@@ -1,5 +1,8 @@
 /** 卡卡學習 — 固定 24 字詞表（繁體表面形） */
 
+// Must be initialized BEFORE WORDS (illustrations call wrap at load time).
+var svgSeq = 0;
+
 const DEER_IDS = ['lu', 'meihualu', 'xunlu', 'tuolu', 'malu'];
 
 const WORDS = [
@@ -196,8 +199,6 @@ const WORDS = [
     svg: dragon('#14B8A6'),
   },
 ];
-
-let svgSeq = 0;
 
 function wrap(body, bg = '#0F2748') {
   svgSeq += 1;

@@ -1,4 +1,17 @@
 /* Classic script — no ES modules (works in sidebar / simple previews). */
+(function () {
+  if (!window.KakaWords || !window.KakaStorage || !window.KakaSpeech) {
+    console.error('KakaLearn: required scripts missing. Check words.js / storage.js / speech.js loaded first.');
+    const row = document.querySelector('.btn-row');
+    if (row) {
+      const msg = document.createElement('p');
+      msg.style.cssText = 'color:#FDE68A;font-size:1.1rem;max-width:28ch;margin:12px auto;';
+      msg.textContent = '遊戲腳本載入失敗，請用本機伺服器打開（見 README）。';
+      row.appendChild(msg);
+    }
+    return;
+  }
+
 const { WORDS, DEER_IDS } = window.KakaWords;
 const {
   loadState,
@@ -568,3 +581,5 @@ if (document.readyState === 'loading') {
 } else {
   init();
 }
+
+})();

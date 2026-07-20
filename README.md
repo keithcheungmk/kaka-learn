@@ -4,24 +4,20 @@
 
 主題：**小鹿太空冒險**（原創美術，無迪士尼／彼思角色或素材）。
 
-## 點樣運行
+## 點樣運行（重要）
 
-需要一個本地靜態伺服器（ES modules 唔可以直接用 `file://`）。
+GitHub PR 頁面本身**唔係**遊戲；要喺你部電腦開靜態伺服器：
 
 ```bash
-# 方法 A：Python
+git clone https://github.com/keithcheungmk/kaka-learn.git
+cd kaka-learn
+git checkout cursor/kaka-learn-mvp-5e36
 python3 -m http.server 5173
-
-# 方法 B：Node
-npx --yes serve -l 5173 .
 ```
 
-然後用瀏覽器開：
+然後用 Chrome 開：**http://localhost:5173**
 
-- 本機：`http://localhost:5173`
-- iPad／電視同網：`http://<電腦IP>:5173`
-
-建議用 Safari（iPad）或 Chrome／Safari（Mac + TV）。首次請允許頁面播放聲音。
+（Cloud agent 嘅 localhost 係遠端機，唔等同你部 Mac 嘅 localhost。）
 
 ## 功能（MVP）
 
