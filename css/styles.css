@@ -250,6 +250,10 @@ body::before {
   appearance: none;
   border: none;
   cursor: pointer;
+  touch-action: manipulation;
+  pointer-events: auto;
+  position: relative;
+  z-index: 2;
   font-family: var(--font-display);
   font-size: clamp(1.2rem, 3.5vw, 1.55rem);
   font-weight: 600;
@@ -560,10 +564,12 @@ body::before {
   justify-content: center;
   padding: 20px;
   z-index: 40;
+  pointer-events: none;
 }
 
 .modal-backdrop.open {
   display: flex;
+  pointer-events: auto;
 }
 
 .modal {

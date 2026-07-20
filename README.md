@@ -49,12 +49,14 @@ npx --yes serve -l 5173 .
 ```
 index.html          # 單頁入口
 css/styles.css      # 小鹿太空冒險主題
-js/app.js           # 畫面同遊戲循環
+js/app.js           # 畫面同遊戲循環（classic script）
 js/words.js         # 24 字詞 + 原創 SVG
 js/storage.js       # localStorage
 js/speech.js        # 粵語 TTS + 簡短音效
 AGENTS.md           # 給協作 agent 嘅說明
 ```
+
+純靜態頁，**唔使 build**；用普通 `<script>` 載入（非 ES module），方便 iPad／預覽側欄。
 
 ## 非目標
 

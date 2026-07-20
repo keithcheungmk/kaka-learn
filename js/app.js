@@ -1,20 +1,21 @@
-import { WORDS, DEER_IDS } from './words.js';
-import {
+/* Classic script — no ES modules (works in sidebar / simple previews). */
+const { WORDS, DEER_IDS } = window.KakaWords;
+const {
   loadState,
   updateState,
   tryEarnStar,
   redeemableCoins,
   resetStars,
   todayKey,
-} from './storage.js';
-import {
+} = window.KakaStorage;
+const {
   warmVoices,
   speakTerm,
   playCorrectCue,
   playTryAgainCue,
   playStarCue,
   playCoinHintCue,
-} from './speech.js';
+} = window.KakaSpeech;
 
 const HERO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" aria-hidden="true">
   <defs>
@@ -55,28 +56,59 @@ const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
 function init() {
-  warmVoices();
-  $('#hero-deer').innerHTML = HERO_SVG;
-  bindHome();
-  bindListen();
-  bindMatch();
-  bindParent();
-  bindStarInfo();
-  refreshStarUI();
-  maybeShowCoinIntro();
+  try {
+    warmVoices();
+    const hero = $('#hero-deer');
+    if (hero) hero.innerHTML = HERO_SVG;
+    bindHome();
+    bindListen();
+    bindMatch();
+    bindParent();
+    bindStarInfo();
+    refreshStarUI();
+    // Close any stuck overlays from a previous partial load
+    closeAllModals();
+  } catch (err) {
+    console.error('KakaLearn init failed', err);
+  }
+}
+
+function closeAllModals() {
+  ['#modal-pin', '#modal-parent', '#modal-stars'].forEach((sel) => {
+    $(sel)?.classList.remove('open');
+  });
+}
+
+function startListenMode(ev) {
+  if (ev) ev.preventDefault();
+  closeAllModals();
+  showScreen('listen');
+  startListenRound();
+}
+
+function startMatchMode(ev) {
+  if (ev) ev.preventDefault();
+  closeAllModals();
+  showScreen('match');
+  startMatchRound();
 }
 
 function bindHome() {
-  $('#btn-mode-listen').addEventListener('click', () => {
-    showScreen('listen');
-    startListenRound();
+  const listenBtn = $('#btn-mode-listen');
+  const matchBtn = $('#btn-mode-match');
+  // Prefer .onclick so we don't stack duplicate listeners on remount/preview refresh
+  if (listenBtn) listenBtn.onclick = startListenMode;
+  if (matchBtn) matchBtn.onclick = startMatchMode;
+  const backListen = $('#btn-back-listen');
+  const backMatch = $('#btn-back-match');
+  if (backListen) backListen.onclick = () => showScreen('home');
+  if (backMatch) backMatch.onclick = () => showScreen('home');
+
+  window.KakaLearn = Object.assign(window.KakaLearn || {}, {
+    startListen: startListenMode,
+    startMatch: startMatchMode,
+    goHome: () => showScreen('home'),
   });
-  $('#btn-mode-match').addEventListener('click', () => {
-    showScreen('match');
-    startMatchRound();
-  });
-  $('#btn-back-listen').addEventListener('click', () => showScreen('home'));
-  $('#btn-back-match').addEventListener('click', () => showScreen('home'));
 }
 
 function showScreen(name) {
@@ -317,7 +349,11 @@ async function awardStar() {
   if (result.gained) {
     showStarBurst();
     playStarCue({ muted: state.muted });
-    if (state.starsToday === 10 || state.totalStars % 10 === 0) {
+    // First star of the day: gentle AEON coin cue (no blocking modal)
+    if (state.starsToday === 1 && !state.coinHintSeen) {
+      playCoinHintCue({ muted: state.muted });
+      state = updateState({ coinHintSeen: true });
+    } else if (state.starsToday === 10 || state.totalStars % 10 === 0) {
       playCoinHintCue({ muted: state.muted });
     }
   } else if (result.capped) {
@@ -371,17 +407,6 @@ function openStarsModal() {
   $('#info-coins').textContent = `${redeemableCoins(state.totalStars)} 枚`;
   $('#modal-stars').classList.add('open');
   playCoinHintCue({ muted: state.muted });
-}
-
-function maybeShowCoinIntro() {
-  state = loadState();
-  if (!state.coinHintSeen) {
-    // 首次輕提示：唔打斷主頁太耐，延遲少少
-    setTimeout(() => {
-      openStarsModal();
-      updateState({ coinHintSeen: true });
-    }, 600);
-  }
 }
 
 /* ---------- 家長區 ---------- */
@@ -538,4 +563,8 @@ function renderParentPanel() {
   });
 }
 
-init();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}

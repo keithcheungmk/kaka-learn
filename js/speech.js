@@ -21,7 +21,7 @@ function pickCantoneseVoice() {
   return voices[0] || null;
 }
 
-export function warmVoices() {
+function warmVoices() {
   if (!('speechSynthesis' in window)) return;
   cachedVoice = pickCantoneseVoice();
   if (typeof speechSynthesis.onvoiceschanged !== 'undefined') {
@@ -36,7 +36,7 @@ export function warmVoices() {
  * @param {string} text
  * @param {{ muted?: boolean }} options
  */
-export function speakTerm(text, { muted = false } = {}) {
+function speakTerm(text, { muted = false } = {}) {
   if (muted || !text) return;
   if (!('speechSynthesis' in window)) return;
 
@@ -60,22 +60,22 @@ export function speakTerm(text, { muted = false } = {}) {
 }
 
 /** 簡短正確音效（Web Audio，不依賴外部檔） */
-export function playCorrectCue({ muted = false } = {}) {
+function playCorrectCue({ muted = false } = {}) {
   if (muted) return;
   beep([523.25, 659.25, 783.99], 0.08, 0.12);
 }
 
-export function playTryAgainCue({ muted = false } = {}) {
+function playTryAgainCue({ muted = false } = {}) {
   if (muted) return;
   beep([392, 349.23], 0.1, 0.1);
 }
 
-export function playStarCue({ muted = false } = {}) {
+function playStarCue({ muted = false } = {}) {
   if (muted) return;
   beep([659.25, 783.99, 1046.5], 0.07, 0.14);
 }
 
-export function playCoinHintCue({ muted = false } = {}) {
+function playCoinHintCue({ muted = false } = {}) {
   if (muted) return;
   beep([523.25, 659.25, 783.99, 1046.5], 0.09, 0.16);
 }
@@ -105,3 +105,6 @@ function beep(freqs, noteDur, gap) {
     // ignore
   }
 }
+
+
+window.KakaSpeech = { warmVoices, speakTerm, playCorrectCue, playTryAgainCue, playStarCue, playCoinHintCue };

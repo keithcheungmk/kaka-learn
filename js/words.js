@@ -1,8 +1,8 @@
 /** 卡卡學習 — 固定 24 字詞表（繁體表面形） */
 
-export const DEER_IDS = ['lu', 'meihualu', 'xunlu', 'tuolu', 'malu'];
+const DEER_IDS = ['lu', 'meihualu', 'xunlu', 'tuolu', 'malu'];
 
-export const WORDS = [
+const WORDS = [
   {
     id: 'lu',
     term: '鹿',
@@ -496,6 +496,9 @@ function dragon(color) {
   `, '#042F2E');
 }
 
-export function getWordById(id) {
+function getWordById(id) {
   return WORDS.find((w) => w.id === id);
 }
+
+
+window.KakaWords = { WORDS, DEER_IDS, getWordById };

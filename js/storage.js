@@ -13,7 +13,7 @@ const DEFAULT_STATE = {
   coinHintSeen: false,
 };
 
-export function todayKey() {
+function todayKey() {
   const d = new Date();
   const y = d.getFullYear();
   const m = String(d.getMonth() + 1).padStart(2, '0');
@@ -21,7 +21,7 @@ export function todayKey() {
   return `${y}-${m}-${day}`;
 }
 
-export function loadState() {
+function loadState() {
   let raw;
   try {
     raw = localStorage.getItem(STORAGE_KEY);
@@ -51,7 +51,7 @@ export function loadState() {
   return state;
 }
 
-export function saveState(state) {
+function saveState(state) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   } catch {
@@ -59,14 +59,14 @@ export function saveState(state) {
   }
 }
 
-export function updateState(patch) {
+function updateState(patch) {
   const next = { ...loadState(), ...patch };
   saveState(next);
   return next;
 }
 
 /** 答對時嘗試加星；回傳 { state, gained, capped } */
-export function tryEarnStar() {
+function tryEarnStar() {
   const state = loadState();
   if (state.starsDate !== todayKey()) {
     state.starsToday = 0;
@@ -84,14 +84,17 @@ export function tryEarnStar() {
   return { state, gained: true, capped: false };
 }
 
-export function redeemableCoins(totalStars) {
+function redeemableCoins(totalStars) {
   return Math.floor((totalStars || 0) / 10);
 }
 
-export function resetStars() {
+function resetStars() {
   return updateState({
     totalStars: 0,
     starsToday: 0,
     starsDate: todayKey(),
   });
 }
+
+
+window.KakaStorage = { todayKey, loadState, saveState, updateState, tryEarnStar, redeemableCoins, resetStars };
