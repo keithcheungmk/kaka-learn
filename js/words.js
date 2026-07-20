@@ -220,6 +220,16 @@ const TOPICS = [
     wordIds: ['wuzi', 'xuexiao', 'gongyuan', 'shangchang', 'tushuguan', 'tingchechang', 'shatian'],
   },
   {
+    id: 'home',
+    title: '屋企',
+    blurb: '廚房、睡房、客廳、廁所、電視、焗爐…',
+    cover: '🛋️',
+    wordIds: [
+      'chufang', 'shuifang', 'keting', 'cesuo',
+      'dianshi', 'julu', 'men', 'chuanghu', 'deng', 'yizi', 'chuangpu', 'shafa',
+    ],
+  },
+  {
     id: 'zoo',
     title: '動物園',
     blurb: '鹿家族同動物園朋友',
