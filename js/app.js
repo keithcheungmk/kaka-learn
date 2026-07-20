@@ -193,6 +193,8 @@ function openLearn(topicId) {
   );
   learnWords = wordsForTopic(topicId).filter((w) => enabled.has(w.id));
   if (learnWords.length < 1) learnWords = wordsForTopic(topicId);
+  // 每次入主題都打亂順序，令卡卡更有新鮮感
+  learnWords = shuffle(learnWords);
   learnIndex = 0;
   const title = $('#learn-topic-title');
   if (title) title.textContent = topic.title;
@@ -240,7 +242,9 @@ function speakCurrentLearn() {
 function stepLearn(delta) {
   if (!learnWords.length) return;
   if (delta > 0 && learnIndex >= learnWords.length - 1) {
-    learnIndex = 0; // 再睇一次
+    // 「再睇一次」：重新打亂順序
+    learnWords = shuffle(learnWords);
+    learnIndex = 0;
   } else {
     learnIndex = Math.max(0, Math.min(learnWords.length - 1, learnIndex + delta));
   }
