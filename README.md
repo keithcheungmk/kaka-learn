@@ -4,7 +4,13 @@
 
 主題：**小鹿太空冒險**（原創美術，無迪士尼／彼思角色或素材）。
 
-## 點樣運行（重要）
+## 線上版（GitHub Pages）
+
+分享俾家人用呢條 link（建議 iPad Safari）：
+
+**https://keithcheungmk.github.io/kaka-learn/**
+
+## 點樣運行（本機）
 
 GitHub PR 頁面本身**唔係**遊戲；要喺你部電腦開靜態伺服器：
 
