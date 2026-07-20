@@ -12,7 +12,7 @@
     return;
   }
 
-const { WORDS, DEER_IDS } = window.KakaWords;
+const { WORDS, DEER_IDS, wordIllustHtml } = window.KakaWords;
 const {
   loadState,
   updateState,
@@ -30,32 +30,11 @@ const {
   playCoinHintCue,
 } = window.KakaSpeech;
 
-const HERO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" aria-hidden="true">
-  <defs>
-    <radialGradient id="helmet" cx="40%" cy="35%" r="65%">
-      <stop offset="0%" stop-color="#A5F3FC"/>
-      <stop offset="55%" stop-color="#2DD4BF"/>
-      <stop offset="100%" stop-color="#0F766E"/>
-    </radialGradient>
-    <linearGradient id="suit" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#FDE68A"/>
-      <stop offset="100%" stop-color="#FBBF24"/>
-    </linearGradient>
-  </defs>
-  <circle cx="100" cy="100" r="78" fill="none" stroke="#FDE68A" stroke-width="3" stroke-dasharray="8 10" opacity=".55"/>
-  <ellipse cx="100" cy="148" rx="46" ry="18" fill="#7CFFB2" opacity=".25"/>
-  <path d="M70 120c4-34 18-54 30-60 12 6 26 26 30 60" fill="#7CFFB2"/>
-  <circle cx="100" cy="72" r="28" fill="url(#helmet)"/>
-  <circle cx="100" cy="72" r="18" fill="#0B1D3A" opacity=".35"/>
-  <circle cx="92" cy="70" r="3" fill="#0B1D3A"/>
-  <circle cx="110" cy="70" r="3" fill="#0B1D3A"/>
-  <path d="M84 56l-8-18 10 8M116 56l8-18-10 8" stroke="#FDE68A" stroke-width="4" stroke-linecap="round" fill="none"/>
-  <rect x="78" y="118" width="44" height="36" rx="14" fill="url(#suit)"/>
-  <circle cx="100" cy="136" r="8" fill="#0B1D3A" opacity=".25"/>
-  <path d="M70 130c-16 4-22 18-10 22M130 130c16 4 22 18 10 22" fill="#5EEAD4"/>
-  <circle cx="158" cy="48" r="6" fill="#FBBF24"/>
-  <circle cx="40" cy="60" r="3" fill="#A5F3FC"/>
-</svg>`;
+const HERO_EMOJI = `<div class="hero-emoji-stack" aria-hidden="true">
+  <span class="hero-emoji-main">🦌</span>
+  <span class="hero-emoji-orbit">🚀</span>
+  <span class="hero-emoji-star">⭐</span>
+</div>`;
 
 /** @type {ReturnType<typeof loadState>} */
 let state = loadState();
@@ -72,7 +51,7 @@ function init() {
   try {
     warmVoices();
     const hero = $('#hero-deer');
-    if (hero) hero.innerHTML = HERO_SVG;
+    if (hero) hero.innerHTML = HERO_EMOJI;
     bindHome();
     bindListen();
     bindMatch();
@@ -199,7 +178,7 @@ function startListenRound() {
     btn.type = 'button';
     btn.className = 'word-card';
     btn.dataset.id = word.id;
-    btn.innerHTML = `<span class="illust">${word.svg}</span><span class="term">${word.term}</span>`;
+    btn.innerHTML = `${wordIllustHtml(word)}<span class="term">${word.term}</span>`;
     btn.addEventListener('click', () => onListenPick(word.id, btn));
     grid.appendChild(btn);
   });
@@ -276,7 +255,7 @@ function startMatchRound() {
     btn.className = 'pic-card';
     btn.dataset.id = w.id;
     btn.setAttribute('aria-label', '圖畫');
-    btn.innerHTML = `<span class="illust">${w.svg}</span>`;
+    btn.innerHTML = wordIllustHtml(w);
     btn.addEventListener('click', () => onMatchPic(w.id, btn));
     picBox.appendChild(btn);
   });

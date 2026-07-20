@@ -30,7 +30,7 @@ python3 -m http.server 5173
 | 檔案 | 職責 |
 |------|------|
 | `index.html` | 畫面骨架（主頁、兩種模式、家長／PIN modal） |
-| `js/words.js` | 字詞資料 + 原創 SVG |
+| `js/words.js` | 字詞資料 + 系統 Emoji 插圖（iPhone Apple Color Emoji） |
 | `js/storage.js` | `localStorage`：星星、PIN、設定 |
 | `js/speech.js` | `speechSynthesis`（優先 `zh-HK`）+ Web Audio 短音 |
 | `js/app.js` | 模式循環、家長區、星星動畫 |

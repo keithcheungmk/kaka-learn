@@ -46,7 +46,7 @@ python3 -m http.server 5173
 index.html          # 單頁入口
 css/styles.css      # 小鹿太空冒險主題
 js/app.js           # 畫面同遊戲循環（classic script）
-js/words.js         # 24 字詞 + 原創 SVG
+js/words.js         # 24 字詞 + 系統 Emoji 插圖
 js/storage.js       # localStorage
 js/speech.js        # 粵語 TTS + 簡短音效
 AGENTS.md           # 給協作 agent 嘅說明
