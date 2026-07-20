@@ -195,6 +195,22 @@ body::before {
   color: var(--ink-dim);
 }
 
+.progress-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  min-width: 72px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: rgba(15, 39, 72, 0.88);
+  border: 1px solid rgba(94, 234, 212, 0.25);
+  box-shadow: var(--shadow);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--teal-soft);
+}
+
 .hero-home {
   flex: 1;
   display: grid;
