@@ -356,9 +356,9 @@ function onListenPick(id, btn) {
     busy = true;
     btn.classList.add('correct');
     playCorrectCue({ muted: state.muted });
-    speakCorrectFeedback({ muted: state.muted });
+    const praise = speakCorrectFeedback({ muted: state.muted });
     const fb = $('#listen-feedback');
-    fb.textContent = '你好叻呀，答啱咗！';
+    fb.textContent = praise;
     fb.className = 'feedback ok';
     awardStar().then(() => {
       setTimeout(() => startListenRound(), 2600);
@@ -367,16 +367,16 @@ function onListenPick(id, btn) {
     btn.classList.add('wrong');
     playTryAgainCue({ muted: state.muted });
     const fb = $('#listen-feedback');
-    fb.textContent = '唔緊要，試多次！';
     fb.className = 'feedback retry';
     setTimeout(() => btn.classList.remove('wrong'), 450);
     // 鼓勵句講完先再讀正確字詞，避免 cancel 切走鼓勵聲
-    speakRetryFeedback({
+    const retryLine = speakRetryFeedback({
       muted: state.muted,
       onEnd: () => {
         setTimeout(() => speakTerm(targetTerm, { muted: loadState().muted }), 250);
       },
     });
+    fb.textContent = retryLine;
   }
 }
 
@@ -467,10 +467,10 @@ function onMatchPic(id, btn) {
     wordBtn?.classList.add('correct');
     matchRound.matched.add(id);
     playCorrectCue({ muted: state.muted });
-    speakCorrectFeedback({ muted: state.muted });
+    const praise = speakCorrectFeedback({ muted: state.muted });
 
     const fb = $('#match-feedback');
-    fb.textContent = '你好叻呀，答啱咗！';
+    fb.textContent = praise;
     fb.className = 'feedback ok';
 
     awardStar().then(() => {
@@ -493,9 +493,9 @@ function onMatchPic(id, btn) {
   } else {
     btn.classList.add('wrong');
     playTryAgainCue({ muted: state.muted });
-    speakRetryFeedback({ muted: state.muted });
+    const retryLine = speakRetryFeedback({ muted: state.muted });
     const fb = $('#match-feedback');
-    fb.textContent = '唔緊要，試多次！';
+    fb.textContent = retryLine;
     fb.className = 'feedback retry';
     setTimeout(() => btn.classList.remove('wrong'), 450);
   }

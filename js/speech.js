@@ -98,17 +98,41 @@ function speakTerm(text, {
   }, delayMs);
 }
 
-/** 測驗答啱／答錯語音回饋 */
-const FEEDBACK_CORRECT = '你好叻呀，答啱咗！';
-const FEEDBACK_RETRY = '唔緊要，試多次！';
+/** 測驗答啱／答錯語音回饋（隨機抽一句，長短夾雜） */
+const FEEDBACK_CORRECT_LINES = [
+  '你好叻呀，答啱咗！',
+  '答啱喇！',
+  '哇，好叻！',
+  '叻仔，完全啱晒！',
+];
 
-function speakCorrectFeedback({ muted = false, onEnd = null } = {}) {
-  // 等短音效先行，再講鼓勵句，避免互相搶
-  speakTerm(FEEDBACK_CORRECT, { muted, rate: 0.92, pitch: 1.08, delayMs: 180, onEnd });
+const FEEDBACK_RETRY_LINES = [
+  '唔緊要，試多次！',
+  '再試吓啦！',
+  '差少少，唔緊要！',
+  '冇事嘅，我哋一齊再諗吓！',
+];
+
+function pickFeedbackLine(lines) {
+  return lines[Math.floor(Math.random() * lines.length)];
 }
 
+/**
+ * @returns {string} 今次用嘅鼓勵句（方便畫面同語音一致）
+ */
+function speakCorrectFeedback({ muted = false, onEnd = null } = {}) {
+  const line = pickFeedbackLine(FEEDBACK_CORRECT_LINES);
+  speakTerm(line, { muted, rate: 0.92, pitch: 1.08, delayMs: 180, onEnd });
+  return line;
+}
+
+/**
+ * @returns {string} 今次用嘅再試句
+ */
 function speakRetryFeedback({ muted = false, onEnd = null } = {}) {
-  speakTerm(FEEDBACK_RETRY, { muted, rate: 0.92, pitch: 1.0, delayMs: 180, onEnd });
+  const line = pickFeedbackLine(FEEDBACK_RETRY_LINES);
+  speakTerm(line, { muted, rate: 0.92, pitch: 1.0, delayMs: 180, onEnd });
+  return line;
 }
 
 /** 簡短正確音效（Web Audio，不依賴外部檔） */
@@ -168,6 +192,6 @@ window.KakaSpeech = {
   playTryAgainCue,
   playStarCue,
   playCoinHintCue,
-  FEEDBACK_CORRECT,
-  FEEDBACK_RETRY,
+  FEEDBACK_CORRECT_LINES,
+  FEEDBACK_RETRY_LINES,
 };
