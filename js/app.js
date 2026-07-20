@@ -489,7 +489,7 @@ function onMatchPic(id, btn) {
   }
 }
 
-/* ---------- 星星 ---------- */
+/* ---------- 星星（只喺測驗答啱先加；學習頁唔計星） ---------- */
 
 async function awardStar() {
   const result = tryEarnStar();
