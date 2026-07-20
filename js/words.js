@@ -35,8 +35,57 @@ const WORDS = [
   { id: 'long', term: '龍', isDeer: false, emoji: '🐲', badge: '', plate: '#0f3535' },
 ];
 
+/** 主題：先學再開考 */
+const TOPICS = [
+  {
+    id: 'deer',
+    title: '鹿家族',
+    blurb: '卡卡嘅強項！先認唔同嘅鹿',
+    cover: '🦌',
+    wordIds: ['lu', 'meihualu', 'xunlu', 'tuolu', 'malu'],
+  },
+  {
+    id: 'pals',
+    title: '可愛朋友',
+    blurb: '狗貓魚鳥兔',
+    cover: '🐶',
+    wordIds: ['gou', 'mao', 'yu', 'niao', 'tu'],
+  },
+  {
+    id: 'farm',
+    title: '農場動物',
+    blurb: '羊牛馬豬雞鴨',
+    cover: '🐮',
+    wordIds: ['yang', 'niu', 'ma', 'zhu', 'ji', 'ya'],
+  },
+  {
+    id: 'zoo',
+    title: '動物園',
+    blurb: '熊、獅子、老虎、大象、猴',
+    cover: '🦁',
+    wordIds: ['xiong', 'shizi', 'laohu', 'daxiang', 'hou'],
+  },
+  {
+    id: 'wonders',
+    title: '奇趣生物',
+    blurb: '蛙、蟲、龍',
+    cover: '🐲',
+    wordIds: ['wa', 'chong', 'long'],
+  },
+];
+
 function getWordById(id) {
   return WORDS.find((w) => w.id === id);
+}
+
+function getTopicById(id) {
+  return TOPICS.find((t) => t.id === id);
+}
+
+function wordsForTopic(topicId) {
+  const topic = getTopicById(topicId);
+  if (!topic) return [...WORDS];
+  return topic.wordIds.map(getWordById).filter(Boolean);
 }
 
 /** 產生卡片插圖 HTML（大粒系統 Emoji） */
@@ -50,4 +99,12 @@ function wordIllustHtml(word) {
   </span>`;
 }
 
-window.KakaWords = { WORDS, DEER_IDS, getWordById, wordIllustHtml };
+window.KakaWords = {
+  WORDS,
+  DEER_IDS,
+  TOPICS,
+  getWordById,
+  getTopicById,
+  wordsForTopic,
+  wordIllustHtml,
+};

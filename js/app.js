@@ -12,7 +12,7 @@
     return;
   }
 
-const { WORDS, DEER_IDS, wordIllustHtml } = window.KakaWords;
+const { WORDS, DEER_IDS, TOPICS, wordIllustHtml, getTopicById, wordsForTopic } = window.KakaWords;
 const {
   loadState,
   updateState,
@@ -43,6 +43,11 @@ let listenRound = null;
 let matchRound = null;
 let matchSelectedWordId = null;
 let busy = false;
+/** @type {string|null} */
+let activeTopicId = null;
+/** @type {ReturnType<typeof wordsForTopic>} */
+let learnWords = [];
+let learnIndex = 0;
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -53,12 +58,14 @@ function init() {
     const hero = $('#hero-deer');
     if (hero) hero.innerHTML = HERO_EMOJI;
     bindHome();
+    bindTopics();
+    bindLearn();
+    bindPlayPick();
     bindListen();
     bindMatch();
     bindParent();
     bindStarInfo();
     refreshStarUI();
-    // Close any stuck overlays from a previous partial load
     closeAllModals();
   } catch (err) {
     console.error('KakaLearn init failed', err);
@@ -73,6 +80,10 @@ function closeAllModals() {
 
 function startListenMode(ev) {
   if (ev) ev.preventDefault();
+  if (!activeTopicId) {
+    showScreen('topics');
+    return;
+  }
   closeAllModals();
   showScreen('listen');
   startListenRound();
@@ -80,44 +91,181 @@ function startListenMode(ev) {
 
 function startMatchMode(ev) {
   if (ev) ev.preventDefault();
+  if (!activeTopicId) {
+    showScreen('topics');
+    return;
+  }
   closeAllModals();
   showScreen('match');
   startMatchRound();
 }
 
 function bindHome() {
-  const listenBtn = $('#btn-mode-listen');
-  const matchBtn = $('#btn-mode-match');
-  // Prefer .onclick so we don't stack duplicate listeners on remount/preview refresh
-  if (listenBtn) listenBtn.onclick = startListenMode;
-  if (matchBtn) matchBtn.onclick = startMatchMode;
-  const backListen = $('#btn-back-listen');
-  const backMatch = $('#btn-back-match');
-  if (backListen) backListen.onclick = () => showScreen('home');
-  if (backMatch) backMatch.onclick = () => showScreen('home');
+  const startBtn = $('#btn-start-topics');
+  if (startBtn) startBtn.onclick = (ev) => {
+    if (ev) ev.preventDefault();
+    closeAllModals();
+    openTopics();
+  };
 
   window.KakaLearn = Object.assign(window.KakaLearn || {}, {
     startListen: startListenMode,
     startMatch: startMatchMode,
     goHome: () => showScreen('home'),
+    openTopics,
   });
+}
+
+function bindTopics() {
+  const back = $('#btn-back-topics');
+  if (back) back.onclick = () => showScreen('home');
+}
+
+function bindLearn() {
+  const back = $('#btn-back-learn');
+  if (back) back.onclick = () => openTopics();
+  const stage = $('#learn-stage');
+  if (stage) stage.onclick = () => speakCurrentLearn();
+  const prev = $('#btn-learn-prev');
+  const next = $('#btn-learn-next');
+  if (prev) prev.onclick = () => stepLearn(-1);
+  if (next) next.onclick = () => stepLearn(1);
+  const play = $('#btn-learn-play');
+  if (play) play.onclick = () => openPlayPick();
+}
+
+function bindPlayPick() {
+  const back = $('#btn-back-play');
+  if (back) back.onclick = () => openLearn(activeTopicId);
+  const listenBtn = $('#btn-mode-listen');
+  const matchBtn = $('#btn-mode-match');
+  if (listenBtn) listenBtn.onclick = startListenMode;
+  if (matchBtn) matchBtn.onclick = startMatchMode;
 }
 
 function showScreen(name) {
   $$('.screen').forEach((el) => el.classList.remove('active'));
   const map = {
     home: '#screen-home',
+    topics: '#screen-topics',
+    learn: '#screen-learn',
+    play: '#screen-play',
     listen: '#screen-listen',
     match: '#screen-match',
   };
   $(map[name])?.classList.add('active');
-  if (name === 'home') refreshStarUI();
+  if (name === 'home' || name === 'topics' || name === 'play') refreshStarUI();
+}
+
+function openTopics() {
+  renderTopics();
+  showScreen('topics');
+  refreshStarUI();
+}
+
+function renderTopics() {
+  const grid = $('#topic-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  TOPICS.forEach((topic) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'topic-card';
+    btn.innerHTML = `
+      <span class="topic-cover" aria-hidden="true">${topic.cover}</span>
+      <span class="topic-title">${topic.title}</span>
+      <span class="topic-blurb">${topic.blurb}</span>
+    `;
+    btn.onclick = () => openLearn(topic.id);
+    grid.appendChild(btn);
+  });
+}
+
+function openLearn(topicId) {
+  const topic = getTopicById(topicId);
+  if (!topic) return;
+  activeTopicId = topicId;
+  state = loadState();
+  const enabled = new Set(
+    state.enabledWordIds && state.enabledWordIds.length
+      ? state.enabledWordIds
+      : WORDS.map((w) => w.id),
+  );
+  learnWords = wordsForTopic(topicId).filter((w) => enabled.has(w.id));
+  if (learnWords.length < 1) learnWords = wordsForTopic(topicId);
+  learnIndex = 0;
+  const title = $('#learn-topic-title');
+  if (title) title.textContent = topic.title;
+  renderLearnCard();
+  showScreen('learn');
+}
+
+function renderLearnCard() {
+  const word = learnWords[learnIndex];
+  if (!word) return;
+  const illust = $('#learn-illust');
+  const term = $('#learn-term');
+  const progress = $('#learn-progress');
+  if (illust) illust.innerHTML = wordIllustHtml(word);
+  if (term) term.textContent = word.term;
+  if (progress) progress.textContent = `${learnIndex + 1}/${learnWords.length}`;
+
+  const prev = $('#btn-learn-prev');
+  const next = $('#btn-learn-next');
+  const finishRow = $('#learn-finish-row');
+  const atEnd = learnIndex >= learnWords.length - 1;
+  if (prev) prev.disabled = learnIndex <= 0;
+  if (next) {
+    next.disabled = false;
+    next.textContent = atEnd ? '再睇一次' : '下一張';
+  }
+  if (finishRow) finishRow.hidden = !atEnd;
+
+  // Enlarge learn plate
+  const plate = illust?.querySelector('.emoji-plate');
+  if (plate) plate.classList.add('emoji-plate-lg');
+  const face = illust?.querySelector('.emoji-face');
+  if (face) face.classList.add('emoji-face-lg');
+
+  speakCurrentLearn();
+}
+
+function speakCurrentLearn() {
+  const word = learnWords[learnIndex];
+  if (!word) return;
+  state = loadState();
+  speakTerm(word.term, { muted: state.muted });
+}
+
+function stepLearn(delta) {
+  if (!learnWords.length) return;
+  if (delta > 0 && learnIndex >= learnWords.length - 1) {
+    learnIndex = 0; // 再睇一次
+  } else {
+    learnIndex = Math.max(0, Math.min(learnWords.length - 1, learnIndex + delta));
+  }
+  renderLearnCard();
+}
+
+function openPlayPick() {
+  const topic = getTopicById(activeTopicId);
+  const title = $('#play-topic-title');
+  if (title) title.textContent = topic ? `${topic.title}・去玩玩` : '去玩玩';
+  showScreen('play');
+  refreshStarUI();
 }
 
 function enabledWords() {
   state = loadState();
   const ids = state.enabledWordIds;
   let list = !ids || !ids.length ? [...WORDS] : WORDS.filter((w) => ids.includes(w.id));
+  if (activeTopicId) {
+    const topicSet = new Set(wordsForTopic(activeTopicId).map((w) => w.id));
+    list = list.filter((w) => topicSet.has(w.id));
+  }
+  if (list.length < 2) {
+    list = activeTopicId ? wordsForTopic(activeTopicId) : [...WORDS];
+  }
   if (list.length < 2) list = [...WORDS];
   return list;
 }
@@ -153,10 +301,15 @@ function sampleOthers(pool, targetId, count) {
 /* ---------- 模式 A：聽音選卡 ---------- */
 
 function bindListen() {
-  $('#btn-speak-listen').addEventListener('click', () => {
-    if (!listenRound) return;
-    speakTerm(listenRound.target.term, { muted: state.muted });
-  });
+  const speak = $('#btn-speak-listen');
+  if (speak) {
+    speak.onclick = () => {
+      if (!listenRound) return;
+      speakTerm(listenRound.target.term, { muted: loadState().muted });
+    };
+  }
+  const back = $('#btn-back-listen');
+  if (back) back.onclick = () => openPlayPick();
 }
 
 function startListenRound() {
@@ -216,7 +369,8 @@ function onListenPick(id, btn) {
 /* ---------- 模式 B：先撳字再撳圖 ---------- */
 
 function bindMatch() {
-  // delegated via recreate each round
+  const back = $('#btn-back-match');
+  if (back) back.onclick = () => openPlayPick();
 }
 
 function startMatchRound() {
