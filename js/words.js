@@ -113,6 +113,14 @@ const WORDS = [
   { id: 'dan', term: '蛋', isDeer: false, emoji: '🥚', badge: '', plate: '#3a3a45' },
   { id: 'nai', term: '奶', isDeer: false, emoji: '🥛', badge: '', plate: '#2a3a50' },
   { id: 'dangao', term: '蛋糕', isDeer: false, emoji: '🎂', badge: '', plate: '#402038' },
+  { id: 'shui', term: '水', isDeer: false, emoji: '💧', badge: '', plate: '#0f3550' },
+  { id: 'guozhi', term: '果汁', isDeer: false, emoji: '🧃', badge: '', plate: '#402410' },
+  { id: 'xuegao', term: '雪糕', isDeer: false, emoji: '🍦', badge: '', plate: '#402038' },
+  { id: 'binggan', term: '餅乾', isDeer: false, emoji: '🍪', badge: '', plate: '#3a2818' },
+  { id: 'tangguo', term: '糖果', isDeer: false, emoji: '🍬', badge: '', plate: '#2a1840' },
+  { id: 'hanbao', term: '漢堡', isDeer: false, emoji: '🍔', badge: '', plate: '#3a3010' },
+  { id: 'pisa', term: '披薩', isDeer: false, emoji: '🍕', badge: '', plate: '#401820' },
+  { id: 'shutiao', term: '薯條', isDeer: false, emoji: '🍟', badge: '', plate: '#3a3010' },
   // 學校／用品
   { id: 'shu', term: '書', isDeer: false, emoji: '📚', badge: '', plate: '#102848' },
   { id: 'gangbi', term: '筆', isDeer: false, emoji: '✏️', badge: '', plate: '#3a3010' },
@@ -177,9 +185,12 @@ const TOPICS = [
   {
     id: 'food',
     title: '食物',
-    blurb: '飯、麵、包、蛋、奶、蛋糕',
+    blurb: '飯麵包蛋奶蛋糕同小食飲品',
     cover: '🍚',
-    wordIds: ['fan', 'mian', 'bao', 'dan', 'nai', 'dangao'],
+    wordIds: [
+      'fan', 'mian', 'bao', 'dan', 'nai', 'dangao',
+      'shui', 'guozhi', 'xuegao', 'binggan', 'tangguo', 'hanbao', 'pisa', 'shutiao',
+    ],
   },
   {
     id: 'school',
