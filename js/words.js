@@ -47,6 +47,26 @@ const WORDS = [
   { id: 'baicai', term: '白菜', isDeer: false, emoji: '🥬', badge: '', plate: '#143820' },
   { id: 'qiezi', term: '茄子', isDeer: false, emoji: '🍆', badge: '', plate: '#281840' },
   { id: 'qingjiao', term: '青椒', isDeer: false, emoji: '🫑', badge: '', plate: '#143818' },
+  // 數字 1–10
+  { id: 'yi', term: '一', isDeer: false, emoji: '1️⃣', badge: '', plate: '#1a3050' },
+  { id: 'er', term: '二', isDeer: false, emoji: '2️⃣', badge: '', plate: '#1a3050' },
+  { id: 'san', term: '三', isDeer: false, emoji: '3️⃣', badge: '', plate: '#1a3050' },
+  { id: 'si', term: '四', isDeer: false, emoji: '4️⃣', badge: '', plate: '#1a3050' },
+  { id: 'wu', term: '五', isDeer: false, emoji: '5️⃣', badge: '', plate: '#1a3050' },
+  { id: 'liu', term: '六', isDeer: false, emoji: '6️⃣', badge: '', plate: '#1a3050' },
+  { id: 'qi', term: '七', isDeer: false, emoji: '7️⃣', badge: '', plate: '#1a3050' },
+  { id: 'ba', term: '八', isDeer: false, emoji: '8️⃣', badge: '', plate: '#1a3050' },
+  { id: 'jiu', term: '九', isDeer: false, emoji: '9️⃣', badge: '', plate: '#1a3050' },
+  { id: 'shi', term: '十', isDeer: false, emoji: '🔟', badge: '', plate: '#1a3050' },
+  // 顏色（橙色 同 水果「橙」分開，避免混淆）
+  { id: 'hong', term: '紅', isDeer: false, emoji: '🔴', badge: '', plate: '#401018' },
+  { id: 'huang', term: '黃', isDeer: false, emoji: '🟡', badge: '', plate: '#3a3410' },
+  { id: 'lan', term: '藍', isDeer: false, emoji: '🔵', badge: '', plate: '#102848' },
+  { id: 'lv', term: '綠', isDeer: false, emoji: '🟢', badge: '', plate: '#143820' },
+  { id: 'bai', term: '白', isDeer: false, emoji: '⚪', badge: '', plate: '#3a3a45' },
+  { id: 'hei', term: '黑', isDeer: false, emoji: '⚫', badge: '', plate: '#1a1a22' },
+  { id: 'zi', term: '紫', isDeer: false, emoji: '🟣', badge: '', plate: '#2a1840' },
+  { id: 'fenhong', term: '粉紅', isDeer: false, emoji: '🩷', badge: '', plate: '#402038' },
 ];
 
 /** 主題：先學再開考 */
