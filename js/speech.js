@@ -34,9 +34,9 @@ function warmVoices() {
 /**
  * 朗讀完整詞語（粵語優先）
  * @param {string} text
- * @param {{ muted?: boolean }} options
+ * @param {{ muted?: boolean, rate?: number, pitch?: number }} options
  */
-function speakTerm(text, { muted = false } = {}) {
+function speakTerm(text, { muted = false, rate = 0.9, pitch = 1.05 } = {}) {
   if (muted || !text) return;
   if (!('speechSynthesis' in window)) return;
 
@@ -54,9 +54,21 @@ function speakTerm(text, { muted = false } = {}) {
   } else {
     utter.lang = 'zh-HK';
   }
-  utter.rate = 0.9;
-  utter.pitch = 1.05;
+  utter.rate = rate;
+  utter.pitch = pitch;
   speechSynthesis.speak(utter);
+}
+
+/** 測驗答啱／答錯語音回饋 */
+const FEEDBACK_CORRECT = '你好叻呀，答啱咗！';
+const FEEDBACK_RETRY = '唔緊要，試多次！';
+
+function speakCorrectFeedback({ muted = false } = {}) {
+  speakTerm(FEEDBACK_CORRECT, { muted, rate: 0.95, pitch: 1.1 });
+}
+
+function speakRetryFeedback({ muted = false } = {}) {
+  speakTerm(FEEDBACK_RETRY, { muted, rate: 0.95, pitch: 1.0 });
 }
 
 /** 簡短正確音效（Web Audio，不依賴外部檔） */
@@ -107,4 +119,15 @@ function beep(freqs, noteDur, gap) {
 }
 
 
-window.KakaSpeech = { warmVoices, speakTerm, playCorrectCue, playTryAgainCue, playStarCue, playCoinHintCue };
+window.KakaSpeech = {
+  warmVoices,
+  speakTerm,
+  speakCorrectFeedback,
+  speakRetryFeedback,
+  playCorrectCue,
+  playTryAgainCue,
+  playStarCue,
+  playCoinHintCue,
+  FEEDBACK_CORRECT,
+  FEEDBACK_RETRY,
+};

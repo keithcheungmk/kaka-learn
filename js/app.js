@@ -24,6 +24,8 @@ const {
 const {
   warmVoices,
   speakTerm,
+  speakCorrectFeedback,
+  speakRetryFeedback,
   playCorrectCue,
   playTryAgainCue,
   playStarCue,
