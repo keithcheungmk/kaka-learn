@@ -1,7 +1,106 @@
-echo "# kaka-learn" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/keithcheungmk/kaka-learn.git
-git push -u origin main
+# 卡卡學習（kaka-learn）
+
+給 KAKA（約 4 歲、升 K2）嘅繁體中文認字小遊戲：聽粵語、配圖畫、攞星星。
+
+主題：**小鹿太空冒險**（原創美術，無迪士尼／彼思角色或素材）。
+
+## 線上版（GitHub Pages）
+
+分享俾家人用呢條 link（建議 iPad Safari）：
+
+**https://keithcheungmk.github.io/kaka-learn/**
+
+## 點樣運行（本機）
+
+GitHub PR 頁面本身**唔係**遊戲；要喺你部電腦開靜態伺服器：
+
+```bash
+git clone https://github.com/keithcheungmk/kaka-learn.git
+cd kaka-learn
+git checkout cursor/kaka-learn-mvp-5e36
+python3 -m http.server 5173
+```
+
+然後用 Chrome 開：**http://localhost:5173**
+
+（Cloud agent 嘅 localhost 係遠端機，唔等同你部 Mac 嘅 localhost。）
+
+## 功能（MVP）
+
+1. **先學再考**：揀主題 → 學習頁（Emoji + 漢字 + 粵語）→ 先揀玩法先考試。
+2. **聽一聽・揀卡片**：播粵語，再揀啱嘅字卡（只考該主題）。
+3. **字詞・配圖畫**：先撳字詞，再撳圖畫（適合電視大掣）。
+4. 答錯只會溫柔講「再試吓」，無懲罰。
+5. **星星**：答啱 +1；每日最多 10 粒。介面顯示「10 粒星星 = 1 枚 AEON 幣」同可兌換數量（`floor(累積星星/10)`）。家長現實兌換，無付款 API。
+6. **家長鎖**：預設 PIN `1234`（可改）。家長區可開關字詞、鹿類重點、靜音、重設星星、改 PIN。
+7. 介面繁體中文；動物、蔬果、數字、顏色等主題（見下）。
+
+## 字詞表
+
+**數字（10）：**  
+一、二、三、四、五、六、七、八、九、十
+
+**顏色（8）：**  
+紅、黃、藍、綠、白、黑、紫、粉紅
+
+**天氣（8）：**  
+日、月、雲、雨、雪、風、電、彩虹
+
+**交通（6）：**  
+車、巴士、火車、飛機、船、單車
+
+**身體（8）：**  
+眼、耳、鼻、口、手、腳、頭、心
+
+**家庭（7）：**  
+爸爸、媽媽、爺爺、婆婆、哥哥、姐姐、寶寶
+
+**食物（14）：**  
+飯、麵、包、蛋、奶、蛋糕、水、果汁、雪糕、餅乾、糖果、漢堡、披薩、薯條
+
+**學校用品（6）：**  
+書、筆、尺、書包、球、積木
+
+**地方（7）：**  
+屋、學校、公園、商場、圖書館、停車場、沙田（爸爸辦公室 🏢）
+
+**屋企（15）：**  
+廚房、睡房、客廳、廁所、電視、雪櫃、洗衣機、電話、風扇、門、窗、燈、椅、床、梳化
+
+**動物主題：**
+- 動物園（鹿 + 熊獅子老虎大象猴 + 熊貓長頸鹿斑馬企鵝河馬犀牛）
+- 可愛朋友、農場動物、奇趣生物
+
+**水果（6）：**  
+蘋果、香蕉、橙、葡萄、西瓜、草莓
+
+**蔬菜（6）：**  
+番茄、紅蘿蔔、玉米、白菜、茄子、青椒
+
+## 本機資料
+
+全部存喺瀏覽器 `localStorage`（鍵名 `kaka-learn-v1`）：
+
+- 今日／累積星星、家長 PIN、靜音、鹿類重點、字詞開關
+
+清瀏覽器資料會重設。
+
+## 專案結構
+
+```
+index.html          # 單頁入口
+css/styles.css      # 小鹿太空冒險主題
+js/app.js           # 畫面同遊戲循環（classic script）
+js/words.js         # 字詞 + 主題 + 系統 Emoji 插圖
+js/storage.js       # localStorage
+js/speech.js        # 粵語 TTS + 簡短音效
+AGENTS.md           # 給協作 agent 嘅說明
+```
+
+純靜態頁，**唔使 build**；用普通 `<script>` 載入（非 ES module），方便 iPad／預覽側欄。
+
+## 非目標
+
+無登入、廣告、追蹤、寫字練習、故事模式、真正 AEON／付款串接。
+
+業務建議可放喺 sibling repo `keith-ops`；所有 app 程式碼只喺本 repo。

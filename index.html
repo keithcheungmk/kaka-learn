@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#071526" />
+  <title>卡卡學習 KAKA Learn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- 主頁 -->
+    <section id="screen-home" class="screen active" aria-label="主頁">
+      <header class="topbar">
+        <div class="brand-mark">
+          <div class="brand-orbit" aria-hidden="true"></div>
+          <div class="brand-text">
+            <div class="brand-name">卡卡學習</div>
+            <div class="brand-tag">小鹿太空冒險</div>
+          </div>
+        </div>
+        <button type="button" class="star-panel" id="btn-star-info" aria-label="星星與 AEON 幣">
+          <span class="star-icon" aria-hidden="true">★</span>
+          <span class="star-meta">
+            <strong id="stars-today-label">今日 0 / 10</strong>
+            <span id="coins-label">可換 0 枚 AEON 幣</span>
+          </span>
+        </button>
+      </header>
+
+      <div class="hero-home">
+        <div class="hero-visual" aria-hidden="true" id="hero-deer"></div>
+        <h1 class="hero-title">卡卡學習</h1>
+        <p class="hero-sub">先學漢字同圖畫，再嚟玩遊戲攞星星！</p>
+        <div class="btn-row">
+          <button type="button" class="btn" id="btn-start-topics">揀主題・先學一學</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 揀主題 -->
+    <section id="screen-topics" class="screen" aria-label="揀主題">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-topics">← 返去</button>
+        <h1>揀主題</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong class="stars-today-inline">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <p class="section-lead">揀一組，先一齊睇字同圖</p>
+      <div class="topic-grid" id="topic-grid"></div>
+    </section>
+
+    <!-- 先學一學 -->
+    <section id="screen-learn" class="screen" aria-label="先學一學">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-learn">← 主題</button>
+        <h1 id="learn-topic-title">先學一學</h1>
+        <div class="progress-pill" aria-label="學習進度">
+          <strong id="learn-progress">1/5</strong>
+        </div>
+      </div>
+      <p class="section-lead">睇吓圖同字，撳喇叭聽廣東話</p>
+      <button type="button" class="learn-stage" id="learn-stage" aria-label="再聽一次">
+        <div id="learn-illust"></div>
+        <div class="learn-term" id="learn-term"></div>
+        <div class="learn-hear">🔊 聽一聽</div>
+      </button>
+      <div class="btn-row learn-nav">
+        <button type="button" class="btn btn-ghost" id="btn-learn-prev">上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-learn-next">下一張</button>
+      </div>
+      <div class="btn-row" id="learn-finish-row" hidden>
+        <button type="button" class="btn" id="btn-learn-play">學完喇・去玩玩</button>
+      </div>
+    </section>
+
+    <!-- 學完揀玩法 -->
+    <section id="screen-play" class="screen" aria-label="揀玩法">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-play">← 再學</button>
+        <h1 id="play-topic-title">去玩玩</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong class="stars-today-inline">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <p class="section-lead">而家先考考你識唔識</p>
+      <div class="btn-row play-choices">
+        <button type="button" class="btn" id="btn-mode-listen">聽一聽・揀卡片</button>
+        <button type="button" class="btn btn-secondary" id="btn-mode-match">字詞・配圖畫</button>
+      </div>
+    </section>
+
+    <!-- 模式 A：聽音選字 -->
+    <section id="screen-listen" class="screen" aria-label="聽一聽揀卡片">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-listen">← 玩法</button>
+        <h1>聽一聽</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong class="stars-today-inline">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p>撳喇叭聽廣東話，再揀啱嘅卡片</p>
+        <button type="button" class="speak-btn" id="btn-speak-listen" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="card-grid cols-3" id="listen-options"></div>
+      <p class="feedback" id="listen-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 模式 B：字詞配圖 -->
+    <section id="screen-match" class="screen" aria-label="字詞配圖畫">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-match">← 玩法</button>
+        <h1>配一配</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong class="stars-today-inline">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p>先撳字詞，再撳啱嘅圖畫</p>
+      </div>
+      <div class="match-layout">
+        <div>
+          <p class="section-label">字詞</p>
+          <div class="word-chips" id="match-words"></div>
+        </div>
+        <div>
+          <p class="section-label">圖畫</p>
+          <div class="pic-grid" id="match-pics"></div>
+        </div>
+      </div>
+      <p class="feedback" id="match-feedback" aria-live="polite"></p>
+    </section>
+  </div>
+
+  <button type="button" class="btn btn-parent" id="btn-parent" aria-label="家長區">👪</button>
+  <div class="star-burst" id="star-burst" aria-hidden="true">★</div>
+
+  <!-- PIN 解鎖 -->
+  <div class="modal-backdrop" id="modal-pin" role="dialog" aria-modal="true" aria-labelledby="pin-title">
+    <div class="modal">
+      <h2 id="pin-title">家長鎖</h2>
+      <p>輸入 PIN 先可以改設定（預設 1234）</p>
+      <div class="pin-row" id="pin-display" aria-hidden="true"></div>
+      <div class="pin-pad" id="pin-pad"></div>
+      <p class="pin-error" id="pin-error"></p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" id="btn-pin-cancel">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 家長區 -->
+  <div class="modal-backdrop" id="modal-parent" role="dialog" aria-modal="true" aria-labelledby="parent-title">
+    <div class="modal">
+      <h2 id="parent-title">家長區</h2>
+      <div class="coin-banner" id="parent-coin-banner"></div>
+
+      <div class="parent-section">
+        <h3>今日進度</h3>
+        <div class="stat-row"><span>今日星星</span><strong id="parent-stars-today">0 / 10</strong></div>
+        <div class="stat-row"><span>累積星星</span><strong id="parent-total-stars">0</strong></div>
+        <div class="stat-row"><span>可換 AEON 幣</span><strong id="parent-coins">0</strong></div>
+        <p style="font-size:0.95rem;margin-top:4px">10 粒星星 = 1 枚 AEON 幣（爸爸媽媽現實中兌換，無網上付款）</p>
+      </div>
+
+      <div class="parent-section">
+        <h3>設定</h3>
+        <div class="toggle-row">
+          <span>靜音</span>
+          <label class="toggle"><input type="checkbox" id="toggle-mute" /><span></span></label>
+        </div>
+        <div class="toggle-row">
+          <span>鹿類重點（每日多啲鹿）</span>
+          <label class="toggle"><input type="checkbox" id="toggle-deer" /><span></span></label>
+        </div>
+      </div>
+
+      <div class="parent-section">
+        <h3>字詞開關</h3>
+        <div class="word-toggles" id="word-toggles"></div>
+      </div>
+
+      <div class="parent-section">
+        <h3>改 PIN</h3>
+        <div class="btn-row" style="justify-content:flex-start">
+          <input class="pin-digit" id="new-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="新 PIN" style="width:140px" />
+          <button type="button" class="btn btn-secondary" id="btn-save-pin" style="min-width:140px">儲存 PIN</button>
+        </div>
+      </div>
+
+      <div class="parent-section">
+        <h3>重設</h3>
+        <button type="button" class="btn btn-ghost" id="btn-reset-stars">重設全部星星</button>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn" id="btn-parent-close">完成</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 星星／幣提示 -->
+  <div class="modal-backdrop" id="modal-stars" role="dialog" aria-modal="true" aria-labelledby="stars-title">
+    <div class="modal">
+      <h2 id="stars-title">星星變 AEON 幣</h2>
+      <div class="coin-banner">
+        <strong>10 粒星星 = 1 枚 AEON 幣</strong><br />
+        答啱就攞星；每日最多 10 粒。<br />
+        攞夠星星，可以叫爸爸媽媽換真正嘅 AEON 幣呀！
+      </div>
+      <div class="stat-row"><span>今日</span><strong id="info-stars-today">0 / 10</strong></div>
+      <div class="stat-row"><span>累積</span><strong id="info-total-stars">0</strong></div>
+      <div class="stat-row"><span>可換</span><strong id="info-coins">0 枚</strong></div>
+      <div class="btn-row">
+        <button type="button" class="btn" id="btn-stars-close">好呀！</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/words.js"></script>
+  <script src="./js/storage.js"></script>
+  <script src="./js/speech.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
