@@ -203,6 +203,7 @@ const TOPICS = [
     wordIds: [
       'lu', 'meihualu', 'xunlu', 'tuolu', 'malu',
       'xiong', 'shizi', 'laohu', 'daxiang', 'hou',
+      'xiongmao', 'changjinglu', 'banma', 'qie', 'hema', 'xiniu',
     ],
   },
   {
