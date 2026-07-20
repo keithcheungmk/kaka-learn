@@ -10,6 +10,9 @@
 
 **https://keithcheungmk.github.io/kaka-learn/**
 
+> 第一次啟用：Repo → **Settings** → **Pages** → Source 揀 **Deploy from a branch** → Branch 揀 **`gh-pages`** / `/ (root)` → Save。  
+> 之後每次 `main` 有更新會自動重新部署。
+
 ## 點樣運行（本機）
 
 GitHub PR 頁面本身**唔係**遊戲；要喺你部電腦開靜態伺服器：
