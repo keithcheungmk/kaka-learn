@@ -225,11 +225,12 @@ const TOPICS = [
   {
     id: 'home',
     title: '屋企',
-    blurb: '廚房、睡房、客廳、廁所、電視、焗爐…',
+    blurb: '廚房、睡房、客廳、廁所、電視、雪櫃…',
     cover: '🛋️',
     wordIds: [
       'chufang', 'shuifang', 'keting', 'cesuo',
-      'dianshi', 'julu', 'men', 'chuanghu', 'deng', 'yizi', 'chuangpu', 'shafa',
+      'dianshi', 'xuegui', 'xiyiji', 'dianhua', 'fengshan',
+      'men', 'chuanghu', 'deng', 'yizi', 'chuangpu', 'shafa',
     ],
   },
   {
