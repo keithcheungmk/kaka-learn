@@ -1,4 +1,4 @@
-/** 卡卡學習 — 固定 24 字詞表（繁體表面形）
+/** 卡卡學習 — 字詞表（繁體表面形）
  *  插圖採用系統 Emoji（iPhone／iPad 會顯示 Apple Color Emoji，清晰易認）
  */
 
@@ -33,6 +33,20 @@ const WORDS = [
   { id: 'wa', term: '蛙', isDeer: false, emoji: '🐸', badge: '', plate: '#143820' },
   { id: 'chong', term: '蟲', isDeer: false, emoji: '🐛', badge: '', plate: '#2a3810' },
   { id: 'long', term: '龍', isDeer: false, emoji: '🐲', badge: '', plate: '#0f3535' },
+  // 水果
+  { id: 'pingguo', term: '蘋果', isDeer: false, emoji: '🍎', badge: '', plate: '#401820' },
+  { id: 'xiangjiao', term: '香蕉', isDeer: false, emoji: '🍌', badge: '', plate: '#3a3410' },
+  { id: 'cheng', term: '橙', isDeer: false, emoji: '🍊', badge: '', plate: '#402410' },
+  { id: 'putao', term: '葡萄', isDeer: false, emoji: '🍇', badge: '', plate: '#2a1840' },
+  { id: 'xigua', term: '西瓜', isDeer: false, emoji: '🍉', badge: '', plate: '#143820' },
+  { id: 'caomei', term: '草莓', isDeer: false, emoji: '🍓', badge: '', plate: '#401028' },
+  // 蔬菜
+  { id: 'fanqie', term: '番茄', isDeer: false, emoji: '🍅', badge: '', plate: '#401018' },
+  { id: 'hongluobo', term: '紅蘿蔔', isDeer: false, emoji: '🥕', badge: '', plate: '#402010' },
+  { id: 'yumi', term: '玉米', isDeer: false, emoji: '🌽', badge: '', plate: '#3a3010' },
+  { id: 'baicai', term: '白菜', isDeer: false, emoji: '🥬', badge: '', plate: '#143820' },
+  { id: 'qiezi', term: '茄子', isDeer: false, emoji: '🍆', badge: '', plate: '#281840' },
+  { id: 'qingjiao', term: '青椒', isDeer: false, emoji: '🫑', badge: '', plate: '#143818' },
 ];
 
 /** 主題：先學再開考 */
@@ -71,6 +85,20 @@ const TOPICS = [
     blurb: '蛙、蟲、龍',
     cover: '🐲',
     wordIds: ['wa', 'chong', 'long'],
+  },
+  {
+    id: 'fruit',
+    title: '水果',
+    blurb: '蘋果、香蕉、橙、葡萄、西瓜、草莓',
+    cover: '🍎',
+    wordIds: ['pingguo', 'xiangjiao', 'cheng', 'putao', 'xigua', 'caomei'],
+  },
+  {
+    id: 'veg',
+    title: '蔬菜',
+    blurb: '番茄、紅蘿蔔、玉米、白菜、茄子、青椒',
+    cover: '🥕',
+    wordIds: ['fanqie', 'hongluobo', 'yumi', 'baicai', 'qiezi', 'qingjiao'],
   },
 ];
 
