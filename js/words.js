@@ -128,14 +128,14 @@ const WORDS = [
   { id: 'shubao', term: '書包', isDeer: false, emoji: '🎒', badge: '', plate: '#401820' },
   { id: 'qiu', term: '球', isDeer: false, emoji: '⚽', badge: '', plate: '#143820' },
   { id: 'jimu', term: '積木', isDeer: false, emoji: '🧸', badge: '', plate: '#3a2818' },
-  // 地方
-  { id: 'wu', term: '屋', isDeer: false, emoji: '🏠', badge: '', plate: '#1a3050' },
+  // 地方（屋用 wuzi，避免同數字「五」id wu 撞車）
+  { id: 'wuzi', term: '屋', isDeer: false, emoji: '🏠', badge: '', plate: '#1a3050' },
   { id: 'xuexiao', term: '學校', isDeer: false, emoji: '🏫', badge: '', plate: '#102848' },
-  { id: 'gongyuan', term: '公園', isDeer: false, emoji: '🏞️', badge: '', plate: '#143828' },
-  { id: 'shumu', term: '樹', isDeer: false, emoji: '🌳', badge: '', plate: '#143820' },
-  { id: 'shan', term: '山', isDeer: false, emoji: '⛰️', badge: '', plate: '#2a3548' },
-  { id: 'hai', term: '海', isDeer: false, emoji: '🌊', badge: '', plate: '#0f3550' },
-  { id: 'shatian', term: '沙田', isDeer: false, emoji: '🏘️', badge: '', plate: '#3a3010' },
+  { id: 'gongyuan', term: '公園', isDeer: false, emoji: '🛝', badge: '', plate: '#143828' },
+  { id: 'shangchang', term: '商場', isDeer: false, emoji: '🏬', badge: '', plate: '#401820' },
+  { id: 'tushuguan', term: '圖書館', isDeer: false, emoji: '📖', badge: '', plate: '#1a3050' },
+  { id: 'tingchechang', term: '停車場', isDeer: false, emoji: '🅿️', badge: '', plate: '#2a3548' },
+  { id: 'shatian', term: '沙田', isDeer: false, emoji: '🏢', badge: '', plate: '#3a3010' },
 ];
 
 /** 主題：先學再開考 */
