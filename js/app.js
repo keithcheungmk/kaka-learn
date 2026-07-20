@@ -350,25 +350,33 @@ function onListenPick(id, btn) {
   if (busy || !listenRound) return;
   state = loadState();
   const correct = id === listenRound.target.id;
+  const targetTerm = listenRound.target.term;
 
   if (correct) {
     busy = true;
     btn.classList.add('correct');
     playCorrectCue({ muted: state.muted });
+    speakCorrectFeedback({ muted: state.muted });
     const fb = $('#listen-feedback');
-    fb.textContent = '好叻！係呢個！';
+    fb.textContent = '你好叻呀，答啱咗！';
     fb.className = 'feedback ok';
     awardStar().then(() => {
-      setTimeout(() => startListenRound(), 900);
+      setTimeout(() => startListenRound(), 2600);
     });
   } else {
     btn.classList.add('wrong');
     playTryAgainCue({ muted: state.muted });
     const fb = $('#listen-feedback');
-    fb.textContent = '差少少，再試吓啦～';
+    fb.textContent = '唔緊要，試多次！';
     fb.className = 'feedback retry';
     setTimeout(() => btn.classList.remove('wrong'), 450);
-    setTimeout(() => speakTerm(listenRound.target.term, { muted: loadState().muted }), 400);
+    // 鼓勵句講完先再讀正確字詞，避免 cancel 切走鼓勵聲
+    speakRetryFeedback({
+      muted: state.muted,
+      onEnd: () => {
+        setTimeout(() => speakTerm(targetTerm, { muted: loadState().muted }), 250);
+      },
+    });
   }
 }
 
@@ -459,9 +467,10 @@ function onMatchPic(id, btn) {
     wordBtn?.classList.add('correct');
     matchRound.matched.add(id);
     playCorrectCue({ muted: state.muted });
+    speakCorrectFeedback({ muted: state.muted });
 
     const fb = $('#match-feedback');
-    fb.textContent = '配中喇！好叻！';
+    fb.textContent = '你好叻呀，答啱咗！';
     fb.className = 'feedback ok';
 
     awardStar().then(() => {
@@ -479,13 +488,14 @@ function onMatchPic(id, btn) {
           fb.textContent = '再揀下一個字詞';
           fb.className = 'feedback';
         }
-      }, 750);
+      }, 2000);
     });
   } else {
     btn.classList.add('wrong');
     playTryAgainCue({ muted: state.muted });
+    speakRetryFeedback({ muted: state.muted });
     const fb = $('#match-feedback');
-    fb.textContent = '差少少，再試吓啦～';
+    fb.textContent = '唔緊要，試多次！';
     fb.className = 'feedback retry';
     setTimeout(() => btn.classList.remove('wrong'), 450);
   }

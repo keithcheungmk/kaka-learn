@@ -1,6 +1,7 @@
 /** 粵語 TTS（Web Speech API / 系統聲線） */
 
 let cachedVoice = null;
+let speakTimer = null;
 
 function pickCantoneseVoice() {
   if (!('speechSynthesis' in window)) return null;
@@ -32,13 +33,31 @@ function warmVoices() {
 }
 
 /**
- * 朗讀完整詞語（粵語優先）
+ * 朗讀文字（粵語優先）
+ * iOS Safari：cancel 之後要稍延遲再 speak，否則會靜音失敗
  * @param {string} text
- * @param {{ muted?: boolean, rate?: number, pitch?: number }} options
+ * @param {{ muted?: boolean, rate?: number, pitch?: number, delayMs?: number, onEnd?: function }} options
  */
-function speakTerm(text, { muted = false, rate = 0.9, pitch = 1.05 } = {}) {
-  if (muted || !text) return;
-  if (!('speechSynthesis' in window)) return;
+function speakTerm(text, {
+  muted = false,
+  rate = 0.9,
+  pitch = 1.05,
+  delayMs = 80,
+  onEnd = null,
+} = {}) {
+  if (muted || !text) {
+    if (onEnd) onEnd();
+    return;
+  }
+  if (!('speechSynthesis' in window)) {
+    if (onEnd) onEnd();
+    return;
+  }
+
+  if (speakTimer) {
+    clearTimeout(speakTimer);
+    speakTimer = null;
+  }
 
   try {
     speechSynthesis.cancel();
@@ -46,29 +65,50 @@ function speakTerm(text, { muted = false, rate = 0.9, pitch = 1.05 } = {}) {
     // ignore
   }
 
-  const utter = new SpeechSynthesisUtterance(text);
-  const voice = cachedVoice || pickCantoneseVoice();
-  if (voice) {
-    utter.voice = voice;
-    utter.lang = voice.lang || 'zh-HK';
-  } else {
-    utter.lang = 'zh-HK';
-  }
-  utter.rate = rate;
-  utter.pitch = pitch;
-  speechSynthesis.speak(utter);
+  speakTimer = setTimeout(() => {
+    speakTimer = null;
+    try {
+      // Some iOS versions pause the synthesis engine after cancel
+      if (speechSynthesis.paused) speechSynthesis.resume();
+    } catch {
+      // ignore
+    }
+
+    const utter = new SpeechSynthesisUtterance(text);
+    const voice = cachedVoice || pickCantoneseVoice();
+    if (voice) {
+      utter.voice = voice;
+      utter.lang = voice.lang || 'zh-HK';
+    } else {
+      utter.lang = 'zh-HK';
+    }
+    utter.rate = rate;
+    utter.pitch = pitch;
+    if (onEnd) {
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        onEnd();
+      };
+      utter.onend = finish;
+      utter.onerror = finish;
+    }
+    speechSynthesis.speak(utter);
+  }, delayMs);
 }
 
 /** 測驗答啱／答錯語音回饋 */
 const FEEDBACK_CORRECT = '你好叻呀，答啱咗！';
 const FEEDBACK_RETRY = '唔緊要，試多次！';
 
-function speakCorrectFeedback({ muted = false } = {}) {
-  speakTerm(FEEDBACK_CORRECT, { muted, rate: 0.95, pitch: 1.1 });
+function speakCorrectFeedback({ muted = false, onEnd = null } = {}) {
+  // 等短音效先行，再講鼓勵句，避免互相搶
+  speakTerm(FEEDBACK_CORRECT, { muted, rate: 0.92, pitch: 1.08, delayMs: 180, onEnd });
 }
 
-function speakRetryFeedback({ muted = false } = {}) {
-  speakTerm(FEEDBACK_RETRY, { muted, rate: 0.95, pitch: 1.0 });
+function speakRetryFeedback({ muted = false, onEnd = null } = {}) {
+  speakTerm(FEEDBACK_RETRY, { muted, rate: 0.92, pitch: 1.0, delayMs: 180, onEnd });
 }
 
 /** 簡短正確音效（Web Audio，不依賴外部檔） */
@@ -97,6 +137,7 @@ function beep(freqs, noteDur, gap) {
     const Ctx = window.AudioContext || window.webkitAudioContext;
     if (!Ctx) return;
     const ctx = new Ctx();
+    if (ctx.state === 'suspended') ctx.resume().catch(() => {});
     let t = ctx.currentTime + 0.02;
     freqs.forEach((f, i) => {
       const osc = ctx.createOscillator();
@@ -117,7 +158,6 @@ function beep(freqs, noteDur, gap) {
     // ignore
   }
 }
-
 
 window.KakaSpeech = {
   warmVoices,
