@@ -100,6 +100,28 @@ const WORDS = [
   { id: 'gege', term: '哥哥', isDeer: false, emoji: '👦', badge: '', plate: '#102848' },
   { id: 'jiejie', term: '姐姐', isDeer: false, emoji: '👧', badge: '', plate: '#402038' },
   { id: 'baobao', term: '寶寶', isDeer: false, emoji: '👶', badge: '', plate: '#3a3010' },
+  // 食物（非蔬果）
+  { id: 'fan', term: '飯', isDeer: false, emoji: '🍚', badge: '', plate: '#2a3548' },
+  { id: 'mian', term: '麵', isDeer: false, emoji: '🍜', badge: '', plate: '#3a3010' },
+  { id: 'bao', term: '包', isDeer: false, emoji: '🍞', badge: '', plate: '#3a2818' },
+  { id: 'dan', term: '蛋', isDeer: false, emoji: '🥚', badge: '', plate: '#3a3a45' },
+  { id: 'nai', term: '奶', isDeer: false, emoji: '🥛', badge: '', plate: '#2a3a50' },
+  { id: 'dangao', term: '蛋糕', isDeer: false, emoji: '🎂', badge: '', plate: '#402038' },
+  // 學校／用品
+  { id: 'shu', term: '書', isDeer: false, emoji: '📚', badge: '', plate: '#102848' },
+  { id: 'gangbi', term: '筆', isDeer: false, emoji: '✏️', badge: '', plate: '#3a3010' },
+  { id: 'chi', term: '尺', isDeer: false, emoji: '📏', badge: '', plate: '#2a3548' },
+  { id: 'shubao', term: '書包', isDeer: false, emoji: '🎒', badge: '', plate: '#401820' },
+  { id: 'qiu', term: '球', isDeer: false, emoji: '⚽', badge: '', plate: '#143820' },
+  { id: 'jimu', term: '積木', isDeer: false, emoji: '🧸', badge: '', plate: '#3a2818' },
+  // 地方
+  { id: 'wu', term: '屋', isDeer: false, emoji: '🏠', badge: '', plate: '#1a3050' },
+  { id: 'xuexiao', term: '學校', isDeer: false, emoji: '🏫', badge: '', plate: '#102848' },
+  { id: 'gongyuan', term: '公園', isDeer: false, emoji: '🏞️', badge: '', plate: '#143828' },
+  { id: 'shumu', term: '樹', isDeer: false, emoji: '🌳', badge: '', plate: '#143820' },
+  { id: 'shan', term: '山', isDeer: false, emoji: '⛰️', badge: '', plate: '#2a3548' },
+  { id: 'hai', term: '海', isDeer: false, emoji: '🌊', badge: '', plate: '#0f3550' },
+  { id: 'shatian', term: '沙田', isDeer: false, emoji: '🏘️', badge: '', plate: '#3a3010' },
 ];
 
 /** 主題：先學再開考 */
