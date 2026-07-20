@@ -136,6 +136,19 @@ const WORDS = [
   { id: 'tushuguan', term: '圖書館', isDeer: false, emoji: '📖', badge: '', plate: '#1a3050' },
   { id: 'tingchechang', term: '停車場', isDeer: false, emoji: '🅿️', badge: '', plate: '#2a3548' },
   { id: 'shatian', term: '沙田', isDeer: false, emoji: '🏢', badge: '', plate: '#3a3010' },
+  // 屋企用品／房間
+  { id: 'chufang', term: '廚房', isDeer: false, emoji: '🍳', badge: '', plate: '#3a3010' },
+  { id: 'shuifang', term: '睡房', isDeer: false, emoji: '🛏️', badge: '', plate: '#1a3050' },
+  { id: 'keting', term: '客廳', isDeer: false, emoji: '🛋️', badge: '', plate: '#2a1840' },
+  { id: 'cesuo', term: '廁所', isDeer: false, emoji: '🚽', badge: '', plate: '#2a3548' },
+  { id: 'dianshi', term: '電視', isDeer: false, emoji: '📺', badge: '', plate: '#102848' },
+  { id: 'julu', term: '焗爐', isDeer: false, emoji: '🔥', badge: '', plate: '#401820' },
+  { id: 'men', term: '門', isDeer: false, emoji: '🚪', badge: '', plate: '#3a2818' },
+  { id: 'chuanghu', term: '窗', isDeer: false, emoji: '🪟', badge: '', plate: '#0f3550' },
+  { id: 'deng', term: '燈', isDeer: false, emoji: '💡', badge: '', plate: '#3a3410' },
+  { id: 'yizi', term: '椅', isDeer: false, emoji: '🪑', badge: '', plate: '#3a2818' },
+  { id: 'chuangpu', term: '床', isDeer: false, emoji: '🛏️', badge: '💤', plate: '#1a2a4a' },
+  { id: 'shafa', term: '梳化', isDeer: false, emoji: '🛋️', badge: '', plate: '#281840' },
 ];
 
 /** 主題：先學再開考 */
@@ -202,9 +215,9 @@ const TOPICS = [
   {
     id: 'places',
     title: '地方',
-    blurb: '屋、學校、公園、樹、山、海、沙田',
+    blurb: '屋、學校、公園、商場、圖書館、停車場、沙田',
     cover: '🏠',
-    wordIds: ['wu', 'xuexiao', 'gongyuan', 'shumu', 'shan', 'hai', 'shatian'],
+    wordIds: ['wuzi', 'xuexiao', 'gongyuan', 'shangchang', 'tushuguan', 'tingchechang', 'shatian'],
   },
   {
     id: 'zoo',
@@ -267,6 +280,17 @@ function wordsForTopic(topicId) {
   if (!topic) return [...WORDS];
   return topic.wordIds.map(getWordById).filter(Boolean);
 }
+
+/** 開發時檢查：唔好有重複 id（例如屋同五撞 wu） */
+(function assertUniqueWordIds() {
+  const seen = Object.create(null);
+  WORDS.forEach((w) => {
+    if (seen[w.id]) {
+      console.error('Duplicate word id:', w.id, seen[w.id], 'vs', w.term);
+    }
+    seen[w.id] = w.term;
+  });
+})();
 
 /** 產生卡片插圖 HTML（大粒系統 Emoji） */
 function wordIllustHtml(word) {
