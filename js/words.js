@@ -197,15 +197,19 @@ export const WORDS = [
   },
 ];
 
+let svgSeq = 0;
+
 function wrap(body, bg = '#0F2748') {
+  svgSeq += 1;
+  const gid = `kg${svgSeq}`;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-hidden="true">
     <defs>
-      <radialGradient id="g" cx="40%" cy="35%" r="70%">
+      <radialGradient id="${gid}" cx="40%" cy="35%" r="70%">
         <stop offset="0%" stop-color="#1E3A5F"/>
         <stop offset="100%" stop-color="${bg}"/>
       </radialGradient>
     </defs>
-    <rect width="120" height="120" rx="28" fill="url(#g)"/>
+    <rect width="120" height="120" rx="28" fill="url(#${gid})"/>
     <circle cx="22" cy="24" r="1.5" fill="#FDE68A" opacity=".9"/>
     <circle cx="96" cy="30" r="1.2" fill="#A5F3FC" opacity=".8"/>
     <circle cx="105" cy="70" r="1" fill="#FDE68A" opacity=".7"/>
