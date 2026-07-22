@@ -284,25 +284,15 @@ const TOPICS = [
     ],
   },
   {
-    id: 'pals',
-    title: '可愛朋友',
-    blurb: '狗貓魚鳥兔子',
+    id: 'small_animals',
+    title: '小動物',
+    blurb: '寵物、農場同奇趣小動物',
     cover: '🐶',
-    wordIds: ['gou', 'mao', 'yu', 'niao', 'tu'],
-  },
-  {
-    id: 'farm',
-    title: '農場動物',
-    blurb: '羊牛馬豬雞鴨',
-    cover: '🐮',
-    wordIds: ['yang', 'niu', 'ma', 'zhu', 'ji', 'ya'],
-  },
-  {
-    id: 'wonders',
-    title: '奇趣生物',
-    blurb: '青蛙、昆蟲、龍',
-    cover: '🐲',
-    wordIds: ['wa', 'chong', 'long'],
+    wordIds: [
+      'gou', 'mao', 'yu', 'niao', 'tu',
+      'yang', 'niu', 'ma', 'zhu', 'ji', 'ya',
+      'wa', 'chong', 'long',
+    ],
   },
   {
     id: 'fruit',
