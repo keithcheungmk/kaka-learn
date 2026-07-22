@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/styles.css?v=20260722b" />
+  <link rel="stylesheet" href="./css/styles.css?v=20260722c" />
 </head>
 <body>
   <div id="app">
@@ -98,7 +98,7 @@
       <p class="section-lead">而家先考考你識唔識</p>
       <div class="btn-row play-choices">
         <button type="button" class="btn" id="btn-mode-listen">聽一聽・揀漢字</button>
-        <button type="button" class="btn btn-secondary" id="btn-mode-match">字詞・配圖畫</button>
+        <button type="button" class="btn btn-secondary" id="btn-mode-match">睇圖・揀漢字</button>
       </div>
     </section>
 
@@ -122,8 +122,8 @@
       <p class="feedback" id="listen-feedback" aria-live="polite"></p>
     </section>
 
-    <!-- 模式 B：字詞配圖 -->
-    <section id="screen-match" class="screen" aria-label="字詞配圖畫">
+    <!-- 模式 B：睇圖揀漢字 -->
+    <section id="screen-match" class="screen" aria-label="睇圖揀漢字">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-match">← 玩法</button>
         <h1>配一配</h1>
@@ -135,18 +135,10 @@
         </div>
       </div>
       <div class="prompt-box">
-        <p>先撳字詞，再撳啱嘅圖畫</p>
+        <p>睇中間嘅圖，再揀啱嘅<strong>漢字</strong></p>
       </div>
-      <div class="match-layout">
-        <div>
-          <p class="section-label">字詞</p>
-          <div class="word-chips" id="match-words"></div>
-        </div>
-        <div>
-          <p class="section-label">圖畫</p>
-          <div class="pic-grid" id="match-pics"></div>
-        </div>
-      </div>
+      <div class="match-stage" id="match-stage" aria-hidden="true"></div>
+      <div class="card-grid cols-3" id="match-options"></div>
       <p class="feedback" id="match-feedback" aria-live="polite"></p>
     </section>
   </div>
@@ -236,9 +228,9 @@
     </div>
   </div>
 
-  <script src="./js/words.js?v=20260722b"></script>
-  <script src="./js/storage.js?v=20260722b"></script>
-  <script src="./js/speech.js?v=20260722b"></script>
-  <script src="./js/app.js?v=20260722b"></script>
+  <script src="./js/words.js?v=20260722c"></script>
+  <script src="./js/storage.js?v=20260722c"></script>
+  <script src="./js/speech.js?v=20260722c"></script>
+  <script src="./js/app.js?v=20260722c"></script>
 </body>
 </html>
