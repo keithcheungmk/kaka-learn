@@ -335,9 +335,11 @@ function startListenRound() {
   options.forEach((word) => {
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'word-card';
+    btn.className = 'word-card word-card-chars';
     btn.dataset.id = word.id;
-    btn.innerHTML = `${wordIllustHtml(word)}<span class="term">${word.term}</span>`;
+    // 測驗認字：淨顯示漢字，唔顯示圖，避免靠圖答
+    btn.innerHTML = `<span class="term term-only">${word.term}</span>`;
+    btn.setAttribute('aria-label', word.term);
     btn.addEventListener('click', () => onListenPick(word.id, btn));
     grid.appendChild(btn);
   });
