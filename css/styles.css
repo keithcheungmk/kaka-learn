@@ -608,6 +608,90 @@ body::before {
   line-height: 1.2;
 }
 
+/* 聽一聽：正面漢字 → 撳完翻背面 emoji */
+.word-card-flip {
+  perspective: 900px;
+  background: transparent;
+  box-shadow: none;
+  border-color: transparent;
+  padding: 0;
+  min-height: 132px;
+}
+
+.word-card-flip .flip-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: 132px;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0.15, 0.2, 1);
+}
+
+.word-card-flip.is-flipped .flip-inner {
+  transform: rotateY(180deg);
+}
+
+.word-card-flip .flip-face {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  min-height: 132px;
+  padding: 18px 14px;
+  border-radius: 24px;
+  border: 3px solid transparent;
+  background: rgba(15, 39, 72, 0.9);
+  box-shadow: var(--shadow);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.word-card-flip .flip-front {
+  position: relative;
+}
+
+.word-card-flip .flip-back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  padding: 12px 10px;
+}
+
+.word-card-flip .flip-back .emoji-plate {
+  width: min(72px, 18vw);
+  height: min(72px, 18vw);
+  border-radius: 18px;
+}
+
+.word-card-flip .flip-back .emoji-face {
+  font-size: clamp(2.2rem, 8vw, 2.8rem);
+}
+
+.word-card-flip .flip-back-term {
+  font-size: clamp(1.15rem, 3.5vw, 1.45rem);
+  letter-spacing: 0.08em;
+  opacity: 0.95;
+}
+
+.word-card-flip.correct .flip-face {
+  border-color: var(--ok);
+  background: rgba(74, 222, 128, 0.18);
+}
+
+.word-card-flip.wrong .flip-face {
+  border-color: var(--coral);
+}
+
+.word-card-flip.correct {
+  animation: popOk 0.45s ease;
+}
+
+.word-card-flip.wrong {
+  animation: softShake 0.4s ease;
+}
+
 .word-card.selected {
   border-color: var(--teal);
   background: rgba(45, 212, 191, 0.15);
@@ -624,6 +708,12 @@ body::before {
   animation: softShake 0.4s ease;
 }
 
+.word-card-flip.correct,
+.word-card-flip.wrong {
+  border-color: transparent;
+  background: transparent;
+}
+
 @keyframes popOk {
   0% { transform: scale(1); }
   40% { transform: scale(1.05); }
@@ -634,6 +724,12 @@ body::before {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-6px); }
   75% { transform: translateX(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word-card-flip .flip-inner {
+    transition: none;
+  }
 }
 
 .feedback {

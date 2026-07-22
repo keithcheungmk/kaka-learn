@@ -335,10 +335,19 @@ function startListenRound() {
   options.forEach((word) => {
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'word-card word-card-chars';
+    btn.className = 'word-card word-card-chars word-card-flip';
     btn.dataset.id = word.id;
-    // 測驗認字：淨顯示漢字，唔顯示圖，避免靠圖答
-    btn.innerHTML = `<span class="term term-only">${word.term}</span>`;
+    // 正面淨漢字（考認字）；撳完先翻背面睇 emoji
+    btn.innerHTML = `
+      <span class="flip-inner">
+        <span class="flip-face flip-front">
+          <span class="term term-only">${word.term}</span>
+        </span>
+        <span class="flip-face flip-back" aria-hidden="true">
+          ${wordIllustHtml(word)}
+          <span class="term flip-back-term">${word.term}</span>
+        </span>
+      </span>`;
     btn.setAttribute('aria-label', word.term);
     btn.addEventListener('click', () => onListenPick(word.id, btn));
     grid.appendChild(btn);
@@ -348,14 +357,24 @@ function startListenRound() {
   setTimeout(() => speakTerm(target.term, { muted: loadState().muted }), 280);
 }
 
+function flipListenCard(btn, stay) {
+  if (!btn) return;
+  btn.classList.add('is-flipped');
+  if (!stay) {
+    setTimeout(() => btn.classList.remove('is-flipped'), 1100);
+  }
+}
+
 function onListenPick(id, btn) {
   if (busy || !listenRound) return;
+  if (btn.classList.contains('is-flipped')) return;
   state = loadState();
   const correct = id === listenRound.target.id;
   const targetTerm = listenRound.target.term;
 
   if (correct) {
     busy = true;
+    flipListenCard(btn, true);
     btn.classList.add('correct');
     playCorrectCue({ muted: state.muted });
     const praise = speakCorrectFeedback({ muted: state.muted });
@@ -363,9 +382,11 @@ function onListenPick(id, btn) {
     fb.textContent = praise;
     fb.className = 'feedback ok';
     awardStar().then(() => {
-      setTimeout(() => startListenRound(), 2600);
+      setTimeout(() => startListenRound(), 2800);
     });
   } else {
+    // 錯咗都翻一吓睇圖，跟住翻返去——唔好長期露圖，避免靠淘汰答
+    flipListenCard(btn, false);
     btn.classList.add('wrong');
     playTryAgainCue({ muted: state.muted });
     const fb = $('#listen-feedback');
