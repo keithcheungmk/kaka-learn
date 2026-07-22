@@ -743,16 +743,15 @@ body::before {
 .feedback.ok { color: var(--ok); }
 .feedback.retry { color: var(--gold-soft); }
 
-.match-layout {
+.match-stage {
   display: grid;
-  gap: 16px;
+  place-items: center;
+  margin: 8px auto 18px;
+  max-width: 220px;
 }
 
-@media (min-width: 900px) {
-  .match-layout {
-    grid-template-columns: 1fr 1fr;
-    align-items: start;
-  }
+.match-stage .emoji-plate {
+  animation: floaty 3.2s ease-in-out infinite;
 }
 
 .section-label {

@@ -43,7 +43,6 @@ let state = loadState();
 let pinBuffer = '';
 let listenRound = null;
 let matchRound = null;
-let matchSelectedWordId = null;
 let busy = false;
 /** @type {string|null} */
 let activeTopicId = null;
@@ -403,7 +402,7 @@ function onListenPick(id, btn) {
   }
 }
 
-/* ---------- 模式 B：先撳字再撳圖 ---------- */
+/* ---------- 模式 B：睇圖揀漢字 ---------- */
 
 function bindMatch() {
   const back = $('#btn-back-match');
@@ -412,115 +411,68 @@ function bindMatch() {
 
 function startMatchRound() {
   busy = false;
-  matchSelectedWordId = null;
   const pool = enabledWords();
-  const count = Math.min(4, pool.length);
   const target = pickTarget(pool);
-  const set = shuffle([target, ...sampleOthers(pool, target.id, count - 1)]);
-  const words = shuffle(set);
-  const pics = shuffle(set);
-  matchRound = { set, words, pics, matched: new Set() };
+  const optionCount = Math.min(4, pool.length);
+  const options = shuffle([target, ...sampleOthers(pool, target.id, optionCount - 1)]);
+  matchRound = { target, options };
 
   const fb = $('#match-feedback');
-  fb.textContent = '先揀一個字詞';
+  fb.textContent = '';
   fb.className = 'feedback';
 
-  const wordBox = $('#match-words');
-  const picBox = $('#match-pics');
-  wordBox.innerHTML = '';
-  picBox.innerHTML = '';
+  const stage = $('#match-stage');
+  if (stage) {
+    stage.innerHTML = wordIllustHtml(target);
+    const plate = stage.querySelector('.emoji-plate');
+    if (plate) plate.classList.add('emoji-plate-lg');
+    const face = stage.querySelector('.emoji-face');
+    if (face) face.classList.add('emoji-face-lg');
+  }
 
-  words.forEach((w) => {
+  const grid = $('#match-options');
+  grid.innerHTML = '';
+  options.forEach((word) => {
     const btn = document.createElement('button');
     btn.type = 'button';
-    btn.className = 'chip';
-    btn.dataset.id = w.id;
-    btn.textContent = w.term;
-    btn.addEventListener('click', () => onMatchWord(w.id, btn));
-    wordBox.appendChild(btn);
-  });
-
-  pics.forEach((w) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'pic-card';
-    btn.dataset.id = w.id;
-    btn.setAttribute('aria-label', '圖畫');
-    btn.innerHTML = wordIllustHtml(w);
-    btn.addEventListener('click', () => onMatchPic(w.id, btn));
-    picBox.appendChild(btn);
+    btn.className = 'word-card word-card-chars';
+    btn.dataset.id = word.id;
+    btn.innerHTML = `<span class="term term-only">${word.term}</span>`;
+    btn.setAttribute('aria-label', word.term);
+    btn.addEventListener('click', () => onMatchPick(word.id, btn));
+    grid.appendChild(btn);
   });
 
   refreshStarUI();
 }
 
-function onMatchWord(id, btn) {
+function onMatchPick(id, btn) {
   if (busy || !matchRound) return;
-  if (matchRound.matched.has(id)) return;
-
-  $$('#match-words .chip').forEach((el) => el.classList.remove('selected'));
-  btn.classList.add('selected');
-  matchSelectedWordId = id;
-
   state = loadState();
-  const word = WORDS.find((w) => w.id === id);
-  if (word) speakTerm(word.term, { muted: state.muted });
+  const correct = id === matchRound.target.id;
+  const targetTerm = matchRound.target.term;
 
-  const fb = $('#match-feedback');
-  fb.textContent = '而家撳啱嘅圖畫';
-  fb.className = 'feedback';
-}
-
-function onMatchPic(id, btn) {
-  if (busy || !matchRound) return;
-  if (!matchSelectedWordId) {
-    const fb = $('#match-feedback');
-    fb.textContent = '記住：先撳字詞，再撳圖畫';
-    fb.className = 'feedback retry';
-    return;
-  }
-  if (matchRound.matched.has(id)) return;
-
-  state = loadState();
-  const wordBtn = $(`#match-words .chip[data-id="${matchSelectedWordId}"]`);
-
-  if (id === matchSelectedWordId) {
+  if (correct) {
     busy = true;
     btn.classList.add('correct');
-    wordBtn?.classList.add('correct');
-    matchRound.matched.add(id);
     playCorrectCue({ muted: state.muted });
     const praise = speakCorrectFeedback({ muted: state.muted });
-
     const fb = $('#match-feedback');
     fb.textContent = praise;
     fb.className = 'feedback ok';
-
+    // 答啱先讀出漢字，強化字音對應
+    setTimeout(() => speakTerm(targetTerm, { muted: loadState().muted }), 400);
     awardStar().then(() => {
-      const done = matchRound.matched.size >= matchRound.set.length;
-      setTimeout(() => {
-        if (done) startMatchRound();
-        else {
-          busy = false;
-          matchSelectedWordId = null;
-          wordBtn?.classList.remove('selected');
-          wordBtn && (wordBtn.disabled = true);
-          btn.disabled = true;
-          wordBtn && (wordBtn.style.opacity = '0.45');
-          btn.style.opacity = '0.45';
-          fb.textContent = '再揀下一個字詞';
-          fb.className = 'feedback';
-        }
-      }, 2000);
+      setTimeout(() => startMatchRound(), 2600);
     });
   } else {
     btn.classList.add('wrong');
     playTryAgainCue({ muted: state.muted });
-    const retryLine = speakRetryFeedback({ muted: state.muted });
     const fb = $('#match-feedback');
-    fb.textContent = retryLine;
     fb.className = 'feedback retry';
     setTimeout(() => btn.classList.remove('wrong'), 450);
+    const retryLine = speakRetryFeedback({ muted: state.muted });
+    fb.textContent = retryLine;
   }
 }
 
