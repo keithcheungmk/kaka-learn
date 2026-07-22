@@ -184,10 +184,65 @@ const WORDS = [
   { id: 'yashua', term: '牙刷', isDeer: false, emoji: '🪥', badge: '', plate: '#143828' },
   { id: 'chuangpu', term: '睡床', isDeer: false, emoji: '🛏️', badge: '💤', plate: '#1a2a4a' },
   { id: 'shafa', term: '梳化', isDeer: false, emoji: '🛋️', badge: '', plate: '#281840' },
+  // 紅輯高頻（對齊《我自己會讀》紅輯溫習；書面語字形，粵語 TTS）
+  // 注意：間尺已用 id chi，故「吃」用 chi_eat；數字「十」已用 shi，故「是」用 shi_be
+  { id: 'wo', term: '我', isDeer: false, emoji: '🙋', badge: '', plate: '#1a3050' },
+  { id: 'ni', term: '你', isDeer: false, emoji: '👉', badge: '', plate: '#102848' },
+  { id: 'ta_he', term: '他', isDeer: false, emoji: '👨', badge: '他', plate: '#2a3548' },
+  { id: 'ta_she', term: '她', isDeer: false, emoji: '👩', badge: '她', plate: '#402038' },
+  { id: 'kan', term: '看', isDeer: false, emoji: '👀', badge: '看', plate: '#2a1840' },
+  { id: 'lai', term: '來', isDeer: false, emoji: '➡️', badge: '', plate: '#143828' },
+  { id: 'qu', term: '去', isDeer: false, emoji: '⬅️', badge: '', plate: '#3a3010' },
+  { id: 'chi_eat', term: '吃', isDeer: false, emoji: '🍽️', badge: '', plate: '#401820' },
+  { id: 'wan_play', term: '玩', isDeer: false, emoji: '🎲', badge: '', plate: '#281840' },
+  { id: 'pao', term: '跑', isDeer: false, emoji: '🏃', badge: '', plate: '#402010' },
+  { id: 'zou', term: '走', isDeer: false, emoji: '🚶', badge: '', plate: '#2a2a35' },
+  { id: 'zuo_sit', term: '坐', isDeer: false, emoji: '🪑', badge: '坐', plate: '#3a2818' },
+  { id: 'da_big', term: '大', isDeer: false, emoji: '⬛', badge: '', plate: '#1a1a22' },
+  { id: 'xiao_small', term: '小', isDeer: false, emoji: '🔸', badge: '', plate: '#3a3a45' },
+  { id: 'you_have', term: '有', isDeer: false, emoji: '✋', badge: '有', plate: '#143820' },
+  { id: 'zai', term: '在', isDeer: false, emoji: '📍', badge: '', plate: '#401018' },
+  { id: 'shi_be', term: '是', isDeer: false, emoji: '✔️', badge: '', plate: '#0f3535' },
+  { id: 'bu', term: '不', isDeer: false, emoji: '❌', badge: '', plate: '#401018' },
+  { id: 'hao', term: '好', isDeer: false, emoji: '👍', badge: '', plate: '#143828' },
+  { id: 'shang', term: '上', isDeer: false, emoji: '⬆️', badge: '', plate: '#1a3050' },
+  { id: 'xia', term: '下', isDeer: false, emoji: '⬇️', badge: '', plate: '#102848' },
+  { id: 'ai_love', term: '愛', isDeer: false, emoji: '💗', badge: '', plate: '#401028' },
+  { id: 'gei', term: '給', isDeer: false, emoji: '🎁', badge: '', plate: '#2a1840' },
+  { id: 'zhao', term: '找', isDeer: false, emoji: '🔍', badge: '', plate: '#2a3548' },
+  { id: 'shuo', term: '說', isDeer: false, emoji: '💬', badge: '', plate: '#1a3050' },
+  { id: 'pengyou', term: '朋友', isDeer: false, emoji: '👫', badge: '', plate: '#402038' },
+  { id: 'zhe', term: '這', isDeer: false, emoji: '👇', badge: '', plate: '#3a3010' },
+  { id: 'na_that', term: '那', isDeer: false, emoji: '👉', badge: '那', plate: '#2a2a35' },
+  { id: 'duo', term: '多', isDeer: false, emoji: '🔢', badge: '多', plate: '#102848' },
+  { id: 'shao', term: '少', isDeer: false, emoji: '1️⃣', badge: '少', plate: '#2a3548' },
+  { id: 'didi', term: '弟弟', isDeer: false, emoji: '👦', badge: '弟', plate: '#1a3050' },
+  { id: 'meimei', term: '妹妹', isDeer: false, emoji: '👧', badge: '妹', plate: '#402038' },
+  { id: 'shuijiao', term: '睡覺', isDeer: false, emoji: '😴', badge: '', plate: '#1a2a4a' },
+  { id: 'xiexie', term: '謝謝', isDeer: false, emoji: '🙏', badge: '', plate: '#3a3010' },
+  { id: 'laoshi', term: '老師', isDeer: false, emoji: '👩‍🏫', badge: '', plate: '#102848' },
+  { id: 'shu_book', term: '書', isDeer: false, emoji: '📕', badge: '', plate: '#401820' },
 ];
 
 /** 主題：先學再開考 */
 const TOPICS = [
+  {
+    id: 'red_series',
+    title: '紅輯',
+    blurb: '對齊《我自己會讀》紅輯：高頻字溫習（第一批）',
+    cover: '📕',
+    wordIds: [
+      // 人物／代詞
+      'wo', 'ni', 'ta_he', 'ta_she', 'baba', 'mama', 'didi', 'meimei', 'pengyou', 'laoshi',
+      // 動作
+      'kan', 'lai', 'qu', 'chi_eat', 'wan_play', 'pao', 'zou', 'zuo_sit', 'zhao', 'shuo', 'gei', 'shuijiao',
+      // 常用字
+      'da_big', 'xiao_small', 'duo', 'shao', 'hao', 'ai_love', 'you_have', 'zai', 'shi_be', 'bu',
+      'shang', 'xia', 'zhe', 'na_that', 'xiexie',
+      // 重用生活詞（紅輯故事常見）
+      'yi', 'shui', 'shu_book', 'gou', 'mao', 'shou', 'jiao', 'ri', 'xuexiao', 'gongyuan',
+    ],
+  },
   {
     id: 'numbers',
     title: '數字',
@@ -229,9 +284,9 @@ const TOPICS = [
   {
     id: 'family',
     title: '家庭',
-    blurb: '爸爸媽媽爺爺婆婆哥哥姐姐寶寶',
+    blurb: '爸爸媽媽爺爺婆婆哥哥姐姐弟弟妹妹寶寶',
     cover: '👨',
-    wordIds: ['baba', 'mama', 'yeye', 'popo', 'gege', 'jiejie', 'baobao'],
+    wordIds: ['baba', 'mama', 'yeye', 'popo', 'gege', 'jiejie', 'didi', 'meimei', 'baobao'],
   },
   {
     id: 'food',
