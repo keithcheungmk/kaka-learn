@@ -145,7 +145,7 @@ const WORDS = [
   { id: 're_hot', term: '熱', isDeer: false, emoji: '🥵', badge: '', plate: '#402010' },
   { id: 'leng_cold', term: '冷', isDeer: false, emoji: '🥶', badge: '', plate: '#102848' },
   { id: 'xiang_scent', term: '香', isDeer: false, emoji: '👃', badge: '香', plate: '#402038' },
-  { id: 'chou', term: '臭', isDeer: false, emoji: '🤢💩', badge: '', plate: '#2a3810', emojiDuo: true },
+  { id: 'chou', term: '臭', isDeer: false, emoji: '🤢', badge: '💩', plate: '#2a3810' },
   // 家庭
   { id: 'baba', term: '爸爸', isDeer: false, emoji: '👨', badge: '', plate: '#1a3050' },
   { id: 'mama', term: '媽媽', isDeer: false, emoji: '👩', badge: '', plate: '#402038' },
