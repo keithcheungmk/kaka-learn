@@ -207,6 +207,9 @@ const WORDS = [
   { id: 'panzi', term: '盤子', isDeer: false, emoji: '🍽️', badge: '', plate: '#1a3050' },
   { id: 'zhijin', term: '紙巾', isDeer: false, emoji: '🧻', badge: '', plate: '#3a3a45' },
   { id: 'shuzi', term: '梳子', isDeer: false, emoji: '🪮', badge: '', plate: '#402038' },
+  { id: 'lifa', term: '理髮', isDeer: false, emoji: '💇', badge: '', plate: '#281840' },
+  { id: 'xitoushui', term: '洗頭水', isDeer: false, emoji: '🧴', badge: '洗', plate: '#1a3050' },
+  { id: 'muyulu', term: '沐浴露', isDeer: false, emoji: '🧴', badge: '浴', plate: '#0f3535' },
   { id: 'kouzhao', term: '口罩', isDeer: false, emoji: '😷', badge: '', plate: '#2a3548' },
   { id: 'yanjing', term: '眼鏡', isDeer: false, emoji: '👓', badge: '', plate: '#1a2a4a' },
   // 紅輯高頻（對齊《我自己會讀》紅輯溫習；書面語字形，粵語 TTS）
