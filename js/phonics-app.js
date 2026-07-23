@@ -1,0 +1,702 @@
+/* 卡卡字母隊 — English Phonics（獨立 IIFE，唔改動 js/app.js 任何內容）
+ * Classic script — 冇 ES module，方便 iPad／預覽側欄。
+ * Phase 1：keep it simple — 冇星星／PIN，答啱淨係鼓勵 + 自動下一題。
+ */
+(function () {
+  if (!window.KakaWords || !window.KakaStorage || !window.KakaSpeech || !window.KakaPhonicsWords) {
+    console.error('KakaPhonics: required scripts missing. Check words.js / storage.js / speech.js / phonics-words.js loaded first.');
+    return;
+  }
+
+  const { PHONICS_TOPICS, getPhonicsTopicById, phonicsLetterPool, phonicsWordIllustHtml, letterTileHtml } =
+    window.KakaPhonicsWords;
+  const { loadState } = window.KakaStorage;
+  const {
+    warmEnglishVoice,
+    speakEnglishTerm,
+    speakCorrectFeedback,
+    speakRetryFeedback,
+    playCorrectCue,
+    playTryAgainCue,
+  } = window.KakaSpeech;
+
+  let pBusy = false;
+  let pActiveTopicId = null;
+  let pLearnWords = [];
+  let pLearnIndex = 0;
+  let pListenRound = null;
+  let pMatchRound = null;
+  let pBuildRound = null;
+  let pBuildSelectedKey = null;
+
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+
+  function isMuted() {
+    try {
+      return !!loadState().muted;
+    } catch {
+      return false;
+    }
+  }
+
+  function goHome() {
+    if (window.KakaLearn && typeof window.KakaLearn.goHome === 'function') {
+      window.KakaLearn.goHome();
+      return;
+    }
+    $$('.screen').forEach((el) => el.classList.remove('active'));
+    $('#screen-home')?.classList.add('active');
+  }
+
+  function showPScreen(name) {
+    const map = {
+      topics: '#screen-phonics-topics',
+      learn: '#screen-phonics-learn',
+      play: '#screen-phonics-play',
+      listen: '#screen-phonics-listen',
+      match: '#screen-phonics-match',
+      build: '#screen-phonics-build',
+    };
+    $$('.screen').forEach((el) => el.classList.remove('active'));
+    $(map[name])?.classList.add('active');
+  }
+
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function sampleOthers(pool, targetId, count) {
+    const others = shuffle(pool.filter((w) => w.id !== targetId));
+    return others.slice(0, count);
+  }
+
+  function pickTarget(pool) {
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+
+  function init() {
+    try {
+      warmEnglishVoice();
+      bindPhonicsHome();
+      bindPhonicsTopics();
+      bindPhonicsLearn();
+      bindPhonicsPlayPick();
+      bindPhonicsListen();
+      bindPhonicsMatch();
+      bindPhonicsBuild();
+    } catch (err) {
+      console.error('KakaPhonics init failed', err);
+    }
+  }
+
+  function bindPhonicsHome() {
+    const btn = $('#btn-start-phonics');
+    if (btn) {
+      btn.onclick = (ev) => {
+        if (ev) ev.preventDefault();
+        openPhonicsTopics();
+      };
+    }
+  }
+
+  function bindPhonicsTopics() {
+    const back = $('#btn-back-phonics-topics');
+    if (back) back.onclick = () => goHome();
+  }
+
+  function openPhonicsTopics() {
+    renderPhonicsTopics();
+    showPScreen('topics');
+  }
+
+  function renderPhonicsTopics() {
+    const grid = $('#phonics-topic-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    PHONICS_TOPICS.forEach((topic) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'topic-card';
+      btn.innerHTML = `
+        <span class="topic-cover" aria-hidden="true">${topic.cover}</span>
+        <span class="topic-title term-en">${topic.title}</span>
+        <span class="topic-blurb term-en">${topic.blurb}</span>
+      `;
+      btn.onclick = () => openPhonicsLearn(topic.id);
+      grid.appendChild(btn);
+    });
+  }
+
+  function bindPhonicsLearn() {
+    const back = $('#btn-back-phonics-learn');
+    if (back) back.onclick = () => openPhonicsTopics();
+    const stage = $('#phonics-learn-stage');
+    if (stage) stage.onclick = () => speakCurrentPhonicsLearn();
+    const prev = $('#btn-phonics-learn-prev');
+    const next = $('#btn-phonics-learn-next');
+    if (prev) prev.onclick = () => stepPhonicsLearn(-1);
+    if (next) next.onclick = () => stepPhonicsLearn(1);
+    const play = $('#btn-phonics-learn-play');
+    if (play) play.onclick = () => openPhonicsPlayPick();
+  }
+
+  function openPhonicsLearn(topicId) {
+    const topic = getPhonicsTopicById(topicId);
+    if (!topic) return;
+    pActiveTopicId = topicId;
+    pLearnWords = shuffle(topic.words);
+    pLearnIndex = 0;
+    const title = $('#phonics-learn-topic-title');
+    if (title) title.textContent = topic.title;
+    renderPhonicsLearnCard();
+    showPScreen('learn');
+  }
+
+  function renderPhonicsLearnCard() {
+    const word = pLearnWords[pLearnIndex];
+    if (!word) return;
+    const illust = $('#phonics-learn-illust');
+    const term = $('#phonics-learn-term');
+    const lettersRow = $('#phonics-learn-letters');
+    const progress = $('#phonics-learn-progress');
+
+    if (illust) illust.innerHTML = word.emoji ? phonicsWordIllustHtml(word) : '';
+    if (term) term.textContent = word.word;
+    if (lettersRow) {
+      lettersRow.innerHTML = word.letters
+        ? word.letters
+            .map((ch) => `<span class="letter-tile">${letterTileHtml(ch)}</span>`)
+            .join('')
+        : '';
+    }
+    if (progress) progress.textContent = `${pLearnIndex + 1}/${pLearnWords.length}`;
+
+    const prev = $('#btn-phonics-learn-prev');
+    const next = $('#btn-phonics-learn-next');
+    const finishRow = $('#phonics-learn-finish-row');
+    const atEnd = pLearnIndex >= pLearnWords.length - 1;
+    if (prev) prev.disabled = pLearnIndex <= 0;
+    if (next) next.textContent = atEnd ? '再睇一次' : '下一張';
+    if (finishRow) finishRow.hidden = !atEnd;
+
+    const plate = illust?.querySelector('.emoji-plate');
+    if (plate) plate.classList.add('emoji-plate-lg');
+    const face = illust?.querySelector('.emoji-face');
+    if (face) face.classList.add('emoji-face-lg');
+
+    speakCurrentPhonicsLearn();
+  }
+
+  function speakCurrentPhonicsLearn() {
+    const word = pLearnWords[pLearnIndex];
+    if (!word) return;
+    speakEnglishTerm(word.word, { muted: isMuted() });
+  }
+
+  function stepPhonicsLearn(delta) {
+    if (!pLearnWords.length) return;
+    if (delta > 0 && pLearnIndex >= pLearnWords.length - 1) {
+      pLearnWords = shuffle(pLearnWords);
+      pLearnIndex = 0;
+    } else {
+      pLearnIndex = Math.max(0, Math.min(pLearnWords.length - 1, pLearnIndex + delta));
+    }
+    renderPhonicsLearnCard();
+  }
+
+  function bindPhonicsPlayPick() {
+    const back = $('#btn-back-phonics-play');
+    if (back) back.onclick = () => openPhonicsLearn(pActiveTopicId);
+    const listenBtn = $('#btn-phonics-mode-listen');
+    const matchBtn = $('#btn-phonics-mode-match');
+    const buildBtn = $('#btn-phonics-mode-build');
+    if (listenBtn) listenBtn.onclick = startPhonicsListenMode;
+    if (matchBtn) matchBtn.onclick = startPhonicsMatchMode;
+    if (buildBtn) buildBtn.onclick = startPhonicsBuildMode;
+  }
+
+  function openPhonicsPlayPick() {
+    const topic = getPhonicsTopicById(pActiveTopicId);
+    const title = $('#phonics-play-topic-title');
+    if (title) title.textContent = topic ? `${topic.title}・去玩玩` : '去玩玩';
+    const modes = topic?.modes || ['listen'];
+    const listenBtn = $('#btn-phonics-mode-listen');
+    const matchBtn = $('#btn-phonics-mode-match');
+    const buildBtn = $('#btn-phonics-mode-build');
+    if (listenBtn) listenBtn.hidden = !modes.includes('listen');
+    if (matchBtn) matchBtn.hidden = !modes.includes('match');
+    if (buildBtn) buildBtn.hidden = !modes.includes('build');
+    showPScreen('play');
+  }
+
+  function startPhonicsListenMode(ev) {
+    if (ev) ev.preventDefault();
+    if (!pActiveTopicId) {
+      openPhonicsTopics();
+      return;
+    }
+    showPScreen('listen');
+    startPhonicsListenRound();
+  }
+
+  function startPhonicsMatchMode(ev) {
+    if (ev) ev.preventDefault();
+    if (!pActiveTopicId) {
+      openPhonicsTopics();
+      return;
+    }
+    showPScreen('match');
+    startPhonicsMatchRound();
+  }
+
+  function startPhonicsBuildMode(ev) {
+    if (ev) ev.preventDefault();
+    if (!pActiveTopicId) {
+      openPhonicsTopics();
+      return;
+    }
+    showPScreen('build');
+    startPhonicsBuildRound();
+  }
+
+  function currentTopicWords() {
+    const topic = getPhonicsTopicById(pActiveTopicId);
+    return topic ? topic.words : [];
+  }
+
+  /* ---------- 模式 A：聽一聽・揀圖(冇圖嘅 sight word 就揀字) ---------- */
+
+  function bindPhonicsListen() {
+    const speak = $('#btn-phonics-speak-listen');
+    if (speak) {
+      speak.onclick = () => {
+        if (!pListenRound) return;
+        speakEnglishTerm(pListenRound.target.word, { muted: isMuted() });
+      };
+    }
+    const back = $('#btn-back-phonics-listen');
+    if (back) back.onclick = () => openPhonicsPlayPick();
+  }
+
+  function startPhonicsListenRound() {
+    pBusy = false;
+    const pool = currentTopicWords();
+    if (pool.length < 2) return;
+    const target = pickTarget(pool);
+    const optionCount = Math.min(4, pool.length);
+    const options = shuffle([target, ...sampleOthers(pool, target.id, optionCount - 1)]);
+    pListenRound = { target, options };
+
+    const fb = $('#phonics-listen-feedback');
+    if (fb) {
+      fb.textContent = '';
+      fb.className = 'feedback';
+    }
+
+    const grid = $('#phonics-listen-options');
+    if (grid) {
+      grid.innerHTML = '';
+      options.forEach((word) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = word.emoji ? 'word-card' : 'word-card word-card-chars';
+        btn.dataset.id = word.id;
+        btn.innerHTML = word.emoji
+          ? `<span class="illust">${phonicsWordIllustHtml(word)}</span>`
+          : `<span class="term term-only term-en">${word.word}</span>`;
+        btn.setAttribute('aria-label', word.word);
+        btn.addEventListener('click', () => onPhonicsListenPick(word.id, btn));
+        grid.appendChild(btn);
+      });
+    }
+
+    setTimeout(() => speakEnglishTerm(target.word, { muted: isMuted() }), 280);
+  }
+
+  function onPhonicsListenPick(id, btn) {
+    if (pBusy || !pListenRound) return;
+    const correct = id === pListenRound.target.id;
+    const targetWord = pListenRound.target.word;
+    const fb = $('#phonics-listen-feedback');
+
+    if (correct) {
+      pBusy = true;
+      btn.classList.add('correct');
+      playCorrectCue({ muted: isMuted() });
+      const praise = speakCorrectFeedback({ muted: isMuted() });
+      if (fb) {
+        fb.textContent = praise;
+        fb.className = 'feedback ok';
+      }
+      setTimeout(() => speakEnglishTerm(targetWord, { muted: isMuted() }), 400);
+      setTimeout(() => startPhonicsListenRound(), 2600);
+    } else {
+      btn.classList.add('wrong');
+      playTryAgainCue({ muted: isMuted() });
+      setTimeout(() => btn.classList.remove('wrong'), 450);
+      const retryLine = speakRetryFeedback({
+        muted: isMuted(),
+        onEnd: () => {
+          setTimeout(() => speakEnglishTerm(targetWord, { muted: isMuted() }), 250);
+        },
+      });
+      if (fb) {
+        fb.textContent = retryLine;
+        fb.className = 'feedback retry';
+      }
+    }
+  }
+
+  /* ---------- 模式 B：睇圖・揀字 ---------- */
+
+  function bindPhonicsMatch() {
+    const back = $('#btn-back-phonics-match');
+    if (back) back.onclick = () => openPhonicsPlayPick();
+  }
+
+  function startPhonicsMatchRound() {
+    pBusy = false;
+    const pool = currentTopicWords().filter((w) => w.emoji);
+    if (pool.length < 2) return;
+    const target = pickTarget(pool);
+    const optionCount = Math.min(4, pool.length);
+    const options = shuffle([target, ...sampleOthers(pool, target.id, optionCount - 1)]);
+    pMatchRound = { target, options };
+
+    const fb = $('#phonics-match-feedback');
+    if (fb) {
+      fb.textContent = '';
+      fb.className = 'feedback';
+    }
+
+    const stage = $('#phonics-match-stage');
+    if (stage) {
+      stage.innerHTML = phonicsWordIllustHtml(target);
+      stage.querySelector('.emoji-plate')?.classList.add('emoji-plate-lg');
+      stage.querySelector('.emoji-face')?.classList.add('emoji-face-lg');
+    }
+
+    const grid = $('#phonics-match-options');
+    if (grid) {
+      grid.innerHTML = '';
+      options.forEach((word) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'word-card word-card-chars';
+        btn.dataset.id = word.id;
+        btn.innerHTML = `<span class="term term-only term-en">${word.word}</span>`;
+        btn.setAttribute('aria-label', word.word);
+        btn.addEventListener('click', () => onPhonicsMatchPick(word.id, btn));
+        grid.appendChild(btn);
+      });
+    }
+  }
+
+  function onPhonicsMatchPick(id, btn) {
+    if (pBusy || !pMatchRound) return;
+    const correct = id === pMatchRound.target.id;
+    const targetWord = pMatchRound.target.word;
+    const fb = $('#phonics-match-feedback');
+
+    if (correct) {
+      pBusy = true;
+      btn.classList.add('correct');
+      playCorrectCue({ muted: isMuted() });
+      const praise = speakCorrectFeedback({ muted: isMuted() });
+      if (fb) {
+        fb.textContent = praise;
+        fb.className = 'feedback ok';
+      }
+      setTimeout(() => speakEnglishTerm(targetWord, { muted: isMuted() }), 400);
+      setTimeout(() => startPhonicsMatchRound(), 2600);
+    } else {
+      btn.classList.add('wrong');
+      playTryAgainCue({ muted: isMuted() });
+      setTimeout(() => btn.classList.remove('wrong'), 450);
+      const retryLine = speakRetryFeedback({ muted: isMuted() });
+      if (fb) {
+        fb.textContent = retryLine;
+        fb.className = 'feedback retry';
+      }
+    }
+  }
+
+  /* ---------- 模式 C：砌一砌(拖／撳字母按順序) ---------- */
+
+  function makePhonicsBuildTiles(target, topic) {
+    const needed = target.letters;
+    const tiles = needed.map((ch, i) => ({ key: `need-${i}-${ch}`, char: ch }));
+    const allLetters = phonicsLetterPool(topic);
+    const distractors = shuffle(allLetters.filter((ch) => !needed.includes(ch)));
+    const cap = Math.min(8, allLetters.length);
+    for (const ch of distractors) {
+      if (tiles.length >= cap) break;
+      tiles.push({ key: `d-${tiles.length}-${ch}`, char: ch });
+    }
+    return shuffle(tiles);
+  }
+
+  function bindPhonicsBuild() {
+    const back = $('#btn-back-phonics-build');
+    if (back) back.onclick = () => openPhonicsPlayPick();
+  }
+
+  function startPhonicsBuildRound() {
+    pBusy = false;
+    pBuildSelectedKey = null;
+    const topic = getPhonicsTopicById(pActiveTopicId);
+    const pool = (topic?.words || []).filter((w) => w.letters);
+    if (pool.length < 1) return;
+    const target = pickTarget(pool);
+    const chars = target.letters;
+    const tiles = makePhonicsBuildTiles(target, topic);
+    pBuildRound = {
+      target,
+      chars,
+      filled: chars.map(() => null),
+      tiles,
+    };
+
+    const fb = $('#phonics-build-feedback');
+    if (fb) {
+      fb.textContent = '由左到右,砌啱每個字母';
+      fb.className = 'feedback';
+    }
+
+    const stage = $('#phonics-build-stage');
+    if (stage) {
+      stage.innerHTML = phonicsWordIllustHtml(target);
+      stage.querySelector('.emoji-plate')?.classList.add('emoji-plate-lg');
+      stage.querySelector('.emoji-face')?.classList.add('emoji-face-lg');
+    }
+
+    renderPhonicsBuildSlots();
+    renderPhonicsBuildPool();
+  }
+
+  function nextPhonicsBuildIndex() {
+    if (!pBuildRound) return -1;
+    return pBuildRound.filled.findIndex((x) => !x);
+  }
+
+  function renderPhonicsBuildSlots() {
+    const box = $('#phonics-build-slots');
+    if (!box || !pBuildRound) return;
+    const next = nextPhonicsBuildIndex();
+    box.innerHTML = '';
+    pBuildRound.chars.forEach((ch, i) => {
+      const filled = pBuildRound.filled[i];
+      const slot = document.createElement('button');
+      slot.type = 'button';
+      slot.className = 'build-slot';
+      if (filled) slot.classList.add('is-filled');
+      if (i === next) slot.classList.add('is-next');
+      slot.dataset.index = String(i);
+      slot.setAttribute('aria-label', filled ? `已放 ${filled.char}` : `第 ${i + 1} 格,淡字母 ${ch}`);
+      slot.innerHTML = `
+        <span class="build-ghost term-en" aria-hidden="true">${ch}</span>
+        ${filled ? `<span class="build-placed letter-tile" aria-hidden="true">${letterTileHtml(filled.char)}</span>` : ''}`;
+      slot.addEventListener('click', () => onPhonicsBuildSlotTap(i));
+      box.appendChild(slot);
+    });
+  }
+
+  function renderPhonicsBuildPool() {
+    const box = $('#phonics-build-pool');
+    if (!box || !pBuildRound) return;
+    box.innerHTML = '';
+    pBuildRound.tiles.forEach((tile) => {
+      const used = pBuildRound.filled.some((f) => f && f.key === tile.key);
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'build-tile letter-tile';
+      if (used) btn.classList.add('is-used');
+      if (pBuildSelectedKey === tile.key) btn.classList.add('is-selected');
+      btn.dataset.key = tile.key;
+      btn.innerHTML = letterTileHtml(tile.char);
+      btn.setAttribute('aria-label', `letter ${tile.char}`);
+      if (!used) {
+        let suppressClick = false;
+        btn.addEventListener('click', (ev) => {
+          ev.preventDefault();
+          if (suppressClick) {
+            suppressClick = false;
+            return;
+          }
+          onPhonicsBuildTileTap(tile.key);
+        });
+        btn.addEventListener('pointerdown', (ev) => {
+          onPhonicsBuildPointerDown(ev, tile, () => {
+            suppressClick = true;
+          });
+        });
+      }
+      box.appendChild(btn);
+    });
+  }
+
+  function onPhonicsBuildTileTap(key) {
+    if (pBusy || !pBuildRound) return;
+    const used = pBuildRound.filled.some((f) => f && f.key === key);
+    if (used) return;
+    pBuildSelectedKey = pBuildSelectedKey === key ? null : key;
+    renderPhonicsBuildPool();
+    const fb = $('#phonics-build-feedback');
+    if (fb && pBuildSelectedKey) {
+      fb.textContent = '而家撳左邊發光嘅格';
+      fb.className = 'feedback';
+    }
+  }
+
+  function onPhonicsBuildSlotTap(index) {
+    if (pBusy || !pBuildRound) return;
+    const next = nextPhonicsBuildIndex();
+    if (pBuildRound.filled[index]) {
+      const lastFilled = [...pBuildRound.filled].map((f, i) => (f ? i : -1)).filter((i) => i >= 0).pop();
+      if (lastFilled === index) {
+        pBuildRound.filled[index] = null;
+        pBuildSelectedKey = null;
+        renderPhonicsBuildSlots();
+        renderPhonicsBuildPool();
+        const fb = $('#phonics-build-feedback');
+        if (fb) {
+          fb.textContent = '由左到右,砌啱每個字母';
+          fb.className = 'feedback';
+        }
+      }
+      return;
+    }
+    if (!pBuildSelectedKey || index !== next) return;
+    tryPlacePhonicsBuildChar(pBuildSelectedKey, index);
+  }
+
+  function tryPlacePhonicsBuildChar(tileKey, slotIndex) {
+    if (pBusy || !pBuildRound) return false;
+    const next = nextPhonicsBuildIndex();
+    const tile = pBuildRound.tiles.find((t) => t.key === tileKey);
+    if (!tile) return false;
+    if (pBuildRound.filled.some((f) => f && f.key === tileKey)) return false;
+
+    const slotEl = $(`#phonics-build-slots .build-slot[data-index="${slotIndex}"]`);
+
+    if (slotIndex !== next) {
+      slotEl?.classList.add('is-wrong');
+      setTimeout(() => slotEl?.classList.remove('is-wrong'), 450);
+      playTryAgainCue({ muted: isMuted() });
+      const fb = $('#phonics-build-feedback');
+      if (fb) {
+        fb.textContent = '要由左到右砌呀';
+        fb.className = 'feedback retry';
+      }
+      pBuildSelectedKey = null;
+      renderPhonicsBuildPool();
+      return false;
+    }
+
+    const expected = pBuildRound.chars[slotIndex];
+    if (tile.char !== expected) {
+      slotEl?.classList.add('is-wrong');
+      setTimeout(() => slotEl?.classList.remove('is-wrong'), 450);
+      playTryAgainCue({ muted: isMuted() });
+      const retryLine = speakRetryFeedback({ muted: isMuted() });
+      const fb = $('#phonics-build-feedback');
+      if (fb) {
+        fb.textContent = retryLine;
+        fb.className = 'feedback retry';
+      }
+      pBuildSelectedKey = null;
+      renderPhonicsBuildPool();
+      return false;
+    }
+
+    pBuildRound.filled[slotIndex] = { key: tile.key, char: tile.char };
+    pBuildSelectedKey = null;
+    renderPhonicsBuildSlots();
+    renderPhonicsBuildPool();
+
+    if (pBuildRound.filled.every(Boolean)) {
+      finishPhonicsBuildSuccess();
+    } else {
+      const fb = $('#phonics-build-feedback');
+      if (fb) {
+        fb.textContent = '好!繼續砌下一個';
+        fb.className = 'feedback ok';
+      }
+    }
+    return true;
+  }
+
+  function finishPhonicsBuildSuccess() {
+    if (!pBuildRound) return;
+    pBusy = true;
+    playCorrectCue({ muted: isMuted() });
+    const praise = speakCorrectFeedback({ muted: isMuted() });
+    const fb = $('#phonics-build-feedback');
+    if (fb) {
+      fb.textContent = praise;
+      fb.className = 'feedback ok';
+    }
+    const word = pBuildRound.target.word;
+    setTimeout(() => speakEnglishTerm(word, { muted: isMuted() }), 400);
+    setTimeout(() => startPhonicsBuildRound(), 2600);
+  }
+
+  function onPhonicsBuildPointerDown(ev, tile, onDragStarted) {
+    if (pBusy || !pBuildRound || ev.button === 2) return;
+    const used = pBuildRound.filled.some((f) => f && f.key === tile.key);
+    if (used) return;
+    const startX = ev.clientX;
+    const startY = ev.clientY;
+    const btn = ev.currentTarget;
+    let moved = false;
+    const ghost = document.createElement('div');
+    ghost.className = 'build-drag-ghost term-en';
+    ghost.textContent = tile.char;
+
+    const onMove = (e) => {
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (!moved && Math.hypot(dx, dy) < 10) return;
+      if (!moved) {
+        moved = true;
+        if (typeof onDragStarted === 'function') onDragStarted();
+        pBuildSelectedKey = tile.key;
+        btn.classList.add('is-dragging');
+        btn.classList.add('is-selected');
+        document.body.appendChild(ghost);
+      }
+      ghost.style.left = `${e.clientX}px`;
+      ghost.style.top = `${e.clientY}px`;
+    };
+
+    const onUp = (e) => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('pointercancel', onUp);
+      if (!moved) return;
+      ghost.remove();
+      btn.classList.remove('is-dragging');
+      const el = document.elementFromPoint(e.clientX, e.clientY);
+      const slot = el?.closest?.('.build-slot');
+      const idx = slot ? Number(slot.dataset.index) : -1;
+      if (idx >= 0) {
+        tryPlacePhonicsBuildChar(tile.key, idx);
+      } else {
+        pBuildSelectedKey = null;
+        renderPhonicsBuildPool();
+      }
+    };
+
+    window.addEventListener('pointermove', onMove);
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('pointercancel', onUp);
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
+})();
