@@ -2,6 +2,9 @@
 
 let cachedVoice = null;
 let speakTimer = null;
+let speakEndTimer = null;
+let speakKeepAlive = null;
+let speakGen = 0;
 
 function pickCantoneseVoice() {
   if (!('speechSynthesis' in window)) return null;
@@ -32,9 +35,33 @@ function warmVoices() {
   }
 }
 
+/** 估算朗讀時長（ms）。iOS／Safari 成日唔觸發 utterance.onend，要靠呢個做後備。 */
+function estimateSpeakMs(text, { rate = 0.9, delayMs = 80 } = {}) {
+  const chars = Array.from(String(text || '')).length;
+  // 粵語大約每字 0.4s；短詞至少預留約 1.4 秒，避免切走字尾
+  const speech = Math.max(1400, Math.ceil((chars * 450) / Math.max(0.5, rate)));
+  return delayMs + speech + 320;
+}
+
+function clearSpeakWatchers() {
+  if (speakTimer) {
+    clearTimeout(speakTimer);
+    speakTimer = null;
+  }
+  if (speakEndTimer) {
+    clearTimeout(speakEndTimer);
+    speakEndTimer = null;
+  }
+  if (speakKeepAlive) {
+    clearInterval(speakKeepAlive);
+    speakKeepAlive = null;
+  }
+}
+
 /**
  * 朗讀文字（粵語優先）
- * iOS Safari：cancel 之後要稍延遲再 speak，否則會靜音失敗
+ * iOS Safari：cancel 之後要稍延遲再 speak，否則會靜音失敗；
+ * 而且 onend 經常唔 fire——會用時長後備確保 onEnd 一定會跑。
  * @param {string} text
  * @param {{ muted?: boolean, rate?: number, pitch?: number, delayMs?: number, onEnd?: function }} options
  */
@@ -45,19 +72,34 @@ function speakTerm(text, {
   delayMs = 80,
   onEnd = null,
 } = {}) {
+  const runEnd = (() => {
+    let done = false;
+    return () => {
+      if (done) return;
+      done = true;
+      if (speakEndTimer) {
+        clearTimeout(speakEndTimer);
+        speakEndTimer = null;
+      }
+      if (speakKeepAlive) {
+        clearInterval(speakKeepAlive);
+        speakKeepAlive = null;
+      }
+      if (typeof onEnd === 'function') onEnd();
+    };
+  })();
+
   if (muted || !text) {
-    if (onEnd) onEnd();
+    runEnd();
     return;
   }
   if (!('speechSynthesis' in window)) {
-    if (onEnd) onEnd();
+    runEnd();
     return;
   }
 
-  if (speakTimer) {
-    clearTimeout(speakTimer);
-    speakTimer = null;
-  }
+  clearSpeakWatchers();
+  const gen = ++speakGen;
 
   try {
     speechSynthesis.cancel();
@@ -65,8 +107,12 @@ function speakTerm(text, {
     // ignore
   }
 
+  // 後備：就算 onend／onerror 都唔嚟，都要繼續下一句（鼓勵聲）
+  speakEndTimer = setTimeout(runEnd, estimateSpeakMs(text, { rate, delayMs }));
+
   speakTimer = setTimeout(() => {
     speakTimer = null;
+    if (gen !== speakGen) return;
     try {
       // Some iOS versions pause the synthesis engine after cancel
       if (speechSynthesis.paused) speechSynthesis.resume();
@@ -84,18 +130,57 @@ function speakTerm(text, {
     }
     utter.rate = rate;
     utter.pitch = pitch;
-    if (onEnd) {
-      let done = false;
-      const finish = () => {
-        if (done) return;
-        done = true;
-        onEnd();
-      };
-      utter.onend = finish;
-      utter.onerror = finish;
+    utter.onend = runEnd;
+    utter.onerror = runEnd;
+
+    try {
+      speechSynthesis.speak(utter);
+    } catch {
+      runEnd();
+      return;
     }
-    speechSynthesis.speak(utter);
+
+    // Chrome 長句有時會卡住 speaking；短句都 harmless
+    speakKeepAlive = setInterval(() => {
+      if (gen !== speakGen) {
+        clearInterval(speakKeepAlive);
+        speakKeepAlive = null;
+        return;
+      }
+      try {
+        if (!speechSynthesis.speaking) {
+          clearInterval(speakKeepAlive);
+          speakKeepAlive = null;
+          runEnd();
+          return;
+        }
+        speechSynthesis.pause();
+        speechSynthesis.resume();
+      } catch {
+        // ignore
+      }
+    }, 5000);
   }, delayMs);
+}
+
+/**
+ * 讀完 text 再執行 next（onEnd + 時長後備，避免 iPad 鼓勵聲永遠唔播）
+ */
+function speakThen(text, options, next) {
+  let done = false;
+  const go = () => {
+    if (done) return;
+    done = true;
+    if (typeof next === 'function') next();
+  };
+  const opts = options || {};
+  const wait = estimateSpeakMs(text, opts);
+  speakTerm(text, {
+    ...opts,
+    onEnd: go,
+  });
+  // 雙重保險：即使 speakTerm 內部後備失效，呢度都跟住下一句
+  setTimeout(go, wait + 120);
 }
 
 /** 測驗答啱／答錯語音回饋（隨機抽一句，長短夾雜） */
@@ -122,8 +207,34 @@ function pickFeedbackLine(lines) {
  */
 function speakCorrectFeedback({ muted = false, onEnd = null } = {}) {
   const line = pickFeedbackLine(FEEDBACK_CORRECT_LINES);
-  speakTerm(line, { muted, rate: 0.92, pitch: 1.08, delayMs: 180, onEnd });
+  speakTerm(line, { muted, rate: 0.92, pitch: 1.08, delayMs: 220, onEnd });
   return line;
+}
+
+/**
+ * 答啱流程：先讀學習字詞，再叮聲 + 鼓勵。
+ * iPad／Safari 成日唔容許「第二次」async speak，所以字詞同鼓勵合併成一次 utterance。
+ * @returns {string} 鼓勵句（畫面顯示用）
+ */
+function speakWordThenEncourage(term, { muted = false, onEnd = null } = {}) {
+  const praise = pickFeedbackLine(FEEDBACK_CORRECT_LINES);
+  if (muted || !term) {
+    if (typeof onEnd === 'function') onEnd();
+    return praise;
+  }
+  warmAudio();
+  // 字詞大概讀完就叮一聲（唔等 onend）
+  const dingAt = Math.max(500, estimateSpeakMs(term, { rate: 0.9, delayMs: 80 }) - 360);
+  setTimeout(() => playCorrectCue({ muted }), dingAt);
+  // 一次過：「哥哥。你好叻呀，答啱咗！」——避免第二次 speak 被靜音
+  speakTerm(`${term}。${praise}`, {
+    muted,
+    rate: 0.92,
+    pitch: 1.06,
+    delayMs: 80,
+    onEnd,
+  });
+  return praise;
 }
 
 /**
@@ -131,7 +242,7 @@ function speakCorrectFeedback({ muted = false, onEnd = null } = {}) {
  */
 function speakRetryFeedback({ muted = false, onEnd = null } = {}) {
   const line = pickFeedbackLine(FEEDBACK_RETRY_LINES);
-  speakTerm(line, { muted, rate: 0.92, pitch: 1.0, delayMs: 180, onEnd });
+  speakTerm(line, { muted, rate: 0.92, pitch: 1.0, delayMs: 220, onEnd });
   return line;
 }
 
@@ -148,6 +259,15 @@ function getAudioCtx() {
     sharedAudioCtx.resume().catch(() => {});
   }
   return sharedAudioCtx;
+}
+
+/** 喺手指手勢入面喚醒音效（之後 async 叮聲先播得唔出） */
+function warmAudio() {
+  try {
+    getAudioCtx();
+  } catch {
+    // ignore
+  }
 }
 
 /** 簡短正確音效（Web Audio，不依賴外部檔） */
@@ -182,7 +302,7 @@ function beep(freqs, noteDur, gap) {
       osc.type = 'sine';
       osc.frequency.value = f;
       gain.gain.setValueAtTime(0.0001, t);
-      gain.gain.exponentialRampToValueAtTime(0.12, t + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.14, t + 0.02);
       gain.gain.exponentialRampToValueAtTime(0.0001, t + noteDur);
       osc.connect(gain);
       gain.connect(ctx.destination);
@@ -197,13 +317,17 @@ function beep(freqs, noteDur, gap) {
 
 window.KakaSpeech = {
   warmVoices,
+  warmAudio,
   speakTerm,
+  speakThen,
   speakCorrectFeedback,
+  speakWordThenEncourage,
   speakRetryFeedback,
   playCorrectCue,
   playTryAgainCue,
   playStarCue,
   playCoinHintCue,
+  estimateSpeakMs,
   FEEDBACK_CORRECT_LINES,
   FEEDBACK_RETRY_LINES,
 };

@@ -23,13 +23,16 @@ const {
 } = window.KakaStorage;
 const {
   warmVoices,
+  warmAudio,
   speakTerm,
   speakCorrectFeedback,
+  speakWordThenEncourage,
   speakRetryFeedback,
   playCorrectCue,
   playTryAgainCue,
   playStarCue,
   playCoinHintCue,
+  estimateSpeakMs,
 } = window.KakaSpeech;
 
 const HERO_EMOJI = `<div class="hero-emoji-stack" aria-hidden="true">
@@ -475,26 +478,17 @@ function onMatchPick(id, btn) {
   if (correct) {
     busy = true;
     btn.classList.add('correct');
-    // 先讀漢字，講完先叮聲 + 鼓勵
+    warmAudio();
     const fb = $('#match-feedback');
+    // 一次過讀字詞 + 鼓勵（iPad 第二次 speak 會靜音）
+    const praise = speakWordThenEncourage(targetTerm, { muted: state.muted });
     if (fb) {
-      fb.textContent = '答啱喇！';
+      fb.textContent = praise;
       fb.className = 'feedback ok';
     }
-    speakTerm(targetTerm, {
-      muted: state.muted,
-      onEnd: () => {
-        const muted = loadState().muted;
-        playCorrectCue({ muted });
-        const praise = speakCorrectFeedback({ muted });
-        if (fb) {
-          fb.textContent = praise;
-          fb.className = 'feedback ok';
-        }
-      },
-    });
+    const nextMs = estimateSpeakMs(`${targetTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
     awardStar().then(() => {
-      setTimeout(() => startMatchRound(), 3800);
+      setTimeout(() => startMatchRound(), nextMs);
     });
   } else {
     btn.classList.add('wrong');
@@ -643,6 +637,7 @@ function renderBuildPool() {
 
 function onBuildTileTap(key) {
   if (busy || !buildRound) return;
+  warmAudio();
   const used = buildRound.filled.some((f) => f && f.key === key);
   if (used) return;
   buildSelectedKey = buildSelectedKey === key ? null : key;
@@ -740,32 +735,25 @@ function finishBuildSuccess() {
   if (!buildRound) return;
   busy = true;
   state = loadState();
+  // 手指手勢入面喚醒 Web Audio，之後叮聲先唔會被 iPad 靜音
+  warmAudio();
   const term = buildRound.target.term;
   const fb = $('#build-feedback');
+  // 一次過讀「字詞 + 鼓勵」——iPad／Safari 第二次 async speak 成日冇聲
+  const praise = speakWordThenEncourage(term, { muted: state.muted });
   if (fb) {
-    fb.textContent = '砌啱喇！';
+    fb.textContent = praise;
     fb.className = 'feedback ok';
   }
-  // 先讀學習字詞，講完先叮聲 + 鼓勵句（避免互相 cancel）
-  speakTerm(term, {
-    muted: state.muted,
-    onEnd: () => {
-      const muted = loadState().muted;
-      playCorrectCue({ muted });
-      const praise = speakCorrectFeedback({ muted });
-      if (fb) {
-        fb.textContent = praise;
-        fb.className = 'feedback ok';
-      }
-    },
-  });
+  const nextMs = estimateSpeakMs(`${term}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
   awardStar().then(() => {
-    setTimeout(() => startBuildRound(), 3800);
+    setTimeout(() => startBuildRound(), nextMs);
   });
 }
 
 function onBuildPointerDown(ev, tile, onDragStarted) {
   if (busy || !buildRound || ev.button === 2) return;
+  warmAudio();
   const used = buildRound.filled.some((f) => f && f.key === tile.key);
   if (used) return;
   const startX = ev.clientX;
