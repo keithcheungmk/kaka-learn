@@ -198,7 +198,7 @@ const WORDS = [
   { id: 'maojin', term: '毛巾', isDeer: false, emoji: '🧼', badge: '巾', plate: '#2a3a50' },
   { id: 'yashua', term: '牙刷', isDeer: false, emoji: '🪥', badge: '', plate: '#143828' },
   { id: 'shuihu', term: '水壺', isDeer: false, emoji: '🧴', badge: '水', plate: '#0f3550' },
-  { id: 'yagao', term: '牙膏', isDeer: false, emoji: '🧴', badge: '膏', plate: '#2a3a50' },
+  { id: 'yagao', term: '牙膏', isDeer: false, emoji: '🦷', badge: '膏', plate: '#2a3a50' },
   { id: 'beizi_cup', term: '杯子', isDeer: false, emoji: '🥤', badge: '', plate: '#102848' },
   { id: 'wan', term: '碗', isDeer: false, emoji: '🥣', badge: '', plate: '#3a3010' },
   { id: 'tangchi', term: '湯匙', isDeer: false, emoji: '🥄', badge: '', plate: '#2a3548' },
@@ -206,7 +206,7 @@ const WORDS = [
   { id: 'chazi', term: '叉子', isDeer: false, emoji: '🍴', badge: '', plate: '#401820' },
   { id: 'panzi', term: '盤子', isDeer: false, emoji: '🍽️', badge: '', plate: '#1a3050' },
   { id: 'zhijin', term: '紙巾', isDeer: false, emoji: '🧻', badge: '', plate: '#3a3a45' },
-  { id: 'shuzi', term: '梳子', isDeer: false, emoji: '💇', badge: '', plate: '#402038' },
+  { id: 'shuzi', term: '梳子', isDeer: false, emoji: '🪮', badge: '', plate: '#402038' },
   { id: 'kouzhao', term: '口罩', isDeer: false, emoji: '😷', badge: '', plate: '#2a3548' },
   { id: 'yanjing', term: '眼鏡', isDeer: false, emoji: '👓', badge: '', plate: '#1a2a4a' },
   // 紅輯高頻（對齊《我自己會讀》紅輯溫習；書面語字形，粵語 TTS）
