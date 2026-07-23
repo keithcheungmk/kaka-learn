@@ -135,6 +135,21 @@ function speakRetryFeedback({ muted = false, onEnd = null } = {}) {
   return line;
 }
 
+/** 重用同一個 AudioContext，避免 iPad 每次 new 後被自動 suspend／播唔出 */
+let sharedAudioCtx = null;
+
+function getAudioCtx() {
+  const Ctx = window.AudioContext || window.webkitAudioContext;
+  if (!Ctx) return null;
+  if (!sharedAudioCtx || sharedAudioCtx.state === 'closed') {
+    sharedAudioCtx = new Ctx();
+  }
+  if (sharedAudioCtx.state === 'suspended') {
+    sharedAudioCtx.resume().catch(() => {});
+  }
+  return sharedAudioCtx;
+}
+
 /** 簡短正確音效（Web Audio，不依賴外部檔） */
 function playCorrectCue({ muted = false } = {}) {
   if (muted) return;
@@ -158,10 +173,8 @@ function playCoinHintCue({ muted = false } = {}) {
 
 function beep(freqs, noteDur, gap) {
   try {
-    const Ctx = window.AudioContext || window.webkitAudioContext;
-    if (!Ctx) return;
-    const ctx = new Ctx();
-    if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+    const ctx = getAudioCtx();
+    if (!ctx) return;
     let t = ctx.currentTime + 0.02;
     freqs.forEach((f, i) => {
       const osc = ctx.createOscillator();
@@ -177,7 +190,6 @@ function beep(freqs, noteDur, gap) {
       osc.stop(t + noteDur + 0.02);
       t += noteDur + (i < freqs.length - 1 ? gap * 0.35 : 0);
     });
-    setTimeout(() => ctx.close().catch(() => {}), 1500);
   } catch {
     // ignore
   }

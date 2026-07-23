@@ -476,14 +476,18 @@ function onMatchPick(id, btn) {
     busy = true;
     btn.classList.add('correct');
     playCorrectCue({ muted: state.muted });
-    const praise = speakCorrectFeedback({ muted: state.muted });
+    // 鼓勵句講完先再讀漢字，避免 cancel 切走鼓勵聲
+    const praise = speakCorrectFeedback({
+      muted: state.muted,
+      onEnd: () => {
+        setTimeout(() => speakTerm(targetTerm, { muted: loadState().muted }), 220);
+      },
+    });
     const fb = $('#match-feedback');
     fb.textContent = praise;
     fb.className = 'feedback ok';
-    // 答啱先讀出漢字，強化字音對應
-    setTimeout(() => speakTerm(targetTerm, { muted: loadState().muted }), 400);
     awardStar().then(() => {
-      setTimeout(() => startMatchRound(), 2600);
+      setTimeout(() => startMatchRound(), 3200);
     });
   } else {
     btn.classList.add('wrong');
@@ -706,6 +710,8 @@ function tryPlaceBuildChar(tileKey, slotIndex) {
   if (buildRound.filled.every(Boolean)) {
     finishBuildSuccess();
   } else {
+    // 砌啱一個字都播短鼓勵音效（唔讀整句，避免同之後成功鼓勵搶聲）
+    playCorrectCue({ muted: state.muted });
     const fb = $('#build-feedback');
     if (fb) {
       fb.textContent = '好！繼續砌下一個';
@@ -720,16 +726,21 @@ function finishBuildSuccess() {
   busy = true;
   state = loadState();
   playCorrectCue({ muted: state.muted });
-  const praise = speakCorrectFeedback({ muted: state.muted });
+  const term = buildRound.target.term;
+  // 鼓勵句講完先再讀字詞，避免 speakTerm 嘅 cancel 切走鼓勵聲
+  const praise = speakCorrectFeedback({
+    muted: state.muted,
+    onEnd: () => {
+      setTimeout(() => speakTerm(term, { muted: loadState().muted }), 220);
+    },
+  });
   const fb = $('#build-feedback');
   if (fb) {
     fb.textContent = praise;
     fb.className = 'feedback ok';
   }
-  const term = buildRound.target.term;
-  setTimeout(() => speakTerm(term, { muted: loadState().muted }), 400);
   awardStar().then(() => {
-    setTimeout(() => startBuildRound(), 2600);
+    setTimeout(() => startBuildRound(), 3200);
   });
 }
 
