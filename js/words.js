@@ -354,7 +354,7 @@ const TOPICS = [
     blurb: '房間、傢俬、電器同家居設施',
     cover: '🛋️',
     wordIds: [
-      'chufang', 'shuifang', 'cesuo', 'yushi', 'yangtai',
+      'chufang', 'shuifang', 'yushi', 'yangtai',
       'chuangpu', 'zhentou', 'beizi', 'yizi', 'zhuozi', 'shafa', 'yigui', 'chouti',
       'dianshi', 'xuegui', 'xiyiji', 'fengshan', 'lengqi', 'dianhua', 'shizhong', 'deng',
       'men', 'mensuo', 'chuanghu', 'lajitong', 'xiangkuang', 'ditan',
