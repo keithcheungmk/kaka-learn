@@ -362,8 +362,8 @@ const TOPICS = [
     blurb: '盥洗、餐具同隨身小物',
     cover: '🪥',
     wordIds: [
-      'maojin', 'yashua', 'yagao', 'jing', 'shuzi', 'kouzhao', 'yanjing',
-      'shuihu', 'zhijin',
+      'maojin', 'yashua', 'yagao', 'jing', 'shuzi', 'lifa', 'xitoushui', 'muyulu',
+      'kouzhao', 'yanjing', 'shuihu', 'zhijin',
       'beizi_cup', 'wan', 'tangchi', 'kuaizi', 'chazi', 'panzi',
     ],
   },
