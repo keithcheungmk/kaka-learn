@@ -96,6 +96,16 @@ const WORDS = [
   { id: 'feng', term: '大風', isDeer: false, emoji: '💨', badge: '', plate: '#243848' },
   { id: 'dian', term: '閃電', isDeer: false, emoji: '⚡', badge: '', plate: '#3a3410' },
   { id: 'caihong', term: '彩虹', isDeer: false, emoji: '🌈', badge: '', plate: '#2a1840' },
+  // 自然（單字為主）
+  { id: 'xingxing', term: '星星', isDeer: false, emoji: '⭐', badge: '', plate: '#1a2040' },
+  { id: 'tiankong', term: '天空', isDeer: false, emoji: '🌤️', badge: '', plate: '#102848' },
+  { id: 'hua', term: '花', isDeer: false, emoji: '🌸', badge: '', plate: '#402038' },
+  { id: 'cao', term: '草', isDeer: false, emoji: '🌱', badge: '', plate: '#143820' },
+  { id: 'shu_tree', term: '樹', isDeer: false, emoji: '🌳', badge: '', plate: '#1a4d3a' },
+  { id: 'hai', term: '海', isDeer: false, emoji: '🌊', badge: '', plate: '#0f3550' },
+  { id: 'sha', term: '沙', isDeer: false, emoji: '🏜️', badge: '', plate: '#3a3410' },
+  { id: 'huo', term: '火', isDeer: false, emoji: '🔥', badge: '', plate: '#401018' },
+  { id: 'ye', term: '葉', isDeer: false, emoji: '🍃', badge: '', plate: '#143828' },
   // 交通
   { id: 'che', term: '汽車', isDeer: false, emoji: '🚗', badge: '', plate: '#102848' },
   { id: 'bashi', term: '巴士', isDeer: false, emoji: '🚌', badge: '', plate: '#3a3010' },
@@ -297,6 +307,13 @@ const TOPICS = [
     blurb: '太陽、月亮、雲朵、下雨、雪花、大風、閃電、彩虹',
     cover: '☀️',
     wordIds: ['ri', 'yue', 'yun', 'yu_rain', 'xue', 'feng', 'dian', 'caihong'],
+  },
+  {
+    id: 'nature',
+    title: '自然',
+    blurb: '星星、天空、花、草、樹、海、沙、火、葉',
+    cover: '🌿',
+    wordIds: ['xingxing', 'tiankong', 'hua', 'cao', 'shu_tree', 'hai', 'sha', 'huo', 'ye'],
   },
   {
     id: 'transport',
