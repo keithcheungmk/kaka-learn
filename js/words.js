@@ -129,6 +129,23 @@ const WORDS = [
   { id: 'jiao', term: '腳', isDeer: false, emoji: '🦶', badge: '', plate: '#3a2818' },
   { id: 'tou', term: '頭', isDeer: false, emoji: '🗣️', badge: '', plate: '#2a3548' },
   { id: 'xin', term: '心', isDeer: false, emoji: '❤️', badge: '', plate: '#401018' },
+  // 情緒
+  { id: 'kaixin', term: '開心', isDeer: false, emoji: '😊', badge: '', plate: '#3a3010' },
+  { id: 'bukaixin', term: '不開心', isDeer: false, emoji: '😢', badge: '', plate: '#1a3050' },
+  { id: 'shengqi', term: '生氣', isDeer: false, emoji: '😠', badge: '', plate: '#401018' },
+  { id: 'haipa', term: '害怕', isDeer: false, emoji: '😨', badge: '', plate: '#2a1840' },
+  { id: 'jingxi', term: '驚喜', isDeer: false, emoji: '😲', badge: '', plate: '#3a3410' },
+  { id: 'haixiu', term: '害羞', isDeer: false, emoji: '🫣', badge: '', plate: '#402038' },
+  // 身體感覺
+  { id: 'lei', term: '累', isDeer: false, emoji: '😩', badge: '', plate: '#2a2a35' },
+  { id: 'e_hungry', term: '餓', isDeer: false, emoji: '😋', badge: '', plate: '#402410' },
+  { id: 'bao_full', term: '飽', isDeer: false, emoji: '😌', badge: '飽', plate: '#143828' },
+  { id: 'ke_thirsty', term: '渴', isDeer: false, emoji: '🥤', badge: '', plate: '#0f3550' },
+  { id: 'tong', term: '痛', isDeer: false, emoji: '😣', badge: '', plate: '#401820' },
+  { id: 're_hot', term: '熱', isDeer: false, emoji: '🥵', badge: '', plate: '#402010' },
+  { id: 'leng_cold', term: '冷', isDeer: false, emoji: '🥶', badge: '', plate: '#102848' },
+  { id: 'xiang_scent', term: '香', isDeer: false, emoji: '👃', badge: '香', plate: '#402038' },
+  { id: 'chou', term: '臭', isDeer: false, emoji: '🤢💩', badge: '', plate: '#2a3810', emojiDuo: true },
   // 家庭
   { id: 'baba', term: '爸爸', isDeer: false, emoji: '👨', badge: '', plate: '#1a3050' },
   { id: 'mama', term: '媽媽', isDeer: false, emoji: '👩', badge: '', plate: '#402038' },
@@ -333,6 +350,20 @@ const TOPICS = [
     wordIds: ['yan', 'erduo', 'bi', 'kou', 'shou', 'jiao', 'tou', 'xin'],
   },
   {
+    id: 'emotions',
+    title: '情緒',
+    blurb: '開心、不開心、生氣、害怕、驚喜、害羞',
+    cover: '😊',
+    wordIds: ['kaixin', 'bukaixin', 'shengqi', 'haipa', 'jingxi', 'haixiu'],
+  },
+  {
+    id: 'senses',
+    title: '身體感覺',
+    blurb: '累、餓、飽、渴、痛、熱、冷、香、臭',
+    cover: '🥵',
+    wordIds: ['lei', 'e_hungry', 'bao_full', 'ke_thirsty', 'tong', 're_hot', 'leng_cold', 'xiang_scent', 'chou'],
+  },
+  {
     id: 'family',
     title: '家庭',
     blurb: '爸爸媽媽爺爺婆婆哥哥姐姐弟弟妹妹寶寶',
@@ -465,8 +496,9 @@ function wordIllustHtml(word) {
   const badge = word.badge
     ? `<span class="emoji-badge" aria-hidden="true">${word.badge}</span>`
     : '';
+  const faceClass = word.emojiDuo ? 'emoji-face emoji-face-duo' : 'emoji-face';
   return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
-    <span class="emoji-face" aria-hidden="true">${word.emoji}</span>
+    <span class="${faceClass}" aria-hidden="true">${word.emoji}</span>
     ${badge}
   </span>`;
 }

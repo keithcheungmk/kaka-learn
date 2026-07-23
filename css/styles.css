@@ -279,6 +279,11 @@ body::before {
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
 }
 
+.emoji-face-duo {
+  font-size: clamp(2.2rem, 8vw, 3.2rem);
+  letter-spacing: 0.06em;
+}
+
 .emoji-badge {
   position: absolute;
   right: 6px;
