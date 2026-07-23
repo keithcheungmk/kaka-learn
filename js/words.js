@@ -340,11 +340,12 @@ const TOPICS = [
   {
     id: 'places',
     title: '地方',
-    blurb: '屋企、學校、醫院、街市、機場、沙田…',
+    blurb: '屋企、學校、醫院、超市、泳池、沙田…',
     cover: '🏠',
     wordIds: [
-      'wuzi', 'xuexiao', 'gongyuan', 'shangchang', 'tushuguan', 'tingchechang', 'shatian',
-      'yiyuan', 'xiaofangju', 'jingchaju', 'jichang', 'haitan', 'canting', 'jieshi',
+      'wuzi', 'xuexiao', 'keshi', 'gongyuan', 'youlechang', 'shangchang', 'chaoshi', 'jieshi',
+      'tushuguan', 'tingchechang', 'shatian',
+      'yiyuan', 'xiaofangju', 'jingchaju', 'jichang', 'haitan', 'canting', 'cesuo', 'yongchi',
     ],
   },
   {
