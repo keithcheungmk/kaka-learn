@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/styles.css?v=20260722r" />
+  <link rel="stylesheet" href="./css/styles.css?v=20260722s" />
 </head>
 <body>
   <div id="app">
@@ -99,6 +99,7 @@
       <div class="btn-row play-choices">
         <button type="button" class="btn" id="btn-mode-listen">聽一聽・揀漢字</button>
         <button type="button" class="btn btn-secondary" id="btn-mode-match">睇圖・揀漢字</button>
+        <button type="button" class="btn btn-accent" id="btn-mode-build">砌一砌・配漢字</button>
       </div>
     </section>
 
@@ -140,6 +141,30 @@
       <div class="match-stage" id="match-stage" aria-hidden="true"></div>
       <div class="card-grid cols-3" id="match-options"></div>
       <p class="feedback" id="match-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 模式 C：砌字配圖 -->
+    <section id="screen-build" class="screen" aria-label="砌一砌配漢字">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-build">← 玩法</button>
+        <h1>砌一砌</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong class="stars-today-inline">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p>睇圖，由下面字池<strong>拖或撳</strong>啱嘅字，按順序砌入淡色格</p>
+      </div>
+      <div class="build-stage" id="build-stage" aria-hidden="true"></div>
+      <div class="build-slots" id="build-slots" aria-label="漢字格"></div>
+      <div class="build-pool-wrap">
+        <p class="section-label">字池</p>
+        <div class="build-pool" id="build-pool" aria-label="可揀嘅漢字"></div>
+      </div>
+      <p class="feedback" id="build-feedback" aria-live="polite"></p>
     </section>
   </div>
 
@@ -228,9 +253,9 @@
     </div>
   </div>
 
-  <script src="./js/words.js?v=20260722r"></script>
-  <script src="./js/storage.js?v=20260722r"></script>
-  <script src="./js/speech.js?v=20260722r"></script>
-  <script src="./js/app.js?v=20260722r"></script>
+  <script src="./js/words.js?v=20260722s"></script>
+  <script src="./js/storage.js?v=20260722s"></script>
+  <script src="./js/speech.js?v=20260722s"></script>
+  <script src="./js/app.js?v=20260722s"></script>
 </body>
 </html>

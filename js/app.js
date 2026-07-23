@@ -43,7 +43,11 @@ let state = loadState();
 let pinBuffer = '';
 let listenRound = null;
 let matchRound = null;
+let buildRound = null;
 let busy = false;
+/** @type {string|null} */
+let buildSelectedKey = null;
+let buildDrag = null;
 /** @type {string|null} */
 let activeTopicId = null;
 /** @type {ReturnType<typeof wordsForTopic>} */
@@ -64,6 +68,7 @@ function init() {
     bindPlayPick();
     bindListen();
     bindMatch();
+    bindBuild();
     bindParent();
     bindStarInfo();
     refreshStarUI();
@@ -101,6 +106,17 @@ function startMatchMode(ev) {
   startMatchRound();
 }
 
+function startBuildMode(ev) {
+  if (ev) ev.preventDefault();
+  if (!activeTopicId) {
+    showScreen('topics');
+    return;
+  }
+  closeAllModals();
+  showScreen('build');
+  startBuildRound();
+}
+
 function bindHome() {
   const startBtn = $('#btn-start-topics');
   if (startBtn) startBtn.onclick = (ev) => {
@@ -112,6 +128,7 @@ function bindHome() {
   window.KakaLearn = Object.assign(window.KakaLearn || {}, {
     startListen: startListenMode,
     startMatch: startMatchMode,
+    startBuild: startBuildMode,
     goHome: () => showScreen('home'),
     openTopics,
   });
@@ -140,8 +157,10 @@ function bindPlayPick() {
   if (back) back.onclick = () => openLearn(activeTopicId);
   const listenBtn = $('#btn-mode-listen');
   const matchBtn = $('#btn-mode-match');
+  const buildBtn = $('#btn-mode-build');
   if (listenBtn) listenBtn.onclick = startListenMode;
   if (matchBtn) matchBtn.onclick = startMatchMode;
+  if (buildBtn) buildBtn.onclick = startBuildMode;
 }
 
 function showScreen(name) {
@@ -153,6 +172,7 @@ function showScreen(name) {
     play: '#screen-play',
     listen: '#screen-listen',
     match: '#screen-match',
+    build: '#screen-build',
   };
   $(map[name])?.classList.add('active');
   if (name === 'home' || name === 'topics' || name === 'play') refreshStarUI();
@@ -474,6 +494,294 @@ function onMatchPick(id, btn) {
     const retryLine = speakRetryFeedback({ muted: state.muted });
     fb.textContent = retryLine;
   }
+}
+
+/* ---------- 模式 C：砌一砌（拖／撳單字按順序） ---------- */
+
+function termChars(term) {
+  return [...term];
+}
+
+function makeBuildTiles(target, wordPool, size = 8) {
+  const needed = termChars(target.term);
+  const tiles = needed.map((ch, i) => ({ key: `need-${i}-${ch}`, char: ch }));
+  const distractors = shuffle(
+    wordPool
+      .filter((w) => w.id !== target.id)
+      .flatMap((w) => termChars(w.term))
+  );
+  for (const ch of distractors) {
+    if (tiles.length >= size) break;
+    tiles.push({ key: `d-${tiles.length}-${ch}`, char: ch });
+  }
+  if (tiles.length < size) {
+    for (const ch of shuffle(WORDS.flatMap((w) => termChars(w.term)))) {
+      if (tiles.length >= size) break;
+      tiles.push({ key: `x-${tiles.length}-${ch}`, char: ch });
+    }
+  }
+  return shuffle(tiles);
+}
+
+function bindBuild() {
+  const back = $('#btn-back-build');
+  if (back) back.onclick = () => openPlayPick();
+}
+
+function startBuildRound() {
+  busy = false;
+  buildSelectedKey = null;
+  buildDrag = null;
+  const pool = enabledWords();
+  const target = pickTarget(pool);
+  const chars = termChars(target.term);
+  const tiles = makeBuildTiles(target, pool, 8);
+  buildRound = {
+    target,
+    chars,
+    filled: chars.map(() => null),
+    tiles,
+  };
+
+  const fb = $('#build-feedback');
+  if (fb) {
+    fb.textContent = '由左到右，砌啱每個字';
+    fb.className = 'feedback';
+  }
+
+  const stage = $('#build-stage');
+  if (stage) {
+    stage.innerHTML = wordIllustHtml(target);
+    stage.querySelector('.emoji-plate')?.classList.add('emoji-plate-lg');
+    stage.querySelector('.emoji-face')?.classList.add('emoji-face-lg');
+  }
+
+  renderBuildSlots();
+  renderBuildPool();
+  refreshStarUI();
+}
+
+function nextBuildIndex() {
+  if (!buildRound) return -1;
+  return buildRound.filled.findIndex((x) => !x);
+}
+
+function renderBuildSlots() {
+  const box = $('#build-slots');
+  if (!box || !buildRound) return;
+  const next = nextBuildIndex();
+  box.innerHTML = '';
+  buildRound.chars.forEach((ch, i) => {
+    const filled = buildRound.filled[i];
+    const slot = document.createElement('button');
+    slot.type = 'button';
+    slot.className = 'build-slot';
+    if (filled) slot.classList.add('is-filled');
+    if (i === next) slot.classList.add('is-next');
+    slot.dataset.index = String(i);
+    slot.setAttribute('aria-label', filled ? `已放 ${filled.char}` : `第 ${i + 1} 格，淡字 ${ch}`);
+    slot.innerHTML = `
+      <span class="build-ghost" aria-hidden="true">${ch}</span>
+      ${filled ? `<span class="build-placed">${filled.char}</span>` : ''}`;
+    slot.addEventListener('click', () => onBuildSlotTap(i));
+    box.appendChild(slot);
+  });
+}
+
+function renderBuildPool() {
+  const box = $('#build-pool');
+  if (!box || !buildRound) return;
+  box.innerHTML = '';
+  buildRound.tiles.forEach((tile) => {
+    const used = buildRound.filled.some((f) => f && f.key === tile.key);
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'build-tile';
+    if (used) btn.classList.add('is-used');
+    if (buildSelectedKey === tile.key) btn.classList.add('is-selected');
+    btn.dataset.key = tile.key;
+    btn.textContent = tile.char;
+    btn.setAttribute('aria-label', `漢字 ${tile.char}`);
+    if (!used) {
+      let suppressClick = false;
+      btn.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        if (suppressClick) {
+          suppressClick = false;
+          return;
+        }
+        onBuildTileTap(tile.key);
+      });
+      btn.addEventListener('pointerdown', (ev) => {
+        onBuildPointerDown(ev, tile, () => {
+          suppressClick = true;
+        });
+      });
+    }
+    box.appendChild(btn);
+  });
+}
+
+function onBuildTileTap(key) {
+  if (busy || !buildRound) return;
+  const used = buildRound.filled.some((f) => f && f.key === key);
+  if (used) return;
+  buildSelectedKey = buildSelectedKey === key ? null : key;
+  renderBuildPool();
+  const fb = $('#build-feedback');
+  if (fb && buildSelectedKey) {
+    fb.textContent = '而家撳左邊發光嘅格';
+    fb.className = 'feedback';
+  }
+}
+
+function onBuildSlotTap(index) {
+  if (busy || !buildRound) return;
+  const next = nextBuildIndex();
+  // 撳已填最尾格可以拆返
+  if (buildRound.filled[index]) {
+    const lastFilled = [...buildRound.filled].map((f, i) => (f ? i : -1)).filter((i) => i >= 0).pop();
+    if (lastFilled === index) {
+      buildRound.filled[index] = null;
+      buildSelectedKey = null;
+      renderBuildSlots();
+      renderBuildPool();
+      const fb = $('#build-feedback');
+      if (fb) {
+        fb.textContent = '由左到右，砌啱每個字';
+        fb.className = 'feedback';
+      }
+    }
+    return;
+  }
+  if (!buildSelectedKey || index !== next) return;
+  tryPlaceBuildChar(buildSelectedKey, index);
+}
+
+function tryPlaceBuildChar(tileKey, slotIndex) {
+  if (busy || !buildRound) return false;
+  const next = nextBuildIndex();
+  const tile = buildRound.tiles.find((t) => t.key === tileKey);
+  if (!tile) return false;
+  if (buildRound.filled.some((f) => f && f.key === tileKey)) return false;
+
+  state = loadState();
+  const slotEl = $(`#build-slots .build-slot[data-index="${slotIndex}"]`);
+
+  if (slotIndex !== next) {
+    slotEl?.classList.add('is-wrong');
+    setTimeout(() => slotEl?.classList.remove('is-wrong'), 450);
+    playTryAgainCue({ muted: state.muted });
+    const fb = $('#build-feedback');
+    if (fb) {
+      fb.textContent = '要由左到右砌呀';
+      fb.className = 'feedback retry';
+    }
+    buildSelectedKey = null;
+    renderBuildPool();
+    return false;
+  }
+
+  const expected = buildRound.chars[slotIndex];
+  if (tile.char !== expected) {
+    slotEl?.classList.add('is-wrong');
+    setTimeout(() => slotEl?.classList.remove('is-wrong'), 450);
+    playTryAgainCue({ muted: state.muted });
+    const retryLine = speakRetryFeedback({ muted: state.muted });
+    const fb = $('#build-feedback');
+    if (fb) {
+      fb.textContent = retryLine;
+      fb.className = 'feedback retry';
+    }
+    buildSelectedKey = null;
+    renderBuildPool();
+    return false;
+  }
+
+  buildRound.filled[slotIndex] = { key: tile.key, char: tile.char };
+  buildSelectedKey = null;
+  renderBuildSlots();
+  renderBuildPool();
+
+  if (buildRound.filled.every(Boolean)) {
+    finishBuildSuccess();
+  } else {
+    const fb = $('#build-feedback');
+    if (fb) {
+      fb.textContent = '好！繼續砌下一個';
+      fb.className = 'feedback ok';
+    }
+  }
+  return true;
+}
+
+function finishBuildSuccess() {
+  if (!buildRound) return;
+  busy = true;
+  state = loadState();
+  playCorrectCue({ muted: state.muted });
+  const praise = speakCorrectFeedback({ muted: state.muted });
+  const fb = $('#build-feedback');
+  if (fb) {
+    fb.textContent = praise;
+    fb.className = 'feedback ok';
+  }
+  const term = buildRound.target.term;
+  setTimeout(() => speakTerm(term, { muted: loadState().muted }), 400);
+  awardStar().then(() => {
+    setTimeout(() => startBuildRound(), 2600);
+  });
+}
+
+function onBuildPointerDown(ev, tile, onDragStarted) {
+  if (busy || !buildRound || ev.button === 2) return;
+  const used = buildRound.filled.some((f) => f && f.key === tile.key);
+  if (used) return;
+  const startX = ev.clientX;
+  const startY = ev.clientY;
+  const btn = ev.currentTarget;
+  let moved = false;
+  const ghost = document.createElement('div');
+  ghost.className = 'build-drag-ghost';
+  ghost.textContent = tile.char;
+
+  const onMove = (e) => {
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    if (!moved && Math.hypot(dx, dy) < 10) return;
+    if (!moved) {
+      moved = true;
+      if (typeof onDragStarted === 'function') onDragStarted();
+      buildSelectedKey = tile.key;
+      btn.classList.add('is-dragging');
+      btn.classList.add('is-selected');
+      document.body.appendChild(ghost);
+    }
+    ghost.style.left = `${e.clientX}px`;
+    ghost.style.top = `${e.clientY}px`;
+  };
+
+  const onUp = (e) => {
+    window.removeEventListener('pointermove', onMove);
+    window.removeEventListener('pointerup', onUp);
+    window.removeEventListener('pointercancel', onUp);
+    if (!moved) return;
+    ghost.remove();
+    btn.classList.remove('is-dragging');
+    const el = document.elementFromPoint(e.clientX, e.clientY);
+    const slot = el?.closest?.('.build-slot');
+    const idx = slot ? Number(slot.dataset.index) : -1;
+    if (idx >= 0) {
+      tryPlaceBuildChar(tile.key, idx);
+    } else {
+      buildSelectedKey = null;
+      renderBuildPool();
+    }
+  };
+
+  window.addEventListener('pointermove', onMove);
+  window.addEventListener('pointerup', onUp);
+  window.addEventListener('pointercancel', onUp);
 }
 
 /* ---------- 星星（只喺測驗答啱先加；學習頁唔計星） ---------- */
