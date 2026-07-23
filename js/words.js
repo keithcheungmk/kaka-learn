@@ -162,6 +162,10 @@ const WORDS = [
   { id: 'haitan', term: '海灘', isDeer: false, emoji: '🏖️', badge: '', plate: '#0f3550' },
   { id: 'canting', term: '餐廳', isDeer: false, emoji: '🍽️', badge: '', plate: '#3a3010' },
   { id: 'jieshi', term: '街市', isDeer: false, emoji: '🛒', badge: '', plate: '#143828' },
+  { id: 'youlechang', term: '遊樂場', isDeer: false, emoji: '🎠', badge: '', plate: '#402038' },
+  { id: 'chaoshi', term: '超市', isDeer: false, emoji: '🏪', badge: '', plate: '#3a3010' },
+  { id: 'keshi', term: '課室', isDeer: false, emoji: '🏫', badge: '課', plate: '#1a3050' },
+  { id: 'yongchi', term: '泳池', isDeer: false, emoji: '🏊', badge: '', plate: '#0f3550' },
   // 屋企：房間／傢俬／電器／設施（叫法跟朋友：沙發、冰箱、電風扇、床、窗戶、門）
   { id: 'chufang', term: '廚房', isDeer: false, emoji: '🍳', badge: '', plate: '#3a3010' },
   { id: 'shuifang', term: '睡房', isDeer: false, emoji: '🛏️', badge: '房', plate: '#1a3050' },
