@@ -15,7 +15,7 @@ const WORDS = [
   { id: 'tuolu', term: '駝鹿', isDeer: true, emoji: '🫎', badge: '', plate: '#4a2a12' },
   { id: 'malu', term: '馬鹿', isDeer: true, emoji: '🦌', badge: '馬', plate: '#2a4018' },
   { id: 'gou', term: '狗', isDeer: false, emoji: '🐶', badge: '', plate: '#3a3010' },
-  { id: 'mao', term: '貓', isDeer: false, emoji: '🐱', badge: '', plate: '#4a2030' },
+  { id: 'mao', term: '貓', isDeer: false, emoji: '🐱', badge: '', plate: '#4a2030', en: { word: 'cat', letters: ['c', 'a', 't'] } },
   { id: 'yu', term: '魚', isDeer: false, emoji: '🐟', badge: '', plate: '#0f3550' },
   { id: 'niao', term: '鳥', isDeer: false, emoji: '🐦', badge: '', plate: '#1a3050' },
   { id: 'tu', term: '兔子', isDeer: false, emoji: '🐰', badge: '', plate: '#402038' },
@@ -51,7 +51,7 @@ const WORDS = [
   { id: 'wa', term: '青蛙', isDeer: false, emoji: '🐸', badge: '', plate: '#143820' },
   { id: 'chong', term: '昆蟲', isDeer: false, emoji: '🐛', badge: '', plate: '#2a3810' },
   { id: 'long', term: '龍', isDeer: false, emoji: '🐲', badge: '', plate: '#0f3535' },
-  { id: 'bianfu', term: '蝙蝠', isDeer: false, emoji: '🦇', badge: '', plate: '#1a1a22' },
+  { id: 'bianfu', term: '蝙蝠', isDeer: false, emoji: '🦇', badge: '', plate: '#1a1a22', en: { word: 'bat', letters: ['b', 'a', 't'] } },
   { id: 'ciwei', term: '刺蝟', isDeer: false, emoji: '🦔', badge: '', plate: '#3a2818' },
   // 水果
   { id: 'pingguo', term: '蘋果', isDeer: false, emoji: '🍎', badge: '', plate: '#401820' },
