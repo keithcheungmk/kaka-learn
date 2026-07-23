@@ -293,6 +293,12 @@ body::before {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
 }
 
+.emoji-badge-icon {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  right: 4px;
+  top: 4px;
+}
+
 .emoji-plate-lg {
   width: min(200px, 48vw);
   height: min(200px, 48vw);

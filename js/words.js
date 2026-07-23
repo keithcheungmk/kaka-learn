@@ -493,8 +493,9 @@ function wordsForTopic(topicId) {
 
 /** 產生卡片插圖 HTML（大粒系統 Emoji） */
 function wordIllustHtml(word) {
+  const badgeIsEmoji = word.badge && /\p{Extended_Pictographic}/u.test(word.badge);
   const badge = word.badge
-    ? `<span class="emoji-badge" aria-hidden="true">${word.badge}</span>`
+    ? `<span class="emoji-badge${badgeIsEmoji ? ' emoji-badge-icon' : ''}" aria-hidden="true">${word.badge}</span>`
     : '';
   const faceClass = word.emojiDuo ? 'emoji-face emoji-face-duo' : 'emoji-face';
   return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
