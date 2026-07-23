@@ -23,13 +23,16 @@ const {
 } = window.KakaStorage;
 const {
   warmVoices,
+  warmAudio,
   speakTerm,
   speakCorrectFeedback,
+  speakWordThenEncourage,
   speakRetryFeedback,
   playCorrectCue,
   playTryAgainCue,
   playStarCue,
   playCoinHintCue,
+  estimateSpeakMs,
 } = window.KakaSpeech;
 
 const HERO_EMOJI = `<div class="hero-emoji-stack" aria-hidden="true">
@@ -475,15 +478,17 @@ function onMatchPick(id, btn) {
   if (correct) {
     busy = true;
     btn.classList.add('correct');
-    playCorrectCue({ muted: state.muted });
-    const praise = speakCorrectFeedback({ muted: state.muted });
+    warmAudio();
     const fb = $('#match-feedback');
-    fb.textContent = praise;
-    fb.className = 'feedback ok';
-    // 答啱先讀出漢字，強化字音對應
-    setTimeout(() => speakTerm(targetTerm, { muted: loadState().muted }), 400);
+    // 一次過讀字詞 + 鼓勵（iPad 第二次 speak 會靜音）
+    const praise = speakWordThenEncourage(targetTerm, { muted: state.muted });
+    if (fb) {
+      fb.textContent = praise;
+      fb.className = 'feedback ok';
+    }
+    const nextMs = estimateSpeakMs(`${targetTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
     awardStar().then(() => {
-      setTimeout(() => startMatchRound(), 2600);
+      setTimeout(() => startMatchRound(), nextMs);
     });
   } else {
     btn.classList.add('wrong');
@@ -526,6 +531,14 @@ function makeBuildTiles(target, wordPool, size = 8) {
 function bindBuild() {
   const back = $('#btn-back-build');
   if (back) back.onclick = () => openPlayPick();
+  const speak = $('#btn-speak-build');
+  if (speak) {
+    speak.onclick = () => {
+      if (!buildRound) return;
+      state = loadState();
+      speakTerm(buildRound.target.term, { muted: state.muted });
+    };
+  }
 }
 
 function startBuildRound() {
@@ -624,6 +637,7 @@ function renderBuildPool() {
 
 function onBuildTileTap(key) {
   if (busy || !buildRound) return;
+  warmAudio();
   const used = buildRound.filled.some((f) => f && f.key === key);
   if (used) return;
   buildSelectedKey = buildSelectedKey === key ? null : key;
@@ -706,6 +720,8 @@ function tryPlaceBuildChar(tileKey, slotIndex) {
   if (buildRound.filled.every(Boolean)) {
     finishBuildSuccess();
   } else {
+    // 砌啱一個字都播短鼓勵音效（唔讀整句，避免同之後成功鼓勵搶聲）
+    playCorrectCue({ muted: state.muted });
     const fb = $('#build-feedback');
     if (fb) {
       fb.textContent = '好！繼續砌下一個';
@@ -719,22 +735,25 @@ function finishBuildSuccess() {
   if (!buildRound) return;
   busy = true;
   state = loadState();
-  playCorrectCue({ muted: state.muted });
-  const praise = speakCorrectFeedback({ muted: state.muted });
+  // 手指手勢入面喚醒 Web Audio，之後叮聲先唔會被 iPad 靜音
+  warmAudio();
+  const term = buildRound.target.term;
   const fb = $('#build-feedback');
+  // 一次過讀「字詞 + 鼓勵」——iPad／Safari 第二次 async speak 成日冇聲
+  const praise = speakWordThenEncourage(term, { muted: state.muted });
   if (fb) {
     fb.textContent = praise;
     fb.className = 'feedback ok';
   }
-  const term = buildRound.target.term;
-  setTimeout(() => speakTerm(term, { muted: loadState().muted }), 400);
+  const nextMs = estimateSpeakMs(`${term}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
   awardStar().then(() => {
-    setTimeout(() => startBuildRound(), 2600);
+    setTimeout(() => startBuildRound(), nextMs);
   });
 }
 
 function onBuildPointerDown(ev, tile, onDragStarted) {
   if (busy || !buildRound || ev.button === 2) return;
+  warmAudio();
   const used = buildRound.filled.some((f) => f && f.key === tile.key);
   if (used) return;
   const startX = ev.clientX;
