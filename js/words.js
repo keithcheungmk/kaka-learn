@@ -197,7 +197,7 @@ const WORDS = [
   { id: 'jing', term: '鏡子', isDeer: false, emoji: '🪞', badge: '', plate: '#2a3a50' },
   { id: 'maojin', term: '毛巾', isDeer: false, emoji: '🧼', badge: '巾', plate: '#2a3a50' },
   { id: 'yashua', term: '牙刷', isDeer: false, emoji: '🪥', badge: '', plate: '#143828' },
-  { id: 'shuihu', term: '水壺', isDeer: false, emoji: '🧴', badge: '水', plate: '#0f3550' },
+  { id: 'shuihu', term: '水壺', isDeer: false, emoji: '🥤', badge: '', plate: '#0f3550' },
   { id: 'yagao', term: '牙膏', isDeer: false, emoji: '🦷', badge: '膏', plate: '#2a3a50' },
   { id: 'beizi_cup', term: '杯子', isDeer: false, emoji: '🥤', badge: '', plate: '#102848' },
   { id: 'wan', term: '碗', isDeer: false, emoji: '🥣', badge: '', plate: '#3a3010' },
