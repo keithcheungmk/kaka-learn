@@ -145,7 +145,7 @@ const WORDS = [
   { id: 're_hot', term: '熱', isDeer: false, emoji: '🥵', badge: '', plate: '#402010' },
   { id: 'leng_cold', term: '冷', isDeer: false, emoji: '🥶', badge: '', plate: '#102848' },
   { id: 'xiang_scent', term: '香', isDeer: false, emoji: '👃', badge: '香', plate: '#402038' },
-  { id: 'chou', term: '臭', isDeer: false, emoji: '🤢💩', badge: '', plate: '#2a3810', emojiDuo: true },
+  { id: 'chou', term: '臭', isDeer: false, emoji: '🤢', badge: '💩', plate: '#2a3810' },
   // 家庭
   { id: 'baba', term: '爸爸', isDeer: false, emoji: '👨', badge: '', plate: '#1a3050' },
   { id: 'mama', term: '媽媽', isDeer: false, emoji: '👩', badge: '', plate: '#402038' },
@@ -493,8 +493,9 @@ function wordsForTopic(topicId) {
 
 /** 產生卡片插圖 HTML（大粒系統 Emoji） */
 function wordIllustHtml(word) {
+  const badgeIsEmoji = word.badge && /\p{Extended_Pictographic}/u.test(word.badge);
   const badge = word.badge
-    ? `<span class="emoji-badge" aria-hidden="true">${word.badge}</span>`
+    ? `<span class="emoji-badge${badgeIsEmoji ? ' emoji-badge-icon' : ''}" aria-hidden="true">${word.badge}</span>`
     : '';
   const faceClass = word.emojiDuo ? 'emoji-face emoji-face-duo' : 'emoji-face';
   return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
