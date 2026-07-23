@@ -315,6 +315,104 @@ function beep(freqs, noteDur, gap) {
   }
 }
 
+/** ---------- 英文發音（卡卡字母隊 phonics 用；同粵語 TTS 分開一套） ---------- */
+
+let cachedEnglishVoice = null;
+let speakEnglishTimer = null;
+
+function pickEnglishVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const voices = speechSynthesis.getVoices();
+  if (!voices.length) return null;
+
+  const prefer = [
+    (v) => /en[-_]GB/i.test(v.lang),
+    (v) => /en[-_]US/i.test(v.lang),
+    (v) => /^en/i.test(v.lang),
+  ];
+
+  for (const test of prefer) {
+    const found = voices.find(test);
+    if (found) return found;
+  }
+  return voices[0] || null;
+}
+
+/** 用 addEventListener（唔用 onvoiceschanged=）避免同粵語 warmVoices() 果個 property handler 互相覆蓋 */
+function warmEnglishVoice() {
+  if (!('speechSynthesis' in window)) return;
+  cachedEnglishVoice = pickEnglishVoice();
+  if (typeof speechSynthesis.addEventListener === 'function') {
+    speechSynthesis.addEventListener('voiceschanged', () => {
+      cachedEnglishVoice = pickEnglishVoice();
+    });
+  }
+}
+
+/**
+ * 朗讀英文詞（字母／CVC 詞／sight word）
+ * @param {string} text
+ * @param {{ muted?: boolean, rate?: number, pitch?: number, delayMs?: number, onEnd?: function }} options
+ */
+function speakEnglishTerm(text, {
+  muted = false,
+  rate = 0.85,
+  pitch = 1.05,
+  delayMs = 80,
+  onEnd = null,
+} = {}) {
+  if (muted || !text) {
+    if (onEnd) onEnd();
+    return;
+  }
+  if (!('speechSynthesis' in window)) {
+    if (onEnd) onEnd();
+    return;
+  }
+
+  if (speakEnglishTimer) {
+    clearTimeout(speakEnglishTimer);
+    speakEnglishTimer = null;
+  }
+
+  try {
+    speechSynthesis.cancel();
+  } catch {
+    // ignore
+  }
+
+  speakEnglishTimer = setTimeout(() => {
+    speakEnglishTimer = null;
+    try {
+      if (speechSynthesis.paused) speechSynthesis.resume();
+    } catch {
+      // ignore
+    }
+
+    const utter = new SpeechSynthesisUtterance(text);
+    const voice = cachedEnglishVoice || pickEnglishVoice();
+    if (voice) {
+      utter.voice = voice;
+      utter.lang = voice.lang || 'en-US';
+    } else {
+      utter.lang = 'en-US';
+    }
+    utter.rate = rate;
+    utter.pitch = pitch;
+    if (onEnd) {
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        onEnd();
+      };
+      utter.onend = finish;
+      utter.onerror = finish;
+    }
+    speechSynthesis.speak(utter);
+  }, delayMs);
+}
+
 window.KakaSpeech = {
   warmVoices,
   warmAudio,
@@ -330,4 +428,6 @@ window.KakaSpeech = {
   estimateSpeakMs,
   FEEDBACK_CORRECT_LINES,
   FEEDBACK_RETRY_LINES,
+  warmEnglishVoice,
+  speakEnglishTerm,
 };

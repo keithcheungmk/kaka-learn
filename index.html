@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/styles.css?v=20260723d" />
+  <link rel="stylesheet" href="./css/phonics.css?v=20260723d" />
 </head>
 <body>
   <div id="app">
@@ -39,6 +40,9 @@
         <p class="hero-sub">先學漢字同圖畫，再嚟玩遊戲攞星星！</p>
         <div class="btn-row">
           <button type="button" class="btn" id="btn-start-topics">揀主題・先學一學</button>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn btn-phonics" id="btn-start-phonics">🔤 卡卡字母隊・English Phonics</button>
         </div>
       </div>
     </section>
@@ -169,6 +173,101 @@
       </div>
       <p class="feedback" id="build-feedback" aria-live="polite"></p>
     </section>
+
+    <!-- 卡卡字母隊：揀主題 -->
+    <section id="screen-phonics-topics" class="screen" aria-label="卡卡字母隊・揀主題">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-topics">← 返去</button>
+        <h1>卡卡字母隊</h1>
+      </div>
+      <p class="section-lead">揀一組,先一齊睇字同讀音</p>
+      <div class="topic-grid" id="phonics-topic-grid"></div>
+    </section>
+
+    <!-- 卡卡字母隊：先學一學 -->
+    <section id="screen-phonics-learn" class="screen" aria-label="卡卡字母隊・先學一學">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-learn">← 主題</button>
+        <h1 id="phonics-learn-topic-title">先學一學</h1>
+        <div class="progress-pill" aria-label="學習進度">
+          <strong id="phonics-learn-progress">1/5</strong>
+        </div>
+      </div>
+      <p class="section-lead">睇吓字同圖,撳喇叭聽英文讀音</p>
+      <button type="button" class="learn-stage" id="phonics-learn-stage" aria-label="再聽一次">
+        <div id="phonics-learn-illust"></div>
+        <div class="learn-term term-en" id="phonics-learn-term"></div>
+        <div class="letter-row" id="phonics-learn-letters" aria-hidden="true"></div>
+        <div class="learn-hear">🔊 聽一聽</div>
+      </button>
+      <div class="btn-row learn-nav">
+        <button type="button" class="btn btn-ghost" id="btn-phonics-learn-prev">上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-phonics-learn-next">下一張</button>
+      </div>
+      <div class="btn-row" id="phonics-learn-finish-row" hidden>
+        <button type="button" class="btn" id="btn-phonics-learn-play">學完喇・去玩玩</button>
+      </div>
+    </section>
+
+    <!-- 卡卡字母隊：揀玩法 -->
+    <section id="screen-phonics-play" class="screen" aria-label="卡卡字母隊・揀玩法">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-play">← 再學</button>
+        <h1 id="phonics-play-topic-title">去玩玩</h1>
+      </div>
+      <p class="section-lead">而家先考考你識唔識</p>
+      <div class="btn-row play-choices">
+        <button type="button" class="btn" id="btn-phonics-mode-listen">聽一聽・揀圖</button>
+        <button type="button" class="btn btn-secondary" id="btn-phonics-mode-match">睇圖・揀字</button>
+        <button type="button" class="btn btn-accent" id="btn-phonics-mode-build">砌一砌・拼英文</button>
+      </div>
+    </section>
+
+    <!-- 卡卡字母隊：聽一聽揀圖 -->
+    <section id="screen-phonics-listen" class="screen" aria-label="卡卡字母隊・聽一聽揀圖">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-listen">← 玩法</button>
+        <h1>聽一聽</h1>
+      </div>
+      <div class="prompt-box">
+        <p>聽英文讀音,再揀啱嘅<strong>圖畫</strong></p>
+        <button type="button" class="speak-btn" id="btn-phonics-speak-listen" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="card-grid cols-3" id="phonics-listen-options"></div>
+      <p class="feedback" id="phonics-listen-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 卡卡字母隊：睇圖揀字 -->
+    <section id="screen-phonics-match" class="screen" aria-label="卡卡字母隊・睇圖揀字">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-match">← 玩法</button>
+        <h1>配一配</h1>
+      </div>
+      <div class="prompt-box">
+        <p>睇中間嘅圖,再揀啱嘅<strong>英文字</strong></p>
+      </div>
+      <div class="match-stage" id="phonics-match-stage" aria-hidden="true"></div>
+      <div class="card-grid cols-3" id="phonics-match-options"></div>
+      <p class="feedback" id="phonics-match-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 卡卡字母隊：砌一砌拼英文 -->
+    <section id="screen-phonics-build" class="screen" aria-label="卡卡字母隊・砌一砌拼英文">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-build">← 玩法</button>
+        <h1>砌一砌</h1>
+      </div>
+      <div class="prompt-box">
+        <p>睇圖,由下面字母池<strong>拖或撳</strong>啱嘅字母,按順序砌入淡色格</p>
+      </div>
+      <div class="build-stage" id="phonics-build-stage" aria-hidden="true"></div>
+      <div class="build-slots" id="phonics-build-slots" aria-label="字母格"></div>
+      <div class="build-pool-wrap">
+        <p class="section-label">字母池</p>
+        <div class="build-pool" id="phonics-build-pool" aria-label="可揀嘅字母"></div>
+      </div>
+      <p class="feedback" id="phonics-build-feedback" aria-live="polite"></p>
+    </section>
   </div>
 
   <button type="button" class="btn btn-parent" id="btn-parent" aria-label="家長區">👪</button>
@@ -260,5 +359,7 @@
   <script src="./js/storage.js?v=20260723d"></script>
   <script src="./js/speech.js?v=20260723d"></script>
   <script src="./js/app.js?v=20260723d"></script>
+  <script src="./js/phonics-words.js?v=20260723d"></script>
+  <script src="./js/phonics-app.js?v=20260723d"></script>
 </body>
 </html>
