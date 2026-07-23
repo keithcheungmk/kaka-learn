@@ -475,19 +475,26 @@ function onMatchPick(id, btn) {
   if (correct) {
     busy = true;
     btn.classList.add('correct');
-    playCorrectCue({ muted: state.muted });
-    // 鼓勵句講完先再讀漢字，避免 cancel 切走鼓勵聲
-    const praise = speakCorrectFeedback({
+    // 先讀漢字，講完先叮聲 + 鼓勵
+    const fb = $('#match-feedback');
+    if (fb) {
+      fb.textContent = '答啱喇！';
+      fb.className = 'feedback ok';
+    }
+    speakTerm(targetTerm, {
       muted: state.muted,
       onEnd: () => {
-        setTimeout(() => speakTerm(targetTerm, { muted: loadState().muted }), 220);
+        const muted = loadState().muted;
+        playCorrectCue({ muted });
+        const praise = speakCorrectFeedback({ muted });
+        if (fb) {
+          fb.textContent = praise;
+          fb.className = 'feedback ok';
+        }
       },
     });
-    const fb = $('#match-feedback');
-    fb.textContent = praise;
-    fb.className = 'feedback ok';
     awardStar().then(() => {
-      setTimeout(() => startMatchRound(), 3200);
+      setTimeout(() => startMatchRound(), 3800);
     });
   } else {
     btn.classList.add('wrong');
@@ -530,6 +537,14 @@ function makeBuildTiles(target, wordPool, size = 8) {
 function bindBuild() {
   const back = $('#btn-back-build');
   if (back) back.onclick = () => openPlayPick();
+  const speak = $('#btn-speak-build');
+  if (speak) {
+    speak.onclick = () => {
+      if (!buildRound) return;
+      state = loadState();
+      speakTerm(buildRound.target.term, { muted: state.muted });
+    };
+  }
 }
 
 function startBuildRound() {
@@ -725,22 +740,27 @@ function finishBuildSuccess() {
   if (!buildRound) return;
   busy = true;
   state = loadState();
-  playCorrectCue({ muted: state.muted });
   const term = buildRound.target.term;
-  // 鼓勵句講完先再讀字詞，避免 speakTerm 嘅 cancel 切走鼓勵聲
-  const praise = speakCorrectFeedback({
-    muted: state.muted,
-    onEnd: () => {
-      setTimeout(() => speakTerm(term, { muted: loadState().muted }), 220);
-    },
-  });
   const fb = $('#build-feedback');
   if (fb) {
-    fb.textContent = praise;
+    fb.textContent = '砌啱喇！';
     fb.className = 'feedback ok';
   }
+  // 先讀學習字詞，講完先叮聲 + 鼓勵句（避免互相 cancel）
+  speakTerm(term, {
+    muted: state.muted,
+    onEnd: () => {
+      const muted = loadState().muted;
+      playCorrectCue({ muted });
+      const praise = speakCorrectFeedback({ muted });
+      if (fb) {
+        fb.textContent = praise;
+        fb.className = 'feedback ok';
+      }
+    },
+  });
   awardStar().then(() => {
-    setTimeout(() => startBuildRound(), 3200);
+    setTimeout(() => startBuildRound(), 3800);
   });
 }
 

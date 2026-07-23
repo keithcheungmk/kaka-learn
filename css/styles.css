@@ -791,9 +791,21 @@ body::before {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  margin: 0 auto 18px;
+  margin: 0 auto 12px;
   max-width: 520px;
   min-height: 88px;
+}
+
+.build-speak-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+
+.build-speak-wrap .speak-btn {
+  min-height: 64px;
+  padding: 14px 22px;
+  font-size: 1.2rem;
 }
 
 .build-slot {
