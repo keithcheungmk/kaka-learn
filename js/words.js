@@ -85,6 +85,8 @@ const WORDS = [
   { id: 'hei', term: '黑色', isDeer: false, emoji: '⚫', badge: '', plate: '#1a1a22' },
   { id: 'zi', term: '紫色', isDeer: false, emoji: '🟣', badge: '', plate: '#2a1840' },
   { id: 'fenhong', term: '粉紅', isDeer: false, emoji: '🩷', badge: '', plate: '#402038' },
+  { id: 'chengse', term: '橙色', isDeer: false, emoji: '🟠', badge: '', plate: '#402410' },
+  { id: 'kafeise', term: '咖啡色', isDeer: false, emoji: '🟤', badge: '', plate: '#3a2818' },
   // 天氣
   { id: 'ri', term: '太陽', isDeer: false, emoji: '☀️', badge: '', plate: '#3a3010' },
   { id: 'yue', term: '月亮', isDeer: false, emoji: '🌙', badge: '', plate: '#1a2040' },
@@ -285,9 +287,9 @@ const TOPICS = [
   {
     id: 'colors',
     title: '顏色',
-    blurb: '紅色黃色藍色綠色白色黑色紫色粉紅',
+    blurb: '紅色黃色藍色綠色白色黑色紫色粉紅橙色咖啡色',
     cover: '🎨',
-    wordIds: ['hong', 'huang', 'lan', 'lv', 'bai', 'hei', 'zi', 'fenhong'],
+    wordIds: ['hong', 'huang', 'lan', 'lv', 'bai', 'hei', 'zi', 'fenhong', 'chengse', 'kafeise'],
   },
   {
     id: 'weather',
