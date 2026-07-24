@@ -9,6 +9,17 @@
 .letter-tile {
   position: relative;
   overflow: visible;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.letter-tile:active .letter-glyph {
+  transform: scale(0.94);
 }
 
 .letter-tile .letter-glyph {
@@ -26,6 +37,7 @@
   font-weight: 700;
   font-size: clamp(1.4rem, 4.5vw, 1.9rem);
   text-transform: lowercase;
+  transition: transform 0.1s ease;
 }
 
 .letter-row .letter-tile .letter-glyph {
@@ -100,12 +112,32 @@
   height: clamp(50px, 14vw, 64px);
 }
 
-/* 卡卡字母隊主頁入口卡：重用 .btn 視覺，加少少字母隊配色點綴 */
-.btn-phonics {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(196, 181, 253, 0.9));
-  color: #10151f;
+/* 「先學一學」畫面：撳圖／字聽整個詞（同字母格分開，避免 button 入面再有 button） */
+.learn-stage-tap {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 
-.btn-phonics:active {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 1), rgba(196, 181, 253, 1));
+/* 主頁品牌球：而家兼任「卡卡字母隊」隱藏入口，撳落去先入去（刻意唔加額外視覺提示，keep it hidden） */
+.brand-orbit {
+  appearance: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.brand-orbit:active {
+  transform: scale(0.94);
 }

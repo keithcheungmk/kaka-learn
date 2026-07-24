@@ -18,6 +18,7 @@
     speakRetryFeedback,
     playCorrectCue,
     playTryAgainCue,
+    estimateSpeakMs,
   } = window.KakaSpeech;
 
   let pBusy = false;
@@ -80,6 +81,37 @@
     return pool[Math.floor(Math.random() * pool.length)];
   }
 
+  /**
+   * 答啱流程:先讀粵語鼓勵句,讀完先讀英文答案詞——唔可以齊頭一齊 setTimeout,
+   * 否則英文嗰句一開始就會 speechSynthesis.cancel() 咗仲未讀完嘅鼓勵句(鼓勵聲會突然「無咗」)。
+   * 用 onEnd + estimateSpeakMs 時長後備做雙重保險(iPad/Safari 成日唔 fire onend)。
+   * @returns {string} 鼓勵句(畫面顯示用)
+   */
+  function speakPraiseThenWord(word, muted, onAllDone) {
+    let wordStarted = false;
+    let allDone = false;
+    const finishAll = () => {
+      if (allDone) return;
+      allDone = true;
+      if (typeof onAllDone === 'function') onAllDone();
+    };
+    const startWord = () => {
+      if (wordStarted) return;
+      wordStarted = true;
+      if (!word) {
+        finishAll();
+        return;
+      }
+      speakEnglishTerm(word, { muted, onEnd: finishAll });
+      const wordWait = estimateSpeakMs ? estimateSpeakMs(word, { rate: 0.85, delayMs: 80 }) : 1200;
+      setTimeout(finishAll, wordWait + 150);
+    };
+    const praise = speakCorrectFeedback({ muted, onEnd: startWord });
+    const praiseWait = estimateSpeakMs ? estimateSpeakMs(praise, { rate: 0.92, delayMs: 220 }) : 1800;
+    setTimeout(startWord, praiseWait + 150);
+    return praise;
+  }
+
   function init() {
     try {
       warmEnglishVoice();
@@ -136,8 +168,8 @@
   function bindPhonicsLearn() {
     const back = $('#btn-back-phonics-learn');
     if (back) back.onclick = () => openPhonicsTopics();
-    const stage = $('#phonics-learn-stage');
-    if (stage) stage.onclick = () => speakCurrentPhonicsLearn();
+    const tap = $('#phonics-learn-tap');
+    if (tap) tap.onclick = () => speakCurrentPhonicsLearn();
     const prev = $('#btn-phonics-learn-prev');
     const next = $('#btn-phonics-learn-next');
     if (prev) prev.onclick = () => stepPhonicsLearn(-1);
@@ -171,9 +203,19 @@
     if (lettersRow) {
       lettersRow.innerHTML = word.letters
         ? word.letters
-            .map((ch) => `<span class="letter-tile">${letterTileHtml(ch)}</span>`)
+            .map(
+              (ch) =>
+                `<button type="button" class="letter-tile" data-letter="${ch}" aria-label="letter ${ch}">${letterTileHtml(ch)}</button>`,
+            )
             .join('')
         : '';
+      lettersRow.querySelectorAll('.letter-tile').forEach((tile) => {
+        tile.addEventListener('click', (ev) => {
+          ev.preventDefault();
+          ev.stopPropagation();
+          speakEnglishTerm(tile.dataset.letter, { muted: isMuted() });
+        });
+      });
     }
     if (progress) progress.textContent = `${pLearnIndex + 1}/${pLearnWords.length}`;
 
@@ -329,23 +371,29 @@
       pBusy = true;
       btn.classList.add('correct');
       playCorrectCue({ muted: isMuted() });
-      const praise = speakCorrectFeedback({ muted: isMuted() });
+      const praise = speakPraiseThenWord(targetWord, isMuted(), () => {
+        setTimeout(() => startPhonicsListenRound(), 450);
+      });
       if (fb) {
         fb.textContent = praise;
         fb.className = 'feedback ok';
       }
-      setTimeout(() => speakEnglishTerm(targetWord, { muted: isMuted() }), 400);
-      setTimeout(() => startPhonicsListenRound(), 2600);
     } else {
       btn.classList.add('wrong');
       playTryAgainCue({ muted: isMuted() });
       setTimeout(() => btn.classList.remove('wrong'), 450);
+      let repeatSpoken = false;
+      const speakTargetOnce = () => {
+        if (repeatSpoken) return;
+        repeatSpoken = true;
+        speakEnglishTerm(targetWord, { muted: isMuted() });
+      };
       const retryLine = speakRetryFeedback({
         muted: isMuted(),
-        onEnd: () => {
-          setTimeout(() => speakEnglishTerm(targetWord, { muted: isMuted() }), 250);
-        },
+        onEnd: () => setTimeout(speakTargetOnce, 250),
       });
+      const retryWait = estimateSpeakMs ? estimateSpeakMs(retryLine, { rate: 0.92, delayMs: 220 }) : 1800;
+      setTimeout(speakTargetOnce, retryWait + 250);
       if (fb) {
         fb.textContent = retryLine;
         fb.className = 'feedback retry';
@@ -408,13 +456,13 @@
       pBusy = true;
       btn.classList.add('correct');
       playCorrectCue({ muted: isMuted() });
-      const praise = speakCorrectFeedback({ muted: isMuted() });
+      const praise = speakPraiseThenWord(targetWord, isMuted(), () => {
+        setTimeout(() => startPhonicsMatchRound(), 450);
+      });
       if (fb) {
         fb.textContent = praise;
         fb.className = 'feedback ok';
       }
-      setTimeout(() => speakEnglishTerm(targetWord, { muted: isMuted() }), 400);
-      setTimeout(() => startPhonicsMatchRound(), 2600);
     } else {
       btn.classList.add('wrong');
       playTryAgainCue({ muted: isMuted() });
@@ -636,15 +684,15 @@
     if (!pBuildRound) return;
     pBusy = true;
     playCorrectCue({ muted: isMuted() });
-    const praise = speakCorrectFeedback({ muted: isMuted() });
+    const word = pBuildRound.target.word;
+    const praise = speakPraiseThenWord(word, isMuted(), () => {
+      setTimeout(() => startPhonicsBuildRound(), 450);
+    });
     const fb = $('#phonics-build-feedback');
     if (fb) {
       fb.textContent = praise;
       fb.className = 'feedback ok';
     }
-    const word = pBuildRound.target.word;
-    setTimeout(() => speakEnglishTerm(word, { muted: isMuted() }), 400);
-    setTimeout(() => startPhonicsBuildRound(), 2600);
   }
 
   function onPhonicsBuildPointerDown(ev, tile, onDragStarted) {
