@@ -5,6 +5,50 @@
   text-transform: lowercase;
 }
 
+/* Phonics 畫面：小鹿 + 彩色字母太空背景（原創美術，唔用現成教材角色） */
+.phonics-screen.active {
+  position: relative;
+  isolation: isolate;
+}
+
+.phonics-screen.active::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(7, 21, 38, 0.58) 0%, rgba(7, 21, 38, 0.42) 45%, rgba(7, 21, 38, 0.72) 100%),
+    url("../assets/phonics-space-bg.jpg") center / cover no-repeat;
+}
+
+.phonics-hero {
+  width: min(100%, 520px);
+  margin: 0 auto 14px;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 2px solid rgba(94, 234, 212, 0.28);
+  box-shadow: var(--shadow);
+  background: rgba(7, 21, 38, 0.55);
+}
+
+.phonics-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+.phonics-screen .topic-card,
+.phonics-screen .prompt-box,
+.phonics-screen .learn-stage,
+.phonics-screen .build-pool,
+.phonics-screen .match-stage {
+  backdrop-filter: blur(2px);
+}
+
 /* 「活字母」：字母字身 + 原創固定顏色 + 簡單笑臉（唔跟任何現成教材角色設計） */
 .letter-tile {
   position: relative;

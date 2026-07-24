@@ -14,11 +14,12 @@
   const {
     warmEnglishVoice,
     speakEnglishTerm,
-    speakCorrectFeedback,
     speakRetryFeedback,
     playCorrectCue,
     playTryAgainCue,
     estimateSpeakMs,
+    warmAudio,
+    FEEDBACK_CORRECT_LINES,
   } = window.KakaSpeech;
 
   let pBusy = false;
@@ -81,35 +82,67 @@
     return pool[Math.floor(Math.random() * pool.length)];
   }
 
+  function pickPraiseLine() {
+    const lines = FEEDBACK_CORRECT_LINES || ['好叻！'];
+    return lines[Math.floor(Math.random() * lines.length)];
+  }
+
   /**
-   * 答啱流程:先讀粵語鼓勵句,讀完先讀英文答案詞——唔可以齊頭一齊 setTimeout,
-   * 否則英文嗰句一開始就會 speechSynthesis.cancel() 咗仲未讀完嘅鼓勵句(鼓勵聲會突然「無咗」)。
-   * 用 onEnd + estimateSpeakMs 時長後備做雙重保險(iPad/Safari 成日唔 fire onend)。
-   * @returns {string} 鼓勵句(畫面顯示用)
+   * 答啱流程（刻意簡化，避免聲音「撈埋一齊」）：
+   * 1) 叮一聲（Web Audio）
+   * 2) 只讀英文答案詞（加強 phonics 學習）
+   * 3) 粵語鼓勵句只顯示喺畫面，唔出聲——唔好同英文答案搶 TTS 聲道
+   * （之前先讀粵語鼓勵再讀英文，喺 iPad 上成日重疊／互相 cancel，聽落好亂）
+   * @returns {string} 鼓勵句（畫面顯示用）
    */
-  function speakPraiseThenWord(word, muted, onAllDone) {
+  function speakCorrectEnglishOnly(word, muted, onAllDone) {
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      if (typeof onAllDone === 'function') onAllDone();
+    };
+    if (typeof warmAudio === 'function') warmAudio();
+    playCorrectCue({ muted });
+    const praise = pickPraiseLine();
+    if (!word || muted) {
+      setTimeout(finish, muted ? 700 : 400);
+      return praise;
+    }
+    speakEnglishTerm(word, { muted, delayMs: 120, onEnd: finish });
+    const wait = estimateSpeakMs ? estimateSpeakMs(word, { rate: 0.85, delayMs: 120 }) : 1400;
+    setTimeout(finish, wait + 200);
+    return praise;
+  }
+
+  /**
+   * 答錯流程：先讀粵語「再試吓」，真正讀完先再讀英文目標詞（雙重保險）。
+   * @returns {string} 再試句（畫面顯示用）
+   */
+  function speakRetryThenEnglish(word, muted, onAllDone) {
     let wordStarted = false;
-    let allDone = false;
-    const finishAll = () => {
-      if (allDone) return;
-      allDone = true;
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
       if (typeof onAllDone === 'function') onAllDone();
     };
     const startWord = () => {
       if (wordStarted) return;
       wordStarted = true;
       if (!word) {
-        finishAll();
+        finish();
         return;
       }
-      speakEnglishTerm(word, { muted, onEnd: finishAll });
-      const wordWait = estimateSpeakMs ? estimateSpeakMs(word, { rate: 0.85, delayMs: 80 }) : 1200;
-      setTimeout(finishAll, wordWait + 150);
+      speakEnglishTerm(word, { muted, delayMs: 180, onEnd: finish });
+      const wordWait = estimateSpeakMs ? estimateSpeakMs(word, { rate: 0.85, delayMs: 180 }) : 1400;
+      setTimeout(finish, wordWait + 200);
     };
-    const praise = speakCorrectFeedback({ muted, onEnd: startWord });
-    const praiseWait = estimateSpeakMs ? estimateSpeakMs(praise, { rate: 0.92, delayMs: 220 }) : 1800;
-    setTimeout(startWord, praiseWait + 150);
-    return praise;
+    playTryAgainCue({ muted });
+    const retryLine = speakRetryFeedback({ muted, onEnd: () => setTimeout(startWord, 180) });
+    const retryWait = estimateSpeakMs ? estimateSpeakMs(retryLine, { rate: 0.92, delayMs: 220 }) : 1800;
+    setTimeout(startWord, retryWait + 200);
+    return retryLine;
   }
 
   function init() {
@@ -370,8 +403,7 @@
     if (correct) {
       pBusy = true;
       btn.classList.add('correct');
-      playCorrectCue({ muted: isMuted() });
-      const praise = speakPraiseThenWord(targetWord, isMuted(), () => {
+      const praise = speakCorrectEnglishOnly(targetWord, isMuted(), () => {
         setTimeout(() => startPhonicsListenRound(), 450);
       });
       if (fb) {
@@ -380,20 +412,8 @@
       }
     } else {
       btn.classList.add('wrong');
-      playTryAgainCue({ muted: isMuted() });
       setTimeout(() => btn.classList.remove('wrong'), 450);
-      let repeatSpoken = false;
-      const speakTargetOnce = () => {
-        if (repeatSpoken) return;
-        repeatSpoken = true;
-        speakEnglishTerm(targetWord, { muted: isMuted() });
-      };
-      const retryLine = speakRetryFeedback({
-        muted: isMuted(),
-        onEnd: () => setTimeout(speakTargetOnce, 250),
-      });
-      const retryWait = estimateSpeakMs ? estimateSpeakMs(retryLine, { rate: 0.92, delayMs: 220 }) : 1800;
-      setTimeout(speakTargetOnce, retryWait + 250);
+      const retryLine = speakRetryThenEnglish(targetWord, isMuted());
       if (fb) {
         fb.textContent = retryLine;
         fb.className = 'feedback retry';
@@ -455,8 +475,7 @@
     if (correct) {
       pBusy = true;
       btn.classList.add('correct');
-      playCorrectCue({ muted: isMuted() });
-      const praise = speakPraiseThenWord(targetWord, isMuted(), () => {
+      const praise = speakCorrectEnglishOnly(targetWord, isMuted(), () => {
         setTimeout(() => startPhonicsMatchRound(), 450);
       });
       if (fb) {
@@ -465,9 +484,8 @@
       }
     } else {
       btn.classList.add('wrong');
-      playTryAgainCue({ muted: isMuted() });
       setTimeout(() => btn.classList.remove('wrong'), 450);
-      const retryLine = speakRetryFeedback({ muted: isMuted() });
+      const retryLine = speakRetryThenEnglish(targetWord, isMuted());
       if (fb) {
         fb.textContent = retryLine;
         fb.className = 'feedback retry';
@@ -651,8 +669,7 @@
     if (tile.char !== expected) {
       slotEl?.classList.add('is-wrong');
       setTimeout(() => slotEl?.classList.remove('is-wrong'), 450);
-      playTryAgainCue({ muted: isMuted() });
-      const retryLine = speakRetryFeedback({ muted: isMuted() });
+      const retryLine = speakRetryThenEnglish(pBuildRound.target.word, isMuted());
       const fb = $('#phonics-build-feedback');
       if (fb) {
         fb.textContent = retryLine;
@@ -683,9 +700,8 @@
   function finishPhonicsBuildSuccess() {
     if (!pBuildRound) return;
     pBusy = true;
-    playCorrectCue({ muted: isMuted() });
     const word = pBuildRound.target.word;
-    const praise = speakPraiseThenWord(word, isMuted(), () => {
+    const praise = speakCorrectEnglishOnly(word, isMuted(), () => {
       setTimeout(() => startPhonicsBuildRound(), 450);
     });
     const fb = $('#phonics-build-feedback');
