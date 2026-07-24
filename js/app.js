@@ -12,7 +12,7 @@
     return;
   }
 
-const { WORDS, DEER_IDS, TOPICS, wordIllustHtml, getTopicById, wordsForTopic } = window.KakaWords;
+const { WORDS, DEER_IDS, TOPICS, wordIllustHtml, getTopicById, wordsForTopic, oppositePairWords } = window.KakaWords;
 const {
   loadState,
   updateState,
@@ -25,6 +25,7 @@ const {
   warmVoices,
   warmAudio,
   speakTerm,
+  speakThen,
   speakCorrectFeedback,
   speakWordThenEncourage,
   speakRetryFeedback,
@@ -55,7 +56,11 @@ let buildDrag = null;
 let activeTopicId = null;
 /** @type {ReturnType<typeof wordsForTopic>} */
 let learnWords = [];
+/** @type {{ left: object, right: object }[]} */
+let learnPairs = [];
 let learnIndex = 0;
+/** 相反位置學習頁用成對模式 */
+let learnPairMode = false;
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -147,6 +152,22 @@ function bindLearn() {
   if (back) back.onclick = () => openTopics();
   const stage = $('#learn-stage');
   if (stage) stage.onclick = () => speakCurrentLearn();
+  const pairLeft = $('#learn-pair-left');
+  const pairRight = $('#learn-pair-right');
+  if (pairLeft) {
+    pairLeft.onclick = () => {
+      if (!learnPairMode || !learnPairs[learnIndex]) return;
+      state = loadState();
+      speakTerm(learnPairs[learnIndex].left.term, { muted: state.muted });
+    };
+  }
+  if (pairRight) {
+    pairRight.onclick = () => {
+      if (!learnPairMode || !learnPairs[learnIndex]) return;
+      state = loadState();
+      speakTerm(learnPairs[learnIndex].right.term, { muted: state.muted });
+    };
+  }
   const prev = $('#btn-learn-prev');
   const next = $('#btn-learn-next');
   if (prev) prev.onclick = () => stepLearn(-1);
@@ -210,23 +231,52 @@ function openLearn(topicId) {
   if (!topic) return;
   activeTopicId = topicId;
   state = loadState();
-  const enabled = new Set(
+  const enabledIds =
     state.enabledWordIds && state.enabledWordIds.length
       ? state.enabledWordIds
-      : WORDS.map((w) => w.id),
-  );
+      : WORDS.map((w) => w.id);
+  const enabled = new Set(enabledIds);
+
+  learnPairMode = topicId === 'opposites';
+  learnPairs = [];
   learnWords = wordsForTopic(topicId).filter((w) => enabled.has(w.id));
   if (learnWords.length < 1) learnWords = wordsForTopic(topicId);
-  // 每次入主題都打亂順序，令卡卡更有新鮮感
-  learnWords = shuffle(learnWords);
+
+  if (learnPairMode) {
+    learnPairs = oppositePairWords(enabledIds);
+    if (learnPairs.length < 1) learnPairs = oppositePairWords(null);
+    learnPairs = shuffle(learnPairs);
+    // 考試／其他模式仍用單字列表
+    learnWords = learnPairs.flatMap((p) => [p.left, p.right]);
+  } else {
+    // 每次入主題都打亂順序，令卡卡更有新鮮感
+    learnWords = shuffle(learnWords);
+  }
+
   learnIndex = 0;
   const title = $('#learn-topic-title');
   if (title) title.textContent = topic.title;
+  const lead = $('#learn-lead');
+  if (lead) {
+    lead.textContent = learnPairMode
+      ? '左右係一對相反詞，撳邊邊聽邊邊'
+      : '睇吓圖同字，撳喇叭聽廣東話';
+  }
   renderLearnCard();
   showScreen('learn');
 }
 
 function renderLearnCard() {
+  if (learnPairMode) {
+    renderLearnPairCard();
+    return;
+  }
+
+  const stage = $('#learn-stage');
+  const pairStage = $('#learn-pair-stage');
+  if (stage) stage.hidden = false;
+  if (pairStage) pairStage.hidden = true;
+
   const word = learnWords[learnIndex];
   if (!word) return;
   const illust = $('#learn-illust');
@@ -256,14 +306,76 @@ function renderLearnCard() {
   speakCurrentLearn();
 }
 
+function renderLearnPairCard() {
+  const stage = $('#learn-stage');
+  const pairStage = $('#learn-pair-stage');
+  if (stage) stage.hidden = true;
+  if (pairStage) pairStage.hidden = false;
+
+  const pair = learnPairs[learnIndex];
+  if (!pair) return;
+
+  const leftIllust = $('#learn-pair-left-illust');
+  const rightIllust = $('#learn-pair-right-illust');
+  const leftTerm = $('#learn-pair-left-term');
+  const rightTerm = $('#learn-pair-right-term');
+  const progress = $('#learn-progress');
+
+  if (leftIllust) leftIllust.innerHTML = wordIllustHtml(pair.left);
+  if (rightIllust) rightIllust.innerHTML = wordIllustHtml(pair.right);
+  if (leftTerm) leftTerm.textContent = pair.left.term;
+  if (rightTerm) rightTerm.textContent = pair.right.term;
+  if (progress) progress.textContent = `${learnIndex + 1}/${learnPairs.length}`;
+
+  const prev = $('#btn-learn-prev');
+  const next = $('#btn-learn-next');
+  const finishRow = $('#learn-finish-row');
+  const atEnd = learnIndex >= learnPairs.length - 1;
+  if (prev) prev.disabled = learnIndex <= 0;
+  if (next) {
+    next.disabled = false;
+    next.textContent = atEnd ? '再睇一次' : '下一對';
+  }
+  if (finishRow) finishRow.hidden = !atEnd;
+
+  speakCurrentLearn();
+}
+
 function speakCurrentLearn() {
+  state = loadState();
+  if (learnPairMode) {
+    const pair = learnPairs[learnIndex];
+    if (!pair) return;
+    // 自動先讀左邊（大／多…），再讀右邊相反詞
+    speakTerm(pair.left.term, {
+      muted: state.muted,
+      onEnd: () => {
+        setTimeout(() => {
+          speakTerm(pair.right.term, { muted: loadState().muted });
+        }, 280);
+      },
+    });
+    return;
+  }
   const word = learnWords[learnIndex];
   if (!word) return;
-  state = loadState();
   speakTerm(word.term, { muted: state.muted });
 }
 
 function stepLearn(delta) {
+  if (learnPairMode) {
+    if (!learnPairs.length) return;
+    if (delta > 0 && learnIndex >= learnPairs.length - 1) {
+      learnPairs = shuffle(learnPairs);
+      learnWords = learnPairs.flatMap((p) => [p.left, p.right]);
+      learnIndex = 0;
+    } else {
+      learnIndex = Math.max(0, Math.min(learnPairs.length - 1, learnIndex + delta));
+    }
+    renderLearnCard();
+    return;
+  }
+
   if (!learnWords.length) return;
   if (delta > 0 && learnIndex >= learnWords.length - 1) {
     // 「再睇一次」：重新打亂順序

@@ -531,6 +531,33 @@ function wordsForTopic(topicId) {
   return topic.wordIds.map(getWordById).filter(Boolean);
 }
 
+/**
+ * 相反位置：學習頁成對出現（左邊固定「大／多／長…」邊）
+ * [leftId, rightId]
+ */
+const OPPOSITE_PAIRS = [
+  ['da_big', 'xiao_small'],
+  ['duo', 'shao'],
+  ['chang_long', 'duan_short'],
+  ['gao_tall', 'ai_short_height'],
+  ['shang', 'xia'],
+  ['qian_front', 'hou_back'],
+  ['zuo_left', 'you_right'],
+  ['limian', 'waimian'],
+];
+
+/** @returns {{ left: object, right: object }[]} */
+function oppositePairWords(enabledIds = null) {
+  const enabled = enabledIds && enabledIds.length ? new Set(enabledIds) : null;
+  return OPPOSITE_PAIRS.map(([leftId, rightId]) => {
+    const left = getWordById(leftId);
+    const right = getWordById(rightId);
+    if (!left || !right) return null;
+    if (enabled && (!enabled.has(left.id) || !enabled.has(right.id))) return null;
+    return { left, right };
+  }).filter(Boolean);
+}
+
 /** 開發時檢查：唔好有重複 id（例如屋同五撞 wu） */
 (function assertUniqueWordIds() {
   const seen = Object.create(null);
@@ -559,8 +586,10 @@ window.KakaWords = {
   WORDS,
   DEER_IDS,
   TOPICS,
+  OPPOSITE_PAIRS,
   getWordById,
   getTopicById,
   wordsForTopic,
+  oppositePairWords,
   wordIllustHtml,
 };

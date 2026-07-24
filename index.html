@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/styles.css?v=20260724b" />
+  <link rel="stylesheet" href="./css/styles.css?v=20260724i" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260724e" />
 </head>
 <body>
@@ -69,12 +69,25 @@
           <strong id="learn-progress">1/5</strong>
         </div>
       </div>
-      <p class="section-lead">睇吓圖同字，撳喇叭聽廣東話</p>
+      <p class="section-lead" id="learn-lead">睇吓圖同字，撳喇叭聽廣東話</p>
       <button type="button" class="learn-stage" id="learn-stage" aria-label="再聽一次">
         <div id="learn-illust"></div>
         <div class="learn-term" id="learn-term"></div>
         <div class="learn-hear">🔊 聽一聽</div>
       </button>
+      <div class="learn-pair-stage" id="learn-pair-stage" hidden>
+        <button type="button" class="learn-pair-card" id="learn-pair-left" aria-label="聽左邊">
+          <div class="learn-pair-illust" id="learn-pair-left-illust"></div>
+          <div class="learn-term learn-pair-term" id="learn-pair-left-term"></div>
+          <div class="learn-hear">🔊 聽</div>
+        </button>
+        <div class="learn-pair-vs" aria-hidden="true">相反</div>
+        <button type="button" class="learn-pair-card" id="learn-pair-right" aria-label="聽右邊">
+          <div class="learn-pair-illust" id="learn-pair-right-illust"></div>
+          <div class="learn-term learn-pair-term" id="learn-pair-right-term"></div>
+          <div class="learn-hear">🔊 聽</div>
+        </button>
+      </div>
       <div class="btn-row learn-nav">
         <button type="button" class="btn btn-ghost" id="btn-learn-prev">上一張</button>
         <button type="button" class="btn btn-secondary" id="btn-learn-next">下一張</button>
@@ -357,10 +370,10 @@
     </div>
   </div>
 
-  <script src="./js/words.js?v=20260724h"></script>
+  <script src="./js/words.js?v=20260724i"></script>
   <script src="./js/storage.js?v=20260724b"></script>
   <script src="./js/speech.js?v=20260724b"></script>
-  <script src="./js/app.js?v=20260724b"></script>
+  <script src="./js/app.js?v=20260724i"></script>
   <script src="./js/phonics-words.js?v=20260724g"></script>
   <script src="./js/phonics-app.js?v=20260724g"></script>
 </body>

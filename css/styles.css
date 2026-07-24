@@ -386,6 +386,69 @@ body::before {
   box-shadow: var(--shadow);
 }
 
+.learn-pair-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 16px);
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto 16px;
+}
+
+.learn-pair-stage[hidden] {
+  display: none !important;
+}
+
+.learn-pair-card {
+  appearance: none;
+  flex: 1 1 0;
+  min-width: 0;
+  border: 2px solid rgba(94, 234, 212, 0.3);
+  border-radius: 28px;
+  background: rgba(15, 39, 72, 0.92);
+  color: var(--ink);
+  padding: 18px 12px 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow);
+}
+
+.learn-pair-card:active {
+  transform: translateY(2px);
+}
+
+.learn-pair-vs {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 3.2vw, 1.25rem);
+  font-weight: 700;
+  color: var(--gold-soft);
+  letter-spacing: 0.08em;
+}
+
+.learn-pair-term {
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  letter-spacing: 0.1em;
+}
+
+.learn-pair-illust .emoji-plate {
+  width: min(100px, 26vw);
+  height: min(100px, 26vw);
+  border-radius: 24px;
+}
+
+.learn-pair-illust .emoji-face {
+  font-size: clamp(2.6rem, 9vw, 3.6rem);
+}
+
+.learn-pair-illust .emoji-face-duo {
+  font-size: clamp(1.8rem, 6vw, 2.4rem);
+}
+
 .learn-term {
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 10vw, 3.6rem);
