@@ -375,7 +375,13 @@
           });
         });
       }
-      if (lead) lead.textContent = '睇吓字同圖,撳字母聽字母音，撳喇叭聽成個字';
+      if (lead) {
+        lead.textContent = word.letters
+          ? '睇吓字同圖,撳字母聽字母音，撳喇叭聽成個字'
+          : word.emoji
+            ? '睇吓常見字同圖，撳喇叭聽成個字（一眼認得）'
+            : '睇吓常見字，撳喇叭聽成個字（一眼認得）';
+      }
     }
     if (progress) progress.textContent = `${pLearnIndex + 1}/${pLearnWords.length}`;
 
