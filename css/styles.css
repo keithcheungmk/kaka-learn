@@ -646,6 +646,15 @@ body::before {
   flex: 1;
 }
 
+.card-grid.cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 440px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  flex: 0 0 auto;
+}
+
 @media (min-width: 800px) {
   .card-grid.cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));

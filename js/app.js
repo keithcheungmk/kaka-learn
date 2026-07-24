@@ -12,7 +12,7 @@
     return;
   }
 
-const { WORDS, DEER_IDS, TOPICS, wordIllustHtml, getTopicById, wordsForTopic, oppositePairWords } = window.KakaWords;
+const { WORDS, DEER_IDS, TOPICS, wordIllustHtml, getTopicById, wordsForTopic, oppositePairWords, getOppositeWord } = window.KakaWords;
 const {
   loadState,
   updateState,
@@ -386,6 +386,15 @@ function openPlayPick() {
   const topic = getTopicById(activeTopicId);
   const title = $('#play-topic-title');
   if (title) title.textContent = topic ? `${topic.title}・去玩玩` : '去玩玩';
+  const listenBtn = $('#btn-mode-listen');
+  const matchBtn = $('#btn-mode-match');
+  if (activeTopicId === 'opposites') {
+    if (listenBtn) listenBtn.textContent = '聽一聽・揀相反';
+    if (matchBtn) matchBtn.textContent = '睇圖・揀相反';
+  } else {
+    if (listenBtn) listenBtn.textContent = '聽一聽・揀漢字';
+    if (matchBtn) matchBtn.textContent = '睇圖・揀漢字';
+  }
   showScreen('play');
   refreshStarUI();
 }
@@ -433,6 +442,26 @@ function sampleOthers(pool, targetId, count) {
   return others.slice(0, count);
 }
 
+/** 相反位置考試：出題字 + 正確答案係其相反詞；選項只有成對兩個 */
+function buildOppositeQuiz(pool) {
+  const candidates = pool.filter((w) => {
+    const opp = getOppositeWord(w.id);
+    return opp && pool.some((p) => p.id === opp.id);
+  });
+  const source = candidates.length ? candidates : pool;
+  const prompt = pickTarget(source);
+  const answer = getOppositeWord(prompt.id);
+  if (!answer) return null;
+  return {
+    pickOpposite: true,
+    prompt,
+    answer,
+    // 沿用 target = 正確要揀嘅字（相反詞）
+    target: answer,
+    options: shuffle([prompt, answer]),
+  };
+}
+
 /* ---------- 模式 A：聽音選卡 ---------- */
 
 function bindListen() {
@@ -440,7 +469,8 @@ function bindListen() {
   if (speak) {
     speak.onclick = () => {
       if (!listenRound) return;
-      speakTerm(listenRound.target.term, { muted: loadState().muted });
+      const spoken = listenRound.prompt || listenRound.target;
+      speakTerm(spoken.term, { muted: loadState().muted });
     };
   }
   const back = $('#btn-back-listen');
@@ -450,10 +480,24 @@ function bindListen() {
 function startListenRound() {
   busy = false;
   const pool = enabledWords();
-  const target = pickTarget(pool);
-  const optionCount = Math.min(4, pool.length);
-  const options = shuffle([target, ...sampleOthers(pool, target.id, optionCount - 1)]);
-  listenRound = { target, options };
+  let round;
+  if (activeTopicId === 'opposites') {
+    round = buildOppositeQuiz(pool);
+  }
+  if (!round) {
+    const target = pickTarget(pool);
+    const optionCount = Math.min(4, pool.length);
+    const options = shuffle([target, ...sampleOthers(pool, target.id, optionCount - 1)]);
+    round = { pickOpposite: false, prompt: target, target, options };
+  }
+  listenRound = round;
+
+  const promptText = $('#listen-prompt-text');
+  if (promptText) {
+    promptText.innerHTML = round.pickOpposite
+      ? '聽廣東話，再揀佢嘅<strong>相反詞</strong>'
+      : '聽廣東話，再揀啱嘅<strong>漢字</strong>（冇圖，靠認字）';
+  }
 
   const feedback = $('#listen-feedback');
   feedback.textContent = '';
@@ -461,7 +505,9 @@ function startListenRound() {
 
   const grid = $('#listen-options');
   grid.innerHTML = '';
-  options.forEach((word) => {
+  grid.classList.toggle('cols-2', !!round.pickOpposite);
+  grid.classList.toggle('cols-3', !round.pickOpposite);
+  round.options.forEach((word) => {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'word-card word-card-chars word-card-flip';
@@ -483,7 +529,8 @@ function startListenRound() {
   });
 
   refreshStarUI();
-  setTimeout(() => speakTerm(target.term, { muted: loadState().muted }), 280);
+  const spoken = round.prompt || round.target;
+  setTimeout(() => speakTerm(spoken.term, { muted: loadState().muted }), 280);
 }
 
 function flipListenCard(btn, stay) {
@@ -499,19 +546,29 @@ function onListenPick(id, btn) {
   if (btn.classList.contains('is-flipped')) return;
   state = loadState();
   const correct = id === listenRound.target.id;
-  const targetTerm = listenRound.target.term;
+  const answerTerm = listenRound.target.term;
+  const promptTerm = (listenRound.prompt || listenRound.target).term;
 
   if (correct) {
     busy = true;
     flipListenCard(btn, true);
     btn.classList.add('correct');
-    playCorrectCue({ muted: state.muted });
-    const praise = speakCorrectFeedback({ muted: state.muted });
+    warmAudio();
     const fb = $('#listen-feedback');
-    fb.textContent = praise;
-    fb.className = 'feedback ok';
+    let nextMs = 2800;
+    if (listenRound.pickOpposite) {
+      const praise = speakWordThenEncourage(answerTerm, { muted: state.muted });
+      fb.textContent = `${promptTerm} 嘅相反係 ${answerTerm}！${praise}`;
+      fb.className = 'feedback ok';
+      nextMs = estimateSpeakMs(`${answerTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
+    } else {
+      playCorrectCue({ muted: state.muted });
+      const praise = speakCorrectFeedback({ muted: state.muted });
+      fb.textContent = praise;
+      fb.className = 'feedback ok';
+    }
     awardStar().then(() => {
-      setTimeout(() => startListenRound(), 2800);
+      setTimeout(() => startListenRound(), nextMs);
     });
   } else {
     // 錯咗都翻一吓睇圖，跟住翻返去——唔好長期露圖，避免靠淘汰答
@@ -521,11 +578,11 @@ function onListenPick(id, btn) {
     const fb = $('#listen-feedback');
     fb.className = 'feedback retry';
     setTimeout(() => btn.classList.remove('wrong'), 450);
-    // 鼓勵句講完先再讀正確字詞，避免 cancel 切走鼓勵聲
+    // 鼓勵句講完先再讀正確答案，避免 cancel 切走鼓勵聲
     const retryLine = speakRetryFeedback({
       muted: state.muted,
       onEnd: () => {
-        setTimeout(() => speakTerm(targetTerm, { muted: loadState().muted }), 250);
+        setTimeout(() => speakTerm(answerTerm, { muted: loadState().muted }), 250);
       },
     });
     fb.textContent = retryLine;
@@ -542,18 +599,33 @@ function bindMatch() {
 function startMatchRound() {
   busy = false;
   const pool = enabledWords();
-  const target = pickTarget(pool);
-  const optionCount = Math.min(4, pool.length);
-  const options = shuffle([target, ...sampleOthers(pool, target.id, optionCount - 1)]);
-  matchRound = { target, options };
+  let round;
+  if (activeTopicId === 'opposites') {
+    round = buildOppositeQuiz(pool);
+  }
+  if (!round) {
+    const target = pickTarget(pool);
+    const optionCount = Math.min(4, pool.length);
+    const options = shuffle([target, ...sampleOthers(pool, target.id, optionCount - 1)]);
+    round = { pickOpposite: false, prompt: target, target, options };
+  }
+  matchRound = round;
+
+  const promptText = $('#match-prompt-text');
+  if (promptText) {
+    promptText.innerHTML = round.pickOpposite
+      ? '睇中間嘅圖／字，再揀佢嘅<strong>相反詞</strong>'
+      : '睇中間嘅圖，再揀啱嘅<strong>漢字</strong>';
+  }
 
   const fb = $('#match-feedback');
   fb.textContent = '';
   fb.className = 'feedback';
 
+  const shown = round.prompt || round.target;
   const stage = $('#match-stage');
   if (stage) {
-    stage.innerHTML = wordIllustHtml(target);
+    stage.innerHTML = wordIllustHtml(shown);
     const plate = stage.querySelector('.emoji-plate');
     if (plate) plate.classList.add('emoji-plate-lg');
     const face = stage.querySelector('.emoji-face');
@@ -562,7 +634,9 @@ function startMatchRound() {
 
   const grid = $('#match-options');
   grid.innerHTML = '';
-  options.forEach((word) => {
+  grid.classList.toggle('cols-2', !!round.pickOpposite);
+  grid.classList.toggle('cols-3', !round.pickOpposite);
+  round.options.forEach((word) => {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'word-card word-card-chars';
@@ -580,20 +654,23 @@ function onMatchPick(id, btn) {
   if (busy || !matchRound) return;
   state = loadState();
   const correct = id === matchRound.target.id;
-  const targetTerm = matchRound.target.term;
+  const answerTerm = matchRound.target.term;
+  const promptTerm = (matchRound.prompt || matchRound.target).term;
 
   if (correct) {
     busy = true;
     btn.classList.add('correct');
     warmAudio();
     const fb = $('#match-feedback');
-    // 一次過讀字詞 + 鼓勵（iPad 第二次 speak 會靜音）
-    const praise = speakWordThenEncourage(targetTerm, { muted: state.muted });
+    // 一次過讀正確答案（相反詞）+ 鼓勵
+    const praise = speakWordThenEncourage(answerTerm, { muted: state.muted });
     if (fb) {
-      fb.textContent = praise;
+      fb.textContent = matchRound.pickOpposite
+        ? `${promptTerm} 嘅相反係 ${answerTerm}！${praise}`
+        : praise;
       fb.className = 'feedback ok';
     }
-    const nextMs = estimateSpeakMs(`${targetTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
+    const nextMs = estimateSpeakMs(`${answerTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
     awardStar().then(() => {
       setTimeout(() => startMatchRound(), nextMs);
     });

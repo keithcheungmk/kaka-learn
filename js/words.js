@@ -558,6 +558,15 @@ function oppositePairWords(enabledIds = null) {
   }).filter(Boolean);
 }
 
+/** 攞某個字嘅相反詞（無就 null） */
+function getOppositeWord(wordId) {
+  for (const [a, b] of OPPOSITE_PAIRS) {
+    if (a === wordId) return getWordById(b) || null;
+    if (b === wordId) return getWordById(a) || null;
+  }
+  return null;
+}
+
 /** 開發時檢查：唔好有重複 id（例如屋同五撞 wu） */
 (function assertUniqueWordIds() {
   const seen = Object.create(null);
@@ -591,5 +600,6 @@ window.KakaWords = {
   getTopicById,
   wordsForTopic,
   oppositePairWords,
+  getOppositeWord,
   wordIllustHtml,
 };
