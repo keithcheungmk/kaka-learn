@@ -180,9 +180,18 @@ const WORDS = [
   { id: 'xuegao', term: '雪糕', isDeer: false, emoji: '🍦', badge: '', plate: '#402038' },
   { id: 'binggan', term: '餅乾', isDeer: false, emoji: '🍪', badge: '', plate: '#3a2818' },
   { id: 'tangguo', term: '糖果', isDeer: false, emoji: '🍬', badge: '', plate: '#2a1840' },
-  { id: 'hanbao', term: '漢堡', isDeer: false, emoji: '🍔', badge: '', plate: '#3a3010' },
-  { id: 'pisa', term: '披薩', isDeer: false, emoji: '🍕', badge: '', plate: '#401820' },
+  { id: 'hanbao', term: '漢堡包', isDeer: false, emoji: '🍔', badge: '', plate: '#3a3010' },
+  { id: 'pisa', term: '薄餅', isDeer: false, emoji: '🍕', badge: '', plate: '#401820' },
   { id: 'shutiao', term: '薯條', isDeer: false, emoji: '🍟', badge: '', plate: '#3a3010' },
+  { id: 'sanwenzi', term: '三文治', isDeer: false, emoji: '🥪', badge: '', plate: '#3a3010' },
+  { id: 'jirou', term: '雞肉', isDeer: false, emoji: '🍗', badge: '', plate: '#402010' },
+  { id: 'niurou', term: '牛肉', isDeer: false, emoji: '🥩', badge: '牛', plate: '#401820' },
+  { id: 'zhurou', term: '豬肉', isDeer: false, emoji: '🥓', badge: '豬', plate: '#402030' },
+  { id: 'yangrou', term: '羊肉', isDeer: false, emoji: '🍖', badge: '羊', plate: '#3a2818' },
+  { id: 'xia_shrimp', term: '蝦', isDeer: false, emoji: '🦐', badge: '', plate: '#401028' },
+  { id: 'xie_crab', term: '蟹', isDeer: false, emoji: '🦀', badge: '', plate: '#401820' },
+  // 海鮮：唔用 🦞（龍蝦），用雙 emoji 表達「好多種海味」
+  { id: 'haixian', term: '海鮮', isDeer: false, emoji: '🦐🐟', emojiDuo: true, badge: '', plate: '#0f3550' },
   // 學校／用品
   { id: 'shu', term: '書本', isDeer: false, emoji: '📚', badge: '', plate: '#102848' },
   { id: 'gangbi', term: '鉛筆', isDeer: false, emoji: '✏️', badge: '', plate: '#3a3010' },
@@ -387,11 +396,14 @@ const TOPICS = [
   {
     id: 'food',
     title: '食物',
-    blurb: '白飯湯麵麵包蛋牛奶蛋糕同小食飲品',
+    blurb: '白飯、小食、肉類、海鮮同飲品',
     cover: '🍚',
     wordIds: [
       'fan', 'mian', 'bao', 'dan', 'nai', 'dangao',
-      'shui', 'guozhi', 'xuegao', 'binggan', 'tangguo', 'hanbao', 'pisa', 'shutiao',
+      'shui', 'guozhi', 'xuegao', 'binggan', 'tangguo',
+      'sanwenzi', 'hanbao', 'pisa', 'shutiao',
+      'jirou', 'niurou', 'zhurou', 'yangrou',
+      'xia_shrimp', 'xie_crab', 'haixian',
     ],
   },
   {

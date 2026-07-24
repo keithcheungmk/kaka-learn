@@ -284,6 +284,11 @@ body::before {
   letter-spacing: 0.06em;
 }
 
+.emoji-face-duo.emoji-face-lg {
+  font-size: clamp(3.2rem, 14vw, 5rem);
+  letter-spacing: 0.08em;
+}
+
 .emoji-badge {
   position: absolute;
   right: 6px;
