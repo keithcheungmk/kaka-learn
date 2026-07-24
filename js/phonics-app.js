@@ -31,6 +31,11 @@
   let pBuildRound = null;
   let pBuildSelectedKey = null;
 
+  /** Cached HTMLAudioElement per letter (a–z phoneme clips). */
+  const phonemeAudioByLetter = Object.create(null);
+  let activePhonemeAudio = null;
+  let phonemeWaitTimer = null;
+
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
@@ -40,6 +45,101 @@
     } catch {
       return false;
     }
+  }
+
+  function normalizeLetter(ch) {
+    const s = String(ch || '')
+      .trim()
+      .toLowerCase();
+    return /^[a-z]$/.test(s) ? s : '';
+  }
+
+  function stopPhonemeAudio() {
+    if (phonemeWaitTimer) {
+      clearTimeout(phonemeWaitTimer);
+      phonemeWaitTimer = null;
+    }
+    if (activePhonemeAudio) {
+      try {
+        activePhonemeAudio.pause();
+        activePhonemeAudio.currentTime = 0;
+      } catch {
+        /* ignore */
+      }
+      activePhonemeAudio = null;
+    }
+  }
+
+  /**
+   * Play synthetic-phonics sound for one letter (not the letter name).
+   * Clips live in ./assets/phonemes/{a-z}.mp3 — browser TTS cannot do isolated phonemes reliably.
+   * @returns {Promise<void>}
+   */
+  function playLetterSound(letter, { muted = isMuted(), onEnd = null } = {}) {
+    const ch = normalizeLetter(letter);
+    const finish = () => {
+      if (typeof onEnd === 'function') onEnd();
+    };
+    if (!ch || muted) {
+      finish();
+      return Promise.resolve();
+    }
+
+    stopPhonemeAudio();
+    try {
+      if (window.speechSynthesis) window.speechSynthesis.cancel();
+    } catch {
+      /* ignore */
+    }
+
+    let audio = phonemeAudioByLetter[ch];
+    if (!audio) {
+      audio = new Audio(`./assets/phonemes/${ch}.mp3`);
+      audio.preload = 'auto';
+      phonemeAudioByLetter[ch] = audio;
+    }
+    try {
+      audio.pause();
+      audio.currentTime = 0;
+    } catch {
+      /* ignore */
+    }
+    activePhonemeAudio = audio;
+
+    return new Promise((resolve) => {
+      let settled = false;
+      const done = () => {
+        if (settled) return;
+        settled = true;
+        if (activePhonemeAudio === audio) activePhonemeAudio = null;
+        finish();
+        resolve();
+      };
+      audio.addEventListener('ended', done, { once: true });
+      audio.addEventListener('error', done, { once: true });
+      // Safety timeout if ended never fires (some WebViews)
+      phonemeWaitTimer = setTimeout(done, 2200);
+      const p = audio.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(() => {
+          // Autoplay / missing file — last resort: letter name TTS (better than silence)
+          if (typeof speakEnglishTerm === 'function') {
+            speakEnglishTerm(ch, { muted: false, rate: 0.88, onEnd: done });
+            return;
+          }
+          done();
+        });
+      }
+    });
+  }
+
+  /** Speak a phonics target: single letters → phoneme clip; words → English TTS. */
+  function speakPhonicsTarget(word, opts = {}) {
+    if (normalizeLetter(word)) {
+      return playLetterSound(word, opts);
+    }
+    speakEnglishTerm(word, opts);
+    return Promise.resolve();
   }
 
   function goHome() {
@@ -109,6 +209,14 @@
       setTimeout(finish, muted ? 700 : 400);
       return praise;
     }
+    // Letters: phoneme MP3; CVC/sight: full English word TTS
+    if (normalizeLetter(word)) {
+      setTimeout(() => {
+        playLetterSound(word, { muted, onEnd: finish });
+      }, 120);
+      setTimeout(finish, 2000);
+      return praise;
+    }
     speakEnglishTerm(word, { muted, delayMs: 120, onEnd: finish });
     const wait = estimateSpeakMs ? estimateSpeakMs(word, { rate: 0.85, delayMs: 120 }) : 1400;
     setTimeout(finish, wait + 200);
@@ -132,6 +240,11 @@
       wordStarted = true;
       if (!word) {
         finish();
+        return;
+      }
+      if (normalizeLetter(word)) {
+        playLetterSound(word, { muted, onEnd: finish });
+        setTimeout(finish, 2000);
         return;
       }
       speakEnglishTerm(word, { muted, delayMs: 180, onEnd: finish });
@@ -239,7 +352,7 @@
       }
       if (term) term.textContent = word.word;
       if (lettersRow) lettersRow.innerHTML = '';
-      if (lead) lead.textContent = '睇吓字母，撳喇叭聽字母名（溫習）';
+      if (lead) lead.textContent = '睇吓字母，撳喇叭聽字母音（phonics）';
     } else {
       if (illust) illust.innerHTML = word.emoji ? phonicsWordIllustHtml(word) : '';
       if (term) term.textContent = word.word;
@@ -248,7 +361,7 @@
           ? word.letters
               .map(
                 (ch) =>
-                  `<button type="button" class="letter-tile" data-letter="${ch}" aria-label="letter ${ch}">${letterTileHtml(ch)}</button>`,
+                  `<button type="button" class="letter-tile" data-letter="${ch}" aria-label="letter sound ${ch}">${letterTileHtml(ch)}</button>`,
               )
               .join('')
           : '';
@@ -256,11 +369,11 @@
           tile.addEventListener('click', (ev) => {
             ev.preventDefault();
             ev.stopPropagation();
-            speakEnglishTerm(tile.dataset.letter, { muted: isMuted() });
+            playLetterSound(tile.dataset.letter, { muted: isMuted() });
           });
         });
       }
-      if (lead) lead.textContent = '睇吓字同圖,撳喇叭聽英文讀音';
+      if (lead) lead.textContent = '睇吓字同圖,撳字母聽字母音，撳喇叭聽成個字';
     }
     if (progress) progress.textContent = `${pLearnIndex + 1}/${pLearnWords.length}`;
 
@@ -283,6 +396,11 @@
   function speakCurrentPhonicsLearn() {
     const word = pLearnWords[pLearnIndex];
     if (!word) return;
+    const isLetter = typeof isLetterItem === 'function' ? isLetterItem(word) : word.kind === 'letter';
+    if (isLetter) {
+      playLetterSound(word.word, { muted: isMuted() });
+      return;
+    }
     speakEnglishTerm(word.word, { muted: isMuted() });
   }
 
@@ -364,7 +482,7 @@
     if (speak) {
       speak.onclick = () => {
         if (!pListenRound) return;
-        speakEnglishTerm(pListenRound.target.word, { muted: isMuted() });
+        speakPhonicsTarget(pListenRound.target.word, { muted: isMuted() });
       };
     }
     const back = $('#btn-back-phonics-listen');
@@ -420,7 +538,7 @@
       });
     }
 
-    setTimeout(() => speakEnglishTerm(target.word, { muted: isMuted() }), 280);
+    setTimeout(() => speakPhonicsTarget(target.word, { muted: isMuted() }), 280);
   }
 
   function onPhonicsListenPick(id, btn) {
