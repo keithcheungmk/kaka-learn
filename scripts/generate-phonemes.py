@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """Generate kid-friendly phonics letter sounds for 卡卡字母隊.
 
-Hybrid approach (much less robotic than espeak-ng):
-  - Short vowels a e i o u: Piper neural TTS with direct IPA (/æ ɛ ɪ ɑ ʌ/)
-  - Consonants: Microsoft Edge neural child-like voice (Ana) with classroom
-    forms kids can mimic (sss, mmm, buh, tuh, …)
+All 26 letters use Microsoft Edge neural child-like voice (en-US-AnaNeural)
+with classroom phonics spellings kids can mimic:
 
-Requires network on first run (downloads Piper voice; Edge TTS API).
+  - Short vowels: onset cropped from cue words (apple/egg/igloo/…)
+  - Continuants / stops: soft “uh” forms (vuh, nuh, buh, tuh, …)
+    — NOT repeated letter letters like “vvv/nnn”, which TTS reads as
+      letter names (“vee vee vee”).
+
+Requires: pip install edge-tts numpy；ffmpeg；network.
 """
 from __future__ import annotations
 
@@ -14,7 +17,6 @@ import asyncio
 import os
 import subprocess
 import sys
-import urllib.request
 import wave
 from pathlib import Path
 
@@ -22,65 +24,55 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "assets" / "phonemes"
-VOICE_DIR = Path(os.environ.get("KAKA_PIPER_VOICES", "/tmp/piper-voices"))
-MODEL = VOICE_DIR / "en_US-amy-medium.onnx"
-MODEL_JSON = VOICE_DIR / "en_US-amy-medium.onnx.json"
-HF = "https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/amy/medium"
+TMP = Path(os.environ.get("KAKA_PHONEME_TMP", "/tmp/kaka-phonemes-ana"))
 
 EDGE_VOICE = "en-US-AnaNeural"
-EDGE_RATE = "-20%"
-EDGE_PITCH = "+10Hz"
+EDGE_RATE = "-18%"
+EDGE_PITCH = "+12Hz"
 
-VOWELS = {
-    "a": ["æ"],
-    "e": ["ɛ"],
-    "i": ["ɪ"],
-    "o": ["ɑ"],
-    "u": ["ʌ"],
+# (mode, text, seconds)
+# mode "onset": keep first N seconds after energy onset (vowel cue words)
+# mode "full": keep up to N seconds of the classroom sound
+SPECS: dict[str, tuple[str, str, float]] = {
+    # short vowels from cue-word onsets (not letter names ay/ee/eye…)
+    # keep short so kids hear the vowel, not the whole cue word
+    "a": ("onset", "apple", 0.28),
+    "e": ("onset", "egg", 0.28),
+    "i": ("onset", "igloo", 0.28),
+    "o": ("onset", "octopus", 0.30),
+    "u": ("onset", "up", 0.28),
+    # continuants — classroom “uh” (avoid vvv/nnn → letter names)
+    "f": ("full", "fuh", 0.72),
+    "l": ("full", "luh", 0.72),
+    "m": ("full", "muh", 0.72),
+    "n": ("full", "nuh", 0.72),
+    "r": ("full", "ruh", 0.72),
+    "s": ("full", "sss", 0.95),
+    "v": ("full", "vuh", 0.72),
+    "z": ("full", "zuh", 0.72),
+    # stops / others — soft uh
+    "b": ("full", "buh", 0.68),
+    "c": ("full", "kuh", 0.68),
+    "d": ("full", "duh", 0.68),
+    "g": ("full", "guh", 0.68),
+    "h": ("full", "huh", 0.68),
+    "j": ("full", "juh", 0.72),
+    "k": ("full", "kuh", 0.68),
+    "p": ("full", "puh", 0.68),
+    "q": ("full", "kwuh", 0.72),
+    "t": ("full", "tuh", 0.68),
+    "w": ("full", "wuh", 0.68),
+    "x": ("full", "ks", 0.80),
+    "y": ("full", "yuh", 0.68),
 }
 
-# Classroom-style consonants — easy for ~4y to hear and copy
-CONSONANTS = {
-    "f": ("fff", 1.0),
-    "l": ("lll", 1.0),
-    "m": ("mmm", 1.0),
-    "n": ("nnn", 1.0),
-    "r": ("rrr", 0.95),
-    "s": ("sss", 1.0),
-    "v": ("vvv", 1.0),
-    "z": ("zzz", 1.0),
-    "b": ("buh", 0.65),
-    "c": ("kuh", 0.65),
-    "d": ("duh", 0.65),
-    "g": ("guh", 0.65),
-    "h": ("huh", 0.65),
-    "j": ("juh", 0.70),
-    "k": ("kuh", 0.65),
-    "p": ("puh", 0.65),
-    "q": ("kwuh", 0.70),
-    "t": ("tuh", 0.65),
-    "w": ("wuh", 0.65),
-    "x": ("ks", 0.75),
-    "y": ("yuh", 0.65),
-}
 
-
-def ensure_deps():
+def ensure_deps() -> None:
     try:
         import edge_tts  # noqa: F401
-        from piper import PiperVoice  # noqa: F401
     except ImportError:
-        print("Installing edge-tts and piper-tts …", file=sys.stderr)
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "edge-tts", "piper-tts"])
-
-
-def download_voice():
-    VOICE_DIR.mkdir(parents=True, exist_ok=True)
-    if MODEL.exists() and MODEL_JSON.exists():
-        return
-    print("Downloading Piper voice en_US-amy-medium …", file=sys.stderr)
-    urllib.request.urlretrieve(f"{HF}/en_US-amy-medium.onnx", MODEL)
-    urllib.request.urlretrieve(f"{HF}/en_US-amy-medium.onnx.json", MODEL_JSON)
+        print("Installing edge-tts …", file=sys.stderr)
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "edge-tts", "numpy"])
 
 
 def write_wav(path: Path, sr: int, audio: np.ndarray) -> None:
@@ -109,7 +101,7 @@ def to_mp3(wav: Path, mp3: Path) -> None:
             "-i",
             str(wav),
             "-af",
-            "treble=g=2:f=3000,volume=1.3,alimiter=limit=0.94",
+            "treble=g=2.5:f=3200,volume=1.25,alimiter=limit=0.94",
             "-ar",
             "22050",
             "-codec:a",
@@ -121,33 +113,7 @@ def to_mp3(wav: Path, mp3: Path) -> None:
     )
 
 
-def synth_vowel(voice, phones, length=1.9) -> np.ndarray:
-    from piper import SynthesisConfig
-
-    sr = voice.config.sample_rate
-    ids = voice.phonemes_to_ids(phones)
-    cfg = SynthesisConfig(
-        length_scale=length,
-        noise_scale=0.45,
-        noise_w_scale=0.55,
-        normalize_audio=True,
-        volume=1.0,
-    )
-    audio = voice.phoneme_ids_to_audio(ids, cfg)
-    if isinstance(audio, tuple):
-        audio = audio[0]
-    audio = np.asarray(audio, dtype=np.float32)
-    peak = float(np.max(np.abs(audio)) + 1e-9)
-    audio = audio * min(0.9 / peak, 3.0)
-    fade = int(0.02 * sr)
-    if len(audio) > 2 * fade:
-        audio[:fade] *= np.linspace(0, 1, fade, dtype=np.float32)
-        audio[-fade:] *= np.linspace(1, 0, fade, dtype=np.float32)
-    pad = int(0.1 * sr)
-    return np.concatenate([np.zeros(pad, np.float32), np.clip(audio, -1, 1), np.zeros(pad, np.float32)])
-
-
-def onset_idx(audio: np.ndarray, sr: int, thresh: float = 0.03) -> int:
+def onset_idx(audio: np.ndarray, sr: int, thresh: float = 0.028) -> int:
     win = max(1, int(0.008 * sr))
     for i in range(0, len(audio) - win, win):
         if np.max(np.abs(audio[i : i + win])) >= thresh:
@@ -155,24 +121,27 @@ def onset_idx(audio: np.ndarray, sr: int, thresh: float = 0.03) -> int:
     return 0
 
 
-def trim_clip(audio: np.ndarray, sr: int, max_dur: float) -> np.ndarray:
-    clip = audio[: int(max_dur * sr)]
+def trim_trailing_silence(clip: np.ndarray, sr: int, min_keep: float = 0.22) -> np.ndarray:
     win = max(1, int(0.02 * sr))
     end = len(clip)
     silent = 0
+    min_i = int(min_keep * sr)
     for i in range(0, len(clip), win):
         if np.max(np.abs(clip[i : i + win])) < 0.02:
             silent += win
-            if silent > int(0.15 * sr) and i > int(0.22 * sr):
-                end = max(int(0.22 * sr), i - silent + win)
+            if silent > int(0.14 * sr) and i > min_i:
+                end = max(min_i, i - silent + win)
                 break
         else:
             silent = 0
-    clip = clip[:end]
+    return clip[:end]
+
+
+def polish(clip: np.ndarray, sr: int) -> np.ndarray:
     pad = int(0.08 * sr)
     clip = np.concatenate([np.zeros(pad, np.float32), clip, np.zeros(pad, np.float32)])
     peak = float(np.max(np.abs(clip)) + 1e-9)
-    clip *= min(0.9 / peak, 2.5)
+    clip = clip * min(0.9 / peak, 2.6)
     fade = int(0.018 * sr)
     if len(clip) > 2 * fade:
         clip[:fade] *= np.linspace(0, 1, fade, dtype=np.float32)
@@ -180,42 +149,55 @@ def trim_clip(audio: np.ndarray, sr: int, max_dur: float) -> np.ndarray:
     return clip
 
 
-async def gen_consonants(tmp: Path) -> None:
+async def synthesize_one(ch: str, mode: str, text: str, seconds: float) -> None:
     import edge_tts
 
-    for ch, (text, dur) in CONSONANTS.items():
-        raw = tmp / f"{ch}_raw.mp3"
-        await edge_tts.Communicate(text, EDGE_VOICE, rate=EDGE_RATE, pitch=EDGE_PITCH).save(str(raw))
-        wav_raw = tmp / f"{ch}_raw.wav"
-        subprocess.check_call(
-            ["ffmpeg", "-y", "-loglevel", "error", "-i", str(raw), "-ac", "1", "-ar", "22050", str(wav_raw)]
-        )
-        sr, audio = read_wav(wav_raw)
-        o = onset_idx(audio, sr)
-        clip = trim_clip(audio[o:], sr, dur)
-        cut = tmp / f"{ch}.wav"
-        write_wav(cut, sr, clip)
-        to_mp3(cut, OUT / f"{ch}.mp3")
-        print(f"cons {ch} {text}")
+    raw_mp3 = TMP / f"{ch}_raw.mp3"
+    raw_wav = TMP / f"{ch}_raw.wav"
+    cut_wav = TMP / f"{ch}.wav"
+    out_mp3 = OUT / f"{ch}.mp3"
+
+    await edge_tts.Communicate(text, EDGE_VOICE, rate=EDGE_RATE, pitch=EDGE_PITCH).save(str(raw_mp3))
+    subprocess.check_call(
+        ["ffmpeg", "-y", "-loglevel", "error", "-i", str(raw_mp3), "-ac", "1", "-ar", "22050", str(raw_wav)]
+    )
+    sr, audio = read_wav(raw_wav)
+    o = onset_idx(audio, sr)
+    clip = audio[o : o + int(seconds * sr)]
+    if mode == "full":
+        clip = trim_trailing_silence(clip, sr)
+    clip = polish(clip, sr)
+    write_wav(cut_wav, sr, clip)
+    to_mp3(cut_wav, out_mp3)
+    dur = float(
+        subprocess.check_output(
+            [
+                "ffprobe",
+                "-v",
+                "error",
+                "-show_entries",
+                "format=duration",
+                "-of",
+                "default=noprint_wrappers=1:nokey=1",
+                str(out_mp3),
+            ],
+            text=True,
+        ).strip()
+    )
+    print(f"{ch}  {mode:5s}  {text!r:10s}  {out_mp3.stat().st_size:5d}b  {dur:.2f}s")
+
+
+async def main_async() -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
+    TMP.mkdir(parents=True, exist_ok=True)
+    for ch in "abcdefghijklmnopqrstuvwxyz":
+        mode, text, seconds = SPECS[ch]
+        await synthesize_one(ch, mode, text, seconds)
 
 
 def main() -> None:
     ensure_deps()
-    download_voice()
-    from piper import PiperVoice
-
-    OUT.mkdir(parents=True, exist_ok=True)
-    tmp = Path("/tmp/kaka-phonemes-final")
-    tmp.mkdir(parents=True, exist_ok=True)
-
-    voice = PiperVoice.load(str(MODEL))
-    for ch, phones in VOWELS.items():
-        wav = tmp / f"{ch}.wav"
-        write_wav(wav, voice.config.sample_rate, synth_vowel(voice, phones))
-        to_mp3(wav, OUT / f"{ch}.mp3")
-        print(f"vowel {ch}")
-
-    asyncio.run(gen_consonants(tmp))
+    asyncio.run(main_async())
     print(f"Done → {OUT}")
 
 
