@@ -1,11 +1,15 @@
-/** 卡卡字母隊 — English Phonics（Phase 1：-at CVC 家族 + 常見字）
+/** 卡卡字母隊 — English Phonics（Phase 1–2：CVC 詞族 + 常見字）
  *  獨立資料檔，唔改動 js/words.js 嘅任何現有內容。
  *  插圖同中文認字 app 一樣用系統 Emoji；字母角色顏色係原創配色（見 LETTER_COLORS），
  *  唔跟任何現成教材／卡通嘅顏色配對。
+ *
+ *  Phase 2：每個詞族一張主題卡（-at/-an/-ap/-in/-ig/-ot/-og）+ 常見字第 2 批。
+ *  選詞原則：優先有清晰 emoji；skip fat；digraphs 留 Phase 3。
  */
 
 /** 每個字母固定原創顏色（「卡卡字母隊」角色配色表） */
 const LETTER_COLORS = {
+  // Phase 1
   c: '#fb7185',
   a: '#7cffb2',
   t: '#93a5fc',
@@ -13,13 +17,24 @@ const LETTER_COLORS = {
   b: '#38bdf8',
   r: '#2dd4bf',
   m: '#c4b5fd',
+  // Phase 2
+  n: '#f9a8d4',
+  p: '#fdba74',
+  i: '#a5f3fc',
+  g: '#86efac',
+  d: '#fcd34d',
+  w: '#ddd6fe',
+  o: '#fda4af',
+  f: '#67e8f9',
+  v: '#bef264',
+  l: '#fde68a',
 };
 
-/** Phase 1 主題：CVC 拼一拼 + 常見字（sight words） */
+/** 主題：先學再開考；CVC 三玩法，sight words 淨聽一聽 */
 const PHONICS_TOPICS = [
   {
     id: 'cvc_at',
-    title: '拼一拼・CVC',
+    title: '拼一拼・-at',
     blurb: 'cat · hat · bat · rat · mat',
     cover: '🐱',
     modes: ['listen', 'match', 'build'],
@@ -32,8 +47,85 @@ const PHONICS_TOPICS = [
     ],
   },
   {
+    id: 'cvc_an',
+    title: '拼一拼・-an',
+    blurb: 'can · pan · man · van · fan',
+    cover: '🚐',
+    modes: ['listen', 'match', 'build'],
+    words: [
+      { id: 'can', word: 'can', letters: ['c', 'a', 'n'], emoji: '🥫', plate: '#3a3a45' },
+      { id: 'pan', word: 'pan', letters: ['p', 'a', 'n'], emoji: '🍳', plate: '#3a3010' },
+      { id: 'man', word: 'man', letters: ['m', 'a', 'n'], emoji: '👨', plate: '#1a3050' },
+      { id: 'van', word: 'van', letters: ['v', 'a', 'n'], emoji: '🚐', plate: '#102848' },
+      { id: 'fan', word: 'fan', letters: ['f', 'a', 'n'], emoji: '🪭', plate: '#2a1840' },
+    ],
+  },
+  {
+    id: 'cvc_ap',
+    title: '拼一拼・-ap',
+    blurb: 'cap · map · tap · nap',
+    cover: '🧢',
+    modes: ['listen', 'match', 'build'],
+    words: [
+      { id: 'cap', word: 'cap', letters: ['c', 'a', 'p'], emoji: '🧢', plate: '#102848' },
+      { id: 'map', word: 'map', letters: ['m', 'a', 'p'], emoji: '🗺️', plate: '#143828' },
+      { id: 'tap', word: 'tap', letters: ['t', 'a', 'p'], emoji: '🚰', plate: '#0f3550' },
+      { id: 'nap', word: 'nap', letters: ['n', 'a', 'p'], emoji: '😴', plate: '#1a2a4a' },
+    ],
+  },
+  {
+    id: 'cvc_in',
+    title: '拼一拼・-in',
+    blurb: 'pin · tin · bin · win',
+    cover: '📌',
+    modes: ['listen', 'match', 'build'],
+    words: [
+      { id: 'pin', word: 'pin', letters: ['p', 'i', 'n'], emoji: '📌', plate: '#401018' },
+      { id: 'tin', word: 'tin', letters: ['t', 'i', 'n'], emoji: '🫙', plate: '#2a3548' },
+      { id: 'bin', word: 'bin', letters: ['b', 'i', 'n'], emoji: '🗑️', plate: '#3a3a45' },
+      { id: 'win', word: 'win', letters: ['w', 'i', 'n'], emoji: '🏆', plate: '#3a3010' },
+    ],
+  },
+  {
+    id: 'cvc_ig',
+    title: '拼一拼・-ig',
+    blurb: 'pig · dig · big · wig',
+    cover: '🐷',
+    modes: ['listen', 'match', 'build'],
+    words: [
+      { id: 'pig', word: 'pig', letters: ['p', 'i', 'g'], emoji: '🐷', plate: '#402030' },
+      { id: 'dig', word: 'dig', letters: ['d', 'i', 'g'], emoji: '⛏️', plate: '#3a2818' },
+      { id: 'big', word: 'big', letters: ['b', 'i', 'g'], emoji: '🐘', plate: '#243040' },
+      { id: 'wig', word: 'wig', letters: ['w', 'i', 'g'], emoji: '💇', plate: '#281840' },
+    ],
+  },
+  {
+    id: 'cvc_ot',
+    title: '拼一拼・-ot',
+    blurb: 'pot · hot · cot',
+    cover: '🍲',
+    modes: ['listen', 'match', 'build'],
+    words: [
+      { id: 'pot', word: 'pot', letters: ['p', 'o', 't'], emoji: '🍲', plate: '#3a3010' },
+      { id: 'hot', word: 'hot', letters: ['h', 'o', 't'], emoji: '🥵', plate: '#402010' },
+      { id: 'cot', word: 'cot', letters: ['c', 'o', 't'], emoji: '🛏️', plate: '#1a2a4a' },
+    ],
+  },
+  {
+    id: 'cvc_og',
+    title: '拼一拼・-og',
+    blurb: 'dog · fog · log',
+    cover: '🐶',
+    modes: ['listen', 'match', 'build'],
+    words: [
+      { id: 'dog', word: 'dog', letters: ['d', 'o', 'g'], emoji: '🐶', plate: '#3a3010' },
+      { id: 'fog', word: 'fog', letters: ['f', 'o', 'g'], emoji: '🌫️', plate: '#2a3a50' },
+      { id: 'log', word: 'log', letters: ['l', 'o', 'g'], emoji: '🪵', plate: '#3a2818' },
+    ],
+  },
+  {
     id: 'sight1',
-    title: '常見字・Sight Words',
+    title: '常見字・1',
     blurb: 'I · a · is · my · see · the',
     cover: '👀',
     modes: ['listen'],
@@ -44,6 +136,21 @@ const PHONICS_TOPICS = [
       { id: 'sw_my', word: 'my' },
       { id: 'sw_see', word: 'see' },
       { id: 'sw_the', word: 'the' },
+    ],
+  },
+  {
+    id: 'sight2',
+    title: '常見字・2',
+    blurb: 'to · me · we · go · no · you',
+    cover: '🚶',
+    modes: ['listen'],
+    words: [
+      { id: 'sw_to', word: 'to' },
+      { id: 'sw_me', word: 'me' },
+      { id: 'sw_we', word: 'we' },
+      { id: 'sw_go', word: 'go' },
+      { id: 'sw_no', word: 'no' },
+      { id: 'sw_you', word: 'you' },
     ],
   },
 ];
