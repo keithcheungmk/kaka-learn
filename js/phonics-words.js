@@ -3,8 +3,9 @@
  *  插圖同中文認字 app 一樣用系統 Emoji；字母角色顏色係原創配色（見 LETTER_COLORS），
  *  唔跟任何現成教材／卡通嘅顏色配對。
  *
- *  Phase 2：字母溫習（a–z revision）+ 每個詞族一張主題卡 + 常見字第 2 批。
- *  選詞原則：優先有清晰 emoji；skip fat；digraphs 留 Phase 3。
+ *  Phase 2：字母溫習（a–z revision）+ 每個詞族一張主題卡 + 常見字分批。
+ *  常見字：整詞認讀（listen；有清楚 emoji 先開 match）；唔開 build。
+ *  抽象字（a/is/the/to…）可以唔配圖；動作／顏色／數優先配清晰 emoji。
  */
 
 /** 每個字母固定原創顏色（「卡卡字母隊」角色配色表） */
@@ -51,7 +52,7 @@ const PHONICS_TOPICS = [
   {
     id: 'letters_rev',
     title: '字母溫習',
-    blurb: 'a–z · 撳住聽字母名',
+    blurb: 'a–z · 撳住聽字母音',
     cover: '🔤',
     modes: ['listen'],
     words: LETTER_REVISION.map((ch) => ({
@@ -156,13 +157,13 @@ const PHONICS_TOPICS = [
     title: '常見字・1',
     blurb: 'I · a · is · my · see · the',
     cover: '👀',
-    modes: ['listen'],
+    modes: ['listen', 'match'],
     words: [
-      { id: 'sw_i', word: 'I' },
+      { id: 'sw_i', word: 'I', emoji: '🙋', plate: '#1a3a58' },
       { id: 'sw_a', word: 'a' },
       { id: 'sw_is', word: 'is' },
-      { id: 'sw_my', word: 'my' },
-      { id: 'sw_see', word: 'see' },
+      { id: 'sw_my', word: 'my', emoji: '🧸', plate: '#3a2818' },
+      { id: 'sw_see', word: 'see', emoji: '👀', plate: '#1a2a4a' },
       { id: 'sw_the', word: 'the' },
     ],
   },
@@ -171,14 +172,45 @@ const PHONICS_TOPICS = [
     title: '常見字・2',
     blurb: 'to · me · we · go · no · you',
     cover: '🚶',
-    modes: ['listen'],
+    modes: ['listen', 'match'],
     words: [
       { id: 'sw_to', word: 'to' },
-      { id: 'sw_me', word: 'me' },
-      { id: 'sw_we', word: 'we' },
-      { id: 'sw_go', word: 'go' },
-      { id: 'sw_no', word: 'no' },
-      { id: 'sw_you', word: 'you' },
+      { id: 'sw_me', word: 'me', emoji: '🪞', plate: '#2a3548' },
+      { id: 'sw_we', word: 'we', emoji: '👥', plate: '#1a3050' },
+      { id: 'sw_go', word: 'go', emoji: '🚶', plate: '#143828' },
+      { id: 'sw_no', word: 'no', emoji: '🙅', plate: '#401018' },
+      { id: 'sw_you', word: 'you', emoji: '👆', plate: '#3a3010' },
+    ],
+  },
+  {
+    id: 'sight3',
+    title: '常見字・3・動作',
+    blurb: 'look · up · down · run · jump · play',
+    cover: '🏃',
+    modes: ['listen', 'match'],
+    words: [
+      { id: 'sw_look', word: 'look', emoji: '🔍', plate: '#1a2a4a' },
+      { id: 'sw_up', word: 'up', emoji: '⬆️', plate: '#102848' },
+      { id: 'sw_down', word: 'down', emoji: '⬇️', plate: '#2a1840' },
+      { id: 'sw_run', word: 'run', emoji: '🏃', plate: '#143828' },
+      { id: 'sw_jump', word: 'jump', emoji: '🦘', plate: '#3a3010' },
+      { id: 'sw_play', word: 'play', emoji: '⚽', plate: '#1a4d3a' },
+    ],
+  },
+  {
+    id: 'sight4',
+    title: '常見字・4・顏色數',
+    blurb: 'red · blue · yellow · green · one · two · three',
+    cover: '🔴',
+    modes: ['listen', 'match'],
+    words: [
+      { id: 'sw_red', word: 'red', emoji: '🔴', plate: '#401018' },
+      { id: 'sw_blue', word: 'blue', emoji: '🔵', plate: '#102848' },
+      { id: 'sw_yellow', word: 'yellow', emoji: '🟡', plate: '#3a3010' },
+      { id: 'sw_green', word: 'green', emoji: '🟢', plate: '#143828' },
+      { id: 'sw_one', word: 'one', emoji: '1️⃣', plate: '#1a3a58' },
+      { id: 'sw_two', word: 'two', emoji: '2️⃣', plate: '#2a1840' },
+      { id: 'sw_three', word: 'three', emoji: '3️⃣', plate: '#3a2818' },
     ],
   },
 ];
