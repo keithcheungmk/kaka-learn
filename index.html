@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/styles.css?v=20260723d" />
-  <link rel="stylesheet" href="./css/phonics.css?v=20260723d" />
+  <link rel="stylesheet" href="./css/phonics.css?v=20260724a" />
 </head>
 <body>
   <div id="app">
@@ -172,17 +172,20 @@
     </section>
 
     <!-- 卡卡字母隊：揀主題 -->
-    <section id="screen-phonics-topics" class="screen" aria-label="卡卡字母隊・揀主題">
+    <section id="screen-phonics-topics" class="screen phonics-screen" aria-label="卡卡字母隊・揀主題">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-phonics-topics">← 返去</button>
         <h1>卡卡字母隊</h1>
+      </div>
+      <div class="phonics-hero" aria-hidden="true">
+        <img src="./assets/phonics-hero.jpg" alt="" width="1100" height="733" />
       </div>
       <p class="section-lead">揀一組,先一齊睇字同讀音</p>
       <div class="topic-grid" id="phonics-topic-grid"></div>
     </section>
 
     <!-- 卡卡字母隊：先學一學 -->
-    <section id="screen-phonics-learn" class="screen" aria-label="卡卡字母隊・先學一學">
+    <section id="screen-phonics-learn" class="screen phonics-screen" aria-label="卡卡字母隊・先學一學">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-phonics-learn">← 主題</button>
         <h1 id="phonics-learn-topic-title">先學一學</h1>
@@ -209,7 +212,7 @@
     </section>
 
     <!-- 卡卡字母隊：揀玩法 -->
-    <section id="screen-phonics-play" class="screen" aria-label="卡卡字母隊・揀玩法">
+    <section id="screen-phonics-play" class="screen phonics-screen" aria-label="卡卡字母隊・揀玩法">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-phonics-play">← 再學</button>
         <h1 id="phonics-play-topic-title">去玩玩</h1>
@@ -223,7 +226,7 @@
     </section>
 
     <!-- 卡卡字母隊：聽一聽揀圖 -->
-    <section id="screen-phonics-listen" class="screen" aria-label="卡卡字母隊・聽一聽揀圖">
+    <section id="screen-phonics-listen" class="screen phonics-screen" aria-label="卡卡字母隊・聽一聽揀圖">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-phonics-listen">← 玩法</button>
         <h1>聽一聽</h1>
@@ -237,7 +240,7 @@
     </section>
 
     <!-- 卡卡字母隊：睇圖揀字 -->
-    <section id="screen-phonics-match" class="screen" aria-label="卡卡字母隊・睇圖揀字">
+    <section id="screen-phonics-match" class="screen phonics-screen" aria-label="卡卡字母隊・睇圖揀字">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-phonics-match">← 玩法</button>
         <h1>配一配</h1>
@@ -251,7 +254,7 @@
     </section>
 
     <!-- 卡卡字母隊：砌一砌拼英文 -->
-    <section id="screen-phonics-build" class="screen" aria-label="卡卡字母隊・砌一砌拼英文">
+    <section id="screen-phonics-build" class="screen phonics-screen" aria-label="卡卡字母隊・砌一砌拼英文">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-phonics-build">← 玩法</button>
         <h1>砌一砌</h1>
@@ -358,7 +361,7 @@
   <script src="./js/storage.js?v=20260723d"></script>
   <script src="./js/speech.js?v=20260723d"></script>
   <script src="./js/app.js?v=20260723d"></script>
-  <script src="./js/phonics-words.js?v=20260723d"></script>
-  <script src="./js/phonics-app.js?v=20260723d"></script>
+  <script src="./js/phonics-words.js?v=20260724a"></script>
+  <script src="./js/phonics-app.js?v=20260724a"></script>
 </body>
 </html>
