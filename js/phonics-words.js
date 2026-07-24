@@ -1,9 +1,9 @@
-/** 卡卡字母隊 — English Phonics（Phase 1–2：CVC 詞族 + 常見字）
+/** 卡卡字母隊 — English Phonics（Phase 1–2：字母溫習 + CVC 詞族 + 常見字）
  *  獨立資料檔，唔改動 js/words.js 嘅任何現有內容。
  *  插圖同中文認字 app 一樣用系統 Emoji；字母角色顏色係原創配色（見 LETTER_COLORS），
  *  唔跟任何現成教材／卡通嘅顏色配對。
  *
- *  Phase 2：每個詞族一張主題卡（-at/-an/-ap/-in/-ig/-ot/-og）+ 常見字第 2 批。
+ *  Phase 2：字母溫習（a–z revision）+ 每個詞族一張主題卡 + 常見字第 2 批。
  *  選詞原則：優先有清晰 emoji；skip fat；digraphs 留 Phase 3。
  */
 
@@ -17,7 +17,7 @@ const LETTER_COLORS = {
   b: '#38bdf8',
   r: '#2dd4bf',
   m: '#c4b5fd',
-  // Phase 2
+  // Phase 2 CVC
   n: '#f9a8d4',
   p: '#fdba74',
   i: '#a5f3fc',
@@ -28,10 +28,38 @@ const LETTER_COLORS = {
   f: '#67e8f9',
   v: '#bef264',
   l: '#fde68a',
+  // 字母溫習（a–z 補齊）
+  e: '#fca5a5',
+  j: '#c4b5fd',
+  k: '#5eead4',
+  q: '#f0abfc',
+  s: '#f9a8d4',
+  u: '#93c5fd',
+  x: '#fb923c',
+  y: '#a3e635',
+  z: '#f472b6',
 };
 
-/** 主題：先學再開考；CVC 三玩法，sight words 淨聽一聽 */
+/** 字母溫習順序（a–z；KAKA 已學過，用嚟 revision） */
+const LETTER_REVISION = [
+  'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+  'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+];
+
+/** 主題：字母溫習排最前；跟住 CVC 詞族；sight words */
 const PHONICS_TOPICS = [
+  {
+    id: 'letters_rev',
+    title: '字母溫習',
+    blurb: 'a–z · 撳住聽字母名',
+    cover: '🔤',
+    modes: ['listen'],
+    words: LETTER_REVISION.map((ch) => ({
+      id: `ltr_${ch}`,
+      word: ch,
+      kind: 'letter',
+    })),
+  },
   {
     id: 'cvc_at',
     title: '拼一拼・-at',
@@ -159,6 +187,10 @@ function getPhonicsTopicById(id) {
   return PHONICS_TOPICS.find((t) => t.id === id);
 }
 
+function isLetterItem(item) {
+  return !!(item && item.kind === 'letter');
+}
+
 /** 呢個主題入面所有詞出現過嘅字母（去重，做「砌一砌」字池） */
 function phonicsLetterPool(topic) {
   const set = new Set();
@@ -185,8 +217,10 @@ function letterTileHtml(ch) {
 
 window.KakaPhonicsWords = {
   LETTER_COLORS,
+  LETTER_REVISION,
   PHONICS_TOPICS,
   getPhonicsTopicById,
+  isLetterItem,
   phonicsLetterPool,
   phonicsWordIllustHtml,
   letterTileHtml,

@@ -8,7 +8,7 @@
     return;
   }
 
-  const { PHONICS_TOPICS, getPhonicsTopicById, phonicsLetterPool, phonicsWordIllustHtml, letterTileHtml } =
+  const { PHONICS_TOPICS, getPhonicsTopicById, phonicsLetterPool, phonicsWordIllustHtml, letterTileHtml, isLetterItem } =
     window.KakaPhonicsWords;
   const { loadState } = window.KakaStorage;
   const {
@@ -230,25 +230,37 @@
     const term = $('#phonics-learn-term');
     const lettersRow = $('#phonics-learn-letters');
     const progress = $('#phonics-learn-progress');
+    const lead = $('#screen-phonics-learn .section-lead');
+    const isLetter = typeof isLetterItem === 'function' ? isLetterItem(word) : word.kind === 'letter';
 
-    if (illust) illust.innerHTML = word.emoji ? phonicsWordIllustHtml(word) : '';
-    if (term) term.textContent = word.word;
-    if (lettersRow) {
-      lettersRow.innerHTML = word.letters
-        ? word.letters
-            .map(
-              (ch) =>
-                `<button type="button" class="letter-tile" data-letter="${ch}" aria-label="letter ${ch}">${letterTileHtml(ch)}</button>`,
-            )
-            .join('')
-        : '';
-      lettersRow.querySelectorAll('.letter-tile').forEach((tile) => {
-        tile.addEventListener('click', (ev) => {
-          ev.preventDefault();
-          ev.stopPropagation();
-          speakEnglishTerm(tile.dataset.letter, { muted: isMuted() });
+    if (isLetter) {
+      if (illust) {
+        illust.innerHTML = `<span class="letter-tile letter-tile-lg" aria-hidden="true">${letterTileHtml(word.word)}</span>`;
+      }
+      if (term) term.textContent = word.word;
+      if (lettersRow) lettersRow.innerHTML = '';
+      if (lead) lead.textContent = '睇吓字母，撳喇叭聽字母名（溫習）';
+    } else {
+      if (illust) illust.innerHTML = word.emoji ? phonicsWordIllustHtml(word) : '';
+      if (term) term.textContent = word.word;
+      if (lettersRow) {
+        lettersRow.innerHTML = word.letters
+          ? word.letters
+              .map(
+                (ch) =>
+                  `<button type="button" class="letter-tile" data-letter="${ch}" aria-label="letter ${ch}">${letterTileHtml(ch)}</button>`,
+              )
+              .join('')
+          : '';
+        lettersRow.querySelectorAll('.letter-tile').forEach((tile) => {
+          tile.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            ev.stopPropagation();
+            speakEnglishTerm(tile.dataset.letter, { muted: isMuted() });
+          });
         });
-      });
+      }
+      if (lead) lead.textContent = '睇吓字同圖,撳喇叭聽英文讀音';
     }
     if (progress) progress.textContent = `${pLearnIndex + 1}/${pLearnWords.length}`;
 
@@ -367,6 +379,16 @@
     const optionCount = Math.min(4, pool.length);
     const options = shuffle([target, ...sampleOthers(pool, target.id, optionCount - 1)]);
     pListenRound = { target, options };
+    const isLetter = typeof isLetterItem === 'function' ? isLetterItem(target) : target.kind === 'letter';
+
+    const prompt = $('#screen-phonics-listen .prompt-box p');
+    if (prompt) {
+      prompt.innerHTML = isLetter
+        ? '聽字母讀音，再揀啱嘅<strong>字母</strong>'
+        : target.emoji
+          ? '聽英文讀音,再揀啱嘅<strong>圖畫</strong>'
+          : '聽英文讀音,再揀啱嘅<strong>英文字</strong>';
+    }
 
     const fb = $('#phonics-listen-feedback');
     if (fb) {
@@ -380,11 +402,18 @@
       options.forEach((word) => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = word.emoji ? 'word-card' : 'word-card word-card-chars';
+        const itemIsLetter = typeof isLetterItem === 'function' ? isLetterItem(word) : word.kind === 'letter';
+        if (itemIsLetter) {
+          btn.className = 'word-card word-card-letter';
+          btn.innerHTML = `<span class="letter-tile letter-tile-card">${letterTileHtml(word.word)}</span>`;
+        } else if (word.emoji) {
+          btn.className = 'word-card';
+          btn.innerHTML = `<span class="illust">${phonicsWordIllustHtml(word)}</span>`;
+        } else {
+          btn.className = 'word-card word-card-chars';
+          btn.innerHTML = `<span class="term term-only term-en">${word.word}</span>`;
+        }
         btn.dataset.id = word.id;
-        btn.innerHTML = word.emoji
-          ? `<span class="illust">${phonicsWordIllustHtml(word)}</span>`
-          : `<span class="term term-only term-en">${word.word}</span>`;
         btn.setAttribute('aria-label', word.word);
         btn.addEventListener('click', () => onPhonicsListenPick(word.id, btn));
         grid.appendChild(btn);

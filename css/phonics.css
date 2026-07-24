@@ -140,6 +140,51 @@
   height: clamp(44px, 12vw, 56px);
 }
 
+/* 字母溫習：學習頁大粒活字母 */
+.letter-tile-lg {
+  width: min(160px, 42vw);
+  height: min(160px, 42vw);
+  display: block;
+  margin: 0 auto;
+}
+
+.letter-tile-lg .letter-glyph {
+  font-size: clamp(3.2rem, 14vw, 4.8rem);
+  border-radius: 28px;
+}
+
+.letter-tile-lg .eye {
+  width: 12px;
+  height: 12px;
+  top: 28%;
+}
+
+.letter-tile-lg .mouth {
+  width: 28px;
+  height: 12px;
+  bottom: 28%;
+  border-bottom-width: 3.5px;
+}
+
+/* 聽一聽：揀字母卡 */
+.word-card-letter {
+  min-height: 132px;
+  padding: 16px;
+}
+
+.word-card-letter .letter-tile-card {
+  width: min(88px, 22vw);
+  height: min(88px, 22vw);
+  display: block;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+.word-card-letter .letter-tile-card .letter-glyph {
+  font-size: clamp(2rem, 8vw, 2.8rem);
+  border-radius: 18px;
+}
+
 /* 「砌一砌」字池／已放好嘅格：letter-tile 要有固定大細先撐得起 letter-glyph 嘅 100% */
 .build-pool .build-tile.letter-tile,
 .build-slot .build-placed.letter-tile {
