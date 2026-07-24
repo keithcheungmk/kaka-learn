@@ -346,14 +346,9 @@ function speakCurrentLearn() {
   if (learnPairMode) {
     const pair = learnPairs[learnIndex];
     if (!pair) return;
-    // 自動先讀左邊（大／多…），再讀右邊相反詞
-    speakTerm(pair.left.term, {
-      muted: state.muted,
-      onEnd: () => {
-        setTimeout(() => {
-          speakTerm(pair.right.term, { muted: loadState().muted });
-        }, 280);
-      },
+    // 自動先讀左邊（大／多…），再讀右邊相反詞（speakThen 有時長後備）
+    speakThen(pair.left.term, { muted: state.muted }, () => {
+      speakTerm(pair.right.term, { muted: loadState().muted });
     });
     return;
   }
