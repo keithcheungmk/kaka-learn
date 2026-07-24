@@ -306,6 +306,17 @@ const WORDS = [
   { id: 'xiexie', term: '謝謝', isDeer: false, emoji: '🙏', badge: '', plate: '#3a3010' },
   { id: 'laoshi', term: '老師', isDeer: false, emoji: '👩‍🏫', badge: '', plate: '#102848' },
   { id: 'shu_book', term: '書', isDeer: false, emoji: '📕', badge: '', plate: '#401820' },
+  // 相反／空間（主題 opposites；大／小／多／少／上／下同紅輯共用）
+  { id: 'chang_long', term: '長', isDeer: false, emoji: '📏', badge: '長', plate: '#1a3050' },
+  { id: 'duan_short', term: '短', isDeer: false, emoji: '✏️', badge: '短', plate: '#3a3010' },
+  { id: 'gao_tall', term: '高', isDeer: false, emoji: '🦒', badge: '高', plate: '#3a3010' },
+  { id: 'ai_short_height', term: '矮', isDeer: false, emoji: '🐣', badge: '矮', plate: '#402038' },
+  { id: 'qian_front', term: '前', isDeer: false, emoji: '🚶', badge: '前', plate: '#143828' },
+  { id: 'hou_back', term: '後', isDeer: false, emoji: '🔙', badge: '後', plate: '#2a2a35' },
+  { id: 'zuo_left', term: '左', isDeer: false, emoji: '👈', badge: '', plate: '#102848' },
+  { id: 'you_right', term: '右', isDeer: false, emoji: '👉', badge: '', plate: '#401820' },
+  { id: 'limian', term: '裏面', isDeer: false, emoji: '🏠', badge: '裏', plate: '#1a3050' },
+  { id: 'waimian', term: '外面', isDeer: false, emoji: '🚪', badge: '外', plate: '#0f3550' },
 ];
 
 /** 主題：先學再開考 */
@@ -340,6 +351,18 @@ const TOPICS = [
     blurb: '紅色黃色藍色綠色白色黑色紫色粉紅橙色咖啡色',
     cover: '🎨',
     wordIds: ['hong', 'huang', 'lan', 'lv', 'bai', 'hei', 'zi', 'fenhong', 'chengse', 'kafeise'],
+  },
+  {
+    id: 'opposites',
+    title: '相反位置',
+    blurb: '大細多少、長短高矮、上下前後左右、裏面外面',
+    cover: '↕️',
+    wordIds: [
+      'da_big', 'xiao_small', 'duo', 'shao',
+      'chang_long', 'duan_short', 'gao_tall', 'ai_short_height',
+      'shang', 'xia', 'qian_front', 'hou_back', 'zuo_left', 'you_right',
+      'limian', 'waimian',
+    ],
   },
   {
     id: 'weather',
