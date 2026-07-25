@@ -210,5 +210,5 @@ assets/math/              # 數理專用圖（可後加）
 ## Agent 工作方式
 
 - **規格／討論**：以本檔 + `AGENTS.md`「數學（故障隔離）」為準。  
-- **實作**：另開 branch（如 `cursor/math-mvp-…`），`math-*.js`／`math.css`／landing 入口；初始化必須容錯。  
-- **預覽**：Cloud Agent 環境會起 `python3 -m http.server 5173`（見 `.cursor/environment.json`）。
+- **實作進度**：見 `docs/math-build-plan.md`。Phase A（hub 骨架）已開工；下一刀 Phase B＝數數星可玩。
+- **預覽**：Cloud Agent 環境會起 `python3 -m http.server 5173`；主頁撳「小鹿數理探險」。
