@@ -23,7 +23,7 @@
     }
 
     const { loadState, updateState, isPlanetLit } = window.KakaMathStorage;
-    const { MATH_PLANETS, getPlanetById, getNextPlanetId } = window.KakaMathSkills;
+    const { MATH_PLANETS, getPlanetById, getNextPlanetId, planetGlobeHtml } = window.KakaMathSkills;
 
     const $ = (sel, root = document) => root.querySelector(sel);
 
@@ -48,17 +48,23 @@
     function applyPlanetTheme(planet) {
       const hub = $('#screen-math-hub');
       if (hub) hub.style.setProperty('--math-planet', planet.color);
+
       const ball = $('#math-planet-ball');
       if (ball) {
-        ball.textContent = planet.emoji;
-        ball.classList.toggle('is-lit', isPlanetLit(planet.id));
+        const lit = isPlanetLit(planet.id) ? ' is-lit' : '';
+        ball.className = `math-globe-wrap math-globe-wrap--${planet.body}${lit}`;
+        ball.innerHTML = `<span class="math-globe math-globe--${planet.body}"></span>`;
       }
+
       const title = $('#math-hub-planet-name');
       if (title) title.textContent = planet.name;
+
       const blurb = $('#math-hub-blurb');
       if (blurb) blurb.textContent = planet.blurb;
+
       const skill = $('#math-hub-skill');
-      if (skill) skill.textContent = planet.skill;
+      if (skill) skill.textContent = `學：${planet.skill}`;
+
       const scarf = $('#math-deer-scarf');
       if (scarf) scarf.style.background = planet.color;
     }
@@ -89,15 +95,21 @@
       const grid = $('#math-galaxy-grid');
       if (!grid) return;
       const state = loadState();
+      grid.classList.add('math-galaxy-grid');
       grid.innerHTML = '';
       [...MATH_PLANETS]
         .sort((a, b) => a.order - b.order)
         .forEach((p) => {
+          const lit = isPlanetLit(p.id, state);
           const btn = document.createElement('button');
           btn.type = 'button';
-          btn.className = 'topic-card';
-          btn.style.setProperty('--math-planet', p.color);
-          btn.innerHTML = `<span class="topic-emoji" aria-hidden="true">${p.emoji}</span><span class="topic-name">${p.name}</span><span class="topic-count">${isPlanetLit(p.id, state) ? '已點亮' : p.skill}</span>`;
+          btn.className = `math-galaxy-card${lit ? ' is-lit' : ''}`;
+          btn.setAttribute('aria-label', `${p.name}，學${p.skill}`);
+          btn.innerHTML = `
+            ${planetGlobeHtml(p, lit ? 'is-lit' : '')}
+            <span class="math-galaxy-name">${p.name}</span>
+            <span class="math-galaxy-skill">${lit ? '已點亮・' : ''}${p.skill}</span>
+          `;
           btn.addEventListener('click', () => {
             updateState({ currentPlanetId: p.id });
             openHub();
@@ -124,9 +136,10 @@
       const launch = $('#btn-math-launch');
       launch?.addEventListener('click', () => {
         const note = $('#math-hub-coming');
+        const planet = getPlanetById(loadState().currentPlanetId);
         if (note) {
           note.hidden = false;
-          note.textContent = '數數星玩法即將開放，而家可以睇旅程先！';
+          note.textContent = `${planet.name}玩法即將開放，而家可以睇旅程先！`;
         }
       });
     }

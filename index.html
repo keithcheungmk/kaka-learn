@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/styles.css?v=20260724j" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260724e" />
-  <link rel="stylesheet" href="./css/math.css?v=20260725a" />
+  <link rel="stylesheet" href="./css/math.css?v=20260725b" />
 </head>
 <body>
   <div id="app">
@@ -295,7 +295,9 @@
       </div>
       <div class="math-hub">
         <div class="math-planet-stage">
-          <div class="math-planet" id="math-planet-ball" aria-hidden="true">🔢</div>
+          <div id="math-planet-ball" class="math-globe-wrap math-globe-wrap--mercury" aria-hidden="true">
+            <span class="math-globe math-globe--mercury"></span>
+          </div>
           <div class="math-deer-guide" aria-hidden="true">
             <div class="math-deer-body">
               <div class="math-deer-face"><i></i><i></i></div>
@@ -304,13 +306,13 @@
             </div>
           </div>
         </div>
-        <h2 class="math-hub-title" id="math-hub-planet-name">數數星</h2>
-        <p class="math-hub-blurb" id="math-hub-blurb">數吓有幾多粒</p>
+        <h2 class="math-hub-title" id="math-hub-planet-name">水星</h2>
+        <p class="math-hub-blurb" id="math-hub-blurb">喺水星學數數：數吓有幾多粒</p>
         <div class="math-hub-meta">
-          <span class="math-chip" id="math-hub-skill">數數</span>
+          <span class="math-chip" id="math-hub-skill">學：數數</span>
           <span class="math-chip" id="math-hub-stars">今日 ★ 0 / 10</span>
           <span class="math-chip" id="math-hub-lit">已點亮 0 / 8</span>
-          <span class="math-chip" id="math-hub-next">下一粒：多少星</span>
+          <span class="math-chip" id="math-hub-next">下一粒：金星</span>
         </div>
         <div class="btn-row">
           <button type="button" class="btn" id="btn-math-launch">出發</button>
@@ -326,8 +328,8 @@
         <h1>銀河旅程</h1>
         <div class="progress-pill" aria-hidden="true"><strong>8</strong></div>
       </div>
-      <p class="section-lead">撳一粒星球，就去嗰度（唔使跟住次序）</p>
-      <div class="topic-grid" id="math-galaxy-grid"></div>
+      <p class="section-lead">太陽系八大行星：撳一粒就去嗰度學（唔使跟住次序）</p>
+      <div class="topic-grid math-galaxy-grid" id="math-galaxy-grid"></div>
     </section>
   </div>
 
@@ -422,8 +424,8 @@
   <script src="./js/app.js?v=20260724j"></script>
   <script src="./js/phonics-words.js?v=20260724i"></script>
   <script src="./js/phonics-app.js?v=20260724i"></script>
-  <script src="./js/math-storage.js?v=20260725a"></script>
-  <script src="./js/math-skills.js?v=20260725a"></script>
-  <script src="./js/math-app.js?v=20260725a"></script>
+  <script src="./js/math-storage.js?v=20260725b"></script>
+  <script src="./js/math-skills.js?v=20260725b"></script>
+  <script src="./js/math-app.js?v=20260725b"></script>
 </body>
 </html>
