@@ -1,9 +1,26 @@
 # 小鹿數理探險 — 產品大綱與風格（Phase 0）
 
-給 KAKA（約 4 歲／升 K2）嘅數學＋邏輯模組規格。  
-**本檔係規格，未實作遊戲畫面。** 實作時沿用 `kaka-learn` 單頁殼，同「認字」「卡卡字母隊」並列。
+給 KAKA（約 4 歲／升 K2）嘅**獨立**數學＋邏輯學習頁規格。  
+**本檔係規格，未實作遊戲畫面。**
 
 參考（教學邏輯，唔抄產品形態）：[KooBits 香港](https://www.koobits.com/hk) — 短每日節奏、CPA、獎勵、由淺入深。
+
+---
+
+## 硬性分離（同認字／字母隊永遠分開）
+
+數理**唔係**認字 App 或多一個「模式」，亦**唔好**再走字母隊咁嵌進同一個 `index.html` 主循環。要有機制令三者長期分開：
+
+| 層面 | 規則 |
+|------|------|
+| **頁面／入口** | 獨立頁（建議 `math.html` 或 `math/index.html`）。認字主頁最多放「去數理」外連；數理頁唔載入認字／字母隊 game screens。 |
+| **程式** | 只用 `js/math-*.js`、`css/math.css`（及數理專用 assets）。**禁止** import／呼叫 `words.js`、`app.js`、`phonics-*.js` 嘅題目／畫面邏輯。可共用嘅只有真正無關遊戲嘅薄工具（例如之後抽出嘅 TTS helper）；預設寧願數理自帶 `math-speech`／自複用，都唔好同認字 state 綁死。 |
+| **資料** | 獨立 `localStorage` 鍵（例如 `kaka-math-v1`）：星球進度、數理星星、數理家長設定。**唔寫入** `kaka-learn-v1`。認字每日星星同數理每日星星分開計。 |
+| **家長鎖** | 數理可自設 PIN（預設可同 `1234` 方便屋企），但存喺數理自己嘅 storage；唔同認字 PIN state 共用同一個 object。 |
+| **視覺／角色** | 數理專用更 Q 小鹿、八色星球、獨立動畫；唔複用認字 hero 鹿 DOM／字母隊 letter-tile 系統。 |
+| **Agent／PR** | 改數理只動數理檔同本 brief／AGENTS 相關段；唔好喺同一個 feature PR 撈埋改認字主題或 phonics 詞庫。反之亦然。 |
+
+一句：**三個學習面（認字｜字母隊｜數理）＝三套產品邊界**；同 repo 只係方便部署，唔代表同一個 App 狀態機。
 
 ---
 
@@ -20,13 +37,11 @@
 
 ## 網頁大綱（資訊架構）
 
-沿用已驗證流程，數學做第三個入口；**進度隱喻＝溫柔星球旅程**（軟解鎖，可返舊星）。
+數理自己嘅單頁 App；**進度隱喻＝溫柔星球旅程**（軟解鎖，可返舊星）。認字主頁若加入口，只係連去呢頁。
 
 ```
-主頁
- ├─ 認字（現有）
- ├─ 卡卡字母隊（現有）
- └─ 小鹿數理探險（新）
+math.html（獨立）
+ └─ 小鹿數理探險
       ├─ 太空站 hub（而家呢粒星球為大；下一個淡示；可睇旅程）
       ├─ 登陸星球 → 先學一學（CPA：卡通物件 + 粵語短講）
       ├─ 去玩玩
@@ -45,11 +60,11 @@
 3. **`screen-math-learn`** — 先學：中央大視覺、🔊 再聽、上一張／下一張
 4. **`screen-math-play`** — 揀玩法（大掣）
 5. **`screen-math-listen` / `count` / `sort`** — 各玩法一屏
-6. 共用：頂欄返去、星星面板、溫柔 feedback、過關飛行動畫層
+6. 數理自用：頂欄返 hub、數理星星面板、溫柔 feedback、過關飛行動畫層
 
-家長區（後加）：開關技能／星球、面試模式、每日上限沿用現有星星。  
+家長區（數理頁內，後加）：開關技能／星球、面試模式、數理每日星星上限（可同樣 10，但計數獨立）。  
 **過關條件（幼齡）：** 喺該星答啱約 5 題或完成一輪玩即可點亮；唔設正確率門檻。  
-**進度分開：** 每日星星（AEON）≠ 星球點亮（長期 `localStorage`）；唔用星星買關卡。
+**進度：** 星球點亮同數理星星都只存 `kaka-math-v1`；唔用星星買關卡。
 
 ---
 
@@ -163,14 +178,17 @@
 ## 建議檔案（實作時）
 
 ```
+math.html                 # 數理獨立入口（唔塞進認字 index 主循環）
 css/math.css
-js/math-skills.js   # 技能／題型資料
-js/math-app.js      # 畫面循環
-index.html          # 主頁入口 + math screens
-docs/math-brief.md  # 本檔
+js/math-storage.js        # localStorage 鍵 kaka-math-v1
+js/math-skills.js         # 技能／題型資料
+js/math-app.js            # 數理畫面循環
+js/math-speech.js         # 可自用或薄包一層；唔依賴認字 app state
+docs/math-brief.md        # 本檔
+assets/math/              # 數理專用圖（可後加）
 ```
 
-共用：`storage.js`（星星／PIN）、`speech.js`（粵語）。
+認字 `index.html` 若加入口：只係 `<a href="./math.html">` 之類外連，唔共享 screen state。
 
 ---
 
@@ -179,12 +197,13 @@ docs/math-brief.md  # 本檔
 - 無登入、廣告、追蹤、真實付款  
 - 無完整小學課程／操卷訂閱平台  
 - Phase 1 無計時考試、無羞恥 ranking  
+- **唔同認字／字母隊共用遊戲狀態機、題庫、星星計數、PIN object**  
 - 業務筆記可放 `keith-ops`；遊戲 code 只喺本 repo  
 
 ---
 
 ## Agent 工作方式
 
-- **規格／討論**：以本檔 + `AGENTS.md`「數學模組」為準。  
-- **實作**：另開 branch（如 `cursor/math-mvp-…`），先技能資料同空畫面骨架，再逐個玩法。  
-- **預覽**：Cloud Agent 環境會起 `python3 -m http.server 5173`（見 `.cursor/environment.json`）。
+- **規格／討論**：以本檔 + `AGENTS.md`「數學（獨立頁）」為準。  
+- **實作**：另開 branch（如 `cursor/math-mvp-…`），先獨立 `math.html` 骨架，再逐個玩法；**唔好**仿字母隊把 screens 併入 `index.html`。  
+- **預覽**：Cloud Agent 環境會起 `python3 -m http.server 5173`（見 `.cursor/environment.json`）；開 `/math.html`。

@@ -50,23 +50,27 @@ python3 -m http.server 5173
 
 | 檔案 | 職責 |
 |------|------|
-| `index.html` | 畫面骨架（主頁、認字／字母隊／家長／PIN modal；數學入口待加） |
+| `index.html` | 認字＋字母隊畫面骨架（家長／PIN）；**唔再把數理 screens 併入呢度** |
 | `js/words.js` | 字詞資料 + 系統 Emoji 插圖（iPhone Apple Color Emoji） |
 | `js/phonics-words.js` / `js/phonics-app.js` | 卡卡字母隊 |
-| `js/storage.js` | `localStorage`：星星、PIN、設定 |
+| `js/storage.js` | `localStorage` 鍵 `kaka-learn-v1`：認字／字母隊星星、PIN、設定 |
 | `js/speech.js` | `speechSynthesis`（優先 `zh-HK`）+ Web Audio 短音 |
 | `js/app.js` | 認字模式循環、家長區、星星動畫 |
 | `css/styles.css` | 太空／小鹿視覺、大 tap target |
 | `css/phonics.css` | 字母隊氛圍層 |
-| `docs/math-brief.md` | **小鹿數理探險**產品大綱／風格／Phase 1 技能（規格；未實作） |
+| `math.html` + `js/math-*.js` + `css/math.css` | **小鹿數理探險（獨立頁；待實作）** |
+| `docs/math-brief.md` | 數理產品大綱／風格／**硬性分離**規則 |
 
-## 數學模組（小鹿數理探險）
+## 數學（小鹿數理探險）— 必須同認字／字母隊分離
 
 - 規格以 `docs/math-brief.md` 為準；未寫明前唔好實作完整小學課程或操卷平台。
-- 放喺本 repo 第三入口（同字母隊一樣），獨立 `css/math.css` + `js/math-*.js`；共用星星／PIN／粵語 TTS。
+- **獨立頁**（`math.html` 等），獨立 `css/math.css` + `js/math-*.js` + `kaka-math-v1` storage。**禁止**把數理嵌進 `index.html` 主循環（唔好再複製字母隊嘅合併方式）。
+- **禁止**數理依賴 `words.js`／`app.js`／`phonics-*` 題目或畫面邏輯；認字／字母隊亦唔好讀寫 `kaka-math-v1`。
+- 星星、PIN、星球進度只存數理自己嘅 storage；同 `kaka-learn-v1` 分開。
 - Phase 1 只打底：數數、比較、形狀、分類、規律、位置、序數；**面試小試**屬 Phase 2+，要家長開關。
 - 教學借 CPA（具體物／圖 → 好遲先符號）；每日短 session；答錯溫柔、無羞恥。
-- 視覺：同一小鹿太空宇宙，但數理更彩、更卡通——八色技能星球＋**數理專用更 Q 導遊小鹿**（圓潤大臉，唔直接複用主頁鹿）＋短飛行動畫；獨立 `math.css`。每屏以當前星球主色為主 + 金星塵；唔另起品牌、唔抄迪士尼／彼思／外部平台角色；唔硬鎖關、唔用星星買關卡。
+- 視覺：同一小鹿太空宇宙，但數理更彩、更卡通——八色技能星球＋**數理專用更 Q 導遊小鹿**（圓潤大臉，唔直接複用主頁鹿）＋短飛行動畫。每屏以當前星球主色為主 + 金星塵；唔另起品牌、唔抄迪士尼／彼思／外部平台角色；唔硬鎖關、唔用星星買關卡。
+- Agent：數理 feature PR 唔好順便改認字主題／phonics 詞庫；反之亦然。
 
 ## 改動時注意
 
