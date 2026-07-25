@@ -445,9 +445,134 @@
   color: var(--gold-soft);
 }
 
+/* ---------- 水星・數數學習／測驗 ---------- */
+.math-screen .btn-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: min(100%, 420px);
+  margin: 12px auto 0;
+}
+
+.math-learn-stage {
+  appearance: none;
+  border: 2px solid rgba(253, 230, 138, 0.35);
+  background: rgba(18, 40, 72, 0.72);
+  border-radius: var(--radius);
+  color: var(--ink);
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 18px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  touch-action: manipulation;
+  box-shadow: var(--shadow);
+}
+
+.math-learn-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 10vw, 4rem);
+  font-weight: 700;
+  color: var(--gold-soft);
+  line-height: 1;
+}
+
+.math-count-field {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 10px;
+  min-height: 120px;
+  width: 100%;
+  padding: 8px;
+}
+
+.math-count-field--quiz {
+  min-height: 150px;
+  margin: 8px 0 4px;
+  background: rgba(18, 40, 72, 0.55);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.math-count-dot {
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  line-height: 1;
+  animation: math-count-pop 0.35s ease both;
+}
+
+@keyframes math-count-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.math-num-bubbles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin: 16px 0 8px;
+}
+
+.math-num-bubble {
+  appearance: none;
+  border: none;
+  width: clamp(72px, 18vw, 96px);
+  height: clamp(72px, 18vw, 96px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.45), transparent 42%),
+    var(--math-planet, #b6bcc4);
+  color: #1a1f2c;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 6vw, 2.4rem);
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
+}
+
+.math-num-bubble:active {
+  transform: scale(0.94);
+}
+
+.math-num-bubble.is-ok {
+  animation: popOk 0.45s ease;
+}
+
+.math-num-bubble.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+#screen-math-learn.math-screen.active,
+#screen-math-play.math-screen.active,
+#screen-math-count.math-screen.active {
+  --math-planet: #b6bcc4;
+}
+
+#screen-math-learn.math-screen.active::before,
+#screen-math-play.math-screen.active::before,
+#screen-math-count.math-screen.active::before {
+  background:
+    radial-gradient(900px 500px at 50% 18%, color-mix(in srgb, var(--math-planet, #b6bcc4) 22%, transparent), transparent 58%),
+    linear-gradient(180deg, rgba(7, 21, 38, 0.55) 0%, rgba(7, 21, 38, 0.72) 100%),
+    url("../assets/math/galaxy-bg.jpg") center 40% / cover no-repeat;
+}
+
 @media (prefers-reduced-motion: reduce) {
   #math-planet-ball.math-globe-wrap,
-  .math-deer-guide {
+  .math-deer-guide,
+  .math-count-dot {
     animation: none;
   }
 }
