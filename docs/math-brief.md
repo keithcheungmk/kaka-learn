@@ -1,26 +1,29 @@
 # 小鹿數理探險 — 產品大綱與風格（Phase 0）
 
-給 KAKA（約 4 歲／升 K2）嘅**獨立**數學＋邏輯學習頁規格。  
+給 KAKA（約 4 歲／升 K2）嘅數學＋邏輯學習規格（同認字／字母隊**故障隔離**，可共用 landing）。  
 **本檔係規格，未實作遊戲畫面。**
 
 參考（教學邏輯，唔抄產品形態）：[KooBits 香港](https://www.koobits.com/hk) — 短每日節奏、CPA、獎勵、由淺入深。
 
 ---
 
-## 硬性分離（同認字／字母隊永遠分開）
+## 硬性分離＝故障隔離（可共用 landing）
 
-數理**唔係**認字 App 或多一個「模式」，亦**唔好**再走字母隊咁嵌進同一個 `index.html` 主循環。要有機制令三者長期分開：
+三個學習面（認字｜英文 phonics｜數理）**可以共用同一個 landing／主頁**（例如 `index.html` 三個入口）。  
+核心唔係拆網站，而係：**一個 app 有 bug，唔好令另外兩個一齊壞。**
 
 | 層面 | 規則 |
 |------|------|
-| **頁面／入口** | 獨立頁（建議 `math.html` 或 `math/index.html`）。認字主頁最多放「去數理」外連；數理頁唔載入認字／字母隊 game screens。 |
-| **程式** | 只用 `js/math-*.js`、`css/math.css`（及數理專用 assets）。**禁止** import／呼叫 `words.js`、`app.js`、`phonics-*.js` 嘅題目／畫面邏輯。可共用嘅只有真正無關遊戲嘅薄工具（例如之後抽出嘅 TTS helper）；預設寧願數理自帶 `math-speech`／自複用，都唔好同認字 state 綁死。 |
-| **資料** | 獨立 `localStorage` 鍵（例如 `kaka-math-v1`）：星球進度、數理星星、數理家長設定。**唔寫入** `kaka-learn-v1`。認字每日星星同數理每日星星分開計。 |
-| **家長鎖** | 數理可自設 PIN（預設可同 `1234` 方便屋企），但存喺數理自己嘅 storage；唔同認字 PIN state 共用同一個 object。 |
-| **視覺／角色** | 數理專用更 Q 小鹿、八色星球、獨立動畫；唔複用認字 hero 鹿 DOM／字母隊 letter-tile 系統。 |
-| **Agent／PR** | 改數理只動數理檔同本 brief／AGENTS 相關段；唔好喺同一個 feature PR 撈埋改認字主題或 phonics 詞庫。反之亦然。 |
+| **入口** | 共用 landing 只做導航；各自進入自己嘅 screen 流程。 |
+| **執行邊界** | 分開 script（`app.js`、`phonics-app.js`、`math-app.js`），各自 IIFE／模組初始化。任一檔 load 或 runtime error 要用 `try/catch` 包住；失敗只停用該入口，**唔好** throw 弄死成頁。 |
+| **狀態** | 三套遊戲 state 互唔寫。數理自用 object + `kaka-math-v1`；唔讀寫認字／phonics 內部 state。 |
+| **DOM** | `screen-math-*` 前綴；唔改對方 screen 節點。Landing／殼可共用。 |
+| **依賴** | 數理唔呼叫認字／phonics 題目或畫面 API。共用只限無遊戲狀態嘅薄工具（如純 TTS）；共用層要穩，單一 app 可降級。 |
+| **資料鍵** | 認字／字母隊：`kaka-learn-v1`。數理：`kaka-math-v1`。清一個唔應默認清冧另一個。 |
+| **視覺** | 數理專用更 Q 小鹿、八色星球、`math.css`；唔綁死認字 hero 鹿／字母磚系統。 |
+| **Agent／PR** | 修 bug 只動出事嗰個 app；回歸抽查：壞模組失敗時，另外兩個入口仍可進入。 |
 
-一句：**三個學習面（認字｜字母隊｜數理）＝三套產品邊界**；同 repo 只係方便部署，唔代表同一個 App 狀態機。
+一句：**共用門廊，分開房間；一間漏水，另外兩間仍然乾淨。**
 
 ---
 
@@ -37,11 +40,13 @@
 
 ## 網頁大綱（資訊架構）
 
-數理自己嘅單頁 App；**進度隱喻＝溫柔星球旅程**（軟解鎖，可返舊星）。認字主頁若加入口，只係連去呢頁。
+共用 landing；數理自己嘅 screen 樹同 state。**進度隱喻＝溫柔星球旅程**（軟解鎖，可返舊星）。
 
 ```
-math.html（獨立）
- └─ 小鹿數理探險
+index.html（共用 landing）
+ ├─ 認字 …
+ ├─ 卡卡字母隊 …
+ └─ 小鹿數理探險（獨立 state／script）
       ├─ 太空站 hub（而家呢粒星球為大；下一個淡示；可睇旅程）
       ├─ 登陸星球 → 先學一學（CPA：卡通物件 + 粵語短講）
       ├─ 去玩玩
@@ -60,9 +65,9 @@ math.html（獨立）
 3. **`screen-math-learn`** — 先學：中央大視覺、🔊 再聽、上一張／下一張
 4. **`screen-math-play`** — 揀玩法（大掣）
 5. **`screen-math-listen` / `count` / `sort`** — 各玩法一屏
-6. 數理自用：頂欄返 hub、數理星星面板、溫柔 feedback、過關飛行動畫層
+6. 數理自用：頂欄返 hub／landing、數理進度、溫柔 feedback、過關飛行動畫層
 
-家長區（數理頁內，後加）：開關技能／星球、面試模式、數理每日星星上限（可同樣 10，但計數獨立）。  
+家長區（可掛共用家長殼，但數理設定寫入 `kaka-math-v1`）：開關技能／星球、面試模式、數理每日星星（可同樣上限 10，計數獨立）。  
 **過關條件（幼齡）：** 喺該星答啱約 5 題或完成一輪玩即可點亮；唔設正確率門檻。  
 **進度：** 星球點亮同數理星星都只存 `kaka-math-v1`；唔用星星買關卡。
 
@@ -178,17 +183,16 @@ math.html（獨立）
 ## 建議檔案（實作時）
 
 ```
-math.html                 # 數理獨立入口（唔塞進認字 index 主循環）
-css/math.css
+index.html                # 共用 landing；加數理入口 + screen-math-* 區塊
+css/math.css              # 數理專用樣式（唔改壞認字／phonics 選擇器）
 js/math-storage.js        # localStorage 鍵 kaka-math-v1
 js/math-skills.js         # 技能／題型資料
-js/math-app.js            # 數理畫面循環
-js/math-speech.js         # 可自用或薄包一層；唔依賴認字 app state
+js/math-app.js            # 數理畫面循環（IIFE + try/catch 初始化）
 docs/math-brief.md        # 本檔
 assets/math/              # 數理專用圖（可後加）
 ```
 
-認字 `index.html` 若加入口：只係 `<a href="./math.html">` 之類外連，唔共享 screen state。
+`math-app.js` 同 `app.js`／`phonics-app.js` 平行載入；數理掛掉時認字／字母隊入口仍要可用。
 
 ---
 
@@ -197,13 +201,13 @@ assets/math/              # 數理專用圖（可後加）
 - 無登入、廣告、追蹤、真實付款  
 - 無完整小學課程／操卷訂閱平台  
 - Phase 1 無計時考試、無羞恥 ranking  
-- **唔同認字／字母隊共用遊戲狀態機、題庫、星星計數、PIN object**  
+- **唔共用遊戲狀態機／題庫**（可共用 landing；故障要隔離）  
 - 業務筆記可放 `keith-ops`；遊戲 code 只喺本 repo  
 
 ---
 
 ## Agent 工作方式
 
-- **規格／討論**：以本檔 + `AGENTS.md`「數學（獨立頁）」為準。  
-- **實作**：另開 branch（如 `cursor/math-mvp-…`），先獨立 `math.html` 骨架，再逐個玩法；**唔好**仿字母隊把 screens 併入 `index.html`。  
-- **預覽**：Cloud Agent 環境會起 `python3 -m http.server 5173`（見 `.cursor/environment.json`）；開 `/math.html`。
+- **規格／討論**：以本檔 + `AGENTS.md`「數學（故障隔離）」為準。  
+- **實作**：另開 branch（如 `cursor/math-mvp-…`），`math-*.js`／`math.css`／landing 入口；初始化必須容錯。  
+- **預覽**：Cloud Agent 環境會起 `python3 -m http.server 5173`（見 `.cursor/environment.json`）。
