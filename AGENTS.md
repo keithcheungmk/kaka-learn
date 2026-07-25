@@ -58,8 +58,8 @@ python3 -m http.server 5173
 | `js/app.js` | 認字模式循環、家長區、星星動畫 |
 | `css/styles.css` | 太空／小鹿視覺、大 tap target |
 | `css/phonics.css` | 字母隊氛圍層 |
-| `js/math-*.js` + `css/math.css` | **小鹿數理探險（待實作；故障隔離）** |
-| `docs/math-brief.md` | 數理產品大綱／風格／故障隔離規則 |
+| `js/math-storage.js` / `math-skills.js` / `math-app.js` + `css/math.css` | 小鹿數理探險（Phase A hub；`kaka-math-v1`） |
+| `docs/math-brief.md` / `docs/math-build-plan.md` | 數理規格同開工計劃 |
 
 ## 數學（小鹿數理探險）— 故障隔離（可共用 landing）
 

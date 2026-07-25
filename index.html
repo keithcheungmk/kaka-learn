@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/styles.css?v=20260724j" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260724e" />
+  <link rel="stylesheet" href="./css/math.css?v=20260725a" />
 </head>
 <body>
   <div id="app">
@@ -40,6 +41,7 @@
         <p class="hero-sub">先學漢字同圖畫，再嚟玩遊戲攞星星！</p>
         <div class="btn-row">
           <button type="button" class="btn" id="btn-start-topics">揀主題・先學一學</button>
+          <button type="button" class="btn btn-accent" id="btn-start-math">小鹿數理探險</button>
         </div>
       </div>
     </section>
@@ -283,6 +285,50 @@
       </div>
       <p class="feedback" id="phonics-build-feedback" aria-live="polite"></p>
     </section>
+
+    <!-- 小鹿數理探險：太空站 hub -->
+    <section id="screen-math-hub" class="screen math-screen" aria-label="小鹿數理探險・太空站">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-hub">← 主頁</button>
+        <h1>小鹿數理探險</h1>
+        <button type="button" class="btn btn-ghost" id="btn-math-galaxy" style="min-width:auto;padding:8px 12px">睇旅程</button>
+      </div>
+      <div class="math-hub">
+        <div class="math-planet-stage">
+          <div class="math-planet" id="math-planet-ball" aria-hidden="true">🔢</div>
+          <div class="math-deer-guide" aria-hidden="true">
+            <div class="math-deer-body">
+              <div class="math-deer-face"><i></i><i></i></div>
+              <div class="math-deer-nose"></div>
+              <div class="math-deer-scarf" id="math-deer-scarf"></div>
+            </div>
+          </div>
+        </div>
+        <h2 class="math-hub-title" id="math-hub-planet-name">數數星</h2>
+        <p class="math-hub-blurb" id="math-hub-blurb">數吓有幾多粒</p>
+        <div class="math-hub-meta">
+          <span class="math-chip" id="math-hub-skill">數數</span>
+          <span class="math-chip" id="math-hub-stars">今日 ★ 0 / 10</span>
+          <span class="math-chip" id="math-hub-lit">已點亮 0 / 8</span>
+          <span class="math-chip" id="math-hub-next">下一粒：多少星</span>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn" id="btn-math-launch">出發</button>
+        </div>
+        <p class="math-coming" id="math-hub-coming" hidden>數數星玩法即將開放</p>
+      </div>
+    </section>
+
+    <!-- 小鹿數理探險：旅程總覽 -->
+    <section id="screen-math-galaxy" class="screen math-screen" aria-label="小鹿數理探險・睇旅程">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-galaxy">← 太空站</button>
+        <h1>銀河旅程</h1>
+        <div class="progress-pill" aria-hidden="true"><strong>8</strong></div>
+      </div>
+      <p class="section-lead">撳一粒星球，就去嗰度（唔使跟住次序）</p>
+      <div class="topic-grid" id="math-galaxy-grid"></div>
+    </section>
   </div>
 
   <button type="button" class="btn btn-parent" id="btn-parent" aria-label="家長區">👪</button>
@@ -376,5 +422,8 @@
   <script src="./js/app.js?v=20260724j"></script>
   <script src="./js/phonics-words.js?v=20260724i"></script>
   <script src="./js/phonics-app.js?v=20260724i"></script>
+  <script src="./js/math-storage.js?v=20260725a"></script>
+  <script src="./js/math-skills.js?v=20260725a"></script>
+  <script src="./js/math-app.js?v=20260725a"></script>
 </body>
 </html>
