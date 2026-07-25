@@ -44,18 +44,29 @@ python3 -m http.server 5173
 # 開 http://localhost:5173
 ```
 
-詳見 `README.md`。
+詳見 `README.md`。Cloud Agent 預覽：repo 內 `.cursor/environment.json` 會自動開 `Preview` terminal（同上埠）。
 
 ## 架構速覽
 
 | 檔案 | 職責 |
 |------|------|
-| `index.html` | 畫面骨架（主頁、兩種模式、家長／PIN modal） |
+| `index.html` | 畫面骨架（主頁、認字／字母隊／家長／PIN modal；數學入口待加） |
 | `js/words.js` | 字詞資料 + 系統 Emoji 插圖（iPhone Apple Color Emoji） |
+| `js/phonics-words.js` / `js/phonics-app.js` | 卡卡字母隊 |
 | `js/storage.js` | `localStorage`：星星、PIN、設定 |
 | `js/speech.js` | `speechSynthesis`（優先 `zh-HK`）+ Web Audio 短音 |
-| `js/app.js` | 模式循環、家長區、星星動畫 |
+| `js/app.js` | 認字模式循環、家長區、星星動畫 |
 | `css/styles.css` | 太空／小鹿視覺、大 tap target |
+| `css/phonics.css` | 字母隊氛圍層 |
+| `docs/math-brief.md` | **小鹿數理探險**產品大綱／風格／Phase 1 技能（規格；未實作） |
+
+## 數學模組（小鹿數理探險）
+
+- 規格以 `docs/math-brief.md` 為準；未寫明前唔好實作完整小學課程或操卷平台。
+- 放喺本 repo 第三入口（同字母隊一樣），獨立 `css/math.css` + `js/math-*.js`；共用星星／PIN／粵語 TTS。
+- Phase 1 只打底：數數、比較、形狀、分類、規律、位置、序數；**面試小試**屬 Phase 2+，要家長開關。
+- 教學借 CPA（具體物／圖 → 好遲先符號）；每日短 session；答錯溫柔、無羞恥。
+- 視覺延續小鹿太空；數理用金＋薄荷輕層，唔另起品牌、唔抄外部平台角色。
 
 ## 改動時注意
 
