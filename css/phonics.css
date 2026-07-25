@@ -1,0 +1,232 @@
+/* 卡卡字母隊 — English Phonics（獨立檔案，唔改動 styles.css） */
+
+.term-en {
+  font-family: var(--font-display);
+  text-transform: lowercase;
+}
+
+/* Phonics 畫面：小鹿 + 彩色字母太空背景（原創美術，唔用現成教材角色） */
+.phonics-screen.active {
+  position: relative;
+  isolation: isolate;
+}
+
+.phonics-screen.active::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(7, 21, 38, 0.58) 0%, rgba(7, 21, 38, 0.42) 45%, rgba(7, 21, 38, 0.72) 100%),
+    url("../assets/phonics-space-bg.jpg") center / cover no-repeat;
+}
+
+.phonics-hero {
+  width: min(100%, 520px);
+  margin: 0 auto 14px;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 2px solid rgba(94, 234, 212, 0.28);
+  box-shadow: var(--shadow);
+  background: rgba(7, 21, 38, 0.55);
+}
+
+.phonics-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+.phonics-screen .topic-card,
+.phonics-screen .prompt-box,
+.phonics-screen .learn-stage,
+.phonics-screen .build-pool,
+.phonics-screen .match-stage {
+  backdrop-filter: blur(2px);
+}
+
+/* 「活字母」：字母字身 + 原創固定顏色 + 簡單笑臉（唔跟任何現成教材角色設計） */
+.letter-tile {
+  position: relative;
+  overflow: visible;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.letter-tile:active .letter-glyph {
+  transform: scale(0.94);
+}
+
+.letter-tile .letter-glyph {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background: var(--ltr-color, var(--teal));
+  color: #10151f;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4.5vw, 1.9rem);
+  text-transform: lowercase;
+  transition: transform 0.1s ease;
+}
+
+.letter-row .letter-tile .letter-glyph {
+  font-size: clamp(1.05rem, 3.2vw, 1.3rem);
+  border-radius: 11px;
+}
+
+.build-tile.letter-tile .letter-glyph {
+  border-radius: 13px;
+}
+
+.letter-tile .letter-face {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+}
+
+.letter-tile .eye {
+  position: absolute;
+  top: 26%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10151f;
+}
+
+.letter-tile .eye-l { left: 30%; }
+.letter-tile .eye-r { right: 30%; }
+
+.letter-tile .mouth {
+  position: absolute;
+  bottom: 26%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 6px;
+  border-bottom: 2.5px solid #10151f;
+  border-radius: 0 0 10px 10px;
+}
+
+.build-slot.is-filled .letter-tile .letter-glyph {
+  background: var(--ltr-color, var(--ok));
+}
+
+/* 「先學一學」畫面：拆返出嚟嘅字母排(純展示,幫手建立「音拼埋成詞」概念) */
+.letter-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 4px 0 2px;
+}
+
+.letter-row .letter-tile {
+  width: clamp(44px, 12vw, 56px);
+  height: clamp(44px, 12vw, 56px);
+}
+
+/* 字母溫習：學習頁大粒活字母 */
+.letter-tile-lg {
+  width: min(160px, 42vw);
+  height: min(160px, 42vw);
+  display: block;
+  margin: 0 auto;
+}
+
+.letter-tile-lg .letter-glyph {
+  font-size: clamp(3.2rem, 14vw, 4.8rem);
+  border-radius: 28px;
+}
+
+.letter-tile-lg .eye {
+  width: 12px;
+  height: 12px;
+  top: 28%;
+}
+
+.letter-tile-lg .mouth {
+  width: 28px;
+  height: 12px;
+  bottom: 28%;
+  border-bottom-width: 3.5px;
+}
+
+/* 聽一聽：揀字母卡 */
+.word-card-letter {
+  min-height: 132px;
+  padding: 16px;
+}
+
+.word-card-letter .letter-tile-card {
+  width: min(88px, 22vw);
+  height: min(88px, 22vw);
+  display: block;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+.word-card-letter .letter-tile-card .letter-glyph {
+  font-size: clamp(2rem, 8vw, 2.8rem);
+  border-radius: 18px;
+}
+
+/* 「砌一砌」字池／已放好嘅格：letter-tile 要有固定大細先撐得起 letter-glyph 嘅 100% */
+.build-pool .build-tile.letter-tile,
+.build-slot .build-placed.letter-tile {
+  display: block;
+  width: clamp(54px, 15vw, 74px);
+  height: clamp(58px, 16vw, 78px);
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.build-slot .build-placed.letter-tile {
+  width: clamp(50px, 14vw, 64px);
+  height: clamp(50px, 14vw, 64px);
+}
+
+/* 「先學一學」畫面：撳圖／字聽整個詞（同字母格分開，避免 button 入面再有 button） */
+.learn-stage-tap {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* 主頁品牌球：而家兼任「卡卡字母隊」隱藏入口，撳落去先入去（刻意唔加額外視覺提示，keep it hidden） */
+.brand-orbit {
+  appearance: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.brand-orbit:active {
+  transform: scale(0.94);
+}
