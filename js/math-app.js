@@ -51,9 +51,8 @@
 
       const ball = $('#math-planet-ball');
       if (ball) {
-        const lit = isPlanetLit(planet.id) ? ' is-lit' : '';
-        ball.className = `math-globe-wrap math-globe-wrap--${planet.body}${lit}`;
-        ball.innerHTML = `<span class="math-globe math-globe--${planet.body}"></span>`;
+        const litClass = isPlanetLit(planet.id) ? ' is-lit' : '';
+        ball.outerHTML = `<div id="math-planet-ball" class="math-globe-wrap math-globe-wrap--photo math-globe-wrap--${planet.body}${litClass}" aria-hidden="true"><img class="math-globe-img" src="${planet.img}" alt="" width="256" height="256" decoding="async" /></div>`;
       }
 
       const title = $('#math-hub-planet-name');

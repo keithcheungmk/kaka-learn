@@ -16,19 +16,19 @@
     radial-gradient(700px 400px at 80% 80%, rgba(251, 191, 36, 0.1), transparent 55%);
 }
 
-/* 銀河旅程：更深星空 */
+/* 銀河旅程：真實銀河背景圖 */
 #screen-math-galaxy.math-screen.active::before {
   background:
-    radial-gradient(1.5px 1.5px at 8% 12%, rgba(255, 255, 255, 0.95), transparent),
-    radial-gradient(1.2px 1.2px at 22% 40%, rgba(253, 230, 138, 0.9), transparent),
-    radial-gradient(1px 1px at 38% 18%, rgba(255, 255, 255, 0.75), transparent),
-    radial-gradient(1.4px 1.4px at 55% 55%, rgba(165, 243, 252, 0.85), transparent),
-    radial-gradient(1px 1px at 70% 28%, rgba(255, 255, 255, 0.8), transparent),
-    radial-gradient(1.3px 1.3px at 82% 70%, rgba(253, 230, 138, 0.7), transparent),
-    radial-gradient(1px 1px at 92% 42%, rgba(255, 255, 255, 0.7), transparent),
-    radial-gradient(600px 320px at 50% 0%, rgba(99, 102, 241, 0.12), transparent 70%),
-    radial-gradient(500px 400px at 20% 100%, rgba(56, 189, 248, 0.1), transparent 60%),
-    linear-gradient(180deg, #040b18 0%, #071526 45%, #0a1f3a 100%);
+    linear-gradient(180deg, rgba(4, 11, 24, 0.35) 0%, rgba(7, 21, 38, 0.45) 55%, rgba(7, 21, 38, 0.72) 100%),
+    url("../assets/math/galaxy-bg.jpg") center / cover no-repeat;
+}
+
+/* Hub 亦可微透銀河 */
+#screen-math-hub.math-screen.active::before {
+  background:
+    radial-gradient(900px 500px at 50% 18%, color-mix(in srgb, var(--math-planet, #3b82f6) 22%, transparent), transparent 58%),
+    linear-gradient(180deg, rgba(7, 21, 38, 0.55) 0%, rgba(7, 21, 38, 0.72) 100%),
+    url("../assets/math/galaxy-bg.jpg") center 40% / cover no-repeat;
 }
 
 .math-hub {
@@ -80,7 +80,7 @@
   }
 }
 
-/* ---------- 真實感星球 globe ---------- */
+/* ---------- 真實感星球 globe（後備 CSS；優先用照片 .math-globe-img） ---------- */
 .math-globe-wrap {
   position: relative;
   display: inline-grid;
@@ -88,6 +88,36 @@
   width: 96px;
   height: 96px;
   flex-shrink: 0;
+}
+
+.math-globe-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.45));
+  pointer-events: none;
+  user-select: none;
+}
+
+.math-globe-wrap--photo.is-lit .math-globe-img,
+#math-planet-ball.is-lit .math-globe-img {
+  filter:
+    drop-shadow(0 0 10px rgba(253, 230, 138, 0.75))
+    drop-shadow(0 12px 22px rgba(0, 0, 0, 0.45));
+}
+
+.math-globe-wrap--saturn.math-globe-wrap--photo {
+  width: 120px;
+  height: 96px;
+}
+
+.math-globe-wrap--saturn.math-globe-wrap--photo .math-globe-img {
+  border-radius: 0;
+  width: 118%;
+  height: 118%;
+  max-width: none;
 }
 
 .math-globe {
@@ -101,18 +131,18 @@
     0 14px 28px rgba(0, 0, 0, 0.4);
 }
 
-.math-globe-wrap--saturn {
+.math-globe-wrap--saturn:not(.math-globe-wrap--photo) {
   width: 120px;
   height: 96px;
 }
 
-.math-globe-wrap--saturn .math-globe {
+.math-globe-wrap--saturn:not(.math-globe-wrap--photo) .math-globe {
   width: 72%;
   height: 90%;
   justify-self: center;
 }
 
-.math-globe-wrap--saturn::before {
+.math-globe-wrap--saturn:not(.math-globe-wrap--photo)::before {
   content: "";
   position: absolute;
   left: 2%;
@@ -129,7 +159,7 @@
   box-shadow: 0 0 12px rgba(240, 213, 154, 0.25);
 }
 
-.math-globe-wrap--saturn::after {
+.math-globe-wrap--saturn:not(.math-globe-wrap--photo)::after {
   content: "";
   position: absolute;
   left: 10%;
@@ -383,13 +413,21 @@
 }
 
 .math-galaxy-card .math-globe-wrap {
-  width: min(28vw, 112px);
-  height: min(28vw, 112px);
+  width: min(30vw, 120px);
+  height: min(30vw, 120px);
 }
 
 .math-galaxy-card .math-globe-wrap--saturn {
-  width: min(34vw, 132px);
-  height: min(28vw, 112px);
+  width: min(36vw, 140px);
+  height: min(30vw, 120px);
+}
+
+.math-galaxy-card .math-globe-img {
+  transition: transform 0.2s ease;
+}
+
+.math-galaxy-card:active .math-globe-img {
+  transform: scale(0.94);
 }
 
 .math-galaxy-name {
