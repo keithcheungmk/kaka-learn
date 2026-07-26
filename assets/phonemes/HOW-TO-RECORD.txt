@@ -1,0 +1,93 @@
+卡卡字母隊 — 真人字母音錄音指引
+================================
+
+App 會播呢個資料夾入面嘅檔案：
+  a.mp3  b.mp3  …  z.mp3
+（細楷英文字母檔名）
+
+而家係合成童聲；你錄完真人聲，用腳本匯入就可以取代。
+
+
+一、錄咩（好重要）
+----------------
+錄「字母音 / phonics sound」，唔好錄「字母名」：
+
+  ✗ 錯：ay, bee, see, dee, ee, eff…（letter names）
+  ✓ 啱：短元音 a/e/i/o/u；輔音可用課堂「少少 uh」
+
+建議讀法（約 4 歲、跟得讀）：
+
+  a  = /æ/ 好似 apple 開頭（唔係 ay）
+  e  = /ɛ/ 好似 egg
+  i  = /ɪ/ 好似 igloo
+  o  = /ɒ/ 或 /ɑ/ 好似 octopus / hot
+  u  = /ʌ/ 好似 up / umbrella
+
+  b  = buh     c/k = kuh     d = duh
+  f  = fff 或 fuh（拉長 f 更好）
+  g  = guh     h = huh
+  j  = juh     l = lll 或 luh
+  m  = mmm 或 muh
+  n  = nnn 或 nuh
+  p  = puh     q = kwuh
+  r  = rrr 或 ruh
+  s  = sss（拉長）
+  t  = tuh     v = vvv 或 vuh
+  w  = wuh     x = ks（「克斯」短促，唔好讀 ex）
+  y  = yuh     z = zzz 或 zuh
+
+
+二、點樣錄（你可以咁做）
+----------------------
+1. 用 iPhone「語音備忘錄」或 QuickTime（Mac）
+2. 安靜房、手機離嘴約 15–20 cm
+3. 每個字母錄 1 次清楚就得（約 0.5–1 秒）
+4. 語速慢少少、聲線溫柔；可帶少少小朋友聲，但要清楚
+5. 誰錄都可以：家長／你／老師；同一個人錄齊 26 個最統一
+6. 唔好加「呢個係 a」「好叻」等多餘說話——淨係字母音
+
+
+三、檔名同格式
+--------------
+匯入前將檔案改名（細楷）：
+
+  a.m4a / a.wav / a.mp3
+  b.m4a …
+  …
+  z.m4a
+
+全部放同一個資料夾，例如：
+  recordings/phonemes/
+
+
+四、匯入 App（你做完錄音之後）
+----------------------------
+喺電腦 repo 根目錄行：
+
+  ./scripts/import-real-phonemes.sh recordings/phonemes
+
+腳本會：
+  - 轉成統一 mp3
+  - 剪走頭尾靜音、輕輕推大聲
+  - 寫入 assets/phonemes/{a-z}.mp3
+
+之後記得：
+  1. 改 js/phonics-app.js 入面 PHONEME_ASSET_VERSION（例如 20260726a）
+     ——唔改嘅話 iPad 可能仲播舊 cache
+  2. git add / commit / 講「merge」上 live
+
+
+五、可分批換
+------------
+唔使一次錄齊。例如先錄 a e i o u 同 van 用到嘅 v/n：
+  ./scripts/import-real-phonemes.sh recordings/phonemes
+冇檔嘅字母會跳過，保留而家合成音。
+
+
+六、檢查清單
+------------
+[ ] 26 個（或本批）都係字母音，唔係字母名
+[ ] 檔名 a–z 細楷
+[ ] 跑過 import 腳本
+[ ] bump PHONEME_ASSET_VERSION
+[ ] iPad 強制 refresh 再聽 van 嘅 v / a / n
