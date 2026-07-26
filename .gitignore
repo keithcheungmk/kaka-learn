@@ -1,3 +1,4 @@
 # Raw phonics recordings (import into assets/phonemes via script)
 recordings/phonemes/*
 !recordings/phonemes/.gitkeep
+!recordings/phonemes/README.txt
