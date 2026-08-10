@@ -724,11 +724,98 @@
   --math-planet: #b6bcc4;
 }
 
+#screen-math-venus-learn.math-screen.active,
+#screen-math-venus-play.math-screen.active,
+#screen-math-compare.math-screen.active {
+  --math-planet: #e8c27a;
+}
+
 #screen-math-learn.math-screen.active::before,
 #screen-math-play.math-screen.active::before,
-#screen-math-count.math-screen.active::before {
+#screen-math-count.math-screen.active::before,
+#screen-math-venus-learn.math-screen.active::before,
+#screen-math-venus-play.math-screen.active::before,
+#screen-math-compare.math-screen.active::before {
   background:
     radial-gradient(900px 500px at 50% 18%, color-mix(in srgb, var(--math-planet, #b6bcc4) 22%, transparent), transparent 58%),
     linear-gradient(180deg, rgba(7, 21, 38, 0.55) 0%, rgba(7, 21, 38, 0.72) 100%),
     url("../assets/math/galaxy-bg.jpg") center 40% / cover no-repeat;
+}
+
+/* ---------- 金星・邊多邊少 ---------- */
+.math-compare-pairs {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+.math-compare-side,
+.math-compare-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-height: 170px;
+  padding: 12px;
+  border-radius: 22px;
+  background: rgba(18, 40, 72, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.math-compare-pick {
+  appearance: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  font: inherit;
+  color: inherit;
+}
+
+.math-compare-pick:active {
+  transform: scale(0.98);
+}
+
+.math-compare-pick.is-ok {
+  border-color: rgba(253, 230, 138, 0.9);
+  box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.35);
+  animation: popOk 0.45s ease;
+}
+
+.math-compare-pick.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+.math-compare-vs {
+  align-self: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gold-soft);
+  font-size: 1.2rem;
+}
+
+.math-compare-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 6px;
+  min-height: 84px;
+  flex: 1;
+}
+
+.math-compare-label {
+  font-size: 0.95rem;
+  color: var(--ink-dim);
+}
+
+.math-venus-say {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--gold-soft);
+}
+
+.math-compare-actions {
+  margin: 14px 0 6px;
 }

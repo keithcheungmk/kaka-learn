@@ -40,6 +40,9 @@
       learn: '#screen-math-learn',
       play: '#screen-math-play',
       count: '#screen-math-count',
+      vlearn: '#screen-math-venus-learn',
+      vplay: '#screen-math-venus-play',
+      compare: '#screen-math-compare',
     };
 
     let learnIndex = 0;
@@ -47,6 +50,11 @@
     let countRound = null;
     let countCorrect = 0;
     let countEmoji = COUNT_EMOJIS[0];
+    let vLearnIndex = 0;
+    let compareBusy = false;
+    let compareRound = null;
+    let compareCorrect = 0;
+    let compareEmoji = '🌟';
     let warpFromPlanet = null;
     let warpToPlanet = null;
     let warpTimer = null;
@@ -419,6 +427,183 @@
       }
     }
 
+    /* ---------- 金星・先學（邊多邊少） ---------- */
+    const VENUS_LEARN_CARDS = [
+      { left: 1, right: 2, say: '右邊多啲' },
+      { left: 3, right: 3, say: '一樣多' },
+      { left: 5, right: 2, say: '左邊多啲' },
+      { left: 4, right: 6, say: '右邊多啲' },
+    ];
+
+    function compareEmojiForCard() {
+      return COUNT_EMOJIS[Math.floor(Math.random() * COUNT_EMOJIS.length)];
+    }
+
+    function renderCompareItems(el, n, emoji) {
+      if (!el) return;
+      el.innerHTML = '';
+      for (let i = 0; i < n; i += 1) {
+        const span = document.createElement('span');
+        span.className = 'math-count-dot';
+        span.textContent = emoji;
+        span.style.animationDelay = `${i * 0.04}s`;
+        el.appendChild(span);
+      }
+    }
+
+    function openVenusLearn() {
+      updateState({ currentPlanetId: 'compare-qty' });
+      vLearnIndex = 0;
+      compareEmoji = compareEmojiForCard();
+      const title = $('#math-venus-learn-title');
+      if (title) title.textContent = '金星・先學';
+      renderVenusLearnCard(true);
+      showMathScreen('vlearn');
+    }
+
+    function renderVenusLearnCard(autoSpeak) {
+      const card = VENUS_LEARN_CARDS[vLearnIndex];
+      renderCompareItems($('#math-venus-learn-left'), card.left, compareEmoji);
+      renderCompareItems($('#math-venus-learn-right'), card.right, compareEmoji);
+      const say = $('#math-venus-learn-say');
+      if (say) say.textContent = card.say;
+      const progress = $('#math-venus-learn-progress');
+      if (progress) progress.textContent = `${vLearnIndex + 1}/${VENUS_LEARN_CARDS.length}`;
+
+      const prev = $('#btn-math-venus-learn-prev');
+      const next = $('#btn-math-venus-learn-next');
+      const finish = $('#math-venus-learn-finish-row');
+      if (prev) prev.disabled = vLearnIndex <= 0;
+      if (next) next.hidden = vLearnIndex >= VENUS_LEARN_CARDS.length - 1;
+      if (finish) finish.hidden = vLearnIndex < VENUS_LEARN_CARDS.length - 1;
+
+      if (autoSpeak) speakVenusLearn();
+    }
+
+    function speakVenusLearn() {
+      const card = VENUS_LEARN_CARDS[vLearnIndex];
+      speak(card.say);
+    }
+
+    /* ---------- 金星・邊多邊少 ---------- */
+    function openVenusPlay() {
+      const stars = $('#math-venus-play-stars');
+      const state = loadState();
+      if (stars) stars.textContent = `${state.starsToday}/10`;
+      const title = $('#math-venus-play-title');
+      if (title) title.textContent = '金星・去玩玩';
+      showMathScreen('vplay');
+    }
+
+    function openCompare() {
+      compareBusy = false;
+      compareCorrect = 0;
+      compareEmoji = compareEmojiForCard();
+      updateCompareProgress();
+      nextCompareRound(true);
+      showMathScreen('compare');
+    }
+
+    function updateCompareProgress() {
+      const el = $('#math-compare-progress');
+      if (el) el.textContent = `${compareCorrect}/${LIT_TARGET}`;
+    }
+
+    function makeCompareRound() {
+      const roll = Math.random();
+      if (roll < 0.25) {
+        const n = 2 + Math.floor(Math.random() * 7);
+        return { left: n, right: n, answer: 'same' };
+      }
+      const left = 1 + Math.floor(Math.random() * 9);
+      let right = 1 + Math.floor(Math.random() * 9);
+      while (right === left) {
+        right = 1 + Math.floor(Math.random() * 9);
+      }
+      return { left, right, answer: left > right ? 'left' : 'right' };
+    }
+
+    function nextCompareRound(autoSpeak) {
+      compareRound = makeCompareRound();
+      compareEmoji = compareEmojiForCard();
+      renderCompareItems($('#math-compare-left'), compareRound.left, compareEmoji);
+      renderCompareItems($('#math-compare-right'), compareRound.right, compareEmoji);
+      const prompt = $('#math-compare-prompt');
+      if (prompt) prompt.textContent = '邊堆多啲？撳左邊或右邊；一樣就撳「一樣多」';
+      const fb = $('#math-compare-feedback');
+      if (fb) fb.textContent = '';
+      $('#math-compare-field')
+        ?.querySelectorAll('.math-compare-pick')
+        .forEach((b) => b.classList.remove('is-ok', 'is-bad'));
+      if (autoSpeak) speakComparePrompt();
+    }
+
+    function speakComparePrompt() {
+      speak('邊堆多啲？');
+    }
+
+    function onComparePick(choice) {
+      if (compareBusy || !compareRound) return;
+      compareBusy = true;
+      const muted = isMuted();
+      const fb = $('#math-compare-feedback');
+      const ok = choice === compareRound.answer;
+
+      const sideBtn =
+        choice === 'same'
+          ? $('#btn-math-compare-same')
+          : $(`#math-compare-field .math-compare-pick[data-side="${choice}"]`);
+
+      if (ok) {
+        sideBtn?.classList.add('is-ok');
+        const { gained } = tryEarnStar();
+        if (gained) {
+          flashStarBurst();
+          speech?.playStarCue?.({ muted });
+        } else {
+          speech?.playCorrectCue?.({ muted });
+        }
+        compareCorrect += 1;
+        updateCompareProgress();
+        const praise =
+          speech?.speakCorrectFeedback?.({ muted }) || '你好叻呀，答啱咗！';
+        if (fb) fb.textContent = gained ? `${praise} ★` : praise;
+
+        if (compareCorrect >= LIT_TARGET && !isPlanetLit('compare-qty')) {
+          lightPlanet('compare-qty');
+          if (fb) fb.textContent = `${praise} 金星點亮喇！`;
+          const fromP = getPlanetById('compare-qty');
+          const toP = getPlanetById(getNextPlanetId('compare-qty'));
+          setTimeout(() => {
+            compareBusy = false;
+            offerWarpHop(fromP, toP);
+          }, 900);
+          return;
+        }
+
+        const stars = $('#math-venus-play-stars');
+        const state = loadState();
+        if (stars) stars.textContent = `${state.starsToday}/10`;
+
+        setTimeout(() => {
+          compareBusy = false;
+          nextCompareRound(true);
+        }, 1100);
+      } else {
+        sideBtn?.classList.add('is-bad');
+        speech?.playTryAgainCue?.({ muted });
+        const line = speech?.speakRetryFeedback?.({ muted }) || '唔緊要，試多次！';
+        if (fb) fb.textContent = line;
+        const field = $('#math-compare-field');
+        if (field) field.style.outline = '3px solid rgba(253, 230, 138, 0.7)';
+        setTimeout(() => {
+          sideBtn?.classList.remove('is-bad');
+          if (field) field.style.outline = '';
+          compareBusy = false;
+        }, 700);
+      }
+    }
+
     function goToNextPlanetFromHub() {
       const planet = getPlanetById(loadState().currentPlanetId);
       if (!isPlanetLit(planet.id)) return;
@@ -429,17 +614,20 @@
 
     function launchFromHub() {
       const planet = getPlanetById(loadState().currentPlanetId);
-      if (planet.id !== 'count') {
-        const note = $('#math-hub-coming');
-        if (note) {
-          note.hidden = false;
-          note.textContent = `${planet.name}玩法即將開放，而家去水星學數數啦！`;
-        }
-        updateState({ currentPlanetId: 'count' });
-        renderHub();
+      if (planet.id === 'count') {
+        openLearn();
         return;
       }
-      openLearn();
+      if (planet.id === 'compare-qty') {
+        openVenusLearn();
+        return;
+      }
+      const note = $('#math-hub-coming');
+      if (note) {
+        note.hidden = false;
+        note.textContent = `${planet.name}玩法即將開放；而家可以去水星數數，或者金星學邊多邊少！`;
+      }
+      renderHub();
     }
 
     function bind() {
@@ -480,9 +668,44 @@
 
       $('#btn-back-math-count')?.addEventListener('click', () => openPlay());
       $('#btn-math-count-speak')?.addEventListener('click', () => speakCountPrompt());
+
+      $('#btn-back-math-venus-learn')?.addEventListener('click', () => openHub());
+      $('#math-venus-learn-tap')?.addEventListener('click', () => speakVenusLearn());
+      $('#btn-math-venus-learn-prev')?.addEventListener('click', () => {
+        if (vLearnIndex <= 0) return;
+        vLearnIndex -= 1;
+        renderVenusLearnCard(true);
+      });
+      $('#btn-math-venus-learn-next')?.addEventListener('click', () => {
+        if (vLearnIndex >= VENUS_LEARN_CARDS.length - 1) return;
+        vLearnIndex += 1;
+        renderVenusLearnCard(true);
+      });
+      $('#btn-math-venus-learn-play')?.addEventListener('click', () => openVenusPlay());
+
+      $('#btn-back-math-venus-play')?.addEventListener('click', () => openVenusLearn());
+      $('#btn-math-mode-compare')?.addEventListener('click', () => openCompare());
+
+      $('#btn-back-math-compare')?.addEventListener('click', () => openVenusPlay());
+      $('#btn-math-compare-speak')?.addEventListener('click', () => speakComparePrompt());
+      $('#btn-math-compare-same')?.addEventListener('click', () => onComparePick('same'));
+      document
+        .querySelectorAll('#math-compare-field .math-compare-pick')
+        .forEach((btn) => {
+          btn.addEventListener('click', () => onComparePick(btn.dataset.side));
+        });
     }
 
     bind();
-    window.KakaMath = { openHub, goHome, renderHub, openLearn, openCount, offerWarpHop };
+    window.KakaMath = {
+      openHub,
+      goHome,
+      renderHub,
+      openLearn,
+      openCount,
+      openVenusLearn,
+      openCompare,
+      offerWarpHop,
+    };
   }
 })();
