@@ -730,12 +730,21 @@
   --math-planet: #e8c27a;
 }
 
+#screen-math-earth-learn.math-screen.active,
+#screen-math-earth-play.math-screen.active,
+#screen-math-size.math-screen.active {
+  --math-planet: #3b82f6;
+}
+
 #screen-math-learn.math-screen.active::before,
 #screen-math-play.math-screen.active::before,
 #screen-math-count.math-screen.active::before,
 #screen-math-venus-learn.math-screen.active::before,
 #screen-math-venus-play.math-screen.active::before,
-#screen-math-compare.math-screen.active::before {
+#screen-math-compare.math-screen.active::before,
+#screen-math-earth-learn.math-screen.active::before,
+#screen-math-earth-play.math-screen.active::before,
+#screen-math-size.math-screen.active::before {
   background:
     radial-gradient(900px 500px at 50% 18%, color-mix(in srgb, var(--math-planet, #b6bcc4) 22%, transparent), transparent 58%),
     linear-gradient(180deg, rgba(7, 21, 38, 0.55) 0%, rgba(7, 21, 38, 0.72) 100%),
@@ -818,4 +827,58 @@
 
 .math-compare-actions {
   margin: 14px 0 6px;
+}
+
+/* ---------- 地球・大細長短 ---------- */
+.math-size-pair,
+.math-size-quiz {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  justify-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.math-size-side,
+.math-size-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 170px;
+  padding: 14px 10px;
+  border-radius: 22px;
+  background: rgba(18, 40, 72, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+
+.math-size-pick {
+  appearance: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  font: inherit;
+  color: inherit;
+}
+
+.math-size-pick:active {
+  transform: scale(0.98);
+}
+
+.math-size-pick.is-ok {
+  border-color: rgba(253, 230, 138, 0.9);
+  box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.35);
+  animation: popOk 0.45s ease;
+}
+
+.math-size-pick.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+.math-size-emoji {
+  line-height: 1;
+  display: inline-block;
+  animation: math-count-pop 0.35s ease both;
 }
