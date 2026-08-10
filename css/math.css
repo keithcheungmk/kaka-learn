@@ -445,6 +445,170 @@
   color: var(--gold-soft);
 }
 
+.math-galaxy-card.is-lit {
+  background: rgba(251, 191, 36, 0.08);
+  box-shadow: inset 0 0 0 2px rgba(253, 230, 138, 0.35);
+}
+
+.math-lit-badge {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold-soft);
+}
+
+/* ---------- 飛過場 warp-hop ---------- */
+.math-warp {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(800px 400px at 50% 40%, rgba(251, 191, 36, 0.18), transparent 55%),
+    rgba(4, 11, 24, 0.88);
+  backdrop-filter: blur(4px);
+}
+
+.math-warp[hidden] {
+  display: none !important;
+}
+
+.math-warp-inner {
+  width: min(100%, 520px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+
+.math-warp-planets {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 140px;
+}
+
+.math-warp-from,
+.math-warp-to {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.math-warp-from .math-globe-img,
+.math-warp-to .math-globe-img {
+  width: min(28vw, 112px);
+  height: min(28vw, 112px);
+}
+
+.math-warp-ship {
+  position: absolute;
+  left: 18%;
+  top: 36%;
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px rgba(253, 230, 138, 0.8));
+  opacity: 0;
+}
+
+.math-warp.is-flying .math-warp-ship {
+  animation: math-warp-hop 1.8s ease-in-out forwards;
+}
+
+.math-warp.is-flying .math-warp-from {
+  animation: math-warp-glow 0.6s ease;
+}
+
+.math-warp.is-flying .math-warp-to {
+  animation: math-warp-arrive 1.8s ease forwards;
+}
+
+@keyframes math-warp-hop {
+  0% {
+    left: 18%;
+    top: 36%;
+    opacity: 0;
+    transform: scale(0.6) rotate(-20deg);
+  }
+  12% {
+    opacity: 1;
+  }
+  55% {
+    left: 48%;
+    top: 18%;
+    transform: scale(1.1) rotate(10deg);
+  }
+  100% {
+    left: 72%;
+    top: 36%;
+    opacity: 0.2;
+    transform: scale(0.85) rotate(25deg);
+  }
+}
+
+@keyframes math-warp-glow {
+  from {
+    filter: brightness(1);
+  }
+  40% {
+    filter: brightness(1.35) drop-shadow(0 0 16px rgba(253, 230, 138, 0.9));
+  }
+  to {
+    filter: brightness(1);
+  }
+}
+
+@keyframes math-warp-arrive {
+  0%,
+  55% {
+    transform: scale(0.92);
+    filter: brightness(0.85);
+  }
+  100% {
+    transform: scale(1.06);
+    filter: brightness(1.2) drop-shadow(0 0 18px rgba(253, 230, 138, 0.75));
+  }
+}
+
+.math-warp-msg {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.math-warp-actions {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #math-planet-ball.math-globe-wrap,
+  .math-deer-guide,
+  .math-count-dot,
+  .math-warp.is-flying .math-warp-ship,
+  .math-warp.is-flying .math-warp-from,
+  .math-warp.is-flying .math-warp-to {
+    animation: none;
+  }
+
+  .math-warp.is-flying .math-warp-ship {
+    opacity: 1;
+    left: 48%;
+  }
+}
+
 /* ---------- 水星・數數學習／測驗 ---------- */
 .math-screen .btn-stack {
   display: flex;
@@ -567,12 +731,4 @@
     radial-gradient(900px 500px at 50% 18%, color-mix(in srgb, var(--math-planet, #b6bcc4) 22%, transparent), transparent 58%),
     linear-gradient(180deg, rgba(7, 21, 38, 0.55) 0%, rgba(7, 21, 38, 0.72) 100%),
     url("../assets/math/galaxy-bg.jpg") center 40% / cover no-repeat;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #math-planet-ball.math-globe-wrap,
-  .math-deer-guide,
-  .math-count-dot {
-    animation: none;
-  }
 }

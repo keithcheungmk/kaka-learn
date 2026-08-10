@@ -47,6 +47,9 @@
     let countRound = null;
     let countCorrect = 0;
     let countEmoji = COUNT_EMOJIS[0];
+    let warpFromPlanet = null;
+    let warpToPlanet = null;
+    let warpTimer = null;
 
     function isMuted() {
       try {
@@ -139,13 +142,24 @@
       const stars = $('#math-hub-stars');
       if (stars) stars.textContent = `今日 ★ ${state.starsToday} / 10`;
 
-      const lit = $('#math-hub-lit');
-      if (lit) lit.textContent = `已點亮 ${state.litPlanetIds.length} / ${MATH_PLANETS.length}`;
+      const litCount = $('#math-hub-lit');
+      if (litCount) litCount.textContent = `已點亮 ${state.litPlanetIds.length} / ${MATH_PLANETS.length}`;
 
       const nextId = getNextPlanetId(planet.id);
       const next = getPlanetById(nextId);
       const nextEl = $('#math-hub-next');
       if (nextEl) nextEl.textContent = `下一粒：${next.name}`;
+
+      const litNow = isPlanetLit(planet.id, state);
+      const badge = $('#math-hub-lit-badge');
+      if (badge) badge.hidden = !litNow;
+
+      const goNext = $('#btn-math-go-next');
+      if (goNext) {
+        const hasNext = next.id !== planet.id;
+        goNext.hidden = !(litNow && hasNext);
+        goNext.textContent = `飛去${next.name}`;
+      }
 
       const coming = $('#math-hub-coming');
       if (coming) {
@@ -154,9 +168,74 @@
           coming.textContent = '';
         } else {
           coming.hidden = false;
-          coming.textContent = `${planet.name}玩法即將開放，而家可以去水星學數數！`;
+          coming.textContent = litNow
+            ? `${planet.name}玩法即將開放；可以返水星溫習，或者睇旅程揀第二粒。`
+            : `${planet.name}玩法即將開放，而家可以去水星學數數！`;
         }
       }
+    }
+
+    function hideWarp() {
+      const overlay = $('#math-warp');
+      if (!overlay) return;
+      if (warpTimer) {
+        clearTimeout(warpTimer);
+        warpTimer = null;
+      }
+      overlay.classList.remove('is-flying');
+      overlay.hidden = true;
+      warpFromPlanet = null;
+      warpToPlanet = null;
+    }
+
+    function finishWarpGo() {
+      const to = warpToPlanet;
+      hideWarp();
+      if (!to) {
+        openHub();
+        return;
+      }
+      updateState({ currentPlanetId: to.id });
+      openHub();
+      speak(`到${to.name}喇！`);
+    }
+
+    function finishWarpStay() {
+      const from = warpFromPlanet;
+      hideWarp();
+      if (from) updateState({ currentPlanetId: from.id });
+      openHub();
+    }
+
+    /** 點亮後短飛行＋建議下一粒（可留低／飛過去；唔硬鎖） */
+    function offerWarpHop(fromPlanet, toPlanet) {
+      const overlay = $('#math-warp');
+      if (!overlay || !toPlanet || fromPlanet.id === toPlanet.id) {
+        openHub();
+        return;
+      }
+      warpFromPlanet = fromPlanet;
+      warpToPlanet = toPlanet;
+
+      const fromImg = $('#math-warp-from-img');
+      const toImg = $('#math-warp-to-img');
+      const fromName = $('#math-warp-from-name');
+      const toName = $('#math-warp-to-name');
+      const msg = $('#math-warp-msg');
+      if (fromImg) fromImg.src = fromPlanet.img;
+      if (toImg) toImg.src = toPlanet.img;
+      if (fromName) fromName.textContent = fromPlanet.name;
+      if (toName) toName.textContent = toPlanet.name;
+      if (msg) msg.textContent = `${fromPlanet.name}點亮喇！飛去${toPlanet.name}？`;
+
+      overlay.hidden = false;
+      overlay.classList.remove('is-flying');
+      void overlay.offsetWidth;
+      overlay.classList.add('is-flying');
+      speak(`${fromPlanet.name}點亮喇！飛去${toPlanet.name}？`);
+
+      if (warpTimer) clearTimeout(warpTimer);
+      // 唔自動飛走：等家長／小朋友撳掣；飛行動畫只係氣氛
     }
 
     function openHub() {
@@ -307,7 +386,13 @@
         if (countCorrect >= LIT_TARGET && !isPlanetLit('count')) {
           lightPlanet('count');
           if (fb) fb.textContent = `${praise} 水星點亮喇！`;
-          speak('水星點亮喇！');
+          const fromP = getPlanetById('count');
+          const toP = getPlanetById(getNextPlanetId('count'));
+          setTimeout(() => {
+            countBusy = false;
+            offerWarpHop(fromP, toP);
+          }, 900);
+          return;
         }
 
         const stars = $('#math-play-stars');
@@ -332,6 +417,14 @@
           countBusy = false;
         }, 700);
       }
+    }
+
+    function goToNextPlanetFromHub() {
+      const planet = getPlanetById(loadState().currentPlanetId);
+      if (!isPlanetLit(planet.id)) return;
+      const next = getPlanetById(getNextPlanetId(planet.id));
+      if (next.id === planet.id) return;
+      offerWarpHop(planet, next);
     }
 
     function launchFromHub() {
@@ -364,6 +457,9 @@
       });
       $('#btn-back-math-galaxy')?.addEventListener('click', () => openHub());
       $('#btn-math-launch')?.addEventListener('click', () => launchFromHub());
+      $('#btn-math-go-next')?.addEventListener('click', () => goToNextPlanetFromHub());
+      $('#btn-math-warp-go')?.addEventListener('click', () => finishWarpGo());
+      $('#btn-math-warp-stay')?.addEventListener('click', () => finishWarpStay());
 
       $('#btn-back-math-learn')?.addEventListener('click', () => openHub());
       $('#math-learn-tap')?.addEventListener('click', () => speakLearn());
@@ -387,6 +483,6 @@
     }
 
     bind();
-    window.KakaMath = { openHub, goHome, renderHub, openLearn, openCount };
+    window.KakaMath = { openHub, goHome, renderHub, openLearn, openCount, offerWarpHop };
   }
 })();

@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/styles.css?v=20260724j" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260724e" />
-  <link rel="stylesheet" href="./css/math.css?v=20260725d" />
+  <link rel="stylesheet" href="./css/math.css?v=20260810a" />
 </head>
 <body>
   <div id="app">
@@ -316,8 +316,10 @@
         </div>
         <div class="btn-row">
           <button type="button" class="btn" id="btn-math-launch">出發</button>
+          <button type="button" class="btn btn-secondary" id="btn-math-go-next" hidden>飛去下一粒</button>
         </div>
         <p class="math-coming" id="math-hub-coming" hidden></p>
+        <p class="math-lit-badge" id="math-hub-lit-badge" hidden>✨ 已點亮</p>
       </div>
     </section>
 
@@ -395,6 +397,28 @@
 
   <button type="button" class="btn btn-parent" id="btn-parent" aria-label="家長區">👪</button>
   <div class="star-burst" id="star-burst" aria-hidden="true">★</div>
+
+  <!-- 數理：星球飛過場 -->
+  <div id="math-warp" class="math-warp" hidden aria-live="polite">
+    <div class="math-warp-inner">
+      <div class="math-warp-planets">
+        <div class="math-warp-from">
+          <img id="math-warp-from-img" class="math-globe-img" src="" alt="" width="128" height="128" />
+          <span id="math-warp-from-name">水星</span>
+        </div>
+        <div class="math-warp-ship" aria-hidden="true">🚀</div>
+        <div class="math-warp-to">
+          <img id="math-warp-to-img" class="math-globe-img" src="" alt="" width="128" height="128" />
+          <span id="math-warp-to-name">金星</span>
+        </div>
+      </div>
+      <p class="math-warp-msg" id="math-warp-msg">點亮喇！飛去下一粒！</p>
+      <div class="btn-row math-warp-actions">
+        <button type="button" class="btn btn-ghost" id="btn-math-warp-stay">繼續玩呢粒</button>
+        <button type="button" class="btn" id="btn-math-warp-go">飛過去</button>
+      </div>
+    </div>
+  </div>
 
   <!-- PIN 解鎖 -->
   <div class="modal-backdrop" id="modal-pin" role="dialog" aria-modal="true" aria-labelledby="pin-title">
@@ -484,8 +508,8 @@
   <script src="./js/app.js?v=20260724j"></script>
   <script src="./js/phonics-words.js?v=20260724i"></script>
   <script src="./js/phonics-app.js?v=20260724i"></script>
-  <script src="./js/math-storage.js?v=20260725d"></script>
-  <script src="./js/math-skills.js?v=20260725d"></script>
-  <script src="./js/math-app.js?v=20260725d"></script>
+  <script src="./js/math-storage.js?v=20260810a"></script>
+  <script src="./js/math-skills.js?v=20260810a"></script>
+  <script src="./js/math-app.js?v=20260810a"></script>
 </body>
 </html>
