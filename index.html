@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/styles.css?v=20260810h" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260724e" />
-  <link rel="stylesheet" href="./css/math.css?v=20260810c" />
+  <link rel="stylesheet" href="./css/math.css?v=20260810d" />
 </head>
 <body>
   <div id="app">
@@ -544,6 +544,65 @@
       <p class="feedback" id="math-size-feedback" aria-live="polite"></p>
     </section>
 
+    <!-- 月球・先學一學（時間） -->
+    <section id="screen-math-moon-learn" class="screen math-screen" aria-label="月球・先學一學">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-moon-learn">← 太空站</button>
+        <h1 id="math-moon-learn-title">月球・先學</h1>
+        <div class="progress-pill" aria-label="學習進度">
+          <strong id="math-moon-learn-progress">1/4</strong>
+        </div>
+      </div>
+      <p class="section-lead" id="math-moon-learn-lead">睇吓鐘面，聽吓係幾點，撳喇叭再聽</p>
+      <button type="button" class="math-learn-stage math-moon-stage" id="math-moon-learn-tap" aria-label="再聽一次">
+        <img class="math-clock-img" id="math-moon-learn-clock" src="./assets/math/clock-openmoji/1F550.svg" alt="" width="200" height="200" />
+        <div class="math-venus-say" id="math-moon-learn-say">一點鐘</div>
+        <div class="learn-hear">🔊 聽一聽</div>
+      </button>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" id="btn-math-moon-learn-prev">上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-moon-learn-next">下一張</button>
+      </div>
+      <div class="btn-row" id="math-moon-learn-finish-row" hidden>
+        <button type="button" class="btn" id="btn-math-moon-learn-play">學完喇・去玩玩</button>
+      </div>
+    </section>
+
+    <!-- 月球・揀玩法 -->
+    <section id="screen-math-moon-play" class="screen math-screen" aria-label="月球・去玩玩">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-moon-play">← 再學</button>
+        <h1 id="math-moon-play-title">月球・去玩玩</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong id="math-moon-play-stars">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <p class="section-lead">揀一種玩法</p>
+      <div class="btn-stack">
+        <button type="button" class="btn" id="btn-math-mode-time">聽一聽・揀鐘</button>
+      </div>
+    </section>
+
+    <!-- 月球・揀鐘 -->
+    <section id="screen-math-time" class="screen math-screen" aria-label="月球・揀鐘">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-time">← 玩法</button>
+        <h1>揀一揀鐘</h1>
+        <div class="progress-pill" aria-label="答啱進度">
+          <strong id="math-time-progress">0/5</strong>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p id="math-time-prompt">揀出正確嘅時間</p>
+        <button type="button" class="speak-btn" id="btn-math-time-speak" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="math-clock-grid" id="math-time-options" aria-label="揀鐘面"></div>
+      <p class="feedback" id="math-time-feedback" aria-live="polite"></p>
+    </section>
+
     <!-- 小鹿數理探險：旅程總覽 -->
     <section id="screen-math-galaxy" class="screen math-screen" aria-label="小鹿數理探險・睇旅程">
       <div class="game-header">
@@ -669,8 +728,8 @@
   <script src="./js/app.js?v=20260810h"></script>
   <script src="./js/phonics-words.js?v=20260724i"></script>
   <script src="./js/phonics-app.js?v=20260724i"></script>
-  <script src="./js/math-storage.js?v=20260810c"></script>
-  <script src="./js/math-skills.js?v=20260810c"></script>
-  <script src="./js/math-app.js?v=20260810c"></script>
+  <script src="./js/math-storage.js?v=20260810d"></script>
+  <script src="./js/math-skills.js?v=20260810d"></script>
+  <script src="./js/math-app.js?v=20260810d"></script>
 </body>
 </html>

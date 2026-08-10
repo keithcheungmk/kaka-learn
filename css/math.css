@@ -736,6 +736,12 @@
   --math-planet: #3b82f6;
 }
 
+#screen-math-moon-learn.math-screen.active,
+#screen-math-moon-play.math-screen.active,
+#screen-math-time.math-screen.active {
+  --math-planet: #cbd5e1;
+}
+
 #screen-math-learn.math-screen.active::before,
 #screen-math-play.math-screen.active::before,
 #screen-math-count.math-screen.active::before,
@@ -744,7 +750,10 @@
 #screen-math-compare.math-screen.active::before,
 #screen-math-earth-learn.math-screen.active::before,
 #screen-math-earth-play.math-screen.active::before,
-#screen-math-size.math-screen.active::before {
+#screen-math-size.math-screen.active::before,
+#screen-math-moon-learn.math-screen.active::before,
+#screen-math-moon-play.math-screen.active::before,
+#screen-math-time.math-screen.active::before {
   background:
     radial-gradient(900px 500px at 50% 18%, color-mix(in srgb, var(--math-planet, #b6bcc4) 22%, transparent), transparent 58%),
     linear-gradient(180deg, rgba(7, 21, 38, 0.55) 0%, rgba(7, 21, 38, 0.72) 100%),
@@ -881,4 +890,53 @@
   line-height: 1;
   display: inline-block;
   animation: math-count-pop 0.35s ease both;
+}
+
+/* ---------- 月球・時間（OpenMoji 鐘面） ---------- */
+.math-clock-img {
+  width: min(52vw, 220px);
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.35));
+}
+
+.math-clock-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  max-width: 640px;
+  margin: 12px auto 0;
+}
+
+.math-clock-pick {
+  appearance: none;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  background: rgba(18, 40, 72, 0.6);
+  border-radius: 20px;
+  padding: 10px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.math-clock-pick img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+}
+
+.math-clock-pick:active {
+  transform: scale(0.96);
+}
+
+.math-clock-pick.is-ok {
+  border-color: rgba(253, 230, 138, 0.9);
+  box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.35);
+  animation: popOk 0.45s ease;
+}
+
+.math-clock-pick.is-bad {
+  animation: softShake 0.4s ease;
 }

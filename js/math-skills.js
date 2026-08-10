@@ -88,6 +88,16 @@
       blurb: '喺海王星學序數：邊個係第一？',
       img: PLANET_IMG('neptune'),
     },
+    {
+      id: 'time',
+      body: 'moon',
+      name: '月球',
+      skill: '時間',
+      color: '#cbd5e1',
+      order: 8,
+      blurb: '喺月球學睇鐘：整點同半點',
+      img: PLANET_IMG('moon'),
+    },
   ];
 
   function getPlanetById(id) {
