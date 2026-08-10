@@ -43,6 +43,9 @@
       vlearn: '#screen-math-venus-learn',
       vplay: '#screen-math-venus-play',
       compare: '#screen-math-compare',
+      elearn: '#screen-math-earth-learn',
+      eplay: '#screen-math-earth-play',
+      size: '#screen-math-size',
     };
 
     let learnIndex = 0;
@@ -55,6 +58,11 @@
     let compareRound = null;
     let compareCorrect = 0;
     let compareEmoji = '🌟';
+    let eLearnIndex = 0;
+    let sizeBusy = false;
+    let sizeRound = null;
+    let sizeCorrect = 0;
+    let sizeEmoji = '🌕';
     let warpFromPlanet = null;
     let warpToPlanet = null;
     let warpTimer = null;
@@ -604,6 +612,180 @@
       }
     }
 
+    /* ---------- 地球・先學（大細長短） ---------- */
+    const EARTH_EMOJIS = ['🌕', '🐢', '🚀', '⭐', '🌳', '🐌'];
+    const SIZE_L = 0.62; // 左
+    const SIZE_R = 1.0; // 右（較大／較長視乎問題）
+
+    const EARTH_LEARN_CARDS = [
+      { q: '邊個大啲？', left: 0.6, right: 1.05, say: '右邊大啲' },
+      { q: '邊個長啲？', left: 0.55, right: 1.0, say: '右邊長啲' },
+      { q: '邊個細啲？', left: 1.05, right: 0.6, say: '左邊細啲' },
+      { q: '邊個短啲？', left: 0.55, right: 1.0, say: '左邊短啲' },
+    ];
+
+    function openEarthLearn() {
+      updateState({ currentPlanetId: 'compare-size' });
+      eLearnIndex = 0;
+      sizeEmoji = EARTH_EMOJIS[Math.floor(Math.random() * EARTH_EMOJIS.length)];
+      const title = $('#math-earth-learn-title');
+      if (title) title.textContent = '地球・先學';
+      renderEarthLearnCard(true);
+      showMathScreen('elearn');
+    }
+
+    function renderEarthLearnCard(autoSpeak) {
+      const card = EARTH_LEARN_CARDS[eLearnIndex];
+      const L = $('#math-earth-learn-left');
+      const R = $('#math-earth-learn-right');
+      if (L) {
+        L.textContent = sizeEmoji;
+        L.style.fontSize = `calc(4.5rem * ${card.left})`;
+      }
+      if (R) {
+        R.textContent = sizeEmoji;
+        R.style.fontSize = `calc(4.5rem * ${card.right})`;
+      }
+      const say = $('#math-earth-learn-say');
+      if (say) say.textContent = card.say;
+      const lead = $('#math-earth-learn-lead');
+      if (lead) lead.textContent = card.q;
+      const progress = $('#math-earth-learn-progress');
+      if (progress) progress.textContent = `${eLearnIndex + 1}/${EARTH_LEARN_CARDS.length}`;
+
+      const prev = $('#btn-math-earth-learn-prev');
+      const next = $('#btn-math-earth-learn-next');
+      const finish = $('#math-earth-learn-finish-row');
+      if (prev) prev.disabled = eLearnIndex <= 0;
+      if (next) next.hidden = eLearnIndex >= EARTH_LEARN_CARDS.length - 1;
+      if (finish) finish.hidden = eLearnIndex < EARTH_LEARN_CARDS.length - 1;
+
+      if (autoSpeak) speakEarthLearn();
+    }
+
+    function speakEarthLearn() {
+      const card = EARTH_LEARN_CARDS[eLearnIndex];
+      speak(card.say);
+    }
+
+    /* ---------- 地球・比一比 ---------- */
+    function openEarthPlay() {
+      const stars = $('#math-earth-play-stars');
+      const state = loadState();
+      if (stars) stars.textContent = `${state.starsToday}/10`;
+      const title = $('#math-earth-play-title');
+      if (title) title.textContent = '地球・去玩玩';
+      showMathScreen('eplay');
+    }
+
+    const SIZE_QUESTIONS = [
+      { q: '邊個大啲？', answerWhenLeftBigger: 'left', answerWhenRightBigger: 'right' },
+      { q: '邊個細啲？', answerWhenLeftBigger: 'right', answerWhenRightBigger: 'left' },
+      { q: '邊個長啲？', answerWhenLeftBigger: 'left', answerWhenRightBigger: 'right' },
+      { q: '邊個短啲？', answerWhenLeftBigger: 'right', answerWhenRightBigger: 'left' },
+    ];
+
+    function openSizeQuiz() {
+      sizeBusy = false;
+      sizeCorrect = 0;
+      updateSizeProgress();
+      nextSizeRound(true);
+      showMathScreen('size');
+    }
+
+    function updateSizeProgress() {
+      const el = $('#math-size-progress');
+      if (el) el.textContent = `${sizeCorrect}/${LIT_TARGET}`;
+    }
+
+    function nextSizeRound(autoSpeak) {
+      sizeEmoji = EARTH_EMOJIS[Math.floor(Math.random() * EARTH_EMOJIS.length)];
+      const def = SIZE_QUESTIONS[Math.floor(Math.random() * SIZE_QUESTIONS.length)];
+      const leftBigger = Math.random() < 0.5;
+      const leftScale = leftBigger ? 1.05 : 0.62;
+      const rightScale = leftBigger ? 0.62 : 1.05;
+      const answer = leftBigger ? def.answerWhenLeftBigger : def.answerWhenRightBigger;
+      sizeRound = { answer, prompt: def.q, leftScale, rightScale };
+
+      const L = $('#math-size-left');
+      const R = $('#math-size-right');
+      if (L) {
+        L.textContent = sizeEmoji;
+        L.style.fontSize = `calc(4.5rem * ${leftScale})`;
+      }
+      if (R) {
+        R.textContent = sizeEmoji;
+        R.style.fontSize = `calc(4.5rem * ${rightScale})`;
+      }
+
+      const prompt = $('#math-size-prompt');
+      if (prompt) prompt.textContent = def.q;
+      const fb = $('#math-size-feedback');
+      if (fb) fb.textContent = '';
+      $('#math-size-field')
+        ?.querySelectorAll('.math-size-pick')
+        .forEach((b) => b.classList.remove('is-ok', 'is-bad'));
+      if (autoSpeak) speak(def.q);
+    }
+
+    function onSizePick(side) {
+      if (sizeBusy || !sizeRound) return;
+      sizeBusy = true;
+      const muted = isMuted();
+      const fb = $('#math-size-feedback');
+      const ok = side === sizeRound.answer;
+      const btn = $(`#math-size-field .math-size-pick[data-side="${side}"]`);
+
+      if (ok) {
+        btn?.classList.add('is-ok');
+        const { gained } = tryEarnStar();
+        if (gained) {
+          flashStarBurst();
+          speech?.playStarCue?.({ muted });
+        } else {
+          speech?.playCorrectCue?.({ muted });
+        }
+        sizeCorrect += 1;
+        updateSizeProgress();
+        const praise =
+          speech?.speakCorrectFeedback?.({ muted }) || '你好叻呀，答啱咗！';
+        if (fb) fb.textContent = gained ? `${praise} ★` : praise;
+
+        if (sizeCorrect >= LIT_TARGET && !isPlanetLit('compare-size')) {
+          lightPlanet('compare-size');
+          if (fb) fb.textContent = `${praise} 地球點亮喇！`;
+          const fromP = getPlanetById('compare-size');
+          const toP = getPlanetById(getNextPlanetId('compare-size'));
+          setTimeout(() => {
+            sizeBusy = false;
+            offerWarpHop(fromP, toP);
+          }, 900);
+          return;
+        }
+
+        const stars = $('#math-earth-play-stars');
+        const state = loadState();
+        if (stars) stars.textContent = `${state.starsToday}/10`;
+
+        setTimeout(() => {
+          sizeBusy = false;
+          nextSizeRound(true);
+        }, 1100);
+      } else {
+        btn?.classList.add('is-bad');
+        speech?.playTryAgainCue?.({ muted });
+        const line = speech?.speakRetryFeedback?.({ muted }) || '唔緊要，試多次！';
+        if (fb) fb.textContent = line;
+        const field = $('#math-size-field');
+        if (field) field.style.outline = '3px solid rgba(253, 230, 138, 0.7)';
+        setTimeout(() => {
+          btn?.classList.remove('is-bad');
+          if (field) field.style.outline = '';
+          sizeBusy = false;
+        }, 700);
+      }
+    }
+
     function goToNextPlanetFromHub() {
       const planet = getPlanetById(loadState().currentPlanetId);
       if (!isPlanetLit(planet.id)) return;
@@ -622,10 +804,14 @@
         openVenusLearn();
         return;
       }
+      if (planet.id === 'compare-size') {
+        openEarthLearn();
+        return;
+      }
       const note = $('#math-hub-coming');
       if (note) {
         note.hidden = false;
-        note.textContent = `${planet.name}玩法即將開放；而家可以去水星數數，或者金星學邊多邊少！`;
+        note.textContent = `${planet.name}玩法即將開放；而家可以去水星、金星或者地球玩！`;
       }
       renderHub();
     }
@@ -694,6 +880,33 @@
         .forEach((btn) => {
           btn.addEventListener('click', () => onComparePick(btn.dataset.side));
         });
+
+      $('#btn-back-math-earth-learn')?.addEventListener('click', () => openHub());
+      $('#math-earth-learn-tap')?.addEventListener('click', () => speakEarthLearn());
+      $('#btn-math-earth-learn-prev')?.addEventListener('click', () => {
+        if (eLearnIndex <= 0) return;
+        eLearnIndex -= 1;
+        renderEarthLearnCard(true);
+      });
+      $('#btn-math-earth-learn-next')?.addEventListener('click', () => {
+        if (eLearnIndex >= EARTH_LEARN_CARDS.length - 1) return;
+        eLearnIndex += 1;
+        renderEarthLearnCard(true);
+      });
+      $('#btn-math-earth-learn-play')?.addEventListener('click', () => openEarthPlay());
+
+      $('#btn-back-math-earth-play')?.addEventListener('click', () => openEarthLearn());
+      $('#btn-math-mode-size')?.addEventListener('click', () => openSizeQuiz());
+
+      $('#btn-back-math-size')?.addEventListener('click', () => openEarthPlay());
+      $('#btn-math-size-speak')?.addEventListener('click', () => {
+        if (sizeRound) speak(sizeRound.prompt);
+      });
+      document
+        .querySelectorAll('#math-size-field .math-size-pick')
+        .forEach((btn) => {
+          btn.addEventListener('click', () => onSizePick(btn.dataset.side));
+        });
     }
 
     bind();
@@ -705,6 +918,8 @@
       openCount,
       openVenusLearn,
       openCompare,
+      openEarthLearn,
+      openSizeQuiz,
       offerWarpHop,
     };
   }
