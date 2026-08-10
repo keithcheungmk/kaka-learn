@@ -357,6 +357,24 @@ const WORDS = [
   { id: 'fuzhilong', term: '副櫛龍', isDeer: false, emoji: '🦕', badge: '冠', plate: '#2a3548', photo: 'assets/dino/fuzhilong.jpg' },
   { id: 'jialong', term: '甲龍', isDeer: false, emoji: '🦕', badge: '甲', plate: '#3a2818', photo: 'assets/dino/jialong.jpg' },
   { id: 'sulong', term: '速龍', isDeer: false, emoji: '🦖', badge: '速', plate: '#1a3050', photo: 'assets/dino/sulong.jpg' },
+  // 昆蟲小生物
+  { id: 'hudie', term: '蝴蝶', isDeer: false, emoji: '🦋', badge: '', plate: '#402038' },
+  { id: 'mifeng', term: '蜜蜂', isDeer: false, emoji: '🐝', badge: '', plate: '#3a3410' },
+  { id: 'mayi', term: '螞蟻', isDeer: false, emoji: '🐜', badge: '', plate: '#2a3810' },
+  { id: 'jiachong', term: '甲蟲', isDeer: false, emoji: '🪲', badge: '', plate: '#143828' },
+  { id: 'zhizhu', term: '蜘蛛', isDeer: false, emoji: '🕷️', badge: '', plate: '#1a1a22' },
+  { id: 'woniu', term: '蝸牛', isDeer: false, emoji: '🐌', badge: '', plate: '#3a2818' },
+  { id: 'maomaochong', term: '毛毛蟲', isDeer: false, emoji: '🐛', badge: '', plate: '#2a3810' },
+  { id: 'qingting', term: '蜻蜓', isDeer: false, emoji: '🪽', badge: '蜻', plate: '#0f3550' },
+  // 海洋動物
+  { id: 'shayu', term: '鯊魚', isDeer: false, emoji: '🦈', badge: '', plate: '#0f3550' },
+  { id: 'jingyu', term: '鯨魚', isDeer: false, emoji: '🐋', badge: '', plate: '#102848' },
+  { id: 'bazhaoyu', term: '八爪魚', isDeer: false, emoji: '🐙', badge: '', plate: '#402038' },
+  { id: 'shuimu', term: '水母', isDeer: false, emoji: '🪼', badge: '', plate: '#2a1840' },
+  { id: 'haigui', term: '海龜', isDeer: false, emoji: '🐢', badge: '', plate: '#143828' },
+  { id: 'haixing', term: '海星', isDeer: false, emoji: '⭐', badge: '海', plate: '#3a3010' },
+  { id: 'xiaochouyu', term: '小丑魚', isDeer: false, emoji: '🐠', badge: '丑', plate: '#401820' },
+  { id: 'youyu', term: '魷魚', isDeer: false, emoji: '🦑', badge: '', plate: '#0f3550' },
   // 衣物
   { id: 'shan', term: '衫', isDeer: false, emoji: '👕', badge: '', plate: '#3a3010' },
   { id: 'fu', term: '褲', isDeer: false, emoji: '👖', badge: '', plate: '#102848' },
@@ -608,6 +626,20 @@ const TOPICS = [
     blurb: '衫、褲、裙、鞋、襪、帽、頸巾、手套',
     cover: '👕',
     wordIds: ['shan', 'fu', 'kwan', 'haai', 'mat', 'mou', 'waihgan', 'shoutao'],
+  },
+  {
+    id: 'bugs',
+    title: '昆蟲小生物',
+    blurb: '蝴蝶、蜜蜂、螞蟻、甲蟲、蜘蛛、蝸牛、毛毛蟲、蜻蜓',
+    cover: '🦋',
+    wordIds: ['hudie', 'mifeng', 'mayi', 'jiachong', 'zhizhu', 'woniu', 'maomaochong', 'qingting'],
+  },
+  {
+    id: 'ocean',
+    title: '海洋動物',
+    blurb: '鯊魚、鯨魚、八爪魚、水母、海龜、海星、小丑魚、魷魚',
+    cover: '🦈',
+    wordIds: ['shayu', 'jingyu', 'bazhaoyu', 'shuimu', 'haigui', 'haixing', 'xiaochouyu', 'youyu'],
   },
 ];
 
