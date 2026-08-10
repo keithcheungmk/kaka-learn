@@ -344,6 +344,8 @@ const WORDS = [
   { id: 'bashi_siji', term: '巴士司機', isDeer: false, emoji: '🚌🧑‍✈️', emojiDuo: true, badge: '', plate: '#3a3010' },
   { id: 'jianzhu_gongren', term: '建築工人', isDeer: false, emoji: '👷🏗️', emojiDuo: true, badge: '', plate: '#3a3010' },
   { id: 'faxingshi', term: '髮型師', isDeer: false, emoji: '💇✂️', emojiDuo: true, badge: '', plate: '#402038' },
+  { id: 'huanbao_zhuren', term: '環境保護主任', isDeer: false, emoji: '🌍🛡️', emojiDuo: true, badge: '', plate: '#143828' },
+  { id: 'yiliao_xiaoshou', term: '醫療銷售代表', isDeer: false, emoji: '💊💼', emojiDuo: true, badge: '', plate: '#102848' },
   // 恐龍
   { id: 'konglong', term: '恐龍', isDeer: false, emoji: '🦕', badge: '', plate: '#1a4d3a' },
   { id: 'baolong', term: '暴龍', isDeer: false, emoji: '🦖', badge: '', plate: '#3a2818' },
@@ -588,7 +590,7 @@ const TOPICS = [
     cover: '👨‍⚕️',
     wordIds: ['yisheng', 'hushi', 'laoshi_job', 'xiaofangyuan', 'jingcha', 'chushi', 'siji', 'nongfu',
       'jishi', 'kongjie', 'taikongren', 'yayi', 'shouyi', 'kexuejia', 'huajia', 'yinyuejia',
-      'yundongyuan', 'bashi_siji', 'jianzhu_gongren', 'faxingshi'],
+      'yundongyuan', 'bashi_siji', 'jianzhu_gongren', 'faxingshi', 'huanbao_zhuren', 'yiliao_xiaoshou'],
   },
   {
     id: 'dino',
