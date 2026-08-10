@@ -346,14 +346,17 @@ const WORDS = [
   { id: 'faxingshi', term: '髮型師', isDeer: false, emoji: '💇✂️', emojiDuo: true, badge: '', plate: '#402038' },
   { id: 'huanbao_zhuren', term: '環境保護主任', isDeer: false, emoji: '♻️👮', emojiDuo: true, badge: '', plate: '#143828' },
   { id: 'yiliao_xiaoshou', term: '醫療銷售代表', isDeer: false, emoji: '💊🤝', emojiDuo: true, badge: '', plate: '#102848' },
-  // 恐龍
+  // 恐龍（彩色復原圖；emoji 係 fallback）
   { id: 'konglong', term: '恐龍', isDeer: false, emoji: '🦕', badge: '', plate: '#1a4d3a' },
-  { id: 'baolong', term: '暴龍', isDeer: false, emoji: '🦖', badge: '', plate: '#3a2818' },
-  { id: 'sanjiaolong', term: '三角龍', isDeer: false, emoji: '🦕', badge: '三', plate: '#2a3548' },
-  { id: 'lianglong', term: '梁龍', isDeer: false, emoji: '🦕', badge: '梁', plate: '#1a4d3a' },
-  { id: 'jianlong', term: '劍龍', isDeer: false, emoji: '🦕', badge: '劍', plate: '#2a2a35' },
-  { id: 'yilong', term: '翼龍', isDeer: false, emoji: '🦅', badge: '翼', plate: '#102848' },
+  { id: 'baolong', term: '暴龍', isDeer: false, emoji: '🦖', badge: '', plate: '#3a2818', photo: 'assets/dino/baolong.jpg' },
+  { id: 'sanjiaolong', term: '三角龍', isDeer: false, emoji: '🦕', badge: '三', plate: '#2a3548', photo: 'assets/dino/sanjiaolong.jpg' },
+  { id: 'lianglong', term: '梁龍', isDeer: false, emoji: '🦕', badge: '梁', plate: '#1a4d3a', photo: 'assets/dino/lianglong.jpg' },
+  { id: 'jianlong', term: '劍龍', isDeer: false, emoji: '🦕', badge: '劍', plate: '#2a2a35', photo: 'assets/dino/jianlong.jpg' },
+  { id: 'yilong', term: '翼龍', isDeer: false, emoji: '🦅', badge: '翼', plate: '#102848', photo: 'assets/dino/yilong.jpg' },
   { id: 'konglongdan', term: '恐龍蛋', isDeer: false, emoji: '🥚', badge: '恐', plate: '#3a3010' },
+  { id: 'fuzhilong', term: '副櫛龍', isDeer: false, emoji: '🦕', badge: '冠', plate: '#2a3548', photo: 'assets/dino/fuzhilong.jpg' },
+  { id: 'jialong', term: '甲龍', isDeer: false, emoji: '🦕', badge: '甲', plate: '#3a2818', photo: 'assets/dino/jialong.jpg' },
+  { id: 'sulong', term: '速龍', isDeer: false, emoji: '🦖', badge: '速', plate: '#1a3050', photo: 'assets/dino/sulong.jpg' },
   // 衣物
   { id: 'shan', term: '衫', isDeer: false, emoji: '👕', badge: '', plate: '#3a3010' },
   { id: 'fu', term: '褲', isDeer: false, emoji: '👖', badge: '', plate: '#102848' },
@@ -595,9 +598,9 @@ const TOPICS = [
   {
     id: 'dino',
     title: '恐龍',
-    blurb: '暴龍、三角龍、梁龍、劍龍、翼龍、恐龍蛋',
+    blurb: '暴龍、三角龍、梁龍、劍龍、翼龍、副櫛龍、甲龍、速龍…',
     cover: '🦖',
-    wordIds: ['konglong', 'baolong', 'sanjiaolong', 'lianglong', 'jianlong', 'yilong', 'konglongdan'],
+    wordIds: ['konglong', 'baolong', 'sanjiaolong', 'lianglong', 'jianlong', 'yilong', 'konglongdan', 'fuzhilong', 'jialong', 'sulong'],
   },
   {
     id: 'clothes',
