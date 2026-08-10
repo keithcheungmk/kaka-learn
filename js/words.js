@@ -306,6 +306,22 @@ const WORDS = [
   { id: 'xiexie', term: '謝謝', isDeer: false, emoji: '🙏', badge: '', plate: '#3a3010' },
   { id: 'laoshi', term: '老師', isDeer: false, emoji: '👩‍🏫', badge: '', plate: '#102848' },
   { id: 'shu_book', term: '書', isDeer: false, emoji: '📕', badge: '', plate: '#401820' },
+  // 港式美食（用真實相；emoji 係 fallback）
+  { id: 'feiniu_wudong', term: '肥牛烏冬', isDeer: false, emoji: '🍜', badge: '', plate: '#3a3010', photo: 'assets/food-hk/feiniu-wudong.jpg' },
+  { id: 'gulourou', term: '咕嚕肉', isDeer: false, emoji: '🍖', badge: '', plate: '#401820', photo: 'assets/food-hk/gulourou.jpg' },
+  { id: 'dabianlu', term: '打邊爐', isDeer: false, emoji: '🍲', badge: '', plate: '#401018', photo: 'assets/food-hk/dabianlu.jpg' },
+  { id: 'yezi', term: '椰子', isDeer: false, emoji: '🥥', badge: '', plate: '#3a2818', photo: 'assets/food-hk/yezi.jpg' },
+  { id: 'maileji', term: '麥樂雞', isDeer: false, emoji: '🍗', badge: '', plate: '#3a3010', photo: 'assets/food-hk/maileji.jpg' },
+  { id: 'roujiang_yifen', term: '肉醬意粉', isDeer: false, emoji: '🍝', badge: '', plate: '#401820', photo: 'assets/food-hk/roujiang-yifen.jpg' },
+  { id: 'wonton_mian', term: '雲吞麵', isDeer: false, emoji: '🍜', badge: '', plate: '#3a3010', photo: 'assets/food-hk/wonton-mian.jpg' },
+  { id: 'changfen', term: '腸粉', isDeer: false, emoji: '🍚', badge: '', plate: '#2a3548', photo: 'assets/food-hk/changfen.jpg' },
+  { id: 'siumai', term: '燒賣', isDeer: false, emoji: '🥟', badge: '', plate: '#3a3010', photo: 'assets/food-hk/siumai.jpg' },
+  { id: 'yudan', term: '魚蛋', isDeer: false, emoji: '🍢', badge: '', plate: '#3a3010', photo: 'assets/food-hk/yudan.jpg' },
+  { id: 'naicha', term: '奶茶', isDeer: false, emoji: '🧋', badge: '', plate: '#3a2818', photo: 'assets/food-hk/naicha.jpg' },
+  { id: 'boluoyou', term: '菠蘿油', isDeer: false, emoji: '🍍', badge: '', plate: '#3a3410', photo: 'assets/food-hk/boluoyou.jpg' },
+  { id: 'fanqie_chaodan', term: '蕃茄炒蛋', isDeer: false, emoji: '🍅', badge: '', plate: '#401820', photo: 'assets/food-hk/fanqie-chaodan.jpg' },
+  { id: 'zheng_yu', term: '蒸魚', isDeer: false, emoji: '🐟', badge: '', plate: '#0f3550', photo: 'assets/food-hk/zheng-yu.jpg' },
+  { id: 'zheng_shuidan', term: '蒸水蛋', isDeer: false, emoji: '🥚', badge: '', plate: '#3a3a45', photo: 'assets/food-hk/zheng-shuidan.jpg' },
   // 相反／空間（主題 opposites；大／小／多／少／上／下同紅輯共用）
   { id: 'chang_long', term: '長', isDeer: false, emoji: '📏', badge: '長', plate: '#1a3050' },
   { id: 'duan_short', term: '短', isDeer: false, emoji: '✏️', badge: '短', plate: '#3a3010' },
@@ -515,6 +531,17 @@ const TOPICS = [
       'shuzai', 'yangcong', 'mogu', 'huanggua', 'wandou', 'nangua',
     ],
   },
+  {
+    id: 'hk_food',
+    title: '港式美食',
+    blurb: '茶餐廳、小菜同屋企常見味道',
+    cover: '🍽️',
+    wordIds: [
+      'feiniu_wudong', 'gulourou', 'dabianlu', 'yezi', 'maileji', 'roujiang_yifen',
+      'wonton_mian', 'changfen', 'siumai', 'yudan', 'naicha', 'boluoyou',
+      'fanqie_chaodan', 'zheng_yu', 'zheng_shuidan',
+    ],
+  },
 ];
 
 function getWordById(id) {
@@ -578,12 +605,18 @@ function getOppositeWord(wordId) {
   });
 })();
 
-/** 產生卡片插圖 HTML（大粒系統 Emoji） */
+/** 產生卡片插圖 HTML（大粒系統 Emoji；有 photo 就用真實相） */
 function wordIllustHtml(word) {
   const badgeIsEmoji = word.badge && /\p{Extended_Pictographic}/u.test(word.badge);
   const badge = word.badge
     ? `<span class="emoji-badge${badgeIsEmoji ? ' emoji-badge-icon' : ''}" aria-hidden="true">${word.badge}</span>`
     : '';
+  if (word.photo) {
+    return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
+    <img class="word-photo" src="${word.photo}" alt="${word.term}" loading="lazy" />
+    ${badge}
+  </span>`;
+  }
   const faceClass = word.emojiDuo ? 'emoji-face emoji-face-duo' : 'emoji-face';
   return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
     <span class="${faceClass}" aria-hidden="true">${word.emoji}</span>
