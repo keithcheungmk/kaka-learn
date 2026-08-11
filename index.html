@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/styles.css?v=20260810i" />
+  <link rel="stylesheet" href="./css/styles.css?v=20260811c" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260724e" />
   <link rel="stylesheet" href="./css/math.css?v=20260811j" />
 </head>
@@ -60,6 +60,22 @@
       </div>
       <p class="section-lead">揀一組，先一齊睇字同圖</p>
       <div class="topic-grid" id="topic-grid"></div>
+    </section>
+
+    <!-- 紅橙輯：揀書 -->
+    <section id="screen-books" class="screen" aria-label="揀書">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-books">← 主題</button>
+        <h1 id="books-topic-title">揀書</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong class="stars-today-inline">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <p class="section-lead">今日讀咗邊本書？揀返嗰本嚟溫習</p>
+      <div class="topic-grid" id="book-grid"></div>
     </section>
 
     <!-- 先學一學 -->
@@ -722,10 +738,10 @@
     </div>
   </div>
 
-  <script src="./js/words.js?v=20260811b"></script>
+  <script src="./js/words.js?v=20260811c"></script>
   <script src="./js/storage.js?v=20260724b"></script>
   <script src="./js/speech.js?v=20260724b"></script>
-  <script src="./js/app.js?v=20260810i"></script>
+  <script src="./js/app.js?v=20260811c"></script>
   <script src="./js/phonics-words.js?v=20260724i"></script>
   <script src="./js/phonics-app.js?v=20260724i"></script>
   <script src="./js/math-storage.js?v=20260811j"></script>

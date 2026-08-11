@@ -12,7 +12,7 @@
     return;
   }
 
-const { WORDS, DEER_IDS, TOPICS, wordIllustHtml, getTopicById, wordsForTopic, oppositePairWords, getOppositeWord } = window.KakaWords;
+const { WORDS, DEER_IDS, TOPICS, wordIllustHtml, getTopicById, wordsForTopic, oppositePairWords, getOppositeWord, getWordById } = window.KakaWords;
 const {
   loadState,
   updateState,
@@ -54,6 +54,8 @@ let buildSelectedKey = null;
 let buildDrag = null;
 /** @type {string|null} */
 let activeTopicId = null;
+/** @type {{ id: string, title: string, wordIds: string[] }|null} 紅橙輯入面揀咗邊本書 */
+let activeBook = null;
 /** @type {ReturnType<typeof wordsForTopic>} */
 let learnWords = [];
 /** @type {{ left: object, right: object }[]} */
@@ -145,11 +147,20 @@ function bindHome() {
 function bindTopics() {
   const back = $('#btn-back-topics');
   if (back) back.onclick = () => showScreen('home');
+  const backBooks = $('#btn-back-books');
+  if (backBooks) backBooks.onclick = () => openTopics();
 }
 
 function bindLearn() {
   const back = $('#btn-back-learn');
-  if (back) back.onclick = () => openTopics();
+  if (back) back.onclick = () => {
+    if (activeBook) {
+      const topic = getTopicById(activeTopicId);
+      if (topic) openBookPicker(topic);
+      return;
+    }
+    openTopics();
+  };
   const stage = $('#learn-stage');
   if (stage) stage.onclick = () => speakCurrentLearn();
   const pairLeft = $('#learn-pair-left');
@@ -178,7 +189,13 @@ function bindLearn() {
 
 function bindPlayPick() {
   const back = $('#btn-back-play');
-  if (back) back.onclick = () => openLearn(activeTopicId);
+  if (back) back.onclick = () => {
+    if (activeBook) {
+      openBook(activeBook.id);
+      return;
+    }
+    openLearn(activeTopicId);
+  };
   const listenBtn = $('#btn-mode-listen');
   const matchBtn = $('#btn-mode-match');
   const buildBtn = $('#btn-mode-build');
@@ -192,6 +209,7 @@ function showScreen(name) {
   const map = {
     home: '#screen-home',
     topics: '#screen-topics',
+    books: '#screen-books',
     learn: '#screen-learn',
     play: '#screen-play',
     listen: '#screen-listen',
@@ -203,9 +221,110 @@ function showScreen(name) {
 }
 
 function openTopics() {
+  activeBook = null;
   renderTopics();
   showScreen('topics');
   refreshStarUI();
+}
+
+/** 紅橙輯等主題入面再分書：顯示揀書頁 */
+function openBookPicker(topic) {
+  activeBook = null;
+  const title = $('#books-topic-title');
+  if (title) title.textContent = topic.title;
+  const grid = $('#book-grid');
+  if (grid) {
+    grid.innerHTML = '';
+    const allCard = document.createElement('button');
+    allCard.type = 'button';
+    allCard.className = 'topic-card';
+    allCard.innerHTML = `
+      <span class="topic-cover" aria-hidden="true">🎲</span>
+      <span class="topic-title">全部${topic.title}</span>
+      <span class="topic-blurb">晒成輯 ${topic.wordIds.length} 個字詞</span>
+    `;
+    allCard.onclick = () => {
+      activeBook = null;
+      startLearn(topic, null);
+    };
+    grid.appendChild(allCard);
+    topic.books.forEach((book) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'topic-card';
+      btn.innerHTML = `
+        <span class="topic-cover" aria-hidden="true">${book.cover || '📖'}</span>
+        <span class="topic-title">${book.title}</span>
+        <span class="topic-blurb">${book.wordIds.length} 個字詞</span>
+      `;
+      btn.onclick = () => openBook(book.id);
+      grid.appendChild(btn);
+    });
+  }
+  showScreen('books');
+  refreshStarUI();
+}
+
+function openBook(bookId) {
+  const topic = getTopicById(activeTopicId);
+  const book = topic?.books?.find((b) => b.id === bookId);
+  if (!book) return;
+  activeBook = book;
+  startLearn(topic, book);
+}
+
+function openLearn(topicId) {
+  const topic = getTopicById(topicId);
+  if (!topic) return;
+  activeTopicId = topicId;
+  activeBook = null;
+  if (topic.books && topic.books.length) {
+    openBookPicker(topic);
+    return;
+  }
+  startLearn(topic, null);
+}
+
+function startLearn(topic, book) {
+  state = loadState();
+  const enabledIds =
+    state.enabledWordIds && state.enabledWordIds.length
+      ? state.enabledWordIds
+      : WORDS.map((w) => w.id);
+  const enabled = new Set(enabledIds);
+  const sourceWords = book
+    ? book.wordIds.map(getWordById).filter(Boolean)
+    : wordsForTopic(topic.id);
+
+  learnPairMode = topic.id === 'opposites';
+  learnPairs = [];
+  learnWords = sourceWords.filter((w) => enabled.has(w.id));
+  if (learnWords.length < 1) learnWords = sourceWords;
+
+  if (learnPairMode) {
+    learnPairs = oppositePairWords(enabledIds);
+    if (learnPairs.length < 1) learnPairs = oppositePairWords(null);
+    learnPairs = shuffle(learnPairs);
+    // 考試／其他模式仍用單字列表
+    learnWords = learnPairs.flatMap((p) => [p.left, p.right]);
+  } else {
+    // 每次入主題都打亂順序，令卡卡更有新鮮感
+    learnWords = shuffle(learnWords);
+  }
+
+  learnIndex = 0;
+  const title = $('#learn-topic-title');
+  if (title) title.textContent = book ? `${topic.title}・${book.title}` : topic.title;
+  const backBtn = $('#btn-back-learn');
+  if (backBtn) backBtn.textContent = book ? '← 揀書' : '← 主題';
+  const lead = $('#learn-lead');
+  if (lead) {
+    lead.textContent = learnPairMode
+      ? '左右係一對相反詞，撳邊邊聽邊邊'
+      : '睇吓圖同字，撳喇叭聽廣東話';
+  }
+  renderLearnCard();
+  showScreen('learn');
 }
 
 function renderTopics() {
@@ -224,46 +343,6 @@ function renderTopics() {
     btn.onclick = () => openLearn(topic.id);
     grid.appendChild(btn);
   });
-}
-
-function openLearn(topicId) {
-  const topic = getTopicById(topicId);
-  if (!topic) return;
-  activeTopicId = topicId;
-  state = loadState();
-  const enabledIds =
-    state.enabledWordIds && state.enabledWordIds.length
-      ? state.enabledWordIds
-      : WORDS.map((w) => w.id);
-  const enabled = new Set(enabledIds);
-
-  learnPairMode = topicId === 'opposites';
-  learnPairs = [];
-  learnWords = wordsForTopic(topicId).filter((w) => enabled.has(w.id));
-  if (learnWords.length < 1) learnWords = wordsForTopic(topicId);
-
-  if (learnPairMode) {
-    learnPairs = oppositePairWords(enabledIds);
-    if (learnPairs.length < 1) learnPairs = oppositePairWords(null);
-    learnPairs = shuffle(learnPairs);
-    // 考試／其他模式仍用單字列表
-    learnWords = learnPairs.flatMap((p) => [p.left, p.right]);
-  } else {
-    // 每次入主題都打亂順序，令卡卡更有新鮮感
-    learnWords = shuffle(learnWords);
-  }
-
-  learnIndex = 0;
-  const title = $('#learn-topic-title');
-  if (title) title.textContent = topic.title;
-  const lead = $('#learn-lead');
-  if (lead) {
-    lead.textContent = learnPairMode
-      ? '左右係一對相反詞，撳邊邊聽邊邊'
-      : '睇吓圖同字，撳喇叭聽廣東話';
-  }
-  renderLearnCard();
-  showScreen('learn');
 }
 
 function renderLearnCard() {
@@ -385,7 +464,9 @@ function stepLearn(delta) {
 function openPlayPick() {
   const topic = getTopicById(activeTopicId);
   const title = $('#play-topic-title');
-  if (title) title.textContent = topic ? `${topic.title}・去玩玩` : '去玩玩';
+  const base = topic ? topic.title : '';
+  const withBook = activeBook ? `${base}・${activeBook.title}` : base;
+  if (title) title.textContent = withBook ? `${withBook}・去玩玩` : '去玩玩';
   const listenBtn = $('#btn-mode-listen');
   const matchBtn = $('#btn-mode-match');
   if (activeTopicId === 'opposites') {
@@ -403,7 +484,11 @@ function enabledWords() {
   state = loadState();
   const ids = state.enabledWordIds;
   let list = !ids || !ids.length ? [...WORDS] : WORDS.filter((w) => ids.includes(w.id));
-  if (activeTopicId) {
+  if (activeBook) {
+    const bookSet = new Set(activeBook.wordIds);
+    list = list.filter((w) => bookSet.has(w.id));
+    if (list.length < 2) list = activeBook.wordIds.map(getWordById).filter(Boolean);
+  } else if (activeTopicId) {
     const topicSet = new Set(wordsForTopic(activeTopicId).map((w) => w.id));
     list = list.filter((w) => topicSet.has(w.id));
   }
