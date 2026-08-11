@@ -694,7 +694,7 @@ const WORDS = [
   { id: 'shu_bunch', term: '束', isDeer: false, emoji: '💐', badge: '束', plate: '#402038' },
   { id: 'xiegui', term: '鞋櫃', isDeer: false, emoji: '👟', badge: '櫃', plate: '#2a3548' },
   { id: 'dui_pair', term: '對', isDeer: false, emoji: '👟👟', emojiDuo: true, badge: '', plate: '#1a3050' },
-  // 認字卡單字（《我自己會讀》書卡用）
+  // 認字卡詞／字（《我自己會讀》書卡用；可為單字或詞組）
   { id: 'yun_char', term: '雲', isDeer: false, emoji: '☁️', badge: '', plate: '#2a3548' },
   { id: 'peng_char', term: '朋', isDeer: false, emoji: '👫', badge: '', plate: '#2a3548' },
   { id: 'qi_char', term: '氣', isDeer: false, emoji: '💨', badge: '', plate: '#2a3548' },
