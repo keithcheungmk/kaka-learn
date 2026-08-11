@@ -849,7 +849,7 @@
 
     function speakMoonLearn() {
       const card = MOON_LEARN_CARDS[mLearnIndex];
-      speak(`${card.say}。短針指住邊個數字，就係幾點。`);
+      speak(card.learnSay || card.say);
     }
 
     /* ---------- 月球・聽一聽揀鐘 ---------- */
