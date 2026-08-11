@@ -928,6 +928,63 @@
   filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.35));
 }
 
+/* 幼齡友善：喺鐘面上疊加 12/3/6/9 + 小時點（唔改動 OpenMoji 原圖） */
+.math-clock-face {
+  position: relative;
+  width: min(52vw, 220px);
+  margin: 0 auto;
+}
+
+.math-clock-face .math-clock-img {
+  width: 100%;
+  margin: 0;
+}
+
+.math-clock-face .math-clock-marker {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: #243447;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.math-clock-face .math-clock-marker--num {
+  font-size: clamp(1rem, 4vw, 1.3rem);
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 10px;
+  padding: 2px 7px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.math-clock-face .math-clock-marker--dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #243447;
+}
+
+.math-clock-face .math-clock-marker--dot {
+  transform: translate(-50%, -50%);
+}
+
+.math-clock-face--small {
+  width: 100%;
+}
+
+.math-clock-face--small .math-clock-marker--num {
+  font-size: clamp(0.75rem, 2.8vw, 0.95rem);
+  padding: 1px 5px;
+}
+
+.math-clock-face--small .math-clock-marker--dot {
+  width: 5px;
+  height: 5px;
+}
+
 #screen-math-time .game-header {
   flex-wrap: wrap;
   gap: 8px 12px;
@@ -983,4 +1040,11 @@
 #screen-math-time .feedback {
   margin: 12px 0 8px;
   padding-bottom: 8px;
+}
+
+.math-clock-label {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.92rem;
+  color: var(--ink-dim);
 }

@@ -143,6 +143,37 @@
       return a;
     }
 
+    /** 幼齡鐘面：喺 OpenMoji 鐘上加 12/3/6/9 大數字 + 小時點（視覺提示） */
+    function clockFaceHtml(src, say, { small = false } = {}) {
+      const hourLabels = [
+        { h: 12, ang: 0, num: true },
+        { h: 1, ang: 30 },
+        { h: 2, ang: 60 },
+        { h: 3, ang: 90, num: true },
+        { h: 4, ang: 120 },
+        { h: 5, ang: 150 },
+        { h: 6, ang: 180, num: true },
+        { h: 7, ang: 210 },
+        { h: 8, ang: 240 },
+        { h: 9, ang: 270, num: true },
+        { h: 10, ang: 300 },
+        { h: 11, ang: 330 },
+      ];
+      const markers = hourLabels
+        .map((m) => {
+          const rad = ((m.ang - 90) * Math.PI) / 180;
+          const r = 44;
+          const x = 50 + r * Math.cos(rad);
+          const y = 50 + r * Math.sin(rad);
+          if (m.num) {
+            return `<span class="math-clock-marker math-clock-marker--num" style="left:${x}%;top:${y}%">${m.h}</span>`;
+          }
+          return `<span class="math-clock-marker math-clock-marker--dot" style="left:${x}%;top:${y}%"></span>`;
+        })
+        .join('');
+      return `<span class="math-clock-face${small ? ' math-clock-face--small' : ''}"><img class="math-clock-img" src="${src}" alt="${say}" loading="lazy" decoding="async" />${markers}</span>`;
+    }
+
     function renderCountField(el, n, emoji) {
       if (!el) return;
       el.innerHTML = '';
