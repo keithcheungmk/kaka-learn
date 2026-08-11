@@ -66,6 +66,7 @@ python3 -m http.server 5173
 | `css/phonics.css` | 字母隊氛圍層 |
 | `js/math-storage.js` / `math-skills.js` / `math-app.js` + `css/math.css` | 小鹿數理探險（Phase A hub；`kaka-math-v1`） |
 | `docs/math-brief.md` / `docs/math-build-plan.md` | 數理規格同開工計劃 |
+| `docs/qa-check.md` | 檢查 agent 規則（merge 前中文檢查報告） |
 
 ## 數學（小鹿數理探險）— 故障隔離（可共用 landing）
 
