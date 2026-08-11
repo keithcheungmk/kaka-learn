@@ -694,6 +694,11 @@ const WORDS = [
   { id: 'shu_bunch', term: '束', isDeer: false, emoji: '💐', badge: '束', plate: '#402038' },
   { id: 'xiegui', term: '鞋櫃', isDeer: false, emoji: '👟', badge: '櫃', plate: '#2a3548' },
   { id: 'dui_pair', term: '對', isDeer: false, emoji: '👟👟', emojiDuo: true, badge: '', plate: '#1a3050' },
+  // 認字卡單字（《我自己會讀》書卡用）
+  { id: 'yun_char', term: '雲', isDeer: false, emoji: '☁️', badge: '', plate: '#2a3548' },
+  { id: 'peng_char', term: '朋', isDeer: false, emoji: '👫', badge: '', plate: '#2a3548' },
+  { id: 'qi_char', term: '氣', isDeer: false, emoji: '💨', badge: '', plate: '#2a3548' },
+  { id: 'ma_char', term: '媽', isDeer: false, emoji: '👩', badge: '', plate: '#2a3548' },
 ];
 
 /** 主題：先學再開考 */
@@ -728,7 +733,7 @@ const TOPICS = [
     { id: 'rb_fengwan', title: '風跟我玩', cover: '🌬️',
       wordIds: ['feng_wind', 'wan_play', 'wo', 'pao', 'xiao_laugh', 'chui_blow', 'fei', 'zhui', 'tiankong', 'gao_tall', 'kaixin'] },
     { id: 'rb_xiaoming', title: '小明和氣球', cover: '🎈',
-      wordIds: [ 'he_and', 'qiqiu', 'baba', 'song', 'yi', 'ge_mw', 'dai', 'fei', 'tiankong', 'da_big', 'hai', 'yue', 'shang', 'qu', 'kaixin' ] },
+      wordIds: [ 'yun_char', 'wo', 'qu', 'hai', 'peng_char', 'qi_char', 'ma_char' ] },
     { id: 'rb_dongdong', title: '冬冬請客', cover: '🍽️',
       wordIds: ['qing_invite', 'keren', 'chi_eat', 'he_drink', 'lai', 'dajia', 'pengyou', 'women', 'nimen', 'tamen', 'yeye', 'maamaa', 'popo', 'gonggong', 'gege', 'jiejie', 'didi', 'meimei', 'fan', 'xiexie', 'kaixin'] },
     ],
