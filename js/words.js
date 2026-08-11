@@ -677,6 +677,13 @@ const WORDS = [
   { id: 'duoshao', term: '多少', isDeer: false, emoji: '🧮', badge: '', plate: '#2a3548' },
   { id: 'bian', term: '邊', isDeer: false, emoji: '📐', badge: '', plate: '#1a3050' },
   { id: 'mei', term: '每', isDeer: false, emoji: '🌍', badge: '每', plate: '#143828' },
+  // 紅輯補充（書名透露嘅字）
+  { id: 'duzi', term: '肚子', isDeer: false, emoji: '🧍', badge: '肚', plate: '#3a2818' },
+  { id: 'shengdan', term: '聖誕', isDeer: false, emoji: '🎄', badge: '', plate: '#143828' },
+  { id: 'shengdan_gonggong', term: '聖誕公公', isDeer: false, emoji: '🎅', badge: '', plate: '#401018' },
+  { id: 'mengxiang', term: '夢想', isDeer: false, emoji: '💭🌟', emojiDuo: true, badge: '', plate: '#2a1840' },
+  { id: 'mianyang', term: '綿羊', isDeer: false, emoji: '🐑', badge: '綿', plate: '#2a2a35' },
+  { id: 'zixingche', term: '自行車', isDeer: false, emoji: '🚲', badge: '', plate: '#143828' },
 ];
 
 /** 主題：先學再開考 */
@@ -688,6 +695,32 @@ const TOPICS = [
     cover: '📕',
     wordIds: [
       'wo', 'ni', 'ta_he', 'ta_she', 'women', 'nimen', 'tamen', 'baba', 'mama', 'yeye', 'maamaa', 'popo', 'gonggong', 'gege', 'jiejie', 'didi', 'meimei', 'baobao', 'pengyou', 'tongxue', 'laoshi_job', 'dajia', 'ziji', 'kanjian', 'tingjian', 'shuo', 'du', 'xie', 'hua_draw', 'chang_sing', 'lai', 'qu', 'hui', 'chu', 'ru', 'zuo_sit', 'zhan', 'zou', 'pao', 'tiao', 'fei', 'you_swim', 'pa', 'chi_eat', 'he_drink', 'shui_sleep', 'xing', 'xi', 'chuan_wear', 'tuo', 'kai', 'guan', 'na_take', 'fang', 'zhao', 'gei', 'wan_play', 'xiao_laugh', 'ku', 'bao_hug', 'xiang_think', 'yao_want', 'da_big', 'xiao_small', 'duo', 'shao', 'hao', 'huai', 'gao_tall', 'ai_short_height', 'chang_long', 'duan_short', 'kuai', 'man', 'xin_new', 'jiu_old', 'xiang_scent', 'tian', 're_hot', 'leng_cold', 'kaixin', 'guai', 'piaoliang', 'de', 'le', 'ma_q', 'ne', 'he_and', 'dou', 'ye_also', 'you_again', 'zai_again', 'hen', 'shi_be', 'bu', 'meiyou', 'you_have', 'zai', 'hui_can', 'keyi', 'zhe', 'na_that', 'na_which', 'shenme', 'weishenme', 'zenme', 'zheli', 'nali', 'nali_where', 'ge_mw', 'zhi_mw', 'ba_mw', 'yi', 'er', 'san', 'si', 'wu', 'liu', 'qi', 'ba', 'jiu', 'shi', 'jintian', 'zuotian', 'mingtian', 'zaoshang', 'xiawu', 'wanshang', 'xianzai', 'nian', 'yue_month', 'ri_day', 'xingqi', 'shengri', 'tiankong', 'ri', 'yue', 'xingxing', 'yun', 'yu_rain', 'feng', 'xue', 'shan_mountain', 'shui', 'huo', 'shu_tree', 'hua', 'cao', 'tou', 'lian', 'yan', 'erduo', 'bi', 'kou', 'yachi', 'shou', 'jiao', 'shouzhi', 'toufa', 'xin', 'shu', 'bi_pen', 'zhi_paper', 'shubao', 'wanju', 'qiu_ball', 'gongzai', 'yifu', 'kuzi', 'xiezi', 'wazi', 'maozi', 'men', 'chuanghu', 'chuangpu', 'yizi', 'deng', 'beizi_cup', 'fan', 'miantiao', 'bao', 'jidan', 'nai', 'guozhi', 'tangguo', 'binggan', 'dangao', 'xiaogou', 'xiaomao', 'xiaoyu', 'xiaoniao', 'tu', 'xiaoji', 'xiaoya', 'xiaoma', 'xiaoniu', 'xiaoyang', 'xiaozhu', 'xiaochong', 'jia', 'xuexiao', 'gongyuan', 'jie', 'shangchang', 'che', 'chuan', 'feiji', 'xiexie', 'shuijiao', 'ai_love', 'zaochen', 'wanan',
+    ],
+    books: [
+    { id: 'rb_shengri', title: '生日禮物', cover: '🎂',
+      wordIds: ['shengri', 'dangao', 'tangguo', 'binggan', 'xiexie', 'ai_love', 'gei', 'kaixin', 'hao', 'xiang_scent', 'tian', 'xin_new', 'jiu_old', 'na_take', 'fang', 'kai', 'guan', 'yao_want', 'xiang_think', 'ge_mw', 'ba_mw', 'zhi_mw', 'wanju', 'qiu_ball', 'gongzai', 'baba', 'mama', 'yi', 'er', 'san', 'si', 'wu', 'liu', 'qi', 'ba', 'jiu', 'shi'] },
+    { id: 'rb_xiayu', title: '下雨了', cover: '🌧️',
+      wordIds: ['yu_rain', 'yun', 'ri', 'feng', 'xue', 'shui', 'tingjian', 'kanjian', 'chu', 'ru', 'jie', 'pao', 'tiao', 're_hot', 'leng_cold'] },
+    { id: 'rb_feiji', title: '小飛機', cover: '✈️',
+      wordIds: ['feiji', 'fei', 'tiankong', 'xingxing', 'yue', 'gao_tall', 'ai_short_height', 'kuai', 'man', 'chang_long', 'duan_short', 'you_swim', 'pa', 'shan_mountain', 'huo', 'da_big'] },
+    { id: 'rb_bushui', title: '我不要睡', cover: '😴',
+      wordIds: ['wo', 'bu', 'shui_sleep', 'shuijiao', 'wanshang', 'wanan', 'chuangpu', 'xing', 'xi', 'chuan_wear', 'tuo', 'bao_hug', 'ku', 'xiao_laugh', 'wan_play', 'baobao', 'ziji', 'tou', 'lian', 'shou', 'jiao', 'shouzhi', 'toufa', 'yifu', 'deng', 'jia'] },
+    { id: 'rb_shizi', title: '獅子的肚子餓了', cover: '🦁',
+      wordIds: ['fan', 'miantiao', 'bao', 'jidan', 'nai', 'guozhi', 'duzi', 'e_hungry', 'yachi', 'kou', 'bi', 'chi_eat', 'he_drink', 'dou', 'de', 'le', 'beizi_cup'] },
+    { id: 'rb_shuilai', title: '是誰來了？', cover: '🚪',
+      wordIds: ['shi_be', 'shui_who', 'lai', 'qu', 'hui', 'men', 'chuanghu', 'dajia', 'pengyou', 'ni', 'ta_he', 'ta_she', 'women', 'nimen', 'tamen', 'yan', 'erduo', 'shuo', 'jintian', 'mingtian', 'xianzai'] },
+    { id: 'rb_woniu', title: '小蝸牛上學', cover: '🐌',
+      wordIds: ['xiao_small', 'woniu', 'shangxue', 'xuexiao', 'laoshi_job', 'tongxue', 'shubao', 'shu', 'bi_pen', 'zhi_paper', 'du', 'xie', 'hua_draw', 'chang_sing', 'zuo_sit', 'zhan', 'zou', 'yizi', 'zaoshang', 'xiawu', 'zaochen', 'kuzi', 'xiezi', 'wazi', 'maozi'] },
+    { id: 'rb_zainali', title: '在哪裏？', cover: '🔍',
+      wordIds: ['nali_where', 'zheli', 'nali', 'na_which', 'zhe', 'na_that', 'zhao', 'zai', 'you_have', 'meiyou', 'ne', 'ma_q', 'shenme'] },
+    { id: 'rb_shengdangong', title: '聖誕公公是怎樣來的？', cover: '🎅',
+      wordIds: ['shengdan', 'shengdan_gonggong', 'gonggong', 'yeye', 'maamaa', 'popo', 'gege', 'jiejie', 'didi', 'meimei', 'weishenme', 'zenme', 'nian', 'yue_month', 'ri_day', 'xingqi', 'zuotian'] },
+    { id: 'rb_mengxiang', title: '我的夢想', cover: '💭',
+      wordIds: ['meng', 'mengxiang', 'xin', 'hui_can', 'keyi', 'hen', 'guai', 'piaoliang'] },
+    { id: 'rb_mianyang', title: '綿羊叔叔', cover: '🐑',
+      wordIds: ['mianyang', 'shushu', 'xiaoyang', 'xiaoniu', 'xiaoma', 'xiaozhu', 'xiaoji', 'xiaoya', 'xiaogou', 'xiaomao', 'xiaoyu', 'xiaoniao', 'tu', 'xiaochong', 'cao', 'shu_tree', 'hua'] },
+    { id: 'rb_qiche', title: '汽車和自行車', cover: '🚗',
+      wordIds: ['che', 'zixingche', 'chuan', 'shangchang', 'gongyuan', 'he_and', 'you_again', 'zai_again', 'ye_also', 'huai', 'duo', 'shao'] },
     ],
   },
   {
