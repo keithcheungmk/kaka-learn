@@ -861,8 +861,8 @@
 
     function renderMoonLearnCard(autoSpeak) {
       const card = MOON_LEARN_CARDS[mLearnIndex];
-      const img = $('#math-moon-learn-clock');
-      if (img) img.src = card.src;
+      const face = $('#math-moon-learn-face');
+      if (face) face.innerHTML = clockFaceHtml(card.src, card.say);
       const say = $('#math-moon-learn-say');
       if (say) say.textContent = card.say;
       const progress = $('#math-moon-learn-progress');
@@ -925,7 +925,10 @@
           btn.type = 'button';
           btn.className = 'math-clock-pick';
           btn.setAttribute('aria-label', c.say);
-          btn.innerHTML = `<img src="${c.src}" alt="" loading="lazy" decoding="async" />`;
+          btn.innerHTML = `
+            ${clockFaceHtml(c.src, c.say, { small: true })}
+            <span class="math-clock-label">${c.say}</span>
+          `;
           btn.addEventListener('click', () => onTimePick(c.id, btn));
           box.appendChild(btn);
         });
