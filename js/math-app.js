@@ -357,6 +357,21 @@
         });
     }
 
+    /** 撳「睇旅程」：渲染＋顯示銀河頁（獨立函式，唔靠 inline onclick） */
+    function openGalaxy() {
+      try {
+        renderGalaxy();
+        showMathScreen('galaxy');
+      } catch (err) {
+        console.error('KakaMath: openGalaxy failed', err);
+        const grid = $('#math-galaxy-grid');
+        if (grid) {
+          grid.innerHTML = '<p class="section-lead">銀河旅程暫時未能顯示，請返去再試。</p>';
+        }
+        showMathScreen('galaxy');
+      }
+    }
+
     /* ---------- 水星・先學 ---------- */
     function openLearn() {
       updateState({ currentPlanetId: 'count' });
@@ -1031,10 +1046,7 @@
       start.addEventListener('click', () => openHub());
 
       $('#btn-back-math-hub')?.addEventListener('click', () => goHome());
-      $('#btn-math-galaxy')?.addEventListener('click', () => {
-        renderGalaxy();
-        showMathScreen('galaxy');
-      });
+      $('#btn-math-galaxy')?.addEventListener('click', () => openGalaxy());
       $('#btn-back-math-galaxy')?.addEventListener('click', () => openHub());
       $('#btn-math-launch')?.addEventListener('click', () => launchFromHub());
       $('#btn-math-go-next')?.addEventListener('click', () => goToNextPlanetFromHub());
@@ -1150,6 +1162,7 @@
       openSizeQuiz,
       openMoonLearn,
       openTimeQuiz,
+      openGalaxy,
       offerWarpHop,
     };
   }
