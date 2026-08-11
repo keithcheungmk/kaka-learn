@@ -892,6 +892,33 @@
   animation: math-count-pop 0.35s ease both;
 }
 
+/* 原創比較圖形（長短＝橫線；大細＝圓） */
+.math-size-draw {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  width: 100%;
+}
+
+.math-bar-shape {
+  display: block;
+  height: 22px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--teal-soft), var(--teal));
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  animation: math-count-pop 0.35s ease both;
+}
+
+.math-circle-shape {
+  display: block;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.55), transparent 42%),
+    var(--math-planet, #3b82f6);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.28);
+  animation: math-count-pop 0.35s ease both;
+}
+
 /* ---------- 月球・時間（OpenMoji 鐘面） ---------- */
 .math-clock-img {
   width: min(52vw, 220px);

@@ -637,21 +637,28 @@
     }
 
     /* ---------- 地球・先學（大細長短） ---------- */
-    const EARTH_EMOJIS = ['🌕', '🐢', '🚀', '⭐', '🌳', '🐌'];
-    const SIZE_L = 0.62; // 左
-    const SIZE_R = 1.0; // 右（較大／較長視乎問題）
-
+    /** 用原創圖形：大細＝圓；長短＝橫線（唔用 emoji 拉長縮細） */
     const EARTH_LEARN_CARDS = [
-      { q: '邊個大啲？', left: 0.6, right: 1.05, say: '右邊大啲' },
-      { q: '邊個長啲？', left: 0.55, right: 1.0, say: '右邊長啲' },
-      { q: '邊個細啲？', left: 1.05, right: 0.6, say: '左邊細啲' },
-      { q: '邊個短啲？', left: 0.55, right: 1.0, say: '左邊短啲' },
+      { q: '邊個大啲？', kind: 'circle', left: 0.6, right: 1.05, say: '右邊大啲' },
+      { q: '邊個長啲？', kind: 'bar', left: 0.45, right: 1.0, say: '右邊長啲' },
+      { q: '邊個細啲？', kind: 'circle', left: 1.05, right: 0.6, say: '左邊細啲' },
+      { q: '邊個短啲？', kind: 'bar', left: 0.45, right: 1.0, say: '左邊短啲' },
     ];
+
+    function drawCompareShape(el, kind, scale) {
+      if (!el) return;
+      if (kind === 'bar') {
+        const widthPct = Math.max(18, Math.min(100, Math.round(scale * 100)));
+        el.innerHTML = `<span class="math-bar-shape" style="width:${widthPct}%"></span>`;
+        return;
+      }
+      const size = Math.max(1.8, 4.5 * scale);
+      el.innerHTML = `<span class="math-circle-shape" style="width:${size}rem;height:${size}rem"></span>`;
+    }
 
     function openEarthLearn() {
       updateState({ currentPlanetId: 'compare-size' });
       eLearnIndex = 0;
-      sizeEmoji = EARTH_EMOJIS[Math.floor(Math.random() * EARTH_EMOJIS.length)];
       const title = $('#math-earth-learn-title');
       if (title) title.textContent = '地球・先學';
       renderEarthLearnCard(true);
@@ -660,16 +667,8 @@
 
     function renderEarthLearnCard(autoSpeak) {
       const card = EARTH_LEARN_CARDS[eLearnIndex];
-      const L = $('#math-earth-learn-left');
-      const R = $('#math-earth-learn-right');
-      if (L) {
-        L.textContent = sizeEmoji;
-        L.style.fontSize = `calc(4.5rem * ${card.left})`;
-      }
-      if (R) {
-        R.textContent = sizeEmoji;
-        R.style.fontSize = `calc(4.5rem * ${card.right})`;
-      }
+      drawCompareShape($('#math-earth-learn-left'), card.kind, card.left);
+      drawCompareShape($('#math-earth-learn-right'), card.kind, card.right);
       const say = $('#math-earth-learn-say');
       if (say) say.textContent = card.say;
       const lead = $('#math-earth-learn-lead');
@@ -703,10 +702,10 @@
     }
 
     const SIZE_QUESTIONS = [
-      { q: '邊個大啲？', answerWhenLeftBigger: 'left', answerWhenRightBigger: 'right' },
-      { q: '邊個細啲？', answerWhenLeftBigger: 'right', answerWhenRightBigger: 'left' },
-      { q: '邊個長啲？', answerWhenLeftBigger: 'left', answerWhenRightBigger: 'right' },
-      { q: '邊個短啲？', answerWhenLeftBigger: 'right', answerWhenRightBigger: 'left' },
+      { q: '邊個大啲？', kind: 'circle', answerWhenLeftBigger: 'left', answerWhenRightBigger: 'right' },
+      { q: '邊個細啲？', kind: 'circle', answerWhenLeftBigger: 'right', answerWhenRightBigger: 'left' },
+      { q: '邊個長啲？', kind: 'bar', answerWhenLeftBigger: 'left', answerWhenRightBigger: 'right' },
+      { q: '邊個短啲？', kind: 'bar', answerWhenLeftBigger: 'right', answerWhenRightBigger: 'left' },
     ];
 
     function openSizeQuiz() {
@@ -723,24 +722,15 @@
     }
 
     function nextSizeRound(autoSpeak) {
-      sizeEmoji = EARTH_EMOJIS[Math.floor(Math.random() * EARTH_EMOJIS.length)];
       const def = SIZE_QUESTIONS[Math.floor(Math.random() * SIZE_QUESTIONS.length)];
       const leftBigger = Math.random() < 0.5;
-      const leftScale = leftBigger ? 1.05 : 0.62;
-      const rightScale = leftBigger ? 0.62 : 1.05;
+      const leftScale = leftBigger ? 1.05 : 0.6;
+      const rightScale = leftBigger ? 0.6 : 1.05;
       const answer = leftBigger ? def.answerWhenLeftBigger : def.answerWhenRightBigger;
-      sizeRound = { answer, prompt: def.q, leftScale, rightScale };
+      sizeRound = { answer, prompt: def.q, kind: def.kind };
 
-      const L = $('#math-size-left');
-      const R = $('#math-size-right');
-      if (L) {
-        L.textContent = sizeEmoji;
-        L.style.fontSize = `calc(4.5rem * ${leftScale})`;
-      }
-      if (R) {
-        R.textContent = sizeEmoji;
-        R.style.fontSize = `calc(4.5rem * ${rightScale})`;
-      }
+      drawCompareShape($('#math-size-left'), def.kind, leftScale);
+      drawCompareShape($('#math-size-right'), def.kind, rightScale);
 
       const prompt = $('#math-size-prompt');
       if (prompt) prompt.textContent = def.q;
