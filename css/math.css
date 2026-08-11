@@ -967,6 +967,22 @@
   border: 1.5px solid #0f172a;
 }
 
+/* 最外圈細刻度：每個鐘點一條短線，跟住角度轉 */
+.math-clock-tick {
+  position: absolute;
+  width: 3px;
+  height: 10px;
+  border-radius: 2px;
+  background: #0f172a;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.math-clock-face--small .math-clock-tick {
+  width: 2px;
+  height: 7px;
+}
+
 .math-clock-hand {
   position: absolute;
   left: 50%;

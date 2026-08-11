@@ -159,7 +159,17 @@
           return `<span class="math-clock-marker math-clock-marker--num" style="left:${x}%;top:${y}%">${m.h}</span>`;
         })
         .join('');
-      return `<div class="math-clock-face math-clock-face--drawn${small ? ' math-clock-face--small' : ''}" role="img" aria-label="${item.say}">${markers}<span class="math-clock-hand math-clock-hand--hour" style="transform: translateX(-50%) rotate(${hourAng}deg)"></span><span class="math-clock-hand math-clock-hand--min" style="transform: translateX(-50%) rotate(${minAng}deg)"></span><span class="math-clock-center"></span></div>`;
+      // 最外圈細刻度：每個鐘點一條，跟住角度轉
+      const ticks = hourLabels
+        .map((m) => {
+          const rad = (m.ang * Math.PI) / 180;
+          const r = 46;
+          const x = 50 + r * Math.sin(rad);
+          const y = 50 - r * Math.cos(rad);
+          return `<span class="math-clock-tick" style="left:${x}%;top:${y}%;transform: translate(-50%, -50%) rotate(${m.ang}deg)"></span>`;
+        })
+        .join('');
+      return `<div class="math-clock-face math-clock-face--drawn${small ? ' math-clock-face--small' : ''}" role="img" aria-label="${item.say}">${ticks}${markers}<span class="math-clock-hand math-clock-hand--hour" style="transform: translateX(-50%) rotate(${hourAng}deg)"></span><span class="math-clock-hand math-clock-hand--min" style="transform: translateX(-50%) rotate(${minAng}deg)"></span><span class="math-clock-center"></span></div>`;
     }
 
     function renderCountField(el, n, emoji) {
