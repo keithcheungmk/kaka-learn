@@ -919,29 +919,23 @@
   animation: math-count-pop 0.35s ease both;
 }
 
-/* ---------- 月球・時間（OpenMoji 鐘面） ---------- */
-.math-clock-img {
-  width: min(52vw, 220px);
-  height: auto;
-  display: block;
-  margin: 0 auto;
-  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.35));
-}
-
-/* 幼齡友善：喺鐘面上疊加 12/3/6/9 + 小時點（唔改動 OpenMoji 原圖） */
+/* ---------- 月球・時間（原創畫鐘，唔用外部圖） ---------- */
 .math-clock-face {
   position: relative;
   display: block;
   width: min(52vw, 220px);
+  aspect-ratio: 1;
   margin: 0 auto;
   line-height: 0;
 }
 
-.math-clock-face .math-clock-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 0;
+.math-clock-face--drawn {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.75) 55%),
+    #f8fafc;
+  border: 6px solid #0f172a;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.35), inset 0 0 0 4px rgba(251, 191, 36, 0.35);
 }
 
 .math-clock-face .math-clock-marker {
@@ -969,6 +963,40 @@
   border-radius: 50%;
   background: #fbbf24;
   border: 1.5px solid #0f172a;
+}
+
+.math-clock-hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: 50% 100%;
+  border-radius: 999px;
+  z-index: 3;
+}
+
+.math-clock-hand--hour {
+  width: 10px;
+  height: 22%;
+  background: #0f172a;
+}
+
+.math-clock-hand--min {
+  width: 7px;
+  height: 32%;
+  background: #b45309;
+}
+
+.math-clock-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: #b45309;
+  border: 2px solid #ffffff;
+  z-index: 4;
 }
 
 .math-clock-face--small {
