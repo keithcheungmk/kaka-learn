@@ -31,6 +31,41 @@
     const LEARN_COUNTS = [1, 2, 3, 4, 5];
     const LIT_TARGET = 5;
 
+    /** 整點：1F550=1:00 … 1F55B=12:00；半點：1F55C=12:30, 1F55D=1:30 … 1F567=11:30 */
+    const CLOCK_ITEMS = [
+      { id: '1-00', say: '一點鐘', src: './assets/math/clock-openmoji/1F550.svg' },
+      { id: '2-00', say: '兩點鐘', src: './assets/math/clock-openmoji/1F551.svg' },
+      { id: '3-00', say: '三點鐘', src: './assets/math/clock-openmoji/1F552.svg' },
+      { id: '4-00', say: '四點鐘', src: './assets/math/clock-openmoji/1F553.svg' },
+      { id: '5-00', say: '五點鐘', src: './assets/math/clock-openmoji/1F554.svg' },
+      { id: '6-00', say: '六點鐘', src: './assets/math/clock-openmoji/1F555.svg' },
+      { id: '7-00', say: '七點鐘', src: './assets/math/clock-openmoji/1F556.svg' },
+      { id: '8-00', say: '八點鐘', src: './assets/math/clock-openmoji/1F557.svg' },
+      { id: '9-00', say: '九點鐘', src: './assets/math/clock-openmoji/1F558.svg' },
+      { id: '10-00', say: '十點鐘', src: './assets/math/clock-openmoji/1F559.svg' },
+      { id: '11-00', say: '十一點鐘', src: './assets/math/clock-openmoji/1F55A.svg' },
+      { id: '12-00', say: '十二點鐘', src: './assets/math/clock-openmoji/1F55B.svg' },
+      { id: '12-30', say: '十二點半', src: './assets/math/clock-openmoji/1F55C.svg' },
+      { id: '1-30', say: '一點半', src: './assets/math/clock-openmoji/1F55D.svg' },
+      { id: '2-30', say: '兩點半', src: './assets/math/clock-openmoji/1F55E.svg' },
+      { id: '3-30', say: '三點半', src: './assets/math/clock-openmoji/1F55F.svg' },
+      { id: '4-30', say: '四點半', src: './assets/math/clock-openmoji/1F560.svg' },
+      { id: '5-30', say: '五點半', src: './assets/math/clock-openmoji/1F561.svg' },
+      { id: '6-30', say: '六點半', src: './assets/math/clock-openmoji/1F562.svg' },
+      { id: '7-30', say: '七點半', src: './assets/math/clock-openmoji/1F563.svg' },
+      { id: '8-30', say: '八點半', src: './assets/math/clock-openmoji/1F564.svg' },
+      { id: '9-30', say: '九點半', src: './assets/math/clock-openmoji/1F565.svg' },
+      { id: '10-30', say: '十點半', src: './assets/math/clock-openmoji/1F566.svg' },
+      { id: '11-30', say: '十一點半', src: './assets/math/clock-openmoji/1F567.svg' },
+    ];
+    /** 先學：整點 + 半點講清楚 */
+    const MOON_LEARN_CARDS = [
+      { ...CLOCK_ITEMS.find((c) => c.id === '3-00'), learnSay: '三點鐘。短針指住 3，長針指住 12。' },
+      { ...CLOCK_ITEMS.find((c) => c.id === '3-30'), learnSay: '三點半。長針指住 6，就係半點。' },
+      { ...CLOCK_ITEMS.find((c) => c.id === '12-00'), learnSay: '十二點鐘。兩支針都指住 12。' },
+      { ...CLOCK_ITEMS.find((c) => c.id === '6-30'), learnSay: '六點半。長針指住 6。' },
+    ];
+
     const $ = (sel, root = document) => root.querySelector(sel);
 
     const screens = {
@@ -46,6 +81,9 @@
       elearn: '#screen-math-earth-learn',
       eplay: '#screen-math-earth-play',
       size: '#screen-math-size',
+      mlearn: '#screen-math-moon-learn',
+      mplay: '#screen-math-moon-play',
+      time: '#screen-math-time',
     };
 
     let learnIndex = 0;
@@ -63,6 +101,10 @@
     let sizeRound = null;
     let sizeCorrect = 0;
     let sizeEmoji = '🌕';
+    let mLearnIndex = 0;
+    let timeBusy = false;
+    let timeRound = null;
+    let timeCorrect = 0;
     let warpFromPlanet = null;
     let warpToPlanet = null;
     let warpTimer = null;
@@ -613,21 +655,28 @@
     }
 
     /* ---------- 地球・先學（大細長短） ---------- */
-    const EARTH_EMOJIS = ['🌕', '🐢', '🚀', '⭐', '🌳', '🐌'];
-    const SIZE_L = 0.62; // 左
-    const SIZE_R = 1.0; // 右（較大／較長視乎問題）
-
+    /** 用原創圖形：大細＝圓；長短＝橫線（唔用 emoji 拉長縮細） */
     const EARTH_LEARN_CARDS = [
-      { q: '邊個大啲？', left: 0.6, right: 1.05, say: '右邊大啲' },
-      { q: '邊個長啲？', left: 0.55, right: 1.0, say: '右邊長啲' },
-      { q: '邊個細啲？', left: 1.05, right: 0.6, say: '左邊細啲' },
-      { q: '邊個短啲？', left: 0.55, right: 1.0, say: '左邊短啲' },
+      { q: '邊個大啲？', kind: 'circle', left: 0.6, right: 1.05, say: '右邊大啲' },
+      { q: '邊個長啲？', kind: 'bar', left: 0.45, right: 1.0, say: '右邊長啲' },
+      { q: '邊個細啲？', kind: 'circle', left: 1.05, right: 0.6, say: '左邊細啲' },
+      { q: '邊個短啲？', kind: 'bar', left: 0.45, right: 1.0, say: '左邊短啲' },
     ];
+
+    function drawCompareShape(el, kind, scale) {
+      if (!el) return;
+      if (kind === 'bar') {
+        const widthPct = Math.max(18, Math.min(100, Math.round(scale * 100)));
+        el.innerHTML = `<span class="math-bar-shape" style="width:${widthPct}%"></span>`;
+        return;
+      }
+      const size = Math.max(1.8, 4.5 * scale);
+      el.innerHTML = `<span class="math-circle-shape" style="width:${size}rem;height:${size}rem"></span>`;
+    }
 
     function openEarthLearn() {
       updateState({ currentPlanetId: 'compare-size' });
       eLearnIndex = 0;
-      sizeEmoji = EARTH_EMOJIS[Math.floor(Math.random() * EARTH_EMOJIS.length)];
       const title = $('#math-earth-learn-title');
       if (title) title.textContent = '地球・先學';
       renderEarthLearnCard(true);
@@ -636,16 +685,8 @@
 
     function renderEarthLearnCard(autoSpeak) {
       const card = EARTH_LEARN_CARDS[eLearnIndex];
-      const L = $('#math-earth-learn-left');
-      const R = $('#math-earth-learn-right');
-      if (L) {
-        L.textContent = sizeEmoji;
-        L.style.fontSize = `calc(4.5rem * ${card.left})`;
-      }
-      if (R) {
-        R.textContent = sizeEmoji;
-        R.style.fontSize = `calc(4.5rem * ${card.right})`;
-      }
+      drawCompareShape($('#math-earth-learn-left'), card.kind, card.left);
+      drawCompareShape($('#math-earth-learn-right'), card.kind, card.right);
       const say = $('#math-earth-learn-say');
       if (say) say.textContent = card.say;
       const lead = $('#math-earth-learn-lead');
@@ -679,10 +720,10 @@
     }
 
     const SIZE_QUESTIONS = [
-      { q: '邊個大啲？', answerWhenLeftBigger: 'left', answerWhenRightBigger: 'right' },
-      { q: '邊個細啲？', answerWhenLeftBigger: 'right', answerWhenRightBigger: 'left' },
-      { q: '邊個長啲？', answerWhenLeftBigger: 'left', answerWhenRightBigger: 'right' },
-      { q: '邊個短啲？', answerWhenLeftBigger: 'right', answerWhenRightBigger: 'left' },
+      { q: '邊個大啲？', kind: 'circle', answerWhenLeftBigger: 'left', answerWhenRightBigger: 'right' },
+      { q: '邊個細啲？', kind: 'circle', answerWhenLeftBigger: 'right', answerWhenRightBigger: 'left' },
+      { q: '邊個長啲？', kind: 'bar', answerWhenLeftBigger: 'left', answerWhenRightBigger: 'right' },
+      { q: '邊個短啲？', kind: 'bar', answerWhenLeftBigger: 'right', answerWhenRightBigger: 'left' },
     ];
 
     function openSizeQuiz() {
@@ -699,24 +740,15 @@
     }
 
     function nextSizeRound(autoSpeak) {
-      sizeEmoji = EARTH_EMOJIS[Math.floor(Math.random() * EARTH_EMOJIS.length)];
       const def = SIZE_QUESTIONS[Math.floor(Math.random() * SIZE_QUESTIONS.length)];
       const leftBigger = Math.random() < 0.5;
-      const leftScale = leftBigger ? 1.05 : 0.62;
-      const rightScale = leftBigger ? 0.62 : 1.05;
+      const leftScale = leftBigger ? 1.05 : 0.6;
+      const rightScale = leftBigger ? 0.6 : 1.05;
       const answer = leftBigger ? def.answerWhenLeftBigger : def.answerWhenRightBigger;
-      sizeRound = { answer, prompt: def.q, leftScale, rightScale };
+      sizeRound = { answer, prompt: def.q, kind: def.kind };
 
-      const L = $('#math-size-left');
-      const R = $('#math-size-right');
-      if (L) {
-        L.textContent = sizeEmoji;
-        L.style.fontSize = `calc(4.5rem * ${leftScale})`;
-      }
-      if (R) {
-        R.textContent = sizeEmoji;
-        R.style.fontSize = `calc(4.5rem * ${rightScale})`;
-      }
+      drawCompareShape($('#math-size-left'), def.kind, leftScale);
+      drawCompareShape($('#math-size-right'), def.kind, rightScale);
 
       const prompt = $('#math-size-prompt');
       if (prompt) prompt.textContent = def.q;
@@ -786,6 +818,144 @@
       }
     }
 
+    /* ---------- 月球・先學（時間） ---------- */
+    function openMoonLearn() {
+      updateState({ currentPlanetId: 'time' });
+      mLearnIndex = 0;
+      const title = $('#math-moon-learn-title');
+      if (title) title.textContent = '月球・先學';
+      renderMoonLearnCard(true);
+      showMathScreen('mlearn');
+    }
+
+    function renderMoonLearnCard(autoSpeak) {
+      const card = MOON_LEARN_CARDS[mLearnIndex];
+      const img = $('#math-moon-learn-clock');
+      if (img) img.src = card.src;
+      const say = $('#math-moon-learn-say');
+      if (say) say.textContent = card.say;
+      const progress = $('#math-moon-learn-progress');
+      if (progress) progress.textContent = `${mLearnIndex + 1}/${MOON_LEARN_CARDS.length}`;
+
+      const prev = $('#btn-math-moon-learn-prev');
+      const next = $('#btn-math-moon-learn-next');
+      const finish = $('#math-moon-learn-finish-row');
+      if (prev) prev.disabled = mLearnIndex <= 0;
+      if (next) next.hidden = mLearnIndex >= MOON_LEARN_CARDS.length - 1;
+      if (finish) finish.hidden = mLearnIndex < MOON_LEARN_CARDS.length - 1;
+
+      if (autoSpeak) speakMoonLearn();
+    }
+
+    function speakMoonLearn() {
+      const card = MOON_LEARN_CARDS[mLearnIndex];
+      speak(card.learnSay || card.say);
+    }
+
+    /* ---------- 月球・聽一聽揀鐘 ---------- */
+    function openMoonPlay() {
+      const stars = $('#math-moon-play-stars');
+      const state = loadState();
+      if (stars) stars.textContent = `${state.starsToday}/10`;
+      const title = $('#math-moon-play-title');
+      if (title) title.textContent = '月球・去玩玩';
+      showMathScreen('mplay');
+    }
+
+    function openTimeQuiz() {
+      timeBusy = false;
+      timeCorrect = 0;
+      updateTimeProgress();
+      nextTimeRound(true);
+      showMathScreen('time');
+    }
+
+    function updateTimeProgress() {
+      const el = $('#math-time-progress');
+      if (el) el.textContent = `${timeCorrect}/${LIT_TARGET}`;
+    }
+
+    function nextTimeRound(autoSpeak) {
+      const target = CLOCK_ITEMS[Math.floor(Math.random() * CLOCK_ITEMS.length)];
+      const others = shuffle(CLOCK_ITEMS.filter((c) => c.id !== target.id)).slice(0, 2);
+      const options = shuffle([target, ...others]);
+      timeRound = { target, options };
+
+      const prompt = $('#math-time-prompt');
+      if (prompt) prompt.textContent = '揀出正確嘅時間';
+      const fb = $('#math-time-feedback');
+      if (fb) fb.textContent = '';
+
+      const box = $('#math-time-options');
+      if (box) {
+        box.innerHTML = '';
+        options.forEach((c) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'math-clock-pick';
+          btn.setAttribute('aria-label', c.say);
+          btn.innerHTML = `<img src="${c.src}" alt="" loading="lazy" decoding="async" />`;
+          btn.addEventListener('click', () => onTimePick(c.id, btn));
+          box.appendChild(btn);
+        });
+      }
+      if (autoSpeak) speak(`幾點？${target.say}`);
+    }
+
+    function onTimePick(id, btn) {
+      if (timeBusy || !timeRound) return;
+      timeBusy = true;
+      const muted = isMuted();
+      const fb = $('#math-time-feedback');
+      const ok = id === timeRound.target.id;
+
+      if (ok) {
+        btn.classList.add('is-ok');
+        const { gained } = tryEarnStar();
+        if (gained) {
+          flashStarBurst();
+          speech?.playStarCue?.({ muted });
+        } else {
+          speech?.playCorrectCue?.({ muted });
+        }
+        timeCorrect += 1;
+        updateTimeProgress();
+        const praise =
+          speech?.speakCorrectFeedback?.({ muted }) || '你好叻呀，答啱咗！';
+        if (fb) fb.textContent = gained ? `${praise} ★` : praise;
+
+        if (timeCorrect >= LIT_TARGET && !isPlanetLit('time')) {
+          lightPlanet('time');
+          if (fb) fb.textContent = `${praise} 月球點亮喇！`;
+          const fromP = getPlanetById('time');
+          const toP = getPlanetById(getNextPlanetId('time'));
+          setTimeout(() => {
+            timeBusy = false;
+            offerWarpHop(fromP, toP);
+          }, 900);
+          return;
+        }
+
+        const stars = $('#math-moon-play-stars');
+        const state = loadState();
+        if (stars) stars.textContent = `${state.starsToday}/10`;
+
+        setTimeout(() => {
+          timeBusy = false;
+          nextTimeRound(true);
+        }, 1100);
+      } else {
+        btn.classList.add('is-bad');
+        speech?.playTryAgainCue?.({ muted });
+        const line = speech?.speakRetryFeedback?.({ muted }) || '唔緊要，試多次！';
+        if (fb) fb.textContent = line;
+        setTimeout(() => {
+          btn.classList.remove('is-bad');
+          timeBusy = false;
+        }, 700);
+      }
+    }
+
     function goToNextPlanetFromHub() {
       const planet = getPlanetById(loadState().currentPlanetId);
       if (!isPlanetLit(planet.id)) return;
@@ -808,10 +978,14 @@
         openEarthLearn();
         return;
       }
+      if (planet.id === 'time') {
+        openMoonLearn();
+        return;
+      }
       const note = $('#math-hub-coming');
       if (note) {
         note.hidden = false;
-        note.textContent = `${planet.name}玩法即將開放；而家可以去水星、金星或者地球玩！`;
+        note.textContent = `${planet.name}玩法即將開放；可以揀水星、金星、地球或者月球玩！`;
       }
       renderHub();
     }
@@ -907,6 +1081,28 @@
         .forEach((btn) => {
           btn.addEventListener('click', () => onSizePick(btn.dataset.side));
         });
+
+      $('#btn-back-math-moon-learn')?.addEventListener('click', () => openHub());
+      $('#math-moon-learn-tap')?.addEventListener('click', () => speakMoonLearn());
+      $('#btn-math-moon-learn-prev')?.addEventListener('click', () => {
+        if (mLearnIndex <= 0) return;
+        mLearnIndex -= 1;
+        renderMoonLearnCard(true);
+      });
+      $('#btn-math-moon-learn-next')?.addEventListener('click', () => {
+        if (mLearnIndex >= MOON_LEARN_CARDS.length - 1) return;
+        mLearnIndex += 1;
+        renderMoonLearnCard(true);
+      });
+      $('#btn-math-moon-learn-play')?.addEventListener('click', () => openMoonPlay());
+
+      $('#btn-back-math-moon-play')?.addEventListener('click', () => openMoonLearn());
+      $('#btn-math-mode-time')?.addEventListener('click', () => openTimeQuiz());
+
+      $('#btn-back-math-time')?.addEventListener('click', () => openMoonPlay());
+      $('#btn-math-time-speak')?.addEventListener('click', () => {
+        if (timeRound) speak(`幾點？${timeRound.target.say}`);
+      });
     }
 
     bind();
@@ -920,6 +1116,8 @@
       openCompare,
       openEarthLearn,
       openSizeQuiz,
+      openMoonLearn,
+      openTimeQuiz,
       offerWarpHop,
     };
   }

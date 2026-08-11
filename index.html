@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./css/styles.css?v=20260810i" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260724e" />
-  <link rel="stylesheet" href="./css/math.css?v=20260810c" />
+  <link rel="stylesheet" href="./css/math.css?v=20260811b" />
 </head>
 <body>
   <div id="app">
@@ -478,12 +478,12 @@
       <button type="button" class="math-learn-stage math-earth-stage" id="math-earth-learn-tap" aria-label="再聽一次">
         <div class="math-size-pair" id="math-earth-learn-field" aria-hidden="true">
           <div class="math-size-side">
-            <span class="math-size-emoji" id="math-earth-learn-left" style="font-size:2.5rem">🌕</span>
+            <div class="math-size-draw" id="math-earth-learn-left"></div>
             <span class="math-compare-label">左邊</span>
           </div>
           <div class="math-compare-vs">比</div>
           <div class="math-size-side">
-            <span class="math-size-emoji" id="math-earth-learn-right" style="font-size:4rem">🌕</span>
+            <div class="math-size-draw" id="math-earth-learn-right"></div>
             <span class="math-compare-label">右邊</span>
           </div>
         </div>
@@ -532,16 +532,75 @@
       </div>
       <div class="math-size-quiz" id="math-size-field">
         <button type="button" class="math-size-pick" data-side="left" aria-label="揀左邊">
-          <span class="math-size-emoji" id="math-size-left" style="font-size:3rem">🌕</span>
+          <div class="math-size-draw" id="math-size-left"></div>
           <span class="math-compare-label">左邊</span>
         </button>
         <div class="math-compare-vs">比</div>
         <button type="button" class="math-size-pick" data-side="right" aria-label="揀右邊">
-          <span class="math-size-emoji" id="math-size-right" style="font-size:4rem">🌕</span>
+          <div class="math-size-draw" id="math-size-right"></div>
           <span class="math-compare-label">右邊</span>
         </button>
       </div>
       <p class="feedback" id="math-size-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 月球・先學一學（時間） -->
+    <section id="screen-math-moon-learn" class="screen math-screen" aria-label="月球・先學一學">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-moon-learn">← 太空站</button>
+        <h1 id="math-moon-learn-title">月球・先學</h1>
+        <div class="progress-pill" aria-label="學習進度">
+          <strong id="math-moon-learn-progress">1/4</strong>
+        </div>
+      </div>
+      <p class="section-lead" id="math-moon-learn-lead">睇吓鐘面：短針指住數字就係「幾點」；半點長針指住 6</p>
+      <button type="button" class="math-learn-stage math-moon-stage" id="math-moon-learn-tap" aria-label="再聽一次">
+        <img class="math-clock-img" id="math-moon-learn-clock" src="./assets/math/clock-openmoji/1F550.svg" alt="" width="200" height="200" />
+        <div class="math-venus-say" id="math-moon-learn-say">一點鐘</div>
+        <div class="learn-hear">🔊 聽一聽</div>
+      </button>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" id="btn-math-moon-learn-prev">上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-moon-learn-next">下一張</button>
+      </div>
+      <div class="btn-row" id="math-moon-learn-finish-row" hidden>
+        <button type="button" class="btn" id="btn-math-moon-learn-play">學完喇・去玩玩</button>
+      </div>
+    </section>
+
+    <!-- 月球・揀玩法 -->
+    <section id="screen-math-moon-play" class="screen math-screen" aria-label="月球・去玩玩">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-moon-play">← 再學</button>
+        <h1 id="math-moon-play-title">月球・去玩玩</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong id="math-moon-play-stars">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <p class="section-lead">揀一種玩法</p>
+      <div class="btn-stack">
+        <button type="button" class="btn" id="btn-math-mode-time">聽一聽・揀鐘</button>
+      </div>
+    </section>
+
+    <!-- 月球・揀鐘 -->
+    <section id="screen-math-time" class="screen math-screen" aria-label="月球・揀鐘">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-time">← 玩法</button>
+        <h1>揀一揀鐘</h1>
+        <div class="progress-pill" aria-label="答啱進度">
+          <strong id="math-time-progress">0/5</strong>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p id="math-time-prompt">揀出正確嘅時間</p>
+        <button type="button" class="speak-btn" id="btn-math-time-speak" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="math-clock-grid" id="math-time-options" aria-label="揀鐘面"></div>
+      <p class="feedback" id="math-time-feedback" aria-live="polite"></p>
     </section>
 
     <!-- 小鹿數理探險：旅程總覽 -->
@@ -551,7 +610,7 @@
         <h1>銀河旅程</h1>
         <div class="progress-pill" aria-hidden="true"><strong>8</strong></div>
       </div>
-      <p class="section-lead">太陽系八大行星：撳一粒就去嗰度學（唔使跟住次序）</p>
+      <p class="section-lead">太陽系八大行星 + 月球時間站：撳一粒就去嗰度學（唔使跟住次序）</p>
       <div class="topic-grid math-galaxy-grid" id="math-galaxy-grid"></div>
     </section>
   </div>
@@ -669,8 +728,8 @@
   <script src="./js/app.js?v=20260810i"></script>
   <script src="./js/phonics-words.js?v=20260724i"></script>
   <script src="./js/phonics-app.js?v=20260724i"></script>
-  <script src="./js/math-storage.js?v=20260810c"></script>
-  <script src="./js/math-skills.js?v=20260810c"></script>
-  <script src="./js/math-app.js?v=20260810c"></script>
+  <script src="./js/math-storage.js?v=20260811b"></script>
+  <script src="./js/math-skills.js?v=20260811b"></script>
+  <script src="./js/math-app.js?v=20260811b"></script>
 </body>
 </html>
