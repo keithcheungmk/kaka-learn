@@ -950,24 +950,25 @@
   pointer-events: none;
   font-family: var(--font-display);
   font-weight: 800;
-  color: #243447;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
   z-index: 2;
 }
 
 .math-clock-face .math-clock-marker--num {
-  font-size: clamp(1rem, 4vw, 1.3rem);
-  background: rgba(255, 255, 255, 0.72);
+  font-size: clamp(1.05rem, 4vw, 1.35rem);
+  background: #ffffff;
+  color: #0f172a;
+  border: 2px solid #0f172a;
   border-radius: 10px;
-  padding: 2px 7px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  padding: 2px 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 .math-clock-face .math-clock-marker--dot {
-  width: 7px;
-  height: 7px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background: #243447;
+  background: #fbbf24;
+  border: 1.5px solid #0f172a;
 }
 
 .math-clock-face--small {
@@ -976,13 +977,13 @@
 }
 
 .math-clock-face--small .math-clock-marker--num {
-  font-size: clamp(0.7rem, 2.4vw, 0.85rem);
-  padding: 1px 4px;
+  font-size: clamp(0.72rem, 2.4vw, 0.9rem);
+  padding: 1px 5px;
 }
 
 .math-clock-face--small .math-clock-marker--dot {
-  width: 4px;
-  height: 4px;
+  width: 6px;
+  height: 6px;
 }
 
 #screen-math-time .game-header {
