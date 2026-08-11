@@ -132,34 +132,31 @@
       return a;
     }
 
-    /** 原創幼齡鐘面：純 CSS 畫（圓圈＋12/3/6/9＋兩支針），唔用外部 emoji 圖 */
+    /** 原創幼齡鐘面：純 CSS 畫（全部 1–12 數字＋兩支針），唔用外部圖 */
     function clockFaceHtml(item, { small = false } = {}) {
       const hourAng = ((item.h % 12) + (item.half ? 0.5 : 0)) * 30;
       const minAng = item.half ? 180 : 0;
       const hourLabels = [
-        { h: 12, ang: 0, num: true },
+        { h: 12, ang: 0 },
         { h: 1, ang: 30 },
         { h: 2, ang: 60 },
-        { h: 3, ang: 90, num: true },
+        { h: 3, ang: 90 },
         { h: 4, ang: 120 },
         { h: 5, ang: 150 },
-        { h: 6, ang: 180, num: true },
+        { h: 6, ang: 180 },
         { h: 7, ang: 210 },
         { h: 8, ang: 240 },
-        { h: 9, ang: 270, num: true },
+        { h: 9, ang: 270 },
         { h: 10, ang: 300 },
         { h: 11, ang: 330 },
       ];
       const markers = hourLabels
         .map((m) => {
           const rad = (m.ang * Math.PI) / 180;
-          const r = 42;
+          const r = 38;
           const x = 50 + r * Math.sin(rad);
           const y = 50 - r * Math.cos(rad);
-          if (m.num) {
-            return `<span class="math-clock-marker math-clock-marker--num" style="left:${x}%;top:${y}%">${m.h}</span>`;
-          }
-          return `<span class="math-clock-marker math-clock-marker--dot" style="left:${x}%;top:${y}%"></span>`;
+          return `<span class="math-clock-marker math-clock-marker--num" style="left:${x}%;top:${y}%">${m.h}</span>`;
         })
         .join('');
       return `<div class="math-clock-face math-clock-face--drawn${small ? ' math-clock-face--small' : ''}" role="img" aria-label="${item.say}">${markers}<span class="math-clock-hand math-clock-hand--hour" style="transform: translateX(-50%) rotate(${hourAng}deg)"></span><span class="math-clock-hand math-clock-hand--min" style="transform: translateX(-50%) rotate(${minAng}deg)"></span><span class="math-clock-center"></span></div>`;

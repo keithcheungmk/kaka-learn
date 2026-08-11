@@ -948,13 +948,15 @@
 }
 
 .math-clock-face .math-clock-marker--num {
-  font-size: clamp(1.05rem, 4vw, 1.35rem);
+  font-size: clamp(0.95rem, 3.8vw, 1.25rem);
   background: #ffffff;
   color: #0f172a;
   border: 2px solid #0f172a;
   border-radius: 10px;
-  padding: 2px 8px;
+  padding: 1px 7px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  min-width: 1.5em;
+  text-align: center;
 }
 
 .math-clock-face .math-clock-marker--dot {
@@ -976,13 +978,13 @@
 
 .math-clock-hand--hour {
   width: 10px;
-  height: 22%;
+  height: 20%;
   background: #0f172a;
 }
 
 .math-clock-hand--min {
   width: 7px;
-  height: 32%;
+  height: 30%;
   background: #b45309;
 }
 
@@ -1005,8 +1007,9 @@
 }
 
 .math-clock-face--small .math-clock-marker--num {
-  font-size: clamp(0.72rem, 2.4vw, 0.9rem);
-  padding: 1px 5px;
+  font-size: clamp(0.62rem, 2.1vw, 0.78rem);
+  padding: 0 4px;
+  border-width: 1.5px;
 }
 
 .math-clock-face--small .math-clock-marker--dot {
