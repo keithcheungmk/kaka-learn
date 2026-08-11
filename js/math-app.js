@@ -161,17 +161,18 @@
       ];
       const markers = hourLabels
         .map((m) => {
+          // 12 喺正上（y 最細），6 喺正下
           const rad = ((m.ang - 90) * Math.PI) / 180;
-          const r = 44;
-          const x = 50 + r * Math.cos(rad);
-          const y = 50 + r * Math.sin(rad);
+          const r = 42;
+          const x = 50 + r * Math.sin((m.ang * Math.PI) / 180);
+          const y = 50 - r * Math.cos((m.ang * Math.PI) / 180);
           if (m.num) {
             return `<span class="math-clock-marker math-clock-marker--num" style="left:${x}%;top:${y}%">${m.h}</span>`;
           }
           return `<span class="math-clock-marker math-clock-marker--dot" style="left:${x}%;top:${y}%"></span>`;
         })
         .join('');
-      return `<span class="math-clock-face${small ? ' math-clock-face--small' : ''}"><img class="math-clock-img" src="${src}" alt="${say}" loading="lazy" decoding="async" />${markers}</span>`;
+      return `<div class="math-clock-face${small ? ' math-clock-face--small' : ''}"><img class="math-clock-img" src="${src}" alt="${say}" loading="lazy" decoding="async" />${markers}</div>`;
     }
 
     function renderCountField(el, n, emoji) {
