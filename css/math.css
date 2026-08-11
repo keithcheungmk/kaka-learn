@@ -928,13 +928,24 @@
   filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.35));
 }
 
+#screen-math-time .game-header {
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+
+#screen-math-time .game-header h1 {
+  flex: 1 1 100%;
+  text-align: center;
+}
+
 .math-clock-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   width: 100%;
   max-width: 640px;
-  margin: 12px auto 0;
+  margin: 12px auto 20px;
+  padding-bottom: 10px;
 }
 
 .math-clock-pick {
@@ -942,9 +953,10 @@
   border: 2px solid rgba(255, 255, 255, 0.12);
   background: rgba(18, 40, 72, 0.6);
   border-radius: 20px;
-  padding: 10px;
+  padding: 12px;
   cursor: pointer;
   touch-action: manipulation;
+  min-height: 96px;
 }
 
 .math-clock-pick img {
@@ -966,4 +978,9 @@
 
 .math-clock-pick.is-bad {
   animation: softShake 0.4s ease;
+}
+
+#screen-math-time .feedback {
+  margin: 12px 0 8px;
+  padding-bottom: 8px;
 }

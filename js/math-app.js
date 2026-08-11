@@ -31,21 +31,39 @@
     const LEARN_COUNTS = [1, 2, 3, 4, 5];
     const LIT_TARGET = 5;
 
+    /** 整點：1F550=1:00 … 1F55B=12:00；半點：1F55C=12:30, 1F55D=1:30 … 1F567=11:30 */
     const CLOCK_ITEMS = [
       { id: '1-00', say: '一點鐘', src: './assets/math/clock-openmoji/1F550.svg' },
-      { id: '1-30', say: '一點半', src: './assets/math/clock-openmoji/1F560.svg' },
       { id: '2-00', say: '兩點鐘', src: './assets/math/clock-openmoji/1F551.svg' },
-      { id: '2-30', say: '兩點半', src: './assets/math/clock-openmoji/1F561.svg' },
       { id: '3-00', say: '三點鐘', src: './assets/math/clock-openmoji/1F552.svg' },
-      { id: '3-30', say: '三點半', src: './assets/math/clock-openmoji/1F562.svg' },
       { id: '4-00', say: '四點鐘', src: './assets/math/clock-openmoji/1F553.svg' },
-      { id: '4-30', say: '四點半', src: './assets/math/clock-openmoji/1F563.svg' },
+      { id: '5-00', say: '五點鐘', src: './assets/math/clock-openmoji/1F554.svg' },
+      { id: '6-00', say: '六點鐘', src: './assets/math/clock-openmoji/1F555.svg' },
+      { id: '7-00', say: '七點鐘', src: './assets/math/clock-openmoji/1F556.svg' },
+      { id: '8-00', say: '八點鐘', src: './assets/math/clock-openmoji/1F557.svg' },
+      { id: '9-00', say: '九點鐘', src: './assets/math/clock-openmoji/1F558.svg' },
+      { id: '10-00', say: '十點鐘', src: './assets/math/clock-openmoji/1F559.svg' },
+      { id: '11-00', say: '十一點鐘', src: './assets/math/clock-openmoji/1F55A.svg' },
+      { id: '12-00', say: '十二點鐘', src: './assets/math/clock-openmoji/1F55B.svg' },
+      { id: '12-30', say: '十二點半', src: './assets/math/clock-openmoji/1F55C.svg' },
+      { id: '1-30', say: '一點半', src: './assets/math/clock-openmoji/1F55D.svg' },
+      { id: '2-30', say: '兩點半', src: './assets/math/clock-openmoji/1F55E.svg' },
+      { id: '3-30', say: '三點半', src: './assets/math/clock-openmoji/1F55F.svg' },
+      { id: '4-30', say: '四點半', src: './assets/math/clock-openmoji/1F560.svg' },
+      { id: '5-30', say: '五點半', src: './assets/math/clock-openmoji/1F561.svg' },
+      { id: '6-30', say: '六點半', src: './assets/math/clock-openmoji/1F562.svg' },
+      { id: '7-30', say: '七點半', src: './assets/math/clock-openmoji/1F563.svg' },
+      { id: '8-30', say: '八點半', src: './assets/math/clock-openmoji/1F564.svg' },
+      { id: '9-30', say: '九點半', src: './assets/math/clock-openmoji/1F565.svg' },
+      { id: '10-30', say: '十點半', src: './assets/math/clock-openmoji/1F566.svg' },
+      { id: '11-30', say: '十一點半', src: './assets/math/clock-openmoji/1F567.svg' },
     ];
+    /** 先學：整點 + 半點講清楚 */
     const MOON_LEARN_CARDS = [
-      CLOCK_ITEMS[0],
-      CLOCK_ITEMS[1],
-      CLOCK_ITEMS[4],
-      CLOCK_ITEMS[5],
+      { ...CLOCK_ITEMS.find((c) => c.id === '3-00'), learnSay: '三點鐘。短針指住 3，長針指住 12。' },
+      { ...CLOCK_ITEMS.find((c) => c.id === '3-30'), learnSay: '三點半。長針指住 6，就係半點。' },
+      { ...CLOCK_ITEMS.find((c) => c.id === '12-00'), learnSay: '十二點鐘。兩支針都指住 12。' },
+      { ...CLOCK_ITEMS.find((c) => c.id === '6-30'), learnSay: '六點半。長針指住 6。' },
     ];
 
     const $ = (sel, root = document) => root.querySelector(sel);
@@ -831,7 +849,7 @@
 
     function speakMoonLearn() {
       const card = MOON_LEARN_CARDS[mLearnIndex];
-      speak(card.say);
+      speak(`${card.say}。短針指住邊個數字，就係幾點。`);
     }
 
     /* ---------- 月球・聽一聽揀鐘 ---------- */
