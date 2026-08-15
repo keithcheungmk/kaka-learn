@@ -333,7 +333,7 @@ const WORDS = [
   { id: 'siji', term: '司機', isDeer: false, emoji: '🚗', badge: '', plate: '#1a3050' },
   { id: 'nongfu', term: '農夫', isDeer: false, emoji: '🧑‍🌾', badge: '', plate: '#143828' },
   { id: 'jishi', term: '機師', isDeer: false, emoji: '✈️🧑‍✈️', emojiDuo: true, badge: '', plate: '#1a3050' },
-  { id: 'kongjie', term: '空姐', isDeer: false, emoji: '✈️👩‍✈️', emojiDuo: true, badge: '', plate: '#102848' },
+  { id: 'kongjie', term: '空中服務員', isDeer: false, emoji: '✈️🧑', emojiDuo: true, badge: '', plate: '#102848' },
   { id: 'taikongren', term: '太空人', isDeer: false, emoji: '🚀🧑‍🚀', emojiDuo: true, badge: '', plate: '#1a1a22' },
   { id: 'yayi', term: '牙醫', isDeer: false, emoji: '🦷👨‍⚕️', emojiDuo: true, badge: '', plate: '#102848' },
   { id: 'shouyi', term: '獸醫', isDeer: false, emoji: '🐶👨‍⚕️', emojiDuo: true, badge: '', plate: '#1a4d3a' },
@@ -344,8 +344,9 @@ const WORDS = [
   { id: 'bashi_siji', term: '巴士司機', isDeer: false, emoji: '🚌🧑‍✈️', emojiDuo: true, badge: '', plate: '#3a3010' },
   { id: 'jianzhu_gongren', term: '建築工人', isDeer: false, emoji: '👷🏗️', emojiDuo: true, badge: '', plate: '#3a3010' },
   { id: 'faxingshi', term: '髮型師', isDeer: false, emoji: '💇✂️', emojiDuo: true, badge: '', plate: '#402038' },
-  { id: 'huanbao_zhuren', term: '環境保護主任', isDeer: false, emoji: '♻️👮', emojiDuo: true, badge: '', plate: '#143828' },
+  { id: 'huanbao_zhuren', term: '環境保護主任', isDeer: false, emoji: '♻️🕵️', emojiDuo: true, badge: '', plate: '#143828' },
   { id: 'yiliao_xiaoshou', term: '醫療銷售代表', isDeer: false, emoji: '💊🤝', emojiDuo: true, badge: '', plate: '#102848' },
+  { id: 'youchai', term: '郵差', isDeer: false, emoji: '📮🧑', emojiDuo: true, badge: '', plate: '#3a3010' },
   // 恐龍（彩色復原圖；emoji 係 fallback）
   { id: 'konglong', term: '恐龍', isDeer: false, emoji: '🦕', badge: '', plate: '#1a4d3a' },
   { id: 'baolong', term: '暴龍', isDeer: false, emoji: '🦖', badge: '', plate: '#3a2818', photo: 'assets/dino/baolong.jpg' },
@@ -976,7 +977,7 @@ const TOPICS = [
     cover: '👨‍⚕️',
     wordIds: ['yisheng', 'hushi', 'laoshi_job', 'xiaofangyuan', 'jingcha', 'chushi', 'siji', 'nongfu',
       'jishi', 'kongjie', 'taikongren', 'yayi', 'shouyi', 'kexuejia', 'huajia', 'yinyuejia',
-      'yundongyuan', 'bashi_siji', 'jianzhu_gongren', 'faxingshi', 'huanbao_zhuren', 'yiliao_xiaoshou'],
+      'yundongyuan', 'bashi_siji', 'jianzhu_gongren', 'faxingshi', 'huanbao_zhuren', 'yiliao_xiaoshou', 'youchai'],
   },
   {
     id: 'dino',
