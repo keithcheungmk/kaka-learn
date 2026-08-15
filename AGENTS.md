@@ -67,7 +67,7 @@ python3 -m http.server 5173
 | `css/phonics.css` | 字母隊氛圍層 |
 | `js/math-storage.js` / `math-skills.js` / `math-app.js` + `css/math.css` | 小鹿數理探險（Phase A hub；`kaka-math-v1`） |
 | `docs/math-brief.md` / `docs/math-build-plan.md` | 數理規格同開工計劃 |
-| `docs/qa-check.md` | 檢查 agent 規則（merge 前中文檢查報告） |
+| `docs/qa-check.md` | 檢查 agent 規則（merge 前中文檢查報告；通過就直接 merge／部署，唔好叫用戶檢查） |
 
 ## 數學（小鹿數理探險）— 故障隔離（可共用 landing）
 
@@ -87,6 +87,7 @@ python3 -m http.server 5173
 - 鹿類重點開關會提高鹿詞抽中權重。
 - 答錯要溫柔、無羞恥文案。
 - 保持單頁、無 build step（純靜態 + ES modules），除非產品明確要求框架。
+- **唔好叫產品擁有人親自檢查或確認先部署。** 跟 `docs/qa-check.md`：叫檢查 agent → 「可以 merge」就 merge 入 `main`（Pages 自動上線）→ 之後先知會做咗咩。
 
 ## 《我自己會讀》書卡用字規則（紅輯／橙輯…）
 
