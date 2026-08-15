@@ -305,7 +305,6 @@ const WORDS = [
   { id: 'meimei', term: '妹妹', isDeer: false, emoji: '👧', badge: '妹', plate: '#402038' },
   { id: 'shuijiao', term: '睡覺', isDeer: false, emoji: '😴', badge: '', plate: '#1a2a4a' },
   { id: 'xiexie', term: '謝謝', isDeer: false, emoji: '🙏', badge: '', plate: '#3a3010' },
-  { id: 'laoshi', term: '老師', isDeer: false, emoji: '👩‍🏫', badge: '', plate: '#102848' },
   { id: 'shu_book', term: '書', isDeer: false, emoji: '📕', badge: '', plate: '#401820' },
   // 港式美食（用真實相；emoji 係 fallback）
   { id: 'feiniu_wudong', term: '肥牛烏冬', isDeer: false, emoji: '🍜', badge: '', plate: '#3a3010', photo: 'assets/food-hk/feiniu-wudong.jpg' },

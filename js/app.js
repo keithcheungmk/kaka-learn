@@ -663,11 +663,11 @@ function onListenPick(id, btn) {
     const fb = $('#listen-feedback');
     fb.className = 'feedback retry';
     setTimeout(() => btn.classList.remove('wrong'), 450);
-    // 鼓勵句講完先再讀正確答案，避免 cancel 切走鼓勵聲
+    // 鼓勵句講完先再讀題目（相反詞唔好讀出要揀嗰個答案）
     const retryLine = speakRetryFeedback({
       muted: state.muted,
       onEnd: () => {
-        setTimeout(() => speakTerm(answerTerm, { muted: loadState().muted }), 250);
+        setTimeout(() => speakTerm(promptTerm, { muted: loadState().muted }), 250);
       },
     });
     fb.textContent = retryLine;
