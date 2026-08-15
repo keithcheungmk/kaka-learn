@@ -523,6 +523,23 @@ body::before {
   width: 100%;
 }
 
+/* Author `display:flex` 會蓋過 HTML hidden；學完掣／數理完結列都靠呢條 */
+[hidden] {
+  display: none !important;
+}
+
+.hero-home .btn-row {
+  flex-direction: column;
+  align-items: center;
+  max-width: 420px;
+  margin-inline: auto;
+}
+
+.hero-home .btn-row .btn {
+  width: 100%;
+  min-width: min(100%, 280px);
+}
+
 .btn {
   appearance: none;
   border: none;
@@ -667,10 +684,14 @@ body::before {
   flex: 0 0 auto;
 }
 
-@media (min-width: 800px) {
-  .card-grid.cols-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+/* 四揀一固定 2×2，避免闊螢幕變成 3+1 */
+.card-grid.cols-3 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 720px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  flex: 0 0 auto;
 }
 
 .word-card {
@@ -1099,6 +1120,53 @@ body::before {
 
 .star-burst.show {
   animation: starGain 0.85s ease forwards;
+}
+
+.play-finish {
+  position: fixed;
+  inset: 0;
+  z-index: 36;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(3, 10, 22, 0.78);
+}
+
+.play-finish-inner {
+  width: min(480px, 100%);
+  text-align: center;
+  background: linear-gradient(180deg, #122848, #0b1d3a);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  border-radius: 28px;
+  padding: 28px 22px 24px;
+  box-shadow: var(--shadow);
+}
+
+.play-finish-star {
+  font-size: clamp(3.2rem, 12vw, 4.6rem);
+  line-height: 1;
+  filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.75));
+  animation: playFinishPop 0.7s ease;
+}
+
+.play-finish-inner p {
+  margin: 14px 0 22px;
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 4vw, 1.9rem);
+  font-weight: 700;
+  color: var(--gold-soft);
+  line-height: 1.35;
+}
+
+@keyframes playFinishPop {
+  0% { transform: scale(0.4); opacity: 0; }
+  55% { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .play-finish-star { animation: none; }
 }
 
 @keyframes starGain {

@@ -63,6 +63,11 @@ let learnPairs = [];
 let learnIndex = 0;
 /** 相反位置學習頁用成對模式 */
 let learnPairMode = false;
+/** 今輪玩法：listen / match / build */
+let playMode = null;
+/** 今輪答啱次數（答錯唔計、唔清零） */
+let playCorrect = 0;
+const PLAY_ROUND_TARGET = 5;
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -79,6 +84,7 @@ function init() {
     bindListen();
     bindMatch();
     bindBuild();
+    bindPlayFinish();
     bindParent();
     bindStarInfo();
     refreshStarUI();
@@ -92,6 +98,86 @@ function closeAllModals() {
   ['#modal-pin', '#modal-parent', '#modal-stars'].forEach((sel) => {
     $(sel)?.classList.remove('open');
   });
+  hidePlayFinish();
+}
+
+function beginPlayRound(mode) {
+  playMode = mode;
+  playCorrect = 0;
+  hidePlayFinish();
+  refreshPlayRoundUI();
+}
+
+function refreshPlayRoundUI() {
+  const label = `${playCorrect}/${PLAY_ROUND_TARGET}`;
+  ['#listen-round-progress', '#match-round-progress', '#build-round-progress'].forEach((sel) => {
+    const el = $(sel);
+    if (el) el.textContent = label;
+  });
+}
+
+function hidePlayFinish() {
+  const el = $('#play-finish');
+  if (el) el.hidden = true;
+}
+
+function showPlayFinish() {
+  busy = true;
+  const el = $('#play-finish');
+  if (el) el.hidden = false;
+  const msg = $('#play-finish-msg');
+  if (msg) msg.textContent = '今輪玩完喇！你好叻呀！';
+  showStarBurst();
+  state = loadState();
+  playStarCue({ muted: state.muted });
+  speakTerm('今輪玩完喇！你好叻呀！', { muted: state.muted, rate: 0.92, pitch: 1.08, delayMs: 180 });
+}
+
+function bindPlayFinish() {
+  const again = $('#btn-play-again');
+  if (again) {
+    again.onclick = () => {
+      hidePlayFinish();
+      if (playMode === 'listen') startListenMode();
+      else if (playMode === 'match') startMatchMode();
+      else if (playMode === 'build') startBuildMode();
+      else openPlayPick();
+    };
+  }
+  const topics = $('#btn-play-topics');
+  if (topics) {
+    topics.onclick = () => {
+      hidePlayFinish();
+      playMode = null;
+      playCorrect = 0;
+      if (activeBook) {
+        const topic = getTopicById(activeTopicId);
+        if (topic) {
+          openBookPicker(topic);
+          return;
+        }
+      }
+      openTopics();
+    };
+  }
+}
+
+/** 答啱先 +1；滿 5 題完一輪。回傳係咪已經完。 */
+function notePlayCorrect() {
+  playCorrect += 1;
+  refreshPlayRoundUI();
+  return playCorrect >= PLAY_ROUND_TARGET;
+}
+
+function afterPlayCorrect(nextRoundFn, nextMs) {
+  const roundDone = notePlayCorrect();
+  awardStar().then(() => {
+    if (roundDone) {
+      setTimeout(() => showPlayFinish(), nextMs);
+    } else {
+      setTimeout(() => nextRoundFn(), nextMs);
+    }
+  });
 }
 
 function startListenMode(ev) {
@@ -101,6 +187,7 @@ function startListenMode(ev) {
     return;
   }
   closeAllModals();
+  beginPlayRound('listen');
   showScreen('listen');
   startListenRound();
 }
@@ -112,6 +199,7 @@ function startMatchMode(ev) {
     return;
   }
   closeAllModals();
+  beginPlayRound('match');
   showScreen('match');
   startMatchRound();
 }
@@ -123,6 +211,7 @@ function startBuildMode(ev) {
     return;
   }
   closeAllModals();
+  beginPlayRound('build');
   showScreen('build');
   startBuildRound();
 }
@@ -205,6 +294,7 @@ function bindPlayPick() {
 }
 
 function showScreen(name) {
+  hidePlayFinish();
   $$('.screen').forEach((el) => el.classList.remove('active'));
   const map = {
     home: '#screen-home',
@@ -564,6 +654,7 @@ function bindListen() {
 
 function startListenRound() {
   busy = false;
+  refreshPlayRoundUI();
   const pool = enabledWords();
   let round;
   if (activeTopicId === 'opposites') {
@@ -640,21 +731,19 @@ function onListenPick(id, btn) {
     btn.classList.add('correct');
     warmAudio();
     const fb = $('#listen-feedback');
-    let nextMs = 2800;
+    const nextMs = 2800;
     if (listenRound.pickOpposite) {
       const praise = speakWordThenEncourage(answerTerm, { muted: state.muted });
       fb.textContent = `${promptTerm} 嘅相反係 ${answerTerm}！${praise}`;
       fb.className = 'feedback ok';
-      nextMs = estimateSpeakMs(`${answerTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
+      afterPlayCorrect(() => startListenRound(), estimateSpeakMs(`${answerTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500);
     } else {
       playCorrectCue({ muted: state.muted });
       const praise = speakCorrectFeedback({ muted: state.muted });
       fb.textContent = praise;
       fb.className = 'feedback ok';
+      afterPlayCorrect(() => startListenRound(), nextMs);
     }
-    awardStar().then(() => {
-      setTimeout(() => startListenRound(), nextMs);
-    });
   } else {
     // 錯咗都翻一吓睇圖，跟住翻返去——唔好長期露圖，避免靠淘汰答
     flipListenCard(btn, false);
@@ -663,11 +752,11 @@ function onListenPick(id, btn) {
     const fb = $('#listen-feedback');
     fb.className = 'feedback retry';
     setTimeout(() => btn.classList.remove('wrong'), 450);
-    // 鼓勵句講完先再讀正確答案，避免 cancel 切走鼓勵聲
+    // 鼓勵句講完先再讀題目（相反詞唔好讀出要揀嗰個答案）
     const retryLine = speakRetryFeedback({
       muted: state.muted,
       onEnd: () => {
-        setTimeout(() => speakTerm(answerTerm, { muted: loadState().muted }), 250);
+        setTimeout(() => speakTerm(promptTerm, { muted: loadState().muted }), 250);
       },
     });
     fb.textContent = retryLine;
@@ -683,6 +772,7 @@ function bindMatch() {
 
 function startMatchRound() {
   busy = false;
+  refreshPlayRoundUI();
   const pool = enabledWords();
   let round;
   if (activeTopicId === 'opposites') {
@@ -756,9 +846,7 @@ function onMatchPick(id, btn) {
       fb.className = 'feedback ok';
     }
     const nextMs = estimateSpeakMs(`${answerTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
-    awardStar().then(() => {
-      setTimeout(() => startMatchRound(), nextMs);
-    });
+    afterPlayCorrect(() => startMatchRound(), nextMs);
   } else {
     btn.classList.add('wrong');
     playTryAgainCue({ muted: state.muted });
@@ -812,6 +900,7 @@ function bindBuild() {
 
 function startBuildRound() {
   busy = false;
+  refreshPlayRoundUI();
   buildSelectedKey = null;
   buildDrag = null;
   const pool = enabledWords();
@@ -1015,9 +1104,7 @@ function finishBuildSuccess() {
     fb.className = 'feedback ok';
   }
   const nextMs = estimateSpeakMs(`${term}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
-  awardStar().then(() => {
-    setTimeout(() => startBuildRound(), nextMs);
-  });
+  afterPlayCorrect(() => startBuildRound(), nextMs);
 }
 
 function onBuildPointerDown(ev, tile, onDragStarted) {
