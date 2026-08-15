@@ -119,6 +119,7 @@ function refreshPlayRoundUI() {
 function hidePlayFinish() {
   const el = $('#play-finish');
   if (el) el.hidden = true;
+  busy = false;
 }
 
 function showPlayFinish() {
