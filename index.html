@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/styles.css?v=20260815d" />
+  <link rel="stylesheet" href="./css/styles.css?v=20260815e" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260815d" />
   <link rel="stylesheet" href="./css/math.css?v=20260811j" />
 </head>
@@ -141,11 +141,8 @@
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-listen">← 玩法</button>
         <h1>聽一聽</h1>
-        <div class="star-panel" style="min-height:56px;padding:8px 12px">
-          <span class="star-icon">★</span>
-          <span class="star-meta">
-            <strong class="stars-today-inline">0/10</strong>
-          </span>
+        <div class="progress-pill" aria-label="今輪答啱進度">
+          <strong id="listen-round-progress">0/5</strong>
         </div>
       </div>
       <div class="prompt-box">
@@ -161,11 +158,8 @@
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-match">← 玩法</button>
         <h1>配一配</h1>
-        <div class="star-panel" style="min-height:56px;padding:8px 12px">
-          <span class="star-icon">★</span>
-          <span class="star-meta">
-            <strong class="stars-today-inline">0/10</strong>
-          </span>
+        <div class="progress-pill" aria-label="今輪答啱進度">
+          <strong id="match-round-progress">0/5</strong>
         </div>
       </div>
       <div class="prompt-box">
@@ -181,11 +175,8 @@
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-build">← 玩法</button>
         <h1>砌一砌</h1>
-        <div class="star-panel" style="min-height:56px;padding:8px 12px">
-          <span class="star-icon">★</span>
-          <span class="star-meta">
-            <strong class="stars-today-inline">0/10</strong>
-          </span>
+        <div class="progress-pill" aria-label="今輪答啱進度">
+          <strong id="build-round-progress">0/5</strong>
         </div>
       </div>
       <div class="prompt-box">
@@ -635,6 +626,18 @@
   <button type="button" class="btn btn-parent" id="btn-parent" aria-label="家長區">👪</button>
   <div class="star-burst" id="star-burst" aria-hidden="true">★</div>
 
+  <!-- 認字：今輪玩完 -->
+  <div id="play-finish" class="play-finish" hidden role="dialog" aria-modal="true" aria-labelledby="play-finish-msg">
+    <div class="play-finish-inner">
+      <div class="play-finish-star" aria-hidden="true">★</div>
+      <p id="play-finish-msg">今輪玩完喇！你好叻呀！</p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-secondary" id="btn-play-again">再玩一輪</button>
+        <button type="button" class="btn" id="btn-play-topics">返主題</button>
+      </div>
+    </div>
+  </div>
+
   <!-- 數理：星球飛過場 -->
   <div id="math-warp" class="math-warp" hidden aria-live="polite">
     <div class="math-warp-inner">
@@ -742,7 +745,7 @@
   <script src="./js/words.js?v=20260815d"></script>
   <script src="./js/storage.js?v=20260724b"></script>
   <script src="./js/speech.js?v=20260724b"></script>
-  <script src="./js/app.js?v=20260815d"></script>
+  <script src="./js/app.js?v=20260815e"></script>
   <script src="./js/phonics-words.js?v=20260724i"></script>
   <script src="./js/phonics-app.js?v=20260724i"></script>
   <script src="./js/math-storage.js?v=20260811j"></script>
