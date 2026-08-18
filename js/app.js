@@ -596,21 +596,30 @@ function stepLearn(delta) {
   renderLearnCard();
 }
 
+function setPlayModeCopy(btnSel, title, blurb) {
+  const btn = $(btnSel);
+  if (!btn) return;
+  const t = btn.querySelector('.play-mode-title');
+  const b = btn.querySelector('.play-mode-blurb');
+  if (t) t.textContent = title;
+  if (b) b.textContent = blurb;
+  btn.setAttribute('aria-label', `${title}，${blurb}`);
+}
+
 function openPlayPick() {
   const topic = getTopicById(activeTopicId);
   const title = $('#play-topic-title');
   const base = topic ? topic.title : '';
   const withBook = activeBook ? `${base}・${activeBook.title}` : base;
   if (title) title.textContent = withBook ? `${withBook}・去玩玩` : '去玩玩';
-  const listenBtn = $('#btn-mode-listen');
-  const matchBtn = $('#btn-mode-match');
   if (activeTopicId === 'opposites') {
-    if (listenBtn) listenBtn.textContent = '聽一聽・揀相反';
-    if (matchBtn) matchBtn.textContent = '睇圖・揀相反';
+    setPlayModeCopy('#btn-mode-listen', '聽一聽', '聽廣東話，揀相反');
+    setPlayModeCopy('#btn-mode-match', '睇圖', '睇圖，揀相反');
   } else {
-    if (listenBtn) listenBtn.textContent = '聽一聽・揀漢字';
-    if (matchBtn) matchBtn.textContent = '睇圖・揀漢字';
+    setPlayModeCopy('#btn-mode-listen', '聽一聽', '聽廣東話，揀漢字');
+    setPlayModeCopy('#btn-mode-match', '睇圖', '睇圖，揀漢字');
   }
+  setPlayModeCopy('#btn-mode-build', '砌一砌', '用手砌漢字');
   showScreen('play');
   refreshStarUI();
 }
