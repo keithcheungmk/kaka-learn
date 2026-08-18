@@ -1,0 +1,25 @@
+Yellow Door phonics — LOCAL TRIAL ONLY
+======================================
+
+Purpose: split their free Phonic_letter_sounds.mp3 into a–z for private
+listening on localhost. Do NOT deploy to GitHub Pages / public main until
+Yellow Door gives written permission (their terms: non-commercial education,
+do not modify; they retain copyright).
+
+Commands
+--------
+# Split only (output under recordings/yellowdoor-trial/, gitignored)
+./scripts/split-yellowdoor-local.sh
+
+# Split + copy into assets/phonemes for localhost preview
+./scripts/split-yellowdoor-local.sh --apply-local
+
+# Preview
+python3 -m http.server 5173
+
+# Restore previous app sounds
+cp recordings/phonemes-backup-before-yellowdoor/*.mp3 assets/phonemes/
+git checkout -- js/phonics-app.js
+
+Never commit: recordings/yellowdoor-trial*/ or replaced assets/phonemes/*.mp3
+from this trial.

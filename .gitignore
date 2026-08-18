@@ -1,0 +1,8 @@
+# Local trial audio (do NOT publish)
+recordings/yellowdoor-trial/
+recordings/yellowdoor-trial-src/
+recordings/phonemes-backup-before-yellowdoor/
+# Raw user recordings for import
+recordings/phonemes/*
+!recordings/phonemes/.gitkeep
+!recordings/phonemes/README.txt
