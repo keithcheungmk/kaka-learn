@@ -36,7 +36,7 @@
   let activePhonemeAudio = null;
   let phonemeWaitTimer = null;
   /** Bump when replacing phoneme MP3s so iPad／Safari 唔用舊 cache。 */
-  const PHONEME_ASSET_VERSION = '20260818a';
+  const PHONEME_ASSET_VERSION = '20260818b';
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
