@@ -25,6 +25,7 @@ const {
   warmVoices,
   warmAudio,
   speakTerm,
+  speakChar,
   speakThen,
   speakCorrectFeedback,
   speakWordThenEncourage,
@@ -1046,13 +1047,10 @@ function onBuildTileTap(key) {
   warmAudio();
   const used = buildRound.filled.some((f) => f && f.key === key);
   if (used) return;
-  buildSelectedKey = buildSelectedKey === key ? null : key;
-  renderBuildPool();
-  const fb = $('#build-feedback');
-  if (fb && buildSelectedKey) {
-    fb.textContent = '而家撳左邊發光嘅格';
-    fb.className = 'feedback';
-  }
+  const next = nextBuildIndex();
+  if (next < 0) return;
+  // 撳一下即入下一格並讀字，唔使再撳格（iPad 先有手勢出聲）
+  tryPlaceBuildChar(key, next);
 }
 
 function onBuildSlotTap(index) {
@@ -1123,11 +1121,12 @@ function tryPlaceBuildChar(tileKey, slotIndex) {
   renderBuildSlots();
   renderBuildPool();
 
+  warmAudio();
   if (buildRound.filled.every(Boolean)) {
     finishBuildSuccess();
   } else {
-    // 每放入一格就讀嗰個字，幫卡卡對字形同讀音
-    speakTerm(expected, { muted: state.muted, rate: 0.88, delayMs: 40 });
+    // 拖或撳入格：同一下手勢即刻讀呢個字（唔好 setTimeout，iPad 會冇聲）
+    speakChar(expected, { muted: state.muted });
     const fb = $('#build-feedback');
     if (fb) {
       fb.textContent = expected;
