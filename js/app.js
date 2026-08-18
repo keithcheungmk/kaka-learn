@@ -63,6 +63,8 @@ let learnPairs = [];
 let learnIndex = 0;
 /** 相反位置學習頁用成對模式 */
 let learnPairMode = false;
+/** 已經睇完最後一張：之後「去玩玩」要留低，即使誤撳「再睇一次」 */
+let learnPassedOnce = false;
 /** 今輪玩法：listen / match / build */
 let playMode = null;
 /** 今輪答啱嘅字 id（unique；答錯唔計、唔清零） */
@@ -257,6 +259,12 @@ function bindHome() {
       target: playRoundTarget(),
       busy,
     }),
+    getLearnProgress: () => ({
+      index: learnIndex,
+      length: learnDeckLength(),
+      passedOnce: learnPassedOnce,
+      finishHidden: Boolean($('#learn-finish-row')?.hidden),
+    }),
   });
 }
 
@@ -430,6 +438,7 @@ function startLearn(topic, book) {
   }
 
   learnIndex = 0;
+  learnPassedOnce = false;
   const title = $('#learn-topic-title');
   if (title) title.textContent = book ? `${topic.title}・${book.title}` : topic.title;
   const backBtn = $('#btn-back-learn');
@@ -462,6 +471,16 @@ function renderTopics() {
   });
 }
 
+function learnDeckLength() {
+  return learnPairMode ? learnPairs.length : learnWords.length;
+}
+
+function updateLearnFinishRow(atEnd) {
+  if (atEnd) learnPassedOnce = true;
+  const finishRow = $('#learn-finish-row');
+  if (finishRow) finishRow.hidden = !learnPassedOnce;
+}
+
 function renderLearnCard() {
   if (learnPairMode) {
     renderLearnPairCard();
@@ -484,14 +503,13 @@ function renderLearnCard() {
 
   const prev = $('#btn-learn-prev');
   const next = $('#btn-learn-next');
-  const finishRow = $('#learn-finish-row');
   const atEnd = learnIndex >= learnWords.length - 1;
   if (prev) prev.disabled = learnIndex <= 0;
   if (next) {
     next.disabled = false;
     next.textContent = atEnd ? '再睇一次' : '下一張';
   }
-  if (finishRow) finishRow.hidden = !atEnd;
+  updateLearnFinishRow(atEnd);
 
   // Enlarge learn plate
   const plate = illust?.querySelector('.emoji-plate');
@@ -525,14 +543,13 @@ function renderLearnPairCard() {
 
   const prev = $('#btn-learn-prev');
   const next = $('#btn-learn-next');
-  const finishRow = $('#learn-finish-row');
   const atEnd = learnIndex >= learnPairs.length - 1;
   if (prev) prev.disabled = learnIndex <= 0;
   if (next) {
     next.disabled = false;
     next.textContent = atEnd ? '再睇一次' : '下一對';
   }
-  if (finishRow) finishRow.hidden = !atEnd;
+  updateLearnFinishRow(atEnd);
 
   speakCurrentLearn();
 }
