@@ -37,12 +37,6 @@ const {
   estimateSpeakMs,
 } = window.KakaSpeech;
 
-const HERO_EMOJI = `<div class="hero-emoji-stack" aria-hidden="true">
-  <span class="hero-emoji-main">🦌</span>
-  <span class="hero-emoji-orbit">🚀</span>
-  <span class="hero-emoji-star">⭐</span>
-</div>`;
-
 /** @type {ReturnType<typeof loadState>} */
 let state = loadState();
 let pinBuffer = '';
@@ -81,8 +75,6 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 function init() {
   try {
     warmVoices();
-    const hero = $('#hero-deer');
-    if (hero) hero.innerHTML = HERO_EMOJI;
     bindHome();
     bindTopics();
     bindLearn();
