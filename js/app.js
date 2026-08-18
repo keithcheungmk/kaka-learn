@@ -1126,11 +1126,11 @@ function tryPlaceBuildChar(tileKey, slotIndex) {
   if (buildRound.filled.every(Boolean)) {
     finishBuildSuccess();
   } else {
-    // 砌啱一個字都播短鼓勵音效（唔讀整句，避免同之後成功鼓勵搶聲）
-    playCorrectCue({ muted: state.muted });
+    // 每放入一格就讀嗰個字，幫卡卡對字形同讀音
+    speakTerm(expected, { muted: state.muted, rate: 0.88, delayMs: 40 });
     const fb = $('#build-feedback');
     if (fb) {
-      fb.textContent = '好！繼續砌下一個';
+      fb.textContent = expected;
       fb.className = 'feedback ok';
     }
   }
@@ -1144,14 +1144,17 @@ function finishBuildSuccess() {
   // 手指手勢入面喚醒 Web Audio，之後叮聲先唔會被 iPad 靜音
   warmAudio();
   const term = buildRound.target.term;
+  const chars = termChars(term);
+  const lastChar = chars[chars.length - 1] || '';
+  // 多於一字：最後一格讀「個字。成個詞。鼓勵」一次過，避免 iPad 第二次 speak 冇聲
+  const spoken = chars.length > 1 ? `${lastChar}。${term}` : term;
   const fb = $('#build-feedback');
-  // 一次過讀「字詞 + 鼓勵」——iPad／Safari 第二次 async speak 成日冇聲
-  const praise = speakWordThenEncourage(term, { muted: state.muted });
+  const praise = speakWordThenEncourage(spoken, { muted: state.muted });
   if (fb) {
     fb.textContent = praise;
     fb.className = 'feedback ok';
   }
-  const nextMs = estimateSpeakMs(`${term}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
+  const nextMs = estimateSpeakMs(`${spoken}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
   afterPlayCorrect(buildRound.target.id, () => startBuildRound(), nextMs);
 }
 
