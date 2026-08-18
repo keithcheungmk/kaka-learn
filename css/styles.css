@@ -36,8 +36,8 @@ body {
   font-family: var(--font-body);
   -webkit-tap-highlight-color: transparent;
   user-select: none;
-  /* 幼齡 iPad／妙控鍵盤：唔好 pinch 放大成個遊戲 */
-  touch-action: manipulation;
+  /* 幼齡 iPad／妙控鍵盤：禁 pinch 放大（manipulation 仍准 pinch，改 pan-y） */
+  touch-action: pan-y;
 }
 
 body {
