@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/styles.css?v=20260818d" />
+  <link rel="stylesheet" href="./css/styles.css?v=20260818f" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260815d" />
   <link rel="stylesheet" href="./css/math.css?v=20260811j" />
 </head>
@@ -128,11 +128,54 @@
           </span>
         </div>
       </div>
-      <p class="section-lead">而家先考考你識唔識</p>
-      <div class="btn-row play-choices">
-        <button type="button" class="btn" id="btn-mode-listen">聽一聽・揀漢字</button>
-        <button type="button" class="btn btn-secondary" id="btn-mode-match">睇圖・揀漢字</button>
-        <button type="button" class="btn btn-accent" id="btn-mode-build">砌一砌・配漢字</button>
+      <p class="section-lead" id="play-lead">你想點樣認？</p>
+      <div class="play-choices">
+        <button type="button" class="play-mode-card play-mode-listen" id="btn-mode-listen" aria-label="聽一聽，聽廣東話，揀漢字">
+          <span class="play-mode-preview" aria-hidden="true">
+            <span class="play-preview-icon">🔊</span>
+            <span class="play-preview-chars">
+              <span>鹿</span>
+              <span>星</span>
+              <span>門</span>
+            </span>
+          </span>
+          <span class="play-mode-copy">
+            <span class="play-mode-title">聽一聽</span>
+            <span class="play-mode-blurb">聽廣東話，揀漢字</span>
+          </span>
+        </button>
+        <button type="button" class="play-mode-card play-mode-match" id="btn-mode-match" aria-label="睇圖，睇圖揀漢字">
+          <span class="play-mode-preview play-preview-match" aria-hidden="true">
+            <span class="play-preview-plate">⭐</span>
+            <span class="play-preview-chars">
+              <span>月</span>
+              <span class="is-glow">星</span>
+              <span>門</span>
+            </span>
+          </span>
+          <span class="play-mode-copy">
+            <span class="play-mode-title">睇圖</span>
+            <span class="play-mode-blurb">睇圖，揀漢字</span>
+          </span>
+        </button>
+        <button type="button" class="play-mode-card play-mode-build" id="btn-mode-build" aria-label="砌一砌，用手砌漢字">
+          <span class="play-mode-preview play-preview-build" aria-hidden="true">
+            <span class="play-preview-hand">✋</span>
+            <span class="play-preview-slots">
+              <span class="play-preview-slot"><span class="play-preview-ghost">小</span></span>
+              <span class="play-preview-slot is-next"><span class="play-preview-ghost">鹿</span></span>
+            </span>
+            <span class="play-preview-tiles">
+              <span>星</span>
+              <span class="is-pick">鹿</span>
+              <span>小</span>
+            </span>
+          </span>
+          <span class="play-mode-copy">
+            <span class="play-mode-title">砌一砌</span>
+            <span class="play-mode-blurb">用手砌漢字</span>
+          </span>
+        </button>
       </div>
     </section>
 
@@ -746,7 +789,7 @@
   <script src="./js/words.js?v=20260815d"></script>
   <script src="./js/storage.js?v=20260724b"></script>
   <script src="./js/speech.js?v=20260818e"></script>
-  <script src="./js/app.js?v=20260818e"></script>
+  <script src="./js/app.js?v=20260818f"></script>
   <script src="./js/phonics-words.js?v=20260724i"></script>
   <script src="./js/phonics-app.js?v=20260724i"></script>
   <script src="./js/math-storage.js?v=20260811j"></script>
