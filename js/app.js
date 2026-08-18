@@ -65,9 +65,12 @@ let learnIndex = 0;
 let learnPairMode = false;
 /** 今輪玩法：listen / match / build */
 let playMode = null;
-/** 今輪答啱次數（答錯唔計、唔清零） */
-let playCorrect = 0;
-const PLAY_ROUND_TARGET = 5;
+/** 今輪答啱嘅字 id（unique；答錯唔計、唔清零） */
+const playWonIds = new Set();
+/** 聽一聽／配一配：最多 8 個 unique 字；主題少過 8 就全清 */
+const LISTEN_MATCH_CAP = 8;
+/** 砌一砌：最多 10 個 unique 字；主題少過 10 就全清 */
+const BUILD_CAP = 10;
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -101,15 +104,29 @@ function closeAllModals() {
   hidePlayFinish();
 }
 
+function playRoundCap() {
+  return playMode === 'build' ? BUILD_CAP : LISTEN_MATCH_CAP;
+}
+
+/** 今輪目標：min(上限, 而家主題／書嘅字數) */
+function playRoundTarget() {
+  const n = enabledWords().length;
+  return Math.max(1, Math.min(playRoundCap(), n));
+}
+
+function resetPlayRoundProgress() {
+  playWonIds.clear();
+}
+
 function beginPlayRound(mode) {
   playMode = mode;
-  playCorrect = 0;
+  resetPlayRoundProgress();
   hidePlayFinish();
   refreshPlayRoundUI();
 }
 
 function refreshPlayRoundUI() {
-  const label = `${playCorrect}/${PLAY_ROUND_TARGET}`;
+  const label = `${playWonIds.size}/${playRoundTarget()}`;
   ['#listen-round-progress', '#match-round-progress', '#build-round-progress'].forEach((sel) => {
     const el = $(sel);
     if (el) el.textContent = label;
@@ -150,7 +167,7 @@ function bindPlayFinish() {
     topics.onclick = () => {
       hidePlayFinish();
       playMode = null;
-      playCorrect = 0;
+      resetPlayRoundProgress();
       if (activeBook) {
         const topic = getTopicById(activeTopicId);
         if (topic) {
@@ -163,15 +180,16 @@ function bindPlayFinish() {
   }
 }
 
-/** 答啱先 +1；滿 5 題完一輪。回傳係咪已經完。 */
-function notePlayCorrect() {
-  playCorrect += 1;
+/** 答啱先記 unique 字；答錯唔計、唔清零。回傳係咪已經完一輪。 */
+function notePlayCorrect(wordId) {
+  if (wordId) playWonIds.add(wordId);
   refreshPlayRoundUI();
-  return playCorrect >= PLAY_ROUND_TARGET;
+  const leftover = enabledWords().filter((w) => !playWonIds.has(w.id));
+  return playWonIds.size >= playRoundTarget() || leftover.length === 0;
 }
 
-function afterPlayCorrect(nextRoundFn, nextMs) {
-  const roundDone = notePlayCorrect();
+function afterPlayCorrect(wordId, nextRoundFn, nextMs) {
+  const roundDone = notePlayCorrect(wordId);
   awardStar().then(() => {
     if (roundDone) {
       setTimeout(() => showPlayFinish(), nextMs);
@@ -231,6 +249,14 @@ function bindHome() {
     startBuild: startBuildMode,
     goHome: () => showScreen('home'),
     openTopics,
+    playRoundTarget,
+    playRoundCap,
+    getPlayProgress: () => ({
+      mode: playMode,
+      won: [...playWonIds],
+      target: playRoundTarget(),
+      busy,
+    }),
   });
 }
 
@@ -590,14 +616,17 @@ function enabledWords() {
   return list;
 }
 
-/** 抽題：鹿類可加權 */
+/** 抽題：優先未答啱過嘅字，鹿類可加權 */
 function pickTarget(pool) {
+  let source = pool;
+  const leftover = pool.filter((w) => !playWonIds.has(w.id));
+  if (leftover.length) source = leftover;
   state = loadState();
   if (!state.deerFocus) {
-    return pool[Math.floor(Math.random() * pool.length)];
+    return source[Math.floor(Math.random() * source.length)];
   }
   const weighted = [];
-  pool.forEach((w) => {
+  source.forEach((w) => {
     const weight = w.isDeer || DEER_IDS.includes(w.id) ? 2 : 1;
     for (let i = 0; i < weight; i += 1) weighted.push(w);
   });
@@ -624,7 +653,8 @@ function buildOppositeQuiz(pool) {
     const opp = getOppositeWord(w.id);
     return opp && pool.some((p) => p.id === opp.id);
   });
-  const source = candidates.length ? candidates : pool;
+  const unused = candidates.filter((w) => !playWonIds.has(w.id));
+  const source = unused.length ? unused : (candidates.length ? candidates : pool);
   const prompt = pickTarget(source);
   const answer = getOppositeWord(prompt.id);
   if (!answer) return null;
@@ -737,13 +767,13 @@ function onListenPick(id, btn) {
       const praise = speakWordThenEncourage(answerTerm, { muted: state.muted });
       fb.textContent = `${promptTerm} 嘅相反係 ${answerTerm}！${praise}`;
       fb.className = 'feedback ok';
-      afterPlayCorrect(() => startListenRound(), estimateSpeakMs(`${answerTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500);
+      afterPlayCorrect((listenRound.prompt || listenRound.target).id, () => startListenRound(), estimateSpeakMs(`${answerTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500);
     } else {
       playCorrectCue({ muted: state.muted });
       const praise = speakCorrectFeedback({ muted: state.muted });
       fb.textContent = praise;
       fb.className = 'feedback ok';
-      afterPlayCorrect(() => startListenRound(), nextMs);
+      afterPlayCorrect((listenRound.prompt || listenRound.target).id, () => startListenRound(), nextMs);
     }
   } else {
     // 錯咗都翻一吓睇圖，跟住翻返去——唔好長期露圖，避免靠淘汰答
@@ -847,7 +877,7 @@ function onMatchPick(id, btn) {
       fb.className = 'feedback ok';
     }
     const nextMs = estimateSpeakMs(`${answerTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
-    afterPlayCorrect(() => startMatchRound(), nextMs);
+    afterPlayCorrect((matchRound.prompt || matchRound.target).id, () => startMatchRound(), nextMs);
   } else {
     btn.classList.add('wrong');
     playTryAgainCue({ muted: state.muted });
@@ -1105,7 +1135,7 @@ function finishBuildSuccess() {
     fb.className = 'feedback ok';
   }
   const nextMs = estimateSpeakMs(`${term}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
-  afterPlayCorrect(() => startBuildRound(), nextMs);
+  afterPlayCorrect(buildRound.target.id, () => startBuildRound(), nextMs);
 }
 
 function onBuildPointerDown(ev, tile, onDragStarted) {
