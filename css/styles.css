@@ -93,6 +93,33 @@ body::before {
   display: flex;
 }
 
+/* 認字各屏：原創漢字太空背景（唔套去字母隊／數理） */
+.screen.active:not(.phonics-screen):not(.math-screen) {
+  position: relative;
+  isolation: isolate;
+}
+
+.screen.active:not(.phonics-screen):not(.math-screen)::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(7, 21, 38, 0.58) 0%, rgba(7, 21, 38, 0.42) 45%, rgba(7, 21, 38, 0.72) 100%),
+    url("../assets/chinese-space-bg.jpg") center / cover no-repeat;
+}
+
+.screen.active:not(.phonics-screen):not(.math-screen) .topic-card,
+.screen.active:not(.phonics-screen):not(.math-screen) .prompt-box,
+.screen.active:not(.phonics-screen):not(.math-screen) .learn-stage,
+.screen.active:not(.phonics-screen):not(.math-screen) .learn-pair-card,
+.screen.active:not(.phonics-screen):not(.math-screen) .build-pool,
+.screen.active:not(.phonics-screen):not(.math-screen) .match-stage,
+.screen.active:not(.phonics-screen):not(.math-screen) .play-mode-card {
+  backdrop-filter: blur(2px);
+}
+
 @keyframes fadeSlide {
   from {
     opacity: 0;
@@ -219,6 +246,25 @@ body::before {
   place-items: center;
   text-align: center;
   padding: 12px 0 24px;
+}
+
+.chinese-hero {
+  width: min(100%, 520px);
+  margin: 0 auto 14px;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 2px solid rgba(94, 234, 212, 0.28);
+  box-shadow: var(--shadow);
+  background: rgba(7, 21, 38, 0.55);
+}
+
+.chinese-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center 42%;
 }
 
 .hero-visual {
