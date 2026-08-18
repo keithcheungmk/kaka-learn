@@ -5,6 +5,18 @@ let speakTimer = null;
 let speakEndTimer = null;
 let speakKeepAlive = null;
 let speakGen = 0;
+/** Safari／iPad：utterance 如果冇人引用會被 GC，出聲會冇聲 */
+const heldUtters = [];
+
+function holdUtter(utter) {
+  heldUtters.push(utter);
+  const drop = () => {
+    const i = heldUtters.indexOf(utter);
+    if (i >= 0) heldUtters.splice(i, 1);
+  };
+  utter.addEventListener('end', drop);
+  utter.addEventListener('error', drop);
+}
 
 function pickCantoneseVoice() {
   if (!('speechSynthesis' in window)) return null;
@@ -132,6 +144,7 @@ function speakTerm(text, {
     utter.pitch = pitch;
     utter.onend = runEnd;
     utter.onerror = runEnd;
+    holdUtter(utter);
 
     try {
       speechSynthesis.speak(utter);
@@ -161,6 +174,40 @@ function speakTerm(text, {
       }
     }, 5000);
   }, delayMs);
+}
+
+/**
+ * 砌一砌放入一格：喺手指／拖放手勢同一拍讀嗰個字。
+ * iPad 單字好易被食：加句號、唔 delay、keep utterance、唔好 cancel 完等 setTimeout。
+ */
+function speakChar(ch, { muted = false } = {}) {
+  const raw = String(ch || '').trim();
+  if (muted || !raw) return;
+  if (!('speechSynthesis' in window)) return;
+  warmAudio();
+  const text = /[。．.!?！？]$/.test(raw) ? raw : `${raw}。`;
+  const utter = new SpeechSynthesisUtterance(text);
+  const voice = cachedVoice || pickCantoneseVoice();
+  if (voice) {
+    utter.voice = voice;
+    utter.lang = voice.lang || 'zh-HK';
+  } else {
+    utter.lang = 'zh-HK';
+  }
+  utter.rate = 0.82;
+  utter.pitch = 1.06;
+  holdUtter(utter);
+  try {
+    if (speechSynthesis.paused) speechSynthesis.resume();
+  } catch {
+    // ignore
+  }
+  try {
+    speechSynthesis.speak(utter);
+    if (speechSynthesis.paused) speechSynthesis.resume();
+  } catch {
+    // ignore
+  }
 }
 
 /**
@@ -417,6 +464,7 @@ window.KakaSpeech = {
   warmVoices,
   warmAudio,
   speakTerm,
+  speakChar,
   speakThen,
   speakCorrectFeedback,
   speakWordThenEncourage,
