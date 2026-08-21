@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#071526" />
+  <title>卡卡學習 KAKA Learn</title>
+  <meta http-equiv="Cache-Control" content="no-cache" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/styles.css?v=20260818g" />
+  <link rel="stylesheet" href="./css/phonics.css?v=20260815d" />
+  <link rel="stylesheet" href="./css/math.css?v=20260811j" />
+</head>
+<body>
+  <div id="app">
+    <!-- 主頁 -->
+    <section id="screen-home" class="screen active" aria-label="主頁">
+      <header class="topbar">
+        <div class="brand-mark">
+          <div class="brand-orbit" aria-hidden="true"></div>
+          <div class="brand-text">
+            <div class="brand-name">卡卡學習</div>
+            <div class="brand-tag">小鹿太空冒險</div>
+          </div>
+        </div>
+        <button type="button" class="star-panel" id="btn-star-info" aria-label="星星與 AEON 幣">
+          <span class="star-icon" aria-hidden="true">★</span>
+          <span class="star-meta">
+            <strong id="stars-today-label">今日 0 / 10</strong>
+            <span id="coins-label">可換 0 枚 AEON 幣</span>
+          </span>
+        </button>
+      </header>
+
+      <div class="hero-home">
+        <div class="chinese-hero" aria-hidden="true">
+          <img src="./assets/chinese-hero.jpg" alt="" width="1100" height="733" />
+        </div>
+        <h1 class="hero-title">卡卡學習</h1>
+        <p class="hero-sub">出發認字、字母同數理，一齊太空冒險攞星星！</p>
+        <div class="btn-row">
+          <button type="button" class="btn" id="btn-start-topics" aria-label="小鹿認字探險">小鹿認字探險</button>
+          <button type="button" class="btn btn-secondary" id="btn-start-phonics" aria-label="卡卡字母隊">卡卡字母隊</button>
+          <button type="button" class="btn btn-accent" id="btn-start-math">小鹿數理探險</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 揀主題 -->
+    <section id="screen-topics" class="screen" aria-label="揀主題">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-topics">← 返去</button>
+        <h1>揀主題</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong class="stars-today-inline">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <p class="section-lead">揀一組，先一齊睇字同圖</p>
+      <div class="topic-grid" id="topic-grid"></div>
+    </section>
+
+    <!-- 紅橙輯：揀書 -->
+    <section id="screen-books" class="screen" aria-label="揀書">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-books">← 主題</button>
+        <h1 id="books-topic-title">揀書</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong class="stars-today-inline">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <p class="section-lead">今日讀咗邊本書？揀返嗰本嚟溫習</p>
+      <div class="topic-grid" id="book-grid"></div>
+    </section>
+
+    <!-- 先學一學 -->
+    <section id="screen-learn" class="screen" aria-label="先學一學">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-learn">← 主題</button>
+        <h1 id="learn-topic-title">先學一學</h1>
+        <div class="progress-pill" aria-label="學習進度">
+          <strong id="learn-progress">1/5</strong>
+        </div>
+      </div>
+      <p class="section-lead" id="learn-lead">睇吓圖同字，撳喇叭聽廣東話</p>
+      <button type="button" class="learn-stage" id="learn-stage" aria-label="再聽一次">
+        <div id="learn-illust"></div>
+        <div class="learn-term" id="learn-term"></div>
+        <div class="learn-hear">🔊 聽一聽</div>
+      </button>
+      <div class="learn-pair-stage" id="learn-pair-stage" hidden>
+        <button type="button" class="learn-pair-card" id="learn-pair-left" aria-label="聽左邊">
+          <div class="learn-pair-illust" id="learn-pair-left-illust"></div>
+          <div class="learn-term learn-pair-term" id="learn-pair-left-term"></div>
+          <div class="learn-hear">🔊 聽</div>
+        </button>
+        <div class="learn-pair-vs" aria-hidden="true">相反</div>
+        <button type="button" class="learn-pair-card" id="learn-pair-right" aria-label="聽右邊">
+          <div class="learn-pair-illust" id="learn-pair-right-illust"></div>
+          <div class="learn-term learn-pair-term" id="learn-pair-right-term"></div>
+          <div class="learn-hear">🔊 聽</div>
+        </button>
+      </div>
+      <div class="btn-row learn-nav">
+        <button type="button" class="btn btn-ghost" id="btn-learn-prev">上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-learn-next">下一張</button>
+      </div>
+      <div class="btn-row" id="learn-finish-row" hidden>
+        <button type="button" class="btn" id="btn-learn-play">學完喇・去玩玩</button>
+      </div>
+    </section>
+
+    <!-- 學完揀玩法 -->
+    <section id="screen-play" class="screen" aria-label="揀玩法">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-play">← 再學</button>
+        <h1 id="play-topic-title">去玩玩</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong class="stars-today-inline">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <p class="section-lead" id="play-lead">你想點樣認？</p>
+      <div class="play-choices">
+        <button type="button" class="play-mode-card play-mode-listen" id="btn-mode-listen" aria-label="聽一聽，聽廣東話，揀漢字">
+          <span class="play-mode-preview" aria-hidden="true">
+            <span class="play-preview-icon">🔊</span>
+            <span class="play-preview-chars">
+              <span>鹿</span>
+              <span>星</span>
+              <span>門</span>
+            </span>
+          </span>
+          <span class="play-mode-copy">
+            <span class="play-mode-title">聽一聽</span>
+            <span class="play-mode-blurb">聽廣東話，揀漢字</span>
+          </span>
+        </button>
+        <button type="button" class="play-mode-card play-mode-match" id="btn-mode-match" aria-label="睇圖，睇圖揀漢字">
+          <span class="play-mode-preview play-preview-match" aria-hidden="true">
+            <span class="play-preview-plate">⭐</span>
+            <span class="play-preview-chars">
+              <span>月</span>
+              <span class="is-glow">星</span>
+              <span>門</span>
+            </span>
+          </span>
+          <span class="play-mode-copy">
+            <span class="play-mode-title">睇圖</span>
+            <span class="play-mode-blurb">睇圖，揀漢字</span>
+          </span>
+        </button>
+        <button type="button" class="play-mode-card play-mode-build" id="btn-mode-build" aria-label="砌一砌，用手砌漢字">
+          <span class="play-mode-preview play-preview-build" aria-hidden="true">
+            <span class="play-preview-hand">✋</span>
+            <span class="play-preview-slots">
+              <span class="play-preview-slot"><span class="play-preview-ghost">小</span></span>
+              <span class="play-preview-slot is-next"><span class="play-preview-ghost">鹿</span></span>
+            </span>
+            <span class="play-preview-tiles">
+              <span>星</span>
+              <span class="is-pick">鹿</span>
+              <span>小</span>
+            </span>
+          </span>
+          <span class="play-mode-copy">
+            <span class="play-mode-title">砌一砌</span>
+            <span class="play-mode-blurb">用手砌漢字</span>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 模式 A：聽音選字 -->
+    <section id="screen-listen" class="screen" aria-label="聽一聽揀卡片">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-listen">← 玩法</button>
+        <h1>聽一聽</h1>
+        <div class="progress-pill" aria-label="今輪答啱進度">
+          <strong id="listen-round-progress">0/8</strong>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p id="listen-prompt-text">聽廣東話，再揀啱嘅<strong>漢字</strong>（冇圖，靠認字）</p>
+        <button type="button" class="speak-btn" id="btn-speak-listen" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="card-grid cols-3" id="listen-options"></div>
+      <p class="feedback" id="listen-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 模式 B：睇圖揀漢字 -->
+    <section id="screen-match" class="screen" aria-label="睇圖揀漢字">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-match">← 玩法</button>
+        <h1>配一配</h1>
+        <div class="progress-pill" aria-label="今輪答啱進度">
+          <strong id="match-round-progress">0/8</strong>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p id="match-prompt-text">睇中間嘅圖，再揀啱嘅<strong>漢字</strong></p>
+      </div>
+      <div class="match-stage" id="match-stage" aria-hidden="true"></div>
+      <div class="card-grid cols-3" id="match-options"></div>
+      <p class="feedback" id="match-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 模式 C：砌字配圖 -->
+    <section id="screen-build" class="screen" aria-label="砌一砌配漢字">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-build">← 玩法</button>
+        <h1>砌一砌</h1>
+        <div class="progress-pill" aria-label="今輪答啱進度">
+          <strong id="build-round-progress">0/10</strong>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p>睇圖，由下面字池<strong>拖或撳</strong>啱嘅字，按順序砌入淡色格</p>
+      </div>
+      <div class="build-stage" id="build-stage" aria-hidden="true"></div>
+      <div class="build-slots" id="build-slots" aria-label="漢字格"></div>
+      <div class="build-speak-wrap">
+        <button type="button" class="speak-btn" id="btn-speak-build" aria-label="聽呢個詞">🔊 聽呢個詞</button>
+      </div>
+      <div class="build-pool-wrap">
+        <p class="section-label">字池</p>
+        <div class="build-pool" id="build-pool" aria-label="可揀嘅漢字"></div>
+      </div>
+      <p class="feedback" id="build-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 卡卡字母隊：揀主題 -->
+    <section id="screen-phonics-topics" class="screen phonics-screen" aria-label="卡卡字母隊・揀主題">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-topics">← 返去</button>
+        <h1>卡卡字母隊</h1>
+      </div>
+      <div class="phonics-hero" aria-hidden="true">
+        <img src="./assets/phonics-hero.jpg" alt="" width="1100" height="733" />
+      </div>
+      <p class="section-lead">揀一組,先一齊睇字同讀音</p>
+      <div class="topic-grid" id="phonics-topic-grid"></div>
+    </section>
+
+    <!-- 卡卡字母隊：先學一學 -->
+    <section id="screen-phonics-learn" class="screen phonics-screen" aria-label="卡卡字母隊・先學一學">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-learn">← 主題</button>
+        <h1 id="phonics-learn-topic-title">先學一學</h1>
+        <div class="progress-pill" aria-label="學習進度">
+          <strong id="phonics-learn-progress">1/5</strong>
+        </div>
+      </div>
+      <p class="section-lead">睇吓字同圖,撳喇叭聽英文讀音</p>
+      <div class="learn-stage" id="phonics-learn-stage">
+        <button type="button" class="learn-stage-tap" id="phonics-learn-tap" aria-label="再聽一次">
+          <div id="phonics-learn-illust"></div>
+          <div class="learn-term term-en" id="phonics-learn-term"></div>
+          <div class="learn-hear">🔊 聽一聽</div>
+        </button>
+        <div class="letter-row" id="phonics-learn-letters"></div>
+      </div>
+      <div class="btn-row learn-nav">
+        <button type="button" class="btn btn-ghost" id="btn-phonics-learn-prev">上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-phonics-learn-next">下一張</button>
+      </div>
+      <div class="btn-row" id="phonics-learn-finish-row" hidden>
+        <button type="button" class="btn" id="btn-phonics-learn-play">學完喇・去玩玩</button>
+      </div>
+    </section>
+
+    <!-- 卡卡字母隊：揀玩法 -->
+    <section id="screen-phonics-play" class="screen phonics-screen" aria-label="卡卡字母隊・揀玩法">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-play">← 再學</button>
+        <h1 id="phonics-play-topic-title">去玩玩</h1>
+      </div>
+      <p class="section-lead">而家先考考你識唔識</p>
+      <div class="btn-row play-choices">
+        <button type="button" class="btn" id="btn-phonics-mode-listen">聽一聽・揀圖</button>
+        <button type="button" class="btn btn-secondary" id="btn-phonics-mode-match">睇圖・揀字</button>
+        <button type="button" class="btn btn-accent" id="btn-phonics-mode-build">砌一砌・拼英文</button>
+      </div>
+    </section>
+
+    <!-- 卡卡字母隊：聽一聽揀圖 -->
+    <section id="screen-phonics-listen" class="screen phonics-screen" aria-label="卡卡字母隊・聽一聽揀圖">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-listen">← 玩法</button>
+        <h1>聽一聽</h1>
+      </div>
+      <div class="prompt-box">
+        <p>聽英文讀音,再揀啱嘅<strong>圖畫</strong></p>
+        <button type="button" class="speak-btn" id="btn-phonics-speak-listen" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="card-grid cols-3" id="phonics-listen-options"></div>
+      <p class="feedback" id="phonics-listen-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 卡卡字母隊：睇圖揀字 -->
+    <section id="screen-phonics-match" class="screen phonics-screen" aria-label="卡卡字母隊・睇圖揀字">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-match">← 玩法</button>
+        <h1>配一配</h1>
+      </div>
+      <div class="prompt-box">
+        <p>睇中間嘅圖,再揀啱嘅<strong>英文字</strong></p>
+      </div>
+      <div class="match-stage" id="phonics-match-stage" aria-hidden="true"></div>
+      <div class="card-grid cols-3" id="phonics-match-options"></div>
+      <p class="feedback" id="phonics-match-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 卡卡字母隊：砌一砌拼英文 -->
+    <section id="screen-phonics-build" class="screen phonics-screen" aria-label="卡卡字母隊・砌一砌拼英文">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-build">← 玩法</button>
+        <h1>砌一砌</h1>
+      </div>
+      <div class="prompt-box">
+        <p>睇圖,由下面字母池<strong>拖或撳</strong>啱嘅字母,按順序砌入淡色格</p>
+      </div>
+      <div class="build-stage" id="phonics-build-stage" aria-hidden="true"></div>
+      <div class="build-slots" id="phonics-build-slots" aria-label="字母格"></div>
+      <div class="build-pool-wrap">
+        <p class="section-label">字母池</p>
+        <div class="build-pool" id="phonics-build-pool" aria-label="可揀嘅字母"></div>
+      </div>
+      <p class="feedback" id="phonics-build-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 小鹿數理探險：太空站 hub -->
+    <section id="screen-math-hub" class="screen math-screen" aria-label="小鹿數理探險・太空站">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-hub">← 主頁</button>
+        <h1>小鹿數理探險</h1>
+        <button type="button" class="btn btn-ghost" id="btn-math-galaxy" style="min-width:auto;padding:8px 12px">睇旅程</button>
+      </div>
+      <div class="math-hub">
+        <div class="math-planet-stage">
+          <div id="math-planet-ball" class="math-globe-wrap math-globe-wrap--photo math-globe-wrap--mercury" aria-hidden="true">
+            <img class="math-globe-img" src="./assets/math/planets/mercury.png" alt="" width="256" height="256" decoding="async" />
+          </div>
+          <div class="math-deer-guide" aria-hidden="true">
+            <div class="math-deer-body">
+              <div class="math-deer-face"><i></i><i></i></div>
+              <div class="math-deer-nose"></div>
+              <div class="math-deer-scarf" id="math-deer-scarf"></div>
+            </div>
+          </div>
+        </div>
+        <h2 class="math-hub-title" id="math-hub-planet-name">水星</h2>
+        <p class="math-hub-blurb" id="math-hub-blurb">喺水星學數數：數吓有幾多粒</p>
+        <div class="math-hub-meta">
+          <span class="math-chip" id="math-hub-skill">學：數數</span>
+          <span class="math-chip" id="math-hub-stars">今日 ★ 0 / 10</span>
+          <span class="math-chip" id="math-hub-lit">已點亮 0 / 8</span>
+          <span class="math-chip" id="math-hub-next">下一粒：金星</span>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn" id="btn-math-launch">出發</button>
+          <button type="button" class="btn btn-secondary" id="btn-math-go-next" hidden>飛去下一粒</button>
+        </div>
+        <p class="math-coming" id="math-hub-coming" hidden></p>
+        <p class="math-lit-badge" id="math-hub-lit-badge" hidden>✨ 已點亮</p>
+      </div>
+    </section>
+
+    <!-- 水星・先學一學 -->
+    <section id="screen-math-learn" class="screen math-screen" aria-label="水星・先學一學">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-learn">← 太空站</button>
+        <h1 id="math-learn-title">水星・先學</h1>
+        <div class="progress-pill" aria-label="學習進度">
+          <strong id="math-learn-progress">1/5</strong>
+        </div>
+      </div>
+      <p class="section-lead" id="math-learn-lead">數吓有幾多粒，撳喇叭再聽</p>
+      <button type="button" class="math-learn-stage" id="math-learn-tap" aria-label="再聽一次">
+        <div class="math-count-field" id="math-learn-field" aria-hidden="true"></div>
+        <div class="math-learn-num" id="math-learn-num">3</div>
+        <div class="learn-hear">🔊 聽一聽</div>
+      </button>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" id="btn-math-learn-prev">上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-learn-next">下一張</button>
+      </div>
+      <div class="btn-row" id="math-learn-finish-row" hidden>
+        <button type="button" class="btn" id="btn-math-learn-play">學完喇・去玩玩</button>
+      </div>
+    </section>
+
+    <!-- 水星・揀玩法 -->
+    <section id="screen-math-play" class="screen math-screen" aria-label="水星・去玩玩">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-play">← 再學</button>
+        <h1 id="math-play-title">水星・去玩玩</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong id="math-play-stars">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <p class="section-lead">揀一種玩法</p>
+      <div class="btn-stack">
+        <button type="button" class="btn" id="btn-math-mode-count">數一數・揀數</button>
+      </div>
+    </section>
+
+    <!-- 水星・數一數揀數 -->
+    <section id="screen-math-count" class="screen math-screen" aria-label="水星・數一數揀數">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-count">← 玩法</button>
+        <h1>數一數</h1>
+        <div class="progress-pill" aria-label="答啱進度">
+          <strong id="math-count-progress">0/5</strong>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p id="math-count-prompt">有幾多粒？</p>
+        <button type="button" class="speak-btn" id="btn-math-count-speak" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="math-count-field math-count-field--quiz" id="math-count-field" aria-hidden="true"></div>
+      <div class="math-num-bubbles" id="math-count-options" aria-label="揀數字"></div>
+      <p class="feedback" id="math-count-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 金星・先學一學（邊多邊少） -->
+    <section id="screen-math-venus-learn" class="screen math-screen" aria-label="金星・先學一學">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-venus-learn">← 太空站</button>
+        <h1 id="math-venus-learn-title">金星・先學</h1>
+        <div class="progress-pill" aria-label="學習進度">
+          <strong id="math-venus-learn-progress">1/4</strong>
+        </div>
+      </div>
+      <p class="section-lead" id="math-venus-learn-lead">睇吓邊堆多、邊堆少，撳喇叭再聽</p>
+      <button type="button" class="math-learn-stage math-venus-stage" id="math-venus-learn-tap" aria-label="再聽一次">
+        <div class="math-compare-pairs" id="math-venus-learn-field" aria-hidden="true">
+          <div class="math-compare-side">
+            <div class="math-compare-items" id="math-venus-learn-left"></div>
+            <span class="math-compare-label" id="math-venus-learn-left-label">左邊</span>
+          </div>
+          <div class="math-compare-vs">比</div>
+          <div class="math-compare-side">
+            <div class="math-compare-items" id="math-venus-learn-right"></div>
+            <span class="math-compare-label" id="math-venus-learn-right-label">右邊</span>
+          </div>
+        </div>
+        <div class="math-venus-say" id="math-venus-learn-say">左邊多啲</div>
+        <div class="learn-hear">🔊 聽一聽</div>
+      </button>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" id="btn-math-venus-learn-prev">上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-venus-learn-next">下一張</button>
+      </div>
+      <div class="btn-row" id="math-venus-learn-finish-row" hidden>
+        <button type="button" class="btn" id="btn-math-venus-learn-play">學完喇・去玩玩</button>
+      </div>
+    </section>
+
+    <!-- 金星・揀玩法 -->
+    <section id="screen-math-venus-play" class="screen math-screen" aria-label="金星・去玩玩">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-venus-play">← 再學</button>
+        <h1 id="math-venus-play-title">金星・去玩玩</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong id="math-venus-play-stars">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <p class="section-lead">揀一種玩法</p>
+      <div class="btn-stack">
+        <button type="button" class="btn" id="btn-math-mode-compare">揀一揀・邊堆多</button>
+      </div>
+    </section>
+
+    <!-- 金星・邊多邊少 -->
+    <section id="screen-math-compare" class="screen math-screen" aria-label="金星・邊多邊少">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-compare">← 玩法</button>
+        <h1>邊多邊少</h1>
+        <div class="progress-pill" aria-label="答啱進度">
+          <strong id="math-compare-progress">0/5</strong>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p id="math-compare-prompt">邊堆多啲？</p>
+        <button type="button" class="speak-btn" id="btn-math-compare-speak" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="math-compare-pairs math-compare-pairs--quiz" id="math-compare-field">
+        <button type="button" class="math-compare-pick" data-side="left" aria-label="揀左邊">
+          <div class="math-compare-items" id="math-compare-left"></div>
+          <span class="math-compare-label">左邊</span>
+        </button>
+        <div class="math-compare-vs">比</div>
+        <button type="button" class="math-compare-pick" data-side="right" aria-label="揀右邊">
+          <div class="math-compare-items" id="math-compare-right"></div>
+          <span class="math-compare-label">右邊</span>
+        </button>
+      </div>
+      <div class="math-compare-actions" id="math-compare-same-row">
+        <button type="button" class="btn btn-secondary" id="btn-math-compare-same">一樣多</button>
+      </div>
+      <p class="feedback" id="math-compare-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 地球・先學一學（大細長短） -->
+    <section id="screen-math-earth-learn" class="screen math-screen" aria-label="地球・先學一學">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-earth-learn">← 太空站</button>
+        <h1 id="math-earth-learn-title">地球・先學</h1>
+        <div class="progress-pill" aria-label="學習進度">
+          <strong id="math-earth-learn-progress">1/4</strong>
+        </div>
+      </div>
+      <p class="section-lead" id="math-earth-learn-lead">睇吓邊個大啲、邊個長啲，撳喇叭再聽</p>
+      <button type="button" class="math-learn-stage math-earth-stage" id="math-earth-learn-tap" aria-label="再聽一次">
+        <div class="math-size-pair" id="math-earth-learn-field" aria-hidden="true">
+          <div class="math-size-side">
+            <div class="math-size-draw" id="math-earth-learn-left"></div>
+            <span class="math-compare-label">左邊</span>
+          </div>
+          <div class="math-compare-vs">比</div>
+          <div class="math-size-side">
+            <div class="math-size-draw" id="math-earth-learn-right"></div>
+            <span class="math-compare-label">右邊</span>
+          </div>
+        </div>
+        <div class="math-venus-say" id="math-earth-learn-say">右邊大啲</div>
+        <div class="learn-hear">🔊 聽一聽</div>
+      </button>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" id="btn-math-earth-learn-prev">上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-earth-learn-next">下一張</button>
+      </div>
+      <div class="btn-row" id="math-earth-learn-finish-row" hidden>
+        <button type="button" class="btn" id="btn-math-earth-learn-play">學完喇・去玩玩</button>
+      </div>
+    </section>
+
+    <!-- 地球・揀玩法 -->
+    <section id="screen-math-earth-play" class="screen math-screen" aria-label="地球・去玩玩">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-earth-play">← 再學</button>
+        <h1 id="math-earth-play-title">地球・去玩玩</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong id="math-earth-play-stars">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <p class="section-lead">揀一種玩法</p>
+      <div class="btn-stack">
+        <button type="button" class="btn" id="btn-math-mode-size">比一比・揀大細長短</button>
+      </div>
+    </section>
+
+    <!-- 地球・大細長短 -->
+    <section id="screen-math-size" class="screen math-screen" aria-label="地球・大細長短">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-size">← 玩法</button>
+        <h1>大細長短</h1>
+        <div class="progress-pill" aria-label="答啱進度">
+          <strong id="math-size-progress">0/5</strong>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p id="math-size-prompt">邊個大啲？</p>
+        <button type="button" class="speak-btn" id="btn-math-size-speak" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="math-size-quiz" id="math-size-field">
+        <button type="button" class="math-size-pick" data-side="left" aria-label="揀左邊">
+          <div class="math-size-draw" id="math-size-left"></div>
+          <span class="math-compare-label">左邊</span>
+        </button>
+        <div class="math-compare-vs">比</div>
+        <button type="button" class="math-size-pick" data-side="right" aria-label="揀右邊">
+          <div class="math-size-draw" id="math-size-right"></div>
+          <span class="math-compare-label">右邊</span>
+        </button>
+      </div>
+      <p class="feedback" id="math-size-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 月球・先學一學（時間） -->
+    <section id="screen-math-moon-learn" class="screen math-screen" aria-label="月球・先學一學">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-moon-learn">← 太空站</button>
+        <h1 id="math-moon-learn-title">月球・先學</h1>
+        <div class="progress-pill" aria-label="學習進度">
+          <strong id="math-moon-learn-progress">1/4</strong>
+        </div>
+      </div>
+      <p class="section-lead" id="math-moon-learn-lead">睇吓鐘面：短針指住數字就係「幾點」；半點長針指住 6</p>
+      <button type="button" class="math-learn-stage math-moon-stage" id="math-moon-learn-tap" aria-label="再聽一次">
+        <div class="math-clock-face" id="math-moon-learn-face"></div>
+        <div class="math-venus-say" id="math-moon-learn-say">一點鐘</div>
+        <div class="learn-hear">🔊 聽一聽</div>
+      </button>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" id="btn-math-moon-learn-prev">上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-moon-learn-next">下一張</button>
+      </div>
+      <div class="btn-row" id="math-moon-learn-finish-row" hidden>
+        <button type="button" class="btn" id="btn-math-moon-learn-play">學完喇・去玩玩</button>
+      </div>
+    </section>
+
+    <!-- 月球・揀玩法 -->
+    <section id="screen-math-moon-play" class="screen math-screen" aria-label="月球・去玩玩">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-moon-play">← 再學</button>
+        <h1 id="math-moon-play-title">月球・去玩玩</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong id="math-moon-play-stars">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <p class="section-lead">揀一種玩法</p>
+      <div class="btn-stack">
+        <button type="button" class="btn" id="btn-math-mode-time">聽一聽・揀鐘</button>
+      </div>
+    </section>
+
+    <!-- 月球・揀鐘 -->
+    <section id="screen-math-time" class="screen math-screen" aria-label="月球・揀鐘">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-time">← 玩法</button>
+        <h1>揀一揀鐘</h1>
+        <div class="progress-pill" aria-label="答啱進度">
+          <strong id="math-time-progress">0/5</strong>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p id="math-time-prompt">揀出正確嘅時間</p>
+        <button type="button" class="speak-btn" id="btn-math-time-speak" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="math-clock-grid" id="math-time-options" aria-label="揀鐘面"></div>
+      <p class="feedback" id="math-time-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 小鹿數理探險：旅程總覽 -->
+    <section id="screen-math-galaxy" class="screen math-screen" aria-label="小鹿數理探險・睇旅程">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-galaxy">← 太空站</button>
+        <h1>銀河旅程</h1>
+        <div class="progress-pill" aria-hidden="true"><strong>8</strong></div>
+      </div>
+      <p class="section-lead">太陽系八大行星 + 月球時間站：撳一粒就去嗰度學（唔使跟住次序）</p>
+      <div class="topic-grid math-galaxy-grid" id="math-galaxy-grid"></div>
+    </section>
+  </div>
+
+  <button type="button" class="btn btn-parent" id="btn-parent" aria-label="家長區">👪</button>
+  <div class="star-burst" id="star-burst" aria-hidden="true">★</div>
+
+  <!-- 認字：今輪玩完 -->
+  <div id="play-finish" class="play-finish" hidden role="dialog" aria-modal="true" aria-labelledby="play-finish-msg">
+    <div class="play-finish-inner">
+      <div class="play-finish-star" aria-hidden="true">★</div>
+      <p id="play-finish-msg">今輪玩完喇！你好叻呀！</p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-secondary" id="btn-play-again">再玩一輪</button>
+        <button type="button" class="btn" id="btn-play-topics">返主題</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 數理：星球飛過場 -->
+  <div id="math-warp" class="math-warp" hidden aria-live="polite">
+    <div class="math-warp-inner">
+      <div class="math-warp-planets">
+        <div class="math-warp-from">
+          <img id="math-warp-from-img" class="math-globe-img" src="" alt="" width="128" height="128" />
+          <span id="math-warp-from-name">水星</span>
+        </div>
+        <div class="math-warp-ship" aria-hidden="true">🚀</div>
+        <div class="math-warp-to">
+          <img id="math-warp-to-img" class="math-globe-img" src="" alt="" width="128" height="128" />
+          <span id="math-warp-to-name">金星</span>
+        </div>
+      </div>
+      <p class="math-warp-msg" id="math-warp-msg">點亮喇！飛去下一粒！</p>
+      <div class="btn-row math-warp-actions">
+        <button type="button" class="btn btn-ghost" id="btn-math-warp-stay">繼續玩呢粒</button>
+        <button type="button" class="btn" id="btn-math-warp-go">飛過去</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIN 解鎖 -->
+  <div class="modal-backdrop" id="modal-pin" role="dialog" aria-modal="true" aria-labelledby="pin-title">
+    <div class="modal">
+      <h2 id="pin-title">家長鎖</h2>
+      <p>輸入 PIN 先可以改設定（預設 1234）</p>
+      <div class="pin-row" id="pin-display" aria-hidden="true"></div>
+      <div class="pin-pad" id="pin-pad"></div>
+      <p class="pin-error" id="pin-error"></p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" id="btn-pin-cancel">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 家長區 -->
+  <div class="modal-backdrop" id="modal-parent" role="dialog" aria-modal="true" aria-labelledby="parent-title">
+    <div class="modal">
+      <h2 id="parent-title">家長區</h2>
+      <div class="coin-banner" id="parent-coin-banner"></div>
+
+      <div class="parent-section">
+        <h3>今日進度</h3>
+        <div class="stat-row"><span>今日星星</span><strong id="parent-stars-today">0 / 10</strong></div>
+        <div class="stat-row"><span>累積星星</span><strong id="parent-total-stars">0</strong></div>
+        <div class="stat-row"><span>可換 AEON 幣</span><strong id="parent-coins">0</strong></div>
+        <p style="font-size:0.95rem;margin-top:4px">10 粒星星 = 1 枚 AEON 幣（爸爸媽媽現實中兌換，無網上付款）</p>
+      </div>
+
+      <div class="parent-section">
+        <h3>設定</h3>
+        <div class="toggle-row">
+          <span>靜音</span>
+          <label class="toggle"><input type="checkbox" id="toggle-mute" /><span></span></label>
+        </div>
+        <div class="toggle-row">
+          <span>鹿類重點（每日多啲鹿）</span>
+          <label class="toggle"><input type="checkbox" id="toggle-deer" /><span></span></label>
+        </div>
+      </div>
+
+      <div class="parent-section">
+        <h3>字詞開關</h3>
+        <div class="word-toggles" id="word-toggles"></div>
+      </div>
+
+      <div class="parent-section">
+        <h3>改 PIN</h3>
+        <div class="btn-row" style="justify-content:flex-start">
+          <input class="pin-digit" id="new-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="新 PIN" style="width:140px" />
+          <button type="button" class="btn btn-secondary" id="btn-save-pin" style="min-width:140px">儲存 PIN</button>
+        </div>
+      </div>
+
+      <div class="parent-section">
+        <h3>重設</h3>
+        <button type="button" class="btn btn-ghost" id="btn-reset-stars">重設全部星星</button>
+      </div>
+
+      <div class="btn-row">
+        <button type="button" class="btn" id="btn-parent-close">完成</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 星星／幣提示 -->
+  <div class="modal-backdrop" id="modal-stars" role="dialog" aria-modal="true" aria-labelledby="stars-title">
+    <div class="modal">
+      <h2 id="stars-title">星星變 AEON 幣</h2>
+      <div class="coin-banner">
+        <strong>10 粒星星 = 1 枚 AEON 幣</strong><br />
+        答啱就攞星；每日最多 10 粒。<br />
+        攞夠星星，可以叫爸爸媽媽換真正嘅 AEON 幣呀！
+      </div>
+      <div class="stat-row"><span>今日</span><strong id="info-stars-today">0 / 10</strong></div>
+      <div class="stat-row"><span>累積</span><strong id="info-total-stars">0</strong></div>
+      <div class="stat-row"><span>可換</span><strong id="info-coins">0 枚</strong></div>
+      <div class="btn-row">
+        <button type="button" class="btn" id="btn-stars-close">好呀！</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./js/no-zoom.js?v=20260818d"></script>
+  <script src="./js/words.js?v=20260821a"></script>
+  <script src="./js/storage.js?v=20260724b"></script>
+  <script src="./js/speech.js?v=20260818e"></script>
+  <script src="./js/app.js?v=20260821a"></script>
+  <script src="./js/phonics-words.js?v=20260818a"></script>
+  <script src="./js/phonics-app.js?v=20260818a"></script>
+  <script src="./js/math-storage.js?v=20260811j"></script>
+  <script src="./js/math-skills.js?v=20260811j"></script>
+  <script src="./js/math-app.js?v=20260811j"></script>
+</body>
+</html>
