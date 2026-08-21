@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Generate kid-friendly phonics letter sounds for 卡卡字母隊.
+"""Generate *synthetic* kid-friendly phonics letter sounds for 卡卡字母隊.
 
-All 26 letters use Microsoft Edge neural child-like voice (en-US-AnaNeural)
-with classroom phonics spellings kids can mimic:
+Fallback when real recordings are not ready yet.
+Prefer real voice when available — see:
+  assets/phonemes/HOW-TO-RECORD.txt
+  ./scripts/import-real-phonemes.sh recordings/phonemes
 
+Synthetic path (this script): Microsoft Edge AnaNeural + classroom spellings
   - Short vowels: onset cropped from cue words (apple/egg/igloo/…)
   - Continuants / stops: soft “uh” forms (vuh, nuh, buh, tuh, …)
-    — NOT repeated letter letters like “vvv/nnn”, which TTS reads as
-      letter names (“vee vee vee”).
+    — NOT “vvv/nnn” (TTS reads those as letter names).
 
 Requires: pip install edge-tts numpy；ffmpeg；network.
 """
