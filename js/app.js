@@ -350,6 +350,12 @@ function openBookPicker(topic) {
   activeBook = null;
   const title = $('#books-topic-title');
   if (title) title.textContent = topic.title;
+  const lead = $('#screen-books .section-lead');
+  if (lead) {
+    lead.textContent = topic.id === 'jobs'
+      ? '揀一冊嚟溫習職業字詞'
+      : '今日讀咗邊本書？揀返嗰本嚟溫習';
+  }
   const grid = $('#book-grid');
   if (grid) {
     grid.innerHTML = '';
