@@ -73,7 +73,8 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 | `scripts/check-invariants.py` | **機器版硬性約束**（24 動物、build-ghost、storage 分家、故障隔離、asset 404、圖片大細）；CI 同部署都會跑 |
 | `scripts/build-site.sh` | 砌 `_site`：預設複製全部檔案（排除 docs/scripts/.github），並自動用 commit SHA 蓋過 `?v=` |
 | `assets/image-formats.lock.json` | 鎖住每張圖真實格式／透明度，防止去背圖被壓成實色底 |
-| `scripts/smoke-shots.py` | 自動行三個入口、影 iPad 截圖、捉 404／console error（檢查 agent 用） |
+| `js/emoji-art.js` + `assets/openmoji/` | emoji → OpenMoji SVG（插圖層；資料唔使改） |
+| `scripts/smoke-shots.py` | 5 種 iPad 尺寸行足全程：溢出／白屏／404／console error + 截圖 |
 | `scripts/apply-book-cards.py` + `data/book-cards/*.json` | 字卡相片 → 書本 wordIds（見 `docs/word-card-ocr.md`） |
 | `docs/qa-check.md` | 檢查 agent 規則（merge 前中文檢查報告；通過就直接 merge／部署，唔好叫用戶檢查） |
 
@@ -102,6 +103,13 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - 每日星星硬上限 10；可兌換幣 = `floor(totalStars / 10)`。
 - 模式 B 必須維持「先撳字 → 再撳圖」。
 - **砌一砌淡色格（`.build-ghost`）係配對支架，唔係洩題。** 目標係活動學習：睇圖 → 喺字池搵同一個字 → 拖／撳入格；靠重複移動嚟認字形。唔好刪淡字、唔好改成空白考試格。字池要留干擾字，等卡卡真係要揀。
+- **遊戲畫面一屏到底，唔准捲。** 只有「揀主題／揀書／字母隊揀主題」准上下捲（純瀏覽、唔涉拖曳）。
+  尺寸用 `min(px, vw, vh)` 跟住視窗高度縮；橫向嘅砌一砌係兩欄（左圖右字池）。
+  改完一定要跑 `python3 scripts/smoke-shots.py`（CI 會跑 5 種 iPad 尺寸），要捲就係 blocker。
+- **插圖用 OpenMoji**（`assets/openmoji/*.svg`，CC BY-SA 4.0）。`words.js` 嘅 `emoji` 欄位仍然係唯一資料來源；
+  `js/emoji-art.js` 負責 emoji → SVG（檔名＝去走 U+FE0F 嘅 codepoint，大寫 hex，`-` 連），揾唔到就跌返系統 emoji。
+  **加新字／新主題記得補圖**，`check-invariants.py` 嘅 `openmoji` 會攔。
+- **星星＝十格星星條**（`renderStarBars`），自動插入每個 `.star-panel` 同 `.game-header`；唔好改返做淨係一個數字。
 - 全頁**鎖死放大縮細**（iPad 螢幕 pinch 同妙控鍵盤觸控板 pinch 都唔好放大遊戲）。砌練習以撳為主，拖係額外。
 - 砌一砌每放入一格就**讀嗰個字**；砌完成個詞再讀一次成個詞。
 - 家長 PIN 預設 `1234`，要可以改。

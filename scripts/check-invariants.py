@@ -179,6 +179,68 @@ def check_word_data_integrity() -> None:
         warn("word-data", f"書入面有字唔喺該輯總表：{n}")
 
 
+def check_openmoji_coverage() -> None:
+    """每個用到嘅 emoji 都要有 OpenMoji SVG。
+
+    插圖層（js/emoji-art.js）會把 emoji 換成 `assets/openmoji/<codepoint>.svg`。
+    加咗新字／新主題但冇補圖，喺瀏覽器度先會見到 404 —— 呢個 check 令佢喺 commit 前就爆。
+    補圖：由 openmoji npm 套件（色彩 SVG）抄過嚟，檔名去走 U+FE0F、大寫 hex、用 `-` 連。
+    """
+    node = shutil.which("node")
+    if not node:
+        notes.append("冇 node，跳過 OpenMoji 覆蓋檢查（CI 一定會跑）")
+        return
+    probe = r"""
+      global.window = {};
+      require(process.argv[1]);
+      require(process.argv[2]);
+      const seg = new Intl.Segmenter('en', { granularity: 'grapheme' });
+      const out = new Set();
+      const add = (str) => {
+        if (!str) return;
+        for (const g of seg.segment(String(str))) {
+          const t = g.segment;
+          if (t.trim() && /\p{Extended_Pictographic}|⃣/u.test(t)) {
+            out.add([...t].filter((c) => c !== '️')
+              .map((c) => c.codePointAt(0).toString(16).toUpperCase().padStart(4, '0')).join('-'));
+          }
+        }
+      };
+      const { WORDS, TOPICS } = window.KakaWords;
+      for (const w of WORDS) { add(w.emoji); add(w.badge); }
+      for (const t of TOPICS) { add(t.cover); for (const b of (t.books || [])) add(b.cover); }
+      const P = window.KakaPhonicsWords || {};
+      for (const k of Object.keys(P)) {
+        const v = P[k];
+        if (!Array.isArray(v)) continue;
+        for (const x of v) {
+          if (!x || typeof x !== 'object') continue;
+          add(x.emoji); add(x.cover);
+          for (const w of (x.words || [])) add(w && w.emoji);
+        }
+      }
+      console.log(JSON.stringify([...out]));
+    """
+    r = subprocess.run(
+        [node, "-e", probe, str(ROOT / "js" / "words.js"), str(ROOT / "js" / "phonics-words.js")],
+        capture_output=True, text=True,
+    )
+    if r.returncode != 0:
+        fail("openmoji", f"掃唔到 emoji 清單：{r.stderr.strip().splitlines()[-1] if r.stderr.strip() else '?'}")
+        return
+    wanted = json.loads(r.stdout)
+    missing = [c for c in wanted if not (ROOT / "assets" / "openmoji" / f"{c}.svg").exists()]
+    for c in missing[:12]:
+        try:
+            glyph = "".join(chr(int(x, 16)) for x in c.split("-"))
+        except ValueError:
+            glyph = "?"
+        fail("openmoji", f"{glyph} 冇 assets/openmoji/{c}.svg（加新字／新主題記得補圖）")
+    if len(missing) > 12:
+        fail("openmoji", f"…仲有 {len(missing) - 12} 個 emoji 冇圖")
+    notes.append(f"OpenMoji 覆蓋 {len(wanted) - len(missing)}/{len(wanted)}")
+
+
 def check_build_ghost() -> None:
     """砌一砌淡色格係配對支架，唔可以刪、唔可以變空白格。"""
     css = read("css/styles.css")
@@ -376,6 +438,7 @@ CHECKS = [
     check_deer_rules,
     check_word_ids_unique,
     check_word_data_integrity,
+    check_openmoji_coverage,
     check_build_ghost,
     check_star_rules,
     check_parent_pin,

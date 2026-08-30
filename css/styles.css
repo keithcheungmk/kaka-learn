@@ -327,6 +327,33 @@ body::before {
   font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
 }
 
+/* OpenMoji SVG 插圖（js/emoji-art.js）：用 em 跟住容器嘅 font-size，
+   咁所有原本嘅 clamp() 尺寸規則都照用，唔使逐個位再寫一次。
+   1.18em 係補償 OpenMoji 畫面四邊嘅留白，睇落先同原本嘅系統 emoji 一樣大。 */
+.emoji-img {
+  width: 1.18em;
+  height: 1.18em;
+  display: inline-block;
+  vertical-align: middle;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.emoji-face,
+.topic-cover,
+.math-count-dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.06em;
+}
+
+/* 圖唔見時原地跌返系統 emoji */
+.emoji-text-fallback {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  line-height: 1;
+}
+
 .emoji-face-duo {
   font-size: clamp(2.2rem, 8vw, 3.2rem);
   letter-spacing: 0.06em;
@@ -1614,4 +1641,277 @@ body::before {
     right: 10px;
     bottom: 10px;
   }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   iPad 版面：遊戲畫面一屏到底，唔使捲
+   ------------------------------------------------------------------
+   點解：4 歲喺砌一砌拖字嗰陣，字池要係一眼見到、隻手夠得到。
+   一有捲動，KAKA 就要一邊捲一邊拖，直接影響學習。
+   所以除咗「揀主題／揀書」（純瀏覽、唔涉拖曳）之外，全部畫面鎖死唔准捲，
+   內容改為跟住視窗高度縮放（min(..., Nvh)）。
+   回歸測試：scripts/smoke-shots.py --check-overflow（CI 會跑）。
+   ══════════════════════════════════════════════════════════════════ */
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+#app {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  padding: clamp(8px, 1.6vh, 26px) clamp(12px, 3vw, 28px);
+}
+
+.screen {
+  min-height: 0;
+}
+
+.screen.active {
+  overflow: hidden;
+}
+
+/* 唯一准捲嘅兩頁：純揀嘢、冇拖曳 */
+#screen-topics.active,
+#screen-books.active,
+#screen-phonics-topics.active {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── 插圖／字磚跟住視窗高度縮 ─────────────────────── */
+.emoji-plate {
+  width: min(124px, 32vw, 17vh);
+  height: min(124px, 32vw, 17vh);
+}
+
+.emoji-plate-lg {
+  width: min(200px, 48vw, 27vh);
+  height: min(200px, 48vw, 27vh);
+}
+
+.emoji-face {
+  font-size: min(5rem, 12vw, 11vh);
+}
+
+.emoji-face-lg {
+  font-size: min(8rem, 22vw, 18vh);
+}
+
+.emoji-face-duo {
+  font-size: min(3.2rem, 8vw, 7vh);
+}
+
+.emoji-face-duo.emoji-face-lg {
+  font-size: min(5rem, 14vw, 12vh);
+}
+
+.build-slot {
+  width: min(84px, 18vw, 11vh);
+  height: min(96px, 20vw, 12.5vh);
+}
+
+.build-slots {
+  min-height: 0;
+  margin-bottom: clamp(4px, 1.2vh, 12px);
+}
+
+.build-stage {
+  margin: 0 auto clamp(4px, 1.2vh, 12px);
+}
+
+.build-speak-wrap {
+  margin: 0 auto clamp(4px, 1.2vh, 14px);
+}
+
+.build-speak-wrap .speak-btn {
+  min-height: min(64px, 8.5vh);
+  padding: clamp(6px, 1.2vh, 14px) 22px;
+}
+
+.build-tile {
+  min-height: min(58px, 7.5vh);
+}
+
+.build-pool {
+  gap: clamp(6px, 1.2vh, 10px);
+  padding: clamp(8px, 1.6vh, 14px);
+  min-height: 0;
+}
+
+.prompt-box {
+  padding: clamp(8px, 1.6vh, 18px) clamp(14px, 3vw, 22px);
+  margin-bottom: clamp(6px, 1.4vh, 16px);
+}
+
+.game-header {
+  margin-bottom: clamp(4px, 1.2vh, 14px);
+}
+
+.section-label {
+  margin: 0 0 clamp(2px, 0.6vh, 8px);
+}
+
+/* 主頁 hero 喺矮屏（橫向 iPad）要收細 */
+.chinese-hero img {
+  max-height: 34vh;
+  width: auto;
+}
+
+.hero-home .btn-row {
+  margin-top: clamp(8px, 2vh, 24px);
+}
+
+/* ── 橫向：砌一砌改兩欄 ────────────────────────────
+   左邊圖同格、右邊字池。唔單止唔使捲，拖曳距離仲短咗。 */
+@media (orientation: landscape) and (max-height: 920px) {
+  #screen-build.active,
+  #screen-phonics-build.active {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "head head"
+      "prompt prompt"
+      "stage pool"
+      "slots pool"
+      "speak pool"
+      "feedback feedback";
+    align-content: center;
+    column-gap: clamp(16px, 3vw, 40px);
+  }
+
+  #screen-build .game-header,
+  #screen-phonics-build .game-header { grid-area: head; }
+
+  #screen-build .prompt-box,
+  #screen-phonics-build .prompt-box { grid-area: prompt; }
+
+  #screen-build .build-stage,
+  #screen-phonics-build .build-stage { grid-area: stage; align-self: end; }
+
+  #screen-build .build-slots,
+  #screen-phonics-build .build-slots { grid-area: slots; }
+
+  #screen-build .build-speak-wrap { grid-area: speak; }
+
+  #screen-build .build-pool-wrap,
+  #screen-phonics-build .build-pool-wrap { grid-area: pool; align-self: center; }
+
+  #screen-build .feedback,
+  #screen-phonics-build .feedback { grid-area: feedback; margin: 0; }
+
+  /* 兩欄之後有多咗橫向空間，字磚可以大返啲 */
+  #screen-build .build-tile,
+  #screen-phonics-build .build-tile { min-height: min(72px, 9vh); }
+}
+
+/* 矮屏（橫向 iPad ≤ 860px 高）：主頁 hero 再收細，確保一屏入晒 */
+@media (orientation: landscape) and (max-height: 880px) {
+  .chinese-hero img { max-height: 26vh; }
+  .hero-title { font-size: clamp(1.9rem, 5vw, 2.6rem); margin-bottom: 4px; }
+  .hero-sub { margin: 0 0 clamp(4px, 1.2vh, 12px); }
+  .hero-home .btn-row { margin-top: clamp(6px, 1.6vh, 16px); }
+}
+
+/* 極矮視窗（手機打橫、細窗）：一屏入唔晒就準捲，好過內容被切走 */
+@media (max-height: 520px) {
+  body,
+  #app { height: auto; min-height: 100dvh; overflow: visible; }
+  .screen.active { overflow: visible; }
+}
+
+/* ══ 十格星星條 ══════════════════════════════════════
+   每答啱一題亮一粒；滿 10 粒換 1 枚 AEON 幣。
+   放喺 topbar 同每個遊戲畫面 header，攞星星即刻見到。 */
+.star-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(2px, 0.5vw, 5px);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(7, 21, 38, 0.6);
+  border: 1px solid rgba(94, 234, 212, 0.22);
+  line-height: 1;
+}
+
+.star-cell {
+  font-size: clamp(15px, 2.2vw, 22px);
+  line-height: 1;
+  color: rgba(148, 163, 184, 0.42);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.star-cell.is-on {
+  color: #fbbf24;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.55);
+}
+
+.star-cell.just-lit {
+  animation: starPop 0.45s ease;
+}
+
+@keyframes starPop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+
+.star-bar-coins {
+  margin-left: 6px;
+  font-size: clamp(12px, 1.6vw, 15px);
+  font-weight: 700;
+  color: #fbbf24;
+  white-space: nowrap;
+}
+
+.star-bar-compact {
+  padding: 4px 8px;
+}
+
+.star-bar-compact .star-cell {
+  font-size: clamp(13px, 1.8vw, 18px);
+}
+
+/* game-header 係 flex 一行（返去／標題／進度）；星星條排喺同一行，
+   慳返直度空間（橫向 iPad 每一 px 都要慳）。窄屏先另起一行。 */
+.game-header { flex-wrap: wrap; }
+
+.game-header .star-bar { order: 4; }
+
+@media (max-width: 760px) {
+  .game-header .star-bar {
+    flex-basis: 100%;
+    justify-content: center;
+    margin-top: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star-cell.just-lit { animation: none; }
+}
+
+/* 遊戲畫面：header 貼頂，中間內容垂直置中（橫向 iPad 底部本來吉一大截，
+   內容置中之後卡片更就手，亦符合 qa-check「版心大致置中」。） */
+#screen-listen.active .prompt-box,
+#screen-match.active .prompt-box {
+  margin-top: auto;
+}
+
+#screen-listen.active .feedback,
+#screen-match.active .feedback {
+  margin-bottom: auto;
+}
+
+@media (orientation: portrait) {
+  #screen-build.active .prompt-box,
+  #screen-phonics-build.active .prompt-box { margin-top: auto; }
+  #screen-build.active .feedback,
+  #screen-phonics-build.active .feedback { margin-bottom: auto; }
 }

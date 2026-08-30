@@ -12,6 +12,7 @@
     return;
   }
 
+const cover = (e) => (window.KakaEmojiArt ? window.KakaEmojiArt.html(e) : e);
 const { WORDS, DEER_IDS, TOPICS, wordIllustHtml, getTopicById, wordsForTopic, oppositePairWords, getOppositeWord, getWordById } = window.KakaWords;
 const {
   loadState,
@@ -377,7 +378,7 @@ function openBookPicker(topic) {
       btn.type = 'button';
       btn.className = 'topic-card';
       btn.innerHTML = `
-        <span class="topic-cover" aria-hidden="true">${book.cover || '📖'}</span>
+        <span class="topic-cover" aria-hidden="true">${cover(book.cover || '📖')}</span>
         <span class="topic-title">${book.title}</span>
         <span class="topic-blurb">${book.wordIds.length} 個字詞</span>
       `;
@@ -461,7 +462,7 @@ function renderTopics() {
     btn.type = 'button';
     btn.className = 'topic-card';
     btn.innerHTML = `
-      <span class="topic-cover" aria-hidden="true">${topic.cover}</span>
+      <span class="topic-cover" aria-hidden="true">${cover(topic.cover)}</span>
       <span class="topic-title">${topic.title}</span>
       <span class="topic-blurb">${topic.blurb}</span>
     `;
@@ -1266,6 +1267,53 @@ function refreshStarUI() {
   if (coinsEl) coinsEl.textContent = coinsLabel;
   $$('.stars-today-inline').forEach((el) => {
     el.textContent = `${state.starsToday}/10`;
+  });
+  renderStarBars(state.starsToday, coins);
+}
+
+/**
+ * 十格星星條：每答啱一題亮一粒，滿 10 粒 = 1 枚 AEON 幣。
+ *
+ * 點解係「格仔」而唔係百分比橫條：KAKA 未讀得明比例，但數得到星星。
+ * 條 bar 會自動插入每個 `.star-panel`（主頁、揀主題…）同每個 `.game-header`
+ * （聽一聽／配一配／砌一砌），咁樣攞星星嗰刻就即刻見到條 bar 亮多一粒。
+ * 用 JS 插入而唔係喺 index.html 寫十幾次，係為咗將來加新畫面唔使記住補返。
+ */
+function renderStarBars(starsToday, coins) {
+  const hosts = [...$$('.star-panel'), ...$$('.game-header')];
+  hosts.forEach((host) => {
+    let bar = host.querySelector('.star-bar');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'star-bar';
+      bar.setAttribute('role', 'img');
+      if (host.classList.contains('game-header')) bar.classList.add('star-bar-compact');
+      for (let i = 0; i < 10; i += 1) {
+        const cell = document.createElement('span');
+        cell.className = 'star-cell';
+        cell.textContent = '★';
+        bar.appendChild(cell);
+      }
+      const coinTag = document.createElement('span');
+      coinTag.className = 'star-bar-coins';
+      bar.appendChild(coinTag);
+      host.appendChild(bar);
+    }
+    bar.setAttribute('aria-label', `今日星星 ${starsToday} / 10，可換 ${coins} 枚 AEON 幣`);
+    const cells = bar.querySelectorAll('.star-cell');
+    cells.forEach((cell, i) => {
+      const wasOn = cell.classList.contains('is-on');
+      const isOn = i < starsToday;
+      cell.classList.toggle('is-on', isOn);
+      if (isOn && !wasOn) {
+        cell.classList.remove('just-lit');
+        // 強制 reflow，令連續答啱都會重新播動畫
+        void cell.offsetWidth;
+        cell.classList.add('just-lit');
+      }
+    });
+    const tag = bar.querySelector('.star-bar-coins');
+    if (tag) tag.textContent = coins > 0 ? `${coins} 幣` : '';
   });
 }
 

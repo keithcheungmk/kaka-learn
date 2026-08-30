@@ -1119,10 +1119,16 @@ function getOppositeWord(wordId) {
 })();
 
 /** 產生卡片插圖 HTML（大粒系統 Emoji；有 photo 就用真實相） */
+/** emoji → OpenMoji SVG（見 js/emoji-art.js）；emoji-art 未載入就原樣用系統 emoji。 */
+function art(emoji) {
+  const A = window.KakaEmojiArt;
+  return A ? A.html(emoji) : emoji;
+}
+
 function wordIllustHtml(word) {
   const badgeIsEmoji = word.badge && /\p{Extended_Pictographic}/u.test(word.badge);
   const badge = word.badge
-    ? `<span class="emoji-badge${badgeIsEmoji ? ' emoji-badge-icon' : ''}" aria-hidden="true">${word.badge}</span>`
+    ? `<span class="emoji-badge${badgeIsEmoji ? ' emoji-badge-icon' : ''}" aria-hidden="true">${badgeIsEmoji ? art(word.badge) : word.badge}</span>`
     : '';
   if (word.photo) {
     return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
@@ -1132,7 +1138,7 @@ function wordIllustHtml(word) {
   }
   const faceClass = word.emojiDuo ? 'emoji-face emoji-face-duo' : 'emoji-face';
   return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
-    <span class="${faceClass}" aria-hidden="true">${word.emoji}</span>
+    <span class="${faceClass}" aria-hidden="true">${art(word.emoji)}</span>
     ${badge}
   </span>`;
 }

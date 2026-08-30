@@ -178,7 +178,8 @@
       for (let i = 0; i < n; i += 1) {
         const span = document.createElement('span');
         span.className = 'math-count-dot';
-        span.textContent = emoji;
+        if (window.KakaEmojiArt) span.innerHTML = window.KakaEmojiArt.html(emoji);
+        else span.textContent = emoji;
         span.style.animationDelay = `${i * 0.05}s`;
         el.appendChild(span);
       }
@@ -539,7 +540,8 @@
       for (let i = 0; i < n; i += 1) {
         const span = document.createElement('span');
         span.className = 'math-count-dot';
-        span.textContent = emoji;
+        if (window.KakaEmojiArt) span.innerHTML = window.KakaEmojiArt.html(emoji);
+        else span.textContent = emoji;
         span.style.animationDelay = `${i * 0.04}s`;
         el.appendChild(span);
       }

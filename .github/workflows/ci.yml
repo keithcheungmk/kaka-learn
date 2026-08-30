@@ -29,3 +29,25 @@ jobs:
           test -f _site/index.html
           test -f _site/.nojekyll
           grep -q "?v=${GITHUB_SHA::7}" _site/index.html
+
+  layout:
+    name: iPad 版面回歸（唔准要捲）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 安裝 playwright
+        run: |
+          pip install --quiet playwright
+          python3 -m playwright install --with-deps chromium
+
+      - name: 開靜態伺服器
+        run: |
+          python3 -m http.server 5173 &
+          for i in $(seq 1 20); do
+            curl -sf http://localhost:5173/ >/dev/null && break
+            sleep 0.5
+          done
+
+      - name: 5 種 iPad 尺寸 × 全部畫面
+        run: python3 scripts/smoke-shots.py --no-shots
