@@ -19,12 +19,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 上線前最後一道閘：硬性約束唔過就唔部署
+      - name: 硬性約束檢查
+        run: python3 scripts/check-invariants.py
+
       - name: Prepare static site
-        run: |
-          mkdir -p _site
-          cp index.html _site/
-          cp -r css js assets _site/
-          touch _site/.nojekyll
+        run: bash scripts/build-site.sh _site "${GITHUB_SHA::7}"
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v4

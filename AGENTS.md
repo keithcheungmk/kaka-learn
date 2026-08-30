@@ -49,6 +49,9 @@
 ```bash
 python3 -m http.server 5173
 # 開 http://localhost:5173
+
+python3 scripts/check-invariants.py   # 硬性約束檢查，merge 前一定要 exit 0
+bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 ```
 
 詳見 `README.md`。Cloud Agent 預覽：repo 內 `.cursor/environment.json` 會自動開 `Preview` terminal（同上埠）。
@@ -67,6 +70,8 @@ python3 -m http.server 5173
 | `css/phonics.css` | 字母隊氛圍層 |
 | `js/math-storage.js` / `math-skills.js` / `math-app.js` + `css/math.css` | 小鹿數理探險（Phase A hub；`kaka-math-v1`） |
 | `docs/math-brief.md` / `docs/math-build-plan.md` | 數理規格同開工計劃 |
+| `scripts/check-invariants.py` | **機器版硬性約束**（24 動物、build-ghost、storage 分家、故障隔離、asset 404、圖片大細）；CI 同部署都會跑 |
+| `scripts/build-site.sh` | 砌 `_site`：預設複製全部檔案（排除 docs/scripts/.github），並自動用 commit SHA 蓋過 `?v=` |
 | `docs/qa-check.md` | 檢查 agent 規則（merge 前中文檢查報告；通過就直接 merge／部署，唔好叫用戶檢查） |
 
 ## 數學（小鹿數理探險）— 故障隔離（可共用 landing）
@@ -80,6 +85,11 @@ python3 -m http.server 5173
 - Agent：修某個 app 嘅 bug 唔好順便改另外兩個；回歸時確認其他入口仍可進入。
 
 ## 改動時注意
+
+- **唔使再手動改 `?v=` 版本號**。部署時 `scripts/build-site.sh` 會用 commit SHA 蓋過全部；`index.html` 保留 `?v=` 佔位就得。
+- **加新 root 檔（manifest、sw.js、favicon…）唔使改 workflow**，`build-site.sh` 預設複製全部。
+- **改完一定要 `python3 scripts/check-invariants.py` 跑到綠**。加新硬性規則時，順手喺呢個檔加一個 `check_xxx()`，等下次唔使靠記憶。
+- 單張圖 ≤ 400KB、`assets/` 總共 ≤ 12MB（檢查器會攔）。
 
 - 每日星星硬上限 10；可兌換幣 = `floor(totalStars / 10)`。
 - 模式 B 必須維持「先撳字 → 再撳圖」。

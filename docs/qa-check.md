@@ -84,6 +84,12 @@
 
 ### F. 技術底線
 
+> **先跑機器檢查**：`python3 scripts/check-invariants.py`。
+> Exit 0 先好人手睇下面；exit 1 = 自動「有問題」，實作 agent 要修到綠先再檢查。
+> 佢已經自動覆蓋：JS syntax、24 個核心動物字、鹿類規則、`.build-ghost`、每日 10 星上限、
+> PIN 預設、鎖放大、三個入口、storage 鍵分家、數理故障隔離、asset 404、圖片大細、外部依賴。
+> 檢查 agent 主力睇機器睇唔到嘅嘢：**視覺、幼齡適切度、玩法邏輯**。
+
 - JS 要**語法正確**（新／改嘅檔要 parse 到）。
 - 新檔案／圖／樣式要**真係喺 PR 入面**（唔好淨係本機有）。
 - 唔好引入唔必要嘅外部依賴（保持純靜態、無 build）。
@@ -116,7 +122,8 @@
 
 ## 實作 agent 要點做
 
-1. push branch
+0. `python3 scripts/check-invariants.py` 跑到綠
+1. push branch（CI 會再跑一次）
 2. **自己叫檢查 agent 出報告**（唔好叫產品擁有人檢查）
 3. **所有「有問題」都要處理**（修／再推／再檢查）
 4. 檢查 agent 講「可以 merge」→ **即刻 merge 入 `main`**（GitHub Pages 會自動部署；唔使再問要唔要上線）
