@@ -72,6 +72,9 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 | `docs/math-brief.md` / `docs/math-build-plan.md` | 數理規格同開工計劃 |
 | `scripts/check-invariants.py` | **機器版硬性約束**（24 動物、build-ghost、storage 分家、故障隔離、asset 404、圖片大細）；CI 同部署都會跑 |
 | `scripts/build-site.sh` | 砌 `_site`：預設複製全部檔案（排除 docs/scripts/.github），並自動用 commit SHA 蓋過 `?v=` |
+| `assets/image-formats.lock.json` | 鎖住每張圖真實格式／透明度，防止去背圖被壓成實色底 |
+| `scripts/smoke-shots.py` | 自動行三個入口、影 iPad 截圖、捉 404／console error（檢查 agent 用） |
+| `scripts/apply-book-cards.py` + `data/book-cards/*.json` | 字卡相片 → 書本 wordIds（見 `docs/word-card-ocr.md`） |
 | `docs/qa-check.md` | 檢查 agent 規則（merge 前中文檢查報告；通過就直接 merge／部署，唔好叫用戶檢查） |
 
 ## 數學（小鹿數理探險）— 故障隔離（可共用 landing）
@@ -90,6 +93,11 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - **加新 root 檔（manifest、sw.js、favicon…）唔使改 workflow**，`build-site.sh` 預設複製全部。
 - **改完一定要 `python3 scripts/check-invariants.py` 跑到綠**。加新硬性規則時，順手喺呢個檔加一個 `check_xxx()`，等下次唔使靠記憶。
 - 單張圖 ≤ 400KB、`assets/` 總共 ≤ 12MB（檢查器會攔）。
+- **⚠️ `assets/dino/*.jpg` 其實係 PNG**（`jialong`、`jianlong`、`sanjiaolong` 帶透明背景；`baolong`、`sulong` 係 PNG 但冇透明）。
+  唔好照掃一次「JPEG 重壓」，透明背景會變黑底，喺太空深色底穿崩；要壓就用 `pngquant`（保留柔邊 alpha），
+  唔好用 Pillow `quantize()`（會變 1-bit alpha、出黑邊）。
+  `assets/image-formats.lock.json` 鎖住每張圖嘅真實格式；有意換圖先跑
+  `python3 scripts/check-invariants.py --update-image-lock`。
 
 - 每日星星硬上限 10；可兌換幣 = `floor(totalStars / 10)`。
 - 模式 B 必須維持「先撳字 → 再撳圖」。
@@ -114,6 +122,8 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - **學習卡＝該書實體「認字卡」嘅單字**（唔係詞）。認字卡係最準依據，好過書名／主題推測。
 - **重複唔使理**：同一個字跨書出現、或者同一張卡重複，都正常，照收（App 入面同一字一個 entry 就得）。
 - **收到字卡相片就以字卡為準**，覆寫嗰本書嘅 `wordIds`；未收到嘅書暫時用推測，標明待校對。
+- **字卡相片一律由 Claude（Cowork）讀，唔好叫 Cursor 讀。** 流程、自檢規程、JSON 格式見 `docs/word-card-ocr.md`；落地一定要用 `scripts/apply-book-cards.py`（會攔簡體、形近字、非單字、錯 id），唔好手改 `wordIds`。
+- 已對過字卡嘅書會有 `verified: true` 同 `cardSource`；冇呢兩個 field 就即係仲係推測。
 - **單字卡顯示**：大漢字＋讀音；可配個簡單 emoji 做裝飾，但唔使為單字強求詞形或貼圖。
 - 其他主題（動物、食物…）維持教「詞＋emoji」，唔受呢條影響。
 

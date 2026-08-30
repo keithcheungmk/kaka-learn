@@ -25,11 +25,16 @@ ROOT = Path(__file__).resolve().parent.parent
 os.chdir(ROOT)
 
 problems: list[str] = []
+warnings: list[str] = []
 notes: list[str] = []
 
 
 def fail(rule: str, msg: str) -> None:
     problems.append(f"[{rule}] {msg}")
+
+
+def warn(rule: str, msg: str) -> None:
+    warnings.append(f"[{rule}] {msg}")
 
 
 def read(p: str) -> str:
@@ -125,6 +130,54 @@ def check_word_ids_unique() -> None:
 
 
 # ---------------------------------------------------------------- 玩法規則
+
+def check_word_data_integrity() -> None:
+    """主題／書本嘅 wordIds 一定要 resolve 到真字；term 唔可以撞名。
+
+    字卡 OCR pipeline（scripts/apply-book-cards.py）靠「一個字 → 一個 id」呢個假設，
+    所以 term 撞名要即刻攔住，唔可以等到寫錯字入書度先發現。
+    """
+    node = shutil.which("node")
+    if not node:
+        notes.append("冇 node，跳過字詞資料完整性檢查（CI 一定會跑）")
+        return
+    probe = r"""
+      global.window = {};
+      require(process.argv[1]);
+      const { WORDS, TOPICS } = window.KakaWords;
+      const ids = new Set(WORDS.map(w => w.id));
+      const out = { badIds: [], emptyLists: [], dupTerms: [], notInTopic: [] };
+      const byTerm = {};
+      for (const w of WORDS) (byTerm[w.term] = byTerm[w.term] || []).push(w.id);
+      for (const [t, v] of Object.entries(byTerm)) if (v.length > 1) out.dupTerms.push(t + ' → ' + v.join('/'));
+      const scan = (label, list) => {
+        if (!list || !list.length) { out.emptyLists.push(label); return; }
+        for (const i of list) if (!ids.has(i)) out.badIds.push(label + ': ' + i);
+      };
+      for (const t of TOPICS) {
+        scan('主題 ' + t.id, t.wordIds);
+        for (const b of (t.books || [])) {
+          scan('書 ' + t.id + '/' + b.id, b.wordIds);
+          const miss = (b.wordIds || []).filter(i => ids.has(i) && !(t.wordIds || []).includes(i));
+          if (miss.length) out.notInTopic.push(t.id + '/' + b.id + '（' + b.title + '）: ' + miss.join('、'));
+        }
+      }
+      console.log(JSON.stringify(out));
+    """
+    r = subprocess.run([node, "-e", probe, str(ROOT / "js" / "words.js")], capture_output=True, text=True)
+    if r.returncode != 0:
+        fail("word-data", f"載入唔到 words.js：{r.stderr.strip().splitlines()[-1] if r.stderr.strip() else '?'}")
+        return
+    out = json.loads(r.stdout)
+    for b in out["badIds"]:
+        fail("word-data", f"wordIds 指住唔存在嘅字：{b}")
+    for e in out["emptyLists"]:
+        fail("word-data", f"{e} 嘅 wordIds 係空（主題／書會白屏）")
+    for d in out["dupTerms"]:
+        fail("word-data", f"同一個詞有多過一個 entry：{d}（字卡 OCR 會唔知揀邊個）")
+    for n in out["notInTopic"]:
+        warn("word-data", f"書入面有字唔喺該輯總表：{n}")
+
 
 def check_build_ghost() -> None:
     """砌一砌淡色格係配對支架，唔可以刪、唔可以變空白格。"""
@@ -238,6 +291,69 @@ def check_asset_manifests() -> None:
                 fail("credits", f"{man} 指住唔存在嘅檔案 {p}")
 
 
+IMAGE_LOCK = Path("assets/image-formats.lock.json")
+
+
+def image_facts(p: Path) -> dict:
+    from PIL import Image  # type: ignore
+
+    with Image.open(p) as im:
+        return {
+            "format": im.format,
+            "alpha": bool("A" in im.mode or "transparency" in im.info),
+        }
+
+
+def all_images() -> list[Path]:
+    return sorted(p for p in Path("assets").rglob("*") if p.suffix.lower() in (".jpg", ".jpeg", ".png"))
+
+
+def update_image_lock() -> None:
+    lock = {str(p): image_facts(p) for p in all_images()}
+    IMAGE_LOCK.write_text(json.dumps(lock, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"已更新 {IMAGE_LOCK}（{len(lock)} 張圖）")
+
+
+def check_image_formats() -> None:
+    """去背圖唔可以變咗白底／黑底。
+
+    陷阱：`assets/dino/` 有幾張 `.jpg` 其實係 **PNG（帶透明背景）**，只係改咗個名。
+    任何人（或 agent）用「JPEG 重新壓縮」照掃一次，透明背景就會變黑，
+    喺太空深色底上面即刻穿崩，而且肉眼喺 diff 度睇唔出。
+
+    做法：`assets/image-formats.lock.json` 記低每張圖真實格式同有冇 alpha；
+    對唔上就攔住。真係有意換圖／換格式，跑：
+        python3 scripts/check-invariants.py --update-image-lock
+    """
+    try:
+        import PIL  # noqa: F401
+    except ImportError:
+        notes.append("冇 Pillow，跳過圖片格式檢查（CI 一定會跑）")
+        return
+    if not IMAGE_LOCK.exists():
+        warn("image-format", f"未有 {IMAGE_LOCK}；跑 --update-image-lock 建立基準")
+        return
+
+    lock = json.loads(IMAGE_LOCK.read_text(encoding="utf-8"))
+    seen = set()
+    for p in all_images():
+        key = str(p)
+        seen.add(key)
+        want = lock.get(key)
+        got = image_facts(p)
+        if want is None:
+            warn("image-format", f"{p} 係新圖，未入 lock；確認冇問題就跑 --update-image-lock")
+            continue
+        if got["format"] != want["format"]:
+            fail("image-format", f"{p} 真實格式由 {want['format']} 變咗 {got['format']}"
+                                 f"（多數係被當成普通 JPEG 重壓，去背會變實色底）")
+        elif want["alpha"] and not got["alpha"]:
+            fail("image-format", f"{p} 冇咗透明通道；原本係去背圖，深色底會穿崩")
+    for key in lock:
+        if key not in seen:
+            warn("image-format", f"{key} 喺 lock 但檔案唔見咗；刪圖後記得跑 --update-image-lock")
+
+
 def check_asset_weight() -> None:
     """效能：單張圖唔好超過 400KB，總資產唔好超過 12MB。"""
     total = 0
@@ -259,6 +375,7 @@ CHECKS = [
     check_core_animals,
     check_deer_rules,
     check_word_ids_unique,
+    check_word_data_integrity,
     check_build_ghost,
     check_star_rules,
     check_parent_pin,
@@ -269,11 +386,15 @@ CHECKS = [
     check_math_boot_guard,
     check_asset_refs,
     check_asset_manifests,
+    check_image_formats,
     check_asset_weight,
 ]
 
 
 def main() -> int:
+    if "--update-image-lock" in sys.argv:
+        update_image_lock()
+        return 0
     for c in CHECKS:
         try:
             c()
@@ -282,6 +403,8 @@ def main() -> int:
     print(f"kaka-learn 硬性約束檢查（{len(CHECKS)} 項）")
     for n in notes:
         print(f"  · {n}")
+    for w in warnings:
+        print(f"  ⚠ {w}")
     if problems:
         print(f"\n結論：有問題（{len(problems)} 個 blocker）\n")
         for p in problems:

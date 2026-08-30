@@ -17,6 +17,9 @@ jobs:
         with:
           node-version: '20'
 
+      - name: 安裝檢查依賴
+        run: pip install --quiet pillow
+
       - name: JS syntax + AGENTS.md 硬性約束
         run: python3 scripts/check-invariants.py
 
