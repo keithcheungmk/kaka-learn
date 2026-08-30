@@ -7,37 +7,37 @@
     "format": "JPEG",
     "alpha": false
   },
-  "assets/dino/baolong.jpg": {
-    "format": "PNG",
-    "alpha": false
-  },
-  "assets/dino/fuzhilong.jpg": {
-    "format": "JPEG",
-    "alpha": false
-  },
-  "assets/dino/jialong.jpg": {
+  "assets/dino/baolong.png": {
     "format": "PNG",
     "alpha": true
   },
-  "assets/dino/jianlong.jpg": {
+  "assets/dino/fuzhilong.png": {
     "format": "PNG",
     "alpha": true
   },
-  "assets/dino/lianglong.jpg": {
-    "format": "JPEG",
-    "alpha": false
-  },
-  "assets/dino/sanjiaolong.jpg": {
+  "assets/dino/jialong.png": {
     "format": "PNG",
     "alpha": true
   },
-  "assets/dino/sulong.jpg": {
+  "assets/dino/jianlong.png": {
     "format": "PNG",
-    "alpha": false
+    "alpha": true
   },
-  "assets/dino/yilong.jpg": {
-    "format": "JPEG",
-    "alpha": false
+  "assets/dino/lianglong.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/dino/sanjiaolong.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/dino/sulong.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/dino/yilong.png": {
+    "format": "PNG",
+    "alpha": true
   },
   "assets/food/feiniu.jpg": {
     "format": "JPEG",
