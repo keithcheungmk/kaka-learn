@@ -15,6 +15,13 @@
 const cover = (e) => (window.KakaEmojiArt ? window.KakaEmojiArt.html(e) : e);
 const { WORDS, DEER_IDS, TOPICS, wordIllustHtml, getTopicById, wordsForTopic, oppositePairWords, getOppositeWord, getWordById } = window.KakaWords;
 const {
+  COIN_MODES,
+  coinsTodayMap,
+  coinsTodayCount,
+  earnCoinForMode,
+  loadRoundProgress,
+  saveRoundProgress,
+  clearRoundProgress,
   loadState,
   updateState,
   tryEarnStar,
@@ -116,9 +123,19 @@ function resetPlayRoundProgress() {
   playWonIds.clear();
 }
 
+/** 未完成輪次嘅 key：玩法 + 主題 + 書。換主題唔會攞錯進度。 */
+function roundKey(mode = playMode) {
+  return `${mode}|${activeTopicId || ''}|${activeBook ? activeBook.id : ''}`;
+}
+
 function beginPlayRound(mode) {
   playMode = mode;
   resetPlayRoundProgress();
+  // 中途走咗返嚟，今輪進度仲喺度（同一日、同一個主題／書）
+  const valid = new Set(enabledWords().map((w) => w.id));
+  loadRoundProgress(roundKey(mode)).forEach((id) => {
+    if (valid.has(id)) playWonIds.add(id);
+  });
   hidePlayFinish();
   refreshPlayRoundUI();
 }
@@ -139,14 +156,27 @@ function hidePlayFinish() {
 
 function showPlayFinish() {
   busy = true;
+  // 完成一輪 = 一個 AEON 幣；同一種玩法一日只派一次
+  const coin = earnCoinForMode(playMode);
+  state = coin.state;
+  refreshStarUI();
+
   const el = $('#play-finish');
   if (el) el.hidden = false;
   const msg = $('#play-finish-msg');
-  if (msg) msg.textContent = '今輪玩完喇！你好叻呀！';
+  const line = coin.gained
+    ? '今輪玩完喇！攞到一個 AEON 幣！'
+    : '今輪玩完喇！你好叻呀！呢個玩法今日嘅幣已經攞咗，試下第二個玩法啦';
+  if (msg) msg.textContent = line;
   showStarBurst();
-  state = loadState();
   playStarCue({ muted: state.muted });
-  speakTerm('今輪玩完喇！你好叻呀！', { muted: state.muted, rate: 0.92, pitch: 1.08, delayMs: 180 });
+  if (coin.gained) playCoinHintCue({ muted: state.muted });
+  speakTerm(coin.gained ? '今輪玩完喇！攞到一個 AEON 幣！' : '今輪玩完喇！你好叻呀！', {
+    muted: state.muted,
+    rate: 0.92,
+    pitch: 1.08,
+    delayMs: 180,
+  });
 }
 
 function bindPlayFinish() {
@@ -183,7 +213,13 @@ function notePlayCorrect(wordId) {
   if (wordId) playWonIds.add(wordId);
   refreshPlayRoundUI();
   const leftover = enabledWords().filter((w) => !playWonIds.has(w.id));
-  return playWonIds.size >= playRoundTarget() || leftover.length === 0;
+  const done = playWonIds.size >= playRoundTarget() || leftover.length === 0;
+  if (done) {
+    clearRoundProgress(roundKey());
+  } else {
+    saveRoundProgress(roundKey(), playWonIds);
+  }
+  return done;
 }
 
 function afterPlayCorrect(wordId, nextRoundFn, nextMs) {
@@ -1239,25 +1275,15 @@ function onBuildPointerDown(ev, tile, onDragStarted) {
 async function awardStar() {
   const result = tryEarnStar();
   state = result.state;
-  refreshStarUI();
-
   if (result.gained) {
-    showStarBurst();
     playStarCue({ muted: state.muted });
-    // First star of the day: gentle AEON coin cue (no blocking modal)
-    if (state.starsToday === 1 && !state.coinHintSeen) {
-      playCoinHintCue({ muted: state.muted });
-      state = updateState({ coinHintSeen: true });
-    } else if (state.starsToday === 10 || state.totalStars % 10 === 0) {
-      playCoinHintCue({ muted: state.muted });
-    }
-  } else if (result.capped) {
-    const fb =
-      $('.screen.active .feedback') || $('#listen-feedback');
-    if (fb) {
-      fb.textContent = '今日星星滿晒喇！聽日再嚟攞星～';
-      fb.className = 'feedback';
-    }
+    // 粒星由圖卡飛去進度條，落地先亮 —— 令 KAKA 見到「我做啱 → 我近咗」
+    await new Promise((resolve) => flyStarToBar(() => {
+      refreshStarUI();
+      resolve();
+    }));
+  } else {
+    refreshStarUI();
   }
   return result;
 }
@@ -1305,18 +1331,16 @@ function refreshStarUI() {
   if (state.starsDate !== todayKey()) {
     state = updateState({ starsToday: 0, starsDate: todayKey() });
   }
-  const coins = redeemableCoins(state.totalStars);
-  const todayLabel = `今日 ${state.starsToday} / 10`;
-  const coinsLabel = `可換 ${coins} 枚 AEON 幣`;
-
+  // 主頁嗰兩行文字同條 bar 講緊同一件事，改為只留條 bar（見 renderStarBars）
+  const coins = redeemableCoins();
   const todayEl = $('#stars-today-label');
   const coinsEl = $('#coins-label');
-  if (todayEl) todayEl.textContent = todayLabel;
-  if (coinsEl) coinsEl.textContent = coinsLabel;
+  if (todayEl) todayEl.textContent = `今日 ${coinsTodayCount()} / 3 個幣`;
+  if (coinsEl) coinsEl.textContent = `累積 ${coins} 枚 AEON 幣`;
   $$('.stars-today-inline').forEach((el) => {
-    el.textContent = `${state.starsToday}/10`;
+    el.textContent = `${coinsTodayCount()}/3`;
   });
-  renderStarBars(state.starsToday, coins);
+  renderStarBars();
 }
 
 /**
@@ -1327,86 +1351,179 @@ function refreshStarUI() {
  * （聽一聽／配一配／砌一砌），咁樣攞星星嗰刻就即刻見到條 bar 亮多一粒。
  * 用 JS 插入而唔係喺 index.html 寫十幾次，係為咗將來加新畫面唔使記住補返。
  */
-function renderStarBars(starsToday, coins) {
+const MODE_LABEL = { listen: '聽', match: '配', build: '砌' };
+
+/**
+ * 獎勵顯示（2026-08 新規則）。同一條 `.star-bar` 兩個樣：
+ *
+ * - **遊戲畫面**：今輪進度（8 或 10 格）→ 一個幣。一條進度、一個目標。
+ * - **其他畫面**：今日三個幣位（聽／配／砌），下面寫住下一個嘅進度。
+ *
+ * 點解分開：4 歲玩緊嗰陣只需要知「仲差幾題就有幣」；喺主頁先需要知
+ * 「今日仲有幾多個幣未攞」。溝埋一齊就係之前嗰個「今日 1/10 + 可換 3 枚」
+ * 兩段訊息打交嘅問題。
+ */
+function renderStarBars() {
+  const coins = coinsTodayMap();
   const hosts = [...$$('.star-panel'), ...$$('.game-header')];
+
   hosts.forEach((host) => {
+    const screenId = host.closest('.screen')?.id || '';
+    const mode = { 'screen-listen': 'listen', 'screen-match': 'match', 'screen-build': 'build' }[screenId];
     let bar = host.querySelector('.star-bar');
     if (!bar) {
       bar = document.createElement('div');
       bar.className = 'star-bar';
       bar.setAttribute('role', 'img');
-      const compact = host.classList.contains('game-header');
-      if (compact) bar.classList.add('star-bar-compact');
-
-      const stars = document.createElement('span');
-      stars.className = 'star-bar-stars';
-      for (let i = 0; i < 10; i += 1) {
-        const cell = document.createElement('span');
-        cell.className = 'star-cell';
-        cell.textContent = '★';
-        stars.appendChild(cell);
-      }
-      bar.appendChild(stars);
-
-      const arrow = document.createElement('span');
-      arrow.className = 'star-bar-arrow';
-      arrow.textContent = '→';
-      arrow.setAttribute('aria-hidden', 'true');
-      bar.appendChild(arrow);
-
-      const coin = document.createElement('span');
-      coin.className = 'coin-chip';
-      coin.innerHTML = '<span class="coin-face" aria-hidden="true">$</span><span class="coin-count"></span>';
-      bar.appendChild(coin);
-
-      if (!compact) {
-        const hint = document.createElement('span');
-        hint.className = 'star-bar-hint';
-        bar.appendChild(hint);
-      }
-
-      // 條 bar 已經講晒今日進度，原本嗰個「0/10」文字就多餘，收起佢
+      if (host.classList.contains('game-header')) bar.classList.add('star-bar-compact');
       host.querySelector('.stars-today-inline')?.closest('.star-meta')?.classList.add('is-replaced');
+      host.querySelector('#stars-today-label')?.closest('.star-meta')?.classList.add('is-replaced');
       host.appendChild(bar);
     }
 
-    const remaining = Math.max(0, 10 - starsToday);
-    bar.setAttribute(
-      'aria-label',
-      `今日星星 ${starsToday} / 10，${remaining > 0 ? `仲差 ${remaining} 粒換一個 AEON 幣` : '今日已經儲滿'}，已儲 ${coins} 個 AEON 幣`,
-    );
-
-    bar.querySelectorAll('.star-cell').forEach((cell, i) => {
-      const wasOn = cell.classList.contains('is-on');
-      const isOn = i < starsToday;
-      cell.classList.toggle('is-on', isOn);
-      if (isOn && !wasOn) {
-        cell.classList.remove('just-lit');
-        void cell.offsetWidth; // 強制 reflow，連續答啱都會重播動畫
-        cell.classList.add('just-lit');
-      }
-    });
-
-    const chip = bar.querySelector('.coin-chip');
-    if (chip) {
-      const full = starsToday >= 10;
-      const wasFull = chip.classList.contains('is-full');
-      chip.classList.toggle('is-full', full);
-      chip.classList.toggle('has-coins', coins > 0);
-      if (full && !wasFull) {
-        chip.classList.remove('just-earned');
-        void chip.offsetWidth;
-        chip.classList.add('just-earned');
-      }
-      // 唔顯示累積幣數：十粒星係「今日」進度，累積幣數係另一個時間尺度，
-      // 溝埋一齊反而難明；累積數字留喺家長區同星星彈窗。
-      const count = chip.querySelector('.coin-count');
-      if (count) count.textContent = '';
-    }
-
-    const hint = bar.querySelector('.star-bar-hint');
-    if (hint) hint.textContent = starsToday >= 10 ? '今日儲滿喇！' : `仲差 ${remaining} 粒`;
+    if (mode) renderRoundBar(bar, mode, coins);
+    else renderCoinBar(bar, coins);
   });
+}
+
+/** 遊戲畫面：今輪進度 → 幣 */
+function renderRoundBar(bar, mode, coins) {
+  const target = playRoundTarget();
+  const won = playWonIds.size;
+  bar.classList.add('star-bar-round');
+  bar.classList.remove('star-bar-coins-row');
+
+  let stars = bar.querySelector('.star-bar-stars');
+  if (!stars || Number(bar.dataset.cells) !== target) {
+    bar.innerHTML = '';
+    stars = document.createElement('span');
+    stars.className = 'star-bar-stars';
+    for (let i = 0; i < target; i += 1) {
+      const cell = document.createElement('span');
+      cell.className = 'star-cell';
+      cell.textContent = '★';
+      stars.appendChild(cell);
+    }
+    bar.appendChild(stars);
+    const arrow = document.createElement('span');
+    arrow.className = 'star-bar-arrow';
+    arrow.textContent = '→';
+    arrow.setAttribute('aria-hidden', 'true');
+    bar.appendChild(arrow);
+    const chip = document.createElement('span');
+    chip.className = 'coin-chip';
+    chip.innerHTML = '<span class="coin-face" aria-hidden="true">$</span>';
+    bar.appendChild(chip);
+    const hint = document.createElement('span');
+    hint.className = 'star-bar-hint';
+    bar.appendChild(hint);
+    bar.dataset.cells = String(target);
+  }
+
+  bar.querySelectorAll('.star-cell').forEach((cell, i) => {
+    const on = i < won;
+    const was = cell.classList.contains('is-on');
+    cell.classList.toggle('is-on', on);
+    if (on && !was) {
+      cell.classList.remove('just-lit');
+      void cell.offsetWidth;
+      cell.classList.add('just-lit');
+    }
+  });
+
+  const done = won >= target;
+  const chip = bar.querySelector('.coin-chip');
+  if (chip) {
+    const wasFull = chip.classList.contains('is-full');
+    chip.classList.toggle('is-full', done || !!coins[mode]);
+    if (done && !wasFull) {
+      chip.classList.remove('just-earned');
+      void chip.offsetWidth;
+      chip.classList.add('just-earned');
+    }
+  }
+  const hint = bar.querySelector('.star-bar-hint');
+  if (hint) {
+    hint.textContent = coins[mode] && !done ? '今日呢個玩法攞咗幣喇' : done ? '攞到一個幣！' : `仲差 ${target - won} 題`;
+  }
+  bar.setAttribute('aria-label', `今輪 ${won} / ${target}，完成就有一個 AEON 幣`);
+}
+
+/** 主頁／揀主題／學習頁：今日三個幣位 + 下一個嘅進度 */
+function renderCoinBar(bar, coins) {
+  bar.classList.add('star-bar-coins-row');
+  // 幣位取代咗星星，panel 左邊嗰粒 ★ icon 就變咗多餘
+  bar.closest('.star-panel')?.querySelector('.star-icon')?.classList.add('is-replaced');
+  bar.classList.remove('star-bar-round');
+  delete bar.dataset.cells;
+
+  const got = coinsTodayCount();
+  const next = nextRoundHint(coins);
+  bar.innerHTML =
+    COIN_MODES.map(
+      (m) =>
+        `<span class="coin-slot${coins[m] ? ' is-earned' : ''}">` +
+        `<span class="coin-face" aria-hidden="true">$</span>` +
+        `<span class="coin-slot-label">${MODE_LABEL[m]}</span></span>`,
+    ).join('') + `<span class="star-bar-hint">${next}</span>`;
+  bar.setAttribute('aria-label', `今日賺咗 ${got} 個 AEON 幣（每種玩法一個）`);
+}
+
+/** 下一個幣嘅進度：揀第一個未賺幣、而且有未完成進度嘅玩法 */
+function nextRoundHint(coins) {
+  const pending = COIN_MODES.filter((m) => !coins[m]);
+  if (!pending.length) return '今日三個幣都攞晒喇！';
+  for (const m of pending) {
+    const saved = loadRoundProgress(`${m}|${activeTopicId || ''}|${activeBook ? activeBook.id : ''}`);
+    if (saved.length) {
+      const cap = m === 'build' ? BUILD_CAP : LISTEN_MATCH_CAP;
+      return `下一個：${MODE_LABEL[m]}一${MODE_LABEL[m]} ${saved.length}/${cap}`;
+    }
+  }
+  return `仲有 ${pending.length} 個幣可以攞`;
+}
+
+/** 答啱嗰粒星由圖卡飛去進度條下一格，落地先亮。 */
+function flyStarToBar(onLanded) {
+  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
+  const screen = $('.screen.active');
+  const bar = screen?.querySelector('.star-bar');
+  const target = bar?.querySelector('.star-cell:not(.is-on)');
+  const from = screen?.querySelector('.emoji-plate, .build-slots, .match-stage');
+  if (reduce || !target || !from || typeof from.animate !== 'function') {
+    onLanded();
+    return;
+  }
+  const a = from.getBoundingClientRect();
+  const b = target.getBoundingClientRect();
+  const star = document.createElement('div');
+  star.className = 'fly-star';
+  star.textContent = '★';
+  star.setAttribute('aria-hidden', 'true');
+  star.style.left = `${a.left + a.width / 2}px`;
+  star.style.top = `${a.top + a.height / 2}px`;
+  document.body.appendChild(star);
+
+  const dx = b.left + b.width / 2 - (a.left + a.width / 2);
+  const dy = b.top + b.height / 2 - (a.top + a.height / 2);
+  const anim = star.animate(
+    [
+      { transform: 'translate(-50%, -50%) scale(0.4)', opacity: 0 },
+      { transform: 'translate(-50%, -50%) scale(1.35)', opacity: 1, offset: 0.18 },
+      { transform: `translate(calc(-50% + ${dx * 0.5}px), calc(-50% + ${dy * 0.5 - 40}px)) scale(1.1)`, opacity: 1, offset: 0.6 },
+      { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.5)`, opacity: 0.9 },
+    ],
+    { duration: 620, easing: 'cubic-bezier(.25,.8,.35,1)' },
+  );
+  let landed = false;
+  const land = () => {
+    if (landed) return;
+    landed = true;
+    star.remove();
+    onLanded();
+  };
+  anim.onfinish = land;
+  setTimeout(land, 900); // 後備：動畫唔跑都要亮返粒星
 }
 
 function bindStarInfo() {
@@ -1419,9 +1536,9 @@ function bindStarInfo() {
 function openStarsModal() {
   refreshStarUI();
   state = loadState();
-  $('#info-stars-today').textContent = `${state.starsToday} / 10`;
+  $('#info-stars-today').textContent = `${coinsTodayCount()} / 3 個幣`;
   $('#info-total-stars').textContent = String(state.totalStars);
-  $('#info-coins').textContent = `${redeemableCoins(state.totalStars)} 枚`;
+  $('#info-coins').textContent = `${redeemableCoins()} 枚`;
   $('#modal-stars').classList.add('open');
   playCoinHintCue({ muted: state.muted });
 }
@@ -1543,10 +1660,11 @@ function openParentPanel() {
 
 function renderParentPanel() {
   state = loadState();
-  const coins = redeemableCoins(state.totalStars);
+  const coins = redeemableCoins();
   $('#parent-coin-banner').innerHTML =
-    `<strong>10 粒星星 = 1 枚 AEON 幣</strong><br />而家可換 <strong>${coins}</strong> 枚（爸爸媽媽現實兌換）`;
-  $('#parent-stars-today').textContent = `${state.starsToday} / 10`;
+    `<strong>完成一輪 = 1 枚 AEON 幣</strong><br />每種玩法（聽／配／砌）一日一個，最多 3 個。` +
+    `<br />累積 <strong>${coins}</strong> 枚（爸爸媽媽現實兌換）`;
+  $('#parent-stars-today').textContent = `${coinsTodayCount()} / 3 個幣（每種玩法一個）`;
   $('#parent-total-stars').textContent = String(state.totalStars);
   $('#parent-coins').textContent = String(coins);
   $('#toggle-mute').checked = !!state.muted;
