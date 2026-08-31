@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
-"""Download batch-2 港式美食 photos from Wikimedia Commons and resize for cards."""
+"""Download batch-2 港式美食 photos from Wikimedia Commons and resize for cards.
+
+選相準則：必須 cooked / ready to serve（碟上、茶餐廳／點心舖）。
+唔要：街市生肉、超市包裝、價牌、路人、只係食材。
+"""
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import time
@@ -27,9 +32,9 @@ NEW_ITEMS = {
     },
     "chashao_fan": {
         "file": "chashao-fan.jpg",
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Charsiu_rice_-_Cambridge%2C_MA.jpg/960px-Charsiu_rice_-_Cambridge%2C_MA.jpg",
-        "title": "File:Charsiu rice - Cambridge, MA.jpg",
-        "license": "CC BY-SA 4.0",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Gfp-bbq-pork-over-rice.jpg/960px-Gfp-bbq-pork-over-rice.jpg",
+        "title": "File:Gfp-bbq-pork-over-rice.jpg",
+        "license": "CC BY-SA 3.0",
         "artist": "Wikimedia Commons",
     },
     "dan_ta": {
@@ -41,8 +46,8 @@ NEW_ITEMS = {
     },
     "xi_duoshi": {
         "file": "xi-duoshi.jpg",
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Hong_Kong_french_toast_and_bottled_milk_tea.jpg/960px-Hong_Kong_french_toast_and_bottled_milk_tea.jpg",
-        "title": "File:Hong Kong french toast and bottled milk tea.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/French_toast_-_Hong_Kong_-_20180421_151601.jpg/960px-French_toast_-_Hong_Kong_-_20180421_151601.jpg",
+        "title": "File:French toast - Hong Kong - 20180421 151601.jpg",
         "license": "CC BY-SA 4.0",
         "artist": "Wikimedia Commons",
     },
@@ -81,13 +86,6 @@ NEW_ITEMS = {
         "license": "CC BY-SA 3.0",
         "artist": "Wikimedia Commons",
     },
-    "fengzhao": {
-        "file": "fengzhao.jpg",
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Uncooked_chicken_feet_at_a_Hong_Kong_market.jpg/960px-Uncooked_chicken_feet_at_a_Hong_Kong_market.jpg",
-        "title": "File:Uncooked chicken feet at a Hong Kong market.jpg",
-        "license": "CC BY-SA 2.0",
-        "artist": "Wikimedia Commons",
-    },
     "gongzai_mian": {
         "file": "gongzai-mian.jpg",
         "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Nissin_Cup_Noodle_%28Original%29_-_01.jpg/960px-Nissin_Cup_Noodle_%28Original%29_-_01.jpg",
@@ -97,9 +95,9 @@ NEW_ITEMS = {
     },
     "jian_niang_sanbao": {
         "file": "jian-niang-sanbao.jpg",
-        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/HK_%E5%8D%97%E5%8D%80_Southern_District_%E7%80%91%E5%B8%83%E7%81%A3_Waterfall_Bay_%E8%8F%AF%E8%B2%B4%E9%82%A8_Wah_Kwai_Estate_%E8%8F%AF%E8%B2%B4%E5%9D%8A%E5%95%86%E5%A0%B4_Noble_Square_shopping_mall_shop_ParknShop_Supermarket_%E7%85%8E%E9%87%80%E4%B8%89%E5%AF%B6_Fried_Stuffed_Three_Treasures_March_2022_Px3.jpg/960px-thumbnail.jpg",
-        "title": "File:HK 南區 … 煎釀三寶 Fried Stuffed Three Treasures March 2022 Px3.jpg",
-        "license": "CC BY-SA 4.0",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Li_Wah_Dim_Sum_-_Stuffed_Pepper_%285339811613%29.jpg/960px-Li_Wah_Dim_Sum_-_Stuffed_Pepper_%285339811613%29.jpg",
+        "title": "File:Li Wah Dim Sum - Stuffed Pepper (5339811613).jpg",
+        "license": "CC BY 2.0",
         "artist": "Wikimedia Commons",
     },
 }
@@ -123,14 +121,24 @@ def save_jpg(data: bytes, dest: Path) -> tuple[int, int]:
 
 
 def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--force", nargs="*", metavar="ID", help="Re-download these word ids")
+    ap.add_argument("--force-all", action="store_true")
+    args = ap.parse_args()
+    force = set(args.force or [])
+    if args.force_all:
+        force = set(NEW_ITEMS)
+
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8")) if MANIFEST.exists() else {}
+    manifest.pop("fengzhao", None)
+
     for wid, meta in NEW_ITEMS.items():
         dest = OUT_DIR / meta["file"]
-        if dest.exists() and dest.stat().st_size > 1000:
+        if dest.exists() and dest.stat().st_size > 1000 and wid not in force:
             print(f"Skip {wid} (exists)")
             continue
         print(f"Fetching {wid} → {dest.name} …", end=" ", flush=True)
-        time.sleep(1.5)
+        time.sleep(1.2)
         raw = fetch(meta["url"])
         w, h = save_jpg(raw, dest)
         manifest[wid] = {
@@ -143,6 +151,7 @@ def main() -> None:
             "artist": meta["artist"],
         }
         print(f"OK ({w}x{h})")
+
     MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Updated {MANIFEST}")
 

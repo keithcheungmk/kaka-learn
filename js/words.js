@@ -331,7 +331,6 @@ const WORDS = [
   { id: 'dong_ningcha', term: '凍檸茶', isDeer: false, emoji: '🍋', badge: '', plate: '#3a3410', photo: 'assets/food-hk/dong-ningcha.jpg' },
   { id: 'hainan_ji_fan', term: '海南雞飯', isDeer: false, emoji: '🍗', badge: '', plate: '#3a3010', photo: 'assets/food-hk/hainan-ji-fan.jpg' },
   { id: 'nuomi_ji', term: '糯米雞', isDeer: false, emoji: '🍚', badge: '', plate: '#3a2818', photo: 'assets/food-hk/nuomi-ji.jpg' },
-  { id: 'fengzhao', term: '鳳爪', isDeer: false, emoji: '🐔', badge: '', plate: '#401820', photo: 'assets/food-hk/fengzhao.jpg' },
   { id: 'gongzai_mian', term: '公仔麵', isDeer: false, emoji: '🍜', badge: '', plate: '#3a3010', photo: 'assets/food-hk/gongzai-mian.jpg' },
   { id: 'jian_niang_sanbao', term: '煎釀三寶', isDeer: false, emoji: '🍆', badge: '', plate: '#401820', photo: 'assets/food-hk/jian-niang-sanbao.jpg' },
   // 職業
@@ -1002,7 +1001,7 @@ const TOPICS = [
       'wonton_mian', 'changfen', 'siumai', 'yudan', 'naicha', 'boluoyou',
       'fanqie_chaodan', 'zheng_yu', 'zheng_shuidan',
       'gan_chao_niuhe', 'chashao_fan', 'dan_ta', 'xi_duoshi', 'xia_jiao', 'niunan_mian',
-      'dong_ningcha', 'hainan_ji_fan', 'nuomi_ji', 'fengzhao', 'gongzai_mian', 'jian_niang_sanbao',
+      'dong_ningcha', 'hainan_ji_fan', 'nuomi_ji', 'gongzai_mian', 'jian_niang_sanbao',
     ],
     books: [
       {
@@ -1021,7 +1020,7 @@ const TOPICS = [
         cover: '🧋',
         wordIds: [
           'gan_chao_niuhe', 'chashao_fan', 'dan_ta', 'xi_duoshi', 'xia_jiao', 'niunan_mian',
-          'dong_ningcha', 'hainan_ji_fan', 'nuomi_ji', 'fengzhao', 'gongzai_mian', 'jian_niang_sanbao',
+          'dong_ningcha', 'hainan_ji_fan', 'nuomi_ji', 'gongzai_mian', 'jian_niang_sanbao',
         ],
       },
     ],

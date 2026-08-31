@@ -20,16 +20,15 @@
 | zheng-yu.jpg | 蒸魚 | File:CantoneseSteamedfish.jpg | 見檔案頁 |
 | zheng-shuidan.jpg | 蒸水蛋 | File:ChineseSteamedEgg.jpg | 見檔案頁 |
 | gan-chao-niuhe.jpg | 干炒牛河 | File:Dry Fried Beef Ho Fun - Ho Chiak 2023-12-08.jpg | CC BY-SA 4.0 |
-| chashao-fan.jpg | 叉燒飯 | File:Charsiu rice - Cambridge, MA.jpg | CC BY-SA 4.0 |
+| chashao-fan.jpg | 叉燒飯 | File:Gfp-bbq-pork-over-rice.jpg | CC BY-SA 3.0 |
 | dan-ta.jpg | 蛋撻 | File:Hong Kong Sweet Dynasty egg tarts.jpg | CC BY-SA 4.0 |
-| xi-duoshi.jpg | 西多士 | File:Hong Kong french toast and bottled milk tea.jpg | CC BY-SA 4.0 |
+| xi-duoshi.jpg | 西多士 | File:French toast - Hong Kong - 20180421 151601.jpg | CC BY-SA 4.0 |
 | xia-jiao.jpg | 蝦餃 | File:Har Gow at Canal Luna restaurant… | CC BY-SA 4.0 |
 | niunan-mian.jpg | 牛腩麵 | File:Beef brisket flat rice noodle - CK Bistro.jpg | CC BY-SA 4.0 |
 | dong-ningcha.jpg | 凍檸茶 | File:A Hong Kong Style Ice Lemon Tea in Cheung Chau.jpg | CC BY-SA 4.0 |
 | hainan-ji-fan.jpg | 海南雞飯 | File:Hainanese chicken rice (in Macau).jpg | CC BY 2.0 |
 | nuomi-ji.jpg | 糯米雞 | File:Lo mai gai 2.JPG | CC BY-SA 3.0 |
-| fengzhao.jpg | 鳳爪 | File:Uncooked chicken feet at a Hong Kong market.jpg | CC BY-SA 2.0 |
 | gongzai-mian.jpg | 公仔麵 | File:Nissin Cup Noodle (Original) - 01.jpg | CC BY-SA 3.0 |
-| jian-niang-sanbao.jpg | 煎釀三寶 | File:HK … 煎釀三寶 Fried Stuffed Three Treasures March 2022 Px3.jpg | CC BY-SA 4.0 |
+| jian-niang-sanbao.jpg | 煎釀三寶 | File:Li Wah Dim Sum - Stuffed Pepper (5339811613).jpg | CC BY 2.0 |
 
 檔案已縮放至適合卡片顯示。如需更新，請到對應 Wikimedia Commons 檔案頁查閱最新版本。

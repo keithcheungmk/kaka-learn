@@ -143,15 +143,6 @@
     "license": "CC BY-SA 3.0",
     "artist": "Wikimedia Commons"
   },
-  "fengzhao": {
-    "title": "File:Uncooked chicken feet at a Hong Kong market.jpg",
-    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Uncooked_chicken_feet_at_a_Hong_Kong_market.jpg/960px-Uncooked_chicken_feet_at_a_Hong_Kong_market.jpg",
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Uncooked_chicken_feet_at_a_Hong_Kong_market.jpg/960px-Uncooked_chicken_feet_at_a_Hong_Kong_market.jpg",
-    "width": 960,
-    "height": 717,
-    "license": "CC BY-SA 2.0",
-    "artist": "Wikimedia Commons"
-  },
   "gongzai_mian": {
     "title": "File:Nissin Cup Noodle (Original) - 01.jpg",
     "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Nissin_Cup_Noodle_%28Original%29_-_01.jpg/960px-Nissin_Cup_Noodle_%28Original%29_-_01.jpg",
@@ -162,11 +153,29 @@
     "artist": "Evan-Amos"
   },
   "jian_niang_sanbao": {
-    "title": "File:HK 南區 … 煎釀三寶 Fried Stuffed Three Treasures March 2022 Px3.jpg",
-    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/HK_%E5%8D%97%E5%8D%80_Southern_District_%E7%80%91%E5%B8%83%E7%81%A3_Waterfall_Bay_%E8%8F%AF%E8%B2%B4%E9%82%A8_Wah_Kwai_Estate_%E8%8F%AF%E8%B2%B4%E5%9D%8A%E5%95%86%E5%A0%B4_Noble_Square_shopping_mall_shop_ParknShop_Supermarket_%E7%85%8E%E9%87%80%E4%B8%89%E5%AF%B6_Fried_Stuffed_Three_Treasures_March_2022_Px3.jpg/960px-thumbnail.jpg",
-    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/HK_%E5%8D%97%E5%8D%80_Southern_District_%E7%80%91%E5%B8%83%E7%81%A3_Waterfall_Bay_%E8%8F%AF%E8%B2%B4%E9%82%A8_Wah_Kwai_Estate_%E8%8F%AF%E8%B2%B4%E5%9D%8A%E5%95%86%E5%A0%B4_Noble_Square_shopping_mall_shop_ParknShop_Supermarket_%E7%85%8E%E9%87%80%E4%B8%89%E5%AF%B6_Fried_Stuffed_Three_Treasures_March_2022_Px3.jpg/960px-thumbnail.jpg",
-    "width": 720,
-    "height": 960,
+    "title": "File:Li Wah Dim Sum - Stuffed Pepper (5339811613).jpg",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Li_Wah_Dim_Sum_-_Stuffed_Pepper_%285339811613%29.jpg/960px-Li_Wah_Dim_Sum_-_Stuffed_Pepper_%285339811613%29.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Li_Wah_Dim_Sum_-_Stuffed_Pepper_%285339811613%29.jpg/960px-Li_Wah_Dim_Sum_-_Stuffed_Pepper_%285339811613%29.jpg",
+    "width": 960,
+    "height": 720,
+    "license": "CC BY 2.0",
+    "artist": "Wikimedia Commons"
+  },
+  "chashao_fan": {
+    "title": "File:Gfp-bbq-pork-over-rice.jpg",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Gfp-bbq-pork-over-rice.jpg/960px-Gfp-bbq-pork-over-rice.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Gfp-bbq-pork-over-rice.jpg/960px-Gfp-bbq-pork-over-rice.jpg",
+    "width": 960,
+    "height": 640,
+    "license": "CC BY-SA 3.0",
+    "artist": "Wikimedia Commons"
+  },
+  "xi_duoshi": {
+    "title": "File:French toast - Hong Kong - 20180421 151601.jpg",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/French_toast_-_Hong_Kong_-_20180421_151601.jpg/960px-French_toast_-_Hong_Kong_-_20180421_151601.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/French_toast_-_Hong_Kong_-_20180421_151601.jpg/960px-French_toast_-_Hong_Kong_-_20180421_151601.jpg",
+    "width": 960,
+    "height": 720,
     "license": "CC BY-SA 4.0",
     "artist": "Wikimedia Commons"
   }
