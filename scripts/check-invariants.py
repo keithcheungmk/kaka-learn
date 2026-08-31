@@ -70,7 +70,11 @@ def check_no_build_step() -> None:
     for bad in ("package.json", "vite.config.js", "webpack.config.js"):
         if Path(bad).exists():
             fail("no-build", f"出現咗 {bad}；AGENTS.md 要求保持無 build step 嘅純靜態站")
-    allowed = {"https://fonts.googleapis.com", "https://fonts.gstatic.com"}
+    allowed = {
+        "https://fonts.googleapis.com",
+        "https://fonts.gstatic.com",
+        "https://yiu0527.github.io",  # 禧禧小遊戲樂園（主頁外部連結）
+    }
     sources = ["index.html"] + JS_FILES + sorted(str(p) for p in Path("css").glob("*.css"))
     hosts = set()
     for f in sources:

@@ -844,6 +844,23 @@ body::before {
   box-shadow: 0 4px 0 #0369a1, var(--shadow);
 }
 
+a.btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-friend {
+  background: linear-gradient(180deg, #e9d5ff, #c084fc);
+  box-shadow: 0 8px 0 #7e22ce, var(--shadow);
+  color: #3b0764;
+}
+
+.btn-friend:active {
+  box-shadow: 0 4px 0 #7e22ce, var(--shadow);
+}
+
 .btn-ghost {
   background: rgba(255, 255, 255, 0.08);
   color: var(--ink);
@@ -1842,7 +1859,7 @@ body {
 /* 矮屏（橫向 iPad ≤ 860px 高）：主頁 hero 再收細，確保一屏入晒 */
 @media (orientation: landscape) and (max-height: 880px) {
   .chinese-hero { width: min(100%, 560px); }
-  .chinese-hero img { max-height: 34vh; }
+  .chinese-hero img { max-height: 30vh; }
   .hero-home .chinese-hero { margin-bottom: 8px; }
   .hero-title { font-size: clamp(1.9rem, 5vw, 2.6rem); margin-bottom: 4px; }
   .hero-sub { margin: 0 0 clamp(4px, 1.2vh, 12px); }
