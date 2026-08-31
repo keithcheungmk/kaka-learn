@@ -133,5 +133,41 @@
     "height": 375,
     "license": "CC BY-SA 2.0",
     "artist": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/photos/tam3415/\">Tam3415</a> from (optional)"
+  },
+  "nuomi_ji": {
+    "title": "File:Lo mai gai 2.JPG",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Lo_mai_gai_2.JPG/960px-Lo_mai_gai_2.JPG",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Lo_mai_gai_2.JPG/960px-Lo_mai_gai_2.JPG",
+    "width": 960,
+    "height": 720,
+    "license": "CC BY-SA 3.0",
+    "artist": "Wikimedia Commons"
+  },
+  "fengzhao": {
+    "title": "File:Uncooked chicken feet at a Hong Kong market.jpg",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Uncooked_chicken_feet_at_a_Hong_Kong_market.jpg/960px-Uncooked_chicken_feet_at_a_Hong_Kong_market.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Uncooked_chicken_feet_at_a_Hong_Kong_market.jpg/960px-Uncooked_chicken_feet_at_a_Hong_Kong_market.jpg",
+    "width": 960,
+    "height": 717,
+    "license": "CC BY-SA 2.0",
+    "artist": "Wikimedia Commons"
+  },
+  "gongzai_mian": {
+    "title": "File:Nissin Cup Noodle (Original) - 01.jpg",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Nissin_Cup_Noodle_%28Original%29_-_01.jpg/960px-Nissin_Cup_Noodle_%28Original%29_-_01.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Nissin_Cup_Noodle_%28Original%29_-_01.jpg/960px-Nissin_Cup_Noodle_%28Original%29_-_01.jpg",
+    "width": 960,
+    "height": 768,
+    "license": "CC BY-SA 3.0",
+    "artist": "Evan-Amos"
+  },
+  "jian_niang_sanbao": {
+    "title": "File:HK 南區 … 煎釀三寶 Fried Stuffed Three Treasures March 2022 Px3.jpg",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/HK_%E5%8D%97%E5%8D%80_Southern_District_%E7%80%91%E5%B8%83%E7%81%A3_Waterfall_Bay_%E8%8F%AF%E8%B2%B4%E9%82%A8_Wah_Kwai_Estate_%E8%8F%AF%E8%B2%B4%E5%9D%8A%E5%95%86%E5%A0%B4_Noble_Square_shopping_mall_shop_ParknShop_Supermarket_%E7%85%8E%E9%87%80%E4%B8%89%E5%AF%B6_Fried_Stuffed_Three_Treasures_March_2022_Px3.jpg/960px-thumbnail.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/HK_%E5%8D%97%E5%8D%80_Southern_District_%E7%80%91%E5%B8%83%E7%81%A3_Waterfall_Bay_%E8%8F%AF%E8%B2%B4%E9%82%A8_Wah_Kwai_Estate_%E8%8F%AF%E8%B2%B4%E5%9D%8A%E5%95%86%E5%A0%B4_Noble_Square_shopping_mall_shop_ParknShop_Supermarket_%E7%85%8E%E9%87%80%E4%B8%89%E5%AF%B6_Fried_Stuffed_Three_Treasures_March_2022_Px3.jpg/960px-thumbnail.jpg",
+    "width": 720,
+    "height": 960,
+    "license": "CC BY-SA 4.0",
+    "artist": "Wikimedia Commons"
   }
 }

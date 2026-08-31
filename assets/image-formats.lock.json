@@ -63,7 +63,19 @@
     "format": "JPEG",
     "alpha": false
   },
+  "assets/food-hk/chashao-fan.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
   "assets/food-hk/dabianlu.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/dan-ta.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/dong-ningcha.jpg": {
     "format": "JPEG",
     "alpha": false
   },
@@ -75,7 +87,27 @@
     "format": "JPEG",
     "alpha": false
   },
+  "assets/food-hk/fengzhao.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/gan-chao-niuhe.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/gongzai-mian.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
   "assets/food-hk/gulourou.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/hainan-ji-fan.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/jian-niang-sanbao.jpg": {
     "format": "JPEG",
     "alpha": false
   },
@@ -84,6 +116,14 @@
     "alpha": false
   },
   "assets/food-hk/naicha.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/niunan-mian.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/nuomi-ji.jpg": {
     "format": "JPEG",
     "alpha": false
   },
@@ -96,6 +136,14 @@
     "alpha": false
   },
   "assets/food-hk/wonton-mian.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/xi-duoshi.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/xia-jiao.jpg": {
     "format": "JPEG",
     "alpha": false
   },

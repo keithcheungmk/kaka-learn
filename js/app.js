@@ -399,7 +399,9 @@ function openBookPicker(topic) {
   if (lead) {
     lead.textContent = topic.id === 'jobs'
       ? '揀一冊嚟溫習職業字詞'
-      : '今日讀咗邊本書？揀返嗰本嚟溫習';
+      : topic.id === 'hk_food'
+        ? '揀一冊嚟溫習港式味道'
+        : '今日讀咗邊本書？揀返嗰本嚟溫習';
   }
   const grid = $('#book-grid');
   if (grid) {

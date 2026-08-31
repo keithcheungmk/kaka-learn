@@ -7,7 +7,7 @@
   const MUZZLE_BURST_MS = 120;
 
   /** 與 scripts/crop-ranger-shooter.py MUZZLE_ANCHOR 同步 */
-  const MUZZLE_ANCHOR = { x: 0.52, y: 0.24 };
+  const MUZZLE_ANCHOR = { x: 0.94, y: 0.38 };
 
   const PLAY_IDS = new Set([
     'screen-listen',

@@ -131,11 +131,37 @@
 
 ---
 
+## Fast review（硬性 ≤10 分鐘、少燒 token）
+
+檢查 agent **必須**跟呢條快徑；唔好重複 CI 已做嘅嘢，**預設禁止 computerUse**（除非 diff 改咗 CSS 動畫或新 UI 元件）。
+
+| 步驟 | 做咩 | 時間上限 |
+|------|------|----------|
+| 0 | `python3 scripts/qa-report.py`（預填報告）；exit ≠0 → 直接「有問題」 | 5 min |
+| 1 | `git diff --stat`；**只 review 改動模組** | 1 min |
+| 2 | 視覺：用 `.smoke/` 或 CI artefact；**最多睇 2 張**相關截圖 | 3 min |
+| 3 | 補報告「視覺／幼齡」各 ≤3 行 → 結論 | 1 min |
+
+### Diff 範圍（唔使全 app E2E）
+
+- 只改 `words.js` → 驗受影響主題學習／玩法一屏
+- 只改 `index.html` 主頁 → 驗主頁 + 三（四）入口可開
+- 只改 `star-fx.js` / ranger 圖 → 驗一個玩法屏 + 槍口射星
+- 只改 `math-*` → 驗數理 + 認字／字母隊仍可進入
+
+### Token 節省
+
+- **唔再**自己重跑 `check-invariants.py` / `smoke-shots.py`（CI + `qa-report.py` 已跑）
+- **唔用** browser agent 行完整認字流程
+- 報告總長 **≤15 行**（機器預填 + 人手補充）
+
+---
+
 ## 實作 agent 要點做
 
 0. `python3 scripts/check-invariants.py` 跑到綠
 1. push branch（CI 會再跑一次）
-2. **自己叫檢查 agent 出報告**（唔好叫產品擁有人檢查）
+2. 跑 `python3 scripts/qa-report.py`，將輸出貼俾檢查 agent（唔好叫產品擁有人檢查）
 3. **所有「有問題」都要處理**（修／再推／再檢查）
 4. 檢查 agent 講「可以 merge」→ **即刻 merge 入 `main`**（GitHub Pages 會自動部署；唔使再問要唔要上線）
 5. merge 後只通知產品擁有人：做咗咩、live 網址、上線未

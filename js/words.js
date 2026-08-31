@@ -322,6 +322,18 @@ const WORDS = [
   { id: 'fanqie_chaodan', term: '蕃茄炒蛋', isDeer: false, emoji: '🍅', badge: '', plate: '#401820', photo: 'assets/food-hk/fanqie-chaodan.jpg' },
   { id: 'zheng_yu', term: '蒸魚', isDeer: false, emoji: '🐟', badge: '', plate: '#0f3550', photo: 'assets/food-hk/zheng-yu.jpg' },
   { id: 'zheng_shuidan', term: '蒸水蛋', isDeer: false, emoji: '🥚', badge: '', plate: '#3a3a45', photo: 'assets/food-hk/zheng-shuidan.jpg' },
+  { id: 'gan_chao_niuhe', term: '干炒牛河', isDeer: false, emoji: '🍜', badge: '', plate: '#3a3010', photo: 'assets/food-hk/gan-chao-niuhe.jpg' },
+  { id: 'chashao_fan', term: '叉燒飯', isDeer: false, emoji: '🍚', badge: '', plate: '#401820', photo: 'assets/food-hk/chashao-fan.jpg' },
+  { id: 'dan_ta', term: '蛋撻', isDeer: false, emoji: '🥚', badge: '', plate: '#3a3410', photo: 'assets/food-hk/dan-ta.jpg' },
+  { id: 'xi_duoshi', term: '西多士', isDeer: false, emoji: '🍞', badge: '', plate: '#3a3010', photo: 'assets/food-hk/xi-duoshi.jpg' },
+  { id: 'xia_jiao', term: '蝦餃', isDeer: false, emoji: '🥟', badge: '', plate: '#2a3548', photo: 'assets/food-hk/xia-jiao.jpg' },
+  { id: 'niunan_mian', term: '牛腩麵', isDeer: false, emoji: '🍜', badge: '', plate: '#3a2818', photo: 'assets/food-hk/niunan-mian.jpg' },
+  { id: 'dong_ningcha', term: '凍檸茶', isDeer: false, emoji: '🍋', badge: '', plate: '#3a3410', photo: 'assets/food-hk/dong-ningcha.jpg' },
+  { id: 'hainan_ji_fan', term: '海南雞飯', isDeer: false, emoji: '🍗', badge: '', plate: '#3a3010', photo: 'assets/food-hk/hainan-ji-fan.jpg' },
+  { id: 'nuomi_ji', term: '糯米雞', isDeer: false, emoji: '🍚', badge: '', plate: '#3a2818', photo: 'assets/food-hk/nuomi-ji.jpg' },
+  { id: 'fengzhao', term: '鳳爪', isDeer: false, emoji: '🐔', badge: '', plate: '#401820', photo: 'assets/food-hk/fengzhao.jpg' },
+  { id: 'gongzai_mian', term: '公仔麵', isDeer: false, emoji: '🍜', badge: '', plate: '#3a3010', photo: 'assets/food-hk/gongzai-mian.jpg' },
+  { id: 'jian_niang_sanbao', term: '煎釀三寶', isDeer: false, emoji: '🍆', badge: '', plate: '#401820', photo: 'assets/food-hk/jian-niang-sanbao.jpg' },
   // 職業
   { id: 'yisheng', term: '醫生', isDeer: false, emoji: '👨‍⚕️', badge: '', plate: '#102848' },
   { id: 'hushi', term: '護士', isDeer: false, emoji: '👩‍⚕️', badge: '', plate: '#402038' },
@@ -982,13 +994,36 @@ const TOPICS = [
   },
   {
     id: 'hk_food',
-    title: '港式美食',
-    blurb: '茶餐廳、小菜同屋企常見味道',
+    title: '港式餐廳美食',
+    blurb: '茶樓、茶餐廳同屋企常見味道',
     cover: '🍽️',
     wordIds: [
       'feiniu_wudong', 'gulourou', 'dabianlu', 'yezi', 'maileji', 'roujiang_yifen',
       'wonton_mian', 'changfen', 'siumai', 'yudan', 'naicha', 'boluoyou',
       'fanqie_chaodan', 'zheng_yu', 'zheng_shuidan',
+      'gan_chao_niuhe', 'chashao_fan', 'dan_ta', 'xi_duoshi', 'xia_jiao', 'niunan_mian',
+      'dong_ningcha', 'hainan_ji_fan', 'nuomi_ji', 'fengzhao', 'gongzai_mian', 'jian_niang_sanbao',
+    ],
+    books: [
+      {
+        id: 'hk_food_classic',
+        title: '經典小菜',
+        cover: '🥟',
+        wordIds: [
+          'feiniu_wudong', 'gulourou', 'dabianlu', 'yezi', 'maileji', 'roujiang_yifen',
+          'wonton_mian', 'changfen', 'siumai', 'yudan', 'naicha', 'boluoyou',
+          'fanqie_chaodan', 'zheng_yu', 'zheng_shuidan',
+        ],
+      },
+      {
+        id: 'hk_food_chachaanteng',
+        title: '茶餐廳招牌',
+        cover: '🧋',
+        wordIds: [
+          'gan_chao_niuhe', 'chashao_fan', 'dan_ta', 'xi_duoshi', 'xia_jiao', 'niunan_mian',
+          'dong_ningcha', 'hainan_ji_fan', 'nuomi_ji', 'fengzhao', 'gongzai_mian', 'jian_niang_sanbao',
+        ],
+      },
     ],
   },
   {

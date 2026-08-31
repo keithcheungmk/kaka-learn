@@ -2196,8 +2196,8 @@ body {
 .space-ranger-laser-flash::after {
   content: "";
   position: absolute;
-  left: calc(52% - 4px);
-  top: calc(24% - 6px);
+  left: calc(94% - 4px);
+  top: calc(38% - 6px);
   width: clamp(36px, 8vw, 52px);
   height: 6px;
   border-radius: 999px;
