@@ -2,6 +2,9 @@
  * 太空戰士星星飛行 — 答啱時由 ranger 射去星星條
  */
 (function () {
+  const FLY_DURATION_MS = 1050;
+  const FLY_FALLBACK_MS = 1200;
+
   const PLAY_IDS = new Set([
     'screen-listen',
     'screen-match',
@@ -15,21 +18,45 @@
     'screen-math-time',
   ]);
 
+  let globalRanger = null;
+
   function prefersReducedMotion() {
     return window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
   }
 
+  /** 清走舊版掛喺 .screen 入面嘅 ranger（避免 iPad clip） */
+  function cleanupLegacyRangers() {
+    document.querySelectorAll('.screen .space-ranger').forEach((el) => el.remove());
+  }
+
+  function getGlobalRanger() {
+    if (globalRanger) return globalRanger;
+    cleanupLegacyRangers();
+    globalRanger = document.createElement('div');
+    globalRanger.className = 'space-ranger';
+    globalRanger.setAttribute('aria-hidden', 'true');
+    globalRanger.innerHTML =
+      '<img src="./assets/space-ranger-badge.png" alt="" width="96" height="96" decoding="async" />';
+    document.body.appendChild(globalRanger);
+    return globalRanger;
+  }
+
+  function showRangerFor(screen) {
+    if (!screen || !PLAY_IDS.has(screen.id)) return null;
+    const ranger = getGlobalRanger();
+    ranger.dataset.rangerScreen = screen.id;
+    ranger.classList.add('space-ranger--visible');
+    return ranger;
+  }
+
+  function hideRanger() {
+    globalRanger?.classList.remove('space-ranger--visible', 'space-ranger-shoot');
+    if (globalRanger) delete globalRanger.dataset.rangerScreen;
+  }
+
   function ensureSpaceRanger(screen) {
     if (!screen || !PLAY_IDS.has(screen.id)) return null;
-    let el = screen.querySelector('.space-ranger');
-    if (el) return el;
-    el = document.createElement('div');
-    el.className = 'space-ranger';
-    el.setAttribute('aria-hidden', 'true');
-    el.innerHTML =
-      '<img src="./assets/space-ranger-badge.png" alt="" width="72" height="72" decoding="async" />';
-    screen.appendChild(el);
-    return el;
+    return showRangerFor(screen);
   }
 
   /** 數理玩法頁：header 加一粒星做飛行目標 */
@@ -41,7 +68,8 @@
       slot = document.createElement('div');
       slot.className = 'math-star-target star-panel';
       slot.setAttribute('aria-hidden', 'true');
-      slot.innerHTML = '<span class="star-icon">★</span><strong class="math-star-target-count">0/10</strong>';
+      slot.innerHTML =
+        '<span class="star-icon">★</span><strong class="math-star-target-count">0/10</strong>';
       header.appendChild(slot);
     }
     if (countText != null) {
@@ -62,6 +90,27 @@
     return screen.querySelector('.game-header .progress-pill');
   }
 
+  function buildFlyKeyframes(dx, dy) {
+    return [
+      { transform: 'translate(-50%, -50%) scale(0.3)', opacity: 0 },
+      { transform: 'translate(-50%, -50%) scale(1.5)', opacity: 1, offset: 0.12 },
+      {
+        transform: `translate(calc(-50% + ${dx * 0.35}px), calc(-50% + ${dy * 0.35 - 28}px)) scale(1.35)`,
+        opacity: 1,
+        offset: 0.32,
+      },
+      {
+        transform: `translate(calc(-50% + ${dx * 0.55}px), calc(-50% + ${dy * 0.55 - 48}px)) scale(1.2)`,
+        opacity: 1,
+        offset: 0.52,
+      },
+      {
+        transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.55)`,
+        opacity: 1,
+      },
+    ];
+  }
+
   function flyStar(fromEl, toEl, onLanded) {
     if (prefersReducedMotion() || !fromEl || !toEl) {
       onLanded?.();
@@ -69,36 +118,35 @@
     }
     const a = fromEl.getBoundingClientRect();
     const b = toEl.getBoundingClientRect();
+    const originX = a.left + a.width / 2;
+    const originY = a.top + a.height / 2;
+    const dx = b.left + b.width / 2 - originX;
+    const dy = b.top + b.height / 2 - originY;
+    const keyframes = buildFlyKeyframes(dx, dy);
+    const easing = 'cubic-bezier(.22,.75,.28,1)';
+
     const star = document.createElement('div');
     star.className = 'fly-star';
     star.textContent = '★';
     star.setAttribute('aria-hidden', 'true');
-    star.style.left = `${a.left + a.width / 2}px`;
-    star.style.top = `${a.top + a.height / 2}px`;
+    star.style.left = `${originX}px`;
+    star.style.top = `${originY}px`;
     document.body.appendChild(star);
+
+    const trail = document.createElement('div');
+    trail.className = 'fly-star fly-star-trail';
+    trail.textContent = '★';
+    trail.setAttribute('aria-hidden', 'true');
+    trail.style.left = `${originX}px`;
+    trail.style.top = `${originY}px`;
+    document.body.appendChild(trail);
 
     fromEl.classList.remove('space-ranger-shoot');
     void fromEl.offsetWidth;
     fromEl.classList.add('space-ranger-shoot');
 
-    const dx = b.left + b.width / 2 - (a.left + a.width / 2);
-    const dy = b.top + b.height / 2 - (a.top + a.height / 2);
-    const anim = star.animate(
-      [
-        { transform: 'translate(-50%, -50%) scale(0.35)', opacity: 0 },
-        { transform: 'translate(-50%, -50%) scale(1.35)', opacity: 1, offset: 0.14 },
-        {
-          transform: `translate(calc(-50% + ${dx * 0.55}px), calc(-50% + ${dy * 0.55 - 40}px)) scale(1.05)`,
-          opacity: 1,
-          offset: 0.58,
-        },
-        {
-          transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.42)`,
-          opacity: 0.95,
-        },
-      ],
-      { duration: 680, easing: 'cubic-bezier(.25,.8,.35,1)' },
-    );
+    const anim = star.animate(keyframes, { duration: FLY_DURATION_MS, easing });
+    const trailAnim = trail.animate(keyframes, { duration: FLY_DURATION_MS, easing, delay: 80 });
 
     return new Promise((resolve) => {
       let landed = false;
@@ -106,6 +154,7 @@
         if (landed) return;
         landed = true;
         star.remove();
+        trail.remove();
         fromEl.classList.remove('space-ranger-shoot');
         toEl.classList.remove('star-target-hit');
         void toEl.offsetWidth;
@@ -114,7 +163,8 @@
         resolve();
       };
       anim.onfinish = land;
-      setTimeout(land, 960);
+      trailAnim.onfinish = () => trail.remove();
+      setTimeout(land, FLY_FALLBACK_MS);
     });
   }
 
@@ -134,16 +184,23 @@
   }
 
   function mountPlayScreen(screen) {
-    if (!screen) return;
-    ensureSpaceRanger(screen);
+    if (!screen) {
+      hideRanger();
+      return;
+    }
+    if (PLAY_IDS.has(screen.id)) showRangerFor(screen);
+    else hideRanger();
   }
 
   window.KakaStarFx = {
     PLAY_IDS,
+    FLY_DURATION_MS,
     ensureSpaceRanger,
     ensureMathStarTarget,
     flyStarFromRanger,
     flyStar,
     mountPlayScreen,
+    hideRanger,
+    showRangerFor,
   };
 })();

@@ -167,6 +167,8 @@
     el?.classList.add('active');
     if (['listen', 'match', 'build'].includes(name)) {
       window.KakaStarFx?.mountPlayScreen?.(el);
+    } else {
+      window.KakaStarFx?.hideRanger?.();
     }
   }
 

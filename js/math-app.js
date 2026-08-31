@@ -121,6 +121,8 @@
         const fx = window.KakaStarFx;
         fx?.mountPlayScreen?.(el);
         fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
+      } else {
+        window.KakaStarFx?.hideRanger?.();
       }
     }
 

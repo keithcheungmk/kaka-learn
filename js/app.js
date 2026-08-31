@@ -377,7 +377,10 @@ function showScreen(name) {
   if (['listen', 'match', 'build'].includes(name)) {
     window.KakaStarFx?.mountPlayScreen?.($(map[name]));
     refreshStarUI();
-  } else if (name === 'home' || name === 'topics' || name === 'play') refreshStarUI();
+  } else {
+    window.KakaStarFx?.hideRanger?.();
+    if (name === 'home' || name === 'topics' || name === 'play') refreshStarUI();
+  }
 }
 
 function openTopics() {
@@ -1521,7 +1524,7 @@ function flyStarToBar(onLanded) {
       { transform: `translate(calc(-50% + ${dx * 0.5}px), calc(-50% + ${dy * 0.5 - 40}px)) scale(1.1)`, opacity: 1, offset: 0.6 },
       { transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.5)`, opacity: 0.9 },
     ],
-    { duration: 620, easing: 'cubic-bezier(.25,.8,.35,1)' },
+    { duration: 1050, easing: 'cubic-bezier(.22,.75,.28,1)' },
   );
   let landed = false;
   const land = () => {
@@ -1531,7 +1534,7 @@ function flyStarToBar(onLanded) {
     onLanded();
   };
   anim.onfinish = land;
-  setTimeout(land, 900); // 後備：動畫唔跑都要亮返粒星
+  setTimeout(land, 1200); // 後備：動畫唔跑都要亮返粒星
 }
 
 function bindStarInfo() {
