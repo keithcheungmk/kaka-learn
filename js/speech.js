@@ -90,8 +90,44 @@ function pickCantoneseVoice() {
   return voices[0] || null;
 }
 
+/** iPad Safari／Chrome 要有 user gesture 先准出聲，而且第一次 speak 必須喺
+ *  gesture 入面「即刻」行（隔咗 setTimeout 就唔算）。所以喺全站第一次撳嘅
+ *  嗰一刻，同步播一個零音量嘅空 utterance 解鎖，之後自動讀出先可靠。
+ *  症狀：撳「聽一聽」有聲，但換卡自動讀冇聲——就係差呢一步。 */
+let speechUnlocked = false;
+/** 呢個 session 有冇成功出過聲。只有「由頭到尾未出過聲」先重試，
+ *  避免 iOS 唔觸發 onstart 時每個詞都讀兩次。 */
+let speechEverStarted = false;
+
+function unlockSpeech() {
+  if (speechUnlocked || !('speechSynthesis' in window)) return;
+  try {
+    const u = new SpeechSynthesisUtterance(' ');
+    u.volume = 0;
+    u.rate = 10;
+    speechSynthesis.speak(u);
+    speechUnlocked = true;
+  } catch (err) {
+    /* 解唔到鎖唔好拖冧成頁 */
+  }
+}
+
+function bindSpeechUnlock() {
+  if (typeof document === 'undefined') return;
+  const once = () => {
+    unlockSpeech();
+    document.removeEventListener('pointerdown', once, true);
+    document.removeEventListener('touchstart', once, true);
+    document.removeEventListener('click', once, true);
+  };
+  document.addEventListener('pointerdown', once, true);
+  document.addEventListener('touchstart', once, true);
+  document.addEventListener('click', once, true);
+}
+
 function warmVoices() {
   if (!('speechSynthesis' in window)) return;
+  bindSpeechUnlock();
   cachedVoice = pickCantoneseVoice();
   if (typeof speechSynthesis.onvoiceschanged !== 'undefined') {
     speechSynthesis.onvoiceschanged = () => {
@@ -195,8 +231,20 @@ function speakTerm(text, {
     }
     utter.rate = rate;
     utter.pitch = pitch;
-    utter.onend = runEnd;
-    utter.onerror = runEnd;
+    utter.onend = () => {
+      ended = true;
+      runEnd();
+    };
+    utter.onerror = () => {
+      ended = true;
+      runEnd();
+    };
+    let started = false;
+    let ended = false;
+    utter.onstart = () => {
+      started = true;
+      speechEverStarted = true;
+    };
     holdUtter(utter);
 
     try {
@@ -205,6 +253,34 @@ function speakTerm(text, {
       runEnd();
       return;
     }
+
+    // 有時第一次 speak 會俾瀏覽器靜靜哋吞咗（語音未解鎖／voices 未載入）。
+    // 冇收到 onstart 就重試一次——自動讀出唔會再「第一張卡冇聲」。
+    setTimeout(() => {
+      if (gen !== speakGen || started || ended || speechEverStarted) return;
+      try {
+        if (speechSynthesis.speaking || speechSynthesis.pending) return;
+        const retry = new SpeechSynthesisUtterance(text);
+        const v2 = cachedVoice || pickCantoneseVoice();
+        if (v2) {
+          retry.voice = v2;
+          retry.lang = v2.lang || 'zh-HK';
+        } else {
+          retry.lang = 'zh-HK';
+        }
+        retry.rate = rate;
+        retry.pitch = pitch;
+        retry.onstart = () => {
+          speechEverStarted = true;
+        };
+        retry.onend = runEnd;
+        retry.onerror = runEnd;
+        holdUtter(retry);
+        speechSynthesis.speak(retry);
+      } catch {
+        // ignore
+      }
+    }, 700);
 
     // Chrome 長句有時會卡住 speaking；短句都 harmless
     speakKeepAlive = setInterval(() => {
@@ -533,6 +609,7 @@ function speakEnglishTerm(text, {
 
 window.KakaSpeech = {
   warmVoices,
+  unlockSpeech,
   listChineseVoices,
   setPreferredVoiceURI,
   currentVoice: () => cachedVoice,
