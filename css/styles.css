@@ -101,14 +101,14 @@ body::before {
   isolation: isolate;
 }
 
-.screen.active:not(.phonics-screen):not(.math-screen)::before {
+.screen.active:not(.phonics-screen):not(.math-screen):not(#screen-home)::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(221, 214, 254, 0.92) 0%, rgba(196, 181, 253, 0.88) 45%, rgba(139, 92, 246, 0.92) 100%),
+    linear-gradient(180deg, rgba(221, 214, 254, 0.38) 0%, rgba(196, 181, 253, 0.28) 45%, rgba(139, 92, 246, 0.42) 100%),
     url("../assets/chinese-space-bg.jpg") center / cover no-repeat;
 }
 
@@ -251,12 +251,12 @@ body::before {
 }
 
 .chinese-hero {
-  width: 100%;
-  margin: 0 auto clamp(6px, 1.6vh, 14px);
+  width: min(100%, 840px);
+  margin: 0 auto clamp(4px, 1.2vh, 12px);
   border: none;
   border-radius: 0;
   overflow: visible;
-  background: #c4b5fd;
+  background: transparent;
   box-shadow: none;
 }
 
@@ -264,10 +264,10 @@ body::before {
   display: block;
   width: 100%;
   height: auto;
-  max-height: min(52vh, 560px);
+  max-height: min(58vh, 620px);
   object-fit: contain;
   object-position: center;
-  mix-blend-mode: screen; opacity: 0.95;
+  filter: drop-shadow(0 14px 28px rgba(91, 33, 182, 0.22));
 }
 
 .hero-visual {
@@ -1782,12 +1782,12 @@ body {
 
 /* 主頁 hero 喺矮屏（橫向 iPad）要收細 */
 .chinese-hero {
-  width: min(100%, 720px);
+  width: min(100%, 840px);
 }
 
 .chinese-hero img {
   width: 100%;
-  max-height: min(52vh, 560px);
+  max-height: min(58vh, 620px);
 }
 
 .hero-home .btn-row {
