@@ -519,7 +519,7 @@ function renderLearnCard() {
   const face = illust?.querySelector('.emoji-face');
   if (face) face.classList.add('emoji-face-lg');
 
-  speakCurrentLearn();
+  speakCurrentLearn(true);
 }
 
 function renderLearnPairCard() {
@@ -553,11 +553,24 @@ function renderLearnPairCard() {
   }
   updateLearnFinishRow(atEnd);
 
-  speakCurrentLearn();
+  speakCurrentLearn(true);
 }
 
-function speakCurrentLearn() {
+/** 自動讀出：卡一載入就讀。
+ *  家長可以喺設定熄（autoSpeak）。靜音仍然照跟。
+ *  配一配／砌一砌都讀 —— 圖同淡色格本身已經表達咗個詞，讀出唔會多洩題，
+ *  反而令 KAKA 聽住字音去認字形。 */
+function autoSpeak(text, delayMs = 260) {
+  const s = loadState();
+  if (s.autoSpeak === false || s.muted) return;
+  if (!text) return;
+  setTimeout(() => speakTerm(text, { muted: loadState().muted }), delayMs);
+}
+
+function speakCurrentLearn(isAuto = false) {
   state = loadState();
+  // 家長熄咗「自動讀出」只影響自動嗰次；撳卡永遠讀得到
+  if (isAuto && state.autoSpeak === false) return;
   if (learnPairMode) {
     const pair = learnPairs[learnIndex];
     if (!pair) return;
@@ -882,6 +895,7 @@ function startMatchRound() {
   });
 
   refreshStarUI();
+  autoSpeak((round.prompt || round.target)?.term);
 }
 
 function onMatchPick(id, btn) {
@@ -989,6 +1003,7 @@ function startBuildRound() {
   renderBuildSlots();
   renderBuildPool();
   refreshStarUI();
+  autoSpeak(target?.term);
 }
 
 function nextBuildIndex() {
@@ -1383,8 +1398,10 @@ function renderStarBars(starsToday, coins) {
         void chip.offsetWidth;
         chip.classList.add('just-earned');
       }
+      // 唔顯示累積幣數：十粒星係「今日」進度，累積幣數係另一個時間尺度，
+      // 溝埋一齊反而難明；累積數字留喺家長區同星星彈窗。
       const count = chip.querySelector('.coin-count');
-      if (count) count.textContent = coins > 0 ? `×${coins}` : '';
+      if (count) count.textContent = '';
     }
 
     const hint = bar.querySelector('.star-bar-hint');
@@ -1424,6 +1441,9 @@ function bindParent() {
   });
   $('#toggle-deer').addEventListener('change', (e) => {
     state = updateState({ deerFocus: e.target.checked });
+  });
+  $('#toggle-autospeak')?.addEventListener('change', (e) => {
+    state = updateState({ autoSpeak: e.target.checked });
   });
   $('#voice-select')?.addEventListener('change', (e) => {
     const uri = e.target.value || null;
@@ -1531,6 +1551,8 @@ function renderParentPanel() {
   $('#parent-coins').textContent = String(coins);
   $('#toggle-mute').checked = !!state.muted;
   $('#toggle-deer').checked = state.deerFocus !== false;
+  const autoSpeakBox = $('#toggle-autospeak');
+  if (autoSpeakBox) autoSpeakBox.checked = state.autoSpeak !== false;
   renderVoicePicker();
 
   const box = $('#word-toggles');

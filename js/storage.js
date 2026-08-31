@@ -11,6 +11,7 @@ const DEFAULT_STATE = {
   starsDate: todayKey(),
   enabledWordIds: null, // null = 全部啟用
   voiceURI: null, // 家長喺設定揀嘅聲音；null = 自動（優先粵語女聲）
+  autoSpeak: true, // 每張卡載入自動讀出（家長可以熄）
   coinHintSeen: false,
 };
 
