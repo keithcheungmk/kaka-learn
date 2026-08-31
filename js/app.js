@@ -75,6 +75,8 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
 function init() {
   try {
+    // 先套用家長揀咗嘅聲，再暖機，唔係第一句會用返自動揀嗰把
+    KakaSpeech.setPreferredVoiceURI?.(loadState().voiceURI || null);
     warmVoices();
     bindHome();
     bindTopics();
@@ -1252,6 +1254,37 @@ function showStarBurst() {
   el.classList.add('show');
 }
 
+/** 家長區聲音清單：列出部機所有中文（粵／普）聲音，可以試聽同記低。
+ *  點解要俾家長揀：每部 iPad 裝咗嘅聲音唔同，iPadOS 更新仲會改次序，
+ *  硬 code 名單解決唔到所有情況（KAKA 部機就試過突然變咗男聲）。 */
+function renderVoicePicker() {
+  const sel = $('#voice-select');
+  if (!sel || typeof KakaSpeech.listChineseVoices !== 'function') return;
+  const voices = KakaSpeech.listChineseVoices();
+  const chosen = state.voiceURI || '';
+  sel.innerHTML = '<option value="">自動（優先粵語女聲）</option>';
+  voices.forEach((v) => {
+    const opt = document.createElement('option');
+    opt.value = v.voiceURI;
+    const tag = /zh[-_]HK|yue/i.test(v.lang) ? '粵語' : /zh[-_]TW/i.test(v.lang) ? '國語（台）' : v.lang;
+    opt.textContent = `${v.name}（${tag}）`;
+    if (v.voiceURI === chosen) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  const hint = $('#voice-hint');
+  if (hint && !voices.length) {
+    hint.textContent = '而家搵唔到中文聲音。iPad：設定 → 輔助功能 → 旁白 → 語音 → 下載粵語聲音。';
+  }
+  const now = KakaSpeech.currentVoice?.();
+  const label = $('#voice-now');
+  if (label) label.textContent = now ? `而家用緊：${now.name}` : '';
+}
+
+function speakVoiceSample() {
+  // 試聽刻意唔理「靜音」設定，唔係就試唔到
+  KakaSpeech.speakTerm('你好，我係卡卡，一齊學認字啦', { muted: false });
+}
+
 function refreshStarUI() {
   state = loadState();
   if (state.starsDate !== todayKey()) {
@@ -1287,33 +1320,75 @@ function renderStarBars(starsToday, coins) {
       bar = document.createElement('div');
       bar.className = 'star-bar';
       bar.setAttribute('role', 'img');
-      if (host.classList.contains('game-header')) bar.classList.add('star-bar-compact');
+      const compact = host.classList.contains('game-header');
+      if (compact) bar.classList.add('star-bar-compact');
+
+      const stars = document.createElement('span');
+      stars.className = 'star-bar-stars';
       for (let i = 0; i < 10; i += 1) {
         const cell = document.createElement('span');
         cell.className = 'star-cell';
         cell.textContent = '★';
-        bar.appendChild(cell);
+        stars.appendChild(cell);
       }
-      const coinTag = document.createElement('span');
-      coinTag.className = 'star-bar-coins';
-      bar.appendChild(coinTag);
+      bar.appendChild(stars);
+
+      const arrow = document.createElement('span');
+      arrow.className = 'star-bar-arrow';
+      arrow.textContent = '→';
+      arrow.setAttribute('aria-hidden', 'true');
+      bar.appendChild(arrow);
+
+      const coin = document.createElement('span');
+      coin.className = 'coin-chip';
+      coin.innerHTML = '<span class="coin-face" aria-hidden="true">$</span><span class="coin-count"></span>';
+      bar.appendChild(coin);
+
+      if (!compact) {
+        const hint = document.createElement('span');
+        hint.className = 'star-bar-hint';
+        bar.appendChild(hint);
+      }
+
+      // 條 bar 已經講晒今日進度，原本嗰個「0/10」文字就多餘，收起佢
+      host.querySelector('.stars-today-inline')?.closest('.star-meta')?.classList.add('is-replaced');
       host.appendChild(bar);
     }
-    bar.setAttribute('aria-label', `今日星星 ${starsToday} / 10，可換 ${coins} 枚 AEON 幣`);
-    const cells = bar.querySelectorAll('.star-cell');
-    cells.forEach((cell, i) => {
+
+    const remaining = Math.max(0, 10 - starsToday);
+    bar.setAttribute(
+      'aria-label',
+      `今日星星 ${starsToday} / 10，${remaining > 0 ? `仲差 ${remaining} 粒換一個 AEON 幣` : '今日已經儲滿'}，已儲 ${coins} 個 AEON 幣`,
+    );
+
+    bar.querySelectorAll('.star-cell').forEach((cell, i) => {
       const wasOn = cell.classList.contains('is-on');
       const isOn = i < starsToday;
       cell.classList.toggle('is-on', isOn);
       if (isOn && !wasOn) {
         cell.classList.remove('just-lit');
-        // 強制 reflow，令連續答啱都會重新播動畫
-        void cell.offsetWidth;
+        void cell.offsetWidth; // 強制 reflow，連續答啱都會重播動畫
         cell.classList.add('just-lit');
       }
     });
-    const tag = bar.querySelector('.star-bar-coins');
-    if (tag) tag.textContent = coins > 0 ? `${coins} 幣` : '';
+
+    const chip = bar.querySelector('.coin-chip');
+    if (chip) {
+      const full = starsToday >= 10;
+      const wasFull = chip.classList.contains('is-full');
+      chip.classList.toggle('is-full', full);
+      chip.classList.toggle('has-coins', coins > 0);
+      if (full && !wasFull) {
+        chip.classList.remove('just-earned');
+        void chip.offsetWidth;
+        chip.classList.add('just-earned');
+      }
+      const count = chip.querySelector('.coin-count');
+      if (count) count.textContent = coins > 0 ? `×${coins}` : '';
+    }
+
+    const hint = bar.querySelector('.star-bar-hint');
+    if (hint) hint.textContent = starsToday >= 10 ? '今日儲滿喇！' : `仲差 ${remaining} 粒`;
   });
 }
 
@@ -1350,6 +1425,13 @@ function bindParent() {
   $('#toggle-deer').addEventListener('change', (e) => {
     state = updateState({ deerFocus: e.target.checked });
   });
+  $('#voice-select')?.addEventListener('change', (e) => {
+    const uri = e.target.value || null;
+    state = updateState({ voiceURI: uri });
+    KakaSpeech.setPreferredVoiceURI?.(uri);
+    speakVoiceSample();
+  });
+  $('#btn-voice-test')?.addEventListener('click', () => speakVoiceSample());
   $('#btn-save-pin').addEventListener('click', () => {
     const val = $('#new-pin').value.trim();
     if (!/^\d{4}$/.test(val)) {
@@ -1449,6 +1531,7 @@ function renderParentPanel() {
   $('#parent-coins').textContent = String(coins);
   $('#toggle-mute').checked = !!state.muted;
   $('#toggle-deer').checked = state.deerFocus !== false;
+  renderVoicePicker();
 
   const box = $('#word-toggles');
   box.innerHTML = '';

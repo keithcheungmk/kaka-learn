@@ -10,6 +10,7 @@ const DEFAULT_STATE = {
   starsToday: 0,
   starsDate: todayKey(),
   enabledWordIds: null, // null = 全部啟用
+  voiceURI: null, // 家長喺設定揀嘅聲音；null = 自動（優先粵語女聲）
   coinHintSeen: false,
 };
 

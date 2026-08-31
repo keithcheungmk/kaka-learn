@@ -241,6 +241,46 @@ def check_openmoji_coverage() -> None:
     notes.append(f"OpenMoji 覆蓋 {len(wanted) - len(missing)}/{len(wanted)}")
 
 
+def check_emoji_disc() -> None:
+    """插圖嘅淺色圓碟唔可以刪。
+
+    OpenMoji 係為淺色底設計：519 個圖形入面有 120 個係黑色線條（筷子、雪花、螞蟻、蝙蝠…），
+    直接放喺深藍板上等於消失。`.emoji-img` 嘅淺色圓碟就係專登用嚟托住佢哋。
+    刪咗＝一堆字即刻「冇咗幅圖」，而且喺 diff 度睇唔出，所以要喺呢度攔。
+    """
+    css = read("css/styles.css")
+    m = re.search(r"(?ms)^\.emoji-img\s*\{(.*?)\}", css)
+    if not m:
+        fail("emoji-disc", "css/styles.css 唔見 .emoji-img 規則")
+        return
+    block = m.group(1)
+    if "border-radius" not in block or "background" not in block:
+        fail("emoji-disc", ".emoji-img 冇咗淺色圓碟（background / border-radius）；"
+                           "OpenMoji 黑線條圖喺深色板會消失")
+
+
+def check_voice_picker() -> None:
+    """粵語女聲優先 + 家長區揀聲要留低。
+
+    iPadOS 更新會改 speechSynthesis 嘅聲音次序，淨係攞「第一個 zh-HK」會突然變咗男聲。
+    """
+    speech = strip_js_comments(read("js/speech.js"))
+    if "FEMALE_VOICE_NAMES" not in speech:
+        fail("voice", "js/speech.js 冇咗女聲優先名單（更新 iPadOS 之後會變返男聲）")
+    if "setPreferredVoiceURI" not in speech:
+        fail("voice", "js/speech.js 冇咗 setPreferredVoiceURI（家長區揀聲會失效）")
+    if "voice-select" not in read("index.html"):
+        fail("voice", "index.html 家長區唔見聲音揀選（#voice-select）")
+
+
+def check_coin_chip() -> None:
+    """星星條後面嘅硬幣唔可以剩返一個數字。"""
+    if "coin-chip" not in read("js/app.js"):
+        fail("coin", "js/app.js 冇咗 coin-chip（『十粒星換一個幣』會變返純文字）")
+    if ".coin-face" not in read("css/styles.css"):
+        fail("coin", "css/styles.css 冇咗 .coin-face 樣式")
+
+
 def check_build_ghost() -> None:
     """砌一砌淡色格係配對支架，唔可以刪、唔可以變空白格。"""
     css = read("css/styles.css")
@@ -439,6 +479,9 @@ CHECKS = [
     check_word_ids_unique,
     check_word_data_integrity,
     check_openmoji_coverage,
+    check_emoji_disc,
+    check_voice_picker,
+    check_coin_chip,
     check_build_ghost,
     check_star_rules,
     check_parent_pin,

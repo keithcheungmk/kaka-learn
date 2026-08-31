@@ -107,10 +107,15 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - **遊戲畫面一屏到底，唔准捲。** 只有「揀主題／揀書／字母隊揀主題」准上下捲（純瀏覽、唔涉拖曳）。
   尺寸用 `min(px, vw, vh)` 跟住視窗高度縮；橫向嘅砌一砌係兩欄（左圖右字池）。
   改完一定要跑 `python3 scripts/smoke-shots.py`（CI 會跑 5 種 iPad 尺寸），要捲就係 blocker。
-- **插圖用 OpenMoji**（`assets/openmoji/*.svg`，CC BY-SA 4.0）。`words.js` 嘅 `emoji` 欄位仍然係唯一資料來源；
+- **插圖用 OpenMoji**（`assets/openmoji/*.svg`，CC BY-SA 4.0）**＋淺色圓碟**。
+  OpenMoji 係為淺色底設計，519 個圖形有 120 個係黑色線條（筷子、雪花、螞蟻、蝙蝠…），
+  直接放喺深藍板上會消失。`.emoji-img` 嘅圓碟就係托住佢哋，**唔可以刪**（`check-invariants` 會攔）。`words.js` 嘅 `emoji` 欄位仍然係唯一資料來源；
   `js/emoji-art.js` 負責 emoji → SVG（檔名＝去走 U+FE0F 嘅 codepoint，大寫 hex，`-` 連），揾唔到就跌返系統 emoji。
   **加新字／新主題記得補圖**，`check-invariants.py` 嘅 `openmoji` 會攔。
-- **星星＝十格星星條**（`renderStarBars`），自動插入每個 `.star-panel` 同 `.game-header`；唔好改返做淨係一個數字。
+- **星星＝十格星星條 → 硬幣**（`renderStarBars`），自動插入每個 `.star-panel` 同 `.game-header`。
+  十粒星後面要有箭嘴同硬幣（`.coin-chip`），儲滿會亮同彈一彈；唔好改返做淨係一個數字。
+- **粵語聲音要係女聲**：`speech.js` 有女聲優先名單，家長區有聲音揀選（記入 `voiceURI`）。
+  唔好改返「攞第一個 zh-HK」——iPadOS 更新會令佢變咗男聲。
 - 全頁**鎖死放大縮細**（iPad 螢幕 pinch 同妙控鍵盤觸控板 pinch 都唔好放大遊戲）。砌練習以撳為主，拖係額外。
 - 砌一砌每放入一格就**讀嗰個字**；砌完成個詞再讀一次成個詞。
 - 家長 PIN 預設 `1234`，要可以改。
