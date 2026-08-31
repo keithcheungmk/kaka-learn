@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+"""視覺煙霧測試 + iPad 版面回歸。
+
+兩件事：
+  1. 自動行三個入口同認字嘅完整流程，影 iPad 尺寸截圖，捉 404／console error／白屏。
+  2. **溢出檢查**：遊戲畫面喺 5 種 iPad 尺寸都唔准要捲。
+     （4 歲喺砌一砌拖字嗰陣要捲畫面 = 學習體驗直接爛，所以呢個係 blocker。）
+
+用法：
+    python3 -m http.server 5173 &
+    python3 scripts/smoke-shots.py                 # 影圖 + 檢查，圖出喺 .smoke/
+    python3 scripts/smoke-shots.py --no-shots      # 淨係做溢出檢查（CI 用，快啲）
+
+需要 playwright；冇裝就會講一聲然後跳過，唔會阻住其他檢查。
+"""
+
+from __future__ import annotations
+
+import argparse
+import sys
+from pathlib import Path
+
+# 只許呢幾頁捲：純瀏覽、唔涉拖曳
+SCROLLABLE = {"screen-topics", "screen-books", "screen-phonics-topics"}
+
+IPADS = {
+    "iPadPro12.9-直": (1024, 1366),
+    "iPadPro12.9-橫": (1366, 1024),
+    "iPadPro11-直": (834, 1194),
+    "iPadPro11-橫": (1194, 834),
+    "iPad10.9-橫": (1180, 820),
+}
+
+
+def walk(pg, url, shots: Path | None, tag: str):
+    """行一次認字全程 + 另外兩個入口，回傳 [(步驟, screen id, 溢出 px)]。"""
+    seen = []
+
+    def probe(step):
+        info = pg.evaluate(
+            """() => {
+              const s = document.querySelector('.screen.active');
+              const d = document.documentElement;
+              return {
+                id: s ? s.id : null,
+                over: Math.max(
+                  s ? s.scrollHeight - s.clientHeight : 0,
+                  Math.max(d.scrollHeight, document.body.scrollHeight) - window.innerHeight
+                ),
+                text: (s && s.innerText || '').trim().length,
+              };
+            }"""
+        )
+        seen.append((step, info["id"], info["over"], info["text"]))
+        if shots:
+            pg.screenshot(path=str(shots / f"{tag}-{step}.png"))
+
+    pg.goto(url, wait_until="domcontentloaded")
+    pg.wait_for_timeout(400)
+    probe("主頁")
+
+    pg.click("#btn-start-topics")
+    pg.wait_for_timeout(600)
+    probe("揀主題")
+
+    for el in pg.query_selector_all("#screen-topics button"):
+        if "動物園" in (el.inner_text() or ""):
+            el.click()
+            break
+    pg.wait_for_timeout(600)
+    probe("學習頁")
+
+    for _ in range(60):
+        if pg.is_visible("#btn-learn-play"):
+            break
+        pg.click("#btn-learn-next")
+        pg.wait_for_timeout(50)
+    pg.click("#btn-learn-play")
+    pg.wait_for_timeout(500)
+    probe("揀玩法")
+
+    for btn, step in [("#btn-mode-build", "砌一砌"), ("#btn-mode-listen", "聽一聽"), ("#btn-mode-match", "配一配")]:
+        pg.click(btn)
+        pg.wait_for_timeout(800)
+        probe(step)
+        back = {"#btn-mode-build": "#btn-back-build", "#btn-mode-listen": "#btn-back-listen", "#btn-mode-match": "#btn-back-match"}[btn]
+        pg.click(back)
+        pg.wait_for_timeout(400)
+
+    for entry, step in [("#btn-start-phonics", "字母隊"), ("#btn-start-math", "數理")]:
+        pg.goto(url, wait_until="domcontentloaded")
+        pg.wait_for_timeout(300)
+        pg.click(entry)
+        pg.wait_for_timeout(800)
+        probe(step)
+
+    return seen
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--url", default="http://localhost:5173")
+    ap.add_argument("--out", default=".smoke")
+    ap.add_argument("--no-shots", action="store_true", help="唔影圖，淨係做檢查")
+    args = ap.parse_args()
+
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        print("冇裝 playwright，跳過視覺煙霧測試。")
+        print("  pip install playwright && playwright install chromium")
+        return 0
+
+    shots = None if args.no_shots else Path(args.out)
+    if shots:
+        shots.mkdir(parents=True, exist_ok=True)
+
+    problems = 0
+    errors: list[str] = []
+    failed: list[str] = []
+
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch()
+        for name, (w, h) in IPADS.items():
+            page = browser.new_page(viewport={"width": w, "height": h}, is_mobile=True, has_touch=True)
+            page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
+            page.on("requestfailed", lambda r: failed.append(r.url))
+            try:
+                rows = walk(page, args.url, shots, name)
+            except Exception as e:  # noqa: BLE001
+                print(f"  ✗ {name}: 行唔完流程（{type(e).__name__}: {e}）")
+                problems += 1
+                page.close()
+                continue
+
+            bad = []
+            for step, sid, over, text in rows:
+                if text < 5:
+                    bad.append(f"{step}（{sid}）似乎白屏")
+                if over > 2 and sid not in SCROLLABLE:
+                    bad.append(f"{step}（{sid}）要捲 {over}px")
+            if bad:
+                problems += len(bad)
+                print(f"  ✗ {name}")
+                for b in bad:
+                    print(f"      {b}")
+            else:
+                print(f"  ✓ {name}：{len(rows)} 個畫面全部一屏入晒")
+            page.close()
+        browser.close()
+
+    for u in dict.fromkeys(x for x in failed if "fonts.g" not in x):
+        print(f"  ✗ 載入失敗：{u}")
+        problems += 1
+    for e in dict.fromkeys(errors):
+        if "ERR_TUNNEL" in e or "fonts.g" in e:
+            continue
+        print(f"  ✗ console error：{e[:120]}")
+        problems += 1
+
+    if problems:
+        print(f"\n結論：有 {problems} 個問題。遊戲畫面要捲 = blocker（KAKA 拖字會捲親）。")
+        return 1
+    print("\n結論：5 種 iPad 尺寸、全部畫面都一屏入晒，冇 404、冇 console error。")
+    if shots:
+        print(f"截圖喺 {shots}/，交檢查 agent 睇視覺同幼齡適切度。")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

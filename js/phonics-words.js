@@ -234,7 +234,7 @@ function phonicsLetterPool(topic) {
 function phonicsWordIllustHtml(word) {
   if (!word || !word.emoji) return '';
   return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
-    <span class="emoji-face" aria-hidden="true">${word.emoji}</span>
+    <span class="emoji-face" aria-hidden="true">${window.KakaEmojiArt ? window.KakaEmojiArt.html(word.emoji) : word.emoji}</span>
   </span>`;
 }
 

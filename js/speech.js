@@ -18,16 +18,69 @@ function holdUtter(utter) {
   utter.addEventListener('error', drop);
 }
 
+/** 已知女聲（Apple／Google／Microsoft 中文聲音）。
+ *  KAKA 由頭到尾聽開女聲，iPadOS 更新之後聲音清單次序會變，
+ *  淨係攞「第一個 zh-HK」會突然變咗男聲，所以要按名揀。 */
+const FEMALE_VOICE_NAMES = [
+  'sinji', '思睿', 'sin-ji',
+  'meijia', '美佳', 'tingting', '婷婷', 'tian-tian', '天天',
+  'yu-shan', '語珊', 'li-mu', 'yating', '雅婷',
+  'xiaoxiao', 'xiaoyi', 'hiugaai', '曉佳', 'hiumaan', '曉曼',
+  'google 粵語', 'google 國語', 'google 中文',
+];
+
+/** 已知男聲，明確排後。 */
+const MALE_VOICE_NAMES = ['aasing', '아', 'danny', 'yunjhe', 'yunyang', 'wanlung', '雲龍', 'kangkang', 'liang', 'gordon'];
+
+let preferredVoiceURI = null;
+
+function isFemaleName(v) {
+  const n = String(v.name || '').toLowerCase();
+  return FEMALE_VOICE_NAMES.some((k) => n.includes(k));
+}
+
+function isMaleName(v) {
+  const n = String(v.name || '').toLowerCase();
+  return MALE_VOICE_NAMES.some((k) => n.includes(k));
+}
+
+/** 部機有嘅中文（粵／普）聲音，家長區個清單用。 */
+function listChineseVoices() {
+  if (!('speechSynthesis' in window)) return [];
+  return speechSynthesis.getVoices().filter((v) => /^(zh|yue)/i.test(v.lang || ''));
+}
+
+/** 家長揀咗邊把聲；null = 自動。 */
+function setPreferredVoiceURI(uri) {
+  preferredVoiceURI = uri || null;
+  cachedVoice = pickCantoneseVoice();
+}
+
 function pickCantoneseVoice() {
   if (!('speechSynthesis' in window)) return null;
   const voices = speechSynthesis.getVoices();
   if (!voices.length) return null;
 
+  // 1) 家長喺設定度揀咗嘅，最大
+  if (preferredVoiceURI) {
+    const chosen = voices.find((v) => v.voiceURI === preferredVoiceURI);
+    if (chosen) return chosen;
+  }
+
+  const isHK = (v) => /zh[-_]HK/i.test(v.lang) || /yue/i.test(v.lang) || /cantonese/i.test(v.name);
+  const isTW = (v) => /zh[-_]TW/i.test(v.lang);
+  const isZh = (v) => /^zh/i.test(v.lang);
+
+  // 2) 粵語女聲 → 粵語（非男聲）→ 粵語任何 → 國語女聲 → …
   const prefer = [
-    (v) => /zh[-_]HK/i.test(v.lang),
-    (v) => /yue/i.test(v.lang) || /cantonese/i.test(v.name),
-    (v) => /zh[-_]TW/i.test(v.lang),
-    (v) => /^zh/i.test(v.lang),
+    (v) => isHK(v) && isFemaleName(v),
+    (v) => isHK(v) && !isMaleName(v),
+    (v) => isHK(v),
+    (v) => isTW(v) && isFemaleName(v),
+    (v) => isTW(v) && !isMaleName(v),
+    (v) => isZh(v) && isFemaleName(v),
+    (v) => isZh(v) && !isMaleName(v),
+    (v) => isZh(v),
   ];
 
   for (const test of prefer) {
@@ -367,15 +420,33 @@ function beep(freqs, noteDur, gap) {
 let cachedEnglishVoice = null;
 let speakEnglishTimer = null;
 
+/** 英文女聲（字母隊都應該係同一把「媽媽聲」感覺，唔好一中一英兩種性別）。 */
+const FEMALE_EN_VOICE_NAMES = [
+  'samantha', 'karen', 'moira', 'serena', 'kate', 'martha', 'fiona', 'ava',
+  'allison', 'susan', 'zoe', 'tessa', 'female', 'aria', 'jenny', 'sonia', 'libby',
+];
+const MALE_EN_VOICE_NAMES = ['daniel', 'alex', 'fred', 'tom', 'aaron', 'arthur', 'oliver', 'male', 'ryan', 'guy'];
+
 function pickEnglishVoice() {
   if (!('speechSynthesis' in window)) return null;
   const voices = speechSynthesis.getVoices();
   if (!voices.length) return null;
 
+  const nm = (v) => String(v.name || '').toLowerCase();
+  const fem = (v) => FEMALE_EN_VOICE_NAMES.some((k) => nm(v).includes(k));
+  const male = (v) => MALE_EN_VOICE_NAMES.some((k) => nm(v).includes(k));
+  const gb = (v) => /en[-_]GB/i.test(v.lang);
+  const us = (v) => /en[-_]US/i.test(v.lang);
+  const en = (v) => /^en/i.test(v.lang);
+
   const prefer = [
-    (v) => /en[-_]GB/i.test(v.lang),
-    (v) => /en[-_]US/i.test(v.lang),
-    (v) => /^en/i.test(v.lang),
+    (v) => gb(v) && fem(v),
+    (v) => gb(v) && !male(v),
+    (v) => us(v) && fem(v),
+    (v) => us(v) && !male(v),
+    (v) => en(v) && fem(v),
+    (v) => en(v) && !male(v),
+    en,
   ];
 
   for (const test of prefer) {
@@ -462,6 +533,9 @@ function speakEnglishTerm(text, {
 
 window.KakaSpeech = {
   warmVoices,
+  listChineseVoices,
+  setPreferredVoiceURI,
+  currentVoice: () => cachedVoice,
   warmAudio,
   speakTerm,
   speakChar,

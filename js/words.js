@@ -370,15 +370,15 @@ const WORDS = [
   { id: 'tushuguan_guanliyuan', term: '圖書館管理員', isDeer: false, emoji: '📚🧑', emojiDuo: true, badge: '', plate: '#102848' },
   // 恐龍（彩色復原圖；emoji 係 fallback）
   { id: 'konglong', term: '恐龍', isDeer: false, emoji: '🦕', badge: '', plate: '#1a4d3a' },
-  { id: 'baolong', term: '暴龍', isDeer: false, emoji: '🦖', badge: '', plate: '#3a2818', photo: 'assets/dino/baolong.jpg' },
-  { id: 'sanjiaolong', term: '三角龍', isDeer: false, emoji: '🦕', badge: '三', plate: '#2a3548', photo: 'assets/dino/sanjiaolong.jpg' },
-  { id: 'lianglong', term: '梁龍', isDeer: false, emoji: '🦕', badge: '梁', plate: '#1a4d3a', photo: 'assets/dino/lianglong.jpg' },
-  { id: 'jianlong', term: '劍龍', isDeer: false, emoji: '🦕', badge: '劍', plate: '#2a2a35', photo: 'assets/dino/jianlong.jpg' },
-  { id: 'yilong', term: '翼龍', isDeer: false, emoji: '🦅', badge: '翼', plate: '#102848', photo: 'assets/dino/yilong.jpg' },
+  { id: 'baolong', term: '暴龍', isDeer: false, emoji: '🦖', badge: '', plate: '#3a2818', photo: 'assets/dino/baolong.png' },
+  { id: 'sanjiaolong', term: '三角龍', isDeer: false, emoji: '🦕', badge: '三', plate: '#2a3548', photo: 'assets/dino/sanjiaolong.png' },
+  { id: 'lianglong', term: '梁龍', isDeer: false, emoji: '🦕', badge: '梁', plate: '#1a4d3a', photo: 'assets/dino/lianglong.png' },
+  { id: 'jianlong', term: '劍龍', isDeer: false, emoji: '🦕', badge: '劍', plate: '#2a2a35', photo: 'assets/dino/jianlong.png' },
+  { id: 'yilong', term: '翼龍', isDeer: false, emoji: '🦅', badge: '翼', plate: '#102848', photo: 'assets/dino/yilong.png' },
   { id: 'konglongdan', term: '恐龍蛋', isDeer: false, emoji: '🥚', badge: '恐', plate: '#3a3010' },
-  { id: 'fuzhilong', term: '副櫛龍', isDeer: false, emoji: '🦕', badge: '冠', plate: '#2a3548', photo: 'assets/dino/fuzhilong.jpg' },
-  { id: 'jialong', term: '甲龍', isDeer: false, emoji: '🦕', badge: '甲', plate: '#3a2818', photo: 'assets/dino/jialong.jpg' },
-  { id: 'sulong', term: '速龍', isDeer: false, emoji: '🦖', badge: '速', plate: '#1a3050', photo: 'assets/dino/sulong.jpg' },
+  { id: 'fuzhilong', term: '副櫛龍', isDeer: false, emoji: '🦕', badge: '冠', plate: '#2a3548', photo: 'assets/dino/fuzhilong.png' },
+  { id: 'jialong', term: '甲龍', isDeer: false, emoji: '🦕', badge: '甲', plate: '#3a2818', photo: 'assets/dino/jialong.png' },
+  { id: 'sulong', term: '速龍', isDeer: false, emoji: '🦖', badge: '速', plate: '#1a3050', photo: 'assets/dino/sulong.png' },
   // 昆蟲小生物
   { id: 'hudie', term: '蝴蝶', isDeer: false, emoji: '🦋', badge: '', plate: '#402038' },
   { id: 'mifeng', term: '蜜蜂', isDeer: false, emoji: '🐝', badge: '', plate: '#3a3410' },
@@ -1119,10 +1119,16 @@ function getOppositeWord(wordId) {
 })();
 
 /** 產生卡片插圖 HTML（大粒系統 Emoji；有 photo 就用真實相） */
+/** emoji → OpenMoji SVG（見 js/emoji-art.js）；emoji-art 未載入就原樣用系統 emoji。 */
+function art(emoji) {
+  const A = window.KakaEmojiArt;
+  return A ? A.html(emoji) : emoji;
+}
+
 function wordIllustHtml(word) {
   const badgeIsEmoji = word.badge && /\p{Extended_Pictographic}/u.test(word.badge);
   const badge = word.badge
-    ? `<span class="emoji-badge${badgeIsEmoji ? ' emoji-badge-icon' : ''}" aria-hidden="true">${word.badge}</span>`
+    ? `<span class="emoji-badge${badgeIsEmoji ? ' emoji-badge-icon' : ''}" aria-hidden="true">${badgeIsEmoji ? art(word.badge) : word.badge}</span>`
     : '';
   if (word.photo) {
     return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
@@ -1132,7 +1138,7 @@ function wordIllustHtml(word) {
   }
   const faceClass = word.emojiDuo ? 'emoji-face emoji-face-duo' : 'emoji-face';
   return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
-    <span class="${faceClass}" aria-hidden="true">${word.emoji}</span>
+    <span class="${faceClass}" aria-hidden="true">${art(word.emoji)}</span>
     ${badge}
   </span>`;
 }

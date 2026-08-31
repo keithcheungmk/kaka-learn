@@ -37,7 +37,7 @@
 
       <div class="hero-home">
         <div class="chinese-hero" aria-hidden="true">
-          <img src="./assets/chinese-hero.jpg" alt="" width="1100" height="733" />
+          <img src="./assets/chinese-hero.jpg" alt="" width="1100" height="733" decoding="async" fetchpriority="high" />
         </div>
         <h1 class="hero-title">卡卡學習</h1>
         <p class="hero-sub">出發認字、字母同數理，一齊太空冒險攞星星！</p>
@@ -246,7 +246,7 @@
         <h1>卡卡字母隊</h1>
       </div>
       <div class="phonics-hero" aria-hidden="true">
-        <img src="./assets/phonics-hero.jpg" alt="" width="1100" height="733" />
+        <img src="./assets/phonics-hero.jpg" alt="" width="1100" height="733" loading="lazy" decoding="async" />
       </div>
       <p class="section-lead">揀一組,先一齊睇字同讀音</p>
       <div class="topic-grid" id="phonics-topic-grid"></div>
@@ -349,7 +349,7 @@
       <div class="math-hub">
         <div class="math-planet-stage">
           <div id="math-planet-ball" class="math-globe-wrap math-globe-wrap--photo math-globe-wrap--mercury" aria-hidden="true">
-            <img class="math-globe-img" src="./assets/math/planets/mercury.png" alt="" width="256" height="256" decoding="async" />
+            <img class="math-globe-img" src="./assets/math/planets/mercury.png" alt="" width="256" height="256" loading="lazy" decoding="async" />
           </div>
           <div class="math-deer-guide" aria-hidden="true">
             <div class="math-deer-body">
@@ -688,12 +688,12 @@
     <div class="math-warp-inner">
       <div class="math-warp-planets">
         <div class="math-warp-from">
-          <img id="math-warp-from-img" class="math-globe-img" src="" alt="" width="128" height="128" />
+          <img id="math-warp-from-img" class="math-globe-img" src="" alt="" width="128" height="128" decoding="async" />
           <span id="math-warp-from-name">水星</span>
         </div>
         <div class="math-warp-ship" aria-hidden="true">🚀</div>
         <div class="math-warp-to">
-          <img id="math-warp-to-img" class="math-globe-img" src="" alt="" width="128" height="128" />
+          <img id="math-warp-to-img" class="math-globe-img" src="" alt="" width="128" height="128" decoding="async" />
           <span id="math-warp-to-name">金星</span>
         </div>
       </div>
@@ -743,6 +743,14 @@
           <span>鹿類重點（每日多啲鹿）</span>
           <label class="toggle"><input type="checkbox" id="toggle-deer" /><span></span></label>
         </div>
+        <div class="voice-row">
+          <label for="voice-select">聲音</label>
+          <select id="voice-select" aria-label="揀廣東話聲音">
+            <option value="">自動（優先粵語女聲）</option>
+          </select>
+          <button type="button" class="btn btn-secondary" id="btn-voice-test">試聽</button>
+        </div>
+        <p class="voice-hint" id="voice-hint">部 iPad 裝咗咩聲音就有咩揀。想要女聲又揀唔到？喺 iPad「設定 → 輔助功能 → 旁白 → 語音」下載多把粵語聲音。</p>
       </div>
 
       <div class="parent-section">
@@ -788,6 +796,7 @@
   </div>
 
   <script src="./js/no-zoom.js?v=20260818d"></script>
+  <script src="./js/emoji-art.js?v=20260830a"></script>
   <script src="./js/words.js?v=20260821a"></script>
   <script src="./js/storage.js?v=20260724b"></script>
   <script src="./js/speech.js?v=20260818e"></script>
