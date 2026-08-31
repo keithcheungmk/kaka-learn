@@ -1727,8 +1727,17 @@ body {
 }
 
 .build-slots {
-  min-height: 0;
+  /* 唔可以用 min-height: 0：flex 空間唔夠時個容器會塌陷，
+     入面嘅淡色格會爆出嚟疊住「聽呢個詞」掣（iPhone 直向出現過）。 */
+  flex-shrink: 0;
+  min-height: auto;
   margin-bottom: clamp(4px, 1.2vh, 12px);
+}
+
+/* 砌一砌成條 column 都唔准壓縮，寧願落去用捲軸（見下面窄屏規則） */
+#screen-build.active > *,
+#screen-phonics-build.active > * {
+  flex-shrink: 0;
 }
 
 .build-stage {
@@ -1834,6 +1843,14 @@ body {
   .hero-title { font-size: clamp(1.9rem, 5vw, 2.6rem); margin-bottom: 4px; }
   .hero-sub { margin: 0 0 clamp(4px, 1.2vh, 12px); }
   .hero-home .btn-row { margin-top: clamp(6px, 1.6vh, 16px); }
+}
+
+/* 手機直向：一屏真係入唔晒（字池兩行 + 圖 + 格 + 掣），
+   鎖死唔捲就會剪走內容，反而更差。iPad 尺寸仍然鎖死唔捲。 */
+@media (max-width: 700px) {
+  body,
+  #app { height: auto; min-height: 100dvh; overflow: visible; }
+  .screen.active { overflow: visible; }
 }
 
 /* 極矮視窗（手機打橫、細窗）：一屏入唔晒就準捲，好過內容被切走 */

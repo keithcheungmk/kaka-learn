@@ -106,7 +106,9 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - **砌一砌淡色格（`.build-ghost`）係配對支架，唔係洩題。** 目標係活動學習：睇圖 → 喺字池搵同一個字 → 拖／撳入格；靠重複移動嚟認字形。唔好刪淡字、唔好改成空白考試格。字池要留干擾字，等卡卡真係要揀。
 - **遊戲畫面一屏到底，唔准捲。** 只有「揀主題／揀書／字母隊揀主題」准上下捲（純瀏覽、唔涉拖曳）。
   尺寸用 `min(px, vw, vh)` 跟住視窗高度縮；橫向嘅砌一砌係兩欄（左圖右字池）。
-  改完一定要跑 `python3 scripts/smoke-shots.py`（CI 會跑 5 種 iPad 尺寸），要捲就係 blocker。
+  改完一定要跑 `python3 scripts/smoke-shots.py`（CI 會跑 5 種 iPad + 2 種 iPhone），iPad 要捲就係 blocker。
+  手機（≤700px 闊）准捲——鎖死唔捲會剪走內容；但任何尺寸都唔准元素重疊。
+  ⚠️ 唔好喺遊戲畫面嘅 flex 子元素落 `min-height: 0`：空間唔夠時容器會塌陷，仔元素爆出嚟疊住下一格。
 - **插圖用 OpenMoji**（`assets/openmoji/*.svg`，CC BY-SA 4.0）**＋淺色圓碟**。
   OpenMoji 係為淺色底設計，519 個圖形有 120 個係黑色線條（筷子、雪花、螞蟻、蝙蝠…），
   直接放喺深藍板上會消失。`.emoji-img` 嘅圓碟就係托住佢哋，**唔可以刪**（`check-invariants` 會攔）。`words.js` 嘅 `emoji` 欄位仍然係唯一資料來源；
