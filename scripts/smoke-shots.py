@@ -31,9 +31,16 @@ IPADS = {
     "iPad10.9-橫": (1180, 820),
 }
 
+# 手機：一屏入唔晒係容許嘅（會準捲），但一定唔可以重疊或者剪走內容。
+# Keith 用 iPhone 試過，砌一砌嘅「聽呢個詞」掣曾經疊住淡色格 —— 就係喺呢度捉。
+PHONES = {
+    "iPhone-直": (393, 852),
+    "iPhone-直細": (390, 660),
+}
+
 
 def walk(pg, url, shots: Path | None, tag: str):
-    """行一次認字全程 + 另外兩個入口，回傳 [(步驟, screen id, 溢出 px)]。"""
+    """行一次認字全程 + 另外兩個入口，回傳每一步嘅量度結果。"""
     seen = []
 
     def probe(step):
@@ -41,17 +48,39 @@ def walk(pg, url, shots: Path | None, tag: str):
             """() => {
               const s = document.querySelector('.screen.active');
               const d = document.documentElement;
+              // 重疊偵測：同一屏嘅直屬子元素兩兩相交（要 x、y 都相交先算）
+              const kids = [...s.children].filter(
+                (e) => e.offsetHeight > 0 && getComputedStyle(e).position !== 'absolute'
+              );
+              const R = (e) => {
+                const b = e.getBoundingClientRect();
+                return { n: (e.id || e.className || '').split(' ')[0],
+                         x1: b.left, x2: b.right, y1: b.top, y2: b.bottom };
+              };
+              const bs = kids.map(R);
+              const overlaps = [];
+              for (let i = 0; i < bs.length; i++) {
+                for (let j = i + 1; j < bs.length; j++) {
+                  const a = bs[i], c = bs[j];
+                  const ox = Math.min(a.x2, c.x2) - Math.max(a.x1, c.x1);
+                  const oy = Math.min(a.y2, c.y2) - Math.max(a.y1, c.y1);
+                  if (ox > 2 && oy > 2) overlaps.push(a.n + ' 疊住 ' + c.n);
+                }
+              }
+              const scrollable = s.scrollHeight - s.clientHeight > 2;
               return {
                 id: s ? s.id : null,
                 over: Math.max(
-                  s ? s.scrollHeight - s.clientHeight : 0,
+                  scrollable ? s.scrollHeight - s.clientHeight : 0,
                   Math.max(d.scrollHeight, document.body.scrollHeight) - window.innerHeight
                 ),
+                clipped: getComputedStyle(s).overflow === 'hidden' && scrollable,
+                overlaps,
                 text: (s && s.innerText || '').trim().length,
               };
             }"""
         )
-        seen.append((step, info["id"], info["over"], info["text"]))
+        seen.append((step, info["id"], info["over"], info["text"], info["overlaps"], info["clipped"]))
         if shots:
             pg.screenshot(path=str(shots / f"{tag}-{step}.png"))
 
@@ -121,7 +150,8 @@ def main() -> int:
 
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
-        for name, (w, h) in IPADS.items():
+        targets = [(n, wh, False) for n, wh in IPADS.items()] + [(n, wh, True) for n, wh in PHONES.items()]
+        for name, (w, h), phone in targets:
             page = browser.new_page(viewport={"width": w, "height": h}, is_mobile=True, has_touch=True)
             page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
             page.on("requestfailed", lambda r: failed.append(r.url))
@@ -134,18 +164,23 @@ def main() -> int:
                 continue
 
             bad = []
-            for step, sid, over, text in rows:
+            for step, sid, over, text, overlaps, clipped in rows:
                 if text < 5:
                     bad.append(f"{step}（{sid}）似乎白屏")
-                if over > 2 and sid not in SCROLLABLE:
+                if not phone and over > 2 and sid not in SCROLLABLE:
                     bad.append(f"{step}（{sid}）要捲 {over}px")
+                if clipped:
+                    bad.append(f"{step}（{sid}）內容被剪走 {over}px（鎖死唔捲但入唔晒）")
+                for o in overlaps:
+                    bad.append(f"{step}（{sid}）元素重疊：{o}")
             if bad:
                 problems += len(bad)
                 print(f"  ✗ {name}")
                 for b in bad:
                     print(f"      {b}")
             else:
-                print(f"  ✓ {name}：{len(rows)} 個畫面全部一屏入晒")
+                fit = "準捲但冇重疊冇剪走" if phone else "全部一屏入晒"
+                print(f"  ✓ {name}：{len(rows)} 個畫面{fit}")
             page.close()
         browser.close()
 
@@ -161,7 +196,8 @@ def main() -> int:
     if problems:
         print(f"\n結論：有 {problems} 個問題。遊戲畫面要捲 = blocker（KAKA 拖字會捲親）。")
         return 1
-    print("\n結論：5 種 iPad 尺寸、全部畫面都一屏入晒，冇 404、冇 console error。")
+    print(f"\n結論：{len(IPADS)} 種 iPad 尺寸一屏入晒、{len(PHONES)} 種手機尺寸冇重疊冇剪走，"
+          "冇 404、冇 console error。")
     if shots:
         print(f"截圖喺 {shots}/，交檢查 agent 睇視覺同幼齡適切度。")
     return 0
