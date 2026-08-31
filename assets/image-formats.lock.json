@@ -163,10 +163,6 @@
     "format": "JPEG",
     "alpha": false
   },
-  "assets/space-ranger-badge.png": {
-    "format": "PNG",
-    "alpha": true
-  },
   "assets/space-ranger-shooter.png": {
     "format": "PNG",
     "alpha": true
