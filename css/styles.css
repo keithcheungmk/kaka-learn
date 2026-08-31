@@ -2054,10 +2054,66 @@ body {
 }
 
 /* 條 bar 講晒進度之後，原本嗰個「0/10」文字就多餘 */
-.star-meta.is-replaced {
+.star-meta.is-replaced,
+.star-icon.is-replaced {
   display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .coin-chip.just-earned .coin-face { animation: none; }
+}
+
+/* ══ 新獎勵顯示：今輪進度 → 幣、今日三個幣位 ══════════ */
+.star-bar-coins-row {
+  gap: clamp(6px, 1.2vw, 12px);
+}
+
+.coin-slot {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  opacity: 0.55;
+}
+
+.coin-slot.is-earned {
+  opacity: 1;
+}
+
+.coin-slot .coin-face {
+  background: #22344f;
+  color: #4c637f;
+}
+
+.coin-slot.is-earned .coin-face {
+  background: linear-gradient(150deg, #ffe08a, #f0a921 55%, #c97e10);
+  color: #5a3a05;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.coin-slot-label {
+  font-size: clamp(10px, 1.3vw, 12px);
+  color: var(--ink-dim, #93a6c0);
+  line-height: 1;
+}
+
+.coin-slot.is-earned .coin-slot-label {
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+/* 飛去進度條嗰粒星 */
+.fly-star {
+  position: fixed;
+  z-index: 60;
+  pointer-events: none;
+  font-size: clamp(28px, 5vw, 44px);
+  line-height: 1;
+  color: #fbbf24;
+  text-shadow: 0 0 14px rgba(251, 191, 36, 0.85), 0 0 30px rgba(251, 191, 36, 0.45);
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fly-star { display: none; }
 }

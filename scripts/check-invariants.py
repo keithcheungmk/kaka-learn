@@ -297,12 +297,29 @@ def check_build_ghost() -> None:
 
 
 def check_star_rules() -> None:
-    """每日星星硬上限 10；可兌換幣 = floor(totalStars / 10)。"""
-    src = strip_js_comments(read("js/storage.js"))
-    if not re.search(r"starsToday\s*>=\s*10", src):
-        fail("stars", "storage.js 揾唔到每日 10 粒星星上限")
-    if not re.search(r"Math\.floor\(\s*\(?\s*totalStars", src):
-        fail("stars", "storage.js 揾唔到 floor(totalStars / 10) 兌換邏輯")
+    """獎勵規則（2026-08 改版）：完成一輪 = 一個 AEON 幣，每種玩法一日一個。
+
+    舊規則（每日 10 星上限、可換幣 = floor(totalStars/10)）已經廢除，
+    因為一輪係 8–10 題，玩到一半就滿咗、第二輪一粒都冇，對 4 歲係動力斷崖。
+    呢度守住新規則嘅三條命脈：派幣要去重、要有 3 種玩法、舊資料要遷移得到。
+    """
+    st = strip_js_comments(read("js/storage.js"))
+    if "earnCoinForMode" not in st:
+        fail("coins", "storage.js 冇咗 earnCoinForMode（完成一輪派幣）")
+    if not re.search(r"if\s*\(state\.coinsToday\[mode\]\)", st):
+        fail("coins", "earnCoinForMode 冇咗『同一種玩法一日一個』嘅去重檢查")
+    if not re.search(r"COIN_MODES\s*=\s*\['listen',\s*'match',\s*'build'\]", st):
+        fail("coins", "COIN_MODES 應該係 listen／match／build 三種玩法")
+    if "economyVersion" not in st or "Math.floor((state.totalStars || 0) / 10)" not in st:
+        fail("coins", "冇咗舊資料遷移（coinsTotal = floor(累積星星/10)）；KAKA 已賺嘅幣唔可以蒸發")
+    if "saveRoundProgress" not in st or "clearRoundProgress" not in st:
+        fail("coins", "storage.js 冇咗未完成輪次嘅儲存（中途走咗返嚟進度會冇晒）")
+
+    app = strip_js_comments(read("js/app.js"))
+    if "earnCoinForMode(playMode)" not in app:
+        fail("coins", "js/app.js 完成一輪冇派幣")
+    if "flyStarToBar" not in app:
+        fail("coins", "js/app.js 冇咗答啱飛星動畫（KAKA 見唔到『我做啱 → 我近咗』）")
 
 
 def check_parent_pin() -> None:
