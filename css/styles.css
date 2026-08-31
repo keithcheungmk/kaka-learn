@@ -1,20 +1,20 @@
-/* 卡卡學習 — 小鹿太空冒險主題 */
+/* 卡卡學習 — 太空戰士學院主題 */
 
 :root {
-  --space-deep: #071526;
-  --space-navy: #0b1d3a;
-  --space-mid: #122848;
-  --space-panel: rgba(18, 40, 72, 0.88);
-  --teal: #2dd4bf;
-  --teal-soft: #5eead4;
-  --mint: #7cffb2;
+  --space-deep: #1a1040;
+  --space-navy: #2d1b69;
+  --space-mid: #3b2a7a;
+  --space-panel: rgba(52, 36, 104, 0.82);
+  --teal: #34d399;
+  --teal-soft: #6ee7b7;
+  --mint: #a3ffcb;
   --gold: #fbbf24;
   --gold-soft: #fde68a;
   --coral: #fb7185;
   --ink: #f8fafc;
-  --ink-dim: rgba(248, 250, 252, 0.72);
+  --ink-dim: rgba(248, 250, 252, 0.82);
   --ok: #4ade80;
-  --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  --shadow: 0 14px 32px rgba(26, 16, 64, 0.28);
   --radius: 28px;
   --tap-min: 72px;
   --font-display: "Fredoka", "Noto Sans TC", sans-serif;
@@ -44,10 +44,11 @@ body {
   min-height: 100dvh;
   overflow-x: hidden;
   background:
-    radial-gradient(1200px 700px at 10% -10%, rgba(45, 212, 191, 0.18), transparent 55%),
-    radial-gradient(900px 600px at 100% 0%, rgba(251, 191, 36, 0.12), transparent 50%),
-    radial-gradient(800px 500px at 50% 120%, rgba(124, 255, 178, 0.1), transparent 55%),
-    linear-gradient(180deg, #071526 0%, #0b1d3a 45%, #102848 100%);
+    radial-gradient(1100px 680px at 8% -8%, rgba(110, 231, 183, 0.22), transparent 58%),
+    radial-gradient(900px 620px at 92% 4%, rgba(251, 191, 36, 0.18), transparent 52%),
+    radial-gradient(760px 520px at 50% 108%, rgba(244, 114, 182, 0.16), transparent 55%),
+    radial-gradient(700px 480px at 72% 42%, rgba(167, 139, 250, 0.2), transparent 60%),
+    linear-gradient(180deg, #1a1040 0%, #2d1b69 42%, #3b2a7a 100%);
 }
 
 body::before {
@@ -56,13 +57,13 @@ body::before {
   inset: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(1.5px 1.5px at 12% 18%, rgba(253, 230, 138, 0.9), transparent),
-    radial-gradient(1.2px 1.2px at 28% 62%, rgba(165, 243, 252, 0.8), transparent),
-    radial-gradient(1px 1px at 55% 24%, rgba(248, 250, 252, 0.7), transparent),
-    radial-gradient(1.4px 1.4px at 78% 40%, rgba(253, 230, 138, 0.75), transparent),
-    radial-gradient(1px 1px at 88% 72%, rgba(165, 243, 252, 0.7), transparent),
-    radial-gradient(1.2px 1.2px at 40% 88%, rgba(248, 250, 252, 0.55), transparent);
-  opacity: 0.85;
+    radial-gradient(1.6px 1.6px at 12% 18%, rgba(253, 230, 138, 0.95), transparent),
+    radial-gradient(1.3px 1.3px at 28% 62%, rgba(110, 231, 183, 0.9), transparent),
+    radial-gradient(1.1px 1.1px at 55% 24%, rgba(248, 250, 252, 0.85), transparent),
+    radial-gradient(1.5px 1.5px at 78% 40%, rgba(251, 191, 36, 0.9), transparent),
+    radial-gradient(1.1px 1.1px at 88% 72%, rgba(244, 114, 182, 0.85), transparent),
+    radial-gradient(1.3px 1.3px at 40% 88%, rgba(165, 243, 252, 0.75), transparent);
+  opacity: 0.9;
   animation: twinkle 6s ease-in-out infinite alternate;
 }
 
@@ -106,7 +107,7 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(7, 21, 38, 0.58) 0%, rgba(7, 21, 38, 0.42) 45%, rgba(7, 21, 38, 0.72) 100%),
+    linear-gradient(180deg, rgba(26, 16, 64, 0.35) 0%, rgba(45, 27, 105, 0.28) 45%, rgba(26, 16, 64, 0.48) 100%),
     url("../assets/chinese-space-bg.jpg") center / cover no-repeat;
 }
 
@@ -150,7 +151,7 @@ body::before {
   height: 56px;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 35% 30%, #7cffb2, #2dd4bf 55%, #0b1d3a 70%);
+    radial-gradient(circle at 35% 30%, #a3ffcb, #34d399 55%, #2d1b69 70%);
   box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.35), var(--shadow);
   position: relative;
   flex-shrink: 0;
@@ -253,9 +254,9 @@ body::before {
   margin: 0 auto 14px;
   border-radius: 28px;
   overflow: hidden;
-  border: 2px solid rgba(94, 234, 212, 0.28);
+  border: 2px solid rgba(167, 139, 250, 0.45);
   box-shadow: var(--shadow);
-  background: rgba(7, 21, 38, 0.55);
+  background: rgba(45, 27, 105, 0.35);
 }
 
 .chinese-hero img {
@@ -428,7 +429,7 @@ body::before {
   appearance: none;
   border: 2px solid rgba(94, 234, 212, 0.28);
   border-radius: 24px;
-  background: rgba(15, 39, 72, 0.92);
+  background: var(--space-panel);
   color: var(--ink);
   padding: 18px 14px;
   min-height: 150px;
@@ -467,7 +468,7 @@ body::before {
   appearance: none;
   border: 2px solid rgba(94, 234, 212, 0.3);
   border-radius: 32px;
-  background: rgba(15, 39, 72, 0.92);
+  background: var(--space-panel);
   color: var(--ink);
   width: 100%;
   max-width: 420px;
@@ -501,7 +502,7 @@ body::before {
   min-width: 0;
   border: 2px solid rgba(94, 234, 212, 0.3);
   border-radius: 28px;
-  background: rgba(15, 39, 72, 0.92);
+  background: var(--space-panel);
   color: var(--ink);
   padding: 18px 12px 14px;
   cursor: pointer;
@@ -587,7 +588,7 @@ body::before {
   appearance: none;
   border: 2px solid rgba(94, 234, 212, 0.28);
   border-radius: 28px;
-  background: rgba(15, 39, 72, 0.94);
+  background: var(--space-panel);
   color: var(--ink);
   cursor: pointer;
   touch-action: manipulation;

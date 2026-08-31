@@ -2,7 +2,7 @@
 
 給 KAKA（約 4 歲、升 K2）嘅繁體中文認字小遊戲：聽粵語、配圖畫、攞星星。
 
-主題：**小鹿太空冒險**（原創美術，無迪士尼／彼思角色或素材）。
+主題：**太空戰士學院**（原創美術，無迪士尼／彼思角色或素材）。
 
 ## 線上版（GitHub Pages）
 
@@ -142,7 +142,7 @@ python3 -m http.server 5173
 
 ```
 index.html          # 單頁入口
-css/styles.css      # 小鹿太空冒險主題
+css/styles.css      # 太空戰士學院主題
 js/app.js           # 畫面同遊戲循環（classic script）
 js/words.js         # 字詞 + 主題 + 系統 Emoji 插圖
 js/storage.js       # localStorage
