@@ -1,9 +1,13 @@
 /**
- * 太空戰士星星飛行 — 答啱時由 ranger 射去星星條
+ * 太空戰士星星飛行 — 答啱時由 ranger 槍口射去星星條
  */
 (function () {
   const FLY_DURATION_MS = 1050;
   const FLY_FALLBACK_MS = 1200;
+  const MUZZLE_BURST_MS = 120;
+
+  /** 與 scripts/crop-ranger-shooter.py MUZZLE_ANCHOR 同步 */
+  const MUZZLE_ANCHOR = { x: 0.52, y: 0.24 };
 
   const PLAY_IDS = new Set([
     'screen-listen',
@@ -24,7 +28,6 @@
     return window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
   }
 
-  /** 清走舊版掛喺 .screen 入面嘅 ranger（避免 iPad clip） */
   function cleanupLegacyRangers() {
     document.querySelectorAll('.screen .space-ranger').forEach((el) => el.remove());
   }
@@ -36,9 +39,17 @@
     globalRanger.className = 'space-ranger';
     globalRanger.setAttribute('aria-hidden', 'true');
     globalRanger.innerHTML =
-      '<img src="./assets/space-ranger-badge.png" alt="" width="96" height="96" decoding="async" />';
+      '<img src="./assets/space-ranger-shooter.png" alt="" width="144" height="144" decoding="async" />';
     document.body.appendChild(globalRanger);
     return globalRanger;
+  }
+
+  function getRangerMuzzle(el) {
+    const r = el.getBoundingClientRect();
+    return {
+      x: r.left + r.width * MUZZLE_ANCHOR.x,
+      y: r.top + r.height * MUZZLE_ANCHOR.y,
+    };
   }
 
   function showRangerFor(screen) {
@@ -50,7 +61,11 @@
   }
 
   function hideRanger() {
-    globalRanger?.classList.remove('space-ranger--visible', 'space-ranger-shoot');
+    globalRanger?.classList.remove(
+      'space-ranger--visible',
+      'space-ranger-shoot',
+      'space-ranger-laser-flash',
+    );
     if (globalRanger) delete globalRanger.dataset.rangerScreen;
   }
 
@@ -59,7 +74,6 @@
     return showRangerFor(screen);
   }
 
-  /** 數理玩法頁：header 加一粒星做飛行目標 */
   function ensureMathStarTarget(screen, countText) {
     const header = screen?.querySelector('.game-header');
     if (!header) return null;
@@ -92,17 +106,18 @@
 
   function buildFlyKeyframes(dx, dy) {
     return [
-      { transform: 'translate(-50%, -50%) scale(0.3)', opacity: 0 },
-      { transform: 'translate(-50%, -50%) scale(1.5)', opacity: 1, offset: 0.12 },
+      { transform: 'translate(-50%, -50%) scale(0.25)', opacity: 0, offset: 0 },
+      { transform: 'translate(-50%, -50%) scale(0.25)', opacity: 0, offset: MUZZLE_BURST_MS / FLY_DURATION_MS },
+      { transform: 'translate(-50%, -50%) scale(1.55)', opacity: 1, offset: 0.14 },
       {
         transform: `translate(calc(-50% + ${dx * 0.35}px), calc(-50% + ${dy * 0.35 - 28}px)) scale(1.35)`,
         opacity: 1,
-        offset: 0.32,
+        offset: 0.34,
       },
       {
         transform: `translate(calc(-50% + ${dx * 0.55}px), calc(-50% + ${dy * 0.55 - 48}px)) scale(1.2)`,
         opacity: 1,
-        offset: 0.52,
+        offset: 0.54,
       },
       {
         transform: `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(0.55)`,
@@ -111,15 +126,14 @@
     ];
   }
 
-  function flyStar(fromEl, toEl, onLanded) {
-    if (prefersReducedMotion() || !fromEl || !toEl) {
+  function flyStar(fromPoint, toEl, rangerEl, onLanded) {
+    if (prefersReducedMotion() || !fromPoint || !toEl) {
       onLanded?.();
       return Promise.resolve();
     }
-    const a = fromEl.getBoundingClientRect();
+    const originX = fromPoint.x;
+    const originY = fromPoint.y;
     const b = toEl.getBoundingClientRect();
-    const originX = a.left + a.width / 2;
-    const originY = a.top + a.height / 2;
     const dx = b.left + b.width / 2 - originX;
     const dy = b.top + b.height / 2 - originY;
     const keyframes = buildFlyKeyframes(dx, dy);
@@ -141,12 +155,18 @@
     trail.style.top = `${originY}px`;
     document.body.appendChild(trail);
 
-    fromEl.classList.remove('space-ranger-shoot');
-    void fromEl.offsetWidth;
-    fromEl.classList.add('space-ranger-shoot');
+    if (rangerEl) {
+      rangerEl.classList.remove('space-ranger-shoot', 'space-ranger-laser-flash');
+      void rangerEl.offsetWidth;
+      rangerEl.classList.add('space-ranger-shoot', 'space-ranger-laser-flash');
+    }
 
     const anim = star.animate(keyframes, { duration: FLY_DURATION_MS, easing });
-    const trailAnim = trail.animate(keyframes, { duration: FLY_DURATION_MS, easing, delay: 80 });
+    const trailAnim = trail.animate(keyframes, {
+      duration: FLY_DURATION_MS,
+      easing,
+      delay: MUZZLE_BURST_MS + 80,
+    });
 
     return new Promise((resolve) => {
       let landed = false;
@@ -155,7 +175,7 @@
         landed = true;
         star.remove();
         trail.remove();
-        fromEl.classList.remove('space-ranger-shoot');
+        rangerEl?.classList.remove('space-ranger-shoot', 'space-ranger-laser-flash');
         toEl.classList.remove('star-target-hit');
         void toEl.offsetWidth;
         toEl.classList.add('star-target-hit');
@@ -180,7 +200,8 @@
       onLanded?.();
       return Promise.resolve();
     }
-    return flyStar(ranger, target, onLanded);
+    const muzzle = getRangerMuzzle(ranger);
+    return flyStar(muzzle, target, ranger, onLanded);
   }
 
   function mountPlayScreen(screen) {
@@ -195,6 +216,7 @@
   window.KakaStarFx = {
     PLAY_IDS,
     FLY_DURATION_MS,
+    MUZZLE_ANCHOR,
     ensureSpaceRanger,
     ensureMathStarTarget,
     flyStarFromRanger,
@@ -202,5 +224,6 @@
     mountPlayScreen,
     hideRanger,
     showRangerFor,
+    getRangerMuzzle,
   };
 })();

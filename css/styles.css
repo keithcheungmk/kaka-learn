@@ -2140,11 +2140,11 @@ body {
 /* 太空戰士：玩法頁左下角（掛 body，避 iPad overflow clip） */
 .space-ranger {
   position: fixed;
-  left: max(18px, calc(env(safe-area-inset-left, 0px) + 16px));
-  bottom: max(72px, calc(env(safe-area-inset-bottom, 0px) + 64px));
+  left: max(22px, calc(env(safe-area-inset-left, 0px) + 20px));
+  bottom: max(76px, calc(env(safe-area-inset-bottom, 0px) + 68px));
   z-index: 18;
-  width: clamp(64px, 12vw, 96px);
-  height: clamp(64px, 12vw, 96px);
+  width: clamp(96px, 18vw, 144px);
+  height: clamp(96px, 18vw, 144px);
   pointer-events: none;
   filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.5));
   opacity: 0;
@@ -2171,9 +2171,31 @@ body {
 }
 
 @keyframes rangerShoot {
-  0%, 100% { transform: translateY(0) scale(1); }
-  22% { transform: translateY(-8px) scale(1.12); }
-  48% { transform: translateY(2px) scale(0.96); }
+  0%, 100% { transform: translateY(0) translateX(0) scale(1); }
+  18% { transform: translateY(-6px) translateX(2px) scale(1.08); }
+  42% { transform: translateY(2px) translateX(3px) scale(0.97); }
+}
+
+.space-ranger-laser-flash::after {
+  content: "";
+  position: absolute;
+  left: calc(52% - 4px);
+  top: calc(24% - 6px);
+  width: clamp(36px, 8vw, 52px);
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(253, 230, 138, 0.95), rgba(251, 191, 36, 0.15));
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.95), 0 0 28px rgba(255, 255, 255, 0.65);
+  transform: rotate(-38deg);
+  transform-origin: left center;
+  animation: laserFlash 0.28s ease-out;
+  pointer-events: none;
+}
+
+@keyframes laserFlash {
+  0% { opacity: 0; transform: rotate(-38deg) scaleX(0.2); }
+  35% { opacity: 1; transform: rotate(-38deg) scaleX(1); }
+  100% { opacity: 0; transform: rotate(-38deg) scaleX(1.15); }
 }
 
 .star-target-hit {
@@ -2191,9 +2213,9 @@ body {
 
 @media (orientation: landscape) and (max-height: 920px) {
   .space-ranger {
-    bottom: max(56px, calc(env(safe-area-inset-bottom, 0px) + 48px));
-    width: clamp(56px, 10vw, 84px);
-    height: clamp(56px, 10vw, 84px);
+    bottom: max(60px, calc(env(safe-area-inset-bottom, 0px) + 52px));
+    width: clamp(84px, 15vw, 126px);
+    height: clamp(84px, 15vw, 126px);
   }
 }
 
@@ -2217,4 +2239,5 @@ body {
   .space-ranger-shoot,
   .star-target-hit { animation: none; }
   .space-ranger { transition: none; }
+  .space-ranger-laser-flash::after { display: none; }
 }
