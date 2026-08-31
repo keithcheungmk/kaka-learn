@@ -1,20 +1,20 @@
 /* 卡卡學習 — 太空戰士學院主題 */
 
 :root {
-  --space-deep: #5b21b6;
-  --space-navy: #7c3aed;
-  --space-mid: #8b5cf6;
-  --space-panel: rgba(255, 255, 255, 0.62);
-  --teal: #10b981;
+  --space-deep: #1a1040;
+  --space-navy: #2d1b69;
+  --space-mid: #3b2a7a;
+  --space-panel: rgba(52, 36, 104, 0.84);
+  --teal: #34d399;
   --teal-soft: #6ee7b7;
-  --mint: #a7f3d0;
-  --gold: #f59e0b;
+  --mint: #a3ffcb;
+  --gold: #fbbf24;
   --gold-soft: #fde68a;
-  --coral: #f472b6;
-  --ink: #1e1b4b;
-  --ink-dim: rgba(49, 46, 129, 0.82);
-  --ok: #22c55e;
-  --shadow: 0 14px 32px rgba(91, 33, 182, 0.22);
+  --coral: #fb7185;
+  --ink: #f8fafc;
+  --ink-dim: rgba(248, 250, 252, 0.82);
+  --ok: #4ade80;
+  --shadow: 0 14px 32px rgba(26, 16, 64, 0.32);
   --radius: 28px;
   --tap-min: 72px;
   --font-display: "Fredoka", "Noto Sans TC", sans-serif;
@@ -31,7 +31,7 @@ html,
 body {
   margin: 0;
   min-height: 100%;
-  background: #c4b5fd;
+  background: var(--space-deep);
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-tap-highlight-color: transparent;
@@ -44,12 +44,11 @@ body {
   min-height: 100dvh;
   overflow-x: hidden;
   background:
-    radial-gradient(1200px 720px at 6% -6%, rgba(110, 231, 183, 0.48), transparent 54%),
-    radial-gradient(1000px 680px at 94% 6%, rgba(251, 191, 36, 0.42), transparent 50%),
-    radial-gradient(860px 580px at 50% 108%, rgba(244, 114, 182, 0.38), transparent 52%),
-    radial-gradient(780px 520px at 78% 44%, rgba(167, 139, 250, 0.45), transparent 56%),
-    radial-gradient(640px 440px at 18% 58%, rgba(56, 189, 248, 0.35), transparent 54%),
-    linear-gradient(180deg, #ddd6fe 0%, #c4b5fd 32%, #a78bfa 58%, #8b5cf6 100%);
+    radial-gradient(1100px 680px at 8% -8%, rgba(110, 231, 183, 0.24), transparent 58%),
+    radial-gradient(900px 620px at 92% 4%, rgba(251, 191, 36, 0.2), transparent 52%),
+    radial-gradient(760px 520px at 50% 108%, rgba(244, 114, 182, 0.18), transparent 55%),
+    radial-gradient(700px 480px at 72% 42%, rgba(167, 139, 250, 0.22), transparent 60%),
+    linear-gradient(180deg, #1a1040 0%, #2d1b69 42%, #3b2a7a 100%);
 }
 
 body::before {
@@ -101,14 +100,14 @@ body::before {
   isolation: isolate;
 }
 
-.screen.active:not(.phonics-screen):not(.math-screen):not(#screen-home)::before {
+.screen.active:not(.phonics-screen):not(.math-screen)::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(221, 214, 254, 0.38) 0%, rgba(196, 181, 253, 0.28) 45%, rgba(139, 92, 246, 0.42) 100%),
+    linear-gradient(180deg, rgba(26, 16, 64, 0.42) 0%, rgba(45, 27, 105, 0.32) 45%, rgba(26, 16, 64, 0.52) 100%),
     url("../assets/chinese-space-bg.jpg") center / cover no-repeat;
 }
 
@@ -152,7 +151,7 @@ body::before {
   height: 56px;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 35% 30%, #a7f3d0, #34d399 55%, #7c3aed 70%);
+    radial-gradient(circle at 35% 30%, #a3ffcb, #34d399 55%, #2d1b69 70%);
   box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.35), var(--shadow);
   position: relative;
   flex-shrink: 0;
@@ -183,8 +182,8 @@ body::before {
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1.1;
-  color: #92400e;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+  color: var(--gold-soft);
+  text-shadow: 0 2px 12px rgba(251, 191, 36, 0.25);
 }
 
 .brand-tag {
@@ -196,8 +195,8 @@ body::before {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.95);
+  background: var(--space-panel);
+  border: 1px solid rgba(94, 234, 212, 0.25);
   border-radius: 999px;
   padding: 10px 16px;
   min-height: var(--tap-min);
@@ -218,12 +217,12 @@ body::before {
 .star-meta strong {
   font-family: var(--font-display);
   font-size: 1.25rem;
-  color: #b45309;
+  color: var(--gold);
 }
 
 .star-meta span {
   font-size: 0.85rem;
-  color: #6d28d9;
+  color: var(--ink-dim);
 }
 
 .progress-pill {
@@ -244,30 +243,31 @@ body::before {
 
 .hero-home {
   flex: 1;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 12px 0 24px;
+  padding: 8px 0 20px;
+  gap: clamp(8px, 1.8vh, 16px);
 }
 
 .chinese-hero {
-  width: min(100%, 840px);
-  margin: 0 auto clamp(4px, 1.2vh, 12px);
+  width: min(100%, 680px);
+  margin: 0;
+  border-radius: 24px;
+  overflow: hidden;
   border: none;
-  border-radius: 0;
-  overflow: visible;
   background: transparent;
-  box-shadow: none;
+  box-shadow: var(--shadow);
+  flex-shrink: 0;
 }
 
 .chinese-hero img {
   display: block;
   width: 100%;
   height: auto;
-  max-height: min(58vh, 620px);
-  object-fit: contain;
-  object-position: center;
-  filter: drop-shadow(0 14px 28px rgba(91, 33, 182, 0.22));
+  vertical-align: middle;
 }
 
 .hero-visual {
@@ -758,16 +758,16 @@ body::before {
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 6vw, 3.2rem);
-  margin: 0 0 10px;
-  color: #312e81;
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  margin: 0;
+  color: var(--ink);
   letter-spacing: 0.06em;
 }
 
 .hero-sub {
-  margin: 0 auto 28px;
+  margin: 0;
   max-width: 28ch;
-  font-size: clamp(1.05rem, 2.8vw, 1.25rem);
+  font-size: clamp(1rem, 2.6vw, 1.2rem);
   color: var(--ink-dim);
   line-height: 1.5;
 }
@@ -790,6 +790,7 @@ body::before {
   align-items: center;
   max-width: 420px;
   margin-inline: auto;
+  margin-top: 0;
 }
 
 .hero-home .btn-row .btn {
@@ -844,15 +845,15 @@ body::before {
 }
 
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.72);
-  color: var(--space-deep);
-  box-shadow: 0 0 0 1px rgba(91, 33, 182, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
   min-width: auto;
   padding-inline: 20px;
 }
 
 .btn-ghost:active {
-  box-shadow: 0 0 0 1px rgba(91, 33, 182, 0.32);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25);
 }
 
 .btn-parent {
@@ -883,7 +884,6 @@ body::before {
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(1.4rem, 3.5vw, 1.9rem);
-  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.75);
 }
 
 .prompt-box {
@@ -1782,16 +1782,18 @@ body {
 
 /* 主頁 hero 喺矮屏（橫向 iPad）要收細 */
 .chinese-hero {
-  width: min(100%, 840px);
+  width: min(100%, 680px);
 }
 
 .chinese-hero img {
   width: 100%;
-  max-height: min(58vh, 620px);
+  max-height: min(40vh, 460px);
+  object-fit: cover;
+  object-position: center 42%;
 }
 
 .hero-home .btn-row {
-  margin-top: clamp(8px, 2vh, 24px);
+  margin-top: 0;
 }
 
 /* ── 橫向：砌一砌改兩欄 ────────────────────────────
