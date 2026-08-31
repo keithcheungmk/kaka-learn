@@ -2121,3 +2121,62 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .fly-star { display: none; }
 }
+
+/* 太空戰士：玩法頁左下角，答啱射星去 bar */
+.space-ranger {
+  position: fixed;
+  left: clamp(10px, 2.5vw, 22px);
+  bottom: clamp(68px, 11vh, 112px);
+  z-index: 18;
+  width: clamp(52px, 9vw, 72px);
+  height: clamp(52px, 9vw, 72px);
+  pointer-events: none;
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.45));
+}
+
+.space-ranger img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.space-ranger-shoot {
+  animation: rangerShoot 0.42s ease;
+}
+
+@keyframes rangerShoot {
+  0%, 100% { transform: scale(1) translateY(0); }
+  28% { transform: scale(1.1) translateY(-6px); }
+  55% { transform: scale(0.94) translateY(2px); }
+}
+
+.star-target-hit {
+  animation: starTargetHit 0.45s ease;
+}
+
+@keyframes starTargetHit {
+  0%, 100% { transform: scale(1); filter: none; }
+  40% { transform: scale(1.35); filter: drop-shadow(0 0 12px rgba(251, 191, 36, 0.95)); }
+}
+
+.math-star-target {
+  min-height: 48px;
+  padding: 6px 12px;
+  gap: 6px;
+}
+
+.math-star-target .star-icon {
+  font-size: 1.25rem;
+}
+
+.math-star-target .math-star-target-count {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space-ranger-shoot,
+  .star-target-hit { animation: none; }
+}

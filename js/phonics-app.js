@@ -163,7 +163,11 @@
       build: '#screen-phonics-build',
     };
     $$('.screen').forEach((el) => el.classList.remove('active'));
-    $(map[name])?.classList.add('active');
+    const el = $(map[name]);
+    el?.classList.add('active');
+    if (['listen', 'match', 'build'].includes(name)) {
+      window.KakaStarFx?.mountPlayScreen?.(el);
+    }
   }
 
   function shuffle(arr) {

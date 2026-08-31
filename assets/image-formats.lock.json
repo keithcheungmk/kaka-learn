@@ -162,5 +162,9 @@
   "assets/phonics-space-bg.jpg": {
     "format": "JPEG",
     "alpha": false
+  },
+  "assets/space-ranger-badge.png": {
+    "format": "PNG",
+    "alpha": true
   }
 }

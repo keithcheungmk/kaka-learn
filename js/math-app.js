@@ -115,7 +115,13 @@
     function showMathScreen(name) {
       document.querySelectorAll('.screen').forEach((el) => el.classList.remove('active'));
       const sel = screens[name] || screens.hub;
-      $(sel)?.classList.add('active');
+      const el = $(sel);
+      el?.classList.add('active');
+      if (['count', 'compare', 'size', 'time'].includes(name)) {
+        const fx = window.KakaStarFx;
+        fx?.mountPlayScreen?.(el);
+        fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
+      }
     }
 
     function goHome() {
@@ -197,6 +203,23 @@
       void burst.offsetWidth;
       burst.classList.add('show');
       setTimeout(() => burst.classList.remove('show'), 900);
+    }
+
+    /** 答啱：太空戰士射星去 header 星星位（無動畫就退回中間 burst） */
+    function playMathStarReward() {
+      const screen = document.querySelector('.math-screen.active');
+      const fx = window.KakaStarFx;
+      if (!screen || !fx?.flyStarFromRanger) {
+        flashStarBurst();
+        return;
+      }
+      const state = loadState();
+      fx.mountPlayScreen(screen);
+      fx.ensureMathStarTarget(screen, `${state.starsToday}/10`);
+      fx.flyStarFromRanger(screen, () => {
+        const s = loadState();
+        fx.ensureMathStarTarget(screen, `${s.starsToday}/10`);
+      });
     }
 
     function applyPlanetTheme(planet) {
@@ -475,8 +498,8 @@
         btn.classList.add('is-ok');
         const { gained } = tryEarnStar();
         if (gained) {
-          flashStarBurst();
           speech?.playStarCue?.({ muted });
+          playMathStarReward();
         } else {
           speech?.playCorrectCue?.({ muted });
         }
@@ -654,8 +677,8 @@
         sideBtn?.classList.add('is-ok');
         const { gained } = tryEarnStar();
         if (gained) {
-          flashStarBurst();
           speech?.playStarCue?.({ muted });
+          playMathStarReward();
         } else {
           speech?.playCorrectCue?.({ muted });
         }
@@ -818,8 +841,8 @@
         btn?.classList.add('is-ok');
         const { gained } = tryEarnStar();
         if (gained) {
-          flashStarBurst();
           speech?.playStarCue?.({ muted });
+          playMathStarReward();
         } else {
           speech?.playCorrectCue?.({ muted });
         }
@@ -962,8 +985,8 @@
         btn.classList.add('is-ok');
         const { gained } = tryEarnStar();
         if (gained) {
-          flashStarBurst();
           speech?.playStarCue?.({ muted });
+          playMathStarReward();
         } else {
           speech?.playCorrectCue?.({ muted });
         }

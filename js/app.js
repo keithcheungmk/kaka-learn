@@ -374,7 +374,10 @@ function showScreen(name) {
     build: '#screen-build',
   };
   $(map[name])?.classList.add('active');
-  if (name === 'home' || name === 'topics' || name === 'play') refreshStarUI();
+  if (['listen', 'match', 'build'].includes(name)) {
+    window.KakaStarFx?.mountPlayScreen?.($(map[name]));
+    refreshStarUI();
+  } else if (name === 'home' || name === 'topics' || name === 'play') refreshStarUI();
 }
 
 function openTopics() {
@@ -1483,13 +1486,18 @@ function nextRoundHint(coins) {
   return `仲有 ${pending.length} 個幣可以攞`;
 }
 
-/** 答啱嗰粒星由圖卡飛去進度條下一格，落地先亮。 */
+/** 答啱嗰粒星由太空戰士射去進度條下一格，落地先亮。 */
 function flyStarToBar(onLanded) {
-  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
   const screen = $('.screen.active');
+  if (window.KakaStarFx?.flyStarFromRanger) {
+    window.KakaStarFx.mountPlayScreen?.(screen);
+    window.KakaStarFx.flyStarFromRanger(screen, onLanded);
+    return;
+  }
+  const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
   const bar = screen?.querySelector('.star-bar');
   const target = bar?.querySelector('.star-cell:not(.is-on)');
-  const from = screen?.querySelector('.emoji-plate, .build-slots, .match-stage');
+  const from = screen?.querySelector('.space-ranger, .emoji-plate, .build-slots, .match-stage');
   if (reduce || !target || !from || typeof from.animate !== 'function') {
     onLanded();
     return;
