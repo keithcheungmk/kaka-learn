@@ -254,7 +254,7 @@ body::before {
 
 .chinese-hero {
   width: min(100%, 720px);
-  aspect-ratio: 1100 / 638;
+  aspect-ratio: 904 / 514;
   margin: 0;
   border-radius: 24px;
   overflow: hidden;
