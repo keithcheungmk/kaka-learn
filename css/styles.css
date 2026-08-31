@@ -1,20 +1,20 @@
 /* 卡卡學習 — 太空戰士學院主題 */
 
 :root {
-  --space-deep: #1a1040;
-  --space-navy: #2d1b69;
-  --space-mid: #3b2a7a;
-  --space-panel: rgba(52, 36, 104, 0.82);
-  --teal: #34d399;
+  --space-deep: #5b21b6;
+  --space-navy: #7c3aed;
+  --space-mid: #8b5cf6;
+  --space-panel: rgba(255, 255, 255, 0.62);
+  --teal: #10b981;
   --teal-soft: #6ee7b7;
-  --mint: #a3ffcb;
-  --gold: #fbbf24;
+  --mint: #a7f3d0;
+  --gold: #f59e0b;
   --gold-soft: #fde68a;
-  --coral: #fb7185;
-  --ink: #f8fafc;
-  --ink-dim: rgba(248, 250, 252, 0.82);
-  --ok: #4ade80;
-  --shadow: 0 14px 32px rgba(26, 16, 64, 0.28);
+  --coral: #f472b6;
+  --ink: #1e1b4b;
+  --ink-dim: rgba(49, 46, 129, 0.82);
+  --ok: #22c55e;
+  --shadow: 0 14px 32px rgba(91, 33, 182, 0.22);
   --radius: 28px;
   --tap-min: 72px;
   --font-display: "Fredoka", "Noto Sans TC", sans-serif;
@@ -31,7 +31,7 @@ html,
 body {
   margin: 0;
   min-height: 100%;
-  background: var(--space-deep);
+  background: #c4b5fd;
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-tap-highlight-color: transparent;
@@ -44,11 +44,12 @@ body {
   min-height: 100dvh;
   overflow-x: hidden;
   background:
-    radial-gradient(1100px 680px at 8% -8%, rgba(110, 231, 183, 0.22), transparent 58%),
-    radial-gradient(900px 620px at 92% 4%, rgba(251, 191, 36, 0.18), transparent 52%),
-    radial-gradient(760px 520px at 50% 108%, rgba(244, 114, 182, 0.16), transparent 55%),
-    radial-gradient(700px 480px at 72% 42%, rgba(167, 139, 250, 0.2), transparent 60%),
-    linear-gradient(180deg, #1a1040 0%, #2d1b69 42%, #3b2a7a 100%);
+    radial-gradient(1200px 720px at 6% -6%, rgba(110, 231, 183, 0.48), transparent 54%),
+    radial-gradient(1000px 680px at 94% 6%, rgba(251, 191, 36, 0.42), transparent 50%),
+    radial-gradient(860px 580px at 50% 108%, rgba(244, 114, 182, 0.38), transparent 52%),
+    radial-gradient(780px 520px at 78% 44%, rgba(167, 139, 250, 0.45), transparent 56%),
+    radial-gradient(640px 440px at 18% 58%, rgba(56, 189, 248, 0.35), transparent 54%),
+    linear-gradient(180deg, #ddd6fe 0%, #c4b5fd 32%, #a78bfa 58%, #8b5cf6 100%);
 }
 
 body::before {
@@ -107,7 +108,7 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(26, 16, 64, 0.35) 0%, rgba(45, 27, 105, 0.28) 45%, rgba(26, 16, 64, 0.48) 100%),
+    linear-gradient(180deg, rgba(221, 214, 254, 0.92) 0%, rgba(196, 181, 253, 0.88) 45%, rgba(139, 92, 246, 0.92) 100%),
     url("../assets/chinese-space-bg.jpg") center / cover no-repeat;
 }
 
@@ -151,7 +152,7 @@ body::before {
   height: 56px;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 35% 30%, #a3ffcb, #34d399 55%, #2d1b69 70%);
+    radial-gradient(circle at 35% 30%, #a7f3d0, #34d399 55%, #7c3aed 70%);
   box-shadow: 0 0 0 3px rgba(94, 234, 212, 0.35), var(--shadow);
   position: relative;
   flex-shrink: 0;
@@ -182,8 +183,8 @@ body::before {
   font-weight: 700;
   letter-spacing: 0.04em;
   line-height: 1.1;
-  color: var(--gold-soft);
-  text-shadow: 0 2px 12px rgba(251, 191, 36, 0.25);
+  color: #92400e;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
 .brand-tag {
@@ -195,8 +196,8 @@ body::before {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--space-panel);
-  border: 1px solid rgba(94, 234, 212, 0.25);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.95);
   border-radius: 999px;
   padding: 10px 16px;
   min-height: var(--tap-min);
@@ -217,12 +218,12 @@ body::before {
 .star-meta strong {
   font-family: var(--font-display);
   font-size: 1.25rem;
-  color: var(--gold);
+  color: #b45309;
 }
 
 .star-meta span {
   font-size: 0.85rem;
-  color: var(--ink-dim);
+  color: #6d28d9;
 }
 
 .progress-pill {
@@ -250,22 +251,23 @@ body::before {
 }
 
 .chinese-hero {
-  width: min(100%, 520px);
-  margin: 0 auto 14px;
-  border-radius: 28px;
-  overflow: hidden;
-  border: 2px solid rgba(167, 139, 250, 0.45);
-  box-shadow: var(--shadow);
-  background: rgba(45, 27, 105, 0.35);
+  width: 100%;
+  margin: 0 auto clamp(6px, 1.6vh, 14px);
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+  background: #c4b5fd;
+  box-shadow: none;
 }
 
 .chinese-hero img {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: center 42%;
+  max-height: min(52vh, 560px);
+  object-fit: contain;
+  object-position: center;
+  mix-blend-mode: screen; opacity: 0.95;
 }
 
 .hero-visual {
@@ -758,7 +760,7 @@ body::before {
   font-family: var(--font-display);
   font-size: clamp(2rem, 6vw, 3.2rem);
   margin: 0 0 10px;
-  color: var(--ink);
+  color: #312e81;
   letter-spacing: 0.06em;
 }
 
@@ -842,15 +844,15 @@ body::before {
 }
 
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.08);
-  color: var(--ink);
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--space-deep);
+  box-shadow: 0 0 0 1px rgba(91, 33, 182, 0.18);
   min-width: auto;
   padding-inline: 20px;
 }
 
 .btn-ghost:active {
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 0 1px rgba(91, 33, 182, 0.32);
 }
 
 .btn-parent {
@@ -881,6 +883,7 @@ body::before {
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+  text-shadow: 0 1px 10px rgba(255, 255, 255, 0.75);
 }
 
 .prompt-box {
@@ -1779,15 +1782,12 @@ body {
 
 /* 主頁 hero 喺矮屏（橫向 iPad）要收細 */
 .chinese-hero {
-  /* 用 max-width 令個框跟住圖收窄，唔會出現右邊吉一橛 */
-  width: auto;
-  max-width: min(100%, 520px);
+  width: min(100%, 720px);
 }
 
 .chinese-hero img {
-  max-height: 34vh;
-  width: auto;
-  max-width: 100%;
+  width: 100%;
+  max-height: min(52vh, 560px);
 }
 
 .hero-home .btn-row {
@@ -1839,7 +1839,8 @@ body {
 
 /* 矮屏（橫向 iPad ≤ 860px 高）：主頁 hero 再收細，確保一屏入晒 */
 @media (orientation: landscape) and (max-height: 880px) {
-  .chinese-hero img { max-height: 26vh; }
+  .chinese-hero { width: min(100%, 560px); }
+  .chinese-hero img { max-height: 34vh; }
   .hero-home .chinese-hero { margin-bottom: 8px; }
   .hero-title { font-size: clamp(1.9rem, 5vw, 2.6rem); margin-bottom: 4px; }
   .hero-sub { margin: 0 0 clamp(4px, 1.2vh, 12px); }
