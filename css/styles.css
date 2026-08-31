@@ -253,7 +253,8 @@ body::before {
 }
 
 .chinese-hero {
-  width: min(100%, 680px);
+  width: min(100%, 720px);
+  aspect-ratio: 1100 / 638;
   margin: 0;
   border-radius: 24px;
   overflow: hidden;
@@ -266,7 +267,9 @@ body::before {
 .chinese-hero img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
   vertical-align: middle;
 }
 
@@ -1702,7 +1705,7 @@ a.btn {
    ------------------------------------------------------------------
    點解：4 歲喺砌一砌拖字嗰陣，字池要係一眼見到、隻手夠得到。
    一有捲動，KAKA 就要一邊捲一邊拖，直接影響學習。
-   所以除咗「揀主題／揀書」（純瀏覽、唔涉拖曳）之外，全部畫面鎖死唔准捲，
+   所以除咗「主頁／揀主題／揀書」（純瀏覽、唔涉拖曳）之外，全部畫面鎖死唔准捲，
    內容改為跟住視窗高度縮放（min(..., Nvh)）。
    回歸測試：scripts/smoke-shots.py --check-overflow（CI 會跑）。
    ══════════════════════════════════════════════════════════════════ */
@@ -1731,13 +1734,20 @@ body {
   overflow: hidden;
 }
 
-/* 唯一准捲嘅兩頁：純揀嘢、冇拖曳 */
+/* 准捲：主頁／揀主題／揀書（純瀏覽、冇拖曳） */
+#screen-home.active,
 #screen-topics.active,
 #screen-books.active,
 #screen-phonics-topics.active {
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+}
+
+/* 主頁可捲：hero 唔再撐滿垂直居中，改自然堆叠 */
+#screen-home .hero-home {
+  flex: 0 0 auto;
+  justify-content: flex-start;
 }
 
 /* ── 插圖／字磚跟住視窗高度縮 ─────────────────────── */
@@ -1822,18 +1832,6 @@ body {
   margin: 0 0 clamp(2px, 0.6vh, 8px);
 }
 
-/* 主頁 hero 喺矮屏（橫向 iPad）要收細 */
-.chinese-hero {
-  width: min(100%, 680px);
-}
-
-.chinese-hero img {
-  width: 100%;
-  max-height: min(40vh, 460px);
-  object-fit: cover;
-  object-position: center 42%;
-}
-
 .hero-home .btn-row {
   margin-top: 0;
 }
@@ -1881,10 +1879,8 @@ body {
   #screen-phonics-build .build-tile { min-height: min(72px, 9vh); }
 }
 
-/* 矮屏（橫向 iPad ≤ 860px 高）：主頁 hero 再收細，確保一屏入晒 */
+/* 矮屏（橫向 iPad）：主頁可捲，只微調 spacing；唔再壓細 hero */
 @media (orientation: landscape) and (max-height: 880px) {
-  .chinese-hero { width: min(100%, 560px); }
-  .chinese-hero img { max-height: 30vh; }
   .hero-home .chinese-hero { margin-bottom: 8px; }
   .hero-title { font-size: clamp(1.9rem, 5vw, 2.6rem); margin-bottom: 4px; }
   .hero-sub { margin: 0 0 clamp(4px, 1.2vh, 12px); }
