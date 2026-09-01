@@ -1,7 +1,7 @@
 {
-  "assets/chinese-hero.jpg": {
-    "format": "JPEG",
-    "alpha": false
+  "assets/chinese-hero.png": {
+    "format": "PNG",
+    "alpha": true
   },
   "assets/chinese-space-bg.jpg": {
     "format": "JPEG",

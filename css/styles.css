@@ -1881,10 +1881,11 @@ body {
   #screen-phonics-build .build-tile { min-height: min(72px, 9vh); }
 }
 
-/* 矮屏（橫向 iPad ≤ 860px 高）：主頁 hero 再收細，確保一屏入晒 */
+/* 矮屏（橫向 iPad ≤ 880px 高）：主頁 hero 再收細，確保一屏入晒。
+   主頁加咗學院標題同外部連結之後，26px 都會爆，所以 hero 要再讓多少少。 */
 @media (orientation: landscape) and (max-height: 880px) {
-  .chinese-hero { width: min(100%, 560px); }
-  .chinese-hero img { max-height: 30vh; }
+  .chinese-hero { width: min(100%, 520px); }
+  .chinese-hero img { max-height: 26vh; }
   .hero-home .chinese-hero { margin-bottom: 8px; }
   .hero-title { font-size: clamp(1.9rem, 5vw, 2.6rem); margin-bottom: 4px; }
   .hero-sub { margin: 0 0 clamp(4px, 1.2vh, 12px); }
@@ -2282,4 +2283,55 @@ body {
   .star-target-hit { animation: none; }
   .space-ranger { transition: none; }
   .space-ranger-laser-flash::after { display: none; }
+}
+
+/* ══ 怪獸守住個幣 ═════════════════════════════════════
+   進度條 = 怪獸嘅血。答啱射中一下，打完先攞到幣。
+   刻意細、企邊位、答緊題唔郁 —— 呢個係認字 app，
+   怪獸唔可以搶走漢字嘅注意力，亦唔可以還擊或者嚇親 KAKA。 */
+.coin-chip {
+  position: relative;
+}
+
+.coin-monster {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(26px, 3.4vw, 36px);
+  height: clamp(26px, 3.4vw, 36px);
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.coin-chip.is-cleared .coin-monster {
+  opacity: 0;
+}
+
+.coin-monster.is-hit {
+  animation: monsterHit 0.42s ease;
+}
+
+@keyframes monsterHit {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+  25% { transform: translate(-50%, -58%) rotate(-14deg) scale(1.18); filter: brightness(1.7); }
+  55% { transform: translate(-50%, -50%) rotate(10deg) scale(0.94); }
+  100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+}
+
+.coin-monster.is-defeated {
+  animation: monsterPoof 0.7s ease forwards;
+}
+
+@keyframes monsterPoof {
+  0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+  40% { transform: translate(-50%, -70%) scale(1.4) rotate(18deg); opacity: 1; }
+  100% { transform: translate(-50%, -120%) scale(0.2) rotate(48deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coin-monster.is-hit,
+  .coin-monster.is-defeated { animation: none; }
+  .coin-monster { transition: none; }
 }
