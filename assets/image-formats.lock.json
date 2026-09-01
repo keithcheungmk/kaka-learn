@@ -1,4 +1,8 @@
 {
+  "assets/chinese-hero-poster.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
   "assets/chinese-hero.jpg": {
     "format": "JPEG",
     "alpha": false

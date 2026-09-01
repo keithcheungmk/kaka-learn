@@ -8,7 +8,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "assets" / "chinese-hero.jpg"
+SRC = ROOT / "assets" / "chinese-hero-poster.jpg"
 OUT = ROOT / "assets" / "space-ranger-shooter.png"
 SIZE = 192
 
