@@ -2,6 +2,9 @@
 
 給 Cursor／自動化 agent 嘅專案指引。
 
+> **開工前先睇 `docs/handover.md`** — Cursor 同 Claude (Cowork) 平行 push 同一個 repo，
+> 嗰度寫住而家嘅分工、撞車高危檔案、同未完事項。收工／merge 完記得返去更新。
+
 ## 專案係乜
 
 幼兒繁體中文認字網頁（KAKA，約 4 歲）。粵語家庭、iPad 優先、亦要適合 Mac mini + TV 大掣操作。
