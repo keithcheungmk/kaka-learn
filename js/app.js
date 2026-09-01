@@ -1420,7 +1420,11 @@ function renderRoundBar(bar, mode, coins) {
     bar.appendChild(arrow);
     const chip = document.createElement('span');
     chip.className = 'coin-chip';
-    chip.innerHTML = '<span class="coin-face" aria-hidden="true">$</span>';
+    // 怪獸守住個幣：進度條就係佢嘅血。答啱射中一下，打完先攞到幣。
+    // 刻意細、企邊位、答緊題唔郁 —— 呢個係認字 app，怪獸唔可以搶走漢字嘅注意力。
+    chip.innerHTML =
+      '<span class="coin-face" aria-hidden="true">$</span>' +
+      '<img class="coin-monster" src="./assets/openmoji/1F47E.svg" alt="" aria-hidden="true" decoding="async" />';
     bar.appendChild(chip);
     const hint = document.createElement('span');
     hint.className = 'star-bar-hint';
@@ -1428,6 +1432,7 @@ function renderRoundBar(bar, mode, coins) {
     bar.dataset.cells = String(target);
   }
 
+  let newHit = false;
   bar.querySelectorAll('.star-cell').forEach((cell, i) => {
     const on = i < won;
     const was = cell.classList.contains('is-on');
@@ -1436,14 +1441,32 @@ function renderRoundBar(bar, mode, coins) {
       cell.classList.remove('just-lit');
       void cell.offsetWidth;
       cell.classList.add('just-lit');
+      newHit = true;
     }
   });
+
+  const monster = bar.querySelector('.coin-monster');
+  if (monster && newHit) {
+    monster.classList.remove('is-hit');
+    void monster.offsetWidth;
+    monster.classList.add('is-hit');
+  }
 
   const done = won >= target;
   const chip = bar.querySelector('.coin-chip');
   if (chip) {
     const wasFull = chip.classList.contains('is-full');
     chip.classList.toggle('is-full', done || !!coins[mode]);
+    // 打完／今日已經攞咗幣：怪獸唔喺度
+    chip.classList.toggle('is-cleared', done || !!coins[mode]);
+    if (done && !wasFull) {
+      const m = chip.querySelector('.coin-monster');
+      if (m) {
+        m.classList.remove('is-defeated');
+        void m.offsetWidth;
+        m.classList.add('is-defeated');
+      }
+    }
     if (done && !wasFull) {
       chip.classList.remove('just-earned');
       void chip.offsetWidth;
@@ -1452,7 +1475,11 @@ function renderRoundBar(bar, mode, coins) {
   }
   const hint = bar.querySelector('.star-bar-hint');
   if (hint) {
-    hint.textContent = coins[mode] && !done ? '今日呢個玩法攞咗幣喇' : done ? '攞到一個幣！' : `仲差 ${target - won} 題`;
+    hint.textContent = coins[mode] && !done
+      ? '今日呢隻怪獸打贏咗喇'
+      : done
+        ? '打贏喇！攞到一個幣'
+        : `仲差 ${target - won} 下`;
   }
   bar.setAttribute('aria-label', `今輪 ${won} / ${target}，完成就有一個 AEON 幣`);
 }
