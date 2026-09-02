@@ -223,16 +223,31 @@ fetch 一次（`cache: 'no-store'`），SHA 唔同就 `location.reload()`。
 
 **驗收**：部署後唔掂部 iPad，5 分鐘內自己變新版；玩緊砌一砌唔會突然跳走。
 
-### P1-6 太空戰士造型（要你決定，唔好自己改）
+### P1-6 太空戰士造型 —— ✅ Keith 已經決定（2026-09-02）
 
-主頁 hero 同 ranger 縮圖：綠白太空衣、胸口翼形徽章、紫色配件 —— 同 Buzz Lightyear 好似。
-`AGENTS.md` 白紙黑字寫住「唔用迪士尼／彼思名稱、角色或素材」。
+主頁 hero 同 ranger 縮圖同 Buzz Lightyear 好似呢一點，同 Keith 傾過。佢揀咗**接受，照用**，
+AGENTS.md 已經同步更新（見「硬性約束」嗰段 2026-09-02 決定）。
 
-而家係自相矛盾：規則寫咗唔用，但畫出嚟嘅嘢好接近。要你話事係
-（a）接受，順手放寬 AGENTS.md 條文；定係（b）重畫 —— 換色系（藍／橙）、
-去走胸口翼徽、改頭盔造型，就可以保住太空主題而唔似。
+同時 Keith 提供咗一套新美術（「KAKA RANGER」），已經入 repo：
+- `assets/kaka-ranger-solo.png` —— 全身企定姿勢，真透明底，700px 寬，110KB
+- `docs/design/kaka-ranger-reference-sheet.png` —— 參考 sheet：4 個角度、2 個飛行姿勢
+  （帶噴射火焰）、7 款表情、握拳／比讚／揮手，仲有獨立嘅頭盔／背包／手套／靴。
+  呢個唔係要直接擺上網頁嘅圖，係俾將來裁單個 pose 用嘅原始參考。
 
-**Cursor 唔好自己動手改造型**，等 Keith 決定咗先。
+**呢項改成 P1-2 嘅跟進**：Cursor 負責決定點樣用呢套新素材，有兩個具體技術缺口要處理：
+
+1. `scripts/crop-ranger-shooter.py` 而家由 `chinese-hero.jpg` 裁圖 + 手畫一支槍嵌喺
+   「舉手」位置，`MUZZLE_ANCHOR = {x: 0.94, y: 0.38}` 就係嗰支槍嘅槍口座標，
+   `js/star-fx.js` 靠呢個座標算飛星起點。**新素材冇一個天然「舉手揸槍」嘅 pose**
+   （solo 嗰張係雙手打開飛嘅姿勢）—— 換圖就要重新度過 anchor 位置，或者索性
+   改個機制：唔畫槍，用 sheet 入面「握拳」嗰個 pose，飛星由拳頭附近射出。
+   兩個做法都得，但一定要喺 `js/star-fx.js` 入面**手動核對飛行軌跡冇跳掣**先算完。
+2. 主頁 hero（`assets/chinese-hero.png`）同 ranger 縮圖而家同一個來源（`chinese-hero.jpg`）。
+   如果想換 hero 做新素材，記得 `crop-ranger-shooter.py` 嘅裁圖比例都要跟住調，
+   唔係會裁到唔啱嘅位置。建議兩樣一齊改，唔好分開兩次半吊子咁換。
+
+呢兩點都喺「太空戰士造型、槍口射星動畫」嘅擁有範圍入面（見 `docs/handover.md`），
+所以由 Cursor 接手，我（Claude）冇郁 `star-fx.js` / `crop-ranger-shooter.py`。
 
 ---
 
@@ -322,7 +337,7 @@ fetch 一次（`cache: 'no-store'`），SHA 唔同就 `location.reload()`。
 4. **P0-2**（掌握度）—— 最大改動，有咗測試先做
 5. **P0-3**（讀音）—— 資料工程，可以慢慢分批填 `say`
 6. **P1-5**（version.json）、**P2-1／P2-2**（版面）
-7. **P1-6**（造型）—— 等 Keith 話事
+7. **P1-6**（造型）—— ✅ 已決定接受，新素材已入 repo，剩返嘅係 Cursor 嘅槍口 anchor 技術活（見上面）
 
 ## 每一步做完
 

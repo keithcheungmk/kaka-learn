@@ -67,6 +67,20 @@
 - 主頁加禧禧小遊戲樂園外部連結
 - 學習卡唔遮字修正
 
+## 新素材：KAKA RANGER（2026-09-02）
+
+Keith 提供咗一套新角色美術，已入 repo，`check-invariants.py` 綠：
+- `assets/kaka-ranger-solo.png` —— 全身企定，真透明底，700px 寬，110KB
+- `docs/design/kaka-ranger-reference-sheet.png` —— 多角度／表情／動作參考 sheet（未裁，唔係網頁用圖）
+
+同 Buzz Lightyear 撞衫呢一點已經同 Keith 傾過，佢決定接受、照用（`AGENTS.md` 已註明呢個
+2026-09-02 決定，唔代表迪士尼／彼思禁令廢咗——將來新畫嘢仍然唔好特登臨摹）。
+
+**呢個係 Cursor 嘅嘢，Claude 未郁 `star-fx.js` / `crop-ranger-shooter.py`**：新 solo 素材冇
+「舉手揸槍」pose，`MUZZLE_ANCHOR`（`js/star-fx.js:10`）要重新度過，或者改機制用「握拳」pose
+發射。想換主頁 hero 就記得 `crop-ranger-shooter.py` 嘅裁圖比例要跟住調（兩個依家共用
+`chinese-hero.jpg` 做來源）。詳細技術筆記見 `docs/site-review-2026-09.md` 嘅 P1-6。
+
 ## 全站審查（2026-09-01）
 
 Claude 做咗一次完整審查，結果喺 **`docs/site-review-2026-09.md`** —— 按 P0/P1/P2/P3 排好，
