@@ -155,6 +155,7 @@ test('summarizeMastery：識字同最需要練排序', () => {
   S.recordWordResult('mao', true);
   const out = S.summarizeMastery(['gou', 'mao', 'yu']);
   assert.equal(out.mastered, 1);
+  assert.equal(out.needPractice.length, 1);
   assert.equal(out.needPractice[0].id, 'gou');
 });
 

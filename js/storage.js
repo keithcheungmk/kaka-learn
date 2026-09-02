@@ -224,7 +224,8 @@ function summarizeMastery(wordIds) {
     });
   });
   ranked.sort((a, b) => b.score - a.score || a.streak - b.streak);
-  return { mastered, needPractice: ranked.filter((r) => r.score > 0 || r.streak === 0).slice(0, 10) };
+  const needPractice = ranked.filter((r) => r.wrong > 0).slice(0, 10);
+  return { mastered, needPractice };
 }
 
 function resetStars() {
