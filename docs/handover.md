@@ -12,11 +12,10 @@
 - 呢個檔唔係規則書。任何「以後都要咁做」嘅嘢要寫入 `AGENTS.md`，
   而且同時喺 `scripts/check-invariants.py` 加一個 `check_xxx()`，靠機器守住，唔好靠記憶。
 
-## 而家嘅狀態（2026-09-01）
+## 而家嘅狀態（2026-09-02）
 
-- `origin/main` = `2998374`（Merge：logo 裁黑邊 + 怪獸守幣 + 部署版面閘門）
-- 已部署，`gh-pages` 15:52 更新，線上有 `assets/chinese-hero.png`、`assets/openmoji/1F47E.svg`
-- `check-invariants.py` 綠、`smoke-shots.py`（5 iPad + 2 iPhone × 9 畫面）綠
+- `origin/main` = `b41e48f`（KAKA RANGER 新素材入 repo + P1-6 決定寫入 AGENTS.md）
+- 玩法頁 ranger／飛星：`cursor/kaka-ranger-star-fx-af8d`（待 merge）
 
 ## 分工（點解要分：唔想兩邊改同一段 code）
 
@@ -44,6 +43,14 @@
   唔係 CI 會紅。
 
 ## 最近改動
+
+### 2026-09-02 · Cursor · KAKA RANGER 飛星接入
+
+- **方案 (b)**：玩法頁縮圖改用 `kaka-ranger-solo.png` 衍生嘅 `space-ranger-shooter.png`，唔再手畫槍；
+  飛星由**握拳**位射出（`MUZZLE_ANCHOR ≈ {x:0.279, y:0.678}`）。
+- `scripts/crop-ranger-shooter.py` 改由 solo 縮放產圖，產物 meta 寫入
+  `assets/space-ranger-shooter.meta.json`；`js/star-fx.js` + `css/styles.css` 激光閃光位同步。
+- 主頁 hero（`chinese-hero.png`）今次**冇換**——只處理玩法頁 ranger／飛星軌跡。
 
 ### 2026-09-01 · Claude · `c5b1c23` → merge `2998374`
 
