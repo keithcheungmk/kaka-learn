@@ -20,8 +20,8 @@ import argparse
 import sys
 from pathlib import Path
 
-# 只許呢幾頁捲：純瀏覽、唔涉拖曳
-SCROLLABLE = {"screen-topics", "screen-books", "screen-phonics-topics"}
+# 只許呢幾頁捲：純瀏覽、唔涉拖曳（主頁四入口掣可超出一屏）
+SCROLLABLE = {"screen-home", "screen-topics", "screen-books", "screen-phonics-topics"}
 
 IPADS = {
     "iPadPro12.9-直": (1024, 1366),
