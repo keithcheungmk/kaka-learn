@@ -1,13 +1,13 @@
 /**
- * 太空戰士星星飛行 — 答啱時由 ranger 槍口射去星星條
+ * 太空戰士星星飛行 — 答啱時由 ranger 拳頭射去星星條（KAKA RANGER solo）
  */
 (function () {
   const FLY_DURATION_MS = 1050;
   const FLY_FALLBACK_MS = 1200;
   const MUZZLE_BURST_MS = 120;
 
-  /** 與 scripts/crop-ranger-shooter.py MUZZLE_ANCHOR 同步 */
-  const MUZZLE_ANCHOR = { x: 0.94, y: 0.38 };
+  /** 與 scripts/crop-ranger-shooter.py MUZZLE_ANCHOR 同步（握拳發射點） */
+  const MUZZLE_ANCHOR = { x: 0.279, y: 0.678 };
 
   const PLAY_IDS = new Set([
     'screen-listen',

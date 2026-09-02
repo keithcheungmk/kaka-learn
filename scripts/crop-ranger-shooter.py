@@ -1,87 +1,85 @@
 #!/usr/bin/env python3
-"""Generate space-ranger-shooter.png: mirrored crop + simple blaster."""
+"""Generate space-ranger-shooter.png from kaka-ranger-solo.png (KAKA RANGER).
+
+飛星由握拳位射出（方案 b：唔手畫槍）。輸出 192×192 透明 PNG；
+MUZZLE_ANCHOR 係拳頭中心（0–1），必須同 js/star-fx.js 同步。
+"""
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageOps
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "assets" / "chinese-hero.jpg"
+SRC = ROOT / "assets" / "kaka-ranger-solo.png"
 OUT = ROOT / "assets" / "space-ranger-shooter.png"
+META = ROOT / "assets" / "space-ranger-shooter.meta.json"
 SIZE = 192
 
-# Muzzle tip relative to output canvas (0–1); synced with js/star-fx.js MUZZLE_ANCHOR
-MUZZLE_ANCHOR = {"x": 0.94, "y": 0.38}
-
-# Raised-hand grip centre on final 192×192 canvas (mirrored → gun arm upper-right)
-BLASTER_CX_RATIO = 0.74
-BLASTER_CY_RATIO = 0.48
+# 拳頭中心（viewer 左邊握拳）—— 喺 kaka-ranger-solo.png 全圖上量度，0–1
+FIST_ANCHOR_SRC = {"x": 0.20, "y": 0.67}
 
 
-def draw_glove(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> None:
-    """White glove behind blaster so the raised hand reads clearly."""
-    draw.ellipse((cx - 12, cy - 4, cx + 14, cy + 18), fill="#f8fafc", outline="#cbd5e1", width=2)
-    for i, dx in enumerate((-4, 2, 8)):
-        draw.rounded_rectangle(
-            (cx + dx - 2, cy - 12 + i * 2, cx + dx + 6, cy - 2 + i * 2),
-            radius=2,
-            fill="#f8fafc",
-            outline="#cbd5e1",
-            width=1,
-        )
+def square_fit(im: Image.Image, size: int) -> tuple[Image.Image, dict]:
+    """等比縮放 + 透明底置中，回傳 canvas 同映射資訊。"""
+    im = im.convert("RGBA")
+    bbox = im.getchannel("A").getbbox()
+    if not bbox:
+        raise ValueError(f"{SRC} 冇透明內容")
+    cropped = im.crop(bbox)
+    cw, ch = cropped.size
+    scale = min(size / cw, size / ch)
+    nw, nh = max(1, int(round(cw * scale))), max(1, int(round(ch * scale)))
+    resized = cropped.resize((nw, nh), Image.Resampling.LANCZOS)
+    canvas = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    ox = (size - nw) // 2
+    oy = (size - nh) // 2
+    canvas.paste(resized, (ox, oy))
+    return canvas, {
+        "bbox": bbox,
+        "scale": scale,
+        "offset": (ox, oy),
+        "src_size": im.size,
+        "cropped_size": (cw, ch),
+    }
 
 
-def draw_blaster(draw: ImageDraw.ImageDraw, cx: int, cy: int) -> tuple[int, int]:
-    """Simple green/white space blaster in raised hand, pointing up-right."""
-    draw_glove(draw, cx, cy)
-    draw.rounded_rectangle(
-        (cx - 5, cy + 2, cx + 11, cy + 18),
-        radius=4,
-        fill="#6ee7b7",
-        outline="#047857",
-        width=2,
-    )
-    draw.polygon(
-        [
-            (cx + 9, cy),
-            (cx + 34, cy - 20),
-            (cx + 40, cy - 12),
-            (cx + 12, cy + 6),
-        ],
-        fill="#ecfdf5",
-        outline="#34d399",
-    )
-    mx0, my0, mx1, my1 = cx + 32, cy - 26, cx + 44, cy - 14
-    draw.ellipse((mx0, my0, mx1, my1), fill="#fde68a", outline="#fbbf24", width=2)
-    return ((mx0 + mx1) // 2, (my0 + my1) // 2)
+def map_anchor(src: dict, fit: dict) -> dict[str, float]:
+    sw, sh = fit["src_size"]
+    bx0, by0, bx1, by1 = fit["bbox"]
+    bw, bh = bx1 - bx0, by1 - by0
+    # 全圖 0–1 → 裁切後像素
+    px = bx0 + src["x"] * sw
+    py = by0 + src["y"] * sh
+    # → 縮放後 canvas
+    cx = fit["offset"][0] + (px - bx0) * fit["scale"]
+    cy = fit["offset"][1] + (py - by0) * fit["scale"]
+    return {"x": round(cx / SIZE, 3), "y": round(cy / SIZE, 3)}
 
 
 def main() -> None:
-    im = Image.open(SRC).convert("RGBA")
-    w, h = im.size
-    # Astronaut sits centre-right on poster; include both arms, drop 士 / title glyphs
-    crop = im.crop((int(w * 0.42), int(h * 0.05), int(w * 0.92), int(h * 0.95)))
-    crop = ImageOps.mirror(crop)
-
-    cw, ch = crop.size
-    side = max(cw, ch)
-    canvas = Image.new("RGBA", (side, side), (0, 0, 0, 0))
-    ox = (side - cw) // 2
-    oy = (side - ch) // 2
-    canvas.paste(crop, (ox, oy))
-    canvas = canvas.resize((SIZE, SIZE), Image.Resampling.LANCZOS)
-
-    blaster_cx = int(SIZE * BLASTER_CX_RATIO)
-    blaster_cy = int(SIZE * BLASTER_CY_RATIO)
-    draw = ImageDraw.Draw(canvas)
-    muzzle = draw_blaster(draw, blaster_cx, blaster_cy)
-
-    anchor = {"x": round(muzzle[0] / SIZE, 2), "y": round(muzzle[1] / SIZE, 2)}
+    im = Image.open(SRC)
+    canvas, fit = square_fit(im, SIZE)
+    anchor = map_anchor(FIST_ANCHOR_SRC, fit)
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     canvas.save(OUT, optimize=True)
+    META.write_text(
+        json.dumps(
+            {
+                "source": str(SRC.relative_to(ROOT)),
+                "fist_anchor_src": FIST_ANCHOR_SRC,
+                "muzzle_anchor": anchor,
+                "size": SIZE,
+            },
+            indent=2,
+            ensure_ascii=False,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
     print(f"Wrote {OUT} ({SIZE}x{SIZE})")
     print(f"MUZZLE_ANCHOR = {anchor}")
 
