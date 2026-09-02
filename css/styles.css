@@ -1,5 +1,29 @@
 /* 卡卡學習 — 太空戰士學院主題 */
 
+@font-face {
+  font-family: "Noto Sans HK";
+  src: url("../assets/fonts/noto-sans-hk-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans HK";
+  src: url("../assets/fonts/noto-sans-hk-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fredoka";
+  src: url("../assets/fonts/fredoka.woff2") format("woff2");
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --space-deep: #1a1040;
   --space-navy: #2d1b69;
@@ -17,8 +41,8 @@
   --shadow: 0 14px 32px rgba(26, 16, 64, 0.32);
   --radius: 28px;
   --tap-min: 72px;
-  --font-display: "Fredoka", "Noto Sans TC", sans-serif;
-  --font-body: "Noto Sans TC", "Fredoka", sans-serif;
+  --font-display: "Fredoka", "Noto Sans HK", "PingFang HK", system-ui, sans-serif;
+  --font-body: "Noto Sans HK", "PingFang HK", "Fredoka", system-ui, sans-serif;
 }
 
 *,
@@ -253,7 +277,8 @@ body::before {
 }
 
 .chinese-hero {
-  width: min(100%, 680px);
+  width: min(100%, 720px);
+  aspect-ratio: 978 / 514;
   margin: 0;
   border-radius: 24px;
   overflow: hidden;
@@ -261,13 +286,15 @@ body::before {
   background: transparent;
   box-shadow: var(--shadow);
   flex-shrink: 0;
+  line-height: 0;
 }
 
 .chinese-hero img {
   display: block;
   width: 100%;
-  height: auto;
-  vertical-align: middle;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .hero-visual {
@@ -1580,6 +1607,17 @@ a.btn {
   color: var(--teal-soft);
 }
 
+.parent-need-practice {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.parent-need-practice li {
+  margin-bottom: 4px;
+}
+
 .toggle-row,
 .stat-row {
   display: flex;
@@ -1702,7 +1740,7 @@ a.btn {
    ------------------------------------------------------------------
    點解：4 歲喺砌一砌拖字嗰陣，字池要係一眼見到、隻手夠得到。
    一有捲動，KAKA 就要一邊捲一邊拖，直接影響學習。
-   所以除咗「揀主題／揀書」（純瀏覽、唔涉拖曳）之外，全部畫面鎖死唔准捲，
+   所以除咗「主頁／揀主題／揀書」（純瀏覽、唔涉拖曳）之外，全部畫面鎖死唔准捲，
    內容改為跟住視窗高度縮放（min(..., Nvh)）。
    回歸測試：scripts/smoke-shots.py --check-overflow（CI 會跑）。
    ══════════════════════════════════════════════════════════════════ */
@@ -1731,13 +1769,20 @@ body {
   overflow: hidden;
 }
 
-/* 唯一准捲嘅兩頁：純揀嘢、冇拖曳 */
+/* 准捲：主頁／揀主題／揀書（純瀏覽、冇拖曳） */
+#screen-home.active,
 #screen-topics.active,
 #screen-books.active,
 #screen-phonics-topics.active {
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+}
+
+/* 主頁可捲：四粒入口掣超出一屏時可以向下捲 */
+#screen-home .hero-home {
+  flex: 0 0 auto;
+  justify-content: flex-start;
 }
 
 /* ── 插圖／字磚跟住視窗高度縮 ─────────────────────── */

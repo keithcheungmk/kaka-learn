@@ -24,7 +24,8 @@ const DEFAULT_STATE = {
   coinsToday: {}, // { listen: 1, match: 0, build: 1 } — 每種玩法一日最多 1
   coinsTotal: 0, // 歷來賺到嘅幣（換版時由 floor(totalStars/10) 承接）
   roundProgress: {}, // { "build|dinosaur|": ["baolong", …] } 未完成嘅輪次，中途走咗都留得低
-  economyVersion: 1,
+  wordStats: {}, // { [wordId]: { right, wrong, streak, lastRightDay } }
+  economyVersion: 2,
 };
 
 /** 每種玩法一日一個幣 */
@@ -76,6 +77,11 @@ function loadState() {
   }
   if (!state.coinsToday || typeof state.coinsToday !== 'object') state.coinsToday = {};
   if (!state.roundProgress || typeof state.roundProgress !== 'object') state.roundProgress = {};
+  if (!state.wordStats || typeof state.wordStats !== 'object') state.wordStats = {};
+  if ((parsed.economyVersion || 0) < 2) {
+    state.economyVersion = 2;
+    migrated = true;
+  }
   // 即刻寫返落去，唔好等下一次 save —— 否則呢段時間內攞多幾粒星會令換算數字浮動
   if (migrated) {
     try {
@@ -178,6 +184,50 @@ function clearRoundProgress(key) {
   return state;
 }
 
+/** 答啱／答錯都記低，俾出題加權同家長區統計用。 */
+function recordWordResult(wordId, correct) {
+  if (!wordId) return loadState();
+  const state = loadState();
+  const prev = state.wordStats[wordId] || { right: 0, wrong: 0, streak: 0, lastRightDay: null };
+  const next = { ...prev };
+  if (correct) {
+    next.right += 1;
+    next.streak += 1;
+    next.lastRightDay = todayKey();
+  } else {
+    next.wrong += 1;
+    next.streak = 0;
+  }
+  state.wordStats = { ...state.wordStats, [wordId]: next };
+  saveState(state);
+  return state;
+}
+
+function isWordMastered(stats) {
+  if (!stats) return false;
+  return (stats.streak || 0) >= 3 || (stats.right || 0) >= 3;
+}
+
+/** 家長區：識咗幾多個字 + 最需要練嘅頭 10 個。 */
+function summarizeMastery(wordIds) {
+  const stats = loadState().wordStats || {};
+  let mastered = 0;
+  const ranked = [];
+  wordIds.forEach((id) => {
+    const s = stats[id];
+    if (isWordMastered(s)) mastered += 1;
+    ranked.push({
+      id,
+      wrong: s ? s.wrong || 0 : 0,
+      streak: s ? s.streak || 0 : 0,
+      score: (s ? s.wrong || 0 : 0) * 3 - (s ? s.streak || 0 : 0),
+    });
+  });
+  ranked.sort((a, b) => b.score - a.score || a.streak - b.streak);
+  const needPractice = ranked.filter((r) => r.wrong > 0).slice(0, 10);
+  return { mastered, needPractice };
+}
+
 function resetStars() {
   return updateState({
     totalStars: 0,
@@ -187,6 +237,7 @@ function resetStars() {
     coinsTotal: 0,
     coinsDate: todayKey(),
     roundProgress: {},
+    wordStats: {},
   });
 }
 
@@ -206,4 +257,7 @@ window.KakaStorage = {
   loadRoundProgress,
   saveRoundProgress,
   clearRoundProgress,
+  recordWordResult,
+  isWordMastered,
+  summarizeMastery,
 };
