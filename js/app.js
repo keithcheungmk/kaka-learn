@@ -22,6 +22,8 @@ const {
   loadRoundProgress,
   saveRoundProgress,
   clearRoundProgress,
+  recordWordResult,
+  summarizeMastery,
   loadState,
   updateState,
   tryEarnStar,
@@ -44,6 +46,12 @@ const {
   playCoinHintCue,
   estimateSpeakMs,
 } = window.KakaSpeech;
+
+function wordSpeakText(word) {
+  if (!word) return '';
+  if (typeof word === 'string') return word;
+  return word.say || word.term;
+}
 
 /** @type {ReturnType<typeof loadState>} */
 let state = loadState();
@@ -210,7 +218,10 @@ function bindPlayFinish() {
 
 /** 答啱先記 unique 字；答錯唔計、唔清零。回傳係咪已經完一輪。 */
 function notePlayCorrect(wordId) {
-  if (wordId) playWonIds.add(wordId);
+  if (wordId) {
+    playWonIds.add(wordId);
+    recordWordResult(wordId, true);
+  }
   refreshPlayRoundUI();
   const leftover = enabledWords().filter((w) => !playWonIds.has(w.id));
   const done = playWonIds.size >= playRoundTarget() || leftover.length === 0;
@@ -325,14 +336,14 @@ function bindLearn() {
     pairLeft.onclick = () => {
       if (!learnPairMode || !learnPairs[learnIndex]) return;
       state = loadState();
-      speakTerm(learnPairs[learnIndex].left.term, { muted: state.muted });
+      speakTerm(wordSpeakText(learnPairs[learnIndex].left), { muted: state.muted });
     };
   }
   if (pairRight) {
     pairRight.onclick = () => {
       if (!learnPairMode || !learnPairs[learnIndex]) return;
       state = loadState();
-      speakTerm(learnPairs[learnIndex].right.term, { muted: state.muted });
+      speakTerm(wordSpeakText(learnPairs[learnIndex].right), { muted: loadState().muted });
     };
   }
   const prev = $('#btn-learn-prev');
@@ -619,14 +630,14 @@ function speakCurrentLearn(isAuto = false) {
     const pair = learnPairs[learnIndex];
     if (!pair) return;
     // 自動先讀左邊（大／多…），再讀右邊相反詞（speakThen 有時長後備）
-    speakThen(pair.left.term, { muted: state.muted }, () => {
-      speakTerm(pair.right.term, { muted: loadState().muted });
+    speakThen(wordSpeakText(pair.left), { muted: state.muted }, () => {
+      speakTerm(wordSpeakText(pair.right), { muted: loadState().muted });
     });
     return;
   }
   const word = learnWords[learnIndex];
   if (!word) return;
-  speakTerm(word.term, { muted: state.muted });
+  speakTerm(wordSpeakText(word), { muted: state.muted });
 }
 
 function stepLearn(delta) {
@@ -701,19 +712,27 @@ function enabledWords() {
   return list;
 }
 
-/** 抽題：優先未答啱過嘅字，鹿類可加權 */
+/** 抽題：優先未答啱過嘅字；掌握度加權；鹿類可加權 */
+function masteryWeight(wordId) {
+  const stats = (loadState().wordStats || {})[wordId];
+  const streak = stats ? stats.streak || 0 : 0;
+  if (streak <= 0) return 8;
+  if (streak === 1) return 4;
+  if (streak === 2) return 2;
+  return 1;
+}
+
 function pickTarget(pool) {
   let source = pool;
   const leftover = pool.filter((w) => !playWonIds.has(w.id));
   if (leftover.length) source = leftover;
   state = loadState();
-  if (!state.deerFocus) {
-    return source[Math.floor(Math.random() * source.length)];
-  }
   const weighted = [];
   source.forEach((w) => {
-    const weight = w.isDeer || DEER_IDS.includes(w.id) ? 2 : 1;
-    for (let i = 0; i < weight; i += 1) weighted.push(w);
+    let weight = masteryWeight(w.id);
+    if (state.deerFocus && (w.isDeer || DEER_IDS.includes(w.id))) weight *= 2;
+    const copies = Math.max(1, Math.round(weight));
+    for (let i = 0; i < copies; i += 1) weighted.push(w);
   });
   return weighted[Math.floor(Math.random() * weighted.length)];
 }
@@ -761,7 +780,7 @@ function bindListen() {
     speak.onclick = () => {
       if (!listenRound) return;
       const spoken = listenRound.prompt || listenRound.target;
-      speakTerm(spoken.term, { muted: loadState().muted });
+      speakTerm(wordSpeakText(spoken), { muted: loadState().muted });
     };
   }
   const back = $('#btn-back-listen');
@@ -822,7 +841,7 @@ function startListenRound() {
 
   refreshStarUI();
   const spoken = round.prompt || round.target;
-  setTimeout(() => speakTerm(spoken.term, { muted: loadState().muted }), 280);
+  setTimeout(() => speakTerm(wordSpeakText(spoken), { muted: loadState().muted }), 280);
 }
 
 function flipListenCard(btn, stay) {
@@ -838,8 +857,8 @@ function onListenPick(id, btn) {
   if (btn.classList.contains('is-flipped')) return;
   state = loadState();
   const correct = id === listenRound.target.id;
-  const answerTerm = listenRound.target.term;
-  const promptTerm = (listenRound.prompt || listenRound.target).term;
+  const answerTerm = wordSpeakText(listenRound.target);
+  const promptTerm = wordSpeakText(listenRound.prompt || listenRound.target);
 
   if (correct) {
     busy = true;
@@ -861,6 +880,7 @@ function onListenPick(id, btn) {
       afterPlayCorrect((listenRound.prompt || listenRound.target).id, () => startListenRound(), nextMs);
     }
   } else {
+    recordWordResult(id, false);
     // 錯咗都翻一吓睇圖，跟住翻返去——唔好長期露圖，避免靠淘汰答
     flipListenCard(btn, false);
     btn.classList.add('wrong');
@@ -939,15 +959,15 @@ function startMatchRound() {
   });
 
   refreshStarUI();
-  autoSpeak((round.prompt || round.target)?.term);
+  autoSpeak(wordSpeakText(round.prompt || round.target));
 }
 
 function onMatchPick(id, btn) {
   if (busy || !matchRound) return;
   state = loadState();
   const correct = id === matchRound.target.id;
-  const answerTerm = matchRound.target.term;
-  const promptTerm = (matchRound.prompt || matchRound.target).term;
+  const answerTerm = wordSpeakText(matchRound.target);
+  const promptTerm = wordSpeakText(matchRound.prompt || matchRound.target);
 
   if (correct) {
     busy = true;
@@ -965,6 +985,7 @@ function onMatchPick(id, btn) {
     const nextMs = estimateSpeakMs(`${answerTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
     afterPlayCorrect((matchRound.prompt || matchRound.target).id, () => startMatchRound(), nextMs);
   } else {
+    recordWordResult(id, false);
     btn.classList.add('wrong');
     playTryAgainCue({ muted: state.muted });
     const fb = $('#match-feedback');
@@ -1010,7 +1031,7 @@ function bindBuild() {
     speak.onclick = () => {
       if (!buildRound) return;
       state = loadState();
-      speakTerm(buildRound.target.term, { muted: state.muted });
+      speakTerm(wordSpeakText(buildRound.target), { muted: state.muted });
     };
   }
 }
@@ -1047,7 +1068,7 @@ function startBuildRound() {
   renderBuildSlots();
   renderBuildPool();
   refreshStarUI();
-  autoSpeak(target?.term);
+  autoSpeak(wordSpeakText(target));
 }
 
 function nextBuildIndex() {
@@ -1171,6 +1192,7 @@ function tryPlaceBuildChar(tileKey, slotIndex) {
 
   const expected = buildRound.chars[slotIndex];
   if (tile.char !== expected) {
+    recordWordResult(buildRound.target.id, false);
     slotEl?.classList.add('is-wrong');
     setTimeout(() => slotEl?.classList.remove('is-wrong'), 450);
     playTryAgainCue({ muted: state.muted });
@@ -1212,10 +1234,10 @@ function finishBuildSuccess() {
   // 手指手勢入面喚醒 Web Audio，之後叮聲先唔會被 iPad 靜音
   warmAudio();
   const term = buildRound.target.term;
+  const termText = wordSpeakText(buildRound.target);
   const chars = termChars(term);
   const lastChar = chars[chars.length - 1] || '';
-  // 多於一字：最後一格讀「個字。成個詞。鼓勵」一次過，避免 iPad 第二次 speak 冇聲
-  const spoken = chars.length > 1 ? `${lastChar}。${term}` : term;
+  const spoken = chars.length > 1 ? `${lastChar}。${termText}` : termText;
   const fb = $('#build-feedback');
   const praise = speakWordThenEncourage(spoken, { muted: state.muted });
   if (fb) {
@@ -1707,6 +1729,30 @@ function renderParentPanel() {
   $('#parent-stars-today').textContent = `${coinsTodayCount()} / 3 個幣（每種玩法一個）`;
   $('#parent-total-stars').textContent = String(state.totalStars);
   $('#parent-coins').textContent = String(coins);
+  const enabledIds = state.enabledWordIds && state.enabledWordIds.length
+    ? state.enabledWordIds
+    : WORDS.map((w) => w.id);
+  const mastery = summarizeMastery(enabledIds);
+  const masteredEl = $('#parent-mastered-count');
+  if (masteredEl) masteredEl.textContent = String(mastery.mastered);
+  const needEl = $('#parent-need-practice');
+  if (needEl) {
+    needEl.innerHTML = '';
+    if (!mastery.needPractice.length) {
+      const li = document.createElement('li');
+      li.textContent = '暫時冇特別需要練嘅字';
+      needEl.appendChild(li);
+    } else {
+      mastery.needPractice.forEach((item) => {
+        const word = getWordById(item.id);
+        const li = document.createElement('li');
+        li.textContent = word
+          ? `${word.term}（錯 ${item.wrong} 次）`
+          : item.id;
+        needEl.appendChild(li);
+      });
+    }
+  }
   $('#toggle-mute').checked = !!state.muted;
   $('#toggle-deer').checked = state.deerFocus !== false;
   const autoSpeakBox = $('#toggle-autospeak');
