@@ -2200,29 +2200,30 @@ body {
   font-weight: 700;
 }
 
-/* 飛去進度條嗰粒星 */
+/* 飛去進度條嗰粒星（KAKA RANGER 人物設定圖嗰粒金星） */
 .fly-star {
   position: fixed;
   z-index: 60;
   pointer-events: none;
-  font-size: clamp(36px, 6.5vw, 56px);
+  width: clamp(36px, 6.5vw, 56px);
   line-height: 1;
-  color: #fde68a;
-  text-shadow:
-    0 0 8px #fff,
-    0 0 18px rgba(255, 255, 255, 0.95),
-    0 0 28px rgba(251, 191, 36, 1),
-    0 0 48px rgba(251, 191, 36, 0.85),
-    0 0 72px rgba(251, 191, 36, 0.55);
-  filter: drop-shadow(0 0 16px rgba(251, 191, 36, 0.9));
+  filter:
+    drop-shadow(0 0 6px #fff)
+    drop-shadow(0 0 14px rgba(251, 191, 36, 1))
+    drop-shadow(0 0 26px rgba(251, 191, 36, 0.75));
   will-change: transform, opacity;
 }
 
+.fly-star img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .fly-star-trail {
-  font-size: clamp(22px, 4vw, 34px);
-  color: rgba(253, 230, 138, 0.75);
-  text-shadow: 0 0 20px rgba(251, 191, 36, 0.65);
-  filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.5));
+  width: clamp(22px, 4vw, 34px);
+  opacity: 0.75;
+  filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.6));
   z-index: 59;
 }
 
@@ -2290,6 +2291,37 @@ body {
   0% { opacity: 0; transform: rotate(-32deg) scaleX(0.2); }
   35% { opacity: 1; transform: rotate(-32deg) scaleX(1); }
   100% { opacity: 0; transform: rotate(-32deg) scaleX(1.15); }
+}
+
+/* 答啱一刻：ranger 頭頂爆幾粒細星,等佢睇落更興奮（用返飛星嗰粒圖,免加新素材） */
+.space-ranger-sparkle {
+  position: absolute;
+  top: 12%;
+  left: 46%;
+  width: 22%;
+  aspect-ratio: 65 / 43;
+  background: url('../assets/kaka-ranger-star.png') center / contain no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.9));
+}
+
+.space-ranger-shoot .space-ranger-sparkle.s1 { animation: rangerSparkle 0.55s ease-out; }
+.space-ranger-shoot .space-ranger-sparkle.s2 { animation: rangerSparkle 0.55s ease-out 0.05s; }
+.space-ranger-shoot .space-ranger-sparkle.s3 { animation: rangerSparkle 0.55s ease-out 0.1s; }
+
+.space-ranger-sparkle.s1 { --sx: -34px; --sy: -20px; }
+.space-ranger-sparkle.s2 { --sx: 6px; --sy: -32px; }
+.space-ranger-sparkle.s3 { --sx: 30px; --sy: -8px; }
+
+@keyframes rangerSparkle {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.4) rotate(0deg); }
+  30% { opacity: 1; transform: translate(calc(var(--sx) * 0.4), calc(var(--sy) * 0.4)) scale(1.1) rotate(50deg); }
+  100% { opacity: 0; transform: translate(var(--sx), var(--sy)) scale(0.7) rotate(110deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space-ranger-sparkle { display: none; }
 }
 
 .star-target-hit {

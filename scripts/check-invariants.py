@@ -72,6 +72,10 @@ def check_no_build_step() -> None:
             fail("no-build", f"出現咗 {bad}；AGENTS.md 要求保持無 build step 嘅純靜態站")
     allowed = {
         "https://yiu0527.github.io",  # 禧禧小遊戲樂園（主頁外部連結）
+        "https://keithcheungmk.github.io",  # 自己個 GitHub Pages 域名，用喺 og:image/twitter:image
+        # 呢個唔係外部依賴：冇任何 JS 會喺 runtime fetch 呢個 host，
+        # 純粹俾分享連結嗰陣（Messages/WhatsApp/Line 等）嘅爬蟲讀 meta tag 用，
+        # 靜態頁面本身完全唔會叫呢個 URL。
     }
     sources = ["index.html"] + JS_FILES + sorted(str(p) for p in Path("css").glob("*.css"))
     hosts = set()

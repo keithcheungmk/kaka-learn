@@ -159,11 +159,43 @@
     "format": "JPEG",
     "alpha": false
   },
+  "assets/icons/icon-16.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-180.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-192.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-32.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-48.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-512.png": {
+    "format": "PNG",
+    "alpha": true
+  },
   "assets/kaka-ranger-celebrate.png": {
     "format": "PNG",
     "alpha": true
   },
+  "assets/kaka-ranger-logo.png": {
+    "format": "PNG",
+    "alpha": true
+  },
   "assets/kaka-ranger-solo.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/kaka-ranger-star.png": {
     "format": "PNG",
     "alpha": true
   },
@@ -204,6 +236,10 @@
     "alpha": false
   },
   "assets/math/planets/venus.png": {
+    "format": "PNG",
+    "alpha": false
+  },
+  "assets/og-image.png": {
     "format": "PNG",
     "alpha": false
   },

@@ -39,7 +39,10 @@
     globalRanger.className = 'space-ranger';
     globalRanger.setAttribute('aria-hidden', 'true');
     globalRanger.innerHTML =
-      '<img src="./assets/space-ranger-shooter.png" alt="" width="144" height="144" decoding="async" />';
+      '<img src="./assets/space-ranger-shooter.png" alt="" width="144" height="144" decoding="async" />' +
+      '<span class="space-ranger-sparkle s1"></span>' +
+      '<span class="space-ranger-sparkle s2"></span>' +
+      '<span class="space-ranger-sparkle s3"></span>';
     document.body.appendChild(globalRanger);
     return globalRanger;
   }
@@ -139,9 +142,11 @@
     const keyframes = buildFlyKeyframes(dx, dy);
     const easing = 'cubic-bezier(.22,.75,.28,1)';
 
+    const starImg = '<img src="./assets/kaka-ranger-star.png" alt="" decoding="async" />';
+
     const star = document.createElement('div');
     star.className = 'fly-star';
-    star.textContent = '★';
+    star.innerHTML = starImg;
     star.setAttribute('aria-hidden', 'true');
     star.style.left = `${originX}px`;
     star.style.top = `${originY}px`;
@@ -149,7 +154,7 @@
 
     const trail = document.createElement('div');
     trail.className = 'fly-star fly-star-trail';
-    trail.textContent = '★';
+    trail.innerHTML = starImg;
     trail.setAttribute('aria-hidden', 'true');
     trail.style.left = `${originX}px`;
     trail.style.top = `${originY}px`;
