@@ -15,8 +15,9 @@
 ## 而家嘅狀態（2026-09-02）
 
 - `origin/main` 已含：P0 三項（字形／掌握度／讀音，PR #82）、KAKA RANGER 飛星接入（PR #83，
-  握拳發射，方案 b）、Claude 加嘅「完成一輪」慶祝 pose、**依家呢次**：favicon／app icon／
-  分享預覽圖（og:image）、飛星改用真星圖、答啱一刻加頭頂 sparkle（見下面「最近改動」）。
+  握拳發射，方案 b）、Claude 加嘅「完成一輪」慶祝 pose、favicon／app icon／分享預覽圖、
+  飛星改用真星圖 + 頭頂 sparkle、**依家呢次**：答啱一題 ranger 會隨機換 4 款動作 pose
+  （見下面「最近改動」）。
 
 ## 分工（點解要分：唔想兩邊改同一段 code）
 
@@ -40,13 +41,64 @@
   delegate 去 `window.KakaStarFx.flyStarFromRanger`（Cursor 嘅），呢個 delegation
   就係兩邊嘅介面：**唔好其中一邊刪咗個 fallback**。
 - `js/star-fx.js` — Cursor 擁有。Claude 通常只經 `window.KakaStarFx` 呼叫，唔改入面；
-  **2026-09-02 下午有一次例外**（Keith 直接叫 Claude 做，唔係 Claude 自把自為）：
-  加咗 3 個 sparkle span + 飛星圖由文字改 `<img>`，範圍好窄，`MUZZLE_ANCHOR`／握拳發射
-  邏輯冇郁，詳情見上面「最近改動」嗰段。Cursor 改呢個檔之前對一對 git log。
+  **2026-09-02 有兩次例外**（都係 Keith 直接叫 Claude 做，唔係 Claude 自把自為）：
+  （1）下午：加咗 3 個 sparkle span + 飛星圖由文字改 `<img>`，`MUZZLE_ANCHOR`／握拳
+  發射邏輯冇郁；（2）夜晚：答啱一題 ranger 會隨機換 4 款 pose，**呢次 `MUZZLE_ANCHOR`
+  改咗**（由精準對住握拳，簡化做身中心固定點 `{x:0.5, y:0.52}`——因為 pose 會變，
+  握拳唔一定喺度），`scripts/crop-ranger-shooter.py`／`kaka-ranger-solo.png` 嘅
+  預設 shooter 圖冇郁。詳情見上面「最近改動」。Cursor 改呢個檔之前對一對 git log，
+  留意 `MUZZLE_ANCHOR` 已經唔再係「握拳精準座標」呢個假設。
 - `assets/image-formats.lock.json` — 換圖之後要 `python3 scripts/check-invariants.py --update-image-lock`，
   唔係 CI 會紅。
 
 ## 最近改動
+
+### 2026-09-02（夜晚）· Claude · 答啱一題 ranger 隨機換 pose
+
+**背景**：Keith 睇完下晝嗰次 sparkle 效果，貼咗張圖出嚟指住 reference sheet 嗰 4 個
+「握拳噴火／指嘢／揸手指公眨眼／招手」動作 pose（呢 4 張同 7 個裸頭表情唔同，**全部有
+戴頭盔**），問可唔可以答啱一題就換一張出嚟，仲要保留飛星效果。**明確要求「討論先，未
+落手」**，傾清楚幾個技術決定先做（見下面），唔係即刻改。
+
+**同 Keith 對齊咗嘅決定**：
+1. 發射點簡化——唔再逐張 pose 校準拳頭位，改做身中心固定點（見上面「撞車高危檔案」）。
+2. 揸手指公嗰張（同 `kaka-ranger-celebrate.png` 完成一輪嗰張係同一個 pose）都照樣攞嚟
+   一齊輪換，即係一輪入面有機會見到兩次（答啱一題見一次、完成一輪又見一次）。Keith 揀
+   咗接受呢個重複。
+3. 隨機揀，唔係固定順序輪。
+4. Claude 今次直接做（同下畫嗰次一樣係例外，唔係常規分工）。
+
+**做法**：
+- 由 `docs/design/kaka-ranger-reference-sheet.png` 裁咗 3 張新 pose（握拳噴火／指嘢／
+  招手），加埋已有嘅 `kaka-ranger-celebrate.png`（揸手指公），四張都 resize/置中做成
+  同 `space-ranger-shooter.png` 一致嘅 192×192 畫布、差唔多嘅角色填滿比例，先唔會轉
+  pose 嗰陣睇落忽大忽細：
+  - `assets/space-ranger-pose-fistpump.png`（16KB）
+  - `assets/space-ranger-pose-point.png`（16KB）
+  - `assets/space-ranger-pose-wave.png`（17KB）
+  - `assets/space-ranger-pose-thumbsup.png`（14KB，同 `kaka-ranger-celebrate.png` 同源
+    但獨立一份、獨立畫布比例，`kaka-ranger-celebrate.png` 本身冇郁，`play-finish` 彈窗
+    唔受影響）
+  - 幾張都有少少鄰接 sprite bleed 殘留（一小撮火花／殘影），裁到依家嘅程度已經花咗
+    幾輪嘗試，睇落唔顯眼，冇再摳落去。
+- `js/star-fx.js`：`getGlobalRanger()` 個 `<img>` 加 `class="space-ranger-img"`
+  俾 JS 揸到嚟換 `src`；新增 `SHOOT_POSES` 陣列 + `flashRandomPose()`——答啱一刻隨機揀
+  一張换上去，`POSE_SWAP_MS`（550ms，同 `rangerShoot` 反彈動畫嗰 0.55s 對齊）之後自動
+  換返 `DEFAULT_POSE`（即係而家嘅 `space-ranger-shooter.png`）。`hideRanger()` 加咗
+  清 timer + 強制歸位，避免轉緊畫面嗰陣 pose 卡住唔變返。
+- `MUZZLE_ANCHOR` 由 `{x:0.279,y:0.678}`（握拳精準座標）改做 `{x:0.5,y:0.52}`
+  （身中心固定點）；`css/styles.css` 嘅 `.space-ranger-laser-flash::after` 位置同步
+  由 `27.9%/67.8%` 改做 `50%/52%`。飛星軌跡、sparkle 位置冇郁（sparkle 本來就係
+  「頭頂附近」，唔靠拳頭座標，換 pose 都合用）。
+- `prefers-reduced-motion`：pose 換圖同飛星、閃光一齊喺 `flyStar()` 開頭 return，
+  已經有保護，冇加多一重判斷。
+
+**驗過**：`check-invariants.py`（含 `--update-image-lock`）綠、`smoke-shots.py --no-shots`
+7 種尺寸 pass、Playwright 連續觸發 6 次答啱，`.space-ranger-img` 嘅 `src` 有隨機換到
+4 款、冇 console error、人手 screenshot 逐張 pose 睇過冇明顯走位。
+
+**呢次冇做**：7 個裸頭表情（同 2026-09-02 下畫嗰段講嘅一樣）仍然冇用——冇戴頭盔，同
+成套「有頭盔」嘅視覺唔啱。
 
 ### 2026-09-02（下午）· Claude · Logo/favicon/分享圖 + 飛星改真圖 + 答啱 sparkle
 
@@ -197,7 +249,8 @@ Claude 做咗一次完整審查，結果喺 **`docs/site-review-2026-09.md`** �
 | 怪獸 phase 2：每個主題一隻、原創畫、家長開關 | **等 KAKA 試玩結果** | Claude |
 | ~~太空戰士造型同 Buzz Lightyear 似唔似~~ | ✅ 已決定接受（2026-09-02，見 AGENTS.md） | — |
 | 每日 3 個幣（真錢）會唔會太鬆手 | **等 Keith 決定** | Keith |
-| ~~答啱每一題要唔要換 ranger 反應~~ | ✅ 已做 sparkle 版（2026-09-02）；真係換表情圖要新畫（現有 sheet 表情冇戴頭盔） | 新畫要 Keith／畫圖果邊 |
+| ~~答啱每一題要唔要換 ranger 反應~~ | ✅ 已做：頭頂 sparkle（下畫）+ 隨機換 4 款動作 pose（夜晚），兩次都 2026-09-02 | — |
+| 純面部表情（開心／眨眼等 7 款）想真係用得到，要新畫一版有戴頭盔嘅版本 | idea，未開工 | 新畫要 Keith／畫圖果邊 |
 | KAKA RANGER logo 擺喺主頁 `.brand-mark`（同而家 CSS 畫嘅 `.brand-orbit` 二揀一） | 未開工，今次冇做（範圍係 favicon／og-image） | Claude |
 
 ## 開工前／收工 checklist

@@ -2274,8 +2274,10 @@ body {
 .space-ranger-laser-flash::after {
   content: "";
   position: absolute;
-  left: calc(27.9% - 8px);
-  top: calc(67.8% - 8px);
+  /* 身中心固定點（同 js/star-fx.js 嘅 MUZZLE_ANCHOR 對齊，2026-09-02 簡化，
+     唔再逐張 pose 校準拳頭位） */
+  left: calc(50% - 8px);
+  top: calc(52% - 8px);
   width: clamp(28px, 6vw, 44px);
   height: 6px;
   border-radius: 999px;

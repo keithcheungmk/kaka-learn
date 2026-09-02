@@ -251,6 +251,22 @@
     "format": "JPEG",
     "alpha": false
   },
+  "assets/space-ranger-pose-fistpump.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/space-ranger-pose-point.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/space-ranger-pose-thumbsup.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/space-ranger-pose-wave.png": {
+    "format": "PNG",
+    "alpha": true
+  },
   "assets/space-ranger-shooter.png": {
     "format": "PNG",
     "alpha": true
