@@ -159,6 +159,10 @@
     "format": "JPEG",
     "alpha": false
   },
+  "assets/kaka-ranger-celebrate.png": {
+    "format": "PNG",
+    "alpha": true
+  },
   "assets/kaka-ranger-solo.png": {
     "format": "PNG",
     "alpha": true

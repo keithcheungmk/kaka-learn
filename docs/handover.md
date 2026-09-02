@@ -14,8 +14,8 @@
 
 ## 而家嘅狀態（2026-09-02）
 
-- `origin/main` = `b41e48f`（KAKA RANGER 新素材入 repo + P1-6 決定寫入 AGENTS.md）
-- 玩法頁 ranger／飛星：`cursor/kaka-ranger-star-fx-af8d`（待 merge）
+- `origin/main` 已含：P0 三項（字形／掌握度／讀音，PR #82）、KAKA RANGER 飛星接入（PR #83，
+  握拳發射，方案 b）、依家呢次 Claude 加嘅「完成一輪」慶祝 pose（見下面「最近改動」）。
 
 ## 分工（點解要分：唔想兩邊改同一段 code）
 
@@ -43,6 +43,35 @@
   唔係 CI 會紅。
 
 ## 最近改動
+
+### 2026-09-02 · Claude · 完成一輪慶祝畫面換 KAKA RANGER pose
+
+- `play-finish`（認字／字母隊／數理答完一輪嗰個彈窗）個「★」大字換成
+  `assets/kaka-ranger-celebrate.png`（由 reference sheet 裁「握拳比讚＋眨眼＋小星星」
+  嗰個 pose，235×305、真透明底、29KB）。CSS 只加咗 `.play-finish-star img` 嘅
+  sizing，原本嘅 `playFinishPop` 彈出動畫、reduced-motion 保護全部冇改。
+- **同怪獸打贏動畫嘅時序**：兩樣嘢一齊由 `showPlayFinish()` 觸發（`refreshStarUI()`
+  畫怪獸 `.is-defeated` 喺前，彈窗喺後），本身已經同步，冇加任何額外 glue code。
+  右上角幣格會被彈窗嘅深色遮罩蒙住（設計上刻意——怪獸唔應該搶主角），
+  中間彈窗嘅 KAKA RANGER 先係主慶祝畫面。
+- `js/app.js` 完全冇郁，只改咗 `index.html`（play-finish 個 `<img>`）同
+  `css/styles.css`（`.play-finish-star`）。呢個喺 Claude 擁有嘅「獎勵條／幣／怪獸」
+  範圍入面，冇撞 Cursor 嘅 `star-fx.js`。
+- iPad 5 種尺寸、iPhone 2 種尺寸都人手開彈窗核對過冇 overflow（`smoke-shots.py`
+  嘅自動 walk 冇經過呢個彈窗，因為要答完成輪先觸發，暫時淨係人手驗）。
+
+**留低一個 idea 俾 Cursor 諗（唔係一定要做）**：答啱**每一題**（唔止完成一輪）嗰下，
+要唔要連 ranger 個樣都閃一閃反應？Reference sheet 有 7 個獨立面部表情（開心／大笑／
+眨眼／驚訝／認真／側面／後腦），可以裁一個「開心」出嚟，同而家嘅 `.space-ranger-shoot`
+反彈 + `.space-ranger-laser-flash` 閃光同時觸發，答完自動變返握拳中性樣。
+
+⚠️ 呢個要諗清楚先做，因為呢個係全站審查一直強調嘅原則：**呢個係識字 app，
+唔可以分薄注意力去個角色度**。完成一輪先出現一次，同答啱一題就出現（一輪 8–10 次），
+係完全唔同數量級嘅刺激頻率。建議 Cursor 落手前，先喺瀏覽器度切個假面部表情試睇下：
+（a）喺 `.space-ranger` 而家嘅細尺寸（96–144px）表情變化實際上睇唔睇得出；
+（b）0.3–0.4 秒嘅閃現會唔會同飛星動畫打交、搶走個「字」嘅注意力。如果兩樣都好，
+先值得裁圖落手；如果表情細到睇唔出，就唔使做，慳返嗰啲工程時間。
+呢個屬於「太空戰士造型、槍口射星動畫」範圍，係 Cursor 話事。
 
 ### 2026-09-02 · Cursor · KAKA RANGER 飛星接入
 
@@ -78,15 +107,19 @@
 
 Keith 提供咗一套新角色美術，已入 repo，`check-invariants.py` 綠：
 - `assets/kaka-ranger-solo.png` —— 全身企定，真透明底，700px 寬，110KB
-- `docs/design/kaka-ranger-reference-sheet.png` —— 多角度／表情／動作參考 sheet（未裁，唔係網頁用圖）
+- `docs/design/kaka-ranger-reference-sheet.png` —— 多角度／表情／動作參考 sheet（未全部裁，
+  唔係網頁用圖；已經裁咗兩個出嚟用：下面「已用」）
+- `assets/kaka-ranger-celebrate.png` —— 由 sheet 裁嘅「握拳比讚＋眨眼」慶祝 pose，
+  235×305、真透明底、29KB，用喺 `play-finish` 彈窗
 
 同 Buzz Lightyear 撞衫呢一點已經同 Keith 傾過，佢決定接受、照用（`AGENTS.md` 已註明呢個
 2026-09-02 決定，唔代表迪士尼／彼思禁令廢咗——將來新畫嘢仍然唔好特登臨摹）。
 
-**呢個係 Cursor 嘅嘢，Claude 未郁 `star-fx.js` / `crop-ranger-shooter.py`**：新 solo 素材冇
-「舉手揸槍」pose，`MUZZLE_ANCHOR`（`js/star-fx.js:10`）要重新度過，或者改機制用「握拳」pose
-發射。想換主頁 hero 就記得 `crop-ranger-shooter.py` 嘅裁圖比例要跟住調（兩個依家共用
-`chinese-hero.jpg` 做來源）。詳細技術筆記見 `docs/site-review-2026-09.md` 嘅 P1-6。
+**已用**：Cursor 用 `kaka-ranger-solo.png` 接咗玩法頁飛星（`space-ranger-shooter.png`，
+握拳發射，PR #83）；Claude 用裁出嚟嘅慶祝 pose 換咗完成一輪彈窗嘅「★」（見上面
+「最近改動」）。**未用**：sheet 入面仲有側面／背面／揮手／指嘢／7 個表情頭像／KAKA RANGER
+logo lockup 未裁，留返將來要用先裁（唔好一次過全部裁晒——冇實際用途嘅圖唔好塞入
+`assets/`，靠 `check_asset_weight` 嘅 400KB／12MB 上限）。
 
 ## 全站審查（2026-09-01）
 
@@ -106,8 +139,9 @@ Claude 做咗一次完整審查，結果喺 **`docs/site-review-2026-09.md`** �
 | 🫎 駝鹿 OpenMoji 淨係得對角，要換圖 | 未開工 | 任一邊 |
 | 已兌換記錄（唔記錄嘅話累積幣數唔誠實） | 未開工 | Claude |
 | 怪獸 phase 2：每個主題一隻、原創畫、家長開關 | **等 KAKA 試玩結果** | Claude |
-| 太空戰士造型同 Buzz Lightyear 似唔似（AGENTS.md 有迪士尼／彼思禁令） | **等 Keith 決定** | Keith |
+| ~~太空戰士造型同 Buzz Lightyear 似唔似~~ | ✅ 已決定接受（2026-09-02，見 AGENTS.md） | — |
 | 每日 3 個幣（真錢）會唔會太鬆手 | **等 Keith 決定** | Keith |
+| 答啱每一題要唔要換 ranger 面部表情（唔止完成一輪） | **idea，等 Cursor 諗**（見上面「最近改動」嗰段警告） | Cursor |
 
 ## 開工前／收工 checklist
 

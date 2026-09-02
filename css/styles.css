@@ -1471,10 +1471,16 @@ a.btn {
 }
 
 .play-finish-star {
-  font-size: clamp(3.2rem, 12vw, 4.6rem);
-  line-height: 1;
+  display: flex;
+  justify-content: center;
   filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.75));
   animation: playFinishPop 0.7s ease;
+}
+
+.play-finish-star img {
+  width: auto;
+  height: clamp(120px, 30vw, 190px);
+  display: block;
 }
 
 .play-finish-inner p {
