@@ -71,7 +71,7 @@ def check_no_build_step() -> None:
         if Path(bad).exists():
             fail("no-build", f"出現咗 {bad}；AGENTS.md 要求保持無 build step 嘅純靜態站")
     allowed = {
-        "https://yiu0527.github.io",  # 禧禧小遊戲樂園（主頁外部連結）
+        "https://yiu0527.github.io",  # 小遊戲樂園（主頁外部連結）
         "https://keithcheungmk.github.io",  # 自己個 GitHub Pages 域名，用喺 og:image/twitter:image
         # 呢個唔係外部依賴：冇任何 JS 會喺 runtime fetch 呢個 host，
         # 純粹俾分享連結嗰陣（Messages/WhatsApp/Line 等）嘅爬蟲讀 meta tag 用，
@@ -266,7 +266,7 @@ def check_emoji_disc() -> None:
 
 
 def check_voice_picker() -> None:
-    """粵語女聲優先 + 家長區揀聲要留低。
+    """粵語女聲優先要留低。家長區已撤，聲音改自動揀女聲。
 
     iPadOS 更新會改 speechSynthesis 嘅聲音次序，淨係攞「第一個 zh-HK」會突然變咗男聲。
     """
@@ -274,9 +274,7 @@ def check_voice_picker() -> None:
     if "FEMALE_VOICE_NAMES" not in speech:
         fail("voice", "js/speech.js 冇咗女聲優先名單（更新 iPadOS 之後會變返男聲）")
     if "setPreferredVoiceURI" not in speech:
-        fail("voice", "js/speech.js 冇咗 setPreferredVoiceURI（家長區揀聲會失效）")
-    if "voice-select" not in read("index.html"):
-        fail("voice", "index.html 家長區唔見聲音揀選（#voice-select）")
+        fail("voice", "js/speech.js 冇咗 setPreferredVoiceURI")
 
 
 def check_coin_chip() -> None:
@@ -319,7 +317,7 @@ def check_star_rules() -> None:
         fail("coins", "earnCoinForMode 冇咗『同一種玩法一日一個』嘅去重檢查")
     if not re.search(r"COIN_MODES\s*=\s*\['listen',\s*'match',\s*'build'\]", st):
         fail("coins", "COIN_MODES 應該係 listen／match／build 三種玩法")
-    if "economyVersion" not in st or "Math.floor((state.totalStars || 0) / 10)" not in st:
+    if "economyVersion" not in st or "Math.floor((" not in st or "/ 10)" not in st:
         fail("coins", "冇咗舊資料遷移（coinsTotal = floor(累積星星/10)）；KAKA 已賺嘅幣唔可以蒸發")
     if "saveRoundProgress" not in st or "clearRoundProgress" not in st:
         fail("coins", "storage.js 冇咗未完成輪次嘅儲存（中途走咗返嚟進度會冇晒）")
@@ -333,9 +331,43 @@ def check_star_rules() -> None:
         fail("coins", "js/app.js 冇咗答啱飛星動畫（KAKA 見唔到『我做啱 → 我近咗』）")
 
 
-def check_parent_pin() -> None:
-    if not re.search(r"pin:\s*'1234'", read("js/storage.js")):
-        fail("parent-pin", "家長 PIN 預設值唔再係 '1234'")
+def check_profiles() -> None:
+    """雙小朋友 Profile：主頁先揀卡卡／希希；資料按人隔離；家長 PIN 已撤。"""
+    html = read("index.html")
+    if 'id="screen-profiles"' not in html:
+        fail("profiles", "index.html 唔見 #screen-profiles（主頁要先揀小朋友）")
+    if 'id="btn-profile-kaka"' not in html or 'id="btn-profile-heihei"' not in html:
+        fail("profiles", "揀 Profile 要有 #btn-profile-kaka 同 #btn-profile-heihei")
+    if "卡卡" not in html or "希希" not in html:
+        fail("profiles", "Profile 卡要寫「卡卡」「希希」")
+    avatars = ["assets/profile-kaka.jpg", "assets/profile-heihei.jpg"]
+    for p in avatars:
+        if not Path(p).exists():
+            fail("profiles", f"唔見頭像 {p}")
+    if 'id="modal-pin"' in html or 'id="btn-parent"' in html:
+        fail("profiles", "家長 PIN／家長區入口應該掹走（改用換小朋友）")
+    if "禧禧小遊戲樂園" in html or "禧禧樂園" in html:
+        fail("profiles", "外鏈唔好叫「禧禧…」，避免同希希 Profile 撞名")
+    if "小遊戲樂園" not in html:
+        fail("profiles", "外鏈文案要改「小遊戲樂園」")
+    if 'id="screen-progress"' not in html:
+        fail("profiles", "唔見 #screen-progress（我的進度頁）")
+    st = strip_js_comments(read("js/storage.js"))
+    if "setActiveProfile" not in st or "SCHEMA_VERSION" not in st:
+        fail("profiles", "storage.js 要有 setActiveProfile／SCHEMA_VERSION（按人分倉）")
+    if "heihei" not in st or "kaka" not in st:
+        fail("profiles", "storage.js 要有 kaka／heihei 兩個 profile")
+    if "migrateLegacyToRoot" not in st:
+        fail("profiles", "storage.js 要遷移舊單一資料入卡卡")
+    math = strip_js_comments(read("js/math-storage.js"))
+    if "setActiveProfile" not in math:
+        fail("profiles", "math-storage.js 都要按 profile 分倉（數理進度唔好互串）")
+    smoke = read("scripts/smoke-shots.py")
+    if "btn-profile-kaka" not in smoke:
+        fail("profiles", "smoke-shots.py 要先撳 Profile 先入主頁三個入口")
+    app = strip_js_comments(read("js/app.js"))
+    if "openProfilePick" not in app or "openProgress" not in app:
+        fail("profiles", "app.js 要有換小朋友同進度頁")
 
 
 def check_ranger_mirror_dodge() -> None:
@@ -665,7 +697,7 @@ CHECKS = [
     check_coin_chip,
     check_build_ghost,
     check_star_rules,
-    check_parent_pin,
+    check_profiles,
     check_ranger_mirror_dodge,
     check_no_zoom,
     check_three_entries,

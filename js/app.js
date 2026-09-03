@@ -29,8 +29,15 @@ const {
   updateState,
   tryEarnStar,
   redeemableCoins,
-  resetStars,
   todayKey,
+  PROFILES,
+  PROFILE_IDS,
+  setActiveProfile,
+  getActiveProfile,
+  markTopicPassed,
+  isTopicPassed,
+  isKeyPassed,
+  coinHistory,
 } = window.KakaStorage;
 const {
   warmVoices,
@@ -56,7 +63,6 @@ function wordSpeakText(word) {
 
 /** @type {ReturnType<typeof loadState>} */
 let state = loadState();
-let pinBuffer = '';
 let listenRound = null;
 let matchRound = null;
 let buildRound = null;
@@ -102,9 +108,10 @@ function init() {
     bindMatch();
     bindBuild();
     bindPlayFinish();
-    bindParent();
+    bindProfiles();
     bindStarInfo();
     refreshStarUI();
+    refreshProfileChrome();
     closeAllModals();
   } catch (err) {
     console.error('KakaLearn init failed', err);
@@ -112,7 +119,7 @@ function init() {
 }
 
 function closeAllModals() {
-  ['#modal-pin', '#modal-parent', '#modal-stars'].forEach((sel) => {
+  ['#modal-stars'].forEach((sel) => {
     $(sel)?.classList.remove('open');
   });
   hidePlayFinish();
@@ -168,6 +175,7 @@ function showPlayFinish() {
   // 完成一輪 = 一個 AEON 幣；同一種玩法一日只派一次
   const coin = earnCoinForMode(playMode);
   state = coin.state;
+  markTopicPassed(activeTopicId, activeBook ? activeBook.id : null);
   refreshStarUI();
 
   const el = $('#play-finish');
@@ -310,6 +318,10 @@ function bindHome() {
       finishHidden: Boolean($('#learn-finish-row')?.hidden),
     }),
   });
+
+  $('#btn-home-progress')?.addEventListener('click', () => openProgress());
+  $('#btn-switch-profile')?.addEventListener('click', () => openProfilePick());
+  $('#home-profile-chip')?.addEventListener('click', () => openProgress());
 }
 
 function bindTopics() {
@@ -376,7 +388,9 @@ function showScreen(name) {
   hidePlayFinish();
   $$('.screen').forEach((el) => el.classList.remove('active'));
   const map = {
+    profiles: '#screen-profiles',
     home: '#screen-home',
+    progress: '#screen-progress',
     topics: '#screen-topics',
     books: '#screen-books',
     learn: '#screen-learn',
@@ -391,7 +405,10 @@ function showScreen(name) {
     refreshStarUI();
   } else {
     window.KakaStarFx?.hideRanger?.();
-    if (name === 'home' || name === 'topics' || name === 'play') refreshStarUI();
+    if (name === 'home' || name === 'topics' || name === 'play' || name === 'progress') {
+      refreshStarUI();
+      refreshProfileChrome();
+    }
   }
 }
 
@@ -424,6 +441,7 @@ function openBookPicker(topic) {
     allCard.innerHTML = `
       <span class="topic-cover" aria-hidden="true">🎲</span>
       <span class="topic-title">全部${topic.title}</span>
+      ${topicPassBadge(isKeyPassed(topic.id))}
       <span class="topic-blurb">晒成輯 ${topic.wordIds.length} 個字詞</span>
     `;
     allCard.onclick = () => {
@@ -438,6 +456,7 @@ function openBookPicker(topic) {
       btn.innerHTML = `
         <span class="topic-cover" aria-hidden="true">${cover(book.cover || '📖')}</span>
         <span class="topic-title">${book.title}</span>
+        ${topicPassBadge(isKeyPassed(topic.id, book.id))}
         <span class="topic-blurb">${book.wordIds.length} 個字詞</span>
       `;
       btn.onclick = () => openBook(book.id);
@@ -531,6 +550,12 @@ function topicProgressHtml(topic) {
   return `<span class="topic-progress" aria-label="識咗 ${mastered}／${ids.length}">${dots}<span class="topic-progress-n">${mastered}/${ids.length}</span></span>`;
 }
 
+function topicPassBadge(passed) {
+  return passed
+    ? '<span class="topic-pass is-yes">已過</span>'
+    : '<span class="topic-pass is-no">未過</span>';
+}
+
 function renderTopicCard(topic) {
   const btn = document.createElement('button');
   btn.type = 'button';
@@ -538,9 +563,11 @@ function renderTopicCard(topic) {
   if (topic.id === 'red_series' || topic.id === 'orange_series') {
     btn.classList.add('topic-card-book');
   }
+  const passed = isTopicPassed(topic);
   btn.innerHTML = `
       <span class="topic-cover" aria-hidden="true">${cover(topic.cover)}</span>
       <span class="topic-title">${topic.title}</span>
+      ${topicPassBadge(passed)}
       ${topicProgressHtml(topic)}
     `;
   btn.onclick = () => openLearn(topic.id);
@@ -1377,37 +1404,6 @@ function showStarBurst() {
   el.classList.add('show');
 }
 
-/** 家長區聲音清單：列出部機所有中文（粵／普）聲音，可以試聽同記低。
- *  點解要俾家長揀：每部 iPad 裝咗嘅聲音唔同，iPadOS 更新仲會改次序，
- *  硬 code 名單解決唔到所有情況（KAKA 部機就試過突然變咗男聲）。 */
-function renderVoicePicker() {
-  const sel = $('#voice-select');
-  if (!sel || typeof KakaSpeech.listChineseVoices !== 'function') return;
-  const voices = KakaSpeech.listChineseVoices();
-  const chosen = state.voiceURI || '';
-  sel.innerHTML = '<option value="">自動（優先粵語女聲）</option>';
-  voices.forEach((v) => {
-    const opt = document.createElement('option');
-    opt.value = v.voiceURI;
-    const tag = /zh[-_]HK|yue/i.test(v.lang) ? '粵語' : /zh[-_]TW/i.test(v.lang) ? '國語（台）' : v.lang;
-    opt.textContent = `${v.name}（${tag}）`;
-    if (v.voiceURI === chosen) opt.selected = true;
-    sel.appendChild(opt);
-  });
-  const hint = $('#voice-hint');
-  if (hint && !voices.length) {
-    hint.textContent = '而家搵唔到中文聲音。iPad：設定 → 輔助功能 → 旁白 → 語音 → 下載粵語聲音。';
-  }
-  const now = KakaSpeech.currentVoice?.();
-  const label = $('#voice-now');
-  if (label) label.textContent = now ? `而家用緊：${now.name}` : '';
-}
-
-function speakVoiceSample() {
-  // 試聽刻意唔理「靜音」設定，唔係就試唔到
-  KakaSpeech.speakTerm('你好，我係卡卡，一齊學認字啦', { muted: false });
-}
-
 function refreshStarUI() {
   state = loadState();
   if (state.starsDate !== todayKey()) {
@@ -1452,6 +1448,7 @@ function renderStarBars() {
 
   hosts.forEach((host) => {
     const screenId = host.closest('.screen')?.id || '';
+    if (screenId === 'screen-progress' || screenId === 'screen-profiles') return;
     const mode = { 'screen-listen': 'listen', 'screen-match': 'match', 'screen-build': 'build' }[screenId];
     let bar = host.querySelector('.star-bar');
     if (!bar) {
@@ -1658,196 +1655,139 @@ function openStarsModal() {
   playCoinHintCue({ muted: state.muted });
 }
 
-/* ---------- 家長區 ---------- */
+/* ---------- 小朋友 Profile ---------- */
 
-function bindParent() {
-  $('#btn-parent').addEventListener('click', () => openPinModal());
-  $('#btn-pin-cancel').addEventListener('click', () => closePinModal());
-  $('#btn-parent-close').addEventListener('click', () => {
-    $('#modal-parent').classList.remove('open');
+function bindProfiles() {
+  PROFILE_IDS.forEach((id) => {
+    $(`#btn-profile-${id}`)?.addEventListener('click', () => selectProfile(id));
   });
-
-  buildPinPad();
-  $('#toggle-mute').addEventListener('change', (e) => {
-    state = updateState({ muted: e.target.checked });
-  });
-  $('#toggle-deer').addEventListener('change', (e) => {
-    state = updateState({ deerFocus: e.target.checked });
-  });
-  $('#toggle-autospeak')?.addEventListener('change', (e) => {
-    state = updateState({ autoSpeak: e.target.checked });
-  });
-  $('#voice-select')?.addEventListener('change', (e) => {
-    const uri = e.target.value || null;
-    state = updateState({ voiceURI: uri });
-    KakaSpeech.setPreferredVoiceURI?.(uri);
-    speakVoiceSample();
-  });
-  $('#btn-voice-test')?.addEventListener('click', () => speakVoiceSample());
-  $('#btn-save-pin').addEventListener('click', () => {
-    const val = $('#new-pin').value.trim();
-    if (!/^\d{4}$/.test(val)) {
-      alert('請輸入 4 位數字 PIN');
-      return;
-    }
-    state = updateState({ pin: val });
-    $('#new-pin').value = '';
-    alert('PIN 已更新');
-  });
-  $('#btn-reset-stars').addEventListener('click', () => {
-    if (confirm('確定重設全部星星同 AEON 幣進度？')) {
-      state = resetStars();
-      renderParentPanel();
-      refreshStarUI();
-    }
-  });
+  $('#btn-back-progress')?.addEventListener('click', () => showScreen('home'));
+  $('#btn-progress-switch')?.addEventListener('click', () => openProfilePick());
 }
 
-function buildPinPad() {
-  const pad = $('#pin-pad');
-  pad.innerHTML = '';
-  const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '清空', '0', '⌫'];
-  keys.forEach((key) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.textContent = key;
-    btn.addEventListener('click', () => onPinKey(key));
-    pad.appendChild(btn);
-  });
-  renderPinDisplay();
+function refreshProfileChrome() {
+  const info = getActiveProfile() || PROFILES.kaka;
+  const nameEl = $('#home-profile-name');
+  const imgEl = $('#home-profile-avatar');
+  if (nameEl) nameEl.textContent = info.name;
+  if (imgEl) imgEl.src = info.avatar;
 }
 
-function renderPinDisplay() {
-  const row = $('#pin-display');
-  row.innerHTML = '';
-  for (let i = 0; i < 4; i += 1) {
-    const box = document.createElement('div');
-    box.className = 'pin-digit';
-    box.textContent = pinBuffer[i] ? '•' : '';
-    row.appendChild(box);
+function openProfilePick() {
+  closeAllModals();
+  playMode = null;
+  resetPlayRoundProgress();
+  showScreen('profiles');
+}
+
+function selectProfile(id) {
+  if (!PROFILE_IDS.includes(id)) return;
+  setActiveProfile(id);
+  try {
+    window.KakaMathStorage?.setActiveProfile?.(id);
+  } catch {
+    /* 數理掛咗都唔影響認字 */
   }
-}
-
-function onPinKey(key) {
-  $('#pin-error').textContent = '';
-  if (key === '清空') {
-    pinBuffer = '';
-    renderPinDisplay();
-    return;
-  }
-  if (key === '⌫') {
-    pinBuffer = pinBuffer.slice(0, -1);
-    renderPinDisplay();
-    return;
-  }
-  if (pinBuffer.length >= 4) return;
-  pinBuffer += key;
-  renderPinDisplay();
-  if (pinBuffer.length === 4) {
-    state = loadState();
-    if (pinBuffer === state.pin) {
-      closePinModal();
-      openParentPanel();
-    } else {
-      $('#pin-error').textContent = 'PIN 唔啱，再試吓';
-      pinBuffer = '';
-      setTimeout(() => renderPinDisplay(), 280);
-    }
-  }
-}
-
-function openPinModal() {
-  pinBuffer = '';
-  $('#pin-error').textContent = '';
-  renderPinDisplay();
-  $('#modal-pin').classList.add('open');
-}
-
-function closePinModal() {
-  $('#modal-pin').classList.remove('open');
-  pinBuffer = '';
-}
-
-function openParentPanel() {
-  renderParentPanel();
-  $('#modal-parent').classList.add('open');
-}
-
-function renderParentPanel() {
   state = loadState();
-  const coins = redeemableCoins();
-  $('#parent-coin-banner').innerHTML =
-    `<strong>完成一輪 = 1 枚 AEON 幣</strong><br />每種玩法（聽／配／砌）一日一個，最多 3 個。` +
-    `<br />累積 <strong>${coins}</strong> 枚（爸爸媽媽現實兌換）`;
-  $('#parent-stars-today').textContent = `${coinsTodayCount()} / 3 個幣（每種玩法一個）`;
-  $('#parent-total-stars').textContent = String(state.totalStars);
-  $('#parent-coins').textContent = String(coins);
-  const enabledIds = state.enabledWordIds && state.enabledWordIds.length
-    ? state.enabledWordIds
-    : WORDS.map((w) => w.id);
-  const mastery = summarizeMastery(enabledIds);
-  const masteredEl = $('#parent-mastered-count');
-  if (masteredEl) masteredEl.textContent = String(mastery.mastered);
-  const needEl = $('#parent-need-practice');
+  playMode = null;
+  resetPlayRoundProgress();
+  activeTopicId = null;
+  activeBook = null;
+  KakaSpeech.setPreferredVoiceURI?.(state.voiceURI || null);
+  refreshProfileChrome();
+  refreshStarUI();
+  showScreen('home');
+}
+
+function openProgress() {
+  renderProgress();
+  showScreen('progress');
+}
+
+function weekdayLabel(dateKey) {
+  const [y, m, d] = dateKey.split('-').map((n) => parseInt(n, 10));
+  const names = ['日', '一', '二', '三', '四', '五', '六'];
+  return names[new Date(y, m - 1, d).getDay()];
+}
+
+function renderProgress() {
+  const info = getActiveProfile() || PROFILES.kaka;
+  const who = $('#progress-who');
+  const title = $('#progress-title');
+  const avatar = $('#progress-avatar');
+  if (who) who.textContent = info.name;
+  if (title) title.textContent = `${info.name}嘅進度`;
+  if (avatar) avatar.src = info.avatar;
+
+  const todayN = coinsTodayCount();
+  const todayEl = $('#progress-coin-today');
+  if (todayEl) todayEl.textContent = `今日 ${todayN} 個幣 · 累積 ${redeemableCoins()} 枚`;
+
+  const cal = $('#progress-coin-cal');
+  if (cal) {
+    cal.innerHTML = '';
+    coinHistory(14).forEach((day) => {
+      const cell = document.createElement('div');
+      cell.className = 'coin-cal-day' + (day.isToday ? ' is-today' : '');
+      cell.innerHTML = `<span class="coin-cal-n">${day.count}</span><span class="coin-cal-d">${weekdayLabel(day.date)}</span>`;
+      cal.appendChild(cell);
+    });
+  }
+
+  const needEl = $('#progress-need');
   if (needEl) {
     needEl.innerHTML = '';
+    const mastery = summarizeMastery(WORDS.map((w) => w.id));
     if (!mastery.needPractice.length) {
       const li = document.createElement('li');
-      li.textContent = '暫時冇特別需要練嘅字';
+      li.className = 'is-empty';
+      li.textContent = '而家冇要練嘅字，去玩玩啦';
       needEl.appendChild(li);
     } else {
       mastery.needPractice.forEach((item) => {
         const word = getWordById(item.id);
         const li = document.createElement('li');
-        li.textContent = word
-          ? `${word.term}（錯 ${item.wrong} 次）`
-          : item.id;
+        li.textContent = word ? `${word.term} · 再練` : item.id;
         needEl.appendChild(li);
       });
     }
   }
-  $('#toggle-mute').checked = !!state.muted;
-  $('#toggle-deer').checked = state.deerFocus !== false;
-  const autoSpeakBox = $('#toggle-autospeak');
-  if (autoSpeakBox) autoSpeakBox.checked = state.autoSpeak !== false;
-  renderVoicePicker();
 
-  const box = $('#word-toggles');
-  box.innerHTML = '';
-  const enabled = new Set(
-    state.enabledWordIds && state.enabledWordIds.length
-      ? state.enabledWordIds
-      : WORDS.map((w) => w.id),
-  );
-
-  WORDS.forEach((w) => {
-    const label = document.createElement('label');
-    label.className = 'word-toggle';
-    const input = document.createElement('input');
-    input.type = 'checkbox';
-    input.checked = enabled.has(w.id);
-    input.addEventListener('change', () => {
-      const current = loadState();
-      let ids =
-        current.enabledWordIds && current.enabledWordIds.length
-          ? [...current.enabledWordIds]
-          : WORDS.map((x) => x.id);
-      if (input.checked) {
-        if (!ids.includes(w.id)) ids.push(w.id);
-      } else {
-        ids = ids.filter((id) => id !== w.id);
-      }
-      if (ids.length < 2) {
-        input.checked = true;
-        alert('最少要留兩個字詞先玩得');
-        return;
-      }
-      state = updateState({ enabledWordIds: ids });
+  const grid = $('#progress-topic-grid');
+  if (grid) {
+    grid.innerHTML = '';
+    const byId = new Map(TOPICS.map((t) => [t.id, t]));
+    TOPIC_GROUPS.forEach((group) => {
+      const topics = group.ids.map((id) => byId.get(id)).filter(Boolean);
+      if (!topics.length) return;
+      const heading = document.createElement('h2');
+      heading.className = 'topic-group-title';
+      heading.textContent = group.title;
+      grid.appendChild(heading);
+      topics.forEach((topic) => {
+        const card = renderTopicCard(topic);
+        grid.appendChild(card);
+      });
     });
-    label.appendChild(input);
-    label.appendChild(document.createTextNode(w.term));
-    box.appendChild(label);
-  });
+  }
+
+  const mathList = $('#progress-math-list');
+  const mathBlock = $('#progress-math-block');
+  const mathApi = window.KakaMathStorage;
+  const planets = window.KakaMathSkills?.MATH_PLANETS;
+  if (mathList && mathApi && Array.isArray(planets)) {
+    mathList.innerHTML = '';
+    planets.forEach((p) => {
+      const chip = document.createElement('span');
+      chip.className = 'progress-math-chip';
+      const lit = mathApi.isPlanetLit(p.id);
+      chip.textContent = `${p.name} ${lit ? '已過' : '未過'}`;
+      mathList.appendChild(chip);
+    });
+    if (mathBlock) mathBlock.hidden = false;
+  } else if (mathBlock) {
+    mathBlock.hidden = true;
+  }
 }
 
 if (document.readyState === 'loading') {

@@ -72,9 +72,9 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 | `index.html` | 共用 landing（認字／字母隊／數理入口）+ 各 app 自己嘅 screens |
 | `js/words.js` | 字詞資料 + 系統 Emoji 插圖（iPhone Apple Color Emoji） |
 | `js/phonics-words.js` / `js/phonics-app.js` | 卡卡字母隊 |
-| `js/storage.js` | `localStorage` 鍵 `kaka-learn-v1`：認字／字母隊星星、PIN、設定 |
+| `js/storage.js` | `localStorage` 鍵 `kaka-learn-v1`：按小朋友 Profile（卡卡／希希）分倉；舊單一資料遷移入卡卡 |
 | `js/speech.js` | `speechSynthesis`（優先 `zh-HK`）+ Web Audio 短音 |
-| `js/app.js` | 認字模式循環、家長區、星星動畫 |
+| `js/app.js` | 認字模式循環、Profile／進度頁、星星動畫 |
 | `css/styles.css` | 太空／小鹿視覺、大 tap target |
 | `css/phonics.css` | 字母隊氛圍層 |
 | `js/math-storage.js` / `math-skills.js` / `math-app.js` + `css/math.css` | 小鹿數理探險（Phase A hub；`kaka-math-v1`） |
@@ -135,12 +135,12 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
   兩段訊息打交就係咁嚟）。
 - **答啱要飛星**（`flyStarToBar`）：由圖卡飛去進度條下一格，落地先亮。
   呢個係「我做啱 → 我近咗」嘅因果連繫，唔好改返做原地閃一閃。
-- **粵語聲音要係女聲**：`speech.js` 有女聲優先名單，家長區有聲音揀選（記入 `voiceURI`）。
+- **粵語聲音要係女聲**：`speech.js` 有女聲優先名單（自動揀，唔使家長區）。
   唔好改返「攞第一個 zh-HK」——iPadOS 更新會令佢變咗男聲。
 - 全頁**鎖死放大縮細**（iPad 螢幕 pinch 同妙控鍵盤觸控板 pinch 都唔好放大遊戲）。砌練習以撳為主，拖係額外。
 - 砌一砌每放入一格就**讀嗰個字**；砌完成個詞再讀一次成個詞。
-- 家長 PIN 預設 `1234`，要可以改。
-- 鹿類重點開關會提高鹿詞抽中權重。
+- **雙小朋友 Profile**（卡卡／希希）：開 app 先揀頭像；幣／wordStats／主題已過／數理星球按人隔離。舊 `kaka-learn-v1`／`kaka-math-v1` 單一資料歸入卡卡，希希由空白開始。暫唔要 PIN。主流程可「換小朋友」。
+- 鹿類重點**預設開**（抽題加權）；家長區已撤所以冇掣改。
 - 學習頁**「去玩玩」常駐**（唔使揭完所有卡先出）。睇完最後一張之後掣文改「學完喇・去玩玩」並加強樣式；誤撳「再睇一次」都唔可以隱藏。換主題／書先重置。`#learn-finish-row` 唔好預設 `hidden`；CSS 要守住 `[hidden]{display:none!important}`，唔好俾 `.btn-row { display:flex }` 蓋走。
 - 認字玩法完一輪（答錯唔計、唔清零；同一題再試，答啱先算；unique 字先計，優先出未答啱過嘅字）：
   - **聽一聽／配一配**：答啱 **8 個字**，或而家主題／書**全部字**（少過 8 個就全清）。
