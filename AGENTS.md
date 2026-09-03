@@ -2,6 +2,9 @@
 
 給 Cursor／自動化 agent 嘅專案指引。
 
+> **開工前先睇 `docs/handover.md`** — Cursor 同 Claude (Cowork) 平行 push 同一個 repo，
+> 嗰度寫住而家嘅分工、撞車高危檔案、同未完事項。收工／merge 完記得返去更新。
+
 ## 專案係乜
 
 幼兒繁體中文認字網頁（KAKA，約 4 歲）。粵語家庭、iPad 優先、亦要適合 Mac mini + TV 大掣操作。
@@ -43,6 +46,11 @@
 
 - 無登入、廣告、追蹤、寫字練習、故事模式、真實付款／AEON API。
 - UI 用繁體中文；主題係原創「**太空戰士學院**」（中文太空冒險；唔用迪士尼／彼思名稱、角色或素材）。動物主題仍保留鹿等字詞內容。
+  **2026-09-02 決定**：KAKA RANGER 呢套角色美術（`assets/kaka-ranger-solo.png`、`docs/design/kaka-ranger-reference-sheet.png`）
+  喺配色（綠／白／紫）、胸口翼形徽章、頭盔側燈呢幾樣設計上同 Buzz Lightyear 相當接近——呢個已經同 Keith
+  傾過，佢知道呢一點，決定接受用（個人非商業學習網站）。**呢個係經過討論嘅例外，唔代表上面條規則廢咗**：
+  新畫嘅素材（例如將來嘅怪獸、其他角色）仍然唔好特登照住迪士尼／彼思設計臨摹；改呢件事要再問過 Keith。
+- 漢字顯示用 **self-hosted Noto Sans HK**（`assets/fonts/`）；`js/words.js` 加新字／新 `say` 後要跑 `python3 scripts/build-font-subset.py` 再 commit 產物。
 
 ## 點樣跑
 
@@ -108,9 +116,11 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
   星星仍然計（`totalStars`／`starsToday`）但只做紀錄，唔再係兌換單位。
   未完成嘅輪次會記入 `roundProgress`（key = 玩法|主題|書），中途走咗返嚟接得返，換日清空。
   舊資料遷移：`coinsTotal = floor(totalStars / 10)`，KAKA 已賺嘅幣唔可以蒸發。
+- **字詞掌握度**：`storage.js` 嘅 `wordStats` 記每字 `{right, wrong, streak}`；答啱／答錯都寫入，`pickTarget()` 會偏向未識字。改 schema 要更新 `scripts/test-storage.mjs`。
+- **多音字讀音**：`words.js` 可選填 `say`（例：`長` → `say: '好長'`）；TTS 用 `say || term`。`check-invariants.py` 有已知多音字清單，單字必須有 `say`。
 - 模式 B 必須維持「先撳字 → 再撳圖」。
 - **砌一砌淡色格（`.build-ghost`）係配對支架，唔係洩題。** 目標係活動學習：睇圖 → 喺字池搵同一個字 → 拖／撳入格；靠重複移動嚟認字形。唔好刪淡字、唔好改成空白考試格。字池要留干擾字，等卡卡真係要揀。
-- **遊戲畫面一屏到底，唔准捲。** 只有「揀主題／揀書／字母隊揀主題」准上下捲（純瀏覽、唔涉拖曳）。
+- **遊戲畫面一屏到底，唔准捲。** 只有「主頁／揀主題／揀書／字母隊揀主題」准上下捲（純瀏覽、唔涉拖曳）。
   尺寸用 `min(px, vw, vh)` 跟住視窗高度縮；橫向嘅砌一砌係兩欄（左圖右字池）。
   改完一定要跑 `python3 scripts/smoke-shots.py`（CI 會跑 5 種 iPad + 2 種 iPhone），iPad 要捲就係 blocker。
   手機（≤700px 闊）准捲——鎖死唔捲會剪走內容；但任何尺寸都唔准元素重疊。

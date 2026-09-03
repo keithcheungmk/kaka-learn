@@ -1,13 +1,26 @@
 /**
- * 太空戰士星星飛行 — 答啱時由 ranger 槍口射去星星條
+ * 太空戰士星星飛行 — 答啱時由 ranger 拳頭射去星星條（KAKA RANGER solo）
  */
 (function () {
   const FLY_DURATION_MS = 1050;
   const FLY_FALLBACK_MS = 1200;
   const MUZZLE_BURST_MS = 120;
+  const POSE_SWAP_MS = 550; // 同 rangerShoot keyframe 對齊，答啱一刻換 pose 嘅顯示時間
 
-  /** 與 scripts/crop-ranger-shooter.py MUZZLE_ANCHOR 同步 */
-  const MUZZLE_ANCHOR = { x: 0.94, y: 0.38 };
+  /**
+   * 2026-09-02：由「精準對住握拳」簡化做「身中心固定點」——因為答啱一刻會隨機換
+   * 4 張唔同動作嘅 pose（握拳唔一定喺度），逐張校準發射點成本太高，
+   * 改用一個對大部分 pose 都夠合理嘅中心點。詳情見 docs/handover.md。
+   */
+  const MUZZLE_ANCHOR = { x: 0.5, y: 0.52 };
+
+  const DEFAULT_POSE = './assets/space-ranger-shooter.png';
+  const SHOOT_POSES = [
+    './assets/space-ranger-pose-fistpump.png',
+    './assets/space-ranger-pose-point.png',
+    './assets/space-ranger-pose-thumbsup.png',
+    './assets/space-ranger-pose-wave.png',
+  ];
 
   const PLAY_IDS = new Set([
     'screen-listen',
@@ -39,9 +52,26 @@
     globalRanger.className = 'space-ranger';
     globalRanger.setAttribute('aria-hidden', 'true');
     globalRanger.innerHTML =
-      '<img src="./assets/space-ranger-shooter.png" alt="" width="144" height="144" decoding="async" />';
+      `<img class="space-ranger-img" src="${DEFAULT_POSE}" alt="" width="144" height="144" decoding="async" />` +
+      '<span class="space-ranger-sparkle s1"></span>' +
+      '<span class="space-ranger-sparkle s2"></span>' +
+      '<span class="space-ranger-sparkle s3"></span>';
     document.body.appendChild(globalRanger);
     return globalRanger;
+  }
+
+  let poseResetTimer = null;
+
+  function flashRandomPose(rangerEl) {
+    const img = rangerEl?.querySelector('.space-ranger-img');
+    if (!img) return;
+    if (poseResetTimer) clearTimeout(poseResetTimer);
+    const pick = SHOOT_POSES[Math.floor(Math.random() * SHOOT_POSES.length)];
+    img.src = pick;
+    poseResetTimer = setTimeout(() => {
+      img.src = DEFAULT_POSE;
+      poseResetTimer = null;
+    }, POSE_SWAP_MS);
   }
 
   function getRangerMuzzle(el) {
@@ -67,6 +97,12 @@
       'space-ranger-laser-flash',
     );
     if (globalRanger) delete globalRanger.dataset.rangerScreen;
+    if (poseResetTimer) {
+      clearTimeout(poseResetTimer);
+      poseResetTimer = null;
+    }
+    const img = globalRanger?.querySelector('.space-ranger-img');
+    if (img) img.src = DEFAULT_POSE;
   }
 
   function ensureSpaceRanger(screen) {
@@ -139,9 +175,11 @@
     const keyframes = buildFlyKeyframes(dx, dy);
     const easing = 'cubic-bezier(.22,.75,.28,1)';
 
+    const starImg = '<img src="./assets/kaka-ranger-star.png" alt="" decoding="async" />';
+
     const star = document.createElement('div');
     star.className = 'fly-star';
-    star.textContent = '★';
+    star.innerHTML = starImg;
     star.setAttribute('aria-hidden', 'true');
     star.style.left = `${originX}px`;
     star.style.top = `${originY}px`;
@@ -149,7 +187,7 @@
 
     const trail = document.createElement('div');
     trail.className = 'fly-star fly-star-trail';
-    trail.textContent = '★';
+    trail.innerHTML = starImg;
     trail.setAttribute('aria-hidden', 'true');
     trail.style.left = `${originX}px`;
     trail.style.top = `${originY}px`;
@@ -159,6 +197,7 @@
       rangerEl.classList.remove('space-ranger-shoot', 'space-ranger-laser-flash');
       void rangerEl.offsetWidth;
       rangerEl.classList.add('space-ranger-shoot', 'space-ranger-laser-flash');
+      flashRandomPose(rangerEl);
     }
 
     const anim = star.animate(keyframes, { duration: FLY_DURATION_MS, easing });

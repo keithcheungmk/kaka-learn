@@ -1,11 +1,7 @@
 {
-  "assets/chinese-hero-poster.jpg": {
-    "format": "JPEG",
-    "alpha": false
-  },
-  "assets/chinese-hero.jpg": {
-    "format": "JPEG",
-    "alpha": false
+  "assets/chinese-hero.png": {
+    "format": "PNG",
+    "alpha": true
   },
   "assets/chinese-space-bg.jpg": {
     "format": "JPEG",
@@ -163,6 +159,46 @@
     "format": "JPEG",
     "alpha": false
   },
+  "assets/icons/icon-16.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-180.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-192.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-32.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-48.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-512.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/kaka-ranger-celebrate.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/kaka-ranger-logo.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/kaka-ranger-solo.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/kaka-ranger-star.png": {
+    "format": "PNG",
+    "alpha": true
+  },
   "assets/math/galaxy-bg.jpg": {
     "format": "JPEG",
     "alpha": false
@@ -203,6 +239,10 @@
     "format": "PNG",
     "alpha": false
   },
+  "assets/og-image.png": {
+    "format": "PNG",
+    "alpha": false
+  },
   "assets/phonics-hero.jpg": {
     "format": "JPEG",
     "alpha": false
@@ -210,6 +250,22 @@
   "assets/phonics-space-bg.jpg": {
     "format": "JPEG",
     "alpha": false
+  },
+  "assets/space-ranger-pose-fistpump.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/space-ranger-pose-point.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/space-ranger-pose-thumbsup.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/space-ranger-pose-wave.png": {
+    "format": "PNG",
+    "alpha": true
   },
   "assets/space-ranger-shooter.png": {
     "format": "PNG",

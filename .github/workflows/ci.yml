@@ -18,10 +18,13 @@ jobs:
           node-version: '20'
 
       - name: 安裝檢查依賴
-        run: pip install --quiet pillow
+        run: pip install --quiet pillow fonttools brotli
 
       - name: JS syntax + AGENTS.md 硬性約束
         run: python3 scripts/check-invariants.py
+
+      - name: storage.js 單元測試
+        run: node scripts/test-storage.mjs
 
       - name: 模擬部署（確保 _site 齊料）
         run: |

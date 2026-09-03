@@ -1,0 +1,278 @@
+# 交接簿 — Cursor ⇄ Claude (Cowork)
+
+呢個 repo 由兩個 agent 平行開工：**Cursor**（喺 Keith 部機／Cloud Agent）同
+**Claude (Cowork)**（喺 Anthropic cloud，經 deploy key push）。兩邊都直接 push
+`main`，所以要有一個地方寫低「另一邊需要知」嘅嘢，唔係就會撞。
+
+## 點用呢個檔
+
+- **開工前**：`git fetch origin main` → 睇 `AGENTS.md`（硬性規則）→ 睇呢個檔（分工同地雷）。
+- **merge 完之後**：喺「最近改動」加一段（日期、邊個做、改咗乜、掂咗邊啲檔）。
+- 只寫另一邊要知嘅嘢：**擁有權、地雷、未完事項**。設計討論、需求分析唔好塞入嚟。
+- 呢個檔唔係規則書。任何「以後都要咁做」嘅嘢要寫入 `AGENTS.md`，
+  而且同時喺 `scripts/check-invariants.py` 加一個 `check_xxx()`，靠機器守住，唔好靠記憶。
+
+## 而家嘅狀態（2026-09-03）
+
+- `origin/main` 已含：P0 三項（字形／掌握度／讀音，PR #82）、KAKA RANGER 飛星接入（PR #83，
+  握拳發射，方案 b）、Claude 加嘅「完成一輪」慶祝 pose、favicon／app icon／分享預覽圖、
+  飛星改用真星圖 + 頭頂 sparkle、答啱一題 ranger 隨機換 4 款動作 pose。
+- **進行中**：PR #81（`cursor/home-hero-scroll-af8d`）已 merge 最新 `main`。主頁准捲 +
+  唔壓細橫向 hero 由 PR 保留；顯示圖沿用 `main` 嘅 `chinese-hero.png`（唔再返 JPG 裁圖）。
+
+## 分工（點解要分：唔想兩邊改同一段 code）
+
+| 範圍 | 擁有人 | 主要檔案 |
+|---|---|---|
+| 太空戰士造型、槍口射星動畫 | **Cursor** | `js/star-fx.js`、`scripts/crop-ranger-shooter.py`、`assets/` ranger 圖 |
+| 獎勵條／幣／怪獸守幣 | **Claude** | `js/app.js` 嘅 `renderStarBars`／`renderRoundBar`／`renderCoinBar`、`js/storage.js` 經濟欄位、`.coin-*` CSS |
+| 新主題內容、真實相片素材 | **Cursor** | `js/words.js`、`assets/food/`、`assets/food-hk/` |
+| 《我自己會讀》字卡 OCR → `wordIds` | **Claude**（AGENTS.md 已寫死） | `docs/word-card-ocr.md`、`scripts/apply-book-cards.py` |
+| 版面 no-scroll、重疊／剪裁回歸 | **Claude** | `scripts/smoke-shots.py`、`css/styles.css` 版面段 |
+| CI／部署閘門／invariants | **Claude** | `.github/workflows/*`、`scripts/check-invariants.py`、`scripts/build-site.sh` |
+| 圖片去背、壓縮、格式鎖 | **Claude** | `scripts/cutout-bg.py`、`assets/image-formats.lock.json`（用 `pngquant`，唔好用 Pillow `quantize()`） |
+
+呢個分工唔係死嘅——要跨界改，喺呢度寫低就得。**但唔好兩邊同時改同一個功能。**
+
+## 撞車高危檔案
+
+- `css/styles.css` — 兩邊都會掂。改之前 `git fetch` + rebase，唔好用大段 rewrite，
+  改細粒啲、貼住現有 selector 改。
+- `js/app.js` — 同上。`renderStarBars` 一帶而家係 Claude 嘅，`flyStarToBar` 會
+  delegate 去 `window.KakaStarFx.flyStarFromRanger`（Cursor 嘅），呢個 delegation
+  就係兩邊嘅介面：**唔好其中一邊刪咗個 fallback**。
+- `js/star-fx.js` — Cursor 擁有。Claude 通常只經 `window.KakaStarFx` 呼叫，唔改入面；
+  **2026-09-02 有兩次例外**（都係 Keith 直接叫 Claude 做，唔係 Claude 自把自為）：
+  （1）下午：加咗 3 個 sparkle span + 飛星圖由文字改 `<img>`，`MUZZLE_ANCHOR`／握拳
+  發射邏輯冇郁；（2）夜晚：答啱一題 ranger 會隨機換 4 款 pose，**呢次 `MUZZLE_ANCHOR`
+  改咗**（由精準對住握拳，簡化做身中心固定點 `{x:0.5, y:0.52}`——因為 pose 會變，
+  握拳唔一定喺度），`scripts/crop-ranger-shooter.py`／`kaka-ranger-solo.png` 嘅
+  預設 shooter 圖冇郁。詳情見上面「最近改動」。Cursor 改呢個檔之前對一對 git log，
+  留意 `MUZZLE_ANCHOR` 已經唔再係「握拳精準座標」呢個假設。
+- `assets/image-formats.lock.json` — 換圖之後要 `python3 scripts/check-invariants.py --update-image-lock`，
+  唔係 CI 會紅。
+
+## 最近改動
+
+### 2026-09-03 · Cursor · PR #81 merge `main`（解衝突）
+
+- 撞車：`css/styles.css`、`index.html`、`assets/CREDITS.md`、`image-formats.lock.json`、
+  `space-ranger-shooter.png`、`crop-ranger-shooter.py`、`chinese-hero.jpg`（main 已刪）。
+- 解法：hero 顯示沿用 `chinese-hero.png`（978×514、透明底）；shooter 沿用
+  `kaka-ranger-solo.png`。PR 獨有保留：主頁 `#screen-home` 准捲、橫向 iPad **唔再**
+  `max-height` 壓細 hero。舊 JPG pipeline（`chinese-hero-poster.jpg`、
+  `crop-chinese-hero.py`）已棄，避免同 PNG 去背方案打架。
+
+### 2026-09-02（夜晚）· Claude · 答啱一題 ranger 隨機換 pose
+
+**背景**：Keith 睇完下晝嗰次 sparkle 效果，貼咗張圖出嚟指住 reference sheet 嗰 4 個
+「握拳噴火／指嘢／揸手指公眨眼／招手」動作 pose（呢 4 張同 7 個裸頭表情唔同，**全部有
+戴頭盔**），問可唔可以答啱一題就換一張出嚟，仲要保留飛星效果。**明確要求「討論先，未
+落手」**，傾清楚幾個技術決定先做（見下面），唔係即刻改。
+
+**同 Keith 對齊咗嘅決定**：
+1. 發射點簡化——唔再逐張 pose 校準拳頭位，改做身中心固定點（見上面「撞車高危檔案」）。
+2. 揸手指公嗰張（同 `kaka-ranger-celebrate.png` 完成一輪嗰張係同一個 pose）都照樣攞嚟
+   一齊輪換，即係一輪入面有機會見到兩次（答啱一題見一次、完成一輪又見一次）。Keith 揀
+   咗接受呢個重複。
+3. 隨機揀，唔係固定順序輪。
+4. Claude 今次直接做（同下畫嗰次一樣係例外，唔係常規分工）。
+
+**做法**：
+- 由 `docs/design/kaka-ranger-reference-sheet.png` 裁咗 3 張新 pose（握拳噴火／指嘢／
+  招手），加埋已有嘅 `kaka-ranger-celebrate.png`（揸手指公），四張都 resize/置中做成
+  同 `space-ranger-shooter.png` 一致嘅 192×192 畫布、差唔多嘅角色填滿比例，先唔會轉
+  pose 嗰陣睇落忽大忽細：
+  - `assets/space-ranger-pose-fistpump.png`（16KB）
+  - `assets/space-ranger-pose-point.png`（16KB）
+  - `assets/space-ranger-pose-wave.png`（17KB）
+  - `assets/space-ranger-pose-thumbsup.png`（14KB，同 `kaka-ranger-celebrate.png` 同源
+    但獨立一份、獨立畫布比例，`kaka-ranger-celebrate.png` 本身冇郁，`play-finish` 彈窗
+    唔受影響）
+  - 幾張都有少少鄰接 sprite bleed 殘留（一小撮火花／殘影），裁到依家嘅程度已經花咗
+    幾輪嘗試，睇落唔顯眼，冇再摳落去。
+- `js/star-fx.js`：`getGlobalRanger()` 個 `<img>` 加 `class="space-ranger-img"`
+  俾 JS 揸到嚟換 `src`；新增 `SHOOT_POSES` 陣列 + `flashRandomPose()`——答啱一刻隨機揀
+  一張换上去，`POSE_SWAP_MS`（550ms，同 `rangerShoot` 反彈動畫嗰 0.55s 對齊）之後自動
+  換返 `DEFAULT_POSE`（即係而家嘅 `space-ranger-shooter.png`）。`hideRanger()` 加咗
+  清 timer + 強制歸位，避免轉緊畫面嗰陣 pose 卡住唔變返。
+- `MUZZLE_ANCHOR` 由 `{x:0.279,y:0.678}`（握拳精準座標）改做 `{x:0.5,y:0.52}`
+  （身中心固定點）；`css/styles.css` 嘅 `.space-ranger-laser-flash::after` 位置同步
+  由 `27.9%/67.8%` 改做 `50%/52%`。飛星軌跡、sparkle 位置冇郁（sparkle 本來就係
+  「頭頂附近」，唔靠拳頭座標，換 pose 都合用）。
+- `prefers-reduced-motion`：pose 換圖同飛星、閃光一齊喺 `flyStar()` 開頭 return，
+  已經有保護，冇加多一重判斷。
+
+**驗過**：`check-invariants.py`（含 `--update-image-lock`）綠、`smoke-shots.py --no-shots`
+7 種尺寸 pass、Playwright 連續觸發 6 次答啱，`.space-ranger-img` 嘅 `src` 有隨機換到
+4 款、冇 console error、人手 screenshot 逐張 pose 睇過冇明顯走位。
+
+**呢次冇做**：7 個裸頭表情（同 2026-09-02 下畫嗰段講嘅一樣）仍然冇用——冇戴頭盔，同
+成套「有頭盔」嘅視覺唔啱。
+
+### 2026-09-02（下午）· Claude · Logo/favicon/分享圖 + 飛星改真圖 + 答啱 sparkle
+
+**背景**：Keith 上傳埋 KAKA RANGER logo lockup（獨立高清圖，446×506，白底冇透明，
+已存底喺 `docs/design/kaka-ranger-logo-source.png`），問（1）logo 擺邊、（2）答啱一題
+可唔可以連 ranger pose／表情都變、加真星星特效、（3）指出 sheet 好多素材未用。
+三點都先討論、AskUserQuestion 俾 Keith 揀先做嘢，唔係自己突擊改。
+
+**1. Logo／favicon（Claude 範圍，冇撞 Cursor）**
+- 成套 lockup 去白底（flood-fill 揀走同外框相連嘅白色／灰色，包括原圖左上角一嚿
+  鄰接 sprite 嘅殘影），trim 完 421×439 → `assets/kaka-ranger-logo.png`。
+- 淨徽章（星球+雙翼章，冇文字）裁成正方形 → `assets/icons/icon-{16,32,48,180,192,512}.png`
+  + `assets/icons/favicon.ico`（16/32/48 合併）+ `assets/icons/site.webmanifest`。
+  之前成個 app **完全冇 favicon/manifest**，依家 `<head>` 已加返晒 `<link rel="icon">`
+  `apple-touch-icon` `manifest`。
+- 完整 lockup 用喺分享連結預覽：合成一張 1200×630 嘅 `assets/og-image.png`
+  （深紫底配 logo + 標題，字用 `scripts/font-src/NotoSansHK-Bold.otf` 現成起），
+  加咗 `og:image`／`twitter:image` meta（絕對 URL）。
+- ⚠️ **`scripts/check-invariants.py` 嘅 `check_no_build_step()` 加咗一個 allowlist
+  例外**：`https://keithcheungmk.github.io`（自己個 GitHub Pages 域名）。呢個唔係
+  runtime 依賴，淨係俾分享連結嗰陣 og:image 用絕對 URL 先啱規格，靜態頁本身唔會
+  fetch 呢個 host。如果見到呢個 host 唔好誤刪佢，除非改咗部署域名。
+
+**2. 飛星特效改用真星圖（踩咗 `js/star-fx.js`，見下面「⚠️ 一次性例外」）**
+- `flyStar()` 由 `textContent = '★'` 改用 `<img src="./assets/kaka-ranger-star.png">`
+  （由 reference sheet 裁 sheet 本身自帶嘅金色星星，65×43，真透明底，744B）。
+  CSS `.fly-star`／`.fly-star-trail` 由 `font-size`+`text-shadow` 改做 `width`+多層
+  `drop-shadow` filter，效果保持（睇落有光暈），發射／飛行嗰套 keyframe 邏輯全部冇郁。
+- 加咗 `.space-ranger-sparkle`（3 粒細星，用返同一張 `kaka-ranger-star.png`），
+  同 `.space-ranger-shoot` class 一齊觸發，答啱嗰下喺 ranger 頭頂爆開 3 粒細星
+  （0.55s，錯開 delay），畫面上讀到「佢反應咗」。`prefers-reduced-motion` 有保護。
+
+**3. 表情／pose 交換（做咗一半，另一半技術上做唔到，唔係唔想做）**
+- Reference sheet 嗰 7 個「純面部表情」全部**冇戴頭盔**（裸頭），但 shooter／celebrate
+  兩張已用嘅圖全部**有戴頭盔**——兩者換唔到，直接疊上去個樣會好突兀（斷晒角色連貫性），
+  唔係「錢／時間」問題，係現有素材本身冇一張「戴住頭盔嘅第二個表情」。
+  所以呢次冇做「換成另一張圖」，改做上面嘅 sparkle 頭頂爆星（唔換底圖，加疊加效果），
+  已經喺人手 screenshot 驗過，睇落有「佢興奮咗」嘅感覺，冇搶漢字風頭（sparkle 好細粒）。
+- 如果將來真係想要「戴頭盔嘅第二表情」（例如眨眼／張大口），要嘅係一張新畫，
+  唔係裁現有 sheet 就有——呢個係俾 Keith／畫圖果邊嘅具體 spec，唔係 Cursor 要諗嘅嘢。
+
+**⚠️ 一次性例外：`js/star-fx.js` 唔係 Claude 擁有，今次係 Keith 直接叫 Claude 踩過去做**
+（見上面「而家嘅狀態」），唔代表分工表變咗——`js/star-fx.js` 嘅正常擁有人仍然係 Cursor。
+今次改嘅範圍好窄：`getGlobalRanger()`（加 3 個 sparkle span）、`flyStar()`
+（`star.innerHTML` 改用 `<img>`），`MUZZLE_ANCHOR`／`ensureSpaceRanger`／
+`crop-ranger-shooter.py`／握拳發射邏輯**全部冇郁**。Cursor 下次改呢個檔之前
+睇多一眼呢段同 git log，唔好同今次嘅改動打交。
+
+**驗過**：`check-invariants.py`（含 `--update-image-lock`）綠、`smoke-shots.py --no-shots`
+7 種尺寸全部 pass、`favicon.ico`／manifest／og-image 用 curl 200 過、Playwright 人手
+screenshot 過飛星＋sparkle 兩個時間點都睇到效果（見上面第 2 點）。
+
+### 2026-09-02 · Claude · 完成一輪慶祝畫面換 KAKA RANGER pose
+
+- `play-finish`（認字／字母隊／數理答完一輪嗰個彈窗）個「★」大字換成
+  `assets/kaka-ranger-celebrate.png`（由 reference sheet 裁「握拳比讚＋眨眼＋小星星」
+  嗰個 pose，235×305、真透明底、29KB）。CSS 只加咗 `.play-finish-star img` 嘅
+  sizing，原本嘅 `playFinishPop` 彈出動畫、reduced-motion 保護全部冇改。
+- **同怪獸打贏動畫嘅時序**：兩樣嘢一齊由 `showPlayFinish()` 觸發（`refreshStarUI()`
+  畫怪獸 `.is-defeated` 喺前，彈窗喺後），本身已經同步，冇加任何額外 glue code。
+  右上角幣格會被彈窗嘅深色遮罩蒙住（設計上刻意——怪獸唔應該搶主角），
+  中間彈窗嘅 KAKA RANGER 先係主慶祝畫面。
+- `js/app.js` 完全冇郁，只改咗 `index.html`（play-finish 個 `<img>`）同
+  `css/styles.css`（`.play-finish-star`）。呢個喺 Claude 擁有嘅「獎勵條／幣／怪獸」
+  範圍入面，冇撞 Cursor 嘅 `star-fx.js`。
+- iPad 5 種尺寸、iPhone 2 種尺寸都人手開彈窗核對過冇 overflow（`smoke-shots.py`
+  嘅自動 walk 冇經過呢個彈窗，因為要答完成輪先觸發，暫時淨係人手驗）。
+
+**（已跟進，見上面最新一段「Logo/favicon/分享圖 + 飛星改真圖 + 答啱 sparkle」）**：
+Keith 之後直接叫 Claude 跟呢個 idea，落地做法係「頭頂爆幾粒 sparkle」而唔係「換一張
+表情圖」——因為查完發現 sheet 嗰 7 個面部表情**冇戴頭盔**，同而家用緊嘅 shooter／
+celebrate 圖（有頭盔）換唔到，直接疊會斷晒角色連貫性。想要真係換表情，要新畫一張
+「戴頭盔嘅表情」，唔係裁而家 sheet 就有得用。
+
+### 2026-09-02 · Cursor · KAKA RANGER 飛星接入
+
+- **方案 (b)**：玩法頁縮圖改用 `kaka-ranger-solo.png` 衍生嘅 `space-ranger-shooter.png`，唔再手畫槍；
+  飛星由**握拳**位射出（`MUZZLE_ANCHOR ≈ {x:0.279, y:0.678}`）。
+- `scripts/crop-ranger-shooter.py` 改由 solo 縮放產圖，產物 meta 寫入
+  `assets/space-ranger-shooter.meta.json`；`js/star-fx.js` + `css/styles.css` 激光閃光位同步。
+- 主頁 hero（`chinese-hero.png`）今次**冇換**——只處理玩法頁 ranger／飛星軌跡。
+
+### 2026-09-01 · Claude · `c5b1c23` → merge `2998374`
+
+1. **主頁 logo 黑邊**：黑邊係烘焙咗喺 `chinese-hero.jpg` 入面（左 41／上 96／右 81／下 30px
+   近黑框），唔係 CSS 問題。裁到圖畫真邊界（978×514，保住「士」字）→ 圓角殘留位用
+   `cutout-bg.py` 去背 → `pngquant` 壓到 198KB → 出 `assets/chinese-hero.png`，
+   `index.html` 嘅 `<img>` 更新 `width/height`。順手裁走 `phonics-hero.jpg` 頂部 23px 黑帶。
+2. **怪獸守幣（試水溫版）**：一隻通用怪獸 👾（`assets/openmoji/1F47E.svg`）企喺右上角幣格
+   上面，答啱一題就 `.is-hit` 抖一抖，儲夠一輪 `.is-defeated` 爆散，提示由「仲差 N 下」
+   變「打贏喇！攞到一個幣」。有 `prefers-reduced-motion` 保護。
+   **呢個係試水溫**：暫時全部主題共用同一隻，未分主題。等 KAKA 試玩過先決定要唔要鋪開。
+3. **部署閘門漏洞**：`deploy-pages.yml` 之前淨係跑 `check-invariants`，唔跑版面回歸，
+   所以 iPad 橫向主頁超出 18–26px 呢個 bug 漏咗上線。而家部署前會跑
+   `smoke-shots.py --no-shots`。同時修咗嗰個 overflow（橫向矮螢幕 hero 收窄至 520px／26vh）。
+
+### 2026-08-31 · Cursor（Keith）
+
+- `js/star-fx.js`：太空戰士答啱由槍口射星去星星條（`MUZZLE_ANCHOR` 同
+  `scripts/crop-ranger-shooter.py` 同步，改圖記得兩邊一齊改）
+- 港式餐廳美食兩冊（經典小菜 15 + 茶餐廳招牌 11），真實相片喺 `assets/food-hk/`
+- 主頁加禧禧小遊戲樂園外部連結
+- 學習卡唔遮字修正
+
+## 新素材：KAKA RANGER（2026-09-02）
+
+Keith 提供咗一套新角色美術，已入 repo，`check-invariants.py` 綠：
+- `assets/kaka-ranger-solo.png` —— 全身企定，真透明底，700px 寬，110KB
+- `docs/design/kaka-ranger-reference-sheet.png` —— 多角度／表情／動作參考 sheet（未全部裁，
+  唔係網頁用圖；已經裁咗幾個出嚟用：下面「已用」）
+- `docs/design/kaka-ranger-logo-source.png` —— Keith 另外上傳嘅 logo lockup 獨立高清圖
+  （446×506，比 reference sheet 入面嗰粒細圖清楚好多，白底冇透明；已經去底、裁好放
+  `assets/`——下面「已用」）。**唔係網頁用圖**，淨係留返將來要重裁 logo 先用。
+- `assets/kaka-ranger-celebrate.png` —— 由 sheet 裁嘅「握拳比讚＋眨眼」慶祝 pose，
+  235×305、真透明底、29KB，用喺 `play-finish` 彈窗
+- `assets/kaka-ranger-star.png` —— 由 reference sheet 裁嘅金色星星（sheet 本身自帶
+  透明底），65×43、744B，用喺飛星特效同 ranger 頭頂 sparkle
+
+同 Buzz Lightyear 撞衫呢一點已經同 Keith 傾過，佢決定接受、照用（`AGENTS.md` 已註明呢個
+2026-09-02 決定，唔代表迪士尼／彼思禁令廢咗——將來新畫嘢仍然唔好特登臨摹）。
+
+**已用**：Cursor 用 `kaka-ranger-solo.png` 接咗玩法頁飛星（`space-ranger-shooter.png`，
+握拳發射，PR #83）；Claude 用裁出嚟嘅慶祝 pose 換咗完成一輪彈窗嘅「★」；Claude 依家呢次
+再用埋星星圖（飛星＋sparkle）同 logo（favicon／icon／og:image，`assets/kaka-ranger-logo.png`
+＋ `assets/icons/*` ＋ `assets/og-image.png`）（見上面「最近改動」）。**未用**：sheet 入面
+仲有側面／背面／企定／揮手／指嘢／握拳噴火／背噴射／7 個裸頭表情頭像／獨立頭盔背包手套
+靴部件圖未裁，留返將來要用先裁（唔好一次過全部裁晒——冇實際用途嘅圖唔好塞入 `assets/`，
+靠 `check_asset_weight` 嘅 400KB／12MB 上限）。7 個表情頭像**冇戴頭盔**，同而家用緊嘅
+有頭盔造型唔啱直接疊用，詳情見上面「最近改動」第 3 點。
+
+## 全站審查（2026-09-01）
+
+Claude 做咗一次完整審查，結果喺 **`docs/site-review-2026-09.md`** —— 按 P0/P1/P2/P3 排好，
+每項有問題、量到嘅證據、建議做法同驗收條件。**Cursor 開工前睇嗰個檔，唔使喺呢度重複。**
+
+重點三項（P0）：字形改用香港標準 + 自己 host 字體、加每隻字嘅掌握度記錄、單字讀音要有得校正。
+入面有一節「我睇過但冇問題、唔好去郁」，避免順手優化整壞嘢。
+
+## 未做／待 Keith 話事
+
+| 項目 | 狀態 | 建議擁有人 |
+|---|---|---|
+| `version.json` 自動 reload（KAKA 部 iPad 冇人幫佢 hard-reload，長遠一定要） | 未開工 | Claude |
+| 行星圖黑底去背（技術已驗證） | 未開工 | Claude |
+| 字詞 union：13 本書有字未計入系列總數（紅輯 212→255、橙輯 183→197） | 未開工 | Claude |
+| 🫎 駝鹿 OpenMoji 淨係得對角，要換圖 | 未開工 | 任一邊 |
+| 已兌換記錄（唔記錄嘅話累積幣數唔誠實） | 未開工 | Claude |
+| 怪獸 phase 2：每個主題一隻、原創畫、家長開關 | **等 KAKA 試玩結果** | Claude |
+| ~~太空戰士造型同 Buzz Lightyear 似唔似~~ | ✅ 已決定接受（2026-09-02，見 AGENTS.md） | — |
+| 每日 3 個幣（真錢）會唔會太鬆手 | **等 Keith 決定** | Keith |
+| ~~答啱每一題要唔要換 ranger 反應~~ | ✅ 已做：頭頂 sparkle（下畫）+ 隨機換 4 款動作 pose（夜晚），兩次都 2026-09-02 | — |
+| 純面部表情（開心／眨眼等 7 款）想真係用得到，要新畫一版有戴頭盔嘅版本 | idea，未開工 | 新畫要 Keith／畫圖果邊 |
+| KAKA RANGER logo 擺喺主頁 `.brand-mark`（同而家 CSS 畫嘅 `.brand-orbit` 二揀一） | 未開工，今次冇做（範圍係 favicon／og-image） | Claude |
+
+## 開工前／收工 checklist
+
+```bash
+git fetch origin main && git rebase origin/main   # 開工第一件事，兩邊都 push main
+# ...改嘢...
+python3 scripts/check-invariants.py               # 一定要 exit 0
+python3 scripts/smoke-shots.py                    # 改過版面／CSS 就一定要跑
+python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
+# merge 入 main → Pages 自動上線 → 返嚟更新呢個檔嘅「最近改動」
+```
+
+⚠️ 部署完，iPhone／iPad 要**閂咗個 tab 再開**先睇到新版（單純 refresh 唔夠，
+`index.html` 本身會被瀏覽器 cache）。呢個就係上面 `version.json` 嗰項想解決嘅問題。

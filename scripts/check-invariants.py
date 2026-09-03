@@ -66,14 +66,16 @@ def check_js_syntax() -> None:
 
 
 def check_no_build_step() -> None:
-    """保持純靜態、無 build step、無外部 runtime 依賴（Google Fonts 除外）。"""
+    """保持純靜態、無 build step、無外部 runtime 依賴。"""
     for bad in ("package.json", "vite.config.js", "webpack.config.js"):
         if Path(bad).exists():
             fail("no-build", f"出現咗 {bad}；AGENTS.md 要求保持無 build step 嘅純靜態站")
     allowed = {
-        "https://fonts.googleapis.com",
-        "https://fonts.gstatic.com",
         "https://yiu0527.github.io",  # 禧禧小遊戲樂園（主頁外部連結）
+        "https://keithcheungmk.github.io",  # 自己個 GitHub Pages 域名，用喺 og:image/twitter:image
+        # 呢個唔係外部依賴：冇任何 JS 會喺 runtime fetch 呢個 host，
+        # 純粹俾分享連結嗰陣（Messages/WhatsApp/Line 等）嘅爬蟲讀 meta tag 用，
+        # 靜態頁面本身完全唔會叫呢個 URL。
     }
     sources = ["index.html"] + JS_FILES + sorted(str(p) for p in Path("css").glob("*.css"))
     hosts = set()
@@ -318,6 +320,8 @@ def check_star_rules() -> None:
         fail("coins", "冇咗舊資料遷移（coinsTotal = floor(累積星星/10)）；KAKA 已賺嘅幣唔可以蒸發")
     if "saveRoundProgress" not in st or "clearRoundProgress" not in st:
         fail("coins", "storage.js 冇咗未完成輪次嘅儲存（中途走咗返嚟進度會冇晒）")
+    if "recordWordResult" not in st or "wordStats" not in st:
+        fail("coins", "storage.js 冇咗 wordStats／recordWordResult（掌握度出題會失效）")
 
     app = strip_js_comments(read("js/app.js"))
     if "earnCoinForMode(playMode)" not in app:
@@ -477,6 +481,79 @@ def check_image_formats() -> None:
             warn("image-format", f"{key} 喺 lock 但檔案唔見咗；刪圖後記得跑 --update-image-lock")
 
 
+def check_font_coverage() -> None:
+    """每個 app 用到嘅漢字都要喺 self-hosted Noto Sans HK subset 入面。"""
+    manifest_path = ROOT / "assets" / "fonts" / "charset.json"
+    if not manifest_path.exists():
+        fail("font-coverage", "未有 assets/fonts/charset.json；跑 python3 scripts/build-font-subset.py")
+        return
+    try:
+        from fontTools.ttLib import TTFont  # type: ignore
+    except ImportError:
+        notes.append("冇 fontTools，跳過字體覆蓋檢查（CI 要裝）")
+        return
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    han = manifest.get("han") or []
+    font_path = ROOT / "assets" / "fonts" / "noto-sans-hk-500.woff2"
+    if not font_path.exists():
+        fail("font-coverage", "未有 assets/fonts/noto-sans-hk-500.woff2")
+        return
+    tt = TTFont(str(font_path))
+    cmap = set()
+    for table in tt["cmap"].tables:
+        cmap.update(table.cmap.keys())
+    missing = [c for c in han if ord(c) not in cmap]
+    for c in missing[:12]:
+        fail("font-coverage", f"字體 subset 缺字「{c}」；加新字後跑 python3 scripts/build-font-subset.py")
+    if len(missing) > 12:
+        fail("font-coverage", f"…仲有 {len(missing) - 12} 個漢字缺字")
+    if not (ROOT / "assets" / "fonts" / "fredoka.woff2").exists():
+        fail("font-coverage", "未有 assets/fonts/fredoka.woff2")
+
+
+POLYPHONE_REQUIRED = {
+    "chang_long": "長",
+    "zhong": "重",
+    "fen_share": "分",
+    "jiao_teach": "教",
+    "shao": "少",
+    "hao": "好",
+    "kan": "看",
+    "du": "讀",
+    "xie": "寫",
+    "chi_eat": "吃",
+    "he_drink": "喝",
+    "shuo": "說",
+    "huan": "還",
+    "le": "了",
+    "jiao_call": "叫",
+    "zhi_point": "指",
+    "chang_sing": "唱",
+    "yao_want": "要",
+    "hui_can": "會",
+    "hui": "回",
+    "de": "的",
+    "shui_sleep": "睡",
+    "xing": "醒",
+    "zhao": "找",
+    "shang": "上",
+    "xia": "下",
+}
+
+
+def check_polyphone_say() -> None:
+    """已知多音字（單字）必須有 say，避免 TTS 讀錯音。"""
+    src = read("js/words.js")
+    for wid, term in POLYPHONE_REQUIRED.items():
+        m = re.search(rf"\{{[^{{}}]*id:\s*'{wid}'[^{{}}]*\}}", src)
+        if not m:
+            fail("polyphone", f"words.js 冇 {wid}（{term}）")
+            continue
+        block = m.group(0)
+        if not re.search(r"say:\s*'[^']+'", block):
+            fail("polyphone", f"「{term}」（{wid}）係多音字，必須有 say")
+
+
 def check_asset_weight() -> None:
     """效能：單張圖唔好超過 400KB，總資產唔好超過 12MB。"""
     total = 0
@@ -514,6 +591,8 @@ CHECKS = [
     check_asset_refs,
     check_asset_manifests,
     check_image_formats,
+    check_font_coverage,
+    check_polyphone_say,
     check_asset_weight,
 ]
 

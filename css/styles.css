@@ -1,5 +1,29 @@
 /* 卡卡學習 — 太空戰士學院主題 */
 
+@font-face {
+  font-family: "Noto Sans HK";
+  src: url("../assets/fonts/noto-sans-hk-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans HK";
+  src: url("../assets/fonts/noto-sans-hk-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fredoka";
+  src: url("../assets/fonts/fredoka.woff2") format("woff2");
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --space-deep: #1a1040;
   --space-navy: #2d1b69;
@@ -17,8 +41,8 @@
   --shadow: 0 14px 32px rgba(26, 16, 64, 0.32);
   --radius: 28px;
   --tap-min: 72px;
-  --font-display: "Fredoka", "Noto Sans TC", sans-serif;
-  --font-body: "Noto Sans TC", "Fredoka", sans-serif;
+  --font-display: "Fredoka", "Noto Sans HK", "PingFang HK", system-ui, sans-serif;
+  --font-body: "Noto Sans HK", "PingFang HK", "Fredoka", system-ui, sans-serif;
 }
 
 *,
@@ -254,12 +278,12 @@ body::before {
 
 .chinese-hero {
   width: min(100%, 720px);
-  aspect-ratio: 857 / 467;
+  aspect-ratio: 978 / 514;
   margin: 0;
   border-radius: 24px;
   overflow: hidden;
   border: none;
-  background: #0a1628;
+  background: transparent;
   box-shadow: var(--shadow);
   flex-shrink: 0;
   line-height: 0;
@@ -1447,10 +1471,16 @@ a.btn {
 }
 
 .play-finish-star {
-  font-size: clamp(3.2rem, 12vw, 4.6rem);
-  line-height: 1;
+  display: flex;
+  justify-content: center;
   filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.75));
   animation: playFinishPop 0.7s ease;
+}
+
+.play-finish-star img {
+  width: auto;
+  height: clamp(120px, 30vw, 190px);
+  display: block;
 }
 
 .play-finish-inner p {
@@ -1581,6 +1611,17 @@ a.btn {
   font-family: var(--font-display);
   font-size: 1.25rem;
   color: var(--teal-soft);
+}
+
+.parent-need-practice {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.parent-need-practice li {
+  margin-bottom: 4px;
 }
 
 .toggle-row,
@@ -1744,7 +1785,7 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* 主頁可捲：hero 唔再撐滿垂直居中，改自然堆叠 */
+/* 主頁可捲：hero 唔再撐滿垂直居中；四粒入口掣超出一屏時可以向下捲 */
 #screen-home .hero-home {
   flex: 0 0 auto;
   justify-content: flex-start;
@@ -1879,7 +1920,7 @@ body {
   #screen-phonics-build .build-tile { min-height: min(72px, 9vh); }
 }
 
-/* 矮屏（橫向 iPad）：主頁可捲，只微調 spacing；唔再壓細 hero */
+/* 矮屏（橫向 iPad）：主頁可捲，只微調 spacing；唔再壓細 hero 去硬砌一屏 */
 @media (orientation: landscape) and (max-height: 880px) {
   .hero-home .chinese-hero { margin-bottom: 8px; }
   .hero-title { font-size: clamp(1.9rem, 5vw, 2.6rem); margin-bottom: 4px; }
@@ -2144,29 +2185,30 @@ body {
   font-weight: 700;
 }
 
-/* 飛去進度條嗰粒星 */
+/* 飛去進度條嗰粒星（KAKA RANGER 人物設定圖嗰粒金星） */
 .fly-star {
   position: fixed;
   z-index: 60;
   pointer-events: none;
-  font-size: clamp(36px, 6.5vw, 56px);
+  width: clamp(36px, 6.5vw, 56px);
   line-height: 1;
-  color: #fde68a;
-  text-shadow:
-    0 0 8px #fff,
-    0 0 18px rgba(255, 255, 255, 0.95),
-    0 0 28px rgba(251, 191, 36, 1),
-    0 0 48px rgba(251, 191, 36, 0.85),
-    0 0 72px rgba(251, 191, 36, 0.55);
-  filter: drop-shadow(0 0 16px rgba(251, 191, 36, 0.9));
+  filter:
+    drop-shadow(0 0 6px #fff)
+    drop-shadow(0 0 14px rgba(251, 191, 36, 1))
+    drop-shadow(0 0 26px rgba(251, 191, 36, 0.75));
   will-change: transform, opacity;
 }
 
+.fly-star img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .fly-star-trail {
-  font-size: clamp(22px, 4vw, 34px);
-  color: rgba(253, 230, 138, 0.75);
-  text-shadow: 0 0 20px rgba(251, 191, 36, 0.65);
-  filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.5));
+  width: clamp(22px, 4vw, 34px);
+  opacity: 0.75;
+  filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.6));
   z-index: 59;
 }
 
@@ -2217,23 +2259,56 @@ body {
 .space-ranger-laser-flash::after {
   content: "";
   position: absolute;
-  left: calc(94% - 4px);
-  top: calc(38% - 6px);
-  width: clamp(36px, 8vw, 52px);
+  /* 身中心固定點（同 js/star-fx.js 嘅 MUZZLE_ANCHOR 對齊，2026-09-02 簡化，
+     唔再逐張 pose 校準拳頭位） */
+  left: calc(50% - 8px);
+  top: calc(52% - 8px);
+  width: clamp(28px, 6vw, 44px);
   height: 6px;
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(253, 230, 138, 0.95), rgba(251, 191, 36, 0.15));
   box-shadow: 0 0 14px rgba(251, 191, 36, 0.95), 0 0 28px rgba(255, 255, 255, 0.65);
-  transform: rotate(-38deg);
+  transform: rotate(-32deg);
   transform-origin: left center;
   animation: laserFlash 0.28s ease-out;
   pointer-events: none;
 }
 
 @keyframes laserFlash {
-  0% { opacity: 0; transform: rotate(-38deg) scaleX(0.2); }
-  35% { opacity: 1; transform: rotate(-38deg) scaleX(1); }
-  100% { opacity: 0; transform: rotate(-38deg) scaleX(1.15); }
+  0% { opacity: 0; transform: rotate(-32deg) scaleX(0.2); }
+  35% { opacity: 1; transform: rotate(-32deg) scaleX(1); }
+  100% { opacity: 0; transform: rotate(-32deg) scaleX(1.15); }
+}
+
+/* 答啱一刻：ranger 頭頂爆幾粒細星,等佢睇落更興奮（用返飛星嗰粒圖,免加新素材） */
+.space-ranger-sparkle {
+  position: absolute;
+  top: 12%;
+  left: 46%;
+  width: 22%;
+  aspect-ratio: 65 / 43;
+  background: url('../assets/kaka-ranger-star.png') center / contain no-repeat;
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.9));
+}
+
+.space-ranger-shoot .space-ranger-sparkle.s1 { animation: rangerSparkle 0.55s ease-out; }
+.space-ranger-shoot .space-ranger-sparkle.s2 { animation: rangerSparkle 0.55s ease-out 0.05s; }
+.space-ranger-shoot .space-ranger-sparkle.s3 { animation: rangerSparkle 0.55s ease-out 0.1s; }
+
+.space-ranger-sparkle.s1 { --sx: -34px; --sy: -20px; }
+.space-ranger-sparkle.s2 { --sx: 6px; --sy: -32px; }
+.space-ranger-sparkle.s3 { --sx: 30px; --sy: -8px; }
+
+@keyframes rangerSparkle {
+  0% { opacity: 0; transform: translate(0, 0) scale(0.4) rotate(0deg); }
+  30% { opacity: 1; transform: translate(calc(var(--sx) * 0.4), calc(var(--sy) * 0.4)) scale(1.1) rotate(50deg); }
+  100% { opacity: 0; transform: translate(var(--sx), var(--sy)) scale(0.7) rotate(110deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .space-ranger-sparkle { display: none; }
 }
 
 .star-target-hit {
@@ -2278,4 +2353,55 @@ body {
   .star-target-hit { animation: none; }
   .space-ranger { transition: none; }
   .space-ranger-laser-flash::after { display: none; }
+}
+
+/* ══ 怪獸守住個幣 ═════════════════════════════════════
+   進度條 = 怪獸嘅血。答啱射中一下，打完先攞到幣。
+   刻意細、企邊位、答緊題唔郁 —— 呢個係認字 app，
+   怪獸唔可以搶走漢字嘅注意力，亦唔可以還擊或者嚇親 KAKA。 */
+.coin-chip {
+  position: relative;
+}
+
+.coin-monster {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(26px, 3.4vw, 36px);
+  height: clamp(26px, 3.4vw, 36px);
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.coin-chip.is-cleared .coin-monster {
+  opacity: 0;
+}
+
+.coin-monster.is-hit {
+  animation: monsterHit 0.42s ease;
+}
+
+@keyframes monsterHit {
+  0% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+  25% { transform: translate(-50%, -58%) rotate(-14deg) scale(1.18); filter: brightness(1.7); }
+  55% { transform: translate(-50%, -50%) rotate(10deg) scale(0.94); }
+  100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+}
+
+.coin-monster.is-defeated {
+  animation: monsterPoof 0.7s ease forwards;
+}
+
+@keyframes monsterPoof {
+  0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+  40% { transform: translate(-50%, -70%) scale(1.4) rotate(18deg); opacity: 1; }
+  100% { transform: translate(-50%, -120%) scale(0.2) rotate(48deg); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coin-monster.is-hit,
+  .coin-monster.is-defeated { animation: none; }
+  .coin-monster { transition: none; }
 }

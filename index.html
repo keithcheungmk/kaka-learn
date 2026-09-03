@@ -7,10 +7,23 @@
   <meta name="theme-color" content="#2d1b69" />
   <title>卡卡學習・太空戰士</title>
   <meta http-equiv="Cache-Control" content="no-cache" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@500;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./css/styles.css?v=20260901a" />
+
+  <!-- KAKA RANGER 徽章：favicon / app icon -->
+  <link rel="icon" href="./assets/icons/favicon.ico" sizes="32x32" />
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/icon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/icon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/icon-180.png" />
+  <link rel="manifest" href="./assets/icons/site.webmanifest" />
+
+  <!-- 分享連結預覽：KAKA RANGER 完整 logo -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="卡卡學習・太空戰士" />
+  <meta property="og:description" content="陪小朋友識字、學拼音、玩數學" />
+  <meta property="og:image" content="https://keithcheungmk.github.io/kaka-learn/assets/og-image.png" />
+  <meta property="og:url" content="https://keithcheungmk.github.io/kaka-learn/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://keithcheungmk.github.io/kaka-learn/assets/og-image.png" />
+  <link rel="stylesheet" href="./css/styles.css?v=20260831l" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260815d" />
   <link rel="stylesheet" href="./css/math.css?v=20260811j" />
 </head>
@@ -37,7 +50,7 @@
 
       <div class="hero-home">
         <div class="chinese-hero" aria-hidden="true">
-          <img src="./assets/chinese-hero.jpg?v=20260901a" alt="" width="857" height="467" decoding="async" fetchpriority="high" />
+          <img src="./assets/chinese-hero.png" alt="" width="978" height="514" decoding="async" fetchpriority="high" />
         </div>
         <p class="hero-sub">太空戰士，出發認字、字母同數理！</p>
         <div class="btn-row">
@@ -252,7 +265,7 @@
         <h1>卡卡字母隊</h1>
       </div>
       <div class="phonics-hero" aria-hidden="true">
-        <img src="./assets/phonics-hero.jpg" alt="" width="1100" height="733" loading="lazy" decoding="async" />
+        <img src="./assets/phonics-hero.jpg" alt="" width="1100" height="710" loading="lazy" decoding="async" />
       </div>
       <p class="section-lead">揀一組,先一齊睇字同讀音</p>
       <div class="topic-grid" id="phonics-topic-grid"></div>
@@ -680,7 +693,9 @@
   <!-- 認字：今輪玩完 -->
   <div id="play-finish" class="play-finish" hidden role="dialog" aria-modal="true" aria-labelledby="play-finish-msg">
     <div class="play-finish-inner">
-      <div class="play-finish-star" aria-hidden="true">★</div>
+      <div class="play-finish-star" aria-hidden="true">
+        <img src="./assets/kaka-ranger-celebrate.png" alt="" width="235" height="305" decoding="async" />
+      </div>
       <p id="play-finish-msg">今輪玩完喇！你好叻呀！</p>
       <div class="btn-row">
         <button type="button" class="btn btn-secondary" id="btn-play-again">再玩一輪</button>
@@ -737,6 +752,14 @@
         <div class="stat-row"><span>累積答啱</span><strong id="parent-total-stars">0</strong></div>
         <div class="stat-row"><span>累積 AEON 幣</span><strong id="parent-coins">0</strong></div>
         <p style="font-size:0.95rem;margin-top:4px">完成一輪 = 1 枚 AEON 幣；聽一聽／配一配／砌一砌各自一日一個，最多 3 個（爸爸媽媽現實中兌換，無網上付款）</p>
+      </div>
+
+      <div class="parent-section">
+        <h3>字詞掌握</h3>
+        <div class="stat-row"><span>識咗幾多個字</span><strong id="parent-mastered-count">0</strong></div>
+        <p class="parent-mastery-hint" style="font-size:0.95rem;margin:6px 0 4px">連續答啱 3 次，或者累積答啱 3 次，就算識咗。</p>
+        <p style="font-size:0.95rem;margin:4px 0 6px"><strong>最需要練：</strong></p>
+        <ul class="parent-need-practice" id="parent-need-practice"></ul>
       </div>
 
       <div class="parent-section">
