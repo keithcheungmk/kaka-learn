@@ -1,6 +1,7 @@
 # CLAUDE.md
 
 規則同 Cursor 共用一份：見 **[AGENTS.md](./AGENTS.md)**。
+交接而家係三方：Cursor ⇄ Claude (Cowork) ⇄ Codex (ChatGPT)，見 `docs/handover.md`。
 
 Merge 前必須跑：
 

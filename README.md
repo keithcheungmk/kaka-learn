@@ -148,7 +148,10 @@ js/app.js           # 畫面同遊戲循環（classic script）
 js/words.js         # 字詞 + 主題 + 系統 Emoji 插圖
 js/storage.js       # localStorage
 js/speech.js        # 粵語 TTS + 簡短音效
-AGENTS.md           # 給協作 agent 嘅說明
+docs/handover.md    # 三方交接簿（Cursor ⇄ Claude ⇄ Codex）
+AGENTS.md           # 共用規則（Cursor／Claude／Codex）
+CLAUDE.md           # Claude 入口，指向 AGENTS.md
+CODEX.md            # Codex 入口，指向 AGENTS.md
 ```
 
 純靜態頁，**唔使 build**；用普通 `<script>` 載入（非 ES module），方便 iPad／預覽側欄。
