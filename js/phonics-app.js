@@ -306,11 +306,12 @@
     const grid = $('#phonics-topic-grid');
     if (!grid) return;
     grid.innerHTML = '';
-    PHONICS_TOPICS.forEach((topic) => {
+    PHONICS_TOPICS.forEach((topic, index) => {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'topic-card';
       btn.innerHTML = `
+        <span class="phonics-mission-number" aria-hidden="true">MISSION ${String(index + 1).padStart(2, '0')}</span>
         <span class="topic-cover" aria-hidden="true">${topic.cover}</span>
         <span class="topic-title term-en">${topic.title}</span>
         <span class="topic-blurb term-en">${topic.blurb}</span>

@@ -82,6 +82,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-04 · Codex（Keith：SPACE RANGER PHONICS Phase 1 品牌統一）
+
+- Phonics 主題頁全面退役鹿仔視覺：背景改用既有深藍太空主題，hero 改為 KAKA Ranger、星球隊徽及 `c-a-t` 聲音能量設計
+- 12 個主題卡統一加入 `MISSION 01–12` 任務編號；今階段只改品牌與導覽視覺，課程內容及玩法保持不變
+- 新增 invariant，禁止 Phonics 再引用舊 `phonics-hero.jpg`／`phonics-space-bg.jpg`，並鎖定 KAKA Ranger hero 必要元素
+- 已驗證：invariants 32 項、storage 11 項、math storage 4 項、version checker 3 項全部通過；iPad 橫向及 390px 手機實機瀏覽器驗證無重疊／橫向溢出，第一個字母任務可正常開啟
+- **踩咗** `index.html`、`css/phonics.css`、`js/phonics-app.js`、`scripts/check-invariants.py`、`AGENTS.md`、`docs/handover.md`
+
 ### 2026-09-04 · Codex（Keith：主頁入口層級、Phonics 命名、底部工具列、「長」讀音）
 
 - 「禧禧遊戲樂園」升級成第四個主要入口，視覺同其他學習入口同級；Profile 畫面連結亦同步改名

@@ -453,6 +453,20 @@ def check_three_entries() -> None:
         fail("entries", "Phonics 入口名稱要統一做「SPACE RANGER PHONICS」")
 
 
+def check_phonics_ranger_theme() -> None:
+    """Phonics 已由鹿主題轉做 KAKA Ranger，舊鹿圖唔可以再接入畫面。"""
+    html = read("index.html")
+    css = read("css/phonics.css")
+    joined = html + css
+    for old_asset in ["phonics-hero.jpg", "phonics-space-bg.jpg"]:
+        if old_asset in joined:
+            fail("phonics-theme", f"Phonics 仍引用舊鹿素材 {old_asset}")
+    if "kaka-ranger-solo.png" not in html:
+        fail("phonics-theme", "Phonics hero 必須顯示 KAKA Ranger")
+    if "phonics-energy-word" not in html or "SOUND MISSION" not in html:
+        fail("phonics-theme", "Phonics hero 缺少 Ranger Sound Mission／能量字母")
+
+
 # ---------------------------------------------------------------- 故障隔離
 
 def check_storage_isolation() -> None:
@@ -739,6 +753,7 @@ CHECKS = [
     check_ranger_mirror_dodge,
     check_no_zoom,
     check_three_entries,
+    check_phonics_ranger_theme,
     check_storage_isolation,
     check_module_isolation,
     check_math_boot_guard,
