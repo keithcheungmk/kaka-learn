@@ -12,12 +12,13 @@
 - 呢個檔唔係規則書。任何「以後都要咁做」嘅嘢要寫入 `AGENTS.md`，
   而且同時喺 `scripts/check-invariants.py` 加一個 `check_xxx()`，靠機器守住，唔好靠記憶。
 
-## 而家嘅狀態（2026-09-02）
+## 而家嘅狀態（2026-09-03）
 
 - `origin/main` 已含：P0 三項（字形／掌握度／讀音，PR #82）、KAKA RANGER 飛星接入（PR #83，
   握拳發射，方案 b）、Claude 加嘅「完成一輪」慶祝 pose、favicon／app icon／分享預覽圖、
-  飛星改用真星圖 + 頭頂 sparkle、**依家呢次**：答啱一題 ranger 會隨機換 4 款動作 pose
-  （見下面「最近改動」）。
+  飛星改用真星圖 + 頭頂 sparkle、答啱一題 ranger 隨機換 4 款動作 pose。
+- **進行中**：PR #81（`cursor/home-hero-scroll-af8d`）已 merge 最新 `main`。主頁准捲 +
+  唔壓細橫向 hero 由 PR 保留；顯示圖沿用 `main` 嘅 `chinese-hero.png`（唔再返 JPG 裁圖）。
 
 ## 分工（點解要分：唔想兩邊改同一段 code）
 
@@ -52,6 +53,15 @@
   唔係 CI 會紅。
 
 ## 最近改動
+
+### 2026-09-03 · Cursor · PR #81 merge `main`（解衝突）
+
+- 撞車：`css/styles.css`、`index.html`、`assets/CREDITS.md`、`image-formats.lock.json`、
+  `space-ranger-shooter.png`、`crop-ranger-shooter.py`、`chinese-hero.jpg`（main 已刪）。
+- 解法：hero 顯示沿用 `chinese-hero.png`（978×514、透明底）；shooter 沿用
+  `kaka-ranger-solo.png`。PR 獨有保留：主頁 `#screen-home` 准捲、橫向 iPad **唔再**
+  `max-height` 壓細 hero。舊 JPG pipeline（`chinese-hero-poster.jpg`、
+  `crop-chinese-hero.py`）已棄，避免同 PNG 去背方案打架。
 
 ### 2026-09-02（夜晚）· Claude · 答啱一題 ranger 隨機換 pose
 

@@ -2,7 +2,7 @@
 
 | 檔案 | 用途 |
 |------|------|
-| `chinese-hero.png` | 主頁任務海報：「太空戰士」四字同人仔太空衣（家庭提供／KAKA RANGER 原創插畫） |
+| `chinese-hero.png` | 主頁任務海報：「太空戰士」四字同人仔太空衣（家庭提供／KAKA RANGER 原創插畫；去背 PNG，貼邊填滿圓角框） |
 | `kaka-ranger-solo.png` | KAKA RANGER 全身透明底原圖（飛星縮圖同主頁素材來源） |
 | `space-ranger-shooter.png` | 玩法頁太空戰士（由 `kaka-ranger-solo.png` 縮放；飛星由拳頭射出） |
 | `chinese-space-bg.jpg` | 認字各屏全屏背景：深海軍藍＋淡紫 nebula，遠景漢字星塵 |

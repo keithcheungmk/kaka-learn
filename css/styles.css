@@ -1785,7 +1785,7 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* 主頁可捲：四粒入口掣超出一屏時可以向下捲 */
+/* 主頁可捲：hero 唔再撐滿垂直居中；四粒入口掣超出一屏時可以向下捲 */
 #screen-home .hero-home {
   flex: 0 0 auto;
   justify-content: flex-start;
@@ -1873,18 +1873,6 @@ body {
   margin: 0 0 clamp(2px, 0.6vh, 8px);
 }
 
-/* 主頁 hero 喺矮屏（橫向 iPad）要收細 */
-.chinese-hero {
-  width: min(100%, 680px);
-}
-
-.chinese-hero img {
-  width: 100%;
-  max-height: min(40vh, 460px);
-  object-fit: cover;
-  object-position: center 42%;
-}
-
 .hero-home .btn-row {
   margin-top: 0;
 }
@@ -1932,11 +1920,8 @@ body {
   #screen-phonics-build .build-tile { min-height: min(72px, 9vh); }
 }
 
-/* 矮屏（橫向 iPad ≤ 880px 高）：主頁 hero 再收細，確保一屏入晒。
-   主頁加咗學院標題同外部連結之後，26px 都會爆，所以 hero 要再讓多少少。 */
+/* 矮屏（橫向 iPad）：主頁可捲，只微調 spacing；唔再壓細 hero 去硬砌一屏 */
 @media (orientation: landscape) and (max-height: 880px) {
-  .chinese-hero { width: min(100%, 520px); }
-  .chinese-hero img { max-height: 26vh; }
   .hero-home .chinese-hero { margin-bottom: 8px; }
   .hero-title { font-size: clamp(1.9rem, 5vw, 2.6rem); margin-bottom: 4px; }
   .hero-sub { margin: 0 0 clamp(4px, 1.2vh, 12px); }
