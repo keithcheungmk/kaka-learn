@@ -15,6 +15,7 @@
 ## 而家嘅狀態（2026-09-03）
 
 - 紅⑪ `rb_xiaoming`《小明和氣球》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「快起牀」保留「牀」）。其他紅輯書仍係推測，唔好順手改。
+- 橙④ `ob_xiezi`《鞋子》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「脫了」用肉月旁「脫」）。其他橙輯書仍係推測，唔好順手改。
 - `origin/main` 已含：P0 三項（字形／掌握度／讀音，PR #82）、KAKA RANGER 飛星接入（PR #83，
   握拳發射，方案 b）、Claude 加嘅「完成一輪」慶祝 pose、favicon／app icon／分享預覽圖、
   飛星改用真星圖 + 頭頂 sparkle、**依家呢次**：答啱一題 ranger 會隨機換 4 款動作 pose
@@ -53,6 +54,13 @@
   唔係 CI 會紅。
 
 ## 最近改動
+
+### 2026-09-03 · Cursor（Keith 授權）· 橙④《鞋子》實體字卡覆寫
+
+- `data/book-cards/ob_xiezi.json`（`allow_words: true`）→ `apply-book-cards.py --write --sync-topic`
+- 舊推測（鞋櫃／放學／回／家拆分等）作廢；16 張卡表面形入 `ob_xiezi.wordIds`，`verified: true`
+- 新詞補入 `js/words.js`（含「脫了」「回家」「舒服地」「舒舒服服地」「地」）；「脫了」用肉月旁「脫」
+- `--sync-topic` 只把新 id 追加到橙輯總表；**其他未對卡嘅橙輯書 `wordIds` 冇改**；**冇掂紅輯**
 
 ### 2026-09-03 · Cursor（Keith 授權）· 紅⑪《小明和氣球》實體字卡覆寫
 

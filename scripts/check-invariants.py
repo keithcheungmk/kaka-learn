@@ -533,6 +533,7 @@ POLYPHONE_REQUIRED = {
     "hui_can": "會",
     "hui": "回",
     "de": "的",
+    "di": "地",
     "shui_sleep": "睡",
     "xing": "醒",
     "zhao": "找",
