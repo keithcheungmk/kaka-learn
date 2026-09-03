@@ -911,16 +911,16 @@ div.star-panel {
 }
 
 .home-friend-link {
-  display: inline-block;
-  margin-top: 4px;
-  padding: 6px 10px;
-  font-size: 0.92rem;
-  color: rgba(248, 250, 252, 0.72);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  background: none;
-  border: none;
-  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #21154e;
+}
+
+.btn-friend {
+  background: linear-gradient(180deg, #a7f3d0, #34d399);
+  box-shadow: 0 7px 0 #07886a, var(--shadow);
 }
 
 .profile-pick {
@@ -1003,7 +1003,8 @@ div.star-panel {
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
-  margin-top: 4px;
+  margin-top: auto;
+  padding-top: clamp(12px, 3vh, 30px);
 }
 
 .home-side-row .btn {
@@ -2108,7 +2109,7 @@ body {
 
 /* 主頁可捲：四粒入口掣超出一屏時可以向下捲 */
 #screen-home .hero-home {
-  flex: 0 0 auto;
+  flex: 1 0 auto;
   justify-content: flex-start;
 }
 

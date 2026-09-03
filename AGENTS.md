@@ -118,7 +118,7 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
   未完成嘅輪次會記入 `roundProgress`（key = 玩法|主題|書），中途走咗返嚟接得返，換日清空。
   舊資料遷移：`coinsTotal = floor(totalStars / 10)`，KAKA 已賺嘅幣唔可以蒸發。
 - **字詞掌握度**：`storage.js` 嘅 `wordStats` 記每字 `{right, wrong, streak}`；答啱／答錯都寫入，`pickTarget()` 會偏向未識字。改 schema 要更新 `scripts/test-storage.mjs`。
-- **多音字讀音**：`words.js` 可選填 `say`（例：`長` → `say: '好長'`）；TTS 用 `say || term`。`check-invariants.py` 有已知多音字清單，單字必須有 `say`。
+- **多音字讀音**：`words.js` 可選填 `say`；TTS 用 `say || term`。畫面同聲音要一致，所以單字「長」只可以讀「長」，唔好用「好長」消歧義；若裝置 TTS 讀音唔準，應改用固定粵語音檔。`check-invariants.py` 有已知多音字清單，單字必須有 `say`。
 - 模式 B 必須維持「先撳字 → 再撳圖」。
 - **砌一砌淡色格（`.build-ghost`）係配對支架，唔係洩題。** 目標係活動學習：睇圖 → 喺字池搵同一個字 → 拖／撳入格；靠重複移動嚟認字形。唔好刪淡字、唔好改成空白考試格。字池要留干擾字，等卡卡真係要揀。
 - **遊戲畫面一屏到底，唔准捲。** 只有「主頁／揀主題／揀書／字母隊揀主題」准上下捲（純瀏覽、唔涉拖曳）。
@@ -164,4 +164,3 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - 已對過字卡嘅書會有 `verified: true` 同 `cardSource`；冇呢兩個 field 就即係仲係推測。
 - **字卡顯示**：大漢字＋讀音；可配個簡單 emoji 做裝飾，但唔使為單字／短語強求詞形或貼圖。
 - 其他主題（動物、食物…）維持教「詞＋emoji」，唔受呢條影響。
-

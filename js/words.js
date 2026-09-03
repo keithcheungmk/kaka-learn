@@ -418,7 +418,7 @@ const WORDS = [
   { id: 'waihgan', term: '頸巾', isDeer: false, emoji: '🧣', badge: '', plate: '#401018' },
   { id: 'shoutao', term: '手套', isDeer: false, emoji: '🧤', badge: '', plate: '#3a2818' },
   // 相反／空間（主題 opposites；大／小／多／少／上／下同紅輯共用）
-  { id: 'chang_long', term: '長', say: '好長', isDeer: false, emoji: '📏', badge: '長', plate: '#1a3050' },
+  { id: 'chang_long', term: '長', say: '長', isDeer: false, emoji: '📏', badge: '長', plate: '#1a3050' },
   { id: 'duan_short', term: '短', isDeer: false, emoji: '✏️', badge: '短', plate: '#3a3010' },
   { id: 'gao_tall', term: '高', isDeer: false, emoji: '🦒', badge: '高', plate: '#3a3010' },
   { id: 'ai_short_height', term: '矮', isDeer: false, emoji: '🐣', badge: '矮', plate: '#402038' },

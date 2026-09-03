@@ -365,10 +365,8 @@ def check_profiles() -> None:
             fail("profiles", f"唔見頭像 {p}")
     if 'id="modal-pin"' in html or 'id="btn-parent"' in html:
         fail("profiles", "家長 PIN／家長區入口應該掹走（改用換小朋友）")
-    if "禧禧小遊戲樂園" in html or "禧禧樂園" in html:
-        fail("profiles", "外鏈唔好叫「禧禧…」，避免同禧禧 Profile 撞名")
-    if "小遊戲樂園" not in html:
-        fail("profiles", "外鏈文案要改「小遊戲樂園」")
+    if "禧禧遊戲樂園" not in html:
+        fail("profiles", "外鏈文案要係「禧禧遊戲樂園」")
     if 'id="screen-progress"' not in html:
         fail("profiles", "唔見 #screen-progress（我的進度頁）")
     st = strip_js_comments(read("js/storage.js"))
@@ -446,11 +444,13 @@ def check_three_entries() -> None:
     html = read("index.html")
     for btn, name in [
         ("btn-start-topics", "小鹿認字探險"),
-        ("btn-start-phonics", "卡卡字母隊"),
+        ("btn-start-phonics", "SPACE RANGER PHONICS"),
         ("btn-start-math", "小鹿數理探險"),
     ]:
         if btn not in html:
             fail("entries", f"index.html 唔見 #{btn}（{name} 入口）")
+    if 'id="btn-start-phonics" aria-label="SPACE RANGER PHONICS">SPACE RANGER PHONICS</button>' not in html:
+        fail("entries", "Phonics 入口名稱要統一做「SPACE RANGER PHONICS」")
 
 
 # ---------------------------------------------------------------- 故障隔離
@@ -651,6 +651,8 @@ def check_polyphone_say() -> None:
         block = m.group(0)
         if not re.search(r"say:\s*'[^']+'", block):
             fail("polyphone", f"「{term}」（{wid}）係多音字，必須有 say")
+        if wid == "chang_long" and not re.search(r"say:\s*'長'", block):
+            fail("polyphone", "單字「長」嘅聲音必須只讀「長」，唔可以讀成「好長」")
 
 
 def check_match_naming() -> None:
