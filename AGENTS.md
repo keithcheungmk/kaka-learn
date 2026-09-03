@@ -123,7 +123,8 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - **砌一砌淡色格（`.build-ghost`）係配對支架，唔係洩題。** 目標係活動學習：睇圖 → 喺字池搵同一個字 → 拖／撳入格；靠重複移動嚟認字形。唔好刪淡字、唔好改成空白考試格。字池要留干擾字，等卡卡真係要揀。
 - **遊戲畫面一屏到底，唔准捲。** 只有「主頁／揀主題／揀書／字母隊揀主題」准上下捲（純瀏覽、唔涉拖曳）。
   尺寸用 `min(px, vw, vh)` 跟住視窗高度縮；橫向嘅砌一砌係兩欄（左圖右字池）。
-  改完一定要跑 `python3 scripts/smoke-shots.py`（CI 會跑 5 種 iPad + 2 種 iPhone），iPad 要捲就係 blocker。
+  真改版面／CSS／遊戲流程：本地一定要跑 `python3 scripts/smoke-shots.py`（CI 都會跑 5 種 iPad + 2 種 iPhone），iPad 要捲就係 blocker。
+  小改動（換圖／label／文案）唔使本地重跑 smoke，見下面「小改動快徑」。
   手機（≤700px 闊）准捲——鎖死唔捲會剪走內容；但任何尺寸都唔准元素重疊。
   ⚠️ 唔好喺遊戲畫面嘅 flex 子元素落 `min-height: 0`：空間唔夠時容器會塌陷，仔元素爆出嚟疊住下一格。
 - **插圖用 OpenMoji**（`assets/openmoji/*.svg`，CC BY-SA 4.0）**＋淺色圓碟**。
@@ -149,6 +150,7 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
   - 完結要粵語「今輪玩完喇」+ 短慶祝，再揀再玩或返主題。唔好無限出題。
 - 揀玩法頁用三張圖卡（聽一聽／配一配／砌一砌），標題統一叫「配一配」（副標先寫「睇圖，揀漢字」），字母隊入口一樣。令卡卡唔使靠讀長句子先知點玩。
 - 保持單頁、無 build step（純靜態 + ES modules），除非產品明確要求框架。
+- **小改動快徑**（換圖、改 2 個 label、文案微調；唔改 layout／CSS／遊戲流程）：本地 `check-invariants.py` 綠 + GitHub CI 綠 → 即刻 merge（唔好叫 Keith QA）。證據一張改動畫面截圖。**唔使** demo 片、computerUse、本地重跑 `smoke-shots.py`（CI 已跑）。新漢字仍要 font subset；唔好跳過 CI。真改版面／CSS／遊戲流程仍要完整 computerUse + 片 + 本地 smoke。詳見 `docs/qa-check.md` Fast review。
 - **唔好叫產品擁有人親自檢查或確認先部署。** 跟 `docs/qa-check.md`：push 後跑 `qa-report.py` → 檢查 agent 補視覺（≤10 分鐘、禁預設 computerUse）→ 「可以 merge」就 merge 入 `main`（Pages 自動上線）→ 之後先知會做咗咩。
 
 ## 《我自己會讀》書卡用字規則（紅輯／橙輯…）

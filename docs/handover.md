@@ -42,7 +42,8 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 - 紅⑪ `rb_xiaoming`《小明和氣球》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「快起牀」保留「牀」）。
 - 紅③ `rb_yusan`《雨傘》已用 2026-08-11 書本 PDF 故事頁印刷詞覆寫（`verified: true`；詞／短語：橙／藍／綠／黃／花雨傘、收起小雨傘、太陽出來了、出來了）。**唔係獨立認字卡相**——若之後影到書後字卡，以字卡覆寫。其他紅輯書仍係推測，唔好順手改。
 - 橙④ `ob_xiezi`《鞋子》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「脫了」用肉月旁「脫」）。其他橙輯書仍係推測，唔好順手改。
-- 卡卡／禧禧頭像已對調：卡卡＝露齒笑、禧禧＝圓框較淡微笑（`assets/profile-kaka.jpg`、`assets/profile-heihei.jpg`）。
+- 卡卡／禧禧頭像已對調（PR #91 已入 `main`）：卡卡＝露齒笑、禧禧＝圓框較淡微笑（`assets/profile-kaka.jpg`、`assets/profile-heihei.jpg`）。顯示名「禧禧」，儲存 id 仍係 `heihei`。
+- **小改動快徑**（Keith 2026-09-03 同意）：換圖／label／文案 → CI 綠即 merge；一張截圖；唔使片／computerUse／本地 smoke。詳見 `AGENTS.md`／`docs/qa-check.md`。
 - `origin/main` 已含：P0 三項（PR #82）、KAKA RANGER 飛星（PR #83）、完成一輪慶祝 pose、favicon／og、sparkle、隨機 pose、UI 審查落地（PR #86）、ranger 朝右（PR #87）。
 
 ## 分工（點解要分：唔想兩個人同時改同一段 code）
@@ -82,7 +83,16 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-03 · Cursor（Keith 同意：小改動快徑寫入規則）
+
+- 小改動（換圖、改 2 個 label、文案微調）：CI 綠 → 即刻 merge；證據一張截圖；唔使 demo 片／computerUse／本地 `smoke-shots.py`
+- 真改版面／CSS／遊戲流程仍然要完整驗收；invariants 本地綠、font subset、唔跳 CI 仍然硬性
+- **冇改** Claude 嘅 OCR／CI／獎勵條／image lock 擁有權，淨係澄清檢查節奏
+- **踩咗** `AGENTS.md`、`docs/qa-check.md`、`docs/handover.md`
+
 ### 2026-09-03 · Cursor（Keith：對調頭像 + 顯示名禧禧）
+
+- **已 squash-merge PR #91**（`d1bd4a5`）入 `main`；live 要閂 tab 再開
 
 - 卡卡／禧禧頭像對調：卡卡＝露齒笑、禧禧＝圓框較淡微笑
 - 畫面顯示名「希希」→「禧禧」；storage id 仍然係 `heihei`（唔改，進度唔會斷）
@@ -357,7 +367,7 @@ Claude 做咗一次完整審查，結果喺 **`docs/site-review-2026-09.md`** �
 git fetch origin main && git rebase origin/main   # 開工第一件事；三個 agent 都可能 push main
 # 認領「進行中」→ 改嘢 → 清認領
 python3 scripts/check-invariants.py               # 一定要 exit 0
-python3 scripts/smoke-shots.py                    # 改過版面／CSS 就一定要跑
+python3 scripts/smoke-shots.py                    # 改過版面／CSS／遊戲流程就一定要跑；小改動（換圖／label／文案）唔使本地重跑，CI 已跑
 python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
 # merge 入 main → Pages 自動上線 → 返嚟更新呢個檔嘅「最近改動」（署名 Cursor／Claude／Codex）
 ```

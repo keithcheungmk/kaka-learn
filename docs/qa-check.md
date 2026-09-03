@@ -135,6 +135,16 @@
 
 檢查 agent **必須**跟呢條快徑；唔好重複 CI 已做嘅嘢，**預設禁止 computerUse**（除非 diff 改咗 CSS 動畫或新 UI 元件）。
 
+### 小改動（swap 圖／改 2 個 label／文案微調）
+
+Keith 2026-09-03 同意嘅常設快徑。範圍：**唔改** layout、CSS、遊戲流程。
+
+- GitHub CI 綠（硬性約束 + iPad 版面）→ **即刻 merge**；唔好叫產品擁有人 QA
+- 實作證據：**一張**改動畫面截圖就夠
+- **跳過** computerUse、demo 片、本地重跑 `smoke-shots.py`（CI 已經跑）
+- 仍然要：push 前本地 `python3 scripts/check-invariants.py` 綠；新漢字要 font subset；**唔好跳過 CI**
+- 真改版面／CSS／遊戲流程：仍然要完整 computerUse + 片 + 本地 smoke
+
 | 步驟 | 做咩 | 時間上限 |
 |------|------|----------|
 | 0 | `python3 scripts/qa-report.py`（預填報告）；exit ≠0 → 直接「有問題」 | 5 min |
