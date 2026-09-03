@@ -38,11 +38,11 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 ## 而家嘅狀態（2026-09-03）
 
-- **Cursor**：雙小朋友 Profile MVP（`cursor/dual-child-profiles-6368`）。主頁先揀卡卡／希希；`kaka-learn-v1`／`kaka-math-v1` 按人分倉；舊資料歸入卡卡。家長 PIN 區已撤。
+- **Cursor**：雙小朋友 Profile MVP（`cursor/dual-child-profiles-6368`）。主頁先揀卡卡／禧禧；`kaka-learn-v1`／`kaka-math-v1` 按人分倉；舊資料歸入卡卡。家長 PIN 區已撤。顯示名「禧禧」，儲存 id 仍係 `heihei`。
 - 紅⑪ `rb_xiaoming`《小明和氣球》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「快起牀」保留「牀」）。
 - 紅③ `rb_yusan`《雨傘》已用 2026-08-11 書本 PDF 故事頁印刷詞覆寫（`verified: true`；詞／短語：橙／藍／綠／黃／花雨傘、收起小雨傘、太陽出來了、出來了）。**唔係獨立認字卡相**——若之後影到書後字卡，以字卡覆寫。其他紅輯書仍係推測，唔好順手改。
 - 橙④ `ob_xiezi`《鞋子》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「脫了」用肉月旁「脫」）。其他橙輯書仍係推測，唔好順手改。
-- 卡卡／希希頭像已換成太空戰士插畫（`assets/profile-kaka.jpg`、`assets/profile-heihei.jpg`）。
+- 卡卡／禧禧頭像已對調：卡卡＝露齒笑、禧禧＝圓框較淡微笑（`assets/profile-kaka.jpg`、`assets/profile-heihei.jpg`）。
 - `origin/main` 已含：P0 三項（PR #82）、KAKA RANGER 飛星（PR #83）、完成一輪慶祝 pose、favicon／og、sparkle、隨機 pose、UI 審查落地（PR #86）、ranger 朝右（PR #87）。
 
 ## 分工（點解要分：唔想兩個人同時改同一段 code）
@@ -81,6 +81,13 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
   唔係 CI 會紅。Codex／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
 
 ## 最近改動
+
+### 2026-09-03 · Cursor（Keith：對調頭像 + 顯示名禧禧）
+
+- 卡卡／禧禧頭像對調：卡卡＝露齒笑、禧禧＝圓框較淡微笑
+- 畫面顯示名「希希」→「禧禧」；storage id 仍然係 `heihei`（唔改，進度唔會斷）
+- 字體 subset 補「禧」
+- **踩咗** `assets/profile-*.jpg`、`index.html`、`js/storage.js`、invariants／font subset、AGENTS／README／handover
 
 ### 2026-09-03 · Cursor（三方交接：加 Codex／ChatGPT）
 

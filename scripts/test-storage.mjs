@@ -185,7 +185,7 @@ test('resetStars：清空幣同 wordStats', () => {
   assert.equal(Object.keys(next.wordStats).length, 0);
 });
 
-test('Profile 隔離：卡卡賺幣唔入希希', () => {
+test('Profile 隔離：卡卡賺幣唔入禧禧', () => {
   const S = freshStorage();
   S.setActiveProfile('kaka');
   S.earnCoinForMode('listen');
