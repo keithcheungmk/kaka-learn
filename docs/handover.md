@@ -30,6 +30,7 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| SPACE RANGER PHONICS Phase 2 Sound Energy | Codex | `js/phonics-words.js`, `js/phonics-app.js`, `css/phonics.css`, `scripts/check-invariants.py` | 2026-09-04 | Keith 已批准；退役 Numberblocks 式字母表情，保留拼音互動及三種玩法 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
