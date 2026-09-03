@@ -12,8 +12,9 @@
 - 呢個檔唔係規則書。任何「以後都要咁做」嘅嘢要寫入 `AGENTS.md`，
   而且同時喺 `scripts/check-invariants.py` 加一個 `check_xxx()`，靠機器守住，唔好靠記憶。
 
-## 而家嘅狀態（2026-09-02）
+## 而家嘅狀態（2026-09-03）
 
+- 紅⑪ `rb_xiaoming`《小明和氣球》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「快起牀」保留「牀」）。其他紅輯書仍係推測，唔好順手改。
 - `origin/main` 已含：P0 三項（字形／掌握度／讀音，PR #82）、KAKA RANGER 飛星接入（PR #83，
   握拳發射，方案 b）、Claude 加嘅「完成一輪」慶祝 pose、favicon／app icon／分享預覽圖、
   飛星改用真星圖 + 頭頂 sparkle、**依家呢次**：答啱一題 ranger 會隨機換 4 款動作 pose
@@ -52,6 +53,14 @@
   唔係 CI 會紅。
 
 ## 最近改動
+
+### 2026-09-03 · Cursor（Keith 授權）· 紅⑪《小明和氣球》實體字卡覆寫
+
+- `data/book-cards/rb_xiaoming.json`（`allow_words: true`）→ `apply-book-cards.py --write --sync-topic`
+- 舊單字腦補（朋／友／氣／球拆分等）作廢；29 張卡表面形入 `rb_xiaoming.wordIds`，`verified: true`
+- 新詞補入 `js/words.js`（含「起牀」「快起牀」，字形係「牀」唔係「床」）；字體 subset 已加「牀」
+- `AGENTS.md`：紅輯認字卡改「以卡上實際詞／字／短語為準」
+- **唔好 merge Gemini #58**；其他未對卡嘅紅輯書 `wordIds` 冇郁
 
 ### 2026-09-02（夜晚）· Claude · 答啱一題 ranger 隨機換 pose
 
