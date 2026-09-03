@@ -28,4 +28,7 @@ touch "$OUT/.nojekyll"
 # 自動 cache-bust：用 commit SHA 蓋過所有 ?v=，agent 唔使再手動改版本號
 find "$OUT" -name '*.html' -print0 | xargs -0 sed -i -E "s/\?v=[A-Za-z0-9_.-]+/?v=${STAMP}/g"
 
-echo "已砌好 $OUT（版本戳 ${STAMP}）"
+# 舊 index.html 仍留喺 iPad cache 時，前端靠呢個 no-store 小檔知道有新版。
+printf '{"version":"%s"}\n' "$STAMP" > "$OUT/version.json"
+
+echo "已砌好 ${OUT}（版本戳 ${STAMP}）"

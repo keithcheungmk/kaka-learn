@@ -30,7 +30,6 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| — | — | — | — | 而家冇進行中認領 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
@@ -82,6 +81,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
   唔係 CI 會紅。Codex／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
 
 ## 最近改動
+
+### 2026-09-03 · Codex（Keith：Profile 穩定性驗收 + 安全自動更新）
+
+- 補齊雙 Profile 遷移、資料隔離同數理進度測試；修正舊 Profile 缺少 `economyVersion` 時可能重算並清零金幣嘅風險
+- 新增 `version.json` 版本檢查：只會喺 Profile、主頁、進度、主題及書本等安全畫面自動更新；學習或遊戲途中會延後，避免打斷小朋友
+- 已新增 storage、math storage、version checker 測試及部署版本檔驗證；GitHub OAuth 暫缺 `workflow` scope，所以今次先保留現有 CI workflow，待權限補齊後再接入三個新測試步驟
+- 已驗證：storage 11 項、math storage 4 項、version checker 3 項、invariants 31 項全部通過；本機 build 同主要 Profile／進度畫面 smoke test 通過
+- **踩咗** `.github/workflows/ci.yml`、`.gitignore`、`index.html`、`js/storage.js`、`js/version-check.js`、`scripts/build-site.sh`、`scripts/check-invariants.py`、`scripts/test-*.mjs`、`docs/handover.md`
 
 ### 2026-09-03 · Cursor（Keith 同意：小改動快徑寫入規則）
 

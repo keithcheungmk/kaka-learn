@@ -208,6 +208,54 @@ test('Profile 隔離：卡卡賺幣唔入禧禧', () => {
   assert.equal(S.loadState().wordStats.gou.wrong, 1);
 });
 
+test('Profile 選擇重新載入後保留，兩邊輪次進度唔互串', () => {
+  const { S, localStorage } = loadStorage();
+  S.setActiveProfile('heihei');
+  S.saveRoundProgress('listen|zoo|', ['gou', 'mao']);
+  const saved = localStorage.getItem('kaka-learn-v1');
+
+  const reloaded = loadStorage();
+  reloaded.localStorage.setItem('kaka-learn-v1', saved);
+  assert.equal(reloaded.S.getActiveProfileId(), 'heihei');
+  assert.deepEqual([...reloaded.S.loadRoundProgress('listen|zoo|')], ['gou', 'mao']);
+
+  reloaded.S.setActiveProfile('kaka');
+  assert.deepEqual([...reloaded.S.loadRoundProgress('listen|zoo|')], []);
+  reloaded.S.saveRoundProgress('listen|zoo|', ['yu']);
+  reloaded.S.setActiveProfile('heihei');
+  assert.deepEqual([...reloaded.S.loadRoundProgress('listen|zoo|')], ['gou', 'mao']);
+});
+
+test('Profile root 正規化：缺欄位會補預設，未知欄位唔污染資料', () => {
+  const { S, localStorage } = loadStorage();
+  localStorage.setItem(
+    'kaka-learn-v1',
+    JSON.stringify({
+      schemaVersion: 3,
+      activeProfileId: 'heihei',
+      profiles: {
+        kaka: { totalStars: 12, unexpected: 'drop-me' },
+        heihei: { coinsTotal: 4, wordStats: null },
+      },
+    }),
+  );
+  const state = S.loadState();
+  assert.equal(S.getActiveProfileId(), 'heihei');
+  assert.equal(state.coinsTotal, 4);
+  assert.deepEqual(Object.keys(state.wordStats), []);
+  assert.equal(state.unexpected, undefined);
+  S.setActiveProfile('kaka');
+  assert.equal(S.loadState().totalStars, 12);
+});
+
+test('損壞 localStorage：安全重設而唔拋錯', () => {
+  const { S, localStorage } = loadStorage();
+  localStorage.setItem('kaka-learn-v1', '{not-json');
+  assert.doesNotThrow(() => S.loadState());
+  assert.equal(S.loadState().totalStars, 0);
+  assert.equal(S.hasActiveProfile(), false);
+});
+
 test('coinLog：派幣寫入今日，歷史骨架有 14 日', () => {
   const S = freshStorage();
   S.setActiveProfile('kaka');
