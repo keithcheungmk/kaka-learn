@@ -1,11 +1,11 @@
-/* 卡卡字母隊 — English Phonics（獨立檔案，唔改動 styles.css） */
+/* SPACE RANGER PHONICS（獨立檔案，唔改動 styles.css） */
 
 .term-en {
   font-family: var(--font-display);
   text-transform: lowercase;
 }
 
-/* Phonics 畫面：小鹿 + 彩色字母太空背景（原創美術，唔用現成教材角色） */
+/* Phonics 畫面：同 KAKA Ranger 主品牌共用深藍太空背景；鹿主題已退役。 */
 .phonics-screen.active {
   position: relative;
   isolation: isolate;
@@ -18,27 +18,168 @@
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(7, 21, 38, 0.58) 0%, rgba(7, 21, 38, 0.42) 45%, rgba(7, 21, 38, 0.72) 100%),
-    url("../assets/phonics-space-bg.jpg") center / cover no-repeat;
+    linear-gradient(180deg, rgba(6, 12, 43, 0.58) 0%, rgba(20, 16, 68, 0.38) 45%, rgba(6, 12, 43, 0.76) 100%),
+    url("../assets/chinese-space-bg.jpg") center / cover no-repeat;
 }
 
 .phonics-hero {
-  width: min(100%, 520px);
+  position: relative;
+  width: min(100%, 760px);
+  min-height: clamp(210px, 31vh, 340px);
   margin: 0 auto 14px;
   border-radius: 28px;
   overflow: hidden;
-  border: 2px solid rgba(94, 234, 212, 0.28);
-  box-shadow: var(--shadow);
-  background: rgba(7, 21, 38, 0.55);
+  border: 2px solid rgba(163, 255, 203, 0.58);
+  box-shadow: 0 0 0 1px rgba(147, 165, 252, 0.24), 0 18px 40px rgba(5, 8, 35, 0.5);
+  background:
+    radial-gradient(circle at 74% 30%, rgba(124, 255, 178, 0.18), transparent 30%),
+    linear-gradient(135deg, rgba(18, 20, 77, 0.96), rgba(31, 20, 89, 0.9));
 }
 
-.phonics-hero img {
+.phonics-hero::before,
+.phonics-hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.phonics-hero::before {
+  width: 260px;
+  height: 90px;
+  left: 20%;
+  top: 48%;
+  border: 3px solid rgba(251, 191, 36, 0.35);
+  transform: rotate(-12deg);
+}
+
+.phonics-hero::after {
+  width: 10px;
+  height: 10px;
+  left: 9%;
+  top: 18%;
+  background: #fde68a;
+  box-shadow: 130px 24px #a3ffcb, 310px -6px #93a5fc, 520px 42px #fb7185, 610px 144px #fde68a;
+}
+
+.phonics-hero-brand {
+  position: absolute;
+  z-index: 3;
+  top: clamp(12px, 2vh, 20px);
+  left: clamp(14px, 2.4vw, 24px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.phonics-hero-logo {
+  width: clamp(58px, 8vw, 82px);
+  height: clamp(58px, 8vw, 82px);
+  object-fit: contain;
+  background: transparent;
+}
+
+.phonics-mission-kicker,
+.phonics-mission-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: var(--gold-soft);
+}
+
+.phonics-mission-kicker {
+  font-size: clamp(0.82rem, 2vw, 1.05rem);
+}
+
+.phonics-hero-action {
+  position: absolute;
+  inset: 0;
+}
+
+.phonics-hero-ranger {
+  position: absolute;
+  z-index: 2;
+  right: clamp(-22px, -2vw, -8px);
+  bottom: clamp(-34px, -3vh, -18px);
+  width: clamp(190px, 30vw, 320px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.4));
+  background: transparent;
+}
+
+.phonics-energy-word {
+  position: absolute;
+  z-index: 2;
+  left: clamp(24px, 7vw, 76px);
+  top: 50%;
+  transform: translateY(-34%);
+  display: flex;
+  align-items: center;
+  gap: clamp(5px, 1vw, 12px);
+}
+
+.phonics-energy-word span {
+  display: grid;
+  place-items: center;
+  width: clamp(58px, 9vw, 88px);
+  height: clamp(66px, 10vw, 96px);
+  border-radius: 22px;
+  background: var(--energy);
+  color: #10151f;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  font-weight: 700;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.45), 0 0 22px color-mix(in srgb, var(--energy) 58%, transparent);
+}
+
+.phonics-energy-word i {
+  width: clamp(10px, 2vw, 24px);
+  height: 4px;
+  border-radius: 999px;
+  background: var(--gold);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+}
+
+.phonics-hero-callout {
+  position: absolute;
+  z-index: 4;
+  left: clamp(18px, 4vw, 42px);
+  bottom: clamp(12px, 2vh, 20px);
+  margin: 0;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(7, 12, 43, 0.74);
+  color: var(--ink);
+  font-size: clamp(0.85rem, 2vw, 1rem);
+}
+
+.phonics-screen .topic-card {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(147, 165, 252, 0.48);
+  background:
+    linear-gradient(145deg, rgba(52, 36, 104, 0.94), rgba(25, 24, 78, 0.94));
+}
+
+.phonics-screen .topic-card::after {
+  content: "";
+  position: absolute;
+  width: 78px;
+  height: 78px;
+  right: -28px;
+  bottom: -34px;
+  border: 2px solid rgba(163, 255, 203, 0.22);
+  border-radius: 50%;
+}
+
+.phonics-mission-number {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-  object-position: center 42%;
+  margin-bottom: 2px;
+  font-size: 0.68rem;
+  text-align: center;
+  color: var(--teal-soft);
 }
 
 .phonics-screen .topic-card,
@@ -47,6 +188,30 @@
 .phonics-screen .build-pool,
 .phonics-screen .match-stage {
   backdrop-filter: blur(2px);
+}
+
+@media (max-width: 700px) {
+  .phonics-hero {
+    min-height: 250px;
+  }
+  .phonics-hero-ranger {
+    width: 168px;
+    right: -32px;
+  }
+  .phonics-energy-word {
+    left: 14px;
+    top: 52%;
+  }
+  .phonics-energy-word span {
+    width: 52px;
+    height: 62px;
+    border-radius: 17px;
+  }
+  .phonics-hero-callout {
+    max-width: 72%;
+    border-radius: 16px;
+    font-size: 0.78rem;
+  }
 }
 
 /* 「活字母」：字母字身 + 原創固定顏色 + 簡單笑臉（唔跟任何現成教材角色設計） */
