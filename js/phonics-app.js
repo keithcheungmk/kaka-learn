@@ -699,7 +699,7 @@
 
     const fb = $('#phonics-build-feedback');
     if (fb) {
-      fb.textContent = '由左到右，砌啱每個字母';
+      fb.textContent = '';
       fb.className = 'feedback';
     }
 
@@ -800,7 +800,7 @@
         renderPhonicsBuildPool();
         const fb = $('#phonics-build-feedback');
         if (fb) {
-          fb.textContent = '由左到右，砌啱每個字母';
+          fb.textContent = '';
           fb.className = 'feedback';
         }
       }

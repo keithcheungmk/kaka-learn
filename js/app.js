@@ -1106,7 +1106,7 @@ function startBuildRound() {
 
   const fb = $('#build-feedback');
   if (fb) {
-    fb.textContent = '由左到右，砌啱每個字';
+    fb.textContent = '';
     fb.className = 'feedback';
   }
 
@@ -1208,7 +1208,7 @@ function onBuildSlotTap(index) {
       renderBuildPool();
       const fb = $('#build-feedback');
       if (fb) {
-        fb.textContent = '由左到右，砌啱每個字';
+        fb.textContent = '';
         fb.className = 'feedback';
       }
     }
