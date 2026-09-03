@@ -26,6 +26,7 @@
   let pActiveTopicId = null;
   let pLearnWords = [];
   let pLearnIndex = 0;
+  let pLearnPassedOnce = false;
   let pListenRound = null;
   let pMatchRound = null;
   let pBuildRound = null;
@@ -338,6 +339,7 @@
     pActiveTopicId = topicId;
     pLearnWords = shuffle(topic.words);
     pLearnIndex = 0;
+    pLearnPassedOnce = false;
     const title = $('#phonics-learn-topic-title');
     if (title) title.textContent = topic.title;
     renderPhonicsLearnCard();
@@ -360,7 +362,7 @@
       }
       if (term) term.textContent = word.word;
       if (lettersRow) lettersRow.innerHTML = '';
-      if (lead) lead.textContent = '睇吓字母，撳喇叭聽字母音（phonics）';
+      if (lead) lead.textContent = '撳卡聽字母音';
     } else {
       if (illust) illust.innerHTML = word.emoji ? phonicsWordIllustHtml(word) : '';
       if (term) term.textContent = word.word;
@@ -382,11 +384,7 @@
         });
       }
       if (lead) {
-        lead.textContent = word.letters
-          ? '睇吓字同圖,撳字母聽字母音，撳喇叭聽成個字'
-          : word.emoji
-            ? '睇吓常見字同圖，撳喇叭聽成個字（一眼認得）'
-            : '睇吓常見字，撳喇叭聽成個字（一眼認得）';
+        lead.textContent = word.letters ? '撳字母聽音' : '撳卡聽英文';
       }
     }
     if (progress) progress.textContent = `${pLearnIndex + 1}/${pLearnWords.length}`;
@@ -394,10 +392,19 @@
     const prev = $('#btn-phonics-learn-prev');
     const next = $('#btn-phonics-learn-next');
     const finishRow = $('#phonics-learn-finish-row');
+    const play = $('#btn-phonics-learn-play');
     const atEnd = pLearnIndex >= pLearnWords.length - 1;
-    if (prev) prev.disabled = pLearnIndex <= 0;
-    if (next) next.textContent = atEnd ? '再睇一次' : '下一張';
-    if (finishRow) finishRow.hidden = !atEnd;
+    if (atEnd) pLearnPassedOnce = true;
+    if (prev) {
+      prev.disabled = pLearnIndex <= 0;
+      prev.textContent = '← 上一張';
+    }
+    if (next) next.textContent = atEnd ? '再睇一次' : '下一張 →';
+    if (finishRow) {
+      finishRow.hidden = false;
+      finishRow.classList.toggle('is-ready', pLearnPassedOnce);
+    }
+    if (play) play.textContent = pLearnPassedOnce ? '學完喇・去玩玩' : '去玩玩';
 
     const plate = illust?.querySelector('.emoji-plate');
     if (plate) plate.classList.add('emoji-plate-lg');
@@ -516,10 +523,10 @@
     const prompt = $('#screen-phonics-listen .prompt-box p');
     if (prompt) {
       prompt.innerHTML = isLetter
-        ? '聽字母讀音，再揀啱嘅<strong>字母</strong>'
+        ? '聽下，揀個字母'
         : target.emoji
-          ? '聽英文讀音,再揀啱嘅<strong>圖畫</strong>'
-          : '聽英文讀音,再揀啱嘅<strong>英文字</strong>';
+          ? '聽下，揀幅圖'
+          : '聽下，揀個字';
     }
 
     const fb = $('#phonics-listen-feedback');
@@ -582,7 +589,7 @@
     }
   }
 
-  /* ---------- 模式 B：睇圖・揀字 ---------- */
+  /* ---------- 模式 B：配一配 ---------- */
 
   function bindPhonicsMatch() {
     const back = $('#btn-back-phonics-match');
@@ -692,7 +699,7 @@
 
     const fb = $('#phonics-build-feedback');
     if (fb) {
-      fb.textContent = '由左到右,砌啱每個字母';
+      fb.textContent = '由左到右，砌啱每個字母';
       fb.className = 'feedback';
     }
 
@@ -725,7 +732,7 @@
       if (filled) slot.classList.add('is-filled');
       if (i === next) slot.classList.add('is-next');
       slot.dataset.index = String(i);
-      slot.setAttribute('aria-label', filled ? `已放 ${filled.char}` : `第 ${i + 1} 格,淡字母 ${ch}`);
+      slot.setAttribute('aria-label', filled ? `已放 ${filled.char}` : `第 ${i + 1} 格，淡字母 ${ch}`);
       slot.innerHTML = `
         <span class="build-ghost term-en" aria-hidden="true">${ch}</span>
         ${filled ? `<span class="build-placed letter-tile" aria-hidden="true">${letterTileHtml(filled.char)}</span>` : ''}`;
@@ -793,7 +800,7 @@
         renderPhonicsBuildPool();
         const fb = $('#phonics-build-feedback');
         if (fb) {
-          fb.textContent = '由左到右,砌啱每個字母';
+          fb.textContent = '由左到右，砌啱每個字母';
           fb.className = 'feedback';
         }
       }
@@ -851,7 +858,7 @@
     } else {
       const fb = $('#phonics-build-feedback');
       if (fb) {
-        fb.textContent = '好!繼續砌下一個';
+        fb.textContent = '好！繼續砌下一個';
         fb.className = 'feedback ok';
       }
     }
