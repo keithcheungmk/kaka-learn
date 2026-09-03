@@ -169,7 +169,10 @@ function normalizeRoot(parsed) {
   PROFILE_IDS.forEach((id) => {
     const src = parsed.profiles && parsed.profiles[id];
     const profile = extractProfileFields(src);
-    applyEconomyMigration(profile, src);
+    // 已經係 Profile root 就唔可以因單一 profile 缺 economyVersion
+    // 而重新用星星計幣；保留現有 coinsTotal，只補返現行版本。
+    const profileSource = src && src.economyVersion ? src : { ...(src || {}), economyVersion: 2 };
+    applyEconomyMigration(profile, profileSource);
     applyDailyReset(profile);
     seedCoinLogFromToday(profile);
     root.profiles[id] = profile;

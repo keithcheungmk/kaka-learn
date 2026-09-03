@@ -95,6 +95,23 @@ def check_cache_bust_tags() -> None:
             fail("cache-bust", f"index.html 嘅 ./{ref} 冇 ?v= 佔位，部署時 cache 會食舊版")
 
 
+def check_safe_auto_update() -> None:
+    """部署有版本檔；前端只可喺安全畫面套用新版，唔可以打斷遊戲。"""
+    html = read("index.html")
+    build = read("scripts/build-site.sh")
+    checker = read("js/version-check.js") if Path("js/version-check.js").exists() else ""
+    if "js/version-check.js?v=" not in html:
+        fail("auto-update", "index.html 冇載入 version-check.js（iPad 會長期停留舊版）")
+    if "version.json" not in build or '"version"' not in build:
+        fail("auto-update", "build-site.sh 冇產出 version.json")
+    if "cache: 'no-store'" not in checker:
+        fail("auto-update", "version-check.js 讀版本時必須用 cache: 'no-store'")
+    for unsafe in ("screen-learn", "screen-play", "screen-listen", "screen-match", "screen-build"):
+        safe_set = re.search(r"SAFE_SCREEN_IDS\s*=\s*new Set\(\[(.*?)\]\)", checker, flags=re.S)
+        if safe_set and unsafe in safe_set.group(1):
+            fail("auto-update", f"{unsafe} 唔可以列做安全 reload 畫面（會打斷學習／遊戲）")
+
+
 # ---------------------------------------------------------------- 字詞資料
 
 CORE_ANIMALS = [
@@ -705,6 +722,7 @@ CHECKS = [
     check_js_syntax,
     check_no_build_step,
     check_cache_bust_tags,
+    check_safe_auto_update,
     check_core_animals,
     check_deer_rules,
     check_word_ids_unique,
