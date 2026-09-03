@@ -1448,6 +1448,7 @@ function renderStarBars() {
 
   hosts.forEach((host) => {
     const screenId = host.closest('.screen')?.id || '';
+    if (screenId === 'screen-progress' || screenId === 'screen-profiles') return;
     const mode = { 'screen-listen': 'listen', 'screen-match': 'match', 'screen-build': 'build' }[screenId];
     let bar = host.querySelector('.star-bar');
     if (!bar) {
