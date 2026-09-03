@@ -30,7 +30,6 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 主頁入口層級／底部工具列／Phonics 命名／「長」讀音 | Codex | `index.html`, `css/styles.css`, `js/words.js` | 2026-09-03 | Keith 已確認方案；改完跑完整版面回歸 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
@@ -82,6 +81,15 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
   唔係 CI 會紅。Codex／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
 
 ## 最近改動
+
+### 2026-09-04 · Codex（Keith：主頁入口層級、Phonics 命名、底部工具列、「長」讀音）
+
+- 「禧禧遊戲樂園」升級成第四個主要入口，視覺同其他學習入口同級；Profile 畫面連結亦同步改名
+- 「卡卡字母隊」所有畫面標題及無障礙名稱統一做 `SPACE RANGER PHONICS`
+- 「我的進度」「換小朋友」移到主頁內容底部；iPad 直向／橫向及 390px 手機實機瀏覽器驗證無重疊
+- 單字「長」由「好長」改成只讀「長」，並加 invariant 防止回歸
+- 已驗證：invariants 31 項、storage 11 項、math storage 4 項、version checker 3 項全部通過；瀏覽器 console 零錯誤
+- **踩咗** `index.html`、`css/styles.css`、`js/words.js`、`scripts/check-invariants.py`、`AGENTS.md`、`docs/handover.md`
 
 ### 2026-09-03 · Codex（Keith：Profile 穩定性驗收 + 安全自動更新）
 
