@@ -15,8 +15,10 @@
 ## 而家嘅狀態（2026-09-03）
 
 - **Cursor**：雙小朋友 Profile MVP（`cursor/dual-child-profiles-6368`）。主頁先揀卡卡／希希；`kaka-learn-v1`／`kaka-math-v1` 按人分倉；舊資料歸入卡卡。家長 PIN 區已撤。
-- 紅⑪ `rb_xiaoming`《小明和氣球》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「快起牀」保留「牀」）。其他紅輯書仍係推測，唔好順手改。
+- 紅⑪ `rb_xiaoming`《小明和氣球》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「快起牀」保留「牀」）。
+- 紅③ `rb_yusan`《雨傘》已用 2026-08-11 書本 PDF 故事頁印刷詞覆寫（`verified: true`；詞／短語：橙／藍／綠／黃／花雨傘、收起小雨傘、太陽出來了、出來了）。**唔係獨立認字卡相**——若之後影到書後字卡，以字卡覆寫。其他紅輯書仍係推測，唔好順手改。
 - 橙④ `ob_xiezi`《鞋子》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「脫了」用肉月旁「脫」）。其他橙輯書仍係推測，唔好順手改。
+- 卡卡／希希頭像已換成太空戰士插畫（`assets/profile-kaka.jpg`、`assets/profile-heihei.jpg`）。
 - `origin/main` 已含：P0 三項（PR #82）、KAKA RANGER 飛星（PR #83）、完成一輪慶祝 pose、favicon／og、sparkle、隨機 pose、UI 審查落地（PR #86）、ranger 朝右（PR #87）。
 
 ## 分工（點解要分：唔想兩邊改同一段 code）
@@ -52,6 +54,14 @@
   唔係 CI 會紅。
 
 ## 最近改動
+
+### 2026-09-03 · Cursor（Keith：紅③《雨傘》字表 + 新頭像）
+
+- 紅③ `rb_yusan`：用 issue #57 書本 PDF 故事頁印刷詞覆寫（9 個表面形；舊推測看見／聽見／水／雲朵等作廢）
+- JSON：`data/book-cards/rb_yusan.json`（`allow_words: true`）→ `apply-book-cards.py --write --sync-topic`
+- **來源係書頁，唔係獨立認字卡相**；其他未對卡紅輯書 `wordIds` 冇改；**冇掂橙輯**；**唔好 merge Gemini #58**
+- 卡卡／希希頭像換成太空戰士插畫 JPEG（384×384）；補 `assets/openmoji/1F302.svg`（🌂 收起小雨傘）
+- **踩咗** `js/words.js`、`assets/profile-*.jpg`、handover
 
 ### 2026-09-03 · Cursor（Keith 授權：雙小朋友 Profile MVP）
 
