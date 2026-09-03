@@ -296,6 +296,9 @@ def check_build_ghost() -> None:
         block = re.search(r"(?ms)^\.build-ghost\s*\{(.*?)\}", css).group(1)
         if re.search(r"display\s*:\s*none", block) or re.search(r"opacity\s*:\s*0\s*[;}]", block):
             fail("build-ghost", ".build-ghost 被整到隱形；淡格係配對支架，唔係洩題")
+        alphas = [float(x) for x in re.findall(r"rgba\(\s*[\d.\s,]+?,\s*(0?\.\d+|\d+(?:\.\d+)?)\s*\)", block)]
+        if alphas and max(alphas) < 0.45:
+            fail("build-ghost", f".build-ghost alpha {max(alphas)} 太淡，至少 0.45（日光下睇唔到支架）")
     for f in ("js/app.js", "js/phonics-app.js"):
         src = read(f)
         if not re.search(r'class="build-ghost[^"]*"[^>]*>\$\{', src):
@@ -555,6 +558,43 @@ def check_polyphone_say() -> None:
             fail("polyphone", f"「{term}」（{wid}）係多音字，必須有 say")
 
 
+def check_match_naming() -> None:
+    """玩法名統一「配一配」，唔好再同「睇圖」三名混用。"""
+    html = read("index.html")
+    if 'play-mode-title">配一配' not in html:
+        fail("match-name", "認字揀玩法卡標題要叫「配一配」")
+    if 'play-mode-title">睇圖' in html:
+        fail("match-name", "認字揀玩法卡唔好再叫「睇圖」")
+    if 'id="btn-phonics-mode-match">配一配' not in html:
+        fail("match-name", "字母隊入口要叫「配一配」")
+    app = strip_js_comments(read("js/app.js"))
+    if "setPlayModeCopy('#btn-mode-match', '睇圖'" in app:
+        fail("match-name", "app.js 唔好再把配一配標題設做「睇圖」")
+
+
+def check_learn_finish_always() -> None:
+    """學習頁「去玩玩」常駐；[hidden] 唔可以被 .btn-row flex 蓋走。"""
+    html = read("index.html")
+    if re.search(r'id="learn-finish-row"[^>]*\bhidden\b', html):
+        fail("learn-finish", "#learn-finish-row 唔應該預設 hidden；去玩玩要常駐")
+    if re.search(r'id="phonics-learn-finish-row"[^>]*\bhidden\b', html):
+        fail("learn-finish", "#phonics-learn-finish-row 唔應該預設 hidden")
+    css = read("css/styles.css")
+    if not re.search(r"\[hidden\]\s*\{[^}]*display\s*:\s*none\s*!important", css):
+        fail("hidden", "css/styles.css 要有 [hidden]{display:none!important}，唔好俾 .btn-row flex 蓋走")
+
+
+def check_cjk_halfwidth_punct() -> None:
+    """中文字後面唔准跟半形 , . ! ? : ;（童面／程式字串）。"""
+    pat = re.compile(r"([\u4e00-\u9fff])([,.!?:;])")
+    for f in ["index.html"] + JS_FILES:
+        src = strip_js_comments(read(f)) if f.endswith(".js") else read(f)
+        hits = pat.findall(src)
+        if hits:
+            sample = " ".join(f"{a}{b}" for a, b in hits[:4])
+            fail("punct", f"{f} 有中文半形標點（例如 {sample}）")
+
+
 def check_asset_weight() -> None:
     """效能：單張圖唔好超過 400KB，總資產唔好超過 12MB。"""
     total = 0
@@ -594,6 +634,9 @@ CHECKS = [
     check_image_formats,
     check_font_coverage,
     check_polyphone_say,
+    check_match_naming,
+    check_learn_finish_always,
+    check_cjk_halfwidth_punct,
     check_asset_weight,
 ]
 

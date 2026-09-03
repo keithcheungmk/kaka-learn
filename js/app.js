@@ -23,6 +23,7 @@ const {
   saveRoundProgress,
   clearRoundProgress,
   recordWordResult,
+  isWordMastered,
   summarizeMastery,
   loadState,
   updateState,
@@ -503,29 +504,69 @@ function startLearn(topic, book) {
   const lead = $('#learn-lead');
   if (lead) {
     lead.textContent = learnPairMode
-      ? '左右係一對相反詞，撳邊邊聽邊邊'
-      : '睇吓圖同字，撳喇叭聽廣東話';
+      ? '撳卡聽相反詞'
+      : '撳卡聽廣東話';
   }
   renderLearnCard();
   showScreen('learn');
+}
+
+const TOPIC_GROUPS = [
+  { id: 'starter', title: '今日好學', ids: ['colors', 'family', 'zoo', 'food', 'numbers'] },
+  { id: 'life', title: '日常生活', ids: ['opposites', 'weather', 'nature', 'transport', 'body', 'emotions', 'senses', 'school', 'places', 'home', 'daily', 'fruit', 'veg', 'hk_food', 'jobs', 'clothes'] },
+  { id: 'animals', title: '動物', ids: ['small_animals', 'bugs', 'ocean', 'dino'] },
+  { id: 'books', title: '課本溫習', ids: ['red_series', 'orange_series'] },
+];
+
+function topicProgressHtml(topic) {
+  const ids = topic.wordIds || [];
+  if (!ids.length) return '';
+  const stats = loadState().wordStats || {};
+  const mastered = ids.filter((id) => isWordMastered(stats[id])).length;
+  const ratio = mastered / ids.length;
+  const lit = ratio >= 0.67 ? 3 : ratio >= 0.34 ? 2 : mastered > 0 ? 1 : 0;
+  const dots = [0, 1, 2]
+    .map((i) => `<span class="topic-dot${i < lit ? ' is-on' : ''}" aria-hidden="true"></span>`)
+    .join('');
+  return `<span class="topic-progress" aria-label="識咗 ${mastered}／${ids.length}">${dots}<span class="topic-progress-n">${mastered}/${ids.length}</span></span>`;
+}
+
+function renderTopicCard(topic) {
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'topic-card';
+  if (topic.id === 'red_series' || topic.id === 'orange_series') {
+    btn.classList.add('topic-card-book');
+  }
+  btn.innerHTML = `
+      <span class="topic-cover" aria-hidden="true">${cover(topic.cover)}</span>
+      <span class="topic-title">${topic.title}</span>
+      ${topicProgressHtml(topic)}
+    `;
+  btn.onclick = () => openLearn(topic.id);
+  return btn;
 }
 
 function renderTopics() {
   const grid = $('#topic-grid');
   if (!grid) return;
   grid.innerHTML = '';
-  TOPICS.forEach((topic) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'topic-card';
-    btn.innerHTML = `
-      <span class="topic-cover" aria-hidden="true">${cover(topic.cover)}</span>
-      <span class="topic-title">${topic.title}</span>
-      <span class="topic-blurb">${topic.blurb}</span>
-    `;
-    btn.onclick = () => openLearn(topic.id);
-    grid.appendChild(btn);
+  const byId = new Map(TOPICS.map((t) => [t.id, t]));
+  const used = new Set();
+  TOPIC_GROUPS.forEach((group) => {
+    const topics = group.ids.map((id) => byId.get(id)).filter(Boolean);
+    if (!topics.length) return;
+    topics.forEach((t) => used.add(t.id));
+    const heading = document.createElement('h2');
+    heading.className = 'topic-group-title';
+    heading.textContent = group.title;
+    grid.appendChild(heading);
+    topics.forEach((topic) => grid.appendChild(renderTopicCard(topic)));
   });
+  const leftover = TOPICS.filter((t) => !used.has(t.id));
+  if (leftover.length) {
+    leftover.forEach((topic) => grid.appendChild(renderTopicCard(topic)));
+  }
 }
 
 function learnDeckLength() {
@@ -535,7 +576,12 @@ function learnDeckLength() {
 function updateLearnFinishRow(atEnd) {
   if (atEnd) learnPassedOnce = true;
   const finishRow = $('#learn-finish-row');
-  if (finishRow) finishRow.hidden = !learnPassedOnce;
+  const play = $('#btn-learn-play');
+  if (finishRow) {
+    finishRow.hidden = false;
+    finishRow.classList.toggle('is-ready', learnPassedOnce);
+  }
+  if (play) play.textContent = learnPassedOnce ? '學完喇・去玩玩' : '去玩玩';
 }
 
 function renderLearnCard() {
@@ -561,10 +607,13 @@ function renderLearnCard() {
   const prev = $('#btn-learn-prev');
   const next = $('#btn-learn-next');
   const atEnd = learnIndex >= learnWords.length - 1;
-  if (prev) prev.disabled = learnIndex <= 0;
+  if (prev) {
+    prev.disabled = learnIndex <= 0;
+    prev.textContent = '← 上一張';
+  }
   if (next) {
     next.disabled = false;
-    next.textContent = atEnd ? '再睇一次' : '下一張';
+    next.textContent = atEnd ? '再睇一次' : '下一張 →';
   }
   updateLearnFinishRow(atEnd);
 
@@ -601,10 +650,13 @@ function renderLearnPairCard() {
   const prev = $('#btn-learn-prev');
   const next = $('#btn-learn-next');
   const atEnd = learnIndex >= learnPairs.length - 1;
-  if (prev) prev.disabled = learnIndex <= 0;
+  if (prev) {
+    prev.disabled = learnIndex <= 0;
+    prev.textContent = '← 上一張';
+  }
   if (next) {
     next.disabled = false;
-    next.textContent = atEnd ? '再睇一次' : '下一對';
+    next.textContent = atEnd ? '再睇一次' : '下一對 →';
   }
   updateLearnFinishRow(atEnd);
 
@@ -682,11 +734,11 @@ function openPlayPick() {
   const withBook = activeBook ? `${base}・${activeBook.title}` : base;
   if (title) title.textContent = withBook ? `${withBook}・去玩玩` : '去玩玩';
   if (activeTopicId === 'opposites') {
-    setPlayModeCopy('#btn-mode-listen', '聽一聽', '聽廣東話，揀相反');
-    setPlayModeCopy('#btn-mode-match', '睇圖', '睇圖，揀相反');
+    setPlayModeCopy('#btn-mode-listen', '聽一聽', '聽下，揀相反');
+    setPlayModeCopy('#btn-mode-match', '配一配', '睇圖，揀相反');
   } else {
     setPlayModeCopy('#btn-mode-listen', '聽一聽', '聽廣東話，揀漢字');
-    setPlayModeCopy('#btn-mode-match', '睇圖', '睇圖，揀漢字');
+    setPlayModeCopy('#btn-mode-match', '配一配', '睇圖，揀漢字');
   }
   setPlayModeCopy('#btn-mode-build', '砌一砌', '用手砌漢字');
   showScreen('play');
@@ -806,8 +858,8 @@ function startListenRound() {
   const promptText = $('#listen-prompt-text');
   if (promptText) {
     promptText.innerHTML = round.pickOpposite
-      ? '聽廣東話，再揀佢嘅<strong>相反詞</strong>'
-      : '聽廣東話，再揀啱嘅<strong>漢字</strong>（冇圖，靠認字）';
+      ? '聽下，揀相反'
+      : '聽下，揀個字';
   }
 
   const feedback = $('#listen-feedback');
@@ -899,7 +951,7 @@ function onListenPick(id, btn) {
   }
 }
 
-/* ---------- 模式 B：睇圖揀漢字 ---------- */
+/* ---------- 模式 B：配一配 ---------- */
 
 function bindMatch() {
   const back = $('#btn-back-match');
@@ -925,8 +977,8 @@ function startMatchRound() {
   const promptText = $('#match-prompt-text');
   if (promptText) {
     promptText.innerHTML = round.pickOpposite
-      ? '睇中間嘅圖／字，再揀佢嘅<strong>相反詞</strong>'
-      : '睇中間嘅圖，再揀啱嘅<strong>漢字</strong>';
+      ? '睇圖，揀相反'
+      : '睇圖，揀個字';
   }
 
   const fb = $('#match-feedback');
@@ -1054,7 +1106,7 @@ function startBuildRound() {
 
   const fb = $('#build-feedback');
   if (fb) {
-    fb.textContent = '由左到右，砌啱每個字';
+    fb.textContent = '';
     fb.className = 'feedback';
   }
 
@@ -1156,7 +1208,7 @@ function onBuildSlotTap(index) {
       renderBuildPool();
       const fb = $('#build-feedback');
       if (fb) {
-        fb.textContent = '由左到右，砌啱每個字';
+        fb.textContent = '';
         fb.className = 'feedback';
       }
     }
@@ -1365,10 +1417,11 @@ function refreshStarUI() {
   const coins = redeemableCoins();
   const todayEl = $('#stars-today-label');
   const coinsEl = $('#coins-label');
-  if (todayEl) todayEl.textContent = `今日 ${coinsTodayCount()} / 3 個幣`;
+  const left = Math.max(0, 3 - coinsTodayCount());
+  if (todayEl) todayEl.textContent = left ? `今日仲可以賺 ${left} 個幣` : '今日三個幣都攞晒喇';
   if (coinsEl) coinsEl.textContent = `累積 ${coins} 枚 AEON 幣`;
   $$('.stars-today-inline').forEach((el) => {
-    el.textContent = `${coinsTodayCount()}/3`;
+    el.textContent = left ? `今日仲可以賺 ${left} 個幣` : '今日幣滿喇';
   });
   renderStarBars();
 }
@@ -1381,7 +1434,7 @@ function refreshStarUI() {
  * （聽一聽／配一配／砌一砌），咁樣攞星星嗰刻就即刻見到條 bar 亮多一粒。
  * 用 JS 插入而唔係喺 index.html 寫十幾次，係為咗將來加新畫面唔使記住補返。
  */
-const MODE_LABEL = { listen: '聽', match: '配', build: '砌' };
+const MODE_LABEL = { listen: '聽一聽', match: '配一配', build: '砌一砌' };
 
 /**
  * 獎勵顯示（2026-08 新規則）。同一條 `.star-bar` 兩個樣：
@@ -1534,10 +1587,10 @@ function nextRoundHint(coins) {
     const saved = loadRoundProgress(`${m}|${activeTopicId || ''}|${activeBook ? activeBook.id : ''}`);
     if (saved.length) {
       const cap = m === 'build' ? BUILD_CAP : LISTEN_MATCH_CAP;
-      return `下一個：${MODE_LABEL[m]}一${MODE_LABEL[m]} ${saved.length}/${cap}`;
+      return `下一個：${MODE_LABEL[m]} ${saved.length}/${cap}`;
     }
   }
-  return `仲有 ${pending.length} 個幣可以攞`;
+  return `今日仲可以賺 ${pending.length} 個幣`;
 }
 
 /** 答啱嗰粒星由太空戰士射去進度條下一格，落地先亮。 */
