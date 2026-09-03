@@ -5,7 +5,8 @@
 | `chinese-hero.png` | 主頁任務海報：「太空戰士」四字同人仔太空衣（家庭提供／KAKA RANGER 原創插畫） |
 | `kaka-ranger-solo.png` | KAKA RANGER 全身透明底原圖（飛星縮圖同主頁素材來源） |
 | `space-ranger-shooter.png` | 玩法頁太空戰士（由 `kaka-ranger-solo.png` 縮放；飛星由拳頭射出） |
-| `chinese-space-bg.jpg` | 認字各屏全屏背景：深海軍藍＋淡紫 nebula，遠景漢字星塵 |
+| `profile-kaka.jpg` | 卡卡頭像（家庭相片，Profile 卡） |
+| `profile-heihei.jpg` | 希希頭像（家庭相片，Profile 卡） |
 
 `chinese-space-bg.jpg` 為本 app 原創生成。主頁海報由產品擁有人提供，用於「太空戰士學院」主題。
 

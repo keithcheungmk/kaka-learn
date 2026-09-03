@@ -21,7 +21,14 @@ import sys
 from pathlib import Path
 
 # 只許呢幾頁捲：純瀏覽、唔涉拖曳（主頁四入口掣可超出一屏）
-SCROLLABLE = {"screen-home", "screen-topics", "screen-books", "screen-phonics-topics"}
+SCROLLABLE = {
+    "screen-profiles",
+    "screen-home",
+    "screen-topics",
+    "screen-books",
+    "screen-phonics-topics",
+    "screen-progress",
+}
 
 IPADS = {
     "iPadPro12.9-直": (1024, 1366),
@@ -125,7 +132,17 @@ def walk(pg, url, shots: Path | None, tag: str):
 
     pg.goto(url, wait_until="domcontentloaded")
     pg.wait_for_timeout(400)
+    probe("揀小朋友")
+
+    pg.click("#btn-profile-kaka")
+    pg.wait_for_timeout(400)
     probe("主頁")
+
+    pg.click("#btn-home-progress")
+    pg.wait_for_timeout(500)
+    probe("我的進度")
+    pg.click("#btn-back-progress")
+    pg.wait_for_timeout(300)
 
     pg.click("#btn-start-topics")
     pg.wait_for_timeout(600)
@@ -157,6 +174,8 @@ def walk(pg, url, shots: Path | None, tag: str):
 
     for entry, step in [("#btn-start-phonics", "字母隊"), ("#btn-start-math", "數理")]:
         pg.goto(url, wait_until="domcontentloaded")
+        pg.wait_for_timeout(300)
+        pg.click("#btn-profile-kaka")
         pg.wait_for_timeout(300)
         pg.click(entry)
         pg.wait_for_timeout(800)

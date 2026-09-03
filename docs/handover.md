@@ -14,10 +14,10 @@
 
 ## 而家嘅狀態（2026-09-03）
 
+- **Cursor**：雙小朋友 Profile MVP（`cursor/dual-child-profiles-6368`）。主頁先揀卡卡／希希；`kaka-learn-v1`／`kaka-math-v1` 按人分倉；舊資料歸入卡卡。家長 PIN 區已撤。
 - 紅⑪ `rb_xiaoming`《小明和氣球》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「快起牀」保留「牀」）。其他紅輯書仍係推測，唔好順手改。
 - 橙④ `ob_xiezi`《鞋子》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「脫了」用肉月旁「脫」）。其他橙輯書仍係推測，唔好順手改。
-- **Cursor**：ranger 朝右 mirror + 直屏避字池（`cursor/ranger-face-right-avoid-pool-287c`）。只改 `.space-ranger*` CSS、`js/star-fx.js` 註解、invariants／smoke。**唔好把 ranger 做成字池格子。** UI #86 已入 `main`。
-- `origin/main` 已含：P0 三項（PR #82）、KAKA RANGER 飛星（PR #83）、完成一輪慶祝 pose、favicon／og、sparkle、隨機 pose、UI 審查落地（PR #86）。
+- `origin/main` 已含：P0 三項（PR #82）、KAKA RANGER 飛星（PR #83）、完成一輪慶祝 pose、favicon／og、sparkle、隨機 pose、UI 審查落地（PR #86）、ranger 朝右（PR #87）。
 
 ## 分工（點解要分：唔想兩邊改同一段 code）
 
@@ -52,6 +52,15 @@
   唔係 CI 會紅。
 
 ## 最近改動
+
+### 2026-09-03 · Cursor（Keith 授權：雙小朋友 Profile MVP）
+
+- 主頁先揀「卡卡／希希」大頭像；選完先入認字／字母隊／數理
+- `storage.js`／`math-storage.js` schemaVersion 3：按 profile 分倉；舊單一資料遷移入卡卡，希希空白
+- 掹走家長 PIN／字詞開關／鹿類重點掣；改「換小朋友」+「我的進度」（近 14 日幣、要練嘅字、主題已過／未過，已過可重玩）
+- 外鏈文案改「小遊戲樂園」
+- 頭像：`assets/profile-kaka.jpg`、`assets/profile-heihei.jpg`
+- **踩咗** `js/storage.js`、`js/app.js`、`js/math-storage.js`、`index.html`、`css/styles.css`、invariants／smoke
 
 ### 2026-09-03 · Cursor（Keith 實機：ranger 朝右 + 唔擋字池）
 

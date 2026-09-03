@@ -1,35 +1,13 @@
-/** localStorage 持久化：星星、家長設定、字詞開關 */
+/** localStorage 持久化：按小朋友 Profile 分開（卡卡／希希） */
 
 const STORAGE_KEY = 'kaka-learn-v1';
+const SCHEMA_VERSION = 3;
 
-const DEFAULT_STATE = {
-  pin: '1234',
-  muted: false,
-  deerFocus: true,
-  totalStars: 0,
-  starsToday: 0,
-  starsDate: todayKey(),
-  enabledWordIds: null, // null = 全部啟用
-  voiceURI: null, // 家長喺設定揀嘅聲音；null = 自動（優先粵語女聲）
-  autoSpeak: true, // 每張卡載入自動讀出（家長可以熄）
-  coinHintSeen: false,
-
-  /* ── 獎勵規則（2026-08 改版）──────────────────────────
-     舊：答啱 +1 星，每日上限 10 星，可換幣 = floor(累積星星 / 10)
-     新：**完成一輪 = 一個 AEON 幣**，每種玩法一日一個（聽／配／砌，最多 3 個）
-     點解改：一輪係 8–10 題，舊規則玩到一半就滿咗 10 星，第二輪一粒都冇，
-     對 4 歲嚟講係動力斷崖。而家一條進度條就係一個目標，做完即刻有嘢。
-     星星仍然計（totalStars／starsToday）但只做紀錄，唔再係兌換單位。 */
-  coinsDate: todayKey(),
-  coinsToday: {}, // { listen: 1, match: 0, build: 1 } — 每種玩法一日最多 1
-  coinsTotal: 0, // 歷來賺到嘅幣（換版時由 floor(totalStars/10) 承接）
-  roundProgress: {}, // { "build|dinosaur|": ["baolong", …] } 未完成嘅輪次，中途走咗都留得低
-  wordStats: {}, // { [wordId]: { right, wrong, streak, lastRightDay } }
-  economyVersion: 2,
+const PROFILE_IDS = ['kaka', 'heihei'];
+const PROFILES = {
+  kaka: { id: 'kaka', name: '卡卡', avatar: './assets/profile-kaka.jpg' },
+  heihei: { id: 'heihei', name: '希希', avatar: './assets/profile-heihei.jpg' },
 };
-
-/** 每種玩法一日一個幣 */
-const COIN_MODES = ['listen', 'match', 'build'];
 
 function todayKey() {
   const d = new Date();
@@ -39,79 +17,246 @@ function todayKey() {
   return `${y}-${m}-${day}`;
 }
 
-function loadState() {
-  let raw;
-  try {
-    raw = localStorage.getItem(STORAGE_KEY);
-  } catch {
-    return { ...DEFAULT_STATE, starsDate: todayKey() };
-  }
-  if (!raw) return { ...DEFAULT_STATE, starsDate: todayKey() };
+const DEFAULT_PROFILE_STATE = {
+  muted: false,
+  deerFocus: true,
+  totalStars: 0,
+  starsToday: 0,
+  starsDate: todayKey(),
+  enabledWordIds: null, // null = 全部啟用
+  voiceURI: null, // null = 自動（優先粵語女聲）
+  autoSpeak: true,
+  coinHintSeen: false,
 
-  let parsed;
-  try {
-    parsed = JSON.parse(raw);
-  } catch {
-    return { ...DEFAULT_STATE, starsDate: todayKey() };
-  }
+  /* ── 獎勵規則（2026-08 改版）──────────────────────────
+     舊：答啱 +1 星，每日上限 10 星，可換幣 = floor(累積星星 / 10)
+     新：**完成一輪 = 一個 AEON 幣**，每種玩法一日一個（聽／配／砌，最多 3 個）
+     星星仍然計（totalStars／starsToday）但只做紀錄，唔再係兌換單位。 */
+  coinsDate: todayKey(),
+  coinsToday: {}, // { listen: 1, match: 0, build: 1 } — 每種玩法一日最多 1
+  coinsTotal: 0, // 歷來賺到嘅幣（換版時由 floor(totalStars/10) 承接）
+  roundProgress: {}, // { "build|dinosaur|": ["baolong", …] } 未完成嘅輪次
+  wordStats: {}, // { [wordId]: { right, wrong, streak, lastRightDay } }
+  coinLog: {}, // { "YYYY-MM-DD": n } 每日賺到幾個幣（進度頁日曆）
+  passedKeys: {}, // { "zoo": true, "red_series|rb_xiaoming": true }
+  economyVersion: 2,
+};
 
-  const state = {
-    ...DEFAULT_STATE,
-    ...parsed,
+/** 每種玩法一日一個幣 */
+const COIN_MODES = ['listen', 'match', 'build'];
+
+const PROFILE_FIELD_KEYS = Object.keys(DEFAULT_PROFILE_STATE);
+
+function emptyProfile() {
+  return {
+    ...DEFAULT_PROFILE_STATE,
+    starsDate: todayKey(),
+    coinsDate: todayKey(),
+    coinsToday: {},
+    roundProgress: {},
+    wordStats: {},
+    coinLog: {},
+    passedKeys: {},
   };
-
-  // 換日：今日幣數同未完成輪次一齊重置
-  if (state.coinsDate !== todayKey()) {
-    state.coinsDate = todayKey();
-    state.coinsToday = {};
-    state.roundProgress = {};
-  }
-
-  // 由舊規則遷移：已經答應咗嘅幣唔可以蒸發
-  // （要睇 parsed，唔可以睇 state —— DEFAULT_STATE 已經有 economyVersion）
-  let migrated = false;
-  if (!parsed.economyVersion) {
-    state.coinsTotal = Math.floor((state.totalStars || 0) / 10);
-    state.economyVersion = 1;
-    migrated = true;
-  }
-  if (!state.coinsToday || typeof state.coinsToday !== 'object') state.coinsToday = {};
-  if (!state.roundProgress || typeof state.roundProgress !== 'object') state.roundProgress = {};
-  if (!state.wordStats || typeof state.wordStats !== 'object') state.wordStats = {};
-  if ((parsed.economyVersion || 0) < 2) {
-    state.economyVersion = 2;
-    migrated = true;
-  }
-  // 即刻寫返落去，唔好等下一次 save —— 否則呢段時間內攞多幾粒星會令換算數字浮動
-  if (migrated) {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    } catch {
-      // ignore
-    }
-  }
-
-  // 日曆日切換：今日星星歸零
-  if (state.starsDate !== todayKey()) {
-    state.starsToday = 0;
-    state.starsDate = todayKey();
-  }
-
-  return state;
 }
 
-function saveState(state) {
+function emptyRoot() {
+  return {
+    schemaVersion: SCHEMA_VERSION,
+    activeProfileId: null,
+    profiles: {
+      kaka: emptyProfile(),
+      heihei: emptyProfile(),
+    },
+  };
+}
+
+function isProfileRoot(parsed) {
+  return !!(
+    parsed &&
+    typeof parsed === 'object' &&
+    (parsed.schemaVersion || 0) >= SCHEMA_VERSION &&
+    parsed.profiles &&
+    typeof parsed.profiles === 'object'
+  );
+}
+
+function extractProfileFields(obj) {
+  const out = emptyProfile();
+  if (!obj || typeof obj !== 'object') return out;
+  PROFILE_FIELD_KEYS.forEach((k) => {
+    if (obj[k] !== undefined) out[k] = obj[k];
+  });
+  return out;
+}
+
+function applyDailyReset(profile) {
+  if (profile.coinsDate !== todayKey()) {
+    profile.coinsDate = todayKey();
+    profile.coinsToday = {};
+    profile.roundProgress = {};
+  }
+  if (profile.starsDate !== todayKey()) {
+    profile.starsToday = 0;
+    profile.starsDate = todayKey();
+  }
+  if (!profile.coinsToday || typeof profile.coinsToday !== 'object') profile.coinsToday = {};
+  if (!profile.roundProgress || typeof profile.roundProgress !== 'object') profile.roundProgress = {};
+  if (!profile.wordStats || typeof profile.wordStats !== 'object') profile.wordStats = {};
+  if (!profile.coinLog || typeof profile.coinLog !== 'object') profile.coinLog = {};
+  if (!profile.passedKeys || typeof profile.passedKeys !== 'object') profile.passedKeys = {};
+  return profile;
+}
+
+function applyEconomyMigration(profile, parsedSource) {
+  const src = parsedSource && typeof parsedSource === 'object' ? parsedSource : {};
+  let migrated = false;
+  if (!src.economyVersion) {
+    profile.coinsTotal = Math.floor((profile.totalStars || 0) / 10);
+    profile.economyVersion = 1;
+    migrated = true;
+  }
+  if ((src.economyVersion || 0) < 2) {
+    profile.economyVersion = 2;
+    migrated = true;
+  }
+  if (!profile.economyVersion) {
+    profile.economyVersion = 2;
+    migrated = true;
+  }
+  return migrated;
+}
+
+function seedCoinLogFromToday(profile) {
+  if (!profile.coinLog || typeof profile.coinLog !== 'object') profile.coinLog = {};
+  const today = todayKey();
+  if (profile.coinLog[today] != null) return;
+  const n = COIN_MODES.reduce((sum, m) => sum + (profile.coinsToday && profile.coinsToday[m] ? 1 : 0), 0);
+  if (n > 0 && profile.coinsDate === today) profile.coinLog[today] = n;
+}
+
+function migrateLegacyToRoot(parsed) {
+  const kaka = extractProfileFields(parsed);
+  applyEconomyMigration(kaka, parsed);
+  applyDailyReset(kaka);
+  seedCoinLogFromToday(kaka);
+  const root = emptyRoot();
+  root.profiles.kaka = kaka;
+  root.profiles.heihei = emptyProfile();
+  root.activeProfileId = null;
+  return root;
+}
+
+function readRaw() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    return localStorage.getItem(STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+function writeRaw(obj) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
   } catch {
     // iPad 私密模式等情況：忽略
   }
 }
 
+function normalizeRoot(parsed) {
+  const root = emptyRoot();
+  root.activeProfileId = PROFILE_IDS.includes(parsed.activeProfileId) ? parsed.activeProfileId : null;
+  PROFILE_IDS.forEach((id) => {
+    const src = parsed.profiles && parsed.profiles[id];
+    const profile = extractProfileFields(src);
+    applyEconomyMigration(profile, src);
+    applyDailyReset(profile);
+    seedCoinLogFromToday(profile);
+    root.profiles[id] = profile;
+  });
+  return root;
+}
+
+function loadRoot() {
+  const raw = readRaw();
+  if (!raw) {
+    const root = emptyRoot();
+    writeRaw(root);
+    return root;
+  }
+
+  let parsed;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    const root = emptyRoot();
+    writeRaw(root);
+    return root;
+  }
+
+  if (isProfileRoot(parsed)) {
+    const root = normalizeRoot(parsed);
+    writeRaw(root);
+    return root;
+  }
+
+  const root = migrateLegacyToRoot(parsed);
+  writeRaw(root);
+  return root;
+}
+
+function persistRoot(root) {
+  writeRaw(root);
+  return root;
+}
+
+function activeId(root = loadRoot()) {
+  return PROFILE_IDS.includes(root.activeProfileId) ? root.activeProfileId : 'kaka';
+}
+
+function loadState() {
+  const root = loadRoot();
+  return { ...root.profiles[activeId(root)] };
+}
+
+function saveState(state) {
+  if (isProfileRoot(state)) {
+    persistRoot(normalizeRoot(state));
+    return loadState();
+  }
+  const root = loadRoot();
+  const id = activeId(root);
+  const next = extractProfileFields({ ...root.profiles[id], ...state });
+  applyDailyReset(next);
+  root.profiles[id] = next;
+  persistRoot(root);
+  return { ...next };
+}
+
 function updateState(patch) {
   const next = { ...loadState(), ...patch };
-  saveState(next);
-  return next;
+  return saveState(next);
+}
+
+function hasActiveProfile() {
+  return PROFILE_IDS.includes(loadRoot().activeProfileId);
+}
+
+function getActiveProfileId() {
+  return loadRoot().activeProfileId;
+}
+
+function getActiveProfile() {
+  const id = getActiveProfileId();
+  return id ? PROFILES[id] : null;
+}
+
+function setActiveProfile(id) {
+  if (!PROFILE_IDS.includes(id)) return loadState();
+  const root = loadRoot();
+  root.activeProfileId = id;
+  persistRoot(root);
+  return loadState();
 }
 
 /** 答對時嘗試加星；回傳 { state, gained, capped } */
@@ -155,10 +300,34 @@ function earnCoinForMode(mode) {
   if (state.coinsToday[mode]) {
     return { state, gained: false, already: true };
   }
+  const day = todayKey();
   state.coinsToday = { ...state.coinsToday, [mode]: 1 };
   state.coinsTotal = (state.coinsTotal || 0) + 1;
+  state.coinLog = { ...(state.coinLog || {}), [day]: ((state.coinLog || {})[day] || 0) + 1 };
   saveState(state);
   return { state, gained: true, already: false };
+}
+
+function shiftDayKey(key, delta) {
+  const [y, m, d] = key.split('-').map((n) => parseInt(n, 10));
+  const dt = new Date(y, m - 1, d);
+  dt.setDate(dt.getDate() + delta);
+  const yy = dt.getFullYear();
+  const mm = String(dt.getMonth() + 1).padStart(2, '0');
+  const dd = String(dt.getDate()).padStart(2, '0');
+  return `${yy}-${mm}-${dd}`;
+}
+
+/** 近 N 日賺幣（含今日），舊→新。 */
+function coinHistory(days = 14) {
+  const log = loadState().coinLog || {};
+  const today = todayKey();
+  const out = [];
+  for (let i = days - 1; i >= 0; i -= 1) {
+    const date = shiftDayKey(today, -i);
+    out.push({ date, count: log[date] || 0, isToday: date === today });
+  }
+  return out;
 }
 
 /** 未完成嘅輪次：中途走咗返嚟仲喺度（key = 玩法|主題|書） */
@@ -184,7 +353,32 @@ function clearRoundProgress(key) {
   return state;
 }
 
-/** 答啱／答錯都記低，俾出題加權同家長區統計用。 */
+function markTopicPassed(topicId, bookId) {
+  if (!topicId) return loadState();
+  const state = loadState();
+  const key = bookId ? `${topicId}|${bookId}` : topicId;
+  state.passedKeys = { ...(state.passedKeys || {}), [key]: true };
+  saveState(state);
+  return state;
+}
+
+function isKeyPassed(topicId, bookId) {
+  const passed = loadState().passedKeys || {};
+  if (bookId) return !!passed[`${topicId}|${bookId}`];
+  return !!passed[topicId];
+}
+
+function isTopicPassed(topic) {
+  if (!topic) return false;
+  const passed = loadState().passedKeys || {};
+  if (passed[topic.id]) return true;
+  if (Array.isArray(topic.books)) {
+    return topic.books.some((b) => passed[`${topic.id}|${b.id}`]);
+  }
+  return false;
+}
+
+/** 答啱／答錯都記低，俾出題加權同進度頁統計用。 */
 function recordWordResult(wordId, correct) {
   if (!wordId) return loadState();
   const state = loadState();
@@ -208,7 +402,7 @@ function isWordMastered(stats) {
   return (stats.streak || 0) >= 3 || (stats.right || 0) >= 3;
 }
 
-/** 家長區：識咗幾多個字 + 最需要練嘅頭 10 個。 */
+/** 識咗幾多個字 + 最需要練嘅頭 10 個。 */
 function summarizeMastery(wordIds) {
   const stats = loadState().wordStats || {};
   let mastered = 0;
@@ -238,11 +432,16 @@ function resetStars() {
     coinsDate: todayKey(),
     roundProgress: {},
     wordStats: {},
+    coinLog: {},
+    passedKeys: {},
   });
 }
 
-
 window.KakaStorage = {
+  STORAGE_KEY,
+  SCHEMA_VERSION,
+  PROFILE_IDS,
+  PROFILES,
   todayKey,
   loadState,
   saveState,
@@ -254,10 +453,18 @@ window.KakaStorage = {
   coinsTodayMap,
   coinsTodayCount,
   earnCoinForMode,
+  coinHistory,
   loadRoundProgress,
   saveRoundProgress,
   clearRoundProgress,
   recordWordResult,
   isWordMastered,
   summarizeMastery,
+  hasActiveProfile,
+  getActiveProfileId,
+  getActiveProfile,
+  setActiveProfile,
+  markTopicPassed,
+  isKeyPassed,
+  isTopicPassed,
 };

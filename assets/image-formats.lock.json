@@ -251,6 +251,14 @@
     "format": "JPEG",
     "alpha": false
   },
+  "assets/profile-heihei.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/profile-kaka.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
   "assets/space-ranger-pose-fistpump.png": {
     "format": "PNG",
     "alpha": true

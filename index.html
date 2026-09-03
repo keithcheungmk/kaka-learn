@@ -29,8 +29,8 @@
 </head>
 <body>
   <div id="app">
-    <!-- 主頁 -->
-    <section id="screen-home" class="screen active" aria-label="主頁">
+    <!-- 先揀小朋友 -->
+    <section id="screen-profiles" class="screen active" aria-label="揀小朋友">
       <header class="topbar">
         <div class="brand-mark">
           <div class="brand-orbit" aria-hidden="true"></div>
@@ -39,6 +39,36 @@
             <div class="brand-tag">太空戰士學院</div>
           </div>
         </div>
+      </header>
+      <div class="hero-home profile-pick">
+        <p class="hero-sub" id="profile-pick-lead">你係邊個？</p>
+        <div class="profile-pick-grid">
+          <button type="button" class="profile-card" id="btn-profile-kaka" aria-label="卡卡">
+            <img class="profile-card-img" src="./assets/profile-kaka.jpg" alt="" width="384" height="384" decoding="async" />
+            <span class="profile-card-name">卡卡</span>
+          </button>
+          <button type="button" class="profile-card" id="btn-profile-heihei" aria-label="希希">
+            <img class="profile-card-img" src="./assets/profile-heihei.jpg" alt="" width="384" height="384" decoding="async" />
+            <span class="profile-card-name">希希</span>
+          </button>
+        </div>
+        <a
+          class="home-friend-link"
+          href="https://yiu0527.github.io/HeiHeiClass/index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="小遊戲樂園（新分頁開啟）"
+        >小遊戲樂園 ↗</a>
+      </div>
+    </section>
+
+    <!-- 主頁 -->
+    <section id="screen-home" class="screen" aria-label="主頁">
+      <header class="topbar">
+        <button type="button" class="profile-chip" id="home-profile-chip" aria-label="我的進度">
+          <img id="home-profile-avatar" src="./assets/profile-kaka.jpg" alt="" width="64" height="64" />
+          <span id="home-profile-name">卡卡</span>
+        </button>
         <button type="button" class="star-panel" id="btn-star-info" aria-label="星星與 AEON 幣">
           <span class="star-icon" aria-hidden="true">★</span>
           <span class="star-meta">
@@ -58,14 +88,49 @@
           <button type="button" class="btn btn-secondary" id="btn-start-phonics" aria-label="卡卡字母隊">卡卡字母隊</button>
           <button type="button" class="btn btn-accent" id="btn-start-math">太空戰士數理</button>
         </div>
+        <div class="home-side-row">
+          <button type="button" class="btn btn-ghost" id="btn-home-progress">我的進度</button>
+          <button type="button" class="btn btn-ghost" id="btn-switch-profile">換小朋友</button>
+        </div>
         <a
           class="home-friend-link"
           href="https://yiu0527.github.io/HeiHeiClass/index.html"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="禧禧小遊戲樂園（新分頁開啟）"
-        >禧禧小遊戲樂園 ↗</a>
+          aria-label="小遊戲樂園（新分頁開啟）"
+        >小遊戲樂園 ↗</a>
       </div>
+    </section>
+
+    <!-- 我的進度 -->
+    <section id="screen-progress" class="screen" aria-label="我的進度">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-progress">← 返去</button>
+        <h1 id="progress-title">我的進度</h1>
+        <button type="button" class="btn btn-ghost" id="btn-progress-switch">換小朋友</button>
+      </div>
+      <div class="progress-hero">
+        <img id="progress-avatar" class="progress-avatar" src="./assets/profile-kaka.jpg" alt="" width="384" height="384" />
+        <p class="progress-who" id="progress-who">卡卡</p>
+      </div>
+      <section class="progress-block">
+        <h2>近日賺幣</h2>
+        <p class="section-lead" id="progress-coin-today">今日 0 個幣</p>
+        <div class="coin-cal" id="progress-coin-cal" aria-label="近十四日賺幣"></div>
+      </section>
+      <section class="progress-block">
+        <h2>要練嘅字</h2>
+        <ul class="progress-need" id="progress-need"></ul>
+      </section>
+      <section class="progress-block">
+        <h2>主題進度</h2>
+        <p class="section-lead">已過都可以再玩</p>
+        <div class="topic-grid progress-topic-grid" id="progress-topic-grid"></div>
+      </section>
+      <section class="progress-block" id="progress-math-block">
+        <h2>數理星球</h2>
+        <div class="progress-math-list" id="progress-math-list"></div>
+      </section>
     </section>
 
     <!-- 揀主題 -->
@@ -687,7 +752,6 @@
     </section>
   </div>
 
-  <button type="button" class="btn btn-parent" id="btn-parent" aria-label="家長區">👪</button>
   <div class="star-burst" id="star-burst" aria-hidden="true">★</div>
 
   <!-- 認字：今輪玩完 -->
@@ -722,99 +786,6 @@
       <div class="btn-row math-warp-actions">
         <button type="button" class="btn btn-ghost" id="btn-math-warp-stay">繼續玩呢粒</button>
         <button type="button" class="btn" id="btn-math-warp-go">飛過去</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- PIN 解鎖 -->
-  <div class="modal-backdrop" id="modal-pin" role="dialog" aria-modal="true" aria-labelledby="pin-title">
-    <div class="modal">
-      <h2 id="pin-title">家長鎖</h2>
-      <p>輸入 PIN 先可以改設定（預設 1234）</p>
-      <div class="pin-row" id="pin-display" aria-hidden="true"></div>
-      <div class="pin-pad" id="pin-pad"></div>
-      <p class="pin-error" id="pin-error"></p>
-      <div class="btn-row">
-        <button type="button" class="btn btn-ghost" id="btn-pin-cancel">取消</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 家長區 -->
-  <div class="modal-backdrop" id="modal-parent" role="dialog" aria-modal="true" aria-labelledby="parent-title">
-    <div class="modal">
-      <h2 id="parent-title">家長區</h2>
-      <div class="coin-banner" id="parent-coin-banner"></div>
-
-      <div class="parent-section">
-        <h3>今日進度</h3>
-        <div class="stat-row"><span>今日賺到嘅幣</span><strong id="parent-stars-today">0 / 3 個幣</strong></div>
-        <div class="stat-row"><span>累積答啱</span><strong id="parent-total-stars">0</strong></div>
-        <div class="stat-row"><span>累積 AEON 幣</span><strong id="parent-coins">0</strong></div>
-        <p style="font-size:0.95rem;margin-top:4px">完成一輪 = 1 枚 AEON 幣；聽一聽／配一配／砌一砌各自一日一個，最多 3 個（爸爸媽媽現實中兌換，無網上付款）</p>
-      </div>
-
-      <div class="parent-section">
-        <h3>點樣玩（寫俾大人睇）</h3>
-        <ul class="parent-how-play">
-          <li><strong>聽一聽</strong>：冇圖，靠聽廣東話再揀漢字。</li>
-          <li><strong>配一配</strong>：睇圖，再揀啱嘅漢字。</li>
-          <li><strong>砌一砌</strong>：由字池拖或者撳字，按順序放入淡色格（淡字係支架，方便認字形）。</li>
-        </ul>
-      </div>
-
-      <div class="parent-section">
-        <h3>字詞掌握</h3>
-        <div class="stat-row"><span>識咗幾多個字</span><strong id="parent-mastered-count">0</strong></div>
-        <p class="parent-mastery-hint" style="font-size:0.95rem;margin:6px 0 4px">連續答啱 3 次，或者累積答啱 3 次，就算識咗。</p>
-        <p style="font-size:0.95rem;margin:4px 0 6px"><strong>最需要練：</strong></p>
-        <ul class="parent-need-practice" id="parent-need-practice"></ul>
-      </div>
-
-      <div class="parent-section">
-        <h3>設定</h3>
-        <div class="toggle-row">
-          <span>靜音</span>
-          <label class="toggle"><input type="checkbox" id="toggle-mute" /><span></span></label>
-        </div>
-        <div class="toggle-row">
-          <span>鹿類重點（每日多啲鹿）</span>
-          <label class="toggle"><input type="checkbox" id="toggle-deer" /><span></span></label>
-        </div>
-        <div class="toggle-row">
-          <span>自動讀出（每張卡載入即刻讀）</span>
-          <label class="toggle"><input type="checkbox" id="toggle-autospeak" /><span></span></label>
-        </div>
-        <div class="voice-row">
-          <label for="voice-select">聲音</label>
-          <select id="voice-select" aria-label="揀廣東話聲音">
-            <option value="">自動（優先粵語女聲）</option>
-          </select>
-          <button type="button" class="btn btn-secondary" id="btn-voice-test">試聽</button>
-        </div>
-        <p class="voice-hint" id="voice-hint">部 iPad 裝咗咩聲音就有咩揀。想要女聲又揀唔到？喺 iPad「設定 → 輔助功能 → 旁白 → 語音」下載多把粵語聲音。</p>
-      </div>
-
-      <div class="parent-section">
-        <h3>字詞開關</h3>
-        <div class="word-toggles" id="word-toggles"></div>
-      </div>
-
-      <div class="parent-section">
-        <h3>改 PIN</h3>
-        <div class="btn-row" style="justify-content:flex-start">
-          <input class="pin-digit" id="new-pin" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="新 PIN" style="width:140px" />
-          <button type="button" class="btn btn-secondary" id="btn-save-pin" style="min-width:140px">儲存 PIN</button>
-        </div>
-      </div>
-
-      <div class="parent-section">
-        <h3>重設</h3>
-        <button type="button" class="btn btn-ghost" id="btn-reset-stars">重設全部星星</button>
-      </div>
-
-      <div class="btn-row">
-        <button type="button" class="btn" id="btn-parent-close">完成</button>
       </div>
     </div>
   </div>
