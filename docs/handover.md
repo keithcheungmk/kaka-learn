@@ -1,16 +1,40 @@
-# 交接簿 — Cursor ⇄ Claude (Cowork)
+# 交接簿 — Cursor ⇄ Claude (Cowork) ⇄ Codex (ChatGPT)
 
-呢個 repo 由兩個 agent 平行開工：**Cursor**（喺 Keith 部機／Cloud Agent）同
-**Claude (Cowork)**（喺 Anthropic cloud，經 deploy key push）。兩邊都直接 push
-`main`，所以要有一個地方寫低「另一邊需要知」嘅嘢，唔係就會撞。
+呢個 repo 由三個 agent 平行開工，大家都可能 push `main`，所以要有一個地方
+寫低「其他人需要知」嘅嘢，唔係就會撞。
+
+## 邊個係邊個
+
+| 署名 | 係邊個 |
+|---|---|
+| **Cursor** | Keith 部機上嘅 Cursor，或者 Cursor Cloud Agent |
+| **Claude**／**Claude (Cowork)** | Anthropic Claude，經 deploy key push |
+| **Codex** | ChatGPT Codex 或 Codex CLI |
+
+Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死嘅擁有權（例如 Claude 嘅字卡 OCR／CI／獎勵條／image lock，Cursor 嘅 ranger／star-fx）——除非 Keith 開口叫你跨界。
 
 ## 點用呢個檔
 
-- **開工前**：`git fetch origin main` → 睇 `AGENTS.md`（硬性規則）→ 睇呢個檔（分工同地雷）。
-- **merge 完之後**：喺「最近改動」加一段（日期、邊個做、改咗乜、掂咗邊啲檔）。
-- 只寫另一邊要知嘅嘢：**擁有權、地雷、未完事項**。設計討論、需求分析唔好塞入嚟。
+三個 agent **同一套**開工／收工協議：
+
+- **開工前**：`git fetch origin main` → 睇 `AGENTS.md`（硬性規則）→ 睇呢個檔（分工、進行中認領、地雷）。
+- **改共享／高危檔之前**：喺下面「進行中（認領）」表認領；同一功能／同一批檔唔可以兩個人同時改。
+- **merge 完之後**：喺「最近改動」加一段（日期、邊個做、改咗乜、掂咗邊啲檔），署名 **Cursor**／**Claude**／**Codex**。做完就清走認領。
+- 只寫其他人要知嘅嘢：**擁有權、地雷、未完事項**。設計討論、需求分析唔好塞入嚟。
 - 呢個檔唔係規則書。任何「以後都要咁做」嘅嘢要寫入 `AGENTS.md`，
   而且同時喺 `scripts/check-invariants.py` 加一個 `check_xxx()`，靠機器守住，唔好靠記憶。
+
+## 進行中（認領）
+
+改共享檔（尤其係下面「撞車高危檔案」）之前，先喺呢度認領。做完／merge 完就刪嗰行。**永遠唔好兩個人同時認領同一批檔／同一個功能。**
+
+| 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
+|---|---|---|---|---|
+| — | — | — | — | 而家冇進行中認領 |
+
+<!-- 範本（複製一行，填完刪走「—」嗰行）：
+| 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
+-->
 
 ## 而家嘅狀態（2026-09-03）
 
@@ -21,7 +45,7 @@
 - 卡卡／希希頭像已換成太空戰士插畫（`assets/profile-kaka.jpg`、`assets/profile-heihei.jpg`）。
 - `origin/main` 已含：P0 三項（PR #82）、KAKA RANGER 飛星（PR #83）、完成一輪慶祝 pose、favicon／og、sparkle、隨機 pose、UI 審查落地（PR #86）、ranger 朝右（PR #87）。
 
-## 分工（點解要分：唔想兩邊改同一段 code）
+## 分工（點解要分：唔想兩個人同時改同一段 code）
 
 | 範圍 | 擁有人 | 主要檔案 |
 |---|---|---|
@@ -32,17 +56,20 @@
 | 版面 no-scroll、重疊／剪裁回歸 | **Claude** | `scripts/smoke-shots.py`、`css/styles.css` 版面段 |
 | CI／部署閘門／invariants | **Claude** | `.github/workflows/*`、`scripts/check-invariants.py`、`scripts/build-site.sh` |
 | 圖片去背、壓縮、格式鎖 | **Claude** | `scripts/cutout-bg.py`、`assets/image-formats.lock.json`（用 `pngquant`，唔好用 Pillow `quantize()`） |
+| Keith 明確交俾 Codex 嘅任務；無人擁有嘅 backlog | **Codex** | 以「進行中」認領為準。**未問 Keith 唔好**改 Claude 嘅 OCR／CI／獎勵條／image lock，或者 Cursor 嘅 star-fx |
 
-呢個分工唔係死嘅——要跨界改，喺呢度寫低就得。**但唔好兩邊同時改同一個功能。**
+呢個分工唔係死嘅——要跨界改，喺「進行中」認領並寫低就得。**但唔好兩個人同時改同一個功能。**
 
 ## 撞車高危檔案
 
-- `css/styles.css` — 兩邊都會掂。改之前 `git fetch` + rebase，唔好用大段 rewrite，
+Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領，唔好兩個人一齊改。
+
+- `css/styles.css` — 三方都會掂。改之前認領 + `git fetch` + rebase，唔好用大段 rewrite，
   改細粒啲、貼住現有 selector 改。
 - `js/app.js` — 同上。`renderStarBars` 一帶而家係 Claude 嘅，`flyStarToBar` 會
   delegate 去 `window.KakaStarFx.flyStarFromRanger`（Cursor 嘅），呢個 delegation
-  就係兩邊嘅介面：**唔好其中一邊刪咗個 fallback**。
-- `js/star-fx.js` — Cursor 擁有。Claude 通常只經 `window.KakaStarFx` 呼叫，唔改入面；
+  就係 Cursor ⇄ Claude 嘅介面：**唔好其中一方刪咗個 fallback**。Codex 未認領唔好改呢度。
+- `js/star-fx.js` — Cursor 擁有。Claude／Codex 通常只經 `window.KakaStarFx` 呼叫，唔改入面；
   **2026-09-02 有兩次例外**（都係 Keith 直接叫 Claude 做，唔係 Claude 自把自為）：
   （1）下午：加咗 3 個 sparkle span + 飛星圖由文字改 `<img>`，`MUZZLE_ANCHOR`／握拳
   發射邏輯冇郁；（2）夜晚：答啱一題 ranger 會隨機換 4 款 pose，**呢次 `MUZZLE_ANCHOR`
@@ -50,10 +77,18 @@
   握拳唔一定喺度），`scripts/crop-ranger-shooter.py`／`kaka-ranger-solo.png` 嘅
   預設 shooter 圖冇郁。詳情見上面「最近改動」。Cursor 改呢個檔之前對一對 git log，
   留意 `MUZZLE_ANCHOR` 已經唔再係「握拳精準座標」呢個假設。
-- `assets/image-formats.lock.json` — 換圖之後要 `python3 scripts/check-invariants.py --update-image-lock`，
-  唔係 CI 會紅。
+- `assets/image-formats.lock.json` — Claude 擁有格式鎖。換圖之後要 `python3 scripts/check-invariants.py --update-image-lock`，
+  唔係 CI 會紅。Codex／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
 
 ## 最近改動
+
+### 2026-09-03 · Cursor（三方交接：加 Codex／ChatGPT）
+
+- 交接簿改做 Cursor ⇄ Claude (Cowork) ⇄ Codex (ChatGPT)；加「邊個係邊個」同「進行中（認領）」表
+- `AGENTS.md`／`CLAUDE.md`／新 `CODEX.md`／`README.md`／`docs/word-card-ocr.md` 對齊
+- 字卡 OCR **仍然係 Claude only**；Codex 預設做 Keith 交辦同認領咗嘅 backlog，唔搶現有 lane
+- `check_agent_collab_docs()`：CODEX.md／CLAUDE.md 要提 AGENTS.md；handover／AGENTS.md 要提 Codex
+- **踩咗** `docs/handover.md`、`AGENTS.md`、`CLAUDE.md`、`CODEX.md`、`README.md`、`docs/word-card-ocr.md`、`scripts/check-invariants.py`
 
 ### 2026-09-03 · Cursor（Keith：紅③《雨傘》字表 + 新頭像）
 
@@ -305,15 +340,19 @@ Claude 做咗一次完整審查，結果喺 **`docs/site-review-2026-09.md`** �
 | 純面部表情（開心／眨眼等 7 款）想真係用得到，要新畫一版有戴頭盔嘅版本 | idea，未開工 | 新畫要 Keith／畫圖果邊 |
 | KAKA RANGER logo 擺喺主頁 `.brand-mark`（同而家 CSS 畫嘅 `.brand-orbit` 二揀一） | 未開工，今次冇做（範圍係 favicon／og-image） | Claude |
 
+無人擁有／「任一邊」嘅項目，三個 agent 都可以經「進行中」認領；已有擁有人嘅唔好搶。
+
 ## 開工前／收工 checklist
 
+三個 agent 都跟呢套（唔係淨係「兩邊」）：
+
 ```bash
-git fetch origin main && git rebase origin/main   # 開工第一件事，兩邊都 push main
-# ...改嘢...
+git fetch origin main && git rebase origin/main   # 開工第一件事；三個 agent 都可能 push main
+# 認領「進行中」→ 改嘢 → 清認領
 python3 scripts/check-invariants.py               # 一定要 exit 0
 python3 scripts/smoke-shots.py                    # 改過版面／CSS 就一定要跑
 python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
-# merge 入 main → Pages 自動上線 → 返嚟更新呢個檔嘅「最近改動」
+# merge 入 main → Pages 自動上線 → 返嚟更新呢個檔嘅「最近改動」（署名 Cursor／Claude／Codex）
 ```
 
 ⚠️ 部署完，iPhone／iPad 要**閂咗個 tab 再開**先睇到新版（單純 refresh 唔夠，

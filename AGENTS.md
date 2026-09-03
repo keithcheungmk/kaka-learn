@@ -1,9 +1,10 @@
 # AGENTS.md — kaka-learn
 
-給 Cursor／自動化 agent 嘅專案指引。
+給 Cursor／Claude／Codex／自動化 agent 嘅專案指引。
 
-> **開工前先睇 `docs/handover.md`** — Cursor 同 Claude (Cowork) 平行 push 同一個 repo，
-> 嗰度寫住而家嘅分工、撞車高危檔案、同未完事項。收工／merge 完記得返去更新。
+> **開工前必須睇 `docs/handover.md`** — Cursor、Claude (Cowork)、Codex (ChatGPT)
+> 三個 agent 共用呢個 repo。嗰度寫住而家嘅分工、進行中認領、撞車高危檔案、同未完事項。
+> 收工／merge 完記得返去更新。
 
 ## 專案係乜
 
@@ -157,7 +158,7 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - **學習卡以該書實體認字卡上實際出現嘅詞／字／短語為準**（唔好預設一定係單字；紅⑪《小明和氣球》等卡上係詞／短語，JSON 要 `"allow_words": true`）。認字卡係最準依據，好過書名／主題推測。
 - **重複唔使理**：同一個字跨書出現、或者同一張卡重複，都正常，照收（App 入面同一字一個 entry 就得）。
 - **收到字卡相片就以字卡為準**，覆寫嗰本書嘅 `wordIds`；未收到嘅書暫時用推測，標明待校對。
-- **字卡相片一律由 Claude（Cowork）讀，唔好叫 Cursor 讀。** 流程、自檢規程、JSON 格式見 `docs/word-card-ocr.md`；落地一定要用 `scripts/apply-book-cards.py`（會攔簡體、形近字、非單字、錯 id），唔好手改 `wordIds`。
+- **字卡相片一律由 Claude（Cowork）讀，唔好叫 Codex／Cursor 讀字卡相。** 流程、自檢規程、JSON 格式見 `docs/word-card-ocr.md`；落地一定要用 `scripts/apply-book-cards.py`（會攔簡體、形近字、非單字、錯 id），唔好手改 `wordIds`。
 - 已對過字卡嘅書會有 `verified: true` 同 `cardSource`；冇呢兩個 field 就即係仲係推測。
 - **字卡顯示**：大漢字＋讀音；可配個簡單 emoji 做裝飾，但唔使為單字／短語強求詞形或貼圖。
 - 其他主題（動物、食物…）維持教「詞＋emoji」，唔受呢條影響。

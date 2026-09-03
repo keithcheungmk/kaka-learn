@@ -24,7 +24,7 @@
 3. **Script**：`python3 scripts/apply-book-cards.py <json>` 出 dry-run 報告 → Keith 睇過 → 加 `--write` 落地。
 4. **檢查**：`python3 scripts/check-invariants.py` 要 exit 0 → 交 branch → Cursor merge。
 
-> ⚠️ **唔好叫 Cursor 讀字卡相。** Cursor 側嘅 agent 唔一定有視覺能力，容易靠書名推測。相片一律入 Cowork。
+> ⚠️ **唔好叫 Cursor 或 Codex／ChatGPT 讀字卡相。** 呢啲 agent 容易靠書名推測，而且字卡 OCR 已經寫死俾 Claude Cowork。相片一律入 Cowork。
 
 ## 拍攝要求（提高一次過成功率）
 

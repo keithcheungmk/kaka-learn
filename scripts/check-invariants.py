@@ -669,6 +669,20 @@ def check_cjk_halfwidth_punct() -> None:
             fail("punct", f"{f} 有中文半形標點（例如 {sample}）")
 
 
+def check_agent_collab_docs() -> None:
+    """三方協作文件：CODEX.md／CLAUDE.md 指向 AGENTS.md；handover 有 Codex。"""
+    for f in ("CODEX.md", "CLAUDE.md"):
+        if not Path(f).exists():
+            fail("agent-docs", f"缺少 {f}")
+            continue
+        if "AGENTS.md" not in read(f):
+            fail("agent-docs", f"{f} 要提到 AGENTS.md")
+    if "Codex" not in read("AGENTS.md"):
+        fail("agent-docs", "AGENTS.md 要提到 Codex")
+    if "Codex" not in read("docs/handover.md"):
+        fail("agent-docs", "docs/handover.md 要提到 Codex")
+
+
 def check_asset_weight() -> None:
     """效能：單張圖唔好超過 400KB，總資產唔好超過 12MB。"""
     total = 0
@@ -712,6 +726,7 @@ CHECKS = [
     check_match_naming,
     check_learn_finish_always,
     check_cjk_halfwidth_punct,
+    check_agent_collab_docs,
     check_asset_weight,
 ]
 
