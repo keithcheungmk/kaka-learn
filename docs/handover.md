@@ -30,6 +30,7 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| SPACE RANGER PHONICS Phase 1 品牌統一 | Codex | `index.html`, `css/phonics.css`, `js/phonics-app.js`, `scripts/check-invariants.py` | 2026-09-04 | Keith 明確交辦；移除鹿背景／hero，沿用現有 KAKA Ranger 素材 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
