@@ -11,6 +11,9 @@
    * 2026-09-02：由「精準對住握拳」簡化做「身中心固定點」——因為答啱一刻會隨機換
    * 4 張唔同動作嘅 pose（握拳唔一定喺度），逐張校準發射點成本太高，
    * 改用一個對大部分 pose 都夠合理嘅中心點。詳情見 docs/handover.md。
+   *
+   * 2026-09-03：人物朝右係 CSS `transform: scaleX(-1)` 加喺 **img**，container
+   * 唔翻。MUZZLE_ANCHOR 用 container 中心，getBoundingClientRect 唔受 img mirror 影響。
    */
   const MUZZLE_ANCHOR = { x: 0.5, y: 0.52 };
 

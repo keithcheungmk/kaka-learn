@@ -16,10 +16,8 @@
 
 - 紅⑪ `rb_xiaoming`《小明和氣球》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「快起牀」保留「牀」）。其他紅輯書仍係推測，唔好順手改。
 - 橙④ `ob_xiezi`《鞋子》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「脫了」用肉月旁「脫」）。其他橙輯書仍係推測，唔好順手改。
-- **Cursor UI 審查落地進行中**（`cursor/ui-review-landing-b847`）：配一配統一命名、學習頁常駐「去玩玩」、橫屏學習卡兩欄、禧禧入口降權、幣格／淡色格對比、主題卡分組＋掌握度點。唔好同時大改 `css/styles.css`／`js/app.js` 版面段。
-- `origin/main` 已含：P0 三項（字形／掌握度／讀音，PR #82）、KAKA RANGER 飛星接入（PR #83，
-  握拳發射，方案 b）、Claude 加嘅「完成一輪」慶祝 pose、favicon／app icon／分享預覽圖、
-  飛星改用真星圖 + 頭頂 sparkle、答啱一題 ranger 隨機換 4 款動作 pose。
+- **Cursor**：ranger 朝右 mirror + 直屏避字池（`cursor/ranger-face-right-avoid-pool-287c`）。只改 `.space-ranger*` CSS、`js/star-fx.js` 註解、invariants／smoke。**唔好把 ranger 做成字池格子。** UI #86 已入 `main`。
+- `origin/main` 已含：P0 三項（PR #82）、KAKA RANGER 飛星（PR #83）、完成一輪慶祝 pose、favicon／og、sparkle、隨機 pose、UI 審查落地（PR #86）。
 
 ## 分工（點解要分：唔想兩邊改同一段 code）
 
@@ -54,6 +52,14 @@
   唔係 CI 會紅。
 
 ## 最近改動
+
+### 2026-09-03 · Cursor（Keith 實機：ranger 朝右 + 唔擋字池）
+
+- `.space-ranger-img` 加 `transform: scaleX(-1)`（只翻 img，container／sparkle／laser 錨點唔翻）
+- 直屏／手機：ranger 改右、抬高、縮小，避開字池／選項格；橫屏維持左下（砌一砌兩欄字池喺右）
+- **唔做** ranger 跳入字池空格
+- `check_ranger_mirror_dodge` + `smoke-shots.py` 加 ranger 蓋磚／朝右檢查（踩咗 Claude 嘅 smoke 檔，只加 ranger 規則）
+- `MUZZLE_ANCHOR` 仍然係 container 中心 `{x:0.5,y:0.52}`；激光改 `-28deg` 向右上
 
 ### 2026-09-03 · Cursor（Keith 授權 UI 審查落地）
 

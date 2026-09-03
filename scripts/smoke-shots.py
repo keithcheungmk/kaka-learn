@@ -68,6 +68,32 @@ def walk(pg, url, shots: Path | None, tag: str):
                 }
               }
               const scrollable = s.scrollHeight - s.clientHeight > 2;
+              const ranger = document.querySelector('.space-ranger.space-ranger--visible');
+              const rangerHits = [];
+              let rangerFaceOk = true;
+              if (ranger) {
+                const rs = getComputedStyle(ranger);
+                if (rs.visibility !== 'hidden' && Number(rs.opacity) > 0.05) {
+                  const rb = ranger.getBoundingClientRect();
+                  const tiles = [...document.querySelectorAll(
+                    '.build-pool .build-tile:not(.is-used), .card-grid .word-card, .math-num-bubble'
+                  )];
+                  for (const t of tiles) {
+                    const tb = t.getBoundingClientRect();
+                    if (tb.width < 8 || tb.height < 8) continue;
+                    const ox = Math.min(rb.right, tb.right) - Math.max(rb.left, tb.left);
+                    const oy = Math.min(rb.bottom, tb.bottom) - Math.max(rb.top, tb.top);
+                    if (ox > 4 && oy > 4 && (ox * oy) / (tb.width * tb.height) > 0.1) {
+                      rangerHits.push((t.textContent || t.className || 'tile').trim().slice(0, 8));
+                    }
+                  }
+                  const img = ranger.querySelector('.space-ranger-img, img');
+                  if (img) {
+                    const compact = (getComputedStyle(img).transform || '').replace(/ /g, '');
+                    rangerFaceOk = compact.startsWith('matrix(-1,') || compact.startsWith('matrix3d(-1,');
+                  }
+                }
+              }
               return {
                 id: s ? s.id : null,
                 over: Math.max(
@@ -76,11 +102,24 @@ def walk(pg, url, shots: Path | None, tag: str):
                 ),
                 clipped: getComputedStyle(s).overflow === 'hidden' && scrollable,
                 overlaps,
+                rangerHits,
+                rangerFaceOk,
                 text: (s && s.innerText || '').trim().length,
               };
             }"""
         )
-        seen.append((step, info["id"], info["over"], info["text"], info["overlaps"], info["clipped"]))
+        seen.append(
+            (
+                step,
+                info["id"],
+                info["over"],
+                info["text"],
+                info["overlaps"],
+                info["clipped"],
+                info.get("rangerHits") or [],
+                info.get("rangerFaceOk", True),
+            )
+        )
         if shots:
             pg.screenshot(path=str(shots / f"{tag}-{step}.png"))
 
@@ -164,7 +203,7 @@ def main() -> int:
                 continue
 
             bad = []
-            for step, sid, over, text, overlaps, clipped in rows:
+            for step, sid, over, text, overlaps, clipped, ranger_hits, ranger_face_ok in rows:
                 if text < 5:
                     bad.append(f"{step}（{sid}）似乎白屏")
                 if not phone and over > 2 and sid not in SCROLLABLE:
@@ -173,6 +212,10 @@ def main() -> int:
                     bad.append(f"{step}（{sid}）內容被剪走 {over}px（鎖死唔捲但入唔晒）")
                 for o in overlaps:
                     bad.append(f"{step}（{sid}）元素重疊：{o}")
+                for hit in ranger_hits:
+                    bad.append(f"{step}（{sid}）太空戰士蓋住字磚／選項「{hit}」")
+                if ranger_face_ok is False:
+                    bad.append(f"{step}（{sid}）太空戰士 img 未朝右（要 scaleX(-1)）")
             if bad:
                 problems += len(bad)
                 print(f"  ✗ {name}")

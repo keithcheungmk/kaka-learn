@@ -2401,11 +2401,16 @@ body {
   .fly-star-trail { display: none; }
 }
 
-/* 太空戰士：玩法頁左下角（掛 body，避 iPad overflow clip） */
+/* 太空戰士：掛 body（避 iPad overflow clip）。
+   闊屏／橫向維持左下（砌一砌兩欄字池喺右邊，唔好改去右）。
+   直屏／窄屏改右、抬高，唔好蓋字池／選項格——唔做「跳入字池空格」
+   （會似可選字、4 歲更亂）。pointer-events 永遠 none。 */
 .space-ranger {
   position: fixed;
   left: max(22px, calc(env(safe-area-inset-left, 0px) + 20px));
+  right: auto;
   bottom: max(76px, calc(env(safe-area-inset-bottom, 0px) + 68px));
+  top: auto;
   z-index: 18;
   width: clamp(96px, 18vw, 144px);
   height: clamp(96px, 18vw, 144px);
@@ -2423,11 +2428,14 @@ body {
   transform: translateY(0) scale(1);
 }
 
-.space-ranger img {
+.space-ranger img,
+.space-ranger-img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
+  /* 只翻人物圖朝右；container 唔翻，sparkle／laser 錨點語義唔亂 */
+  transform: scaleX(-1);
 }
 
 .space-ranger-shoot {
@@ -2435,16 +2443,17 @@ body {
 }
 
 @keyframes rangerShoot {
+  /* 人物朝右：後坐力往左（後退） */
   0%, 100% { transform: translateY(0) translateX(0) scale(1); }
-  18% { transform: translateY(-6px) translateX(2px) scale(1.08); }
-  42% { transform: translateY(2px) translateX(3px) scale(0.97); }
+  18% { transform: translateY(-6px) translateX(-2px) scale(1.08); }
+  42% { transform: translateY(2px) translateX(-3px) scale(0.97); }
 }
 
 .space-ranger-laser-flash::after {
   content: "";
   position: absolute;
-  /* 身中心固定點（同 js/star-fx.js 嘅 MUZZLE_ANCHOR 對齊，2026-09-02 簡化，
-     唔再逐張 pose 校準拳頭位） */
+  /* 身中心固定點（同 js/star-fx.js 嘅 MUZZLE_ANCHOR 對齊）。
+     img 已 scaleX(-1) 朝右；激光由中心向右上（朝面向／進度條）射出。 */
   left: calc(50% - 8px);
   top: calc(52% - 8px);
   width: clamp(28px, 6vw, 44px);
@@ -2452,16 +2461,16 @@ body {
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(253, 230, 138, 0.95), rgba(251, 191, 36, 0.15));
   box-shadow: 0 0 14px rgba(251, 191, 36, 0.95), 0 0 28px rgba(255, 255, 255, 0.65);
-  transform: rotate(-32deg);
+  transform: rotate(-28deg);
   transform-origin: left center;
   animation: laserFlash 0.28s ease-out;
   pointer-events: none;
 }
 
 @keyframes laserFlash {
-  0% { opacity: 0; transform: rotate(-32deg) scaleX(0.2); }
-  35% { opacity: 1; transform: rotate(-32deg) scaleX(1); }
-  100% { opacity: 0; transform: rotate(-32deg) scaleX(1.15); }
+  0% { opacity: 0; transform: rotate(-28deg) scaleX(0.2); }
+  35% { opacity: 1; transform: rotate(-28deg) scaleX(1); }
+  100% { opacity: 0; transform: rotate(-28deg) scaleX(1.15); }
 }
 
 /* 答啱一刻：ranger 頭頂爆幾粒細星,等佢睇落更興奮（用返飛星嗰粒圖,免加新素材） */
@@ -2513,6 +2522,44 @@ body {
     bottom: max(60px, calc(env(safe-area-inset-bottom, 0px) + 52px));
     width: clamp(84px, 15vw, 126px);
     height: clamp(84px, 15vw, 126px);
+  }
+}
+
+/* 直屏：改去右邊，抬高過字池／選項格（唔跳入格子）。
+   橫向砌一砌字池喺右欄，所以橫屏仍然用上面嘅左下。 */
+@media (orientation: portrait) {
+  .space-ranger {
+    left: auto;
+    right: max(16px, calc(env(safe-area-inset-right, 0px) + 12px));
+    bottom: max(28vh, calc(env(safe-area-inset-bottom, 0px) + 200px));
+  }
+
+  /* 聽／配／數理：選項格佔下半屏，改停喺 header 下面右側（圖卡／提示外側） */
+  .space-ranger[data-ranger-screen="screen-listen"],
+  .space-ranger[data-ranger-screen="screen-match"],
+  .space-ranger[data-ranger-screen="screen-phonics-listen"],
+  .space-ranger[data-ranger-screen="screen-phonics-match"],
+  .space-ranger[data-ranger-screen="screen-math-count"],
+  .space-ranger[data-ranger-screen="screen-math-compare"],
+  .space-ranger[data-ranger-screen="screen-math-size"],
+  .space-ranger[data-ranger-screen="screen-math-time"] {
+    top: max(88px, calc(env(safe-area-inset-top, 0px) + 76px));
+    bottom: auto;
+  }
+}
+
+/* 手機直屏：再細、再抬，確保砌一砌字池左下格完全唔被蓋 */
+@media (max-width: 700px) and (orientation: portrait) {
+  .space-ranger {
+    right: max(4px, env(safe-area-inset-right, 0px));
+    bottom: max(38vh, calc(env(safe-area-inset-bottom, 0px) + 248px));
+    width: clamp(64px, 18vw, 84px);
+    height: clamp(64px, 18vw, 84px);
+  }
+
+  .space-ranger[data-ranger-screen="screen-build"],
+  .space-ranger[data-ranger-screen="screen-phonics-build"] {
+    bottom: max(42vh, calc(env(safe-area-inset-bottom, 0px) + 268px));
   }
 }
 

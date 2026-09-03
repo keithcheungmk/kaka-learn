@@ -338,6 +338,48 @@ def check_parent_pin() -> None:
         fail("parent-pin", "家長 PIN 預設值唔再係 '1234'")
 
 
+def check_ranger_mirror_dodge() -> None:
+    """太空戰士：img 朝右 mirror；container 唔翻；唔跳入字池；pointer-events none；窄屏避讓。"""
+    css = read("css/styles.css")
+    js = strip_js_comments(read("js/star-fx.js"))
+
+    ranger_block = re.search(r"(?ms)^\s*\.space-ranger\s*\{(.*?)\}", css)
+    if not ranger_block:
+        fail("ranger", "css/styles.css 唔見 .space-ranger 規則")
+        return
+    block = ranger_block.group(1)
+    if not re.search(r"pointer-events\s*:\s*none", block):
+        fail("ranger", ".space-ranger 冇咗 pointer-events: none（會擋字池 hit-test）")
+    if re.search(r"scaleX\s*\(\s*-1\s*\)", block):
+        fail("ranger", ".space-ranger container 唔應該 scaleX(-1)（會翻亂 sparkle／laser 錨點）；只可以翻 img")
+
+    img_block = re.search(
+        r"(?ms)^\s*\.space-ranger(?:\s+img|-img)\s*,?\s*(?:\.space-ranger-img)?\s*\{(.*?)\}",
+        css,
+    )
+    if not img_block:
+        img_block = re.search(r"(?ms)^\s*\.space-ranger-img\s*\{(.*?)\}", css) or re.search(
+            r"(?ms)^\s*\.space-ranger img\s*\{(.*?)\}", css
+        )
+    if not img_block:
+        fail("ranger", "css/styles.css 唔見 .space-ranger img／.space-ranger-img（朝右 mirror 冇位加）")
+    elif not re.search(r"scaleX\s*\(\s*-1\s*\)", img_block.group(1)):
+        fail("ranger", "人物圖冇 transform: scaleX(-1)；Keith 要求視覺朝右、只翻 img")
+
+    if "appendChild(globalRanger)" not in js and "document.body.appendChild" not in js:
+        fail("ranger", "star-fx.js 嘅 ranger 唔再掛 body（可能跳入字池格子？）")
+    if re.search(r"build-pool.*space-ranger|space-ranger.*build-pool", js):
+        fail("ranger", "star-fx.js 似乎把 ranger 放進字池；唔好做成格子／跳空位")
+
+    if not re.search(r"@media\s*\([^)]*orientation:\s*portrait", css):
+        fail("ranger", "css 冇 portrait 避讓（窄屏／直屏會蓋住字池）")
+    if not re.search(r"\.space-ranger\s*\{[^}]*\bright\s*:", css, flags=re.S):
+        fail("ranger", "直屏／窄屏 .space-ranger 應該改用 right（避字池），而家搵唔到 right:")
+
+    if "MUZZLE_ANCHOR" not in js:
+        fail("ranger", "star-fx.js 冇咗 MUZZLE_ANCHOR（飛星原點）")
+
+
 def check_no_zoom() -> None:
     html = read("index.html")
     if "user-scalable=no" not in html:
@@ -624,6 +666,7 @@ CHECKS = [
     check_build_ghost,
     check_star_rules,
     check_parent_pin,
+    check_ranger_mirror_dodge,
     check_no_zoom,
     check_three_entries,
     check_storage_isolation,
