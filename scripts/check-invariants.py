@@ -467,6 +467,18 @@ def check_phonics_ranger_theme() -> None:
         fail("phonics-theme", "Phonics hero 缺少 Ranger Sound Mission／能量字母")
 
 
+def check_phonics_sound_energy() -> None:
+    """Phonics 字母集中呈現字形／聲音，唔再扮成有表情嘅方塊角色。"""
+    words = read("js/phonics-words.js")
+    css = read("css/phonics.css")
+    joined = words + css
+    for retired in ["letter-face", "eye-l", "eye-r", "LETTER_COLORS"]:
+        if retired in joined:
+            fail("phonics-sound-energy", f"Phonics 仍包含已退役字母角色元素 {retired}")
+    if "sound-energy-glyph" not in words or "sound-energy-glyph" not in css:
+        fail("phonics-sound-energy", "Phonics 字母必須使用共用 Sound Energy 節點")
+
+
 # ---------------------------------------------------------------- 故障隔離
 
 def check_storage_isolation() -> None:
@@ -754,6 +766,7 @@ CHECKS = [
     check_no_zoom,
     check_three_entries,
     check_phonics_ranger_theme,
+    check_phonics_sound_energy,
     check_storage_isolation,
     check_module_isolation,
     check_math_boot_guard,

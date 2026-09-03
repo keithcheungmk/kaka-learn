@@ -82,6 +82,15 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-04 · Codex（Keith：SPACE RANGER PHONICS Phase 2 Sound Energy）
+
+- 全面退役 Numberblocks 式擬人字母：共用元件已刪除眼、嘴、面孔及每個字母固定角色配色
+- 「先學一學」「聽一聽」「砌一砌」統一改用深藍 Ranger Sound Energy 節點；點字母時以金色光環表示正在播放，砌啱後以綠色狀態表示完成
+- 保留逐字母讀音、插圖、三種玩法、進度及派幣邏輯；插圖仍只顯示直接對應單字嘅現有素材
+- 新增 invariant，禁止擬人字母元素／固定角色配色回歸；同步更新 CSS／JS cache bust
+- 已驗證：invariants 33 項、storage 11 項、math storage 4 項、version checker 3 項全部通過；390px 手機學習卡及 1024×768 iPad 砌字畫面無溢出，點選字母再放入字格功能正常
+- **踩咗** `js/phonics-words.js`、`js/phonics-app.js`、`css/phonics.css`、`index.html`、`scripts/check-invariants.py`、`AGENTS.md`、`docs/handover.md`
+
 ### 2026-09-04 · Codex（Keith：SPACE RANGER PHONICS Phase 1 品牌統一）
 
 - Phonics 主題頁全面退役鹿仔視覺：背景改用既有深藍太空主題，hero 改為 KAKA Ranger、星球隊徽及 `c-a-t` 聲音能量設計

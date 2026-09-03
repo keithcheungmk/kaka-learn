@@ -1,45 +1,12 @@
-/** 卡卡字母隊 — English Phonics（Phase 1–2：字母溫習 + CVC 詞族 + 常見字）
+/** SPACE RANGER PHONICS（字母溫習 + CVC 詞族 + 常見字）
  *  獨立資料檔，唔改動 js/words.js 嘅任何現有內容。
- *  插圖同中文認字 app 一樣用系統 Emoji；字母角色顏色係原創配色（見 LETTER_COLORS），
- *  唔跟任何現成教材／卡通嘅顏色配對。
+ *  插圖同中文認字 app 一樣用系統 Emoji；字母統一用 Ranger Sound Energy 節點，
+ *  唔用擬人方塊角色，避免表情搶走字形同讀音焦點。
  *
  *  Phase 2：字母溫習（a–z revision）+ 每個詞族一張主題卡 + 常見字分批。
  *  常見字：整詞認讀（listen；有清楚 emoji 先開 match）；唔開 build。
  *  抽象字（a/is/the/to…）可以唔配圖；動作／顏色／數優先配清晰 emoji。
  */
-
-/** 每個字母固定原創顏色（「卡卡字母隊」角色配色表） */
-const LETTER_COLORS = {
-  // Phase 1
-  c: '#fb7185',
-  a: '#7cffb2',
-  t: '#93a5fc',
-  h: '#fbbf24',
-  b: '#38bdf8',
-  r: '#2dd4bf',
-  m: '#c4b5fd',
-  // Phase 2 CVC
-  n: '#f9a8d4',
-  p: '#fdba74',
-  i: '#a5f3fc',
-  g: '#86efac',
-  d: '#fcd34d',
-  w: '#ddd6fe',
-  o: '#fda4af',
-  f: '#67e8f9',
-  v: '#bef264',
-  l: '#fde68a',
-  // 字母溫習（a–z 補齊）
-  e: '#fca5a5',
-  j: '#c4b5fd',
-  k: '#5eead4',
-  q: '#f0abfc',
-  s: '#f9a8d4',
-  u: '#93c5fd',
-  x: '#fb923c',
-  y: '#a3e635',
-  z: '#f472b6',
-};
 
 /** 字母溫習順序（a–z；KAKA 已學過，用嚟 revision） */
 const LETTER_REVISION = [
@@ -238,17 +205,12 @@ function phonicsWordIllustHtml(word) {
   </span>`;
 }
 
-/** 「活字母」卡片 HTML：字母字身 + 固定原創顏色 + 簡單笑臉 */
+/** Ranger Sound Energy：只突出字形；互動狀態由 CSS 光環表達。 */
 function letterTileHtml(ch) {
-  const color = LETTER_COLORS[ch] || '#5eead4';
-  return `<span class="letter-glyph" style="--ltr-color:${color}">${ch}</span>
-    <span class="letter-face" aria-hidden="true">
-      <span class="eye eye-l"></span><span class="eye eye-r"></span><span class="mouth"></span>
-    </span>`;
+  return `<span class="sound-energy-glyph">${ch}</span>`;
 }
 
 window.KakaPhonicsWords = {
-  LETTER_COLORS,
   LETTER_REVISION,
   PHONICS_TOPICS,
   getPhonicsTopicById,

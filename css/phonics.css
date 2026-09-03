@@ -214,7 +214,7 @@
   }
 }
 
-/* 「活字母」：字母字身 + 原創固定顏色 + 簡單笑臉（唔跟任何現成教材角色設計） */
+/* Ranger Sound Energy：非擬人化節點，集中呈現字形、聲音及互動狀態。 */
 .letter-tile {
   position: relative;
   overflow: visible;
@@ -227,11 +227,17 @@
   touch-action: manipulation;
 }
 
-.letter-tile:active .letter-glyph {
+.letter-tile:active .sound-energy-glyph {
   transform: scale(0.94);
 }
 
-.letter-tile .letter-glyph {
+.letter-tile.is-energized .sound-energy-glyph {
+  border-color: var(--gold-soft);
+  color: var(--gold-soft);
+  box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.16), 0 0 28px rgba(251, 191, 36, 0.58);
+}
+
+.letter-tile .sound-energy-glyph {
   position: relative;
   z-index: 1;
   display: inline-flex;
@@ -239,65 +245,53 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  border-radius: 14px;
-  background: var(--ltr-color, var(--teal));
-  color: #10151f;
+  border: 2px solid rgba(163, 255, 203, 0.72);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 36% 28%, rgba(255, 255, 255, 0.2), transparent 24%),
+    linear-gradient(145deg, rgba(39, 47, 117, 0.98), rgba(14, 24, 70, 0.98));
+  color: #fff;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(1.4rem, 4.5vw, 1.9rem);
   text-transform: lowercase;
+  box-shadow:
+    inset 0 0 16px rgba(147, 165, 252, 0.24),
+    0 0 0 4px rgba(147, 165, 252, 0.12),
+    0 6px 18px rgba(4, 8, 35, 0.34);
   transition: transform 0.1s ease;
 }
 
-.letter-row .letter-tile .letter-glyph {
+.letter-row .letter-tile .sound-energy-glyph {
   font-size: clamp(1.05rem, 3.2vw, 1.3rem);
-  border-radius: 11px;
 }
 
-.build-tile.letter-tile .letter-glyph {
-  border-radius: 13px;
-}
-
-.letter-tile .letter-face {
-  position: absolute;
-  z-index: 2;
-  inset: 0;
-  pointer-events: none;
-}
-
-.letter-tile .eye {
-  position: absolute;
-  top: 26%;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #10151f;
-}
-
-.letter-tile .eye-l { left: 30%; }
-.letter-tile .eye-r { right: 30%; }
-
-.letter-tile .mouth {
-  position: absolute;
-  bottom: 26%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 6px;
-  border-bottom: 2.5px solid #10151f;
-  border-radius: 0 0 10px 10px;
-}
-
-.build-slot.is-filled .letter-tile .letter-glyph {
-  background: var(--ltr-color, var(--ok));
+.build-slot.is-filled .letter-tile .sound-energy-glyph {
+  border-color: rgba(124, 255, 178, 0.92);
+  background: linear-gradient(145deg, rgba(22, 118, 92, 0.98), rgba(12, 62, 70, 0.98));
+  box-shadow: 0 0 0 4px rgba(124, 255, 178, 0.14), 0 0 18px rgba(124, 255, 178, 0.28);
 }
 
 /* 「先學一學」畫面：拆返出嚟嘅字母排(純展示,幫手建立「音拼埋成詞」概念) */
 .letter-row {
+  position: relative;
   display: flex;
   justify-content: center;
-  gap: 8px;
-  margin: 4px 0 2px;
+  gap: 14px;
+  margin: 8px 0 2px;
+}
+
+.letter-row:not(:empty)::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 18%;
+  right: 18%;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.54);
 }
 
 .letter-row .letter-tile {
@@ -313,22 +307,10 @@
   margin: 0 auto;
 }
 
-.letter-tile-lg .letter-glyph {
+.letter-tile-lg .sound-energy-glyph {
   font-size: clamp(3.2rem, 14vw, 4.8rem);
-  border-radius: 28px;
-}
-
-.letter-tile-lg .eye {
-  width: 12px;
-  height: 12px;
-  top: 28%;
-}
-
-.letter-tile-lg .mouth {
-  width: 28px;
-  height: 12px;
-  bottom: 28%;
-  border-bottom-width: 3.5px;
+  border-width: 3px;
+  box-shadow: inset 0 0 28px rgba(147, 165, 252, 0.28), 0 0 0 7px rgba(147, 165, 252, 0.12), 0 0 28px rgba(94, 234, 212, 0.22);
 }
 
 /* 聽一聽：揀字母卡 */
@@ -345,12 +327,11 @@
   pointer-events: none;
 }
 
-.word-card-letter .letter-tile-card .letter-glyph {
+.word-card-letter .letter-tile-card .sound-energy-glyph {
   font-size: clamp(2rem, 8vw, 2.8rem);
-  border-radius: 18px;
 }
 
-/* 「砌一砌」字池／已放好嘅格：letter-tile 要有固定大細先撐得起 letter-glyph 嘅 100% */
+/* 「砌一砌」字池／已放好嘅格：Sound Energy 節點要有固定大細。 */
 .build-pool .build-tile.letter-tile,
 .build-slot .build-placed.letter-tile {
   display: block;
