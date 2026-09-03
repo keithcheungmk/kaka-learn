@@ -1,4 +1,4 @@
-/** localStorage 持久化：按小朋友 Profile 分開（卡卡／希希） */
+/** localStorage 持久化：按小朋友 Profile 分開（卡卡／禧禧） */
 
 const STORAGE_KEY = 'kaka-learn-v1';
 const SCHEMA_VERSION = 3;
@@ -6,7 +6,7 @@ const SCHEMA_VERSION = 3;
 const PROFILE_IDS = ['kaka', 'heihei'];
 const PROFILES = {
   kaka: { id: 'kaka', name: '卡卡', avatar: './assets/profile-kaka.jpg' },
-  heihei: { id: 'heihei', name: '希希', avatar: './assets/profile-heihei.jpg' },
+  heihei: { id: 'heihei', name: '禧禧', avatar: './assets/profile-heihei.jpg' },
 };
 
 function todayKey() {

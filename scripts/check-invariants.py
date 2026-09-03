@@ -332,14 +332,16 @@ def check_star_rules() -> None:
 
 
 def check_profiles() -> None:
-    """雙小朋友 Profile：主頁先揀卡卡／希希；資料按人隔離；家長 PIN 已撤。"""
+    """雙小朋友 Profile：主頁先揀卡卡／禧禧；資料按人隔離；家長 PIN 已撤。"""
     html = read("index.html")
     if 'id="screen-profiles"' not in html:
         fail("profiles", "index.html 唔見 #screen-profiles（主頁要先揀小朋友）")
     if 'id="btn-profile-kaka"' not in html or 'id="btn-profile-heihei"' not in html:
         fail("profiles", "揀 Profile 要有 #btn-profile-kaka 同 #btn-profile-heihei")
-    if "卡卡" not in html or "希希" not in html:
-        fail("profiles", "Profile 卡要寫「卡卡」「希希」")
+    if 'profile-card-name">卡卡' not in html or 'profile-card-name">禧禧' not in html:
+        fail("profiles", "Profile 卡要寫「卡卡」「禧禧」")
+    if 'profile-card-name">希希' in html:
+        fail("profiles", "Profile 顯示名係「禧禧」，唔好寫返「希希」")
     avatars = ["assets/profile-kaka.jpg", "assets/profile-heihei.jpg"]
     for p in avatars:
         if not Path(p).exists():
@@ -347,7 +349,7 @@ def check_profiles() -> None:
     if 'id="modal-pin"' in html or 'id="btn-parent"' in html:
         fail("profiles", "家長 PIN／家長區入口應該掹走（改用換小朋友）")
     if "禧禧小遊戲樂園" in html or "禧禧樂園" in html:
-        fail("profiles", "外鏈唔好叫「禧禧…」，避免同希希 Profile 撞名")
+        fail("profiles", "外鏈唔好叫「禧禧…」，避免同禧禧 Profile 撞名")
     if "小遊戲樂園" not in html:
         fail("profiles", "外鏈文案要改「小遊戲樂園」")
     if 'id="screen-progress"' not in html:
@@ -357,6 +359,8 @@ def check_profiles() -> None:
         fail("profiles", "storage.js 要有 setActiveProfile／SCHEMA_VERSION（按人分倉）")
     if "heihei" not in st or "kaka" not in st:
         fail("profiles", "storage.js 要有 kaka／heihei 兩個 profile")
+    if "name: '禧禧'" not in st:
+        fail("profiles", "storage.js 嘅 heihei Profile 顯示名要係「禧禧」")
     if "migrateLegacyToRoot" not in st:
         fail("profiles", "storage.js 要遷移舊單一資料入卡卡")
     math = strip_js_comments(read("js/math-storage.js"))
