@@ -738,6 +738,23 @@ const WORDS = [
   { id: 'tian_char', term: '天', isDeer: false, emoji: '🌤️', badge: '', plate: '#2a3548' },
   { id: 'liang_char', term: '亮', isDeer: false, emoji: '💡', badge: '', plate: '#2a3548' },
   { id: 'xing_char', term: '星', isDeer: false, emoji: '⭐', badge: '', plate: '#2a3548' },
+  // 紅⑪《小明和氣球》字卡詞／短語（2026-09-03 掃描；起牀／快起牀保留「牀」）
+  { id: 'feiguo', term: '飛過', isDeer: false, emoji: '🎈', badge: '過', plate: '#1a3050' },
+  { id: 'qichuang', term: '起牀', isDeer: false, emoji: '🛏️', badge: '', plate: '#1a2a4a' },
+  { id: 'feishang', term: '飛上', isDeer: false, emoji: '⬆️', badge: '', plate: '#102848' },
+  { id: 'gaogaode', term: '高高的', isDeer: false, emoji: '🦒', badge: '高', plate: '#3a3010' },
+  { id: 'feidao', term: '飛到', isDeer: false, emoji: '🎯', badge: '到', plate: '#1a3050' },
+  { id: 'dadade', term: '大大的', isDeer: false, emoji: '⬛', badge: '大', plate: '#1a1a22' },
+  { id: 'he_river', term: '河', isDeer: false, emoji: '🌊', badge: '河', plate: '#0f3550' },
+  { id: 'yige', term: '一個', isDeer: false, emoji: '1️⃣', badge: '', plate: '#1a3050' },
+  { id: 'xiaoming', term: '小明', isDeer: false, emoji: '👦', badge: '明', plate: '#1a3050' },
+  { id: 'tianliang', term: '天亮', isDeer: false, emoji: '🌅', badge: '', plate: '#3a3410' },
+  { id: 'yueqiu', term: '月球', isDeer: false, emoji: '🌙', badge: '球', plate: '#1a2040' },
+  { id: 'changchangde', term: '長長的', say: '好長好長的', isDeer: false, emoji: '📏', badge: '長', plate: '#1a3050' },
+  { id: 'shangxuequ', term: '上學去', isDeer: false, emoji: '🎒🏫', emojiDuo: true, badge: '', plate: '#102848' },
+  { id: 'qule', term: '去了', isDeer: false, emoji: '⬅️', badge: '了', plate: '#3a3010' },
+  { id: 'tianliangle', term: '天亮了', isDeer: false, emoji: '☀️', badge: '', plate: '#3a3410' },
+  { id: 'kuaiqichuang', term: '快起牀', isDeer: false, emoji: '⏰', badge: '', plate: '#3a3410' },
 ];
 
 /** 主題：先學再開考 */
@@ -748,7 +765,7 @@ const TOPICS = [
     blurb: '對齊《我自己會讀》紅輯：讀完書考吓佢',
     cover: '📕',
     wordIds: [
-      'wo', 'ni', 'ta_he', 'ta_she', 'women', 'nimen', 'tamen', 'baba', 'mama', 'yeye', 'maamaa', 'popo', 'gonggong', 'gege', 'jiejie', 'didi', 'meimei', 'baobao', 'pengyou', 'tongxue', 'laoshi_job', 'dajia', 'ziji', 'kanjian', 'tingjian', 'shuo', 'du', 'xie', 'hua_draw', 'chang_sing', 'lai', 'qu', 'hui', 'chu', 'ru', 'zuo_sit', 'zhan', 'zou', 'pao', 'tiao', 'fei', 'you_swim', 'pa', 'chi_eat', 'he_drink', 'shui_sleep', 'xing', 'xi', 'chuan_wear', 'tuo', 'kai', 'guan', 'na_take', 'fang', 'zhao', 'gei', 'wan_play', 'xiao_laugh', 'ku', 'bao_hug', 'xiang_think', 'yao_want', 'da_big', 'xiao_small', 'duo', 'shao', 'hao', 'huai', 'gao_tall', 'ai_short_height', 'chang_long', 'duan_short', 'kuai', 'man', 'xin_new', 'jiu_old', 'xiang_scent', 'tian', 're_hot', 'leng_cold', 'kaixin', 'guai', 'piaoliang', 'de', 'le', 'ma_q', 'ne', 'he_and', 'dou', 'ye_also', 'you_again', 'zai_again', 'hen', 'shi_be', 'bu', 'meiyou', 'you_have', 'zai', 'hui_can', 'keyi', 'zhe', 'na_that', 'na_which', 'shenme', 'weishenme', 'zenme', 'zheli', 'nali', 'nali_where', 'ge_mw', 'zhi_mw', 'ba_mw', 'yi', 'er', 'san', 'si', 'wu', 'liu', 'qi', 'ba', 'jiu', 'shi', 'jintian', 'zuotian', 'mingtian', 'zaoshang', 'xiawu', 'wanshang', 'xianzai', 'nian', 'yue_month', 'ri_day', 'xingqi', 'shengri', 'tiankong', 'ri', 'yue', 'xingxing', 'yun', 'yu_rain', 'feng', 'xue', 'shan_mountain', 'shui', 'huo', 'shu_tree', 'hua', 'cao', 'tou', 'lian', 'yan', 'erduo', 'bi', 'kou', 'yachi', 'shou', 'jiao', 'shouzhi', 'toufa', 'xin', 'shu', 'bi_pen', 'zhi_paper', 'shubao', 'wanju', 'qiu_ball', 'gongzai', 'yifu', 'kuzi', 'xiezi', 'wazi', 'maozi', 'men', 'chuanghu', 'chuangpu', 'yizi', 'deng', 'beizi_cup', 'fan', 'miantiao', 'bao', 'jidan', 'nai', 'guozhi', 'tangguo', 'binggan', 'dangao', 'xiaogou', 'xiaomao', 'xiaoyu', 'xiaoniao', 'tu', 'xiaoji', 'xiaoya', 'xiaoma', 'xiaoniu', 'xiaoyang', 'xiaozhu', 'xiaochong', 'jia', 'xuexiao', 'gongyuan', 'jie', 'shangchang', 'che', 'chuan', 'feiji', 'xiexie', 'shuijiao', 'ai_love', 'zaochen', 'wanan',
+      'wo', 'ni', 'ta_he', 'ta_she', 'women', 'nimen', 'tamen', 'baba', 'mama', 'yeye', 'maamaa', 'popo', 'gonggong', 'gege', 'jiejie', 'didi', 'meimei', 'baobao', 'pengyou', 'tongxue', 'laoshi_job', 'dajia', 'ziji', 'kanjian', 'tingjian', 'shuo', 'du', 'xie', 'hua_draw', 'chang_sing', 'lai', 'qu', 'hui', 'chu', 'ru', 'zuo_sit', 'zhan', 'zou', 'pao', 'tiao', 'fei', 'you_swim', 'pa', 'chi_eat', 'he_drink', 'shui_sleep', 'xing', 'xi', 'chuan_wear', 'tuo', 'kai', 'guan', 'na_take', 'fang', 'zhao', 'gei', 'wan_play', 'xiao_laugh', 'ku', 'bao_hug', 'xiang_think', 'yao_want', 'da_big', 'xiao_small', 'duo', 'shao', 'hao', 'huai', 'gao_tall', 'ai_short_height', 'chang_long', 'duan_short', 'kuai', 'man', 'xin_new', 'jiu_old', 'xiang_scent', 'tian', 're_hot', 'leng_cold', 'kaixin', 'guai', 'piaoliang', 'de', 'le', 'ma_q', 'ne', 'he_and', 'dou', 'ye_also', 'you_again', 'zai_again', 'hen', 'shi_be', 'bu', 'meiyou', 'you_have', 'zai', 'hui_can', 'keyi', 'zhe', 'na_that', 'na_which', 'shenme', 'weishenme', 'zenme', 'zheli', 'nali', 'nali_where', 'ge_mw', 'zhi_mw', 'ba_mw', 'yi', 'er', 'san', 'si', 'wu', 'liu', 'qi', 'ba', 'jiu', 'shi', 'jintian', 'zuotian', 'mingtian', 'zaoshang', 'xiawu', 'wanshang', 'xianzai', 'nian', 'yue_month', 'ri_day', 'xingqi', 'shengri', 'tiankong', 'ri', 'yue', 'xingxing', 'yun', 'yu_rain', 'feng', 'xue', 'shan_mountain', 'shui', 'huo', 'shu_tree', 'hua', 'cao', 'tou', 'lian', 'yan', 'erduo', 'bi', 'kou', 'yachi', 'shou', 'jiao', 'shouzhi', 'toufa', 'xin', 'shu', 'bi_pen', 'zhi_paper', 'shubao', 'wanju', 'qiu_ball', 'gongzai', 'yifu', 'kuzi', 'xiezi', 'wazi', 'maozi', 'men', 'chuanghu', 'chuangpu', 'yizi', 'deng', 'beizi_cup', 'fan', 'miantiao', 'bao', 'jidan', 'nai', 'guozhi', 'tangguo', 'binggan', 'dangao', 'xiaogou', 'xiaomao', 'xiaoyu', 'xiaoniao', 'tu', 'xiaoji', 'xiaoya', 'xiaoma', 'xiaoniu', 'xiaoyang', 'xiaozhu', 'xiaochong', 'jia', 'xuexiao', 'gongyuan', 'jie', 'shangchang', 'che', 'chuan', 'feiji', 'xiexie', 'shuijiao', 'ai_love', 'zaochen', 'wanan', 'qiqiu', 'feiguo', 'qichuang', 'feishang', 'gaogaode', 'feidao', 'dadade', 'dai', 'he_river', 'song', 'hai', 'shang', 'shangxue', 'yige', 'xiaoming', 'tianliang', 'yueqiu', 'changchangde', 'shangxuequ', 'qule', 'tianliangle', 'kuaiqichuang',
     ],
     books: [
     { id: 'rb_qiqiu', title: '我的氣球呢？', cover: '🎈',
@@ -771,8 +788,9 @@ const TOPICS = [
       wordIds: ['shu_bunch', 'hua', 'piaoliang', 'guai', 'xin', 'baobao', 'ziji', 'bao_hug', 'song', 'gei', 'ai_love', 'mama'] },
     { id: 'rb_fengwan', title: '風跟我玩', cover: '🌬️',
       wordIds: ['feng_wind', 'wan_play', 'wo', 'pao', 'xiao_laugh', 'chui_blow', 'fei', 'zhui', 'tiankong', 'gao_tall', 'kaixin'] },
-    { id: 'rb_xiaoming', title: '小明和氣球', cover: '🎈',
-      wordIds: [ 'wo', 'ba_char', 'ma_char', 'ming_char', 'he_and', 'peng_char', 'you_char', 'qi_char', 'qiu_ball', 'dai', 'fei', 'shang', 'qu', 'tian_char', 'yun_char', 'xing_char', 'yue_month', 'liang_char', 'hai', 'da_big', 'xia', 'niao', 'men' ] },
+    { id: 'rb_xiaoming', verified: true, cardSource: '2026-09-03 掃描字卡（紅⑪《小明和氣球》；Keith 授權／中文老師同意）', title: '小明和氣球', cover: '🎈',
+      wordIds: [
+        'qiqiu', 'feiguo', 'baba', 'qichuang', 'feishang', 'gaogaode', 'feidao', 'dadade', 'dai', 'he_river', 'song', 'qu', 'shan_mountain', 'kuai', 'hai', 'he_and', 'de', 'shang', 'shangxue', 'yige', 'xiaoming', 'tiankong', 'tianliang', 'yueqiu', 'changchangde', 'shangxuequ', 'qule', 'tianliangle', 'kuaiqichuang' ] },
     { id: 'rb_dongdong', title: '冬冬請客', cover: '🍽️',
       wordIds: ['qing_invite', 'keren', 'chi_eat', 'he_drink', 'lai', 'dajia', 'pengyou', 'women', 'nimen', 'tamen', 'yeye', 'maamaa', 'popo', 'gonggong', 'gege', 'jiejie', 'didi', 'meimei', 'fan', 'xiexie', 'kaixin'] },
     ],

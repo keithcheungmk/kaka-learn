@@ -379,6 +379,7 @@
     "爬",
     "爸",
     "爺",
+    "牀",
     "牙",
     "牛",
     "物",
@@ -711,8 +712,8 @@
     "龜"
   ],
   "files": {
-    "noto-sans-hk-500.woff2": 194620,
-    "noto-sans-hk-700.woff2": 198160,
+    "noto-sans-hk-500.woff2": 194636,
+    "noto-sans-hk-700.woff2": 198828,
     "fredoka.woff2": 34808
   }
 }
