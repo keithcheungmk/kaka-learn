@@ -380,6 +380,10 @@
           tile.addEventListener('click', (ev) => {
             ev.preventDefault();
             ev.stopPropagation();
+            tile.classList.remove('is-energized');
+            void tile.offsetWidth;
+            tile.classList.add('is-energized');
+            setTimeout(() => tile.classList.remove('is-energized'), 520);
             playLetterSound(tile.dataset.letter, { muted: isMuted() });
           });
         });
