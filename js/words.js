@@ -755,6 +755,12 @@ const WORDS = [
   { id: 'qule', term: '去了', isDeer: false, emoji: '⬅️', badge: '了', plate: '#3a3010' },
   { id: 'tianliangle', term: '天亮了', isDeer: false, emoji: '☀️', badge: '', plate: '#3a3410' },
   { id: 'kuaiqichuang', term: '快起牀', isDeer: false, emoji: '⏰', badge: '', plate: '#3a3410' },
+  // 橙④《鞋子》字卡詞／短語（2026-09-03 掃描；脫了用肉月旁「脫」）
+  { id: 'di', term: '地', say: '慢慢地', isDeer: false, emoji: '📌', badge: '地', plate: '#2a3548' },
+  { id: 'huijia', term: '回家', isDeer: false, emoji: '🏡', badge: '', plate: '#1a3050' },
+  { id: 'tuole', term: '脫了', isDeer: false, emoji: '👟', badge: '脫', plate: '#402030' },
+  { id: 'shufudi', term: '舒服地', isDeer: false, emoji: '😌', badge: '', plate: '#143828' },
+  { id: 'shushufufudi', term: '舒舒服服地', isDeer: false, emoji: '😴', badge: '舒', plate: '#1a2a4a' },
 ];
 
 /** 主題：先學再開考 */
@@ -801,9 +807,7 @@ const TOPICS = [
     blurb: '對齊《我自己會讀》橙輯：讀完書考吓佢',
     cover: '📙',
     wordIds: [
-      'xiaopengyou', 'xuesheng', 'xiansheng', 'taitai', 'bobo', 'shushu', 'ayi', 'zhuren', 'keren', 'linju', 'bangmang', 'wen', 'da', 'gaosu', 'jiao_call', 'dai', 'zhui', 'zhuo', 'cang', 'diedao', 'han', 'song', 'shou_collect', 'jie_borrow', 'huan', 'yong', 'shi_try', 'xue_learn', 'jiao_teach', 'huan_change', 'sao', 'mo', 'gai', 'ban', 'tui', 'la', 'pao_throw', 'jie_catch', 'ti', 'da_hit', 'pai', 'yao_shake', 'an', 'zhi_point', 'mo_touch', 'wen_smell', 'gaoxing', 'kuaile', 'nanguo', 'haipa', 'shengqi', 'shufu', 'yang_itch', 'hua_slide', 'ying', 'ruan', 'qing', 'zhong', 'ganjing', 'angzang', 'shi_wet', 'gan_dry', 'jian', 'yuan', 'fang_shape', 'jing_quiet', 'cao_noise', 'lei', 'yinwei', 'suoyi', 'danshi', 'keshi_but', 'ranhou', 'jiezhe', 'xian_first', 'zhihou', 'yiqian', 'yihou', 'gangcai', 'yijing', 'zhengzai', 'changchang', 'youshi', 'yiqi', 'zhongyu', 'turan', 'ruguo', 'huozhe', 'haishi', 'bei', 'rang', 'cong', 'dao', 'bi_compare', 'yuelaiyue', 'yibian', 'diyi', 'dier', 'zuihou', 'kaishi', 'wanjie', 'deng_wait', 'dengyixia', 'yizhi', 'paidui', 'lunliu', 'zuowan', 'jinwan', 'fangzi', 'menkou', 'huayuan', 'louti', 'dianti', 'dai_bag', 'he_box', 'zun', 'tong_bucket', 'pen', 'die', 'yusan', 'liwu', 'qiqiu', 'qi_flag', 'sheng_rope', 'zaocan', 'wucan', 'wancan', 'dianxin', 'tang', 'zhou', 'huamao', 'wuya', 'baige', 'yingwu', 'hudie', 'mifeng', 'mayi', 'wa', 'shangxue', 'fangxue', 'shangke', 'xiake', 'xiezi_write', 'dushu', 'changge', 'huahua', 'youxi', 'bisai', 'yundong', 'lvxing', 'yecan', 'fangjia', 'gushi', 'wenti', 'daan', 'banfa', 'zhuyi', 'shengyin', 'weidao', 'yanse', 'tuhua', 'meng', 'qian_front', 'hou_back', 'zuo_left', 'you_right', 'zhongjian', 'pangbian', 'duimian', 'shui_who', 'feng_wind', 'zheyang', 'nayang', 'zhen', 'zheng', 'ji_howmany', 'duoshao', 'bian', 'mei', 'dangao', 'xiezi',
-      'xiegui',
-      'dui_pair',
+      'xiaopengyou', 'xuesheng', 'xiansheng', 'taitai', 'bobo', 'shushu', 'ayi', 'zhuren', 'keren', 'linju', 'bangmang', 'wen', 'da', 'gaosu', 'jiao_call', 'dai', 'zhui', 'zhuo', 'cang', 'diedao', 'han', 'song', 'shou_collect', 'jie_borrow', 'huan', 'yong', 'shi_try', 'xue_learn', 'jiao_teach', 'huan_change', 'sao', 'mo', 'gai', 'ban', 'tui', 'la', 'pao_throw', 'jie_catch', 'ti', 'da_hit', 'pai', 'yao_shake', 'an', 'zhi_point', 'mo_touch', 'wen_smell', 'gaoxing', 'kuaile', 'nanguo', 'haipa', 'shengqi', 'shufu', 'yang_itch', 'hua_slide', 'ying', 'ruan', 'qing', 'zhong', 'ganjing', 'angzang', 'shi_wet', 'gan_dry', 'jian', 'yuan', 'fang_shape', 'jing_quiet', 'cao_noise', 'lei', 'yinwei', 'suoyi', 'danshi', 'keshi_but', 'ranhou', 'jiezhe', 'xian_first', 'zhihou', 'yiqian', 'yihou', 'gangcai', 'yijing', 'zhengzai', 'changchang', 'youshi', 'yiqi', 'zhongyu', 'turan', 'ruguo', 'huozhe', 'haishi', 'bei', 'rang', 'cong', 'dao', 'bi_compare', 'yuelaiyue', 'yibian', 'diyi', 'dier', 'zuihou', 'kaishi', 'wanjie', 'deng_wait', 'dengyixia', 'yizhi', 'paidui', 'lunliu', 'zuowan', 'jinwan', 'fangzi', 'menkou', 'huayuan', 'louti', 'dianti', 'dai_bag', 'he_box', 'zun', 'tong_bucket', 'pen', 'die', 'yusan', 'liwu', 'qiqiu', 'qi_flag', 'sheng_rope', 'zaocan', 'wucan', 'wancan', 'dianxin', 'tang', 'zhou', 'huamao', 'wuya', 'baige', 'yingwu', 'hudie', 'mifeng', 'mayi', 'wa', 'shangxue', 'fangxue', 'shangke', 'xiake', 'xiezi_write', 'dushu', 'changge', 'huahua', 'youxi', 'bisai', 'yundong', 'lvxing', 'yecan', 'fangjia', 'gushi', 'wenti', 'daan', 'banfa', 'zhuyi', 'shengyin', 'weidao', 'yanse', 'tuhua', 'meng', 'qian_front', 'hou_back', 'zuo_left', 'you_right', 'zhongjian', 'pangbian', 'duimian', 'shui_who', 'feng_wind', 'zheyang', 'nayang', 'zhen', 'zheng', 'ji_howmany', 'duoshao', 'bian', 'mei', 'dangao', 'xiezi', 'xiegui', 'dui_pair', 'da_big', 'xiao_small', 'de', 'di', 'huijia', 'didi', 'meimei', 'jiejie', 'baba', 'tuole', 'gege', 'mama', 'shufudi', 'shuijiao', 'shushufufudi',
     ],
     books: [
     { id: 'ob_fangzi', title: '我的房子', cover: '🏠',
@@ -812,8 +816,9 @@ const TOPICS = [
       wordIds: ['diedao', 'zhui', 'pao_throw', 'jie_catch', 'baige', 'wuya', 'hudie', 'mifeng', 'qiqiu', 'qi_flag', 'qing', 'zhong', 'jian', 'yuan', 'sheng_rope'] },
     { id: 'ob_dangao', title: '誰吃了蛋糕', cover: '🎂',
       wordIds: ['shui_who', 'dangao', 'weidao', 'zaocan', 'wucan', 'wancan', 'dianxin', 'tang', 'zhou', 'wenti', 'daan', 'wen', 'da', 'gaosu', 'dai_bag', 'he_box', 'die', 'fang_shape', 'zun', 'tong_bucket', 'pen', 'bei'] },
-    { id: 'ob_xiezi', title: '鞋子', cover: '👟',
-      wordIds: [ 'xiezi', 'xiegui', 'tuo', 'fang', 'hui', 'jia', 'fangxue', 'dui_pair', 'da_big', 'xiao_small', 'baba', 'mama', 'jiejie', 'meimei', 'gege', 'didi', 'duoshao', 'shui_who', 'zai', 'limian' ] },
+    { id: 'ob_xiezi', verified: true, cardSource: '2026-09-03 掃描字卡（橙④《鞋子》；Keith 授權／中文老師建議）', title: '鞋子', cover: '👟',
+      wordIds: [
+        'da_big', 'xiao_small', 'de', 'di', 'huijia', 'didi', 'meimei', 'jiejie', 'baba', 'tuole', 'gege', 'xiezi', 'mama', 'shufudi', 'shuijiao', 'shushufufudi' ] },
     { id: 'ob_huijia', title: '回家', cover: '🏡',
       wordIds: ['cong', 'dao', 'gangcai', 'yijing', 'zhengzai', 'zhongyu', 'turan', 'jinwan', 'dai', 'song', 'shou_collect', 'lvxing', 'yecan', 'fangjia'] },
     { id: 'ob_woxiang', title: '我想', cover: '💭',
