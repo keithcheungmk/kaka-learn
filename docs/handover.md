@@ -35,9 +35,9 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 | 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
 -->
 
-## 而家嘅狀態（2026-09-03）
+## 而家嘅狀態（2026-09-04）
 
-- **Cursor**：雙小朋友 Profile MVP（`cursor/dual-child-profiles-6368`）。主頁先揀卡卡／禧禧；`kaka-learn-v1`／`kaka-math-v1` 按人分倉；舊資料歸入卡卡。家長 PIN 區已撤。顯示名「禧禧」，儲存 id 仍係 `heihei`。
+- 紅⑥ `rb_kuaipao`《快跑呀》已用 2026-09-04 掃描字卡覆寫（`verified: true`；12 張：快／跑／啊／呀／大火／小鹿／老虎／兔子／獅子＋斑馬快跑／猴子快跑呀／森林大火啊）。舊推測走跳站坐慢贏追來去回作廢。其他紅輯書仍係推測，唔好順手改。**唔好 merge Gemini #58**。
 - 紅⑪ `rb_xiaoming`《小明和氣球》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「快起牀」保留「牀」）。
 - 紅③ `rb_yusan`《雨傘》已用 2026-08-11 書本 PDF 故事頁印刷詞覆寫（`verified: true`；詞／短語：橙／藍／綠／黃／花雨傘、收起小雨傘、太陽出來了、出來了）。**唔係獨立認字卡相**——若之後影到書後字卡，以字卡覆寫。其他紅輯書仍係推測，唔好順手改。
 - 橙④ `ob_xiezi`《鞋子》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「脫了」用肉月旁「脫」）。其他橙輯書仍係推測，唔好順手改。
@@ -81,6 +81,15 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
   唔係 CI 會紅。Codex／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
 
 ## 最近改動
+
+### 2026-09-04 · Cursor（Keith：紅⑥《快跑呀》字卡覆寫）
+
+- `data/book-cards/rb_kuaipao.json`（`allow_words: true`）→ `apply-book-cards.py --write --sync-topic`
+- 舊推測（走／跳／站／坐／慢／贏／追／來／去／回）作廢；12 張卡表面形入 `rb_kuaipao.wordIds`，`verified: true`
+- 新詞補入 `js/words.js`（啊／呀／大火／小鹿／斑馬快跑／猴子快跑呀／森林大火啊）；呀用 `ya_exclaim`（`ya` 已係鴨）；短語整卡保留，冇拆斑馬／猴子
+- `--sync-topic` 只把新 id 追加到紅輯總表；**其他未對卡嘅紅輯書 `wordIds` 冇改**；**冇掂橙輯**；**唔好 merge Gemini #58**
+- 字體 subset 補「啊／呀／森／林」
+- **踩咗** `js/words.js`、`data/book-cards/rb_kuaipao.json`、font subset、handover
 
 ### 2026-09-04 · Codex（Keith：Phonics Phase 3A 能力紀錄基礎）
 
