@@ -1,0 +1,21 @@
+{
+  "book": "rb_kuaipao",
+  "series": "red_series",
+  "allow_words": true,
+  "source": "2026-09-04 掃描字卡（紅⑥《快跑呀》；中文老師已審／Keith 授權）",
+  "note": "卡上係單字／詞／短語，故 allow_words。整卡保留：啊／呀分卡；單字有快＋跑（短語另有快跑）；勿拆斑馬快跑／猴子快跑呀成斑馬／猴子。舊推測（走跳站坐慢贏追來去回等）作廢。呀用 id ya_exclaim（ya 已係鴨）。順序：單字／詞 → 短語。",
+  "cards": [
+    { "char": "快" },
+    { "char": "跑" },
+    { "char": "啊" },
+    { "char": "呀", "id": "ya_exclaim" },
+    { "char": "大火" },
+    { "char": "小鹿" },
+    { "char": "老虎" },
+    { "char": "兔子" },
+    { "char": "獅子" },
+    { "char": "斑馬快跑" },
+    { "char": "猴子快跑呀" },
+    { "char": "森林大火啊" }
+  ]
+}

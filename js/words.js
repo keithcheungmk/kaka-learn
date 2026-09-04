@@ -803,7 +803,7 @@ const WORDS = [
   { id: 'lv_char', term: '綠', isDeer: false, emoji: '🟢', badge: '綠', plate: '#143820' },
   { id: 'bai_char', term: '白', isDeer: false, emoji: '⚪', badge: '白', plate: '#3a3a45' },
   { id: 'feizou', term: '飛走', isDeer: false, emoji: '🎈', badge: '走', plate: '#1a3050' },
-  { id: 'a_particle', term: '啊', isDeer: false, emoji: '', badge: '啊', plate: '#2a3548' },
+  { id: 'a_exclaim', term: '啊', isDeer: false, emoji: '❗', badge: '', plate: '#401820' },
   { id: 'feizoule', term: '飛走了', isDeer: false, emoji: '🎈', badge: '走', plate: '#1a3050' },
   { id: 'wode', term: '我的', isDeer: false, emoji: '', badge: '我', plate: '#1a3050' },
   { id: 'xiaodidi', term: '小弟弟', isDeer: false, emoji: '👦', badge: '弟', plate: '#1a3050' },
@@ -835,6 +835,13 @@ const WORDS = [
   { id: 'daole', term: '到了', isDeer: false, emoji: '', badge: '到', plate: '#1a3050' },
   { id: 'yipian', term: '一片', isDeer: false, emoji: '🍂', badge: '一', plate: '#3a3410' },
   { id: 'henduo', term: '很多', isDeer: false, emoji: '', badge: '多', plate: '#3a3010' },
+  // 紅⑥《快跑呀》字卡詞／短語（2026-09-04 掃描；整卡保留）
+  { id: 'ya_exclaim', term: '呀', isDeer: false, emoji: '💬', badge: '', plate: '#2a3548' },
+  { id: 'dahuo', term: '大火', isDeer: false, emoji: '🔥', badge: '大', plate: '#401018' },
+  { id: 'xiaolu', term: '小鹿', isDeer: true, emoji: '🦌', badge: '小', plate: '#1a4d3a' },
+  { id: 'banmakuaipao', term: '斑馬快跑', isDeer: false, emoji: '🦓🏃', emojiDuo: true, badge: '', plate: '#2a2a35' },
+  { id: 'houzikuaipaoya', term: '猴子快跑呀', isDeer: false, emoji: '🐵🏃', emojiDuo: true, badge: '', plate: '#3a2410' },
+  { id: 'senlindahuoa', term: '森林大火啊', isDeer: false, emoji: '🌳🔥', emojiDuo: true, badge: '', plate: '#401018' },
 ];
 
 /** 主題：先學再開考 */
@@ -846,11 +853,11 @@ const TOPICS = [
     cover: '📕',
     wordIds: [
       'wo', 'ni', 'ta_he', 'ta_she', 'women', 'nimen', 'tamen', 'baba', 'mama', 'yeye', 'maamaa', 'popo', 'gonggong', 'gege', 'jiejie', 'didi', 'meimei', 'baobao', 'pengyou', 'tongxue', 'laoshi_job', 'dajia', 'ziji', 'kanjian', 'tingjian', 'shuo', 'du', 'xie', 'hua_draw', 'chang_sing', 'lai', 'qu', 'hui', 'chu', 'ru', 'zuo_sit', 'zhan', 'zou', 'pao', 'tiao', 'fei', 'you_swim', 'pa', 'chi_eat', 'he_drink', 'shui_sleep', 'xing', 'xi', 'chuan_wear', 'tuo', 'kai', 'guan', 'na_take', 'fang', 'zhao', 'gei', 'wan_play', 'xiao_laugh', 'ku', 'bao_hug', 'xiang_think', 'yao_want', 'da_big', 'xiao_small', 'duo', 'shao', 'hao', 'huai', 'gao_tall', 'ai_short_height', 'chang_long', 'duan_short', 'kuai', 'man', 'xin_new', 'jiu_old', 'xiang_scent', 'tian', 're_hot', 'leng_cold', 'kaixin', 'guai', 'piaoliang', 'de', 'le', 'ma_q', 'ne', 'he_and', 'dou', 'ye_also', 'you_again', 'zai_again', 'hen', 'shi_be', 'bu', 'meiyou', 'you_have', 'zai', 'hui_can', 'keyi', 'zhe', 'na_that', 'na_which', 'shenme', 'weishenme', 'zenme', 'zheli', 'nali', 'nali_where', 'ge_mw', 'zhi_mw', 'ba_mw', 'yi', 'er', 'san', 'si', 'wu', 'liu', 'qi', 'ba', 'jiu', 'shi', 'jintian', 'zuotian', 'mingtian', 'zaoshang', 'xiawu', 'wanshang', 'xianzai', 'nian', 'yue_month', 'ri_day', 'xingqi', 'shengri', 'tiankong', 'ri', 'yue', 'xingxing', 'yun', 'yu_rain', 'feng', 'xue', 'shan_mountain', 'shui', 'huo', 'shu_tree', 'hua', 'cao', 'tou', 'lian', 'yan', 'erduo', 'bi', 'kou', 'yachi', 'shou', 'jiao', 'shouzhi', 'toufa', 'xin', 'shu', 'bi_pen', 'zhi_paper', 'shubao', 'wanju', 'qiu_ball', 'gongzai', 'yifu', 'kuzi', 'xiezi', 'wazi', 'maozi', 'men', 'chuanghu', 'chuangpu', 'yizi', 'deng', 'beizi_cup', 'fan', 'miantiao', 'bao', 'jidan', 'nai', 'guozhi', 'tangguo', 'binggan', 'dangao', 'xiaogou', 'xiaomao', 'xiaoyu', 'xiaoniao', 'tu', 'xiaoji', 'xiaoya', 'xiaoma', 'xiaoniu', 'xiaoyang', 'xiaozhu', 'xiaochong', 'jia', 'xuexiao', 'gongyuan', 'jie', 'shangchang', 'che', 'chuan', 'feiji', 'xiexie', 'shuijiao', 'ai_love', 'zaochen', 'wanan', 'qiqiu', 'feiguo', 'qichuang', 'feishang', 'gaogaode', 'feidao', 'dadade', 'dai', 'he_river', 'song', 'hai', 'shang', 'shangxue', 'yige', 'xiaoming', 'tianliang', 'yueqiu', 'changchangde', 'shangxuequ', 'qule', 'tianliangle', 'kuaiqichuang', 'yusan', 'chengyusan', 'lanyusan', 'lvyusan', 'huangyusan', 'huayusan', 'shouqixiaoyusan', 'taiyangchulaile', 'chulaile',
-      'cheng_char', 'bai_char', 'hong_char', 'huang_char', 'lan_char', 'lv_char', 'feizou', 'a_particle', 'feizoule', 'wode', 'qishui', 'tong', 'shuiguo', 'shupian', 'huasheng', 'tanchi', 'anan', 'tongle', 'duzi', 'tanchide', 'aiyo', 'anande', 'xin_letter', 'liugei', 'zuihou', 'fengguoguo', 'fen_share', 'li_pear', 'guoguo', 'xiangjiao', 'pingguo', 'mangguo', 'ying_win', 'zhui', 'xiaodidi', 'shuizaijiao', 'jiao_call', 'shui_who', 'e_hungry', 'mao', 'yang', 'niu', 'gou', 'niao', 'zhizhi', 'miaomiao', 'miemie', 'wangwang', 'moumou', 'wawa', 'huangye', 'pian_mw', 'liang_two', 'dao', 'qiutian', 'daole', 'yipian', 'ye', 'henduo', 'zuo_do', 'huaer', 'songgei', 'yiduo', 'yishu', 'zuohao', 'shu_bunch', 'duo_mw', 'xiaofanchuan', 'xiaowanpi', 'chuipaopao', 'genwowan', 'feng_wind', 'gen', 'fengche', 'chuiluan', 'zhifeiji', 'gutou', 'dongdong', 'wa', 'qingke', 'huamao', 'yu', 'bushi', 'qing_invite', 'dongxi', 'buken', 'henhao', 'baitu', 'luobo', 'chidongxi', 'chidehenhao',
+      'cheng_char', 'bai_char', 'hong_char', 'huang_char', 'lan_char', 'lv_char', 'feizou', 'a_exclaim', 'feizoule', 'wode', 'qishui', 'tong', 'shuiguo', 'shupian', 'huasheng', 'tanchi', 'anan', 'tongle', 'duzi', 'tanchide', 'aiyo', 'anande', 'xin_letter', 'liugei', 'zuihou', 'fengguoguo', 'fen_share', 'li_pear', 'guoguo', 'xiangjiao', 'pingguo', 'mangguo', 'xiaodidi', 'shuizaijiao', 'jiao_call', 'shui_who', 'e_hungry', 'mao', 'yang', 'niu', 'gou', 'niao', 'zhizhi', 'miaomiao', 'miemie', 'wangwang', 'moumou', 'wawa', 'huangye', 'pian_mw', 'liang_two', 'dao', 'qiutian', 'daole', 'yipian', 'ye', 'henduo', 'zuo_do', 'huaer', 'songgei', 'yiduo', 'yishu', 'zuohao', 'shu_bunch', 'duo_mw', 'xiaofanchuan', 'xiaowanpi', 'chuipaopao', 'genwowan', 'feng_wind', 'gen', 'fengche', 'chuiluan', 'zhifeiji', 'gutou', 'dongdong', 'wa', 'qingke', 'huamao', 'yu', 'bushi', 'qing_invite', 'dongxi', 'buken', 'henhao', 'baitu', 'luobo', 'chidongxi', 'chidehenhao', 'ya_exclaim', 'dahuo', 'xiaolu', 'laohu', 'tu', 'shizi', 'banmakuaipao', 'houzikuaipaoya', 'senlindahuoa',
     ],
     books: [
     { id: 'rb_qiqiu', verified: true, cardSource: '2026-09-05 掃描書本認字卡（紅①《我的氣球呢？》）', title: '我的氣球呢？', cover: '🎈',
-      wordIds: ['le', 'cheng_char', 'bai_char', 'hong_char', 'huang_char', 'lan_char', 'lv_char', 'wo', 'ne', 'qiqiu', 'de', 'feizou', 'a_particle', 'feizoule', 'wode'] },
+      wordIds: ['le', 'cheng_char', 'bai_char', 'hong_char', 'huang_char', 'lan_char', 'lv_char', 'wo', 'ne', 'qiqiu', 'de', 'feizou', 'a_exclaim', 'feizoule', 'wode'] },
     { id: 'rb_anan', verified: true, cardSource: '2026-09-05 掃描書本認字卡（紅②《貪吃的安安》）', title: '貪吃的安安', cover: '😋',
       wordIds: ['de', 'qishui', 'le', 'binggan', 'tong', 'tangguo', 'shuiguo', 'shupian', 'huasheng', 'tanchi', 'anan', 'tongle', 'duzi', 'tanchide', 'aiyo', 'anande'] },
     { id: 'rb_yusan', verified: true, cardSource: '2026-08-11 書本 PDF（紅③《雨傘》；issue #57 附件；故事頁印刷詞／短語，封面書名「雨傘」＋末頁大字卡「出來了」）', title: '雨傘', cover: '☂️',
@@ -860,12 +867,12 @@ const TOPICS = [
       wordIds: ['xin_letter', 'baba', 'de', 'gege', 'anan', 'mama', 'jiejie', 'yeye', 'meiyou'] },
     { id: 'rb_fenguo', verified: true, cardSource: '2026-09-05 掃描書本認字卡（紅⑤《分果果》）', title: '分果果', cover: '🍎',
       wordIds: ['gege', 'liugei', 'jiejie', 'zuihou', 'popo', 'fengguoguo', 'xiaogou', 'wo', 'he_and', 'yige', 'ge_mw', 'fen_share', 'zhi_mw', 'li_pear', 'cheng_char', 'guoguo', 'xiangjiao', 'pingguo', 'shuiguo', 'mama', 'mangguo', 'baba'] },
-    { id: 'rb_kuaipao', title: '快跑呀', cover: '🏃',
-      wordIds: ['pao', 'zou', 'tiao', 'zhan', 'zuo_sit', 'kuai', 'man', 'ying_win', 'zhui', 'lai', 'qu', 'hui'] },
+    { id: 'rb_kuaipao', verified: true, cardSource: '2026-09-04 掃描字卡（紅⑥《快跑呀》；中文老師已審／Keith 授權）', title: '快跑呀', cover: '🏃',
+      wordIds: ['kuai', 'pao', 'a_exclaim', 'ya_exclaim', 'dahuo', 'xiaolu', 'laohu', 'tu', 'shizi', 'banmakuaipao', 'houzikuaipaoya', 'senlindahuoa'] },
     { id: 'rb_shuijiao', verified: true, cardSource: '2026-09-05 掃描書本認字卡（紅⑦《誰在叫》）', title: '誰在叫', cover: '📣',
       wordIds: ['duzi', 'xiaodidi', 'shuizaijiao', 'jiao_call', 'zai', 'shui_who', 'e_hungry', 'mao', 'yang', 'niu', 'gou', 'niao', 'le', 'zhizhi', 'miaomiao', 'miemie', 'wangwang', 'moumou', 'wawa'] },
     { id: 'rb_huangye', verified: true, cardSource: '2026-09-05 掃描書本認字卡（紅⑧《黃葉》）', title: '黃葉', cover: '🍂',
-      wordIds: ['huangye', 'yi', 'wu', 'le', 'pian_mw', 'er', 'si', 'san', 'liang_two', 'dao', 'qiutian', 'a_particle', 'daole', 'huang_char', 'yipian', 'ye', 'henduo'] },
+      wordIds: ['huangye', 'yi', 'wu', 'le', 'pian_mw', 'er', 'si', 'san', 'liang_two', 'dao', 'qiutian', 'a_exclaim', 'daole', 'huang_char', 'yipian', 'ye', 'henduo'] },
     { id: 'rb_yishuhua', verified: true, cardSource: '2026-09-05 掃描書本認字卡（紅⑨《一束花》）', title: '一束花', cover: '💐',
       wordIds: ['wo', 'zuo_do', 'huaer', 'ba_mw', 'songgei', 'yiduo', 'mama', 'yishu', 'zuohao', 'yi', 'ba', 'shu_bunch', 'san', 'qi', 'wu', 'le', 'liu', 'si', 'duo_mw', 'liang_two', 'hua'] },
     { id: 'rb_fengwan', verified: true, cardSource: '2026-09-05 掃描書本認字卡（紅⑩《風跟我玩》）', title: '風跟我玩', cover: '🌬️',
