@@ -1,3 +1,6 @@
 .smoke/
 _site/
 .DS_Store
+
+# 媽媽跟課程錄嘅原檔（檔名簡化後都唔好直接 commit 成個資料夾）
+mama phonic recording/
