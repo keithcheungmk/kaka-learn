@@ -30,7 +30,6 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| Profile 頁移除禧禧遊戲樂園入口 | Codex | `index.html`, `scripts/check-invariants.py` | 2026-09-04 | Keith 明確交辦；只移除 Profile 頁重複外鏈，主頁入口保留 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
@@ -82,6 +81,13 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
   唔係 CI 會紅。Codex／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
 
 ## 最近改動
+
+### 2026-09-04 · Codex（Keith：Profile 頁移除禧禧遊戲樂園入口）
+
+- Profile 選擇頁只保留卡卡／禧禧兩張登入卡，移除底部重複的「禧禧遊戲樂園」外鏈
+- 登入後主頁的「禧禧遊戲樂園」主要入口保留；禧禧 Profile、資料及遊戲內容完全不受影響
+- 更新 Profile invariant，鎖定外鏈只可出現在主頁，不可再次加入 Profile 選擇頁
+- **踩咗** `index.html`、`scripts/check-invariants.py`、`docs/handover.md`
 
 ### 2026-09-04 · Codex（Keith：SPACE RANGER PHONICS Phase 2 Sound Energy）
 

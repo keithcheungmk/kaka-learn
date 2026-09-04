@@ -365,8 +365,11 @@ def check_profiles() -> None:
             fail("profiles", f"唔見頭像 {p}")
     if 'id="modal-pin"' in html or 'id="btn-parent"' in html:
         fail("profiles", "家長 PIN／家長區入口應該掹走（改用換小朋友）")
-    if "禧禧遊戲樂園" not in html:
-        fail("profiles", "外鏈文案要係「禧禧遊戲樂園」")
+    if html.count("禧禧遊戲樂園") != 2:
+        fail("profiles", "「禧禧遊戲樂園」只應保留主頁一個入口（文字及 aria-label 各一次）")
+    profile_html = html.split('id="screen-profiles"', 1)[1].split("</section>", 1)[0]
+    if "禧禧遊戲樂園" in profile_html or "HeiHeiClass" in profile_html:
+        fail("profiles", "Profile 選擇頁唔應該再顯示禧禧遊戲樂園外鏈")
     if 'id="screen-progress"' not in html:
         fail("profiles", "唔見 #screen-progress（我的進度頁）")
     st = strip_js_comments(read("js/storage.js"))
