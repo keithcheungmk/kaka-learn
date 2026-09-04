@@ -30,6 +30,7 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| Phonics Phase 3A 能力紀錄基礎 | Codex | `js/storage.js`, `js/phonics-app.js`, `scripts/test-storage.mjs`, `scripts/check-invariants.py` | 2026-09-04 | Keith 已批准；分開記錄認音／拼合／拆音，暫不改自動出題 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
