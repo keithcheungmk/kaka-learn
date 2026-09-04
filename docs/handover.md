@@ -82,6 +82,13 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-04 · Codex（Keith：Profile 頁移除禧禧遊戲樂園入口）
+
+- Profile 選擇頁只保留卡卡／禧禧兩張登入卡，移除底部重複的「禧禧遊戲樂園」外鏈
+- 登入後主頁的「禧禧遊戲樂園」主要入口保留；禧禧 Profile、資料及遊戲內容完全不受影響
+- 更新 Profile invariant，鎖定外鏈只可出現在主頁，不可再次加入 Profile 選擇頁
+- **踩咗** `index.html`、`scripts/check-invariants.py`、`docs/handover.md`
+
 ### 2026-09-04 · Codex（Keith：SPACE RANGER PHONICS Phase 2 Sound Energy）
 
 - 全面退役 Numberblocks 式擬人字母：共用元件已刪除眼、嘴、面孔及每個字母固定角色配色
