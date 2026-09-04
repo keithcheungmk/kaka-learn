@@ -161,6 +161,43 @@ test('recordWordResult：答錯清零 streak，答啱累積', () => {
   assert.equal(s.streak, 1);
 });
 
+test('Phonics Phase 3A：認音／拼合／拆音分開記錄，recent 最多 10 次', () => {
+  const S = freshStorage();
+  S.setActiveProfile('kaka');
+  S.recordPhonicsSkillResult('recognition', 'm', false);
+  S.recordPhonicsSkillResult('recognition', 'm', true);
+  S.recordPhonicsSkillResult('blending', 'ap_map', true);
+  S.recordPhonicsSkillResult('segmenting', 'ap_map', false);
+  for (let i = 0; i < 12; i += 1) S.recordPhonicsSkillResult('recognition', 'a', i % 2 === 0);
+
+  const skills = S.loadState().phonicsSkillStats;
+  assert.equal(skills.recognition.m.right, 1);
+  assert.equal(skills.recognition.m.wrong, 1);
+  assert.equal(skills.recognition.m.streak, 1);
+  assert.equal(skills.blending.ap_map.right, 1);
+  assert.equal(skills.segmenting.ap_map.wrong, 1);
+  assert.equal(skills.recognition.a.recent.length, 10);
+  assert.equal(skills.recognition.a.lastAttemptDay, S.todayKey());
+});
+
+test('Phonics Phase 3A：無效能力不寫入，舊 Profile 自動補空資料', () => {
+  const { S, localStorage } = loadStorage();
+  localStorage.setItem(
+    'kaka-learn-v1',
+    JSON.stringify({
+      schemaVersion: 3,
+      activeProfileId: 'kaka',
+      profiles: { kaka: { totalStars: 5 }, heihei: {} },
+    }),
+  );
+  let state = S.loadState();
+  assert.equal(state.phonicsLearningVersion, 1);
+  assert.deepEqual(Object.keys(state.phonicsSkillStats), ['recognition', 'blending', 'segmenting']);
+  S.recordPhonicsSkillResult('not-a-skill', 'm', true);
+  state = S.loadState();
+  assert.equal(state.phonicsSkillStats['not-a-skill'], undefined);
+});
+
 test('summarizeMastery：識字同最需要練排序', () => {
   const S = freshStorage();
   S.recordWordResult('gou', false);
@@ -179,10 +216,12 @@ test('resetStars：清空幣同 wordStats', () => {
   S.tryEarnStar();
   S.earnCoinForMode('build');
   S.recordWordResult('gou', true);
+  S.recordPhonicsSkillResult('recognition', 'm', true);
   const next = S.resetStars();
   assert.equal(next.coinsTotal, 0);
   assert.equal(next.totalStars, 0);
   assert.equal(Object.keys(next.wordStats).length, 0);
+  assert.equal(Object.keys(next.phonicsSkillStats.recognition).length, 0);
 });
 
 test('Profile 隔離：卡卡賺幣唔入禧禧', () => {
@@ -206,6 +245,22 @@ test('Profile 隔離：卡卡賺幣唔入禧禧', () => {
   assert.equal(S.loadState().coinsToday.listen, 1);
   assert.equal(S.loadState().coinsToday.match || 0, 0);
   assert.equal(S.loadState().wordStats.gou.wrong, 1);
+});
+
+test('Phonics Phase 3A：卡卡／禧禧能力紀錄完全隔離', () => {
+  const S = freshStorage();
+  S.setActiveProfile('kaka');
+  S.recordPhonicsSkillResult('recognition', 'm', true);
+  S.recordPhonicsSkillResult('blending', 'ap_map', false);
+
+  S.setActiveProfile('heihei');
+  assert.equal(S.loadState().phonicsSkillStats.recognition.m, undefined);
+  assert.equal(S.loadState().phonicsSkillStats.blending.ap_map, undefined);
+  S.recordPhonicsSkillResult('segmenting', 'ap_map', true);
+
+  S.setActiveProfile('kaka');
+  assert.equal(S.loadState().phonicsSkillStats.segmenting.ap_map, undefined);
+  assert.equal(S.loadState().phonicsSkillStats.recognition.m.right, 1);
 });
 
 test('Profile 選擇重新載入後保留，兩邊輪次進度唔互串', () => {
@@ -243,6 +298,7 @@ test('Profile root 正規化：缺欄位會補預設，未知欄位唔污染資�
   assert.equal(S.getActiveProfileId(), 'heihei');
   assert.equal(state.coinsTotal, 4);
   assert.deepEqual(Object.keys(state.wordStats), []);
+  assert.deepEqual(Object.keys(state.phonicsSkillStats), ['recognition', 'blending', 'segmenting']);
   assert.equal(state.unexpected, undefined);
   S.setActiveProfile('kaka');
   assert.equal(S.loadState().totalStars, 12);

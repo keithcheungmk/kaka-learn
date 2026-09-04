@@ -482,6 +482,21 @@ def check_phonics_sound_energy() -> None:
         fail("phonics-sound-energy", "Phonics 字母必須使用共用 Sound Energy 節點")
 
 
+def check_phonics_skill_tracking() -> None:
+    """Phase 3A：三種 Phonics 能力分開記錄，而且由正確玩法提供數據。"""
+    storage = strip_js_comments(read("js/storage.js"))
+    app = strip_js_comments(read("js/phonics-app.js"))
+    for skill in ["recognition", "blending", "segmenting"]:
+        if skill not in storage:
+            fail("phonics-skills", f"storage.js 缺少 {skill} 能力記錄")
+        if f"recordPhonicsSkill('{skill}'" not in app:
+            fail("phonics-skills", f"phonics-app.js 未接入 {skill} 能力記錄")
+    if "recordPhonicsSkillResult" not in storage or "phonicsSkillStats" not in storage:
+        fail("phonics-skills", "Phase 3A 儲存 API／資料欄位不完整")
+    if "recent.slice(-10)" not in storage:
+        fail("phonics-skills", "Phonics recent 嘗試必須設上限，避免 localStorage 無限增長")
+
+
 # ---------------------------------------------------------------- 故障隔離
 
 def check_storage_isolation() -> None:
@@ -770,6 +785,7 @@ CHECKS = [
     check_three_entries,
     check_phonics_ranger_theme,
     check_phonics_sound_energy,
+    check_phonics_skill_tracking,
     check_storage_isolation,
     check_module_isolation,
     check_math_boot_guard,
