@@ -82,6 +82,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-04 · Codex（Keith：採用 Open Source Phonics 純音方法）
+
+- 核實 Open Source Phonics 提供 CC BY-NC-SA 4.0 課程及發音指引，但沒有可下載的 a–z 音檔；因此只採用教學方法，沒有複製或錯誤標示第三方聲音
+- 新增 a–z 目標音、cue word、無 schwa 規則、英式發音覆核要求及人耳驗收表
+- 新增人聲錄音匯入工具：必須齊 26 個檔案並通過長度／格式檢查，才會一次過正規化音量及安裝，避免半套錄音污染正式素材
+- 退役會產生 `buh`／`tuh` 等多餘母音的 TTS 產生器；現有家庭錄音暫未更換，待新一套人聲純音錄好及老師覆核後才部署聲音修正
+- **踩咗** `scripts/generate-phonemes.py`、`scripts/import-phonemes.py`、`docs/phonics-audio-standard.md`、`assets/CREDITS.md`、`docs/handover.md`
+
 ### 2026-09-04 · Codex（Keith：Phonics Phase 3A 能力紀錄基礎）
 
 - 每個 Profile 新增獨立 `phonicsSkillStats`，分開保存 `recognition`（認音）、`blending`（CVC 解碼／拼合）及 `segmenting`（砌字／拆音）
