@@ -30,7 +30,6 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| Phonics Phase 3A 能力紀錄基礎 | Codex | `js/storage.js`, `js/phonics-app.js`, `scripts/test-storage.mjs`, `scripts/check-invariants.py` | 2026-09-04 | Keith 已批准；分開記錄認音／拼合／拆音，暫不改自動出題 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
@@ -82,6 +81,15 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
   唔係 CI 會紅。Codex／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
 
 ## 最近改動
+
+### 2026-09-04 · Codex（Keith：Phonics Phase 3A 能力紀錄基礎）
+
+- 每個 Profile 新增獨立 `phonicsSkillStats`，分開保存 `recognition`（認音）、`blending`（CVC 解碼／拼合）及 `segmenting`（砌字／拆音）
+- 資料來源刻意收窄：單字母聆聽先計認音、看圖揀有 `letters` 的 CVC 字先計 blending、砌有 `letters` 的字先計 segmenting；Sight words、完整單字 TTS 揀圖及撳錯字格位置不計能力分
+- 每項保存答對／答錯／streak、最後嘗試／答對日期及最近 10 次結果；舊 Profile 自動補空資料，卡卡／禧禧完全分倉，reset 亦會清理
+- 暫時無改出題排序、自動重練或家長進度 UI；等 Phase 3B／3C 使用真實數據
+- 新增 3 組 migration／分類／隔離測試及 invariant；同步更新 storage／Phonics app cache bust
+- **踩咗** `js/storage.js`、`js/phonics-app.js`、`scripts/test-storage.mjs`、`scripts/check-invariants.py`、`index.html`、`AGENTS.md`、`docs/handover.md`
 
 ### 2026-09-04 · Codex（Keith：Profile 頁移除禧禧遊戲樂園入口）
 

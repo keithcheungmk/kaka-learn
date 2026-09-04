@@ -49,6 +49,7 @@
 - UI 用繁體中文；主題係原創「**太空戰士學院**」（中文太空冒險；唔用迪士尼／彼思名稱、角色或素材）。動物主題仍保留鹿等字詞內容。
 - **SPACE RANGER PHONICS 已停用鹿主題**：所有 Phonics 畫面用 KAKA Ranger、翼形胸章、能量字母及共用深藍太空背景；唔好再引用 `phonics-hero.jpg`／`phonics-space-bg.jpg` 或新增鹿太空人。鹿只保留喺動物認字內容及未另行改版嘅數理模組。
 - **Phonics 字母唔擬人化**：字母只可以用統一 Ranger Sound Energy 節點顯示；唔好加眼、嘴、面孔、四肢或固定角色配色，亦唔好用 Numberblocks 式方塊角色。插圖只在直接解釋單字意思時使用。
+- **Phonics 能力數據要誠實分類**：認音（聽音揀單字母）、blending（由圖／意思解碼有 `letters` 嘅 CVC 字）、segmenting（砌出有 `letters` 嘅字）分開記錄；完整單字 TTS 揀圖、Sight words、撳錯字格位置唔可以當成其中一項能力。卡卡／禧禧資料必須分倉。
   **2026-09-02 決定**：KAKA RANGER 呢套角色美術（`assets/kaka-ranger-solo.png`、`docs/design/kaka-ranger-reference-sheet.png`）
   喺配色（綠／白／紫）、胸口翼形徽章、頭盔側燈呢幾樣設計上同 Buzz Lightyear 相當接近——呢個已經同 Keith
   傾過，佢知道呢一點，決定接受用（個人非商業學習網站）。**呢個係經過討論嘅例外，唔代表上面條規則廢咗**：

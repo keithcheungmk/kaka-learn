@@ -10,7 +10,7 @@
 
   const { PHONICS_TOPICS, getPhonicsTopicById, phonicsLetterPool, phonicsWordIllustHtml, letterTileHtml, isLetterItem } =
     window.KakaPhonicsWords;
-  const { loadState } = window.KakaStorage;
+  const { loadState, recordPhonicsSkillResult } = window.KakaStorage;
   const {
     warmEnglishVoice,
     speakEnglishTerm,
@@ -194,6 +194,15 @@
   function pickPraiseLine() {
     const lines = FEEDBACK_CORRECT_LINES || ['好叻！'];
     return lines[Math.floor(Math.random() * lines.length)];
+  }
+
+  function recordPhonicsSkill(skill, itemId, correct) {
+    if (typeof recordPhonicsSkillResult !== 'function') return;
+    try {
+      recordPhonicsSkillResult(skill, itemId, correct);
+    } catch (err) {
+      console.warn('Phonics skill result was not saved', err);
+    }
   }
 
   /**
@@ -571,7 +580,10 @@
     if (pBusy || !pListenRound) return;
     const correct = id === pListenRound.target.id;
     const targetWord = pListenRound.target.word;
+    const isLetter = typeof isLetterItem === 'function' ? isLetterItem(pListenRound.target) : pListenRound.target.kind === 'letter';
     const fb = $('#phonics-listen-feedback');
+
+    if (isLetter) recordPhonicsSkill('recognition', targetWord, correct);
 
     if (correct) {
       pBusy = true;
@@ -644,6 +656,10 @@
     const correct = id === pMatchRound.target.id;
     const targetWord = pMatchRound.target.word;
     const fb = $('#phonics-match-feedback');
+
+    if (Array.isArray(pMatchRound.target.letters) && pMatchRound.target.letters.length > 0) {
+      recordPhonicsSkill('blending', pMatchRound.target.id, correct);
+    }
 
     if (correct) {
       pBusy = true;
@@ -840,6 +856,7 @@
 
     const expected = pBuildRound.chars[slotIndex];
     if (tile.char !== expected) {
+      recordPhonicsSkill('segmenting', pBuildRound.target.id, false);
       slotEl?.classList.add('is-wrong');
       setTimeout(() => slotEl?.classList.remove('is-wrong'), 450);
       const retryLine = speakRetryThenEnglish(pBuildRound.target.word, isMuted());
@@ -874,6 +891,7 @@
     if (!pBuildRound) return;
     pBusy = true;
     const word = pBuildRound.target.word;
+    recordPhonicsSkill('segmenting', pBuildRound.target.id, true);
     const praise = speakCorrectEnglishOnly(word, isMuted(), () => {
       setTimeout(() => startPhonicsBuildRound(), 450);
     });

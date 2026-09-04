@@ -37,6 +37,12 @@ const DEFAULT_PROFILE_STATE = {
   coinsTotal: 0, // 歷來賺到嘅幣（換版時由 floor(totalStars/10) 承接）
   roundProgress: {}, // { "build|dinosaur|": ["baolong", …] } 未完成嘅輪次
   wordStats: {}, // { [wordId]: { right, wrong, streak, lastRightDay } }
+  phonicsSkillStats: {
+    recognition: {}, // { [letter]: skill stat } 聽音揀字母
+    blending: {}, // { [wordId]: skill stat } 看圖解碼 CVC 字
+    segmenting: {}, // { [wordId]: skill stat } 聽／看詞砌出字母
+  },
+  phonicsLearningVersion: 1,
   coinLog: {}, // { "YYYY-MM-DD": n } 每日賺到幾個幣（進度頁日曆）
   passedKeys: {}, // { "zoo": true, "red_series|rb_xiaoming": true }
   economyVersion: 2,
@@ -55,6 +61,7 @@ function emptyProfile() {
     coinsToday: {},
     roundProgress: {},
     wordStats: {},
+    phonicsSkillStats: { recognition: {}, blending: {}, segmenting: {} },
     coinLog: {},
     passedKeys: {},
   };
@@ -103,9 +110,22 @@ function applyDailyReset(profile) {
   if (!profile.coinsToday || typeof profile.coinsToday !== 'object') profile.coinsToday = {};
   if (!profile.roundProgress || typeof profile.roundProgress !== 'object') profile.roundProgress = {};
   if (!profile.wordStats || typeof profile.wordStats !== 'object') profile.wordStats = {};
+  profile.phonicsSkillStats = normalizePhonicsSkillStats(profile.phonicsSkillStats);
+  profile.phonicsLearningVersion = 1;
   if (!profile.coinLog || typeof profile.coinLog !== 'object') profile.coinLog = {};
   if (!profile.passedKeys || typeof profile.passedKeys !== 'object') profile.passedKeys = {};
   return profile;
+}
+
+const PHONICS_SKILLS = ['recognition', 'blending', 'segmenting'];
+
+function normalizePhonicsSkillStats(value) {
+  const src = value && typeof value === 'object' ? value : {};
+  const out = {};
+  PHONICS_SKILLS.forEach((skill) => {
+    out[skill] = src[skill] && typeof src[skill] === 'object' && !Array.isArray(src[skill]) ? src[skill] : {};
+  });
+  return out;
 }
 
 function applyEconomyMigration(profile, parsedSource) {
@@ -400,6 +420,44 @@ function recordWordResult(wordId, correct) {
   return state;
 }
 
+/**
+ * 記錄 Phonics 三種能力。recent 只留最近 10 次，足夠之後判斷跨日穩定度，
+ * 同時避免 localStorage 隨使用時間無限增長。
+ */
+function recordPhonicsSkillResult(skill, itemId, correct) {
+  if (!PHONICS_SKILLS.includes(skill) || !itemId) return loadState();
+  const state = loadState();
+  const allStats = normalizePhonicsSkillStats(state.phonicsSkillStats);
+  const day = todayKey();
+  const prev = allStats[skill][itemId] || {
+    right: 0,
+    wrong: 0,
+    streak: 0,
+    lastRightDay: null,
+    lastAttemptDay: null,
+    recent: [],
+  };
+  const next = {
+    ...prev,
+    recent: Array.isArray(prev.recent) ? [...prev.recent] : [],
+  };
+  if (correct) {
+    next.right = (next.right || 0) + 1;
+    next.streak = (next.streak || 0) + 1;
+    next.lastRightDay = day;
+  } else {
+    next.wrong = (next.wrong || 0) + 1;
+    next.streak = 0;
+  }
+  next.lastAttemptDay = day;
+  next.recent.push({ correct: !!correct, day });
+  next.recent = next.recent.slice(-10);
+  allStats[skill] = { ...allStats[skill], [itemId]: next };
+  state.phonicsSkillStats = allStats;
+  saveState(state);
+  return state;
+}
+
 function isWordMastered(stats) {
   if (!stats) return false;
   return (stats.streak || 0) >= 3 || (stats.right || 0) >= 3;
@@ -435,6 +493,8 @@ function resetStars() {
     coinsDate: todayKey(),
     roundProgress: {},
     wordStats: {},
+    phonicsSkillStats: { recognition: {}, blending: {}, segmenting: {} },
+    phonicsLearningVersion: 1,
     coinLog: {},
     passedKeys: {},
   });
@@ -461,6 +521,8 @@ window.KakaStorage = {
   saveRoundProgress,
   clearRoundProgress,
   recordWordResult,
+  PHONICS_SKILLS,
+  recordPhonicsSkillResult,
   isWordMastered,
   summarizeMastery,
   hasActiveProfile,
