@@ -1,0 +1,7 @@
+{
+  "book": "rb_huangye", "series": "red_series", "allow_words": true,
+  "source": "2026-09-05 掃描書本認字卡（紅⑧《黃葉》）",
+  "cards": [
+    {"char":"黃葉"},{"char":"一"},{"char":"五"},{"char":"了"},{"char":"片"},{"char":"二"},{"char":"四"},{"char":"三"},{"char":"兩"},{"char":"到"},{"char":"秋天"},{"char":"啊"},{"char":"到了"},{"char":"黃"},{"char":"一片"},{"char":"葉"},{"char":"很多"}
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "book": "rb_qiqiu", "series": "red_series", "allow_words": true,
+  "source": "2026-09-05 掃描書本認字卡（紅①《我的氣球呢？》）",
+  "cards": [
+    {"char":"了"},{"char":"橙"},{"char":"白"},{"char":"紅"},{"char":"黃"},{"char":"藍"},{"char":"綠"},{"char":"我"},{"char":"呢"},{"char":"氣球"},{"char":"的"},{"char":"飛走"},{"char":"啊"},{"char":"飛走了"},{"char":"我的"}
+  ]
+}
