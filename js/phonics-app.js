@@ -12,7 +12,7 @@
     PHONICS_TOPICS, PHONICS_SOUND_SECTIONS, getPhonicsTopicById,
     phonicsLetterPool, phonicsWordIllustHtml, letterTileHtml, isLetterItem,
   } = window.KakaPhonicsWords;
-  const { loadState, recordPhonicsSkillResult } = window.KakaStorage;
+  const { loadState, getActiveProfileId, recordPhonicsSkillResult } = window.KakaStorage;
   const {
     warmEnglishVoice,
     speakEnglishTerm,
@@ -34,6 +34,8 @@
   let pMatchRound = null;
   let pBuildRound = null;
   let pBuildSelectedKey = null;
+  let pBuildAudioGen = 0;
+  let pBuildPromptTimer = null;
 
   /** Cached HTMLAudioElement per grapheme／phoneme. */
   const phonemeAudioByLetter = Object.create(null);
@@ -201,6 +203,58 @@
   function pickPraiseLine() {
     const lines = FEEDBACK_CORRECT_LINES || ['好叻！'];
     return lines[Math.floor(Math.random() * lines.length)];
+  }
+
+  const PHONICS_BUILD_RETRY_LINES = [
+    'Try again!',
+    'Almost! Try again.',
+    'Good try! Have another go.',
+  ];
+
+  function activeLearnerEnglishName() {
+    return getActiveProfileId?.() === 'heihei' ? 'Hei Hei' : 'Kaka';
+  }
+
+  function pickPhonicsBuildPraise() {
+    const name = activeLearnerEnglishName();
+    const lines = [
+      `Great job, ${name}!`,
+      'Well done!',
+      'You got it!',
+      'Brilliant!',
+      'Excellent blending!',
+    ];
+    return lines[Math.floor(Math.random() * lines.length)];
+  }
+
+  function pickPhonicsBuildRetry() {
+    return PHONICS_BUILD_RETRY_LINES[Math.floor(Math.random() * PHONICS_BUILD_RETRY_LINES.length)];
+  }
+
+  function waitMs(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  /** English TTS with a timeout because iPad Safari does not always fire utterance.onend. */
+  function speakEnglishAndWait(text, { muted = isMuted(), delayMs = 80, rate = 0.85, pitch = 1.05 } = {}) {
+    return new Promise((resolve) => {
+      let done = false;
+      const finish = () => {
+        if (done) return;
+        done = true;
+        resolve();
+      };
+      speakEnglishTerm(text, { muted, delayMs, rate, pitch, onEnd: finish });
+      const wait = estimateSpeakMs ? estimateSpeakMs(text, { rate, delayMs }) : 1600;
+      setTimeout(finish, wait + 200);
+    });
+  }
+
+  function speakPhonicsBuildRetry() {
+    const line = pickPhonicsBuildRetry();
+    playTryAgainCue({ muted: isMuted() });
+    speakEnglishTerm(line, { muted: isMuted(), rate: 0.9, pitch: 1.05, delayMs: 120 });
+    return line;
   }
 
   function recordPhonicsSkill(skill, itemId, correct) {
@@ -788,10 +842,19 @@
 
   function bindPhonicsBuild() {
     const back = $('#btn-back-phonics-build');
-    if (back) back.onclick = () => openPhonicsPlayPick();
+    if (back) back.onclick = () => {
+      pBuildAudioGen += 1;
+      if (pBuildPromptTimer) clearTimeout(pBuildPromptTimer);
+      pBuildPromptTimer = null;
+      stopPhonemeAudio();
+      openPhonicsPlayPick();
+    };
   }
 
   function startPhonicsBuildRound() {
+    if (pBuildPromptTimer) clearTimeout(pBuildPromptTimer);
+    pBuildPromptTimer = null;
+    const audioGen = ++pBuildAudioGen;
     pBusy = false;
     pBuildSelectedKey = null;
     const topic = getPhonicsTopicById(pActiveTopicId);
@@ -822,6 +885,14 @@
 
     renderPhonicsBuildSlots();
     renderPhonicsBuildPool();
+
+    // First model the complete word. The generation guard prevents a stale
+    // delayed prompt from speaking after the child has already moved on.
+    pBuildPromptTimer = setTimeout(() => {
+      pBuildPromptTimer = null;
+      if (audioGen !== pBuildAudioGen || pBuildRound?.target.id !== target.id) return;
+      speakEnglishTerm(target.word, { muted: isMuted(), rate: 0.82, pitch: 1.05, delayMs: 0 });
+    }, 400);
   }
 
   function nextPhonicsBuildIndex() {
@@ -922,6 +993,8 @@
 
   function tryPlacePhonicsBuildChar(tileKey, slotIndex) {
     if (pBusy || !pBuildRound) return false;
+    if (pBuildPromptTimer) clearTimeout(pBuildPromptTimer);
+    pBuildPromptTimer = null;
     const next = nextPhonicsBuildIndex();
     const tile = pBuildRound.tiles.find((t) => t.key === tileKey);
     if (!tile) return false;
@@ -932,10 +1005,10 @@
     if (slotIndex !== next) {
       slotEl?.classList.add('is-wrong');
       setTimeout(() => slotEl?.classList.remove('is-wrong'), 450);
-      playTryAgainCue({ muted: isMuted() });
+      const retryLine = speakPhonicsBuildRetry();
       const fb = $('#phonics-build-feedback');
       if (fb) {
-        fb.textContent = '要由左到右砌呀';
+        fb.textContent = retryLine;
         fb.className = 'feedback retry';
       }
       pBuildSelectedKey = null;
@@ -948,7 +1021,7 @@
       recordPhonicsSkill('segmenting', pBuildRound.target.id, false);
       slotEl?.classList.add('is-wrong');
       setTimeout(() => slotEl?.classList.remove('is-wrong'), 450);
-      const retryLine = speakRetryThenEnglish(pBuildRound.target.word, isMuted());
+      const retryLine = speakPhonicsBuildRetry();
       const fb = $('#phonics-build-feedback');
       if (fb) {
         fb.textContent = retryLine;
@@ -964,31 +1037,56 @@
     renderPhonicsBuildSlots();
     renderPhonicsBuildPool();
 
+    // Tap and drag both arrive here, so every correctly placed grapheme gets
+    // the same reviewed Mama phoneme recording.
+    const placedSound = playLetterSound(tile.char, { muted: isMuted() });
+    const placedRound = pBuildRound;
+
     if (pBuildRound.filled.every(Boolean)) {
-      finishPhonicsBuildSuccess();
+      finishPhonicsBuildSuccess(placedSound);
     } else {
+      // Let the short sound finish before accepting the next tile, otherwise
+      // fast taps would cut off the sound the child is meant to memorise.
+      pBusy = true;
+      placedSound.then(() => {
+        if (pBuildRound === placedRound && !pBuildRound.filled.every(Boolean)) pBusy = false;
+      });
       const fb = $('#phonics-build-feedback');
       if (fb) {
-        fb.textContent = '好！繼續砌下一個';
+        fb.textContent = 'Great! Keep going.';
         fb.className = 'feedback ok';
       }
     }
     return true;
   }
 
-  function finishPhonicsBuildSuccess() {
+  async function finishPhonicsBuildSuccess(placedSound = Promise.resolve()) {
     if (!pBuildRound) return;
     pBusy = true;
+    const audioGen = ++pBuildAudioGen;
+    const completedRound = pBuildRound;
     const word = pBuildRound.target.word;
     recordPhonicsSkill('segmenting', pBuildRound.target.id, true);
-    const praise = speakCorrectEnglishOnly(word, isMuted(), () => {
-      setTimeout(() => startPhonicsBuildRound(), 450);
-    });
+    const praise = pickPhonicsBuildPraise();
     const fb = $('#phonics-build-feedback');
     if (fb) {
       fb.textContent = praise;
       fb.className = 'feedback ok';
     }
+
+    await placedSound;
+    if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
+    await waitMs(280);
+    if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
+    await speakEnglishAndWait(word, { muted: isMuted(), rate: 0.82, pitch: 1.05, delayMs: 0 });
+    if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
+    await waitMs(180);
+    if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
+    playCorrectCue({ muted: isMuted() });
+    await speakEnglishAndWait(praise, { muted: isMuted(), rate: 0.9, pitch: 1.08, delayMs: 80 });
+    if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
+    await waitMs(450);
+    if (audioGen === pBuildAudioGen && pBuildRound === completedRound) startPhonicsBuildRound();
   }
 
   function onPhonicsBuildPointerDown(ev, tile, onDragStarted) {

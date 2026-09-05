@@ -82,6 +82,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-05 · Codex（Keith：Phonics 砌字完整英文聲音流程）
+
+- 「砌一砌」每題載入後先以英式女聲 TTS 示範完整單字；拖放或點按正確入格均逐個播放媽媽的 phoneme 錄音
+- 最後一格按「phoneme → 完整單字 → 英文鼓勵」順序播放；鼓勵會按 Profile 稱呼 Kaka／Hei Hei，錯誤提示亦改為短英文並不再重播答案
+- 每個短音播完才接受下一格，避免快速連按截斷錄音；加入換題／離頁 generation guard，舊題延遲語音不會漏到新畫面
+- 已驗證：實際瀏覽器聲序 `rat → r/a/t → rat → Great job, Kaka!`；invariants、storage／math-storage／version tests 全綠；5 種 iPad 及 2 種 iPhone 無裁切、重疊、404 或 console error
+- **踩咗** `js/phonics-app.js`、`docs/handover.md`
+
 ### 2026-09-05 · Codex（Keith：Phonics 49 音分段清單＋透明 hero 圖）
 
 - 「字母音訓練基地」由無語意的 01–10 橫列改為完整清單：基礎單字母音 25、輔音組合 10、母音組合 14；合共 3 大類、13 個具名 Sound Missions、49 音
