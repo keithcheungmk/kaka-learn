@@ -2764,7 +2764,7 @@ body {
   .space-ranger[data-ranger-screen="screen-phonics-match"],
   .space-ranger[data-ranger-screen="screen-math-count"],
   .space-ranger[data-ranger-screen="screen-math-compare"],
-  .space-ranger[data-ranger-screen="screen-math-size"],
+  .space-ranger[data-ranger-screen="screen-math-earth-game"],
   .space-ranger[data-ranger-screen="screen-math-time"] {
     top: max(88px, calc(env(safe-area-inset-top, 0px) + 76px));
     bottom: auto;

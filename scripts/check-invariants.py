@@ -503,7 +503,7 @@ def check_storage_isolation() -> None:
     """認字用 kaka-learn-v1、數理用 kaka-math-v1，唔好互寫。"""
     rules = [
         ("kaka-math-v1", ["js/app.js", "js/phonics-app.js", "js/storage.js"]),
-        ("kaka-learn-v1", ["js/math-app.js", "js/math-skills.js", "js/math-storage.js"]),
+        ("kaka-learn-v1", ["js/math-app.js", "js/math-skills.js", "js/math-storage.js", "js/additionData.js"]),
     ]
     for key, files in rules:
         for f in files:
@@ -513,10 +513,33 @@ def check_storage_isolation() -> None:
 
 def check_module_isolation() -> None:
     """數理唔可以依賴認字／字母隊嘅題目或畫面 API。"""
-    src = strip_js_comments("".join(read(f) for f in ["js/math-app.js", "js/math-skills.js", "js/math-storage.js"]))
+    src = strip_js_comments("".join(read(f) for f in ["js/math-app.js", "js/math-skills.js", "js/math-storage.js", "js/additionData.js"]))
     for g in ["KakaWords", "KakaLearn", "KakaPhonicsWords", "KakaPhonics"]:
         if re.search(rf"\b{g}\b", src):
             fail("module-isolation", f"math-* 用咗 {g}；AGENTS.md 禁止數理依賴認字／字母隊")
+
+
+def check_addition_planet() -> None:
+    """地球加法星球：additionData + additionGame 模組、6 關（5–10）。"""
+    for rel in ["js/additionData.js", "js/additionGame.js", "css/additionGame.css"]:
+        if not Path(rel).exists():
+            fail("addition-planet", f"缺少 {rel}")
+    html = read("index.html")
+    for sid in ["screen-math-earth-addition-select", "screen-math-earth-addition-play"]:
+        if sid not in html:
+            fail("addition-planet", f"index.html 缺少 #{sid}")
+    for needle in ["additionData.js", "additionGame.js", "additionGame.css"]:
+        if needle not in html:
+            fail("addition-planet", f"index.html 未載入 {needle}")
+    storage = strip_js_comments(read("js/math-storage.js"))
+    if "additionProgress" not in storage or "completeAdditionMission" not in storage:
+        fail("addition-planet", "math-storage.js 缺少 additionProgress／completeAdditionMission")
+    data_src = read("js/additionData.js")
+    bases = [int(m.group(1)) for m in re.finditer(r"targetNumber:\s*(\d+)", data_src)]
+    if bases != list(range(5, 11)):
+        fail("addition-planet", f"additionData 關卡 targetNumber 應為 5–10，而家係 {bases}")
+    if "KakaAdditionGame" not in read("js/math-app.js"):
+        fail("addition-planet", "math-app.js 未整合 KakaAdditionGame")
 
 
 def check_math_boot_guard() -> None:
@@ -788,6 +811,7 @@ CHECKS = [
     check_phonics_skill_tracking,
     check_storage_isolation,
     check_module_isolation,
+    check_addition_planet,
     check_math_boot_guard,
     check_asset_refs,
     check_asset_manifests,

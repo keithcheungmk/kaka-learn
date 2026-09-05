@@ -34,7 +34,7 @@
     'screen-phonics-build',
     'screen-math-count',
     'screen-math-compare',
-    'screen-math-size',
+    'screen-math-earth-game',
     'screen-math-time',
   ]);
 

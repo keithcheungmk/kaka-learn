@@ -32,10 +32,10 @@
       id: 'compare-size',
       body: 'earth',
       name: '地球',
-      skill: '大細長短',
+      skill: '加法',
       color: '#3b82f6',
       order: 2,
-      blurb: '喺地球學比較：邊個大？邊個長？',
+      blurb: '喺地球用能量方塊學加法：拖入空格砌出目標數字',
       img: PLANET_IMG('earth'),
     },
     {

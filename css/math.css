@@ -730,9 +730,8 @@
   --math-planet: #e8c27a;
 }
 
-#screen-math-earth-learn.math-screen.active,
-#screen-math-earth-play.math-screen.active,
-#screen-math-size.math-screen.active {
+#screen-math-earth-levels.math-screen.active,
+#screen-math-earth-game.math-screen.active {
   --math-planet: #3b82f6;
 }
 
@@ -748,9 +747,8 @@
 #screen-math-venus-learn.math-screen.active::before,
 #screen-math-venus-play.math-screen.active::before,
 #screen-math-compare.math-screen.active::before,
-#screen-math-earth-learn.math-screen.active::before,
-#screen-math-earth-play.math-screen.active::before,
-#screen-math-size.math-screen.active::before,
+#screen-math-earth-levels.math-screen.active::before,
+#screen-math-earth-game.math-screen.active::before,
 #screen-math-moon-learn.math-screen.active::before,
 #screen-math-moon-play.math-screen.active::before,
 #screen-math-time.math-screen.active::before {
@@ -838,85 +836,306 @@
   margin: 14px 0 6px;
 }
 
-/* ---------- 地球・大細長短 ---------- */
-.math-size-pair,
-.math-size-quiz {
+/* ---------- 地球・能量方塊加法 ---------- */
+.math-addition-level-grid {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: end;
-  justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
-.math-size-side,
-.math-size-pick {
+.math-addition-level-card {
+  appearance: none;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  background: rgba(18, 40, 72, 0.62);
+  color: inherit;
+  font: inherit;
+  padding: 14px 10px;
+  min-height: 108px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  min-height: 170px;
-  padding: 14px 10px;
-  border-radius: 22px;
-  background: rgba(18, 40, 72, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  width: 100%;
-}
-
-.math-size-pick {
-  appearance: none;
+  justify-content: center;
+  gap: 6px;
   cursor: pointer;
   touch-action: manipulation;
-  font: inherit;
-  color: inherit;
+  text-align: center;
 }
 
-.math-size-pick:active {
-  transform: scale(0.98);
+.math-addition-level-card:active:not(:disabled) {
+  transform: scale(0.97);
 }
 
-.math-size-pick.is-ok {
-  border-color: rgba(253, 230, 138, 0.9);
-  box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.35);
-  animation: popOk 0.45s ease;
+.math-addition-level-card.is-locked {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
-.math-size-pick.is-bad {
-  animation: softShake 0.4s ease;
+.math-addition-level-card.is-done {
+  border-color: rgba(253, 230, 138, 0.55);
 }
 
-.math-size-emoji {
-  line-height: 1;
-  display: inline-block;
-  animation: math-count-pop 0.35s ease both;
+.math-addition-level-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5vw, 2rem);
+  font-weight: 800;
+  color: var(--gold-soft);
 }
 
-/* 原創比較圖形（長短＝橫線；大細＝圓） */
-.math-size-draw {
+.math-addition-level-title {
+  font-size: 0.95rem;
+  color: var(--ink-dim);
+}
+
+.math-addition-board {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 96px;
+  gap: 10px;
+  margin: 6px 0 10px;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+  font-weight: 800;
+}
+
+.math-addition-eq-a,
+.math-addition-eq-sum {
+  color: var(--gold-soft);
+}
+
+.math-addition-eq-b {
+  color: #67e8f9;
+  min-width: 1.2em;
+  text-align: center;
+}
+
+.math-addition-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 0;
+}
+
+.math-addition-slots {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  gap: 8px;
   width: 100%;
 }
 
-.math-bar-shape {
-  display: block;
-  height: 22px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, var(--teal-soft), var(--teal));
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-  animation: math-count-pop 0.35s ease both;
+.math-addition-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 8px;
+  border-radius: 20px;
+  background: rgba(18, 40, 72, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 120px;
 }
 
-.math-circle-shape {
-  display: block;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.55), transparent 42%),
-    var(--math-planet, #3b82f6);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.28);
-  animation: math-count-pop 0.35s ease both;
+.math-addition-slot.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+.math-addition-slot--b.is-drop-target {
+  border-color: rgba(103, 232, 249, 0.75);
+  box-shadow: 0 0 0 3px rgba(103, 232, 249, 0.25);
+}
+
+.math-addition-slot-label {
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+}
+
+.math-addition-merge {
+  align-self: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gold-soft);
+  font-size: 1.4rem;
+}
+
+.math-addition-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 6px;
+  min-height: 72px;
+  width: 100%;
+}
+
+.math-addition-blocks--drop {
+  min-height: 84px;
+  border-radius: 14px;
+  border: 2px dashed rgba(103, 232, 249, 0.35);
+  padding: 6px;
+}
+
+.math-energy-block {
+  width: clamp(36px, 9vw, 44px);
+  height: clamp(36px, 9vw, 44px);
+  border-radius: 10px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.35) 0%, transparent 40%),
+    linear-gradient(180deg, #38bdf8 0%, #2563eb 55%, #1e40af 100%);
+  box-shadow:
+    0 0 12px rgba(56, 189, 248, 0.45),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+  animation: math-count-pop 0.3s ease both;
+  touch-action: none;
+}
+
+.math-energy-block.is-in-warehouse {
+  cursor: grab;
+}
+
+.math-energy-block.is-dragging {
+  opacity: 0.35;
+}
+
+.math-addition-stack {
+  appearance: none;
+  border: none;
+  background: rgba(15, 35, 62, 0.7);
+  border-radius: 16px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  touch-action: manipulation;
+  color: inherit;
+  font: inherit;
+  min-width: 64px;
+}
+
+.math-addition-stack:active {
+  transform: scale(0.96);
+}
+
+.math-addition-stack-preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+  max-width: 88px;
+}
+
+.math-addition-stack-preview .math-energy-block {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+}
+
+.math-addition-stack-count {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--gold-soft);
+}
+
+.math-addition-warehouse {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 4px;
+}
+
+.math-addition-hint {
+  font-size: 1rem;
+  color: var(--ink-dim);
+  text-align: center;
+  margin: 0;
+}
+
+.math-addition-actions {
+  margin-top: 4px;
+}
+
+.math-addition-celebrate {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(7, 21, 38, 0.82);
+  padding: 24px;
+}
+
+.math-addition-celebrate-burst {
+  width: min(70vw, 280px);
+  height: min(70vw, 280px);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(253, 230, 138, 0.35), transparent 62%),
+    linear-gradient(180deg, rgba(56, 189, 248, 0.25), rgba(37, 99, 235, 0.15));
+  animation: math-addition-merge 0.9s ease both;
+}
+
+.math-addition-celebrate-say {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 800;
+  color: var(--gold-soft);
+  text-align: center;
+}
+
+@keyframes math-addition-merge {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.math-addition-slots.is-merging .math-energy-block {
+  animation: math-addition-block-merge 0.75s ease both;
+}
+
+@keyframes math-addition-block-merge {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15) translateY(-6px);
+    filter: brightness(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#screen-math-earth-game.math-screen.active {
+  overflow: hidden;
+}
+
+@media (max-width: 700px) {
+  .math-addition-level-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ---------- 月球・時間（原創畫鐘，唔用外部圖） ---------- */
