@@ -182,7 +182,11 @@ def walk(pg, url, shots: Path | None, tag: str):
         pg.wait_for_timeout(800)
         probe(step)
         if entry == "#btn-start-phonics":
-            pg.click("#phonics-topic-grid .topic-card:first-child")
+            # Phase A hub：建議下一站或 Blend Words 第一張（舊 flat grid 已 hidden）
+            if pg.locator("#btn-phonics-suggested-next").count():
+                pg.click("#btn-phonics-suggested-next")
+            else:
+                pg.click("#phonics-hub-blend .topic-card:first-child")
             pg.wait_for_timeout(500)
             probe("字母音清單")
 
