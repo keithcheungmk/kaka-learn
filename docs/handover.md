@@ -82,6 +82,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-05 — Cursor：地球加法星球（能量方塊）
+
+- 重構地球 `compare-size`：舊大細長短 → 原創太空能量方塊加法（槽 A 預放 + 槽 B 拖放／點擊 + 倉庫方塊）
+- `js/additionData.js`：5–10 關生活情境任務；`kaka-math-v1` `additionProgress` 預設解鎖 5、逐關解鎖
+- 完成能量十（10-5）點亮地球；合併慶祝 + 粵語 TTS + 數理星
+- 已驗證：`check-invariants.py` 35 項、math-storage 5 項；Playwright 關卡／遊戲／慶祝截圖
+- **踩咗** `js/additionData.js`、`js/math-app.js`、`js/math-storage.js`、`index.html`、`css/math.css`、`js/math-skills.js`、`js/star-fx.js`、`scripts/check-invariants.py`、`scripts/test-math-storage.mjs`
+
 ### 2026-09-05 · Codex（Keith：Phonics 砌字完整英文聲音流程）
 
 - 「砌一砌」每題載入後先以英式女聲 TTS 示範完整單字；拖放或點按正確入格均逐個播放媽媽的 phoneme 錄音

@@ -28,12 +28,8 @@
       tryEarnStar,
       isPlanetLit,
       lightPlanet,
-      isAdditionBaseUnlocked,
-      isAdditionMissionDone,
-      completeAdditionMission,
     } = window.KakaMathStorage;
     const { MATH_PLANETS, getPlanetById, getNextPlanetId, planetGlobeHtml } = window.KakaMathSkills;
-    const { additionLevels, getLevelByBase, getMissionById } = window.KakaAdditionData;
     const speech = window.KakaSpeech || null;
 
     const ZH_NUM = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
@@ -94,9 +90,6 @@
     let compareRound = null;
     let compareCorrect = 0;
     let compareEmoji = '🌟';
-    let addMissionId = null;
-    let addSlotB = 0;
-    let addBusy = false;
     let mLearnIndex = 0;
     let timeBusy = false;
     let timeRound = null;

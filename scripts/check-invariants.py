@@ -540,6 +540,8 @@ def check_addition_planet() -> None:
     bases = [int(m.group(1)) for m in re.finditer(r"targetNumber:\s*(\d+)", data_src)]
     if bases != list(range(5, 11)):
         fail("addition-planet", f"additionData 關卡 targetNumber 應為 5–10，而家係 {bases}")
+    if "openEarthLevelSelect" not in read("js/math-app.js"):
+        fail("addition-planet", "math-app.js 缺少地球加法流程 openEarthLevelSelect")
 
 
 def check_math_boot_guard() -> None:
