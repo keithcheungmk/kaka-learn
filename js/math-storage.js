@@ -19,6 +19,10 @@
     currentPlanetId: 'count',
     litPlanetIds: [],
     interviewUnlocked: false,
+    additionProgress: {
+      unlockedBase: 5,
+      completedMissions: [],
+    },
   };
 
   const PROFILE_FIELD_KEYS = Object.keys(DEFAULT_STATE);
@@ -28,6 +32,10 @@
       ...DEFAULT_STATE,
       starsDate: todayKey(),
       litPlanetIds: [],
+      additionProgress: {
+        unlockedBase: 5,
+        completedMissions: [],
+      },
     };
   }
 
@@ -59,6 +67,15 @@
       if (obj[k] !== undefined) out[k] = obj[k];
     });
     if (!Array.isArray(out.litPlanetIds)) out.litPlanetIds = [];
+    if (!out.additionProgress || typeof out.additionProgress !== 'object') {
+      out.additionProgress = { unlockedBase: 5, completedMissions: [] };
+    }
+    if (!Array.isArray(out.additionProgress.completedMissions)) {
+      out.additionProgress.completedMissions = [];
+    }
+    if (typeof out.additionProgress.unlockedBase !== 'number') {
+      out.additionProgress.unlockedBase = 5;
+    }
     if (out.starsDate !== todayKey()) {
       out.starsToday = 0;
       out.starsDate = todayKey();
@@ -188,6 +205,54 @@
     return state;
   }
 
+  function normalizeAdditionProgress(prog) {
+    const base = {
+      unlockedBase: 5,
+      completedMissions: [],
+    };
+    if (!prog || typeof prog !== 'object') return base;
+    return {
+      unlockedBase: typeof prog.unlockedBase === 'number' ? prog.unlockedBase : 5,
+      completedMissions: Array.isArray(prog.completedMissions) ? [...prog.completedMissions] : [],
+    };
+  }
+
+  function getAdditionProgress(state = loadState()) {
+    return normalizeAdditionProgress(state.additionProgress);
+  }
+
+  function isAdditionBaseUnlocked(base, state = loadState()) {
+    return base <= getAdditionProgress(state).unlockedBase;
+  }
+
+  function isAdditionMissionDone(id, state = loadState()) {
+    return getAdditionProgress(state).completedMissions.includes(id);
+  }
+
+  function completeAdditionMission(missionId) {
+    const state = loadState();
+    const prog = getAdditionProgress(state);
+    if (!prog.completedMissions.includes(missionId)) {
+      prog.completedMissions = [...prog.completedMissions, missionId];
+    }
+    const data = window.KakaAdditionData;
+    if (data) {
+      const found = data.getMissionById(missionId);
+      if (found) {
+        const allDone = found.level.missions.every((m) => prog.completedMissions.includes(m.id));
+        if (allDone && found.level.base < 10) {
+          prog.unlockedBase = Math.max(prog.unlockedBase, found.level.base + 1);
+        }
+        if (allDone && found.level.base === 10 && !state.litPlanetIds.includes('compare-size')) {
+          state.litPlanetIds = [...state.litPlanetIds, 'compare-size'];
+        }
+      }
+    }
+    state.additionProgress = prog;
+    saveState(state);
+    return state;
+  }
+
   window.KakaMathStorage = {
     STORAGE_KEY,
     todayKey,
@@ -198,5 +263,9 @@
     isPlanetLit,
     lightPlanet,
     setActiveProfile,
+    getAdditionProgress,
+    isAdditionBaseUnlocked,
+    isAdditionMissionDone,
+    completeAdditionMission,
   };
 })();

@@ -16,14 +16,24 @@
   }
 
   function bootMath() {
-    if (!window.KakaMathStorage || !window.KakaMathSkills) {
-      console.error('KakaMath: math-storage.js / math-skills.js missing.');
+    if (!window.KakaMathStorage || !window.KakaMathSkills || !window.KakaAdditionData || !window.KakaAdditionGame) {
+      console.error('KakaMath: math modules missing.');
       disableMathEntry();
       return;
     }
 
-    const { loadState, updateState, tryEarnStar, isPlanetLit, lightPlanet } = window.KakaMathStorage;
+    const {
+      loadState,
+      updateState,
+      tryEarnStar,
+      isPlanetLit,
+      lightPlanet,
+      isAdditionBaseUnlocked,
+      isAdditionMissionDone,
+      completeAdditionMission,
+    } = window.KakaMathStorage;
     const { MATH_PLANETS, getPlanetById, getNextPlanetId, planetGlobeHtml } = window.KakaMathSkills;
+    const { additionLevels, getLevelByBase, getMissionById } = window.KakaAdditionData;
     const speech = window.KakaSpeech || null;
 
     const ZH_NUM = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
@@ -67,9 +77,8 @@
       vlearn: '#screen-math-venus-learn',
       vplay: '#screen-math-venus-play',
       compare: '#screen-math-compare',
-      elearn: '#screen-math-earth-learn',
-      eplay: '#screen-math-earth-play',
-      size: '#screen-math-size',
+      additionSelect: '#screen-math-earth-addition-select',
+      additionPlay: '#screen-math-earth-addition-play',
       mlearn: '#screen-math-moon-learn',
       mplay: '#screen-math-moon-play',
       time: '#screen-math-time',
@@ -85,11 +94,9 @@
     let compareRound = null;
     let compareCorrect = 0;
     let compareEmoji = '🌟';
-    let eLearnIndex = 0;
-    let sizeBusy = false;
-    let sizeRound = null;
-    let sizeCorrect = 0;
-    let sizeEmoji = '🌕';
+    let addMissionId = null;
+    let addSlotB = 0;
+    let addBusy = false;
     let mLearnIndex = 0;
     let timeBusy = false;
     let timeRound = null;
@@ -117,7 +124,7 @@
       const sel = screens[name] || screens.hub;
       const el = $(sel);
       el?.classList.add('active');
-      if (['count', 'compare', 'size', 'time'].includes(name)) {
+      if (['count', 'compare', 'additionPlay', 'time'].includes(name)) {
         const fx = window.KakaStarFx;
         fx?.mountPlayScreen?.(el);
         fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
@@ -276,7 +283,8 @@
 
       const coming = $('#math-hub-coming');
       if (coming) {
-        if (planet.id === 'count') {
+        const playable = ['count', 'compare-qty', 'compare-size', 'time'].includes(planet.id);
+        if (playable) {
           coming.hidden = true;
           coming.textContent = '';
         } else {
@@ -725,169 +733,7 @@
       }
     }
 
-    /* ---------- 地球・先學（大細長短） ---------- */
-    /** 用原創圖形：大細＝圓；長短＝橫線（唔用 emoji 拉長縮細） */
-    const EARTH_LEARN_CARDS = [
-      { q: '邊個大啲？', kind: 'circle', left: 0.6, right: 1.05, say: '右邊大啲' },
-      { q: '邊個長啲？', kind: 'bar', left: 0.45, right: 1.0, say: '右邊長啲' },
-      { q: '邊個細啲？', kind: 'circle', left: 1.05, right: 0.6, say: '左邊細啲' },
-      { q: '邊個短啲？', kind: 'bar', left: 0.45, right: 1.0, say: '左邊短啲' },
-    ];
-
-    function drawCompareShape(el, kind, scale) {
-      if (!el) return;
-      if (kind === 'bar') {
-        const widthPct = Math.max(18, Math.min(100, Math.round(scale * 100)));
-        el.innerHTML = `<span class="math-bar-shape" style="width:${widthPct}%"></span>`;
-        return;
-      }
-      const size = Math.max(1.8, 4.5 * scale);
-      el.innerHTML = `<span class="math-circle-shape" style="width:${size}rem;height:${size}rem"></span>`;
-    }
-
-    function openEarthLearn() {
-      updateState({ currentPlanetId: 'compare-size' });
-      eLearnIndex = 0;
-      const title = $('#math-earth-learn-title');
-      if (title) title.textContent = '地球・先學';
-      renderEarthLearnCard(true);
-      showMathScreen('elearn');
-    }
-
-    function renderEarthLearnCard(autoSpeak) {
-      const card = EARTH_LEARN_CARDS[eLearnIndex];
-      drawCompareShape($('#math-earth-learn-left'), card.kind, card.left);
-      drawCompareShape($('#math-earth-learn-right'), card.kind, card.right);
-      const say = $('#math-earth-learn-say');
-      if (say) say.textContent = card.say;
-      const lead = $('#math-earth-learn-lead');
-      if (lead) lead.textContent = card.q;
-      const progress = $('#math-earth-learn-progress');
-      if (progress) progress.textContent = `${eLearnIndex + 1}/${EARTH_LEARN_CARDS.length}`;
-
-      const prev = $('#btn-math-earth-learn-prev');
-      const next = $('#btn-math-earth-learn-next');
-      const finish = $('#math-earth-learn-finish-row');
-      if (prev) prev.disabled = eLearnIndex <= 0;
-      if (next) next.hidden = eLearnIndex >= EARTH_LEARN_CARDS.length - 1;
-      if (finish) finish.hidden = eLearnIndex < EARTH_LEARN_CARDS.length - 1;
-
-      if (autoSpeak) speakEarthLearn();
-    }
-
-    function speakEarthLearn() {
-      const card = EARTH_LEARN_CARDS[eLearnIndex];
-      speak(card.say);
-    }
-
-    /* ---------- 地球・比一比 ---------- */
-    function openEarthPlay() {
-      const stars = $('#math-earth-play-stars');
-      const state = loadState();
-      if (stars) stars.textContent = `${state.starsToday}/10`;
-      const title = $('#math-earth-play-title');
-      if (title) title.textContent = '地球・去玩玩';
-      showMathScreen('eplay');
-    }
-
-    const SIZE_QUESTIONS = [
-      { q: '邊個大啲？', kind: 'circle', answerWhenLeftBigger: 'left', answerWhenRightBigger: 'right' },
-      { q: '邊個細啲？', kind: 'circle', answerWhenLeftBigger: 'right', answerWhenRightBigger: 'left' },
-      { q: '邊個長啲？', kind: 'bar', answerWhenLeftBigger: 'left', answerWhenRightBigger: 'right' },
-      { q: '邊個短啲？', kind: 'bar', answerWhenLeftBigger: 'right', answerWhenRightBigger: 'left' },
-    ];
-
-    function openSizeQuiz() {
-      sizeBusy = false;
-      sizeCorrect = 0;
-      updateSizeProgress();
-      nextSizeRound(true);
-      showMathScreen('size');
-    }
-
-    function updateSizeProgress() {
-      const el = $('#math-size-progress');
-      if (el) el.textContent = `${sizeCorrect}/${LIT_TARGET}`;
-    }
-
-    function nextSizeRound(autoSpeak) {
-      const def = SIZE_QUESTIONS[Math.floor(Math.random() * SIZE_QUESTIONS.length)];
-      const leftBigger = Math.random() < 0.5;
-      const leftScale = leftBigger ? 1.05 : 0.6;
-      const rightScale = leftBigger ? 0.6 : 1.05;
-      const answer = leftBigger ? def.answerWhenLeftBigger : def.answerWhenRightBigger;
-      sizeRound = { answer, prompt: def.q, kind: def.kind };
-
-      drawCompareShape($('#math-size-left'), def.kind, leftScale);
-      drawCompareShape($('#math-size-right'), def.kind, rightScale);
-
-      const prompt = $('#math-size-prompt');
-      if (prompt) prompt.textContent = def.q;
-      const fb = $('#math-size-feedback');
-      if (fb) fb.textContent = '';
-      $('#math-size-field')
-        ?.querySelectorAll('.math-size-pick')
-        .forEach((b) => b.classList.remove('is-ok', 'is-bad'));
-      if (autoSpeak) speak(def.q);
-    }
-
-    function onSizePick(side) {
-      if (sizeBusy || !sizeRound) return;
-      sizeBusy = true;
-      const muted = isMuted();
-      const fb = $('#math-size-feedback');
-      const ok = side === sizeRound.answer;
-      const btn = $(`#math-size-field .math-size-pick[data-side="${side}"]`);
-
-      if (ok) {
-        btn?.classList.add('is-ok');
-        const { gained } = tryEarnStar();
-        if (gained) {
-          speech?.playStarCue?.({ muted });
-          playMathStarReward();
-        } else {
-          speech?.playCorrectCue?.({ muted });
-        }
-        sizeCorrect += 1;
-        updateSizeProgress();
-        const praise =
-          speech?.speakCorrectFeedback?.({ muted }) || '你好叻呀，答啱咗！';
-        if (fb) fb.textContent = gained ? `${praise} ★` : praise;
-
-        if (sizeCorrect >= LIT_TARGET && !isPlanetLit('compare-size')) {
-          lightPlanet('compare-size');
-          if (fb) fb.textContent = `${praise} 地球點亮喇！`;
-          const fromP = getPlanetById('compare-size');
-          const toP = getPlanetById(getNextPlanetId('compare-size'));
-          setTimeout(() => {
-            sizeBusy = false;
-            offerWarpHop(fromP, toP);
-          }, 900);
-          return;
-        }
-
-        const stars = $('#math-earth-play-stars');
-        const state = loadState();
-        if (stars) stars.textContent = `${state.starsToday}/10`;
-
-        setTimeout(() => {
-          sizeBusy = false;
-          nextSizeRound(true);
-        }, 1100);
-      } else {
-        btn?.classList.add('is-bad');
-        speech?.playTryAgainCue?.({ muted });
-        const line = speech?.speakRetryFeedback?.({ muted }) || '唔緊要，試多次！';
-        if (fb) fb.textContent = line;
-        const field = $('#math-size-field');
-        if (field) field.style.outline = '3px solid rgba(253, 230, 138, 0.7)';
-        setTimeout(() => {
-          btn?.classList.remove('is-bad');
-          if (field) field.style.outline = '';
-          sizeBusy = false;
-        }, 700);
-      }
-    }
+    /* ---------- 地球・加法（KakaAdditionGame） ---------- */
 
     /* ---------- 月球・先學（時間） ---------- */
     function openMoonLearn() {
@@ -1049,7 +895,7 @@
         return;
       }
       if (planet.id === 'compare-size') {
-        openEarthLearn();
+        window.KakaAdditionGame.openEarthAddition();
         return;
       }
       if (planet.id === 'time') {
@@ -1126,33 +972,6 @@
           btn.addEventListener('click', () => onComparePick(btn.dataset.side));
         });
 
-      $('#btn-back-math-earth-learn')?.addEventListener('click', () => openHub());
-      $('#math-earth-learn-tap')?.addEventListener('click', () => speakEarthLearn());
-      $('#btn-math-earth-learn-prev')?.addEventListener('click', () => {
-        if (eLearnIndex <= 0) return;
-        eLearnIndex -= 1;
-        renderEarthLearnCard(true);
-      });
-      $('#btn-math-earth-learn-next')?.addEventListener('click', () => {
-        if (eLearnIndex >= EARTH_LEARN_CARDS.length - 1) return;
-        eLearnIndex += 1;
-        renderEarthLearnCard(true);
-      });
-      $('#btn-math-earth-learn-play')?.addEventListener('click', () => openEarthPlay());
-
-      $('#btn-back-math-earth-play')?.addEventListener('click', () => openEarthLearn());
-      $('#btn-math-mode-size')?.addEventListener('click', () => openSizeQuiz());
-
-      $('#btn-back-math-size')?.addEventListener('click', () => openEarthPlay());
-      $('#btn-math-size-speak')?.addEventListener('click', () => {
-        if (sizeRound) speak(sizeRound.prompt);
-      });
-      document
-        .querySelectorAll('#math-size-field .math-size-pick')
-        .forEach((btn) => {
-          btn.addEventListener('click', () => onSizePick(btn.dataset.side));
-        });
-
       $('#btn-back-math-moon-learn')?.addEventListener('click', () => openHub());
       $('#math-moon-learn-tap')?.addEventListener('click', () => speakMoonLearn());
       $('#btn-math-moon-learn-prev')?.addEventListener('click', () => {
@@ -1177,6 +996,25 @@
     }
 
     bind();
+
+    window.KakaAdditionGame.init({
+      storage: window.KakaMathStorage,
+      loadState,
+      updateState,
+      tryEarnStar,
+      isPlanetLit,
+      lightPlanet,
+      getPlanetById,
+      getNextPlanetId,
+      offerWarpHop,
+      openHub,
+      showMathScreen,
+      speak,
+      speech,
+      isMuted,
+      playMathStarReward,
+    });
+
     window.KakaMath = {
       openHub,
       goHome,
@@ -1185,8 +1023,7 @@
       openCount,
       openVenusLearn,
       openCompare,
-      openEarthLearn,
-      openSizeQuiz,
+      openEarthAddition: () => window.KakaAdditionGame.openEarthAddition(),
       openMoonLearn,
       openTimeQuiz,
       openGalaxy,

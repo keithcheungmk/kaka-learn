@@ -22,11 +22,13 @@ function makeLocalStorage() {
 }
 
 function loadMathStorage() {
-  const code = fs.readFileSync(path.join(root, 'js/math-storage.js'), 'utf8');
+  const storageCode = fs.readFileSync(path.join(root, 'js/math-storage.js'), 'utf8');
+  const additionCode = fs.readFileSync(path.join(root, 'js/additionData.js'), 'utf8');
   const localStorage = makeLocalStorage();
   const context = { localStorage, window: {}, console, Date, JSON };
   vm.createContext(context);
-  vm.runInContext(code, context);
+  vm.runInContext(additionCode, context);
+  vm.runInContext(storageCode, context);
   return { S: context.window.KakaMathStorage, localStorage };
 }
 
@@ -93,7 +95,29 @@ test('卡卡／禧禧數理進度完全隔離', () => {
   assert.deepEqual([...S.loadState().litPlanetIds], ['count']);
 });
 
-test('損壞資料會安全重設', () => {
+test('加法進度：完成關卡解鎖下一關、點亮地球', () => {
+  const { S } = loadMathStorage();
+  S.completeAdditionMission('5-1');
+  S.completeAdditionMission('5-2');
+  S.completeAdditionMission('5-3');
+  S.completeAdditionMission('5-4');
+  assert.equal(S.getAdditionProgress().unlockedBase, 6);
+  assert(S.isAdditionBaseUnlocked(6));
+  assert(!S.isAdditionBaseUnlocked(7));
+
+  const data = fs.readFileSync(path.join(root, 'js/additionData.js'), 'utf8');
+  const ctx = { window: {} };
+  vm.createContext(ctx);
+  vm.runInContext(data, ctx);
+  const levels = ctx.window.KakaAdditionData.additionLevels;
+  levels.forEach((level) => {
+    level.missions.forEach((m) => S.completeAdditionMission(m.id));
+  });
+  assert(S.isPlanetLit('compare-size'));
+  assert.equal(S.getAdditionProgress().unlockedBase, 10);
+});
+
+test('損壞 JSON 回退預設', () => {
   const { S, localStorage } = loadMathStorage();
   localStorage.setItem('kaka-math-v1', 'broken-json');
   assert.doesNotThrow(() => S.loadState());

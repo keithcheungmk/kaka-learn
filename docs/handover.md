@@ -30,6 +30,7 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| 地球加法星球（能量方塊） | Cursor | `js/additionData.js`, `js/math-app.js`, `js/math-storage.js`, `index.html`, `css/math.css` | 2026-09-05 | 重構 compare-size → 加法 drag-drop |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
