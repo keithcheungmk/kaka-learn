@@ -9,8 +9,9 @@
   }
 
   const {
-    PHONICS_TOPICS, PHONICS_SOUND_SECTIONS, getPhonicsTopicById,
-    phonicsLetterPool, phonicsWordIllustHtml, letterTileHtml, isLetterItem,
+    PHONICS_TOPICS, PHONICS_SOUND_SECTIONS, PHONICS_STAGES, PHONICS_TRICKY_SETS, PHONICS_VOCAB_SETS,
+    getPhonicsTopicById, getPhonicsStageById, wordGraphemes, phonicsLetterPool,
+    phonicsWordIllustHtml, letterTileHtml, isLetterItem,
   } = window.KakaPhonicsWords;
   const { loadState, getActiveProfileId, recordPhonicsSkillResult } = window.KakaStorage;
   const {
@@ -162,7 +163,123 @@
     $('#screen-home')?.classList.add('active');
   }
 
+
+  /** Unified phonics audio sequencer — cancel on navigate / new task; never TTS letter names for phonemes. */
+  const PhonicsAudio = {
+    generation: 0,
+    timers: [],
+    cancel() {
+      this.generation += 1;
+      this.timers.forEach((id) => clearTimeout(id));
+      this.timers = [];
+      stopPhonemeAudio();
+      try {
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+      } catch {
+        /* ignore */
+      }
+    },
+    _wait(ms, gen) {
+      return new Promise((resolve) => {
+        const id = setTimeout(() => {
+          this.timers = this.timers.filter((t) => t !== id);
+          resolve(gen === this.generation);
+        }, ms);
+        this.timers.push(id);
+      });
+    },
+    async playPhoneme(sound, { muted = isMuted() } = {}) {
+      const gen = this.generation;
+      if (muted) {
+        await this._wait(160, gen);
+        return gen === this.generation;
+      }
+      await playLetterSound(sound, { muted });
+      return gen === this.generation;
+    },
+    async speakWord(word, { muted = isMuted(), rate = 0.85, pitch = 1.05 } = {}) {
+      const gen = this.generation;
+      if (!word) return gen === this.generation;
+      if (muted) {
+        await this._wait(280, gen);
+        return gen === this.generation;
+      }
+      await speakEnglishAndWait(word, { muted, delayMs: 40, rate, pitch });
+      return gen === this.generation;
+    },
+    async speakFeedback(text, { muted = isMuted(), rate = 0.92, pitch = 1.06 } = {}) {
+      return this.speakWord(text, { muted, rate, pitch });
+    },
+    /**
+     * steps: { type:'phoneme'|'word'|'feedback'|'wait'|'highlight', value?, ms?, index? }
+     */
+    async playSequence(steps, { muted = isMuted(), onStep = null } = {}) {
+      const gen = this.generation;
+      for (const step of steps) {
+        if (gen !== this.generation) return false;
+        if (typeof onStep === 'function') onStep(step);
+        if (step.type === 'wait') {
+          const ok = await this._wait(step.ms || 150, gen);
+          if (!ok) return false;
+        } else if (step.type === 'phoneme') {
+          const ok = await this.playPhoneme(step.value, { muted });
+          if (!ok) return false;
+          const gap = await this._wait(step.gapMs != null ? step.gapMs : 150, gen);
+          if (!gap) return false;
+        } else if (step.type === 'word') {
+          const ok = await this.speakWord(step.value, { muted, rate: step.rate || 0.85 });
+          if (!ok) return false;
+        } else if (step.type === 'feedback') {
+          const ok = await this.speakFeedback(step.value, { muted });
+          if (!ok) return false;
+        } else if (step.type === 'highlight') {
+          /* visual only */
+        }
+      }
+      return gen === this.generation;
+    },
+  };
+
+  function wordUnits(word) {
+    if (typeof wordGraphemes === 'function') return wordGraphemes(word);
+    return word?.graphemes || word?.letters || [];
+  }
+
+  function buildBlendSteps(word) {
+    const units = wordUnits(word);
+    const steps = [];
+    units.forEach((g, index) => {
+      steps.push({ type: 'highlight', index });
+      steps.push({ type: 'phoneme', value: g, gapMs: 150 });
+    });
+    steps.push({ type: 'wait', ms: 300 });
+    steps.push({ type: 'highlight', index: -1, blend: true });
+    steps.push({ type: 'word', value: word.word });
+    return steps;
+  }
+
+  function setBlendNodeActive(index, { blend = false } = {}) {
+    const nodes = $$('#phonics-blend-nodes .phonics-blend-node');
+    nodes.forEach((node, i) => {
+      node.classList.toggle('is-active', !blend && i === index);
+      node.classList.toggle('is-blended', !!blend);
+    });
+  }
+
+  async function playBlendSequenceForWord(word, { muted = isMuted() } = {}) {
+    if (!word || !wordUnits(word).length) return false;
+    PhonicsAudio.cancel();
+    const steps = buildBlendSteps(word);
+    return PhonicsAudio.playSequence(steps, {
+      muted,
+      onStep: (step) => {
+        if (step.type === 'highlight') setBlendNodeActive(step.index, { blend: !!step.blend });
+      },
+    });
+  }
+
   function showPScreen(name) {
+    PhonicsAudio.cancel();
     const map = {
       topics: '#screen-phonics-topics',
       sounds: '#screen-phonics-sounds',
@@ -274,31 +391,47 @@
    * （之前先讀粵語鼓勵再讀英文，喺 iPad 上成日重疊／互相 cancel，聽落好亂）
    * @returns {string} 鼓勵句（畫面顯示用）
    */
+  const PHONICS_EN_PRAISE = [
+    'Great job, {name}!',
+    'Well done!',
+    'You got it!',
+    'Brilliant!',
+    'Excellent blending!',
+  ];
+  const PHONICS_EN_RETRY = [
+    'Try again!',
+    'Almost! Try again.',
+    'Good try! Have another go.',
+  ];
+
+  function pickPhonicsEnglishPraise() {
+    const name = activeLearnerEnglishName();
+    const line = PHONICS_EN_PRAISE[Math.floor(Math.random() * PHONICS_EN_PRAISE.length)];
+    return line.replace('{name}', name);
+  }
+
+  function pickPhonicsEnglishRetry() {
+    return PHONICS_EN_RETRY[Math.floor(Math.random() * PHONICS_EN_RETRY.length)];
+  }
+
   function speakCorrectEnglishOnly(word, muted, onAllDone) {
-    let done = false;
-    const finish = () => {
-      if (done) return;
-      done = true;
+    const praise = pickPhonicsEnglishPraise();
+    (async () => {
+      playCorrectCue({ muted });
+      const still = await PhonicsAudio.speakFeedback(praise, { muted });
+      if (!still) {
+        if (typeof onAllDone === 'function') onAllDone();
+        return;
+      }
+      if (word) {
+        if (normalizePhoneme(word)) {
+          await PhonicsAudio.playPhoneme(word, { muted });
+        } else {
+          await PhonicsAudio.speakWord(word, { muted });
+        }
+      }
       if (typeof onAllDone === 'function') onAllDone();
-    };
-    if (typeof warmAudio === 'function') warmAudio();
-    playCorrectCue({ muted });
-    const praise = pickPraiseLine();
-    if (!word || muted) {
-      setTimeout(finish, muted ? 700 : 400);
-      return praise;
-    }
-    // Letters: phoneme MP3; CVC/sight: full English word TTS
-    if (normalizePhoneme(word)) {
-      setTimeout(() => {
-        playLetterSound(word, { muted, onEnd: finish });
-      }, 120);
-      setTimeout(finish, 2000);
-      return praise;
-    }
-    speakEnglishTerm(word, { muted, delayMs: 120, onEnd: finish });
-    const wait = estimateSpeakMs ? estimateSpeakMs(word, { rate: 0.85, delayMs: 120 }) : 1400;
-    setTimeout(finish, wait + 200);
+    })();
     return praise;
   }
 
@@ -307,33 +440,24 @@
    * @returns {string} 再試句（畫面顯示用）
    */
   function speakRetryThenEnglish(word, muted, onAllDone) {
-    let wordStarted = false;
-    let done = false;
-    const finish = () => {
-      if (done) return;
-      done = true;
+    const retryLine = pickPhonicsEnglishRetry();
+    (async () => {
+      playTryAgainCue({ muted });
+      const still = await PhonicsAudio.speakFeedback(retryLine, { muted });
+      if (!still) {
+        if (typeof onAllDone === 'function') onAllDone();
+        return;
+      }
+      // Wrong answers: replay target phoneme/word — never announce the letter name.
+      if (word) {
+        if (normalizePhoneme(word)) {
+          await PhonicsAudio.playPhoneme(word, { muted });
+        } else {
+          await PhonicsAudio.speakWord(word, { muted });
+        }
+      }
       if (typeof onAllDone === 'function') onAllDone();
-    };
-    const startWord = () => {
-      if (wordStarted) return;
-      wordStarted = true;
-      if (!word) {
-        finish();
-        return;
-      }
-      if (normalizePhoneme(word)) {
-        playLetterSound(word, { muted, onEnd: finish });
-        setTimeout(finish, 2000);
-        return;
-      }
-      speakEnglishTerm(word, { muted, delayMs: 180, onEnd: finish });
-      const wordWait = estimateSpeakMs ? estimateSpeakMs(word, { rate: 0.85, delayMs: 180 }) : 1400;
-      setTimeout(finish, wordWait + 200);
-    };
-    playTryAgainCue({ muted });
-    const retryLine = speakRetryFeedback({ muted, onEnd: () => setTimeout(startWord, 180) });
-    const retryWait = estimateSpeakMs ? estimateSpeakMs(retryLine, { rate: 0.92, delayMs: 220 }) : 1800;
-    setTimeout(startWord, retryWait + 200);
+    })();
     return retryLine;
   }
 
@@ -373,23 +497,175 @@
     showPScreen('topics');
   }
 
+  function missionStatusForStage(stage) {
+    // Soft status only — never hard-lock. Uses existing skill stats when present.
+    try {
+      const stats = loadState()?.phonicsSkillStats?.blending || {};
+      const ids = stage.wordIds || [];
+      if (!ids.length) return 'can-review';
+      let mastered = 0;
+      let seen = 0;
+      ids.forEach((id) => {
+        const s = stats[id];
+        if (!s) return;
+        seen += 1;
+        if ((s.right || 0) >= 3 && (s.streak || 0) >= 2) mastered += 1;
+      });
+      if (mastered >= Math.max(1, Math.ceil(ids.length * 0.6))) return 'mastered';
+      if (seen > 0) return 'learning';
+      return 'suggested';
+    } catch {
+      return 'can-review';
+    }
+  }
+
+  function statusLabel(status) {
+    if (status === 'mastered') return '已掌握';
+    if (status === 'learning') return '正在學習';
+    if (status === 'suggested') return '建議下一站';
+    return '可以溫習';
+  }
+
+  function suggestedNextStage() {
+    const stages = (PHONICS_STAGES || []).slice().sort((a, b) => a.order - b.order);
+    for (const stage of stages) {
+      const st = missionStatusForStage(stage);
+      if (st === 'suggested' || st === 'learning') return stage;
+    }
+    return stages[0] || null;
+  }
+
+  function hubCardHtml({ code, title, focus, status, cta }) {
+    return `
+      <span class="phonics-mission-number" aria-hidden="true">${code}</span>
+      <span class="topic-title term-en">${title}</span>
+      <span class="topic-blurb term-en">${focus || ''}</span>
+      <span class="phonics-hub-status" data-status="${status}">${statusLabel(status)}</span>
+      <span class="phonics-hub-cta">${cta}</span>
+    `;
+  }
+
   function renderPhonicsTopics() {
-    const grid = $('#phonics-topic-grid');
-    if (!grid) return;
-    grid.innerHTML = '';
-    PHONICS_TOPICS.forEach((topic, index) => {
+    const suggestBox = $('#phonics-hub-suggest');
+    const soundsBox = $('#phonics-hub-sounds');
+    const blendBox = $('#phonics-hub-blend');
+    const trickyBox = $('#phonics-hub-tricky');
+    const vocabBox = $('#phonics-hub-vocab');
+    const legacyGrid = $('#phonics-topic-grid');
+
+    const next = suggestedNextStage();
+    if (suggestBox) {
+      if (next) {
+        suggestBox.innerHTML = `
+          <p class="phonics-hub-suggest-label">建議下一站</p>
+          <button type="button" class="phonics-hub-suggest-card" id="btn-phonics-suggested-next">
+            <span class="phonics-mission-number">Mission ${String(next.order).padStart(2, '0')}</span>
+            <span class="topic-title term-en">${next.title}</span>
+            <span class="topic-blurb term-en">Focus: ${next.focusSounds.join(' ')}</span>
+            <span class="phonics-hub-cta">開始拼讀</span>
+          </button>`;
+        $('#btn-phonics-suggested-next')?.addEventListener('click', () => openPhonicsLearn(next.id));
+      } else {
+        suggestBox.innerHTML = '';
+      }
+    }
+
+    if (soundsBox) {
+      soundsBox.innerHTML = '';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'topic-card phonics-hub-card';
+      btn.innerHTML = hubCardHtml({
+        code: 'Sound Lab',
+        title: '字母音訓練基地',
+        focus: '49 音 · 13 Sound Missions',
+        status: 'can-review',
+        cta: '進入聲音訓練',
+      });
+      btn.onclick = () => openPhonicsSounds();
+      soundsBox.appendChild(btn);
+      (PHONICS_SOUND_SECTIONS || []).forEach((section, idx) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'topic-card phonics-hub-card';
+        card.innerHTML = hubCardHtml({
+          code: `0${idx + 1}`,
+          title: section.title,
+          focus: section.blurb,
+          status: 'can-review',
+          cta: '聽音',
+        });
+        card.onclick = () => openPhonicsSounds();
+        soundsBox.appendChild(card);
+      });
+    }
+
+    if (blendBox) {
+      blendBox.innerHTML = '';
+      (PHONICS_STAGES || []).slice().sort((a, b) => a.order - b.order).forEach((stage) => {
+        const status = missionStatusForStage(stage);
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'topic-card phonics-hub-card';
+        card.innerHTML = hubCardHtml({
+          code: `Stage ${String(stage.order).padStart(2, '0')}`,
+          title: stage.title,
+          focus: `Focus: ${stage.focusSounds.join(' ')}`,
+          status: next && next.id === stage.id ? 'suggested' : status,
+          cta: '拼讀任務',
+        });
+        card.onclick = () => openPhonicsLearn(stage.id);
+        blendBox.appendChild(card);
+      });
+    }
+
+    if (trickyBox) {
+      trickyBox.innerHTML = '';
+      (PHONICS_TRICKY_SETS || []).forEach((set, i) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'topic-card phonics-hub-card';
+        card.innerHTML = hubCardHtml({
+          code: `Set ${i + 1}`,
+          title: set.title,
+          focus: set.blurb,
+          status: 'can-review',
+          cta: '特別字',
+        });
+        card.onclick = () => openPhonicsLearn(set.id);
+        trickyBox.appendChild(card);
+      });
+    }
+
+    if (vocabBox) {
+      vocabBox.innerHTML = '';
+      (PHONICS_VOCAB_SETS || []).forEach((set, i) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'topic-card phonics-hub-card';
+        card.innerHTML = hubCardHtml({
+          code: `Vocab ${i + 1}`,
+          title: set.title,
+          focus: set.blurb,
+          status: 'can-review',
+          cta: '詞彙任務',
+        });
+        card.onclick = () => openPhonicsLearn(set.id);
+        vocabBox.appendChild(card);
+      });
+    }
+
+    // Keep legacy grid populated (hidden) for smoke selectors / older hooks
+    if (legacyGrid) {
+      legacyGrid.innerHTML = '';
+      const firstBlend = (PHONICS_STAGES || [])[0];
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'topic-card';
-      btn.innerHTML = `
-        <span class="phonics-mission-number" aria-hidden="true">MISSION ${String(index + 1).padStart(2, '0')}</span>
-        <span class="topic-cover" aria-hidden="true">${topic.cover}</span>
-        <span class="topic-title term-en">${topic.title}</span>
-        <span class="topic-blurb term-en">${topic.blurb}</span>
-      `;
-      btn.onclick = () => topic.soundMissions ? openPhonicsSounds() : openPhonicsLearn(topic.id);
-      grid.appendChild(btn);
-    });
+      btn.textContent = firstBlend ? firstBlend.title : 'Sound Training';
+      btn.onclick = () => (firstBlend ? openPhonicsLearn(firstBlend.id) : openPhonicsSounds());
+      legacyGrid.appendChild(btn);
+    }
   }
 
   function bindPhonicsSounds() {
@@ -498,12 +774,17 @@
   function renderPhonicsLearnCard() {
     const word = pLearnWords[pLearnIndex];
     if (!word) return;
+    PhonicsAudio.cancel();
     const illust = $('#phonics-learn-illust');
     const term = $('#phonics-learn-term');
     const lettersRow = $('#phonics-learn-letters');
     const progress = $('#phonics-learn-progress');
     const lead = $('#screen-phonics-learn .section-lead');
-    const isLetter = typeof isLetterItem === 'function' ? isLetterItem(word) : word.kind === 'letter';
+    const blendPanel = $('#phonics-blend-panel');
+    const blendNodes = $('#phonics-blend-nodes');
+    const blendBtn = $('#btn-phonics-blend-sounds');
+    const isLetter = typeof isLetterItem === 'function' ? isLetterItem(word) : word.kind === 'letter' || word.kind === 'phoneme';
+    const units = wordUnits(word);
 
     if (isLetter) {
       if (illust) {
@@ -511,13 +792,14 @@
       }
       if (term) term.textContent = word.word;
       if (lettersRow) lettersRow.innerHTML = '';
+      if (blendPanel) blendPanel.hidden = true;
       if (lead) lead.textContent = '先聽熟每個音，再玩聽音辨形';
     } else {
-      if (illust) illust.innerHTML = word.emoji ? phonicsWordIllustHtml(word) : '';
+      if (illust) illust.innerHTML = (word.emoji || word.meaningArt?.emoji) ? phonicsWordIllustHtml(word) : '';
       if (term) term.textContent = word.word;
       if (lettersRow) {
-        lettersRow.innerHTML = word.letters
-          ? word.letters
+        lettersRow.innerHTML = units.length
+          ? units
               .map(
                 (ch) =>
                   `<button type="button" class="letter-tile" data-letter="${ch}" aria-label="letter sound ${ch}">${letterTileHtml(ch)}</button>`,
@@ -532,13 +814,27 @@
             void tile.offsetWidth;
             tile.classList.add('is-energized');
             setTimeout(() => tile.classList.remove('is-energized'), 520);
-            playLetterSound(tile.dataset.letter, { muted: isMuted() });
+            PhonicsAudio.cancel();
+            PhonicsAudio.playPhoneme(tile.dataset.letter, { muted: isMuted() });
           });
         });
       }
-      if (lead) {
-        lead.textContent = word.letters ? '撳字母聽音' : '撳卡聽英文';
+      if (blendPanel && blendNodes) {
+        if (units.length) {
+          blendPanel.hidden = false;
+          blendNodes.innerHTML = units
+            .map((ch, i) => `<span class="phonics-blend-node letter-tile" data-index="${i}">${letterTileHtml(ch)}</span>`)
+            .join('<i class="phonics-blend-link" aria-hidden="true"></i>');
+          if (blendBtn) {
+            blendBtn.onclick = () => {
+              playBlendSequenceForWord(word, { muted: isMuted() });
+            };
+          }
+        } else {
+          blendPanel.hidden = true;
+        }
       }
+      if (lead) lead.textContent = units.length ? '撳字母聽音，或 Blend the sounds' : '撳卡聽英文';
     }
     if (progress) progress.textContent = `${pLearnIndex + 1}/${pLearnWords.length}`;
 
@@ -570,12 +866,13 @@
   function speakCurrentPhonicsLearn() {
     const word = pLearnWords[pLearnIndex];
     if (!word) return;
-    const isLetter = typeof isLetterItem === 'function' ? isLetterItem(word) : word.kind === 'letter';
+    PhonicsAudio.cancel();
+    const isLetter = typeof isLetterItem === 'function' ? isLetterItem(word) : word.kind === 'letter' || word.kind === 'phoneme';
     if (isLetter) {
-      playLetterSound(word.word, { muted: isMuted() });
+      PhonicsAudio.playPhoneme(word.word, { muted: isMuted() });
       return;
     }
-    speakEnglishTerm(word.word, { muted: isMuted() });
+    PhonicsAudio.speakWord(word.word, { muted: isMuted() });
   }
 
   function stepPhonicsLearn(delta) {
@@ -792,6 +1089,15 @@
         grid.appendChild(btn);
       });
     }
+
+    // Blend the Word: play /c/ /a/ /t/ then child picks the word/picture.
+    if (wordUnits(target).length) {
+      const prompt = $('#screen-phonics-match .prompt-box p');
+      if (prompt) prompt.textContent = '聽音拼合，揀個字';
+      setTimeout(() => {
+        playBlendSequenceForWord(target, { muted: isMuted() });
+      }, 280);
+    }
   }
 
   function onPhonicsMatchPick(id, btn) {
@@ -800,7 +1106,7 @@
     const targetWord = pMatchRound.target.word;
     const fb = $('#phonics-match-feedback');
 
-    if (Array.isArray(pMatchRound.target.letters) && pMatchRound.target.letters.length > 0) {
+    if (wordUnits(pMatchRound.target).length > 0) {
       recordPhonicsSkill('blending', pMatchRound.target.id, correct);
     }
 
@@ -828,7 +1134,7 @@
   /* ---------- 模式 C：砌一砌(拖／撳字母按順序) ---------- */
 
   function makePhonicsBuildTiles(target, topic) {
-    const needed = target.letters;
+    const needed = wordUnits(target);
     const tiles = needed.map((ch, i) => ({ key: `need-${i}-${ch}`, char: ch }));
     const allLetters = phonicsLetterPool(topic);
     const distractors = shuffle(allLetters.filter((ch) => !needed.includes(ch)));
@@ -858,10 +1164,10 @@
     pBusy = false;
     pBuildSelectedKey = null;
     const topic = getPhonicsTopicById(pActiveTopicId);
-    const pool = (topic?.words || []).filter((w) => w.letters);
+    const pool = (topic?.words || []).filter((w) => wordUnits(w).length);
     if (pool.length < 1) return;
     const target = pickTarget(pool);
-    const chars = target.letters;
+    const chars = wordUnits(target);
     const tiles = makePhonicsBuildTiles(target, topic);
     pBuildRound = {
       target,
