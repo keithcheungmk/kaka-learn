@@ -82,6 +82,13 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-05 — Cursor：Phonics Phase A/B（課程 hub + blending + 英文回饋）
+- Phase A：`PHONICS_WORDS`／`PHONICS_STAGES`／Tricky／Vocab；首頁分 Sound Training／Blend Words／Tricky Words（+ Vocabulary）；建議下一站唔硬鎖。
+- Phase B：`PhonicsAudio` 序列、`Blend the sounds`（/c/→/a/→/t/→cat；ship = sh·i·p）、聽／配／砌全英文回饋（Kaka／Hei Hei）。
+- 自動檢查：`check_phonics_curriculum_model`；smoke 改撳 hub 卡。
+- 檔案：`js/phonics-words.js`、`js/phonics-app.js`、`css/phonics.css`、`index.html`、`scripts/check-invariants.py`、`scripts/smoke-shots.py`。
+- 未做：Phase C 大量 CVC、短句、家長進度大改。
+
 ### 2026-09-05 · Codex（Keith：Phonics 砌字完整英文聲音流程）
 
 - 「砌一砌」每題載入後先以英式女聲 TTS 示範完整單字；拖放或點按正確入格均逐個播放媽媽的 phoneme 錄音
