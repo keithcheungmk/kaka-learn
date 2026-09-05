@@ -1,0 +1,546 @@
+/* SPACE RANGER PHONICS（獨立檔案，唔改動 styles.css） */
+
+.term-en {
+  font-family: var(--font-display);
+  text-transform: lowercase;
+}
+
+/* Phonics 畫面：同 KAKA Ranger 主品牌共用深藍太空背景；鹿主題已退役。 */
+.phonics-screen.active {
+  position: relative;
+  isolation: isolate;
+}
+
+.phonics-screen.active::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(6, 12, 43, 0.58) 0%, rgba(20, 16, 68, 0.38) 45%, rgba(6, 12, 43, 0.76) 100%),
+    url("../assets/chinese-space-bg.jpg") center / cover no-repeat;
+}
+
+.phonics-hero {
+  position: relative;
+  width: min(100%, 760px);
+  min-height: clamp(210px, 31vh, 340px);
+  margin: 0 auto 14px;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 2px solid rgba(163, 255, 203, 0.58);
+  box-shadow: 0 0 0 1px rgba(147, 165, 252, 0.24), 0 18px 40px rgba(5, 8, 35, 0.5);
+  background:
+    radial-gradient(circle at 74% 30%, rgba(124, 255, 178, 0.18), transparent 30%),
+    linear-gradient(135deg, rgba(18, 20, 77, 0.96), rgba(31, 20, 89, 0.9));
+}
+
+.phonics-hero::before,
+.phonics-hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.phonics-hero::before {
+  width: 260px;
+  height: 90px;
+  left: 20%;
+  top: 48%;
+  border: 3px solid rgba(251, 191, 36, 0.35);
+  transform: rotate(-12deg);
+}
+
+.phonics-hero::after {
+  width: 10px;
+  height: 10px;
+  left: 9%;
+  top: 18%;
+  background: #fde68a;
+  box-shadow: 130px 24px #a3ffcb, 310px -6px #93a5fc, 520px 42px #fb7185, 610px 144px #fde68a;
+}
+
+.phonics-hero-brand {
+  position: absolute;
+  z-index: 3;
+  top: clamp(12px, 2vh, 20px);
+  left: clamp(14px, 2.4vw, 24px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.phonics-hero-logo {
+  width: clamp(58px, 8vw, 82px);
+  height: clamp(58px, 8vw, 82px);
+  object-fit: contain;
+  background: transparent;
+}
+
+/* 共用 `.phonics-hero img` 會加深色底；品牌圖及 Ranger 必須以原生 alpha 浮在 hero 上。 */
+.phonics-hero .phonics-hero-logo,
+.phonics-hero .phonics-hero-ranger {
+  background-color: transparent;
+  background-image: none;
+}
+
+.phonics-mission-kicker,
+.phonics-mission-number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  color: var(--gold-soft);
+}
+
+.phonics-mission-kicker {
+  font-size: clamp(0.82rem, 2vw, 1.05rem);
+}
+
+.phonics-hero-action {
+  position: absolute;
+  inset: 0;
+}
+
+.phonics-hero-ranger {
+  position: absolute;
+  z-index: 2;
+  right: clamp(-22px, -2vw, -8px);
+  bottom: clamp(-34px, -3vh, -18px);
+  width: clamp(190px, 30vw, 320px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.4));
+  background: transparent;
+}
+
+.phonics-energy-word {
+  position: absolute;
+  z-index: 2;
+  left: clamp(24px, 7vw, 76px);
+  top: 50%;
+  transform: translateY(-34%);
+  display: flex;
+  align-items: center;
+  gap: clamp(5px, 1vw, 12px);
+}
+
+.phonics-energy-word span {
+  display: grid;
+  place-items: center;
+  width: clamp(58px, 9vw, 88px);
+  height: clamp(66px, 10vw, 96px);
+  border-radius: 22px;
+  background: var(--energy);
+  color: #10151f;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  font-weight: 700;
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.45), 0 0 22px color-mix(in srgb, var(--energy) 58%, transparent);
+}
+
+.phonics-energy-word i {
+  width: clamp(10px, 2vw, 24px);
+  height: 4px;
+  border-radius: 999px;
+  background: var(--gold);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+}
+
+.phonics-hero-callout {
+  position: absolute;
+  z-index: 4;
+  left: clamp(18px, 4vw, 42px);
+  bottom: clamp(12px, 2vh, 20px);
+  margin: 0;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(7, 12, 43, 0.74);
+  color: var(--ink);
+  font-size: clamp(0.85rem, 2vw, 1rem);
+}
+
+.phonics-screen .topic-card {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(147, 165, 252, 0.48);
+  background:
+    linear-gradient(145deg, rgba(52, 36, 104, 0.94), rgba(25, 24, 78, 0.94));
+}
+
+.phonics-screen .topic-card::after {
+  content: "";
+  position: absolute;
+  width: 78px;
+  height: 78px;
+  right: -28px;
+  bottom: -34px;
+  border: 2px solid rgba(163, 255, 203, 0.22);
+  border-radius: 50%;
+}
+
+.phonics-mission-number {
+  display: block;
+  width: 100%;
+  margin-bottom: 2px;
+  font-size: 0.68rem;
+  text-align: center;
+  color: var(--teal-soft);
+}
+
+.phonics-screen .topic-card,
+.phonics-screen .prompt-box,
+.phonics-screen .learn-stage,
+.phonics-screen .build-pool,
+.phonics-screen .match-stage {
+  backdrop-filter: blur(2px);
+}
+
+.sound-library-screen {
+  overflow-y: auto;
+}
+
+.sound-section-list {
+  display: grid;
+  gap: 18px;
+  width: min(100%, 1040px);
+  margin: 0 auto;
+  padding-bottom: 32px;
+}
+
+.sound-section-card {
+  overflow: hidden;
+  border: 2px solid rgba(147, 165, 252, 0.45);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(52, 36, 104, 0.94), rgba(16, 24, 72, 0.96));
+  box-shadow: 0 14px 30px rgba(4, 8, 35, 0.3);
+}
+
+.sound-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(147, 165, 252, 0.3);
+  background: rgba(8, 15, 54, 0.48);
+}
+
+.sound-section-heading h2,
+.sound-section-heading p,
+.sound-group-copy h3,
+.sound-group-copy p {
+  margin: 0;
+}
+
+.sound-section-heading h2 {
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+}
+
+.sound-section-heading p {
+  margin-top: 3px;
+  color: var(--ink-muted);
+  font-size: 0.92rem;
+}
+
+.sound-section-heading > span {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  border: 1px solid rgba(124, 255, 178, 0.54);
+  border-radius: 999px;
+  color: var(--teal-soft);
+  font-weight: 800;
+}
+
+.sound-group-list {
+  display: grid;
+}
+
+.sound-group-row {
+  display: grid;
+  grid-template-columns: minmax(155px, 0.8fr) minmax(280px, 2fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 15px 20px;
+}
+
+.sound-group-row + .sound-group-row {
+  border-top: 1px solid rgba(147, 165, 252, 0.2);
+}
+
+.sound-group-copy h3 {
+  font-size: 1.08rem;
+}
+
+.sound-group-copy p {
+  margin-top: 2px;
+  color: var(--teal-soft);
+  font: 700 0.68rem var(--font-display);
+  letter-spacing: 0.08em;
+}
+
+.sound-chip-list,
+.sound-group-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.sound-list-chip {
+  min-width: 52px;
+  min-height: 52px;
+  padding: 5px 9px;
+  border: 2px solid rgba(124, 255, 178, 0.58);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(39, 47, 117, 0.98), rgba(14, 24, 70, 0.98));
+  color: #fff;
+  font-family: var(--font-display);
+  box-shadow: inset 0 0 14px rgba(147, 165, 252, 0.2);
+}
+
+.sound-list-glyph {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.sound-list-chip small {
+  display: block;
+  margin-top: 4px;
+  color: var(--gold-soft);
+  font: 700 0.64rem var(--font-body);
+}
+
+.sound-list-chip.is-playing {
+  border-color: var(--gold-soft);
+  color: var(--gold-soft);
+  box-shadow: 0 0 0 5px rgba(251, 191, 36, 0.15), 0 0 22px rgba(251, 191, 36, 0.42);
+}
+
+.sound-group-actions {
+  justify-content: flex-end;
+}
+
+.sound-group-actions .btn {
+  min-width: 92px;
+  min-height: 44px;
+  padding: 9px 13px;
+  font-size: 0.84rem;
+}
+
+@media (max-width: 900px) {
+  .sound-group-row {
+    grid-template-columns: 1fr auto;
+  }
+  .sound-chip-list {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .sound-group-actions {
+    grid-column: 2;
+    grid-row: 1;
+  }
+}
+
+@media (max-width: 700px) {
+  .sound-section-heading,
+  .sound-group-row {
+    padding: 14px;
+  }
+  .sound-section-heading {
+    align-items: flex-start;
+  }
+  .sound-section-heading p {
+    max-width: 250px;
+  }
+  .sound-group-row {
+    grid-template-columns: 1fr;
+  }
+  .sound-chip-list,
+  .sound-group-actions {
+    grid-column: 1;
+  }
+  .sound-chip-list { grid-row: 2; }
+  .sound-group-actions {
+    grid-row: 3;
+    justify-content: flex-start;
+  }
+  .phonics-hero {
+    min-height: 250px;
+  }
+  .phonics-hero-ranger {
+    width: 168px;
+    right: -32px;
+  }
+  .phonics-energy-word {
+    left: 14px;
+    top: 52%;
+  }
+  .phonics-energy-word span {
+    width: 52px;
+    height: 62px;
+    border-radius: 17px;
+  }
+  .phonics-hero-callout {
+    max-width: 72%;
+    border-radius: 16px;
+    font-size: 0.78rem;
+  }
+}
+
+/* Ranger Sound Energy：非擬人化節點，集中呈現字形、聲音及互動狀態。 */
+.letter-tile {
+  position: relative;
+  overflow: visible;
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.letter-tile:active .sound-energy-glyph {
+  transform: scale(0.94);
+}
+
+.letter-tile.is-energized .sound-energy-glyph {
+  border-color: var(--gold-soft);
+  color: var(--gold-soft);
+  box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.16), 0 0 28px rgba(251, 191, 36, 0.58);
+}
+
+.letter-tile .sound-energy-glyph {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 2px solid rgba(163, 255, 203, 0.72);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 36% 28%, rgba(255, 255, 255, 0.2), transparent 24%),
+    linear-gradient(145deg, rgba(39, 47, 117, 0.98), rgba(14, 24, 70, 0.98));
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4.5vw, 1.9rem);
+  text-transform: lowercase;
+  box-shadow:
+    inset 0 0 16px rgba(147, 165, 252, 0.24),
+    0 0 0 4px rgba(147, 165, 252, 0.12),
+    0 6px 18px rgba(4, 8, 35, 0.34);
+  transition: transform 0.1s ease;
+}
+
+.letter-row .letter-tile .sound-energy-glyph {
+  font-size: clamp(1.05rem, 3.2vw, 1.3rem);
+}
+
+.build-slot.is-filled .letter-tile .sound-energy-glyph {
+  border-color: rgba(124, 255, 178, 0.92);
+  background: linear-gradient(145deg, rgba(22, 118, 92, 0.98), rgba(12, 62, 70, 0.98));
+  box-shadow: 0 0 0 4px rgba(124, 255, 178, 0.14), 0 0 18px rgba(124, 255, 178, 0.28);
+}
+
+/* 「先學一學」畫面：拆返出嚟嘅字母排(純展示,幫手建立「音拼埋成詞」概念) */
+.letter-row {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 8px 0 2px;
+}
+
+.letter-row:not(:empty)::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 18%;
+  right: 18%;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.54);
+}
+
+.letter-row .letter-tile {
+  width: clamp(44px, 12vw, 56px);
+  height: clamp(44px, 12vw, 56px);
+}
+
+/* 字母溫習：學習頁大粒活字母 */
+.letter-tile-lg {
+  width: min(160px, 42vw);
+  height: min(160px, 42vw);
+  display: block;
+  margin: 0 auto;
+}
+
+.letter-tile-lg .sound-energy-glyph {
+  font-size: clamp(3.2rem, 14vw, 4.8rem);
+  border-width: 3px;
+  box-shadow: inset 0 0 28px rgba(147, 165, 252, 0.28), 0 0 0 7px rgba(147, 165, 252, 0.12), 0 0 28px rgba(94, 234, 212, 0.22);
+}
+
+/* 聽一聽：揀字母卡 */
+.word-card-letter {
+  min-height: 132px;
+  padding: 16px;
+}
+
+.word-card-letter .letter-tile-card {
+  width: min(88px, 22vw);
+  height: min(88px, 22vw);
+  display: block;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+.word-card-letter .letter-tile-card .sound-energy-glyph {
+  font-size: clamp(2rem, 8vw, 2.8rem);
+}
+
+/* 「砌一砌」字池／已放好嘅格：Sound Energy 節點要有固定大細。 */
+.build-pool .build-tile.letter-tile,
+.build-slot .build-placed.letter-tile {
+  display: block;
+  width: clamp(54px, 15vw, 74px);
+  height: clamp(58px, 16vw, 78px);
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.build-slot .build-placed.letter-tile {
+  width: clamp(50px, 14vw, 64px);
+  height: clamp(50px, 14vw, 64px);
+}
+
+/* 「先學一學」畫面：撳圖／字聽整個詞（同字母格分開，避免 button 入面再有 button） */
+.learn-stage-tap {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* 主頁品牌球淨係裝飾；字母隊入口喺主頁大掣 */

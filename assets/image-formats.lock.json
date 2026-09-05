@@ -1,0 +1,282 @@
+{
+  "assets/chinese-hero.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/chinese-space-bg.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/dino/baolong.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/dino/fuzhilong.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/dino/jialong.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/dino/jianlong.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/dino/lianglong.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/dino/sanjiaolong.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/dino/sulong.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/dino/yilong.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/food/feiniu.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food/niurou.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food/yangrou.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food/zhurou.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/boluoyou.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/changfen.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/chashao-fan.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/dabianlu.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/dan-ta.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/dong-ningcha.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/fanqie-chaodan.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/feiniu-wudong.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/gan-chao-niuhe.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/gongzai-mian.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/gulourou.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/hainan-ji-fan.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/jian-niang-sanbao.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/maileji.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/naicha.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/niunan-mian.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/nuomi-ji.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/roujiang-yifen.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/siumai.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/wonton-mian.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/xi-duoshi.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/xia-jiao.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/yezi.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/yudan.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/zheng-shuidan.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/food-hk/zheng-yu.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/icons/icon-16.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-180.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-192.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-32.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-48.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/icons/icon-512.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/kaka-ranger-celebrate.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/kaka-ranger-logo.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/kaka-ranger-solo.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/kaka-ranger-star.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/math/galaxy-bg.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/math/planets/earth.png": {
+    "format": "PNG",
+    "alpha": false
+  },
+  "assets/math/planets/jupiter.png": {
+    "format": "PNG",
+    "alpha": false
+  },
+  "assets/math/planets/mars.png": {
+    "format": "PNG",
+    "alpha": false
+  },
+  "assets/math/planets/mercury.png": {
+    "format": "PNG",
+    "alpha": false
+  },
+  "assets/math/planets/moon.png": {
+    "format": "PNG",
+    "alpha": false
+  },
+  "assets/math/planets/neptune.png": {
+    "format": "PNG",
+    "alpha": false
+  },
+  "assets/math/planets/saturn.png": {
+    "format": "PNG",
+    "alpha": false
+  },
+  "assets/math/planets/uranus.png": {
+    "format": "PNG",
+    "alpha": false
+  },
+  "assets/math/planets/venus.png": {
+    "format": "PNG",
+    "alpha": false
+  },
+  "assets/og-image.png": {
+    "format": "PNG",
+    "alpha": false
+  },
+  "assets/phonics-hero.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/phonics-space-bg.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/profile-heihei.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/profile-kaka.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/space-ranger-pose-fistpump.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/space-ranger-pose-point.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/space-ranger-pose-thumbsup.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/space-ranger-pose-wave.png": {
+    "format": "PNG",
+    "alpha": true
+  },
+  "assets/space-ranger-shooter.png": {
+    "format": "PNG",
+    "alpha": true
+  }
+}
