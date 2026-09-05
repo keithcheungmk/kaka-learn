@@ -8,8 +8,10 @@
     return;
   }
 
-  const { PHONICS_TOPICS, getPhonicsTopicById, phonicsLetterPool, phonicsWordIllustHtml, letterTileHtml, isLetterItem } =
-    window.KakaPhonicsWords;
+  const {
+    PHONICS_TOPICS, PHONICS_SOUND_SECTIONS, getPhonicsTopicById,
+    phonicsLetterPool, phonicsWordIllustHtml, letterTileHtml, isLetterItem,
+  } = window.KakaPhonicsWords;
   const { loadState, recordPhonicsSkillResult } = window.KakaStorage;
   const {
     warmEnglishVoice,
@@ -161,6 +163,7 @@
   function showPScreen(name) {
     const map = {
       topics: '#screen-phonics-topics',
+      sounds: '#screen-phonics-sounds',
       learn: '#screen-phonics-learn',
       play: '#screen-phonics-play',
       listen: '#screen-phonics-listen',
@@ -285,6 +288,7 @@
       warmEnglishVoice();
       bindPhonicsHome();
       bindPhonicsTopics();
+      bindPhonicsSounds();
       bindPhonicsLearn();
       bindPhonicsPlayPick();
       bindPhonicsListen();
@@ -329,14 +333,88 @@
         <span class="topic-title term-en">${topic.title}</span>
         <span class="topic-blurb term-en">${topic.blurb}</span>
       `;
-      btn.onclick = () => openPhonicsLearn(topic.id);
+      btn.onclick = () => topic.soundMissions ? openPhonicsSounds() : openPhonicsLearn(topic.id);
       grid.appendChild(btn);
     });
   }
 
+  function bindPhonicsSounds() {
+    const back = $('#btn-back-phonics-sounds');
+    if (back) back.onclick = () => openPhonicsTopics();
+  }
+
+  function soundDisplay(sound) {
+    if (sound === 'oo-long') return { glyph: 'oo', note: '長音' };
+    if (sound === 'oo-short') return { glyph: 'oo', note: '短音' };
+    return { glyph: sound, note: '' };
+  }
+
+  function openPhonicsSounds() {
+    pActiveTopicId = 'letters_rev';
+    const container = $('#phonics-sound-section-list');
+    if (!container) return;
+    const missions = getPhonicsTopicById('letters_rev')?.soundMissions || [];
+    container.innerHTML = (PHONICS_SOUND_SECTIONS || []).map((section) => `
+      <section class="sound-section-card" aria-labelledby="sound-section-${section.id}">
+        <header class="sound-section-heading">
+          <div>
+            <h2 id="sound-section-${section.id}">${section.title}</h2>
+            <p>${section.blurb}</p>
+          </div>
+          <span>${section.count} 音</span>
+        </header>
+        <div class="sound-group-list">
+          ${section.groups.map((group) => {
+            const missionIndex = missions.findIndex((mission) => mission.id === group.id);
+            return `<article class="sound-group-row">
+              <div class="sound-group-copy">
+                <h3>${group.label}</h3>
+                <p>Sound Mission ${String(missionIndex + 1).padStart(2, '0')}</p>
+              </div>
+              <div class="sound-chip-list">
+                ${group.sounds.map((sound) => {
+                  const display = soundDisplay(sound);
+                  return `<button type="button" class="sound-list-chip" data-sound="${sound}" aria-label="播放 ${display.glyph}${display.note ? ` ${display.note}` : ''}">
+                    <span class="sound-list-glyph">${display.glyph}</span>
+                    ${display.note ? `<small>${display.note}</small>` : ''}
+                  </button>`;
+                }).join('')}
+              </div>
+              <div class="sound-group-actions">
+                <button type="button" class="btn btn-secondary sound-group-study" data-mission="${missionIndex}">溫習本組</button>
+                <button type="button" class="btn btn-ghost sound-group-quiz" data-mission="${missionIndex}">小測驗</button>
+              </div>
+            </article>`;
+          }).join('')}
+        </div>
+      </section>
+    `).join('');
+
+    container.querySelectorAll('.sound-list-chip').forEach((button) => {
+      button.addEventListener('click', () => {
+        container.querySelectorAll('.sound-list-chip.is-playing').forEach((chip) => chip.classList.remove('is-playing'));
+        button.classList.add('is-playing');
+        playLetterSound(button.dataset.sound, {
+          muted: isMuted(),
+          onEnd: () => button.classList.remove('is-playing'),
+        });
+      });
+    });
+    container.querySelectorAll('.sound-group-study').forEach((button) => {
+      button.addEventListener('click', () => openPhonicsLearn('letters_rev', Number(button.dataset.mission)));
+    });
+    container.querySelectorAll('.sound-group-quiz').forEach((button) => {
+      button.addEventListener('click', () => {
+        pSoundMissionIndex = Number(button.dataset.mission) || 0;
+        openPhonicsPlayPick();
+      });
+    });
+    showPScreen('sounds');
+  }
+
   function bindPhonicsLearn() {
     const back = $('#btn-back-phonics-learn');
-    if (back) back.onclick = () => openPhonicsTopics();
+    if (back) back.onclick = () => pActiveTopicId === 'letters_rev' ? openPhonicsSounds() : openPhonicsTopics();
     const tap = $('#phonics-learn-tap');
     if (tap) tap.onclick = () => speakCurrentPhonicsLearn();
     const prev = $('#btn-phonics-learn-prev');
@@ -347,39 +425,20 @@
     if (play) play.onclick = () => openPhonicsPlayPick();
   }
 
-  function openPhonicsLearn(topicId) {
+  function openPhonicsLearn(topicId, soundMissionIndex = 0) {
     const topic = getPhonicsTopicById(topicId);
     if (!topic) return;
     pActiveTopicId = topicId;
-    pSoundMissionIndex = 0;
-    pLearnWords = topic.soundMissions?.[0]?.words || shuffle(topic.words);
+    pSoundMissionIndex = soundMissionIndex;
+    pLearnWords = topic.soundMissions?.[pSoundMissionIndex]?.words || shuffle(topic.words);
     pLearnIndex = 0;
     pLearnPassedOnce = false;
     const title = $('#phonics-learn-topic-title');
-    if (title) title.textContent = topic.title;
-    renderSoundMissionPicker(topic);
+    if (title) title.textContent = topic.soundMissions
+      ? topic.soundMissions[pSoundMissionIndex].label
+      : topic.title;
     renderPhonicsLearnCard();
     showPScreen('learn');
-  }
-
-  function renderSoundMissionPicker(topic) {
-    const picker = $('#phonics-sound-mission-picker');
-    if (!picker) return;
-    const missions = topic?.soundMissions || [];
-    picker.hidden = missions.length === 0;
-    picker.innerHTML = missions
-      .map((mission, index) => `<button type="button" class="sound-mission-chip${index === pSoundMissionIndex ? ' is-active' : ''}" data-index="${index}" aria-label="Sound Mission ${mission.label}">${mission.label}</button>`)
-      .join('');
-    picker.querySelectorAll('.sound-mission-chip').forEach((button) => {
-      button.addEventListener('click', () => {
-        pSoundMissionIndex = Number(button.dataset.index) || 0;
-        pLearnWords = missions[pSoundMissionIndex].words;
-        pLearnIndex = 0;
-        pLearnPassedOnce = false;
-        renderSoundMissionPicker(topic);
-        renderPhonicsLearnCard();
-      });
-    });
   }
 
   function renderPhonicsLearnCard() {
@@ -478,7 +537,7 @@
 
   function bindPhonicsPlayPick() {
     const back = $('#btn-back-phonics-play');
-    if (back) back.onclick = () => openPhonicsLearn(pActiveTopicId);
+    if (back) back.onclick = () => openPhonicsLearn(pActiveTopicId, pSoundMissionIndex);
     const listenBtn = $('#btn-phonics-mode-listen');
     const matchBtn = $('#btn-phonics-mode-match');
     const buildBtn = $('#btn-phonics-mode-build');
@@ -490,7 +549,10 @@
   function openPhonicsPlayPick() {
     const topic = getPhonicsTopicById(pActiveTopicId);
     const title = $('#phonics-play-topic-title');
-    if (title) title.textContent = topic ? `${topic.title}・去玩玩` : '去玩玩';
+    if (title) {
+      const activeSoundGroup = topic?.soundMissions?.[pSoundMissionIndex];
+      title.textContent = activeSoundGroup ? `${activeSoundGroup.label}・小測驗` : topic ? `${topic.title}・去玩玩` : '去玩玩';
+    }
     const modes = topic?.modes || ['listen'];
     const listenBtn = $('#btn-phonics-mode-listen');
     const matchBtn = $('#btn-phonics-mode-match');

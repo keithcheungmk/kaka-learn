@@ -82,6 +82,15 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-05 · Codex（Keith：Phonics 49 音分段清單＋透明 hero 圖）
+
+- 「字母音訓練基地」由無語意的 01–10 橫列改為完整清單：基礎單字母音 25、輔音組合 10、母音組合 14；合共 3 大類、13 個具名 Sound Missions、49 音
+- 每個音可在清單直接播放；每組保留「溫習本組」集中大卡及「小測驗」聽音辨形，最後一組只有 `ear／air` 亦可正常二選一
+- `oo` 長音／短音以同字形加明確中文標示，避免只看檔名；清單屬純瀏覽頁，iPad／手機可安全捲動
+- KAKA RANGER logo 原檔已有 alpha；方形底實為共用 `.phonics-hero img` 背景以較高 specificity 覆蓋。以精準 CSS 同時恢復 logo 及右側 Ranger 真透明背景，沒有重畫品牌圖
+- 已驗證：invariants、storage／math-storage／version tests 全綠；5 種 iPad 及 2 種 iPhone 共 12 畫面無裁切、重疊、404 或 console error；本機人眼確認清單層級及 hero 透明效果
+- **踩咗** `index.html`、`js/phonics-words.js`、`js/phonics-app.js`、`css/phonics.css`、`css/styles.css`、`scripts/smoke-shots.py`、`docs/handover.md`
+
 ### 2026-09-05 · Codex（Keith：媽媽 49 音錄音＋Phonics 聲音訓練基地）
 
 - 保留 `mama phonic recording/` 49 個原始 MP3 完全不變並排除 Git／部署；網站只使用另外產生的副本

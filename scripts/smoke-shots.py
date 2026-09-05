@@ -27,6 +27,7 @@ SCROLLABLE = {
     "screen-topics",
     "screen-books",
     "screen-phonics-topics",
+    "screen-phonics-sounds",
     "screen-progress",
 }
 
@@ -180,6 +181,10 @@ def walk(pg, url, shots: Path | None, tag: str):
         pg.click(entry)
         pg.wait_for_timeout(800)
         probe(step)
+        if entry == "#btn-start-phonics":
+            pg.click("#phonics-topic-grid .topic-card:first-child")
+            pg.wait_for_timeout(500)
+            probe("字母音清單")
 
     return seen
 

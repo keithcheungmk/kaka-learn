@@ -2095,12 +2095,13 @@ body {
   overflow: hidden;
 }
 
-/* 准捲：揀小朋友／主頁／揀主題／揀書／進度（純瀏覽、冇拖曳） */
+/* 准捲：揀小朋友／主頁／揀主題／揀書／聲音清單／進度（純瀏覽、冇拖曳） */
 #screen-profiles.active,
 #screen-home.active,
 #screen-topics.active,
 #screen-books.active,
 #screen-phonics-topics.active,
+#screen-phonics-sounds.active,
 #screen-progress.active {
   overflow-y: auto;
   overscroll-behavior: contain;

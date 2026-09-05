@@ -3,24 +3,53 @@
  *  插圖同中文認字 app 一樣用系統 Emoji；字母統一用 Ranger Sound Energy 節點，
  *  唔用擬人方塊角色，避免表情搶走字形同讀音焦點。
  *
- *  聲音訓練基地：媽媽錄製的 49 音分成 10 個短 Mission；每組先聽熟，再做辨音。
+ *  聲音訓練基地：媽媽錄製的 49 音分成 3 大類、13 個短 Mission；每組先聽熟，再做辨音。
  *  常見字：整詞認讀（listen；有清楚 emoji 先開 match）；唔開 build。
  *  抽象字（a/is/the/to…）可以唔配圖；動作／顏色／數優先配清晰 emoji。
  */
 
-/** 媽媽錄製的 49 個 Letters and Sounds 音素，按循序漸進的 Ranger Missions 分組。 */
-const PHONICS_SOUND_MISSIONS = [
-  { id: 'sound_01', label: '01', sounds: ['s', 'a', 't', 'p'] },
-  { id: 'sound_02', label: '02', sounds: ['i', 'n', 'm', 'd'] },
-  { id: 'sound_03', label: '03', sounds: ['g', 'o', 'c', 'k'] },
-  { id: 'sound_04', label: '04', sounds: ['ck', 'e', 'u', 'r'] },
-  { id: 'sound_05', label: '05', sounds: ['h', 'b', 'f', 'ff', 'l', 'll', 'ss'] },
-  { id: 'sound_06', label: '06', sounds: ['j', 'v', 'w', 'x', 'y', 'z', 'zz', 'qu'] },
-  { id: 'sound_07', label: '07', sounds: ['ch', 'sh', 'th', 'ng'] },
-  { id: 'sound_08', label: '08', sounds: ['ai', 'ee', 'igh', 'oa'] },
-  { id: 'sound_09', label: '09', sounds: ['oo-long', 'oo-short', 'ar', 'or', 'ur'] },
-  { id: 'sound_10', label: '10', sounds: ['ow', 'oi', 'ear', 'air', 'er'] },
-].map((mission) => ({
+/** 媽媽錄製的 49 個 Letters and Sounds 音素：先按類別搵音，再按小組練習。 */
+const PHONICS_SOUND_SECTIONS = [
+  {
+    id: 'basic',
+    title: '基礎單字母音',
+    count: 25,
+    blurb: '由常用音開始，愈早可以拼出簡單英文字。',
+    groups: [
+      { id: 'sound_01', label: '起步音', sounds: ['s', 'a', 't', 'p'] },
+      { id: 'sound_02', label: '拼讀擴展', sounds: ['i', 'n', 'm', 'd'] },
+      { id: 'sound_03', label: '短母音與 /k/', sounds: ['g', 'o', 'c', 'k'] },
+      { id: 'sound_04', label: '新短母音', sounds: ['e', 'u', 'r'] },
+      { id: 'sound_05', label: '常用輔音', sounds: ['h', 'b', 'f', 'l'] },
+      { id: 'sound_06', label: '進階單字母音', sounds: ['j', 'v', 'w', 'x', 'y', 'z'] },
+    ],
+  },
+  {
+    id: 'consonants',
+    title: '輔音組合',
+    count: 10,
+    blurb: '兩個字母一齊看，連成一個清楚聲音。',
+    groups: [
+      { id: 'sound_07', label: '相同音・不同拼法', sounds: ['ck', 'ff', 'll', 'ss', 'zz'] },
+      { id: 'sound_08', label: '兩字母新聲音', sounds: ['ch', 'sh', 'th', 'ng', 'qu'] },
+    ],
+  },
+  {
+    id: 'vowels',
+    title: '母音組合',
+    count: 14,
+    blurb: '認識長母音、滑音及 r 音組合。',
+    groups: [
+      { id: 'sound_09', label: '長母音組合', sounds: ['ai', 'ee', 'igh', 'oa'] },
+      { id: 'sound_10', label: 'oo 長短音', sounds: ['oo-long', 'oo-short'] },
+      { id: 'sound_11', label: 'r 音組合', sounds: ['ar', 'or', 'ur', 'er'] },
+      { id: 'sound_12', label: '滑音組合', sounds: ['ow', 'oi'] },
+      { id: 'sound_13', label: '其他母音組合', sounds: ['ear', 'air'] },
+    ],
+  },
+];
+
+const PHONICS_SOUND_MISSIONS = PHONICS_SOUND_SECTIONS.flatMap((section) => section.groups).map((mission) => ({
   ...mission,
   words: mission.sounds.map((sound) => ({
     id: `sound_${sound.replace('-', '_')}`,
@@ -36,7 +65,7 @@ const PHONICS_TOPICS = [
   {
     id: 'letters_rev',
     title: '字母音訓練基地',
-    blurb: '10 個 Sound Missions · 先聽熟再拼讀',
+    blurb: '3 大分類 · 13 個 Sound Missions · 49 音',
     cover: '🔤',
     modes: ['listen'],
     soundMissions: PHONICS_SOUND_MISSIONS,
@@ -226,6 +255,7 @@ function letterTileHtml(ch) {
 
 window.KakaPhonicsWords = {
   LETTER_REVISION,
+  PHONICS_SOUND_SECTIONS,
   PHONICS_SOUND_MISSIONS,
   PHONICS_TOPICS,
   getPhonicsTopicById,

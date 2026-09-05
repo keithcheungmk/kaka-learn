@@ -79,6 +79,13 @@
   background: transparent;
 }
 
+/* 共用 `.phonics-hero img` 會加深色底；品牌圖及 Ranger 必須以原生 alpha 浮在 hero 上。 */
+.phonics-hero .phonics-hero-logo,
+.phonics-hero .phonics-hero-ranger {
+  background-color: transparent;
+  background-image: none;
+}
+
 .phonics-mission-kicker,
 .phonics-mission-number {
   font-family: var(--font-display);
@@ -190,37 +197,179 @@
   backdrop-filter: blur(2px);
 }
 
-.sound-mission-picker {
+.sound-library-screen {
+  overflow-y: auto;
+}
+
+.sound-section-list {
+  display: grid;
+  gap: 18px;
+  width: min(100%, 1040px);
+  margin: 0 auto;
+  padding-bottom: 32px;
+}
+
+.sound-section-card {
+  overflow: hidden;
+  border: 2px solid rgba(147, 165, 252, 0.45);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(52, 36, 104, 0.94), rgba(16, 24, 72, 0.96));
+  box-shadow: 0 14px 30px rgba(4, 8, 35, 0.3);
+}
+
+.sound-section-heading {
   display: flex;
-  gap: 8px;
-  width: min(100%, 720px);
-  margin: 0 auto 12px;
-  padding: 5px 2px;
-  overflow-x: auto;
-  scrollbar-width: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(147, 165, 252, 0.3);
+  background: rgba(8, 15, 54, 0.48);
 }
 
-.sound-mission-picker[hidden] { display: none !important; }
-.sound-mission-picker::-webkit-scrollbar { display: none; }
+.sound-section-heading h2,
+.sound-section-heading p,
+.sound-group-copy h3,
+.sound-group-copy p {
+  margin: 0;
+}
 
-.sound-mission-chip {
-  flex: 0 0 48px;
-  min-height: 44px;
-  border: 2px solid rgba(147, 165, 252, 0.52);
+.sound-section-heading h2 {
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3vw, 1.8rem);
+}
+
+.sound-section-heading p {
+  margin-top: 3px;
+  color: var(--ink-muted);
+  font-size: 0.92rem;
+}
+
+.sound-section-heading > span {
+  flex: 0 0 auto;
+  padding: 7px 12px;
+  border: 1px solid rgba(124, 255, 178, 0.54);
   border-radius: 999px;
-  background: rgba(18, 24, 72, 0.9);
-  color: var(--ink);
-  font: 700 0.9rem var(--font-display);
+  color: var(--teal-soft);
+  font-weight: 800;
 }
 
-.sound-mission-chip.is-active {
-  border-color: var(--teal-soft);
-  background: rgba(28, 92, 92, 0.94);
+.sound-group-list {
+  display: grid;
+}
+
+.sound-group-row {
+  display: grid;
+  grid-template-columns: minmax(155px, 0.8fr) minmax(280px, 2fr) auto;
+  align-items: center;
+  gap: 16px;
+  padding: 15px 20px;
+}
+
+.sound-group-row + .sound-group-row {
+  border-top: 1px solid rgba(147, 165, 252, 0.2);
+}
+
+.sound-group-copy h3 {
+  font-size: 1.08rem;
+}
+
+.sound-group-copy p {
+  margin-top: 2px;
   color: var(--teal-soft);
-  box-shadow: 0 0 16px rgba(94, 234, 212, 0.3);
+  font: 700 0.68rem var(--font-display);
+  letter-spacing: 0.08em;
+}
+
+.sound-chip-list,
+.sound-group-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.sound-list-chip {
+  min-width: 52px;
+  min-height: 52px;
+  padding: 5px 9px;
+  border: 2px solid rgba(124, 255, 178, 0.58);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(39, 47, 117, 0.98), rgba(14, 24, 70, 0.98));
+  color: #fff;
+  font-family: var(--font-display);
+  box-shadow: inset 0 0 14px rgba(147, 165, 252, 0.2);
+}
+
+.sound-list-glyph {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.sound-list-chip small {
+  display: block;
+  margin-top: 4px;
+  color: var(--gold-soft);
+  font: 700 0.64rem var(--font-body);
+}
+
+.sound-list-chip.is-playing {
+  border-color: var(--gold-soft);
+  color: var(--gold-soft);
+  box-shadow: 0 0 0 5px rgba(251, 191, 36, 0.15), 0 0 22px rgba(251, 191, 36, 0.42);
+}
+
+.sound-group-actions {
+  justify-content: flex-end;
+}
+
+.sound-group-actions .btn {
+  min-width: 92px;
+  min-height: 44px;
+  padding: 9px 13px;
+  font-size: 0.84rem;
+}
+
+@media (max-width: 900px) {
+  .sound-group-row {
+    grid-template-columns: 1fr auto;
+  }
+  .sound-chip-list {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .sound-group-actions {
+    grid-column: 2;
+    grid-row: 1;
+  }
 }
 
 @media (max-width: 700px) {
+  .sound-section-heading,
+  .sound-group-row {
+    padding: 14px;
+  }
+  .sound-section-heading {
+    align-items: flex-start;
+  }
+  .sound-section-heading p {
+    max-width: 250px;
+  }
+  .sound-group-row {
+    grid-template-columns: 1fr;
+  }
+  .sound-chip-list,
+  .sound-group-actions {
+    grid-column: 1;
+  }
+  .sound-chip-list { grid-row: 2; }
+  .sound-group-actions {
+    grid-row: 3;
+    justify-content: flex-start;
+  }
   .phonics-hero {
     min-height: 250px;
   }
