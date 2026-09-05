@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="./css/styles.css?v=20260905list" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260905list" />
   <link rel="stylesheet" href="./css/math.css?v=20260811j" />
+  <link rel="stylesheet" href="./css/additionGame.css?v=20260905a" />
 </head>
 <body>
   <div id="app">
@@ -620,53 +621,38 @@
     </section>
 
     <!-- 地球・加法能量基地 -->
-    <section id="screen-math-earth-levels" class="screen math-screen" aria-label="地球・揀能量基地">
+    <section id="screen-math-earth-addition-select" class="screen math-screen addition-screen" aria-label="地球・揀能量基地">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-earth-levels">← 太空站</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-math-addition-select">← 太空站</button>
         <h1>地球・加法能量</h1>
         <div class="star-panel" style="min-height:56px;padding:8px 12px">
           <span class="star-icon">★</span>
-          <span class="star-meta"><strong id="math-earth-levels-stars">0/10</strong></span>
+          <span class="star-meta"><strong id="addition-select-stars">0/10</strong></span>
         </div>
       </div>
       <p class="section-lead">揀一個數字基地：由 5 開始，逐關解鎖</p>
-      <div class="math-addition-level-grid" id="math-earth-level-grid"></div>
+      <div class="addition-level-grid" id="addition-level-grid"></div>
     </section>
 
-    <section id="screen-math-earth-game" class="screen math-screen" aria-label="地球・能量方塊加法">
+    <section id="screen-math-earth-addition-play" class="screen math-screen addition-screen" aria-label="地球・能量方塊加法">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-earth-game">← 基地</button>
-        <h1 id="math-earth-game-title">5號能量基地</h1>
-        <div class="progress-pill" aria-label="任務進度">
-          <strong id="math-earth-mission-progress">1/4</strong>
+        <button type="button" class="btn btn-ghost" id="btn-back-math-addition-play">← 基地</button>
+        <h1 id="addition-play-title">5號能量基地</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta"><strong id="addition-play-stars">0/10</strong></span>
         </div>
       </div>
-      <div class="math-addition-stage">
-        <p class="math-addition-hint" id="math-earth-scenario"></p>
-        <p class="section-lead" id="math-earth-desc" style="margin:0;text-align:center"></p>
-        <div class="math-addition-board" id="math-earth-equation" aria-live="polite"></div>
-        <div class="math-addition-slots" id="math-earth-slots">
-          <div class="math-addition-slot">
-            <span class="math-addition-slot-label">已有能量</span>
-            <div class="math-addition-blocks" id="math-earth-blocks-a"></div>
-          </div>
-          <span class="math-addition-merge">+</span>
-          <div class="math-addition-slot math-addition-slot--b" id="math-earth-slot-b">
-            <span class="math-addition-slot-label">加埋</span>
-            <div class="math-addition-blocks math-addition-blocks--drop" id="math-earth-blocks-b"></div>
-          </div>
-        </div>
-        <p class="math-addition-hint">拖入或者撳能量方塊 ⬇️</p>
-        <div class="math-addition-warehouse" id="math-earth-warehouse"></div>
-        <p class="feedback" id="math-earth-feedback" aria-live="polite"></p>
+      <p class="addition-mission-progress" id="addition-mission-progress">任務 1/4</p>
+      <div class="addition-stage">
+        <p class="addition-scenario" id="addition-scenario"></p>
+        <p class="addition-desc" id="addition-desc"></p>
+        <div class="addition-equation" id="addition-equation" aria-live="polite"></div>
+        <div class="addition-slot-wrap"><div class="addition-slot" id="addition-slot"></div></div>
+        <div class="addition-warehouse" id="addition-warehouse"></div>
+        <p class="feedback" id="addition-feedback" aria-live="polite"></p>
       </div>
-      <div class="math-addition-celebrate" id="math-earth-celebrate" hidden>
-        <div class="math-addition-celebrate-burst" aria-hidden="true"></div>
-        <p class="math-addition-celebrate-say" id="math-earth-celebrate-say"></p>
-        <div class="btn-row">
-          <button type="button" class="btn" id="btn-math-earth-next">下一任務</button>
-        </div>
-      </div>
+      <div class="addition-merge-overlay" id="addition-merge-overlay" hidden></div>
     </section>
 
     <!-- 月球・先學一學（時間） -->
@@ -808,6 +794,7 @@
   <script src="./js/math-storage.js?v=20260811j"></script>
   <script src="./js/math-skills.js?v=20260811j"></script>
   <script src="./js/additionData.js?v=20260905a"></script>
+  <script src="./js/additionGame.js?v=20260905a"></script>
   <script src="./js/math-app.js?v=20260905a"></script>
   <script src="./js/version-check.js?v=20260903a"></script>
 </body>

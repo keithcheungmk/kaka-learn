@@ -520,19 +520,17 @@ def check_module_isolation() -> None:
 
 
 def check_addition_planet() -> None:
-    """地球加法星球：additionData 6 關（5–10）、獨立 screen、storage 進度欄。"""
-    if not Path("js/additionData.js").exists():
-        fail("addition-planet", "缺少 js/additionData.js")
+    """地球加法星球：additionData + additionGame 模組、6 關（5–10）。"""
+    for rel in ["js/additionData.js", "js/additionGame.js", "css/additionGame.css"]:
+        if not Path(rel).exists():
+            fail("addition-planet", f"缺少 {rel}")
     html = read("index.html")
-    for sid in ["screen-math-earth-levels", "screen-math-earth-game"]:
+    for sid in ["screen-math-earth-addition-select", "screen-math-earth-addition-play"]:
         if sid not in html:
             fail("addition-planet", f"index.html 缺少 #{sid}")
-    if "screen-math-size" in html or "screen-math-earth-learn" in html:
-        fail("addition-planet", "舊地球大細 screen 未清走")
-    if "additionData.js" not in html:
-        fail("addition-planet", "index.html 未載入 additionData.js")
-    if "additionGame.js" in html:
-        fail("addition-planet", "加法邏輯已併入 math-app.js，唔好再載入 additionGame.js")
+    for needle in ["additionData.js", "additionGame.js", "additionGame.css"]:
+        if needle not in html:
+            fail("addition-planet", f"index.html 未載入 {needle}")
     storage = strip_js_comments(read("js/math-storage.js"))
     if "additionProgress" not in storage or "completeAdditionMission" not in storage:
         fail("addition-planet", "math-storage.js 缺少 additionProgress／completeAdditionMission")
@@ -540,8 +538,8 @@ def check_addition_planet() -> None:
     bases = [int(m.group(1)) for m in re.finditer(r"targetNumber:\s*(\d+)", data_src)]
     if bases != list(range(5, 11)):
         fail("addition-planet", f"additionData 關卡 targetNumber 應為 5–10，而家係 {bases}")
-    if "openEarthLevelSelect" not in read("js/math-app.js"):
-        fail("addition-planet", "math-app.js 缺少地球加法流程 openEarthLevelSelect")
+    if "KakaAdditionGame" not in read("js/math-app.js"):
+        fail("addition-planet", "math-app.js 未整合 KakaAdditionGame")
 
 
 def check_math_boot_guard() -> None:
