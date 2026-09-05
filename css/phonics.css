@@ -190,6 +190,36 @@
   backdrop-filter: blur(2px);
 }
 
+.sound-mission-picker {
+  display: flex;
+  gap: 8px;
+  width: min(100%, 720px);
+  margin: 0 auto 12px;
+  padding: 5px 2px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.sound-mission-picker[hidden] { display: none !important; }
+.sound-mission-picker::-webkit-scrollbar { display: none; }
+
+.sound-mission-chip {
+  flex: 0 0 48px;
+  min-height: 44px;
+  border: 2px solid rgba(147, 165, 252, 0.52);
+  border-radius: 999px;
+  background: rgba(18, 24, 72, 0.9);
+  color: var(--ink);
+  font: 700 0.9rem var(--font-display);
+}
+
+.sound-mission-chip.is-active {
+  border-color: var(--teal-soft);
+  background: rgba(28, 92, 92, 0.94);
+  color: var(--teal-soft);
+  box-shadow: 0 0 16px rgba(94, 234, 212, 0.3);
+}
+
 @media (max-width: 700px) {
   .phonics-hero {
     min-height: 250px;

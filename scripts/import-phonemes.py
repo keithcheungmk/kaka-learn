@@ -1,102 +1,135 @@
 #!/usr/bin/env python3
-"""Validate and normalize a reviewed a-z human phonics recording set."""
+"""Create web-ready copies of Mama's 49 phonics recordings.
+
+The source folder is read-only by design. Each source contains three takes separated
+by silence; this importer selects the middle take, adds a short safety pad, normalizes
+volume, and writes compact mono MP3 copies into assets/phonemes.
+"""
 
 from __future__ import annotations
 
 import argparse
+import re
 import shutil
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import Dict, Optional
 
 ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_SOURCE = ROOT / "mama phonic recording"
 DESTINATION = ROOT / "assets" / "phonemes"
-LETTERS = "abcdefghijklmnopqrstuvwxyz"
-EXTENSIONS = (".wav", ".m4a", ".mp3", ".aac", ".flac", ".ogg")
+SOUNDS = (
+    *tuple("abcdefghijklmnoprstuvwxyz"),
+    "qu", "ck", "ff", "ll", "ss", "zz", "ch", "sh", "th", "ng",
+    "ai", "ee", "igh", "oa", "oo-long", "oo-short", "ar", "or", "ur",
+    "ow", "oi", "ear", "air", "er",
+)
 
 
-def find_source(folder: Path, letter: str) -> Optional[Path]:
-    found = [folder / f"{letter}{extension}" for extension in EXTENSIONS if (folder / f"{letter}{extension}").is_file()]
-    if len(found) > 1:
-        raise ValueError(f"{letter}: more than one recording found ({', '.join(path.name for path in found)})")
-    return found[0] if found else None
+def source_name(sound: str) -> str:
+    if sound in {"oo-long", "oo-short"}:
+        return f"OO_{sound.removeprefix('oo-')}.mp3"
+    return f"{sound.upper()}.mp3"
 
 
-def duration(path: Path) -> float:
-    result = subprocess.run(
-        ["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "default=noprint_wrappers=1:nokey=1", str(path)],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    return float(result.stdout.strip())
+def run(command: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(command, check=True, capture_output=True, text=True)
 
 
-def normalize(source: Path, destination: Path) -> None:
-    subprocess.run(
-        [
-            "ffmpeg", "-y", "-loglevel", "error", "-i", str(source),
-            "-af",
-            "highpass=f=70,silenceremove=start_periods=1:start_silence=0.025:start_threshold=-42dB:stop_periods=1:stop_silence=0.08:stop_threshold=-42dB,loudnorm=I=-18:TP=-2:LRA=7,apad=pad_dur=0.06",
-            "-ac", "1", "-ar", "44100", "-codec:a", "libmp3lame", "-b:a", "128k", str(destination),
-        ],
-        check=True,
-    )
+def duration(ffmpeg: Path, path: Path) -> float:
+    result = run([str(ffmpeg), "-hide_banner", "-i", str(path), "-f", "null", "-"])
+    match = re.search(r"Duration: (\d+):(\d+):([\d.]+)", result.stderr)
+    if not match:
+        raise RuntimeError(f"Cannot read duration: {path}")
+    return int(match[1]) * 3600 + int(match[2]) * 60 + float(match[3])
 
 
-def main() -> None:
+def active_spans(ffmpeg: Path, source: Path) -> list[tuple[float, float]]:
+    total = duration(ffmpeg, source)
+    result = run([
+        str(ffmpeg), "-hide_banner", "-i", str(source),
+        "-af", "silencedetect=noise=-38dB:d=0.12", "-f", "null", "-",
+    ])
+    silences: list[tuple[float, float]] = []
+    start: float | None = None
+    for line in result.stderr.splitlines():
+        start_match = re.search(r"silence_start: ([\d.]+)", line)
+        end_match = re.search(r"silence_end: ([\d.]+)", line)
+        if start_match:
+            start = float(start_match[1])
+        if end_match and start is not None:
+            silences.append((start, float(end_match[1])))
+            start = None
+    if start is not None:
+        silences.append((start, total))
+
+    spans: list[tuple[float, float]] = []
+    cursor = 0.0
+    for silence_start, silence_end in silences:
+        if silence_start - cursor >= 0.035:
+            spans.append((cursor, silence_start))
+        cursor = max(cursor, silence_end)
+    if total - cursor >= 0.035:
+        spans.append((cursor, total))
+    return spans
+
+
+def normalize_copy(ffmpeg: Path, source: Path, destination: Path) -> tuple[float, float]:
+    spans = active_spans(ffmpeg, source)
+    if len(spans) < 2:
+        raise RuntimeError(f"Expected repeated takes separated by silence: {source.name}")
+    start, end = spans[len(spans) // 2]
+    clip_start = max(0.0, start - 0.10)
+    clip_end = min(duration(ffmpeg, source), end + 0.14)
+    run([
+        str(ffmpeg), "-y", "-loglevel", "error", "-ss", f"{clip_start:.4f}",
+        "-to", f"{clip_end:.4f}", "-i", str(source),
+        "-af", "highpass=f=70,loudnorm=I=-18:TP=-2:LRA=7,afade=t=in:d=0.025,areverse,afade=t=in:d=0.04,areverse",
+        "-ac", "1", "-ar", "44100", "-codec:a", "libmp3lame", "-b:a", "96k",
+        str(destination),
+    ])
+    return start, end
+
+
+def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("folder", type=Path, help="folder containing a.wav through z.wav (other common formats accepted)")
-    parser.add_argument("--install", action="store_true", help="replace assets/phonemes after all checks pass")
+    parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
+    parser.add_argument("--ffmpeg", type=Path, default=Path(shutil.which("ffmpeg") or "ffmpeg"))
+    parser.add_argument("--install", action="store_true", help="install staged copies into assets/phonemes")
     args = parser.parse_args()
+    source_folder = args.source.resolve()
+    ffmpeg = args.ffmpeg.resolve()
+    if not source_folder.is_dir():
+        raise SystemExit(f"Source folder not found: {source_folder}")
+    if not ffmpeg.is_file():
+        raise SystemExit("ffmpeg not found; pass --ffmpeg /path/to/ffmpeg")
 
-    if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
-        raise SystemExit("ffmpeg and ffprobe are required")
-    folder = args.folder.expanduser().resolve()
-    if not folder.is_dir():
-        raise SystemExit(f"recording folder not found: {folder}")
+    expected = {source_name(sound) for sound in SOUNDS}
+    present = {path.name for path in source_folder.glob("*.mp3")}
+    missing, extra = sorted(expected - present), sorted(present - expected)
+    if missing or extra:
+        raise SystemExit(f"Recording inventory mismatch. Missing={missing}; extra={extra}")
 
-    sources: Dict[str, Path] = {}
-    problems = []
-    for letter in LETTERS:
-        try:
-            source = find_source(folder, letter)
-        except ValueError as error:
-            problems.append(str(error))
-            continue
-        if source is None:
-            problems.append(f"{letter}: recording missing")
-            continue
-        seconds = duration(source)
-        if seconds < 0.12 or seconds > 2.0:
-            problems.append(f"{letter}: duration {seconds:.2f}s is outside 0.12–2.00s")
-        sources[letter] = source
-        print(f"{letter}: {source.name} ({seconds:.2f}s)")
+    with tempfile.TemporaryDirectory(prefix="kaka-mama-phonemes-") as temp:
+        staged = Path(temp)
+        for sound in SOUNDS:
+            output = staged / f"{sound}.mp3"
+            start, end = normalize_copy(ffmpeg, source_folder / source_name(sound), output)
+            seconds = duration(ffmpeg, output)
+            if not 0.18 <= seconds <= 1.4:
+                raise SystemExit(f"{sound}: processed duration {seconds:.2f}s is outside 0.18–1.40s")
+            print(f"{sound:8} middle take {start:.2f}–{end:.2f}s -> {seconds:.2f}s")
 
-    if problems:
-        for problem in problems:
-            print(f"ERROR {problem}")
-        raise SystemExit(f"{len(problems)} problem(s); no files changed")
-    if not args.install:
-        print("Structural checks passed. Listen against docs/phonics-audio-standard.md, then rerun with --install.")
-        return
-
-    with tempfile.TemporaryDirectory(prefix="kaka-phonemes-") as temp_dir:
-        staged = Path(temp_dir)
-        for letter, source in sources.items():
-            normalize(source, staged / f"{letter}.mp3")
-        for letter in LETTERS:
-            seconds = duration(staged / f"{letter}.mp3")
-            if seconds < 0.12 or seconds > 2.1:
-                raise SystemExit(f"{letter}: normalized duration {seconds:.2f}s is invalid; no files changed")
+        if not args.install:
+            print("Preview checks passed; source files were not changed. Add --install to copy outputs.")
+            return 0
         DESTINATION.mkdir(parents=True, exist_ok=True)
-        for letter in LETTERS:
-            shutil.copy2(staged / f"{letter}.mp3", DESTINATION / f"{letter}.mp3")
+        for sound in SOUNDS:
+            shutil.copy2(staged / f"{sound}.mp3", DESTINATION / f"{sound}.mp3")
 
-    print(f"Installed 26 normalized human recordings in {DESTINATION}")
-    print("Update PHONEME_ASSET_VERSION and complete the listening checklist before deployment.")
+    print(f"Installed {len(SOUNDS)} processed copies in {DESTINATION}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

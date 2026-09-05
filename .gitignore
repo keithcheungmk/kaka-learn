@@ -1,3 +1,6 @@
 .smoke/
 _site/
 .DS_Store
+
+# 媽媽錄製的 Phonics 原始檔：只作本機母帶，網站只使用另外產生的副本。
+mama phonic recording/

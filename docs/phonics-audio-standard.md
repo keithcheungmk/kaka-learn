@@ -19,7 +19,7 @@ Kaka Learn 採用 Open Source Phonics 的發音教學方法作為錄音標準，
 5. 由同一位發音者、同一房間、同一咪高峰距離完成整套錄音。
 6. Open Source Phonics 是美國課程。Kaka Learn 採英式發音，短母音及 `r` 要由熟悉英式 synthetic phonics 的老師覆核。
 
-## a–z 第一套目標
+## 49 音目標
 
 | 字母 | 目標 | cue word | 錄音提示 |
 |---|---|---|---|
@@ -50,21 +50,26 @@ Kaka Learn 採用 Open Source Phonics 的發音教學方法作為錄音標準，
 | y | /j/ | yes | 滑音，不加 “uh” |
 | z | /z/ | zip | 可延續，不讀 “zed/zee” |
 
+除 a–z 基礎音外，網站亦收錄 `ck ff ll ss zz ch sh th ng qu`、
+`ai ee igh oa oo-long oo-short ar or ur ow oi ear air er`。`oo` 的長短音必須分開，
+而 `qu` 作一個 grapheme 教授。相同音的不同拼法（例如 c／k／ck）仍各自顯示，
+讓小朋友把聲音連結到正確字形。
+
 ## 錄音及安裝流程
 
-1. 每個字母錄三次，暫用 `a-1.wav`、`a-2.wav`、`a-3.wav`。
-2. 人耳選出最好的一次，改名為 `a.wav`；其餘字母同樣處理。
-3. 將完整 `a.wav` 至 `z.wav` 放在同一資料夾。
-4. 先只檢查：`python3 scripts/import-phonemes.py /錄音資料夾`
-5. 逐一戴耳機驗收後安裝：`python3 scripts/import-phonemes.py /錄音資料夾 --install`
-6. 更新 `js/phonics-app.js` 的 `PHONEME_ASSET_VERSION`，再跑完整 QA。
+1. 原始母帶放在 repo 根目錄的 `mama phonic recording/`；此資料夾永不修改、提交或部署。
+2. 每個原檔包含三次讀音，匯入器自動選取中間一次，保留少量起落緩衝並統一音量。
+3. 預覽檢查：`python3 scripts/import-phonemes.py --ffmpeg /path/to/ffmpeg`
+4. 安裝網站副本：在上述命令加 `--install`；只會寫入 `assets/phonemes/`。
+5. 更新 `js/phonics-app.js` 的 `PHONEME_ASSET_VERSION`，再跑完整 QA。
 
 ## 人耳驗收表
 
-- [ ] 26 個檔案都對應正確字母，沒有讀出字母名稱
+- [ ] 49 個網站副本都對應正確 grapheme，沒有讀出字母名稱
 - [ ] b、c/k、d、g、j、p、t 沒有尾隨「uh」
 - [ ] a、e、i、o、u 是課程所需短母音
-- [ ] c 與 k 播放同一個 `/k/`；q 是 `/kw/`；x 是 `/ks/`
+- [ ] c、k、ck 都是 `/k/`；qu 是 `/kw/`；x 是 `/ks/`
+- [ ] `th` 已確認是課程目前需要的清音或濁音；`oo-long`／`oo-short` 沒有互換
 - [ ] s 先採用 `/s/`、g 先採用硬音 `/g/`
 - [ ] 音量接近，沒有削波、爆咪、背景說話或明顯噪音
 - [ ] 用 `cat`、`map`、`bat`、`pin`、`dog` 實際逐音 blending，連接時沒有多餘母音

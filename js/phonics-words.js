@@ -1,32 +1,46 @@
-/** SPACE RANGER PHONICS（字母溫習 + CVC 詞族 + 常見字）
+/** SPACE RANGER PHONICS（49 音溫習 + CVC 詞族 + 常見字）
  *  獨立資料檔，唔改動 js/words.js 嘅任何現有內容。
  *  插圖同中文認字 app 一樣用系統 Emoji；字母統一用 Ranger Sound Energy 節點，
  *  唔用擬人方塊角色，避免表情搶走字形同讀音焦點。
  *
- *  Phase 2：字母溫習（a–z revision）+ 每個詞族一張主題卡 + 常見字分批。
+ *  聲音訓練基地：媽媽錄製的 49 音分成 10 個短 Mission；每組先聽熟，再做辨音。
  *  常見字：整詞認讀（listen；有清楚 emoji 先開 match）；唔開 build。
  *  抽象字（a/is/the/to…）可以唔配圖；動作／顏色／數優先配清晰 emoji。
  */
 
-/** 字母溫習順序（a–z；KAKA 已學過，用嚟 revision） */
-const LETTER_REVISION = [
-  'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-  'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-];
+/** 媽媽錄製的 49 個 Letters and Sounds 音素，按循序漸進的 Ranger Missions 分組。 */
+const PHONICS_SOUND_MISSIONS = [
+  { id: 'sound_01', label: '01', sounds: ['s', 'a', 't', 'p'] },
+  { id: 'sound_02', label: '02', sounds: ['i', 'n', 'm', 'd'] },
+  { id: 'sound_03', label: '03', sounds: ['g', 'o', 'c', 'k'] },
+  { id: 'sound_04', label: '04', sounds: ['ck', 'e', 'u', 'r'] },
+  { id: 'sound_05', label: '05', sounds: ['h', 'b', 'f', 'ff', 'l', 'll', 'ss'] },
+  { id: 'sound_06', label: '06', sounds: ['j', 'v', 'w', 'x', 'y', 'z', 'zz', 'qu'] },
+  { id: 'sound_07', label: '07', sounds: ['ch', 'sh', 'th', 'ng'] },
+  { id: 'sound_08', label: '08', sounds: ['ai', 'ee', 'igh', 'oa'] },
+  { id: 'sound_09', label: '09', sounds: ['oo-long', 'oo-short', 'ar', 'or', 'ur'] },
+  { id: 'sound_10', label: '10', sounds: ['ow', 'oi', 'ear', 'air', 'er'] },
+].map((mission) => ({
+  ...mission,
+  words: mission.sounds.map((sound) => ({
+    id: `sound_${sound.replace('-', '_')}`,
+    word: sound,
+    kind: 'phoneme',
+  })),
+}));
+
+const LETTER_REVISION = PHONICS_SOUND_MISSIONS.flatMap((mission) => mission.sounds);
 
 /** 主題：字母溫習排最前；跟住 CVC 詞族；sight words */
 const PHONICS_TOPICS = [
   {
     id: 'letters_rev',
-    title: '字母溫習',
-    blurb: 'a–z · 撳住聽字母音',
+    title: '字母音訓練基地',
+    blurb: '10 個 Sound Missions · 先聽熟再拼讀',
     cover: '🔤',
     modes: ['listen'],
-    words: LETTER_REVISION.map((ch) => ({
-      id: `ltr_${ch}`,
-      word: ch,
-      kind: 'letter',
-    })),
+    soundMissions: PHONICS_SOUND_MISSIONS,
+    words: PHONICS_SOUND_MISSIONS.flatMap((mission) => mission.words),
   },
   {
     id: 'cvc_at',
@@ -187,7 +201,7 @@ function getPhonicsTopicById(id) {
 }
 
 function isLetterItem(item) {
-  return !!(item && item.kind === 'letter');
+  return !!(item && (item.kind === 'letter' || item.kind === 'phoneme'));
 }
 
 /** 呢個主題入面所有詞出現過嘅字母（去重，做「砌一砌」字池） */
@@ -212,6 +226,7 @@ function letterTileHtml(ch) {
 
 window.KakaPhonicsWords = {
   LETTER_REVISION,
+  PHONICS_SOUND_MISSIONS,
   PHONICS_TOPICS,
   getPhonicsTopicById,
   isLetterItem,

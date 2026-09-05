@@ -27,17 +27,18 @@
   let pLearnWords = [];
   let pLearnIndex = 0;
   let pLearnPassedOnce = false;
+  let pSoundMissionIndex = 0;
   let pListenRound = null;
   let pMatchRound = null;
   let pBuildRound = null;
   let pBuildSelectedKey = null;
 
-  /** Cached HTMLAudioElement per letter (a–z phoneme clips). */
+  /** Cached HTMLAudioElement per grapheme／phoneme. */
   const phonemeAudioByLetter = Object.create(null);
   let activePhonemeAudio = null;
   let phonemeWaitTimer = null;
   /** Bump when replacing phoneme MP3s so iPad／Safari 唔用舊 cache。 */
-  const PHONEME_ASSET_VERSION = '20260818a';
+  const PHONEME_ASSET_VERSION = '20260905mama';
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -50,11 +51,18 @@
     }
   }
 
-  function normalizeLetter(ch) {
+  const PHONEME_FILES = new Set([
+    ...'abcdefghijklmnoprstuvwxyz',
+    'qu', 'ck', 'ff', 'll', 'ss', 'zz', 'ch', 'sh', 'th', 'ng',
+    'ai', 'ee', 'igh', 'oa', 'oo-long', 'oo-short', 'ar', 'or', 'ur',
+    'ow', 'oi', 'ear', 'air', 'er',
+  ]);
+
+  function normalizePhoneme(ch) {
     const s = String(ch || '')
       .trim()
       .toLowerCase();
-    return /^[a-z]$/.test(s) ? s : '';
+    return PHONEME_FILES.has(s) ? s : '';
   }
 
   function stopPhonemeAudio() {
@@ -74,12 +82,12 @@
   }
 
   /**
-   * Play synthetic-phonics sound for one letter (not the letter name).
-   * Clips live in ./assets/phonemes/{a-z}.mp3 — browser TTS cannot do isolated phonemes reliably.
+   * Play one reviewed phonics sound (not a letter name).
+   * Mama's 49 processed clips live in ./assets/phonemes/; browser TTS is never used as a phoneme fallback.
    * @returns {Promise<void>}
    */
   function playLetterSound(letter, { muted = isMuted(), onEnd = null } = {}) {
-    const ch = normalizeLetter(letter);
+    const ch = normalizePhoneme(letter);
     const finish = () => {
       if (typeof onEnd === 'function') onEnd();
     };
@@ -121,24 +129,20 @@
       audio.addEventListener('ended', done, { once: true });
       audio.addEventListener('error', done, { once: true });
       // Safety timeout if ended never fires (some WebViews)
-      phonemeWaitTimer = setTimeout(done, 2200);
+      phonemeWaitTimer = setTimeout(done, 1800);
       const p = audio.play();
       if (p && typeof p.catch === 'function') {
         p.catch(() => {
-          // Autoplay / missing file — last resort: letter name TTS (better than silence)
-          if (typeof speakEnglishTerm === 'function') {
-            speakEnglishTerm(ch, { muted: false, rate: 0.88, onEnd: done });
-            return;
-          }
+          // Never fall back to a letter name: it teaches a different sound.
           done();
         });
       }
     });
   }
 
-  /** Speak a phonics target: single letters → phoneme clip; words → English TTS. */
+  /** Speak a phonics target: known graphemes → phoneme clip; words → English TTS. */
   function speakPhonicsTarget(word, opts = {}) {
-    if (normalizeLetter(word)) {
+    if (normalizePhoneme(word)) {
       return playLetterSound(word, opts);
     }
     speakEnglishTerm(word, opts);
@@ -228,7 +232,7 @@
       return praise;
     }
     // Letters: phoneme MP3; CVC/sight: full English word TTS
-    if (normalizeLetter(word)) {
+    if (normalizePhoneme(word)) {
       setTimeout(() => {
         playLetterSound(word, { muted, onEnd: finish });
       }, 120);
@@ -260,7 +264,7 @@
         finish();
         return;
       }
-      if (normalizeLetter(word)) {
+      if (normalizePhoneme(word)) {
         playLetterSound(word, { muted, onEnd: finish });
         setTimeout(finish, 2000);
         return;
@@ -347,13 +351,35 @@
     const topic = getPhonicsTopicById(topicId);
     if (!topic) return;
     pActiveTopicId = topicId;
-    pLearnWords = shuffle(topic.words);
+    pSoundMissionIndex = 0;
+    pLearnWords = topic.soundMissions?.[0]?.words || shuffle(topic.words);
     pLearnIndex = 0;
     pLearnPassedOnce = false;
     const title = $('#phonics-learn-topic-title');
     if (title) title.textContent = topic.title;
+    renderSoundMissionPicker(topic);
     renderPhonicsLearnCard();
     showPScreen('learn');
+  }
+
+  function renderSoundMissionPicker(topic) {
+    const picker = $('#phonics-sound-mission-picker');
+    if (!picker) return;
+    const missions = topic?.soundMissions || [];
+    picker.hidden = missions.length === 0;
+    picker.innerHTML = missions
+      .map((mission, index) => `<button type="button" class="sound-mission-chip${index === pSoundMissionIndex ? ' is-active' : ''}" data-index="${index}" aria-label="Sound Mission ${mission.label}">${mission.label}</button>`)
+      .join('');
+    picker.querySelectorAll('.sound-mission-chip').forEach((button) => {
+      button.addEventListener('click', () => {
+        pSoundMissionIndex = Number(button.dataset.index) || 0;
+        pLearnWords = missions[pSoundMissionIndex].words;
+        pLearnIndex = 0;
+        pLearnPassedOnce = false;
+        renderSoundMissionPicker(topic);
+        renderPhonicsLearnCard();
+      });
+    });
   }
 
   function renderPhonicsLearnCard() {
@@ -372,7 +398,7 @@
       }
       if (term) term.textContent = word.word;
       if (lettersRow) lettersRow.innerHTML = '';
-      if (lead) lead.textContent = '撳卡聽字母音';
+      if (lead) lead.textContent = '先聽熟每個音，再玩聽音辨形';
     } else {
       if (illust) illust.innerHTML = word.emoji ? phonicsWordIllustHtml(word) : '';
       if (term) term.textContent = word.word;
@@ -507,7 +533,8 @@
 
   function currentTopicWords() {
     const topic = getPhonicsTopicById(pActiveTopicId);
-    return topic ? topic.words : [];
+    if (!topic) return [];
+    return topic.soundMissions?.[pSoundMissionIndex]?.words || topic.words;
   }
 
   /* ---------- 模式 A：聽一聽・揀圖(冇圖嘅 sight word 就揀字) ---------- */
@@ -537,7 +564,7 @@
     const prompt = $('#screen-phonics-listen .prompt-box p');
     if (prompt) {
       prompt.innerHTML = isLetter
-        ? '聽下，揀個字母'
+        ? '聽下，揀啱嘅字母音'
         : target.emoji
           ? '聽下，揀幅圖'
           : '聽下，揀個字';
