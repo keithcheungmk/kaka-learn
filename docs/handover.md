@@ -84,7 +84,7 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ### 2026-09-05 — Cursor：地球加法星球（能量方塊）
 
-- 重構地球 `compare-size`：舊大細長短 → 原創太空能量方塊加法（槽 A 預放 + 槽 B 拖放／點擊 + 倉庫方塊）
+- 重構地球 `compare-size`：舊大細長短 → 原創太空能量方塊加法（槽 A 預放 + 槽 B 拖放／點擊 + 倉庫方塊）；邏輯 inline 於 `math-app.js`（`screen-math-earth-levels`／`screen-math-earth-game`）
 - `js/additionData.js`：5–10 關生活情境任務；`kaka-math-v1` `additionProgress` 預設解鎖 5、逐關解鎖
 - 完成能量十（10-5）點亮地球；合併慶祝 + 粵語 TTS + 數理星
 - 已驗證：`check-invariants.py` 35 項、math-storage 5 項；Playwright 關卡／遊戲／慶祝截圖

@@ -16,7 +16,7 @@
   }
 
   function bootMath() {
-    if (!window.KakaMathStorage || !window.KakaMathSkills || !window.KakaAdditionData || !window.KakaAdditionGame) {
+    if (!window.KakaMathStorage || !window.KakaMathSkills || !window.KakaAdditionData) {
       console.error('KakaMath: math modules missing.');
       disableMathEntry();
       return;
@@ -28,8 +28,12 @@
       tryEarnStar,
       isPlanetLit,
       lightPlanet,
+      isAdditionBaseUnlocked,
+      isAdditionMissionDone,
+      completeAdditionMission,
     } = window.KakaMathStorage;
     const { MATH_PLANETS, getPlanetById, getNextPlanetId, planetGlobeHtml } = window.KakaMathSkills;
+    const { additionLevels, getLevelByBase } = window.KakaAdditionData;
     const speech = window.KakaSpeech || null;
 
     const ZH_NUM = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
@@ -73,8 +77,8 @@
       vlearn: '#screen-math-venus-learn',
       vplay: '#screen-math-venus-play',
       compare: '#screen-math-compare',
-      additionSelect: '#screen-math-earth-addition-select',
-      additionPlay: '#screen-math-earth-addition-play',
+      elevels: '#screen-math-earth-levels',
+      egame: '#screen-math-earth-game',
       mlearn: '#screen-math-moon-learn',
       mplay: '#screen-math-moon-play',
       time: '#screen-math-time',
@@ -90,6 +94,12 @@
     let compareRound = null;
     let compareCorrect = 0;
     let compareEmoji = '🌟';
+    let addMissionId = null;
+    let addLevelBase = 5;
+    let addMissionIdx = 0;
+    let addSlotB = 0;
+    let addBusy = false;
+    let addDragState = null;
     let mLearnIndex = 0;
     let timeBusy = false;
     let timeRound = null;
@@ -117,7 +127,7 @@
       const sel = screens[name] || screens.hub;
       const el = $(sel);
       el?.classList.add('active');
-      if (['count', 'compare', 'additionPlay', 'time'].includes(name)) {
+      if (['count', 'compare', 'egame', 'time'].includes(name)) {
         const fx = window.KakaStarFx;
         fx?.mountPlayScreen?.(el);
         fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
@@ -726,7 +736,351 @@
       }
     }
 
-    /* ---------- 地球・加法（KakaAdditionGame） ---------- */
+    /* ---------- 地球・加法（能量方塊） ---------- */
+    const EARTH_PLANET_ID = 'compare-size';
+
+    function updateEarthStarsDisplay() {
+      const state = loadState();
+      const txt = `${state.starsToday}/10`;
+      const a = $('#math-earth-levels-stars');
+      if (a) a.textContent = txt;
+    }
+
+    function isEarthLevelComplete(level) {
+      return level.missions.every((m) => isAdditionMissionDone(m.id));
+    }
+
+    function openEarthLevelSelect() {
+      updateState({ currentPlanetId: EARTH_PLANET_ID });
+      renderEarthLevelGrid();
+      showMathScreen('elevels');
+    }
+
+    function renderEarthLevelGrid() {
+      const grid = $('#math-earth-level-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      additionLevels.forEach((level) => {
+        const unlocked = isAdditionBaseUnlocked(level.base);
+        const done = isEarthLevelComplete(level);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `math-addition-level-card${unlocked ? '' : ' is-locked'}${done ? ' is-done' : ''}`;
+        btn.disabled = !unlocked;
+        btn.innerHTML = `
+          <span class="math-addition-level-num">${level.targetNumber}</span>
+          <span class="math-addition-level-title">${level.title}</span>
+        `;
+        btn.addEventListener('click', () => {
+          const first = level.missions.findIndex((m) => !isAdditionMissionDone(m.id));
+          openEarthGame(level.base, first >= 0 ? first : 0);
+        });
+        grid.appendChild(btn);
+      });
+      updateEarthStarsDisplay();
+    }
+
+    function getEarthMissionContext() {
+      const level = getLevelByBase(addLevelBase);
+      const mission = level.missions[addMissionIdx];
+      return { level, mission };
+    }
+
+    function createEnergyBlock({ preset = false } = {}) {
+      const b = document.createElement('span');
+      b.className = 'math-energy-block';
+      b.setAttribute('role', 'img');
+      b.setAttribute('aria-label', '能量方塊');
+      if (preset) {
+        b.dataset.preset = '1';
+        b.style.opacity = '0.85';
+        b.style.filter = 'hue-rotate(-18deg)';
+      } else {
+        b.classList.add('is-in-warehouse');
+        b.dataset.draggable = '1';
+      }
+      return b;
+    }
+
+    function countSlotBBlocks() {
+      return $('#math-earth-blocks-b')?.querySelectorAll('.math-energy-block:not([data-preset="1"])').length || 0;
+    }
+
+    function renderEarthEquation() {
+      const { level, mission } = getEarthMissionContext();
+      const eq = $('#math-earth-equation');
+      if (!eq) return;
+      addSlotB = countSlotBBlocks();
+      let mid =
+        addSlotB <= 0
+          ? '<span class="math-addition-eq-b">❓</span>'
+          : addSlotB < mission.b
+            ? `<span class="math-addition-eq-b">${addSlotB}</span>`
+            : `<span class="math-addition-eq-b">${mission.b}</span>`;
+      eq.innerHTML = `
+        <span class="math-addition-eq-a">${mission.a}</span>
+        <span>+</span>
+        ${mid}
+        <span>=</span>
+        <span class="math-addition-eq-sum">${level.targetNumber}</span>
+      `;
+    }
+
+    function renderEarthSlotA(mission) {
+      const box = $('#math-earth-blocks-a');
+      if (!box) return;
+      box.innerHTML = '';
+      for (let i = 0; i < mission.a; i += 1) {
+        box.appendChild(createEnergyBlock({ preset: true }));
+      }
+    }
+
+    function renderEarthSlotB() {
+      const box = $('#math-earth-blocks-b');
+      if (!box) return;
+      box.innerHTML = '';
+      addSlotB = 0;
+    }
+
+    function bindEarthBlockDrag(el) {
+      el.addEventListener('pointerdown', (e) => {
+        if (addBusy || el.dataset.preset === '1' || el.dataset.draggable === '0') return;
+        e.preventDefault();
+        addDragState = {
+          el,
+          id: e.pointerId,
+          warehouse: el.dataset.warehouse === '1',
+          fromCell: el.parentElement,
+          ghost: null,
+          x: e.clientX,
+          y: e.clientY,
+          moved: false,
+        };
+        el.setPointerCapture(e.pointerId);
+        el.classList.add('is-dragging');
+
+        const move = (ev) => {
+          if (!addDragState) return;
+          if (Math.hypot(ev.clientX - addDragState.x, ev.clientY - addDragState.y) < 8) return;
+          addDragState.moved = true;
+          if (!addDragState.ghost) {
+            const r = el.getBoundingClientRect();
+            addDragState.ghost = el.cloneNode(true);
+            addDragState.ghost.className = 'math-energy-block is-flying';
+            addDragState.ghost.style.cssText = `position:fixed;z-index:50;width:${r.width}px;height:${r.height}px;left:${r.left}px;top:${r.top}px;pointer-events:none;`;
+            document.body.appendChild(addDragState.ghost);
+          }
+          addDragState.ghost.style.left = `${ev.clientX - addDragState.ghost.offsetWidth / 2}px`;
+          addDragState.ghost.style.top = `${ev.clientY - addDragState.ghost.offsetHeight / 2}px`;
+        };
+
+        const up = (ev) => {
+          el.releasePointerCapture(ev.pointerId);
+          el.classList.remove('is-dragging');
+          el.removeEventListener('pointermove', move);
+          el.removeEventListener('pointerup', up);
+          addDragState?.ghost?.remove();
+          const ds = addDragState;
+          addDragState = null;
+          if (!ds?.moved) return;
+
+          const target = document.elementFromPoint(ev.clientX, ev.clientY);
+          const dropB = target?.closest?.('#math-earth-blocks-b');
+          const dropWh = target?.closest?.('#math-earth-warehouse');
+          const slotB = $('#math-earth-slot-b');
+
+          if (dropWh && ds.fromCell?.id === 'math-earth-blocks-b') {
+            returnEarthBlockToWarehouse(el);
+          } else if (dropB && ds.warehouse) {
+            placeEarthBlockFromWarehouse(el, dropB, ds.el);
+          } else if (dropB && ds.fromCell?.id === 'math-earth-blocks-b' && dropB !== ds.fromCell) {
+            dropB.appendChild(el);
+            syncEarthSlotB();
+          } else if (slotB && !dropB && !dropWh && ds.fromCell?.id === 'math-earth-blocks-b') {
+            returnEarthBlockToWarehouse(el);
+          }
+        };
+
+        el.addEventListener('pointermove', move);
+        el.addEventListener('pointerup', up);
+      });
+    }
+
+    function attachEarthBlock(el, { warehouse = false } = {}) {
+      if (warehouse) {
+        el.dataset.warehouse = '1';
+        el.classList.add('is-in-warehouse');
+      } else {
+        delete el.dataset.warehouse;
+        el.classList.remove('is-in-warehouse');
+      }
+      el.dataset.draggable = '1';
+      el.addEventListener('click', onEarthBlockTap);
+      bindEarthBlockDrag(el);
+    }
+
+    function onEarthBlockTap(e) {
+      if (addBusy || addDragState) return;
+      const block = e.currentTarget;
+      if (block.dataset.warehouse === '1') {
+        const box = $('#math-earth-blocks-b');
+        if (box) placeEarthBlockFromWarehouse(block, box, block);
+        return;
+      }
+      if (block.closest('#math-earth-blocks-b')) {
+        returnEarthBlockToWarehouse(block);
+      }
+    }
+
+    function placeEarthBlockFromWarehouse(source, dropBox, flyFrom) {
+      const { mission } = getEarthMissionContext();
+      const current = countSlotBBlocks();
+      if (current >= mission.b) return;
+
+      const go = () => {
+        const block = createEnergyBlock();
+        dropBox.appendChild(block);
+        attachEarthBlock(block);
+        if (source?.dataset.warehouse === '1') source.remove();
+        syncEarthSlotB();
+      };
+
+      if (flyFrom) {
+        const ghost = flyFrom.cloneNode(true);
+        ghost.className = 'math-energy-block is-flying';
+        const rf = flyFrom.getBoundingClientRect();
+        const rt = dropBox.getBoundingClientRect();
+        ghost.style.cssText = `position:fixed;z-index:50;width:${rf.width}px;height:${rf.height}px;left:${rf.left}px;top:${rf.top}px;pointer-events:none;`;
+        document.body.appendChild(ghost);
+        requestAnimationFrame(() => {
+          ghost.style.transition = 'left 0.32s ease, top 0.32s ease';
+          ghost.style.left = `${rt.left + rt.width / 2 - rf.width / 2}px`;
+          ghost.style.top = `${rt.top + rt.height / 2 - rf.height / 2}px`;
+        });
+        setTimeout(() => {
+          ghost.remove();
+          go();
+        }, 340);
+      } else {
+        go();
+      }
+    }
+
+    function returnEarthBlockToWarehouse(block) {
+      if (addBusy || block.dataset.preset === '1') return;
+      block.remove();
+      const b = createEnergyBlock();
+      attachEarthBlock(b, { warehouse: true });
+      $('#math-earth-warehouse')?.appendChild(b);
+      syncEarthSlotB();
+    }
+
+    function renderEarthWarehouse(mission) {
+      const box = $('#math-earth-warehouse');
+      if (!box) return;
+      box.innerHTML = '';
+      const extra = mission.b + Math.max(2, Math.ceil(mission.b / 2));
+      for (let i = 0; i < extra; i += 1) {
+        const b = createEnergyBlock();
+        attachEarthBlock(b, { warehouse: true });
+        box.appendChild(b);
+      }
+    }
+
+    function syncEarthSlotB() {
+      addSlotB = countSlotBBlocks();
+      const slotB = $('#math-earth-slot-b');
+      const { mission } = getEarthMissionContext();
+      slotB?.classList.toggle('is-drop-target', addSlotB < mission.b);
+      renderEarthEquation();
+      if (addSlotB >= mission.b) checkEarthAddition();
+    }
+
+    function openEarthGame(base, missionIdx = 0) {
+      addLevelBase = base;
+      addMissionIdx = missionIdx;
+      addBusy = false;
+      addDragState = null;
+      const { level, mission } = getEarthMissionContext();
+      addMissionId = mission.id;
+
+      const title = $('#math-earth-game-title');
+      if (title) title.textContent = level.title;
+      const prog = $('#math-earth-mission-progress');
+      if (prog) prog.textContent = `${addMissionIdx + 1}/${level.missions.length}`;
+      const scenario = $('#math-earth-scenario');
+      if (scenario) scenario.textContent = mission.scenario;
+      const desc = $('#math-earth-desc');
+      if (desc) desc.textContent = mission.desc;
+      const fb = $('#math-earth-feedback');
+      if (fb) fb.textContent = '';
+      const celeb = $('#math-earth-celebrate');
+      if (celeb) celeb.hidden = true;
+
+      renderEarthSlotA(mission);
+      renderEarthSlotB();
+      renderEarthWarehouse(mission);
+      renderEarthEquation();
+      $('#math-earth-slots')?.classList.remove('is-merging');
+      showMathScreen('egame');
+      speak(mission.desc);
+    }
+
+    function checkEarthAddition() {
+      if (addBusy) return;
+      const { level, mission } = getEarthMissionContext();
+      if (countSlotBBlocks() < mission.b) return;
+      addBusy = true;
+
+      $('#math-earth-slots')?.classList.add('is-merging');
+      const muted = isMuted();
+      speech?.playCorrectCue?.({ muted });
+
+      const celeb = $('#math-earth-celebrate');
+      const sayEl = $('#math-earth-celebrate-say');
+      const line = `${mission.a}加${mission.b}等於${level.targetNumber}！`;
+      if (sayEl) sayEl.textContent = line;
+      if (celeb) celeb.hidden = false;
+      speak(line);
+
+      setTimeout(() => {
+        $('#math-earth-slots')?.classList.remove('is-merging');
+        const wasLit = isPlanetLit(EARTH_PLANET_ID);
+        if (!isAdditionMissionDone(mission.id)) {
+          completeAdditionMission(mission.id);
+          const { gained } = tryEarnStar();
+          if (gained) {
+            speech?.playStarCue?.({ muted });
+            playMathStarReward();
+          }
+          const fb = $('#math-earth-feedback');
+          if (fb) fb.textContent = gained ? '好叻呀！★' : '好叻呀！';
+        }
+        updateEarthStarsDisplay();
+
+        if (!wasLit && isPlanetLit(EARTH_PLANET_ID)) {
+          addBusy = false;
+          if (celeb) celeb.hidden = true;
+          const fromP = getPlanetById(EARTH_PLANET_ID);
+          const toP = getPlanetById(getNextPlanetId(EARTH_PLANET_ID));
+          if (fromP && toP && fromP.id !== toP.id) offerWarpHop(fromP, toP);
+          else openEarthLevelSelect();
+          return;
+        }
+        addBusy = false;
+      }, 900);
+    }
+
+    function goEarthNextMission() {
+      const celeb = $('#math-earth-celebrate');
+      if (celeb) celeb.hidden = true;
+      const { level } = getEarthMissionContext();
+      if (addMissionIdx < level.missions.length - 1) {
+        openEarthGame(addLevelBase, addMissionIdx + 1);
+        return;
+      }
+      openEarthLevelSelect();
+    }
 
     /* ---------- 月球・先學（時間） ---------- */
     function openMoonLearn() {
@@ -888,7 +1242,7 @@
         return;
       }
       if (planet.id === 'compare-size') {
-        window.KakaAdditionGame.openEarthAddition();
+        openEarthLevelSelect();
         return;
       }
       if (planet.id === 'time') {
@@ -965,6 +1319,10 @@
           btn.addEventListener('click', () => onComparePick(btn.dataset.side));
         });
 
+      $('#btn-back-math-earth-levels')?.addEventListener('click', () => openHub());
+      $('#btn-back-math-earth-game')?.addEventListener('click', () => openEarthLevelSelect());
+      $('#btn-math-earth-next')?.addEventListener('click', () => goEarthNextMission());
+
       $('#btn-back-math-moon-learn')?.addEventListener('click', () => openHub());
       $('#math-moon-learn-tap')?.addEventListener('click', () => speakMoonLearn());
       $('#btn-math-moon-learn-prev')?.addEventListener('click', () => {
@@ -990,24 +1348,6 @@
 
     bind();
 
-    window.KakaAdditionGame.init({
-      storage: window.KakaMathStorage,
-      loadState,
-      updateState,
-      tryEarnStar,
-      isPlanetLit,
-      lightPlanet,
-      getPlanetById,
-      getNextPlanetId,
-      offerWarpHop,
-      openHub,
-      showMathScreen,
-      speak,
-      speech,
-      isMuted,
-      playMathStarReward,
-    });
-
     window.KakaMath = {
       openHub,
       goHome,
@@ -1016,7 +1356,8 @@
       openCount,
       openVenusLearn,
       openCompare,
-      openEarthAddition: () => window.KakaAdditionGame.openEarthAddition(),
+      openEarthLevelSelect,
+      openEarthGame,
       openMoonLearn,
       openTimeQuiz,
       openGalaxy,
