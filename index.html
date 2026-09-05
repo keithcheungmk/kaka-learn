@@ -317,7 +317,7 @@
     </section>
 
     <!-- SPACE RANGER PHONICS：揀主題 -->
-    <section id="screen-phonics-topics" class="screen phonics-screen" aria-label="SPACE RANGER PHONICS・揀主題">
+    <section id="screen-phonics-topics" class="screen phonics-screen phonics-hub-screen" aria-label="SPACE RANGER PHONICS・揀主題">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-phonics-topics">← 返去</button>
         <h1>SPACE RANGER PHONICS</h1>
@@ -339,8 +339,43 @@
         </div>
         <p class="phonics-hero-callout">聽字母音・連接能量・拼出英文字</p>
       </div>
-      <p class="section-lead">揀一個 Ranger Mission，先聽音，再出發！</p>
-      <div class="topic-grid" id="phonics-topic-grid"></div>
+
+      <div class="phonics-hub-suggest" id="phonics-hub-suggest" aria-label="建議下一站"></div>
+
+      <section class="phonics-hub-zone" aria-labelledby="phonics-hub-sounds-title">
+        <header class="phonics-hub-zone-head">
+          <h2 id="phonics-hub-sounds-title">Sound Training｜聲音訓練</h2>
+          <p>49 音 · 13 個 Sound Missions</p>
+        </header>
+        <div class="phonics-hub-grid" id="phonics-hub-sounds"></div>
+      </section>
+
+      <section class="phonics-hub-zone" aria-labelledby="phonics-hub-blend-title">
+        <header class="phonics-hub-zone-head">
+          <h2 id="phonics-hub-blend-title">Blend Words｜拼讀任務</h2>
+          <p>按已學聲音累積；全部可自由進入</p>
+        </header>
+        <div class="phonics-hub-grid" id="phonics-hub-blend"></div>
+      </section>
+
+      <section class="phonics-hub-zone" aria-labelledby="phonics-hub-tricky-title">
+        <header class="phonics-hub-zone-head">
+          <h2 id="phonics-hub-tricky-title">Tricky Words｜特別字</h2>
+          <p>暫時未能純靠 phonics 解碼</p>
+        </header>
+        <div class="phonics-hub-grid" id="phonics-hub-tricky"></div>
+      </section>
+
+      <section class="phonics-hub-zone" aria-labelledby="phonics-hub-vocab-title">
+        <header class="phonics-hub-zone-head">
+          <h2 id="phonics-hub-vocab-title">Vocabulary Missions｜詞彙任務</h2>
+          <p>動作・顏色・數字（唔算 Tricky Words）</p>
+        </header>
+        <div class="phonics-hub-grid" id="phonics-hub-vocab"></div>
+      </section>
+
+      <!-- 相容舊 selector：保留空容器畀 smoke／舊碼，實際卡片喺上面分區 -->
+      <div class="topic-grid" id="phonics-topic-grid" hidden></div>
     </section>
 
     <!-- SPACE RANGER PHONICS：49 音分類清單 -->
@@ -370,6 +405,10 @@
           <div class="learn-hear">🔊 聽一聽</div>
         </button>
         <div class="letter-row" id="phonics-learn-letters"></div>
+        <div class="phonics-blend-panel" id="phonics-blend-panel" hidden>
+          <div class="phonics-blend-nodes" id="phonics-blend-nodes" aria-hidden="true"></div>
+          <button type="button" class="btn btn-secondary" id="btn-phonics-blend-sounds">Blend the sounds</button>
+        </div>
       </div>
       <div class="btn-row learn-nav">
         <button type="button" class="btn btn-ghost" id="btn-phonics-learn-prev">← 上一張</button>
@@ -388,9 +427,9 @@
       </div>
       <p class="section-lead">而家先考考你識唔識</p>
       <div class="btn-row play-choices">
-        <button type="button" class="btn" id="btn-phonics-mode-listen">聽一聽・揀圖</button>
+        <button type="button" class="btn" id="btn-phonics-mode-listen">聽一聽・Hear the Sound</button>
         <button type="button" class="btn btn-secondary" id="btn-phonics-mode-match">配一配</button>
-        <button type="button" class="btn btn-accent" id="btn-phonics-mode-build">砌一砌・拼英文</button>
+        <button type="button" class="btn btn-accent" id="btn-phonics-mode-build">砌一砌・Build the Word</button>
       </div>
     </section>
 

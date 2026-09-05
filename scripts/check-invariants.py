@@ -482,6 +482,80 @@ def check_phonics_sound_energy() -> None:
         fail("phonics-sound-energy", "Phonics 字母必須使用共用 Sound Energy 節點")
 
 
+def check_phonics_curriculum_model() -> None:
+    """Phase A/B：graphemes 課程模型、hub 分區、Blend 掣、英文回饋、音檔齊備。"""
+    words_js = read("js/phonics-words.js")
+    app_js = strip_js_comments(read("js/phonics-app.js"))
+    html = read("index.html")
+    if "PHONICS_WORDS" not in words_js or "PHONICS_STAGES" not in words_js:
+        fail("phonics-curriculum", "缺少 PHONICS_WORDS／PHONICS_STAGES 課程模型")
+    if "wordGraphemes" not in words_js:
+        fail("phonics-curriculum", "需要 wordGraphemes（graphemes || letters）相容層")
+    if "PhonicsAudio" not in app_js:
+        fail("phonics-curriculum", "缺少 PhonicsAudio 序列控制器")
+    if "Blend the sounds" not in html:
+        fail("phonics-curriculum", "學習卡需要 Blend the sounds 掣")
+    if "phonics-hub-sounds" not in html or "phonics-hub-blend" not in html or "phonics-hub-tricky" not in html:
+        fail("phonics-curriculum", "Phonics 首頁要有 Sound／Blend／Tricky 三區")
+    if "Great job," not in app_js or "Try again!" not in app_js:
+        fail("phonics-curriculum", "Phonics 玩法要用英文回饋")
+    if "function speakRetryThenEnglish" in app_js:
+        start = app_js.index("function speakRetryThenEnglish")
+        end = app_js.find("\n  function ", start + 10)
+        body = app_js[start : end if end != -1 else start + 1200]
+        if "speakRetryFeedback(" in body:
+            fail("phonics-curriculum", "Phonics 答錯回饋唔可以再用粵語 speakRetryFeedback")
+
+    node = shutil.which("node")
+    if not node:
+        fail("phonics-curriculum", "需要 node 來檢查 grapheme 資料")
+        return
+    probe = r"""
+const fs = require('fs');
+const path = require('path');
+const code = fs.readFileSync(process.argv[1], 'utf8');
+global.window = { KakaEmojiArt: { html: (e) => e } };
+eval(code);
+const W = window.KakaPhonicsWords;
+const phonemeDir = path.join(path.dirname(process.argv[1]), '..', 'assets', 'phonemes');
+const joinBad = [];
+const missingAudio = new Set();
+for (const w of W.PHONICS_WORDS) {
+  const g = W.wordGraphemes(w);
+  if (g.join('') !== w.word) joinBad.push(w.id + ':' + g.join('|'));
+  for (const unit of g) {
+    if (!fs.existsSync(path.join(phonemeDir, unit + '.mp3'))) missingAudio.add(unit);
+  }
+}
+const ship = W.getPhonicsWordById('ship');
+const shipG = W.wordGraphemes(ship);
+if (!ship || shipG.length !== 3 || shipG[0] !== 'sh') {
+  throw new Error('ship must be graphemes [sh,i,p], got ' + JSON.stringify(shipG));
+}
+const missingWords = [];
+for (const stage of W.PHONICS_STAGES) {
+  for (const id of stage.wordIds) {
+    if (!W.getPhonicsWordById(id)) missingWords.push(id);
+  }
+}
+const tricky = new Set((W.PHONICS_TRICKY_SETS || []).flatMap((s) => s.wordIds));
+const decodable = new Set(W.PHONICS_WORDS.map((w) => w.id));
+const overlap = [...tricky].filter((id) => decodable.has(id));
+if (joinBad.length) throw new Error('grapheme join mismatch: ' + joinBad.join(','));
+if (missingAudio.size) throw new Error('missing phoneme audio: ' + [...missingAudio].join(','));
+if (missingWords.length) throw new Error('missing stage words: ' + missingWords.join(','));
+if (overlap.length) throw new Error('tricky/decodable overlap: ' + overlap.join(','));
+"""
+    r = subprocess.run(
+        [node, "-e", probe, str(ROOT / "js" / "phonics-words.js")],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if r.returncode != 0:
+        fail("phonics-curriculum", (r.stderr or r.stdout or "grapheme probe failed").strip()[:400])
+
+
 def check_phonics_skill_tracking() -> None:
     """Phase 3A：三種 Phonics 能力分開記錄，而且由正確玩法提供數據。"""
     storage = strip_js_comments(read("js/storage.js"))
@@ -785,6 +859,7 @@ CHECKS = [
     check_three_entries,
     check_phonics_ranger_theme,
     check_phonics_sound_energy,
+    check_phonics_curriculum_model,
     check_phonics_skill_tracking,
     check_storage_isolation,
     check_module_isolation,

@@ -544,3 +544,224 @@
 }
 
 /* 主頁品牌球淨係裝飾；字母隊入口喺主頁大掣 */
+
+
+/* —— Phase A hub zones —— */
+.phonics-hub-screen {
+  overflow-y: auto;
+}
+
+.phonics-hub-suggest {
+  width: min(100%, 760px);
+  margin: 0 auto 16px;
+}
+
+.phonics-hub-suggest-label {
+  margin: 0 0 8px;
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+  letter-spacing: 0.04em;
+}
+
+.phonics-hub-suggest-card,
+.phonics-hub-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+}
+
+.phonics-hub-suggest-card {
+  width: 100%;
+  padding: 16px 18px;
+  border-radius: 22px;
+  border: 2px solid rgba(251, 191, 36, 0.7);
+  background: linear-gradient(145deg, rgba(72, 48, 20, 0.95), rgba(28, 24, 78, 0.96));
+  color: var(--ink);
+  box-shadow: 0 12px 28px rgba(4, 8, 35, 0.35);
+  cursor: pointer;
+}
+
+.phonics-hub-zone {
+  width: min(100%, 1040px);
+  margin: 0 auto 22px;
+}
+
+.phonics-hub-zone-head {
+  margin-bottom: 10px;
+}
+
+.phonics-hub-zone-head h2 {
+  margin: 0;
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.6vw, 1.45rem);
+}
+
+.phonics-hub-zone-head p {
+  margin: 4px 0 0;
+  color: var(--ink-muted);
+  font-size: 0.92rem;
+}
+
+.phonics-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: 12px;
+}
+
+.phonics-hub-status {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: rgba(8, 15, 54, 0.55);
+  color: var(--teal-soft);
+}
+
+.phonics-hub-status[data-status="suggested"] {
+  color: #fde68a;
+  background: rgba(120, 80, 10, 0.55);
+}
+
+.phonics-hub-status[data-status="mastered"] {
+  color: #a3ffcb;
+}
+
+.phonics-hub-status[data-status="learning"] {
+  color: #93a5fc;
+}
+
+.phonics-hub-cta {
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: var(--ink);
+  opacity: 0.9;
+}
+
+/* —— Phase B blend panel —— */
+.phonics-blend-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.phonics-blend-panel[hidden] {
+  display: none !important;
+}
+
+.phonics-blend-nodes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.phonics-blend-node {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  opacity: 0.72;
+}
+
+.phonics-blend-node.is-active {
+  opacity: 1;
+  transform: scale(1.08);
+  filter: drop-shadow(0 0 10px rgba(163, 255, 203, 0.85));
+}
+
+.phonics-blend-node.is-blended {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.phonics-blend-link {
+  width: 12px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(251, 191, 36, 0.7);
+}
+
+@media (max-width: 700px) {
+  .phonics-hub-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Phase B learn compact landscape — blend panel 唔好撐爆 iPad 橫向一屏 */
+@media (max-height: 900px) {
+  #screen-phonics-learn .learn-stage {
+    gap: 6px;
+    padding-block: 6px;
+  }
+  #screen-phonics-learn .learn-stage-tap {
+    gap: 6px;
+  }
+  #screen-phonics-learn .letter-tile-lg {
+    width: min(96px, 18vh, 28vw);
+    height: min(96px, 18vh, 28vw);
+  }
+  #screen-phonics-learn .letter-tile-lg .sound-energy-glyph {
+    font-size: clamp(2rem, 8vh, 3rem);
+  }
+  #screen-phonics-learn .letter-row {
+    gap: 8px;
+    margin: 2px 0;
+  }
+  #screen-phonics-learn .letter-row .letter-tile {
+    width: clamp(36px, 8vh, 48px);
+    height: clamp(36px, 8vh, 48px);
+  }
+  #screen-phonics-learn .phonics-blend-panel {
+    gap: 4px;
+    margin-top: 2px;
+  }
+  #screen-phonics-learn .phonics-blend-node.letter-tile {
+    width: clamp(32px, 7vh, 44px);
+    height: clamp(32px, 7vh, 44px);
+  }
+  #screen-phonics-learn .btn-row {
+    margin-top: 4px;
+  }
+  #screen-phonics-learn .section-lead {
+    margin: 2px 0 4px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-height: 820px) {
+  #screen-phonics-learn .phonics-blend-nodes {
+    display: none; /* 橫向矮屏：節點動畫隱藏，保留 Blend 掣節省高度 */
+  }
+  #screen-phonics-learn .learn-hear {
+    display: none;
+  }
+}
+
+@media (max-height: 900px) {
+  #screen-phonics-learn .emoji-plate,
+  #screen-phonics-learn .emoji-plate-lg {
+    width: min(110px, 22vh) !important;
+    height: min(110px, 22vh) !important;
+  }
+  #screen-phonics-learn .learn-term {
+    font-size: clamp(1.6rem, 5vh, 2.2rem);
+  }
+  #screen-phonics-learn .game-header {
+    margin-bottom: 4px;
+  }
+  #screen-phonics-learn .btn-row.learn-nav,
+  #screen-phonics-learn .btn-row.learn-finish-row {
+    margin-top: 4px;
+    gap: 8px;
+  }
+  #screen-phonics-learn .btn-row .btn {
+    padding: 8px 14px;
+    font-size: 0.95rem;
+  }
+}
