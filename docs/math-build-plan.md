@@ -20,6 +20,12 @@
 - **Phase 1B ✅**：水星每輪 6 題，涵蓋逐粒點數、快速認量、數量守恆、數量配對、多一／少一；接入提示及掌握度資料。
 - 下一階段：Phase 1C 根據歷史表現混合已掌握、學習中及需重練題目，並在家長進度頁顯示數感摘要。
 
+### 2026-09-07 Montessori 互動升級（Phase M1 + M2）
+
+- **Phase M1 ✅**：`js/math-manipulatives.js` + `css/math-manipulatives.css` — 原生 emoji 拖放／撳放操作層（唔用 OpenMoji）；`scripts/test-math-manipulatives.mjs`。
+- **Phase M2 ✅（第一輪）**：水星「火箭入油」— 5 題拖入燃料槽、語音計數、三級提示、掌握度接入；玩法頁主入口；**「數一數・揀數（經典）」保留作後備**。
+- **刻意未做**：外星人餵食、星座修復（M2 Sprint 3）、金星平衡（M3）、個人化出題（M7）、家長數感摘要（M8）。
+
 ---
 
 ## Phase A 細節（今次做）

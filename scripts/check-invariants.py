@@ -549,6 +549,25 @@ def check_math_boot_guard() -> None:
         fail("math-boot", "math-app.js 開頭冇 try/catch 保護，掛咗會拖冧成頁")
 
 
+def check_math_manipulatives() -> None:
+    """Montessori 操作層：原生 emoji manipulative + 火箭入油 screen。"""
+    for rel in ["js/math-manipulatives.js", "css/math-manipulatives.css", "js/math-rocket-fuel.js"]:
+        if not Path(rel).exists():
+            fail("math-manipulatives", f"缺少 {rel}")
+    manip = read("js/math-manipulatives.js")
+    if "math-native-emoji" not in manip:
+        fail("math-manipulatives", "math-manipulatives.js 要用 .math-native-emoji（原生 emoji，唔用 OpenMoji）")
+    if "KakaEmojiArt" in manip:
+        fail("math-manipulatives", "math-manipulatives.js 唔好依賴 KakaEmojiArt")
+    html = read("index.html")
+    if "screen-math-fuel" not in html:
+        fail("math-manipulatives", "index.html 缺少 screen-math-fuel")
+    if "btn-math-mode-fuel" not in html:
+        fail("math-manipulatives", "index.html 缺少 btn-math-mode-fuel")
+    if "KakaMathRocketFuel" not in read("js/math-app.js"):
+        fail("math-manipulatives", "math-app.js 未整合 KakaMathRocketFuel")
+
+
 # ---------------------------------------------------------------- 資產
 
 ASSET_RE = re.compile(r"['\"(]\.?/?(assets/[A-Za-z0-9._/%-]+\.(?:jpg|jpeg|png|svg|webp|mp3|json))")
@@ -823,6 +842,7 @@ CHECKS = [
     check_module_isolation,
     check_addition_planet,
     check_math_boot_guard,
+    check_math_manipulatives,
     check_asset_refs,
     check_asset_manifests,
     check_image_formats,

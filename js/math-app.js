@@ -73,6 +73,7 @@
       learn: '#screen-math-learn',
       play: '#screen-math-play',
       count: '#screen-math-count',
+      fuel: '#screen-math-fuel',
       vlearn: '#screen-math-venus-learn',
       vplay: '#screen-math-venus-play',
       compare: '#screen-math-compare',
@@ -125,7 +126,7 @@
       const sel = screens[name] || screens.hub;
       const el = $(sel);
       el?.classList.add('active');
-      if (['count', 'compare', 'additionPlay', 'time'].includes(name)) {
+      if (['count', 'compare', 'additionPlay', 'time', 'fuel'].includes(name)) {
         const fx = window.KakaStarFx;
         fx?.mountPlayScreen?.(el);
         fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
@@ -447,7 +448,7 @@
       const state = loadState();
       if (stars) stars.textContent = `${state.starsToday}/10`;
       const title = $('#math-play-title');
-      if (title) title.textContent = '水星・去玩玩';
+      if (title) title.textContent = '水星・太空補給站';
       showMathScreen('play');
     }
 
@@ -1190,6 +1191,24 @@
       speech,
       isMuted,
       playMathStarReward,
+    });
+
+    window.KakaMathRocketFuel?.init({
+      loadState,
+      saveState,
+      mastery,
+      speak,
+      speech,
+      tryEarnStar,
+      isPlanetLit,
+      lightPlanet,
+      getPlanetById,
+      getNextPlanetId,
+      offerWarpHop,
+      openPlay,
+      showMathScreen,
+      playMathStarReward,
+      isMuted,
     });
 
     window.KakaMath = {

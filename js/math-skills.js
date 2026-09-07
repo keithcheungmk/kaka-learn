@@ -15,7 +15,7 @@
       skill: '數數',
       color: '#b6bcc4',
       order: 0,
-      blurb: '喺水星學數數：數吓有幾多粒',
+      blurb: '喺水星太空補給站：幫火箭裝能源',
       img: PLANET_IMG('mercury'),
     },
     {

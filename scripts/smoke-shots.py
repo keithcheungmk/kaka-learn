@@ -192,6 +192,24 @@ def walk(pg, url, shots: Path | None, tag: str):
         pg.click(entry)
         pg.wait_for_timeout(800)
         probe(step)
+        if entry == "#btn-start-math":
+            pg.click("#btn-math-launch")
+            pg.wait_for_timeout(500)
+            probe("數理・先學")
+            for _ in range(6):
+                if pg.is_visible("#btn-math-learn-play"):
+                    break
+                if pg.is_visible("#btn-math-learn-next") and not pg.locator("#btn-math-learn-next").is_hidden():
+                    pg.click("#btn-math-learn-next")
+                    pg.wait_for_timeout(80)
+            pg.click("#btn-math-learn-play")
+            pg.wait_for_timeout(400)
+            probe("數理・玩法")
+            pg.click("#btn-math-mode-fuel")
+            pg.wait_for_timeout(600)
+            probe("數理・火箭入油")
+            pg.click("#btn-back-math-fuel")
+            pg.wait_for_timeout(300)
         if entry == "#btn-start-phonics":
             pg.click("#phonics-topic-grid .topic-card:first-child")
             pg.wait_for_timeout(500)

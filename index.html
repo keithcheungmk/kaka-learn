@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="./css/styles.css?v=20260905list" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260905list" />
   <link rel="stylesheet" href="./css/math.css?v=20260811j" />
+  <link rel="stylesheet" href="./css/math-manipulatives.css?v=20260907a" />
   <link rel="stylesheet" href="./css/additionGame.css?v=20260905a" />
 </head>
 <body>
@@ -516,8 +517,31 @@
       </div>
       <p class="section-lead">揀一種玩法</p>
       <div class="btn-stack">
-        <button type="button" class="btn" id="btn-math-mode-count">數一數・揀數</button>
+        <button type="button" class="btn" id="btn-math-mode-fuel">火箭入油</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-mode-count">數一數・揀數（經典）</button>
       </div>
+    </section>
+
+    <!-- 水星・火箭入油 -->
+    <section id="screen-math-fuel" class="screen math-screen" aria-label="水星・火箭入油">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-fuel">← 玩法</button>
+        <h1>水星・火箭入油</h1>
+        <div class="progress-pill" aria-label="任務進度">
+          <strong id="math-fuel-progress">1/5</strong>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p id="math-fuel-prompt">幫火箭裝入能源。</p>
+        <button type="button" class="speak-btn" id="btn-math-fuel-speak" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="math-fuel-rocket-wrap">
+        <div class="math-fuel-rocket" id="math-fuel-rocket" aria-hidden="true">🚀</div>
+        <div class="math-fuel-target-label">目標</div>
+        <div class="math-fuel-target"><span id="math-fuel-target-num">5</span></div>
+      </div>
+      <div class="math-manip-stage" id="math-fuel-board" aria-label="拖入或撳能源"></div>
+      <p class="feedback" id="math-fuel-feedback" aria-live="polite"></p>
     </section>
 
     <!-- 水星・數一數揀數 -->
@@ -795,6 +819,8 @@
   <script src="./js/math-mastery.js?v=20260907a"></script>
   <script src="./js/math-question-engine.js?v=20260907a"></script>
   <script src="./js/math-skills.js?v=20260811j"></script>
+  <script src="./js/math-manipulatives.js?v=20260907a"></script>
+  <script src="./js/math-rocket-fuel.js?v=20260907a"></script>
   <script src="./js/additionData.js?v=20260905a"></script>
   <script src="./js/additionGame.js?v=20260905a"></script>
   <script src="./js/math-app.js?v=20260905a"></script>
