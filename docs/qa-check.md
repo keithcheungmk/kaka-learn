@@ -94,12 +94,13 @@
 > Exit 0 先好人手睇下面；exit 1 = 自動「有問題」，實作 agent 要修到綠先再檢查。
 > 佢已經自動覆蓋：JS syntax、24 個核心動物字、鹿類規則、`.build-ghost`、完成一輪派幣、
 > Profile 分倉、鎖放大、三個入口、storage 鍵分家、數理故障隔離、asset 404、圖片大細、外部依賴。
-> 跟住跑 `python3 scripts/smoke-shots.py`（要 `python3 -m http.server 5173` 開住）：
-> 5 種 iPad + 2 種 iPhone 尺寸 × 9 個畫面，檢查**溢出、元素重疊、內容被剪走**、白屏、404、console error，
-> 並影低截圖落 `.smoke/`。
+> 跟住跑 `python3 scripts/smoke-shots.py --no-shots`（要 `python3 -m http.server 5173` 開住）：
+> **預設家庭裝置**——iPad Pro 11 直／橫 + iPhone 16 Pro Max 直（共 3 個 viewport）× 全程畫面，
+> 檢查**溢出、元素重疊、內容被剪走**、白屏、404、console error。舊全尺寸用 `--all`。
 > **iPad 遊戲畫面要捲 = blocker**（KAKA 拖字會捲親）；只有揀主題／揀書准捲。
-> **手機**准捲，但**唔可以重疊、唔可以剪走內容**（試過「聽呢個詞」掣疊住淡色格）。
-> 檢查 agent 主力睇機器睇唔到嘅嘢：**視覺、幼齡適切度、玩法邏輯**（就住啲截圖睇）。
+> **手機**准捲，但**唔可以重疊、唔可以剪走內容**。
+> 檢查 agent 主力睇機器睇唔到嘅嘢：**視覺、幼齡適切度、玩法邏輯**（就住最多 2 張截圖睇）。
+> **唔好**再開 computerUse 重跑 smoke／行完整認字——燒 token、拖時間。
 
 - JS 要**語法正確**（新／改嘅檔要 parse 到）。
 - 新檔案／圖／樣式要**真係喺 PR 入面**（唔好淨係本機有）。
@@ -131,39 +132,59 @@
 
 ---
 
-## Fast review（硬性 ≤10 分鐘、少燒 token）
+## Fast review（硬性 ≤5 分鐘、少燒 token）
 
-檢查 agent **必須**跟呢條快徑；唔好重複 CI 已做嘅嘢，**預設禁止 computerUse**（除非 diff 改咗 CSS 動畫或新 UI 元件）。
+檢查 agent **必須**跟呢條快徑；唔好重複 CI 已做嘅嘢。
+
+### 家庭目標裝置（唯一日常驗收尺寸）
+
+| 裝置 | CSS viewport | 用途 |
+|------|--------------|------|
+| iPad Pro 11" 直 | 834×1194 | 日常直屏玩 |
+| iPad Pro 11" 橫 | 1194×834 | 砌一砌兩欄 |
+| iPhone 16 Pro Max 直 | 430×932 | 手機回歸（准捲、禁重疊） |
+
+12.9"／10.9"／細機**唔使**每次人手或 computerUse 驗；要全尺寸先 `smoke-shots.py --all`（罕見）。
 
 ### 小改動（swap 圖／改 2 個 label／文案微調）
 
 Keith 2026-09-03 同意嘅常設快徑。範圍：**唔改** layout、CSS、遊戲流程。
 
-- GitHub CI 綠（硬性約束 + iPad 版面）→ **即刻 merge**；唔好叫產品擁有人 QA
+- GitHub CI 綠 → **即刻 merge**；唔好叫產品擁有人 QA
 - 實作證據：**一張**改動畫面截圖就夠
-- **跳過** computerUse、demo 片、本地重跑 `smoke-shots.py`（CI 已經跑）
-- 仍然要：push 前本地 `python3 scripts/check-invariants.py` 綠；新漢字要 font subset；**唔好跳過 CI**
-- 真改版面／CSS／遊戲流程：仍然要完整 computerUse + 片 + 本地 smoke
+- **跳過** computerUse、demo 片、本地重跑 `smoke-shots.py`
+- 仍然要：push 前本地 `check-invariants.py` 綠；新漢字要 font subset；**唔好跳過 CI**
+
+### 版面／CSS／遊戲流程改動
+
+- 本地 `smoke-shots.py --no-shots`（家庭裝置）綠 + CI 綠 → merge
+- 證據最多 **2 張**截圖（優先改動頁；一張 iPad Pro 11 夠用就唔使再開手機）
+- **預設禁止** computerUse 同 demo 片
+- **例外先准短 computerUse**（仍然唔好拍長片）：改 CSS 動畫／飛星／過場；或者 smoke 綠但懷疑互動壞（撳掣無反應）
+- Keith 冇明確要求就**唔好**為檢查再開第二個 subagent
 
 | 步驟 | 做咩 | 時間上限 |
 |------|------|----------|
-| 0 | `python3 scripts/qa-report.py`（預填報告）；exit ≠0 → 直接「有問題」 | 5 min |
+| 0 | 睇 CI／`qa-report.py`；exit ≠0 → 「有問題」 | 2 min |
 | 1 | `git diff --stat`；**只 review 改動模組** | 1 min |
-| 2 | 視覺：用 `.smoke/` 或 CI artefact；**最多睇 2 張**相關截圖 | 3 min |
-| 3 | 補報告「視覺／幼齡」各 ≤3 行 → 結論 | 1 min |
+| 2 | 視覺：最多 **2 張**截圖（`.smoke/` 或實作 agent 交嘅圖） | 1–2 min |
+| 3 | 報告「視覺／幼齡」各 ≤2 行 → 結論 | 1 min |
 
 ### Diff 範圍（唔使全 app E2E）
 
 - 只改 `words.js` → 驗受影響主題學習／玩法一屏
-- 只改 `index.html` 主頁 → 驗主頁 + 三（四）入口可開
-- 只改 `star-fx.js` / ranger 圖 → 驗一個玩法屏 + 槍口射星
+- 只改 `index.html` 主頁 → 驗主頁 + 四入口可開
+- 只改 `star-fx.js` / ranger 圖 → 驗一個玩法屏 + 飛星（截圖／短片擇一）
 - 只改 `math-*` → 驗數理 + 認字／字母隊仍可進入
 
-### Token 節省
+### Token／時間節省（硬性）
 
-- **唔再**自己重跑 `check-invariants.py` / `smoke-shots.py`（CI + `qa-report.py` 已跑）
-- **唔用** browser agent 行完整認字流程
-- 報告總長 **≤15 行**（機器預填 + 人手補充）
+- **唔再**自己重跑 `check-invariants.py`／`smoke-shots.py`（CI 已跑；實作 agent 本地跑過就夠）
+- **唔用** browser agent 行完整認字／字母隊／數理流程
+- **唔錄** demo 片，除非動畫例外
+- **唔 fork** 額外檢查 subagent「再驗一次」
+- 報告總長 **≤12 行**
+- 目標：檢查 agent 牆鐘 **≤5 分鐘**（以前 ≤10）
 
 ---
 

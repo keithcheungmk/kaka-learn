@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Pre-fill QA review report for merge checks (target <5 min machine time).
 
-Runs check-invariants.py + smoke-shots.py --no-shots, scopes diff impact,
-and prints a markdown report matching docs/qa-check.md format.
+Runs check-invariants.py + smoke-shots.py --no-shots (family devices by default),
+scopes diff impact, and prints a markdown report matching docs/qa-check.md format.
 
 Usage:
     python3 -m http.server 5173 &   # required for smoke-shots
@@ -86,7 +86,7 @@ def main() -> int:
     ]
 
     print("```text")
-    print(f"結論：{conclusion}（機器檢查；檢查 agent 補視覺 ≤5 行，總時限 ≤10 分鐘）")
+    print(f"結論：{conclusion}（機器檢查；檢查 agent 補視覺 ≤5 行，總時限 ≤5 分鐘）")
     print()
     print("改咗咩：")
     if files:

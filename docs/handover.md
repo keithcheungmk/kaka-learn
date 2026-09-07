@@ -43,6 +43,7 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 - 橙④ `ob_xiezi`《鞋子》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「脫了」用肉月旁「脫」）。其他橙輯書仍係推測，唔好順手改。
 - 卡卡／禧禧頭像已對調（PR #91 已入 `main`）：卡卡＝露齒笑、禧禧＝圓框較淡微笑（`assets/profile-kaka.jpg`、`assets/profile-heihei.jpg`）。顯示名「禧禧」，儲存 id 仍係 `heihei`。
 - **小改動快徑**（Keith 2026-09-03 同意）：換圖／label／文案 → CI 綠即 merge；一張截圖；唔使片／computerUse／本地 smoke。詳見 `AGENTS.md`／`docs/qa-check.md`。
+- **家庭裝置版面回歸**（Keith 2026-09-07）：CI／agent 預設只跑 iPad Pro 11 直／橫 + iPhone 16 Pro Max；舊 12.9／10.9／細機用 `smoke-shots.py --all`。檢查 agent ≤5 分鐘、禁預設 computerUse。
 - `origin/main` 已含：P0 三項（PR #82）、KAKA RANGER 飛星（PR #83）、完成一輪慶祝 pose、favicon／og、sparkle、隨機 pose、UI 審查落地（PR #86）、ranger 朝右（PR #87）。
 
 ## 分工（點解要分：唔想兩個人同時改同一段 code）
@@ -81,6 +82,13 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
   唔係 CI 會紅。Codex／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
 
 ## 最近改動
+
+### 2026-09-07 · Cursor（Keith：精簡檢查——家庭裝置 + 禁預設 computerUse）
+
+- `smoke-shots.py` 預設只跑 iPad Pro 11 直／橫 + iPhone 16 Pro Max（3 viewport）；舊全尺寸改 `--all`
+- CI／deploy layout job 跟預設；檢查 agent Fast review 改 ≤5 分鐘；版面改動最多 2 張截圖、預設唔錄片／唔 computerUse
+- `check_family_smoke_devices()` 鎖住家庭裝置 viewport
+- **踩咗** `scripts/smoke-shots.py`、`.github/workflows/ci.yml`、`deploy-pages.yml`、`AGENTS.md`、`docs/qa-check.md`、`docs/handover.md`、`scripts/check-invariants.py`
 
 ### 2026-09-07 · Codex（Keith：數學 Phase 1B 水星數感任務）
 
@@ -490,7 +498,7 @@ Claude 做咗一次完整審查，結果喺 **`docs/site-review-2026-09.md`** �
 git fetch origin main && git rebase origin/main   # 開工第一件事；三個 agent 都可能 push main
 # 認領「進行中」→ 改嘢 → 清認領
 python3 scripts/check-invariants.py               # 一定要 exit 0
-python3 scripts/smoke-shots.py                    # 改過版面／CSS／遊戲流程就一定要跑；小改動（換圖／label／文案）唔使本地重跑，CI 已跑
+python3 scripts/smoke-shots.py --no-shots         # 家庭裝置；改過版面／CSS／流程先跑。全尺寸加 --all。小改動唔使本地重跑
 python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
 # merge 入 main → Pages 自動上線 → 返嚟更新呢個檔嘅「最近改動」（署名 Cursor／Claude／Codex）
 ```
