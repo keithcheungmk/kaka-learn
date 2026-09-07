@@ -124,6 +124,8 @@
       </section>
       <section class="progress-block" id="progress-math-block">
         <h2>數理星球</h2>
+        <p class="section-lead" id="progress-math-summary"></p>
+        <ul class="progress-need" id="progress-math-skills"></ul>
         <div class="progress-math-list" id="progress-math-list"></div>
       </section>
     </section>
@@ -517,16 +519,16 @@
       </div>
       <p class="section-lead">揀一種玩法</p>
       <div class="btn-stack">
-        <button type="button" class="btn" id="btn-math-mode-fuel">火箭入油</button>
+        <button type="button" class="btn" id="btn-math-mode-fuel">太空補給任務</button>
         <button type="button" class="btn btn-secondary" id="btn-math-mode-count">數一數・揀數（經典）</button>
       </div>
     </section>
 
-    <!-- 水星・火箭入油 -->
-    <section id="screen-math-fuel" class="screen math-screen" aria-label="水星・火箭入油">
+    <!-- 水星・太空補給站（火箭入油／外星人／星座） -->
+    <section id="screen-math-fuel" class="screen math-screen" aria-label="水星・太空補給站">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-math-fuel">← 玩法</button>
-        <h1>水星・火箭入油</h1>
+        <h1 id="math-fuel-title">水星・太空補給站</h1>
         <div class="progress-pill" aria-label="任務進度">
           <strong id="math-fuel-progress">1/5</strong>
         </div>
@@ -535,12 +537,19 @@
         <p id="math-fuel-prompt">幫火箭裝入能源。</p>
         <button type="button" class="speak-btn" id="btn-math-fuel-speak" aria-label="再聽一次">🔊 再聽一次</button>
       </div>
-      <div class="math-fuel-rocket-wrap">
+      <div class="math-mission-hero">
         <div class="math-fuel-rocket" id="math-fuel-rocket" aria-hidden="true">🚀</div>
+        <div class="math-mission-alien" id="math-mission-alien" hidden aria-hidden="true">👽</div>
+        <div class="math-mission-constellation" id="math-mission-constellation" hidden aria-hidden="true">✨</div>
+      </div>
+      <div class="math-fuel-rocket-wrap" id="math-fuel-target-wrap">
         <div class="math-fuel-target-label">目標</div>
         <div class="math-fuel-target"><span id="math-fuel-target-num">5</span></div>
       </div>
-      <div class="math-manip-stage" id="math-fuel-board" aria-label="拖入或撳能源"></div>
+      <div class="btn-row" id="math-mission-zero-row" hidden>
+        <button type="button" class="btn btn-secondary" id="btn-math-mission-zero">好啦，唔使放食物</button>
+      </div>
+      <div class="math-manip-stage" id="math-fuel-board" aria-label="拖入或撳物件"></div>
       <p class="feedback" id="math-fuel-feedback" aria-live="polite"></p>
     </section>
 
@@ -610,8 +619,26 @@
       </div>
       <p class="section-lead">揀一種玩法</p>
       <div class="btn-stack">
-        <button type="button" class="btn" id="btn-math-mode-compare">揀一揀・邊堆多</button>
+        <button type="button" class="btn" id="btn-math-mode-balance">公平分享・分一分</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-mode-compare">揀一揀・邊堆多</button>
       </div>
+    </section>
+
+    <!-- 金星・公平分享 -->
+    <section id="screen-math-venus-balance" class="screen math-screen" aria-label="金星・公平分享">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-venus-balance">← 玩法</button>
+        <h1>金星・公平分享</h1>
+        <div class="progress-pill" aria-label="任務進度">
+          <strong id="math-venus-balance-progress">1/5</strong>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p id="math-venus-balance-prompt">兩個朋友想一樣多，幫佢哋分一分。</p>
+        <button type="button" class="speak-btn" id="btn-math-venus-balance-speak" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="math-manip-stage" id="math-venus-balance-board" aria-label="撳一下移去另一邊"></div>
+      <p class="feedback" id="math-venus-balance-feedback" aria-live="polite"></p>
     </section>
 
     <!-- 金星・邊多邊少 -->
@@ -820,7 +847,8 @@
   <script src="./js/math-question-engine.js?v=20260907a"></script>
   <script src="./js/math-skills.js?v=20260811j"></script>
   <script src="./js/math-manipulatives.js?v=20260907a"></script>
-  <script src="./js/math-rocket-fuel.js?v=20260907a"></script>
+  <script src="./js/math-mercury-missions.js?v=20260907b"></script>
+  <script src="./js/math-venus-balance.js?v=20260907b"></script>
   <script src="./js/additionData.js?v=20260905a"></script>
   <script src="./js/additionGame.js?v=20260905a"></script>
   <script src="./js/math-app.js?v=20260905a"></script>

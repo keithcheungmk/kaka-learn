@@ -102,12 +102,12 @@
     }
   }
 
-  function createManipulative(piece, { reducedMotion } = {}) {
+  function createManipulative(piece, { reducedMotion, label = '物件' } = {}) {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'math-manipulative';
     btn.dataset.manipId = piece.id;
-    btn.setAttribute('aria-label', '能源');
+    btn.setAttribute('aria-label', label);
     const span = document.createElement('span');
     span.className = 'math-native-emoji';
     span.setAttribute('aria-hidden', 'true');
@@ -152,8 +152,13 @@
     const {
       target,
       available,
+      slotCount: slotCountOpt,
+      lockedIndices = [],
+      startFilled = 0,
+      mode = 'fill',
       emoji,
       emojiSet = 'energy',
+      pieceLabel = '物件',
       onPlace,
       onReturn,
       onComplete,
@@ -164,8 +169,11 @@
 
     if (!container) throw new Error('KakaMathManipulatives: container required');
 
-    const spec = createBoard({ target, available, emoji, emojiSet });
+    const slotsTotal = slotCountOpt ?? target;
+    const completionTarget = target;
+    const spec = createBoard({ target: slotsTotal, available, emoji, emojiSet });
     const state = createBoardState(spec);
+    const locked = new Set(lockedIndices);
     let busy = false;
     let dragState = null;
     let moves = 0;
@@ -180,7 +188,7 @@
     poolWrap.dataset.role = 'pool';
 
     const slotEls = [];
-    for (let i = 0; i < state.target; i += 1) {
+    for (let i = 0; i < slotsTotal; i += 1) {
       const cell = document.createElement('div');
       cell.className = 'math-slot is-empty';
       cell.dataset.slotIndex = String(i);
@@ -189,17 +197,35 @@
     }
 
     spec.pieces.forEach((piece) => {
-      const btn = createManipulative(piece, { reducedMotion });
+      const btn = createManipulative(piece, { reducedMotion, label: pieceLabel });
       elById.set(piece.id, btn);
       poolWrap.appendChild(btn);
     });
 
     container.append(slotsWrap, poolWrap);
 
+    function isLockedSlot(index) {
+      return locked.has(index);
+    }
+
+    function isLockedPiece(manipId) {
+      const idx = state.slots.indexOf(manipId);
+      return idx >= 0 && isLockedSlot(idx);
+    }
+
     function syncNextHint() {
       slotEls.forEach((c) => c.classList.remove('is-next'));
+      if (mode === 'remove') {
+        if (state.filledCount() > completionTarget) {
+          slotEls.forEach((c, i) => {
+            if (!state.slots[i]) return;
+            if (!isLockedSlot(i)) c.classList.add('is-next');
+          });
+        }
+        return;
+      }
       const idx = state.firstEmptyIndex();
-      if (idx >= 0 && state.filledCount() < state.target) {
+      if (idx >= 0 && state.filledCount() < completionTarget) {
         slotEls[idx]?.classList.add('is-next');
       }
     }
@@ -209,6 +235,7 @@
         const filled = !!state.slots[i];
         cell.classList.toggle('is-empty', !filled);
         cell.classList.toggle('is-filled', filled);
+        cell.classList.toggle('is-locked', isLockedSlot(i) && filled);
       });
       syncNextHint();
     }
@@ -225,14 +252,28 @@
     }
 
     function tryComplete() {
-      if (state.filledCount() !== state.target) return;
+      const filled = state.filledCount();
+      const ok = mode === 'remove' ? filled === completionTarget : filled === completionTarget;
+      if (!ok) return;
       busy = true;
-      onComplete?.({ moves, incorrectDrops, count: state.filledCount() });
+      onComplete?.({ moves, incorrectDrops, count: filled });
     }
 
-    function handlePlace(manipId, fromDemo = false) {
+    function handlePlace(manipId, fromDemo = false, slotIndexOverride = null) {
       if (busy) return { ok: false };
-      const result = state.placeFromPool(manipId);
+      let result;
+      if (slotIndexOverride != null && state.slots[slotIndexOverride] == null && state.pool.includes(manipId)) {
+        state.pool.splice(state.pool.indexOf(manipId), 1);
+        state.slots[slotIndexOverride] = manipId;
+        result = {
+          ok: true,
+          slotIndex: slotIndexOverride,
+          count: state.filledCount(),
+          complete: state.filledCount() === completionTarget,
+        };
+      } else {
+        result = state.placeFromPool(manipId);
+      }
       if (!result.ok) {
         if (result.reason === 'full') incorrectDrops += 1;
         return result;
@@ -243,19 +284,21 @@
       refreshSlotClasses();
       speakCount?.(result.count);
       onPlace?.({ count: result.count, slotIndex: result.slotIndex });
-      if (result.complete) tryComplete();
+      tryComplete();
       return result;
     }
 
     function handleReturn(manipId) {
-      if (busy) return { ok: false };
+      if (busy || isLockedPiece(manipId)) return { ok: false };
       const result = state.returnToPool(manipId);
       if (!result.ok) return result;
       moves += 1;
       const btn = elById.get(manipId);
       if (btn) appendToPool(btn);
       refreshSlotClasses();
+      speakCount?.(result.count);
       onReturn?.({ count: result.count });
+      tryComplete();
       return result;
     }
 
@@ -265,7 +308,6 @@
       if (loc.home === 'pool') {
         const r = handlePlace(manipId);
         if (!r.ok && r.reason === 'full') {
-          incorrectDrops += 1;
           onInvalidDrop?.({ incorrectDrops, reason: 'full' });
           animateReturn(btn, reducedMotion);
         }
@@ -330,10 +372,11 @@
           const targetEl = document.elementFromPoint(ev.clientX, ev.clientY);
           const slotCell = targetEl?.closest?.('.math-slot');
           const hitPool = targetEl?.closest?.('[data-role="pool"]');
+          const slotIdx = slotCell ? Number(slotCell.dataset.slotIndex) : -1;
 
-          if (slotCell && slotCell.classList.contains('is-empty') && ds.fromPool) {
-            handlePlace(ds.manipId);
-          } else if (hitPool && ds.fromSlot != null && ds.fromSlot >= 0) {
+          if (slotCell && slotCell.classList.contains('is-empty') && ds.fromPool && !isLockedSlot(slotIdx)) {
+            handlePlace(ds.manipId, false, slotIdx);
+          } else if (hitPool && ds.fromSlot != null && ds.fromSlot >= 0 && !isLockedSlot(ds.fromSlot)) {
             handleReturn(ds.manipId);
           } else if (ds.fromPool) {
             incorrectDrops += 1;
@@ -351,6 +394,33 @@
       const btn = elById.get(piece.id);
       bindManip(btn, piece.id);
     });
+
+    // 初始化：鎖定格、起始已放、或 remove 模式全滿
+    lockedIndices.slice().sort((a, b) => a - b).forEach((idx) => {
+      if (idx < 0 || idx >= slotsTotal || !state.pool.length) return;
+      const id = state.pool.shift();
+      state.slots[idx] = id;
+      const btn = elById.get(id);
+      if (btn) {
+        appendToSlot(btn, idx);
+        btn.dataset.draggable = '0';
+      }
+    });
+
+    if (startFilled > 0 && mode === 'fill') {
+      for (let i = 0; i < slotsTotal && state.pool.length && state.filledCount() < startFilled; i += 1) {
+        if (state.slots[i]) continue;
+        handlePlace(state.pool[0], true, i);
+      }
+    }
+
+    if (mode === 'remove') {
+      while (state.pool.length) {
+        const idx = state.firstEmptyIndex();
+        if (idx < 0) break;
+        handlePlace(state.pool[0], true, idx);
+      }
+    }
 
     refreshSlotClasses();
 
@@ -373,16 +443,140 @@
       clearHints() {
         slotEls.forEach((c) => c.classList.remove('is-hint-glow'));
       },
-      /** 第三級提示：示範移一件（唔自動填滿） */
       demoOneMove() {
-        if (busy || state.filledCount() >= state.target) return false;
+        if (busy) return false;
+        if (mode === 'remove') {
+          const id = state.slots.find((mid, i) => mid && !isLockedSlot(i));
+          if (!id) return false;
+          handleReturn(id);
+          return true;
+        }
         const id = state.pool[0];
         if (!id) return false;
-        handlePlace(id, true);
+        const idx = state.firstEmptyIndex();
+        if (idx < 0) return false;
+        handlePlace(id, true, idx);
         return true;
       },
       getStats() {
         return { moves, incorrectDrops, filled: state.filledCount() };
+      },
+    };
+  }
+
+  /** 金星公平分享：左右餐盤移動物件，兩邊一樣多就完成 */
+  function mountBalanceBoard(container, options) {
+    const {
+      leftCount,
+      rightCount,
+      emoji,
+      emojiSet = 'food',
+      pieceLabel = '食物',
+      onMove,
+      onComplete,
+      speakCount,
+      reducedMotion = prefersReducedMotion(),
+    } = options || {};
+
+    if (!container) throw new Error('KakaMathManipulatives: container required');
+    const total = leftCount + rightCount;
+    const spec = createBoard({ target: total, available: total, emoji, emojiSet });
+    let busy = false;
+    let moves = 0;
+    const sides = { left: [], right: [] };
+    const elById = new Map();
+
+    container.innerHTML = '';
+    const row = document.createElement('div');
+    row.className = 'math-balance-row';
+
+    function makePlate(side, label) {
+      const wrap = document.createElement('div');
+      wrap.className = `math-balance-plate math-balance-plate--${side}`;
+      wrap.dataset.side = side;
+      wrap.dataset.role = 'pool';
+      const cap = document.createElement('div');
+      cap.className = 'math-balance-plate-label';
+      cap.textContent = label;
+      const tray = document.createElement('div');
+      tray.className = 'math-balance-tray';
+      tray.dataset.side = side;
+      wrap.append(cap, tray);
+      return { wrap, tray };
+    }
+
+    const left = makePlate('left', '左邊');
+    const mid = document.createElement('div');
+    mid.className = 'math-balance-mid';
+    mid.textContent = '⇄';
+    const right = makePlate('right', '右邊');
+    row.append(left.wrap, mid, right.wrap);
+    container.appendChild(row);
+
+    spec.pieces.forEach((piece, i) => {
+      const btn = createManipulative(piece, { reducedMotion, label: pieceLabel });
+      elById.set(piece.id, btn);
+      const side = i < leftCount ? 'left' : 'right';
+      sides[side].push(piece.id);
+      (side === 'left' ? left.tray : right.tray).appendChild(btn);
+    });
+
+    function counts() {
+      return { left: sides.left.length, right: sides.right.length };
+    }
+
+    function tryComplete() {
+      const c = counts();
+      if (c.left !== c.right) return;
+      busy = true;
+      onComplete?.({ moves, count: c.left });
+    }
+
+    function movePiece(manipId, toSide) {
+      if (busy) return false;
+      const fromSide = sides.left.includes(manipId) ? 'left' : sides.right.includes(manipId) ? 'right' : null;
+      if (!fromSide || fromSide === toSide) return false;
+      sides[fromSide] = sides[fromSide].filter((id) => id !== manipId);
+      sides[toSide].push(manipId);
+      const btn = elById.get(manipId);
+      const tray = toSide === 'left' ? left.tray : right.tray;
+      if (btn) tray.appendChild(btn);
+      moves += 1;
+      const c = counts();
+      speakCount?.(c.left);
+      onMove?.(c);
+      tryComplete();
+      return true;
+    }
+
+    spec.pieces.forEach((piece) => {
+      const btn = elById.get(piece.id);
+      btn.addEventListener('click', () => {
+        const from = sides.left.includes(piece.id) ? 'left' : 'right';
+        const to = from === 'left' ? 'right' : 'left';
+        movePiece(piece.id, to);
+      });
+    });
+
+    return {
+      destroy() {
+        container.innerHTML = '';
+        busy = false;
+      },
+      setBusy(v) {
+        busy = !!v;
+      },
+      getStats() {
+        return { moves, ...counts() };
+      },
+      demoOneMove() {
+        if (counts().left > counts().right && sides.left.length) {
+          return movePiece(sides.left[0], 'right');
+        }
+        if (counts().right > counts().left && sides.right.length) {
+          return movePiece(sides.right[0], 'left');
+        }
+        return false;
       },
     };
   }
@@ -394,6 +588,7 @@
     createBoardState,
     createManipulative,
     mountSlotBoard,
+    mountBalanceBoard,
     prefersReducedMotion,
   };
 })();

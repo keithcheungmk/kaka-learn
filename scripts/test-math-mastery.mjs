@@ -100,4 +100,35 @@ test('缺少 skillId 或 missionId 時拒絕寫入', () => {
   assert.throws(() => M.recordMission({}, {}), /missionId/);
 });
 
+test('M7 pickSkillForReview 按 bucket 權重揀技能', () => {
+  const state = {
+    skillProgress: {
+      'count.oneToOne.1to5': { status: 'review', attempts: 5, firstTryCorrect: 2, recentResults: [] },
+      'count.subitize.1to5': { status: 'mastered', attempts: 20, firstTryCorrect: 18, recentResults: [] },
+    },
+  };
+  let reviewHits = 0;
+  for (let i = 0; i < 40; i += 1) {
+    const id = M.pickSkillForReview(state, M.MERCURY_SKILL_IDS, () => 0.05);
+    if (id === 'count.oneToOne.1to5') reviewHits += 1;
+  }
+  assert(reviewHits >= 30, `review bucket 應優先，而家 ${reviewHits}/40`);
+});
+
+test('M8 summarizeMathProgress 列出要練技能', () => {
+  const state = {
+    skillProgress: {
+      'count.oneToOne.1to5': { status: 'learning', attempts: 3, firstTryCorrect: 1, recentResults: [] },
+      'count.subitize.1to5': { status: 'mastered', attempts: 12, firstTryCorrect: 10, recentResults: [] },
+    },
+    missionHistory: [{ missionId: 'a' }, { missionId: 'b' }],
+  };
+  const summary = M.summarizeMathProgress(state);
+  assert.equal(summary.counts.mastered, 1);
+  assert.equal(summary.counts.learning, 1);
+  assert.equal(summary.needPractice.length, 1);
+  assert.equal(summary.missions, 2);
+  assert.match(summary.summaryLine, /掌握 1/);
+});
+
 console.log(`\n${passed} passed`);

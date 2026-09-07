@@ -76,6 +76,7 @@
       fuel: '#screen-math-fuel',
       vlearn: '#screen-math-venus-learn',
       vplay: '#screen-math-venus-play',
+      venusBalance: '#screen-math-venus-balance',
       compare: '#screen-math-compare',
       additionSelect: '#screen-math-earth-addition-select',
       additionPlay: '#screen-math-earth-addition-play',
@@ -126,7 +127,7 @@
       const sel = screens[name] || screens.hub;
       const el = $(sel);
       el?.classList.add('active');
-      if (['count', 'compare', 'additionPlay', 'time', 'fuel'].includes(name)) {
+      if (['count', 'compare', 'additionPlay', 'time', 'fuel', 'venusBalance'].includes(name)) {
         const fx = window.KakaStarFx;
         fx?.mountPlayScreen?.(el);
         fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
@@ -1193,7 +1194,7 @@
       playMathStarReward,
     });
 
-    window.KakaMathRocketFuel?.init({
+    window.KakaMathMercuryMissions?.init({
       loadState,
       saveState,
       mastery,
@@ -1206,6 +1207,24 @@
       getNextPlanetId,
       offerWarpHop,
       openPlay,
+      showMathScreen,
+      playMathStarReward,
+      isMuted,
+    });
+
+    window.KakaMathVenusBalance?.init({
+      loadState,
+      saveState,
+      mastery,
+      speak,
+      speech,
+      tryEarnStar,
+      isPlanetLit,
+      lightPlanet,
+      getPlanetById,
+      getNextPlanetId,
+      offerWarpHop,
+      openVenusPlay,
       showMathScreen,
       playMathStarReward,
       isMuted,

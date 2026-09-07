@@ -83,6 +83,13 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-07 · Cursor（Montessori M2 Sprint 3 + M3/M7/M8）
+
+- `js/math-mercury-missions.js`：水星每輪 5 題混合（火箭入油／外星人餵食／星座修復／多一少一／個人化重練）；玩法入口改「太空補給任務」；向後兼容 `KakaMathRocketFuel`
+- `js/math-venus-balance.js` + `#screen-math-venus-balance`：金星「公平分享・分一分」；`mountBalanceBoard` 雙餐盤
+- `js/math-mastery.js`：`pickSkillForReview`（40/30/20/10）+ `summarizeMathProgress`；進度頁數感摘要
+- **踩咗** `js/math-manipulatives.js`、`js/math-mercury-missions.js`、`js/math-venus-balance.js`、`css/math-manipulatives.css`、`js/math-app.js`、`js/math-mastery.js`、`js/app.js`、`index.html`、`js/star-fx.js`、`scripts/check-invariants.py`、`scripts/test-math-*.mjs`、`docs/math-build-plan.md`、`docs/handover.md`
+
 ### 2026-09-07 · Cursor（Keith：Montessori M1 + 水星火箭入油）
 
 - 新增 `js/math-manipulatives.js` + `css/math-manipulatives.css`：原生 emoji 拖放／撳放操作層（唔用 OpenMoji）；`scripts/test-math-manipulatives.mjs`
