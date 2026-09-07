@@ -82,6 +82,15 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-07 · Codex（Keith：數學 Phase 1B 水星數感任務）
+
+- 水星由單一「睇物件揀數字」升級為每輪 6 題數感任務：兩題逐粒點數、快速認量、數量守恆、數字配數量及多一／少一
+- 逐粒點數時每件只可計一次，數完才開放答案；答錯有兩級針對性提示，第二次會重設逐粒點數讓孩子真正再數，而不是亂試答案
+- 每題接入 Phase 1A：分開保存首次答對、協助完成、提示次數、表示方式及錯因；完整一輪保存任務摘要，已點亮水星重玩亦會正常結束
+- 新增純資料題目引擎及 1,000 輪隨機邊界測試；移除缺少 OpenMoji 資源的衛星隨機物件，避免偶發 404
+- 已驗證：桌面實際完成完整 6 題；iPad 橫／直及 iPhone 無捲動、重疊、橫向溢出或 console error；全站測試及 invariants 通過
+- **踩咗** `js/math-question-engine.js`、`js/math-app.js`、`css/math.css`、`index.html`、`scripts/test-math-question-engine.mjs`、`docs/math-build-plan.md`、`docs/handover.md`
+
 ### 2026-09-07 · Codex（Keith：數學 Phase 1A 學習紀錄與掌握度基礎）
 
 - `kaka-math-v1` 由 schema v3 無損升級至 v4；保留原有星星、已點亮星球及 Cursor 地球加法進度，並為卡卡／禧禧分別新增技能、錯題及任務紀錄
