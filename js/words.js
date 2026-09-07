@@ -867,8 +867,9 @@ const TOPICS = [
       wordIds: ['xin_letter', 'baba', 'de', 'gege', 'anan', 'mama', 'jiejie', 'yeye', 'meiyou'] },
     { id: 'rb_fenguo', verified: true, cardSource: '2026-09-05 掃描書本認字卡（紅⑤《分果果》）', title: '分果果', cover: '🍎',
       wordIds: ['gege', 'liugei', 'jiejie', 'zuihou', 'popo', 'fengguoguo', 'xiaogou', 'wo', 'he_and', 'yige', 'ge_mw', 'fen_share', 'zhi_mw', 'li_pear', 'cheng_char', 'guoguo', 'xiangjiao', 'pingguo', 'shuiguo', 'mama', 'mangguo', 'baba'] },
-    { id: 'rb_kuaipao', verified: true, cardSource: '2026-09-04 掃描字卡（紅⑥《快跑呀》；中文老師已審／Keith 授權）', title: '快跑呀', cover: '🏃',
-      wordIds: ['kuai', 'pao', 'a_exclaim', 'ya_exclaim', 'dahuo', 'xiaolu', 'laohu', 'tu', 'shizi', 'banmakuaipao', 'houzikuaipaoya', 'senlindahuoa'] },
+    { id: 'rb_kuaipao', verified: true, cardSource: '2026-09-05 完整書本 PDF（紅⑥《快跑呀》；第 3、7 頁共 12 張認字卡）', title: '快跑呀', cover: '🏃',
+      wordIds: [
+        'kuai', 'pao', 'a_exclaim', 'ya_exclaim', 'dahuo', 'xiaolu', 'laohu', 'tu', 'shizi', 'banmakuaipao', 'houzikuaipaoya', 'senlindahuoa' ] },
     { id: 'rb_shuijiao', verified: true, cardSource: '2026-09-05 掃描書本認字卡（紅⑦《誰在叫》）', title: '誰在叫', cover: '📣',
       wordIds: ['duzi', 'xiaodidi', 'shuizaijiao', 'jiao_call', 'zai', 'shui_who', 'e_hungry', 'mao', 'yang', 'niu', 'gou', 'niao', 'le', 'zhizhi', 'miaomiao', 'miemie', 'wangwang', 'moumou', 'wawa'] },
     { id: 'rb_huangye', verified: true, cardSource: '2026-09-05 掃描書本認字卡（紅⑧《黃葉》）', title: '黃葉', cover: '🍂',

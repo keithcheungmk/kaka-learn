@@ -37,7 +37,7 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 ## 而家嘅狀態（2026-09-05）
 
-- 紅輯 12 本書的 `wordIds` 已按掃描書內認字卡核實（`verified: true`）；紅⑥《快跑呀》採用 2026-09-04 中文老師已審字卡，其餘新核實書採用 2026-09-05 掃描。除紅③《雨傘》暫以故事頁印刷詞為準外，不可再用書名或插圖推測字表。**唔好 merge Gemini #58**。
+- 紅輯 12 本書的 `wordIds` 已按掃描書內認字卡核實（`verified: true`）；紅⑥《快跑呀》已再用 2026-09-05 完整書本 PDF 第 3、7 頁共 12 張認字卡複核，與原中文老師已審字表完全吻合。除紅③《雨傘》暫以故事頁印刷詞為準外，不可再用書名或插圖推測字表。**唔好 merge Gemini #58**。
 - 紅⑪ `rb_xiaoming`《小明和氣球》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「快起牀」保留「牀」）。
 - 紅③ `rb_yusan`《雨傘》已用 2026-08-11 書本 PDF 故事頁印刷詞覆寫（`verified: true`；詞／短語：橙／藍／綠／黃／花雨傘、收起小雨傘、太陽出來了、出來了）。**唔係獨立認字卡相**——若之後影到書後字卡，以字卡覆寫。
 - 橙④ `ob_xiezi`《鞋子》已用 2026-09-03 掃描字卡覆寫（`verified: true`；詞／短語；「脫了」用肉月旁「脫」）。其他橙輯書仍係推測，唔好順手改。
@@ -89,6 +89,13 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 - `kaka-math-v1` `additionProgress` 預設解鎖 5、逐關解鎖；完成能量十點亮地球；合併慶祝 + 粵語 TTS + 數理星
 - 已驗證：`check-invariants.py` 35 項、math-storage 5 項；關卡／遊戲 Playwright + demo 片
 - **踩咗** `js/additionData.js`、`js/additionGame.js`、`css/additionGame.css`、`js/math-app.js`、`index.html`、`js/math-storage.js`、`js/math-skills.js`、`scripts/check-invariants.py`、`scripts/test-math-storage.mjs`
+
+### 2026-09-05 · Codex（Keith：紅⑥《快跑呀》完整 PDF 複核）
+
+- 逐張核對完整 PDF 第 3 頁 8 張及第 7 頁 4 張認字卡；網站原有 12 項表面形、詞／短語邊界及順序全部吻合，沒有新增或刪除
+- 將 JSON 及網站 `cardSource` 由舊掃描字卡紀錄更新為完整 PDF 正式證據；以 `apply-book-cards.py --write --sync-topic` 重建及驗證 12 項書本字表
+- 本機介面確認「紅輯・快跑呀」顯示 1/12，書本入口及學習卡可正常開啟
+- **踩咗** `data/book-cards/rb_kuaipao.json`、`js/words.js`、`docs/handover.md`
 
 ### 2026-09-05 · Codex（Keith：Phonics 砌字完整英文聲音流程）
 
