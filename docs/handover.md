@@ -30,6 +30,7 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| Montessori M1 + 水星火箭入油 | **Cursor** | `js/math-manipulatives.js`, `js/math-rocket-fuel.js`, `css/math-manipulatives.css`, `js/math-app.js`, `index.html`, `css/math.css` | 2026-09-07 | Codex Phase 1B 後續；唔改 `star-fx.js`／CI 規則 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
