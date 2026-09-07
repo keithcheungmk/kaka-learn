@@ -60,10 +60,56 @@ test('舊單一資料歸入卡卡，禧禧由零開始', () => {
     }),
   );
   assert.equal(S.loadState().totalStars, 42);
+  assert.equal(S.SCHEMA_VERSION, 4);
+  assert.deepEqual(S.loadState().skillProgress, {});
+  assert.deepEqual([...S.loadState().mistakeHistory], []);
+  assert.deepEqual([...S.loadState().missionHistory], []);
   assert.deepEqual([...S.loadState().litPlanetIds], ['count']);
   S.setActiveProfile('heihei');
   assert.equal(S.loadState().totalStars, 0);
   assert.deepEqual([...S.loadState().litPlanetIds], []);
+});
+
+test('v3 Profile 資料升級 v4，保留原有加法與星球進度', () => {
+  const { S, localStorage } = loadMathStorage();
+  localStorage.setItem(
+    'kaka-math-v1',
+    JSON.stringify({
+      schemaVersion: 3,
+      activeProfileId: 'heihei',
+      profiles: {
+        kaka: { totalStars: 8, litPlanetIds: ['count'] },
+        heihei: {
+          totalStars: 3,
+          litPlanetIds: ['compare-qty'],
+          additionProgress: { unlockedBase: 7, completedMissions: ['5-1'] },
+        },
+      },
+    }),
+  );
+  const state = S.loadState();
+  assert.equal(state.totalStars, 3);
+  assert.deepEqual([...state.litPlanetIds], ['compare-qty']);
+  assert.equal(state.additionProgress.unlockedBase, 7);
+  assert.deepEqual([...state.additionProgress.completedMissions], ['5-1']);
+  assert.deepEqual(state.skillProgress, {});
+  assert.equal(JSON.parse(localStorage.getItem('kaka-math-v1')).schemaVersion, 4);
+});
+
+test('新學習紀錄按 Profile 分倉並限制歷史長度', () => {
+  const { S } = loadMathStorage();
+  S.setActiveProfile('kaka');
+  S.updateState({
+    skillProgress: { 'count.oneToOne.1to5': { attempts: 2 } },
+    mistakeHistory: Array.from({ length: 55 }, (_, i) => ({ i })),
+    missionHistory: Array.from({ length: 35 }, (_, i) => ({ i })),
+  });
+  assert.equal(S.loadState().skillProgress['count.oneToOne.1to5'].attempts, 2);
+  assert.equal(S.loadState().mistakeHistory.length, 50);
+  assert.equal(S.loadState().missionHistory.length, 30);
+  S.setActiveProfile('heihei');
+  assert.deepEqual(S.loadState().skillProgress, {});
+  assert.equal(S.loadState().mistakeHistory.length, 0);
 });
 
 test('Profile 選擇重新載入後保留', () => {

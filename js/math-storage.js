@@ -1,7 +1,7 @@
-/** 小鹿數理探險 — localStorage（kaka-math-v1；同認字 kaka-learn-v1 分開） */
+/** 數理探險 — localStorage v4（kaka-math-v1；同認字 kaka-learn-v1 分開） */
 (function () {
   const STORAGE_KEY = 'kaka-math-v1';
-  const SCHEMA_VERSION = 3;
+  const SCHEMA_VERSION = 4;
   const PROFILE_IDS = ['kaka', 'heihei'];
 
   function todayKey() {
@@ -23,6 +23,9 @@
       unlockedBase: 5,
       completedMissions: [],
     },
+    skillProgress: {},
+    mistakeHistory: [],
+    missionHistory: [],
   };
 
   const PROFILE_FIELD_KEYS = Object.keys(DEFAULT_STATE);
@@ -36,6 +39,9 @@
         unlockedBase: 5,
         completedMissions: [],
       },
+      skillProgress: {},
+      mistakeHistory: [],
+      missionHistory: [],
     };
   }
 
@@ -54,7 +60,7 @@
     return !!(
       parsed &&
       typeof parsed === 'object' &&
-      (parsed.schemaVersion || 0) >= SCHEMA_VERSION &&
+      (parsed.schemaVersion || 0) >= 3 &&
       parsed.profiles &&
       typeof parsed.profiles === 'object'
     );
@@ -76,6 +82,15 @@
     if (typeof out.additionProgress.unlockedBase !== 'number') {
       out.additionProgress.unlockedBase = 5;
     }
+    if (!out.skillProgress || typeof out.skillProgress !== 'object' || Array.isArray(out.skillProgress)) {
+      out.skillProgress = {};
+    } else {
+      out.skillProgress = JSON.parse(JSON.stringify(out.skillProgress));
+    }
+    if (!Array.isArray(out.mistakeHistory)) out.mistakeHistory = [];
+    else out.mistakeHistory = out.mistakeHistory.slice(-50).map((item) => ({ ...item }));
+    if (!Array.isArray(out.missionHistory)) out.missionHistory = [];
+    else out.missionHistory = out.missionHistory.slice(-30).map((item) => ({ ...item }));
     if (out.starsDate !== todayKey()) {
       out.starsToday = 0;
       out.starsDate = todayKey();
@@ -255,6 +270,7 @@
 
   window.KakaMathStorage = {
     STORAGE_KEY,
+    SCHEMA_VERSION,
     todayKey,
     loadState,
     saveState,

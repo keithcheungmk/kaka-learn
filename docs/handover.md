@@ -82,6 +82,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-07 · Codex（Keith：數學 Phase 1A 學習紀錄與掌握度基礎）
+
+- `kaka-math-v1` 由 schema v3 無損升級至 v4；保留原有星星、已點亮星球及 Cursor 地球加法進度，並為卡卡／禧禧分別新增技能、錯題及任務紀錄
+- 新增獨立 `math-mastery.js`：首次答對、提示後完成、提示次數、最近 12 次表現及跨日掌握判斷分開保存；已掌握技能近期退步會標記為需要重練
+- 錯題最多保留 50 項、任務最多 30 項，避免 `localStorage` 無限增長；今階段只建立資料基礎，沒有更改數學遊戲介面
+- 已驗證：math-storage 7 項、math-mastery 5 項、全站 invariants 35 項全部通過
+- **踩咗** `js/math-storage.js`、`js/math-mastery.js`、`scripts/test-math-storage.mjs`、`scripts/test-math-mastery.mjs`、`index.html`、`docs/handover.md`
+
 ### 2026-09-05 — Cursor：地球加法星球（能量方塊）
 
 - 重構地球 `compare-size`：舊大細長短 → 原創太空能量方塊加法（槽 A 預放 + 槽 B 拖放／點擊 + 倉庫方塊）
