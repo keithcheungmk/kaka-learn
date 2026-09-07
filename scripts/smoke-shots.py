@@ -1,15 +1,21 @@
 #!/usr/bin/env python3
-"""視覺煙霧測試 + iPad 版面回歸。
+"""視覺煙霧測試 + 家庭裝置版面回歸。
 
 兩件事：
-  1. 自動行三個入口同認字嘅完整流程，影 iPad 尺寸截圖，捉 404／console error／白屏。
-  2. **溢出檢查**：遊戲畫面喺 5 種 iPad 尺寸都唔准要捲。
+  1. 自動行三個入口同認字嘅完整流程，影截圖，捉 404／console error／白屏。
+  2. **溢出檢查**：遊戲畫面喺 iPad 尺寸都唔准要捲。
      （4 歲喺砌一砌拖字嗰陣要捲畫面 = 學習體驗直接爛，所以呢個係 blocker。）
+
+預設只跑 **家庭目標裝置**（慳時間／token；Keith 2026-09-07）：
+  - iPad Pro 11" 直／橫（834×1194／1194×834）
+  - iPhone 16 Pro Max 直（430×932）
+舊嘅 12.9"／10.9"／細機用 `--all` 先跑。
 
 用法：
     python3 -m http.server 5173 &
-    python3 scripts/smoke-shots.py                 # 影圖 + 檢查，圖出喺 .smoke/
-    python3 scripts/smoke-shots.py --no-shots      # 淨係做溢出檢查（CI 用，快啲）
+    python3 scripts/smoke-shots.py                 # 家庭裝置 + 影圖 → .smoke/
+    python3 scripts/smoke-shots.py --no-shots      # 家庭裝置、淨檢查（CI 預設）
+    python3 scripts/smoke-shots.py --all --no-shots  # 舊全尺寸回歸
 
 需要 playwright；冇裝就會講一聲然後跳過，唔會阻住其他檢查。
 """
@@ -31,17 +37,22 @@ SCROLLABLE = {
     "screen-progress",
 }
 
-IPADS = {
-    "iPadPro12.9-直": (1024, 1366),
-    "iPadPro12.9-橫": (1366, 1024),
+# 家庭目標裝置（預設／CI）——對齊 Keith 部 iPad Pro 11" 同 iPhone 16 Pro Max
+FAMILY_IPADS = {
     "iPadPro11-直": (834, 1194),
     "iPadPro11-橫": (1194, 834),
-    "iPad10.9-橫": (1180, 820),
+}
+FAMILY_PHONES = {
+    "iPhone16ProMax-直": (430, 932),
 }
 
-# 手機：一屏入唔晒係容許嘅（會準捲），但一定唔可以重疊或者剪走內容。
-# Keith 用 iPhone 試過，砌一砌嘅「聽呢個詞」掣曾經疊住淡色格 —— 就係喺呢度捉。
-PHONES = {
+# 擴充裝置（只喺 --all）
+EXTRA_IPADS = {
+    "iPadPro12.9-直": (1024, 1366),
+    "iPadPro12.9-橫": (1366, 1024),
+    "iPad10.9-橫": (1180, 820),
+}
+EXTRA_PHONES = {
     "iPhone-直": (393, 852),
     "iPhone-直細": (390, 660),
 }
@@ -194,6 +205,11 @@ def main() -> int:
     ap.add_argument("--url", default="http://localhost:5173")
     ap.add_argument("--out", default=".smoke")
     ap.add_argument("--no-shots", action="store_true", help="唔影圖，淨係做檢查")
+    ap.add_argument(
+        "--all",
+        action="store_true",
+        help="連 12.9\"／10.9\"／細機一齊跑（預設只跑家庭裝置：iPad Pro 11 + iPhone 16 Pro Max）",
+    )
     args = ap.parse_args()
 
     try:
@@ -207,13 +223,19 @@ def main() -> int:
     if shots:
         shots.mkdir(parents=True, exist_ok=True)
 
+    ipads = {**FAMILY_IPADS, **EXTRA_IPADS} if args.all else dict(FAMILY_IPADS)
+    phones = {**FAMILY_PHONES, **EXTRA_PHONES} if args.all else dict(FAMILY_PHONES)
+    # 手機：一屏入唔晒係容許嘅（會準捲），但一定唔可以重疊或者剪走內容。
+
     problems = 0
     errors: list[str] = []
     failed: list[str] = []
 
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
-        targets = [(n, wh, False) for n, wh in IPADS.items()] + [(n, wh, True) for n, wh in PHONES.items()]
+        targets = [(n, wh, False) for n, wh in ipads.items()] + [(n, wh, True) for n, wh in phones.items()]
+        mode = "全尺寸" if args.all else "家庭裝置（iPad Pro 11 + iPhone 16 Pro Max）"
+        print(f"smoke-shots：{mode}（{len(targets)} 個 viewport）")
         for name, (w, h), phone in targets:
             page = browser.new_page(viewport={"width": w, "height": h}, is_mobile=True, has_touch=True)
             page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
@@ -263,7 +285,7 @@ def main() -> int:
     if problems:
         print(f"\n結論：有 {problems} 個問題。遊戲畫面要捲 = blocker（KAKA 拖字會捲親）。")
         return 1
-    print(f"\n結論：{len(IPADS)} 種 iPad 尺寸一屏入晒、{len(PHONES)} 種手機尺寸冇重疊冇剪走，"
+    print(f"\n結論：{len(ipads)} 種 iPad 尺寸一屏入晒、{len(phones)} 種手機尺寸冇重疊冇剪走，"
           "冇 404、冇 console error。")
     if shots:
         print(f"截圖喺 {shots}/，交檢查 agent 睇視覺同幼齡適切度。")

@@ -773,6 +773,16 @@ def check_agent_collab_docs() -> None:
         fail("agent-docs", "docs/handover.md 要提到 Codex")
 
 
+def check_family_smoke_devices() -> None:
+    """版面回歸預設家庭裝置：iPad Pro 11 + iPhone 16 Pro Max（慳 CI／agent 時間）。"""
+    smoke = read("scripts/smoke-shots.py")
+    for needle in ("FAMILY_IPADS", "FAMILY_PHONES", "iPadPro11-直", "iPhone16ProMax-直", "--all"):
+        if needle not in smoke:
+            fail("family-smoke", f"smoke-shots.py 要有 {needle}（預設家庭裝置；--all 先跑舊全尺寸）")
+    if "834, 1194" not in smoke or "430, 932" not in smoke:
+        fail("family-smoke", "家庭裝置 viewport 要係 iPad Pro 11 834×1194 同 iPhone 16 Pro Max 430×932")
+
+
 def check_asset_weight() -> None:
     """效能：單張圖唔好超過 400KB，總資產唔好超過 12MB。"""
     total = 0
@@ -822,6 +832,7 @@ CHECKS = [
     check_learn_finish_always,
     check_cjk_halfwidth_punct,
     check_agent_collab_docs,
+    check_family_smoke_devices,
     check_asset_weight,
 ]
 

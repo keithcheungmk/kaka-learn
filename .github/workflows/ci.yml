@@ -34,7 +34,7 @@ jobs:
           grep -q "?v=${GITHUB_SHA::7}" _site/index.html
 
   layout:
-    name: iPad 版面回歸（唔准要捲）
+    name: 家庭裝置版面回歸（iPad Pro 11 + iPhone 16 Pro Max）
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -52,5 +52,5 @@ jobs:
             sleep 0.5
           done
 
-      - name: 5 種 iPad 尺寸 × 全部畫面
+      - name: 家庭裝置（iPad Pro 11 直／橫 + iPhone 16 Pro Max）
         run: python3 scripts/smoke-shots.py --no-shots
