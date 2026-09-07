@@ -1773,7 +1773,10 @@ function renderProgress() {
 
   const mathList = $('#progress-math-list');
   const mathBlock = $('#progress-math-block');
+  const mathSummary = $('#progress-math-summary');
+  const mathSkills = $('#progress-math-skills');
   const mathApi = window.KakaMathStorage;
+  const mathMastery = window.KakaMathMastery;
   const planets = window.KakaMathSkills?.MATH_PLANETS;
   if (mathList && mathApi && Array.isArray(planets)) {
     mathList.innerHTML = '';
@@ -1784,6 +1787,27 @@ function renderProgress() {
       chip.textContent = `${p.name} ${lit ? '已過' : '未過'}`;
       mathList.appendChild(chip);
     });
+    const mathState = mathApi.loadState?.() || {};
+    const summary = mathMastery?.summarizeMathProgress?.(mathState);
+    if (mathSummary && summary) {
+      const missionNote = summary.missions ? ` · 完成 ${summary.missions} 次任務` : '';
+      mathSummary.textContent = `${summary.summaryLine}${missionNote}`;
+    }
+    if (mathSkills && summary) {
+      mathSkills.innerHTML = '';
+      if (!summary.needPractice.length) {
+        const li = document.createElement('li');
+        li.className = 'is-empty';
+        li.textContent = '數感練習正常，去玩玩啦';
+        mathSkills.appendChild(li);
+      } else {
+        summary.needPractice.forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = `${item.label} · ${item.status === 'review' ? '要重練' : '學緊'}`;
+          mathSkills.appendChild(li);
+        });
+      }
+    }
     if (mathBlock) mathBlock.hidden = false;
   } else if (mathBlock) {
     mathBlock.hidden = true;

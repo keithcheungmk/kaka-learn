@@ -155,8 +155,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(6px, 1.5vh, 12px);
-  margin-bottom: clamp(6px, 1.5vh, 10px);
+  gap: clamp(4px, 1vh, 8px);
+  margin-bottom: clamp(4px, 1vh, 8px);
 }
 
 .math-fuel-rocket {
@@ -192,4 +192,101 @@
 .math-fuel-target-label {
   font-size: clamp(0.85rem, 2.5vw, 1rem);
   opacity: 0.85;
+}
+
+.math-mission-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 16px);
+  min-height: clamp(3rem, 10vw, 4.5rem);
+  margin-bottom: clamp(4px, 1vh, 8px);
+}
+
+.math-mission-alien {
+  font-size: clamp(2.5rem, 10vw, 4rem);
+  line-height: 1;
+}
+
+.math-mission-constellation {
+  font-size: clamp(2rem, 8vw, 3.2rem);
+  line-height: 1;
+  letter-spacing: 0.15em;
+  opacity: 0.75;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.math-mission-constellation.is-lit {
+  opacity: 1;
+  transform: scale(1.08);
+  text-shadow: 0 0 12px rgba(253, 230, 138, 0.85);
+}
+
+.math-manip-pool--decor {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.math-mission-decor {
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+}
+
+.math-slot.is-locked {
+  border-color: rgba(147, 197, 253, 0.65);
+  background: rgba(147, 197, 253, 0.12);
+}
+
+.math-balance-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 16px);
+  width: 100%;
+}
+
+.math-balance-plate {
+  flex: 1;
+  max-width: min(42vw, 220px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.math-balance-plate-label {
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  opacity: 0.9;
+}
+
+.math-balance-tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(6px, 1.5vw, 10px);
+  justify-content: center;
+  align-items: center;
+  min-height: clamp(88px, 20vw, 120px);
+  width: 100%;
+  padding: clamp(8px, 2vw, 12px);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px dashed rgba(255, 255, 255, 0.28);
+}
+
+.math-balance-mid {
+  align-self: center;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  opacity: 0.75;
+  padding-top: 1.5rem;
+}
+
+#screen-math-venus-balance.math-screen.active {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+#screen-math-venus-balance.math-screen.active::before {
+  background: radial-gradient(ellipse at 50% 20%, rgba(232, 194, 122, 0.22), transparent 55%);
 }

@@ -98,6 +98,86 @@
     return next;
   }
 
+  const MERCURY_SKILL_IDS = [
+    'count.oneToOne.1to5',
+    'count.oneToOne.1to10',
+    'count.oneToOne.0to10',
+    'count.subitize.1to5',
+    'count.oneMoreLess.0to10',
+  ];
+
+  const SKILL_LABELS = {
+    'count.oneToOne.1to5': '逐粒數 1–5',
+    'count.oneToOne.1to10': '逐粒數 1–10',
+    'count.oneToOne.0to10': '數到零',
+    'count.subitize.1to5': '快速認量',
+    'count.oneMoreLess.0to10': '多一／少一',
+    'count.quantityConservation.1to8': '數量守恆',
+    'count.numberMatch.0to10': '數量配對',
+    'compare-qty.fairShare': '公平分享',
+  };
+
+  const REVIEW_BUCKET_WEIGHTS = [
+    { status: 'review', weight: 0.4 },
+    { status: 'learning', weight: 0.3 },
+    { status: 'practising', weight: 0.2 },
+    { status: 'mastered', weight: 0.1 },
+  ];
+
+  function skillLabel(skillId) {
+    return SKILL_LABELS[skillId] || skillId.replace(/^count\./, '').replace(/\./g, ' ');
+  }
+
+  /** M7：按 40/30/20/10 由 review→learning→practising→mastered 揀技能 */
+  function pickSkillForReview(state, catalog = MERCURY_SKILL_IDS, random = Math.random) {
+    const progress = (state && state.skillProgress) || {};
+    const buckets = { review: [], learning: [], practising: [], mastered: [], new: [] };
+    catalog.forEach((id) => {
+      const stat = normalizeSkillStat(progress[id]);
+      (buckets[stat.status] || buckets.new).push(id);
+    });
+    const mistakes = (state && state.mistakeHistory) || [];
+    mistakes.slice(-5).forEach((m) => {
+      if (m.skillId && catalog.includes(m.skillId) && !buckets.review.includes(m.skillId)) {
+        buckets.review.push(m.skillId);
+      }
+    });
+    let roll = random();
+    for (const { status, weight } of REVIEW_BUCKET_WEIGHTS) {
+      if (buckets[status].length && roll < weight) return buckets[status][Math.floor(random() * buckets[status].length)];
+      roll -= weight;
+    }
+    const pool = [...buckets.review, ...buckets.learning, ...buckets.practising, ...catalog];
+    return pool[Math.floor(random() * pool.length)] || catalog[0];
+  }
+
+  /** M8：家長進度頁數感摘要 */
+  function summarizeMathProgress(state, catalog = MERCURY_SKILL_IDS) {
+    const progress = (state && state.skillProgress) || {};
+    const counts = { review: 0, learning: 0, practising: 0, mastered: 0, new: 0 };
+    catalog.forEach((id) => {
+      const stat = normalizeSkillStat(progress[id]);
+      counts[stat.status] = (counts[stat.status] || 0) + 1;
+    });
+    const needPractice = catalog
+      .map((id) => ({ id, stat: normalizeSkillStat(progress[id]) }))
+      .filter(({ stat }) => stat.status === 'review' || stat.status === 'learning')
+      .sort((a, b) => {
+        const wrongA = a.stat.attempts - a.stat.firstTryCorrect;
+        const wrongB = b.stat.attempts - b.stat.firstTryCorrect;
+        return wrongB - wrongA || b.stat.attempts - a.stat.attempts;
+      })
+      .slice(0, 5)
+      .map(({ id, stat }) => ({ id, label: skillLabel(id), status: stat.status }));
+    const missions = Array.isArray(state?.missionHistory) ? state.missionHistory.length : 0;
+    return {
+      counts,
+      needPractice,
+      missions,
+      summaryLine: `掌握 ${counts.mastered} · 學緊 ${counts.learning + counts.practising} · 要重練 ${counts.review}`,
+    };
+  }
+
   function recordMission(state, mission) {
     if (!mission || typeof mission.missionId !== 'string' || !mission.missionId.trim()) {
       throw new Error('KakaMathMastery: missionId is required');
@@ -116,5 +196,10 @@
     determineStatus,
     recordAttempt,
     recordMission,
+    MERCURY_SKILL_IDS,
+    SKILL_LABELS,
+    skillLabel,
+    pickSkillForReview,
+    summarizeMathProgress,
   };
 })();

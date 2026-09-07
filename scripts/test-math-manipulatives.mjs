@@ -79,4 +79,8 @@ test('MATH_EMOJI_SETS 每組至少一個 emoji', () => {
   });
 });
 
+test('mountBalanceBoard 存在', () => {
+  assert.equal(typeof M.mountBalanceBoard, 'function');
+});
+
 console.log(`\n${passed} passed`);

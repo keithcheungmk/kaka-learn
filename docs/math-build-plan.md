@@ -20,11 +20,15 @@
 - **Phase 1B ✅**：水星每輪 6 題，涵蓋逐粒點數、快速認量、數量守恆、數量配對、多一／少一；接入提示及掌握度資料。
 - 下一階段：Phase 1C 根據歷史表現混合已掌握、學習中及需重練題目，並在家長進度頁顯示數感摘要。
 
-### 2026-09-07 Montessori 互動升級（Phase M1 + M2）
+### 2026-09-07 Montessori 互動升級（Phase M1 + M2 + Sprint 3 + M3/M7/M8）
 
 - **Phase M1 ✅**：`js/math-manipulatives.js` + `css/math-manipulatives.css` — 原生 emoji 拖放／撳放操作層（唔用 OpenMoji）；`scripts/test-math-manipulatives.mjs`。
 - **Phase M2 ✅（第一輪）**：水星「火箭入油」— 5 題拖入燃料槽、語音計數、三級提示、掌握度接入；玩法頁主入口；**「數一數・揀數（經典）」保留作後備**。
-- **刻意未做**：外星人餵食、星座修復（M2 Sprint 3）、金星平衡（M3）、個人化出題（M7）、家長數感摘要（M8）。
+- **Phase M2 Sprint 3 ✅**：`js/math-mercury-missions.js` — 每輪 5 題混合（火箭入油 → 外星人餵食 → 星座修復 → 多一少一 → 個人化重練）；零題用「好啦」掣；向後兼容 `KakaMathRocketFuel`。
+- **Phase M3 ✅（公平分享）**：`js/math-venus-balance.js` + `mountBalanceBoard` — 金星「公平分享・分一分」5 題。
+- **Phase M7 ✅**：`math-mastery.js` `pickSkillForReview` — 40/30/20/10 review→learning→practising→mastered。
+- **Phase M8 ✅**：進度頁 `#progress-math-summary` / `#progress-math-skills` — 數感摘要同要練技能。
+- **刻意未做**：M3 貨艙平衡、隊伍配對（Sprint 4–5）。
 
 ---
 
