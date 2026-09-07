@@ -2763,6 +2763,7 @@ body {
   .space-ranger[data-ranger-screen="screen-phonics-listen"],
   .space-ranger[data-ranger-screen="screen-phonics-match"],
   .space-ranger[data-ranger-screen="screen-math-count"],
+  .space-ranger[data-ranger-screen="screen-math-fuel"],
   .space-ranger[data-ranger-screen="screen-math-compare"],
   .space-ranger[data-ranger-screen="screen-math-earth-game"],
   .space-ranger[data-ranger-screen="screen-math-time"] {

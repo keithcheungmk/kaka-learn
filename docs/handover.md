@@ -83,6 +83,13 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-07 · Cursor（Keith：Montessori M1 + 水星火箭入油）
+
+- 新增 `js/math-manipulatives.js` + `css/math-manipulatives.css`：原生 emoji 拖放／撳放操作層（唔用 OpenMoji）；`scripts/test-math-manipulatives.mjs`
+- 新增 `js/math-rocket-fuel.js` + `#screen-math-fuel`：5 題火箭入油、語音計數、三級提示、掌握度接入；玩法頁主入口「火箭入油」；「數一數・揀數（經典）」保留作後備
+- `check-invariants.py` 加 `check_math_manipulatives()`；`smoke-shots.py` 數理流程探測火箭入油畫面
+- **踩咗** `js/math-manipulatives.js`、`js/math-rocket-fuel.js`、`css/math-manipulatives.css`、`js/math-app.js`、`js/math-skills.js`、`index.html`、`js/star-fx.js`、`css/styles.css`、`scripts/check-invariants.py`、`scripts/smoke-shots.py`、`docs/math-build-plan.md`、`docs/handover.md`
+
 ### 2026-09-07 · Cursor（Keith：精簡檢查——家庭裝置 + 禁預設 computerUse）
 
 - `smoke-shots.py` 預設只跑 iPad Pro 11 直／橫 + iPhone 16 Pro Max（3 viewport）；舊全尺寸改 `--all`
