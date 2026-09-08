@@ -1011,6 +1011,25 @@ div.star-panel {
   min-width: 160px;
 }
 
+/* 家長用書架：細字連出去，唔同四大玩法入口搶位 */
+.home-scans-link {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.home-scans-link a {
+  color: rgba(248, 250, 252, 0.58);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.home-scans-link a:hover,
+.home-scans-link a:focus-visible {
+  color: var(--gold-soft);
+}
+
 .progress-hero {
   display: flex;
   flex-direction: column;
@@ -2323,6 +2342,7 @@ body {
   .hero-sub { margin: 0 0 clamp(4px, 1.2vh, 12px); }
   .hero-home .btn-row,
   .hero-home .hero-cta-row { margin-top: clamp(6px, 1.6vh, 16px); }
+  .home-scans-link { margin-top: 4px; }
   #screen-learn .section-lead { display: none; }
   #screen-learn .learn-stage { margin-bottom: 8px; padding: 12px 16px; }
   #screen-learn .learn-nav { margin-bottom: 6px; }
