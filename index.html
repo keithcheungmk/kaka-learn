@@ -82,6 +82,7 @@
           <button type="button" class="btn" id="btn-start-topics" aria-label="太空戰士認字">太空戰士認字</button>
           <button type="button" class="btn btn-secondary" id="btn-start-phonics" aria-label="SPACE RANGER PHONICS">SPACE RANGER PHONICS</button>
           <button type="button" class="btn btn-accent" id="btn-start-math">太空戰士數理</button>
+          <button type="button" class="btn btn-chain-home" id="btn-start-chain">詞語鏈・接一接</button>
           <a
             class="btn btn-friend home-friend-link"
             href="https://yiu0527.github.io/HeiHeiClass/index.html"
@@ -262,6 +263,28 @@
             <span class="play-mode-blurb">用手砌漢字</span>
           </span>
         </button>
+      </div>
+      <button type="button" class="word-chain-entry" id="btn-mode-chain" aria-label="接一接，搵下一個詞">
+        <span class="word-chain-entry-icon" aria-hidden="true">🔗</span>
+        <span><strong>接一接</strong><small>搵下一個詞，睇下啲字點樣變</small></span>
+        <span aria-hidden="true">→</span>
+      </button>
+    </section>
+
+    <!-- 詞語接龍 demo -->
+    <section id="screen-chain" class="screen" aria-label="接一接詞語遊戲">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-chain">← 玩法</button>
+        <h1>接一接</h1>
+        <div class="progress-pill"><strong id="chain-progress">1/5</strong></div>
+      </div>
+      <div class="chain-reward-bar" aria-label="完成詞語鏈可得十粒星"><span>詞語星</span><strong id="chain-reward-stars">0 / 10</strong></div>
+      <p class="section-lead" id="chain-lead">下一個詞，要由「冬」字開始</p>
+      <div class="chain-board" id="chain-board" aria-live="polite"></div>
+      <div class="chain-options" id="chain-options" aria-label="揀下一個詞"></div>
+      <p class="feedback" id="chain-feedback" aria-live="polite"></p>
+      <div class="btn-row chain-actions">
+        <button type="button" class="btn btn-secondary" id="btn-chain-restart">再玩一次</button>
       </div>
     </section>
 

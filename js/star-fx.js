@@ -33,11 +33,10 @@
     'screen-phonics-match',
     'screen-phonics-build',
     'screen-math-count',
-    'screen-math-fuel',
-    'screen-math-time',
-    'screen-math-shape',
-    'screen-math-pattern',
+    'screen-math-compare',
     'screen-math-earth-game',
+    'screen-math-time',
+    'screen-chain',
   ]);
 
   let globalRanger = null;

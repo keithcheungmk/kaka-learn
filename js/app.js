@@ -85,6 +85,24 @@ let learnPairMode = false;
 let learnPassedOnce = false;
 /** 今輪玩法：listen / match / build */
 let playMode = null;
+let chainIndex = 0;
+let activeChain = null;
+let chainStars = 0;
+const CHAIN_LIBRARY = [
+  ['肥牛烏冬', '冬天', '天氣', '氣球', '球鞋'],
+  ['奶茶', '茶杯', '杯子', '子女', '女兒'],
+  ['白飯', '飯盒', '盒子', '子女', '女兒'],
+  ['花生', '生日', '日子', '子女', '女兒'],
+  ['大風', '風車', '車站', '站長', '長頸鹿'],
+  ['天氣', '氣球', '球鞋', '鞋子', '子女'],
+  ['月亮', '亮光', '光線', '線條', '條紋'],
+  ['雨傘', '傘下', '下雨', '雨衣', '衣服'],
+  ['火車', '車站', '站長', '長頸鹿', '鹿角'],
+  ['足球', '球鞋', '鞋子', '子女', '女兒'],
+  ['青蛙', '蛙跳', '跳高', '高山', '山洞'],
+  ['蛋糕', '糕點', '點心', '心情', '情緒'],
+].map((terms) => terms.map((term) => ({ term, emoji: '✨' })));
+CHAIN_LIBRARY[0] = CHAIN_LIBRARY[0].map((item, i) => ({ ...item, emoji: ['🍜', '❄️', '🌤️', '🎈', '👟'][i] }));
 /** 今輪答啱嘅字 id（unique；答錯唔計、唔清零） */
 const playWonIds = new Set();
 /** 聽一聽／配一配：最多 8 個 unique 字；主題少過 8 就全清 */
@@ -104,6 +122,7 @@ function init() {
     bindTopics();
     bindLearn();
     bindPlayPick();
+    bindWordChain();
     bindListen();
     bindMatch();
     bindBuild();
@@ -398,9 +417,10 @@ function showScreen(name) {
     listen: '#screen-listen',
     match: '#screen-match',
     build: '#screen-build',
+    chain: '#screen-chain',
   };
   $(map[name])?.classList.add('active');
-  if (['listen', 'match', 'build'].includes(name)) {
+  if (['listen', 'match', 'build', 'chain'].includes(name)) {
     window.KakaStarFx?.mountPlayScreen?.($(map[name]));
     refreshStarUI();
   } else {
@@ -410,6 +430,146 @@ function showScreen(name) {
       refreshProfileChrome();
     }
   }
+}
+
+function renderWordChain() {
+  const CHAIN_DEMO = activeChain;
+  if (!CHAIN_DEMO) return;
+  const board = $('#chain-board');
+  const options = $('#chain-options');
+  const lead = $('#chain-lead');
+  const progress = $('#chain-progress');
+  if (!board || !options) return;
+  board.innerHTML = '';
+  CHAIN_DEMO.slice(0, chainIndex + 1).forEach((item, index) => {
+    if (index) {
+      const arrow = document.createElement('span');
+      arrow.className = 'chain-arrow';
+      arrow.textContent = '→';
+      board.appendChild(arrow);
+    }
+    const card = document.createElement('div');
+    card.className = 'chain-card' + (index === chainIndex ? ' is-current' : '');
+    const chars = Array.from(item.term).map((ch, charIndex) => {
+      const isJoin = (index < chainIndex && charIndex === item.term.length - 1) ||
+        (index > 0 && charIndex === 0);
+      return `<span class="chain-char${isJoin ? ' chain-shared' : ''}">${ch}</span>`;
+    }).join('');
+    card.innerHTML = `<span class="chain-emoji" aria-hidden="true">${item.emoji}</span><strong class="chain-term">${chars}</strong>`;
+    board.appendChild(card);
+  });
+  if (chainIndex < CHAIN_DEMO.length - 1) {
+    const slot = document.createElement('div');
+    slot.className = 'chain-drop-slot';
+    slot.textContent = '拖到呢度';
+    slot.setAttribute('aria-label', '將下一個詞拖到這裡');
+    slot.addEventListener('dragover', (ev) => {
+      ev.preventDefault();
+      slot.classList.add('is-over');
+    });
+    slot.addEventListener('dragleave', () => slot.classList.remove('is-over'));
+    slot.addEventListener('drop', (ev) => {
+      ev.preventDefault();
+      slot.classList.remove('is-over');
+      const id = ev.dataTransfer?.getData('text/plain');
+      const item = window.__kakaChainDragItem;
+      if (id === 'correct' || item === CHAIN_DEMO[chainIndex + 1]) advanceWordChain();
+      else showChainRetry();
+      window.__kakaChainDragItem = null;
+    });
+    board.appendChild(slot);
+  }
+  if (chainIndex > 0) {
+    board.classList.remove('chain-collision');
+    void board.offsetWidth;
+    board.classList.add('chain-collision');
+    setTimeout(() => board.classList.remove('chain-collision'), 900);
+  }
+  progress.textContent = `${chainIndex + 1}/${CHAIN_DEMO.length}`;
+  if (chainIndex >= CHAIN_DEMO.length - 1) {
+    lead.textContent = '完成喇！你見到「氣」可以組成唔同詞語嗎？';
+    options.innerHTML = '';
+    const done = document.createElement('p');
+    done.className = 'chain-done';
+    done.textContent = '好叻！一條詞語鏈完成！';
+    options.appendChild(done);
+    speakTerm(CHAIN_DEMO[chainIndex].term, { muted: loadState().muted });
+    chainStars = Math.min(10, chainStars + 10);
+    const reward = $('#chain-reward-stars');
+    if (reward) reward.textContent = `${chainStars} / 10`;
+    for (let i = 0; i < 10; i += 1) tryEarnStar();
+    const screen = $('#screen-chain');
+    window.KakaStarFx?.mountPlayScreen?.(screen);
+    window.KakaStarFx?.flyStarFromRanger?.(screen, () => refreshStarUI());
+    return;
+  }
+  const next = activeChain[chainIndex + 1];
+  const first = next.term.slice(0, 1);
+  lead.textContent = `下一個詞，要由「${first}」字開始`;
+  options.innerHTML = '';
+  const distractors = [
+    { term: '月亮', emoji: '🌙' },
+    { term: '小狗', emoji: '🐶' },
+    { term: '花朵', emoji: '🌸' },
+    { term: '烏冬', emoji: '🍜' },
+    { term: '冬眠', emoji: '🐻' },
+    { term: '大風', emoji: '🌬️' },
+  ].filter((item) => item.term !== next.term && item.term.slice(0, 1) !== first);
+  shuffle([next, ...distractors.slice(0, 5)]).forEach((item) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'chain-option';
+    button.draggable = true;
+    button.addEventListener('dragstart', (ev) => {
+      window.__kakaChainDragItem = item;
+      ev.dataTransfer?.setData('text/plain', item === next ? 'correct' : 'wrong');
+      button.classList.add('is-dragging');
+    });
+    button.addEventListener('dragend', () => {
+      button.classList.remove('is-dragging');
+      window.__kakaChainDragItem = null;
+    });
+    button.innerHTML = `<span class="chain-option-emoji" aria-hidden="true">${item.emoji}</span><strong>${item.term}</strong><small>由「${item.term.slice(0, 1)}」開始</small>`;
+    button.onclick = () => {
+      if (item !== next) return showChainRetry();
+      advanceWordChain();
+    };
+    options.appendChild(button);
+  });
+}
+
+function showChainRetry() {
+  const next = activeChain[chainIndex + 1];
+  const feedback = $('#chain-feedback');
+  if (feedback) {
+    feedback.textContent = `再試吓：要搵由「${next.term.slice(0, 1)}」開始嘅詞。`;
+    feedback.className = 'feedback retry';
+  }
+  playTryAgainCue({ muted: loadState().muted });
+}
+
+function advanceWordChain() {
+  const next = activeChain[chainIndex + 1];
+  chainIndex += 1;
+  playCorrectCue({ muted: loadState().muted });
+  speakTerm(next.term, { muted: loadState().muted });
+  renderWordChain();
+}
+
+function openWordChain() {
+  chainIndex = 0;
+  chainStars = 0;
+  activeChain = CHAIN_LIBRARY[Math.floor(Math.random() * CHAIN_LIBRARY.length)];
+  showScreen('chain');
+  renderWordChain();
+  speakTerm(activeChain[0].term, { muted: loadState().muted });
+}
+
+function bindWordChain() {
+  $('#btn-mode-chain')?.addEventListener('click', openWordChain);
+  $('#btn-back-chain')?.addEventListener('click', () => showScreen('play'));
+  $('#btn-chain-restart')?.addEventListener('click', openWordChain);
+  $('#btn-start-chain')?.addEventListener('click', openWordChain);
 }
 
 function openTopics() {
