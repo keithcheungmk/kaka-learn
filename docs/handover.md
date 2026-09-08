@@ -83,6 +83,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-08 · Cursor（金星睇鐘 + 火星形狀／推理；接撤走舊金星）
+
+- 舊金星邊多邊少／公平分享已撤；金星改「睇鐘」：先學模擬鐘＋電子鐘；玩法「揀鐘面」「揀電子鐘」；`planet id` 仍 `time`（進度保留）
+- 月球改 `id: moon`、「即將開放」空位
+- 火星：先學形狀＋規律；玩法「揀形狀」「補規律」
+- 清走舊 `compare-qty` 點亮；`currentPlanetId === compare-qty` → `time`
+- **踩咗** `js/math-app.js`、`js/math-skills.js`、`js/math-storage.js`、`index.html`、`css/math.css`、`css/styles.css`、`js/star-fx.js`、`scripts/check-invariants.py`、`scripts/test-math-storage.mjs`、`docs/*`
+
 ### 2026-09-07 · Cursor（Montessori M2 Sprint 3 + M3/M7/M8）
 
 - `js/math-mercury-missions.js`：水星每輪 5 題混合（火箭入油／外星人餵食／星座修復／多一少一／個人化重練）；玩法入口改「太空補給任務」；向後兼容 `KakaMathRocketFuel`
