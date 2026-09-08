@@ -2,7 +2,7 @@
 (function () {
   const PLANET_ID = 'compare-size';
   let deps = null, levels = [], currentLevelIndex = 0, currentMissionIndex = 0;
-  let filledCount = 0, busy = false, dragState = null;
+  let filledCount = 0, busy = false, dragState = null, suppressClickUntil = 0;
   const $ = (sel) => document.querySelector(sel);
   const storage = () => deps?.storage || window.KakaMathStorage;
   const isLevelUnlocked = (level) => storage()?.isAdditionLevelUnlocked?.(level.level) ?? level.level === 1;
@@ -59,10 +59,9 @@
     const go = () => {
       const mission = levels[currentLevelIndex].missions[currentMissionIndex];
       const object = createObject(mission.visual); object.classList.add('is-snapped'); object.dataset.warehouse = '0';
-      object.addEventListener('click', (event) => { event.stopPropagation(); returnObject(object); }); bindDrag(object); cell.appendChild(object);
+      object.addEventListener('click', (event) => { event.stopPropagation(); if (Date.now() < suppressClickUntil) return; returnObject(object); }); bindDrag(object); cell.appendChild(object);
       if (source?.dataset.warehouse === '1') source.remove();
       syncFilled(); renderEquation(mission); deps?.speak?.(filledCount === mission.b ? `${filledCount}${mission.visual.measure}${mission.visual.label}` : `${filledCount}`);
-      if (filledCount >= mission.b) onComplete(mission, levels[currentLevelIndex]);
     };
     if (!flyFrom) return go();
     const ghost = flyFrom.cloneNode(true); ghost.classList.add('is-flying');
@@ -79,8 +78,20 @@
     $('#addition-warehouse')?.appendChild(replacement); syncFilled(); renderEquation(mission);
   }
   function onWarehouseClick(event) {
-    if (busy || dragState) return;
+    if (busy || dragState || Date.now() < suppressClickUntil) return;
     const cell = getEmptyCells().find((item) => !item.querySelector('.addition-object')); if (cell) placeObject(event.currentTarget, cell, event.currentTarget);
+  }
+
+  function answer(mission) {
+    if (busy) return;
+    const feedback = $('#addition-feedback');
+    if (filledCount !== mission.b) {
+      if (feedback) feedback.textContent = `請放入 ${mission.b}${mission.visual.measure}${mission.visual.label}，再撳回答。`;
+      deps?.speak?.(`請放入${mission.b}${mission.visual.measure}${mission.visual.label}`);
+      return;
+    }
+    if (feedback) feedback.textContent = '答啱喇！';
+    onComplete(mission, levels[currentLevelIndex]);
   }
 
   function bindDrag(element) {
@@ -100,6 +111,7 @@
       const up = (upEvent) => {
         element.releasePointerCapture(upEvent.pointerId); element.classList.remove('is-dragging'); element.removeEventListener('pointermove', move); element.removeEventListener('pointerup', up); dragState.ghost?.remove();
         const state = dragState; dragState = null; if (!state.moved) return;
+        suppressClickUntil = Date.now() + 350;
         const target = document.elementFromPoint(upEvent.clientX, upEvent.clientY)?.closest?.('.addition-slot-cell.is-empty,#addition-warehouse');
         if (target?.id === 'addition-warehouse' && state.cell) returnObject(element);
         else if (target?.classList?.contains('is-empty') && !target.querySelector('.addition-object')) {
@@ -130,7 +142,7 @@
   }
 
   function startMission(levelIndex, missionIndex) {
-    currentLevelIndex = levelIndex; currentMissionIndex = missionIndex; busy = false; dragState = null;
+    currentLevelIndex = levelIndex; currentMissionIndex = missionIndex; busy = false; dragState = null; suppressClickUntil = 0;
     const level = levels[levelIndex], mission = level.missions[missionIndex];
     $('#addition-play-title').textContent = level.title; $('#addition-scenario').textContent = `${mission.scenario} · ${mission.visual.emoji}`; $('#addition-desc').textContent = mission.level === 2 ? `${mission.desc}（先湊十，再數剩低。）` : mission.desc;
     const boardLabel = document.querySelector('.addition-board-label'); if (boardLabel) boardLabel.textContent = mission.level === 2 ? '白板：先湊十，再將兩組物件放埋一齊' : '白板：將兩組物件放埋一齊';
@@ -150,6 +162,6 @@
   }
 
   function openEarthAddition() { deps.updateState({ currentPlanetId: PLANET_ID }); renderLevelSelect(); }
-  function init(options) { deps = options; levels = window.KakaAdditionData?.additionLevels || []; $('#btn-back-math-addition-select')?.addEventListener('click', () => deps.openHub()); $('#btn-back-math-addition-play')?.addEventListener('click', () => renderLevelSelect()); return levels.length > 0; }
+  function init(options) { deps = options; levels = window.KakaAdditionData?.additionLevels || []; $('#btn-back-math-addition-select')?.addEventListener('click', () => deps.openHub()); $('#btn-back-math-addition-play')?.addEventListener('click', () => renderLevelSelect()); $('#btn-addition-answer')?.addEventListener('click', () => { const mission = levels[currentLevelIndex]?.missions[currentMissionIndex]; if (mission) answer(mission); }); return levels.length > 0; }
   window.KakaAdditionGame = { init, openEarthAddition, renderLevelSelect, startMission };
 })();

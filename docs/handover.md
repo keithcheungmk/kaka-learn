@@ -30,6 +30,8 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| 加減法操作流程統一第一階段 | Codex | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | Keith 交辦：加法加入回答確認、拖曳防誤觸、修正兩套桌面排位 |
+| 加減法操作流程統一、回答確認、拖曳防誤觸及桌面版面 | Codex | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | Keith 交辦：先操作後回答，修正加減法介面及排位 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
@@ -82,6 +84,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
   唔係 CI 會紅。Codex／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
 
 ## 最近改動
+
+### 2026-09-08 · Codex（加減法統一回答流程＋操作版面修正）
+
+- 加法加入「回答」掣；放滿物件只代表完成操作，必須確認後先判題、播答啱聲及進入下一題
+- 加法及減法工作區統一使用主操作欄＋副物件欄，桌面自適應兩欄、窄屏上下排列
+- 加法拖曳後加入短暫 click 抑制，避免一次拖曳同時觸發撳一下而重複放入物件
+- 未完成數量時撳回答會保留原題並顯示針對性提示
+- **踩咗** `index.html`、`js/additionGame.js`、`js/subtractionGame.js`、`css/additionGame.css`、`docs/handover.md`
 
 ### 2026-09-08 · Codex（數理物件量詞修正）
 
