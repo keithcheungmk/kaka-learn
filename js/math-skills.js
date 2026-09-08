@@ -104,7 +104,7 @@
       icon: '➖',
       color: '#cbd5e1',
       order: 3,
-      blurb: '月球減法任務準備中：拿走幾粒，再數剩低幾多',
+      blurb: '喺月球學減法：拿走幾粒，再數剩低幾多',
       img: PLANET_IMG('moon'),
     },
   ];

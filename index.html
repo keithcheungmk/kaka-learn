@@ -464,14 +464,45 @@
           <span class="math-chip" id="math-hub-skill">學：數數</span>
           <span class="math-chip" id="math-hub-stars">今日 ★ 0 / 10</span>
           <span class="math-chip" id="math-hub-lit">已點亮 0 / 8</span>
-          <span class="math-chip" id="math-hub-next">下一粒：金星</span>
         </div>
         <div class="btn-row">
           <button type="button" class="btn" id="btn-math-launch">出發</button>
-          <button type="button" class="btn btn-secondary" id="btn-math-go-next" hidden>飛去下一粒</button>
         </div>
         <p class="math-coming" id="math-hub-coming" hidden></p>
         <p class="math-lit-badge" id="math-hub-lit-badge" hidden>✨ 已點亮</p>
+      </div>
+    </section>
+
+    <!-- 月球・減法拿走 -->
+    <section id="screen-math-moon-subtraction-select" class="screen math-screen subtraction-screen" aria-label="月球・揀減法任務">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-subtraction-select">← 太空站</button>
+        <h1>月球・減法拿走</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px"><span class="star-icon">★</span><span class="star-meta"><strong id="subtraction-select-stars">0/10</strong></span></div>
+      </div>
+      <p class="section-lead">將物件拿走，再數吓剩低幾多</p>
+      <div class="subtraction-level-grid" id="subtraction-level-grid"></div>
+    </section>
+
+    <section id="screen-math-moon-subtraction-play" class="screen math-screen subtraction-screen" aria-label="月球・減法拿走任務">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-subtraction-play">← 月球任務</button>
+        <h1 id="subtraction-play-title">Level 1・減法</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px"><span class="star-icon">★</span><span class="star-meta"><strong id="subtraction-play-stars">0/10</strong></span></div>
+      </div>
+      <p class="subtraction-mission-progress" id="subtraction-mission-progress">今輪第 1 / 10 題</p>
+      <div class="subtraction-stage">
+        <p class="subtraction-scenario" id="subtraction-scenario"></p>
+        <p class="subtraction-desc" id="subtraction-desc"></p>
+        <div class="subtraction-equation" id="subtraction-equation" aria-live="polite"></div>
+        <div class="subtraction-workspace">
+          <div class="subtraction-board">
+            <div class="subtraction-board-label">白板：由呢度拿走物件</div>
+            <div class="subtraction-slot-wrap"><div class="subtraction-slot" id="subtraction-slot"></div></div>
+          </div>
+          <div class="subtraction-takeaway" id="subtraction-takeaway"><div class="subtraction-takeaway-label">將物件拖到呢度<br>或者撳一下拿走</div></div>
+        </div>
+        <p class="feedback" id="subtraction-feedback" aria-live="polite"></p>
       </div>
     </section>
 
@@ -596,7 +627,6 @@
         <div class="addition-workspace">
           <div class="addition-board">
             <div class="addition-board-label">白板：將兩組物件放埋一齊</div>
-            <div class="addition-ten-frame" id="addition-ten-frame" hidden aria-label="十格板"></div>
             <div class="addition-slot-wrap"><div class="addition-slot" id="addition-slot"></div></div>
           </div>
           <div class="addition-warehouse" id="addition-warehouse"></div>
@@ -847,6 +877,8 @@
   <script src="./js/math-mercury-missions.js?v=20260907b"></script>
   <script src="./js/additionData.js?v=20260908a"></script>
   <script src="./js/additionGame.js?v=20260908a"></script>
+  <script src="./js/subtractionData.js?v=20260908a"></script>
+  <script src="./js/subtractionGame.js?v=20260908a"></script>
   <script src="./js/math-app.js?v=20260905a"></script>
   <script src="./js/version-check.js?v=20260903a"></script>
 </body>

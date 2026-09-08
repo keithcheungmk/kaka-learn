@@ -43,13 +43,6 @@
     }
     const divider = document.createElement('div'); divider.className = 'addition-slot-divider'; divider.textContent = '+'; slot.appendChild(divider);
     for (let i = 0; i < mission.b; i += 1) { const cell = document.createElement('div'); cell.className = 'addition-slot-cell is-empty'; slot.appendChild(cell); }
-    const frame = $('#addition-ten-frame');
-    if (frame) {
-      frame.hidden = mission.level !== 2;
-      frame.innerHTML = mission.level === 2
-        ? `<span class="addition-ten-frame-label">湊十法：先填滿 10 格，再數剩低</span><span class="addition-ten-frame-cells">${Array.from({ length: 10 }, (_, index) => `<span class="addition-ten-frame-cell${index < mission.a ? ' is-filled' : ''}${index === mission.a ? ' is-next' : ''}">${index < mission.a ? mission.visual.emoji : ''}</span>`).join('')}</span>`
-        : '';
-    }
     syncFilled();
   }
 
@@ -139,7 +132,8 @@
   function startMission(levelIndex, missionIndex) {
     currentLevelIndex = levelIndex; currentMissionIndex = missionIndex; busy = false; dragState = null;
     const level = levels[levelIndex], mission = level.missions[missionIndex];
-    $('#addition-play-title').textContent = level.title; $('#addition-scenario').textContent = `${mission.scenario} · ${mission.visual.emoji}`; $('#addition-desc').textContent = mission.desc;
+    $('#addition-play-title').textContent = level.title; $('#addition-scenario').textContent = `${mission.scenario} · ${mission.visual.emoji}`; $('#addition-desc').textContent = mission.level === 2 ? `${mission.desc}（先湊十，再數剩低。）` : mission.desc;
+    const boardLabel = document.querySelector('.addition-board-label'); if (boardLabel) boardLabel.textContent = mission.level === 2 ? '白板：先湊十，再將兩組物件放埋一齊' : '白板：將兩組物件放埋一齊';
     $('#addition-mission-progress').textContent = `今輪第 ${missionIndex + 1} / ${level.missions.length} 題`; $('#addition-feedback').textContent = '';
     renderSlot(mission); renderWarehouse(mission); renderEquation(mission); updateStarsDisplay(); deps.showMathScreen('additionPlay'); deps.speak(mission.desc);
   }

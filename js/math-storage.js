@@ -25,6 +25,11 @@
       completedLevels: [],
       completedMissions: [],
     },
+    subtractionProgress: {
+      unlockedLevel: 1,
+      completedLevels: [],
+      completedMissions: [],
+    },
     skillProgress: {},
     mistakeHistory: [],
     missionHistory: [],
@@ -40,6 +45,11 @@
       additionProgress: {
         unlockedLevel: 1,
         unlockedBase: 5,
+        completedLevels: [],
+        completedMissions: [],
+      },
+      subtractionProgress: {
+        unlockedLevel: 1,
         completedLevels: [],
         completedMissions: [],
       },
@@ -90,6 +100,12 @@
       out.additionProgress.unlockedLevel = out.additionProgress.unlockedBase <= 5 ? 1 : 2;
     }
     if (typeof out.additionProgress.unlockedBase !== 'number') out.additionProgress.unlockedBase = out.additionProgress.unlockedLevel >= 2 ? 10 : 5;
+    if (!out.subtractionProgress || typeof out.subtractionProgress !== 'object') {
+      out.subtractionProgress = { unlockedLevel: 1, completedLevels: [], completedMissions: [] };
+    }
+    if (typeof out.subtractionProgress.unlockedLevel !== 'number') out.subtractionProgress.unlockedLevel = 1;
+    if (!Array.isArray(out.subtractionProgress.completedLevels)) out.subtractionProgress.completedLevels = [];
+    if (!Array.isArray(out.subtractionProgress.completedMissions)) out.subtractionProgress.completedMissions = [];
     if (!out.skillProgress || typeof out.skillProgress !== 'object' || Array.isArray(out.skillProgress)) {
       out.skillProgress = {};
     } else {
@@ -311,6 +327,32 @@
     return state;
   }
 
+  function normalizeSubtractionProgress(prog) {
+    if (!prog || typeof prog !== 'object') return { unlockedLevel: 1, completedLevels: [], completedMissions: [] };
+    return {
+      unlockedLevel: typeof prog.unlockedLevel === 'number' ? prog.unlockedLevel : 1,
+      completedLevels: Array.isArray(prog.completedLevels) ? [...prog.completedLevels] : [],
+      completedMissions: Array.isArray(prog.completedMissions) ? [...prog.completedMissions] : [],
+    };
+  }
+  function getSubtractionProgress(state = loadState()) { return normalizeSubtractionProgress(state.subtractionProgress); }
+  function isSubtractionLevelUnlocked(level, state = loadState()) { return level <= getSubtractionProgress(state).unlockedLevel; }
+  function isSubtractionMissionDone(id, state = loadState()) { return getSubtractionProgress(state).completedMissions.includes(id); }
+  function completeSubtractionMission(missionId) {
+    const state = loadState(); const prog = getSubtractionProgress(state);
+    if (!prog.completedMissions.includes(missionId)) prog.completedMissions.push(missionId);
+    const data = window.KakaSubtractionData;
+    const found = data?.getMissionById?.(missionId);
+    if (found && found.level.missions.every((m) => prog.completedMissions.includes(m.id)) && found.level.level === 1) prog.unlockedLevel = Math.max(prog.unlockedLevel, 2);
+    state.subtractionProgress = prog; saveState(state); return state;
+  }
+  function completeSubtractionLevel(level) {
+    const state = loadState(); const prog = getSubtractionProgress(state);
+    if (!prog.completedLevels.includes(level)) prog.completedLevels.push(level);
+    if (level === 1) prog.unlockedLevel = Math.max(prog.unlockedLevel, 2);
+    state.subtractionProgress = prog; saveState(state); return state;
+  }
+
   window.KakaMathStorage = {
     STORAGE_KEY,
     SCHEMA_VERSION,
@@ -329,5 +371,10 @@
     completeAdditionMission,
     completeAdditionLevel,
     unlockAdditionLevel,
+    getSubtractionProgress,
+    isSubtractionLevelUnlocked,
+    isSubtractionMissionDone,
+    completeSubtractionMission,
+    completeSubtractionLevel,
   };
 })();

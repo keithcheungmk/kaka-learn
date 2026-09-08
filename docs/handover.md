@@ -83,6 +83,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-08 · Codex（加法白板整理＋月球減法拿走第一版）
+
+- 加法 Level 1／2 合併成單一較大、淺色實體白板，移除重複嘅獨立十格板，Level 2 教學提示保留喺白板文案內
+- 數理星球詳情頁移除「下一粒／飛去下一粒」跨星球入口，統一由銀河 landing page 揀星球
+- 月球正式加入減法拿走：Level 1（2–10）及 Level 2（11–20），每級十題；白板物件可以撳或拖去拿走區，完成一輪沿用 KAKA RANGER 獎勵畫面
+- `kaka-math-v1` 新增獨立 `subtractionProgress`，保留卡卡／禧禧 Profile 隔離及舊資料兼容
+- **踩咗** `index.html`、`js/additionGame.js`、`js/subtractionData.js`、`js/subtractionGame.js`、`js/math-app.js`、`js/math-skills.js`、`js/math-storage.js`、`css/additionGame.css`、`docs/handover.md`
+
 ### 2026-09-08 · Codex（地球加法 Level 1/2 + 十題獎勵流程）
 
 - 地球加法由 5–10 六個數字基地改為兩個清晰階段：Level 1（2–10）及 Level 2（11–20）；每個 Level 十題，Level 1 完成後解鎖 Level 2
