@@ -7,7 +7,7 @@
   function done(id) { return storage()?.isSubtractionMissionDone?.(id) ?? false; }
   function unlocked(level) { return storage()?.isSubtractionLevelUnlocked?.(level) ?? level === 1; }
   function updateStars() { const el = $('#subtraction-play-stars') || $('#subtraction-select-stars'); if (el) el.textContent = `${deps.loadState().starsToday}/10`; }
-  function object(visual) { const el = document.createElement('button'); el.type = 'button'; el.className = `subtraction-object math-native-emoji subtraction-object--${visual.id}`; el.textContent = visual.emoji; el.setAttribute('aria-label', `一粒${visual.label}`); el.dataset.object = '1'; return el; }
+  function object(visual) { const el = document.createElement('button'); el.type = 'button'; el.className = `subtraction-object math-native-emoji subtraction-object--${visual.id}`; el.textContent = visual.emoji; el.setAttribute('aria-label', `一${visual.measure}${visual.label}`); el.dataset.object = '1'; return el; }
   function renderEquation(mission) { const el = $('#subtraction-equation'); if (el) el.innerHTML = `${mission.start} − <span class="subtraction-removed">${removedCount || '?'}</span> = <span class="subtraction-result">${mission.remaining}</span>`; }
   function sync(mission) {
     removedCount = document.querySelectorAll('#subtraction-takeaway .subtraction-object').length;
@@ -29,8 +29,8 @@
     if (busy) return;
     const feedback = $('#subtraction-feedback');
     if (removedCount !== mission.remove) {
-      if (feedback) feedback.textContent = `請拿走 ${mission.remove} 粒${mission.visual.label}，再撳回答。`;
-      deps.speak?.(`請拿走${mission.remove}粒${mission.visual.label}`);
+      if (feedback) feedback.textContent = `請拿走 ${mission.remove}${mission.visual.measure}${mission.visual.label}，再撳回答。`;
+      deps.speak?.(`請拿走${mission.remove}${mission.visual.measure}${mission.visual.label}`);
       return;
     }
     if (feedback) feedback.textContent = '答啱喇！';

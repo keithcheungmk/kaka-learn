@@ -25,7 +25,7 @@
   function createObject(visual) {
     const item = document.createElement('button');
     item.type = 'button'; item.className = `addition-object math-native-emoji addition-object--${visual.id}`;
-    item.textContent = visual.emoji; item.setAttribute('aria-label', `一粒${visual.label}`); item.dataset.draggable = '1';
+    item.textContent = visual.emoji; item.setAttribute('aria-label', `一${visual.measure}${visual.label}`); item.dataset.draggable = '1';
     return item;
   }
   function getEmptyCells() { return [...document.querySelectorAll('#addition-slot .addition-slot-cell.is-empty')]; }
@@ -61,7 +61,7 @@
       const object = createObject(mission.visual); object.classList.add('is-snapped'); object.dataset.warehouse = '0';
       object.addEventListener('click', (event) => { event.stopPropagation(); returnObject(object); }); bindDrag(object); cell.appendChild(object);
       if (source?.dataset.warehouse === '1') source.remove();
-      syncFilled(); renderEquation(mission); deps?.speak?.(filledCount === mission.b ? `${filledCount}粒${mission.visual.label}` : `${filledCount}`);
+      syncFilled(); renderEquation(mission); deps?.speak?.(filledCount === mission.b ? `${filledCount}${mission.visual.measure}${mission.visual.label}` : `${filledCount}`);
       if (filledCount >= mission.b) onComplete(mission, levels[currentLevelIndex]);
     };
     if (!flyFrom) return go();

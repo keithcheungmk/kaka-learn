@@ -1,12 +1,12 @@
 /** 地球加法星球 — 兩個能力階段；每階段十題，視覺物件由題目輪換。 */
 (function () {
   const VISUALS = [
-    { id: 'fruit', emoji: '🍓', label: '士多啤梨' },
-    { id: 'chick', emoji: '🐥', label: '雞仔' },
-    { id: 'coin', emoji: '🪙', label: '金幣' },
-    { id: 'rabbit', emoji: '🐰', label: '小白兔' },
-    { id: 'star', emoji: '⭐', label: '星星' },
-    { id: 'moon-star', emoji: '🌟', label: '閃閃星' },
+    { id: 'fruit', emoji: '🍓', measure: '粒', label: '士多啤梨' },
+    { id: 'chick', emoji: '🐥', measure: '隻', label: '雞仔' },
+    { id: 'coin', emoji: '🪙', measure: '枚', label: '金幣' },
+    { id: 'rabbit', emoji: '🐰', measure: '隻', label: '小白兔' },
+    { id: 'star', emoji: '⭐', measure: '顆', label: '星星' },
+    { id: 'moon-star', emoji: '🌟', measure: '顆', label: '閃閃星' },
   ];
 
   const levelOnePairs = [[1, 1], [1, 2], [2, 1], [2, 2], [1, 4], [3, 2], [2, 4], [3, 4], [4, 4], [5, 5]];
@@ -22,7 +22,7 @@
         return {
           id: `addition-l${level}-${index + 1}`, level, a, b, targetNumber: a + b, visual,
           scenario: `${visual.label}能量任務`,
-          desc: `先有 ${a} 粒${visual.label}，再拖入 ${b} 粒，合共有幾多粒？`,
+          desc: `先有 ${a}${visual.measure}${visual.label}，再拖入 ${b}${visual.measure}，合共有幾多${visual.measure}？`,
         };
       }),
     };

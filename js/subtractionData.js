@@ -1,12 +1,12 @@
 /** 月球減法拿走 — 兩個能力階段；每階段十題。 */
 (function () {
   const VISUALS = [
-    { id: 'fruit', emoji: '🍓', label: '士多啤梨' },
-    { id: 'chick', emoji: '🐥', label: '雞仔' },
-    { id: 'coin', emoji: '🪙', label: '金幣' },
-    { id: 'rabbit', emoji: '🐰', label: '小白兔' },
-    { id: 'star', emoji: '⭐', label: '星星' },
-    { id: 'moon-star', emoji: '🌟', label: '閃閃星' },
+    { id: 'fruit', emoji: '🍓', measure: '粒', label: '士多啤梨' },
+    { id: 'chick', emoji: '🐥', measure: '隻', label: '雞仔' },
+    { id: 'coin', emoji: '🪙', measure: '枚', label: '金幣' },
+    { id: 'rabbit', emoji: '🐰', measure: '隻', label: '小白兔' },
+    { id: 'star', emoji: '⭐', measure: '顆', label: '星星' },
+    { id: 'moon-star', emoji: '🌟', measure: '顆', label: '閃閃星' },
   ];
   const levelOnePairs = [[3, 1], [4, 1], [5, 2], [6, 2], [7, 3], [8, 3], [9, 4], [10, 5], [10, 1], [8, 6]];
   const levelTwoPairs = [[11, 1], [12, 2], [13, 3], [14, 4], [15, 5], [16, 6], [17, 7], [18, 8], [19, 9], [20, 10]];
@@ -15,7 +15,7 @@
       missions: pairs.map(([start, remove], index) => {
         const visual = VISUALS[index % VISUALS.length];
         return { id: `subtraction-l${level}-${index + 1}`, level, start, remove, remaining: start - remove, visual,
-          scenario: `${visual.label}月球任務`, desc: `白板有 ${start} 粒${visual.label}，拿走 ${remove} 粒，剩低幾多粒？` };
+          scenario: `${visual.label}月球任務`, desc: `白板有 ${start}${visual.measure}${visual.label}，拿走 ${remove}${visual.measure}，剩低幾多${visual.measure}？` };
       }) };
   }
   const subtractionLevels = [
