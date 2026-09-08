@@ -20,7 +20,9 @@
     litPlanetIds: [],
     interviewUnlocked: false,
     additionProgress: {
+      unlockedLevel: 1,
       unlockedBase: 5,
+      completedLevels: [],
       completedMissions: [],
     },
     skillProgress: {},
@@ -36,7 +38,9 @@
       starsDate: todayKey(),
       litPlanetIds: [],
       additionProgress: {
+        unlockedLevel: 1,
         unlockedBase: 5,
+        completedLevels: [],
         completedMissions: [],
       },
       skillProgress: {},
@@ -76,14 +80,16 @@
     else out.litPlanetIds = out.litPlanetIds.filter((id) => id !== 'compare-qty');
     if (out.currentPlanetId === 'compare-qty') out.currentPlanetId = 'time';
     if (!out.additionProgress || typeof out.additionProgress !== 'object') {
-      out.additionProgress = { unlockedBase: 5, completedMissions: [] };
+      out.additionProgress = { unlockedLevel: 1, unlockedBase: 5, completedLevels: [], completedMissions: [] };
     }
     if (!Array.isArray(out.additionProgress.completedMissions)) {
       out.additionProgress.completedMissions = [];
     }
-    if (typeof out.additionProgress.unlockedBase !== 'number') {
-      out.additionProgress.unlockedBase = 5;
+    if (!Array.isArray(out.additionProgress.completedLevels)) out.additionProgress.completedLevels = [];
+    if (typeof out.additionProgress.unlockedLevel !== 'number') {
+      out.additionProgress.unlockedLevel = out.additionProgress.unlockedBase <= 5 ? 1 : 2;
     }
+    if (typeof out.additionProgress.unlockedBase !== 'number') out.additionProgress.unlockedBase = out.additionProgress.unlockedLevel >= 2 ? 10 : 5;
     if (!out.skillProgress || typeof out.skillProgress !== 'object' || Array.isArray(out.skillProgress)) {
       out.skillProgress = {};
     } else {
@@ -224,12 +230,16 @@
 
   function normalizeAdditionProgress(prog) {
     const base = {
+      unlockedLevel: 1,
       unlockedBase: 5,
+      completedLevels: [],
       completedMissions: [],
     };
     if (!prog || typeof prog !== 'object') return base;
     return {
-      unlockedBase: typeof prog.unlockedBase === 'number' ? prog.unlockedBase : 5,
+      unlockedLevel: typeof prog.unlockedLevel === 'number' ? prog.unlockedLevel : (prog.unlockedBase <= 5 ? 1 : 2),
+      unlockedBase: typeof prog.unlockedBase === 'number' ? prog.unlockedBase : (prog.unlockedLevel >= 2 ? 10 : 5),
+      completedLevels: Array.isArray(prog.completedLevels) ? [...prog.completedLevels] : [],
       completedMissions: Array.isArray(prog.completedMissions) ? [...prog.completedMissions] : [],
     };
   }
@@ -242,6 +252,10 @@
     return base <= getAdditionProgress(state).unlockedBase;
   }
 
+  function isAdditionLevelUnlocked(level, state = loadState()) {
+    return level <= getAdditionProgress(state).unlockedLevel;
+  }
+
   function isAdditionMissionDone(id, state = loadState()) {
     return getAdditionProgress(state).completedMissions.includes(id);
   }
@@ -252,19 +266,46 @@
     if (!prog.completedMissions.includes(missionId)) {
       prog.completedMissions = [...prog.completedMissions, missionId];
     }
+    // 保留舊版 5–10 關卡資料的讀取兼容，唔令舊進度失效。
+    const legacy = /^([5-9]|10)-\d+$/.exec(missionId);
+    if (legacy) {
+      const base = Number(legacy[1]);
+      const required = base === 5 ? ['5-1', '5-2', '5-3', '5-4'] : [];
+      if (required.length && required.every((id) => prog.completedMissions.includes(id))) prog.unlockedBase = Math.max(prog.unlockedBase, 6);
+    }
     const data = window.KakaAdditionData;
     if (data) {
       const found = data.getMissionById(missionId);
       if (found) {
         const allDone = found.level.missions.every((m) => prog.completedMissions.includes(m.id));
-        if (allDone && found.level.base < 10) {
-          prog.unlockedBase = Math.max(prog.unlockedBase, found.level.base + 1);
-        }
-        if (allDone && found.level.base === 10 && !state.litPlanetIds.includes('compare-size')) {
-          state.litPlanetIds = [...state.litPlanetIds, 'compare-size'];
+        if (allDone && found.level.level === 1) prog.unlockedBase = Math.max(prog.unlockedBase, 6);
+        if (allDone && found.level.level === 2) {
+          prog.unlockedBase = Math.max(prog.unlockedBase, 10);
+          if (!state.litPlanetIds.includes('compare-size')) state.litPlanetIds = [...state.litPlanetIds, 'compare-size'];
         }
       }
     }
+    state.additionProgress = prog;
+    saveState(state);
+    return state;
+  }
+
+  function completeAdditionLevel(level) {
+    const state = loadState();
+    const prog = getAdditionProgress(state);
+    if (!prog.completedLevels.includes(level)) prog.completedLevels.push(level);
+    if (level === 1) prog.unlockedLevel = Math.max(prog.unlockedLevel, 2);
+    if (level === 1) prog.unlockedBase = Math.max(prog.unlockedBase, 6);
+    if (level === 2) prog.unlockedBase = Math.max(prog.unlockedBase, 10);
+    state.additionProgress = prog;
+    saveState(state);
+    return state;
+  }
+
+  function unlockAdditionLevel(level) {
+    const state = loadState();
+    const prog = getAdditionProgress(state);
+    prog.unlockedLevel = Math.max(prog.unlockedLevel, level);
     state.additionProgress = prog;
     saveState(state);
     return state;
@@ -283,7 +324,10 @@
     setActiveProfile,
     getAdditionProgress,
     isAdditionBaseUnlocked,
+    isAdditionLevelUnlocked,
     isAdditionMissionDone,
     completeAdditionMission,
+    completeAdditionLevel,
+    unlockAdditionLevel,
   };
 })();

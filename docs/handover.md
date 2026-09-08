@@ -83,6 +83,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-08 · Codex（地球加法 Level 1/2 + 十題獎勵流程）
+
+- 地球加法由 5–10 六個數字基地改為兩個清晰階段：Level 1（2–10）及 Level 2（11–20）；每個 Level 十題，Level 1 完成後解鎖 Level 2
+- 每題輪換士多啤梨、雞仔、金幣、小白兔、星星及閃閃星；左側／下方 Pool 可以撳或拖物件入白板，保留具體物 → 圖像 → 算式嘅 Montessori 路徑
+- 每題答對累積數理星星；完成十題顯示與中文認字相同風格嘅 KAKA RANGER 獎勵畫面，可再玩或返銀河；水星補給、數數、睇鐘、形狀及規律輪次統一為十題目標
+- `kaka-math-v1` 保留舊 `unlockedBase`／5–10 mission 讀取兼容，新增 Level 進度欄位，唔會清走舊進度
+- **踩咗** `js/additionData.js`、`js/additionGame.js`、`css/additionGame.css`、`js/math-storage.js`、`js/math-mercury-missions.js`、`js/math-app.js`、`index.html`、`scripts/check-invariants.py`、`docs/handover.md`
+
 ### 2026-09-08 · Codex（數理銀河 landing + 技能徽章 + KAKA RANGER 品牌）
 
 - 「太空戰士數理」入口改為直接進入銀河總覽；九個天體以 3×3 顯示，逐粒加原生 emoji 技能徽章及「可以出發／即將開放」狀態

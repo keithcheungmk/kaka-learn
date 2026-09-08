@@ -24,10 +24,11 @@
 
 - **Phase M1 ✅**：`js/math-manipulatives.js` + `css/math-manipulatives.css` — 原生 emoji 拖放／撳放操作層（唔用 OpenMoji）；`scripts/test-math-manipulatives.mjs`。
 - **Phase M2 ✅（第一輪）**：水星「火箭入油」— 5 題拖入燃料槽、語音計數、三級提示、掌握度接入；玩法頁主入口；**「數一數・揀數（經典）」保留作後備**。
-- **Phase M2 Sprint 3 ✅**：`js/math-mercury-missions.js` — 每輪 5 題混合（火箭入油 → 外星人餵食 → 星座修復 → 多一少一 → 個人化重練）；零題用「好啦」掣；向後兼容 `KakaMathRocketFuel`。
+- **Phase M2 Sprint 3 ✅**：`js/math-mercury-missions.js` — 每輪十題混合（火箭入油 → 外星人餵食 → 星座修復 → 多一少一 → 個人化重練，再以第二組任務加深）；零題用「好啦」掣；向後兼容 `KakaMathRocketFuel`。
 - **Phase M3（公平分享）**：已撤 — 金星改做「睇鐘」（由月球遷入）。
 - **2026-09-08**：金星 = 模擬鐘＋電子鐘；火星 = 形狀＋缺格規律；月球 = 即將開放。
 - **2026-09-08（Codex）**：銀河總覽成為數理 landing；月球移到地球加法之後，下一階段定位為「具體減法／拿走、數剩餘」，今次只更新旅程及預告，未實作玩法。
+- **2026-09-08（Codex）**：地球加法重新整理為 Level 1（2–10）及 Level 2（11–20），每級十題；物件 Pool／白板拖放為主，題目輪換原生 emoji，完成十題彈出 KAKA RANGER 獎勵畫面；舊 5–10 progress 保留兼容。
 - **刻意未做**：M3 貨艙平衡、隊伍配對；月球新主題；鐘面一刻／分針。
 
 ---

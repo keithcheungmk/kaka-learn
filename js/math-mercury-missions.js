@@ -1,7 +1,7 @@
-/** 水星・太空補給站 — 五題 Montessori 混合任務 */
+/** 水星・太空補給站 — 十題 Montessori 混合任務 */
 (function () {
   const ZH_NUM = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
-  const ROUND_SIZE = 5;
+  const ROUND_SIZE = 10;
   const HINT_IDLE_MS = 15000;
 
   const ACTIVITY_ORDER = ['rocketFuel', 'alienFeed', 'constellation', 'oneMoreLess', 'review'];
@@ -171,13 +171,14 @@
   }
 
   function generateMission(state, random = Math.random) {
-    return [
+    const firstHalf = [
       makeRocketFuel(pickTarget(random, 5, 2), random),
       makeAlienFeed(pickTarget(random, 5, 1), random),
       makeConstellation(random),
       makeOneMoreLess(random),
       pickReviewActivity(state, random),
     ];
+    return firstHalf.concat(firstHalf.map((question, index) => ({ ...question, id: `${question.id}-repeat-${index + 1}` })));
   }
 
   function renderHero(q) {
@@ -278,14 +279,8 @@
     if (fb) fb.textContent = firstLight ? `${praise} 水星點亮喇！` : `${praise} 任務完成！`;
     setTimeout(() => {
       roundBusy = false;
-      if (firstLight) {
-        const fromP = deps.getPlanetById?.('count');
-        const toP = deps.getPlanetById?.(deps.getNextPlanetId?.('count'));
-        if (fromP && toP) deps.offerWarpHop?.(fromP, toP);
-        else deps?.openPlay?.();
-      } else {
-        deps?.openPlay?.();
-      }
+      if (deps?.showMathRoundReward) deps.showMathRoundReward(firstLight ? '水星十題完成！水星點亮喇！' : '水星十題完成！你好叻呀！', deps.openMissionRound);
+      else deps?.openPlay?.();
     }, 1200);
   }
 

@@ -38,7 +38,7 @@
     const ZH_NUM = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
     const COUNT_EMOJIS = ['⭐', '🌙', '🚀', '🪨', '💫'];
     const LEARN_COUNTS = [1, 2, 3, 4, 5];
-    const LIT_TARGET = 5;
+    const LIT_TARGET = 10;
 
     /** 時間資料：id = "h-00" 整點／"h-30" 半點（1–12） */
     const ZH_HOUR = ['十二', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一'];
@@ -286,6 +286,19 @@
       });
     }
 
+    function showMathRoundReward(message, onAgain) {
+      const overlay = $('#math-round-finish');
+      if (!overlay) return;
+      const msg = $('#math-round-finish-msg');
+      if (msg) msg.textContent = message || '今輪玩完喇！攞到一個獎勵！';
+      overlay.hidden = false;
+      speech?.playStarCue?.({ muted: isMuted() });
+      speak(message || '今輪玩完喇！你好叻呀！攞到一個獎勵！');
+      playMathStarReward();
+      $('#btn-math-round-again').onclick = () => { overlay.hidden = true; onAgain?.(); };
+      $('#btn-math-round-galaxy').onclick = () => { overlay.hidden = true; openGalaxy(); };
+    }
+
     function applyPlanetTheme(planet) {
       const hub = $('#screen-math-hub');
       if (hub) hub.style.setProperty('--math-planet', planet.color);
@@ -518,8 +531,11 @@
       countMissionStartedAt = new Date().toISOString();
       countEmoji = COUNT_EMOJIS[Math.floor(Math.random() * COUNT_EMOJIS.length)];
       countMission = questionEngine?.generateMission?.() || [];
+      while (countMission.length < 10) {
+        countMission = countMission.concat(questionEngine?.generateMission?.() || []).slice(0, 10);
+      }
       if (!countMission.length) {
-        countMission = Array.from({ length: 6 }, () => {
+          countMission = Array.from({ length: 10 }, () => {
           const answer = 1 + Math.floor(Math.random() * 10);
           const options = new Set([answer, Math.max(0, answer - 1), Math.min(10, answer + 1)]);
           while (options.size < 3) options.add(Math.floor(Math.random() * 11));
@@ -543,7 +559,7 @@
 
     function updateCountProgress() {
       const el = $('#math-count-progress');
-      if (el) el.textContent = `${Math.min(countIndex + 1, countMission.length || 6)}/${countMission.length || 6}`;
+      if (el) el.textContent = `${Math.min(countIndex + 1, countMission.length || 10)}/${countMission.length || 10}`;
     }
 
     function nextCountRound(autoSpeak) {
@@ -736,12 +752,9 @@
           const firstLight = !isPlanetLit('count');
           if (firstLight) lightPlanet('count');
           if (fb) fb.textContent = firstLight ? `${praise} 水星點亮喇！` : `${praise} Ranger Mission 完成！`;
-          const fromP = getPlanetById('count');
-          const toP = getPlanetById(getNextPlanetId('count'));
           setTimeout(() => {
             countBusy = false;
-            if (firstLight) offerWarpHop(fromP, toP);
-            else openPlay();
+            showMathRoundReward(firstLight ? '水星十題完成！水星點亮喇！' : '今輪玩完喇！你好叻呀！攞到一個獎勵！', openCount);
           }, 1100);
           return;
         }
@@ -908,14 +921,12 @@
           speech?.speakCorrectFeedback?.({ muted }) || '你好叻呀，答啱咗！';
         if (fb) fb.textContent = gained ? `${praise} ★` : praise;
 
-        if (timeCorrect >= LIT_TARGET && !isPlanetLit('time')) {
-          lightPlanet('time');
+        if (timeCorrect >= LIT_TARGET) {
+          if (!isPlanetLit('time')) lightPlanet('time');
           if (fb) fb.textContent = `${praise} 金星點亮喇！`;
-          const fromP = getPlanetById('time');
-          const toP = getPlanetById(getNextPlanetId('time'));
           setTimeout(() => {
             timeBusy = false;
-            offerWarpHop(fromP, toP);
+            showMathRoundReward('金星十題完成！你好叻呀！', () => openTimeQuiz(timeMode));
           }, 900);
           return;
         }
@@ -1040,14 +1051,12 @@
         updateShapeProgress();
         const praise = speech?.speakCorrectFeedback?.({ muted }) || '好叻呀！';
         if (fb) fb.textContent = praise;
-        if (shapeCorrect >= LIT_TARGET && !isPlanetLit('shape')) {
-          lightPlanet('shape');
+        if (shapeCorrect >= LIT_TARGET) {
+          if (!isPlanetLit('shape')) lightPlanet('shape');
           if (fb) fb.textContent = `${praise} 火星點亮喇！`;
-          const fromP = getPlanetById('shape');
-          const toP = getPlanetById(getNextPlanetId('shape'));
           setTimeout(() => {
             shapeBusy = false;
-            offerWarpHop(fromP, toP);
+            showMathRoundReward('火星十題完成！你好叻呀！', openShapeQuiz);
           }, 900);
           return;
         }
@@ -1135,14 +1144,12 @@
         updatePatternProgress();
         const praise = speech?.speakCorrectFeedback?.({ muted }) || '好叻呀！';
         if (fb) fb.textContent = praise;
-        if (patternCorrect >= LIT_TARGET && !isPlanetLit('shape')) {
-          lightPlanet('shape');
+        if (patternCorrect >= LIT_TARGET) {
+          if (!isPlanetLit('shape')) lightPlanet('shape');
           if (fb) fb.textContent = `${praise} 火星點亮喇！`;
-          const fromP = getPlanetById('shape');
-          const toP = getPlanetById(getNextPlanetId('shape'));
           setTimeout(() => {
             patternBusy = false;
-            offerWarpHop(fromP, toP);
+            showMathRoundReward('火星規律十題完成！你好叻呀！', openPatternQuiz);
           }, 900);
           return;
         }
@@ -1291,6 +1298,7 @@
       getNextPlanetId,
       offerWarpHop,
       openHub,
+      openGalaxy,
       showMathScreen,
       speak,
       speech,
@@ -1313,6 +1321,7 @@
       openPlay,
       showMathScreen,
       playMathStarReward,
+      showMathRoundReward,
       isMuted,
     });
 

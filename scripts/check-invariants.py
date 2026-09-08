@@ -520,7 +520,7 @@ def check_module_isolation() -> None:
 
 
 def check_addition_planet() -> None:
-    """地球加法星球：additionData + additionGame 模組、6 關（5–10）。"""
+    """地球加法星球：兩個加法階段，每階段十題物件拖放。"""
     for rel in ["js/additionData.js", "js/additionGame.js", "css/additionGame.css"]:
         if not Path(rel).exists():
             fail("addition-planet", f"缺少 {rel}")
@@ -532,12 +532,13 @@ def check_addition_planet() -> None:
         if needle not in html:
             fail("addition-planet", f"index.html 未載入 {needle}")
     storage = strip_js_comments(read("js/math-storage.js"))
-    if "additionProgress" not in storage or "completeAdditionMission" not in storage:
-        fail("addition-planet", "math-storage.js 缺少 additionProgress／completeAdditionMission")
+    if "additionProgress" not in storage or "completeAdditionMission" not in storage or "completeAdditionLevel" not in storage:
+        fail("addition-planet", "math-storage.js 缺少 additionProgress／完成任務 API")
     data_src = read("js/additionData.js")
-    bases = [int(m.group(1)) for m in re.finditer(r"targetNumber:\s*(\d+)", data_src)]
-    if bases != list(range(5, 11)):
-        fail("addition-planet", f"additionData 關卡 targetNumber 應為 5–10，而家係 {bases}")
+    if "levelOnePairs" not in data_src or "levelTwoPairs" not in data_src or "VISUALS" not in data_src:
+        fail("addition-planet", "additionData 應包含 Level 1、Level 2 及多種原生 emoji 物件")
+    if data_src.count("questionCount: QUESTIONS_PER_LEVEL") != 1 or "QUESTIONS_PER_LEVEL = 10" not in data_src:
+        fail("addition-planet", "additionData 每個 Level 必須有十題")
     if "KakaAdditionGame" not in read("js/math-app.js"):
         fail("addition-planet", "math-app.js 未整合 KakaAdditionGame")
 
