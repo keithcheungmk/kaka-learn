@@ -30,6 +30,7 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| 數理下一刀（金星睇鐘加深／火星推理／月球主題） | **Codex** | 見 `docs/handover-codex-math-next.md` | 2026-09-08 | Keith：ChatGPT token 已開，Cursor 收工交棒 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
@@ -82,6 +83,12 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
   唔係 CI 會紅。Codex／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
 
 ## 最近改動
+
+### 2026-09-08 · Cursor（收工交棒 → Codex／ChatGPT）
+
+- 數理金星／火星／月球重組案已上線（PR #107，`6b2449d`）；Cursor 收工
+- 交接 brief：`docs/handover-codex-math-next.md`（建議下一刀、關鍵檔、硬性規則）
+- 「進行中」已預留認領俾 **Codex**；Codex 開工請更新該行備註／檔案清單
 
 ### 2026-09-08 · Cursor（金星睇鐘 + 火星形狀／推理；接撤走舊金星）
 
