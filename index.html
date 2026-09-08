@@ -25,7 +25,7 @@
   <meta name="twitter:image" content="https://keithcheungmk.github.io/kaka-learn/assets/og-image.png" />
   <link rel="stylesheet" href="./css/styles.css?v=20260905list" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260905list" />
-  <link rel="stylesheet" href="./css/math.css?v=20260811j" />
+  <link rel="stylesheet" href="./css/math.css?v=20260908c" />
   <link rel="stylesheet" href="./css/math-manipulatives.css?v=20260907a" />
   <link rel="stylesheet" href="./css/additionGame.css?v=20260905a" />
 </head>
@@ -444,25 +444,19 @@
       <p class="feedback" id="phonics-build-feedback" aria-live="polite"></p>
     </section>
 
-    <!-- 小鹿數理探險：太空站 hub -->
-    <section id="screen-math-hub" class="screen math-screen" aria-label="小鹿數理探險・太空站">
+    <!-- KAKA RANGER 數理探險：星球任務詳情 -->
+    <section id="screen-math-hub" class="screen math-screen" aria-label="KAKA RANGER 數理探險・星球任務">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-hub">← 主頁</button>
-        <h1>小鹿數理探險</h1>
-        <button type="button" class="btn btn-ghost" id="btn-math-galaxy" style="min-width:auto;padding:8px 12px">睇旅程</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-math-hub">← 銀河旅程</button>
+        <h1>KAKA RANGER 數理探險</h1>
+        <span class="math-header-spacer" aria-hidden="true"></span>
       </div>
       <div class="math-hub">
         <div class="math-planet-stage">
           <div id="math-planet-ball" class="math-globe-wrap math-globe-wrap--photo math-globe-wrap--mercury" aria-hidden="true">
             <img class="math-globe-img" src="./assets/math/planets/mercury.png" alt="" width="256" height="256" loading="lazy" decoding="async" />
           </div>
-          <div class="math-deer-guide" aria-hidden="true">
-            <div class="math-deer-body">
-              <div class="math-deer-face"><i></i><i></i></div>
-              <div class="math-deer-nose"></div>
-              <div class="math-deer-scarf" id="math-deer-scarf"></div>
-            </div>
-          </div>
+          <img class="math-ranger-guide-logo" src="./assets/kaka-ranger-logo.png" alt="" width="381" height="389" decoding="async" />
         </div>
         <h2 class="math-hub-title" id="math-hub-planet-name">水星</h2>
         <p class="math-hub-blurb" id="math-hub-blurb">喺水星學數數：數吓有幾多粒</p>
@@ -748,14 +742,14 @@
       <p class="feedback" id="math-pattern-feedback" aria-live="polite"></p>
     </section>
 
-    <!-- 小鹿數理探險：旅程總覽 -->
-    <section id="screen-math-galaxy" class="screen math-screen" aria-label="小鹿數理探險・睇旅程">
+    <!-- KAKA RANGER 數理探險：主 landing／旅程總覽 -->
+    <section id="screen-math-galaxy" class="screen math-screen" aria-label="KAKA RANGER 數理探險・銀河旅程">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-galaxy">← 太空站</button>
-        <h1>銀河旅程</h1>
-        <div class="progress-pill" aria-hidden="true"><strong>8</strong></div>
+        <button type="button" class="btn btn-ghost" id="btn-back-math-galaxy">← 主頁</button>
+        <h1>KAKA RANGER 數理銀河</h1>
+        <img class="math-galaxy-brand" src="./assets/kaka-ranger-logo.png" alt="" width="381" height="389" decoding="async" />
       </div>
-      <p class="section-lead">太陽系八大行星 + 月球站：撳一粒就去嗰度學（唔使跟住次序）</p>
+      <p class="section-lead">揀一粒星球，出發做數學任務！</p>
       <div class="topic-grid math-galaxy-grid" id="math-galaxy-grid"></div>
     </section>
   </div>
@@ -828,7 +822,7 @@
   <script src="./js/math-storage.js?v=20260811j"></script>
   <script src="./js/math-mastery.js?v=20260907a"></script>
   <script src="./js/math-question-engine.js?v=20260907a"></script>
-  <script src="./js/math-skills.js?v=20260811j"></script>
+  <script src="./js/math-skills.js?v=20260908c"></script>
   <script src="./js/math-manipulatives.js?v=20260907a"></script>
   <script src="./js/math-mercury-missions.js?v=20260907b"></script>
   <script src="./js/additionData.js?v=20260905a"></script>

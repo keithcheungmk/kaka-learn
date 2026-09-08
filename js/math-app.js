@@ -305,8 +305,6 @@
       const skill = $('#math-hub-skill');
       if (skill) skill.textContent = `學：${planet.skill}`;
 
-      const scarf = $('#math-deer-scarf');
-      if (scarf) scarf.style.background = planet.color;
     }
 
     function renderHub() {
@@ -433,11 +431,16 @@
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = `math-galaxy-card${lit ? ' is-lit' : ''}`;
-          btn.setAttribute('aria-label', retired ? `${p.name}，${p.skill}` : `${p.name}，學${p.skill}`);
+          const status = retired ? '即將開放' : (lit ? '已點亮' : '可以出發');
+          btn.setAttribute('aria-label', `${p.name}，${p.skill}，${status}`);
           btn.innerHTML = `
-            ${planetGlobeHtml(p, lit ? 'is-lit' : '')}
+            <span class="math-galaxy-planet">
+              ${planetGlobeHtml(p, lit ? 'is-lit' : '')}
+              <span class="math-galaxy-icon math-native-emoji" aria-hidden="true">${p.icon || '🚀'}</span>
+            </span>
             <span class="math-galaxy-name">${p.name}</span>
-            <span class="math-galaxy-skill">${lit ? '已點亮・' : ''}${p.skill}</span>
+            <span class="math-galaxy-skill">${p.skill}</span>
+            <span class="math-galaxy-status">${status}</span>
           `;
           btn.addEventListener('click', () => {
             updateState({ currentPlanetId: p.id });
@@ -1198,11 +1201,10 @@
         console.error('KakaMath: #btn-start-math missing.');
         return;
       }
-      start.addEventListener('click', () => openHub());
+      start.addEventListener('click', () => openGalaxy());
 
-      $('#btn-back-math-hub')?.addEventListener('click', () => goHome());
-      $('#btn-math-galaxy')?.addEventListener('click', () => openGalaxy());
-      $('#btn-back-math-galaxy')?.addEventListener('click', () => openHub());
+      $('#btn-back-math-hub')?.addEventListener('click', () => openGalaxy());
+      $('#btn-back-math-galaxy')?.addEventListener('click', () => goHome());
       $('#btn-math-launch')?.addEventListener('click', () => launchFromHub());
       $('#btn-math-go-next')?.addEventListener('click', () => goToNextPlanetFromHub());
       $('#btn-math-warp-go')?.addEventListener('click', () => finishWarpGo());

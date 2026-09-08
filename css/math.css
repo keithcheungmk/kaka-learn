@@ -101,6 +101,11 @@
   user-select: none;
 }
 
+/* 全站圖片後備色唔應該填入已去背嘅星球 alpha。 */
+.math-screen .math-globe-img {
+  background-color: transparent;
+}
+
 .math-globe-wrap--photo.is-lit .math-globe-img,
 #math-planet-ball.is-lit .math-globe-img {
   filter:
@@ -242,17 +247,23 @@
     linear-gradient(150deg, #6b9ef5 0%, #2f5ec8 48%, #1a2f8a 100%);
 }
 
-.math-deer-guide {
+.math-ranger-guide-logo {
   position: absolute;
-  right: -4%;
-  bottom: 2%;
-  width: 88px;
-  height: 100px;
-  animation: math-deer-bob 2.8s ease-in-out infinite;
+  right: -12%;
+  bottom: -5%;
+  width: 112px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.4));
+  animation: math-ranger-bob 2.8s ease-in-out infinite;
   z-index: 3;
 }
 
-@keyframes math-deer-bob {
+.math-header-spacer {
+  width: 120px;
+}
+
+@keyframes math-ranger-bob {
   0%,
   100% {
     transform: translateY(0);
@@ -260,77 +271,6 @@
   50% {
     transform: translateY(-8px);
   }
-}
-
-/* 數理專用更 Q 小鹿（CSS 佔位） */
-.math-deer-body {
-  position: relative;
-  width: 72px;
-  height: 72px;
-  margin: 0 auto;
-  background: #f5d0a9;
-  border-radius: 50% 50% 46% 46%;
-  box-shadow: inset -6px -8px 0 rgba(0, 0, 0, 0.06);
-}
-
-.math-deer-body::before,
-.math-deer-body::after {
-  content: "";
-  position: absolute;
-  top: -18px;
-  width: 18px;
-  height: 34px;
-  background: #c4a484;
-  border-radius: 10px 10px 4px 4px;
-}
-
-.math-deer-body::before {
-  left: 12px;
-  transform: rotate(-18deg);
-}
-
-.math-deer-body::after {
-  right: 12px;
-  transform: rotate(18deg);
-}
-
-.math-deer-face {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  padding-top: 8px;
-}
-
-.math-deer-face i {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #3b2f2f;
-}
-
-.math-deer-nose {
-  position: absolute;
-  left: 50%;
-  top: 48%;
-  width: 12px;
-  height: 10px;
-  margin-left: -6px;
-  background: #e879a9;
-  border-radius: 50%;
-}
-
-.math-deer-scarf {
-  position: absolute;
-  left: 50%;
-  bottom: -6px;
-  width: 40px;
-  height: 14px;
-  margin-left: -20px;
-  background: var(--math-planet, #3b82f6);
-  border-radius: 8px;
 }
 
 .math-hub-title {
@@ -373,12 +313,12 @@
 /* ---------- 銀河旅程卡（圓形星球，唔再用方塊 topic-card） ---------- */
 #math-galaxy-grid.math-galaxy-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(12px, 2.5vw, 20px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(4px, 1.2vw, 12px);
   width: 100%;
   max-width: 920px;
   margin: 0 auto;
-  padding: 8px 0 28px;
+  padding: 0 0 18px;
 }
 
 @media (max-width: 720px) {
@@ -397,10 +337,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 10px 6px 14px;
+  gap: 3px;
+  padding: 4px 6px 7px;
   border-radius: 24px;
   transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.math-galaxy-planet {
+  position: relative;
+  display: grid;
+  place-items: center;
 }
 
 .math-galaxy-card:active {
@@ -413,13 +359,13 @@
 }
 
 .math-galaxy-card .math-globe-wrap {
-  width: min(30vw, 120px);
-  height: min(30vw, 120px);
+  width: min(24vw, 96px);
+  height: min(24vw, 96px);
 }
 
 .math-galaxy-card .math-globe-wrap--saturn {
-  width: min(36vw, 140px);
-  height: min(30vw, 120px);
+  width: min(29vw, 116px);
+  height: min(24vw, 96px);
 }
 
 .math-galaxy-card .math-globe-img {
@@ -436,6 +382,22 @@
   font-size: clamp(1.05rem, 2.8vw, 1.25rem);
 }
 
+.math-galaxy-icon {
+  position: absolute;
+  right: -8px;
+  bottom: -2px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 2px solid rgba(255, 255, 255, 0.78);
+  border-radius: 50%;
+  background: rgba(8, 24, 48, 0.92);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.42);
+  font-size: 21px;
+  line-height: 1;
+}
+
 .math-galaxy-skill {
   font-size: 0.92rem;
   color: var(--ink-dim);
@@ -443,6 +405,24 @@
 
 .math-galaxy-card.is-lit .math-galaxy-skill {
   color: var(--gold-soft);
+}
+
+.math-galaxy-status {
+  min-height: 1.25em;
+  color: var(--teal-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.math-galaxy-card:not(.is-lit) .math-galaxy-status {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.math-galaxy-brand {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.35));
 }
 
 .math-galaxy-card.is-lit {
@@ -595,7 +575,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   #math-planet-ball.math-globe-wrap,
-  .math-deer-guide,
+  .math-ranger-guide-logo,
   .math-count-dot,
   .math-warp.is-flying .math-warp-ship,
   .math-warp.is-flying .math-warp-from,

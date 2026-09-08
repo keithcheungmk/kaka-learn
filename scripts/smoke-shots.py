@@ -193,6 +193,8 @@ def walk(pg, url, shots: Path | None, tag: str):
         pg.wait_for_timeout(800)
         probe(step)
         if entry == "#btn-start-math":
+            pg.click("#math-galaxy-grid .math-galaxy-card:first-child")
+            pg.wait_for_timeout(300)
             pg.click("#btn-math-launch")
             pg.wait_for_timeout(500)
             probe("數理・先學")

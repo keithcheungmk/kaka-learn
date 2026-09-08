@@ -83,6 +83,15 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-08 · Codex（數理銀河 landing + 技能徽章 + KAKA RANGER 品牌）
+
+- 「太空戰士數理」入口改為直接進入銀河總覽；九個天體以 3×3 顯示，逐粒加原生 emoji 技能徽章及「可以出發／即將開放」狀態
+- 學習次序改為水星數感 → 金星睇鐘 → 地球加法 → 月球「減法・拿走」預告；月球今次只定方向，未實作減法遊戲
+- 整套行星圖用連邊 flood-fill 去除烘焙黑底並更新 image lock；土星方框／紫邊及其他行星黑圈已消失
+- 星球詳情頁移除 CSS 兔仔，改用透明 `kaka-ranger-logo.png`；返回流程改為詳情 → 銀河 → 主頁
+- 實際瀏覽器驗收 iPad Pro 11 橫／直及 iPhone 16 Pro Max：桌面／iPad 九格同屏，手機兩欄可捲且無橫向溢出；invariants、math storage、mastery、manipulatives 全綠
+- **踩咗** `index.html`、`js/math-app.js`、`js/math-skills.js`、`css/math.css`、`assets/math/planets/*.png`、`assets/image-formats.lock.json`、`scripts/smoke-shots.py`、`docs/handover.md`
+
 ### 2026-09-08 · Cursor（金星睇鐘 + 火星形狀／推理；接撤走舊金星）
 
 - 舊金星邊多邊少／公平分享已撤；金星改「睇鐘」：先學模擬鐘＋電子鐘；玩法「揀鐘面」「揀電子鐘」；`planet id` 仍 `time`（進度保留）
