@@ -83,6 +83,12 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-08 · Cursor（Keith：撤走金星全部玩法）
+
+- 刪除金星先學／去玩玩／邊多邊少／公平分享 screen 同 `js/math-venus-balance.js`
+- 金星喺銀河只顯示「即將開放」；舊 `compare-qty` 點亮狀態載入時清走
+- **踩咗** `index.html`、`js/math-app.js`、`js/math-skills.js`、`js/math-storage.js`、`js/star-fx.js`、`scripts/check-invariants.py`、`docs/math-build-plan.md`
+
 ### 2026-09-07 · Cursor（Montessori M2 Sprint 3 + M3/M7/M8）
 
 - `js/math-mercury-missions.js`：水星每輪 5 題混合（火箭入油／外星人餵食／星座修復／多一少一／個人化重練）；玩法入口改「太空補給任務」；向後兼容 `KakaMathRocketFuel`

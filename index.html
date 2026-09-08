@@ -571,106 +571,6 @@
       <p class="feedback" id="math-count-feedback" aria-live="polite"></p>
     </section>
 
-    <!-- 金星・先學一學（邊多邊少） -->
-    <section id="screen-math-venus-learn" class="screen math-screen" aria-label="金星・先學一學">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-venus-learn">← 太空站</button>
-        <h1 id="math-venus-learn-title">金星・先學</h1>
-        <div class="progress-pill" aria-label="學習進度">
-          <strong id="math-venus-learn-progress">1/4</strong>
-        </div>
-      </div>
-      <p class="section-lead" id="math-venus-learn-lead">睇吓邊堆多、邊堆少，撳喇叭再聽</p>
-      <button type="button" class="math-learn-stage math-venus-stage" id="math-venus-learn-tap" aria-label="再聽一次">
-        <div class="math-compare-pairs" id="math-venus-learn-field" aria-hidden="true">
-          <div class="math-compare-side">
-            <div class="math-compare-items" id="math-venus-learn-left"></div>
-            <span class="math-compare-label" id="math-venus-learn-left-label">左邊</span>
-          </div>
-          <div class="math-compare-vs">比</div>
-          <div class="math-compare-side">
-            <div class="math-compare-items" id="math-venus-learn-right"></div>
-            <span class="math-compare-label" id="math-venus-learn-right-label">右邊</span>
-          </div>
-        </div>
-        <div class="math-venus-say" id="math-venus-learn-say">左邊多啲</div>
-        <div class="learn-hear">🔊 聽一聽</div>
-      </button>
-      <div class="btn-row">
-        <button type="button" class="btn btn-ghost" id="btn-math-venus-learn-prev">← 上一張</button>
-        <button type="button" class="btn btn-secondary" id="btn-math-venus-learn-next">下一張 →</button>
-      </div>
-      <div class="btn-row" id="math-venus-learn-finish-row" hidden>
-        <button type="button" class="btn" id="btn-math-venus-learn-play">學完喇・去玩玩</button>
-      </div>
-    </section>
-
-    <!-- 金星・揀玩法 -->
-    <section id="screen-math-venus-play" class="screen math-screen" aria-label="金星・去玩玩">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-venus-play">← 再學</button>
-        <h1 id="math-venus-play-title">金星・去玩玩</h1>
-        <div class="star-panel" style="min-height:56px;padding:8px 12px">
-          <span class="star-icon">★</span>
-          <span class="star-meta">
-            <strong id="math-venus-play-stars">0/10</strong>
-          </span>
-        </div>
-      </div>
-      <p class="section-lead">揀一種玩法</p>
-      <div class="btn-stack">
-        <button type="button" class="btn" id="btn-math-mode-balance">公平分享・分一分</button>
-        <button type="button" class="btn btn-secondary" id="btn-math-mode-compare">揀一揀・邊堆多</button>
-      </div>
-    </section>
-
-    <!-- 金星・公平分享 -->
-    <section id="screen-math-venus-balance" class="screen math-screen" aria-label="金星・公平分享">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-venus-balance">← 玩法</button>
-        <h1>金星・公平分享</h1>
-        <div class="progress-pill" aria-label="任務進度">
-          <strong id="math-venus-balance-progress">1/5</strong>
-        </div>
-      </div>
-      <div class="prompt-box">
-        <p id="math-venus-balance-prompt">兩個朋友想一樣多，幫佢哋分一分。</p>
-        <button type="button" class="speak-btn" id="btn-math-venus-balance-speak" aria-label="再聽一次">🔊 再聽一次</button>
-      </div>
-      <div class="math-manip-stage" id="math-venus-balance-board" aria-label="撳一下移去另一邊"></div>
-      <p class="feedback" id="math-venus-balance-feedback" aria-live="polite"></p>
-    </section>
-
-    <!-- 金星・邊多邊少 -->
-    <section id="screen-math-compare" class="screen math-screen" aria-label="金星・邊多邊少">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-compare">← 玩法</button>
-        <h1>邊多邊少</h1>
-        <div class="progress-pill" aria-label="答啱進度">
-          <strong id="math-compare-progress">0/5</strong>
-        </div>
-      </div>
-      <div class="prompt-box">
-        <p id="math-compare-prompt">邊堆多啲？</p>
-        <button type="button" class="speak-btn" id="btn-math-compare-speak" aria-label="再聽一次">🔊 再聽一次</button>
-      </div>
-      <div class="math-compare-pairs math-compare-pairs--quiz" id="math-compare-field">
-        <button type="button" class="math-compare-pick" data-side="left" aria-label="揀左邊">
-          <div class="math-compare-items" id="math-compare-left"></div>
-          <span class="math-compare-label">左邊</span>
-        </button>
-        <div class="math-compare-vs">比</div>
-        <button type="button" class="math-compare-pick" data-side="right" aria-label="揀右邊">
-          <div class="math-compare-items" id="math-compare-right"></div>
-          <span class="math-compare-label">右邊</span>
-        </button>
-      </div>
-      <div class="math-compare-actions" id="math-compare-same-row">
-        <button type="button" class="btn btn-secondary" id="btn-math-compare-same">一樣多</button>
-      </div>
-      <p class="feedback" id="math-compare-feedback" aria-live="polite"></p>
-    </section>
-
     <!-- 地球・加法能量基地 -->
     <section id="screen-math-earth-addition-select" class="screen math-screen addition-screen" aria-label="地球・揀能量基地">
       <div class="game-header">
@@ -848,7 +748,6 @@
   <script src="./js/math-skills.js?v=20260811j"></script>
   <script src="./js/math-manipulatives.js?v=20260907a"></script>
   <script src="./js/math-mercury-missions.js?v=20260907b"></script>
-  <script src="./js/math-venus-balance.js?v=20260907b"></script>
   <script src="./js/additionData.js?v=20260905a"></script>
   <script src="./js/additionGame.js?v=20260905a"></script>
   <script src="./js/math-app.js?v=20260905a"></script>

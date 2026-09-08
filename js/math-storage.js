@@ -73,6 +73,7 @@
       if (obj[k] !== undefined) out[k] = obj[k];
     });
     if (!Array.isArray(out.litPlanetIds)) out.litPlanetIds = [];
+    else out.litPlanetIds = out.litPlanetIds.filter((id) => id !== 'compare-qty');
     if (!out.additionProgress || typeof out.additionProgress !== 'object') {
       out.additionProgress = { unlockedBase: 5, completedMissions: [] };
     }

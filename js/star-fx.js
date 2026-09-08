@@ -34,8 +34,6 @@
     'screen-phonics-build',
     'screen-math-count',
     'screen-math-fuel',
-    'screen-math-venus-balance',
-    'screen-math-compare',
     'screen-math-earth-game',
     'screen-math-time',
   ]);

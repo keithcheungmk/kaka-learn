@@ -22,10 +22,10 @@
       id: 'compare-qty',
       body: 'venus',
       name: '金星',
-      skill: '邊多邊少',
+      skill: '即將開放',
       color: '#e8c27a',
       order: 1,
-      blurb: '喺金星學比較：邊堆多？邊堆少？',
+      blurb: '金星玩法整理中',
       img: PLANET_IMG('venus'),
     },
     {
