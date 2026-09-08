@@ -30,6 +30,7 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| 書本掃描書架 | Cursor | `book-scans/index.html`, `index.html`（主頁細字連出去）, `css/styles.css`（`.home-scans-link`）, `scripts/check-invariants.py` | 2026-09-08 | Keith 交辦：家長 PDF 書架；唔改識字／OCR／數理 |
 | 加減法操作流程統一第一階段 | Codex | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | Keith 交辦：加法加入回答確認、拖曳防誤觸、修正兩套桌面排位 |
 | 加減法操作流程統一、回答確認、拖曳防誤觸及桌面版面 | Codex | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | Keith 交辦：先操作後回答，修正加減法介面及排位 |
 
@@ -84,6 +85,13 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
   唔係 CI 會紅。Codex／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
 
 ## 最近改動
+
+### 2026-09-08 · Cursor（Keith：書本掃描書架）
+
+- 新增公開靜態書架 `book-scans/`：列出 7 本《我自己會讀》紅輯家庭掃描 PDF（檔名原樣；PDF 二進制另外 commit）
+- 主頁底部低調「書本掃描」連出去（新分頁），唔擋四大玩法入口
+- **冇改** `js/words.js`／字卡／OCR
+- **踩咗** `book-scans/index.html`、`index.html`、`css/styles.css`、`scripts/check-invariants.py`、`docs/handover.md`
 
 ### 2026-09-08 · Codex（加減法統一回答流程＋操作版面修正）
 

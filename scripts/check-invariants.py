@@ -836,6 +836,40 @@ def check_family_smoke_devices() -> None:
         fail("family-smoke", "家庭裝置 viewport 要係 iPad Pro 11 834×1194 同 iPhone 16 Pro Max 430×932")
 
 
+BOOK_SCAN_PDFS = (
+    "红①我的氣球呢-scan.pdf",
+    "红③雨傘-scan.pdf",
+    "红⑤分果果-scan.pdf",
+    "红⑥快跑呀-scan.pdf",
+    "红⑨一束花-scan.pdf",
+    "红⑪小明和氣球-scan.pdf",
+    "红⑫冬冬請客-scan.pdf",
+)
+
+
+def check_book_scans_shelf() -> None:
+    """家長用《我自己會讀》掃描書架：獨立靜態頁 + 主頁低調入口；唔改識字資料。"""
+    shelf = Path("book-scans/index.html")
+    if not shelf.exists():
+        fail("book-scans", "唔見 book-scans/index.html")
+        return
+    src = read("book-scans/index.html")
+    for name in BOOK_SCAN_PDFS:
+        if name not in src:
+            fail("book-scans", f"書架未連到 {name}")
+    if "唔作外傳" not in src and "不作外傳" not in src:
+        fail("book-scans", "書架要有一句屋企自用／唔作外傳說明")
+    html = read("index.html")
+    if "./book-scans/" not in html:
+        fail("book-scans", "主頁要有書本掃描入口（./book-scans/）")
+    if "書本掃描" not in html:
+        fail("book-scans", "入口文案要寫「書本掃描」")
+    if "id=\"screen-home\"" in html:
+        home = html.split('id="screen-home"', 1)[1].split("</section>", 1)[0]
+        if "書本掃描" not in home:
+            fail("book-scans", "書本掃描入口要放喺主頁，唔好塞入小朋友揀 Profile 大卡")
+
+
 def check_asset_weight() -> None:
     """效能：單張圖唔好超過 400KB，總資產唔好超過 12MB。"""
     total = 0
@@ -887,6 +921,7 @@ CHECKS = [
     check_cjk_halfwidth_punct,
     check_agent_collab_docs,
     check_family_smoke_devices,
+    check_book_scans_shelf,
     check_asset_weight,
 ]
 
