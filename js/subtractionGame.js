@@ -24,7 +24,18 @@
       busy = false; showReward(level);
     }, 550);
   }
-  function moveToTakeaway(el, mission) { if (busy || !el?.parentElement || removedCount >= mission.remove) return; $('#subtraction-takeaway')?.appendChild(el); el.classList.add('is-taken'); sync(mission); if (removedCount >= mission.remove) finish(mission, levels[currentLevelIndex]); }
+  function moveToTakeaway(el, mission) { if (busy || !el?.parentElement || removedCount >= mission.remove) return; $('#subtraction-takeaway')?.appendChild(el); el.classList.add('is-taken'); sync(mission); }
+  function answer(mission) {
+    if (busy) return;
+    const feedback = $('#subtraction-feedback');
+    if (removedCount !== mission.remove) {
+      if (feedback) feedback.textContent = `請拿走 ${mission.remove} 粒${mission.visual.label}，再撳回答。`;
+      deps.speak?.(`請拿走${mission.remove}粒${mission.visual.label}`);
+      return;
+    }
+    if (feedback) feedback.textContent = '答啱喇！';
+    finish(mission, levels[currentLevelIndex]);
+  }
   function bindObject(el, mission) {
     el.addEventListener('click', () => moveToTakeaway(el, mission));
     el.addEventListener('pointerdown', (event) => {
@@ -44,9 +55,9 @@
     const overlay = $('#math-round-finish'); if (!overlay) return; const msg = $('#math-round-finish-msg'); if (msg) msg.textContent = `${level.title}完成！攞到一個獎勵！`; overlay.hidden = false; deps.speech?.playStarCue?.({ muted: deps.isMuted?.() }); deps.speak?.('今輪玩完喇！你好叻呀！攞到一個獎勵！'); deps.playMathStarReward?.();
     $('#btn-math-round-again').onclick = () => { overlay.hidden = true; startMission(currentLevelIndex, 0); }; $('#btn-math-round-galaxy').onclick = () => { overlay.hidden = true; deps.openGalaxy?.(); };
   }
-  function startMission(levelIndex, missionIndex) { currentLevelIndex = levelIndex; currentMissionIndex = missionIndex; busy = false; const level = levels[levelIndex]; const mission = level.missions[missionIndex]; $('#subtraction-play-title').textContent = level.title; $('#subtraction-scenario').textContent = `${mission.scenario} · ${mission.visual.emoji}`; $('#subtraction-desc').textContent = mission.desc; $('#subtraction-mission-progress').textContent = `今輪第 ${missionIndex + 1} / ${level.missions.length} 題`; $('#subtraction-feedback').textContent = ''; renderMission(mission); updateStars(); deps.showMathScreen('subtractionPlay'); deps.speak?.(mission.desc); }
+  function startMission(levelIndex, missionIndex) { currentLevelIndex = levelIndex; currentMissionIndex = missionIndex; busy = false; const level = levels[levelIndex]; const mission = level.missions[missionIndex]; $('#subtraction-play-title').textContent = level.title; $('#subtraction-scenario').textContent = `${mission.scenario} · ${mission.visual.emoji}`; $('#subtraction-desc').textContent = `${mission.desc} 完成後撳「回答」。`; $('#subtraction-mission-progress').textContent = `今輪第 ${missionIndex + 1} / ${level.missions.length} 題`; $('#subtraction-feedback').textContent = ''; renderMission(mission); updateStars(); deps.showMathScreen('subtractionPlay'); deps.speak?.(mission.desc); }
   function renderSelect() { const grid = $('#subtraction-level-grid'); if (!grid) return; grid.innerHTML = ''; levels.forEach((level, index) => { const complete = level.missions.every((m) => done(m.id)); const card = document.createElement('button'); card.type = 'button'; card.className = `subtraction-level-card${unlocked(level.level) ? '' : ' is-locked'}${complete ? ' is-done' : ''}`; card.style.setProperty('--subtraction-accent', level.color); card.disabled = !unlocked(level.level); card.innerHTML = `<span class="subtraction-level-kicker">LEVEL ${level.level}</span><strong>${level.targetRange}</strong><span>${level.title.split('・')[1]}</span><small>${level.blurb}</small><span class="subtraction-level-status">${complete ? '已完成・可以再玩' : unlocked(level.level) ? '10 題任務' : '完成 Level 1 後解鎖'}</span>`; card.onclick = () => { const first = level.missions.findIndex((m) => !done(m.id)); startMission(index, first < 0 ? 0 : first); }; grid.appendChild(card); }); updateStars(); deps.showMathScreen('subtractionSelect'); }
   function openMoonSubtraction() { deps.updateState({ currentPlanetId: PLANET_ID }); renderSelect(); }
-  function init(options) { deps = options; levels = window.KakaSubtractionData?.subtractionLevels || []; $('#btn-back-math-subtraction-select')?.addEventListener('click', () => deps.openHub()); $('#btn-back-math-subtraction-play')?.addEventListener('click', () => renderSelect()); return levels.length > 0; }
+  function init(options) { deps = options; levels = window.KakaSubtractionData?.subtractionLevels || []; $('#btn-back-math-subtraction-select')?.addEventListener('click', () => deps.openHub()); $('#btn-back-math-subtraction-play')?.addEventListener('click', () => renderSelect()); $('#btn-subtraction-answer')?.addEventListener('click', () => { const mission = levels[currentLevelIndex]?.missions[currentMissionIndex]; if (mission) answer(mission); }); return levels.length > 0; }
   window.KakaSubtractionGame = { init, openMoonSubtraction, renderSelect, startMission };
 })();
