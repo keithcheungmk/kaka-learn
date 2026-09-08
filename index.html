@@ -606,53 +606,57 @@
       <div class="addition-merge-overlay" id="addition-merge-overlay" hidden></div>
     </section>
 
-    <!-- 月球・先學一學（時間） -->
-    <section id="screen-math-moon-learn" class="screen math-screen" aria-label="月球・先學一學">
+    <!-- 金星・先學一學（睇鐘） -->
+    <section id="screen-math-venus-learn" class="screen math-screen" aria-label="金星・先學一學">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-moon-learn">← 太空站</button>
-        <h1 id="math-moon-learn-title">月球・先學</h1>
+        <button type="button" class="btn btn-ghost" id="btn-back-math-venus-learn">← 太空站</button>
+        <h1 id="math-venus-learn-title">金星・先學</h1>
         <div class="progress-pill" aria-label="學習進度">
-          <strong id="math-moon-learn-progress">1/4</strong>
+          <strong id="math-venus-learn-progress">1/6</strong>
         </div>
       </div>
-      <p class="section-lead" id="math-moon-learn-lead">睇吓鐘面：短針指住數字就係「幾點」；半點長針指住 6</p>
-      <button type="button" class="math-learn-stage math-moon-stage" id="math-moon-learn-tap" aria-label="再聽一次">
-        <div class="math-clock-face" id="math-moon-learn-face"></div>
-        <div class="math-venus-say" id="math-moon-learn-say">一點鐘</div>
+      <p class="section-lead" id="math-venus-learn-lead">睇吓模擬鐘同電子鐘：整點／半點</p>
+      <button type="button" class="math-learn-stage math-venus-stage" id="math-venus-learn-tap" aria-label="再聽一次">
+        <div class="math-clock-pair" id="math-venus-learn-pair">
+          <div class="math-clock-face" id="math-venus-learn-face"></div>
+          <div class="math-digital-clock" id="math-venus-learn-digital" aria-hidden="true">3:00</div>
+        </div>
+        <div class="math-venus-say" id="math-venus-learn-say">一點鐘</div>
         <div class="learn-hear">🔊 聽一聽</div>
       </button>
       <div class="btn-row">
-        <button type="button" class="btn btn-ghost" id="btn-math-moon-learn-prev">← 上一張</button>
-        <button type="button" class="btn btn-secondary" id="btn-math-moon-learn-next">下一張 →</button>
+        <button type="button" class="btn btn-ghost" id="btn-math-venus-learn-prev">← 上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-venus-learn-next">下一張 →</button>
       </div>
-      <div class="btn-row" id="math-moon-learn-finish-row" hidden>
-        <button type="button" class="btn" id="btn-math-moon-learn-play">學完喇・去玩玩</button>
+      <div class="btn-row" id="math-venus-learn-finish-row" hidden>
+        <button type="button" class="btn" id="btn-math-venus-learn-play">學完喇・去玩玩</button>
       </div>
     </section>
 
-    <!-- 月球・揀玩法 -->
-    <section id="screen-math-moon-play" class="screen math-screen" aria-label="月球・去玩玩">
+    <!-- 金星・揀玩法 -->
+    <section id="screen-math-venus-play" class="screen math-screen" aria-label="金星・去玩玩">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-moon-play">← 再學</button>
-        <h1 id="math-moon-play-title">月球・去玩玩</h1>
+        <button type="button" class="btn btn-ghost" id="btn-back-math-venus-play">← 再學</button>
+        <h1 id="math-venus-play-title">金星・去玩玩</h1>
         <div class="star-panel" style="min-height:56px;padding:8px 12px">
           <span class="star-icon">★</span>
           <span class="star-meta">
-            <strong id="math-moon-play-stars">0/10</strong>
+            <strong id="math-venus-play-stars">0/10</strong>
           </span>
         </div>
       </div>
       <p class="section-lead">揀一種玩法</p>
       <div class="btn-stack">
-        <button type="button" class="btn" id="btn-math-mode-time">聽一聽・揀鐘</button>
+        <button type="button" class="btn" id="btn-math-mode-time-analog">聽一聽・揀鐘面</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-mode-time-digital">聽一聽・揀電子鐘</button>
       </div>
     </section>
 
-    <!-- 月球・揀鐘 -->
-    <section id="screen-math-time" class="screen math-screen" aria-label="月球・揀鐘">
+    <!-- 金星・揀鐘 -->
+    <section id="screen-math-time" class="screen math-screen" aria-label="金星・揀鐘">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-math-time">← 玩法</button>
-        <h1>揀一揀鐘</h1>
+        <h1 id="math-time-title">揀一揀鐘</h1>
         <div class="progress-pill" aria-label="答啱進度">
           <strong id="math-time-progress">0/5</strong>
         </div>
@@ -661,8 +665,87 @@
         <p id="math-time-prompt">揀出正確嘅時間</p>
         <button type="button" class="speak-btn" id="btn-math-time-speak" aria-label="再聽一次">🔊 再聽一次</button>
       </div>
-      <div class="math-clock-grid" id="math-time-options" aria-label="揀鐘面"></div>
+      <div class="math-clock-grid" id="math-time-options" aria-label="揀時間"></div>
       <p class="feedback" id="math-time-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 火星・先學（形狀＋推理） -->
+    <section id="screen-math-mars-learn" class="screen math-screen" aria-label="火星・先學一學">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-mars-learn">← 太空站</button>
+        <h1 id="math-mars-learn-title">火星・先學</h1>
+        <div class="progress-pill" aria-label="學習進度">
+          <strong id="math-mars-learn-progress">1/5</strong>
+        </div>
+      </div>
+      <p class="section-lead" id="math-mars-learn-lead">學圓、三角、方；再睇缺格規律</p>
+      <button type="button" class="math-learn-stage math-mars-stage" id="math-mars-learn-tap" aria-label="再聽一次">
+        <div class="math-mars-learn-visual" id="math-mars-learn-visual" aria-hidden="true"></div>
+        <div class="math-venus-say" id="math-mars-learn-say">圓形</div>
+        <div class="learn-hear">🔊 聽一聽</div>
+      </button>
+      <div class="btn-row">
+        <button type="button" class="btn btn-ghost" id="btn-math-mars-learn-prev">← 上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-mars-learn-next">下一張 →</button>
+      </div>
+      <div class="btn-row" id="math-mars-learn-finish-row" hidden>
+        <button type="button" class="btn" id="btn-math-mars-learn-play">學完喇・去玩玩</button>
+      </div>
+    </section>
+
+    <!-- 火星・揀玩法 -->
+    <section id="screen-math-mars-play" class="screen math-screen" aria-label="火星・去玩玩">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-mars-play">← 再學</button>
+        <h1 id="math-mars-play-title">火星・去玩玩</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta">
+            <strong id="math-mars-play-stars">0/10</strong>
+          </span>
+        </div>
+      </div>
+      <p class="section-lead">揀一種玩法</p>
+      <div class="btn-stack">
+        <button type="button" class="btn" id="btn-math-mode-shape">睇一睇・揀形狀</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-mode-pattern">補一補・規律</button>
+      </div>
+    </section>
+
+    <!-- 火星・揀形狀 -->
+    <section id="screen-math-shape" class="screen math-screen" aria-label="火星・揀形狀">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-shape">← 玩法</button>
+        <h1>揀形狀</h1>
+        <div class="progress-pill" aria-label="答啱進度">
+          <strong id="math-shape-progress">0/5</strong>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p id="math-shape-prompt">呢個係咩形狀？</p>
+        <button type="button" class="speak-btn" id="btn-math-shape-speak" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="math-mars-prompt-shape" id="math-shape-target" aria-hidden="true"></div>
+      <div class="math-mars-options" id="math-shape-options" aria-label="揀形狀名"></div>
+      <p class="feedback" id="math-shape-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- 火星・補規律 -->
+    <section id="screen-math-pattern" class="screen math-screen" aria-label="火星・補規律">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-pattern">← 玩法</button>
+        <h1>補規律</h1>
+        <div class="progress-pill" aria-label="答啱進度">
+          <strong id="math-pattern-progress">0/5</strong>
+        </div>
+      </div>
+      <div class="prompt-box">
+        <p id="math-pattern-prompt">邊個跟住嚟？</p>
+        <button type="button" class="speak-btn" id="btn-math-pattern-speak" aria-label="再聽一次">🔊 再聽一次</button>
+      </div>
+      <div class="math-pattern-row" id="math-pattern-row" aria-label="規律格"></div>
+      <div class="math-mars-options" id="math-pattern-options" aria-label="揀答案"></div>
+      <p class="feedback" id="math-pattern-feedback" aria-live="polite"></p>
     </section>
 
     <!-- 小鹿數理探險：旅程總覽 -->
@@ -672,7 +755,7 @@
         <h1>銀河旅程</h1>
         <div class="progress-pill" aria-hidden="true"><strong>8</strong></div>
       </div>
-      <p class="section-lead">太陽系八大行星 + 月球時間站：撳一粒就去嗰度學（唔使跟住次序）</p>
+      <p class="section-lead">太陽系八大行星 + 月球站：撳一粒就去嗰度學（唔使跟住次序）</p>
       <div class="topic-grid math-galaxy-grid" id="math-galaxy-grid"></div>
     </section>
   </div>

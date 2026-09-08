@@ -931,7 +931,7 @@
 
 #screen-math-venus-learn.math-screen.active,
 #screen-math-venus-play.math-screen.active,
-#screen-math-compare.math-screen.active {
+#screen-math-time.math-screen.active {
   --math-planet: #e8c27a;
 }
 
@@ -940,10 +940,11 @@
   --math-planet: #3b82f6;
 }
 
-#screen-math-moon-learn.math-screen.active,
-#screen-math-moon-play.math-screen.active,
-#screen-math-time.math-screen.active {
-  --math-planet: #cbd5e1;
+#screen-math-mars-learn.math-screen.active,
+#screen-math-mars-play.math-screen.active,
+#screen-math-shape.math-screen.active,
+#screen-math-pattern.math-screen.active {
+  --math-planet: #e35d3b;
 }
 
 #screen-math-learn.math-screen.active::before,
@@ -951,12 +952,13 @@
 #screen-math-count.math-screen.active::before,
 #screen-math-venus-learn.math-screen.active::before,
 #screen-math-venus-play.math-screen.active::before,
-#screen-math-compare.math-screen.active::before,
+#screen-math-time.math-screen.active::before,
 #screen-math-earth-levels.math-screen.active::before,
 #screen-math-earth-game.math-screen.active::before,
-#screen-math-moon-learn.math-screen.active::before,
-#screen-math-moon-play.math-screen.active::before,
-#screen-math-time.math-screen.active::before {
+#screen-math-mars-learn.math-screen.active::before,
+#screen-math-mars-play.math-screen.active::before,
+#screen-math-shape.math-screen.active::before,
+#screen-math-pattern.math-screen.active::before {
   background:
     radial-gradient(900px 500px at 50% 18%, color-mix(in srgb, var(--math-planet, #b6bcc4) 22%, transparent), transparent 58%),
     linear-gradient(180deg, rgba(7, 21, 38, 0.55) 0%, rgba(7, 21, 38, 0.72) 100%),
@@ -1522,4 +1524,138 @@
   margin-top: 6px;
   font-size: 0.92rem;
   color: var(--ink-dim);
+}
+
+/* ---------- 金星・電子鐘 ---------- */
+.math-clock-pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 24px);
+  flex-wrap: wrap;
+}
+
+.math-digital-clock {
+  min-width: clamp(120px, 28vw, 180px);
+  padding: clamp(10px, 2vw, 16px) clamp(14px, 3vw, 22px);
+  border-radius: 14px;
+  background: #0b1224;
+  border: 2px solid rgba(253, 230, 138, 0.45);
+  box-shadow: inset 0 0 18px rgba(56, 189, 248, 0.15);
+  text-align: center;
+}
+
+.math-digital-clock--small {
+  min-width: clamp(88px, 20vw, 120px);
+  padding: 8px 12px;
+}
+
+.math-digital-digits {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 7vw, 2.8rem);
+  font-weight: 700;
+  color: #67e8f9;
+  letter-spacing: 0.06em;
+}
+
+.math-digital-clock--small .math-digital-digits {
+  font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+}
+
+.math-clock-pick--digital {
+  min-width: clamp(110px, 26vw, 150px);
+}
+
+/* ---------- 火星・形狀／規律 ---------- */
+.math-mars-learn-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(100px, 22vw, 160px);
+}
+
+.math-shape-glyph {
+  font-size: clamp(2.4rem, 10vw, 4rem);
+  line-height: 1;
+  display: inline-flex;
+}
+
+.math-shape-glyph.is-hero {
+  font-size: clamp(3.5rem, 16vw, 6rem);
+}
+
+.math-mars-prompt-shape {
+  display: flex;
+  justify-content: center;
+  margin: clamp(6px, 1.5vh, 12px) 0;
+}
+
+.math-mars-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.math-mars-option.is-ok {
+  outline: 3px solid rgba(253, 230, 138, 0.85);
+}
+
+.math-mars-option.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+.math-mars-option--glyph {
+  appearance: none;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: rgba(18, 40, 72, 0.72);
+  border-radius: 16px;
+  width: clamp(72px, 18vw, 96px);
+  height: clamp(72px, 18vw, 96px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.math-pattern-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(6px, 1.5vw, 10px);
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.math-pattern-cell {
+  width: clamp(48px, 12vw, 64px);
+  height: clamp(48px, 12vw, 64px);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.4rem, 5vw, 2rem);
+}
+
+.math-pattern-cell.is-blank {
+  border-style: dashed;
+  color: #fde68a;
+  font-weight: 700;
+}
+
+#screen-math-shape.math-screen.active,
+#screen-math-pattern.math-screen.active,
+#screen-math-mars-learn.math-screen.active,
+#screen-math-mars-play.math-screen.active,
+#screen-math-venus-learn.math-screen.active,
+#screen-math-venus-play.math-screen.active,
+#screen-math-time.math-screen.active {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
 }

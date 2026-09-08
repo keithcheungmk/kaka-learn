@@ -570,8 +570,14 @@ def check_math_manipulatives() -> None:
         fail("math-manipulatives", "index.html 缺少 btn-math-mode-fuel")
     if "math-mercury-missions.js" not in html:
         fail("math-manipulatives", "index.html 未載入 math-mercury-missions.js")
-    if "screen-math-venus" in html or "math-venus-balance.js" in html:
-        fail("math-manipulatives", "金星玩法已撤，index.html 唔應再載入 Venus screen／script")
+    if "math-venus-balance.js" in html or "screen-math-venus-balance" in html:
+        fail("math-manipulatives", "金星公平分享已撤，唔應再載入 balance script／screen")
+    if "screen-math-venus-learn" not in html or "screen-math-time" not in html:
+        fail("math-manipulatives", "index.html 缺少金星睇鐘 screens")
+    if "screen-math-mars-learn" not in html or "screen-math-pattern" not in html:
+        fail("math-manipulatives", "index.html 缺少火星形狀／規律 screens")
+    if "btn-math-mode-time-digital" not in html:
+        fail("math-manipulatives", "index.html 缺少電子鐘玩法掣")
     missions = read("js/math-mercury-missions.js")
     for needle in ["alienFeed", "constellation", "oneMoreLess", "KakaMathRocketFuel"]:
         if needle not in missions:
@@ -579,8 +585,17 @@ def check_math_manipulatives() -> None:
     app = read("js/math-app.js")
     if "KakaMathMercuryMissions" not in app:
         fail("math-manipulatives", "math-app.js 未整合 KakaMathMercuryMissions")
-    if "KakaMathVenusBalance" in app or "openVenusLearn" in app:
-        fail("math-manipulatives", "math-app.js 仍引用已撤嘅金星玩法")
+    if "KakaMathVenusBalance" in app:
+        fail("math-manipulatives", "math-app.js 仍引用已撤嘅金星公平分享")
+    if "openVenusLearn" not in app or "openMarsLearn" not in app:
+        fail("math-manipulatives", "math-app.js 缺少 openVenusLearn／openMarsLearn")
+    if "digitalClockHtml" not in app:
+        fail("math-manipulatives", "math-app.js 缺少電子鐘 digitalClockHtml")
+    skills = read("js/math-skills.js")
+    if "睇鐘" not in skills or "形狀・推理" not in skills:
+        fail("math-manipulatives", "math-skills.js 金星應係睇鐘、火星應係形狀・推理")
+    if "compare-qty" in skills:
+        fail("math-manipulatives", "math-skills.js 唔應再有 compare-qty（金星已改睇鐘）")
     mastery = read("js/math-mastery.js")
     if "pickSkillForReview" not in mastery or "summarizeMathProgress" not in mastery:
         fail("math-manipulatives", "math-mastery.js 缺少 M7/M8 個人化出題或數感摘要")

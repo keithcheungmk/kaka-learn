@@ -61,6 +61,7 @@ test('舊單一資料歸入卡卡，禧禧由零開始', () => {
   );
   assert.equal(S.loadState().totalStars, 42);
   assert.equal(S.SCHEMA_VERSION, 4);
+  assert.equal(S.loadState().currentPlanetId, 'time');
   assert.deepEqual(S.loadState().skillProgress, {});
   assert.deepEqual([...S.loadState().mistakeHistory], []);
   assert.deepEqual([...S.loadState().missionHistory], []);
@@ -81,7 +82,7 @@ test('v3 Profile 資料升級 v4，保留原有加法與星球進度', () => {
         kaka: { totalStars: 8, litPlanetIds: ['count'] },
         heihei: {
           totalStars: 3,
-          litPlanetIds: ['compare-qty'],
+          litPlanetIds: ['compare-qty', 'count'],
           additionProgress: { unlockedBase: 7, completedMissions: ['5-1'] },
         },
       },
@@ -89,7 +90,7 @@ test('v3 Profile 資料升級 v4，保留原有加法與星球進度', () => {
   );
   const state = S.loadState();
   assert.equal(state.totalStars, 3);
-  assert.deepEqual([...state.litPlanetIds], ['compare-qty']);
+  assert.deepEqual([...state.litPlanetIds], ['count']);
   assert.equal(state.additionProgress.unlockedBase, 7);
   assert.deepEqual([...state.additionProgress.completedMissions], ['5-1']);
   assert.deepEqual(state.skillProgress, {});
@@ -133,9 +134,9 @@ test('卡卡／禧禧數理進度完全隔離', () => {
   S.setActiveProfile('heihei');
   S.tryEarnStar();
   S.tryEarnStar();
-  S.lightPlanet('compare-qty');
+  S.lightPlanet('shape');
   assert.equal(S.loadState().totalStars, 2);
-  assert.deepEqual([...S.loadState().litPlanetIds], ['compare-qty']);
+  assert.deepEqual([...S.loadState().litPlanetIds], ['shape']);
   S.setActiveProfile('kaka');
   assert.equal(S.loadState().totalStars, 1);
   assert.deepEqual([...S.loadState().litPlanetIds], ['count']);

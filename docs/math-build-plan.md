@@ -11,7 +11,7 @@
 | **A — 骨架** | landing 入口、hub、storage／skills | ✅ |
 | **B — 水星可玩** | 先學 +「數一數・揀數」；答啱攞數理星；5 題點亮水星 | ✅ |
 | **C — 點亮＋飛行** | `warp-hop` 建議下一星；Hub「飛去下一粒」；已點亮標記加強 | ✅ |
-| **D — 擴星** | 金星、地球已可玩；**月球（時間）**整點／半點已可玩 | ✅ 3 星；🚧 其餘 |
+| **D — 擴星** | **金星睇鐘**（模擬＋電子）、地球加法、**火星形狀／推理**；月球暫「即將開放」 | ✅ 4 星可玩；月球空位 |
 | **E — 打磨** | 動畫、家長開關、面試小試 | 最後 |
 
 ### 2026-09-07 數感升級
@@ -25,10 +25,9 @@
 - **Phase M1 ✅**：`js/math-manipulatives.js` + `css/math-manipulatives.css` — 原生 emoji 拖放／撳放操作層（唔用 OpenMoji）；`scripts/test-math-manipulatives.mjs`。
 - **Phase M2 ✅（第一輪）**：水星「火箭入油」— 5 題拖入燃料槽、語音計數、三級提示、掌握度接入；玩法頁主入口；**「數一數・揀數（經典）」保留作後備**。
 - **Phase M2 Sprint 3 ✅**：`js/math-mercury-missions.js` — 每輪 5 題混合（火箭入油 → 外星人餵食 → 星座修復 → 多一少一 → 個人化重練）；零題用「好啦」掣；向後兼容 `KakaMathRocketFuel`。
-- **Phase M3（公平分享）**：已撤 — 金星玩法整理中，銀河只顯示「即將開放」。
-- **Phase M7 ✅**：`math-mastery.js` `pickSkillForReview` — 40/30/20/10 review→learning→practising→mastered。
-- **Phase M8 ✅**：進度頁 `#progress-math-summary` / `#progress-math-skills` — 數感摘要同要練技能。
-- **刻意未做**：M3 貨艙平衡、隊伍配對（Sprint 4–5）。
+- **Phase M3（公平分享）**：已撤 — 金星改做「睇鐘」（由月球遷入）。
+- **2026-09-08**：金星 = 模擬鐘＋電子鐘；火星 = 形狀＋缺格規律；月球 = 即將開放。
+- **刻意未做**：M3 貨艙平衡、隊伍配對；月球新主題；鐘面一刻／分針。
 
 ---
 

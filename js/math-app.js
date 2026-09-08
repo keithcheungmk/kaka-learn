@@ -56,12 +56,38 @@
       CLOCK_ITEMS.push(clockItem(h, false), clockItem(h, true));
     }
 
-    /** 先學：整點 + 半點講清楚 */
-    const MOON_LEARN_CARDS = [
-      { ...clockItem(3, false), learnSay: '三點鐘。短針指住 3，長針指住 12。' },
-      { ...clockItem(3, true), learnSay: '三點半。長針指住 6，就係半點。' },
-      { ...clockItem(12, false), learnSay: '十二點鐘。兩支針都指住 12。' },
-      { ...clockItem(6, true), learnSay: '六點半。長針指住 6。' },
+    /** 先學：模擬鐘 + 電子鐘（整點／半點） */
+    const VENUS_TIME_LEARN_CARDS = [
+      { ...clockItem(3, false), learnSay: '三點鐘。模擬鐘短針指住 3，長針指住 12。電子鐘寫住 3:00。' },
+      { ...clockItem(3, true), learnSay: '三點半。長針指住 6，就係半點。電子鐘寫住 3:30。' },
+      { ...clockItem(12, false), learnSay: '十二點鐘。兩支針都指住 12。電子鐘寫住 12:00。' },
+      { ...clockItem(6, true), learnSay: '六點半。長針指住 6。電子鐘寫住 6:30。' },
+      { ...clockItem(9, false), learnSay: '電子鐘寫住 9:00，就係九點鐘。' },
+      { ...clockItem(2, true), learnSay: '電子鐘寫住 2:30，就係兩點半。' },
+    ];
+
+    const MARS_SHAPES = [
+      { id: 'circle', name: '圓形', emoji: '⚪', say: '圓形' },
+      { id: 'triangle', name: '三角形', emoji: '🔺', say: '三角形' },
+      { id: 'square', name: '方形', emoji: '🟦', say: '方形' },
+    ];
+
+    const MARS_LEARN_CARDS = [
+      { kind: 'shape', shape: MARS_SHAPES[0], learnSay: '呢個係圓形。圓圓哋，冇角。' },
+      { kind: 'shape', shape: MARS_SHAPES[1], learnSay: '呢個係三角形。有三個角。' },
+      { kind: 'shape', shape: MARS_SHAPES[2], learnSay: '呢個係方形。有四個一樣嘅邊。' },
+      {
+        kind: 'pattern',
+        sequence: [MARS_SHAPES[0], MARS_SHAPES[1], MARS_SHAPES[0], MARS_SHAPES[1]],
+        answer: MARS_SHAPES[0],
+        learnSay: '圓、三角、圓、三角……跟住又係圓。呢個叫規律。',
+      },
+      {
+        kind: 'pattern',
+        sequence: [MARS_SHAPES[2], MARS_SHAPES[2], MARS_SHAPES[0], MARS_SHAPES[2], MARS_SHAPES[2], MARS_SHAPES[0]],
+        answer: MARS_SHAPES[2],
+        learnSay: '方、方、圓，再方、方、圓……跟住又係方。',
+      },
     ];
 
     const $ = (sel, root = document) => root.querySelector(sel);
@@ -76,9 +102,13 @@
       fuel: '#screen-math-fuel',
       additionSelect: '#screen-math-earth-addition-select',
       additionPlay: '#screen-math-earth-addition-play',
-      mlearn: '#screen-math-moon-learn',
-      mplay: '#screen-math-moon-play',
+      vlearn: '#screen-math-venus-learn',
+      vplay: '#screen-math-venus-play',
       time: '#screen-math-time',
+      marsLearn: '#screen-math-mars-learn',
+      marsPlay: '#screen-math-mars-play',
+      shape: '#screen-math-shape',
+      pattern: '#screen-math-pattern',
     };
 
     let learnIndex = 0;
@@ -91,10 +121,18 @@
     let countWrongAttempts = 0;
     let countFirstWrongAnswer = null;
     let countMissionStartedAt = null;
-    let mLearnIndex = 0;
+    let vLearnIndex = 0;
     let timeBusy = false;
     let timeRound = null;
     let timeCorrect = 0;
+    let timeMode = 'analog';
+    let marsLearnIndex = 0;
+    let shapeBusy = false;
+    let shapeRound = null;
+    let shapeCorrect = 0;
+    let patternBusy = false;
+    let patternRound = null;
+    let patternCorrect = 0;
     let warpFromPlanet = null;
     let warpToPlanet = null;
     let warpTimer = null;
@@ -118,7 +156,7 @@
       const sel = screens[name] || screens.hub;
       const el = $(sel);
       el?.classList.add('active');
-      if (['count', 'additionPlay', 'time', 'fuel'].includes(name)) {
+      if (['count', 'additionPlay', 'time', 'fuel', 'shape', 'pattern'].includes(name)) {
         const fx = window.KakaStarFx;
         fx?.mountPlayScreen?.(el);
         fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
@@ -179,6 +217,29 @@
         })
         .join('');
       return `<div class="math-clock-face math-clock-face--drawn${small ? ' math-clock-face--small' : ''}" role="img" aria-label="${item.say}">${ticks}${markers}<span class="math-clock-hand math-clock-hand--hour" style="transform: translateX(-50%) rotate(${hourAng}deg)"></span><span class="math-clock-hand math-clock-hand--min" style="transform: translateX(-50%) rotate(${minAng}deg)"></span><span class="math-clock-center"></span></div>`;
+    }
+
+    function digitalText(item) {
+      return `${item.h}:${item.half ? '30' : '00'}`;
+    }
+
+    function digitalClockHtml(item, { small = false } = {}) {
+      const text = digitalText(item);
+      return `<div class="math-digital-clock${small ? ' math-digital-clock--small' : ''}" role="img" aria-label="${item.say}"><span class="math-digital-digits">${text}</span></div>`;
+    }
+
+    function shapeGlyphHtml(shape, extraClass = '') {
+      return `<span class="math-shape-glyph math-shape-glyph--${shape.id} ${extraClass}" aria-hidden="true">${shape.emoji}</span>`;
+    }
+
+    function patternCellsHtml(sequence, { blankLast = false } = {}) {
+      return sequence
+        .map((item, i) => {
+          const empty = item == null || (blankLast && i === sequence.length - 1);
+          if (empty) return `<span class="math-pattern-cell is-blank" aria-label="缺格">？</span>`;
+          return `<span class="math-pattern-cell">${shapeGlyphHtml(item)}</span>`;
+        })
+        .join('');
     }
 
     function renderCountField(el, n, emoji) {
@@ -277,7 +338,7 @@
 
       const coming = $('#math-hub-coming');
       if (coming) {
-        const playable = ['count', 'compare-size', 'time'].includes(planet.id);
+        const playable = ['count', 'compare-size', 'time', 'shape'].includes(planet.id);
         if (playable) {
           coming.hidden = true;
           coming.textContent = '';
@@ -367,7 +428,7 @@
       [...MATH_PLANETS]
         .sort((a, b) => a.order - b.order)
         .forEach((p) => {
-          const retired = p.id === 'compare-qty';
+          const retired = p.id === 'moon';
           const lit = !retired && isPlanetLit(p.id, state);
           const btn = document.createElement('button');
           btn.type = 'button';
@@ -728,53 +789,57 @@
 
     /* ---------- 地球・加法（KakaAdditionGame） ---------- */
 
-    /* ---------- 月球・先學（時間） ---------- */
-    function openMoonLearn() {
+    /* ---------- 金星・先學（睇鐘） ---------- */
+    function openVenusLearn() {
       updateState({ currentPlanetId: 'time' });
-      mLearnIndex = 0;
-      const title = $('#math-moon-learn-title');
-      if (title) title.textContent = '月球・先學';
-      renderMoonLearnCard(true);
-      showMathScreen('mlearn');
+      vLearnIndex = 0;
+      const title = $('#math-venus-learn-title');
+      if (title) title.textContent = '金星・先學';
+      renderVenusLearnCard(true);
+      showMathScreen('vlearn');
     }
 
-    function renderMoonLearnCard(autoSpeak) {
-      const card = MOON_LEARN_CARDS[mLearnIndex];
-      const face = $('#math-moon-learn-face');
+    function renderVenusLearnCard(autoSpeak) {
+      const card = VENUS_TIME_LEARN_CARDS[vLearnIndex];
+      const face = $('#math-venus-learn-face');
       if (face) face.innerHTML = clockFaceHtml(card);
-      const say = $('#math-moon-learn-say');
-      if (say) say.textContent = card.say;
-      const progress = $('#math-moon-learn-progress');
-      if (progress) progress.textContent = `${mLearnIndex + 1}/${MOON_LEARN_CARDS.length}`;
+      const dig = $('#math-venus-learn-digital');
+      if (dig) dig.innerHTML = `<span class="math-digital-digits">${digitalText(card)}</span>`;
+      const say = $('#math-venus-learn-say');
+      if (say) say.textContent = `${card.say} · ${digitalText(card)}`;
+      const progress = $('#math-venus-learn-progress');
+      if (progress) progress.textContent = `${vLearnIndex + 1}/${VENUS_TIME_LEARN_CARDS.length}`;
 
-      const prev = $('#btn-math-moon-learn-prev');
-      const next = $('#btn-math-moon-learn-next');
-      const finish = $('#math-moon-learn-finish-row');
-      if (prev) prev.disabled = mLearnIndex <= 0;
-      if (next) next.hidden = mLearnIndex >= MOON_LEARN_CARDS.length - 1;
-      if (finish) finish.hidden = mLearnIndex < MOON_LEARN_CARDS.length - 1;
+      const prev = $('#btn-math-venus-learn-prev');
+      const next = $('#btn-math-venus-learn-next');
+      const finish = $('#math-venus-learn-finish-row');
+      if (prev) prev.disabled = vLearnIndex <= 0;
+      if (next) next.hidden = vLearnIndex >= VENUS_TIME_LEARN_CARDS.length - 1;
+      if (finish) finish.hidden = vLearnIndex < VENUS_TIME_LEARN_CARDS.length - 1;
 
-      if (autoSpeak) speakMoonLearn();
+      if (autoSpeak) speakVenusLearn();
     }
 
-    function speakMoonLearn() {
-      const card = MOON_LEARN_CARDS[mLearnIndex];
+    function speakVenusLearn() {
+      const card = VENUS_TIME_LEARN_CARDS[vLearnIndex];
       speak(card.learnSay || card.say);
     }
 
-    /* ---------- 月球・聽一聽揀鐘 ---------- */
-    function openMoonPlay() {
-      const stars = $('#math-moon-play-stars');
+    function openVenusPlay() {
+      const stars = $('#math-venus-play-stars');
       const state = loadState();
       if (stars) stars.textContent = `${state.starsToday}/10`;
-      const title = $('#math-moon-play-title');
-      if (title) title.textContent = '月球・去玩玩';
-      showMathScreen('mplay');
+      const title = $('#math-venus-play-title');
+      if (title) title.textContent = '金星・去玩玩';
+      showMathScreen('vplay');
     }
 
-    function openTimeQuiz() {
+    function openTimeQuiz(mode) {
+      timeMode = mode === 'digital' ? 'digital' : 'analog';
       timeBusy = false;
       timeCorrect = 0;
+      const title = $('#math-time-title');
+      if (title) title.textContent = timeMode === 'digital' ? '揀電子鐘' : '揀鐘面';
       updateTimeProgress();
       nextTimeRound(true);
       showMathScreen('time');
@@ -792,7 +857,10 @@
       timeRound = { target, options };
 
       const prompt = $('#math-time-prompt');
-      if (prompt) prompt.textContent = '揀出正確嘅時間';
+      if (prompt) {
+        prompt.textContent =
+          timeMode === 'digital' ? '聽完揀正確嘅電子鐘' : '聽完揀正確嘅鐘面';
+      }
       const fb = $('#math-time-feedback');
       if (fb) fb.textContent = '';
 
@@ -802,12 +870,12 @@
         options.forEach((c) => {
           const btn = document.createElement('button');
           btn.type = 'button';
-          btn.className = 'math-clock-pick';
-          btn.setAttribute('aria-label', c.say);
-          btn.innerHTML = `
-            ${clockFaceHtml(c, { small: true })}
-            <span class="math-clock-label">${c.say}</span>
-          `;
+          btn.className = timeMode === 'digital' ? 'math-clock-pick math-clock-pick--digital' : 'math-clock-pick';
+          btn.setAttribute('aria-label', `${c.say} ${digitalText(c)}`);
+          btn.innerHTML =
+            timeMode === 'digital'
+              ? `${digitalClockHtml(c, { small: true })}<span class="math-clock-label">${c.say}</span>`
+              : `${clockFaceHtml(c, { small: true })}<span class="math-clock-label">${c.say}</span>`;
           btn.addEventListener('click', () => onTimePick(c.id, btn));
           box.appendChild(btn);
         });
@@ -839,7 +907,7 @@
 
         if (timeCorrect >= LIT_TARGET && !isPlanetLit('time')) {
           lightPlanet('time');
-          if (fb) fb.textContent = `${praise} 月球點亮喇！`;
+          if (fb) fb.textContent = `${praise} 金星點亮喇！`;
           const fromP = getPlanetById('time');
           const toP = getPlanetById(getNextPlanetId('time'));
           setTimeout(() => {
@@ -849,7 +917,7 @@
           return;
         }
 
-        const stars = $('#math-moon-play-stars');
+        const stars = $('#math-venus-play-stars');
         const state = loadState();
         if (stars) stars.textContent = `${state.starsToday}/10`;
 
@@ -865,6 +933,227 @@
         setTimeout(() => {
           btn.classList.remove('is-bad');
           timeBusy = false;
+        }, 700);
+      }
+    }
+
+    /* ---------- 火星・形狀＋推理 ---------- */
+    function openMarsLearn() {
+      updateState({ currentPlanetId: 'shape' });
+      marsLearnIndex = 0;
+      const title = $('#math-mars-learn-title');
+      if (title) title.textContent = '火星・先學';
+      renderMarsLearnCard(true);
+      showMathScreen('marsLearn');
+    }
+
+    function renderMarsLearnCard(autoSpeak) {
+      const card = MARS_LEARN_CARDS[marsLearnIndex];
+      const visual = $('#math-mars-learn-visual');
+      const say = $('#math-mars-learn-say');
+      if (card.kind === 'shape') {
+        if (visual) visual.innerHTML = shapeGlyphHtml(card.shape, 'is-hero');
+        if (say) say.textContent = card.shape.name;
+      } else {
+        if (visual) visual.innerHTML = `<div class="math-pattern-row">${patternCellsHtml(card.sequence)}</div>`;
+        if (say) say.textContent = '規律';
+      }
+      const progress = $('#math-mars-learn-progress');
+      if (progress) progress.textContent = `${marsLearnIndex + 1}/${MARS_LEARN_CARDS.length}`;
+      const prev = $('#btn-math-mars-learn-prev');
+      const next = $('#btn-math-mars-learn-next');
+      const finish = $('#math-mars-learn-finish-row');
+      if (prev) prev.disabled = marsLearnIndex <= 0;
+      if (next) next.hidden = marsLearnIndex >= MARS_LEARN_CARDS.length - 1;
+      if (finish) finish.hidden = marsLearnIndex < MARS_LEARN_CARDS.length - 1;
+      if (autoSpeak) speakMarsLearn();
+    }
+
+    function speakMarsLearn() {
+      speak(MARS_LEARN_CARDS[marsLearnIndex].learnSay);
+    }
+
+    function openMarsPlay() {
+      const stars = $('#math-mars-play-stars');
+      const state = loadState();
+      if (stars) stars.textContent = `${state.starsToday}/10`;
+      showMathScreen('marsPlay');
+    }
+
+    function openShapeQuiz() {
+      shapeBusy = false;
+      shapeCorrect = 0;
+      updateShapeProgress();
+      nextShapeRound(true);
+      showMathScreen('shape');
+    }
+
+    function updateShapeProgress() {
+      const el = $('#math-shape-progress');
+      if (el) el.textContent = `${shapeCorrect}/${LIT_TARGET}`;
+    }
+
+    function nextShapeRound(autoSpeak) {
+      const target = MARS_SHAPES[Math.floor(Math.random() * MARS_SHAPES.length)];
+      const options = shuffle([...MARS_SHAPES]);
+      shapeRound = { target, options };
+      const prompt = $('#math-shape-prompt');
+      if (prompt) prompt.textContent = '呢個係咩形狀？';
+      const fb = $('#math-shape-feedback');
+      if (fb) fb.textContent = '';
+      const targetEl = $('#math-shape-target');
+      if (targetEl) targetEl.innerHTML = shapeGlyphHtml(target, 'is-hero');
+      const box = $('#math-shape-options');
+      if (box) {
+        box.innerHTML = '';
+        options.forEach((s) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'btn btn-secondary math-mars-option';
+          btn.textContent = s.name;
+          btn.addEventListener('click', () => onShapePick(s.id, btn));
+          box.appendChild(btn);
+        });
+      }
+      if (autoSpeak) speak('呢個係咩形狀？');
+    }
+
+    function onShapePick(id, btn) {
+      if (shapeBusy || !shapeRound) return;
+      shapeBusy = true;
+      const muted = isMuted();
+      const fb = $('#math-shape-feedback');
+      const ok = id === shapeRound.target.id;
+      if (ok) {
+        btn.classList.add('is-ok');
+        const { gained } = tryEarnStar();
+        if (gained) {
+          speech?.playStarCue?.({ muted });
+          playMathStarReward();
+        } else {
+          speech?.playCorrectCue?.({ muted });
+        }
+        shapeCorrect += 1;
+        updateShapeProgress();
+        const praise = speech?.speakCorrectFeedback?.({ muted }) || '好叻呀！';
+        if (fb) fb.textContent = praise;
+        if (shapeCorrect >= LIT_TARGET && !isPlanetLit('shape')) {
+          lightPlanet('shape');
+          if (fb) fb.textContent = `${praise} 火星點亮喇！`;
+          const fromP = getPlanetById('shape');
+          const toP = getPlanetById(getNextPlanetId('shape'));
+          setTimeout(() => {
+            shapeBusy = false;
+            offerWarpHop(fromP, toP);
+          }, 900);
+          return;
+        }
+        setTimeout(() => {
+          shapeBusy = false;
+          nextShapeRound(true);
+        }, 1000);
+      } else {
+        btn.classList.add('is-bad');
+        speech?.playTryAgainCue?.({ muted });
+        if (fb) fb.textContent = speech?.speakRetryFeedback?.({ muted }) || '試多次！';
+        setTimeout(() => {
+          btn.classList.remove('is-bad');
+          shapeBusy = false;
+        }, 700);
+      }
+    }
+
+    function openPatternQuiz() {
+      patternBusy = false;
+      patternCorrect = 0;
+      updatePatternProgress();
+      nextPatternRound(true);
+      showMathScreen('pattern');
+    }
+
+    function updatePatternProgress() {
+      const el = $('#math-pattern-progress');
+      if (el) el.textContent = `${patternCorrect}/${LIT_TARGET}`;
+    }
+
+    function makePatternRound() {
+      const pool = shuffle([...MARS_SHAPES]);
+      const a = pool[0];
+      const b = pool[1];
+      const c = pool[2];
+      if (Math.random() < 0.55) {
+        const sequence = [a, b, a, b, a, null];
+        return { sequence, answer: b, options: shuffle([b, a, c]) };
+      }
+      const sequence = [a, b, c, a, b, null];
+      return { sequence, answer: c, options: shuffle([c, a, b]) };
+    }
+
+    function nextPatternRound(autoSpeak) {
+      patternRound = makePatternRound();
+      const prompt = $('#math-pattern-prompt');
+      if (prompt) prompt.textContent = '邊個跟住嚟？';
+      const fb = $('#math-pattern-feedback');
+      if (fb) fb.textContent = '';
+      const row = $('#math-pattern-row');
+      if (row) row.innerHTML = patternCellsHtml(patternRound.sequence);
+      const box = $('#math-pattern-options');
+      if (box) {
+        box.innerHTML = '';
+        patternRound.options.forEach((s) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'math-mars-option math-mars-option--glyph';
+          btn.setAttribute('aria-label', s.name);
+          btn.innerHTML = shapeGlyphHtml(s);
+          btn.addEventListener('click', () => onPatternPick(s.id, btn));
+          box.appendChild(btn);
+        });
+      }
+      if (autoSpeak) speak('邊個跟住嚟？');
+    }
+
+    function onPatternPick(id, btn) {
+      if (patternBusy || !patternRound) return;
+      patternBusy = true;
+      const muted = isMuted();
+      const fb = $('#math-pattern-feedback');
+      const ok = id === patternRound.answer.id;
+      if (ok) {
+        btn.classList.add('is-ok');
+        const { gained } = tryEarnStar();
+        if (gained) {
+          speech?.playStarCue?.({ muted });
+          playMathStarReward();
+        } else {
+          speech?.playCorrectCue?.({ muted });
+        }
+        patternCorrect += 1;
+        updatePatternProgress();
+        const praise = speech?.speakCorrectFeedback?.({ muted }) || '好叻呀！';
+        if (fb) fb.textContent = praise;
+        if (patternCorrect >= LIT_TARGET && !isPlanetLit('shape')) {
+          lightPlanet('shape');
+          if (fb) fb.textContent = `${praise} 火星點亮喇！`;
+          const fromP = getPlanetById('shape');
+          const toP = getPlanetById(getNextPlanetId('shape'));
+          setTimeout(() => {
+            patternBusy = false;
+            offerWarpHop(fromP, toP);
+          }, 900);
+          return;
+        }
+        setTimeout(() => {
+          patternBusy = false;
+          nextPatternRound(true);
+        }, 1000);
+      } else {
+        btn.classList.add('is-bad');
+        speech?.playTryAgainCue?.({ muted });
+        if (fb) fb.textContent = speech?.speakRetryFeedback?.({ muted }) || '試多次！';
+        setTimeout(() => {
+          btn.classList.remove('is-bad');
+          patternBusy = false;
         }, 700);
       }
     }
@@ -888,13 +1177,17 @@
         return;
       }
       if (planet.id === 'time') {
-        openMoonLearn();
+        openVenusLearn();
+        return;
+      }
+      if (planet.id === 'shape') {
+        openMarsLearn();
         return;
       }
       const note = $('#math-hub-coming');
       if (note) {
         note.hidden = false;
-        note.textContent = `${planet.name}玩法即將開放；可以揀水星、地球或者月球玩！`;
+        note.textContent = `${planet.name}玩法即將開放；可以揀水星、金星、地球或者火星玩！`;
       }
       renderHub();
     }
@@ -935,27 +1228,52 @@
       $('#btn-back-math-count')?.addEventListener('click', () => openPlay());
       $('#btn-math-count-speak')?.addEventListener('click', () => speakCountPrompt());
 
-      $('#btn-back-math-moon-learn')?.addEventListener('click', () => openHub());
-      $('#math-moon-learn-tap')?.addEventListener('click', () => speakMoonLearn());
-      $('#btn-math-moon-learn-prev')?.addEventListener('click', () => {
-        if (mLearnIndex <= 0) return;
-        mLearnIndex -= 1;
-        renderMoonLearnCard(true);
+      $('#btn-back-math-venus-learn')?.addEventListener('click', () => openHub());
+      $('#math-venus-learn-tap')?.addEventListener('click', () => speakVenusLearn());
+      $('#btn-math-venus-learn-prev')?.addEventListener('click', () => {
+        if (vLearnIndex <= 0) return;
+        vLearnIndex -= 1;
+        renderVenusLearnCard(true);
       });
-      $('#btn-math-moon-learn-next')?.addEventListener('click', () => {
-        if (mLearnIndex >= MOON_LEARN_CARDS.length - 1) return;
-        mLearnIndex += 1;
-        renderMoonLearnCard(true);
+      $('#btn-math-venus-learn-next')?.addEventListener('click', () => {
+        if (vLearnIndex >= VENUS_TIME_LEARN_CARDS.length - 1) return;
+        vLearnIndex += 1;
+        renderVenusLearnCard(true);
       });
-      $('#btn-math-moon-learn-play')?.addEventListener('click', () => openMoonPlay());
+      $('#btn-math-venus-learn-play')?.addEventListener('click', () => openVenusPlay());
 
-      $('#btn-back-math-moon-play')?.addEventListener('click', () => openMoonLearn());
-      $('#btn-math-mode-time')?.addEventListener('click', () => openTimeQuiz());
+      $('#btn-back-math-venus-play')?.addEventListener('click', () => openVenusLearn());
+      $('#btn-math-mode-time-analog')?.addEventListener('click', () => openTimeQuiz('analog'));
+      $('#btn-math-mode-time-digital')?.addEventListener('click', () => openTimeQuiz('digital'));
 
-      $('#btn-back-math-time')?.addEventListener('click', () => openMoonPlay());
+      $('#btn-back-math-time')?.addEventListener('click', () => openVenusPlay());
       $('#btn-math-time-speak')?.addEventListener('click', () => {
         if (timeRound) speak(`幾點？${timeRound.target.say}`);
       });
+
+      $('#btn-back-math-mars-learn')?.addEventListener('click', () => openHub());
+      $('#math-mars-learn-tap')?.addEventListener('click', () => speakMarsLearn());
+      $('#btn-math-mars-learn-prev')?.addEventListener('click', () => {
+        if (marsLearnIndex <= 0) return;
+        marsLearnIndex -= 1;
+        renderMarsLearnCard(true);
+      });
+      $('#btn-math-mars-learn-next')?.addEventListener('click', () => {
+        if (marsLearnIndex >= MARS_LEARN_CARDS.length - 1) return;
+        marsLearnIndex += 1;
+        renderMarsLearnCard(true);
+      });
+      $('#btn-math-mars-learn-play')?.addEventListener('click', () => openMarsPlay());
+
+      $('#btn-back-math-mars-play')?.addEventListener('click', () => openMarsLearn());
+      $('#btn-math-mode-shape')?.addEventListener('click', () => openShapeQuiz());
+      $('#btn-math-mode-pattern')?.addEventListener('click', () => openPatternQuiz());
+
+      $('#btn-back-math-shape')?.addEventListener('click', () => openMarsPlay());
+      $('#btn-math-shape-speak')?.addEventListener('click', () => speak('呢個係咩形狀？'));
+
+      $('#btn-back-math-pattern')?.addEventListener('click', () => openMarsPlay());
+      $('#btn-math-pattern-speak')?.addEventListener('click', () => speak('邊個跟住嚟？'));
     }
 
     bind();
@@ -1003,8 +1321,11 @@
       openLearn,
       openCount,
       openEarthAddition: () => window.KakaAdditionGame.openEarthAddition(),
-      openMoonLearn,
+      openVenusLearn,
       openTimeQuiz,
+      openMarsLearn,
+      openShapeQuiz,
+      openPatternQuiz,
       openGalaxy,
       offerWarpHop,
     };

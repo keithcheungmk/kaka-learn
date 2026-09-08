@@ -74,6 +74,7 @@
     });
     if (!Array.isArray(out.litPlanetIds)) out.litPlanetIds = [];
     else out.litPlanetIds = out.litPlanetIds.filter((id) => id !== 'compare-qty');
+    if (out.currentPlanetId === 'compare-qty') out.currentPlanetId = 'time';
     if (!out.additionProgress || typeof out.additionProgress !== 'object') {
       out.additionProgress = { unlockedBase: 5, completedMissions: [] };
     }
