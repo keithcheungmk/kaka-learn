@@ -88,6 +88,29 @@ let playMode = null;
 let chainIndex = 0;
 let activeChain = null;
 let chainStars = 0;
+let sentenceIndex = 0;
+let sentencePlaced = [];
+const SENTENCE_DEMO = [
+  { image: 'assets/sentence-balloon-p1.jpg', panel: 1, sentence: ['小明', '手持', '氣球'] },
+  { image: 'assets/sentence-balloon-p2.jpg', panel: 2, sentence: ['氣球', '飛走了'] },
+  { image: 'assets/sentence-balloon-p3.jpg', panel: 3, sentence: ['小明', '追趕', '氣球'] },
+  { image: 'assets/sentence-balloon-p4.jpg', panel: 4, sentence: ['氣球', '掛在', '樹上'] },
+  { image: 'assets/sentence-anan-p1.jpg', panel: 1, sentence: ['安安', '看見', '食物'] },
+  { image: 'assets/sentence-anan-p2.jpg', panel: 2, sentence: ['安安', '想要', '進食'] },
+  { image: 'assets/sentence-anan-p3.jpg', panel: 3, sentence: ['安安', '吃', '蛋糕'] },
+  { image: 'assets/sentence-anan-p4.jpg', panel: 4, sentence: ['安安', '吃飽了'] },
+  { image: 'assets/sentence-anan-p1.jpg', panel: 1, sentence: ['小明', '寫', '信'] },
+  { image: 'assets/sentence-anan-p2.jpg', panel: 2, sentence: ['妹妹', '分享', '水果'] },
+  { image: 'assets/sentence-anan-p3.jpg', panel: 3, sentence: ['小鹿', '快速', '奔跑'] },
+  { image: 'assets/sentence-anan-p4.jpg', panel: 4, sentence: ['冬冬', '邀請', '朋友'] },
+];
+const SENTENCE_WORD_TYPES = {
+  '小明': 'person', '安安': 'person', '妹妹': 'person', '小狗': 'person',
+  '手持': 'verb', '飛走了': 'verb', '追趕': 'verb', '掛在': 'verb',
+  '看見': 'verb', '想要': 'verb', '進食': 'verb', '品嚐': 'verb', '感到': 'verb', '吃': 'verb', '吃飽了': 'verb', '寫': 'verb', '分享': 'verb', '快速': 'verb', '奔跑': 'verb', '邀請': 'verb', '睡覺': 'verb',
+  '氣球': 'object', '樹上': 'object', '食物': 'object', '蛋糕': 'object', '信': 'object', '水果': 'object', '小鹿': 'person', '冬冬': 'person', '朋友': 'person', '飽足': 'object',
+};
+function sentenceWordType(word) { return SENTENCE_WORD_TYPES[word] || 'other'; }
 const CHAIN_LIBRARY = [
   ['肥牛烏冬', '冬天', '天氣', '氣球', '球鞋'],
   ['奶茶', '茶杯', '杯子', '子女', '女兒'],
@@ -123,6 +146,7 @@ function init() {
     bindLearn();
     bindPlayPick();
     bindWordChain();
+    bindSentenceGame();
     bindListen();
     bindMatch();
     bindBuild();
@@ -418,9 +442,10 @@ function showScreen(name) {
     match: '#screen-match',
     build: '#screen-build',
     chain: '#screen-chain',
+    sentence: '#screen-sentence',
   };
   $(map[name])?.classList.add('active');
-  if (['listen', 'match', 'build', 'chain'].includes(name)) {
+  if (['listen', 'match', 'build', 'chain', 'sentence'].includes(name)) {
     window.KakaStarFx?.mountPlayScreen?.($(map[name]));
     refreshStarUI();
   } else {
@@ -570,6 +595,87 @@ function bindWordChain() {
   $('#btn-back-chain')?.addEventListener('click', () => showScreen('play'));
   $('#btn-chain-restart')?.addEventListener('click', openWordChain);
   $('#btn-start-chain')?.addEventListener('click', openWordChain);
+}
+
+function renderSentenceGame() {
+  const item = SENTENCE_DEMO[sentenceIndex];
+  const scene = $('#sentence-scene');
+  const slots = $('#sentence-slots');
+  const pool = $('#sentence-pool');
+  const progress = $('#sentence-progress');
+  if (!item || !scene || !slots || !pool) return;
+  scene.innerHTML = `<img src="${item.image}" alt="故事第 ${item.panel} 格" loading="eager" /><span class="sentence-panel-label">第 ${item.panel} 格</span>`;
+  progress.textContent = `${sentenceIndex + 1}/${SENTENCE_DEMO.length}`;
+  slots.innerHTML = '';
+  item.sentence.forEach((word, index) => {
+    const slot = document.createElement('div');
+    slot.className = 'sentence-slot' + (sentencePlaced[index] ? ' is-filled' : '');
+    slot.dataset.index = String(index);
+    slot.textContent = sentencePlaced[index] || '？';
+    slot.addEventListener('dragover', (ev) => ev.preventDefault());
+    slot.addEventListener('drop', (ev) => {
+      ev.preventDefault();
+      const word = ev.dataTransfer?.getData('text/plain');
+      placeSentenceWord(word, index);
+    });
+    slots.appendChild(slot);
+  });
+  pool.innerHTML = '';
+  shuffle(item.sentence.map((word) => ({ word, correct: true })).concat([{ word: '小狗' }, { word: '睡覺' }]))
+    .filter((entry) => !sentencePlaced.includes(entry.word))
+    .forEach((entry) => {
+      const card = document.createElement('button');
+      card.type = 'button';
+      const type = sentenceWordType(entry.word);
+      card.className = `sentence-card sentence-card-${type}`;
+      card.draggable = true;
+      card.innerHTML = `<span>${entry.word}</span><small>${type === 'person' ? '人物' : type === 'verb' ? '動作' : type === 'object' ? '物件' : '詞語'}</small>`;
+      card.addEventListener('dragstart', (ev) => ev.dataTransfer?.setData('text/plain', entry.word));
+      card.addEventListener('click', () => placeSentenceWord(entry.word, sentencePlaced.length));
+      pool.appendChild(card);
+    });
+}
+
+function placeSentenceWord(word, index) {
+  const item = SENTENCE_DEMO[sentenceIndex];
+  if (!word || index !== sentencePlaced.length) return;
+  if (word !== item.sentence[index]) {
+    const fb = $('#sentence-feedback');
+    if (fb) { fb.textContent = '再諗吓，邊個詞應該放喺呢度？'; fb.className = 'feedback retry'; }
+    playTryAgainCue({ muted: loadState().muted });
+    return;
+  }
+  sentencePlaced.push(word);
+  playCorrectCue({ muted: loadState().muted });
+  renderSentenceGame();
+  if (sentencePlaced.length === item.sentence.length) {
+    const fb = $('#sentence-feedback');
+    if (fb) { fb.textContent = '句子砌好喇！'; fb.className = 'feedback ok'; }
+    speakTerm(item.sentence.join('，'), { muted: loadState().muted });
+    const result = tryEarnStar();
+    state = result.state;
+    window.KakaStarFx?.mountPlayScreen?.($('#screen-sentence'));
+    window.KakaStarFx?.flyStarFromRanger?.($('#screen-sentence'), () => refreshStarUI());
+    setTimeout(() => {
+      if (sentenceIndex < SENTENCE_DEMO.length - 1) { sentenceIndex += 1; sentencePlaced = []; renderSentenceGame(); }
+    }, 1800);
+  } else {
+    speakTerm(word, { muted: loadState().muted });
+  }
+}
+
+function openSentenceGame() {
+  sentenceIndex = 0;
+  sentencePlaced = [];
+  showScreen('sentence');
+  renderSentenceGame();
+}
+
+function bindSentenceGame() {
+  $('#btn-start-sentence')?.addEventListener('click', openSentenceGame);
+  $('#btn-topics-sentence')?.addEventListener('click', openSentenceGame);
+  $('#btn-back-sentence')?.addEventListener('click', () => showScreen('home'));
+  $('#btn-sentence-restart')?.addEventListener('click', openSentenceGame);
 }
 
 function openTopics() {

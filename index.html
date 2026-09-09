@@ -83,6 +83,7 @@
           <button type="button" class="btn btn-secondary" id="btn-start-phonics" aria-label="SPACE RANGER PHONICS">SPACE RANGER PHONICS</button>
           <button type="button" class="btn btn-accent" id="btn-start-math">太空戰士數理</button>
           <button type="button" class="btn btn-chain-home" id="btn-start-chain">詞語鏈・接一接</button>
+          <button type="button" class="btn btn-sentence-home" id="btn-start-sentence">砌句子</button>
           <a
             class="btn btn-friend home-friend-link"
             href="https://yiu0527.github.io/HeiHeiClass/index.html"
@@ -98,6 +99,24 @@
         <p class="home-scans-link">
           <a href="./book-scans/" target="_blank" rel="noopener noreferrer">書本掃描</a>
         </p>
+      </div>
+    </section>
+
+    <!-- 砌句子 demo -->
+    <section id="screen-sentence" class="screen" aria-label="砌句子遊戲">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-sentence">← 主頁</button>
+        <h1>砌句子</h1>
+        <div class="progress-pill"><strong id="sentence-progress">1/8</strong></div>
+      </div>
+      <div class="sentence-reward-bar"><span>句子星</span><strong>完成一句攞一粒星</strong></div>
+      <p class="section-lead" id="sentence-lead">睇圖，砌返一句說話</p>
+      <div class="sentence-scene" id="sentence-scene" aria-label="四格漫畫圖片"></div>
+      <div class="sentence-slots" id="sentence-slots" aria-label="句子位置"></div>
+      <p class="feedback" id="sentence-feedback" aria-live="polite"></p>
+      <div class="sentence-pool" id="sentence-pool" aria-label="打亂的詞卡"></div>
+      <div class="btn-row sentence-actions">
+        <button type="button" class="btn btn-secondary" id="btn-sentence-restart">重新開始</button>
       </div>
     </section>
 
@@ -147,6 +166,7 @@
         </div>
       </div>
       <p class="section-lead">揀一組，先一齊睇字同圖</p>
+      <div class="btn-row topic-sentence-entry"><button type="button" class="btn btn-sentence-home" id="btn-topics-sentence">中文砌句子</button></div>
       <div class="topic-grid" id="topic-grid"></div>
     </section>
 

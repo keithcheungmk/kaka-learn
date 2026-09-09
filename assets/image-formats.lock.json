@@ -259,6 +259,46 @@
     "format": "JPEG",
     "alpha": false
   },
+  "assets/sentence-anan-p1.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/sentence-anan-p2.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/sentence-anan-p3.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/sentence-anan-p4.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/sentence-balloon-p1.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/sentence-balloon-p2.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/sentence-balloon-p3.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/sentence-balloon-p4.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/sentence-comic-anan.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/sentence-comic-balloon.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
   "assets/space-ranger-pose-fistpump.png": {
     "format": "PNG",
     "alpha": true
