@@ -443,6 +443,7 @@ function showScreen(name) {
     build: '#screen-build',
     chain: '#screen-chain',
     sentence: '#screen-sentence',
+    sentenceLanding: '#screen-sentence-landing',
   };
   $(map[name])?.classList.add('active');
   if (['listen', 'match', 'build', 'chain', 'sentence'].includes(name)) {
@@ -603,7 +604,9 @@ function renderSentenceGame() {
   const slots = $('#sentence-slots');
   const pool = $('#sentence-pool');
   const progress = $('#sentence-progress');
+  const submit = $('#btn-sentence-submit');
   if (!item || !scene || !slots || !pool) return;
+  if (submit) submit.disabled = sentencePlaced.length !== item.sentence.length;
   scene.innerHTML = `<img src="${item.image}" alt="故事第 ${item.panel} 格" loading="eager" /><span class="sentence-panel-label">第 ${item.panel} 格</span>`;
   progress.textContent = `${sentenceIndex + 1}/${SENTENCE_DEMO.length}`;
   slots.innerHTML = '';
@@ -649,6 +652,15 @@ function placeSentenceWord(word, index) {
   playCorrectCue({ muted: loadState().muted });
   renderSentenceGame();
   if (sentencePlaced.length === item.sentence.length) {
+    return;
+  } else {
+    speakTerm(word, { muted: loadState().muted });
+  }
+}
+
+function submitSentence() {
+  const item = SENTENCE_DEMO[sentenceIndex];
+  if (!item || sentencePlaced.length !== item.sentence.length) return;
     const fb = $('#sentence-feedback');
     if (fb) { fb.textContent = '句子砌好喇！'; fb.className = 'feedback ok'; }
     speakTerm(item.sentence.join('，'), { muted: loadState().muted });
@@ -659,9 +671,6 @@ function placeSentenceWord(word, index) {
     setTimeout(() => {
       if (sentenceIndex < SENTENCE_DEMO.length - 1) { sentenceIndex += 1; sentencePlaced = []; renderSentenceGame(); }
     }, 1800);
-  } else {
-    speakTerm(word, { muted: loadState().muted });
-  }
 }
 
 function openSentenceGame() {
@@ -671,9 +680,20 @@ function openSentenceGame() {
   renderSentenceGame();
 }
 
+function openSentenceLanding() {
+  const grid = $('#sentence-story-grid');
+  if (grid) {
+    grid.innerHTML = SENTENCE_DEMO.map((item, i) => `<button type="button" class="sentence-story-card" data-sentence-index="${i}"><img src="${item.image}" alt="故事 ${i + 1}" loading="lazy"><span>故事 ${i + 1}</span></button>`).join('');
+    grid.querySelectorAll('[data-sentence-index]').forEach((b) => b.addEventListener('click', () => { sentenceIndex = Number(b.dataset.sentenceIndex); sentencePlaced = []; showScreen('sentence'); renderSentenceGame(); }));
+  }
+  showScreen('sentenceLanding');
+}
+
 function bindSentenceGame() {
-  $('#btn-start-sentence')?.addEventListener('click', openSentenceGame);
-  $('#btn-topics-sentence')?.addEventListener('click', openSentenceGame);
+  $('#btn-start-sentence')?.addEventListener('click', openSentenceLanding);
+  $('#btn-topics-sentence')?.addEventListener('click', openSentenceLanding);
+  $('#btn-back-sentence-landing')?.addEventListener('click', () => showScreen('topics'));
+  $('#btn-sentence-submit')?.addEventListener('click', submitSentence);
   $('#btn-back-sentence')?.addEventListener('click', () => showScreen('home'));
   $('#btn-sentence-restart')?.addEventListener('click', openSentenceGame);
 }

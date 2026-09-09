@@ -102,6 +102,12 @@
       </div>
     </section>
 
+    <section id="screen-sentence-landing" class="screen" aria-label="砌句子故事選擇">
+      <div class="game-header"><button type="button" class="btn btn-ghost" id="btn-back-sentence-landing">← 中文</button><h1>砌句子</h1><div class="progress-pill"><strong>12 個故事</strong></div></div>
+      <p class="section-lead">先看看全部故事，再選一個開始</p>
+      <div class="sentence-story-grid" id="sentence-story-grid"></div>
+    </section>
+
     <!-- 砌句子 demo -->
     <section id="screen-sentence" class="screen" aria-label="砌句子遊戲">
       <div class="game-header">
@@ -116,6 +122,7 @@
       <p class="feedback" id="sentence-feedback" aria-live="polite"></p>
       <div class="sentence-pool" id="sentence-pool" aria-label="打亂的詞卡"></div>
       <div class="btn-row sentence-actions">
+        <button type="button" class="btn" id="btn-sentence-submit" disabled>提交句子</button>
         <button type="button" class="btn btn-secondary" id="btn-sentence-restart">重新開始</button>
       </div>
     </section>
