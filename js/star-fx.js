@@ -37,6 +37,7 @@
     'screen-math-earth-game',
     'screen-math-time',
     'screen-chain',
+    'screen-sentence',
   ]);
 
   let globalRanger = null;
