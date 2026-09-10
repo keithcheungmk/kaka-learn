@@ -694,6 +694,7 @@ function openSentenceLanding() {
 function bindSentenceGame() {
   $('#btn-start-sentence')?.addEventListener('click', openSentenceLanding);
   $('#btn-topics-sentence')?.addEventListener('click', openSentenceLanding);
+  $('#btn-topics-chain')?.addEventListener('click', openWordChain);
   $('#btn-back-sentence-landing')?.addEventListener('click', () => showScreen('topics'));
   $('#btn-sentence-submit')?.addEventListener('click', submitSentence);
   $('#btn-back-sentence')?.addEventListener('click', () => showScreen('home'));
