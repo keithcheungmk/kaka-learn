@@ -191,7 +191,9 @@
     $('#addition-play-title').textContent = level.title; $('#addition-scenario').textContent = `${mission.scenario} · ${mission.visual.emoji}`; $('#addition-desc').textContent = mission.level === 2 ? `${mission.desc}（先湊十，再數剩低。）` : mission.desc;
     const boardLabel = document.querySelector('.addition-board-label'); if (boardLabel) boardLabel.textContent = mission.level === 2 ? '白板：先湊十，再將兩組物件放埋一齊' : '白板：將兩組物件放埋一齊';
     $('#addition-mission-progress').textContent = `今輪第 ${missionIndex + 1} / ${level.missions.length} 題`; $('#addition-feedback').textContent = '';
-    renderSlot(mission); renderWarehouse(mission); renderEquation(mission); updateStarsDisplay(); deps.showMathScreen('additionPlay'); deps.speak(mission.desc);
+    renderSlot(mission); renderWarehouse(mission); renderEquation(mission); updateStarsDisplay(); deps.showMathScreen('additionPlay');
+    requestAnimationFrame(() => positionBoardObjects());
+    deps.speak(mission.desc);
   }
 
   function renderLevelSelect() {
