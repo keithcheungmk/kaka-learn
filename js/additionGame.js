@@ -76,13 +76,14 @@
     const rect = board.getBoundingClientRect();
     const placed = [];
     const divider = { x: rect.width / 2 - 42, y: rect.height / 2 - 42, w: 84, h: 84 };
+    const leftRegion = { x: 8, y: 8, w: Math.max(120, rect.width * 0.42), h: Math.max(1, rect.height - 16) };
     getBoardObjects().forEach((object) => {
       const width = object.offsetWidth || 58; const height = object.offsetHeight || 68;
       let chosen = null;
       for (let attempt = 0; attempt < 80; attempt += 1) {
         const candidate = {
-          x: 8 + Math.random() * Math.max(1, rect.width - width - 16),
-          y: 8 + Math.random() * Math.max(1, rect.height - height - 16),
+          x: leftRegion.x + Math.random() * Math.max(1, leftRegion.w - width),
+          y: leftRegion.y + Math.random() * Math.max(1, leftRegion.h - height),
           w: width,
           h: height,
         };
@@ -90,7 +91,7 @@
         const overlaps = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
         if (!overlaps(padded, divider) && placed.every((item) => !overlaps(padded, item))) { chosen = candidate; break; }
       }
-      if (!chosen) chosen = { x: 8 + (placed.length % 4) * Math.max(64, width + 8), y: 8 + Math.floor(placed.length / 4) * Math.max(76, height + 8), w: width, h: height };
+      if (!chosen) chosen = { x: leftRegion.x + (placed.length % 4) * Math.max(64, width + 8), y: leftRegion.y + Math.floor(placed.length / 4) * Math.max(76, height + 8), w: width, h: height };
       object.style.left = `${Math.max(4, Math.min(rect.width - width - 4, chosen.x))}px`;
       object.style.top = `${Math.max(4, Math.min(rect.height - height - 4, chosen.y))}px`;
       placed.push(chosen);

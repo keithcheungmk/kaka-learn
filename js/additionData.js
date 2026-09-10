@@ -22,7 +22,7 @@
         return {
           id: `addition-l${level}-${index + 1}`, level, a, b, targetNumber: a + b, visual,
           scenario: `${visual.label}能量任務`,
-          desc: `先有 ${a}${visual.measure}${visual.label}，再拖入 ${b}${visual.measure}，合共有幾多${visual.measure}？`,
+          desc: `呢度有 ${a}${visual.measure}${visual.label}，再拖入幾多${visual.measure}${visual.label}，令到佢有 ${a + b}${visual.measure}${visual.label}？`,
         };
       }),
     };
