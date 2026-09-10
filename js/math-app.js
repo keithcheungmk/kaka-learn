@@ -1308,6 +1308,7 @@
       tryEarnStar,
       showMathScreen,
       showMathRoundReward,
+      speak,
     });
 
     window.KakaSubtractionGame?.init({

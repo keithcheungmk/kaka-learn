@@ -138,17 +138,32 @@
     storage().completeNumberBondsMission(mission.id);
     if (!wasDone) deps.tryEarnStar();
     missionIndex += 1;
-    if (missionIndex < level.missions.length) {
-      setTimeout(renderMission, 450);
-    } else {
-      storage().completeNumberBondsLevel(level.level);
-      deps.showMathRoundReward(`${level.title}完成！你已經識得拆解 ${level.range} 嘅數字。`, () => startLevel(level.level));
-    }
+    const message = `答對了！${mission.target} 可以是 ${mission.pairs.map(([a, b]) => `${a} 加 ${b}`).join('，或者是 ')}。你真聰明哦！`;
+    showCorrectPopover(message, () => {
+      if (missionIndex < level.missions.length) {
+        renderMission();
+      } else {
+        storage().completeNumberBondsLevel(level.level);
+        deps.showMathRoundReward(`${level.title}完成！你已經識得拆解 ${level.range} 嘅數字。`, () => startLevel(level.level));
+      }
+    });
+  }
+
+  function showCorrectPopover(message, onNext) {
+    const popover = $('number-bonds-correct-popover');
+    const messageEl = $('number-bonds-correct-message');
+    const next = $('btn-number-bonds-next');
+    if (!popover || !messageEl || !next) { onNext?.(); return; }
+    messageEl.textContent = message;
+    popover.hidden = false;
+    deps.speak?.(message);
+    next.onclick = () => { popover.hidden = true; onNext?.(); };
   }
 
   function init(nextDeps) {
     deps = nextDeps;
     $('btn-number-bonds-answer')?.addEventListener('click', checkAnswer);
+    $('btn-number-bonds-next')?.addEventListener('click', () => { $('number-bonds-correct-popover').hidden = true; });
   }
 
   window.KakaNumberBondsGame = { init, openSelect, startLevel };
