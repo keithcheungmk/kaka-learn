@@ -91,25 +91,26 @@ let chainStars = 0;
 let sentenceIndex = 0;
 let sentencePlaced = [];
 const SENTENCE_DEMO = [
-  { image: 'assets/sentence-balloon-p1.jpg', panel: 1, sentence: ['小明', '手持', '氣球'] },
-  { image: 'assets/sentence-balloon-p2.jpg', panel: 2, sentence: ['氣球', '飛走了'] },
-  { image: 'assets/sentence-balloon-p3.jpg', panel: 3, sentence: ['小明', '追趕', '氣球'] },
-  { image: 'assets/sentence-balloon-p4.jpg', panel: 4, sentence: ['氣球', '掛在', '樹上'] },
-  { image: 'assets/sentence-anan-p1.jpg', panel: 1, sentence: ['安安', '看見', '食物'] },
-  { image: 'assets/sentence-anan-p2.jpg', panel: 2, sentence: ['安安', '想要', '進食'] },
-  { image: 'assets/sentence-anan-p3.jpg', panel: 3, sentence: ['安安', '吃', '蛋糕'] },
-  { image: 'assets/sentence-anan-p4.jpg', panel: 4, sentence: ['安安', '吃飽了'] },
-  { image: 'assets/sentence-anan-p1.jpg', panel: 1, sentence: ['小明', '寫', '信'] },
-  { image: 'assets/sentence-anan-p2.jpg', panel: 2, sentence: ['妹妹', '分享', '水果'] },
-  { image: 'assets/sentence-anan-p3.jpg', panel: 3, sentence: ['小鹿', '快速', '奔跑'] },
-  { image: 'assets/sentence-anan-p4.jpg', panel: 4, sentence: ['冬冬', '邀請', '朋友'] },
+  { book: '我的氣球呢？', image: 'assets/sentence-balloon-p1.jpg', panel: 1, sentence: ['小明', '拿着', '氣球'] },
+  { book: '我的氣球呢？', image: 'assets/sentence-balloon-p2.jpg', panel: 2, sentence: ['氣球', '飛走了'] },
+  { book: '我的氣球呢？', image: 'assets/sentence-balloon-p3.jpg', panel: 3, sentence: ['小明', '追着', '氣球'] },
+  { book: '我的氣球呢？', image: 'assets/sentence-balloon-p4.jpg', panel: 4, sentence: ['氣球', '掛在', '樹上'] },
+  { book: '貪吃的安安', image: 'assets/sentence-anan-p1.jpg', panel: 1, sentence: ['安安', '看見', '食物'] },
+  { book: '貪吃的安安', image: 'assets/sentence-anan-p2.jpg', panel: 2, sentence: ['安安', '想吃', '蛋糕'] },
+  { book: '貪吃的安安', image: 'assets/sentence-anan-p3.jpg', panel: 3, sentence: ['安安', '吃了', '蛋糕'] },
+  { book: '貪吃的安安', image: 'assets/sentence-anan-p4.jpg', panel: 4, sentence: ['安安', '吃飽了'] },
+  { book: '信', image: 'assets/sentence-anan-p1.jpg', panel: 1, sentence: ['小明', '寫', '信'], pendingImage: true },
+  { book: '分果果', image: 'assets/sentence-anan-p2.jpg', panel: 1, sentence: ['妹妹', '分享', '水果'], pendingImage: true },
+  { book: '快跑呀', image: 'assets/sentence-anan-p3.jpg', panel: 1, sentence: ['小鹿', '跑得', '很快'], pendingImage: true },
+  { book: '冬冬請客', image: 'assets/sentence-anan-p4.jpg', panel: 1, sentence: ['冬冬', '邀請', '朋友'], pendingImage: true },
 ];
 const SENTENCE_WORD_TYPES = {
   '小明': 'person', '安安': 'person', '妹妹': 'person', '小狗': 'person',
-  '手持': 'verb', '飛走了': 'verb', '追趕': 'verb', '掛在': 'verb',
-  '看見': 'verb', '想要': 'verb', '進食': 'verb', '品嚐': 'verb', '感到': 'verb', '吃': 'verb', '吃飽了': 'verb', '寫': 'verb', '分享': 'verb', '快速': 'verb', '奔跑': 'verb', '邀請': 'verb', '睡覺': 'verb',
+  '手持': 'verb', '拿着': 'verb', '飛走了': 'verb', '追趕': 'verb', '追着': 'verb', '掛在': 'verb',
+  '看見': 'verb', '想要': 'verb', '想吃': 'verb', '進食': 'verb', '品嚐': 'verb', '感到': 'verb', '吃': 'verb', '吃了': 'verb', '吃飽了': 'verb', '寫': 'verb', '分享': 'verb', '跑得': 'verb', '很快': 'other', '快速': 'verb', '奔跑': 'verb', '邀請': 'verb', '睡覺': 'verb',
   '氣球': 'object', '樹上': 'object', '食物': 'object', '蛋糕': 'object', '信': 'object', '水果': 'object', '小鹿': 'person', '冬冬': 'person', '朋友': 'person', '飽足': 'object',
 };
+const SENTENCE_BOOK_TITLES = ['我的氣球呢？', '貪吃的安安', '雨傘', '信', '分果果', '快跑呀', '誰在叫', '黃葉', '一束花', '風跟我玩', '小明和氣球', '冬冬請客'];
 function sentenceWordType(word) { return SENTENCE_WORD_TYPES[word] || 'other'; }
 const CHAIN_LIBRARY = [
   ['肥牛烏冬', '冬天', '天氣', '氣球', '球鞋'],
@@ -642,25 +643,22 @@ function renderSentenceGame() {
 function placeSentenceWord(word, index) {
   const item = SENTENCE_DEMO[sentenceIndex];
   if (!word || index !== sentencePlaced.length) return;
-  if (word !== item.sentence[index]) {
-    const fb = $('#sentence-feedback');
-    if (fb) { fb.textContent = '再諗吓，邊個詞應該放喺呢度？'; fb.className = 'feedback retry'; }
-    playTryAgainCue({ muted: loadState().muted });
-    return;
-  }
   sentencePlaced.push(word);
-  playCorrectCue({ muted: loadState().muted });
   renderSentenceGame();
-  if (sentencePlaced.length === item.sentence.length) {
-    return;
-  } else {
-    speakTerm(word, { muted: loadState().muted });
-  }
+  speakTerm(word, { muted: loadState().muted });
 }
 
 function submitSentence() {
   const item = SENTENCE_DEMO[sentenceIndex];
   if (!item || sentencePlaced.length !== item.sentence.length) return;
+  const correct = item.sentence.every((word, i) => sentencePlaced[i] === word);
+  if (!correct) {
+    const fb = $('#sentence-feedback');
+    if (fb) { fb.textContent = '再調整詞語次序，再提交一次。'; fb.className = 'feedback retry'; }
+    playTryAgainCue({ muted: loadState().muted });
+    return;
+  }
+  playCorrectCue({ muted: loadState().muted });
     const fb = $('#sentence-feedback');
     if (fb) { fb.textContent = '句子砌好喇！'; fb.className = 'feedback ok'; }
     speakTerm(item.sentence.join('，'), { muted: loadState().muted });
@@ -683,7 +681,7 @@ function openSentenceGame() {
 function openSentenceLanding() {
   const grid = $('#sentence-story-grid');
   if (grid) {
-    grid.innerHTML = SENTENCE_DEMO.map((item, i) => `<button type="button" class="sentence-story-card" data-sentence-index="${i}"><img src="${item.image}" alt="故事 ${i + 1}" loading="lazy"><span>故事 ${i + 1}</span></button>`).join('');
+    grid.innerHTML = SENTENCE_BOOK_TITLES.map((book) => { const i = SENTENCE_DEMO.findIndex((item) => item.book === book); const count = SENTENCE_DEMO.filter((item) => item.book === book).length; const image = i >= 0 ? SENTENCE_DEMO[i].image : 'assets/chinese-hero.png'; return `<button type="button" class="sentence-story-card${i < 0 ? ' is-pending' : ''}" data-sentence-index="${i}" ${i < 0 ? 'disabled' : ''}><img src="${image}" alt="${book}" loading="lazy"><span>${book}</span><small>${count === 4 ? '四句故事' : i >= 0 ? '首句示範' : '內容整理中'}</small></button>`; }).join('');
     grid.querySelectorAll('[data-sentence-index]').forEach((b) => b.addEventListener('click', () => { sentenceIndex = Number(b.dataset.sentenceIndex); sentencePlaced = []; showScreen('sentence'); renderSentenceGame(); }));
   }
   showScreen('sentenceLanding');
