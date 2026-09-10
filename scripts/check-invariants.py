@@ -837,13 +837,18 @@ def check_family_smoke_devices() -> None:
 
 
 BOOK_SCAN_PDFS = (
-    "红①我的氣球呢-scan.pdf",
-    "红③雨傘-scan.pdf",
-    "红⑤分果果-scan.pdf",
-    "红⑥快跑呀-scan.pdf",
-    "红⑨一束花-scan.pdf",
-    "红⑪小明和氣球-scan.pdf",
-    "红⑫冬冬請客-scan.pdf",
+    "我的氣球呢.pdf",
+    "貪吃的安安.pdf",
+    "雨傘.pdf",
+    "信.pdf",
+    "分果果.pdf",
+    "快跑呀.pdf",
+    "誰在叫.pdf",
+    "黃葉.pdf",
+    "一束花.pdf",
+    "風跟我玩.pdf",
+    "小明和氣球.pdf",
+    "冬冬請客.pdf",
 )
 
 
