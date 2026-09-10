@@ -110,7 +110,11 @@ const SENTENCE_WORD_TYPES = {
   '看見': 'verb', '想要': 'verb', '想吃': 'verb', '進食': 'verb', '品嚐': 'verb', '感到': 'verb', '吃': 'verb', '吃了': 'verb', '吃飽了': 'verb', '寫': 'verb', '分享': 'verb', '跑得': 'verb', '很快': 'other', '快速': 'verb', '奔跑': 'verb', '邀請': 'verb', '睡覺': 'verb',
   '氣球': 'object', '樹上': 'object', '食物': 'object', '蛋糕': 'object', '信': 'object', '水果': 'object', '小鹿': 'person', '冬冬': 'person', '朋友': 'person', '飽足': 'object',
 };
-const SENTENCE_BOOK_TITLES = ['我的氣球呢？', '貪吃的安安', '雨傘', '信', '分果果', '快跑呀', '誰在叫', '黃葉', '一束花', '風跟我玩', '小明和氣球', '冬冬請客'];
+const SENTENCE_BOOK_TITLES = [
+  ['我的氣球呢？', '🎈'], ['貪吃的安安', '😋'], ['雨傘', '☂️'], ['信', '✉️'],
+  ['分果果', '🍎'], ['快跑呀', '🏃'], ['誰在叫', '📣'], ['黃葉', '🍂'],
+  ['一束花', '💐'], ['風跟我玩', '🌬️'], ['小明和氣球', '🎈'], ['冬冬請客', '🍽️'],
+];
 function sentenceWordType(word) { return SENTENCE_WORD_TYPES[word] || 'other'; }
 const CHAIN_LIBRARY = [
   ['肥牛烏冬', '冬天', '天氣', '氣球', '球鞋'],
@@ -681,7 +685,7 @@ function openSentenceGame() {
 function openSentenceLanding() {
   const grid = $('#sentence-story-grid');
   if (grid) {
-    grid.innerHTML = SENTENCE_BOOK_TITLES.map((book) => { const i = SENTENCE_DEMO.findIndex((item) => item.book === book); const count = SENTENCE_DEMO.filter((item) => item.book === book).length; const image = i >= 0 ? SENTENCE_DEMO[i].image : 'assets/chinese-hero.png'; return `<button type="button" class="sentence-story-card${i < 0 ? ' is-pending' : ''}" data-sentence-index="${i}" ${i < 0 ? 'disabled' : ''}><img src="${image}" alt="${book}" loading="lazy"><span>${book}</span><small>${count === 4 ? '四句故事' : i >= 0 ? '首句示範' : '內容整理中'}</small></button>`; }).join('');
+    grid.innerHTML = SENTENCE_BOOK_TITLES.map(([book, cover]) => { const i = SENTENCE_DEMO.findIndex((item) => item.book === book); const count = SENTENCE_DEMO.filter((item) => item.book === book).length; const image = i >= 0 ? SENTENCE_DEMO[i].image : 'assets/chinese-hero.png'; return `<button type="button" class="sentence-story-card${i < 0 ? ' is-pending' : ''}" data-sentence-index="${i}" ${i < 0 ? 'disabled' : ''}><span class="sentence-story-cover" aria-hidden="true">${cover}</span><img src="${image}" alt="${book}" loading="lazy"><span>${book}</span><small>${count === 4 ? '四句故事' : i >= 0 ? '首句示範' : '內容整理中'}</small></button>`; }).join('');
     grid.querySelectorAll('[data-sentence-index]').forEach((b) => b.addEventListener('click', () => { sentenceIndex = Number(b.dataset.sentenceIndex); sentencePlaced = []; showScreen('sentence'); renderSentenceGame(); }));
   }
   showScreen('sentenceLanding');

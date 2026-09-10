@@ -822,7 +822,10 @@ div.star-panel {
 #screen-sentence { overflow-y: auto; }
 .sentence-story-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; width: min(860px, 100%); margin: 20px auto; }
 .sentence-story-card { border: 3px solid rgba(96,165,250,.65); border-radius: 18px; padding: 8px; background: rgba(20,42,88,.85); color: var(--ink); font-weight: 700; cursor: pointer; }
+.sentence-story-cover { display:block; font-size: 2.4rem; margin: 2px 0 5px; }
 .sentence-story-card img { display:block; width:100%; aspect-ratio: 3/2; object-fit: cover; border-radius: 12px; margin-bottom: 6px; }
+.sentence-story-card small { display:block; color: #bfdbfe; margin-top: 4px; }
+.sentence-story-card.is-pending { opacity: .72; cursor: default; border-style: dashed; }
 .sentence-story-card:hover, .sentence-story-card:focus-visible { border-color: var(--gold-soft); transform: translateY(-2px); }
 @media (max-width: 620px) { .sentence-story-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .sentence-reward-bar {
