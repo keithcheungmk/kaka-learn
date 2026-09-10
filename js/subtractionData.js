@@ -15,7 +15,7 @@
       missions: pairs.map(([start, remove], index) => {
         const visual = VISUALS[index % VISUALS.length];
         return { id: `subtraction-l${level}-${index + 1}`, level, start, remove, remaining: start - remove, visual,
-          scenario: `${visual.label}月球任務`, desc: `白板有 ${start}${visual.measure}${visual.label}，拿走 ${remove}${visual.measure}，剩低幾多${visual.measure}？` };
+          scenario: `${visual.label}月球任務`, desc: `白板有 ${start}${visual.measure}${visual.label}，攞走幾多${visual.measure}${visual.label}，剩低 ${start - remove}${visual.measure}${visual.label}？` };
       }) };
   }
   const subtractionLevels = [
