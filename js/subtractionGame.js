@@ -49,7 +49,25 @@
     const slot = $('#subtraction-slot'); const takeaway = $('#subtraction-takeaway'); if (!slot || !takeaway) return;
     slot.innerHTML = ''; takeaway.innerHTML = `<div class="subtraction-takeaway-label">將物件拖到呢度<br>或者撳一下拿走</div>`;
     for (let i = 0; i < mission.start; i += 1) { const el = object(mission.visual); bindObject(el, mission); slot.appendChild(el); }
+    positionInitialObjects();
     removedCount = 0; sync(mission);
+  }
+  function positionInitialObjects() {
+    const slot = $('#subtraction-slot'); if (!slot) return;
+    const rect = slot.getBoundingClientRect(); const placed = [];
+    const overlaps = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+    [...slot.querySelectorAll('.subtraction-object')].forEach((el) => {
+      const width = el.offsetWidth || 58; const height = el.offsetHeight || 68; let chosen = null;
+      for (let attempt = 0; attempt < 80; attempt += 1) {
+        const candidate = { x: 8 + Math.random() * Math.max(1, rect.width - width - 16), y: 8 + Math.random() * Math.max(1, rect.height - height - 16), w: width, h: height };
+        const padded = { x: candidate.x - 12, y: candidate.y - 12, w: candidate.w + 24, h: candidate.h + 24 };
+        if (placed.every((item) => !overlaps(padded, item))) { chosen = candidate; break; }
+      }
+      if (!chosen) chosen = { x: 8 + (placed.length % 4) * Math.max(64, width + 8), y: 8 + Math.floor(placed.length / 4) * Math.max(76, height + 8), w: width, h: height };
+      el.style.left = `${Math.max(4, Math.min(rect.width - width - 4, chosen.x))}px`;
+      el.style.top = `${Math.max(4, Math.min(rect.height - height - 4, chosen.y))}px`;
+      placed.push(chosen);
+    });
   }
   function showReward(level) {
     const overlay = $('#math-round-finish'); if (!overlay) return; const msg = $('#math-round-finish-msg'); if (msg) msg.textContent = `${level.title}完成！攞到一個獎勵！`; overlay.hidden = false; deps.speech?.playStarCue?.({ muted: deps.isMuted?.() }); deps.speak?.('今輪玩完喇！你好叻呀！攞到一個獎勵！'); deps.playMathStarReward?.();

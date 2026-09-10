@@ -25,6 +25,11 @@
       completedLevels: [],
       completedMissions: [],
     },
+    numberBondsProgress: {
+      unlockedLevel: 1,
+      completedLevels: [],
+      completedMissions: [],
+    },
     subtractionProgress: {
       unlockedLevel: 1,
       completedLevels: [],
@@ -45,6 +50,11 @@
       additionProgress: {
         unlockedLevel: 1,
         unlockedBase: 5,
+        completedLevels: [],
+        completedMissions: [],
+      },
+      numberBondsProgress: {
+        unlockedLevel: 1,
         completedLevels: [],
         completedMissions: [],
       },
@@ -103,6 +113,12 @@
     if (!out.subtractionProgress || typeof out.subtractionProgress !== 'object') {
       out.subtractionProgress = { unlockedLevel: 1, completedLevels: [], completedMissions: [] };
     }
+    if (!out.numberBondsProgress || typeof out.numberBondsProgress !== 'object') {
+      out.numberBondsProgress = { unlockedLevel: 1, completedLevels: [], completedMissions: [] };
+    }
+    if (typeof out.numberBondsProgress.unlockedLevel !== 'number') out.numberBondsProgress.unlockedLevel = 1;
+    if (!Array.isArray(out.numberBondsProgress.completedLevels)) out.numberBondsProgress.completedLevels = [];
+    if (!Array.isArray(out.numberBondsProgress.completedMissions)) out.numberBondsProgress.completedMissions = [];
     if (typeof out.subtractionProgress.unlockedLevel !== 'number') out.subtractionProgress.unlockedLevel = 1;
     if (!Array.isArray(out.subtractionProgress.completedLevels)) out.subtractionProgress.completedLevels = [];
     if (!Array.isArray(out.subtractionProgress.completedMissions)) out.subtractionProgress.completedMissions = [];
@@ -353,6 +369,33 @@
     state.subtractionProgress = prog; saveState(state); return state;
   }
 
+  function normalizeNumberBondsProgress(prog) {
+    if (!prog || typeof prog !== 'object') return { unlockedLevel: 1, completedLevels: [], completedMissions: [] };
+    return {
+      unlockedLevel: typeof prog.unlockedLevel === 'number' ? prog.unlockedLevel : 1,
+      completedLevels: Array.isArray(prog.completedLevels) ? [...prog.completedLevels] : [],
+      completedMissions: Array.isArray(prog.completedMissions) ? [...prog.completedMissions] : [],
+    };
+  }
+  function getNumberBondsProgress(state = loadState()) { return normalizeNumberBondsProgress(state.numberBondsProgress); }
+  function isNumberBondsLevelUnlocked(level, state = loadState()) { return level <= getNumberBondsProgress(state).unlockedLevel; }
+  function isNumberBondsMissionDone(id, state = loadState()) { return getNumberBondsProgress(state).completedMissions.includes(id); }
+  function completeNumberBondsMission(missionId) {
+    const state = loadState(); const prog = getNumberBondsProgress(state);
+    if (!prog.completedMissions.includes(missionId)) prog.completedMissions.push(missionId);
+    const found = window.KakaNumberBondsData?.getMissionById?.(missionId);
+    if (found && found.level.missions.every((m) => prog.completedMissions.includes(m.id)) && found.level.level === 1) {
+      prog.unlockedLevel = Math.max(prog.unlockedLevel, 2);
+    }
+    state.numberBondsProgress = prog; saveState(state); return state;
+  }
+  function completeNumberBondsLevel(level) {
+    const state = loadState(); const prog = getNumberBondsProgress(state);
+    if (!prog.completedLevels.includes(level)) prog.completedLevels.push(level);
+    if (level === 1) prog.unlockedLevel = Math.max(prog.unlockedLevel, 2);
+    state.numberBondsProgress = prog; saveState(state); return state;
+  }
+
   window.KakaMathStorage = {
     STORAGE_KEY,
     SCHEMA_VERSION,
@@ -376,5 +419,10 @@
     isSubtractionMissionDone,
     completeSubtractionMission,
     completeSubtractionLevel,
+    getNumberBondsProgress,
+    isNumberBondsLevelUnlocked,
+    isNumberBondsMissionDone,
+    completeNumberBondsMission,
+    completeNumberBondsLevel,
   };
 })();

@@ -662,6 +662,11 @@
       </div>
       <p class="section-lead">揀一個學習階段：每輪 10 題，拖物件理解加法</p>
       <div class="addition-level-grid" id="addition-level-grid"></div>
+      <button type="button" class="addition-level-card number-bonds-entry" id="btn-open-number-bonds">
+        <span class="addition-level-kicker">新玩法・Number Bonds</span><strong>1＋？</strong>
+        <span class="addition-level-label">數字拆解</span><small>將一個數字拆成所有不同嘅兩數組合<br>Level 1：至 10；Level 2：11–20</small>
+        <span class="addition-level-status">開始學數字關係 →</span>
+      </button>
     </section>
 
     <section id="screen-math-earth-addition-play" class="screen math-screen addition-screen" aria-label="地球・能量方塊加法">
@@ -689,6 +694,32 @@
         <p class="feedback" id="addition-feedback" aria-live="polite"></p>
       </div>
       <div class="addition-merge-overlay" id="addition-merge-overlay" hidden></div>
+    </section>
+
+    <section id="screen-math-earth-bonds-select" class="screen math-screen addition-screen" aria-label="地球・數字拆解選擇">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-bonds-select">← 加法基地</button>
+        <h1>地球・數字拆解</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px"><span class="star-icon">★</span><span class="star-meta"><strong>Number Bonds</strong></span></div>
+      </div>
+      <p class="section-lead">先搵齊一個數字嘅所有兩數組合，再慢慢挑戰 11–20。</p>
+      <div class="addition-level-grid" id="number-bonds-level-grid"></div>
+    </section>
+
+    <section id="screen-math-earth-bonds-play" class="screen math-screen addition-screen number-bonds-screen" aria-label="地球・數字拆解遊戲">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-bonds-play">← 選擇關卡</button>
+        <h1 id="number-bonds-play-title">數字拆解</h1>
+        <div class="progress-pill"><strong id="number-bonds-mission-progress">目標 1/9</strong></div>
+      </div>
+      <p class="number-bonds-prompt" id="number-bonds-prompt">請將數字拆成所有不同嘅兩數組合。</p>
+      <div class="number-bonds-target-card"><span>目標數字</span><strong id="number-bonds-target">7</strong></div>
+      <div class="number-bonds-layout">
+        <div class="number-bonds-rows" id="number-bonds-rows"></div>
+        <div class="number-bonds-pool-wrap"><p>撳數字，或者拖去空格：</p><div class="number-bonds-pool" id="number-bonds-pool"></div></div>
+      </div>
+      <button type="button" class="btn addition-answer-btn" id="btn-number-bonds-answer" disabled>回答</button>
+      <p class="feedback" id="number-bonds-feedback" aria-live="polite"></p>
     </section>
 
     <!-- 金星・先學一學（睇鐘） -->
@@ -932,6 +963,8 @@
   <script src="./js/math-mercury-missions.js?v=20260907b"></script>
   <script src="./js/additionData.js?v=20260908a"></script>
   <script src="./js/additionGame.js?v=20260908a"></script>
+  <script src="./js/numberBondsData.js?v=20260910a"></script>
+  <script src="./js/numberBondsGame.js?v=20260910a"></script>
   <script src="./js/subtractionData.js?v=20260908a"></script>
   <script src="./js/subtractionGame.js?v=20260908a"></script>
   <script src="./js/math-app.js?v=20260905a"></script>

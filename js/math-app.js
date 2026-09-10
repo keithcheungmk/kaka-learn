@@ -16,7 +16,7 @@
   }
 
   function bootMath() {
-    if (!window.KakaMathStorage || !window.KakaMathSkills || !window.KakaAdditionData || !window.KakaAdditionGame) {
+    if (!window.KakaMathStorage || !window.KakaMathSkills || !window.KakaAdditionData || !window.KakaAdditionGame || !window.KakaNumberBondsData || !window.KakaNumberBondsGame) {
       console.error('KakaMath: math modules missing.');
       disableMathEntry();
       return;
@@ -102,6 +102,8 @@
       fuel: '#screen-math-fuel',
       additionSelect: '#screen-math-earth-addition-select',
       additionPlay: '#screen-math-earth-addition-play',
+      bondsSelect: '#screen-math-earth-bonds-select',
+      bondsPlay: '#screen-math-earth-bonds-play',
       subtractionSelect: '#screen-math-moon-subtraction-select',
       subtractionPlay: '#screen-math-moon-subtraction-play',
       vlearn: '#screen-math-venus-learn',
@@ -158,7 +160,7 @@
       const sel = screens[name] || screens.hub;
       const el = $(sel);
       el?.classList.add('active');
-      if (['count', 'additionPlay', 'time', 'fuel', 'shape', 'pattern'].includes(name)) {
+      if (['count', 'additionPlay', 'bondsPlay', 'time', 'fuel', 'shape', 'pattern'].includes(name)) {
         const fx = window.KakaStarFx;
         fx?.mountPlayScreen?.(el);
         fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
@@ -1206,6 +1208,9 @@
       $('#btn-back-math-hub')?.addEventListener('click', () => openGalaxy());
       $('#btn-back-math-galaxy')?.addEventListener('click', () => goHome());
       $('#btn-math-launch')?.addEventListener('click', () => launchFromHub());
+      $('#btn-open-number-bonds')?.addEventListener('click', () => window.KakaNumberBondsGame.openSelect());
+      $('#btn-back-math-bonds-select')?.addEventListener('click', () => window.KakaAdditionGame.openEarthAddition());
+      $('#btn-back-math-bonds-play')?.addEventListener('click', () => window.KakaNumberBondsGame.openSelect());
       $('#btn-math-warp-go')?.addEventListener('click', () => finishWarpGo());
       $('#btn-math-warp-stay')?.addEventListener('click', () => finishWarpStay());
 
@@ -1296,6 +1301,13 @@
       speech,
       isMuted,
       playMathStarReward,
+    });
+
+    window.KakaNumberBondsGame.init({
+      storage: window.KakaMathStorage,
+      tryEarnStar,
+      showMathScreen,
+      showMathRoundReward,
     });
 
     window.KakaSubtractionGame?.init({

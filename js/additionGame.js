@@ -8,6 +8,14 @@
   const isLevelUnlocked = (level) => storage()?.isAdditionLevelUnlocked?.(level.level) ?? level.level === 1;
   const isMissionDone = (id) => storage()?.isAdditionMissionDone?.(id) ?? false;
   const isLevelComplete = (level) => level.missions.every((mission) => isMissionDone(mission.id));
+  function shuffleMissions(missions) {
+    const shuffled = [...missions];
+    for (let i = shuffled.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
 
   function updateStarsDisplay() {
     const el = $('#addition-play-stars') || $('#addition-select-stars');
@@ -28,22 +36,21 @@
     item.textContent = visual.emoji; item.setAttribute('aria-label', `一${visual.measure}${visual.label}`); item.dataset.draggable = '1';
     return item;
   }
-  function getEmptyCells() { return [...document.querySelectorAll('#addition-slot .addition-slot-cell.is-empty')]; }
+  function getBoardObjects() { return [...document.querySelectorAll('#addition-slot .addition-object[data-board-object="1"]')]; }
   function syncFilled() {
-    filledCount = getEmptyCells().filter((cell) => cell.querySelector('.addition-object')).length;
-    getEmptyCells().forEach((cell) => cell.classList.remove('is-next'));
-    getEmptyCells().find((cell) => !cell.querySelector('.addition-object'))?.classList.add('is-next');
+    const mission = levels[currentLevelIndex]?.missions[currentMissionIndex];
+    filledCount = Math.max(0, getBoardObjects().length - (mission?.a || 0));
   }
 
   function renderSlot(mission) {
     const slot = $('#addition-slot'); if (!slot) return;
-    slot.innerHTML = ''; filledCount = 0;
+    slot.innerHTML = ''; filledCount = 0; slot.dataset.target = String(mission.targetNumber);
     for (let i = 0; i < mission.a; i += 1) {
-      const cell = document.createElement('div'); cell.className = 'addition-slot-cell is-preset'; cell.appendChild(createObject(mission.visual)); slot.appendChild(cell);
+      const object = createObject(mission.visual); object.dataset.boardObject = '1'; object.dataset.preset = '1'; bindDrag(object); slot.appendChild(object);
     }
     const divider = document.createElement('div'); divider.className = 'addition-slot-divider'; divider.textContent = '+'; slot.appendChild(divider);
-    for (let i = 0; i < mission.b; i += 1) { const cell = document.createElement('div'); cell.className = 'addition-slot-cell is-empty'; slot.appendChild(cell); }
     syncFilled();
+    positionBoardObjects();
   }
 
   function renderWarehouse(mission) {
@@ -54,20 +61,56 @@
     }
   }
 
-  function placeObject(source, cell, flyFrom) {
-    if (!cell || cell.querySelector('.addition-object')) return;
+  function positionBoardObject(object, clientX = null, clientY = null) {
+    const board = $('#addition-slot'); if (!board || !object) return;
+    const rect = board.getBoundingClientRect();
+    const width = object.offsetWidth || 58; const height = object.offsetHeight || 68;
+    const x = clientX === null ? rect.left + Math.random() * Math.max(1, rect.width - width) : clientX - width / 2;
+    const y = clientY === null ? rect.top + Math.random() * Math.max(1, rect.height - height) : clientY - height / 2;
+    object.style.left = `${Math.max(4, Math.min(rect.width - width - 4, x - rect.left))}px`;
+    object.style.top = `${Math.max(4, Math.min(rect.height - height - 4, y - rect.top))}px`;
+  }
+
+  function positionBoardObjects() {
+    const board = $('#addition-slot'); if (!board) return;
+    const rect = board.getBoundingClientRect();
+    const placed = [];
+    const divider = { x: rect.width / 2 - 42, y: rect.height / 2 - 42, w: 84, h: 84 };
+    getBoardObjects().forEach((object) => {
+      const width = object.offsetWidth || 58; const height = object.offsetHeight || 68;
+      let chosen = null;
+      for (let attempt = 0; attempt < 80; attempt += 1) {
+        const candidate = {
+          x: 8 + Math.random() * Math.max(1, rect.width - width - 16),
+          y: 8 + Math.random() * Math.max(1, rect.height - height - 16),
+          w: width,
+          h: height,
+        };
+        const padded = { x: candidate.x - 12, y: candidate.y - 12, w: candidate.w + 24, h: candidate.h + 24 };
+        const overlaps = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+        if (!overlaps(padded, divider) && placed.every((item) => !overlaps(padded, item))) { chosen = candidate; break; }
+      }
+      if (!chosen) chosen = { x: 8 + (placed.length % 4) * Math.max(64, width + 8), y: 8 + Math.floor(placed.length / 4) * Math.max(76, height + 8), w: width, h: height };
+      object.style.left = `${Math.max(4, Math.min(rect.width - width - 4, chosen.x))}px`;
+      object.style.top = `${Math.max(4, Math.min(rect.height - height - 4, chosen.y))}px`;
+      placed.push(chosen);
+    });
+  }
+
+  function placeObject(source, clientX = null, clientY = null, flyFrom) {
+    const board = $('#addition-slot'); if (!board) return;
     const go = () => {
       const mission = levels[currentLevelIndex].missions[currentMissionIndex];
-      const object = createObject(mission.visual); object.classList.add('is-snapped'); object.dataset.warehouse = '0';
-      object.addEventListener('click', (event) => { event.stopPropagation(); if (Date.now() < suppressClickUntil) return; returnObject(object); }); bindDrag(object); cell.appendChild(object);
+      const object = createObject(mission.visual); object.classList.add('is-snapped'); object.dataset.warehouse = '0'; object.dataset.boardObject = '1';
+      object.addEventListener('click', (event) => { event.stopPropagation(); if (Date.now() < suppressClickUntil) return; returnObject(object); }); bindDrag(object); board.appendChild(object); positionBoardObject(object, clientX, clientY);
       if (source?.dataset.warehouse === '1') source.remove();
       syncFilled(); renderEquation(mission); deps?.speak?.(filledCount === mission.b ? `${filledCount}${mission.visual.measure}${mission.visual.label}` : `${filledCount}`);
     };
     if (!flyFrom) return go();
     const ghost = flyFrom.cloneNode(true); ghost.classList.add('is-flying');
-    const from = flyFrom.getBoundingClientRect(), to = cell.getBoundingClientRect();
+    const from = flyFrom.getBoundingClientRect(), boardRect = board.getBoundingClientRect();
     ghost.style.cssText = `position:fixed;z-index:50;width:${from.width}px;height:${from.height}px;left:${from.left}px;top:${from.top}px;`;
-    document.body.appendChild(ghost); requestAnimationFrame(() => { ghost.style.left = `${to.left}px`; ghost.style.top = `${to.top}px`; });
+    document.body.appendChild(ghost); requestAnimationFrame(() => { ghost.style.left = `${boardRect.left + boardRect.width / 2}px`; ghost.style.top = `${boardRect.top + boardRect.height / 2}px`; });
     setTimeout(() => { ghost.remove(); go(); }, 300);
   }
 
@@ -79,13 +122,13 @@
   }
   function onWarehouseClick(event) {
     if (busy || dragState || Date.now() < suppressClickUntil) return;
-    const cell = getEmptyCells().find((item) => !item.querySelector('.addition-object')); if (cell) placeObject(event.currentTarget, cell, event.currentTarget);
+    placeObject(event.currentTarget);
   }
 
   function answer(mission) {
     if (busy) return;
     const feedback = $('#addition-feedback');
-    if (filledCount !== mission.b) {
+    if (getBoardObjects().length !== mission.targetNumber) {
       if (feedback) feedback.textContent = `請放入 ${mission.b}${mission.visual.measure}${mission.visual.label}，再撳回答。`;
       deps?.speak?.(`請放入${mission.b}${mission.visual.measure}${mission.visual.label}`);
       return;
@@ -112,10 +155,11 @@
         element.releasePointerCapture(upEvent.pointerId); element.classList.remove('is-dragging'); element.removeEventListener('pointermove', move); element.removeEventListener('pointerup', up); dragState.ghost?.remove();
         const state = dragState; dragState = null; if (!state.moved) return;
         suppressClickUntil = Date.now() + 350;
-        const target = document.elementFromPoint(upEvent.clientX, upEvent.clientY)?.closest?.('.addition-slot-cell.is-empty,#addition-warehouse');
-        if (target?.id === 'addition-warehouse' && state.cell) returnObject(element);
-        else if (target?.classList?.contains('is-empty') && !target.querySelector('.addition-object')) {
-          if (state.warehouse) placeObject(element, target); else if (state.cell !== target) { target.appendChild(element); syncFilled(); renderEquation(levels[currentLevelIndex].missions[currentMissionIndex]); }
+        const target = document.elementFromPoint(upEvent.clientX, upEvent.clientY)?.closest?.('#addition-slot,#addition-warehouse');
+        if (target?.id === 'addition-warehouse' && !state.warehouse) returnObject(element);
+        else if (target?.id === 'addition-slot') {
+          if (state.warehouse) placeObject(element, upEvent.clientX, upEvent.clientY);
+          else { positionBoardObject(element, upEvent.clientX, upEvent.clientY); syncFilled(); renderEquation(levels[currentLevelIndex].missions[currentMissionIndex]); }
         }
       };
       element.addEventListener('pointermove', move); element.addEventListener('pointerup', up);
@@ -162,6 +206,6 @@
   }
 
   function openEarthAddition() { deps.updateState({ currentPlanetId: PLANET_ID }); renderLevelSelect(); }
-  function init(options) { deps = options; levels = window.KakaAdditionData?.additionLevels || []; $('#btn-back-math-addition-select')?.addEventListener('click', () => deps.openHub()); $('#btn-back-math-addition-play')?.addEventListener('click', () => renderLevelSelect()); $('#btn-addition-answer')?.addEventListener('click', () => { const mission = levels[currentLevelIndex]?.missions[currentMissionIndex]; if (mission) answer(mission); }); return levels.length > 0; }
+  function init(options) { deps = options; levels = (window.KakaAdditionData?.additionLevels || []).map((level) => ({ ...level, missions: shuffleMissions(level.missions) })); $('#btn-back-math-addition-select')?.addEventListener('click', () => deps.openHub()); $('#btn-back-math-addition-play')?.addEventListener('click', () => renderLevelSelect()); $('#btn-addition-answer')?.addEventListener('click', () => { const mission = levels[currentLevelIndex]?.missions[currentMissionIndex]; if (mission) answer(mission); }); return levels.length > 0; }
   window.KakaAdditionGame = { init, openEarthAddition, renderLevelSelect, startMission };
 })();
