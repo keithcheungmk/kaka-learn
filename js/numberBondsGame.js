@@ -5,6 +5,15 @@
   let missionIndex = 0;
   let slots = [];
   let dragValue = null;
+  let lastPraiseIndex = -1;
+
+  const CORRECT_PRAISES = [
+    '你真聰明哦！',
+    '你好叻呀！',
+    '哇，好犀利啊！',
+    '答得真好！',
+    '你真係好醒目！',
+  ];
 
   const $ = (id) => document.getElementById(id);
   const data = () => window.KakaNumberBondsData;
@@ -138,7 +147,10 @@
     storage().completeNumberBondsMission(mission.id);
     if (!wasDone) deps.tryEarnStar();
     missionIndex += 1;
-    const message = `答對了！${mission.target} 可以是 ${mission.pairs.map(([a, b]) => `${a} 加 ${b}`).join('，或者是 ')}。你真聰明哦！`;
+    let praiseIndex = Math.floor(Math.random() * CORRECT_PRAISES.length);
+    if (CORRECT_PRAISES.length > 1 && praiseIndex === lastPraiseIndex) praiseIndex = (praiseIndex + 1) % CORRECT_PRAISES.length;
+    lastPraiseIndex = praiseIndex;
+    const message = `答對了！${mission.target} 可以是 ${mission.pairs.map(([a, b]) => `${a} 加 ${b}`).join('，或者是 ')}。${CORRECT_PRAISES[praiseIndex]}`;
     showCorrectPopover(message, () => {
       if (missionIndex < level.missions.length) {
         renderMission();
