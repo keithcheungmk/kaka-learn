@@ -25,8 +25,11 @@
   function renderEquation(mission) {
     const eq = $('#addition-equation');
     if (!eq) return;
-    const second = filledCount >= mission.b ? String(mission.b) : (filledCount ? String(filledCount) : '❓');
-    eq.innerHTML = `${mission.a} + <span class="eq-unknown">${second}</span> = <span class="eq-sum">${mission.targetNumber}</span>`;
+    const total = getBoardObjects().length;
+    const added = Math.max(0, total - mission.a);
+    const second = added ? String(added) : '❓';
+    const sum = added ? String(total) : String(mission.targetNumber);
+    eq.innerHTML = `${mission.a} + <span class="eq-unknown">${second}</span> = <span class="eq-sum">${sum}</span>`;
     eq.classList.remove('is-pop'); void eq.offsetWidth; eq.classList.add('is-pop');
   }
 
@@ -129,9 +132,15 @@
   function answer(mission) {
     if (busy) return;
     const feedback = $('#addition-feedback');
-    if (getBoardObjects().length !== mission.targetNumber) {
-      if (feedback) feedback.textContent = `請放入 ${mission.b}${mission.visual.measure}${mission.visual.label}，再撳回答。`;
-      deps?.speak?.(`請放入${mission.b}${mission.visual.measure}${mission.visual.label}`);
+    const total = getBoardObjects().length;
+    if (total !== mission.targetNumber) {
+      const difference = Math.abs(mission.targetNumber - total);
+      const measureName = `${mission.visual.measure}${mission.visual.label}`;
+      const message = total < mission.targetNumber
+        ? `而家有 ${total}${measureName}，仲差 ${difference}${measureName}，再撳回答。`
+        : `而家有 ${total}${measureName}，多咗 ${difference}${measureName}，請移走再撳回答。`;
+      if (feedback) feedback.textContent = message;
+      deps?.speak?.(message);
       return;
     }
     if (feedback) feedback.textContent = '答啱喇！';
