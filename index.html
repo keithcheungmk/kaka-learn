@@ -25,6 +25,7 @@
   <meta name="twitter:image" content="https://keithcheungmk.github.io/kaka-learn/assets/og-image.png" />
   <link rel="stylesheet" href="./css/styles.css?v=20260905list" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260905list" />
+  <link rel="stylesheet" href="./css/story-demo.css?v=20260911b" />
   <link rel="stylesheet" href="./css/math.css?v=20260908c" />
   <link rel="stylesheet" href="./css/math-manipulatives.css?v=20260907a" />
   <link rel="stylesheet" href="./css/additionGame.css?v=20260908a" />
@@ -77,10 +78,13 @@
         <div class="chinese-hero" aria-hidden="true">
           <img src="./assets/chinese-hero.png" alt="" width="978" height="514" decoding="async" fetchpriority="high" />
         </div>
-        <p class="hero-sub">太空戰士，出發認字、字母同數理！</p>
+        <p class="hero-sub">太空戰士，出發認字、英文同數理！</p>
         <div class="btn-row hero-cta-row">
           <button type="button" class="btn" id="btn-start-topics" aria-label="太空戰士認字">太空戰士認字</button>
-          <button type="button" class="btn btn-secondary" id="btn-start-phonics" aria-label="SPACE RANGER PHONICS">SPACE RANGER PHONICS</button>
+          <div class="english-home-group" aria-label="Space Ranger English">
+            <button type="button" class="btn btn-secondary" id="btn-start-phonics" aria-label="SPACE RANGER ENGLISH">SPACE RANGER ENGLISH</button>
+            <button type="button" class="btn btn-story" id="btn-start-story-demo" aria-label="Story English・Game Night">STORY ENGLISH・Game Night</button>
+          </div>
           <button type="button" class="btn btn-accent" id="btn-start-math">太空戰士數理</button>
           <a
             class="btn btn-friend home-friend-link"
@@ -496,6 +500,38 @@
         <div class="build-pool" id="phonics-build-pool" aria-label="可揀嘅字母"></div>
       </div>
       <p class="feedback" id="phonics-build-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- STORY ENGLISH：Carter Family 選取單元示範。原始 PDF 保留在素材庫，載入獲選逐頁圖和錄音。 -->
+    <section id="screen-story-demo" class="screen story-demo-screen" aria-label="Story English・Game Night">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-story-demo">← 主頁</button>
+        <h1>STORY ENGLISH</h1>
+        <div class="progress-pill"><strong id="story-demo-complete">0/4</strong></div>
+      </div>
+      <div class="story-demo-hero">
+        <img class="story-demo-hero-cover" src="./assets/story-demo/pages/page-01.jpg" alt="Game Night story illustration" decoding="async" />
+        <div class="story-demo-hero-copy">
+          <span class="story-demo-kicker">CARTER FAMILY · CF001</span>
+          <h2>Game Night</h2>
+          <p>聽故事、學英文，再練習用一句完整說話回答。</p>
+        </div>
+      </div>
+      <div class="story-demo-activity-grid" id="story-demo-activity-grid"></div>
+      <p class="story-demo-source-note">每一頁用對應故事圖和逐頁錄音；單字和答題都取材自故事內容。</p>
+    </section>
+
+    <section id="screen-story-play" class="screen story-demo-screen story-play-screen" aria-label="Story English 練習">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-story-play">← Game Night</button>
+        <h1 id="story-play-title">Listen to the Story</h1>
+        <div class="progress-pill"><strong id="story-round-progress">1/2</strong></div>
+      </div>
+      <p class="section-lead" id="story-play-lead">聽一聽，再撳下一頁。</p>
+      <div class="story-play-stage" id="story-play-stage"></div>
+      <div class="story-play-actions" id="story-play-actions"></div>
+      <div class="story-play-options" id="story-play-options"></div>
+      <p class="feedback" id="story-play-feedback" aria-live="polite"></p>
     </section>
 
     <!-- KAKA RANGER 數理探險：星球任務詳情 -->
@@ -972,6 +1008,7 @@
   <script src="./js/app.js?v=20260831l"></script>
   <script src="./js/phonics-words.js?v=20260905list"></script>
   <script src="./js/phonics-app.js?v=20260905list"></script>
+  <script src="./js/story-demo.js?v=20260911b"></script>
   <script src="./js/math-storage.js?v=20260811j"></script>
   <script src="./js/math-mastery.js?v=20260907a"></script>
   <script src="./js/math-question-engine.js?v=20260907a"></script>

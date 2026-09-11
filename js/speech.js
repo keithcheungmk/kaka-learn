@@ -160,6 +160,24 @@ function clearSpeakWatchers() {
 }
 
 /**
+ * 中文／英文共用同一個瀏覽器 speechSynthesis queue。
+ * 必須連尚未開始嘅延遲 timer 一齊清，否則上一個畫面排隊嘅粵語會喺英文卡中途插播。
+ */
+function cancelAllSpeech() {
+  clearSpeakWatchers();
+  if (speakEnglishTimer) {
+    clearTimeout(speakEnglishTimer);
+    speakEnglishTimer = null;
+  }
+  speakGen += 1;
+  try {
+    if ('speechSynthesis' in window) speechSynthesis.cancel();
+  } catch {
+    // ignore
+  }
+}
+
+/**
  * 朗讀文字（粵語優先）
  * iOS Safari：cancel 之後要稍延遲再 speak，否則會靜音失敗；
  * 而且 onend 經常唔 fire——會用時長後備確保 onEnd 一定會跑。
@@ -199,14 +217,8 @@ function speakTerm(text, {
     return;
   }
 
-  clearSpeakWatchers();
-  const gen = ++speakGen;
-
-  try {
-    speechSynthesis.cancel();
-  } catch {
-    // ignore
-  }
+  cancelAllSpeech();
+  const gen = speakGen;
 
   // 後備：就算 onend／onerror 都唔嚟，都要繼續下一句（鼓勵聲）
   speakEndTimer = setTimeout(runEnd, estimateSpeakMs(text, { rate, delayMs }));
@@ -564,16 +576,7 @@ function speakEnglishTerm(text, {
     return;
   }
 
-  if (speakEnglishTimer) {
-    clearTimeout(speakEnglishTimer);
-    speakEnglishTimer = null;
-  }
-
-  try {
-    speechSynthesis.cancel();
-  } catch {
-    // ignore
-  }
+  cancelAllSpeech();
 
   speakEnglishTimer = setTimeout(() => {
     speakEnglishTimer = null;
@@ -629,4 +632,5 @@ window.KakaSpeech = {
   FEEDBACK_RETRY_LINES,
   warmEnglishVoice,
   speakEnglishTerm,
+  cancelAllSpeech,
 };

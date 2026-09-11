@@ -86,6 +86,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-12 · Codex（Keith：Carter Family Story English・Game Night）
+
+- 新增 `Game Night` 英文故事示範：12 頁學校 PDF 衍生頁圖配 12 段對應逐頁錄音；錄音結束後自動翻下一頁
+- Vocab、Say It、Picture Talk 改用故事插圖；修正延遲排隊的粵語 TTS 插入英文朗讀問題
+- 首頁英文入口命名為 `SPACE RANGER ENGLISH`，並將 Story English 固定排在其下方
+- 數理 storage／題目引擎／掌握度測試全綠，未改任何數理程式或數據
+- **踩咗** `index.html`、`js/story-demo.js`、`js/speech.js`、`css/story-demo.css`、`assets/story-demo/`、`assets/image-formats.lock.json`、`scripts/check-invariants.py`、`docs/handover.md`
+
 ### 2026-09-08 · Cursor（Keith：書本掃描書架）
 
 - 新增公開靜態書架 `book-scans/`：列出 7 本《我自己會讀》紅輯家庭掃描 PDF（檔名原樣；PDF 二進制另外 commit）

@@ -447,13 +447,13 @@ def check_three_entries() -> None:
     html = read("index.html")
     for btn, name in [
         ("btn-start-topics", "小鹿認字探險"),
-        ("btn-start-phonics", "SPACE RANGER PHONICS"),
+        ("btn-start-phonics", "SPACE RANGER ENGLISH"),
         ("btn-start-math", "小鹿數理探險"),
     ]:
         if btn not in html:
             fail("entries", f"index.html 唔見 #{btn}（{name} 入口）")
-    if 'id="btn-start-phonics" aria-label="SPACE RANGER PHONICS">SPACE RANGER PHONICS</button>' not in html:
-        fail("entries", "Phonics 入口名稱要統一做「SPACE RANGER PHONICS」")
+    if 'id="btn-start-phonics" aria-label="SPACE RANGER ENGLISH">SPACE RANGER ENGLISH</button>' not in html:
+        fail("entries", "英文入口名稱要統一做「SPACE RANGER ENGLISH」")
 
 
 def check_phonics_ranger_theme() -> None:

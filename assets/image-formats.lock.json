@@ -318,5 +318,53 @@
   "assets/space-ranger-shooter.png": {
     "format": "PNG",
     "alpha": true
+  },
+  "assets/story-demo/pages/page-01.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/story-demo/pages/page-02.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/story-demo/pages/page-03.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/story-demo/pages/page-04.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/story-demo/pages/page-05.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/story-demo/pages/page-06.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/story-demo/pages/page-07.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/story-demo/pages/page-08.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/story-demo/pages/page-09.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/story-demo/pages/page-10.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/story-demo/pages/page-11.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/story-demo/pages/page-12.jpg": {
+    "format": "JPEG",
+    "alpha": false
   }
 }
