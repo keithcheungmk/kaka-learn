@@ -2,7 +2,7 @@
 (function () {
   const PLANET_ID = 'compare-size';
   let deps = null, levels = [], currentLevelIndex = 0, currentMissionIndex = 0;
-  let filledCount = 0, busy = false, dragState = null, suppressClickUntil = 0;
+  let filledCount = 0, busy = false, dragState = null, suppressClickUntil = 0, flightTimer = null;
   const $ = (sel) => document.querySelector(sel);
   const storage = () => deps?.storage || window.KakaMathStorage;
   const isLevelUnlocked = (level) => storage()?.isAdditionLevelUnlocked?.(level.level) ?? level.level === 1;
@@ -38,6 +38,10 @@
     item.type = 'button'; item.className = `addition-object math-native-emoji addition-object--${visual.id}`;
     item.textContent = visual.emoji; item.setAttribute('aria-label', `一${visual.measure}${visual.label}`); item.dataset.draggable = '1';
     return item;
+  }
+  function clearTransientObjects() {
+    if (flightTimer) { clearTimeout(flightTimer); flightTimer = null; }
+    document.querySelectorAll('.addition-object.is-flying').forEach((object) => object.remove());
   }
   function getBoardObjects() { return [...document.querySelectorAll('#addition-slot .addition-object[data-board-object="1"]')]; }
   function syncFilled() {
@@ -115,7 +119,7 @@
     const from = flyFrom.getBoundingClientRect(), boardRect = board.getBoundingClientRect();
     ghost.style.cssText = `position:fixed;z-index:50;width:${from.width}px;height:${from.height}px;left:${from.left}px;top:${from.top}px;`;
     document.body.appendChild(ghost); requestAnimationFrame(() => { ghost.style.left = `${boardRect.left + boardRect.width / 2}px`; ghost.style.top = `${boardRect.top + boardRect.height / 2}px`; });
-    setTimeout(() => { ghost.remove(); go(); }, 300);
+    flightTimer = setTimeout(() => { flightTimer = null; ghost.remove(); go(); }, 300);
   }
 
   function returnObject(object) {
@@ -196,6 +200,7 @@
   }
 
   function startMission(levelIndex, missionIndex) {
+    clearTransientObjects();
     currentLevelIndex = levelIndex; currentMissionIndex = missionIndex; busy = false; dragState = null; suppressClickUntil = 0;
     const level = levels[levelIndex], mission = level.missions[missionIndex];
     $('#addition-play-title').textContent = level.title; $('#addition-scenario').textContent = `${mission.visual.emoji} ${mission.scenario}`; $('#addition-desc').textContent = `已有 ${mission.a}${mission.visual.measure}${mission.visual.label}，要有 ${mission.targetNumber}${mission.visual.measure}${mission.visual.label}，仲差幾多？`;

@@ -1666,10 +1666,28 @@
   }
 }
 
+/* 遊戲統一按 iPad 橫向設計；直向時不把畫面重排成另一個遊戲版，而是請小朋友轉向。 */
 @media (min-width:701px) and (orientation:portrait) {
   html.math-canvas-mode #app {
-    width: min(834px, 100vw, calc(100dvh * 834 / 1194));
-    height: min(1194px, 100dvh, calc(100vw * 1194 / 834));
-    padding: 18px;
+    width: min(1194px, 100vw, calc(100dvh * 1194 / 834));
+    height: min(834px, 100dvh, calc(100vw * 834 / 1194));
+  }
+
+  html.math-canvas-mode #app::after {
+    content: '↻\A請將 iPad 轉至橫向使用';
+    white-space: pre-line;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-content: center;
+    padding: 28px;
+    background: rgba(7, 12, 37, .96);
+    color: #eef4ff;
+    font-family: Fredoka, 'Noto Sans HK', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.4rem);
+    font-weight: 800;
+    line-height: 1.7;
+    text-align: center;
   }
 }
