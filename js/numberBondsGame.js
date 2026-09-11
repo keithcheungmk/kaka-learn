@@ -72,6 +72,8 @@
       <button type="button" class="number-bonds-slot" data-slot="0" aria-label="第 ${index + 1} 組第一個數">？</button>
       <span aria-hidden="true">＋</span>
       <button type="button" class="number-bonds-slot" data-slot="1" aria-label="第 ${index + 1} 組第二個數">？</button>
+      <span class="number-bonds-equals" aria-hidden="true">＝</span>
+      <strong class="number-bonds-row-target" aria-label="目標數字 ${mission.target}">${mission.target}</strong>
     </div>`).join('');
     root.querySelectorAll('.number-bonds-slot').forEach((button) => {
       const row = Number(button.closest('.number-bonds-row').dataset.row);
@@ -100,6 +102,7 @@
   function renderPool(target) {
     const root = $('number-bonds-pool');
     const max = Math.max(10, target - 1);
+    root.style.setProperty('--number-count', String(max));
     root.innerHTML = Array.from({ length: max }, (_, index) => index + 1).map((value) => `<button type="button" class="number-bonds-number" draggable="true" data-value="${value}">${value}</button>`).join('');
     root.querySelectorAll('.number-bonds-number').forEach((button) => {
       const value = Number(button.dataset.value);
