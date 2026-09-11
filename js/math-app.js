@@ -156,6 +156,7 @@
     }
 
     function showMathScreen(name) {
+      document.documentElement.classList.add('math-canvas-mode');
       document.querySelectorAll('.screen').forEach((el) => el.classList.remove('active'));
       const sel = screens[name] || screens.hub;
       const el = $(sel);
@@ -170,6 +171,7 @@
     }
 
     function goHome() {
+      document.documentElement.classList.remove('math-canvas-mode');
       document.querySelectorAll('.screen').forEach((el) => el.classList.remove('active'));
       $('#screen-home')?.classList.add('active');
     }
@@ -448,6 +450,10 @@
           `;
           btn.addEventListener('click', () => {
             updateState({ currentPlanetId: p.id });
+            if (p.id === 'compare-size') {
+              window.KakaAdditionGame.openEarthAddition();
+              return;
+            }
             openHub();
           });
           grid.appendChild(btn);

@@ -198,8 +198,8 @@
   function startMission(levelIndex, missionIndex) {
     currentLevelIndex = levelIndex; currentMissionIndex = missionIndex; busy = false; dragState = null; suppressClickUntil = 0;
     const level = levels[levelIndex], mission = level.missions[missionIndex];
-    $('#addition-play-title').textContent = level.title; $('#addition-scenario').textContent = `${mission.scenario} · ${mission.visual.emoji}`; $('#addition-desc').textContent = mission.level === 2 ? `${mission.desc}（先湊十，再數剩低。）` : mission.desc;
-    const boardLabel = document.querySelector('.addition-board-label'); if (boardLabel) boardLabel.textContent = mission.level === 2 ? '白板：先湊十，再將兩組物件放埋一齊' : '白板：將兩組物件放埋一齊';
+    $('#addition-play-title').textContent = level.title; $('#addition-scenario').textContent = `${mission.visual.emoji} ${mission.scenario}`; $('#addition-desc').textContent = `已有 ${mission.a}${mission.visual.measure}${mission.visual.label}，要有 ${mission.targetNumber}${mission.visual.measure}${mission.visual.label}，仲差幾多？`;
+    const boardLabel = document.querySelector('.addition-board-label'); if (boardLabel) boardLabel.textContent = '將物件放埋一齊';
     $('#addition-mission-progress').textContent = `今輪第 ${missionIndex + 1} / ${level.missions.length} 題`; $('#addition-feedback').textContent = '';
     renderSlot(mission); renderWarehouse(mission); renderEquation(mission); updateStarsDisplay(); deps.showMathScreen('additionPlay');
     requestAnimationFrame(() => positionBoardObjects());
@@ -211,13 +211,14 @@
     levels.forEach((level, index) => {
       const unlocked = isLevelUnlocked(level), complete = isLevelComplete(level), button = document.createElement('button');
       button.type = 'button'; button.className = `addition-level-card${unlocked ? '' : ' is-locked'}${complete ? ' is-done' : ''}`; button.style.setProperty('--addition-accent', level.color); button.disabled = !unlocked;
-      button.innerHTML = `<span class="addition-level-kicker">LEVEL ${level.level}</span><strong>${level.targetRange}</strong><span class="addition-level-label">${level.title.split('・')[1]}</span><small>${level.blurb}</small><span class="addition-level-status">${complete ? '已完成・可以再玩' : unlocked ? '10 題任務' : '完成 Level 1 後解鎖'}</span>`;
+      const visual = level.level === 1 ? '🍓 ＋ 🍓' : '🔟 ＋ 🐥';
+      button.innerHTML = `<span class="addition-level-kicker">LEVEL ${level.level}</span><span class="addition-level-visual" aria-hidden="true">${visual}</span><strong>${level.targetRange}</strong><span class="addition-level-label">${level.title.split('・')[1]}</span><small>${level.blurb}</small><span class="addition-level-status">${complete ? '已完成・再玩' : unlocked ? '10 題任務' : '完成 Level 1 後解鎖'}</span>`;
       button.onclick = () => { const first = level.missions.findIndex((mission) => !isMissionDone(mission.id)); startMission(index, first >= 0 ? first : 0); }; grid.appendChild(button);
     });
     updateStarsDisplay(); deps.showMathScreen('additionSelect');
   }
 
   function openEarthAddition() { deps.updateState({ currentPlanetId: PLANET_ID }); renderLevelSelect(); }
-  function init(options) { deps = options; levels = (window.KakaAdditionData?.additionLevels || []).map((level) => ({ ...level, missions: shuffleMissions(level.missions) })); $('#btn-back-math-addition-select')?.addEventListener('click', () => deps.openHub()); $('#btn-back-math-addition-play')?.addEventListener('click', () => renderLevelSelect()); $('#btn-addition-answer')?.addEventListener('click', () => { const mission = levels[currentLevelIndex]?.missions[currentMissionIndex]; if (mission) answer(mission); }); return levels.length > 0; }
+  function init(options) { deps = options; levels = (window.KakaAdditionData?.additionLevels || []).map((level) => ({ ...level, missions: shuffleMissions(level.missions) })); $('#btn-back-math-addition-select')?.addEventListener('click', () => deps.openGalaxy()); $('#btn-back-math-addition-play')?.addEventListener('click', () => renderLevelSelect()); $('#btn-addition-answer')?.addEventListener('click', () => { const mission = levels[currentLevelIndex]?.missions[currentMissionIndex]; if (mission) answer(mission); }); return levels.length > 0; }
   window.KakaAdditionGame = { init, openEarthAddition, renderLevelSelect, startMission };
 })();

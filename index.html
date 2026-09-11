@@ -653,26 +653,34 @@
 
     <!-- 地球・加法能量基地 -->
     <section id="screen-math-earth-addition-select" class="screen math-screen addition-screen" aria-label="地球・揀能量基地">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-addition-select">← 太空站</button>
-        <h1>地球・加法能量</h1>
+      <div class="game-header earth-game-header">
+        <div class="earth-nav">
+          <button type="button" class="btn btn-ghost" id="btn-back-math-addition-select">← 銀河</button>
+          <span class="earth-location"><img src="./assets/math/planets/earth.png" alt="" width="48" height="48" decoding="async" />地球</span>
+        </div>
+        <h1>揀玩法</h1>
         <div class="star-panel" style="min-height:56px;padding:8px 12px">
           <span class="star-icon">★</span>
           <span class="star-meta"><strong id="addition-select-stars">0/10</strong></span>
         </div>
       </div>
-      <p class="section-lead">揀一個學習階段：每輪 10 題，拖物件理解加法</p>
-      <div class="addition-level-grid" id="addition-level-grid"></div>
-      <button type="button" class="addition-level-card number-bonds-entry" id="btn-open-number-bonds">
-        <span class="addition-level-kicker">新玩法・Number Bonds</span><strong>1＋？</strong>
-        <span class="addition-level-label">數字拆解</span><small>將一個數字拆成所有不同嘅兩數組合<br>Level 1：至 10；Level 2：11–20</small>
-        <span class="addition-level-status">開始學數字關係 →</span>
-      </button>
+      <p class="section-lead addition-select-lead">揀一張卡開始玩</p>
+      <div class="addition-level-menu">
+        <div class="addition-level-grid" id="addition-level-grid"></div>
+        <button type="button" class="addition-level-card number-bonds-entry" id="btn-open-number-bonds">
+          <span class="addition-level-kicker">NUMBER BONDS</span><span class="addition-level-visual" aria-hidden="true">⑤ → ② ＋ ③</span>
+          <span class="addition-level-label">數字拆解</span><small>拆開數字，搵不同組合</small>
+          <span class="addition-level-status">開始玩 →</span>
+        </button>
+      </div>
     </section>
 
     <section id="screen-math-earth-addition-play" class="screen math-screen addition-screen" aria-label="地球・能量方塊加法">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-addition-play">← 基地</button>
+      <div class="game-header earth-game-header">
+        <div class="earth-nav">
+          <button type="button" class="btn btn-ghost" id="btn-back-math-addition-play">← 揀玩法</button>
+          <span class="earth-location"><img src="./assets/math/planets/earth.png" alt="" width="48" height="48" decoding="async" />地球</span>
+        </div>
         <h1 id="addition-play-title">5號能量基地</h1>
         <div class="star-panel" style="min-height:56px;padding:8px 12px">
           <span class="star-icon">★</span>
