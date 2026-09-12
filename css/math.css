@@ -353,6 +353,12 @@
   transform: scale(0.96);
 }
 
+.math-galaxy-card:disabled {
+  cursor: not-allowed;
+  opacity: 0.56;
+  filter: saturate(0.58);
+}
+
 .math-galaxy-card:focus-visible {
   outline: 3px solid var(--teal-soft);
   outline-offset: 2px;

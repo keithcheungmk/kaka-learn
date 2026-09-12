@@ -534,39 +534,13 @@
       <p class="feedback" id="story-play-feedback" aria-live="polite"></p>
     </section>
 
-    <!-- KAKA RANGER 數理探險：星球任務詳情 -->
-    <section id="screen-math-hub" class="screen math-screen" aria-label="KAKA RANGER 數理探險・星球任務">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-hub">← 銀河旅程</button>
-        <h1>KAKA RANGER 數理探險</h1>
-        <span class="math-header-spacer" aria-hidden="true"></span>
-      </div>
-      <div class="math-hub">
-        <div class="math-planet-stage">
-          <div id="math-planet-ball" class="math-globe-wrap math-globe-wrap--photo math-globe-wrap--mercury" aria-hidden="true">
-            <img class="math-globe-img" src="./assets/math/planets/mercury.png" alt="" width="256" height="256" loading="lazy" decoding="async" />
-          </div>
-          <img class="math-ranger-guide-logo" src="./assets/kaka-ranger-logo.png" alt="" width="381" height="389" decoding="async" />
-        </div>
-        <h2 class="math-hub-title" id="math-hub-planet-name">水星</h2>
-        <p class="math-hub-blurb" id="math-hub-blurb">喺水星學數數：數吓有幾多粒</p>
-        <div class="math-hub-meta">
-          <span class="math-chip" id="math-hub-skill">學：數數</span>
-          <span class="math-chip" id="math-hub-stars">今日 ★ 0 / 10</span>
-          <span class="math-chip" id="math-hub-lit">已點亮 0 / 8</span>
-        </div>
-        <div class="btn-row">
-          <button type="button" class="btn" id="btn-math-launch">出發</button>
-        </div>
-        <p class="math-coming" id="math-hub-coming" hidden></p>
-        <p class="math-lit-badge" id="math-hub-lit-badge" hidden>✨ 已點亮</p>
-      </div>
-    </section>
-
     <!-- 月球・減法拿走 -->
     <section id="screen-math-moon-subtraction-select" class="screen math-screen subtraction-screen" aria-label="月球・揀減法任務">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-subtraction-select">← 太空站</button>
+      <div class="game-header earth-game-header">
+        <div class="earth-nav">
+          <button type="button" class="btn btn-ghost" id="btn-back-math-subtraction-select">← 銀河</button>
+          <span class="earth-location"><img src="./assets/math/planets/moon.png" alt="" width="48" height="48" decoding="async" />月球</span>
+        </div>
         <h1>月球・減法拿走</h1>
         <div class="star-panel" style="min-height:56px;padding:8px 12px"><span class="star-icon">★</span><span class="star-meta"><strong id="subtraction-select-stars">0/10</strong></span></div>
       </div>
@@ -599,8 +573,11 @@
 
     <!-- 水星・先學一學 -->
     <section id="screen-math-learn" class="screen math-screen" aria-label="水星・先學一學">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-learn">← 太空站</button>
+      <div class="game-header earth-game-header">
+        <div class="earth-nav">
+          <button type="button" class="btn btn-ghost" id="btn-back-math-learn">← 銀河</button>
+          <span class="earth-location"><img src="./assets/math/planets/mercury.png" alt="" width="48" height="48" decoding="async" />水星</span>
+        </div>
         <h1 id="math-learn-title">水星・先學</h1>
         <div class="progress-pill" aria-label="學習進度">
           <strong id="math-learn-progress">1/5</strong>
@@ -777,8 +754,11 @@
 
     <!-- 金星・先學一學（睇鐘） -->
     <section id="screen-math-venus-learn" class="screen math-screen" aria-label="金星・先學一學">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-venus-learn">← 太空站</button>
+      <div class="game-header earth-game-header">
+        <div class="earth-nav">
+          <button type="button" class="btn btn-ghost" id="btn-back-math-venus-learn">← 銀河</button>
+          <span class="earth-location"><img src="./assets/math/planets/venus.png" alt="" width="48" height="48" decoding="async" />金星</span>
+        </div>
         <h1 id="math-venus-learn-title">金星・先學</h1>
         <div class="progress-pill" aria-label="學習進度">
           <strong id="math-venus-learn-progress">1/6</strong>
@@ -840,8 +820,11 @@
 
     <!-- 火星・先學（形狀＋推理） -->
     <section id="screen-math-mars-learn" class="screen math-screen" aria-label="火星・先學一學">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-mars-learn">← 太空站</button>
+      <div class="game-header earth-game-header">
+        <div class="earth-nav">
+          <button type="button" class="btn btn-ghost" id="btn-back-math-mars-learn">← 銀河</button>
+          <span class="earth-location"><img src="./assets/math/planets/mars.png" alt="" width="48" height="48" decoding="async" />火星</span>
+        </div>
         <h1 id="math-mars-learn-title">火星・先學</h1>
         <div class="progress-pill" aria-label="學習進度">
           <strong id="math-mars-learn-progress">1/5</strong>

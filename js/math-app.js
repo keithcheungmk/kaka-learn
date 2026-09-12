@@ -94,7 +94,6 @@
 
     const screens = {
       home: '#screen-home',
-      hub: '#screen-math-hub',
       galaxy: '#screen-math-galaxy',
       learn: '#screen-math-learn',
       play: '#screen-math-play',
@@ -158,7 +157,7 @@
     function showMathScreen(name) {
       document.documentElement.classList.add('math-canvas-mode');
       document.querySelectorAll('.screen').forEach((el) => el.classList.remove('active'));
-      const sel = screens[name] || screens.hub;
+      const sel = screens[name] || screens.galaxy;
       const el = $(sel);
       el?.classList.add('active');
       if (['count', 'additionPlay', 'bondsPlay', 'time', 'fuel', 'shape', 'pattern'].includes(name)) {
@@ -305,57 +304,6 @@
       $('#btn-math-round-galaxy').onclick = () => { overlay.hidden = true; openGalaxy(); };
     }
 
-    function applyPlanetTheme(planet) {
-      const hub = $('#screen-math-hub');
-      if (hub) hub.style.setProperty('--math-planet', planet.color);
-
-      const ball = $('#math-planet-ball');
-      if (ball) {
-        const litClass = isPlanetLit(planet.id) ? ' is-lit' : '';
-        ball.outerHTML = `<div id="math-planet-ball" class="math-globe-wrap math-globe-wrap--photo math-globe-wrap--${planet.body}${litClass}" aria-hidden="true"><img class="math-globe-img" src="${planet.img}" alt="" width="256" height="256" decoding="async" /></div>`;
-      }
-
-      const title = $('#math-hub-planet-name');
-      if (title) title.textContent = planet.name;
-
-      const blurb = $('#math-hub-blurb');
-      if (blurb) blurb.textContent = planet.blurb;
-
-      const skill = $('#math-hub-skill');
-      if (skill) skill.textContent = `學：${planet.skill}`;
-
-    }
-
-    function renderHub() {
-      const state = loadState();
-      const planet = getPlanetById(state.currentPlanetId);
-      applyPlanetTheme(planet);
-
-      const stars = $('#math-hub-stars');
-      if (stars) stars.textContent = `今日 ★ ${state.starsToday} / 10`;
-
-      const litCount = $('#math-hub-lit');
-      if (litCount) litCount.textContent = `已點亮 ${state.litPlanetIds.length} / ${MATH_PLANETS.length}`;
-
-      const litNow = isPlanetLit(planet.id, state);
-      const badge = $('#math-hub-lit-badge');
-      if (badge) badge.hidden = !litNow;
-
-      const coming = $('#math-hub-coming');
-      if (coming) {
-        const playable = ['count', 'compare-size', 'time', 'shape', 'moon'].includes(planet.id);
-        if (playable) {
-          coming.hidden = true;
-          coming.textContent = '';
-        } else {
-          coming.hidden = false;
-          coming.textContent = litNow
-            ? `${planet.name}玩法即將開放；可以返水星溫習，或者睇旅程揀第二粒。`
-            : `${planet.name}玩法即將開放，而家可以去水星學數數！`;
-        }
-      }
-    }
-
     function hideWarp() {
       const overlay = $('#math-warp');
       if (!overlay) return;
@@ -373,26 +321,30 @@
       const to = warpToPlanet;
       hideWarp();
       if (!to) {
-        openHub();
+        openGalaxy();
         return;
       }
       updateState({ currentPlanetId: to.id });
-      openHub();
+      openPlanet(to.id);
       speak(`到${to.name}喇！`);
     }
 
     function finishWarpStay() {
       const from = warpFromPlanet;
       hideWarp();
-      if (from) updateState({ currentPlanetId: from.id });
-      openHub();
+      if (!from) {
+        openGalaxy();
+        return;
+      }
+      updateState({ currentPlanetId: from.id });
+      openPlanet(from.id);
     }
 
     /** 點亮後短飛行＋建議下一粒（可留低／飛過去；唔硬鎖） */
     function offerWarpHop(fromPlanet, toPlanet) {
       const overlay = $('#math-warp');
       if (!overlay || !toPlanet || fromPlanet.id === toPlanet.id) {
-        openHub();
+        openGalaxy();
         return;
       }
       warpFromPlanet = fromPlanet;
@@ -419,9 +371,15 @@
       // 唔自動飛走：等家長／小朋友撳掣；飛行動畫只係氣氛
     }
 
-    function openHub() {
-      renderHub();
-      showMathScreen('hub');
+    function openPlanet(planetId) {
+      const planet = getPlanetById(planetId);
+      updateState({ currentPlanetId: planet.id });
+      if (planet.id === 'count') return openLearn();
+      if (planet.id === 'compare-size') return window.KakaAdditionGame.openEarthAddition();
+      if (planet.id === 'time') return openVenusLearn();
+      if (planet.id === 'shape') return openMarsLearn();
+      if (planet.id === 'moon') return window.KakaSubtractionGame?.openMoonSubtraction();
+      openGalaxy();
     }
 
     function renderGalaxy() {
@@ -437,7 +395,9 @@
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = `math-galaxy-card${lit ? ' is-lit' : ''}`;
-          const status = lit ? '已點亮' : '可以出發';
+          const playable = ['count', 'compare-size', 'time', 'shape', 'moon'].includes(p.id);
+          const status = playable ? (lit ? '已點亮' : '可以出發') : '準備中';
+          btn.disabled = !playable;
           btn.setAttribute('aria-label', `${p.name}，${p.skill}，${status}`);
           btn.innerHTML = `
             <span class="math-galaxy-planet">
@@ -449,12 +409,7 @@
             <span class="math-galaxy-status">${status}</span>
           `;
           btn.addEventListener('click', () => {
-            updateState({ currentPlanetId: p.id });
-            if (p.id === 'compare-size') {
-              window.KakaAdditionGame.openEarthAddition();
-              return;
-            }
-            openHub();
+            openPlanet(p.id);
           });
           grid.appendChild(btn);
         });
@@ -1165,44 +1120,6 @@
       }
     }
 
-    function goToNextPlanetFromHub() {
-      const planet = getPlanetById(loadState().currentPlanetId);
-      if (!isPlanetLit(planet.id)) return;
-      const next = getPlanetById(getNextPlanetId(planet.id));
-      if (next.id === planet.id) return;
-      offerWarpHop(planet, next);
-    }
-
-    function launchFromHub() {
-      const planet = getPlanetById(loadState().currentPlanetId);
-      if (planet.id === 'count') {
-        openLearn();
-        return;
-      }
-      if (planet.id === 'compare-size') {
-        window.KakaAdditionGame.openEarthAddition();
-        return;
-      }
-      if (planet.id === 'time') {
-        openVenusLearn();
-        return;
-      }
-      if (planet.id === 'shape') {
-        openMarsLearn();
-        return;
-      }
-      if (planet.id === 'moon') {
-        window.KakaSubtractionGame?.openMoonSubtraction();
-        return;
-      }
-      const note = $('#math-hub-coming');
-      if (note) {
-        note.hidden = false;
-        note.textContent = `${planet.name}玩法即將開放；可以揀水星、金星、地球或者火星玩！`;
-      }
-      renderHub();
-    }
-
     function bind() {
       const start = $('#btn-start-math');
       if (!start) {
@@ -1211,16 +1128,14 @@
       }
       start.addEventListener('click', () => openGalaxy());
 
-      $('#btn-back-math-hub')?.addEventListener('click', () => openGalaxy());
       $('#btn-back-math-galaxy')?.addEventListener('click', () => goHome());
-      $('#btn-math-launch')?.addEventListener('click', () => launchFromHub());
       $('#btn-open-number-bonds')?.addEventListener('click', () => window.KakaNumberBondsGame.openSelect());
       $('#btn-back-math-bonds-select')?.addEventListener('click', () => window.KakaAdditionGame.openEarthAddition());
       $('#btn-back-math-bonds-play')?.addEventListener('click', () => window.KakaNumberBondsGame.openSelect());
       $('#btn-math-warp-go')?.addEventListener('click', () => finishWarpGo());
       $('#btn-math-warp-stay')?.addEventListener('click', () => finishWarpStay());
 
-      $('#btn-back-math-learn')?.addEventListener('click', () => openHub());
+      $('#btn-back-math-learn')?.addEventListener('click', () => openGalaxy());
       $('#math-learn-tap')?.addEventListener('click', () => speakLearn());
       $('#btn-math-learn-prev')?.addEventListener('click', () => {
         if (learnIndex <= 0) return;
@@ -1240,7 +1155,7 @@
       $('#btn-back-math-count')?.addEventListener('click', () => openPlay());
       $('#btn-math-count-speak')?.addEventListener('click', () => speakCountPrompt());
 
-      $('#btn-back-math-venus-learn')?.addEventListener('click', () => openHub());
+      $('#btn-back-math-venus-learn')?.addEventListener('click', () => openGalaxy());
       $('#math-venus-learn-tap')?.addEventListener('click', () => speakVenusLearn());
       $('#btn-math-venus-learn-prev')?.addEventListener('click', () => {
         if (vLearnIndex <= 0) return;
@@ -1263,7 +1178,7 @@
         if (timeRound) speak(`幾點？${timeRound.target.say}`);
       });
 
-      $('#btn-back-math-mars-learn')?.addEventListener('click', () => openHub());
+      $('#btn-back-math-mars-learn')?.addEventListener('click', () => openGalaxy());
       $('#math-mars-learn-tap')?.addEventListener('click', () => speakMarsLearn());
       $('#btn-math-mars-learn-prev')?.addEventListener('click', () => {
         if (marsLearnIndex <= 0) return;
@@ -1300,7 +1215,6 @@
       getPlanetById,
       getNextPlanetId,
       offerWarpHop,
-      openHub,
       openGalaxy,
       showMathScreen,
       speak,
@@ -1324,7 +1238,6 @@
       tryEarnStar,
       isPlanetLit,
       lightPlanet,
-      openHub,
       openGalaxy,
       showMathScreen,
       speak,
@@ -1353,9 +1266,8 @@
     });
 
     window.KakaMath = {
-      openHub,
       goHome,
-      renderHub,
+      openPlanet,
       openLearn,
       openCount,
       openEarthAddition: () => window.KakaAdditionGame.openEarthAddition(),
