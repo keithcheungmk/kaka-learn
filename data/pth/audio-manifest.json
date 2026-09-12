@@ -59,7 +59,10 @@
       "videoSrc": "assets/pth/initials/video/b.mp4",
       "sourceFile": "source-materials/b.mp4",
       "format": "m4a/aac",
-      "textbookGroup": "bpmf"
+      "textbookGroup": "bpmf",
+      "durationSec": 0.75,
+      "sizeBytes": 4246,
+      "derivation": "首個非靜音讀音片段；頭尾靜音裁剪；loudnorm -16 LUFS"
     },
     "u1-initial-p": {
       "source": "本地口形MP4衍生音檔",
@@ -68,7 +71,10 @@
       "videoSrc": "assets/pth/initials/video/p.mp4",
       "sourceFile": "source-materials/p.mp4",
       "format": "m4a/aac",
-      "textbookGroup": "bpmf"
+      "textbookGroup": "bpmf",
+      "durationSec": 1.17,
+      "sizeBytes": 5968,
+      "derivation": "首個非靜音讀音片段；頭尾靜音裁剪；loudnorm -16 LUFS"
     },
     "u1-initial-m": {
       "source": "本地口形MP4衍生音檔",
@@ -77,7 +83,10 @@
       "videoSrc": "assets/pth/initials/video/m.mp4",
       "sourceFile": "source-materials/m.mp4",
       "format": "m4a/aac",
-      "textbookGroup": "bpmf"
+      "textbookGroup": "bpmf",
+      "durationSec": 1,
+      "sizeBytes": 5359,
+      "derivation": "首個非靜音讀音片段；頭尾靜音裁剪；loudnorm -16 LUFS"
     },
     "u1-initial-f": {
       "source": "本地口形MP4衍生音檔",
@@ -86,7 +95,10 @@
       "videoSrc": "assets/pth/initials/video/f.mp4",
       "sourceFile": "source-materials/f.mp4",
       "format": "m4a/aac",
-      "textbookGroup": "bpmf"
+      "textbookGroup": "bpmf",
+      "durationSec": 1.14,
+      "sizeBytes": 5896,
+      "derivation": "首個非靜音讀音片段；頭尾靜音裁剪；loudnorm -16 LUFS"
     }
   }
 }
