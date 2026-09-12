@@ -67,6 +67,11 @@ def walk(pg, url, shots: Path | None, tag: str):
             """() => {
               const s = document.querySelector('.screen.active');
               const d = document.documentElement;
+              const app = document.querySelector('#app');
+              const showingOrientationNotice = d.classList.contains('math-canvas-mode')
+                && matchMedia('(orientation: portrait)').matches
+                && app
+                && getComputedStyle(app, '::after').content !== 'none';
               // 重疊偵測：同一屏嘅直屬子元素兩兩相交（要 x、y 都相交先算）
               const kids = [...s.children].filter(
                 (e) => e.offsetHeight > 0 && getComputedStyle(e).position !== 'absolute'
@@ -115,12 +120,12 @@ def walk(pg, url, shots: Path | None, tag: str):
               }
               return {
                 id: s ? s.id : null,
-                over: Math.max(
+                over: showingOrientationNotice ? 0 : Math.max(
                   scrollable ? s.scrollHeight - s.clientHeight : 0,
                   Math.max(d.scrollHeight, document.body.scrollHeight) - window.innerHeight
                 ),
-                clipped: getComputedStyle(s).overflow === 'hidden' && scrollable,
-                overlaps,
+                clipped: !showingOrientationNotice && getComputedStyle(s).overflow === 'hidden' && scrollable,
+                overlaps: showingOrientationNotice ? [] : overlaps,
                 rangerHits,
                 rangerFaceOk,
                 text: (s && s.innerText || '').trim().length,

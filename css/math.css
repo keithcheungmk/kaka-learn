@@ -1666,28 +1666,13 @@
   }
 }
 
-/* 遊戲統一按 iPad 橫向設計；直向時不把畫面重排成另一個遊戲版，而是請小朋友轉向。 */
+.math-landscape-notice.active{display:grid;place-items:center;min-height:100%;padding:28px;text-align:center;background:radial-gradient(circle at 50% 28%,rgba(59,130,246,.32),transparent 36%),linear-gradient(165deg,#07122e,#14113d)}.math-landscape-notice-inner{position:relative;display:grid;place-items:center;gap:14px;color:#eef4ff}.math-landscape-notice-inner img{width:clamp(120px,25vw,190px);height:auto;filter:drop-shadow(0 12px 20px rgba(0,0,0,.35))}.math-landscape-notice-inner h1{margin:0;font-size:clamp(1.8rem,5vw,2.8rem);color:#a7f3d0}.math-landscape-notice-inner p{margin:0;font-size:clamp(1.1rem,3vw,1.45rem);font-weight:700}.math-landscape-rotate{position:absolute;top:82px;right:-36px;display:grid;place-items:center;width:58px;height:58px;border:3px solid #fde68a;border-radius:50%;color:#fde68a;font-size:2.4rem;line-height:1}
+
+/* 遊戲統一按 iPad 橫向設計；直向時以完整提示頁取代遊戲畫布。 */
 @media (min-width:701px) and (orientation:portrait) {
   html.math-canvas-mode #app {
-    width: min(1194px, 100vw, calc(100dvh * 1194 / 834));
-    height: min(834px, 100dvh, calc(100vw * 834 / 1194));
-  }
-
-  html.math-canvas-mode #app::after {
-    content: '↻\A請將 iPad 轉至橫向使用';
-    white-space: pre-line;
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    display: grid;
-    place-content: center;
-    padding: 28px;
-    background: rgba(7, 12, 37, .96);
-    color: #eef4ff;
-    font-family: Fredoka, 'Noto Sans HK', sans-serif;
-    font-size: clamp(1.5rem, 5vw, 2.4rem);
-    font-weight: 800;
-    line-height: 1.7;
-    text-align: center;
+    width: min(834px, 100vw, calc(100dvh * 834 / 1194));
+    height: min(1194px, 100dvh, calc(100vw * 1194 / 834));
+    padding:18px;
   }
 }
