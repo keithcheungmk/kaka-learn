@@ -603,3 +603,11 @@ python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
 
 ⚠️ 部署完，iPhone／iPad 要**閂咗個 tab 再開**先睇到新版（單純 refresh 唔夠，
 `index.html` 本身會被瀏覽器 cache）。呢個就係上面 `version.json` 嗰項想解決嘅問題。
+
+### 2026-09-12 · Codex — 本地普通話聲母示範素材
+
+- Keith 已放入 `source-materials/` 根目錄的 23 個聲母 MP4（b/p/m/f、dtnl、gkh、jqx、zhchshr、zcs、yw）；原檔保留，未移動、刪除或直接部署。
+- 新增 `data/pth/initial-video-manifest.json`，記錄 23 個來源檔、課本組別、原始 H.264/AAC 規格及時長。
+- b/p/m/f 已各自產生輕量衍生影片及 AAC 音檔於 `assets/pth/initials/`（合計約 876KB），供口形示範及聽辨題；其餘 19 個只保留 metadata，避免超出網站資產預算。
+- `data/pth/audio-manifest.json` 的 b/p/m/f 已標記 `verified`，並指向本地衍生音檔；聲調／韻母仍待核實來源。
+- 驗證：`node scripts/test-pth-content.mjs`、`python3 scripts/check-invariants.py`。

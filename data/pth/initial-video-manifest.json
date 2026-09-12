@@ -1,0 +1,328 @@
+{
+  "courseId": "pth-k2",
+  "description": "本地普通話聲母口形示範；原始 MP4 僅存於 source-materials，不直接部署。",
+  "entries": [
+    {
+      "id": "b",
+      "sourceFile": "source-materials/b.mp4",
+      "textbookGroup": "bpmf",
+      "durationSec": 13.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/b.mp4",
+      "derivedAudio": "assets/pth/initials/audio/b.m4a"
+    },
+    {
+      "id": "p",
+      "sourceFile": "source-materials/p.mp4",
+      "textbookGroup": "bpmf",
+      "durationSec": 14.38,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/p.mp4",
+      "derivedAudio": "assets/pth/initials/audio/p.m4a"
+    },
+    {
+      "id": "m",
+      "sourceFile": "source-materials/m.mp4",
+      "textbookGroup": "bpmf",
+      "durationSec": 14.08,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/m.mp4",
+      "derivedAudio": "assets/pth/initials/audio/m.m4a"
+    },
+    {
+      "id": "f",
+      "sourceFile": "source-materials/f.mp4",
+      "textbookGroup": "bpmf",
+      "durationSec": 13.14,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/f.mp4",
+      "derivedAudio": "assets/pth/initials/audio/f.m4a"
+    },
+    {
+      "id": "d",
+      "sourceFile": "source-materials/d.mp4",
+      "textbookGroup": "dtnl",
+      "durationSec": 14.08,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "t",
+      "sourceFile": "source-materials/t.mp4",
+      "textbookGroup": "dtnl",
+      "durationSec": 13.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "n",
+      "sourceFile": "source-materials/n.mp4",
+      "textbookGroup": "dtnl",
+      "durationSec": 13.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "l",
+      "sourceFile": "source-materials/l.mp4",
+      "textbookGroup": "dtnl",
+      "durationSec": 12.4,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "g",
+      "sourceFile": "source-materials/g.mp4",
+      "textbookGroup": "gkh",
+      "durationSec": 12.18,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "k",
+      "sourceFile": "source-materials/k.mp4",
+      "textbookGroup": "gkh",
+      "durationSec": 11.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "h",
+      "sourceFile": "source-materials/h.mp4",
+      "textbookGroup": "gkh",
+      "durationSec": 10.98,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "j",
+      "sourceFile": "source-materials/j.mp4",
+      "textbookGroup": "jqx",
+      "durationSec": 10.92,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "q",
+      "sourceFile": "source-materials/q.mp4",
+      "textbookGroup": "jqx",
+      "durationSec": 11.24,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "x",
+      "sourceFile": "source-materials/x.mp4",
+      "textbookGroup": "jqx",
+      "durationSec": 12.32,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "zh",
+      "sourceFile": "source-materials/zh.mp4",
+      "textbookGroup": "zhchshr",
+      "durationSec": 12.82,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "ch",
+      "sourceFile": "source-materials/ch.mp4",
+      "textbookGroup": "zhchshr",
+      "durationSec": 12.7,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "sh",
+      "sourceFile": "source-materials/sh.mp4",
+      "textbookGroup": "zhchshr",
+      "durationSec": 11.56,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "r",
+      "sourceFile": "source-materials/r.mp4",
+      "textbookGroup": "zhchshr",
+      "durationSec": 12.76,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "z",
+      "sourceFile": "source-materials/z.mp4",
+      "textbookGroup": "zcs",
+      "durationSec": 12.9,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "c",
+      "sourceFile": "source-materials/c.mp4",
+      "textbookGroup": "zcs",
+      "durationSec": 11.96,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "s",
+      "sourceFile": "source-materials/s.mp4",
+      "textbookGroup": "zcs",
+      "durationSec": 12.5,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "y",
+      "sourceFile": "source-materials/y.mp4",
+      "textbookGroup": "yw",
+      "durationSec": 12.28,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    },
+    {
+      "id": "w",
+      "sourceFile": "source-materials/w.mp4",
+      "textbookGroup": "yw",
+      "durationSec": 13.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": null,
+      "derivedAudio": null
+    }
+  ]
+}
