@@ -120,6 +120,7 @@ def walk(pg, url, shots: Path | None, tag: str):
               }
               return {
                 id: s ? s.id : null,
+                portrait: window.innerHeight > window.innerWidth,
                 over: showingOrientationNotice ? 0 : Math.max(
                   scrollable ? s.scrollHeight - s.clientHeight : 0,
                   Math.max(d.scrollHeight, document.body.scrollHeight) - window.innerHeight
@@ -142,6 +143,7 @@ def walk(pg, url, shots: Path | None, tag: str):
                 info["clipped"],
                 info.get("rangerHits") or [],
                 info.get("rangerFaceOk", True),
+                info.get("portrait", False),
             )
         )
         if shots:
@@ -199,10 +201,6 @@ def walk(pg, url, shots: Path | None, tag: str):
         probe(step)
         if entry == "#btn-start-math":
             # 數理遊戲係固定 iPad 橫向畫布；直向只應顯示轉向提示，唔應嘗試撳入任務。
-            viewport = pg.viewport_size or {}
-            if viewport.get("height", 0) > viewport.get("width", 0):
-                probe("數理・請轉橫向")
-                continue
             pg.click("#math-galaxy-grid .math-galaxy-card:first-child")
             pg.wait_for_timeout(300)
             pg.click("#btn-math-launch")
@@ -279,12 +277,12 @@ def main() -> int:
                 continue
 
             bad = []
-            for step, sid, over, text, overlaps, clipped, ranger_hits, ranger_face_ok in rows:
+            for step, sid, over, text, overlaps, clipped, ranger_hits, ranger_face_ok, portrait in rows:
                 if text < 5:
                     bad.append(f"{step}（{sid}）似乎白屏")
-                if not phone and over > 2 and sid not in SCROLLABLE:
+                if not phone and not portrait and over > 2 and sid not in SCROLLABLE:
                     bad.append(f"{step}（{sid}）要捲 {over}px")
-                if clipped:
+                if clipped and not portrait:
                     bad.append(f"{step}（{sid}）內容被剪走 {over}px（鎖死唔捲但入唔晒）")
                 for o in overlaps:
                     bad.append(f"{step}（{sid}）元素重疊：{o}")

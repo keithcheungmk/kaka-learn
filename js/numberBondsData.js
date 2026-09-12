@@ -28,10 +28,21 @@
     makeLevel(2, 'Level 2・拆解 11–20', '11–20', [11, 12, 13, 14, 15, 16, 17, 18, 19, 20], '先諗 10，再搵埋其他兩數組合。'),
   ];
 
+  // Level 1 has nine distinct targets (2–10).  Add one non-persistent review
+  // item to make every practice round exactly ten questions without changing
+  // legacy completion IDs or the Level 2 unlock rule.
+  function roundMissionsForLevel(level) {
+    if (level?.level !== 1) return [...(level?.missions || [])];
+    return [...level.missions, {
+      id: 'bonds-1-review-5', review: true, target: 5, pairs: pairsForTarget(5),
+    }];
+  }
+
   window.KakaNumberBondsData = {
     levels,
     pairsForTarget,
     getLevel(level) { return levels.find((item) => item.level === level) || null; },
+    roundMissionsForLevel,
     getMissionById(id) {
       for (const level of levels) {
         const mission = level.missions.find((item) => item.id === id);

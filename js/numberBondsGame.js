@@ -3,6 +3,8 @@
   let deps = null;
   let level = null;
   let missionIndex = 0;
+  let roundMissions = [];
+  let roundStars = new Set();
   let slots = [];
   let dragValue = null;
   let lastPraiseIndex = -1;
@@ -46,18 +48,18 @@
     const selected = data().getLevel(levelNumber);
     if (!selected || !storage().isNumberBondsLevelUnlocked(levelNumber)) return;
     level = selected;
+    roundMissions = data().roundMissionsForLevel?.(level) || [...level.missions];
+    roundStars = new Set();
     missionIndex = 0;
-    while (missionIndex < level.missions.length && storage().isNumberBondsMissionDone(level.missions[missionIndex].id)) missionIndex += 1;
-    if (missionIndex >= level.missions.length) missionIndex = 0;
     deps.showMathScreen('bondsPlay');
     renderMission();
   }
 
   function renderMission() {
-    const mission = level.missions[missionIndex];
+    const mission = roundMissions[missionIndex];
     slots = mission.pairs.map(() => [null, null]);
     $('number-bonds-play-title').textContent = level.title;
-    $('number-bonds-mission-progress').textContent = `目標 ${missionIndex + 1}/${level.missions.length}`;
+    $('number-bonds-mission-progress').textContent = `第 ${missionIndex + 1}/10 題`;
     $('number-bonds-prompt').textContent = `請將 ${mission.target} 拆成所有不同嘅兩數組合。`;
     $('number-bonds-target').textContent = mission.target;
     $('number-bonds-feedback').textContent = '';
@@ -125,7 +127,7 @@
   function placeValue(row, slot, value) {
     if (!Number.isInteger(value) || value < 1) return;
     slots[row][slot] = value;
-    renderRows(level.missions[missionIndex]);
+    renderRows(roundMissions[missionIndex]);
     updateAnswerButton();
   }
 
@@ -135,7 +137,7 @@
   }
 
   function checkAnswer() {
-    const mission = level.missions[missionIndex];
+    const mission = roundMissions[missionIndex];
     const expected = mission.pairs.map((pair) => pair.join(',')).sort();
     const actual = slots.map((pair) => [...pair].sort((a, b) => a - b).join(',')).sort();
     const feedback = $('number-bonds-feedback');
@@ -146,16 +148,15 @@
     }
     feedback.textContent = '啱晒！你搵齊所有組合！';
     feedback.className = 'feedback is-good';
-    const wasDone = storage().isNumberBondsMissionDone(mission.id);
-    storage().completeNumberBondsMission(mission.id);
-    if (!wasDone) deps.tryEarnStar();
+    if (!mission.review) storage().completeNumberBondsMission(mission.id);
+    if (!roundStars.has(mission.id)) { deps.tryEarnStar(); roundStars.add(mission.id); }
     missionIndex += 1;
     let praiseIndex = Math.floor(Math.random() * CORRECT_PRAISES.length);
     if (CORRECT_PRAISES.length > 1 && praiseIndex === lastPraiseIndex) praiseIndex = (praiseIndex + 1) % CORRECT_PRAISES.length;
     lastPraiseIndex = praiseIndex;
     const message = `答對了！${mission.target} 可以是 ${mission.pairs.map(([a, b]) => `${a} 加 ${b}`).join('，或者是 ')}。${CORRECT_PRAISES[praiseIndex]}`;
     showCorrectPopover(message, () => {
-      if (missionIndex < level.missions.length) {
+      if (missionIndex < roundMissions.length) {
         renderMission();
       } else {
         storage().completeNumberBondsLevel(level.level);

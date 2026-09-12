@@ -96,7 +96,6 @@
       home: '#screen-home',
       hub: '#screen-math-hub',
       galaxy: '#screen-math-galaxy',
-      landscapeNotice: '#screen-math-landscape-notice',
       learn: '#screen-math-learn',
       play: '#screen-math-play',
       count: '#screen-math-count',
@@ -141,11 +140,6 @@
     let warpFromPlanet = null;
     let warpToPlanet = null;
     let warpTimer = null;
-    let requestedMathScreen = 'galaxy';
-
-    function mustUseLandscapeNotice() {
-      return window.innerWidth >= 701 && window.innerHeight > window.innerWidth;
-    }
 
     function isMuted() {
       try {
@@ -162,14 +156,12 @@
     }
 
     function showMathScreen(name) {
-      if (name !== 'landscapeNotice') requestedMathScreen = name;
       document.documentElement.classList.add('math-canvas-mode');
       document.querySelectorAll('.screen').forEach((el) => el.classList.remove('active'));
-      const target = mustUseLandscapeNotice() ? 'landscapeNotice' : name;
-      const sel = screens[target] || screens.hub;
+      const sel = screens[name] || screens.hub;
       const el = $(sel);
       el?.classList.add('active');
-      if (['count', 'additionPlay', 'bondsPlay', 'time', 'fuel', 'shape', 'pattern'].includes(target)) {
+      if (['count', 'additionPlay', 'bondsPlay', 'time', 'fuel', 'shape', 'pattern'].includes(name)) {
         const fx = window.KakaStarFx;
         fx?.mountPlayScreen?.(el);
         fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
@@ -177,12 +169,6 @@
         window.KakaStarFx?.hideRanger?.();
       }
     }
-
-    window.addEventListener('resize', () => {
-      if (!document.documentElement.classList.contains('math-canvas-mode')) return;
-      const activeId = document.querySelector('.math-screen.active')?.id;
-      if (mustUseLandscapeNotice() || activeId === 'screen-math-landscape-notice') showMathScreen(requestedMathScreen);
-    });
 
     function goHome() {
       document.documentElement.classList.remove('math-canvas-mode');

@@ -69,3 +69,12 @@
 .subtraction-answer-btn{min-width:220px;margin:2px auto 0;background:#f8c654;color:#101b3d;border-color:#f8c654;box-shadow:0 6px 0 #b96b12}
 @media(max-width:900px){.subtraction-workspace{grid-template-columns:minmax(0,1fr) clamp(210px,28vw,280px);width:min(96vw,900px)}}
 @media(max-width:700px){.subtraction-workspace{grid-template-columns:1fr}.subtraction-answer-btn{min-width:min(80vw,260px)}}
+
+/* 直向 iPad 沿用手機單欄、可捲動的遊戲流程。 */
+@media (min-width:701px) and (orientation:portrait){
+  #screen-math-earth-addition-play.active,#screen-math-earth-addition-select.active,#screen-math-earth-bonds-select.active,#screen-math-earth-bonds-play.active{height:auto;max-height:none;overflow:visible}
+  .addition-level-menu{grid-template-columns:1fr;width:min(92vw,620px)}
+  .addition-workspace,.subtraction-workspace{grid-template-columns:1fr;width:100%;gap:12px}
+  .addition-warehouse{max-width:none}
+  .number-bonds-layout{width:100%;overflow:visible}.number-bonds-rows{max-height:none}.number-bonds-pool{grid-template-columns:repeat(5,1fr)}
+}
