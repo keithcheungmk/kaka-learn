@@ -1,0 +1,17 @@
+{
+  "unitId": "pth-k2-u1",
+  "title": "聲調、單韻母、b/p/m/f",
+  "questionCount": 10,
+  "questions": [
+    { "id": "u1-q01", "lesson": "tones-song", "type": "tone-listen", "prompt": "聽一聽，這是第幾聲？", "audioId": "u1-tone-1", "options": ["第一聲", "第二聲", "第三聲", "第四聲"], "answer": "第一聲", "hint": "聲音平平的，是第一聲。" },
+    { "id": "u1-q02", "lesson": "tones-song", "type": "tone-listen", "prompt": "聽一聽，這是第幾聲？", "audioId": "u1-tone-2", "options": ["第一聲", "第二聲", "第三聲", "第四聲"], "answer": "第二聲", "hint": "聲音由低向高，是第二聲。" },
+    { "id": "u1-q03", "lesson": "tones-song", "type": "tone-symbol", "prompt": "哪一個是第三聲？", "options": ["ā", "á", "ǎ", "à"], "answer": "ǎ", "hint": "第三聲的聲調符號像一個小勾。" },
+    { "id": "u1-q04", "lesson": "single-finals", "type": "final-listen", "prompt": "聽一聽，這是哪一個韻母？", "audioId": "u1-final-a", "options": ["a", "o", "e", "i"], "answer": "a", "hint": "張大嘴巴，讀 a。" },
+    { "id": "u1-q05", "lesson": "single-finals", "type": "final-listen", "prompt": "聽一聽，這是哪一個韻母？", "audioId": "u1-final-o", "options": ["a", "o", "u", "ü"], "answer": "o", "hint": "嘴巴圓圓的，讀 o。" },
+    { "id": "u1-q06", "lesson": "single-finals", "type": "final-symbol", "prompt": "哪一個是 ü？", "options": ["u", "ü", "i", "e"], "answer": "ü", "hint": "ü 上面有兩點。" },
+    { "id": "u1-q07", "lesson": "single-finals", "type": "final-sort", "prompt": "請找出單韻母。", "options": ["ai", "a", "an", "ang"], "answer": "a", "hint": "單韻母只有一個字母。" },
+    { "id": "u1-q08", "lesson": "initials-bpmf", "type": "initial-listen", "prompt": "聽一聽，開頭是哪個聲母？", "audioId": "u1-initial-b", "options": ["b", "p", "m", "f"], "answer": "b", "hint": "嘴唇先合起來，再讀 b。" },
+    { "id": "u1-q09", "lesson": "initials-bpmf", "type": "initial-listen", "prompt": "聽一聽，開頭是哪個聲母？", "audioId": "u1-initial-p", "options": ["b", "p", "m", "f"], "answer": "p", "hint": "讀 p 時，會有一點送氣。" },
+    { "id": "u1-q10", "lesson": "initials-bpmf", "type": "initial-listen", "prompt": "聽一聽，開頭是哪個聲母？", "audioId": "u1-initial-m", "options": ["b", "p", "m", "f"], "answer": "m", "hint": "雙唇合起來，鼻音是 m。" }
+  ]
+}

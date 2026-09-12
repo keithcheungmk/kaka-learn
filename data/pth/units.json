@@ -1,0 +1,16 @@
+{
+  "courseId": "pth-k2",
+  "title": "快樂拼音・低班",
+  "source": "source-materials/PTH textbook_k2.pdf",
+  "lessons": [
+    { "id": "tones-song", "order": 1, "title": "聲調歌", "focus": "聽辨第一至第四聲" },
+    { "id": "single-finals", "order": 2, "title": "單韻母", "focus": "a、o、e、i、u、ü" },
+    { "id": "initials-bpmf", "order": 3, "title": "聲母 b、p、m、f", "focus": "聽辨及認讀 b、p、m、f" },
+    { "id": "initials-dtnl", "order": 4, "title": "聲母 d、t、n、l", "focus": "後續單元" },
+    { "id": "initials-gkh", "order": 5, "title": "聲母 g、k、h", "focus": "後續單元" },
+    { "id": "initials-jqx", "order": 6, "title": "聲母 j、q、x", "focus": "後續單元" },
+    { "id": "initials-zhchshr", "order": 7, "title": "聲母 zh、ch、sh、r", "focus": "後續單元" },
+    { "id": "initials-zcs", "order": 8, "title": "聲母 z、c、s", "focus": "後續單元" },
+    { "id": "initials-yw", "order": 9, "title": "聲母 y、w", "focus": "後續單元" }
+  ]
+}

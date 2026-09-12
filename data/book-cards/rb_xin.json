@@ -1,0 +1,7 @@
+{
+  "book": "rb_xin", "series": "red_series", "allow_words": true,
+  "source": "2026-09-05 掃描書本認字卡（紅④《信》）",
+  "cards": [
+    {"char":"信"},{"char":"爸爸"},{"char":"的"},{"char":"哥哥"},{"char":"安安"},{"char":"媽媽"},{"char":"姐姐"},{"char":"爺爺"},{"char":"沒有"}
+  ]
+}

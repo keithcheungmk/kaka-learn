@@ -1,0 +1,1675 @@
+/* 小鹿數理探險 — 獨立樣式（故障隔離：只影響 .math-screen） */
+
+.math-screen.active {
+  position: relative;
+  isolation: isolate;
+}
+
+.math-screen.active::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 500px at 50% 20%, color-mix(in srgb, var(--math-planet, #3b82f6) 28%, transparent), transparent 60%),
+    radial-gradient(700px 400px at 80% 80%, rgba(251, 191, 36, 0.1), transparent 55%);
+}
+
+/* 銀河旅程：真實銀河背景圖 */
+#screen-math-galaxy.math-screen.active::before {
+  background:
+    linear-gradient(180deg, rgba(4, 11, 24, 0.35) 0%, rgba(7, 21, 38, 0.45) 55%, rgba(7, 21, 38, 0.72) 100%),
+    url("../assets/math/galaxy-bg.jpg") center / cover no-repeat;
+}
+
+/* Hub 亦可微透銀河 */
+#screen-math-hub.math-screen.active::before {
+  background:
+    radial-gradient(900px 500px at 50% 18%, color-mix(in srgb, var(--math-planet, #3b82f6) 22%, transparent), transparent 58%),
+    linear-gradient(180deg, rgba(7, 21, 38, 0.55) 0%, rgba(7, 21, 38, 0.72) 100%),
+    url("../assets/math/galaxy-bg.jpg") center 40% / cover no-repeat;
+}
+
+.math-hub {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+  padding: 8px 0 24px;
+}
+
+.math-planet-stage {
+  position: relative;
+  width: min(72vw, 280px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+/* Hub 大星球：改用真實太陽系 globe */
+#math-planet-ball.math-globe-wrap {
+  width: 78%;
+  aspect-ratio: 1;
+  animation: math-planet-breathe 3.6s ease-in-out infinite;
+}
+
+#math-planet-ball .math-globe {
+  width: 100%;
+  height: 100%;
+}
+
+#math-planet-ball.is-lit,
+.math-globe-wrap.is-lit .math-globe {
+  box-shadow:
+    0 0 0 3px rgba(253, 230, 138, 0.85),
+    0 0 24px rgba(251, 191, 36, 0.45),
+    0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes math-planet-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+/* ---------- 真實感星球 globe（後備 CSS；優先用照片 .math-globe-img） ---------- */
+.math-globe-wrap {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+}
+
+.math-globe-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.45));
+  pointer-events: none;
+  user-select: none;
+}
+
+/* 全站圖片後備色唔應該填入已去背嘅星球 alpha。 */
+.math-screen .math-globe-img {
+  background-color: transparent;
+}
+
+.math-globe-wrap--photo.is-lit .math-globe-img,
+#math-planet-ball.is-lit .math-globe-img {
+  filter:
+    drop-shadow(0 0 10px rgba(253, 230, 138, 0.75))
+    drop-shadow(0 12px 22px rgba(0, 0, 0, 0.45));
+}
+
+.math-globe-wrap--saturn.math-globe-wrap--photo {
+  width: 120px;
+  height: 96px;
+}
+
+.math-globe-wrap--saturn.math-globe-wrap--photo .math-globe-img {
+  border-radius: 0;
+  width: 118%;
+  height: 118%;
+  max-width: none;
+}
+
+.math-globe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow:
+    inset -14px -10px 28px rgba(0, 0, 0, 0.45),
+    inset 10px 8px 18px rgba(255, 255, 255, 0.22),
+    0 14px 28px rgba(0, 0, 0, 0.4);
+}
+
+.math-globe-wrap--saturn:not(.math-globe-wrap--photo) {
+  width: 120px;
+  height: 96px;
+}
+
+.math-globe-wrap--saturn:not(.math-globe-wrap--photo) .math-globe {
+  width: 72%;
+  height: 90%;
+  justify-self: center;
+}
+
+.math-globe-wrap--saturn:not(.math-globe-wrap--photo)::before {
+  content: "";
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  top: 48%;
+  height: 28%;
+  border-radius: 50%;
+  border: 3px solid rgba(232, 205, 150, 0.55);
+  border-top-color: rgba(245, 230, 190, 0.85);
+  border-bottom-color: rgba(160, 130, 80, 0.35);
+  transform: rotateX(68deg) translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
+  box-shadow: 0 0 12px rgba(240, 213, 154, 0.25);
+}
+
+.math-globe-wrap--saturn:not(.math-globe-wrap--photo)::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 50%;
+  height: 16%;
+  border-radius: 50%;
+  border: 2px solid rgba(210, 180, 120, 0.4);
+  transform: rotateX(68deg) translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.math-globe--mercury {
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.45), transparent 38%),
+    radial-gradient(circle at 62% 58%, rgba(80, 80, 85, 0.35) 0 8%, transparent 9%),
+    radial-gradient(circle at 40% 70%, rgba(60, 60, 65, 0.3) 0 6%, transparent 7%),
+    linear-gradient(145deg, #d5d8de 0%, #9a9ea8 45%, #6e727a 100%);
+}
+
+.math-globe--venus {
+  background:
+    radial-gradient(circle at 30% 26%, rgba(255, 255, 255, 0.5), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(180, 120, 40, 0.25), transparent 50%),
+    linear-gradient(150deg, #f3e0b0 0%, #e0b86a 40%, #c4893a 100%);
+}
+
+.math-globe--earth {
+  background:
+    radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.45), transparent 36%),
+    radial-gradient(circle at 58% 42%, #2f9e5b 0 14%, transparent 15%),
+    radial-gradient(circle at 38% 62%, #247a48 0 10%, transparent 11%),
+    radial-gradient(circle at 72% 68%, #1f6b3f 0 12%, transparent 13%),
+    linear-gradient(145deg, #5eb0ef 0%, #1d6fd0 42%, #0b3d91 100%);
+}
+
+.math-globe--mars {
+  background:
+    radial-gradient(circle at 30% 26%, rgba(255, 230, 200, 0.4), transparent 38%),
+    radial-gradient(circle at 55% 48%, rgba(120, 50, 30, 0.35) 0 10%, transparent 11%),
+    radial-gradient(circle at 40% 72%, rgba(90, 40, 25, 0.3) 0 8%, transparent 9%),
+    linear-gradient(150deg, #f08a5a 0%, #c4472a 48%, #7a2410 100%);
+}
+
+.math-globe--jupiter {
+  background:
+    radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.35), transparent 36%),
+    repeating-linear-gradient(
+      180deg,
+      #e8c9a0 0 8%,
+      #d4a574 8% 16%,
+      #c4895a 16% 22%,
+      #ead2b0 22% 30%,
+      #b87448 30% 38%,
+      #e0b888 38% 46%,
+      #c99560 46% 54%,
+      #e8c9a0 54% 62%,
+      #a86a3c 62% 70%,
+      #d4a574 70% 100%
+    );
+}
+
+.math-globe--saturn {
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.4), transparent 38%),
+    linear-gradient(160deg, #f7e7c2 0%, #e8c98a 45%, #c9a35c 100%);
+}
+
+.math-globe--uranus {
+  background:
+    radial-gradient(circle at 30% 26%, rgba(255, 255, 255, 0.5), transparent 40%),
+    linear-gradient(150deg, #b8f3f8 0%, #5ec8d6 45%, #2a8f9e 100%);
+}
+
+.math-globe--neptune {
+  background:
+    radial-gradient(circle at 30% 26%, rgba(200, 230, 255, 0.45), transparent 38%),
+    radial-gradient(circle at 65% 55%, rgba(20, 40, 120, 0.35), transparent 45%),
+    linear-gradient(150deg, #6b9ef5 0%, #2f5ec8 48%, #1a2f8a 100%);
+}
+
+.math-ranger-guide-logo {
+  position: absolute;
+  right: -12%;
+  bottom: -5%;
+  width: 112px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.4));
+  animation: math-ranger-bob 2.8s ease-in-out infinite;
+  z-index: 3;
+}
+
+.math-header-spacer {
+  width: 120px;
+}
+
+@keyframes math-ranger-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.math-hub-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  font-weight: 700;
+}
+
+.math-hub-blurb {
+  margin: 0;
+  color: var(--ink-dim);
+  font-size: 1.05rem;
+}
+
+.math-hub-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.math-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(18, 40, 72, 0.75);
+  border: 1px solid rgba(253, 230, 138, 0.35);
+  font-size: 0.95rem;
+}
+
+.math-coming {
+  margin: 0;
+  color: var(--gold-soft);
+  font-size: 0.98rem;
+}
+
+/* ---------- 銀河旅程卡（圓形星球，唔再用方塊 topic-card） ---------- */
+#math-galaxy-grid.math-galaxy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(4px, 1.2vw, 12px);
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 0 18px;
+}
+
+@media (max-width: 720px) {
+  #math-galaxy-grid.math-galaxy-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.math-galaxy-card {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  touch-action: manipulation;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 6px 7px;
+  border-radius: 24px;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.math-galaxy-planet {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.math-galaxy-card:active {
+  transform: scale(0.96);
+}
+
+.math-galaxy-card:focus-visible {
+  outline: 3px solid var(--teal-soft);
+  outline-offset: 2px;
+}
+
+.math-galaxy-card .math-globe-wrap {
+  width: min(24vw, 96px);
+  height: min(24vw, 96px);
+}
+
+.math-galaxy-card .math-globe-wrap--saturn {
+  width: min(29vw, 116px);
+  height: min(24vw, 96px);
+}
+
+.math-galaxy-card .math-globe-img {
+  transition: transform 0.2s ease;
+}
+
+.math-galaxy-card:active .math-globe-img {
+  transform: scale(0.94);
+}
+
+.math-galaxy-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 2.8vw, 1.25rem);
+}
+
+.math-galaxy-icon {
+  position: absolute;
+  right: -5px;
+  bottom: -3px;
+  font-size: 30px;
+  line-height: 1;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.42));
+}
+
+.math-galaxy-skill {
+  font-size: 0.92rem;
+  color: var(--ink-dim);
+}
+
+.math-galaxy-card.is-lit .math-galaxy-skill {
+  color: var(--gold-soft);
+}
+
+.math-galaxy-status {
+  min-height: 1.25em;
+  color: var(--teal-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.math-galaxy-card:not(.is-lit) .math-galaxy-status {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.math-galaxy-brand {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.35));
+}
+
+.math-galaxy-card.is-lit {
+  background: rgba(251, 191, 36, 0.08);
+  box-shadow: inset 0 0 0 2px rgba(253, 230, 138, 0.35);
+}
+
+.math-lit-badge {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold-soft);
+}
+
+/* ---------- 飛過場 warp-hop ---------- */
+.math-warp {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(800px 400px at 50% 40%, rgba(251, 191, 36, 0.18), transparent 55%),
+    rgba(4, 11, 24, 0.88);
+  backdrop-filter: blur(4px);
+}
+
+.math-warp[hidden] {
+  display: none !important;
+}
+
+.math-warp-inner {
+  width: min(100%, 520px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+
+.math-warp-planets {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 140px;
+}
+
+.math-warp-from,
+.math-warp-to {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.math-warp-from .math-globe-img,
+.math-warp-to .math-globe-img {
+  width: min(28vw, 112px);
+  height: min(28vw, 112px);
+}
+
+.math-warp-ship {
+  position: absolute;
+  left: 18%;
+  top: 36%;
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px rgba(253, 230, 138, 0.8));
+  opacity: 0;
+}
+
+.math-warp.is-flying .math-warp-ship {
+  animation: math-warp-hop 1.8s ease-in-out forwards;
+}
+
+.math-warp.is-flying .math-warp-from {
+  animation: math-warp-glow 0.6s ease;
+}
+
+.math-warp.is-flying .math-warp-to {
+  animation: math-warp-arrive 1.8s ease forwards;
+}
+
+@keyframes math-warp-hop {
+  0% {
+    left: 18%;
+    top: 36%;
+    opacity: 0;
+    transform: scale(0.6) rotate(-20deg);
+  }
+  12% {
+    opacity: 1;
+  }
+  55% {
+    left: 48%;
+    top: 18%;
+    transform: scale(1.1) rotate(10deg);
+  }
+  100% {
+    left: 72%;
+    top: 36%;
+    opacity: 0.2;
+    transform: scale(0.85) rotate(25deg);
+  }
+}
+
+@keyframes math-warp-glow {
+  from {
+    filter: brightness(1);
+  }
+  40% {
+    filter: brightness(1.35) drop-shadow(0 0 16px rgba(253, 230, 138, 0.9));
+  }
+  to {
+    filter: brightness(1);
+  }
+}
+
+@keyframes math-warp-arrive {
+  0%,
+  55% {
+    transform: scale(0.92);
+    filter: brightness(0.85);
+  }
+  100% {
+    transform: scale(1.06);
+    filter: brightness(1.2) drop-shadow(0 0 18px rgba(253, 230, 138, 0.75));
+  }
+}
+
+.math-warp-msg {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.math-warp-actions {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #math-planet-ball.math-globe-wrap,
+  .math-ranger-guide-logo,
+  .math-count-dot,
+  .math-warp.is-flying .math-warp-ship,
+  .math-warp.is-flying .math-warp-from,
+  .math-warp.is-flying .math-warp-to {
+    animation: none;
+  }
+
+  .math-warp.is-flying .math-warp-ship {
+    opacity: 1;
+    left: 48%;
+  }
+}
+
+/* ---------- 水星・數數學習／測驗 ---------- */
+.math-screen .btn-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: min(100%, 420px);
+  margin: 12px auto 0;
+}
+
+.math-learn-stage {
+  appearance: none;
+  border: 2px solid rgba(253, 230, 138, 0.35);
+  background: rgba(18, 40, 72, 0.72);
+  border-radius: var(--radius);
+  color: var(--ink);
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 18px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  touch-action: manipulation;
+  box-shadow: var(--shadow);
+}
+
+.math-learn-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 10vw, 4rem);
+  font-weight: 700;
+  color: var(--gold-soft);
+  line-height: 1;
+}
+
+.math-count-field {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 10px;
+  min-height: 120px;
+  width: 100%;
+  padding: 8px;
+}
+
+.math-count-field--quiz {
+  min-height: 150px;
+  margin: 8px 0 4px;
+  background: rgba(18, 40, 72, 0.55);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.math-count-dot {
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  line-height: 1;
+  animation: math-count-pop 0.35s ease both;
+}
+
+.math-count-tappable {
+  appearance: none;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  min-width: 64px;
+  min-height: 64px;
+  padding: 7px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: opacity 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+}
+
+.math-count-tappable.is-counted {
+  opacity: 0.48;
+  transform: scale(0.86);
+  border-color: #6ee7b7;
+  background: rgba(52, 211, 153, 0.18);
+}
+
+.math-touch-count {
+  width: min(100%, 560px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(7px, 1.5vw, 14px);
+}
+
+.math-touch-count--arc .math-count-tappable:nth-child(2n) {
+  transform: translateY(10px);
+}
+
+.math-touch-count--arc .math-count-tappable.is-counted {
+  transform: translateY(10px) scale(0.86);
+}
+
+.math-touch-status {
+  width: 100%;
+  text-align: center;
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  font-weight: 700;
+}
+
+.math-count-field--conservation {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.math-conservation-row {
+  min-height: 116px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.math-conservation-row .math-count-dot,
+.math-one-more-group .math-count-dot,
+.math-subitize-pattern .math-count-dot {
+  font-size: clamp(1.55rem, 4.5vw, 2.35rem);
+}
+
+.math-conservation-row--line {
+  flex-wrap: nowrap;
+}
+
+.math-conservation-row--scattered .math-count-dot:nth-child(2n) {
+  transform: translateY(13px);
+}
+
+.math-conservation-arrow {
+  color: var(--gold-soft);
+  font-weight: 700;
+  text-align: center;
+  max-width: 80px;
+}
+
+.math-target-number {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--ink-dim);
+  font-weight: 700;
+}
+
+.math-target-number strong {
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 15vw, 6.8rem);
+  line-height: 1;
+}
+
+.math-one-more-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  max-width: 65%;
+}
+
+.math-one-more-action {
+  min-width: 88px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(110, 231, 183, 0.16);
+  color: #6ee7b7;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 6vw, 2.8rem);
+  font-weight: 700;
+  text-align: center;
+}
+
+.math-one-more-action.is-less {
+  background: rgba(253, 230, 138, 0.14);
+  color: var(--gold-soft);
+}
+
+.math-subitize-pattern {
+  width: min(100%, 260px);
+  min-height: 130px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+  gap: 8px 28px;
+  padding: 14px 26px;
+  border: 3px solid rgba(255, 255, 255, 0.16);
+  border-radius: 24px;
+}
+
+.math-subitize-pattern--fiveFrame {
+  width: min(100%, 420px);
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.math-quantity-option {
+  appearance: none;
+  width: clamp(94px, 25vw, 132px);
+  min-height: 86px;
+  border: 3px solid rgba(110, 231, 183, 0.48);
+  border-radius: 22px;
+  background: rgba(24, 48, 92, 0.92);
+  color: #6ee7b7;
+  cursor: pointer;
+  touch-action: manipulation;
+  padding: 12px;
+}
+
+.math-mini-dots {
+  display: block;
+  overflow-wrap: anywhere;
+  letter-spacing: 4px;
+  font-size: clamp(1.15rem, 3.5vw, 1.55rem);
+  line-height: 1.35;
+}
+
+.math-quantity-option.is-ok {
+  animation: popOk 0.45s ease;
+  border-color: #6ee7b7;
+}
+
+.math-quantity-option.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+.math-num-bubble:disabled {
+  opacity: 0.3;
+  cursor: default;
+  filter: grayscale(0.65);
+}
+
+.math-count-field.is-guided .math-count-dot:not(.is-counted) {
+  filter: drop-shadow(0 0 12px rgba(253, 230, 138, 0.95));
+}
+
+@media (max-width: 560px) {
+  .math-count-field--conservation {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .math-conservation-row {
+    min-height: 72px;
+  }
+
+  .math-conservation-arrow {
+    max-width: none;
+  }
+
+  .math-count-tappable {
+    min-width: 54px;
+    min-height: 54px;
+  }
+}
+
+@keyframes math-count-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.math-num-bubbles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin: 16px 0 8px;
+}
+
+.math-num-bubble {
+  appearance: none;
+  border: none;
+  width: clamp(72px, 18vw, 96px);
+  height: clamp(72px, 18vw, 96px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.45), transparent 42%),
+    var(--math-planet, #b6bcc4);
+  color: #1a1f2c;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 6vw, 2.4rem);
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
+}
+
+.math-num-bubble:active {
+  transform: scale(0.94);
+}
+
+.math-num-bubble.is-ok {
+  animation: popOk 0.45s ease;
+}
+
+.math-num-bubble.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+#screen-math-learn.math-screen.active,
+#screen-math-play.math-screen.active,
+#screen-math-count.math-screen.active {
+  --math-planet: #b6bcc4;
+}
+
+#screen-math-venus-learn.math-screen.active,
+#screen-math-venus-play.math-screen.active,
+#screen-math-time.math-screen.active {
+  --math-planet: #e8c27a;
+}
+
+#screen-math-earth-levels.math-screen.active,
+#screen-math-earth-game.math-screen.active {
+  --math-planet: #3b82f6;
+}
+
+#screen-math-mars-learn.math-screen.active,
+#screen-math-mars-play.math-screen.active,
+#screen-math-shape.math-screen.active,
+#screen-math-pattern.math-screen.active {
+  --math-planet: #e35d3b;
+}
+
+#screen-math-learn.math-screen.active::before,
+#screen-math-play.math-screen.active::before,
+#screen-math-count.math-screen.active::before,
+#screen-math-venus-learn.math-screen.active::before,
+#screen-math-venus-play.math-screen.active::before,
+#screen-math-time.math-screen.active::before,
+#screen-math-earth-levels.math-screen.active::before,
+#screen-math-earth-game.math-screen.active::before,
+#screen-math-mars-learn.math-screen.active::before,
+#screen-math-mars-play.math-screen.active::before,
+#screen-math-shape.math-screen.active::before,
+#screen-math-pattern.math-screen.active::before {
+  background:
+    radial-gradient(900px 500px at 50% 18%, color-mix(in srgb, var(--math-planet, #b6bcc4) 22%, transparent), transparent 58%),
+    linear-gradient(180deg, rgba(7, 21, 38, 0.55) 0%, rgba(7, 21, 38, 0.72) 100%),
+    url("../assets/math/galaxy-bg.jpg") center 40% / cover no-repeat;
+}
+
+/* ---------- 金星・邊多邊少 ---------- */
+.math-compare-pairs {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+.math-compare-side,
+.math-compare-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-height: 170px;
+  padding: 12px;
+  border-radius: 22px;
+  background: rgba(18, 40, 72, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.math-compare-pick {
+  appearance: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  font: inherit;
+  color: inherit;
+}
+
+.math-compare-pick:active {
+  transform: scale(0.98);
+}
+
+.math-compare-pick.is-ok {
+  border-color: rgba(253, 230, 138, 0.9);
+  box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.35);
+  animation: popOk 0.45s ease;
+}
+
+.math-compare-pick.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+.math-compare-vs {
+  align-self: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gold-soft);
+  font-size: 1.2rem;
+}
+
+.math-compare-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 6px;
+  min-height: 84px;
+  flex: 1;
+}
+
+.math-compare-label {
+  font-size: 0.95rem;
+  color: var(--ink-dim);
+}
+
+.math-venus-say {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--gold-soft);
+}
+
+.math-compare-actions {
+  margin: 14px 0 6px;
+}
+
+/* ---------- 地球・能量方塊加法 ---------- */
+.math-addition-level-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.math-addition-level-card {
+  appearance: none;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  background: rgba(18, 40, 72, 0.62);
+  color: inherit;
+  font: inherit;
+  padding: 14px 10px;
+  min-height: 108px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  touch-action: manipulation;
+  text-align: center;
+}
+
+.math-addition-level-card:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.math-addition-level-card.is-locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.math-addition-level-card.is-done {
+  border-color: rgba(253, 230, 138, 0.55);
+}
+
+.math-addition-level-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5vw, 2rem);
+  font-weight: 800;
+  color: var(--gold-soft);
+}
+
+.math-addition-level-title {
+  font-size: 0.95rem;
+  color: var(--ink-dim);
+}
+
+.math-addition-board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 6px 0 10px;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+  font-weight: 800;
+}
+
+.math-addition-eq-a,
+.math-addition-eq-sum {
+  color: var(--gold-soft);
+}
+
+.math-addition-eq-b {
+  color: #67e8f9;
+  min-width: 1.2em;
+  text-align: center;
+}
+
+.math-addition-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 0;
+}
+
+.math-addition-slots {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+}
+
+.math-addition-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 8px;
+  border-radius: 20px;
+  background: rgba(18, 40, 72, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 120px;
+}
+
+.math-addition-slot.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+.math-addition-slot--b.is-drop-target {
+  border-color: rgba(103, 232, 249, 0.75);
+  box-shadow: 0 0 0 3px rgba(103, 232, 249, 0.25);
+}
+
+.math-addition-slot-label {
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+}
+
+.math-addition-merge {
+  align-self: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gold-soft);
+  font-size: 1.4rem;
+}
+
+.math-addition-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 6px;
+  min-height: 72px;
+  width: 100%;
+}
+
+.math-addition-blocks--drop {
+  min-height: 84px;
+  border-radius: 14px;
+  border: 2px dashed rgba(103, 232, 249, 0.35);
+  padding: 6px;
+}
+
+.math-energy-block {
+  width: clamp(36px, 9vw, 44px);
+  height: clamp(36px, 9vw, 44px);
+  border-radius: 10px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.35) 0%, transparent 40%),
+    linear-gradient(180deg, #38bdf8 0%, #2563eb 55%, #1e40af 100%);
+  box-shadow:
+    0 0 12px rgba(56, 189, 248, 0.45),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+  animation: math-count-pop 0.3s ease both;
+  touch-action: none;
+}
+
+.math-energy-block.is-in-warehouse {
+  cursor: grab;
+}
+
+.math-energy-block.is-dragging {
+  opacity: 0.35;
+}
+
+.math-addition-stack {
+  appearance: none;
+  border: none;
+  background: rgba(15, 35, 62, 0.7);
+  border-radius: 16px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  touch-action: manipulation;
+  color: inherit;
+  font: inherit;
+  min-width: 64px;
+}
+
+.math-addition-stack:active {
+  transform: scale(0.96);
+}
+
+.math-addition-stack-preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+  max-width: 88px;
+}
+
+.math-addition-stack-preview .math-energy-block {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+}
+
+.math-addition-stack-count {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--gold-soft);
+}
+
+.math-addition-warehouse {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 4px;
+}
+
+.math-addition-hint {
+  font-size: 1rem;
+  color: var(--ink-dim);
+  text-align: center;
+  margin: 0;
+}
+
+.math-addition-actions {
+  margin-top: 4px;
+}
+
+.math-addition-celebrate {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(7, 21, 38, 0.82);
+  padding: 24px;
+}
+
+.math-addition-celebrate-burst {
+  width: min(70vw, 280px);
+  height: min(70vw, 280px);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(253, 230, 138, 0.35), transparent 62%),
+    linear-gradient(180deg, rgba(56, 189, 248, 0.25), rgba(37, 99, 235, 0.15));
+  animation: math-addition-merge 0.9s ease both;
+}
+
+.math-addition-celebrate-say {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 800;
+  color: var(--gold-soft);
+  text-align: center;
+}
+
+@keyframes math-addition-merge {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.math-addition-slots.is-merging .math-energy-block {
+  animation: math-addition-block-merge 0.75s ease both;
+}
+
+@keyframes math-addition-block-merge {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15) translateY(-6px);
+    filter: brightness(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#screen-math-earth-game.math-screen.active {
+  overflow: hidden;
+}
+
+@media (max-width: 700px) {
+  .math-addition-level-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- 月球・時間（原創畫鐘，唔用外部圖） ---------- */
+.math-clock-face {
+  position: relative;
+  display: block;
+  width: min(52vw, 220px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  line-height: 0;
+}
+
+.math-clock-face--drawn {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.75) 55%),
+    #f8fafc;
+  border: 6px solid #0f172a;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.35), inset 0 0 0 4px rgba(251, 191, 36, 0.35);
+}
+
+.math-clock-face .math-clock-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+  z-index: 2;
+}
+
+.math-clock-face .math-clock-marker--num {
+  font-size: clamp(0.95rem, 3.8vw, 1.25rem);
+  color: #0f172a;
+  text-shadow:
+    -1px -1px 0 #ffffff,
+    1px -1px 0 #ffffff,
+    -1px 1px 0 #ffffff,
+    1px 1px 0 #ffffff,
+    0 2px 3px rgba(15, 23, 42, 0.15);
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  min-width: auto;
+}
+
+.math-clock-face .math-clock-marker--dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fbbf24;
+  border: 1.5px solid #0f172a;
+}
+
+/* 最外圈細刻度：每個鐘點一條短線，跟住角度轉 */
+.math-clock-tick {
+  position: absolute;
+  width: 3px;
+  height: 10px;
+  border-radius: 2px;
+  background: #0f172a;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.math-clock-face--small .math-clock-tick {
+  width: 2px;
+  height: 7px;
+}
+
+.math-clock-hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: 50% 100%;
+  border-radius: 999px;
+  z-index: 3;
+}
+
+.math-clock-hand--hour {
+  width: 10px;
+  height: 20%;
+  background: #0f172a;
+}
+
+.math-clock-hand--min {
+  width: 7px;
+  height: 30%;
+  background: #b45309;
+}
+
+.math-clock-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: #b45309;
+  border: 2px solid #ffffff;
+  z-index: 4;
+}
+
+.math-clock-face--small {
+  width: 100%;
+  max-width: 140px;
+}
+
+.math-clock-face--small .math-clock-marker--num {
+  font-size: clamp(0.62rem, 2.1vw, 0.78rem);
+  padding: 0;
+}
+
+.math-clock-face--small .math-clock-marker--dot {
+  width: 6px;
+  height: 6px;
+}
+
+#screen-math-time .game-header {
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+
+#screen-math-time .game-header h1 {
+  flex: 1 1 100%;
+  text-align: center;
+}
+
+.math-clock-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  max-width: 640px;
+  margin: 12px auto 20px;
+  padding-bottom: 10px;
+}
+
+.math-clock-pick {
+  appearance: none;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  background: rgba(18, 40, 72, 0.6);
+  border-radius: 20px;
+  padding: 12px;
+  cursor: pointer;
+  touch-action: manipulation;
+  min-height: 96px;
+}
+
+.math-clock-pick img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+}
+
+.math-clock-pick:active {
+  transform: scale(0.96);
+}
+
+.math-clock-pick.is-ok {
+  border-color: rgba(253, 230, 138, 0.9);
+  box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.35);
+  animation: popOk 0.45s ease;
+}
+
+.math-clock-pick.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+#screen-math-time .feedback {
+  margin: 12px 0 8px;
+  padding-bottom: 8px;
+}
+
+.math-clock-label {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.92rem;
+  color: var(--ink-dim);
+}
+
+/* ---------- 金星・電子鐘 ---------- */
+.math-clock-pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 24px);
+  flex-wrap: wrap;
+}
+
+.math-digital-clock {
+  min-width: clamp(120px, 28vw, 180px);
+  padding: clamp(10px, 2vw, 16px) clamp(14px, 3vw, 22px);
+  border-radius: 14px;
+  background: #0b1224;
+  border: 2px solid rgba(253, 230, 138, 0.45);
+  box-shadow: inset 0 0 18px rgba(56, 189, 248, 0.15);
+  text-align: center;
+}
+
+.math-digital-clock--small {
+  min-width: clamp(88px, 20vw, 120px);
+  padding: 8px 12px;
+}
+
+.math-digital-digits {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 7vw, 2.8rem);
+  font-weight: 700;
+  color: #67e8f9;
+  letter-spacing: 0.06em;
+}
+
+.math-digital-clock--small .math-digital-digits {
+  font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+}
+
+.math-clock-pick--digital {
+  min-width: clamp(110px, 26vw, 150px);
+}
+
+/* ---------- 火星・形狀／規律 ---------- */
+.math-mars-learn-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(100px, 22vw, 160px);
+}
+
+.math-shape-glyph {
+  font-size: clamp(2.4rem, 10vw, 4rem);
+  line-height: 1;
+  display: inline-flex;
+}
+
+.math-shape-glyph.is-hero {
+  font-size: clamp(3.5rem, 16vw, 6rem);
+}
+
+.math-mars-prompt-shape {
+  display: flex;
+  justify-content: center;
+  margin: clamp(6px, 1.5vh, 12px) 0;
+}
+
+.math-mars-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.math-mars-option.is-ok {
+  outline: 3px solid rgba(253, 230, 138, 0.85);
+}
+
+.math-mars-option.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+.math-mars-option--glyph {
+  appearance: none;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: rgba(18, 40, 72, 0.72);
+  border-radius: 16px;
+  width: clamp(72px, 18vw, 96px);
+  height: clamp(72px, 18vw, 96px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.math-pattern-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(6px, 1.5vw, 10px);
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.math-pattern-cell {
+  width: clamp(48px, 12vw, 64px);
+  height: clamp(48px, 12vw, 64px);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.4rem, 5vw, 2rem);
+}
+
+.math-pattern-cell.is-blank {
+  border-style: dashed;
+  color: #fde68a;
+  font-weight: 700;
+}
+
+#screen-math-shape.math-screen.active,
+#screen-math-pattern.math-screen.active,
+#screen-math-mars-learn.math-screen.active,
+#screen-math-mars-play.math-screen.active,
+#screen-math-venus-learn.math-screen.active,
+#screen-math-venus-play.math-screen.active,
+#screen-math-time.math-screen.active {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+/* 數理以 iPad Pro 11 橫向為主畫布；直向沿用手機單欄流程。 */
+@media (min-width:701px) and (orientation:landscape) {
+  html.math-canvas-mode,
+  html.math-canvas-mode body {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+  }
+
+  html.math-canvas-mode body {
+    display: grid;
+    place-items: center;
+  }
+
+  html.math-canvas-mode #app {
+    width: min(1194px, 100vw, calc(100dvh * 1194 / 834));
+    height: min(834px, 100dvh, calc(100vw * 834 / 1194));
+    min-height: 0;
+    max-width: none;
+    margin: 0;
+    padding: 16px 20px;
+    overflow: hidden;
+  }
+
+  html.math-canvas-mode .math-screen.active {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+}
+
+/* 直向 iPad 採用同手機一致的單欄、可捲動操作流程。 */
+@media (min-width:701px) and (orientation:portrait) {
+  html.math-canvas-mode,html.math-canvas-mode body{height:auto;min-height:100%;overflow:auto}
+  html.math-canvas-mode body{display:block}
+  html.math-canvas-mode #app{width:100%;height:auto;min-height:100dvh;max-width:none;margin:0;padding:16px;overflow:visible}
+  html.math-canvas-mode .math-screen.active{height:auto;min-height:100dvh;overflow:visible}
+}
