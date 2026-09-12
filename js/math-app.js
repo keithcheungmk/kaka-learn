@@ -67,26 +67,37 @@
     ];
 
     const MARS_SHAPES = [
-      { id: 'circle', name: '圓形', emoji: '⚪', say: '圓形' },
-      { id: 'triangle', name: '三角形', emoji: '🔺', say: '三角形' },
-      { id: 'square', name: '方形', emoji: '🟦', say: '方形' },
+      { id: 'circle', name: '圓形', symbol: '●', learnSay: '呢個係圓形。圓圓哋，冇角。' },
+      { id: 'oval', name: '橢圓形', symbol: '⬭', learnSay: '呢個係橢圓形。好似一隻拉長咗嘅蛋。' },
+      { id: 'triangle', name: '三角形', symbol: '▲', learnSay: '呢個係三角形。有三個角。' },
+      { id: 'square', name: '正方形', symbol: '■', learnSay: '呢個係正方形。四條邊一樣長。' },
+      { id: 'rectangle', name: '長方形', symbol: '▬', learnSay: '呢個係長方形。有兩條長邊、兩條短邊。' },
+      { id: 'diamond', name: '菱形', symbol: '◆', learnSay: '呢個係菱形。四條邊一樣長，斜斜哋站住。' },
+      { id: 'parallelogram', name: '平行四邊形', symbol: '▱', learnSay: '呢個係平行四邊形。對面兩條邊永遠平行。' },
+      { id: 'trapezoid', name: '梯形', symbol: '⏢', learnSay: '呢個係梯形。上面同下面係平行嘅。' },
+      { id: 'pentagon', name: '五邊形', symbol: '⬠', learnSay: '呢個係五邊形。有五條邊、五個角。' },
+      { id: 'hexagon', name: '六邊形', symbol: '⬡', learnSay: '呢個係六邊形。有六條邊、六個角。' },
+    ];
+
+    const MARS_PATTERN_ANIMALS = [
+      { id: 'rabbit', name: '小白兔', emoji: '🐰' },
+      { id: 'chick', name: '雞仔', emoji: '🐥' },
+      { id: 'dog', name: '小狗', emoji: '🐶' },
+      { id: 'cat', name: '小貓', emoji: '🐱' },
+      { id: 'frog', name: '青蛙', emoji: '🐸' },
     ];
 
     const MARS_LEARN_CARDS = [
-      { kind: 'shape', shape: MARS_SHAPES[0], learnSay: '呢個係圓形。圓圓哋，冇角。' },
-      { kind: 'shape', shape: MARS_SHAPES[1], learnSay: '呢個係三角形。有三個角。' },
-      { kind: 'shape', shape: MARS_SHAPES[2], learnSay: '呢個係方形。有四個一樣嘅邊。' },
+      ...MARS_SHAPES.map((shape) => ({ kind: 'shape', shape, learnSay: shape.learnSay })),
       {
         kind: 'pattern',
-        sequence: [MARS_SHAPES[0], MARS_SHAPES[1], MARS_SHAPES[0], MARS_SHAPES[1]],
-        answer: MARS_SHAPES[0],
-        learnSay: '圓、三角、圓、三角……跟住又係圓。呢個叫規律。',
+        sequence: [MARS_PATTERN_ANIMALS[0], MARS_PATTERN_ANIMALS[1], MARS_PATTERN_ANIMALS[0], MARS_PATTERN_ANIMALS[1]],
+        learnSay: '小白兔、雞仔、小白兔、雞仔……跟住又係小白兔。呢個叫規律。',
       },
       {
         kind: 'pattern',
-        sequence: [MARS_SHAPES[2], MARS_SHAPES[2], MARS_SHAPES[0], MARS_SHAPES[2], MARS_SHAPES[2], MARS_SHAPES[0]],
-        answer: MARS_SHAPES[2],
-        learnSay: '方、方、圓，再方、方、圓……跟住又係方。',
+        sequence: [MARS_PATTERN_ANIMALS[2], MARS_PATTERN_ANIMALS[2], MARS_PATTERN_ANIMALS[3], MARS_PATTERN_ANIMALS[2], MARS_PATTERN_ANIMALS[2], MARS_PATTERN_ANIMALS[3]],
+        learnSay: '小狗、小狗、小貓，再小狗、小狗、小貓……跟住又係小狗。',
       },
     ];
 
@@ -234,7 +245,12 @@
     }
 
     function shapeGlyphHtml(shape, extraClass = '') {
-      return `<span class="math-shape-glyph math-shape-glyph--${shape.id} ${extraClass}" aria-hidden="true">${shape.emoji}</span>`;
+      return `<span class="math-shape-glyph math-shape-glyph--${shape.id} ${extraClass}" aria-hidden="true">${shape.symbol}</span>`;
+    }
+
+    function patternGlyphHtml(item) {
+      if (item.emoji) return `<span class="math-pattern-animal" aria-hidden="true">${item.emoji}</span>`;
+      return shapeGlyphHtml(item);
     }
 
     function patternCellsHtml(sequence, { blankLast = false } = {}) {
@@ -242,7 +258,7 @@
         .map((item, i) => {
           const empty = item == null || (blankLast && i === sequence.length - 1);
           if (empty) return `<span class="math-pattern-cell is-blank" aria-label="缺格">？</span>`;
-          return `<span class="math-pattern-cell">${shapeGlyphHtml(item)}</span>`;
+          return `<span class="math-pattern-cell">${patternGlyphHtml(item)}</span>`;
         })
         .join('');
     }
@@ -961,7 +977,7 @@
 
     function nextShapeRound(autoSpeak) {
       const target = MARS_SHAPES[Math.floor(Math.random() * MARS_SHAPES.length)];
-      const options = shuffle([...MARS_SHAPES]);
+      const options = shuffle([target, ...shuffle(MARS_SHAPES.filter((shape) => shape.id !== target.id)).slice(0, 3)]);
       shapeRound = { target, options };
       const prompt = $('#math-shape-prompt');
       if (prompt) prompt.textContent = '呢個係咩形狀？';
@@ -1041,7 +1057,7 @@
     }
 
     function makePatternRound() {
-      const pool = shuffle([...MARS_SHAPES]);
+      const pool = shuffle([...MARS_PATTERN_ANIMALS]);
       const a = pool[0];
       const b = pool[1];
       const c = pool[2];
@@ -1069,7 +1085,7 @@
           btn.type = 'button';
           btn.className = 'math-mars-option math-mars-option--glyph';
           btn.setAttribute('aria-label', s.name);
-          btn.innerHTML = shapeGlyphHtml(s);
+          btn.innerHTML = patternGlyphHtml(s);
           btn.addEventListener('click', () => onPatternPick(s.id, btn));
           box.appendChild(btn);
         });
