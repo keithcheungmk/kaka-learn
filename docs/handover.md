@@ -86,6 +86,12 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-12 · Codex（Keith：PTH 第一單元資料層）
+
+- 新增《快樂拼音》低班第一單元資料：聲調、單韻母、b/p/m/f，固定跟教材次序。
+- 新增10題混合鞏固題、普通話音檔 manifest（教材QR pending；明確禁止粵語TTS fallback）及獨立內容驗證測試。
+- **踩咗** `data/pth/`、`js/pth-data.js`、`scripts/test-pth-content.mjs`、`docs/handover.md`
+
 ### 2026-09-12 · Codex（Keith：中文掌握度記錄及詞語鏈第一輪）
 
 - 聽一聽／配一配答錯改記被考目標字；砌一砌改用獨立 `build` 統計，不混入認字掌握度；保留舊 `right`／`wrong`／`streak` 欄位兼容。

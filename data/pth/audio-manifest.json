@@ -1,0 +1,20 @@
+{
+  "courseId": "pth-k2",
+  "audioPolicy": "普通話題目必須使用教材QR或已核實教育資源；不可使用粵語TTS fallback。",
+  "items": {
+    "u1-tone-1": { "source": "教材QR", "status": "pending", "src": null },
+    "u1-tone-2": { "source": "教材QR", "status": "pending", "src": null },
+    "u1-tone-3": { "source": "教材QR", "status": "pending", "src": null },
+    "u1-tone-4": { "source": "教材QR", "status": "pending", "src": null },
+    "u1-final-a": { "source": "教材QR", "status": "pending", "src": null },
+    "u1-final-o": { "source": "教材QR", "status": "pending", "src": null },
+    "u1-final-e": { "source": "教材QR", "status": "pending", "src": null },
+    "u1-final-i": { "source": "教材QR", "status": "pending", "src": null },
+    "u1-final-u": { "source": "教材QR", "status": "pending", "src": null },
+    "u1-final-v": { "source": "教材QR", "status": "pending", "src": null },
+    "u1-initial-b": { "source": "教材QR", "status": "pending", "src": null },
+    "u1-initial-p": { "source": "教材QR", "status": "pending", "src": null },
+    "u1-initial-m": { "source": "教材QR", "status": "pending", "src": null },
+    "u1-initial-f": { "source": "教材QR", "status": "pending", "src": null }
+  }
+}
