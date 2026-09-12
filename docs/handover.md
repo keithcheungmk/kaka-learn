@@ -611,3 +611,9 @@ python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
 - b/p/m/f 已各自產生輕量衍生影片及 AAC 音檔於 `assets/pth/initials/`（合計約 876KB），供口形示範及聽辨題；其餘 19 個只保留 metadata，避免超出網站資產預算。
 - `data/pth/audio-manifest.json` 的 b/p/m/f 已標記 `verified`，並指向本地衍生音檔；聲調／韻母仍待核實來源。
 - 驗證：`node scripts/test-pth-content.mjs`、`python3 scripts/check-invariants.py`。
+
+### 2026-09-12 · Codex — PTH demo preview cache bust
+
+- PTH demo blank 卡片問題確認為 preview tab 使用 stale/mixed cached HTML/CSS/JS；fresh `?v=68e8abc` 載入後四張卡正常，非資料或 render failure。
+- `pth-demo.html` 的 `css/pth-demo.css` 及 `js/pth-demo.js` 已加共用版本 query `?v=20260912-pth1`。
+- 正確預覽網址：`http://127.0.0.1:5174/pth-demo.html?v=20260912-pth1`；如仍見舊版，關閉舊 tab 後重新開啟此網址。
