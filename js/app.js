@@ -19,6 +19,7 @@ const {
   coinsTodayMap,
   coinsTodayCount,
   earnCoinForMode,
+  getCoinModeForGame,
   loadRoundProgress,
   saveRoundProgress,
   clearRoundProgress,
@@ -118,18 +119,7 @@ const SENTENCE_BOOK_TITLES = [
 function sentenceWordType(word) { return SENTENCE_WORD_TYPES[word] || 'other'; }
 const CHAIN_LIBRARY = [
   ['肥牛烏冬', '冬天', '天氣', '氣球', '球鞋'],
-  ['奶茶', '茶杯', '杯子', '子女', '女兒'],
-  ['白飯', '飯盒', '盒子', '子女', '女兒'],
-  ['花生', '生日', '日子', '子女', '女兒'],
-  ['大風', '風車', '車站', '站長', '長頸鹿'],
-  ['天氣', '氣球', '球鞋', '鞋子', '子女'],
-  ['月亮', '亮光', '光線', '線條', '條紋'],
-  ['雨傘', '傘下', '下雨', '雨衣', '衣服'],
-  ['火車', '車站', '站長', '長頸鹿', '鹿角'],
-  ['足球', '球鞋', '鞋子', '子女', '女兒'],
-  ['青蛙', '蛙跳', '跳高', '高山', '山洞'],
-  ['蛋糕', '糕點', '點心', '心情', '情緒'],
-].map((terms) => terms.map((term) => ({ term, emoji: '✨' })));
+].map((terms) => terms.map((term) => ({ term, emoji: '🔗' })));
 CHAIN_LIBRARY[0] = CHAIN_LIBRARY[0].map((item, i) => ({ ...item, emoji: ['🍜', '❄️', '🌤️', '🎈', '👟'][i] }));
 /** 今輪答啱嘅字 id（unique；答錯唔計、唔清零） */
 const playWonIds = new Set();
@@ -274,10 +264,10 @@ function bindPlayFinish() {
 }
 
 /** 答啱先記 unique 字；答錯唔計、唔清零。回傳係咪已經完一輪。 */
-function notePlayCorrect(wordId) {
+function notePlayCorrect(wordId, mode = 'recognition') {
   if (wordId) {
     playWonIds.add(wordId);
-    recordWordResult(wordId, true);
+    recordWordResult(wordId, true, mode);
   }
   refreshPlayRoundUI();
   const leftover = enabledWords().filter((w) => !playWonIds.has(w.id));
@@ -290,8 +280,8 @@ function notePlayCorrect(wordId) {
   return done;
 }
 
-function afterPlayCorrect(wordId, nextRoundFn, nextMs) {
-  const roundDone = notePlayCorrect(wordId);
+function afterPlayCorrect(wordId, nextRoundFn, nextMs, mode = 'recognition') {
+  const roundDone = notePlayCorrect(wordId, mode);
   awardStar().then(() => {
     if (roundDone) {
       setTimeout(() => showPlayFinish(), nextMs);
@@ -464,15 +454,15 @@ function showScreen(name) {
 }
 
 function renderWordChain() {
-  const CHAIN_DEMO = activeChain;
-  if (!CHAIN_DEMO) return;
+  const chain = activeChain;
+  if (!chain) return;
   const board = $('#chain-board');
   const options = $('#chain-options');
   const lead = $('#chain-lead');
   const progress = $('#chain-progress');
   if (!board || !options) return;
   board.innerHTML = '';
-  CHAIN_DEMO.slice(0, chainIndex + 1).forEach((item, index) => {
+  chain.slice(0, chainIndex + 1).forEach((item, index) => {
     if (index) {
       const arrow = document.createElement('span');
       arrow.className = 'chain-arrow';
@@ -489,7 +479,7 @@ function renderWordChain() {
     card.innerHTML = `<span class="chain-emoji" aria-hidden="true">${item.emoji}</span><strong class="chain-term">${chars}</strong>`;
     board.appendChild(card);
   });
-  if (chainIndex < CHAIN_DEMO.length - 1) {
+  if (chainIndex < chain.length - 1) {
     const slot = document.createElement('div');
     slot.className = 'chain-drop-slot';
     slot.textContent = '拖到呢度';
@@ -504,7 +494,7 @@ function renderWordChain() {
       slot.classList.remove('is-over');
       const id = ev.dataTransfer?.getData('text/plain');
       const item = window.__kakaChainDragItem;
-      if (id === 'correct' || item === CHAIN_DEMO[chainIndex + 1]) advanceWordChain();
+      if (id === 'correct' || item === chain[chainIndex + 1]) advanceWordChain();
       else showChainRetry();
       window.__kakaChainDragItem = null;
     });
@@ -516,19 +506,24 @@ function renderWordChain() {
     board.classList.add('chain-collision');
     setTimeout(() => board.classList.remove('chain-collision'), 900);
   }
-  progress.textContent = `${chainIndex + 1}/${CHAIN_DEMO.length}`;
-  if (chainIndex >= CHAIN_DEMO.length - 1) {
-    lead.textContent = '完成喇！你見到「氣」可以組成唔同詞語嗎？';
+  progress.textContent = `${chainIndex + 1}/${chain.length}`;
+  if (chainIndex >= chain.length - 1) {
+    lead.textContent = '完成喇！同一個字，放入不同詞語會有不同意思。';
     options.innerHTML = '';
     const done = document.createElement('p');
     done.className = 'chain-done';
-    done.textContent = '好叻！一條詞語鏈完成！';
+    const coin = earnCoinForMode(getCoinModeForGame('chain'));
+    done.textContent = coin.gained
+      ? '好叻！詞語鏈完成，今日「砌一砌」幣位已亮起！'
+      : '好叻！詞語鏈完成（共用今日「砌一砌」幣位）。';
     options.appendChild(done);
-    speakTerm(CHAIN_DEMO[chainIndex].term, { muted: loadState().muted });
-    chainStars = Math.min(10, chainStars + 10);
+    speakTerm(chain[chainIndex].term, { muted: loadState().muted });
+    chainStars = 1;
     const reward = $('#chain-reward-stars');
-    if (reward) reward.textContent = `${chainStars} / 10`;
-    for (let i = 0; i < 10; i += 1) tryEarnStar();
+    if (reward) reward.textContent = `${chainStars} / 1`;
+    state = tryEarnStar().state;
+    state = coin.state;
+    refreshStarUI();
     const screen = $('#screen-chain');
     window.KakaStarFx?.mountPlayScreen?.(screen);
     window.KakaStarFx?.flyStarFromRanger?.(screen, () => refreshStarUI());
@@ -1083,7 +1078,8 @@ function enabledWords() {
 /** 抽題：優先未答啱過嘅字；掌握度加權；鹿類可加權 */
 function masteryWeight(wordId) {
   const stats = (loadState().wordStats || {})[wordId];
-  const streak = stats ? stats.streak || 0 : 0;
+  const recognition = stats?.byMode?.recognition || stats;
+  const streak = recognition ? recognition.streak || 0 : 0;
   if (streak <= 0) return 8;
   if (streak === 1) return 4;
   if (streak === 2) return 2;
@@ -1248,7 +1244,7 @@ function onListenPick(id, btn) {
       afterPlayCorrect((listenRound.prompt || listenRound.target).id, () => startListenRound(), nextMs);
     }
   } else {
-    recordWordResult(id, false);
+    recordWordResult(listenRound.target.id, false, 'recognition');
     // 錯咗都翻一吓睇圖，跟住翻返去——唔好長期露圖，避免靠淘汰答
     flipListenCard(btn, false);
     btn.classList.add('wrong');
@@ -1353,7 +1349,7 @@ function onMatchPick(id, btn) {
     const nextMs = estimateSpeakMs(`${answerTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
     afterPlayCorrect((matchRound.prompt || matchRound.target).id, () => startMatchRound(), nextMs);
   } else {
-    recordWordResult(id, false);
+    recordWordResult(matchRound.target.id, false, 'recognition');
     btn.classList.add('wrong');
     playTryAgainCue({ muted: state.muted });
     const fb = $('#match-feedback');
@@ -1560,7 +1556,7 @@ function tryPlaceBuildChar(tileKey, slotIndex) {
 
   const expected = buildRound.chars[slotIndex];
   if (tile.char !== expected) {
-    recordWordResult(buildRound.target.id, false);
+    recordWordResult(buildRound.target.id, false, 'build');
     slotEl?.classList.add('is-wrong');
     setTimeout(() => slotEl?.classList.remove('is-wrong'), 450);
     playTryAgainCue({ muted: state.muted });
@@ -1613,7 +1609,7 @@ function finishBuildSuccess() {
     fb.className = 'feedback ok';
   }
   const nextMs = estimateSpeakMs(`${spoken}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500;
-  afterPlayCorrect(buildRound.target.id, () => startBuildRound(), nextMs);
+  afterPlayCorrect(buildRound.target.id, () => startBuildRound(), nextMs, 'build');
 }
 
 function onBuildPointerDown(ev, tile, onDragStarted) {

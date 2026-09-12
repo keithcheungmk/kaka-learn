@@ -161,6 +161,28 @@ test('recordWordResult：答錯清零 streak，答啱累積', () => {
   assert.equal(s.streak, 1);
 });
 
+test('掌握度分玩法：砌字完成不會混入獨立認字 right/streak', () => {
+  const S = freshStorage();
+  S.recordWordResult('gou', true, 'build');
+  let s = S.loadState().wordStats.gou;
+  assert.equal(s.right, 0);
+  assert.equal(s.streak, 0);
+  assert.equal(s.byMode.build.right, 1);
+  S.recordWordResult('gou', false, 'recognition');
+  s = S.loadState().wordStats.gou;
+  assert.equal(s.wrong, 1);
+  assert.equal(s.byMode.recognition.wrong, 1);
+});
+
+test('接一接沿用砌字幣位：仍然只有三種每日幣，不會新增第四種', () => {
+  const S = freshStorage();
+  assert.equal(S.getCoinModeForGame('chain'), 'build');
+  assert.equal(S.COIN_MODES.includes('chain'), false);
+  assert.equal(S.earnCoinForMode(S.getCoinModeForGame('chain')).gained, true);
+  assert.equal(S.earnCoinForMode('build').gained, false);
+  assert.equal(S.coinsTodayCount(), 1);
+});
+
 test('Phonics Phase 3A：認音／拼合／拆音分開記錄，recent 最多 10 次', () => {
   const S = freshStorage();
   S.setActiveProfile('kaka');

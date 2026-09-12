@@ -405,19 +405,34 @@ function isTopicPassed(topic) {
 function recordWordResult(wordId, correct) {
   if (!wordId) return loadState();
   const state = loadState();
+  const mode = arguments.length >= 3 && arguments[2] ? arguments[2] : 'recognition';
   const prev = state.wordStats[wordId] || { right: 0, wrong: 0, streak: 0, lastRightDay: null };
-  const next = { ...prev };
+  const next = { ...prev, byMode: { ...(prev.byMode || {}) } };
+  const modePrev = next.byMode[mode] || { right: 0, wrong: 0, streak: 0, lastRightDay: null };
+  const modeNext = { ...modePrev };
   if (correct) {
-    next.right += 1;
-    next.streak += 1;
-    next.lastRightDay = todayKey();
+    modeNext.right += 1;
+    modeNext.streak += 1;
+    modeNext.lastRightDay = todayKey();
   } else {
-    next.wrong += 1;
-    next.streak = 0;
+    modeNext.wrong += 1;
+    modeNext.streak = 0;
+  }
+  next.byMode[mode] = modeNext;
+  // 保持舊版 right/wrong/streak 欄位向後兼容；砌字支架不會令認字變成已掌握。
+  if (mode === 'recognition') {
+    next.right = modeNext.right;
+    next.wrong = modeNext.wrong;
+    next.streak = modeNext.streak;
+    next.lastRightDay = modeNext.lastRightDay;
   }
   state.wordStats = { ...state.wordStats, [wordId]: next };
   saveState(state);
   return state;
+}
+
+function getCoinModeForGame(mode) {
+  return mode === 'chain' ? 'build' : mode;
 }
 
 /**
@@ -516,6 +531,7 @@ window.KakaStorage = {
   coinsTodayMap,
   coinsTodayCount,
   earnCoinForMode,
+  getCoinModeForGame,
   coinHistory,
   loadRoundProgress,
   saveRoundProgress,

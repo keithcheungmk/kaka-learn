@@ -86,6 +86,13 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-12 · Codex（Keith：中文掌握度記錄及詞語鏈第一輪）
+
+- 聽一聽／配一配答錯改記被考目標字；砌一砌改用獨立 `build` 統計，不混入認字掌握度；保留舊 `right`／`wrong`／`streak` 欄位兼容。
+- `pickTarget()` 只用 recognition 掌握度加權；新增 `scripts/test-chain.mjs` 及 storage 分玩法／幣位測試。
+- 詞語鏈收窄為 Keith 指定五詞示範鏈，移除未核實鏈；共享字文案改清楚，完成只加一粒紀錄星，並共用「砌一砌」每日幣位，唔新增第四種幣。
+- **踩咗** `js/app.js`、`js/storage.js`、`index.html`、`scripts/test-storage.mjs`、`scripts/test-chain.mjs`、`docs/handover.md`
+
 ### 2026-09-12 · Codex（Keith：Carter Family Story English・Game Night）
 
 - 新增 `Game Night` 英文故事示範：12 頁學校 PDF 衍生頁圖配 12 段對應逐頁錄音；錄音結束後自動翻下一頁
