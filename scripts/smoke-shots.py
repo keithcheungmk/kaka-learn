@@ -193,6 +193,11 @@ def walk(pg, url, shots: Path | None, tag: str):
         pg.wait_for_timeout(800)
         probe(step)
         if entry == "#btn-start-math":
+            # 數理遊戲係固定 iPad 橫向畫布；直向只應顯示轉向提示，唔應嘗試撳入任務。
+            viewport = page.viewport_size or {}
+            if viewport.get("height", 0) > viewport.get("width", 0):
+                probe("數理・請轉橫向")
+                continue
             pg.click("#math-galaxy-grid .math-galaxy-card:first-child")
             pg.wait_for_timeout(300)
             pg.click("#btn-math-launch")
