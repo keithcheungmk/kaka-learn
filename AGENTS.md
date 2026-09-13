@@ -104,6 +104,15 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 
 ## 改動時注意
 
+### 跨裝置版面與語音驗收契約（所有新功能／修 bug 必須遵守）
+
+- 所有 UI／CSS／遊戲流程改動，必須以 touch-enabled Chromium 驗收三個固定 viewport：iPad Pro 11 吋 Chrome 橫向 `1194×834`、iPad Pro 11 吋 Chrome 直向 `834×1194`、iPhone 16 Pro Max Chrome 直向 `430×932`；另須作一次真機 iPad Chrome spot-check，desktop resize 不算實機驗收。
+- 每個遊戲頁都要確認 `scrollWidth <= clientWidth + 2`、iPad 遊戲畫面不可上下捲、iPhone 雖可捲但不可重疊／裁切；白板、字池、物件區、目標卡、答案掣必須互相分開，互動掣完整位於 viewport 內且 touch target 至少 44px。
+- 長中文、普通話、英文文案必須能換行或完整包住；console 無 error、資源無 404、頁面不可白屏。CSS 優先用 `min()`／`max()`／`clamp()`／`100dvh`，不可依賴裸 `100vw`／`100vh` 撐版，亦不可用負 margin 或 absolute positioning 疊住主要互動區。
+- flex／grid 子項要設定 `min-width: 0`；遊戲主要垂直區域不可任意使用 `min-height: 0`。需考慮 Chrome address bar、safe-area inset 及 portrait／landscape 轉向。
+- 答啱後算式解說及鼓勵句必須完整讀完，`SpeechSynthesisUtterance.onend`（另加合理 fallback）先可以進入下一題；禁止用短固定 timeout 搶先切頁。答錯提示要同畫面文字一致。
+- 驗收須涵蓋繁體中文認字、英文／Phonics、普通話內容（如有）及數學所有玩法；每個模組至少測進入、主要操作、答對、答錯、下一題、返回。版面／流程改動最多保存兩張家庭 viewport 證據圖。
+
 - **唔使再手動改 `?v=` 版本號**。部署時 `scripts/build-site.sh` 會用 commit SHA 蓋過全部；`index.html` 保留 `?v=` 佔位就得。
 - **加新 root 檔（manifest、sw.js、favicon…）唔使改 workflow**，`build-site.sh` 預設複製全部。
 - **改完一定要 `python3 scripts/check-invariants.py` 跑到綠**。加新硬性規則時，順手喺呢個檔加一個 `check_xxx()`，等下次唔使靠記憶。
