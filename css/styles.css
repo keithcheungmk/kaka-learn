@@ -2280,6 +2280,7 @@ body {
 #screen-books.active,
 #screen-phonics-topics.active,
 #screen-phonics-sounds.active,
+#screen-phonics-learn.active,
 #screen-progress.active {
   overflow-y: auto;
   overscroll-behavior: contain;
