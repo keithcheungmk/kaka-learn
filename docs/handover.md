@@ -623,11 +623,11 @@ python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
 ### 2026-09-12 · Codex — PTH demo preview cache bust
 
 - PTH demo blank 卡片問題確認為 preview tab 使用 stale/mixed cached HTML/CSS/JS；fresh `?v=68e8abc` 載入後四張卡正常，非資料或 render failure。
-- `pth-demo.html` 的 `css/pth-demo.css` 及 `js/pth-demo.js` 已加共用版本 query `?v=20260913-pth-preview`。
-- 正確預覽網址：`http://127.0.0.1:5174/pth-demo.html?v=20260913-pth-preview`；如仍見舊版，關閉舊 tab 後重新開啟此網址。
+- `pth-demo.html` 的 `css/pth-demo.css` 及 `js/pth-demo.js` 已加共用版本 query `?v=20260913-pth-responsive`。
+- 正確預覽網址：`http://127.0.0.1:5174/pth-demo.html?v=20260913-pth-responsive`；如仍見舊版，關閉舊 tab 後重新開啟此網址。
 
 ### 2026-09-13 · Codex — PTH homepage entry
 
-- 主頁 `screen-home` 新增「普通話拼音」一級入口，與認字、英文、數理並列，連至 `./pth-demo.html?v=20260913-pth-preview`。
+- 主頁 `screen-home` 新增「普通話拼音」一級入口，與認字、英文、數理並列，連至 `./pth-demo.html?v=20260913-pth-responsive`。
 - 入口為 same-site standalone demo，不接入中文／英文／數學邏輯或共用進度；`source-materials/` 未改動。
-- 公開網址：`https://keithcheungmk.github.io/kaka-learn/pth-demo.html?v=20260913-pth-preview`。
+- 公開網址：`https://keithcheungmk.github.io/kaka-learn/pth-demo.html?v=20260913-pth-responsive`。
