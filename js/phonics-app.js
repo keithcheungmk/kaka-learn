@@ -1119,7 +1119,7 @@
       if (filled) slot.classList.add('is-filled');
       if (i === next) slot.classList.add('is-next');
       slot.dataset.index = String(i);
-      slot.setAttribute('aria-label', filled ? `已放 ${filled.char}` : `第 ${i + 1} 格，淡音素 ${ch}`);
+      slot.setAttribute('aria-label', filled ? `已放 ${filled.char}` : `第 ${i + 1} 格，提示字形 ${ch}`);
       slot.innerHTML = `
         <span class="build-ghost term-en" aria-hidden="true">${ch}</span>
         ${filled ? `<span class="build-placed letter-tile" aria-hidden="true">${letterTileHtml(filled.char)}</span>` : ''}`;

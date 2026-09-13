@@ -451,6 +451,11 @@
   box-shadow: 0 0 0 4px rgba(124, 255, 178, 0.14), 0 0 18px rgba(124, 255, 178, 0.28);
 }
 
+/* 淡字係 K2 配對支架：可辨認但明顯弱過已放入的能量字母。 */
+.phonics-screen .build-ghost {
+  color: rgba(226, 232, 240, 0.32);
+}
+
 .build-slot.is-blending .letter-tile .sound-energy-glyph {
   transform: translateY(-5px) scale(1.07);
   border-color: var(--gold-soft);

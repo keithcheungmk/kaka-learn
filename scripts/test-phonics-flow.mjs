@@ -37,6 +37,7 @@ assert.match(appSource, /profileId.*phonics.*mode/s, '記憶內的回合 key 包
 assert.match(appSource, /onPhonicsBuildTileTap/, '提供點按操作');
 assert.match(appSource, /onPhonicsBuildPointerDown/, '提供拖拉操作');
 assert.match(appSource, /cancelAllSpeech/, '切題前清除延遲及進行中的語音');
+assert.doesNotMatch(appSource, /淡音素/, '字格提示使用清楚的「提示字形」描述');
 
 console.log('phonics blend flow tests');
 console.log('  ✓ 10 個動物字均可由 verified phoneme assets 組成');

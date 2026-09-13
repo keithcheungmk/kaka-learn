@@ -27,6 +27,8 @@ for (const [id, emoji] of Object.entries({ b: '🎈', p: '🍇', m: '🍚', f: '
 assert.ok(!demoSource.includes('<small>${s.sentence}</small>'));
 assert.ok(demoSource.includes('s.verified'));
 assert.ok(demoSource.includes('groupNames[activeGroup]'));
+assert.ok(demoSource.includes('if(!sounds.some(s=>s.group===activeGroup&&s.verified))'));
+assert.ok(demoSource.includes("['chē','ch']") && demoSource.includes("['chū','ch']"));
 for (const id of ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w']) {
   const row = demoSource.match(new RegExp(`\\{id:'${id}'[^\\n]+`))?.[0] ?? '';
   assert.match(row, new RegExp(`syllables:\\[\\['[^']+','${id}'\\]`));
