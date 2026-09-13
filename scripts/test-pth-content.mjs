@@ -21,11 +21,17 @@ assert.equal(media.entries.length, 23);
 assert.deepEqual(media.entries.slice(0, 4).map((x) => x.id), ['b', 'p', 'm', 'f']);
 assert.ok(media.entries.every((x) => x.sourceFile.startsWith('source-materials/')));
 assert.ok(media.entries.every((x) => x.status === 'verified' && fs.existsSync(path.join(root, x.derivedVideo)) && fs.existsSync(path.join(root, x.derivedAudio))));
-for (const [id, emoji] of Object.entries({ b: '🎈', p: '⛰️', m: '🍚', f: '🎡' })) {
+for (const [id, emoji] of Object.entries({ b: '🎈', p: '🍇', m: '🍚', f: '🎡' })) {
   assert.ok(demoSource.includes(`id:'${id}'`) && demoSource.includes(`emoji:'${emoji}'`));
 }
 assert.ok(!demoSource.includes('<small>${s.sentence}</small>'));
-for (const emoji of ['🎈', '⛰️', '🍚', '🎡']) assert.ok(demoHtml.includes(emoji));
+assert.ok(demoSource.includes('s.verified'));
+assert.ok(demoSource.includes('groupNames[activeGroup]'));
+for (const id of ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w']) {
+  const row = demoSource.match(new RegExp(`\\{id:'${id}'[^\\n]+`))?.[0] ?? '';
+  assert.match(row, new RegExp(`syllables:\\[\\['[^']+','${id}'\\]`));
+}
+for (const emoji of ['🎈', '🍇', '🍚', '🎡']) assert.ok(demoHtml.includes(emoji));
 assert.ok(!demoHtml.includes('波波拿波波球。') && !demoHtml.includes('小明走上山坡。') && !demoHtml.includes('媽媽煮米飯。') && !demoHtml.includes('風車不停轉動。'));
 for (const id of ['b', 'p', 'm', 'f']) {
   assert.equal(audio.items[`u1-initial-${id}`].status, 'verified');

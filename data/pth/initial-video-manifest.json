@@ -15,7 +15,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/b.mp4",
       "derivedAudio": "assets/pth/initials/audio/b.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 QR MP4／bpmf"
     },
     {
       "id": "p",
@@ -30,7 +31,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/p.mp4",
       "derivedAudio": "assets/pth/initials/audio/p.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 QR MP4／bpmf"
     },
     {
       "id": "m",
@@ -45,7 +47,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/m.mp4",
       "derivedAudio": "assets/pth/initials/audio/m.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 QR MP4／bpmf"
     },
     {
       "id": "f",
@@ -60,7 +63,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/f.mp4",
       "derivedAudio": "assets/pth/initials/audio/f.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 QR MP4／bpmf"
     },
     {
       "id": "d",
@@ -75,7 +79,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/d.mp4",
       "derivedAudio": "assets/pth/initials/audio/d.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "t",
@@ -90,7 +95,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/t.mp4",
       "derivedAudio": "assets/pth/initials/audio/t.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "n",
@@ -105,7 +111,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/n.mp4",
       "derivedAudio": "assets/pth/initials/audio/n.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "l",
@@ -120,7 +127,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/l.mp4",
       "derivedAudio": "assets/pth/initials/audio/l.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "g",
@@ -135,7 +143,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/g.mp4",
       "derivedAudio": "assets/pth/initials/audio/g.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "k",
@@ -150,7 +159,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/k.mp4",
       "derivedAudio": "assets/pth/initials/audio/k.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "h",
@@ -165,7 +175,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/h.mp4",
       "derivedAudio": "assets/pth/initials/audio/h.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "j",
@@ -180,7 +191,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/j.mp4",
       "derivedAudio": "assets/pth/initials/audio/j.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "q",
@@ -195,7 +207,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/q.mp4",
       "derivedAudio": "assets/pth/initials/audio/q.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "x",
@@ -210,7 +223,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/x.mp4",
       "derivedAudio": "assets/pth/initials/audio/x.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "zh",
@@ -225,7 +239,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/zh.mp4",
       "derivedAudio": "assets/pth/initials/audio/zh.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "ch",
@@ -240,7 +255,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/ch.mp4",
       "derivedAudio": "assets/pth/initials/audio/ch.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "sh",
@@ -255,7 +271,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/sh.mp4",
       "derivedAudio": "assets/pth/initials/audio/sh.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "r",
@@ -270,7 +287,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/r.mp4",
       "derivedAudio": "assets/pth/initials/audio/r.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "z",
@@ -285,7 +303,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/z.mp4",
       "derivedAudio": "assets/pth/initials/audio/z.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "c",
@@ -300,7 +319,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/c.mp4",
       "derivedAudio": "assets/pth/initials/audio/c.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "s",
@@ -315,7 +335,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/s.mp4",
       "derivedAudio": "assets/pth/initials/audio/s.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "y",
@@ -330,7 +351,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/y.mp4",
       "derivedAudio": "assets/pth/initials/audio/y.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     },
     {
       "id": "w",
@@ -345,7 +367,8 @@
       },
       "derivedVideo": "assets/pth/initials/video/w.mp4",
       "derivedAudio": "assets/pth/initials/audio/w.m4a",
-      "status": "verified"
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
     }
   ]
 }
