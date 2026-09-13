@@ -85,30 +85,30 @@ const PHONICS_TOPICS = [
       { id: 'animal_owl', word: 'owl', letters: ['ow', 'l'], emoji: '🦉', plate: '#2a2440' },
       { id: 'animal_ant', word: 'ant', letters: ['a', 'n', 't'], emoji: '🐜', plate: '#3a2018' },
       { id: 'animal_bee', word: 'bee', letters: ['b', 'ee'], emoji: '🐝', plate: '#3a3010' },
-      { id: 'animal_goat', word: 'goat', letters: ['g', 'oa', 't'], emoji: '🐐', plate: '#2a3a35' },
+      { id: 'animal_goat', word: 'goat', letters: ['g', 'oa', 't'], emoji: '🐑', plate: '#2a3a35' },
       { id: 'animal_lion', word: 'lion', letters: ['l', 'i', 'o', 'n'], emoji: '🦁', plate: '#3a2818' },
       { id: 'animal_bear', word: 'bear', letters: ['b', 'ear'], emoji: '🐻', plate: '#3a2418' },
       { id: 'animal_snail', word: 'snail', letters: ['s', 'n', 'ai', 'l'], emoji: '🐌', plate: '#16344a' },
       { id: 'animal_zebra', word: 'zebra', letters: ['z', 'e', 'b', 'r', 'a'], emoji: '🦓', plate: '#30303a' },
-      { id: 'animal_monkey', word: 'monkey', letters: ['m', 'o', 'n', 'k', 'e', 'y'], emoji: '🐒', plate: '#3a2818' },
+      { id: 'animal_monkey', word: 'monkey', letters: ['m', 'o', 'n', 'k', 'e', 'y'], emoji: '🐼', plate: '#3a2818' },
     ],
   },
   {
     id: 'sight_food', title: '食物', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種食物', cover: '🍎', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
-      ['rice', '🍚'], ['bread', '🍞'], ['milk', '🥛'], ['egg', '🥚'], ['apple', '🍎'], ['banana', '🍌'], ['cake', '🍰'], ['fish', '🐟'], ['chicken', '🍗'], ['juice', '🧃'],
+      ['rice', '🍚'], ['bread', '🍞'], ['milk', '🥛'], ['egg', '🥚'], ['apple', '🍎'], ['banana', '🍌'], ['cake', '🍎'], ['fish', '🐟'], ['chicken', '🍗'], ['juice', '🧃'],
     ].map(([word, emoji], i) => ({ id: `sight_food_${i}`, word, letters: Array.from(word), emoji, plate: '#3a2818' })),
   },
   {
     id: 'sight_veg', title: '蔬菜', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種蔬菜', cover: '🥕', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
-      ['carrot', '🥕'], ['corn', '🌽'], ['tomato', '🍅'], ['potato', '🥔'], ['peas', '🫛'], ['beans', '🫘'], ['cabbage', '🥬'], ['onion', '🧅'], ['mushroom', '🍄'], ['cucumber', '🥒'],
+      ['carrot', '🥕'], ['corn', '🌽'], ['tomato', '🍅'], ['potato', '🥔'], ['peas', '🌽'], ['beans', '🌽'], ['cabbage', '🥬'], ['onion', '🧅'], ['mushroom', '🍄'], ['cucumber', '🥒'],
     ].map(([word, emoji], i) => ({ id: `sight_veg_${i}`, word, letters: Array.from(word), emoji, plate: '#143828' })),
   },
   {
     id: 'sight_places', title: '地方', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 個地方', cover: '🏫', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
-      ['home', '🏠'], ['school', '🏫'], ['park', '🏞️'], ['shop', '🛍️'], ['hospital', '🏥'], ['library', '📚'], ['pool', '🏊'], ['beach', '🏖️'], ['zoo', '🦁'], ['classroom', '🧑‍🏫'],
+      ['home', '🏠'], ['school', '🏫'], ['park', '🌳'], ['shop', '🛍️'], ['hospital', '🏥'], ['library', '📚'], ['pool', '🏊'], ['beach', '🏖️'], ['zoo', '🦁'], ['classroom', '🧑‍🏫'],
     ].map(([word, emoji], i) => ({ id: `sight_places_${i}`, word, letters: Array.from(word), emoji, plate: '#1a3050' })),
   },
   {
