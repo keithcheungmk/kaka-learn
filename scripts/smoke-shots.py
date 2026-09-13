@@ -39,8 +39,8 @@ SCROLLABLE = {
 
 # 家庭目標裝置（預設／CI）——對齊 Keith 部 iPad Pro 11" 同 iPhone 16 Pro Max
 FAMILY_IPADS = {
-    "iPadPro11-直": (834, 1194),
-    "iPadPro11-橫": (1194, 834),
+    "iPadPro11-直": (834, 1210),
+    "iPadPro11-橫": (1210, 834),
 }
 FAMILY_PHONES = {
     "iPhone16ProMax-直": (430, 932),

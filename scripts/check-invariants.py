@@ -832,8 +832,8 @@ def check_family_smoke_devices() -> None:
     for needle in ("FAMILY_IPADS", "FAMILY_PHONES", "iPadPro11-直", "iPhone16ProMax-直", "--all"):
         if needle not in smoke:
             fail("family-smoke", f"smoke-shots.py 要有 {needle}（預設家庭裝置；--all 先跑舊全尺寸）")
-    if "834, 1194" not in smoke or "430, 932" not in smoke:
-        fail("family-smoke", "家庭裝置 viewport 要係 iPad Pro 11 834×1194 同 iPhone 16 Pro Max 430×932")
+    if "834, 1210" not in smoke or "430, 932" not in smoke:
+        fail("family-smoke", "家庭裝置 viewport 要係最新 iPad Pro 11 834×1210 同 iPhone 16 Pro Max 430×932")
 
 
 BOOK_SCAN_PDFS = (

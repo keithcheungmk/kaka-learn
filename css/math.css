@@ -1662,8 +1662,8 @@
   }
 
   html.math-canvas-mode #app {
-    width: min(1194px, 100vw, calc(100dvh * 1194 / 834));
-    height: min(834px, 100dvh, calc(100vw * 834 / 1194));
+    width: min(1210px, 100vw, calc(100dvh * 1210 / 834));
+    height: min(834px, 100dvh, calc(100vw * 834 / 1210));
     min-height: 0;
     max-width: none;
     margin: 0;

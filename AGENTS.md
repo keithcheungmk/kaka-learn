@@ -106,7 +106,7 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 
 ### 跨裝置版面與語音驗收契約（所有新功能／修 bug 必須遵守）
 
-- 所有 UI／CSS／遊戲流程改動，必須以 touch-enabled Chromium 驗收三個固定 viewport：iPad Pro 11 吋 Chrome 橫向 `1194×834`、iPad Pro 11 吋 Chrome 直向 `834×1194`、iPhone 16 Pro Max Chrome 直向 `430×932`；另須作一次真機 iPad Chrome spot-check，desktop resize 不算實機驗收。
+- 所有 UI／CSS／遊戲流程改動，必須以 touch-enabled Chromium 驗收三個固定 viewport：最新 iPad Pro 11 吋（M4，實體 2420×1668）Chrome 橫向 `1210×834`、直向 `834×1210`、iPhone 16 Pro Max Chrome 直向 `430×932`；另須作一次真機 iPad Chrome spot-check，desktop resize 不算實機驗收。
 - 每個遊戲頁都要確認 `scrollWidth <= clientWidth + 2`、iPad 遊戲畫面不可上下捲、iPhone 雖可捲但不可重疊／裁切；白板、字池、物件區、目標卡、答案掣必須互相分開，互動掣完整位於 viewport 內且 touch target 至少 44px。
 - 長中文、普通話、英文文案必須能換行或完整包住；console 無 error、資源無 404、頁面不可白屏。CSS 優先用 `min()`／`max()`／`clamp()`／`100dvh`，不可依賴裸 `100vw`／`100vh` 撐版，亦不可用負 margin 或 absolute positioning 疊住主要互動區。
 - flex／grid 子項要設定 `min-width: 0`；遊戲主要垂直區域不可任意使用 `min-height: 0`。需考慮 Chrome address bar、safe-area inset 及 portrait／landscape 轉向。
@@ -135,7 +135,7 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - **砌一砌淡色格（`.build-ghost`）係配對支架，唔係洩題。** 目標係活動學習：睇圖 → 喺字池搵同一個字 → 拖／撳入格；靠重複移動嚟認字形。唔好刪淡字、唔好改成空白考試格。字池要留干擾字，等卡卡真係要揀。
 - **遊戲畫面一屏到底，唔准捲。** 只有「主頁／揀主題／揀書／字母隊揀主題」准上下捲（純瀏覽、唔涉拖曳）。
   尺寸用 `min(px, vw, vh)` 跟住視窗高度縮；橫向嘅砌一砌係兩欄（左圖右字池）。
-  **家庭目標裝置**（Keith 實機）：iPad Pro 11"（834×1194 直／1194×834 橫）、iPhone 16 Pro Max（430×932 直）。
+  **家庭目標裝置**（Keith 實機）：最新 iPad Pro 11" M4（834×1210 直／1210×834 橫）、iPhone 16 Pro Max（430×932 直）。
   真改版面／CSS／遊戲流程：本地跑 `python3 scripts/smoke-shots.py --no-shots`（預設就係呢三個 viewport；CI 一樣）。
   要舊全尺寸先加 `--all`。iPad 遊戲畫面要捲就係 blocker。
   小改動（換圖／label／文案）唔使本地重跑 smoke，見下面「小改動快徑」。
