@@ -17,14 +17,21 @@
     $('#subtraction-slot')?.classList.toggle('is-ready', removedCount >= mission.remove);
   }
   function finish(mission, level) {
-    if (busy) return; busy = true; deps.speech?.playCorrectCue?.({ muted: deps.isMuted?.() }); deps.speak?.(`${mission.start}減${mission.remove}等於${mission.remaining}`);
-    setTimeout(() => {
+    if (busy) return; busy = true;
+    const measureName = `${mission.visual.measure}${mission.visual.label}`;
+    const praiseLines = deps?.speech?.FEEDBACK_CORRECT_LINES || ['你好叻呀！'];
+    const praise = praiseLines[Math.floor(Math.random() * praiseLines.length)];
+    const spoken = `${mission.start}${measureName}減${mission.remove}${measureName}係${mission.remaining}${measureName}。${praise}`;
+    const advance = () => {
       if (!done(mission.id)) { storage()?.completeSubtractionMission?.(mission.id); deps.tryEarnStar?.(); }
       updateStars();
       if (currentMissionIndex < level.missions.length - 1) { currentMissionIndex += 1; busy = false; startMission(currentLevelIndex, currentMissionIndex); return; }
       storage()?.completeSubtractionLevel?.(level.level); if (!deps.isPlanetLit?.(PLANET_ID)) deps.lightPlanet?.(PLANET_ID);
       busy = false; showReward(level);
-    }, 550);
+    };
+    deps.speech?.playCorrectCue?.({ muted: deps.isMuted?.() });
+    if (deps?.speech?.speakThen) deps.speech.speakThen(spoken, { muted: deps.isMuted?.(), rate: 0.86, pitch: 1.06, delayMs: 120 }, advance);
+    else { deps.speak?.(spoken, { rate: 0.86 }); setTimeout(advance, 3000); }
   }
   function moveToTakeaway(el, mission) { if (busy || !el?.parentElement || removedCount >= mission.remove) return; $('#subtraction-takeaway')?.appendChild(el); el.classList.add('is-taken'); sync(mission); }
   function answer(mission) {

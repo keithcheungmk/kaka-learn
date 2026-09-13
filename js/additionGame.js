@@ -187,14 +187,21 @@
   }
 
   function onComplete(mission, level) {
-    if (busy) return; busy = true; $('#addition-slot')?.classList.add('is-merging'); deps?.speech?.playCorrectCue?.({ muted: deps.isMuted?.() }); deps?.speak?.(`${mission.a}加${mission.b}等於${mission.targetNumber}`);
-    setTimeout(() => {
+    if (busy) return; busy = true; $('#addition-slot')?.classList.add('is-merging');
+    const measureName = `${mission.visual.measure}${mission.visual.label}`;
+    const praiseLines = deps?.speech?.FEEDBACK_CORRECT_LINES || ['你好叻呀！'];
+    const praise = praiseLines[Math.floor(Math.random() * praiseLines.length)];
+    const spoken = `${mission.a}${measureName}加${mission.b}${measureName}係${mission.targetNumber}${measureName}。${praise}`;
+    const advance = () => {
       $('#addition-slot')?.classList.remove('is-merging');
       if (!isMissionDone(mission.id)) { storage()?.completeAdditionMission?.(mission.id); deps?.tryEarnStar?.(); }
       updateStarsDisplay();
       if (currentMissionIndex < level.missions.length - 1) { busy = false; currentMissionIndex += 1; startMission(currentLevelIndex, currentMissionIndex); }
       else { storage()?.completeAdditionLevel?.(level.level); if (level.level === 1) storage()?.unlockAdditionLevel?.(2); if (!deps?.isPlanetLit?.(PLANET_ID)) deps?.lightPlanet?.(PLANET_ID); busy = false; showReward(level); }
-    }, 650);
+    };
+    deps?.speech?.playCorrectCue?.({ muted: deps.isMuted?.() });
+    if (deps?.speech?.speakThen) deps.speech.speakThen(spoken, { muted: deps.isMuted?.(), rate: 0.86, pitch: 1.06, delayMs: 120 }, advance);
+    else { deps?.speak?.(spoken, { rate: 0.86 }); setTimeout(advance, 3000); }
   }
 
   function startMission(levelIndex, missionIndex) {
