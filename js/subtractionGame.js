@@ -8,10 +8,12 @@
   function unlocked(level) { return storage()?.isSubtractionLevelUnlocked?.(level) ?? level === 1; }
   function updateStars() { const el = $('#subtraction-play-stars') || $('#subtraction-select-stars'); if (el) el.textContent = `${deps.loadState().starsToday}/10`; }
   function object(visual) { const el = document.createElement('button'); el.type = 'button'; el.className = `subtraction-object math-native-emoji subtraction-object--${visual.id}`; el.textContent = visual.emoji; el.setAttribute('aria-label', `一${visual.measure}${visual.label}`); el.dataset.object = '1'; return el; }
-  function renderEquation(mission) { const el = $('#subtraction-equation'); if (el) el.innerHTML = `${mission.start} − <span class="subtraction-removed">${removedCount || '?'}</span> = <span class="subtraction-result">${mission.remaining}</span>`; }
+  function renderEquation(mission) { const el = $('#subtraction-equation'); if (el) el.innerHTML = `${mission.start} − <span class="subtraction-removed">?</span> = <span class="subtraction-result">${mission.remaining}</span>`; }
   function sync(mission) {
     removedCount = document.querySelectorAll('#subtraction-takeaway .subtraction-object').length;
     renderEquation(mission);
+    const label = $('#subtraction-takeaway .subtraction-takeaway-label');
+    if (label) label.innerHTML = `拿走區（已拿走：${removedCount}${mission.visual.measure}）<br>拖物件入嚟`;
     $('#subtraction-slot')?.classList.toggle('is-ready', removedCount >= mission.remove);
   }
   function finish(mission, level) {
@@ -47,7 +49,7 @@
   }
   function renderMission(mission) {
     const slot = $('#subtraction-slot'); const takeaway = $('#subtraction-takeaway'); if (!slot || !takeaway) return;
-    slot.innerHTML = ''; takeaway.innerHTML = `<div class="subtraction-takeaway-label">將物件拖到呢度<br>或者撳一下拿走</div>`;
+    slot.innerHTML = ''; takeaway.innerHTML = `<div class="subtraction-takeaway-label">拿走區（已拿走：0${mission.visual.measure}）<br>拖物件入嚟</div>`;
     for (let i = 0; i < mission.start; i += 1) { const el = object(mission.visual); bindObject(el, mission); slot.appendChild(el); }
     positionInitialObjects();
     removedCount = 0; sync(mission);
@@ -73,7 +75,7 @@
     const overlay = $('#math-round-finish'); if (!overlay) return; const msg = $('#math-round-finish-msg'); if (msg) msg.textContent = `${level.title}完成！攞到一個獎勵！`; overlay.hidden = false; deps.speech?.playStarCue?.({ muted: deps.isMuted?.() }); deps.speak?.('今輪玩完喇！你好叻呀！攞到一個獎勵！'); deps.playMathStarReward?.();
     $('#btn-math-round-again').onclick = () => { overlay.hidden = true; startMission(currentLevelIndex, 0); }; $('#btn-math-round-galaxy').onclick = () => { overlay.hidden = true; deps.openGalaxy?.(); };
   }
-  function startMission(levelIndex, missionIndex) { currentLevelIndex = levelIndex; currentMissionIndex = missionIndex; busy = false; const level = levels[levelIndex]; const mission = level.missions[missionIndex]; $('#subtraction-play-title').textContent = level.title; $('#subtraction-scenario').textContent = `${mission.scenario} · ${mission.visual.emoji}`; $('#subtraction-desc').textContent = `${mission.desc} 完成後撳「回答」。`; $('#subtraction-mission-progress').textContent = `今輪第 ${missionIndex + 1} / ${level.missions.length} 題`; $('#subtraction-feedback').textContent = ''; renderMission(mission); updateStars(); deps.showMathScreen('subtractionPlay'); requestAnimationFrame(() => positionInitialObjects()); deps.speak?.(mission.desc); }
+  function startMission(levelIndex, missionIndex) { currentLevelIndex = levelIndex; currentMissionIndex = missionIndex; busy = false; const level = levels[levelIndex]; const mission = level.missions[missionIndex]; $('#subtraction-play-title').textContent = level.title; $('#subtraction-scenario').textContent = `${mission.scenario} · ${mission.visual.emoji}`; $('#subtraction-desc').textContent = `${mission.desc} 完成後撳「回答」。`; $('#subtraction-target-num').textContent = String(mission.remaining); $('#subtraction-target-label').textContent = `${mission.visual.label}（目標剩 ${mission.remaining}${mission.visual.measure}）`; $('#subtraction-mission-progress').textContent = `今輪第 ${missionIndex + 1} / ${level.missions.length} 題`; $('#subtraction-feedback').textContent = ''; renderMission(mission); updateStars(); deps.showMathScreen('subtractionPlay'); requestAnimationFrame(() => positionInitialObjects()); deps.speak?.(mission.desc); }
   function renderSelect() { const grid = $('#subtraction-level-grid'); if (!grid) return; grid.innerHTML = ''; levels.forEach((level, index) => { const complete = level.missions.every((m) => done(m.id)); const card = document.createElement('button'); card.type = 'button'; card.className = `subtraction-level-card${unlocked(level.level) ? '' : ' is-locked'}${complete ? ' is-done' : ''}`; card.style.setProperty('--subtraction-accent', level.color); card.disabled = !unlocked(level.level); card.innerHTML = `<span class="subtraction-level-kicker">LEVEL ${level.level}</span><strong>${level.targetRange}</strong><span>${level.title.split('・')[1]}</span><small>${level.blurb}</small><span class="subtraction-level-status">${complete ? '已完成・可以再玩' : unlocked(level.level) ? '10 題任務' : '完成 Level 1 後解鎖'}</span>`; card.onclick = () => { const first = level.missions.findIndex((m) => !done(m.id)); startMission(index, first < 0 ? 0 : first); }; grid.appendChild(card); }); updateStars(); deps.showMathScreen('subtractionSelect'); }
   function openMoonSubtraction() { deps.updateState({ currentPlanetId: PLANET_ID }); renderSelect(); }
   function init(options) { deps = options; levels = window.KakaSubtractionData?.subtractionLevels || []; $('#btn-back-math-subtraction-select')?.addEventListener('click', () => deps.openGalaxy()); $('#btn-back-math-subtraction-play')?.addEventListener('click', () => renderSelect()); $('#btn-subtraction-answer')?.addEventListener('click', () => { const mission = levels[currentLevelIndex]?.missions[currentMissionIndex]; if (mission) answer(mission); }); return levels.length > 0; }

@@ -560,12 +560,21 @@
         <p class="subtraction-scenario" id="subtraction-scenario"></p>
         <p class="subtraction-desc" id="subtraction-desc"></p>
         <div class="subtraction-equation" id="subtraction-equation" aria-live="polite"></div>
-        <div class="subtraction-workspace">
-          <div class="subtraction-board">
-            <div class="subtraction-board-label">白板：由呢度拿走物件</div>
-            <div class="subtraction-slot-wrap"><div class="subtraction-slot" id="subtraction-slot"></div></div>
+        <div class="concrete-math-layout">
+          <div class="concrete-math-board-column">
+            <div class="subtraction-workspace">
+              <div class="subtraction-board">
+                <div class="subtraction-board-label">物品區：由呢度拿走</div>
+                <div class="subtraction-slot-wrap"><div class="subtraction-slot" id="subtraction-slot"></div></div>
+              </div>
+              <div class="subtraction-takeaway" id="subtraction-takeaway"><div class="subtraction-takeaway-label">拿走區<br>拖物件入嚟</div></div>
+            </div>
           </div>
-          <div class="subtraction-takeaway" id="subtraction-takeaway"><div class="subtraction-takeaway-label">將物件拖到呢度<br>或者撳一下拿走</div></div>
+          <aside class="concrete-target-card" aria-label="減法目標">
+            <div class="concrete-target-kicker">🎯 目標剩下</div>
+            <strong id="subtraction-target-num">0</strong>
+            <span id="subtraction-target-label">物件</span>
+          </aside>
         </div>
         <button type="button" class="btn subtraction-answer-btn" id="btn-subtraction-answer">回答</button>
         <p class="feedback" id="subtraction-feedback" aria-live="polite"></p>
@@ -706,12 +715,21 @@
         <p class="addition-scenario" id="addition-scenario"></p>
         <p class="addition-desc" id="addition-desc"></p>
         <div class="addition-equation" id="addition-equation" aria-live="polite"></div>
-        <div class="addition-workspace">
-          <div class="addition-board">
-            <div class="addition-board-label">白板：將兩組物件放埋一齊</div>
-            <div class="addition-slot-wrap"><div class="addition-slot" id="addition-slot"></div></div>
+        <div class="concrete-math-layout">
+          <div class="concrete-math-board-column">
+            <div class="addition-workspace">
+              <div class="addition-board">
+                <div class="addition-board-label">原有物品：再加入物件</div>
+                <div class="addition-slot-wrap"><div class="addition-slot" id="addition-slot"></div></div>
+              </div>
+            </div>
+            <div class="addition-warehouse" id="addition-warehouse"></div>
           </div>
-          <div class="addition-warehouse" id="addition-warehouse"></div>
+          <aside class="concrete-target-card" aria-label="加法目標">
+            <div class="concrete-target-kicker">🎯 目標數量</div>
+            <strong id="addition-target-num">0</strong>
+            <span id="addition-target-label">物件</span>
+          </aside>
         </div>
         <button type="button" class="btn addition-answer-btn" id="btn-addition-answer">回答</button>
         <p class="feedback" id="addition-feedback" aria-live="polite"></p>

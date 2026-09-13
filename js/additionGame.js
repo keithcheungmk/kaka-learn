@@ -25,11 +25,7 @@
   function renderEquation(mission) {
     const eq = $('#addition-equation');
     if (!eq) return;
-    const total = getBoardObjects().length;
-    const added = Math.max(0, total - mission.a);
-    const second = added ? String(added) : '❓';
-    const sum = added ? String(total) : String(mission.targetNumber);
-    eq.innerHTML = `${mission.a} + <span class="eq-unknown">${second}</span> = <span class="eq-sum">${sum}</span>`;
+    eq.innerHTML = `${mission.a} + <span class="eq-unknown">?</span> = <span class="eq-sum">${mission.targetNumber}</span>`;
     eq.classList.remove('is-pop'); void eq.offsetWidth; eq.classList.add('is-pop');
   }
 
@@ -47,6 +43,8 @@
   function syncFilled() {
     const mission = levels[currentLevelIndex]?.missions[currentMissionIndex];
     filledCount = Math.max(0, getBoardObjects().length - (mission?.a || 0));
+    const count = $('#addition-added-count');
+    if (count) count.textContent = `加入：${filledCount}${mission?.visual.measure || ''}`;
   }
 
   function renderSlot(mission) {
@@ -62,7 +60,7 @@
 
   function renderWarehouse(mission) {
     const box = $('#addition-warehouse'); if (!box) return;
-    box.innerHTML = `<div class="addition-warehouse-label">拖 ${mission.visual.label} 入白板，或者撳一下</div>`;
+    box.innerHTML = `<div class="addition-warehouse-label">拖 ${mission.visual.label} 入白板，或者撳一下 <span id="addition-added-count">加入：0${mission.visual.measure}</span></div>`;
     for (let i = 0; i < Math.max(mission.b + 2, 7); i += 1) {
       const object = createObject(mission.visual); object.dataset.warehouse = '1'; object.addEventListener('click', onWarehouseClick); bindDrag(object); box.appendChild(object);
     }
@@ -204,7 +202,8 @@
     currentLevelIndex = levelIndex; currentMissionIndex = missionIndex; busy = false; dragState = null; suppressClickUntil = 0;
     const level = levels[levelIndex], mission = level.missions[missionIndex];
     $('#addition-play-title').textContent = level.title; $('#addition-scenario').textContent = `${mission.visual.emoji} ${mission.scenario}`; $('#addition-desc').textContent = `已有 ${mission.a}${mission.visual.measure}${mission.visual.label}，要有 ${mission.targetNumber}${mission.visual.measure}${mission.visual.label}，仲差幾多？`;
-    const boardLabel = document.querySelector('.addition-board-label'); if (boardLabel) boardLabel.textContent = '將物件放埋一齊';
+    $('#addition-target-num').textContent = String(mission.targetNumber); $('#addition-target-label').textContent = `${mission.visual.label}（目標 ${mission.targetNumber}${mission.visual.measure}）`;
+    const boardLabel = document.querySelector('.addition-board-label'); if (boardLabel) boardLabel.textContent = '物品區：再加入';
     $('#addition-mission-progress').textContent = `今輪第 ${missionIndex + 1} / ${level.missions.length} 題`; $('#addition-feedback').textContent = '';
     renderSlot(mission); renderWarehouse(mission); renderEquation(mission); updateStarsDisplay(); deps.showMathScreen('additionPlay');
     requestAnimationFrame(() => positionBoardObjects());
