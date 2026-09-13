@@ -65,8 +65,9 @@ const PHONICS_TOPICS = [
   {
     id: 'animal_spelling',
     title: '動物拼字園',
-    blurb: '睇圖 · 聽音 · 逐格砌字 · 10 隻動物',
+    blurb: '睇圖 · 聽音 · 逐格砌字 · 20 隻動物',
     cover: '🐱',
+    section: 'sight',
     flow: 'blend',
     modes: ['build'],
     words: [
@@ -80,13 +81,42 @@ const PHONICS_TOPICS = [
       { id: 'animal_fish', word: 'fish', letters: ['f', 'i', 'sh'], emoji: '🐟', plate: '#0f3550' },
       { id: 'animal_frog', word: 'frog', letters: ['f', 'r', 'o', 'g'], emoji: '🐸', plate: '#143828' },
       { id: 'animal_duck', word: 'duck', letters: ['d', 'u', 'ck'], emoji: '🦆', plate: '#1a3050' },
+      { id: 'animal_cow', word: 'cow', letters: ['c', 'ow'], emoji: '🐮', plate: '#2a3548' },
+      { id: 'animal_owl', word: 'owl', letters: ['ow', 'l'], emoji: '🦉', plate: '#2a2440' },
+      { id: 'animal_ant', word: 'ant', letters: ['a', 'n', 't'], emoji: '🐜', plate: '#3a2018' },
+      { id: 'animal_bee', word: 'bee', letters: ['b', 'ee'], emoji: '🐝', plate: '#3a3010' },
+      { id: 'animal_goat', word: 'goat', letters: ['g', 'oa', 't'], emoji: '🐐', plate: '#2a3a35' },
+      { id: 'animal_lion', word: 'lion', letters: ['l', 'i', 'o', 'n'], emoji: '🦁', plate: '#3a2818' },
+      { id: 'animal_bear', word: 'bear', letters: ['b', 'ear'], emoji: '🐻', plate: '#3a2418' },
+      { id: 'animal_snail', word: 'snail', letters: ['s', 'n', 'ai', 'l'], emoji: '🐌', plate: '#16344a' },
+      { id: 'animal_zebra', word: 'zebra', letters: ['z', 'e', 'b', 'r', 'a'], emoji: '🦓', plate: '#30303a' },
+      { id: 'animal_monkey', word: 'monkey', letters: ['m', 'o', 'n', 'k', 'e', 'y'], emoji: '🐒', plate: '#3a2818' },
     ],
+  },
+  {
+    id: 'sight_food', title: '食物', blurb: 'rice · bread · milk · egg · apple · banana · cake · fish · chicken · juice', cover: '🍎', section: 'sight', modes: ['listen', 'match'],
+    words: [
+      ['rice', '🍚'], ['bread', '🍞'], ['milk', '🥛'], ['egg', '🥚'], ['apple', '🍎'], ['banana', '🍌'], ['cake', '🍰'], ['fish', '🐟'], ['chicken', '🍗'], ['juice', '🧃'],
+    ].map(([word, emoji], i) => ({ id: `sight_food_${i}`, word, emoji, plate: '#3a2818' })),
+  },
+  {
+    id: 'sight_veg', title: '蔬菜', blurb: 'carrot · corn · tomato · potato · peas · beans · cabbage · onion · mushroom · cucumber', cover: '🥕', section: 'sight', modes: ['listen', 'match'],
+    words: [
+      ['carrot', '🥕'], ['corn', '🌽'], ['tomato', '🍅'], ['potato', '🥔'], ['peas', '🫛'], ['beans', '🫘'], ['cabbage', '🥬'], ['onion', '🧅'], ['mushroom', '🍄'], ['cucumber', '🥒'],
+    ].map(([word, emoji], i) => ({ id: `sight_veg_${i}`, word, emoji, plate: '#143828' })),
+  },
+  {
+    id: 'sight_places', title: '地方', blurb: 'home · school · park · shop · hospital · library · pool · beach · zoo · classroom', cover: '🏫', section: 'sight', modes: ['listen', 'match'],
+    words: [
+      ['home', '🏠'], ['school', '🏫'], ['park', '🏞️'], ['shop', '🛍️'], ['hospital', '🏥'], ['library', '📚'], ['pool', '🏊'], ['beach', '🏖️'], ['zoo', '🦁'], ['classroom', '🧑‍🏫'],
+    ].map(([word, emoji], i) => ({ id: `sight_places_${i}`, word, emoji, plate: '#1a3050' })),
   },
   {
     id: 'letters_rev',
     title: '字母音訓練基地',
     blurb: '3 大分類 · 13 個 Sound Missions · 49 音',
     cover: '🔤',
+    section: 'phonics',
     modes: ['listen'],
     soundMissions: PHONICS_SOUND_MISSIONS,
     words: PHONICS_SOUND_MISSIONS.flatMap((mission) => mission.words),
@@ -96,6 +126,7 @@ const PHONICS_TOPICS = [
     title: '拼一拼・-at',
     blurb: 'cat · hat · bat · rat · mat',
     cover: '🐱',
+    section: 'phonics',
     modes: ['listen', 'match', 'build'],
     words: [
       { id: 'cat', word: 'cat', letters: ['c', 'a', 't'], emoji: '🐱', plate: '#1a4d3a' },
@@ -187,6 +218,7 @@ const PHONICS_TOPICS = [
     title: '常見字・1',
     blurb: 'I · a · is · my · see · the',
     cover: '👀',
+    section: 'sight',
     modes: ['listen', 'match'],
     words: [
       { id: 'sw_i', word: 'I', emoji: '🙋', plate: '#1a3a58' },
@@ -202,6 +234,7 @@ const PHONICS_TOPICS = [
     title: '常見字・2',
     blurb: 'to · me · we · go · no · you',
     cover: '🚶',
+    section: 'sight',
     modes: ['listen', 'match'],
     words: [
       { id: 'sw_to', word: 'to' },
@@ -217,6 +250,7 @@ const PHONICS_TOPICS = [
     title: '常見字・3・動作',
     blurb: 'look · up · down · run · jump · play',
     cover: '🏃',
+    section: 'sight',
     modes: ['listen', 'match'],
     words: [
       { id: 'sw_look', word: 'look', emoji: '🔍', plate: '#1a2a4a' },
@@ -232,6 +266,7 @@ const PHONICS_TOPICS = [
     title: '常見字・4・顏色數',
     blurb: 'red · blue · yellow · green · one · two · three',
     cover: '🔴',
+    section: 'sight',
     modes: ['listen', 'match'],
     words: [
       { id: 'sw_red', word: 'red', emoji: '🔴', plate: '#401018' },

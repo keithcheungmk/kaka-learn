@@ -15,7 +15,7 @@ const topic = context.window.KakaPhonicsWords.getPhonicsTopicById('animal_spelli
 assert.ok(topic, '動物拼字主題存在');
 assert.equal(topic.flow, 'blend', '動物主題使用音素＋拼字流程');
 assert.deepEqual([...topic.modes], ['build'], '動物主題直接進入拼字任務');
-assert.equal(topic.words.length, 10, '一輪剛好 10 個動物字');
+assert.equal(topic.words.length, 20, '動物園擴充至 20 個動物字');
 
 for (const item of topic.words) {
   assert.equal(item.letters.join(''), item.word, `${item.word} 音素格可以組回完整字`);

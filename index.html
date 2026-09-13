@@ -379,31 +379,41 @@
       <p class="feedback" id="build-feedback" aria-live="polite"></p>
     </section>
 
-    <!-- SPACE RANGER PHONICS：揀主題 -->
-    <section id="screen-phonics-topics" class="screen phonics-screen" aria-label="SPACE RANGER PHONICS・揀主題">
+    <!-- SPACE RANGER ENGLISH：先揀學習線，再揀主題 -->
+    <section id="screen-phonics-topics" class="screen phonics-screen" aria-label="SPACE RANGER ENGLISH・揀學習線">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-phonics-topics">← 返去</button>
-        <h1>SPACE RANGER PHONICS</h1>
+        <h1>SPACE RANGER ENGLISH</h1>
       </div>
-      <div class="phonics-hero" aria-hidden="true">
-        <div class="phonics-hero-brand">
-          <img class="phonics-hero-logo" src="./assets/kaka-ranger-logo.png" alt="" width="421" height="439" loading="lazy" decoding="async" />
-          <span class="phonics-mission-kicker">SOUND MISSION</span>
-        </div>
-        <div class="phonics-hero-action">
-          <div class="phonics-energy-word" aria-label="cat">
-            <span style="--energy:#fb7185">c</span>
-            <i></i>
-            <span style="--energy:#7cffb2">a</span>
-            <i></i>
-            <span style="--energy:#93a5fc">t</span>
+      <div class="english-track english-track-sight">
+        <header class="english-track-heading">
+          <span class="english-track-kicker">WORD MISSION · 01</span>
+          <h2>Sight Words <small>常見字・詞語認讀</small></h2>
+          <p>先認得完整英文字，再用圖像、聆聽同配對記住意思。</p>
+        </header>
+        <div class="topic-grid" id="phonics-sight-grid"></div>
+      </div>
+      <div class="english-track english-track-phonics">
+        <header class="english-track-heading">
+          <span class="english-track-kicker">SOUND MISSION · 02</span>
+          <h2>Phonics <small>字母音・拼讀</small></h2>
+          <p>逐個音聽清楚，再將聲音連起來拼出英文字。</p>
+        </header>
+        <div class="phonics-hero" aria-hidden="true">
+          <div class="phonics-hero-brand">
+            <img class="phonics-hero-logo" src="./assets/kaka-ranger-logo.png" alt="" width="421" height="439" loading="lazy" decoding="async" />
+            <span class="phonics-mission-kicker">SOUND MISSION</span>
           </div>
-          <img class="phonics-hero-ranger" src="./assets/kaka-ranger-solo.png" alt="" width="700" height="656" loading="lazy" decoding="async" />
+          <div class="phonics-hero-action">
+            <div class="phonics-energy-word" aria-label="cat">
+              <span style="--energy:#fb7185">c</span><i></i><span style="--energy:#7cffb2">a</span><i></i><span style="--energy:#93a5fc">t</span>
+            </div>
+            <img class="phonics-hero-ranger" src="./assets/kaka-ranger-solo.png" alt="" width="700" height="656" loading="lazy" decoding="async" />
+          </div>
+          <p class="phonics-hero-callout">聽字母音・連接能量・拼出英文字</p>
         </div>
-        <p class="phonics-hero-callout">聽字母音・連接能量・拼出英文字</p>
+        <div class="topic-grid" id="phonics-topic-grid"></div>
       </div>
-      <p class="section-lead">揀一個 Ranger Mission，先聽音，再出發！</p>
-      <div class="topic-grid" id="phonics-topic-grid"></div>
     </section>
 
     <!-- SPACE RANGER PHONICS：49 音分類清單 -->

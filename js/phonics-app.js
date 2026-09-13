@@ -521,15 +521,22 @@
   }
 
   function renderPhonicsTopics() {
-    const grid = $('#phonics-topic-grid');
-    if (!grid) return;
-    grid.innerHTML = '';
-    PHONICS_TOPICS.forEach((topic, index) => {
+    const grids = {
+      sight: $('#phonics-sight-grid'),
+      phonics: $('#phonics-topic-grid'),
+    };
+    Object.values(grids).forEach((grid) => { if (grid) grid.innerHTML = ''; });
+    const counters = { sight: 0, phonics: 0 };
+    PHONICS_TOPICS.forEach((topic) => {
+      const track = topic.section === 'sight' ? 'sight' : 'phonics';
+      const grid = grids[track];
+      if (!grid) return;
+      counters[track] += 1;
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'topic-card';
       btn.innerHTML = `
-        <span class="phonics-mission-number" aria-hidden="true">MISSION ${String(index + 1).padStart(2, '0')}</span>
+        <span class="phonics-mission-number" aria-hidden="true">${track === 'sight' ? 'WORD' : 'MISSION'} ${String(counters[track]).padStart(2, '0')}</span>
         <span class="topic-cover" aria-hidden="true">${topic.cover}</span>
         <span class="topic-title term-en">${topic.title}</span>
         <span class="topic-blurb term-en">${topic.blurb}</span>
