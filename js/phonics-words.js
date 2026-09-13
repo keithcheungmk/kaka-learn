@@ -94,22 +94,22 @@ const PHONICS_TOPICS = [
     ],
   },
   {
-    id: 'sight_food', title: '食物', blurb: 'rice · bread · milk · egg · apple · banana · cake · fish · chicken · juice', cover: '🍎', section: 'sight', modes: ['listen', 'match'],
+    id: 'sight_food', title: '食物', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種食物', cover: '🍎', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
       ['rice', '🍚'], ['bread', '🍞'], ['milk', '🥛'], ['egg', '🥚'], ['apple', '🍎'], ['banana', '🍌'], ['cake', '🍰'], ['fish', '🐟'], ['chicken', '🍗'], ['juice', '🧃'],
-    ].map(([word, emoji], i) => ({ id: `sight_food_${i}`, word, emoji, plate: '#3a2818' })),
+    ].map(([word, emoji], i) => ({ id: `sight_food_${i}`, word, letters: Array.from(word), emoji, plate: '#3a2818' })),
   },
   {
-    id: 'sight_veg', title: '蔬菜', blurb: 'carrot · corn · tomato · potato · peas · beans · cabbage · onion · mushroom · cucumber', cover: '🥕', section: 'sight', modes: ['listen', 'match'],
+    id: 'sight_veg', title: '蔬菜', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種蔬菜', cover: '🥕', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
       ['carrot', '🥕'], ['corn', '🌽'], ['tomato', '🍅'], ['potato', '🥔'], ['peas', '🫛'], ['beans', '🫘'], ['cabbage', '🥬'], ['onion', '🧅'], ['mushroom', '🍄'], ['cucumber', '🥒'],
-    ].map(([word, emoji], i) => ({ id: `sight_veg_${i}`, word, emoji, plate: '#143828' })),
+    ].map(([word, emoji], i) => ({ id: `sight_veg_${i}`, word, letters: Array.from(word), emoji, plate: '#143828' })),
   },
   {
-    id: 'sight_places', title: '地方', blurb: 'home · school · park · shop · hospital · library · pool · beach · zoo · classroom', cover: '🏫', section: 'sight', modes: ['listen', 'match'],
+    id: 'sight_places', title: '地方', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 個地方', cover: '🏫', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
       ['home', '🏠'], ['school', '🏫'], ['park', '🏞️'], ['shop', '🛍️'], ['hospital', '🏥'], ['library', '📚'], ['pool', '🏊'], ['beach', '🏖️'], ['zoo', '🦁'], ['classroom', '🧑‍🏫'],
-    ].map(([word, emoji], i) => ({ id: `sight_places_${i}`, word, emoji, plate: '#1a3050' })),
+    ].map(([word, emoji], i) => ({ id: `sight_places_${i}`, word, letters: Array.from(word), emoji, plate: '#1a3050' })),
   },
   {
     id: 'letters_rev',

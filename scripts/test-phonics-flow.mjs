@@ -28,6 +28,19 @@ for (const item of topic.words) {
   }
 }
 
+for (const topicId of ['sight_food', 'sight_veg', 'sight_places']) {
+  const vocabularyTopic = context.window.KakaPhonicsWords.getPhonicsTopicById(topicId);
+  assert.equal(vocabularyTopic.flow, 'blend', `${topicId} 跟動物園使用融合拼字流程`);
+  assert.deepEqual([...vocabularyTopic.modes], ['build'], `${topicId} 直接進入拼字任務`);
+  assert.equal(vocabularyTopic.words.length, 10, `${topicId} 有 10 個詞`);
+  for (const item of vocabularyTopic.words) {
+    assert.equal(item.letters.join(''), item.word, `${item.word} 可以組回完整字`);
+    for (const phoneme of item.letters) {
+      assert.ok(fs.existsSync(path.join(repo, 'assets/phonemes', `${phoneme}.mp3`)), `${item.word} 使用已存在的 ${phoneme} 音檔`);
+    }
+  }
+}
+
 assert.match(appSource, /playLetterSound\(tile\.char/, '每放入一格播放 phoneme');
 assert.match(appSource, /completedRound\.chars\[index\]/, '完成後依次連讀 phoneme');
 assert.match(appSource, /speakEnglishAndWait\(word/, '連音後播放完整英文單字');
