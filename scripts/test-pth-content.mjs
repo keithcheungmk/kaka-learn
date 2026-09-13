@@ -29,6 +29,9 @@ assert.ok(demoSource.includes('s.verified'));
 assert.ok(demoSource.includes('groupNames[activeGroup]'));
 assert.ok(demoSource.includes('if(!sounds.some(s=>s.group===activeGroup&&s.verified))'));
 assert.ok(demoSource.includes('function hydrateGroup()') && demoSource.includes('state.roundStars=gp.roundStars||0') && demoSource.includes('state.completed=!!gp.completed'));
+assert.ok(demoSource.includes("kaka-pth-preview-v1") && demoSource.includes('測試預覽') && demoSource.includes('preview-badge'));
+assert.ok(!demoSource.includes("group-btn:not([disabled])"));
+assert.equal((demoSource.match(/group:'[^']+'/g) || []).length, 23);
 assert.ok(demoSource.includes('function persistGroup()') && demoSource.includes('state.roundIndex=qi;persistGroup();save();') && demoSource.includes('state.completed=true;qi=0;state.roundIndex=0;persistGroup();save();')); 
 assert.ok(demoSource.includes("['chē','ch']") && demoSource.includes("['chū','ch']"));
 for (const id of ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w']) {
