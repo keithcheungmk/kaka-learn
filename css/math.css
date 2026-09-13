@@ -1646,7 +1646,7 @@
   overflow: hidden;
 }
 
-/* 數理以 iPad Pro 11 橫向為主畫布；直向沿用手機單欄流程。 */
+/* 數理以 iPad 橫向為主，但畫布跟 Chrome 實際可用 viewport 流動，不綁死實體解像度。 */
 @media (min-width:701px) and (orientation:landscape) {
   html.math-canvas-mode,
   html.math-canvas-mode body {
@@ -1662,12 +1662,12 @@
   }
 
   html.math-canvas-mode #app {
-    width: min(1210px, 100vw, calc(100dvh * 1210 / 834));
-    height: min(834px, 100dvh, calc(100vw * 834 / 1210));
+    width: 100dvw;
+    height: 100dvh;
     min-height: 0;
     max-width: none;
     margin: 0;
-    padding: 16px 20px;
+    padding: max(12px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
     overflow: hidden;
   }
 
