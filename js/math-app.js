@@ -92,7 +92,7 @@
       {
         kind: 'pattern',
         sequence: [MARS_PATTERN_ANIMALS[0], MARS_PATTERN_ANIMALS[1], MARS_PATTERN_ANIMALS[0], MARS_PATTERN_ANIMALS[1]],
-        learnSay: '小白兔、雞仔、小白兔、雞仔……跟住又係小白兔。呢個叫規律。',
+        learnSay: '小白兔、雞仔、小白兔、雞仔……下一個又係小白兔。小動物會跟住次序排隊。',
       },
       {
         kind: 'pattern',
@@ -938,7 +938,7 @@
         if (say) say.textContent = card.shape.name;
       } else {
         if (visual) visual.innerHTML = `<div class="math-pattern-row">${patternCellsHtml(card.sequence)}</div>`;
-        if (say) say.textContent = '規律';
+        if (say) say.textContent = '動物排隊';
       }
       const progress = $('#math-mars-learn-progress');
       if (progress) progress.textContent = `${marsLearnIndex + 1}/${MARS_LEARN_CARDS.length}`;
@@ -1072,7 +1072,7 @@
     function nextPatternRound(autoSpeak) {
       patternRound = makePatternRound();
       const prompt = $('#math-pattern-prompt');
-      if (prompt) prompt.textContent = '邊個跟住嚟？';
+      if (prompt) prompt.textContent = '下一個係邊個？';
       const fb = $('#math-pattern-feedback');
       if (fb) fb.textContent = '';
       const row = $('#math-pattern-row');
@@ -1090,7 +1090,7 @@
           box.appendChild(btn);
         });
       }
-      if (autoSpeak) speak('邊個跟住嚟？');
+      if (autoSpeak) speak('下一個係邊個？');
     }
 
     function onPatternPick(id, btn) {
@@ -1117,7 +1117,7 @@
           if (fb) fb.textContent = `${praise} 火星點亮喇！`;
           setTimeout(() => {
             patternBusy = false;
-            showMathRoundReward('火星規律十題完成！你好叻呀！', openPatternQuiz);
+            showMathRoundReward('動物排隊十題完成！你好叻呀！', openPatternQuiz);
           }, 900);
           return;
         }
@@ -1216,7 +1216,7 @@
       $('#btn-math-shape-speak')?.addEventListener('click', () => speak('呢個係咩形狀？'));
 
       $('#btn-back-math-pattern')?.addEventListener('click', () => openMarsPlay());
-      $('#btn-math-pattern-speak')?.addEventListener('click', () => speak('邊個跟住嚟？'));
+      $('#btn-math-pattern-speak')?.addEventListener('click', () => speak('下一個係邊個？'));
     }
 
     bind();
