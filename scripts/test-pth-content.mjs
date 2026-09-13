@@ -9,6 +9,7 @@ const units = JSON.parse(fs.readFileSync(path.join(root, 'data/pth/units.json'))
 const quiz = JSON.parse(fs.readFileSync(path.join(root, 'data/pth/questions-u1.json')));
 const audio = JSON.parse(fs.readFileSync(path.join(root, 'data/pth/audio-manifest.json')));
 const media = JSON.parse(fs.readFileSync(path.join(root, 'data/pth/initial-video-manifest.json')));
+const demoSource = fs.readFileSync(path.join(root, 'js/pth-demo.js'), 'utf8');
 assert.deepEqual(units.lessons.slice(0, 3).map((x) => x.id), ['tones-song', 'single-finals', 'initials-bpmf']);
 assert.equal(quiz.questions.length, 10);
 assert.equal(new Set(quiz.questions.map((q) => q.id)).size, 10);
@@ -18,6 +19,10 @@ assert.equal(Object.values(audio.items).some((x) => x.src && x.source === '粵�
 assert.equal(media.entries.length, 23);
 assert.deepEqual(media.entries.slice(0, 4).map((x) => x.id), ['b', 'p', 'm', 'f']);
 assert.ok(media.entries.every((x) => x.sourceFile.startsWith('source-materials/')));
+for (const [id, emoji] of Object.entries({ b: '🎈', p: '⛰️', m: '🍚', f: '🎡' })) {
+  assert.ok(demoSource.includes(`id:'${id}'`) && demoSource.includes(`emoji:'${emoji}'`));
+}
+assert.ok(!demoSource.includes('<small>${s.sentence}</small>'));
 for (const id of ['b', 'p', 'm', 'f']) {
   assert.equal(audio.items[`u1-initial-${id}`].status, 'verified');
   assert.ok(fs.existsSync(path.join(root, audio.items[`u1-initial-${id}`].src)));
