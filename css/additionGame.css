@@ -104,6 +104,22 @@
 .concrete-math-board-column .addition-slot-wrap,.concrete-math-board-column .subtraction-slot-wrap{flex:1;min-height:0}
 .concrete-math-layout .addition-warehouse{flex:none;min-height:96px;margin-top:2px;position:static}
 .concrete-target-answer{width:min(100%,260px);min-height:64px;margin-top:12px}
+
+/* iPad landscape: addition stacks the board and object bank vertically, so
+   keep both compact enough for the answer panel to remain on-screen. */
+@media (min-width:701px) and (orientation:landscape){
+  #screen-math-earth-addition-play.active .addition-workspace{
+    height:clamp(210px,30vh,270px);
+  }
+  #screen-math-earth-addition-play.active .addition-warehouse{
+    min-height:76px;
+    padding:8px 12px;
+    gap:6px;
+  }
+  #screen-math-earth-addition-play.active .addition-warehouse-label{
+    font-size:.82rem;
+  }
+}
 .concrete-math-layout + .feedback{min-height:1.5em;margin:4px 12px 8px;text-align:center}
 @media(max-width:700px){
   .concrete-math-board-column .addition-workspace{height:clamp(220px,38vh,320px)}
