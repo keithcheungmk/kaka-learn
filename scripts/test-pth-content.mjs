@@ -20,6 +20,7 @@ assert.equal(Object.values(audio.items).some((x) => x.src && x.source === '粵�
 assert.equal(media.entries.length, 23);
 assert.deepEqual(media.entries.slice(0, 4).map((x) => x.id), ['b', 'p', 'm', 'f']);
 assert.ok(media.entries.every((x) => x.sourceFile.startsWith('source-materials/')));
+assert.ok(media.entries.every((x) => x.status === 'verified' && fs.existsSync(path.join(root, x.derivedVideo)) && fs.existsSync(path.join(root, x.derivedAudio))));
 for (const [id, emoji] of Object.entries({ b: '🎈', p: '⛰️', m: '🍚', f: '🎡' })) {
   assert.ok(demoSource.includes(`id:'${id}'`) && demoSource.includes(`emoji:'${emoji}'`));
 }
@@ -31,4 +32,5 @@ for (const id of ['b', 'p', 'm', 'f']) {
   assert.ok(fs.existsSync(path.join(root, audio.items[`u1-initial-${id}`].src)));
   assert.ok(fs.existsSync(path.join(root, audio.items[`u1-initial-${id}`].videoSrc)));
 }
+assert.equal(Object.keys(audio.items).length, 23);
 console.log('PTH content tests: 9 passed');

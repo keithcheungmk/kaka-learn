@@ -14,7 +14,8 @@
         "audioCodec": "aac"
       },
       "derivedVideo": "assets/pth/initials/video/b.mp4",
-      "derivedAudio": "assets/pth/initials/audio/b.m4a"
+      "derivedAudio": "assets/pth/initials/audio/b.m4a",
+      "status": "verified"
     },
     {
       "id": "p",
@@ -28,7 +29,8 @@
         "audioCodec": "aac"
       },
       "derivedVideo": "assets/pth/initials/video/p.mp4",
-      "derivedAudio": "assets/pth/initials/audio/p.m4a"
+      "derivedAudio": "assets/pth/initials/audio/p.m4a",
+      "status": "verified"
     },
     {
       "id": "m",
@@ -42,7 +44,8 @@
         "audioCodec": "aac"
       },
       "derivedVideo": "assets/pth/initials/video/m.mp4",
-      "derivedAudio": "assets/pth/initials/audio/m.m4a"
+      "derivedAudio": "assets/pth/initials/audio/m.m4a",
+      "status": "verified"
     },
     {
       "id": "f",
@@ -56,7 +59,8 @@
         "audioCodec": "aac"
       },
       "derivedVideo": "assets/pth/initials/video/f.mp4",
-      "derivedAudio": "assets/pth/initials/audio/f.m4a"
+      "derivedAudio": "assets/pth/initials/audio/f.m4a",
+      "status": "verified"
     },
     {
       "id": "d",
@@ -69,8 +73,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/d.mp4",
+      "derivedAudio": "assets/pth/initials/audio/d.m4a",
+      "status": "verified"
     },
     {
       "id": "t",
@@ -83,8 +88,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/t.mp4",
+      "derivedAudio": "assets/pth/initials/audio/t.m4a",
+      "status": "verified"
     },
     {
       "id": "n",
@@ -97,8 +103,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/n.mp4",
+      "derivedAudio": "assets/pth/initials/audio/n.m4a",
+      "status": "verified"
     },
     {
       "id": "l",
@@ -111,8 +118,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/l.mp4",
+      "derivedAudio": "assets/pth/initials/audio/l.m4a",
+      "status": "verified"
     },
     {
       "id": "g",
@@ -125,8 +133,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/g.mp4",
+      "derivedAudio": "assets/pth/initials/audio/g.m4a",
+      "status": "verified"
     },
     {
       "id": "k",
@@ -139,8 +148,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/k.mp4",
+      "derivedAudio": "assets/pth/initials/audio/k.m4a",
+      "status": "verified"
     },
     {
       "id": "h",
@@ -153,8 +163,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/h.mp4",
+      "derivedAudio": "assets/pth/initials/audio/h.m4a",
+      "status": "verified"
     },
     {
       "id": "j",
@@ -167,8 +178,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/j.mp4",
+      "derivedAudio": "assets/pth/initials/audio/j.m4a",
+      "status": "verified"
     },
     {
       "id": "q",
@@ -181,8 +193,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/q.mp4",
+      "derivedAudio": "assets/pth/initials/audio/q.m4a",
+      "status": "verified"
     },
     {
       "id": "x",
@@ -195,8 +208,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/x.mp4",
+      "derivedAudio": "assets/pth/initials/audio/x.m4a",
+      "status": "verified"
     },
     {
       "id": "zh",
@@ -209,8 +223,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/zh.mp4",
+      "derivedAudio": "assets/pth/initials/audio/zh.m4a",
+      "status": "verified"
     },
     {
       "id": "ch",
@@ -223,8 +238,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/ch.mp4",
+      "derivedAudio": "assets/pth/initials/audio/ch.m4a",
+      "status": "verified"
     },
     {
       "id": "sh",
@@ -237,8 +253,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/sh.mp4",
+      "derivedAudio": "assets/pth/initials/audio/sh.m4a",
+      "status": "verified"
     },
     {
       "id": "r",
@@ -251,8 +268,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/r.mp4",
+      "derivedAudio": "assets/pth/initials/audio/r.m4a",
+      "status": "verified"
     },
     {
       "id": "z",
@@ -265,8 +283,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/z.mp4",
+      "derivedAudio": "assets/pth/initials/audio/z.m4a",
+      "status": "verified"
     },
     {
       "id": "c",
@@ -279,8 +298,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/c.mp4",
+      "derivedAudio": "assets/pth/initials/audio/c.m4a",
+      "status": "verified"
     },
     {
       "id": "s",
@@ -293,8 +313,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/s.mp4",
+      "derivedAudio": "assets/pth/initials/audio/s.m4a",
+      "status": "verified"
     },
     {
       "id": "y",
@@ -307,8 +328,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/y.mp4",
+      "derivedAudio": "assets/pth/initials/audio/y.m4a",
+      "status": "verified"
     },
     {
       "id": "w",
@@ -321,8 +343,9 @@
         "height": 1080,
         "audioCodec": "aac"
       },
-      "derivedVideo": null,
-      "derivedAudio": null
+      "derivedVideo": "assets/pth/initials/video/w.mp4",
+      "derivedAudio": "assets/pth/initials/audio/w.m4a",
+      "status": "verified"
     }
   ]
 }
