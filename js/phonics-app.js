@@ -1,6 +1,6 @@
 /* 卡卡字母隊 — English Phonics（獨立 IIFE，唔改動 js/app.js 任何內容）
  * Classic script — 冇 ES module，方便 iPad／預覽側欄。
- * Phase 1：keep it simple — 冇星星／PIN，答啱淨係鼓勵 + 自動下一題。
+ * 每個小測驗係 10 題回合：答啱先亮一粒星；中途離開可繼續。
  */
 (function () {
   if (!window.KakaWords || !window.KakaStorage || !window.KakaSpeech || !window.KakaPhonicsWords) {
@@ -12,7 +12,10 @@
     PHONICS_TOPICS, PHONICS_SOUND_SECTIONS, getPhonicsTopicById,
     phonicsLetterPool, phonicsWordIllustHtml, letterTileHtml, isLetterItem,
   } = window.KakaPhonicsWords;
-  const { loadState, getActiveProfileId, recordPhonicsSkillResult } = window.KakaStorage;
+  const {
+    loadState, getActiveProfileId, recordPhonicsSkillResult,
+    loadRoundProgress, saveRoundProgress, clearRoundProgress,
+  } = window.KakaStorage;
   const {
     warmEnglishVoice,
     speakEnglishTerm,
@@ -21,6 +24,7 @@
     playTryAgainCue,
     estimateSpeakMs,
     warmAudio,
+    cancelAllSpeech,
     FEEDBACK_CORRECT_LINES,
   } = window.KakaSpeech;
 
@@ -36,6 +40,8 @@
   let pBuildSelectedKey = null;
   let pBuildAudioGen = 0;
   let pBuildPromptTimer = null;
+  const PHONICS_ROUND_LENGTH = 10;
+  const pRoundStates = Object.create(null);
 
   /** Cached HTMLAudioElement per grapheme／phoneme. */
   const phonemeAudioByLetter = Object.create(null);
@@ -101,10 +107,13 @@
     }
 
     stopPhonemeAudio();
-    try {
-      if (window.speechSynthesis) window.speechSynthesis.cancel();
-    } catch {
-      /* ignore */
+    if (typeof cancelAllSpeech === 'function') cancelAllSpeech();
+    else {
+      try {
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+      } catch {
+        /* ignore */
+      }
     }
 
     let audio = phonemeAudioByLetter[ch];
@@ -182,6 +191,135 @@
     }
   }
 
+  function reframePhonicsAsEnglish() {
+    const topics = $('#screen-phonics-topics');
+    const title = topics?.querySelector('.game-header h1');
+    const kicker = topics?.querySelector('.phonics-mission-kicker');
+    const lead = topics?.querySelector('.section-lead');
+    if (title) title.textContent = 'SPACE RANGER ENGLISH';
+    if (kicker) kicker.textContent = 'WORD MISSION';
+    if (lead) lead.textContent = '揀一個英文主題，先認全字，再聽音砌字！';
+    $$('.phonics-screen').forEach((screen) => {
+      const label = screen.getAttribute('aria-label');
+      if (label) screen.setAttribute('aria-label', label.replace('SPACE RANGER PHONICS', 'SPACE RANGER ENGLISH'));
+    });
+  }
+
+  function phonicsRoundKey(mode) {
+    const profileId = typeof getActiveProfileId === 'function' ? getActiveProfileId() : 'kaka';
+    return `${profileId}|phonics|${mode}|${pActiveTopicId || 'none'}|${pSoundMissionIndex || 0}`;
+  }
+
+  function phonicsRoundPlan(pool) {
+    // Keep the first pass predictable, then repeat the same small word set as
+    // needed. Several early sound groups have fewer than ten items.
+    return Array.from({ length: PHONICS_ROUND_LENGTH }, (_, index) => pool[index % pool.length]);
+  }
+
+  function ensurePhonicsRound(mode, pool) {
+    const key = phonicsRoundKey(mode);
+    let state = pRoundStates[mode];
+    if (!state || state.key !== key || state.poolIds !== pool.map((word) => word.id).join('|')) {
+      const saved = typeof loadRoundProgress === 'function' ? loadRoundProgress(key) : [];
+      state = {
+        key,
+        poolIds: pool.map((word) => word.id).join('|'),
+        plan: phonicsRoundPlan(pool),
+        completed: Array.isArray(saved) ? saved.slice(0, PHONICS_ROUND_LENGTH) : [],
+      };
+      pRoundStates[mode] = state;
+    }
+    return state;
+  }
+
+  function renderPhonicsRoundBar(mode, state) {
+    const screen = $(`#screen-phonics-${mode}`);
+    const header = screen?.querySelector('.game-header');
+    if (!screen || !header || !state) return;
+    let bar = header.querySelector('.phonics-round-bar');
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'star-bar star-bar-compact phonics-round-bar';
+      bar.setAttribute('role', 'img');
+      bar.innerHTML = '<span class="star-bar-stars"></span><span class="star-bar-hint"></span>';
+      header.appendChild(bar);
+    }
+    const count = Math.min(state.completed.length, PHONICS_ROUND_LENGTH);
+    bar.setAttribute('aria-label', `今輪答啱 ${count} 題，共 ${PHONICS_ROUND_LENGTH} 題`);
+    const stars = $('.star-bar-stars', bar);
+    if (stars) {
+      stars.innerHTML = Array.from({ length: PHONICS_ROUND_LENGTH }, (_, index) =>
+        `<span class="star-cell${index < count ? ' is-on' : ''}" aria-hidden="true">★</span>`).join('');
+    }
+    const hint = $('.star-bar-hint', bar);
+    if (hint) hint.textContent = `${count}/${PHONICS_ROUND_LENGTH}`;
+  }
+
+  function hidePhonicsRoundFinish(mode) {
+    $(`#screen-phonics-${mode} .phonics-round-finish`)?.remove();
+  }
+
+  function resetPhonicsRound(mode) {
+    const state = pRoundStates[mode];
+    const key = state?.key || phonicsRoundKey(mode);
+    if (typeof clearRoundProgress === 'function') clearRoundProgress(key);
+    delete pRoundStates[mode];
+    hidePhonicsRoundFinish(mode);
+  }
+
+  function showPhonicsRoundFinish(mode) {
+    const screen = $(`#screen-phonics-${mode}`);
+    if (!screen || screen.querySelector('.phonics-round-finish')) return;
+    const topic = getPhonicsTopicById(pActiveTopicId);
+    const isBlendFlow = topic?.flow === 'blend';
+    const finish = document.createElement('div');
+    finish.className = 'play-finish phonics-round-finish';
+    finish.innerHTML = `
+      <div class="play-finish-inner" role="dialog" aria-modal="true" aria-label="小測驗完成">
+        <div class="play-finish-star" aria-hidden="true"><img src="./assets/kaka-ranger-celebrate.png" alt=""></div>
+        <p>${isBlendFlow ? '10 隻動物都拼好喇！' : '完成 10 題！'}你儲滿咗 10 粒星。</p>
+        <div class="play-finish-actions">
+          <button type="button" class="btn btn-primary" data-phonics-round-again>再玩一輪</button>
+          <button type="button" class="btn btn-secondary" data-phonics-round-back>${isBlendFlow ? '返字卡' : '返玩法'}</button>
+        </div>
+      </div>`;
+    finish.querySelector('[data-phonics-round-again]')?.addEventListener('click', () => {
+      resetPhonicsRound(mode);
+      if (mode === 'listen') startPhonicsListenMode();
+      if (mode === 'match') startPhonicsMatchMode();
+      if (mode === 'build') startPhonicsBuildMode();
+    });
+    finish.querySelector('[data-phonics-round-back]')?.addEventListener('click', () => {
+      hidePhonicsRoundFinish(mode);
+      if (isBlendFlow) openPhonicsLearn(pActiveTopicId, pSoundMissionIndex);
+      else openPhonicsPlayPick();
+    });
+    screen.appendChild(finish);
+  }
+
+  function awardPhonicsRoundStar(mode, target, onComplete) {
+    const state = pRoundStates[mode];
+    if (!state || !target) return;
+    const commit = () => {
+      const answerIndex = state.completed.length;
+      if (answerIndex >= PHONICS_ROUND_LENGTH) return;
+      state.completed.push(`${answerIndex}:${target.id}`);
+      if (state.completed.length < PHONICS_ROUND_LENGTH && typeof saveRoundProgress === 'function') {
+        saveRoundProgress(state.key, state.completed);
+      }
+      renderPhonicsRoundBar(mode, state);
+      const finished = state.completed.length >= PHONICS_ROUND_LENGTH;
+      if (finished && typeof clearRoundProgress === 'function') clearRoundProgress(state.key);
+      if (typeof onComplete === 'function') onComplete(finished);
+    };
+    const screen = $(`#screen-phonics-${mode}`);
+    if (screen && typeof window.KakaStarFx?.flyStarFromRanger === 'function') {
+      window.KakaStarFx.flyStarFromRanger(screen, commit);
+    } else {
+      commit();
+    }
+  }
+
   function shuffle(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i -= 1) {
@@ -252,8 +390,16 @@
 
   function speakPhonicsBuildRetry() {
     const line = pickPhonicsBuildRetry();
+    const activeRound = pBuildRound;
+    pBusy = true;
     playTryAgainCue({ muted: isMuted() });
     speakEnglishTerm(line, { muted: isMuted(), rate: 0.9, pitch: 1.05, delayMs: 120 });
+    const duration = isMuted()
+      ? 420
+      : (estimateSpeakMs ? estimateSpeakMs(line, { rate: 0.9, delayMs: 120 }) : 1800);
+    setTimeout(() => {
+      if (pBuildRound === activeRound) pBusy = false;
+    }, duration);
     return line;
   }
 
@@ -340,6 +486,7 @@
   function init() {
     try {
       warmEnglishVoice();
+      reframePhonicsAsEnglish();
       bindPhonicsHome();
       bindPhonicsTopics();
       bindPhonicsSounds();
@@ -476,7 +623,13 @@
     if (prev) prev.onclick = () => stepPhonicsLearn(-1);
     if (next) next.onclick = () => stepPhonicsLearn(1);
     const play = $('#btn-phonics-learn-play');
-    if (play) play.onclick = () => openPhonicsPlayPick();
+    if (play) {
+      play.onclick = () => {
+        const topic = getPhonicsTopicById(pActiveTopicId);
+        if (topic?.flow === 'blend') startPhonicsBuildMode();
+        else openPhonicsPlayPick();
+      };
+    }
   }
 
   function openPhonicsLearn(topicId, soundMissionIndex = 0) {
@@ -484,7 +637,8 @@
     if (!topic) return;
     pActiveTopicId = topicId;
     pSoundMissionIndex = soundMissionIndex;
-    pLearnWords = topic.soundMissions?.[pSoundMissionIndex]?.words || shuffle(topic.words);
+    pLearnWords = topic.soundMissions?.[pSoundMissionIndex]?.words
+      || (topic.flow === 'blend' ? [...topic.words] : shuffle(topic.words));
     pLearnIndex = 0;
     pLearnPassedOnce = false;
     const title = $('#phonics-learn-topic-title');
@@ -520,7 +674,7 @@
           ? word.letters
               .map(
                 (ch) =>
-                  `<button type="button" class="letter-tile" data-letter="${ch}" aria-label="letter sound ${ch}">${letterTileHtml(ch)}</button>`,
+                  `<button type="button" class="letter-tile" data-letter="${ch}" aria-label="播放 ${ch} 音">${letterTileHtml(ch)}</button>`,
               )
               .join('')
           : '';
@@ -537,7 +691,10 @@
         });
       }
       if (lead) {
-        lead.textContent = word.letters ? '撳字母聽音' : '撳卡聽英文';
+        const topic = getPhonicsTopicById(pActiveTopicId);
+        lead.textContent = topic?.flow === 'blend'
+          ? '先聽完整英文；再撳下面每個音素'
+          : word.letters ? '撳字母聽音' : '撳卡聽英文';
       }
     }
     if (progress) progress.textContent = `${pLearnIndex + 1}/${pLearnWords.length}`;
@@ -557,7 +714,12 @@
       finishRow.hidden = false;
       finishRow.classList.toggle('is-ready', pLearnPassedOnce);
     }
-    if (play) play.textContent = pLearnPassedOnce ? '學完喇・去玩玩' : '去玩玩';
+    if (play) {
+      const topic = getPhonicsTopicById(pActiveTopicId);
+      play.textContent = topic?.flow === 'blend'
+        ? (pLearnPassedOnce ? '學完喇・開始拼字' : '開始拼字')
+        : (pLearnPassedOnce ? '學完喇・去玩玩' : '去玩玩');
+    }
 
     const plate = illust?.querySelector('.emoji-plate');
     if (plate) plate.classList.add('emoji-plate-lg');
@@ -624,6 +786,7 @@
       return;
     }
     showPScreen('listen');
+    hidePhonicsRoundFinish('listen');
     startPhonicsListenRound();
   }
 
@@ -634,6 +797,7 @@
       return;
     }
     showPScreen('match');
+    hidePhonicsRoundFinish('match');
     startPhonicsMatchRound();
   }
 
@@ -643,7 +807,18 @@
       openPhonicsTopics();
       return;
     }
+    const topic = getPhonicsTopicById(pActiveTopicId);
+    const isBlendFlow = topic?.flow === 'blend';
+    const title = $('#screen-phonics-build .game-header h1');
+    const prompt = $('#screen-phonics-build .prompt-box p');
+    const back = $('#btn-back-phonics-build');
+    const poolLabel = $('#screen-phonics-build .build-pool-wrap .section-label');
+    if (title) title.textContent = isBlendFlow ? '動物拼字任務' : '砌一砌';
+    if (prompt) prompt.textContent = isBlendFlow ? '睇圖，逐個音砌出英文' : '拖字母入格';
+    if (back) back.textContent = isBlendFlow ? '← 字卡' : '← 玩法';
+    if (poolLabel) poolLabel.textContent = isBlendFlow ? '音素池' : '字母池';
     showPScreen('build');
+    hidePhonicsRoundFinish('build');
     startPhonicsBuildRound();
   }
 
@@ -671,7 +846,13 @@
     pBusy = false;
     const pool = currentTopicWords();
     if (pool.length < 2) return;
-    const target = pickTarget(pool);
+    const state = ensurePhonicsRound('listen', pool);
+    if (state.completed.length >= PHONICS_ROUND_LENGTH) {
+      showPhonicsRoundFinish('listen');
+      return;
+    }
+    renderPhonicsRoundBar('listen', state);
+    const target = state.plan[state.completed.length];
     const optionCount = Math.min(4, pool.length);
     const options = shuffle([target, ...sampleOthers(pool, target.id, optionCount - 1)]);
     pListenRound = { target, options };
@@ -732,7 +913,11 @@
       pBusy = true;
       btn.classList.add('correct');
       const praise = speakCorrectEnglishOnly(targetWord, isMuted(), () => {
-        setTimeout(() => startPhonicsListenRound(), 450);
+        if (!$('#screen-phonics-listen')?.classList.contains('active')) return;
+        awardPhonicsRoundStar('listen', pListenRound.target, (finished) => {
+          if (finished) showPhonicsRoundFinish('listen');
+          else setTimeout(() => startPhonicsListenRound(), 450);
+        });
       });
       if (fb) {
         fb.textContent = praise;
@@ -760,7 +945,13 @@
     pBusy = false;
     const pool = currentTopicWords().filter((w) => w.emoji);
     if (pool.length < 2) return;
-    const target = pickTarget(pool);
+    const state = ensurePhonicsRound('match', pool);
+    if (state.completed.length >= PHONICS_ROUND_LENGTH) {
+      showPhonicsRoundFinish('match');
+      return;
+    }
+    renderPhonicsRoundBar('match', state);
+    const target = state.plan[state.completed.length];
     const optionCount = Math.min(4, pool.length);
     const options = shuffle([target, ...sampleOthers(pool, target.id, optionCount - 1)]);
     pMatchRound = { target, options };
@@ -808,7 +999,11 @@
       pBusy = true;
       btn.classList.add('correct');
       const praise = speakCorrectEnglishOnly(targetWord, isMuted(), () => {
-        setTimeout(() => startPhonicsMatchRound(), 450);
+        if (!$('#screen-phonics-match')?.classList.contains('active')) return;
+        awardPhonicsRoundStar('match', pMatchRound.target, (finished) => {
+          if (finished) showPhonicsRoundFinish('match');
+          else setTimeout(() => startPhonicsMatchRound(), 450);
+        });
       });
       if (fb) {
         fb.textContent = praise;
@@ -847,7 +1042,10 @@
       if (pBuildPromptTimer) clearTimeout(pBuildPromptTimer);
       pBuildPromptTimer = null;
       stopPhonemeAudio();
-      openPhonicsPlayPick();
+      if (typeof cancelAllSpeech === 'function') cancelAllSpeech();
+      const topic = getPhonicsTopicById(pActiveTopicId);
+      if (topic?.flow === 'blend') openPhonicsLearn(pActiveTopicId, pSoundMissionIndex);
+      else openPhonicsPlayPick();
     };
   }
 
@@ -855,12 +1053,20 @@
     if (pBuildPromptTimer) clearTimeout(pBuildPromptTimer);
     pBuildPromptTimer = null;
     const audioGen = ++pBuildAudioGen;
+    stopPhonemeAudio();
+    if (typeof cancelAllSpeech === 'function') cancelAllSpeech();
     pBusy = false;
     pBuildSelectedKey = null;
     const topic = getPhonicsTopicById(pActiveTopicId);
-    const pool = (topic?.words || []).filter((w) => w.letters);
+    const pool = currentTopicWords().filter((w) => w.letters);
     if (pool.length < 1) return;
-    const target = pickTarget(pool);
+    const state = ensurePhonicsRound('build', pool);
+    if (state.completed.length >= PHONICS_ROUND_LENGTH) {
+      showPhonicsRoundFinish('build');
+      return;
+    }
+    renderPhonicsRoundBar('build', state);
+    const target = state.plan[state.completed.length];
     const chars = target.letters;
     const tiles = makePhonicsBuildTiles(target, topic);
     pBuildRound = {
@@ -913,7 +1119,7 @@
       if (filled) slot.classList.add('is-filled');
       if (i === next) slot.classList.add('is-next');
       slot.dataset.index = String(i);
-      slot.setAttribute('aria-label', filled ? `已放 ${filled.char}` : `第 ${i + 1} 格，淡字母 ${ch}`);
+      slot.setAttribute('aria-label', filled ? `已放 ${filled.char}` : `第 ${i + 1} 格，淡音素 ${ch}`);
       slot.innerHTML = `
         <span class="build-ghost term-en" aria-hidden="true">${ch}</span>
         ${filled ? `<span class="build-placed letter-tile" aria-hidden="true">${letterTileHtml(filled.char)}</span>` : ''}`;
@@ -935,7 +1141,7 @@
       if (pBuildSelectedKey === tile.key) btn.classList.add('is-selected');
       btn.dataset.key = tile.key;
       btn.innerHTML = letterTileHtml(tile.char);
-      btn.setAttribute('aria-label', `letter ${tile.char}`);
+      btn.setAttribute('aria-label', `音素 ${tile.char}`);
       if (!used) {
         let suppressClick = false;
         btn.addEventListener('click', (ev) => {
@@ -1076,9 +1282,17 @@
 
     await placedSound;
     if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
-    await waitMs(280);
+    await waitMs(180);
+    for (let index = 0; index < completedRound.chars.length; index += 1) {
+      if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
+      const slot = $(`#phonics-build-slots .build-slot[data-index="${index}"]`);
+      slot?.classList.add('is-blending');
+      await playLetterSound(completedRound.chars[index], { muted: isMuted() });
+      slot?.classList.remove('is-blending');
+      await waitMs(70);
+    }
     if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
-    await speakEnglishAndWait(word, { muted: isMuted(), rate: 0.82, pitch: 1.05, delayMs: 0 });
+    await speakEnglishAndWait(word, { muted: isMuted(), rate: 0.78, pitch: 1.05, delayMs: 0 });
     if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
     await waitMs(180);
     if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
@@ -1086,7 +1300,11 @@
     await speakEnglishAndWait(praise, { muted: isMuted(), rate: 0.9, pitch: 1.08, delayMs: 80 });
     if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
     await waitMs(450);
-    if (audioGen === pBuildAudioGen && pBuildRound === completedRound) startPhonicsBuildRound();
+    if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
+    awardPhonicsRoundStar('build', completedRound.target, (finished) => {
+      if (finished) showPhonicsRoundFinish('build');
+      else startPhonicsBuildRound();
+    });
   }
 
   function onPhonicsBuildPointerDown(ev, tile, onDragStarted) {

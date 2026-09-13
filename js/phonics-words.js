@@ -60,8 +60,28 @@ const PHONICS_SOUND_MISSIONS = PHONICS_SOUND_SECTIONS.flatMap((section) => secti
 
 const LETTER_REVISION = PHONICS_SOUND_MISSIONS.flatMap((mission) => mission.sounds);
 
-/** 主題：字母溫習排最前；跟住 CVC 詞族；sight words */
+/** 主題：先由有意思的完整單字入手；字母音基地保留作針對性溫習。 */
 const PHONICS_TOPICS = [
+  {
+    id: 'animal_spelling',
+    title: '動物拼字園',
+    blurb: '睇圖 · 聽音 · 逐格砌字 · 10 隻動物',
+    cover: '🐱',
+    flow: 'blend',
+    modes: ['build'],
+    words: [
+      { id: 'animal_cat', word: 'cat', letters: ['c', 'a', 't'], emoji: '🐱', plate: '#1a4d3a' },
+      { id: 'animal_dog', word: 'dog', letters: ['d', 'o', 'g'], emoji: '🐶', plate: '#3a3010' },
+      { id: 'animal_pig', word: 'pig', letters: ['p', 'i', 'g'], emoji: '🐷', plate: '#402030' },
+      { id: 'animal_hen', word: 'hen', letters: ['h', 'e', 'n'], emoji: '🐔', plate: '#3a2818' },
+      { id: 'animal_fox', word: 'fox', letters: ['f', 'o', 'x'], emoji: '🦊', plate: '#402010' },
+      { id: 'animal_bat', word: 'bat', letters: ['b', 'a', 't'], emoji: '🦇', plate: '#1a1a22' },
+      { id: 'animal_rat', word: 'rat', letters: ['r', 'a', 't'], emoji: '🐀', plate: '#2a2a35' },
+      { id: 'animal_fish', word: 'fish', letters: ['f', 'i', 'sh'], emoji: '🐟', plate: '#0f3550' },
+      { id: 'animal_frog', word: 'frog', letters: ['f', 'r', 'o', 'g'], emoji: '🐸', plate: '#143828' },
+      { id: 'animal_duck', word: 'duck', letters: ['d', 'u', 'ck'], emoji: '🦆', plate: '#1a3050' },
+    ],
+  },
   {
     id: 'letters_rev',
     title: '字母音訓練基地',

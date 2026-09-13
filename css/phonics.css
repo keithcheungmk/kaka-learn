@@ -451,6 +451,13 @@
   box-shadow: 0 0 0 4px rgba(124, 255, 178, 0.14), 0 0 18px rgba(124, 255, 178, 0.28);
 }
 
+.build-slot.is-blending .letter-tile .sound-energy-glyph {
+  transform: translateY(-5px) scale(1.07);
+  border-color: var(--gold-soft);
+  color: var(--gold-soft);
+  box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.2), 0 0 30px rgba(251, 191, 36, 0.58);
+}
+
 /* 「先學一學」畫面：拆返出嚟嘅字母排(純展示,幫手建立「音拼埋成詞」概念) */
 .letter-row {
   position: relative;

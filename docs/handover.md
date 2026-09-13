@@ -86,6 +86,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-13 · Codex（Keith：英文 phonics＋拼字融合流程）
+
+- `SPACE RANGER ENGLISH` 以完整單字主題為入口；新增「動物拼字園」10 字，字卡可聽全字及逐個 verified phoneme。
+- 拼字任務支援 tap／drag；每格播放音素，完成後按音素順序連讀、讀完整英文及正面回饋，再由 KAKA Ranger 射星。
+- 每輪固定 10 題／10 星，中途進度按卡卡／禧禧分倉；完整可見瀏覽器測試由 `1/10` 續玩至 `10/10`。
+- iPad Pro 11 直／橫全部一屏；iPhone 16 Pro Max 無重疊、剪裁、404 或 console error。
+- **踩咗** `js/phonics-words.js`、`js/phonics-app.js`、`css/phonics.css`、`scripts/test-phonics-flow.mjs`、`docs/handover.md`
+
 ### 2026-09-12 · Codex（Keith：PTH 第一單元資料層）
 
 - 新增《快樂拼音》低班第一單元資料：聲調、單韻母、b/p/m/f，固定跟教材次序。
