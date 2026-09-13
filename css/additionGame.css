@@ -94,3 +94,24 @@
 @media(max-width:700px){.concrete-math-layout{grid-template-columns:1fr;width:100%;overflow:visible}.concrete-target-card{order:-1;min-height:120px;padding:14px;flex-direction:row;gap:14px}.concrete-target-card strong{font-size:3.5rem}.concrete-target-card span:last-child{font-size:.9rem}.concrete-math-board-column .addition-workspace,.concrete-math-board-column .subtraction-workspace{grid-template-columns:1fr;flex:none}.concrete-math-layout .subtraction-takeaway{min-height:110px;height:auto}}
 @media (min-width:701px) and (orientation:portrait){.concrete-math-layout{grid-template-columns:1fr;width:min(94vw,760px)}.concrete-target-card{order:-1;min-height:150px;flex-direction:row;gap:16px}.concrete-target-card strong{font-size:4rem}.concrete-math-board-column .addition-workspace,.concrete-math-board-column .subtraction-workspace{grid-template-columns:1fr;flex:none}.concrete-math-layout .subtraction-takeaway{min-height:140px;height:auto}}
 @media(max-width:700px),(min-width:701px) and (orientation:portrait){#screen-math-earth-addition-play.active,#screen-math-moon-subtraction-play.active{height:auto;max-height:none;overflow:visible}.addition-stage,.subtraction-stage{flex:none}}
+
+/* 操作區固定分層：白板、備用物件／拿走區、目標卡各自佔位，避免 flex 壓縮造成視覺重疊。 */
+.concrete-math-layout{flex:none;align-items:stretch}
+.concrete-math-board-column{flex:none}
+.concrete-math-board-column .addition-workspace,.concrete-math-board-column .subtraction-workspace{flex:none;min-height:0}
+.concrete-math-board-column .addition-workspace{height:clamp(270px,38vh,390px)}
+.concrete-math-board-column .addition-board,.concrete-math-board-column .subtraction-board{height:100%;display:flex;flex-direction:column}
+.concrete-math-board-column .addition-slot-wrap,.concrete-math-board-column .subtraction-slot-wrap{flex:1;min-height:0}
+.concrete-math-layout .addition-warehouse{flex:none;min-height:96px;margin-top:2px;position:static}
+.concrete-target-answer{width:min(100%,260px);min-height:64px;margin-top:12px}
+.concrete-math-layout + .feedback{min-height:1.5em;margin:4px 12px 8px;text-align:center}
+@media(max-width:700px){
+  .concrete-math-board-column .addition-workspace{height:clamp(220px,38vh,320px)}
+  .concrete-target-card{flex-wrap:wrap}
+  .concrete-target-answer{flex-basis:100%;width:100%;margin-top:2px}
+}
+@media (min-width:701px) and (orientation:portrait){
+  .concrete-math-board-column .addition-workspace{height:clamp(250px,36vh,360px)}
+  .concrete-target-card{flex-wrap:wrap}
+  .concrete-target-answer{flex-basis:100%;width:min(100%,300px);margin-top:2px}
+}
