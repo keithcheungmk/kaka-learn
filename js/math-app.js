@@ -141,6 +141,7 @@
     let timeCorrect = 0;
     let timeMode = 'analog';
     let timeSetSelection = { h: 12, half: false };
+    let timeSetActiveHand = 'hour';
     let marsLearnIndex = 0;
     let shapeBusy = false;
     let shapeRound = null;
@@ -853,6 +854,7 @@
       if (setPanel) setPanel.hidden = timeMode !== 'set';
       if (timeMode === 'set') {
         timeSetSelection = { h: 12, half: false };
+        timeSetActiveHand = 'hour';
         const targetDig = $('#math-time-target-digital');
         if (targetDig) targetDig.innerHTML = `<span class="math-digital-digits">${digitalText(target)}</span>`;
         renderTimeSetFace();
@@ -881,18 +883,22 @@
       if (!face) return;
       const item = clockItem(timeSetSelection.h, timeSetSelection.half);
       face.innerHTML = clockFaceHtml(item);
-      face.setAttribute('aria-label', `${item.say}，按鐘面數字改變短針；再按「回答」`);
+      face.setAttribute('aria-label', `${item.say}，先揀短針或長針，再按鐘面調校；完成後按「回答」`);
       face.onclick = (event) => {
         const rect = face.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
         const angle = (Math.atan2(event.clientY - cy, event.clientX - cx) * 180 / Math.PI + 90 + 360) % 360;
-        const h = Math.max(1, Math.min(12, Math.round(angle / 30) || 12));
-        timeSetSelection = { h, half: false };
+        if (timeSetActiveHand === 'minute') {
+          timeSetSelection.half = angle >= 90 && angle < 270;
+        } else {
+          const h = Math.max(1, Math.min(12, Math.round(angle / 30) || 12));
+          timeSetSelection.h = h;
+        }
         renderTimeSetFace();
       };
-      const toggle = $('#btn-math-time-toggle-half');
-      if (toggle) toggle.textContent = timeSetSelection.half ? '長針：6（半點）' : '長針：12（整點）';
+      $('#btn-math-time-hand-hour')?.classList.toggle('is-active', timeSetActiveHand === 'hour');
+      $('#btn-math-time-hand-minute')?.classList.toggle('is-active', timeSetActiveHand === 'minute');
     }
 
     function onTimeSetAnswer() {
@@ -1229,11 +1235,8 @@
         if (timeRound) speak(`幾點？${timeRound.target.say}`);
       });
       $('#btn-math-time-set-answer')?.addEventListener('click', onTimeSetAnswer);
-      $('#btn-math-time-toggle-half')?.addEventListener('click', () => {
-        if (timeMode !== 'set' || timeBusy) return;
-        timeSetSelection.half = !timeSetSelection.half;
-        renderTimeSetFace();
-      });
+      $('#btn-math-time-hand-hour')?.addEventListener('click', () => { if (timeMode === 'set' && !timeBusy) { timeSetActiveHand = 'hour'; renderTimeSetFace(); } });
+      $('#btn-math-time-hand-minute')?.addEventListener('click', () => { if (timeMode === 'set' && !timeBusy) { timeSetActiveHand = 'minute'; renderTimeSetFace(); } });
 
       $('#btn-back-math-mars-learn')?.addEventListener('click', () => openGalaxy());
       $('#math-mars-learn-tap')?.addEventListener('click', () => speakMarsLearn());

@@ -849,7 +849,10 @@
         <div class="math-digital-clock" id="math-time-target-digital" aria-label="目標電子時間"></div>
         <p class="math-time-set-hint">喺圓鐘上面點擊數字，揀返相同時間</p>
         <div class="math-time-set-face" id="math-time-set-face" role="application" aria-label="選擇鐘面時間"></div>
-        <button type="button" class="btn btn-secondary math-time-toggle" id="btn-math-time-toggle-half">長針：12（整點）</button>
+        <div class="math-time-hand-controls" role="group" aria-label="選擇要調校嘅指針">
+          <button type="button" class="btn btn-secondary is-active" id="btn-math-time-hand-hour">轉短針</button>
+          <button type="button" class="btn btn-secondary" id="btn-math-time-hand-minute">轉長針</button>
+        </div>
         <button type="button" class="btn" id="btn-math-time-set-answer">回答</button>
       </div>
       <div class="math-clock-grid" id="math-time-options" aria-label="揀時間"></div>

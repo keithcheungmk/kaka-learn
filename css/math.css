@@ -1559,6 +1559,9 @@
 .math-time-set-face { width: clamp(190px, 42vw, 260px); aspect-ratio: 1; cursor: pointer; touch-action: manipulation; }
 .math-time-set-face .math-clock-face { width: 100%; height: 100%; }
 .math-time-toggle { min-height: 44px; }
+.math-time-hand-controls { display: flex; gap: 10px; justify-content: center; }
+.math-time-hand-controls .btn { min-height: 44px; min-width: 120px; }
+.math-time-hand-controls .btn.is-active { background: #fbbf24; color: #0b1b36; box-shadow: 0 0 0 3px rgba(253,230,138,.45); }
 #btn-math-time-set-answer { min-height: 48px; min-width: 150px; }
 
 @media (max-width: 700px) {
