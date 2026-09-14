@@ -140,6 +140,7 @@
     let timeRound = null;
     let timeCorrect = 0;
     let timeMode = 'analog';
+    let timeSetSelection = { h: 12, half: false };
     let marsLearnIndex = 0;
     let shapeBusy = false;
     let shapeRound = null;
@@ -819,11 +820,11 @@
     }
 
     function openTimeQuiz(mode) {
-      timeMode = mode === 'digital' ? 'digital' : 'analog';
+      timeMode = mode === 'digital' ? 'digital' : mode === 'set' ? 'set' : 'analog';
       timeBusy = false;
       timeCorrect = 0;
       const title = $('#math-time-title');
-      if (title) title.textContent = timeMode === 'digital' ? '揀電子鐘' : '揀鐘面';
+      if (title) title.textContent = timeMode === 'digital' ? '揀電子鐘' : timeMode === 'set' ? '轉圓鐘' : '揀鐘面';
       updateTimeProgress();
       nextTimeRound(true);
       showMathScreen('time');
@@ -842,14 +843,22 @@
 
       const prompt = $('#math-time-prompt');
       if (prompt) {
-        prompt.textContent =
-          timeMode === 'digital' ? '聽完揀正確嘅電子鐘' : '聽完揀正確嘅鐘面';
+        prompt.textContent = timeMode === 'set' ? '睇電子鐘，再轉圓鐘揀返相同時間' : timeMode === 'digital' ? '聽完揀正確嘅電子鐘' : '聽完揀正確嘅鐘面';
       }
       const fb = $('#math-time-feedback');
       if (fb) fb.textContent = '';
 
       const box = $('#math-time-options');
-      if (box) {
+      const setPanel = $('#math-time-set');
+      if (setPanel) setPanel.hidden = timeMode !== 'set';
+      if (timeMode === 'set') {
+        timeSetSelection = { h: 12, half: false };
+        const targetDig = $('#math-time-target-digital');
+        if (targetDig) targetDig.innerHTML = `<span class="math-digital-digits">${digitalText(target)}</span>`;
+        renderTimeSetFace();
+        if (box) box.innerHTML = '';
+      }
+      if (box && timeMode !== 'set') {
         box.innerHTML = '';
         options.forEach((c) => {
           const btn = document.createElement('button');
@@ -865,6 +874,31 @@
         });
       }
       if (autoSpeak) speak(`幾點？${target.say}`);
+    }
+
+    function renderTimeSetFace() {
+      const face = $('#math-time-set-face');
+      if (!face) return;
+      const item = clockItem(timeSetSelection.h, timeSetSelection.half);
+      face.innerHTML = clockFaceHtml(item);
+      face.setAttribute('aria-label', `${item.say}，按鐘面數字改變短針；再按「回答」`);
+      face.onclick = (event) => {
+        const rect = face.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const angle = (Math.atan2(event.clientY - cy, event.clientX - cx) * 180 / Math.PI + 90 + 360) % 360;
+        const h = Math.max(1, Math.min(12, Math.round(angle / 30) || 12));
+        timeSetSelection = { h, half: false };
+        renderTimeSetFace();
+      };
+      const toggle = $('#btn-math-time-toggle-half');
+      if (toggle) toggle.textContent = timeSetSelection.half ? '長針：6（半點）' : '長針：12（整點）';
+    }
+
+    function onTimeSetAnswer() {
+      if (timeBusy || !timeRound || timeMode !== 'set') return;
+      const chosen = clockItem(timeSetSelection.h, timeSetSelection.half);
+      onTimePick(chosen.id, $('#btn-math-time-set-answer'));
     }
 
     function onTimePick(id, btn) {
@@ -1188,10 +1222,17 @@
       $('#btn-back-math-venus-play')?.addEventListener('click', () => openVenusLearn());
       $('#btn-math-mode-time-analog')?.addEventListener('click', () => openTimeQuiz('analog'));
       $('#btn-math-mode-time-digital')?.addEventListener('click', () => openTimeQuiz('digital'));
+      $('#btn-math-mode-time-set')?.addEventListener('click', () => openTimeQuiz('set'));
 
       $('#btn-back-math-time')?.addEventListener('click', () => openVenusPlay());
       $('#btn-math-time-speak')?.addEventListener('click', () => {
         if (timeRound) speak(`幾點？${timeRound.target.say}`);
+      });
+      $('#btn-math-time-set-answer')?.addEventListener('click', onTimeSetAnswer);
+      $('#btn-math-time-toggle-half')?.addEventListener('click', () => {
+        if (timeMode !== 'set' || timeBusy) return;
+        timeSetSelection.half = !timeSetSelection.half;
+        renderTimeSetFace();
       });
 
       $('#btn-back-math-mars-learn')?.addEventListener('click', () => openGalaxy());
