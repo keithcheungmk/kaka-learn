@@ -16,7 +16,7 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SOURCE = ROOT / "mama phonic recording"
+DEFAULT_SOURCE = ROOT / "source-materials" / "Phonics" / "mama phonic recording"
 DESTINATION = ROOT / "assets" / "phonemes"
 SOUNDS = (
     *tuple("abcdefghijklmnoprstuvwxyz"),

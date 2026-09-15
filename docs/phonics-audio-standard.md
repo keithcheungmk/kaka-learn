@@ -57,7 +57,7 @@ Kaka Learn 採用 Open Source Phonics 的發音教學方法作為錄音標準，
 
 ## 錄音及安裝流程
 
-1. 原始母帶放在 repo 根目錄的 `mama phonic recording/`；此資料夾永不修改、提交或部署。
+1. 原始母帶放在 `source-materials/Phonics/mama phonic recording/`；此資料夾永不修改、提交或部署。
 2. 每個原檔包含三次讀音，匯入器自動選取中間一次，保留少量起落緩衝並統一音量。
 3. 預覽檢查：`python3 scripts/import-phonemes.py --ffmpeg /path/to/ffmpeg`
 4. 安裝網站副本：在上述命令加 `--install`；只會寫入 `assets/phonemes/`。

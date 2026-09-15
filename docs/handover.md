@@ -255,7 +255,7 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ### 2026-09-05 · Codex（Keith：媽媽 49 音錄音＋Phonics 聲音訓練基地）
 
-- 保留 `mama phonic recording/` 49 個原始 MP3 完全不變並排除 Git／部署；網站只使用另外產生的副本
+- 保留 `source-materials/Phonics/mama phonic recording/` 49 個原始 MP3 完全不變並排除 Git／部署；網站只使用另外產生的副本
 - 匯入器由每個三次讀音原檔選取中間一次，保留起落緩衝、統一音量並壓成 44.1kHz 單聲道 96kbps；49 個網站副本合共約 464KB
 - 「字母音訓練基地」分成 10 個循序 Sound Missions，涵蓋單字母、雙字母及三字母音；每組可先逐音溫習，再做聽音辨形
 - 移除音檔失敗時讀字母名稱的 TTS fallback，避免把 letter name 當 phoneme；音素能力紀錄繼續按 Profile 分倉

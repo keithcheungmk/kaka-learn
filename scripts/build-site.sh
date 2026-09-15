@@ -17,7 +17,7 @@ tar -cf - \
   --exclude='./.cursor' \
   --exclude='./docs' \
   --exclude='./scripts' \
-  --exclude='./mama phonic recording' \
+  --exclude='./source-materials' \
   --exclude="./${OUT#./}" \
   --exclude='./_site' \
   --exclude='./AGENTS.md' \
