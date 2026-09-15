@@ -884,19 +884,29 @@
       const item = clockItem(timeSetSelection.h, timeSetSelection.half);
       face.innerHTML = clockFaceHtml(item);
       face.setAttribute('aria-label', `${item.say}，先揀短針或長針，再按鐘面調校；完成後按「回答」`);
-      face.onclick = (event) => {
+      const updateFromPoint = (clientX, clientY) => {
         const rect = face.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
-        const angle = (Math.atan2(event.clientY - cy, event.clientX - cx) * 180 / Math.PI + 90 + 360) % 360;
+        const angle = (Math.atan2(clientY - cy, clientX - cx) * 180 / Math.PI + 90 + 360) % 360;
         if (timeSetActiveHand === 'minute') {
           timeSetSelection.half = angle >= 90 && angle < 270;
         } else {
           const h = Math.max(1, Math.min(12, Math.round(angle / 30) || 12));
           timeSetSelection.h = h;
         }
-        renderTimeSetFace();
+        const hour = face.querySelector('.math-clock-hand--hour');
+        const minute = face.querySelector('.math-clock-hand--min');
+        if (hour) hour.style.transform = `translateX(-50%) rotate(${((timeSetSelection.h % 12) + (timeSetSelection.half ? 0.5 : 0)) * 30}deg)`;
+        if (minute) minute.style.transform = `translateX(-50%) rotate(${timeSetSelection.half ? 180 : 0}deg)`;
+        face.setAttribute('aria-label', `${clockItem(timeSetSelection.h, timeSetSelection.half).say}，先揀短針或長針，再按鐘面調校；完成後按「回答」`);
       };
+      let dragging = false;
+      face.onpointerdown = (event) => { dragging = true; face.setPointerCapture?.(event.pointerId); event.preventDefault(); updateFromPoint(event.clientX, event.clientY); };
+      face.onpointermove = (event) => { if (dragging) updateFromPoint(event.clientX, event.clientY); };
+      face.onpointerup = () => { dragging = false; };
+      face.onpointercancel = () => { dragging = false; };
+      face.onclick = (event) => updateFromPoint(event.clientX, event.clientY);
       $('#btn-math-time-hand-hour')?.classList.toggle('is-active', timeSetActiveHand === 'hour');
       $('#btn-math-time-hand-minute')?.classList.toggle('is-active', timeSetActiveHand === 'minute');
     }
