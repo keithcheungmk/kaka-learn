@@ -47,8 +47,15 @@
   const phonemeAudioByLetter = Object.create(null);
   let activePhonemeAudio = null;
   let phonemeWaitTimer = null;
-  /** Bump when replacing phoneme MP3s so iPad／Safari 唔用舊 cache。 */
-  const PHONEME_ASSET_VERSION = '20260905mama';
+  /** Bump when replacing phoneme assets so iPad／Safari 唔用舊 cache。 */
+  const PHONEME_ASSET_VERSION = '20260916-recorded-rimes';
+
+  /** Keith 的真人實錄；ow-snow 與 cow／owl 的 ow 分開，避免教錯音。 */
+  const RECORDED_PHONEME_FILES = new Map([
+    ['a_e', 'a_e'], ['i_e', 'i_e'], ['ee', 'ee'], ['igh', 'igh'],
+    ['ow-snow', 'ow-snow'], ['ar', 'ar'], ['or', 'or'], ['ice', 'ice'],
+    ['ike', 'ike'], ['ide', 'ide'],
+  ]);
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -65,7 +72,7 @@
     ...'abcdefghijklmnoprstuvwxyz',
     'qu', 'ck', 'ff', 'll', 'ss', 'zz', 'ch', 'sh', 'th', 'ng',
     'ai', 'ee', 'igh', 'oa', 'oo-long', 'oo-short', 'ar', 'or', 'ur',
-    'ow', 'oi', 'ear', 'air', 'er',
+    'ow', 'oi', 'ear', 'air', 'er', 'a_e', 'i_e', 'ice', 'ike', 'ide', 'ow-snow',
   ]);
 
   function normalizePhoneme(ch) {
@@ -73,6 +80,12 @@
       .trim()
       .toLowerCase();
     return PHONEME_FILES.has(s) ? s : '';
+  }
+
+  function phonemeAudioUrl(ch) {
+    const recordedFile = RECORDED_PHONEME_FILES.get(ch);
+    if (recordedFile) return `./assets/phonemes/recorded/${recordedFile}.m4a?v=${PHONEME_ASSET_VERSION}`;
+    return `./assets/phonemes/${ch}.mp3?v=${PHONEME_ASSET_VERSION}`;
   }
 
   function stopPhonemeAudio() {
@@ -118,7 +131,7 @@
 
     let audio = phonemeAudioByLetter[ch];
     if (!audio) {
-      audio = new Audio(`./assets/phonemes/${ch}.mp3?v=${PHONEME_ASSET_VERSION}`);
+      audio = new Audio(phonemeAudioUrl(ch));
       audio.preload = 'auto';
       phonemeAudioByLetter[ch] = audio;
     }
@@ -554,6 +567,7 @@
   function soundDisplay(sound) {
     if (sound === 'oo-long') return { glyph: 'oo', note: '長音' };
     if (sound === 'oo-short') return { glyph: 'oo', note: '短音' };
+    if (sound === 'ow-snow') return { glyph: 'ow', note: 'snow 的音' };
     return { glyph: sound, note: '' };
   }
 
@@ -667,18 +681,22 @@
     const isLetter = typeof isLetterItem === 'function' ? isLetterItem(word) : word.kind === 'letter';
 
     if (isLetter) {
+      const display = soundDisplay(word.word);
       if (illust) {
-        illust.innerHTML = `<span class="letter-tile letter-tile-lg" aria-hidden="true">${letterTileHtml(word.word)}</span>`;
+        illust.innerHTML = `<span class="letter-tile letter-tile-lg" aria-hidden="true">${letterTileHtml(display.glyph)}</span>`;
       }
-      if (term) term.textContent = word.word;
+      if (term) term.textContent = display.glyph;
       if (lettersRow) lettersRow.innerHTML = '';
-      if (lead) lead.textContent = '先聽熟每個音，再玩聽音辨形';
+      if (lead) lead.textContent = display.note
+        ? `先聽 ${display.note}，再玩聽音辨形`
+        : '先聽熟每個音，再玩聽音辨形';
     } else {
       if (illust) illust.innerHTML = word.emoji ? phonicsWordIllustHtml(word) : '';
       if (term) term.textContent = word.word;
       if (lettersRow) {
-        lettersRow.innerHTML = word.letters
-          ? word.letters
+        const soundChunks = word.soundChunks || word.letters;
+        lettersRow.innerHTML = soundChunks
+          ? soundChunks
               .map(
                 (ch) =>
                   `<button type="button" class="letter-tile" data-letter="${ch}" aria-label="播放 ${ch} 音">${letterTileHtml(ch)}</button>`,
