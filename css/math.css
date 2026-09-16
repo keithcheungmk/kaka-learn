@@ -442,6 +442,20 @@
 .math-galaxy-card.planet-moon { border-color: rgba(196, 181, 253, .72); }
 .math-galaxy-card.planet-shape { border-color: rgba(251, 146, 60, .72); }
 
+/* Landscape game screens can use the full iPad canvas instead of the
+   narrow desktop content cap. */
+@media (min-width: 701px) and (orientation: landscape) {
+  #app:has(.math-screen.active) { max-width: 1400px; }
+  #screen-math-time.math-screen.active { min-height: 0; }
+  #screen-math-time .math-time-set { width: min(100%, 980px); grid-template-columns: 180px minmax(280px, 360px) 1fr; align-items: center; text-align: left; }
+  #screen-math-time .math-time-set-label { grid-column: 1; }
+  #screen-math-time .math-time-set .math-digital-clock { grid-column: 1; grid-row: 2; }
+  #screen-math-time .math-time-set-hint { grid-column: 3; grid-row: 2; }
+  #screen-math-time .math-time-set-face { grid-column: 2; grid-row: 1 / span 4; width: clamp(280px, 27vw, 360px); }
+  #screen-math-time .math-time-hand-controls { grid-column: 3; grid-row: 3; justify-content: flex-start; }
+  #screen-math-time #btn-math-time-set-answer { grid-column: 3; grid-row: 4; justify-self: start; }
+}
+
 .math-lit-badge {
   margin: 0;
   font-family: var(--font-display);

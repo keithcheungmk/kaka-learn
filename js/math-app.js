@@ -40,20 +40,22 @@
     const LEARN_COUNTS = [1, 2, 3, 4, 5];
     const LIT_TARGET = 10;
 
-    /** 時間資料：id = "h-00" 整點／"h-30" 半點（1–12） */
+    /** 時間資料：每 5 分鐘一格（1–12 點），支援完整鐘面練習。 */
     const ZH_HOUR = ['十二', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一'];
-    function clockItem(h, half) {
+    function clockItem(h, halfOrMinute) {
+      const minute = typeof halfOrMinute === 'number' ? halfOrMinute : (halfOrMinute ? 30 : 0);
       const zh = ZH_HOUR[h % 12];
       return {
-        id: `${h}-${half ? '30' : '00'}`,
+        id: `${h}-${String(minute).padStart(2, '0')}`,
         h,
-        half: !!half,
-        say: half ? `${zh}點半` : `${zh}點鐘`,
+        minute,
+        half: minute === 30,
+        say: minute === 0 ? `${zh}點鐘` : minute === 30 ? `${zh}點半` : `${zh}點${minute}分`,
       };
     }
     const CLOCK_ITEMS = [];
     for (let h = 1; h <= 12; h += 1) {
-      CLOCK_ITEMS.push(clockItem(h, false), clockItem(h, true));
+      for (let minute = 0; minute < 60; minute += 5) CLOCK_ITEMS.push(clockItem(h, minute));
     }
 
     /** 先學：模擬鐘 + 電子鐘（整點／半點） */
@@ -140,7 +142,7 @@
     let timeRound = null;
     let timeCorrect = 0;
     let timeMode = 'analog';
-    let timeSetSelection = { h: 12, half: false };
+    let timeSetSelection = { h: 12, minute: 0 };
     let timeSetActiveHand = 'hour';
     let marsLearnIndex = 0;
     let shapeBusy = false;
@@ -199,8 +201,9 @@
 
     /** 原創幼齡鐘面：純 CSS 畫（全部 1–12 數字＋兩支針），唔用外部圖 */
     function clockFaceHtml(item, { small = false } = {}) {
-      const hourAng = ((item.h % 12) + (item.half ? 0.5 : 0)) * 30;
-      const minAng = item.half ? 180 : 0;
+      const minute = Number.isFinite(item.minute) ? item.minute : (item.half ? 30 : 0);
+      const hourAng = ((item.h % 12) + minute / 60) * 30;
+      const minAng = minute * 6;
       const hourLabels = [
         { h: 12, ang: 0 },
         { h: 1, ang: 30 },
@@ -238,7 +241,8 @@
     }
 
     function digitalText(item) {
-      return `${item.h}:${item.half ? '30' : '00'}`;
+      const minute = Number.isFinite(item.minute) ? item.minute : (item.half ? 30 : 0);
+      return `${item.h}:${String(minute).padStart(2, '0')}`;
     }
 
     function digitalClockHtml(item, { small = false } = {}) {
@@ -853,7 +857,7 @@
       const setPanel = $('#math-time-set');
       if (setPanel) setPanel.hidden = timeMode !== 'set';
       if (timeMode === 'set') {
-        timeSetSelection = { h: 12, half: false };
+        timeSetSelection = { h: 12, minute: 0 };
         timeSetActiveHand = 'hour';
         const targetDig = $('#math-time-target-digital');
         if (targetDig) targetDig.innerHTML = `<span class="math-digital-digits">${digitalText(target)}</span>`;
@@ -881,7 +885,7 @@
     function renderTimeSetFace() {
       const face = $('#math-time-set-face');
       if (!face) return;
-      const item = clockItem(timeSetSelection.h, timeSetSelection.half);
+      const item = clockItem(timeSetSelection.h, timeSetSelection.minute);
       face.innerHTML = clockFaceHtml(item);
       face.setAttribute('aria-label', `${item.say}，先揀短針或長針，再按鐘面調校；完成後按「回答」`);
       const updateFromPoint = (clientX, clientY) => {
@@ -890,16 +894,16 @@
         const cy = rect.top + rect.height / 2;
         const angle = (Math.atan2(clientY - cy, clientX - cx) * 180 / Math.PI + 90 + 360) % 360;
         if (timeSetActiveHand === 'minute') {
-          timeSetSelection.half = angle >= 90 && angle < 270;
+          timeSetSelection.minute = Math.round(angle / 30) * 5 % 60;
         } else {
           const h = Math.max(1, Math.min(12, Math.round(angle / 30) || 12));
           timeSetSelection.h = h;
         }
         const hour = face.querySelector('.math-clock-hand--hour');
         const minute = face.querySelector('.math-clock-hand--min');
-        if (hour) hour.style.transform = `translateX(-50%) rotate(${((timeSetSelection.h % 12) + (timeSetSelection.half ? 0.5 : 0)) * 30}deg)`;
-        if (minute) minute.style.transform = `translateX(-50%) rotate(${timeSetSelection.half ? 180 : 0}deg)`;
-        face.setAttribute('aria-label', `${clockItem(timeSetSelection.h, timeSetSelection.half).say}，先揀短針或長針，再按鐘面調校；完成後按「回答」`);
+        if (hour) hour.style.transform = `translateX(-50%) rotate(${((timeSetSelection.h % 12) + timeSetSelection.minute / 60) * 30}deg)`;
+        if (minute) minute.style.transform = `translateX(-50%) rotate(${timeSetSelection.minute * 6}deg)`;
+        face.setAttribute('aria-label', `${clockItem(timeSetSelection.h, timeSetSelection.minute).say}，先揀短針或長針，再按鐘面調校；完成後按「回答」`);
       };
       let dragging = false;
       face.onpointerdown = (event) => { dragging = true; face.setPointerCapture?.(event.pointerId); event.preventDefault(); updateFromPoint(event.clientX, event.clientY); };
@@ -913,7 +917,7 @@
 
     function onTimeSetAnswer() {
       if (timeBusy || !timeRound || timeMode !== 'set') return;
-      const chosen = clockItem(timeSetSelection.h, timeSetSelection.half);
+      const chosen = clockItem(timeSetSelection.h, timeSetSelection.minute);
       onTimePick(chosen.id, $('#btn-math-time-set-answer'));
     }
 
