@@ -93,6 +93,26 @@ function spellingTopic({ id, title, titleEn, blurb, cover, parentId = null, word
   };
 }
 
+function sightWordTopic({ id, title, titleEn, blurb, cover, words, plate = '#1a3050' }) {
+  return {
+    id,
+    title,
+    titleEn,
+    blurb,
+    cover,
+    section: 'sight',
+    flow: 'blend',
+    modes: ['build'],
+    words: words.map(([word, emoji], index) => ({
+      id: `${id}_${index}`,
+      word,
+      letters: Array.from(word),
+      emoji,
+      plate,
+    })),
+  };
+}
+
 const HK_FESTIVAL_TOPICS = [
   spellingTopic({
     id: 'festival_christmas', title: '聖誕節', titleEn: 'Christmas', blurb: '10 個聖誕英文詞語', cover: '🎄', parentId: 'hk_festivals',
@@ -209,6 +229,41 @@ const PHONICS_TOPICS = [
   {
     id: 'hk_festivals', title: '香港節日', titleEn: 'Hong Kong Festivals', blurb: '5 個節日 · 50 個主題詞語', cover: '🎉', section: 'sight', collections: HK_FESTIVAL_TOPICS,
   },
+  sightWordTopic({
+    id: 'sight_body', title: '身體部位', titleEn: 'My Body', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 個身體部位', cover: '👀',
+    words: [
+      ['eye', '👀'], ['ear', '👂'], ['nose', '👃'], ['mouth', '👄'], ['head', '🗣️'], ['hair', '💇'],
+      ['face', '🙂'], ['hand', '✋'], ['arm', '💪'], ['leg', '🦵'], ['foot', '🦶'], ['tooth', '🦷'],
+    ],
+  }),
+  sightWordTopic({
+    id: 'sight_feelings', title: '情緒與感受', titleEn: 'Feelings', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 個感受詞語', cover: '😊', plate: '#402030',
+    words: [
+      ['happy', '😊'], ['sad', '😢'], ['angry', '😠'], ['scared', '😨'], ['excited', '😊'], ['shy', '🙂'],
+      ['tired', '😴'], ['hungry', '😋'], ['thirsty', '🥤'], ['hot', '🥵'], ['cold', '🥶'], ['hurt', '😢'],
+    ],
+  }),
+  sightWordTopic({
+    id: 'sight_clothes', title: '衣物', titleEn: 'Clothes', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 件衣物', cover: '👕', plate: '#2a1840',
+    words: [
+      ['shirt', '👕'], ['pants', '👖'], ['dress', '👗'], ['skirt', '👗'], ['shoes', '👟'], ['socks', '🧦'],
+      ['hat', '🧢'], ['coat', '🧣'], ['jacket', '👕'], ['scarf', '🧣'], ['gloves', '🧤'], ['shorts', '👖'],
+    ],
+  }),
+  sightWordTopic({
+    id: 'sight_family_people', title: '家庭與身邊的人', titleEn: 'Family & People', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 個人物詞語', cover: '👨‍👩‍👧‍👦', plate: '#1a3050',
+    words: [
+      ['dad', '👨'], ['mum', '👩'], ['brother', '👦'], ['sister', '👧'], ['baby', '👶'], ['grandpa', '👴'],
+      ['grandma', '👵'], ['friend', '🧑‍🤝‍🧑'], ['teacher', '🧑‍🏫'], ['doctor', '🧑‍⚕️'], ['police', '👮'], ['driver', '🧑‍✈️'],
+    ],
+  }),
+  sightWordTopic({
+    id: 'sight_weather', title: '天氣', titleEn: 'Weather', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 個天氣詞語', cover: '🌈', plate: '#0f3550',
+    words: [
+      ['sunny', '☀️'], ['cloudy', '☁️'], ['rainy', '🌧️'], ['windy', '💨'], ['stormy', '🌧️'], ['hot', '🥵'],
+      ['cold', '🥶'], ['snowy', '❄️'], ['rain', '🌧️'], ['snow', '❄️'], ['rainbow', '🌈'], ['umbrella', '☂️'],
+    ],
+  }),
   {
     id: 'letters_rev',
     title: '字母音訓練基地',

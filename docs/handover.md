@@ -86,6 +86,12 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-16 · Codex（Keith：Sight Words 五個生活主題）
+
+- Sight Words 新增 My Body、Feelings、Clothes、Family & People、Weather 五個主題，每個主題 12 個完整英文詞及圖像。
+- 五個主題沿用現有「睇圖 · 聽音 · 逐格砌字」玩法，並保留中英文卡片標題；新增圖示均通過 OpenMoji 資產檢查。
+- **踩咗** `js/phonics-words.js`、`docs/handover.md`
+
 ### 2026-09-16 · Codex（Keith：Sight Words 主題雙語標題）
 
 - Sight Words 主題卡補上英文副標題：Animal Spelling Zoo、Food、Vegetables、Places、Vehicles、Fruit、Household Items、School Items、Hong Kong Festivals。
