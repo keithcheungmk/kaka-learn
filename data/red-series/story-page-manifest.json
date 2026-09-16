@@ -2,6 +2,9 @@
   "series": "red_series",
   "purpose": "十本紅輯故事頁展示資產；圖片由 source-materials/Chinese book scans/ 逐頁轉製，未改原檔",
   "pageRule": "每本取 PDF 第 4 頁作首批真實故事頁；同一頁可重用於五輪測驗。頁碼以 PDF 1 起計。",
+  "preferredAssetRoot": "assets/book-scenes/red-series-pages-hq/",
+  "preferredAssetFormat": "webp",
+  "preferredAssetRule": "以每個 item 的 image 檔名替換根目錄及副檔名：red-series-pages/<basename>.jpg → red-series-pages-hq/<basename>.webp；舊 image 欄位保留作 fallback。",
   "textRule": "OCR 未作為可靠來源；故事句子留空，遊戲只可重用對應 book-cards 內已核實詞語，唔可由圖片推測完整句子。",
   "pages": [
     {"book":"rb_yusan","title":"雨傘","pdf":"book-scans/雨傘.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages/雨傘-p4.jpg","sentence":null,"terms":[]}]},

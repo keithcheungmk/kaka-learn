@@ -31,7 +31,7 @@ body { margin: 0; min-height: 100dvh; background: radial-gradient(circle at 10% 
 .scene-board { position: relative; isolation: isolate; overflow: hidden; max-width: 950px; margin: auto; border: 5px solid #e9eefb; border-radius: 20px; background: #fff; aspect-ratio: var(--scene-aspect, 1.7); }
 .scene-board img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .scene-pdf-preview { display: block; width: 100%; height: 100%; border: 0; background: #fff; }
-.scene-preview-badge { position: absolute; z-index: 3; top: 10px; left: 10px; padding: 6px 10px; border: 1px solid #ffd54a; border-radius: 999px; background: #111a44e8; color: #fff1a0; font-size: clamp(.7rem, 1.6vw, .9rem); font-weight: 900; }
+.scene-preview-badge { position: absolute; z-index: 3; right: 10px; bottom: 10px; padding: 6px 10px; border: 1px solid #ffd54a; border-radius: 999px; background: #111a44e8; color: #fff1a0; font-size: clamp(.7rem, 1.6vw, .9rem); font-weight: 900; }
 .scene-neutral-preview { display: grid; place-items: center; align-content: center; gap: 12px; width: 100%; height: 100%; background: radial-gradient(circle, #244780, #132858 70%); color: var(--scene-gold); }
 .scene-neutral-preview span { font-size: clamp(4rem, 12vw, 8rem); filter: drop-shadow(0 8px 12px #0006); }
 .scene-neutral-preview small { padding: 7px 12px; border: 1px solid var(--scene-gold); border-radius: 999px; color: #fff1a0; font-size: clamp(.78rem, 1.8vw, 1rem); font-weight: 900; }
