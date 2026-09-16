@@ -86,6 +86,12 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-16 · Codex（Keith：Sight Words 主題雙語標題）
+
+- Sight Words 主題卡補上英文副標題：Animal Spelling Zoo、Food、Vegetables、Places、Vehicles、Fruit、Household Items、School Items、Hong Kong Festivals。
+- 香港節日五個子主題同步補回中文名稱，英文名稱保留於第二行；Phonics 下半部維持原本顯示。
+- **踩咗** `js/phonics-words.js`、`js/phonics-app.js`、`css/phonics.css`、`docs/handover.md`
+
 ### 2026-09-16 · Codex（Keith：Carter Family Read & Fill）
 
 - 移除獨立 Story Mission 的揀圖、揀答案、完整砌句和理解題；`Game Night` 現在只保留一條 `Read & Fill` 流程。

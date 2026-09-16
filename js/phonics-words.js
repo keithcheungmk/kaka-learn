@@ -79,10 +79,11 @@ function spellingItem(id, word, emoji, plate) {
   };
 }
 
-function spellingTopic({ id, title, blurb, cover, parentId = null, words }) {
+function spellingTopic({ id, title, titleEn, blurb, cover, parentId = null, words }) {
   return {
     id,
     title,
+    titleEn: titleEn || title,
     blurb,
     cover,
     parentId,
@@ -94,35 +95,35 @@ function spellingTopic({ id, title, blurb, cover, parentId = null, words }) {
 
 const HK_FESTIVAL_TOPICS = [
   spellingTopic({
-    id: 'festival_christmas', title: 'Christmas', blurb: '10 個聖誕英文詞語', cover: '🎄', parentId: 'hk_festivals',
+    id: 'festival_christmas', title: '聖誕節', titleEn: 'Christmas', blurb: '10 個聖誕英文詞語', cover: '🎄', parentId: 'hk_festivals',
     words: [
       ['Santa Claus', '🎅', '#401018'], ['reindeer', '🦌', '#3a2818'], ['sleigh', '🛷', '#1a3050'], ['stocking', '🧦', '#401018'], ['present', '🎁', '#2a1840'],
       ['tree', '🎄', '#143828'], ['ornament', '🔴', '#401018'], ['gingerbread', '🍪', '#3a2818'], ['snowman', '☃️', '#1a3050'], ['bell', '🔔', '#3a3010'],
     ],
   }),
   spellingTopic({
-    id: 'festival_lunar_new_year', title: 'Lunar New Year', blurb: '10 個農曆新年英文詞語', cover: '🧧', parentId: 'hk_festivals',
+    id: 'festival_lunar_new_year', title: '農曆新年', titleEn: 'Lunar New Year', blurb: '10 個農曆新年英文詞語', cover: '🧧', parentId: 'hk_festivals',
     words: [
       ['red packet', '🧧', '#401018'], ['lion dance', '🦁', '#3a2818'], ['firecracker', '🧨', '#401018'], ['tangerine', '🍊', '#3a3010'], ['blossom', '🌸', '#402030'],
       ['couplet', '📜', '#401018'], ['lucky', '🍀', '#143828'], ['family', '👨‍👩‍👧‍👦', '#1a3050'], ['feast', '🍲', '#3a2818'], ['New Year', '🎊', '#401018'],
     ],
   }),
   spellingTopic({
-    id: 'festival_mid_autumn', title: 'Mid-Autumn Festival', blurb: '10 個中秋節英文詞語', cover: '🥮', parentId: 'hk_festivals',
+    id: 'festival_mid_autumn', title: '中秋節', titleEn: 'Mid-Autumn Festival', blurb: '10 個中秋節英文詞語', cover: '🥮', parentId: 'hk_festivals',
     words: [
       ['mooncake', '🥮', '#3a2818'], ['moon', '🌕', '#1a3050'], ['rabbit', '🐇', '#3a2418'], ['lantern', '🏮', '#401018'], ['pomelo', '🍊', '#3a3010'],
       ['tea', '🍵', '#143828'], ['cloud', '☁️', '#1a3050'], ['sky', '🌌', '#1a2a4a'], ['night', '🌃', '#1a2a4a'], ['harvest', '🌾', '#3a3010'],
     ],
   }),
   spellingTopic({
-    id: 'festival_dragon_boat', title: 'Dragon Boat Festival', blurb: '10 個端午節英文詞語', cover: '🐉', parentId: 'hk_festivals',
+    id: 'festival_dragon_boat', title: '端午節', titleEn: 'Dragon Boat Festival', blurb: '10 個端午節英文詞語', cover: '🐉', parentId: 'hk_festivals',
     words: [
       ['dragon boat', '🐉', '#143828'], ['dumpling', '🥟', '#3a2818'], ['paddle', '🛶', '#1a3050'], ['race', '🏁', '#1a2a4a'], ['river', '🌊', '#0f3550'],
       ['team', '👥', '#1a3050'], ['drum', '🥁', '#401018'], ['flag', '🚩', '#401018'], ['water', '💧', '#0f3550'], ['winner', '🏆', '#3a3010'],
     ],
   }),
   spellingTopic({
-    id: 'festival_halloween', title: 'Halloween', blurb: '10 個萬聖節英文詞語', cover: '🎃', parentId: 'hk_festivals',
+    id: 'festival_halloween', title: '萬聖節', titleEn: 'Halloween', blurb: '10 個萬聖節英文詞語', cover: '🎃', parentId: 'hk_festivals',
     words: [
       ['pumpkin', '🎃', '#3a2818'], ['costume', '🥸', '#2a1840'], ['witch', '🧙', '#2a1840'], ['ghost', '👻', '#1a3050'], ['spider', '🕷️', '#1a1a22'],
       ['bat', '🦇', '#1a1a22'], ['candy', '🍬', '#401018'], ['mask', '🎭', '#2a1840'], ['trick', '🪄', '#2a1840'], ['treat', '🍭', '#401018'],
@@ -134,7 +135,7 @@ const HK_FESTIVAL_TOPICS = [
 const PHONICS_TOPICS = [
   {
     id: 'animal_spelling',
-    title: '動物拼字園',
+    title: '動物拼字園', titleEn: 'Animal Spelling Zoo',
     blurb: '睇圖 · 聽音 · 逐格砌字 · 20 隻動物',
     cover: '🐱',
     section: 'sight',
@@ -164,49 +165,49 @@ const PHONICS_TOPICS = [
     ],
   },
   {
-    id: 'sight_food', title: '食物', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種食物', cover: '🍎', section: 'sight', flow: 'blend', modes: ['build'],
+    id: 'sight_food', title: '食物', titleEn: 'Food', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種食物', cover: '🍎', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
       ['rice', '🍚', ['r', 'ice']], ['bread', '🍞'], ['milk', '🥛'], ['egg', '🥚'], ['apple', '🍎'], ['banana', '🍌'], ['cake', '🍎'], ['fish', '🐟'], ['chicken', '🍗'], ['juice', '🧃'],
     ].map(([word, emoji, soundChunks], i) => ({ id: `sight_food_${i}`, word, letters: Array.from(word), soundChunks, emoji, plate: '#3a2818' })),
   },
   {
-    id: 'sight_veg', title: '蔬菜', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種蔬菜', cover: '🥕', section: 'sight', flow: 'blend', modes: ['build'],
+    id: 'sight_veg', title: '蔬菜', titleEn: 'Vegetables', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種蔬菜', cover: '🥕', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
       ['carrot', '🥕'], ['corn', '🌽'], ['tomato', '🍅'], ['potato', '🥔'], ['peas', '🌽'], ['beans', '🌽'], ['cabbage', '🥬'], ['onion', '🧅'], ['mushroom', '🍄'], ['cucumber', '🥒'],
     ].map(([word, emoji, soundChunks], i) => ({ id: `sight_veg_${i}`, word, letters: Array.from(word), soundChunks, emoji, plate: '#143828' })),
   },
   {
-    id: 'sight_places', title: '地方', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 個地方', cover: '🏫', section: 'sight', flow: 'blend', modes: ['build'],
+    id: 'sight_places', title: '地方', titleEn: 'Places', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 個地方', cover: '🏫', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
       ['home', '🏠'], ['school', '🏫'], ['park', '🌳'], ['shop', '🛍️'], ['hospital', '🏥'], ['library', '📚'], ['pool', '🏊'], ['beach', '🏖️'], ['zoo', '🦁'], ['classroom', '🧑‍🏫'],
     ].map(([word, emoji], i) => ({ id: `sight_places_${i}`, word, letters: Array.from(word), emoji, plate: '#1a3050' })),
   },
   {
-    id: 'sight_vehicles', title: '車輛', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種車輛', cover: '🚕', section: 'sight', flow: 'blend', modes: ['build'],
+    id: 'sight_vehicles', title: '車輛', titleEn: 'Vehicles', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種車輛', cover: '🚕', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
       ['car', '🚗'], ['bus', '🚌'], ['taxi', '🚕'], ['tram', '🚋'], ['train', '🚆'], ['truck', '🚚'], ['van', '🚐'], ['bike', '🚲'], ['ferry', '⛴️'], ['plane', '✈️'],
     ].map(([word, emoji], i) => ({ id: `sight_vehicles_${i}`, word, letters: Array.from(word), emoji, plate: '#1a3050' })),
   },
   {
-    id: 'sight_fruit', title: '水果', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種水果', cover: '🍇', section: 'sight', flow: 'blend', modes: ['build'],
+    id: 'sight_fruit', title: '水果', titleEn: 'Fruit', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種水果', cover: '🍇', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
       ['apple', '🍎'], ['banana', '🍌'], ['orange', '🍊'], ['grape', '🍇'], ['mango', '🥭'], ['melon', '🍈'], ['pear', '🍐'], ['peach', '🍑'], ['lemon', '🍋'], ['kiwi', '🥝'],
     ].map(([word, emoji], i) => ({ id: `sight_fruit_${i}`, word, letters: Array.from(word), emoji, plate: '#3a2818' })),
   },
   {
-    id: 'sight_household', title: '家居用品', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 件家居用品', cover: '🛋️', section: 'sight', flow: 'blend', modes: ['build'],
+    id: 'sight_household', title: '家居用品', titleEn: 'Household Items', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 件家居用品', cover: '🛋️', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
       ['bed', '🛏️'], ['sofa', '🛋️'], ['table', '🪑'], ['chair', '🪑'], ['lamp', '💡'], ['clock', '🕰️'], ['cup', '☕'], ['plate', '🍽️'], ['spoon', '🥄'], ['towel', '🧺'],
     ].map(([word, emoji], i) => ({ id: `sight_household_${i}`, word, letters: Array.from(word), emoji, plate: '#1a3050' })),
   },
   {
-    id: 'sight_school_items', title: '學校用品', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 件學校用品', cover: '🎒', section: 'sight', flow: 'blend', modes: ['build'],
+    id: 'sight_school_items', title: '學校用品', titleEn: 'School Items', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 件學校用品', cover: '🎒', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
       ['book', '📘'], ['bag', '🎒'], ['pen', '🖊️'], ['pencil', '✏️'], ['ruler', '📏'], ['eraser', '🧽'], ['crayon', '🖍️'], ['paper', '📄'], ['glue', '🧴'], ['scissors', '✂️'],
     ].map(([word, emoji], i) => ({ id: `sight_school_items_${i}`, word, letters: Array.from(word), emoji, plate: '#2a1840' })),
   },
   {
-    id: 'hk_festivals', title: '香港節日', blurb: '5 個節日 · 50 個主題詞語', cover: '🎉', section: 'sight', collections: HK_FESTIVAL_TOPICS,
+    id: 'hk_festivals', title: '香港節日', titleEn: 'Hong Kong Festivals', blurb: '5 個節日 · 50 個主題詞語', cover: '🎉', section: 'sight', collections: HK_FESTIVAL_TOPICS,
   },
   {
     id: 'letters_rev',

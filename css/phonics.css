@@ -262,6 +262,24 @@
   backdrop-filter: blur(2px);
 }
 
+.topic-title-zh {
+  display: block;
+  margin-top: 2px;
+}
+
+.topic-title-en {
+  display: block;
+  margin-top: 4px;
+  color: var(--teal-soft);
+  font-size: clamp(.88rem, 1.8vw, 1.12rem);
+  letter-spacing: .02em;
+}
+
+.collection-title.topic-title-en {
+  margin-top: 2px;
+  font-size: clamp(.78rem, 1.6vw, 1rem);
+}
+
 .sound-library-screen {
   overflow-y: auto;
 }

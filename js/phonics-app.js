@@ -553,7 +553,8 @@
       btn.innerHTML = `
         <span class="phonics-mission-number" aria-hidden="true">${track === 'sight' ? 'WORD' : 'MISSION'} ${String(counters[track]).padStart(2, '0')}</span>
         <span class="topic-cover" aria-hidden="true">${topic.cover}</span>
-        <span class="topic-title term-en">${topic.title}</span>
+        <span class="topic-title topic-title-zh">${topic.title}</span>
+        ${track === 'sight' && topic.titleEn ? `<span class="topic-title topic-title-en term-en">${topic.titleEn}</span>` : ''}
         <span class="topic-blurb term-en">${topic.blurb}</span>
       `;
       btn.onclick = () => topic.soundMissions ? openPhonicsSounds() : topic.collections ? openPhonicsCollections(topic.id) : openPhonicsLearn(topic.id);
@@ -582,7 +583,8 @@
       btn.innerHTML = `
         <span class="phonics-mission-number" aria-hidden="true">FESTIVAL ${String(index + 1).padStart(2, '0')}</span>
         <span class="topic-cover" aria-hidden="true">${collection.cover}</span>
-        <span class="topic-title collection-title">${collection.title}</span>
+        <span class="topic-title collection-title topic-title-zh">${collection.title}</span>
+        ${collection.titleEn ? `<span class="topic-title collection-title topic-title-en term-en">${collection.titleEn}</span>` : ''}
         <span class="topic-blurb term-en">${collection.blurb}</span>
       `;
       btn.onclick = () => openPhonicsLearn(collection.id);
