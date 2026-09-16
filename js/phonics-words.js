@@ -1,9 +1,9 @@
-/** SPACE RANGER PHONICS（49 音溫習 + 真人字尾音塊 + CVC 詞族 + 常見字）
+/** SPACE RANGER PHONICS（49 音溫習 + CVC 詞族 + 常見字）
  *  獨立資料檔，唔改動 js/words.js 嘅任何現有內容。
  *  插圖同中文認字 app 一樣用系統 Emoji；字母統一用 Ranger Sound Energy 節點，
  *  唔用擬人方塊角色，避免表情搶走字形同讀音焦點。
  *
- *  聲音訓練基地：媽媽錄製的 49 音，加上真人錄製的字尾音塊；每組先聽熟，再做辨音。
+ *  聲音訓練基地：媽媽錄製的 49 音；每組先聽熟，再做辨音。
  *  常見字：整詞認讀（listen；有清楚 emoji 先開 match）；唔開 build。
  *  抽象字（a/is/the/to…）可以唔配圖；動作／顏色／數優先配清晰 emoji。
  */
@@ -45,17 +45,6 @@ const PHONICS_SOUND_SECTIONS = [
       { id: 'sound_11', label: 'r 音組合', sounds: ['ar', 'or', 'ur', 'er'] },
       { id: 'sound_12', label: '滑音組合', sounds: ['ow', 'oi'] },
       { id: 'sound_13', label: '其他母音組合', sounds: ['ear', 'air'] },
-    ],
-  },
-  {
-    id: 'recorded-rimes',
-    title: '真人實錄音塊',
-    count: 6,
-    blurb: '用真人聲音聽長母音字尾，再放進完整單字。',
-    groups: [
-      { id: 'sound_14', label: 'Magic-e 與 -ice', sounds: ['a_e', 'i_e', 'ice'] },
-      { id: 'sound_15', label: '-ike 與 -ide', sounds: ['ike', 'ide'] },
-      { id: 'sound_16', label: 'ow・snow 的長 O 音', sounds: ['ow-snow'] },
     ],
   },
 ];
@@ -107,13 +96,13 @@ const PHONICS_TOPICS = [
   {
     id: 'sight_food', title: '食物', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種食物', cover: '🍎', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
-      ['rice', '🍚', ['r', 'ice']], ['bread', '🍞'], ['milk', '🥛'], ['egg', '🥚'], ['apple', '🍎'], ['banana', '🍌'], ['cake', '🍎', ['c', 'a_e', 'k']], ['fish', '🐟'], ['chicken', '🍗'], ['juice', '🧃'],
+      ['rice', '🍚', ['r', 'ice']], ['bread', '🍞'], ['milk', '🥛'], ['egg', '🥚'], ['apple', '🍎'], ['banana', '🍌'], ['cake', '🍎'], ['fish', '🐟'], ['chicken', '🍗'], ['juice', '🧃'],
     ].map(([word, emoji, soundChunks], i) => ({ id: `sight_food_${i}`, word, letters: Array.from(word), soundChunks, emoji, plate: '#3a2818' })),
   },
   {
     id: 'sight_veg', title: '蔬菜', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種蔬菜', cover: '🥕', section: 'sight', flow: 'blend', modes: ['build'],
     words: [
-      ['carrot', '🥕', ['c', 'ar', 'r', 'o', 't']], ['corn', '🌽', ['c', 'or', 'n']], ['tomato', '🍅'], ['potato', '🥔'], ['peas', '🌽'], ['beans', '🌽'], ['cabbage', '🥬'], ['onion', '🧅'], ['mushroom', '🍄'], ['cucumber', '🥒'],
+      ['carrot', '🥕'], ['corn', '🌽'], ['tomato', '🍅'], ['potato', '🥔'], ['peas', '🌽'], ['beans', '🌽'], ['cabbage', '🥬'], ['onion', '🧅'], ['mushroom', '🍄'], ['cucumber', '🥒'],
     ].map(([word, emoji, soundChunks], i) => ({ id: `sight_veg_${i}`, word, letters: Array.from(word), soundChunks, emoji, plate: '#143828' })),
   },
   {
@@ -125,7 +114,7 @@ const PHONICS_TOPICS = [
   {
     id: 'letters_rev',
     title: '字母音訓練基地',
-    blurb: '4 大分類 · 16 個 Sound Missions · 49 音＋真人音塊',
+    blurb: '3 大分類 · 13 個 Sound Missions · 49 音',
     cover: '🔤',
     section: 'phonics',
     modes: ['listen'],

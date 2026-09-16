@@ -49,14 +49,11 @@
   let activePhonemeAudio = null;
   let phonemeWaitTimer = null;
   /** Bump when replacing phoneme assets so iPad／Safari 唔用舊 cache。 */
-  const PHONEME_ASSET_VERSION = '20260916-recorded-rimes';
+  const PHONEME_ASSET_VERSION = '20260916-clean-rime-flow';
 
-  /** Keith 的真人實錄；ow-snow 與 cow／owl 的 ow 分開，避免教錯音。 */
-  const RECORDED_PHONEME_FILES = new Map([
-    ['a_e', 'a_e'], ['i_e', 'i_e'], ['ee', 'ee'], ['igh', 'igh'],
-    ['ow-snow', 'ow-snow'], ['ar', 'ar'], ['or', 'or'], ['ice', 'ice'],
-    ['ike', 'ike'], ['ide', 'ide'],
-  ]);
+  // A rime is a readable word-part rather than a standalone phoneme. Use a
+  // clean English voice for it; raw recordings stay in source-materials until clean.
+  const CLEAN_RIME_WORDS = new Set(['ice']);
 
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -73,7 +70,7 @@
     ...'abcdefghijklmnoprstuvwxyz',
     'qu', 'ck', 'ff', 'll', 'ss', 'zz', 'ch', 'sh', 'th', 'ng',
     'ai', 'ee', 'igh', 'oa', 'oo-long', 'oo-short', 'ar', 'or', 'ur',
-    'ow', 'oi', 'ear', 'air', 'er', 'a_e', 'i_e', 'ice', 'ike', 'ide', 'ow-snow',
+    'ow', 'oi', 'ear', 'air', 'er',
   ]);
 
   function normalizePhoneme(ch) {
@@ -81,12 +78,6 @@
       .trim()
       .toLowerCase();
     return PHONEME_FILES.has(s) ? s : '';
-  }
-
-  function phonemeAudioUrl(ch) {
-    const recordedFile = RECORDED_PHONEME_FILES.get(ch);
-    if (recordedFile) return `./assets/phonemes/recorded/${recordedFile}.m4a?v=${PHONEME_ASSET_VERSION}`;
-    return `./assets/phonemes/${ch}.mp3?v=${PHONEME_ASSET_VERSION}`;
   }
 
   function stopPhonemeAudio() {
@@ -132,7 +123,7 @@
 
     let audio = phonemeAudioByLetter[ch];
     if (!audio) {
-      audio = new Audio(phonemeAudioUrl(ch));
+      audio = new Audio(`./assets/phonemes/${ch}.mp3?v=${PHONEME_ASSET_VERSION}`);
       audio.preload = 'auto';
       phonemeAudioByLetter[ch] = audio;
     }
@@ -174,6 +165,14 @@
     }
     speakEnglishTerm(word, opts);
     return Promise.resolve();
+  }
+
+  /** Play a reviewed phoneme, or a cleanly spoken rime such as "ice". */
+  function playPhonicsChunk(chunk, { muted = isMuted() } = {}) {
+    if (normalizePhoneme(chunk)) return playLetterSound(chunk, { muted });
+    const rime = String(chunk || '').trim().toLowerCase();
+    if (!CLEAN_RIME_WORDS.has(rime) || muted) return Promise.resolve();
+    return speakEnglishAndWait(rime, { muted, rate: 0.82, pitch: 1.05, delayMs: 0 });
   }
 
   function goHome() {
@@ -712,7 +711,7 @@
             void tile.offsetWidth;
             tile.classList.add('is-energized');
             setTimeout(() => tile.classList.remove('is-energized'), 520);
-            playLetterSound(tile.dataset.letter, { muted: isMuted() });
+            playPhonicsChunk(tile.dataset.letter, { muted: isMuted() });
           });
         });
       }
@@ -765,11 +764,11 @@
       return;
     }
 
-    // 真人錄音的音塊要先後讀出，再讀完整單字。拼字格仍保持原來字形，
+    // 拼字格保持原來字形；rime 用乾淨英文讀音示範連讀。
     // 例如 rice 的字格是 r-i-c-e，而學習示範讀 r + ice → rice。
     if (Array.isArray(word.soundChunks) && word.soundChunks.length) {
       for (const sound of word.soundChunks) {
-        await playLetterSound(sound, { muted: isMuted() });
+        await playPhonicsChunk(sound, { muted: isMuted() });
         if (audioGen !== pLearnAudioGen) return;
         await waitMs(100);
       }
@@ -1328,7 +1327,7 @@
         ? $(`#phonics-build-slots .build-slot[data-index="${index}"]`)
         : null;
       slot?.classList.add('is-blending');
-      await playLetterSound(blendSounds[index], { muted: isMuted() });
+      await playPhonicsChunk(blendSounds[index], { muted: isMuted() });
       slot?.classList.remove('is-blending');
       await waitMs(70);
     }
