@@ -412,7 +412,7 @@
           const lit = isPlanetLit(p.id, state);
           const btn = document.createElement('button');
           btn.type = 'button';
-          btn.className = `math-galaxy-card${lit ? ' is-lit' : ''}`;
+          btn.className = `math-galaxy-card planet-${p.id}${lit ? ' is-lit' : ''}`;
           const playable = ['count', 'compare-size', 'time', 'shape', 'moon'].includes(p.id);
           const status = playable ? (lit ? '已點亮' : '可以出發') : '準備中';
           btn.disabled = !playable;
