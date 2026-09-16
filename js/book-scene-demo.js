@@ -17,8 +17,8 @@ const BOOKS = [
   },
 ];
 
-// 紅輯其餘書本：詞語只取自已核實嘅 book-cards；未有可靠頁面對位，
-// 所以使用中性預覽，唔將任何圖片誤稱為該書場景。
+// 紅輯其餘書本：頁面資產係內容 lead 從各本 PDF 揀出嘅真實故事頁；
+// 但每頁 target 對位仍待逐頁核實，故保留未完成標記，唔會冒充已完成教材。
 const RED_BOOKS = [
   ['rb_yusan', '雨傘', '☂️', 'yusan', ['雨傘', '橙雨傘', '藍雨傘', '綠雨傘', '黃雨傘', '花雨傘', '收起小雨傘', '太陽出來了', '出來了', '下雨']],
   ['rb_xin', '信', '✉️', 'xin', ['信', '爸爸', '的', '哥哥', '安安', '媽媽', '姐姐', '爺爺', '沒有', '寫']],
@@ -36,11 +36,12 @@ const RED_BOOKS = [
   stars: 10,
   mode: 'preview',
   cover,
-  // 五輪 × 兩個詞語 = 10 題；中性預覽，待書頁核實後才替換。
+  // 五輪 × 兩個詞語 = 10 題；真實書頁展示，詞語位置待核實。
   scenes: [0, 1, 2, 3, 4].map((page, index) => ({
-    image: null,
-    aspect: '1.55',
-    source: `紅輯・《${title}》詞卡核實；場景預覽・待書頁核實 ${page + 1}`,
+    image: `assets/book-scenes/red-series-pages/${title}-p${(page % 3) + 4}.jpg`,
+    aspect: '1.72',
+    incomplete: true,
+    source: `紅輯・《${title}》PDF 故事頁 ${(page % 3) + 4}；頁面 target 對位待核實 ${page + 1}`,
     targets: words.slice(index * 2, index * 2 + 2).map((word, targetIndex) => ({ word, x: targetIndex ? 68 : 28, y: 24 + (index % 3) * 22 })),
     distractors: words.filter((word) => !words.slice(index * 2, index * 2 + 2).includes(word)).slice(0, 2),
   })),
@@ -126,7 +127,7 @@ function renderScene() {
   const board = $('#scene-board');
   board.style.setProperty('--scene-aspect', scene.aspect);
   const preview = scene.image
-    ? `<img src="${scene.image}" alt="${book.title}的書頁場景" decoding="async">`
+    ? `<img src="${scene.image}" alt="${book.title} PDF 故事書頁" decoding="async"><small class="scene-preview-badge">真實故事頁・頁面配對待核實</small>`
     : `<div class="scene-neutral-preview" role="img" aria-label="${book.title}中性場景預覽"><span>${book.cover || '📖'}</span><small>場景預覽・待書頁核實</small></div>`;
   board.innerHTML = `${preview}${scene.targets.map((target) => `<button type="button" class="drop-zone${placements[target.word] ? ' is-filled' : ''}" data-target="${target.word}" style="left:${target.x}%;top:${target.y}%" aria-label="把詞語放到${target.word}的位置">${placements[target.word] || '拖到這裡'}</button>`).join('')}`;
   board.querySelectorAll('.drop-zone').forEach((zone) => {
