@@ -40,7 +40,7 @@
     const LEARN_COUNTS = [1, 2, 3, 4, 5];
     const LIT_TARGET = 10;
 
-    /** 時間資料：每一分鐘一格（1–12 點），支援完整鐘面練習。 */
+    /** 時間資料：先以四分一鐘（00／15／30／45）練習，適合初學者。 */
     const ZH_HOUR = ['十二', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一'];
     function clockItem(h, halfOrMinute) {
       const minute = typeof halfOrMinute === 'number' ? halfOrMinute : (halfOrMinute ? 30 : 0);
@@ -55,7 +55,7 @@
     }
     const CLOCK_ITEMS = [];
     for (let h = 1; h <= 12; h += 1) {
-      for (let minute = 0; minute < 60; minute += 1) CLOCK_ITEMS.push(clockItem(h, minute));
+      for (let minute = 0; minute < 60; minute += 15) CLOCK_ITEMS.push(clockItem(h, minute));
     }
 
     /** 先學：模擬鐘 + 電子鐘（整點／半點） */
@@ -893,7 +893,7 @@
         const cy = rect.top + rect.height / 2;
         const angle = (Math.atan2(clientY - cy, clientX - cx) * 180 / Math.PI + 90 + 360) % 360;
         if (timeSetActiveHand === 'minute') {
-          timeSetSelection.minute = Math.round(angle / 6) % 60;
+          timeSetSelection.minute = (Math.round(angle / 90) * 15) % 60;
         } else {
           const h = Math.max(1, Math.min(12, Math.round(angle / 30) || 12));
           timeSetSelection.h = h;
