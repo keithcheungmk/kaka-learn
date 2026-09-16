@@ -70,7 +70,9 @@ assert.deepEqual(
 assert.match(appSource, /playLetterSound\(tile\.char/, '每放入一格播放 phoneme');
 assert.match(appSource, /RECORDED_PHONEME_FILES/, '真人錄音優先於原有 phoneme 音檔');
 assert.match(appSource, /word\.soundChunks \|\| word\.letters/, '學習卡可分開顯示聽音音塊與拼字格');
-assert.match(appSource, /completedRound\.chars\[index\]/, '完成後依次連讀 phoneme');
+assert.match(appSource, /for \(const sound of word\.soundChunks\)/, '學習卡先順序播放真人音塊');
+assert.match(appSource, /const blendSounds = completedRound\.target\.soundChunks \|\| completedRound\.chars/, '拼字完成按音塊連讀，再讀完整單字');
+assert.match(appSource, /blendSounds\[index\]/, '完成後依次連讀音塊或 phoneme');
 assert.match(appSource, /speakEnglishAndWait\(word/, '連音後播放完整英文單字');
 assert.match(appSource, /flyStarFromRanger/, '答對後由 KAKA Ranger 射星');
 assert.match(appSource, /saveRoundProgress/, '未完成回合保存進度');

@@ -91,6 +91,7 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 - 整理 Keith 錄製的 10 段 AAC/M4A，保留 `source-materials/` 原檔，另產生輕量網站播放版 `assets/phonemes/recorded/`。
 - 人聲優先播放 `a_e`、`i_e`、`ee`、`igh`、`ar`、`or`、`ice`、`ike`、`ide`；`ow` 明確命名為 `ow-snow`，不會誤套到 cow／owl 的另一個 ow 音。
 - 食物／蔬菜學習卡加入獨立聽音列（`rice = r + ice`、`cake = c + a_e + k`、`carrot`、`corn`），砌字格仍保留原本完整拼字。
+- 跟進修正：學習卡與砌字完成後都會先順序播放音塊，再讀完整單字；`rice` 現為 `r + ice → rice`，不再直接跳過真人 `ice` 錄音。
 - `test-phonics-flow.mjs` 覆蓋真人音檔、真人音塊基地及 rice／cake 音塊；invariants、storage、家庭裝置 smoke 均通過。
 - **踩咗** `assets/phonemes/recorded/`、`js/phonics-words.js`、`js/phonics-app.js`、`scripts/test-phonics-flow.mjs`、`docs/handover.md`
 

@@ -32,6 +32,7 @@
   let pActiveTopicId = null;
   let pLearnWords = [];
   let pLearnIndex = 0;
+  let pLearnAudioGen = 0;
   let pLearnPassedOnce = false;
   let pSoundMissionIndex = 0;
   let pListenRound = null;
@@ -718,7 +719,7 @@
       if (lead) {
         const topic = getPhonicsTopicById(pActiveTopicId);
         lead.textContent = topic?.flow === 'blend'
-          ? '先聽完整英文；再撳下面每個音素'
+          ? (word.soundChunks ? '先聽音塊，再讀完整英文' : '先聽完整英文；再撳下面每個音素')
           : word.letters ? '撳字母聽音' : '撳卡聽英文';
       }
     }
@@ -754,13 +755,25 @@
     speakCurrentPhonicsLearn();
   }
 
-  function speakCurrentPhonicsLearn() {
+  async function speakCurrentPhonicsLearn() {
     const word = pLearnWords[pLearnIndex];
     if (!word) return;
+    const audioGen = ++pLearnAudioGen;
     const isLetter = typeof isLetterItem === 'function' ? isLetterItem(word) : word.kind === 'letter';
     if (isLetter) {
       playLetterSound(word.word, { muted: isMuted() });
       return;
+    }
+
+    // 真人錄音的音塊要先後讀出，再讀完整單字。拼字格仍保持原來字形，
+    // 例如 rice 的字格是 r-i-c-e，而學習示範讀 r + ice → rice。
+    if (Array.isArray(word.soundChunks) && word.soundChunks.length) {
+      for (const sound of word.soundChunks) {
+        await playLetterSound(sound, { muted: isMuted() });
+        if (audioGen !== pLearnAudioGen) return;
+        await waitMs(100);
+      }
+      if (audioGen !== pLearnAudioGen) return;
     }
     speakEnglishTerm(word.word, { muted: isMuted() });
   }
@@ -1308,11 +1321,14 @@
     await placedSound;
     if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
     await waitMs(180);
-    for (let index = 0; index < completedRound.chars.length; index += 1) {
+    const blendSounds = completedRound.target.soundChunks || completedRound.chars;
+    for (let index = 0; index < blendSounds.length; index += 1) {
       if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
-      const slot = $(`#phonics-build-slots .build-slot[data-index="${index}"]`);
+      const slot = blendSounds === completedRound.chars
+        ? $(`#phonics-build-slots .build-slot[data-index="${index}"]`)
+        : null;
       slot?.classList.add('is-blending');
-      await playLetterSound(completedRound.chars[index], { muted: isMuted() });
+      await playLetterSound(blendSounds[index], { muted: isMuted() });
       slot?.classList.remove('is-blending');
       await waitMs(70);
     }
