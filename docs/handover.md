@@ -86,6 +86,12 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-16 · Codex（Keith：Carter Family 素材集中與閱讀任務規劃）
+
+- Carter Family 原始教材已由 Downloads 集中遷到 `source-materials/Carter Family/`，保留原有 PDF、完整 MP3、逐頁 clips 與來源說明檔的結構；素材庫仍被 Git ignore，不會直接部署。
+- 新增 `docs/carter-family-sentence-reading-plan.md`：由 PDF 場景與對應原始逐頁錄音建立可追溯句子資料，先以 `Game Night` 做三句、十題的 Sentence Mission 試點，再逐本擴展閱讀練習。
+- **踩咗** `AGENTS.md`、`docs/carter-family-sentence-reading-plan.md`、`docs/handover.md`
+
 ### 2026-09-16 · Codex（Keith：移除舊常見字）
 
 - `常見字・1` 至 `常見字・4` 已從英文選單及資料層移除；它們把高頻功能詞、主題詞及不同玩法混在一起，不能再作為重建新常見字的基礎。
