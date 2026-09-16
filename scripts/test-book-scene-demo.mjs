@@ -16,6 +16,7 @@ assert.equal((source.match(/distractors:/g) || []).length, 6);
 for (const file of ['balloon-colours-a.jpg', 'balloon-colours-b.jpg', 'balloon-flew-away.jpg', 'anan-snacks.jpg', 'anan-biscuits-fruit.jpg', 'anan-chips-drink.jpg']) assert.ok(fs.existsSync(path.join(root, 'assets/book-scenes', file)));
 assert.match(source, /draggable=/);
 assert.match(source, /addEventListener\('drop'/);
+assert.match(source, /if \(!heardWhileSelecting\) speak\(word\)/);
 assert.match(source, /scene-submit/);
 assert.match(html, /js\/speech\.js/);
 assert.match(app, /book-scene-demo\.html/);

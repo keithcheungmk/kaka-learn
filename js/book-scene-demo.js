@@ -44,12 +44,14 @@ function placeWord(word, target) {
   if (locked) return;
   const targetWordsForScene = targetWords();
   if (!sceneOptions().includes(word) || !targetWordsForScene.includes(target)) return;
+  const heardWhileSelecting = selectedWord === word;
   Object.keys(placements).forEach((slot) => {
     if (placements[slot] === word) delete placements[slot];
   });
   placements[target] = word;
   selectedWord = null;
   renderScene();
+  if (!heardWhileSelecting) speak(word);
 }
 
 function renderBookTabs() {
