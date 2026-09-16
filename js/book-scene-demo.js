@@ -38,13 +38,15 @@ const RED_BOOKS = [
   cover,
   // 五輪 × 每頁四個詞語；每本固定 10 題／10 星，真實書頁展示，詞語位置待核實。
   scenes: [0, 1, 2, 3, 4].map((page, index) => ({
-    // 《誰在叫》PDF 第 4 頁係認字卡／封面跨頁，改用第 5 頁故事內頁；其餘書暫沿用已核實頁。
+    // 《誰在叫》p4 係認字卡／封面跨頁；《小明和氣球》《風跟我玩》p4 亦非故事頁，改用已核實 p5。
     image: title === '誰在叫'
-      ? 'assets/book-scenes/red-series-pages-hq/誰在叫-p5.webp'
-      : `assets/book-scenes/red-series-pages-hq/${title}-p4.webp`,
+      ? `assets/book-scenes/red-series-pages-hq/誰在叫-p${(page % 2) + 5}.webp`
+      : (title === '小明和氣球' || title === '風跟我玩')
+        ? `assets/book-scenes/red-series-pages-hq/${title}-p5.webp`
+        : `assets/book-scenes/red-series-pages-hq/${title}-p${(page % 3) + 4}.webp`,
     aspect: '1.72',
     incomplete: true,
-    source: `紅輯・《${title}》PDF 故事頁 ${title === '誰在叫' ? 5 : 4}（重用於第 ${page + 1} 輪）；頁面 target 對位待核實`,
+    source: `紅輯・《${title}》PDF 故事內頁（第 ${title === '誰在叫' ? ((page % 2) + 5) : ((title === '小明和氣球' || title === '風跟我玩') ? 5 : ((page % 3) + 4))} 頁）；頁面 target 對位待核實`,
     targets: Array.from({ length: 4 }, (_, targetIndex) => words[(index * 2 + targetIndex) % words.length]).map((word) => ({ word })),
     distractors: words.filter((word) => !Array.from({ length: 4 }, (_, targetIndex) => words[(index * 2 + targetIndex) % words.length]).includes(word)).slice(0, 4),
   })),
