@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#080d35">
+  <title>紅輯場景遊戲・卡卡學習</title>
+  <link rel="stylesheet" href="css/book-scene-demo.css">
+</head>
+<body>
+  <main class="scene-app">
+    <header class="scene-topbar">
+      <a class="scene-back" href="index.html">← 中文</a>
+      <div><p>紅輯・書頁任務</p><h1>看場景・放字詞</h1></div>
+      <output id="star-count" aria-label="星星進度">0/6 ⭐</output>
+    </header>
+
+    <section class="scene-intro">
+      <div><span>第一版 Demo</span><h2>聽一聽，將字詞放到書頁場景</h2><p>每本有三張真實書頁。可拖動，也可先點詞語再點圖中的虛線框。</p></div>
+      <img src="assets/kaka-ranger-solo.png" alt="KAKA Ranger">
+    </section>
+
+    <nav class="book-tabs" id="book-tabs" aria-label="選擇紅輯書本"></nav>
+
+    <section class="scene-game" aria-live="polite">
+      <div class="scene-meta">
+        <span id="scene-book-title">我的氣球呢？</span>
+        <strong id="scene-progress">第 1 / 3 頁</strong>
+      </div>
+      <h2 id="scene-prompt">看圖，找出詞語。</h2>
+      <p class="scene-help">先按 🔊 聽詞語，再把詞語放到相應的圖畫位置。</p>
+
+      <div class="scene-board" id="scene-board"></div>
+      <div class="word-bank" id="word-bank" aria-label="可選詞語"></div>
+      <p class="scene-feedback" id="scene-feedback" aria-live="polite"></p>
+      <button class="scene-submit" id="scene-submit" type="button" disabled>提交答案</button>
+    </section>
+
+    <section class="scene-complete" id="scene-complete" hidden>
+      <span>✦</span><h2>書頁任務完成！</h2><p id="complete-copy"></p>
+      <button class="scene-submit" id="scene-replay" type="button">再玩一次</button>
+    </section>
+  </main>
+  <script src="js/speech.js"></script>
+  <script type="module" src="js/book-scene-demo.js"></script>
+</body>
+</html>

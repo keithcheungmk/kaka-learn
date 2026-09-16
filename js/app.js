@@ -716,6 +716,17 @@ function openBookPicker(topic) {
         ? '揀一冊嚟溫習港式味道'
         : '今日讀咗邊本書？揀返嗰本嚟溫習';
   }
+  let sceneDemoLink = $('#book-scene-demo-link');
+  if (!sceneDemoLink && lead) {
+    sceneDemoLink = document.createElement('a');
+    sceneDemoLink.id = 'book-scene-demo-link';
+    sceneDemoLink.className = 'btn btn-sentence-home';
+    sceneDemoLink.href = './book-scene-demo.html';
+    sceneDemoLink.textContent = '紅輯場景遊戲・試玩兩本書';
+    sceneDemoLink.style.cssText = 'display:flex;width:fit-content;margin:0 auto 18px;text-decoration:none';
+    lead.insertAdjacentElement('afterend', sceneDemoLink);
+  }
+  if (sceneDemoLink) sceneDemoLink.hidden = topic.id !== 'red_series';
   const grid = $('#book-grid');
   if (grid) {
     grid.innerHTML = '';
