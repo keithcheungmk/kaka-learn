@@ -1,0 +1,19 @@
+{
+  "series": "red_series",
+  "source": "source-materials/Chinese book scans/",
+  "format": "webp",
+  "render": {"minWidth": 1000, "pdfPage": 4},
+  "textPolicy": "只展示原書頁；句子未經可靠 OCR 核實前保持 null，詞語只能由 data/book-cards/<book>.json 提供。",
+  "pages": [
+    {"book":"rb_yusan","title":"雨傘","pdf":"book-scans/雨傘.pdf","pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/雨傘-p4.webp","sentence":null},
+    {"book":"rb_xin","title":"信","pdf":"book-scans/信.pdf","pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/信-p4.webp","sentence":null},
+    {"book":"rb_fenguo","title":"分果果","pdf":"book-scans/分果果.pdf","pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/分果果-p4.webp","sentence":null},
+    {"book":"rb_kuaipao","title":"快跑呀","pdf":"book-scans/快跑呀.pdf","pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/快跑呀-p4.webp","sentence":null},
+    {"book":"rb_shuijiao","title":"誰在叫","pdf":"book-scans/誰在叫.pdf","pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/誰在叫-p4.webp","sentence":null},
+    {"book":"rb_huangye","title":"黃葉","pdf":"book-scans/黃葉.pdf","pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/黃葉-p4.webp","sentence":null},
+    {"book":"rb_yishuhua","title":"一束花","pdf":"book-scans/一束花.pdf","pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/一束花-p4.webp","sentence":null},
+    {"book":"rb_fengwan","title":"風跟我玩","pdf":"book-scans/風跟我玩.pdf","pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/風跟我玩-p4.webp","sentence":null},
+    {"book":"rb_xiaoming","title":"小明和氣球","pdf":"book-scans/小明和氣球.pdf","pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/小明和氣球-p4.webp","sentence":null},
+    {"book":"rb_dongdong","title":"冬冬請客","pdf":"book-scans/冬冬請客.pdf","pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/冬冬請客-p4.webp","sentence":null}
+  ]
+}
