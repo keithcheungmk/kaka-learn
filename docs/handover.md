@@ -33,6 +33,7 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 | 書本掃描書架 | Cursor | `book-scans/index.html`, `index.html`（主頁細字連出去）, `css/styles.css`（`.home-scans-link`）, `scripts/check-invariants.py` | 2026-09-08 | Keith 交辦：家長 PDF 書架；唔改識字／OCR／數理 |
 | 加減法操作流程統一第一階段 | Codex | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | Keith 交辦：加法加入回答確認、拖曳防誤觸、修正兩套桌面排位 |
 | 加減法操作流程統一、回答確認、拖曳防誤觸及桌面版面 | Codex | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | Keith 交辦：先操作後回答，修正加減法介面及排位 |
+| 數理全區 iPad 橫向版面及原生 emoji | Codex | `css/math.css`, `js/math-app.js` | 2026-09-16 | Keith 同意：所有數理頁面優先 landscape，善用畫布；數理物件改用 Apple 原生 emoji |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |

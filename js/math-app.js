@@ -274,9 +274,8 @@
       el.innerHTML = '';
       for (let i = 0; i < n; i += 1) {
         const span = document.createElement('span');
-        span.className = 'math-count-dot';
-        if (window.KakaEmojiArt) span.innerHTML = window.KakaEmojiArt.html(emoji);
-        else span.textContent = emoji;
+        span.className = 'math-count-dot math-native-emoji';
+        span.textContent = emoji;
         span.style.animationDelay = `${i * 0.05}s`;
         el.appendChild(span);
       }
@@ -556,13 +555,13 @@
     }
 
     function countDotHtml(emoji = countEmoji) {
-      return window.KakaEmojiArt ? window.KakaEmojiArt.html(emoji) : emoji;
+      return `<span class="math-native-emoji" aria-hidden="true">${emoji}</span>`;
     }
 
     function appendStaticDots(parent, quantity) {
       for (let i = 0; i < quantity; i += 1) {
         const dot = document.createElement('span');
-        dot.className = 'math-count-dot';
+        dot.className = 'math-count-dot math-native-emoji';
         dot.innerHTML = countDotHtml();
         dot.style.animationDelay = `${i * 0.04}s`;
         parent.appendChild(dot);
