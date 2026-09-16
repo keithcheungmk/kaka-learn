@@ -28,7 +28,7 @@ for (const item of topic.words) {
   }
 }
 
-for (const topicId of ['sight_food', 'sight_veg', 'sight_places']) {
+for (const topicId of ['sight_food', 'sight_veg', 'sight_places', 'sight_vehicles', 'sight_fruit', 'sight_household', 'sight_school_items']) {
   const vocabularyTopic = context.window.KakaPhonicsWords.getPhonicsTopicById(topicId);
   assert.equal(vocabularyTopic.flow, 'blend', `${topicId} 跟動物園使用融合拼字流程`);
   assert.deepEqual([...vocabularyTopic.modes], ['build'], `${topicId} 直接進入拼字任務`);
@@ -41,6 +41,27 @@ for (const topicId of ['sight_food', 'sight_veg', 'sight_places']) {
   }
 }
 
+const festivals = [
+  'festival_christmas', 'festival_lunar_new_year', 'festival_mid_autumn', 'festival_dragon_boat', 'festival_halloween',
+].map((id) => context.window.KakaPhonicsWords.getPhonicsTopicById(id));
+assert.equal(festivals.length, 5, '香港節日有 5 個獨立節日任務');
+const festivalWords = festivals.flatMap((festival) => {
+  assert.ok(festival, '每個節日任務可開啟');
+  assert.equal(festival.words.length, 10, `${festival.title} 有 10 個專屬詞語`);
+  assert.equal(festival.flow, 'blend', `${festival.title} 使用融合拼字流程`);
+  for (const item of festival.words) {
+    assert.equal(item.letters.join(''), item.word.toLowerCase().replace(/[^a-z]/g, ''), `${item.word} 的拼字會略過空格`);
+    for (const phoneme of item.letters) {
+      assert.ok(fs.existsSync(path.join(repo, 'assets/phonemes', `${phoneme}.mp3`)), `${item.word} 使用已存在的 ${phoneme} 音檔`);
+    }
+  }
+  return festival.words.map((item) => item.word.toLowerCase());
+});
+assert.equal(new Set(festivalWords).size, festivalWords.length, '五個節日詞庫沒有重複詞語');
+const santa = festivals[0].words.find((item) => item.word === 'Santa Claus');
+assert.deepEqual([...santa.letters], ['s', 'a', 'n', 't', 'a', 'c', 'l', 'a', 'u', 's'], '短語拼字只使用英文字母');
+assert.deepEqual([...santa.wordBreaks], [5], '短語保留 Santa 與 Claus 之間的分隔');
+
 assert.deepEqual(
   [...context.window.KakaPhonicsWords.getPhonicsTopicById('sight_food').words.find((word) => word.word === 'rice').soundChunks],
   ['r', 'ice'],
@@ -50,6 +71,9 @@ assert.match(appSource, /playLetterSound\(tile\.char/, '每放入一格播放 ph
 assert.match(appSource, /word\.soundChunks \|\| word\.letters/, '學習卡可分開顯示聽音音塊與拼字格');
 assert.match(appSource, /CLEAN_RIME_WORDS/, '乾淨的 rime 字尾有獨立播放規則');
 assert.match(appSource, /playPhonicsChunk\(tile\.dataset\.letter/, '學習卡音塊以 phoneme／rime 規則播放');
+assert.match(appSource, /openPhonicsCollections/, '香港節日有獨立節日選擇頁');
+assert.match(appSource, /wordBreaks/, '短語在學習卡及拼字格保留詞間分隔');
+assert.match(appSource, /\$\{topic\.title\}・拼字/, '拼字畫面會顯示目前主題名稱');
 assert.match(appSource, /for \(const sound of word\.soundChunks\)/, '學習卡先順序播放音塊');
 assert.match(appSource, /await playPhonicsChunk\(sound/, '學習卡用乾淨音素或 rime 連讀');
 assert.match(appSource, /const blendSounds = completedRound\.target\.soundChunks \|\| completedRound\.chars/, '拼字完成按音塊連讀，再讀完整單字');
@@ -68,4 +92,5 @@ console.log('phonics blend flow tests');
 console.log('  ✓ 10 個動物字均可由 verified phoneme assets 組成');
 console.log('  ✓ 每格 phoneme → 完成連音 → 完整單字 → KAKA 射星');
 console.log('  ✓ rice 保留完整拼字，並以乾淨的 r + ice → rice 連讀');
+console.log('  ✓ 車輛、水果、家居、學校用品及 5 個香港節日詞庫已接入');
 console.log('  ✓ tap／drag、profile round progress、audio cancellation 均已接入');

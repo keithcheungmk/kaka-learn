@@ -266,6 +266,25 @@
   overflow-y: auto;
 }
 
+.phonics-collections-screen {
+  overflow-y: auto;
+}
+
+.collection-topic-grid {
+  width: min(100%, 1040px);
+  margin: 0 auto;
+  padding-bottom: 32px;
+}
+
+.collection-topic-card {
+  min-height: 210px;
+}
+
+.collection-title {
+  font-family: var(--font-display);
+  text-transform: none;
+}
+
 .sound-section-list {
   display: grid;
   gap: 18px;
@@ -519,6 +538,38 @@
 /* 淡字係 K2 配對支架：可辨認但明顯弱過已放入的能量字母。 */
 .phonics-screen .build-ghost {
   color: rgba(226, 232, 240, 0.32);
+}
+
+.phrase-divider,
+.build-phrase-divider {
+  flex: 0 0 12px;
+  align-self: stretch;
+  position: relative;
+}
+
+.phrase-divider::after,
+.build-phrase-divider::after {
+  content: '';
+  position: absolute;
+  top: 22%;
+  bottom: 22%;
+  left: 50%;
+  border-left: 2px solid rgba(124, 255, 178, 0.34);
+}
+
+#phonics-build-slots.has-long-word {
+  max-width: 620px;
+  gap: 7px;
+}
+
+#phonics-build-slots.has-long-word .build-slot {
+  width: min(64px, 15vw, 8.5vh);
+  height: min(72px, 17vw, 9.5vh);
+}
+
+#phonics-build-slots.has-long-word .build-slot .build-placed.letter-tile {
+  width: min(54px, 13vw, 7.5vh);
+  height: min(54px, 13vw, 7.5vh);
 }
 
 .build-slot.is-blending .letter-tile .sound-energy-glyph {

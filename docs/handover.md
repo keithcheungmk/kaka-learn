@@ -86,6 +86,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-16 · Codex（Keith：英文 Sight Words 主題擴充）
+
+- Sight Words 新增車輛、水果、家居用品、學校用品；每個主題各有 10 個完整英文詞，全部沿用動物拼字園的學習卡、phonics、拖拉／點按拼字及完成連讀流程。
+- 「香港節日」為獨立入口，內有 Christmas、Lunar New Year、Mid-Autumn Festival、Dragon Boat Festival、Halloween 五個任務，各 10 個不重複詞語。
+- 加入短語拼字顯示：`Santa Claus`、`red packet`、`lion dance`、`dragon boat` 等詞間保留分隔線，只有英文字母是可拖動的拼字格。
+- 補齊新詞所需的 7 個 OpenMoji SVG；phonics flow、storage、invariants、家庭裝置 smoke 均通過。
+- **踩咗** `index.html`、`js/phonics-words.js`、`js/phonics-app.js`、`css/phonics.css`、`assets/openmoji/`、`scripts/test-phonics-flow.mjs`、`docs/handover.md`
+
 ### 2026-09-16 · Codex（Keith：英文 phonics＋拼字連讀）
 
 - Keith 初步錄製的 10 段 AAC/M4A 保留在 `source-materials/`，因背景雜音不部署、也不在正式遊戲播放。

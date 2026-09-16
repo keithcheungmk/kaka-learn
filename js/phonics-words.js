@@ -60,6 +60,76 @@ const PHONICS_SOUND_MISSIONS = PHONICS_SOUND_SECTIONS.flatMap((section) => secti
 
 const LETTER_REVISION = PHONICS_SOUND_MISSIONS.flatMap((mission) => mission.sounds);
 
+/** 保留短語的顯示空格；拼字只取英文字母，並記下詞與詞之間的位置。 */
+function spellingItem(id, word, emoji, plate) {
+  const terms = String(word).trim().split(/\s+/);
+  let length = 0;
+  const wordBreaks = [];
+  terms.slice(0, -1).forEach((term) => {
+    length += Array.from(term).filter((ch) => /[a-z]/i.test(ch)).length;
+    wordBreaks.push(length);
+  });
+  return {
+    id,
+    word,
+    letters: Array.from(terms.join('').toLowerCase()).filter((ch) => /[a-z]/.test(ch)),
+    wordBreaks,
+    emoji,
+    plate,
+  };
+}
+
+function spellingTopic({ id, title, blurb, cover, parentId = null, words }) {
+  return {
+    id,
+    title,
+    blurb,
+    cover,
+    parentId,
+    flow: 'blend',
+    modes: ['build'],
+    words: words.map(([word, emoji, plate], index) => spellingItem(`${id}_${index}`, word, emoji, plate)),
+  };
+}
+
+const HK_FESTIVAL_TOPICS = [
+  spellingTopic({
+    id: 'festival_christmas', title: 'Christmas', blurb: '10 個聖誕英文詞語', cover: '🎄', parentId: 'hk_festivals',
+    words: [
+      ['Santa Claus', '🎅', '#401018'], ['reindeer', '🦌', '#3a2818'], ['sleigh', '🛷', '#1a3050'], ['stocking', '🧦', '#401018'], ['present', '🎁', '#2a1840'],
+      ['tree', '🎄', '#143828'], ['ornament', '🔴', '#401018'], ['gingerbread', '🍪', '#3a2818'], ['snowman', '☃️', '#1a3050'], ['bell', '🔔', '#3a3010'],
+    ],
+  }),
+  spellingTopic({
+    id: 'festival_lunar_new_year', title: 'Lunar New Year', blurb: '10 個農曆新年英文詞語', cover: '🧧', parentId: 'hk_festivals',
+    words: [
+      ['red packet', '🧧', '#401018'], ['lion dance', '🦁', '#3a2818'], ['firecracker', '🧨', '#401018'], ['tangerine', '🍊', '#3a3010'], ['blossom', '🌸', '#402030'],
+      ['couplet', '📜', '#401018'], ['lucky', '🍀', '#143828'], ['family', '👨‍👩‍👧‍👦', '#1a3050'], ['feast', '🍲', '#3a2818'], ['New Year', '🎊', '#401018'],
+    ],
+  }),
+  spellingTopic({
+    id: 'festival_mid_autumn', title: 'Mid-Autumn Festival', blurb: '10 個中秋節英文詞語', cover: '🥮', parentId: 'hk_festivals',
+    words: [
+      ['mooncake', '🥮', '#3a2818'], ['moon', '🌕', '#1a3050'], ['rabbit', '🐇', '#3a2418'], ['lantern', '🏮', '#401018'], ['pomelo', '🍊', '#3a3010'],
+      ['tea', '🍵', '#143828'], ['cloud', '☁️', '#1a3050'], ['sky', '🌌', '#1a2a4a'], ['night', '🌃', '#1a2a4a'], ['harvest', '🌾', '#3a3010'],
+    ],
+  }),
+  spellingTopic({
+    id: 'festival_dragon_boat', title: 'Dragon Boat Festival', blurb: '10 個端午節英文詞語', cover: '🐉', parentId: 'hk_festivals',
+    words: [
+      ['dragon boat', '🐉', '#143828'], ['dumpling', '🥟', '#3a2818'], ['paddle', '🛶', '#1a3050'], ['race', '🏁', '#1a2a4a'], ['river', '🌊', '#0f3550'],
+      ['team', '👥', '#1a3050'], ['drum', '🥁', '#401018'], ['flag', '🚩', '#401018'], ['water', '💧', '#0f3550'], ['winner', '🏆', '#3a3010'],
+    ],
+  }),
+  spellingTopic({
+    id: 'festival_halloween', title: 'Halloween', blurb: '10 個萬聖節英文詞語', cover: '🎃', parentId: 'hk_festivals',
+    words: [
+      ['pumpkin', '🎃', '#3a2818'], ['costume', '🥸', '#2a1840'], ['witch', '🧙', '#2a1840'], ['ghost', '👻', '#1a3050'], ['spider', '🕷️', '#1a1a22'],
+      ['bat', '🦇', '#1a1a22'], ['candy', '🍬', '#401018'], ['mask', '🎭', '#2a1840'], ['trick', '🪄', '#2a1840'], ['treat', '🍭', '#401018'],
+    ],
+  }),
+];
+
 /** 主題：先由有意思的完整單字入手；字母音基地保留作針對性溫習。 */
 const PHONICS_TOPICS = [
   {
@@ -110,6 +180,33 @@ const PHONICS_TOPICS = [
     words: [
       ['home', '🏠'], ['school', '🏫'], ['park', '🌳'], ['shop', '🛍️'], ['hospital', '🏥'], ['library', '📚'], ['pool', '🏊'], ['beach', '🏖️'], ['zoo', '🦁'], ['classroom', '🧑‍🏫'],
     ].map(([word, emoji], i) => ({ id: `sight_places_${i}`, word, letters: Array.from(word), emoji, plate: '#1a3050' })),
+  },
+  {
+    id: 'sight_vehicles', title: '車輛', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種車輛', cover: '🚕', section: 'sight', flow: 'blend', modes: ['build'],
+    words: [
+      ['car', '🚗'], ['bus', '🚌'], ['taxi', '🚕'], ['tram', '🚋'], ['train', '🚆'], ['truck', '🚚'], ['van', '🚐'], ['bike', '🚲'], ['ferry', '⛴️'], ['plane', '✈️'],
+    ].map(([word, emoji], i) => ({ id: `sight_vehicles_${i}`, word, letters: Array.from(word), emoji, plate: '#1a3050' })),
+  },
+  {
+    id: 'sight_fruit', title: '水果', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種水果', cover: '🍇', section: 'sight', flow: 'blend', modes: ['build'],
+    words: [
+      ['apple', '🍎'], ['banana', '🍌'], ['orange', '🍊'], ['grape', '🍇'], ['mango', '🥭'], ['melon', '🍈'], ['pear', '🍐'], ['peach', '🍑'], ['lemon', '🍋'], ['kiwi', '🥝'],
+    ].map(([word, emoji], i) => ({ id: `sight_fruit_${i}`, word, letters: Array.from(word), emoji, plate: '#3a2818' })),
+  },
+  {
+    id: 'sight_household', title: '家居用品', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 件家居用品', cover: '🛋️', section: 'sight', flow: 'blend', modes: ['build'],
+    words: [
+      ['bed', '🛏️'], ['sofa', '🛋️'], ['table', '🪑'], ['chair', '🪑'], ['lamp', '💡'], ['clock', '🕰️'], ['cup', '☕'], ['plate', '🍽️'], ['spoon', '🥄'], ['towel', '🧺'],
+    ].map(([word, emoji], i) => ({ id: `sight_household_${i}`, word, letters: Array.from(word), emoji, plate: '#1a3050' })),
+  },
+  {
+    id: 'sight_school_items', title: '學校用品', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 件學校用品', cover: '🎒', section: 'sight', flow: 'blend', modes: ['build'],
+    words: [
+      ['book', '📘'], ['bag', '🎒'], ['pen', '🖊️'], ['pencil', '✏️'], ['ruler', '📏'], ['eraser', '🧽'], ['crayon', '🖍️'], ['paper', '📄'], ['glue', '🧴'], ['scissors', '✂️'],
+    ].map(([word, emoji], i) => ({ id: `sight_school_items_${i}`, word, letters: Array.from(word), emoji, plate: '#2a1840' })),
+  },
+  {
+    id: 'hk_festivals', title: '香港節日', blurb: '5 個節日 · 50 個主題詞語', cover: '🎉', section: 'sight', collections: HK_FESTIVAL_TOPICS,
   },
   {
     id: 'letters_rev',
@@ -281,7 +378,7 @@ const PHONICS_TOPICS = [
 ];
 
 function getPhonicsTopicById(id) {
-  return PHONICS_TOPICS.find((t) => t.id === id);
+  return PHONICS_TOPICS.find((t) => t.id === id) || HK_FESTIVAL_TOPICS.find((t) => t.id === id);
 }
 
 function isLetterItem(item) {

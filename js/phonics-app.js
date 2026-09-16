@@ -188,6 +188,7 @@
     const map = {
       topics: '#screen-phonics-topics',
       sounds: '#screen-phonics-sounds',
+      collections: '#screen-phonics-collections',
       learn: '#screen-phonics-learn',
       play: '#screen-phonics-play',
       listen: '#screen-phonics-listen',
@@ -503,6 +504,7 @@
       bindPhonicsHome();
       bindPhonicsTopics();
       bindPhonicsSounds();
+      bindPhonicsCollections();
       bindPhonicsLearn();
       bindPhonicsPlayPick();
       bindPhonicsListen();
@@ -554,9 +556,39 @@
         <span class="topic-title term-en">${topic.title}</span>
         <span class="topic-blurb term-en">${topic.blurb}</span>
       `;
-      btn.onclick = () => topic.soundMissions ? openPhonicsSounds() : openPhonicsLearn(topic.id);
+      btn.onclick = () => topic.soundMissions ? openPhonicsSounds() : topic.collections ? openPhonicsCollections(topic.id) : openPhonicsLearn(topic.id);
       grid.appendChild(btn);
     });
+  }
+
+  function bindPhonicsCollections() {
+    const back = $('#btn-back-phonics-collections');
+    if (back) back.onclick = () => openPhonicsTopics();
+  }
+
+  function openPhonicsCollections(topicId) {
+    const topic = getPhonicsTopicById(topicId);
+    const grid = $('#phonics-collections-grid');
+    if (!topic?.collections || !grid) return;
+    const title = $('#phonics-collections-title');
+    const lead = $('#phonics-collections-lead');
+    if (title) title.textContent = topic.title;
+    if (lead) lead.textContent = '揀一個節日，先學詞語再拼字';
+    grid.innerHTML = '';
+    topic.collections.forEach((collection, index) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'topic-card collection-topic-card';
+      btn.innerHTML = `
+        <span class="phonics-mission-number" aria-hidden="true">FESTIVAL ${String(index + 1).padStart(2, '0')}</span>
+        <span class="topic-cover" aria-hidden="true">${collection.cover}</span>
+        <span class="topic-title collection-title">${collection.title}</span>
+        <span class="topic-blurb term-en">${collection.blurb}</span>
+      `;
+      btn.onclick = () => openPhonicsLearn(collection.id);
+      grid.appendChild(btn);
+    });
+    showPScreen('collections');
   }
 
   function bindPhonicsSounds() {
@@ -636,7 +668,12 @@
 
   function bindPhonicsLearn() {
     const back = $('#btn-back-phonics-learn');
-    if (back) back.onclick = () => pActiveTopicId === 'letters_rev' ? openPhonicsSounds() : openPhonicsTopics();
+    if (back) back.onclick = () => {
+      const topic = getPhonicsTopicById(pActiveTopicId);
+      if (pActiveTopicId === 'letters_rev') openPhonicsSounds();
+      else if (topic?.parentId) openPhonicsCollections(topic.parentId);
+      else openPhonicsTopics();
+    };
     const tap = $('#phonics-learn-tap');
     if (tap) tap.onclick = () => speakCurrentPhonicsLearn();
     const prev = $('#btn-phonics-learn-prev');
@@ -697,10 +734,10 @@
         const soundChunks = word.soundChunks || word.letters;
         lettersRow.innerHTML = soundChunks
           ? soundChunks
-              .map(
-                (ch) =>
-                  `<button type="button" class="letter-tile" data-letter="${ch}" aria-label="播放 ${ch} 音">${letterTileHtml(ch)}</button>`,
-              )
+              .map((ch, index) => {
+                const divider = word.wordBreaks?.includes(index) ? '<span class="phrase-divider" aria-hidden="true"></span>' : '';
+                return `${divider}<button type="button" class="letter-tile" data-letter="${ch}" aria-label="播放 ${ch} 音">${letterTileHtml(ch)}</button>`;
+              })
               .join('')
           : '';
         lettersRow.querySelectorAll('.letter-tile').forEach((tile) => {
@@ -850,7 +887,7 @@
     const prompt = $('#screen-phonics-build .prompt-box p');
     const back = $('#btn-back-phonics-build');
     const poolLabel = $('#screen-phonics-build .build-pool-wrap .section-label');
-    if (title) title.textContent = isBlendFlow ? '動物拼字任務' : '砌一砌';
+    if (title) title.textContent = isBlendFlow && topic ? `${topic.title}・拼字` : '砌一砌';
     if (prompt) prompt.textContent = isBlendFlow ? '睇圖，逐個音砌出英文' : '拖字母入格';
     if (back) back.textContent = isBlendFlow ? '← 字卡' : '← 玩法';
     if (poolLabel) poolLabel.textContent = isBlendFlow ? '音素池' : '字母池';
@@ -1148,6 +1185,7 @@
     if (!box || !pBuildRound) return;
     const next = nextPhonicsBuildIndex();
     box.innerHTML = '';
+    box.classList.toggle('has-long-word', pBuildRound.chars.length > 8);
     pBuildRound.chars.forEach((ch, i) => {
       const filled = pBuildRound.filled[i];
       const slot = document.createElement('button');
@@ -1162,6 +1200,12 @@
         ${filled ? `<span class="build-placed letter-tile" aria-hidden="true">${letterTileHtml(filled.char)}</span>` : ''}`;
       slot.addEventListener('click', () => onPhonicsBuildSlotTap(i));
       box.appendChild(slot);
+      if (pBuildRound.target.wordBreaks?.includes(i + 1)) {
+        const divider = document.createElement('span');
+        divider.className = 'build-phrase-divider';
+        divider.setAttribute('aria-hidden', 'true');
+        box.appendChild(divider);
+      }
     });
   }
 
