@@ -1,93 +1,55 @@
-# Carter Family sentence missions and reading exercises
+# Carter Family Read & Fill and reading exercises
 
 ## Aim
 
-Use the Carter Family books to turn real story scenes into a gradual path from
-listening, to noticing a sentence, to reading it independently.  The app will reuse
-the school-supplied PDF page as the scene and its matching original page clip as the
-model.  It therefore does not need invented illustrations or synthetic story audio.
+Turn each Carter Family story page into one small reading action: listen to the page,
+then put one missing whole word back into a short sentence from that same page. The
+school-supplied PDF is the scene and the matching original page clip is the model, so
+the app does not need invented illustrations or synthetic story audio.
 
 ## Source-to-app workflow
 
-1. **Catalogue a candidate book.** Record the book title, its source PDF, full-book
-   recording, page-level clip folder, and available page numbers in a small tracked
-   manifest.  The original files stay under `source-materials/Carter Family/`.
-2. **Choose two or three scenes.** A scene must be clear to a child, contain a short
-   useful sentence, and have a matching page clip.
-3. **Transcribe and verify manually.** Copy the sentence exactly from the PDF, replay
-   the page clip, and confirm the words, page number, and audio match.  No sentence is
-   published based only on a title or illustration.
-4. **Make lean derivatives.** Export only the chosen page image and short approved
-   audio clip into a KAKA Learn asset folder.  The manifest stores the source book,
-   PDF page, and clip filename for each derivative.
-5. **Tag the teaching target.** For each verified sentence, identify one sentence
-   frame and at most three target words.  Keep phonics chunks only where they clarify
-   a word; the full sentence remains the reading goal.
+1. Catalogue the source PDF, full-book recording, page clip folder, and page numbers.
+   Originals remain in `source-materials/Carter Family/`.
+2. For each chosen page, transcribe one short printed sentence and replay its matching
+   clip. Record the PDF page and clip filename in the web data.
+3. Select one useful whole word to remove. Use two tiles only: the answer and one
+   gentle distractor. Start with one blank; add a second only after the child is ready.
+4. Deploy only selected page images and clips as derivatives. Keep the original files
+   private and traceable.
 
-## Pilot: *Game Night*
+## Current pilot: *Game Night* Read & Fill
 
-Start with the existing `Game Night` material because the page scenes and page-level
-audio are already in the app.  First verify the exact text and clip alignment, then
-select three short sentences that form a small story sequence.  The pilot should be a
-single ten-question mission, not a separate collection of unrelated vocab cards.
+The current pilot uses all 12 existing page images and page clips. Its loop is:
 
-### Play flow
+1. The child sees a large page and taps **Listen to this page**.
+2. When the official recording finishes, the same page remains on screen.
+3. A short sentence from that page appears with one missing word.
+4. The child drags or taps a word tile into the blank.
+5. The full sentence remains visible after a correct answer. The child chooses the
+   next page, retaining control of the pace.
 
-1. **Read the scene** — the child sees page 1, taps Listen, and follows the official
-   page recording.  It advances like the existing e-book only after the clip finishes
-   or the child taps Next.
-2. **Notice the sentence** — the same scene stays visible; the verified sentence
-   appears in a large reading strip.  Tapping it repeats the original page clip, with
-   the sentence highlighted.
-3. **Play the sentence mission** — ten questions based on the same two or three
-   scenes:
+On iPad landscape, the page is the main left-hand visual and the sentence activity is
+on the right. On a phone, the same elements stack vertically. This keeps the image,
+sound and word recognition together rather than turning the story into a separate quiz.
 
-   | Questions | Activity | Learning purpose |
-   | --- | --- | --- |
-   | 1–2 | Hear a line and tap its scene | Link spoken English with story meaning. |
-   | 3–5 | Find a target word in the displayed sentence | Recognise whole high-frequency words in context. |
-   | 6–8 | Fill one blank or arrange a short sentence | Notice word order and build the complete line. |
-   | 9–10 | Replay, point to the scene, then read the line aloud | Practise fluent reading and simple picture talk. |
-
-4. **Finish the book mission** — show the three completed story scenes and allow a
-   replay.  It shares the existing listening/reading daily reward slot, so it does not
-   create a fourth daily coin type.
-
-## Reading exercise progression
-
-Each later Carter Family book follows the same predictable structure:
+## Progression for later books
 
 | Stage | Child action | Evidence of progress |
 | --- | --- | --- |
-| Listen | Hear one complete page clip while viewing its PDF scene | Can identify the matching scene. |
-| Echo read | Replay the model and follow one highlighted sentence | Can track the sentence from left to right. |
-| Word notice | Tap a known word inside that sentence | Recognises the word in a meaningful context. |
-| Build | Restore one missing word or arrange a short line | Uses the sentence frame and word order. |
-| Read for meaning | Answer one scene-based question or point to the answer | Shows understanding beyond decoding. |
+| Listen | Hear one page clip while seeing its PDF scene | Stays with a page of story English. |
+| Notice | See a short sentence from that same page | Connects spoken language with print. |
+| Fill | Restore one whole word by tap or drag | Recognises the word in context. |
+| Read again | Replay the source clip with the completed sentence visible | Builds familiarity without testing pressure. |
 
-The first content line should be **My First Sentences**: useful frames such as `I am…`,
-`I can see…`, `I like…`, and `I want…`, but only when those exact forms occur in a
-verified Carter Family page.  Later units can group verified scenes by setting, such as
-home, school, play, or food, rather than forcing an arbitrary word list.
+Useful sentence frames are added only when they occur word-for-word in a verified
+Carter Family page. New books are added only after their PDF page and page clip are
+checked together.
 
-## Product and quality rules
+## Quality rules
 
-- Every published sentence must point to a specific Carter Family book, PDF page, and
+- Every published fill sentence points to a Carter Family book, source PDF page and
   matching page clip.
-- Retain the official page recording as the child-facing model.  Do not replace it with
-  text-to-speech for story reading.
-- Keep original PDFs and audio private under `source-materials/`; deploy only approved,
-  compressed derivatives needed by the active mission.
-- Use the real PDF page as the scene, with an optional crop only to focus attention.
-- Test each mission on iPad portrait, iPad landscape, and phone so the final action is
-  always visible and reachable.
-
-## Build order
-
-1. Audit and make the *Game Night* three-sentence pilot manifest.
-2. Add the read-scene and ten-question mission screens, reusing the existing Story
-   English e-book playback.
-3. Test one child flow end-to-end and adjust the sentence length, audio pacing, and
-   reward feedback.
-4. Catalogue the next two Carter Family books and add them only after their page/audio
-   alignment is verified.
+- The child-facing model remains the official page recording, never English TTS.
+- The final interactive action must be visible and reachable on iPad portrait,
+  landscape and phone.

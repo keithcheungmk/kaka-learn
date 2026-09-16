@@ -86,6 +86,13 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-16 · Codex（Keith：Carter Family Read & Fill）
+
+- 移除獨立 Story Mission 的揀圖、揀答案、完整砌句和理解題；`Game Night` 現在只保留一條 `Read & Fill` 流程。
+- 每一頁先播放對應 Carter Family 原始逐頁錄音；錄音結束才在同頁開啟短句填空。卡卡把一個完整英文詞拖入或點入空格，答啱後可看完整句子再自己按下一頁。
+- 橫向 iPad 改為左邊大故事頁、右邊短句、填空和兩張字卡；手機自動上下排列。12 頁題目各自保留 PDF 頁碼、原始 clip 編號和來源句。
+- **踩咗** `index.html`、`js/story-demo.js`、`css/story-demo.css`、`assets/story-demo/SOURCE.md`、`docs/carter-family-sentence-reading-plan.md`、`scripts/test-story-mission.mjs`、`docs/handover.md`
+
 ### 2026-09-16 · Codex（Keith：課本溫習移到中文主題頁最頂）
 
 - 主題頁將「課本溫習」移到第一組，紅輯及橙輯會在其他日常主題之前顯示；未改動紅橙輯字表、書本資料或書架。

@@ -2,17 +2,19 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
 const source = await readFile(new URL('../js/story-demo.js', import.meta.url), 'utf8');
+const css = await readFile(new URL('../css/story-demo.css', import.meta.url), 'utf8');
 const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 
-assert.match(source, /const MISSION = \[/, 'Story Mission data should exist');
-assert.match(source, /missionLength: MISSION\.length/, 'Mission length should be exposed for the demo');
-assert.match(source, /count: MISSION\.length/, 'Hub should describe the real mission length');
-for (const type of ['scene', 'word', 'build', 'meaning', 'echo']) assert.match(source, new RegExp(`type: '${type}'`));
-assert.match(source, /sourceClip: '86\.mp3'/, 'Mission lines should retain a Carter source clip trace');
-assert.match(source, /function audioMarkup/, 'Story activity should render page-audio controls');
-assert.doesNotMatch(source, /speakEnglishTerm/, 'Story Mission should use original page audio instead of English TTS');
-assert.match(index, /Sentence Mission 的每一句都可追溯到故事頁和原始錄音/);
-
-const missionBlock = source.slice(source.indexOf('const MISSION = ['), source.indexOf('];\n\n  const ACTIVITIES'));
-assert.equal((missionBlock.match(/type: '/g) || []).length, 10, 'Game Night pilot should have exactly ten questions');
-console.log('story mission checks passed');
+assert.match(source, /const PAGES = \[/, 'Read & Fill page data should exist');
+assert.match(source, /pageCount: PAGES\.length/, 'The page count should be exposed for the demo');
+assert.equal((source.match(/sourceClip: '/g) || []).length, 12, 'Every story page needs a source audio trace');
+assert.equal((source.match(/blanks: \[/g) || []).length, 12, 'Every story page needs one short fill activity');
+assert.match(source, /function renderFill/, 'The fill screen should render after the page audio');
+assert.match(source, /draggable="true"/, 'Word tiles should support dragging');
+assert.match(source, /tile\.addEventListener\('click'/, 'Word tiles should also support tapping');
+assert.match(source, /audio\.onended = \(\) => \{ if \(after\) after\(\)/, 'The fill activity must follow the original page audio');
+assert.doesNotMatch(source, /speakEnglishTerm/, 'Story reading must not use English TTS');
+assert.doesNotMatch(source, /const MISSION/, 'The former separate multi-question mission should be removed');
+assert.match(css, /grid-template-columns:minmax\(0,58%\) minmax\(300px,42%\)/, 'iPad challenge layout should allocate space to image and fill panel');
+assert.match(index, /每頁先聽故事，再把剛才聽到的一個字放回短句/);
+console.log('story read-and-fill checks passed');

@@ -7,4 +7,4 @@ Source supplied by Keith for the private KAKA Learn app:
 
 `pages/page-01.jpg` through `pages/page-12.jpg` are rendered derivatives of PDF pages 3 through 14, which correspond to printed story pages 1 through 12. `cf001-game-night-page-01.mp3` through `cf001-game-night-page-12.mp3` correspond respectively to source clips `86.mp3` through `97.mp3`, as mapped by that folder's README.
 
-The originals remain untouched in `source-materials/`. These files are selected derivatives for the Story English electronic-book and Sentence Mission demo only.
+The originals remain untouched in `source-materials/`. These files are selected derivatives for the Story English Read & Fill demo only.
