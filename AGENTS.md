@@ -12,6 +12,22 @@
 
 ## 硬性約束
 
+### Source Materials：Keith 只負責掉檔，Agent 負責其餘工作
+
+- **唯一投放路徑**：`source-materials/`。Keith 可以將 MP3、PDF、相片、Flash Cards、試算表、壓縮檔或其他教材直接混合放入去。
+- **唔可以要求 Keith 預先分類**：唔好叫 Keith 分科目／年級／檔案類型、改檔名、轉格式、拆 PDF、填 metadata 或整理重複檔案。辨認、抽取、轉錄、OCR、分類、命名、去重、建立索引及轉成網站資料，全部係 Agent 工作。
+- `source-materials/` 係本機原始素材區，已由 `.gitignore` 排除；原始檔**唔可以直接 commit 或部署**。未經 Keith 明確要求，唔好將整個素材庫搬入 `assets/`、`data/`、`book-scans/` 或 `_site/`。
+- 處理素材時先保留原檔；唔好覆寫或刪除原件。衍生嘅逐字稿、OCR、縮圖、JSON、字卡或網站副本要另外產生，並記錄來源檔。若要搬走已處理嘅原檔，先確保有可追溯位置，唔可以當垃圾刪除。
+- Keith 要素材支援網站時，Agent 自行判斷最佳落點：網站要直接載入嘅成品先放 `assets/`；結構化內容先放 `data/`；只供分析／參考嘅內容留喺 `source-materials/`。大型 MP3／PDF 唔好未評估體積就塞入網站。
+- 除非素材本身有相反標示，視為 Keith 已授權用於呢個私人 learning app；但公開部署前仍要避免洩露學生資料、教師答案、姓名或其他私隱內容，有疑問先停低講明。
+
+### Carter Family 教材來源（原始素材參考）
+
+- Carter Family 嘅教材來源係 `source-materials/Carter Family/`（Keith 於 2026-09-16 指示集中遷入）；呢個 project 要重用嘅係入面嘅故事書 PDF、完整故事 MP3、逐頁 audio clips 同各本書內容，唔係 Carter Family 點讀筆 project 嘅工作規則。
+- 需要做英文網站／learning app 內容時，優先參考 `Book pdf/`、`Carter Family MP3/` 同 `Page-level clips/`；可以抽取故事、生字、句子、頁面次序、完整錄音同逐頁錄音之間嘅對應。
+- `README.md`、`BOOKMARK_APPENDIX.md`、`HANDOVER.md` 等只可以用來理解檔案內容／對應背景；唔好將點讀筆 sticker 編號規則當成 KAKA Learn 產品規則。
+- 唔好將 Carter Family 原始教材整個複製入本 repo，亦唔好改動 Carter Family 原檔；需要落地時只產生 KAKA Learn 自己嘅衍生資料及獲選網站資產。
+
 - 所有 app 程式碼只可以寫喺本 repo（kaka-learn）。`keith-ops` 只係建議／營運筆記，唔好把遊戲實作放過去。
 - 動物核心 24 個繁體表面形必須保留（唔好改「老虎／獅子／大象」做單字、唔好加「麋鹿」取代鹿種）：
 

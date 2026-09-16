@@ -14,6 +14,9 @@ for (const id of ['rb_yusan', 'rb_xin', 'rb_fenguo', 'rb_kuaipao', 'rb_shuijiao'
 assert.match(source, /BOOKS\.push\(\.\.\.RED_BOOKS\)/);
 assert.match(source, /kaka-red-book-game-v2/);
 assert.match(source, /mode: 'preview'/);
+assert.match(source, /scenes: \[0, 1, 2, 3, 4\]/);
+assert.match(source, /scene-neutral-preview/);
+assert.doesNotMatch(source, /assets\/book-scenes\/red-series\/\$\{slug\}\.jpg/);
 assert.equal((source.match(/image: 'assets\/book-scenes\//g) || []).length, 6);
 for (const term of ['紅氣球', '藍氣球', '黃氣球', '綠氣球', '氣球', '飛走了', '花生', '糖果', '餅乾', '水果', '薯片', '汽水']) assert.ok(source.includes(`word: '${term}'`));
 assert.ok((source.match(/distractors:/g) || []).length >= 7);

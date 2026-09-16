@@ -17,8 +17,8 @@ const BOOKS = [
   },
 ];
 
-// 紅輯其餘書本：詞語只取自已核實嘅 book-cards；場景圖係書本掃描第 2 頁，
-// 所以遊戲將「詞語放入學習框」標示為預覽，唔將畫面位置誤稱為字卡對應。
+// 紅輯其餘書本：詞語只取自已核實嘅 book-cards；未有可靠頁面對位，
+// 所以使用中性預覽，唔將任何圖片誤稱為該書場景。
 const RED_BOOKS = [
   ['rb_yusan', '雨傘', '☂️', 'yusan', ['雨傘', '橙雨傘', '藍雨傘', '綠雨傘', '黃雨傘', '花雨傘', '收起小雨傘', '太陽出來了', '出來了', '下雨']],
   ['rb_xin', '信', '✉️', 'xin', ['信', '爸爸', '的', '哥哥', '安安', '媽媽', '姐姐', '爺爺', '沒有', '寫']],
@@ -36,11 +36,11 @@ const RED_BOOKS = [
   stars: 10,
   mode: 'preview',
   cover,
-  // 五輪 × 兩個詞語 = 10 題；頁圖係同一份掃描預覽，避免虛構頁面對位。
+  // 五輪 × 兩個詞語 = 10 題；中性預覽，待書頁核實後才替換。
   scenes: [0, 1, 2, 3, 4].map((page, index) => ({
-    image: `assets/book-scenes/red-series/${slug}.jpg`,
-    aspect: '0.76',
-    source: `紅輯・《${title}》掃描書第 2 頁・詞卡核實；場景配對預覽 ${page + 1}`,
+    image: null,
+    aspect: '1.55',
+    source: `紅輯・《${title}》詞卡核實；場景預覽・待書頁核實 ${page + 1}`,
     targets: words.slice(index * 2, index * 2 + 2).map((word, targetIndex) => ({ word, x: targetIndex ? 68 : 28, y: 24 + (index % 3) * 22 })),
     distractors: words.filter((word) => !words.slice(index * 2, index * 2 + 2).includes(word)).slice(0, 2),
   })),
@@ -125,7 +125,10 @@ function renderScene() {
 
   const board = $('#scene-board');
   board.style.setProperty('--scene-aspect', scene.aspect);
-  board.innerHTML = `<img src="${scene.image}" alt="${book.title}的書頁場景" decoding="async">${scene.targets.map((target) => `<button type="button" class="drop-zone${placements[target.word] ? ' is-filled' : ''}" data-target="${target.word}" style="left:${target.x}%;top:${target.y}%" aria-label="把詞語放到${target.word}的位置">${placements[target.word] || '拖到這裡'}</button>`).join('')}`;
+  const preview = scene.image
+    ? `<img src="${scene.image}" alt="${book.title}的書頁場景" decoding="async">`
+    : `<div class="scene-neutral-preview" role="img" aria-label="${book.title}中性場景預覽"><span>${book.cover || '📖'}</span><small>場景預覽・待書頁核實</small></div>`;
+  board.innerHTML = `${preview}${scene.targets.map((target) => `<button type="button" class="drop-zone${placements[target.word] ? ' is-filled' : ''}" data-target="${target.word}" style="left:${target.x}%;top:${target.y}%" aria-label="把詞語放到${target.word}的位置">${placements[target.word] || '拖到這裡'}</button>`).join('')}`;
   board.querySelectorAll('.drop-zone').forEach((zone) => {
     zone.addEventListener('click', () => selectedWord && placeWord(selectedWord, zone.dataset.target));
     zone.addEventListener('dragover', (event) => { event.preventDefault(); zone.classList.add('is-over'); });
