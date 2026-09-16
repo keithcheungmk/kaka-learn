@@ -36,6 +36,7 @@ for (const file of ['balloon-colours-a.jpg', 'balloon-colours-b.jpg', 'balloon-f
 assert.match(source, /draggable=/);
 assert.match(source, /answer-slot/);
 assert.match(source, /addEventListener\('drop'/);
+assert.match(source, /直接揿正確字詞，就自動放入下一個空格/);
 assert.match(html, /每頁答對固定得 2 粒星/);
 assert.match(source, /Array\.from\(\{ length: 4 \}/);
 assert.match(source, /stars \+= 2/);

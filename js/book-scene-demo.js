@@ -146,8 +146,15 @@ function renderScene() {
 
   $('#word-bank').querySelectorAll('.word-card').forEach((card) => {
     card.addEventListener('click', () => {
-      selectedWord = card.dataset.word;
-      speak(selectedWord);
+      const word = card.dataset.word;
+      const target = scene.targets.find((item) => item.word === word && !placements[item.word]);
+      if (target) {
+        // K2 直接揿正確字詞，就自動放入下一個空格；唔需要再揿一次答案槽。
+        placeWord(word, target.word);
+        return;
+      }
+      selectedWord = word;
+      speak(word);
       renderScene();
     });
     card.addEventListener('dragstart', (event) => event.dataTransfer.setData('text/plain', card.dataset.word));
