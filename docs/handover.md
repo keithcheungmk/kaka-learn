@@ -86,6 +86,14 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-16 · Codex（Keith：Carter Family Story Mission）
+
+- Story English 的 `Game Night` 現在有兩條清楚路徑：`Read the Story` 保留 12 頁電子書和對應逐頁原始錄音；`Story Mission` 將原本拆散的 Word Cards／Say It／Picture Talk 重組成一輪 10 題。
+- 試點題型依次包含聽句揀故事場景、在原句找字、按順序砌句、句子辨認、故事理解和跟讀；所有示範都重播對應故事頁音檔，唔會用英文 TTS 代替 Carter Family 原錄音。
+- 六句 `Game Night` 內容均保留 PDF 頁碼和原始逐頁 clip 編號；資產來源記錄已改為新的 `source-materials/Carter Family/` 位置。
+- `scripts/test-story-mission.mjs` 會守住 10 題組成、原錄音入口、來源追溯和「不使用英文 TTS」要求；家庭裝置 smoke 及 invariants 已通過。
+- **踩咗** `index.html`、`js/story-demo.js`、`css/story-demo.css`、`assets/story-demo/SOURCE.md`、`scripts/test-story-mission.mjs`、`docs/handover.md`
+
 ### 2026-09-16 · Codex（Keith：Carter Family 素材集中與閱讀任務規劃）
 
 - Carter Family 原始教材已由 Downloads 集中遷到 `source-materials/Carter Family/`，保留原有 PDF、完整 MP3、逐頁 clips 與來源說明檔的結構；素材庫仍被 Git ignore，不會直接部署。
