@@ -118,8 +118,8 @@ function renderScene() {
   $('#scene-book-title').textContent = book.title;
   $('#scene-progress').textContent = `第 ${sceneIndex + 1} / ${book.scenes.length} 頁`;
   $('#star-count').textContent = `${stars}/${book.stars} ⭐`;
-  $('#scene-prompt').textContent = '看圖，找出詞語。';
-  $('#scene-feedback').textContent = `${scene.source}・先聽，再放字詞。`;
+  $('#scene-prompt').textContent = '先聽本頁字詞，再將正確字詞放入下方字詞槽。';
+  $('#scene-feedback').textContent = `${scene.source}・本頁字詞全列出，另有干擾字。`;
   $('#scene-feedback').className = 'scene-feedback';
   $('#scene-submit').disabled = Object.keys(placements).length !== scene.targets.length || locked;
   $('#scene-feedback').dataset.mode = book.mode || 'verified';
@@ -156,7 +156,7 @@ function submitScene() {
   const correct = scene.targets.every((target) => placements[target.word] === target.word);
   const feedback = $('#scene-feedback');
   if (!correct) {
-    feedback.textContent = '再聽一次，想想每個詞語在哪一幅圖裡。';
+    feedback.textContent = '再聽一次，揀出本頁字詞，唔好揀干擾字。';
     feedback.className = 'scene-feedback is-retry';
     window.KakaSpeech?.speakRetryFeedback?.();
     return;
@@ -165,7 +165,7 @@ function submitScene() {
   stars += scene.targets.length;
   saveProgress();
   $('#star-count').textContent = `${stars}/${book.stars} ⭐`;
-  feedback.textContent = '答對了！字詞和書頁場景連起來了。';
+  feedback.textContent = '答對了！你已經砌齊本頁字詞。';
   feedback.className = 'scene-feedback is-good';
   $('#scene-submit').disabled = true;
   const spoken = scene.targets.map((target) => target.word).join('。');
