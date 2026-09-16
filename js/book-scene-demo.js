@@ -36,14 +36,14 @@ const RED_BOOKS = [
   stars: 10,
   mode: 'preview',
   cover,
-  // 五輪 × 兩個詞語 = 10 題；真實書頁展示，詞語位置待核實。
+  // 五輪 × 每頁四個詞語；每本固定 10 題／10 星，真實書頁展示，詞語位置待核實。
   scenes: [0, 1, 2, 3, 4].map((page, index) => ({
     image: `assets/book-scenes/red-series-pages-hq/${title}-p4.webp`,
     aspect: '1.72',
     incomplete: true,
     source: `紅輯・《${title}》PDF 故事頁 4（重用於第 ${page + 1} 輪）；頁面 target 對位待核實`,
-    targets: words.slice(index * 2, index * 2 + 2).map((word, targetIndex) => ({ word, x: targetIndex ? 68 : 28, y: 24 + (index % 3) * 22 })),
-    distractors: words.filter((word) => !words.slice(index * 2, index * 2 + 2).includes(word)).slice(0, 2),
+    targets: Array.from({ length: 4 }, (_, targetIndex) => words[(index * 2 + targetIndex) % words.length]).map((word) => ({ word })),
+    distractors: words.filter((word) => !Array.from({ length: 4 }, (_, targetIndex) => words[(index * 2 + targetIndex) % words.length]).includes(word)).slice(0, 4),
   })),
 }));
 
@@ -162,7 +162,8 @@ function submitScene() {
     return;
   }
   locked = true;
-  stars += scene.targets.length;
+  // 每頁固定 2 星；詞語槽由 2 個擴展到 4 個唔會改變獎勵規則。
+  stars += 2;
   saveProgress();
   $('#star-count').textContent = `${stars}/${book.stars} ⭐`;
   feedback.textContent = '答對了！你已經砌齊本頁字詞。';

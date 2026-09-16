@@ -30,7 +30,9 @@ for (const file of ['balloon-colours-a.jpg', 'balloon-colours-b.jpg', 'balloon-f
 assert.match(source, /draggable=/);
 assert.match(source, /answer-slot/);
 assert.match(source, /addEventListener\('drop'/);
-assert.match(html, /每頁答對得 2 粒星/);
+assert.match(html, /每頁答對固定得 2 粒星/);
+assert.match(source, /Array\.from\(\{ length: 4 \}/);
+assert.match(source, /stars \+= 2/);
 assert.doesNotMatch(source, /把詞語放到.*位置/);
 assert.match(source, /if \(!heardWhileSelecting\) speak\(word\)/);
 assert.match(source, /scene-submit/);
