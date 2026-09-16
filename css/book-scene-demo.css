@@ -39,6 +39,10 @@ body { margin: 0; min-height: 100dvh; background: radial-gradient(circle at 10% 
 .drop-zone.is-over { transform: translate(-50%, -50%) scale(1.08); background: #254e81; }
 .drop-zone.is-filled { border-style: solid; background: #15505dcc; color: white; }
 .word-bank { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin: 16px auto 8px; }
+.answer-slots { display: flex; justify-content: center; gap: 12px; width: 100%; margin: 0 0 4px; }
+.answer-slot { flex: 1 1 180px; min-height: 58px; max-width: 280px; padding: 10px 16px; border: 3px dashed var(--scene-gold); border-radius: 16px; background: #111a44d9; color: #fff1a0; font: inherit; font-size: clamp(1.05rem, 2.4vw, 1.4rem); font-weight: 900; cursor: pointer; touch-action: manipulation; }
+.answer-slot.is-filled { border-style: solid; background: #15505dcc; color: white; }
+.answer-slot.is-over { background: #254e81; }
 .word-card { min-width: 118px; min-height: 58px; padding: 10px 16px; border: 2px solid #5fb5ee; border-radius: 16px; background: #203c7a; color: var(--scene-ink); font: inherit; font-size: clamp(1.15rem, 2.5vw, 1.55rem); font-weight: 900; cursor: pointer; touch-action: manipulation; }
 .word-card:hover, .word-card.is-selected { border-color: var(--scene-gold); background: #4a2c4f; }
 .word-card.is-distractor { border-color: #b58be8; }

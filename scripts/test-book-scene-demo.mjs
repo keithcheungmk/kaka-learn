@@ -28,7 +28,10 @@ for (const term of ['紅氣球', '藍氣球', '黃氣球', '綠氣球', '氣球'
 assert.ok((source.match(/distractors:/g) || []).length >= 7);
 for (const file of ['balloon-colours-a.jpg', 'balloon-colours-b.jpg', 'balloon-flew-away.jpg', 'anan-snacks.jpg', 'anan-biscuits-fruit.jpg', 'anan-chips-drink.jpg']) assert.ok(fs.existsSync(path.join(root, 'assets/book-scenes', file)));
 assert.match(source, /draggable=/);
+assert.match(source, /answer-slot/);
 assert.match(source, /addEventListener\('drop'/);
+assert.match(html, /每頁答對得 2 粒星/);
+assert.doesNotMatch(source, /把詞語放到.*位置/);
 assert.match(source, /if \(!heardWhileSelecting\) speak\(word\)/);
 assert.match(source, /scene-submit/);
 assert.match(html, /js\/speech\.js/);

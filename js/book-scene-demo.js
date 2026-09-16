@@ -129,16 +129,16 @@ function renderScene() {
   const preview = scene.image
     ? `<img src="${scene.image}" alt="${book.title} PDF 故事書頁" decoding="async"><small class="scene-preview-badge">真實故事頁・頁面配對待核實</small>`
     : `<div class="scene-neutral-preview" role="img" aria-label="${book.title}中性場景預覽"><span>${book.cover || '📖'}</span><small>場景預覽・待書頁核實</small></div>`;
-  board.innerHTML = `${preview}${scene.targets.map((target) => `<button type="button" class="drop-zone${placements[target.word] ? ' is-filled' : ''}" data-target="${target.word}" style="left:${target.x}%;top:${target.y}%" aria-label="把詞語放到${target.word}的位置">${placements[target.word] || '拖到這裡'}</button>`).join('')}`;
-  board.querySelectorAll('.drop-zone').forEach((zone) => {
+  const used = new Set(Object.values(placements));
+  board.innerHTML = preview;
+  $('#word-bank').innerHTML = `<div class="answer-slots" aria-label="本頁字詞">${scene.targets.map((target) => `<button type="button" class="answer-slot${placements[target.word] ? ' is-filled' : ''}" data-target="${target.word}" aria-label="${placements[target.word] || '未選字詞'}">${placements[target.word] || '本頁字詞'}</button>`).join('')}</div>${sceneOptions().map((word) => `<button type="button" class="word-card${selectedWord === word ? ' is-selected' : ''}${scene.targets.some((target) => target.word === word) ? '' : ' is-distractor'}" data-word="${word}" draggable="${!used.has(word)}" ${used.has(word) || locked ? 'disabled' : ''}>${word} <small>🔊</small></button>`).join('')}`;
+  $('#word-bank').querySelectorAll('.answer-slot').forEach((zone) => {
     zone.addEventListener('click', () => selectedWord && placeWord(selectedWord, zone.dataset.target));
     zone.addEventListener('dragover', (event) => { event.preventDefault(); zone.classList.add('is-over'); });
     zone.addEventListener('dragleave', () => zone.classList.remove('is-over'));
     zone.addEventListener('drop', (event) => { event.preventDefault(); zone.classList.remove('is-over'); placeWord(event.dataTransfer.getData('text/plain'), zone.dataset.target); });
   });
 
-  const used = new Set(Object.values(placements));
-  $('#word-bank').innerHTML = sceneOptions().map((word) => `<button type="button" class="word-card${selectedWord === word ? ' is-selected' : ''}${scene.targets.some((target) => target.word === word) ? '' : ' is-distractor'}" data-word="${word}" draggable="${!used.has(word)}" ${used.has(word) || locked ? 'disabled' : ''}>${word} <small>🔊</small></button>`).join('');
   $('#word-bank').querySelectorAll('.word-card').forEach((card) => {
     card.addEventListener('click', () => {
       selectedWord = card.dataset.word;
