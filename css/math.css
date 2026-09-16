@@ -1771,7 +1771,8 @@
   html.math-canvas-mode .math-screen .game-header h1 {
     grid-column: 2;
     text-align: center;
-    white-space: nowrap;
+    white-space: normal;
+    overflow-wrap: anywhere;
     font-size: clamp(1.45rem, 3.1vw, 2.25rem);
   }
 
@@ -1829,6 +1830,46 @@
     min-height: 78px;
   }
 
+  html.math-canvas-mode #screen-math-fuel.math-screen.active {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+    grid-template-rows: auto auto 1fr auto;
+    align-items: center;
+  }
+  html.math-canvas-mode #screen-math-fuel .game-header,
+  html.math-canvas-mode #screen-math-fuel .prompt-box,
+  html.math-canvas-mode #screen-math-fuel .feedback { grid-column: 1 / -1; }
+  html.math-canvas-mode #screen-math-fuel .math-mission-hero,
+  html.math-canvas-mode #screen-math-fuel .math-fuel-rocket-wrap { grid-column: 2; }
+  html.math-canvas-mode #screen-math-fuel .math-manip-stage { grid-column: 1; grid-row: 3; width: 100%; }
+
+  html.math-canvas-mode #screen-math-time.math-screen.active {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    align-content: stretch;
+  }
+  html.math-canvas-mode #screen-math-time .math-time-set { align-self: stretch; }
+
+  html.math-canvas-mode #screen-math-earth-addition-select .addition-level-menu,
+  html.math-canvas-mode #screen-math-earth-bonds-select .addition-level-grid,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-grid {
+    width: min(100%, 1320px);
+    max-width: none;
+    margin-inline: auto;
+  }
+  html.math-canvas-mode #screen-math-earth-addition-select .addition-level-menu { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  html.math-canvas-mode #screen-math-earth-addition-select .addition-level-card,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-card { min-height: min(46vh, 340px); }
+  html.math-canvas-mode #screen-math-earth-bonds-select .addition-level-grid,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  html.math-canvas-mode #screen-math-earth-bonds-play .number-bonds-layout {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  html.math-canvas-mode #screen-math-earth-bonds-play .number-bonds-rows { flex: 1 1 auto; max-height: none; }
+  html.math-canvas-mode #screen-math-earth-bonds-play .number-bonds-pool-wrap { flex: 0 0 min(30%, 360px); order: 0; }
+
   /* 數數／形狀／規律：大圖置中，選項沿底部橫向伸展。 */
   html.math-canvas-mode #screen-math-count.math-screen.active,
   html.math-canvas-mode #screen-math-shape.math-screen.active,
@@ -1882,4 +1923,16 @@
     font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
     font-variant-emoji: emoji;
   }
+}
+
+/* iPad 直向仍然維持固定遊戲畫布；只有揀主題／揀關卡頁容許瀏覽。 */
+@media (min-width:701px) and (orientation:portrait) {
+  html.math-canvas-mode .math-screen.active { height: 100%; min-height: 0; overflow: hidden; }
+  html.math-canvas-mode #screen-math-galaxy.math-screen.active,
+  html.math-canvas-mode #screen-math-earth-addition-select.math-screen.active,
+  html.math-canvas-mode #screen-math-earth-bonds-select.math-screen.active,
+  html.math-canvas-mode #screen-math-moon-subtraction-select.math-screen.active,
+  html.math-canvas-mode #screen-math-play.math-screen.active,
+  html.math-canvas-mode #screen-math-venus-play.math-screen.active,
+  html.math-canvas-mode #screen-math-mars-play.math-screen.active { height: auto; min-height: 100dvh; overflow: visible; }
 }
