@@ -86,6 +86,12 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
 
 ## 最近改動
 
+### 2026-09-16 · Codex（Keith：課本溫習移到中文主題頁最頂）
+
+- 主題頁將「課本溫習」移到第一組，紅輯及橙輯會在其他日常主題之前顯示；未改動紅橙輯字表、書本資料或書架。
+- 抽查紅輯 PDF 的場景頁，供之後設計「看書頁、聽詞、放字回場景」玩法時使用；暫未把原始 PDF 或掃描頁部署。
+- **踩咗** `js/app.js`、`docs/handover.md`
+
 ### 2026-09-16 · Codex（Keith：Carter Family Story Mission）
 
 - Story English 的 `Game Night` 現在有兩條清楚路徑：`Read the Story` 保留 12 頁電子書和對應逐頁原始錄音；`Story Mission` 將原本拆散的 Word Cards／Say It／Picture Talk 重組成一輪 10 題。

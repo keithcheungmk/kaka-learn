@@ -815,10 +815,10 @@ function startLearn(topic, book) {
 }
 
 const TOPIC_GROUPS = [
+  { id: 'books', title: '課本溫習', ids: ['red_series', 'orange_series'] },
   { id: 'starter', title: '今日好學', ids: ['colors', 'family', 'zoo', 'food', 'numbers'] },
   { id: 'life', title: '日常生活', ids: ['opposites', 'weather', 'nature', 'transport', 'body', 'emotions', 'senses', 'school', 'places', 'home', 'daily', 'fruit', 'veg', 'hk_food', 'jobs', 'clothes'] },
   { id: 'animals', title: '動物', ids: ['small_animals', 'bugs', 'ocean', 'dino'] },
-  { id: 'books', title: '課本溫習', ids: ['red_series', 'orange_series'] },
 ];
 
 function topicProgressHtml(topic) {
