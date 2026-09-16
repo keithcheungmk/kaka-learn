@@ -38,10 +38,10 @@ const RED_BOOKS = [
   cover,
   // 五輪 × 兩個詞語 = 10 題；真實書頁展示，詞語位置待核實。
   scenes: [0, 1, 2, 3, 4].map((page, index) => ({
-    image: `assets/book-scenes/red-series-pages/${title}-p${(page % 3) + 4}.jpg`,
+    image: `assets/book-scenes/red-series-pages/${title}-p4.jpg`,
     aspect: '1.72',
     incomplete: true,
-    source: `紅輯・《${title}》PDF 故事頁 ${(page % 3) + 4}；頁面 target 對位待核實 ${page + 1}`,
+    source: `紅輯・《${title}》PDF 故事頁 4（重用於第 ${page + 1} 輪）；頁面 target 對位待核實`,
     targets: words.slice(index * 2, index * 2 + 2).map((word, targetIndex) => ({ word, x: targetIndex ? 68 : 28, y: 24 + (index % 3) * 22 })),
     distractors: words.filter((word) => !words.slice(index * 2, index * 2 + 2).includes(word)).slice(0, 2),
   })),
