@@ -17,6 +17,10 @@ assert.equal(topic.flow, 'blend', '動物主題使用音素＋拼字流程');
 assert.deepEqual([...topic.modes], ['build'], '動物主題直接進入拼字任務');
 assert.equal(topic.words.length, 20, '動物園擴充至 20 個動物字');
 
+for (const retiredTopicId of ['sight1', 'sight2', 'sight3', 'sight4']) {
+  assert.equal(context.window.KakaPhonicsWords.getPhonicsTopicById(retiredTopicId), undefined, `${retiredTopicId} 已從常見字選單移除`);
+}
+
 for (const item of topic.words) {
   assert.equal(item.letters.join(''), item.word, `${item.word} 音素格可以組回完整字`);
   assert.ok(item.emoji, `${item.word} 有圖像提示`);
