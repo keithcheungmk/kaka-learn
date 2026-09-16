@@ -1,21 +1,22 @@
 {
   "series": "red_series",
   "purpose": "十本紅輯故事頁展示資產；圖片由 source-materials/Chinese book scans/ 逐頁轉製，未改原檔",
+  "deploymentImageDir": "assets/book-scenes/red-series-pages-hq/",
   "pageRule": "每本取 PDF 第 4 頁作首批真實故事頁；同一頁可重用於五輪測驗。頁碼以 PDF 1 起計。",
   "preferredAssetRoot": "assets/book-scenes/red-series-pages-hq/",
   "preferredAssetFormat": "webp",
   "preferredAssetRule": "以每個 item 的 image 檔名替換根目錄及副檔名：red-series-pages/<basename>.jpg → red-series-pages-hq/<basename>.webp；舊 image 欄位保留作 fallback。",
   "textRule": "OCR 未作為可靠來源；故事句子留空，遊戲只可重用對應 book-cards 內已核實詞語，唔可由圖片推測完整句子。",
   "pages": [
-    {"book":"rb_yusan","title":"雨傘","pdf":"book-scans/雨傘.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages/雨傘-p4.jpg","sentence":null,"terms":[]}]},
-    {"book":"rb_xin","title":"信","pdf":"book-scans/信.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages/信-p4.jpg","sentence":null,"terms":[]}]},
-    {"book":"rb_fenguo","title":"分果果","pdf":"book-scans/分果果.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages/分果果-p4.jpg","sentence":null,"terms":[]}]},
-    {"book":"rb_kuaipao","title":"快跑呀","pdf":"book-scans/快跑呀.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages/快跑呀-p4.jpg","sentence":null,"terms":[]}]},
-    {"book":"rb_shuijiao","title":"誰在叫","pdf":"book-scans/誰在叫.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages/誰在叫-p4.jpg","sentence":null,"terms":[]}]},
-    {"book":"rb_huangye","title":"黃葉","pdf":"book-scans/黃葉.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages/黃葉-p4.jpg","sentence":null,"terms":[]}]},
-    {"book":"rb_yishuhua","title":"一束花","pdf":"book-scans/一束花.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages/一束花-p4.jpg","sentence":null,"terms":[]}]},
-    {"book":"rb_fengwan","title":"風跟我玩","pdf":"book-scans/風跟我玩.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages/風跟我玩-p4.jpg","sentence":null,"terms":[]}]},
-    {"book":"rb_xiaoming","title":"小明和氣球","pdf":"book-scans/小明和氣球.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages/小明和氣球-p4.jpg","sentence":null,"terms":[]}]},
-    {"book":"rb_dongdong","title":"冬冬請客","pdf":"book-scans/冬冬請客.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages/冬冬請客-p4.jpg","sentence":null,"terms":[]}]}
+    {"book":"rb_yusan","title":"雨傘","pdf":"book-scans/雨傘.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages-hq/雨傘-p4.webp","sentence":null,"terms":[]}]},
+    {"book":"rb_xin","title":"信","pdf":"book-scans/信.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages-hq/信-p4.webp","sentence":null,"terms":[]}]},
+    {"book":"rb_fenguo","title":"分果果","pdf":"book-scans/分果果.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages-hq/分果果-p4.webp","sentence":null,"terms":[]}]},
+    {"book":"rb_kuaipao","title":"快跑呀","pdf":"book-scans/快跑呀.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages-hq/快跑呀-p4.webp","sentence":null,"terms":[]}]},
+    {"book":"rb_shuijiao","title":"誰在叫","pdf":"book-scans/誰在叫.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages-hq/誰在叫-p4.webp","sentence":null,"terms":[]}]},
+    {"book":"rb_huangye","title":"黃葉","pdf":"book-scans/黃葉.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages-hq/黃葉-p4.webp","sentence":null,"terms":[]}]},
+    {"book":"rb_yishuhua","title":"一束花","pdf":"book-scans/一束花.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages-hq/一束花-p4.webp","sentence":null,"terms":[]}]},
+    {"book":"rb_fengwan","title":"風跟我玩","pdf":"book-scans/風跟我玩.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages-hq/風跟我玩-p4.webp","sentence":null,"terms":[]}]},
+    {"book":"rb_xiaoming","title":"小明和氣球","pdf":"book-scans/小明和氣球.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages-hq/小明和氣球-p4.webp","sentence":null,"terms":[]}]},
+    {"book":"rb_dongdong","title":"冬冬請客","pdf":"book-scans/冬冬請客.pdf","items":[{"page":4,"image":"assets/book-scenes/red-series-pages-hq/冬冬請客-p4.webp","sentence":null,"terms":[]}]}
   ]
 }
