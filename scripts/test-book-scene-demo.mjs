@@ -13,7 +13,7 @@ assert.match(source, /id: 'anan'/);
 assert.equal((source.match(/image: 'assets\/book-scenes\//g) || []).length, 6);
 for (const term of ['紅氣球', '藍氣球', '黃氣球', '綠氣球', '氣球', '飛走了', '花生', '糖果', '餅乾', '水果', '薯片', '汽水']) assert.ok(source.includes(`word: '${term}'`));
 assert.equal((source.match(/distractors:/g) || []).length, 6);
-for (const file of ['balloon-colours-a.webp', 'balloon-colours-b.webp', 'balloon-flew-away.webp', 'anan-snacks.webp', 'anan-biscuits-fruit.webp', 'anan-chips-drink.webp']) assert.ok(fs.existsSync(path.join(root, 'assets/book-scenes', file)));
+for (const file of ['balloon-colours-a.jpg', 'balloon-colours-b.jpg', 'balloon-flew-away.jpg', 'anan-snacks.jpg', 'anan-biscuits-fruit.jpg', 'anan-chips-drink.jpg']) assert.ok(fs.existsSync(path.join(root, 'assets/book-scenes', file)));
 assert.match(source, /draggable=/);
 assert.match(source, /addEventListener\('drop'/);
 assert.match(source, /scene-submit/);

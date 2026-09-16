@@ -2,17 +2,17 @@ const BOOKS = [
   {
     id: 'balloon', title: '我的氣球呢？', stars: 6,
     scenes: [
-      { image: 'assets/book-scenes/balloon-colours-a.webp', aspect: '1.97', source: '紅①・第 2–3 頁', targets: [{ word: '紅氣球', x: 31, y: 26 }, { word: '藍氣球', x: 72, y: 27 }], distractors: ['黃氣球', '綠氣球'] },
-      { image: 'assets/book-scenes/balloon-colours-b.webp', aspect: '1.97', source: '紅①・第 4–5 頁', targets: [{ word: '黃氣球', x: 18, y: 24 }, { word: '綠氣球', x: 74, y: 27 }], distractors: ['紅氣球', '藍氣球'] },
-      { image: 'assets/book-scenes/balloon-flew-away.webp', aspect: '1.2', source: '紅①・第 8 頁', targets: [{ word: '氣球', x: 31, y: 20 }, { word: '飛走了', x: 48, y: 34 }], distractors: ['紅氣球', '藍氣球'] },
+      { image: 'assets/book-scenes/balloon-colours-a.jpg', aspect: '1.97', source: '紅①・第 2–3 頁', targets: [{ word: '紅氣球', x: 31, y: 26 }, { word: '藍氣球', x: 72, y: 27 }], distractors: ['黃氣球', '綠氣球'] },
+      { image: 'assets/book-scenes/balloon-colours-b.jpg', aspect: '1.97', source: '紅①・第 4–5 頁', targets: [{ word: '黃氣球', x: 18, y: 24 }, { word: '綠氣球', x: 74, y: 27 }], distractors: ['紅氣球', '藍氣球'] },
+      { image: 'assets/book-scenes/balloon-flew-away.jpg', aspect: '1.2', source: '紅①・第 8 頁', targets: [{ word: '氣球', x: 31, y: 20 }, { word: '飛走了', x: 48, y: 34 }], distractors: ['紅氣球', '藍氣球'] },
     ],
   },
   {
     id: 'anan', title: '貪吃的安安', stars: 6,
     scenes: [
-      { image: 'assets/book-scenes/anan-snacks.webp', aspect: '1.97', source: '紅②・第 2–3 頁', targets: [{ word: '花生', x: 27, y: 45 }, { word: '糖果', x: 78, y: 35 }], distractors: ['餅乾', '水果'] },
-      { image: 'assets/book-scenes/anan-biscuits-fruit.webp', aspect: '1.97', source: '紅②・第 4–5 頁', targets: [{ word: '餅乾', x: 24, y: 45 }, { word: '水果', x: 79, y: 47 }], distractors: ['薯片', '汽水'] },
-      { image: 'assets/book-scenes/anan-chips-drink.webp', aspect: '1.97', source: '紅②・第 6–7 頁', targets: [{ word: '薯片', x: 25, y: 39 }, { word: '汽水', x: 76, y: 41 }], distractors: ['花生', '糖果'] },
+      { image: 'assets/book-scenes/anan-snacks.jpg', aspect: '1.97', source: '紅②・第 2–3 頁', targets: [{ word: '花生', x: 27, y: 45 }, { word: '糖果', x: 78, y: 35 }], distractors: ['餅乾', '水果'] },
+      { image: 'assets/book-scenes/anan-biscuits-fruit.jpg', aspect: '1.97', source: '紅②・第 4–5 頁', targets: [{ word: '餅乾', x: 24, y: 45 }, { word: '水果', x: 79, y: 47 }], distractors: ['薯片', '汽水'] },
+      { image: 'assets/book-scenes/anan-chips-drink.jpg', aspect: '1.97', source: '紅②・第 6–7 頁', targets: [{ word: '薯片', x: 25, y: 39 }, { word: '汽水', x: 76, y: 41 }], distractors: ['花生', '糖果'] },
     ],
   },
 ];

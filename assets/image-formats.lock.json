@@ -1,4 +1,28 @@
 {
+  "assets/book-scenes/anan-biscuits-fruit.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/book-scenes/anan-chips-drink.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/book-scenes/anan-snacks.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/book-scenes/balloon-colours-a.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/book-scenes/balloon-colours-b.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
+  "assets/book-scenes/balloon-flew-away.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
   "assets/chinese-hero.png": {
     "format": "PNG",
     "alpha": true
