@@ -722,7 +722,7 @@ function openBookPicker(topic) {
     sceneDemoLink.id = 'book-scene-demo-link';
     sceneDemoLink.className = 'btn btn-sentence-home';
     sceneDemoLink.href = './book-scene-demo.html';
-    sceneDemoLink.textContent = '紅輯場景遊戲・試玩兩本書';
+    sceneDemoLink.textContent = '紅輯場景遊戲・12 本書最新版';
     sceneDemoLink.style.cssText = 'display:flex;width:fit-content;margin:0 auto 18px;text-decoration:none';
     lead.insertAdjacentElement('afterend', sceneDemoLink);
   }

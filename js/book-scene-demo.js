@@ -17,6 +17,36 @@ const BOOKS = [
   },
 ];
 
+// 紅輯其餘書本：詞語只取自已核實嘅 book-cards；場景圖係書本掃描第 2 頁，
+// 所以遊戲將「詞語放入學習框」標示為預覽，唔將畫面位置誤稱為字卡對應。
+const RED_BOOKS = [
+  ['rb_yusan', '雨傘', '☂️', 'yusan', ['雨傘', '橙雨傘', '藍雨傘', '綠雨傘', '黃雨傘', '花雨傘']],
+  ['rb_xin', '信', '✉️', 'xin', ['信', '爸爸', '哥哥', '媽媽', '姐姐', '爺爺']],
+  ['rb_fenguo', '分果果', '🍎', 'fenguo', ['哥哥', '留給', '姐姐', '分果果', '梨', '蘋果']],
+  ['rb_kuaipao', '快跑呀', '🏃', 'kuaipao', ['快', '跑', '小鹿', '老虎', '兔子', '獅子']],
+  ['rb_shuijiao', '誰在叫', '📣', 'shuijiao', ['肚子', '小弟弟', '誰在叫', '貓', '羊', '狗']],
+  ['rb_huangye', '黃葉', '🍂', 'huangye', ['黃葉', '一片', '秋天', '黃', '葉', '很多']],
+  ['rb_yishuhua', '一束花', '💐', 'yishuhua', ['我', '做', '花兒', '送給', '一束', '花']],
+  ['rb_fengwan', '風跟我玩', '🌬️', 'fengwan', ['小帆船', '小頑皮', '吹泡泡', '跟我玩', '風車', '紙飛機']],
+  ['rb_xiaoming', '小明和氣球', '🎈', 'xiaoming', ['氣球', '飛過', '爸爸', '起牀', '飛上', '高高的']],
+  ['rb_dongdong', '冬冬請客', '🍽️', 'dongdong', ['媽媽', '冬冬', '請客', '小狗', '花貓', '白兔']],
+].map(([id, title, cover, slug, words]) => ({
+  id,
+  title,
+  stars: 6,
+  mode: 'preview',
+  cover,
+  scenes: [0, 1, 2].map((page, index) => ({
+    image: `assets/book-scenes/red-series/${slug}.jpg`,
+    aspect: '0.76',
+    source: `紅輯・《${title}》掃描書第 2 頁・詞卡核實；場景配對預覽 ${page + 1}`,
+    targets: words.slice(index * 2, index * 2 + 2).map((word, targetIndex) => ({ word, x: targetIndex ? 68 : 28, y: 32 + index * 18 })),
+    distractors: words.filter((word) => !words.slice(index * 2, index * 2 + 2).includes(word)).slice(0, 2),
+  })),
+}));
+
+BOOKS.push(...RED_BOOKS);
+
 const $ = (selector) => document.querySelector(selector);
 let book = BOOKS[0];
 let sceneIndex = 0;
@@ -24,6 +54,14 @@ let selectedWord = null;
 let placements = {};
 let stars = 0;
 let locked = false;
+
+const progressKey = (bookId) => `kaka-red-book-game-v2:${bookId}`;
+function loadProgress(bookId) {
+  try { return JSON.parse(localStorage.getItem(progressKey(bookId)) || '{}'); } catch { return {}; }
+}
+function saveProgress() {
+  try { localStorage.setItem(progressKey(book.id), JSON.stringify({ stars, sceneIndex, completed: sceneIndex >= book.scenes.length - 1 && locked })); } catch { /* private browsing */ }
+}
 
 function speak(text, onEnd) {
   const api = window.KakaSpeech;
@@ -59,11 +97,12 @@ function renderBookTabs() {
   $('#book-tabs').querySelectorAll('button').forEach((button) => {
     button.addEventListener('click', () => {
       book = BOOKS.find((item) => item.id === button.dataset.book) || BOOKS[0];
-      sceneIndex = 0;
-      stars = 0;
+      const saved = loadProgress(book.id);
+      sceneIndex = Number.isInteger(saved.sceneIndex) ? Math.min(saved.sceneIndex, book.scenes.length - 1) : 0;
+      stars = Number.isInteger(saved.stars) ? Math.min(saved.stars, book.stars) : 0;
       placements = {};
       selectedWord = null;
-      locked = false;
+      locked = Boolean(saved.completed);
       $('#scene-complete').hidden = true;
       $('.scene-game').hidden = false;
       renderBookTabs();
@@ -81,6 +120,7 @@ function renderScene() {
   $('#scene-feedback').textContent = `${scene.source}・先聽，再放字詞。`;
   $('#scene-feedback').className = 'scene-feedback';
   $('#scene-submit').disabled = Object.keys(placements).length !== scene.targets.length || locked;
+  $('#scene-feedback').dataset.mode = book.mode || 'verified';
 
   const board = $('#scene-board');
   board.style.setProperty('--scene-aspect', scene.aspect);
@@ -118,6 +158,7 @@ function submitScene() {
   }
   locked = true;
   stars += scene.targets.length;
+  saveProgress();
   $('#star-count').textContent = `${stars}/${book.stars} ⭐`;
   feedback.textContent = '答對了！字詞和書頁場景連起來了。';
   feedback.className = 'scene-feedback is-good';
@@ -137,6 +178,7 @@ function advanceScene() {
     return;
   }
   $('.scene-game').hidden = true;
+  saveProgress();
   $('#complete-copy').textContent = `你完成了《${book.title}》的 ${book.stars} 個場景字詞。`;
   $('#scene-complete').hidden = false;
 }
@@ -148,6 +190,7 @@ $('#scene-replay').addEventListener('click', () => {
   placements = {};
   selectedWord = null;
   locked = false;
+  saveProgress();
   $('#scene-complete').hidden = true;
   $('.scene-game').hidden = false;
   renderScene();
