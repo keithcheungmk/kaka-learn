@@ -876,7 +876,7 @@ def check_book_scans_shelf() -> None:
 
 
 def check_asset_weight() -> None:
-    """效能：單張圖唔好超過 400KB，總資產唔好超過 12MB。"""
+    """效能：單張圖唔好超過 400KB，總資產唔好超過 14MB（含高清教材頁）。"""
     total = 0
     for p in Path("assets").rglob("*"):
         if p.is_file():
@@ -884,8 +884,8 @@ def check_asset_weight() -> None:
             total += size
             if size > 400_000:
                 fail("asset-weight", f"{p} 有 {size // 1024}KB（上限 400KB，請先縮圖／轉 WebP）")
-    if total > 12_000_000:
-        fail("asset-weight", f"assets/ 合共 {total // 1024 // 1024}MB，超過 12MB 上限")
+    if total > 14_000_000:
+        fail("asset-weight", f"assets/ 合共 {total // 1024 // 1024}MB，超過 14MB 上限")
     notes.append(f"assets/ 合共 {total // 1024 // 1024}MB")
 
 

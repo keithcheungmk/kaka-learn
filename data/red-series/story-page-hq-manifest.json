@@ -1,0 +1,19 @@
+{
+  "series": "red_series",
+  "source": "source-materials/Chinese book scans/",
+  "format": "webp",
+  "render": {"minWidth": 1000, "pagesPerBook": 3, "pdfPages": [4,5,6]},
+  "textPolicy": "只展示原書頁；句子未經可靠 OCR 核實前保持 null，詞語只能由 data/book-cards/<book>.json 提供。",
+  "books": [
+    {"book":"rb_yusan","title":"雨傘","pages":[{"pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/雨傘-p4.webp","sentence":null},{"pdfPage":5,"image":"assets/book-scenes/red-series-pages-hq/雨傘-p5.webp","sentence":null},{"pdfPage":6,"image":"assets/book-scenes/red-series-pages-hq/雨傘-p6.webp","sentence":null}]},
+    {"book":"rb_xin","title":"信","pages":[{"pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/信-p4.webp","sentence":null},{"pdfPage":5,"image":"assets/book-scenes/red-series-pages-hq/信-p5.webp","sentence":null},{"pdfPage":6,"image":"assets/book-scenes/red-series-pages-hq/信-p6.webp","sentence":null}]},
+    {"book":"rb_fenguo","title":"分果果","pages":[{"pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/分果果-p4.webp","sentence":null},{"pdfPage":5,"image":"assets/book-scenes/red-series-pages-hq/分果果-p5.webp","sentence":null},{"pdfPage":6,"image":"assets/book-scenes/red-series-pages-hq/分果果-p6.webp","sentence":null}]},
+    {"book":"rb_kuaipao","title":"快跑呀","pages":[{"pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/快跑呀-p4.webp","sentence":null},{"pdfPage":5,"image":"assets/book-scenes/red-series-pages-hq/快跑呀-p5.webp","sentence":null},{"pdfPage":6,"image":"assets/book-scenes/red-series-pages-hq/快跑呀-p6.webp","sentence":null}]},
+    {"book":"rb_shuijiao","title":"誰在叫","pages":[{"pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/誰在叫-p4.webp","sentence":null},{"pdfPage":5,"image":"assets/book-scenes/red-series-pages-hq/誰在叫-p5.webp","sentence":null},{"pdfPage":6,"image":"assets/book-scenes/red-series-pages-hq/誰在叫-p6.webp","sentence":null}]},
+    {"book":"rb_huangye","title":"黃葉","pages":[{"pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/黃葉-p4.webp","sentence":null},{"pdfPage":5,"image":"assets/book-scenes/red-series-pages-hq/黃葉-p5.webp","sentence":null},{"pdfPage":6,"image":"assets/book-scenes/red-series-pages-hq/黃葉-p6.webp","sentence":null}]},
+    {"book":"rb_yishuhua","title":"一束花","pages":[{"pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/一束花-p4.webp","sentence":null},{"pdfPage":5,"image":"assets/book-scenes/red-series-pages-hq/一束花-p5.webp","sentence":null},{"pdfPage":6,"image":"assets/book-scenes/red-series-pages-hq/一束花-p6.webp","sentence":null}]},
+    {"book":"rb_fengwan","title":"風跟我玩","pages":[{"pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/風跟我玩-p4.webp","sentence":null},{"pdfPage":5,"image":"assets/book-scenes/red-series-pages-hq/風跟我玩-p5.webp","sentence":null},{"pdfPage":6,"image":"assets/book-scenes/red-series-pages-hq/風跟我玩-p6.webp","sentence":null}]},
+    {"book":"rb_xiaoming","title":"小明和氣球","pages":[{"pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/小明和氣球-p4.webp","sentence":null},{"pdfPage":5,"image":"assets/book-scenes/red-series-pages-hq/小明和氣球-p5.webp","sentence":null},{"pdfPage":6,"image":"assets/book-scenes/red-series-pages-hq/小明和氣球-p6.webp","sentence":null}]},
+    {"book":"rb_dongdong","title":"冬冬請客","pages":[{"pdfPage":4,"image":"assets/book-scenes/red-series-pages-hq/冬冬請客-p4.webp","sentence":null},{"pdfPage":5,"image":"assets/book-scenes/red-series-pages-hq/冬冬請客-p5.webp","sentence":null},{"pdfPage":6,"image":"assets/book-scenes/red-series-pages-hq/冬冬請客-p6.webp","sentence":null}]}
+  ]
+}
