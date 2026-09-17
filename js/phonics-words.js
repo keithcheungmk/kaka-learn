@@ -264,6 +264,41 @@ const PHONICS_TOPICS = [
       ['cold', '🥶'], ['snowy', '❄️'], ['rain', '🌧️'], ['snow', '❄️'], ['rainbow', '🌈'], ['umbrella', '☂️'],
     ],
   }),
+  sightWordTopic({
+    id: 'sight_colors', title: '顏色', titleEn: 'Colors', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 種顏色', cover: '🌈', plate: '#243040',
+    words: [
+      ['red', '🔴'], ['blue', '🔵'], ['yellow', '🟡'], ['green', '🟢'], ['orange', '🟠'], ['purple', '🟣'],
+      ['pink', '🩷'], ['black', '⚫'], ['white', '⚪'], ['brown', '🟤'], ['grey', '🔘'], ['gold', '🌟'],
+    ],
+  }),
+  sightWordTopic({
+    id: 'sight_numbers', title: '數字', titleEn: 'Numbers', blurb: '睇圖 · 聽音 · 逐格砌字 · 數字 1–12', cover: '🔢', plate: '#3a3010',
+    words: [
+      ['one', '1️⃣'], ['two', '2️⃣'], ['three', '3️⃣'], ['four', '4️⃣'], ['five', '5️⃣'], ['six', '6️⃣'],
+      ['seven', '7️⃣'], ['eight', '8️⃣'], ['nine', '9️⃣'], ['ten', '🔟'], ['eleven', '1️⃣1️⃣'], ['twelve', '1️⃣2️⃣'],
+    ],
+  }),
+  sightWordTopic({
+    id: 'sight_shapes', title: '形狀', titleEn: 'Shapes', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 種形狀', cover: '🔺', plate: '#1a3050',
+    words: [
+      ['circle', '🔴'], ['square', '⬛'], ['triangle', '🔺'], ['rectangle', '🪟'], ['star', '⭐'], ['heart', '❤️'],
+      ['oval', '🥚'], ['diamond', '💎'], ['cube', '🧊'], ['cone', '🍦'], ['cylinder', '🥫'], ['sphere', '⚽'],
+    ],
+  }),
+  sightWordTopic({
+    id: 'sight_toys', title: '玩具', titleEn: 'Toys', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 種玩具', cover: '🧸', plate: '#2a1840',
+    words: [
+      ['ball', '⚽'], ['doll', '🪆'], ['teddy', '🧸'], ['puzzle', '🧩'], ['toy', '🧸'], ['balloon', '🎈'],
+      ['dice', '🎲'], ['target', '🎯'], ['slide', '🛝'], ['carousel', '🎠'], ['maracas', '🪇'], ['game', '🎲'],
+    ],
+  }),
+  sightWordTopic({
+    id: 'sight_actions', title: '動作', titleEn: 'Action Words', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 個動作詞語', cover: '🏃', plate: '#143828',
+    words: [
+      ['run', '🏃'], ['jump', '🤸'], ['walk', '🚶'], ['clap', '👏'], ['wave', '👋'], ['swim', '🏊'],
+      ['sleep', '😴'], ['read', '📖'], ['write', '✍️'], ['draw', '🎨'], ['sing', '🎤'], ['ride', '🚲'],
+    ],
+  }),
   {
     id: 'letters_rev',
     title: '字母音訓練基地',

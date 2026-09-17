@@ -45,6 +45,25 @@ for (const topicId of ['sight_food', 'sight_veg', 'sight_places', 'sight_vehicle
   }
 }
 
+const newSightTopicIds = ['sight_colors', 'sight_numbers', 'sight_shapes', 'sight_toys', 'sight_actions'];
+for (const topicId of newSightTopicIds) {
+  const vocabularyTopic = context.window.KakaPhonicsWords.getPhonicsTopicById(topicId);
+  assert.ok(vocabularyTopic, `${topicId} 新主題已加入`);
+  assert.equal(vocabularyTopic.section, 'sight', `${topicId} 放在 Sight Words 區`);
+  assert.ok(vocabularyTopic.titleEn, `${topicId} 有英文副標題`);
+  assert.equal(vocabularyTopic.flow, 'blend', `${topicId} 跟動物園使用融合拼字流程`);
+  assert.deepEqual([...vocabularyTopic.modes], ['build'], `${topicId} 直接進入拼字任務`);
+  assert.equal(vocabularyTopic.words.length, 12, `${topicId} 有 12 個詞`);
+  assert.equal(new Set(vocabularyTopic.words.map((item) => item.word)).size, 12, `${topicId} 詞語沒有重複`);
+  for (const item of vocabularyTopic.words) {
+    assert.equal(item.letters.join(''), item.word, `${item.word} 可以逐格拼回完整字`);
+    assert.ok(item.emoji, `${item.word} 有圖像提示`);
+    for (const phoneme of item.letters) {
+      assert.ok(fs.existsSync(path.join(repo, 'assets/phonemes', `${phoneme}.mp3`)), `${item.word} 使用已存在的 ${phoneme} 音檔`);
+    }
+  }
+}
+
 const festivals = [
   'festival_christmas', 'festival_lunar_new_year', 'festival_mid_autumn', 'festival_dragon_boat', 'festival_halloween',
 ].map((id) => context.window.KakaPhonicsWords.getPhonicsTopicById(id));
@@ -98,3 +117,4 @@ console.log('  ✓ 每格 phoneme → 完成連音 → 完整單字 → KAKA 射
 console.log('  ✓ rice 保留完整拼字，並以乾淨的 r + ice → rice 連讀');
 console.log('  ✓ 車輛、水果、家居、學校用品及 5 個香港節日詞庫已接入');
 console.log('  ✓ tap／drag、profile round progress、audio cancellation 均已接入');
+console.log('  ✓ Colors、Numbers、Shapes、Toys、Action Words 各有 12 個可拼讀詞');
