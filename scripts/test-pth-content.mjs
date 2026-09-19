@@ -34,6 +34,7 @@ assert.ok(demoSource.includes("type:'listen'") && demoSource.includes('draggable
 assert.ok(demoSource.includes('function playWord') && demoSource.includes('data-word') && demoSource.includes('currentSounds().flatMap'));
 assert.ok(demoSource.includes('function pickMandarinVoice') && demoSource.includes('speechSynthesis.getVoices') && demoSource.includes('MANDARIN_LANG'));
 assert.ok(demoSource.includes('CANTONESE_LANG') && demoSource.includes('未找到普通話語音'));
+assert.ok(demoSource.includes('u.voice=voice') && !demoSource.includes("u.lang='zh-CN'"));
 assert.ok(demoHtml.includes('wordAudioStatus'));
 assert.ok(!demoSource.includes('type:i<5?"listen":"shape"'));
 assert.ok(!demoSource.includes("group-btn:not([disabled])"));
