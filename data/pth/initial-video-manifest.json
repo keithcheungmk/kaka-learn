@@ -1,0 +1,374 @@
+{
+  "courseId": "pth-k2",
+  "description": "本地普通話聲母口形示範；原始 MP4 僅存於 source-materials，不直接部署。",
+  "entries": [
+    {
+      "id": "b",
+      "sourceFile": "source-materials/PTH/initials-video/b.mp4",
+      "textbookGroup": "bpmf",
+      "durationSec": 13.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/b.mp4",
+      "derivedAudio": "assets/pth/initials/audio/b.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 QR MP4／bpmf"
+    },
+    {
+      "id": "p",
+      "sourceFile": "source-materials/PTH/initials-video/p.mp4",
+      "textbookGroup": "bpmf",
+      "durationSec": 14.38,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/p.mp4",
+      "derivedAudio": "assets/pth/initials/audio/p.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 QR MP4／bpmf"
+    },
+    {
+      "id": "m",
+      "sourceFile": "source-materials/PTH/initials-video/m.mp4",
+      "textbookGroup": "bpmf",
+      "durationSec": 14.08,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/m.mp4",
+      "derivedAudio": "assets/pth/initials/audio/m.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 QR MP4／bpmf"
+    },
+    {
+      "id": "f",
+      "sourceFile": "source-materials/PTH/initials-video/f.mp4",
+      "textbookGroup": "bpmf",
+      "durationSec": 13.14,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/f.mp4",
+      "derivedAudio": "assets/pth/initials/audio/f.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 QR MP4／bpmf"
+    },
+    {
+      "id": "d",
+      "sourceFile": "source-materials/PTH/initials-video/d.mp4",
+      "textbookGroup": "dtnl",
+      "durationSec": 14.08,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/d.mp4",
+      "derivedAudio": "assets/pth/initials/audio/d.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "t",
+      "sourceFile": "source-materials/PTH/initials-video/t.mp4",
+      "textbookGroup": "dtnl",
+      "durationSec": 13.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/t.mp4",
+      "derivedAudio": "assets/pth/initials/audio/t.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "n",
+      "sourceFile": "source-materials/PTH/initials-video/n.mp4",
+      "textbookGroup": "dtnl",
+      "durationSec": 13.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/n.mp4",
+      "derivedAudio": "assets/pth/initials/audio/n.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "l",
+      "sourceFile": "source-materials/PTH/initials-video/l.mp4",
+      "textbookGroup": "dtnl",
+      "durationSec": 12.4,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/l.mp4",
+      "derivedAudio": "assets/pth/initials/audio/l.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "g",
+      "sourceFile": "source-materials/PTH/initials-video/g.mp4",
+      "textbookGroup": "gkh",
+      "durationSec": 12.18,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/g.mp4",
+      "derivedAudio": "assets/pth/initials/audio/g.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "k",
+      "sourceFile": "source-materials/PTH/initials-video/k.mp4",
+      "textbookGroup": "gkh",
+      "durationSec": 11.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/k.mp4",
+      "derivedAudio": "assets/pth/initials/audio/k.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "h",
+      "sourceFile": "source-materials/PTH/initials-video/h.mp4",
+      "textbookGroup": "gkh",
+      "durationSec": 10.98,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/h.mp4",
+      "derivedAudio": "assets/pth/initials/audio/h.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "j",
+      "sourceFile": "source-materials/PTH/initials-video/j.mp4",
+      "textbookGroup": "jqx",
+      "durationSec": 10.92,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/j.mp4",
+      "derivedAudio": "assets/pth/initials/audio/j.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "q",
+      "sourceFile": "source-materials/PTH/initials-video/q.mp4",
+      "textbookGroup": "jqx",
+      "durationSec": 11.24,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/q.mp4",
+      "derivedAudio": "assets/pth/initials/audio/q.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "x",
+      "sourceFile": "source-materials/PTH/initials-video/x.mp4",
+      "textbookGroup": "jqx",
+      "durationSec": 12.32,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/x.mp4",
+      "derivedAudio": "assets/pth/initials/audio/x.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "zh",
+      "sourceFile": "source-materials/PTH/initials-video/zh.mp4",
+      "textbookGroup": "zhchshr",
+      "durationSec": 12.82,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/zh.mp4",
+      "derivedAudio": "assets/pth/initials/audio/zh.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "ch",
+      "sourceFile": "source-materials/PTH/initials-video/ch.mp4",
+      "textbookGroup": "zhchshr",
+      "durationSec": 12.7,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/ch.mp4",
+      "derivedAudio": "assets/pth/initials/audio/ch.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "sh",
+      "sourceFile": "source-materials/PTH/initials-video/sh.mp4",
+      "textbookGroup": "zhchshr",
+      "durationSec": 11.56,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/sh.mp4",
+      "derivedAudio": "assets/pth/initials/audio/sh.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "r",
+      "sourceFile": "source-materials/PTH/initials-video/r.mp4",
+      "textbookGroup": "zhchshr",
+      "durationSec": 12.76,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/r.mp4",
+      "derivedAudio": "assets/pth/initials/audio/r.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "z",
+      "sourceFile": "source-materials/PTH/initials-video/z.mp4",
+      "textbookGroup": "zcs",
+      "durationSec": 12.9,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/z.mp4",
+      "derivedAudio": "assets/pth/initials/audio/z.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "c",
+      "sourceFile": "source-materials/PTH/initials-video/c.mp4",
+      "textbookGroup": "zcs",
+      "durationSec": 11.96,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/c.mp4",
+      "derivedAudio": "assets/pth/initials/audio/c.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "s",
+      "sourceFile": "source-materials/PTH/initials-video/s.mp4",
+      "textbookGroup": "zcs",
+      "durationSec": 12.5,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/s.mp4",
+      "derivedAudio": "assets/pth/initials/audio/s.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "y",
+      "sourceFile": "source-materials/PTH/initials-video/y.mp4",
+      "textbookGroup": "yw",
+      "durationSec": 12.28,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/y.mp4",
+      "derivedAudio": "assets/pth/initials/audio/y.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    },
+    {
+      "id": "w",
+      "sourceFile": "source-materials/PTH/initials-video/w.mp4",
+      "textbookGroup": "yw",
+      "durationSec": 13.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/w.mp4",
+      "derivedAudio": "assets/pth/initials/audio/w.m4a",
+      "status": "verified",
+      "textbookRef": "pending: scanned PDF requires manual page audit"
+    }
+  ]
+}

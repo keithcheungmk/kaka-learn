@@ -1,0 +1,17 @@
+{
+  "series": "red_series",
+  "purpose": "紅輯十本 PDF 可追溯展示頁；頁碼由原始掃描 PDF 以 1 起計",
+  "displayPolicy": "網站可用 page.url 以 PDF fragment 展示原頁；原始 source-materials 不直接部署",
+  "pages": [
+    {"book":"rb_yusan","title":"雨傘","pdf":"book-scans/雨傘.pdf","pageCount":7,"pages":[{"page":1,"kind":"cover","text":"雨傘"},{"page":2,"kind":"activity","text":"閱讀活動"},{"page":3,"kind":"word-cards","terms":["雨傘","橙雨傘","藍雨傘","綠雨傘","黃雨傘","花雨傘","收起小雨傘","太陽出來了","出來了"]}]},
+    {"book":"rb_xin","title":"信","pdf":"book-scans/信.pdf","pageCount":7,"pages":[{"page":1,"kind":"cover","text":"信"},{"page":2,"kind":"activity","text":"閱讀活動"},{"page":3,"kind":"word-cards","terms":["信","爸爸","的","哥哥","安安","媽媽","姐姐","爺爺","沒有"]}]},
+    {"book":"rb_fenguo","title":"分果果","pdf":"book-scans/分果果.pdf","pageCount":8,"pages":[{"page":1,"kind":"cover","text":"分果果"},{"page":2,"kind":"activity","text":"閱讀活動"},{"page":3,"kind":"word-cards","terms":["哥哥","留給","姐姐","最後","婆婆","分果果","小狗","我","和","一個","個","分","隻","梨","橙","果果","香蕉","蘋果","水果","媽媽","芒果","爸爸"]}]},
+    {"book":"rb_kuaipao","title":"快跑呀","pdf":"book-scans/快跑呀.pdf","pageCount":6,"pages":[{"page":1,"kind":"cover","text":"快跑呀"},{"page":2,"kind":"activity","text":"閱讀活動"},{"page":3,"kind":"word-cards","terms":["快","跑","啊","呀","大火","小鹿","老虎","兔子","獅子","斑馬快跑","猴子快跑呀","森林大火啊"]}]},
+    {"book":"rb_shuijiao","title":"誰在叫","pdf":"book-scans/誰在叫.pdf","pageCount":7,"pages":[{"page":1,"kind":"cover","text":"誰在叫"},{"page":2,"kind":"activity","text":"閱讀活動"},{"page":3,"kind":"word-cards","terms":["肚子","小弟弟","誰在叫","叫","在","誰","餓","貓","羊","牛","狗","鳥","了","吱吱","喵喵","咩咩","汪汪","哞哞","哇哇"]}]},
+    {"book":"rb_huangye","title":"黃葉","pdf":"book-scans/黃葉.pdf","pageCount":7,"pages":[{"page":1,"kind":"cover","text":"黃葉"},{"page":2,"kind":"activity","text":"閱讀活動"},{"page":3,"kind":"word-cards","terms":["黃葉","一","五","了","片","二","四","三","兩","到","秋天","啊","到了","黃","一片","葉","很多"]}]},
+    {"book":"rb_yishuhua","title":"一束花","pdf":"book-scans/一束花.pdf","pageCount":8,"pages":[{"page":1,"kind":"cover","text":"一束花"},{"page":2,"kind":"activity","text":"閱讀活動"},{"page":3,"kind":"word-cards","terms":["我","做","花兒","把","送給","一朵","媽媽","一束","做好","一","八","束","三","七","五","了","六","四","朵","兩","花"]}]},
+    {"book":"rb_fengwan","title":"風跟我玩","pdf":"book-scans/風跟我玩.pdf","pageCount":6,"pages":[{"page":1,"kind":"cover","text":"風跟我玩"},{"page":2,"kind":"activity","text":"閱讀活動"},{"page":3,"kind":"word-cards","terms":["小帆船","小頑皮","吹泡泡","跟我玩","了","是","我","風","玩","個","的","跟","紙","頭髮","飛機","風車","氣球","我的","吹亂","紙飛機"]}]},
+    {"book":"rb_xiaoming","title":"小明和氣球","pdf":"book-scans/小明和氣球.pdf","pageCount":10,"pages":[{"page":1,"kind":"cover","text":"小明和氣球"},{"page":2,"kind":"activity","text":"閱讀活動"},{"page":3,"kind":"word-cards","terms":["氣球","飛過","爸爸","起牀","飛上","高高的","飛到","大大的","帶","河","送","去","山","快","海","和","的","上","上學","一個","小明","天空","天亮","月球","長長的","上學去","去了","天亮了","快起牀"]}]},
+    {"book":"rb_dongdong","title":"冬冬請客","pdf":"book-scans/冬冬請客.pdf","pageCount":9,"pages":[{"page":1,"kind":"cover","text":"冬冬請客"},{"page":2,"kind":"activity","text":"閱讀活動"},{"page":3,"kind":"word-cards","terms":["媽媽","骨頭","冬冬","青蛙","請客","小蟲","小狗","花貓","吃","了","來","玩","和","都","呢","魚","嗎","不是","說","他們","請","東西","不肯","很好","白兔","蘿蔔","吃東西","吃得很好","為什麼"]}]}
+  ]
+}

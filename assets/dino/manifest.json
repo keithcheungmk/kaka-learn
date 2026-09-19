@@ -1,0 +1,58 @@
+{
+  "baolong": {
+    "title": "File:Tyrannosaurus rex.png",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Tyrannosaurus_rex.png/960px-Tyrannosaurus_rex.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Tyrannosaurus_rex.png",
+    "license": "CC BY-SA 4.0",
+    "artist": "<a href=\"//commons.wikimedia.org/wiki/User:ChrisTheWhaleKing\" title=\"User:ChrisTheWhaleKing\">User:ChrisTheWhaleKing</a>"
+  },
+  "sanjiaolong": {
+    "title": "File:Triceratops horridus.png",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Triceratops_horridus.png/960px-Triceratops_horridus.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/08/Triceratops_horridus.png",
+    "license": "CC BY-SA 4.0",
+    "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Ddinodan&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Ddinodan (page does not exist)\">Connor Ashbridge</a>"
+  },
+  "lianglong": {
+    "title": "File:Diplodocus carnegii (flipped, cropped).jpg",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Diplodocus_carnegii_%28flipped%2C_cropped%29.jpg/960px-Diplodocus_carnegii_%28flipped%2C_cropped%29.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/3/34/Diplodocus_carnegii_%28flipped%2C_cropped%29.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Fred_Wierum\" title=\"User:Fred Wierum\">Fred Wierum</a>"
+  },
+  "jianlong": {
+    "title": "File:Stegosaurus stenops.png",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Stegosaurus_stenops.png/960px-Stegosaurus_stenops.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/05/Stegosaurus_stenops.png",
+    "license": "CC BY-SA 4.0",
+    "artist": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Ddinodan&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Ddinodan (page does not exist)\">Connor Ashbridge</a>"
+  },
+  "yilong": {
+    "title": "File:Pteranodon BW.jpg",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/5/51/Pteranodon_BW.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/51/Pteranodon_BW.jpg",
+    "license": "CC BY 2.5",
+    "artist": "No machine-readable author provided. <a href=\"//commons.wikimedia.org/w/index.php?title=User:ArthurWeasley~commonswiki&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:ArthurWeasley~commonswiki (page does not exist)\">ArthurWeasley~commonswiki</a> assumed (based on copyright claims)."
+  },
+  "fuzhilong": {
+    "title": "File:Parasaurolophuspic steveoc.jpg",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Parasaurolophuspic_steveoc.jpg/960px-Parasaurolophuspic_steveoc.jpg",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Parasaurolophuspic_steveoc.jpg",
+    "license": "CC BY 2.5",
+    "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Steveoc_86\" title=\"User:Steveoc 86\">Steveoc 86</a>"
+  },
+  "jialong": {
+    "title": "File:Ankylosaurus dinosaur.png",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Ankylosaurus_dinosaur.png/960px-Ankylosaurus_dinosaur.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/7/77/Ankylosaurus_dinosaur.png",
+    "license": "Public domain",
+    "artist": "Mariana Ruiz Villarreal <a href=\"//commons.wikimedia.org/wiki/User:LadyofHats\" title=\"User:LadyofHats\">LadyofHats</a>"
+  },
+  "sulong": {
+    "title": "File:Velociraptor Restoration.png",
+    "thumb": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Velociraptor_Restoration.png/960px-Velociraptor_Restoration.png",
+    "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/Velociraptor_Restoration.png",
+    "license": "CC BY-SA 4.0",
+    "artist": "<a href=\"//commons.wikimedia.org/wiki/User:Fred_Wierum\" title=\"User:Fred Wierum\">Fred Wierum</a>"
+  }
+}
