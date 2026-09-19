@@ -2,6 +2,43 @@
 
 更新：2026-09-20。呢份係俾 Cursor 開工時先讀嘅導覽；程式碼同測試先係事實來源，規則以 [`AGENTS.md`](../AGENTS.md) 及 [`docs/handover.md`](handover.md) 為準。
 
+## 新增素材／library 提示（2026-09-20）
+
+Keith 提到「crop project folder」最近加入咗好多 source material。喺目前機器嘅
+`/Users/keith/Claude Projects/` 掃描唔到一個字面上叫 `crop` 嘅資料夾；應先把
+`/Users/keith/Claude Projects/kaka-learn/` 視為現行 project，並由下面嘅
+`source-materials/` 開始查。若 Keith 另行提供真正 crop 路徑，先把新路徑補入本節，
+唔好靠估路徑或將另一個 sibling repo 當成主 project。
+
+目前本地 source library 約 **2.7 GB**（Git ignore、未部署），主要容量如下：
+
+| 本地資料夾 | 約容量 | 用途 |
+|---|---:|---|
+| `source-materials/Carter Family/` | 1.0 GB | 85 本英文故事 PDF、完整 MP3、逐頁 clips |
+| `source-materials/Level 2 Phonics Ⅰ （25篇完结）/` | 672 MB | phonics 故事、音頻、MP4、flash cards、word |
+| `source-materials/Space Patrol/` | 576 MB | 太空故事、MP3、word 練習 |
+| `source-materials/PTH/` | 385 MB | 快樂拼音教材、initials video |
+| `source-materials/Chinese book scans/` | 40 MB | 中文 PDF 及衍生紅輯頁面 |
+| `source-materials/Phonics/` | 11 MB | phonics 原始／參考素材 |
+| `source-materials/recording phonic/` | 348 KB | Keith 錄製嘅 `a_e`、`ice`、`i_e`、`igh`、`ar`、`or`、`ow` 等音檔 |
+
+另外，Codex working tree 目前有一批**只存在本機、未必已部署**嘅衍生 library／試作，
+例如 `assets/pth/words/*.aac`、`tmp/`、紅輯高質頁面、`data/red-series/sentence-game-data.mjs`、
+`js/red-sentence-engine.mjs`、Saturn demo 同 Supabase 草稿。Cursor 接手時要先用
+`git status --short` 分辨 tracked、untracked、已 commit 及已部署；唔好把未驗證嘅
+local asset 當成 production 功能，亦唔好刪除 source 原檔。
+
+建議 Cursor 先執行：
+
+```bash
+du -sh source-materials/*
+find source-materials -maxdepth 3 -type f | sort
+git status --short
+```
+
+再按 `AGENTS.md` 嘅 source-material 規則，從原始檔建立可追溯衍生資料；原始 library
+唔可以整個搬入 `assets/` 或 `_site/`。
+
 ## 先做呢幾步
 
 ```bash
