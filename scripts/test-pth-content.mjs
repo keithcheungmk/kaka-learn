@@ -32,6 +32,9 @@ assert.ok(demoSource.includes('function hydrateGroup()') && demoSource.includes(
 assert.ok(demoSource.includes("kaka-pth-preview-v1") && demoSource.includes('測試預覽') && demoSource.includes('preview-badge'));
 assert.ok(demoSource.includes("type:'listen'") && demoSource.includes('draggable="true"') && demoSource.includes('answerSlot'));
 assert.ok(demoSource.includes('function playWord') && demoSource.includes('data-word') && demoSource.includes('currentSounds().flatMap'));
+assert.ok(demoSource.includes('function pickMandarinVoice') && demoSource.includes('speechSynthesis.getVoices') && demoSource.includes('MANDARIN_LANG'));
+assert.ok(demoSource.includes('CANTONESE_LANG') && demoSource.includes('未找到普通話語音'));
+assert.ok(demoHtml.includes('wordAudioStatus'));
 assert.ok(!demoSource.includes('type:i<5?"listen":"shape"'));
 assert.ok(!demoSource.includes("group-btn:not([disabled])"));
 assert.equal((demoSource.match(/group:'[^']+'/g) || []).length, 23);

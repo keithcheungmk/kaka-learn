@@ -6,3 +6,4 @@
 .word-char.target,.pinyin-part.target{background:var(--gold);color:#111735;border-radius:6px;padding:1px 5px;box-shadow:0 0 10px #ffd54a66}.word-char{display:inline-block;margin-right:2px}.pinyin-part{display:inline-block;margin-right:4px}
 @media(prefers-reduced-motion:reduce){.star-fx{animation:none!important}.star-fx img,.star-fx span,.star-fx i{animation:none!important}.star-fx span{opacity:1;left:65%;top:28%}.star-fx i{opacity:.7;left:38%;}}
 .fallback-card audio{width:100%;height:34px}
+.audio-status{margin:8px 0 0;color:var(--gold);font-size:.9rem;font-weight:700;text-align:center}
