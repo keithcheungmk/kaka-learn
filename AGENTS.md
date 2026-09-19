@@ -5,6 +5,9 @@
 > **開工前必須睇 `docs/handover.md`** — Cursor、Claude (Cowork)、Codex (ChatGPT)
 > 三個 agent 共用呢個 repo。嗰度寫住而家嘅分工、進行中認領、撞車高危檔案、同未完事項。
 > 收工／merge 完記得返去更新。
+>
+> **Cursor Lead Team**：`.cursor/agents/` 有 `chief-lead`／`chinese-lead`／`english-lead`／`math-lead`。
+> 跨科目先經 Chief；中文認字、英文 Phonics、數理分別交對應 Lead。詳見 `docs/handover.md`「KAKA Lead Team」。
 
 ## 專案係乜
 

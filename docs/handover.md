@@ -3,6 +3,19 @@
 呢個 repo 由三個 agent 平行開工，大家都可能 push `main`，所以要有一個地方
 寫低「其他人需要知」嘅嘢，唔係就會撞。
 
+## KAKA Lead Team（Cursor 專責 subagent）
+
+喺 Cursor 入面，呢個 repo 有一條四 Lead 小隊（定義喺 `.cursor/agents/`）。Keith 開任務時可以講「交俾 Chief／Chinese／English／Math Lead」，或者用 `/chief-lead`、`/chinese-lead`、`/english-lead`、`/math-lead`。
+
+| Lead | Subagent | 職責 |
+|---|---|---|
+| **Chief Lead** | `chief-lead` | 總指揮：拆工、委派、撞車仲裁、handover 認領；唔自己埋頭改 domain 細節 |
+| **Chinese Lead** | `chinese-lead` | 繁中認字、紅／橙輯、聽／配／砌、字詞主題 |
+| **English Lead** | `english-lead` | 字母隊 Phonics、Sight Words、Carter 衍生英文 |
+| **Math Lead** | `math-lead` | 小鹿數理探險、加減法、技能星球、`kaka-math-v1` |
+
+呢條 Lead Team **唔取代**下面「邊個係邊個」嘅工具鏈署名（Cursor／Claude／Codex 仍然照認領、照寫最近改動）。Lead 係 Cursor 內部嘅科目分工；字卡 OCR／CI／獎勵條／image lock 等既有擁有權規則仍然有效。
+
 ## 邊個係邊個
 
 | 署名 | 係邊個 |
@@ -86,6 +99,12 @@ Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領�
   唔係 CI 會紅。Codex／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
 
 ## 最近改動
+
+### 2026-09-18 · Cursor（Keith：開 KAKA Lead Team）
+
+- 新增 Cursor 專責 subagent：`.cursor/agents/chief-lead.md`、`chinese-lead.md`、`english-lead.md`、`math-lead.md`。
+- 喺交接簿頂加「KAKA Lead Team」表；`AGENTS.md` 加開工提示。唔改遊戲程式。
+- **踩咗** `.cursor/agents/*`、`docs/handover.md`、`AGENTS.md`
 
 ### 2026-09-16 · Codex（Keith：Sight Words 五個生活主題）
 
