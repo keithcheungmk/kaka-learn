@@ -18,6 +18,13 @@
   let solved = false;
   let reading = false;
 
+  const PRAISE_LINES = [
+    'Great job, Kaka! You got it right!',
+    'Well done, Kaka! You did it!',
+    'Fantastic work, Kaka! Keep it up!',
+    'Great, Kaka! You are doing a wonderful job!',
+  ];
+
   const pageImage = (page) => `./assets/story-demo/pages/page-${String(page).padStart(2, '0')}.jpg`;
   const pageAudio = (page) => `./assets/story-demo/cf001-game-night-page-${String(page).padStart(2, '0')}.mp3`;
 
@@ -132,6 +139,27 @@
     next();
   }
 
+  function speakPraise(onEnd = null) {
+    const token = ++readToken;
+    const line = PRAISE_LINES[pageIndex % PRAISE_LINES.length];
+    const feedback = $('#story-play-feedback');
+    reading = true;
+    setReadingUi(true);
+    if (feedback) { feedback.textContent = line; feedback.className = 'feedback ok story-praise'; }
+    let done = false;
+    let fallbackTimer = null;
+    const finish = () => {
+      if (done || token !== readToken) return;
+      done = true;
+      if (fallbackTimer) clearTimeout(fallbackTimer);
+      reading = false;
+      setReadingUi(false);
+      onEnd?.();
+    };
+    fallbackTimer = setTimeout(finish, (speech.estimateSpeakMs?.(line, { rate: 0.82, delayMs: 80 }) || 1800) + 600);
+    speech.speakEnglishTerm?.(line, { rate: 0.82, pitch: 1.05, onEnd: finish });
+  }
+
   function selectWord(word) {
     const item = current();
     if (busy || reading || !item.choices.includes(word)) return;
@@ -203,7 +231,7 @@
     speech.playCorrectCue?.({ muted: muted() });
     const feedback = $('#story-play-feedback');
     feedback.textContent = 'Great job!'; feedback.className = 'feedback ok';
-    readSentenceWithHighlight(item, () => {
+    speakPraise(() => {
       $('#story-fill-bank').insertAdjacentHTML('afterend', `<button type="button" class="btn btn-primary story-next-page" id="btn-story-next">${pageIndex === PAGES.length - 1 ? 'Finish story →' : 'Next page →'}</button>`);
       $('#btn-story-next')?.addEventListener('click', nextPage);
     });

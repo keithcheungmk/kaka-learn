@@ -19,6 +19,9 @@ assert.match(source, /That’s okay\. Try again!/, 'Wrong answers should use a g
 assert.match(source, /speakEnglishTerm/, 'The fill activity should use English TTS for the short sentence');
 assert.match(source, /story-sentence-token/, 'The sentence should expose word-level highlight targets');
 assert.match(source, /function readSentenceWithHighlight/, 'The short sentence should be read with word highlighting');
+assert.match(source, /function speakPraise/, 'Correct answers should use a spoken praise line');
+assert.match(source, /Great job, Kaka! You got it right!/, 'The praise lines should address Kaka in English');
+assert.match(source, /speakPraise\(\(\) => \{/, 'Correct answers should praise before showing Next page');
 assert.doesNotMatch(source, /playPageAudio\(\);/, 'The fill activity must not replay the Carter page audio');
 assert.doesNotMatch(source, /const MISSION/, 'The former separate multi-question mission should be removed');
 assert.match(css, /grid-template-columns:minmax\(0,58%\) minmax\(300px,42%\)/, 'iPad challenge layout should allocate space to image and fill panel');
