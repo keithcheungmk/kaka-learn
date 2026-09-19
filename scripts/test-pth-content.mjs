@@ -35,6 +35,11 @@ assert.ok(demoSource.includes('function playWord') && demoSource.includes('data-
 assert.ok(demoSource.includes('function pickMandarinVoice') && demoSource.includes('speechSynthesis.getVoices') && demoSource.includes('MANDARIN_LANG'));
 assert.ok(demoSource.includes('CANTONESE_LANG') && demoSource.includes('未找到普通話語音'));
 assert.ok(demoSource.includes('u.voice=voice') && !demoSource.includes("u.lang='zh-CN'"));
+assert.ok(demoSource.includes('data-word-audio') && demoSource.includes('playWord(b.dataset.word,wordAudioClips[b.dataset.wordAudio])'));
+assert.ok(demoSource.includes('wordAudioClips') && demoSource.includes('sharedAudio.currentTime=start'));
+for (const id of ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w']) {
+  assert.ok(fs.existsSync(path.join(root, `assets/pth/words/${id}.aac`)), `missing Mandarin word clip: ${id}`);
+}
 assert.ok(demoHtml.includes('wordAudioStatus'));
 assert.ok(!demoSource.includes('type:i<5?"listen":"shape"'));
 assert.ok(!demoSource.includes("group-btn:not([disabled])"));
