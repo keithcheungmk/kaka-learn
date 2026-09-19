@@ -22,9 +22,11 @@ Keith 提到「crop project folder」最近加入咗好多 source material。喺
 | `source-materials/Phonics/` | 11 MB | phonics 原始／參考素材 |
 | `source-materials/recording phonic/` | 348 KB | Keith 錄製嘅 `a_e`、`ice`、`i_e`、`igh`、`ar`、`or`、`ow` 等音檔 |
 
-另外，Codex working tree 目前有一批**只存在本機、未必已部署**嘅衍生 library／試作，
-例如 `assets/pth/words/*.aac`、`tmp/`、紅輯高質頁面、`data/red-series/sentence-game-data.mjs`、
-`js/red-sentence-engine.mjs`、Saturn demo 同 Supabase 草稿。Cursor 接手時要先用
+PTH 嘅 `assets/pth/words/*.aac` 及 `js/pth-word-audio.js` 已於 `d4a0274` commit，
+但 Cursor 仍要以 GitHub Actions 結果確認是否已部署。Codex working tree 另外仍有一批
+**只存在本機、未必已部署**嘅衍生 library／試作，例如 `tmp/`、紅輯高質頁面、
+`data/red-series/sentence-game-data.mjs`、`js/red-sentence-engine.mjs`、Saturn demo
+同 Supabase 草稿。Cursor 接手時要先用
 `git status --short` 分辨 tracked、untracked、已 commit 及已部署；唔好把未驗證嘅
 local asset 當成 production 功能，亦唔好刪除 source 原檔。
 
