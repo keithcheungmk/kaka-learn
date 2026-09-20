@@ -140,42 +140,40 @@ export const RED_SERIES_BOOKS = [
   },
   {
     id: 'rb_xin', title: '信', cover: '✉️', mode: 'sentence',
+    // gentle：無干擾、學測合一、砌齊自動讀句翻頁（Keith 2026-09-21 試點）
+    flow: 'gentle',
     questions: [
       {
         id: 'spread-p4', pdfPage: 4, bookPages: [2, 3], side: '整個跨頁（左至右）',
         image: 'assets/book-scenes/red-series-pages-hq/信-p4.webp',
         sentence: '爺爺的信媽媽的信',
         chunks: ['爺爺的信', '媽媽的信'], stars: 2,
-        distractors: ['爸爸的信', '哥哥的信', '安安沒有信？'], sourceVerified: true, audio: null,
-        distractorSource: '同書其他故事頁印刷短語。',
-        reviewNote: 'PDF p4 目視：爺爺的信｜媽媽的信。',
+        distractors: [], sourceVerified: true, audio: null,
+        reviewNote: 'PDF p4 目視：爺爺的信｜媽媽的信。gentle 試點：無干擾字。',
       },
       {
         id: 'spread-p5', pdfPage: 5, bookPages: [4, 5], side: '整個跨頁（左至右）',
         image: 'assets/book-scenes/red-series-pages-hq/信-p5.webp',
         sentence: '爸爸的信哥哥的信',
         chunks: ['爸爸的信', '哥哥的信'], stars: 2,
-        distractors: ['爺爺的信', '姐姐的信', '媽媽的信'], sourceVerified: true, audio: null,
-        distractorSource: '同書其他故事頁印刷短語。',
-        reviewNote: 'PDF p5 目視：爸爸的信｜哥哥的信。',
+        distractors: [], sourceVerified: true, audio: null,
+        reviewNote: 'PDF p5 目視：爸爸的信｜哥哥的信。gentle 試點：無干擾字。',
       },
       {
         id: 'spread-p6', pdfPage: 6, bookPages: [6, 7], side: '整個跨頁（左至右）',
         image: 'assets/book-scenes/red-series-pages-hq/信-p6.webp',
         sentence: '姐姐的信安安沒有信？',
         chunks: ['姐姐的信', '安安沒有信？'], stars: 2,
-        distractors: ['爺爺的信', '爸爸的信', '哥哥的信'], sourceVerified: true, audio: null,
-        distractorSource: '同書其他故事頁印刷短語。',
-        reviewNote: 'PDF p6 目視：姐姐的信｜安安沒有信？',
+        distractors: [], sourceVerified: true, audio: null,
+        reviewNote: 'PDF p6 目視：姐姐的信｜安安沒有信？。gentle 試點：無干擾字。',
       },
       {
         id: 'p7-story', pdfPage: 7, bookPages: [8], side: '故事頁（字卡半頁排除）',
         image: 'assets/book-scenes/red-series-pages-hq/信-p7.webp',
         sentence: '安安的信',
         chunks: ['安安', '的信'], stars: 2,
-        distractors: ['沒有', '爺爺的信', '媽媽的信'], sourceVerified: true, audio: null,
-        distractorSource: '同頁字卡「沒有」及前頁短語。',
-        reviewNote: 'HQ 自 PDF p7；故事句「安安的信」。',
+        distractors: [], sourceVerified: true, audio: null,
+        reviewNote: 'HQ 自 PDF p7；故事句「安安的信」。gentle 試點：無干擾字。',
       },
     ],
   },
@@ -459,4 +457,6 @@ export const RED_SERIES_BOOKS = [
 export const RED_SENTENCE_RULES = Object.freeze({
   starsPerSentenceChunk: 1,
   starCap: 10,
+  /** 無干擾、一頁即砌、砌齊自動讀句翻頁（目前《信》試點） */
+  gentleFlow: 'gentle',
 });

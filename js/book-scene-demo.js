@@ -67,6 +67,14 @@ function saveProgress(overrides = {}) {
   try { localStorage.setItem(progressKey(book.id), JSON.stringify(saved)); } catch { /* private browsing */ }
 }
 
+function usesGentleFlow(item = book) {
+  return item.mode === 'sentence' && item.flow === RED_SENTENCE_RULES.gentleFlow;
+}
+
+function sentenceStartPhase(item = book) {
+  return usesGentleFlow(item) ? 'play' : 'learn';
+}
+
 function speak(text, onEnd) {
   const api = window.KakaSpeech;
   if (api?.speakTerm) api.speakTerm(text, { rate: 0.82, onEnd });
@@ -141,7 +149,7 @@ function selectBook(item) {
   sceneIndex = firstIncompleteIndex >= 0 && completedScenes.has(book.scenes[savedIndex]?.id) ? firstIncompleteIndex : savedIndex;
   stars = book.stars ? Math.min(Number.isInteger(saved.stars) ? saved.stars : 0, book.stars) : 0;
   placements = {};
-  phase = item.mode === 'sentence' ? 'learn' : 'play';
+  phase = item.mode === 'sentence' ? sentenceStartPhase(item) : 'play';
   selectedWord = null;
   const allSentenceScenesComplete = book.mode === 'sentence' && book.scenes.every((scene) => completedScenes.has(scene.id));
   const completed = Boolean((saved.completed || allSentenceScenesComplete) && book.mode !== 'preview');
@@ -177,21 +185,28 @@ function renderScene() {
     : `${stars}/${book.stars || RED_SENTENCE_RULES.starCap} ⭐`;
   $('#star-count').setAttribute('aria-label', isPreview ? '本書只供頁面預覽，尚未開放星星測驗' : '星星進度');
   $('#scene-ranger').hidden = isPreview;
+  const gentle = usesGentleFlow();
   $('#scene-prompt').textContent = isPreview
     ? '書頁預覽・未核實原句前不會出測驗'
     : isSentence
-      ? phase === 'learn' ? '先看一看、聽一聽，認識本版句子。' : '把本版所有詞組按原書次序放好。'
+      ? gentle
+        ? '聽一聽，再把本版詞組放好。'
+        : phase === 'learn' ? '先看一看、聽一聽，認識本版句子。' : '把本版所有詞組按原書次序放好。'
       : '看場景，找出正確字詞。';
   $('#scene-help').textContent = isPreview
     ? '原頁可以翻閱；逐頁內容核實後才會開放正式遊戲。'
     : isSentence
-      ? phase === 'learn' ? '先聽完整跨頁內容；準備好後再開始砌句小測。' : '點一下正確詞組會自動放入下一格；亦可拖曳，錯了可點格子清走。'
+      ? gentle
+        ? '隨時可撳讀音掣。點一下詞組會放入下一格；亦可拖曳。砌齊就讀句，再開心下一版。'
+        : phase === 'learn' ? '先聽完整跨頁內容；準備好後再開始砌句小測。' : '點一下正確詞組會自動放入下一格；亦可拖曳，錯了可點格子清走。'
       : '按一下正確字詞，再放入對應格子。';
 
   const board = $('#scene-board');
   board.style.setProperty('--scene-aspect', scene.aspect || '1.72');
   const imageAlt = `${book.title}掃描書頁，PDF 第 ${scene.pdfPage ?? '—'} 頁`;
-  const coverText = isSentence && phase === 'play' ? '<div class="scene-sentence-mask" aria-hidden="true">測驗中・先聽一聽再砌</div>' : '';
+  const coverText = isSentence && phase === 'play'
+    ? `<div class="scene-sentence-mask" aria-hidden="true">${gentle ? '聽一聽・砌本版' : '測驗中・先聽一聽再砌'}</div>`
+    : '';
   // 預覽狀態放在圖片外的說明區，避免 badge 蓋住書頁文字或插圖。
   board.innerHTML = scene.image
     ? `<img src="${scene.image}" alt="${imageAlt}" decoding="async">${coverText}`
@@ -199,12 +214,12 @@ function renderScene() {
 
   $('#scene-listen').hidden = !isSentence;
   $('#scene-listen').disabled = locked;
-  $('#scene-listen').textContent = isSentence && phase === 'learn' ? '🔊 聽本版句子' : '🔊 重聽本版句子';
-  $('#scene-study').hidden = !isSentence || phase !== 'learn';
-  $('#scene-study-sentence').textContent = isSentence ? scene.sentence : '';
-  $('#scene-start-quiz').hidden = !isSentence || phase !== 'learn';
+  $('#scene-listen').textContent = gentle || phase === 'learn' ? '🔊 聽本版句子' : '🔊 重聽本版句子';
+  $('#scene-study').hidden = !isSentence || phase !== 'learn' || gentle;
+  $('#scene-study-sentence').textContent = isSentence && !gentle ? scene.sentence : '';
+  $('#scene-start-quiz').hidden = !isSentence || phase !== 'learn' || gentle;
   $('#scene-start-quiz').disabled = locked;
-  $('#scene-review').hidden = !isSentence || phase !== 'play';
+  $('#scene-review').hidden = !isSentence || phase !== 'play' || gentle;
   $('#scene-review').disabled = locked;
   $('#scene-preview-note').hidden = !isPreview;
   $('#scene-preview-note').textContent = isPreview
@@ -213,10 +228,12 @@ function renderScene() {
   $('#scene-preview-nav').hidden = !isPreview;
   $('#scene-preview-prev').disabled = locked || sceneIndex <= 0;
   $('#scene-preview-next').disabled = locked || sceneIndex >= book.scenes.length - 1;
-  $('#scene-submit').hidden = isPreview || (isSentence && phase !== 'play');
+  // gentle：唔使「檢查」掣——砌齊自動判、讀句、翻頁
+  $('#scene-submit').hidden = isPreview || (isSentence && phase !== 'play') || gentle;
   $('#scene-submit').textContent = isSentence ? '檢查本版句子' : '提交答案';
   $('#word-bank').hidden = isPreview || (isSentence && phase !== 'play');
   $('#scene-feedback').dataset.mode = book.mode;
+  $('#scene-feedback').dataset.flow = gentle ? 'gentle' : '';
 
   if (isPreview) {
     $('#word-bank').replaceChildren();
@@ -237,7 +254,9 @@ function renderScene() {
   const slotWords = isSentence ? chunks : scene.targets.map((target) => target.word);
   const completeSlots = filledCount() === slotWords.length;
   $('#scene-submit').disabled = !completeSlots || locked;
-  setFeedback(sourceLine);
+  setFeedback(gentle
+    ? `${sourceLine} 聽完就砌；砌齊會自動讀句翻頁。`
+    : sourceLine);
 
   const used = new Set(Object.values(placements));
   const slotsMarkup = slotWords.map((word, index) => {
@@ -302,6 +321,11 @@ function renderScene() {
     });
     card.addEventListener('dragstart', (event) => event.dataTransfer.setData('text/plain', isSentence ? card.dataset.choiceId : card.dataset.word));
   });
+
+  if (gentle && completeSlots && !locked) {
+    // 砌齊後喺下一 tick 自動完成，等今次 render 事件綁定先完成
+    queueMicrotask(() => maybeAutoCompleteGentle());
+  }
 }
 
 function placeSentenceChunk(word, slotIndex) {
@@ -334,14 +358,27 @@ function listenCurrentSentence() {
   if (scene.sentence) speak(scene.sentence);
 }
 
+function maybeAutoCompleteGentle() {
+  if (locked || !usesGentleFlow() || phase !== 'play') return;
+  const scene = currentScene();
+  const chunks = currentSentenceChunks(scene);
+  const answerIds = answerChoiceIds(scene);
+  if (filledCount() !== chunks.length) return;
+  if (!isSentenceCorrect(placementArray(chunks.length), answerIds, optionOrder, chunks)) {
+    setFeedback('次序未啱，再聽一次，試試調換詞組。', 'retry');
+    return;
+  }
+  submitScene();
+}
+
 function startSentenceQuiz() {
-  if (locked || book.mode !== 'sentence') return;
+  if (locked || book.mode !== 'sentence' || usesGentleFlow()) return;
   phase = 'play';
   renderScene();
 }
 
 function reviewSentence() {
-  if (locked || book.mode !== 'sentence') return;
+  if (locked || book.mode !== 'sentence' || usesGentleFlow()) return;
   phase = 'learn';
   renderScene();
 }
@@ -411,7 +448,15 @@ function submitScene() {
     : 2;
   $('#scene-submit').disabled = true;
   const spoken = scene.sentence || scene.targets.map((target) => target.word).join('。');
-  setFeedback(book.mode === 'sentence' ? `答對了！${spoken}（收集 ${sceneStars} 粒星）` : '答對了！你已經配好本頁字詞。', 'good');
+  const gentle = usesGentleFlow();
+  setFeedback(
+    book.mode === 'sentence'
+      ? gentle
+        ? `砌好喇！聽一聽：${spoken}`
+        : `答對了！${spoken}（收集 ${sceneStars} 粒星）`
+      : '答對了！你已經配好本頁字詞。',
+    'good',
+  );
 
   const isLastQuestion = sceneIndex >= book.scenes.length - 1;
   const token = roundGeneration;
@@ -463,7 +508,7 @@ function advanceScene(isLastQuestion = sceneIndex >= book.scenes.length - 1) {
     placements = {};
     selectedWord = null;
     locked = false;
-    phase = book.mode === 'sentence' ? 'learn' : 'play';
+    phase = book.mode === 'sentence' ? sentenceStartPhase() : 'play';
     optionSceneId = null;
     saveProgress({ sceneIndex, stars, completed: false });
     renderBookTabs();
@@ -502,7 +547,7 @@ $('#scene-replay').addEventListener('click', () => {
   placements = {};
   selectedWord = null;
   locked = false;
-  phase = book.mode === 'sentence' ? 'learn' : 'play';
+  phase = book.mode === 'sentence' ? sentenceStartPhase() : 'play';
   optionSceneId = null;
   saveProgress({ sceneIndex: 0, stars: 0, completed: false });
   $('#scene-complete').hidden = true;

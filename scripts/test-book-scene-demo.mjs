@@ -35,8 +35,11 @@ assert.ok(sentenceChunksMatch(callingSpread), '兩句連同標點切詞後須還
 assert.equal(callingBook.questions.reduce((sum, question) => sum + question.stars, 0), RED_SENTENCE_RULES.starCap, '《誰在叫》十個原文詞組收集十粒星');
 const letterBook = RED_SERIES_BOOKS.find((book) => book.id === 'rb_xin');
 assert.equal(letterBook.mode, 'sentence');
+assert.equal(letterBook.flow, RED_SENTENCE_RULES.gentleFlow, '《信》用 gentle 簡化流程');
 assert.equal(letterBook.questions.length, 4);
 assert.equal(letterBook.questions.reduce((sum, question) => sum + question.stars, 0), 8);
+assert.ok(letterBook.questions.every((question) => question.distractors.length === 0), '《信》gentle：無干擾字');
+assert.equal(makeOptions(letterBook.questions[0], () => 0).length, 2, '《信》字池只有本頁正確詞組');
 const runBook = RED_SERIES_BOOKS.find((book) => book.id === 'rb_kuaipao');
 assert.equal(runBook.mode, 'sentence');
 assert.equal(runBook.questions.length, 4);
@@ -48,16 +51,21 @@ for (const book of RED_SERIES_BOOKS) {
     assert.ok(book.previewPages.length > 0, `${book.title} 仍可預覽來源頁`);
     for (const page of book.previewPages) assert.ok(fs.existsSync(path.join(root, page.image)), `${book.title} PDF 第 ${page.pdfPage} 頁圖存在`);
   } else {
+    const gentle = book.flow === RED_SENTENCE_RULES.gentleFlow;
     for (const question of book.questions) {
       assert.ok(question.sourceVerified, `${book.title}/${question.id} 來源須人工核實`);
       assert.ok(question.pdfPage >= 1 && question.bookPages?.length, `${book.title}/${question.id} 頁碼有效`);
       assert.ok(question.image && fs.existsSync(path.join(root, question.image)), `${book.title}/${question.id} 書頁資產存在`);
       assert.ok(question.sentence && question.chunks.length >= 2, `${book.title}/${question.id} 原句與詞組完整`);
       assert.ok(sentenceChunksMatch(question), `${book.title}/${question.id} 詞組須還原原句`);
-      assert.ok(question.distractors.length >= 2 && question.distractors.length <= 4, `${book.title}/${question.id} 干擾項數量`);
-      assert.ok(question.distractorSource, `${book.title}/${question.id} 干擾項來源須可追查`);
-      assert.ok(question.distractors.every((item) => !question.chunks.includes(item)), `${book.title}/${question.id} 干擾項不可是答案`);
-      assert.equal(new Set(question.distractors).size, question.distractors.length, `${book.title}/${question.id} 干擾項文字不可互重複`);
+      if (gentle) {
+        assert.equal(question.distractors.length, 0, `${book.title}/${question.id} gentle 不可有干擾`);
+      } else {
+        assert.ok(question.distractors.length >= 2 && question.distractors.length <= 4, `${book.title}/${question.id} 干擾項數量`);
+        assert.ok(question.distractorSource, `${book.title}/${question.id} 干擾項來源須可追查`);
+        assert.ok(question.distractors.every((item) => !question.chunks.includes(item)), `${book.title}/${question.id} 干擾項不可是答案`);
+        assert.equal(new Set(question.distractors).size, question.distractors.length, `${book.title}/${question.id} 干擾項文字不可互重複`);
+      }
       assert.equal(new Set(answerChoiceIds(question)).size, question.chunks.length, `${book.title}/${question.id} 即使答案文字重複，各選項亦要有獨立 ID`);
     }
   }
@@ -122,10 +130,13 @@ assert.match(source, /KakaStorage/);
 assert.match(source, /roundGeneration/);
 assert.match(source, /KakaStarFx/);
 assert.match(source, /shootStars\(sceneStars, landStar\)/, '每一粒獎勵星星均要由 Ranger 發射');
+assert.match(source, /usesGentleFlow/);
+assert.match(source, /maybeAutoCompleteGentle/);
+assert.match(source, /flow === RED_SENTENCE_RULES\.gentleFlow/);
 assert.match(html, /聽本版句子/);
 assert.match(html, /scene-study-sentence/);
 assert.match(html, /scene-preview-note/);
-assert.match(html, /每個正確詞組收集 1 粒星/);
+assert.match(html, /《信》用開心簡化玩法/);
 assert.equal(fs.readdirSync(path.join(root, 'assets/book-scenes/red-series-pages-hq')).filter((name) => !name.startsWith('.')).length, 33, 'HQ 原頁含新建信-p7、快跑呀-p3，以及分果果左頁裁切');
 assert.ok(fs.existsSync(path.join(root, activeBook.questions[2].image)), '不完整右頁不得混入本題，使用已裁切左頁');
 assert.ok(fs.existsSync(path.join(root, callingSpread.image)), '《誰在叫》實際故事跨頁圖片存在');

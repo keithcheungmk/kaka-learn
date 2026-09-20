@@ -225,6 +225,48 @@ def run(url: str, out: Path | None) -> None:
             assert page.locator('#scene-complete').is_visible(), f"{name}: 《誰在叫》十粒星後應完成"
             verify_layout(page, f"{name}-shuijiao-complete", require_no_vertical_scroll=name.startswith("ipad"))
 
+            # 《信》gentle：無干擾、唔使開始小測／檢查掣，砌齊自動讀句。
+            page.locator('#book-tabs [data-book="rb_xin"]').click()
+            page.wait_for_function("document.querySelector('#scene-book-title').textContent === '信'")
+            page.evaluate("""() => {
+              window.__starFlights = 0;
+              window.__starObserver?.disconnect?.();
+              window.__starObserver = new MutationObserver((records) => {
+                for (const record of records) {
+                  for (const node of record.addedNodes) {
+                    if (node.nodeType === Node.ELEMENT_NODE && node.matches('.fly-star')) window.__starFlights += 1;
+                  }
+                }
+              });
+              window.__starObserver.observe(document.body, { childList: true });
+              window.KakaSpeech = {
+                warmVoices() {},
+                speakTerm(text, options = {}) { window.__lastSentence = text; options.onEnd?.(); },
+                speakWordThenEncourage(text, options = {}) { window.__lastSentence = text; window.__answerEnd = options.onEnd; },
+              };
+            }""")
+            assert page.locator('#scene-start-quiz').is_hidden(), f"{name}: 《信》gentle 不應有開始小測"
+            assert page.locator('#scene-submit').is_hidden(), f"{name}: 《信》gentle 不應有檢查掣"
+            assert page.locator('#scene-study').is_hidden(), f"{name}: 《信》gentle 不應預先顯示答案句"
+            assert page.locator('.word-card').count() == 2, f"{name}: 《信》字池只有正確詞組"
+            assert page.locator('.word-card.is-distractor').count() == 0, f"{name}: 《信》不可有干擾字"
+            page.locator('#scene-listen').click()
+            assert page.evaluate('window.__lastSentence') == '爺爺的信媽媽的信', f"{name}: 《信》讀音掣應讀本版句"
+            page.locator('.word-card[data-word="媽媽的信"]').click()
+            page.locator('.word-card[data-word="爺爺的信"]').click()
+            assert '次序未啱' in page.locator('#scene-feedback').inner_text(), f"{name}: 《信》錯序仍要溫柔提示"
+            for slot in range(2):
+                page.locator(f'.answer-slot[data-slot="{slot}"]').click()
+            page.locator('.word-card[data-word="爺爺的信"]').click()
+            page.locator('.word-card[data-word="媽媽的信"]').click()
+            page.wait_for_function("typeof window.__answerEnd === 'function' || document.querySelector('#scene-feedback').textContent.includes('砌好喇')")
+            assert '砌好喇' in page.locator('#scene-feedback').inner_text(), f"{name}: 《信》砌齊應自動完成"
+            page.wait_for_function("typeof window.__answerEnd === 'function'")
+            assert page.evaluate('window.__lastSentence') == '爺爺的信媽媽的信', f"{name}: 砌齊後應朗讀本版句"
+            page.evaluate('window.__answerEnd(); window.__answerEnd = null')
+            page.wait_for_function("document.querySelector('#scene-progress').textContent.includes('第 2 / 4 版')")
+            verify_layout(page, f"{name}-xin-gentle", require_no_vertical_scroll=name.startswith("ipad"))
+
             if console_errors:
                 failures.extend(f"{name}: console {error}" for error in console_errors)
             if failed_requests:
