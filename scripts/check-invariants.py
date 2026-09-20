@@ -813,17 +813,29 @@ def check_cjk_halfwidth_punct() -> None:
 
 
 def check_agent_collab_docs() -> None:
-    """三方協作文件：CODEX.md／CLAUDE.md 指向 AGENTS.md；handover 有 Codex。"""
+    """確保現行 ChatGPT／Cursor／Grok 分工及 OCR owner 寫入協作文件。"""
     for f in ("CODEX.md", "CLAUDE.md"):
         if not Path(f).exists():
             fail("agent-docs", f"缺少 {f}")
             continue
         if "AGENTS.md" not in read(f):
             fail("agent-docs", f"{f} 要提到 AGENTS.md")
-    if "Codex" not in read("AGENTS.md"):
-        fail("agent-docs", "AGENTS.md 要提到 Codex")
-    if "Codex" not in read("docs/handover.md"):
-        fail("agent-docs", "docs/handover.md 要提到 Codex")
+    agents = read("AGENTS.md")
+    handover = read("docs/handover.md")
+    ocr = read("docs/word-card-ocr.md")
+    grok_path = Path("GROK.md")
+    if not grok_path.exists():
+        fail("agent-docs", "缺少 GROK.md 協作界線")
+    for name, src in (("AGENTS.md", agents), ("docs/handover.md", handover)):
+        for role in ("ChatGPT", "Cursor", "Grok"):
+            if role not in src:
+                fail("agent-docs", f"{name} 要記錄現行協作角色 {role}")
+    if "字卡相片辨讀由 ChatGPT" not in agents:
+        fail("agent-docs", "AGENTS.md 要將字卡辨讀責任交畀 ChatGPT／Codex")
+    if "ChatGPT／Codex" not in ocr or "Grok" not in ocr:
+        fail("agent-docs", "字卡 OCR 指引要寫清 ChatGPT owner 同 Grok 界線")
+    if "Claude Cowork" in ocr or "唔好叫 Cursor 或 Codex／ChatGPT 讀字卡相" in ocr:
+        fail("agent-docs", "字卡 OCR 指引仍然鎖死 Claude 或禁止 ChatGPT")
 
 
 def check_family_smoke_devices() -> None:

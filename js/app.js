@@ -91,20 +91,9 @@ let activeChain = null;
 let chainStars = 0;
 let sentenceIndex = 0;
 let sentencePlaced = [];
-const SENTENCE_DEMO = [
-  { book: '我的氣球呢？', image: 'assets/sentence-balloon-p1.jpg', panel: 1, sentence: ['小明', '拿着', '氣球'] },
-  { book: '我的氣球呢？', image: 'assets/sentence-balloon-p2.jpg', panel: 2, sentence: ['氣球', '飛走了'] },
-  { book: '我的氣球呢？', image: 'assets/sentence-balloon-p3.jpg', panel: 3, sentence: ['小明', '追着', '氣球'] },
-  { book: '我的氣球呢？', image: 'assets/sentence-balloon-p4.jpg', panel: 4, sentence: ['氣球', '掛在', '樹上'] },
-  { book: '貪吃的安安', image: 'assets/sentence-anan-p1.jpg', panel: 1, sentence: ['安安', '看見', '食物'] },
-  { book: '貪吃的安安', image: 'assets/sentence-anan-p2.jpg', panel: 2, sentence: ['安安', '想吃', '蛋糕'] },
-  { book: '貪吃的安安', image: 'assets/sentence-anan-p3.jpg', panel: 3, sentence: ['安安', '吃了', '蛋糕'] },
-  { book: '貪吃的安安', image: 'assets/sentence-anan-p4.jpg', panel: 4, sentence: ['安安', '吃飽了'] },
-  { book: '信', image: 'assets/sentence-anan-p1.jpg', panel: 1, sentence: ['小明', '寫', '信'], pendingImage: true },
-  { book: '分果果', image: 'assets/sentence-anan-p2.jpg', panel: 1, sentence: ['妹妹', '分享', '水果'], pendingImage: true },
-  { book: '快跑呀', image: 'assets/sentence-anan-p3.jpg', panel: 1, sentence: ['小鹿', '跑得', '很快'], pendingImage: true },
-  { book: '冬冬請客', image: 'assets/sentence-anan-p4.jpg', panel: 1, sentence: ['冬冬', '邀請', '朋友'], pendingImage: true },
-];
+// 舊版首頁砌句子資料已停用。所有正式內容由 book-scene-demo.html 的
+// data/red-series/sentence-game-data.mjs 提供，避免錯配圖片和句子再次被接回入口。
+const SENTENCE_DEMO = [];
 const SENTENCE_WORD_TYPES = {
   '小明': 'person', '安安': 'person', '妹妹': 'person', '小狗': 'person',
   '手持': 'verb', '拿着': 'verb', '飛走了': 'verb', '追趕': 'verb', '追着': 'verb', '掛在': 'verb',
@@ -678,12 +667,9 @@ function openSentenceGame() {
 }
 
 function openSentenceLanding() {
-  const grid = $('#sentence-story-grid');
-  if (grid) {
-    grid.innerHTML = SENTENCE_BOOK_TITLES.map(([book, cover]) => { const i = SENTENCE_DEMO.findIndex((item) => item.book === book); const count = SENTENCE_DEMO.filter((item) => item.book === book).length; const image = i >= 0 ? SENTENCE_DEMO[i].image : 'assets/chinese-hero.png'; return `<button type="button" class="sentence-story-card${i < 0 ? ' is-pending' : ''}" data-sentence-index="${i}" ${i < 0 ? 'disabled' : ''}><span class="sentence-story-cover" aria-hidden="true">${cover}</span><img src="${image}" alt="${book}" loading="lazy"><span>${book}</span><small>${count === 4 ? '四句故事' : i >= 0 ? '首句示範' : '內容整理中'}</small></button>`; }).join('');
-    grid.querySelectorAll('[data-sentence-index]').forEach((b) => b.addEventListener('click', () => { sentenceIndex = Number(b.dataset.sentenceIndex); sentencePlaced = []; showScreen('sentence'); renderSentenceGame(); }));
-  }
-  showScreen('sentenceLanding');
+  // 舊版首頁 SENTENCE_DEMO 曾以圖片猜句子，題目未必來自同一本 PDF。
+  // 統一導向逐頁來源版，避免孩子再遇到圖片、書名和答案不相配的題目。
+  window.location.href = './book-scene-demo.html';
 }
 
 function bindSentenceGame() {

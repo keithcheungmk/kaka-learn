@@ -1,9 +1,10 @@
 # AGENTS.md — kaka-learn
 
-給 Cursor／Claude／Codex／自動化 agent 嘅專案指引。
+給 Cursor／ChatGPT Codex／Grok bot／自動化 agent 嘅專案指引。
 
-> **開工前必須睇 `docs/handover.md`** — Cursor、Claude (Cowork)、Codex (ChatGPT)
-> 三個 agent 共用呢個 repo。嗰度寫住而家嘅分工、進行中認領、撞車高危檔案、同未完事項。
+> **開工前必須睇 `docs/handover.md`** — Keith 現時主要用 ChatGPT（Codex）、Cursor 同 Grok bot。
+> ChatGPT／Cursor 按認領直接改 repo；Grok 預設只提供建議，唔假設有 repo 寫入權限。
+> 交接簿記錄現行分工、進行中認領、撞車高危檔案同未完事項。
 > 收工／merge 完記得返去更新。
 
 ## 專案係乜
@@ -11,6 +12,14 @@
 幼兒繁體中文認字網頁（KAKA，約 4 歲）。粵語家庭、iPad 優先、亦要適合 Mac mini + TV 大掣操作。
 
 ## 硬性約束
+
+### 驗收＝上線玩（Keith 2026-09-21；最高優先）
+
+- **唔好叫 Keith 睇 code 驗收。** 唔好叫佢「目視／確認／驗收」diff、JSON、`pendingQuestions`、handoff 清單或任何程式片段先先繼續。
+- Agent 自己對 `source-materials/` 核實內容 → 跑測試／`check-invariants` → **commit → merge／push 部署**（Pages 自動上線）。
+- 收工只交 **可撳網址**；Keith 唔滿意會喺網站玩完再講，跟住再改再部署。
+- 「第二人驗收」＝Keith 喺 live／Pages 玩；**唔係** chat 入面 code review。呢條優先過舊「先等 Keith 確認先開正式題」。
+- 詳見 `.cursor/rules/keith-play-not-code.mdc` 同 `docs/qa-check.md`。
 
 ### Source Materials：Keith 只負責掉檔，Agent 負責其餘工作
 
@@ -182,7 +191,7 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - 保持單頁、無 build step（純靜態 + ES modules），除非產品明確要求框架。
 - **小改動快徑**（換圖、改 2 個 label、文案微調；唔改 layout／CSS／遊戲流程）：本地 `check-invariants.py` 綠 + GitHub CI 綠 → 即刻 merge（唔好叫 Keith QA）。證據一張改動畫面截圖。**唔使** demo 片、computerUse、本地重跑 `smoke-shots.py`（CI 已跑）。新漢字仍要 font subset；唔好跳過 CI。
 - **版面／CSS／流程改動**：本地 `smoke-shots.py --no-shots`（家庭裝置）綠 + CI 綠；證據最多 **2 張**截圖（優先 iPad Pro 11 橫或直 + 需要時 iPhone 16 Pro Max）。**預設禁止** computerUse 同 demo 片；只有改動畫／交互動畫、或者 smoke 捉唔到嘅互動 bug，先准短片 computerUse。詳見 `docs/qa-check.md`。
-- **唔好叫產品擁有人親自檢查或確認先部署。** 跟 `docs/qa-check.md`：push 後跑 `qa-report.py`（或 CI 綠）→ 檢查 agent 補視覺（≤5 分鐘、禁預設 computerUse）→ 「可以 merge」就 merge 入 `main`（Pages 自動上線）→ 之後先知會做咗咩。
+- **唔好叫產品擁有人親自檢查或確認先部署。** 跟 `docs/qa-check.md`：push 後跑 `qa-report.py`（或 CI 綠）→ 檢查 agent 補視覺（≤5 分鐘、禁預設 computerUse）→ 「可以 merge」就 merge 入 `main`（Pages 自動上線）→ 之後只交網址，唔好再丟 code 叫 Keith 睇。見上方「驗收＝上線玩」。
 
 ## 《我自己會讀》書卡用字規則（紅輯／橙輯…）
 
@@ -191,7 +200,7 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - **學習卡以該書實體認字卡上實際出現嘅詞／字／短語為準**（唔好預設一定係單字；紅⑪《小明和氣球》等卡上係詞／短語，JSON 要 `"allow_words": true`）。認字卡係最準依據，好過書名／主題推測。
 - **重複唔使理**：同一個字跨書出現、或者同一張卡重複，都正常，照收（App 入面同一字一個 entry 就得）。
 - **收到字卡相片就以字卡為準**，覆寫嗰本書嘅 `wordIds`；未收到嘅書暫時用推測，標明待校對。
-- **字卡相片一律由 Claude（Cowork）讀，唔好叫 Codex／Cursor 讀字卡相。** 流程、自檢規程、JSON 格式見 `docs/word-card-ocr.md`；落地一定要用 `scripts/apply-book-cards.py`（會攔簡體、形近字、非單字、錯 id），唔好手改 `wordIds`。
+- **字卡相片辨讀由 ChatGPT（Codex）負責**：逐張讀原相、兩輪反查，整理成 JSON；Cursor／Grok 唔好靠書名推測或另起一份 OCR。落地一定要用 `scripts/apply-book-cards.py`（會攔簡體、形近字、非單字、錯 id），先 dry-run 再寫入；睇唔清先問 Keith。詳見 `docs/word-card-ocr.md`。
 - 已對過字卡嘅書會有 `verified: true` 同 `cardSource`；冇呢兩個 field 就即係仲係推測。
 - **字卡顯示**：大漢字＋讀音；可配個簡單 emoji 做裝飾，但唔使為單字／短語強求詞形或貼圖。
 - 其他主題（動物、食物…）維持教「詞＋emoji」，唔受呢條影響。

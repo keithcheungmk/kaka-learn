@@ -1,28 +1,29 @@
-# 交接簿 — Cursor ⇄ Claude (Cowork) ⇄ Codex (ChatGPT)
+# 交接簿 — ChatGPT (Codex) ⇄ Cursor ⇄ Grok bot
 
-呢個 repo 由三個 agent 平行開工，大家都可能 push `main`，所以要有一個地方
-寫低「其他人需要知」嘅嘢，唔係就會撞。
+Keith 現時主要用 ChatGPT、Cursor 同 Grok bot。ChatGPT／Cursor 會按任務認領直接改 repo；Grok 預設係外部顧問 bot，只提供建議，唔假設有 repo 權限。
+呢度記錄「其他人需要知」嘅分工、認領、撞車風險同未完事項，避免撞改。
 
 ## 邊個係邊個
 
 | 署名 | 係邊個 |
 |---|---|
-| **Cursor** | Keith 部機上嘅 Cursor，或者 Cursor Cloud Agent |
-| **Claude**／**Claude (Cowork)** | Anthropic Claude，經 deploy key push |
-| **Codex** | ChatGPT Codex 或 Codex CLI |
+| **ChatGPT／Codex** | Keith 使用嘅 ChatGPT Codex；chief lead，負責跨組校準、架構、內容核對及整合 review，亦會按認領實作 |
+| **Cursor** | Keith 部機上嘅 Cursor，或者 Cursor Cloud Agent；主要負責高迭代程式、介面／遊戲落地及視覺回歸 |
+| **Grok bot** | Keith 手動使用嘅外部建議／研究 bot；預設唯讀，無 repo、push、merge 或部署權限 |
 
-Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死嘅擁有權（例如 Claude 嘅字卡 OCR／CI／獎勵條／image lock，Cursor 嘅 ranger／star-fx）——除非 Keith 開口叫你跨界。
+Keith 明確交俾邊個嘅任務，就由嗰個做。ChatGPT 同 Cursor 都可改 repo，但共享檔先認領，避免同時寫同一功能。Grok 嘅輸出係建議，唔係已驗證嘅 repo 狀態；除非 Keith 另行明確交代，唔叫 Grok 寫入或接觸私有素材／密鑰。Claude 舊工作只保留喺歷史紀錄，唔再係現行 owner。
 
 ## 點用呢個檔
 
-三個 agent **同一套**開工／收工協議：
+ChatGPT／Cursor **同一套**開工／收工協議：
 
 - **開工前**：`git fetch origin main` → 睇 `AGENTS.md`（硬性規則）→ 睇呢個檔（分工、進行中認領、地雷）。
 - **改共享／高危檔之前**：喺下面「進行中（認領）」表認領；同一功能／同一批檔唔可以兩個人同時改。
-- **merge 完之後**：喺「最近改動」加一段（日期、邊個做、改咗乜、掂咗邊啲檔），署名 **Cursor**／**Claude**／**Codex**。做完就清走認領。
+- **merge 完之後**：喺「最近改動」加一段（日期、邊個做、改咗乜、掂咗邊啲檔），署名 **Cursor** 或 **ChatGPT／Codex**。做完就清走認領。
 - 只寫其他人要知嘅嘢：**擁有權、地雷、未完事項**。設計討論、需求分析唔好塞入嚟。
 - 呢個檔唔係規則書。任何「以後都要咁做」嘅嘢要寫入 `AGENTS.md`，
   而且同時喺 `scripts/check-invariants.py` 加一個 `check_xxx()`，靠機器守住，唔好靠記憶。
+- Grok bot 如受邀 review，Keith／ChatGPT 負責將必要且可分享嘅摘錄手動交畀佢；Grok 唔參與 repo 認領、merge 或部署流程。
 
 ## 進行中（認領）
 
@@ -30,14 +31,22 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| 紅輯「按書頁砌句」資料層及遊戲引擎 | Cursor | `js/book-scene-demo.js`, `book-scene-demo.html`, `css/book-scene-demo.css`, `data/red-series/`, `scripts/test-book-scene-demo.mjs`, `scripts/smoke-book-scene-demo.py`, `docs/cursor-handoff-2026-09-20.md` | 2026-09-20 | Keith 交辦：本機接盤（Codex token 盡）；跟 `docs/cursor-handoff-2026-09-20.md`；唔開 Cloud Agent；先解 asset-weight，再分批開餘下 10 本（未第二人驗收前維持 preview） |
 | 書本掃描書架 | Cursor | `book-scans/index.html`, `index.html`（主頁細字連出去）, `css/styles.css`（`.home-scans-link`）, `scripts/check-invariants.py` | 2026-09-08 | Keith 交辦：家長 PDF 書架；唔改識字／OCR／數理 |
-| 加減法操作流程統一第一階段 | Codex | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | Keith 交辦：加法加入回答確認、拖曳防誤觸、修正兩套桌面排位 |
-| 加減法操作流程統一、回答確認、拖曳防誤觸及桌面版面 | Codex | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | Keith 交辦：先操作後回答，修正加減法介面及排位 |
-| 數理全區 iPad 橫向版面及原生 emoji | Codex | `css/math.css`, `js/math-app.js` | 2026-09-16 | Keith 同意：所有數理頁面優先 landscape，善用畫布；數理物件改用 Apple 原生 emoji |
+| 加減法操作流程統一第一階段 | ChatGPT／Codex | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | Keith 交辦：加法加入回答確認、拖曳防誤觸、修正兩套桌面排位 |
+| 加減法操作流程統一、回答確認、拖曳防誤觸及桌面版面 | ChatGPT／Codex | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | Keith 交辦：先操作後回答，修正加減法介面及排位 |
+| 數理全區 iPad 橫向版面及原生 emoji | ChatGPT／Codex | `css/math.css`, `js/math-app.js` | 2026-09-16 | Keith 同意：所有數理頁面優先 landscape，善用畫布；數理物件改用 Apple 原生 emoji |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
-| 短描述 | Cursor／Claude／Codex | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
+| 短描述 | Cursor／ChatGPT（Codex） | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
 -->
+
+## 暫緩支線（Keith 2026-09-19 指示）
+
+- **Supabase PIN＋跨裝置進度同步**：Keith 暫時因 token 預算改做其他網站優化，呢條支線暫停；當佢之後再問「網站有咩可以優化」時，主動提醒佢曾擱置此項。只係提醒，未獲重新指示前唔好執行 migration、設定 Auth 使用者／PIN、改登入安全設定或部署。
+- 已準備但未套用：`supabase/migrations/20260919_profile_progress.sql`、`docs/supabase-progress-sync.md`。migration 未執行；Supabase 前端未接駁；PIN 未設定；Auth 安全選項未改。
+- 方案草稿：卡卡／禧禧各自雲端 Profile，PIN 登入；Guest 不登入／不同步；RLS 隔離資料；快照 revision 防舊裝置覆蓋；星星用唯一事件鍵去重。8 位數字 PIN 只係草稿建議，Keith 未確認長度。
+- 恢復時要先確認 migration 寫入正式 Supabase 專案，再由 Keith 親自輸入 PIN；初次舊資料匯入應選最完整裝置作來源，避免兩部 iPad 星星重複相加。
 
 ## 而家嘅狀態（2026-09-05）
 
@@ -55,37 +64,59 @@ Keith 明確交俾邊個嘅任務，就由嗰個做。**唔好搶**已經寫死�
 | 範圍 | 擁有人 | 主要檔案 |
 |---|---|---|
 | 太空戰士造型、槍口射星動畫 | **Cursor** | `js/star-fx.js`、`scripts/crop-ranger-shooter.py`、`assets/` ranger 圖 |
-| 獎勵條／幣／怪獸守幣 | **Claude** | `js/app.js` 嘅 `renderStarBars`／`renderRoundBar`／`renderCoinBar`、`js/storage.js` 經濟欄位、`.coin-*` CSS |
-| 新主題內容、真實相片素材 | **Cursor** | `js/words.js`、`assets/food/`、`assets/food-hk/` |
-| 《我自己會讀》字卡 OCR → `wordIds` | **Claude**（AGENTS.md 已寫死） | `docs/word-card-ocr.md`、`scripts/apply-book-cards.py` |
-| 版面 no-scroll、重疊／剪裁回歸 | **Claude** | `scripts/smoke-shots.py`、`css/styles.css` 版面段 |
-| CI／部署閘門／invariants | **Claude** | `.github/workflows/*`、`scripts/check-invariants.py`、`scripts/build-site.sh` |
-| 圖片去背、壓縮、格式鎖 | **Claude** | `scripts/cutout-bg.py`、`assets/image-formats.lock.json`（用 `pngquant`，唔好用 Pillow `quantize()`） |
-| Keith 明確交俾 Codex 嘅任務；無人擁有嘅 backlog | **Codex** | 以「進行中」認領為準。**未問 Keith 唔好**改 Claude 嘅 OCR／CI／獎勵條／image lock，或者 Cursor 嘅 star-fx |
+| Chief lead：跨組校準、架構、整合 review、教材內容核對／字卡 OCR | **ChatGPT／Codex** | `docs/`、教材資料、`docs/word-card-ocr.md`；依任務認領共享程式 |
+| 獎勵條／星星帳簿／共用儲存與規則、CI/invariants 治理 | **ChatGPT／Codex** | `js/storage.js`、`js/app.js` 獎勵區、`.github/workflows/*`、`scripts/check-invariants.py`；高危檔先認領 |
+| 高迭代程式實作、介面／遊戲互動、家庭裝置視覺回歸 | **Cursor** | 依認領範圍；`js/star-fx.js`、ranger 資產仍由 Cursor 主責 |
+| 新主題內容與網站資產整合 | **Cursor**（ChatGPT 可先校準內容） | `js/words.js`、`assets/food/`、`assets/food-hk/`；共享檔先認領 |
+| 第二意見、概念發想、公開資料研究 | **Grok bot**（Keith 手動邀請） | 不直接讀寫 repo；輸出由 ChatGPT／Cursor 核實後採納 |
 
-呢個分工唔係死嘅——要跨界改，喺「進行中」認領並寫低就得。**但唔好兩個人同時改同一個功能。**
+呢個分工唔係死嘅——ChatGPT／Cursor 要跨界改，喺「進行中」認領並寫低就得。**唔好兩個人同時改同一個功能。** Grok 如要由顧問角色升級成程式執行者，須 Keith 另行明確授權並先更新規則。
 
 ## 撞車高危檔案
 
-Cursor／Claude／Codex 都可能掂到下面呢批檔——改之前先認領，唔好兩個人一齊改。
+ChatGPT／Cursor 都可能掂到下面呢批檔——改之前先認領，唔好兩個人一齊改。Grok 預設唔改檔。
 
-- `css/styles.css` — 三方都會掂。改之前認領 + `git fetch` + rebase，唔好用大段 rewrite，
+- `css/styles.css` — ChatGPT／Cursor 都會掂。改之前認領 + `git fetch` + rebase，唔好用大段 rewrite，
   改細粒啲、貼住現有 selector 改。
-- `js/app.js` — 同上。`renderStarBars` 一帶而家係 Claude 嘅，`flyStarToBar` 會
+- `js/app.js` — 同上。獎勵條由 ChatGPT／Codex 主責；`flyStarToBar` 會
   delegate 去 `window.KakaStarFx.flyStarFromRanger`（Cursor 嘅），呢個 delegation
-  就係 Cursor ⇄ Claude 嘅介面：**唔好其中一方刪咗個 fallback**。Codex 未認領唔好改呢度。
-- `js/star-fx.js` — Cursor 擁有。Claude／Codex 通常只經 `window.KakaStarFx` 呼叫，唔改入面；
-  **2026-09-02 有兩次例外**（都係 Keith 直接叫 Claude 做，唔係 Claude 自把自為）：
+  就係 Cursor ⇄ ChatGPT 嘅介面：**唔好其中一方刪咗個 fallback**。
+- `js/star-fx.js` — Cursor 主責。ChatGPT 通常只經 `window.KakaStarFx` 呼叫；
+  **2026-09-02 有兩次歷史例外**（當時係 Keith 直接叫 Claude 做）：
   （1）下午：加咗 3 個 sparkle span + 飛星圖由文字改 `<img>`，`MUZZLE_ANCHOR`／握拳
   發射邏輯冇郁；（2）夜晚：答啱一題 ranger 會隨機換 4 款 pose，**呢次 `MUZZLE_ANCHOR`
   改咗**（由精準對住握拳，簡化做身中心固定點 `{x:0.5, y:0.52}`——因為 pose 會變，
   握拳唔一定喺度），`scripts/crop-ranger-shooter.py`／`kaka-ranger-solo.png` 嘅
   預設 shooter 圖冇郁。詳情見上面「最近改動」。Cursor 改呢個檔之前對一對 git log，
   留意 `MUZZLE_ANCHOR` 已經唔再係「握拳精準座標」呢個假設。
-- `assets/image-formats.lock.json` — Claude 擁有格式鎖。換圖之後要 `python3 scripts/check-invariants.py --update-image-lock`，
-  唔係 CI 會紅。Codex／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
+- `assets/image-formats.lock.json` — Cursor 主責圖片格式鎖。換圖之後要 `python3 scripts/check-invariants.py --update-image-lock`，
+  唔係 CI 會紅。ChatGPT／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
 
 ## 最近改動
+
+以下按日期保留原始署名同當時分工，只作歷史紀錄；**現行擁有人以本文上方「分工」表為準**。
+
+### 2026-09-21 · Cursor（驗收工作流＋《信》《快跑呀》上線）
+
+- Keith 硬性：驗收只喺網站玩，唔睇 code；已寫入 `AGENTS.md`、`.cursor/rules/keith-play-not-code.mdc`、`docs/qa-check.md`、用戶 rule。
+- 《信》《快跑呀》改 `mode: sentence`、`sourceVerified: true`（各 4 關／8 星）；正式砌句現共 4 本。
+- **踩咗** 同上規則檔、`data/red-series/sentence-game-data.mjs`、`scripts/test-book-scene-demo.mjs`、`docs/handover.md`
+
+### 2026-09-20 · Cursor（本機接盤紅輯書頁砌句）
+
+- 接過 Codex handoff（`docs/cursor-handoff-2026-09-20.md`）：認領改為 Cursor；全程本機，唔開 Cloud Agent。
+- 清走已停用舊版 `sentence-comic-*.jpg`（只喺 image lock 殘留），`check-invariants` **asset-weight 全綠**。
+- 正式砌句維持《分果果》《誰在叫》；其餘 10 本仍 `mode: preview`，並新增 `pendingQuestions`（`sourceVerified: false`）供第二人驗收——**未翻 sentence mode**。
+- 新建 HQ：`信-p7.webp`、`快跑呀-p3.webp`；更新 `story-page-hq-manifest.json`、`test-book-scene-demo.mjs`（pending 結構檢查）。
+- 驗收通過：`node scripts/test-book-scene-demo.mjs`、`python3 scripts/check-invariants.py`、touch smoke 三 viewport。
+- **等 Keith**：按批次目視 `pendingQuestions`（尤其 inventory 差異：安安末句、氣球飛走句、黃葉「啊！秋天到了。」、小明「牀／床」、尚缺 HQ 頁）。確認後先開《信》《快跑呀》。
+- **踩咗** `docs/handover.md`、`data/red-series/sentence-game-data.mjs`、`data/red-series/story-page-hq-manifest.json`、`assets/book-scenes/red-series-pages-hq/信-p7.webp`、`assets/book-scenes/red-series-pages-hq/快跑呀-p3.webp`、`assets/image-formats.lock.json`、`scripts/test-book-scene-demo.mjs`；刪 `assets/sentence-comic-anan.jpg`、`assets/sentence-comic-balloon.jpg`
+
+### 2026-09-19 · ChatGPT／Codex（PTH 詞語普通話 voice 修正）
+
+- 普通話聲母頁嘅「米飯／貓咪」等詞語播放，改為明確揀普通話 voice，排除 `yue`、`zh-HK`、粵語／廣東話 voice；裝置未提供普通話 voice 時顯示設定提示，唔再靜默播錯語音。
+- TTS、教材 MP4 同切頁會互相取消，避免快速連按造成疊音；補上 cache-bust、狀態提示及內容測試，家庭三個 viewport smoke test 通過。
+- **踩咗** `js/pth-demo.js`、`pth-demo.html`、`css/pth-demo.css`、`scripts/test-pth-content.mjs`、`docs/handover.md`
 
 ### 2026-09-16 · Codex（Keith：Sight Words 五個生活主題）
 
@@ -643,31 +674,31 @@ Claude 做咗一次完整審查，結果喺 **`docs/site-review-2026-09.md`** �
 
 | 項目 | 狀態 | 建議擁有人 |
 |---|---|---|
-| `version.json` 自動 reload（KAKA 部 iPad 冇人幫佢 hard-reload，長遠一定要） | 未開工 | Claude |
-| 行星圖黑底去背（技術已驗證） | 未開工 | Claude |
-| 字詞 union：13 本書有字未計入系列總數（紅輯 212→255、橙輯 183→197） | 未開工 | Claude |
-| 🫎 駝鹿 OpenMoji 淨係得對角，要換圖 | 未開工 | 任一邊 |
-| 已兌換記錄（唔記錄嘅話累積幣數唔誠實） | 未開工 | Claude |
-| 怪獸 phase 2：每個主題一隻、原創畫、家長開關 | **等 KAKA 試玩結果** | Claude |
+| `version.json` 自動 reload（KAKA 部 iPad 冇人幫佢 hard-reload，長遠一定要） | 未開工 | Cursor |
+| 行星圖黑底去背（技術已驗證） | 未開工 | Cursor |
+| 字詞 union：13 本書有字未計入系列總數（紅輯 212→255、橙輯 183→197） | 未開工 | ChatGPT／Codex（核內容）＋Cursor（落地） |
+| 🫎 駝鹿 OpenMoji 淨係得對角，要換圖 | 未開工 | Cursor |
+| 已兌換記錄（唔記錄嘅話累積幣數唔誠實） | 未開工 | ChatGPT／Codex |
+| 怪獸 phase 2：每個主題一隻、原創畫、家長開關 | **等 KAKA 試玩結果** | ChatGPT／Codex（方案）＋Cursor（落地） |
 | ~~太空戰士造型同 Buzz Lightyear 似唔似~~ | ✅ 已決定接受（2026-09-02，見 AGENTS.md） | — |
 | 每日 3 個幣（真錢）會唔會太鬆手 | **等 Keith 決定** | Keith |
 | ~~答啱每一題要唔要換 ranger 反應~~ | ✅ 已做：頭頂 sparkle（下畫）+ 隨機換 4 款動作 pose（夜晚），兩次都 2026-09-02 | — |
 | 純面部表情（開心／眨眼等 7 款）想真係用得到，要新畫一版有戴頭盔嘅版本 | idea，未開工 | 新畫要 Keith／畫圖果邊 |
-| KAKA RANGER logo 擺喺主頁 `.brand-mark`（同而家 CSS 畫嘅 `.brand-orbit` 二揀一） | 未開工，今次冇做（範圍係 favicon／og-image） | Claude |
+| KAKA RANGER logo 擺喺主頁 `.brand-mark`（同而家 CSS 畫嘅 `.brand-orbit` 二揀一） | 未開工，今次冇做（範圍係 favicon／og-image） | Cursor |
 
-無人擁有／「任一邊」嘅項目，三個 agent 都可以經「進行中」認領；已有擁有人嘅唔好搶。
+無人擁有嘅 repo 項目，由 ChatGPT／Cursor 經「進行中」認領；已有擁有人嘅唔好搶。Grok bot 可畀第二意見，但預設唔係 repo owner。
 
 ## 開工前／收工 checklist
 
-三個 agent 都跟呢套（唔係淨係「兩邊」）：
+ChatGPT／Cursor 都跟呢套：
 
 ```bash
-git fetch origin main && git rebase origin/main   # 開工第一件事；三個 agent 都可能 push main
+git fetch origin main && git rebase origin/main   # 開工第一件事；ChatGPT／Cursor 都可能 push main
 # 認領「進行中」→ 改嘢 → 清認領
 python3 scripts/check-invariants.py               # 一定要 exit 0
 python3 scripts/smoke-shots.py --no-shots         # 家庭裝置；改過版面／CSS／流程先跑。全尺寸加 --all。小改動唔使本地重跑
 python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
-# merge 入 main → Pages 自動上線 → 返嚟更新呢個檔嘅「最近改動」（署名 Cursor／Claude／Codex）
+# merge 入 main → Pages 自動上線 → 返嚟更新呢個檔嘅「最近改動」（署名 Cursor 或 ChatGPT／Codex）
 ```
 
 ⚠️ 部署完，iPhone／iPad 要**閂咗個 tab 再開**先睇到新版（單純 refresh 唔夠，

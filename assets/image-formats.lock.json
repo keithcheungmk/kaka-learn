@@ -315,14 +315,6 @@
     "format": "JPEG",
     "alpha": false
   },
-  "assets/sentence-comic-anan.jpg": {
-    "format": "JPEG",
-    "alpha": false
-  },
-  "assets/sentence-comic-balloon.jpg": {
-    "format": "JPEG",
-    "alpha": false
-  },
   "assets/space-ranger-pose-fistpump.png": {
     "format": "PNG",
     "alpha": true

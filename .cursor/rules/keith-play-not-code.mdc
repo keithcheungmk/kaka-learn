@@ -1,0 +1,13 @@
+---
+description: Keith 只喺網站玩驗收；唔好叫佢睇 code／diff／JSON
+alwaysApply: true
+---
+
+# 驗收＝上線玩，唔係睇 code
+
+Keith（2026-09-21）硬性工作流：
+
+1. **唔好**叫 Keith「目視／驗收／確認」任何 code、diff、JSON、`pendingQuestions`、handoff 清單。
+2. Agent 自己對 `source-materials/` 核實內容 → 跑測試／invariants → **commit → merge／push 部署**。
+3. 收工只交 **可撳網址**（例如 Pages）；佢唔滿意會喺網站玩完再講，再改再部署。
+4. 「第二人驗收」＝Keith 喺 live 玩；**唔係** chat 入面 code review。呢條優先過舊「先等 Keith 確認先開正式題」。
