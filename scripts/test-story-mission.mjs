@@ -21,10 +21,11 @@ assert.equal(sourceClipCount, 38, 'Every story page needs a source audio trace (
 assert.equal(blankCount, 38, 'Every story page needs one short fill activity');
 assert.equal(choiceCount, 38, 'Every story page should define answer choices');
 
-assert.match(source, /function renderFill/, 'The fill screen should render after the page audio');
-assert.match(source, /draggable="\$\{!busy && !reading\}/, 'Word tiles should support dragging before submission');
+assert.match(source, /function renderChallenge/, 'Read & Fill should use one challenge layout for listen and fill');
+assert.match(source, /function unlockFill/, 'Story audio should unlock the fill controls when finished');
+assert.match(source, /draggable="\$\{!locked && !busy && !reading && !solved\}/, 'Word tiles should support dragging before submission');
 assert.match(source, /tile\.addEventListener\('click'/, 'Word tiles should also support tapping');
-assert.match(source, /audio\.onended = \(\) => \{ if \(after\) after\(\)/, 'The fill activity must follow the original page audio');
+assert.match(source, /audio\.onended = \(\) => \{/, 'The fill activity must follow the original page audio');
 assert.match(source, /function submitWord/, 'The fill activity should wait for Submit before judging');
 assert.match(source, /That’s okay\. Try again!/, 'Wrong answers should use a gentle English retry message');
 assert.match(source, /speakEnglishTerm/, 'The fill activity should use English TTS for the short sentence');
@@ -35,11 +36,14 @@ assert.match(source, /function readSentenceWithHighlight/, 'The short sentence s
 assert.match(source, /function speakPraise/, 'Correct answers should use a spoken praise line');
 assert.match(source, /Great job, Kaka! You got it right!/, 'The praise lines should address Kaka in English');
 assert.match(source, /speakPraise\(\(\) => \{/, 'Correct answers should praise before showing Next page');
-assert.doesNotMatch(source, /playPageAudio\(\);/, 'The fill activity must not replay the Carter page audio');
+assert.match(source, /\$\('#btn-story-submit'\)\?\.remove\(\)/, 'Submit should be removed after a correct answer');
+assert.doesNotMatch(source, /function renderListen/, 'There should be no separate listen-only layout');
 assert.doesNotMatch(source, /const MISSION/, 'The former separate multi-question mission should be removed');
+assert.match(source, /autoPlay: phase === 'listen'/, 'Each page should auto-play the story clip in the challenge layout');
 
 assert.match(css, /orientation:\s*landscape/, 'iPad landscape should have a dedicated media query');
 assert.match(css, /grid-template-columns:\s*minmax\(0,\s*58%\)\s*minmax\(280px,\s*42%\)/, 'Landscape challenge layout should allocate space to image and fill panel');
+assert.match(css, /\.story-fill-tools/, 'Listen and sentence buttons should share a compact toolbar');
 assert.match(index, /每頁先聽故事，再把剛才聽到的一個字放回短句/);
 assert.match(index, /STORY ENGLISH・Carter Family/, 'Home entry should name the Carter Family track');
 

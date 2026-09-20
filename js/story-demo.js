@@ -138,29 +138,24 @@
   function playPageAudio({ after = null } = {}) {
     const audio = $('audio[data-story-demo]');
     const feedback = $('#story-play-feedback');
+    const listenBtn = $('#btn-story-listen');
     if (!audio) return;
     if (feedback) { feedback.textContent = 'Listening…'; feedback.className = 'feedback'; }
+    if (listenBtn) listenBtn.disabled = true;
     audio.currentTime = 0;
-    audio.onended = () => { if (after) after(); else if (feedback) feedback.textContent = 'Now fill the missing word.'; };
-    audio.onerror = () => { if (feedback) { feedback.textContent = 'Audio could not play. Please try again.'; feedback.className = 'feedback retry'; } };
-    audio.play().catch(() => { if (feedback) { feedback.textContent = 'Audio could not play. Please try again.'; feedback.className = 'feedback retry'; } });
-  }
-
-  function renderListen() {
-    const book = activeBook();
-    const item = current();
-    const list = pages();
-    $('#btn-back-story-play').textContent = `← ${book.title}`;
-    $('#story-play-title').textContent = 'Read & Fill';
-    $('#story-play-lead').textContent = '先聽這一頁故事，然後把一個字放回句子。';
-    $('#story-round-progress').textContent = `${pageIndex + 1}/${list.length}`;
-    $('#story-play-stage').innerHTML = `<div class="story-book-frame"><img class="story-book-page" src="${item.image}" alt="${book.title}, page ${pageIndex + 1}" decoding="async"></div>`;
-    $('#story-play-actions').innerHTML = `<button type="button" class="btn btn-ghost" id="btn-story-prev" ${pageIndex === 0 ? 'disabled' : ''}>← Previous</button>
-      <button type="button" class="btn btn-secondary" id="btn-story-audio">🔊 Listen to the story</button>
-      <audio data-story-demo preload="metadata" src="${item.audio}"></audio>`;
-    $('#story-play-options').innerHTML = '';
-    $('#btn-story-prev')?.addEventListener('click', () => { if (pageIndex > 0) { pageIndex -= 1; phase = 'listen'; renderPage(); } });
-    $('#btn-story-audio')?.addEventListener('click', () => playPageAudio({ after: () => { phase = 'fill'; renderPage(); } }));
+    audio.onended = () => {
+      if (listenBtn) listenBtn.disabled = false;
+      if (after) after();
+      else if (feedback) feedback.textContent = 'Now fill the missing word.';
+    };
+    audio.onerror = () => {
+      if (listenBtn) listenBtn.disabled = false;
+      if (feedback) { feedback.textContent = 'Audio could not play. Please try again.'; feedback.className = 'feedback retry'; }
+    };
+    audio.play().catch(() => {
+      if (listenBtn) listenBtn.disabled = false;
+      if (feedback) { feedback.textContent = 'Tap Listen to play the story.'; feedback.className = 'feedback retry'; }
+    });
   }
 
   function tokenMarkup(item, { filled = false } = {}) {
@@ -171,14 +166,58 @@
   }
 
   function setReadingUi(disabled) {
-    $$('.story-fill-tile, #btn-story-submit, #btn-story-read-sentence').forEach((element) => { element.disabled = disabled || busy; });
+    const fillLocked = phase !== 'fill' || solved;
+    $$('.story-fill-tile, #btn-story-submit, #btn-story-read-sentence, #btn-story-listen').forEach((element) => {
+      if (element.id === 'btn-story-listen') {
+        element.disabled = disabled || busy;
+        return;
+      }
+      element.disabled = disabled || busy || fillLocked || (element.id === 'btn-story-submit' && !selectedWord);
+    });
   }
 
   function clearSentenceHighlight() {
     $$('.story-sentence-token').forEach((element) => element.classList.remove('is-speaking'));
   }
 
+  function unlockFill() {
+    if (solved || phase === 'fill') return;
+    phase = 'fill';
+    $('#story-play-lead').textContent = '聽英文句子，揀字，再按 Submit。';
+    const help = $('.story-fill-help');
+    if (help) help.hidden = false;
+    $('#btn-story-read-sentence')?.removeAttribute('hidden');
+    $('#btn-story-submit')?.removeAttribute('hidden');
+    $$('.story-fill-tile').forEach((tile) => {
+      tile.disabled = false;
+      tile.draggable = true;
+    });
+    $$('.story-fill-blank').forEach((blank) => { blank.disabled = false; });
+    const submit = $('#btn-story-submit');
+    if (submit) submit.disabled = !selectedWord;
+    const feedback = $('#story-play-feedback');
+    if (feedback && !feedback.classList.contains('ok')) {
+      feedback.textContent = 'Now fill the missing word.';
+      feedback.className = 'feedback';
+    }
+  }
+
+  function lockFillForStory() {
+    phase = 'listen';
+    $('#story-play-lead').textContent = '先聽這一頁故事；聽完就可以揀字。';
+    const help = $('.story-fill-help');
+    if (help) help.hidden = true;
+    $('#btn-story-read-sentence')?.setAttribute('hidden', '');
+    $('#btn-story-submit')?.setAttribute('hidden', '');
+    $$('.story-fill-tile').forEach((tile) => {
+      tile.disabled = true;
+      tile.draggable = false;
+    });
+    $$('.story-fill-blank').forEach((blank) => { blank.disabled = true; });
+  }
+
   function readSentenceWithHighlight(item, onEnd = null) {
+    if (phase !== 'fill' || solved) return;
     const token = ++readToken;
     reading = true;
     setReadingUi(true);
@@ -236,7 +275,7 @@
 
   function selectWord(word) {
     const item = current();
-    if (busy || reading || !item.choices.includes(word)) return;
+    if (busy || reading || solved || phase !== 'fill' || !item.choices.includes(word)) return;
     selectedWord = word;
     const blank = $('.story-fill-blank');
     if (blank) { blank.textContent = word; blank.classList.add('has-selection'); }
@@ -249,40 +288,71 @@
     speech.speakEnglishTerm?.(word, { rate: 1.0, pitch: 1.05 });
   }
 
-  function renderFill() {
+  function renderChallenge({ autoPlay = false } = {}) {
     const book = activeBook();
     const item = current();
+    const list = pages();
     const stage = $('#story-play-stage');
-    $('#story-play-lead').textContent = '聽英文句子，揀字，再按 Submit。';
+    const locked = phase === 'listen' && !solved;
+    $('#btn-back-story-play').textContent = `← ${book.title}`;
+    $('#story-play-title').textContent = 'Read & Fill';
+    $('#story-play-lead').textContent = locked
+      ? '先聽這一頁故事；聽完就可以揀字。'
+      : '聽英文句子，揀字，再按 Submit。';
+    $('#story-round-progress').textContent = `${pageIndex + 1}/${list.length}`;
     stage.classList.add('story-page-challenge');
+    stage.classList.toggle('is-listening', locked);
+    stage.classList.toggle('is-solved', solved);
     stage.innerHTML = `<div class="story-challenge-image-wrap"><img class="story-challenge-page" src="${item.image}" alt="${book.title}, page ${pageIndex + 1}" decoding="async"></div>
       <section class="story-fill-panel" aria-label="Sentence fill activity">
         <p class="story-source-tag">${book.title} · PDF page ${item.pdfPage}</p>
-        <h2>Fill the missing word</h2><p class="story-fill-sentence">${tokenMarkup(item, { filled: solved })}</p>
-        <button type="button" class="btn btn-secondary story-listen-again" id="btn-story-read-sentence" ${reading ? 'disabled' : ''}>🔊 Read this sentence</button>
-        <p class="story-fill-help">Choose one word, then press Submit.</p>
-        <div class="story-fill-bank" id="story-fill-bank">${item.choices.map((word) => `<button type="button" class="story-fill-tile${selectedWord === word ? ' selected' : ''}${solved && item.blanks.includes(word) ? ' correct' : ''}" draggable="${!busy && !reading}" data-word="${word}"${busy || reading ? ' disabled' : ''}>${word}</button>`).join('')}</div>
-        <button type="button" class="btn btn-primary story-fill-submit" id="btn-story-submit"${!selectedWord || busy || reading ? ' disabled' : ''}>Submit</button>
+        <h2>Fill the missing word</h2>
+        <p class="story-fill-sentence">${tokenMarkup(item, { filled: solved })}</p>
+        <div class="story-fill-tools">
+          <button type="button" class="btn btn-secondary story-listen-again" id="btn-story-listen">🔊 Listen to the story</button>
+          <button type="button" class="btn btn-ghost story-listen-again" id="btn-story-read-sentence"${locked || solved ? ' hidden' : ''}>🔊 Read this sentence</button>
+          <audio data-story-demo preload="metadata" src="${item.audio}"></audio>
+        </div>
+        <p class="story-fill-help"${locked ? ' hidden' : ''}>Choose one word, then press Submit.</p>
+        <div class="story-fill-bank" id="story-fill-bank">${item.choices.map((word) => `<button type="button" class="story-fill-tile${selectedWord === word ? ' selected' : ''}${solved && item.blanks.includes(word) ? ' correct' : ''}" draggable="${!locked && !busy && !reading && !solved}" data-word="${word}"${locked || busy || reading || solved ? ' disabled' : ''}>${word}</button>`).join('')}</div>
+        <button type="button" class="btn btn-primary story-fill-submit" id="btn-story-submit"${locked || solved ? ' hidden' : ''}${!selectedWord || busy || reading ? ' disabled' : ''}>Submit</button>
       </section>`;
     $('#story-play-actions').innerHTML = '';
     $('#story-play-options').innerHTML = '';
+    $('#btn-story-listen')?.addEventListener('click', () => {
+      if (busy || reading) return;
+      speech.cancelAllSpeech?.();
+      if (!solved) lockFillForStory();
+      stage.classList.add('is-listening');
+      playPageAudio({ after: () => {
+        stage.classList.remove('is-listening');
+        if (!solved) unlockFill();
+      } });
+    });
     $('#btn-story-read-sentence')?.addEventListener('click', () => readSentenceWithHighlight(item));
     $$('.story-fill-tile', stage).forEach((tile) => {
       tile.addEventListener('click', () => selectWord(tile.dataset.word));
       tile.addEventListener('dragstart', (event) => event.dataTransfer?.setData('text/plain', tile.dataset.word));
     });
     $$('.story-fill-blank', stage).forEach((blank) => {
+      blank.disabled = locked || solved;
       blank.addEventListener('dragover', (event) => event.preventDefault());
       blank.addEventListener('drop', (event) => { event.preventDefault(); selectWord(event.dataTransfer?.getData('text/plain')); });
     });
     $('#btn-story-submit')?.addEventListener('click', submitWord);
+    if (autoPlay) {
+      playPageAudio({ after: () => {
+        stage.classList.remove('is-listening');
+        unlockFill();
+      } });
+    }
   }
 
   function submitWord() {
     const item = current();
     const list = pages();
     const word = selectedWord;
-    if (busy || reading || !word) return;
+    if (busy || reading || solved || phase !== 'fill' || !word) return;
     const blank = $('.story-fill-blank');
     if (!item.blanks.includes(word)) {
       const tile = $$('.story-fill-tile').find((candidate) => candidate.dataset.word === word);
@@ -293,6 +363,8 @@
       selectedWord = null;
       if (blank) { blank.textContent = '?'; blank.classList.remove('has-selection'); }
       $$('.story-fill-tile').forEach((candidate) => candidate.classList.remove('selected'));
+      const submit = $('#btn-story-submit');
+      if (submit) submit.disabled = true;
       setTimeout(() => tile?.classList.remove('wrong'), 650);
       return;
     }
@@ -305,11 +377,18 @@
       tile.draggable = false;
       tile.classList.toggle('correct', tile.dataset.word === word);
     });
-    $('#btn-story-submit').disabled = true;
+    $$('.story-fill-blank').forEach((el) => { el.disabled = true; });
+    $('#btn-story-submit')?.setAttribute('hidden', '');
+    $('#btn-story-read-sentence')?.setAttribute('hidden', '');
+    $('.story-fill-help')?.setAttribute('hidden', '');
+    $('#story-play-stage')?.classList.add('is-solved');
+    $('#story-play-stage')?.classList.remove('is-listening');
     speech.playCorrectCue?.({ muted: muted() });
     const feedback = $('#story-play-feedback');
     feedback.textContent = 'Great job!'; feedback.className = 'feedback ok';
     speakPraise(() => {
+      $('#btn-story-submit')?.remove();
+      if ($('#btn-story-next')) return;
       $('#story-fill-bank').insertAdjacentHTML('afterend', `<button type="button" class="btn btn-primary story-next-page" id="btn-story-next">${pageIndex === list.length - 1 ? 'Finish story →' : 'Next page →'}</button>`);
       $('#btn-story-next')?.addEventListener('click', nextPage);
     });
@@ -327,7 +406,7 @@
     $('#story-play-title').textContent = 'Great reading!';
     $('#story-play-lead').textContent = 'You listened to the story and filled every sentence.';
     $('#story-round-progress').textContent = `${list.length}/${list.length}`;
-    $('#story-play-stage').classList.remove('story-page-challenge');
+    $('#story-play-stage').classList.remove('story-page-challenge', 'is-listening', 'is-solved');
     $('#story-play-stage').innerHTML = `<div class="story-finish"><span>★</span><h2>${book.title} Complete!</h2><p>Read the story again whenever you like.</p></div>`;
     $('#story-play-actions').innerHTML = '<button type="button" class="btn btn-secondary" id="btn-story-restart">Read again</button>';
     $('#story-play-options').innerHTML = '<button type="button" class="story-answer" id="btn-story-home">Back to Story Books</button>';
@@ -338,8 +417,8 @@
   function renderPage() {
     stopAudio(); viewGen += 1;
     const feedback = $('#story-play-feedback'); feedback.textContent = ''; feedback.className = 'feedback';
-    $('#story-play-stage').classList.remove('story-page-challenge');
-    if (phase === 'listen') renderListen(); else renderFill();
+    $('#story-play-stage').classList.remove('story-page-challenge', 'is-listening', 'is-solved');
+    renderChallenge({ autoPlay: phase === 'listen' && !solved });
   }
 
   function init() {
