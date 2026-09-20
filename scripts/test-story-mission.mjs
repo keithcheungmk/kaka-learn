@@ -28,6 +28,8 @@ assert.match(source, /audio\.onended = \(\) => \{ if \(after\) after\(\)/, 'The 
 assert.match(source, /function submitWord/, 'The fill activity should wait for Submit before judging');
 assert.match(source, /That’s okay\. Try again!/, 'Wrong answers should use a gentle English retry message');
 assert.match(source, /speakEnglishTerm/, 'The fill activity should use English TTS for the short sentence');
+assert.match(source, /rate: 0\.98/, 'Sentence reading should use a quicker English rate');
+assert.match(source, /function selectWord[\s\S]*speakEnglishTerm\?\.\(word/, 'Choosing a word tile should speak that word');
 assert.match(source, /story-sentence-token/, 'The sentence should expose word-level highlight targets');
 assert.match(source, /function readSentenceWithHighlight/, 'The short sentence should be read with word highlighting');
 assert.match(source, /function speakPraise/, 'Correct answers should use a spoken praise line');

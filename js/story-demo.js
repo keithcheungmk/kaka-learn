@@ -207,8 +207,8 @@
         if (fallbackTimer) clearTimeout(fallbackTimer);
         setTimeout(next, 0);
       };
-      fallbackTimer = setTimeout(moveOn, (speech.estimateSpeakMs?.(item.sentence[wordIndex], { rate: 0.78, delayMs: 80 }) || 1500) + 450);
-      speech.speakEnglishTerm?.(item.sentence[wordIndex], { rate: 0.78, pitch: 1.05, onEnd: moveOn });
+      fallbackTimer = setTimeout(moveOn, (speech.estimateSpeakMs?.(item.sentence[wordIndex], { rate: 0.98, delayMs: 60 }) || 1200) + 280);
+      speech.speakEnglishTerm?.(item.sentence[wordIndex], { rate: 0.98, pitch: 1.05, onEnd: moveOn });
     };
     next();
   }
@@ -245,6 +245,8 @@
     if (submit) submit.disabled = false;
     $('#story-play-feedback').textContent = 'Now press Submit.';
     $('#story-play-feedback').className = 'feedback';
+    speech.cancelAllSpeech?.();
+    speech.speakEnglishTerm?.(word, { rate: 1.0, pitch: 1.05 });
   }
 
   function renderFill() {
