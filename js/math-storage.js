@@ -1,7 +1,7 @@
 /** 數理探險 — localStorage v4（kaka-math-v1；同認字 kaka-learn-v1 分開） */
 (function () {
   const STORAGE_KEY = 'kaka-math-v1';
-  const SCHEMA_VERSION = 4;
+  const SCHEMA_VERSION = 5;
   const PROFILE_IDS = ['kaka', 'heihei'];
 
   function todayKey() {
@@ -16,7 +16,7 @@
     starsToday: 0,
     totalStars: 0,
     starsDate: todayKey(),
-    currentPlanetId: 'count',
+    currentPlanetId: 'number-relations',
     litPlanetIds: [],
     interviewUnlocked: false,
     additionProgress: {
@@ -34,6 +34,16 @@
       unlockedLevel: 1,
       completedLevels: [],
       completedMissions: [],
+    },
+    numberRelationsProgress: {
+      completedRounds: 0,
+      lastCompletedAt: null,
+      questionTypeCounts: {},
+    },
+    retiredPlanetProgress: {
+      countLit: false,
+      timeLit: false,
+      compareQtyLit: false,
     },
     skillProgress: {},
     mistakeHistory: [],
@@ -62,6 +72,16 @@
         unlockedLevel: 1,
         completedLevels: [],
         completedMissions: [],
+      },
+      numberRelationsProgress: {
+        completedRounds: 0,
+        lastCompletedAt: null,
+        questionTypeCounts: {},
+      },
+      retiredPlanetProgress: {
+        countLit: false,
+        timeLit: false,
+        compareQtyLit: false,
       },
       skillProgress: {},
       mistakeHistory: [],
@@ -97,8 +117,24 @@
       if (obj[k] !== undefined) out[k] = obj[k];
     });
     if (!Array.isArray(out.litPlanetIds)) out.litPlanetIds = [];
-    else out.litPlanetIds = out.litPlanetIds.filter((id) => id !== 'compare-qty');
+    if (!out.retiredPlanetProgress || typeof out.retiredPlanetProgress !== 'object') {
+      out.retiredPlanetProgress = { countLit: false, timeLit: false, compareQtyLit: false };
+    } else {
+      out.retiredPlanetProgress = {
+        countLit: !!out.retiredPlanetProgress.countLit,
+        timeLit: !!out.retiredPlanetProgress.timeLit,
+        compareQtyLit: !!out.retiredPlanetProgress.compareQtyLit,
+      };
+    }
+    if (out.litPlanetIds.includes('compare-qty')) {
+      out.retiredPlanetProgress.compareQtyLit = true;
+    }
+    if (out.litPlanetIds.includes('count')) {
+      out.retiredPlanetProgress.countLit = true;
+    }
+    out.litPlanetIds = out.litPlanetIds.filter((id) => id !== 'compare-qty' && id !== 'count');
     if (out.currentPlanetId === 'compare-qty') out.currentPlanetId = 'time';
+    if (out.currentPlanetId === 'count') out.currentPlanetId = 'number-relations';
     if (!out.additionProgress || typeof out.additionProgress !== 'object') {
       out.additionProgress = { unlockedLevel: 1, unlockedBase: 5, completedLevels: [], completedMissions: [] };
     }
@@ -122,6 +158,21 @@
     if (typeof out.subtractionProgress.unlockedLevel !== 'number') out.subtractionProgress.unlockedLevel = 1;
     if (!Array.isArray(out.subtractionProgress.completedLevels)) out.subtractionProgress.completedLevels = [];
     if (!Array.isArray(out.subtractionProgress.completedMissions)) out.subtractionProgress.completedMissions = [];
+    if (!out.numberRelationsProgress || typeof out.numberRelationsProgress !== 'object') {
+      out.numberRelationsProgress = { completedRounds: 0, lastCompletedAt: null, questionTypeCounts: {} };
+    } else {
+      out.numberRelationsProgress = {
+        completedRounds: Number.isFinite(out.numberRelationsProgress.completedRounds)
+          ? Math.max(0, out.numberRelationsProgress.completedRounds)
+          : 0,
+        lastCompletedAt: out.numberRelationsProgress.lastCompletedAt || null,
+        questionTypeCounts:
+          out.numberRelationsProgress.questionTypeCounts &&
+          typeof out.numberRelationsProgress.questionTypeCounts === 'object'
+            ? { ...out.numberRelationsProgress.questionTypeCounts }
+            : {},
+      };
+    }
     if (!out.skillProgress || typeof out.skillProgress !== 'object' || Array.isArray(out.skillProgress)) {
       out.skillProgress = {};
     } else {

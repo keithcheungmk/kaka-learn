@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="./css/phonics.css?v=20260905list" />
   <link rel="stylesheet" href="./css/story-demo.css?v=20260911b" />
   <link rel="stylesheet" href="./css/math.css?v=20260908c" />
-  <link rel="stylesheet" href="./css/math-manipulatives.css?v=20260907a" />
+  <link rel="stylesheet" href="./css/math-number-line.css?v=20260921a" />
   <link rel="stylesheet" href="./css/additionGame.css?v=4751bde" />
 </head>
 <body>
@@ -600,97 +600,62 @@
       </div>
     </section>
 
-    <!-- 水星・先學一學 -->
-    <section id="screen-math-learn" class="screen math-screen" aria-label="水星・先學一學">
+    <!-- 水星・數字關係・先學 -->
+    <section id="screen-math-relations-learn" class="screen math-screen" aria-label="水星・數字關係先學">
       <div class="game-header earth-game-header">
         <div class="earth-nav">
-          <button type="button" class="btn btn-ghost" id="btn-back-math-learn">← 銀河</button>
+          <button type="button" class="btn btn-ghost" id="btn-back-math-relations-learn">← 銀河</button>
           <span class="earth-location"><img src="./assets/math/planets/mercury.png" alt="" width="48" height="48" decoding="async" />水星</span>
         </div>
-        <h1 id="math-learn-title">水星・先學</h1>
+        <h1 id="math-relations-learn-title">水星・先學</h1>
         <div class="progress-pill" aria-label="學習進度">
-          <strong id="math-learn-progress">1/5</strong>
+          <strong id="math-relations-learn-progress">1/5</strong>
         </div>
       </div>
-      <p class="section-lead" id="math-learn-lead">數吓有幾多粒，撳喇叭再聽</p>
-      <button type="button" class="math-learn-stage" id="math-learn-tap" aria-label="再聽一次">
-        <div class="math-count-field" id="math-learn-field" aria-hidden="true"></div>
-        <div class="math-learn-num" id="math-learn-num">3</div>
+      <p class="section-lead" id="math-relations-learn-prompt">喺0至10數軸搵位置、行距離</p>
+      <button type="button" class="math-relations-learn-stage" id="math-relations-learn-stage" aria-label="再聽一次">
+        <div id="math-relations-learn-line" class="math-nline" aria-label="學習數軸"></div>
         <div class="learn-hear">🔊 聽一聽</div>
       </button>
+      <p class="feedback" id="math-relations-learn-feedback" aria-live="polite"></p>
       <div class="btn-row">
-        <button type="button" class="btn btn-ghost" id="btn-math-learn-prev">← 上一張</button>
-        <button type="button" class="btn btn-secondary" id="btn-math-learn-next">下一張 →</button>
+        <button type="button" class="btn btn-ghost" id="btn-math-relations-learn-prev">← 上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-relations-learn-next">下一張 →</button>
       </div>
-      <div class="btn-row" id="math-learn-finish-row" hidden>
-        <button type="button" class="btn" id="btn-math-learn-play">學完喇・去玩玩</button>
-      </div>
-    </section>
-
-    <!-- 水星・揀玩法 -->
-    <section id="screen-math-play" class="screen math-screen" aria-label="水星・去玩玩">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-play">← 再學</button>
-        <h1 id="math-play-title">水星・去玩玩</h1>
-        <div class="star-panel" style="min-height:56px;padding:8px 12px">
-          <span class="star-icon">★</span>
-          <span class="star-meta">
-            <strong id="math-play-stars">0/10</strong>
-          </span>
-        </div>
-      </div>
-      <p class="section-lead">揀一種玩法</p>
-      <div class="btn-stack">
-        <button type="button" class="btn" id="btn-math-mode-fuel">太空補給任務</button>
-        <button type="button" class="btn btn-secondary" id="btn-math-mode-count">數一數・揀數（經典）</button>
+      <div class="btn-row">
+        <button type="button" class="btn" id="btn-math-relations-start-mission">開始10題</button>
       </div>
     </section>
 
-    <!-- 水星・太空補給站（火箭入油／外星人／星座） -->
-    <section id="screen-math-fuel" class="screen math-screen" aria-label="水星・太空補給站">
+    <!-- 水星・數字關係・十題任務 -->
+    <section id="screen-math-relations-play" class="screen math-screen" aria-label="水星・數字關係任務">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-fuel">← 玩法</button>
-        <h1 id="math-fuel-title">水星・太空補給站</h1>
+        <button type="button" class="btn btn-ghost" id="btn-back-math-relations-play">← 先學</button>
+        <h1 id="math-relations-play-title">水星・數字關係</h1>
         <div class="progress-pill" aria-label="任務進度">
-          <strong id="math-fuel-progress">1/5</strong>
+          <strong id="math-relations-progress">1/10</strong>
         </div>
       </div>
       <div class="prompt-box">
-        <p id="math-fuel-prompt">幫火箭裝入能源。</p>
-        <button type="button" class="speak-btn" id="btn-math-fuel-speak" aria-label="再聽一次">🔊 再聽一次</button>
+        <p id="math-relations-prompt">將標記放到正確位置。</p>
+        <button type="button" class="speak-btn" id="btn-math-relations-speak" aria-label="再聽一次">🔊 再聽一次</button>
       </div>
-      <div class="math-mission-hero">
-        <div class="math-fuel-rocket" id="math-fuel-rocket" aria-hidden="true">🚀</div>
-        <div class="math-mission-alien" id="math-mission-alien" hidden aria-hidden="true">👽</div>
-        <div class="math-mission-constellation" id="math-mission-constellation" hidden aria-hidden="true">✨</div>
+      <div id="math-relations-line" class="math-nline" aria-label="遊戲數軸"></div>
+      <div id="math-relations-distance-choices" hidden aria-label="揀格數"></div>
+      <div class="math-relations-actions">
+        <button type="button" class="btn btn-secondary" id="btn-math-relations-stop" hidden>停喺呢度</button>
+        <button type="button" class="btn btn-ghost" id="btn-math-relations-change-first" hidden>改第一段</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-relations-hint">提示</button>
+        <button type="button" class="btn" id="btn-math-relations-answer">回答</button>
       </div>
-      <div class="math-fuel-rocket-wrap" id="math-fuel-target-wrap">
-        <div class="math-fuel-target-label">目標</div>
-        <div class="math-fuel-target"><span id="math-fuel-target-num">5</span></div>
-      </div>
-      <div class="btn-row" id="math-mission-zero-row" hidden>
-        <button type="button" class="btn btn-secondary" id="btn-math-mission-zero">好啦，唔使放食物</button>
-      </div>
-      <div class="math-manip-stage" id="math-fuel-board" aria-label="拖入或撳物件"></div>
-      <p class="feedback" id="math-fuel-feedback" aria-live="polite"></p>
-    </section>
-
-    <!-- 水星・數一數揀數 -->
-    <section id="screen-math-count" class="screen math-screen" aria-label="水星・數一數揀數">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-count">← 玩法</button>
-        <h1>水星數感任務</h1>
-        <div class="progress-pill" aria-label="任務進度">
-          <strong id="math-count-progress">1/6</strong>
+      <p class="feedback" id="math-relations-feedback" aria-live="polite"></p>
+      <div class="math-relations-explain" id="math-relations-explain" hidden>
+        <p id="math-relations-explain-msg">試吓講畀我聽。</p>
+        <div class="btn-row">
+          <button type="button" class="btn btn-secondary" id="btn-math-relations-explain-demo">聽示範</button>
+          <button type="button" class="btn" id="btn-math-relations-explain-next">下一題</button>
         </div>
       </div>
-      <div class="prompt-box">
-        <p id="math-count-prompt">逐粒撳住數，數完再揀答案。</p>
-        <button type="button" class="speak-btn" id="btn-math-count-speak" aria-label="再聽一次">🔊 再聽一次</button>
-      </div>
-      <div class="math-count-field math-count-field--quiz" id="math-count-field" aria-hidden="true"></div>
-      <div class="math-num-bubbles" id="math-count-options" aria-label="揀數字"></div>
-      <p class="feedback" id="math-count-feedback" aria-live="polite"></p>
     </section>
 
     <!-- 地球・加法能量基地 -->
@@ -1044,10 +1009,9 @@
   <script src="./js/story-demo.js?v=20260911b"></script>
   <script src="./js/math-storage.js?v=20260811j"></script>
   <script src="./js/math-mastery.js?v=20260907a"></script>
-  <script src="./js/math-question-engine.js?v=20260907a"></script>
   <script src="./js/math-skills.js?v=20260908c"></script>
-  <script src="./js/math-manipulatives.js?v=20260907a"></script>
-  <script src="./js/math-mercury-missions.js?v=20260907b"></script>
+  <script src="./js/math-number-line-data.js?v=20260921a"></script>
+  <script src="./js/math-number-line-game.js?v=20260921a"></script>
   <script src="./js/additionData.js?v=20260908a"></script>
   <script src="./js/additionGame.js?v=20260908a"></script>
   <script src="./js/numberBondsData.js?v=20260910a"></script>

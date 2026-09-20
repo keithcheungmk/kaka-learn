@@ -106,6 +106,14 @@
     'count.oneMoreLess.0to10',
   ];
 
+  const RELATION_SKILL_IDS = [
+    'relation.positionOrder.0to10',
+    'relation.distance.0to10',
+    'relation.compose.twoJumps.0to10',
+    'relation.makeTen.5to10',
+    'relation.inverse.0to10',
+  ];
+
   const SKILL_LABELS = {
     'count.oneToOne.1to5': '逐粒數 1–5',
     'count.oneToOne.1to10': '逐粒數 1–10',
@@ -115,6 +123,11 @@
     'count.quantityConservation.1to8': '數量守恆',
     'count.numberMatch.0to10': '數量配對',
     'compare-qty.fairShare': '公平分享',
+    'relation.positionOrder.0to10': '位置／次序',
+    'relation.distance.0to10': '距離／方向',
+    'relation.compose.twoJumps.0to10': '兩段路組合',
+    'relation.makeTen.5to10': '補到十',
+    'relation.inverse.0to10': '加減互逆',
   };
 
   const REVIEW_BUCKET_WEIGHTS = [
@@ -129,7 +142,7 @@
   }
 
   /** M7：按 40/30/20/10 由 review→learning→practising→mastered 揀技能 */
-  function pickSkillForReview(state, catalog = MERCURY_SKILL_IDS, random = Math.random) {
+  function pickSkillForReview(state, catalog = RELATION_SKILL_IDS, random = Math.random) {
     const progress = (state && state.skillProgress) || {};
     const buckets = { review: [], learning: [], practising: [], mastered: [], new: [] };
     catalog.forEach((id) => {
@@ -152,7 +165,7 @@
   }
 
   /** M8：家長進度頁數感摘要 */
-  function summarizeMathProgress(state, catalog = MERCURY_SKILL_IDS) {
+  function summarizeMathProgress(state, catalog = RELATION_SKILL_IDS) {
     const progress = (state && state.skillProgress) || {};
     const counts = { review: 0, learning: 0, practising: 0, mastered: 0, new: 0 };
     catalog.forEach((id) => {
@@ -197,6 +210,7 @@
     recordAttempt,
     recordMission,
     MERCURY_SKILL_IDS,
+    RELATION_SKILL_IDS,
     SKILL_LABELS,
     skillLabel,
     pickSkillForReview,

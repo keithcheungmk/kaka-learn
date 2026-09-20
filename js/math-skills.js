@@ -9,14 +9,14 @@
    */
   const MATH_PLANETS = [
     {
-      id: 'count',
+      id: 'number-relations',
       body: 'mercury',
       name: '水星',
-      skill: '數數',
-      icon: '🔢',
+      skill: '數字關係',
+      icon: '↔️',
       color: '#b6bcc4',
       order: 0,
-      blurb: '喺水星太空補給站：幫火箭裝能源',
+      blurb: '喺0至10數軸搵位置、行距離、砌兩段路同補到10',
       img: PLANET_IMG('mercury'),
     },
     {

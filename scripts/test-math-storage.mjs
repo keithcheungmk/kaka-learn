@@ -60,12 +60,13 @@ test('舊單一資料歸入卡卡，禧禧由零開始', () => {
     }),
   );
   assert.equal(S.loadState().totalStars, 42);
-  assert.equal(S.SCHEMA_VERSION, 4);
+  assert.equal(S.SCHEMA_VERSION, 5);
   assert.equal(S.loadState().currentPlanetId, 'time');
   assert.deepEqual(S.loadState().skillProgress, {});
   assert.deepEqual([...S.loadState().mistakeHistory], []);
   assert.deepEqual([...S.loadState().missionHistory], []);
-  assert.deepEqual([...S.loadState().litPlanetIds], ['count']);
+  assert.deepEqual([...S.loadState().litPlanetIds], []);
+  assert.equal(S.loadState().retiredPlanetProgress.countLit, true);
   S.setActiveProfile('heihei');
   assert.equal(S.loadState().totalStars, 0);
   assert.deepEqual([...S.loadState().litPlanetIds], []);
@@ -90,11 +91,13 @@ test('v3 Profile 資料升級 v4，保留原有加法與星球進度', () => {
   );
   const state = S.loadState();
   assert.equal(state.totalStars, 3);
-  assert.deepEqual([...state.litPlanetIds], ['count']);
+  assert.deepEqual([...state.litPlanetIds], []);
+  assert.equal(state.retiredPlanetProgress.countLit, true);
+  assert.equal(state.retiredPlanetProgress.compareQtyLit, true);
   assert.equal(state.additionProgress.unlockedBase, 7);
   assert.deepEqual([...state.additionProgress.completedMissions], ['5-1']);
   assert.deepEqual(state.skillProgress, {});
-  assert.equal(JSON.parse(localStorage.getItem('kaka-math-v1')).schemaVersion, 4);
+  assert.equal(JSON.parse(localStorage.getItem('kaka-math-v1')).schemaVersion, 5);
 });
 
 test('新學習紀錄按 Profile 分倉並限制歷史長度', () => {
@@ -117,20 +120,20 @@ test('Profile 選擇重新載入後保留', () => {
   const { S, localStorage } = loadMathStorage();
   S.setActiveProfile('heihei');
   S.tryEarnStar();
-  S.lightPlanet('count');
+  S.lightPlanet('number-relations');
   const saved = localStorage.getItem('kaka-math-v1');
 
   const reloaded = loadMathStorage();
   reloaded.localStorage.setItem('kaka-math-v1', saved);
   assert.equal(reloaded.S.loadState().totalStars, 1);
-  assert.deepEqual([...reloaded.S.loadState().litPlanetIds], ['count']);
+  assert.deepEqual([...reloaded.S.loadState().litPlanetIds], ['number-relations']);
 });
 
 test('卡卡／禧禧數理進度完全隔離', () => {
   const { S } = loadMathStorage();
   S.setActiveProfile('kaka');
   S.tryEarnStar();
-  S.lightPlanet('count');
+  S.lightPlanet('number-relations');
   S.setActiveProfile('heihei');
   S.tryEarnStar();
   S.tryEarnStar();
@@ -139,7 +142,7 @@ test('卡卡／禧禧數理進度完全隔離', () => {
   assert.deepEqual([...S.loadState().litPlanetIds], ['shape']);
   S.setActiveProfile('kaka');
   assert.equal(S.loadState().totalStars, 1);
-  assert.deepEqual([...S.loadState().litPlanetIds], ['count']);
+  assert.deepEqual([...S.loadState().litPlanetIds], ['number-relations']);
 });
 
 test('加法進度：完成關卡解鎖下一關、點亮地球', () => {
@@ -169,6 +172,52 @@ test('損壞 JSON 回退預設', () => {
   localStorage.setItem('kaka-math-v1', 'broken-json');
   assert.doesNotThrow(() => S.loadState());
   assert.equal(S.loadState().totalStars, 0);
+});
+
+test('舊 count 點亮唔承繼 number-relations', () => {
+  const { S, localStorage } = loadMathStorage();
+  localStorage.setItem('kaka-math-v1', JSON.stringify({
+    schemaVersion: 4,
+    activeProfileId: 'kaka',
+    profiles: {
+      kaka: {
+        starsToday: 1,
+        totalStars: 5,
+        starsDate: S.todayKey(),
+        currentPlanetId: 'count',
+        litPlanetIds: ['count', 'time'],
+        interviewUnlocked: false,
+        additionProgress: { unlockedLevel: 1, unlockedBase: 5, completedLevels: [], completedMissions: [] },
+        numberBondsProgress: { unlockedLevel: 1, completedLevels: [], completedMissions: [] },
+        subtractionProgress: { unlockedLevel: 1, completedLevels: [], completedMissions: [] },
+        skillProgress: {},
+        mistakeHistory: [],
+        missionHistory: [],
+      },
+      heihei: {
+        starsToday: 0,
+        totalStars: 0,
+        starsDate: S.todayKey(),
+        currentPlanetId: 'count',
+        litPlanetIds: [],
+        interviewUnlocked: false,
+        additionProgress: { unlockedLevel: 1, unlockedBase: 5, completedLevels: [], completedMissions: [] },
+        numberBondsProgress: { unlockedLevel: 1, completedLevels: [], completedMissions: [] },
+        subtractionProgress: { unlockedLevel: 1, completedLevels: [], completedMissions: [] },
+        skillProgress: {},
+        mistakeHistory: [],
+        missionHistory: [],
+      },
+    },
+  }));
+  S.setActiveProfile('kaka');
+  const state = S.loadState();
+  assert.equal(state.currentPlanetId, 'number-relations');
+  assert.ok(!state.litPlanetIds.includes('count'));
+  assert.ok(!state.litPlanetIds.includes('number-relations'));
+  assert.ok(state.litPlanetIds.includes('time'));
+  assert.equal(state.retiredPlanetProgress.countLit, true);
+  assert.equal(state.numberRelationsProgress.completedRounds, 0);
 });
 
 console.log(`\n${passed} passed`);

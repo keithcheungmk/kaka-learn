@@ -100,6 +100,14 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 以下按日期保留原始署名同當時分工，只作歷史紀錄；**現行擁有人以本文上方「分工」表為準**。
 
+### 2026-09-21 · Cursor Chief Lead＋Math Lead（水星換成數字關係）
+
+- 水星由舊點數／補給任務完整換成 0–10 橫向數軸「數字關係」：五步先學＋固定十題（位置、次序、距離、左右移、兩段路、補十、互逆）。
+- 新模組：`js/math-number-line-data.js`、`js/math-number-line-game.js`、`css/math-number-line.css`；planet id `number-relations`。
+- `kaka-math-v1` schema v5：舊 `count` 點亮只封存，唔承繼新水星完成；金星 `time` 睇鐘完全保留。
+- 舊 live 退出：`math-question-engine`／`math-mercury-missions`／`math-manipulatives`／`math-rocket-fuel` 及對應測試。
+- **踩咗** 上列數軸檔、`js/math-app.js`、`js/math-storage.js`、`js/math-skills.js`、`js/math-mastery.js`、`index.html`、`scripts/check-invariants.py`、`scripts/smoke-shots.py`、`docs/handover.md`
+
 ### 2026-09-21 · Cursor Chief Lead＋English Lead（Carter CF002–003＋iPad 橫向）
 
 - Story English 由單本 Game Night 擴成三本選書：CF001 *Game Night*、CF002 *The Tree House*（12 頁）、CF003 *The School Play*（14 頁）；同一 Read & Fill 流程。

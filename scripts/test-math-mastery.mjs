@@ -123,7 +123,7 @@ test('M8 summarizeMathProgress 列出要練技能', () => {
     },
     missionHistory: [{ missionId: 'a' }, { missionId: 'b' }],
   };
-  const summary = M.summarizeMathProgress(state);
+  const summary = M.summarizeMathProgress(state, M.MERCURY_SKILL_IDS);
   assert.equal(summary.counts.mastered, 1);
   assert.equal(summary.counts.learning, 1);
   assert.equal(summary.needPractice.length, 1);

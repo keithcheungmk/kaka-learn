@@ -550,56 +550,66 @@ def check_math_boot_guard() -> None:
         fail("math-boot", "math-app.js 開頭冇 try/catch 保護，掛咗會拖冧成頁")
 
 
-def check_math_manipulatives() -> None:
-    """Montessori 操作層：原生 emoji manipulative + 太空補給站。"""
+def check_math_number_relations() -> None:
+    """水星數字關係數軸：取代舊點數／補給站；金星睇鐘保留。"""
     for rel in [
-        "js/math-manipulatives.js",
-        "css/math-manipulatives.css",
-        "js/math-mercury-missions.js",
+        "js/math-number-line-data.js",
+        "js/math-number-line-game.js",
+        "css/math-number-line.css",
     ]:
         if not Path(rel).exists():
-            fail("math-manipulatives", f"缺少 {rel}")
-    manip = read("js/math-manipulatives.js")
-    if "math-native-emoji" not in manip:
-        fail("math-manipulatives", "math-manipulatives.js 要用 .math-native-emoji（原生 emoji，唔用 OpenMoji）")
-    if "KakaEmojiArt" in manip:
-        fail("math-manipulatives", "math-manipulatives.js 唔好依賴 KakaEmojiArt")
+            fail("math-number-relations", f"缺少 {rel}")
     html = read("index.html")
-    if "screen-math-fuel" not in html:
-        fail("math-manipulatives", "index.html 缺少 screen-math-fuel")
-    if "btn-math-mode-fuel" not in html:
-        fail("math-manipulatives", "index.html 缺少 btn-math-mode-fuel")
-    if "math-mercury-missions.js" not in html:
-        fail("math-manipulatives", "index.html 未載入 math-mercury-missions.js")
+    if "math-manipulatives.css" in html or "math-mercury-missions.js" in html or "math-question-engine.js" in html:
+        fail("math-number-relations", "index.html 仍載入已撤嘅舊水星 manipulative／missions／question-engine")
+    if "screen-math-fuel" in html or "screen-math-count" in html or "btn-math-mode-fuel" in html:
+        fail("math-number-relations", "index.html 仍有舊水星 fuel／count screens")
+    if "screen-math-relations-learn" not in html or "screen-math-relations-play" not in html:
+        fail("math-number-relations", "index.html 缺少數字關係 screens")
+    if "btn-math-relations-answer" not in html or "btn-math-relations-start-mission" not in html:
+        fail("math-number-relations", "index.html 缺少回答／開始10題掣")
+    if "math-number-line-data.js" not in html or "math-number-line-game.js" not in html:
+        fail("math-number-relations", "index.html 未載入數軸 data／game")
     if "math-venus-balance.js" in html or "screen-math-venus-balance" in html:
-        fail("math-manipulatives", "金星公平分享已撤，唔應再載入 balance script／screen")
+        fail("math-number-relations", "金星公平分享已撤，唔應再載入 balance script／screen")
     if "screen-math-venus-learn" not in html or "screen-math-time" not in html:
-        fail("math-manipulatives", "index.html 缺少金星睇鐘 screens")
+        fail("math-number-relations", "index.html 缺少金星睇鐘 screens")
     if "screen-math-mars-learn" not in html or "screen-math-pattern" not in html:
-        fail("math-manipulatives", "index.html 缺少火星形狀／規律 screens")
+        fail("math-number-relations", "index.html 缺少火星形狀／規律 screens")
     if "btn-math-mode-time-digital" not in html:
-        fail("math-manipulatives", "index.html 缺少電子鐘玩法掣")
-    missions = read("js/math-mercury-missions.js")
-    for needle in ["alienFeed", "constellation", "oneMoreLess", "KakaMathRocketFuel"]:
-        if needle not in missions:
-            fail("math-manipulatives", f"math-mercury-missions.js 缺少 {needle}")
+        fail("math-number-relations", "index.html 缺少電子鐘玩法掣")
     app = read("js/math-app.js")
-    if "KakaMathMercuryMissions" not in app:
-        fail("math-manipulatives", "math-app.js 未整合 KakaMathMercuryMissions")
+    if "KakaMathMercuryMissions" in app or "KakaMathQuestionEngine" in app:
+        fail("math-number-relations", "math-app.js 仍引用舊水星 missions／question engine")
+    if "KakaMathNumberLineGame" not in app:
+        fail("math-number-relations", "math-app.js 未整合 KakaMathNumberLineGame")
     if "KakaMathVenusBalance" in app:
-        fail("math-manipulatives", "math-app.js 仍引用已撤嘅金星公平分享")
+        fail("math-number-relations", "math-app.js 仍引用已撤嘅金星公平分享")
     if "openVenusLearn" not in app or "openMarsLearn" not in app:
-        fail("math-manipulatives", "math-app.js 缺少 openVenusLearn／openMarsLearn")
+        fail("math-number-relations", "math-app.js 缺少 openVenusLearn／openMarsLearn")
     if "digitalClockHtml" not in app:
-        fail("math-manipulatives", "math-app.js 缺少電子鐘 digitalClockHtml")
+        fail("math-number-relations", "math-app.js 缺少電子鐘 digitalClockHtml")
+    if "number-relations" not in app:
+        fail("math-number-relations", "math-app.js 缺少 number-relations routing")
     skills = read("js/math-skills.js")
-    if "睇鐘" not in skills or "形狀・推理" not in skills:
-        fail("math-manipulatives", "math-skills.js 金星應係睇鐘、火星應係形狀・推理")
-    if "compare-qty" in skills:
-        fail("math-manipulatives", "math-skills.js 唔應再有 compare-qty（金星已改睇鐘）")
+    if "數字關係" not in skills or "睇鐘" not in skills or "形狀・推理" not in skills:
+        fail("math-number-relations", "math-skills.js 水星應係數字關係、金星睇鐘、火星形狀・推理")
+    if "id: 'count'" in skills or "compare-qty" in skills:
+        fail("math-number-relations", "math-skills.js 唔應再有舊 count／compare-qty planet")
+    storage = read("js/math-storage.js")
+    if "SCHEMA_VERSION = 5" not in storage:
+        fail("math-number-relations", "math-storage.js 應升到 schema v5")
+    if "numberRelationsProgress" not in storage or "retiredPlanetProgress" not in storage:
+        fail("math-number-relations", "math-storage.js 缺少 numberRelations／retired 進度")
+    if "currentPlanetId === 'count'" not in storage:
+        fail("math-number-relations", "math-storage.js 缺少 count → number-relations 遷移")
     mastery = read("js/math-mastery.js")
-    if "pickSkillForReview" not in mastery or "summarizeMathProgress" not in mastery:
-        fail("math-manipulatives", "math-mastery.js 缺少 M7/M8 個人化出題或數感摘要")
+    if "RELATION_SKILL_IDS" not in mastery or "pickSkillForReview" not in mastery or "summarizeMathProgress" not in mastery:
+        fail("math-number-relations", "math-mastery.js 缺少 RELATION_SKILL_IDS／摘要 API")
+    data = read("js/math-number-line-data.js")
+    if "generateMission" not in data or "validateAnswer" not in data:
+        fail("math-number-relations", "數軸 data 缺少 generateMission／validateAnswer")
+
 
 
 # ---------------------------------------------------------------- 資產
@@ -927,7 +937,7 @@ CHECKS = [
     check_module_isolation,
     check_addition_planet,
     check_math_boot_guard,
-    check_math_manipulatives,
+    check_math_number_relations,
     check_asset_refs,
     check_asset_manifests,
     check_image_formats,

@@ -200,23 +200,24 @@ def walk(pg, url, shots: Path | None, tag: str):
         pg.wait_for_timeout(800)
         probe(step)
         if entry == "#btn-start-math":
-            # 星球卡而家直接進入任務，唔再經過多餘嘅 landing page。
-            pg.click("#math-galaxy-grid .math-galaxy-card:first-child")
+            # 水星數字關係：先學 → 開始10題 → 拖一格 → 回答（可錯）→ 返銀河
+            pg.click('[data-planet-id="number-relations"]')
             pg.wait_for_timeout(500)
-            probe("數理・先學")
-            for _ in range(6):
-                if pg.is_visible("#btn-math-learn-play"):
-                    break
-                if pg.is_visible("#btn-math-learn-next") and not pg.locator("#btn-math-learn-next").is_hidden():
-                    pg.click("#btn-math-learn-next")
-                    pg.wait_for_timeout(80)
-            pg.click("#btn-math-learn-play")
-            pg.wait_for_timeout(400)
-            probe("數理・玩法")
-            pg.click("#btn-math-mode-fuel")
+            probe("數理・數字關係先學")
+            pg.click("#btn-math-relations-start-mission")
             pg.wait_for_timeout(600)
-            probe("數理・火箭入油")
-            pg.click("#btn-back-math-fuel")
+            probe("數理・數字關係任務")
+            line = pg.locator("#math-relations-line .math-nline-track")
+            box = line.bounding_box()
+            if box:
+                pg.mouse.click(box["x"] + box["width"] * 0.3, box["y"] + box["height"] * 0.5)
+                pg.wait_for_timeout(200)
+            pg.click("#btn-math-relations-answer")
+            pg.wait_for_timeout(500)
+            probe("數理・數字關係回答")
+            pg.click("#btn-back-math-relations-play")
+            pg.wait_for_timeout(300)
+            pg.click("#btn-back-math-relations-learn")
             pg.wait_for_timeout(300)
         if entry == "#btn-start-phonics":
             pg.click("#phonics-topic-grid .topic-card:first-child")

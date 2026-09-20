@@ -16,7 +16,7 @@
   }
 
   function bootMath() {
-    if (!window.KakaMathStorage || !window.KakaMathSkills || !window.KakaAdditionData || !window.KakaAdditionGame || !window.KakaNumberBondsData || !window.KakaNumberBondsGame) {
+    if (!window.KakaMathStorage || !window.KakaMathSkills || !window.KakaMathNumberLineData || !window.KakaMathNumberLineGame || !window.KakaAdditionData || !window.KakaAdditionGame || !window.KakaNumberBondsData || !window.KakaNumberBondsGame) {
       console.error('KakaMath: math modules missing.');
       disableMathEntry();
       return;
@@ -32,12 +32,8 @@
     } = window.KakaMathStorage;
     const { MATH_PLANETS, getPlanetById, getNextPlanetId, planetGlobeHtml } = window.KakaMathSkills;
     const mastery = window.KakaMathMastery || null;
-    const questionEngine = window.KakaMathQuestionEngine || null;
     const speech = window.KakaSpeech || null;
 
-    const ZH_NUM = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
-    const COUNT_EMOJIS = ['⭐', '🌙', '🚀', '🪨', '💫'];
-    const LEARN_COUNTS = [1, 2, 3, 4, 5];
     const LIT_TARGET = 10;
 
     /** 時間資料：先以四分一鐘（00／15／30／45）練習，適合初學者。 */
@@ -108,10 +104,8 @@
     const screens = {
       home: '#screen-home',
       galaxy: '#screen-math-galaxy',
-      learn: '#screen-math-learn',
-      play: '#screen-math-play',
-      count: '#screen-math-count',
-      fuel: '#screen-math-fuel',
+      relationsLearn: '#screen-math-relations-learn',
+      relationsPlay: '#screen-math-relations-play',
       additionSelect: '#screen-math-earth-addition-select',
       additionPlay: '#screen-math-earth-addition-play',
       bondsSelect: '#screen-math-earth-bonds-select',
@@ -127,16 +121,6 @@
       pattern: '#screen-math-pattern',
     };
 
-    let learnIndex = 0;
-    let countBusy = false;
-    let countRound = null;
-    let countCorrect = 0;
-    let countEmoji = COUNT_EMOJIS[0];
-    let countMission = [];
-    let countIndex = 0;
-    let countWrongAttempts = 0;
-    let countFirstWrongAnswer = null;
-    let countMissionStartedAt = null;
     let vLearnIndex = 0;
     let timeBusy = false;
     let timeRound = null;
@@ -175,7 +159,7 @@
       const sel = screens[name] || screens.galaxy;
       const el = $(sel);
       el?.classList.add('active');
-      if (['count', 'additionPlay', 'bondsPlay', 'time', 'fuel', 'shape', 'pattern'].includes(name)) {
+      if (['relationsPlay', 'additionPlay', 'bondsPlay', 'time', 'shape', 'pattern'].includes(name)) {
         const fx = window.KakaStarFx;
         fx?.mountPlayScreen?.(el);
         fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
@@ -269,21 +253,6 @@
         .join('');
     }
 
-    function renderCountField(el, n, emoji) {
-      if (!el) return;
-      el.innerHTML = '';
-      for (let i = 0; i < n; i += 1) {
-        const span = document.createElement('span');
-        span.className = 'math-count-dot math-native-emoji';
-        span.textContent = emoji;
-        span.style.animationDelay = `${i * 0.05}s`;
-        el.appendChild(span);
-      }
-    }
-
-    function countPhrase(n) {
-      return `呢度有${ZH_NUM[n] || n}粒`;
-    }
 
     function flashStarBurst() {
       const burst = $('#star-burst');
@@ -395,7 +364,7 @@
     function openPlanet(planetId) {
       const planet = getPlanetById(planetId);
       updateState({ currentPlanetId: planet.id });
-      if (planet.id === 'count') return openLearn();
+      if (planet.id === 'number-relations') return window.KakaMathNumberLineGame.openLearn();
       if (planet.id === 'compare-size') return window.KakaAdditionGame.openEarthAddition();
       if (planet.id === 'time') return openVenusLearn();
       if (planet.id === 'shape') return openMarsLearn();
@@ -416,7 +385,8 @@
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = `math-galaxy-card planet-${p.id}${lit ? ' is-lit' : ''}`;
-          const playable = ['count', 'compare-size', 'time', 'shape', 'moon'].includes(p.id);
+          btn.dataset.planetId = p.id;
+          const playable = ['number-relations', 'compare-size', 'time', 'shape', 'moon'].includes(p.id);
           const status = playable ? (lit ? '已點亮' : '可以出發') : '準備中';
           btn.disabled = !playable;
           btn.setAttribute('aria-label', `${p.name}，${p.skill}，${status}`);
@@ -451,330 +421,7 @@
       }
     }
 
-    /* ---------- 水星・先學 ---------- */
-    function openLearn() {
-      updateState({ currentPlanetId: 'count' });
-      learnIndex = 0;
-      countEmoji = COUNT_EMOJIS[Math.floor(Math.random() * COUNT_EMOJIS.length)];
-      const title = $('#math-learn-title');
-      if (title) title.textContent = '水星・先學';
-      renderLearnCard(true);
-      showMathScreen('learn');
-    }
-
-    function renderLearnCard(autoSpeak) {
-      const n = LEARN_COUNTS[learnIndex];
-      renderCountField($('#math-learn-field'), n, countEmoji);
-      const num = $('#math-learn-num');
-      if (num) num.textContent = String(n);
-      const progress = $('#math-learn-progress');
-      if (progress) progress.textContent = `${learnIndex + 1}/${LEARN_COUNTS.length}`;
-
-      const prev = $('#btn-math-learn-prev');
-      const next = $('#btn-math-learn-next');
-      const finish = $('#math-learn-finish-row');
-      if (prev) prev.disabled = learnIndex <= 0;
-      if (next) next.hidden = learnIndex >= LEARN_COUNTS.length - 1;
-      if (finish) finish.hidden = learnIndex < LEARN_COUNTS.length - 1;
-
-      if (autoSpeak) speakLearn();
-    }
-
-    function speakLearn() {
-      const n = LEARN_COUNTS[learnIndex];
-      speak(`${countPhrase(n)}。${n}`);
-    }
-
-    /* ---------- 水星・數一數 ---------- */
-    function openPlay() {
-      const stars = $('#math-play-stars');
-      const state = loadState();
-      if (stars) stars.textContent = `${state.starsToday}/10`;
-      const title = $('#math-play-title');
-      if (title) title.textContent = '水星・太空補給站';
-      showMathScreen('play');
-    }
-
-    function openCount() {
-      countBusy = false;
-      countCorrect = 0;
-      countIndex = 0;
-      countWrongAttempts = 0;
-      countFirstWrongAnswer = null;
-      countMissionStartedAt = new Date().toISOString();
-      countEmoji = COUNT_EMOJIS[Math.floor(Math.random() * COUNT_EMOJIS.length)];
-      countMission = questionEngine?.generateMission?.() || [];
-      while (countMission.length < 10) {
-        countMission = countMission.concat(questionEngine?.generateMission?.() || []).slice(0, 10);
-      }
-      if (!countMission.length) {
-          countMission = Array.from({ length: 10 }, () => {
-          const answer = 1 + Math.floor(Math.random() * 10);
-          const options = new Set([answer, Math.max(0, answer - 1), Math.min(10, answer + 1)]);
-          while (options.size < 3) options.add(Math.floor(Math.random() * 11));
-          return {
-            id: `fallback-${Date.now()}-${answer}`,
-            type: 'oneToOne',
-            skillId: 'count.oneToOne.1to10',
-            answer,
-            quantity: answer,
-            options: shuffle([...options]),
-            prompt: '逐粒撳住數，數完再揀答案。',
-            speech: '逐粒撳住數，每粒只數一次。',
-            representation: 'touchObjects',
-          };
-        });
-      }
-      updateCountProgress();
-      nextCountRound(true);
-      showMathScreen('count');
-    }
-
-    function updateCountProgress() {
-      const el = $('#math-count-progress');
-      if (el) el.textContent = `${Math.min(countIndex + 1, countMission.length || 10)}/${countMission.length || 10}`;
-    }
-
-    function nextCountRound(autoSpeak) {
-      countRound = countMission[countIndex];
-      if (!countRound) return;
-      countWrongAttempts = 0;
-      countFirstWrongAnswer = null;
-      renderCountQuestion(countRound);
-      const prompt = $('#math-count-prompt');
-      if (prompt) prompt.textContent = countRound.prompt;
-      const fb = $('#math-count-feedback');
-      if (fb) fb.textContent = '';
-      renderCountOptions(countRound);
-      updateCountProgress();
-      if (autoSpeak) speakCountPrompt();
-    }
-
-    function speakCountPrompt() {
-      speak(countRound?.speech || '有幾多粒？數吓再揀！');
-    }
-
-    function countDotHtml(emoji = countEmoji) {
-      return `<span class="math-native-emoji" aria-hidden="true">${emoji}</span>`;
-    }
-
-    function appendStaticDots(parent, quantity) {
-      for (let i = 0; i < quantity; i += 1) {
-        const dot = document.createElement('span');
-        dot.className = 'math-count-dot math-native-emoji';
-        dot.innerHTML = countDotHtml();
-        dot.style.animationDelay = `${i * 0.04}s`;
-        parent.appendChild(dot);
-      }
-    }
-
-    function renderCountQuestion(question) {
-      const field = $('#math-count-field');
-      if (!field) return;
-      field.innerHTML = '';
-      field.className = `math-count-field math-count-field--quiz math-count-field--${question.type}`;
-      field.removeAttribute('aria-hidden');
-      field.classList.remove('is-guided');
-
-      if (question.type === 'oneToOne') {
-        const items = document.createElement('div');
-        items.className = `math-touch-count math-touch-count--${question.arrangement || 'scattered'}`;
-        const status = document.createElement('div');
-        status.className = 'math-touch-status';
-        status.textContent = `已數：0 / ${question.quantity}`;
-        for (let i = 0; i < question.quantity; i += 1) {
-          const dot = document.createElement('button');
-          dot.type = 'button';
-          dot.className = 'math-count-dot math-count-tappable';
-          dot.innerHTML = countDotHtml();
-          dot.setAttribute('aria-label', `第 ${i + 1} 粒，未數`);
-          dot.addEventListener('click', () => {
-            if (dot.classList.contains('is-counted') || countBusy) return;
-            dot.classList.add('is-counted');
-            const counted = items.querySelectorAll('.is-counted').length;
-            dot.setAttribute('aria-label', `第 ${i + 1} 粒，已數`);
-            status.textContent = `已數：${counted} / ${question.quantity}`;
-            speak(String(counted), { rate: 0.82, delayMs: 0 });
-            if (counted === question.quantity) {
-              $('#math-count-options')?.querySelectorAll('button').forEach((btn) => { btn.disabled = false; });
-              status.textContent = '數完喇，揀答案！';
-            }
-          });
-          items.appendChild(dot);
-        }
-        field.append(items, status);
-        return;
-      }
-
-      if (question.type === 'conservation') {
-        const before = document.createElement('div');
-        before.className = 'math-conservation-row math-conservation-row--line';
-        appendStaticDots(before, question.quantity);
-        const arrow = document.createElement('span');
-        arrow.className = 'math-conservation-arrow';
-        arrow.textContent = '↓ 只係排開';
-        const after = document.createElement('div');
-        after.className = 'math-conservation-row math-conservation-row--scattered';
-        appendStaticDots(after, question.quantity);
-        field.append(before, arrow, after);
-        return;
-      }
-
-      if (question.type === 'numberMatch') {
-        const target = document.createElement('div');
-        target.className = 'math-target-number';
-        target.innerHTML = `<span>搵數量</span><strong>${question.targetNumber}</strong>`;
-        field.appendChild(target);
-        return;
-      }
-
-      if (question.type === 'oneMoreLess') {
-        const group = document.createElement('div');
-        group.className = 'math-one-more-group';
-        appendStaticDots(group, question.quantity);
-        const action = document.createElement('div');
-        action.className = `math-one-more-action is-${question.relation}`;
-        action.textContent = question.relation === 'more' ? '+ 1' : '− 1';
-        field.append(group, action);
-        return;
-      }
-
-      const group = document.createElement('div');
-      group.className = `math-subitize-pattern math-subitize-pattern--${question.arrangement || 'dice'}`;
-      appendStaticDots(group, question.quantity);
-      field.appendChild(group);
-    }
-
-    function renderCountOptions(question) {
-      const box = $('#math-count-options');
-      if (!box) return;
-      box.innerHTML = '';
-      question.options.forEach((n) => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = question.type === 'numberMatch' ? 'math-quantity-option' : 'math-num-bubble';
-        if (question.type === 'numberMatch') {
-          btn.innerHTML = `<span class="math-mini-dots" aria-hidden="true">${'●'.repeat(n) || '∅'}</span>`;
-          btn.setAttribute('aria-label', `${n} 粒`);
-        } else {
-          btn.textContent = String(n);
-          btn.setAttribute('aria-label', `揀 ${n}`);
-        }
-        if (question.type === 'oneToOne') btn.disabled = true;
-        btn.addEventListener('click', () => onCountPick(n, btn));
-        box.appendChild(btn);
-      });
-    }
-
-    function saveCountResult(correctAnswer) {
-      if (!mastery?.recordAttempt || !saveState || !countRound) return;
-      const next = mastery.recordAttempt(loadState(), {
-        skillId: countRound.skillId,
-        firstTryCorrect: countWrongAttempts === 0,
-        assisted: countWrongAttempts >= 2,
-        hints: countWrongAttempts,
-        errorType: countWrongAttempts
-          ? questionEngine?.classifyError?.(countRound, countFirstWrongAnswer)
-          : undefined,
-        answer: countFirstWrongAnswer ?? correctAnswer,
-        expected: countRound.answer,
-        representation: countRound.representation,
-      });
-      saveState(next);
-    }
-
-    function finishCountMission() {
-      if (!mastery?.recordMission || !saveState) return;
-      const next = mastery.recordMission(loadState(), {
-        missionId: `mercury-${Date.now()}`,
-        startedAt: countMissionStartedAt,
-        completedAt: new Date().toISOString(),
-        questionsCompleted: countMission.length,
-        firstTryCorrect: countMission.length - countMission.filter((q) => q._neededHelp).length,
-        hintsUsed: countMission.reduce((sum, q) => sum + (q._hints || 0), 0),
-      });
-      saveState(next);
-    }
-
-    function onCountPick(n, btn) {
-      if (countBusy || !countRound) return;
-      countBusy = true;
-      const muted = isMuted();
-      const fb = $('#math-count-feedback');
-      const ok = n === countRound.answer;
-
-      if (ok) {
-        btn.classList.add('is-ok');
-        countRound._neededHelp = countWrongAttempts > 0;
-        countRound._hints = countWrongAttempts;
-        saveCountResult(n);
-        const { gained } = tryEarnStar();
-        if (gained) {
-          speech?.playStarCue?.({ muted });
-          playMathStarReward();
-        } else {
-          speech?.playCorrectCue?.({ muted });
-        }
-        countCorrect += 1;
-        const praise =
-          speech?.speakCorrectFeedback?.({ muted }) || '你好叻呀，答啱咗！';
-        if (fb) fb.textContent = gained ? `${praise} ★` : praise;
-
-        if (countCorrect >= countMission.length) {
-          finishCountMission();
-          const firstLight = !isPlanetLit('count');
-          if (firstLight) lightPlanet('count');
-          if (fb) fb.textContent = firstLight ? `${praise} 水星點亮喇！` : `${praise} Ranger Mission 完成！`;
-          setTimeout(() => {
-            countBusy = false;
-            showMathRoundReward(firstLight ? '水星十題完成！水星點亮喇！' : '今輪玩完喇！你好叻呀！攞到一個獎勵！', openCount);
-          }, 1100);
-          return;
-        }
-
-        const stars = $('#math-play-stars');
-        const state = loadState();
-        if (stars) stars.textContent = `${state.starsToday}/10`;
-
-        setTimeout(() => {
-          countBusy = false;
-          countIndex += 1;
-          nextCountRound(true);
-        }, 1100);
-      } else {
-        countWrongAttempts += 1;
-        if (countFirstWrongAnswer === null) countFirstWrongAnswer = n;
-        btn.classList.add('is-bad');
-        speech?.playTryAgainCue?.({ muted });
-        const line = questionEngine?.hintFor?.(countRound, countWrongAttempts)
-          || speech?.speakRetryFeedback?.({ muted })
-          || '唔緊要，試多次！';
-        if (fb) fb.textContent = line;
-        speak(line);
-        // 短暫閃正確數量（溫柔提示）
-        const field = $('#math-count-field');
-        if (field) {
-          field.style.outline = '3px solid rgba(253, 230, 138, 0.7)';
-          if (countWrongAttempts >= 2) field.classList.add('is-guided');
-        }
-        setTimeout(() => {
-          btn.classList.remove('is-bad');
-          if (field) {
-            field.style.outline = '';
-            if (countRound.type === 'oneToOne' && countWrongAttempts >= 2) {
-              field.querySelectorAll('.math-count-tappable').forEach((dot, index) => {
-                dot.classList.remove('is-counted');
-                dot.setAttribute('aria-label', `第 ${index + 1} 粒，未數`);
-              });
-              const status = field.querySelector('.math-touch-status');
-              if (status) status.textContent = `已數：0 / ${countRound.quantity}`;
-              $('#math-count-options')?.querySelectorAll('button').forEach((option) => { option.disabled = true; });
-            }
-          }
-          countBusy = false;
-        }, 700);
-      }
-    }
+    /* ---------- 水星・數字關係（KakaMathNumberLineGame） ---------- */
 
     /* ---------- 地球・加法（KakaAdditionGame） ---------- */
 
@@ -1204,26 +851,6 @@
       $('#btn-math-warp-go')?.addEventListener('click', () => finishWarpGo());
       $('#btn-math-warp-stay')?.addEventListener('click', () => finishWarpStay());
 
-      $('#btn-back-math-learn')?.addEventListener('click', () => openGalaxy());
-      $('#math-learn-tap')?.addEventListener('click', () => speakLearn());
-      $('#btn-math-learn-prev')?.addEventListener('click', () => {
-        if (learnIndex <= 0) return;
-        learnIndex -= 1;
-        renderLearnCard(true);
-      });
-      $('#btn-math-learn-next')?.addEventListener('click', () => {
-        if (learnIndex >= LEARN_COUNTS.length - 1) return;
-        learnIndex += 1;
-        renderLearnCard(true);
-      });
-      $('#btn-math-learn-play')?.addEventListener('click', () => openPlay());
-
-      $('#btn-back-math-play')?.addEventListener('click', () => openLearn());
-      $('#btn-math-mode-count')?.addEventListener('click', () => openCount());
-
-      $('#btn-back-math-count')?.addEventListener('click', () => openPlay());
-      $('#btn-math-count-speak')?.addEventListener('click', () => speakCountPrompt());
-
       $('#btn-back-math-venus-learn')?.addEventListener('click', () => openGalaxy());
       $('#math-venus-learn-tap')?.addEventListener('click', () => speakVenusLearn());
       $('#btn-math-venus-learn-prev')?.addEventListener('click', () => {
@@ -1319,8 +946,10 @@
       playMathStarReward,
     });
 
-    window.KakaMathMercuryMissions?.init({
+    window.KakaMathNumberLineGame.init({
+      storage: window.KakaMathStorage,
       loadState,
+      updateState,
       saveState,
       mastery,
       speak,
@@ -1328,12 +957,8 @@
       tryEarnStar,
       isPlanetLit,
       lightPlanet,
-      getPlanetById,
-      getNextPlanetId,
-      offerWarpHop,
-      openPlay,
+      openGalaxy,
       showMathScreen,
-      playMathStarReward,
       showMathRoundReward,
       isMuted,
     });
@@ -1341,8 +966,8 @@
     window.KakaMath = {
       goHome,
       openPlanet,
-      openLearn,
-      openCount,
+      openRelationsLearn: () => window.KakaMathNumberLineGame.openLearn(),
+      openRelationsMission: () => window.KakaMathNumberLineGame.openMission(),
       openEarthAddition: () => window.KakaAdditionGame.openEarthAddition(),
       openMoonSubtraction: () => window.KakaSubtractionGame?.openMoonSubtraction(),
       openVenusLearn,
