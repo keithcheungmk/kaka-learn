@@ -271,7 +271,7 @@ function renderScene() {
   }).join('');
   const wordBank = $('#word-bank');
   wordBank.dataset.choiceCount = String(optionOrder.length);
-  wordBank.classList.toggle('is-dense', optionOrder.length >= 12);
+  wordBank.classList.toggle('is-dense', optionOrder.length >= 10);
   wordBank.innerHTML = `<div class="answer-slots" aria-label="本版詞組次序">${slotsMarkup}</div>${choicesMarkup}`;
 
   $('#word-bank').querySelectorAll('.answer-slot').forEach((zone) => {

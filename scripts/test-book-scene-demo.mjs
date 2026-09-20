@@ -16,6 +16,7 @@ assert.equal(pageManifest.books.length, 12, '每本書均有頁面來源 manifes
 assert.equal(RED_SERIES_BOOKS.filter((book) => book.mode === 'sentence').length, 4, '目前四本書已啟用已核實題目');
 const activeBook = RED_SERIES_BOOKS.find((book) => book.id === 'rb_fenguo');
 assert.equal(activeBook.mode, 'sentence');
+assert.equal(activeBook.flow, RED_SENTENCE_RULES.gentleFlow, '《分果果》用 gentle');
 assert.equal(activeBook.questions.length, 3, '《分果果》只按三個已核實書頁／跨頁出題');
 assert.equal(new Set(activeBook.questions.map((question) => question.id)).size, activeBook.questions.length, '題目不得重複');
 assert.deepEqual(activeBook.questions.map((question) => question.stars), [4, 4, 2], '按本版實際正確詞組數派星，合共10粒');
@@ -23,8 +24,10 @@ assert.equal(activeBook.questions.reduce((sum, question) => sum + question.stars
 assert.deepEqual(activeBook.questions[0].chunks, ['爸爸', '一個橙', '媽媽', '一個蘋果'], '整個跨頁句子一起作答');
 assert.equal(activeBook.questions[2].sentence, '姐姐一個芒果。');
 assert.match(activeBook.questions[2].excludedSide, /最後一個水果/);
+assert.ok(activeBook.questions.every((question) => question.distractors.length === 0), '《分果果》gentle：無干擾字');
 const callingBook = RED_SERIES_BOOKS.find((book) => book.id === 'rb_shuijiao');
 assert.equal(callingBook.mode, 'sentence', '《誰在叫》故事頁正式進入砌句試點');
+assert.equal(callingBook.flow, RED_SENTENCE_RULES.gentleFlow, '《誰在叫》用 gentle');
 assert.equal(callingBook.questions.length, 1, '本輪只啟用已核實的 PDF p5 故事跨頁');
 const callingSpread = callingBook.questions[0];
 assert.equal(callingSpread.pdfPage, 5, '排除 PDF p4 字卡／封面頁');
@@ -33,6 +36,7 @@ assert.equal(callingSpread.chunks.length, 10, 'p5 完整兩句原文共有十個
 assert.ok(new Set(callingSpread.chunks).size < callingSpread.chunks.length, '本頁包含重複「喵」及「誰在叫」詞組');
 assert.ok(sentenceChunksMatch(callingSpread), '兩句連同標點切詞後須還原 p5 原文');
 assert.equal(callingBook.questions.reduce((sum, question) => sum + question.stars, 0), RED_SENTENCE_RULES.starCap, '《誰在叫》十個原文詞組收集十粒星');
+assert.equal(callingSpread.distractors.length, 0, '《誰在叫》gentle：無干擾字');
 const letterBook = RED_SERIES_BOOKS.find((book) => book.id === 'rb_xin');
 assert.equal(letterBook.mode, 'sentence');
 assert.equal(letterBook.flow, RED_SENTENCE_RULES.gentleFlow, '《信》用 gentle 簡化流程');
@@ -42,8 +46,14 @@ assert.ok(letterBook.questions.every((question) => question.distractors.length =
 assert.equal(makeOptions(letterBook.questions[0], () => 0).length, 2, '《信》字池只有本頁正確詞組');
 const runBook = RED_SERIES_BOOKS.find((book) => book.id === 'rb_kuaipao');
 assert.equal(runBook.mode, 'sentence');
+assert.equal(runBook.flow, RED_SENTENCE_RULES.gentleFlow, '《快跑呀》用 gentle');
 assert.equal(runBook.questions.length, 4);
 assert.equal(runBook.questions.reduce((sum, question) => sum + question.stars, 0), 8);
+assert.ok(runBook.questions.every((question) => question.distractors.length === 0), '《快跑呀》gentle：無干擾字');
+assert.ok(
+  RED_SERIES_BOOKS.filter((book) => book.mode === 'sentence').every((book) => book.flow === RED_SENTENCE_RULES.gentleFlow),
+  '四本正式砌句書全部 gentle',
+);
 
 for (const book of RED_SERIES_BOOKS) {
   if (book.mode === 'preview') {
@@ -84,7 +94,7 @@ assert.ok(RED_SERIES_BOOKS.filter((book) => book.mode === 'preview').every((book
 
 assert.equal(normalizeSentence('爸爸一個橙。'), '爸爸一個橙');
 const options = makeOptions(activeBook.questions[0], () => 0);
-assert.equal(options.length, 8, '完整跨頁四組答案加四個干擾項');
+assert.equal(options.length, 4, '《分果果》gentle：字池只有四組正確詞組');
 assert.equal(new Set(options.map((choice) => choice.id)).size, options.length, '每個可拖選項有唯一身分');
 const targetIds = answerChoiceIds(activeBook.questions[0]);
 let placements = [null, null, null, null];
@@ -114,8 +124,8 @@ const repeatedChoices = makeOptions({ chunks: repeatedChunks, distractors: [] },
 const equivalentRepeatedOrder = ['answer-2', 'answer-0', 'answer-1', 'answer-3', 'answer-4'];
 assert.equal(isSentenceCorrect(equivalentRepeatedOrder, answerChoiceIds({ chunks: repeatedChunks }), repeatedChoices, repeatedChunks), true, '畫面相同的重複詞組不應因內部卡片 ID 而誤判');
 assert.equal(isSentenceCorrect(['answer-2', 'answer-0', 'answer-1', 'answer-4', 'answer-3'], answerChoiceIds({ chunks: repeatedChunks }), repeatedChoices, repeatedChunks), false, '重複詞組等價不可掩蓋其他詞組錯序');
-assert.equal(makeOptions(callingSpread).length, 14, '《誰在叫》有十個原文詞組及四個干擾詞');
-assert.equal(new Set(makeOptions(callingSpread).map((choice) => choice.id)).size, 14, '《誰在叫》重複詞仍各自可選');
+assert.equal(makeOptions(callingSpread).length, 10, '《誰在叫》gentle：只有十個原文詞組');
+assert.equal(new Set(makeOptions(callingSpread).map((choice) => choice.id)).size, 10, '《誰在叫》重複詞仍各自可選');
 assert.equal(addQuestionStars(0, 4, 10), 4);
 assert.equal([4, 4, 2].reduce((stars, amount) => addQuestionStars(stars, amount, RED_SENTENCE_RULES.starCap), 0), 10);
 assert.equal(addQuestionStars(10, 2, 10), 10, '星星不可超過 10');
@@ -136,7 +146,7 @@ assert.match(source, /flow === RED_SENTENCE_RULES\.gentleFlow/);
 assert.match(html, /聽本版句子/);
 assert.match(html, /scene-study-sentence/);
 assert.match(html, /scene-preview-note/);
-assert.match(html, /《信》用開心簡化玩法/);
+assert.match(html, /四本正式書/);
 assert.equal(fs.readdirSync(path.join(root, 'assets/book-scenes/red-series-pages-hq')).filter((name) => !name.startsWith('.')).length, 33, 'HQ 原頁含新建信-p7、快跑呀-p3，以及分果果左頁裁切');
 assert.ok(fs.existsSync(path.join(root, activeBook.questions[2].image)), '不完整右頁不得混入本題，使用已裁切左頁');
 assert.ok(fs.existsSync(path.join(root, callingSpread.image)), '《誰在叫》實際故事跨頁圖片存在');

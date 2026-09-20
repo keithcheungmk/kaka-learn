@@ -108,6 +108,11 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 - `assets/` 總上限調至 18MB（含故事音檔）；測試、image lock、計劃書／校準文件已更新。
 - **踩咗** `js/story-demo.js`、`css/story-demo.css`、`assets/story-demo/`、`index.html`、`scripts/test-story-mission.mjs`、`scripts/check-invariants.py`、`AGENTS.md`、`docs/handover.md`、`docs/carter-family-sentence-reading-plan.md`、`docs/english-content-calibration.md`
 
+### 2026-09-21 · Cursor Chief Lead（《分果果》等正式本全面 gentle）
+
+- Keith 截圖指出《分果果》仍有雨傘干擾字；已將四本正式砌句書一律 `flow: 'gentle'`、清空干擾。
+- **踩咗** `data/red-series/sentence-game-data.mjs`、`book-scene-demo.html`、`scripts/test-book-scene-demo.mjs`、`scripts/smoke-book-scene-demo.py`、`docs/handover.md`
+
 ### 2026-09-21 · Cursor Chief Lead＋Chinese Lead（《信》gentle 簡化試點）
 
 - Keith 選定方案 A：無干擾字、學測合一、逐詞入格、砌齊自動讀句翻頁；讀音掣常駐。
