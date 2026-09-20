@@ -1,25 +1,28 @@
-# 交接簿 — ChatGPT (Codex) ⇄ Cursor ⇄ Grok bot
+# 交接簿 — Cursor Chief Lead ⇄ 專科 Leads ⇄ ChatGPT／Grok
 
-Keith 現時主要用 ChatGPT、Cursor 同 Grok bot。ChatGPT／Cursor 會按任務認領直接改 repo；Grok 預設係外部顧問 bot，只提供建議，唔假設有 repo 權限。
+Keith 現時以 Cursor 主 Agent 做 Chief Lead，下面設本機 Math／English／Chinese 三位專科 Lead。ChatGPT／Codex 如另行使用仍按任務認領直接改 repo；Grok 預設係外部顧問 bot，只提供建議，唔假設有 repo 權限。
 呢度記錄「其他人需要知」嘅分工、認領、撞車風險同未完事項，避免撞改。
 
 ## 邊個係邊個
 
 | 署名 | 係邊個 |
 |---|---|
-| **ChatGPT／Codex** | Keith 使用嘅 ChatGPT Codex；chief lead，負責跨組校準、架構、內容核對及整合 review，亦會按認領實作 |
-| **Cursor** | Keith 部機上嘅 Cursor，或者 Cursor Cloud Agent；主要負責高迭代程式、介面／遊戲落地及視覺回歸 |
+| **Cursor Chief Lead** | Keith 本機 Cursor 主 Agent；總負責拆 scope、委派專科、共享檔整合、驗證、commit、push 同部署 |
+| **Math Lead** | `.cursor/agents/math-lead.md`；數理、加減法、數感、數學面試玩法及數理回歸 |
+| **English Lead** | `.cursor/agents/english-lead.md`；Carter Family、Story English、Game Night、Sight Words、Phonics |
+| **Chinese Lead** | `.cursor/agents/chinese-lead.md`；中文認字、紅／橙輯、書頁砌句、字卡 OCR、粵語及 PTH |
+| **ChatGPT／Codex** | Keith 如另行使用嘅實作／內容核對 agent；依 handover 認領工作，唔再係預設 Chief Lead |
 | **Grok bot** | Keith 手動使用嘅外部建議／研究 bot；預設唯讀，無 repo、push、merge 或部署權限 |
 
-Keith 明確交俾邊個嘅任務，就由嗰個做。ChatGPT 同 Cursor 都可改 repo，但共享檔先認領，避免同時寫同一功能。Grok 嘅輸出係建議，唔係已驗證嘅 repo 狀態；除非 Keith 另行明確交代，唔叫 Grok 寫入或接觸私有素材／密鑰。Claude 舊工作只保留喺歷史紀錄，唔再係現行 owner。
+Keith 明確交俾邊個嘅任務，就由嗰個做；未指定時由 Cursor Chief Lead routing。三位專科 Lead 完成後交 Chief 整合，唔自行 push／部署。共享檔先認領，避免同時寫同一功能。Grok 嘅輸出係建議，唔係已驗證嘅 repo 狀態；除非 Keith 另行明確交代，唔叫 Grok 寫入或接觸私有素材／密鑰。Claude 舊工作只保留喺歷史紀錄，唔再係現行 owner。
 
 ## 點用呢個檔
 
-ChatGPT／Cursor **同一套**開工／收工協議：
+Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**開工／收工協議：
 
 - **開工前**：`git fetch origin main` → 睇 `AGENTS.md`（硬性規則）→ 睇呢個檔（分工、進行中認領、地雷）。
 - **改共享／高危檔之前**：喺下面「進行中（認領）」表認領；同一功能／同一批檔唔可以兩個人同時改。
-- **merge 完之後**：喺「最近改動」加一段（日期、邊個做、改咗乜、掂咗邊啲檔），署名 **Cursor** 或 **ChatGPT／Codex**。做完就清走認領。
+- **merge 完之後**：喺「最近改動」加一段（日期、邊個做、改咗乜、掂咗邊啲檔），署名 **Cursor Chief Lead**、相應專科 Lead 或 **ChatGPT／Codex**。做完就清走認領。
 - 只寫其他人要知嘅嘢：**擁有權、地雷、未完事項**。設計討論、需求分析唔好塞入嚟。
 - 呢個檔唔係規則書。任何「以後都要咁做」嘅嘢要寫入 `AGENTS.md`，
   而且同時喺 `scripts/check-invariants.py` 加一個 `check_xxx()`，靠機器守住，唔好靠記憶。
@@ -31,11 +34,11 @@ ChatGPT／Cursor **同一套**開工／收工協議：
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 紅輯「按書頁砌句」資料層及遊戲引擎 | Cursor | `js/book-scene-demo.js`, `book-scene-demo.html`, `css/book-scene-demo.css`, `data/red-series/`, `scripts/test-book-scene-demo.mjs`, `scripts/smoke-book-scene-demo.py`, `docs/cursor-handoff-2026-09-20.md` | 2026-09-20 | Keith 交辦：本機接盤（Codex token 盡）；跟 `docs/cursor-handoff-2026-09-20.md`；唔開 Cloud Agent；先解 asset-weight，再分批開餘下 10 本（未第二人驗收前維持 preview） |
-| 書本掃描書架 | Cursor | `book-scans/index.html`, `index.html`（主頁細字連出去）, `css/styles.css`（`.home-scans-link`）, `scripts/check-invariants.py` | 2026-09-08 | Keith 交辦：家長 PDF 書架；唔改識字／OCR／數理 |
-| 加減法操作流程統一第一階段 | ChatGPT／Codex | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | Keith 交辦：加法加入回答確認、拖曳防誤觸、修正兩套桌面排位 |
-| 加減法操作流程統一、回答確認、拖曳防誤觸及桌面版面 | ChatGPT／Codex | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | Keith 交辦：先操作後回答，修正加減法介面及排位 |
-| 數理全區 iPad 橫向版面及原生 emoji | ChatGPT／Codex | `css/math.css`, `js/math-app.js` | 2026-09-16 | Keith 同意：所有數理頁面優先 landscape，善用畫布；數理物件改用 Apple 原生 emoji |
+| 紅輯「按書頁砌句」資料層及遊戲引擎 | Chinese Lead（Chief 整合） | `js/book-scene-demo.js`, `book-scene-demo.html`, `css/book-scene-demo.css`, `data/red-series/`, `scripts/test-book-scene-demo.mjs`, `scripts/smoke-book-scene-demo.py`, `docs/cursor-handoff-2026-09-20.md` | 2026-09-20 | Keith 交辦：本機接盤；內容由 Chinese Lead，shared／部署由 Chief；唔開 Cloud Agent |
+| 書本掃描書架 | Chinese Lead（Chief 整合） | `book-scans/index.html`, `index.html`（共享）, `css/styles.css`（共享）, `scripts/check-invariants.py`（共享） | 2026-09-08 | 家長 PDF 書架；中文內容由 Chinese Lead，共享檔由 Chief 認領 |
+| 加減法操作流程統一第一階段 | Math Lead（Chief 整合） | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | 加法回答確認、拖曳防誤觸、桌面排位；共享檔由 Chief 整合 |
+| 加減法操作流程統一、回答確認、拖曳防誤觸及桌面版面 | Math Lead（Chief 整合） | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | 先操作後回答；共享檔由 Chief 整合 |
+| 數理全區 iPad 橫向版面及原生 emoji | Math Lead | `css/math.css`, `js/math-app.js` | 2026-09-16 | 所有數理頁面優先 landscape，善用畫布；數理物件用 Apple 原生 emoji |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／ChatGPT（Codex） | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
@@ -63,22 +66,23 @@ ChatGPT／Cursor **同一套**開工／收工協議：
 
 | 範圍 | 擁有人 | 主要檔案 |
 |---|---|---|
-| 太空戰士造型、槍口射星動畫 | **Cursor** | `js/star-fx.js`、`scripts/crop-ranger-shooter.py`、`assets/` ranger 圖 |
-| Chief lead：跨組校準、架構、整合 review、教材內容核對／字卡 OCR | **ChatGPT／Codex** | `docs/`、教材資料、`docs/word-card-ocr.md`；依任務認領共享程式 |
-| 獎勵條／星星帳簿／共用儲存與規則、CI/invariants 治理 | **ChatGPT／Codex** | `js/storage.js`、`js/app.js` 獎勵區、`.github/workflows/*`、`scripts/check-invariants.py`；高危檔先認領 |
-| 高迭代程式實作、介面／遊戲互動、家庭裝置視覺回歸 | **Cursor** | 依認領範圍；`js/star-fx.js`、ranger 資產仍由 Cursor 主責 |
-| 新主題內容與網站資產整合 | **Cursor**（ChatGPT 可先校準內容） | `js/words.js`、`assets/food/`、`assets/food-hk/`；共享檔先認領 |
+| Chief Lead：routing、跨科校準、共享架構、整合 review、驗證、commit／部署 | **Cursor Chief Lead** | `index.html`、`js/app.js`、`js/storage.js`、共用獎勵／Profile、`.github/workflows/*`、`scripts/check-invariants.py`、`docs/handover.md` |
+| 數理內容、玩法、題目、版面及測試 | **Math Lead** | `js/math-*`、`css/math.css`、`js/additionGame.js`、`js/subtractionGame.js`、數理測試 |
+| 英文故事、Carter Family、Sight Words、Phonics、錄音及測試 | **English Lead** | `js/phonics-*`、Story English／Game Night、英文衍生資產及測試 |
+| 中文認字、紅／橙輯、書頁砌句、字卡 OCR、粵語、PTH | **Chinese Lead** | `data/red-series/`、`book-scene-*`、中文／PTH 資料、衍生資產及測試 |
+| 太空戰士造型、槍口射星動畫 | **Cursor Chief Lead** | `js/star-fx.js`、`scripts/crop-ranger-shooter.py`、`assets/` ranger 圖 |
+| 新主題內容與網站資產整合 | **相應專科 Lead＋Chief 整合** | 科目資料由 Lead；`js/words.js`、共享 CSS／入口及資產鎖由 Chief 認領 |
 | 第二意見、概念發想、公開資料研究 | **Grok bot**（Keith 手動邀請） | 不直接讀寫 repo；輸出由 ChatGPT／Cursor 核實後採納 |
 
-呢個分工唔係死嘅——ChatGPT／Cursor 要跨界改，喺「進行中」認領並寫低就得。**唔好兩個人同時改同一個功能。** Grok 如要由顧問角色升級成程式執行者，須 Keith 另行明確授權並先更新規則。
+呢個分工唔係死嘅——需要跨界時先由 Chief Lead 拆件並喺「進行中」認領。**唔好兩個 agent 同時改同一個功能／同一批檔。** 專科 Lead 唔自行 push／部署；Grok 如要由顧問角色升級成程式執行者，須 Keith 另行明確授權並先更新規則。
 
 ## 撞車高危檔案
 
-ChatGPT／Cursor 都可能掂到下面呢批檔——改之前先認領，唔好兩個人一齊改。Grok 預設唔改檔。
+Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下面呢批檔——改之前先認領，唔好兩個 agent 一齊改。Grok 預設唔改檔。
 
 - `css/styles.css` — ChatGPT／Cursor 都會掂。改之前認領 + `git fetch` + rebase，唔好用大段 rewrite，
   改細粒啲、貼住現有 selector 改。
-- `js/app.js` — 同上。獎勵條由 ChatGPT／Codex 主責；`flyStarToBar` 會
+- `js/app.js` — 同上。獎勵條由 Cursor Chief Lead 主責；`flyStarToBar` 會
   delegate 去 `window.KakaStarFx.flyStarFromRanger`（Cursor 嘅），呢個 delegation
   就係 Cursor ⇄ ChatGPT 嘅介面：**唔好其中一方刪咗個 fallback**。
 - `js/star-fx.js` — Cursor 主責。ChatGPT 通常只經 `window.KakaStarFx` 呼叫；
@@ -89,12 +93,20 @@ ChatGPT／Cursor 都可能掂到下面呢批檔——改之前先認領，唔好
   握拳唔一定喺度），`scripts/crop-ranger-shooter.py`／`kaka-ranger-solo.png` 嘅
   預設 shooter 圖冇郁。詳情見上面「最近改動」。Cursor 改呢個檔之前對一對 git log，
   留意 `MUZZLE_ANCHOR` 已經唔再係「握拳精準座標」呢個假設。
-- `assets/image-formats.lock.json` — Cursor 主責圖片格式鎖。換圖之後要 `python3 scripts/check-invariants.py --update-image-lock`，
-  唔係 CI 會紅。ChatGPT／Cursor 換圖都要跑，但唔好未問就改 lock 規則。
+- `assets/image-formats.lock.json` — Cursor Chief Lead 主責圖片格式鎖。換圖之後要 `python3 scripts/check-invariants.py --update-image-lock`，
+  唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
 
 以下按日期保留原始署名同當時分工，只作歷史紀錄；**現行擁有人以本文上方「分工」表為準**。
+
+### 2026-09-21 · Cursor Chief Lead（建立三科本機 Agent 團隊）
+
+- Cursor 主 Agent 升為 Chief Lead，負責 routing、共享檔整合、驗證、commit、push 同部署。
+- 新增 `.cursor/agents/math-lead.md`、`english-lead.md`、`chinese-lead.md`；三位都係 `model: inherit` 本機專科 agent，唔用 Cloud Agent。
+- 數理／英文／中文按科分流；跨科、主頁、共用 state／Profile／獎勵、CI／invariants 一律由 Chief 認領及整合。
+- 專科 Lead 唔自行 push／部署；Keith 繼續只喺 live 網站玩驗收。
+- **踩咗** `.cursor/agents/`、`AGENTS.md`、`docs/handover.md`
 
 ### 2026-09-21 · Cursor（驗收工作流＋《信》《快跑呀》上線）
 
@@ -109,7 +121,7 @@ ChatGPT／Cursor 都可能掂到下面呢批檔——改之前先認領，唔好
 - 正式砌句維持《分果果》《誰在叫》；其餘 10 本仍 `mode: preview`，並新增 `pendingQuestions`（`sourceVerified: false`）供第二人驗收——**未翻 sentence mode**。
 - 新建 HQ：`信-p7.webp`、`快跑呀-p3.webp`；更新 `story-page-hq-manifest.json`、`test-book-scene-demo.mjs`（pending 結構檢查）。
 - 驗收通過：`node scripts/test-book-scene-demo.mjs`、`python3 scripts/check-invariants.py`、touch smoke 三 viewport。
-- **等 Keith**：按批次目視 `pendingQuestions`（尤其 inventory 差異：安安末句、氣球飛走句、黃葉「啊！秋天到了。」、小明「牀／床」、尚缺 HQ 頁）。確認後先開《信》《快跑呀》。
+- 呢段舊「等 Keith 睇 `pendingQuestions`」工作流已被 2026-09-21 規則取代；之後由 agent 核實、測試、部署，Keith 只喺 live 網站玩。
 - **踩咗** `docs/handover.md`、`data/red-series/sentence-game-data.mjs`、`data/red-series/story-page-hq-manifest.json`、`assets/book-scenes/red-series-pages-hq/信-p7.webp`、`assets/book-scenes/red-series-pages-hq/快跑呀-p3.webp`、`assets/image-formats.lock.json`、`scripts/test-book-scene-demo.mjs`；刪 `assets/sentence-comic-anan.jpg`、`assets/sentence-comic-balloon.jpg`
 
 ### 2026-09-19 · ChatGPT／Codex（PTH 詞語普通話 voice 修正）

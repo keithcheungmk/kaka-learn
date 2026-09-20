@@ -3,13 +3,35 @@
 給 Cursor／ChatGPT Codex／Grok bot／自動化 agent 嘅專案指引。
 
 > **開工前必須睇 `docs/handover.md`** — Keith 現時主要用 ChatGPT（Codex）、Cursor 同 Grok bot。
-> ChatGPT／Cursor 按認領直接改 repo；Grok 預設只提供建議，唔假設有 repo 寫入權限。
+> Cursor 主 Agent 係 **Chief Lead**，按科目委派 `.cursor/agents/` 三位本機 Lead；ChatGPT／Cursor 仍按認領直接改 repo，Grok 預設只提供建議。
 > 交接簿記錄現行分工、進行中認領、撞車高危檔案同未完事項。
 > 收工／merge 完記得返去更新。
 
 ## 專案係乜
 
 幼兒繁體中文認字網頁（KAKA，約 4 歲）。粵語家庭、iPad 優先、亦要適合 Mac mini + TV 大掣操作。
+
+## Agent 團隊與 routing（Keith 2026-09-21）
+
+### Chief Lead＝Cursor 主 Agent
+
+- 主 Agent 係總負責人：收需求、拆 scope、按科目委派、管理 `docs/handover.md` 認領、整合共享檔、跑全套驗證、commit、push 同部署。
+- Chief Lead 唔係另一個 child agent；唔需要 `.cursor/agents/chief-lead.md`。三位專科 Lead 完成工作後交返結果畀 Chief Lead。
+- 跨兩科或以上、主頁／共享 state／Profile／獎勵／CI／部署，一律先經 Chief Lead 拆件同整合。
+
+### 三位本機專科 Lead
+
+| Routing | Agent | 主要範圍 |
+|---|---|---|
+| 數理、數數、比較、形狀、分類、規律、位置、序數、加減法、數感 | `.cursor/agents/math-lead.md` | `js/math-*`, `css/math.css`, 加減法模組、數理資料／測試 |
+| 英文、Carter Family、Story English、Game Night、Sight Words、Phonics | `.cursor/agents/english-lead.md` | `js/phonics-*`, 英文故事／錄音衍生資產、英文資料／測試 |
+| 中文認字、紅／橙輯、書頁砌句、字卡 OCR、粵語、PTH | `.cursor/agents/chinese-lead.md` | 中文／PTH／red-series 資料、介面及測試 |
+
+- 三位 Lead 全部係 **local subagent**、`model: inherit`；內容向任務可讀本機 `source-materials/`，唔開 Cloud Agent。
+- 科目 Lead 唔自行擴 scope、唔互相委派、唔自行 push／部署；改完交 Chief Lead 統一整合。
+- `index.html`、`js/app.js`、`js/storage.js`、共用獎勵／Profile、`scripts/check-invariants.py`、`.github/workflows/*`、`docs/handover.md` 係 Chief Lead 共享範圍。專科任務需要改呢批檔時，先由 Chief Lead 認領及安排。
+- 同一功能／同一批檔任何時候只可以一位 agent 寫；平行工作只限互不重疊範圍。
+- Keith 明確指定某位 Lead 時直接 routing；未指定就由 Chief Lead 判斷。專科 Lead 回報 blocker 畀 Chief，唔將 code／JSON 丟畀 Keith 驗收。
 
 ## 硬性約束
 
