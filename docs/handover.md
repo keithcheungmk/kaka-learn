@@ -100,6 +100,14 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 以下按日期保留原始署名同當時分工，只作歷史紀錄；**現行擁有人以本文上方「分工」表為準**。
 
+### 2026-09-21 · Cursor Chief Lead＋English Lead（Carter CF002–003＋iPad 橫向）
+
+- Story English 由單本 Game Night 擴成三本選書：CF001 *Game Night*、CF002 *The Tree House*（12 頁）、CF003 *The School Play*（14 頁）；同一 Read & Fill 流程。
+- Hub／主頁掣改為 `STORY ENGLISH・Carter Family`；資產按書分目錄；MP3 壓至單聲道 32kbps 以守住 assets 體積。
+- `story-demo.css` 加 `orientation: landscape` 專用一屏兩欄；Listen／Fill 互動掣唔裁切。
+- `assets/` 總上限調至 18MB（含故事音檔）；測試、image lock、計劃書／校準文件已更新。
+- **踩咗** `js/story-demo.js`、`css/story-demo.css`、`assets/story-demo/`、`index.html`、`scripts/test-story-mission.mjs`、`scripts/check-invariants.py`、`AGENTS.md`、`docs/handover.md`、`docs/carter-family-sentence-reading-plan.md`、`docs/english-content-calibration.md`
+
 ### 2026-09-21 · Cursor Chief Lead（建立三科本機 Agent 團隊）
 
 - Cursor 主 Agent 升為 Chief Lead，負責 routing、共享檔整合、驗證、commit、push 同部署。

@@ -18,9 +18,17 @@ the app does not need invented illustrations or synthetic story audio.
 4. Deploy only selected page images and clips as derivatives. Keep the original files
    private and traceable.
 
-## Current pilot: *Game Night* Read & Fill
+## Current books: CF001–CF003 Read & Fill
 
-The current pilot uses all 12 existing page images and page clips. Its loop is:
+Published Story English books:
+
+| Book | Title | Story pages | Clips |
+| --- | --- | ---: | --- |
+| CF001 | *Game Night* | 12 | `86.mp3`–`97.mp3` |
+| CF002 | *The Tree House* | 12 | `98.mp3`–`109.mp3` |
+| CF003 | *The School Play* | 14 | `110.mp3`–`123.mp3` |
+
+Each book uses the same Read & Fill loop:
 
 1. The child sees a large page and taps **Listen to this page**.
 2. When the official recording finishes, the same page remains on screen.

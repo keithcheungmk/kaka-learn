@@ -163,7 +163,7 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - **唔使再手動改 `?v=` 版本號**。部署時 `scripts/build-site.sh` 會用 commit SHA 蓋過全部；`index.html` 保留 `?v=` 佔位就得。
 - **加新 root 檔（manifest、sw.js、favicon…）唔使改 workflow**，`build-site.sh` 預設複製全部。
 - **改完一定要 `python3 scripts/check-invariants.py` 跑到綠**。加新硬性規則時，順手喺呢個檔加一個 `check_xxx()`，等下次唔使靠記憶。
-- 單張圖 ≤ 400KB、`assets/` 總共 ≤ 12MB（檢查器會攔）。
+- 單張圖 ≤ 400KB、`assets/` 總共 ≤ 18MB（檢查器會攔；含故事頁音檔）。
 - **`assets/dino/*.png` 係去背圖（帶透明背景）**，由 `scripts/cutout-bg.py` 處理，喺深色卡上直接浮住。
   唔好當普通 JPEG 重壓（透明會變實色底，diff 睇唔出）；要壓用 `pngquant`（保留柔邊 alpha），
   唔好用 Pillow `quantize()`（1-bit alpha，會出黑邊）。

@@ -84,7 +84,7 @@
           <a class="btn btn-secondary" href="./pth-demo.html?v=20260914-pth-word-audio" aria-label="普通話拼音">普通話拼音</a>
           <div class="english-home-group" aria-label="Space Ranger English">
             <button type="button" class="btn btn-secondary" id="btn-start-phonics" aria-label="SPACE RANGER ENGLISH">SPACE RANGER ENGLISH</button>
-            <button type="button" class="btn btn-story" id="btn-start-story-demo" aria-label="Story English・Game Night">STORY ENGLISH・Game Night</button>
+            <button type="button" class="btn btn-story" id="btn-start-story-demo" aria-label="Story English・Carter Family">STORY ENGLISH・Carter Family</button>
           </div>
           <button type="button" class="btn btn-accent" id="btn-start-math">太空戰士數理</button>
           <a
@@ -523,17 +523,17 @@
     </section>
 
     <!-- STORY ENGLISH：Carter Family 選取單元示範。原始 PDF 保留在素材庫，載入獲選逐頁圖和錄音。 -->
-    <section id="screen-story-demo" class="screen story-demo-screen" aria-label="Story English・Game Night">
+    <section id="screen-story-demo" class="screen story-demo-screen" aria-label="Story English・Carter Family">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-story-demo">← 主頁</button>
         <h1>STORY ENGLISH</h1>
-        <div class="progress-pill"><strong id="story-demo-complete">0/4</strong></div>
+        <div class="progress-pill"><strong id="story-demo-complete">3 books</strong></div>
       </div>
       <div class="story-demo-hero">
-        <img class="story-demo-hero-cover" src="./assets/story-demo/pages/page-01.jpg" alt="Game Night story illustration" decoding="async" />
+        <img id="story-demo-hero-cover" class="story-demo-hero-cover" src="./assets/story-demo/pages/page-01.jpg" alt="Carter Family story illustration" decoding="async" />
         <div class="story-demo-hero-copy">
-          <span class="story-demo-kicker">CARTER FAMILY · CF001</span>
-          <h2>Game Night</h2>
+          <span id="story-demo-kicker" class="story-demo-kicker">CARTER FAMILY · CF001–CF003</span>
+          <h2 id="story-demo-hero-title">Story Books</h2>
           <p>每頁先聽故事，再把剛才聽到的一個字放回短句。</p>
         </div>
       </div>
@@ -543,7 +543,7 @@
 
     <section id="screen-story-play" class="screen story-demo-screen story-play-screen" aria-label="Story English 練習">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-story-play">← Game Night</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-story-play">← Story Books</button>
         <h1 id="story-play-title">Listen to the Story</h1>
         <div class="progress-pill"><strong id="story-round-progress">1/2</strong></div>
       </div>
