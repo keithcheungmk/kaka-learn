@@ -19,12 +19,12 @@
 
 ## 邊個做邊步
 
-1. **Keith**：影字卡相（見下面拍攝要求），上載去 Claude（Cowork）對話。
-2. **Claude**：睇相 → 逐張核對（下面自檢規程）→ 寫 `data/book-cards/<book_id>.json`。
-3. **Script**：`python3 scripts/apply-book-cards.py <json>` 出 dry-run 報告 → Keith 睇過 → 加 `--write` 落地。
-4. **檢查**：`python3 scripts/check-invariants.py` 要 exit 0 → 交 branch → Cursor merge。
+1. **Keith**：影字卡相（見下面拍攝要求），交畀 ChatGPT／Codex。
+2. **ChatGPT／Codex**：睇原相、逐張核對（下面自檢規程），整理 `data/book-cards/<book_id>.json` 草稿；唔清楚就標出並問 Keith，唔估。
+3. **Script**：`python3 scripts/apply-book-cards.py <json>` 出 dry-run 報告；ChatGPT 核對報告後先加 `--write` 落地。
+4. **檢查／交接**：`python3 scripts/check-invariants.py` 要 exit 0；Cursor 可負責後續 UI／程式整合及 merge。涉及字詞有歧義先問 Keith，唔要求佢做例行重覆 QA。
 
-> ⚠️ **唔好叫 Cursor 或 Codex／ChatGPT 讀字卡相。** 呢啲 agent 容易靠書名推測，而且字卡 OCR 已經寫死俾 Claude Cowork。相片一律入 Cowork。
+> ⚠️ 字卡相辨讀由 ChatGPT／Codex 主責；Cursor／Grok 唔好自行 OCR 或按書名補字。Grok 只可喺 Keith 明確要求時，針對已分享且不含私隱嘅文字清單提供第二意見；唔好將未公開素材、學生資料或密鑰交畀外部 bot。
 
 ## 拍攝要求（提高一次過成功率）
 
@@ -33,7 +33,7 @@
 - 卡有正反面／有讀音就一齊影，方便核對。
 - 太多卡就分幾張相，講低順序。
 
-## Claude 嘅自檢規程（每次都要做齊）
+## ChatGPT／Codex 嘅自檢規程（每次都要做齊）
 
 1. **第一輪**：逐張卡讀出**卡上實際表面形**（字／詞／短語都照寫），順住卡嘅次序寫低。
 2. **數卡**：講出「我見到 N 張卡」，同 Keith 講嘅數目對數；唔夾就即刻講，唔好硬砌。
