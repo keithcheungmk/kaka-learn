@@ -43,7 +43,10 @@ assert.match(source, /autoPlay: phase === 'listen'/, 'Each page should auto-play
 
 assert.match(css, /orientation:\s*landscape/, 'iPad landscape should have a dedicated media query');
 assert.match(css, /grid-template-columns:\s*minmax\(0,\s*58%\)\s*minmax\(280px,\s*42%\)/, 'Landscape challenge layout should allocate space to image and fill panel');
-assert.match(css, /\.story-fill-tools/, 'Listen and sentence buttons should share a compact toolbar');
+assert.match(css, /\.story-challenge-story/, 'Story listen control should sit with the page image');
+assert.match(css, /\.story-fill-panel[\s\S]*padding:\s*clamp\(12px/, 'Fill panel should keep comfortable inner padding');
+assert.match(source, /story-challenge-story/, 'Listen to the story should live in the left story column');
+assert.doesNotMatch(source, /story-fill-tools/, 'Story listen should not share the right-hand quiz toolbar');
 assert.match(index, /每頁先聽故事，再把剛才聽到的一個字放回短句/);
 assert.match(index, /STORY ENGLISH・Carter Family/, 'Home entry should name the Carter Family track');
 

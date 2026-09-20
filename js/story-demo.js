@@ -303,16 +303,16 @@
     stage.classList.add('story-page-challenge');
     stage.classList.toggle('is-listening', locked);
     stage.classList.toggle('is-solved', solved);
-    stage.innerHTML = `<div class="story-challenge-image-wrap"><img class="story-challenge-page" src="${item.image}" alt="${book.title}, page ${pageIndex + 1}" decoding="async"></div>
+    stage.innerHTML = `<div class="story-challenge-story">
+        <div class="story-challenge-image-wrap"><img class="story-challenge-page" src="${item.image}" alt="${book.title}, page ${pageIndex + 1}" decoding="async"></div>
+        <button type="button" class="btn btn-secondary story-story-listen" id="btn-story-listen">🔊 Listen to the story</button>
+        <audio data-story-demo preload="metadata" src="${item.audio}"></audio>
+      </div>
       <section class="story-fill-panel" aria-label="Sentence fill activity">
         <p class="story-source-tag">${book.title} · PDF page ${item.pdfPage}</p>
         <h2>Fill the missing word</h2>
         <p class="story-fill-sentence">${tokenMarkup(item, { filled: solved })}</p>
-        <div class="story-fill-tools">
-          <button type="button" class="btn btn-secondary story-listen-again" id="btn-story-listen">🔊 Listen to the story</button>
-          <button type="button" class="btn btn-ghost story-listen-again" id="btn-story-read-sentence"${locked || solved ? ' hidden' : ''}>🔊 Read this sentence</button>
-          <audio data-story-demo preload="metadata" src="${item.audio}"></audio>
-        </div>
+        <button type="button" class="btn btn-ghost story-sentence-listen" id="btn-story-read-sentence"${locked || solved ? ' hidden' : ''}>🔊 Read this sentence</button>
         <p class="story-fill-help"${locked ? ' hidden' : ''}>Choose one word, then press Submit.</p>
         <div class="story-fill-bank" id="story-fill-bank">${item.choices.map((word) => `<button type="button" class="story-fill-tile${selectedWord === word ? ' selected' : ''}${solved && item.blanks.includes(word) ? ' correct' : ''}" draggable="${!locked && !busy && !reading && !solved}" data-word="${word}"${locked || busy || reading || solved ? ' disabled' : ''}>${word}</button>`).join('')}</div>
         <button type="button" class="btn btn-primary story-fill-submit" id="btn-story-submit"${locked || solved ? ' hidden' : ''}${!selectedWord || busy || reading ? ' disabled' : ''}>Submit</button>
