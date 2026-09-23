@@ -472,6 +472,7 @@
       <div class="btn-row play-choices">
         <button type="button" class="btn" id="btn-phonics-mode-listen">聽一聽・揀圖</button>
         <button type="button" class="btn btn-secondary" id="btn-phonics-mode-match">配一配</button>
+        <button type="button" class="btn btn-connect" id="btn-phonics-mode-connect">連一連・圖詞配對</button>
         <button type="button" class="btn btn-accent" id="btn-phonics-mode-build">砌一砌・拼英文</button>
       </div>
     </section>
@@ -502,6 +503,30 @@
       <div class="match-stage" id="phonics-match-stage" aria-hidden="true"></div>
       <div class="card-grid cols-3" id="phonics-match-options"></div>
       <p class="feedback" id="phonics-match-feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- SPACE RANGER ENGLISH：連一連圖詞配對（Sight Words） -->
+    <section id="screen-phonics-connect" class="screen phonics-screen" aria-label="SPACE RANGER ENGLISH・連一連圖詞配對">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-connect">← 玩法</button>
+        <h1>連一連</h1>
+      </div>
+      <div class="prompt-box connect-prompt">
+        <p>先撳圖片，再撳啱嘅英文。</p>
+        <span class="connect-prompt-note">每張圖片旁邊都可以再聽一次。</span>
+      </div>
+      <div class="connect-board" id="phonics-connect-board">
+        <svg class="connect-lines" id="phonics-connect-lines" aria-hidden="true" focusable="false"></svg>
+        <section class="connect-column connect-picture-column" aria-labelledby="connect-picture-title">
+          <h2 id="connect-picture-title">圖片</h2>
+          <div class="connect-card-list" id="phonics-connect-pictures"></div>
+        </section>
+        <section class="connect-column connect-word-column" aria-labelledby="connect-word-title">
+          <h2 id="connect-word-title">English words</h2>
+          <div class="connect-card-list" id="phonics-connect-words"></div>
+        </section>
+      </div>
+      <p class="feedback" id="phonics-connect-feedback" aria-live="polite"></p>
     </section>
 
     <!-- SPACE RANGER PHONICS：砌一砌拼英文 -->

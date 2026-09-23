@@ -14,7 +14,7 @@ vm.runInContext(dataSource, context);
 const topic = context.window.KakaPhonicsWords.getPhonicsTopicById('animal_spelling');
 assert.ok(topic, '動物拼字主題存在');
 assert.equal(topic.flow, 'blend', '動物主題使用音素＋拼字流程');
-assert.deepEqual([...topic.modes], ['build'], '動物主題直接進入拼字任務');
+assert.deepEqual([...topic.modes], ['build', 'connect'], '動物主題提供拼字及圖詞配對任務');
 assert.equal(topic.words.length, 20, '動物園擴充至 20 個動物字');
 
 for (const retiredTopicId of ['sight1', 'sight2', 'sight3', 'sight4']) {
@@ -35,7 +35,7 @@ for (const item of topic.words) {
 for (const topicId of ['sight_food', 'sight_veg', 'sight_places', 'sight_vehicles', 'sight_fruit', 'sight_household', 'sight_school_items']) {
   const vocabularyTopic = context.window.KakaPhonicsWords.getPhonicsTopicById(topicId);
   assert.equal(vocabularyTopic.flow, 'blend', `${topicId} 跟動物園使用融合拼字流程`);
-  assert.deepEqual([...vocabularyTopic.modes], ['build'], `${topicId} 直接進入拼字任務`);
+  assert.deepEqual([...vocabularyTopic.modes], ['build', 'connect'], `${topicId} 提供拼字及圖詞配對任務`);
   assert.equal(vocabularyTopic.words.length, 10, `${topicId} 有 10 個詞`);
   for (const item of vocabularyTopic.words) {
     assert.equal(item.letters.join(''), item.word, `${item.word} 可以組回完整字`);
@@ -52,7 +52,7 @@ for (const topicId of newSightTopicIds) {
   assert.equal(vocabularyTopic.section, 'sight', `${topicId} 放在 Sight Words 區`);
   assert.ok(vocabularyTopic.titleEn, `${topicId} 有英文副標題`);
   assert.equal(vocabularyTopic.flow, 'blend', `${topicId} 跟動物園使用融合拼字流程`);
-  assert.deepEqual([...vocabularyTopic.modes], ['build'], `${topicId} 直接進入拼字任務`);
+  assert.deepEqual([...vocabularyTopic.modes], ['build', 'connect'], `${topicId} 提供拼字及圖詞配對任務`);
   assert.equal(vocabularyTopic.words.length, 12, `${topicId} 有 12 個詞`);
   assert.equal(new Set(vocabularyTopic.words.map((item) => item.word)).size, 12, `${topicId} 詞語沒有重複`);
   for (const item of vocabularyTopic.words) {
@@ -72,6 +72,7 @@ const festivalWords = festivals.flatMap((festival) => {
   assert.ok(festival, '每個節日任務可開啟');
   assert.equal(festival.words.length, 10, `${festival.title} 有 10 個專屬詞語`);
   assert.equal(festival.flow, 'blend', `${festival.title} 使用融合拼字流程`);
+  assert.deepEqual([...festival.modes], ['build', 'connect'], `${festival.title} 提供拼字及圖詞配對任務`);
   for (const item of festival.words) {
     assert.equal(item.letters.join(''), item.word.toLowerCase().replace(/[^a-z]/g, ''), `${item.word} 的拼字會略過空格`);
     for (const phoneme of item.letters) {
@@ -109,6 +110,9 @@ assert.match(appSource, /profileId.*phonics.*mode/s, '記憶內的回合 key 包
 assert.match(appSource, /onPhonicsBuildTileTap/, '提供點按操作');
 assert.match(appSource, /onPhonicsBuildPointerDown/, '提供拖拉操作');
 assert.match(appSource, /cancelAllSpeech/, '切題前清除延遲及進行中的語音');
+assert.match(appSource, /startPhonicsConnectMode/, 'Sight Words 可進入獨立圖詞配對模式');
+assert.match(appSource, /attemptPhonicsConnectPair/, '圖詞配對會在選取圖片及英文後判斷');
+assert.match(appSource, /drawPhonicsConnectLines/, '配對成功會繪畫連線');
 assert.doesNotMatch(appSource, /淡音素/, '字格提示使用清楚的「提示字形」描述');
 
 console.log('phonics blend flow tests');
@@ -118,3 +122,4 @@ console.log('  ✓ rice 保留完整拼字，並以乾淨的 r + ice → rice �
 console.log('  ✓ 車輛、水果、家居、學校用品及 5 個香港節日詞庫已接入');
 console.log('  ✓ tap／drag、profile round progress、audio cancellation 均已接入');
 console.log('  ✓ Colors、Numbers、Shapes、Toys、Action Words 各有 12 個可拼讀詞');
+console.log('  ✓ Sight Words 新增獨立連一連模式：五對圖片／英文、語音按鈕及 SVG 連線');

@@ -98,6 +98,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-09-23 · ChatGPT／Codex（Sight Words 圖詞連線遊戲）
+
+- 英文 Sight Words 新增獨立 `Connect & Match・連一連・圖詞配對`：一版顯示 5 張圖片及 5 個打亂英文詞，撳圖片再撳英文配對；每張圖片有獨立 speaker 按鈕。
+- 配對成功會鎖定兩張卡、iPad 橫向以 SVG 線連接，答錯顯示溫柔英文重試提示；沿用英文 TTS、profile round progress、10 題星星及完成獎勵。
+- 新模式以獨立 `screen-phonics-connect` 實作，原有「配一配」及「砌一砌」保持不變；手機直向改為上下排列並隱藏跨欄連線，避免觸控重疊。
+- **踩咗** `index.html`、`css/phonics.css`、`js/phonics-app.js`、`js/phonics-words.js`、`scripts/test-phonics-flow.mjs`；`check-invariants`、phonics flow tests、三個 touch viewport focused smoke 均通過。
+
 以下按日期保留原始署名同當時分工，只作歷史紀錄；**現行擁有人以本文上方「分工」表為準**。
 
 ### 2026-09-21 · Cursor Chief Lead＋Math Lead（水星換成數字關係）

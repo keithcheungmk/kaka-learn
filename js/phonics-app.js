@@ -37,6 +37,8 @@
   let pSoundMissionIndex = 0;
   let pListenRound = null;
   let pMatchRound = null;
+  let pConnectRound = null;
+  let pConnectResizeBound = false;
   let pBuildRound = null;
   let pBuildSelectedKey = null;
   let pBuildAudioGen = 0;
@@ -193,12 +195,13 @@
       play: '#screen-phonics-play',
       listen: '#screen-phonics-listen',
       match: '#screen-phonics-match',
+      connect: '#screen-phonics-connect',
       build: '#screen-phonics-build',
     };
     $$('.screen').forEach((el) => el.classList.remove('active'));
     const el = $(map[name]);
     el?.classList.add('active');
-    if (['listen', 'match', 'build'].includes(name)) {
+    if (['listen', 'match', 'connect', 'build'].includes(name)) {
       window.KakaStarFx?.mountPlayScreen?.(el);
     } else {
       window.KakaStarFx?.hideRanger?.();
@@ -278,6 +281,7 @@
     const key = state?.key || phonicsRoundKey(mode);
     if (typeof clearRoundProgress === 'function') clearRoundProgress(key);
     delete pRoundStates[mode];
+    if (mode === 'connect') pConnectRound = null;
     hidePhonicsRoundFinish(mode);
   }
 
@@ -286,12 +290,15 @@
     if (!screen || screen.querySelector('.phonics-round-finish')) return;
     const topic = getPhonicsTopicById(pActiveTopicId);
     const isBlendFlow = topic?.flow === 'blend';
+    const finishText = mode === 'connect'
+      ? '10 組圖詞都配對喇！'
+      : isBlendFlow ? '10 題都拼好喇！' : '完成 10 題！';
     const finish = document.createElement('div');
     finish.className = 'play-finish phonics-round-finish';
     finish.innerHTML = `
       <div class="play-finish-inner" role="dialog" aria-modal="true" aria-label="小測驗完成">
         <div class="play-finish-star" aria-hidden="true"><img src="./assets/kaka-ranger-celebrate.png" alt=""></div>
-        <p>${isBlendFlow ? '10 隻動物都拼好喇！' : '完成 10 題！'}你儲滿咗 10 粒星。</p>
+        <p>${finishText}你儲滿咗 10 粒星。</p>
         <div class="play-finish-actions">
           <button type="button" class="btn btn-primary" data-phonics-round-again>再玩一輪</button>
           <button type="button" class="btn btn-secondary" data-phonics-round-back>${isBlendFlow ? '返字卡' : '返玩法'}</button>
@@ -301,6 +308,7 @@
       resetPhonicsRound(mode);
       if (mode === 'listen') startPhonicsListenMode();
       if (mode === 'match') startPhonicsMatchMode();
+      if (mode === 'connect') startPhonicsConnectMode();
       if (mode === 'build') startPhonicsBuildMode();
     });
     finish.querySelector('[data-phonics-round-back]')?.addEventListener('click', () => {
@@ -509,6 +517,7 @@
       bindPhonicsPlayPick();
       bindPhonicsListen();
       bindPhonicsMatch();
+      bindPhonicsConnect();
       bindPhonicsBuild();
     } catch (err) {
       console.error('KakaPhonics init failed', err);
@@ -686,8 +695,11 @@
     if (play) {
       play.onclick = () => {
         const topic = getPhonicsTopicById(pActiveTopicId);
-        if (topic?.flow === 'blend') startPhonicsBuildMode();
-        else openPhonicsPlayPick();
+        if (topic?.flow === 'blend' && topic?.section !== 'sight' && topic?.parentId !== 'hk_festivals') {
+          startPhonicsBuildMode();
+        } else {
+          openPhonicsPlayPick();
+        }
       };
     }
   }
@@ -832,9 +844,11 @@
     if (back) back.onclick = () => openPhonicsLearn(pActiveTopicId, pSoundMissionIndex);
     const listenBtn = $('#btn-phonics-mode-listen');
     const matchBtn = $('#btn-phonics-mode-match');
+    const connectBtn = $('#btn-phonics-mode-connect');
     const buildBtn = $('#btn-phonics-mode-build');
     if (listenBtn) listenBtn.onclick = startPhonicsListenMode;
     if (matchBtn) matchBtn.onclick = startPhonicsMatchMode;
+    if (connectBtn) connectBtn.onclick = startPhonicsConnectMode;
     if (buildBtn) buildBtn.onclick = startPhonicsBuildMode;
   }
 
@@ -845,12 +859,16 @@
       const activeSoundGroup = topic?.soundMissions?.[pSoundMissionIndex];
       title.textContent = activeSoundGroup ? `${activeSoundGroup.label}・小測驗` : topic ? `${topic.title}・去玩玩` : '去玩玩';
     }
-    const modes = topic?.modes || ['listen'];
+    const modes = topic?.section === 'sight' || topic?.parentId === 'hk_festivals'
+      ? [...new Set([...(topic?.modes || []), 'connect'])]
+      : (topic?.modes || ['listen']);
     const listenBtn = $('#btn-phonics-mode-listen');
     const matchBtn = $('#btn-phonics-mode-match');
+    const connectBtn = $('#btn-phonics-mode-connect');
     const buildBtn = $('#btn-phonics-mode-build');
     if (listenBtn) listenBtn.hidden = !modes.includes('listen');
     if (matchBtn) matchBtn.hidden = !modes.includes('match');
+    if (connectBtn) connectBtn.hidden = !modes.includes('connect');
     if (buildBtn) buildBtn.hidden = !modes.includes('build');
     showPScreen('play');
   }
@@ -875,6 +893,17 @@
     showPScreen('match');
     hidePhonicsRoundFinish('match');
     startPhonicsMatchRound();
+  }
+
+  function startPhonicsConnectMode(ev) {
+    if (ev) ev.preventDefault();
+    if (!pActiveTopicId) {
+      openPhonicsTopics();
+      return;
+    }
+    showPScreen('connect');
+    hidePhonicsRoundFinish('connect');
+    startPhonicsConnectRound();
   }
 
   function startPhonicsBuildMode(ev) {
@@ -1093,6 +1122,232 @@
         fb.textContent = retryLine;
         fb.className = 'feedback retry';
       }
+    }
+  }
+
+  /* ---------- 模式 C：連一連・圖詞配對（Sight Words） ---------- */
+
+  function bindPhonicsConnect() {
+    const back = $('#btn-back-phonics-connect');
+    if (back) back.onclick = () => {
+      pBusy = false;
+      pConnectRound = null;
+      if (typeof cancelAllSpeech === 'function') cancelAllSpeech();
+      openPhonicsPlayPick();
+    };
+    if (!pConnectResizeBound) {
+      window.addEventListener('resize', () => {
+        if ($('#screen-phonics-connect')?.classList.contains('active')) drawPhonicsConnectLines();
+      });
+      pConnectResizeBound = true;
+    }
+  }
+
+  function connectCardById(selector, id) {
+    const board = $('#phonics-connect-board');
+    if (!board) return null;
+    return [...board.querySelectorAll(selector)].find((el) => el.dataset.id === id) || null;
+  }
+
+  function renderPhonicsConnectSelection() {
+    const round = pConnectRound;
+    if (!round) return;
+    $('#phonics-connect-pictures')?.querySelectorAll('[data-id]').forEach((el) => {
+      const matched = round.matchedIds.has(el.dataset.id);
+      el.classList.toggle('is-selected', el.dataset.id === round.selectedPictureId && !matched);
+      el.classList.toggle('is-matched', matched);
+    });
+    $('#phonics-connect-words')?.querySelectorAll('[data-id]').forEach((el) => {
+      const matched = round.matchedIds.has(el.dataset.id);
+      el.classList.toggle('is-selected', el.dataset.id === round.selectedWordId && !matched);
+      el.classList.toggle('is-matched', matched);
+    });
+  }
+
+  function drawPhonicsConnectLines() {
+    const board = $('#phonics-connect-board');
+    const svg = $('#phonics-connect-lines');
+    if (!board || !svg || !pConnectRound || window.matchMedia('(max-width: 640px)').matches) {
+      if (svg) svg.innerHTML = '';
+      return;
+    }
+    const boardRect = board.getBoundingClientRect();
+    const width = Math.max(1, boardRect.width);
+    const height = Math.max(1, boardRect.height);
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+    const lines = [];
+    pConnectRound.matchedIds.forEach((id) => {
+      const picture = connectCardById('.connect-picture-main', id);
+      const word = connectCardById('.connect-word-card', id);
+      if (!picture || !word) return;
+      const pictureRect = picture.getBoundingClientRect();
+      const wordRect = word.getBoundingClientRect();
+      const x1 = pictureRect.right - boardRect.left;
+      const y1 = pictureRect.top + pictureRect.height / 2 - boardRect.top;
+      const x2 = wordRect.left - boardRect.left;
+      const y2 = wordRect.top + wordRect.height / 2 - boardRect.top;
+      lines.push(`<line class="connect-line" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"></line>`);
+    });
+    svg.innerHTML = lines.join('');
+  }
+
+  function renderPhonicsConnectBoard() {
+    const round = pConnectRound;
+    const pictureBox = $('#phonics-connect-pictures');
+    const wordBox = $('#phonics-connect-words');
+    if (!round || !pictureBox || !wordBox) return;
+    pictureBox.innerHTML = '';
+    wordBox.innerHTML = '';
+    const pictures = shuffle(round.board);
+    const words = shuffle(round.board);
+
+    pictures.forEach((item) => {
+      const matched = round.matchedIds.has(item.id);
+      const article = document.createElement('article');
+      article.className = 'connect-item';
+      const picture = document.createElement('button');
+      picture.type = 'button';
+      picture.className = 'connect-picture-main';
+      picture.dataset.id = item.id;
+      picture.setAttribute('aria-label', `圖片：${item.word}`);
+      picture.disabled = matched;
+      picture.innerHTML = phonicsWordIllustHtml(item);
+      picture.addEventListener('click', () => onPhonicsConnectPicture(item.id));
+
+      const audio = document.createElement('button');
+      audio.type = 'button';
+      audio.className = 'connect-audio';
+      audio.setAttribute('aria-label', `聽 ${item.word}`);
+      audio.textContent = '🔊';
+      audio.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        speakEnglishTerm(item.word, { muted: isMuted(), delayMs: 0, rate: 0.86, pitch: 1.05 });
+      });
+
+      article.append(picture, audio);
+      pictureBox.appendChild(article);
+    });
+
+    words.forEach((item) => {
+      const word = document.createElement('button');
+      word.type = 'button';
+      word.className = 'connect-word-card';
+      word.dataset.id = item.id;
+      word.textContent = item.word;
+      word.setAttribute('aria-label', `英文：${item.word}`);
+      word.disabled = round.matchedIds.has(item.id);
+      word.addEventListener('click', () => onPhonicsConnectWord(item.id));
+      wordBox.appendChild(word);
+    });
+    renderPhonicsConnectSelection();
+    requestAnimationFrame(drawPhonicsConnectLines);
+  }
+
+  function startPhonicsConnectRound() {
+    pBusy = false;
+    const pool = currentTopicWords().filter((word) => word.emoji);
+    if (pool.length < 2) return;
+    const state = ensurePhonicsRound('connect', pool);
+    if (state.completed.length >= PHONICS_ROUND_LENGTH) {
+      showPhonicsRoundFinish('connect');
+      return;
+    }
+    renderPhonicsRoundBar('connect', state);
+    const answerIndex = state.completed.length;
+    const target = state.plan[answerIndex];
+    if (!pConnectRound || pConnectRound.stateKey !== state.key || pConnectRound.answerIndex !== answerIndex) {
+      pConnectRound = {
+        stateKey: state.key,
+        answerIndex,
+        board: shuffle([target, ...sampleOthers(pool, target.id, 4)]),
+        matchedIds: new Set(),
+        selectedPictureId: null,
+        selectedWordId: null,
+      };
+    }
+    const fb = $('#phonics-connect-feedback');
+    if (fb) {
+      fb.textContent = `配對 ${pConnectRound.matchedIds.size}/${pConnectRound.board.length}`;
+      fb.className = 'feedback';
+    }
+    renderPhonicsConnectBoard();
+  }
+
+  function onPhonicsConnectPicture(id) {
+    if (pBusy || !pConnectRound || pConnectRound.matchedIds.has(id)) return;
+    pConnectRound.selectedPictureId = pConnectRound.selectedPictureId === id ? null : id;
+    renderPhonicsConnectSelection();
+    if (pConnectRound.selectedPictureId && pConnectRound.selectedWordId) attemptPhonicsConnectPair();
+  }
+
+  function onPhonicsConnectWord(id) {
+    if (pBusy || !pConnectRound || pConnectRound.matchedIds.has(id)) return;
+    pConnectRound.selectedWordId = pConnectRound.selectedWordId === id ? null : id;
+    renderPhonicsConnectSelection();
+    if (pConnectRound.selectedPictureId && pConnectRound.selectedWordId) attemptPhonicsConnectPair();
+  }
+
+  function attemptPhonicsConnectPair() {
+    if (pBusy || !pConnectRound) return;
+    const pictureId = pConnectRound.selectedPictureId;
+    const wordId = pConnectRound.selectedWordId;
+    if (!pictureId || !wordId) return;
+    const item = pConnectRound.board.find((word) => word.id === pictureId);
+    const correct = pictureId === wordId;
+    const picture = connectCardById('.connect-picture-main', pictureId);
+    const word = connectCardById('.connect-word-card', wordId);
+    const fb = $('#phonics-connect-feedback');
+
+    if (correct && item) {
+      pBusy = true;
+      pConnectRound.matchedIds.add(item.id);
+      pConnectRound.selectedPictureId = null;
+      pConnectRound.selectedWordId = null;
+      picture?.classList.add('is-matched');
+      word?.classList.add('is-matched');
+      renderPhonicsConnectSelection();
+      drawPhonicsConnectLines();
+      recordPhonicsSkill('recognition', item.id, true);
+      if (fb) {
+        fb.textContent = 'Great job!';
+        fb.className = 'feedback ok';
+      }
+      speakCorrectEnglishOnly(item.word, isMuted(), () => {
+        if (!$('#screen-phonics-connect')?.classList.contains('active')) return;
+        awardPhonicsRoundStar('connect', item, (finished) => {
+          if (finished) {
+            showPhonicsRoundFinish('connect');
+            return;
+          }
+          if (pConnectRound && pConnectRound.matchedIds.size >= pConnectRound.board.length) {
+            pConnectRound = null;
+            setTimeout(() => startPhonicsConnectRound(), 450);
+          } else {
+            pBusy = false;
+            if (pConnectRound && fb) fb.textContent = `配對 ${pConnectRound.matchedIds.size}/${pConnectRound.board.length}`;
+          }
+        });
+      });
+      return;
+    }
+
+    pBusy = true;
+    picture?.classList.add('is-wrong');
+    word?.classList.add('is-wrong');
+    pConnectRound.selectedPictureId = null;
+    pConnectRound.selectedWordId = null;
+    renderPhonicsConnectSelection();
+    setTimeout(() => {
+      picture?.classList.remove('is-wrong');
+      word?.classList.remove('is-wrong');
+    }, 500);
+    const retryLine = speakRetryThenEnglish(item?.word || '', isMuted(), () => {
+      if (pConnectRound) pBusy = false;
+    });
+    if (fb) {
+      fb.textContent = retryLine;
+      fb.className = 'feedback retry';
     }
   }
 
