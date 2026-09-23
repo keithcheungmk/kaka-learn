@@ -21,6 +21,12 @@ assert.equal(media.entries.length, 23);
 assert.deepEqual(media.entries.slice(0, 4).map((x) => x.id), ['b', 'p', 'm', 'f']);
 assert.ok(media.entries.every((x) => x.sourceFile.startsWith('source-materials/')));
 assert.ok(media.entries.every((x) => x.status === 'verified' && fs.existsSync(path.join(root, x.derivedVideo)) && fs.existsSync(path.join(root, x.derivedAudio))));
+const textbookAudit = media.entries.filter((x) => x.textbookStatus);
+assert.equal(textbookAudit.length, 19, '19 個後續聲母均有教材參照審核狀態');
+assert.equal(textbookAudit.filter((x) => !x.textbookStatus.startsWith('pending')).length, 18, '18 個聲母已在掃描教材找到對應頁（l 另標示重複掃描）');
+assert.equal(textbookAudit.filter((x) => x.textbookStatus.startsWith('pending')).length, 1, '未見個別教材頁的 d 必須保留 pending');
+assert.ok(textbookAudit.every((x) => x.textbookRef.startsWith('PTH textbook K2 p.')));
+assert.match(textbookAudit.find((x) => x.id === 'd').textbookRef, /d 個別示範頁未見/);
 for (const [id, emoji] of Object.entries({ b: '🎈', p: '🍇', m: '🍚', f: '🎡' })) {
   assert.ok(demoSource.includes(`id:'${id}'`) && demoSource.includes(`emoji:'${emoji}'`));
 }

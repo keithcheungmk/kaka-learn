@@ -3,13 +3,26 @@
 // 一個選項以 choice id 識別，故相同詞語可以在同一句出現多次。
 export const RED_SERIES_BOOKS = [
   {
-    id: 'rb_qiqiu', title: '我的氣球呢？', cover: '🎈', mode: 'preview',
+    id: 'rb_qiqiu', title: '我的氣球呢？', cover: '🎈', mode: 'sentence', flow: 'gentle',
     previewPages: [
       { pdfPage: 4, image: 'assets/book-scenes/balloon-colours-a.jpg' },
       { pdfPage: 5, image: 'assets/book-scenes/balloon-colours-b.jpg' },
       { pdfPage: 7, image: 'assets/book-scenes/balloon-flew-away.jpg' },
     ],
-    questions: [],
+    questions: [
+      {
+        id: 'spread-p4', pdfPage: 4, bookPages: [2, 3], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/balloon-colours-a.jpg', sentence: '紅氣球藍氣球',
+        chunks: ['紅氣球', '藍氣球'], stars: 2, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/我的氣球呢.pdf p4；兩頁均為故事頁。',
+      },
+      {
+        id: 'spread-p5', pdfPage: 5, bookPages: [4, 5], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/balloon-colours-b.jpg', sentence: '黃氣球綠氣球',
+        chunks: ['黃氣球', '綠氣球'], stars: 2, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/我的氣球呢.pdf p5；兩頁均為故事頁。',
+      },
+    ],
     pendingQuestions: [
       {
         id: 'spread-p4', pdfPage: 4, bookPages: [2, 3], side: '整個跨頁（左至右）',
@@ -54,13 +67,32 @@ export const RED_SERIES_BOOKS = [
     ],
   },
   {
-    id: 'rb_anan', title: '貪吃的安安', cover: '🍪', mode: 'preview',
+    id: 'rb_anan', title: '貪吃的安安', cover: '🍪', mode: 'sentence', flow: 'gentle',
     previewPages: [
       { pdfPage: 3, image: 'assets/book-scenes/anan-snacks.jpg' },
       { pdfPage: 4, image: 'assets/book-scenes/anan-biscuits-fruit.jpg' },
       { pdfPage: 5, image: 'assets/book-scenes/anan-chips-drink.jpg' },
     ],
-    questions: [],
+    questions: [
+      {
+        id: 'spread-p3', pdfPage: 3, bookPages: [2, 3], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/anan-snacks.jpg', sentence: '花生糖果',
+        chunks: ['花生', '糖果'], stars: 2, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/貪吃的安安.pdf p3；兩頁均為故事頁。',
+      },
+      {
+        id: 'spread-p4', pdfPage: 4, bookPages: [4, 5], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/anan-biscuits-fruit.jpg', sentence: '餅乾水果',
+        chunks: ['餅乾', '水果'], stars: 2, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/貪吃的安安.pdf p4；兩頁均為故事頁。',
+      },
+      {
+        id: 'spread-p5', pdfPage: 5, bookPages: [6, 7], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/anan-chips-drink.jpg', sentence: '薯片汽水',
+        chunks: ['薯片', '汽水'], stars: 2, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/貪吃的安安.pdf p5；兩頁均為故事頁。',
+      },
+    ],
     pendingQuestions: [
       {
         id: 'spread-p3', pdfPage: 3, bookPages: [2, 3], side: '整個跨頁',
@@ -105,9 +137,28 @@ export const RED_SERIES_BOOKS = [
     ],
   },
   {
-    id: 'rb_yusan', title: '雨傘', cover: '☂️', mode: 'preview',
+    id: 'rb_yusan', title: '雨傘', cover: '☂️', mode: 'sentence', flow: 'gentle',
     previewPages: [4, 5, 6].map((pdfPage) => ({ pdfPage, image: `assets/book-scenes/red-series-pages-hq/雨傘-p${pdfPage}.webp` })),
-    questions: [],
+    questions: [
+      {
+        id: 'spread-p4', pdfPage: 4, bookPages: [2, 3], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/red-series-pages-hq/雨傘-p4.webp', sentence: '橙雨傘藍雨傘',
+        chunks: ['橙雨傘', '藍雨傘'], stars: 2, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/雨傘.pdf p4；完整故事跨頁。',
+      },
+      {
+        id: 'spread-p5', pdfPage: 5, bookPages: [4, 5], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/red-series-pages-hq/雨傘-p5.webp', sentence: '綠雨傘黃雨傘',
+        chunks: ['綠雨傘', '黃雨傘'], stars: 2, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/雨傘.pdf p5；完整故事跨頁。',
+      },
+      {
+        id: 'spread-p6', pdfPage: 6, bookPages: [6, 7], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/red-series-pages-hq/雨傘-p6.webp', sentence: '花雨傘收起小雨傘。',
+        chunks: ['花雨傘', '收起小雨傘。'], stars: 2, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/雨傘.pdf p6；完整故事跨頁。',
+      },
+    ],
     pendingQuestions: [
       {
         id: 'spread-p4', pdfPage: 4, bookPages: [2, 3], side: '整個跨頁（左至右）',
@@ -266,9 +317,22 @@ export const RED_SERIES_BOOKS = [
     ],
   },
   {
-    id: 'rb_huangye', title: '黃葉', cover: '🍂', mode: 'preview',
+    id: 'rb_huangye', title: '黃葉', cover: '🍂', mode: 'sentence', flow: 'gentle',
     previewPages: [4, 5, 6].map((pdfPage) => ({ pdfPage, image: `assets/book-scenes/red-series-pages-hq/黃葉-p${pdfPage}.webp` })),
-    questions: [],
+    questions: [
+      {
+        id: 'spread-p4', pdfPage: 4, bookPages: [4, 5], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/red-series-pages-hq/黃葉-p4.webp', sentence: '一、二、三，三片黃葉。一、二、三、四，四片黃葉。',
+        chunks: ['一、二、三，', '三片黃葉。', '一、二、三、四，', '四片黃葉。'], stars: 4, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/黃葉.pdf p4；兩句均完整。',
+      },
+      {
+        id: 'spread-p5', pdfPage: 5, bookPages: [6, 7], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/red-series-pages-hq/黃葉-p5.webp', sentence: '一、二、三、四、五，五片黃葉。很多、很多黃葉。',
+        chunks: ['一、二、三、四、五，', '五片黃葉。', '很多、', '很多黃葉。'], stars: 4, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/黃葉.pdf p5；第二句標點按掃描頁核對。',
+      },
+    ],
     pendingQuestions: [
       {
         id: 'spread-p4', pdfPage: 4, bookPages: [4, 5], side: '整個跨頁（左至右）',
@@ -334,9 +398,16 @@ export const RED_SERIES_BOOKS = [
     ],
   },
   {
-    id: 'rb_fengwan', title: '風跟我玩', cover: '🌬️', mode: 'preview',
+    id: 'rb_fengwan', title: '風跟我玩', cover: '🌬️', mode: 'sentence', flow: 'gentle',
     previewPages: [5, 6].map((pdfPage) => ({ pdfPage, image: `assets/book-scenes/red-series-pages-hq/風跟我玩-p${pdfPage}.webp` })),
-    questions: [],
+    questions: [
+      {
+        id: 'spread-p5', pdfPage: 5, bookPages: [4, 5], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/red-series-pages-hq/風跟我玩-p5.webp', sentence: '風跟我玩紙飛機。風跟我玩吹泡泡。',
+        chunks: ['風跟我玩紙飛機。', '風跟我玩吹泡泡。'], stars: 2, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/風跟我玩.pdf p5；p4 字卡／封面、p6 字卡半頁排除。',
+      },
+    ],
     pendingQuestions: [
       {
         id: 'spread-p5', pdfPage: 5, bookPages: [4, 5], side: '整個跨頁（左至右）',
@@ -404,9 +475,28 @@ export const RED_SERIES_BOOKS = [
     ],
   },
   {
-    id: 'rb_dongdong', title: '冬冬請客', cover: '🍽️', mode: 'preview',
+    id: 'rb_dongdong', title: '冬冬請客', cover: '🍽️', mode: 'sentence', flow: 'gentle',
     previewPages: [4, 5, 6].map((pdfPage) => ({ pdfPage, image: `assets/book-scenes/red-series-pages-hq/冬冬請客-p${pdfPage}.webp` })),
-    questions: [],
+    questions: [
+      {
+        id: 'spread-p4', pdfPage: 4, bookPages: [2, 3], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/red-series-pages-hq/冬冬請客-p4.webp', sentence: '冬冬請了花貓、小狗、白兔和青蛙來玩。冬冬請花貓吃蘿蔔。',
+        chunks: ['冬冬請了花貓、小狗、白兔和青蛙來玩。', '冬冬請花貓吃蘿蔔。'], stars: 2, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/冬冬請客.pdf p4；完整故事跨頁。',
+      },
+      {
+        id: 'spread-p5', pdfPage: 5, bookPages: [4, 5], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/red-series-pages-hq/冬冬請客-p5.webp', sentence: '冬冬請白兔吃骨頭。冬冬請小狗吃小蟲。',
+        chunks: ['冬冬請白兔吃骨頭。', '冬冬請小狗吃小蟲。'], stars: 2, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/冬冬請客.pdf p5；完整故事跨頁。',
+      },
+      {
+        id: 'spread-p6', pdfPage: 6, bookPages: [6, 7], side: '整個跨頁（左至右）',
+        image: 'assets/book-scenes/red-series-pages-hq/冬冬請客-p6.webp', sentence: '冬冬請青蛙吃魚。冬冬說：「媽媽，為什麼他們都不肯吃東西呢？」',
+        chunks: ['冬冬請青蛙吃魚。', '冬冬說：「媽媽，為什麼他們都不肯吃東西呢？」'], stars: 2, distractors: [], sourceVerified: true, audio: null,
+        reviewNote: '逐字對照 source-materials/Chinese book scans/冬冬請客.pdf p6；引號及問號按掃描頁保留。',
+      },
+    ],
     pendingQuestions: [
       {
         id: 'spread-p4', pdfPage: 4, bookPages: [2, 3], side: '整個跨頁',

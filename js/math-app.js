@@ -99,6 +99,72 @@
       },
     ];
 
+    /**
+     * Phase 1 backlog planets：每粒都係獨立十題短任務，先用具體圖像／格仔，
+     * 唔依賴中文認字題庫；畫面由本檔動態建立，避免撞 shared index.html。
+     */
+    const BACKLOG_PLANETS = {
+      sort: {
+        id: 'sort', name: '木星', skill: '分類',
+        learn: [
+          { title: '一樣嘅放埋一齊', say: '水果同水果放埋一齊，動物同動物放埋一齊。', visual: '<div class="math-backlog-pair"><span>🍎 🍌</span><span>🐶 🐱</span></div>' },
+          { title: '睇清楚物件', say: '先睇物件係乜，再揀佢應該去邊一盒。', visual: '<div class="math-backlog-example">🍎 → <b>水果</b><br />🐶 → <b>動物</b></div>' },
+          { title: '準備分類', say: '聽題目，將每一件物件放入正確嘅分類。', visual: '<div class="math-backlog-bins"><span>🍎 水果</span><span>🐶 動物</span></div>' },
+        ],
+      },
+      pattern: {
+        id: 'pattern', name: '土星', skill: '規律',
+        learn: [
+          { title: '規律會重複', say: '紅、藍、紅、藍，係一個 AB 規律。', visual: '<div class="math-backlog-sequence"><span>🔴</span><span>🔵</span><span>🔴</span><span>🔵</span></div>' },
+          { title: '搵下一個', say: '由左至右睇，下一個要跟返原本嘅次序。', visual: '<div class="math-backlog-sequence"><span>🐰</span><span>🐥</span><span>🐰</span><span>🐥</span><span>？</span></div>' },
+          { title: '唔同規律都可以', say: '有時係兩個一組，有時係三個一組；都要睇清楚先揀。', visual: '<div class="math-backlog-sequence"><span>🍎</span><span>🍌</span><span>🍇</span><span>🍎</span><span>🍌</span><span>？</span></div>' },
+        ],
+      },
+      position: {
+        id: 'position', name: '天王星', skill: '位置',
+        learn: [
+          { title: '上面同下面', say: '星星喺上面，月亮喺下面。', visual: '<div class="math-backlog-position-demo"><span>⭐</span><span>🌙</span></div>' },
+          { title: '左邊同右邊', say: '由左至右睇，先係左邊，再係右邊。', visual: '<div class="math-backlog-position-demo is-row"><span>⭐</span><span>🌙</span></div>' },
+          { title: '中間位置', say: '三格入面，中間就係第二格。', visual: '<div class="math-backlog-grid-demo"><i></i><b>⭐</b><i></i></div>' },
+        ],
+      },
+      ordinal: {
+        id: 'ordinal', name: '海王星', skill: '序數',
+        learn: [
+          { title: '排隊有次序', say: '由左至右數：第一、第二、第三。', visual: '<div class="math-backlog-queue"><span>1️⃣ 🐰</span><span>2️⃣ 🐶</span><span>3️⃣ 🐱</span></div>' },
+          { title: '問第幾個', say: '見到隊伍，逐個由左至右數，就知道第幾個。', visual: '<div class="math-backlog-queue"><span>🐰</span><span>🐶</span><span class="is-target">🐱</span><span>🐸</span></div>' },
+          { title: '準備搵答案', say: '聽清楚係第一、第二、第三、第四定第五。', visual: '<div class="math-backlog-queue"><span>🐰</span><span>🐶</span><span>🐱</span><span>🐸</span><span>🐥</span></div>' },
+        ],
+      },
+    };
+
+    const BACKLOG_SORT_ITEMS = [
+      { emoji: '🍎', name: '蘋果', category: '水果' }, { emoji: '🍌', name: '香蕉', category: '水果' },
+      { emoji: '🐶', name: '小狗', category: '動物' }, { emoji: '🐱', name: '小貓', category: '動物' },
+      { emoji: '🚗', name: '汽車', category: '交通工具' }, { emoji: '🚌', name: '巴士', category: '交通工具' },
+      { emoji: '🧸', name: '玩偶', category: '玩具' }, { emoji: '⚽', name: '足球', category: '玩具' },
+    ];
+    const BACKLOG_CATEGORIES = ['水果', '動物', '交通工具', '玩具'];
+    const BACKLOG_PATTERN_SETS = [
+      ['🔴', '🔵', '🔴', '🔵', null], ['🐰', '🐥', '🐰', '🐥', null],
+      ['🍎', '🍌', '🍇', '🍎', '🍌', null], ['⭐', '🌙', '☀️', '⭐', '🌙', null],
+      ['🟩', '🟨', '🟩', '🟨', null], ['🐶', '🐶', '🐱', '🐶', '🐶', null],
+      ['🍓', '🍓', '🍊', '🍓', '🍓', null], ['🔺', '⚪', '🔺', '⚪', null],
+      ['🚀', '🪐', '🌙', '🚀', '🪐', null], ['🦁', '🐯', '🦁', '🐯', null],
+    ];
+    const BACKLOG_POSITION_CELLS = [
+      { answer: '上面', index: 1 }, { answer: '下面', index: 7 }, { answer: '左邊', index: 3 },
+      { answer: '右邊', index: 5 }, { answer: '中間', index: 4 }, { answer: '上面', index: 0 },
+      { answer: '下面', index: 8 }, { answer: '左邊', index: 6 }, { answer: '右邊', index: 2 }, { answer: '中間', index: 4 },
+    ];
+    const BACKLOG_ORDINAL_ANIMALS = [
+      ['🐰', '🐶', '🐱', '🐸', '🐥'], ['🐶', '🐱', '🐸', '🐥', '🐰'],
+      ['🐱', '🐸', '🐥', '🐰', '🐶'], ['🐸', '🐥', '🐰', '🐶', '🐱'],
+      ['🐥', '🐰', '🐶', '🐱', '🐸'], ['🐰', '🐸', '🐶', '🐥', '🐱'],
+      ['🐱', '🐥', '🐰', '🐸', '🐶'], ['🐶', '🐰', '🐥', '🐱', '🐸'],
+      ['🐸', '🐶', '🐱', '🐰', '🐥'], ['🐥', '🐱', '🐸', '🐶', '🐰'],
+    ];
+
     const $ = (sel, root = document) => root.querySelector(sel);
 
     const screens = {
@@ -119,6 +185,7 @@
       marsPlay: '#screen-math-mars-play',
       shape: '#screen-math-shape',
       pattern: '#screen-math-pattern',
+      backlog: '#screen-math-backlog',
     };
 
     let vLearnIndex = 0;
@@ -135,6 +202,12 @@
     let patternBusy = false;
     let patternRound = null;
     let patternCorrect = 0;
+    let backlogPlanetId = null;
+    let backlogLearnIndex = 0;
+    let backlogQuestionIndex = 0;
+    let backlogCorrect = 0;
+    let backlogRound = null;
+    let backlogBusy = false;
     let warpFromPlanet = null;
     let warpToPlanet = null;
     let warpTimer = null;
@@ -159,7 +232,7 @@
       const sel = screens[name] || screens.galaxy;
       const el = $(sel);
       el?.classList.add('active');
-      if (['relationsPlay', 'additionPlay', 'bondsPlay', 'time', 'shape', 'pattern'].includes(name)) {
+      if (['relationsPlay', 'additionPlay', 'bondsPlay', 'time', 'shape', 'pattern', 'backlog'].includes(name)) {
         const fx = window.KakaStarFx;
         fx?.mountPlayScreen?.(el);
         fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
@@ -294,6 +367,240 @@
       $('#btn-math-round-galaxy').onclick = () => { overlay.hidden = true; openGalaxy(); };
     }
 
+    function ensureBacklogScreen() {
+      if ($('#screen-math-backlog')) return;
+      const app = $('#app');
+      if (!app) throw new Error('KakaMath: #app missing for backlog screen');
+      const screen = document.createElement('section');
+      screen.id = 'screen-math-backlog';
+      screen.className = 'screen math-screen math-backlog-screen';
+      screen.setAttribute('aria-label', '數理星球任務');
+      screen.innerHTML = `
+        <div class="game-header math-backlog-header">
+          <button type="button" class="btn btn-ghost" id="btn-back-math-backlog">← 銀河</button>
+          <h1 id="math-backlog-title">數理星球</h1>
+          <div class="progress-pill"><strong id="math-backlog-progress">先學一學</strong></div>
+        </div>
+        <div class="math-backlog-learn" id="math-backlog-learn">
+          <p class="section-lead" id="math-backlog-learn-lead">先學一學，再挑戰十題。</p>
+          <button type="button" class="math-learn-stage math-backlog-learn-stage" id="math-backlog-learn-tap" aria-label="再聽一次">
+            <div id="math-backlog-learn-visual" class="math-backlog-learn-visual"></div>
+            <div id="math-backlog-learn-say" class="math-venus-say"></div>
+            <div class="learn-hear">🔊 聽一聽</div>
+          </button>
+          <div class="btn-row">
+            <button type="button" class="btn btn-ghost" id="btn-math-backlog-learn-prev">← 上一張</button>
+            <button type="button" class="btn btn-secondary" id="btn-math-backlog-learn-next">下一張 →</button>
+          </div>
+          <div class="btn-row" id="math-backlog-learn-finish-row">
+            <button type="button" class="btn" id="btn-math-backlog-start">學完喇・開始十題</button>
+          </div>
+        </div>
+        <div class="math-backlog-play" id="math-backlog-play" hidden>
+          <p class="section-lead" id="math-backlog-play-lead">第 1 / 10 題</p>
+          <div class="prompt-box">
+            <p id="math-backlog-prompt"></p>
+            <button type="button" class="speak-btn" id="btn-math-backlog-speak" aria-label="再聽一次">🔊 再聽一次</button>
+          </div>
+          <div id="math-backlog-visual" class="math-backlog-visual"></div>
+          <div id="math-backlog-options" class="math-backlog-options" aria-label="答案選項"></div>
+          <p class="feedback" id="math-backlog-feedback" aria-live="polite"></p>
+          <button type="button" class="btn btn-ghost math-backlog-back-learn" id="btn-math-backlog-back-learn">← 再學一次</button>
+        </div>`;
+      app.appendChild(screen);
+
+      $('#btn-back-math-backlog').addEventListener('click', () => openGalaxy());
+      $('#math-backlog-learn-tap').addEventListener('click', () => speakBacklogLearn());
+      $('#btn-math-backlog-learn-prev').addEventListener('click', () => {
+        if (backlogLearnIndex <= 0) return;
+        backlogLearnIndex -= 1;
+        renderBacklogLearn(true);
+      });
+      $('#btn-math-backlog-learn-next').addEventListener('click', () => {
+        const cards = BACKLOG_PLANETS[backlogPlanetId]?.learn || [];
+        if (backlogLearnIndex >= cards.length - 1) return;
+        backlogLearnIndex += 1;
+        renderBacklogLearn(true);
+      });
+      $('#btn-math-backlog-start').addEventListener('click', () => openBacklogQuiz());
+      $('#btn-math-backlog-speak').addEventListener('click', () => {
+        if (backlogRound) speak(backlogRound.speak || backlogRound.prompt);
+      });
+      $('#btn-math-backlog-back-learn').addEventListener('click', () => openBacklogLearn(backlogPlanetId));
+    }
+
+    function backlogVisual(item) {
+      return `<span class="math-backlog-choice-visual" aria-hidden="true">${item.visual || item.emoji || item}</span><span>${item.label || item.name || item}</span>`;
+    }
+
+    function makeBacklogQuestion(planetId, index) {
+      if (planetId === 'sort') {
+        const target = BACKLOG_SORT_ITEMS[index % BACKLOG_SORT_ITEMS.length];
+        const other = BACKLOG_CATEGORIES.find((category) => category !== target.category);
+        return {
+          skillId: 'sort.category', representation: 'concrete-category',
+          prompt: `「${target.name}」應該放入邊一盒？`, speak: `請將${target.name}放入正確嘅分類。`,
+          visual: `<div class="math-backlog-sort-target"><span>${target.emoji}</span><strong>${target.name}</strong></div>`,
+          options: shuffle([target.category, other]).map((label) => ({ value: label, label, visual: label === target.category ? '✅' : '📦' })),
+          answer: target.category,
+        };
+      }
+      if (planetId === 'pattern') {
+        const sequence = BACKLOG_PATTERN_SETS[index % BACKLOG_PATTERN_SETS.length];
+        const answer = sequence[sequence.length - 2];
+        const distractors = [...new Set(BACKLOG_PATTERN_SETS.flat().filter(Boolean).filter((item) => item !== answer))];
+        return {
+          skillId: 'pattern.next', representation: 'visual-sequence',
+          prompt: '下一個係邊個？', speak: '請睇清楚規律，揀下一個。',
+          visual: `<div class="math-backlog-sequence">${sequence.map((item) => `<span class="${item == null ? 'is-blank' : ''}">${item || '？'}</span>`).join('')}</div>`,
+          options: shuffle([answer, ...shuffle(distractors).slice(0, 2)]).map((visual) => ({ value: visual, label: visual, visual })),
+          answer,
+        };
+      }
+      if (planetId === 'position') {
+        const target = BACKLOG_POSITION_CELLS[index % BACKLOG_POSITION_CELLS.length];
+        return {
+          skillId: 'position.grid', representation: 'nine-grid',
+          prompt: '星星喺邊度？', speak: `星星喺${target.answer}，揀返佢。`,
+          visual: `<div class="math-backlog-position-grid">${Array.from({ length: 9 }, (_, cell) => `<span class="${cell === target.index ? 'is-target' : ''}">${cell === target.index ? '⭐' : ''}</span>`).join('')}</div>`,
+          options: shuffle(['上面', '下面', '左邊', '右邊', '中間']).map((label) => ({ value: label, label, visual: label === target.answer ? '⭐' : '•' })),
+          answer: target.answer,
+        };
+      }
+      const order = BACKLOG_ORDINAL_ANIMALS[index % BACKLOG_ORDINAL_ANIMALS.length];
+      const ordinal = (index % 5) + 1;
+      const answer = order[ordinal - 1];
+      return {
+        skillId: 'ordinal.order.1to5', representation: 'animal-queue',
+        prompt: `邊個係第${ordinal}個？`, speak: `請揀第${ordinal}個小動物。`,
+        visual: `<div class="math-backlog-queue">${order.map((item, i) => `<span><small>${i + 1}</small>${item}</span>`).join('')}</div>`,
+        options: shuffle([answer, ...shuffle(order.filter((item) => item !== answer)).slice(0, 2)]).map((visual) => ({ value: visual, label: visual, visual })),
+        answer,
+      };
+    }
+
+    function renderBacklogLearn(autoSpeak) {
+      ensureBacklogScreen();
+      const config = BACKLOG_PLANETS[backlogPlanetId];
+      const card = config.learn[backlogLearnIndex];
+      $('#math-backlog-learn').hidden = false;
+      $('#math-backlog-play').hidden = true;
+      $('#math-backlog-title').textContent = `${config.name}・先學一學`;
+      $('#math-backlog-progress').textContent = `${backlogLearnIndex + 1}/${config.learn.length}`;
+      $('#math-backlog-learn-lead').textContent = `${config.skill}：先睇清楚，再試十題。`;
+      $('#math-backlog-learn-visual').innerHTML = card.visual;
+      $('#math-backlog-learn-say').textContent = card.title;
+      $('#btn-math-backlog-learn-prev').disabled = backlogLearnIndex <= 0;
+      $('#btn-math-backlog-learn-next').hidden = backlogLearnIndex >= config.learn.length - 1;
+      if (autoSpeak) speak(card.say);
+    }
+
+    function speakBacklogLearn() {
+      const config = BACKLOG_PLANETS[backlogPlanetId];
+      if (config) speak(config.learn[backlogLearnIndex].say);
+    }
+
+    function openBacklogLearn(planetId) {
+      if (!BACKLOG_PLANETS[planetId]) return openGalaxy();
+      ensureBacklogScreen();
+      backlogPlanetId = planetId;
+      backlogLearnIndex = 0;
+      backlogQuestionIndex = 0;
+      backlogCorrect = 0;
+      backlogBusy = false;
+      updateState({ currentPlanetId: planetId });
+      renderBacklogLearn(true);
+      showMathScreen('backlog');
+    }
+
+    function openBacklogQuiz() {
+      if (!BACKLOG_PLANETS[backlogPlanetId]) return openGalaxy();
+      backlogQuestionIndex = 0;
+      backlogCorrect = 0;
+      backlogBusy = false;
+      $('#math-backlog-learn').hidden = true;
+      $('#math-backlog-play').hidden = false;
+      nextBacklogQuestion(true);
+      showMathScreen('backlog');
+    }
+
+    function nextBacklogQuestion(autoSpeak) {
+      backlogRound = makeBacklogQuestion(backlogPlanetId, backlogQuestionIndex);
+      const config = BACKLOG_PLANETS[backlogPlanetId];
+      $('#math-backlog-title').textContent = `${config.name}・${config.skill}`;
+      $('#math-backlog-progress').textContent = `${backlogQuestionIndex + 1}/10`;
+      $('#math-backlog-play-lead').textContent = `第 ${backlogQuestionIndex + 1} / 10 題 · 答啱 ${backlogCorrect} 題`;
+      $('#math-backlog-prompt').textContent = backlogRound.prompt;
+      $('#math-backlog-visual').innerHTML = backlogRound.visual;
+      const options = $('#math-backlog-options');
+      options.replaceChildren();
+      backlogRound.options.forEach((item) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'math-backlog-option';
+        button.dataset.value = item.value;
+        button.innerHTML = backlogVisual(item);
+        button.addEventListener('click', () => onBacklogPick(item.value, button));
+        options.append(button);
+      });
+      $('#math-backlog-feedback').textContent = '';
+      if (autoSpeak) speak(backlogRound.speak);
+    }
+
+    function finishBacklogRound() {
+      const state = loadState();
+      lightPlanet(backlogPlanetId);
+      const withMission = mastery?.recordMission
+        ? mastery.recordMission(state, {
+          missionId: `${backlogPlanetId}.ten-question-round`, skillId: `${backlogPlanetId}.round`,
+          questionCount: 10, correct: backlogCorrect, completedAt: new Date().toISOString(),
+        })
+        : state;
+      updateState(withMission);
+      showMathRoundReward(`${BACKLOG_PLANETS[backlogPlanetId].name}十題完成！攞到${backlogCorrect}粒星！`, () => openBacklogQuiz());
+    }
+
+    function onBacklogPick(value, button) {
+      if (backlogBusy || !backlogRound) return;
+      backlogBusy = true;
+      const ok = value === backlogRound.answer;
+      const muted = isMuted();
+      const state = loadState();
+      const next = mastery?.recordAttempt
+        ? mastery.recordAttempt(state, {
+          skillId: backlogRound.skillId, firstTryCorrect: ok, assisted: false, hints: 0,
+          errorType: ok ? undefined : 'wrong-choice', answer: value, expected: backlogRound.answer,
+          representation: backlogRound.representation,
+        })
+        : state;
+      updateState(next);
+      const feedback = $('#math-backlog-feedback');
+      if (ok) {
+        button.classList.add('is-ok');
+        backlogCorrect += 1;
+        const { gained } = tryEarnStar();
+        if (gained) {
+          speech?.playStarCue?.({ muted });
+          playMathStarReward();
+        } else speech?.playCorrectCue?.({ muted });
+        feedback.textContent = '答啱咗！你搵到規律喇。';
+      } else {
+        button.classList.add('is-bad');
+        speech?.playTryAgainCue?.({ muted });
+        feedback.textContent = `再諗吓；答案係「${backlogRound.answer}」。`;
+      }
+      setTimeout(() => {
+        if (backlogQuestionIndex >= 9) {
+          backlogBusy = false;
+          finishBacklogRound();
+          return;
+        }
+        backlogQuestionIndex += 1;
+        backlogBusy = false;
+        nextBacklogQuestion(true);
+      }, ok ? 700 : 900);
+    }
+
     function hideWarp() {
       const overlay = $('#math-warp');
       if (!overlay) return;
@@ -368,6 +675,7 @@
       if (planet.id === 'compare-size') return window.KakaAdditionGame.openEarthAddition();
       if (planet.id === 'time') return openVenusLearn();
       if (planet.id === 'shape') return openMarsLearn();
+      if (['sort', 'pattern', 'position', 'ordinal'].includes(planet.id)) return openBacklogLearn(planet.id);
       if (planet.id === 'moon') return window.KakaSubtractionGame?.openMoonSubtraction();
       openGalaxy();
     }
@@ -386,7 +694,7 @@
           btn.type = 'button';
           btn.className = `math-galaxy-card planet-${p.id}${lit ? ' is-lit' : ''}`;
           btn.dataset.planetId = p.id;
-          const playable = ['number-relations', 'compare-size', 'time', 'shape', 'moon'].includes(p.id);
+          const playable = ['number-relations', 'compare-size', 'time', 'shape', 'moon', 'sort', 'pattern', 'position', 'ordinal'].includes(p.id);
           const status = playable ? (lit ? '已點亮' : '可以出發') : '準備中';
           btn.disabled = !playable;
           btn.setAttribute('aria-label', `${p.name}，${p.skill}，${status}`);
@@ -975,6 +1283,7 @@
       openMarsLearn,
       openShapeQuiz,
       openPatternQuiz,
+      openBacklogLearn,
       openGalaxy,
       offerWarpHop,
     };

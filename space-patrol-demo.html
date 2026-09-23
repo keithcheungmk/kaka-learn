@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>KAKA Space Patrol Pilot</title>
+  <link rel="stylesheet" href="./css/space-patrol-demo.css?v=pilot1">
+</head>
+<body>
+  <main class="sp-app">
+    <header class="sp-header">
+      <div><span class="sp-kicker">KAKA ENGLISH PILOT</span><h1>SPACE PATROL</h1></div>
+      <span class="sp-star-count">0/10 ★</span>
+    </header>
+
+    <section id="sp-hub" class="sp-screen active" aria-label="Space Patrol arc selection">
+      <div class="sp-hero"><span>BLUE MOON ARC · 01–03</span><h2 id="sp-arc-title">Mission to Blue Moon</h2><p>先聽原故事，再學目標詞，最後完成 10 題小測驗。</p></div>
+      <div class="sp-book-grid" id="sp-arc-books"></div>
+      <p class="sp-provenance">Pilot scope：只選用 Mission to Blue Moon 1–3；每本均有 story PDF、原始 MP3 及 word 練習 PDF 對應。</p>
+    </section>
+
+    <section id="sp-lesson" class="sp-screen" aria-label="Space Patrol lesson">
+      <div class="sp-toolbar"><button type="button" class="sp-ghost" id="sp-back-home">← Arc</button><strong id="sp-lesson-title"></strong><span id="sp-lesson-progress"></span></div>
+      <div class="sp-lesson-grid">
+        <div class="sp-page-wrap"><img id="sp-lesson-image" src="" alt=""><p id="sp-lesson-source" class="sp-source"></p><button type="button" class="sp-listen-story" id="sp-listen-story">🔊 聽原故事錄音</button><p id="sp-lesson-feedback" class="sp-feedback"></p></div>
+        <aside class="sp-word-panel"><h2>Target words</h2><p>先認英文詞，再聽故事入面點樣用。</p><div id="sp-word-cards"></div></aside>
+      </div>
+      <div class="sp-nav"><button type="button" class="sp-ghost" id="sp-lesson-prev">← 上一頁</button><button type="button" class="sp-primary" id="sp-lesson-next">下一頁 →</button></div>
+    </section>
+
+    <section id="sp-quiz" class="sp-screen" aria-label="Space Patrol ten question quiz">
+      <div class="sp-toolbar"><span id="sp-question-number">Question 1/10</span><div class="sp-stars" id="sp-quiz-stars" aria-label="Stars"></div><span id="sp-question-source"></span></div>
+      <div class="sp-quiz-card"><span class="sp-kicker">WORD MISSION</span><h2 id="sp-question-prompt"></h2><p>揀一個英文詞語。</p><div class="sp-options" id="sp-quiz-options"></div><p id="sp-quiz-feedback" class="sp-feedback"></p></div>
+    </section>
+
+    <section id="sp-finish" class="sp-screen sp-finish" aria-label="Space Patrol completed">
+      <div class="sp-finish-card"><div class="sp-big-star">★</div><h2>Mission complete!</h2><p id="sp-finish-score"></p><button type="button" class="sp-primary" id="sp-finish-again">再玩一次</button><button type="button" class="sp-ghost" id="sp-finish-back">返回 Arc</button></div>
+    </section>
+  </main>
+  <script type="module" src="./js/space-patrol-demo.js?v=pilot1"></script>
+</body>
+</html>

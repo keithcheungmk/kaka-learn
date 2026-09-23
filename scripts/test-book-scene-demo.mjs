@@ -13,7 +13,17 @@ const pageManifest = JSON.parse(fs.readFileSync(path.join(root, 'data/red-series
 
 assert.equal(RED_SERIES_BOOKS.length, 12, '12 本紅輯全部列入資料層');
 assert.equal(pageManifest.books.length, 12, '每本書均有頁面來源 manifest');
-assert.equal(RED_SERIES_BOOKS.filter((book) => book.mode === 'sentence').length, 4, '目前四本書已啟用已核實題目');
+assert.equal(RED_SERIES_BOOKS.filter((book) => book.mode === 'sentence').length, 10, '目前十本書已啟用已核實題目');
+assert.deepEqual(
+  RED_SERIES_BOOKS.filter((book) => book.mode === 'sentence').map((book) => book.id),
+  ['rb_qiqiu', 'rb_anan', 'rb_yusan', 'rb_xin', 'rb_fenguo', 'rb_shuijiao', 'rb_kuaipao', 'rb_huangye', 'rb_fengwan', 'rb_dongdong'],
+  '只有逐頁有來源證據及可用書頁資產的書才轉正式模式',
+);
+assert.deepEqual(
+  RED_SERIES_BOOKS.filter((book) => book.mode === 'preview').map((book) => book.id),
+  ['rb_yishuhua', 'rb_xiaoming'],
+  '有未完成句、字卡頁或缺少正確 HQ 書頁資產的書繼續待核實',
+);
 const activeBook = RED_SERIES_BOOKS.find((book) => book.id === 'rb_fenguo');
 assert.equal(activeBook.mode, 'sentence');
 assert.equal(activeBook.flow, RED_SENTENCE_RULES.gentleFlow, '《分果果》用 gentle');
@@ -146,7 +156,7 @@ assert.match(source, /flow === RED_SENTENCE_RULES\.gentleFlow/);
 assert.match(html, /聽本版句子/);
 assert.match(html, /scene-study-sentence/);
 assert.match(html, /scene-preview-note/);
-assert.match(html, /四本正式書/);
+assert.match(html, /正式書/);
 assert.equal(fs.readdirSync(path.join(root, 'assets/book-scenes/red-series-pages-hq')).filter((name) => !name.startsWith('.')).length, 33, 'HQ 原頁含新建信-p7、快跑呀-p3，以及分果果左頁裁切');
 assert.ok(fs.existsSync(path.join(root, activeBook.questions[2].image)), '不完整右頁不得混入本題，使用已裁切左頁');
 assert.ok(fs.existsSync(path.join(root, callingSpread.image)), '《誰在叫》實際故事跨頁圖片存在');

@@ -1746,6 +1746,60 @@
   html.math-canvas-mode .math-screen.active{height:auto;min-height:100dvh;overflow:visible}
 }
 
+/* ---------- Phase 1 backlog 星球：分類／規律／位置／序數 ---------- */
+.math-backlog-screen { gap: clamp(12px, 2vh, 22px); }
+.math-backlog-screen[hidden], .math-backlog-learn[hidden], .math-backlog-play[hidden] { display: none !important; }
+.math-backlog-header { margin-bottom: 0; }
+.math-backlog-learn, .math-backlog-play { width: min(100%, 1120px); margin-inline: auto; }
+.math-backlog-learn-stage { width: 100%; min-height: clamp(240px, 42vh, 390px); display: grid; place-items: center; gap: 12px; border: 2px solid rgba(115, 242, 194, .45); border-radius: 24px; background: linear-gradient(145deg, rgba(30, 58, 120, .96), rgba(26, 30, 84, .96)); color: inherit; }
+.math-backlog-learn-visual { min-height: 120px; display: grid; place-items: center; font-size: clamp(3rem, 8vw, 6rem); }
+.math-backlog-learn-visual .math-backlog-example, .math-backlog-learn-visual .math-backlog-bins { font-size: clamp(1.35rem, 3vw, 2.4rem); line-height: 1.7; }
+.math-backlog-pair, .math-backlog-bins, .math-backlog-position-demo, .math-backlog-queue { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 2vw, 26px); flex-wrap: wrap; }
+.math-backlog-pair span, .math-backlog-bins span { padding: 12px 18px; border-radius: 16px; background: rgba(255, 213, 90, .16); border: 2px solid rgba(255, 213, 90, .7); }
+.math-backlog-position-demo { flex-direction: column; font-size: clamp(3rem, 8vw, 6rem); }
+.math-backlog-position-demo.is-row { flex-direction: row; }
+.math-backlog-grid-demo { display: grid; grid-template-columns: repeat(3, 70px); gap: 10px; }
+.math-backlog-grid-demo > * { display: grid; place-items: center; width: 70px; height: 70px; border-radius: 14px; background: rgba(255,255,255,.12); }
+.math-backlog-grid-demo b { background: rgba(255,213,90,.3); }
+.math-backlog-queue span { display: grid; gap: 5px; justify-items: center; padding: 10px 14px; border-radius: 15px; background: rgba(71, 98, 171, .72); font-size: clamp(2.2rem, 5vw, 4rem); }
+.math-backlog-queue span small { font-size: .9rem; color: var(--muted, #b7c1e0); }
+.math-backlog-queue span.is-target { outline: 3px solid var(--gold, #ffd55a); }
+.math-backlog-play .prompt-box { margin-bottom: 12px; }
+.math-backlog-visual { min-height: clamp(170px, 32vh, 300px); display: grid; place-items: center; padding: 16px; border-radius: 22px; background: rgba(27, 48, 105, .7); border: 1px solid rgba(130, 151, 226, .5); }
+.math-backlog-sort-target { display: grid; justify-items: center; gap: 8px; font-size: clamp(4rem, 10vw, 7rem); }
+.math-backlog-sort-target strong { font-size: clamp(1.2rem, 2.5vw, 2rem); color: var(--muted, #b7c1e0); }
+.math-backlog-sequence { display: flex; align-items: center; justify-content: center; gap: clamp(8px, 2vw, 22px); flex-wrap: wrap; }
+.math-backlog-sequence span { display: grid; place-items: center; min-width: clamp(54px, 8vw, 92px); min-height: clamp(54px, 8vw, 92px); padding: 8px; border-radius: 18px; background: rgba(71, 98, 171, .72); font-size: clamp(2rem, 6vw, 4.8rem); }
+.math-backlog-sequence span.is-blank { color: var(--gold, #ffd55a); border: 3px dashed currentColor; background: rgba(255, 213, 90, .12); }
+.math-backlog-position-grid { display: grid; grid-template-columns: repeat(3, minmax(58px, 92px)); gap: 10px; }
+.math-backlog-position-grid span { display: grid; place-items: center; min-height: clamp(58px, 9vw, 92px); border-radius: 15px; background: rgba(71, 98, 171, .72); font-size: clamp(2rem, 5vw, 4rem); }
+.math-backlog-position-grid span.is-target { background: rgba(255, 213, 90, .36); box-shadow: 0 0 0 3px var(--gold, #ffd55a); }
+.math-backlog-options { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+.math-backlog-option { min-height: 76px; display: grid; grid-template-columns: auto 1fr; align-items: center; justify-content: center; gap: 8px; border: 2px solid #5eb9ee; border-radius: 16px; background: rgba(49, 74, 145, .8); color: var(--text, #f7f8ff); font-weight: 900; padding: 10px 12px; }
+.math-backlog-choice-visual { font-size: 1.5rem; }
+.math-backlog-option:hover, .math-backlog-option:focus-visible { outline: 3px solid var(--mint, #73f2c2); transform: translateY(-2px); }
+.math-backlog-option.is-ok { border-color: #73f2c2; background: rgba(39, 148, 115, .72); }
+.math-backlog-option.is-bad { border-color: #ffb18c; background: rgba(157, 70, 74, .72); }
+.math-backlog-back-learn { margin-top: 10px; }
+html.math-canvas-mode .math-backlog-screen.math-screen.active { display: grid; grid-template-rows: auto 1fr; align-content: stretch; }
+html.math-canvas-mode .math-backlog-learn, html.math-canvas-mode .math-backlog-play { width: min(100%, 1320px); }
+html.math-canvas-mode .math-backlog-learn-stage { min-height: min(47vh, 400px); }
+html.math-canvas-mode .math-backlog-options { width: min(100%, 1180px); margin-inline: auto; }
+
+@media (max-width: 700px) {
+  .math-backlog-screen { padding: 12px; }
+  .math-backlog-header { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; }
+  .math-backlog-header h1 { font-size: clamp(1.35rem, 6vw, 2rem); text-align: center; overflow-wrap: anywhere; }
+  .math-backlog-grid-demo { grid-template-columns: repeat(3, minmax(46px, 70px)); gap: 7px; }
+  .math-backlog-grid-demo > * { width: auto; height: 60px; }
+  .math-backlog-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .math-backlog-option { min-height: 64px; font-size: .95rem; }
+}
+
+@media (min-width: 701px) and (orientation: portrait) {
+  html.math-canvas-mode .math-backlog-screen.math-screen.active { height: auto; min-height: 100dvh; overflow: visible; }
+}
+
 /* ── 數理 iPad 橫向總版型 ─────────────────────────────
    所有數理遊戲共用同一個橫向節奏：標題列 → 指示 → 主操作區。
    內容用畫布寬度計算，唔用固定手機直流式寬度。 */
