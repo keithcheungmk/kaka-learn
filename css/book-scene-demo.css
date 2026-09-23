@@ -43,6 +43,11 @@ body { margin: 0; min-height: 100dvh; background: radial-gradient(circle at 10% 
 .scene-game h2 { margin: 12px 0 3px; font-size: clamp(1.28rem, 2.7vw, 1.8rem); }
 .scene-help { margin: 0 0 13px; color: var(--scene-muted); }
 .scene-activity { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr); align-items: center; gap: 18px; }
+.scene-activity.is-sentence-layout { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+.scene-book-column { min-width: 0; }
+.scene-book-toolbar { display: flex; align-items: center; gap: 12px; margin: 0 auto 10px; max-width: 950px; }
+.scene-book-toolbar > span { color: var(--scene-muted); font-size: .92rem; font-weight: 800; }
+.scene-book-toolbar .scene-listen { width: auto; min-width: 190px; margin: 0; }
 .scene-board { position: relative; isolation: isolate; overflow: hidden; width: 100%; max-width: 950px; min-width: 0; margin: auto; border: 5px solid #e9eefb; border-radius: 20px; background: #fff; aspect-ratio: var(--scene-aspect, 1.7); }
 .scene-board img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .scene-pdf-preview { display: block; width: 100%; height: 100%; border: 0; background: #fff; }
@@ -55,6 +60,7 @@ body { margin: 0; min-height: 100dvh; background: radial-gradient(circle at 10% 
 .drop-zone.is-over { transform: translate(-50%, -50%) scale(1.08); background: #254e81; }
 .drop-zone.is-filled { border-style: solid; background: #15505dcc; color: white; }
 .scene-task-panel { min-width: 0; }
+.scene-activity.is-sentence-layout .scene-task-panel { width: 100%; }
 .scene-study { margin: 0 0 10px; padding: 16px; border: 1px solid #68d6b8; border-radius: 16px; background: #15396b; color: #fff2a0; font-size: clamp(1.15rem, 2.4vw, 1.65rem); font-weight: 950; text-align: center; line-height: 1.45; }
 .scene-study p { margin: 0; }
 .scene-listen { display: block; width: 100%; min-height: 52px; margin: 0 0 10px; padding: 10px 16px; border: 2px solid #5fe0d1; border-radius: 15px; background: #123f65; color: white; font: inherit; font-weight: 900; cursor: pointer; touch-action: manipulation; }
@@ -65,6 +71,26 @@ body { margin: 0; min-height: 100dvh; background: radial-gradient(circle at 10% 
 .scene-preview-nav button { flex: 1 1 0; min-width: 0; min-height: 48px; padding: 8px 12px; border: 2px solid var(--scene-line); border-radius: 14px; background: #203c7a; color: white; font: inherit; font-weight: 900; cursor: pointer; touch-action: manipulation; }
 .scene-preview-nav button:disabled { opacity: .45; }
 .word-bank { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 12px auto 6px; }
+.scene-activity.is-sentence-layout .word-bank { display: block; margin-top: 10px; }
+.sentence-lanes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.sentence-lanes.is-single { grid-template-columns: minmax(0, 1fr); }
+.sentence-lane { min-width: 0; padding: 13px; border: 2px solid #347bbd; border-radius: 18px; background: linear-gradient(150deg, #132e63, #10234c); }
+.sentence-lane:first-child { border-color: #5cb6e8; }
+.sentence-lane:nth-child(2) { border-color: #9a7be8; }
+.sentence-lane-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 9px; color: var(--scene-ink); }
+.sentence-lane-heading strong { font-size: 1.1rem; }
+.lane-listen { min-height: 42px; padding: 6px 10px; border: 1px solid #5fe0d1; border-radius: 12px; background: #123f65; color: #fff; font: inherit; font-size: .9rem; font-weight: 900; cursor: pointer; touch-action: manipulation; }
+.sentence-lane .answer-slots { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); justify-content: stretch; gap: 8px; margin: 0 0 9px; }
+.sentence-lane .answer-slot { max-width: none; flex: initial; width: 100%; }
+.word-pool { margin-top: 14px; padding: 13px; border: 2px solid var(--scene-gold); border-radius: 18px; background: linear-gradient(150deg, #292659, #1e214d); }
+.word-pool-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 9px; }
+.word-pool-heading strong { color: #fff0a1; font-size: 1.15rem; }
+.word-pool-heading span { color: var(--scene-muted); font-size: .88rem; font-weight: 800; }
+.word-pool-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 9px; }
+.word-pool-cards .word-card { width: 100%; }
+.distractor-bank { margin-top: 12px; padding: 10px 12px 12px; border: 1px dashed #b58be8; border-radius: 16px; background: #2a2150aa; }
+.distractor-bank > strong { display: block; margin-bottom: 7px; color: #e1c7ff; text-align: center; }
+.distractor-bank > div { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; }
 .word-bank.is-dense { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .answer-slots { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; width: 100%; margin: 0 0 4px; }
 .word-bank.is-dense .answer-slots { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
@@ -106,6 +132,12 @@ body { margin: 0; min-height: 100dvh; background: radial-gradient(circle at 10% 
   .scene-game { padding: 13px; }
   .scene-activity { grid-template-columns: minmax(0, 1fr); gap: 10px; }
   .scene-board { max-width: none; }
+  .scene-book-toolbar { align-items: stretch; flex-direction: column; gap: 6px; }
+  .scene-book-toolbar .scene-listen { width: 100%; }
+  .scene-book-toolbar > span { font-size: .82rem; }
+  .sentence-lanes { grid-template-columns: minmax(0, 1fr); }
+  .word-pool-heading { align-items: flex-start; flex-direction: column; gap: 3px; }
+  .word-pool-cards { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
   .word-card { flex-basis: calc(50% - 8px); min-height: 52px; padding: 8px 10px; }
   .answer-slot { flex-basis: calc(50% - 8px); }
   .word-bank.is-dense { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -169,4 +201,9 @@ body { margin: 0; min-height: 100dvh; background: radial-gradient(circle at 10% 
   .word-bank.is-dense .word-card { min-height: 44px; padding: 4px; font-size: clamp(.8rem, 1.35vw, .95rem); }
   .scene-feedback { min-height: 2em; margin: 5px 0; font-size: .86rem; }
   .scene-submit { width: 100%; min-width: 0; min-height: 50px; margin-top: 6px; padding: 8px 14px; font-size: 1.1rem; }
+}
+
+@media (max-width: 900px) {
+  .scene-activity.is-sentence-layout .sentence-lane .answer-slots,
+  .scene-activity.is-sentence-layout .word-pool-cards { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
 }

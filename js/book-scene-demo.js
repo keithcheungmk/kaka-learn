@@ -40,6 +40,7 @@ let book = RED_BOOKS.find((item) => item.id === 'rb_fenguo')
   || BOOKS[0];
 let sceneIndex = 0;
 let selectedWord = null;
+let selectedChoiceId = null;
 let placements = {};
 let stars = 0;
 let earnedByScene = {};
@@ -89,6 +90,34 @@ function currentSentenceChunks(scene = currentScene()) {
   return scene.chunks || [];
 }
 
+// 將跨頁句子切成「左頁／右頁」兩條 lane；單頁故事則保留單欄。
+// 資料層如果日後補上 lanes，會優先使用明確的 chunk index，避免靠數量猜測。
+function sentenceLanes(scene = currentScene()) {
+  const chunks = currentSentenceChunks(scene);
+  if (!chunks.length) return [];
+  if (Array.isArray(scene.lanes) && scene.lanes.length) {
+    return scene.lanes.map((lane, index) => ({
+      id: lane.id || `lane-${index}`,
+      label: lane.label || (index === 0 ? '左頁句子' : '右頁句子'),
+      indexes: lane.indexes || [],
+    })).filter((lane) => lane.indexes.length);
+  }
+  const side = String(scene.side || '');
+  const isSpread = side.includes('跨頁') || side.includes('整個');
+  if (!isSpread || chunks.length === 1) {
+    return [{ id: 'single', label: side.includes('左頁') ? '左頁句子' : '本頁句子', indexes: chunks.map((_, index) => index) }];
+  }
+  const midpoint = Math.ceil(chunks.length / 2);
+  return [
+    { id: 'left', label: '左頁句子', indexes: chunks.slice(0, midpoint).map((_, index) => index) },
+    { id: 'right', label: '右頁句子', indexes: chunks.slice(midpoint).map((_, index) => midpoint + index) },
+  ];
+}
+
+function laneText(scene, lane) {
+  return lane.indexes.map((index) => scene.chunks[index]).join('');
+}
+
 function placementArray(size) {
   return Array.from({ length: size }, (_, index) => placements[String(index)] ?? null);
 }
@@ -99,6 +128,16 @@ function filledCount() {
 
 function setSentencePlacements(values) {
   placements = Object.fromEntries(values.map((value, index) => [String(index), value]).filter(([, value]) => value != null));
+}
+
+function placeSentenceChunkInLane(choiceId, indexes, answerIds) {
+  const localPlacements = indexes.map((index) => placements[String(index)] ?? null);
+  const localAnswerIds = indexes.map((index) => answerIds[index]);
+  const next = placeNextChunk(localPlacements, choiceId, localAnswerIds);
+  indexes.forEach((index, localIndex) => {
+    if (next[localIndex] == null) delete placements[String(index)];
+    else placements[String(index)] = next[localIndex];
+  });
 }
 
 function ensureOptionOrder(scene) {
@@ -149,6 +188,7 @@ function selectBook(item) {
   sceneIndex = firstIncompleteIndex >= 0 && completedScenes.has(book.scenes[savedIndex]?.id) ? firstIncompleteIndex : savedIndex;
   stars = book.stars ? Math.min(Number.isInteger(saved.stars) ? saved.stars : 0, book.stars) : 0;
   placements = {};
+  selectedChoiceId = null;
   phase = item.mode === 'sentence' ? sentenceStartPhase(item) : 'play';
   selectedWord = null;
   const allSentenceScenesComplete = book.mode === 'sentence' && book.scenes.every((scene) => completedScenes.has(scene.id));
@@ -186,6 +226,10 @@ function renderScene() {
   $('#star-count').setAttribute('aria-label', isPreview ? '本書只供頁面預覽，尚未開放星星測驗' : '星星進度');
   $('#scene-ranger').hidden = isPreview;
   const gentle = usesGentleFlow();
+  const activity = $('#scene-activity');
+  activity.classList.toggle('is-sentence-layout', isSentence);
+  activity.classList.toggle('is-preview-layout', isPreview);
+  $('#scene-book-toolbar').hidden = !isSentence;
   $('#scene-prompt').textContent = isPreview
     ? '書頁預覽・未核實原句前不會出測驗'
     : isSentence
@@ -197,19 +241,16 @@ function renderScene() {
     ? '原頁可以翻閱；逐頁內容核實後才會開放正式遊戲。'
     : isSentence
       ? gentle
-        ? '隨時可撳讀音掣。點一下詞組會放入下一格；亦可拖曳。砌齊就讀句，再開心下一版。'
-        : phase === 'learn' ? '先聽完整跨頁內容；準備好後再開始砌句小測。' : '點一下正確詞組會自動放入下一格；亦可拖曳，錯了可點格子清走。'
+        ? '詞語會打亂放入詞語池；先揀詞語，再撳目標空格，亦可直接拖曳。'
+        : phase === 'learn' ? '先聽完整跨頁內容；準備好後再開始砌句小測。' : '詞語會打亂放入詞語池；先揀詞語，再撳目標空格，亦可直接拖曳。'
       : '按一下正確字詞，再放入對應格子。';
 
   const board = $('#scene-board');
   board.style.setProperty('--scene-aspect', scene.aspect || '1.72');
   const imageAlt = `${book.title}掃描書頁，PDF 第 ${scene.pdfPage ?? '—'} 頁`;
-  const coverText = isSentence && phase === 'play'
-    ? `<div class="scene-sentence-mask" aria-hidden="true">${gentle ? '聽一聽・砌本版' : '測驗中・先聽一聽再砌'}</div>`
-    : '';
-  // 預覽狀態放在圖片外的說明區，避免 badge 蓋住書頁文字或插圖。
+  // 原書文字保持完整可見；操作提示及配對區放到圖片下方，避免遮住掃描頁。
   board.innerHTML = scene.image
-    ? `<img src="${scene.image}" alt="${imageAlt}" decoding="async">${coverText}`
+    ? `<img src="${scene.image}" alt="${imageAlt}" decoding="async">`
     : `<div class="scene-neutral-preview" role="img" aria-label="${book.title}中性場景預覽"><span>📖</span><small>場景預覽</small></div>`;
 
   $('#scene-listen').hidden = !isSentence;
@@ -259,27 +300,54 @@ function renderScene() {
     : sourceLine);
 
   const used = new Set(Object.values(placements));
-  const slotsMarkup = slotWords.map((word, index) => {
+  const choiceMarkup = (choice, extraClass = '') => {
+    const alreadyUsed = used.has(isSentence ? choice.id : choice.text);
+    const isSelected = isSentence && selectedChoiceId === choice.id;
+    return `<button type="button" class="word-card${choice.isAnswer ? '' : ' is-distractor'}${isSelected ? ' is-selected' : ''}${extraClass}" data-choice-id="${choice.id}" data-word="${choice.text}" draggable="${!alreadyUsed && !locked}" ${alreadyUsed || locked ? 'disabled' : ''}>${choice.text}</button>`;
+  };
+  const renderSlot = (word, index) => {
     const value = isSentence ? placements[String(index)] : placements[word];
     const displayValue = isSentence ? optionOrder.find((choice) => choice.id === value)?.text || '' : value || '';
     const aria = displayValue || `第 ${index + 1} 個詞組，未填`;
     return `<button type="button" class="answer-slot${displayValue ? ' is-filled' : ''}" data-slot="${index}"${isLegacy ? ` data-target="${word}"` : ''} aria-label="${aria}"${locked ? ' disabled' : ''}>${displayValue || (isSentence ? `詞組 ${index + 1}` : '本頁字詞')}</button>`;
-  }).join('');
-  const choicesMarkup = optionOrder.map((choice) => {
-    const alreadyUsed = used.has(isSentence ? choice.id : choice.text);
-    return `<button type="button" class="word-card${choice.isAnswer ? '' : ' is-distractor'}" data-choice-id="${choice.id}" data-word="${choice.text}" draggable="${!alreadyUsed && !locked}" ${alreadyUsed || locked ? 'disabled' : ''}>${choice.text}</button>`;
-  }).join('');
+  };
+
+  let bankMarkup;
+  if (isSentence) {
+    const lanes = sentenceLanes(scene);
+    const laneMarkup = lanes.map((lane) => {
+      const listenLabel = `🔊 聽${lane.label}`;
+      return `<section class="sentence-lane" data-lane="${lane.id}">
+        <div class="sentence-lane-heading"><strong>${lane.label}</strong><button type="button" class="lane-listen" data-lane-listen="${lane.id}" aria-label="${listenLabel}">${listenLabel}</button></div>
+        <div class="answer-slots" aria-label="${lane.label}詞組次序">${lane.indexes.map((index) => renderSlot(chunks[index], index)).join('')}</div>
+      </section>`;
+    }).join('');
+    bankMarkup = `<div class="sentence-lanes${lanes.length === 1 ? ' is-single' : ''}" aria-label="左右頁句子配對">${laneMarkup}</div><section class="word-pool" aria-label="詞語池"><div class="word-pool-heading"><strong>詞語池</strong><span>先揀詞語，再撳目標空格；亦可直接拖曳。</span></div><div class="word-pool-cards">${optionOrder.map((choice) => choiceMarkup(choice)).join('')}</div></section>`;
+  } else {
+    const slotsMarkup = slotWords.map((word, index) => renderSlot(word, index)).join('');
+    const choicesMarkup = optionOrder.map((choice) => choiceMarkup(choice)).join('');
+    bankMarkup = `<div class="answer-slots" aria-label="本版詞組次序">${slotsMarkup}</div>${choicesMarkup}`;
+  }
   const wordBank = $('#word-bank');
   wordBank.dataset.choiceCount = String(optionOrder.length);
   wordBank.classList.toggle('is-dense', optionOrder.length >= 10);
-  wordBank.innerHTML = `<div class="answer-slots" aria-label="本版詞組次序">${slotsMarkup}</div>${choicesMarkup}`;
+  wordBank.innerHTML = bankMarkup;
 
   $('#word-bank').querySelectorAll('.answer-slot').forEach((zone) => {
     zone.addEventListener('click', () => {
       if (locked) return;
       if (isSentence) {
-        setSentencePlacements(removeChunkAt(placementArray(slotWords.length), Number(zone.dataset.slot)));
-        renderScene();
+        const slotIndex = Number(zone.dataset.slot);
+        if (selectedChoiceId) {
+          const choiceId = selectedChoiceId;
+          if (placeSentenceChunk(choiceId, slotIndex)) {
+            selectedChoiceId = null;
+            renderScene();
+          }
+        } else if (placements[String(slotIndex)] != null) {
+          setSentencePlacements(removeChunkAt(placementArray(slotWords.length), slotIndex));
+          renderScene();
+        }
       } else if (selectedWord) {
         placeLegacyWord(selectedWord, zone.dataset.target);
       }
@@ -291,7 +359,12 @@ function renderScene() {
       zone.classList.remove('is-over');
       if (locked) return;
       const word = event.dataTransfer.getData('text/plain');
-      if (isSentence) placeSentenceChunk(word, Number(zone.dataset.slot));
+      if (isSentence) {
+        if (placeSentenceChunk(word, Number(zone.dataset.slot))) {
+          selectedChoiceId = null;
+          renderScene();
+        }
+      }
       else placeLegacyWord(word, zone.dataset.target);
     });
   });
@@ -303,11 +376,12 @@ function renderScene() {
       if (isSentence) {
         const choice = optionOrder.find((option) => option.id === card.dataset.choiceId);
         if (!choice?.isAnswer) {
-          setFeedback('再聽一次，揀句子入面嘅詞組。', 'retry');
+          setFeedback('呢張係干擾詞，先揀句子入面嘅詞組。', 'retry');
           return;
         }
-        setSentencePlacements(placeNextChunk(placementArray(chunks.length), choice.id, answerIds));
+        selectedChoiceId = selectedChoiceId === choice.id ? null : choice.id;
         renderScene();
+        if (selectedChoiceId) setFeedback(`已選「${choice.text}」，再撳左頁或右頁嘅空格。`);
         return;
       }
       const target = scene.targets.find((item) => item.word === word && !placements[item.word]);
@@ -322,6 +396,13 @@ function renderScene() {
     card.addEventListener('dragstart', (event) => event.dataTransfer.setData('text/plain', isSentence ? card.dataset.choiceId : card.dataset.word));
   });
 
+  $('#word-bank').querySelectorAll('.lane-listen').forEach((button) => {
+    button.addEventListener('click', () => {
+      const lane = sentenceLanes(scene).find((item) => item.id === button.dataset.laneListen);
+      if (lane) speak(laneText(scene, lane));
+    });
+  });
+
   if (gentle && completeSlots && !locked) {
     // 砌齊後喺下一 tick 自動完成，等今次 render 事件綁定先完成
     queueMicrotask(() => maybeAutoCompleteGentle());
@@ -334,10 +415,16 @@ function placeSentenceChunk(word, slotIndex) {
   if (locked) return;
   if (!answerIds.includes(word)) {
     setFeedback('再聽一次，揀句子入面嘅詞組。', 'retry');
-    return;
+    return false;
+  }
+  const choiceIndex = Number(String(word).replace('answer-', ''));
+  const lane = sentenceLanes(scene).find((item) => item.indexes.includes(slotIndex));
+  if (!lane || !lane.indexes.includes(choiceIndex)) {
+    setFeedback('呢個詞組屬於另一頁，放返原本嗰邊。', 'retry');
+    return false;
   }
   setSentencePlacements(placeChunkAt(placementArray(answerIds.length), word, slotIndex, answerIds));
-  renderScene();
+  return true;
 }
 
 function placeLegacyWord(word, target) {
@@ -506,6 +593,7 @@ function advanceScene(isLastQuestion = sceneIndex >= book.scenes.length - 1) {
   if (!isLastQuestion) {
     sceneIndex += 1;
     placements = {};
+    selectedChoiceId = null;
     selectedWord = null;
     locked = false;
     phase = book.mode === 'sentence' ? sentenceStartPhase() : 'play';
@@ -545,6 +633,7 @@ $('#scene-replay').addEventListener('click', () => {
   earnedByScene = {};
   completedScenes = new Set();
   placements = {};
+  selectedChoiceId = null;
   selectedWord = null;
   locked = false;
   phase = book.mode === 'sentence' ? sentenceStartPhase() : 'play';

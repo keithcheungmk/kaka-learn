@@ -34,11 +34,16 @@
       <h2 id="scene-prompt">聽句子，將詞組按次序放好。</h2>
       <p class="scene-help" id="scene-help">先看一看、聽一聽，認識本版句子。</p>
 
-      <div class="scene-activity">
-        <div class="scene-board" id="scene-board"></div>
+      <div class="scene-activity" id="scene-activity">
+        <div class="scene-book-column">
+          <div class="scene-book-toolbar" id="scene-book-toolbar">
+            <button class="scene-listen" id="scene-listen" type="button">🔊 聽本版句子</button>
+            <span>可隨時重聽；原書文字會完整保留。</span>
+          </div>
+          <div class="scene-board" id="scene-board"></div>
+        </div>
         <div class="scene-task-panel">
           <div class="scene-study" id="scene-study" hidden><p id="scene-study-sentence"></p></div>
-          <button class="scene-listen" id="scene-listen" type="button">🔊 聽本版句子</button>
           <button class="scene-start-quiz" id="scene-start-quiz" type="button" hidden>學好咗・開始砌本版句子</button>
           <button class="scene-review" id="scene-review" type="button" hidden>再學一學</button>
           <p class="scene-preview-note" id="scene-preview-note" hidden>此書可以先看掃描頁；原句、詞組及干擾項核實後，才會開放正式測驗。</p>
