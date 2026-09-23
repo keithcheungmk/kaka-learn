@@ -1708,17 +1708,15 @@ function refreshStarUI() {
  * 十格星星條：每答啱一題亮一粒，滿 10 粒 = 1 枚 AEON 幣。
  *
  * 點解係「格仔」而唔係百分比橫條：KAKA 未讀得明比例，但數得到星星。
- * 條 bar 會自動插入每個 `.star-panel`（主頁、揀主題…）同每個 `.game-header`
- * （聽一聽／配一配／砌一砌），咁樣攞星星嗰刻就即刻見到條 bar 亮多一粒。
+ * 條 bar 會自動插入每個 `.star-panel`（主頁、揀主題…）同每個 `.game-header`，
+ * 咁樣攞星星嗰刻就即刻見到條 bar 亮多一粒。
  * 用 JS 插入而唔係喺 index.html 寫十幾次，係為咗將來加新畫面唔使記住補返。
  */
-const MODE_LABEL = { listen: '聽一聽', match: '配一配', build: '砌一砌' };
-
 /**
  * 獎勵顯示（2026-08 新規則）。同一條 `.star-bar` 兩個樣：
  *
  * - **遊戲畫面**：今輪進度（8 或 10 格）→ 一個幣。一條進度、一個目標。
- * - **其他畫面**：今日三個幣位（聽／配／砌），下面寫住下一個嘅進度。
+ * - **其他畫面**：今日三個獎勵幣位，下面寫住下一個嘅進度。
  *
  * 點解分開：4 歲玩緊嗰陣只需要知「仲差幾題就有幣」；喺主頁先需要知
  * 「今日仲有幾多個幣未攞」。溝埋一齊就係之前嗰個「今日 1/10 + 可換 3 枚」
@@ -1851,11 +1849,11 @@ function renderCoinBar(bar, coins) {
   bar.innerHTML =
     COIN_MODES.map(
       (m) =>
-        `<span class="coin-slot${coins[m] ? ' is-earned' : ''}">` +
+        `<span class="coin-slot${coins[m] ? ' is-earned' : ''}" aria-label="${coins[m] ? '已取得' : '未取得'}獎勵幣">` +
         `<span class="coin-face" aria-hidden="true">$</span>` +
-        `<span class="coin-slot-label">${MODE_LABEL[m]}</span></span>`,
+        `</span>`,
     ).join('') + `<span class="star-bar-hint">${next}</span>`;
-  bar.setAttribute('aria-label', `今日賺咗 ${got} 個 AEON 幣（每種玩法一個）`);
+  bar.setAttribute('aria-label', `今日賺咗 ${got} 個 AEON 獎勵幣`);
 }
 
 /** 下一個幣嘅進度：揀第一個未賺幣、而且有未完成進度嘅玩法 */
@@ -1866,7 +1864,7 @@ function nextRoundHint(coins) {
     const saved = loadRoundProgress(`${m}|${activeTopicId || ''}|${activeBook ? activeBook.id : ''}`);
     if (saved.length) {
       const cap = m === 'build' ? BUILD_CAP : LISTEN_MATCH_CAP;
-      return `下一個：${MODE_LABEL[m]} ${saved.length}/${cap}`;
+      return `下一個獎勵進度 ${saved.length}/${cap}`;
     }
   }
   return `今日仲可以賺 ${pending.length} 個幣`;

@@ -113,6 +113,7 @@ assert.match(appSource, /cancelAllSpeech/, '切題前清除延遲及進行中的
 assert.match(appSource, /startPhonicsConnectMode/, 'Sight Words 可進入獨立圖詞配對模式');
 assert.match(appSource, /attemptPhonicsConnectPair/, '圖詞配對會在選取圖片及英文後判斷');
 assert.match(appSource, /drawPhonicsConnectLines/, '配對成功會繪畫連線');
+assert.doesNotMatch(appSource, /MODE_LABEL|coin-slot-label/, '全站獎勵條不再顯示聽／配／砌玩法標籤');
 assert.doesNotMatch(appSource, /淡音素/, '字格提示使用清楚的「提示字形」描述');
 
 console.log('phonics blend flow tests');

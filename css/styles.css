@@ -2760,18 +2760,6 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
-.coin-slot-label {
-  font-size: clamp(11px, 1.5vw, 13px);
-  color: #e8eef7;
-  line-height: 1;
-  font-weight: 700;
-}
-
-.coin-slot.is-earned .coin-slot-label {
-  color: #fbbf24;
-  font-weight: 800;
-}
-
 /* 飛去進度條嗰粒星（KAKA RANGER 人物設定圖嗰粒金星） */
 .fly-star {
   position: fixed;

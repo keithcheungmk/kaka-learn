@@ -211,8 +211,8 @@
   isolation: isolate;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(12px, 3vw, 32px);
-  width: min(100%, 1040px);
+  gap: clamp(28px, 6vw, 76px);
+  width: min(100%, 1120px);
   height: clamp(340px, 66vh, 600px);
   margin: 0 auto;
 }
@@ -230,9 +230,9 @@
 .connect-line {
   fill: none;
   stroke: rgba(124, 255, 178, 0.95);
-  stroke-width: 5;
+  stroke-width: 7;
   stroke-linecap: round;
-  filter: drop-shadow(0 0 5px rgba(124, 255, 178, 0.6));
+  filter: drop-shadow(0 0 6px rgba(124, 255, 178, 0.72));
 }
 
 .connect-column {
@@ -255,7 +255,8 @@
 .connect-card-list {
   display: grid;
   grid-template-rows: repeat(5, minmax(0, 1fr));
-  gap: clamp(7px, 1.2vh, 12px);
+  gap: clamp(12px, 2vh, 18px);
+  padding-inline: clamp(2px, 0.7vw, 10px);
   flex: 1;
   min-height: 0;
 }
@@ -331,11 +332,27 @@
 }
 
 .connect-picture-main:hover,
-.connect-word-card:hover,
-.connect-picture-main.is-selected,
-.connect-word-card.is-selected {
+.connect-word-card:hover {
   border-color: var(--gold-soft);
   background: rgba(251, 191, 36, 0.16);
+}
+
+/* 第一個揀到嘅配對要即刻睇得出，方便小朋友記住下一步要揀邊張。 */
+.connect-picture-main.is-selected,
+.connect-word-card.is-selected {
+  position: relative;
+  z-index: 2;
+  border-color: #fde68a;
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(86, 62, 157, 0.94));
+  box-shadow:
+    0 0 0 4px rgba(251, 191, 36, 0.25),
+    0 0 24px rgba(251, 191, 36, 0.32),
+    var(--shadow);
+  transform: translateY(-2px) scale(1.015);
+}
+
+.connect-picture-main.is-selected .emoji-plate {
+  transform: scale(1.08);
 }
 
 .connect-picture-main.is-matched,
