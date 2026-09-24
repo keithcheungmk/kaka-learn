@@ -43,6 +43,7 @@ assert.ok(demoSource.includes('CANTONESE_LANG') && demoSource.includes('未找�
 assert.ok(demoSource.includes('u.voice=voice') && !demoSource.includes("u.lang='zh-CN'"));
 assert.ok(demoSource.includes('data-word-audio') && demoSource.includes('playWord(b.dataset.word,wordAudioClips[b.dataset.wordAudio])'));
 assert.ok(demoSource.includes('wordAudioClips') && demoSource.includes('sharedAudio.currentTime=start'));
+assert.ok(demoSource.includes('function normalizeAudioClip') && demoSource.includes('playAudio(audioClip.src,audioClip.start,audioClip.end)'), '詞語音檔物件必須拆出 src/start/end 播放');
 for (const id of ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w']) {
   assert.ok(fs.existsSync(path.join(root, `assets/pth/words/${id}.aac`)), `missing Mandarin word clip: ${id}`);
 }
