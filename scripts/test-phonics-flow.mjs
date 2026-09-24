@@ -45,7 +45,7 @@ for (const topicId of ['sight_food', 'sight_veg', 'sight_places', 'sight_vehicle
   }
 }
 
-const correctedVocabularyTopics = ['sight_food', 'sight_veg', 'sight_household', 'sight_feelings', 'sight_weather'];
+const correctedVocabularyTopics = ['sight_food', 'sight_veg', 'sight_household', 'sight_feelings', 'sight_weather', 'sight_toys'];
 for (const topicId of correctedVocabularyTopics) {
   const vocabularyTopic = context.window.KakaPhonicsWords.getPhonicsTopicById(topicId);
   assert.equal(

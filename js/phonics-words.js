@@ -290,7 +290,7 @@ const PHONICS_TOPICS = [
     id: 'sight_toys', title: '玩具', titleEn: 'Toys', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 種玩具', cover: '🧸', plate: '#2a1840',
     words: [
       ['ball', '⚽'], ['doll', '🪆'], ['teddy', '🧸'], ['puzzle', '🧩'], ['toy', '🪀'], ['balloon', '🎈'],
-      ['dice', '🎲'], ['target', '🎯'], ['slide', '🛝'], ['carousel', '🎠'], ['maracas', '🪇'], ['game', '🎲'],
+      ['dice', '🎲'], ['target', '🎯'], ['slide', '🛝'], ['carousel', '🎠'], ['maracas', '🪇'], ['game', '🏆'],
     ],
   }),
   sightWordTopic({
