@@ -45,6 +45,23 @@ for (const topicId of ['sight_food', 'sight_veg', 'sight_places', 'sight_vehicle
   }
 }
 
+const correctedVocabularyTopics = ['sight_food', 'sight_veg', 'sight_household', 'sight_feelings', 'sight_weather'];
+for (const topicId of correctedVocabularyTopics) {
+  const vocabularyTopic = context.window.KakaPhonicsWords.getPhonicsTopicById(topicId);
+  assert.equal(
+    new Set(vocabularyTopic.words.map((item) => item.emoji)).size,
+    vocabularyTopic.words.length,
+    `${topicId} 每個詞都有獨立圖像`,
+  );
+}
+
+const familyTopic = context.window.KakaPhonicsWords.getPhonicsTopicById('sight_family_people');
+assert.equal(
+  JSON.stringify(familyTopic.words.slice(0, 7).map((item) => item.word)),
+  JSON.stringify(['father', 'mother', 'brother', 'sister', 'baby', 'grandfather', 'grandmother']),
+  'Family & People 使用正式家庭稱謂',
+);
+
 const newSightTopicIds = ['sight_colors', 'sight_numbers', 'sight_shapes', 'sight_toys', 'sight_actions'];
 for (const topicId of newSightTopicIds) {
   const vocabularyTopic = context.window.KakaPhonicsWords.getPhonicsTopicById(topicId);

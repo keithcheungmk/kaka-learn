@@ -188,13 +188,13 @@ const PHONICS_TOPICS = [
   {
     id: 'sight_food', title: '食物', titleEn: 'Food', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種食物', cover: '🍎', section: 'sight', flow: 'blend', modes: ['build', 'connect'],
     words: [
-      ['rice', '🍚', ['r', 'ice']], ['bread', '🍞'], ['milk', '🥛'], ['egg', '🥚'], ['apple', '🍎'], ['banana', '🍌'], ['cake', '🍎'], ['fish', '🐟'], ['chicken', '🍗'], ['juice', '🧃'],
+      ['rice', '🍚', ['r', 'ice']], ['bread', '🍞'], ['milk', '🥛'], ['egg', '🥚'], ['apple', '🍎'], ['banana', '🍌'], ['cake', '🎂'], ['fish', '🐟'], ['chicken', '🍗'], ['juice', '🧃'],
     ].map(([word, emoji, soundChunks], i) => ({ id: `sight_food_${i}`, word, letters: Array.from(word), soundChunks, emoji, plate: '#3a2818' })),
   },
   {
     id: 'sight_veg', title: '蔬菜', titleEn: 'Vegetables', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 種蔬菜', cover: '🥕', section: 'sight', flow: 'blend', modes: ['build', 'connect'],
     words: [
-      ['carrot', '🥕'], ['corn', '🌽'], ['tomato', '🍅'], ['potato', '🥔'], ['peas', '🌽'], ['beans', '🌽'], ['cabbage', '🥬'], ['onion', '🧅'], ['mushroom', '🍄'], ['cucumber', '🥒'],
+      ['carrot', '🥕'], ['corn', '🌽'], ['tomato', '🍅'], ['potato', '🥔'], ['peas', '🫛'], ['beans', '🌱'], ['cabbage', '🥬'], ['onion', '🧅'], ['mushroom', '🍄'], ['cucumber', '🥒'],
     ].map(([word, emoji, soundChunks], i) => ({ id: `sight_veg_${i}`, word, letters: Array.from(word), soundChunks, emoji, plate: '#143828' })),
   },
   {
@@ -218,7 +218,7 @@ const PHONICS_TOPICS = [
   {
     id: 'sight_household', title: '家居用品', titleEn: 'Household Items', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 件家居用品', cover: '🛋️', section: 'sight', flow: 'blend', modes: ['build', 'connect'],
     words: [
-      ['bed', '🛏️'], ['sofa', '🛋️'], ['table', '🪑'], ['chair', '🪑'], ['lamp', '💡'], ['clock', '🕰️'], ['cup', '☕'], ['plate', '🍽️'], ['spoon', '🥄'], ['towel', '🧺'],
+      ['bed', '🛏️'], ['sofa', '🛋️'], ['table', '🍽️'], ['chair', '🪑'], ['lamp', '💡'], ['clock', '🕰️'], ['cup', '☕'], ['plate', '🥣'], ['spoon', '🥄'], ['towel', '🧺'],
     ].map(([word, emoji], i) => ({ id: `sight_household_${i}`, word, letters: Array.from(word), emoji, plate: '#1a3050' })),
   },
   {
@@ -240,8 +240,8 @@ const PHONICS_TOPICS = [
   sightWordTopic({
     id: 'sight_feelings', title: '情緒與感受', titleEn: 'Feelings', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 個感受詞語', cover: '😊', plate: '#402030',
     words: [
-      ['happy', '😊'], ['sad', '😢'], ['angry', '😠'], ['scared', '😨'], ['excited', '😊'], ['shy', '🙂'],
-      ['tired', '😴'], ['hungry', '😋'], ['thirsty', '🥤'], ['hot', '🥵'], ['cold', '🥶'], ['hurt', '😢'],
+      ['happy', '😊'], ['sad', '😢'], ['angry', '😠'], ['scared', '😨'], ['excited', '🎉'], ['shy', '🙂'],
+      ['tired', '😴'], ['hungry', '😋'], ['thirsty', '🥤'], ['hot', '🥵'], ['cold', '🥶'], ['hurt', '😣'],
     ],
   }),
   sightWordTopic({
@@ -254,15 +254,15 @@ const PHONICS_TOPICS = [
   sightWordTopic({
     id: 'sight_family_people', title: '家庭與身邊的人', titleEn: 'Family & People', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 個人物詞語', cover: '👨‍👩‍👧‍👦', plate: '#1a3050',
     words: [
-      ['dad', '👨'], ['mum', '👩'], ['brother', '👦'], ['sister', '👧'], ['baby', '👶'], ['grandpa', '👴'],
-      ['grandma', '👵'], ['friend', '🧑‍🤝‍🧑'], ['teacher', '🧑‍🏫'], ['doctor', '🧑‍⚕️'], ['police', '👮'], ['driver', '🧑‍✈️'],
+      ['father', '👨'], ['mother', '👩'], ['brother', '👦'], ['sister', '👧'], ['baby', '👶'], ['grandfather', '👴'],
+      ['grandmother', '👵'], ['friend', '🧑‍🤝‍🧑'], ['teacher', '🧑‍🏫'], ['doctor', '🧑‍⚕️'], ['police', '👮'], ['driver', '🧑‍✈️'],
     ],
   }),
   sightWordTopic({
     id: 'sight_weather', title: '天氣', titleEn: 'Weather', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 個天氣詞語', cover: '🌈', plate: '#0f3550',
     words: [
-      ['sunny', '☀️'], ['cloudy', '☁️'], ['rainy', '🌧️'], ['windy', '💨'], ['stormy', '🌧️'], ['hot', '🥵'],
-      ['cold', '🥶'], ['snowy', '❄️'], ['rain', '🌧️'], ['snow', '❄️'], ['rainbow', '🌈'], ['umbrella', '☂️'],
+      ['sunny', '☀️'], ['cloudy', '☁️'], ['rainy', '🌧️'], ['windy', '💨'], ['stormy', '⚡'], ['hot', '🥵'],
+      ['cold', '🥶'], ['snowy', '❄️'], ['rain', '🌂'], ['snow', '🧊'], ['rainbow', '🌈'], ['umbrella', '☂️'],
     ],
   }),
   sightWordTopic({
@@ -289,7 +289,7 @@ const PHONICS_TOPICS = [
   sightWordTopic({
     id: 'sight_toys', title: '玩具', titleEn: 'Toys', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 種玩具', cover: '🧸', plate: '#2a1840',
     words: [
-      ['ball', '⚽'], ['doll', '🪆'], ['teddy', '🧸'], ['puzzle', '🧩'], ['toy', '🧸'], ['balloon', '🎈'],
+      ['ball', '⚽'], ['doll', '🪆'], ['teddy', '🧸'], ['puzzle', '🧩'], ['toy', '🪀'], ['balloon', '🎈'],
       ['dice', '🎲'], ['target', '🎯'], ['slide', '🛝'], ['carousel', '🎠'], ['maracas', '🪇'], ['game', '🎲'],
     ],
   }),
