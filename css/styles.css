@@ -424,6 +424,7 @@ div.star-panel {
   font-size: clamp(1.5rem, 5vw, 2rem);
   right: 4px;
   top: 4px;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
 }
 
 .word-photo {
@@ -2993,6 +2994,9 @@ body {
   top: 50%;
   width: clamp(26px, 3.4vw, 36px);
   height: clamp(26px, 3.4vw, 36px);
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  font-size: clamp(26px, 3.4vw, 36px);
+  line-height: 1;
   transform: translate(-50%, -50%);
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
   pointer-events: none;

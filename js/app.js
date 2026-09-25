@@ -12,7 +12,8 @@
     return;
   }
 
-const cover = (e) => (window.KakaEmojiArt ? window.KakaEmojiArt.html(e) : e);
+// 中文主題／書本封面用裝置原生 Emoji；英文 Phonics 的 OpenMoji helper 保留原狀。
+const cover = (e) => (e == null ? '' : String(e));
 const { WORDS, DEER_IDS, TOPICS, wordIllustHtml, getTopicById, wordsForTopic, oppositePairWords, getOppositeWord, getWordById } = window.KakaWords;
 const {
   COIN_MODES,
@@ -1776,7 +1777,7 @@ function renderRoundBar(bar, mode, coins) {
     // 刻意細、企邊位、答緊題唔郁 —— 呢個係認字 app，怪獸唔可以搶走漢字嘅注意力。
     chip.innerHTML =
       '<span class="coin-face" aria-hidden="true">$</span>' +
-      '<img class="coin-monster" src="./assets/openmoji/1F47E.svg" alt="" aria-hidden="true" decoding="async" />';
+      '<span class="coin-monster" aria-hidden="true">👾</span>';
     bar.appendChild(chip);
     const hint = document.createElement('span');
     hint.className = 'star-bar-hint';

@@ -98,6 +98,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-09-26 · ChatGPT／Codex（中文限定裝置原生 Emoji）
+
+- 中文認字嘅生字卡、emoji badge、主題封面及遊戲進度怪獸改用裝置原生 Emoji；iPhone／iPad 會顯示 Apple Color Emoji。
+- 保留 `js/emoji-art.js`、OpenMoji 資產及英文 Phonics 原有插圖流程，數理及普通話不受影響。
+- 本機 Chrome 驗證中文卡不再輸出 `.emoji-img`，英文食物卡仍輸出 OpenMoji；console 無 error。完整 `check-invariants` 受既有數理「數字關係」blocker 阻擋，與此改動無關。
+- **踩咗** `js/words.js`、`js/app.js`、`css/styles.css`、`docs/handover.md`
+
 ### 2026-09-23 · ChatGPT／Codex（Sight Words 圖詞連線遊戲）
 
 - 英文 Sight Words 新增獨立 `Connect & Match・連一連・圖詞配對`：一版顯示 5 張圖片及 5 個打亂英文詞，撳圖片再撳英文配對；每張圖片有獨立 speaker 按鈕。
