@@ -1405,6 +1405,8 @@
       chars,
       filled: chars.map(() => null),
       tiles,
+      isComplete: false,
+      autoPlacedIndex: -1,
     };
 
     const fb = $('#phonics-build-feedback');
@@ -1445,13 +1447,22 @@
     box.classList.toggle('has-long-word', pBuildRound.chars.length > 8);
     pBuildRound.chars.forEach((ch, i) => {
       const filled = pBuildRound.filled[i];
+      const blendGroup = pBuildRound.isComplete
+        ? pBuildRound.target.blendGroups?.find((group) => i >= group.start && i < group.end)
+        : null;
       const slot = document.createElement('button');
       slot.type = 'button';
       slot.className = 'build-slot';
       if (filled) slot.classList.add('is-filled');
       if (i === next) slot.classList.add('is-next');
+      if (blendGroup) {
+        slot.classList.add('is-chunk');
+        slot.style.setProperty('--blend-group-color', blendGroup.color);
+        slot.setAttribute('aria-label', `${blendGroup.label} 詞塊的第 ${i - blendGroup.start + 1} 個字母 ${filled?.char || ch}`);
+      }
+      if (i === pBuildRound.autoPlacedIndex) slot.classList.add('is-auto-placed');
       slot.dataset.index = String(i);
-      slot.setAttribute('aria-label', filled ? `已放 ${filled.char}` : `第 ${i + 1} 格，提示字形 ${ch}`);
+      if (!blendGroup) slot.setAttribute('aria-label', filled ? `已放 ${filled.char}` : `第 ${i + 1} 格，提示字形 ${ch}`);
       slot.innerHTML = `
         <span class="build-ghost term-en" aria-hidden="true">${ch}</span>
         ${filled ? `<span class="build-placed letter-tile" aria-hidden="true">${letterTileHtml(filled.char)}</span>` : ''}`;
@@ -1464,6 +1475,19 @@
         box.appendChild(divider);
       }
     });
+    renderPhonicsBuildChunks();
+  }
+
+  function renderPhonicsBuildChunks(activeGroupIndex = -1) {
+    const box = $('#phonics-build-chunks');
+    if (!box || !pBuildRound) return;
+    const groups = pBuildRound.target.blendGroups || [];
+    const showGroups = pBuildRound.isComplete && groups.length > 0;
+    box.hidden = !showGroups;
+    box.innerHTML = showGroups
+      ? groups.map((group, index) => `
+        <span class="build-chunk-pill${index === activeGroupIndex ? ' is-active' : ''}" style="--blend-group-color:${group.color}">${group.label}</span>`).join('')
+      : '';
   }
 
   function renderPhonicsBuildPool() {
@@ -1504,11 +1528,18 @@
     if (pBusy || !pBuildRound) return;
     const used = pBuildRound.filled.some((f) => f && f.key === key);
     if (used) return;
-    pBuildSelectedKey = pBuildSelectedKey === key ? null : key;
+    if (pBuildSelectedKey === key) {
+      const next = nextPhonicsBuildIndex();
+      if (next >= 0) tryPlacePhonicsBuildChar(key, next, { autoPlace: true });
+      return;
+    }
+    pBuildSelectedKey = key;
     renderPhonicsBuildPool();
+    const tile = pBuildRound.tiles.find((item) => item.key === key);
+    if (tile) playLetterSound(tile.char, { muted: isMuted() });
     const fb = $('#phonics-build-feedback');
-    if (fb && pBuildSelectedKey) {
-      fb.textContent = '而家撳左邊發光嘅格';
+    if (fb) {
+      fb.textContent = '再撳同一粒字母，會自動彈入發光格。';
       fb.className = 'feedback';
     }
   }
@@ -1535,7 +1566,7 @@
     tryPlacePhonicsBuildChar(pBuildSelectedKey, index);
   }
 
-  function tryPlacePhonicsBuildChar(tileKey, slotIndex) {
+  function tryPlacePhonicsBuildChar(tileKey, slotIndex, { autoPlace = false } = {}) {
     if (pBusy || !pBuildRound) return false;
     if (pBuildPromptTimer) clearTimeout(pBuildPromptTimer);
     pBuildPromptTimer = null;
@@ -1578,8 +1609,18 @@
 
     pBuildRound.filled[slotIndex] = { key: tile.key, char: tile.char };
     pBuildSelectedKey = null;
+    pBuildRound.autoPlacedIndex = autoPlace ? slotIndex : -1;
+    if (pBuildRound.filled.every(Boolean)) pBuildRound.isComplete = true;
     renderPhonicsBuildSlots();
     renderPhonicsBuildPool();
+    if (autoPlace) {
+      const placedRound = pBuildRound;
+      setTimeout(() => {
+        if (pBuildRound !== placedRound || pBuildRound.autoPlacedIndex !== slotIndex) return;
+        pBuildRound.autoPlacedIndex = -1;
+        renderPhonicsBuildSlots();
+      }, 420);
+    }
 
     // Tap and drag both arrive here, so every correctly placed grapheme gets
     // the same reviewed Mama phoneme recording.
@@ -1621,16 +1662,36 @@
     await placedSound;
     if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
     await waitMs(180);
-    const blendSounds = completedRound.target.soundChunks || completedRound.chars;
-    for (let index = 0; index < blendSounds.length; index += 1) {
-      if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
-      const slot = blendSounds === completedRound.chars
-        ? $(`#phonics-build-slots .build-slot[data-index="${index}"]`)
-        : null;
-      slot?.classList.add('is-blending');
-      await playPhonicsChunk(blendSounds[index], { muted: isMuted() });
-      slot?.classList.remove('is-blending');
-      await waitMs(70);
+    const blendGroups = completedRound.target.blendGroups || [];
+    if (blendGroups.length) {
+      for (let groupIndex = 0; groupIndex < blendGroups.length; groupIndex += 1) {
+        if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
+        const group = blendGroups[groupIndex];
+        const slots = Array.from({ length: group.end - group.start }, (_, offset) => (
+          $(`#phonics-build-slots .build-slot[data-index="${group.start + offset}"]`)
+        ));
+        slots.forEach((slot) => slot?.classList.add('is-blending'));
+        renderPhonicsBuildChunks(groupIndex);
+        for (const sound of group.sounds) {
+          if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
+          await playPhonicsChunk(sound, { muted: isMuted() });
+          await waitMs(70);
+        }
+        slots.forEach((slot) => slot?.classList.remove('is-blending'));
+      }
+      renderPhonicsBuildChunks();
+    } else {
+      const blendSounds = completedRound.target.soundChunks || completedRound.chars;
+      for (let index = 0; index < blendSounds.length; index += 1) {
+        if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
+        const slot = blendSounds === completedRound.chars
+          ? $(`#phonics-build-slots .build-slot[data-index="${index}"]`)
+          : null;
+        slot?.classList.add('is-blending');
+        await playPhonicsChunk(blendSounds[index], { muted: isMuted() });
+        slot?.classList.remove('is-blending');
+        await waitMs(70);
+      }
     }
     if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
     await speakEnglishAndWait(word, { muted: isMuted(), rate: 0.78, pitch: 1.05, delayMs: 0 });

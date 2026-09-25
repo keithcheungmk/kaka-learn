@@ -823,6 +823,58 @@
   box-shadow: 0 0 0 6px rgba(251, 191, 36, 0.2), 0 0 30px rgba(251, 191, 36, 0.58);
 }
 
+/* 詞塊完成後保留每組的邊界和色彩；色彩之外亦會在下方顯示詞塊文字。 */
+.build-slot.is-chunk {
+  border-color: var(--blend-group-color);
+  background: color-mix(in srgb, var(--blend-group-color) 14%, rgba(15, 39, 72, 0.78));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--blend-group-color) 18%, transparent);
+}
+
+.build-slot.is-chunk .letter-tile .sound-energy-glyph {
+  border-color: var(--blend-group-color);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--blend-group-color) 38%, #173c55), #0c2639);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--blend-group-color) 17%, transparent), 0 0 18px color-mix(in srgb, var(--blend-group-color) 28%, transparent);
+}
+
+.build-slot.is-auto-placed {
+  animation: buildSlotArrive 0.36s ease-out;
+}
+
+.build-chunk-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: -2px auto 14px;
+  max-width: 620px;
+}
+
+.build-chunk-pill {
+  min-width: 72px;
+  padding: 7px 14px;
+  border: 2px solid var(--blend-group-color);
+  border-radius: 999px;
+  color: var(--blend-group-color);
+  background: rgba(8, 24, 47, 0.82);
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 3.4vw, 1.2rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.build-chunk-pill.is-active {
+  transform: translateY(-3px) scale(1.06);
+  background: color-mix(in srgb, var(--blend-group-color) 28%, #0c2639);
+  box-shadow: 0 0 22px color-mix(in srgb, var(--blend-group-color) 46%, transparent);
+}
+
+@keyframes buildSlotArrive {
+  0% { transform: scale(0.76); opacity: 0.45; }
+  70% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
 /* 「先學一學」畫面：拆返出嚟嘅字母排(純展示,幫手建立「音拼埋成詞」概念) */
 .letter-row {
   position: relative;

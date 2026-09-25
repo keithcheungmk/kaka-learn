@@ -57,10 +57,26 @@ for (const topicId of correctedVocabularyTopics) {
 
 const familyTopic = context.window.KakaPhonicsWords.getPhonicsTopicById('sight_family_people');
 assert.equal(
-  JSON.stringify(familyTopic.words.slice(0, 7).map((item) => item.word)),
-  JSON.stringify(['father', 'mother', 'brother', 'sister', 'baby', 'grandfather', 'grandmother']),
-  'Family & People 使用正式家庭稱謂',
+  JSON.stringify(familyTopic.words.map((item) => item.word)),
+  JSON.stringify(['father', 'mother', 'brother', 'sister', 'baby', 'grandfather', 'grandmother', 'aunt', 'uncle', 'friend', 'teacher', 'classmate']),
+  'Family & People 只保留家庭、朋友及學校身邊的人',
 );
+assert.equal(familyTopic.flow, 'blend', 'Family & People 使用融合拼字流程');
+assert.deepEqual([...familyTopic.modes], ['build', 'connect'], 'Family & People 提供拼字及圖詞配對任務');
+assert.equal(new Set(familyTopic.words.map((item) => item.emoji)).size, familyTopic.words.length, 'Family & People 每個詞有獨立圖像');
+assert.equal(familyTopic.words.some((item) => ['police', 'doctor', 'driver'].includes(item.word)), false, '職業詞不放在家庭與身邊的人');
+for (const item of familyTopic.words) {
+  assert.equal(item.letters.join(''), item.word, `${item.word} 可以逐格拼回完整字`);
+  for (const phoneme of item.letters) {
+    assert.ok(fs.existsSync(path.join(repo, 'assets/phonemes', `${phoneme}.mp3`)), `${item.word} 使用已存在的 ${phoneme} 音檔`);
+  }
+}
+const father = familyTopic.words.find((item) => item.word === 'father');
+assert.deepEqual([...father.soundChunks], ['f', 'a', 'th', 'er'], 'father 先按 f、a、th、er 的音素順序讀');
+assert.equal(JSON.stringify(father.blendGroups), JSON.stringify([
+  { label: 'fa', start: 0, end: 2, sounds: ['f', 'a'], color: '#5eead4' },
+  { label: 'ther', start: 2, end: 6, sounds: ['th', 'er'], color: '#fbbf24' },
+]), 'father 完成後以 fa 和 ther 兩個視覺詞塊呈現');
 
 const newSightTopicIds = ['sight_colors', 'sight_numbers', 'sight_shapes', 'sight_toys', 'sight_actions'];
 for (const topicId of newSightTopicIds) {
@@ -120,6 +136,11 @@ assert.match(appSource, /await playPhonicsChunk\(sound/, '學習卡用乾淨音�
 assert.match(appSource, /const blendSounds = completedRound\.target\.soundChunks \|\| completedRound\.chars/, '拼字完成按音塊連讀，再讀完整單字');
 assert.match(appSource, /blendSounds\[index\]/, '完成後依次連讀音塊或 phoneme');
 assert.match(appSource, /await playPhonicsChunk\(blendSounds\[index\]/, '完成後用乾淨音素或 rime 連讀');
+assert.match(appSource, /target\.blendGroups/, '拼字資料可定義可重用的視覺詞塊');
+assert.match(appSource, /renderPhonicsBuildChunks/, '完成後顯示詞塊文字和目前連讀位置');
+assert.match(appSource, /group\.sounds/, '詞塊保留底層 phoneme，而非把整個詞塊交給不可靠的 TTS');
+assert.match(appSource, /pBuildSelectedKey === key/, '再撳已揀字母會啟動自動放入');
+assert.match(appSource, /autoPlace: true/, 'iPad 重撳操作會自動彈入發光格');
 assert.match(appSource, /speakEnglishAndWait\(word/, '連音後播放完整英文單字');
 assert.match(appSource, /flyStarFromRanger/, '答對後由 KAKA Ranger 射星');
 assert.match(appSource, /saveRoundProgress/, '未完成回合保存進度');

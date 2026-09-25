@@ -61,7 +61,7 @@ const PHONICS_SOUND_MISSIONS = PHONICS_SOUND_SECTIONS.flatMap((section) => secti
 const LETTER_REVISION = PHONICS_SOUND_MISSIONS.flatMap((mission) => mission.sounds);
 
 /** 保留短語的顯示空格；拼字只取英文字母，並記下詞與詞之間的位置。 */
-function spellingItem(id, word, emoji, plate) {
+function spellingItem(id, word, emoji, plate, options = {}) {
   const terms = String(word).trim().split(/\s+/);
   let length = 0;
   const wordBreaks = [];
@@ -76,6 +76,7 @@ function spellingItem(id, word, emoji, plate) {
     wordBreaks,
     emoji,
     plate,
+    ...options,
   };
 }
 
@@ -90,7 +91,7 @@ function spellingTopic({ id, title, titleEn, blurb, cover, parentId = null, word
     parentId,
     flow: 'blend',
     modes: ['build', 'connect'],
-    words: words.map(([word, emoji, plate], index) => spellingItem(`${id}_${index}`, word, emoji, plate)),
+    words: words.map(([word, emoji, plate, options], index) => spellingItem(`${id}_${index}`, word, emoji, plate, options)),
   };
 }
 
@@ -251,11 +252,49 @@ const PHONICS_TOPICS = [
       ['hat', '🧢'], ['coat', '🧣'], ['jacket', '👕'], ['scarf', '🧣'], ['gloves', '🧤'], ['shorts', '👖'],
     ],
   }),
-  sightWordTopic({
-    id: 'sight_family_people', title: '家庭與身邊的人', titleEn: 'Family & People', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 個人物詞語', cover: '👨‍👩‍👧‍👦', plate: '#1a3050',
+  spellingTopic({
+    id: 'sight_family_people', title: '家庭與身邊的人', titleEn: 'Family & People', blurb: '睇圖 · 聽音 · 詞塊拼讀 · 12 個家庭及學校人物詞語', cover: '👨‍👩‍👧‍👦',
     words: [
-      ['father', '👨'], ['mother', '👩'], ['brother', '👦'], ['sister', '👧'], ['baby', '👶'], ['grandfather', '👴'],
-      ['grandmother', '👵'], ['friend', '🧑‍🤝‍🧑'], ['teacher', '🧑‍🏫'], ['doctor', '🧑‍⚕️'], ['police', '👮'], ['driver', '🧑‍✈️'],
+      ['father', '👨', '#1a3050', {
+        soundChunks: ['f', 'a', 'th', 'er'],
+        blendGroups: [
+          { label: 'fa', start: 0, end: 2, sounds: ['f', 'a'], color: '#5eead4' },
+          { label: 'ther', start: 2, end: 6, sounds: ['th', 'er'], color: '#fbbf24' },
+        ],
+      }],
+      ['mother', '👩', '#243a68', {
+        soundChunks: ['m', 'o', 'th', 'er'],
+        blendGroups: [
+          { label: 'mo', start: 0, end: 2, sounds: ['m', 'o'], color: '#5eead4' },
+          { label: 'ther', start: 2, end: 6, sounds: ['th', 'er'], color: '#fbbf24' },
+        ],
+      }],
+      ['brother', '👦', '#1f3d5d', {
+        soundChunks: ['b', 'r', 'o', 'th', 'er'],
+        blendGroups: [
+          { label: 'bro', start: 0, end: 3, sounds: ['b', 'r', 'o'], color: '#5eead4' },
+          { label: 'ther', start: 3, end: 7, sounds: ['th', 'er'], color: '#fbbf24' },
+        ],
+      }],
+      ['sister', '👧', '#65376e'], ['baby', '👶', '#2e4a77'],
+      ['grandfather', '👴', '#4d3d6b', {
+        soundChunks: ['g', 'r', 'a', 'n', 'd', 'f', 'a', 'th', 'er'],
+        blendGroups: [
+          { label: 'grand', start: 0, end: 5, sounds: ['g', 'r', 'a', 'n', 'd'], color: '#c4b5fd' },
+          { label: 'fa', start: 5, end: 7, sounds: ['f', 'a'], color: '#5eead4' },
+          { label: 'ther', start: 7, end: 11, sounds: ['th', 'er'], color: '#fbbf24' },
+        ],
+      }],
+      ['grandmother', '👵', '#61426d', {
+        soundChunks: ['g', 'r', 'a', 'n', 'd', 'm', 'o', 'th', 'er'],
+        blendGroups: [
+          { label: 'grand', start: 0, end: 5, sounds: ['g', 'r', 'a', 'n', 'd'], color: '#c4b5fd' },
+          { label: 'mo', start: 5, end: 7, sounds: ['m', 'o'], color: '#5eead4' },
+          { label: 'ther', start: 7, end: 11, sounds: ['th', 'er'], color: '#fbbf24' },
+        ],
+      }],
+      ['aunt', '👩‍🦰', '#733b65'], ['uncle', '👨‍🦱', '#32566c'], ['friend', '🧑‍🤝‍🧑', '#315877'],
+      ['teacher', '🧑‍🏫', '#3d4d78'], ['classmate', '🧑‍🎓', '#394b79'],
     ],
   }),
   sightWordTopic({
