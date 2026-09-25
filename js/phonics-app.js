@@ -919,7 +919,7 @@
     const back = $('#btn-back-phonics-build');
     const poolLabel = $('#screen-phonics-build .build-pool-wrap .section-label');
     if (title) title.textContent = isBlendFlow && topic ? `${topic.title}・拼字` : '砌一砌';
-    if (prompt) prompt.textContent = isBlendFlow ? '睇圖，逐個音砌出英文' : '拖字母入格';
+    if (prompt) prompt.textContent = isBlendFlow ? '揀字母，再撳同一粒自動入格；亦可以拖入發光格' : '拖字母入格';
     if (back) back.textContent = isBlendFlow ? '← 字卡' : '← 玩法';
     if (poolLabel) poolLabel.textContent = isBlendFlow ? '音素池' : '字母池';
     showPScreen('build');
