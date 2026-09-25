@@ -1,0 +1,393 @@
+{
+  "courseId": "pth-k2",
+  "description": "本地普通話聲母口形示範；原始 MP4 僅存於 source-materials，不直接部署。",
+  "entries": [
+    {
+      "id": "b",
+      "sourceFile": "source-materials/PTH/initials-video/b.mp4",
+      "textbookGroup": "bpmf",
+      "durationSec": 13.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/b.mp4",
+      "derivedAudio": "assets/pth/initials/audio/b.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 QR MP4／bpmf"
+    },
+    {
+      "id": "p",
+      "sourceFile": "source-materials/PTH/initials-video/p.mp4",
+      "textbookGroup": "bpmf",
+      "durationSec": 14.38,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/p.mp4",
+      "derivedAudio": "assets/pth/initials/audio/p.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 QR MP4／bpmf"
+    },
+    {
+      "id": "m",
+      "sourceFile": "source-materials/PTH/initials-video/m.mp4",
+      "textbookGroup": "bpmf",
+      "durationSec": 14.08,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/m.mp4",
+      "derivedAudio": "assets/pth/initials/audio/m.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 QR MP4／bpmf"
+    },
+    {
+      "id": "f",
+      "sourceFile": "source-materials/PTH/initials-video/f.mp4",
+      "textbookGroup": "bpmf",
+      "durationSec": 13.14,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/f.mp4",
+      "derivedAudio": "assets/pth/initials/audio/f.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 QR MP4／bpmf"
+    },
+    {
+      "id": "d",
+      "sourceFile": "source-materials/PTH/initials-video/d.mp4",
+      "textbookGroup": "dtnl",
+      "durationSec": 14.08,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/d.mp4",
+      "derivedAudio": "assets/pth/initials/audio/d.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.8（聲母二 d、t、n、l 組別頁；d 個別示範頁未見於掃描）",
+      "textbookStatus": "pending: individual d page not present in supplied scan"
+    },
+    {
+      "id": "t",
+      "sourceFile": "source-materials/PTH/initials-video/t.mp4",
+      "textbookGroup": "dtnl",
+      "durationSec": 13.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/t.mp4",
+      "derivedAudio": "assets/pth/initials/audio/t.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.8、p.10（聲母二 d、t、n、l；t 示範見 p.10）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "n",
+      "sourceFile": "source-materials/PTH/initials-video/n.mp4",
+      "textbookGroup": "dtnl",
+      "durationSec": 13.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/n.mp4",
+      "derivedAudio": "assets/pth/initials/audio/n.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.8、p.11（聲母二 d、t、n、l；n 示範見 p.11）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "l",
+      "sourceFile": "source-materials/PTH/initials-video/l.mp4",
+      "textbookGroup": "dtnl",
+      "durationSec": 12.4,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/l.mp4",
+      "derivedAudio": "assets/pth/initials/audio/l.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.8、p.9／p.12（聲母二 d、t、n、l；l 示範頁於掃描中重複）",
+      "textbookStatus": "verified-with-duplicate-scan"
+    },
+    {
+      "id": "g",
+      "sourceFile": "source-materials/PTH/initials-video/g.mp4",
+      "textbookGroup": "gkh",
+      "durationSec": 12.18,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/g.mp4",
+      "derivedAudio": "assets/pth/initials/audio/g.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.13–14（聲母三 g、k、h；g 示範見 p.13–14）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "k",
+      "sourceFile": "source-materials/PTH/initials-video/k.mp4",
+      "textbookGroup": "gkh",
+      "durationSec": 11.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/k.mp4",
+      "derivedAudio": "assets/pth/initials/audio/k.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.13–15（聲母三 g、k、h；k 示範見 p.14–15）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "h",
+      "sourceFile": "source-materials/PTH/initials-video/h.mp4",
+      "textbookGroup": "gkh",
+      "durationSec": 10.98,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/h.mp4",
+      "derivedAudio": "assets/pth/initials/audio/h.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.15–16（聲母三 g、k、h；h 示範見 p.15–16）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "j",
+      "sourceFile": "source-materials/PTH/initials-video/j.mp4",
+      "textbookGroup": "jqx",
+      "durationSec": 10.92,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/j.mp4",
+      "derivedAudio": "assets/pth/initials/audio/j.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.16–17（聲母四 j、q、x；j 示範見 p.17）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "q",
+      "sourceFile": "source-materials/PTH/initials-video/q.mp4",
+      "textbookGroup": "jqx",
+      "durationSec": 11.24,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/q.mp4",
+      "derivedAudio": "assets/pth/initials/audio/q.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.17–18（聲母四 j、q、x；q 示範見 p.18）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "x",
+      "sourceFile": "source-materials/PTH/initials-video/x.mp4",
+      "textbookGroup": "jqx",
+      "durationSec": 12.32,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/x.mp4",
+      "derivedAudio": "assets/pth/initials/audio/x.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.18–19（聲母四 j、q、x；x 示範見 p.19）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "zh",
+      "sourceFile": "source-materials/PTH/initials-video/zh.mp4",
+      "textbookGroup": "zhchshr",
+      "durationSec": 12.82,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/zh.mp4",
+      "derivedAudio": "assets/pth/initials/audio/zh.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.20–21（聲母五 zh、ch、sh、r；zh 示範見 p.20–21）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "ch",
+      "sourceFile": "source-materials/PTH/initials-video/ch.mp4",
+      "textbookGroup": "zhchshr",
+      "durationSec": 12.7,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/ch.mp4",
+      "derivedAudio": "assets/pth/initials/audio/ch.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.21–22（聲母五 zh、ch、sh、r；ch 示範見 p.21–22）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "sh",
+      "sourceFile": "source-materials/PTH/initials-video/sh.mp4",
+      "textbookGroup": "zhchshr",
+      "durationSec": 11.56,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/sh.mp4",
+      "derivedAudio": "assets/pth/initials/audio/sh.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.22–23（聲母五 zh、ch、sh、r；sh 示範見 p.22–23）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "r",
+      "sourceFile": "source-materials/PTH/initials-video/r.mp4",
+      "textbookGroup": "zhchshr",
+      "durationSec": 12.76,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/r.mp4",
+      "derivedAudio": "assets/pth/initials/audio/r.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.23–24（聲母五 zh、ch、sh、r；r 示範見 p.23–24）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "z",
+      "sourceFile": "source-materials/PTH/initials-video/z.mp4",
+      "textbookGroup": "zcs",
+      "durationSec": 12.9,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/z.mp4",
+      "derivedAudio": "assets/pth/initials/audio/z.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.25（聲母六 z、c、s；z 示範）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "c",
+      "sourceFile": "source-materials/PTH/initials-video/c.mp4",
+      "textbookGroup": "zcs",
+      "durationSec": 11.96,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/c.mp4",
+      "derivedAudio": "assets/pth/initials/audio/c.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.25–26（聲母六 z、c、s；c 示範見 p.26）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "s",
+      "sourceFile": "source-materials/PTH/initials-video/s.mp4",
+      "textbookGroup": "zcs",
+      "durationSec": 12.5,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/s.mp4",
+      "derivedAudio": "assets/pth/initials/audio/s.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.26–27（聲母六 z、c、s；s 示範見 p.27）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "y",
+      "sourceFile": "source-materials/PTH/initials-video/y.mp4",
+      "textbookGroup": "yw",
+      "durationSec": 12.28,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/y.mp4",
+      "derivedAudio": "assets/pth/initials/audio/y.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.28–29（聲母七 y、w；y 示範見 p.28–29）",
+      "textbookStatus": "verified"
+    },
+    {
+      "id": "w",
+      "sourceFile": "source-materials/PTH/initials-video/w.mp4",
+      "textbookGroup": "yw",
+      "durationSec": 13.12,
+      "source": {
+        "videoCodec": "h264",
+        "width": 1920,
+        "height": 1080,
+        "audioCodec": "aac"
+      },
+      "derivedVideo": "assets/pth/initials/video/w.mp4",
+      "derivedAudio": "assets/pth/initials/audio/w.m4a",
+      "status": "verified",
+      "textbookRef": "PTH textbook K2 p.29–30（聲母七 y、w；w 示範見 p.29–30）",
+      "textbookStatus": "verified"
+    }
+  ]
+}

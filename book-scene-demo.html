@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+  <meta name="theme-color" content="#080d35">
+  <title>紅輯書頁句子任務・卡卡學習</title>
+  <link rel="stylesheet" href="css/book-scene-demo.css">
+</head>
+<body>
+  <main class="scene-app">
+    <header class="scene-topbar">
+      <a class="scene-back" href="index.html">← 中文</a>
+      <div><p>紅輯・書頁任務</p><h1>看書頁・砌句子</h1></div>
+      <div class="scene-ranger" id="scene-ranger" aria-hidden="true">
+        <img class="space-ranger-img" src="assets/space-ranger-shooter.png" alt="" width="64" height="64" decoding="async">
+        <span class="space-ranger-sparkle s1"></span><span class="space-ranger-sparkle s2"></span><span class="space-ranger-sparkle s3"></span>
+      </div>
+      <output id="star-count" aria-label="星星進度">0/10 ⭐</output>
+    </header>
+
+    <section class="scene-intro">
+      <div><span>紅輯逐頁砌句・試點版</span><h2>看書頁・聽句子・砌返落去</h2><p>四本正式書（《分果果》《誰在叫》《信》《快跑呀》）都用開心簡化玩法：無干擾字，聽完砌齊就讀句翻頁。其他紅輯書可翻頁預覽。</p></div>
+      <img src="assets/kaka-ranger-solo.png" alt="KAKA Ranger">
+    </section>
+
+    <nav class="book-tabs" id="book-tabs" aria-label="選擇紅輯書本"></nav>
+
+    <section class="scene-game" aria-live="polite">
+      <div class="scene-meta">
+        <span id="scene-book-title">我的氣球呢？</span>
+        <strong id="scene-progress">第 1 / 3 頁</strong>
+      </div>
+      <h2 id="scene-prompt">聽句子，將詞組按次序放好。</h2>
+      <p class="scene-help" id="scene-help">先看一看、聽一聽，認識本版句子。</p>
+
+      <div class="scene-activity" id="scene-activity">
+        <div class="scene-book-column">
+          <div class="scene-book-toolbar" id="scene-book-toolbar">
+            <button class="scene-listen" id="scene-listen" type="button">🔊 聽本版句子</button>
+            <span>可隨時重聽；原書文字會完整保留。</span>
+          </div>
+          <div class="scene-board" id="scene-board"></div>
+        </div>
+        <div class="scene-task-panel">
+          <div class="scene-study" id="scene-study" hidden><p id="scene-study-sentence"></p></div>
+          <button class="scene-start-quiz" id="scene-start-quiz" type="button" hidden>學好咗・開始砌本版句子</button>
+          <button class="scene-review" id="scene-review" type="button" hidden>再學一學</button>
+          <p class="scene-preview-note" id="scene-preview-note" hidden>此書可以先看掃描頁；原句、詞組及干擾項核實後，才會開放正式測驗。</p>
+          <div class="scene-preview-nav" id="scene-preview-nav" hidden>
+            <button type="button" id="scene-preview-prev">← 上一頁</button>
+            <button type="button" id="scene-preview-next">下一頁 →</button>
+          </div>
+          <div class="word-bank" id="word-bank" aria-label="可選詞語"></div>
+          <p class="scene-feedback" id="scene-feedback" aria-live="polite"></p>
+          <button class="scene-submit" id="scene-submit" type="button" disabled>檢查句子</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene-complete" id="scene-complete" hidden>
+      <span>✦</span><h2>書頁任務完成！</h2><p id="complete-copy"></p>
+      <button class="scene-submit" id="scene-replay" type="button">再玩一次</button>
+    </section>
+  </main>
+  <script src="js/speech.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/star-fx.js"></script>
+  <script type="module" src="js/book-scene-demo.js"></script>
+</body>
+</html>

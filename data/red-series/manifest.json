@@ -1,0 +1,13 @@
+{
+  "series": "red_series",
+  "title": "紅輯《我自己會讀》",
+  "gameContract": { "flow": ["先學書詞", "10題測驗", "集齊10粒星"], "progressKey": "red_series|book|mode" },
+  "rounds": [
+    { "round": 1, "books": ["rb_yusan", "rb_xin"] },
+    { "round": 2, "books": ["rb_fenguo", "rb_kuaipao"] },
+    { "round": 3, "books": ["rb_shuijiao", "rb_huangye"] },
+    { "round": 4, "books": ["rb_yishuhua", "rb_fengwan"] },
+    { "round": 5, "books": ["rb_xiaoming", "rb_dongdong"] }
+  ],
+  "sourcePolicy": "Only use words and sentences traceable to the referenced scanned book or card source; missing scene/audio remains preview, never invented."
+}

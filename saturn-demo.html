@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>土星・電子積木 Demo</title>
+  <link rel="stylesheet" href="./css/saturn-demo.css" />
+</head>
+<body>
+  <main class="demo-shell">
+    <header class="demo-header">
+      <div>
+        <p class="eyebrow">KAKA RANGER · SATURN LAB</p>
+        <h1>土星・電子積木</h1>
+        <p class="subtitle">拖積木入工作區，砌出你想要嘅平面或立體模型。</p>
+      </div>
+      <div class="mission-badge"><span id="block-count">0</span><small>/ 16 粒</small></div>
+    </header>
+
+    <section class="toolbar" aria-label="積木工具列">
+      <div class="mode-tabs" role="tablist" aria-label="模型模式">
+        <button class="mode-tab is-active" data-mode="plane" role="tab" aria-selected="true">平面 4×4</button>
+        <button class="mode-tab" data-mode="stack" role="tab" aria-selected="false">立體堆疊</button>
+      </div>
+      <div class="toolbar-actions">
+        <button class="ghost-btn" id="btn-template">載入示範</button>
+        <button class="ghost-btn" id="btn-clear">清空</button>
+      </div>
+    </section>
+
+    <section class="how-to" aria-label="操作方法">
+      <span class="how-to-icon">👆</span>
+      <div><strong>電腦玩法：</strong>用滑鼠按住右邊一粒積木，拖到工作區；亦可以直接撳積木自動放入下一格。</div>
+      <div class="how-to-divider"></div>
+      <div><strong>iPad 玩法：</strong>直接撳積木，或者用手指拖入格仔。</div>
+    </section>
+
+    <section class="workspace-layout">
+      <section class="build-card" aria-labelledby="workspace-title">
+        <div class="card-heading">
+          <div>
+            <p class="card-kicker">MISSION 01</p>
+            <h2 id="workspace-title">砌一個 4×4 平面</h2>
+          </div>
+          <span class="hint-pill" id="hint-pill">每格放一粒</span>
+        </div>
+        <div class="board-wrap">
+          <div class="board plane-board" id="plane-board" aria-label="平面積木工作區"></div>
+          <div class="stack-board" id="stack-board" aria-label="立體積木工作區" hidden></div>
+        </div>
+        <div class="board-footer">
+          <span id="board-message">可以撳積木，或者由右邊拖入格仔。</span>
+          <button class="answer-btn" id="btn-answer">完成模型</button>
+        </div>
+        <p class="feedback" id="feedback" aria-live="polite"></p>
+      </section>
+
+      <aside class="pool-card" aria-labelledby="pool-title">
+        <div class="card-heading">
+          <div>
+            <p class="card-kicker">BLOCK POOL</p>
+            <h2 id="pool-title">積木池</h2>
+          </div>
+          <span class="pool-count">16 粒</span>
+        </div>
+        <p class="pool-instruction">撳一下放入下一格；長按或拖曳亦可以。</p>
+        <div class="block-pool" id="block-pool" aria-label="可用積木"></div>
+        <div class="legend"><span class="legend-dot"></span> 可用積木 <span class="legend-dot is-used"></span> 已放入</div>
+      </aside>
+    </section>
+
+    <section class="challenge-strip">
+      <div class="challenge-icon">🪐</div>
+      <div><strong>小挑戰</strong><span>你可以砌出一個方形、長方形，或者自己創作嗎？</span></div>
+      <button class="secondary-btn" id="btn-stairs">試玩階梯形</button>
+    </section>
+  </main>
+
+  <script src="./js/saturn-demo.js"></script>
+</body>
+</html>
