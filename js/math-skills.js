@@ -45,11 +45,11 @@
       id: 'shape',
       body: 'mars',
       name: '火星',
-      skill: '形狀・推理',
+      skill: '形狀・規律',
       icon: '🔺',
       color: '#e35d3b',
       order: 4,
-      blurb: '喺火星學形狀：圓、三角、方；再試缺格規律推理',
+      blurb: '喺火星認識形狀，再用形狀找規律',
       img: PLANET_IMG('mars'),
     },
     {

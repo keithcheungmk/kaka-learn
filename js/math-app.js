@@ -64,38 +64,32 @@
       { ...clockItem(2, true), learnSay: '電子鐘寫住 2:30，就係兩點半。' },
     ];
 
+    /** 火星只教形狀：以一致的貼紙式 SVG 呈現，不混入動物規律。 */
     const MARS_SHAPES = [
-      { id: 'circle', name: '圓形', symbol: '●', learnSay: '呢個係圓形。圓圓哋，冇角。' },
-      { id: 'oval', name: '橢圓形', symbol: '⬭', learnSay: '呢個係橢圓形。好似一隻拉長咗嘅蛋。' },
-      { id: 'triangle', name: '三角形', symbol: '▲', learnSay: '呢個係三角形。有三個角。' },
-      { id: 'square', name: '正方形', symbol: '■', learnSay: '呢個係正方形。四條邊一樣長。' },
-      { id: 'rectangle', name: '長方形', symbol: '▬', learnSay: '呢個係長方形。有兩條長邊、兩條短邊。' },
-      { id: 'diamond', name: '菱形', symbol: '◆', learnSay: '呢個係菱形。四條邊一樣長，斜斜哋站住。' },
-      { id: 'parallelogram', name: '平行四邊形', symbol: '▱', learnSay: '呢個係平行四邊形。對面兩條邊永遠平行。' },
-      { id: 'trapezoid', name: '梯形', symbol: '⏢', learnSay: '呢個係梯形。上面同下面係平行嘅。' },
-      { id: 'pentagon', name: '五邊形', symbol: '⬠', learnSay: '呢個係五邊形。有五條邊、五個角。' },
-      { id: 'hexagon', name: '六邊形', symbol: '⬡', learnSay: '呢個係六邊形。有六條邊、六個角。' },
+      { id: 'circle', name: '圓形', core: true, learnSay: '呢個係圓形。圓圓哋，冇角。' },
+      { id: 'oval', name: '橢圓形', core: true, learnSay: '呢個係橢圓形。好似一隻拉長咗嘅蛋。' },
+      { id: 'triangle', name: '三角形', core: true, learnSay: '呢個係三角形。有三個角。' },
+      { id: 'square', name: '正方形', core: true, learnSay: '呢個係正方形。四條邊一樣長。' },
+      { id: 'rectangle', name: '長方形', core: true, learnSay: '呢個係長方形。有兩條長邊、兩條短邊。' },
+      { id: 'diamond', name: '菱形', learnSay: '呢個係菱形。四條邊一樣長，斜斜哋站住。' },
+      { id: 'parallelogram', name: '平行四邊形', learnSay: '呢個係平行四邊形。對面兩條邊永遠平行。' },
+      { id: 'trapezoid', name: '梯形', learnSay: '呢個係梯形。上面同下面係平行嘅。' },
+      { id: 'pentagon', name: '五邊形', learnSay: '呢個係五邊形。有五條邊、五個角。' },
+      { id: 'hexagon', name: '六邊形', learnSay: '呢個係六邊形。有六條邊、六個角。' },
     ];
-
-    const MARS_PATTERN_ANIMALS = [
-      { id: 'rabbit', name: '小白兔', emoji: '🐰' },
-      { id: 'chick', name: '雞仔', emoji: '🐥' },
-      { id: 'dog', name: '小狗', emoji: '🐶' },
-      { id: 'cat', name: '小貓', emoji: '🐱' },
-      { id: 'frog', name: '青蛙', emoji: '🐸' },
-    ];
+    const MARS_CORE_SHAPES = MARS_SHAPES.filter((shape) => shape.core);
 
     const MARS_LEARN_CARDS = [
       ...MARS_SHAPES.map((shape) => ({ kind: 'shape', shape, learnSay: shape.learnSay })),
       {
         kind: 'pattern',
-        sequence: [MARS_PATTERN_ANIMALS[0], MARS_PATTERN_ANIMALS[1], MARS_PATTERN_ANIMALS[0], MARS_PATTERN_ANIMALS[1]],
-        learnSay: '小白兔、雞仔、小白兔、雞仔……下一個又係小白兔。小動物會跟住次序排隊。',
+        sequence: [MARS_CORE_SHAPES[0], MARS_CORE_SHAPES[3], MARS_CORE_SHAPES[0], MARS_CORE_SHAPES[3]],
+        learnSay: '圓形、正方形、圓形、正方形……下一個又係圓形。形狀可以跟住次序排隊。',
       },
       {
         kind: 'pattern',
-        sequence: [MARS_PATTERN_ANIMALS[2], MARS_PATTERN_ANIMALS[2], MARS_PATTERN_ANIMALS[3], MARS_PATTERN_ANIMALS[2], MARS_PATTERN_ANIMALS[2], MARS_PATTERN_ANIMALS[3]],
-        learnSay: '小狗、小狗、小貓，再小狗、小狗、小貓……跟住又係小狗。',
+        sequence: [MARS_CORE_SHAPES[2], MARS_CORE_SHAPES[2], MARS_CORE_SHAPES[1], MARS_CORE_SHAPES[2], MARS_CORE_SHAPES[2], MARS_CORE_SHAPES[1]],
+        learnSay: '三角形、三角形、橢圓形，再三角形、三角形、橢圓形……跟住又係三角形。',
       },
     ];
 
@@ -307,13 +301,28 @@
       return `<div class="math-digital-clock${small ? ' math-digital-clock--small' : ''}" role="img" aria-label="${item.say}"><span class="math-digital-digits">${text}</span></div>`;
     }
 
-    function shapeGlyphHtml(shape, extraClass = '') {
-      return `<span class="math-shape-glyph math-shape-glyph--${shape.id} ${extraClass}" aria-hidden="true">${shape.symbol}</span>`;
+    function shapeSvgHtml(id) {
+      const shapes = {
+        circle: '<circle class="math-shape-sticker-body" cx="50" cy="50" r="35" />',
+        oval: '<ellipse class="math-shape-sticker-body" cx="50" cy="50" rx="39" ry="27" />',
+        triangle: '<path class="math-shape-sticker-body" d="M50 13 88 82H12Z" />',
+        square: '<rect class="math-shape-sticker-body" x="18" y="18" width="64" height="64" rx="8" />',
+        rectangle: '<rect class="math-shape-sticker-body" x="10" y="27" width="80" height="46" rx="8" />',
+        diamond: '<path class="math-shape-sticker-body" d="M50 10 90 50 50 90 10 50Z" />',
+        parallelogram: '<path class="math-shape-sticker-body" d="M28 20H88L72 80H12Z" />',
+        trapezoid: '<path class="math-shape-sticker-body" d="M30 20H70L88 80H12Z" />',
+        pentagon: '<path class="math-shape-sticker-body" d="M50 10 88 38 74 83H26L12 38Z" />',
+        hexagon: '<path class="math-shape-sticker-body" d="M27 14H73L91 50 73 86H27L9 50Z" />',
+      };
+      return `<svg class="math-shape-sticker-svg" viewBox="0 0 100 100" focusable="false" aria-hidden="true">${shapes[id] || shapes.circle}<ellipse class="math-shape-sticker-shine" cx="38" cy="30" rx="13" ry="7" /></svg>`;
     }
 
-    function patternGlyphHtml(item) {
-      if (item.emoji) return `<span class="math-pattern-animal" aria-hidden="true">${item.emoji}</span>`;
-      return shapeGlyphHtml(item);
+    function shapeGlyphHtml(shape, extraClass = '') {
+      return `<span class="math-shape-glyph math-shape-glyph--${shape.id} ${extraClass}" aria-hidden="true">${shapeSvgHtml(shape.id)}</span>`;
+    }
+
+    function patternGlyphHtml(shape) {
+      return shapeGlyphHtml(shape);
     }
 
     function patternCellsHtml(sequence, { blankLast = false } = {}) {
@@ -946,7 +955,7 @@
         if (say) say.textContent = card.shape.name;
       } else {
         if (visual) visual.innerHTML = `<div class="math-pattern-row">${patternCellsHtml(card.sequence)}</div>`;
-        if (say) say.textContent = '動物排隊';
+        if (say) say.textContent = '形狀排隊';
       }
       const progress = $('#math-mars-learn-progress');
       if (progress) progress.textContent = `${marsLearnIndex + 1}/${MARS_LEARN_CARDS.length}`;
@@ -1065,22 +1074,22 @@
     }
 
     function makePatternRound() {
-      const pool = shuffle([...MARS_PATTERN_ANIMALS]);
+      const pool = shuffle([...MARS_CORE_SHAPES]);
       const a = pool[0];
       const b = pool[1];
       const c = pool[2];
-      if (Math.random() < 0.55) {
+      if (Math.random() < 0.65) {
         const sequence = [a, b, a, b, a, null];
         return { sequence, answer: b, options: shuffle([b, a, c]) };
       }
-      const sequence = [a, b, c, a, b, null];
-      return { sequence, answer: c, options: shuffle([c, a, b]) };
+      const sequence = [a, a, b, a, a, null];
+      return { sequence, answer: b, options: shuffle([b, a, c]) };
     }
 
     function nextPatternRound(autoSpeak) {
       patternRound = makePatternRound();
       const prompt = $('#math-pattern-prompt');
-      if (prompt) prompt.textContent = '下一個係邊個？';
+      if (prompt) prompt.textContent = '下一個係咩形狀？';
       const fb = $('#math-pattern-feedback');
       if (fb) fb.textContent = '';
       const row = $('#math-pattern-row');
@@ -1098,7 +1107,7 @@
           box.appendChild(btn);
         });
       }
-      if (autoSpeak) speak('下一個係邊個？');
+      if (autoSpeak) speak('下一個係咩形狀？');
     }
 
     function onPatternPick(id, btn) {
@@ -1125,7 +1134,7 @@
           if (fb) fb.textContent = `${praise} 火星點亮喇！`;
           setTimeout(() => {
             patternBusy = false;
-            showMathRoundReward('動物排隊十題完成！你好叻呀！', openPatternQuiz);
+            showMathRoundReward('形狀排隊十題完成！你好叻呀！', openPatternQuiz);
           }, 900);
           return;
         }
@@ -1208,7 +1217,7 @@
       $('#btn-math-shape-speak')?.addEventListener('click', () => speak('呢個係咩形狀？'));
 
       $('#btn-back-math-pattern')?.addEventListener('click', () => openMarsPlay());
-      $('#btn-math-pattern-speak')?.addEventListener('click', () => speak('下一個係邊個？'));
+      $('#btn-math-pattern-speak')?.addEventListener('click', () => speak('下一個係咩形狀？'));
     }
 
     bind();

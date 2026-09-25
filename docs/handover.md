@@ -98,6 +98,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-09-26 · ChatGPT／Codex（火星形狀 → 形狀規律）
+
+- 火星移除動物排隊；先學頁、玩法入口、題庫、語音及完成提示全部統一為「認識 10 種形狀，再用形狀找規律」。
+- 圓形、橢圓形、三角形、正方形、長方形及五個延伸形狀由字體符號改為統一的鮮艷 SVG 貼紙；規律題初階只出已學基礎形狀，並限 AB／AAB。
+- `check-invariants` 新增火星不可混入動物規律的守則；數理 targeted tests、invariants、iPad Pro 11 橫／直及 iPhone 16 Pro Max local browser visual checks 均通過，Playwright smoke 受 macOS Mach port sandbox 限制未能啟動。
+- **踩咗** `index.html`、`js/math-app.js`、`js/math-skills.js`、`css/math.css`、`scripts/check-invariants.py`、`docs/handover.md`
+
 ### 2026-09-26 · ChatGPT／Codex（中文限定裝置原生 Emoji）
 
 - 中文認字嘅生字卡、emoji badge、主題封面及遊戲進度怪獸改用裝置原生 Emoji；iPhone／iPad 會顯示 Apple Color Emoji。

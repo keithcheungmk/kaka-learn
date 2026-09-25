@@ -587,13 +587,15 @@ def check_math_number_relations() -> None:
         fail("math-number-relations", "math-app.js 仍引用已撤嘅金星公平分享")
     if "openVenusLearn" not in app or "openMarsLearn" not in app:
         fail("math-number-relations", "math-app.js 缺少 openVenusLearn／openMarsLearn")
+    if "MARS_PATTERN_ANIMALS" in app or "MARS_CORE_SHAPES" not in app:
+        fail("mars-shapes", "火星規律必須使用已學形狀；動物規律不可混入火星題庫")
     if "digitalClockHtml" not in app:
         fail("math-number-relations", "math-app.js 缺少電子鐘 digitalClockHtml")
     if "number-relations" not in app:
         fail("math-number-relations", "math-app.js 缺少 number-relations routing")
     skills = read("js/math-skills.js")
-    if "數字關係" not in skills or "睇鐘" not in skills or "形狀・推理" not in skills:
-        fail("math-number-relations", "math-skills.js 水星應係數字關係、金星睇鐘、火星形狀・推理")
+    if "數字關係" not in skills or "睇鐘" not in skills or "形狀・規律" not in skills:
+        fail("math-number-relations", "math-skills.js 水星應係數字關係、金星睇鐘、火星形狀・規律")
     if "id: 'count'" in skills or "compare-qty" in skills:
         fail("math-number-relations", "math-skills.js 唔應再有舊 count／compare-qty planet")
     storage = read("js/math-storage.js")

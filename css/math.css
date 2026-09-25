@@ -1613,14 +1613,38 @@
 }
 
 .math-shape-glyph {
-  font-size: clamp(2.4rem, 10vw, 4rem);
-  line-height: 1;
+  width: clamp(54px, 11vw, 76px);
+  height: clamp(54px, 11vw, 76px);
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 7px 7px rgba(3, 11, 31, .32));
 }
 
 .math-shape-glyph.is-hero {
-  font-size: clamp(3.5rem, 16vw, 6rem);
+  width: clamp(118px, 22vw, 190px);
+  height: clamp(118px, 22vw, 190px);
 }
+
+.math-shape-sticker-svg { width: 100%; height: 100%; overflow: visible; }
+.math-shape-sticker-body {
+  fill: var(--shape-fill);
+  stroke: rgba(255, 255, 255, .88);
+  stroke-width: 5;
+  stroke-linejoin: round;
+  filter: saturate(1.12);
+}
+.math-shape-sticker-shine { fill: rgba(255, 255, 255, .38); transform: rotate(-25deg); transform-origin: center; }
+.math-shape-glyph--circle { --shape-fill: #f35b80; }
+.math-shape-glyph--oval { --shape-fill: #2bc5df; }
+.math-shape-glyph--triangle { --shape-fill: #ffad2f; }
+.math-shape-glyph--square { --shape-fill: #8870ed; }
+.math-shape-glyph--rectangle { --shape-fill: #48d28e; }
+.math-shape-glyph--diamond { --shape-fill: #f06bb2; }
+.math-shape-glyph--parallelogram { --shape-fill: #3daeea; }
+.math-shape-glyph--trapezoid { --shape-fill: #ff7f5c; }
+.math-shape-glyph--pentagon { --shape-fill: #a66ddc; }
+.math-shape-glyph--hexagon { --shape-fill: #3cc7a5; }
 
 .math-mars-prompt-shape {
   display: flex;
@@ -1686,10 +1710,8 @@
   font-weight: 700;
 }
 
-.math-pattern-animal {
-  font-size: clamp(1.8rem, 6vw, 2.5rem);
-  line-height: 1;
-}
+.math-pattern-cell .math-shape-glyph { width: clamp(34px, 8vw, 46px); height: clamp(34px, 8vw, 46px); }
+.math-mars-option--glyph .math-shape-glyph { width: clamp(42px, 10vw, 60px); height: clamp(42px, 10vw, 60px); }
 
 #screen-math-shape.math-screen.active,
 #screen-math-pattern.math-screen.active,
