@@ -39,6 +39,7 @@
     'screen-math-time',
     'screen-chain',
     'screen-sentence',
+    'screen-story-play',
   ]);
 
   let globalRanger = null;

@@ -1,4 +1,4 @@
-/* STORY ENGLISH — Carter Family Read & Fill (CF001–CF003).
+/* STORY ENGLISH — Carter Family Read & Fill (CF001–CF010).
  * Each fill sentence is checked against the cited Carter Family PDF page and
  * matching original page clip. The learner hears the source clip first, then
  * practises the short sentence with the device's English TTS voice.
@@ -27,7 +27,7 @@
     'Great, Kaka! You are doing a wonderful job!',
   ];
 
-  const BOOKS = [
+  const BASE_BOOKS = [
     {
       id: 'cf001',
       title: 'Game Night',
@@ -92,10 +92,20 @@
     },
   ];
 
+  // CF001–CF003 stay as the golden UI/content template. Additional books are
+  // supplied by the verified Carter manifest loaded before this script.
+  const BOOKS = BASE_BOOKS.concat(window.KakaCarterManifest?.books || []);
+
   function muted() { try { return !!window.KakaStorage?.loadState?.().muted; } catch { return false; } }
   function stopAudio() { $$('audio[data-story-demo]').forEach((audio) => { audio.pause(); audio.currentTime = 0; }); }
   function invalidatePlayback() { viewGen += 1; readToken += 1; reading = false; stopAudio(); speech.cancelAllSpeech?.(); }
-  function show(name) { invalidatePlayback(); $$('.screen').forEach((screen) => screen.classList.remove('active')); $(`#screen-${name}`)?.classList.add('active'); window.KakaStarFx?.hideRanger?.(); }
+  function show(name) {
+    invalidatePlayback();
+    $$('.screen').forEach((screen) => screen.classList.remove('active'));
+    const screen = $(`#screen-${name}`);
+    screen?.classList.add('active');
+    window.KakaStarFx?.mountPlayScreen?.(screen);
+  }
   function home() { invalidatePlayback(); activeBookId = null; if (window.KakaLearn?.goHome) window.KakaLearn.goHome(); else show('home'); }
   function activeBook() { return BOOKS.find((book) => book.id === activeBookId) || null; }
   function pages() { return activeBook()?.pages || []; }
@@ -108,7 +118,7 @@
     const heroKicker = $('#story-demo-kicker');
     const heroTitle = $('#story-demo-hero-title');
     if (heroCover) heroCover.src = BOOKS[0].cover;
-    if (heroKicker) heroKicker.textContent = 'CARTER FAMILY · CF001–CF003';
+    if (heroKicker) heroKicker.textContent = 'CARTER FAMILY · CF001–CF010';
     if (heroTitle) heroTitle.textContent = 'Story Books';
     const grid = $('#story-demo-activity-grid');
     grid.innerHTML = BOOKS.map((book) => `<button type="button" class="story-activity-card story-activity-card--read" data-book-id="${book.id}">
@@ -273,6 +283,21 @@
     speech.speakEnglishTerm?.(line, { rate: 0.82, pitch: 1.05, onEnd: finish });
   }
 
+  function awardStoryPageStar(item) {
+    const storage = window.KakaStorage;
+    if (!storage?.loadState || !storage?.tryEarnStar || !storage?.updateState) return Promise.resolve(false);
+    const pageKey = `story|${activeBookId}|page-${item.printedPage || pageIndex + 1}`;
+    const before = storage.loadState();
+    if (before.passedKeys?.[pageKey]) return Promise.resolve(false);
+    const result = storage.tryEarnStar();
+    const after = storage.loadState();
+    storage.updateState({ passedKeys: { ...(after.passedKeys || {}), [pageKey]: true } });
+    const screen = $('#screen-story-play');
+    window.KakaStarFx?.mountPlayScreen?.(screen);
+    if (!result.gained || !window.KakaStarFx?.flyStarFromRanger) return Promise.resolve(result.gained);
+    return new Promise((resolve) => window.KakaStarFx.flyStarFromRanger(screen, () => resolve(true)));
+  }
+
   function selectWord(word) {
     const item = current();
     if (busy || reading || solved || phase !== 'fill' || !item.choices.includes(word)) return;
@@ -388,9 +413,11 @@
     feedback.textContent = 'Great job!'; feedback.className = 'feedback ok';
     speakPraise(() => {
       $('#btn-story-submit')?.remove();
-      if ($('#btn-story-next')) return;
-      $('#story-fill-bank').insertAdjacentHTML('afterend', `<button type="button" class="btn btn-primary story-next-page" id="btn-story-next">${pageIndex === list.length - 1 ? 'Finish story →' : 'Next page →'}</button>`);
-      $('#btn-story-next')?.addEventListener('click', nextPage);
+      awardStoryPageStar(item).then(() => {
+        if ($('#btn-story-next')) return;
+        $('#story-fill-bank').insertAdjacentHTML('afterend', `<button type="button" class="btn btn-primary story-next-page" id="btn-story-next">${pageIndex === list.length - 1 ? 'Finish story →' : 'Next page →'}</button>`);
+        $('#btn-story-next')?.addEventListener('click', nextPage);
+      });
     });
   }
 

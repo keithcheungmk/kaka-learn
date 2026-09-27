@@ -22,3 +22,18 @@ Source supplied by Keith for the private KAKA Learn app. Originals remain untouc
 - Page clips: `Page-level clips/Book 03 - The School Play/`
 - `cf003/pages/page-01.jpg`–`page-14.jpg` ← PDF pages 2–15 (printed story pages 1–14)
 - `cf003/cf003-the-school-play-page-01.mp3`–`14.mp3` ← clips `110.mp3`–`123.mp3`
+
+## CF004–CF010
+
+The first-ten rollout uses the same Read & Fill renderer and keeps only selected
+derivatives in this deployable folder. Source PDFs and original clips remain under
+`source-materials/Carter Family/`; the generated page/audio mapping is recorded in
+`data/carter-family-manifest.js`.
+
+- CF004 *A Camping Trip!*: 12 story pages, clips `124.mp3`–`135.mp3`
+- CF005 *The Grocery Store*: 13 story pages, clips `136.mp3`–`148.mp3`
+- CF006 *Don't Get Dirty!*: 14 story pages, clips `149.mp3`–`162.mp3`
+- CF007 *New Glasses for Oliver*: 12 story pages, clips `163.mp3`–`174.mp3`
+- CF008 *Good Dog, Rover!*: 16 story pages, clips `175.mp3`–`190.mp3`
+- CF009 *A Good Day for Painting*: 16 story pages, clips `191.mp3`–`206.mp3`
+- CF010 *Going to the Dentist*: 13 story pages, clips `207.mp3`–`219.mp3`
