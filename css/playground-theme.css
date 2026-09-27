@@ -256,9 +256,23 @@ body::before {
   box-shadow: 0 0 0 6px rgba(248, 189, 53, 0.22), 0 7px 0 #dd9710, 0 12px 22px rgba(239, 176, 30, 0.26);
 }
 
+/* 已放入格的綠邊只表示「答啱」；字母本身必須繼續是深色，不能沉入深綠底。 */
 .build-slot.is-filled .letter-tile .sound-energy-glyph,
 .build-slot.is-chunk .letter-tile .sound-energy-glyph {
-  color: #164b3b;
+  border-color: #28b982;
+  background: linear-gradient(145deg, #ffffff, #dff8eb);
+  color: #17396e;
+  box-shadow:
+    inset 0 -5px 0 rgba(65, 190, 137, 0.18),
+    0 0 0 4px rgba(58, 196, 139, 0.22),
+    0 7px 0 #67ca9f,
+    0 11px 18px rgba(65, 105, 154, 0.18);
+}
+
+.build-slot.is-blending .letter-tile .sound-energy-glyph {
+  border-color: #e9a60d;
+  background: linear-gradient(145deg, #fffbe3, #ffe08a);
+  color: #704006;
 }
 
 .letter-row {
