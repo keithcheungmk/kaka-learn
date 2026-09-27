@@ -1,4 +1,4 @@
-import {wordAudioClips} from './pth-word-audio.js';
+import {wordAudioClips} from './pth-word-audio.js?v=20260927-pth-audio-clean';
 const STAR_FX_MS=1600;
 const sounds=[
  {id:'b',name:'b',group:'bpmf',verified:true,textbookRef:'PTH textbook K2 QR MP4／bpmf',tip:'聲母 b，跟住例詞讀一次。',emoji:'🎈',emojiLabel:'波波球圖示',word:'波波球',sentence:'',syllables:[['bō','b'],['bō','b'],['qiú','q']]},

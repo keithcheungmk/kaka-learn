@@ -108,7 +108,7 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 ### 2026-09-27 · ChatGPT／Codex（PTH 詞語語音穩定性）
 
 - 69 個普通話例詞由每組共用的短 AAC 切片，改成每詞一個完整 `.m4a`；原有片段移到 `data/pth/word-audio-source/` 作可追溯重建來源。衍生檔保持較自然的節奏、短暫收尾空間及一致音量。
-- 播放器分開管理停止及 UI 計時器，快速由「可樂」轉按「哥哥」不會被上一段的計時器截斷；載入或播放失敗會顯示清楚提示。教材口形 MP4 保持原檔及原有音軌。
+- 播放器分開管理停止及 UI 計時器，快速由「可樂」轉按「哥哥」不會被上一段的計時器截斷；載入或播放失敗會顯示清楚提示。教材口形 MP4 保持原檔及原有音軌；PTH 的模組版本參數同步更新，避免瀏覽器沿用舊聲音快取。
 - 已驗證 69 個詞語檔均可解碼、PTH content tests、全站 invariant，以及瀏覽器中的詞語、教材原音和 g／k／h 影片載入。
 - **踩咗** `js/pth-demo.js`、`js/pth-word-audio.js`、`js/pth-word-audio-source.js`、`data/pth/word-audio-source/`、`assets/pth/words/individual/`、`scripts/build-pth-word-audio.mjs`、`scripts/test-pth-content.mjs`、`docs/handover.md`
 
