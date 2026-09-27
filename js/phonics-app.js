@@ -737,7 +737,10 @@
         illust.innerHTML = `<span class="letter-tile letter-tile-lg" aria-hidden="true">${letterTileHtml(display.glyph)}</span>`;
       }
       if (term) term.textContent = display.glyph;
-      if (lettersRow) lettersRow.innerHTML = '';
+      if (lettersRow) {
+        lettersRow.innerHTML = '';
+        lettersRow.classList.remove('has-long-sounds', 'has-extra-long-sounds');
+      }
       if (lead) lead.textContent = display.note
         ? `先聽 ${display.note}，再玩聽音辨形`
         : '先聽熟每個音，再玩聽音辨形';
@@ -746,6 +749,8 @@
       if (term) term.textContent = word.word;
       if (lettersRow) {
         const soundChunks = word.soundChunks || word.letters;
+        lettersRow.classList.toggle('has-long-sounds', (soundChunks?.length || 0) >= 8);
+        lettersRow.classList.toggle('has-extra-long-sounds', (soundChunks?.length || 0) >= 10);
         lettersRow.innerHTML = soundChunks
           ? soundChunks
               .map((ch, index) => {

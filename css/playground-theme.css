@@ -1,0 +1,348 @@
+/* KAKA 日間太空遊樂場：共用淺色主題，載入在各模組樣式之後。 */
+:root {
+  --space-deep: #eaf7ff;
+  --space-navy: #dbeafe;
+  --space-mid: #e9e2ff;
+  --space-panel: rgba(255, 255, 255, 0.9);
+  --ink: #18345f;
+  --ink-dim: #527093;
+  --teal: #2bc99d;
+  --teal-soft: #7be8c8;
+  --mint: #b9f7d8;
+  --gold: #f8bd35;
+  --gold-soft: #ffe39a;
+  --coral: #f47d8b;
+  --ok: #33bf83;
+  --shadow: 0 12px 28px rgba(77, 116, 158, 0.18);
+}
+
+html,
+body {
+  background: #eaf7ff;
+  color: var(--ink);
+}
+
+body {
+  background:
+    radial-gradient(700px 380px at 4% 4%, rgba(255, 229, 143, 0.58), transparent 64%),
+    radial-gradient(620px 440px at 96% 10%, rgba(180, 224, 255, 0.75), transparent 63%),
+    radial-gradient(760px 430px at 48% 105%, rgba(222, 206, 255, 0.72), transparent 66%),
+    linear-gradient(180deg, #f8fcff 0%, #eaf7ff 48%, #edf1ff 100%);
+}
+
+/* 細雲、泡泡及遠處遊樂星球取代深色星塵；不影響任何互動。 */
+body::before {
+  opacity: 1;
+  animation: none;
+  background-image:
+    radial-gradient(72px 34px at 9% 19%, rgba(255, 255, 255, 0.88) 48%, transparent 50%),
+    radial-gradient(106px 42px at 12% 20%, rgba(255, 255, 255, 0.88) 48%, transparent 50%),
+    radial-gradient(80px 32px at 84% 12%, rgba(255, 255, 255, 0.82) 48%, transparent 50%),
+    radial-gradient(112px 44px at 90% 13%, rgba(255, 255, 255, 0.82) 48%, transparent 50%),
+    radial-gradient(10px 10px at 23% 74%, rgba(255, 196, 78, 0.7) 48%, transparent 52%),
+    radial-gradient(13px 13px at 77% 67%, rgba(113, 208, 255, 0.58) 48%, transparent 52%),
+    radial-gradient(18px 18px at 93% 88%, rgba(244, 125, 139, 0.35) 48%, transparent 52%);
+}
+
+/* 停用舊有的深銀河遮罩；各學習線共用日間天空。 */
+.screen.active:not(.phonics-screen):not(.math-screen)::before,
+.phonics-screen.active::before,
+.story-demo-screen.active::before,
+.math-screen.active::before,
+#screen-math-galaxy.math-screen.active::before,
+#screen-math-hub.math-screen.active::before {
+  background:
+    radial-gradient(620px 300px at 12% 5%, rgba(255, 235, 164, 0.44), transparent 62%),
+    radial-gradient(600px 340px at 92% 22%, rgba(191, 225, 255, 0.62), transparent 63%),
+    linear-gradient(180deg, rgba(248, 252, 255, 0.74), rgba(235, 244, 255, 0.84));
+}
+
+.brand-name,
+.topic-group-title,
+.learn-hear,
+.learn-pair-vs,
+.phonics-mission-kicker,
+.phonics-mission-number {
+  color: #b76a08;
+  text-shadow: none;
+}
+
+.brand-tag,
+.section-lead,
+.prompt-box p,
+.star-meta span,
+.topic-progress-n {
+  color: var(--ink-dim);
+}
+
+.star-panel,
+.progress-pill,
+.topic-card,
+.learn-stage,
+.learn-pair-card,
+.play-mode-card,
+.prompt-box,
+.build-pool,
+.match-stage,
+.word-chain-entry,
+.progress-math-chip {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(93, 145, 203, 0.42);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+/* English 入口保留「兩條學習線」的分區，但兩區都改成明亮的遊樂場底。 */
+.english-track,
+.english-track-sight,
+.english-track-phonics {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(229, 242, 255, 0.82));
+  border-color: rgba(93, 145, 203, 0.42);
+  box-shadow: var(--shadow);
+}
+
+.english-track-sight {
+  background: linear-gradient(145deg, rgba(255, 250, 225, 0.94), rgba(239, 232, 255, 0.86));
+  border-color: rgba(237, 177, 55, 0.56);
+}
+
+.english-track-heading p,
+.english-track-heading h2 small,
+.topic-title-en,
+.phonics-mission-number {
+  color: #207d67;
+}
+
+.phonics-hero {
+  border-color: rgba(83, 151, 212, 0.56);
+  background:
+    radial-gradient(circle at 74% 30%, rgba(128, 237, 193, 0.62), transparent 32%),
+    linear-gradient(135deg, rgba(225, 239, 255, 0.96), rgba(232, 224, 255, 0.94));
+  box-shadow: var(--shadow);
+}
+
+.phonics-hero-callout {
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--ink);
+  box-shadow: 0 4px 12px rgba(77, 116, 158, 0.16);
+}
+
+/* 數理也沿用同一片日間天空，核心學習卡和選項不再是深藍底。 */
+.math-chip,
+.math-galaxy-card,
+.math-learn-stage,
+.math-count-field--quiz,
+.math-quantity-option,
+.math-backlog-learn-stage,
+.math-backlog-visual,
+.math-backlog-option {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(93, 145, 203, 0.42);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.math-learn-num,
+.math-quantity-option,
+.math-coming,
+.math-galaxy-lead,
+.math-galaxy-lead span {
+  color: #a85d08;
+  text-shadow: none;
+}
+
+.math-count-tappable {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(93, 145, 203, 0.2);
+}
+
+.star-meta strong,
+.progress-pill {
+  color: #a85d08;
+}
+
+.topic-card,
+.learn-stage,
+.learn-pair-card,
+.play-mode-card {
+  border-width: 2px;
+}
+
+.topic-card:active,
+.play-mode-card:active,
+.learn-pair-card:active {
+  filter: brightness(0.97);
+}
+
+.btn-ghost,
+.btn-parent {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 0 0 2px rgba(93, 145, 203, 0.26), var(--shadow);
+}
+
+.profile-card,
+.profile-chip {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(237, 177, 55, 0.58);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.profile-card-name {
+  color: var(--ink);
+}
+
+.learn-nav .btn-ghost:not(:disabled) {
+  color: var(--ink);
+  box-shadow: 0 0 0 2px rgba(93, 145, 203, 0.42), var(--shadow);
+}
+
+.emoji-plate {
+  --plate: #dff3ff;
+  box-shadow: 0 8px 18px rgba(68, 113, 158, 0.14);
+}
+
+/* 連一連和字母遊戲用同一種淺色板，避免一半仍然是夜空。 */
+.phonics-screen .topic-card,
+.phonics-screen .learn-stage,
+.phonics-screen .build-pool,
+.phonics-screen .match-stage,
+.connect-picture-main,
+.connect-word-card,
+.word-card,
+.build-slot {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(93, 145, 203, 0.48);
+  color: var(--ink);
+  box-shadow: 0 8px 20px rgba(77, 116, 158, 0.13);
+}
+
+.connect-picture-main.is-selected,
+.connect-word-card.is-selected,
+.word-card.selected,
+.build-slot.is-next {
+  background: #e6fbf3;
+  border-color: #26af86;
+  box-shadow: 0 0 0 4px rgba(43, 201, 157, 0.2), 0 8px 20px rgba(77, 116, 158, 0.13);
+}
+
+.connect-picture-main.is-matched,
+.connect-word-card.is-matched,
+.word-card.correct,
+.build-slot.is-filled {
+  background: #e3faed;
+  border-color: #32b97d;
+}
+
+/* 音素踏腳石：淺底、深色字和厚外框，比舊深藍圓點清楚。 */
+.letter-tile .sound-energy-glyph {
+  border: 3px solid #5b9fe1;
+  background:
+    radial-gradient(circle at 34% 26%, #ffffff 0 14%, transparent 15%),
+    linear-gradient(145deg, #ffffff, #dceeff);
+  color: #1b3970;
+  box-shadow:
+    inset 0 -5px 0 rgba(124, 177, 226, 0.2),
+    0 0 0 4px rgba(121, 181, 231, 0.18),
+    0 7px 0 #8ab9e2,
+    0 11px 18px rgba(65, 105, 154, 0.2);
+}
+
+.letter-tile.is-energized .sound-energy-glyph {
+  border-color: #e9a60d;
+  color: #704006;
+  background: linear-gradient(145deg, #fffbe3, #ffe08a);
+  box-shadow: 0 0 0 6px rgba(248, 189, 53, 0.22), 0 7px 0 #dd9710, 0 12px 22px rgba(239, 176, 30, 0.26);
+}
+
+.build-slot.is-filled .letter-tile .sound-energy-glyph,
+.build-slot.is-chunk .letter-tile .sound-energy-glyph {
+  color: #164b3b;
+}
+
+.letter-row {
+  width: min(100%, 460px);
+  gap: clamp(8px, 1.8vw, 14px);
+  padding: 8px 10px 14px;
+  border-radius: 999px;
+  background: rgba(219, 238, 255, 0.72);
+  box-shadow: inset 0 0 0 2px rgba(93, 145, 203, 0.18);
+}
+
+.letter-row:not(:empty)::before {
+  left: 7%;
+  right: 7%;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, #ffd36b 13%, #ffd36b 87%, transparent);
+  box-shadow: none;
+}
+
+.letter-row .letter-tile {
+  width: clamp(52px, 10vw, 64px);
+  height: clamp(52px, 10vw, 64px);
+}
+
+.letter-row.has-long-sounds {
+  width: min(100%, 520px);
+  gap: clamp(4px, 1.1vw, 8px);
+}
+
+.letter-row.has-long-sounds .letter-tile {
+  width: clamp(44px, 7.7vw, 54px);
+  height: clamp(44px, 7.7vw, 54px);
+}
+
+.letter-row.has-extra-long-sounds .letter-tile {
+  width: clamp(40px, 6.6vw, 48px);
+  height: clamp(40px, 6.6vw, 48px);
+}
+
+.story-demo-hero,
+.story-play-stage {
+  border-color: rgba(108, 157, 215, 0.54);
+  background: linear-gradient(135deg, rgba(235, 225, 255, 0.92), rgba(220, 244, 255, 0.94));
+  box-shadow: var(--shadow);
+}
+
+.story-demo-hero p,
+.story-demo-source-note,
+.story-play-stage p,
+.story-activity-card small,
+.story-activity-description {
+  color: var(--ink-dim);
+}
+
+.story-activity-card,
+.story-answer,
+.story-fill-tile {
+  color: var(--ink);
+  border-color: rgba(93, 145, 203, 0.42);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 480px) {
+  .letter-row.has-long-sounds {
+    max-width: 330px;
+    flex-wrap: wrap;
+    padding-inline: 14px;
+  }
+
+  .letter-row.has-long-sounds::before {
+    display: none;
+  }
+
+  .letter-row.has-long-sounds .letter-tile {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .letter-tile .sound-energy-glyph,
+  .topic-card,
+  .play-mode-card {
+    transition: none;
+  }
+}
