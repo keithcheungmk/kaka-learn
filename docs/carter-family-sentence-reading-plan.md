@@ -1,6 +1,6 @@
 # Carter Family Read & Fill and reading exercises
 
-This is the content specification for the first ten Carter Family books. The
+This is the content specification for Carter Family books CF001–CF040. The
 existing CF001–CF003 implementation is the visual and interaction template; the
 remaining books extend the content catalogue without creating a second game.
 
@@ -40,7 +40,33 @@ Published Story English books:
 | CF010 | *Going to the Dentist* | 13 | `207.mp3`–`219.mp3` |
 
 CF001–CF003 currently provide 38 verified story pages. CF004–CF010 add 96
-further story pages, for 134 pages in the first-ten scope.
+further story pages. CF021–CF040 add 245 further story pages. The manifest now
+tracks 341 pages across the published CF001–CF040 catalogue.
+
+## Scope: CF021–CF040 Read & Fill
+
+| Book | Title | Story pages | Clips |
+| --- | --- | ---: | --- |
+| CF021 | *It's Mother's Day!* | 12 | `359.mp3`–`370.mp3` |
+| CF022 | *The Backyard* | 13 | `371.mp3`–`383.mp3` |
+| CF023 | *The Amusement Park* | 13 | `384.mp3`–`396.mp3` |
+| CF024 | *The Purple Scarf* | 14 | `397.mp3`–`410.mp3` |
+| CF025 | *Everyone Babysits* | 12 | `411.mp3`–`422.mp3` |
+| CF026 | *Aunt Judy's Mystery Adventure* | 12 | `423.mp3`–`434.mp3` |
+| CF027 | *Rover's Walk* | 12 | `435.mp3`–`446.mp3` |
+| CF028 | *A Silly Snowman* | 12 | `447.mp3`–`458.mp3` |
+| CF029 | *The Club in the Tree House* | 12 | `459.mp3`–`470.mp3` |
+| CF030 | *A Rainy Day* | 12 | `471.mp3`–`482.mp3` |
+| CF031 | *The Class Pet* | 12 | `483.mp3`–`494.mp3` |
+| CF032 | *The Fire Drill* | 12 | `495.mp3`–`506.mp3` |
+| CF033 | *A Hike to the Top* | 12 | `507.mp3`–`518.mp3` |
+| CF034 | *Harry's Sick Day* | 12 | `519.mp3`–`530.mp3` |
+| CF035 | *Aunt Judy's Closet* | 12 | `531.mp3`–`542.mp3` |
+| CF036 | *Planting Seeds* | 12 | `543.mp3`–`554.mp3` |
+| CF037 | *The Airplane Trip* | 13 | `555.mp3`–`567.mp3` |
+| CF038 | *Harry's Map* | 12 | `568.mp3`–`579.mp3` |
+| CF039 | *A Visit with Grandpa* | 12 | `580.mp3`–`591.mp3` |
+| CF040 | *Picking Berries* | 12 | `592.mp3`–`603.mp3` |
 
 ## Content manifest contract
 

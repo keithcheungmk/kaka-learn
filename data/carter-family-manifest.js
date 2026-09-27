@@ -2456,6 +2456,6557 @@ window.KakaCarterManifest = {
           "reviewNote": "PDF page 14 paired with page clip 219.mp3."
         }
       ]
+    },
+    {
+      "id": "cf021",
+      "title": "It's Mother's Day!",
+      "cfLabel": "CF021",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 021. It's Mother's Day!.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/21.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 21 - It's Mother's Day!",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "359.mp3",
+          "sentence": [
+            "“Sunday",
+            "is",
+            "a",
+            "special",
+            "day,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "special"
+          ],
+          "choices": [
+            "special",
+            "planting",
+            "flowers"
+          ],
+          "image": "./assets/story-demo/cf021/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf021/cf021-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 359.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "360.mp3",
+          "sentence": [
+            "“We",
+            "don’t",
+            "have",
+            "to",
+            "go",
+            "to",
+            "school!”"
+          ],
+          "blanks": [
+            "school!”"
+          ],
+          "choices": [
+            "school!”",
+            "planting",
+            "flowers"
+          ],
+          "image": "./assets/story-demo/cf021/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf021/cf021-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 360.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "361.mp3",
+          "sentence": [
+            "“Sunday",
+            "will",
+            "be",
+            "a",
+            "very",
+            "fun",
+            "day,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "very"
+          ],
+          "choices": [
+            "very",
+            "planting",
+            "flowers"
+          ],
+          "image": "./assets/story-demo/cf021/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf021/cf021-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 361.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "362.mp3",
+          "sentence": [
+            "“There’s",
+            "a",
+            "great",
+            "baseball",
+            "game",
+            "on",
+            "TV!”"
+          ],
+          "blanks": [
+            "game"
+          ],
+          "choices": [
+            "game",
+            "planting",
+            "flowers"
+          ],
+          "image": "./assets/story-demo/cf021/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf021/cf021-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 362.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "363.mp3",
+          "sentence": [
+            "Mom",
+            "tossed",
+            "the",
+            "ball",
+            "to",
+            "Rover",
+            "too."
+          ],
+          "blanks": [
+            "ball"
+          ],
+          "choices": [
+            "ball",
+            "planting",
+            "flowers"
+          ],
+          "image": "./assets/story-demo/cf021/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf021/cf021-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 363.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "364.mp3",
+          "sentence": [
+            "“Do",
+            "you",
+            "know",
+            "what",
+            "Sunday",
+            "is?”",
+            "she",
+            "asked",
+            "Oliver."
+          ],
+          "blanks": [
+            "asked"
+          ],
+          "choices": [
+            "asked",
+            "planting",
+            "flowers"
+          ],
+          "image": "./assets/story-demo/cf021/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf021/cf021-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 364.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "365.mp3",
+          "sentence": [
+            "But",
+            "no",
+            "one",
+            "in",
+            "the",
+            "family",
+            "remembered."
+          ],
+          "blanks": [
+            "remembered."
+          ],
+          "choices": [
+            "remembered.",
+            "planting",
+            "flowers"
+          ],
+          "image": "./assets/story-demo/cf021/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf021/cf021-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 365.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "366.mp3",
+          "sentence": [
+            "On",
+            "Sunday",
+            "the",
+            "kids",
+            "woke",
+            "up",
+            "early."
+          ],
+          "blanks": [
+            "early."
+          ],
+          "choices": [
+            "early.",
+            "planting",
+            "flowers"
+          ],
+          "image": "./assets/story-demo/cf021/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf021/cf021-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 366.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "367.mp3",
+          "sentence": [
+            "Oliver",
+            "put",
+            "some",
+            "pretty",
+            "flowers",
+            "in",
+            "a",
+            "vase."
+          ],
+          "blanks": [
+            "vase."
+          ],
+          "choices": [
+            "vase.",
+            "planting",
+            "flowers"
+          ],
+          "image": "./assets/story-demo/cf021/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf021/cf021-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 367.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "368.mp3",
+          "sentence": [
+            "Then",
+            "they",
+            "carried",
+            "the",
+            "tray",
+            "upstairs."
+          ],
+          "blanks": [
+            "upstairs."
+          ],
+          "choices": [
+            "upstairs.",
+            "planting",
+            "flowers"
+          ],
+          "image": "./assets/story-demo/cf021/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf021/cf021-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 368.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "369.mp3",
+          "sentence": [
+            "The",
+            "kids",
+            "and",
+            "Dad",
+            "ran",
+            "downstairs."
+          ],
+          "blanks": [
+            "downstairs."
+          ],
+          "choices": [
+            "downstairs.",
+            "planting",
+            "flowers"
+          ],
+          "image": "./assets/story-demo/cf021/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf021/cf021-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 369.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "370.mp3",
+          "sentence": [
+            "“I",
+            "went",
+            "out",
+            "to",
+            "buy",
+            "some",
+            "bagels,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "bagels,”"
+          ],
+          "choices": [
+            "bagels,”",
+            "planting",
+            "flowers"
+          ],
+          "image": "./assets/story-demo/cf021/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf021/cf021-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 370.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf022",
+      "title": "The Backyard",
+      "cfLabel": "CF022",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 022. The Backyard.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/22.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 22 - The Backyard",
+      "pages": [
+        {
+          "pdfPage": 2,
+          "printedPage": 1,
+          "sourceClip": "371.mp3",
+          "sentence": [
+            "“What",
+            "a",
+            "beautiful",
+            "day!”",
+            "said",
+            "Emmy."
+          ],
+          "blanks": [
+            "beautiful"
+          ],
+          "choices": [
+            "beautiful",
+            "day",
+            "want"
+          ],
+          "image": "./assets/story-demo/cf022/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf022/cf022-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 2 paired with page clip 371.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 3,
+          "printedPage": 2,
+          "sourceClip": "372.mp3",
+          "sentence": [
+            "Harry",
+            "and",
+            "Emmy",
+            "played",
+            "tag."
+          ],
+          "blanks": [
+            "played"
+          ],
+          "choices": [
+            "played",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf022/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf022/cf022-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 372.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 3,
+          "sourceClip": "373.mp3",
+          "sentence": [
+            "He",
+            "saw",
+            "a",
+            "big",
+            "green",
+            "bug",
+            "in",
+            "a",
+            "tree."
+          ],
+          "blanks": [
+            "tree."
+          ],
+          "choices": [
+            "tree.",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf022/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf022/cf022-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 373.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 4,
+          "sourceClip": "374.mp3",
+          "sentence": [
+            "“That",
+            "bug",
+            "looks",
+            "like",
+            "a",
+            "leaf!”"
+          ],
+          "blanks": [
+            "leaf!”"
+          ],
+          "choices": [
+            "leaf!”",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf022/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf022/cf022-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 374.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 5,
+          "sourceClip": "375.mp3",
+          "sentence": [
+            "A",
+            "bird",
+            "flew",
+            "down",
+            "from",
+            "the",
+            "sky."
+          ],
+          "blanks": [
+            "down"
+          ],
+          "choices": [
+            "down",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf022/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf022/cf022-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 375.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 6,
+          "sourceClip": "376.mp3",
+          "sentence": [
+            "“A",
+            "bird",
+            "is",
+            "eating",
+            "my",
+            "granola",
+            "bar!”",
+            "The",
+            "bird",
+            "flew",
+            "away."
+          ],
+          "blanks": [
+            "away."
+          ],
+          "choices": [
+            "away.",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf022/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf022/cf022-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 376.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 7,
+          "sourceClip": "377.mp3",
+          "sentence": [
+            "A",
+            "squirrel",
+            "jumped",
+            "onto",
+            "the",
+            "bird",
+            "feeder."
+          ],
+          "blanks": [
+            "feeder."
+          ],
+          "choices": [
+            "feeder.",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf022/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf022/cf022-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 377.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 8,
+          "sourceClip": "378.mp3",
+          "sentence": [
+            "A",
+            "cat",
+            "was",
+            "walking",
+            "on",
+            "the",
+            "fence."
+          ],
+          "blanks": [
+            "fence."
+          ],
+          "choices": [
+            "fence.",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf022/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf022/cf022-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 378.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 9,
+          "sourceClip": "379.mp3",
+          "sentence": [
+            "Pickles",
+            "jumped",
+            "down",
+            "from",
+            "the",
+            "fence."
+          ],
+          "blanks": [
+            "fence."
+          ],
+          "choices": [
+            "fence.",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf022/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf022/cf022-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 379.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 10,
+          "sourceClip": "380.mp3",
+          "sentence": [
+            "He",
+            "rolled",
+            "over",
+            "onto",
+            "his",
+            "back."
+          ],
+          "blanks": [
+            "back."
+          ],
+          "choices": [
+            "back.",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf022/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf022/cf022-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 380.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 11,
+          "sourceClip": "381.mp3",
+          "sentence": [
+            "“This",
+            "is",
+            "fun,”",
+            "said",
+            "Oliver."
+          ],
+          "blanks": [
+            "Oliver."
+          ],
+          "choices": [
+            "Oliver.",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf022/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf022/cf022-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 381.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 12,
+          "sourceClip": "382.mp3",
+          "sentence": [
+            "Another",
+            "animal",
+            "climbed",
+            "over",
+            "the",
+            "fence."
+          ],
+          "blanks": [
+            "fence."
+          ],
+          "choices": [
+            "fence.",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf022/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf022/cf022-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 382.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 13,
+          "sourceClip": "383.mp3",
+          "sentence": [
+            "“I",
+            "don’t",
+            "think",
+            "that’s",
+            "a",
+            "cat,”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "that’s"
+          ],
+          "choices": [
+            "that’s",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf022/pages/page-13.jpg",
+          "audio": "./assets/story-demo/cf022/cf022-page-13.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 383.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf023",
+      "title": "The Amusement Park",
+      "cfLabel": "CF023",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 023. The Amusement Park.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/23.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 23 - The Amusement Park",
+      "pages": [
+        {
+          "pdfPage": 2,
+          "printedPage": 1,
+          "sourceClip": "384.mp3",
+          "sentence": [
+            "The",
+            "family",
+            "was",
+            "at",
+            "an",
+            "amusement",
+            "park."
+          ],
+          "blanks": [
+            "park."
+          ],
+          "choices": [
+            "park.",
+            "family",
+            "amusement"
+          ],
+          "image": "./assets/story-demo/cf023/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf023/cf023-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 2 paired with page clip 384.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 3,
+          "printedPage": 2,
+          "sourceClip": "385.mp3",
+          "sentence": [
+            "Its",
+            "cars",
+            "went",
+            "up",
+            "and",
+            "down",
+            "the",
+            "track."
+          ],
+          "blanks": [
+            "track."
+          ],
+          "choices": [
+            "track.",
+            "family",
+            "amusement"
+          ],
+          "image": "./assets/story-demo/cf023/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf023/cf023-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 385.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 3,
+          "sourceClip": "386.mp3",
+          "sentence": [
+            "“Let’s",
+            "go",
+            "on",
+            "that",
+            "roller",
+            "coaster!”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "coaster!”"
+          ],
+          "choices": [
+            "coaster!”",
+            "family",
+            "amusement"
+          ],
+          "image": "./assets/story-demo/cf023/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf023/cf023-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 386.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 4,
+          "sourceClip": "387.mp3",
+          "sentence": [
+            "“I",
+            "want",
+            "to",
+            "go",
+            "on",
+            "that!”",
+            "said",
+            "Oliver."
+          ],
+          "blanks": [
+            "want"
+          ],
+          "choices": [
+            "want",
+            "family",
+            "amusement"
+          ],
+          "image": "./assets/story-demo/cf023/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf023/cf023-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 387.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 5,
+          "sourceClip": "388.mp3",
+          "sentence": [
+            "Harry",
+            "sat",
+            "on",
+            "a",
+            "horse."
+          ],
+          "blanks": [
+            "horse."
+          ],
+          "choices": [
+            "horse.",
+            "family",
+            "amusement"
+          ],
+          "image": "./assets/story-demo/cf023/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf023/cf023-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 388.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 6,
+          "sourceClip": "389.mp3",
+          "sentence": [
+            "“This",
+            "is",
+            "a",
+            "baby",
+            "ride,”",
+            "he",
+            "thought."
+          ],
+          "blanks": [
+            "thought."
+          ],
+          "choices": [
+            "thought.",
+            "family",
+            "amusement"
+          ],
+          "image": "./assets/story-demo/cf023/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf023/cf023-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 389.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 7,
+          "sourceClip": "390.mp3",
+          "sentence": [
+            "The",
+            "roller",
+            "coaster",
+            "looked",
+            "bigger",
+            "now."
+          ],
+          "blanks": [
+            "bigger"
+          ],
+          "choices": [
+            "bigger",
+            "family",
+            "amusement"
+          ],
+          "image": "./assets/story-demo/cf023/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf023/cf023-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 390.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 8,
+          "sourceClip": "391.mp3",
+          "sentence": [
+            "“Let’s",
+            "go",
+            "on",
+            "it!”",
+            "said",
+            "Aunt",
+            "Judy."
+          ],
+          "blanks": [
+            "“Let’s"
+          ],
+          "choices": [
+            "“Let’s",
+            "family",
+            "amusement"
+          ],
+          "image": "./assets/story-demo/cf023/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf023/cf023-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 391.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 9,
+          "sourceClip": "392.mp3",
+          "sentence": [
+            "Everyone",
+            "got",
+            "on",
+            "the",
+            "Ferris",
+            "wheel."
+          ],
+          "blanks": [
+            "wheel."
+          ],
+          "choices": [
+            "wheel.",
+            "family",
+            "amusement"
+          ],
+          "image": "./assets/story-demo/cf023/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf023/cf023-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 392.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 10,
+          "sourceClip": "393.mp3",
+          "sentence": [
+            "“This",
+            "Ferris",
+            "wheel",
+            "is",
+            "so",
+            "slow,”",
+            "Harry",
+            "thought."
+          ],
+          "blanks": [
+            "thought."
+          ],
+          "choices": [
+            "thought.",
+            "family",
+            "amusement"
+          ],
+          "image": "./assets/story-demo/cf023/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf023/cf023-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 393.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 11,
+          "sourceClip": "394.mp3",
+          "sentence": [
+            "Finally",
+            "they",
+            "got",
+            "to",
+            "the",
+            "roller",
+            "coaster."
+          ],
+          "blanks": [
+            "coaster."
+          ],
+          "choices": [
+            "coaster.",
+            "family",
+            "amusement"
+          ],
+          "image": "./assets/story-demo/cf023/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf023/cf023-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 394.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 12,
+          "sourceClip": "395.mp3",
+          "sentence": [
+            "The",
+            "roller",
+            "coaster",
+            "looked",
+            "really",
+            "scary",
+            "now."
+          ],
+          "blanks": [
+            "scary"
+          ],
+          "choices": [
+            "scary",
+            "family",
+            "amusement"
+          ],
+          "image": "./assets/story-demo/cf023/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf023/cf023-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 395.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 13,
+          "sourceClip": "396.mp3",
+          "sentence": [
+            "“Harry,",
+            "where",
+            "are",
+            "you",
+            "going?”",
+            "called",
+            "Dad."
+          ],
+          "blanks": [
+            "called"
+          ],
+          "choices": [
+            "called",
+            "family",
+            "amusement"
+          ],
+          "image": "./assets/story-demo/cf023/pages/page-13.jpg",
+          "audio": "./assets/story-demo/cf023/cf023-page-13.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 396.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf024",
+      "title": "The Purple Scarf",
+      "cfLabel": "CF024",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 024. The Purple Scarf.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/24.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 24 - The Purple Scarf",
+      "pages": [
+        {
+          "pdfPage": 2,
+          "printedPage": 1,
+          "sourceClip": "397.mp3",
+          "sentence": [
+            "She",
+            "had",
+            "lots",
+            "of",
+            "purple",
+            "yarn."
+          ],
+          "blanks": [
+            "yarn."
+          ],
+          "choices": [
+            "yarn.",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 2 paired with page clip 397.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 3,
+          "printedPage": 2,
+          "sourceClip": "398.mp3",
+          "sentence": [
+            "But",
+            "Emmy",
+            "didn’t",
+            "know",
+            "what",
+            "to",
+            "make."
+          ],
+          "blanks": [
+            "make."
+          ],
+          "choices": [
+            "make.",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 398.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 3,
+          "sourceClip": "399.mp3",
+          "sentence": [
+            "“Brr,”",
+            "said",
+            "Aunt",
+            "Judy",
+            "one",
+            "morning."
+          ],
+          "blanks": [
+            "morning."
+          ],
+          "choices": [
+            "morning.",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 399.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 4,
+          "sourceClip": "400.mp3",
+          "sentence": [
+            "“I’ll",
+            "make",
+            "a",
+            "warm",
+            "scarf!”",
+            "Emmy",
+            "started",
+            "knitting",
+            "a",
+            "purple",
+            "scarf."
+          ],
+          "blanks": [
+            "scarf."
+          ],
+          "choices": [
+            "scarf.",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 400.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 5,
+          "sourceClip": "401.mp3",
+          "sentence": [
+            "“I’ll",
+            "need",
+            "this",
+            "scarf",
+            "soon,”",
+            "she",
+            "thought."
+          ],
+          "blanks": [
+            "thought."
+          ],
+          "choices": [
+            "thought.",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 401.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 6,
+          "sourceClip": "402.mp3",
+          "sentence": [
+            "“This",
+            "scarf",
+            "will",
+            "be",
+            "so",
+            "warm,”",
+            "thought",
+            "Emmy."
+          ],
+          "blanks": [
+            "thought"
+          ],
+          "choices": [
+            "thought",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 402.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 7,
+          "sourceClip": "403.mp3",
+          "sentence": [
+            "“My",
+            "scarf",
+            "has",
+            "lots",
+            "of",
+            "mistakes!”"
+          ],
+          "blanks": [
+            "mistakes!”"
+          ],
+          "choices": [
+            "mistakes!”",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 403.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 8,
+          "sourceClip": "404.mp3",
+          "sentence": [
+            "“Your",
+            "scarf",
+            "is",
+            "still",
+            "pretty,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "pretty,”"
+          ],
+          "choices": [
+            "pretty,”",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 404.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 9,
+          "sourceClip": "405.mp3",
+          "sentence": [
+            "She",
+            "stuffed",
+            "the",
+            "scarf",
+            "in",
+            "a",
+            "drawer."
+          ],
+          "blanks": [
+            "drawer."
+          ],
+          "choices": [
+            "drawer.",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 405.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 10,
+          "sourceClip": "406.mp3",
+          "sentence": [
+            "One",
+            "morning",
+            "Oliver",
+            "looked",
+            "upset."
+          ],
+          "blanks": [
+            "upset."
+          ],
+          "choices": [
+            "upset.",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 406.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 11,
+          "sourceClip": "407.mp3",
+          "sentence": [
+            "“But",
+            "I",
+            "don’t",
+            "have",
+            "anything",
+            "purple",
+            "to",
+            "wear.”"
+          ],
+          "blanks": [
+            "wear.”"
+          ],
+          "choices": [
+            "wear.”",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 407.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 12,
+          "sourceClip": "408.mp3",
+          "sentence": [
+            "“You",
+            "can",
+            "wear",
+            "my",
+            "scarf.”"
+          ],
+          "blanks": [
+            "scarf.”"
+          ],
+          "choices": [
+            "scarf.”",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 408.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 13,
+          "sourceClip": "409.mp3",
+          "sentence": [
+            "Oliver",
+            "took",
+            "Emmy’s",
+            "scarf."
+          ],
+          "blanks": [
+            "scarf."
+          ],
+          "choices": [
+            "scarf.",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-13.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-13.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 409.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 15,
+          "printedPage": 14,
+          "sourceClip": "410.mp3",
+          "sentence": [
+            "He",
+            "put",
+            "it",
+            "on."
+          ],
+          "blanks": [
+            "put"
+          ],
+          "choices": [
+            "put",
+            "learning",
+            "knit"
+          ],
+          "image": "./assets/story-demo/cf024/pages/page-14.jpg",
+          "audio": "./assets/story-demo/cf024/cf024-page-14.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 15 paired with page clip 410.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf025",
+      "title": "Everyone Babysits",
+      "cfLabel": "CF025",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 025. Everyone Babysits.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/25.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 25 - Everyone Babysits",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "411.mp3",
+          "sentence": [
+            "“We’re",
+            "going",
+            "to",
+            "babysit",
+            "for",
+            "Martha",
+            "today.”"
+          ],
+          "blanks": [
+            "today.”"
+          ],
+          "choices": [
+            "today.”",
+            "good",
+            "news"
+          ],
+          "image": "./assets/story-demo/cf025/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf025/cf025-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 411.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "412.mp3",
+          "sentence": [
+            "She",
+            "brought",
+            "a",
+            "diaper",
+            "bag",
+            "and",
+            "crib",
+            "too."
+          ],
+          "blanks": [
+            "crib"
+          ],
+          "choices": [
+            "crib",
+            "good",
+            "news"
+          ],
+          "image": "./assets/story-demo/cf025/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf025/cf025-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 412.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "413.mp3",
+          "sentence": [
+            "“I",
+            "want",
+            "to",
+            "play",
+            "with",
+            "Martha,”",
+            "Oliver",
+            "said."
+          ],
+          "blanks": [
+            "Martha,”"
+          ],
+          "choices": [
+            "Martha,”",
+            "good",
+            "news"
+          ],
+          "image": "./assets/story-demo/cf025/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf025/cf025-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 413.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "414.mp3",
+          "sentence": [
+            "“She",
+            "wants",
+            "a",
+            "new",
+            "diaper,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "diaper,”"
+          ],
+          "choices": [
+            "diaper,”",
+            "good",
+            "news"
+          ],
+          "image": "./assets/story-demo/cf025/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf025/cf025-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 414.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "415.mp3",
+          "sentence": [
+            "“What",
+            "does",
+            "she",
+            "want?”",
+            "Emmy",
+            "asked."
+          ],
+          "blanks": [
+            "asked."
+          ],
+          "choices": [
+            "asked.",
+            "good",
+            "news"
+          ],
+          "image": "./assets/story-demo/cf025/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf025/cf025-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 415.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "416.mp3",
+          "sentence": [
+            "Emmy",
+            "gave",
+            "Martha",
+            "a",
+            "bottle."
+          ],
+          "blanks": [
+            "bottle."
+          ],
+          "choices": [
+            "bottle.",
+            "good",
+            "news"
+          ],
+          "image": "./assets/story-demo/cf025/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf025/cf025-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 416.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "417.mp3",
+          "sentence": [
+            "Soon",
+            "Martha",
+            "started",
+            "to",
+            "cry",
+            "again."
+          ],
+          "blanks": [
+            "again."
+          ],
+          "choices": [
+            "again.",
+            "good",
+            "news"
+          ],
+          "image": "./assets/story-demo/cf025/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf025/cf025-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 417.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "418.mp3",
+          "sentence": [
+            "Harry",
+            "put",
+            "the",
+            "baby",
+            "in",
+            "her",
+            "crib."
+          ],
+          "blanks": [
+            "crib."
+          ],
+          "choices": [
+            "crib.",
+            "good",
+            "news"
+          ],
+          "image": "./assets/story-demo/cf025/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf025/cf025-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 418.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "419.mp3",
+          "sentence": [
+            "She",
+            "was",
+            "not",
+            "wet",
+            "or",
+            "hungry",
+            "or",
+            "tired."
+          ],
+          "blanks": [
+            "tired."
+          ],
+          "choices": [
+            "tired.",
+            "good",
+            "news"
+          ],
+          "image": "./assets/story-demo/cf025/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf025/cf025-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 419.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "420.mp3",
+          "sentence": [
+            "“What",
+            "does",
+            "Martha",
+            "want",
+            "now?”",
+            "she",
+            "asked."
+          ],
+          "blanks": [
+            "asked."
+          ],
+          "choices": [
+            "asked.",
+            "good",
+            "news"
+          ],
+          "image": "./assets/story-demo/cf025/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf025/cf025-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 420.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "421.mp3",
+          "sentence": [
+            "“I",
+            "know!”",
+            "Oliver",
+            "ran",
+            "to",
+            "his",
+            "room."
+          ],
+          "blanks": [
+            "room."
+          ],
+          "choices": [
+            "room.",
+            "good",
+            "news"
+          ],
+          "image": "./assets/story-demo/cf025/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf025/cf025-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 421.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "422.mp3",
+          "sentence": [
+            "Oliver",
+            "gave",
+            "the",
+            "alligator",
+            "to",
+            "Martha."
+          ],
+          "blanks": [
+            "Martha."
+          ],
+          "choices": [
+            "Martha.",
+            "good",
+            "news"
+          ],
+          "image": "./assets/story-demo/cf025/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf025/cf025-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 422.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf026",
+      "title": "Aunt Judy's Mystery Adventure",
+      "cfLabel": "CF026",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 026. Aunt Judy's Mystery Adventure.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/26.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 26 - Aunt Judy's Mystery Adventure",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "423.mp3",
+          "sentence": [
+            "Aunt",
+            "Judy",
+            "carried",
+            "a",
+            "tote",
+            "bag."
+          ],
+          "blanks": [
+            "tote"
+          ],
+          "choices": [
+            "tote",
+            "carried",
+            "bag"
+          ],
+          "image": "./assets/story-demo/cf026/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf026/cf026-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 423.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "424.mp3",
+          "sentence": [
+            "“I’m",
+            "going",
+            "on",
+            "an",
+            "adventure,”",
+            "said",
+            "Aunt",
+            "Judy."
+          ],
+          "blanks": [
+            "adventure,”"
+          ],
+          "choices": [
+            "adventure,”",
+            "carried",
+            "tote"
+          ],
+          "image": "./assets/story-demo/cf026/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf026/cf026-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 424.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "425.mp3",
+          "sentence": [
+            "The",
+            "kids",
+            "followed",
+            "Aunt",
+            "Judy",
+            "to",
+            "the",
+            "kitchen."
+          ],
+          "blanks": [
+            "kitchen."
+          ],
+          "choices": [
+            "kitchen.",
+            "carried",
+            "tote"
+          ],
+          "image": "./assets/story-demo/cf026/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf026/cf026-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 425.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "426.mp3",
+          "sentence": [
+            "“As",
+            "far",
+            "as",
+            "you",
+            "can",
+            "imagine,”",
+            "she",
+            "said."
+          ],
+          "blanks": [
+            "imagine,”"
+          ],
+          "choices": [
+            "imagine,”",
+            "carried",
+            "tote"
+          ],
+          "image": "./assets/story-demo/cf026/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf026/cf026-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 426.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "427.mp3",
+          "sentence": [
+            "“But",
+            "it’s",
+            "not",
+            "too",
+            "far",
+            "to",
+            "walk,”",
+            "she",
+            "said."
+          ],
+          "blanks": [
+            "walk,”"
+          ],
+          "choices": [
+            "walk,”",
+            "carried",
+            "tote"
+          ],
+          "image": "./assets/story-demo/cf026/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf026/cf026-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 427.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "428.mp3",
+          "sentence": [
+            "Aunt",
+            "Judy",
+            "put",
+            "on",
+            "a",
+            "sweater."
+          ],
+          "blanks": [
+            "sweater."
+          ],
+          "choices": [
+            "sweater.",
+            "carried",
+            "tote"
+          ],
+          "image": "./assets/story-demo/cf026/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf026/cf026-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 428.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "429.mp3",
+          "sentence": [
+            "“Will",
+            "you",
+            "meet",
+            "wild",
+            "animals?”",
+            "asked",
+            "Oliver."
+          ],
+          "blanks": [
+            "asked"
+          ],
+          "choices": [
+            "asked",
+            "carried",
+            "tote"
+          ],
+          "image": "./assets/story-demo/cf026/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf026/cf026-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 429.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "430.mp3",
+          "sentence": [
+            "“Will",
+            "there",
+            "be",
+            "danger?”",
+            "she",
+            "asked."
+          ],
+          "blanks": [
+            "asked."
+          ],
+          "choices": [
+            "asked.",
+            "carried",
+            "tote"
+          ],
+          "image": "./assets/story-demo/cf026/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf026/cf026-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 430.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "431.mp3",
+          "sentence": [
+            "Aunt",
+            "Judy",
+            "put",
+            "on",
+            "her",
+            "hat."
+          ],
+          "blanks": [
+            "hat."
+          ],
+          "choices": [
+            "hat.",
+            "carried",
+            "tote"
+          ],
+          "image": "./assets/story-demo/cf026/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf026/cf026-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 431.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "432.mp3",
+          "sentence": [
+            "“You",
+            "can",
+            "all",
+            "come",
+            "with",
+            "me,”",
+            "said",
+            "Aunt",
+            "Judy."
+          ],
+          "blanks": [
+            "come"
+          ],
+          "choices": [
+            "come",
+            "carried",
+            "tote"
+          ],
+          "image": "./assets/story-demo/cf026/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf026/cf026-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 432.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "433.mp3",
+          "sentence": [
+            "“I’m",
+            "going",
+            "outside",
+            "to",
+            "read.”"
+          ],
+          "blanks": [
+            "read.”"
+          ],
+          "choices": [
+            "read.”",
+            "carried",
+            "tote"
+          ],
+          "image": "./assets/story-demo/cf026/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf026/cf026-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 433.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "434.mp3",
+          "sentence": [
+            "They",
+            "all",
+            "ran",
+            "to",
+            "get",
+            "their",
+            "books."
+          ],
+          "blanks": [
+            "books."
+          ],
+          "choices": [
+            "books.",
+            "carried",
+            "tote"
+          ],
+          "image": "./assets/story-demo/cf026/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf026/cf026-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 434.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf027",
+      "title": "Rover's Walk",
+      "cfLabel": "CF027",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 027. Rover's Walk.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/27.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 27 - Rover's Walk",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "435.mp3",
+          "sentence": [
+            "“I",
+            "want",
+            "to",
+            "play",
+            "soccer,”",
+            "said",
+            "Emmy."
+          ],
+          "blanks": [
+            "soccer,”"
+          ],
+          "choices": [
+            "soccer,”",
+            "called",
+            "needs"
+          ],
+          "image": "./assets/story-demo/cf027/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf027/cf027-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 435.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "436.mp3",
+          "sentence": [
+            "Emmy",
+            "got",
+            "Rover’s",
+            "leash."
+          ],
+          "blanks": [
+            "leash."
+          ],
+          "choices": [
+            "leash.",
+            "called",
+            "needs"
+          ],
+          "image": "./assets/story-demo/cf027/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf027/cf027-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 436.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "437.mp3",
+          "sentence": [
+            "He",
+            "wanted",
+            "to",
+            "chase",
+            "it."
+          ],
+          "blanks": [
+            "chase"
+          ],
+          "choices": [
+            "chase",
+            "called",
+            "needs"
+          ],
+          "image": "./assets/story-demo/cf027/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf027/cf027-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 437.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "438.mp3",
+          "sentence": [
+            "He",
+            "wanted",
+            "to",
+            "dig",
+            "in",
+            "it."
+          ],
+          "blanks": [
+            "wanted"
+          ],
+          "choices": [
+            "wanted",
+            "called",
+            "needs"
+          ],
+          "image": "./assets/story-demo/cf027/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf027/cf027-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 438.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "439.mp3",
+          "sentence": [
+            "He",
+            "wanted",
+            "to",
+            "eat",
+            "it."
+          ],
+          "blanks": [
+            "wanted"
+          ],
+          "choices": [
+            "wanted",
+            "called",
+            "needs"
+          ],
+          "image": "./assets/story-demo/cf027/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf027/cf027-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 439.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "440.mp3",
+          "sentence": [
+            "Then",
+            "Rover",
+            "heard",
+            "something."
+          ],
+          "blanks": [
+            "something."
+          ],
+          "choices": [
+            "something.",
+            "called",
+            "needs"
+          ],
+          "image": "./assets/story-demo/cf027/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf027/cf027-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 440.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "441.mp3",
+          "sentence": [
+            "Rover",
+            "pulled",
+            "the",
+            "leash",
+            "out",
+            "of",
+            "Emmy's",
+            "hands."
+          ],
+          "blanks": [
+            "hands."
+          ],
+          "choices": [
+            "hands.",
+            "called",
+            "needs"
+          ],
+          "image": "./assets/story-demo/cf027/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf027/cf027-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 441.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "442.mp3",
+          "sentence": [
+            "Rover",
+            "did",
+            "not",
+            "come",
+            "back."
+          ],
+          "blanks": [
+            "back."
+          ],
+          "choices": [
+            "back.",
+            "called",
+            "needs"
+          ],
+          "image": "./assets/story-demo/cf027/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf027/cf027-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 442.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "443.mp3",
+          "sentence": [
+            "There",
+            "were",
+            "lots",
+            "of",
+            "kids",
+            "there."
+          ],
+          "blanks": [
+            "kids"
+          ],
+          "choices": [
+            "kids",
+            "called",
+            "needs"
+          ],
+          "image": "./assets/story-demo/cf027/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf027/cf027-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 443.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "444.mp3",
+          "sentence": [
+            "He",
+            "chased",
+            "it",
+            "right",
+            "into",
+            "a",
+            "goal!"
+          ],
+          "blanks": [
+            "goal!"
+          ],
+          "choices": [
+            "goal!",
+            "called",
+            "needs"
+          ],
+          "image": "./assets/story-demo/cf027/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf027/cf027-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 444.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "445.mp3",
+          "sentence": [
+            "“Your",
+            "dog",
+            "is",
+            "a",
+            "good",
+            "soccer",
+            "player,”",
+            "one",
+            "kid",
+            "said."
+          ],
+          "blanks": [
+            "player,”"
+          ],
+          "choices": [
+            "player,”",
+            "called",
+            "needs"
+          ],
+          "image": "./assets/story-demo/cf027/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf027/cf027-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 445.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "446.mp3",
+          "sentence": [
+            "“You",
+            "did",
+            "not",
+            "want",
+            "a",
+            "walk,",
+            "Rover,”",
+            "said",
+            "Emmy."
+          ],
+          "blanks": [
+            "walk,"
+          ],
+          "choices": [
+            "walk,",
+            "called",
+            "needs"
+          ],
+          "image": "./assets/story-demo/cf027/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf027/cf027-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 446.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf028",
+      "title": "A Silly Snowman",
+      "cfLabel": "CF028",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 028. A Silly Snowman.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/28.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 28 - A Silly Snowman",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "447.mp3",
+          "sentence": [
+            "“Let’s",
+            "make",
+            "a",
+            "snowman!”",
+            "Emmy",
+            "said."
+          ],
+          "blanks": [
+            "snowman!”"
+          ],
+          "choices": [
+            "snowman!”",
+            "make",
+            "made"
+          ],
+          "image": "./assets/story-demo/cf028/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf028/cf028-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 447.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "448.mp3",
+          "sentence": [
+            "Oliver",
+            "tried",
+            "to",
+            "make",
+            "the",
+            "snowman’s",
+            "head."
+          ],
+          "blanks": [
+            "head."
+          ],
+          "choices": [
+            "head.",
+            "make",
+            "snowman"
+          ],
+          "image": "./assets/story-demo/cf028/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf028/cf028-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 448.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "449.mp3",
+          "sentence": [
+            "Emmy",
+            "made",
+            "a",
+            "nose",
+            "for",
+            "the",
+            "snowman."
+          ],
+          "blanks": [
+            "snowman."
+          ],
+          "choices": [
+            "snowman.",
+            "make",
+            "made"
+          ],
+          "image": "./assets/story-demo/cf028/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf028/cf028-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 449.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "450.mp3",
+          "sentence": [
+            "“You",
+            "can",
+            "find",
+            "a",
+            "hat,”",
+            "Harry",
+            "said."
+          ],
+          "blanks": [
+            "find"
+          ],
+          "choices": [
+            "find",
+            "make",
+            "snowman"
+          ],
+          "image": "./assets/story-demo/cf028/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf028/cf028-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 450.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "451.mp3",
+          "sentence": [
+            "“This",
+            "could",
+            "be",
+            "a",
+            "silly",
+            "hat,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "silly"
+          ],
+          "choices": [
+            "silly",
+            "make",
+            "snowman"
+          ],
+          "image": "./assets/story-demo/cf028/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf028/cf028-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 451.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "452.mp3",
+          "sentence": [
+            "“This",
+            "could",
+            "be",
+            "a",
+            "silly",
+            "hat!”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "silly"
+          ],
+          "choices": [
+            "silly",
+            "make",
+            "snowman"
+          ],
+          "image": "./assets/story-demo/cf028/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf028/cf028-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 452.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "453.mp3",
+          "sentence": [
+            "Emmy",
+            "put",
+            "it",
+            "on",
+            "the",
+            "snowman."
+          ],
+          "blanks": [
+            "snowman."
+          ],
+          "choices": [
+            "snowman.",
+            "make",
+            "made"
+          ],
+          "image": "./assets/story-demo/cf028/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf028/cf028-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 453.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "454.mp3",
+          "sentence": [
+            "“What",
+            "about",
+            "this?”",
+            "he",
+            "asked."
+          ],
+          "blanks": [
+            "asked."
+          ],
+          "choices": [
+            "asked.",
+            "make",
+            "snowman"
+          ],
+          "image": "./assets/story-demo/cf028/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf028/cf028-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 454.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "455.mp3",
+          "sentence": [
+            "Harry",
+            "put",
+            "the",
+            "scarf",
+            "on",
+            "the",
+            "snowman’s",
+            "head."
+          ],
+          "blanks": [
+            "head."
+          ],
+          "choices": [
+            "head.",
+            "make",
+            "snowman"
+          ],
+          "image": "./assets/story-demo/cf028/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf028/cf028-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 455.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "456.mp3",
+          "sentence": [
+            "He",
+            "took",
+            "the",
+            "soup",
+            "pot,",
+            "and",
+            "the",
+            "box,",
+            "and",
+            "the",
+            "scarf."
+          ],
+          "blanks": [
+            "scarf."
+          ],
+          "choices": [
+            "scarf.",
+            "make",
+            "snowman"
+          ],
+          "image": "./assets/story-demo/cf028/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf028/cf028-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 456.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "457.mp3",
+          "sentence": [
+            "“Now",
+            "the",
+            "snowman",
+            "looks",
+            "very",
+            "silly!”",
+            "Emmy",
+            "said."
+          ],
+          "blanks": [
+            "silly!”"
+          ],
+          "choices": [
+            "silly!”",
+            "make",
+            "snowman"
+          ],
+          "image": "./assets/story-demo/cf028/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf028/cf028-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 457.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "458.mp3",
+          "sentence": [
+            "“But",
+            "I",
+            "have",
+            "big",
+            "ideas!”"
+          ],
+          "blanks": [
+            "ideas!”"
+          ],
+          "choices": [
+            "ideas!”",
+            "make",
+            "snowman"
+          ],
+          "image": "./assets/story-demo/cf028/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf028/cf028-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 458.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf029",
+      "title": "The Club in the Tree House",
+      "cfLabel": "CF029",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 029. The Club in the Tree House.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/29.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 29 - The Club in the Tree House",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "459.mp3",
+          "sentence": [
+            "They",
+            "were",
+            "all",
+            "playing",
+            "in",
+            "the",
+            "tree",
+            "house."
+          ],
+          "blanks": [
+            "house."
+          ],
+          "choices": [
+            "house.",
+            "playing",
+            "friends"
+          ],
+          "image": "./assets/story-demo/cf029/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf029/cf029-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 459.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "460.mp3",
+          "sentence": [
+            "“Not",
+            "now,”",
+            "the",
+            "older",
+            "kids",
+            "said."
+          ],
+          "blanks": [
+            "kids"
+          ],
+          "choices": [
+            "kids",
+            "playing",
+            "friends"
+          ],
+          "image": "./assets/story-demo/cf029/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf029/cf029-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 460.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "461.mp3",
+          "sentence": [
+            "“Let’s",
+            "have",
+            "a",
+            "club,”",
+            "Harry",
+            "said."
+          ],
+          "blanks": [
+            "club,”"
+          ],
+          "choices": [
+            "club,”",
+            "playing",
+            "friends"
+          ],
+          "image": "./assets/story-demo/cf029/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf029/cf029-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 461.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "462.mp3",
+          "sentence": [
+            "“Let’s",
+            "call",
+            "it",
+            "the",
+            "Boys",
+            "Only",
+            "Club!”"
+          ],
+          "blanks": [
+            "Club!”"
+          ],
+          "choices": [
+            "Club!”",
+            "playing",
+            "friends"
+          ],
+          "image": "./assets/story-demo/cf029/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf029/cf029-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 462.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "463.mp3",
+          "sentence": [
+            "Sarah",
+            "grinned",
+            "at",
+            "Emmy."
+          ],
+          "blanks": [
+            "grinned"
+          ],
+          "choices": [
+            "grinned",
+            "playing",
+            "friends"
+          ],
+          "image": "./assets/story-demo/cf029/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf029/cf029-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 463.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "464.mp3",
+          "sentence": [
+            "“Who",
+            "plays",
+            "in",
+            "the",
+            "tree",
+            "house",
+            "after",
+            "lunch?”"
+          ],
+          "blanks": [
+            "lunch?”"
+          ],
+          "choices": [
+            "lunch?”",
+            "playing",
+            "friends"
+          ],
+          "image": "./assets/story-demo/cf029/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf029/cf029-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 464.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "465.mp3",
+          "sentence": [
+            "The",
+            "girls",
+            "and",
+            "boys",
+            "finished",
+            "at",
+            "the",
+            "same",
+            "time."
+          ],
+          "blanks": [
+            "time."
+          ],
+          "choices": [
+            "time.",
+            "playing",
+            "friends"
+          ],
+          "image": "./assets/story-demo/cf029/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf029/cf029-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 465.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "466.mp3",
+          "sentence": [
+            "They",
+            "all",
+            "got",
+            "there",
+            "at",
+            "the",
+            "same",
+            "time."
+          ],
+          "blanks": [
+            "time."
+          ],
+          "choices": [
+            "time.",
+            "playing",
+            "friends"
+          ],
+          "image": "./assets/story-demo/cf029/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf029/cf029-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 466.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "467.mp3",
+          "sentence": [
+            "“Someone",
+            "is",
+            "already",
+            "in",
+            "the",
+            "tree",
+            "house.”"
+          ],
+          "blanks": [
+            "house.”"
+          ],
+          "choices": [
+            "house.”",
+            "playing",
+            "friends"
+          ],
+          "image": "./assets/story-demo/cf029/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf029/cf029-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 467.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "468.mp3",
+          "sentence": [
+            "“I",
+            "have",
+            "a",
+            "club",
+            "too,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "club"
+          ],
+          "choices": [
+            "club",
+            "playing",
+            "friends"
+          ],
+          "image": "./assets/story-demo/cf029/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf029/cf029-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 468.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "469.mp3",
+          "sentence": [
+            "“Can",
+            "Sarah",
+            "and",
+            "I",
+            "be",
+            "in",
+            "your",
+            "club?”",
+            "Emmy",
+            "asked."
+          ],
+          "blanks": [
+            "asked."
+          ],
+          "choices": [
+            "asked.",
+            "playing",
+            "friends"
+          ],
+          "image": "./assets/story-demo/cf029/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf029/cf029-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 469.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "470.mp3",
+          "sentence": [
+            "“My",
+            "club",
+            "is",
+            "fair,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "fair,”"
+          ],
+          "choices": [
+            "fair,”",
+            "playing",
+            "friends"
+          ],
+          "image": "./assets/story-demo/cf029/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf029/cf029-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 470.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf030",
+      "title": "A Rainy Day",
+      "cfLabel": "CF030",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 030. A Rainy Day.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/30.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 30 - A Rainy Day",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "471.mp3",
+          "sentence": [
+            "“We",
+            "have",
+            "to",
+            "play",
+            "inside",
+            "today.”"
+          ],
+          "blanks": [
+            "today.”"
+          ],
+          "choices": [
+            "today.”",
+            "rainy",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf030/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf030/cf030-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 471.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "472.mp3",
+          "sentence": [
+            "Rover",
+            "followed",
+            "Emmy",
+            "into",
+            "the",
+            "kitchen."
+          ],
+          "blanks": [
+            "kitchen."
+          ],
+          "choices": [
+            "kitchen.",
+            "rainy",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf030/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf030/cf030-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 472.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "473.mp3",
+          "sentence": [
+            "Oliver",
+            "got",
+            "out",
+            "the",
+            "flour."
+          ],
+          "blanks": [
+            "flour."
+          ],
+          "choices": [
+            "flour.",
+            "rainy",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf030/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf030/cf030-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 473.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "474.mp3",
+          "sentence": [
+            "But",
+            "he",
+            "got",
+            "covered",
+            "in",
+            "flour!"
+          ],
+          "blanks": [
+            "flour!"
+          ],
+          "choices": [
+            "flour!",
+            "rainy",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf030/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf030/cf030-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 474.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "475.mp3",
+          "sentence": [
+            "“Now",
+            "let’s",
+            "paint",
+            "something,”",
+            "Emmy",
+            "said."
+          ],
+          "blanks": [
+            "something,”"
+          ],
+          "choices": [
+            "something,”",
+            "rainy",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf030/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf030/cf030-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 475.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "476.mp3",
+          "sentence": [
+            "Oliver",
+            "painted",
+            "a",
+            "pirate",
+            "ship."
+          ],
+          "blanks": [
+            "ship."
+          ],
+          "choices": [
+            "ship.",
+            "rainy",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf030/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf030/cf030-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 476.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "477.mp3",
+          "sentence": [
+            "But",
+            "he",
+            "got",
+            "covered",
+            "in",
+            "paint!"
+          ],
+          "blanks": [
+            "paint!"
+          ],
+          "choices": [
+            "paint!",
+            "rainy",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf030/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf030/cf030-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 477.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "478.mp3",
+          "sentence": [
+            "“I",
+            "know",
+            "what",
+            "to",
+            "do",
+            "next,”",
+            "she",
+            "said."
+          ],
+          "blanks": [
+            "next,”"
+          ],
+          "choices": [
+            "next,”",
+            "rainy",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf030/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf030/cf030-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 478.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "479.mp3",
+          "sentence": [
+            "Emmy",
+            "filled",
+            "the",
+            "tub",
+            "with",
+            "water."
+          ],
+          "blanks": [
+            "water."
+          ],
+          "choices": [
+            "water.",
+            "rainy",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf030/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf030/cf030-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 479.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "480.mp3",
+          "sentence": [
+            "But",
+            "Rover",
+            "didn’t",
+            "like",
+            "the",
+            "tub."
+          ],
+          "blanks": [
+            "didn’t"
+          ],
+          "choices": [
+            "didn’t",
+            "rainy",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf030/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf030/cf030-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 480.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "481.mp3",
+          "sentence": [
+            "Finally",
+            "Emmy",
+            "opened",
+            "the",
+            "back",
+            "door."
+          ],
+          "blanks": [
+            "door."
+          ],
+          "choices": [
+            "door.",
+            "rainy",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf030/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf030/cf030-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 481.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "482.mp3",
+          "sentence": [
+            "“Now",
+            "Rover",
+            "is",
+            "having",
+            "fun,”",
+            "said",
+            "Emmy."
+          ],
+          "blanks": [
+            "having"
+          ],
+          "choices": [
+            "having",
+            "rainy",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf030/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf030/cf030-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 482.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf031",
+      "title": "The Class Pet",
+      "cfLabel": "CF031",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 031. The Class Pet.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/31.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 31 - The Class Pet",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "483.mp3",
+          "sentence": [
+            "The",
+            "kids",
+            "took",
+            "turns",
+            "taking",
+            "the",
+            "rat",
+            "home."
+          ],
+          "blanks": [
+            "home."
+          ],
+          "choices": [
+            "home.",
+            "class",
+            "pet"
+          ],
+          "image": "./assets/story-demo/cf031/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf031/cf031-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 483.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "484.mp3",
+          "sentence": [
+            "Oliver",
+            "brought",
+            "the",
+            "cage",
+            "home."
+          ],
+          "blanks": [
+            "home."
+          ],
+          "choices": [
+            "home.",
+            "class",
+            "pet"
+          ],
+          "image": "./assets/story-demo/cf031/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf031/cf031-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 484.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "485.mp3",
+          "sentence": [
+            "“Ratty",
+            "is",
+            "nice,”",
+            "said",
+            "Oliver."
+          ],
+          "blanks": [
+            "nice,”"
+          ],
+          "choices": [
+            "nice,”",
+            "class",
+            "pet"
+          ],
+          "image": "./assets/story-demo/cf031/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf031/cf031-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 485.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "486.mp3",
+          "sentence": [
+            "Ratty",
+            "washed",
+            "his",
+            "face",
+            "with",
+            "his",
+            "paw."
+          ],
+          "blanks": [
+            "face"
+          ],
+          "choices": [
+            "face",
+            "class",
+            "pet"
+          ],
+          "image": "./assets/story-demo/cf031/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf031/cf031-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 486.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "487.mp3",
+          "sentence": [
+            "“Rats",
+            "are",
+            "ugly,”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "ugly,”"
+          ],
+          "choices": [
+            "ugly,”",
+            "class",
+            "pet"
+          ],
+          "image": "./assets/story-demo/cf031/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf031/cf031-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 487.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "488.mp3",
+          "sentence": [
+            "“Rats",
+            "are",
+            "smart,”",
+            "said",
+            "Dad."
+          ],
+          "blanks": [
+            "smart,”"
+          ],
+          "choices": [
+            "smart,”",
+            "class",
+            "pet"
+          ],
+          "image": "./assets/story-demo/cf031/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf031/cf031-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 488.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "489.mp3",
+          "sentence": [
+            "“Not",
+            "me,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "Mom."
+          ],
+          "choices": [
+            "Mom.",
+            "class",
+            "pet"
+          ],
+          "image": "./assets/story-demo/cf031/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf031/cf031-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 489.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "490.mp3",
+          "sentence": [
+            "Dad",
+            "and",
+            "Oliver",
+            "built",
+            "a",
+            "castle."
+          ],
+          "blanks": [
+            "castle."
+          ],
+          "choices": [
+            "castle.",
+            "class",
+            "pet"
+          ],
+          "image": "./assets/story-demo/cf031/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf031/cf031-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 490.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "491.mp3",
+          "sentence": [
+            "“He’s",
+            "climbing",
+            "up",
+            "the",
+            "steps!”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "steps!”"
+          ],
+          "choices": [
+            "steps!”",
+            "class",
+            "pet"
+          ],
+          "image": "./assets/story-demo/cf031/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf031/cf031-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 491.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "492.mp3",
+          "sentence": [
+            "“He’s",
+            "really",
+            "smart!”",
+            "Ratty",
+            "stood",
+            "on",
+            "his",
+            "back",
+            "legs."
+          ],
+          "blanks": [
+            "legs."
+          ],
+          "choices": [
+            "legs.",
+            "class",
+            "pet"
+          ],
+          "image": "./assets/story-demo/cf031/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf031/cf031-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 492.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "493.mp3",
+          "sentence": [
+            "“I",
+            "think",
+            "Mom",
+            "ran",
+            "away",
+            "from",
+            "Ratty,”",
+            "said",
+            "Dad."
+          ],
+          "blanks": [
+            "Ratty,”"
+          ],
+          "choices": [
+            "Ratty,”",
+            "class",
+            "pet"
+          ],
+          "image": "./assets/story-demo/cf031/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf031/cf031-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 493.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "494.mp3",
+          "sentence": [
+            "“I",
+            "got",
+            "that",
+            "cute",
+            "rat",
+            "some",
+            "peanuts!”"
+          ],
+          "blanks": [
+            "peanuts!”"
+          ],
+          "choices": [
+            "peanuts!”",
+            "class",
+            "pet"
+          ],
+          "image": "./assets/story-demo/cf031/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf031/cf031-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 494.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf032",
+      "title": "The Fire Drill",
+      "cfLabel": "CF032",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 032. The Fire Drill.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/32.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 32 - The Fire Drill",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "495.mp3",
+          "sentence": [
+            "“We",
+            "had",
+            "a",
+            "fire",
+            "drill,”",
+            "said",
+            "Emmy."
+          ],
+          "blanks": [
+            "drill,”"
+          ],
+          "choices": [
+            "drill,”",
+            "family",
+            "kitchen"
+          ],
+          "image": "./assets/story-demo/cf032/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf032/cf032-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 495.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "496.mp3",
+          "sentence": [
+            "“Everybody",
+            "had",
+            "to",
+            "walk",
+            "outside,”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "outside,”"
+          ],
+          "choices": [
+            "outside,”",
+            "family",
+            "kitchen"
+          ],
+          "image": "./assets/story-demo/cf032/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf032/cf032-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 496.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "497.mp3",
+          "sentence": [
+            "“Let’s",
+            "have",
+            "a",
+            "fire",
+            "drill",
+            "before",
+            "dinner.”"
+          ],
+          "blanks": [
+            "dinner.”"
+          ],
+          "choices": [
+            "dinner.”",
+            "family",
+            "kitchen"
+          ],
+          "image": "./assets/story-demo/cf032/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf032/cf032-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 497.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "498.mp3",
+          "sentence": [
+            "“I’ll",
+            "make",
+            "the",
+            "smoke",
+            "alarm",
+            "go",
+            "off,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "alarm"
+          ],
+          "choices": [
+            "alarm",
+            "family",
+            "kitchen"
+          ],
+          "image": "./assets/story-demo/cf032/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf032/cf032-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 498.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "499.mp3",
+          "sentence": [
+            "“Let’s",
+            "go",
+            "to",
+            "the",
+            "tree",
+            "house!”",
+            "Oliver",
+            "said."
+          ],
+          "blanks": [
+            "house!”"
+          ],
+          "choices": [
+            "house!”",
+            "family",
+            "kitchen"
+          ],
+          "image": "./assets/story-demo/cf032/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf032/cf032-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 499.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "500.mp3",
+          "sentence": [
+            "“I’ll",
+            "tell",
+            "Aunt",
+            "Judy",
+            "to",
+            "get",
+            "ready,”",
+            "Emmy",
+            "said."
+          ],
+          "blanks": [
+            "ready,”"
+          ],
+          "choices": [
+            "ready,”",
+            "family",
+            "kitchen"
+          ],
+          "image": "./assets/story-demo/cf032/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf032/cf032-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 500.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "501.mp3",
+          "sentence": [
+            "Oliver",
+            "and",
+            "Harry",
+            "ran",
+            "to",
+            "Harry’s",
+            "room."
+          ],
+          "blanks": [
+            "room."
+          ],
+          "choices": [
+            "room.",
+            "family",
+            "kitchen"
+          ],
+          "image": "./assets/story-demo/cf032/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf032/cf032-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 501.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "502.mp3",
+          "sentence": [
+            "Everybody",
+            "walked",
+            "quickly",
+            "to",
+            "the",
+            "tree",
+            "house."
+          ],
+          "blanks": [
+            "house."
+          ],
+          "choices": [
+            "house.",
+            "family",
+            "kitchen"
+          ],
+          "image": "./assets/story-demo/cf032/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf032/cf032-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 502.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "503.mp3",
+          "sentence": [
+            "“Our",
+            "family",
+            "is",
+            "safe,”",
+            "Mom",
+            "said."
+          ],
+          "blanks": [
+            "safe,”"
+          ],
+          "choices": [
+            "safe,”",
+            "family",
+            "kitchen"
+          ],
+          "image": "./assets/story-demo/cf032/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf032/cf032-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 503.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "504.mp3",
+          "sentence": [
+            "The",
+            "family",
+            "walked",
+            "back",
+            "to",
+            "the",
+            "house."
+          ],
+          "blanks": [
+            "house."
+          ],
+          "choices": [
+            "house.",
+            "family",
+            "kitchen"
+          ],
+          "image": "./assets/story-demo/cf032/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf032/cf032-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 504.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "505.mp3",
+          "sentence": [
+            "“Something",
+            "smells",
+            "bad,”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "smells"
+          ],
+          "choices": [
+            "smells",
+            "family",
+            "kitchen"
+          ],
+          "image": "./assets/story-demo/cf032/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf032/cf032-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 505.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "506.mp3",
+          "sentence": [
+            "She",
+            "ran",
+            "to",
+            "the",
+            "stove."
+          ],
+          "blanks": [
+            "stove."
+          ],
+          "choices": [
+            "stove.",
+            "family",
+            "kitchen"
+          ],
+          "image": "./assets/story-demo/cf032/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf032/cf032-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 506.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf033",
+      "title": "A Hike to the Top",
+      "cfLabel": "CF033",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 033. A Hike to the Top.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/33.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 33 - A Hike to the Top",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "507.mp3",
+          "sentence": [
+            "“I",
+            "want",
+            "to",
+            "hike",
+            "to",
+            "the",
+            "top",
+            "of",
+            "a",
+            "mountain!”"
+          ],
+          "blanks": [
+            "mountain!”"
+          ],
+          "choices": [
+            "mountain!”",
+            "nice",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf033/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf033/cf033-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 507.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "508.mp3",
+          "sentence": [
+            "“Hiking",
+            "up",
+            "a",
+            "mountain",
+            "is",
+            "hard,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "hard,”"
+          ],
+          "choices": [
+            "hard,”",
+            "nice",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf033/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf033/cf033-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 508.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "509.mp3",
+          "sentence": [
+            "Dad",
+            "drove",
+            "the",
+            "car",
+            "to",
+            "the",
+            "mountain."
+          ],
+          "blanks": [
+            "mountain."
+          ],
+          "choices": [
+            "mountain.",
+            "nice",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf033/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf033/cf033-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 509.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "510.mp3",
+          "sentence": [
+            "“I",
+            "can",
+            "carry",
+            "the",
+            "bottles",
+            "of",
+            "water,”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "water,”"
+          ],
+          "choices": [
+            "water,”",
+            "nice",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf033/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf033/cf033-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 510.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "511.mp3",
+          "sentence": [
+            "“I",
+            "can",
+            "carry",
+            "the",
+            "map,”",
+            "said",
+            "Oliver."
+          ],
+          "blanks": [
+            "carry"
+          ],
+          "choices": [
+            "carry",
+            "nice",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf033/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf033/cf033-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 511.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "512.mp3",
+          "sentence": [
+            "Everybody",
+            "hiked",
+            "on",
+            "the",
+            "trail."
+          ],
+          "blanks": [
+            "trail."
+          ],
+          "choices": [
+            "trail.",
+            "nice",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf033/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf033/cf033-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 512.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "513.mp3",
+          "sentence": [
+            "“Are",
+            "you",
+            "tired?”",
+            "Mom",
+            "asked",
+            "Oliver."
+          ],
+          "blanks": [
+            "asked"
+          ],
+          "choices": [
+            "asked",
+            "nice",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf033/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf033/cf033-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 513.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "514.mp3",
+          "sentence": [
+            "“Just",
+            "a",
+            "little",
+            "bit,”",
+            "said",
+            "Oliver."
+          ],
+          "blanks": [
+            "little"
+          ],
+          "choices": [
+            "little",
+            "nice",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf033/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf033/cf033-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 514.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "515.mp3",
+          "sentence": [
+            "“I",
+            "can",
+            "make",
+            "it,”",
+            "said",
+            "Oliver."
+          ],
+          "blanks": [
+            "make"
+          ],
+          "choices": [
+            "make",
+            "nice",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf033/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf033/cf033-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 515.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "516.mp3",
+          "sentence": [
+            "“We",
+            "are",
+            "at",
+            "the",
+            "top,”",
+            "said",
+            "Dad."
+          ],
+          "blanks": [
+            "Dad."
+          ],
+          "choices": [
+            "Dad.",
+            "nice",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf033/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf033/cf033-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 516.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "517.mp3",
+          "sentence": [
+            "“Now",
+            "we",
+            "hike",
+            "down",
+            "the",
+            "mountain,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "mountain,”"
+          ],
+          "choices": [
+            "mountain,”",
+            "nice",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf033/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf033/cf033-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 517.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "518.mp3",
+          "sentence": [
+            "“Now",
+            "I",
+            "have",
+            "something",
+            "to",
+            "carry,”",
+            "said",
+            "Dad."
+          ],
+          "blanks": [
+            "carry,”"
+          ],
+          "choices": [
+            "carry,”",
+            "nice",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf033/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf033/cf033-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 518.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf034",
+      "title": "Harry's Sick Day",
+      "cfLabel": "CF034",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 034. Harry's Sick Day.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/34.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 34 - Harry's Sick Day",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "519.mp3",
+          "sentence": [
+            "“Today",
+            "is",
+            "a",
+            "sick",
+            "day,”",
+            "Mom",
+            "said."
+          ],
+          "blanks": [
+            "sick"
+          ],
+          "choices": [
+            "sick",
+            "time",
+            "school"
+          ],
+          "image": "./assets/story-demo/cf034/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf034/cf034-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 519.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "520.mp3",
+          "sentence": [
+            "“Sorry,",
+            "Harry,”",
+            "Mom",
+            "said."
+          ],
+          "blanks": [
+            "“Sorry,"
+          ],
+          "choices": [
+            "“Sorry,",
+            "time",
+            "school"
+          ],
+          "image": "./assets/story-demo/cf034/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf034/cf034-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 520.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "521.mp3",
+          "sentence": [
+            "Aunt",
+            "Judy",
+            "stayed",
+            "home",
+            "with",
+            "Harry."
+          ],
+          "blanks": [
+            "home"
+          ],
+          "choices": [
+            "home",
+            "time",
+            "school"
+          ],
+          "image": "./assets/story-demo/cf034/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf034/cf034-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 521.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "522.mp3",
+          "sentence": [
+            "“Tell",
+            "me",
+            "about",
+            "the",
+            "class",
+            "party,”",
+            "Aunt",
+            "Judy",
+            "said."
+          ],
+          "blanks": [
+            "party,”"
+          ],
+          "choices": [
+            "party,”",
+            "time",
+            "school"
+          ],
+          "image": "./assets/story-demo/cf034/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf034/cf034-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 522.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "523.mp3",
+          "sentence": [
+            "His",
+            "throat",
+            "hurt",
+            "when",
+            "he",
+            "drank",
+            "juice."
+          ],
+          "blanks": [
+            "juice."
+          ],
+          "choices": [
+            "juice.",
+            "time",
+            "school"
+          ],
+          "image": "./assets/story-demo/cf034/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf034/cf034-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 523.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "524.mp3",
+          "sentence": [
+            "“The",
+            "class",
+            "will",
+            "eat",
+            "cupcakes,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "cupcakes,”"
+          ],
+          "choices": [
+            "cupcakes,”",
+            "time",
+            "school"
+          ],
+          "image": "./assets/story-demo/cf034/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf034/cf034-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 524.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "525.mp3",
+          "sentence": [
+            "“The",
+            "class",
+            "will",
+            "watch",
+            "a",
+            "movie,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "movie,”"
+          ],
+          "choices": [
+            "movie,”",
+            "time",
+            "school"
+          ],
+          "image": "./assets/story-demo/cf034/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf034/cf034-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 525.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "526.mp3",
+          "sentence": [
+            "Soon",
+            "Harry",
+            "fell",
+            "asleep."
+          ],
+          "blanks": [
+            "asleep."
+          ],
+          "choices": [
+            "asleep.",
+            "time",
+            "school"
+          ],
+          "image": "./assets/story-demo/cf034/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf034/cf034-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 526.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "527.mp3",
+          "sentence": [
+            "When",
+            "Harry",
+            "woke",
+            "up,",
+            "he",
+            "felt",
+            "better."
+          ],
+          "blanks": [
+            "better."
+          ],
+          "choices": [
+            "better.",
+            "time",
+            "school"
+          ],
+          "image": "./assets/story-demo/cf034/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf034/cf034-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 527.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "528.mp3",
+          "sentence": [
+            "Aunt",
+            "Judy",
+            "said,",
+            "“It’s",
+            "time",
+            "for",
+            "our",
+            "party!”"
+          ],
+          "blanks": [
+            "party!”"
+          ],
+          "choices": [
+            "party!”",
+            "time",
+            "school"
+          ],
+          "image": "./assets/story-demo/cf034/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf034/cf034-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 528.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "529.mp3",
+          "sentence": [
+            "“This",
+            "party",
+            "is",
+            "for",
+            "Harry,”",
+            "Aunt",
+            "Judy",
+            "said."
+          ],
+          "blanks": [
+            "party"
+          ],
+          "choices": [
+            "party",
+            "time",
+            "school"
+          ],
+          "image": "./assets/story-demo/cf034/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf034/cf034-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 529.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "530.mp3",
+          "sentence": [
+            "“I",
+            "love",
+            "sick",
+            "days,”",
+            "Harry",
+            "said."
+          ],
+          "blanks": [
+            "days,”"
+          ],
+          "choices": [
+            "days,”",
+            "time",
+            "school"
+          ],
+          "image": "./assets/story-demo/cf034/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf034/cf034-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 530.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf035",
+      "title": "Aunt Judy's Closet",
+      "cfLabel": "CF035",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 035. Aunt Judy's Closet.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/35.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 35 - Aunt Judy's Closet",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "531.mp3",
+          "sentence": [
+            "“I’m",
+            "going",
+            "to",
+            "clean",
+            "my",
+            "closet,”",
+            "said",
+            "Aunt",
+            "Judy."
+          ],
+          "blanks": [
+            "closet,”"
+          ],
+          "choices": [
+            "closet,”",
+            "going",
+            "clean"
+          ],
+          "image": "./assets/story-demo/cf035/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf035/cf035-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 531.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "532.mp3",
+          "sentence": [
+            "“I",
+            "will",
+            "help,”",
+            "said",
+            "Emmy."
+          ],
+          "blanks": [
+            "help,”"
+          ],
+          "choices": [
+            "help,”",
+            "going",
+            "clean"
+          ],
+          "image": "./assets/story-demo/cf035/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf035/cf035-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 532.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "533.mp3",
+          "sentence": [
+            "“People",
+            "wore",
+            "funny",
+            "clothes",
+            "long",
+            "ago,”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "long"
+          ],
+          "choices": [
+            "long",
+            "going",
+            "clean"
+          ],
+          "image": "./assets/story-demo/cf035/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf035/cf035-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 533.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "534.mp3",
+          "sentence": [
+            "“You",
+            "can",
+            "keep",
+            "anything",
+            "you",
+            "like.”"
+          ],
+          "blanks": [
+            "anything"
+          ],
+          "choices": [
+            "anything",
+            "going",
+            "clean"
+          ],
+          "image": "./assets/story-demo/cf035/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf035/cf035-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 534.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "535.mp3",
+          "sentence": [
+            "“Nobody",
+            "wears",
+            "funny",
+            "clothes",
+            "either,”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "either,”"
+          ],
+          "choices": [
+            "either,”",
+            "going",
+            "clean"
+          ],
+          "image": "./assets/story-demo/cf035/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf035/cf035-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 535.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "536.mp3",
+          "sentence": [
+            "She",
+            "took",
+            "out",
+            "a",
+            "green",
+            "scarf."
+          ],
+          "blanks": [
+            "scarf."
+          ],
+          "choices": [
+            "scarf.",
+            "going",
+            "clean"
+          ],
+          "image": "./assets/story-demo/cf035/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf035/cf035-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 536.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "537.mp3",
+          "sentence": [
+            "Emmy",
+            "put",
+            "on",
+            "the",
+            "scarf."
+          ],
+          "blanks": [
+            "scarf."
+          ],
+          "choices": [
+            "scarf.",
+            "going",
+            "clean"
+          ],
+          "image": "./assets/story-demo/cf035/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf035/cf035-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 537.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "538.mp3",
+          "sentence": [
+            "“It",
+            "looks",
+            "like",
+            "a",
+            "spy’s",
+            "hat!”",
+            "Harry",
+            "put",
+            "on",
+            "the",
+            "hat."
+          ],
+          "blanks": [
+            "spy’s"
+          ],
+          "choices": [
+            "spy’s",
+            "going",
+            "clean"
+          ],
+          "image": "./assets/story-demo/cf035/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf035/cf035-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 538.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "539.mp3",
+          "sentence": [
+            "“I",
+            "need",
+            "a",
+            "white",
+            "shirt",
+            "to",
+            "play",
+            "doctor!”",
+            "said",
+            "Oliver."
+          ],
+          "blanks": [
+            "doctor!”"
+          ],
+          "choices": [
+            "doctor!”",
+            "going",
+            "clean"
+          ],
+          "image": "./assets/story-demo/cf035/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf035/cf035-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 539.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "540.mp3",
+          "sentence": [
+            "The",
+            "sweater",
+            "had",
+            "a",
+            "lion",
+            "on",
+            "the",
+            "front."
+          ],
+          "blanks": [
+            "front."
+          ],
+          "choices": [
+            "front.",
+            "going",
+            "clean"
+          ],
+          "image": "./assets/story-demo/cf035/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf035/cf035-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 540.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "541.mp3",
+          "sentence": [
+            "“I",
+            "need",
+            "a",
+            "vest",
+            "for",
+            "my",
+            "school",
+            "play!”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "play!”"
+          ],
+          "choices": [
+            "play!”",
+            "going",
+            "clean"
+          ],
+          "image": "./assets/story-demo/cf035/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf035/cf035-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 541.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "542.mp3",
+          "sentence": [
+            "“Now",
+            "I",
+            "have",
+            "room",
+            "for",
+            "new",
+            "clothes,”",
+            "she",
+            "said."
+          ],
+          "blanks": [
+            "clothes,”"
+          ],
+          "choices": [
+            "clothes,”",
+            "going",
+            "clean"
+          ],
+          "image": "./assets/story-demo/cf035/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf035/cf035-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 542.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf036",
+      "title": "Planting Seeds",
+      "cfLabel": "CF036",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 036. Planting Seeds.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/36.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 36 - Planting Seeds",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "543.mp3",
+          "sentence": [
+            "“Soon",
+            "it",
+            "will",
+            "be",
+            "spring,”",
+            "said",
+            "Dad."
+          ],
+          "blanks": [
+            "spring,”"
+          ],
+          "choices": [
+            "spring,”",
+            "Soon",
+            "plant"
+          ],
+          "image": "./assets/story-demo/cf036/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf036/cf036-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 543.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "544.mp3",
+          "sentence": [
+            "“Corn",
+            "grows",
+            "really",
+            "big,”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "really"
+          ],
+          "choices": [
+            "really",
+            "Soon",
+            "spring"
+          ],
+          "image": "./assets/story-demo/cf036/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf036/cf036-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 544.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "545.mp3",
+          "sentence": [
+            "“You",
+            "just",
+            "need",
+            "time",
+            "to",
+            "grow.”"
+          ],
+          "blanks": [
+            "grow.”"
+          ],
+          "choices": [
+            "grow.”",
+            "Soon",
+            "spring"
+          ],
+          "image": "./assets/story-demo/cf036/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf036/cf036-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 545.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "546.mp3",
+          "sentence": [
+            "“I’ll",
+            "make",
+            "rows",
+            "for",
+            "the",
+            "seeds,”",
+            "said",
+            "Dad."
+          ],
+          "blanks": [
+            "seeds,”"
+          ],
+          "choices": [
+            "seeds,”",
+            "Soon",
+            "spring"
+          ],
+          "image": "./assets/story-demo/cf036/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf036/cf036-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 546.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "547.mp3",
+          "sentence": [
+            "Oliver",
+            "planted",
+            "corn",
+            "in",
+            "row",
+            "one."
+          ],
+          "blanks": [
+            "corn"
+          ],
+          "choices": [
+            "corn",
+            "Soon",
+            "spring"
+          ],
+          "image": "./assets/story-demo/cf036/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf036/cf036-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 547.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "548.mp3",
+          "sentence": [
+            "Emmy",
+            "planted",
+            "carrots",
+            "in",
+            "row",
+            "three."
+          ],
+          "blanks": [
+            "three."
+          ],
+          "choices": [
+            "three.",
+            "Soon",
+            "spring"
+          ],
+          "image": "./assets/story-demo/cf036/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf036/cf036-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 548.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "549.mp3",
+          "sentence": [
+            "A",
+            "week",
+            "later",
+            "the",
+            "kids",
+            "ran",
+            "to",
+            "the",
+            "garden."
+          ],
+          "blanks": [
+            "garden."
+          ],
+          "choices": [
+            "garden.",
+            "Soon",
+            "spring"
+          ],
+          "image": "./assets/story-demo/cf036/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf036/cf036-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 549.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "550.mp3",
+          "sentence": [
+            "“The",
+            "corn",
+            "didn’t",
+            "grow,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "grow,”"
+          ],
+          "choices": [
+            "grow,”",
+            "Soon",
+            "spring"
+          ],
+          "image": "./assets/story-demo/cf036/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf036/cf036-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 550.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "551.mp3",
+          "sentence": [
+            "The",
+            "next",
+            "week",
+            "everybody",
+            "ran",
+            "to",
+            "the",
+            "garden."
+          ],
+          "blanks": [
+            "garden."
+          ],
+          "choices": [
+            "garden.",
+            "Soon",
+            "spring"
+          ],
+          "image": "./assets/story-demo/cf036/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf036/cf036-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 551.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "552.mp3",
+          "sentence": [
+            "“The",
+            "corn",
+            "didn’t",
+            "grow,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "grow,”"
+          ],
+          "choices": [
+            "grow,”",
+            "Soon",
+            "spring"
+          ],
+          "image": "./assets/story-demo/cf036/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf036/cf036-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 552.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "553.mp3",
+          "sentence": [
+            "The",
+            "next",
+            "week",
+            "the",
+            "corn",
+            "was",
+            "big!"
+          ],
+          "blanks": [
+            "corn"
+          ],
+          "choices": [
+            "corn",
+            "Soon",
+            "spring"
+          ],
+          "image": "./assets/story-demo/cf036/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf036/cf036-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 553.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "554.mp3",
+          "sentence": [
+            "“No,",
+            "I’m",
+            "not,”",
+            "said",
+            "Oliver."
+          ],
+          "blanks": [
+            "Oliver."
+          ],
+          "choices": [
+            "Oliver.",
+            "Soon",
+            "spring"
+          ],
+          "image": "./assets/story-demo/cf036/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf036/cf036-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 554.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf037",
+      "title": "The Airplane Trip",
+      "cfLabel": "CF037",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 037. The Airplane Trip.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/37.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 37 - The Airplane Trip",
+      "pages": [
+        {
+          "pdfPage": 2,
+          "printedPage": 1,
+          "sourceClip": "555.mp3",
+          "sentence": [
+            "“I",
+            "can’t",
+            "wait",
+            "to",
+            "fly",
+            "in",
+            "an",
+            "airplane!”",
+            "Harry",
+            "said."
+          ],
+          "blanks": [
+            "airplane!”"
+          ],
+          "choices": [
+            "airplane!”",
+            "wait",
+            "fly"
+          ],
+          "image": "./assets/story-demo/cf037/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf037/cf037-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 2 paired with page clip 555.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 3,
+          "printedPage": 2,
+          "sourceClip": "556.mp3",
+          "sentence": [
+            "“We",
+            "might",
+            "be",
+            "too",
+            "heavy",
+            "for",
+            "the",
+            "plane,”",
+            "Oliver",
+            "said."
+          ],
+          "blanks": [
+            "plane,”"
+          ],
+          "choices": [
+            "plane,”",
+            "wait",
+            "fly"
+          ],
+          "image": "./assets/story-demo/cf037/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf037/cf037-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 556.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 3,
+          "sourceClip": "557.mp3",
+          "sentence": [
+            "The",
+            "Carter",
+            "Family",
+            "was",
+            "flying!"
+          ],
+          "blanks": [
+            "flying!"
+          ],
+          "choices": [
+            "flying!",
+            "wait",
+            "fly"
+          ],
+          "image": "./assets/story-demo/cf037/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf037/cf037-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 557.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 4,
+          "sourceClip": "558.mp3",
+          "sentence": [
+            "Chewing",
+            "the",
+            "gum",
+            "made",
+            "his",
+            "ears",
+            "feel",
+            "better."
+          ],
+          "blanks": [
+            "better."
+          ],
+          "choices": [
+            "better.",
+            "wait",
+            "fly"
+          ],
+          "image": "./assets/story-demo/cf037/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf037/cf037-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 558.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 5,
+          "sourceClip": "559.mp3",
+          "sentence": [
+            "“What",
+            "if",
+            "we",
+            "fall?”",
+            "Harry",
+            "said,",
+            "“We",
+            "will",
+            "not",
+            "fall.”"
+          ],
+          "blanks": [
+            "fall.”"
+          ],
+          "choices": [
+            "fall.”",
+            "wait",
+            "fly"
+          ],
+          "image": "./assets/story-demo/cf037/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf037/cf037-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 559.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 6,
+          "sourceClip": "560.mp3",
+          "sentence": [
+            "Mom",
+            "gave",
+            "the",
+            "kids",
+            "a",
+            "card",
+            "game."
+          ],
+          "blanks": [
+            "game."
+          ],
+          "choices": [
+            "game.",
+            "wait",
+            "fly"
+          ],
+          "image": "./assets/story-demo/cf037/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf037/cf037-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 560.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 7,
+          "sourceClip": "561.mp3",
+          "sentence": [
+            "“That",
+            "was",
+            "fun,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "said."
+          ],
+          "choices": [
+            "said.",
+            "wait",
+            "fly"
+          ],
+          "image": "./assets/story-demo/cf037/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf037/cf037-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 561.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 8,
+          "sourceClip": "562.mp3",
+          "sentence": [
+            "A",
+            "flight",
+            "attendant",
+            "brought",
+            "drinks",
+            "and",
+            "a",
+            "snack."
+          ],
+          "blanks": [
+            "snack."
+          ],
+          "choices": [
+            "snack.",
+            "wait",
+            "fly"
+          ],
+          "image": "./assets/story-demo/cf037/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf037/cf037-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 562.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 9,
+          "sourceClip": "563.mp3",
+          "sentence": [
+            "Everyone",
+            "got",
+            "their",
+            "luggage."
+          ],
+          "blanks": [
+            "luggage."
+          ],
+          "choices": [
+            "luggage.",
+            "wait",
+            "fly"
+          ],
+          "image": "./assets/story-demo/cf037/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf037/cf037-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 563.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 10,
+          "sourceClip": "564.mp3",
+          "sentence": [
+            "“Would",
+            "you",
+            "like",
+            "to",
+            "meet",
+            "the",
+            "pilot?”",
+            "she",
+            "asked."
+          ],
+          "blanks": [
+            "asked."
+          ],
+          "choices": [
+            "asked.",
+            "wait",
+            "fly"
+          ],
+          "image": "./assets/story-demo/cf037/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf037/cf037-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 564.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 11,
+          "sourceClip": "565.mp3",
+          "sentence": [
+            "Oliver",
+            "saw",
+            "buttons",
+            "and",
+            "lights",
+            "and",
+            "maps."
+          ],
+          "blanks": [
+            "maps."
+          ],
+          "choices": [
+            "maps.",
+            "wait",
+            "fly"
+          ],
+          "image": "./assets/story-demo/cf037/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf037/cf037-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 565.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 12,
+          "sourceClip": "566.mp3",
+          "sentence": [
+            "“Does",
+            "flying",
+            "still",
+            "seem",
+            "scary,",
+            "Oliver?”",
+            "Dad",
+            "asked."
+          ],
+          "blanks": [
+            "asked."
+          ],
+          "choices": [
+            "asked.",
+            "wait",
+            "fly"
+          ],
+          "image": "./assets/story-demo/cf037/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf037/cf037-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 566.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 13,
+          "sourceClip": "567.mp3",
+          "sentence": [
+            "“Scary?”",
+            "Oliver",
+            "laughed."
+          ],
+          "blanks": [
+            "laughed."
+          ],
+          "choices": [
+            "laughed.",
+            "wait",
+            "fly"
+          ],
+          "image": "./assets/story-demo/cf037/pages/page-13.jpg",
+          "audio": "./assets/story-demo/cf037/cf037-page-13.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 567.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf038",
+      "title": "Harry's Map",
+      "cfLabel": "CF038",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 038. Harry's Map.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/38.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 38 - Harry's Map",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "568.mp3",
+          "sentence": [
+            "“We",
+            "should",
+            "turn",
+            "left",
+            "now,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "left"
+          ],
+          "choices": [
+            "left",
+            "Carters",
+            "trip"
+          ],
+          "image": "./assets/story-demo/cf038/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf038/cf038-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 568.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "569.mp3",
+          "sentence": [
+            "“We",
+            "don’t",
+            "need",
+            "the",
+            "map,",
+            "Harry,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "need"
+          ],
+          "choices": [
+            "need",
+            "Carters",
+            "trip"
+          ],
+          "image": "./assets/story-demo/cf038/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf038/cf038-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 569.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "570.mp3",
+          "sentence": [
+            "He",
+            "liked",
+            "maps",
+            "better",
+            "than",
+            "phones."
+          ],
+          "blanks": [
+            "phones."
+          ],
+          "choices": [
+            "phones.",
+            "Carters",
+            "trip"
+          ],
+          "image": "./assets/story-demo/cf038/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf038/cf038-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 570.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "571.mp3",
+          "sentence": [
+            "“I",
+            "can",
+            "find",
+            "the",
+            "museum",
+            "on",
+            "my",
+            "map,”",
+            "Harry",
+            "said."
+          ],
+          "blanks": [
+            "museum"
+          ],
+          "choices": [
+            "museum",
+            "Carters",
+            "trip"
+          ],
+          "image": "./assets/story-demo/cf038/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf038/cf038-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 571.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "572.mp3",
+          "sentence": [
+            "Next",
+            "they",
+            "looked",
+            "for",
+            "the",
+            "zoo."
+          ],
+          "blanks": [
+            "looked"
+          ],
+          "choices": [
+            "looked",
+            "Carters",
+            "trip"
+          ],
+          "image": "./assets/story-demo/cf038/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf038/cf038-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 572.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "573.mp3",
+          "sentence": [
+            "After",
+            "the",
+            "zoo",
+            "they",
+            "went",
+            "to",
+            "a",
+            "park."
+          ],
+          "blanks": [
+            "park."
+          ],
+          "choices": [
+            "park.",
+            "Carters",
+            "trip"
+          ],
+          "image": "./assets/story-demo/cf038/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf038/cf038-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 573.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "574.mp3",
+          "sentence": [
+            "“Let’s",
+            "go",
+            "back",
+            "to",
+            "the",
+            "hotel,”",
+            "she",
+            "said."
+          ],
+          "blanks": [
+            "hotel,”"
+          ],
+          "choices": [
+            "hotel,”",
+            "Carters",
+            "trip"
+          ],
+          "image": "./assets/story-demo/cf038/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf038/cf038-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 574.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "575.mp3",
+          "sentence": [
+            "“Turn",
+            "right,”",
+            "Mom",
+            "said."
+          ],
+          "blanks": [
+            "right,”"
+          ],
+          "choices": [
+            "right,”",
+            "Carters",
+            "trip"
+          ],
+          "image": "./assets/story-demo/cf038/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf038/cf038-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 575.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "576.mp3",
+          "sentence": [
+            "“The",
+            "battery",
+            "is",
+            "dead!”",
+            "Dad",
+            "said."
+          ],
+          "blanks": [
+            "dead!”"
+          ],
+          "choices": [
+            "dead!”",
+            "Carters",
+            "trip"
+          ],
+          "image": "./assets/story-demo/cf038/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf038/cf038-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 576.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "577.mp3",
+          "sentence": [
+            "“Where’s",
+            "our",
+            "hotel?”",
+            "Emmy",
+            "asked."
+          ],
+          "blanks": [
+            "asked."
+          ],
+          "choices": [
+            "asked.",
+            "Carters",
+            "trip"
+          ],
+          "image": "./assets/story-demo/cf038/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf038/cf038-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 577.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "578.mp3",
+          "sentence": [
+            "“We",
+            "have",
+            "to",
+            "walk",
+            "along",
+            "this",
+            "street,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "street,”"
+          ],
+          "choices": [
+            "street,”",
+            "Carters",
+            "trip"
+          ],
+          "image": "./assets/story-demo/cf038/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf038/cf038-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 578.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "579.mp3",
+          "sentence": [
+            "“I’m",
+            "glad",
+            "you",
+            "brought",
+            "a",
+            "map,",
+            "Harry!”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "brought"
+          ],
+          "choices": [
+            "brought",
+            "Carters",
+            "trip"
+          ],
+          "image": "./assets/story-demo/cf038/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf038/cf038-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 579.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf039",
+      "title": "A Visit with Grandpa",
+      "cfLabel": "CF039",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 039. A Visit with Grandpa.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/39.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 39 - A Visit with Grandpa",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "580.mp3",
+          "sentence": [
+            "“I",
+            "am",
+            "so",
+            "glad",
+            "to",
+            "see",
+            "you!”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "glad"
+          ],
+          "choices": [
+            "glad",
+            "Carters",
+            "visited"
+          ],
+          "image": "./assets/story-demo/cf039/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf039/cf039-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 580.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "581.mp3",
+          "sentence": [
+            "Grandpa",
+            "took",
+            "the",
+            "kids",
+            "to",
+            "the",
+            "park."
+          ],
+          "blanks": [
+            "park."
+          ],
+          "choices": [
+            "park.",
+            "Carters",
+            "visited"
+          ],
+          "image": "./assets/story-demo/cf039/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf039/cf039-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 581.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "582.mp3",
+          "sentence": [
+            "Grandpa",
+            "drove",
+            "his",
+            "go-kart",
+            "fast."
+          ],
+          "blanks": [
+            "fast."
+          ],
+          "choices": [
+            "fast.",
+            "Carters",
+            "visited"
+          ],
+          "image": "./assets/story-demo/cf039/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf039/cf039-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 582.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "583.mp3",
+          "sentence": [
+            "“Let’s",
+            "go",
+            "roller",
+            "skating!”",
+            "Grandpa",
+            "said."
+          ],
+          "blanks": [
+            "skating!”"
+          ],
+          "choices": [
+            "skating!”",
+            "Carters",
+            "visited"
+          ],
+          "image": "./assets/story-demo/cf039/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf039/cf039-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 583.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "584.mp3",
+          "sentence": [
+            "“Maybe",
+            "we",
+            "should",
+            "do",
+            "something",
+            "else",
+            "now.”"
+          ],
+          "blanks": [
+            "else"
+          ],
+          "choices": [
+            "else",
+            "Carters",
+            "visited"
+          ],
+          "image": "./assets/story-demo/cf039/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf039/cf039-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 584.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "585.mp3",
+          "sentence": [
+            "“That",
+            "is",
+            "a",
+            "very",
+            "tall",
+            "slide,”",
+            "Oliver",
+            "said."
+          ],
+          "blanks": [
+            "slide,”"
+          ],
+          "choices": [
+            "slide,”",
+            "Carters",
+            "visited"
+          ],
+          "image": "./assets/story-demo/cf039/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf039/cf039-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 585.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "586.mp3",
+          "sentence": [
+            "Grandpa",
+            "slid",
+            "down",
+            "headfirst."
+          ],
+          "blanks": [
+            "headfirst."
+          ],
+          "choices": [
+            "headfirst.",
+            "Carters",
+            "visited"
+          ],
+          "image": "./assets/story-demo/cf039/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf039/cf039-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 586.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "587.mp3",
+          "sentence": [
+            "“I",
+            "didn’t",
+            "mean",
+            "to",
+            "scare",
+            "you,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "scare"
+          ],
+          "choices": [
+            "scare",
+            "Carters",
+            "visited"
+          ],
+          "image": "./assets/story-demo/cf039/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf039/cf039-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 587.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "588.mp3",
+          "sentence": [
+            "“You",
+            "are",
+            "the",
+            "best",
+            "grandpa",
+            "ever!”",
+            "she",
+            "said."
+          ],
+          "blanks": [
+            "ever!”"
+          ],
+          "choices": [
+            "ever!”",
+            "Carters",
+            "visited"
+          ],
+          "image": "./assets/story-demo/cf039/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf039/cf039-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 588.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "589.mp3",
+          "sentence": [
+            "“We",
+            "can",
+            "have",
+            "fun,”",
+            "Harry",
+            "said."
+          ],
+          "blanks": [
+            "said."
+          ],
+          "choices": [
+            "said.",
+            "Carters",
+            "visited"
+          ],
+          "image": "./assets/story-demo/cf039/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf039/cf039-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 589.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "590.mp3",
+          "sentence": [
+            "Then",
+            "he",
+            "pointed",
+            "up",
+            "to",
+            "the",
+            "sky."
+          ],
+          "blanks": [
+            "pointed"
+          ],
+          "choices": [
+            "pointed",
+            "Carters",
+            "visited"
+          ],
+          "image": "./assets/story-demo/cf039/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf039/cf039-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 590.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "591.mp3",
+          "sentence": [
+            "“Who",
+            "wants",
+            "to",
+            "get",
+            "some",
+            "ice",
+            "cream?”"
+          ],
+          "blanks": [
+            "cream?”"
+          ],
+          "choices": [
+            "cream?”",
+            "Carters",
+            "visited"
+          ],
+          "image": "./assets/story-demo/cf039/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf039/cf039-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 591.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf040",
+      "title": "Picking Berries",
+      "cfLabel": "CF040",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 040. Picking Berries.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/40.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 40 - Picking Berries",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "592.mp3",
+          "sentence": [
+            "“It’s",
+            "a",
+            "good",
+            "day",
+            "for",
+            "picking",
+            "berries!”",
+            "Dad",
+            "said."
+          ],
+          "blanks": [
+            "berries!”"
+          ],
+          "choices": [
+            "berries!”",
+            "good",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf040/pages/page-01.jpg",
+          "audio": "./assets/story-demo/cf040/cf040-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 592.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "593.mp3",
+          "sentence": [
+            "“Mmm!”",
+            "Emmy",
+            "ate",
+            "a",
+            "few",
+            "berries",
+            "too."
+          ],
+          "blanks": [
+            "berries"
+          ],
+          "choices": [
+            "berries",
+            "good",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf040/pages/page-02.jpg",
+          "audio": "./assets/story-demo/cf040/cf040-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 593.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "594.mp3",
+          "sentence": [
+            "“Don’t",
+            "eat",
+            "the",
+            "berries",
+            "now,”",
+            "she",
+            "said."
+          ],
+          "blanks": [
+            "berries"
+          ],
+          "choices": [
+            "berries",
+            "good",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf040/pages/page-03.jpg",
+          "audio": "./assets/story-demo/cf040/cf040-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 594.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "595.mp3",
+          "sentence": [
+            "“I",
+            "love",
+            "blueberry",
+            "pancakes",
+            "and",
+            "pie!”",
+            "Oliver",
+            "said."
+          ],
+          "blanks": [
+            "pancakes"
+          ],
+          "choices": [
+            "pancakes",
+            "good",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf040/pages/page-04.jpg",
+          "audio": "./assets/story-demo/cf040/cf040-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 595.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "596.mp3",
+          "sentence": [
+            "He",
+            "put",
+            "all",
+            "the",
+            "berries",
+            "into",
+            "his",
+            "bucket."
+          ],
+          "blanks": [
+            "bucket."
+          ],
+          "choices": [
+            "bucket.",
+            "good",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf040/pages/page-05.jpg",
+          "audio": "./assets/story-demo/cf040/cf040-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 596.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "597.mp3",
+          "sentence": [
+            "“Pancakes",
+            "and",
+            "pie,”",
+            "she",
+            "said",
+            "to",
+            "herself."
+          ],
+          "blanks": [
+            "herself."
+          ],
+          "choices": [
+            "herself.",
+            "good",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf040/pages/page-06.jpg",
+          "audio": "./assets/story-demo/cf040/cf040-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 597.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "598.mp3",
+          "sentence": [
+            "He",
+            "did",
+            "this",
+            "over",
+            "and",
+            "over",
+            "again."
+          ],
+          "blanks": [
+            "again."
+          ],
+          "choices": [
+            "again.",
+            "good",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf040/pages/page-07.jpg",
+          "audio": "./assets/story-demo/cf040/cf040-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 598.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "599.mp3",
+          "sentence": [
+            "Then",
+            "he",
+            "ate",
+            "a",
+            "big",
+            "handful."
+          ],
+          "blanks": [
+            "handful."
+          ],
+          "choices": [
+            "handful.",
+            "good",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf040/pages/page-08.jpg",
+          "audio": "./assets/story-demo/cf040/cf040-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 599.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "600.mp3",
+          "sentence": [
+            "“Dad!”",
+            "Oliver",
+            "said."
+          ],
+          "blanks": [
+            "said."
+          ],
+          "choices": [
+            "said.",
+            "good",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf040/pages/page-09.jpg",
+          "audio": "./assets/story-demo/cf040/cf040-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 600.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "601.mp3",
+          "sentence": [
+            "He",
+            "put",
+            "the",
+            "rest",
+            "of",
+            "the",
+            "berries",
+            "in",
+            "his",
+            "bucket."
+          ],
+          "blanks": [
+            "bucket."
+          ],
+          "choices": [
+            "bucket.",
+            "good",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf040/pages/page-10.jpg",
+          "audio": "./assets/story-demo/cf040/cf040-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 601.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "602.mp3",
+          "sentence": [
+            "Dad",
+            "and",
+            "Oliver",
+            "had",
+            "full",
+            "buckets",
+            "too."
+          ],
+          "blanks": [
+            "buckets"
+          ],
+          "choices": [
+            "buckets",
+            "good",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf040/pages/page-11.jpg",
+          "audio": "./assets/story-demo/cf040/cf040-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 602.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "603.mp3",
+          "sentence": [
+            "Her",
+            "lips",
+            "were",
+            "blue."
+          ],
+          "blanks": [
+            "blue."
+          ],
+          "choices": [
+            "blue.",
+            "good",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf040/pages/page-12.jpg",
+          "audio": "./assets/story-demo/cf040/cf040-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 603.mp3; sentence copied from source page."
+        }
+      ]
     }
   ]
 };

@@ -28,9 +28,11 @@ assert.equal(sourceClipCount, 38, 'Every story page needs a source audio trace (
 assert.equal(blankCount, 38, 'Every story page needs one short fill activity');
 assert.equal(choiceCount, 38, 'Every story page should define answer choices');
 
-assert.equal(manifestBooks.length, 7, 'Manifest should add CF004–CF010');
-assert.deepEqual(Array.from(manifestBooks, (book) => book.cfLabel), ['CF004', 'CF005', 'CF006', 'CF007', 'CF008', 'CF009', 'CF010']);
-assert.equal(manifestBooks.reduce((sum, book) => sum + book.pages.length, 0), 96, 'CF004–CF010 should add 96 story pages');
+assert.equal(manifestBooks.length, 27, 'Manifest should add CF004–CF040');
+assert.deepEqual(Array.from(manifestBooks.slice(0, 7), (book) => book.cfLabel), ['CF004', 'CF005', 'CF006', 'CF007', 'CF008', 'CF009', 'CF010']);
+assert.deepEqual(Array.from(manifestBooks.slice(-20), (book) => book.cfLabel), Array.from({ length: 20 }, (_, index) => `CF${String(index + 21).padStart(3, '0')}`));
+assert.equal(manifestBooks.slice(0, 7).reduce((sum, book) => sum + book.pages.length, 0), 96, 'CF004–CF010 should add 96 story pages');
+assert.equal(manifestBooks.slice(-20).reduce((sum, book) => sum + book.pages.length, 0), 245, 'CF021–CF040 should add 245 story pages');
 for (const book of manifestBooks) {
   assert.equal(book.pages.length, book.pages.filter((item) => item.verificationStatus === 'verified').length, `${book.id} pages must be verified`);
   for (const item of book.pages) {
