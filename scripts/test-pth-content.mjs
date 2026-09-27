@@ -4,7 +4,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {wordAudioClips} from '../js/pth-word-audio.js';
-import {wordAudioSourceSegments} from '../js/pth-word-audio-source.js';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const units = JSON.parse(fs.readFileSync(path.join(root, 'data/pth/units.json')));
@@ -22,7 +21,8 @@ assert.equal(Object.values(audio.items).some((x) => x.src && x.source === '粵�
 assert.equal(media.entries.length, 23);
 assert.deepEqual(media.entries.slice(0, 4).map((x) => x.id), ['b', 'p', 'm', 'f']);
 assert.ok(media.entries.every((x) => x.sourceFile.startsWith('source-materials/')));
-assert.ok(media.entries.every((x) => x.status === 'verified' && fs.existsSync(path.join(root, x.derivedVideo)) && fs.existsSync(path.join(root, x.derivedAudio))));
+assert.ok(media.entries.every((x) => x.status === 'awaiting-listening-review' && fs.existsSync(path.join(root, x.derivedVideo)) && !x.derivedAudio));
+assert.deepEqual(media.derivation, {height: 360, videoCodec: 'h264', crf: 29, audioCodec: 'aac', audioBitrateKbps: 64, channels: 1, trimmed: false, sourceIsPreserved: true});
 const textbookAudit = media.entries.filter((x) => x.textbookStatus);
 assert.equal(textbookAudit.length, 19, '19 個後續聲母均有教材參照審核狀態');
 assert.equal(textbookAudit.filter((x) => !x.textbookStatus.startsWith('pending')).length, 18, '18 個聲母已在掃描教材找到對應頁（l 另標示重複掃描）');
@@ -47,17 +47,10 @@ assert.ok(demoSource.includes('data-word-audio') && demoSource.includes('playWor
 assert.ok(demoSource.includes('wordAudioClips') && demoSource.includes('sharedAudio.currentTime=start'));
 assert.ok(demoSource.includes('function normalizeAudioClip') && demoSource.includes('playAudio(audioClip.src,audioClip.start,audioClip.end)'), '詞語音檔物件必須拆出 src/start/end 播放');
 assert.ok(demoSource.includes('let stopTimer=null') && demoSource.includes('let uiTimer=null') && demoSource.includes('sharedAudio.onerror=fail'), '快速重按及播放失敗必須可被正確處理');
-assert.equal(Object.keys(wordAudioSourceSegments).length, 69, '69 個來源片段必須保留，方便重建詞語音檔');
-assert.equal(Object.keys(wordAudioClips).length, 69, '每個例詞必須有獨立播放檔');
-for (const [key, source] of Object.entries(wordAudioSourceSegments)) {
-  assert.ok(fs.existsSync(path.join(root, source.src)), `missing source segment: ${key}`);
-  const clip=wordAudioClips[key];
-  assert.equal(clip.start, 0, `${key} must begin at the start of its own file`);
-  assert.equal(clip.end, 0, `${key} must play its complete individual file`);
-  assert.ok(fs.existsSync(path.join(root, clip.src)), `missing individual Mandarin word clip: ${key}`);
-  assert.ok(fs.statSync(path.join(root, clip.src)).size > 1000, `invalid individual Mandarin word clip: ${key}`);
-}
+assert.equal(Object.keys(wordAudioClips).length, 0, '不得再播放未核聽的短切詞語錄音');
+assert.ok(demoSource.includes('u.rate=1') && demoSource.includes('u.voice=voice') && demoSource.includes('pickMandarinVoice()'), '例詞要以明確普通話聲線及正常語速朗讀');
 assert.ok(demoHtml.includes('wordAudioStatus'));
+assert.ok(demoSource.includes('preload="metadata"') && demoSource.includes('data-play-video'), '只載入目前小隊並可由頭播放完整示範');
 assert.ok(!demoSource.includes('type:i<5?"listen":"shape"'));
 assert.ok(!demoSource.includes("group-btn:not([disabled])"));
 assert.equal((demoSource.match(/group:'[^']+'/g) || []).length, 23);
@@ -69,10 +62,5 @@ for (const id of ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q
 }
 for (const emoji of ['🎈', '🍇', '🍚', '🎡']) assert.ok(demoHtml.includes(emoji));
 assert.ok(!demoHtml.includes('波波拿波波球。') && !demoHtml.includes('小明走上山坡。') && !demoHtml.includes('媽媽煮米飯。') && !demoHtml.includes('風車不停轉動。'));
-for (const id of ['b', 'p', 'm', 'f']) {
-  assert.equal(audio.items[`u1-initial-${id}`].status, 'verified');
-  assert.ok(fs.existsSync(path.join(root, audio.items[`u1-initial-${id}`].src)));
-  assert.ok(fs.existsSync(path.join(root, audio.items[`u1-initial-${id}`].videoSrc)));
-}
-assert.equal(Object.keys(audio.items).length, 23);
+assert.equal(Object.keys(audio.items).length, 0, '舊有的靜音偵測裁切檔不得再被引用');
 console.log('PTH content tests: 9 passed');
