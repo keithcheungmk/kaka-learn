@@ -105,6 +105,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 - `check-invariants` 新增火星不可混入動物規律的守則；數理 targeted tests、invariants、iPad Pro 11 橫／直及 iPhone 16 Pro Max local browser visual checks 均通過，Playwright smoke 受 macOS Mach port sandbox 限制未能啟動。
 - **踩咗** `index.html`、`js/math-app.js`、`js/math-skills.js`、`css/math.css`、`scripts/check-invariants.py`、`docs/handover.md`
 
+### 2026-09-27 · ChatGPT／Codex（PTH 詞語語音穩定性）
+
+- 69 個普通話例詞由每組共用的短 AAC 切片，改成每詞一個完整 `.m4a`；原有片段移到 `data/pth/word-audio-source/` 作可追溯重建來源。衍生檔保持較自然的節奏、短暫收尾空間及一致音量。
+- 播放器分開管理停止及 UI 計時器，快速由「可樂」轉按「哥哥」不會被上一段的計時器截斷；載入或播放失敗會顯示清楚提示。教材口形 MP4 保持原檔及原有音軌。
+- 已驗證 69 個詞語檔均可解碼、PTH content tests、全站 invariant，以及瀏覽器中的詞語、教材原音和 g／k／h 影片載入。
+- **踩咗** `js/pth-demo.js`、`js/pth-word-audio.js`、`js/pth-word-audio-source.js`、`data/pth/word-audio-source/`、`assets/pth/words/individual/`、`scripts/build-pth-word-audio.mjs`、`scripts/test-pth-content.mjs`、`docs/handover.md`
+
 ### 2026-09-26 · ChatGPT／Codex（中文限定裝置原生 Emoji）
 
 - 中文認字嘅生字卡、emoji badge、主題封面及遊戲進度怪獸改用裝置原生 Emoji；iPhone／iPad 會顯示 Apple Color Emoji。

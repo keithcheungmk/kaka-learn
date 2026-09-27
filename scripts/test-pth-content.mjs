@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {wordAudioClips} from '../js/pth-word-audio.js';
+import {wordAudioSourceSegments} from '../js/pth-word-audio-source.js';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const units = JSON.parse(fs.readFileSync(path.join(root, 'data/pth/units.json')));
@@ -44,8 +46,16 @@ assert.ok(demoSource.includes('u.voice=voice') && !demoSource.includes("u.lang='
 assert.ok(demoSource.includes('data-word-audio') && demoSource.includes('playWord(b.dataset.word,wordAudioClips[b.dataset.wordAudio])'));
 assert.ok(demoSource.includes('wordAudioClips') && demoSource.includes('sharedAudio.currentTime=start'));
 assert.ok(demoSource.includes('function normalizeAudioClip') && demoSource.includes('playAudio(audioClip.src,audioClip.start,audioClip.end)'), '詞語音檔物件必須拆出 src/start/end 播放');
-for (const id of ['b', 'p', 'm', 'f', 'd', 't', 'n', 'l', 'g', 'k', 'h', 'j', 'q', 'x', 'zh', 'ch', 'sh', 'r', 'z', 'c', 's', 'y', 'w']) {
-  assert.ok(fs.existsSync(path.join(root, `assets/pth/words/${id}.aac`)), `missing Mandarin word clip: ${id}`);
+assert.ok(demoSource.includes('let stopTimer=null') && demoSource.includes('let uiTimer=null') && demoSource.includes('sharedAudio.onerror=fail'), '快速重按及播放失敗必須可被正確處理');
+assert.equal(Object.keys(wordAudioSourceSegments).length, 69, '69 個來源片段必須保留，方便重建詞語音檔');
+assert.equal(Object.keys(wordAudioClips).length, 69, '每個例詞必須有獨立播放檔');
+for (const [key, source] of Object.entries(wordAudioSourceSegments)) {
+  assert.ok(fs.existsSync(path.join(root, source.src)), `missing source segment: ${key}`);
+  const clip=wordAudioClips[key];
+  assert.equal(clip.start, 0, `${key} must begin at the start of its own file`);
+  assert.equal(clip.end, 0, `${key} must play its complete individual file`);
+  assert.ok(fs.existsSync(path.join(root, clip.src)), `missing individual Mandarin word clip: ${key}`);
+  assert.ok(fs.statSync(path.join(root, clip.src)).size > 1000, `invalid individual Mandarin word clip: ${key}`);
 }
 assert.ok(demoHtml.includes('wordAudioStatus'));
 assert.ok(!demoSource.includes('type:i<5?"listen":"shape"'));
