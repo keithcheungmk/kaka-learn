@@ -25,5 +25,9 @@ assert.match(source, /mastery\.recordMission/, 'backlog rounds should record mis
 assert.match(source, /math-backlog-options/, 'backlog should render an answer area');
 assert.match(css, /\.math-backlog-options/, 'backlog answer area needs dedicated styles');
 assert.match(css, /@media \(max-width: 700px\)/, 'backlog needs a narrow viewport layout');
+assert.match(source, /choicesIncludingAnswer\(answer, distractors\)/, 'pattern choices must be built from the correct answer');
+assert.doesNotMatch(source, /sequence\[sequence\.length - 2\]/, 'the last visible pattern item is not necessarily the next answer');
+assert.match(source, /sequence: \['🔴', '🔵', '🔴', '🔵', null\], answer: '🔴'/, 'AB pattern must offer the next red circle');
+assert.doesNotMatch(source, /math-shape-sticker-shine/, 'shape stickers must not render a white shine patch');
 
-console.log('math-backlog tests: 14 passed');
+console.log('math-backlog tests: 18 passed');

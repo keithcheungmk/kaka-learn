@@ -139,12 +139,21 @@
       { emoji: '🧸', name: '玩偶', category: '玩具' }, { emoji: '⚽', name: '足球', category: '玩具' },
     ];
     const BACKLOG_CATEGORIES = ['水果', '動物', '交通工具', '玩具'];
+    // Keep the answer beside each sequence.  It is tempting to infer it from
+    // the last visible item, but that is wrong for a sequence such as red,
+    // blue, red, blue, ?.  The explicit answer is also used when building the
+    // choices, so a correct option can never disappear from the answer area.
     const BACKLOG_PATTERN_SETS = [
-      ['🔴', '🔵', '🔴', '🔵', null], ['🐰', '🐥', '🐰', '🐥', null],
-      ['🍎', '🍌', '🍇', '🍎', '🍌', null], ['⭐', '🌙', '☀️', '⭐', '🌙', null],
-      ['🟩', '🟨', '🟩', '🟨', null], ['🐶', '🐶', '🐱', '🐶', '🐶', null],
-      ['🍓', '🍓', '🍊', '🍓', '🍓', null], ['🔺', '⚪', '🔺', '⚪', null],
-      ['🚀', '🪐', '🌙', '🚀', '🪐', null], ['🦁', '🐯', '🦁', '🐯', null],
+      { sequence: ['🔴', '🔵', '🔴', '🔵', null], answer: '🔴' },
+      { sequence: ['🐰', '🐥', '🐰', '🐥', null], answer: '🐰' },
+      { sequence: ['🍎', '🍌', '🍇', '🍎', '🍌', null], answer: '🍇' },
+      { sequence: ['⭐', '🌙', '☀️', '⭐', '🌙', null], answer: '☀️' },
+      { sequence: ['🟩', '🟨', '🟩', '🟨', null], answer: '🟩' },
+      { sequence: ['🐶', '🐶', '🐱', '🐶', '🐶', null], answer: '🐱' },
+      { sequence: ['🍓', '🍓', '🍊', '🍓', '🍓', null], answer: '🍊' },
+      { sequence: ['🔺', '⚪', '🔺', '⚪', null], answer: '🔺' },
+      { sequence: ['🚀', '🪐', '🌙', '🚀', '🪐', null], answer: '🌙' },
+      { sequence: ['🦁', '🐯', '🦁', '🐯', null], answer: '🦁' },
     ];
     const BACKLOG_POSITION_CELLS = [
       { answer: '上面', index: 1 }, { answer: '下面', index: 7 }, { answer: '左邊', index: 3 },
@@ -314,7 +323,7 @@
         pentagon: '<path class="math-shape-sticker-body" d="M50 10 88 38 74 83H26L12 38Z" />',
         hexagon: '<path class="math-shape-sticker-body" d="M27 14H73L91 50 73 86H27L9 50Z" />',
       };
-      return `<svg class="math-shape-sticker-svg" viewBox="0 0 100 100" focusable="false" aria-hidden="true">${shapes[id] || shapes.circle}<ellipse class="math-shape-sticker-shine" cx="38" cy="30" rx="13" ry="7" /></svg>`;
+      return `<svg class="math-shape-sticker-svg" viewBox="0 0 100 100" focusable="false" aria-hidden="true">${shapes[id] || shapes.circle}</svg>`;
     }
 
     function shapeGlyphHtml(shape, extraClass = '') {
@@ -442,6 +451,11 @@
       return `<span class="math-backlog-choice-visual" aria-hidden="true">${item.visual || item.emoji || item}</span><span>${item.label || item.name || item}</span>`;
     }
 
+    function choicesIncludingAnswer(answer, distractors, count = 3) {
+      const choices = [answer, ...shuffle([...new Set(distractors.filter((item) => item !== answer))]).slice(0, count - 1)];
+      return shuffle(choices);
+    }
+
     function makeBacklogQuestion(planetId, index) {
       if (planetId === 'sort') {
         const target = BACKLOG_SORT_ITEMS[index % BACKLOG_SORT_ITEMS.length];
@@ -455,14 +469,14 @@
         };
       }
       if (planetId === 'pattern') {
-        const sequence = BACKLOG_PATTERN_SETS[index % BACKLOG_PATTERN_SETS.length];
-        const answer = sequence[sequence.length - 2];
-        const distractors = [...new Set(BACKLOG_PATTERN_SETS.flat().filter(Boolean).filter((item) => item !== answer))];
+        const round = BACKLOG_PATTERN_SETS[index % BACKLOG_PATTERN_SETS.length];
+        const { sequence, answer } = round;
+        const distractors = BACKLOG_PATTERN_SETS.flatMap((item) => item.sequence).filter(Boolean);
         return {
           skillId: 'pattern.next', representation: 'visual-sequence',
           prompt: '下一個係邊個？', speak: '請睇清楚規律，揀下一個。',
           visual: `<div class="math-backlog-sequence">${sequence.map((item) => `<span class="${item == null ? 'is-blank' : ''}">${item || '？'}</span>`).join('')}</div>`,
-          options: shuffle([answer, ...shuffle(distractors).slice(0, 2)]).map((visual) => ({ value: visual, label: visual, visual })),
+          options: choicesIncludingAnswer(answer, distractors).map((visual) => ({ value: visual, label: visual, visual })),
           answer,
         };
       }
