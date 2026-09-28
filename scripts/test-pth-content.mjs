@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {wordAudioClips} from '../js/pth-word-audio.js';
+import {isMandarinVoice} from '../js/pth-voice.js';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const units = JSON.parse(fs.readFileSync(path.join(root, 'data/pth/units.json')));
@@ -40,8 +41,11 @@ assert.ok(demoSource.includes('function hydrateGroup()') && demoSource.includes(
 assert.ok(demoSource.includes("kaka-pth-preview-v1") && demoSource.includes('測試預覽') && demoSource.includes('preview-badge'));
 assert.ok(demoSource.includes("type:'listen'") && demoSource.includes('draggable="true"') && demoSource.includes('answerSlot'));
 assert.ok(demoSource.includes('function playWord') && demoSource.includes('data-word') && demoSource.includes('currentSounds().flatMap'));
-assert.ok(demoSource.includes('function pickMandarinVoice') && demoSource.includes('speechSynthesis.getVoices') && demoSource.includes('MANDARIN_LANG'));
-assert.ok(demoSource.includes('CANTONESE_LANG') && demoSource.includes('未找到普通話語音'));
+assert.ok(demoSource.includes("import {isMandarinVoice} from './pth-voice.js") && demoSource.includes('function pickMandarinVoice') && demoSource.includes('speechSynthesis.getVoices'));
+assert.ok(demoSource.includes('粵語聲線不會代替播放'));
+for (const lang of ['zh-HK', 'zh-Hant-HK', 'zh-Hans-HK', 'yue-HK', 'zh-yue-HK']) assert.equal(isMandarinVoice({lang, name:'System Voice'}), false, `${lang} must never be selected`);
+for (const lang of ['zh-CN', 'zh-Hans-CN', 'zh-SG', 'zh-Hant-TW', 'cmn-CN']) assert.equal(isMandarinVoice({lang, name:'System Voice'}), true, `${lang} is an explicit Mandarin locale`);
+assert.equal(isMandarinVoice({lang:'zh-CN', name:'Cantonese Hong Kong'}), false, 'a Cantonese-labelled voice must never be selected');
 assert.ok(demoSource.includes('u.voice=voice') && !demoSource.includes("u.lang='zh-CN'"));
 assert.ok(demoSource.includes('data-word-audio') && demoSource.includes('playWord(b.dataset.word,wordAudioClips[b.dataset.wordAudio])'));
 assert.ok(demoSource.includes('wordAudioClips') && demoSource.includes('sharedAudio.currentTime=start'));
