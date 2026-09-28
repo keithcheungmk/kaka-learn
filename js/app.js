@@ -505,6 +505,9 @@ function startChineseConnectMode() {
   $('#chinese-connect-title').textContent = `${topic.title}・連一連`;
   $('#chinese-connect-finish').hidden = true;
   $('#chinese-connect-instruction').textContent = '先看左邊圖片，再找右邊相同的詞語。';
+  const feedback = $('#chinese-connect-feedback');
+  feedback.className = 'feedback';
+  feedback.textContent = '配對 0/6';
   chineseConnectRound = {
     topicId: activeTopicId,
     board: pool,
