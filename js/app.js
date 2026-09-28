@@ -425,7 +425,7 @@ function bindPlayPick() {
 /** 水果／動物園試點：入口及畫面由本檔建立，避免改動共享 HTML。 */
 function initChineseConnect() {
   const app = $('#app');
-  const choices = $('#play-choices');
+    const choices = $('#screen-play .play-choices') || $('.play-choices');
   if (!app || !choices || $('#screen-chinese-connect')) return;
 
   const entry = document.createElement('button');
