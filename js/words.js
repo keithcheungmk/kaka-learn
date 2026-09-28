@@ -1,19 +1,16 @@
 /** 卡卡學習 — 字詞表（繁體表面形）
- *  插圖採用系統 Emoji（iPhone／iPad 會顯示 Apple Color Emoji，清晰易認）
+ *  中文一般字詞採用系統 Emoji；需要清楚區分物種的鹿類採用專屬插圖。
  */
 
 const DEER_IDS = ['lu', 'meihualu', 'xunlu', 'tuolu', 'malu'];
 
-/**
- * badge：少數鹿種共用 🦌 時嘅細標記，幫 KAKA 分辨
- * plate：卡片底色，加強視覺區分
- */
+/** plate：卡片底色，加強視覺區分 */
 const WORDS = [
-  { id: 'lu', term: '鹿', isDeer: true, emoji: '🦌', badge: '', plate: '#1a4d3a' },
-  { id: 'meihualu', term: '梅花鹿', isDeer: true, emoji: '🦌', badge: '🌸', plate: '#4a3b1a' },
-  { id: 'xunlu', term: '馴鹿', isDeer: true, emoji: '🦌', badge: '❄️', plate: '#1a2a4a' },
-  { id: 'tuolu', term: '駝鹿', isDeer: true, emoji: '🫎', badge: '', plate: '#4a2a12' },
-  { id: 'malu', term: '馬鹿', isDeer: true, emoji: '🦌', badge: '馬', plate: '#2a4018' },
+  { id: 'lu', term: '鹿', isDeer: true, emoji: '🦌', badge: '', plate: '#1a4d3a', photo: 'assets/animals/deer/deer.webp' },
+  { id: 'meihualu', term: '梅花鹿', isDeer: true, emoji: '🦌', badge: '', plate: '#4a3b1a', photo: 'assets/animals/deer/sika-deer.webp' },
+  { id: 'xunlu', term: '馴鹿', isDeer: true, emoji: '🦌', badge: '', plate: '#1a2a4a', photo: 'assets/animals/deer/reindeer.webp' },
+  { id: 'tuolu', term: '駝鹿', isDeer: true, emoji: '🫎', badge: '', plate: '#4a2a12', photo: 'assets/animals/deer/moose.webp' },
+  { id: 'malu', term: '馬鹿', isDeer: true, emoji: '🦌', badge: '', plate: '#2a4018', photo: 'assets/animals/deer/red-deer.webp' },
   { id: 'gou', term: '狗', isDeer: false, emoji: '🐶', badge: '', plate: '#3a3010', en: { word: 'dog', letters: ['d', 'o', 'g'] } },
   { id: 'mao', term: '貓', isDeer: false, emoji: '🐱', badge: '', plate: '#4a2030', en: { word: 'cat', letters: ['c', 'a', 't'] } },
   { id: 'yu', term: '魚', isDeer: false, emoji: '🐟', badge: '', plate: '#0f3550' },

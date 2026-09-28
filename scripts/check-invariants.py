@@ -130,7 +130,7 @@ def check_core_animals() -> None:
 
 
 def check_deer_rules() -> None:
-    """鹿類規則：5 個鹿種、駝鹿用 🫎、馬鹿用 🦌 ＋ badge「馬」。"""
+    """5 種鹿類均有唯一、存在的專屬插圖；缺圖時才使用詞語本身的 Emoji fallback。"""
     src = read("js/words.js")
     m = re.search(r"DEER_IDS\s*=\s*\[([^\]]*)\]", src)
     if not m:
@@ -139,10 +139,22 @@ def check_deer_rules() -> None:
         ids = re.findall(r"'([^']+)'", m.group(1))
         if len(ids) < 5:
             fail("deer", f"DEER_IDS 得 {len(ids)} 個（應該至少 5 個鹿種）")
-    if not re.search(r"term:\s*'駝鹿'[^}]*emoji:\s*'🫎'", src):
-        fail("deer", "駝鹿要用 🫎")
-    if not re.search(r"term:\s*'馬鹿'[^}]*badge:\s*'馬'", src):
-        fail("deer", "馬鹿要有 badge「馬」先分得開")
+    deer_terms = ["鹿", "梅花鹿", "馴鹿", "駝鹿", "馬鹿"]
+    image_paths: list[str] = []
+    for term in deer_terms:
+        entry = re.search(r"\{[^{}]*term:\s*'" + re.escape(term) + r"'[^{}]*\}", src)
+        if not entry:
+            continue
+        photo = re.search(r"photo:\s*'([^']+)'", entry.group(0))
+        if not photo:
+            fail("deer", f"{term} 必須有專屬插圖，唔可以只靠相同鹿 Emoji／badge")
+            continue
+        path = photo.group(1)
+        image_paths.append(path)
+        if not (ROOT / path).is_file():
+            fail("deer", f"{term} 插圖檔不存在：{path}")
+    if len(image_paths) != len(set(image_paths)):
+        fail("deer", "每種鹿必須使用不同插圖檔案")
 
 
 def check_word_ids_unique() -> None:
