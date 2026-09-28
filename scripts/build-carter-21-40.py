@@ -74,6 +74,12 @@ def sentences(text: str) -> list[str]:
     index = 0
     while index < len(found):
         current = found[index]
+        # A quoted line may contain an exclamation before the spoken sentence
+        # ends (e.g. “Emmy! I put bait on your hook!”). Keep joining until its
+        # opening and closing quotation marks are balanced.
+        while current.count("“") > current.count("”") and index + 1 < len(found):
+            index += 1
+            current = f"{current} {found[index]}"
         if current.endswith("”") and index + 1 < len(found) and not found[index + 1].startswith("“"):
             current = f"{current} {found[index + 1]}"
             index += 1
@@ -114,7 +120,9 @@ def choose_words(sentence: str, page_text: str, book_words: list[str]) -> tuple[
     used = {plain_word(answer).lower()}
     distractors: list[str] = []
     # Prefer real words from the same page/book, so choices stay story-related.
-    for token in book_words + [plain_word(t) for t in word_tokens(page_text)]:
+    # Local distractors are more meaningful and less repetitive than always
+    # taking the first eligible words from the start of the whole book.
+    for token in [plain_word(t) for t in word_tokens(page_text)] + book_words:
         word = plain_word(token)
         low = word.lower()
         if len(word) < 3 or low in used or low in STOP_WORDS or low in FAMILY_NAMES or not re.fullmatch(r"[A-Za-z]+", word):

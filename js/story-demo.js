@@ -1,4 +1,4 @@
-/* STORY ENGLISH — Carter Family Read & Fill (CF001–CF040).
+/* STORY ENGLISH — Carter Family Read & Fill (CF001–CF085).
  * Each fill sentence is checked against the cited Carter Family PDF page and
  * matching original page clip. The learner hears the source clip first, then
  * practises the short sentence with the device's English TTS voice.

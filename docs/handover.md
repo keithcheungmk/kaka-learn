@@ -98,6 +98,14 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-09-28 · ChatGPT／Codex（Story English 完成 Carter Family CF001–CF085）
+
+- Story English 納入其餘 CF041–CF085 共 45 本、515 頁；與原有 CF001–CF040 合計 85 本、1,033 個可玩頁面。每頁有 PDF 場景、來源逐頁錄音和同頁原文挖空題。
+- 保留 `source-materials/Carter Family/` 原始 PDF／錄音；網站只放 900px WebP 和 22.05kHz、32kbps mono MP3 衍生檔。`assets/` 現約 99MB；因全集規模把資產總量上限由 60MB 調至 120MB，單一檔案仍限制 400KB。
+- 改善生成器對跨行引號台詞的辨識；新增 `scripts/build-carter-41-85.py`，來源／逐頁對應清單在 `assets/story-demo/SOURCE.md`，內容規格在 `docs/carter-family-sentence-reading-plan.md`。
+- **踩咗** `AGENTS.md`、`index.html`、`js/story-demo.js`、`data/carter-family-manifest.js`、`assets/story-demo/`、`scripts/build-carter-21-40.py`、`scripts/build-carter-41-85.py`、`scripts/check-invariants.py`、`docs/carter-family-sentence-reading-plan.md`、`assets/story-demo/SOURCE.md`、`docs/handover.md`
+
+
 ### 2026-09-28 · ChatGPT／Codex（Story English 故事書架修復及 CF011–CF020）
 
 - 修復 CF004 起故事書卡片縮圖無圖：書架改用每本第一頁圖作封面 fallback；CF001–CF040 現有 518 頁都用 900px WebP 衍生圖，`assets/` 總量約 56MB，保留 60MB 上限及原始 MP3 音質。
