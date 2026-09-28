@@ -622,7 +622,7 @@ function updateChineseConnectProgress() {
   const progress = $('#chinese-connect-progress');
   const feedback = $('#chinese-connect-feedback');
   if (progress) progress.textContent = `已配對 ${matched}/${count}`;
-  if (feedback && !feedback.classList.contains('wrong')) {
+  if (feedback && !feedback.classList.contains('retry') && !feedback.classList.contains('ok')) {
     feedback.textContent = `配對 ${matched}/${count}`;
   }
 }
@@ -648,6 +648,8 @@ function checkChineseConnectPair() {
     chineseConnectErrorTimer = setTimeout(() => {
       chineseConnectErrorTimer = null;
       chineseConnectBusy = false;
+      picture?.classList.remove('is-wrong');
+      word?.classList.remove('is-wrong');
       round.selectedPictureId = null;
       round.selectedWordId = null;
       feedback.className = 'feedback';
