@@ -109,7 +109,9 @@ assert.doesNotMatch(source, /const MISSION/, 'The former separate multi-question
 assert.match(source, /autoPlay: phase === 'listen'/, 'Each page should auto-play the story clip in the challenge layout');
 
 assert.match(css, /orientation:\s*landscape/, 'iPad landscape should have a dedicated media query');
-assert.match(css, /grid-template-columns:\s*minmax\(0,\s*58%\)\s*minmax\(280px,\s*42%\)/, 'Landscape challenge layout should allocate space to image and fill panel');
+assert.match(css, /grid-template-columns:\s*minmax\(0,\s*1\.38fr\)\s*minmax\(280px,\s*1fr\)/, 'Landscape challenge columns should keep their gap inside the available width');
+assert.match(css, /orientation:\s*portrait[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)[\s\S]*grid-template-rows:\s*minmax\(0,\s*\.82fr\)\s*minmax\(0,\s*1\.18fr\)/, 'iPad portrait should stack the story above the fill panel');
+assert.match(css, /\.story-play-stage\s*\{[^}]*width:\s*100%;\s*max-width:\s*1180px/s, 'Story stage should size to its parent and avoid viewport-based margin overflow');
 assert.match(css, /\.story-challenge-story/, 'Story listen control should sit with the page image');
 assert.match(css, /\.story-fill-panel[\s\S]*padding:\s*clamp\(12px/, 'Fill panel should keep comfortable inner padding');
 assert.match(source, /story-challenge-story/, 'Listen to the story should live in the left story column');

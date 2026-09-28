@@ -40,7 +40,9 @@
 .story-play-screen.active > .section-lead { margin: 4px auto 6px; }
 .story-play-stage {
   flex: 1 1 auto;
-  width: min(1180px, 96vw);
+  min-height: 0;
+  width: 100%;
+  max-width: 1180px;
   display: grid;
   place-items: center;
   gap: 8px;
@@ -73,7 +75,7 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
-  width: min(960px, 94vw);
+  width: min(960px, 100%);
   margin: 8px auto 0;
 }
 .story-play-actions .btn,
@@ -93,7 +95,8 @@
 
 /* Default challenge (iPad portrait & large screens): two columns that fit the stage. */
 .story-play-stage.story-page-challenge {
-  width: min(1180px, 96vw);
+  width: 100%;
+  max-width: 1180px;
   height: auto;
   grid-template-columns: minmax(0, 55%) minmax(260px, 45%);
   align-items: stretch;
@@ -251,9 +254,10 @@
     height: min(52dvh, 460px);
   }
   .story-play-stage.story-page-challenge {
-    width: min(1240px, 98vw);
+    width: 100%;
+    max-width: 1240px;
     max-height: calc(100dvh - 7.5rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
-    grid-template-columns: minmax(0, 58%) minmax(280px, 42%);
+    grid-template-columns: minmax(0, 1.38fr) minmax(280px, 1fr);
     gap: clamp(10px, 1.8vw, 22px);
     padding: clamp(8px, 1.2vw, 14px);
   }
@@ -277,16 +281,27 @@
   .story-play-actions { margin-top: 6px; }
 }
 
-/* iPad portrait: still two columns but slightly tighter right panel. */
+/* iPad portrait: stack the story display above the answer panel. */
 @media (orientation: portrait) and (min-width: 701px) {
   .story-play-stage.story-page-challenge {
-    grid-template-columns: minmax(0, 52%) minmax(240px, 48%);
-    max-height: calc(100dvh - 8.5rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, .82fr) minmax(0, 1.18fr);
+    max-height: calc(100dvh - 9.5rem - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    min-height: 0;
+    gap: clamp(8px, 1.2vh, 12px);
   }
-  .story-book-frame { height: min(42dvh, 380px); }
-  .story-fill-panel h2 { font-size: clamp(1.15rem, 2.4vw, 1.7rem); }
-  .story-fill-sentence { font-size: clamp(1rem, 2vw, 1.35rem)!important; }
-  .story-fill-tile { min-height: 46px; }
+  .story-challenge-story,
+  .story-fill-panel { min-height: 0; }
+  .story-challenge-image-wrap { min-height: 0; }
+  .story-story-listen,
+  .story-sentence-listen,
+  .story-fill-submit,
+  .story-next-page { min-height: 44px; }
+  .story-fill-panel { gap: clamp(5px, .8vh, 9px); padding: clamp(8px, 1.2vw, 14px); }
+  .story-fill-panel h2 { font-size: clamp(1.05rem, 2.2vw, 1.55rem); }
+  .story-fill-sentence { font-size: clamp(.95rem, 1.9vw, 1.3rem)!important; }
+  .story-fill-tile { min-height: 44px; }
 }
 
 @media (max-width: 700px) {
