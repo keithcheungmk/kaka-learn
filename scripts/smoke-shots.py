@@ -35,6 +35,7 @@ SCROLLABLE = {
     "screen-phonics-topics",
     "screen-phonics-sounds",
     "screen-progress",
+    "screen-chinese-connect",
 }
 
 # 家庭目標裝置（預設／CI）——對齊 Keith 部 iPad Pro 11" 同 iPhone 16 Pro Max
@@ -183,13 +184,21 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.wait_for_timeout(500)
     probe("揀玩法")
 
-    for btn, step in [("#btn-mode-build", "砌一砌"), ("#btn-mode-listen", "聽一聽"), ("#btn-mode-match", "配一配")]:
+    for btn, step in [("#btn-mode-build", "砌一砌"), ("#btn-mode-match", "配一配")]:
         pg.click(btn)
         pg.wait_for_timeout(800)
         probe(step)
-        back = {"#btn-mode-build": "#btn-back-build", "#btn-mode-listen": "#btn-back-listen", "#btn-mode-match": "#btn-back-match"}[btn]
+        back = {"#btn-mode-build": "#btn-back-build", "#btn-mode-match": "#btn-back-match"}[btn]
         pg.click(back)
         pg.wait_for_timeout(400)
+
+    pg.wait_for_selector("#btn-mode-chinese-connect", state="visible")
+    pg.click("#btn-mode-chinese-connect")
+    pg.wait_for_selector("#screen-chinese-connect.active #chinese-connect-pictures .connect-picture-main")
+    pg.wait_for_timeout(500)
+    probe("中文連一連")
+    pg.click("#btn-back-chinese-connect")
+    pg.wait_for_timeout(400)
 
     for entry, step in [("#btn-start-phonics", "字母隊"), ("#btn-start-math", "數理")]:
         pg.goto(url, wait_until="domcontentloaded")

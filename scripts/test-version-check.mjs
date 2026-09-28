@@ -86,12 +86,12 @@ function makeHarness({ current = 'old', latest = 'new', screen = 'screen-home' }
 console.log('version-check.js tests');
 
 {
-  const h = makeHarness({ screen: 'screen-listen' });
+  const h = makeHarness({ screen: 'screen-chinese-connect' });
   await h.runFirstCheck();
-  assert.equal(h.reloads(), 0, '聽一聽進行中唔可以 reload');
+  assert.equal(h.reloads(), 0, '連一連進行中唔可以 reload');
   h.setScreen('screen-home');
   assert.equal(h.reloads(), 1, '返主頁後應套用等候中嘅新版');
-  console.log('  ✓ 遊戲中延後更新，返安全畫面先 reload');
+  console.log('  ✓ 連一連遊戲中延後更新，返安全畫面先 reload');
 }
 
 {

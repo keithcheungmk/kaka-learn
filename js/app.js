@@ -65,7 +65,6 @@ function wordSpeakText(word) {
 
 /** @type {ReturnType<typeof loadState>} */
 let state = loadState();
-let listenRound = null;
 let matchRound = null;
 let buildRound = null;
 let busy = false;
@@ -91,10 +90,7 @@ let chainIndex = 0;
 let chineseConnectRound = null;
 let chineseConnectBusy = false;
 let chineseConnectErrorTimer = null;
-const CHINESE_CONNECT_WORD_IDS = {
-  fruit: ['pingguo', 'xiangjiao', 'cheng', 'putao', 'xigua', 'caomei'],
-  zoo: ['shizi', 'daxiang', 'xiongmao', 'changjinglu', 'banma', 'qie'],
-};
+const CHINESE_CONNECT_TOPIC_IDS = new Set(['fruit', 'zoo']);
 let activeChain = null;
 let chainStars = 0;
 let sentenceIndex = 0;
@@ -121,7 +117,7 @@ CHAIN_LIBRARY[0] = CHAIN_LIBRARY[0].map((item, i) => ({ ...item, emoji: ['🍜',
 /** 今輪答啱嘅字 id（unique；答錯唔計、唔清零） */
 const playWonIds = new Set();
 /** 聽一聽／配一配：最多 8 個 unique 字；主題少過 8 就全清 */
-const LISTEN_MATCH_CAP = 8;
+const MATCH_CAP = 8;
 /** 砌一砌：最多 10 個 unique 字；主題少過 10 就全清 */
 const BUILD_CAP = 10;
 
@@ -140,7 +136,6 @@ function init() {
     bindPlayPick();
     bindWordChain();
     bindSentenceGame();
-    bindListen();
     bindMatch();
     bindBuild();
     bindPlayFinish();
@@ -162,7 +157,7 @@ function closeAllModals() {
 }
 
 function playRoundCap() {
-  return playMode === 'build' ? BUILD_CAP : LISTEN_MATCH_CAP;
+  return playMode === 'build' ? BUILD_CAP : MATCH_CAP;
 }
 
 /** 今輪目標：min(上限, 而家主題／書嘅字數) */
@@ -237,8 +232,7 @@ function bindPlayFinish() {
   if (again) {
     again.onclick = () => {
       hidePlayFinish();
-      if (playMode === 'listen') startListenMode();
-      else if (playMode === 'match') startMatchMode();
+      if (playMode === 'match') startMatchMode();
       else if (playMode === 'build') startBuildMode();
       else openPlayPick();
     };
@@ -289,18 +283,6 @@ function afterPlayCorrect(wordId, nextRoundFn, nextMs, mode = 'recognition') {
   });
 }
 
-function startListenMode(ev) {
-  if (ev) ev.preventDefault();
-  if (!activeTopicId) {
-    showScreen('topics');
-    return;
-  }
-  closeAllModals();
-  beginPlayRound('listen');
-  showScreen('listen');
-  startListenRound();
-}
-
 function startMatchMode(ev) {
   if (ev) ev.preventDefault();
   if (!activeTopicId) {
@@ -334,7 +316,6 @@ function bindHome() {
   };
 
   window.KakaLearn = Object.assign(window.KakaLearn || {}, {
-    startListen: startListenMode,
     startMatch: startMatchMode,
     startBuild: startBuildMode,
     goHome: () => showScreen('home'),
@@ -412,10 +393,8 @@ function bindPlayPick() {
     }
     openLearn(activeTopicId);
   };
-  const listenBtn = $('#btn-mode-listen');
   const matchBtn = $('#btn-mode-match');
   const buildBtn = $('#btn-mode-build');
-  if (listenBtn) listenBtn.onclick = startListenMode;
   if (matchBtn) matchBtn.onclick = startMatchMode;
   if (buildBtn) buildBtn.onclick = startBuildMode;
   const connectBtn = $('#btn-mode-chinese-connect');
@@ -453,8 +432,8 @@ function initChineseConnect() {
       <h1 id="chinese-connect-title">連一連</h1>
       <div class="star-panel" style="min-height:56px;padding:8px 12px"><span class="star-icon">★</span><span class="star-meta"><strong class="stars-today-inline">0/10</strong></span></div>
     </div>
-    <p class="section-lead" id="chinese-connect-instruction">先看左邊圖片，再找右邊相同的詞語。</p>
-    <div class="connect-prompt"><p class="feedback" id="chinese-connect-feedback" aria-live="polite">配對 0/6</p><span class="connect-prompt-note" id="chinese-connect-progress">已配對 0/6</span></div>
+    <p class="section-lead" id="chinese-connect-instruction">先看左邊圖片，再找右邊相同的詞語。完成這個主題所有詞語，可得一粒星。</p>
+    <div class="connect-prompt"><p class="feedback" id="chinese-connect-feedback" aria-live="polite">本輪配對 0/3</p><span class="connect-prompt-note" id="chinese-connect-progress">主題進度 0/0 · 第 1/1 輪</span></div>
     <div class="connect-board" id="chinese-connect-board">
       <svg class="connect-lines" id="chinese-connect-lines" aria-hidden="true"></svg>
       <section class="connect-column" aria-label="圖片"><h2>圖片</h2><div class="connect-card-list" id="chinese-connect-pictures"></div></section>
@@ -462,7 +441,8 @@ function initChineseConnect() {
     </div>
     <div class="btn-row" id="chinese-connect-finish" hidden>
       <p class="feedback ok" id="chinese-connect-finish-message" aria-live="polite"></p>
-      <button type="button" class="btn" id="btn-chinese-connect-again">再玩一版</button>
+      <button type="button" class="btn" id="btn-chinese-connect-next" hidden>下一輪</button>
+      <button type="button" class="btn" id="btn-chinese-connect-again" hidden>再玩一次</button>
       <button type="button" class="btn btn-secondary" id="btn-chinese-connect-back">返回玩法</button>
     </div>`;
   app.appendChild(screen);
@@ -470,6 +450,7 @@ function initChineseConnect() {
   $('#btn-back-chinese-connect').onclick = () => leaveChineseConnect();
   $('#btn-chinese-connect-back').onclick = () => leaveChineseConnect();
   $('#btn-chinese-connect-again').onclick = () => startChineseConnectMode();
+  $('#btn-chinese-connect-next').onclick = () => advanceChineseConnectRound();
   window.addEventListener('resize', () => {
     if ($('#screen-chinese-connect')?.classList.contains('active')) {
       layoutChineseConnectBoard();
@@ -488,14 +469,13 @@ function leaveChineseConnect() {
 
 function startChineseConnectMode() {
   const topic = getTopicById(activeTopicId);
-  const ids = CHINESE_CONNECT_WORD_IDS[activeTopicId];
-  if (!topic || !ids) {
+  if (!topic || !CHINESE_CONNECT_TOPIC_IDS.has(activeTopicId)) {
     openPlayPick();
     return;
   }
-  const pool = ids.map(getWordById).filter((word) => word?.emoji);
-  if (pool.length !== 6) {
-    console.error(`Chinese connect pilot data incomplete for ${activeTopicId}`);
+  const pool = enabledWords().filter((word) => word?.emoji);
+  if (!pool.length) {
+    console.error(`Chinese connect topic has no playable words: ${activeTopicId}`);
     return;
   }
   playMode = 'chineseConnect';
@@ -507,16 +487,59 @@ function startChineseConnectMode() {
   $('#chinese-connect-instruction').textContent = '先看左邊圖片，再找右邊相同的詞語。';
   const feedback = $('#chinese-connect-feedback');
   feedback.className = 'feedback';
-  feedback.textContent = '配對 0/6';
+  feedback.textContent = '本輪配對 0/3';
   chineseConnectRound = {
     topicId: activeTopicId,
-    board: pool,
+    topicWords: pool,
+    rounds: splitChineseConnectRounds(pool),
+    roundIndex: 0,
+    board: [],
     matchedIds: new Set(),
     selectedPictureId: null,
     selectedWordId: null,
+    topicStarAwarded: false,
   };
   showScreen('chineseConnect');
+  showChineseConnectRound(0);
+}
+
+function splitChineseConnectRounds(words) {
+  const total = words.length;
+  // Smaller topics stay gentle; larger topics use up to five pairs per turn.
+  // This gives 12 words = 4 turns and 15 words = 3 turns, as requested.
+  const preferredSize = total <= 12 ? 3 : total < 15 ? 4 : 5;
+  const roundCount = Math.ceil(total / preferredSize);
+  const baseSize = Math.floor(total / roundCount);
+  const extra = total % roundCount;
+  const rounds = [];
+  let offset = 0;
+  for (let index = 0; index < roundCount; index += 1) {
+    const size = baseSize + (index < extra ? 1 : 0);
+    rounds.push(words.slice(offset, offset + size));
+    offset += size;
+  }
+  return rounds;
+}
+
+function showChineseConnectRound(index) {
+  const round = chineseConnectRound;
+  if (!round || index < 0 || index >= round.rounds.length) return;
+  round.roundIndex = index;
+  round.board = round.rounds[index];
+  round.matchedIds = new Set();
+  round.selectedPictureId = null;
+  round.selectedWordId = null;
+  const feedback = $('#chinese-connect-feedback');
+  feedback.className = 'feedback';
+  feedback.textContent = `本輪配對 0/${round.board.length}`;
+  $('#chinese-connect-finish').hidden = true;
   renderChineseConnectBoard();
+}
+
+function advanceChineseConnectRound() {
+  const round = chineseConnectRound;
+  if (!round || round.roundIndex >= round.rounds.length - 1) return;
+  showChineseConnectRound(round.roundIndex + 1);
 }
 
 function renderChineseConnectBoard() {
@@ -576,17 +599,18 @@ function renderChineseConnectBoard() {
 function layoutChineseConnectBoard() {
   const board = $('#chinese-connect-board');
   if (!board) return;
+  const count = chineseConnectRound?.board.length || 1;
   const rowRule = window.matchMedia('(max-width: 640px)').matches
-    ? 'repeat(6, minmax(66px, 1fr))'
-    : 'repeat(6, minmax(0, 1fr))';
+    ? `repeat(${count}, minmax(66px, 1fr))`
+    : `repeat(${count}, minmax(0, 1fr))`;
   $('#chinese-connect-pictures').style.gridTemplateRows = rowRule;
   $('#chinese-connect-words').style.gridTemplateRows = rowRule;
   if (window.matchMedia('(max-width: 640px)').matches) {
-    // Respect the existing mobile one-column layout so six choices remain legible.
+    // Respect the existing mobile one-column layout so each round stays legible.
     board.style.height = 'auto';
     board.style.gridTemplateColumns = '';
   } else {
-    board.style.height = `clamp(480px, 70vh, 720px)`;
+    board.style.height = `clamp(400px, ${Math.min(82, 46 + count * 8)}vh, 720px)`;
     board.style.gridTemplateColumns = 'repeat(2, minmax(0, 1fr))';
   }
 }
@@ -620,13 +644,19 @@ function updateChineseConnectSelection() {
 }
 
 function updateChineseConnectProgress() {
-  const count = chineseConnectRound?.board.length || 6;
-  const matched = chineseConnectRound?.matchedIds.size || 0;
+  const round = chineseConnectRound;
+  const count = round?.board.length || 0;
+  const matched = round?.matchedIds.size || 0;
+  const completedBefore = round
+    ? round.rounds.slice(0, round.roundIndex).reduce((sum, words) => sum + words.length, 0)
+    : 0;
   const progress = $('#chinese-connect-progress');
   const feedback = $('#chinese-connect-feedback');
-  if (progress) progress.textContent = `已配對 ${matched}/${count}`;
+  if (progress && round) {
+    progress.textContent = `主題進度 ${completedBefore + matched}/${round.topicWords.length} · 第 ${round.roundIndex + 1}/${round.rounds.length} 輪`;
+  }
   if (feedback && !feedback.classList.contains('retry') && !feedback.classList.contains('ok')) {
-    feedback.textContent = `配對 ${matched}/${count}`;
+    feedback.textContent = `本輪配對 ${matched}/${count}`;
   }
 }
 
@@ -705,16 +735,28 @@ function drawChineseConnectLines() {
 
 function finishChineseConnectRound() {
   const round = chineseConnectRound;
-  if (!round || round.starAwarded) return;
-  round.starAwarded = true;
+  if (!round || round.matchedIds.size !== round.board.length || round.finishedRoundIndex === round.roundIndex) return;
+  round.finishedRoundIndex = round.roundIndex;
+  const isTopicComplete = round.roundIndex === round.rounds.length - 1;
+  const remaining = round.topicWords.length - round.rounds
+    .slice(0, round.roundIndex + 1)
+    .reduce((sum, words) => sum + words.length, 0);
   $('#chinese-connect-finish').hidden = false;
-  $('#chinese-connect-finish-message').textContent = '一版完成！六組都配對正確，獲得一粒星！';
+  $('#chinese-connect-finish-message').textContent = isTopicComplete
+    ? `全部 ${round.topicWords.length} 個詞語完成！獲得一粒星！`
+    : `第 ${round.roundIndex + 1}/${round.rounds.length} 輪完成！還有 ${remaining} 個詞語。`;
   $('#chinese-connect-feedback').textContent = '全部配對成功！';
   $('#chinese-connect-feedback').className = 'feedback ok';
-  awardStar().then(() => {
-    if (chineseConnectRound !== round) return;
-    showStarBurst();
-  });
+  $('#btn-chinese-connect-next').hidden = isTopicComplete;
+  $('#btn-chinese-connect-again').hidden = !isTopicComplete;
+  if (isTopicComplete && !round.topicStarAwarded) {
+    round.topicStarAwarded = true;
+    markTopicPassed(activeTopicId, activeBook ? activeBook.id : null);
+    awardStar().then(() => {
+      if (chineseConnectRound !== round) return;
+      showStarBurst();
+    });
+  }
 }
 
 function showScreen(name) {
@@ -729,7 +771,6 @@ function showScreen(name) {
     learn: '#screen-learn',
     play: '#screen-play',
     chineseConnect: '#screen-chinese-connect',
-    listen: '#screen-listen',
     match: '#screen-match',
     build: '#screen-build',
     chain: '#screen-chain',
@@ -737,7 +778,7 @@ function showScreen(name) {
     sentenceLanding: '#screen-sentence-landing',
   };
   $(map[name])?.classList.add('active');
-  if (['listen', 'match', 'build', 'chain', 'sentence', 'chineseConnect'].includes(name)) {
+  if (['match', 'build', 'chain', 'sentence', 'chineseConnect'].includes(name)) {
     window.KakaStarFx?.mountPlayScreen?.($(map[name]));
     refreshStarUI();
   } else {
@@ -1349,16 +1390,14 @@ function openPlayPick() {
   const withBook = activeBook ? `${base}・${activeBook.title}` : base;
   if (title) title.textContent = withBook ? `${withBook}・去玩玩` : '去玩玩';
   if (activeTopicId === 'opposites') {
-    setPlayModeCopy('#btn-mode-listen', '聽一聽', '聽下，揀相反');
     setPlayModeCopy('#btn-mode-match', '配一配', '睇圖，揀相反');
   } else {
-    setPlayModeCopy('#btn-mode-listen', '聽一聽', '聽廣東話，揀漢字');
     setPlayModeCopy('#btn-mode-match', '配一配', '睇圖，揀漢字');
   }
   setPlayModeCopy('#btn-mode-build', '砌一砌', '用手砌漢字');
   const connectBtn = $('#btn-mode-chinese-connect');
   if (connectBtn) {
-    const available = Boolean(CHINESE_CONNECT_WORD_IDS[activeTopicId]);
+    const available = CHINESE_CONNECT_TOPIC_IDS.has(activeTopicId);
     connectBtn.hidden = !available;
     connectBtn.style.display = available ? '' : 'none';
     if (available) {
@@ -1448,133 +1487,6 @@ function buildOppositeQuiz(pool) {
     target: answer,
     options: shuffle([prompt, answer]),
   };
-}
-
-/* ---------- 模式 A：聽音選卡 ---------- */
-
-function bindListen() {
-  const speak = $('#btn-speak-listen');
-  if (speak) {
-    speak.onclick = () => {
-      if (!listenRound) return;
-      const spoken = listenRound.prompt || listenRound.target;
-      speakTerm(wordSpeakText(spoken), { muted: loadState().muted });
-    };
-  }
-  const back = $('#btn-back-listen');
-  if (back) back.onclick = () => openPlayPick();
-}
-
-function startListenRound() {
-  busy = false;
-  refreshPlayRoundUI();
-  const pool = enabledWords();
-  let round;
-  if (activeTopicId === 'opposites') {
-    round = buildOppositeQuiz(pool);
-  }
-  if (!round) {
-    const target = pickTarget(pool);
-    const optionCount = Math.min(4, pool.length);
-    const options = shuffle([target, ...sampleOthers(pool, target.id, optionCount - 1)]);
-    round = { pickOpposite: false, prompt: target, target, options };
-  }
-  listenRound = round;
-
-  const promptText = $('#listen-prompt-text');
-  if (promptText) {
-    promptText.innerHTML = round.pickOpposite
-      ? '聽下，揀相反'
-      : '聽下，揀個字';
-  }
-
-  const feedback = $('#listen-feedback');
-  feedback.textContent = '';
-  feedback.className = 'feedback';
-
-  const grid = $('#listen-options');
-  grid.innerHTML = '';
-  grid.classList.toggle('cols-2', !!round.pickOpposite);
-  grid.classList.toggle('cols-3', !round.pickOpposite);
-  round.options.forEach((word) => {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'word-card word-card-chars word-card-flip';
-    btn.dataset.id = word.id;
-    // 正面淨漢字（考認字）；撳完先翻背面睇 emoji
-    btn.innerHTML = `
-      <span class="flip-inner">
-        <span class="flip-face flip-front">
-          <span class="term term-only">${word.term}</span>
-        </span>
-        <span class="flip-face flip-back" aria-hidden="true">
-          ${wordIllustHtml(word)}
-          <span class="term flip-back-term">${word.term}</span>
-        </span>
-      </span>`;
-    btn.setAttribute('aria-label', word.term);
-    btn.addEventListener('click', () => onListenPick(word.id, btn));
-    grid.appendChild(btn);
-  });
-
-  refreshStarUI();
-  const spoken = round.prompt || round.target;
-  setTimeout(() => speakTerm(wordSpeakText(spoken), { muted: loadState().muted }), 280);
-}
-
-function flipListenCard(btn, stay) {
-  if (!btn) return;
-  btn.classList.add('is-flipped');
-  if (!stay) {
-    setTimeout(() => btn.classList.remove('is-flipped'), 1100);
-  }
-}
-
-function onListenPick(id, btn) {
-  if (busy || !listenRound) return;
-  if (btn.classList.contains('is-flipped')) return;
-  state = loadState();
-  const correct = id === listenRound.target.id;
-  const answerTerm = wordSpeakText(listenRound.target);
-  const promptTerm = wordSpeakText(listenRound.prompt || listenRound.target);
-
-  if (correct) {
-    busy = true;
-    flipListenCard(btn, true);
-    btn.classList.add('correct');
-    warmAudio();
-    const fb = $('#listen-feedback');
-    const nextMs = 2800;
-    if (listenRound.pickOpposite) {
-      const praise = speakWordThenEncourage(answerTerm, { muted: state.muted });
-      fb.textContent = `${promptTerm} 嘅相反係 ${answerTerm}！${praise}`;
-      fb.className = 'feedback ok';
-      afterPlayCorrect((listenRound.prompt || listenRound.target).id, () => startListenRound(), estimateSpeakMs(`${answerTerm}。${praise}`, { rate: 0.92, delayMs: 80 }) + 500);
-    } else {
-      playCorrectCue({ muted: state.muted });
-      const praise = speakCorrectFeedback({ muted: state.muted });
-      fb.textContent = praise;
-      fb.className = 'feedback ok';
-      afterPlayCorrect((listenRound.prompt || listenRound.target).id, () => startListenRound(), nextMs);
-    }
-  } else {
-    recordWordResult(listenRound.target.id, false, 'recognition');
-    // 錯咗都翻一吓睇圖，跟住翻返去——唔好長期露圖，避免靠淘汰答
-    flipListenCard(btn, false);
-    btn.classList.add('wrong');
-    playTryAgainCue({ muted: state.muted });
-    const fb = $('#listen-feedback');
-    fb.className = 'feedback retry';
-    setTimeout(() => btn.classList.remove('wrong'), 450);
-    // 鼓勵句講完先再讀題目（相反詞唔好讀出要揀嗰個答案）
-    const retryLine = speakRetryFeedback({
-      muted: state.muted,
-      onEnd: () => {
-        setTimeout(() => speakTerm(promptTerm, { muted: loadState().muted }), 250);
-      },
-    });
-    fb.textContent = retryLine;
-  }
 }
 
 /* ---------- 模式 B：配一配 ---------- */
@@ -2046,7 +1958,7 @@ function renderStarBars() {
   hosts.forEach((host) => {
     const screenId = host.closest('.screen')?.id || '';
     if (screenId === 'screen-progress' || screenId === 'screen-profiles') return;
-    const mode = { 'screen-listen': 'listen', 'screen-match': 'match', 'screen-build': 'build' }[screenId];
+    const mode = { 'screen-chinese-connect': 'chineseConnect', 'screen-match': 'match', 'screen-build': 'build' }[screenId];
     let bar = host.querySelector('.star-bar');
     if (!bar) {
       bar = document.createElement('div');
@@ -2058,9 +1970,18 @@ function renderStarBars() {
       host.appendChild(bar);
     }
 
-    if (mode) renderRoundBar(bar, mode, coins);
+    if (mode === 'chineseConnect') renderChineseConnectStarBar(bar);
+    else if (mode) renderRoundBar(bar, mode, coins);
     else renderCoinBar(bar, coins);
   });
+}
+
+function renderChineseConnectStarBar(bar) {
+  const earned = Boolean(chineseConnectRound?.topicStarAwarded);
+  bar.classList.add('star-bar-round');
+  bar.classList.remove('star-bar-coins-row');
+  bar.innerHTML = `<span class="star-bar-stars"><span class="star-cell${earned ? ' is-on' : ''}">★</span></span><span class="star-bar-hint">完成整個主題，獲得一粒星</span>`;
+  bar.setAttribute('aria-label', earned ? '完成主題，獲得一粒星' : '完成這個主題所有詞語，可得一粒星');
 }
 
 /** 遊戲畫面：今輪進度 → 幣 */
@@ -2180,7 +2101,7 @@ function nextRoundHint(coins) {
   for (const m of pending) {
     const saved = loadRoundProgress(`${m}|${activeTopicId || ''}|${activeBook ? activeBook.id : ''}`);
     if (saved.length) {
-      const cap = m === 'build' ? BUILD_CAP : LISTEN_MATCH_CAP;
+      const cap = m === 'build' ? BUILD_CAP : MATCH_CAP;
       return `下一個獎勵進度 ${saved.length}/${cap}`;
     }
   }

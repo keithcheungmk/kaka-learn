@@ -250,20 +250,6 @@
       </div>
       <p class="section-lead" id="play-lead">你想點樣認？</p>
       <div class="play-choices">
-        <button type="button" class="play-mode-card play-mode-listen" id="btn-mode-listen" aria-label="聽一聽，聽廣東話，揀漢字">
-          <span class="play-mode-preview" aria-hidden="true">
-            <span class="play-preview-icon">🔊</span>
-            <span class="play-preview-chars">
-              <span>鹿</span>
-              <span>星</span>
-              <span>門</span>
-            </span>
-          </span>
-          <span class="play-mode-copy">
-            <span class="play-mode-title">聽一聽</span>
-            <span class="play-mode-blurb">聽廣東話，揀漢字</span>
-          </span>
-        </button>
         <button type="button" class="play-mode-card play-mode-match" id="btn-mode-match" aria-label="配一配，睇圖，揀漢字">
           <span class="play-mode-preview play-preview-match" aria-hidden="true">
             <span class="play-preview-plate">⭐</span>
@@ -319,23 +305,6 @@
       <div class="btn-row chain-actions">
         <button type="button" class="btn btn-secondary" id="btn-chain-restart">再玩一次</button>
       </div>
-    </section>
-
-    <!-- 模式 A：聽音選字 -->
-    <section id="screen-listen" class="screen" aria-label="聽一聽揀卡片">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-listen">← 玩法</button>
-        <h1>聽一聽</h1>
-        <div class="progress-pill" aria-label="今輪答啱進度">
-          <strong id="listen-round-progress">0/8</strong>
-        </div>
-      </div>
-      <div class="prompt-box">
-        <p id="listen-prompt-text">聽下，揀個字</p>
-        <button type="button" class="speak-btn" id="btn-speak-listen" aria-label="再聽一次">🔊 再聽一次</button>
-      </div>
-      <div class="card-grid cols-3" id="listen-options"></div>
-      <p class="feedback" id="listen-feedback" aria-live="polite"></p>
     </section>
 
     <!-- 模式 B：配一配 -->
@@ -890,7 +859,8 @@
       <h2 id="stars-title">星星變 AEON 幣</h2>
       <div class="coin-banner">
         <strong>玩完一輪 = 1 枚 AEON 幣</strong><br />
-        聽一聽、配一配、砌一砌，每個玩法一日一個幣。<br />
+        配一配、砌一砌，每個玩法一日一個幣。<br />
+        「連一連」完成一個主題，可獲一粒星。<br />
         攞到幣，可以叫爸爸媽媽換真正嘅 AEON 幣呀！
       </div>
       <div class="stat-row"><span>今日</span><strong id="info-stars-today">0 / 3 個幣</strong></div>
@@ -908,7 +878,7 @@
   <script src="./js/storage.js?v=20260904a"></script>
   <script src="./js/speech.js?v=20260818e"></script>
   <script src="./js/star-fx.js?v=20260831l"></script>
-  <script src="./js/app.js?v=20260916-scene"></script>
+  <script src="./js/app.js?v=20260928-connect-rounds"></script>
   <script src="./js/phonics-words.js?v=20260905list"></script>
   <script src="./js/phonics-app.js?v=20260905list"></script>
   <script src="./data/carter-family-manifest.js?v=20260928cf040"></script>
