@@ -19,6 +19,7 @@
   let selectedWord = null;
   let solved = false;
   let reading = false;
+  let questionPlan = [];
 
   const PRAISE_LINES = [
     'Great job, Kaka! You got it right!',
@@ -96,6 +97,67 @@
   // supplied by the verified Carter manifest loaded before this script.
   const BOOKS = BASE_BOOKS.concat(window.KakaCarterManifest?.books || []);
 
+  const OPTION_LABELS = ['A', 'B', 'C', 'D'];
+  const normalizeOption = (word) => String(word || '').toLowerCase().replace(/[^a-z]/g, '');
+
+  function shuffle(items, random) {
+    const shuffled = [...items];
+    for (let index = shuffled.length - 1; index > 0; index -= 1) {
+      const swapIndex = Math.floor(random() * (index + 1));
+      [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+    }
+    return shuffled;
+  }
+
+  function balancedAnswerSlots(count, random = Math.random) {
+    if (!count) return [];
+    const base = Math.floor(count / OPTION_LABELS.length);
+    const bonusLabels = new Set(shuffle(OPTION_LABELS.map((_, index) => index), random).slice(0, count % OPTION_LABELS.length));
+    const slots = OPTION_LABELS.flatMap((_, index) => Array(base + (bonusLabels.has(index) ? 1 : 0)).fill(index));
+    let ordered = shuffle(slots, random);
+    // Keep the distribution balanced while avoiding an obvious repeated-answer lane.
+    for (let attempt = 0; attempt < 200 && ordered.some((slot, index) => index > 0 && slot === ordered[index - 1]); attempt += 1) {
+      ordered = shuffle(slots, random);
+    }
+    return ordered;
+  }
+
+  function createQuestionPlan(bookOrId, random = Math.random) {
+    const book = typeof bookOrId === 'string' ? BOOKS.find((candidate) => candidate.id === bookOrId) : bookOrId;
+    if (!book?.pages?.length) return [];
+    const localWordPool = book.pages.flatMap((page) => [...(page.blanks || []), ...(page.choices || [])]);
+    const allWordPool = BOOKS.flatMap((candidateBook) => candidateBook.pages.flatMap((page) => [...(page.blanks || []), ...(page.choices || [])]));
+    const answerSlots = balancedAnswerSlots(book.pages.length, random);
+
+    return book.pages.map((page, pageIndex) => {
+      const answer = page.blanks?.[0];
+      const existingChoices = [...new Set([answer, ...(page.choices || [])].filter(Boolean))];
+      const used = new Set(existingChoices.map(normalizeOption));
+      const visible = new Set((page.sentence || []).map(normalizeOption));
+      const findCandidates = (pool) => [...new Map(pool
+        .filter((word) => {
+          const key = normalizeOption(word);
+          return key && !used.has(key) && !visible.has(key) && key.length <= 14;
+        })
+        .map((word) => [normalizeOption(word), word])).values()];
+      let candidates = findCandidates(localWordPool);
+      if (!candidates.length) candidates = findCandidates(allWordPool);
+      const answerLength = normalizeOption(answer).length;
+      const closest = candidates.sort((left, right) => Math.abs(normalizeOption(left).length - answerLength) - Math.abs(normalizeOption(right).length - answerLength)).slice(0, 12);
+      const extraDistractor = closest.length ? closest[Math.floor(random() * closest.length)] : 'story';
+      const choices = [...existingChoices.slice(0, 3), extraDistractor];
+      while (choices.length < 4 || new Set(choices.map(normalizeOption)).size < 4) {
+        const fallback = ['family', 'school', 'happy', 'playing'].find((word) => !choices.some((choice) => normalizeOption(choice) === normalizeOption(word)));
+        if (!fallback) break;
+        choices.push(fallback);
+      }
+      const correctIndex = answerSlots[pageIndex];
+      const distractors = shuffle(choices.filter((word) => normalizeOption(word) !== normalizeOption(answer)), random);
+      distractors.splice(correctIndex, 0, answer);
+      return { choices: distractors, correctIndex, answer };
+    });
+  }
+
   function muted() { try { return !!window.KakaStorage?.loadState?.().muted; } catch { return false; } }
   function stopAudio() { $$('audio[data-story-demo]').forEach((audio) => { audio.pause(); audio.currentTime = 0; }); }
   function invalidatePlayback() { viewGen += 1; readToken += 1; reading = false; stopAudio(); speech.cancelAllSpeech?.(); }
@@ -137,6 +199,7 @@
     if (!book) return;
     activeBookId = bookId;
     pageIndex = 0;
+    questionPlan = createQuestionPlan(book);
     phase = 'listen';
     busy = false;
     selectedWord = null;
@@ -300,7 +363,8 @@
 
   function selectWord(word) {
     const item = current();
-    if (busy || reading || solved || phase !== 'fill' || !item.choices.includes(word)) return;
+    const choices = questionPlan[pageIndex]?.choices || item.choices;
+    if (busy || reading || solved || phase !== 'fill' || !choices.includes(word)) return;
     selectedWord = word;
     const blank = $('.story-fill-blank');
     if (blank) { blank.textContent = word; blank.classList.add('has-selection'); }
@@ -316,6 +380,7 @@
   function renderChallenge({ autoPlay = false } = {}) {
     const book = activeBook();
     const item = current();
+    const choices = questionPlan[pageIndex]?.choices || item.choices;
     const list = pages();
     const stage = $('#story-play-stage');
     const locked = phase === 'listen' && !solved;
@@ -339,7 +404,7 @@
         <p class="story-fill-sentence">${tokenMarkup(item, { filled: solved })}</p>
         <button type="button" class="btn btn-ghost story-sentence-listen" id="btn-story-read-sentence"${locked || solved ? ' hidden' : ''}>🔊 Read this sentence</button>
         <p class="story-fill-help"${locked ? ' hidden' : ''}>Choose one word, then press Submit.</p>
-        <div class="story-fill-bank" id="story-fill-bank">${item.choices.map((word) => `<button type="button" class="story-fill-tile${selectedWord === word ? ' selected' : ''}${solved && item.blanks.includes(word) ? ' correct' : ''}" draggable="${!locked && !busy && !reading && !solved}" data-word="${word}"${locked || busy || reading || solved ? ' disabled' : ''}>${word}</button>`).join('')}</div>
+        <div class="story-fill-bank" id="story-fill-bank">${choices.map((word, index) => `<button type="button" class="story-fill-tile${selectedWord === word ? ' selected' : ''}${solved && item.blanks.includes(word) ? ' correct' : ''}" draggable="${!locked && !busy && !reading && !solved}" data-word="${word}"${locked || busy || reading || solved ? ' disabled' : ''}><span class="story-choice-label" aria-hidden="true">${OPTION_LABELS[index]}</span><span class="story-choice-word">${word}</span></button>`).join('')}</div>
         <button type="button" class="btn btn-primary story-fill-submit" id="btn-story-submit"${locked || solved ? ' hidden' : ''}${!selectedWord || busy || reading ? ' disabled' : ''}>Submit</button>
       </section>`;
     $('#story-play-actions').innerHTML = '';
@@ -461,5 +526,6 @@
     open: openHub,
     books: BOOKS.map((book) => ({ id: book.id, title: book.title, pageCount: book.pages.length })),
     pageCount: totalPages(),
+    createQuestionPlan,
   };
 }());

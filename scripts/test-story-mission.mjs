@@ -28,15 +28,15 @@ assert.equal(sourceClipCount, 38, 'Every story page needs a source audio trace (
 assert.equal(blankCount, 38, 'Every story page needs one short fill activity');
 assert.equal(choiceCount, 38, 'Every story page should define answer choices');
 
-assert.equal(manifestBooks.length, 27, 'Manifest should add CF004–CF040');
+assert.equal(manifestBooks.length, 82, 'Manifest should add CF004–CF085');
 assert.deepEqual(Array.from(manifestBooks.slice(0, 7), (book) => book.cfLabel), ['CF004', 'CF005', 'CF006', 'CF007', 'CF008', 'CF009', 'CF010']);
-assert.deepEqual(Array.from(manifestBooks.slice(-20), (book) => book.cfLabel), Array.from({ length: 20 }, (_, index) => `CF${String(index + 21).padStart(3, '0')}`));
+assert.deepEqual(Array.from(manifestBooks.slice(-20), (book) => book.cfLabel), Array.from({ length: 20 }, (_, index) => `CF${String(index + 66).padStart(3, '0')}`));
 assert.equal(manifestBooks.slice(0, 7).reduce((sum, book) => sum + book.pages.length, 0), 96, 'CF004–CF010 should add 96 story pages');
-assert.equal(manifestBooks.slice(-20).reduce((sum, book) => sum + book.pages.length, 0), 245, 'CF021–CF040 should add 245 story pages');
+assert.equal(manifestBooks.reduce((sum, book) => sum + book.pages.length, 0), 995, 'CF004–CF085 should add 995 manifest story pages');
 for (const book of manifestBooks) {
   assert.equal(book.pages.length, book.pages.filter((item) => item.verificationStatus === 'verified').length, `${book.id} pages must be verified`);
   for (const item of book.pages) {
-    assert.equal(item.choices.length, 3, `${book.id} page ${item.printedPage} should have answer plus two distractors`);
+    assert.equal(item.choices.length, 3, `${book.id} page ${item.printedPage} should provide the answer plus two reviewed distractors; runtime adds a fourth`);
     assert.equal(item.blanks.length, 1, `${book.id} page ${item.printedPage} should have one blank`);
     assert.ok(item.sentence.includes(item.blanks[0]), `${book.id} blank must occur in the sentence`);
     await access(new URL(`../${item.image.slice(2)}`, import.meta.url), fsConstants.R_OK);
@@ -44,7 +44,49 @@ for (const book of manifestBooks) {
   }
 }
 
+const storySandbox = {
+  window: { KakaCarterManifest: { books: manifestBooks }, KakaSpeech: {} },
+  document: { querySelector: () => null, querySelectorAll: () => [] },
+  console,
+};
+vm.runInNewContext(source, storySandbox);
+const storyDemo = storySandbox.window.KakaStoryDemo;
+assert.equal(storyDemo.books.length, 85, 'The balanced answer system should include all 85 Carter books');
+assert.equal(storyDemo.pageCount, 1033, 'The balanced answer system should cover all 1,033 story pages');
+const normalize = (word) => String(word).toLowerCase().replace(/[^a-z]/g, '');
+const seededRandom = (seed) => () => {
+  seed = (seed * 1664525 + 1013904223) >>> 0;
+  return seed / 0x100000000;
+};
+for (const book of storyDemo.books) {
+  let sawDifferentRun = false;
+  let previousSignature = '';
+  for (let run = 1; run <= 12; run += 1) {
+    const plan = Array.from(storyDemo.createQuestionPlan(book.id, seededRandom(run * 997 + book.id.charCodeAt(2))));
+    const counts = [0, 0, 0, 0];
+    for (const [pageIndex, question] of plan.entries()) {
+      const page = book.id.startsWith('cf00') && Number(book.id.slice(2)) <= 3
+        ? null
+        : manifestBooks.find((candidate) => candidate.id === book.id)?.pages[pageIndex];
+      assert.equal(question.choices.length, 4, `${book.id} page ${pageIndex + 1} should have four choices`);
+      assert.equal(new Set(question.choices.map(normalize)).size, 4, `${book.id} page ${pageIndex + 1} choices must be distinct`);
+      assert.equal(question.choices[question.correctIndex], question.answer, `${book.id} page ${pageIndex + 1} answer must match its labelled position`);
+      assert.equal(question.choices.filter((word) => normalize(word) === normalize(question.answer)).length, 1, `${book.id} page ${pageIndex + 1} must contain exactly one correct option`);
+      if (page) assert.ok(!page.sentence.map(normalize).includes(normalize(question.choices.find((word) => normalize(word) !== normalize(question.answer) && !page.choices.some((choice) => normalize(choice) === normalize(word))))), `${book.id} page ${pageIndex + 1} extra distractor should not be exposed in its sentence`);
+      counts[question.correctIndex] += 1;
+      if (pageIndex > 0) assert.notEqual(question.correctIndex, plan[pageIndex - 1].correctIndex, `${book.id} should not repeat the same answer position on adjacent pages`);
+    }
+    assert.ok(Math.max(...counts) - Math.min(...counts) <= 1, `${book.id} answers should be evenly distributed across A–D`);
+    const signature = plan.map((question) => question.correctIndex).join('');
+    if (previousSignature && signature !== previousSignature) sawDifferentRun = true;
+    previousSignature = signature;
+  }
+  assert.ok(sawDifferentRun, `${book.id} answer positions should change between plays`);
+}
+
 assert.match(source, /function renderChallenge/, 'Read & Fill should use one challenge layout for listen and fill');
+assert.match(source, /balancedAnswerSlots/, 'Correct-answer positions should be balanced across A–D for each book run');
+assert.match(source, /story-choice-label/, 'Each of the four answer choices should show its A–D label');
 assert.match(source, /function unlockFill/, 'Story audio should unlock the fill controls when finished');
 assert.match(source, /draggable="\$\{!locked && !busy && !reading && !solved\}/, 'Word tiles should support dragging before submission');
 assert.match(source, /tile\.addEventListener\('click'/, 'Word tiles should also support tapping');
@@ -78,11 +120,11 @@ assert.match(starFx, /'screen-story-play'/, 'Story play should use the shared ra
 assert.match(index, /STORY ENGLISH・Carter Family/, 'Home entry should name the Carter Family track');
 
 const requiredAssets = [
-  '../assets/story-demo/pages/page-01.jpg',
+  '../assets/story-demo/pages/page-01.webp',
   '../assets/story-demo/cf001-game-night-page-01.mp3',
-  '../assets/story-demo/cf002/pages/page-12.jpg',
+  '../assets/story-demo/cf002/pages/page-12.webp',
   '../assets/story-demo/cf002/cf002-the-tree-house-page-12.mp3',
-  '../assets/story-demo/cf003/pages/page-14.jpg',
+  '../assets/story-demo/cf003/pages/page-14.webp',
   '../assets/story-demo/cf003/cf003-the-school-play-page-14.mp3',
 ];
 for (const relative of requiredAssets) {

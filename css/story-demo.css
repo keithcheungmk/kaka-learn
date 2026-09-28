@@ -192,12 +192,16 @@
 .story-fill-help { color:#fef3c7!important; font-weight:800; font-size:.85rem!important; margin:0; }
 .story-fill-bank {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   width: 100%;
   box-sizing: border-box;
 }
 .story-fill-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   min-width: 0;
   min-height: 44px;
   padding: 8px 6px;
@@ -212,6 +216,18 @@
   overflow-wrap: anywhere;
   box-sizing: border-box;
 }
+.story-choice-label {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 1.65em;
+  width: 1.65em;
+  height: 1.65em;
+  border-radius: 50%;
+  color: #163469;
+  background: #fde68a;
+  font: 800 .78em/1 var(--font-display);
+}
+.story-choice-word { min-width: 0; overflow-wrap: anywhere; }
 .story-fill-tile.wrong { border-color:#fda4af; background:rgba(159,18,57,.8); }
 .story-fill-tile.selected { border-color:#fde68a; background:rgba(113,72,25,.88); box-shadow:0 0 0 3px rgba(253,230,138,.2); }
 .story-fill-tile.correct { border-color:#86efac; background:rgba(22,101,52,.75); }
@@ -289,7 +305,7 @@
   .story-challenge-image-wrap { min-height: 220px; }
   .story-challenge-page { max-height: 360px; }
   .story-fill-panel { padding: 6px; overflow: visible; }
-  .story-fill-bank { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; }
+  .story-fill-bank { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; }
   .story-fill-tile { min-height: 52px; padding: 6px 4px; font-size: 1rem; }
   .story-play-options { grid-template-columns: 1fr; }
 }
