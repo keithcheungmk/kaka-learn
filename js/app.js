@@ -88,6 +88,13 @@ let learnPassedOnce = false;
 /** 今輪玩法：listen / match / build */
 let playMode = null;
 let chainIndex = 0;
+let chineseConnectRound = null;
+let chineseConnectBusy = false;
+let chineseConnectErrorTimer = null;
+const CHINESE_CONNECT_WORD_IDS = {
+  fruit: ['pingguo', 'xiangjiao', 'cheng', 'putao', 'xigua', 'caomei'],
+  zoo: ['shizi', 'daxiang', 'xiongmao', 'changjinglu', 'banma', 'qie'],
+};
 let activeChain = null;
 let chainStars = 0;
 let sentenceIndex = 0;
@@ -129,6 +136,7 @@ function init() {
     bindHome();
     bindTopics();
     bindLearn();
+    initChineseConnect();
     bindPlayPick();
     bindWordChain();
     bindSentenceGame();
@@ -410,6 +418,298 @@ function bindPlayPick() {
   if (listenBtn) listenBtn.onclick = startListenMode;
   if (matchBtn) matchBtn.onclick = startMatchMode;
   if (buildBtn) buildBtn.onclick = startBuildMode;
+  const connectBtn = $('#btn-mode-chinese-connect');
+  if (connectBtn) connectBtn.onclick = startChineseConnectMode;
+}
+
+/** 水果／動物園試點：入口及畫面由本檔建立，避免改動共享 HTML。 */
+function initChineseConnect() {
+  const app = $('#app');
+  const choices = $('#play-choices');
+  if (!app || !choices || $('#screen-chinese-connect')) return;
+
+  const entry = document.createElement('button');
+  entry.type = 'button';
+  entry.id = 'btn-mode-chinese-connect';
+  entry.className = 'play-mode-card play-mode-match';
+  entry.setAttribute('aria-label', '連一連，配對圖片和詞語');
+  entry.innerHTML = `
+    <span class="play-mode-preview" aria-hidden="true">
+      <span class="play-preview-icon">🔗</span>
+      <span class="play-preview-chars"><span>🍎</span><span class="is-glow">蘋果</span><span>🍌</span></span>
+    </span>
+    <span class="play-mode-copy"><span class="play-mode-title">連一連</span><span class="play-mode-blurb">左右配對圖片和詞語</span></span>`;
+  choices.prepend(entry);
+
+  const screen = document.createElement('section');
+  screen.id = 'screen-chinese-connect';
+  screen.className = 'screen';
+  screen.setAttribute('aria-label', '中文連一連配對遊戲');
+  screen.style.overflowY = 'auto';
+  screen.style.overscrollBehavior = 'contain';
+  screen.innerHTML = `
+    <div class="game-header">
+      <button type="button" class="btn btn-ghost" id="btn-back-chinese-connect">← 玩法</button>
+      <h1 id="chinese-connect-title">連一連</h1>
+      <div class="star-panel" style="min-height:56px;padding:8px 12px"><span class="star-icon">★</span><span class="star-meta"><strong class="stars-today-inline">0/10</strong></span></div>
+    </div>
+    <p class="section-lead" id="chinese-connect-instruction">先看左邊圖片，再找右邊相同的詞語。</p>
+    <div class="connect-prompt"><p class="feedback" id="chinese-connect-feedback" aria-live="polite">配對 0/6</p><span class="connect-prompt-note" id="chinese-connect-progress">已配對 0/6</span></div>
+    <div class="connect-board" id="chinese-connect-board">
+      <svg class="connect-lines" id="chinese-connect-lines" aria-hidden="true"></svg>
+      <section class="connect-column" aria-label="圖片"><h2>圖片</h2><div class="connect-card-list" id="chinese-connect-pictures"></div></section>
+      <section class="connect-column" aria-label="詞語"><h2>詞語</h2><div class="connect-card-list" id="chinese-connect-words"></div></section>
+    </div>
+    <div class="btn-row" id="chinese-connect-finish" hidden>
+      <p class="feedback ok" id="chinese-connect-finish-message" aria-live="polite"></p>
+      <button type="button" class="btn" id="btn-chinese-connect-again">再玩一版</button>
+      <button type="button" class="btn btn-secondary" id="btn-chinese-connect-back">返回玩法</button>
+    </div>`;
+  app.appendChild(screen);
+
+  $('#btn-back-chinese-connect').onclick = () => leaveChineseConnect();
+  $('#btn-chinese-connect-back').onclick = () => leaveChineseConnect();
+  $('#btn-chinese-connect-again').onclick = () => startChineseConnectMode();
+  window.addEventListener('resize', () => {
+    if ($('#screen-chinese-connect')?.classList.contains('active')) {
+      layoutChineseConnectBoard();
+      drawChineseConnectLines();
+    }
+  });
+}
+
+function leaveChineseConnect() {
+  if (chineseConnectErrorTimer) clearTimeout(chineseConnectErrorTimer);
+  chineseConnectErrorTimer = null;
+  chineseConnectBusy = false;
+  chineseConnectRound = null;
+  openPlayPick();
+}
+
+function startChineseConnectMode() {
+  const topic = getTopicById(activeTopicId);
+  const ids = CHINESE_CONNECT_WORD_IDS[activeTopicId];
+  if (!topic || !ids) {
+    openPlayPick();
+    return;
+  }
+  const pool = ids.map(getWordById).filter((word) => word?.emoji);
+  if (pool.length !== 6) {
+    console.error(`Chinese connect pilot data incomplete for ${activeTopicId}`);
+    return;
+  }
+  playMode = 'chineseConnect';
+  chineseConnectBusy = false;
+  if (chineseConnectErrorTimer) clearTimeout(chineseConnectErrorTimer);
+  chineseConnectErrorTimer = null;
+  $('#chinese-connect-title').textContent = `${topic.title}・連一連`;
+  $('#chinese-connect-finish').hidden = true;
+  $('#chinese-connect-instruction').textContent = '先看左邊圖片，再找右邊相同的詞語。';
+  chineseConnectRound = {
+    topicId: activeTopicId,
+    board: pool,
+    matchedIds: new Set(),
+    selectedPictureId: null,
+    selectedWordId: null,
+  };
+  showScreen('chineseConnect');
+  renderChineseConnectBoard();
+}
+
+function renderChineseConnectBoard() {
+  const round = chineseConnectRound;
+  const pictureBox = $('#chinese-connect-pictures');
+  const wordBox = $('#chinese-connect-words');
+  const board = $('#chinese-connect-board');
+  if (!round || !pictureBox || !wordBox || !board) return;
+  pictureBox.innerHTML = '';
+  wordBox.innerHTML = '';
+
+  shuffle(round.board).forEach((word) => {
+    const item = document.createElement('article');
+    item.className = 'connect-item';
+    const picture = document.createElement('button');
+    picture.type = 'button';
+    picture.className = 'connect-picture-main';
+    picture.dataset.id = word.id;
+    picture.setAttribute('aria-label', `圖片：${word.term}`);
+    picture.setAttribute('aria-pressed', String(round.selectedPictureId === word.id));
+    picture.disabled = round.matchedIds.has(word.id);
+    picture.innerHTML = wordIllustHtml(word);
+    picture.onclick = () => chooseChineseConnectCard('picture', word.id);
+
+    const audio = document.createElement('button');
+    audio.type = 'button';
+    audio.className = 'connect-audio';
+    audio.textContent = '🔊';
+    audio.setAttribute('aria-label', `聽詞語：${word.term}`);
+    audio.onclick = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      speakTerm(wordSpeakText(word), { muted: loadState().muted });
+    };
+    item.append(picture, audio);
+    pictureBox.appendChild(item);
+  });
+
+  shuffle(round.board).forEach((word) => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'connect-word-card';
+    card.dataset.id = word.id;
+    card.textContent = word.term;
+    card.setAttribute('aria-label', `詞語：${word.term}`);
+    card.setAttribute('aria-pressed', String(round.selectedWordId === word.id));
+    card.disabled = round.matchedIds.has(word.id);
+    card.onclick = () => chooseChineseConnectCard('word', word.id);
+    wordBox.appendChild(card);
+  });
+  updateChineseConnectSelection();
+  updateChineseConnectProgress();
+  layoutChineseConnectBoard();
+  requestAnimationFrame(drawChineseConnectLines);
+}
+
+function layoutChineseConnectBoard() {
+  const board = $('#chinese-connect-board');
+  if (!board) return;
+  const rowRule = window.matchMedia('(max-width: 640px)').matches
+    ? 'repeat(6, minmax(66px, 1fr))'
+    : 'repeat(6, minmax(0, 1fr))';
+  $('#chinese-connect-pictures').style.gridTemplateRows = rowRule;
+  $('#chinese-connect-words').style.gridTemplateRows = rowRule;
+  if (window.matchMedia('(max-width: 640px)').matches) {
+    // Respect the existing mobile one-column layout so six choices remain legible.
+    board.style.height = 'auto';
+    board.style.gridTemplateColumns = '';
+  } else {
+    board.style.height = `clamp(480px, 70vh, 720px)`;
+    board.style.gridTemplateColumns = 'repeat(2, minmax(0, 1fr))';
+  }
+}
+
+function chooseChineseConnectCard(kind, id) {
+  const round = chineseConnectRound;
+  if (!round || chineseConnectBusy || round.matchedIds.has(id)) return;
+  const key = kind === 'picture' ? 'selectedPictureId' : 'selectedWordId';
+  round[key] = round[key] === id ? null : id;
+  updateChineseConnectSelection();
+  if (round.selectedPictureId && round.selectedWordId) checkChineseConnectPair();
+}
+
+function updateChineseConnectSelection() {
+  const round = chineseConnectRound;
+  if (!round) return;
+  $('#chinese-connect-pictures')?.querySelectorAll('[data-id]').forEach((card) => {
+    const matched = round.matchedIds.has(card.dataset.id);
+    const selected = card.dataset.id === round.selectedPictureId && !matched;
+    card.classList.toggle('is-selected', selected);
+    card.classList.toggle('is-matched', matched);
+    card.setAttribute('aria-pressed', String(selected));
+  });
+  $('#chinese-connect-words')?.querySelectorAll('[data-id]').forEach((card) => {
+    const matched = round.matchedIds.has(card.dataset.id);
+    const selected = card.dataset.id === round.selectedWordId && !matched;
+    card.classList.toggle('is-selected', selected);
+    card.classList.toggle('is-matched', matched);
+    card.setAttribute('aria-pressed', String(selected));
+  });
+}
+
+function updateChineseConnectProgress() {
+  const count = chineseConnectRound?.board.length || 6;
+  const matched = chineseConnectRound?.matchedIds.size || 0;
+  const progress = $('#chinese-connect-progress');
+  const feedback = $('#chinese-connect-feedback');
+  if (progress) progress.textContent = `已配對 ${matched}/${count}`;
+  if (feedback && !feedback.classList.contains('wrong')) {
+    feedback.textContent = `配對 ${matched}/${count}`;
+  }
+}
+
+function checkChineseConnectPair() {
+  const round = chineseConnectRound;
+  if (!round || chineseConnectBusy) return;
+  const pictureId = round.selectedPictureId;
+  const wordId = round.selectedWordId;
+  if (!pictureId || !wordId) return;
+  const picture = $(`#chinese-connect-pictures [data-id="${pictureId}"]`);
+  const word = $(`#chinese-connect-words [data-id="${wordId}"]`);
+  const feedback = $('#chinese-connect-feedback');
+  if (pictureId !== wordId) {
+    chineseConnectBusy = true;
+    picture?.classList.add('is-wrong');
+    word?.classList.add('is-wrong');
+    if (feedback) {
+      feedback.textContent = '差少少，再試一次。';
+      feedback.className = 'feedback retry';
+    }
+    playTryAgainCue({ muted: loadState().muted });
+    chineseConnectErrorTimer = setTimeout(() => {
+      chineseConnectErrorTimer = null;
+      chineseConnectBusy = false;
+      round.selectedPictureId = null;
+      round.selectedWordId = null;
+      feedback.className = 'feedback';
+      updateChineseConnectSelection();
+      updateChineseConnectProgress();
+    }, 650);
+    return;
+  }
+
+  const item = round.board.find((entry) => entry.id === pictureId);
+  if (!item) return;
+  round.matchedIds.add(item.id);
+  round.selectedPictureId = null;
+  round.selectedWordId = null;
+  recordWordResult(item.id, true);
+  if (feedback) {
+    feedback.textContent = '配對成功！';
+    feedback.className = 'feedback ok';
+  }
+  updateChineseConnectSelection();
+  updateChineseConnectProgress();
+  drawChineseConnectLines();
+  speakTerm(wordSpeakText(item), { muted: loadState().muted });
+  if (round.matchedIds.size === round.board.length) finishChineseConnectRound();
+  else setTimeout(() => {
+    if (feedback && chineseConnectRound === round && feedback.classList.contains('ok')) feedback.className = 'feedback';
+    updateChineseConnectProgress();
+  }, 650);
+}
+
+function drawChineseConnectLines() {
+  const board = $('#chinese-connect-board');
+  const svg = $('#chinese-connect-lines');
+  const round = chineseConnectRound;
+  if (!board || !svg || !round || window.matchMedia('(max-width: 640px)').matches) {
+    if (svg) svg.innerHTML = '';
+    return;
+  }
+  const rect = board.getBoundingClientRect();
+  svg.setAttribute('viewBox', `0 0 ${Math.max(1, rect.width)} ${Math.max(1, rect.height)}`);
+  svg.innerHTML = [...round.matchedIds].map((id) => {
+    const picture = $(`#chinese-connect-pictures [data-id="${id}"]`);
+    const word = $(`#chinese-connect-words [data-id="${id}"]`);
+    if (!picture || !word) return '';
+    const a = picture.getBoundingClientRect();
+    const b = word.getBoundingClientRect();
+    return `<line class="connect-line" x1="${a.right - rect.left}" y1="${a.top + a.height / 2 - rect.top}" x2="${b.left - rect.left}" y2="${b.top + b.height / 2 - rect.top}"></line>`;
+  }).join('');
+}
+
+function finishChineseConnectRound() {
+  const round = chineseConnectRound;
+  if (!round || round.starAwarded) return;
+  round.starAwarded = true;
+  $('#chinese-connect-finish').hidden = false;
+  $('#chinese-connect-finish-message').textContent = '一版完成！六組都配對正確，獲得一粒星！';
+  $('#chinese-connect-feedback').textContent = '全部配對成功！';
+  $('#chinese-connect-feedback').className = 'feedback ok';
+  awardStar().then(() => {
+    if (chineseConnectRound !== round) return;
+    showStarBurst();
+  });
 }
 
 function showScreen(name) {
@@ -423,6 +723,7 @@ function showScreen(name) {
     books: '#screen-books',
     learn: '#screen-learn',
     play: '#screen-play',
+    chineseConnect: '#screen-chinese-connect',
     listen: '#screen-listen',
     match: '#screen-match',
     build: '#screen-build',
@@ -431,7 +732,7 @@ function showScreen(name) {
     sentenceLanding: '#screen-sentence-landing',
   };
   $(map[name])?.classList.add('active');
-  if (['listen', 'match', 'build', 'chain', 'sentence'].includes(name)) {
+  if (['listen', 'match', 'build', 'chain', 'sentence', 'chineseConnect'].includes(name)) {
     window.KakaStarFx?.mountPlayScreen?.($(map[name]));
     refreshStarUI();
   } else {
@@ -1050,6 +1351,16 @@ function openPlayPick() {
     setPlayModeCopy('#btn-mode-match', '配一配', '睇圖，揀漢字');
   }
   setPlayModeCopy('#btn-mode-build', '砌一砌', '用手砌漢字');
+  const connectBtn = $('#btn-mode-chinese-connect');
+  if (connectBtn) {
+    const available = Boolean(CHINESE_CONNECT_WORD_IDS[activeTopicId]);
+    connectBtn.hidden = !available;
+    connectBtn.style.display = available ? '' : 'none';
+    if (available) {
+      const topicName = topic?.title || '';
+      connectBtn.setAttribute('aria-label', `${topicName}・連一連，配對圖片和詞語`);
+    }
+  }
   showScreen('play');
   refreshStarUI();
 }
