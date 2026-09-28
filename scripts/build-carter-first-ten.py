@@ -229,7 +229,7 @@ def build() -> None:
             printed_text = " ".join(doc[pdf_page - 1].get_text("text").split())
             if sentence not in printed_text:
                 raise ValueError(f"{book_id} page {pdf_page}: sentence is not present in the source PDF page")
-            image_rel = f"./assets/story-demo/{book_id}/pages/page-{index:02d}.jpg"
+            image_rel = f"./assets/story-demo/{book_id}/pages/page-{index:02d}.webp"
             audio_rel = f"./assets/story-demo/{book_id}/{book_id}-page-{index:02d}.mp3"
             image_path = ROOT / image_rel.removeprefix("./")
             audio_path = ROOT / audio_rel.removeprefix("./")

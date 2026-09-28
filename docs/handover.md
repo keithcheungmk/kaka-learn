@@ -98,6 +98,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-09-28 · ChatGPT／Codex（Story English 故事書架修復及 CF011–CF020）
+
+- 修復 CF004 起故事書卡片縮圖無圖：書架改用每本第一頁圖作封面 fallback；CF001–CF040 現有 518 頁都用 900px WebP 衍生圖，`assets/` 總量約 56MB，保留 60MB 上限及原始 MP3 音質。
+- 故事書架加入全站純瀏覽頁可捲動名單，滑鼠／觸控可向下瀏覽完整清單；標題範圍、書本數和 manifest 都動態／按 CF 編號排序。
+- 從本機 Carter Family 原始 PDF 與逐頁 clips 還原 CF011–CF020（139 頁），沒有改動原始素材；40 本故事書依序 CF001–CF040，共 518 頁。
+- **踩咗** `index.html`、`css/styles.css`、`js/story-demo.js`、`data/carter-family-manifest.js`、`assets/story-demo/`、`assets/image-formats.lock.json`、`scripts/build-carter-11-20.py`、`scripts/build-carter-first-ten.py`、`scripts/build-carter-21-40.py`、`docs/carter-family-sentence-reading-plan.md`、`assets/story-demo/SOURCE.md`
+
 ### 2026-09-26 · ChatGPT／Codex（火星形狀 → 形狀規律）
 
 - 火星移除動物排隊；先學頁、玩法入口、題庫、語音及完成提示全部統一為「認識 10 種形狀，再用形狀找規律」。

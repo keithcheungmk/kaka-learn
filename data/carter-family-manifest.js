@@ -25,7 +25,7 @@ window.KakaCarterManifest = {
             "Mom.",
             "Dad."
           ],
-          "image": "./assets/story-demo/cf004/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf004/pages/page-01.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 124.mp3."
@@ -50,7 +50,7 @@ window.KakaCarterManifest = {
             "car.",
             "woods."
           ],
-          "image": "./assets/story-demo/cf004/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf004/pages/page-02.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 125.mp3."
@@ -75,7 +75,7 @@ window.KakaCarterManifest = {
             "tent!”",
             "woods!”"
           ],
-          "image": "./assets/story-demo/cf004/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf004/pages/page-03.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 126.mp3."
@@ -101,7 +101,7 @@ window.KakaCarterManifest = {
             "food.",
             "tent."
           ],
-          "image": "./assets/story-demo/cf004/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf004/pages/page-04.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 127.mp3."
@@ -126,7 +126,7 @@ window.KakaCarterManifest = {
             "quietly.",
             "slowly."
           ],
-          "image": "./assets/story-demo/cf004/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf004/pages/page-05.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 128.mp3."
@@ -152,7 +152,7 @@ window.KakaCarterManifest = {
             "fire.",
             "car."
           ],
-          "image": "./assets/story-demo/cf004/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf004/pages/page-06.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 129.mp3."
@@ -175,7 +175,7 @@ window.KakaCarterManifest = {
             "inside.",
             "upstairs."
           ],
-          "image": "./assets/story-demo/cf004/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf004/pages/page-07.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 130.mp3."
@@ -201,7 +201,7 @@ window.KakaCarterManifest = {
             "bags.",
             "tent."
           ],
-          "image": "./assets/story-demo/cf004/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf004/pages/page-08.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 131.mp3."
@@ -225,7 +225,7 @@ window.KakaCarterManifest = {
             "dogs,",
             "birds,"
           ],
-          "image": "./assets/story-demo/cf004/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf004/pages/page-09.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 132.mp3."
@@ -248,7 +248,7 @@ window.KakaCarterManifest = {
             "stopped.",
             "opened."
           ],
-          "image": "./assets/story-demo/cf004/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf004/pages/page-10.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 133.mp3."
@@ -273,7 +273,7 @@ window.KakaCarterManifest = {
             "tent.",
             "car."
           ],
-          "image": "./assets/story-demo/cf004/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf004/pages/page-11.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 134.mp3."
@@ -297,7 +297,7 @@ window.KakaCarterManifest = {
             "ball.",
             "bag."
           ],
-          "image": "./assets/story-demo/cf004/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf004/pages/page-12.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 135.mp3."
@@ -332,7 +332,7 @@ window.KakaCarterManifest = {
             "park.",
             "school."
           ],
-          "image": "./assets/story-demo/cf005/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf005/pages/page-01.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 2 paired with page clip 136.mp3."
@@ -356,7 +356,7 @@ window.KakaCarterManifest = {
             "water,",
             "bread,"
           ],
-          "image": "./assets/story-demo/cf005/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf005/pages/page-02.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 137.mp3."
@@ -381,7 +381,7 @@ window.KakaCarterManifest = {
             "cookies,",
             "candy,"
           ],
-          "image": "./assets/story-demo/cf005/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf005/pages/page-03.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 138.mp3."
@@ -406,7 +406,7 @@ window.KakaCarterManifest = {
             "good",
             "healthy"
           ],
-          "image": "./assets/story-demo/cf005/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf005/pages/page-04.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 139.mp3."
@@ -433,7 +433,7 @@ window.KakaCarterManifest = {
             "apples",
             "chips"
           ],
-          "image": "./assets/story-demo/cf005/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf005/pages/page-05.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 140.mp3."
@@ -461,7 +461,7 @@ window.KakaCarterManifest = {
             "water",
             "juice"
           ],
-          "image": "./assets/story-demo/cf005/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf005/pages/page-06.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 141.mp3."
@@ -486,7 +486,7 @@ window.KakaCarterManifest = {
             "making",
             "selling"
           ],
-          "image": "./assets/story-demo/cf005/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf005/pages/page-07.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 142.mp3."
@@ -513,7 +513,7 @@ window.KakaCarterManifest = {
             "fruit",
             "bread"
           ],
-          "image": "./assets/story-demo/cf005/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf005/pages/page-08.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 143.mp3."
@@ -537,7 +537,7 @@ window.KakaCarterManifest = {
             "started.",
             "lost."
           ],
-          "image": "./assets/story-demo/cf005/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf005/pages/page-09.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 144.mp3."
@@ -563,7 +563,7 @@ window.KakaCarterManifest = {
             "shelf.",
             "floor."
           ],
-          "image": "./assets/story-demo/cf005/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf005/pages/page-10.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 145.mp3."
@@ -588,7 +588,7 @@ window.KakaCarterManifest = {
             "books",
             "shoes"
           ],
-          "image": "./assets/story-demo/cf005/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf005/pages/page-11.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 146.mp3."
@@ -612,7 +612,7 @@ window.KakaCarterManifest = {
             "him!",
             "you!"
           ],
-          "image": "./assets/story-demo/cf005/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf005/pages/page-12.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 147.mp3."
@@ -637,7 +637,7 @@ window.KakaCarterManifest = {
             "away,”",
             "down,”"
           ],
-          "image": "./assets/story-demo/cf005/pages/page-13.jpg",
+          "image": "./assets/story-demo/cf005/pages/page-13.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-13.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 148.mp3."
@@ -674,7 +674,7 @@ window.KakaCarterManifest = {
             "school,",
             "park,"
           ],
-          "image": "./assets/story-demo/cf006/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-01.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 2 paired with page clip 149.mp3."
@@ -699,7 +699,7 @@ window.KakaCarterManifest = {
             "hat.",
             "coat."
           ],
-          "image": "./assets/story-demo/cf006/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-02.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 150.mp3."
@@ -724,7 +724,7 @@ window.KakaCarterManifest = {
             "jacket.",
             "shirt."
           ],
-          "image": "./assets/story-demo/cf006/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-03.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 151.mp3."
@@ -751,7 +751,7 @@ window.KakaCarterManifest = {
             "dress",
             "coat"
           ],
-          "image": "./assets/story-demo/cf006/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-04.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 152.mp3."
@@ -773,7 +773,7 @@ window.KakaCarterManifest = {
             "ran.",
             "slept."
           ],
-          "image": "./assets/story-demo/cf006/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-05.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 153.mp3."
@@ -796,7 +796,7 @@ window.KakaCarterManifest = {
             "wet.",
             "lost."
           ],
-          "image": "./assets/story-demo/cf006/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-06.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 154.mp3."
@@ -818,7 +818,7 @@ window.KakaCarterManifest = {
             "nowhere.",
             "upstairs."
           ],
-          "image": "./assets/story-demo/cf006/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-07.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 155.mp3."
@@ -842,7 +842,7 @@ window.KakaCarterManifest = {
             "fast.",
             "quiet."
           ],
-          "image": "./assets/story-demo/cf006/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-08.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 156.mp3."
@@ -868,7 +868,7 @@ window.KakaCarterManifest = {
             "ready,",
             "lost,"
           ],
-          "image": "./assets/story-demo/cf006/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-09.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 157.mp3."
@@ -893,7 +893,7 @@ window.KakaCarterManifest = {
             "bags?",
             "shoes?"
           ],
-          "image": "./assets/story-demo/cf006/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-10.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 158.mp3."
@@ -917,7 +917,7 @@ window.KakaCarterManifest = {
             "hungry!",
             "late!"
           ],
-          "image": "./assets/story-demo/cf006/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-11.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 159.mp3."
@@ -942,7 +942,7 @@ window.KakaCarterManifest = {
             "wet!",
             "tired!"
           ],
-          "image": "./assets/story-demo/cf006/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-12.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 160.mp3."
@@ -968,7 +968,7 @@ window.KakaCarterManifest = {
             "happy?",
             "ready?"
           ],
-          "image": "./assets/story-demo/cf006/pages/page-13.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-13.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-13.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 161.mp3."
@@ -990,7 +990,7 @@ window.KakaCarterManifest = {
             "Wow,",
             "Sorry,"
           ],
-          "image": "./assets/story-demo/cf006/pages/page-14.jpg",
+          "image": "./assets/story-demo/cf006/pages/page-14.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-14.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 15 paired with page clip 162.mp3."
@@ -1023,7 +1023,7 @@ window.KakaCarterManifest = {
             "shoes.",
             "books."
           ],
-          "image": "./assets/story-demo/cf007/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf007/pages/page-01.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 163.mp3."
@@ -1049,7 +1049,7 @@ window.KakaCarterManifest = {
             "well",
             "badly"
           ],
-          "image": "./assets/story-demo/cf007/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf007/pages/page-02.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 164.mp3."
@@ -1074,7 +1074,7 @@ window.KakaCarterManifest = {
             "old",
             "blue"
           ],
-          "image": "./assets/story-demo/cf007/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf007/pages/page-03.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 165.mp3."
@@ -1100,7 +1100,7 @@ window.KakaCarterManifest = {
             "morning",
             "afternoon"
           ],
-          "image": "./assets/story-demo/cf007/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf007/pages/page-04.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 166.mp3."
@@ -1127,7 +1127,7 @@ window.KakaCarterManifest = {
             "dog.",
             "car."
           ],
-          "image": "./assets/story-demo/cf007/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf007/pages/page-05.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 167.mp3."
@@ -1149,7 +1149,7 @@ window.KakaCarterManifest = {
             "jumped.",
             "laughed."
           ],
-          "image": "./assets/story-demo/cf007/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf007/pages/page-06.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 168.mp3."
@@ -1174,7 +1174,7 @@ window.KakaCarterManifest = {
             "Shoes",
             "Books"
           ],
-          "image": "./assets/story-demo/cf007/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf007/pages/page-07.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 169.mp3."
@@ -1198,7 +1198,7 @@ window.KakaCarterManifest = {
             "much",
             "little"
           ],
-          "image": "./assets/story-demo/cf007/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf007/pages/page-08.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 170.mp3."
@@ -1222,7 +1222,7 @@ window.KakaCarterManifest = {
             "pennies!",
             "buttons!"
           ],
-          "image": "./assets/story-demo/cf007/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf007/pages/page-09.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 171.mp3."
@@ -1246,7 +1246,7 @@ window.KakaCarterManifest = {
             "Harry.",
             "Mom."
           ],
-          "image": "./assets/story-demo/cf007/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf007/pages/page-10.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 172.mp3."
@@ -1271,7 +1271,7 @@ window.KakaCarterManifest = {
             "Oliver.",
             "Harry."
           ],
-          "image": "./assets/story-demo/cf007/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf007/pages/page-11.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 173.mp3."
@@ -1298,7 +1298,7 @@ window.KakaCarterManifest = {
             "sad",
             "tired"
           ],
-          "image": "./assets/story-demo/cf007/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf007/pages/page-12.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 174.mp3."
@@ -1332,7 +1332,7 @@ window.KakaCarterManifest = {
             "mean",
             "small"
           ],
-          "image": "./assets/story-demo/cf008/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-01.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 175.mp3."
@@ -1358,7 +1358,7 @@ window.KakaCarterManifest = {
             "books",
             "sticks"
           ],
-          "image": "./assets/story-demo/cf008/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-02.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 176.mp3."
@@ -1385,7 +1385,7 @@ window.KakaCarterManifest = {
             "helped",
             "found"
           ],
-          "image": "./assets/story-demo/cf008/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-03.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 177.mp3."
@@ -1408,7 +1408,7 @@ window.KakaCarterManifest = {
             "Ginger!",
             "Harry!"
           ],
-          "image": "./assets/story-demo/cf008/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-04.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 178.mp3."
@@ -1434,7 +1434,7 @@ window.KakaCarterManifest = {
             "tricks!",
             "songs!"
           ],
-          "image": "./assets/story-demo/cf008/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-05.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 179.mp3."
@@ -1460,7 +1460,7 @@ window.KakaCarterManifest = {
             "park.",
             "store."
           ],
-          "image": "./assets/story-demo/cf008/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-06.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 180.mp3."
@@ -1484,7 +1484,7 @@ window.KakaCarterManifest = {
             "Emmy.",
             "Ginger."
           ],
-          "image": "./assets/story-demo/cf008/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-07.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 181.mp3."
@@ -1508,7 +1508,7 @@ window.KakaCarterManifest = {
             "ran—except",
             "slept—except"
           ],
-          "image": "./assets/story-demo/cf008/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-08.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 182.mp3."
@@ -1532,7 +1532,7 @@ window.KakaCarterManifest = {
             "jumped—except",
             "waited—except"
           ],
-          "image": "./assets/story-demo/cf008/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-09.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 183.mp3."
@@ -1558,7 +1558,7 @@ window.KakaCarterManifest = {
             "helpful",
             "happy"
           ],
-          "image": "./assets/story-demo/cf008/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-10.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 184.mp3."
@@ -1581,7 +1581,7 @@ window.KakaCarterManifest = {
             "inside.",
             "upstairs."
           ],
-          "image": "./assets/story-demo/cf008/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-11.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 185.mp3."
@@ -1605,7 +1605,7 @@ window.KakaCarterManifest = {
             "safe!",
             "hungry!"
           ],
-          "image": "./assets/story-demo/cf008/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-12.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 186.mp3."
@@ -1627,7 +1627,7 @@ window.KakaCarterManifest = {
             "ran.",
             "barked."
           ],
-          "image": "./assets/story-demo/cf008/pages/page-13.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-13.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-13.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 15 paired with page clip 187.mp3."
@@ -1651,7 +1651,7 @@ window.KakaCarterManifest = {
             "Rover!",
             "Emmy!"
           ],
-          "image": "./assets/story-demo/cf008/pages/page-14.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-14.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-14.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 16 paired with page clip 188.mp3."
@@ -1678,7 +1678,7 @@ window.KakaCarterManifest = {
             "sleep.",
             "hide."
           ],
-          "image": "./assets/story-demo/cf008/pages/page-15.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-15.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-15.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 17 paired with page clip 189.mp3."
@@ -1703,7 +1703,7 @@ window.KakaCarterManifest = {
             "kitchen.",
             "school."
           ],
-          "image": "./assets/story-demo/cf008/pages/page-16.jpg",
+          "image": "./assets/story-demo/cf008/pages/page-16.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-16.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 18 paired with page clip 190.mp3."
@@ -1740,7 +1740,7 @@ window.KakaCarterManifest = {
             "cooking,",
             "reading,"
           ],
-          "image": "./assets/story-demo/cf009/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-01.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 191.mp3."
@@ -1766,7 +1766,7 @@ window.KakaCarterManifest = {
             "kitchen.",
             "garden."
           ],
-          "image": "./assets/story-demo/cf009/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-02.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 192.mp3."
@@ -1791,7 +1791,7 @@ window.KakaCarterManifest = {
             "cleaning",
             "building"
           ],
-          "image": "./assets/story-demo/cf009/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-03.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 193.mp3."
@@ -1814,7 +1814,7 @@ window.KakaCarterManifest = {
             "Mom!",
             "Rover!"
           ],
-          "image": "./assets/story-demo/cf009/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-04.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 194.mp3."
@@ -1836,7 +1836,7 @@ window.KakaCarterManifest = {
             "nowhere.",
             "upstairs."
           ],
-          "image": "./assets/story-demo/cf009/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-05.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 195.mp3."
@@ -1860,7 +1860,7 @@ window.KakaCarterManifest = {
             "spilled",
             "mixed"
           ],
-          "image": "./assets/story-demo/cf009/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-06.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 196.mp3."
@@ -1885,7 +1885,7 @@ window.KakaCarterManifest = {
             "school.",
             "work."
           ],
-          "image": "./assets/story-demo/cf009/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-07.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 197.mp3."
@@ -1911,7 +1911,7 @@ window.KakaCarterManifest = {
             "water!",
             "mud!"
           ],
-          "image": "./assets/story-demo/cf009/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-08.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 198.mp3."
@@ -1936,7 +1936,7 @@ window.KakaCarterManifest = {
             "hat!",
             "dress!"
           ],
-          "image": "./assets/story-demo/cf009/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-09.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 199.mp3."
@@ -1959,7 +1959,7 @@ window.KakaCarterManifest = {
             "cleaning",
             "resting"
           ],
-          "image": "./assets/story-demo/cf009/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-10.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 200.mp3."
@@ -1982,7 +1982,7 @@ window.KakaCarterManifest = {
             "Stay,",
             "Come,"
           ],
-          "image": "./assets/story-demo/cf009/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-11.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 201.mp3."
@@ -2007,7 +2007,7 @@ window.KakaCarterManifest = {
             "dried",
             "stayed"
           ],
-          "image": "./assets/story-demo/cf009/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-12.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 202.mp3."
@@ -2031,7 +2031,7 @@ window.KakaCarterManifest = {
             "smiled.",
             "laughed."
           ],
-          "image": "./assets/story-demo/cf009/pages/page-13.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-13.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-13.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 15 paired with page clip 203.mp3."
@@ -2056,7 +2056,7 @@ window.KakaCarterManifest = {
             "painted",
             "dropped"
           ],
-          "image": "./assets/story-demo/cf009/pages/page-14.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-14.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-14.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 16 paired with page clip 204.mp3."
@@ -2082,7 +2082,7 @@ window.KakaCarterManifest = {
             "kitchen.",
             "garden."
           ],
-          "image": "./assets/story-demo/cf009/pages/page-15.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-15.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-15.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 17 paired with page clip 205.mp3."
@@ -2107,7 +2107,7 @@ window.KakaCarterManifest = {
             "playing!",
             "running!"
           ],
-          "image": "./assets/story-demo/cf009/pages/page-16.jpg",
+          "image": "./assets/story-demo/cf009/pages/page-16.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-16.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 18 paired with page clip 206.mp3."
@@ -2144,7 +2144,7 @@ window.KakaCarterManifest = {
             "doctor.",
             "school."
           ],
-          "image": "./assets/story-demo/cf010/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf010/pages/page-01.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 2 paired with page clip 207.mp3."
@@ -2170,7 +2170,7 @@ window.KakaCarterManifest = {
             "help",
             "see"
           ],
-          "image": "./assets/story-demo/cf010/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf010/pages/page-02.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 208.mp3."
@@ -2197,7 +2197,7 @@ window.KakaCarterManifest = {
             "car",
             "door"
           ],
-          "image": "./assets/story-demo/cf010/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf010/pages/page-03.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 209.mp3."
@@ -2222,7 +2222,7 @@ window.KakaCarterManifest = {
             "early.",
             "ready."
           ],
-          "image": "./assets/story-demo/cf010/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf010/pages/page-04.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 210.mp3."
@@ -2248,7 +2248,7 @@ window.KakaCarterManifest = {
             "forget",
             "like"
           ],
-          "image": "./assets/story-demo/cf010/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf010/pages/page-05.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 211.mp3."
@@ -2273,7 +2273,7 @@ window.KakaCarterManifest = {
             "needs",
             "sees"
           ],
-          "image": "./assets/story-demo/cf010/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf010/pages/page-06.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 212.mp3."
@@ -2295,7 +2295,7 @@ window.KakaCarterManifest = {
             "stay!",
             "wait!"
           ],
-          "image": "./assets/story-demo/cf010/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf010/pages/page-07.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 213.mp3."
@@ -2322,7 +2322,7 @@ window.KakaCarterManifest = {
             "bad,",
             "small,"
           ],
-          "image": "./assets/story-demo/cf010/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf010/pages/page-08.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 214.mp3."
@@ -2346,7 +2346,7 @@ window.KakaCarterManifest = {
             "game.",
             "story."
           ],
-          "image": "./assets/story-demo/cf010/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf010/pages/page-09.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 215.mp3."
@@ -2370,7 +2370,7 @@ window.KakaCarterManifest = {
             "never",
             "sometimes"
           ],
-          "image": "./assets/story-demo/cf010/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf010/pages/page-10.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 216.mp3."
@@ -2397,7 +2397,7 @@ window.KakaCarterManifest = {
             "checkup.",
             "brush."
           ],
-          "image": "./assets/story-demo/cf010/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf010/pages/page-11.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 217.mp3."
@@ -2426,7 +2426,7 @@ window.KakaCarterManifest = {
             "doctor!",
             "school!"
           ],
-          "image": "./assets/story-demo/cf010/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf010/pages/page-12.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 218.mp3."
@@ -2450,10 +2450,3709 @@ window.KakaCarterManifest = {
             "school",
             "toy"
           ],
-          "image": "./assets/story-demo/cf010/pages/page-13.jpg",
+          "image": "./assets/story-demo/cf010/pages/page-13.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-13.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 219.mp3."
+        }
+      ]
+    },
+    {
+      "id": "cf011",
+      "title": "Harry's Friend Comes Over",
+      "cfLabel": "CF011",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 011. Harry's Friend Comes Over.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/11.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 11 - Harry's Friend",
+      "pages": [
+        {
+          "pdfPage": 2,
+          "printedPage": 1,
+          "sourceClip": "220.mp3",
+          "sentence": [
+            "“Mom,",
+            "can",
+            "Jim",
+            "come",
+            "over?”",
+            "asked",
+            "Harry."
+          ],
+          "blanks": [
+            "asked"
+          ],
+          "choices": [
+            "asked",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-01.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 2 paired with page clip 220.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 3,
+          "printedPage": 2,
+          "sourceClip": "221.mp3",
+          "sentence": [
+            "His",
+            "clothes",
+            "were",
+            "all",
+            "over",
+            "the",
+            "floor."
+          ],
+          "blanks": [
+            "floor."
+          ],
+          "choices": [
+            "floor.",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-02.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 221.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 3,
+          "sourceClip": "222.mp3",
+          "sentence": [
+            "“But",
+            "first",
+            "you",
+            "must",
+            "clean",
+            "your",
+            "room.”"
+          ],
+          "blanks": [
+            "room.”"
+          ],
+          "choices": [
+            "room.”",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-03.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 222.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 4,
+          "sourceClip": "223.mp3",
+          "sentence": [
+            "He",
+            "put",
+            "his",
+            "toy",
+            "robots",
+            "in",
+            "a",
+            "basket."
+          ],
+          "blanks": [
+            "basket."
+          ],
+          "choices": [
+            "basket.",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-04.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 223.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 5,
+          "sourceClip": "224.mp3",
+          "sentence": [
+            "Soon",
+            "Harry’s",
+            "room",
+            "was",
+            "very",
+            "neat."
+          ],
+          "blanks": [
+            "neat."
+          ],
+          "choices": [
+            "neat.",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-05.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 224.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 6,
+          "sourceClip": "225.mp3",
+          "sentence": [
+            "Harry",
+            "opened",
+            "the",
+            "door",
+            "for",
+            "him."
+          ],
+          "blanks": [
+            "door"
+          ],
+          "choices": [
+            "door",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-06.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 225.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 7,
+          "sourceClip": "226.mp3",
+          "sentence": [
+            "“Hey,",
+            "Harry!”",
+            "said",
+            "Jim."
+          ],
+          "blanks": [
+            "Jim."
+          ],
+          "choices": [
+            "Jim.",
+            "come",
+            "over"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-07.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 226.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 8,
+          "sourceClip": "227.mp3",
+          "sentence": [
+            "He",
+            "pulled",
+            "a",
+            "few",
+            "of",
+            "them",
+            "off",
+            "the",
+            "shelf."
+          ],
+          "blanks": [
+            "shelf."
+          ],
+          "choices": [
+            "shelf.",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-08.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 227.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 9,
+          "sourceClip": "228.mp3",
+          "sentence": [
+            "Jim",
+            "dropped",
+            "the",
+            "books",
+            "on",
+            "the",
+            "floor."
+          ],
+          "blanks": [
+            "floor."
+          ],
+          "choices": [
+            "floor.",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-09.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 228.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 10,
+          "sourceClip": "229.mp3",
+          "sentence": [
+            "Next",
+            "he",
+            "picked",
+            "up",
+            "a",
+            "model",
+            "car."
+          ],
+          "blanks": [
+            "model"
+          ],
+          "choices": [
+            "model",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-10.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 229.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 11,
+          "sourceClip": "230.mp3",
+          "sentence": [
+            "“Oops,",
+            "sorry",
+            "about",
+            "that,”",
+            "said",
+            "Jim."
+          ],
+          "blanks": [
+            "about"
+          ],
+          "choices": [
+            "about",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-11.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 230.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 12,
+          "sourceClip": "231.mp3",
+          "sentence": [
+            "“It’s",
+            "not",
+            "a",
+            "big",
+            "deal,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "deal,”"
+          ],
+          "choices": [
+            "deal,”",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-12.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 231.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 13,
+          "sourceClip": "232.mp3",
+          "sentence": [
+            "He",
+            "dumped",
+            "toy",
+            "robots",
+            "on",
+            "the",
+            "floor."
+          ],
+          "blanks": [
+            "floor."
+          ],
+          "choices": [
+            "floor.",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-13.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-13.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 232.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 15,
+          "printedPage": 14,
+          "sourceClip": "233.mp3",
+          "sentence": [
+            "Finally",
+            "Jim",
+            "went",
+            "home."
+          ],
+          "blanks": [
+            "home."
+          ],
+          "choices": [
+            "home.",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-14.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-14.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 15 paired with page clip 233.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 16,
+          "printedPage": 15,
+          "sourceClip": "234.mp3",
+          "sentence": [
+            "Harry",
+            "looked",
+            "at",
+            "the",
+            "mess",
+            "in",
+            "his",
+            "room."
+          ],
+          "blanks": [
+            "room."
+          ],
+          "choices": [
+            "room.",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-15.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-15.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 16 paired with page clip 234.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 17,
+          "printedPage": 16,
+          "sourceClip": "235.mp3",
+          "sentence": [
+            "He",
+            "started",
+            "picking",
+            "up",
+            "his",
+            "things."
+          ],
+          "blanks": [
+            "things."
+          ],
+          "choices": [
+            "things.",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-16.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-16.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 17 paired with page clip 235.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 18,
+          "printedPage": 17,
+          "sourceClip": "236.mp3",
+          "sentence": [
+            "“What",
+            "are",
+            "you",
+            "doing?”",
+            "asked",
+            "Mom."
+          ],
+          "blanks": [
+            "asked"
+          ],
+          "choices": [
+            "asked",
+            "Jim",
+            "come"
+          ],
+          "image": "./assets/story-demo/cf011/pages/page-17.webp",
+          "audio": "./assets/story-demo/cf011/cf011-page-17.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 18 paired with page clip 236.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf012",
+      "title": "Summer Vacation",
+      "cfLabel": "CF012",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 012. Summer Vacation.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/12.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 12 - Summer Vacation",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "237.mp3",
+          "sentence": [
+            "It",
+            "was",
+            "the",
+            "first",
+            "day",
+            "of",
+            "summer",
+            "vacation."
+          ],
+          "blanks": [
+            "vacation."
+          ],
+          "choices": [
+            "vacation.",
+            "first",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf012/pages/page-01.webp",
+          "audio": "./assets/story-demo/cf012/cf012-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 237.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "238.mp3",
+          "sentence": [
+            "“I’m",
+            "glad",
+            "school",
+            "is",
+            "over,”",
+            "said",
+            "Emmy."
+          ],
+          "blanks": [
+            "over,”"
+          ],
+          "choices": [
+            "over,”",
+            "first",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf012/pages/page-02.webp",
+          "audio": "./assets/story-demo/cf012/cf012-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 238.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "239.mp3",
+          "sentence": [
+            "“What",
+            "should",
+            "we",
+            "do",
+            "first?”",
+            "asked",
+            "Harry."
+          ],
+          "blanks": [
+            "asked"
+          ],
+          "choices": [
+            "asked",
+            "first",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf012/pages/page-03.webp",
+          "audio": "./assets/story-demo/cf012/cf012-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 239.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "240.mp3",
+          "sentence": [
+            "Emmy",
+            "and",
+            "Harry",
+            "rode",
+            "to",
+            "the",
+            "park."
+          ],
+          "blanks": [
+            "park."
+          ],
+          "choices": [
+            "park.",
+            "first",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf012/pages/page-04.webp",
+          "audio": "./assets/story-demo/cf012/cf012-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 240.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "241.mp3",
+          "sentence": [
+            "“What",
+            "should",
+            "we",
+            "do",
+            "next?”",
+            "asked",
+            "Harry."
+          ],
+          "blanks": [
+            "asked"
+          ],
+          "choices": [
+            "asked",
+            "first",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf012/pages/page-05.webp",
+          "audio": "./assets/story-demo/cf012/cf012-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 241.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "242.mp3",
+          "sentence": [
+            "Emmy",
+            "and",
+            "Harry",
+            "put",
+            "on",
+            "their",
+            "swimsuits."
+          ],
+          "blanks": [
+            "swimsuits."
+          ],
+          "choices": [
+            "swimsuits.",
+            "first",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf012/pages/page-06.webp",
+          "audio": "./assets/story-demo/cf012/cf012-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 242.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "243.mp3",
+          "sentence": [
+            "Emmy",
+            "and",
+            "Harry",
+            "ran",
+            "through",
+            "the",
+            "cool",
+            "spray."
+          ],
+          "blanks": [
+            "spray."
+          ],
+          "choices": [
+            "spray.",
+            "first",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf012/pages/page-07.webp",
+          "audio": "./assets/story-demo/cf012/cf012-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 243.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "244.mp3",
+          "sentence": [
+            "Next",
+            "Harry",
+            "and",
+            "Emmy",
+            "played",
+            "cards."
+          ],
+          "blanks": [
+            "cards."
+          ],
+          "choices": [
+            "cards.",
+            "first",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf012/pages/page-08.webp",
+          "audio": "./assets/story-demo/cf012/cf012-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 244.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "245.mp3",
+          "sentence": [
+            "They",
+            "played",
+            "tag",
+            "and",
+            "hide-and-seek."
+          ],
+          "blanks": [
+            "hide-and-seek."
+          ],
+          "choices": [
+            "hide-and-seek.",
+            "first",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf012/pages/page-09.webp",
+          "audio": "./assets/story-demo/cf012/cf012-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 245.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "246.mp3",
+          "sentence": [
+            "“Now",
+            "what",
+            "should",
+            "we",
+            "do?”",
+            "asked",
+            "Harry."
+          ],
+          "blanks": [
+            "asked"
+          ],
+          "choices": [
+            "asked",
+            "first",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf012/pages/page-10.webp",
+          "audio": "./assets/story-demo/cf012/cf012-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 246.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "247.mp3",
+          "sentence": [
+            "Later",
+            "Mom",
+            "came",
+            "into",
+            "the",
+            "family",
+            "room."
+          ],
+          "blanks": [
+            "room."
+          ],
+          "choices": [
+            "room.",
+            "first",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf012/pages/page-11.webp",
+          "audio": "./assets/story-demo/cf012/cf012-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 247.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "248.mp3",
+          "sentence": [
+            "“When",
+            "does",
+            "school",
+            "start",
+            "again?”"
+          ],
+          "blanks": [
+            "again?”"
+          ],
+          "choices": [
+            "again?”",
+            "first",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf012/pages/page-12.webp",
+          "audio": "./assets/story-demo/cf012/cf012-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 248.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf013",
+      "title": "The Yard Sale",
+      "cfLabel": "CF013",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 013. The Yard Sale.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/13.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 13 - The Yard Sale",
+      "pages": [
+        {
+          "pdfPage": 2,
+          "printedPage": 1,
+          "sourceClip": "249.mp3",
+          "sentence": [
+            "“We",
+            "can",
+            "sell",
+            "our",
+            "old",
+            "things,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "things,”"
+          ],
+          "choices": [
+            "things,”",
+            "having",
+            "yard"
+          ],
+          "image": "./assets/story-demo/cf013/pages/page-01.webp",
+          "audio": "./assets/story-demo/cf013/cf013-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 2 paired with page clip 249.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 3,
+          "printedPage": 2,
+          "sourceClip": "250.mp3",
+          "sentence": [
+            "“I",
+            "don’t",
+            "play",
+            "with",
+            "this",
+            "stuff",
+            "anymore,”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "anymore,”"
+          ],
+          "choices": [
+            "anymore,”",
+            "having",
+            "yard"
+          ],
+          "image": "./assets/story-demo/cf013/pages/page-02.webp",
+          "audio": "./assets/story-demo/cf013/cf013-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 250.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 3,
+          "sourceClip": "251.mp3",
+          "sentence": [
+            "Emmy",
+            "found",
+            "some",
+            "board",
+            "games",
+            "and",
+            "dolls."
+          ],
+          "blanks": [
+            "dolls."
+          ],
+          "choices": [
+            "dolls.",
+            "having",
+            "yard"
+          ],
+          "image": "./assets/story-demo/cf013/pages/page-03.webp",
+          "audio": "./assets/story-demo/cf013/cf013-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 251.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 4,
+          "sourceClip": "252.mp3",
+          "sentence": [
+            "Oliver",
+            "was",
+            "still",
+            "looking",
+            "for",
+            "something",
+            "to",
+            "sell."
+          ],
+          "blanks": [
+            "sell."
+          ],
+          "choices": [
+            "sell.",
+            "having",
+            "yard"
+          ],
+          "image": "./assets/story-demo/cf013/pages/page-04.webp",
+          "audio": "./assets/story-demo/cf013/cf013-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 252.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 5,
+          "sourceClip": "253.mp3",
+          "sentence": [
+            "“What",
+            "about",
+            "this",
+            "rubber",
+            "ball?”",
+            "asked",
+            "Dad."
+          ],
+          "blanks": [
+            "asked"
+          ],
+          "choices": [
+            "asked",
+            "having",
+            "yard"
+          ],
+          "image": "./assets/story-demo/cf013/pages/page-05.webp",
+          "audio": "./assets/story-demo/cf013/cf013-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 253.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 6,
+          "sourceClip": "254.mp3",
+          "sentence": [
+            "It",
+            "was",
+            "time",
+            "for",
+            "the",
+            "yard",
+            "sale!"
+          ],
+          "blanks": [
+            "sale!"
+          ],
+          "choices": [
+            "sale!",
+            "having",
+            "yard"
+          ],
+          "image": "./assets/story-demo/cf013/pages/page-06.webp",
+          "audio": "./assets/story-demo/cf013/cf013-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 254.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 7,
+          "sourceClip": "255.mp3",
+          "sentence": [
+            "“This",
+            "is",
+            "a",
+            "baby",
+            "toy,”",
+            "he",
+            "thought."
+          ],
+          "blanks": [
+            "thought."
+          ],
+          "choices": [
+            "thought.",
+            "having",
+            "yard"
+          ],
+          "image": "./assets/story-demo/cf013/pages/page-07.webp",
+          "audio": "./assets/story-demo/cf013/cf013-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 255.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 8,
+          "sourceClip": "256.mp3",
+          "sentence": [
+            "Mom",
+            "sold",
+            "some",
+            "blue",
+            "dishes",
+            "and",
+            "old",
+            "clothes."
+          ],
+          "blanks": [
+            "clothes."
+          ],
+          "choices": [
+            "clothes.",
+            "having",
+            "yard"
+          ],
+          "image": "./assets/story-demo/cf013/pages/page-08.webp",
+          "audio": "./assets/story-demo/cf013/cf013-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 256.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 9,
+          "sourceClip": "257.mp3",
+          "sentence": [
+            "Emmy",
+            "and",
+            "Harry",
+            "sold",
+            "their",
+            "toys."
+          ],
+          "blanks": [
+            "toys."
+          ],
+          "choices": [
+            "toys.",
+            "having",
+            "yard"
+          ],
+          "image": "./assets/story-demo/cf013/pages/page-09.webp",
+          "audio": "./assets/story-demo/cf013/cf013-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 257.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 10,
+          "sourceClip": "258.mp3",
+          "sentence": [
+            "Then",
+            "a",
+            "little",
+            "girl",
+            "picked",
+            "up",
+            "Oliver’s",
+            "alligator."
+          ],
+          "blanks": [
+            "alligator."
+          ],
+          "choices": [
+            "alligator.",
+            "having",
+            "yard"
+          ],
+          "image": "./assets/story-demo/cf013/pages/page-10.webp",
+          "audio": "./assets/story-demo/cf013/cf013-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 258.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 11,
+          "sourceClip": "259.mp3",
+          "sentence": [
+            "The",
+            "little",
+            "girl",
+            "bought",
+            "the",
+            "alligator."
+          ],
+          "blanks": [
+            "alligator."
+          ],
+          "choices": [
+            "alligator.",
+            "having",
+            "yard"
+          ],
+          "image": "./assets/story-demo/cf013/pages/page-11.webp",
+          "audio": "./assets/story-demo/cf013/cf013-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 259.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 12,
+          "sourceClip": "260.mp3",
+          "sentence": [
+            "The",
+            "next",
+            "day",
+            "Dad",
+            "and",
+            "Oliver",
+            "took",
+            "a",
+            "walk."
+          ],
+          "blanks": [
+            "walk."
+          ],
+          "choices": [
+            "walk.",
+            "having",
+            "yard"
+          ],
+          "image": "./assets/story-demo/cf013/pages/page-12.webp",
+          "audio": "./assets/story-demo/cf013/cf013-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 260.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 13,
+          "sourceClip": "261.mp3",
+          "sentence": [
+            "“Look",
+            "what",
+            "I",
+            "bought,",
+            "Dad!”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "bought,"
+          ],
+          "choices": [
+            "bought,",
+            "having",
+            "yard"
+          ],
+          "image": "./assets/story-demo/cf013/pages/page-13.webp",
+          "audio": "./assets/story-demo/cf013/cf013-page-13.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 261.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf014",
+      "title": "At the Beach",
+      "cfLabel": "CF014",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 014. At the Beach.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/14.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 14 - At the Beach",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "262.mp3",
+          "sentence": [
+            "“It’s",
+            "a",
+            "perfect",
+            "day",
+            "for",
+            "the",
+            "beach!”",
+            "said",
+            "Dad."
+          ],
+          "blanks": [
+            "beach!”"
+          ],
+          "choices": [
+            "beach!”",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-01.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 262.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "263.mp3",
+          "sentence": [
+            "Mom",
+            "spread",
+            "a",
+            "blanket",
+            "next",
+            "to",
+            "the",
+            "cooler."
+          ],
+          "blanks": [
+            "cooler."
+          ],
+          "choices": [
+            "cooler.",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-02.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 263.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "264.mp3",
+          "sentence": [
+            "Mom",
+            "put",
+            "sunscreen",
+            "on",
+            "everyone."
+          ],
+          "blanks": [
+            "everyone."
+          ],
+          "choices": [
+            "everyone.",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-03.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 264.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "265.mp3",
+          "sentence": [
+            "Oliver",
+            "started",
+            "building",
+            "a",
+            "sand",
+            "castle."
+          ],
+          "blanks": [
+            "castle."
+          ],
+          "choices": [
+            "castle.",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-04.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 265.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "266.mp3",
+          "sentence": [
+            "Dad,",
+            "Emmy,",
+            "and",
+            "Harry",
+            "went",
+            "down",
+            "to",
+            "the",
+            "water."
+          ],
+          "blanks": [
+            "water."
+          ],
+          "choices": [
+            "water.",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-05.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 266.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "267.mp3",
+          "sentence": [
+            "A",
+            "small",
+            "wave",
+            "splashed",
+            "over",
+            "their",
+            "feet."
+          ],
+          "blanks": [
+            "feet."
+          ],
+          "choices": [
+            "feet.",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-06.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 267.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "268.mp3",
+          "sentence": [
+            "“It",
+            "only",
+            "feels",
+            "cold",
+            "at",
+            "first,”",
+            "said",
+            "Dad."
+          ],
+          "blanks": [
+            "first,”"
+          ],
+          "choices": [
+            "first,”",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-07.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 268.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "269.mp3",
+          "sentence": [
+            "The",
+            "water",
+            "was",
+            "up",
+            "to",
+            "his",
+            "knees."
+          ],
+          "blanks": [
+            "knees."
+          ],
+          "choices": [
+            "knees.",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-08.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 269.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "270.mp3",
+          "sentence": [
+            "Harry",
+            "shivered",
+            "and",
+            "ran",
+            "back",
+            "out."
+          ],
+          "blanks": [
+            "back"
+          ],
+          "choices": [
+            "back",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-09.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 270.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "271.mp3",
+          "sentence": [
+            "“You",
+            "need",
+            "to",
+            "jump",
+            "in",
+            "quickly!”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "quickly!”"
+          ],
+          "choices": [
+            "quickly!”",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-10.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 271.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "272.mp3",
+          "sentence": [
+            "Dad",
+            "dived",
+            "under",
+            "a",
+            "big",
+            "wave."
+          ],
+          "blanks": [
+            "wave."
+          ],
+          "choices": [
+            "wave.",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-11.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 272.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "273.mp3",
+          "sentence": [
+            "Harry",
+            "and",
+            "Emmy",
+            "went",
+            "into",
+            "the",
+            "water",
+            "again."
+          ],
+          "blanks": [
+            "again."
+          ],
+          "choices": [
+            "again.",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-12.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 273.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 15,
+          "printedPage": 13,
+          "sourceClip": "274.mp3",
+          "sentence": [
+            "“I",
+            "don’t",
+            "want",
+            "to",
+            "jump",
+            "in",
+            "quick—”",
+            "Splash!"
+          ],
+          "blanks": [
+            "Splash!"
+          ],
+          "choices": [
+            "Splash!",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-13.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-13.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 15 paired with page clip 274.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 16,
+          "printedPage": 14,
+          "sourceClip": "275.mp3",
+          "sentence": [
+            "They",
+            "tumbled",
+            "with",
+            "the",
+            "wave."
+          ],
+          "blanks": [
+            "wave."
+          ],
+          "choices": [
+            "wave.",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-14.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-14.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 16 paired with page clip 275.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 17,
+          "printedPage": 15,
+          "sourceClip": "276.mp3",
+          "sentence": [
+            "When",
+            "they",
+            "got",
+            "up,",
+            "they",
+            "were",
+            "soaked."
+          ],
+          "blanks": [
+            "soaked."
+          ],
+          "choices": [
+            "soaked.",
+            "perfect",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf014/pages/page-15.webp",
+          "audio": "./assets/story-demo/cf014/cf014-page-15.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 17 paired with page clip 276.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf015",
+      "title": "The Movie Theater",
+      "cfLabel": "CF015",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 015. The Movie Theater.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/15.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 15 - The Movie Theater",
+      "pages": [
+        {
+          "pdfPage": 2,
+          "printedPage": 1,
+          "sourceClip": "277.mp3",
+          "sentence": [
+            "“What",
+            "movie",
+            "will",
+            "we",
+            "see?”",
+            "asked",
+            "Dad."
+          ],
+          "blanks": [
+            "asked"
+          ],
+          "choices": [
+            "asked",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-01.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 2 paired with page clip 277.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 3,
+          "printedPage": 2,
+          "sourceClip": "278.mp3",
+          "sentence": [
+            "“I",
+            "want",
+            "to",
+            "see",
+            "car",
+            "chases!”"
+          ],
+          "blanks": [
+            "chases!”"
+          ],
+          "choices": [
+            "chases!”",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-02.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 278.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 3,
+          "sourceClip": "279.mp3",
+          "sentence": [
+            "“Let’s",
+            "go",
+            "to",
+            "the",
+            "penguin",
+            "movie,”",
+            "said",
+            "Dad."
+          ],
+          "blanks": [
+            "movie,”"
+          ],
+          "choices": [
+            "movie,”",
+            "Everyone",
+            "theater"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-03.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 279.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 4,
+          "sourceClip": "280.mp3",
+          "sentence": [
+            "“Five",
+            "tickets,",
+            "please,”",
+            "said",
+            "Dad."
+          ],
+          "blanks": [
+            "please,”"
+          ],
+          "choices": [
+            "please,”",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-04.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 280.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 5,
+          "sourceClip": "281.mp3",
+          "sentence": [
+            "“It",
+            "looks",
+            "like",
+            "a",
+            "baby",
+            "movie.”"
+          ],
+          "blanks": [
+            "movie.”"
+          ],
+          "choices": [
+            "movie.”",
+            "Everyone",
+            "theater"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-05.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 281.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 6,
+          "sourceClip": "282.mp3",
+          "sentence": [
+            "The",
+            "kids",
+            "picked",
+            "out",
+            "their",
+            "favorite",
+            "candy."
+          ],
+          "blanks": [
+            "candy."
+          ],
+          "choices": [
+            "candy.",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-06.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 282.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 7,
+          "sourceClip": "283.mp3",
+          "sentence": [
+            "Then",
+            "they",
+            "all",
+            "went",
+            "into",
+            "the",
+            "theater."
+          ],
+          "blanks": [
+            "theater."
+          ],
+          "choices": [
+            "theater.",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-07.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 283.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 8,
+          "sourceClip": "284.mp3",
+          "sentence": [
+            "The",
+            "screen",
+            "was",
+            "filled",
+            "with",
+            "penguins."
+          ],
+          "blanks": [
+            "penguins."
+          ],
+          "choices": [
+            "penguins.",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-08.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 284.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 9,
+          "sourceClip": "285.mp3",
+          "sentence": [
+            "“This",
+            "is",
+            "going",
+            "to",
+            "be",
+            "boring,”",
+            "thought",
+            "Harry."
+          ],
+          "blanks": [
+            "thought"
+          ],
+          "choices": [
+            "thought",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-09.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 285.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 10,
+          "sourceClip": "286.mp3",
+          "sentence": [
+            "Suddenly",
+            "the",
+            "penguins",
+            "did",
+            "something",
+            "funny."
+          ],
+          "blanks": [
+            "funny."
+          ],
+          "choices": [
+            "funny.",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-10.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 286.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 11,
+          "sourceClip": "287.mp3",
+          "sentence": [
+            "The",
+            "audience",
+            "laughed."
+          ],
+          "blanks": [
+            "laughed."
+          ],
+          "choices": [
+            "laughed.",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-11.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 287.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 12,
+          "sourceClip": "288.mp3",
+          "sentence": [
+            "The",
+            "penguins",
+            "climbed",
+            "into",
+            "a",
+            "car."
+          ],
+          "blanks": [
+            "climbed"
+          ],
+          "choices": [
+            "climbed",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-12.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 288.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 13,
+          "sourceClip": "289.mp3",
+          "sentence": [
+            "The",
+            "audience",
+            "laughed",
+            "again."
+          ],
+          "blanks": [
+            "again."
+          ],
+          "choices": [
+            "again.",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-13.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-13.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 289.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 15,
+          "printedPage": 14,
+          "sourceClip": "290.mp3",
+          "sentence": [
+            "“Stop",
+            "those",
+            "penguins!”",
+            "cried",
+            "the",
+            "zookeeper."
+          ],
+          "blanks": [
+            "zookeeper."
+          ],
+          "choices": [
+            "zookeeper.",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-14.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-14.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 15 paired with page clip 290.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 16,
+          "printedPage": 15,
+          "sourceClip": "291.mp3",
+          "sentence": [
+            "Harry",
+            "laughed",
+            "hard."
+          ],
+          "blanks": [
+            "hard."
+          ],
+          "choices": [
+            "hard.",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-15.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-15.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 16 paired with page clip 291.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 17,
+          "printedPage": 16,
+          "sourceClip": "292.mp3",
+          "sentence": [
+            "The",
+            "zookeeper",
+            "got",
+            "in",
+            "a",
+            "jeep."
+          ],
+          "blanks": [
+            "jeep."
+          ],
+          "choices": [
+            "jeep.",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-16.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-16.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 17 paired with page clip 292.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 18,
+          "printedPage": 17,
+          "sourceClip": "293.mp3",
+          "sentence": [
+            "“This",
+            "movie",
+            "has",
+            "a",
+            "car",
+            "chase!”"
+          ],
+          "blanks": [
+            "chase!”"
+          ],
+          "choices": [
+            "chase!”",
+            "Everyone",
+            "movie"
+          ],
+          "image": "./assets/story-demo/cf015/pages/page-17.webp",
+          "audio": "./assets/story-demo/cf015/cf015-page-17.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 18 paired with page clip 293.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf016",
+      "title": "The Cake",
+      "cfLabel": "CF016",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 016. The Cake.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/16.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 16 - The Cake",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "294.mp3",
+          "sentence": [
+            "Aunt",
+            "Judy",
+            "spent",
+            "all",
+            "day",
+            "in",
+            "the",
+            "kitchen."
+          ],
+          "blanks": [
+            "kitchen."
+          ],
+          "choices": [
+            "kitchen.",
+            "spent",
+            "all"
+          ],
+          "image": "./assets/story-demo/cf016/pages/page-01.webp",
+          "audio": "./assets/story-demo/cf016/cf016-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 294.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "295.mp3",
+          "sentence": [
+            "“I",
+            "hope",
+            "everyone",
+            "likes",
+            "my",
+            "cake,”",
+            "said",
+            "Aunt",
+            "Judy."
+          ],
+          "blanks": [
+            "cake,”"
+          ],
+          "choices": [
+            "cake,”",
+            "spent",
+            "all"
+          ],
+          "image": "./assets/story-demo/cf016/pages/page-02.webp",
+          "audio": "./assets/story-demo/cf016/cf016-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 295.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "296.mp3",
+          "sentence": [
+            "“I",
+            "don’t",
+            "like",
+            "raisins.”",
+            "Emmy",
+            "picked",
+            "out",
+            "the",
+            "raisins."
+          ],
+          "blanks": [
+            "raisins."
+          ],
+          "choices": [
+            "raisins.",
+            "spent",
+            "all"
+          ],
+          "image": "./assets/story-demo/cf016/pages/page-03.webp",
+          "audio": "./assets/story-demo/cf016/cf016-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 296.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "297.mp3",
+          "sentence": [
+            "Aunt",
+            "Judy",
+            "cut",
+            "a",
+            "piece",
+            "of",
+            "cake",
+            "for",
+            "Dad."
+          ],
+          "blanks": [
+            "cake"
+          ],
+          "choices": [
+            "cake",
+            "spent",
+            "all"
+          ],
+          "image": "./assets/story-demo/cf016/pages/page-04.webp",
+          "audio": "./assets/story-demo/cf016/cf016-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 297.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "298.mp3",
+          "sentence": [
+            "“Cherries.”",
+            "He",
+            "left",
+            "all",
+            "of",
+            "the",
+            "cherries",
+            "on",
+            "his",
+            "plate."
+          ],
+          "blanks": [
+            "plate."
+          ],
+          "choices": [
+            "plate.",
+            "spent",
+            "all"
+          ],
+          "image": "./assets/story-demo/cf016/pages/page-05.webp",
+          "audio": "./assets/story-demo/cf016/cf016-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 298.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "299.mp3",
+          "sentence": [
+            "“I",
+            "will",
+            "just",
+            "eat",
+            "the",
+            "things",
+            "that",
+            "I",
+            "like.”"
+          ],
+          "blanks": [
+            "things"
+          ],
+          "choices": [
+            "things",
+            "spent",
+            "all"
+          ],
+          "image": "./assets/story-demo/cf016/pages/page-06.webp",
+          "audio": "./assets/story-demo/cf016/cf016-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 299.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "300.mp3",
+          "sentence": [
+            "Mom",
+            "picked",
+            "out",
+            "the",
+            "raisins,",
+            "carrots,",
+            "and",
+            "cherries."
+          ],
+          "blanks": [
+            "cherries."
+          ],
+          "choices": [
+            "cherries.",
+            "spent",
+            "all"
+          ],
+          "image": "./assets/story-demo/cf016/pages/page-07.webp",
+          "audio": "./assets/story-demo/cf016/cf016-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 300.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "301.mp3",
+          "sentence": [
+            "Oliver",
+            "ate",
+            "his",
+            "whole",
+            "piece",
+            "of",
+            "cake."
+          ],
+          "blanks": [
+            "cake."
+          ],
+          "choices": [
+            "cake.",
+            "spent",
+            "all"
+          ],
+          "image": "./assets/story-demo/cf016/pages/page-08.webp",
+          "audio": "./assets/story-demo/cf016/cf016-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 301.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "302.mp3",
+          "sentence": [
+            "Oliver",
+            "wished",
+            "he",
+            "had",
+            "more",
+            "cake."
+          ],
+          "blanks": [
+            "cake."
+          ],
+          "choices": [
+            "cake.",
+            "spent",
+            "all"
+          ],
+          "image": "./assets/story-demo/cf016/pages/page-09.webp",
+          "audio": "./assets/story-demo/cf016/cf016-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 302.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "303.mp3",
+          "sentence": [
+            "He",
+            "collected",
+            "the",
+            "raisins,",
+            "carrots,",
+            "and",
+            "cherries."
+          ],
+          "blanks": [
+            "cherries."
+          ],
+          "choices": [
+            "cherries.",
+            "spent",
+            "all"
+          ],
+          "image": "./assets/story-demo/cf016/pages/page-10.webp",
+          "audio": "./assets/story-demo/cf016/cf016-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 303.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "304.mp3",
+          "sentence": [
+            "“I",
+            "have",
+            "a",
+            "new",
+            "piece",
+            "of",
+            "cake!”",
+            "said",
+            "Oliver."
+          ],
+          "blanks": [
+            "cake!”"
+          ],
+          "choices": [
+            "cake!”",
+            "spent",
+            "all"
+          ],
+          "image": "./assets/story-demo/cf016/pages/page-11.webp",
+          "audio": "./assets/story-demo/cf016/cf016-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 304.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf017",
+      "title": "Space Wands",
+      "cfLabel": "CF017",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 017. Space Wands.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/17.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 17 - Space Wands",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "305.mp3",
+          "sentence": [
+            "Emmy",
+            "and",
+            "Harry",
+            "were",
+            "going",
+            "outside",
+            "to",
+            "play."
+          ],
+          "blanks": [
+            "play."
+          ],
+          "choices": [
+            "play.",
+            "going",
+            "outside"
+          ],
+          "image": "./assets/story-demo/cf017/pages/page-01.webp",
+          "audio": "./assets/story-demo/cf017/cf017-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 305.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "306.mp3",
+          "sentence": [
+            "“Please",
+            "dust",
+            "all",
+            "the",
+            "furniture,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "furniture,”"
+          ],
+          "choices": [
+            "furniture,”",
+            "going",
+            "outside"
+          ],
+          "image": "./assets/story-demo/cf017/pages/page-02.webp",
+          "audio": "./assets/story-demo/cf017/cf017-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 306.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "307.mp3",
+          "sentence": [
+            "Emmy",
+            "and",
+            "Harry",
+            "started",
+            "dusting",
+            "tables",
+            "and",
+            "chairs."
+          ],
+          "blanks": [
+            "chairs."
+          ],
+          "choices": [
+            "chairs.",
+            "going",
+            "outside"
+          ],
+          "image": "./assets/story-demo/cf017/pages/page-03.webp",
+          "audio": "./assets/story-demo/cf017/cf017-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 307.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "308.mp3",
+          "sentence": [
+            "Soon",
+            "Oliver",
+            "and",
+            "Tom",
+            "ran",
+            "into",
+            "the",
+            "room."
+          ],
+          "blanks": [
+            "room."
+          ],
+          "choices": [
+            "room.",
+            "going",
+            "outside"
+          ],
+          "image": "./assets/story-demo/cf017/pages/page-04.webp",
+          "audio": "./assets/story-demo/cf017/cf017-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 308.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "309.mp3",
+          "sentence": [
+            "“Here",
+            "come",
+            "some",
+            "evil",
+            "aliens!”",
+            "Tom",
+            "started",
+            "to",
+            "run",
+            "away."
+          ],
+          "blanks": [
+            "away."
+          ],
+          "choices": [
+            "away.",
+            "going",
+            "outside"
+          ],
+          "image": "./assets/story-demo/cf017/pages/page-05.webp",
+          "audio": "./assets/story-demo/cf017/cf017-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 309.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "310.mp3",
+          "sentence": [
+            "Then",
+            "he",
+            "spotted",
+            "Emmy’s",
+            "feather",
+            "duster."
+          ],
+          "blanks": [
+            "duster."
+          ],
+          "choices": [
+            "duster.",
+            "going",
+            "outside"
+          ],
+          "image": "./assets/story-demo/cf017/pages/page-06.webp",
+          "audio": "./assets/story-demo/cf017/cf017-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 310.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "311.mp3",
+          "sentence": [
+            "“It’s",
+            "a",
+            "special",
+            "space",
+            "wand,”",
+            "she",
+            "said."
+          ],
+          "blanks": [
+            "wand,”"
+          ],
+          "choices": [
+            "wand,”",
+            "going",
+            "outside"
+          ],
+          "image": "./assets/story-demo/cf017/pages/page-07.webp",
+          "audio": "./assets/story-demo/cf017/cf017-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 311.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "312.mp3",
+          "sentence": [
+            "Emmy",
+            "showed",
+            "him."
+          ],
+          "blanks": [
+            "showed"
+          ],
+          "choices": [
+            "showed",
+            "going",
+            "outside"
+          ],
+          "image": "./assets/story-demo/cf017/pages/page-08.webp",
+          "audio": "./assets/story-demo/cf017/cf017-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 312.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "313.mp3",
+          "sentence": [
+            "“Can",
+            "I",
+            "have",
+            "your",
+            "space",
+            "wand?”",
+            "asked",
+            "Tom."
+          ],
+          "blanks": [
+            "asked"
+          ],
+          "choices": [
+            "asked",
+            "going",
+            "outside"
+          ],
+          "image": "./assets/story-demo/cf017/pages/page-09.webp",
+          "audio": "./assets/story-demo/cf017/cf017-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 313.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "314.mp3",
+          "sentence": [
+            "“Can",
+            "I",
+            "have",
+            "your",
+            "space",
+            "wand,",
+            "please?”"
+          ],
+          "blanks": [
+            "please?”"
+          ],
+          "choices": [
+            "please?”",
+            "going",
+            "outside"
+          ],
+          "image": "./assets/story-demo/cf017/pages/page-10.webp",
+          "audio": "./assets/story-demo/cf017/cf017-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 314.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "315.mp3",
+          "sentence": [
+            "Oliver",
+            "dusted",
+            "the",
+            "tables",
+            "with",
+            "his",
+            "space",
+            "wand."
+          ],
+          "blanks": [
+            "wand."
+          ],
+          "choices": [
+            "wand.",
+            "going",
+            "outside"
+          ],
+          "image": "./assets/story-demo/cf017/pages/page-11.webp",
+          "audio": "./assets/story-demo/cf017/cf017-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 315.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "316.mp3",
+          "sentence": [
+            "But",
+            "Emmy",
+            "and",
+            "Harry",
+            "couldn’t",
+            "hear",
+            "them."
+          ],
+          "blanks": [
+            "hear"
+          ],
+          "choices": [
+            "hear",
+            "going",
+            "outside"
+          ],
+          "image": "./assets/story-demo/cf017/pages/page-12.webp",
+          "audio": "./assets/story-demo/cf017/cf017-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 316.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf018",
+      "title": "A Picnic in the Park",
+      "cfLabel": "CF018",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 018. A Picnic in the Park.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/18.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 18 - A Picnic in the Park",
+      "pages": [
+        {
+          "pdfPage": 3,
+          "printedPage": 1,
+          "sourceClip": "317.mp3",
+          "sentence": [
+            "“Let’s",
+            "have",
+            "a",
+            "picnic",
+            "in",
+            "the",
+            "park.”"
+          ],
+          "blanks": [
+            "park.”"
+          ],
+          "choices": [
+            "park.”",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-01.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 317.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 2,
+          "sourceClip": "318.mp3",
+          "sentence": [
+            "“We",
+            "can",
+            "eat",
+            "lunch",
+            "in",
+            "the",
+            "warm",
+            "sun,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "warm"
+          ],
+          "choices": [
+            "warm",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-02.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 318.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 3,
+          "sourceClip": "319.mp3",
+          "sentence": [
+            "“But",
+            "it",
+            "won’t",
+            "be",
+            "fun.”"
+          ],
+          "blanks": [
+            "won’t"
+          ],
+          "choices": [
+            "won’t",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-03.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 319.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 4,
+          "sourceClip": "320.mp3",
+          "sentence": [
+            "Mom",
+            "put",
+            "food",
+            "in",
+            "the",
+            "picnic",
+            "basket."
+          ],
+          "blanks": [
+            "basket."
+          ],
+          "choices": [
+            "basket.",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-04.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 320.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 5,
+          "sourceClip": "321.mp3",
+          "sentence": [
+            "Then",
+            "everyone",
+            "drove",
+            "to",
+            "the",
+            "park."
+          ],
+          "blanks": [
+            "park."
+          ],
+          "choices": [
+            "park.",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-05.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 321.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 6,
+          "sourceClip": "322.mp3",
+          "sentence": [
+            "“Let’s",
+            "look",
+            "for",
+            "frogs,”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "frogs,”"
+          ],
+          "choices": [
+            "frogs,”",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-06.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 322.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 7,
+          "sourceClip": "323.mp3",
+          "sentence": [
+            "Emmy",
+            "threw",
+            "the",
+            "Frisbee",
+            "to",
+            "Harry."
+          ],
+          "blanks": [
+            "Frisbee"
+          ],
+          "choices": [
+            "Frisbee",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-07.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 323.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 8,
+          "sourceClip": "324.mp3",
+          "sentence": [
+            "The",
+            "Frisbee",
+            "went",
+            "in",
+            "the",
+            "frog",
+            "pond!"
+          ],
+          "blanks": [
+            "pond!"
+          ],
+          "choices": [
+            "pond!",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-08.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 324.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 9,
+          "sourceClip": "325.mp3",
+          "sentence": [
+            "“We",
+            "scared",
+            "away",
+            "all",
+            "the",
+            "frogs!”"
+          ],
+          "blanks": [
+            "frogs!”"
+          ],
+          "choices": [
+            "frogs!”",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-09.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 325.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 10,
+          "sourceClip": "326.mp3",
+          "sentence": [
+            "Dad",
+            "handed",
+            "out",
+            "the",
+            "sandwiches."
+          ],
+          "blanks": [
+            "sandwiches."
+          ],
+          "choices": [
+            "sandwiches.",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-10.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 326.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 11,
+          "sourceClip": "327.mp3",
+          "sentence": [
+            "“I",
+            "think",
+            "it’s",
+            "thunder,”",
+            "said",
+            "Emmy."
+          ],
+          "blanks": [
+            "thunder,”"
+          ],
+          "choices": [
+            "thunder,”",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-11.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 327.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 12,
+          "sourceClip": "328.mp3",
+          "sentence": [
+            "Mom",
+            "packed",
+            "up",
+            "all",
+            "the",
+            "food."
+          ],
+          "blanks": [
+            "food."
+          ],
+          "choices": [
+            "food.",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-12.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 328.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 15,
+          "printedPage": 13,
+          "sourceClip": "329.mp3",
+          "sentence": [
+            "The",
+            "family",
+            "ran",
+            "back",
+            "to",
+            "the",
+            "car."
+          ],
+          "blanks": [
+            "back"
+          ],
+          "choices": [
+            "back",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-13.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-13.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 15 paired with page clip 329.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 16,
+          "printedPage": 14,
+          "sourceClip": "330.mp3",
+          "sentence": [
+            "Oliver",
+            "watched",
+            "the",
+            "rain."
+          ],
+          "blanks": [
+            "rain."
+          ],
+          "choices": [
+            "rain.",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-14.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-14.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 16 paired with page clip 330.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 17,
+          "printedPage": 15,
+          "sourceClip": "331.mp3",
+          "sentence": [
+            "“What",
+            "a",
+            "fun",
+            "picnic!”",
+            "he",
+            "said."
+          ],
+          "blanks": [
+            "picnic!”"
+          ],
+          "choices": [
+            "picnic!”",
+            "beautiful",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf018/pages/page-15.webp",
+          "audio": "./assets/story-demo/cf018/cf018-page-15.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 17 paired with page clip 331.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf019",
+      "title": "Oliver's Library Book",
+      "cfLabel": "CF019",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 019. Oliver's Library Book.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/19.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 19 - Oliver's Library Book",
+      "pages": [
+        {
+          "pdfPage": 2,
+          "printedPage": 1,
+          "sourceClip": "332.mp3",
+          "sentence": [
+            "“Let’s",
+            "go",
+            "to",
+            "the",
+            "library,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "library,”"
+          ],
+          "choices": [
+            "library,”",
+            "Saturday",
+            "morning"
+          ],
+          "image": "./assets/story-demo/cf019/pages/page-01.webp",
+          "audio": "./assets/story-demo/cf019/cf019-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 2 paired with page clip 332.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 3,
+          "printedPage": 2,
+          "sourceClip": "333.mp3",
+          "sentence": [
+            "She",
+            "looked",
+            "up",
+            "books",
+            "about",
+            "soccer."
+          ],
+          "blanks": [
+            "soccer."
+          ],
+          "choices": [
+            "soccer.",
+            "Saturday",
+            "morning"
+          ],
+          "image": "./assets/story-demo/cf019/pages/page-02.webp",
+          "audio": "./assets/story-demo/cf019/cf019-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 333.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 3,
+          "sourceClip": "334.mp3",
+          "sentence": [
+            "The",
+            "librarian",
+            "helped",
+            "him",
+            "find",
+            "a",
+            "robot",
+            "book."
+          ],
+          "blanks": [
+            "book."
+          ],
+          "choices": [
+            "book.",
+            "Saturday",
+            "morning"
+          ],
+          "image": "./assets/story-demo/cf019/pages/page-03.webp",
+          "audio": "./assets/story-demo/cf019/cf019-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 334.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 4,
+          "sourceClip": "335.mp3",
+          "sentence": [
+            "“We",
+            "can",
+            "watch",
+            "this",
+            "later,”",
+            "she",
+            "thought."
+          ],
+          "blanks": [
+            "thought."
+          ],
+          "choices": [
+            "thought.",
+            "Saturday",
+            "morning"
+          ],
+          "image": "./assets/story-demo/cf019/pages/page-04.webp",
+          "audio": "./assets/story-demo/cf019/cf019-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 335.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 5,
+          "sourceClip": "336.mp3",
+          "sentence": [
+            "“I",
+            "don’t",
+            "know",
+            "what",
+            "to",
+            "get,”",
+            "he",
+            "grumbled."
+          ],
+          "blanks": [
+            "grumbled."
+          ],
+          "choices": [
+            "grumbled.",
+            "Saturday",
+            "morning"
+          ],
+          "image": "./assets/story-demo/cf019/pages/page-05.webp",
+          "audio": "./assets/story-demo/cf019/cf019-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 336.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 6,
+          "sourceClip": "337.mp3",
+          "sentence": [
+            "“Here’s",
+            "a",
+            "book",
+            "about",
+            "cars,”",
+            "said",
+            "Mom."
+          ],
+          "blanks": [
+            "cars,”"
+          ],
+          "choices": [
+            "cars,”",
+            "Saturday",
+            "morning"
+          ],
+          "image": "./assets/story-demo/cf019/pages/page-06.webp",
+          "audio": "./assets/story-demo/cf019/cf019-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 337.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 7,
+          "sourceClip": "338.mp3",
+          "sentence": [
+            "“Here’s",
+            "a",
+            "snake",
+            "book,”",
+            "said",
+            "Emmy."
+          ],
+          "blanks": [
+            "book,”"
+          ],
+          "choices": [
+            "book,”",
+            "Saturday",
+            "morning"
+          ],
+          "image": "./assets/story-demo/cf019/pages/page-07.webp",
+          "audio": "./assets/story-demo/cf019/cf019-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 338.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 8,
+          "sourceClip": "339.mp3",
+          "sentence": [
+            "“I’ll",
+            "get",
+            "this",
+            "bug",
+            "book,”",
+            "said",
+            "Oliver."
+          ],
+          "blanks": [
+            "book,”"
+          ],
+          "choices": [
+            "book,”",
+            "Saturday",
+            "morning"
+          ],
+          "image": "./assets/story-demo/cf019/pages/page-08.webp",
+          "audio": "./assets/story-demo/cf019/cf019-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 339.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 9,
+          "sourceClip": "340.mp3",
+          "sentence": [
+            "Oliver",
+            "read",
+            "the",
+            "bug",
+            "book",
+            "again",
+            "and",
+            "again."
+          ],
+          "blanks": [
+            "again."
+          ],
+          "choices": [
+            "again.",
+            "Saturday",
+            "morning"
+          ],
+          "image": "./assets/story-demo/cf019/pages/page-09.webp",
+          "audio": "./assets/story-demo/cf019/cf019-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 340.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 10,
+          "sourceClip": "341.mp3",
+          "sentence": [
+            "The",
+            "family",
+            "was",
+            "at",
+            "the",
+            "library",
+            "again."
+          ],
+          "blanks": [
+            "again."
+          ],
+          "choices": [
+            "again.",
+            "Saturday",
+            "morning"
+          ],
+          "image": "./assets/story-demo/cf019/pages/page-10.webp",
+          "audio": "./assets/story-demo/cf019/cf019-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 341.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 11,
+          "sourceClip": "342.mp3",
+          "sentence": [
+            "Then",
+            "they",
+            "looked",
+            "for",
+            "new",
+            "books."
+          ],
+          "blanks": [
+            "books."
+          ],
+          "choices": [
+            "books.",
+            "Saturday",
+            "morning"
+          ],
+          "image": "./assets/story-demo/cf019/pages/page-11.webp",
+          "audio": "./assets/story-demo/cf019/cf019-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 342.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 12,
+          "sourceClip": "343.mp3",
+          "sentence": [
+            "But",
+            "Oliver",
+            "didn’t",
+            "see",
+            "any",
+            "good",
+            "books."
+          ],
+          "blanks": [
+            "books."
+          ],
+          "choices": [
+            "books.",
+            "Saturday",
+            "morning"
+          ],
+          "image": "./assets/story-demo/cf019/pages/page-12.webp",
+          "audio": "./assets/story-demo/cf019/cf019-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 343.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 13,
+          "sourceClip": "344.mp3",
+          "sentence": [
+            "“I’m",
+            "getting",
+            "my",
+            "bug",
+            "book",
+            "again!”",
+            "said",
+            "Oliver."
+          ],
+          "blanks": [
+            "again!”"
+          ],
+          "choices": [
+            "again!”",
+            "Saturday",
+            "morning"
+          ],
+          "image": "./assets/story-demo/cf019/pages/page-13.webp",
+          "audio": "./assets/story-demo/cf019/cf019-page-13.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 344.mp3; sentence copied from source page."
+        }
+      ]
+    },
+    {
+      "id": "cf020",
+      "title": "A Surprise for Emmy",
+      "cfLabel": "CF020",
+      "sourcePdf": "source-materials/Carter Family/Book pdf/The Carter Family 020. A Surprise for Emmy.pdf",
+      "sourceFullAudio": "source-materials/Carter Family/Carter Family MP3/20.mp3",
+      "clipFolder": "source-materials/Carter Family/Page-level clips/Book 20 - A Surprise for Emmy",
+      "pages": [
+        {
+          "pdfPage": 2,
+          "printedPage": 1,
+          "sourceClip": "345.mp3",
+          "sentence": [
+            "One",
+            "day",
+            "Dad",
+            "brought",
+            "home",
+            "a",
+            "box."
+          ],
+          "blanks": [
+            "home"
+          ],
+          "choices": [
+            "home",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-01.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-01.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 2 paired with page clip 345.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 3,
+          "printedPage": 2,
+          "sourceClip": "346.mp3",
+          "sentence": [
+            "“It’s",
+            "a",
+            "surprise",
+            "for",
+            "Emmy,”",
+            "said",
+            "Dad."
+          ],
+          "blanks": [
+            "surprise"
+          ],
+          "choices": [
+            "surprise",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-02.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-02.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 3 paired with page clip 346.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 4,
+          "printedPage": 3,
+          "sourceClip": "347.mp3",
+          "sentence": [
+            "“Emmy",
+            "loves",
+            "snakes,”",
+            "said",
+            "Oliver."
+          ],
+          "blanks": [
+            "snakes,”"
+          ],
+          "choices": [
+            "snakes,”",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-03.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-03.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 4 paired with page clip 347.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 5,
+          "printedPage": 4,
+          "sourceClip": "348.mp3",
+          "sentence": [
+            "“I",
+            "think",
+            "it’s",
+            "a",
+            "snake",
+            "too,”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "snake"
+          ],
+          "choices": [
+            "snake",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-04.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-04.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 5 paired with page clip 348.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 6,
+          "printedPage": 5,
+          "sourceClip": "349.mp3",
+          "sentence": [
+            "He",
+            "took",
+            "the",
+            "lid",
+            "off",
+            "the",
+            "box."
+          ],
+          "blanks": [
+            "took"
+          ],
+          "choices": [
+            "took",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-05.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-05.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 6 paired with page clip 349.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 7,
+          "printedPage": 6,
+          "sourceClip": "350.mp3",
+          "sentence": [
+            "Its",
+            "tongue",
+            "was",
+            "shaped",
+            "like",
+            "a",
+            "fork."
+          ],
+          "blanks": [
+            "fork."
+          ],
+          "choices": [
+            "fork.",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-06.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-06.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 7 paired with page clip 350.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 8,
+          "printedPage": 7,
+          "sourceClip": "351.mp3",
+          "sentence": [
+            "“It",
+            "looks",
+            "like",
+            "Emmy’s",
+            "toy",
+            "snake,”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "snake,”"
+          ],
+          "choices": [
+            "snake,”",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-07.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-07.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 8 paired with page clip 351.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 9,
+          "printedPage": 8,
+          "sourceClip": "352.mp3",
+          "sentence": [
+            "Oliver",
+            "and",
+            "Harry",
+            "took",
+            "the",
+            "snake",
+            "outside."
+          ],
+          "blanks": [
+            "outside."
+          ],
+          "choices": [
+            "outside.",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-08.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-08.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 9 paired with page clip 352.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 10,
+          "printedPage": 9,
+          "sourceClip": "353.mp3",
+          "sentence": [
+            "They",
+            "watched",
+            "it",
+            "move",
+            "across",
+            "the",
+            "grass."
+          ],
+          "blanks": [
+            "grass."
+          ],
+          "choices": [
+            "grass.",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-09.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-09.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 10 paired with page clip 353.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 11,
+          "printedPage": 10,
+          "sourceClip": "354.mp3",
+          "sentence": [
+            "The",
+            "snake’s",
+            "tongue",
+            "flicked",
+            "in",
+            "and",
+            "out."
+          ],
+          "blanks": [
+            "flicked"
+          ],
+          "choices": [
+            "flicked",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-10.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-10.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 11 paired with page clip 354.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 12,
+          "printedPage": 11,
+          "sourceClip": "355.mp3",
+          "sentence": [
+            "“Wait",
+            "till",
+            "Emmy",
+            "sees",
+            "this",
+            "snake.”"
+          ],
+          "blanks": [
+            "snake.”"
+          ],
+          "choices": [
+            "snake.”",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-11.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-11.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 12 paired with page clip 355.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 13,
+          "printedPage": 12,
+          "sourceClip": "356.mp3",
+          "sentence": [
+            "“Dad",
+            "got",
+            "you",
+            "a",
+            "cool",
+            "surprise!”",
+            "said",
+            "Oliver."
+          ],
+          "blanks": [
+            "surprise!”"
+          ],
+          "choices": [
+            "surprise!”",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-12.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-12.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 13 paired with page clip 356.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 14,
+          "printedPage": 13,
+          "sourceClip": "357.mp3",
+          "sentence": [
+            "Harry",
+            "took",
+            "the",
+            "lid",
+            "off",
+            "the",
+            "box."
+          ],
+          "blanks": [
+            "took"
+          ],
+          "choices": [
+            "took",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-13.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-13.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 14 paired with page clip 357.mp3; sentence copied from source page."
+        },
+        {
+          "pdfPage": 15,
+          "printedPage": 14,
+          "sourceClip": "358.mp3",
+          "sentence": [
+            "“But",
+            "you",
+            "love",
+            "snakes,”",
+            "said",
+            "Harry."
+          ],
+          "blanks": [
+            "snakes,”"
+          ],
+          "choices": [
+            "snakes,”",
+            "One",
+            "day"
+          ],
+          "image": "./assets/story-demo/cf020/pages/page-14.webp",
+          "audio": "./assets/story-demo/cf020/cf020-page-14.mp3",
+          "verificationStatus": "verified",
+          "reviewNote": "PDF page 15 paired with page clip 358.mp3; sentence copied from source page."
         }
       ]
     },
@@ -2486,7 +6185,7 @@ window.KakaCarterManifest = {
             "planting",
             "flowers"
           ],
-          "image": "./assets/story-demo/cf021/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf021/pages/page-01.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 359.mp3; sentence copied from source page."
@@ -2512,7 +6211,7 @@ window.KakaCarterManifest = {
             "planting",
             "flowers"
           ],
-          "image": "./assets/story-demo/cf021/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf021/pages/page-02.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 360.mp3; sentence copied from source page."
@@ -2540,7 +6239,7 @@ window.KakaCarterManifest = {
             "planting",
             "flowers"
           ],
-          "image": "./assets/story-demo/cf021/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf021/pages/page-03.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 361.mp3; sentence copied from source page."
@@ -2566,7 +6265,7 @@ window.KakaCarterManifest = {
             "planting",
             "flowers"
           ],
-          "image": "./assets/story-demo/cf021/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf021/pages/page-04.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 362.mp3; sentence copied from source page."
@@ -2592,7 +6291,7 @@ window.KakaCarterManifest = {
             "planting",
             "flowers"
           ],
-          "image": "./assets/story-demo/cf021/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf021/pages/page-05.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 363.mp3; sentence copied from source page."
@@ -2620,7 +6319,7 @@ window.KakaCarterManifest = {
             "planting",
             "flowers"
           ],
-          "image": "./assets/story-demo/cf021/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf021/pages/page-06.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 364.mp3; sentence copied from source page."
@@ -2646,7 +6345,7 @@ window.KakaCarterManifest = {
             "planting",
             "flowers"
           ],
-          "image": "./assets/story-demo/cf021/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf021/pages/page-07.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 365.mp3; sentence copied from source page."
@@ -2672,7 +6371,7 @@ window.KakaCarterManifest = {
             "planting",
             "flowers"
           ],
-          "image": "./assets/story-demo/cf021/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf021/pages/page-08.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 366.mp3; sentence copied from source page."
@@ -2699,7 +6398,7 @@ window.KakaCarterManifest = {
             "planting",
             "flowers"
           ],
-          "image": "./assets/story-demo/cf021/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf021/pages/page-09.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 367.mp3; sentence copied from source page."
@@ -2724,7 +6423,7 @@ window.KakaCarterManifest = {
             "planting",
             "flowers"
           ],
-          "image": "./assets/story-demo/cf021/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf021/pages/page-10.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 368.mp3; sentence copied from source page."
@@ -2749,7 +6448,7 @@ window.KakaCarterManifest = {
             "planting",
             "flowers"
           ],
-          "image": "./assets/story-demo/cf021/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf021/pages/page-11.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 369.mp3; sentence copied from source page."
@@ -2777,7 +6476,7 @@ window.KakaCarterManifest = {
             "planting",
             "flowers"
           ],
-          "image": "./assets/story-demo/cf021/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf021/pages/page-12.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 370.mp3; sentence copied from source page."
@@ -2812,7 +6511,7 @@ window.KakaCarterManifest = {
             "day",
             "want"
           ],
-          "image": "./assets/story-demo/cf022/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf022/pages/page-01.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 2 paired with page clip 371.mp3; sentence copied from source page."
@@ -2836,7 +6535,7 @@ window.KakaCarterManifest = {
             "beautiful",
             "day"
           ],
-          "image": "./assets/story-demo/cf022/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf022/pages/page-02.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 372.mp3; sentence copied from source page."
@@ -2864,7 +6563,7 @@ window.KakaCarterManifest = {
             "beautiful",
             "day"
           ],
-          "image": "./assets/story-demo/cf022/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf022/pages/page-03.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 373.mp3; sentence copied from source page."
@@ -2889,7 +6588,7 @@ window.KakaCarterManifest = {
             "beautiful",
             "day"
           ],
-          "image": "./assets/story-demo/cf022/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf022/pages/page-04.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 374.mp3; sentence copied from source page."
@@ -2915,7 +6614,7 @@ window.KakaCarterManifest = {
             "beautiful",
             "day"
           ],
-          "image": "./assets/story-demo/cf022/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf022/pages/page-05.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 375.mp3; sentence copied from source page."
@@ -2945,7 +6644,7 @@ window.KakaCarterManifest = {
             "beautiful",
             "day"
           ],
-          "image": "./assets/story-demo/cf022/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf022/pages/page-06.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 376.mp3; sentence copied from source page."
@@ -2971,7 +6670,7 @@ window.KakaCarterManifest = {
             "beautiful",
             "day"
           ],
-          "image": "./assets/story-demo/cf022/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf022/pages/page-07.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 377.mp3; sentence copied from source page."
@@ -2997,7 +6696,7 @@ window.KakaCarterManifest = {
             "beautiful",
             "day"
           ],
-          "image": "./assets/story-demo/cf022/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf022/pages/page-08.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 378.mp3; sentence copied from source page."
@@ -3022,7 +6721,7 @@ window.KakaCarterManifest = {
             "beautiful",
             "day"
           ],
-          "image": "./assets/story-demo/cf022/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf022/pages/page-09.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 379.mp3; sentence copied from source page."
@@ -3047,7 +6746,7 @@ window.KakaCarterManifest = {
             "beautiful",
             "day"
           ],
-          "image": "./assets/story-demo/cf022/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf022/pages/page-10.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 380.mp3; sentence copied from source page."
@@ -3071,7 +6770,7 @@ window.KakaCarterManifest = {
             "beautiful",
             "day"
           ],
-          "image": "./assets/story-demo/cf022/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf022/pages/page-11.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 381.mp3; sentence copied from source page."
@@ -3096,7 +6795,7 @@ window.KakaCarterManifest = {
             "beautiful",
             "day"
           ],
-          "image": "./assets/story-demo/cf022/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf022/pages/page-12.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 382.mp3; sentence copied from source page."
@@ -3123,7 +6822,7 @@ window.KakaCarterManifest = {
             "beautiful",
             "day"
           ],
-          "image": "./assets/story-demo/cf022/pages/page-13.jpg",
+          "image": "./assets/story-demo/cf022/pages/page-13.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-13.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 383.mp3; sentence copied from source page."
@@ -3159,7 +6858,7 @@ window.KakaCarterManifest = {
             "family",
             "amusement"
           ],
-          "image": "./assets/story-demo/cf023/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf023/pages/page-01.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 2 paired with page clip 384.mp3; sentence copied from source page."
@@ -3186,7 +6885,7 @@ window.KakaCarterManifest = {
             "family",
             "amusement"
           ],
-          "image": "./assets/story-demo/cf023/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf023/pages/page-02.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 385.mp3; sentence copied from source page."
@@ -3213,7 +6912,7 @@ window.KakaCarterManifest = {
             "family",
             "amusement"
           ],
-          "image": "./assets/story-demo/cf023/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf023/pages/page-03.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 386.mp3; sentence copied from source page."
@@ -3240,7 +6939,7 @@ window.KakaCarterManifest = {
             "family",
             "amusement"
           ],
-          "image": "./assets/story-demo/cf023/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf023/pages/page-04.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 387.mp3; sentence copied from source page."
@@ -3264,7 +6963,7 @@ window.KakaCarterManifest = {
             "family",
             "amusement"
           ],
-          "image": "./assets/story-demo/cf023/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf023/pages/page-05.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 388.mp3; sentence copied from source page."
@@ -3290,7 +6989,7 @@ window.KakaCarterManifest = {
             "family",
             "amusement"
           ],
-          "image": "./assets/story-demo/cf023/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf023/pages/page-06.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 389.mp3; sentence copied from source page."
@@ -3315,7 +7014,7 @@ window.KakaCarterManifest = {
             "family",
             "amusement"
           ],
-          "image": "./assets/story-demo/cf023/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf023/pages/page-07.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 390.mp3; sentence copied from source page."
@@ -3341,7 +7040,7 @@ window.KakaCarterManifest = {
             "family",
             "amusement"
           ],
-          "image": "./assets/story-demo/cf023/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf023/pages/page-08.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 391.mp3; sentence copied from source page."
@@ -3366,7 +7065,7 @@ window.KakaCarterManifest = {
             "family",
             "amusement"
           ],
-          "image": "./assets/story-demo/cf023/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf023/pages/page-09.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 392.mp3; sentence copied from source page."
@@ -3393,7 +7092,7 @@ window.KakaCarterManifest = {
             "family",
             "amusement"
           ],
-          "image": "./assets/story-demo/cf023/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf023/pages/page-10.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 393.mp3; sentence copied from source page."
@@ -3419,7 +7118,7 @@ window.KakaCarterManifest = {
             "family",
             "amusement"
           ],
-          "image": "./assets/story-demo/cf023/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf023/pages/page-11.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 394.mp3; sentence copied from source page."
@@ -3445,7 +7144,7 @@ window.KakaCarterManifest = {
             "family",
             "amusement"
           ],
-          "image": "./assets/story-demo/cf023/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf023/pages/page-12.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 395.mp3; sentence copied from source page."
@@ -3471,7 +7170,7 @@ window.KakaCarterManifest = {
             "family",
             "amusement"
           ],
-          "image": "./assets/story-demo/cf023/pages/page-13.jpg",
+          "image": "./assets/story-demo/cf023/pages/page-13.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-13.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 396.mp3; sentence copied from source page."
@@ -3506,7 +7205,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-01.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 2 paired with page clip 397.mp3; sentence copied from source page."
@@ -3532,7 +7231,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-02.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 398.mp3; sentence copied from source page."
@@ -3557,7 +7256,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-03.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 399.mp3; sentence copied from source page."
@@ -3587,7 +7286,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-04.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 400.mp3; sentence copied from source page."
@@ -3613,7 +7312,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-05.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 401.mp3; sentence copied from source page."
@@ -3640,7 +7339,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-06.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 402.mp3; sentence copied from source page."
@@ -3665,7 +7364,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-07.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 403.mp3; sentence copied from source page."
@@ -3691,7 +7390,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-08.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 404.mp3; sentence copied from source page."
@@ -3717,7 +7416,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-09.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 405.mp3; sentence copied from source page."
@@ -3741,7 +7440,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-10.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 406.mp3; sentence copied from source page."
@@ -3768,7 +7467,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-11.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 407.mp3; sentence copied from source page."
@@ -3792,7 +7491,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-12.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 408.mp3; sentence copied from source page."
@@ -3815,7 +7514,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-13.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-13.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-13.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 409.mp3; sentence copied from source page."
@@ -3838,7 +7537,7 @@ window.KakaCarterManifest = {
             "learning",
             "knit"
           ],
-          "image": "./assets/story-demo/cf024/pages/page-14.jpg",
+          "image": "./assets/story-demo/cf024/pages/page-14.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-14.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 15 paired with page clip 410.mp3; sentence copied from source page."
@@ -3874,7 +7573,7 @@ window.KakaCarterManifest = {
             "good",
             "news"
           ],
-          "image": "./assets/story-demo/cf025/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf025/pages/page-01.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 411.mp3; sentence copied from source page."
@@ -3901,7 +7600,7 @@ window.KakaCarterManifest = {
             "good",
             "news"
           ],
-          "image": "./assets/story-demo/cf025/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf025/pages/page-02.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 412.mp3; sentence copied from source page."
@@ -3928,7 +7627,7 @@ window.KakaCarterManifest = {
             "good",
             "news"
           ],
-          "image": "./assets/story-demo/cf025/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf025/pages/page-03.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 413.mp3; sentence copied from source page."
@@ -3954,7 +7653,7 @@ window.KakaCarterManifest = {
             "good",
             "news"
           ],
-          "image": "./assets/story-demo/cf025/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf025/pages/page-04.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 414.mp3; sentence copied from source page."
@@ -3979,7 +7678,7 @@ window.KakaCarterManifest = {
             "good",
             "news"
           ],
-          "image": "./assets/story-demo/cf025/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf025/pages/page-05.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 415.mp3; sentence copied from source page."
@@ -4003,7 +7702,7 @@ window.KakaCarterManifest = {
             "good",
             "news"
           ],
-          "image": "./assets/story-demo/cf025/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf025/pages/page-06.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 416.mp3; sentence copied from source page."
@@ -4028,7 +7727,7 @@ window.KakaCarterManifest = {
             "good",
             "news"
           ],
-          "image": "./assets/story-demo/cf025/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf025/pages/page-07.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 417.mp3; sentence copied from source page."
@@ -4054,7 +7753,7 @@ window.KakaCarterManifest = {
             "good",
             "news"
           ],
-          "image": "./assets/story-demo/cf025/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf025/pages/page-08.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 418.mp3; sentence copied from source page."
@@ -4081,7 +7780,7 @@ window.KakaCarterManifest = {
             "good",
             "news"
           ],
-          "image": "./assets/story-demo/cf025/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf025/pages/page-09.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 419.mp3; sentence copied from source page."
@@ -4107,7 +7806,7 @@ window.KakaCarterManifest = {
             "good",
             "news"
           ],
-          "image": "./assets/story-demo/cf025/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf025/pages/page-10.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 420.mp3; sentence copied from source page."
@@ -4133,7 +7832,7 @@ window.KakaCarterManifest = {
             "good",
             "news"
           ],
-          "image": "./assets/story-demo/cf025/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf025/pages/page-11.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 421.mp3; sentence copied from source page."
@@ -4158,7 +7857,7 @@ window.KakaCarterManifest = {
             "good",
             "news"
           ],
-          "image": "./assets/story-demo/cf025/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf025/pages/page-12.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 422.mp3; sentence copied from source page."
@@ -4193,7 +7892,7 @@ window.KakaCarterManifest = {
             "carried",
             "bag"
           ],
-          "image": "./assets/story-demo/cf026/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf026/pages/page-01.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 423.mp3; sentence copied from source page."
@@ -4220,7 +7919,7 @@ window.KakaCarterManifest = {
             "carried",
             "tote"
           ],
-          "image": "./assets/story-demo/cf026/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf026/pages/page-02.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 424.mp3; sentence copied from source page."
@@ -4247,7 +7946,7 @@ window.KakaCarterManifest = {
             "carried",
             "tote"
           ],
-          "image": "./assets/story-demo/cf026/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf026/pages/page-03.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 425.mp3; sentence copied from source page."
@@ -4274,7 +7973,7 @@ window.KakaCarterManifest = {
             "carried",
             "tote"
           ],
-          "image": "./assets/story-demo/cf026/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf026/pages/page-04.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 426.mp3; sentence copied from source page."
@@ -4302,7 +8001,7 @@ window.KakaCarterManifest = {
             "carried",
             "tote"
           ],
-          "image": "./assets/story-demo/cf026/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf026/pages/page-05.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 427.mp3; sentence copied from source page."
@@ -4327,7 +8026,7 @@ window.KakaCarterManifest = {
             "carried",
             "tote"
           ],
-          "image": "./assets/story-demo/cf026/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf026/pages/page-06.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 428.mp3; sentence copied from source page."
@@ -4353,7 +8052,7 @@ window.KakaCarterManifest = {
             "carried",
             "tote"
           ],
-          "image": "./assets/story-demo/cf026/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf026/pages/page-07.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 429.mp3; sentence copied from source page."
@@ -4378,7 +8077,7 @@ window.KakaCarterManifest = {
             "carried",
             "tote"
           ],
-          "image": "./assets/story-demo/cf026/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf026/pages/page-08.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 430.mp3; sentence copied from source page."
@@ -4403,7 +8102,7 @@ window.KakaCarterManifest = {
             "carried",
             "tote"
           ],
-          "image": "./assets/story-demo/cf026/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf026/pages/page-09.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 431.mp3; sentence copied from source page."
@@ -4431,7 +8130,7 @@ window.KakaCarterManifest = {
             "carried",
             "tote"
           ],
-          "image": "./assets/story-demo/cf026/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf026/pages/page-10.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 432.mp3; sentence copied from source page."
@@ -4455,7 +8154,7 @@ window.KakaCarterManifest = {
             "carried",
             "tote"
           ],
-          "image": "./assets/story-demo/cf026/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf026/pages/page-11.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 433.mp3; sentence copied from source page."
@@ -4481,7 +8180,7 @@ window.KakaCarterManifest = {
             "carried",
             "tote"
           ],
-          "image": "./assets/story-demo/cf026/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf026/pages/page-12.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 434.mp3; sentence copied from source page."
@@ -4517,7 +8216,7 @@ window.KakaCarterManifest = {
             "called",
             "needs"
           ],
-          "image": "./assets/story-demo/cf027/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf027/pages/page-01.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 435.mp3; sentence copied from source page."
@@ -4540,7 +8239,7 @@ window.KakaCarterManifest = {
             "called",
             "needs"
           ],
-          "image": "./assets/story-demo/cf027/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf027/pages/page-02.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 436.mp3; sentence copied from source page."
@@ -4564,7 +8263,7 @@ window.KakaCarterManifest = {
             "called",
             "needs"
           ],
-          "image": "./assets/story-demo/cf027/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf027/pages/page-03.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 437.mp3; sentence copied from source page."
@@ -4589,7 +8288,7 @@ window.KakaCarterManifest = {
             "called",
             "needs"
           ],
-          "image": "./assets/story-demo/cf027/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf027/pages/page-04.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 438.mp3; sentence copied from source page."
@@ -4613,7 +8312,7 @@ window.KakaCarterManifest = {
             "called",
             "needs"
           ],
-          "image": "./assets/story-demo/cf027/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf027/pages/page-05.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 439.mp3; sentence copied from source page."
@@ -4636,7 +8335,7 @@ window.KakaCarterManifest = {
             "called",
             "needs"
           ],
-          "image": "./assets/story-demo/cf027/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf027/pages/page-06.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 440.mp3; sentence copied from source page."
@@ -4663,7 +8362,7 @@ window.KakaCarterManifest = {
             "called",
             "needs"
           ],
-          "image": "./assets/story-demo/cf027/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf027/pages/page-07.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 441.mp3; sentence copied from source page."
@@ -4687,7 +8386,7 @@ window.KakaCarterManifest = {
             "called",
             "needs"
           ],
-          "image": "./assets/story-demo/cf027/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf027/pages/page-08.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 442.mp3; sentence copied from source page."
@@ -4712,7 +8411,7 @@ window.KakaCarterManifest = {
             "called",
             "needs"
           ],
-          "image": "./assets/story-demo/cf027/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf027/pages/page-09.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 443.mp3; sentence copied from source page."
@@ -4738,7 +8437,7 @@ window.KakaCarterManifest = {
             "called",
             "needs"
           ],
-          "image": "./assets/story-demo/cf027/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf027/pages/page-10.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 444.mp3; sentence copied from source page."
@@ -4767,7 +8466,7 @@ window.KakaCarterManifest = {
             "called",
             "needs"
           ],
-          "image": "./assets/story-demo/cf027/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf027/pages/page-11.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 445.mp3; sentence copied from source page."
@@ -4795,7 +8494,7 @@ window.KakaCarterManifest = {
             "called",
             "needs"
           ],
-          "image": "./assets/story-demo/cf027/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf027/pages/page-12.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 446.mp3; sentence copied from source page."
@@ -4830,7 +8529,7 @@ window.KakaCarterManifest = {
             "make",
             "made"
           ],
-          "image": "./assets/story-demo/cf028/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf028/pages/page-01.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 447.mp3; sentence copied from source page."
@@ -4856,7 +8555,7 @@ window.KakaCarterManifest = {
             "make",
             "snowman"
           ],
-          "image": "./assets/story-demo/cf028/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf028/pages/page-02.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 448.mp3; sentence copied from source page."
@@ -4882,7 +8581,7 @@ window.KakaCarterManifest = {
             "make",
             "made"
           ],
-          "image": "./assets/story-demo/cf028/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf028/pages/page-03.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 449.mp3; sentence copied from source page."
@@ -4908,7 +8607,7 @@ window.KakaCarterManifest = {
             "make",
             "snowman"
           ],
-          "image": "./assets/story-demo/cf028/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf028/pages/page-04.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 450.mp3; sentence copied from source page."
@@ -4935,7 +8634,7 @@ window.KakaCarterManifest = {
             "make",
             "snowman"
           ],
-          "image": "./assets/story-demo/cf028/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf028/pages/page-05.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 451.mp3; sentence copied from source page."
@@ -4962,7 +8661,7 @@ window.KakaCarterManifest = {
             "make",
             "snowman"
           ],
-          "image": "./assets/story-demo/cf028/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf028/pages/page-06.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 452.mp3; sentence copied from source page."
@@ -4987,7 +8686,7 @@ window.KakaCarterManifest = {
             "make",
             "made"
           ],
-          "image": "./assets/story-demo/cf028/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf028/pages/page-07.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 453.mp3; sentence copied from source page."
@@ -5011,7 +8710,7 @@ window.KakaCarterManifest = {
             "make",
             "snowman"
           ],
-          "image": "./assets/story-demo/cf028/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf028/pages/page-08.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 454.mp3; sentence copied from source page."
@@ -5038,7 +8737,7 @@ window.KakaCarterManifest = {
             "make",
             "snowman"
           ],
-          "image": "./assets/story-demo/cf028/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf028/pages/page-09.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 455.mp3; sentence copied from source page."
@@ -5068,7 +8767,7 @@ window.KakaCarterManifest = {
             "make",
             "snowman"
           ],
-          "image": "./assets/story-demo/cf028/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf028/pages/page-10.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 456.mp3; sentence copied from source page."
@@ -5095,7 +8794,7 @@ window.KakaCarterManifest = {
             "make",
             "snowman"
           ],
-          "image": "./assets/story-demo/cf028/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf028/pages/page-11.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 457.mp3; sentence copied from source page."
@@ -5119,7 +8818,7 @@ window.KakaCarterManifest = {
             "make",
             "snowman"
           ],
-          "image": "./assets/story-demo/cf028/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf028/pages/page-12.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 458.mp3; sentence copied from source page."
@@ -5156,7 +8855,7 @@ window.KakaCarterManifest = {
             "playing",
             "friends"
           ],
-          "image": "./assets/story-demo/cf029/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf029/pages/page-01.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 459.mp3; sentence copied from source page."
@@ -5181,7 +8880,7 @@ window.KakaCarterManifest = {
             "playing",
             "friends"
           ],
-          "image": "./assets/story-demo/cf029/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf029/pages/page-02.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 460.mp3; sentence copied from source page."
@@ -5206,7 +8905,7 @@ window.KakaCarterManifest = {
             "playing",
             "friends"
           ],
-          "image": "./assets/story-demo/cf029/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf029/pages/page-03.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 461.mp3; sentence copied from source page."
@@ -5232,7 +8931,7 @@ window.KakaCarterManifest = {
             "playing",
             "friends"
           ],
-          "image": "./assets/story-demo/cf029/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf029/pages/page-04.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 462.mp3; sentence copied from source page."
@@ -5255,7 +8954,7 @@ window.KakaCarterManifest = {
             "playing",
             "friends"
           ],
-          "image": "./assets/story-demo/cf029/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf029/pages/page-05.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 463.mp3; sentence copied from source page."
@@ -5282,7 +8981,7 @@ window.KakaCarterManifest = {
             "playing",
             "friends"
           ],
-          "image": "./assets/story-demo/cf029/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf029/pages/page-06.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 464.mp3; sentence copied from source page."
@@ -5310,7 +9009,7 @@ window.KakaCarterManifest = {
             "playing",
             "friends"
           ],
-          "image": "./assets/story-demo/cf029/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf029/pages/page-07.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 465.mp3; sentence copied from source page."
@@ -5337,7 +9036,7 @@ window.KakaCarterManifest = {
             "playing",
             "friends"
           ],
-          "image": "./assets/story-demo/cf029/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf029/pages/page-08.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 466.mp3; sentence copied from source page."
@@ -5363,7 +9062,7 @@ window.KakaCarterManifest = {
             "playing",
             "friends"
           ],
-          "image": "./assets/story-demo/cf029/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf029/pages/page-09.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 467.mp3; sentence copied from source page."
@@ -5389,7 +9088,7 @@ window.KakaCarterManifest = {
             "playing",
             "friends"
           ],
-          "image": "./assets/story-demo/cf029/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf029/pages/page-10.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 468.mp3; sentence copied from source page."
@@ -5418,7 +9117,7 @@ window.KakaCarterManifest = {
             "playing",
             "friends"
           ],
-          "image": "./assets/story-demo/cf029/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf029/pages/page-11.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 469.mp3; sentence copied from source page."
@@ -5443,7 +9142,7 @@ window.KakaCarterManifest = {
             "playing",
             "friends"
           ],
-          "image": "./assets/story-demo/cf029/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf029/pages/page-12.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 470.mp3; sentence copied from source page."
@@ -5478,7 +9177,7 @@ window.KakaCarterManifest = {
             "rainy",
             "day"
           ],
-          "image": "./assets/story-demo/cf030/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf030/pages/page-01.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 471.mp3; sentence copied from source page."
@@ -5503,7 +9202,7 @@ window.KakaCarterManifest = {
             "rainy",
             "day"
           ],
-          "image": "./assets/story-demo/cf030/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf030/pages/page-02.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 472.mp3; sentence copied from source page."
@@ -5527,7 +9226,7 @@ window.KakaCarterManifest = {
             "rainy",
             "day"
           ],
-          "image": "./assets/story-demo/cf030/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf030/pages/page-03.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 473.mp3; sentence copied from source page."
@@ -5552,7 +9251,7 @@ window.KakaCarterManifest = {
             "rainy",
             "day"
           ],
-          "image": "./assets/story-demo/cf030/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf030/pages/page-04.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 474.mp3; sentence copied from source page."
@@ -5577,7 +9276,7 @@ window.KakaCarterManifest = {
             "rainy",
             "day"
           ],
-          "image": "./assets/story-demo/cf030/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf030/pages/page-05.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 475.mp3; sentence copied from source page."
@@ -5601,7 +9300,7 @@ window.KakaCarterManifest = {
             "rainy",
             "day"
           ],
-          "image": "./assets/story-demo/cf030/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf030/pages/page-06.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 476.mp3; sentence copied from source page."
@@ -5626,7 +9325,7 @@ window.KakaCarterManifest = {
             "rainy",
             "day"
           ],
-          "image": "./assets/story-demo/cf030/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf030/pages/page-07.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 477.mp3; sentence copied from source page."
@@ -5653,7 +9352,7 @@ window.KakaCarterManifest = {
             "rainy",
             "day"
           ],
-          "image": "./assets/story-demo/cf030/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf030/pages/page-08.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 478.mp3; sentence copied from source page."
@@ -5678,7 +9377,7 @@ window.KakaCarterManifest = {
             "rainy",
             "day"
           ],
-          "image": "./assets/story-demo/cf030/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf030/pages/page-09.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 479.mp3; sentence copied from source page."
@@ -5703,7 +9402,7 @@ window.KakaCarterManifest = {
             "rainy",
             "day"
           ],
-          "image": "./assets/story-demo/cf030/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf030/pages/page-10.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 480.mp3; sentence copied from source page."
@@ -5728,7 +9427,7 @@ window.KakaCarterManifest = {
             "rainy",
             "day"
           ],
-          "image": "./assets/story-demo/cf030/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf030/pages/page-11.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 481.mp3; sentence copied from source page."
@@ -5754,7 +9453,7 @@ window.KakaCarterManifest = {
             "rainy",
             "day"
           ],
-          "image": "./assets/story-demo/cf030/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf030/pages/page-12.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 482.mp3; sentence copied from source page."
@@ -5791,7 +9490,7 @@ window.KakaCarterManifest = {
             "class",
             "pet"
           ],
-          "image": "./assets/story-demo/cf031/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf031/pages/page-01.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 483.mp3; sentence copied from source page."
@@ -5815,7 +9514,7 @@ window.KakaCarterManifest = {
             "class",
             "pet"
           ],
-          "image": "./assets/story-demo/cf031/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf031/pages/page-02.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 484.mp3; sentence copied from source page."
@@ -5839,7 +9538,7 @@ window.KakaCarterManifest = {
             "class",
             "pet"
           ],
-          "image": "./assets/story-demo/cf031/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf031/pages/page-03.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 485.mp3; sentence copied from source page."
@@ -5865,7 +9564,7 @@ window.KakaCarterManifest = {
             "class",
             "pet"
           ],
-          "image": "./assets/story-demo/cf031/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf031/pages/page-04.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 486.mp3; sentence copied from source page."
@@ -5889,7 +9588,7 @@ window.KakaCarterManifest = {
             "class",
             "pet"
           ],
-          "image": "./assets/story-demo/cf031/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf031/pages/page-05.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 487.mp3; sentence copied from source page."
@@ -5913,7 +9612,7 @@ window.KakaCarterManifest = {
             "class",
             "pet"
           ],
-          "image": "./assets/story-demo/cf031/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf031/pages/page-06.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 488.mp3; sentence copied from source page."
@@ -5936,7 +9635,7 @@ window.KakaCarterManifest = {
             "class",
             "pet"
           ],
-          "image": "./assets/story-demo/cf031/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf031/pages/page-07.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 489.mp3; sentence copied from source page."
@@ -5961,7 +9660,7 @@ window.KakaCarterManifest = {
             "class",
             "pet"
           ],
-          "image": "./assets/story-demo/cf031/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf031/pages/page-08.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 490.mp3; sentence copied from source page."
@@ -5987,7 +9686,7 @@ window.KakaCarterManifest = {
             "class",
             "pet"
           ],
-          "image": "./assets/story-demo/cf031/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf031/pages/page-09.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 491.mp3; sentence copied from source page."
@@ -6015,7 +9714,7 @@ window.KakaCarterManifest = {
             "class",
             "pet"
           ],
-          "image": "./assets/story-demo/cf031/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf031/pages/page-10.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 492.mp3; sentence copied from source page."
@@ -6043,7 +9742,7 @@ window.KakaCarterManifest = {
             "class",
             "pet"
           ],
-          "image": "./assets/story-demo/cf031/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf031/pages/page-11.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 493.mp3; sentence copied from source page."
@@ -6069,7 +9768,7 @@ window.KakaCarterManifest = {
             "class",
             "pet"
           ],
-          "image": "./assets/story-demo/cf031/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf031/pages/page-12.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 494.mp3; sentence copied from source page."
@@ -6105,7 +9804,7 @@ window.KakaCarterManifest = {
             "family",
             "kitchen"
           ],
-          "image": "./assets/story-demo/cf032/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf032/pages/page-01.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 495.mp3; sentence copied from source page."
@@ -6131,7 +9830,7 @@ window.KakaCarterManifest = {
             "family",
             "kitchen"
           ],
-          "image": "./assets/story-demo/cf032/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf032/pages/page-02.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 496.mp3; sentence copied from source page."
@@ -6157,7 +9856,7 @@ window.KakaCarterManifest = {
             "family",
             "kitchen"
           ],
-          "image": "./assets/story-demo/cf032/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf032/pages/page-03.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 497.mp3; sentence copied from source page."
@@ -6185,7 +9884,7 @@ window.KakaCarterManifest = {
             "family",
             "kitchen"
           ],
-          "image": "./assets/story-demo/cf032/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf032/pages/page-04.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 498.mp3; sentence copied from source page."
@@ -6212,7 +9911,7 @@ window.KakaCarterManifest = {
             "family",
             "kitchen"
           ],
-          "image": "./assets/story-demo/cf032/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf032/pages/page-05.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 499.mp3; sentence copied from source page."
@@ -6240,7 +9939,7 @@ window.KakaCarterManifest = {
             "family",
             "kitchen"
           ],
-          "image": "./assets/story-demo/cf032/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf032/pages/page-06.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 500.mp3; sentence copied from source page."
@@ -6266,7 +9965,7 @@ window.KakaCarterManifest = {
             "family",
             "kitchen"
           ],
-          "image": "./assets/story-demo/cf032/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf032/pages/page-07.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 501.mp3; sentence copied from source page."
@@ -6292,7 +9991,7 @@ window.KakaCarterManifest = {
             "family",
             "kitchen"
           ],
-          "image": "./assets/story-demo/cf032/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf032/pages/page-08.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 502.mp3; sentence copied from source page."
@@ -6317,7 +10016,7 @@ window.KakaCarterManifest = {
             "family",
             "kitchen"
           ],
-          "image": "./assets/story-demo/cf032/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf032/pages/page-09.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 503.mp3; sentence copied from source page."
@@ -6343,7 +10042,7 @@ window.KakaCarterManifest = {
             "family",
             "kitchen"
           ],
-          "image": "./assets/story-demo/cf032/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf032/pages/page-10.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 504.mp3; sentence copied from source page."
@@ -6367,7 +10066,7 @@ window.KakaCarterManifest = {
             "family",
             "kitchen"
           ],
-          "image": "./assets/story-demo/cf032/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf032/pages/page-11.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 505.mp3; sentence copied from source page."
@@ -6391,7 +10090,7 @@ window.KakaCarterManifest = {
             "family",
             "kitchen"
           ],
-          "image": "./assets/story-demo/cf032/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf032/pages/page-12.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 506.mp3; sentence copied from source page."
@@ -6430,7 +10129,7 @@ window.KakaCarterManifest = {
             "nice",
             "day"
           ],
-          "image": "./assets/story-demo/cf033/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf033/pages/page-01.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 507.mp3; sentence copied from source page."
@@ -6457,7 +10156,7 @@ window.KakaCarterManifest = {
             "nice",
             "day"
           ],
-          "image": "./assets/story-demo/cf033/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf033/pages/page-02.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 508.mp3; sentence copied from source page."
@@ -6483,7 +10182,7 @@ window.KakaCarterManifest = {
             "nice",
             "day"
           ],
-          "image": "./assets/story-demo/cf033/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf033/pages/page-03.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 509.mp3; sentence copied from source page."
@@ -6511,7 +10210,7 @@ window.KakaCarterManifest = {
             "nice",
             "day"
           ],
-          "image": "./assets/story-demo/cf033/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf033/pages/page-04.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 510.mp3; sentence copied from source page."
@@ -6537,7 +10236,7 @@ window.KakaCarterManifest = {
             "nice",
             "day"
           ],
-          "image": "./assets/story-demo/cf033/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf033/pages/page-05.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 511.mp3; sentence copied from source page."
@@ -6561,7 +10260,7 @@ window.KakaCarterManifest = {
             "nice",
             "day"
           ],
-          "image": "./assets/story-demo/cf033/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf033/pages/page-06.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 512.mp3; sentence copied from source page."
@@ -6586,7 +10285,7 @@ window.KakaCarterManifest = {
             "nice",
             "day"
           ],
-          "image": "./assets/story-demo/cf033/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf033/pages/page-07.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 513.mp3; sentence copied from source page."
@@ -6611,7 +10310,7 @@ window.KakaCarterManifest = {
             "nice",
             "day"
           ],
-          "image": "./assets/story-demo/cf033/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf033/pages/page-08.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 514.mp3; sentence copied from source page."
@@ -6636,7 +10335,7 @@ window.KakaCarterManifest = {
             "nice",
             "day"
           ],
-          "image": "./assets/story-demo/cf033/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf033/pages/page-09.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 515.mp3; sentence copied from source page."
@@ -6662,7 +10361,7 @@ window.KakaCarterManifest = {
             "nice",
             "day"
           ],
-          "image": "./assets/story-demo/cf033/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf033/pages/page-10.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 516.mp3; sentence copied from source page."
@@ -6689,7 +10388,7 @@ window.KakaCarterManifest = {
             "nice",
             "day"
           ],
-          "image": "./assets/story-demo/cf033/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf033/pages/page-11.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 517.mp3; sentence copied from source page."
@@ -6716,7 +10415,7 @@ window.KakaCarterManifest = {
             "nice",
             "day"
           ],
-          "image": "./assets/story-demo/cf033/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf033/pages/page-12.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 518.mp3; sentence copied from source page."
@@ -6752,7 +10451,7 @@ window.KakaCarterManifest = {
             "time",
             "school"
           ],
-          "image": "./assets/story-demo/cf034/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf034/pages/page-01.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 519.mp3; sentence copied from source page."
@@ -6775,7 +10474,7 @@ window.KakaCarterManifest = {
             "time",
             "school"
           ],
-          "image": "./assets/story-demo/cf034/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf034/pages/page-02.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 520.mp3; sentence copied from source page."
@@ -6800,7 +10499,7 @@ window.KakaCarterManifest = {
             "time",
             "school"
           ],
-          "image": "./assets/story-demo/cf034/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf034/pages/page-03.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 521.mp3; sentence copied from source page."
@@ -6828,7 +10527,7 @@ window.KakaCarterManifest = {
             "time",
             "school"
           ],
-          "image": "./assets/story-demo/cf034/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf034/pages/page-04.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 522.mp3; sentence copied from source page."
@@ -6854,7 +10553,7 @@ window.KakaCarterManifest = {
             "time",
             "school"
           ],
-          "image": "./assets/story-demo/cf034/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf034/pages/page-05.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 523.mp3; sentence copied from source page."
@@ -6880,7 +10579,7 @@ window.KakaCarterManifest = {
             "time",
             "school"
           ],
-          "image": "./assets/story-demo/cf034/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf034/pages/page-06.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 524.mp3; sentence copied from source page."
@@ -6907,7 +10606,7 @@ window.KakaCarterManifest = {
             "time",
             "school"
           ],
-          "image": "./assets/story-demo/cf034/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf034/pages/page-07.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 525.mp3; sentence copied from source page."
@@ -6930,7 +10629,7 @@ window.KakaCarterManifest = {
             "time",
             "school"
           ],
-          "image": "./assets/story-demo/cf034/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf034/pages/page-08.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 526.mp3; sentence copied from source page."
@@ -6956,7 +10655,7 @@ window.KakaCarterManifest = {
             "time",
             "school"
           ],
-          "image": "./assets/story-demo/cf034/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf034/pages/page-09.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 527.mp3; sentence copied from source page."
@@ -6983,7 +10682,7 @@ window.KakaCarterManifest = {
             "time",
             "school"
           ],
-          "image": "./assets/story-demo/cf034/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf034/pages/page-10.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 528.mp3; sentence copied from source page."
@@ -7010,7 +10709,7 @@ window.KakaCarterManifest = {
             "time",
             "school"
           ],
-          "image": "./assets/story-demo/cf034/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf034/pages/page-11.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 529.mp3; sentence copied from source page."
@@ -7035,7 +10734,7 @@ window.KakaCarterManifest = {
             "time",
             "school"
           ],
-          "image": "./assets/story-demo/cf034/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf034/pages/page-12.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 530.mp3; sentence copied from source page."
@@ -7073,7 +10772,7 @@ window.KakaCarterManifest = {
             "going",
             "clean"
           ],
-          "image": "./assets/story-demo/cf035/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf035/pages/page-01.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 531.mp3; sentence copied from source page."
@@ -7097,7 +10796,7 @@ window.KakaCarterManifest = {
             "going",
             "clean"
           ],
-          "image": "./assets/story-demo/cf035/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf035/pages/page-02.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 532.mp3; sentence copied from source page."
@@ -7124,7 +10823,7 @@ window.KakaCarterManifest = {
             "going",
             "clean"
           ],
-          "image": "./assets/story-demo/cf035/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf035/pages/page-03.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 533.mp3; sentence copied from source page."
@@ -7149,7 +10848,7 @@ window.KakaCarterManifest = {
             "going",
             "clean"
           ],
-          "image": "./assets/story-demo/cf035/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf035/pages/page-04.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 534.mp3; sentence copied from source page."
@@ -7175,7 +10874,7 @@ window.KakaCarterManifest = {
             "going",
             "clean"
           ],
-          "image": "./assets/story-demo/cf035/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf035/pages/page-05.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 535.mp3; sentence copied from source page."
@@ -7200,7 +10899,7 @@ window.KakaCarterManifest = {
             "going",
             "clean"
           ],
-          "image": "./assets/story-demo/cf035/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf035/pages/page-06.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 536.mp3; sentence copied from source page."
@@ -7224,7 +10923,7 @@ window.KakaCarterManifest = {
             "going",
             "clean"
           ],
-          "image": "./assets/story-demo/cf035/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf035/pages/page-07.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 537.mp3; sentence copied from source page."
@@ -7254,7 +10953,7 @@ window.KakaCarterManifest = {
             "going",
             "clean"
           ],
-          "image": "./assets/story-demo/cf035/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf035/pages/page-08.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 538.mp3; sentence copied from source page."
@@ -7283,7 +10982,7 @@ window.KakaCarterManifest = {
             "going",
             "clean"
           ],
-          "image": "./assets/story-demo/cf035/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf035/pages/page-09.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 539.mp3; sentence copied from source page."
@@ -7310,7 +11009,7 @@ window.KakaCarterManifest = {
             "going",
             "clean"
           ],
-          "image": "./assets/story-demo/cf035/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf035/pages/page-10.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 540.mp3; sentence copied from source page."
@@ -7339,7 +11038,7 @@ window.KakaCarterManifest = {
             "going",
             "clean"
           ],
-          "image": "./assets/story-demo/cf035/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf035/pages/page-11.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 541.mp3; sentence copied from source page."
@@ -7367,7 +11066,7 @@ window.KakaCarterManifest = {
             "going",
             "clean"
           ],
-          "image": "./assets/story-demo/cf035/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf035/pages/page-12.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 542.mp3; sentence copied from source page."
@@ -7403,7 +11102,7 @@ window.KakaCarterManifest = {
             "Soon",
             "plant"
           ],
-          "image": "./assets/story-demo/cf036/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf036/pages/page-01.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 543.mp3; sentence copied from source page."
@@ -7428,7 +11127,7 @@ window.KakaCarterManifest = {
             "Soon",
             "spring"
           ],
-          "image": "./assets/story-demo/cf036/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf036/pages/page-02.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 544.mp3; sentence copied from source page."
@@ -7453,7 +11152,7 @@ window.KakaCarterManifest = {
             "Soon",
             "spring"
           ],
-          "image": "./assets/story-demo/cf036/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf036/pages/page-03.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 545.mp3; sentence copied from source page."
@@ -7480,7 +11179,7 @@ window.KakaCarterManifest = {
             "Soon",
             "spring"
           ],
-          "image": "./assets/story-demo/cf036/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf036/pages/page-04.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 546.mp3; sentence copied from source page."
@@ -7505,7 +11204,7 @@ window.KakaCarterManifest = {
             "Soon",
             "spring"
           ],
-          "image": "./assets/story-demo/cf036/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf036/pages/page-05.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 547.mp3; sentence copied from source page."
@@ -7530,7 +11229,7 @@ window.KakaCarterManifest = {
             "Soon",
             "spring"
           ],
-          "image": "./assets/story-demo/cf036/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf036/pages/page-06.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 548.mp3; sentence copied from source page."
@@ -7558,7 +11257,7 @@ window.KakaCarterManifest = {
             "Soon",
             "spring"
           ],
-          "image": "./assets/story-demo/cf036/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf036/pages/page-07.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 549.mp3; sentence copied from source page."
@@ -7583,7 +11282,7 @@ window.KakaCarterManifest = {
             "Soon",
             "spring"
           ],
-          "image": "./assets/story-demo/cf036/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf036/pages/page-08.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 550.mp3; sentence copied from source page."
@@ -7610,7 +11309,7 @@ window.KakaCarterManifest = {
             "Soon",
             "spring"
           ],
-          "image": "./assets/story-demo/cf036/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf036/pages/page-09.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 551.mp3; sentence copied from source page."
@@ -7635,7 +11334,7 @@ window.KakaCarterManifest = {
             "Soon",
             "spring"
           ],
-          "image": "./assets/story-demo/cf036/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf036/pages/page-10.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 552.mp3; sentence copied from source page."
@@ -7661,7 +11360,7 @@ window.KakaCarterManifest = {
             "Soon",
             "spring"
           ],
-          "image": "./assets/story-demo/cf036/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf036/pages/page-11.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 553.mp3; sentence copied from source page."
@@ -7685,7 +11384,7 @@ window.KakaCarterManifest = {
             "Soon",
             "spring"
           ],
-          "image": "./assets/story-demo/cf036/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf036/pages/page-12.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 554.mp3; sentence copied from source page."
@@ -7724,7 +11423,7 @@ window.KakaCarterManifest = {
             "wait",
             "fly"
           ],
-          "image": "./assets/story-demo/cf037/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf037/pages/page-01.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 2 paired with page clip 555.mp3; sentence copied from source page."
@@ -7753,7 +11452,7 @@ window.KakaCarterManifest = {
             "wait",
             "fly"
           ],
-          "image": "./assets/story-demo/cf037/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf037/pages/page-02.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 556.mp3; sentence copied from source page."
@@ -7777,7 +11476,7 @@ window.KakaCarterManifest = {
             "wait",
             "fly"
           ],
-          "image": "./assets/story-demo/cf037/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf037/pages/page-03.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 557.mp3; sentence copied from source page."
@@ -7804,7 +11503,7 @@ window.KakaCarterManifest = {
             "wait",
             "fly"
           ],
-          "image": "./assets/story-demo/cf037/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf037/pages/page-04.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 558.mp3; sentence copied from source page."
@@ -7833,7 +11532,7 @@ window.KakaCarterManifest = {
             "wait",
             "fly"
           ],
-          "image": "./assets/story-demo/cf037/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf037/pages/page-05.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 559.mp3; sentence copied from source page."
@@ -7859,7 +11558,7 @@ window.KakaCarterManifest = {
             "wait",
             "fly"
           ],
-          "image": "./assets/story-demo/cf037/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf037/pages/page-06.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 560.mp3; sentence copied from source page."
@@ -7883,7 +11582,7 @@ window.KakaCarterManifest = {
             "wait",
             "fly"
           ],
-          "image": "./assets/story-demo/cf037/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf037/pages/page-07.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 561.mp3; sentence copied from source page."
@@ -7910,7 +11609,7 @@ window.KakaCarterManifest = {
             "wait",
             "fly"
           ],
-          "image": "./assets/story-demo/cf037/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf037/pages/page-08.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 562.mp3; sentence copied from source page."
@@ -7933,7 +11632,7 @@ window.KakaCarterManifest = {
             "wait",
             "fly"
           ],
-          "image": "./assets/story-demo/cf037/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf037/pages/page-09.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 563.mp3; sentence copied from source page."
@@ -7961,7 +11660,7 @@ window.KakaCarterManifest = {
             "wait",
             "fly"
           ],
-          "image": "./assets/story-demo/cf037/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf037/pages/page-10.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 564.mp3; sentence copied from source page."
@@ -7987,7 +11686,7 @@ window.KakaCarterManifest = {
             "wait",
             "fly"
           ],
-          "image": "./assets/story-demo/cf037/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf037/pages/page-11.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 565.mp3; sentence copied from source page."
@@ -8014,7 +11713,7 @@ window.KakaCarterManifest = {
             "wait",
             "fly"
           ],
-          "image": "./assets/story-demo/cf037/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf037/pages/page-12.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 566.mp3; sentence copied from source page."
@@ -8036,7 +11735,7 @@ window.KakaCarterManifest = {
             "wait",
             "fly"
           ],
-          "image": "./assets/story-demo/cf037/pages/page-13.jpg",
+          "image": "./assets/story-demo/cf037/pages/page-13.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-13.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 567.mp3; sentence copied from source page."
@@ -8072,7 +11771,7 @@ window.KakaCarterManifest = {
             "Carters",
             "trip"
           ],
-          "image": "./assets/story-demo/cf038/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf038/pages/page-01.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 568.mp3; sentence copied from source page."
@@ -8099,7 +11798,7 @@ window.KakaCarterManifest = {
             "Carters",
             "trip"
           ],
-          "image": "./assets/story-demo/cf038/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf038/pages/page-02.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 569.mp3; sentence copied from source page."
@@ -8124,7 +11823,7 @@ window.KakaCarterManifest = {
             "Carters",
             "trip"
           ],
-          "image": "./assets/story-demo/cf038/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf038/pages/page-03.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 570.mp3; sentence copied from source page."
@@ -8153,7 +11852,7 @@ window.KakaCarterManifest = {
             "Carters",
             "trip"
           ],
-          "image": "./assets/story-demo/cf038/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf038/pages/page-04.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 571.mp3; sentence copied from source page."
@@ -8178,7 +11877,7 @@ window.KakaCarterManifest = {
             "Carters",
             "trip"
           ],
-          "image": "./assets/story-demo/cf038/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf038/pages/page-05.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 572.mp3; sentence copied from source page."
@@ -8205,7 +11904,7 @@ window.KakaCarterManifest = {
             "Carters",
             "trip"
           ],
-          "image": "./assets/story-demo/cf038/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf038/pages/page-06.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 573.mp3; sentence copied from source page."
@@ -8232,7 +11931,7 @@ window.KakaCarterManifest = {
             "Carters",
             "trip"
           ],
-          "image": "./assets/story-demo/cf038/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf038/pages/page-07.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 574.mp3; sentence copied from source page."
@@ -8255,7 +11954,7 @@ window.KakaCarterManifest = {
             "Carters",
             "trip"
           ],
-          "image": "./assets/story-demo/cf038/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf038/pages/page-08.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 575.mp3; sentence copied from source page."
@@ -8280,7 +11979,7 @@ window.KakaCarterManifest = {
             "Carters",
             "trip"
           ],
-          "image": "./assets/story-demo/cf038/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf038/pages/page-09.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 576.mp3; sentence copied from source page."
@@ -8304,7 +12003,7 @@ window.KakaCarterManifest = {
             "Carters",
             "trip"
           ],
-          "image": "./assets/story-demo/cf038/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf038/pages/page-10.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 577.mp3; sentence copied from source page."
@@ -8332,7 +12031,7 @@ window.KakaCarterManifest = {
             "Carters",
             "trip"
           ],
-          "image": "./assets/story-demo/cf038/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf038/pages/page-11.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 578.mp3; sentence copied from source page."
@@ -8360,7 +12059,7 @@ window.KakaCarterManifest = {
             "Carters",
             "trip"
           ],
-          "image": "./assets/story-demo/cf038/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf038/pages/page-12.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 579.mp3; sentence copied from source page."
@@ -8398,7 +12097,7 @@ window.KakaCarterManifest = {
             "Carters",
             "visited"
           ],
-          "image": "./assets/story-demo/cf039/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf039/pages/page-01.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 580.mp3; sentence copied from source page."
@@ -8424,7 +12123,7 @@ window.KakaCarterManifest = {
             "Carters",
             "visited"
           ],
-          "image": "./assets/story-demo/cf039/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf039/pages/page-02.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 581.mp3; sentence copied from source page."
@@ -8448,7 +12147,7 @@ window.KakaCarterManifest = {
             "Carters",
             "visited"
           ],
-          "image": "./assets/story-demo/cf039/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf039/pages/page-03.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 582.mp3; sentence copied from source page."
@@ -8473,7 +12172,7 @@ window.KakaCarterManifest = {
             "Carters",
             "visited"
           ],
-          "image": "./assets/story-demo/cf039/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf039/pages/page-04.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 583.mp3; sentence copied from source page."
@@ -8499,7 +12198,7 @@ window.KakaCarterManifest = {
             "Carters",
             "visited"
           ],
-          "image": "./assets/story-demo/cf039/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf039/pages/page-05.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 584.mp3; sentence copied from source page."
@@ -8526,7 +12225,7 @@ window.KakaCarterManifest = {
             "Carters",
             "visited"
           ],
-          "image": "./assets/story-demo/cf039/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf039/pages/page-06.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 585.mp3; sentence copied from source page."
@@ -8549,7 +12248,7 @@ window.KakaCarterManifest = {
             "Carters",
             "visited"
           ],
-          "image": "./assets/story-demo/cf039/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf039/pages/page-07.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 586.mp3; sentence copied from source page."
@@ -8576,7 +12275,7 @@ window.KakaCarterManifest = {
             "Carters",
             "visited"
           ],
-          "image": "./assets/story-demo/cf039/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf039/pages/page-08.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 587.mp3; sentence copied from source page."
@@ -8603,7 +12302,7 @@ window.KakaCarterManifest = {
             "Carters",
             "visited"
           ],
-          "image": "./assets/story-demo/cf039/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf039/pages/page-09.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 588.mp3; sentence copied from source page."
@@ -8628,7 +12327,7 @@ window.KakaCarterManifest = {
             "Carters",
             "visited"
           ],
-          "image": "./assets/story-demo/cf039/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf039/pages/page-10.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 589.mp3; sentence copied from source page."
@@ -8654,7 +12353,7 @@ window.KakaCarterManifest = {
             "Carters",
             "visited"
           ],
-          "image": "./assets/story-demo/cf039/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf039/pages/page-11.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 590.mp3; sentence copied from source page."
@@ -8680,7 +12379,7 @@ window.KakaCarterManifest = {
             "Carters",
             "visited"
           ],
-          "image": "./assets/story-demo/cf039/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf039/pages/page-12.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 591.mp3; sentence copied from source page."
@@ -8718,7 +12417,7 @@ window.KakaCarterManifest = {
             "good",
             "day"
           ],
-          "image": "./assets/story-demo/cf040/pages/page-01.jpg",
+          "image": "./assets/story-demo/cf040/pages/page-01.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-01.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 3 paired with page clip 592.mp3; sentence copied from source page."
@@ -8744,7 +12443,7 @@ window.KakaCarterManifest = {
             "good",
             "day"
           ],
-          "image": "./assets/story-demo/cf040/pages/page-02.jpg",
+          "image": "./assets/story-demo/cf040/pages/page-02.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-02.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 4 paired with page clip 593.mp3; sentence copied from source page."
@@ -8770,7 +12469,7 @@ window.KakaCarterManifest = {
             "good",
             "day"
           ],
-          "image": "./assets/story-demo/cf040/pages/page-03.jpg",
+          "image": "./assets/story-demo/cf040/pages/page-03.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-03.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 5 paired with page clip 594.mp3; sentence copied from source page."
@@ -8797,7 +12496,7 @@ window.KakaCarterManifest = {
             "good",
             "day"
           ],
-          "image": "./assets/story-demo/cf040/pages/page-04.jpg",
+          "image": "./assets/story-demo/cf040/pages/page-04.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-04.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 6 paired with page clip 595.mp3; sentence copied from source page."
@@ -8824,7 +12523,7 @@ window.KakaCarterManifest = {
             "good",
             "day"
           ],
-          "image": "./assets/story-demo/cf040/pages/page-05.jpg",
+          "image": "./assets/story-demo/cf040/pages/page-05.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-05.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 7 paired with page clip 596.mp3; sentence copied from source page."
@@ -8850,7 +12549,7 @@ window.KakaCarterManifest = {
             "good",
             "day"
           ],
-          "image": "./assets/story-demo/cf040/pages/page-06.jpg",
+          "image": "./assets/story-demo/cf040/pages/page-06.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-06.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 8 paired with page clip 597.mp3; sentence copied from source page."
@@ -8876,7 +12575,7 @@ window.KakaCarterManifest = {
             "good",
             "day"
           ],
-          "image": "./assets/story-demo/cf040/pages/page-07.jpg",
+          "image": "./assets/story-demo/cf040/pages/page-07.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-07.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 9 paired with page clip 598.mp3; sentence copied from source page."
@@ -8901,7 +12600,7 @@ window.KakaCarterManifest = {
             "good",
             "day"
           ],
-          "image": "./assets/story-demo/cf040/pages/page-08.jpg",
+          "image": "./assets/story-demo/cf040/pages/page-08.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-08.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 10 paired with page clip 599.mp3; sentence copied from source page."
@@ -8923,7 +12622,7 @@ window.KakaCarterManifest = {
             "good",
             "day"
           ],
-          "image": "./assets/story-demo/cf040/pages/page-09.jpg",
+          "image": "./assets/story-demo/cf040/pages/page-09.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-09.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 11 paired with page clip 600.mp3; sentence copied from source page."
@@ -8952,7 +12651,7 @@ window.KakaCarterManifest = {
             "good",
             "day"
           ],
-          "image": "./assets/story-demo/cf040/pages/page-10.jpg",
+          "image": "./assets/story-demo/cf040/pages/page-10.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-10.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 12 paired with page clip 601.mp3; sentence copied from source page."
@@ -8978,7 +12677,7 @@ window.KakaCarterManifest = {
             "good",
             "day"
           ],
-          "image": "./assets/story-demo/cf040/pages/page-11.jpg",
+          "image": "./assets/story-demo/cf040/pages/page-11.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-11.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 13 paired with page clip 602.mp3; sentence copied from source page."
@@ -9001,7 +12700,7 @@ window.KakaCarterManifest = {
             "good",
             "day"
           ],
-          "image": "./assets/story-demo/cf040/pages/page-12.jpg",
+          "image": "./assets/story-demo/cf040/pages/page-12.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-12.mp3",
           "verificationStatus": "verified",
           "reviewNote": "PDF page 14 paired with page clip 603.mp3; sentence copied from source page."

@@ -22,7 +22,7 @@ the app does not need invented illustrations or synthetic story audio.
 4. Deploy only selected page images and clips as derivatives. Keep the original files
    private and traceable.
 
-## Scope: CF001–CF010 Read & Fill
+## Scope: CF001–CF020 Read & Fill
 
 Published Story English books:
 
@@ -38,10 +38,20 @@ Published Story English books:
 | CF008 | *Good Dog, Rover!* | 16 | `175.mp3`–`190.mp3` |
 | CF009 | *A Good Day for Painting* | 16 | `191.mp3`–`206.mp3` |
 | CF010 | *Going to the Dentist* | 13 | `207.mp3`–`219.mp3` |
+| CF011 | *Harry's Friend Comes Over* | 17 | `220.mp3`–`236.mp3` |
+| CF012 | *Summer Vacation* | 12 | `237.mp3`–`248.mp3` |
+| CF013 | *The Yard Sale* | 13 | `249.mp3`–`261.mp3` |
+| CF014 | *At the Beach* | 15 | `262.mp3`–`276.mp3` |
+| CF015 | *The Movie Theater* | 17 | `277.mp3`–`293.mp3` |
+| CF016 | *The Cake* | 11 | `294.mp3`–`304.mp3` |
+| CF017 | *Space Wands* | 12 | `305.mp3`–`316.mp3` |
+| CF018 | *A Picnic in the Park* | 15 | `317.mp3`–`331.mp3` |
+| CF019 | *Oliver's Library Book* | 13 | `332.mp3`–`344.mp3` |
+| CF020 | *A Surprise for Emmy* | 14 | `345.mp3`–`358.mp3` |
 
-CF001–CF003 currently provide 38 verified story pages. CF004–CF010 add 96
-further story pages. CF021–CF040 add 245 further story pages. The manifest now
-tracks 341 pages across the published CF001–CF040 catalogue.
+CF001–CF003 provide 38 verified story pages. CF004–CF010 add 96 pages,
+CF011–CF020 add 139 pages, and CF021–CF040 add 245 pages, for 518 pages across
+the published CF001–CF040 catalogue.
 
 ## Scope: CF021–CF040 Read & Fill
 

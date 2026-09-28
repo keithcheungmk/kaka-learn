@@ -139,7 +139,7 @@ def render_page(pdf: fitz.Document, pdf_page: int, dest: Path) -> None:
     pix = page_obj.get_pixmap(matrix=fitz.Matrix(scale, scale), alpha=False)
     dest.parent.mkdir(parents=True, exist_ok=True)
     image = Image.open(io.BytesIO(pix.tobytes("png"))).convert("RGB")
-    image.save(dest, format="JPEG", quality=82, optimize=True, progressive=True)
+    image.save(dest, format="WEBP", quality=75, method=6)
 
 
 def encode_audio(source: Path, dest: Path) -> None:
@@ -203,7 +203,7 @@ def build_book(number: int) -> dict:
             raise ValueError(f"CF{number:03d} page {pdf_page}: no playable sentence")
         if sentence not in clean_text(doc[pdf_page - 1].get_text("text")):
             raise ValueError(f"CF{number:03d} PDF page {pdf_page}: sentence not found")
-        image_rel = f"./assets/story-demo/{book_id}/pages/page-{printed_page:02d}.jpg"
+        image_rel = f"./assets/story-demo/{book_id}/pages/page-{printed_page:02d}.webp"
         audio_rel = f"./assets/story-demo/{book_id}/{book_id}-page-{printed_page:02d}.mp3"
         render_page(doc, pdf_page, ROOT / image_rel.removeprefix("./"))
         encode_audio(source_clip, ROOT / audio_rel.removeprefix("./"))
@@ -239,6 +239,7 @@ def main() -> None:
         if book["id"] in existing:
             manifest["books"] = [item for item in manifest["books"] if item["id"] != book["id"]]
         manifest["books"].append(book)
+    manifest["books"].sort(key=lambda book: int(book["cfLabel"][2:]))
     MANIFEST.write_text(
         "window.KakaCarterManifest = " + json.dumps(manifest, ensure_ascii=False, indent=2) + ";\n",
         encoding="utf-8",
