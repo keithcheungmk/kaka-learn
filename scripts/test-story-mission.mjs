@@ -110,7 +110,10 @@ assert.match(source, /autoPlay: phase === 'listen'/, 'Each page should auto-play
 
 assert.match(css, /orientation:\s*landscape/, 'iPad landscape should have a dedicated media query');
 assert.match(css, /grid-template-columns:\s*minmax\(0,\s*1\.38fr\)\s*minmax\(280px,\s*1fr\)/, 'Landscape challenge columns should keep their gap inside the available width');
-assert.match(css, /orientation:\s*portrait[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)[\s\S]*grid-template-rows:\s*minmax\(0,\s*\.82fr\)\s*minmax\(0,\s*1\.18fr\)/, 'iPad portrait should stack the story above the fill panel');
+assert.match(css, /orientation:\s*portrait[\s\S]*flex:\s*1\s+1\s+0[\s\S]*grid-template-columns:\s*minmax\(0,\s*1fr\)[\s\S]*grid-template-rows:\s*minmax\(0,\s*1\.3fr\)\s*minmax\(0,\s*\.9fr\)/, 'iPad portrait should give the story display more room than the fill panel');
+assert.match(css, /\.story-challenge-page\s*\{\s*width:\s*auto;\s*max-width:\s*100%;\s*height:\s*auto;\s*max-height:\s*39vh;\s*\}/, 'Portrait story page should preserve its aspect ratio and use the enlarged story area without clipping');
+assert.match(css, /\.story-play-screen\.active\s*>\s*\.game-header h1\s*\{[^}]*white-space:\s*nowrap/s, 'Portrait Story English title should remain on one line and preserve stage height');
+assert.match(css, /\.story-fill-tile\s*\{\s*min-height:\s*44px;\s*padding-block:\s*6px;\s*font-size:\s*clamp\(1rem,\s*1\.8vw,\s*1\.12rem\);\s*\}/, 'Portrait answer choices should stay comfortably readable after tightening the panel');
 assert.match(css, /\.story-play-stage\s*\{[^}]*width:\s*100%;\s*max-width:\s*1180px/s, 'Story stage should size to its parent and avoid viewport-based margin overflow');
 assert.match(css, /\.story-challenge-story/, 'Story listen control should sit with the page image');
 assert.match(css, /\.story-fill-panel[\s\S]*padding:\s*clamp\(12px/, 'Fill panel should keep comfortable inner padding');
