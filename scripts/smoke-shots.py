@@ -200,21 +200,20 @@ def walk(pg, url, shots: Path | None, tag: str):
         pg.wait_for_timeout(800)
         probe(step)
         if entry == "#btn-start-math":
-            # 水星數字關係：先學 → 開始10題 → 拖一格 → 回答（可錯）→ 返銀河
+            # 水星數物件：先看完三張示範 → 開始數數 → 確認選項 → 返銀河
             pg.click('[data-planet-id="number-relations"]')
             pg.wait_for_timeout(500)
-            probe("數理・數字關係先學")
+            probe("數理・水星數數先學")
+            for _ in range(3):
+                if pg.is_visible("#btn-math-relations-start-mission"):
+                    break
+                pg.click("#btn-math-relations-learn-next")
+                pg.wait_for_timeout(100)
+            pg.wait_for_selector("#btn-math-relations-start-mission", state="visible")
             pg.click("#btn-math-relations-start-mission")
-            pg.wait_for_timeout(600)
-            probe("數理・數字關係任務")
-            line = pg.locator("#math-relations-line .math-nline-track")
-            box = line.bounding_box()
-            if box:
-                pg.mouse.click(box["x"] + box["width"] * 0.3, box["y"] + box["height"] * 0.5)
-                pg.wait_for_timeout(200)
-            pg.click("#btn-math-relations-answer")
+            pg.wait_for_selector("#math-relations-distance-choices button", state="visible")
             pg.wait_for_timeout(500)
-            probe("數理・數字關係回答")
+            probe("數理・水星數一數")
             pg.click("#btn-back-math-relations-play")
             pg.wait_for_timeout(300)
             pg.click("#btn-back-math-relations-learn")
