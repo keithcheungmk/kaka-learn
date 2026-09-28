@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {wordAudioClips} from '../js/pth-word-audio.js';
-import {isMandarinVoice} from '../js/pth-voice.js';
+import {wordAudioSourceSegments} from '../js/pth-word-audio-source.js';
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const units = JSON.parse(fs.readFileSync(path.join(root, 'data/pth/units.json')));
@@ -41,18 +41,21 @@ assert.ok(demoSource.includes('function hydrateGroup()') && demoSource.includes(
 assert.ok(demoSource.includes("kaka-pth-preview-v1") && demoSource.includes('測試預覽') && demoSource.includes('preview-badge'));
 assert.ok(demoSource.includes("type:'listen'") && demoSource.includes('draggable="true"') && demoSource.includes('answerSlot'));
 assert.ok(demoSource.includes('function playWord') && demoSource.includes('data-word') && demoSource.includes('currentSounds().flatMap'));
-assert.ok(demoSource.includes("import {isMandarinVoice} from './pth-voice.js") && demoSource.includes('function pickMandarinVoice') && demoSource.includes('speechSynthesis.getVoices'));
-assert.ok(demoSource.includes('粵語聲線不會代替播放'));
-for (const lang of ['zh-HK', 'zh-Hant-HK', 'zh-Hans-HK', 'yue-HK', 'zh-yue-HK']) assert.equal(isMandarinVoice({lang, name:'System Voice'}), false, `${lang} must never be selected`);
-for (const lang of ['zh-CN', 'zh-Hans-CN', 'zh-SG', 'zh-Hant-TW', 'cmn-CN']) assert.equal(isMandarinVoice({lang, name:'System Voice'}), true, `${lang} is an explicit Mandarin locale`);
-assert.equal(isMandarinVoice({lang:'zh-CN', name:'Cantonese Hong Kong'}), false, 'a Cantonese-labelled voice must never be selected');
-assert.ok(demoSource.includes('u.voice=voice') && !demoSource.includes("u.lang='zh-CN'"));
+assert.ok(!demoSource.includes('speechSynthesis') && !demoSource.includes('SpeechSynthesisUtterance'), 'PTH word audio must never fall back to device TTS');
 assert.ok(demoSource.includes('data-word-audio') && demoSource.includes('playWord(b.dataset.word,wordAudioClips[b.dataset.wordAudio])'));
 assert.ok(demoSource.includes('wordAudioClips') && demoSource.includes('sharedAudio.currentTime=start'));
 assert.ok(demoSource.includes('function normalizeAudioClip') && demoSource.includes('playAudio(audioClip.src,audioClip.start,audioClip.end)'), '詞語音檔物件必須拆出 src/start/end 播放');
 assert.ok(demoSource.includes('let stopTimer=null') && demoSource.includes('let uiTimer=null') && demoSource.includes('sharedAudio.onerror=fail'), '快速重按及播放失敗必須可被正確處理');
-assert.equal(Object.keys(wordAudioClips).length, 0, '不得再播放未核聽的短切詞語錄音');
-assert.ok(demoSource.includes('u.rate=1') && demoSource.includes('u.voice=voice') && demoSource.includes('pickMandarinVoice()'), '例詞要以明確普通話聲線及正常語速朗讀');
+assert.equal(Object.keys(wordAudioClips).length, 69, '23 個聲母各有 3 段固定普通話例詞錄音');
+assert.deepEqual(Object.keys(wordAudioClips), Object.keys(wordAudioSourceSegments));
+for (const [key, clip] of Object.entries(wordAudioClips)) {
+  assert.equal(clip.src, `assets/pth/words/individual/${key}.m4a`);
+  assert.ok(fs.existsSync(path.join(root, clip.src)), `Missing generated Mandarin audio: ${key}`);
+  assert.ok(fs.statSync(path.join(root, clip.src)).size > 1024, `Generated Mandarin audio is empty: ${key}`);
+  assert.ok(wordAudioSourceSegments[key].end > wordAudioSourceSegments[key].start, `Invalid source segment: ${key}`);
+}
+assert.ok(demoSource.includes('function playWord') && demoSource.includes('普通話錄音未能載入') && demoSource.includes('playAudio(audioClip.src,audioClip.start,audioClip.end)'), '缺少固定錄音時須明確報錯，不能代用系統語音');
+assert.ok(demoSource.includes('if(start===0||sharedAudio.readyState>=1)begin()'), 'iPad 點擊播放須在同一手勢即時呼叫 play()');
 assert.ok(demoHtml.includes('wordAudioStatus'));
 assert.ok(demoSource.includes('preload="metadata"') && demoSource.includes('data-play-video'), '只載入目前小隊並可由頭播放完整示範');
 assert.ok(!demoSource.includes('type:i<5?"listen":"shape"'));

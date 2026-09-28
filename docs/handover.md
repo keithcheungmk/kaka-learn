@@ -98,6 +98,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-09-29 · ChatGPT／Codex（PTH 例詞普通話固定錄音）
+
+- 普通話學習卡及測驗改用教材聲母示範 MP4 對應時間段，產生 69 段獨立 AAC/M4A 普通話例詞錄音；iPad 不再依賴可能被系統錯誤選成粵語的 speech synthesis。無錄音時明確提示，不會退回系統 TTS。
+- 為配合 iPad Safari 點按播放限制，從使用者點擊事件內即時呼叫 `audio.play()`；統一播放器仍會先停止上一段，避免快速連點聲音重疊。新增可重現建置腳本，原始 `source-materials/PTH/initials-video/` 不移動、不提交。
+- 驗證：69 段 AAC 均可解碼；Chromium iPad 直向點按及快速連點、橫向播放通過；全站 iPad Pro 11 直／橫和 iPhone 16 Pro Max smoke、PTH content test、invariants 通過。Playwright WebKit 執行檔未安裝，故未聲稱完成實體 iPad Safari 驗證。
+- **踩咗** `pth-demo.html`、`js/pth-demo.js`、`js/pth-word-audio.js`、`js/pth-word-audio-source.js`、`assets/pth/words/individual/`、`scripts/build-pth-word-audio.mjs`、`scripts/test-pth-content.mjs`、`docs/handover.md`
+
 ### 2026-09-28 · ChatGPT／Codex（Story English 完成 Carter Family CF001–CF085）
 
 - Story English 納入其餘 CF041–CF085 共 45 本、515 頁；與原有 CF001–CF040 合計 85 本、1,033 個可玩頁面。每頁有 PDF 場景、來源逐頁錄音和同頁原文挖空題。
