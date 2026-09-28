@@ -202,6 +202,43 @@ def check_word_data_integrity() -> None:
         warn("word-data", f"書入面有字唔喺該輯總表：{n}")
 
 
+def check_answer_contrast() -> None:
+    """共享答案磚與獨立 PTH 答案狀態須維持 WCAG AA 對比。"""
+    theme = read("css/playground-theme.css")
+
+    def luminance(value: str) -> float:
+        channels = [int(value[i:i + 2], 16) / 255 for i in (1, 3, 5)]
+        linear = [c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4 for c in channels]
+        return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+
+    def contrast(foreground: str, background: str) -> float:
+        lighter, darker = sorted((luminance(foreground), luminance(background)), reverse=True)
+        return (lighter + 0.05) / (darker + 0.05)
+
+    for selector in (".build-tile", ".build-drag-ghost", ".chip", ".pic-card", ".chain-option", ".sentence-story-card", ".sentence-card"):
+        if selector not in theme:
+            fail("answer-contrast", f"共享答案元件缺少對比規則：{selector}")
+
+    pairs = (("#18345f", "#ffffff"), ("#17396e", "#e3faed"),
+             ("#0b5f43", "#eaf7ff"), ("#775000", "#eaf7ff"),
+             ("#ffffff", "#9f1239"), ("#ffffff", "#714819"), ("#ffffff", "#166534"))
+    if any(contrast(foreground, background) < 4.5 for foreground, background in pairs):
+        fail("answer-contrast", "共享答案／已選／回饋狀態未達 WCAG AA 4.5:1")
+    for selector in (".feedback.ok", ".feedback.retry", ".story-fill-tile.wrong", ".story-fill-tile.selected", ".story-fill-tile.correct"):
+        if selector not in theme:
+            fail("answer-contrast", f"共享回饋狀態缺少對比規則：{selector}")
+
+    pth_html = read("pth-demo.html")
+    pth_css = read("css/pth-answer-contrast.css")
+    if "pth-answer-contrast.css" not in pth_html:
+        fail("answer-contrast", "PTH standalone 頁未載入答案對比修正")
+    for selector in (".answer-slot.filled", ".option {", ".option.selected", ".feedback.good"):
+        if selector not in pth_css:
+            fail("answer-contrast", f"PTH 缺少答案／回饋對比規則：{selector}")
+    if contrast("#19365f", "#e3faed") < 4.5:
+        fail("answer-contrast", "PTH 已填答案未達 WCAG AA 4.5:1")
+
+
 def check_openmoji_coverage() -> None:
     """每個用到嘅 emoji 都要有 OpenMoji SVG。
 
@@ -903,6 +940,7 @@ CHECKS = [
     check_deer_rules,
     check_word_ids_unique,
     check_word_data_integrity,
+    check_answer_contrast,
     check_openmoji_coverage,
     check_emoji_disc,
     check_voice_picker,

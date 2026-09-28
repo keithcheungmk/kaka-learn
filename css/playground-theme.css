@@ -13,6 +13,10 @@
   --gold-soft: #ffe39a;
   --coral: #f47d8b;
   --ok: #33bf83;
+  --answer-ink: #18345f;
+  --answer-surface: #ffffff;
+  --answer-selected-surface: #e3faed;
+  --answer-selected-ink: #17396e;
   --shadow: 0 12px 28px rgba(77, 116, 158, 0.18);
 }
 
@@ -360,3 +364,75 @@ body::before {
     transition: none;
   }
 }
+
+/* 全站答案／字詞磚：明確指定深字淺底，避免繼承深色底後字色對比不足。 */
+.build-tile,
+.build-drag-ghost,
+.chip,
+.pic-card,
+.chain-option,
+.sentence-story-card,
+.sentence-card {
+  background: var(--answer-surface);
+  border-color: rgba(93, 145, 203, 0.55);
+  color: var(--answer-ink);
+}
+
+.build-drag-ghost {
+  box-shadow: 0 10px 24px rgba(35, 65, 105, 0.24);
+}
+
+.build-tile.is-selected,
+.chip.selected,
+.pic-card.selected {
+  border-color: #21815f;
+  background: var(--answer-selected-surface);
+  color: var(--answer-selected-ink);
+}
+
+.build-tile.is-dragging,
+.chain-option.is-dragging {
+  opacity: 0.8;
+}
+
+.chain-option small { color: #72520a; }
+.sentence-story-card small { color: #456b92; }
+
+.sentence-card-person { border-color: #3b82f6; background: #eff6ff; }
+.sentence-card-person small { color: #1d4ed8; }
+.sentence-card-verb { border-color: #ea580c; background: #fff7ed; }
+.sentence-card-verb small { color: #9a3412; }
+.sentence-card-object { border-color: #16a34a; background: #f0fdf4; }
+.sentence-card-object small { color: #166534; }
+.sentence-card-other { border-color: #9333ea; background: #faf5ff; }
+.sentence-card-other small { color: #6b21a8; }
+
+.feedback { color: #18345f; }
+.feedback.ok { color: #0b5f43; }
+.feedback.retry { color: #775000; }
+
+.story-fill-tile.wrong,
+.story-fill-tile.selected,
+.story-fill-tile.correct { color: #ffffff; }
+.story-fill-tile.wrong { background: #9f1239; }
+.story-fill-tile.selected { background: #714819; }
+.story-fill-tile.correct { background: #166534; }
+.story-fill-tile:disabled { opacity: 0.85; }
+.story-play-stage.is-listening .story-fill-bank { opacity: 0.85; }
+
+.build-tile:focus-visible,
+.chip:focus-visible,
+.pic-card:focus-visible,
+.chain-option:focus-visible,
+.sentence-story-card:focus-visible,
+.sentence-card:focus-visible {
+  outline: 3px solid #18345f;
+  outline-offset: 3px;
+}
+
+.chain-option small,
+.sentence-story-card small,
+.sentence-card-person small,
+.sentence-card-verb small,
+.sentence-card-object small,
+.sentence-card-other small { font-weight: 700; }
