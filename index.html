@@ -27,7 +27,6 @@
   <link rel="stylesheet" href="./css/phonics.css?v=20260905list" />
   <link rel="stylesheet" href="./css/story-demo.css?v=20260911b" />
   <link rel="stylesheet" href="./css/math.css?v=20260927a" />
-  <link rel="stylesheet" href="./css/math-number-line.css?v=20260921a" />
   <link rel="stylesheet" href="./css/additionGame.css?v=4751bde" />
   <link rel="stylesheet" href="./css/playground-theme.css?v=20260927a" />
 </head>
@@ -627,8 +626,8 @@
       </div>
     </section>
 
-    <!-- 水星・數字關係・先學 -->
-    <section id="screen-math-relations-learn" class="screen math-screen" aria-label="水星・數字關係先學">
+    <!-- 水星・數物件先學 -->
+    <section id="screen-math-relations-learn" class="screen math-screen" aria-label="水星・數物件先學">
       <div class="game-header earth-game-header">
         <div class="earth-nav">
           <button type="button" class="btn btn-ghost" id="btn-back-math-relations-learn">← 銀河</button>
@@ -639,9 +638,9 @@
           <strong id="math-relations-learn-progress">1/5</strong>
         </div>
       </div>
-      <p class="section-lead" id="math-relations-learn-prompt">喺0至10數軸搵位置、行距離</p>
+      <p class="section-lead" id="math-relations-learn-prompt">數一數，再揀返相同數量</p>
       <button type="button" class="math-relations-learn-stage" id="math-relations-learn-stage" aria-label="再聽一次">
-        <div id="math-relations-learn-line" class="math-nline" aria-label="學習數軸"></div>
+        <div id="math-relations-learn-line" class="math-nline" aria-label="跟住點數物件"></div>
         <div class="learn-hear">🔊 聽一聽</div>
       </button>
       <p class="feedback" id="math-relations-learn-feedback" aria-live="polite"></p>
@@ -650,30 +649,30 @@
         <button type="button" class="btn btn-secondary" id="btn-math-relations-learn-next">下一張 →</button>
       </div>
       <div class="btn-row">
-        <button type="button" class="btn" id="btn-math-relations-start-mission">開始10題</button>
+        <button type="button" class="btn" id="btn-math-relations-start-mission">開始數一數</button>
       </div>
     </section>
 
-    <!-- 水星・數字關係・十題任務 -->
-    <section id="screen-math-relations-play" class="screen math-screen" aria-label="水星・數字關係任務">
+    <!-- 水星・數一數 -->
+    <section id="screen-math-relations-play" class="screen math-screen" aria-label="水星・數一數">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-math-relations-play">← 先學</button>
-        <h1 id="math-relations-play-title">水星・數字關係</h1>
+        <h1 id="math-relations-play-title">水星・數一數</h1>
         <div class="progress-pill" aria-label="任務進度">
-          <strong id="math-relations-progress">1/10</strong>
+          <strong id="math-relations-progress">1/5</strong>
         </div>
       </div>
       <div class="prompt-box">
-        <p id="math-relations-prompt">將標記放到正確位置。</p>
+        <p id="math-relations-prompt">數一數有幾個，再揀數字。</p>
         <button type="button" class="speak-btn" id="btn-math-relations-speak" aria-label="再聽一次">🔊 再聽一次</button>
       </div>
-      <div id="math-relations-line" class="math-nline" aria-label="遊戲數軸"></div>
-      <div id="math-relations-distance-choices" hidden aria-label="揀格數"></div>
+      <div id="math-relations-line" class="math-nline" role="group" aria-label="數一數物件"></div>
+      <div id="math-relations-distance-choices" aria-label="揀數字答案"></div>
       <div class="math-relations-actions">
         <button type="button" class="btn btn-secondary" id="btn-math-relations-stop" hidden>停喺呢度</button>
         <button type="button" class="btn btn-ghost" id="btn-math-relations-change-first" hidden>改第一段</button>
-        <button type="button" class="btn btn-secondary" id="btn-math-relations-hint">提示</button>
-        <button type="button" class="btn" id="btn-math-relations-answer">回答</button>
+        <button type="button" class="btn btn-secondary" id="btn-math-relations-hint" hidden>提示</button>
+        <button type="button" class="btn" id="btn-math-relations-answer" hidden>回答</button>
       </div>
       <p class="feedback" id="math-relations-feedback" aria-live="polite"></p>
       <div class="math-relations-explain" id="math-relations-explain" hidden>
@@ -701,11 +700,6 @@
       <p class="section-lead addition-select-lead">揀一張卡開始玩</p>
       <div class="addition-level-menu">
         <div class="addition-level-grid" id="addition-level-grid"></div>
-        <button type="button" class="addition-level-card number-bonds-entry" id="btn-open-number-bonds">
-          <span class="addition-level-kicker">NUMBER BONDS</span><span class="addition-level-visual" aria-hidden="true">⑤ → ② ＋ ③</span>
-          <span class="addition-level-label">數字拆解</span><small>拆開數字，搵不同組合</small>
-          <span class="addition-level-status">開始玩 →</span>
-        </button>
       </div>
     </section>
 
@@ -746,40 +740,6 @@
         <p class="feedback" id="addition-feedback" aria-live="polite"></p>
       </div>
       <div class="addition-merge-overlay" id="addition-merge-overlay" hidden></div>
-    </section>
-
-    <section id="screen-math-earth-bonds-select" class="screen math-screen addition-screen" aria-label="地球・數字拆解選擇">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-bonds-select">← 加法基地</button>
-        <h1>地球・數字拆解</h1>
-        <div class="star-panel" style="min-height:56px;padding:8px 12px"><span class="star-icon">★</span><span class="star-meta"><strong>Number Bonds</strong></span></div>
-      </div>
-      <p class="section-lead">先搵齊一個數字嘅所有兩數組合，再慢慢挑戰 11–20。</p>
-      <div class="addition-level-grid" id="number-bonds-level-grid"></div>
-    </section>
-
-    <section id="screen-math-earth-bonds-play" class="screen math-screen addition-screen number-bonds-screen" aria-label="地球・數字拆解遊戲">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-bonds-play">← 選擇關卡</button>
-        <h1 id="number-bonds-play-title">數字拆解</h1>
-        <div class="progress-pill"><strong id="number-bonds-mission-progress">目標 1/9</strong></div>
-      </div>
-      <p class="number-bonds-prompt" id="number-bonds-prompt">請將數字拆成所有不同嘅兩數組合。</p>
-      <div class="number-bonds-target-card"><span>目標數字</span><strong id="number-bonds-target">7</strong></div>
-      <div class="number-bonds-layout">
-        <div class="number-bonds-rows" id="number-bonds-rows"></div>
-        <div class="number-bonds-pool-wrap"><p>撳數字，或者拖去空格：</p><div class="number-bonds-pool" id="number-bonds-pool"></div></div>
-      </div>
-      <button type="button" class="btn addition-answer-btn" id="btn-number-bonds-answer" disabled>回答</button>
-      <p class="feedback" id="number-bonds-feedback" aria-live="polite"></p>
-      <div class="number-bonds-correct-popover" id="number-bonds-correct-popover" hidden role="dialog" aria-modal="true" aria-labelledby="number-bonds-correct-title">
-        <div class="number-bonds-correct-inner">
-          <div class="number-bonds-correct-mark" aria-hidden="true">✓</div>
-          <h2 id="number-bonds-correct-title">答對了！</h2>
-          <p id="number-bonds-correct-message"></p>
-          <button type="button" class="btn" id="btn-number-bonds-next">下一題</button>
-        </div>
-      </div>
     </section>
 
     <!-- 金星・先學一學（睇鐘） -->
@@ -858,88 +818,6 @@
       </div>
       <div class="math-clock-grid" id="math-time-options" aria-label="揀時間"></div>
       <p class="feedback" id="math-time-feedback" aria-live="polite"></p>
-    </section>
-
-    <!-- 火星・先學（形狀＋形狀規律） -->
-    <section id="screen-math-mars-learn" class="screen math-screen" aria-label="火星・先學一學">
-      <div class="game-header earth-game-header">
-        <div class="earth-nav">
-          <button type="button" class="btn btn-ghost" id="btn-back-math-mars-learn">← 銀河</button>
-          <span class="earth-location"><img src="./assets/math/planets/mars.png" alt="" width="48" height="48" decoding="async" />火星</span>
-        </div>
-        <h1 id="math-mars-learn-title">火星・先學</h1>
-        <div class="progress-pill" aria-label="學習進度">
-          <strong id="math-mars-learn-progress">1/5</strong>
-        </div>
-      </div>
-      <p class="section-lead" id="math-mars-learn-lead">認識 10 種形狀，再用形狀找規律</p>
-      <button type="button" class="math-learn-stage math-mars-stage" id="math-mars-learn-tap" aria-label="再聽一次">
-        <div class="math-mars-learn-visual" id="math-mars-learn-visual" aria-hidden="true"></div>
-        <div class="math-venus-say" id="math-mars-learn-say">圓形</div>
-        <div class="learn-hear">🔊 聽一聽</div>
-      </button>
-      <div class="btn-row">
-        <button type="button" class="btn btn-ghost" id="btn-math-mars-learn-prev">← 上一張</button>
-        <button type="button" class="btn btn-secondary" id="btn-math-mars-learn-next">下一張 →</button>
-      </div>
-      <div class="btn-row" id="math-mars-learn-finish-row" hidden>
-        <button type="button" class="btn" id="btn-math-mars-learn-play">學完喇・去玩玩</button>
-      </div>
-    </section>
-
-    <!-- 火星・揀玩法 -->
-    <section id="screen-math-mars-play" class="screen math-screen" aria-label="火星・去玩玩">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-mars-play">← 再學</button>
-        <h1 id="math-mars-play-title">火星・去玩玩</h1>
-        <div class="star-panel" style="min-height:56px;padding:8px 12px">
-          <span class="star-icon">★</span>
-          <span class="star-meta">
-            <strong id="math-mars-play-stars">0/10</strong>
-          </span>
-        </div>
-      </div>
-      <p class="section-lead">揀一種玩法</p>
-      <div class="btn-stack">
-        <button type="button" class="btn" id="btn-math-mode-shape">睇一睇・揀形狀</button>
-        <button type="button" class="btn btn-secondary" id="btn-math-mode-pattern">形狀排隊・找規律</button>
-      </div>
-    </section>
-
-    <!-- 火星・揀形狀 -->
-    <section id="screen-math-shape" class="screen math-screen" aria-label="火星・揀形狀">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-shape">← 玩法</button>
-        <h1>揀形狀</h1>
-        <div class="progress-pill" aria-label="答啱進度">
-          <strong id="math-shape-progress">0/5</strong>
-        </div>
-      </div>
-      <div class="prompt-box">
-        <p id="math-shape-prompt">呢個係咩形狀？</p>
-        <button type="button" class="speak-btn" id="btn-math-shape-speak" aria-label="再聽一次">🔊 再聽一次</button>
-      </div>
-      <div class="math-mars-prompt-shape" id="math-shape-target" aria-hidden="true"></div>
-      <div class="math-mars-options" id="math-shape-options" aria-label="揀形狀名"></div>
-      <p class="feedback" id="math-shape-feedback" aria-live="polite"></p>
-    </section>
-
-    <!-- 火星・形狀排隊 -->
-    <section id="screen-math-pattern" class="screen math-screen" aria-label="火星・形狀排隊">
-      <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-pattern">← 玩法</button>
-        <h1>形狀排隊</h1>
-        <div class="progress-pill" aria-label="答啱進度">
-          <strong id="math-pattern-progress">0/5</strong>
-        </div>
-      </div>
-      <div class="prompt-box">
-        <p id="math-pattern-prompt">下一個係咩形狀？</p>
-        <button type="button" class="speak-btn" id="btn-math-pattern-speak" aria-label="再聽一次">🔊 再聽一次</button>
-      </div>
-      <div class="math-pattern-row" id="math-pattern-row" aria-label="形狀排隊"></div>
-      <div class="math-mars-options" id="math-pattern-options" aria-label="揀答案"></div>
-      <p class="feedback" id="math-pattern-feedback" aria-live="polite"></p>
     </section>
 
     <!-- KAKA RANGER 數理探險：主 landing／旅程總覽 -->
@@ -1038,12 +916,10 @@
   <script src="./js/math-storage.js?v=20260811j"></script>
   <script src="./js/math-mastery.js?v=20260907a"></script>
   <script src="./js/math-skills.js?v=20260908c"></script>
-  <script src="./js/math-number-line-data.js?v=20260921a"></script>
-  <script src="./js/math-number-line-game.js?v=20260921a"></script>
+  <script src="./js/math-mercury-count-data.js?v=20260928a"></script>
+  <script src="./js/math-mercury-count-game.js?v=20260928a"></script>
   <script src="./js/additionData.js?v=20260908a"></script>
   <script src="./js/additionGame.js?v=20260908a"></script>
-  <script src="./js/numberBondsData.js?v=20260910a"></script>
-  <script src="./js/numberBondsGame.js?v=4751bde"></script>
   <script src="./js/subtractionData.js?v=20260908a"></script>
   <script src="./js/subtractionGame.js?v=20260908a"></script>
   <script src="./js/math-app.js?v=20260927a"></script>

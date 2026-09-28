@@ -314,15 +314,15 @@
 /* ---------- 銀河旅程卡（圓形星球，唔再用方塊 topic-card） ---------- */
 #math-galaxy-grid.math-galaxy-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(4px, 1.2vw, 12px);
   width: 100%;
-  max-width: 920px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 0 0 18px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   #math-galaxy-grid.math-galaxy-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -953,13 +953,6 @@
   --math-planet: #3b82f6;
 }
 
-#screen-math-mars-learn.math-screen.active,
-#screen-math-mars-play.math-screen.active,
-#screen-math-shape.math-screen.active,
-#screen-math-pattern.math-screen.active {
-  --math-planet: #e35d3b;
-}
-
 #screen-math-learn.math-screen.active::before,
 #screen-math-play.math-screen.active::before,
 #screen-math-count.math-screen.active::before,
@@ -967,11 +960,7 @@
 #screen-math-venus-play.math-screen.active::before,
 #screen-math-time.math-screen.active::before,
 #screen-math-earth-levels.math-screen.active::before,
-#screen-math-earth-game.math-screen.active::before,
-#screen-math-mars-learn.math-screen.active::before,
-#screen-math-mars-play.math-screen.active::before,
-#screen-math-shape.math-screen.active::before,
-#screen-math-pattern.math-screen.active::before {
+#screen-math-earth-game.math-screen.active::before {
   background:
     radial-gradient(900px 500px at 50% 18%, color-mix(in srgb, var(--math-planet, #b6bcc4) 22%, transparent), transparent 58%),
     linear-gradient(180deg, rgba(7, 21, 38, 0.55) 0%, rgba(7, 21, 38, 0.72) 100%),
@@ -1604,118 +1593,6 @@
   .math-time-set-face { width: min(58vw, 230px); }
 }
 
-/* ---------- 火星・形狀／規律 ---------- */
-.math-mars-learn-visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: clamp(100px, 22vw, 160px);
-}
-
-.math-shape-glyph {
-  width: clamp(54px, 11vw, 76px);
-  height: clamp(54px, 11vw, 76px);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  filter: drop-shadow(0 7px 7px rgba(3, 11, 31, .32));
-}
-
-.math-shape-glyph.is-hero {
-  width: clamp(118px, 22vw, 190px);
-  height: clamp(118px, 22vw, 190px);
-}
-
-.math-shape-sticker-svg { width: 100%; height: 100%; overflow: visible; }
-.math-shape-sticker-body {
-  fill: var(--shape-fill);
-  stroke: rgba(255, 255, 255, .88);
-  stroke-width: 5;
-  stroke-linejoin: round;
-  filter: saturate(1.12);
-}
-.math-shape-glyph--circle { --shape-fill: #f35b80; }
-.math-shape-glyph--oval { --shape-fill: #2bc5df; }
-.math-shape-glyph--triangle { --shape-fill: #ffad2f; }
-.math-shape-glyph--square { --shape-fill: #8870ed; }
-.math-shape-glyph--rectangle { --shape-fill: #48d28e; }
-.math-shape-glyph--diamond { --shape-fill: #f06bb2; }
-.math-shape-glyph--parallelogram { --shape-fill: #3daeea; }
-.math-shape-glyph--trapezoid { --shape-fill: #ff7f5c; }
-.math-shape-glyph--pentagon { --shape-fill: #a66ddc; }
-.math-shape-glyph--hexagon { --shape-fill: #3cc7a5; }
-
-.math-mars-prompt-shape {
-  display: flex;
-  justify-content: center;
-  margin: clamp(6px, 1.5vh, 12px) 0;
-}
-
-.math-mars-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
-  margin-top: clamp(34px, 7vh, 64px);
-  padding-top: clamp(18px, 3vh, 28px);
-  border-top: 2px dashed rgba(167, 243, 208, 0.48);
-}
-
-.math-mars-option.is-ok {
-  outline: 3px solid rgba(253, 230, 138, 0.85);
-}
-
-.math-mars-option.is-bad {
-  animation: softShake 0.4s ease;
-}
-
-.math-mars-option--glyph {
-  appearance: none;
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  background: rgba(18, 40, 72, 0.72);
-  border-radius: 16px;
-  width: clamp(72px, 18vw, 96px);
-  height: clamp(72px, 18vw, 96px);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.math-pattern-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(6px, 1.5vw, 10px);
-  justify-content: center;
-  align-items: center;
-  margin: 8px 0;
-}
-
-.math-pattern-cell {
-  width: clamp(48px, 12vw, 64px);
-  height: clamp(48px, 12vw, 64px);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 2px solid rgba(255, 255, 255, 0.22);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: clamp(1.4rem, 5vw, 2rem);
-}
-
-.math-pattern-cell.is-blank {
-  border-style: dashed;
-  color: #fde68a;
-  font-weight: 700;
-}
-
-.math-pattern-cell .math-shape-glyph { width: clamp(34px, 8vw, 46px); height: clamp(34px, 8vw, 46px); }
-.math-mars-option--glyph .math-shape-glyph { width: clamp(42px, 10vw, 60px); height: clamp(42px, 10vw, 60px); }
-
-#screen-math-shape.math-screen.active,
-#screen-math-pattern.math-screen.active,
-#screen-math-mars-learn.math-screen.active,
-#screen-math-mars-play.math-screen.active,
 #screen-math-venus-learn.math-screen.active,
 #screen-math-venus-play.math-screen.active,
 #screen-math-time.math-screen.active {
@@ -1767,60 +1644,6 @@
   html.math-canvas-mode .math-screen.active{height:auto;min-height:100dvh;overflow:visible}
 }
 
-/* ---------- Phase 1 backlog 星球：分類／規律／位置／序數 ---------- */
-.math-backlog-screen { gap: clamp(12px, 2vh, 22px); }
-.math-backlog-screen[hidden], .math-backlog-learn[hidden], .math-backlog-play[hidden] { display: none !important; }
-.math-backlog-header { margin-bottom: 0; }
-.math-backlog-learn, .math-backlog-play { width: min(100%, 1120px); margin-inline: auto; }
-.math-backlog-learn-stage { width: 100%; min-height: clamp(240px, 42vh, 390px); display: grid; place-items: center; gap: 12px; border: 2px solid rgba(115, 242, 194, .45); border-radius: 24px; background: linear-gradient(145deg, rgba(30, 58, 120, .96), rgba(26, 30, 84, .96)); color: inherit; }
-.math-backlog-learn-visual { min-height: 120px; display: grid; place-items: center; font-size: clamp(3rem, 8vw, 6rem); }
-.math-backlog-learn-visual .math-backlog-example, .math-backlog-learn-visual .math-backlog-bins { font-size: clamp(1.35rem, 3vw, 2.4rem); line-height: 1.7; }
-.math-backlog-pair, .math-backlog-bins, .math-backlog-position-demo, .math-backlog-queue { display: flex; align-items: center; justify-content: center; gap: clamp(10px, 2vw, 26px); flex-wrap: wrap; }
-.math-backlog-pair span, .math-backlog-bins span { padding: 12px 18px; border-radius: 16px; background: rgba(255, 213, 90, .16); border: 2px solid rgba(255, 213, 90, .7); }
-.math-backlog-position-demo { flex-direction: column; font-size: clamp(3rem, 8vw, 6rem); }
-.math-backlog-position-demo.is-row { flex-direction: row; }
-.math-backlog-grid-demo { display: grid; grid-template-columns: repeat(3, 70px); gap: 10px; }
-.math-backlog-grid-demo > * { display: grid; place-items: center; width: 70px; height: 70px; border-radius: 14px; background: rgba(255,255,255,.12); }
-.math-backlog-grid-demo b { background: rgba(255,213,90,.3); }
-.math-backlog-queue span { display: grid; gap: 5px; justify-items: center; padding: 10px 14px; border-radius: 15px; background: rgba(71, 98, 171, .72); font-size: clamp(2.2rem, 5vw, 4rem); }
-.math-backlog-queue span small { font-size: .9rem; color: var(--muted, #b7c1e0); }
-.math-backlog-queue span.is-target { outline: 3px solid var(--gold, #ffd55a); }
-.math-backlog-play .prompt-box { margin-bottom: 12px; }
-.math-backlog-visual { min-height: clamp(170px, 32vh, 300px); display: grid; place-items: center; padding: 16px; border-radius: 22px; background: rgba(27, 48, 105, .7); border: 1px solid rgba(130, 151, 226, .5); }
-.math-backlog-sort-target { display: grid; justify-items: center; gap: 8px; font-size: clamp(4rem, 10vw, 7rem); }
-.math-backlog-sort-target strong { font-size: clamp(1.2rem, 2.5vw, 2rem); color: var(--muted, #b7c1e0); }
-.math-backlog-sequence { display: flex; align-items: center; justify-content: center; gap: clamp(8px, 2vw, 22px); flex-wrap: wrap; }
-.math-backlog-sequence span { display: grid; place-items: center; min-width: clamp(54px, 8vw, 92px); min-height: clamp(54px, 8vw, 92px); padding: 8px; border-radius: 18px; background: rgba(71, 98, 171, .72); font-size: clamp(2rem, 6vw, 4.8rem); }
-.math-backlog-sequence span.is-blank { color: var(--gold, #ffd55a); border: 3px dashed currentColor; background: rgba(255, 213, 90, .12); }
-.math-backlog-position-grid { display: grid; grid-template-columns: repeat(3, minmax(58px, 92px)); gap: 10px; }
-.math-backlog-position-grid span { display: grid; place-items: center; min-height: clamp(58px, 9vw, 92px); border-radius: 15px; background: rgba(71, 98, 171, .72); font-size: clamp(2rem, 5vw, 4rem); }
-.math-backlog-position-grid span.is-target { background: rgba(255, 213, 90, .36); box-shadow: 0 0 0 3px var(--gold, #ffd55a); }
-.math-backlog-options { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
-.math-backlog-option { min-height: 76px; display: grid; grid-template-columns: auto 1fr; align-items: center; justify-content: center; gap: 8px; border: 2px solid #5eb9ee; border-radius: 16px; background: rgba(49, 74, 145, .8); color: var(--text, #f7f8ff); font-weight: 900; padding: 10px 12px; }
-.math-backlog-choice-visual { font-size: 1.5rem; }
-.math-backlog-option:hover, .math-backlog-option:focus-visible { outline: 3px solid var(--mint, #73f2c2); transform: translateY(-2px); }
-.math-backlog-option.is-ok { border-color: #73f2c2; background: rgba(39, 148, 115, .72); }
-.math-backlog-option.is-bad { border-color: #ffb18c; background: rgba(157, 70, 74, .72); }
-.math-backlog-back-learn { margin-top: 10px; }
-html.math-canvas-mode .math-backlog-screen.math-screen.active { display: grid; grid-template-rows: auto 1fr; align-content: stretch; }
-html.math-canvas-mode .math-backlog-learn, html.math-canvas-mode .math-backlog-play { width: min(100%, 1320px); }
-html.math-canvas-mode .math-backlog-learn-stage { min-height: min(47vh, 400px); }
-html.math-canvas-mode .math-backlog-options { width: min(100%, 1180px); margin-inline: auto; }
-
-@media (max-width: 700px) {
-  .math-backlog-screen { padding: 12px; }
-  .math-backlog-header { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 8px; }
-  .math-backlog-header h1 { font-size: clamp(1.35rem, 6vw, 2rem); text-align: center; overflow-wrap: anywhere; }
-  .math-backlog-grid-demo { grid-template-columns: repeat(3, minmax(46px, 70px)); gap: 7px; }
-  .math-backlog-grid-demo > * { width: auto; height: 60px; }
-  .math-backlog-options { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .math-backlog-option { min-height: 64px; font-size: .95rem; }
-}
-
-@media (min-width: 701px) and (orientation: portrait) {
-  html.math-canvas-mode .math-backlog-screen.math-screen.active { height: auto; min-height: 100dvh; overflow: visible; }
-}
-
 /* ── 數理 iPad 橫向總版型 ─────────────────────────────
    所有數理遊戲共用同一個橫向節奏：標題列 → 指示 → 主操作區。
    內容用畫布寬度計算，唔用固定手機直流式寬度。 */
@@ -1863,7 +1686,7 @@ html.math-canvas-mode .math-backlog-options { width: min(100%, 1180px); margin-i
   }
 
   html.math-canvas-mode #math-galaxy-grid.math-galaxy-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     width: min(100%, 1320px);
     max-width: none;
     gap: clamp(10px, 1.4vw, 22px);
@@ -1926,7 +1749,6 @@ html.math-canvas-mode .math-backlog-options { width: min(100%, 1180px); margin-i
   html.math-canvas-mode #screen-math-time .math-time-set { align-self: stretch; }
 
   html.math-canvas-mode #screen-math-earth-addition-select .addition-level-menu,
-  html.math-canvas-mode #screen-math-earth-bonds-select .addition-level-grid,
   html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-grid {
     width: min(100%, 1320px);
     max-width: none;
@@ -1935,25 +1757,10 @@ html.math-canvas-mode .math-backlog-options { width: min(100%, 1180px); margin-i
   html.math-canvas-mode #screen-math-earth-addition-select .addition-level-menu { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   html.math-canvas-mode #screen-math-earth-addition-select .addition-level-card,
   html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-card { min-height: min(46vh, 340px); }
-  html.math-canvas-mode #screen-math-earth-bonds-select .addition-level-grid,
   html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-  html.math-canvas-mode #screen-math-earth-bonds-play .number-bonds-layout {
-    flex-direction: row;
-    align-items: stretch;
-  }
-  html.math-canvas-mode #screen-math-earth-bonds-play .number-bonds-rows { flex: 1 1 auto; max-height: none; }
-  html.math-canvas-mode #screen-math-earth-bonds-play .number-bonds-pool-wrap { flex: 0 0 min(30%, 360px); order: 0; }
 
   /* 數數／形狀／規律：大圖置中，選項沿底部橫向伸展。 */
   html.math-canvas-mode #screen-math-count.math-screen.active,
-  html.math-canvas-mode #screen-math-shape.math-screen.active,
-  html.math-canvas-mode #screen-math-pattern.math-screen.active {
-    display: grid;
-    grid-template-rows: auto auto 1fr auto auto;
-    align-content: stretch;
-  }
-
   html.math-canvas-mode #screen-math-count .math-count-field--quiz {
     width: min(100%, 1100px);
     min-height: 0;
@@ -1961,20 +1768,13 @@ html.math-canvas-mode .math-backlog-options { width: min(100%, 1180px); margin-i
     align-self: stretch;
   }
 
-  html.math-canvas-mode #screen-math-count .math-num-bubbles,
-  html.math-canvas-mode #screen-math-shape .math-mars-options {
+  html.math-canvas-mode #screen-math-count .math-num-bubbles {
     width: min(100%, 1100px);
     margin: 0 auto;
   }
 
-  html.math-canvas-mode #screen-math-shape .math-mars-prompt-shape {
-    align-self: center;
-    margin: 0;
-  }
-
-  /* 加減法與數字拆解沿用各自互動元件，但主內容放大到橫向畫布。 */
-  html.math-canvas-mode .concrete-math-layout,
-  html.math-canvas-mode .number-bonds-layout {
+  /* 加減法沿用各自操作元件，但主內容放大到橫向畫布。 */
+  html.math-canvas-mode .concrete-math-layout {
     width: min(100%, 1320px);
     margin-inline: auto;
   }
@@ -2000,14 +1800,129 @@ html.math-canvas-mode .math-backlog-options { width: min(100%, 1180px); margin-i
   }
 }
 
+/* 水星・由實物數量開始：每件物件分開顯示，答案只係數字選擇。 */
+.math-counting-set {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(12px, 2.4vw, 32px);
+  width: min(100%, 1100px);
+  min-height: clamp(150px, 28vh, 310px);
+  margin: clamp(8px, 2vh, 22px) auto;
+  padding: clamp(16px, 3vw, 36px);
+  border: 3px solid rgba(125, 211, 252, 0.62);
+  border-radius: clamp(22px, 3vw, 38px);
+  background: linear-gradient(145deg, rgba(24, 58, 103, 0.92), rgba(13, 32, 65, 0.88));
+  box-shadow: 0 18px 42px rgba(2, 10, 28, 0.32), inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.math-counting-object {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 clamp(76px, 10vw, 118px);
+  width: clamp(76px, 10vw, 118px);
+  height: clamp(76px, 10vw, 118px);
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.24);
+  animation: math-count-pop .24s ease-out both;
+}
+
+.math-counting-emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  font-size: clamp(44px, 6vw, 74px);
+  line-height: 1;
+}
+
+.math-counting-number {
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #fbbf24;
+  color: #172554;
+  font-size: 1.35rem;
+  font-weight: 900;
+  box-shadow: 0 3px 8px rgba(2, 10, 28, .25);
+}
+
+.math-counting-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(88px, 150px));
+  justify-content: center;
+  gap: clamp(12px, 2.5vw, 30px);
+  width: min(100%, 620px);
+  margin: 0 auto;
+}
+
+.math-counting-choice {
+  appearance: none;
+  min-width: 0;
+  min-height: clamp(72px, 12vh, 112px);
+  border: 3px solid #fbbf24;
+  border-radius: 24px;
+  background: linear-gradient(160deg, #fff5c2, #fbbf24);
+  color: #172554;
+  font: 900 clamp(2.4rem, 5vw, 4rem)/1 Fredoka, "Noto Sans HK", sans-serif;
+  box-shadow: 0 7px 0 #b45309, 0 12px 20px rgba(0,0,0,.2);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.math-counting-choice:disabled { cursor: default; }
+.math-counting-choice.is-wrong { animation: math-count-wobble .28s ease-in-out; border-color: #93c5fd; background: #dbeafe; }
+.math-counting-choice.is-correct { border-color: #6ee7b7; background: #a7f3d0; }
+
+#screen-math-relations-play .math-relations-explain {
+  width: min(100%, 900px);
+  margin: clamp(10px, 2vh, 20px) auto 0;
+  padding: clamp(14px, 2vw, 24px);
+  border: 2px solid rgba(110, 231, 183, .72);
+  border-radius: 24px;
+  background: rgba(8, 36, 57, .92);
+  color: #e6fff4;
+  text-align: center;
+}
+
+#screen-math-relations-play .math-relations-explain p { margin: 0 0 12px; font-size: clamp(1rem, 2vw, 1.4rem); }
+
+@keyframes math-count-pop {
+  from { opacity: 0; transform: scale(.82); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes math-count-wobble {
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+@media (max-width: 600px) {
+  .math-counting-set { min-height: 170px; gap: 10px; }
+  .math-counting-object { flex-basis: 64px; width: 64px; height: 64px; border-radius: 18px; }
+  .math-counting-emoji { font-size: 42px; }
+  .math-counting-choices { grid-template-columns: repeat(3, minmax(72px, 1fr)); gap: 10px; }
+  .math-counting-choice { min-height: 68px; border-radius: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .math-counting-object { animation: none; }
+  .math-counting-choice.is-wrong { animation: none; }
+}
+
 /* iPad 直向仍然維持固定遊戲畫布；只有揀主題／揀關卡頁容許瀏覽。 */
 @media (min-width:701px) and (orientation:portrait) {
   html.math-canvas-mode .math-screen.active { height: 100%; min-height: 0; overflow: hidden; }
   html.math-canvas-mode #screen-math-galaxy.math-screen.active,
   html.math-canvas-mode #screen-math-earth-addition-select.math-screen.active,
-  html.math-canvas-mode #screen-math-earth-bonds-select.math-screen.active,
   html.math-canvas-mode #screen-math-moon-subtraction-select.math-screen.active,
   html.math-canvas-mode #screen-math-play.math-screen.active,
-  html.math-canvas-mode #screen-math-venus-play.math-screen.active,
-  html.math-canvas-mode #screen-math-mars-play.math-screen.active { height: auto; min-height: 100dvh; overflow: visible; }
+  html.math-canvas-mode #screen-math-venus-play.math-screen.active { height: auto; min-height: 100dvh; overflow: visible; }
 }

@@ -38,7 +38,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 | 書本掃描書架 | Chinese Lead（Chief 整合） | `book-scans/index.html`, `index.html`（共享）, `css/styles.css`（共享）, `scripts/check-invariants.py`（共享） | 2026-09-08 | 家長 PDF 書架；中文內容由 Chinese Lead，共享檔由 Chief 認領 |
 | 加減法操作流程統一第一階段 | Math Lead（Chief 整合） | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | 加法回答確認、拖曳防誤觸、桌面排位；共享檔由 Chief 整合 |
 | 加減法操作流程統一、回答確認、拖曳防誤觸及桌面版面 | Math Lead（Chief 整合） | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | 先操作後回答；共享檔由 Chief 整合 |
-| 數理全區 iPad 橫向版面及原生 emoji | Math Lead | `css/math.css`, `js/math-app.js` | 2026-09-16 | 所有數理頁面優先 landscape，善用畫布；數理物件用 Apple 原生 emoji |
+| 數學玩法縮至四星＋水星重做 | Math Lead（ChatGPT／Codex Chief 整合） | `index.html`, `js/math-*`, `css/math.css`, 數理測試、`scripts/check-invariants.py`, `docs/handover.md` | 2026-09-28 | Keith 指示只保留地球加法、月球減法、金星時鐘及全新水星數量玩法；其他星球、Number Bonds 從入口與流程下架。原 9/16 iPad 橫向工作納入此任務；未部署 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
 | 短描述 | Cursor／ChatGPT（Codex） | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |

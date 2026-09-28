@@ -1,33 +1,29 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import vm from 'node:vm';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const source = fs.readFileSync(path.join(root, 'js/math-app.js'), 'utf8');
-const css = fs.readFileSync(path.join(root, 'css/math.css'), 'utf8');
+const app = fs.readFileSync(path.join(root, 'js/math-app.js'), 'utf8');
+const skills = fs.readFileSync(path.join(root, 'js/math-skills.js'), 'utf8');
+const context = { window: {}, console };
+vm.createContext(context);
+vm.runInContext(skills, context);
 
-for (const id of ['sort', 'pattern', 'position', 'ordinal']) {
-  assert.match(source, new RegExp(`id: '${id}'`), `${id} backlog planet should be defined`);
-  // Ordinal uses the final generator branch after the three specialised branches.
-  if (id !== 'ordinal') {
-    assert.match(source, new RegExp(`if \\(planetId === '${id}'\\)`), `${id} should have a question generator`);
-  }
+const planets = [...context.window.KakaMathSkills.MATH_PLANETS];
+assert.deepEqual(planets.map((planet) => planet.body), ['mercury', 'venus', 'earth', 'moon']);
+assert.deepEqual(planets.map((planet) => planet.id), ['number-relations', 'time', 'compare-size', 'moon']);
+assert.equal(planets.length, 4, 'only the retained four math planets should appear in the galaxy');
+for (const retired of ['shape', 'sort', 'pattern', 'position', 'ordinal']) {
+  assert.ok(!planets.some((planet) => planet.id === retired), `${retired} must not be playable from the galaxy`);
 }
-assert.match(source, /BACKLOG_PATTERN_SETS = \[/, 'pattern question bank should exist');
-assert.match(source, /BACKLOG_POSITION_CELLS = \[/, 'position question bank should exist');
-assert.match(source, /BACKLOG_ORDINAL_ANIMALS = \[/, 'ordinal question bank should exist');
-assert.match(source, /backlogQuestionIndex >= 9/, 'every backlog mission should stop after ten questions');
-assert.match(source, /tryEarnStar\(\)/, 'correct backlog answers should use math stars');
-assert.match(source, /lightPlanet\(backlogPlanetId\)/, 'completed backlog mission should light its planet');
-assert.match(source, /mastery\.recordAttempt/, 'backlog answers should feed math mastery');
-assert.match(source, /mastery\.recordMission/, 'backlog rounds should record mission history');
-assert.match(source, /math-backlog-options/, 'backlog should render an answer area');
-assert.match(css, /\.math-backlog-options/, 'backlog answer area needs dedicated styles');
-assert.match(css, /@media \(max-width: 700px\)/, 'backlog needs a narrow viewport layout');
-assert.match(source, /choicesIncludingAnswer\(answer, distractors\)/, 'pattern choices must be built from the correct answer');
-assert.doesNotMatch(source, /sequence\[sequence\.length - 2\]/, 'the last visible pattern item is not necessarily the next answer');
-assert.match(source, /sequence: \['🔴', '🔵', '🔴', '🔵', null\], answer: '🔴'/, 'AB pattern must offer the next red circle');
-assert.doesNotMatch(source, /math-shape-sticker-shine/, 'shape stickers must not render a white shine patch');
+assert.match(app, /MATH_PLANETS\.find\(\(candidate\) => candidate\.id === planetId\)/);
+assert.match(app, /if \(!planet\) return openGalaxy\(\)/, 'stale planet IDs must return to the galaxy, not open Mercury');
+assert.doesNotMatch(app, /window\.KakaNumberBondsGame\.init/);
+assert.doesNotMatch(app, /openMars|openShape|openPattern|Backlog|BACKLOG|MARS_SHAPES/);
+assert.doesNotMatch(app, /screen-math-earth-bonds|btn-open-number-bonds/);
+assert.match(app, /const planet = MATH_PLANETS\.find/);
+assert.match(app, /if \(!planet\) return openGalaxy\(\)/);
 
-console.log('math-backlog tests: 18 passed');
+console.log('test-math-retired-planets: ok');

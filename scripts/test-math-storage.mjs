@@ -60,7 +60,7 @@ test('舊單一資料歸入卡卡，禧禧由零開始', () => {
     }),
   );
   assert.equal(S.loadState().totalStars, 42);
-  assert.equal(S.SCHEMA_VERSION, 5);
+  assert.equal(S.SCHEMA_VERSION, 6);
   assert.equal(S.loadState().currentPlanetId, 'time');
   assert.deepEqual(S.loadState().skillProgress, {});
   assert.deepEqual([...S.loadState().mistakeHistory], []);
@@ -97,7 +97,7 @@ test('v3 Profile 資料升級 v4，保留原有加法與星球進度', () => {
   assert.equal(state.additionProgress.unlockedBase, 7);
   assert.deepEqual([...state.additionProgress.completedMissions], ['5-1']);
   assert.deepEqual(state.skillProgress, {});
-  assert.equal(JSON.parse(localStorage.getItem('kaka-math-v1')).schemaVersion, 5);
+  assert.equal(JSON.parse(localStorage.getItem('kaka-math-v1')).schemaVersion, 6);
 });
 
 test('新學習紀錄按 Profile 分倉並限制歷史長度', () => {
@@ -143,6 +143,17 @@ test('卡卡／禧禧數理進度完全隔離', () => {
   S.setActiveProfile('kaka');
   assert.equal(S.loadState().totalStars, 1);
   assert.deepEqual([...S.loadState().litPlanetIds], ['number-relations']);
+});
+
+test('新水星數數進度與舊數線進度分開保存', () => {
+  const { S } = loadMathStorage();
+  S.updateState({
+    numberRelationsProgress: { completedRounds: 12, lastCompletedAt: 'old', questionTypeCounts: { 'number-line': 12 } },
+    mercuryCountProgress: { completedRounds: 2, lastCompletedAt: 'new' },
+  });
+  const saved = S.loadState();
+  assert.equal(saved.numberRelationsProgress.completedRounds, 12);
+  assert.equal(saved.mercuryCountProgress.completedRounds, 2);
 });
 
 test('加法進度：完成關卡解鎖下一關、點亮地球', () => {
@@ -218,6 +229,7 @@ test('舊 count 點亮唔承繼 number-relations', () => {
   assert.ok(state.litPlanetIds.includes('time'));
   assert.equal(state.retiredPlanetProgress.countLit, true);
   assert.equal(state.numberRelationsProgress.completedRounds, 0);
+  assert.equal(state.mercuryCountProgress.completedRounds, 0);
 });
 
 console.log(`\n${passed} passed`);

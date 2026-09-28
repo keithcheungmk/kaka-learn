@@ -115,7 +115,7 @@ test('M7 pickSkillForReview 按 bucket 權重揀技能', () => {
   assert(reviewHits >= 30, `review bucket 應優先，而家 ${reviewHits}/40`);
 });
 
-test('M8 summarizeMathProgress 列出要練技能', () => {
+test('M8 summarizeMathProgress 只總結水星保留嘅數數技能', () => {
   const state = {
     skillProgress: {
       'count.oneToOne.1to5': { status: 'learning', attempts: 3, firstTryCorrect: 1, recentResults: [] },
@@ -124,11 +124,11 @@ test('M8 summarizeMathProgress 列出要練技能', () => {
     missionHistory: [{ missionId: 'a' }, { missionId: 'b' }],
   };
   const summary = M.summarizeMathProgress(state, M.MERCURY_SKILL_IDS);
-  assert.equal(summary.counts.mastered, 1);
+  assert.equal(summary.counts.mastered, 0, '已退役嘅心算技能唔應冒充水星掌握進度');
   assert.equal(summary.counts.learning, 1);
   assert.equal(summary.needPractice.length, 1);
   assert.equal(summary.missions, 2);
-  assert.match(summary.summaryLine, /掌握 1/);
+  assert.match(summary.summaryLine, /掌握 0/);
 });
 
 console.log(`\n${passed} passed`);

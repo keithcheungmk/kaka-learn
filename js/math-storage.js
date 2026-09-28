@@ -1,7 +1,7 @@
 /** 數理探險 — localStorage v4（kaka-math-v1；同認字 kaka-learn-v1 分開） */
 (function () {
   const STORAGE_KEY = 'kaka-math-v1';
-  const SCHEMA_VERSION = 5;
+  const SCHEMA_VERSION = 6;
   const PROFILE_IDS = ['kaka', 'heihei'];
 
   function todayKey() {
@@ -40,6 +40,10 @@
       lastCompletedAt: null,
       questionTypeCounts: {},
     },
+    mercuryCountProgress: {
+      completedRounds: 0,
+      lastCompletedAt: null,
+    },
     retiredPlanetProgress: {
       countLit: false,
       timeLit: false,
@@ -77,6 +81,10 @@
         completedRounds: 0,
         lastCompletedAt: null,
         questionTypeCounts: {},
+      },
+      mercuryCountProgress: {
+        completedRounds: 0,
+        lastCompletedAt: null,
       },
       retiredPlanetProgress: {
         countLit: false,
@@ -171,6 +179,16 @@
           typeof out.numberRelationsProgress.questionTypeCounts === 'object'
             ? { ...out.numberRelationsProgress.questionTypeCounts }
             : {},
+      };
+    }
+    if (!out.mercuryCountProgress || typeof out.mercuryCountProgress !== 'object') {
+      out.mercuryCountProgress = { completedRounds: 0, lastCompletedAt: null };
+    } else {
+      out.mercuryCountProgress = {
+        completedRounds: Number.isFinite(out.mercuryCountProgress.completedRounds)
+          ? Math.max(0, Math.floor(out.mercuryCountProgress.completedRounds))
+          : 0,
+        lastCompletedAt: out.mercuryCountProgress.lastCompletedAt || null,
       };
     }
     if (!out.skillProgress || typeof out.skillProgress !== 'object' || Array.isArray(out.skillProgress)) {

@@ -550,67 +550,48 @@ def check_math_boot_guard() -> None:
         fail("math-boot", "math-app.js 開頭冇 try/catch 保護，掛咗會拖冧成頁")
 
 
-def check_math_number_relations() -> None:
-    """水星數字關係數軸：取代舊點數／補給站；金星睇鐘保留。"""
-    for rel in [
-        "js/math-number-line-data.js",
-        "js/math-number-line-game.js",
-        "css/math-number-line.css",
-    ]:
-        if not Path(rel).exists():
-            fail("math-number-relations", f"缺少 {rel}")
+def check_math_planets_scope() -> None:
+    """只保留四個核心數理入口；水星為新手數量辨認，舊路線不得復活。"""
     html = read("index.html")
-    if "math-manipulatives.css" in html or "math-mercury-missions.js" in html or "math-question-engine.js" in html:
-        fail("math-number-relations", "index.html 仍載入已撤嘅舊水星 manipulative／missions／question-engine")
-    if "screen-math-fuel" in html or "screen-math-count" in html or "btn-math-mode-fuel" in html:
-        fail("math-number-relations", "index.html 仍有舊水星 fuel／count screens")
-    if "screen-math-relations-learn" not in html or "screen-math-relations-play" not in html:
-        fail("math-number-relations", "index.html 缺少數字關係 screens")
-    if "btn-math-relations-answer" not in html or "btn-math-relations-start-mission" not in html:
-        fail("math-number-relations", "index.html 缺少回答／開始10題掣")
-    if "math-number-line-data.js" not in html or "math-number-line-game.js" not in html:
-        fail("math-number-relations", "index.html 未載入數軸 data／game")
-    if "math-venus-balance.js" in html or "screen-math-venus-balance" in html:
-        fail("math-number-relations", "金星公平分享已撤，唔應再載入 balance script／screen")
-    if "screen-math-venus-learn" not in html or "screen-math-time" not in html:
-        fail("math-number-relations", "index.html 缺少金星睇鐘 screens")
-    if "screen-math-mars-learn" not in html or "screen-math-pattern" not in html:
-        fail("math-number-relations", "index.html 缺少火星形狀／規律 screens")
-    if "btn-math-mode-time-digital" not in html:
-        fail("math-number-relations", "index.html 缺少電子鐘玩法掣")
-    app = read("js/math-app.js")
-    if "KakaMathMercuryMissions" in app or "KakaMathQuestionEngine" in app:
-        fail("math-number-relations", "math-app.js 仍引用舊水星 missions／question engine")
-    if "KakaMathNumberLineGame" not in app:
-        fail("math-number-relations", "math-app.js 未整合 KakaMathNumberLineGame")
-    if "KakaMathVenusBalance" in app:
-        fail("math-number-relations", "math-app.js 仍引用已撤嘅金星公平分享")
-    if "openVenusLearn" not in app or "openMarsLearn" not in app:
-        fail("math-number-relations", "math-app.js 缺少 openVenusLearn／openMarsLearn")
-    if "MARS_PATTERN_ANIMALS" in app or "MARS_CORE_SHAPES" not in app:
-        fail("mars-shapes", "火星規律必須使用已學形狀；動物規律不可混入火星題庫")
-    if "digitalClockHtml" not in app:
-        fail("math-number-relations", "math-app.js 缺少電子鐘 digitalClockHtml")
-    if "number-relations" not in app:
-        fail("math-number-relations", "math-app.js 缺少 number-relations routing")
+    app = strip_js_comments(read("js/math-app.js"))
     skills = read("js/math-skills.js")
-    if "數字關係" not in skills or "睇鐘" not in skills or "形狀・規律" not in skills:
-        fail("math-number-relations", "math-skills.js 水星應係數字關係、金星睇鐘、火星形狀・規律")
-    if "id: 'count'" in skills or "compare-qty" in skills:
-        fail("math-number-relations", "math-skills.js 唔應再有舊 count／compare-qty planet")
+    data = read("js/math-mercury-count-data.js")
+    game = read("js/math-mercury-count-game.js")
     storage = read("js/math-storage.js")
-    if "SCHEMA_VERSION = 5" not in storage:
-        fail("math-number-relations", "math-storage.js 應升到 schema v5")
-    if "numberRelationsProgress" not in storage or "retiredPlanetProgress" not in storage:
-        fail("math-number-relations", "math-storage.js 缺少 numberRelations／retired 進度")
-    if "currentPlanetId === 'count'" not in storage:
-        fail("math-number-relations", "math-storage.js 缺少 count → number-relations 遷移")
     mastery = read("js/math-mastery.js")
-    if "RELATION_SKILL_IDS" not in mastery or "pickSkillForReview" not in mastery or "summarizeMathProgress" not in mastery:
-        fail("math-number-relations", "math-mastery.js 缺少 RELATION_SKILL_IDS／摘要 API")
-    data = read("js/math-number-line-data.js")
-    if "generateMission" not in data or "validateAnswer" not in data:
-        fail("math-number-relations", "數軸 data 缺少 generateMission／validateAnswer")
+
+    for rel in ("js/math-mercury-count-data.js", "js/math-mercury-count-game.js"):
+        if not Path(rel).exists() or rel not in html:
+            fail("math-planets", f"缺少或未載入 {rel}")
+    for retired in ("shape", "sort", "pattern", "position", "ordinal"):
+        if re.search(rf"id:\s*'{retired}'", skills):
+            fail("math-planets", f"已下架嘅 {retired} 星球仍喺入口資料")
+    if "number-relations" not in skills or "compare-size" not in skills or "id: 'time'" not in skills or "id: 'moon'" not in skills:
+        fail("math-planets", "水星、地球、金星、月球四個保留入口唔齊")
+    for token in ("screen-math-mars", "screen-math-shape", "screen-math-pattern", "screen-math-earth-bonds", "numberBonds"):
+        if token in html:
+            fail("math-planets", f"index.html 仲有已移除玩法 {token}")
+    for token in ("openMars", "openBacklog", "BACKLOG_PLANETS", "KakaNumberBondsGame", "math-number-line"):
+        if token in app or token in html:
+            fail("math-planets", f"舊數理路線仍可被執行：{token}")
+    if "math-number-line.css" in html or "math-number-line-game.js" in html or "numberBondsGame.js" in html:
+        fail("math-planets", "index.html 仍載入已退役數軸／Number Bonds 模組")
+    if "screen-math-relations-learn" not in html or "screen-math-relations-play" not in html:
+        fail("math-planets", "index.html 缺少水星數數教學／遊戲畫面")
+    if "openLearn" not in app or "KakaMathMercuryCountGame" not in app:
+        fail("math-planets", "math-app.js 未將水星路由到新數數遊戲")
+    if "generateMission" not in data or "count-objects" not in data or "mercuryCountProgress" not in data:
+        fail("math-planets", "水星題庫缺少數物件題或獨立進度")
+    if "numberRelationsProgress" not in storage or "mercuryCountProgress" not in storage or "SCHEMA_VERSION = 6" not in storage:
+        fail("math-planets", "數理儲存未保留舊數線紀錄並加入水星新進度")
+    if "count.oneToOne.1to5" not in mastery or "count.oneToOne.1to10" not in mastery:
+        fail("math-planets", "數理掌握度未登記水星數數技能")
+    if "btn-math-mode-time-digital" not in html or "btn-math-mode-time-set" not in html:
+        fail("math-planets", "金星電子鐘或轉鐘玩法掣被移除")
+    if "screen-math-moon-subtraction-play" not in html or "screen-math-earth-addition-play" not in html:
+        fail("math-planets", "月球減法或地球加法畫面被移除")
+    if "next.disabled = true" not in game or "speak(question.spokenCorrect" not in game:
+        fail("math-planets", "水星答啱後未有等待語音再提供下一步")
 
 
 
@@ -939,7 +920,7 @@ CHECKS = [
     check_module_isolation,
     check_addition_planet,
     check_math_boot_guard,
-    check_math_number_relations,
+    check_math_planets_scope,
     check_asset_refs,
     check_asset_manifests,
     check_image_formats,

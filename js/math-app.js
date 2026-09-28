@@ -16,7 +16,7 @@
   }
 
   function bootMath() {
-    if (!window.KakaMathStorage || !window.KakaMathSkills || !window.KakaMathNumberLineData || !window.KakaMathNumberLineGame || !window.KakaAdditionData || !window.KakaAdditionGame || !window.KakaNumberBondsData || !window.KakaNumberBondsGame) {
+    if (!window.KakaMathStorage || !window.KakaMathSkills || !window.KakaMathMercuryCountData || !window.KakaMathMercuryCountGame || !window.KakaAdditionData || !window.KakaAdditionGame) {
       console.error('KakaMath: math modules missing.');
       disableMathEntry();
       return;
@@ -64,110 +64,6 @@
       { ...clockItem(2, true), learnSay: '電子鐘寫住 2:30，就係兩點半。' },
     ];
 
-    /** 火星只教形狀：以一致的貼紙式 SVG 呈現，不混入動物規律。 */
-    const MARS_SHAPES = [
-      { id: 'circle', name: '圓形', core: true, learnSay: '呢個係圓形。圓圓哋，冇角。' },
-      { id: 'oval', name: '橢圓形', core: true, learnSay: '呢個係橢圓形。好似一隻拉長咗嘅蛋。' },
-      { id: 'triangle', name: '三角形', core: true, learnSay: '呢個係三角形。有三個角。' },
-      { id: 'square', name: '正方形', core: true, learnSay: '呢個係正方形。四條邊一樣長。' },
-      { id: 'rectangle', name: '長方形', core: true, learnSay: '呢個係長方形。有兩條長邊、兩條短邊。' },
-      { id: 'diamond', name: '菱形', learnSay: '呢個係菱形。四條邊一樣長，斜斜哋站住。' },
-      { id: 'parallelogram', name: '平行四邊形', learnSay: '呢個係平行四邊形。對面兩條邊永遠平行。' },
-      { id: 'trapezoid', name: '梯形', learnSay: '呢個係梯形。上面同下面係平行嘅。' },
-      { id: 'pentagon', name: '五邊形', learnSay: '呢個係五邊形。有五條邊、五個角。' },
-      { id: 'hexagon', name: '六邊形', learnSay: '呢個係六邊形。有六條邊、六個角。' },
-    ];
-    const MARS_CORE_SHAPES = MARS_SHAPES.filter((shape) => shape.core);
-
-    const MARS_LEARN_CARDS = [
-      ...MARS_SHAPES.map((shape) => ({ kind: 'shape', shape, learnSay: shape.learnSay })),
-      {
-        kind: 'pattern',
-        sequence: [MARS_CORE_SHAPES[0], MARS_CORE_SHAPES[3], MARS_CORE_SHAPES[0], MARS_CORE_SHAPES[3]],
-        learnSay: '圓形、正方形、圓形、正方形……下一個又係圓形。形狀可以跟住次序排隊。',
-      },
-      {
-        kind: 'pattern',
-        sequence: [MARS_CORE_SHAPES[2], MARS_CORE_SHAPES[2], MARS_CORE_SHAPES[1], MARS_CORE_SHAPES[2], MARS_CORE_SHAPES[2], MARS_CORE_SHAPES[1]],
-        learnSay: '三角形、三角形、橢圓形，再三角形、三角形、橢圓形……跟住又係三角形。',
-      },
-    ];
-
-    /**
-     * Phase 1 backlog planets：每粒都係獨立十題短任務，先用具體圖像／格仔，
-     * 唔依賴中文認字題庫；畫面由本檔動態建立，避免撞 shared index.html。
-     */
-    const BACKLOG_PLANETS = {
-      sort: {
-        id: 'sort', name: '木星', skill: '分類',
-        learn: [
-          { title: '一樣嘅放埋一齊', say: '水果同水果放埋一齊，動物同動物放埋一齊。', visual: '<div class="math-backlog-pair"><span>🍎 🍌</span><span>🐶 🐱</span></div>' },
-          { title: '睇清楚物件', say: '先睇物件係乜，再揀佢應該去邊一盒。', visual: '<div class="math-backlog-example">🍎 → <b>水果</b><br />🐶 → <b>動物</b></div>' },
-          { title: '準備分類', say: '聽題目，將每一件物件放入正確嘅分類。', visual: '<div class="math-backlog-bins"><span>🍎 水果</span><span>🐶 動物</span></div>' },
-        ],
-      },
-      pattern: {
-        id: 'pattern', name: '土星', skill: '規律',
-        learn: [
-          { title: '規律會重複', say: '紅、藍、紅、藍，係一個 AB 規律。', visual: '<div class="math-backlog-sequence"><span>🔴</span><span>🔵</span><span>🔴</span><span>🔵</span></div>' },
-          { title: '搵下一個', say: '由左至右睇，下一個要跟返原本嘅次序。', visual: '<div class="math-backlog-sequence"><span>🐰</span><span>🐥</span><span>🐰</span><span>🐥</span><span>？</span></div>' },
-          { title: '唔同規律都可以', say: '有時係兩個一組，有時係三個一組；都要睇清楚先揀。', visual: '<div class="math-backlog-sequence"><span>🍎</span><span>🍌</span><span>🍇</span><span>🍎</span><span>🍌</span><span>？</span></div>' },
-        ],
-      },
-      position: {
-        id: 'position', name: '天王星', skill: '位置',
-        learn: [
-          { title: '上面同下面', say: '星星喺上面，月亮喺下面。', visual: '<div class="math-backlog-position-demo"><span>⭐</span><span>🌙</span></div>' },
-          { title: '左邊同右邊', say: '由左至右睇，先係左邊，再係右邊。', visual: '<div class="math-backlog-position-demo is-row"><span>⭐</span><span>🌙</span></div>' },
-          { title: '中間位置', say: '三格入面，中間就係第二格。', visual: '<div class="math-backlog-grid-demo"><i></i><b>⭐</b><i></i></div>' },
-        ],
-      },
-      ordinal: {
-        id: 'ordinal', name: '海王星', skill: '序數',
-        learn: [
-          { title: '排隊有次序', say: '由左至右數：第一、第二、第三。', visual: '<div class="math-backlog-queue"><span>1️⃣ 🐰</span><span>2️⃣ 🐶</span><span>3️⃣ 🐱</span></div>' },
-          { title: '問第幾個', say: '見到隊伍，逐個由左至右數，就知道第幾個。', visual: '<div class="math-backlog-queue"><span>🐰</span><span>🐶</span><span class="is-target">🐱</span><span>🐸</span></div>' },
-          { title: '準備搵答案', say: '聽清楚係第一、第二、第三、第四定第五。', visual: '<div class="math-backlog-queue"><span>🐰</span><span>🐶</span><span>🐱</span><span>🐸</span><span>🐥</span></div>' },
-        ],
-      },
-    };
-
-    const BACKLOG_SORT_ITEMS = [
-      { emoji: '🍎', name: '蘋果', category: '水果' }, { emoji: '🍌', name: '香蕉', category: '水果' },
-      { emoji: '🐶', name: '小狗', category: '動物' }, { emoji: '🐱', name: '小貓', category: '動物' },
-      { emoji: '🚗', name: '汽車', category: '交通工具' }, { emoji: '🚌', name: '巴士', category: '交通工具' },
-      { emoji: '🧸', name: '玩偶', category: '玩具' }, { emoji: '⚽', name: '足球', category: '玩具' },
-    ];
-    const BACKLOG_CATEGORIES = ['水果', '動物', '交通工具', '玩具'];
-    // Keep the answer beside each sequence.  It is tempting to infer it from
-    // the last visible item, but that is wrong for a sequence such as red,
-    // blue, red, blue, ?.  The explicit answer is also used when building the
-    // choices, so a correct option can never disappear from the answer area.
-    const BACKLOG_PATTERN_SETS = [
-      { sequence: ['🔴', '🔵', '🔴', '🔵', null], answer: '🔴' },
-      { sequence: ['🐰', '🐥', '🐰', '🐥', null], answer: '🐰' },
-      { sequence: ['🍎', '🍌', '🍇', '🍎', '🍌', null], answer: '🍇' },
-      { sequence: ['⭐', '🌙', '☀️', '⭐', '🌙', null], answer: '☀️' },
-      { sequence: ['🟩', '🟨', '🟩', '🟨', null], answer: '🟩' },
-      { sequence: ['🐶', '🐶', '🐱', '🐶', '🐶', null], answer: '🐱' },
-      { sequence: ['🍓', '🍓', '🍊', '🍓', '🍓', null], answer: '🍊' },
-      { sequence: ['🔺', '⚪', '🔺', '⚪', null], answer: '🔺' },
-      { sequence: ['🚀', '🪐', '🌙', '🚀', '🪐', null], answer: '🌙' },
-      { sequence: ['🦁', '🐯', '🦁', '🐯', null], answer: '🦁' },
-    ];
-    const BACKLOG_POSITION_CELLS = [
-      { answer: '上面', index: 1 }, { answer: '下面', index: 7 }, { answer: '左邊', index: 3 },
-      { answer: '右邊', index: 5 }, { answer: '中間', index: 4 }, { answer: '上面', index: 0 },
-      { answer: '下面', index: 8 }, { answer: '左邊', index: 6 }, { answer: '右邊', index: 2 }, { answer: '中間', index: 4 },
-    ];
-    const BACKLOG_ORDINAL_ANIMALS = [
-      ['🐰', '🐶', '🐱', '🐸', '🐥'], ['🐶', '🐱', '🐸', '🐥', '🐰'],
-      ['🐱', '🐸', '🐥', '🐰', '🐶'], ['🐸', '🐥', '🐰', '🐶', '🐱'],
-      ['🐥', '🐰', '🐶', '🐱', '🐸'], ['🐰', '🐸', '🐶', '🐥', '🐱'],
-      ['🐱', '🐥', '🐰', '🐸', '🐶'], ['🐶', '🐰', '🐥', '🐱', '🐸'],
-      ['🐸', '🐶', '🐱', '🐰', '🐥'], ['🐥', '🐱', '🐸', '🐶', '🐰'],
-    ];
-
     const $ = (sel, root = document) => root.querySelector(sel);
 
     const screens = {
@@ -177,18 +73,11 @@
       relationsPlay: '#screen-math-relations-play',
       additionSelect: '#screen-math-earth-addition-select',
       additionPlay: '#screen-math-earth-addition-play',
-      bondsSelect: '#screen-math-earth-bonds-select',
-      bondsPlay: '#screen-math-earth-bonds-play',
       subtractionSelect: '#screen-math-moon-subtraction-select',
       subtractionPlay: '#screen-math-moon-subtraction-play',
       vlearn: '#screen-math-venus-learn',
       vplay: '#screen-math-venus-play',
       time: '#screen-math-time',
-      marsLearn: '#screen-math-mars-learn',
-      marsPlay: '#screen-math-mars-play',
-      shape: '#screen-math-shape',
-      pattern: '#screen-math-pattern',
-      backlog: '#screen-math-backlog',
     };
 
     let vLearnIndex = 0;
@@ -198,19 +87,6 @@
     let timeMode = 'analog';
     let timeSetSelection = { h: 12, minute: 0 };
     let timeSetActiveHand = 'hour';
-    let marsLearnIndex = 0;
-    let shapeBusy = false;
-    let shapeRound = null;
-    let shapeCorrect = 0;
-    let patternBusy = false;
-    let patternRound = null;
-    let patternCorrect = 0;
-    let backlogPlanetId = null;
-    let backlogLearnIndex = 0;
-    let backlogQuestionIndex = 0;
-    let backlogCorrect = 0;
-    let backlogRound = null;
-    let backlogBusy = false;
     let warpFromPlanet = null;
     let warpToPlanet = null;
     let warpTimer = null;
@@ -235,7 +111,7 @@
       const sel = screens[name] || screens.galaxy;
       const el = $(sel);
       el?.classList.add('active');
-      if (['relationsPlay', 'additionPlay', 'bondsPlay', 'time', 'shape', 'pattern', 'backlog'].includes(name)) {
+      if (['relationsPlay', 'additionPlay', 'time'].includes(name)) {
         const fx = window.KakaStarFx;
         fx?.mountPlayScreen?.(el);
         fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
@@ -310,41 +186,6 @@
       return `<div class="math-digital-clock${small ? ' math-digital-clock--small' : ''}" role="img" aria-label="${item.say}"><span class="math-digital-digits">${text}</span></div>`;
     }
 
-    function shapeSvgHtml(id) {
-      const shapes = {
-        circle: '<circle class="math-shape-sticker-body" cx="50" cy="50" r="35" />',
-        oval: '<ellipse class="math-shape-sticker-body" cx="50" cy="50" rx="39" ry="27" />',
-        triangle: '<path class="math-shape-sticker-body" d="M50 13 88 82H12Z" />',
-        square: '<rect class="math-shape-sticker-body" x="18" y="18" width="64" height="64" rx="8" />',
-        rectangle: '<rect class="math-shape-sticker-body" x="10" y="27" width="80" height="46" rx="8" />',
-        diamond: '<path class="math-shape-sticker-body" d="M50 10 90 50 50 90 10 50Z" />',
-        parallelogram: '<path class="math-shape-sticker-body" d="M28 20H88L72 80H12Z" />',
-        trapezoid: '<path class="math-shape-sticker-body" d="M30 20H70L88 80H12Z" />',
-        pentagon: '<path class="math-shape-sticker-body" d="M50 10 88 38 74 83H26L12 38Z" />',
-        hexagon: '<path class="math-shape-sticker-body" d="M27 14H73L91 50 73 86H27L9 50Z" />',
-      };
-      return `<svg class="math-shape-sticker-svg" viewBox="0 0 100 100" focusable="false" aria-hidden="true">${shapes[id] || shapes.circle}</svg>`;
-    }
-
-    function shapeGlyphHtml(shape, extraClass = '') {
-      return `<span class="math-shape-glyph math-shape-glyph--${shape.id} ${extraClass}" aria-hidden="true">${shapeSvgHtml(shape.id)}</span>`;
-    }
-
-    function patternGlyphHtml(shape) {
-      return shapeGlyphHtml(shape);
-    }
-
-    function patternCellsHtml(sequence, { blankLast = false } = {}) {
-      return sequence
-        .map((item, i) => {
-          const empty = item == null || (blankLast && i === sequence.length - 1);
-          if (empty) return `<span class="math-pattern-cell is-blank" aria-label="缺格">？</span>`;
-          return `<span class="math-pattern-cell">${patternGlyphHtml(item)}</span>`;
-        })
-        .join('');
-    }
-
-
     function flashStarBurst() {
       const burst = $('#star-burst');
       if (!burst) return;
@@ -383,245 +224,6 @@
       playMathStarReward();
       $('#btn-math-round-again').onclick = () => { overlay.hidden = true; onAgain?.(); };
       $('#btn-math-round-galaxy').onclick = () => { overlay.hidden = true; openGalaxy(); };
-    }
-
-    function ensureBacklogScreen() {
-      if ($('#screen-math-backlog')) return;
-      const app = $('#app');
-      if (!app) throw new Error('KakaMath: #app missing for backlog screen');
-      const screen = document.createElement('section');
-      screen.id = 'screen-math-backlog';
-      screen.className = 'screen math-screen math-backlog-screen';
-      screen.setAttribute('aria-label', '數理星球任務');
-      screen.innerHTML = `
-        <div class="game-header math-backlog-header">
-          <button type="button" class="btn btn-ghost" id="btn-back-math-backlog">← 銀河</button>
-          <h1 id="math-backlog-title">數理星球</h1>
-          <div class="progress-pill"><strong id="math-backlog-progress">先學一學</strong></div>
-        </div>
-        <div class="math-backlog-learn" id="math-backlog-learn">
-          <p class="section-lead" id="math-backlog-learn-lead">先學一學，再挑戰十題。</p>
-          <button type="button" class="math-learn-stage math-backlog-learn-stage" id="math-backlog-learn-tap" aria-label="再聽一次">
-            <div id="math-backlog-learn-visual" class="math-backlog-learn-visual"></div>
-            <div id="math-backlog-learn-say" class="math-venus-say"></div>
-            <div class="learn-hear">🔊 聽一聽</div>
-          </button>
-          <div class="btn-row">
-            <button type="button" class="btn btn-ghost" id="btn-math-backlog-learn-prev">← 上一張</button>
-            <button type="button" class="btn btn-secondary" id="btn-math-backlog-learn-next">下一張 →</button>
-          </div>
-          <div class="btn-row" id="math-backlog-learn-finish-row">
-            <button type="button" class="btn" id="btn-math-backlog-start">學完喇・開始十題</button>
-          </div>
-        </div>
-        <div class="math-backlog-play" id="math-backlog-play" hidden>
-          <p class="section-lead" id="math-backlog-play-lead">第 1 / 10 題</p>
-          <div class="prompt-box">
-            <p id="math-backlog-prompt"></p>
-            <button type="button" class="speak-btn" id="btn-math-backlog-speak" aria-label="再聽一次">🔊 再聽一次</button>
-          </div>
-          <div id="math-backlog-visual" class="math-backlog-visual"></div>
-          <div id="math-backlog-options" class="math-backlog-options" aria-label="答案選項"></div>
-          <p class="feedback" id="math-backlog-feedback" aria-live="polite"></p>
-          <button type="button" class="btn btn-ghost math-backlog-back-learn" id="btn-math-backlog-back-learn">← 再學一次</button>
-        </div>`;
-      app.appendChild(screen);
-
-      $('#btn-back-math-backlog').addEventListener('click', () => openGalaxy());
-      $('#math-backlog-learn-tap').addEventListener('click', () => speakBacklogLearn());
-      $('#btn-math-backlog-learn-prev').addEventListener('click', () => {
-        if (backlogLearnIndex <= 0) return;
-        backlogLearnIndex -= 1;
-        renderBacklogLearn(true);
-      });
-      $('#btn-math-backlog-learn-next').addEventListener('click', () => {
-        const cards = BACKLOG_PLANETS[backlogPlanetId]?.learn || [];
-        if (backlogLearnIndex >= cards.length - 1) return;
-        backlogLearnIndex += 1;
-        renderBacklogLearn(true);
-      });
-      $('#btn-math-backlog-start').addEventListener('click', () => openBacklogQuiz());
-      $('#btn-math-backlog-speak').addEventListener('click', () => {
-        if (backlogRound) speak(backlogRound.speak || backlogRound.prompt);
-      });
-      $('#btn-math-backlog-back-learn').addEventListener('click', () => openBacklogLearn(backlogPlanetId));
-    }
-
-    function backlogVisual(item) {
-      return `<span class="math-backlog-choice-visual" aria-hidden="true">${item.visual || item.emoji || item}</span><span>${item.label || item.name || item}</span>`;
-    }
-
-    function choicesIncludingAnswer(answer, distractors, count = 3) {
-      const choices = [answer, ...shuffle([...new Set(distractors.filter((item) => item !== answer))]).slice(0, count - 1)];
-      return shuffle(choices);
-    }
-
-    function makeBacklogQuestion(planetId, index) {
-      if (planetId === 'sort') {
-        const target = BACKLOG_SORT_ITEMS[index % BACKLOG_SORT_ITEMS.length];
-        const other = BACKLOG_CATEGORIES.find((category) => category !== target.category);
-        return {
-          skillId: 'sort.category', representation: 'concrete-category',
-          prompt: `「${target.name}」應該放入邊一盒？`, speak: `請將${target.name}放入正確嘅分類。`,
-          visual: `<div class="math-backlog-sort-target"><span>${target.emoji}</span><strong>${target.name}</strong></div>`,
-          options: shuffle([target.category, other]).map((label) => ({ value: label, label, visual: label === target.category ? '✅' : '📦' })),
-          answer: target.category,
-        };
-      }
-      if (planetId === 'pattern') {
-        const round = BACKLOG_PATTERN_SETS[index % BACKLOG_PATTERN_SETS.length];
-        const { sequence, answer } = round;
-        const distractors = BACKLOG_PATTERN_SETS.flatMap((item) => item.sequence).filter(Boolean);
-        return {
-          skillId: 'pattern.next', representation: 'visual-sequence',
-          prompt: '下一個係邊個？', speak: '請睇清楚規律，揀下一個。',
-          visual: `<div class="math-backlog-sequence">${sequence.map((item) => `<span class="${item == null ? 'is-blank' : ''}">${item || '？'}</span>`).join('')}</div>`,
-          options: choicesIncludingAnswer(answer, distractors).map((visual) => ({ value: visual, label: visual, visual })),
-          answer,
-        };
-      }
-      if (planetId === 'position') {
-        const target = BACKLOG_POSITION_CELLS[index % BACKLOG_POSITION_CELLS.length];
-        return {
-          skillId: 'position.grid', representation: 'nine-grid',
-          prompt: '星星喺邊度？', speak: `星星喺${target.answer}，揀返佢。`,
-          visual: `<div class="math-backlog-position-grid">${Array.from({ length: 9 }, (_, cell) => `<span class="${cell === target.index ? 'is-target' : ''}">${cell === target.index ? '⭐' : ''}</span>`).join('')}</div>`,
-          options: shuffle(['上面', '下面', '左邊', '右邊', '中間']).map((label) => ({ value: label, label, visual: label === target.answer ? '⭐' : '•' })),
-          answer: target.answer,
-        };
-      }
-      const order = BACKLOG_ORDINAL_ANIMALS[index % BACKLOG_ORDINAL_ANIMALS.length];
-      const ordinal = (index % 5) + 1;
-      const answer = order[ordinal - 1];
-      return {
-        skillId: 'ordinal.order.1to5', representation: 'animal-queue',
-        prompt: `邊個係第${ordinal}個？`, speak: `請揀第${ordinal}個小動物。`,
-        visual: `<div class="math-backlog-queue">${order.map((item, i) => `<span><small>${i + 1}</small>${item}</span>`).join('')}</div>`,
-        options: shuffle([answer, ...shuffle(order.filter((item) => item !== answer)).slice(0, 2)]).map((visual) => ({ value: visual, label: visual, visual })),
-        answer,
-      };
-    }
-
-    function renderBacklogLearn(autoSpeak) {
-      ensureBacklogScreen();
-      const config = BACKLOG_PLANETS[backlogPlanetId];
-      const card = config.learn[backlogLearnIndex];
-      $('#math-backlog-learn').hidden = false;
-      $('#math-backlog-play').hidden = true;
-      $('#math-backlog-title').textContent = `${config.name}・先學一學`;
-      $('#math-backlog-progress').textContent = `${backlogLearnIndex + 1}/${config.learn.length}`;
-      $('#math-backlog-learn-lead').textContent = `${config.skill}：先睇清楚，再試十題。`;
-      $('#math-backlog-learn-visual').innerHTML = card.visual;
-      $('#math-backlog-learn-say').textContent = card.title;
-      $('#btn-math-backlog-learn-prev').disabled = backlogLearnIndex <= 0;
-      $('#btn-math-backlog-learn-next').hidden = backlogLearnIndex >= config.learn.length - 1;
-      if (autoSpeak) speak(card.say);
-    }
-
-    function speakBacklogLearn() {
-      const config = BACKLOG_PLANETS[backlogPlanetId];
-      if (config) speak(config.learn[backlogLearnIndex].say);
-    }
-
-    function openBacklogLearn(planetId) {
-      if (!BACKLOG_PLANETS[planetId]) return openGalaxy();
-      ensureBacklogScreen();
-      backlogPlanetId = planetId;
-      backlogLearnIndex = 0;
-      backlogQuestionIndex = 0;
-      backlogCorrect = 0;
-      backlogBusy = false;
-      updateState({ currentPlanetId: planetId });
-      renderBacklogLearn(true);
-      showMathScreen('backlog');
-    }
-
-    function openBacklogQuiz() {
-      if (!BACKLOG_PLANETS[backlogPlanetId]) return openGalaxy();
-      backlogQuestionIndex = 0;
-      backlogCorrect = 0;
-      backlogBusy = false;
-      $('#math-backlog-learn').hidden = true;
-      $('#math-backlog-play').hidden = false;
-      nextBacklogQuestion(true);
-      showMathScreen('backlog');
-    }
-
-    function nextBacklogQuestion(autoSpeak) {
-      backlogRound = makeBacklogQuestion(backlogPlanetId, backlogQuestionIndex);
-      const config = BACKLOG_PLANETS[backlogPlanetId];
-      $('#math-backlog-title').textContent = `${config.name}・${config.skill}`;
-      $('#math-backlog-progress').textContent = `${backlogQuestionIndex + 1}/10`;
-      $('#math-backlog-play-lead').textContent = `第 ${backlogQuestionIndex + 1} / 10 題 · 答啱 ${backlogCorrect} 題`;
-      $('#math-backlog-prompt').textContent = backlogRound.prompt;
-      $('#math-backlog-visual').innerHTML = backlogRound.visual;
-      const options = $('#math-backlog-options');
-      options.replaceChildren();
-      backlogRound.options.forEach((item) => {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'math-backlog-option';
-        button.dataset.value = item.value;
-        button.innerHTML = backlogVisual(item);
-        button.addEventListener('click', () => onBacklogPick(item.value, button));
-        options.append(button);
-      });
-      $('#math-backlog-feedback').textContent = '';
-      if (autoSpeak) speak(backlogRound.speak);
-    }
-
-    function finishBacklogRound() {
-      const state = loadState();
-      lightPlanet(backlogPlanetId);
-      const withMission = mastery?.recordMission
-        ? mastery.recordMission(state, {
-          missionId: `${backlogPlanetId}.ten-question-round`, skillId: `${backlogPlanetId}.round`,
-          questionCount: 10, correct: backlogCorrect, completedAt: new Date().toISOString(),
-        })
-        : state;
-      updateState(withMission);
-      showMathRoundReward(`${BACKLOG_PLANETS[backlogPlanetId].name}十題完成！攞到${backlogCorrect}粒星！`, () => openBacklogQuiz());
-    }
-
-    function onBacklogPick(value, button) {
-      if (backlogBusy || !backlogRound) return;
-      backlogBusy = true;
-      const ok = value === backlogRound.answer;
-      const muted = isMuted();
-      const state = loadState();
-      const next = mastery?.recordAttempt
-        ? mastery.recordAttempt(state, {
-          skillId: backlogRound.skillId, firstTryCorrect: ok, assisted: false, hints: 0,
-          errorType: ok ? undefined : 'wrong-choice', answer: value, expected: backlogRound.answer,
-          representation: backlogRound.representation,
-        })
-        : state;
-      updateState(next);
-      const feedback = $('#math-backlog-feedback');
-      if (ok) {
-        button.classList.add('is-ok');
-        backlogCorrect += 1;
-        const { gained } = tryEarnStar();
-        if (gained) {
-          speech?.playStarCue?.({ muted });
-          playMathStarReward();
-        } else speech?.playCorrectCue?.({ muted });
-        feedback.textContent = '答啱咗！你搵到規律喇。';
-      } else {
-        button.classList.add('is-bad');
-        speech?.playTryAgainCue?.({ muted });
-        feedback.textContent = `再諗吓；答案係「${backlogRound.answer}」。`;
-      }
-      setTimeout(() => {
-        if (backlogQuestionIndex >= 9) {
-          backlogBusy = false;
-          finishBacklogRound();
-          return;
-        }
-        backlogQuestionIndex += 1;
-        backlogBusy = false;
-        nextBacklogQuestion(true);
-      }, ok ? 700 : 900);
     }
 
     function hideWarp() {
@@ -692,13 +294,12 @@
     }
 
     function openPlanet(planetId) {
-      const planet = getPlanetById(planetId);
+      const planet = MATH_PLANETS.find((candidate) => candidate.id === planetId);
+      if (!planet) return openGalaxy();
       updateState({ currentPlanetId: planet.id });
-      if (planet.id === 'number-relations') return window.KakaMathNumberLineGame.openLearn();
+      if (planet.id === 'number-relations') return window.KakaMathMercuryCountGame.openLearn();
       if (planet.id === 'compare-size') return window.KakaAdditionGame.openEarthAddition();
       if (planet.id === 'time') return openVenusLearn();
-      if (planet.id === 'shape') return openMarsLearn();
-      if (['sort', 'pattern', 'position', 'ordinal'].includes(planet.id)) return openBacklogLearn(planet.id);
       if (planet.id === 'moon') return window.KakaSubtractionGame?.openMoonSubtraction();
       openGalaxy();
     }
@@ -717,7 +318,7 @@
           btn.type = 'button';
           btn.className = `math-galaxy-card planet-${p.id}${lit ? ' is-lit' : ''}`;
           btn.dataset.planetId = p.id;
-          const playable = ['number-relations', 'compare-size', 'time', 'shape', 'moon', 'sort', 'pattern', 'position', 'ordinal'].includes(p.id);
+          const playable = ['number-relations', 'compare-size', 'time', 'moon'].includes(p.id);
           const status = playable ? (lit ? '已點亮' : '可以出發') : '準備中';
           btn.disabled = !playable;
           btn.setAttribute('aria-label', `${p.name}，${p.skill}，${status}`);
@@ -950,223 +551,6 @@
       }
     }
 
-    /* ---------- 火星・形狀＋推理 ---------- */
-    function openMarsLearn() {
-      updateState({ currentPlanetId: 'shape' });
-      marsLearnIndex = 0;
-      const title = $('#math-mars-learn-title');
-      if (title) title.textContent = '火星・先學';
-      renderMarsLearnCard(true);
-      showMathScreen('marsLearn');
-    }
-
-    function renderMarsLearnCard(autoSpeak) {
-      const card = MARS_LEARN_CARDS[marsLearnIndex];
-      const visual = $('#math-mars-learn-visual');
-      const say = $('#math-mars-learn-say');
-      if (card.kind === 'shape') {
-        if (visual) visual.innerHTML = shapeGlyphHtml(card.shape, 'is-hero');
-        if (say) say.textContent = card.shape.name;
-      } else {
-        if (visual) visual.innerHTML = `<div class="math-pattern-row">${patternCellsHtml(card.sequence)}</div>`;
-        if (say) say.textContent = '形狀排隊';
-      }
-      const progress = $('#math-mars-learn-progress');
-      if (progress) progress.textContent = `${marsLearnIndex + 1}/${MARS_LEARN_CARDS.length}`;
-      const prev = $('#btn-math-mars-learn-prev');
-      const next = $('#btn-math-mars-learn-next');
-      const finish = $('#math-mars-learn-finish-row');
-      if (prev) prev.disabled = marsLearnIndex <= 0;
-      if (next) next.hidden = marsLearnIndex >= MARS_LEARN_CARDS.length - 1;
-      if (finish) finish.hidden = marsLearnIndex < MARS_LEARN_CARDS.length - 1;
-      if (autoSpeak) speakMarsLearn();
-    }
-
-    function speakMarsLearn() {
-      speak(MARS_LEARN_CARDS[marsLearnIndex].learnSay);
-    }
-
-    function openMarsPlay() {
-      const stars = $('#math-mars-play-stars');
-      const state = loadState();
-      if (stars) stars.textContent = `${state.starsToday}/10`;
-      showMathScreen('marsPlay');
-    }
-
-    function openShapeQuiz() {
-      shapeBusy = false;
-      shapeCorrect = 0;
-      updateShapeProgress();
-      nextShapeRound(true);
-      showMathScreen('shape');
-    }
-
-    function updateShapeProgress() {
-      const el = $('#math-shape-progress');
-      if (el) el.textContent = `${shapeCorrect}/${LIT_TARGET}`;
-    }
-
-    function nextShapeRound(autoSpeak) {
-      const target = MARS_SHAPES[Math.floor(Math.random() * MARS_SHAPES.length)];
-      const options = shuffle([target, ...shuffle(MARS_SHAPES.filter((shape) => shape.id !== target.id)).slice(0, 3)]);
-      shapeRound = { target, options };
-      const prompt = $('#math-shape-prompt');
-      if (prompt) prompt.textContent = '呢個係咩形狀？';
-      const fb = $('#math-shape-feedback');
-      if (fb) fb.textContent = '';
-      const targetEl = $('#math-shape-target');
-      if (targetEl) targetEl.innerHTML = shapeGlyphHtml(target, 'is-hero');
-      const box = $('#math-shape-options');
-      if (box) {
-        box.innerHTML = '';
-        options.forEach((s) => {
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'btn btn-secondary math-mars-option';
-          btn.textContent = s.name;
-          btn.addEventListener('click', () => onShapePick(s.id, btn));
-          box.appendChild(btn);
-        });
-      }
-      if (autoSpeak) speak('呢個係咩形狀？');
-    }
-
-    function onShapePick(id, btn) {
-      if (shapeBusy || !shapeRound) return;
-      shapeBusy = true;
-      const muted = isMuted();
-      const fb = $('#math-shape-feedback');
-      const ok = id === shapeRound.target.id;
-      if (ok) {
-        btn.classList.add('is-ok');
-        const { gained } = tryEarnStar();
-        if (gained) {
-          speech?.playStarCue?.({ muted });
-          playMathStarReward();
-        } else {
-          speech?.playCorrectCue?.({ muted });
-        }
-        shapeCorrect += 1;
-        updateShapeProgress();
-        const praise = speech?.speakCorrectFeedback?.({ muted }) || '好叻呀！';
-        if (fb) fb.textContent = praise;
-        if (shapeCorrect >= LIT_TARGET) {
-          if (!isPlanetLit('shape')) lightPlanet('shape');
-          if (fb) fb.textContent = `${praise} 火星點亮喇！`;
-          setTimeout(() => {
-            shapeBusy = false;
-            showMathRoundReward('火星十題完成！你好叻呀！', openShapeQuiz);
-          }, 900);
-          return;
-        }
-        setTimeout(() => {
-          shapeBusy = false;
-          nextShapeRound(true);
-        }, 1000);
-      } else {
-        btn.classList.add('is-bad');
-        speech?.playTryAgainCue?.({ muted });
-        if (fb) fb.textContent = speech?.speakRetryFeedback?.({ muted }) || '試多次！';
-        setTimeout(() => {
-          btn.classList.remove('is-bad');
-          shapeBusy = false;
-        }, 700);
-      }
-    }
-
-    function openPatternQuiz() {
-      patternBusy = false;
-      patternCorrect = 0;
-      updatePatternProgress();
-      nextPatternRound(true);
-      showMathScreen('pattern');
-    }
-
-    function updatePatternProgress() {
-      const el = $('#math-pattern-progress');
-      if (el) el.textContent = `${patternCorrect}/${LIT_TARGET}`;
-    }
-
-    function makePatternRound() {
-      const pool = shuffle([...MARS_CORE_SHAPES]);
-      const a = pool[0];
-      const b = pool[1];
-      const c = pool[2];
-      if (Math.random() < 0.65) {
-        const sequence = [a, b, a, b, a, null];
-        return { sequence, answer: b, options: shuffle([b, a, c]) };
-      }
-      const sequence = [a, a, b, a, a, null];
-      return { sequence, answer: b, options: shuffle([b, a, c]) };
-    }
-
-    function nextPatternRound(autoSpeak) {
-      patternRound = makePatternRound();
-      const prompt = $('#math-pattern-prompt');
-      if (prompt) prompt.textContent = '下一個係咩形狀？';
-      const fb = $('#math-pattern-feedback');
-      if (fb) fb.textContent = '';
-      const row = $('#math-pattern-row');
-      if (row) row.innerHTML = patternCellsHtml(patternRound.sequence);
-      const box = $('#math-pattern-options');
-      if (box) {
-        box.innerHTML = '';
-        patternRound.options.forEach((s) => {
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'math-mars-option math-mars-option--glyph';
-          btn.setAttribute('aria-label', s.name);
-          btn.innerHTML = patternGlyphHtml(s);
-          btn.addEventListener('click', () => onPatternPick(s.id, btn));
-          box.appendChild(btn);
-        });
-      }
-      if (autoSpeak) speak('下一個係咩形狀？');
-    }
-
-    function onPatternPick(id, btn) {
-      if (patternBusy || !patternRound) return;
-      patternBusy = true;
-      const muted = isMuted();
-      const fb = $('#math-pattern-feedback');
-      const ok = id === patternRound.answer.id;
-      if (ok) {
-        btn.classList.add('is-ok');
-        const { gained } = tryEarnStar();
-        if (gained) {
-          speech?.playStarCue?.({ muted });
-          playMathStarReward();
-        } else {
-          speech?.playCorrectCue?.({ muted });
-        }
-        patternCorrect += 1;
-        updatePatternProgress();
-        const praise = speech?.speakCorrectFeedback?.({ muted }) || '好叻呀！';
-        if (fb) fb.textContent = praise;
-        if (patternCorrect >= LIT_TARGET) {
-          if (!isPlanetLit('shape')) lightPlanet('shape');
-          if (fb) fb.textContent = `${praise} 火星點亮喇！`;
-          setTimeout(() => {
-            patternBusy = false;
-            showMathRoundReward('形狀排隊十題完成！你好叻呀！', openPatternQuiz);
-          }, 900);
-          return;
-        }
-        setTimeout(() => {
-          patternBusy = false;
-          nextPatternRound(true);
-        }, 1000);
-      } else {
-        btn.classList.add('is-bad');
-        speech?.playTryAgainCue?.({ muted });
-        if (fb) fb.textContent = speech?.speakRetryFeedback?.({ muted }) || '試多次！';
-        setTimeout(() => {
-          btn.classList.remove('is-bad');
-          patternBusy = false;
-        }, 700);
-      }
-    }
-
     function bind() {
       const start = $('#btn-start-math');
       if (!start) {
@@ -1176,9 +560,6 @@
       start.addEventListener('click', () => openGalaxy());
 
       $('#btn-back-math-galaxy')?.addEventListener('click', () => goHome());
-      $('#btn-open-number-bonds')?.addEventListener('click', () => window.KakaNumberBondsGame.openSelect());
-      $('#btn-back-math-bonds-select')?.addEventListener('click', () => window.KakaAdditionGame.openEarthAddition());
-      $('#btn-back-math-bonds-play')?.addEventListener('click', () => window.KakaNumberBondsGame.openSelect());
       $('#btn-math-warp-go')?.addEventListener('click', () => finishWarpGo());
       $('#btn-math-warp-stay')?.addEventListener('click', () => finishWarpStay());
 
@@ -1209,29 +590,6 @@
       $('#btn-math-time-hand-hour')?.addEventListener('click', () => { if (timeMode === 'set' && !timeBusy) { timeSetActiveHand = 'hour'; renderTimeSetFace(); } });
       $('#btn-math-time-hand-minute')?.addEventListener('click', () => { if (timeMode === 'set' && !timeBusy) { timeSetActiveHand = 'minute'; renderTimeSetFace(); } });
 
-      $('#btn-back-math-mars-learn')?.addEventListener('click', () => openGalaxy());
-      $('#math-mars-learn-tap')?.addEventListener('click', () => speakMarsLearn());
-      $('#btn-math-mars-learn-prev')?.addEventListener('click', () => {
-        if (marsLearnIndex <= 0) return;
-        marsLearnIndex -= 1;
-        renderMarsLearnCard(true);
-      });
-      $('#btn-math-mars-learn-next')?.addEventListener('click', () => {
-        if (marsLearnIndex >= MARS_LEARN_CARDS.length - 1) return;
-        marsLearnIndex += 1;
-        renderMarsLearnCard(true);
-      });
-      $('#btn-math-mars-learn-play')?.addEventListener('click', () => openMarsPlay());
-
-      $('#btn-back-math-mars-play')?.addEventListener('click', () => openMarsLearn());
-      $('#btn-math-mode-shape')?.addEventListener('click', () => openShapeQuiz());
-      $('#btn-math-mode-pattern')?.addEventListener('click', () => openPatternQuiz());
-
-      $('#btn-back-math-shape')?.addEventListener('click', () => openMarsPlay());
-      $('#btn-math-shape-speak')?.addEventListener('click', () => speak('呢個係咩形狀？'));
-
-      $('#btn-back-math-pattern')?.addEventListener('click', () => openMarsPlay());
-      $('#btn-math-pattern-speak')?.addEventListener('click', () => speak('下一個係咩形狀？'));
     }
 
     bind();
@@ -1254,14 +612,6 @@
       playMathStarReward,
     });
 
-    window.KakaNumberBondsGame.init({
-      storage: window.KakaMathStorage,
-      tryEarnStar,
-      showMathScreen,
-      showMathRoundReward,
-      speak,
-    });
-
     window.KakaSubtractionGame?.init({
       storage: window.KakaMathStorage,
       loadState,
@@ -1277,7 +627,7 @@
       playMathStarReward,
     });
 
-    window.KakaMathNumberLineGame.init({
+    window.KakaMathMercuryCountGame.init({
       storage: window.KakaMathStorage,
       loadState,
       updateState,
@@ -1297,16 +647,12 @@
     window.KakaMath = {
       goHome,
       openPlanet,
-      openRelationsLearn: () => window.KakaMathNumberLineGame.openLearn(),
-      openRelationsMission: () => window.KakaMathNumberLineGame.openMission(),
+      openRelationsLearn: () => window.KakaMathMercuryCountGame.openLearn(),
+      openRelationsMission: () => window.KakaMathMercuryCountGame.openMission(),
       openEarthAddition: () => window.KakaAdditionGame.openEarthAddition(),
       openMoonSubtraction: () => window.KakaSubtractionGame?.openMoonSubtraction(),
       openVenusLearn,
       openTimeQuiz,
-      openMarsLearn,
-      openShapeQuiz,
-      openPatternQuiz,
-      openBacklogLearn,
       openGalaxy,
       offerWarpHop,
     };
