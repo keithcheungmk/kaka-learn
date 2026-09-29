@@ -917,6 +917,26 @@ def check_book_scans_shelf() -> None:
             fail("book-scans", "書本掃描入口要放喺主頁，唔好塞入小朋友揀 Profile 大卡")
 
 
+def check_family_storybook_entry() -> None:
+    """獨立中文故事書入口及 provenance/test 邊界必須存在。"""
+    html = read("index.html")
+    if 'id="btn-topics-family-stories"' not in html or './family-storybook.html' not in html:
+        fail("family-storybook", "中文主題頁要有故事小隊入口")
+    for path in (
+        "family-storybook.html",
+        "css/family-storybook.css",
+        "js/family-storybook.js",
+        "data/family-stories/manifest.js",
+        "scripts/check-family-stories.py",
+    ):
+        if not Path(path).is_file():
+            fail("family-storybook", f"缺少獨立故事書檔案：{path}")
+    manifest = read("data/family-stories/manifest.js")
+    for field in ("sourceBooks", "bookWords", "extensionWords", "pages"):
+        if field not in manifest:
+            fail("family-storybook", f"故事 manifest 缺少 provenance 欄位：{field}")
+
+
 def check_asset_weight() -> None:
     """效能：單檔唔好超過 400KB，完整 CF001–CF085 圖書館總資產唔好超過 120MB。"""
     total = 0
@@ -970,6 +990,7 @@ CHECKS = [
     check_agent_collab_docs,
     check_family_smoke_devices,
     check_book_scans_shelf,
+    check_family_storybook_entry,
     check_asset_weight,
 ]
 

@@ -94,6 +94,7 @@
 
 - 無登入、廣告、追蹤、寫字練習、故事模式、真實付款／AEON API。
 - UI 用繁體中文；主題係原創「**太空戰士學院**」（中文太空冒險；唔用迪士尼／彼思名稱、角色或素材）。動物主題仍保留鹿等字詞內容。
+- `family-storybook.html` 係獨立中文故事小隊入口；故事原創，只參考紅輯認字卡。每篇 6–8 格，`bookWords` 必須可追溯到列出的認字卡，場景延伸詞獨立放入 `extensionWords`，完成整篇只獎一粒星。普通話未有預錄音時可用明確標示的 `zh-CN` 裝置語音作 fallback。
 - **SPACE RANGER PHONICS 已停用鹿主題**：所有 Phonics 畫面用 KAKA Ranger、翼形胸章、能量字母及共用深藍太空背景；唔好再引用 `phonics-hero.jpg`／`phonics-space-bg.jpg` 或新增鹿太空人。鹿只保留喺動物認字內容及未另行改版嘅數理模組。
 - **Phonics 字母唔擬人化**：字母只可以用統一 Ranger Sound Energy 節點顯示；唔好加眼、嘴、面孔、四肢或固定角色配色，亦唔好用 Numberblocks 式方塊角色。插圖只在直接解釋單字意思時使用。
 - **Phonics 能力數據要誠實分類**：認音（聽音揀單字母）、blending（由圖／意思解碼有 `letters` 嘅 CVC 字）、segmenting（砌出有 `letters` 嘅字）分開記錄；完整單字 TTS 揀圖、Sight words、撳錯字格位置唔可以當成其中一項能力。卡卡／禧禧資料必須分倉。
