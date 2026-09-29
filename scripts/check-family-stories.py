@@ -24,7 +24,29 @@ for story in stories:
         if norm(''.join(page.get('tiles',[])))!=norm(page.get('sentence','')): errors.append(f'{label} page {i}: tiles do not rebuild sentence')
         for word in page.get('learn',[]):
             if word not in allowed: errors.append(f'{label} page {i}: unclassified learning word {word}')
+        focus=page.get('focusWords',[])
+        if len(focus)!=2: errors.append(f'{label} page {i}: expected exactly two focus words')
+        if page.get('learn',[])!=focus: errors.append(f'{label} page {i}: learn words must match focusWords in sentence order')
+        if len(page.get('distractors',[]))<2: errors.append(f'{label} page {i}: expected at least two distractors')
+        positions=[]
+        for word in focus:
+            if word not in allowed: errors.append(f'{label} page {i}: focus word {word} has no source classification')
+            start=page.get('sentence','').find(word)
+            if start<0: errors.append(f'{label} page {i}: focus word {word} is absent from sentence')
+            elif page.get('sentence','').count(word)!=1: errors.append(f'{label} page {i}: focus word {word} must occur once for an unambiguous blank')
+            else: positions.append((start,start+len(word),word))
+        positions.sort()
+        for previous,following in zip(positions,positions[1:]):
+            if following[0]<previous[1]: errors.append(f'{label} page {i}: focus words overlap in sentence')
+        if [word for _,_,word in positions] != focus:
+            errors.append(f'{label} page {i}: focusWords must follow sentence order')
+        if set(focus) & set(page.get('distractors',[])):
+            errors.append(f'{label} page {i}: a distractor duplicates a focus word')
         if not page.get('sentence'): errors.append(f'{label} page {i}: missing sentence')
+        elif not re.search(r'[。！？]$',page['sentence']) or re.search(r'[。！？].+[。！？]',page['sentence']): errors.append(f'{label} page {i}: story text must be one complete sentence')
+        speech=page.get('dialogue',{})
+        if speech.get('speaker') not in story.get('characters',[]): errors.append(f'{label} page {i}: dialogue speaker must be a listed story character')
+        if not speech.get('text') or not re.search(r'[。！？]$',speech.get('text','')): errors.append(f'{label} page {i}: dialogue must be a complete punctuated sentence')
     for asset in [f'{label}-p{i:02}.webp' for i in range(1,len(story.get('pages',[]))+1)]:
         if not (ROOT/'assets/family-stories/scenes'/asset).exists(): errors.append(f'{label}: missing art {asset}')
 if errors:
