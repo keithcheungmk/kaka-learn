@@ -24,7 +24,8 @@
       const image = `assets/family-stories/scenes/${story.id}-p01.webp`;
       return `<button class="story-card" type="button" data-story="${story.id}" aria-label="開始故事：${story.title}"><img class="story-cover" src="${image}" alt="${story.title}插圖" onerror="this.src='assets/family-stories/characters/family-height-lineup.webp'"><span><strong class="story-title">${String(index+1).padStart(2,'0')}・${story.title} ${done?'<span class="done-tag">★</span>':''}</strong><p>${story.place} · ${story.pages.length}頁</p><p>${story.summary}</p><p class="card-words">讀本詞：${story.bookWords.slice(0,4).join('、')}</p>${story.artNote?`<p class="art-note">${story.artNote}</p>`:''}</span></button>`;
     }).join('');
-    $('cast-grid').innerHTML = cast.map(([name,height,traits,file]) => `<article class="cast-card"><img src="assets/family-stories/characters/${file}" alt="${name}角色三視圖"><div><strong>${name}</strong><p>${height} · ${traits}</p></div></article>`).join('');
+    const castGrid = $('cast-grid');
+    if (castGrid) castGrid.innerHTML = cast.map(([name,height,traits,file]) => `<article class="cast-card"><img src="assets/family-stories/characters/${file}" alt="${name}角色三視圖"><div><strong>${name}</strong><p>${height} · ${traits}</p></div></article>`).join('');
     $('story-grid').querySelectorAll('[data-story]').forEach(button => button.addEventListener('click', () => openStory(button.dataset.story)));
     refreshStars();
   }

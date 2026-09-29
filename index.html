@@ -176,11 +176,15 @@
         </div>
       </div>
       <p class="section-lead">揀一組，先一齊睇字同圖</p>
-      <div class="btn-row topic-sentence-entry">
-        <button type="button" class="btn btn-sentence-home" id="btn-topics-sentence">中文砌句子</button>
-        <button type="button" class="btn btn-chain-home" id="btn-topics-chain">詞語鏈・接一接</button>
-        <a class="btn btn-story" id="btn-topics-family-stories" href="./family-storybook.html" aria-label="卡卡和禧禧一齊玩：故事閱讀與詞語遊戲">卡卡和禧禧一齊玩</a>
-      </div>
+      <button type="button" class="btn btn-sentence-home" id="btn-topics-sentence" hidden>中文砌句子</button>
+      <button type="button" class="btn btn-chain-home" id="btn-topics-chain" hidden>詞語鏈・接一接</button>
+      <section class="family-story-entry" aria-labelledby="family-story-entry-title">
+        <a class="family-story-poster" href="./family-storybook.html" aria-labelledby="family-story-entry-title">
+          <img src="assets/family-stories/characters/family-height-lineup.webp" alt="卡卡、禧禧和四位家長的角色合照" width="1600" height="1067" loading="lazy" decoding="async">
+          <span class="family-story-banner"><span>原創故事</span><h2 id="family-story-entry-title">卡卡和禧禧一齊玩</h2></span>
+        </a>
+        <div class="family-story-entry-copy"><p>聽六位家人的生活故事，認識紅書詞語，再玩每頁小練習。</p><a class="btn btn-story" id="btn-topics-family-stories" href="./family-storybook.html" aria-label="獨立開啟卡卡和禧禧一齊玩故事書">開始閱讀 →</a></div>
+      </section>
       <div class="topic-grid" id="topic-grid"></div>
     </section>
 

@@ -118,7 +118,7 @@ window.FAMILY_STORIES = [
     ]
   },
   {
-    id:'hongkong-disney', title:'香港迪士尼的一天', place:'香港迪士尼樂園', characters:['卡卡','禧禧','姑姑','蛙蛙','傑叔叔','堯叔叔'], sourceBooks:['rb_xin','rb_yishuhua','rb_fengwan','rb_fenguo'], artNote:'概念插圖；角色美術待下一版精修',
+    id:'hongkong-disney', title:'香港迪士尼的一天', place:'香港迪士尼樂園', characters:['卡卡','禧禧','姑姑','蛙蛙','傑叔叔','堯叔叔'], sourceBooks:['rb_xin','rb_yishuhua','rb_fengwan','rb_fenguo'], artNote:'六頁故事和場景圖已齊；插圖仍為概念稿，六位角色的造型一致性待精修',
     bookWords:['信','送給','媽媽','爸爸','一束','花','玩','和','我'], extensionWords:["城堡","地圖","巡遊","合照","樂園","來到","前行","找到","路旁","一張","照片"],
     summary:'兩家人一起看地圖找城堡，欣賞巡遊，最後留下合照。',
     pages:[
