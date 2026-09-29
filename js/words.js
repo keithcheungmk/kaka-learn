@@ -1264,6 +1264,55 @@ function nativeEmoji(emoji) {
   return emoji == null ? '' : String(emoji);
 }
 
+// 職業詞卡共用的卡卡／禧禧未來職業插圖；其他主題仍使用原有 Emoji。
+const CAREER_ILLUSTRATIONS = {
+  yisheng: 'assets/careers/yisheng.webp',
+  hushi: 'assets/careers/hushi.webp',
+  laoshi_job: 'assets/careers/laoshi_job.webp',
+  xiaofangyuan: 'assets/careers/xiaofangyuan.webp',
+  jingcha: 'assets/careers/jingcha.webp',
+  chushi: 'assets/careers/chushi.webp',
+  siji: 'assets/careers/siji.webp',
+  nongfu: 'assets/careers/nongfu.webp',
+  jishi: 'assets/careers/jishi.webp',
+  kongjie: 'assets/careers/kongjie.webp',
+  taikongren: 'assets/careers/taikongren.webp',
+  yayi: 'assets/careers/yayi.webp',
+  shouyi: 'assets/careers/shouyi.webp',
+  kexuejia: 'assets/careers/kexuejia.webp',
+  huajia: 'assets/careers/huajia.webp',
+  yinyuejia: 'assets/careers/yinyuejia.webp',
+  yundongyuan: 'assets/careers/yundongyuan.webp',
+  bashi_siji: 'assets/careers/bashi_siji.webp',
+  jianzhu_gongren: 'assets/careers/jianzhu_gongren.webp',
+  faxingshi: 'assets/careers/faxingshi.webp',
+  huanbao_zhuren: 'assets/careers/huanbao_zhuren.webp',
+  yiliao_xiaoshou: 'assets/careers/yiliao_xiaoshou.webp',
+  youchai: 'assets/careers/youchai.webp',
+  jiuhuyuan: 'assets/careers/jiuhuyuan.webp',
+  shouhuoyuan: 'assets/careers/shouhuoyuan.webp',
+  baoan: 'assets/careers/baoan.webp',
+  qingjie_gongren: 'assets/careers/qingjie_gongren.webp',
+  jiushengyuan: 'assets/careers/jiushengyuan.webp',
+  siyangyuan: 'assets/careers/siyangyuan.webp',
+  chuanzhang: 'assets/careers/chuanzhang.webp',
+  yufu: 'assets/careers/yufu.webp',
+  songhuoyuan: 'assets/careers/songhuoyuan.webp',
+  sheyingshi: 'assets/careers/sheyingshi.webp',
+  xiaozhang: 'assets/careers/xiaozhang.webp',
+  jiawu_zhuli: 'assets/careers/jiawu_zhuli.webp',
+  shiying: 'assets/careers/shiying.webp',
+  shouyinyuan: 'assets/careers/shouyinyuan.webp',
+  yaojishi: 'assets/careers/yaojishi.webp',
+  yuanding: 'assets/careers/yuanding.webp',
+  diksi_siji: 'assets/careers/diksi_siji.webp',
+  junren: 'assets/careers/junren.webp',
+  yanyuan: 'assets/careers/yanyuan.webp',
+  jizhe: 'assets/careers/jizhe.webp',
+  gongchengshi: 'assets/careers/gongchengshi.webp',
+  tushuguan_guanliyuan: 'assets/careers/tushuguan_guanliyuan.webp',
+};
+
 function wordIllustHtml(word) {
   const badgeIsEmoji = word.badge && /\p{Extended_Pictographic}/u.test(word.badge);
   const badge = word.badge
@@ -1272,6 +1321,13 @@ function wordIllustHtml(word) {
   if (word.photo) {
     return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
     <img class="word-photo" src="${word.photo}" alt="${word.term}" loading="lazy" />
+    ${badge}
+  </span>`;
+  }
+  const careerIllustration = CAREER_ILLUSTRATIONS[word.id];
+  if (careerIllustration) {
+    return `<span class="emoji-plate career-plate" style="--plate:${word.plate || '#122848'}">
+    <img class="career-illustration" src="${careerIllustration}" alt="" aria-hidden="true" loading="lazy" />
     ${badge}
   </span>`;
   }
