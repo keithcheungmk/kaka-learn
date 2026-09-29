@@ -452,6 +452,19 @@ div.star-panel {
   border-radius: inherit;
 }
 
+.character-word-plate {
+  overflow: hidden;
+}
+
+.character-word-illustration {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  border-radius: inherit;
+}
+
 .chinese-hero img,
 .phonics-hero img,
 .word-photo,

@@ -265,6 +265,7 @@ def main() -> int:
     problems = 0
     errors: list[str] = []
     failed: list[str] = []
+    not_found: list[str] = []
 
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
@@ -275,6 +276,7 @@ def main() -> int:
             page = browser.new_page(viewport={"width": w, "height": h}, is_mobile=True, has_touch=True)
             page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
             page.on("requestfailed", lambda r: failed.append(r.url))
+            page.on("response", lambda r: not_found.append(r.url) if r.status == 404 else None)
             try:
                 rows = walk(page, args.url, shots, name)
             except Exception as e:  # noqa: BLE001
@@ -313,6 +315,10 @@ def main() -> int:
         problems += 1
     for e in dict.fromkeys(errors):
         if "ERR_TUNNEL" in e or "fonts.g" in e:
+            continue
+        if "404" in e and not any(not url.endswith("/version.json") for url in not_found):
+            # 原始碼 preview 用 http.server，冇 build-site.sh 產生嘅可選版本戳；
+            # 其他 404（圖片、程式或字體）仍然照常視為錯誤。
             continue
         print(f"  ✗ console error：{e[:120]}")
         problems += 1

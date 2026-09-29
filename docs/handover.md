@@ -100,6 +100,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-09-30 · ChatGPT／Codex（情緒、常見動作及運動角色插圖）
+
+- 沿用六個既有情緒詞，新增「常見動作」23 詞及「運動」10 詞，並將三組詞卡插圖換成 Kaka／Xixi 角色畫面；其他主題及舊詞保留，生活主題分類照原架構顯示。
+- 新動作詞採書面語完整詞形（如「喝水」「睡覺」）；兩主題插圖 WebP 約 2 MB，原始 PNG 留在本機 `source-materials/generated-character-words/`，不部署。
+- 驗收：39 張角色詞卡逐張載入測試、iPad Pro 11 橫／直及 iPhone 16 Pro Max 定向 smoke 通過；OpenMoji、字體子集、圖片大小／格式及 `check-invariants` 全綠。全站三 viewport 亦通過版面檢查；另修正 smoke 對原始碼 preview 缺少部署產生的 `version.json` 誤報 404，其餘資產 404 仍會攔截。
+- **踩咗** `js/words.js`、`js/app.js`、`css/styles.css`、`assets/character-words/`、`scripts/test-character-word-illustrations.mjs`、`scripts/smoke-character-word-topics.py`、`scripts/smoke-shots.py`、`docs/handover.md`
+
 ### 2026-09-30 · ChatGPT／Codex（香港迪士尼故事六頁插圖修復）
 
 - 原書架說明已標示迪士尼故事插圖仍是概念稿，但實際六張頁面圖片仍指向舊簡筆稿；重生六張繪本風格場景圖，逐張壓至 640 × 640 WebP，角色衣著按人物設定維持一致。

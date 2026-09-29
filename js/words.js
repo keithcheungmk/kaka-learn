@@ -454,6 +454,28 @@ const WORDS = [
   { id: 'xi', term: '洗', isDeer: false, emoji: '🛁', badge: '', plate: '#0f3550' },
   { id: 'chuan_wear', term: '穿', isDeer: false, emoji: '👕', badge: '穿', plate: '#3a3010' },
   { id: 'tuo', term: '脫', isDeer: false, emoji: '👕', badge: '脫', plate: '#402030' },
+  // 常見日常動作與運動完整詞組；保留既有單字詞條供紅／橙輯及故事重用。
+  { id: 'chi_fan', term: '吃飯', isDeer: false, emoji: '🍽️', badge: '', plate: '#401820' },
+  { id: 'he_shui', term: '喝水', isDeer: false, emoji: '🥤', badge: '', plate: '#0f3550' },
+  { id: 'xi_shou', term: '洗手', isDeer: false, emoji: '🧼', badge: '', plate: '#143828' },
+  { id: 'shua_ya', term: '刷牙', isDeer: false, emoji: '🪥', badge: '', plate: '#0f3550' },
+  { id: 'chuan_yifu', term: '穿衣服', isDeer: false, emoji: '👕', badge: '', plate: '#3a3010' },
+  { id: 'tuo_yifu', term: '脫衣服', isDeer: false, emoji: '👕', badge: '', plate: '#402030' },
+  { id: 'kan_shu', term: '看書', isDeer: false, emoji: '📖', badge: '', plate: '#1a3050' },
+  { id: 'ting_yinyue', term: '聽音樂', isDeer: false, emoji: '🎵', badge: '', plate: '#2a1840' },
+  { id: 'shuo_hua', term: '說話', isDeer: false, emoji: '💬', badge: '', plate: '#1a3050' },
+  { id: 'tiao_wu', term: '跳舞', isDeer: false, emoji: '🎶', badge: '', plate: '#402038' },
+  { id: 'pai_shou', term: '拍手', isDeer: false, emoji: '👏', badge: '', plate: '#3a3010' },
+  { id: 'ti_zuqiu', term: '踢足球', isDeer: false, emoji: '⚽', badge: '', plate: '#143820' },
+  { id: 'youyong', term: '游泳', isDeer: false, emoji: '🏊', badge: '', plate: '#0f3550' },
+  { id: 'qi_danche', term: '騎單車', isDeer: false, emoji: '🚲', badge: '', plate: '#143828' },
+  { id: 'da_lanqiu', term: '打籃球', isDeer: false, emoji: '🏀', badge: '', plate: '#402010' },
+  { id: 'tiaosheng', term: '跳繩', isDeer: false, emoji: '🪢', badge: '', plate: '#2a1840' },
+  { id: 'da_yumaoqiu', term: '打羽毛球', isDeer: false, emoji: '🏃', badge: '', plate: '#143820' },
+  { id: 'da_pingpangqiu', term: '打乒乓球', isDeer: false, emoji: '🏃', badge: '', plate: '#401820' },
+  { id: 'zuo_ticao', term: '做體操', isDeer: false, emoji: '🤸', badge: '', plate: '#2a1840' },
+  { id: 'liubing', term: '溜冰', isDeer: false, emoji: '❄️', badge: '', plate: '#102848' },
+  { id: 'paobu', term: '跑步', isDeer: false, emoji: '🏃', badge: '', plate: '#402010' },
   { id: 'kai', term: '開', isDeer: false, emoji: '🔓', badge: '', plate: '#143828' },
   { id: 'guan', term: '關', isDeer: false, emoji: '🔒', badge: '', plate: '#401018' },
   { id: 'na_take', term: '拿', isDeer: false, emoji: '🫴', badge: '', plate: '#3a2818' },
@@ -978,9 +1000,31 @@ const TOPICS = [
   {
     id: 'emotions',
     title: '情緒',
-    blurb: '開心、不開心、生氣、害怕、驚喜、害羞',
+    blurb: '卡卡和禧禧用表情認識六種情緒',
     cover: '😊',
     wordIds: ['kaixin', 'bukaixin', 'shengqi', 'haipa', 'jingxi', 'haixiu'],
+  },
+  {
+    id: 'actions',
+    title: '常見動作',
+    blurb: '看清楚動作，一起學習日常用語',
+    cover: '🏃',
+    wordIds: [
+      'zou', 'pao', 'tiao', 'zuo_sit', 'zhan', 'pa', 'diedao', 'shuijiao',
+      'chi_fan', 'he_shui', 'xi_shou', 'shua_ya', 'chuan_yifu', 'tuo_yifu',
+      'kan_shu', 'ting_yinyue', 'shuo_hua', 'xiezi_write', 'huahua', 'changge',
+      'tiao_wu', 'pai_shou', 'wan_play',
+    ],
+  },
+  {
+    id: 'sports',
+    title: '運動',
+    blurb: '卡卡和禧禧一起試試不同運動',
+    cover: '⚽',
+    wordIds: [
+      'paobu', 'ti_zuqiu', 'youyong', 'qi_danche', 'da_lanqiu', 'tiaosheng',
+      'da_yumaoqiu', 'da_pingpangqiu', 'zuo_ticao', 'liubing',
+    ],
   },
   {
     id: 'senses',
@@ -1313,6 +1357,49 @@ const CAREER_ILLUSTRATIONS = {
   tushuguan_guanliyuan: 'assets/careers/tushuguan_guanliyuan.webp',
 };
 
+// 情緒、常見動作及運動改用卡卡／禧禧角色圖；其他詞卡維持既有 Emoji。
+const CHARACTER_WORD_ILLUSTRATIONS = {
+  kaixin: 'assets/character-words/emotions/kaixin.webp',
+  bukaixin: 'assets/character-words/emotions/bukaixin.webp',
+  shengqi: 'assets/character-words/emotions/shengqi.webp',
+  haipa: 'assets/character-words/emotions/haipa.webp',
+  jingxi: 'assets/character-words/emotions/jingxi.webp',
+  haixiu: 'assets/character-words/emotions/haixiu.webp',
+  zou: 'assets/character-words/actions/zou.webp',
+  pao: 'assets/character-words/actions/pao.webp',
+  tiao: 'assets/character-words/actions/tiao.webp',
+  zuo_sit: 'assets/character-words/actions/zuo-sit.webp',
+  zhan: 'assets/character-words/actions/zhan.webp',
+  pa: 'assets/character-words/actions/pa.webp',
+  diedao: 'assets/character-words/actions/diedao.webp',
+  shuijiao: 'assets/character-words/actions/shuijiao.webp',
+  chi_fan: 'assets/character-words/actions/chi-fan.webp',
+  he_shui: 'assets/character-words/actions/he-shui.webp',
+  xi_shou: 'assets/character-words/actions/xi-shou.webp',
+  shua_ya: 'assets/character-words/actions/shua-ya.webp',
+  chuan_yifu: 'assets/character-words/actions/chuan-yifu.webp',
+  tuo_yifu: 'assets/character-words/actions/tuo-yifu.webp',
+  kan_shu: 'assets/character-words/actions/kan-shu.webp',
+  ting_yinyue: 'assets/character-words/actions/ting-yinyue.webp',
+  shuo_hua: 'assets/character-words/actions/shuo-hua.webp',
+  xiezi_write: 'assets/character-words/actions/xiezi-write.webp',
+  huahua: 'assets/character-words/actions/huahua.webp',
+  changge: 'assets/character-words/actions/changge.webp',
+  tiao_wu: 'assets/character-words/actions/tiao-wu.webp',
+  pai_shou: 'assets/character-words/actions/pai-shou.webp',
+  wan_play: 'assets/character-words/actions/wan-play.webp',
+  paobu: 'assets/character-words/sports/paobu.webp',
+  ti_zuqiu: 'assets/character-words/sports/ti-zuqiu.webp',
+  youyong: 'assets/character-words/sports/youyong.webp',
+  qi_danche: 'assets/character-words/sports/qi-danche.webp',
+  da_lanqiu: 'assets/character-words/sports/da-lanqiu.webp',
+  tiaosheng: 'assets/character-words/sports/tiaosheng.webp',
+  da_yumaoqiu: 'assets/character-words/sports/da-yumaoqiu.webp',
+  da_pingpangqiu: 'assets/character-words/sports/da-pingpangqiu.webp',
+  zuo_ticao: 'assets/character-words/sports/zuo-ticao.webp',
+  liubing: 'assets/character-words/sports/liubing.webp',
+};
+
 function wordIllustHtml(word) {
   const badgeIsEmoji = word.badge && /\p{Extended_Pictographic}/u.test(word.badge);
   const badge = word.badge
@@ -1328,6 +1415,13 @@ function wordIllustHtml(word) {
   if (careerIllustration) {
     return `<span class="emoji-plate career-plate" style="--plate:${word.plate || '#122848'}">
     <img class="career-illustration" src="${careerIllustration}" alt="" aria-hidden="true" loading="lazy" />
+    ${badge}
+  </span>`;
+  }
+  const characterWordIllustration = CHARACTER_WORD_ILLUSTRATIONS[word.id];
+  if (characterWordIllustration) {
+    return `<span class="emoji-plate character-word-plate" style="--plate:${word.plate || '#122848'}">
+    <img class="character-word-illustration" src="${characterWordIllustration}" alt="" aria-hidden="true" loading="lazy" />
     ${badge}
   </span>`;
   }
@@ -1349,4 +1443,5 @@ window.KakaWords = {
   oppositePairWords,
   getOppositeWord,
   wordIllustHtml,
+  CHARACTER_WORD_ILLUSTRATIONS,
 };
