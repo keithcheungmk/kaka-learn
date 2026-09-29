@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101c49">
+  <title>卡卡一家・故事小隊</title>
+  <link rel="stylesheet" href="css/family-storybook.css">
+</head>
+<body>
+  <main class="storybook-shell">
+    <header class="topbar">
+      <a class="back-link" href="index.html#screen-topics">← 中文</a>
+      <div class="brand"><span>卡卡一家</span><h1>故事小隊</h1></div>
+      <div class="star-total" aria-live="polite">⭐ <strong id="star-total">0</strong> / 10</div>
+    </header>
+    <section id="library" class="view" aria-labelledby="library-heading">
+      <div class="intro">
+        <p class="eyebrow">聽故事・讀句子・玩生字</p>
+        <h2 id="library-heading">今天想和他們去哪裏？</h2>
+        <p>每個故事有六頁。先聽普通話，再讀短句，最後玩詞語和砌句子。</p>
+      </div>
+      <div id="story-grid" class="story-grid"></div>
+      <section class="cast-section">
+        <div class="section-heading"><div><p class="eyebrow">人物設定</p><h2>故事小隊的六位主角</h2></div><span>站在同一地面時，按真實身高比例呈現</span></div>
+        <img class="height-lineup" src="assets/family-stories/characters/family-height-lineup.webp" alt="六位角色按身高比例排列">
+        <div id="cast-grid" class="cast-grid"></div>
+      </section>
+    </section>
+    <section id="reader" class="view hidden" aria-labelledby="story-title">
+      <div class="reader-head">
+        <button id="back-library" class="back-link" type="button">← 故事書目</button>
+        <div><p id="story-place" class="eyebrow"></p><h2 id="story-title"></h2></div>
+        <div id="page-count" class="page-count">第 1 / 6 頁</div>
+      </div>
+      <div class="progress-track"><span id="page-progress"></span></div>
+      <article class="page-card">
+        <figure class="scene-frame"><img id="scene-image" alt="故事插圖"><figcaption id="scene-caption"></figcaption></figure>
+        <div class="page-copy">
+          <div class="sentence-row"><p id="page-sentence"></p><button id="speak-sentence" class="speak-button" type="button" aria-label="聽普通話朗讀">🔊 <span>聽本頁</span></button></div>
+          <p id="page-dialogue" class="dialogue"></p>
+          <p id="audio-feedback" class="audio-feedback" aria-live="polite"></p>
+          <div class="word-band"><span>本頁生字</span><div id="learn-words" class="word-chips"></div></div>
+          <p id="source-note" class="source-note"></p>
+        </div>
+      </article>
+      <nav class="reader-controls" aria-label="故事頁導航"><button id="prev-page" class="secondary-button" type="button">上一頁</button><button id="next-page" class="primary-button" type="button">下一頁</button></nav>
+      <section id="activity" class="activity hidden" aria-labelledby="activity-heading">
+        <p class="eyebrow">故事任務</p><h3 id="activity-heading">聽音選詞，再把詞語排成句子</h3>
+        <div class="quiz-row"><button id="speak-word" class="speak-button" type="button">🔊 聽詞語</button><div id="quiz-options" class="quiz-options"></div><span id="quiz-feedback" aria-live="polite"></span></div>
+        <div class="sentence-builder"><p>按正確次序選詞語：</p><div id="tile-answer" class="tile-answer" aria-live="polite"></div><div id="tile-bank" class="tile-bank"></div><div class="builder-actions"><button id="clear-tiles" class="secondary-button" type="button">重新排列</button><button id="submit-answer" class="primary-button" type="button">提交句子</button></div><p id="builder-feedback" aria-live="polite"></p></div>
+      </section>
+      <section id="completion" class="completion hidden" aria-live="polite"><div class="completion-star">⭐</div><h3>故事完成！</h3><p id="completion-summary"></p><button id="next-story" class="primary-button" type="button">返回故事書目</button></section>
+    </section>
+    <footer><p>故事為原創內容；「讀本詞語」以紅輯認字卡作詞彙參考，場景延伸詞另行標示。普通話朗讀使用裝置提供的語音。</p></footer>
+  </main>
+  <script src="data/family-stories/manifest.js"></script>
+  <script src="js/family-storybook.js"></script>
+</body>
+</html>
