@@ -107,6 +107,12 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 - 驗收：Magic Marker manifest／頁面資產測試、Carter 85 本／1,033 頁回歸、`check-invariants.py`；iPad Pro 11 直／橫及 iPhone 16 Pro Max smoke 包含系列入口、Magic Marker 書架、MM001 Read & Fill、答對後下一頁。
 - **踩咗** `index.html`、`css/story-demo.css`、`js/story-demo.js`、`data/magic-marker-manifest.js`、`assets/story-demo/mm001/`、`assets/story-demo/mm002/`、`assets/story-demo/SOURCE.md`、`.github/workflows/ci.yml`、`scripts/test-story-mission.mjs`、`scripts/smoke-shots.py`、`scripts/build-magic-marker-pilot.py`、`docs/handover.md`
 
+### 2026-09-30 · ChatGPT／Codex（家庭故事頁文字版面統一）
+
+- 十篇故事的每頁敘述和角色對白合併成同一段、同一字級；用「角色說：『對白』」標示說話人，不再用獨立對白框。
+- 移除閱讀頁上的重點詞／參考讀本註記，來源資料仍保留於故事 manifest，供遊戲和 provenance 使用。
+- **踩咗** `family-storybook.html`、`js/family-storybook.js`、`css/family-storybook.css`、`AGENTS.md`、`scripts/check-invariants.py`、`docs/handover.md`
+
 ### 2026-09-30 · ChatGPT／Codex（情緒、常見動作及運動角色插圖）
 
 - 沿用六個既有情緒詞，新增「常見動作」23 詞及「運動」10 詞，並將三組詞卡插圖換成 Kaka／Xixi 角色畫面；其他主題及舊詞保留，生活主題分類照原架構顯示。

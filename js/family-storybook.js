@@ -44,6 +44,11 @@
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     activeUtterance = null;
   }
+  function pageReadingText(page) {
+    const sentence = String(page.sentence || '').replace(/[。！？]$/, '');
+    const dialogue = String(page.dialogue?.text || '').replace(/^「|」$/g, '');
+    return `${sentence}。${page.dialogue?.speaker || ''}說：「${dialogue}」`;
+  }
   function leaveReader() {
     stopSpeech(); reader.classList.add('hidden'); library.classList.remove('hidden'); renderLibrary(); window.scrollTo({top:0,behavior:'smooth'});
   }
@@ -58,10 +63,7 @@
     $('scene-image').alt = `${current.title}，第 ${pageIndex+1} 頁`;
     $('scene-image').onerror = () => { $('scene-image').src = 'assets/family-stories/characters/family-height-lineup.webp'; };
     $('scene-caption').textContent = `${current.title}・第 ${pageIndex+1} 頁${current.artNote?`｜${current.artNote}`:''}`;
-    $('page-sentence').textContent = page.sentence;
-    $('dialogue-speaker').textContent = `${page.dialogue.speaker}說`;
-    $('page-dialogue').textContent = `「${page.dialogue.text}」`;
-    $('source-note').textContent = `本頁重點詞：${page.focusWords.join('、')}｜參考讀本：${current.sourceBooks.map(id => bookTitles[id] || id).join('、')}`;
+    $('page-reading').textContent = pageReadingText(page);
     $('audio-feedback').textContent = '';
     $('prev-page').disabled = pageIndex === 0;
     $('next-page').disabled = !state.solved;

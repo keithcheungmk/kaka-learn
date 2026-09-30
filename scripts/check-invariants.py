@@ -947,6 +947,15 @@ def check_family_storybook_entry() -> None:
     for field in ("sourceBooks", "bookWords", "extensionWords", "pages"):
         if field not in manifest:
             fail("family-storybook", f"故事 manifest 缺少 provenance 欄位：{field}")
+    story_html = read("family-storybook.html")
+    story_js = read("js/family-storybook.js")
+    story_css = read("css/family-storybook.css")
+    if 'id="page-reading"' not in story_html or "pageReadingText(page)" not in story_js:
+        fail("family-storybook", "敘述和角色對白必須整合成同一段故事文字")
+    if any(marker in story_html for marker in ('id="source-note"', 'class="dialogue-bubble"', 'id="page-dialogue"')):
+        fail("family-storybook", "故事頁不可顯示每頁來源註記或獨立對白框")
+    if ".page-reading" not in story_css or ".dialogue-bubble" in story_css:
+        fail("family-storybook", "整合故事文字須使用單一字級樣式，且移除對白框樣式")
 
 
 def check_asset_weight() -> None:
