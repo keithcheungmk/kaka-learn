@@ -36,6 +36,7 @@ SCROLLABLE = {
     "screen-phonics-sounds",
     "screen-progress",
     "screen-chinese-connect",
+    "screen-story-demo",  # Little Fox 20-book shelf: browsing may scroll; play screen may not.
 }
 
 # 家庭目標裝置（預設／CI）——對齊 Keith 部 iPad Pro 11" 同 iPhone 16 Pro Max
@@ -148,6 +149,8 @@ def walk(pg, url, shots: Path | None, tag: str):
             )
         )
         if shots:
+            # The shared screen fade starts at opacity 0; capture the settled UI.
+            pg.wait_for_timeout(400)
             pg.screenshot(path=str(shots / f"{tag}-{step}.png"))
 
     pg.goto(url, wait_until="domcontentloaded")
@@ -232,7 +235,7 @@ def walk(pg, url, shots: Path | None, tag: str):
             pg.wait_for_timeout(500)
             probe("字母音清單")
 
-    # Story English / Magic Marker pilot: keep its series shelf and actual
+    # Story English / Magic Marker: keep its series shelf and actual
     # read-and-fill screen inside the same family-device layout regression.
     pg.goto(url, wait_until="domcontentloaded")
     pg.wait_for_timeout(300)
@@ -267,6 +270,19 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.wait_for_selector("#screen-story-play.active .story-challenge-page")
     pg.wait_for_function("document.querySelector('.story-challenge-page')?.complete")
     probe("MM002 Read & Fill")
+    pg.click("#btn-back-story-play")
+    pg.wait_for_selector("#screen-story-demo.active [data-book-id='mm020']")
+    pg.click("#screen-story-demo.active [data-book-id='mm020']")
+    pg.wait_for_selector("#screen-story-play.active .story-challenge-page")
+    pg.wait_for_function("document.querySelector('.story-challenge-page')?.complete")
+    probe("MM020 Read & Fill")
+    pg.evaluate("document.querySelector('audio[data-story-demo]').dispatchEvent(new Event('ended'))")
+    pg.wait_for_function("!document.querySelector('.story-fill-tile')?.disabled")
+    answer = pg.locator(".story-fill-blank").get_attribute("data-blank")
+    pg.locator(".story-fill-tile").evaluate_all("(tiles, word) => tiles.find(tile => tile.dataset.word === word).click()", answer)
+    pg.click("#btn-story-submit")
+    pg.wait_for_selector("#btn-story-next", timeout=10000)
+    probe("MM020 答對與星星")
 
     return seen
 

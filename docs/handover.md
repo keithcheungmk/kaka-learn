@@ -100,9 +100,16 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-01 · ChatGPT／Codex（Magic Marker MM003–MM020）
+
+- Little Fox → Magic Marker 擴至 MM001–MM020，共 20 本／151 個可玩書頁。新 135 頁沿用 MM001／MM002 的逐頁原圖、聆聽、Read & Fill、答對派星與獨立進度 key；四個只有短感嘆語而缺可靠逐頁音檔的原書頁及純插圖／空白頁不當成題目。
+- `data/magic-marker-expansion.js` 的句子按原 PDF 可見文字擷取，記錄書頁、來源音檔及第一輪音檔對位信心；低信心只代表仍需日後人工聆聽，唔好誤寫成音訊已逐句核實。原素材仍留在 `source-materials/`，網站只含精簡衍生檔。
+- 驗收：20 本／151 頁資料及資產測試、`check-invariants.py`、iPad Pro 11 直／橫與 iPhone 16 Pro Max 的完整入口及 MM020 smoke。書架屬瀏覽畫面可捲；遊戲畫面維持不可捲。
+- **踩咗** `index.html`、`js/story-demo.js`、`data/magic-marker-expansion.js`、`assets/story-demo/mm003/`–`mm020/`、`assets/story-demo/SOURCE.md`、`scripts/build-magic-marker-*`、`scripts/test-story-mission.mjs`、`scripts/smoke-shots.py`、`docs/handover.md`。
+
 ### 2026-09-30 · ChatGPT／Codex（Magic Marker MM001–MM002 試作）
 
-- Little Fox 英文故事書入口新增 Magic Marker 系列，MM001、MM002 共 8 頁；沿用 Carter 的逐頁聆聽、Read & Fill、答對派星及逐頁進度 key。Carter 原書架及 progress key 維持獨立。
+- Little Fox 英文故事書入口新增 Magic Marker 系列，MM001、MM002 共 16 頁；沿用 Carter 的逐頁聆聽、Read & Fill、答對派星及逐頁進度 key。Carter 原書架及 progress key 維持獨立。
 - 16 頁書頁圖及逐頁 MP3 由本機 PDF／MP3 壓縮衍生；逐頁句子按 PDF 和 clip map 核對，原素材留在 `source-materials/`。
 - 驗收：Magic Marker manifest／頁面資產測試、Carter 85 本／1,033 頁回歸、`check-invariants.py`；iPad Pro 11 直／橫及 iPhone 16 Pro Max smoke 包含系列入口、Magic Marker 書架、MM001 Read & Fill、答對後下一頁。
 - **踩咗** `index.html`、`css/story-demo.css`、`js/story-demo.js`、`data/magic-marker-manifest.js`、`assets/story-demo/mm001/`、`assets/story-demo/mm002/`、`assets/story-demo/SOURCE.md`、`.github/workflows/ci.yml`、`scripts/test-story-mission.mjs`、`scripts/smoke-shots.py`、`scripts/build-magic-marker-pilot.py`、`docs/handover.md`

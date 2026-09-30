@@ -23,7 +23,7 @@ Source supplied by Keith for the private KAKA Learn app. Originals remain untouc
 - `cf003/pages/page-01.webp`–`page-14.webp` ← PDF pages 2–15 (printed story pages 1–14)
 - `cf003/cf003-the-school-play-page-01.mp3`–`14.mp3` ← clips `110.mp3`–`123.mp3`
 
-## MM001–MM002 Magic Marker pilot
+## MM001–MM020 Magic Marker
 
 Magic Marker remains a separate Little Fox collection but uses the Carter Family
 Read & Fill renderer. Original PDFs and complete recordings remain unchanged in
@@ -36,7 +36,16 @@ story pages and 22.05kHz, 32kbps mono page clips.
   `MM002-pdf03-print01.mp3`–`MM002-pdf10-print08.mp3`.
 - Web derivatives and verified sentence/answer provenance are recorded in
   `data/magic-marker-manifest.js`; regenerate images/audio with
-  `python3 scripts/build-magic-marker-pilot.py`.
+  `python3 scripts/build-magic-marker-pilot.py --start 1 --end 2`.
+- MM003–MM020 add 135 playable printed pages from the matching local PDFs and
+  `Page-level clips/Book 03`–`Book 20` clip maps. Four short interjection-only
+  pages in the source maps have no usable page clip; illustration-only and blank
+  pages are also excluded from the exercise flow. Run
+  `python3 scripts/build-magic-marker-pilot.py --start 3 --end 20` for the media,
+  then `python3 scripts/build-magic-marker-expansion.py` for the question manifest.
+  `data/magic-marker-expansion.js` records each PDF page, printed page, source
+  clip, exact PDF-derived sentence, and first-pass audio alignment confidence.
+  Low-confidence clip alignment is not a claim of independently verified audio.
 
 ## CF004–CF010
 

@@ -99,7 +99,7 @@
   const MAGIC_MARKER_BOOKS = window.KakaMagicMarkerManifest?.books || [];
   const SERIES = [
     { id: 'carter', title: 'Carter Family', label: 'CARTER FAMILY', range: 'CF001–CF085', image: CARTER_BOOKS[0]?.cover || CARTER_BOOKS[0]?.pages[0]?.image, description: '生活故事 · 聆聽、閱讀與句子填字', books: CARTER_BOOKS },
-    { id: 'magic-marker', title: 'Magic Marker', label: 'MAGIC MARKER', range: 'MM001–MM002 · Demo', image: MAGIC_MARKER_BOOKS[0]?.cover || MAGIC_MARKER_BOOKS[0]?.pages[0]?.image, description: 'Maxie、Taco、Alex 和 Sue 的故事', books: MAGIC_MARKER_BOOKS },
+    { id: 'magic-marker', title: 'Magic Marker', label: 'MAGIC MARKER', range: 'MM001–MM020', image: MAGIC_MARKER_BOOKS[0]?.cover || MAGIC_MARKER_BOOKS[0]?.pages[0]?.image, description: 'Maxie、Taco、Alex 和 Sue 的故事', books: MAGIC_MARKER_BOOKS },
   ];
   let currentSeriesId = 'carter';
   let BOOKS = CARTER_BOOKS;

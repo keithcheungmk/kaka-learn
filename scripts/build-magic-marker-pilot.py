@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Build selected, web-sized derivatives for Magic Marker MM001-MM002."""
+"""Build selected, web-sized Magic Marker derivatives from local originals."""
 
 from __future__ import annotations
 
 import json
+import argparse
 import shutil
 import subprocess
 from pathlib import Path
@@ -12,11 +13,6 @@ ROOT = Path(__file__).resolve().parent.parent
 SOURCE = ROOT / "source-materials" / "Magic Marker"
 OUTPUT = ROOT / "assets" / "story-demo"
 TEMP = ROOT / "tmp" / "pdfs" / "magic-marker-build"
-BOOKS = [
-    (1, "Meet the Characters"),
-    (2, "Maxie and Taco"),
-]
-
 
 def run(command: list[str]) -> None:
     subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -29,7 +25,7 @@ def one_file(folder: Path, prefix: str, suffix: str) -> Path:
     return matches[0]
 
 
-def build_book(number: int, title: str) -> None:
+def build_book(number: int) -> None:
     label = f"MM{number:03d}"
     source_id = f"{number:03d}"
     pdf_dir = SOURCE / "Magic Marker 制作故事书"
@@ -83,11 +79,17 @@ def build_book(number: int, title: str) -> None:
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--start", type=int, default=1)
+    parser.add_argument("--end", type=int, default=2)
+    args = parser.parse_args()
+    if not 1 <= args.start <= args.end <= 73:
+        raise SystemExit("Expected a Magic Marker range between MM001 and MM073.")
     if not (ROOT / "source-materials").exists():
         raise SystemExit("The local source-materials folder must be available; originals remain read-only.")
     if not shutil.which("pdftoppm"):
         raise SystemExit("pdftoppm is required to render selected source pages.")
     if not shutil.which("ffmpeg") or not shutil.which("magick"):
         raise SystemExit("ffmpeg and ImageMagick are required to build web derivatives.")
-    for book_number, book_title in BOOKS:
-        build_book(book_number, book_title)
+    for book_number in range(args.start, args.end + 1):
+        build_book(book_number)

@@ -7,6 +7,7 @@ import vm from 'node:vm';
 const source = await readFile(new URL('../js/story-demo.js', import.meta.url), 'utf8');
 const manifestSource = await readFile(new URL('../data/carter-family-manifest.js', import.meta.url), 'utf8');
 const magicManifestSource = await readFile(new URL('../data/magic-marker-manifest.js', import.meta.url), 'utf8');
+const magicExpansionSource = await readFile(new URL('../data/magic-marker-expansion.js', import.meta.url), 'utf8');
 const starFx = await readFile(new URL('../js/star-fx.js', import.meta.url), 'utf8');
 const css = await readFile(new URL('../css/story-demo.css', import.meta.url), 'utf8');
 const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
@@ -15,6 +16,7 @@ vm.runInNewContext(manifestSource, manifestSandbox);
 const manifestBooks = manifestSandbox.window.KakaCarterManifest.books;
 const magicManifestSandbox = { window: {} };
 vm.runInNewContext(magicManifestSource, magicManifestSandbox);
+vm.runInNewContext(magicExpansionSource, magicManifestSandbox);
 const magicBooks = magicManifestSandbox.window.KakaMagicMarkerManifest.books;
 
 assert.match(source, /const BASE_BOOKS = \[/, 'Read & Fill should keep the three-book template catalogue');
@@ -59,15 +61,15 @@ vm.runInNewContext(source, storySandbox);
 const storyDemo = storySandbox.window.KakaStoryDemo;
 assert.equal(storyDemo.books.length, 85, 'The balanced answer system should include all 85 Carter books');
 assert.equal(storyDemo.pageCount, 1033, 'The balanced answer system should cover all 1,033 story pages');
-assert.deepEqual(Array.from(storyDemo.series, (series) => [series.id, series.bookCount, series.pageCount]), [['carter', 85, 1033], ['magic-marker', 2, 16]], 'Little Fox should keep Carter and Magic Marker as separate collections');
-assert.deepEqual(Array.from(magicBooks, (book) => book.id), ['mm001', 'mm002'], 'The pilot catalogue should contain exactly MM001 and MM002');
+assert.deepEqual(Array.from(storyDemo.series, (series) => [series.id, series.bookCount, series.pageCount]), [['carter', 85, 1033], ['magic-marker', 20, 151]], 'Little Fox should keep Carter and Magic Marker as separate collections');
+assert.deepEqual(Array.from(magicBooks, (book) => book.id), Array.from({ length: 20 }, (_, index) => `mm${String(index + 1).padStart(3, '0')}`), 'The Magic Marker catalogue should run continuously through MM020');
 const normalize = (word) => String(word).toLowerCase().replace(/[^a-z]/g, '');
 const seededRandom = (seed) => () => {
   seed = (seed * 1664525 + 1013904223) >>> 0;
   return seed / 0x100000000;
 };
 for (const book of magicBooks) {
-  assert.equal(book.pages.length, 8, `${book.id} should expose its eight printed story pages`);
+  assert.ok(book.pages.length >= 6 && book.pages.length <= 9, `${book.id} should expose its source-mapped playable story pages`);
   assert.equal(book.sourceSet, 'magic-marker', `${book.id} should preserve its source collection`);
   for (const item of book.pages) {
     assert.equal(item.verificationStatus, 'verified', `${book.id} page ${item.printedPage} should be source-checked`);
@@ -78,7 +80,7 @@ for (const book of magicBooks) {
     await access(new URL(`../${item.audio.slice(2)}`, import.meta.url), fsConstants.R_OK);
   }
   const plan = Array.from(storyDemo.createQuestionPlan(book, seededRandom(book.id.charCodeAt(2)), magicBooks));
-  assert.equal(plan.length, 8, `${book.id} should build one balanced exercise per page`);
+  assert.equal(plan.length, book.pages.length, `${book.id} should build one balanced exercise per page`);
   assert.ok(plan.every((question) => question.choices.length === 4 && question.choices[question.correctIndex] === question.answer), `${book.id} answers should render with one correct choice among four`);
 }
 for (const book of storyDemo.books) {
