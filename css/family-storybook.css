@@ -76,12 +76,13 @@ body {
 .activity h3 { font-size: clamp(1.35rem,2.2vw,1.8rem); margin: 4px 0 12px; }
 .task-instruction { color: var(--muted); line-height: 1.5; margin: 0 0 10px; }
 .task-sentence { display: flex; align-items: center; flex-wrap: wrap; gap: 5px 3px; min-height: 118px; padding: 18px; border: 1px dashed #7a9bce; border-radius: 18px; background: #0e193c; font-size: clamp(1.35rem,2.4vw,1.9rem); font-weight: 900; line-height: 1.8; }
+.task-sentence-speaker { align-self: flex-end; margin-top: 10px; min-height: 48px; }
 .word-slot { display: inline-flex; min-width: 3.1em; min-height: 1.65em; align-items: center; justify-content: center; border: 2px dashed var(--gold); border-radius: 10px; padding: 0 9px; background: #253665; color: var(--gold); font: inherit; font-size: .82em; cursor: pointer; }
 .word-slot:not(:disabled):hover { border-style: solid; background: #34477a; }
 .word-bank-wrap { margin-top: 16px; }
 .word-bank-wrap h4 { margin: 0 0 9px; color: var(--gold); }
 .word-bank { min-height: 94px; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 9px; padding: 12px; border: 1px solid #385b94; border-radius: 16px; background: #111e45; }
-.word-choice { border: 1px solid #6197d4; background: #213d76; color: var(--ink); border-radius: 12px; padding: 10px 15px; font: inherit; font-weight: 800; cursor: pointer; }
+.word-choice { min-height: 56px; border: 1px solid #6197d4; background: #213d76; color: var(--ink); border-radius: 12px; padding: 10px 18px; font: inherit; font-size: clamp(1.15rem,1.8vw,1.4rem); font-weight: 800; cursor: pointer; }
 .word-choice:not(:disabled):hover { border-color: var(--mint); transform: translateY(-1px); }
 .word-choice:disabled { opacity: .42; cursor: default; }
 .task-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: auto; padding-top: 16px; }
