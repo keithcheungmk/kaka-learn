@@ -23,6 +23,21 @@ Source supplied by Keith for the private KAKA Learn app. Originals remain untouc
 - `cf003/pages/page-01.webp`–`page-14.webp` ← PDF pages 2–15 (printed story pages 1–14)
 - `cf003/cf003-the-school-play-page-01.mp3`–`14.mp3` ← clips `110.mp3`–`123.mp3`
 
+## MM001–MM002 Magic Marker pilot
+
+Magic Marker remains a separate Little Fox collection but uses the Carter Family
+Read & Fill renderer. Original PDFs and complete recordings remain unchanged in
+`source-materials/Magic Marker/`; the website contains only selected 900px WebP
+story pages and 22.05kHz, 32kbps mono page clips.
+
+- MM001 *Meet the Characters*: printed pages 1–8 ← PDF pages 3–10; page clips
+  `MM001-pdf03-print01.mp3`–`MM001-pdf10-print08.mp3`.
+- MM002 *Maxie and Taco*: printed pages 1–8 ← PDF pages 3–10; page clips
+  `MM002-pdf03-print01.mp3`–`MM002-pdf10-print08.mp3`.
+- Web derivatives and verified sentence/answer provenance are recorded in
+  `data/magic-marker-manifest.js`; regenerate images/audio with
+  `python3 scripts/build-magic-marker-pilot.py`.
+
 ## CF004–CF010
 
 The first-ten rollout uses the same Read & Fill renderer and keeps only selected

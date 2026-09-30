@@ -232,6 +232,42 @@ def walk(pg, url, shots: Path | None, tag: str):
             pg.wait_for_timeout(500)
             probe("字母音清單")
 
+    # Story English / Magic Marker pilot: keep its series shelf and actual
+    # read-and-fill screen inside the same family-device layout regression.
+    pg.goto(url, wait_until="domcontentloaded")
+    pg.wait_for_timeout(300)
+    pg.click("#btn-profile-kaka")
+    pg.wait_for_timeout(300)
+    pg.click("#btn-start-story-demo")
+    pg.wait_for_selector("#screen-story-series.active [data-series-id='magic-marker']")
+    probe("英文故事書系列")
+    pg.click("#screen-story-series.active [data-series-id='magic-marker']")
+    pg.wait_for_selector("#screen-story-demo.active [data-book-id='mm001']")
+    probe("Magic Marker 書架")
+    pg.click("#screen-story-demo.active [data-book-id='mm001']")
+    pg.wait_for_selector("#screen-story-play.active .story-challenge-page")
+    pg.wait_for_function("document.querySelector('.story-challenge-page')?.complete")
+    probe("MM001 Read & Fill")
+    # Finish the page audio deterministically; the test concerns the gated
+    # audio -> answer interaction, not the real-time duration of the recording.
+    pg.evaluate("document.querySelector('audio[data-story-demo]').dispatchEvent(new Event('ended'))")
+    pg.wait_for_function("!document.querySelector('.story-fill-tile')?.disabled")
+    answer = pg.locator(".story-fill-blank").get_attribute("data-blank")
+    pg.locator(".story-fill-tile").evaluate_all("(tiles, word) => tiles.find(tile => tile.dataset.word === word).click()", answer)
+    pg.click("#btn-story-submit")
+    pg.wait_for_selector("#btn-story-next", timeout=10000)
+    probe("MM001 答對與星星")
+    pg.click("#btn-story-next")
+    pg.wait_for_selector("#screen-story-play.active .story-challenge-page")
+    pg.wait_for_function("document.querySelector('.story-challenge-page')?.complete")
+    probe("MM001 下一頁")
+    pg.click("#btn-back-story-play")
+    pg.wait_for_selector("#screen-story-demo.active [data-book-id='mm002']")
+    pg.click("#screen-story-demo.active [data-book-id='mm002']")
+    pg.wait_for_selector("#screen-story-play.active .story-challenge-page")
+    pg.wait_for_function("document.querySelector('.story-challenge-page')?.complete")
+    probe("MM002 Read & Fill")
+
     return seen
 
 

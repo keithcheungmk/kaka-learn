@@ -93,9 +93,16 @@
     },
   ];
 
-  // CF001–CF003 stay as the golden UI/content template. Additional books are
-  // supplied by the verified Carter manifest loaded before this script.
-  const BOOKS = BASE_BOOKS.concat(window.KakaCarterManifest?.books || []);
+  // Carter Family and Magic Marker keep separate catalogues and progress keys,
+  // while sharing this verified page-listen/read-and-fill experience.
+  const CARTER_BOOKS = BASE_BOOKS.concat(window.KakaCarterManifest?.books || []);
+  const MAGIC_MARKER_BOOKS = window.KakaMagicMarkerManifest?.books || [];
+  const SERIES = [
+    { id: 'carter', title: 'Carter Family', label: 'CARTER FAMILY', range: 'CF001–CF085', image: CARTER_BOOKS[0]?.cover || CARTER_BOOKS[0]?.pages[0]?.image, description: '生活故事 · 聆聽、閱讀與句子填字', books: CARTER_BOOKS },
+    { id: 'magic-marker', title: 'Magic Marker', label: 'MAGIC MARKER', range: 'MM001–MM002 · Demo', image: MAGIC_MARKER_BOOKS[0]?.cover || MAGIC_MARKER_BOOKS[0]?.pages[0]?.image, description: 'Maxie、Taco、Alex 和 Sue 的故事', books: MAGIC_MARKER_BOOKS },
+  ];
+  let currentSeriesId = 'carter';
+  let BOOKS = CARTER_BOOKS;
 
   const OPTION_LABELS = ['A', 'B', 'C', 'D'];
   const normalizeOption = (word) => String(word || '').toLowerCase().replace(/[^a-z]/g, '');
@@ -122,11 +129,11 @@
     return ordered;
   }
 
-  function createQuestionPlan(bookOrId, random = Math.random) {
-    const book = typeof bookOrId === 'string' ? BOOKS.find((candidate) => candidate.id === bookOrId) : bookOrId;
+  function createQuestionPlan(bookOrId, random = Math.random, sourceBooks = BOOKS) {
+    const book = typeof bookOrId === 'string' ? sourceBooks.find((candidate) => candidate.id === bookOrId) : bookOrId;
     if (!book?.pages?.length) return [];
     const localWordPool = book.pages.flatMap((page) => [...(page.blanks || []), ...(page.choices || [])]);
-    const allWordPool = BOOKS.flatMap((candidateBook) => candidateBook.pages.flatMap((page) => [...(page.blanks || []), ...(page.choices || [])]));
+    const allWordPool = sourceBooks.flatMap((candidateBook) => candidateBook.pages.flatMap((page) => [...(page.blanks || []), ...(page.choices || [])]));
     const answerSlots = balancedAnswerSlots(book.pages.length, random);
 
     return book.pages.map((page, pageIndex) => {
@@ -170,22 +177,35 @@
   }
   function home() { invalidatePlayback(); activeBookId = null; if (window.KakaLearn?.goHome) window.KakaLearn.goHome(); else show('home'); }
   function activeBook() { return BOOKS.find((book) => book.id === activeBookId) || null; }
+  function activeSeries() { return SERIES.find((series) => series.id === currentSeriesId) || SERIES[0]; }
   function pages() { return activeBook()?.pages || []; }
   function current() { return pages()[pageIndex]; }
-  function totalPages() { return BOOKS.reduce((sum, book) => sum + book.pages.length, 0); }
+  function totalPages(books = BOOKS) { return books.reduce((sum, book) => sum + book.pages.length, 0); }
+
+  function renderSeriesChooser() {
+    const grid = $('#story-series-grid');
+    if (!grid) return;
+    grid.innerHTML = SERIES.map((series) => `<button type="button" class="story-activity-card story-activity-card--read" data-series-id="${series.id}">
+      <img class="story-activity-image" src="${series.image || ''}" alt="" loading="lazy" decoding="async">
+      <strong>${series.title}</strong><small>${series.books.length} books · ${series.range}</small>
+      <span class="story-activity-description">${series.description}</span><span class="story-activity-status">Open stories →</span>
+    </button>`).join('');
+    $$('[data-series-id]', grid).forEach((button) => button.addEventListener('click', () => openHub(button.dataset.seriesId)));
+  }
 
   function renderHub() {
+    const series = activeSeries();
     $('#story-demo-complete').textContent = `${BOOKS.length} books`;
     const heroCover = $('#story-demo-hero-cover');
     const heroKicker = $('#story-demo-kicker');
     const heroTitle = $('#story-demo-hero-title');
     if (heroCover) heroCover.src = BOOKS[0].cover || BOOKS[0].pages[0]?.image || '';
-    if (heroKicker) heroKicker.textContent = `CARTER FAMILY · ${BOOKS[0].cfLabel}–${BOOKS[BOOKS.length - 1].cfLabel}`;
-    if (heroTitle) heroTitle.textContent = 'Story Books';
+    if (heroKicker) heroKicker.textContent = `${series.label} · ${series.range}`;
+    if (heroTitle) heroTitle.textContent = series.title;
     const grid = $('#story-demo-activity-grid');
     grid.innerHTML = BOOKS.map((book) => `<button type="button" class="story-activity-card story-activity-card--read" data-book-id="${book.id}">
       <img class="story-activity-image" src="${book.cover || book.pages[0]?.image || ''}" alt="" loading="lazy" decoding="async">
-      <strong>${book.title}</strong><small>${book.cfLabel} · ${book.pages.length} pages</small>
+      <strong>${book.title}</strong><small>${book.cfLabel || book.mmLabel} · ${book.pages.length} pages</small>
       <span class="story-activity-description">聽每一頁，再放回剛才聽到的一個字。</span><span class="story-activity-status">Start →</span>
     </button>`).join('');
     $$('[data-book-id]', grid).forEach((button) => {
@@ -193,13 +213,22 @@
     });
   }
 
-  function openHub() { activeBookId = null; renderHub(); show('story-demo'); }
+  function openSeriesChooser() { activeBookId = null; renderSeriesChooser(); show('story-series'); }
+  function openHub(seriesId = currentSeriesId) {
+    const series = SERIES.find((item) => item.id === seriesId);
+    if (!series?.books?.length) return;
+    currentSeriesId = series.id;
+    BOOKS = series.books;
+    activeBookId = null;
+    renderHub();
+    show('story-demo');
+  }
   function startBook(bookId) {
     const book = BOOKS.find((item) => item.id === bookId);
     if (!book) return;
     activeBookId = bookId;
     pageIndex = 0;
-    questionPlan = createQuestionPlan(book);
+    questionPlan = createQuestionPlan(book, Math.random, BOOKS);
     phase = 'listen';
     busy = false;
     selectedWord = null;
@@ -384,7 +413,7 @@
     const list = pages();
     const stage = $('#story-play-stage');
     const locked = phase === 'listen' && !solved;
-    $('#btn-back-story-play').textContent = `← ${book.title}`;
+    $('#btn-back-story-play').textContent = `← ${activeSeries().title} 書架`;
     $('#story-play-title').textContent = 'Read & Fill';
     $('#story-play-lead').textContent = locked
       ? '先聽這一頁故事；聽完就可以揀字。'
@@ -501,9 +530,9 @@
     $('#story-play-stage').classList.remove('story-page-challenge', 'is-listening', 'is-solved');
     $('#story-play-stage').innerHTML = `<div class="story-finish"><span>★</span><h2>${book.title} Complete!</h2><p>Read the story again whenever you like.</p></div>`;
     $('#story-play-actions').innerHTML = '<button type="button" class="btn btn-secondary" id="btn-story-restart">Read again</button>';
-    $('#story-play-options').innerHTML = '<button type="button" class="story-answer" id="btn-story-home">Back to Story Books</button>';
+    $('#story-play-options').innerHTML = `<button type="button" class="story-answer" id="btn-story-home">Back to ${activeSeries().title} Books</button>`;
     $('#btn-story-restart')?.addEventListener('click', () => startBook(book.id));
-    $('#btn-story-home')?.addEventListener('click', openHub);
+    $('#btn-story-home')?.addEventListener('click', () => openHub());
   }
 
   function renderPage() {
@@ -516,16 +545,19 @@
   function init() {
     speech.warmVoices?.();
     speech.warmEnglishVoice?.();
-    $('#btn-start-story-demo')?.addEventListener('click', openHub);
-    $('#btn-back-story-demo')?.addEventListener('click', home);
-    $('#btn-back-story-play')?.addEventListener('click', openHub);
+    $('#btn-start-story-demo')?.addEventListener('click', openSeriesChooser);
+    $('#btn-back-story-series')?.addEventListener('click', home);
+    $('#btn-back-story-demo')?.addEventListener('click', openSeriesChooser);
+    $('#btn-back-story-play')?.addEventListener('click', () => openHub());
   }
 
   init();
   window.KakaStoryDemo = {
-    open: openHub,
-    books: BOOKS.map((book) => ({ id: book.id, title: book.title, pageCount: book.pages.length })),
-    pageCount: totalPages(),
+    open: openSeriesChooser,
+    openSeries: openHub,
+    series: SERIES.map((series) => ({ id: series.id, title: series.title, bookCount: series.books.length, pageCount: totalPages(series.books) })),
+    books: CARTER_BOOKS.map((book) => ({ id: book.id, title: book.title, pageCount: book.pages.length })),
+    pageCount: totalPages(CARTER_BOOKS),
     createQuestionPlan,
   };
 }());

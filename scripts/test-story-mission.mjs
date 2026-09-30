@@ -6,20 +6,26 @@ import vm from 'node:vm';
 
 const source = await readFile(new URL('../js/story-demo.js', import.meta.url), 'utf8');
 const manifestSource = await readFile(new URL('../data/carter-family-manifest.js', import.meta.url), 'utf8');
+const magicManifestSource = await readFile(new URL('../data/magic-marker-manifest.js', import.meta.url), 'utf8');
 const starFx = await readFile(new URL('../js/star-fx.js', import.meta.url), 'utf8');
 const css = await readFile(new URL('../css/story-demo.css', import.meta.url), 'utf8');
 const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const manifestSandbox = { window: {} };
 vm.runInNewContext(manifestSource, manifestSandbox);
 const manifestBooks = manifestSandbox.window.KakaCarterManifest.books;
+const magicManifestSandbox = { window: {} };
+vm.runInNewContext(magicManifestSource, magicManifestSandbox);
+const magicBooks = magicManifestSandbox.window.KakaMagicMarkerManifest.books;
 
 assert.match(source, /const BASE_BOOKS = \[/, 'Read & Fill should keep the three-book template catalogue');
 assert.match(source, /BASE_BOOKS\.concat\(window\.KakaCarterManifest/, 'Additional Carter books should come from the manifest');
+assert.match(source, /window\.KakaMagicMarkerManifest\?\.books/, 'Magic Marker books should come from their own manifest');
+assert.match(source, /function openSeriesChooser/, 'English story entry should lead to the series chooser');
 assert.match(source, /id: 'cf001'/, 'CF001 Game Night should remain available');
 assert.match(source, /id: 'cf002'/, 'CF002 The Tree House should be available');
 assert.match(source, /id: 'cf003'/, 'CF003 The School Play should be available');
 assert.match(source, /function startBook/, 'Hub cards should start a chosen book');
-assert.match(source, /pageCount: totalPages\(\)/, 'Total page count should be exposed for the demo');
+assert.match(source, /pageCount: totalPages\(CARTER_BOOKS\)/, 'Total Carter page count should remain exposed for the demo');
 
 const sourceClipCount = (source.match(/sourceClip: '/g) || []).length;
 const blankCount = (source.match(/blanks: \[/g) || []).length;
@@ -45,7 +51,7 @@ for (const book of manifestBooks) {
 }
 
 const storySandbox = {
-  window: { KakaCarterManifest: { books: manifestBooks }, KakaSpeech: {} },
+  window: { KakaCarterManifest: { books: manifestBooks }, KakaMagicMarkerManifest: { books: magicBooks }, KakaSpeech: {} },
   document: { querySelector: () => null, querySelectorAll: () => [] },
   console,
 };
@@ -53,11 +59,28 @@ vm.runInNewContext(source, storySandbox);
 const storyDemo = storySandbox.window.KakaStoryDemo;
 assert.equal(storyDemo.books.length, 85, 'The balanced answer system should include all 85 Carter books');
 assert.equal(storyDemo.pageCount, 1033, 'The balanced answer system should cover all 1,033 story pages');
+assert.deepEqual(Array.from(storyDemo.series, (series) => [series.id, series.bookCount, series.pageCount]), [['carter', 85, 1033], ['magic-marker', 2, 16]], 'Little Fox should keep Carter and Magic Marker as separate collections');
+assert.deepEqual(Array.from(magicBooks, (book) => book.id), ['mm001', 'mm002'], 'The pilot catalogue should contain exactly MM001 and MM002');
 const normalize = (word) => String(word).toLowerCase().replace(/[^a-z]/g, '');
 const seededRandom = (seed) => () => {
   seed = (seed * 1664525 + 1013904223) >>> 0;
   return seed / 0x100000000;
 };
+for (const book of magicBooks) {
+  assert.equal(book.pages.length, 8, `${book.id} should expose its eight printed story pages`);
+  assert.equal(book.sourceSet, 'magic-marker', `${book.id} should preserve its source collection`);
+  for (const item of book.pages) {
+    assert.equal(item.verificationStatus, 'verified', `${book.id} page ${item.printedPage} should be source-checked`);
+    assert.equal(item.blanks.length, 1, `${book.id} page ${item.printedPage} should have one blank`);
+    assert.equal(item.choices.length, 3, `${book.id} page ${item.printedPage} should define the answer and two reviewed distractors`);
+    assert.ok(item.sentence.includes(item.blanks[0]), `${book.id} blank should appear in the sentence`);
+    await access(new URL(`../${item.image.slice(2)}`, import.meta.url), fsConstants.R_OK);
+    await access(new URL(`../${item.audio.slice(2)}`, import.meta.url), fsConstants.R_OK);
+  }
+  const plan = Array.from(storyDemo.createQuestionPlan(book, seededRandom(book.id.charCodeAt(2)), magicBooks));
+  assert.equal(plan.length, 8, `${book.id} should build one balanced exercise per page`);
+  assert.ok(plan.every((question) => question.choices.length === 4 && question.choices[question.correctIndex] === question.answer), `${book.id} answers should render with one correct choice among four`);
+}
 for (const book of storyDemo.books) {
   let sawDifferentRun = false;
   let previousSignature = '';
@@ -122,7 +145,8 @@ assert.doesNotMatch(source, /story-fill-tools/, 'Story listen should not share t
 assert.match(index, /每頁先聽故事，再把剛才聽到的一個字放回短句/);
 assert.match(index, /data\/carter-family-manifest\.js/, 'The Carter manifest must load before Story English');
 assert.match(starFx, /'screen-story-play'/, 'Story play should use the shared ranger star animation');
-assert.match(index, /STORY ENGLISH・Carter Family/, 'Home entry should name the Carter Family track');
+assert.match(index, /英文故事書・Little Fox 系列/, 'Home entry should name the Little Fox story collection');
+assert.match(index, /id="screen-story-series"/, 'Little Fox entry should expose a collection chooser');
 
 const requiredAssets = [
   '../assets/story-demo/pages/page-01.webp',
@@ -131,6 +155,10 @@ const requiredAssets = [
   '../assets/story-demo/cf002/cf002-the-tree-house-page-12.mp3',
   '../assets/story-demo/cf003/pages/page-14.webp',
   '../assets/story-demo/cf003/cf003-the-school-play-page-14.mp3',
+  '../assets/story-demo/mm001/pages/page-01.webp',
+  '../assets/story-demo/mm001/mm001-page-01.mp3',
+  '../assets/story-demo/mm002/pages/page-08.webp',
+  '../assets/story-demo/mm002/mm002-page-08.mp3',
 ];
 for (const relative of requiredAssets) {
   await access(new URL(relative, import.meta.url), fsConstants.R_OK);

@@ -5,6 +5,7 @@
 .story-demo-screen.active { position: relative; isolation: isolate; }
 .story-demo-screen.active::before { content: ""; position: fixed; z-index: -1; inset: 0; background: radial-gradient(circle at 80% 15%, rgba(251,146,60,.2), transparent 26%), linear-gradient(180deg, rgba(13,20,61,.88), rgba(41,20,76,.88)), url("../assets/chinese-space-bg.jpg") center / cover; }
 .story-demo-hero { width: min(860px,94vw); display: grid; grid-template-columns: minmax(180px,28%) minmax(0,1fr); align-items: center; gap: clamp(12px,2vw,24px); margin: clamp(12px,2vh,24px) auto; padding: clamp(16px,2.5vw,28px); border: 2px solid rgba(251,191,36,.6); border-radius: 26px; background: linear-gradient(135deg,rgba(101,53,165,.82),rgba(190,67,132,.76)); box-shadow: 0 16px 38px rgba(8,10,38,.38); }
+.story-series-hero { grid-template-columns: 1fr; }
 .story-demo-kicker { color: #fde68a; font-family: var(--font-display); font-size: clamp(.72rem,1.4vw,.9rem); letter-spacing: .08em; }
 .story-demo-hero-cover { width: 100%; max-height: 130px; object-fit: cover; border: 2px solid rgba(255,255,255,.4); border-radius: 14px; background: #fff; }
 .story-demo-hero-copy { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
