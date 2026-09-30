@@ -18,7 +18,7 @@
       <div class="intro">
         <p class="eyebrow">聽故事・讀句子・玩生字</p>
         <h2 id="library-heading">今天想和他們去哪裏？</h2>
-        <p>每個故事有六頁；每頁讀一句故事，再聽一位角色說話，最後把兩個重點詞放回句子。</p>
+        <p>每個故事有六頁；每頁讀一段故事，聽句子，再把兩個重點詞放回句子。</p>
       </div>
       <div id="story-grid" class="story-grid"></div>
       <section class="cast-section" hidden aria-hidden="true">
@@ -44,10 +44,8 @@
         <article class="book-page">
           <p class="panel-label">故事閱讀</p>
           <figure class="scene-frame"><img id="scene-image" alt="故事插圖"><figcaption id="scene-caption"></figcaption></figure>
-          <div class="sentence-row"><div class="sentence-copy"><span class="text-kind-label">故事句子</span><p id="page-sentence"></p></div><button id="speak-sentence" class="speak-button" type="button">🔊 聽本頁</button></div>
-          <div class="dialogue-bubble" aria-label="角色對白"><span id="dialogue-speaker" class="dialogue-speaker"></span><p id="page-dialogue" class="dialogue"></p></div>
+          <div class="sentence-row"><p id="page-reading" class="page-reading"></p><button id="speak-sentence" class="speak-button" type="button">🔊 聽本頁</button></div>
           <p id="audio-feedback" class="audio-feedback" aria-live="polite"></p>
-          <p id="source-note" class="source-note"></p>
         </article>
         <section id="activity" class="activity" aria-labelledby="activity-heading">
           <p class="panel-label">本頁詞語任務</p>
