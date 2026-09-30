@@ -16,7 +16,7 @@
   }
 
   function bootMath() {
-    if (!window.KakaMathStorage || !window.KakaMathSkills || !window.KakaMathMercuryCountData || !window.KakaMathMercuryCountGame || !window.KakaAdditionData || !window.KakaAdditionGame) {
+    if (!window.KakaMathStorage || !window.KakaMathSkills || !window.KakaMathMercuryCountData || !window.KakaMathMercuryCountGame || !window.KakaMathLifeSkillsData || !window.KakaMathLifeSkillsGame || !window.KakaAdditionData || !window.KakaAdditionGame) {
       console.error('KakaMath: math modules missing.');
       disableMathEntry();
       return;
@@ -78,6 +78,7 @@
       vlearn: '#screen-math-venus-learn',
       vplay: '#screen-math-venus-play',
       time: '#screen-math-time',
+      lifeSkill: '#screen-math-life-skill',
     };
 
     let vLearnIndex = 0;
@@ -111,7 +112,7 @@
       const sel = screens[name] || screens.galaxy;
       const el = $(sel);
       el?.classList.add('active');
-      if (['relationsPlay', 'additionPlay', 'time'].includes(name)) {
+      if (['relationsPlay', 'additionPlay', 'time', 'lifeSkill'].includes(name)) {
         const fx = window.KakaStarFx;
         fx?.mountPlayScreen?.(el);
         fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
@@ -644,6 +645,20 @@
       isMuted,
     });
 
+    window.KakaMathLifeSkillsGame.init({
+      storage: window.KakaMathStorage,
+      loadState,
+      tryEarnStar,
+      mastery,
+      openGalaxy,
+      showMathScreen,
+      showMathRoundReward,
+      speak,
+      speech,
+      isMuted,
+      playMathStarReward,
+    });
+
     window.KakaMath = {
       goHome,
       openPlanet,
@@ -653,6 +668,7 @@
       openMoonSubtraction: () => window.KakaSubtractionGame?.openMoonSubtraction(),
       openVenusLearn,
       openTimeQuiz,
+      openLifeSkill: (activityId) => window.KakaMathLifeSkillsGame.start(activityId),
       openGalaxy,
       offerWarpHop,
     };

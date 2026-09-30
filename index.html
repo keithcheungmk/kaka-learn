@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="./css/styles.css?v=20260928story-scroll" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260905list" />
   <link rel="stylesheet" href="./css/story-demo.css?v=20260911b" />
-  <link rel="stylesheet" href="./css/math.css?v=20260927a" />
+  <link rel="stylesheet" href="./css/math.css?v=20261001-life-skills" />
   <link rel="stylesheet" href="./css/additionGame.css?v=4751bde" />
   <link rel="stylesheet" href="./css/playground-theme.css?v=20260927a" />
 </head>
@@ -819,6 +819,34 @@
       </div>
       <p class="section-lead math-galaxy-lead"><span aria-hidden="true">🚀</span> 揀一個數學任務，出發探險！ <span aria-hidden="true">✨</span></p>
       <div class="topic-grid math-galaxy-grid" id="math-galaxy-grid"></div>
+      <section class="math-extra-missions" aria-labelledby="math-extra-missions-title">
+        <div class="math-extra-missions-heading">
+          <span class="math-extra-missions-kicker">日常數學・動手試</span>
+          <h2 id="math-extra-missions-title">生活數感任務</h2>
+          <p>每張卡都會話你知喺邊粒星球、今次要玩乜。</p>
+        </div>
+        <div class="math-extra-mission-grid" id="math-extra-mission-grid"></div>
+      </section>
+    </section>
+
+    <section id="screen-math-life-skill" class="screen math-screen math-life-skill-screen" aria-label="生活數學任務">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-life-skill">← 銀河任務</button>
+        <h1 id="math-life-skill-title">生活數學</h1>
+        <div class="progress-pill" aria-label="任務進度"><strong id="math-life-skill-progress">1/5</strong></div>
+      </div>
+      <p class="math-life-skill-planet" id="math-life-skill-planet">水星任務</p>
+      <p class="math-life-skill-prompt" id="math-life-skill-prompt" aria-live="polite"></p>
+      <div class="math-life-skill-board-wrap">
+        <div class="math-life-skill-board-heading"><span aria-hidden="true">🪄</span> 一起動手做</div>
+        <div class="math-life-skill-board" id="math-life-skill-board" aria-label="題目圖片"></div>
+      </div>
+      <aside class="math-life-skill-answer-panel" aria-label="答案和提示">
+        <div class="math-life-skill-answers-heading"><span aria-hidden="true">💡</span> 揀答案</div>
+        <div class="math-life-skill-choices" id="math-life-skill-choices" aria-label="答案選項"></div>
+        <p class="feedback math-life-skill-feedback" id="math-life-skill-feedback" aria-live="polite"></p>
+        <button type="button" class="btn math-life-skill-next" id="btn-math-life-skill-next" hidden>下一題 →</button>
+      </aside>
     </section>
   </div>
 
@@ -915,7 +943,9 @@
   <script src="./js/additionGame.js?v=20260908a"></script>
   <script src="./js/subtractionData.js?v=20260908a"></script>
   <script src="./js/subtractionGame.js?v=20260908a"></script>
-  <script src="./js/math-app.js?v=20260927a"></script>
+  <script src="./js/math-life-skills-data.js?v=20261001-life-skills"></script>
+  <script src="./js/math-life-skills-game.js?v=20261001-life-skills"></script>
+  <script src="./js/math-app.js?v=20261001-life-skills"></script>
   <script src="./js/version-check.js?v=20260903a"></script>
 </body>
 </html>
