@@ -14,7 +14,7 @@
   const library = $('library'), reader = $('reader');
   const finishedKey = 'kaka-family-storybook-finished-v1';
   const voiceKey = 'kaka-family-storybook-mandarin-voice-v1';
-  let current = null, pageIndex = 0, pageStates = [], selectedVoice = null, voiceList = [], activeUtterance = null, activeSlots = [], activeSlot = 0;
+  let current = null, pageIndex = 0, pageStates = [], selectedVoice = null, voiceList = [], activeUtterance = null, activeSpeechFallback = null, activeSlots = [], activeSlot = 0;
   const safeRead = key => { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } };
   const refreshStars = () => { $('star-total').textContent = safeRead(finishedKey).length; };
   const shuffle = values => [...values].map(value => [Math.random(), value]).sort((a,b) => a[0]-b[0]).map(pair => pair[1]);
@@ -39,6 +39,8 @@
     renderPage(); window.scrollTo({top:0,behavior:'smooth'});
   }
   function stopSpeech() {
+    if (activeSpeechFallback) window.clearTimeout(activeSpeechFallback);
+    activeSpeechFallback = null;
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     activeUtterance = null;
   }
@@ -125,42 +127,84 @@
     window.speechSynthesis.addEventListener('voiceschanged', refreshVoices);
   } else refreshVoices();
 
-  function speakMandarin(text, { unlockPage = false, test = false } = {}) {
+  function speakMandarin(text, { unlockPage = false, test = false, onEnd = null, onError = null } = {}) {
     stopSpeech();
     if (!('speechSynthesis' in window) || typeof SpeechSynthesisUtterance === 'undefined') {
       $('voice-status').textContent = '此瀏覽器不支援語音合成。';
       $('guardian-unlock').classList.remove('hidden');
-      return;
+      return false;
     }
     if (!hasMandarinVoice()) {
       $('audio-feedback').textContent = '找不到已選的普通話聲線；不會使用系統預設聲線。';
       $('guardian-unlock').classList.remove('hidden');
-      return;
+      return false;
     }
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.voice = selectedVoice;
     utterance.lang = selectedVoice.lang;
     utterance.rate = 0.95;
     activeUtterance = utterance;
+    activeSpeechFallback = window.setTimeout(() => {
+      if (activeUtterance !== utterance) return;
+      activeUtterance = null;
+      activeSpeechFallback = null;
+      window.speechSynthesis.cancel();
+      $('audio-feedback').textContent = '語音播放時間較長，已停止；可以再按喇叭重播。';
+      if (typeof onError === 'function') onError({ error: 'timeout' });
+    }, Math.max(10000, Math.min(60000, text.length * 600 + 5000)));
     $('audio-feedback').textContent = test ? '正在試聽所選聲線……' : '正在播放所選普通話聲線……';
     utterance.onend = () => {
       if (activeUtterance !== utterance) return;
       activeUtterance = null;
+      if (activeSpeechFallback) window.clearTimeout(activeSpeechFallback);
+      activeSpeechFallback = null;
       $('audio-feedback').textContent = test ? `試聽完成：${selectedVoice.name}（${selectedVoice.lang}）。請確認聽起來是普通話。` : '播放完畢。';
       if (unlockPage && current) {
-        pageStates[pageIndex].unlocked = true;
+        const unlockedPageIndex = pageIndex;
+        pageStates[unlockedPageIndex].unlocked = true;
         $('guardian-unlock').classList.add('hidden');
         $('task-feedback').textContent = '聽完了，請把兩個重點詞放回句子。';
-        renderWordTask(current.pages[pageIndex], pageStates[pageIndex]);
+        renderWordTask(current.pages[unlockedPageIndex], pageStates[unlockedPageIndex]);
+        const unlockedPage = current.pages[unlockedPageIndex];
+        const unlockedState = pageStates[unlockedPageIndex];
+        unlockedState.audioLocked = true;
+        $('speak-sentence').disabled = true;
+        $('test-voice').disabled = true;
+        renderWordTask(unlockedPage, unlockedState);
+        const readStarted = speakMandarin(unlockedPage.sentence, {
+          onEnd: () => {
+            unlockedState.audioLocked = false;
+            $('speak-sentence').disabled = false;
+            $('test-voice').disabled = !hasMandarinVoice();
+            if (current?.pages[pageIndex] === unlockedPage) renderWordTask(unlockedPage, unlockedState);
+          },
+          onError: () => {
+            unlockedState.audioLocked = false;
+            $('speak-sentence').disabled = false;
+            $('test-voice').disabled = !hasMandarinVoice();
+            if (current?.pages[pageIndex] === unlockedPage) renderWordTask(unlockedPage, unlockedState);
+          }
+        });
+        if (!readStarted) {
+          unlockedState.audioLocked = false;
+          $('speak-sentence').disabled = false;
+          $('test-voice').disabled = !hasMandarinVoice();
+          renderWordTask(unlockedPage, unlockedState);
+        }
       }
+      if (typeof onEnd === 'function') onEnd();
     };
     utterance.onerror = event => {
       if (activeUtterance !== utterance) return;
       activeUtterance = null;
+      if (activeSpeechFallback) window.clearTimeout(activeSpeechFallback);
+      activeSpeechFallback = null;
       $('audio-feedback').textContent = `語音播放失敗（${event.error || '未知錯誤'}）。請試另一個普通話聲線，或由家長朗讀。`;
       $('guardian-unlock').classList.remove('hidden');
+      if (typeof onError === 'function') onError(event);
     };
     window.speechSynthesis.speak(utterance);
+    return true;
   }
   $('test-voice').addEventListener('click', () => speakMandarin('你好，這是普通話聲線試聽。', {test:true}));
   $('speak-sentence').addEventListener('click', () => {
@@ -177,6 +221,16 @@
     $('task-feedback').textContent = '現在可以開始填詞。';
     renderWordTask(current.pages[pageIndex], pageStates[pageIndex]);
   });
+  $('speak-task-sentence').addEventListener('click', () => {
+    if (!current || !pageStates[pageIndex]?.unlocked) return;
+    speakMandarin(current.pages[pageIndex].sentence);
+  });
+
+  function setSolvedSpeechControls(disabled) {
+    $('speak-sentence').disabled = disabled;
+    $('speak-task-sentence').disabled = disabled || !pageStates[pageIndex]?.unlocked;
+    $('test-voice').disabled = disabled || !hasMandarinVoice();
+  }
 
   function renderWordTask(page, state) {
     const targets = page.focusWords.map(word => ({ word, start: page.sentence.indexOf(word) })).sort((a,b) => a.start-b.start);
@@ -193,7 +247,7 @@
       slot.type = 'button'; slot.className = 'word-slot'; slot.dataset.slot = String(index);
       slot.textContent = state.answers[index] || '＿＿＿＿';
       slot.setAttribute('aria-label', state.answers[index] ? `空格 ${index+1}：${state.answers[index]}，按一下移除` : `第 ${index+1} 個詞語空格`);
-      slot.disabled = !state.unlocked || state.solved;
+      slot.disabled = !state.unlocked || state.solved || state.audioLocked;
       slot.addEventListener('click', () => {
         if (state.solved || !state.unlocked) return;
         if (state.answers[index]) state.answers[index] = '';
@@ -204,19 +258,21 @@
     });
     pieces.push(document.createTextNode(page.sentence.slice(cursor)));
     $('task-sentence').replaceChildren(...pieces);
+    $('speak-task-sentence').disabled = !state.unlocked || state.audioLocked || state.speechSequenceActive;
     const distractors = (page.distractors || []).slice(0,2);
     const pool = shuffle([...new Set([...activeSlots, ...distractors])]);
     const bank = $('word-bank'); bank.replaceChildren();
     pool.forEach(word => {
       const button = document.createElement('button');
       button.type = 'button'; button.className = 'word-choice'; button.textContent = word;
-      button.disabled = !state.unlocked || state.solved || state.answers.includes(word);
+      button.disabled = !state.unlocked || state.solved || state.audioLocked || state.answers.includes(word);
       button.setAttribute('aria-pressed', String(state.answers.includes(word)));
       button.addEventListener('click', () => {
         if (button.disabled) return;
         let index = activeSlot;
         if (state.answers[index]) index = state.answers.findIndex(value => !value);
         if (index < 0) return;
+        speakMandarin(word);
         state.answers[index] = word;
         activeSlot = state.answers.findIndex(value => !value);
         if (activeSlot < 0) activeSlot = index;
@@ -224,8 +280,8 @@
       });
       bank.append(button);
     });
-    $('submit-page').disabled = !state.unlocked || state.solved || state.answers.some(answer => !answer);
-    $('reset-page').disabled = !state.unlocked || state.solved;
+    $('submit-page').disabled = !state.unlocked || state.solved || state.audioLocked || state.answers.some(answer => !answer);
+    $('reset-page').disabled = !state.unlocked || state.solved || state.audioLocked;
     $('task-instruction').textContent = state.unlocked ? '詞語池中有兩個干擾詞；按空格再選詞，或直接選詞填入下一格。' : '先按左邊「聽本頁」，聽完句子後再開始；沒有普通話聲線時可請家長代讀。';
   }
   $('reset-page').addEventListener('click', () => {
@@ -241,15 +297,35 @@
     const expected = [...page.focusWords].sort((a,b) => page.sentence.indexOf(a)-page.sentence.indexOf(b));
     if (state.answers.every((answer,index) => answer === expected[index])) {
       state.solved = true;
-      $('task-feedback').textContent = '答對了！你已把本頁句子補完整。';
+      state.speechSequenceActive = true;
+      $('task-feedback').textContent = '答對了！正在重讀完整句子……';
       $('task-feedback').classList.add('success');
-      $('next-page').disabled = false;
+      $('next-page').disabled = true;
+      setSolvedSpeechControls(true);
       renderWordTask(page, state);
       const celebration = $('answer-celebration');
       celebration.classList.remove('hidden');
       celebration.classList.remove('play');
       void celebration.offsetWidth;
       celebration.classList.add('play');
+      const finishSolvedSpeech = () => {
+        state.speechSequenceActive = false;
+        setSolvedSpeechControls(false);
+        renderWordTask(page, state);
+        $('next-page').disabled = false;
+      };
+      const sentenceRead = speakMandarin(page.sentence, {
+        onEnd: () => {
+          $('task-feedback').textContent = '你好叻！你已把本頁句子補完整。';
+          const praiseRead = speakMandarin('你好叻！', { onEnd: finishSolvedSpeech, onError: finishSolvedSpeech });
+          if (!praiseRead) finishSolvedSpeech();
+        },
+        onError: finishSolvedSpeech
+      });
+      if (!sentenceRead) {
+        $('task-feedback').textContent = '答對了！你好叻！你已把本頁句子補完整。';
+        finishSolvedSpeech();
+      }
     } else {
       $('task-feedback').textContent = '再看一次句子中的位置，調整詞語後再提交。';
       $('task-feedback').classList.remove('success');
