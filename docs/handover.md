@@ -104,7 +104,8 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 ### 2026-10-01 · ChatGPT／Codex（故事閱讀頁改為 60:40）
 
 - 故事閱讀頁桌面雙欄改為左側 60%、右側 40%，放大場景插圖；右側「重新選詞／提交本頁」按鈕移近詞語池，減少內容區之間的空位。窄屏仍按原設定改為上下排列。
-- 驗證：家族故事內容檢查 11 篇／68 頁、39 項 invariants、`git diff --check` 均通過；Chrome 本機預覽確認職業故事頁圖片和詞語任務以約 60:40 並排顯示。未做實體 iPad／iPhone 驗收。
+- 驗證：家族故事內容檢查 11 篇／68 頁、40 項 invariants、`git diff --check` 均通過；Chrome 本機及公開頁面都確認職業故事頁圖片和詞語任務以約 60:40 並排顯示。未做實體 iPad／iPhone 驗收。
+- `db1b42d` 已推送至 `main`；公開故事頁及新版版面已核實。
 - 改動檔案：`css/family-storybook.css`、`docs/handover.md`。
 
 ### 2026-10-01 · ChatGPT／Codex（新增職業志願故事）
