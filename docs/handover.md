@@ -878,3 +878,10 @@ python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
 - Automated checks: story mission tests and all 40 invariants pass. Full set of web audio candidates decoded in the earlier local QA pass; no source PDFs/MP3s were modified. Local browser/iPad QA still unavailable in this session (`python -m http.server` socket permission denied; Playwright Chromium MachPortRendezvous permission denied). User authorized deployment before manual listening/device QA; those review states remain visibly pending in the activity.
 - Change set: `AGENTS.md`, `index.html`, `js/story-demo.js`, `css/story-demo.css`, `data/wacky-ricky-manifest.js`, `assets/wacky-ricky/`, `scripts/build-wacky-ricky-site-data.py`, `scripts/check-invariants.py`, `scripts/test-story-mission.mjs`.
 - Release state: committed as `7bc6ad4`, pushed to `main`, and deployed successfully by GitHub Pages workflow `36856877836` (CI workflow `36856877859` also passed). Live checks returned HTTP 200 for the app, Wacky Ricky manifest, and a sample page image. Manual listening review (477 priority pages) and iPad visual QA remain pending by explicit user authorization.
+
+### 2026-10-01 · ChatGPT/Codex — English Sight Words Jobs
+
+- Added a bilingual `職業 / Jobs` topic with two groups: People Around Us (25) and Jobs Around the World (20), reusing the same occupation emoji illustrations as Chinese recognition cards; added no new binary assets.
+- Both groups use the existing Sight Words spelling and picture-word matching flow. Multiword job titles preserve spaces between words. The shared group picker now uses generic labels instead of festival-only copy.
+- Validation: `node scripts/test-phonics-flow.mjs`, `python3 -B scripts/check-invariants.py` (40 checks; assets total 208.59 MB), JS syntax checks, and `git diff --check` passed. Device smoke is delegated to the existing Pages workflow because no layout or interaction behavior changed.
+- The release push triggers Pages; final CI, deployment, and live status are reported with the release result rather than in a second documentation-only push.

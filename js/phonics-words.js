@@ -153,6 +153,38 @@ const HK_FESTIVAL_TOPICS = [
   }),
 ];
 
+/** Reuse the established Chinese occupation icon vocabulary in English Sight Words. */
+const JOB_TOPICS = [
+  spellingTopic({
+    id: 'sight_jobs_nearby', title: '身邊的職業', titleEn: 'People Around Us',
+    blurb: '睇圖 · 聽音 · 逐格砌字 · 25 個身邊職業', cover: '🏥', parentId: 'sight_jobs',
+    words: [
+      ['doctor', '👨‍⚕️', '#102848'], ['nurse', '👩‍⚕️', '#402038'], ['teacher', '👩‍🏫', '#102848'],
+      ['principal', '🏫🧑', '#102848'], ['firefighter', '🧑‍🚒', '#401820'], ['police officer', '👮', '#102848'],
+      ['paramedic', '🚑🧑‍⚕️', '#401820'], ['dentist', '🦷👨‍⚕️', '#102848'], ['pharmacist', '💊🧑', '#102848'],
+      ['hairdresser', '💇✂️', '#402038'], ['shop assistant', '🛍️🧑', '#402038'], ['cashier', '🧾🧑', '#143828'],
+      ['security guard', '🚪🧑', '#2a2a35'], ['cleaner', '🧹🧑', '#143828'], ['domestic helper', '🏠🧹', '#3a3010'],
+      ['postman', '📮🧑', '#3a3010'], ['delivery worker', '📦🧑', '#3a3010'], ['driver', '🚗', '#1a3050'],
+      ['bus driver', '🚌🧑', '#3a3010'], ['taxi driver', '🚕🧑', '#3a3010'], ['waiter', '🍽️🧑', '#402038'],
+      ['gardener', '🪴🧑', '#143828'], ['zookeeper', '🦁🧑', '#3a3010'], ['vet', '🐶👨‍⚕️', '#1a4d3a'],
+      ['librarian', '📚🧑', '#102848'],
+    ],
+  }),
+  spellingTopic({
+    id: 'sight_jobs_world', title: '世界各地的職業', titleEn: 'Jobs Around the World',
+    blurb: '睇圖 · 聽音 · 逐格砌字 · 20 個不同職業', cover: '🚀', parentId: 'sight_jobs',
+    words: [
+      ['chef', '🧑‍🍳', '#3a3010'], ['farmer', '🧑‍🌾', '#143828'], ['pilot', '✈️🧑‍✈️', '#1a3050'],
+      ['flight attendant', '✈️🧑', '#102848'], ['astronaut', '🚀🧑‍🚀', '#1a1a22'], ['scientist', '🔬🧑‍🔬', '#0f3550'],
+      ['artist', '🎨🖌️', '#402038'], ['musician', '🎵🧑‍🎤', '#2a1840'], ['athlete', '🏃🏅', '#143828'],
+      ['actor', '🎭', '#402038'], ['reporter', '🎤📰', '#1a3050'], ['builder', '👷🏗️', '#3a3010'],
+      ['engineer', '🛠️🧑', '#3a3010'], ['ship captain', '⚓🧑', '#0f3550'], ['fisherman', '🎣🧑', '#0f3550'],
+      ['lifeguard', '🏊🛟', '#0f3550'], ['photographer', '📷', '#2a2a35'], ['soldier', '🪖', '#2a2a35'],
+      ['environmental officer', '♻️🕵️', '#143828'], ['medical sales representative', '💊🤝', '#102848'],
+    ],
+  }),
+];
+
 /** 主題：先由有意思的完整單字入手；字母音基地保留作針對性溫習。 */
 const PHONICS_TOPICS = [
   {
@@ -230,6 +262,9 @@ const PHONICS_TOPICS = [
   },
   {
     id: 'hk_festivals', title: '香港節日', titleEn: 'Hong Kong Festivals', blurb: '5 個節日 · 50 個主題詞語', cover: '🎉', section: 'sight', collections: HK_FESTIVAL_TOPICS,
+  },
+  {
+    id: 'sight_jobs', title: '職業', titleEn: 'Jobs', blurb: '兩組職業 · 45 個英文詞語', cover: '🧑‍⚕️', section: 'sight', collections: JOB_TOPICS,
   },
   sightWordTopic({
     id: 'sight_body', title: '身體部位', titleEn: 'My Body', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 個身體部位', cover: '👀',
@@ -444,7 +479,9 @@ const PHONICS_TOPICS = [
 ];
 
 function getPhonicsTopicById(id) {
-  return PHONICS_TOPICS.find((t) => t.id === id) || HK_FESTIVAL_TOPICS.find((t) => t.id === id);
+  return PHONICS_TOPICS.find((t) => t.id === id)
+    || HK_FESTIVAL_TOPICS.find((t) => t.id === id)
+    || JOB_TOPICS.find((t) => t.id === id);
 }
 
 function isLetterItem(item) {

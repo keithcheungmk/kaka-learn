@@ -583,14 +583,14 @@
     const title = $('#phonics-collections-title');
     const lead = $('#phonics-collections-lead');
     if (title) title.textContent = topic.title;
-    if (lead) lead.textContent = '揀一個節日，先學詞語再拼字';
+    if (lead) lead.textContent = '揀一組詞語，開始認字同拼字';
     grid.innerHTML = '';
     topic.collections.forEach((collection, index) => {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'topic-card collection-topic-card';
       btn.innerHTML = `
-        <span class="phonics-mission-number" aria-hidden="true">FESTIVAL ${String(index + 1).padStart(2, '0')}</span>
+        <span class="phonics-mission-number" aria-hidden="true">SET ${String(index + 1).padStart(2, '0')}</span>
         <span class="topic-cover" aria-hidden="true">${collection.cover}</span>
         <span class="topic-title collection-title topic-title-zh">${collection.title}</span>
         ${collection.titleEn ? `<span class="topic-title collection-title topic-title-en term-en">${collection.titleEn}</span>` : ''}

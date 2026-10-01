@@ -98,6 +98,35 @@ for (const topicId of newSightTopicIds) {
   }
 }
 
+const jobsHub = context.window.KakaPhonicsWords.getPhonicsTopicById('sight_jobs');
+assert.ok(jobsHub, 'Jobs 主題已加入 Sight Words');
+assert.equal(jobsHub.section, 'sight', 'Jobs 顯示在 Sight Words 區');
+assert.equal(jobsHub.titleEn, 'Jobs', '職業主題有清楚英文標題');
+assert.equal(jobsHub.collections.length, 2, '職業詞按身邊人物及世界職業分成兩組');
+const jobSets = jobsHub.collections.map((group) => context.window.KakaPhonicsWords.getPhonicsTopicById(group.id));
+assert.deepEqual([...jobSets].map((group) => group.words.length), [25, 20], '兩組分別有 25 個身邊職業及 20 個世界職業');
+const jobWords = jobSets.flatMap((group) => {
+  assert.equal(group.flow, 'blend', `${group.id} 使用融合拼字流程`);
+  assert.deepEqual([...group.modes], ['build', 'connect'], `${group.id} 提供砌字及圖詞配對`);
+  assert.equal(new Set(group.words.map((item) => item.emoji)).size, group.words.length, `${group.id} 每個詞重用獨立中文職業圖示`);
+  assert.equal(new Set(group.words.map((item) => item.word)).size, group.words.length, `${group.id} 詞語沒有重複`);
+  for (const item of group.words) {
+    assert.equal(item.letters.join(''), item.word.toLowerCase().replace(/[^a-z]/g, ''), `${item.word} 的字母磚可組回完整英文詞`);
+    assert.ok(item.emoji, `${item.word} 有配對圖示`);
+    for (const phoneme of item.letters) {
+      assert.ok(fs.existsSync(path.join(repo, 'assets/phonemes', `${phoneme}.mp3`)), `${item.word} 使用已存在的 ${phoneme} 音素錄音`);
+    }
+  }
+  return group.words;
+});
+assert.equal(jobWords.length, 45, '職業主題共使用中文職業詞庫的 45 個詞');
+assert.equal(new Set(jobWords.map((item) => item.word)).size, 45, '兩組職業之間沒有重複英文詞');
+assert.deepEqual(
+  [...jobSets[0].words.find((item) => item.word === 'police officer').wordBreaks],
+  [6],
+  '多字職稱保留 police 與 officer 的空格',
+);
+
 const festivals = [
   'festival_christmas', 'festival_lunar_new_year', 'festival_mid_autumn', 'festival_dragon_boat', 'festival_halloween',
 ].map((id) => context.window.KakaPhonicsWords.getPhonicsTopicById(id));
@@ -130,6 +159,8 @@ assert.match(appSource, /word\.soundChunks \|\| word\.letters/, '學習卡可分
 assert.match(appSource, /CLEAN_RIME_WORDS/, '乾淨的 rime 字尾有獨立播放規則');
 assert.match(appSource, /playPhonicsChunk\(tile\.dataset\.letter/, '學習卡音塊以 phoneme／rime 規則播放');
 assert.match(appSource, /openPhonicsCollections/, '香港節日有獨立節日選擇頁');
+assert.match(appSource, /揀一組詞語，開始認字同拼字/, '共用分組頁使用適用於節日及職業的指示');
+assert.match(appSource, /SET \$\{String\(index \+ 1\)/, '共用分組卡用通用組別編號');
 assert.match(appSource, /wordBreaks/, '短語在學習卡及拼字格保留詞間分隔');
 assert.match(appSource, /\$\{topic\.title\}・拼字/, '拼字畫面會顯示目前主題名稱');
 assert.match(appSource, /for \(const sound of word\.soundChunks\)/, '學習卡先順序播放音塊');
