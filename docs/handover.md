@@ -36,7 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 |---|---|---|---|---|
 | 紅輯「按書頁砌句」資料層及遊戲引擎 | Chinese Lead（Chief 整合） | `js/book-scene-demo.js`, `book-scene-demo.html`, `css/book-scene-demo.css`, `data/red-series/`, `scripts/test-book-scene-demo.mjs`, `scripts/smoke-book-scene-demo.py`, `docs/cursor-handoff-2026-09-20.md` | 2026-09-20 | Keith 交辦：本機接盤；內容由 Chinese Lead，shared／部署由 Chief；唔開 Cloud Agent |
 | 書本掃描書架 | Chinese Lead（Chief 整合） | `book-scans/index.html`, `index.html`（共享）, `css/styles.css`（共享）, `scripts/check-invariants.py`（共享） | 2026-09-08 | 家長 PDF 書架；中文內容由 Chinese Lead，共享檔由 Chief 認領 |
-| 中文故事小隊第一版 | ChatGPT／Codex（故事內容及 UI 狀態；Chief 整合） | `family-storybook.html`, `css/styles.css`, `js/family-storybook.js`, `data/family-stories/manifest.js`, `docs/family-storybook-first-edition.md`, `index.html`, `docs/handover.md` | 2026-10-01 | 11 篇／68 頁；新增〈長大以後，我想做甚麼？〉八頁原創故事及場景圖，紅書詞語來源留空並以「學習詞語」呈現。香港迪士尼六頁繪本風格插圖已更新；本次新故事待部署。 |
+| 中文故事小隊第一版 | ChatGPT／Codex（故事內容及 UI 狀態；Chief 整合） | `family-storybook.html`, `css/styles.css`, `js/family-storybook.js`, `data/family-stories/manifest.js`, `docs/family-storybook-first-edition.md`, `index.html`, `docs/handover.md` | 2026-10-01 | 11 篇／68 頁；新增〈長大以後，我想做甚麼？〉八頁原創故事及場景圖，紅書詞語來源留空並以「學習詞語」呈現。香港迪士尼六頁繪本風格插圖已更新；新故事已隨 `3250ab3` 部署並核實公開頁面及圖片。 |
 | 加減法操作流程統一第一階段 | Math Lead（Chief 整合） | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | 加法回答確認、拖曳防誤觸、桌面排位；共享檔由 Chief 整合 |
 | 加減法操作流程統一、回答確認、拖曳防誤觸及桌面版面 | Math Lead（Chief 整合） | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | 先操作後回答；共享檔由 Chief 整合 |
 | 數學玩法縮至四星＋水星重做 | Math Lead（ChatGPT／Codex Chief 整合） | `index.html`, `js/math-*`, `css/math.css`, 數理測試、`scripts/check-invariants.py`, `docs/handover.md` | 2026-09-28 | Keith 指示只保留地球加法、月球減法、金星時鐘及全新水星數量玩法；其他星球、Number Bonds 從入口與流程下架。原 9/16 iPad 橫向工作納入此任務；未部署 |
@@ -105,6 +105,7 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 - 在故事書目加入〈長大以後，我想做甚麼？〉八頁故事，包含消防員、工程師、極地探險家、洗街車司機、醫生、獸醫及太空人；卡卡和禧禧輪流分享志願，並以共同整理職業圖卡收結。
 - 每頁維持兩個可從句子抽出的重點詞及兩個干擾詞，並新增八張 900×600 WebP 場景圖。此篇沒有紅書來源詞，明確列為 `extensionWords`，書架標籤顯示「學習詞語」。星星上限由故事清單動態計數。
+- 驗證：內容檢查 11 篇／68 頁、40 項 invariants、Chromium 家庭裝置 smoke、靜態網站建置及 CI 通過；Pages workflow 成功，公開頁面、故事 manifest 和首尾插圖均已核實。
 - 改動檔案：`data/family-stories/manifest.js`、`assets/family-stories/scenes/future-careers-p01.webp` 至 `future-careers-p08.webp`、`family-storybook.html`、`js/family-storybook.js`、`scripts/check-family-stories.py`、`docs/family-storybook-first-edition.md`、`docs/handover.md`。
 
 ### 2026-10-01 · ChatGPT／Codex（Magic Marker MM021–MM073）
