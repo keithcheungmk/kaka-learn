@@ -23,12 +23,13 @@ Source supplied by Keith for the private KAKA Learn app. Originals remain untouc
 - `cf003/pages/page-01.webp`–`page-14.webp` ← PDF pages 2–15 (printed story pages 1–14)
 - `cf003/cf003-the-school-play-page-01.mp3`–`14.mp3` ← clips `110.mp3`–`123.mp3`
 
-## MM001–MM020 Magic Marker
+## MM001–MM073 Magic Marker
 
 Magic Marker remains a separate Little Fox collection but uses the Carter Family
 Read & Fill renderer. Original PDFs and complete recordings remain unchanged in
 `source-materials/Magic Marker/`; the website contains only selected 900px WebP
-story pages and 22.05kHz, 32kbps mono page clips.
+story pages and 22.05kHz mono MP3 page clips. MM001–MM020 use 32kbps; MM021–MM073
+use 28kbps to keep each derived file within the site's per-file budget.
 
 - MM001 *Meet the Characters*: printed pages 1–8 ← PDF pages 3–10; page clips
   `MM001-pdf03-print01.mp3`–`MM001-pdf10-print08.mp3`.
@@ -46,6 +47,14 @@ story pages and 22.05kHz, 32kbps mono page clips.
   `data/magic-marker-expansion.js` records each PDF page, printed page, source
   clip, exact PDF-derived sentence, and first-pass audio alignment confidence.
   Low-confidence clip alignment is not a claim of independently verified audio.
+- MM021–MM073 add 504 playable printed pages from 53 further local books, for a
+  total of 73 books / 655 playable pages. Web images are 900px WebP (quality 78)
+  and page audio is 22.05kHz mono MP3 (28kbps). Run
+  `python3 scripts/build-magic-marker-pilot.py --start 21 --end 73 --source-root <local-source-materials-path> --scale-to 900 --quality 78 --audio-bitrate 28k`,
+  then `python3 scripts/build-magic-marker-expansion.py --start 21 --end 73 --source-root <local-source-materials-path> --output data/magic-marker-rest.js`.
+  The exact visible PDF text is used for each selected question sentence; the
+  clip-map match ratio is preserved on each page because the page cuts are
+  first-pass alignments, not independently listened-to transcriptions.
 
 ## CF004–CF010
 

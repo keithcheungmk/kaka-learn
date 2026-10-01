@@ -99,7 +99,7 @@
   const MAGIC_MARKER_BOOKS = window.KakaMagicMarkerManifest?.books || [];
   const SERIES = [
     { id: 'carter', title: 'Carter Family', label: 'CARTER FAMILY', range: 'CF001–CF085', image: CARTER_BOOKS[0]?.cover || CARTER_BOOKS[0]?.pages[0]?.image, description: '生活故事 · 聆聽、閱讀與句子填字', books: CARTER_BOOKS },
-    { id: 'magic-marker', title: 'Magic Marker', label: 'MAGIC MARKER', range: 'MM001–MM020', image: MAGIC_MARKER_BOOKS[0]?.cover || MAGIC_MARKER_BOOKS[0]?.pages[0]?.image, description: 'Maxie、Taco、Alex 和 Sue 的故事', books: MAGIC_MARKER_BOOKS },
+    { id: 'magic-marker', title: 'Magic Marker', label: 'MAGIC MARKER', range: 'MM001–MM073', image: MAGIC_MARKER_BOOKS[0]?.cover || MAGIC_MARKER_BOOKS[0]?.pages[0]?.image, description: 'Maxie、Taco、Alex 和 Sue 的故事', books: MAGIC_MARKER_BOOKS },
   ];
   let currentSeriesId = 'carter';
   let BOOKS = CARTER_BOOKS;
@@ -505,23 +505,26 @@
     speech.playCorrectCue?.({ muted: muted() });
     const feedback = $('#story-play-feedback');
     feedback.textContent = 'Great job!'; feedback.className = 'feedback ok';
-    speakPraise(() => {
-      $('#btn-story-submit')?.remove();
-      awardStoryPageStar(item).then(() => {
-        if ($('#btn-story-next')) return;
-        $('#story-fill-bank').insertAdjacentHTML('afterend', `<button type="button" class="btn btn-primary story-next-page" id="btn-story-next">${pageIndex === list.length - 1 ? 'Finish story →' : 'Next page →'}</button>`);
-        $('#btn-story-next')?.addEventListener('click', nextPage);
-      });
-    });
+    // A correct answer must never be held hostage by a speech or animation
+    // completion callback (both can be delayed on iPad Safari).
+    $('#btn-story-submit')?.remove();
+    if (!$('#btn-story-next')) {
+      $('#story-fill-bank').insertAdjacentHTML('afterend', `<button type="button" class="btn btn-primary story-next-page" id="btn-story-next">${pageIndex === list.length - 1 ? 'Finish story →' : 'Next page →'}</button>`);
+      $('#btn-story-next')?.addEventListener('click', nextPage);
+    }
+    void awardStoryPageStar(item);
+    speakPraise();
   }
 
   function nextPage() {
+    invalidatePlayback();
     const list = pages();
     if (pageIndex >= list.length - 1) return finish();
     pageIndex += 1; phase = 'listen'; busy = false; selectedWord = null; solved = false; renderPage();
   }
 
   function finish() {
+    invalidatePlayback();
     const book = activeBook();
     const list = pages();
     $('#story-play-title').textContent = 'Great reading!';

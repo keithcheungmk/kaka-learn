@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compile MM003–MM020 source-anchored Read & Fill pages into a browser manifest.
+"""Compile source-anchored Magic Marker Read & Fill pages into a browser manifest.
 
 The visible PDF text, not speech recognition, is the source of every question.
 Page clips are first-pass source cuts; their alignment confidence is preserved.
@@ -10,6 +10,7 @@ from __future__ import annotations
 import glob
 import json
 import re
+import argparse
 from pathlib import Path
 
 import fitz
@@ -42,17 +43,28 @@ TARGETS = {
 }
 
 GROUPS = [
-    "Taco Maxie Alex Sue Benny Hammie Heddy Fishy Smiley Happy",
-    "key chair feather marker window helmet rope hoop doll boxes",
-    "bread milk pizza soup cake steak lunch cupcakes chocolate ice",
-    "cat dog bird horse fish parrot hamsters pets mouse",
-    "blue green purple red orange yellow brown",
-    "store playground station supermarket home school house",
-    "run walk draw eat sleep skate drive fly dance swim",
-    "one two three four five six seven eight nine ten",
-    "strawberries pineapples grapes bananas watermelon",
+    "Taco Maxie Alex Sue Benny Hammie Heddy Fishy Smiley Happy Betty Jack Lulu Gisella Teddy",
+    "grandmother grandfather grandma uncle brother sister mother father children friends neighbors guest reporter photographer artist teacher doctor",
+    "key chair feather marker markers pencil crayon window helmet rope hoop doll boxes box book books picture pictures photos camera clip fork chopsticks telephone refrigerator",
+    "bread milk pizza soup cake steak lunch cupcakes chocolate ice snack soda cookies popcorn bananas watermelon strawberries pineapples grapes food drink",
+    "cat cats dog dogs bird horse fish parrot hamsters pets mouse frogs monkeys tiger skunks shark panda dragon animals crocodile kitty",
+    "blue green purple red orange yellow brown black white",
+    "store playground station supermarket home school house zoo park library bedroom bathroom kitchen airport",
+    "ship plane bus truck car bike bicycle bicycles rollerblades",
+    "road street path bridge",
+    "run walk draw eat sleep skate drive fly dance swim cook jump hide chase catch touch pull push follow help shout cry sing read write listen watch look",
+    "running walking drawing eating swimming fishing flying stopping moving waiting helping following chasing crying sitting looking coming going",
+    "one two three four five six seven eight nine ten fifteen",
+    "monday tuesday wednesday thursday friday saturday sunday today tomorrow yesterday morning night week",
+    "happy sad angry tired scared worried sick safe lucky lonely beautiful ugly nice bad good little big long short fast slow tall old young",
+    "inside outside behind next over under away back here there home down up",
+    "party game picnic concert show journey adventure story flight music subject soccer basketball swimming skating",
+    "tree flower flowers ocean land swamp swamps beach stars sun rain sky",
 ]
 POOLS = [group.split() for group in GROUPS]
+AUTO_STOP = {"about", "again", "also", "are", "can", "could", "does", "don", "have", "has", "here", "how", "isn", "just", "let", "lets", "im", "ill", "hes", "shes", "theyre", "we", "were", "like", "look", "many", "more", "much", "name", "not", "now", "only", "our", "please", "some", "something", "that", "them", "there", "these", "they", "this", "those", "very", "want", "was", "what", "when", "where", "which", "who", "why", "will", "with", "would", "your", "you", "its", "the", "and", "for", "from", "into", "she", "he", "too"}
+AUTO_SEMANTIC = {word.lower() for group in POOLS[1:] for word in group}
+AUTO_STOP.update({"dont", "cant", "wont", "wouldnt", "couldnt", "isnt", "didnt", "wasnt", "arent", "shouldnt", "couldve", "youre", "thats", "whats", "wheres"})
 DISTRACTORS = {
     "that": ["this", "these"], "they": ["we", "you"], "she": ["he", "they"],
     "doing": ["reading", "playing"], "drawing": ["running", "eating"],
@@ -87,6 +99,41 @@ DISTRACTORS = {
     "boxes": ["chairs", "tables"], "bed": ["chair", "sofa"],
     "nine": ["six", "seven"], "pets": ["friends", "toys"],
 }
+DISTRACTORS.update({
+    "gone": ["here", "back"], "oh": ["Wow", "Hey"], "her": ["him", "them"],
+    "yes": ["No", "Maybe"], "bite": ["lick", "kiss"], "stairs": ["elevator", "ladder"],
+    "china": ["Brazil", "Hawaii"], "english": ["Chinese", "Spanish"],
+    "either": ["yet", "before"], "else": ["more", "again"],
+    "aahchoo": ["Hooray", "Oh no"], "took": ["gave", "lost"],
+    "mine": ["yours", "hers"], "doctors": ["dentist", "teacher"],
+    "tuesdays": ["Mondays", "Fridays"], "shorts": ["pants", "shoes"],
+    "tshirt": ["sweater", "jacket"], "get": ["find", "take"],
+    "excuse": ["Pardon", "Hello"], "brazil": ["China", "Hawaii"],
+    "give": ["show", "lend"], "yippie": ["Hooray", "Oh no"],
+    "out": ["in", "back"], "careful": ["quiet", "ready"],
+    "where": ["when", "why"], "wake": ["sleep", "rest"],
+    "watched": ["played", "read"], "actually": ["maybe", "really"],
+    "what": ["where", "who"], "hat": ["cap", "helmet"],
+    "looks": ["sounds", "feels"], "finds": ["loses", "sees"],
+    "almost": ["never", "always"], "gave": ["took", "found"],
+    "heeheehee": ["Ha ha ha", "Oh no"], "ticklish": ["sleepy", "hungry"],
+    "wanted": ["needed", "liked"], "off": ["on", "down"],
+    "sir": ["Ma’am", "Mister"], "say": ["hear", "write"],
+    "sure": ["ready", "sorry"], "pose": ["smile", "wave"],
+    "noise": ["sound", "music"], "come": ["go", "stay"],
+    "everyone": ["someone", "no one"], "titanic": ["ship", "boat"],
+    "problem": ["question", "idea"], "ate": ["made", "bought"],
+    "bao": ["Lian", "Taco"], "trouble": ["danger", "fun"],
+    "tasty": ["salty", "sweet"], "eyes": ["ears", "hands"],
+    "escape": ["hide", "wait"], "caught": ["lost", "found"],
+    "plan": ["idea", "story"], "lose": ["win", "find"],
+    "hurts": ["helps", "tickles"], "did": ["saw", "had"],
+    "door": ["window", "gate"], "california": ["Hawaii", "China"],
+    "soon": ["later", "tomorrow"], "sunny": ["rainy", "cloudy"],
+    "color": ["shape", "size"], "see": ["hear", "feel"],
+    "truth": ["lie", "story"], "wonder": ["know", "think"],
+    "everything": ["something", "nothing"],
+})
 
 
 def find_one(pattern: str) -> Path:
@@ -120,6 +167,32 @@ def answer_token(sentence: list[str], target: str) -> str:
     return matches[-1]
 
 
+def auto_sentence_and_target(text: str) -> tuple[list[str], str]:
+    text = text.replace(" . . .", " …").replace("Mrs.", "Mrs¤")
+    clauses = [piece.strip().replace("Mrs¤", "Mrs.") for piece in re.findall(r"[^.!?]+[.!?]+|[^.!?]+$", text) if piece.strip()]
+    ranked = []
+    for part in clauses:
+        words = part.split()
+        candidates = [(re.sub(r"[^A-Za-z-]", "", token.replace("’s", "").replace("'s", "")), token) for token in words]
+        candidates = [(bare, token) for bare, token in candidates if (len(bare) >= 3 or bare.lower() in {"go", "do", "no"}) and bare.lower() not in AUTO_STOP]
+        if not candidates:
+            continue
+        semantic = [pair for pair in candidates if pair[0].lower() in AUTO_SEMANTIC]
+        target = (semantic or candidates)[-1][0]
+        count = len(words)
+        score = (3 <= count <= 12, bool(semantic), -abs(count - 6), len(target))
+        ranked.append((score, words, target))
+    if not ranked:
+        words = max((part.split() for part in clauses), key=len, default=[])
+        fallback = [re.sub(r"[^A-Za-z]", "", token) for token in words]
+        fallback = [word for word in fallback if len(word) >= 2]
+        if not fallback:
+            raise RuntimeError(f"No suitable Read & Fill sentence on printed page: {text!r}")
+        return words, max(fallback, key=len)
+    _, sentence, target = max(ranked, key=lambda item: item[0])
+    return sentence, target
+
+
 def choices_for(answer: str, target: str, book_targets: list[str], sentence: list[str]) -> list[str]:
     suffix = answer[len(target):] if answer.lower().startswith(target.lower()) else ""
     pool = next((group for group in POOLS if target.lower() in {word.lower() for word in group}), None)
@@ -138,26 +211,45 @@ def choices_for(answer: str, target: str, book_targets: list[str], sentence: lis
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--start", type=int, default=3)
+    parser.add_argument("--end", type=int, default=20)
+    parser.add_argument("--source-root", type=Path, default=ROOT / "source-materials")
+    parser.add_argument("--output", type=Path, default=OUTPUT)
+    args = parser.parse_args()
+    if not 3 <= args.start <= args.end <= 73:
+        raise RuntimeError("Expected range MM003–MM073")
+    source = args.source_root / "Magic Marker"
     books = []
-    for number in range(3, 21):
+    for number in range(args.start, args.end + 1):
         label = f"mm{number:03d}"
-        pdf = find_one(str(SOURCE / "Magic Marker 制作故事书" / f"{number:03d}_Magic Marker*.pdf"))
-        full_audio = find_one(str(SOURCE / "Magic Marker MP3" / f"{number:03d}_Magic Marker*.mp3"))
-        folder = find_one(str(SOURCE / "Page-level clips" / f"Book {number:02d} - *"))
+        pdf = find_one(str(source / "Magic Marker 制作故事书" / f"{number:03d}_Magic Marker*.pdf"))
+        full_audio = find_one(str(source / "Magic Marker MP3" / f"{number:03d}_Magic Marker*.mp3"))
+        folder = find_one(str(source / "Page-level clips" / f"Book {number:02d} - *"))
         mapping = json.loads((folder / "clip-map.json").read_text(encoding="utf-8"))
         rows = [row for row in mapping.get("pages", mapping.get("clips", [])) if row.get("file") and row.get("printed_page")]
-        targets = TARGETS[number].split()
-        if len(rows) != len(targets):
+        targets = TARGETS[number].split() if number in TARGETS else None
+        if targets is not None and len(rows) != len(targets):
             raise RuntimeError(f"{label}: {len(rows)} playable pages, {len(targets)} targets")
         doc = fitz.open(pdf)
         pages = []
-        for row, target in zip(rows, targets):
+        prepared = []
+        for index, row in enumerate(rows):
             pdf_page = int(row["pdf_page"])
             printed = int(row["printed_page"])
             text = clean_pdf_text(doc[pdf_page - 1], printed)
-            sentence = select_sentence(text, target)
+            if targets is not None:
+                target = targets[index]
+                sentence = select_sentence(text, target)
+            else:
+                sentence, target = auto_sentence_and_target(text)
+            prepared.append((row, text, sentence, target))
+        book_targets = targets or [item[3] for item in prepared]
+        for row, text, sentence, target in prepared:
+            pdf_page = int(row["pdf_page"])
+            printed = int(row["printed_page"])
             answer = answer_token(sentence, target)
-            choices = choices_for(answer, target, targets, sentence)
+            choices = choices_for(answer, target, book_targets, sentence)
             image = f"./assets/story-demo/{label}/pages/page-{printed:02d}.webp"
             audio = f"./assets/story-demo/{label}/{label}-page-{printed:02d}.mp3"
             for asset in (image, audio):
@@ -182,14 +274,14 @@ def main() -> None:
             "mmLabel": label.upper(),
             "title": folder.name.split(" - ", 1)[1],
             "sourceSet": "magic-marker",
-            "sourcePdf": str(pdf.relative_to(ROOT)),
-            "sourceFullAudio": str(full_audio.relative_to(ROOT)),
-            "clipFolder": str(folder.relative_to(ROOT)),
+            "sourcePdf": "source-materials/Magic Marker/" + pdf.relative_to(source).as_posix(),
+            "sourceFullAudio": "source-materials/Magic Marker/" + full_audio.relative_to(source).as_posix(),
+            "clipFolder": "source-materials/Magic Marker/" + folder.relative_to(source).as_posix(),
             "cover": pages[0]["image"],
             "pages": pages,
         })
         print(f"{label.upper()}: {len(pages)} PDF-checked playable pages")
-    OUTPUT.write_text(
+    args.output.write_text(
         "/* Generated from local Magic Marker PDFs and page-level clip maps by scripts/build-magic-marker-expansion.py. */\n"
         "window.KakaMagicMarkerManifest.books.push(..." + json.dumps(books, ensure_ascii=False, indent=2) + ");\n",
         encoding="utf-8",

@@ -101,6 +101,14 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-01 · ChatGPT／Codex（Magic Marker MM021–MM073）
+
+- Little Fox → Magic Marker 擴至完整 MM001–MM073，共 73 本／655 個可玩書頁。MM021–MM073 新增 504 頁，沿用 Carter Read & Fill、逐頁 PDF 畫面與來源音檔、每頁答對派星及獨立逐頁進度 key。
+- 題目句子按對應 PDF 可見文字擷取；音檔以來源 clip map 對位。低音訊對位信心已在 manifest 註明，未經人工聆聽的頁面不標成音質核實。
+- 經 Keith 明確批准，`assets/` 總上限由 120MB 提高至 160MB，保留書頁畫質；單檔上限仍為 400KB，原始 PDF／錄音仍留在 `source-materials/`。
+- 驗收：全系列 73 本／655 頁資料及資產測試、`check-invariants.py`、MM073 iPad Pro 11 直／橫與 iPhone 16 Pro Max viewport 流程測試；網站建置成功。
+- **踩咗** `AGENTS.md`、`index.html`、`js/story-demo.js`、`data/magic-marker-rest.js`、`assets/story-demo/mm021/`–`mm073/`、`assets/story-demo/SOURCE.md`、`scripts/build-magic-marker-*`、`scripts/check-invariants.py`、`scripts/test-story-mission.mjs`、`scripts/smoke-magic-marker.py`、`scripts/smoke-shots.py`、`docs/handover.md`。
+
 ### 2026-10-01 · ChatGPT／Codex（Magic Marker MM003–MM020）
 
 - Little Fox → Magic Marker 擴至 MM001–MM020，共 20 本／151 個可玩書頁。新 135 頁沿用 MM001／MM002 的逐頁原圖、聆聽、Read & Fill、答對派星與獨立進度 key；四個只有短感嘆語而缺可靠逐頁音檔的原書頁及純插圖／空白頁不當成題目。

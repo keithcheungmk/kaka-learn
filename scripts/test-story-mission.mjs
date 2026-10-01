@@ -8,6 +8,7 @@ const source = await readFile(new URL('../js/story-demo.js', import.meta.url), '
 const manifestSource = await readFile(new URL('../data/carter-family-manifest.js', import.meta.url), 'utf8');
 const magicManifestSource = await readFile(new URL('../data/magic-marker-manifest.js', import.meta.url), 'utf8');
 const magicExpansionSource = await readFile(new URL('../data/magic-marker-expansion.js', import.meta.url), 'utf8');
+const magicRestSource = await readFile(new URL('../data/magic-marker-rest.js', import.meta.url), 'utf8');
 const starFx = await readFile(new URL('../js/star-fx.js', import.meta.url), 'utf8');
 const css = await readFile(new URL('../css/story-demo.css', import.meta.url), 'utf8');
 const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
@@ -17,6 +18,7 @@ const manifestBooks = manifestSandbox.window.KakaCarterManifest.books;
 const magicManifestSandbox = { window: {} };
 vm.runInNewContext(magicManifestSource, magicManifestSandbox);
 vm.runInNewContext(magicExpansionSource, magicManifestSandbox);
+vm.runInNewContext(magicRestSource, magicManifestSandbox);
 const magicBooks = magicManifestSandbox.window.KakaMagicMarkerManifest.books;
 
 assert.match(source, /const BASE_BOOKS = \[/, 'Read & Fill should keep the three-book template catalogue');
@@ -61,15 +63,15 @@ vm.runInNewContext(source, storySandbox);
 const storyDemo = storySandbox.window.KakaStoryDemo;
 assert.equal(storyDemo.books.length, 85, 'The balanced answer system should include all 85 Carter books');
 assert.equal(storyDemo.pageCount, 1033, 'The balanced answer system should cover all 1,033 story pages');
-assert.deepEqual(Array.from(storyDemo.series, (series) => [series.id, series.bookCount, series.pageCount]), [['carter', 85, 1033], ['magic-marker', 20, 151]], 'Little Fox should keep Carter and Magic Marker as separate collections');
-assert.deepEqual(Array.from(magicBooks, (book) => book.id), Array.from({ length: 20 }, (_, index) => `mm${String(index + 1).padStart(3, '0')}`), 'The Magic Marker catalogue should run continuously through MM020');
+assert.deepEqual(Array.from(storyDemo.series, (series) => [series.id, series.bookCount, series.pageCount]), [['carter', 85, 1033], ['magic-marker', 73, 655]], 'Little Fox should keep Carter and Magic Marker as separate collections');
+assert.deepEqual(Array.from(magicBooks, (book) => book.id), Array.from({ length: 73 }, (_, index) => `mm${String(index + 1).padStart(3, '0')}`), 'The Magic Marker catalogue should run continuously through MM073');
 const normalize = (word) => String(word).toLowerCase().replace(/[^a-z]/g, '');
 const seededRandom = (seed) => () => {
   seed = (seed * 1664525 + 1013904223) >>> 0;
   return seed / 0x100000000;
 };
 for (const book of magicBooks) {
-  assert.ok(book.pages.length >= 6 && book.pages.length <= 9, `${book.id} should expose its source-mapped playable story pages`);
+  assert.ok(book.pages.length >= 6 && book.pages.length <= 17, `${book.id} should expose its source-mapped playable story pages`);
   assert.equal(book.sourceSet, 'magic-marker', `${book.id} should preserve its source collection`);
   for (const item of book.pages) {
     assert.equal(item.verificationStatus, 'verified', `${book.id} page ${item.printedPage} should be source-checked`);
@@ -82,6 +84,7 @@ for (const book of magicBooks) {
   const plan = Array.from(storyDemo.createQuestionPlan(book, seededRandom(book.id.charCodeAt(2)), magicBooks));
   assert.equal(plan.length, book.pages.length, `${book.id} should build one balanced exercise per page`);
   assert.ok(plan.every((question) => question.choices.length === 4 && question.choices[question.correctIndex] === question.answer), `${book.id} answers should render with one correct choice among four`);
+  assert.ok(plan.every((question) => new Set(question.choices.map(normalize)).size === 4), `${book.id} should have four different choices on every page`);
 }
 for (const book of storyDemo.books) {
   let sawDifferentRun = false;
@@ -127,7 +130,7 @@ assert.match(source, /function speakPraise/, 'Correct answers should use a spoke
 assert.match(source, /function awardStoryPageStar/, 'Story pages should award a tracked star');
 assert.match(source, /story\|\$\{activeBookId\}\|page-/, 'Story star keys should be stable per book/page');
 assert.match(source, /Great job, Kaka! You got it right!/, 'The praise lines should address Kaka in English');
-assert.match(source, /speakPraise\(\(\) => \{/, 'Correct answers should praise before showing Next page');
+assert.match(source, /if \(!\$\('#btn-story-next'\)\)[\s\S]*void awardStoryPageStar\(item\);\s*speakPraise\(\);/, 'Correct answers should show Next page immediately, then award the star and play praise');
 assert.match(source, /\$\('#btn-story-submit'\)\?\.remove\(\)/, 'Submit should be removed after a correct answer');
 assert.doesNotMatch(source, /function renderListen/, 'There should be no separate listen-only layout');
 assert.doesNotMatch(source, /const MISSION/, 'The former separate multi-question mission should be removed');

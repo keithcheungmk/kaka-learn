@@ -25,7 +25,7 @@ def one_file(folder: Path, prefix: str, suffix: str) -> Path:
     return matches[0]
 
 
-def build_book(number: int) -> None:
+def build_book(number: int, scale_to: int, quality: int, audio_bitrate: str) -> None:
     label = f"MM{number:03d}"
     source_id = f"{number:03d}"
     pdf_dir = SOURCE / "Magic Marker 制作故事书"
@@ -53,7 +53,7 @@ def build_book(number: int) -> None:
     page_prefix = temp_book / "page"
     run([
         "pdftoppm", "-f", str(first_pdf_page), "-l", str(last_pdf_page),
-        "-scale-to", "900", "-jpeg", "-jpegopt", "quality=90",
+        "-scale-to", str(scale_to), "-jpeg", "-jpegopt", "quality=90",
         str(pdf), str(page_prefix),
     ])
 
@@ -67,11 +67,11 @@ def build_book(number: int) -> None:
         audio = audio_output_dir / f"{label.lower()}-page-{page_number:02d}.mp3"
         if not jpg.exists() or not clip.exists():
             raise SystemExit(f"Missing rendered page or audio: {label} page {page_number}")
-        run(["magick", str(jpg), "-strip", "-quality", "82", str(image)])
+        run(["magick", str(jpg), "-strip", "-quality", str(quality), str(image)])
         run([
             "ffmpeg", "-nostdin", "-hide_banner", "-loglevel", "error", "-y",
             "-i", str(clip), "-ac", "1", "-ar", "22050", "-codec:a", "libmp3lame",
-            "-b:a", "32k", "-write_xing", "0", str(audio),
+            "-b:a", audio_bitrate, "-write_xing", "0", str(audio),
         ])
         if image.stat().st_size > 400_000 or audio.stat().st_size > 400_000:
             raise SystemExit(f"Asset exceeds 400 KB: {image} or {audio}")
@@ -82,14 +82,19 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--start", type=int, default=1)
     parser.add_argument("--end", type=int, default=2)
+    parser.add_argument("--source-root", type=Path, default=ROOT / "source-materials")
+    parser.add_argument("--scale-to", type=int, default=900)
+    parser.add_argument("--quality", type=int, default=82)
+    parser.add_argument("--audio-bitrate", default="32k")
     args = parser.parse_args()
+    SOURCE = args.source_root / "Magic Marker"
     if not 1 <= args.start <= args.end <= 73:
         raise SystemExit("Expected a Magic Marker range between MM001 and MM073.")
-    if not (ROOT / "source-materials").exists():
+    if not SOURCE.exists():
         raise SystemExit("The local source-materials folder must be available; originals remain read-only.")
     if not shutil.which("pdftoppm"):
         raise SystemExit("pdftoppm is required to render selected source pages.")
     if not shutil.which("ffmpeg") or not shutil.which("magick"):
         raise SystemExit("ffmpeg and ImageMagick are required to build web derivatives.")
     for book_number in range(args.start, args.end + 1):
-        build_book(book_number)
+        build_book(book_number, args.scale_to, args.quality, args.audio_bitrate)
