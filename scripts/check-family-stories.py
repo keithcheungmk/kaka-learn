@@ -7,7 +7,7 @@ manifest="global.window={};require('./data/family-stories/manifest.js');process.
 stories=json.loads(subprocess.check_output(['node','-e',manifest],cwd=ROOT,text=True))
 errors=[]
 def norm(text): return re.sub(r'[，。！？、\s]','',text)
-if len(stories)!=10: errors.append(f'Expected 10 stories, found {len(stories)}')
+if len(stories)!=11: errors.append(f'Expected 11 stories, found {len(stories)}')
 for story in stories:
     label=story.get('id','?')
     if len(story.get('pages',[])) not in range(6,9): errors.append(f'{label}: page count must be 6-8')
@@ -51,4 +51,5 @@ for story in stories:
         if not (ROOT/'assets/family-stories/scenes'/asset).exists(): errors.append(f'{label}: missing art {asset}')
 if errors:
     print('\n'.join('FAIL: '+e for e in errors));sys.exit(1)
-print(f'PASS: {len(stories)} stories; 6 pages each; source words, classified learning words, answer tiles and art paths validated.')
+total_pages=sum(len(story.get('pages',[])) for story in stories)
+print(f'PASS: {len(stories)} stories; {total_pages} pages total (6-8 each); source words, classified learning words, answer tiles and art paths validated.')

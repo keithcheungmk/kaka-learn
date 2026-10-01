@@ -16,13 +16,22 @@
   const voiceKey = 'kaka-family-storybook-mandarin-voice-v1';
   let current = null, pageIndex = 0, pageStates = [], selectedVoice = null, voiceList = [], activeUtterance = null, activeSpeechFallback = null, activeSlots = [], activeSlot = 0;
   const safeRead = key => { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } };
-  const refreshStars = () => { $('star-total').textContent = safeRead(finishedKey).length; };
+  const refreshStars = () => {
+    $('star-total').textContent = safeRead(finishedKey).length;
+    const total = $('story-total');
+    if (total) total.textContent = stories.length;
+  };
   const shuffle = values => [...values].map(value => [Math.random(), value]).sort((a,b) => a[0]-b[0]).map(pair => pair[1]);
   function renderLibrary() {
     $('story-grid').innerHTML = stories.map((story, index) => {
       const done = safeRead(finishedKey).includes(story.id);
       const image = `assets/family-stories/scenes/${story.id}-p01.webp`;
-      return `<button class="story-card" type="button" data-story="${story.id}" aria-label="開始故事：${story.title}"><img class="story-cover" src="${image}" alt="${story.title}插圖" onerror="this.src='assets/family-stories/characters/family-height-lineup.webp'"><span><strong class="story-title">${String(index+1).padStart(2,'0')}・${story.title} ${done?'<span class="done-tag">★</span>':''}</strong><p>${story.place} · ${story.pages.length}頁</p><p>${story.summary}</p><p class="card-words">讀本詞：${story.bookWords.slice(0,4).join('、')}</p>${story.artNote?`<p class="art-note">${story.artNote}</p>`:''}</span></button>`;
+      const hasBookWords = story.bookWords.length > 0;
+      const displayedWords = hasBookWords
+        ? story.bookWords.slice(0,4)
+        : story.pages.flatMap(page => page.focusWords).slice(0,4);
+      const wordLabel = hasBookWords ? '讀本詞' : '學習詞語';
+      return `<button class="story-card" type="button" data-story="${story.id}" aria-label="開始故事：${story.title}"><img class="story-cover" src="${image}" alt="${story.title}插圖" onerror="this.src='assets/family-stories/characters/family-height-lineup.webp'"><span><strong class="story-title">${String(index+1).padStart(2,'0')}・${story.title} ${done?'<span class="done-tag">★</span>':''}</strong><p>${story.place} · ${story.pages.length}頁</p><p>${story.summary}</p><p class="card-words">${wordLabel}：${displayedWords.join('、')}</p>${story.artNote?`<p class="art-note">${story.artNote}</p>`:''}</span></button>`;
     }).join('');
     const castGrid = $('cast-grid');
     if (castGrid) castGrid.innerHTML = cast.map(([name,height,traits,file]) => `<article class="cast-card"><img src="assets/family-stories/characters/${file}" alt="${name}角色三視圖"><div><strong>${name}</strong><p>${height} · ${traits}</p></div></article>`).join('');
