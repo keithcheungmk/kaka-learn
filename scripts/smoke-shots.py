@@ -35,8 +35,9 @@ SCROLLABLE = {
     "screen-phonics-topics",
     "screen-phonics-sounds",
     "screen-progress",
+    "screen-math-galaxy",  # Browsing hub for planet and life-skill destinations; the actual math activities remain no-scroll.
     "screen-chinese-connect",
-    "screen-story-demo",  # Little Fox 20-book shelf: browsing may scroll; play screen may not.
+    "screen-story-demo",  # Little Fox book shelf: browsing may scroll; play screen may not.
 }
 
 # 家庭目標裝置（預設／CI）——對齊 Keith 部 iPad Pro 11" 同 iPhone 16 Pro Max
