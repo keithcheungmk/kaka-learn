@@ -959,7 +959,7 @@ def check_family_storybook_entry() -> None:
 
 
 def check_asset_weight() -> None:
-    """效能：單檔唔好超過 400KB，完整 Carter + Magic Marker 圖書館總資產唔好超過 160MB。"""
+    """效能：單檔唔好超過 400KB，所有遊戲共用 assets/ 唔好超過 300MB。"""
     total = 0
     for p in Path("assets").rglob("*"):
         if p.is_file():
@@ -967,9 +967,9 @@ def check_asset_weight() -> None:
             total += size
             if size > 400_000:
                 fail("asset-weight", f"{p} 有 {size // 1024}KB（上限 400KB，請先縮圖／轉 WebP）")
-    if total > 160_000_000:
-        fail("asset-weight", f"assets/ 合共 {total // 1024 // 1024}MB，超過 160MB 上限")
-    notes.append(f"assets/ 合共 {total // 1024 // 1024}MB")
+    if total > 300_000_000:
+        fail("asset-weight", f"assets/ 合共 {total // 1_000_000}MB，超過 300MB 上限")
+    notes.append(f"assets/ 合共 {total / 1_000_000:.2f}MB")
 
 
 CHECKS = [

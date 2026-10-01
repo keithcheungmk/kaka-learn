@@ -9,6 +9,7 @@ const manifestSource = await readFile(new URL('../data/carter-family-manifest.js
 const magicManifestSource = await readFile(new URL('../data/magic-marker-manifest.js', import.meta.url), 'utf8');
 const magicExpansionSource = await readFile(new URL('../data/magic-marker-expansion.js', import.meta.url), 'utf8');
 const magicRestSource = await readFile(new URL('../data/magic-marker-rest.js', import.meta.url), 'utf8');
+const wackyManifestSource = await readFile(new URL('../data/wacky-ricky-manifest.js', import.meta.url), 'utf8');
 const starFx = await readFile(new URL('../js/star-fx.js', import.meta.url), 'utf8');
 const css = await readFile(new URL('../css/story-demo.css', import.meta.url), 'utf8');
 const index = await readFile(new URL('../index.html', import.meta.url), 'utf8');
@@ -20,10 +21,16 @@ vm.runInNewContext(magicManifestSource, magicManifestSandbox);
 vm.runInNewContext(magicExpansionSource, magicManifestSandbox);
 vm.runInNewContext(magicRestSource, magicManifestSandbox);
 const magicBooks = magicManifestSandbox.window.KakaMagicMarkerManifest.books;
+const wackyManifestSandbox = { window: {} };
+vm.runInNewContext(wackyManifestSource, wackyManifestSandbox);
+const wackyManifest = wackyManifestSandbox.window.KakaWackyRickyManifest;
+const wackyBooks = wackyManifest.books;
 
 assert.match(source, /const BASE_BOOKS = \[/, 'Read & Fill should keep the three-book template catalogue');
 assert.match(source, /BASE_BOOKS\.concat\(window\.KakaCarterManifest/, 'Additional Carter books should come from the manifest');
 assert.match(source, /window\.KakaMagicMarkerManifest\?\.books/, 'Magic Marker books should come from their own manifest');
+assert.match(source, /window\.KakaWackyRickyManifest\?\.books/, 'Wacky Ricky should use its independent collection manifest');
+assert.match(source, /story-demo-review-note/, 'Wacky Ricky pending audio review must be visible in the hub');
 assert.match(source, /function openSeriesChooser/, 'English story entry should lead to the series chooser');
 assert.match(source, /id: 'cf001'/, 'CF001 Game Night should remain available');
 assert.match(source, /id: 'cf002'/, 'CF002 The Tree House should be available');
@@ -39,6 +46,10 @@ assert.equal(blankCount, 38, 'Every story page needs one short fill activity');
 assert.equal(choiceCount, 38, 'Every story page should define answer choices');
 
 assert.equal(manifestBooks.length, 82, 'Manifest should add CF004–CF085');
+assert.equal(wackyBooks.length, 100, 'Wacky Ricky should contain WR001–WR100');
+assert.equal(wackyManifest.status, 'first_pass_review_required');
+assert.deepEqual(JSON.parse(JSON.stringify(wackyManifest.reviewSummary)), { pageClips: 960, priorityListenPages: 477, unavailablePages: 9, manualListeningVerified: 0 });
+assert.equal(wackyBooks.reduce((sum, book) => sum + book.unavailablePages.length, 0), 9);
 assert.deepEqual(Array.from(manifestBooks.slice(0, 7), (book) => book.cfLabel), ['CF004', 'CF005', 'CF006', 'CF007', 'CF008', 'CF009', 'CF010']);
 assert.deepEqual(Array.from(manifestBooks.slice(-20), (book) => book.cfLabel), Array.from({ length: 20 }, (_, index) => `CF${String(index + 66).padStart(3, '0')}`));
 assert.equal(manifestBooks.slice(0, 7).reduce((sum, book) => sum + book.pages.length, 0), 96, 'CF004–CF010 should add 96 story pages');
@@ -55,7 +66,7 @@ for (const book of manifestBooks) {
 }
 
 const storySandbox = {
-  window: { KakaCarterManifest: { books: manifestBooks }, KakaMagicMarkerManifest: { books: magicBooks }, KakaSpeech: {} },
+  window: { KakaCarterManifest: { books: manifestBooks }, KakaMagicMarkerManifest: { books: magicBooks }, KakaWackyRickyManifest: wackyManifest, KakaSpeech: {} },
   document: { querySelector: () => null, querySelectorAll: () => [] },
   console,
 };
@@ -63,7 +74,7 @@ vm.runInNewContext(source, storySandbox);
 const storyDemo = storySandbox.window.KakaStoryDemo;
 assert.equal(storyDemo.books.length, 85, 'The balanced answer system should include all 85 Carter books');
 assert.equal(storyDemo.pageCount, 1033, 'The balanced answer system should cover all 1,033 story pages');
-assert.deepEqual(Array.from(storyDemo.series, (series) => [series.id, series.bookCount, series.pageCount]), [['carter', 85, 1033], ['magic-marker', 73, 655]], 'Little Fox should keep Carter and Magic Marker as separate collections');
+assert.deepEqual(Array.from(storyDemo.series, (series) => [series.id, series.bookCount, series.pageCount]), [['carter', 85, 1033], ['magic-marker', 73, 655], ['wacky-ricky', 100, 960]], 'All story collections should remain independent');
 assert.deepEqual(Array.from(magicBooks, (book) => book.id), Array.from({ length: 73 }, (_, index) => `mm${String(index + 1).padStart(3, '0')}`), 'The Magic Marker catalogue should run continuously through MM073');
 const normalize = (word) => String(word).toLowerCase().replace(/[^a-z]/g, '');
 const seededRandom = (seed) => () => {
@@ -85,6 +96,20 @@ for (const book of magicBooks) {
   assert.equal(plan.length, book.pages.length, `${book.id} should build one balanced exercise per page`);
   assert.ok(plan.every((question) => question.choices.length === 4 && question.choices[question.correctIndex] === question.answer), `${book.id} answers should render with one correct choice among four`);
   assert.ok(plan.every((question) => new Set(question.choices.map(normalize)).size === 4), `${book.id} should have four different choices on every page`);
+}
+for (const book of wackyBooks) {
+  assert.equal(book.editorialStatus, 'review_required', `${book.id} should remain marked as unreviewed`);
+  for (const item of book.pages) {
+    assert.equal(item.contentStatus, 'auto_generated_pending_review');
+    assert.equal(item.listeningStatus, 'pending');
+    assert.equal(item.choices.length, 3);
+    assert.ok(item.sentence.includes(item.blanks[0]));
+    await access(new URL(`../${item.image.slice(2)}`, import.meta.url), fsConstants.R_OK);
+    await access(new URL(`../${item.audio.slice(2)}`, import.meta.url), fsConstants.R_OK);
+  }
+  const plan = Array.from(storyDemo.createQuestionPlan(book, seededRandom(book.id.charCodeAt(2)), wackyBooks));
+  assert.equal(plan.length, book.pages.length);
+  assert.ok(plan.every((question) => question.choices.length === 4 && question.choices[question.correctIndex] === question.answer));
 }
 for (const book of storyDemo.books) {
   let sawDifferentRun = false;

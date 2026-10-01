@@ -863,3 +863,11 @@ python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
 - 主頁 `screen-home` 新增「普通話拼音」一級入口，與認字、英文、數理並列，連至 `./pth-demo.html?v=20260914-pth-word-audio`。
 - 入口為 same-site standalone demo，不接入中文／英文／數學邏輯或共用進度；`source-materials/` 未改動。
 - 公開網址：`https://keithcheungmk.github.io/kaka-learn/pth-demo.html?v=20260914-pth-word-audio`。
+### 2026-10-01 · ChatGPT/Codex — Wacky Ricky Story English integration
+
+- Added Wacky Ricky as a separate Story English collection (WR001–WR100), retaining its independent source paths, page order, image/audio references and review state; source originals remain local under `source-materials/Wacky Ricky/`.
+- This release includes 960 playable page exercises from 100 books. Nine pages without reliable audio alignment remain unavailable and are identified on their book cards and finish flow. The Wacky Ricky hub marks all recordings as awaiting review (477 priority pages; 0 manually listened).
+- Keith authorized the shared `assets/` cap at 300,000,000 bytes (decimal 300 MB); the cap counts assets for every game together. The current candidate totals 208,593,873 bytes; the largest asset is 365,106 bytes.
+- Automated checks: story mission tests and all 40 invariants pass. Full set of web audio candidates decoded in the earlier local QA pass; no source PDFs/MP3s were modified. Local browser/iPad QA still unavailable in this session (`python -m http.server` socket permission denied; Playwright Chromium MachPortRendezvous permission denied). User authorized deployment before manual listening/device QA; those review states remain visibly pending in the activity.
+- Change set: `AGENTS.md`, `index.html`, `js/story-demo.js`, `css/story-demo.css`, `data/wacky-ricky-manifest.js`, `assets/wacky-ricky/`, `scripts/build-wacky-ricky-site-data.py`, `scripts/check-invariants.py`, `scripts/test-story-mission.mjs`.
+- Release state: not yet committed, pushed, deployed or live-verified.

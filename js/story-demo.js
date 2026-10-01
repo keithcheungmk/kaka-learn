@@ -97,9 +97,11 @@
   // while sharing this verified page-listen/read-and-fill experience.
   const CARTER_BOOKS = BASE_BOOKS.concat(window.KakaCarterManifest?.books || []);
   const MAGIC_MARKER_BOOKS = window.KakaMagicMarkerManifest?.books || [];
+  const WACKY_RICKY_BOOKS = window.KakaWackyRickyManifest?.books || [];
   const SERIES = [
     { id: 'carter', title: 'Carter Family', label: 'CARTER FAMILY', range: 'CF001–CF085', image: CARTER_BOOKS[0]?.cover || CARTER_BOOKS[0]?.pages[0]?.image, description: '生活故事 · 聆聽、閱讀與句子填字', books: CARTER_BOOKS },
     { id: 'magic-marker', title: 'Magic Marker', label: 'MAGIC MARKER', range: 'MM001–MM073', image: MAGIC_MARKER_BOOKS[0]?.cover || MAGIC_MARKER_BOOKS[0]?.pages[0]?.image, description: 'Maxie、Taco、Alex 和 Sue 的故事', books: MAGIC_MARKER_BOOKS },
+    { id: 'wacky-ricky', title: 'Wacky Ricky', label: 'WACKY RICKY', range: 'WR001–WR100', image: WACKY_RICKY_BOOKS[0]?.cover || WACKY_RICKY_BOOKS[0]?.pages[0]?.image, description: 'Ricky 和朋友們的故事 · 錄音仍待聽審', books: WACKY_RICKY_BOOKS },
   ];
   let currentSeriesId = 'carter';
   let BOOKS = CARTER_BOOKS;
@@ -202,10 +204,18 @@
     if (heroCover) heroCover.src = BOOKS[0].cover || BOOKS[0].pages[0]?.image || '';
     if (heroKicker) heroKicker.textContent = `${series.label} · ${series.range}`;
     if (heroTitle) heroTitle.textContent = series.title;
+    const reviewNote = $('#story-demo-review-note');
+    if (reviewNote) {
+      const review = window.KakaWackyRickyManifest?.reviewSummary;
+      reviewNote.hidden = currentSeriesId !== 'wacky-ricky';
+      reviewNote.textContent = currentSeriesId === 'wacky-ricky' && review
+        ? `Adult preview: all ${review.pageClips} page recordings are awaiting listening review; ${review.priorityListenPages} are priority checks. ${review.unavailablePages} pages have no reliable clip and are unavailable.`
+        : '';
+    }
     const grid = $('#story-demo-activity-grid');
     grid.innerHTML = BOOKS.map((book) => `<button type="button" class="story-activity-card story-activity-card--read" data-book-id="${book.id}">
       <img class="story-activity-image" src="${book.cover || book.pages[0]?.image || ''}" alt="" loading="lazy" decoding="async">
-      <strong>${book.title}</strong><small>${book.cfLabel || book.mmLabel} · ${book.pages.length} pages</small>
+      <strong>${book.title}</strong><small>${book.cfLabel || book.mmLabel || book.wrLabel} · ${book.pages.length} playable pages${book.unavailablePages?.length ? ` · ${book.unavailablePages.length} audio pages unavailable` : ''}</small>
       <span class="story-activity-description">聽每一頁，再放回剛才聽到的一個字。</span><span class="story-activity-status">Start →</span>
     </button>`).join('');
     $$('[data-book-id]', grid).forEach((button) => {
@@ -531,7 +541,9 @@
     $('#story-play-lead').textContent = 'You listened to the story and filled every sentence.';
     $('#story-round-progress').textContent = `${list.length}/${list.length}`;
     $('#story-play-stage').classList.remove('story-page-challenge', 'is-listening', 'is-solved');
-    $('#story-play-stage').innerHTML = `<div class="story-finish"><span>★</span><h2>${book.title} Complete!</h2><p>Read the story again whenever you like.</p></div>`;
+    const missingPages = book.unavailablePages?.length || 0;
+    const finishNote = missingPages ? `${missingPages} page${missingPages === 1 ? ' is' : 's are'} unavailable because no reliable recording is ready yet.` : 'Read the story again whenever you like.';
+    $('#story-play-stage').innerHTML = `<div class="story-finish"><span>★</span><h2>${book.title} Complete!</h2><p>${finishNote}</p></div>`;
     $('#story-play-actions').innerHTML = '<button type="button" class="btn btn-secondary" id="btn-story-restart">Read again</button>';
     $('#story-play-options').innerHTML = `<button type="button" class="story-answer" id="btn-story-home">Back to ${activeSeries().title} Books</button>`;
     $('#btn-story-restart')?.addEventListener('click', () => startBook(book.id));
