@@ -66,16 +66,16 @@ window.FAMILY_STORIES = [
     ]
   },
   {
-    id:'zhuhai-aquarium', title:'珠海水族館探險', place:'珠海水族館', characters:['卡卡','禧禧','堯叔叔'], sourceBooks:['rb_shuijiao','rb_dongdong','rb_xin'],
+    id:'zhuhai-aquarium', title:'珠海水族館探險', place:'珠海水族館', characters:['卡卡','禧禧','耀叔叔'], sourceBooks:['rb_shuijiao','rb_dongdong','rb_xin'],
     bookWords:['魚','小狗','媽媽','爸爸'], extensionWords:["水族館","海豚","海龜","水母","水","海","小魚","看見","一起","帶","玻璃","一隻","一條","游來游去","拍照","留念"],
-    summary:'堯叔叔帶兩個孩子在水族館觀察海洋動物，最後合照留念。',
+    summary:'耀叔叔帶兩個孩子在水族館觀察海洋動物，最後合照留念。',
     pages:[
-      {"sentence":"堯叔叔帶大家去水族館。","tiles":["堯叔叔","帶","大家","去","水族館"],"learn":["帶","水族館"],"distractors":["超市","公園"],"focusWords":["帶","水族館"],"dialogue":{"speaker":"禧禧","text":"我們一起去水族館吧。"}},
-      {"sentence":"玻璃後面有很多魚。","tiles":["玻璃","後面","有","很多","魚"],"learn":["玻璃","魚"],"distractors":["花","葉"],"focusWords":["玻璃","魚"],"dialogue":{"speaker":"堯叔叔","text":"隔着玻璃可以看見很多魚。"}},
+      {"sentence":"耀叔叔帶大家去水族館。","tiles":["耀叔叔","帶","大家","去","水族館"],"learn":["帶","水族館"],"distractors":["超市","公園"],"focusWords":["帶","水族館"],"dialogue":{"speaker":"禧禧","text":"我們一起去水族館吧。"}},
+      {"sentence":"玻璃後面有很多魚。","tiles":["玻璃","後面","有","很多","魚"],"learn":["玻璃","魚"],"distractors":["花","葉"],"focusWords":["玻璃","魚"],"dialogue":{"speaker":"耀叔叔","text":"隔着玻璃可以看見很多魚。"}},
       {"sentence":"禧禧看見一隻海龜。","tiles":["禧禧","看見","一隻","海龜"],"learn":["一隻","海龜"],"distractors":["小狗","白兔"],"focusWords":["一隻","海龜"],"dialogue":{"speaker":"禧禧","text":"我看見一隻海龜！"}},
       {"sentence":"卡卡找到一條小魚。","tiles":["卡卡","找到","一條","小魚"],"learn":["一條","小魚"],"distractors":["一片黃葉","一束花"],"focusWords":["一條","小魚"],"dialogue":{"speaker":"卡卡","text":"那邊有一條小魚。"}},
       {"sentence":"海豚在水裏游來游去。","tiles":["海豚","在","水裏","游來游去"],"learn":["海豚","游來游去"],"distractors":["跑來跑去","飛上天"],"focusWords":["海豚","游來游去"],"dialogue":{"speaker":"禧禧","text":"海豚游來游去了！"}},
-      {"sentence":"大家一起拍照留念。","tiles":["大家","一起","拍照","留念"],"learn":["拍照","留念"],"distractors":["分水果","收雨傘"],"focusWords":["拍照","留念"],"dialogue":{"speaker":"堯叔叔","text":"我們拍照留念吧。"}}
+      {"sentence":"大家一起拍照留念。","tiles":["大家","一起","拍照","留念"],"learn":["拍照","留念"],"distractors":["分水果","收雨傘"],"focusWords":["拍照","留念"],"dialogue":{"speaker":"耀叔叔","text":"我們拍照留念吧。"}}
     ]
   },
   {
@@ -92,16 +92,16 @@ window.FAMILY_STORIES = [
     ]
   },
   {
-    id:'chimelong-safari', title:'長隆野生動物世界', place:'廣州長隆', characters:['卡卡','禧禧','堯叔叔'], sourceBooks:['rb_kuaipao','rb_shuijiao','rb_dongdong'],
+    id:'chimelong-safari', title:'長隆野生動物世界', place:'廣州長隆', characters:['卡卡','禧禧','耀叔叔'], sourceBooks:['rb_kuaipao','rb_shuijiao','rb_dongdong'],
     bookWords:['小鹿','老虎','兔子','獅子','叫','誰','在'], extensionWords:["長頸鹿","大象","望遠鏡","動物園","斑馬","猴子","快跑","看見","帶","走來","安全區","動物"],
     summary:'在安全觀賞區觀察動物，聽叫聲、找斑馬，認識牠們的生活。',
     pages:[
-      {"sentence":"堯叔叔帶孩子們到動物園。","tiles":["堯叔叔","帶","孩子們","到","動物園"],"learn":["帶","動物園"],"distractors":["酒店","超市"],"focusWords":["帶","動物園"],"dialogue":{"speaker":"禧禧","text":"我們一起去看動物吧。"}},
+      {"sentence":"耀叔叔帶孩子們到動物園。","tiles":["耀叔叔","帶","孩子們","到","動物園"],"learn":["帶","動物園"],"distractors":["酒店","超市"],"focusWords":["帶","動物園"],"dialogue":{"speaker":"禧禧","text":"我們一起去看動物吧。"}},
       {"sentence":"卡卡用望遠鏡看小鹿。","tiles":["卡卡","用","望遠鏡","看","小鹿"],"learn":["望遠鏡","小鹿"],"distractors":["小狗","氣球"],"focusWords":["望遠鏡","小鹿"],"dialogue":{"speaker":"卡卡","text":"我用望遠鏡看見小鹿。"}},
-      {"sentence":"遠處的斑馬慢慢走來。","tiles":["遠處","的","斑馬","慢慢","走來"],"learn":["斑馬","走來"],"distractors":["河水","橙子"],"focusWords":["斑馬","走來"],"dialogue":{"speaker":"堯叔叔","text":"斑馬慢慢走過來了。"}},
+      {"sentence":"遠處的斑馬慢慢走來。","tiles":["遠處","的","斑馬","慢慢","走來"],"learn":["斑馬","走來"],"distractors":["河水","橙子"],"focusWords":["斑馬","走來"],"dialogue":{"speaker":"耀叔叔","text":"斑馬慢慢走過來了。"}},
       {"sentence":"禧禧聽見猴子在叫。","tiles":["禧禧","聽見","猴子","在","叫"],"learn":["猴子","叫"],"distractors":["睡覺","飛走"],"focusWords":["猴子","叫"],"dialogue":{"speaker":"禧禧","text":"我聽見猴子在叫！"}},
       {"sentence":"大家在安全區看大象。","tiles":["大家","在","安全區","看","大象"],"learn":["安全區","大象"],"distractors":["大火","海豚"],"focusWords":["安全區","大象"],"dialogue":{"speaker":"卡卡","text":"我們在安全區看大象。"}},
-      {"sentence":"孩子們記下今天看見的動物。","tiles":["孩子們","記下","今天","看見","的","動物"],"learn":["看見","動物"],"distractors":["送給","收起"],"focusWords":["看見","動物"],"dialogue":{"speaker":"堯叔叔","text":"今天大家看見很多動物。"}}
+      {"sentence":"孩子們記下今天看見的動物。","tiles":["孩子們","記下","今天","看見","的","動物"],"learn":["看見","動物"],"distractors":["送給","收起"],"focusWords":["看見","動物"],"dialogue":{"speaker":"耀叔叔","text":"今天大家看見很多動物。"}}
     ]
   },
   {
@@ -118,7 +118,7 @@ window.FAMILY_STORIES = [
     ]
   },
   {
-    id:'hongkong-disney', title:'香港迪士尼的一天', place:'香港迪士尼樂園', characters:['卡卡','禧禧','姑姑','蛙蛙','傑叔叔','堯叔叔'], sourceBooks:['rb_xin','rb_yishuhua','rb_fengwan','rb_fenguo'], artNote:'六頁場景插圖已更新為繪本風格；角色細節仍可再微調',
+    id:'hongkong-disney', title:'香港迪士尼的一天', place:'香港迪士尼樂園', characters:['卡卡','禧禧','姑姑','蛙蛙','傑叔叔','耀叔叔'], sourceBooks:['rb_xin','rb_yishuhua','rb_fengwan','rb_fenguo'], artNote:'六頁場景插圖已更新為繪本風格；角色細節仍可再微調',
     bookWords:['信','送給','媽媽','爸爸','一束','花','玩','和','我'], extensionWords:["城堡","地圖","巡遊","合照","樂園","來到","前行","找到","路旁","一張","照片"],
     summary:'兩家人一起看地圖找城堡，欣賞巡遊，最後留下合照。',
     pages:[
@@ -126,8 +126,8 @@ window.FAMILY_STORIES = [
       {"sentence":"姑姑拿着地圖帶孩子前行。","tiles":["姑姑","拿着","地圖","帶","孩子","前行"],"learn":["地圖","前行"],"distractors":["信","雨傘"],"focusWords":["地圖","前行"],"dialogue":{"speaker":"禧禧","text":"我看看地圖怎樣走。"}},
       {"sentence":"卡卡和禧禧找到城堡。","tiles":["卡卡","和","禧禧","找到","城堡"],"learn":["找到","城堡"],"distractors":["樹枝","水窪"],"focusWords":["找到","城堡"],"dialogue":{"speaker":"姑姑","text":"前面就是城堡。"}},
       {"sentence":"大家站在路旁看巡遊。","tiles":["大家","站在","路旁","看","巡遊"],"learn":["路旁","巡遊"],"distractors":["猴子","海豚"],"focusWords":["路旁","巡遊"],"dialogue":{"speaker":"蛙蛙","text":"大家站好看巡遊。"}},
-      {"sentence":"傑叔叔和堯叔叔拍了一張合照。","tiles":["傑叔叔","和","堯叔叔","拍了","一張","合照"],"learn":["一張","合照"],"distractors":["一束花","一封信"],"focusWords":["一張","合照"],"dialogue":{"speaker":"傑叔叔","text":"我們拍一張合照。"}},
-      {"sentence":"卡卡把照片送給姑姑。","tiles":["卡卡","把","照片","送給","姑姑"],"learn":["照片","送給"],"distractors":["飛走","收起小雨傘"],"focusWords":["照片","送給"],"dialogue":{"speaker":"堯叔叔","text":"回家把照片送給姑姑看。"}}
+      {"sentence":"傑叔叔和耀叔叔拍了一張合照。","tiles":["傑叔叔","和","耀叔叔","拍了","一張","合照"],"learn":["一張","合照"],"distractors":["一束花","一封信"],"focusWords":["一張","合照"],"dialogue":{"speaker":"傑叔叔","text":"我們拍一張合照。"}},
+      {"sentence":"卡卡把照片送給姑姑。","tiles":["卡卡","把","照片","送給","姑姑"],"learn":["照片","送給"],"distractors":["飛走","收起小雨傘"],"focusWords":["照片","送給"],"dialogue":{"speaker":"耀叔叔","text":"回家把照片送給姑姑看。"}}
     ]
   },
   {
@@ -143,6 +143,21 @@ window.FAMILY_STORIES = [
       {"sentence":"卡卡拿起獸醫圖卡，旁邊畫着小狗和小貓。","tiles":["卡卡","拿起","獸醫","圖卡","，","旁邊","畫着","小狗","和","小貓"],"learn":["獸醫","小狗"],"distractors":["巡遊","水窪"],"focusWords":["獸醫","小狗"],"dialogue":{"speaker":"卡卡","text":"我想做獸醫，照顧小動物。"}},
       {"sentence":"老師把太空人圖卡貼在星空圖旁。","tiles":["老師","把","太空人","圖卡","貼在","星空圖","旁"],"learn":["太空人","星空圖"],"distractors":["蘋果","雨傘"],"focusWords":["太空人","星空圖"],"dialogue":{"speaker":"禧禧","text":"我想做太空人，去看看月亮和星星。"}},
       {"sentence":"卡卡和禧禧把職業圖卡排在一起。","tiles":["卡卡","和","禧禧","把","職業圖卡","排在","一起"],"learn":["職業圖卡","一起"],"distractors":["洗澡","睡覺"],"focusWords":["職業圖卡","一起"],"dialogue":{"speaker":"卡卡和禧禧","text":"每一份工作都能幫助大家；長大後我們再選喜歡的工作！"}}
+    ]
+  },
+  {
+    id:'xiyu-newborn', title:'浠榆妹妹來了', place:'珠海月子中心', characters:['卡卡','傑叔叔','姑姑','浠榆','護士姐姐','阿姨','醫生','耀叔叔','娃娃','禧禧'], sourceBooks:[], bookWords:[],
+    extensionWords:["浠榆","妹妹","出生了","迎接","高興","傑叔叔","卡卡","陪","送","媽媽","珠海","月子中心","休息","住進","行李","護士姐姐","阿姨","照顧","醫生","看看","放心","笑了","洗澡","毛巾","抱着","喝奶","喝飽","閉上","眼睛","睡覺","輕聲","唱歌","耀叔叔","娃娃","禧禧","探望","姑姑"],
+    summary:'浠榆妹妹出生了；卡卡一家到珠海月子中心休息，親友也來探望。',
+    pages:[
+      {"sentence":"浠榆妹妹出生了，卡卡和爸爸高興地迎接她。","tiles":["浠榆妹妹","出生了","，","卡卡","和","爸爸","高興","地","迎接","她","。"],"learn":["出生了","迎接"],"distractors":["洗澡","唱歌"],"focusWords":["出生了","迎接"],"dialogue":{"speaker":"卡卡","text":"浠榆妹妹，歡迎你來到我們家！"}},
+      {"sentence":"傑叔叔和卡卡送媽媽和浠榆到珠海月子中心休息。","tiles":["傑叔叔","和","卡卡","送","媽媽","和","浠榆","到","珠海","月子中心","休息","。"],"learn":["珠海","月子中心"],"distractors":["水族館","遊樂園"],"focusWords":["珠海","月子中心"],"dialogue":{"speaker":"傑叔叔","text":"我們到月子中心休息，媽媽和妹妹都要好好休息。"}},
+      {"sentence":"護士姐姐和阿姨來照顧媽媽和浠榆。","tiles":["護士姐姐","和","阿姨","來","照顧","媽媽","和","浠榆","。"],"learn":["護士姐姐","阿姨"],"distractors":["司機","老師"],"focusWords":["護士姐姐","阿姨"],"dialogue":{"speaker":"護士姐姐","text":"媽媽安心休息，我和阿姨會照顧你們。"}},
+      {"sentence":"醫生來看看媽媽和浠榆，媽媽放心地笑了。","tiles":["醫生","來","看看","媽媽","和","浠榆","，","媽媽","放心","地","笑了","。"],"learn":["醫生","放心"],"distractors":["廚師","害怕"],"focusWords":["醫生","放心"],"dialogue":{"speaker":"姑姑","text":"謝謝醫生，我安心多了。"}},
+      {"sentence":"護士姐姐替浠榆洗澡，阿姨拿來毛巾。","tiles":["護士姐姐","替","浠榆","洗澡","，","阿姨","拿來","毛巾","。"],"learn":["洗澡","毛巾"],"distractors":["睡覺","雨傘"],"focusWords":["洗澡","毛巾"],"dialogue":{"speaker":"姑姑","text":"妹妹洗完澡，香噴噴的！"}},
+      {"sentence":"媽媽抱着浠榆喝奶，浠榆喝飽了。","tiles":["媽媽","抱着","浠榆","喝奶","，","浠榆","喝飽","了","。"],"learn":["抱着","喝奶"],"distractors":["唱歌","跑步"],"focusWords":["抱着","喝奶"],"dialogue":{"speaker":"姑姑","text":"浠榆喝飽奶了，真乖。"}},
+      {"sentence":"浠榆喝飽奶，閉上眼睛睡覺，卡卡輕聲唱歌陪她。","tiles":["浠榆","喝飽奶","，","閉上","眼睛","睡覺","，","卡卡","輕聲","唱歌","陪","她","。"],"learn":["睡覺","唱歌"],"distractors":["洗澡","玩水"],"focusWords":["睡覺","唱歌"],"dialogue":{"speaker":"卡卡","text":"妹妹睡覺吧，我唱歌給你聽。"}},
+      {"sentence":"耀叔叔、娃娃和禧禧來探望姑姑和浠榆。","tiles":["耀叔叔","、","娃娃","和","禧禧","來","探望","姑姑","和","浠榆","。"],"learn":["探望","姑姑"],"distractors":["超市","公園"],"focusWords":["探望","姑姑"],"dialogue":{"speaker":"禧禧","text":"姑姑、浠榆妹妹，我和爸爸媽媽來看你們啦！"}}
     ]
   }
 ];
