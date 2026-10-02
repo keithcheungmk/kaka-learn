@@ -159,5 +159,20 @@ window.FAMILY_STORIES = [
       {"sentence":"浠榆喝飽奶，閉上眼睛睡覺，卡卡輕聲唱歌陪她。","tiles":["浠榆","喝飽奶","，","閉上","眼睛","睡覺","，","卡卡","輕聲","唱歌","陪","她","。"],"learn":["睡覺","唱歌"],"distractors":["洗澡","玩水"],"focusWords":["睡覺","唱歌"],"dialogue":{"speaker":"卡卡","text":"妹妹睡覺吧，我唱歌給你聽。"}},
       {"sentence":"耀叔叔、娃娃和禧禧來探望姑姑和浠榆。","tiles":["耀叔叔","、","娃娃","和","禧禧","來","探望","姑姑","和","浠榆","。"],"learn":["探望","姑姑"],"distractors":["超市","公園"],"focusWords":["探望","姑姑"],"dialogue":{"speaker":"禧禧","text":"姑姑、浠榆妹妹，我和爸爸媽媽來看你們啦！"}}
     ]
+  },
+  {
+    id:'xiyu-national-day', title:'國慶假期，去珠海看妹妹', place:'珠海月子中心、室內遊樂場', characters:['卡卡','傑叔叔','姑姑','浠榆','工作人員'], sourceBooks:[], bookWords:[],
+    extensionWords:["國慶節假期","上星期","道別","珠海","探望","媽媽","浠榆妹妹","到了","帶","來","看","第二天早上","起床","搖鈴","輕輕","陪","聽見","開心","相機","拿起","合照","照片","拍","一張","工作人員","做好","手模","腳模","紀念盒","紀念品","放進","室內遊樂場","排隊","等候","玩具車","海綿","洗車","洗車遊戲","擦乾淨","攀爬架","爬過","滑梯","波波池","沿着","滑進","輪到","月子中心","回到","拿給","長大","一起","妹妹","爸爸","卡卡"],
+    summary:'國慶假期，卡卡和爸爸到珠海探望媽媽與浠榆；卡卡玩室內遊樂場後，帶着合照和手腳模紀念品回來分享。',
+    pages:[
+      {"sentence":"上星期道別後，國慶節假期到了，傑叔叔帶卡卡來珠海看媽媽和浠榆妹妹。","tiles":["上星期","道別","後","，","國慶節假期","到了","，","傑叔叔","帶","卡卡","來","珠海","看","媽媽","和","浠榆妹妹","。"],"learn":["國慶節假期","珠海"],"distractors":["生日","超市"],"focusWords":["國慶節假期","珠海"],"dialogue":{"speaker":"卡卡","text":"媽媽，浠榆妹妹，我們來看你們啦！"},"image":"assets/family-stories/scenes/xiyu-national-day-p01.webp"},
+      {"sentence":"媽媽抱着浠榆，卡卡起床後輕輕搖鈴陪妹妹玩。","tiles":["媽媽","抱着","浠榆","，","卡卡","起床","後","輕輕","搖鈴","陪","妹妹","玩","。"],"learn":["起床","搖鈴"],"distractors":["洗澡","唱歌"],"focusWords":["起床","搖鈴"],"dialogue":{"speaker":"姑姑","text":"卡卡輕輕搖鈴，妹妹聽見聲音很開心。"},"image":"assets/family-stories/scenes/xiyu-national-day-p02.webp"},
+      {"sentence":"傑叔叔拿起相機，替卡卡和浠榆拍一張合照。","tiles":["傑叔叔","拿起","相機","，","替","卡卡","和","浠榆","拍","一張","合照","。"],"learn":["相機","合照"],"distractors":["雨傘","風箏"],"focusWords":["相機","合照"],"dialogue":{"speaker":"卡卡","text":"妹妹，我們一起笑，拍張照片吧！"},"image":"assets/family-stories/scenes/xiyu-national-day-p03.webp"},
+      {"sentence":"工作人員做好浠榆的手模和腳模，放進紀念盒。","tiles":["工作人員","做好","浠榆","的","手模","和","腳模","，","放進","紀念盒","。"],"learn":["手模","腳模"],"distractors":["圖畫","毛巾"],"focusWords":["手模","腳模"],"dialogue":{"speaker":"工作人員","text":"這是浠榆小小的手模和腳模，留作紀念。"},"image":"assets/family-stories/scenes/xiyu-national-day-p04.webp"},
+      {"sentence":"卡卡和傑叔叔來到室內遊樂場，先排隊等候。","tiles":["卡卡","和","傑叔叔","來到","室內遊樂場","，","先","排隊","等候","。"],"learn":["室內遊樂場","排隊"],"distractors":["水族館","月子中心"],"focusWords":["室內遊樂場","排隊"],"dialogue":{"speaker":"卡卡","text":"爸爸，我們先去玩玩具車洗車，好嗎？"},"image":"assets/family-stories/scenes/xiyu-national-day-p05.webp"},
+      {"sentence":"卡卡拿起海綿，玩洗車遊戲，替玩具車擦乾淨。","tiles":["卡卡","拿起","海綿","，","玩","洗車","遊戲","，","替","玩具車","擦乾淨","。"],"learn":["海綿","洗車"],"distractors":["積木","滑梯"],"focusWords":["海綿","洗車"],"dialogue":{"speaker":"傑叔叔","text":"慢慢擦，玩具車變乾淨了！"},"image":"assets/family-stories/scenes/xiyu-national-day-p06.webp"},
+      {"sentence":"卡卡爬過攀爬架，再沿着滑梯滑進波波池。","tiles":["卡卡","爬過","攀爬架","，","再","沿着","滑梯","滑進","波波池","。"],"learn":["滑梯","波波池"],"distractors":["鞦韆","沙池"],"focusWords":["滑梯","波波池"],"dialogue":{"speaker":"卡卡","text":"我排好隊，輪到我才滑下去。"},"image":"assets/family-stories/scenes/xiyu-national-day-p07.webp"},
+      {"sentence":"卡卡和爸爸回到月子中心，把照片和紀念品拿給媽媽看。","tiles":["卡卡","和","爸爸","回到","月子中心","，","把","照片","和","紀念品","拿給","媽媽","看","。"],"learn":["照片","紀念品"],"distractors":["糖果","玩具車"],"focusWords":["照片","紀念品"],"dialogue":{"speaker":"姑姑","text":"等妹妹長大，我們再一起看這張照片！"},"image":"assets/family-stories/scenes/xiyu-national-day-p08.webp"}
+    ]
   }
 ];

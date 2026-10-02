@@ -7,7 +7,7 @@ manifest="global.window={};require('./data/family-stories/manifest.js');process.
 stories=json.loads(subprocess.check_output(['node','-e',manifest],cwd=ROOT,text=True))
 errors=[]
 def norm(text): return re.sub(r'[，。！？、\s]','',text)
-if len(stories)!=12: errors.append(f'Expected 12 stories, found {len(stories)}')
+if len(stories)!=13: errors.append(f'Expected 13 stories, found {len(stories)}')
 for path in ('data/family-stories/manifest.js','js/family-storybook.js','docs/family-story-character-bible.md'):
     if '堯叔叔' in (ROOT/path).read_text(encoding='utf-8'): errors.append(f'{path}: use the corrected character name 耀叔叔')
 for story in stories:
