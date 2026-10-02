@@ -113,6 +113,8 @@ const jobWords = jobSets.flatMap((group) => {
   for (const item of group.words) {
     assert.equal(item.letters.join(''), item.word.toLowerCase().replace(/[^a-z]/g, ''), `${item.word} 的字母磚可組回完整英文詞`);
     assert.ok(item.emoji, `${item.word} 有配對圖示`);
+    assert.ok(item.photo, `${item.word} 使用原創卡卡／希希職業插圖`);
+    assert.ok(fs.existsSync(path.join(repo, item.photo.replace(/^\.\//, ''))), `${item.word} 的職業插圖檔存在`);
     for (const phoneme of item.letters) {
       assert.ok(fs.existsSync(path.join(repo, 'assets/phonemes', `${phoneme}.mp3`)), `${item.word} 使用已存在的 ${phoneme} 音素錄音`);
     }
@@ -121,6 +123,28 @@ const jobWords = jobSets.flatMap((group) => {
 });
 assert.equal(jobWords.length, 45, '職業主題共使用中文職業詞庫的 45 個詞');
 assert.equal(new Set(jobWords.map((item) => item.word)).size, 45, '兩組職業之間沒有重複英文詞');
+assert.equal(new Set(jobWords.map((item) => item.photo)).size, 45, '45 個職業各自使用不同的原創插圖');
+assert.deepEqual(
+  ['phonics', 'phrase', 'recognize'].map((mode) => jobWords.filter((item) => item.buildMode === mode).length),
+  [13, 10, 22],
+  '職業詞庫按單字拼音、雙字詞語組合及整詞認讀分級',
+);
+for (const word of ['doctor', 'nurse', 'teacher', 'dentist', 'cleaner', 'driver', 'vet', 'chef', 'farmer', 'pilot', 'actor', 'builder', 'waiter']) {
+  assert.equal(jobWords.find((item) => item.word === word).buildMode, 'phonics', `${word} 使用字母拼音模式`);
+}
+for (const word of ['police officer', 'shop assistant', 'security guard', 'domestic helper', 'delivery worker', 'bus driver', 'taxi driver', 'flight attendant', 'ship captain', 'environmental officer']) {
+  const item = jobWords.find((entry) => entry.word === word);
+  assert.equal(item.buildMode, 'phrase', `${word} 使用完整英文詞語組合模式`);
+  assert.deepEqual([...item.wordParts], word.split(' '), `${word} 的每個完整詞語獨立呈現及播放`);
+}
+for (const word of ['firefighter', 'pharmacist', 'hairdresser', 'librarian', 'photographer', 'medical sales representative']) {
+  assert.equal(jobWords.find((item) => item.word === word).buildMode, 'recognize', `${word} 先使用整詞認讀，避免硬拆長字`);
+}
+assert.match(dataSource, /if \(word\.photo\) return .*career-photo/, '職業插圖優先於 Emoji 顯示');
+assert.match(appSource, /word\.buildMode === 'phrase' \? '先聽完整職稱/, '雙字職稱的學習卡提供逐詞聆聽');
+assert.match(appSource, /allBuildWords = currentTopicWords\(\)\.filter\(\(w\) => w\.letters && \['phonics', 'phrase'\]/, '長字整詞認讀項目不會誤入字母拼音遊戲');
+assert.match(appSource, /const phraseMode = target\.buildMode === 'phrase'/, '雙字職稱拼字遊戲改用完整詞語磚');
+assert.match(appSource, /lettersRow\.hidden = word\.buildMode === 'recognize'/, '進階職稱學習卡不再顯示逐字母拼音列');
 assert.deepEqual(
   [...jobSets[0].words.find((item) => item.word === 'police officer').wordBreaks],
   [6],
@@ -165,7 +189,7 @@ assert.match(appSource, /wordBreaks/, '短語在學習卡及拼字格保留詞�
 assert.match(appSource, /\$\{topic\.title\}・拼字/, '拼字畫面會顯示目前主題名稱');
 assert.match(appSource, /for \(const sound of word\.soundChunks\)/, '學習卡先順序播放音塊');
 assert.match(appSource, /await playPhonicsChunk\(sound/, '學習卡用乾淨音素或 rime 連讀');
-assert.match(appSource, /const blendSounds = completedRound\.target\.soundChunks \|\| completedRound\.chars/, '拼字完成按音塊連讀，再讀完整單字');
+assert.match(appSource, /const blendSounds = completedRound\.phraseMode \? \[\] : completedRound\.target\.soundChunks \|\| completedRound\.chars/, '一般拼字完成連讀音塊；完整詞語組合不會逐字母朗讀');
 assert.match(appSource, /blendSounds\[index\]/, '完成後依次連讀音塊或 phoneme');
 assert.match(appSource, /await playPhonicsChunk\(blendSounds\[index\]/, '完成後用乾淨音素或 rime 連讀');
 assert.match(appSource, /target\.blendGroups/, '拼字資料可定義可重用的視覺詞塊');

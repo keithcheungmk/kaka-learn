@@ -561,7 +561,7 @@
       btn.className = 'topic-card';
       btn.innerHTML = `
         <span class="phonics-mission-number" aria-hidden="true">${track === 'sight' ? 'WORD' : 'MISSION'} ${String(counters[track]).padStart(2, '0')}</span>
-        <span class="topic-cover" aria-hidden="true">${topic.cover}</span>
+        ${phonicsTopicCoverHtml(topic)}
         <span class="topic-title topic-title-zh">${topic.title}</span>
         ${track === 'sight' && topic.titleEn ? `<span class="topic-title topic-title-en term-en">${topic.titleEn}</span>` : ''}
         <span class="topic-blurb term-en">${topic.blurb}</span>
@@ -569,6 +569,12 @@
       btn.onclick = () => topic.soundMissions ? openPhonicsSounds() : topic.collections ? openPhonicsCollections(topic.id) : openPhonicsLearn(topic.id);
       grid.appendChild(btn);
     });
+  }
+
+  function phonicsTopicCoverHtml(topic) {
+    return topic.coverPhoto
+      ? `<span class="topic-cover topic-cover-photo" aria-hidden="true"><img src="${topic.coverPhoto}" alt="" loading="lazy" decoding="async"></span>`
+      : `<span class="topic-cover" aria-hidden="true">${topic.cover || ''}</span>`;
   }
 
   function bindPhonicsCollections() {
@@ -591,7 +597,7 @@
       btn.className = 'topic-card collection-topic-card';
       btn.innerHTML = `
         <span class="phonics-mission-number" aria-hidden="true">SET ${String(index + 1).padStart(2, '0')}</span>
-        <span class="topic-cover" aria-hidden="true">${collection.cover}</span>
+        ${phonicsTopicCoverHtml(collection)}
         <span class="topic-title collection-title topic-title-zh">${collection.title}</span>
         ${collection.titleEn ? `<span class="topic-title collection-title topic-title-en term-en">${collection.titleEn}</span>` : ''}
         <span class="topic-blurb term-en">${collection.blurb}</span>
@@ -748,10 +754,14 @@
       if (illust) illust.innerHTML = word.emoji ? phonicsWordIllustHtml(word) : '';
       if (term) term.textContent = word.word;
       if (lettersRow) {
-        const soundChunks = word.soundChunks || word.letters;
+        lettersRow.hidden = word.buildMode === 'recognize';
+        const soundChunks = word.buildMode === 'recognize' ? [] : word.wordParts || word.soundChunks || word.letters;
         lettersRow.classList.toggle('has-long-sounds', (soundChunks?.length || 0) >= 8);
         lettersRow.classList.toggle('has-extra-long-sounds', (soundChunks?.length || 0) >= 10);
-        lettersRow.innerHTML = soundChunks
+        lettersRow.classList.toggle('has-word-parts', word.buildMode === 'phrase');
+        lettersRow.innerHTML = word.buildMode === 'recognize' ? '' : word.buildMode === 'phrase'
+          ? (word.wordParts || word.word.split(/\s+/)).map((part) => `<button type="button" class="word-part-tile term-en" data-word-part="${part}">${part}</button>`).join('')
+          : soundChunks
           ? soundChunks
               .map((ch, index) => {
                 const divider = word.wordBreaks?.includes(index) ? '<span class="phrase-divider" aria-hidden="true"></span>' : '';
@@ -770,11 +780,18 @@
             playPhonicsChunk(tile.dataset.letter, { muted: isMuted() });
           });
         });
+        lettersRow.querySelectorAll('.word-part-tile').forEach((tile) => {
+          tile.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            ev.stopPropagation();
+            speakEnglishTerm(tile.dataset.wordPart, { muted: isMuted() });
+          });
+        });
       }
       if (lead) {
         const topic = getPhonicsTopicById(pActiveTopicId);
         lead.textContent = topic?.flow === 'blend'
-          ? (word.soundChunks ? '先聽音塊，再讀完整英文' : '先聽完整英文；再撳下面每個音素')
+          ? (word.buildMode === 'phrase' ? '先聽完整職稱，再逐個聽英文詞語' : word.buildMode === 'recognize' ? '先聽完整英文職稱，認熟整個詞' : word.soundChunks ? '先聽音塊，再讀完整英文' : '先聽完整英文；再撳下面每個音素')
           : word.letters ? '撳字母聽音' : '撳卡聽英文';
       }
     }
@@ -822,7 +839,13 @@
 
     // 拼字格保持原來字形；rime 用乾淨英文讀音示範連讀。
     // 例如 rice 的字格是 r-i-c-e，而學習示範讀 r + ice → rice。
-    if (Array.isArray(word.soundChunks) && word.soundChunks.length) {
+    if (Array.isArray(word.wordParts) && word.wordParts.length) {
+      for (const part of word.wordParts) {
+        await speakEnglishAndWait(part, { muted: isMuted(), rate: 0.88, pitch: 1.05, delayMs: 0 });
+        if (audioGen !== pLearnAudioGen) return;
+        await waitMs(220);
+      }
+    } else if (Array.isArray(word.soundChunks) && word.soundChunks.length) {
       for (const sound of word.soundChunks) {
         await playPhonicsChunk(sound, { muted: isMuted() });
         if (audioGen !== pLearnAudioGen) return;
@@ -924,9 +947,12 @@
     const back = $('#btn-back-phonics-build');
     const poolLabel = $('#screen-phonics-build .build-pool-wrap .section-label');
     if (title) title.textContent = isBlendFlow && topic ? `${topic.title}・拼字` : '砌一砌';
-    if (prompt) prompt.textContent = isBlendFlow ? '揀字母，再撳同一粒自動入格；亦可以拖入發光格' : '拖字母入格';
+    const hasPhraseBuild = currentTopicWords().some((word) => word.buildMode === 'phrase');
+    if (prompt) prompt.textContent = hasPhraseBuild
+      ? '揀完整英文詞語，按次序砌好職稱；簡單職業就逐個字母拼'
+      : isBlendFlow ? '揀字母，再撳同一粒自動入格；亦可以拖入發光格' : '拖字母入格';
     if (back) back.textContent = isBlendFlow ? '← 字卡' : '← 玩法';
-    if (poolLabel) poolLabel.textContent = isBlendFlow ? '音素池' : '字母池';
+    if (poolLabel) poolLabel.textContent = hasPhraseBuild ? '英文詞語／音素池' : isBlendFlow ? '音素池' : '字母池';
     showPScreen('build');
     hidePhonicsRoundFinish('build');
     startPhonicsBuildRound();
@@ -1359,11 +1385,21 @@
   /* ---------- 模式 C：砌一砌(拖／撳字母按順序) ---------- */
 
   function makePhonicsBuildTiles(target, topic) {
+    if (target.buildMode === 'phrase') {
+      const needed = target.word.split(/\s+/);
+      const tiles = needed.map((part, i) => ({ key: `need-${i}-${part}`, char: part }));
+      const candidates = [...new Set((topic?.words || []).flatMap((word) => word.word.split(/\s+/)).filter((part) => !needed.includes(part)))];
+      for (const part of shuffle(candidates)) {
+        if (tiles.length >= 6) break;
+        tiles.push({ key: `d-${tiles.length}-${part}`, char: part });
+      }
+      return shuffle(tiles);
+    }
     const needed = target.letters;
     const tiles = needed.map((ch, i) => ({ key: `need-${i}-${ch}`, char: ch }));
     const allLetters = phonicsLetterPool(topic);
     const distractors = shuffle(allLetters.filter((ch) => !needed.includes(ch)));
-    const cap = Math.min(8, allLetters.length);
+    const cap = Math.max(needed.length, Math.min(needed.length + 3, allLetters.length));
     for (const ch of distractors) {
       if (tiles.length >= cap) break;
       tiles.push({ key: `d-${tiles.length}-${ch}`, char: ch });
@@ -1394,7 +1430,14 @@
     pBusy = false;
     pBuildSelectedKey = null;
     const topic = getPhonicsTopicById(pActiveTopicId);
-    const pool = currentTopicWords().filter((w) => w.letters);
+    const allBuildWords = currentTopicWords().filter((w) => w.letters && ['phonics', 'phrase'].includes(w.buildMode || 'phonics'));
+    const phonicsWords = allBuildWords.filter((w) => (w.buildMode || 'phonics') === 'phonics');
+    const phraseWords = allBuildWords.filter((w) => w.buildMode === 'phrase');
+    const pool = [];
+    while (phonicsWords.length || phraseWords.length) {
+      if (phonicsWords.length) pool.push(phonicsWords.shift());
+      if (phraseWords.length) pool.push(phraseWords.shift());
+    }
     if (pool.length < 1) return;
     const state = ensurePhonicsRound('build', pool);
     if (state.completed.length >= PHONICS_ROUND_LENGTH) {
@@ -1403,11 +1446,13 @@
     }
     renderPhonicsRoundBar('build', state);
     const target = state.plan[state.completed.length];
-    const chars = target.letters;
+    const phraseMode = target.buildMode === 'phrase';
+    const chars = phraseMode ? target.word.split(/\s+/) : target.letters;
     const tiles = makePhonicsBuildTiles(target, topic);
     pBuildRound = {
       target,
       chars,
+      phraseMode,
       filled: chars.map(() => null),
       tiles,
       isComplete: false,
@@ -1449,7 +1494,8 @@
     if (!box || !pBuildRound) return;
     const next = nextPhonicsBuildIndex();
     box.innerHTML = '';
-    box.classList.toggle('has-long-word', pBuildRound.chars.length > 8);
+    box.classList.toggle('has-long-word', !pBuildRound.phraseMode && pBuildRound.chars.length > 8);
+    box.classList.toggle('has-word-phrase', pBuildRound.phraseMode);
     pBuildRound.chars.forEach((ch, i) => {
       const filled = pBuildRound.filled[i];
       const blendGroup = pBuildRound.isComplete
@@ -1467,10 +1513,12 @@
       }
       if (i === pBuildRound.autoPlacedIndex) slot.classList.add('is-auto-placed');
       slot.dataset.index = String(i);
-      if (!blendGroup) slot.setAttribute('aria-label', filled ? `已放 ${filled.char}` : `第 ${i + 1} 格，提示字形 ${ch}`);
-      slot.innerHTML = `
-        <span class="build-ghost term-en" aria-hidden="true">${ch}</span>
-        ${filled ? `<span class="build-placed letter-tile" aria-hidden="true">${letterTileHtml(filled.char)}</span>` : ''}`;
+      if (!blendGroup) slot.setAttribute('aria-label', pBuildRound.phraseMode
+        ? (filled ? `已放英文詞語 ${filled.char}` : `第 ${i + 1} 個詞語位置`)
+        : filled ? `已放 ${filled.char}` : `第 ${i + 1} 格，提示字形 ${ch}`);
+      slot.innerHTML = pBuildRound.phraseMode
+        ? `<span class="build-ghost build-word-ghost term-en" aria-hidden="true">?</span>${filled ? `<span class="build-placed build-word-placed term-en" aria-hidden="true">${filled.char}</span>` : ''}`
+        : `<span class="build-ghost term-en" aria-hidden="true">${ch}</span>${filled ? `<span class="build-placed letter-tile" aria-hidden="true">${letterTileHtml(filled.char)}</span>` : ''}`;
       slot.addEventListener('click', () => onPhonicsBuildSlotTap(i));
       box.appendChild(slot);
       if (pBuildRound.target.wordBreaks?.includes(i + 1)) {
@@ -1498,17 +1546,19 @@
   function renderPhonicsBuildPool() {
     const box = $('#phonics-build-pool');
     if (!box || !pBuildRound) return;
+    box.classList.toggle('has-word-tiles', pBuildRound.phraseMode);
     box.innerHTML = '';
     pBuildRound.tiles.forEach((tile) => {
       const used = pBuildRound.filled.some((f) => f && f.key === tile.key);
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'build-tile letter-tile';
+      if (pBuildRound.phraseMode) btn.classList.add('is-word-tile');
       if (used) btn.classList.add('is-used');
       if (pBuildSelectedKey === tile.key) btn.classList.add('is-selected');
       btn.dataset.key = tile.key;
-      btn.innerHTML = letterTileHtml(tile.char);
-      btn.setAttribute('aria-label', `音素 ${tile.char}`);
+      btn.innerHTML = pBuildRound.phraseMode ? `<span class="build-word-tile term-en">${tile.char}</span>` : letterTileHtml(tile.char);
+      btn.setAttribute('aria-label', pBuildRound.phraseMode ? `英文詞語 ${tile.char}` : `音素 ${tile.char}`);
       if (!used) {
         let suppressClick = false;
         btn.addEventListener('click', (ev) => {
@@ -1541,10 +1591,14 @@
     pBuildSelectedKey = key;
     renderPhonicsBuildPool();
     const tile = pBuildRound.tiles.find((item) => item.key === key);
-    if (tile) playLetterSound(tile.char, { muted: isMuted() });
+    if (tile) pBuildRound.phraseMode
+      ? speakEnglishTerm(tile.char, { muted: isMuted() })
+      : playLetterSound(tile.char, { muted: isMuted() });
     const fb = $('#phonics-build-feedback');
     if (fb) {
-      fb.textContent = '再撳同一粒字母，會自動彈入發光格。';
+      fb.textContent = pBuildRound.phraseMode
+        ? '再撳同一個英文詞語，會自動放入下一格。'
+        : '再撳同一粒字母，會自動彈入發光格。';
       fb.className = 'feedback';
     }
   }
@@ -1598,7 +1652,7 @@
 
     const expected = pBuildRound.chars[slotIndex];
     if (tile.char !== expected) {
-      recordPhonicsSkill('segmenting', pBuildRound.target.id, false);
+      if (!pBuildRound.phraseMode) recordPhonicsSkill('segmenting', pBuildRound.target.id, false);
       slotEl?.classList.add('is-wrong');
       setTimeout(() => slotEl?.classList.remove('is-wrong'), 450);
       const retryLine = speakPhonicsBuildRetry();
@@ -1627,9 +1681,11 @@
       }, 420);
     }
 
-    // Tap and drag both arrive here, so every correctly placed grapheme gets
-    // the same reviewed Mama phoneme recording.
-    const placedSound = playLetterSound(tile.char, { muted: isMuted() });
+    // Letter tiles use the reviewed phoneme recording; phrase tiles model a
+    // complete English word so children assemble vocabulary, not graphemes.
+    const placedSound = pBuildRound.phraseMode
+      ? speakEnglishAndWait(tile.char, { muted: isMuted(), rate: 0.86, pitch: 1.05 })
+      : playLetterSound(tile.char, { muted: isMuted() });
     const placedRound = pBuildRound;
 
     if (pBuildRound.filled.every(Boolean)) {
@@ -1656,7 +1712,7 @@
     const audioGen = ++pBuildAudioGen;
     const completedRound = pBuildRound;
     const word = pBuildRound.target.word;
-    recordPhonicsSkill('segmenting', pBuildRound.target.id, true);
+    if (!pBuildRound.phraseMode) recordPhonicsSkill('segmenting', pBuildRound.target.id, true);
     const praise = pickPhonicsBuildPraise();
     const fb = $('#phonics-build-feedback');
     if (fb) {
@@ -1667,7 +1723,7 @@
     await placedSound;
     if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
     await waitMs(180);
-    const blendGroups = completedRound.target.blendGroups || [];
+    const blendGroups = completedRound.phraseMode ? [] : completedRound.target.blendGroups || [];
     if (blendGroups.length) {
       for (let groupIndex = 0; groupIndex < blendGroups.length; groupIndex += 1) {
         if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
@@ -1686,7 +1742,7 @@
       }
       renderPhonicsBuildChunks();
     } else {
-      const blendSounds = completedRound.target.soundChunks || completedRound.chars;
+      const blendSounds = completedRound.phraseMode ? [] : completedRound.target.soundChunks || completedRound.chars;
       for (let index = 0; index < blendSounds.length; index += 1) {
         if (audioGen !== pBuildAudioGen || pBuildRound !== completedRound) return;
         const slot = blendSounds === completedRound.chars

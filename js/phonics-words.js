@@ -1,6 +1,6 @@
 /** SPACE RANGER PHONICS（49 音溫習 + CVC 詞族 + 常見字）
  *  獨立資料檔，唔改動 js/words.js 嘅任何現有內容。
- *  插圖同中文認字 app 一樣用系統 Emoji；字母統一用 Ranger Sound Energy 節點，
+ *  一般插圖用系統 Emoji；英文職業主題用 Kaka／Heihei 原創職業插圖；字母統一用 Ranger Sound Energy 節點，
  *  唔用擬人方塊角色，避免表情搶走字形同讀音焦點。
  *
  *  聲音訓練基地：媽媽錄製的 49 音；每組先聽熟，再做辨音。
@@ -74,19 +74,21 @@ function spellingItem(id, word, emoji, plate, options = {}) {
     word,
     letters: Array.from(terms.join('').toLowerCase()).filter((ch) => /[a-z]/.test(ch)),
     wordBreaks,
+    wordParts: options.buildMode === 'phrase' ? terms : undefined,
     emoji,
     plate,
     ...options,
   };
 }
 
-function spellingTopic({ id, title, titleEn, blurb, cover, parentId = null, words }) {
+function spellingTopic({ id, title, titleEn, blurb, cover, coverPhoto, parentId = null, words }) {
   return {
     id,
     title,
     titleEn: titleEn || title,
     blurb,
     cover,
+    coverPhoto,
     section: 'sight',
     parentId,
     flow: 'blend',
@@ -153,34 +155,67 @@ const HK_FESTIVAL_TOPICS = [
   }),
 ];
 
-/** Reuse the established Chinese occupation icon vocabulary in English Sight Words. */
+/**
+ * Job learning levels: 1) decodable shorter single words use phonics;
+ * 2) two-word job titles assemble as whole spoken words; 3) long, irregular,
+ * or three-word titles remain whole-word recognition until a suitable lesson exists.
+ */
 const JOB_TOPICS = [
   spellingTopic({
     id: 'sight_jobs_nearby', title: '身邊的職業', titleEn: 'People Around Us',
-    blurb: '睇圖 · 聽音 · 逐格砌字 · 25 個身邊職業', cover: '🏥', parentId: 'sight_jobs',
+    blurb: '認讀職業；簡單字拼音，雙字職稱砌詞語', cover: '🏥', coverPhoto: './assets/careers/yisheng.webp', parentId: 'sight_jobs',
     words: [
-      ['doctor', '👨‍⚕️', '#102848'], ['nurse', '👩‍⚕️', '#402038'], ['teacher', '👩‍🏫', '#102848'],
-      ['principal', '🏫🧑', '#102848'], ['firefighter', '🧑‍🚒', '#401820'], ['police officer', '👮', '#102848'],
-      ['paramedic', '🚑🧑‍⚕️', '#401820'], ['dentist', '🦷👨‍⚕️', '#102848'], ['pharmacist', '💊🧑', '#102848'],
-      ['hairdresser', '💇✂️', '#402038'], ['shop assistant', '🛍️🧑', '#402038'], ['cashier', '🧾🧑', '#143828'],
-      ['security guard', '🚪🧑', '#2a2a35'], ['cleaner', '🧹🧑', '#143828'], ['domestic helper', '🏠🧹', '#3a3010'],
-      ['postman', '📮🧑', '#3a3010'], ['delivery worker', '📦🧑', '#3a3010'], ['driver', '🚗', '#1a3050'],
-      ['bus driver', '🚌🧑', '#3a3010'], ['taxi driver', '🚕🧑', '#3a3010'], ['waiter', '🍽️🧑', '#402038'],
-      ['gardener', '🪴🧑', '#143828'], ['zookeeper', '🦁🧑', '#3a3010'], ['vet', '🐶👨‍⚕️', '#1a4d3a'],
-      ['librarian', '📚🧑', '#102848'],
+      ['doctor', '👨‍⚕️', '#102848', { photo: './assets/careers/yisheng.webp', buildMode: 'phonics' }],
+      ['nurse', '👩‍⚕️', '#402038', { photo: './assets/careers/hushi.webp', buildMode: 'phonics' }],
+      ['teacher', '👩‍🏫', '#102848', { photo: './assets/careers/laoshi_job.webp', buildMode: 'phonics' }],
+      ['principal', '🏫🧑', '#102848', { photo: './assets/careers/xiaozhang.webp', buildMode: 'recognize' }],
+      ['firefighter', '🧑‍🚒', '#401820', { photo: './assets/careers/xiaofangyuan.webp', buildMode: 'recognize' }],
+      ['police officer', '👮', '#102848', { photo: './assets/careers/jingcha.webp', buildMode: 'phrase' }],
+      ['paramedic', '🚑🧑‍⚕️', '#401820', { photo: './assets/careers/jiuhuyuan.webp', buildMode: 'recognize' }],
+      ['dentist', '🦷👨‍⚕️', '#102848', { photo: './assets/careers/yayi.webp', buildMode: 'phonics' }],
+      ['pharmacist', '💊🧑', '#102848', { photo: './assets/careers/yaojishi.webp', buildMode: 'recognize' }],
+      ['hairdresser', '💇✂️', '#402038', { photo: './assets/careers/faxingshi.webp', buildMode: 'recognize' }],
+      ['shop assistant', '🛍️🧑', '#402038', { photo: './assets/careers/shouhuoyuan.webp', buildMode: 'phrase' }],
+      ['cashier', '🧾🧑', '#143828', { photo: './assets/careers/shouyinyuan.webp', buildMode: 'recognize' }],
+      ['security guard', '🚪🧑', '#2a2a35', { photo: './assets/careers/baoan.webp', buildMode: 'phrase' }],
+      ['cleaner', '🧹🧑', '#143828', { photo: './assets/careers/qingjie_gongren.webp', buildMode: 'phonics' }],
+      ['domestic helper', '🏠🧹', '#3a3010', { photo: './assets/careers/jiawu_zhuli.webp', buildMode: 'phrase' }],
+      ['postman', '📮🧑', '#3a3010', { photo: './assets/careers/youchai.webp', buildMode: 'recognize' }],
+      ['delivery worker', '📦🧑', '#3a3010', { photo: './assets/careers/songhuoyuan.webp', buildMode: 'phrase' }],
+      ['driver', '🚗', '#1a3050', { photo: './assets/careers/siji.webp', buildMode: 'phonics' }],
+      ['bus driver', '🚌🧑', '#3a3010', { photo: './assets/careers/bashi_siji.webp', buildMode: 'phrase' }],
+      ['taxi driver', '🚕🧑', '#3a3010', { photo: './assets/careers/diksi_siji.webp', buildMode: 'phrase' }],
+      ['waiter', '🍽️🧑', '#402038', { photo: './assets/careers/shiying.webp', buildMode: 'phonics' }],
+      ['gardener', '🪴🧑', '#143828', { photo: './assets/careers/yuanding.webp', buildMode: 'recognize' }],
+      ['zookeeper', '🦁🧑', '#3a3010', { photo: './assets/careers/siyangyuan.webp', buildMode: 'recognize' }],
+      ['vet', '🐶👨‍⚕️', '#1a4d3a', { photo: './assets/careers/shouyi.webp', buildMode: 'phonics' }],
+      ['librarian', '📚🧑', '#102848', { photo: './assets/careers/tushuguan_guanliyuan.webp', buildMode: 'recognize' }],
     ],
   }),
   spellingTopic({
     id: 'sight_jobs_world', title: '世界各地的職業', titleEn: 'Jobs Around the World',
-    blurb: '睇圖 · 聽音 · 逐格砌字 · 20 個不同職業', cover: '🚀', parentId: 'sight_jobs',
+    blurb: '認讀職業；簡單字拼音，雙字職稱砌詞語', cover: '🚀', coverPhoto: './assets/careers/chushi.webp', parentId: 'sight_jobs',
     words: [
-      ['chef', '🧑‍🍳', '#3a3010'], ['farmer', '🧑‍🌾', '#143828'], ['pilot', '✈️🧑‍✈️', '#1a3050'],
-      ['flight attendant', '✈️🧑', '#102848'], ['astronaut', '🚀🧑‍🚀', '#1a1a22'], ['scientist', '🔬🧑‍🔬', '#0f3550'],
-      ['artist', '🎨🖌️', '#402038'], ['musician', '🎵🧑‍🎤', '#2a1840'], ['athlete', '🏃🏅', '#143828'],
-      ['actor', '🎭', '#402038'], ['reporter', '🎤📰', '#1a3050'], ['builder', '👷🏗️', '#3a3010'],
-      ['engineer', '🛠️🧑', '#3a3010'], ['ship captain', '⚓🧑', '#0f3550'], ['fisherman', '🎣🧑', '#0f3550'],
-      ['lifeguard', '🏊🛟', '#0f3550'], ['photographer', '📷', '#2a2a35'], ['soldier', '🪖', '#2a2a35'],
-      ['environmental officer', '♻️🕵️', '#143828'], ['medical sales representative', '💊🤝', '#102848'],
+      ['chef', '🧑‍🍳', '#3a3010', { photo: './assets/careers/chushi.webp', buildMode: 'phonics' }],
+      ['farmer', '🧑‍🌾', '#143828', { photo: './assets/careers/nongfu.webp', buildMode: 'phonics' }],
+      ['pilot', '✈️🧑‍✈️', '#1a3050', { photo: './assets/careers/jishi.webp', buildMode: 'phonics' }],
+      ['flight attendant', '✈️🧑', '#102848', { photo: './assets/careers/kongjie.webp', buildMode: 'phrase' }],
+      ['astronaut', '🚀🧑‍🚀', '#1a1a22', { photo: './assets/careers/taikongren.webp', buildMode: 'recognize' }],
+      ['scientist', '🔬🧑‍🔬', '#0f3550', { photo: './assets/careers/kexuejia.webp', buildMode: 'recognize' }],
+      ['artist', '🎨🖌️', '#402038', { photo: './assets/careers/huajia.webp', buildMode: 'recognize' }],
+      ['musician', '🎵🧑‍🎤', '#2a1840', { photo: './assets/careers/yinyuejia.webp', buildMode: 'recognize' }],
+      ['athlete', '🏃🏅', '#143828', { photo: './assets/careers/yundongyuan.webp', buildMode: 'recognize' }],
+      ['actor', '🎭', '#402038', { photo: './assets/careers/yanyuan.webp', buildMode: 'phonics' }],
+      ['reporter', '🎤📰', '#1a3050', { photo: './assets/careers/jizhe.webp', buildMode: 'recognize' }],
+      ['builder', '👷🏗️', '#3a3010', { photo: './assets/careers/jianzhu_gongren.webp', buildMode: 'phonics' }],
+      ['engineer', '🛠️🧑', '#3a3010', { photo: './assets/careers/gongchengshi.webp', buildMode: 'recognize' }],
+      ['ship captain', '⚓🧑', '#0f3550', { photo: './assets/careers/chuanzhang.webp', buildMode: 'phrase' }],
+      ['fisherman', '🎣🧑', '#0f3550', { photo: './assets/careers/yufu.webp', buildMode: 'recognize' }],
+      ['lifeguard', '🏊🛟', '#0f3550', { photo: './assets/careers/jiushengyuan.webp', buildMode: 'recognize' }],
+      ['photographer', '📷', '#2a2a35', { photo: './assets/careers/sheyingshi.webp', buildMode: 'recognize' }],
+      ['soldier', '🪖', '#2a2a35', { photo: './assets/careers/junren.webp', buildMode: 'recognize' }],
+      ['environmental officer', '♻️🕵️', '#143828', { photo: './assets/careers/huanbao_zhuren.webp', buildMode: 'phrase' }],
+      ['medical sales representative', '💊🤝', '#102848', { photo: './assets/careers/yiliao_xiaoshou.webp', buildMode: 'recognize' }],
     ],
   }),
 ];
@@ -264,7 +299,7 @@ const PHONICS_TOPICS = [
     id: 'hk_festivals', title: '香港節日', titleEn: 'Hong Kong Festivals', blurb: '5 個節日 · 50 個主題詞語', cover: '🎉', section: 'sight', collections: HK_FESTIVAL_TOPICS,
   },
   {
-    id: 'sight_jobs', title: '職業', titleEn: 'Jobs', blurb: '兩組職業 · 45 個英文詞語', cover: '🧑‍⚕️', section: 'sight', collections: JOB_TOPICS,
+    id: 'sight_jobs', title: '職業', titleEn: 'Jobs', blurb: '兩組職業 · 45 個英文詞語', cover: '🧑‍⚕️', coverPhoto: './assets/careers/yisheng.webp', section: 'sight', collections: JOB_TOPICS,
   },
   sightWordTopic({
     id: 'sight_body', title: '身體部位', titleEn: 'My Body', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 個身體部位', cover: '👀',
@@ -497,7 +532,9 @@ function phonicsLetterPool(topic) {
 
 /** 產生卡片插圖 HTML（同中文 app 嘅 wordIllustHtml 一樣風格，方便共用視覺） */
 function phonicsWordIllustHtml(word) {
-  if (!word || !word.emoji) return '';
+  if (!word) return '';
+  if (word.photo) return `<span class="career-photo-plate"><img class="career-photo" src="${word.photo}" alt="" loading="lazy" decoding="async"></span>`;
+  if (!word.emoji) return '';
   return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
     <span class="emoji-face" aria-hidden="true">${window.KakaEmojiArt ? window.KakaEmojiArt.html(word.emoji) : word.emoji}</span>
   </span>`;

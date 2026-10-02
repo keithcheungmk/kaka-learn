@@ -279,6 +279,117 @@ body::before {
   color: #704006;
 }
 
+/* Original Kaka/Heihei career artwork for the English Jobs topic. */
+.career-photo-plate {
+  display: grid;
+  place-items: center;
+  width: min(36vw, 300px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 4px solid rgba(93, 145, 203, 0.35);
+  border-radius: 30px;
+  background: linear-gradient(145deg, #e5f3ff, #fff);
+  box-shadow: 0 12px 28px rgba(48, 87, 133, 0.2);
+}
+
+.career-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.topic-cover-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: inherit;
+}
+
+.topic-cover-photo {
+  width: clamp(64px, 14vw, 92px);
+  height: clamp(64px, 14vw, 92px);
+  overflow: hidden;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 5px 0 #8ab9e2, 0 9px 16px rgba(65, 105, 154, 0.16);
+}
+
+.letter-row.has-word-parts {
+  width: min(100%, 620px);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.word-part-tile,
+.build-word-tile,
+.build-word-placed {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 112px;
+  min-height: 58px;
+  padding: 10px 18px;
+  border: 3px solid #5b9fe1;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #fff, #dceeff);
+  color: #1b3970;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.6vw, 1.45rem);
+  font-weight: 800;
+  box-shadow: 0 5px 0 #8ab9e2, 0 9px 16px rgba(65, 105, 154, 0.16);
+}
+
+.word-part-tile { cursor: pointer; }
+.word-part-tile:active { transform: translateY(2px); }
+
+#phonics-build-slots.has-word-phrase {
+  width: min(100%, 620px);
+  max-width: 620px;
+  gap: clamp(12px, 3vw, 24px);
+}
+
+#phonics-build-slots.has-word-phrase .build-slot {
+  width: min(38vw, 240px);
+  min-width: 132px;
+  height: clamp(66px, 10vh, 92px);
+  border-radius: 20px;
+}
+
+.build-word-ghost {
+  font-size: clamp(1rem, 2.8vw, 1.5rem);
+  letter-spacing: 0;
+}
+
+.build-word-placed {
+  min-width: 0;
+  width: 94%;
+  min-height: 50px;
+  padding: 6px 12px;
+  border-color: #28b982;
+  background: linear-gradient(145deg, #fff, #dff8eb);
+  box-shadow: 0 5px 0 #67ca9f, 0 9px 16px rgba(65, 105, 154, 0.16);
+}
+
+#phonics-build-pool.has-word-tiles {
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  max-width: 560px;
+}
+
+#phonics-build-pool .build-tile.is-word-tile {
+  aspect-ratio: auto;
+  min-height: 68px;
+  padding: 8px;
+}
+
+@media (max-width: 640px) {
+  .career-photo-plate { width: min(54vw, 240px); border-radius: 22px; }
+  #phonics-build-slots.has-word-phrase .build-slot { min-width: min(40vw, 172px); }
+  #phonics-build-pool.has-word-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .build-word-tile { min-width: 0; width: 100%; padding: 8px; }
+}
+
 .letter-row {
   width: min(100%, 460px);
   gap: clamp(8px, 1.8vw, 14px);

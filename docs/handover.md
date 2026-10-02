@@ -885,3 +885,11 @@ python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
 - Both groups use the existing Sight Words spelling and picture-word matching flow. Multiword job titles preserve spaces between words. The shared group picker now uses generic labels instead of festival-only copy.
 - Validation: `node scripts/test-phonics-flow.mjs`, `python3 -B scripts/check-invariants.py` (40 checks; assets total 208.59 MB), JS syntax checks, and `git diff --check` passed. Device smoke is delegated to the existing Pages workflow because no layout or interaction behavior changed.
 - The release push triggers Pages; final CI, deployment, and live status are reported with the release result rather than in a second documentation-only push.
+
+### 2026-10-02 · ChatGPT/Codex — English Jobs phonics tiers and original career art
+
+- Replaced Emoji artwork in all 45 English Jobs word cards and spelling/matching activities with the existing original Kaka/Heihei career illustrations in `assets/careers/`; each job maps to a distinct WebP image.
+- Added explicit learning tiers: 13 shorter single-word jobs use phonics tiles; 10 two-word titles (such as `flight attendant`) use two whole spoken-word tiles; 22 longer, irregular, or three-word titles use whole-word recognition and are excluded from letter-by-letter build rounds.
+- Added word-part listening to two-word job cards and phrase assembly, mixed phonics and phrase items through each build round, and stopped counting phrase assembly as phonics segmenting progress.
+- Validation: JS syntax checks, `scripts/test-phonics-flow.mjs`, `scripts/check-invariants.py` (40 checks; assets 208.59 MB), and `git diff --check` pass. Local `smoke-shots.py --no-shots` could not launch Chromium because macOS denied MachPort rendezvous; deployment CI remains the responsive smoke gate.
+- Changes: `js/phonics-words.js`, `js/phonics-app.js`, `css/playground-theme.css`, `scripts/test-phonics-flow.mjs`, `docs/handover.md`.
