@@ -322,6 +322,12 @@ body::before {
   justify-content: center;
 }
 
+/* Whole-word phrase tiles are separate vocabulary items, not phoneme steps.
+   Keep the phonics connector from striking through the words. */
+.letter-row.has-word-parts::before {
+  display: none;
+}
+
 .word-part-tile,
 .build-word-tile,
 .build-word-placed {

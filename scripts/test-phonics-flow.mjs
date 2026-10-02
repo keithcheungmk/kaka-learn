@@ -205,6 +205,7 @@ assert.match(appSource, /onPhonicsBuildTileTap/, '提供點按操作');
 assert.match(appSource, /onPhonicsBuildPointerDown/, '提供拖拉操作');
 assert.match(appSource, /has-long-sounds/, '長字會切換為較緊湊的音素踏腳石排列');
 assert.match(playgroundTheme, /\.letter-tile \.sound-energy-glyph/, '日間遊樂場主題為音素踏腳石提供高對比樣式');
+assert.match(playgroundTheme, /\.letter-row\.has-word-parts::before\s*\{\s*display:\s*none;/, '完整詞組的學習卡不會顯示穿過詞語磚的連線');
 assert.match(appSource, /cancelAllSpeech/, '切題前清除延遲及進行中的語音');
 assert.match(appSource, /startPhonicsConnectMode/, 'Sight Words 可進入獨立圖詞配對模式');
 assert.match(appSource, /attemptPhonicsConnectPair/, '圖詞配對會在選取圖片及英文後判斷');

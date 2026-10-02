@@ -893,3 +893,10 @@ python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
 - Added word-part listening to two-word job cards and phrase assembly, mixed phonics and phrase items through each build round, and stopped counting phrase assembly as phonics segmenting progress.
 - Validation: JS syntax checks, `scripts/test-phonics-flow.mjs`, `scripts/check-invariants.py` (40 checks; assets 208.59 MB), and `git diff --check` pass. Local `smoke-shots.py --no-shots` could not launch Chromium because macOS denied MachPort rendezvous; deployment CI remains the responsive smoke gate.
 - Changes: `js/phonics-words.js`, `js/phonics-app.js`, `css/playground-theme.css`, `scripts/test-phonics-flow.mjs`, `docs/handover.md`.
+
+### 2026-10-02 · ChatGPT/Codex — Hide connector behind phrase word tiles
+
+- Fixed the Jobs learning-card decoration: complete-word phrase tiles (for example, `shop assistant`) no longer show the phonics connector that crossed through the words. Letter-by-letter phonics rows retain their connector.
+- Added a regression assertion in `scripts/test-phonics-flow.mjs`.
+- Validation: phonics flow tests, JavaScript syntax checks, all 40 invariants, and `git diff --check` passed.
+- Changes: `css/playground-theme.css`, `scripts/test-phonics-flow.mjs`, `docs/handover.md`.
