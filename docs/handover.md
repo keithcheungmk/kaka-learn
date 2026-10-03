@@ -102,6 +102,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-03 · ChatGPT／Codex（Chinese Connect 職業主題）
+
+- 將 `jobs` 加入「連一連」可玩主題；保留 `jobs_nearby`／`jobs_world` 分冊篩選，分別為 25 詞／5 輪及 20 詞／4 輪（每輪最多 5 組）。
+- 驗證：連一連輪次測試、40 項 invariants、GitHub CI run #364 及 Pages 裝置 smoke 均通過。macOS 本機 Chromium 因 MachPort 權限無法啟動；GitHub Linux smoke 已成功。公開首頁 HTTP 200，部署版 `js/app.js` 確認包含 `jobs` allowlist。
+- `45be385` 已推送至 `main`；GitHub Pages run #321 成功。
+- 改動檔案：`js/app.js`、`scripts/test-chinese-connect-rounds.mjs`、`docs/handover.md`。
+
 ### 2026-10-02 · ChatGPT／Codex（迎接浠榆妹妹故事）
 
 - 新增〈浠榆妹妹來了〉八頁，描寫出生、到珠海月子中心、護士／阿姨／醫生照顧、洗澡、喝奶和睡覺，以及耀叔叔、娃娃和禧禧探望姑姑和浠榆。新增浠榆包被造型三視圖和八張場景圖；新詞全列為 `extensionWords`，未標作紅書詞。
