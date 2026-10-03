@@ -18,7 +18,9 @@ export function createAudioController(audio, status, videos, onBusy = () => {}) 
     const fail = () => { if (request !== token) return; stop(); message('聲音未能播放。請檢查網絡，再按「聽一聽」重試。'); };
     audio.src = src; audio.currentTime = 0; audio.onerror = fail;
     audio.onended = () => { if (request !== token) return; clearTimeout(timeout); setBusy(false); message(''); ended(); };
-    timeout = setTimeout(fail, 12000);
+    // Remote Safari byte-range requests can take longer than a local clip load.
+    // Keep a finite retry path without rejecting a healthy slow connection.
+    timeout = setTimeout(fail, 25000);
     // iPad: call play() within the original gesture, never wait for metadata.
     audio.play()?.then(() => { if (request === token) message(''); }).catch(fail);
   }

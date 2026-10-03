@@ -110,6 +110,7 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 - `mandarin-v2/` 為完整 Tingting `zh_CN` 合成詞音及生成 manifest；教材影片保留原聲。舊 initial-video 分段資料只留歷史，不再載入。單一播放器排除重疊、換頁即停、失敗提示全頁可見、重播完才可提交。
 - 新 PTH v2 進度按卡卡／禧禧分倉，Guest 為記憶體；原 PTH v1 備份並保留歷史星星／中途答題數。每玩家每課首次完成記10星，重溫不重複入帳；獎勵保持 PTH 專屬，沒有新增幣或恢復 Supabase。
 - 調整 iPad 橫向測驗為單屏、直向用手機式單欄學習卡；拼音改高對比並將聲母加色及底線；影片加入原片縮圖，不再黑框。
+- `b9ca5ed` 已部署；正式站 WebKit 檢查另觀察到遠端 byte-range 載入停頓。補強影片 `preload=none` 避免未播放影片搶頻寬，詞音保留25秒有限等待及明確重試，並更新模組版本避免舊快取。本機 WebKit 亦納入驗證；仍未宣稱實機 iPad 或人耳逐詞聽審。
 - 本機：41 invariants、16 storage tests、內容／音檔／遷移／去重模型通過；既有家庭 smoke 三尺寸各24畫面通過；PTH 七組70題、69音檔可解碼播完、Profile、快速連按、媒體互斥、音訊失敗及三尺寸測試通過。CI加入PTH專用回歸。證據為 desktop Chromium touch viewport，非實機 iPad；人耳逐詞聽審未宣稱完成。部署狀態以本次 PR／GitHub Actions 為準。
 
 ### 2026-10-03 · ChatGPT／Codex（Chinese Connect 職業主題）

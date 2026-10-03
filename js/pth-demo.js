@@ -1,7 +1,7 @@
 import {sounds, groups, groupNames, buildQuestions} from './pth-content.js?v=20261004';
 import {wordAudioClips} from './pth-word-audio.js?v=20261004';
 import {createProgress} from './pth-progress.js?v=20261004';
-import {createAudioController} from './pth-audio.js?v=20261004';
+import {createAudioController} from './pth-audio.js?v=20261004b';
 
 const $ = selector => document.querySelector(selector);
 const guestMemory = new Map();
@@ -62,7 +62,7 @@ function renderLearn() {
       <strong>${word.word}</strong><span class="example-pinyin" lang="zh-Latn">${pinyin(word)}</span>
       <button class="word-audio" data-word-audio="${word.audioKey}" aria-label="播放${word.word}普通話">🔊</button>
     </div>`).join('')}</div>
-    <video controls playsinline preload="metadata" poster="assets/pth/initials/posters/${sound.id}.jpg" src="${sound.video}" aria-label="${sound.name} 教材口形影片"></video>
+    <video controls playsinline preload="none" poster="assets/pth/initials/posters/${sound.id}.jpg" src="${sound.video}" aria-label="${sound.name} 教材口形影片"></video>
     <button class="audio-btn" data-play-video>▶ 重播 ${sound.name} 口形示範</button></article>`).join('');
   document.querySelectorAll('[data-word-audio]').forEach(button => button.onclick = () => {
     const word = sounds.flatMap(s => s.examples).find(w => w.audioKey === button.dataset.wordAudio); playWord(word);

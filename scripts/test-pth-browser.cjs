@@ -14,6 +14,7 @@ const pause=ms=>new Promise(r=>setTimeout(r,ms));
   for(const group of groups){
    await page.click('[data-tab="learn"]');await page.click(`[data-group="${group}"]`);
    assert.equal(await page.locator('.example-item').count(),group==='yw'?6:['gkh','jqx','zcs'].includes(group)?9:12);
+   assert.ok(await page.locator('video').evaluateAll(videos=>videos.every(v=>v.preload==='none')),'unplayed lesson videos must not compete with word audio');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
    const contrast=await page.locator('.example-pinyin').first().evaluate(el=>{
     const lum=c=>{const a=c.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;});return a[0]*.2126+a[1]*.7152+a[2]*.0722;};
