@@ -1,9 +1,14 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import vm from 'node:vm';
 
 const app = await readFile(new URL('../js/app.js', import.meta.url), 'utf8');
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
 const smoke = await readFile(new URL('./smoke-shots.py', import.meta.url), 'utf8');
+const wordsSource = await readFile(new URL('../js/words.js', import.meta.url), 'utf8');
+const wordsWindow = {};
+vm.runInNewContext(wordsSource, { window: wordsWindow });
+const wordLibrary = wordsWindow.KakaWords;
 const plannerSource = app.match(/function splitChineseConnectRounds\(words\) \{[\s\S]*?\n\}/)?.[0];
 assert.ok(plannerSource, 'Chinese Connect round planner exists');
 const splitRounds = new Function(`${plannerSource}; return splitChineseConnectRounds;`)();
@@ -25,8 +30,30 @@ for (const [count, expected] of [
 }
 
 assert.match(app, /#screen-play \.play-choices/);
-assert.match(app, /const CHINESE_CONNECT_TOPIC_IDS = new Set\(\['fruit', 'zoo', 'jobs'\]\)/, 'jobs topic is enabled for Chinese Connect');
-assert.match(app, /enabledWords\(\)\.filter\(\(word\) => word\?\.emoji\)/);
+const topicAllowlist = app.match(/const CHINESE_CONNECT_TOPIC_IDS = new Set\(\[([\s\S]*?)\]\);/)?.[1];
+assert.ok(topicAllowlist, 'Chinese Connect topic allowlist exists');
+const enabledTopicIds = [...topicAllowlist.matchAll(/'([^']+)'/g)].map((match) => match[1]);
+const expectedConnectTopics = [...wordLibrary.TOPICS].filter((topic) => topic.id !== 'red_series' && topic.id !== 'orange_series').map((topic) => topic.id).sort();
+assert.deepEqual(enabledTopicIds.sort(), expectedConnectTopics, 'every regular Chinese topic is enabled');
+assert.match(app, /const CHINESE_CONNECT_BOOK_IDS = new Set\(/, 'book-level eligibility is curated');
+assert.match(app, /activeBook && CHINESE_CONNECT_BOOK_IDS\.has\(activeBook\.id\)/, 'selected books can expose Chinese Connect');
+assert.match(app, /enabledWords\(\)\.filter\(isChineseConnectIllustratable\)/, 'only drawable words enter a round');
+assert.match(app, /picture\.innerHTML = chineseConnectIllustHtml\(word\)/, 'Connect-specific illustration is rendered');
+
+const bookAllowlist = app.match(/const CHINESE_CONNECT_BOOK_IDS = new Set\(\[([\s\S]*?)\]\);/)?.[1];
+const enabledBookIds = [...bookAllowlist.matchAll(/'([^']+)'/g)].map((match) => match[1]);
+const allBooks = wordLibrary.TOPICS.flatMap((topic) => topic.books || []);
+assert.equal(enabledBookIds.length, 16, 'four verified red books and all twelve orange books are enabled');
+for (const bookId of enabledBookIds) {
+  const book = allBooks.find((entry) => entry.id === bookId);
+  assert.ok(book, `enabled book ${bookId} exists`);
+  const missingIllustrations = [...book.wordIds].filter((id) => !wordLibrary.isChineseConnectIllustratable(wordLibrary.getWordById(id)));
+  assert.deepEqual(missingIllustrations, [], `${book.title} has a clear illustration for every word`);
+}
+for (const topic of wordLibrary.TOPICS.filter((entry) => expectedConnectTopics.includes(entry.id))) {
+  const missingIllustrations = [...topic.wordIds].filter((id) => !wordLibrary.isChineseConnectIllustratable(wordLibrary.getWordById(id)));
+  assert.deepEqual(missingIllustrations, [], `${topic.title} has a clear illustration for every word`);
+}
 assert.match(app, /const isTopicComplete = round\.roundIndex === round\.rounds\.length - 1/);
 assert.match(app, /if \(isTopicComplete && !round\.topicStarAwarded\)/);
 assert.match(app, /完成整個主題，獲得一粒星/);

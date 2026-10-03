@@ -1400,6 +1400,26 @@ const CHARACTER_WORD_ILLUSTRATIONS = {
   liubing: 'assets/character-words/sports/liubing.webp',
 };
 
+// 連一連專用圖像校訂：只改善容易混淆的抽象詞，不更改其他學習遊戲的原裝 Emoji。
+const CHINESE_CONNECT_EMOJI_OVERRIDES = {
+  da_big: '🐘', xiao_small: '🐜', duo: '👥', shao: '🧍',
+  chang_long: '🐍', duan_short: '🪱', gao_tall: '🦒', ai_short_height: '🐢',
+  shang: '⬆️', xia: '⬇️', qian_front: '⏩', hou_back: '⏪',
+  zuo_left: '⬅️', you_right: '➡️', limian: '🏠', waimian: '🌳',
+  lei: '😫', e_hungry: '🤤', bao_full: '😌', ke_thirsty: '💧', tong: '🤕',
+  re_hot: '🥵', leng_cold: '🥶', xiang_scent: '🌸', chou: '🤢',
+};
+
+function isChineseConnectIllustratable(word) {
+  return Boolean(word && (word.photo || word.emoji || CAREER_ILLUSTRATIONS[word.id]
+    || CHARACTER_WORD_ILLUSTRATIONS[word.id] || CHINESE_CONNECT_EMOJI_OVERRIDES[word.id]));
+}
+
+function chineseConnectIllustHtml(word) {
+  const emoji = CHINESE_CONNECT_EMOJI_OVERRIDES[word?.id];
+  return wordIllustHtml(emoji ? { ...word, emoji, photo: null } : word);
+}
+
 function wordIllustHtml(word) {
   const badgeIsEmoji = word.badge && /\p{Extended_Pictographic}/u.test(word.badge);
   const badge = word.badge
@@ -1443,5 +1463,7 @@ window.KakaWords = {
   oppositePairWords,
   getOppositeWord,
   wordIllustHtml,
+  chineseConnectIllustHtml,
+  isChineseConnectIllustratable,
   CHARACTER_WORD_ILLUSTRATIONS,
 };

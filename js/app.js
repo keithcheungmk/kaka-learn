@@ -14,7 +14,7 @@
 
 // 中文主題／書本封面用裝置原生 Emoji；英文 Phonics 的 OpenMoji helper 保留原狀。
 const cover = (e) => (e == null ? '' : String(e));
-const { WORDS, DEER_IDS, TOPICS, wordIllustHtml, getTopicById, wordsForTopic, oppositePairWords, getOppositeWord, getWordById } = window.KakaWords;
+const { WORDS, DEER_IDS, TOPICS, wordIllustHtml, chineseConnectIllustHtml, isChineseConnectIllustratable, getTopicById, wordsForTopic, oppositePairWords, getOppositeWord, getWordById } = window.KakaWords;
 const {
   COIN_MODES,
   coinsTodayMap,
@@ -90,7 +90,18 @@ let chainIndex = 0;
 let chineseConnectRound = null;
 let chineseConnectBusy = false;
 let chineseConnectErrorTimer = null;
-const CHINESE_CONNECT_TOPIC_IDS = new Set(['fruit', 'zoo', 'jobs']);
+const CHINESE_CONNECT_TOPIC_IDS = new Set([
+  'fruit', 'zoo', 'jobs', 'numbers', 'colors', 'weather', 'nature', 'transport',
+  'body', 'sports', 'family', 'food', 'school', 'places', 'home', 'daily',
+  'small_animals', 'veg', 'hk_food', 'dino', 'clothes', 'bugs', 'ocean',
+  'opposites', 'actions', 'emotions', 'senses',
+]);
+// 紅輯只開放全書詞語都有清楚配圖的冊；橙輯逐冊檢視後目前十二冊均可玩。
+const CHINESE_CONNECT_BOOK_IDS = new Set([
+  'rb_yusan', 'rb_xin', 'rb_kuaipao', 'rb_xiaoming',
+  'ob_fangzi', 'ob_fei', 'ob_dangao', 'ob_xiezi', 'ob_huijia', 'ob_woxiang',
+  'ob_chuanyi', 'ob_huamao', 'ob_zuowan', 'ob_diyi', 'ob_dengyixia', 'ob_feng',
+]);
 let activeChain = null;
 let chainStars = 0;
 let sentenceIndex = 0;
@@ -469,11 +480,13 @@ function leaveChineseConnect() {
 
 function startChineseConnectMode() {
   const topic = getTopicById(activeTopicId);
-  if (!topic || !CHINESE_CONNECT_TOPIC_IDS.has(activeTopicId)) {
+  const playable = CHINESE_CONNECT_TOPIC_IDS.has(activeTopicId)
+    || (activeBook && CHINESE_CONNECT_BOOK_IDS.has(activeBook.id));
+  if (!topic || !playable) {
     openPlayPick();
     return;
   }
-  const pool = enabledWords().filter((word) => word?.emoji);
+  const pool = enabledWords().filter(isChineseConnectIllustratable);
   if (!pool.length) {
     console.error(`Chinese connect topic has no playable words: ${activeTopicId}`);
     return;
@@ -561,7 +574,7 @@ function renderChineseConnectBoard() {
     picture.setAttribute('aria-label', `圖片：${word.term}`);
     picture.setAttribute('aria-pressed', String(round.selectedPictureId === word.id));
     picture.disabled = round.matchedIds.has(word.id);
-    picture.innerHTML = wordIllustHtml(word);
+    picture.innerHTML = chineseConnectIllustHtml(word);
     picture.onclick = () => chooseChineseConnectCard('picture', word.id);
 
     const audio = document.createElement('button');
@@ -1397,7 +1410,8 @@ function openPlayPick() {
   setPlayModeCopy('#btn-mode-build', '砌一砌', '用手砌漢字');
   const connectBtn = $('#btn-mode-chinese-connect');
   if (connectBtn) {
-    const available = CHINESE_CONNECT_TOPIC_IDS.has(activeTopicId);
+    const available = CHINESE_CONNECT_TOPIC_IDS.has(activeTopicId)
+      || (activeBook && CHINESE_CONNECT_BOOK_IDS.has(activeBook.id));
     connectBtn.hidden = !available;
     connectBtn.style.display = available ? '' : 'none';
     if (available) {
