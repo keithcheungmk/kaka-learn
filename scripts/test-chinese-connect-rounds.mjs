@@ -25,6 +25,7 @@ for (const [count, expected] of [
 }
 
 assert.match(app, /#screen-play \.play-choices/);
+assert.match(app, /const CHINESE_CONNECT_TOPIC_IDS = new Set\(\['fruit', 'zoo', 'jobs'\]\)/, 'jobs topic is enabled for Chinese Connect');
 assert.match(app, /enabledWords\(\)\.filter\(\(word\) => word\?\.emoji\)/);
 assert.match(app, /const isTopicComplete = round\.roundIndex === round\.rounds\.length - 1/);
 assert.match(app, /if \(isTopicComplete && !round\.topicStarAwarded\)/);
