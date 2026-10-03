@@ -228,5 +228,20 @@ window.FAMILY_STORIES = [
       {"sentence":"卡卡爬過攀爬架，再沿着滑梯滑進波波池。","tiles":["卡卡","爬過","攀爬架","，","再","沿着","滑梯","滑進","波波池","。"],"learn":["滑梯","波波池"],"distractors":["鞦韆","沙池"],"focusWords":["滑梯","波波池"],"dialogue":{"speaker":"卡卡","text":"我排好隊，輪到我才滑下去。"},"image":"assets/family-stories/scenes/xiyu-national-day-p07.webp"},
       {"sentence":"卡卡和爸爸回到月子中心，把照片和紀念品拿給媽媽看。","tiles":["卡卡","和","爸爸","回到","月子中心","，","把","照片","和","紀念品","拿給","媽媽","看","。"],"learn":["照片","紀念品"],"distractors":["糖果","玩具車"],"focusWords":["照片","紀念品"],"dialogue":{"speaker":"姑姑","text":"等妹妹長大，我們再一起看這張照片！"},"image":"assets/family-stories/scenes/xiyu-national-day-p08.webp"}
     ]
+  },
+  {
+    id:'zhongshan-zoo-day', title:'中山動物園的一天', place:'中山動物園', characters:['卡卡','傑叔叔','動物園工作員（客串）'], sourceBooks:[], bookWords:[],
+    extensionWords:['卡卡','爸爸','傑叔叔','中山','動物園','坐','電動高爾夫球車','進入','看見','獅子','老虎','斑馬','拿着','有','鮮嫩','樹葉','樹枝','餵','長頸鹿','小心地','把','蘿蔔','南瓜','甘蔗','放到','大象','面前','戴上','頭盔','騎馬馬甲','騎着','啡色','小馬','走了','兩圈','在','水塘','金魚','鴨仔','還','天鵝','爸爸','請','食','雪糕','臨走時','想用','五個幣','換','冰糖士多啤梨','回到家','交回','因為','他','很','守信用','和','進入','的','、','。','，'],
+    summary:'卡卡和爸爸在中山動物園坐電動車、看動物、餵食、騎小馬，最後用五個幣換冰糖士多啤梨，回家後守信用交回給爸爸。',
+    pages:[
+      {"sentence":"卡卡和爸爸坐電動高爾夫球車進入動物園。","tiles":["卡卡","和","爸爸","坐","電動高爾夫球車","進入","動物園","。"],"learn":["電動高爾夫球車","動物園"],"distractors":["水族館","超市"],"focusWords":["電動高爾夫球車","動物園"],"dialogue":{"speaker":"卡卡","text":"坐電動車看動物，好開心！"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p01.webp"},
+      {"sentence":"卡卡看見獅子、老虎和斑馬。","tiles":["卡卡","看見","獅子","、","老虎","和","斑馬","。"],"learn":["獅子","斑馬"],"distractors":["海豚","小狗"],"focusWords":["獅子","斑馬"],"dialogue":{"speaker":"卡卡","text":"獅子和老虎很威風，斑馬身上有黑白條紋！"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p02.webp"},
+      {"sentence":"卡卡拿着有鮮嫩樹葉的樹枝餵長頸鹿。","tiles":["卡卡","拿着","有","鮮嫩","樹葉","的","樹枝","餵","長頸鹿","。"],"learn":["樹枝","長頸鹿"],"distractors":["胡蘿蔔","水草"],"focusWords":["樹枝","長頸鹿"],"dialogue":{"speaker":"傑叔叔","text":"慢慢伸出樹枝，讓長頸鹿自己來吃。"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p03.webp"},
+      {"sentence":"卡卡小心地把蘿蔔、南瓜和甘蔗放到大象面前。","tiles":["卡卡","小心地","把","蘿蔔","、","南瓜","和","甘蔗","放到","大象","面前","。"],"learn":["蘿蔔","大象"],"distractors":["蘋果","兔子"],"focusWords":["蘿蔔","大象"],"dialogue":{"speaker":"傑叔叔","text":"小心一點，先把食物放在餵食盤上。"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p04.webp"},
+      {"sentence":"卡卡戴上頭盔和騎馬馬甲，騎着啡色小馬走了兩圈。","tiles":["卡卡","戴上","頭盔","和","騎馬馬甲","，","騎着","啡色","小馬","走了","兩圈","。"],"learn":["頭盔","小馬"],"distractors":["泳圈","滑梯"],"focusWords":["頭盔","小馬"],"dialogue":{"speaker":"動物園工作員（客串）","text":"我扶住小馬，你坐穩就可以了。"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p05.webp"},
+      {"sentence":"卡卡在水塘餵金魚和鴨仔，還看見天鵝。","tiles":["卡卡","在","水塘","餵","金魚","和","鴨仔","，","還","看見","天鵝","。"],"learn":["金魚","天鵝"],"distractors":["獅子","斑馬"],"focusWords":["金魚","天鵝"],"dialogue":{"speaker":"卡卡","text":"金魚游來游去，鴨仔和天鵝也來了！"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p06.webp"},
+      {"sentence":"爸爸請卡卡食雪糕，卡卡想用五個幣換冰糖士多啤梨。","tiles":["爸爸","請","卡卡","食","雪糕","，","卡卡","想用","五個幣","換","冰糖士多啤梨","。"],"learn":["雪糕","冰糖士多啤梨"],"distractors":["南瓜","手模"],"focusWords":["雪糕","冰糖士多啤梨"],"dialogue":{"speaker":"卡卡","text":"我想用五個幣換冰糖士多啤梨。"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p07.webp"},
+      {"sentence":"回到家，卡卡把五個幣交回爸爸，因為他很守信用。","tiles":["回到家","，","卡卡","把","五個幣","交回","爸爸","，","因為","他","很","守信用","。"],"learn":["五個幣","守信用"],"distractors":["忘記","借走"],"focusWords":["五個幣","守信用"],"dialogue":{"speaker":"傑叔叔","text":"你答應交回來，真的做到了！"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p08.webp"}
+    ]
   }
 ];
