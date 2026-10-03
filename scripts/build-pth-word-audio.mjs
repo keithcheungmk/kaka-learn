@@ -1,43 +1,30 @@
 #!/usr/bin/env node
-import {mkdirSync, existsSync, statSync} from 'node:fs';
-import {dirname, join, resolve} from 'node:path';
-import {spawnSync} from 'node:child_process';
+import {mkdirSync, mkdtempSync, statSync, writeFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join, dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {wordAudioSourceSegments} from '../js/pth-word-audio-source.js';
-
-const root=join(dirname(fileURLToPath(import.meta.url)),'..');
-const sourceDir=resolve(process.env.PTH_SOURCE_DIR || join(root,'source-materials/PTH/initials-video'));
-const outputDir=join(root,'assets/pth/words/individual');
-const force=process.argv.includes('--force');
-mkdirSync(outputDir,{recursive:true});
-
-for(const [key,clip] of Object.entries(wordAudioSourceSegments)){
-  const initial=key.replace(/-\d+$/,'');
-  const input=join(sourceDir,`${initial}.mp4`);
-  const output=join(outputDir,`${key}.m4a`);
-  if(!existsSync(input))throw new Error(`Missing source video for ${key}: ${input}`);
-  if(existsSync(output)&&!force){
-    if(statSync(output).size<1024)throw new Error(`Generated audio is unexpectedly small: ${output}`);
-    continue;
-  }
-  const duration=clip.end-clip.start;
-  if(duration<0.2||duration>1.5)throw new Error(`Suspicious segment duration for ${key}: ${duration}`);
-  const spokenSeconds=duration/.78;
-  const totalSeconds=spokenSeconds+.28;
-  const fadeStart=Math.max(.02,totalSeconds-.1);
-  const filter=[
-    `atrim=start=${clip.start}:end=${clip.end}`,
-    'asetpts=PTS-STARTPTS',
-    'atempo=.78',
-    'apad=pad_dur=0.28',
-    `atrim=duration=${totalSeconds.toFixed(3)}`,
-    'afade=t=in:st=0:d=0.02',
-    `afade=t=out:st=${fadeStart.toFixed(3)}:d=0.08`,
-    'loudnorm=I=-18:TP=-2:LRA=7'
-  ].join(',');
-  const result=spawnSync('ffmpeg',['-hide_banner','-loglevel','error','-y','-i',input,'-map','0:a:0','-vn','-af',filter,'-ac','1','-ar','24000','-c:a','aac','-b:a','32k','-movflags','+faststart',output],{encoding:'utf8'});
-  if(result.status!==0)throw new Error(`Could not build ${key}: ${result.stderr||result.error?.message||'unknown ffmpeg error'}`);
-  if(statSync(output).size<1024)throw new Error(`Generated audio is unexpectedly small: ${output}`);
+import {spawnSync} from 'node:child_process';
+import {sounds} from '../js/pth-content.js';
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+const output = join(root, 'assets/pth/words/mandarin-v2');
+const temp = mkdtempSync(join(tmpdir(), 'pth-mandarin-'));
+mkdirSync(output, {recursive:true});
+function run(bin, args) {
+  const result = spawnSync(bin, args, {encoding:'utf8'});
+  if (result.status !== 0) throw new Error(`${bin}: ${result.stderr || result.error}`);
+  return result.stdout;
 }
-
-console.log(`Built ${Object.keys(wordAudioSourceSegments).length} Mandarin word clips from the supplied teaching videos.`);
+const voices = run('say', ['-v','?']);
+if (!/^Tingting\s+zh_CN\s/m.test(voices)) throw new Error('Required Mandarin Tingting voice unavailable');
+const manifest = {version:2, source:'macOS Tingting', locale:'zh_CN', kind:'synthetic-word-recordings', items:[]};
+for (const word of sounds.flatMap(s => s.examples)) {
+  const aiff = join(temp, `${word.id}.aiff`);
+  const file = join(output, `${word.id}.m4a`);
+  run('say', ['-v','Tingting','-r','145','-o',aiff,word.say]);
+  run('ffmpeg', ['-hide_banner','-loglevel','error','-y','-i',aiff,'-af','loudnorm=I=-18:TP=-2:LRA=7,apad=pad_dur=0.18','-ac','1','-ar','24000','-c:a','aac','-b:a','48k','-movflags','+faststart',file]);
+  const duration = Number(run('ffprobe', ['-v','error','-show_entries','format=duration','-of','default=noprint_wrappers=1:nokey=1',file]).trim());
+  if (!(duration > .25 && duration < 5) || statSync(file).size > 400000) throw new Error(`Invalid audio ${word.id}`);
+  manifest.items.push({id:word.id,word:word.word,speechText:word.say,pinyin:word.pinyin,duration,bytes:statSync(file).size});
+}
+writeFileSync(join(output, 'manifest.json'), JSON.stringify(manifest,null,2)+'\n');
+console.log(`Built ${manifest.items.length} complete Mandarin words using Tingting zh_CN.`);

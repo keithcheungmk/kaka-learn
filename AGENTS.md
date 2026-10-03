@@ -152,6 +152,13 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 
 ## 改動時注意
 
+### 普通話專用契約（2026-10-04）
+
+- `js/pth-content.js` 是 PTH 學習卡、題目、固定例詞錄音的唯一資料來源；不要在 renderer 另寫詞表。初始聲母須精確解析，`sh` 不可匹配 `s`，`zh/ch` 同理。y/w 依教材保留但稱「拼音字母」。
+- 教材口形影片與例詞音訊分開：例詞使用完整 `zh_CN` 固定合成錄音並標示來源，不能把聲母影片任意短切假稱詞語音檔，不能 fallback 到裝置／粵語語音。所有媒體只准一個播放，換頁／隱藏頁即停；聽音及重播須播放完才可提交。
+- 每組固定 10 個獨立題號；不足 10 詞用不同題型鞏固，不能讓題號循環。每玩家每課只領一次正式星星；重溫保留領星記錄。舊進度必須備份及保留已答題數，Guest 不持久化。PTH 仍為本機記錄，Supabase 支線未恢復。
+- `node scripts/test-pth-content.mjs` 已接 invariants；`scripts/test-pth-browser.cjs` 在 CI 驗證七組、三 viewport、69 詞音播放、媒體互斥、快速重按、Profile、錯誤重試。機器播放測試不等於人耳聽審或真機 iPad 驗收，報告需分開。
+
 ### 跨裝置版面與語音驗收契約（所有新功能／修 bug 必須遵守）
 
 - 所有 UI／CSS／遊戲流程改動，必須以 touch-enabled Chromium 驗收三個固定 viewport：最新 iPad Pro 11 吋（M4，實體 2420×1668）Chrome 橫向 `1210×834`、直向 `834×1210`、iPhone 16 Pro Max Chrome 直向 `430×932`；另須作一次真機 iPad Chrome spot-check，desktop resize 不算實機驗收。

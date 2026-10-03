@@ -23,6 +23,8 @@
 from __future__ import annotations
 
 import argparse
+import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -396,7 +398,15 @@ def main() -> int:
           "冇 404、冇 console error。")
     if shots:
         print(f"截圖喺 {shots}/，交檢查 agent 睇視覺同幼齡適切度。")
-    return 0
+    # Reuse Python Playwright's bundled Node package/browser revision. No extra
+    # npm install, workflow permission or production dependency is required.
+    import playwright
+    driver = Path(playwright.__file__).parent / "driver"
+    env = dict(os.environ, PTH_PLAYWRIGHT=str(driver / "package"),
+               PTH_TEST_URL=args.url.rstrip("/") + "/pth-demo.html")
+    print("PTH：七组測驗、固定詞音、Profile、錯誤重試及家庭 viewport 回歸", flush=True)
+    result = subprocess.run([str(driver / "node"), str(Path(__file__).with_name("test-pth-browser.cjs"))], env=env)
+    return result.returncode
 
 
 if __name__ == "__main__":

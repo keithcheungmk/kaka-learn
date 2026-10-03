@@ -1,66 +1,158 @@
-import {wordAudioClips} from './pth-word-audio.js?v=20260929-mandarin-clips';
-const STAR_FX_MS=1600;
-const sounds=[
- {id:'b',name:'b',group:'bpmf',verified:true,textbookRef:'PTH textbook K2 QR MP4／bpmf',tip:'聲母 b，跟住例詞讀一次。',emoji:'🎈',emojiLabel:'波波球圖示',word:'波波球',sentence:'',syllables:[['bō','b'],['bō','b'],['qiú','q']]},
- {id:'p',name:'p',group:'bpmf',verified:true,textbookRef:'PTH textbook K2 QR MP4／bpmf',tip:'聲母 p，跟住例詞讀一次。',emoji:'🍇',emojiLabel:'葡萄圖示',word:'葡萄',sentence:'',syllables:[['pú','p'],['táo','t']]},
- {id:'m',name:'m',group:'bpmf',verified:true,textbookRef:'PTH textbook K2 QR MP4／bpmf',tip:'聲母 m，跟住例詞讀一次。',emoji:'🍚',emojiLabel:'米飯圖示',word:'米飯',sentence:'',syllables:[['mǐ','m'],['fàn','f']]},
- {id:'f',name:'f',group:'bpmf',verified:true,textbookRef:'PTH textbook K2 QR MP4／bpmf',tip:'聲母 f，跟住例詞讀一次。',emoji:'🎡',emojiLabel:'風車圖示',word:'風車',sentence:'',syllables:[['fēng','f'],['chē','ch']]},
- {id:'d',name:'d',group:'dtnl',verified:true,textbookRef:'PTH textbook K2 p.8（聲母二 d、t、n、l 組別頁；d 個別示範頁未見於掃描）',textbookStatus:'pending',tip:'聲母 d，跟住例詞讀一次。',emoji:'🐘',emojiLabel:'大象圖示',word:'大象',sentence:'',syllables:[['dà','d'],['xiàng','x']]},
- {id:'t',name:'t',group:'dtnl',verified:true,textbookRef:'PTH textbook K2 p.8、p.10（聲母二 d、t、n、l；t 示範見 p.10）',textbookStatus:'verified',tip:'聲母 t，跟住例詞讀一次。',emoji:'☀️',emojiLabel:'太陽圖示',word:'太陽',sentence:'',syllables:[['tài','t'],['yáng','y']]},
- {id:'n',name:'n',group:'dtnl',verified:true,textbookRef:'PTH textbook K2 p.8、p.11（聲母二 d、t、n、l；n 示範見 p.11）',textbookStatus:'verified',tip:'聲母 n，跟住例詞讀一次。',emoji:'🐮',emojiLabel:'奶牛圖示',word:'奶牛',sentence:'',syllables:[['nǎi','n'],['niú','n']]},
- {id:'l',name:'l',group:'dtnl',verified:true,textbookRef:'PTH textbook K2 p.8、p.9／p.12（聲母二 d、t、n、l；l 示範頁於掃描中重複）',textbookStatus:'verified-with-duplicate-scan',tip:'聲母 l，跟住例詞讀一次。',emoji:'🍐',emojiLabel:'梨子圖示',word:'梨子',sentence:'',syllables:[['lí','l'],['zi','z']]},
- {id:'g',name:'g',group:'gkh',verified:true,textbookRef:'PTH textbook K2 p.13–14（聲母三 g、k、h；g 示範見 p.13–14）',textbookStatus:'verified',tip:'聲母 g，跟住例詞讀一次。',emoji:'👦',emojiLabel:'哥哥圖示',word:'哥哥',sentence:'',syllables:[['gē','g'],['ge','g']]},
- {id:'k',name:'k',group:'gkh',verified:true,textbookRef:'PTH textbook K2 p.13–15（聲母三 g、k、h；k 示範見 p.14–15）',textbookStatus:'verified',tip:'聲母 k，跟住例詞讀一次。',emoji:'🥤',emojiLabel:'可樂圖示',word:'可樂',sentence:'',syllables:[['kě','k'],['lè','l']]},
- {id:'h',name:'h',group:'gkh',verified:true,textbookRef:'PTH textbook K2 p.15–16（聲母三 g、k、h；h 示範見 p.15–16）',textbookStatus:'verified',tip:'聲母 h，跟住例詞讀一次。',emoji:'🌸',emojiLabel:'花朵圖示',word:'花朵',sentence:'',syllables:[['huā','h'],['duǒ','d']]},
- {id:'j',name:'j',group:'jqx',verified:true,textbookRef:'PTH textbook K2 p.16–17（聲母四 j、q、x；j 示範見 p.17）',textbookStatus:'verified',tip:'聲母 j，跟住例詞讀一次。',emoji:'🐔',emojiLabel:'雞蛋圖示',word:'雞蛋',sentence:'',syllables:[['jī','j'],['dàn','d']]},
- {id:'q',name:'q',group:'jqx',verified:true,textbookRef:'PTH textbook K2 p.17–18（聲母四 j、q、x；q 示範見 p.18）',textbookStatus:'verified',tip:'聲母 q，跟住例詞讀一次。',emoji:'🚩',emojiLabel:'旗子圖示',word:'旗子',sentence:'',syllables:[['qí','q'],['zi','z']]},
- {id:'x',name:'x',group:'jqx',verified:true,textbookRef:'PTH textbook K2 p.18–19（聲母四 j、q、x；x 示範見 p.19）',textbookStatus:'verified',tip:'聲母 x，跟住例詞讀一次。',emoji:'🦐',emojiLabel:'蝦子圖示',word:'蝦子',sentence:'',syllables:[['xiā','x'],['zi','z']]},
- {id:'zh',name:'zh',group:'zhchshr',verified:true,textbookRef:'PTH textbook K2 p.20–21（聲母五 zh、ch、sh、r；zh 示範見 p.20–21）',textbookStatus:'verified',tip:'聲母 zh，跟住例詞讀一次。',emoji:'📄',emojiLabel:'紙張圖示',word:'紙張',sentence:'',syllables:[['zhǐ','zh'],['zhāng','z']]},
- {id:'ch',name:'ch',group:'zhchshr',verified:true,textbookRef:'PTH textbook K2 p.21–22（聲母五 zh、ch、sh、r；ch 示範見 p.21–22）',textbookStatus:'verified',tip:'聲母 ch，跟住例詞讀一次。',emoji:'🚗',emojiLabel:'車子圖示',word:'車子',sentence:'',syllables:[['chē','ch'],['zi','z']]},
- {id:'sh',name:'sh',group:'zhchshr',verified:true,textbookRef:'PTH textbook K2 p.22–23（聲母五 zh、ch、sh、r；sh 示範見 p.22–23）',textbookStatus:'verified',tip:'聲母 sh，跟住例詞讀一次。',emoji:'📖',emojiLabel:'書本圖示',word:'書本',sentence:'',syllables:[['shū','sh'],['běn','b']],wordChars:['書','本'],previewExample:true},
- {id:'r',name:'r',group:'zhchshr',verified:true,textbookRef:'PTH textbook K2 p.23–24（聲母五 zh、ch、sh、r；r 示範見 p.23–24）',textbookStatus:'verified',tip:'聲母 r，跟住例詞讀一次。',emoji:'🌞',emojiLabel:'日出圖示',word:'日出',sentence:'',syllables:[['rì','r'],['chū','ch']]},
- {id:'z',name:'z',group:'zcs',verified:true,textbookRef:'PTH textbook K2 p.25（聲母六 z、c、s；z 示範）',textbookStatus:'verified',tip:'聲母 z，跟住例詞讀一次。',emoji:'🌅',emojiLabel:'早上圖示',word:'早上',sentence:'',syllables:[['zǎo','z'],['shàng','sh']]},
- {id:'c',name:'c',group:'zcs',verified:true,textbookRef:'PTH textbook K2 p.25–26（聲母六 z、c、s；c 示範見 p.26）',textbookStatus:'verified',tip:'聲母 c，跟住例詞讀一次。',emoji:'🌱',emojiLabel:'草地圖示',word:'草地',sentence:'',syllables:[['cǎo','c'],['dì','d']]},
- {id:'s',name:'s',group:'zcs',verified:true,textbookRef:'PTH textbook K2 p.26–27（聲母六 z、c、s；s 示範見 p.27）',textbookStatus:'verified',tip:'聲母 s，跟住例詞讀一次。',emoji:'🌲',emojiLabel:'森林圖示',word:'森林',sentence:'',syllables:[['sēn','s'],['lín','l']]},
- {id:'y',name:'y',group:'yw',verified:true,textbookRef:'PTH textbook K2 p.28–29（聲母七 y、w；y 示範見 p.28–29）',textbookStatus:'verified',tip:'聲母 y，跟住例詞讀一次。',emoji:'🍃',emojiLabel:'葉子圖示',word:'葉子',sentence:'',syllables:[['yè','y'],['zi','z']]},
- {id:'w',name:'w',group:'yw',verified:true,textbookRef:'PTH textbook K2 p.29–30（聲母七 y、w；w 示範見 p.29–30）',textbookStatus:'verified',tip:'聲母 w，跟住例詞讀一次。',emoji:'🧸',emojiLabel:'玩具圖示',word:'玩具',sentence:'',syllables:[['wán','w'],['jù','j']]}
-];
-const groups=[...new Set(sounds.map(s=>s.group))];
-let activeGroup=localStorage.getItem("kaka-pth-group")||"bpmf";if(!sounds.some(s=>s.group===activeGroup&&s.verified)){activeGroup="bpmf";localStorage.setItem("kaka-pth-group",activeGroup);}
-const groupNames={bpmf:"b・p・m・f",dtnl:"d・t・n・l",gkh:"g・k・h",jqx:"j・q・x",zhchshr:"zh・ch・sh・r",zcs:"z・c・s",yw:"y・w"};
-let isPreview=()=>false;const exampleMap={b:[{emoji:"🎈",word:"波波球",pinyin:"bō bō qiú"},{emoji:"🚌",word:"巴士",pinyin:"bā shì"},{emoji:"🍚",word:"白飯",pinyin:"bái fàn"}],p:[{emoji:"🍇",word:"葡萄",pinyin:"pú táo"},{emoji:"🎼",word:"琵琶",pinyin:"pí pá",imageLabel:"音樂圖示（琵琶插圖待補）"},{emoji:"🏞️",word:"瀑布",pinyin:"pù bù"}],m:[{emoji:"🍚",word:"米飯",pinyin:"mǐ fàn"},{emoji:"🐱",word:"貓咪",pinyin:"māo mī"},{emoji:"🐴",word:"馬兒",pinyin:"mǎr"}],f:[{emoji:"🎡",word:"風車",pinyin:"fēng chē"},{emoji:"✈️",word:"飛機",pinyin:"fēi jī"},{emoji:"🍚",word:"飯盒",pinyin:"fàn hé"}],d:[{emoji:"🐘",word:"大象",pinyin:"dà xiàng"},{emoji:"🎯",word:"打中",pinyin:"dǎ zhòng"},{emoji:"🚪",word:"大門",pinyin:"dà mén"}],t:[{emoji:"☀️",word:"太陽",pinyin:"tài yáng"},{emoji:"🐰",word:"兔子",pinyin:"tù zi"},{emoji:"🍬",word:"糖果",pinyin:"táng guǒ"}],n:[{emoji:"🐮",word:"奶牛",pinyin:"nǎi niú"},{emoji:"🐦",word:"鳥兒",pinyin:"niǎo er"},{emoji:"🍦",word:"奶油",pinyin:"nǎi yóu"}],l:[{emoji:"🍐",word:"梨子",pinyin:"lí zi"},{emoji:"🌳",word:"柳樹",pinyin:"liǔ shù"},{emoji:"👨",word:"老師",pinyin:"lǎo shī"}],g:[{emoji:"👦",word:"哥哥",pinyin:"gē ge"},{emoji:"🐶",word:"狗狗",pinyin:"gǒu gou"},{emoji:"🐱",word:"公貓",pinyin:"gōng māo"}],k:[{emoji:"🥤",word:"可樂",pinyin:"kě lè"},{emoji:"👀",word:"看見",pinyin:"kàn jiàn"},{emoji:"🧤",word:"口罩",pinyin:"kǒu zhào"}],h:[{emoji:"🌸",word:"花朵",pinyin:"huā duǒ"},{emoji:"🌊",word:"河水",pinyin:"hé shuǐ"},{emoji:"🚢",word:"海船",pinyin:"hǎi chuán"}],j:[{emoji:"🐔",word:"雞蛋",pinyin:"jī dàn"},{emoji:"👨‍👩‍👧",word:"家人",pinyin:"jiā rén"},{emoji:"🍊",word:"橘子",pinyin:"jú zi"}],q:[{emoji:"🚩",word:"旗子",pinyin:"qí zi"},{emoji:"🌿",word:"青草",pinyin:"qīng cǎo"},{emoji:"🎹",word:"琴鍵",pinyin:"qín jiàn"}],x:[{emoji:"🦐",word:"蝦子",pinyin:"xiā zi"},{emoji:"⭐",word:"星星",pinyin:"xīng xīng"},{emoji:"🧼",word:"洗手",pinyin:"xǐ shǒu"}],zh:[{emoji:"📄",word:"紙張",pinyin:"zhǐ zhāng"},{emoji:"🐷",word:"豬仔",pinyin:"zhū zǎi"},{emoji:"🌱",word:"種子",pinyin:"zhǒng zi"}],ch:[{emoji:"🚗",word:"車子",pinyin:"chē zi"},{emoji:"🍴",word:"叉子",pinyin:"chā zi"},{emoji:"🏃",word:"出發",pinyin:"chū fā"}],sh:[{emoji:"📖",word:"書本",pinyin:"shū běn"},{emoji:"🦁",word:"獅子",pinyin:"shī zi"},{emoji:"🌳",word:"樹木",pinyin:"shù mù"}],r:[{emoji:"🌞",word:"日出",pinyin:"rì chū"},{emoji:"👨",word:"人家",pinyin:"rén jiā"},{emoji:"🍖",word:"肉類",pinyin:"ròu lèi"}],z:[{emoji:"🌅",word:"早上",pinyin:"zǎo shàng"},{emoji:"🚶",word:"走路",pinyin:"zǒu lù"},{emoji:"⚽",word:"足球",pinyin:"zú qiú"}],c:[{emoji:"🌱",word:"草地",pinyin:"cǎo dì"},{emoji:"🍋",word:"醋",pinyin:"cù"},{emoji:"🧅",word:"菜",pinyin:"cài"}],s:[{emoji:"🌲",word:"森林",pinyin:"sēn lín"},{emoji:"🐍",word:"蛇",pinyin:"shé"},{emoji:"☂️",word:"傘",pinyin:"sǎn"}],y:[{emoji:"🍃",word:"葉子",pinyin:"yè zi"},{emoji:"👕",word:"衣服",pinyin:"yī fu"},{emoji:"🦆",word:"鴨子",pinyin:"yā zi"}],w:[{emoji:"🧸",word:"玩具",pinyin:"wán jù"},{emoji:"🌙",word:"晚上",pinyin:"wǎn shàng"},{emoji:"🐸",word:"娃娃",pinyin:"wá wa"}]};sounds.forEach(s=>{const list=exampleMap[s.id]||[{emoji:s.emoji,word:s.word,pinyin:s.syllables.map(x=>x[0]).join(" ")}];s.examples=list.map((e,i)=>({...e,audioKey:`${s.id}-${i+1}`,audio:wordAudioClips[`${s.id}-${i+1}`]}));});
-let currentSounds=()=>sounds.filter(s=>s.group===activeGroup);
-const questionCache={};const shuffle=items=>[...items].sort(()=>Math.random()-.5);const startsWithInitial=(pinyin,initial)=>pinyin.trim().toLowerCase().startsWith(initial);const questionsFor=()=>{if(questionCache[activeGroup])return questionCache[activeGroup];const pool=currentSounds().flatMap(sound=>(sound.examples||[]).filter(example=>startsWithInitial(example.pinyin,sound.id)).map(example=>({sound,example,word:{word:example.word,pinyin:example.pinyin,initial:sound.id,syllableIndex:0,emoji:example.emoji,imageLabel:example.imageLabel||`${example.word}圖示`,audioKey:example.audioKey,audio:example.audio}})));questionCache[activeGroup]=shuffle(pool).slice(0,Math.min(10,pool.length)).map(item=>({type:'listen',answer:item.word.initial,prompt:'聽詞語，找出第一個聲母。',sound:item.sound,word:item.word,hint:`提示：「${item.word.word}」的第一個聲母是 ${item.word.initial}。`}));return questionCache[activeGroup];};
-const $=s=>document.querySelector(s);function setWordAudioStatus(message){const status=$('#wordAudioStatus');if(!status)return;status.textContent=message;status.hidden=!message;}function normalizeAudioClip(clip){if(typeof clip==='string')return{src:clip,start:0,end:0};if(clip&&typeof clip.src==='string')return{src:clip.src,start:Number(clip.start)||0,end:Number(clip.end)||0};return null;}function playWord(text,clip){const audioClip=normalizeAudioClip(clip);if(!audioClip){stopAudio();setWordAudioStatus(`「${text}」普通話錄音未能載入，請重新整理後再試。`);return;}playAudio(audioClip.src,audioClip.start,audioClip.end);}const sharedAudio=$('#sharedAudio');let stopTimer=null;let uiTimer=null;let audioRequest=0;
-function clearAudioTimers(){if(stopTimer)clearTimeout(stopTimer);if(uiTimer)clearTimeout(uiTimer);stopTimer=null;uiTimer=null;}
-function finishAudio(request){if(request!==audioRequest)return;clearAudioTimers();sharedAudio.pause();sharedAudio.classList.remove('playing');}
-function playAudio(src,start=0,end=0){
-  audioRequest++;const request=audioRequest;
-  clearAudioTimers();sharedAudio.onloadedmetadata=null;sharedAudio.onerror=null;sharedAudio.onended=null;sharedAudio.pause();sharedAudio.currentTime=0;sharedAudio.removeAttribute('src');sharedAudio.load();
-  setWordAudioStatus('');sharedAudio.classList.add('playing');
-  let started=false;
-  const fail=()=>{if(request!==audioRequest)return;clearAudioTimers();sharedAudio.pause();sharedAudio.classList.remove('playing');setWordAudioStatus('未能播放這段聲音，請稍後再試。');};
-  const begin=()=>{if(started||request!==audioRequest)return;started=true;if(start>0)sharedAudio.currentTime=start;sharedAudio.play().then(()=>{
-    if(request!==audioRequest)return;
-    const clipSeconds=end>start?end-start:sharedAudio.duration;
-    if(Number.isFinite(clipSeconds)&&clipSeconds>0)stopTimer=setTimeout(()=>finishAudio(request),(clipSeconds+.08)*1000);
-  }).catch(fail);};
-  sharedAudio.onloadedmetadata=begin;
-  sharedAudio.onerror=fail;
-  sharedAudio.onended=()=>finishAudio(request);
-  sharedAudio.src=src;
-  sharedAudio.load();
-  // The fixed M4A clips start at 0; call play() in the same tap event so iPad
-  // Safari does not reject playback after an asynchronous metadata callback.
-  if(start===0||sharedAudio.readyState>=1)begin();
-  uiTimer=setTimeout(()=>{if(request===audioRequest&&sharedAudio.paused)fail();},5000);
+import {sounds, groups, groupNames, buildQuestions} from './pth-content.js?v=20261004';
+import {wordAudioClips} from './pth-word-audio.js?v=20261004';
+import {createProgress} from './pth-progress.js?v=20261004';
+import {createAudioController} from './pth-audio.js?v=20261004';
+
+const $ = selector => document.querySelector(selector);
+const guestMemory = new Map();
+const guestStore = {getItem: k => guestMemory.get(k) ?? null, setItem: (k, v) => guestMemory.set(k, v)};
+let profile = window.KakaStorage?.getActiveProfileId() || 'guest';
+let store;
+try { store = localStorage; store.setItem('kaka-pth-storage-check', '1'); store.removeItem('kaka-pth-storage-check'); }
+catch { store = guestStore; $('#storageNotice').hidden = false; }
+let progress = createProgress(profile === 'guest' ? guestStore : store, profile);
+let activeGroup = 'bpmf', tab = 'learn', question, round, selected = null;
+let heard = false, locked = false, next = false, generation = 0, animation;
+const audio = createAudioController($('#sharedAudio'), $('#wordAudioStatus'), () => document.querySelectorAll('video'), busy => {
+  if (tab !== 'quiz' || !question) return;
+  const blocked = busy || locked || next || (question.type === 'listen' && !heard);
+  document.querySelectorAll('.option').forEach(button => button.disabled = blocked);
+  $('#submitAnswer').disabled = busy || locked || (!next && !selected);
+});
+const currentSounds = () => sounds.filter(sound => sound.group === activeGroup);
+const escape = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function pinyin(word) {
+  const n = word.initial.length;
+  return `<span class="pinyin-initial">${escape(word.pinyin.slice(0, n))}</span>${escape(word.pinyin.slice(n))}`;
 }
-function stopAudio(){audioRequest++;clearAudioTimers();sharedAudio.pause();sharedAudio.currentTime=0;sharedAudio.classList.remove('playing');}const key=()=>isPreview()?'kaka-pth-preview-v1':'kaka-pth-v1';let state=JSON.parse(localStorage.getItem(key())||'null')||{roundIndex:0,roundStars:0,totalStars:0,completed:false};state.groupProgress=state.groupProgress||{};let qi=0,selected=null;function hydrateGroup(){const gp=state.groupProgress[activeGroup]||{};qi=gp.roundIndex||0;state.roundIndex=qi;state.roundStars=gp.roundStars||0;state.completed=!!gp.completed;}function persistGroup(){state.groupProgress[activeGroup]={roundIndex:qi,roundStars:state.roundStars||0,completed:!!state.completed};}hydrateGroup();const save=()=>localStorage.setItem(key(),JSON.stringify(state));
-function renderStars(){const n=state.roundStars||0;const completeText=$('#completeText');if(completeText)completeText.textContent=isPreview()?`預覽完成：${groupNames[activeGroup]}。`:`你已經完成 ${groupNames[activeGroup]} 小隊。再玩一次鞏固記憶吧！`;const html=Array.from({length:10},(_,i)=>`<span class="${i<n?'on':''}">${i<n?'★':'☆'}</span>`).join('');const track=Array.from({length:10},(_,i)=>`<span class="star ${i<n?'on':''}">${i<n?'★':'☆'}</span>`).join('');$('#miniStars').innerHTML=html;$('#starTrack').innerHTML=track;$('#starsTotal').textContent=`${n}/10 ⭐（累積完成 ${Math.floor((state.totalStars||0)/10)} 輪・${state.totalStars||0} 星）`;$('#progressBadge').textContent=`${n}/10 ⭐`;$('#quizTabCount').textContent=`${n}/10`;$('#completeMessage').hidden=n<10;}
-function renderLearn(){document.querySelector('.lesson-grid').dataset.group=activeGroup;$('#lessonGrid').innerHTML=currentSounds().map(s=>`<article class="lesson"><h3>${s.name}</h3><p>${s.tip}</p>${isPreview()?'<span class="preview-badge">測試預覽・例詞待核實</span>':''}<div class="sound-emoji" role="img" aria-label="${s.emojiLabel}">${s.emoji}</div><div class="example-list">${s.examples.map(e=>`<div class="example-item"><span class="example-emoji" role="img" aria-label="${e.imageLabel||e.word+'圖示'}">${e.emoji}</span><strong>${e.word}</strong><span>${e.pinyin}</span><button class="word-audio" data-word="${e.word}" data-word-audio="${e.audioKey||''}" aria-label="播放「${e.word}」普通話">🔊</button></div>`).join("")}</div><video controls playsinline preload="metadata" src="assets/pth/initials/video/${s.id}.mp4"></video><button class="audio-btn" data-play-video aria-label="重播${s.name}聲母完整教材示範">🔊 重播完整示範</button></article>`).join('');document.querySelectorAll('[data-play-video]').forEach(b=>b.onclick=()=>{const video=b.closest('.lesson')?.querySelector('video');if(!video)return;video.currentTime=0;video.play().catch(()=>setWordAudioStatus('教材口形影片未能載入，請重新整理後再試。'));});document.querySelectorAll('[data-word]').forEach(b=>b.onclick=()=>playWord(b.dataset.word,wordAudioClips[b.dataset.wordAudio]));document.querySelectorAll('.lesson video').forEach(video=>video.onerror=()=>setWordAudioStatus('教材口形影片未能載入，請重新整理後再試。'));}
-function showTab(id){stopAudio();if(id==='quiz'&&state.completed){id='stars';}document.querySelectorAll('.panel').forEach(p=>{p.hidden=p.id!==id;p.classList.toggle('active',p.id===id)});document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===id));if(id==='quiz')renderQuestion();}
-function revealContext(q){const spans=q.word.pinyin.split(/\s+/).map((text,i)=>`<span class="syllable ${i===q.word.syllableIndex?'target':''}">${text}</span>`).join(' ');return `<div class="context-card revealed"><strong>${q.word.word}</strong><span class="pinyin">${spans}</span><small>第一個聲母：${q.word.initial}</small></div>`;}
-function renderQuestion(){const q=questionsFor()[qi%questionsFor().length];$('#questionNo').textContent=qi+1;$('#questionPrompt').textContent=q.prompt;$('#feedback').textContent='';$('#feedback').className='feedback';selected=null;$('#submitAnswer').disabled=true;$('#quizMedia').innerHTML=`<div class="word-challenge" aria-label="${q.word.imageLabel}"><div class="challenge-emoji">${q.word.emoji}</div><strong>${q.word.word}</strong><span>${q.word.pinyin}</span><button class="sound-btn" id="challengeAudio" data-word-audio="${q.word.audioKey||''}" aria-label="播放「${q.word.word}」普通話">🔊</button></div><div class="answer-prompt">「${q.word.word}」的第一個聲母是：<span id="answerSlot" class="answer-slot">拖到這裡</span></div>`;$('#challengeAudio').onclick=()=>playWord(q.word.word,wordAudioClips[q.word.audioKey]);const shuffled=[...currentSounds()].sort(()=>Math.random()-.5);$('#options').innerHTML=shuffled.map(s=>`<button class="option" draggable="true" data-answer="${s.id}">${s.name}</button>`).join('');const slot=$('#answerSlot');document.querySelectorAll('.option').forEach(b=>{b.onclick=()=>{document.querySelectorAll('.option').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');selected=b.dataset.answer;slot.textContent=b.dataset.answer;slot.classList.add('filled');$('#submitAnswer').disabled=false;};b.ondragstart=e=>e.dataTransfer.setData('text/plain',b.dataset.answer);});slot.ondragover=e=>e.preventDefault();slot.ondrop=e=>{e.preventDefault();const answer=e.dataTransfer.getData('text/plain');const b=document.querySelector(`.option[data-answer="${answer}"]`);if(b)b.click();};}
-function fireStar(){const index=Math.max(1,state.roundStars);document.querySelector('#miniStars span:nth-child('+index+')')?.classList.add('target-glow');document.querySelector('#starTrack span:nth-child('+index+')')?.classList.add('target-glow');const fx=document.createElement('div');fx.className='star-fx';fx.innerHTML='<img src="assets/kaka-ranger-solo.png" alt="KAKA Ranger"><i>✦</i><span>★</span>';$('#quizMedia').append(fx);setTimeout(()=>fx.remove(),STAR_FX_MS);}
-$('#startQuiz').onclick=()=>{if(state.completed){showTab('stars');return;}showTab('quiz');};document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>showTab(t.dataset.tab));$('#submitAnswer').onclick=()=>{if($('#submitAnswer').disabled)return;const q=questionsFor()[qi%questionsFor().length];if(selected!==q.answer){$('#feedback').textContent=q.hint;return;}stopAudio();state.roundStars=Math.min(10,state.roundStars+1);$('#submitAnswer').disabled=true;$('#quizMedia').insertAdjacentHTML('afterbegin',revealContext(q));renderStars();fireStar();$('#feedback').textContent='答對了！看清楚第一個聲母在拼音的哪個位置。';$('#feedback').className='feedback good';setTimeout(()=>{if(state.roundStars>=10){state.totalStars+=10;state.completed=true;qi=0;state.roundIndex=0;persistGroup();save();showTab('stars');}else{qi=(qi+1)%questionsFor().length;state.roundIndex=qi;persistGroup();save();renderQuestion();}},STAR_FX_MS+100);};function renderGroupNav(){$('header h1').textContent='聲母小隊：'+groupNames[activeGroup];$('#groupNav').innerHTML=groups.map(g=>{const ready=sounds.some(s=>s.group===g&&s.verified);return `<button class="group-btn ${g===activeGroup?'active':''}" data-group="${g}">${groupNames[g]}${ready?'（已核實）':'（可玩）'}</button>`}).join('');document.querySelectorAll('.group-btn').forEach(b=>b.onclick=()=>{state.groupProgress[activeGroup]={roundIndex:qi,roundStars:state.roundStars,completed:state.completed};activeGroup=b.dataset.group;localStorage.setItem('kaka-pth-group',activeGroup);state=JSON.parse(localStorage.getItem(key())||'null')||{roundIndex:0,roundStars:0,totalStars:0,completed:false,groupProgress:{}};state.groupProgress=state.groupProgress||{};hydrateGroup();save();renderGroupNav();renderLearn();renderStars();});}
-$('#resetProgress').onclick=()=>{state={roundIndex:0,roundStars:0,totalStars:state.totalStars||0,completed:false,groupProgress:state.groupProgress||{}};qi=0;persistGroup();save();renderLearn();renderStars();showTab('learn');};renderGroupNav();renderLearn();renderStars();
+function playWord(word, ended) {
+  const clip = wordAudioClips[word.audioKey];
+  if (!clip) { audio.message('這個詞語未有普通話錄音，請先練習其他詞語。'); return; }
+  audio.play(clip.src, ended);
+}
+function leaveScreen() {
+  generation++; audio.stop(); audio.message(''); animation?.cancel();
+  document.querySelectorAll('.flying-star,.ranger-shooter').forEach(el => el.remove());
+  locked = false; next = false;
+}
+function renderStars(displayIndex = progress.load(activeGroup).index) {
+  const cells = Array.from({length: 10}, (_, i) => `<span class="star ${i < displayIndex ? 'on' : ''}" aria-label="第${i+1}粒星${i < displayIndex ? '已完成' : '未完成'}">${i < displayIndex ? '★' : '☆'}</span>`).join('');
+  $('#miniStars').innerHTML = cells; $('#starTrack').innerHTML = cells;
+  $('#progressBadge').textContent = `${displayIndex}/10 ⭐`;
+  $('#quizTabCount').textContent = `${displayIndex}/10`;
+  $('#starsTotal').textContent = `累積 ${progress.total()} 粒星`;
+  $('#completeMessage').hidden = displayIndex < 10;
+  $('#completeText').textContent = `已完成 ${groupNames[activeGroup]} 的 10 題練習！`;
+  $('#rewardNote').textContent = profile === 'guest' ? '訪客試玩：離開後不保留進度。' :
+    progress.awarded(activeGroup) ? '⭐ 本課已領星；重溫仍會射星，但不會重複增加累積星星。' : '首次完成本課可記錄 10 粒星；同一玩家重溫不會重複領取。';
+  $('#courseRecords').innerHTML = groups.map(group => `<li>${groupNames[group]}：${progress.awarded(group) ? '⭐ 已領星' : '未領星'}</li>`).join('');
+}
+function renderGroups() {
+  $('h1').textContent = `${activeGroup === 'yw' ? '拼音字母' : '聲母'}小隊：${groupNames[activeGroup]}`;
+  $('#groupNav').innerHTML = groups.map(group => `<button class="group-btn ${group === activeGroup ? 'active' : ''}" aria-pressed="${group === activeGroup}" data-group="${group}">${groupNames[group]}${progress.awarded(group) ? ' ⭐' : ''}</button>`).join('');
+  document.querySelectorAll('[data-group]').forEach(button => button.onclick = () => {
+    leaveScreen(); activeGroup = button.dataset.group; renderGroups(); renderLearn(); showTab('learn');
+  });
+}
+function renderLearn() {
+  $('#lessonGrid').style.setProperty('--lesson-count', currentSounds().length);
+  $('#lessonGrid').innerHTML = currentSounds().map(sound => `<article class="lesson">
+    <h3>${sound.name}</h3><p>${sound.tip}</p><div class="example-list">${sound.examples.map(word => `<div class="example-item">
+      <span class="example-emoji" role="img" aria-label="${word.imageLabel}">${word.emoji}</span>
+      <strong>${word.word}</strong><span class="example-pinyin" lang="zh-Latn">${pinyin(word)}</span>
+      <button class="word-audio" data-word-audio="${word.audioKey}" aria-label="播放${word.word}普通話">🔊</button>
+    </div>`).join('')}</div>
+    <video controls playsinline preload="metadata" poster="assets/pth/initials/posters/${sound.id}.jpg" src="${sound.video}" aria-label="${sound.name} 教材口形影片"></video>
+    <button class="audio-btn" data-play-video>▶ 重播 ${sound.name} 口形示範</button></article>`).join('');
+  document.querySelectorAll('[data-word-audio]').forEach(button => button.onclick = () => {
+    const word = sounds.flatMap(s => s.examples).find(w => w.audioKey === button.dataset.wordAudio); playWord(word);
+  });
+  document.querySelectorAll('video').forEach(video => audio.bindVideo(video));
+  document.querySelectorAll('[data-play-video]').forEach(button => button.onclick = () => {
+    audio.stop(); const video = button.previousElementSibling; video.currentTime = 0;
+    video.play().catch(() => audio.message('教材影片未能播放，請再試。'));
+  });
+}
+function showTab(id) {
+  leaveScreen();
+  tab = id === 'quiz' && progress.load(activeGroup).index === 10 ? 'stars' : id;
+  document.body.dataset.tab = tab;
+  document.querySelectorAll('.panel').forEach(panel => panel.hidden = panel.id !== tab);
+  document.querySelectorAll('.tab').forEach(button => { button.classList.toggle('active', button.dataset.tab === tab); button.setAttribute('aria-pressed', String(button.dataset.tab === tab)); });
+  renderStars(); if (tab === 'quiz') renderQuestion(); window.scrollTo(0, 0);
+}
+function selectAnswer(answer) {
+  if (audio.busy || locked || next || (question.type === 'listen' && !heard)) return;
+  selected = answer; $('#answerSlot').textContent = answer; $('#answerSlot').classList.add('filled');
+  document.querySelectorAll('.option').forEach(button => { button.classList.toggle('selected', button.dataset.answer === answer); button.setAttribute('aria-pressed', String(button.dataset.answer === answer)); });
+  $('#submitAnswer').disabled = false;
+}
+function renderQuestion() {
+  round = progress.load(activeGroup);
+  if (round.index >= 10) { showTab('stars'); return; }
+  question = buildQuestions(activeGroup, round.seed)[round.index];
+  selected = null; heard = false; next = false; locked = false;
+  $('#questionNo').textContent = round.index + 1; $('#questionPrompt').textContent = question.prompt;
+  $('#feedback').textContent = question.type === 'listen' ? '先按「聽一聽」，聽完再選。' : '選一個字母，再提交答案。';
+  $('#feedback').className = 'feedback'; $('#submitAnswer').textContent = '提交答案'; $('#submitAnswer').disabled = true;
+  const word = question.word;
+  $('#quizMedia').innerHTML = `<div class="word-challenge">
+    <div class="challenge-emoji" role="img" aria-label="${question.type === 'listen' ? '聆聽詞語' : word.imageLabel}">${question.type === 'listen' ? '👂' : word.emoji}</div>
+    <strong id="quizWord">${question.type === 'listen' ? '聽一聽這個詞語' : word.word}</strong>
+    <span id="quizPinyin" class="example-pinyin" hidden></span>
+    <button class="audio-btn" id="challengeAudio">🔊 聽一聽</button></div>
+    <div class="answer-prompt">第一個${activeGroup === 'yw' ? '拼音字母' : '聲母'}<span id="answerSlot" class="answer-slot">選字母</span></div>`;
+  const request = generation;
+  $('#challengeAudio').onclick = () => playWord(word, () => {
+    if (request !== generation || next || locked) return;
+    heard = true; document.querySelectorAll('.option').forEach(button => button.disabled = false);
+    $('#feedback').textContent = '聽到了！選一個字母，再提交。';
+  });
+  $('#options').innerHTML = currentSounds().map(sound => `<button class="option" data-answer="${sound.id}" aria-pressed="false" draggable="true" ${question.type === 'listen' ? 'disabled' : ''}>${sound.name}</button>`).join('');
+  document.querySelectorAll('.option').forEach(button => {
+    button.onclick = () => selectAnswer(button.dataset.answer);
+    button.ondragstart = event => { if (button.disabled || locked || next) { event.preventDefault(); return; } event.dataTransfer.setData('text/plain', button.dataset.answer); };
+  });
+  $('#answerSlot').ondragover = event => event.preventDefault();
+  $('#answerSlot').ondrop = event => { event.preventDefault(); const answer = event.dataTransfer.getData('text/plain'); if (currentSounds().some(s => s.id === answer)) selectAnswer(answer); };
+}
+async function fireStar(index) {
+  const target = $('#miniStars').children[index - 1].getBoundingClientRect();
+  const source = $('#quizMedia').getBoundingClientRect();
+  const ranger = document.createElement('img'); ranger.src = 'assets/kaka-ranger-solo.png'; ranger.alt = ''; ranger.className = 'ranger-shooter';
+  ranger.style.left = `${source.left + 8}px`; ranger.style.top = `${source.bottom - 96}px`;
+  const star = document.createElement('span'); star.className = 'flying-star'; star.textContent = '★';
+  const x = source.left + 80, y = source.bottom - 65;
+  star.style.left = `${x}px`; star.style.top = `${y}px`; document.body.append(ranger, star);
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  animation = star.animate([{transform: 'translate(0,0) scale(.7)'}, {transform: `translate(${target.left - x}px,${target.top - y}px) scale(.55)`}], {duration: reduced ? 120 : 800, easing: 'ease-in-out', fill: 'forwards'});
+  try { await animation.finished; } catch { /* Navigation only cancels presentation. */ }
+  ranger.remove(); star.remove();
+}
+$('#submitAnswer').onclick = async () => {
+  if (audio.busy || locked || $('#submitAnswer').disabled) return;
+  if (next) { showTab(progress.load(activeGroup).index === 10 ? 'stars' : 'quiz'); return; }
+  if (selected !== question.answer) { $('#feedback').textContent = `再試一次。${question.hint}`; return; }
+  locked = true; audio.stop(); const request = generation;
+  if (!progress.accept(activeGroup, round.index, round.seed)) { showTab('quiz'); return; }
+  $('#submitAnswer').disabled = true; document.querySelectorAll('.option').forEach(button => button.disabled = true);
+  $('#quizWord').textContent = question.word.word; $('#quizPinyin').innerHTML = pinyin(question.word); $('#quizPinyin').hidden = false;
+  $('.challenge-emoji').textContent = question.word.emoji;
+  $('#feedback').textContent = '答對了！卡卡射出一粒星！'; $('#feedback').className = 'feedback good';
+  await fireStar(round.index + 1); if (request !== generation) return;
+  renderStars(); renderGroups(); locked = false; next = true;
+  $('#submitAnswer').textContent = round.index === 9 ? '查看星星記錄 →' : '下一題 →'; $('#submitAnswer').disabled = false;
+};
+$('#startQuiz').onclick = () => showTab('quiz');
+document.querySelectorAll('.tab').forEach(button => button.onclick = () => showTab(button.dataset.tab));
+$('#resetProgress').onclick = () => { progress.restart(activeGroup); showTab('quiz'); };
+$('#profileSelect').value = profile;
+$('#profileSelect').onchange = () => {
+  leaveScreen(); profile = $('#profileSelect').value;
+  if (profile !== 'guest') window.KakaStorage?.setActiveProfile(profile);
+  progress = createProgress(profile === 'guest' ? guestStore : store, profile); renderGroups(); renderLearn(); showTab('learn');
+};
+document.addEventListener('visibilitychange', () => { if (document.hidden) audio.stop(); });
+window.addEventListener('pagehide', () => audio.stop());
+window.addEventListener('storage', event => { if (event.key?.startsWith(`kaka-pth-v2:${profile}:`)) { renderGroups(); showTab(tab); } });
+renderGroups(); renderLearn(); showTab('learn');

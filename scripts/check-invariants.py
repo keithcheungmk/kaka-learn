@@ -972,7 +972,19 @@ def check_asset_weight() -> None:
     notes.append(f"assets/ 合共 {total / 1_000_000:.2f}MB")
 
 
+def check_pth_contract() -> None:
+    """PTH content/audio/progress share one executable contract, not string snapshots."""
+    node = shutil.which("node")
+    if not node:
+        fail("pth-contract", "需要 node 執行 PTH 教材／音檔／進度檢查")
+        return
+    result = subprocess.run([node, "scripts/test-pth-content.mjs"], capture_output=True, text=True)
+    if result.returncode:
+        fail("pth-contract", result.stderr[-1200:] or "PTH 回歸失敗")
+
+
 CHECKS = [
+    check_pth_contract,
     check_js_syntax,
     check_no_build_step,
     check_cache_bust_tags,

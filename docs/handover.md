@@ -30,6 +30,8 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 ## 進行中（認領）
 
+2026-10-04 ChatGPT／Codex：PTH audit 修復在獨立 worktree `/private/tmp/kaka-pth-repair` 完成，進入 CI／發佈驗證；勿用舊本機 PTH renderer 覆蓋。其餘共享工作樹不變；Supabase 支線仍暫停。
+
 改共享檔（尤其係下面「撞車高危檔案」）之前，先喺呢度認領。做完／merge 完就刪嗰行。**永遠唔好兩個人同時認領同一批檔／同一個功能。**
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
@@ -101,6 +103,14 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-10-04 · ChatGPT／Codex＋Chinese Lead（普通話 audit 修復）
+
+- 新 `js/pth-content.js` 統一 23 教材影片、69 延伸詞與七組各 10 題；修正蛇/sh 被當 s、圖詞錯配、拼音標示；不再宣稱全部「已核實」。y/w 明確稱拼音字母。
+- `mandarin-v2/` 為完整 Tingting `zh_CN` 合成詞音及生成 manifest；教材影片保留原聲。舊 initial-video 分段資料只留歷史，不再載入。單一播放器排除重疊、換頁即停、失敗提示全頁可見、重播完才可提交。
+- 新 PTH v2 進度按卡卡／禧禧分倉，Guest 為記憶體；原 PTH v1 備份並保留歷史星星／中途答題數。每玩家每課首次完成記10星，重溫不重複入帳；獎勵保持 PTH 專屬，沒有新增幣或恢復 Supabase。
+- 調整 iPad 橫向測驗為單屏、直向用手機式單欄學習卡；拼音改高對比並將聲母加色及底線；影片加入原片縮圖，不再黑框。
+- 本機：41 invariants、16 storage tests、內容／音檔／遷移／去重模型通過；既有家庭 smoke 三尺寸各24畫面通過；PTH 七組70題、69音檔可解碼播完、Profile、快速連按、媒體互斥、音訊失敗及三尺寸測試通過。CI加入PTH專用回歸。證據為 desktop Chromium touch viewport，非實機 iPad；人耳逐詞聽審未宣稱完成。部署狀態以本次 PR／GitHub Actions 為準。
 
 ### 2026-10-03 · ChatGPT／Codex（Chinese Connect 職業主題）
 

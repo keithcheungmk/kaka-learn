@@ -1,11 +1,4 @@
-import {wordAudioSourceSegments} from './pth-word-audio-source.js?v=20260929-mandarin-clips';
-
-// The clips are generated from the supplied Mandarin teaching videos. Keeping
-// each word as a separate M4A avoids device-dependent speech synthesis voices.
-export const wordAudioClips = Object.fromEntries(
-  Object.keys(wordAudioSourceSegments).map((key) => [key, {
-    src: `assets/pth/words/individual/${key}.m4a`,
-    start: 0,
-    end: 0,
-  }]),
-);
+import {sounds} from './pth-content.js?v=20261004';
+// Fixed zh_CN Tingting recordings of complete words, NOT cuts of initial videos.
+export const wordAudioClips = Object.fromEntries(sounds.flatMap(sound => sound.examples)
+  .map(word => [word.audioKey, {src: `assets/pth/words/mandarin-v2/${word.audioKey}.m4a`} ]));

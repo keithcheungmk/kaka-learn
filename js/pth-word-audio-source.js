@@ -1,3 +1,5 @@
+// LEGACY ONLY. These initial-video segments are NOT complete example words.
+// Retained as historical provenance; the app must use mandarin-v2 recordings.
 export const wordAudioSourceSegments={
   "b-1": {
     "src": "source-materials/PTH/initials-video/b.mp4",
