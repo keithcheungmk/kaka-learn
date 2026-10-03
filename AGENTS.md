@@ -11,6 +11,12 @@
 
 幼兒繁體中文認字網頁（KAKA，約 4 歲）。粵語家庭、iPad 優先、亦要適合 Mac mini + TV 大掣操作。
 
+### English learning structure
+
+- 主頁只放一個「英文學習・English Learning」入口；入面分為「故事閱讀／Story Reading」、「主題詞語／Topic Words」及「字母音・拼讀／Phonics」三條路線。
+- 「Topic Words」係完整詞語認讀，唔統稱做 Sight Words；Sight Words 只用於真正高頻功能字內容。詞語認讀進度同 Phonics 解碼能力分開記錄。
+- 故事系列（Carter Family、Magic Marker、Wacky Ricky 及日後 Little Fox）共用 Story Reading 入口；唔為同類故事再開主頁捷徑。Space Patrol／Little Fox Pilot 放喺共用入口穩定後第二階段接入。
+
 ## Agent 團隊與 routing（Keith 2026-09-21）
 
 ### Chief Lead＝Cursor 主 Agent

@@ -492,17 +492,33 @@ def check_no_zoom() -> None:
 
 
 def check_three_entries() -> None:
-    """A. 冇破壞現有嘢：主頁三個入口都要喺度。"""
+    """主頁保持科目入口簡潔，英文由單一入口分流到三條學習路線。"""
     html = read("index.html")
     for btn, name in [
         ("btn-start-topics", "小鹿認字探險"),
-        ("btn-start-phonics", "SPACE RANGER ENGLISH"),
+        ("btn-start-english", "英文學習"),
         ("btn-start-math", "小鹿數理探險"),
     ]:
         if btn not in html:
             fail("entries", f"index.html 唔見 #{btn}（{name} 入口）")
-    if 'id="btn-start-phonics" aria-label="SPACE RANGER ENGLISH">SPACE RANGER ENGLISH</button>' not in html:
-        fail("entries", "英文入口名稱要統一做「SPACE RANGER ENGLISH」")
+    for btn in ["btn-english-story", "btn-english-words", "btn-english-phonics"]:
+        if f'id="{btn}"' not in html:
+            fail("entries", f"英文學習分流頁唔見 #{btn}")
+    if html.count('id="btn-start-english"') != 1:
+        fail("entries", "主頁應該只有一個英文學習入口")
+    if 'id="btn-start-story-demo"' in html or 'id="btn-start-phonics"' in html:
+        fail("entries", "主頁應只保留一個英文入口，故事與 Phonics 請由英文分流頁進入")
+    phonics = read("js/phonics-app.js")
+    phonics_css = read("css/phonics.css")
+    if "openPhonicsTopics('sight')" not in phonics or "openPhonicsTopics('phonics')" not in phonics:
+        fail("entries", "英文學習分流頁嘅 Topic Words／Phonics 按鈕未接到各自內容")
+    if "pActiveEnglishTrack" not in phonics or 'dataset.englishTrack = pActiveEnglishTrack' not in phonics:
+        fail("entries", "Topic Words 與 Phonics 頁面未按選擇分開顯示")
+    if 'data-english-track="sight"' not in phonics_css or 'data-english-track="phonics"' not in phonics_css:
+        fail("entries", "Topic Words／Phonics 頁面未分開隱藏另一條路線")
+    story = read("js/story-demo.js")
+    if "window.KakaPhonics?.openEnglishHub" not in story:
+        fail("entries", "故事系列返回按鈕未返回共用英文入口")
 
 
 def check_phonics_ranger_theme() -> None:

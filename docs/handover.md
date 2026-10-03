@@ -36,6 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| 英文學習入口及三條學習路線整理 | ChatGPT／Codex | `index.html`, `js/phonics-app.js`, `js/story-demo.js`, `css/phonics.css`, `css/styles.css`, 英文入口檢查 | 2026-10-04 | 統一主頁英文入口；故事閱讀、主題詞語、Phonics 分流；Little Fox Pilot 留待第二階段。於獨立 worktree 實作，保留本機既有未提交修改。 |
 | 紅輯「按書頁砌句」資料層及遊戲引擎 | Chinese Lead（Chief 整合） | `js/book-scene-demo.js`, `book-scene-demo.html`, `css/book-scene-demo.css`, `data/red-series/`, `scripts/test-book-scene-demo.mjs`, `scripts/smoke-book-scene-demo.py`, `docs/cursor-handoff-2026-09-20.md` | 2026-09-20 | Keith 交辦：本機接盤；內容由 Chinese Lead，shared／部署由 Chief；唔開 Cloud Agent |
 | 書本掃描書架 | Chinese Lead（Chief 整合） | `book-scans/index.html`, `index.html`（共享）, `css/styles.css`（共享）, `scripts/check-invariants.py`（共享） | 2026-09-08 | 家長 PDF 書架；中文內容由 Chinese Lead，共享檔由 Chief 認領 |
 | 中文故事小隊第一版 | ChatGPT／Codex（故事內容及 UI 狀態；Chief 整合） | `family-storybook.html`, `css/styles.css`, `js/family-storybook.js`, `data/family-stories/manifest.js`, `docs/family-storybook-first-edition.md`, `index.html`, `docs/handover.md` | 2026-10-02 | 新增〈浠榆妹妹來了〉八頁和九張角色／場景 WebP；紅書詞語來源留空並以「學習詞語」呈現。將錯寫的「堯叔叔」全數更正為「耀叔叔」。首個故事提交 `fdab12d` 已推送，GitHub Pages run #315 成功；瀏覽器仍取到未加版本戳的舊 JS，因此本次為故事資料與角色程式加入部署版本戳，確保即時刷新。 |

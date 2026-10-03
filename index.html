@@ -82,10 +82,7 @@
         <div class="btn-row hero-cta-row">
           <button type="button" class="btn" id="btn-start-topics" aria-label="太空戰士認字">太空戰士認字</button>
           <a class="btn btn-secondary" href="./pth-demo.html?v=20260914-pth-word-audio" aria-label="普通話拼音">普通話拼音</a>
-          <div class="english-home-group" aria-label="Space Ranger English">
-            <button type="button" class="btn btn-secondary" id="btn-start-phonics" aria-label="SPACE RANGER ENGLISH">SPACE RANGER ENGLISH</button>
-            <button type="button" class="btn btn-story" id="btn-start-story-demo" aria-label="英文故事書 Little Fox 系列">英文故事書・Little Fox 系列</button>
-          </div>
+          <button type="button" class="btn btn-secondary" id="btn-start-english" aria-label="英文學習・English Learning">英文學習・English Learning</button>
           <button type="button" class="btn btn-accent" id="btn-start-math">太空戰士數理</button>
           <a
             class="btn btn-friend home-friend-link"
@@ -353,23 +350,52 @@
       <p class="feedback" id="build-feedback" aria-live="polite"></p>
     </section>
 
-    <!-- SPACE RANGER ENGLISH：先揀學習線，再揀主題 -->
+    <!-- 英文學習：故事閱讀、主題詞語、字母音與拼讀 -->
+    <section id="screen-english-hub" class="screen phonics-screen english-hub-screen" aria-label="英文學習・選擇學習方式">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-english-home">← 主頁</button>
+        <h1>英文學習 <small>English Learning</small></h1>
+      </div>
+      <p class="section-lead">揀一種學習方式；每個入口只做一件主要任務。</p>
+      <div class="english-hub-grid">
+        <button type="button" class="english-hub-card english-hub-story" id="btn-english-story">
+          <span class="english-hub-icon" aria-hidden="true">📚</span>
+          <span class="english-hub-title">故事閱讀 <small>Story Reading</small></span>
+          <span class="english-hub-description">聽逐頁故事，讀句子，再找回句子中缺少的字。</span>
+          <span class="english-hub-action">選擇故事系列 →</span>
+        </button>
+        <button type="button" class="english-hub-card english-hub-words" id="btn-english-words">
+          <span class="english-hub-icon" aria-hidden="true">🖼️</span>
+          <span class="english-hub-title">主題詞語 <small>Topic Words</small></span>
+          <span class="english-hub-description">按主題認讀完整英文詞，聽音、看圖和配對。</span>
+          <span class="english-hub-action">選擇詞語主題 →</span>
+        </button>
+        <button type="button" class="english-hub-card english-hub-phonics" id="btn-english-phonics">
+          <span class="english-hub-icon" aria-hidden="true">🔤</span>
+          <span class="english-hub-title">字母音・拼讀 <small>Phonics</small></span>
+          <span class="english-hub-description">學字母和字母組合發音，再練習拼合單詞。</span>
+          <span class="english-hub-action">開始學字母音 →</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 主題詞語／Phonics 各自顯示單一學習方向；詞語認讀不等同拼讀能力。 -->
     <section id="screen-phonics-topics" class="screen phonics-screen" aria-label="SPACE RANGER ENGLISH・揀學習線">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-phonics-topics">← 返去</button>
-        <h1>SPACE RANGER ENGLISH</h1>
+        <button type="button" class="btn btn-ghost" id="btn-back-phonics-topics">← 英文學習</button>
+        <h1 id="english-topic-screen-title">主題詞語</h1>
       </div>
       <div class="english-track english-track-sight">
         <header class="english-track-heading">
           <span class="english-track-kicker">WORD MISSION · 01</span>
-          <h2>Sight Words <small>常見字・詞語認讀</small></h2>
-          <p>先認得完整英文字，再用圖像、聆聽同配對記住意思。</p>
+          <h2>Topic Words <small>主題詞語認讀</small></h2>
+          <p>按主題認得完整英文字，再用圖像、聆聽同配對記住意思。</p>
         </header>
         <div class="topic-grid" id="phonics-sight-grid"></div>
       </div>
       <div class="english-track english-track-phonics">
         <header class="english-track-heading">
-          <span class="english-track-kicker">SOUND MISSION · 02</span>
+          <span class="english-track-kicker">SOUND MISSION</span>
           <h2>Phonics <small>字母音・拼讀</small></h2>
           <p>逐個音聽清楚，再將聲音連起來拼出英文字。</p>
         </header>
@@ -525,7 +551,7 @@
     <!-- 英文故事書 Little Fox 系列：先揀故事系列，再進入共用 Read & Fill 書架。 -->
     <section id="screen-story-series" class="screen story-demo-screen" aria-label="英文故事系列">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-story-series">← 主頁</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-story-series">← 英文學習</button>
         <h1>英文故事書</h1>
         <div class="progress-pill"><strong>Little Fox 系列</strong></div>
       </div>

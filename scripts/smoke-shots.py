@@ -32,6 +32,7 @@ from pathlib import Path
 SCROLLABLE = {
     "screen-profiles",
     "screen-home",
+    "screen-english-hub",
     "screen-topics",
     "screen-books",
     "screen-phonics-topics",
@@ -40,6 +41,7 @@ SCROLLABLE = {
     "screen-math-galaxy",  # Browsing hub for planet and life-skill destinations; the actual math activities remain no-scroll.
     "screen-chinese-connect",
     "screen-story-demo",  # Little Fox book shelf: browsing may scroll; play screen may not.
+    "screen-story-series",  # Selecting a story series is a browsing screen.
 }
 
 # 家庭目標裝置（預設／CI）——對齊 Keith 部 iPad Pro 11" 同 iPhone 16 Pro Max
@@ -206,7 +208,7 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.click("#btn-back-chinese-connect")
     pg.wait_for_timeout(400)
 
-    for entry, step in [("#btn-start-phonics", "字母隊"), ("#btn-start-math", "數理")]:
+    for entry, step in [("#btn-start-english", "英文學習入口"), ("#btn-start-math", "數理")]:
         pg.goto(url, wait_until="domcontentloaded")
         pg.wait_for_timeout(300)
         pg.click("#btn-profile-kaka")
@@ -233,7 +235,21 @@ def walk(pg, url, shots: Path | None, tag: str):
             pg.wait_for_timeout(300)
             pg.click("#btn-back-math-relations-learn")
             pg.wait_for_timeout(300)
-        if entry == "#btn-start-phonics":
+        if entry == "#btn-start-english":
+            pg.wait_for_selector("#screen-english-hub.active #btn-english-story")
+            probe("英文學習入口")
+            pg.click("#btn-english-words")
+            pg.wait_for_selector('#screen-phonics-topics.active[data-english-track="sight"]')
+            if not pg.is_visible("#phonics-sight-grid") or pg.is_visible("#phonics-topic-grid"):
+                raise RuntimeError("Topic Words screen must show only its word-topic grid")
+            probe("主題詞語")
+            pg.click("#btn-back-phonics-topics")
+            pg.wait_for_selector("#screen-english-hub.active")
+            pg.click("#btn-english-phonics")
+            pg.wait_for_selector('#screen-phonics-topics.active[data-english-track="phonics"]')
+            if pg.is_visible("#phonics-sight-grid") or not pg.is_visible("#phonics-topic-grid"):
+                raise RuntimeError("Phonics screen must show only its phonics-topic grid")
+            probe("Phonics 主題入口")
             pg.click("#phonics-topic-grid .topic-card:first-child")
             pg.wait_for_timeout(500)
             probe("字母音清單")
@@ -244,9 +260,14 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.wait_for_timeout(300)
     pg.click("#btn-profile-kaka")
     pg.wait_for_timeout(300)
-    pg.click("#btn-start-story-demo")
+    pg.click("#btn-start-english")
+    pg.click("#btn-english-story")
     pg.wait_for_selector("#screen-story-series.active [data-series-id='magic-marker']")
     probe("英文故事書系列")
+    pg.click("#btn-back-story-series")
+    pg.wait_for_selector("#screen-english-hub.active")
+    pg.click("#btn-english-story")
+    pg.wait_for_selector("#screen-story-series.active [data-series-id='magic-marker']")
     pg.click("#screen-story-series.active [data-series-id='magic-marker']")
     pg.wait_for_selector("#screen-story-demo.active [data-book-id='mm001']")
     probe("Magic Marker 書架")

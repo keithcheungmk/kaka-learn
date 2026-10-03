@@ -175,8 +175,12 @@ assert.doesNotMatch(source, /story-fill-tools/, 'Story listen should not share t
 assert.match(index, /每頁先聽故事，再把剛才聽到的一個字放回短句/);
 assert.match(index, /data\/carter-family-manifest\.js/, 'The Carter manifest must load before Story English');
 assert.match(starFx, /'screen-story-play'/, 'Story play should use the shared ranger star animation');
-assert.match(index, /英文故事書・Little Fox 系列/, 'Home entry should name the Little Fox story collection');
+assert.match(index, /id="btn-start-english"/, 'Home should expose one English learning entry');
+assert.match(index, /id="btn-english-story"/, 'English hub should route to Story Reading');
+assert.match(index, /id="btn-english-words"/, 'English hub should route to Topic Words');
+assert.match(index, /id="btn-english-phonics"/, 'English hub should route to Phonics');
 assert.match(index, /id="screen-story-series"/, 'Little Fox entry should expose a collection chooser');
+assert.match(source, /window\.KakaPhonics\?\.openEnglishHub/, 'Story series back should return to the shared English hub');
 
 const requiredAssets = [
   '../assets/story-demo/pages/page-01.webp',

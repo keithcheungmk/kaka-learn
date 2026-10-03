@@ -177,7 +177,13 @@
     screen?.classList.add('active');
     window.KakaStarFx?.mountPlayScreen?.(screen);
   }
-  function home() { invalidatePlayback(); activeBookId = null; if (window.KakaLearn?.goHome) window.KakaLearn.goHome(); else show('home'); }
+  function home() {
+    invalidatePlayback();
+    activeBookId = null;
+    if (window.KakaPhonics?.openEnglishHub) window.KakaPhonics.openEnglishHub();
+    else if (window.KakaLearn?.goHome) window.KakaLearn.goHome();
+    else show('home');
+  }
   function activeBook() { return BOOKS.find((book) => book.id === activeBookId) || null; }
   function activeSeries() { return SERIES.find((series) => series.id === currentSeriesId) || SERIES[0]; }
   function pages() { return activeBook()?.pages || []; }

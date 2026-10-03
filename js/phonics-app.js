@@ -30,6 +30,7 @@
 
   let pBusy = false;
   let pActiveTopicId = null;
+  let pActiveEnglishTrack = 'sight';
   let pLearnWords = [];
   let pLearnIndex = 0;
   let pLearnAudioGen = 0;
@@ -208,14 +209,19 @@
     }
   }
 
+  function openEnglishHub() {
+    $$('.screen').forEach((el) => el.classList.remove('active'));
+    $('#screen-english-hub')?.classList.add('active');
+    window.KakaStarFx?.hideRanger?.();
+  }
+
   function reframePhonicsAsEnglish() {
     const topics = $('#screen-phonics-topics');
-    const title = topics?.querySelector('.game-header h1');
+    const title = $('#english-topic-screen-title');
     const kicker = topics?.querySelector('.phonics-mission-kicker');
-    const lead = topics?.querySelector('.section-lead');
-    if (title) title.textContent = 'SPACE RANGER ENGLISH';
+    if (title) title.textContent = pActiveEnglishTrack === 'phonics' ? '字母音・拼讀' : '主題詞語';
     if (kicker) kicker.textContent = 'WORD MISSION';
-    if (lead) lead.textContent = '揀一個英文主題，先認全字，再聽音砌字！';
+    if (kicker && pActiveEnglishTrack === 'phonics') kicker.textContent = 'SOUND MISSION';
     $$('.phonics-screen').forEach((screen) => {
       const label = screen.getAttribute('aria-label');
       if (label) screen.setAttribute('aria-label', label.replace('SPACE RANGER PHONICS', 'SPACE RANGER ENGLISH'));
@@ -525,22 +531,30 @@
   }
 
   function bindPhonicsHome() {
-    const btn = $('#btn-start-phonics');
+    const btn = $('#btn-start-english');
     if (btn) {
       btn.onclick = (ev) => {
         if (ev) ev.preventDefault();
-        openPhonicsTopics();
+        openEnglishHub();
       };
     }
+    $('#btn-back-english-home')?.addEventListener('click', goHome);
+    $('#btn-english-words')?.addEventListener('click', () => openPhonicsTopics('sight'));
+    $('#btn-english-phonics')?.addEventListener('click', () => openPhonicsTopics('phonics'));
+    $('#btn-english-story')?.addEventListener('click', () => window.KakaStoryDemo?.open?.());
   }
 
   function bindPhonicsTopics() {
     const back = $('#btn-back-phonics-topics');
-    if (back) back.onclick = () => goHome();
+    if (back) back.onclick = () => openEnglishHub();
   }
 
-  function openPhonicsTopics() {
+  function openPhonicsTopics(track = pActiveEnglishTrack) {
+    pActiveEnglishTrack = track === 'phonics' ? 'phonics' : 'sight';
     renderPhonicsTopics();
+    const screen = $('#screen-phonics-topics');
+    if (screen) screen.dataset.englishTrack = pActiveEnglishTrack;
+    reframePhonicsAsEnglish();
     showPScreen('topics');
   }
 
@@ -1822,4 +1836,5 @@
   }
 
   document.addEventListener('DOMContentLoaded', init);
+  window.KakaPhonics = { openEnglishHub, openWordTopics: () => openPhonicsTopics('sight'), openPhonicsTopics: () => openPhonicsTopics('phonics') };
 })();
