@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KAKA 普通話・拼音小隊</title>
+  <link rel="stylesheet" href="css/pth-demo.css?v=ad8974c">
+  <link rel="stylesheet" href="css/pth-answer-contrast.css?v=ad8974c">
+</head>
+<body data-tab="learn">
+  <main class="app-shell">
+    <header class="topbar">
+      <a href="index.html" class="back">← 主頁</a>
+      <div class="title"><p class="eyebrow">KAKA 普通話任務</p><h1>拼音小隊</h1></div>
+      <label class="profile-label">玩家 <select id="profileSelect"><option value="guest">Guest 訪客</option><option value="kaka">卡卡</option><option value="heihei">禧禧</option></select></label>
+      <div class="badge" id="progressBadge">0/10 ⭐</div>
+    </header>
+    <p id="storageNotice" role="status" hidden>此瀏覽器無法儲存進度；今次只作臨時練習。</p>
+    <nav class="tabs" aria-label="課程步驟"><button class="tab active" data-tab="learn">先學一學</button><button class="tab" data-tab="quiz">測試 <span id="quizTabCount">0/10</span></button><button class="tab" data-tab="stars">星星記錄</button></nav>
+    <p id="wordAudioStatus" class="audio-status" role="status" aria-live="polite" hidden></p>
+    <section id="learn" class="panel">
+      <div class="section-heading"><div><span class="kicker">學一學 → 挑戰 10 題 → 收集 10 粒星</span><h2>嘴形、聲音、字形一齊記</h2></div><button class="primary" id="startQuiz">開始測試 →</button></div>
+      <nav id="groupNav" class="group-nav" aria-label="拼音小隊"></nav>
+      <p class="source-note">🔊 例詞：固定普通話合成錄音（婷婷）。影片：學校教材原聲。例詞為延伸練習，並非書本原文。y／w 依教材編組練習。</p>
+      <div id="lessonGrid" class="lesson-grid"></div>
+      <noscript>請啟用 JavaScript 以使用普通話學習及遊戲。</noscript>
+    </section>
+    <section id="quiz" class="panel" hidden>
+      <div class="quiz-head"><div><span class="kicker">第 <b id="questionNo">1</b> / 10 題</span><h2 id="questionPrompt">聽詞語，選字母。</h2></div><div class="mini-stars" id="miniStars" aria-label="今輪星星"></div></div>
+      <div class="quiz-card"><div id="quizMedia" class="quiz-media"></div><div id="options" class="options"></div><p id="feedback" class="feedback" aria-live="polite"></p></div>
+      <button class="primary" id="submitAnswer" disabled>提交答案</button>
+    </section>
+    <section id="stars" class="panel" hidden>
+      <div class="section-heading"><div><span class="kicker">按玩家分開・儲存於此裝置</span><h2>普通話星星記錄</h2></div><span class="badge" id="starsTotal">累積 0 粒星</span></div>
+      <div class="star-track" id="starTrack"></div>
+      <div id="completeMessage" class="complete" hidden><strong>任務完成！</strong><span id="completeText"></span></div>
+      <p id="rewardNote"></p><ul id="courseRecords"></ul>
+      <button class="secondary" id="resetProgress">重新練習本課（保留已領星記錄）</button>
+    </section>
+  </main>
+  <audio id="sharedAudio" preload="none"></audio>
+  <script src="js/storage.js?v=ad8974c"></script>
+  <script type="module" src="js/pth-demo.js?v=ad8974c"></script>
+</body></html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101c49">
+  <title>卡卡和禧禧一齊玩｜故事閱讀與詞語遊戲</title>
+  <link rel="stylesheet" href="css/family-storybook.css">
+</head>
+<body>
+  <main class="storybook-shell">
+    <header class="topbar">
+      <a class="back-link" href="index.html#screen-topics">← 中文</a>
+      <div class="brand"><span>故事閱讀・詞語遊戲</span><h1>卡卡和禧禧一齊玩</h1></div>
+      <div class="star-total" aria-live="polite">⭐ <strong id="star-total">0</strong> / <span id="story-total">11</span></div>
+    </header>
+    <section id="library" class="view" aria-labelledby="library-heading">
+      <div class="intro">
+        <p class="eyebrow">聽故事・讀句子・玩生字</p>
+        <h2 id="library-heading">今天想和他們去哪裏？</h2>
+        <p>每個故事有 6 至 8 頁；每頁讀一句故事，再聽一位角色說話，最後把兩個重點詞放回句子。</p>
+      </div>
+      <div id="story-grid" class="story-grid"></div>
+      <section class="cast-section" hidden aria-hidden="true">
+        <div class="section-heading"><div><p class="eyebrow">人物設定</p><h2>故事裏的六位主角</h2></div><span>站在同一地面時，按真實身高比例呈現</span></div>
+        <img class="height-lineup" src="assets/family-stories/characters/family-height-lineup.webp" alt="六位角色按身高比例排列">
+        <div id="cast-grid" class="cast-grid"></div>
+      </section>
+    </section>
+    <section id="reader" class="view hidden" aria-labelledby="story-title">
+      <div class="reader-head">
+        <button id="back-library" class="back-link" type="button">← 故事書目</button>
+        <div><p id="story-place" class="eyebrow"></p><h2 id="story-title"></h2></div>
+        <div id="page-count" class="page-count">第 1 / 6 頁</div>
+      </div>
+      <div class="progress-track"><span id="page-progress"></span></div>
+      <section class="voice-settings" aria-label="普通話語音設定">
+        <label for="mandarin-voice">普通話聲線</label>
+        <select id="mandarin-voice" aria-describedby="voice-status"><option value="">正在尋找普通話聲線…</option></select>
+        <button id="test-voice" class="secondary-button" type="button">🔊 試聽</button>
+        <span id="voice-status" role="status" aria-live="polite">只會使用明確標示為普通話的聲線。</span>
+      </section>
+      <section class="lesson-spread" aria-label="故事頁和詞語任務">
+        <article class="book-page">
+          <p class="panel-label">故事閱讀</p>
+          <figure class="scene-frame"><img id="scene-image" alt="故事插圖"><figcaption id="scene-caption"></figcaption></figure>
+          <div class="sentence-row"><p id="page-reading" class="page-reading"></p><button id="speak-sentence" class="speak-button" type="button">🔊 聽本頁</button></div>
+          <p id="audio-feedback" class="audio-feedback" aria-live="polite"></p>
+        </article>
+        <section id="activity" class="activity" aria-labelledby="activity-heading">
+          <p class="panel-label">本頁詞語任務</p>
+          <p id="task-instruction" class="task-instruction">先聽左邊的句子，再把兩個重點詞放回句子。</p>
+          <h3 id="activity-heading">聽句子，填回詞語</h3>
+          <p id="task-sentence" class="task-sentence" aria-label="填詞句子"></p>
+          <button id="speak-task-sentence" class="speak-button task-sentence-speaker" type="button" disabled>🔊 聽完整句子</button>
+          <div class="word-bank-wrap"><h4>詞語池</h4><div id="word-bank" class="word-bank" aria-label="可選詞語"></div></div>
+          <div class="task-actions"><button id="reset-page" class="secondary-button" type="button">重新選詞</button><button id="submit-page" class="primary-button" type="button">提交本頁</button></div>
+          <p id="task-feedback" class="task-feedback" role="status" aria-live="polite"></p>
+          <div id="answer-celebration" class="answer-celebration hidden" aria-hidden="true">
+            <img src="assets/kaka-ranger-celebrate.png" alt="">
+            <svg viewBox="0 0 100 100" focusable="false"><path d="M50 5 L61 38 L96 38 L68 59 L79 93 L50 72 L21 93 L32 59 L4 38 L39 38 Z"></path></svg>
+          </div>
+          <button id="guardian-unlock" class="guardian-unlock hidden" type="button">由家長朗讀，繼續作答</button>
+        </section>
+      </section>
+      <nav class="reader-controls" aria-label="故事頁導航"><button id="prev-page" class="secondary-button" type="button">上一頁</button><button id="next-page" class="primary-button" type="button" disabled>下一頁 →</button></nav>
+      <section id="completion" class="completion hidden" aria-live="polite"><div class="completion-star">⭐</div><h3>故事完成！</h3><p id="completion-summary"></p><button id="next-story" class="primary-button" type="button">返回故事書目</button></section>
+    </section>
+    <footer><p>故事為原創內容；「讀本詞語」以紅輯認字卡作詞彙參考，場景延伸詞另行標示。普通話只使用明確標示的普通話聲線；如裝置沒有該聲線，可由家長朗讀。</p></footer>
+  </main>
+  <script src="data/family-stories/manifest.js?v=ad8974c"></script>
+  <script src="js/family-storybook.js?v=ad8974c"></script>
+</body>
+</html>
