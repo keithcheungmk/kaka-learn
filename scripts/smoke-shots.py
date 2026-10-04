@@ -217,24 +217,36 @@ def walk(pg, url, shots: Path | None, tag: str):
         pg.wait_for_timeout(800)
         probe(step)
         if entry == "#btn-start-math":
-            # 水星數物件：先看完三張示範 → 開始數數 → 確認選項 → 返銀河
-            pg.click('[data-planet-id="number-relations"]')
-            pg.wait_for_timeout(500)
-            probe("數理・水星數數先學")
-            for _ in range(3):
-                if pg.is_visible("#btn-math-relations-start-mission"):
-                    break
-                pg.click("#btn-math-relations-learn-next")
-                pg.wait_for_timeout(100)
-            pg.wait_for_selector("#btn-math-relations-start-mission", state="visible")
-            pg.click("#btn-math-relations-start-mission")
-            pg.wait_for_selector("#math-relations-distance-choices button", state="visible")
-            pg.wait_for_timeout(500)
-            probe("數理・水星數一數")
+            # 數學已由星球流程改成遊戲樂園：逐條進入四個主路線，
+            # 檢查實際遊戲畫面喺家庭裝置上無捲動／重疊，再返樂園。
+            pg.click("#screen-math-galaxy.active .math-route-numbers")
+            pg.wait_for_selector("#screen-math-relations-play.active #math-relations-distance-choices button", state="visible")
+            pg.wait_for_timeout(400)
+            probe("數學・數字探險")
             pg.click("#btn-back-math-relations-play")
-            pg.wait_for_timeout(300)
-            pg.click("#btn-back-math-relations-learn")
-            pg.wait_for_timeout(300)
+
+            pg.click("#screen-math-galaxy.active .math-route-addition")
+            pg.wait_for_selector("#screen-math-earth-addition-select.active .addition-level-card:not(.is-locked)", state="visible")
+            probe("數學・加法關卡")
+            pg.click("#screen-math-earth-addition-select.active .addition-level-card:not(.is-locked)")
+            pg.wait_for_selector("#screen-math-earth-addition-play.active #addition-slot")
+            probe("數學・加法果園")
+            pg.click("#btn-back-math-addition-play")
+            pg.click("#btn-back-math-addition-select")
+
+            pg.click("#screen-math-galaxy.active .math-route-subtraction")
+            pg.wait_for_selector("#screen-math-moon-subtraction-select.active .subtraction-level-card:not(.is-locked)", state="visible")
+            probe("數學・減法關卡")
+            pg.click("#screen-math-moon-subtraction-select.active .subtraction-level-card:not(.is-locked)")
+            pg.wait_for_selector("#screen-math-moon-subtraction-play.active #subtraction-slot")
+            probe("數學・減法籃球場")
+            pg.click("#btn-back-math-subtraction-play")
+            pg.click("#btn-back-math-subtraction-select")
+
+            pg.click("#screen-math-galaxy.active .math-route-clock")
+            pg.wait_for_selector("#screen-math-venus-learn.active #math-venus-learn-face")
+            probe("數學・時鐘遊樂屋")
+            pg.click("#btn-back-math-venus-learn")
         if entry == "#btn-start-english":
             pg.wait_for_selector("#screen-english-hub.active #btn-english-story")
             probe("英文學習入口")
