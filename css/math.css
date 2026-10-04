@@ -2089,6 +2089,38 @@
   html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-card { min-height: min(46vh, 340px); }
   html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
+  /* 關卡選擇頁仲有下方方法卡；橫向 iPad 要一屏睇晒兩層內容。 */
+  html.math-canvas-mode #screen-math-earth-addition-select .addition-level-menu {
+    gap: 12px;
+    margin-top: 4px;
+    padding: 4px 12px 8px;
+  }
+  html.math-canvas-mode #screen-math-earth-addition-select .addition-level-card,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-card {
+    min-height: min(28vh, 230px);
+    padding-block: 12px;
+  }
+  html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-grid {
+    gap: 12px;
+    padding: 8px 12px;
+  }
+  html.math-canvas-mode #screen-math-earth-addition-select .math-strategy-route,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .math-strategy-route {
+    margin-top: 6px;
+    padding: 10px 14px;
+  }
+  html.math-canvas-mode #screen-math-earth-addition-select .math-strategy-route > p,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .math-strategy-route > p {
+    margin-bottom: 8px;
+  }
+  html.math-canvas-mode #screen-math-moon-subtraction-play .subtraction-stage {
+    gap: 6px;
+  }
+  html.math-canvas-mode #screen-math-moon-subtraction-play .subtraction-slot-wrap {
+    min-height: max(160px, 22vh);
+    padding-block: 14px;
+  }
+
   /* 數數／形狀／規律：大圖置中，選項沿底部橫向伸展。 */
   html.math-canvas-mode #screen-math-count.math-screen.active,
   html.math-canvas-mode #screen-math-count .math-count-field--quiz {
