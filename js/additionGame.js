@@ -194,10 +194,10 @@
     const spoken = `${mission.a}${measureName}加${mission.b}${measureName}係${mission.targetNumber}${measureName}。${praise}`;
     const advance = () => {
       $('#addition-slot')?.classList.remove('is-merging');
-      if (!isMissionDone(mission.id)) { storage()?.completeAdditionMission?.(mission.id); deps?.tryEarnStar?.(); }
+      if (!isMissionDone(mission.id)) storage()?.completeAdditionMission?.(mission.id);
       updateStarsDisplay();
       if (currentMissionIndex < level.missions.length - 1) { busy = false; currentMissionIndex += 1; startMission(currentLevelIndex, currentMissionIndex); }
-      else { storage()?.completeAdditionLevel?.(level.level); if (level.level === 1) storage()?.unlockAdditionLevel?.(2); if (!deps?.isPlanetLit?.(PLANET_ID)) deps?.lightPlanet?.(PLANET_ID); busy = false; showReward(level); }
+      else { storage()?.completeAdditionLevel?.(level.level); if (level.level === 1) storage()?.unlockAdditionLevel?.(2); deps?.tryEarnStar?.(); busy = false; showReward(level); }
     };
     deps?.speech?.playCorrectCue?.({ muted: deps.isMuted?.() });
     if (deps?.speech?.speakThen) deps.speech.speakThen(spoken, { muted: deps.isMuted?.(), rate: 0.86, pitch: 1.06, delayMs: 120 }, advance);
@@ -229,7 +229,7 @@
     updateStarsDisplay(); deps.showMathScreen('additionSelect');
   }
 
-  function openEarthAddition() { deps.updateState({ currentPlanetId: PLANET_ID }); renderLevelSelect(); }
+  function openEarthAddition() { renderLevelSelect(); }
   function init(options) { deps = options; levels = (window.KakaAdditionData?.additionLevels || []).map((level) => ({ ...level, missions: shuffleMissions(level.missions) })); $('#btn-back-math-addition-select')?.addEventListener('click', () => deps.openGalaxy()); $('#btn-back-math-addition-play')?.addEventListener('click', () => renderLevelSelect()); $('#btn-addition-answer')?.addEventListener('click', () => { const mission = levels[currentLevelIndex]?.missions[currentMissionIndex]; if (mission) answer(mission); }); return levels.length > 0; }
   window.KakaAdditionGame = { init, openEarthAddition, renderLevelSelect, startMission };
 })();

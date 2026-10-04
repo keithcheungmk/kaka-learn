@@ -1,4 +1,4 @@
-/** 水星・逐粒數物件，再揀數字；不使用數線或拖放操作。 */
+/** 數字探險・以生活物件五個一組，數到 20 後揀數字。 */
 (function () {
   let deps = null;
   let learnIndex = 0;
@@ -33,7 +33,17 @@
     root.setAttribute('role', 'group');
     root.setAttribute('aria-label', `${count}${object.counter}${object.name}`);
     root.replaceChildren();
+    let group = null;
     for (let i = 0; i < count; i += 1) {
+      if (count > 5 && i % 5 === 0) {
+        group = document.createElement('div');
+        group.className = 'math-counting-five-group';
+        const groupLabel = document.createElement('span');
+        groupLabel.className = 'math-counting-five-label';
+        groupLabel.textContent = `第 ${Math.floor(i / 5) + 1} 組・5個`;
+        group.append(groupLabel);
+        root.append(group);
+      }
       const item = document.createElement('span');
       item.className = 'math-counting-object';
       item.setAttribute('aria-label', `${i + 1}${object.counter}${object.name}`);
@@ -49,7 +59,7 @@
         number.textContent = String(i + 1);
         item.append(number);
       }
-      root.append(item);
+      (group || root).append(item);
     }
   }
 
@@ -59,7 +69,7 @@
     const progress = $('math-relations-learn-progress');
     const prompt = $('math-relations-learn-prompt');
     const feedback = $('math-relations-learn-feedback');
-    if (title) title.textContent = `水星・${step.title}`;
+    if (title) title.textContent = `數字探險・${step.title}`;
     if (progress) progress.textContent = `${learnIndex + 1}/${data().LEARN_STEPS.length}`;
     if (prompt) prompt.textContent = step.prompt;
     if (feedback) feedback.textContent = '';
@@ -76,7 +86,6 @@
   function openLearn() {
     generation += 1;
     learnIndex = 0;
-    deps?.updateState?.({ currentPlanetId: data().PLANET_ID });
     renderLearn(true);
     deps.showMathScreen('relationsLearn');
   }
@@ -89,7 +98,6 @@
     missionIndex = 0;
     wrongAttempts = 0;
     busy = false;
-    deps?.updateState?.({ currentPlanetId: data().PLANET_ID });
     deps.showMathScreen('relationsPlay');
     renderQuestion(true);
   }
@@ -110,7 +118,7 @@
     const explain = $('math-relations-explain');
     const next = $('btn-math-relations-explain-next');
     const demo = $('btn-math-relations-explain-demo');
-    if (title) title.textContent = '水星・數一數';
+    if (title) title.textContent = '數字探險・數一數';
     if (progress) progress.textContent = `${missionIndex + 1}/${mission.length}`;
     if (prompt) prompt.textContent = question.prompt;
     if (feedback) feedback.textContent = '';
@@ -168,8 +176,13 @@
       wrongAttempts += 1;
       recordAttempt(question, false);
       button.classList.add('is-wrong');
-      if (feedback) feedback.textContent = '再數一次。逐粒由一開始，慢慢數就得。';
+      const groups = Array.from({ length: Math.floor(question.count / 5) }, (_, i) => (i + 1) * 5);
+      const remainder = question.count % 5;
+      const guide = `${groups.join('、')}${remainder ? `，再加${remainder}` : ''}`;
+      renderCountSet($('math-relations-line'), question.count, question.object, { numbered: true });
+      if (feedback) feedback.textContent = `一齊五個一組數：${guide}。答案係 ${question.answer}。`;
       deps?.speech?.playTryAgainCue?.({ muted: deps.isMuted?.() });
+      speak(`唔緊要，我哋五個一組數：${guide}。總共有${question.answer}${question.object.counter}${question.object.name}。`);
       setTimeout(() => {
         button.classList.remove('is-wrong');
         busy = false;
@@ -182,11 +195,7 @@
     // correct selection as another failed first attempt in mastery history.
     if (wrongAttempts === 0) recordAttempt(question, true);
     button.classList.add('is-correct');
-    const { gained } = deps?.tryEarnStar?.() || {};
-    if (gained) {
-      deps?.speech?.playStarCue?.({ muted: deps.isMuted?.() });
-      deps?.playMathStarReward?.();
-    } else deps?.speech?.playCorrectCue?.({ muted: deps.isMuted?.() });
+    deps?.speech?.playCorrectCue?.({ muted: deps.isMuted?.() });
 
     if (feedback) feedback.textContent = '答啱喇！';
     const explain = $('math-relations-explain');
@@ -203,7 +212,7 @@
   function completeMission() {
     const state = deps?.loadState?.() || {};
     const progress = state.mercuryCountProgress || {};
-    deps?.lightPlanet?.(data().PLANET_ID);
+    deps?.tryEarnStar?.();
     deps?.updateState?.({
       mercuryCountProgress: {
         completedRounds: (progress.completedRounds || 0) + 1,
@@ -211,7 +220,7 @@
         questionTypeCounts: { ...(progress.questionTypeCounts || {}), 'count-objects': mission.length },
       },
     });
-    deps?.showMathRoundReward?.('水星數一數完成！逐粒數清楚，做得好！', () => openMission());
+    deps?.showMathRoundReward?.('數字探險十題完成！五個一組數得好清楚，攞到一粒星星！', () => openMission());
   }
 
   function advance() {
@@ -240,7 +249,7 @@
     });
     $('btn-math-relations-start-mission')?.addEventListener('click', openMission);
     $('btn-back-math-relations-learn')?.addEventListener('click', () => deps.openGalaxy?.());
-    $('btn-back-math-relations-play')?.addEventListener('click', openLearn);
+    $('btn-back-math-relations-play')?.addEventListener('click', () => deps.openGalaxy?.());
     $('btn-math-relations-speak')?.addEventListener('click', () => {
       const question = mission[missionIndex];
       if (question) speak(question.speak);

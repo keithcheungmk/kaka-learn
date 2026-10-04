@@ -100,7 +100,7 @@
         : [{ id: 'left', label: '左杯水較多' }, { id: 'same', label: '一樣多' }, { id: 'right', label: '右杯水較多' }];
     return { kind: 'measure', attribute, left, right, answer, choices, prompt: attribute === '長短' ? '兩條積木尺排齊起點，哪條比較長？' : attribute === '輕重' ? '看看天秤上的砝碼，哪邊比較重？' : '看量杯的水位，哪杯水比較多？', explain };
   }
-  function makeMission(activityId, { random = Math.random, length = 5 } = {}) {
+  function makeMission(activityId, { random = Math.random, length = 10 } = {}) {
     const activity = ACTIVITIES.find((item) => item.id === activityId);
     if (!activity) throw new RangeError(`Unknown life skill activity: ${activityId}`);
     return Array.from({ length }, (_, round) => {

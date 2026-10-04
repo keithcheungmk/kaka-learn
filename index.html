@@ -82,8 +82,11 @@
         <div class="btn-row hero-cta-row">
           <button type="button" class="btn" id="btn-start-topics" aria-label="太空戰士認字">太空戰士認字</button>
           <a class="btn btn-secondary" href="./pth-demo.html?v=20260914-pth-word-audio" aria-label="普通話拼音">普通話拼音</a>
-          <button type="button" class="btn btn-secondary" id="btn-start-english" aria-label="英文學習・English Learning">英文學習・English Learning</button>
-          <button type="button" class="btn btn-accent" id="btn-start-math">太空戰士數理</button>
+          <div class="english-home-group" aria-label="Space Ranger English">
+            <button type="button" class="btn btn-secondary" id="btn-start-phonics" aria-label="SPACE RANGER ENGLISH">SPACE RANGER ENGLISH</button>
+            <button type="button" class="btn btn-story" id="btn-start-story-demo" aria-label="英文故事書 Little Fox 系列">英文故事書・Little Fox 系列</button>
+          </div>
+          <button type="button" class="btn btn-accent" id="btn-start-math">數學遊樂園</button>
           <a
             class="btn btn-friend home-friend-link"
             href="https://yiu0527.github.io/HeiHeiClass/index.html"
@@ -153,7 +156,7 @@
         <div class="topic-grid progress-topic-grid" id="progress-topic-grid"></div>
       </section>
       <section class="progress-block" id="progress-math-block">
-        <h2>數理星球</h2>
+        <h2>數學遊樂園</h2>
         <p class="section-lead" id="progress-math-summary"></p>
         <ul class="progress-need" id="progress-math-skills"></ul>
         <div class="progress-math-list" id="progress-math-list"></div>
@@ -597,24 +600,28 @@
       <p class="feedback" id="story-play-feedback" aria-live="polite"></p>
     </section>
 
-    <!-- 月球・減法拿走 -->
-    <section id="screen-math-moon-subtraction-select" class="screen math-screen subtraction-screen" aria-label="月球・揀減法任務">
+    <!-- 減法路線：關卡選擇 -->
+    <section id="screen-math-moon-subtraction-select" class="screen math-screen subtraction-screen" aria-label="減法路線關卡">
       <div class="game-header earth-game-header">
         <div class="earth-nav">
-          <button type="button" class="btn btn-ghost" id="btn-back-math-subtraction-select">← 銀河</button>
-          <span class="earth-location"><img src="./assets/math/planets/moon.png" alt="" width="48" height="48" decoding="async" />月球</span>
+          <button type="button" class="btn btn-ghost" id="btn-back-math-subtraction-select">← 遊戲樂園</button>
         </div>
-        <h1>月球・減法拿走</h1>
+        <h1>減法籃球場</h1>
         <div class="star-panel" style="min-height:56px;padding:8px 12px"><span class="star-icon">★</span><span class="star-meta"><strong id="subtraction-select-stars">0/10</strong></span></div>
       </div>
-      <p class="section-lead">將物件拿走，再數吓剩低幾多</p>
+      <p class="section-lead">先玩減法拿走，再挑戰十幾減個位數。</p>
       <div class="subtraction-level-grid" id="subtraction-level-grid"></div>
+      <section class="math-strategy-route" aria-labelledby="math-subtraction-methods-title">
+        <h2 id="math-subtraction-methods-title">水果格仔・減法方法挑戰</h2>
+        <p>用水果格一步一步試三種方法。</p>
+        <div class="math-strategy-method-grid" id="math-strategy-method-grid-subtraction"></div>
+      </section>
     </section>
 
-    <section id="screen-math-moon-subtraction-play" class="screen math-screen subtraction-screen" aria-label="月球・減法拿走任務">
+    <section id="screen-math-moon-subtraction-play" class="screen math-screen subtraction-screen" aria-label="減法籃球場拿走任務">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-subtraction-play">← 月球任務</button>
-        <h1 id="subtraction-play-title">Level 1・減法</h1>
+        <button type="button" class="btn btn-ghost" id="btn-back-math-subtraction-play">← 減法籃球場</button>
+        <h1 id="subtraction-play-title">減法關卡</h1>
         <div class="star-panel" style="min-height:56px;padding:8px 12px"><span class="star-icon">★</span><span class="star-meta"><strong id="subtraction-play-stars">0/10</strong></span></div>
       </div>
       <p class="subtraction-mission-progress" id="subtraction-mission-progress">今輪第 1 / 10 題</p>
@@ -643,14 +650,13 @@
       </div>
     </section>
 
-    <!-- 水星・數物件先學 -->
-    <section id="screen-math-relations-learn" class="screen math-screen" aria-label="水星・數物件先學">
+    <!-- 數字路線・先看示範 -->
+    <section id="screen-math-relations-learn" class="screen math-screen" aria-label="數字探險・先看示範">
       <div class="game-header earth-game-header">
         <div class="earth-nav">
-          <button type="button" class="btn btn-ghost" id="btn-back-math-relations-learn">← 銀河</button>
-          <span class="earth-location"><img src="./assets/math/planets/mercury.png" alt="" width="48" height="48" decoding="async" />水星</span>
+          <button type="button" class="btn btn-ghost" id="btn-back-math-relations-learn">← 遊戲樂園</button>
         </div>
-        <h1 id="math-relations-learn-title">水星・先學</h1>
+        <h1 id="math-relations-learn-title">數字探險・先看示範</h1>
         <div class="progress-pill" aria-label="學習進度">
           <strong id="math-relations-learn-progress">1/5</strong>
         </div>
@@ -670,13 +676,13 @@
       </div>
     </section>
 
-    <!-- 水星・數一數 -->
-    <section id="screen-math-relations-play" class="screen math-screen" aria-label="水星・數一數">
+    <!-- 數字路線・數一數 -->
+    <section id="screen-math-relations-play" class="screen math-screen" aria-label="數字探險・數一數">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-relations-play">← 先學</button>
-        <h1 id="math-relations-play-title">水星・數一數</h1>
+        <button type="button" class="btn btn-ghost" id="btn-back-math-relations-play">← 遊戲樂園</button>
+        <h1 id="math-relations-play-title">數字探險・數一數</h1>
         <div class="progress-pill" aria-label="任務進度">
-          <strong id="math-relations-progress">1/5</strong>
+          <strong id="math-relations-progress">1/10</strong>
         </div>
       </div>
       <div class="prompt-box">
@@ -701,32 +707,35 @@
       </div>
     </section>
 
-    <!-- 地球・加法能量基地 -->
-    <section id="screen-math-earth-addition-select" class="screen math-screen addition-screen" aria-label="地球・揀能量基地">
+    <!-- 加法路線：關卡選擇 -->
+    <section id="screen-math-earth-addition-select" class="screen math-screen addition-screen" aria-label="加法路線關卡">
       <div class="game-header earth-game-header">
         <div class="earth-nav">
-          <button type="button" class="btn btn-ghost" id="btn-back-math-addition-select">← 銀河</button>
-          <span class="earth-location"><img src="./assets/math/planets/earth.png" alt="" width="48" height="48" decoding="async" />地球</span>
+          <button type="button" class="btn btn-ghost" id="btn-back-math-addition-select">← 遊戲樂園</button>
         </div>
-        <h1>揀玩法</h1>
+        <h1>加法果園</h1>
         <div class="star-panel" style="min-height:56px;padding:8px 12px">
           <span class="star-icon">★</span>
           <span class="star-meta"><strong id="addition-select-stars">0/10</strong></span>
         </div>
       </div>
-      <p class="section-lead addition-select-lead">揀一張卡開始玩</p>
+      <p class="section-lead addition-select-lead">由合併水果開始，再學識先湊成十。</p>
       <div class="addition-level-menu">
         <div class="addition-level-grid" id="addition-level-grid"></div>
       </div>
+      <section class="math-strategy-route" aria-labelledby="math-addition-methods-title">
+        <h2 id="math-addition-methods-title">水果格仔・加法方法挑戰</h2>
+        <p>將水果移入格仔，先湊滿十，再數剩低幾多。</p>
+        <div class="math-strategy-method-grid" id="math-strategy-method-grid-addition"></div>
+      </section>
     </section>
 
-    <section id="screen-math-earth-addition-play" class="screen math-screen addition-screen" aria-label="地球・能量方塊加法">
+    <section id="screen-math-earth-addition-play" class="screen math-screen addition-screen" aria-label="加法果園水果任務">
       <div class="game-header earth-game-header">
         <div class="earth-nav">
-          <button type="button" class="btn btn-ghost" id="btn-back-math-addition-play">← 揀玩法</button>
-          <span class="earth-location"><img src="./assets/math/planets/earth.png" alt="" width="48" height="48" decoding="async" />地球</span>
+          <button type="button" class="btn btn-ghost" id="btn-back-math-addition-play">← 加法果園</button>
         </div>
-        <h1 id="addition-play-title">5號能量基地</h1>
+        <h1 id="addition-play-title">加法果園</h1>
         <div class="star-panel" style="min-height:56px;padding:8px 12px">
           <span class="star-icon">★</span>
           <span class="star-meta"><strong id="addition-play-stars">0/10</strong></span>
@@ -759,14 +768,13 @@
       <div class="addition-merge-overlay" id="addition-merge-overlay" hidden></div>
     </section>
 
-    <!-- 金星・先學一學（睇鐘） -->
-    <section id="screen-math-venus-learn" class="screen math-screen" aria-label="金星・先學一學">
+    <!-- 時鐘路線・先看示範 -->
+    <section id="screen-math-venus-learn" class="screen math-screen" aria-label="時鐘遊樂屋・先看示範">
       <div class="game-header earth-game-header">
         <div class="earth-nav">
-          <button type="button" class="btn btn-ghost" id="btn-back-math-venus-learn">← 銀河</button>
-          <span class="earth-location"><img src="./assets/math/planets/venus.png" alt="" width="48" height="48" decoding="async" />金星</span>
+          <button type="button" class="btn btn-ghost" id="btn-back-math-venus-learn">← 遊戲樂園</button>
         </div>
-        <h1 id="math-venus-learn-title">金星・先學</h1>
+        <h1 id="math-venus-learn-title">時鐘遊樂屋・先看示範</h1>
         <div class="progress-pill" aria-label="學習進度">
           <strong id="math-venus-learn-progress">1/6</strong>
         </div>
@@ -789,11 +797,11 @@
       </div>
     </section>
 
-    <!-- 金星・揀玩法 -->
-    <section id="screen-math-venus-play" class="screen math-screen" aria-label="金星・去玩玩">
+    <!-- 時鐘路線・揀玩法 -->
+    <section id="screen-math-venus-play" class="screen math-screen" aria-label="時鐘遊樂屋・去玩玩">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-math-venus-play">← 再學</button>
-        <h1 id="math-venus-play-title">金星・去玩玩</h1>
+        <h1 id="math-venus-play-title">時鐘遊樂屋</h1>
         <div class="star-panel" style="min-height:56px;padding:8px 12px">
           <span class="star-icon">★</span>
           <span class="star-meta">
@@ -809,10 +817,10 @@
       </div>
     </section>
 
-    <!-- 金星・揀鐘 -->
-    <section id="screen-math-time" class="screen math-screen" aria-label="金星・揀鐘">
+    <!-- 時鐘路線・玩時鐘 -->
+    <section id="screen-math-time" class="screen math-screen" aria-label="時鐘遊樂屋">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-time">← 玩法</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-math-time">← 時鐘關卡</button>
         <h1 id="math-time-title">揀一揀鐘</h1>
         <div class="progress-pill" aria-label="答啱進度">
           <strong id="math-time-progress">0/5</strong>
@@ -837,20 +845,20 @@
       <p class="feedback" id="math-time-feedback" aria-live="polite"></p>
     </section>
 
-    <!-- KAKA RANGER 數理探險：主 landing／旅程總覽 -->
-    <section id="screen-math-galaxy" class="screen math-screen" aria-label="KAKA RANGER 數理探險・銀河旅程">
+    <!-- 數學遊樂園：四條主線＋生活挑戰 -->
+    <section id="screen-math-galaxy" class="screen math-screen math-playground-screen" aria-label="數學遊樂園">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-math-galaxy">← 主頁</button>
-        <h1>KAKA RANGER 數理銀河</h1>
-        <img class="math-galaxy-brand" src="./assets/kaka-ranger-logo.png" alt="" width="381" height="389" decoding="async" />
+        <h1>數學遊樂園</h1>
+        <div class="math-park-star-summary" id="math-park-star-summary" aria-live="polite">⭐ 今日星星 0/10</div>
       </div>
-      <p class="section-lead math-galaxy-lead"><span aria-hidden="true">🚀</span> 揀一個數學任務，出發探險！ <span aria-hidden="true">✨</span></p>
-      <div class="topic-grid math-galaxy-grid" id="math-galaxy-grid"></div>
+      <p class="section-lead math-galaxy-lead">揀一條路線，逐關玩數學遊戲！</p>
+      <div class="topic-grid math-galaxy-grid math-playground-grid" id="math-galaxy-grid"></div>
       <section class="math-extra-missions" aria-labelledby="math-extra-missions-title">
         <div class="math-extra-missions-heading">
-          <span class="math-extra-missions-kicker">日常數學・動手試</span>
-          <h2 id="math-extra-missions-title">生活數感任務</h2>
-          <p>每張卡都會話你知喺邊粒星球、今次要玩乜。</p>
+          <span class="math-extra-missions-kicker">遊樂園支線・動手玩</span>
+          <h2 id="math-extra-missions-title">生活挑戰</h2>
+          <p>數物件、認形狀、買水果、比長短，邊玩邊發現數學。</p>
         </div>
         <div class="math-extra-mission-grid" id="math-extra-mission-grid"></div>
       </section>
@@ -858,11 +866,11 @@
 
     <section id="screen-math-life-skill" class="screen math-screen math-life-skill-screen" aria-label="生活數學任務">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-math-life-skill">← 銀河任務</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-math-life-skill">← 遊戲樂園</button>
         <h1 id="math-life-skill-title">生活數學</h1>
-        <div class="progress-pill" aria-label="任務進度"><strong id="math-life-skill-progress">1/5</strong></div>
+        <div class="progress-pill" aria-label="任務進度"><strong id="math-life-skill-progress">1/10</strong></div>
       </div>
-      <p class="math-life-skill-planet" id="math-life-skill-planet">水星任務</p>
+      <p class="math-life-skill-planet" id="math-life-skill-planet">生活挑戰</p>
       <p class="math-life-skill-prompt" id="math-life-skill-prompt" aria-live="polite"></p>
       <div class="math-life-skill-board-wrap">
         <div class="math-life-skill-board-heading"><span aria-hidden="true">🪄</span> 一起動手做</div>
@@ -874,6 +882,52 @@
         <p class="feedback math-life-skill-feedback" id="math-life-skill-feedback" aria-live="polite"></p>
         <button type="button" class="btn math-life-skill-next" id="btn-math-life-skill-next" hidden>下一題 →</button>
       </aside>
+    </section>
+
+    <section id="screen-math-strategy" class="screen math-screen math-strategy-screen" aria-label="一年級計算方法練習">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-math-strategy">← 遊戲樂園</button>
+        <h1 id="math-strategy-title">計算方法</h1>
+        <div class="progress-pill" aria-label="練習進度"><strong id="math-strategy-progress">準備</strong></div>
+      </div>
+      <p class="math-strategy-method-label" id="math-strategy-method-label"></p>
+      <section class="math-strategy-intro-panel" id="math-strategy-intro-panel" aria-labelledby="math-strategy-intro-heading" hidden>
+        <div class="math-strategy-intro-copy">
+          <span class="math-strategy-eyebrow">先睇一個例子</span>
+          <h2 id="math-strategy-intro-heading">呢個方法點樣計？</h2>
+          <p id="math-strategy-intro"></p>
+        </div>
+        <div class="math-strategy-example">
+          <strong id="math-strategy-example-equation"></strong>
+          <ol id="math-strategy-example-steps"></ol>
+        </div>
+        <button type="button" class="btn math-strategy-primary" id="btn-math-strategy-start">明白，開始玩 →</button>
+      </section>
+      <section class="math-strategy-play-panel" id="math-strategy-play-panel" aria-label="水果格仔計算遊戲" hidden>
+        <div class="math-strategy-question-card">
+          <p id="math-strategy-question-count"></p>
+          <h2 id="math-strategy-prompt"></h2>
+          <div class="math-strategy-equation" id="math-strategy-equation"></div>
+          <p class="math-strategy-board-hint" id="math-strategy-board-hint"></p>
+          <div class="math-strategy-board" id="math-strategy-board" aria-label="水果數字格"></div>
+        </div>
+        <div class="math-strategy-answer-area">
+          <h3 id="math-strategy-action-title">跟住提示搬水果</h3>
+          <p class="math-strategy-action-copy" id="math-strategy-action-copy"></p>
+          <p class="math-strategy-feedback" id="math-strategy-feedback" aria-live="polite"></p>
+          <div class="math-strategy-move-count" id="math-strategy-move-count" aria-live="polite"></div>
+          <button type="button" class="btn math-strategy-primary" id="btn-math-strategy-next" hidden>下一題 →</button>
+        </div>
+      </section>
+      <section class="math-strategy-finish-panel" id="math-strategy-finish-panel" aria-label="練習完成" hidden>
+        <span class="math-strategy-finish-icon" aria-hidden="true">🎉</span>
+        <h2 id="math-strategy-finish-title"></h2>
+        <p id="math-strategy-finish-copy"></p>
+        <div class="math-strategy-finish-actions">
+          <button type="button" class="btn math-strategy-primary" id="btn-math-strategy-replay">再玩一輪</button>
+          <button type="button" class="btn btn-secondary" id="btn-math-strategy-finish-back">返遊戲樂園</button>
+        </div>
+      </section>
     </section>
   </div>
 
@@ -902,29 +956,7 @@
       <p id="math-round-finish-msg">今輪玩完喇！攞到一個獎勵！</p>
       <div class="btn-row">
         <button type="button" class="btn btn-secondary" id="btn-math-round-again">再玩一輪</button>
-        <button type="button" class="btn" id="btn-math-round-galaxy">返銀河</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 數理：星球飛過場 -->
-  <div id="math-warp" class="math-warp" hidden aria-live="polite">
-    <div class="math-warp-inner">
-      <div class="math-warp-planets">
-        <div class="math-warp-from">
-          <img id="math-warp-from-img" class="math-globe-img" src="" alt="" width="128" height="128" decoding="async" />
-          <span id="math-warp-from-name">水星</span>
-        </div>
-        <div class="math-warp-ship" aria-hidden="true">🚀</div>
-        <div class="math-warp-to">
-          <img id="math-warp-to-img" class="math-globe-img" src="" alt="" width="128" height="128" decoding="async" />
-          <span id="math-warp-to-name">金星</span>
-        </div>
-      </div>
-      <p class="math-warp-msg" id="math-warp-msg">點亮喇！飛去下一粒！</p>
-      <div class="btn-row math-warp-actions">
-        <button type="button" class="btn btn-ghost" id="btn-math-warp-stay">繼續玩呢粒</button>
-        <button type="button" class="btn" id="btn-math-warp-go">飛過去</button>
+        <button type="button" class="btn" id="btn-math-round-galaxy">返遊戲樂園</button>
       </div>
     </div>
   </div>
@@ -974,6 +1006,8 @@
   <script src="./js/subtractionGame.js?v=20260908a"></script>
   <script src="./js/math-life-skills-data.js?v=20261001-life-skills"></script>
   <script src="./js/math-life-skills-game.js?v=20261001-life-skills"></script>
+  <script src="./js/math-strategies-data.js?v=1"></script>
+  <script src="./js/math-strategies-game.js?v=1"></script>
   <script src="./js/math-app.js?v=20261001-life-skills"></script>
   <script src="./js/version-check.js?v=20260903a"></script>
 </body>

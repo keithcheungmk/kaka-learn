@@ -141,11 +141,11 @@
       deps?.speech?.playTryAgainCue?.({ muted: deps.isMuted?.() }); setTimeout(() => button.classList.remove('is-bad'), 420); return;
     }
     locked = true; document.querySelectorAll('#math-life-skill-choices button').forEach((item) => { item.disabled = true; });
-    button.classList.add('is-ok'); const reward = deps.tryEarnStar?.() || { gained: false };
-    recordAttempt(question, true, choice.id); if (reward.gained) deps?.playMathStarReward?.(); else deps?.speech?.playCorrectCue?.({ muted: deps.isMuted?.() });
+    button.classList.add('is-ok');
+    recordAttempt(question, true, choice.id); deps?.speech?.playCorrectCue?.({ muted: deps.isMuted?.() });
     announce(`答啱喇！${question.explain}`);
     const nextButton = $('btn-math-life-skill-next'); if (nextButton) nextButton.hidden = true;
-    speakThen(`答啱喇！${question.explain}${reward.gained ? '你好叻！' : ''}`, () => { if (nextButton) nextButton.hidden = false; });
+    speakThen(`答啱喇！${question.explain}你好叻！`, () => { if (nextButton) nextButton.hidden = false; });
   }
   function renderChoice(question, choice, choices) {
     const button = el('button', 'btn math-life-choice'); button.type = 'button'; button.dataset.choiceId = String(choice.id);
@@ -169,15 +169,15 @@
   }
   function start(activityId) {
     const found = data().ACTIVITIES.find((item) => item.id === activityId); if (!found) return;
-    generation += 1; activity = found; mission = data().makeMission(activityId); index = 0;
-    $('math-life-skill-title').textContent = found.title; $('math-life-skill-planet').textContent = `${found.planet}任務・${found.subtitle}`;
+    generation += 1; activity = found; mission = data().makeMission(activityId, { length: 10 }); index = 0;
+    $('math-life-skill-title').textContent = found.title; $('math-life-skill-planet').textContent = `生活挑戰・${found.subtitle}`;
     $('btn-back-math-life-skill').onclick = () => deps?.openGalaxy?.(); renderQuestion(); deps.showMathScreen('lifeSkill');
     speakThen(mission[0].prompt || found.title, () => {});
   }
   function next() {
     if (!locked) return;
     if (index + 1 < mission.length) { index += 1; renderQuestion(); speakThen(mission[index].prompt || activity.title, () => {}); return; }
-    const current = activity; deps.showMathRoundReward(`${current.planet}任務完成！你好叻呀！`, () => start(current.id));
+    const current = activity; deps.tryEarnStar?.(); deps.showMathRoundReward(`${current.title}十題完成！攞到一粒星星，你好叻呀！`, () => start(current.id));
   }
   function init(dependencies) {
     deps = dependencies; $('btn-math-life-skill-next')?.addEventListener('click', next);
@@ -185,9 +185,9 @@
     data().ACTIVITIES.forEach((item, index) => {
       const button = el('button', `math-extra-mission-card mission-${index + 1}`); button.type = 'button';
       const icon = ['🔎', '🧩', '🔺', '🛒', '📏'][index];
-      button.append(el('span', 'math-extra-mission-icon', icon), el('span', 'math-extra-mission-location', `${item.planet}任務`),
+      button.append(el('span', 'math-extra-mission-icon', icon), el('span', 'math-extra-mission-location', '生活挑戰'),
         el('strong', '', item.title), el('span', 'math-extra-mission-description', item.subtitle), el('span', 'math-extra-mission-arrow', '開始 →'));
-      button.setAttribute('aria-label', `${item.planet}：${item.title}。${item.subtitle}`);
+      button.setAttribute('aria-label', `生活挑戰：${item.title}。${item.subtitle}`);
       button.addEventListener('click', () => start(item.id)); grid.append(button);
     });
   }

@@ -1,12 +1,13 @@
-/** 水星・數一數題目資料。只做一個動作：逐粒數物件，再揀數字。 */
+/** 數字探險：生活物件數量 5–20，並以五個一組呈現。 */
 (function () {
   const PLANET_ID = 'number-relations'; // 保留舊水星進度鍵，避免重置家庭資料
   const OBJECTS = [
-    { emoji: '🍎', name: '蘋果', counter: '個' },
-    { emoji: '🐥', name: '小雞', counter: '隻' },
-    { emoji: '⭐', name: '星星', counter: '粒' },
+    { emoji: '🍓', name: '士多啤梨', counter: '粒' },
+    { emoji: '🫐', name: '藍莓', counter: '粒' },
+    { emoji: '🪙', name: '硬幣', counter: '個' },
+    { emoji: '🍊', name: '橙', counter: '個' },
   ];
-  const ZH = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十'];
+  const ZH = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十'];
 
   function shuffle(items, random = Math.random) {
     const result = [...items];
@@ -18,9 +19,9 @@
   }
 
   function stageForCompletedRounds(completedRounds = 0) {
-    if (completedRounds >= 3) return { max: 10, skillId: 'count.oneToOne.1to10' };
-    if (completedRounds >= 1) return { max: 5, skillId: 'count.oneToOne.1to5' };
-    return { max: 3, skillId: 'count.oneToOne.1to5' };
+    if (completedRounds >= 3) return { min: 5, max: 20, skillId: 'count.oneToOne.1to20' };
+    if (completedRounds >= 1) return { min: 5, max: 15, skillId: 'count.oneToOne.1to20' };
+    return { min: 5, max: 10, skillId: 'count.oneToOne.1to20' };
   }
 
   function completedRoundsFromState(state = {}) {
@@ -46,18 +47,18 @@
       object,
       max,
       answer: count,
-      skillId: max > 5 ? 'count.oneToOne.1to10' : 'count.oneToOne.1to5',
-      prompt: `數一數，有幾${object.counter}${object.name}？`,
-      speak: `請數一數，有幾${object.counter}${object.name}？`,
-      spokenCorrect: `有${ZH[count]}${object.counter}${object.name}。我哋由一開始逐${object.counter}數：${Array.from({ length: count }, (_, i) => ZH[i + 1]).join('、')}。一共有${ZH[count]}${object.counter}${object.name}。`,
+      skillId: 'count.oneToOne.1to20',
+      prompt: `數字探險：睇睇有幾多${object.counter}${object.name}？`,
+      speak: `我哋一齊數數，有幾多${object.counter}${object.name}？可以五個五個咁數。`,
+      spokenCorrect: `一共有${ZH[count]}${object.counter}${object.name}。我哋五個一組數：${Array.from({ length: Math.floor(count / 5) }, (_, i) => ZH[(i + 1) * 5]).join('、')}${count % 5 ? `，再加${ZH[count % 5]}` : ''}。答案係${ZH[count]}。`,
       choices: makeChoices(count, max, random),
     };
   }
 
-  function generateMission({ completedRounds = 0, random = Math.random, length = 5 } = {}) {
+  function generateMission({ completedRounds = 0, random = Math.random, length = 10 } = {}) {
     const stage = stageForCompletedRounds(completedRounds);
     return Array.from({ length }, (_, index) => {
-      const count = Math.floor(random() * stage.max) + 1;
+      const count = Math.floor(random() * (stage.max - stage.min + 1)) + stage.min;
       const object = OBJECTS[index % OBJECTS.length];
       return makeQuestion({ count, object, max: stage.max, random });
     });

@@ -44,6 +44,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 | 加減法操作流程統一、回答確認、拖曳防誤觸及桌面版面 | Math Lead（Chief 整合） | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | 先操作後回答；共享檔由 Chief 整合 |
 | 數學玩法縮至四星＋水星重做 | Math Lead（ChatGPT／Codex Chief 整合） | `index.html`, `js/math-*`, `css/math.css`, 數理測試、`scripts/check-invariants.py`, `docs/handover.md` | 2026-09-28 | Keith 指示只保留地球加法、月球減法、金星時鐘及全新水星數量玩法；其他星球、Number Bonds 從入口與流程下架。原 9/16 iPad 橫向工作納入此任務；未部署 |
 | 五項生活數感活動 | ChatGPT／Codex（Math；Chief review） | `index.html`, `css/math.css`, `js/math-app.js`, `js/math-life-skills-*`, `scripts/test-math-life-skills.mjs` | 2026-10-01 | 加入數量比較、數字拆合、形狀與規律、小小商店、生活度量；本機數學回歸及 invariants 通過。尚未在 iPad/iPhone 實機視覺驗收。 |
+| 數學遊樂園重整＋四種加減方法遊戲 | ChatGPT／Codex（Math；Chief review） | `index.html`, `css/math.css`, `js/math-app.js`, `js/math-strategies-*`, `js/math-life-skills-*`, `js/math-mercury-count-*`, 加減／時鐘遊戲、`js/app.js`, `docs/handover.md` | 2026-10-04 | 入口改成數字、加法、減法、時鐘四條主線＋生活挑戰，移除數學星球入口與飛行流程；湊十／破十／平十／想加算減改成五個一組水果格操作；數字題 5–20，主要路線十題一輪派一粒星，保留舊 progress storage key。尚未做 iPad/iPhone 實機視覺驗收、尚未執行測試／未提交／推送／部署。 |
 | 職業字詞 45 張卡卡／禧禧未來職業插圖 | ChatGPT／Codex | `js/words.js`, `css/styles.css`, `assets/careers/`, 職業插圖測試、`docs/handover.md` | 2026-09-29 | 由 Keith 指示按已同意方案落地；保留其餘主題原 Emoji；待完成 iPad 驗證及部署 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：

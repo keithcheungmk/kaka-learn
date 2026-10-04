@@ -2309,17 +2309,21 @@ function renderProgress() {
   const mathSkills = $('#progress-math-skills');
   const mathApi = window.KakaMathStorage;
   const mathMastery = window.KakaMathMastery;
-  const planets = window.KakaMathSkills?.MATH_PLANETS;
-  if (mathList && mathApi && Array.isArray(planets)) {
+  if (mathList && mathApi) {
     mathList.innerHTML = '';
-    planets.forEach((p) => {
+    const mathState = mathApi.loadState?.() || {};
+    const routes = [
+      { label: '數字探險', detail: `完成 ${mathState.mercuryCountProgress?.completedRounds || 0} 輪` },
+      { label: '加法果園', detail: `完成 ${mathState.additionProgress?.completedLevels?.length || 0} 關` },
+      { label: '減法籃球場', detail: `完成 ${mathState.subtractionProgress?.completedLevels?.length || 0} 關` },
+      { label: '時鐘遊樂屋', detail: '完成十題攞一粒星' },
+    ];
+    routes.forEach((route) => {
       const chip = document.createElement('span');
       chip.className = 'progress-math-chip';
-      const lit = mathApi.isPlanetLit(p.id);
-      chip.textContent = `${p.name} ${lit ? '已過' : '未過'}`;
+      chip.textContent = `${route.label}・${route.detail}`;
       mathList.appendChild(chip);
     });
-    const mathState = mathApi.loadState?.() || {};
     const summary = mathMastery?.summarizeMathProgress?.(mathState);
     if (mathSummary && summary) {
       const missionNote = summary.missions ? ` · 完成 ${summary.missions} 次任務` : '';
