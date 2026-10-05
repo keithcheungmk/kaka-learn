@@ -104,6 +104,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-06 · ChatGPT／Codex（英文學習入口設計）
+
+- 英文學習入口改成淺色遊樂場風格，以三張原創插畫說清故事閱讀、主題詞語及 Phonics 三條路線；新增中英文標題、簡短玩法說明及清楚入口提示，保留原有路由和獨立學習進度。
+- iPad 橫向三欄、iPad 直向圖文卡、手機單欄；修正 HTML 原始圖片尺寸撐大卡片造成橫向內容跑出畫面。圖片載入已加到家庭裝置 smoke。
+- 本機驗證：41 項 invariants、故事任務、Phonics flow、16 項 storage tests、`smoke-shots.py --no-shots`、三尺寸入口圖片／文字 focused check、靜態建置及 `git diff --check` 通過。CI／Pages 待本次 branch merge 後補記。
+- 改動檔案：`index.html`、`css/phonics.css`、`assets/english-worlds/*.webp`、`scripts/smoke-shots.py`、`docs/handover.md`。
+
 ### 2026-10-05 · ChatGPT／Codex（數學遊樂園重整與發布）
 
 - 數學入口改為數字探險、加法果園、減法籃球場及時鐘遊樂屋，另保留生活挑戰；移除數學星球入口／飛行流程。四種加減方法以水果格實物操作呈現，數字遊戲以五個一組數至 20。

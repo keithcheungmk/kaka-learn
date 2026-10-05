@@ -251,6 +251,10 @@ def walk(pg, url, shots: Path | None, tag: str):
             pg.click("#btn-back-math-venus-learn")
         if entry == "#btn-start-english":
             pg.wait_for_selector("#screen-english-hub.active #btn-english-story")
+            pg.wait_for_function("""() => {
+              const images = [...document.querySelectorAll('#screen-english-hub.active .english-hub-art')];
+              return images.length === 3 && images.every(image => image.complete && image.naturalWidth > 0);
+            }""")
             probe("英文學習入口")
             pg.click("#btn-english-words")
             pg.wait_for_selector('#screen-phonics-topics.active[data-english-track="sight"]')

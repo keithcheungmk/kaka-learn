@@ -352,29 +352,45 @@
 
     <!-- 英文學習：故事閱讀、主題詞語、字母音與拼讀 -->
     <section id="screen-english-hub" class="screen phonics-screen english-hub-screen" aria-label="英文學習・選擇學習方式">
-      <div class="game-header">
+      <div class="english-hub-topbar">
         <button type="button" class="btn btn-ghost" id="btn-back-english-home">← 主頁</button>
-        <h1>英文學習 <small>English Learning</small></h1>
+        <span class="english-hub-kicker">KAKA'S ENGLISH PLAYGROUND</span>
       </div>
-      <p class="section-lead">揀一種學習方式；每個入口只做一件主要任務。</p>
+      <header class="english-hub-hero">
+        <div class="english-hub-hero-copy">
+          <span class="english-hub-eyebrow">LEARN THROUGH PLAY</span>
+          <h1>英文學習 <small>English Learning</small></h1>
+          <p>讀故事、認詞語、玩拼讀；揀一個學習世界出發！</p>
+        </div>
+        <div class="english-hub-world-count" aria-label="三個學習世界">
+          <strong>03</strong>
+          <span>個學習世界</span>
+        </div>
+      </header>
       <div class="english-hub-grid">
-        <button type="button" class="english-hub-card english-hub-story" id="btn-english-story">
-          <span class="english-hub-icon" aria-hidden="true">📚</span>
-          <span class="english-hub-title">故事閱讀 <small>Story Reading</small></span>
-          <span class="english-hub-description">聽逐頁故事，讀句子，再找回句子中缺少的字。</span>
-          <span class="english-hub-action">選擇故事系列 →</span>
+        <button type="button" class="english-hub-card english-hub-story" id="btn-english-story" aria-label="故事閱讀 Story Reading：聽故事、讀句子、找故事詞語">
+          <img class="english-hub-art" src="assets/english-worlds/story-reading.webp" alt="" aria-hidden="true" width="1254" height="1254" fetchpriority="high">
+          <span class="english-hub-card-body">
+            <span class="english-hub-title">故事閱讀 <small>Story Reading</small></span>
+            <span class="english-hub-description">跟住繪本聽故事、讀句子，再找故事入面嘅詞語。</span>
+            <span class="english-hub-action">去揀故事 →</span>
+          </span>
         </button>
-        <button type="button" class="english-hub-card english-hub-words" id="btn-english-words">
-          <span class="english-hub-icon" aria-hidden="true">🖼️</span>
-          <span class="english-hub-title">主題詞語 <small>Topic Words</small></span>
-          <span class="english-hub-description">按主題認讀完整英文詞，聽音、看圖和配對。</span>
-          <span class="english-hub-action">選擇詞語主題 →</span>
+        <button type="button" class="english-hub-card english-hub-words" id="btn-english-words" aria-label="主題詞語 Topic Words：看圖、聽音、認讀完整英文詞">
+          <img class="english-hub-art" src="assets/english-worlds/topic-words.webp" alt="" aria-hidden="true" width="1254" height="1254" decoding="async">
+          <span class="english-hub-card-body">
+            <span class="english-hub-title">主題詞語 <small>Topic Words</small></span>
+            <span class="english-hub-description">看清楚圖像、聽英文讀音，認識一個完整詞語。</span>
+            <span class="english-hub-action">去揀詞語主題 →</span>
+          </span>
         </button>
-        <button type="button" class="english-hub-card english-hub-phonics" id="btn-english-phonics">
-          <span class="english-hub-icon" aria-hidden="true">🔤</span>
-          <span class="english-hub-title">字母音・拼讀 <small>Phonics</small></span>
-          <span class="english-hub-description">學字母和字母組合發音，再練習拼合單詞。</span>
-          <span class="english-hub-action">開始學字母音 →</span>
+        <button type="button" class="english-hub-card english-hub-phonics" id="btn-english-phonics" aria-label="字母音・拼讀 Phonics：聽字母音，把聲音拼成單字">
+          <img class="english-hub-art" src="assets/english-worlds/phonics.webp" alt="" aria-hidden="true" width="1254" height="1254" decoding="async">
+          <span class="english-hub-card-body">
+            <span class="english-hub-title">字母音・拼讀 <small>Phonics</small></span>
+            <span class="english-hub-description">聽字母發音，把聲音合起來讀成單字。</span>
+            <span class="english-hub-action">去玩拼讀 →</span>
+          </span>
         </button>
       </div>
     </section>
