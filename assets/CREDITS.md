@@ -10,6 +10,12 @@
 
 `chinese-space-bg.jpg` 為本 app 原創生成。主頁海報由產品擁有人提供，用於「太空戰士學院」主題。
 
+# 中文動物插畫 pilot
+
+`assets/animals/wild/{raccoon,honey-badger,black-bear,brown-bear,panda,fox}.webp` 為 KAKA Learn 專用 AI 生成透明底插畫，參考既有梅花鹿插畫的自然野生動物繪本風格。原始生成圖存於本機生成素材目錄；圖片只映射至普通中文動物詞語，其他主題保留原生 Emoji。
+
+`assets/openmoji/1F99D.svg`（浣熊）及 `assets/openmoji/1F9A1.svg`（蜜獾）取自 OpenMoji 17.0.0 色彩 SVG，依其 CC BY-SA 4.0 授權使用；https://openmoji.org/ 與 https://creativecommons.org/licenses/by-sa/4.0/ 。
+
 # 卡卡字母隊字母音
 
 `assets/phonemes/{a–z}.mp3` 目前由家庭錄音剪輯（一條 a–z 連續檔，按約 2 秒一格切開），
