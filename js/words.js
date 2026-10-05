@@ -1412,6 +1412,9 @@ const ANIMAL_ILLUSTRATIONS = {
   huli: 'assets/animals/wild/fox.webp',
   huanxiong: 'assets/animals/wild/raccoon.webp',
   mizhuan: 'assets/animals/wild/honey-badger.webp',
+  shizi: 'assets/animals/wild/lion.webp',
+  laohu: 'assets/animals/wild/tiger.webp',
+  daxiang: 'assets/animals/wild/elephant.webp',
 };
 
 // 連一連專用圖像校訂：只改善容易混淆的抽象詞，不更改其他學習遊戲的原裝 Emoji。

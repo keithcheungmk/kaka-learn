@@ -2,7 +2,7 @@
 
 ## 範圍
 
-第一輪只接入四個新增動物詞和兩款風格對照圖：浣熊、蜜獾、黑熊、棕熊（灰熊）、熊貓、狐狸。六張都是獨立透明底 WebP，供普通中文「連一連」配圖使用。其他動物仍沿用系統 emoji；英文、數學和其他中文玩法不受這批插畫映射影響。
+第一輪接入四個新增動物詞和兩款風格對照圖：浣熊、蜜獾、黑熊、棕熊（灰熊）、熊貓、狐狸。第二批加入動物園常見動物：獅子、老虎、大象。九張都是獨立透明底 WebP，供普通中文「連一連」配圖使用。其他動物仍沿用系統 emoji；英文、數學和其他中文玩法不受這批插畫映射影響。
 
 ## 共通視覺規格
 
@@ -22,13 +22,16 @@
 | 棕熊（灰熊） | `assets/animals/wild/brown-bear.webp` | 棕色毛、肩峰明顯、較長口鼻、肩背毛略有灰褐層次；這階段作一個詞語，不把「棕熊」和「灰熊」拆成兩個近似配對。美國國家公園管理局亦將 grizzly bear 歸在 brown bear 名稱範圍內：[Bear Identification](https://www.nps.gov/articles/bear-identification.htm)。 |
 | 熊貓 | `assets/animals/wild/panda.webp` | 黑白毛色和眼周黑斑清楚。 |
 | 狐狸 | `assets/animals/wild/fox.webp` | 尖耳、窄嘴、紅橙色毛和蓬鬆白尖尾巴清楚。 |
+| 獅子 | `assets/animals/wild/lion.webp` | 雄獅鬃毛完整、金棕色身體、尾端有毛簇。 |
+| 老虎 | `assets/animals/wild/tiger.webp` | 橙色毛和黑色直紋分布清楚，臉部有白色斑紋。 |
+| 大象 | `assets/animals/wild/elephant.webp` | 亞洲象較小的圓耳、長鼻和象牙容易辨認。 |
 
 生成時每款分開出圖，沿用共通規格並加入相應物種重點。原始 PNG 保存在生成素材目錄；網站只使用經視覺檢查及轉成 WebP 的成品。
 
 ## 詞彙與 fallback
 
-四個新增詞只加到「動物園」普通中文 topic。六個 pilot ID 經 `ANIMAL_ILLUSTRATIONS` 映射至專屬圖片；未映射的動物繼續用原生 emoji。六張圖都要通過格式鎖和 pilot 測試。
+四個新增詞只加到「動物園」普通中文 topic。已核准的九個 ID 經 `ANIMAL_ILLUSTRATIONS` 映射至專屬圖片；未映射的動物繼續用原生 emoji。每張圖都要通過 WebP、透明度、尺寸和映射測試。
 
 ## 驗收界線
 
-自動測試核對詞語、topic、圖片映射、WebP 簽名、連線資格和 emoji fallback。視覺檢查核對六個主體的完整度與物種特徵。此 pilot 不代表其餘中文動物已重繪，亦不代表已部署；完成後交 Chief Lead 審閱，再決定擴大範圍。
+自動測試核對詞語、topic、圖片映射、WebP 簽名、透明背景、大小、連線資格和 emoji fallback。視覺檢查核對主體完整度與物種特徵。其餘中文動物仍分批處理，每批交 Chief Lead 審閱；目前未部署。

@@ -25,16 +25,20 @@ for (const [id, term] of addedAnimals) {
 assert.notEqual(words.getWordById('huanxiong').id, words.getWordById('mizhuan').id,
   '浣熊 and 蜜獾 remain distinct vocabulary items');
 
-const pilot = new Map([
+const mappedAnimals = new Map([
   ['huanxiong', 'raccoon.webp'],
   ['mizhuan', 'honey-badger.webp'],
   ['xionghei', 'black-bear.webp'],
   ['xiongzong', 'brown-bear.webp'],
   ['xiongmao', 'panda.webp'],
   ['huli', 'fox.webp'],
+  ['shizi', 'lion.webp'],
+  ['laohu', 'tiger.webp'],
+  ['daxiang', 'elephant.webp'],
 ]);
-for (const [id, filename] of pilot) {
+for (const [id, filename] of mappedAnimals) {
   const word = words.getWordById(id);
+  assert.ok(zoo.wordIds.includes(id), `${id} is in 動物園`);
   const expectedPath = `assets/animals/wild/${filename}`;
   const markup = words.wordIllustHtml(word);
   assert.ok(markup.includes(`src="${expectedPath}"`), `${id} maps to ${filename}`);
@@ -54,4 +58,4 @@ assert.ok(words.wordIllustHtml(unrelated).includes('class="emoji-face"'),
 assert.ok(!words.wordIllustHtml(unrelated).includes('word-photo'),
   'the pilot does not replace unrelated animal art');
 
-console.log('Animal illustration pilot checks passed (6 mapped assets, 4 new zoo words, emoji fallback).');
+console.log('Animal illustration checks passed (9 mapped assets, 4 new zoo words, alpha and size limits, emoji fallback).');
