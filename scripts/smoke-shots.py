@@ -39,6 +39,8 @@ SCROLLABLE = {
     "screen-phonics-sounds",
     "screen-progress",
     "screen-math-galaxy",  # Browsing hub for planet and life-skill destinations; the actual math activities remain no-scroll.
+    "screen-math-earth-addition-select",  # Level/method browsing; keep the actual fruit manipulation screen no-scroll.
+    "screen-math-moon-subtraction-select",  # Level/method browsing; keep the actual fruit manipulation screen no-scroll.
     "screen-chinese-connect",
     "screen-story-demo",  # Little Fox book shelf: browsing may scroll; play screen may not.
     "screen-story-series",  # Selecting a story series is a browsing screen.

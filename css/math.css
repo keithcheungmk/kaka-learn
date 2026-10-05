@@ -1964,6 +1964,15 @@
     min-height: 0;
     overflow: hidden;
   }
+
+  /* Level and method selection is browsing, not a drag exercise: expose a
+     small internal scroll instead of clipping any cards below the fold. */
+  html.math-canvas-mode #screen-math-earth-addition-select.math-screen.active,
+  html.math-canvas-mode #screen-math-moon-subtraction-select.math-screen.active {
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
 }
 
 /* 直向 iPad 採用同手機一致的單欄、可捲動操作流程。 */
