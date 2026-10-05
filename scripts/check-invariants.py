@@ -492,8 +492,16 @@ def check_no_zoom() -> None:
 
 
 def check_three_entries() -> None:
-    """主頁保持科目入口簡潔，英文由單一入口分流到三條學習路線。"""
+    """首頁品牌、四科名稱與朋友入口穩定；英文仍由單一入口分流。"""
     html = read("index.html")
+    home = html.split('id="screen-home"', 1)[1].split("</section>", 1)[0] if 'id="screen-home"' in html else ""
+    for label in ["卡卡開心學習樂園", "卡卡中文樂園", "卡卡英文樂園", "卡卡普通話拼音", "卡卡數學樂園"]:
+        if label not in home:
+            fail("home-labels", f"主頁缺少核准入口／標題：{label}")
+    if 'src="./assets/home-learning-picnic.jpg"' not in home or not Path("assets/home-learning-picnic.jpg").is_file():
+        fail("home-poster", "主頁野餐海報資產缺失或未接入")
+    if 'href="https://yiu0527.github.io/HeiHeiClass/index.html"' not in home or "禧禧遊戲樂園" not in home:
+        fail("home-friend", "禧禧遊戲樂園入口／既有網址必須保留")
     for btn, name in [
         ("btn-start-topics", "小鹿認字探險"),
         ("btn-start-english", "英文學習"),

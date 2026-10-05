@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="theme-color" content="#eaf7ff" />
-  <title>卡卡學習・太空戰士</title>
+  <title>卡卡開心學習樂園｜中英數和普通話</title>
   <meta http-equiv="Cache-Control" content="no-cache" />
 
   <!-- KAKA RANGER 徽章：favicon / app icon -->
@@ -15,14 +15,14 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/icon-180.png" />
   <link rel="manifest" href="./assets/icons/site.webmanifest" />
 
-  <!-- 分享連結預覽：KAKA RANGER 完整 logo -->
+  <!-- 分享連結預覽：首頁主視覺 -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="卡卡學習・太空戰士" />
-  <meta property="og:description" content="陪小朋友識字、學拼音、玩數學" />
-  <meta property="og:image" content="https://keithcheungmk.github.io/kaka-learn/assets/og-image.png" />
+  <meta property="og:title" content="卡卡開心學習樂園｜中英數和普通話" />
+  <meta property="og:description" content="同卡卡一齊玩，開心學中文、英文、普通話同數學！" />
+  <meta property="og:image" content="https://keithcheungmk.github.io/kaka-learn/assets/home-learning-picnic.jpg" />
   <meta property="og:url" content="https://keithcheungmk.github.io/kaka-learn/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://keithcheungmk.github.io/kaka-learn/assets/og-image.png" />
+  <meta name="twitter:image" content="https://keithcheungmk.github.io/kaka-learn/assets/home-learning-picnic.jpg" />
   <link rel="stylesheet" href="./css/styles.css?v=20260928story-scroll" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260905list" />
   <link rel="stylesheet" href="./css/story-demo.css?v=20260911b" />
@@ -75,23 +75,43 @@
       </header>
 
       <div class="hero-home">
-        <div class="chinese-hero" aria-hidden="true">
-          <img src="./assets/chinese-hero.png" alt="" width="978" height="514" decoding="async" fetchpriority="high" />
+        <div class="home-hero-poster">
+          <img src="./assets/home-learning-picnic.jpg" alt="卡卡在公園野餐讀圖書，旁邊有一個小太空玩具角色" width="1400" height="788" decoding="async" fetchpriority="high" />
+          <div class="home-hero-copy">
+            <p class="home-hero-eyebrow">故事・遊戲・一齊探索</p>
+            <h1 id="home-hero-title">卡卡開心學習樂園</h1>
+            <p>同卡卡一齊玩，開心學中文、英文、普通話同數學！</p>
+          </div>
         </div>
-        <p class="hero-sub">太空戰士，出發認字、英文同數理！</p>
-        <div class="btn-row hero-cta-row">
-          <button type="button" class="btn" id="btn-start-topics" aria-label="太空戰士認字">太空戰士認字</button>
-          <a class="btn btn-secondary" href="./pth-demo.html?v=20260914-pth-word-audio" aria-label="普通話拼音">普通話拼音</a>
-          <button type="button" class="btn btn-secondary" id="btn-start-english" aria-label="英文學習・English Learning">英文學習・English Learning</button>
-          <button type="button" class="btn btn-accent" id="btn-start-math">數學遊樂園</button>
-          <a
-            class="btn btn-friend home-friend-link"
-            href="https://yiu0527.github.io/HeiHeiClass/index.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="禧禧遊戲樂園（新分頁開啟）"
-          >禧禧遊戲樂園 ↗</a>
-        </div>
+        <nav class="home-subject-grid" aria-label="選擇學習科目">
+          <button type="button" class="home-entry home-entry-chinese" id="btn-start-topics" aria-label="卡卡中文樂園：識字、故事、砌句">
+            <span class="home-entry-kicker">中文・識字故事</span>
+            <strong>卡卡中文樂園</strong>
+            <span class="home-entry-detail">識字・故事・砌句</span>
+          </button>
+          <button type="button" class="home-entry home-entry-english" id="btn-start-english" aria-label="卡卡英文樂園：Phonics、串字、故事">
+            <span class="home-entry-kicker">ENGLISH</span>
+            <strong>卡卡英文樂園</strong>
+            <span class="home-entry-detail">Phonics・串字・故事</span>
+          </button>
+          <a class="home-entry home-entry-putonghua" href="./pth-demo.html?v=20261004" aria-label="卡卡普通話拼音：聲母、韻母、拼音">
+            <span class="home-entry-kicker">普通話・拼音</span>
+            <strong>卡卡普通話拼音</strong>
+            <span class="home-entry-detail">聲母・韻母・拼音</span>
+          </a>
+          <button type="button" class="home-entry home-entry-math" id="btn-start-math" aria-label="卡卡數學樂園：數數、計算、思考">
+            <span class="home-entry-kicker">數數・思考</span>
+            <strong>卡卡數學樂園</strong>
+            <span class="home-entry-detail">數數・計算・思考</span>
+          </button>
+        </nav>
+        <a
+          class="btn btn-friend home-friend-link"
+          href="https://yiu0527.github.io/HeiHeiClass/index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="禧禧遊戲樂園（新分頁開啟）"
+        >禧禧遊戲樂園 ↗</a>
         <div class="home-side-row">
           <button type="button" class="btn btn-ghost" id="btn-home-progress">我的進度</button>
           <button type="button" class="btn btn-ghost" id="btn-switch-profile">換小朋友</button>

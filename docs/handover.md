@@ -111,6 +111,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 - 本機驗證：41 項 invariants、故事任務、Phonics flow、16 項 storage tests、`smoke-shots.py --no-shots`、三尺寸入口圖片／文字 focused check、靜態建置及 `git diff --check` 通過。CI／Pages 待本次 branch merge 後補記。
 - 改動檔案：`index.html`、`css/phonics.css`、`assets/english-worlds/*.webp`、`scripts/smoke-shots.py`、`docs/handover.md`。
 
+### 2026-10-06 · ChatGPT／Codex（首頁圖畫書式改版）
+
+- 主頁換成 Keith 選定的野餐讀書主視覺，擴大成寬幅封面；中文、英文、普通話、數學各自改為大觸控入口，保留「禧禧遊戲樂園」原名稱／網址、Profile／星星／進度與家長書架功能。
+- 加入首頁專用故事書風格與 iPad／手機響應式版面；入口既有 JS ID 不變。圖片為原創玩具太空人形象，並非 Buzz Lightyear 官方素材。
+- 驗證：`check-invariants.py`（41 項）及靜態建置通過；本機 Chromium 因 macOS Mach port sandbox 無法啟動。三個家庭裝置 viewport smoke 由本次 CI／Pages workflow 執行；實機 iPad 人手視覺檢查未做。
+- 涉及 `index.html`、`css/styles.css`、`assets/home-learning-picnic.jpg`、`assets/image-formats.lock.json`、`scripts/check-invariants.py`、`docs/handover.md`。本次 release push 會觸發 CI 及 Pages，結果以發佈回報為準。
+
 ### 2026-10-05 · ChatGPT／Codex（數學遊樂園重整與發布）
 
 - 數學入口改為數字探險、加法果園、減法籃球場及時鐘遊樂屋，另保留生活挑戰；移除數學星球入口／飛行流程。四種加減方法以水果格實物操作呈現，數字遊戲以五個一組數至 20。
