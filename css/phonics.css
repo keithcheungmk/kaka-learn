@@ -408,113 +408,323 @@
 
 /* English landing：三條學習路線由共用入口分流；子頁只顯示目前路線。 */
 .english-hub-screen {
-  width: min(100%, 1160px);
+  width: min(100%, 1240px);
   margin: 0 auto;
+  padding: clamp(18px, 3vw, 38px) clamp(14px, 3vw, 34px) clamp(30px, 5vw, 58px);
+  color: #18345f;
+  background:
+    radial-gradient(ellipse at 8% 8%, rgba(255, 230, 153, 0.45), transparent 27%),
+    radial-gradient(ellipse at 94% 2%, rgba(159, 217, 255, 0.55), transparent 30%),
+    linear-gradient(150deg, rgba(249, 252, 255, 0.94), rgba(230, 244, 255, 0.94) 60%, rgba(244, 239, 255, 0.94));
+  border: 1px solid rgba(150, 188, 228, 0.7);
+  border-radius: clamp(24px, 4vw, 42px);
+  box-shadow: 0 18px 48px rgba(42, 82, 135, 0.15);
 }
 
-.english-hub-screen .game-header h1 small {
-  display: block;
-  color: var(--teal-soft);
+.english-hub-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: clamp(22px, 3.4vw, 42px);
+}
+
+.english-hub-topbar .btn {
+  min-height: 48px;
+  padding: 10px 18px;
+  border: 1px solid #bed4e9;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #18345f;
+  box-shadow: 0 5px 14px rgba(55, 92, 137, 0.1);
+}
+
+.english-hub-kicker,
+.english-hub-eyebrow {
+  color: #338a77;
+  font-family: var(--font-display);
+  font-size: clamp(0.76rem, 1.3vw, 0.94rem);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.english-hub-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(22px, 4vw, 48px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: clamp(24px, 3.5vw, 38px);
+  background: linear-gradient(112deg, rgba(255, 255, 255, 0.94), rgba(246, 250, 255, 0.8));
+  box-shadow: 0 12px 30px rgba(69, 112, 164, 0.12);
+}
+
+.english-hub-hero-copy h1 {
+  margin: 8px 0 10px;
+  color: #18345f;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.12;
+}
+
+.english-hub-hero-copy h1 small {
+  display: inline-block;
+  margin-left: 8px;
+  color: #47759c;
   font-family: var(--font-body);
-  font-size: 0.48em;
+  font-size: 0.52em;
+  font-weight: 800;
+}
+
+.english-hub-hero-copy p {
+  max-width: 680px;
+  margin: 0;
+  color: #4d6f94;
+  font-size: clamp(1rem, 1.7vw, 1.22rem);
+  font-weight: 650;
+  line-height: 1.6;
+}
+
+.english-hub-world-count {
+  display: grid;
+  min-width: 128px;
+  min-height: 128px;
+  align-content: center;
+  justify-items: center;
+  border: 2px solid rgba(95, 180, 157, 0.35);
+  border-radius: 32px;
+  background: linear-gradient(145deg, #e2fff2, #d9f4ff);
+  color: #257d71;
+  box-shadow: inset 0 0 0 7px rgba(255, 255, 255, 0.5);
+}
+
+.english-hub-world-count strong {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.english-hub-world-count span {
+  margin-top: 6px;
+  font-weight: 800;
 }
 
 .english-hub-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(12px, 2vw, 22px);
-  width: min(100%, 1080px);
-  margin: 20px auto 36px;
+  gap: clamp(14px, 2.2vw, 26px);
+  width: 100%;
+  margin: clamp(20px, 3vw, 34px) auto 0;
 }
 
 .english-hub-card {
-  display: flex;
+  display: grid;
+  grid-template-rows: auto 1fr;
   min-width: 0;
-  min-height: 260px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  padding: clamp(18px, 2.4vw, 28px);
-  border: 2px solid rgba(147, 165, 252, 0.56);
-  border-radius: 26px;
-  background: linear-gradient(150deg, rgba(37, 43, 104, 0.96), rgba(15, 29, 76, 0.98));
-  color: var(--ink);
+  min-height: 430px;
+  overflow: hidden;
+  padding: 0;
+  border: 2px solid #c5d9ed;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #18345f;
   text-align: left;
   cursor: pointer;
-  box-shadow: 0 12px 26px rgba(3, 8, 35, 0.28);
-  transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+  box-shadow: 0 12px 28px rgba(49, 88, 135, 0.14);
+  transition: transform 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
 }
 
 .english-hub-card:hover,
 .english-hub-card:focus-visible {
-  transform: translateY(-3px);
-  border-color: var(--teal-soft);
-  box-shadow: 0 16px 32px rgba(3, 8, 35, 0.36);
+  transform: translateY(-4px);
+  border-color: #5aa7df;
+  box-shadow: 0 18px 34px rgba(49, 88, 135, 0.22);
 }
 
 .english-hub-card:focus-visible {
-  outline: 3px solid var(--gold-soft);
+  outline: 3px solid #f2c84b;
   outline-offset: 3px;
 }
 
-.english-hub-icon {
-  display: grid;
-  width: 64px;
-  height: 64px;
-  place-items: center;
-  border-radius: 19px;
-  background: rgba(255, 255, 255, 0.12);
-  font-size: 2.4rem;
+.english-hub-art {
+  display: block;
+  width: 100%;
+  height: clamp(190px, 22vw, 275px);
+  object-fit: contain;
+  padding: 8px clamp(8px, 1.4vw, 18px) 0;
+  background: linear-gradient(150deg, #eef8ff, #fff9e6 58%, #f4efff);
+}
+
+.english-hub-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: clamp(18px, 2vw, 26px);
 }
 
 .english-hub-title {
-  display: grid;
-  gap: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: #18345f;
   font-family: var(--font-display);
-  font-size: clamp(1.25rem, 2vw, 1.65rem);
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
   font-weight: 800;
 }
 
 .english-hub-title small {
-  color: var(--teal-soft);
+  color: #388a78;
   font-family: var(--font-body);
-  font-size: 0.72em;
+  font-size: 0.7em;
   font-weight: 700;
 }
 
 .english-hub-description {
-  color: rgba(245, 247, 255, 0.84);
+  color: #527093;
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
 .english-hub-action {
   margin-top: auto;
-  color: var(--gold-soft);
+  padding-top: 4px;
+  color: #9b6600;
   font-family: var(--font-display);
   font-weight: 800;
 }
 
 .english-hub-words {
-  border-color: rgba(251, 191, 36, 0.66);
-  background: linear-gradient(150deg, rgba(65, 36, 91, 0.9), rgba(22, 24, 73, 0.96));
+  border-color: #e8d89c;
 }
 
 .english-hub-phonics {
-  border-color: rgba(124, 255, 178, 0.56);
+  border-color: #a9d9c4;
 }
 
 @media (max-width: 900px) {
+  .english-hub-screen {
+    width: min(100%, 700px);
+  }
+
   .english-hub-grid {
     grid-template-columns: minmax(0, 1fr);
-    width: min(100%, 640px);
-    margin-top: 12px;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .english-hub-card {
+    grid-template-columns: minmax(120px, 0.8fr) minmax(0, 1fr);
+    grid-template-rows: 1fr;
+    min-height: 0;
+  }
+
+  .english-hub-art {
+    height: 210px;
+    min-height: 190px;
+    aspect-ratio: auto;
+    padding: 8px;
+  }
+
+  .english-hub-card-body {
+    justify-content: center;
+    padding: clamp(14px, 3vw, 22px);
+  }
+}
+
+@media (max-width: 560px) {
+  .english-hub-topbar {
+    align-items: flex-start;
+  }
+
+  .english-hub-kicker {
+    max-width: 150px;
+    padding-top: 10px;
+    text-align: right;
+  }
+
+  .english-hub-hero {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .english-hub-hero-copy h1 small {
+    display: block;
+    margin: 4px 0 0;
+  }
+
+  .english-hub-world-count {
+    min-width: 76px;
+    min-height: 76px;
+    border-radius: 22px;
+  }
+
+  .english-hub-world-count strong {
+    font-size: 1.8rem;
+  }
+
+  .english-hub-world-count span {
+    font-size: 0.72rem;
+  }
+
+  .english-hub-card {
+    grid-template-columns: 1fr;
+  }
+
+  .english-hub-art {
+    height: min(54vw, 230px);
+    min-height: 0;
+    aspect-ratio: 1.8 / 1;
+    padding: 8px 20px 0;
+  }
+}
+
+@media (min-width: 901px) and (max-height: 900px) {
+  .english-hub-screen {
+    padding-top: 14px;
+    padding-bottom: 22px;
+  }
+
+  .english-hub-topbar {
+    margin-bottom: 16px;
+  }
+
+  .english-hub-topbar .btn {
+    min-height: 42px;
+    padding-block: 7px;
+  }
+
+  .english-hub-hero {
+    padding: 20px 30px;
+  }
+
+  .english-hub-world-count {
+    min-width: 94px;
+    min-height: 94px;
+    border-radius: 25px;
+  }
+
+  .english-hub-world-count strong {
+    font-size: 2rem;
+  }
+
+  .english-hub-grid {
+    gap: 16px;
+    margin-top: 20px;
   }
 
   .english-hub-card {
     min-height: 0;
-    padding: 18px 20px;
-    gap: 8px;
+  }
+
+  .english-hub-art {
+    height: 205px;
+  }
+
+  .english-hub-card-body {
+    gap: 7px;
+    padding: 16px;
   }
 }
 
