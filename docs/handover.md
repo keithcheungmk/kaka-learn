@@ -110,7 +110,7 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 - 修正合併時首頁英文入口與主線英文 Hub 不一致；主頁維持單一「英文學習・English Learning」入口。
 - 裝置版面回歸流程改測新數學四主線。遊戲操作畫面保持一屏；加法／減法選關頁容許內部捲動，避免下方方法卡被裁走。橫向 iPad 外層上下留白改按 viewport 高度計算。
 - GitHub CI #389（含 iPad Pro 11 直／橫及 iPhone 16 Pro Max viewport 回歸）及 Pages #334 成功；公開首頁已載入本次版本。此為 Chromium 模擬 viewport，不代表已做實機 iPad／iPhone 人手驗收。
-- 最新主線提交：`d4b00d8`。涉及 `index.html`、`css/math.css`、數學遊戲模組及 `scripts/smoke-shots.py`。
+- 數學功能提交：`d4b00d8`；交接紀錄跟進提交：`bab0e58`（CI #391、Pages #335 亦成功）。涉及 `index.html`、`css/math.css`、數學遊戲模組及 `scripts/smoke-shots.py`。
 
 ### 2026-10-04 · ChatGPT／Codex（英文學習入口整理）
 
