@@ -1415,6 +1415,9 @@ const ANIMAL_ILLUSTRATIONS = {
   shizi: 'assets/animals/wild/lion.webp',
   laohu: 'assets/animals/wild/tiger.webp',
   daxiang: 'assets/animals/wild/elephant.webp',
+  changjinglu: 'assets/animals/wild/giraffe.webp',
+  banma: 'assets/animals/wild/zebra.webp',
+  qie: 'assets/animals/wild/penguin.webp',
 };
 
 // 連一連專用圖像校訂：只改善容易混淆的抽象詞，不更改其他學習遊戲的原裝 Emoji。

@@ -35,6 +35,9 @@ const mappedAnimals = new Map([
   ['shizi', 'lion.webp'],
   ['laohu', 'tiger.webp'],
   ['daxiang', 'elephant.webp'],
+  ['changjinglu', 'giraffe.webp'],
+  ['banma', 'zebra.webp'],
+  ['qie', 'penguin.webp'],
 ]);
 for (const [id, filename] of mappedAnimals) {
   const word = words.getWordById(id);
@@ -58,4 +61,4 @@ assert.ok(words.wordIllustHtml(unrelated).includes('class="emoji-face"'),
 assert.ok(!words.wordIllustHtml(unrelated).includes('word-photo'),
   'the pilot does not replace unrelated animal art');
 
-console.log('Animal illustration checks passed (9 mapped assets, 4 new zoo words, alpha and size limits, emoji fallback).');
+console.log(`Animal illustration checks passed (${mappedAnimals.size} mapped assets, 4 new zoo words, alpha and size limits, emoji fallback).`);
