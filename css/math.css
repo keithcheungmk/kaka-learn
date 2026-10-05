@@ -1980,12 +1980,12 @@
 @media (min-width:701px) and (orientation:landscape) {
   html.math-canvas-mode #app {
     max-width: none;
-    padding: clamp(8px, 1vh, 12px) clamp(16px, 2.2vw, 32px);
+    padding: clamp(6px, .7vh, 10px) clamp(16px, 2.2vw, 32px);
   }
 
   html.math-canvas-mode .math-screen.active {
     box-sizing: border-box;
-    gap: clamp(6px, .8vh, 10px);
+    gap: clamp(4px, .55vh, 7px);
   }
 
   html.math-canvas-mode .math-screen .game-header {
@@ -2092,7 +2092,7 @@
   /* 關卡選擇頁仲有下方方法卡；橫向 iPad 要一屏睇晒兩層內容。 */
   html.math-canvas-mode #screen-math-earth-addition-select .addition-level-menu {
     gap: 12px;
-    margin-top: 4px;
+    margin-top: 0;
     padding: 4px 12px 8px;
   }
   html.math-canvas-mode #screen-math-earth-addition-select .addition-level-card,
@@ -2105,11 +2105,11 @@
   }
   html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-grid {
     gap: 12px;
-    padding: 8px 12px;
+    padding: 4px 12px;
   }
   html.math-canvas-mode #screen-math-earth-addition-select .math-strategy-route,
   html.math-canvas-mode #screen-math-moon-subtraction-select .math-strategy-route {
-    margin-top: 6px;
+    margin-top: 2px;
     padding: 10px 14px;
   }
   html.math-canvas-mode #screen-math-earth-addition-select .math-strategy-route > p,
