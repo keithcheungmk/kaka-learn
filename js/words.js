@@ -1,5 +1,5 @@
 /** 卡卡學習 — 字詞表（繁體表面形）
- *  中文一般字詞採用系統 Emoji；需要清楚區分物種的鹿類採用專屬插圖。
+ * 動物插圖逐批加入透明底專屬圖；未有插圖時仍用系統 Emoji 回退。
  */
 
 const DEER_IDS = ['lu', 'meihualu', 'xunlu', 'tuolu', 'malu'];
@@ -21,6 +21,8 @@ const WORDS = [
   { id: 'ma', term: '馬', isDeer: false, emoji: '🐴', badge: '', plate: '#2a2520' },
   { id: 'zhu', term: '豬', isDeer: false, emoji: '🐷', badge: '', plate: '#402030', en: { word: 'pig', letters: ['p', 'i', 'g'] } },
   { id: 'xiong', term: '熊', isDeer: false, emoji: '🐻', badge: '', plate: '#3a2810' },
+  { id: 'xionghei', term: '黑熊', isDeer: false, emoji: '🐻', badge: '', plate: '#252a31' },
+  { id: 'xiongzong', term: '棕熊（灰熊）', isDeer: false, emoji: '🐻', badge: '', plate: '#4b2d1c' },
   { id: 'shizi', term: '獅子', isDeer: false, emoji: '🦁', badge: '', plate: '#3a3010' },
   { id: 'laohu', term: '老虎', isDeer: false, emoji: '🐯', badge: '', plate: '#402010' },
   { id: 'daxiang', term: '大象', isDeer: false, emoji: '🐘', badge: '', plate: '#243040' },
@@ -35,6 +37,8 @@ const WORDS = [
   { id: 'daishu', term: '袋鼠', isDeer: false, emoji: '🦘', badge: '', plate: '#402010' },
   { id: 'shuxiong', term: '樹熊', isDeer: false, emoji: '🐨', badge: '', plate: '#2a2a35' },
   { id: 'huli', term: '狐狸', isDeer: false, emoji: '🦊', badge: '', plate: '#402410' },
+  { id: 'huanxiong', term: '浣熊', isDeer: false, emoji: '🦝', badge: '', plate: '#3c3328' },
+  { id: 'mizhuan', term: '蜜獾', isDeer: false, emoji: '🦡', badge: '', plate: '#393632' },
   { id: 'eyu', term: '鱷魚', isDeer: false, emoji: '🐊', badge: '', plate: '#143820' },
   { id: 'she', term: '蛇', isDeer: false, emoji: '🐍', badge: '', plate: '#1a4d3a' },
   { id: 'maotouying', term: '貓頭鷹', isDeer: false, emoji: '🦉', badge: '', plate: '#3a2818' },
@@ -1102,9 +1106,9 @@ const TOPICS = [
     cover: '🦁',
     wordIds: [
       'lu', 'meihualu', 'xunlu', 'tuolu', 'malu',
-      'xiong', 'shizi', 'laohu', 'daxiang', 'hou',
+      'xiong', 'xionghei', 'xiongzong', 'shizi', 'laohu', 'daxiang', 'hou',
       'xiongmao', 'changjinglu', 'banma', 'qie', 'hema', 'xiniu',
-      'luotuo', 'daishu', 'shuxiong', 'huli', 'eyu', 'she', 'maotouying', 'lang',
+      'luotuo', 'daishu', 'shuxiong', 'huli', 'huanxiong', 'mizhuan', 'eyu', 'she', 'maotouying', 'lang',
       'haitun', 'haibao', 'kongque', 'honghe',
     ],
   },
@@ -1400,6 +1404,64 @@ const CHARACTER_WORD_ILLUSTRATIONS = {
   liubing: 'assets/character-words/sports/liubing.webp',
 };
 
+// 動物專屬圖逐批接入；未列出的動物繼續用原生 Emoji。
+const ANIMAL_ILLUSTRATIONS = {
+  xionghei: 'assets/animals/wild/black-bear.webp',
+  xiongzong: 'assets/animals/wild/brown-bear.webp',
+  xiongmao: 'assets/animals/wild/panda.webp',
+  huli: 'assets/animals/wild/fox.webp',
+  huanxiong: 'assets/animals/wild/raccoon.webp',
+  mizhuan: 'assets/animals/wild/honey-badger.webp',
+  shizi: 'assets/animals/wild/lion.webp',
+  laohu: 'assets/animals/wild/tiger.webp',
+  daxiang: 'assets/animals/wild/elephant.webp',
+  changjinglu: 'assets/animals/wild/giraffe.webp',
+  banma: 'assets/animals/wild/zebra.webp',
+  qie: 'assets/animals/wild/penguin.webp',
+  hou: 'assets/animals/wild/monkey.webp',
+  hema: 'assets/animals/wild/hippo.webp',
+  xiniu: 'assets/animals/wild/rhino.webp',
+  luotuo: 'assets/animals/wild/camel.webp',
+  daishu: 'assets/animals/wild/kangaroo.webp',
+  shuxiong: 'assets/animals/wild/koala.webp',
+  eyu: 'assets/animals/wild/crocodile.webp',
+  maotouying: 'assets/animals/wild/owl.webp',
+  lang: 'assets/animals/wild/wolf.webp',
+  haitun: 'assets/animals/wild/dolphin.webp',
+  haibao: 'assets/animals/wild/seal.webp',
+  kongque: 'assets/animals/wild/peacock.webp',
+  honghe: 'assets/animals/wild/flamingo.webp',
+  she: 'assets/animals/wild/snake.webp',
+  gou: 'assets/animals/wild/dog.webp',
+  mao: 'assets/animals/wild/cat.webp',
+  tu: 'assets/animals/wild/rabbit.webp',
+  yang: 'assets/animals/wild/sheep.webp',
+  niu: 'assets/animals/wild/cow.webp',
+  ma: 'assets/animals/wild/horse.webp',
+  zhu: 'assets/animals/wild/pig.webp',
+  ji: 'assets/animals/wild/chicken.webp',
+  ya: 'assets/animals/wild/duck.webp',
+  wa: 'assets/animals/wild/frog.webp',
+  bianfu: 'assets/animals/wild/bat.webp',
+  ciwei: 'assets/animals/wild/hedgehog.webp',
+  hudie: 'assets/animals/wild/butterfly.webp',
+  mifeng: 'assets/animals/wild/bee.webp',
+  mayi: 'assets/animals/wild/ant.webp',
+  jiachong: 'assets/animals/wild/beetle.webp',
+  zhizhu: 'assets/animals/wild/spider.webp',
+  woniu: 'assets/animals/wild/snail.webp',
+  maomaochong: 'assets/animals/wild/caterpillar.webp',
+  qingting: 'assets/animals/wild/dragonfly.webp',
+  shayu: 'assets/animals/wild/shark.webp',
+  jingyu: 'assets/animals/wild/whale.webp',
+  bazhaoyu: 'assets/animals/wild/octopus.webp',
+  shuimu: 'assets/animals/wild/jellyfish.webp',
+  haigui: 'assets/animals/wild/sea-turtle.webp',
+  haixing: 'assets/animals/wild/starfish.webp',
+  xiaochouyu: 'assets/animals/wild/clownfish.webp',
+  youyu: 'assets/animals/wild/squid.webp',
+};
+
 // 連一連專用圖像校訂：只改善容易混淆的抽象詞，不更改其他學習遊戲的原裝 Emoji。
 const CHINESE_CONNECT_EMOJI_OVERRIDES = {
   da_big: '🐘', xiao_small: '🐜', duo: '👥', shao: '🧍',
@@ -1411,7 +1473,7 @@ const CHINESE_CONNECT_EMOJI_OVERRIDES = {
 };
 
 function isChineseConnectIllustratable(word) {
-  return Boolean(word && (word.photo || word.emoji || CAREER_ILLUSTRATIONS[word.id]
+  return Boolean(word && (ANIMAL_ILLUSTRATIONS[word.id] || word.photo || word.emoji || CAREER_ILLUSTRATIONS[word.id]
     || CHARACTER_WORD_ILLUSTRATIONS[word.id] || CHINESE_CONNECT_EMOJI_OVERRIDES[word.id]));
 }
 
@@ -1421,13 +1483,14 @@ function chineseConnectIllustHtml(word) {
 }
 
 function wordIllustHtml(word) {
+  const photo = ANIMAL_ILLUSTRATIONS[word.id] || word.photo;
   const badgeIsEmoji = word.badge && /\p{Extended_Pictographic}/u.test(word.badge);
   const badge = word.badge
     ? `<span class="emoji-badge${badgeIsEmoji ? ' emoji-badge-icon' : ''}" aria-hidden="true">${badgeIsEmoji ? nativeEmoji(word.badge) : word.badge}</span>`
     : '';
-  if (word.photo) {
+  if (photo) {
     return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
-    <img class="word-photo" src="${word.photo}" alt="${word.term}" loading="lazy" />
+    <img class="word-photo" src="${photo}" alt="${word.term}" loading="lazy" />
     ${badge}
   </span>`;
   }

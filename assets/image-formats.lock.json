@@ -187,6 +187,10 @@
     "format": "JPEG",
     "alpha": false
   },
+  "assets/home-learning-picnic.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
   "assets/icons/icon-16.png": {
     "format": "PNG",
     "alpha": true
@@ -226,10 +230,6 @@
   "assets/kaka-ranger-star.png": {
     "format": "PNG",
     "alpha": true
-  },
-  "assets/home-learning-picnic.jpg": {
-    "format": "JPEG",
-    "alpha": false
   },
   "assets/math/galaxy-bg.jpg": {
     "format": "JPEG",

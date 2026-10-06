@@ -36,6 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| 主頁四科入口加入卡卡插畫 | ChatGPT／Codex | `index.html`, `css/styles.css`, `assets/home-subjects/`, `assets/image-formats.lock.json`, `docs/handover.md` | 2026-10-06 | Keith 已看過四科卡片 demo 並指示繼續；只改入口視覺，保留文字、連結與按鈕行為。 |
 | 紅輯「按書頁砌句」資料層及遊戲引擎 | Chinese Lead（Chief 整合） | `js/book-scene-demo.js`, `book-scene-demo.html`, `css/book-scene-demo.css`, `data/red-series/`, `scripts/test-book-scene-demo.mjs`, `scripts/smoke-book-scene-demo.py`, `docs/cursor-handoff-2026-09-20.md` | 2026-09-20 | Keith 交辦：本機接盤；內容由 Chinese Lead，shared／部署由 Chief；唔開 Cloud Agent |
 | 書本掃描書架 | Chinese Lead（Chief 整合） | `book-scans/index.html`, `index.html`（共享）, `css/styles.css`（共享）, `scripts/check-invariants.py`（共享） | 2026-09-08 | 家長 PDF 書架；中文內容由 Chinese Lead，共享檔由 Chief 認領 |
 | 中文故事小隊第一版 | ChatGPT／Codex（故事內容及 UI 狀態；Chief 整合） | `family-storybook.html`, `css/styles.css`, `js/family-storybook.js`, `data/family-stories/manifest.js`, `docs/family-storybook-first-edition.md`, `index.html`, `docs/handover.md` | 2026-10-02 | 新增〈浠榆妹妹來了〉八頁和九張角色／場景 WebP；紅書詞語來源留空並以「學習詞語」呈現。將錯寫的「堯叔叔」全數更正為「耀叔叔」。首個故事提交 `fdab12d` 已推送，GitHub Pages run #315 成功；瀏覽器仍取到未加版本戳的舊 JS，因此本次為故事資料與角色程式加入部署版本戳，確保即時刷新。 |
@@ -44,7 +45,6 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 | 加減法操作流程統一、回答確認、拖曳防誤觸及桌面版面 | Math Lead（Chief 整合） | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | 先操作後回答；共享檔由 Chief 整合 |
 | 數學玩法縮至四星＋水星重做 | Math Lead（ChatGPT／Codex Chief 整合） | `index.html`, `js/math-*`, `css/math.css`, 數理測試、`scripts/check-invariants.py`, `docs/handover.md` | 2026-09-28 | Keith 指示只保留地球加法、月球減法、金星時鐘及全新水星數量玩法；其他星球、Number Bonds 從入口與流程下架。原 9/16 iPad 橫向工作納入此任務；未部署 |
 | 五項生活數感活動 | ChatGPT／Codex（Math；Chief review） | `index.html`, `css/math.css`, `js/math-app.js`, `js/math-life-skills-*`, `scripts/test-math-life-skills.mjs` | 2026-10-01 | 加入數量比較、數字拆合、形狀與規律、小小商店、生活度量；本機數學回歸及 invariants 通過。尚未在 iPad/iPhone 實機視覺驗收。 |
-| 數學全頁淺色主題 | ChatGPT／Codex（Math；Chief 整合） | `css/math.css`, `css/additionGame.css`, `docs/handover.md` | 2026-10-06 | 依 Keith 澄清，整個數學遊樂園及所有路線／活動都改用一致淺色底，唔限時鐘；保留鐘面、加減法、生活挑戰等既有互動和版面。功能、invariants、Chromium 家庭裝置 smoke 與視覺檢查通過，待 merge／部署；未做實體 iPad／iPhone 人手驗收。 |
 | 職業字詞 45 張卡卡／禧禧未來職業插圖 | ChatGPT／Codex | `js/words.js`, `css/styles.css`, `assets/careers/`, 職業插圖測試、`docs/handover.md` | 2026-09-29 | 由 Keith 指示按已同意方案落地；保留其餘主題原 Emoji；待完成 iPad 驗證及部署 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
@@ -104,6 +104,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-10-06 · ChatGPT／Codex（普通中文動物連線插畫）
+
+- 將十四批共五十四張透明 WebP 動物插畫整合到普通中文「動物園」連線配圖；未映射的廣義類別詞保留裝置原生 emoji。只 cherry-pick 動物插畫工作，保留最新主線的其他功能及回饋改動。
+- 核對 `assets/image-formats.lock.json`（涵蓋的 109 張 JPEG／PNG 無變更）；五十四張 WebP 由動物測試逐張檢查格式、透明度和大小。Chief Lead 已驗收十四批插畫。
+- 驗證：動物插畫測試、Chinese Connect 回歸、41 項 invariants、靜態建置及 `git diff --check` 通過。合併後 Pages／CI 結果及公開站狀態待確認。
+- 涉及 `js/words.js`、`assets/animals/wild/`、相關 emoji／字體子集、圖片格式鎖、動物測試及本紀錄。
 
 ### 2026-10-06 · ChatGPT／Codex（數學全頁淺色主題及水果店互動完善）
 
