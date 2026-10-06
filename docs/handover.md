@@ -106,6 +106,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-06 · ChatGPT／Codex（普通中文動物連線插畫）
+
+- 將十四批共五十四張透明 WebP 動物插畫整合到普通中文「動物園」連線配圖；未映射的廣義類別詞保留裝置原生 emoji。只 cherry-pick 動物插畫工作，保留最新主線的其他功能及回饋改動。
+- 核對 `assets/image-formats.lock.json`（涵蓋的 109 張 JPEG／PNG 無變更）；五十四張 WebP 由動物測試逐張檢查格式、透明度和大小。Chief Lead 已驗收十四批插畫。
+- 驗證：動物插畫測試、Chinese Connect 回歸、41 項 invariants、靜態建置及 `git diff --check` 通過。合併後 Pages／CI 結果及公開站狀態待確認。
+- 涉及 `js/words.js`、`assets/animals/wild/`、相關 emoji／字體子集、圖片格式鎖、動物測試及本紀錄。
+
 ### 2026-10-06 · ChatGPT／Codex（時鐘視覺及水果店互動完善）
 
 - 金星時鐘遊戲沿用現有版面／指針操作，只將背景、文字、提示、電子時間、答案卡及 CTA 調成配合數學遊樂園的明亮淺色系。

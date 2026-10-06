@@ -75,8 +75,8 @@
 
 ## 詞彙與 fallback
 
-四個新增詞只加到「動物園」普通中文 topic。已核准的十六個 ID，以及第五至第九批既有動物詞，經 `ANIMAL_ILLUSTRATIONS` 映射至專屬圖片；未映射的廣義類別詞繼續用原生 emoji；自動測試明確核對所有保留的 fallback。每張圖都要通過 WebP、透明度、尺寸和映射測試。
+四個新增詞只加到「動物園」普通中文 topic。十四批合共五十四個動物 ID 經 `ANIMAL_ILLUSTRATIONS` 映射至專屬圖片；未映射的廣義類別詞繼續用原生 emoji；自動測試明確核對所有保留的 fallback。每張圖都要通過 WebP、透明度、尺寸和映射測試。
 
 ## 驗收界線
 
-自動測試核對詞語、topic、圖片映射、WebP 簽名、透明背景、大小、連線資格和 emoji fallback。視覺檢查核對主體完整度與物種特徵。Chief Lead 已批准首十三批，共五十二張；其餘中文動物仍分批處理，目前未部署。
+自動測試核對詞語、topic、圖片映射、WebP 簽名、透明背景、大小、連線資格和 emoji fallback。視覺檢查核對主體完整度與物種特徵。Chief Lead 已批准全部十四批，共五十四張；發布狀態以 `docs/handover.md` 的最近改動紀錄為準。
