@@ -39,14 +39,6 @@ for (const activity of data.ACTIVITIES) {
         assert.ok(question.choices.every((choice) => String(Number(choice.id)) === choice.id), 'bond answers are one missing quantity, not competing valid equations');
       }
       if (question.kind === 'shape' || question.kind === 'pattern') assert.ok(question.choices.every((choice) => data.SHAPES.some((shape) => shape.id === choice.id)));
-      if (question.kind === 'shop-recognize') {
-        assert.ok([1, 2, 5, 10].includes(question.coin.value));
-        assert.equal(question.answer, String(question.coin.value));
-        assert.equal(question.choices.length, 3);
-        assert.ok(question.choices.some((choice) => choice.value === question.coin.value));
-        assert.match(question.prompt, /同一款/, 'children match a visible reference coin instead of guessing a hidden target');
-        assert.ok(question.explain.includes(String(question.coin.value)), 'coin feedback names the denomination');
-      }
       if (question.kind === 'shop-payment') {
         assert.ok(question.price >= 1 && question.price <= 12);
         assert.ok(question.coins.length >= 2 && question.coins.length <= 7);
@@ -68,8 +60,7 @@ assert.deepEqual([...shapeMission.map((q) => q.kind)], ['shape', 'shape', 'shape
 for (let seed = 1; seed <= 200; seed += 1) {
   const shopMission = data.makeMission('little-shop', { random: seeded(seed), length: 10 });
   assert.equal(shopMission.length, 10);
-  assert.deepEqual([...shopMission.slice(0, 2).map((question) => question.kind)], ['shop-recognize', 'shop-recognize']);
-  assert.ok(shopMission.slice(2).every((question) => question.kind === 'shop-payment'));
+  assert.ok(shopMission.every((question) => question.kind === 'shop-payment'), 'fruit shop goes straight to payment practice');
 }
 assert.throws(() => data.makeMission('retired-planet'), RangeError);
 assert.match(read('index.html'), /id="math-extra-mission-grid"/);
@@ -80,11 +71,16 @@ assert.match(read('js/math-life-skills-game.js'), /function selectCompareItem/);
 assert.match(read('js/math-life-skills-game.js'), /math-life-answer-number/);
 assert.match(read('js/math-life-skills-game.js'), /question\.part/);
 assert.match(read('css/math.css'), /\.math-life-ten-cell\.is-empty/);
-assert.match(read('js/math-life-skills-game.js'), /coinFace\(question\.coin\.value, 'is-target-coin'\)/);
+assert.match(read('js/math-life-skills-game.js'), /question\.kind === 'shop-payment' \? '🧺 完成付款'/);
 assert.match(read('js/math-life-skills-game.js'), /而家有\$\$\{total\}，仲差/);
 assert.match(read('css/math.css'), /math-life-skill-feedback:not\(:empty\)/);
 assert.match(read('index.html'), /class="math-life-skill-answer-panel"/);
 assert.match(read('index.html'), /math-life-skill-board-wrap/);
+assert.match(read('index.html'), /class="math-life-shop-poster"[^>]*aria-label="水果店故事海報"/);
+assert.match(read('index.html'), /fruit-shop-scene\.jpg/);
+assert.doesNotMatch(read('js/math-life-skills-data.js'), /shop-recognize/);
+assert.doesNotMatch(read('js/math-life-skills-game.js'), /shop-recognize|renderShopIntro|is-shop-intro/);
 assert.match(read('css/math.css'), /grid-template-areas: "header header" "planet planet" "prompt prompt" "board answers"/);
+assert.match(read('css/math.css'), /grid-template-areas: "header header header" "poster prompt answers" "poster board answers"/);
 assert.match(read('css/math.css'), /:has\(#screen-math-life-skill\.active\)/, 'new math screens opt out of clipped fixed-height canvas');
 console.log('test-math-life-skills: ok');

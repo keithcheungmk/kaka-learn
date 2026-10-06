@@ -4,7 +4,7 @@
     { id: 'quantity-compare', planetId: 'number-relations', planet: '水星', title: '配一配・邊邊多？', skillId: 'compare.quantity.1to10', subtitle: '比較兩盤日常物品的多少' },
     { id: 'number-bonds', planetId: 'compare-size', planet: '地球', title: '數字好朋友・合起來', skillId: 'numberBonds.to10', subtitle: '找出兩部分合成目標數字的方法' },
     { id: 'shape-patterns', planetId: 'number-relations', planet: '水星', title: '形狀觀察隊', skillId: 'shape.pattern.AB', subtitle: '先認形狀，再找重複規律' },
-    { id: 'little-shop', planetId: 'compare-size', planet: '地球', title: '卡卡水果店・香港硬幣', skillId: 'money.matchPrice.1to10', subtitle: '認識硬幣，幫卡卡買水果' },
+    { id: 'little-shop', planetId: 'compare-size', planet: '地球', title: '卡卡水果店・幫手付款', skillId: 'money.matchPrice.1to10', subtitle: '用熟悉嘅硬幣，幫卡卡買水果' },
     { id: 'measure-compare', planetId: 'moon', planet: '月球', title: '生活度量・比一比', skillId: 'measure.compare.visual', subtitle: '比較長短、輕重和多少' },
   ];
   const OBJECTS = [
@@ -87,15 +87,7 @@
     visit(price, 0, []);
     return combinations;
   }
-  function shopQuestion(round, random) {
-    if (round < 2) {
-      const coin = pick(HK_COINS, random);
-      const choices = shuffle([coin, ...shuffle(HK_COINS.filter((item) => item.value !== coin.value), random).slice(0, 2)], random)
-        .map((item) => ({ id: String(item.value), label: item.label, value: item.value }));
-      return { kind: 'shop-recognize', coin, answer: String(coin.value), choices,
-        prompt: '睇吓呢枚硬幣，喺右邊搵返同一款。', explain: `呢枚係${coin.value}蚊硬幣；可以睇硬幣中間個數字。` };
-    }
-
+  function shopQuestion(random) {
     const item = pick(SHOP_ITEMS, random);
     const price = item.price;
     // The purse always contains one exact solution plus a few spare coins. Children
@@ -111,7 +103,7 @@
     }
     const choices = [{ id: 'pay', label: '付錢啦' }, { id: 'keep-looking', label: '再看看' }];
     return { kind: 'shop-payment', item, price, coins: shuffle(coins, random), wallet: coins.length,
-      answer: 'pay', choices, prompt: `${item.name}要${price}蚊，揀啱硬幣放入付款盤。`,
+      answer: 'pay', choices, prompt: `${item.name}要${price}蚊，幫卡卡揀啱硬幣放入付款盤。`,
       explain: `啱啱好畀到${price}蚊。` };
   }
   function measureQuestion(round, random) {
@@ -138,7 +130,7 @@
       if (activityId === 'quantity-compare') question = compareQuestion(round, random);
       else if (activityId === 'number-bonds') question = bondQuestion(round, random);
       else if (activityId === 'shape-patterns') question = shapeQuestion(round, random);
-      else if (activityId === 'little-shop') question = shopQuestion(round, random);
+      else if (activityId === 'little-shop') question = shopQuestion(random);
       else question = measureQuestion(round, random);
       return { ...question, round, activityId, skillId: activity.skillId, missionId: `${activityId}-${round + 1}` };
     });

@@ -105,6 +105,14 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-06 · ChatGPT／Codex（水果店付款遊戲簡化）
+
+- 水果店十題由第一題開始直接練習付款，移除認一／二／五／十蚊硬幣題；保留點選硬幣放入／取回付款盤、即時計總額及「付錢啦」確認，答案欄標示「完成付款」。
+- 水果店故事海報持續顯示：闊屏幕置左、答題畫面在中、付款與回饋在右；窄橫屏海報橫跨頂部；直屏改用可捲動單欄和 16:9 小海報。題目短語音合併場景與本題，不另加冗長介紹頁。
+- 驗證：生活技能測試（200 組種子、每組 10 題均為付款題）、計算法測試、41 項 invariants、JS 語法及靜態建置通過。macOS 本機 Chromium 因 MachPort 權限未能啟動；家庭 viewport smoke 留待 GitHub CI。實體 iPad／iPhone 未驗收。
+- 改動檔案：`index.html`、`css/math.css`、`js/math-life-skills-data.js`、`js/math-life-skills-game.js`、`scripts/test-math-life-skills.mjs`、`docs/handover.md`。
+- 發佈狀態：待 GitHub Actions 與 Pages 確認。
+
 ### 2026-10-06 · ChatGPT／Codex（普通中文動物連線插畫）
 
 - 將十四批共五十四張透明 WebP 動物插畫整合到普通中文「動物園」連線配圖；未映射的廣義類別詞保留裝置原生 emoji。只 cherry-pick 動物插畫工作，保留最新主線的其他功能及回饋改動。

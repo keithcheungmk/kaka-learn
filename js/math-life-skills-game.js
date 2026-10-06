@@ -2,7 +2,7 @@
 (function () {
   let deps = null, activity = null, mission = [], index = 0, locked = false, wrongAttempts = 0, generation = 0;
   let compareSelection = null, paired = { left: new Set(), right: new Set() }, shopSelected = new Set();
-  const SHOP_STORY = '卡卡嚟到水果店想買水果，幫佢揀啱硬幣啦！';
+  const SHOP_STORY = '卡卡嚟到水果店想買水果，幫佢用硬幣付啱價錢啦！';
   const $ = (id) => document.getElementById(id);
   const data = () => window.KakaMathLifeSkillsData;
 
@@ -79,12 +79,6 @@
   }
   function renderShop(board, question) {
     const shop = el('div', 'math-life-shop-scene');
-    if (question.kind === 'shop-recognize') {
-      shop.classList.add('is-coin-recognition');
-      const till = el('div', 'math-life-shop-till');
-      till.append(coinFace(question.coin.value, 'is-target-coin'), el('strong', '', '睇清楚呢枚硬幣'), el('span', '', '喺右邊揀返同一款。'));
-      shop.append(till); board.append(shop); return;
-    }
     const product = el('div', 'math-life-product-card');
     product.append(el('span', 'math-life-shop-item', question.item.emoji), el('strong', '', question.item.name), el('span', 'math-life-price-tag', `$${question.price}`));
     const wallet = el('div', 'math-life-wallet');
@@ -164,36 +158,8 @@
       const row = el('div', 'math-life-pattern-row');
       question.sequence.forEach((shape, i) => { const tile = el('div', 'math-life-pattern-tile'); tile.append(shapeDrawing(shape, data().COLORS[i % data().COLORS.length])); row.append(tile); });
       row.append(el('div', 'math-life-pattern-missing', '?')); board.append(el('p', 'math-life-board-instruction', '找找重複的形狀小隊。'), row);
-    } else if (question.kind === 'shop-recognize' || question.kind === 'shop-payment') renderShop(board, question);
+    } else if (question.kind === 'shop-payment') renderShop(board, question);
     else if (question.kind === 'measure') renderMeasure(board, question);
-  }
-  function renderShopIntro() {
-    $('math-life-skill-progress').textContent = '準備出發';
-    $('math-life-skill-prompt').textContent = '水果店小任務：幫卡卡買水果！';
-    $('math-life-skill-feedback').textContent = '';
-    $('btn-math-life-skill-next').hidden = true;
-    const board = $('math-life-skill-board'); board.replaceChildren(); board.classList.add('is-shop-intro');
-    const card = el('div', 'math-life-shop-intro-card');
-    const scene = el('img', 'math-life-shop-intro-image');
-    scene.src = './assets/math-life/fruit-shop-scene.jpg';
-    scene.alt = '卡卡提着籃子來到水果店，店主身旁有各種水果';
-    const story = el('div', 'math-life-shop-intro-copy');
-    story.append(el('span', 'math-life-shop-intro-kicker', '今日小任務'),
-      el('strong', '', '卡卡想買水果！'),
-      el('p', '', '店裏有好多香甜水果，請你幫卡卡認硬幣、揀啱錢付款。'));
-    const actions = el('div', 'math-life-shop-intro-actions');
-    const replay = el('button', 'btn math-life-shop-replay', '🔊 聽卡卡講'); replay.type = 'button';
-    replay.addEventListener('click', () => speakThen(SHOP_STORY, () => {}));
-    actions.append(replay); story.append(actions); card.append(scene, story); board.append(card);
-    const choices = $('math-life-skill-choices'); choices.replaceChildren();
-    const startButton = el('button', 'btn math-life-shop-start', '開始幫手 →'); startButton.type = 'button';
-    startButton.addEventListener('click', () => {
-      board.classList.remove('is-shop-intro');
-      $('math-life-skill-answers-heading').textContent = '💡 揀答案';
-      renderQuestion(); speakThen(mission[0].prompt || activity.title, () => {});
-    });
-    choices.append(startButton);
-    $('math-life-skill-answers-heading').textContent = '🛍️ 準備出發';
   }
   function recordAttempt(question, correct, picked) {
     if (!deps?.mastery?.recordAttempt) return;
@@ -225,7 +191,6 @@
       if (question.kind === 'compare') announce(`已一對一配好${Math.min(question.left, question.right)}對，看看哪邊有剩。`);
       else if (question.kind === 'bonds') announce(`可以用星星逐個數一數，合起來有幾個。`);
       else if (question.kind === 'shape' || question.kind === 'pattern') announce(`再看看形狀的邊、角，或前面重複的次序。`);
-      else if (question.kind === 'shop-recognize') announce('睇吓硬幣中間個數字，再同右邊比一比。');
       else announce(`再看看物品、價錢和數量，慢慢想一想。`);
       deps?.speech?.playTryAgainCue?.({ muted: deps.isMuted?.() }); setTimeout(() => button.classList.remove('is-bad'), 420); return;
     }
@@ -248,8 +213,6 @@
     if (question.kind === 'shape' || question.kind === 'pattern') {
       const shape = data().SHAPES.find((item) => item.id === choice.id);
       if (shape) button.append(shapeDrawing(shape, '#ffd064')); button.append(el('strong', '', choice.label));
-    } else if (question.kind === 'shop-recognize') {
-      button.append(coinFace(Number(choice.id), 'is-choice-coin'), el('strong', '', `${choice.id}蚊`));
     } else if (question.kind === 'bonds') {
       button.append(el('span', 'math-life-answer-number', String(choice.id)), el('span', 'math-life-answer-unit', '粒'));
     } else button.textContent = choice.label;
@@ -262,8 +225,7 @@
     $('math-life-skill-progress').textContent = `${index + 1}/${mission.length}`;
     $('math-life-skill-prompt').textContent = question.prompt || activity.title;
     $('math-life-skill-feedback').textContent = ''; $('btn-math-life-skill-next').hidden = true;
-    $('math-life-skill-answers-heading').textContent = '💡 揀答案';
-    $('math-life-skill-board').classList.remove('is-shop-intro');
+    $('math-life-skill-answers-heading').textContent = question.kind === 'shop-payment' ? '🧺 完成付款' : '💡 揀答案';
     renderQuestionVisual(question); const choices = $('math-life-skill-choices'); choices.replaceChildren();
     if (question.kind === 'shop-payment') renderShopPaymentAction(question, choices);
     else question.choices.forEach((choice) => renderChoice(question, choice, choices));
@@ -274,9 +236,9 @@
     $('math-life-skill-title').textContent = found.title; $('math-life-skill-planet').textContent = `生活挑戰・${found.subtitle}`;
     const screen = $('screen-math-life-skill'); if (screen) screen.dataset.activity = activityId;
     $('btn-back-math-life-skill').onclick = () => deps?.openGalaxy?.();
-    if (activityId === 'little-shop') renderShopIntro(); else renderQuestion();
+    renderQuestion();
     deps.showMathScreen('lifeSkill');
-    if (activityId === 'little-shop') speakThen(SHOP_STORY, () => {});
+    if (activityId === 'little-shop') speakThen(`${SHOP_STORY} ${mission[0].prompt}`, () => {});
     else speakThen(mission[0].prompt || found.title, () => {});
   }
   function next() {
