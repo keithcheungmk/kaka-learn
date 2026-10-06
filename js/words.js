@@ -1426,6 +1426,10 @@ const ANIMAL_ILLUSTRATIONS = {
   shuxiong: 'assets/animals/wild/koala.webp',
   eyu: 'assets/animals/wild/crocodile.webp',
   maotouying: 'assets/animals/wild/owl.webp',
+  lang: 'assets/animals/wild/wolf.webp',
+  haitun: 'assets/animals/wild/dolphin.webp',
+  haibao: 'assets/animals/wild/seal.webp',
+  kongque: 'assets/animals/wild/peacock.webp',
 };
 
 // 連一連專用圖像校訂：只改善容易混淆的抽象詞，不更改其他學習遊戲的原裝 Emoji。

@@ -46,6 +46,10 @@ const mappedAnimals = new Map([
   ['shuxiong', 'koala.webp'],
   ['eyu', 'crocodile.webp'],
   ['maotouying', 'owl.webp'],
+  ['lang', 'wolf.webp'],
+  ['haitun', 'dolphin.webp'],
+  ['haibao', 'seal.webp'],
+  ['kongque', 'peacock.webp'],
 ]);
 for (const [id, filename] of mappedAnimals) {
   const word = words.getWordById(id);
