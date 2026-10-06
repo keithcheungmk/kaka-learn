@@ -80,6 +80,8 @@ const mappedAnimals = new Map([
   ['shuimu', 'jellyfish.webp'],
   ['haigui', 'sea-turtle.webp'],
   ['haixing', 'starfish.webp'],
+  ['xiaochouyu', 'clownfish.webp'],
+  ['youyu', 'squid.webp'],
 ]);
 for (const [id, filename] of mappedAnimals) {
   const word = words.getWordById(id);
@@ -97,10 +99,14 @@ for (const [id, filename] of mappedAnimals) {
   assert.ok(bytes.byteLength < 400 * 1024, `${filename} stays below the 400 KiB asset limit`);
 }
 
-const unrelated = words.getWordById('niao');
-assert.ok(words.wordIllustHtml(unrelated).includes('class="emoji-face"'),
-  'unmapped animals continue using the emoji fallback');
-assert.ok(!words.wordIllustHtml(unrelated).includes('word-photo'),
-  'the pilot does not replace unrelated animal art');
+const genericAnimalIds = ['xiong', 'yu', 'niao', 'chong', 'long', 'konglong', 'konglongdan'];
+for (const id of genericAnimalIds) {
+  const word = words.getWordById(id);
+  assert.ok(word, `${id} generic animal category exists`);
+  assert.ok(words.wordIllustHtml(word).includes('class="emoji-face"'),
+    `${id} keeps its emoji fallback`);
+  assert.ok(!words.wordIllustHtml(word).includes('word-photo'),
+    `${id} remains a generic category rather than a species illustration`);
+}
 
 console.log(`Animal illustration checks passed (${mappedAnimals.size} mapped assets, 4 new zoo words, alpha and size limits, emoji fallback).`);
