@@ -993,3 +993,10 @@ python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
 - Added a regression assertion in `scripts/test-phonics-flow.mjs`.
 - Validation: phonics flow tests, JavaScript syntax checks, all 40 invariants, and `git diff --check` passed.
 - Changes: `css/playground-theme.css`, `scripts/test-phonics-flow.mjs`, `docs/handover.md`.
+
+### 2026-10-06 · ChatGPT/Codex — Keep Jobs portraits inside Topic Words cards
+
+- Fixed the Jobs / People Around Us word-wall portraits overflowing their cards and covering neighboring rows. The overview now uses contained, landscape photo frames (up to 144×104px; 120×82px on phones), with taller word cards and a face-focused crop; other career-photo screens keep their existing sizing.
+- Added regression assertions for desktop and phone portrait bounds and bumped the shared stylesheet cache key.
+- Validation: phonics flow tests, JS syntax, all 41 invariants, and `git diff --check` pass. Local responsive smoke could not start because the sandbox denied binding port 5173; deployment CI remains the viewport smoke gate. Static review approved the scoped selectors; no visual/browser QA was captured.
+- Changes: `css/playground-theme.css`, `index.html`, `scripts/test-phonics-flow.mjs`, `docs/handover.md`.

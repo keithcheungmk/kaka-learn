@@ -593,7 +593,7 @@ body::before {
   appearance: none;
   display: flex;
   min-width: 0;
-  min-height: 170px;
+  min-height: 208px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -625,8 +625,25 @@ body::before {
 
 #screen-phonics-learn.is-words-overview .topic-word-art {
   display: grid;
-  min-height: 88px;
+  width: 100%;
+  min-height: 108px;
   place-items: center;
+}
+
+/* Keep the original career portraits inside each overview card instead of
+   letting the larger phonics-card image size cover neighboring words. */
+#screen-phonics-learn.is-words-overview .topic-word-art .career-photo-plate {
+  width: min(100%, 144px);
+  height: 104px;
+  aspect-ratio: auto;
+  border-width: 3px;
+  border-radius: 18px;
+  box-shadow: 0 5px 12px rgba(48, 87, 133, 0.14);
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-art .career-photo {
+  object-fit: cover;
+  object-position: center 32%;
 }
 
 #screen-phonics-learn.is-words-overview .topic-word-art .emoji-plate {
@@ -683,8 +700,18 @@ body::before {
   }
 
   #screen-phonics-learn.is-words-overview .topic-word-card {
-    min-height: 148px;
+    min-height: 178px;
     border-radius: 18px;
+  }
+
+  #screen-phonics-learn.is-words-overview .topic-word-art {
+    min-height: 88px;
+  }
+
+  #screen-phonics-learn.is-words-overview .topic-word-art .career-photo-plate {
+    width: min(100%, 120px);
+    height: 82px;
+    border-radius: 14px;
   }
 
   #screen-phonics-learn.is-words-overview .topic-word-art .emoji-plate {

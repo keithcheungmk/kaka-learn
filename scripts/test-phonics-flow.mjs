@@ -57,6 +57,9 @@ assert.match(appSource, /開始挑戰 →/, '主題詞卡頁保留挑戰入口')
 assert.match(playgroundTheme, /words-card-grid[\s\S]*repeat\(5, minmax\(0, 1fr\)\)/, '寬版主題詞卡採用五欄');
 assert.match(playgroundTheme, /@media \(max-width: 900px\)[\s\S]*words-card-grid[\s\S]*repeat\(3, minmax\(0, 1fr\)\)/, '平板直向主題詞卡採用三欄');
 assert.match(playgroundTheme, /@media \(max-width: 560px\)[\s\S]*words-card-grid[\s\S]*repeat\(2, minmax\(0, 1fr\)\)/, '手機主題詞卡採用兩欄');
+assert.match(playgroundTheme, /is-words-overview \.topic-word-art \.career-photo-plate[\s\S]*width: min\(100%, 144px\)[\s\S]*height: 104px/, '職業相片在主題詞卡內有固定尺寸，避免遮住其他卡片');
+assert.match(playgroundTheme, /is-words-overview \.topic-word-art \.career-photo[\s\S]*object-fit: cover/, '職業相片會裁切填滿卡片預留的圖像區');
+assert.match(playgroundTheme, /@media \(max-width: 560px\)[\s\S]*career-photo-plate[\s\S]*width: min\(100%, 120px\)[\s\S]*height: 82px/, '手機上的職業相片會再縮小並留在卡片內');
 
 const allVocabularyTopicIds = [
   'sight_food', 'sight_veg', 'sight_places', 'sight_vehicles', 'sight_fruit', 'sight_household', 'sight_school_items',
