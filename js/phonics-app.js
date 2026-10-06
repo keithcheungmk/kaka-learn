@@ -742,6 +742,21 @@
   }
 
   function renderPhonicsLearnCard() {
+    const screen = $('#screen-phonics-learn');
+    const topic = getPhonicsTopicById(pActiveTopicId);
+    const wordsOverview = topic?.section === 'sight' && !topic.soundMissions;
+    screen?.classList.toggle('is-words-overview', wordsOverview);
+    const wordsPanel = $('#phonics-words-overview');
+    const learnStage = $('#phonics-learn-stage');
+    const learnNav = $('#screen-phonics-learn .learn-nav');
+    if (wordsPanel) wordsPanel.hidden = !wordsOverview;
+    if (learnStage) learnStage.hidden = wordsOverview;
+    if (learnNav) learnNav.hidden = wordsOverview;
+    if (wordsOverview) {
+      renderPhonicsWordsOverview();
+      return;
+    }
+
     const word = pLearnWords[pLearnIndex];
     if (!word) return;
     const illust = $('#phonics-learn-illust');
@@ -839,6 +854,50 @@
     if (face) face.classList.add('emoji-face-lg');
 
     speakCurrentPhonicsLearn();
+  }
+
+  function renderPhonicsWordsOverview() {
+    const topic = getPhonicsTopicById(pActiveTopicId);
+    const overview = $('#phonics-words-overview');
+    const title = $('#phonics-words-overview-title');
+    const grid = $('#phonics-words-card-grid');
+    const lead = $('#screen-phonics-learn .section-lead');
+    const progress = $('#phonics-learn-progress');
+    const nav = $('#screen-phonics-learn .learn-nav');
+    const finishRow = $('#phonics-learn-finish-row');
+    const play = $('#btn-phonics-learn-play');
+
+    if (overview) overview.hidden = false;
+    if (lead) lead.textContent = '一次睇晒全部生字；按卡片聽英文讀音';
+    if (progress) progress.textContent = `${pLearnWords.length} 個詞`;
+    if (nav) nav.hidden = true;
+    if (finishRow) finishRow.hidden = false;
+    if (title) title.textContent = topic?.titleEn || 'Words';
+    if (play) {
+      play.textContent = '開始挑戰 →';
+      play.setAttribute('aria-label', `開始${topic?.title || ''}詞語挑戰`);
+    }
+    if (!grid) return;
+
+    grid.innerHTML = pLearnWords.map((word) => `
+      <button type="button" class="topic-word-card" data-topic-word="${word.word}" aria-label="聽 ${word.word}">
+        <span class="topic-word-art" aria-hidden="true">${phonicsWordIllustHtml(word)}</span>
+        <span class="topic-word-label term-en">${word.word}</span>
+        <span class="topic-word-hear" aria-hidden="true">🔊</span>
+      </button>
+    `).join('');
+
+    grid.querySelectorAll('.topic-word-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        grid.querySelectorAll('.topic-word-card.is-speaking').forEach((activeCard) => activeCard.classList.remove('is-speaking'));
+        card.classList.add('is-speaking');
+        speakEnglishTerm(card.dataset.topicWord, {
+          muted: isMuted(),
+          onEnd: () => card.classList.remove('is-speaking'),
+        });
+      });
+    });
+    if (topic) grid.setAttribute('aria-label', `${topic.titleEn} vocabulary cards`);
   }
 
   async function speakCurrentPhonicsLearn() {

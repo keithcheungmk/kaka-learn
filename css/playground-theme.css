@@ -553,3 +553,146 @@ body::before {
 .sentence-card-verb small,
 .sentence-card-object small,
 .sentence-card-other small { font-weight: 700; }
+
+/* Topic Words: one glanceable, tappable word wall for every English vocabulary topic. */
+#screen-phonics-learn.is-words-overview .words-overview {
+  width: min(100%, 1240px);
+  margin: 0 auto;
+  padding: clamp(14px, 2.2vw, 26px);
+  border: 2px solid rgba(93, 145, 203, 0.3);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: var(--shadow);
+}
+
+#screen-phonics-learn.is-words-overview .words-overview-heading {
+  margin: 0 0 16px;
+  text-align: center;
+}
+
+#screen-phonics-learn.is-words-overview .words-overview-heading h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+#screen-phonics-learn.is-words-overview .words-overview-heading p {
+  margin: 4px 0 0;
+  color: var(--ink-dim);
+  font-size: clamp(.95rem, 1.8vw, 1.15rem);
+  font-weight: 700;
+}
+
+#screen-phonics-learn.is-words-overview .words-card-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(10px, 1.4vw, 18px);
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-card {
+  appearance: none;
+  display: flex;
+  min-width: 0;
+  min-height: 170px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 8px;
+  border: 2px solid #efc85c;
+  border-radius: 22px;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 5px 12px rgba(55, 87, 123, 0.13);
+  cursor: pointer;
+  font: inherit;
+  transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-card:active,
+#screen-phonics-learn.is-words-overview .topic-word-card.is-speaking {
+  transform: translateY(-2px);
+  border-color: #36bd91;
+  background: #e9fbf4;
+  box-shadow: 0 0 0 4px rgba(54, 189, 145, 0.18), 0 8px 16px rgba(55, 87, 123, 0.14);
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-card:focus-visible {
+  outline: 3px solid #2f80d1;
+  outline-offset: 3px;
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-art {
+  display: grid;
+  min-height: 88px;
+  place-items: center;
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-art .emoji-plate {
+  width: 82px;
+  height: 82px;
+  background: #e7f3ff;
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-art .emoji-face {
+  font-size: 2.8rem;
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-label {
+  overflow-wrap: anywhere;
+  color: #193864;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: lowercase;
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-hear {
+  color: #347fc5;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+#screen-phonics-learn.is-words-overview .learn-finish-row {
+  margin: 18px auto 28px;
+}
+
+#screen-phonics-learn.is-words-overview #btn-phonics-learn-play {
+  min-width: min(100%, 360px);
+  min-height: 64px;
+  font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+}
+
+@media (max-width: 900px) {
+  #screen-phonics-learn.is-words-overview .words-card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  #screen-phonics-learn.is-words-overview .words-overview {
+    padding: 12px;
+    border-radius: 20px;
+  }
+
+  #screen-phonics-learn.is-words-overview .words-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  #screen-phonics-learn.is-words-overview .topic-word-card {
+    min-height: 148px;
+    border-radius: 18px;
+  }
+
+  #screen-phonics-learn.is-words-overview .topic-word-art .emoji-plate {
+    width: 70px;
+    height: 70px;
+  }
+
+  #screen-phonics-learn.is-words-overview .topic-word-art .emoji-face {
+    font-size: 2.35rem;
+  }
+}
