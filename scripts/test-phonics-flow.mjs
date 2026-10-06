@@ -8,6 +8,7 @@ const repo = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dataSource = fs.readFileSync(path.join(repo, 'js/phonics-words.js'), 'utf8');
 const appSource = fs.readFileSync(path.join(repo, 'js/phonics-app.js'), 'utf8');
 const playgroundTheme = fs.readFileSync(path.join(repo, 'css/playground-theme.css'), 'utf8');
+const appMarkup = fs.readFileSync(path.join(repo, 'index.html'), 'utf8');
 const context = { window: {} };
 vm.createContext(context);
 vm.runInContext(dataSource, context);
@@ -44,6 +45,29 @@ for (const topicId of ['sight_food', 'sight_veg', 'sight_places', 'sight_vehicle
       assert.ok(fs.existsSync(path.join(repo, 'assets/phonemes', `${phoneme}.mp3`)), `${item.word} 使用已存在的 ${phoneme} 音檔`);
     }
   }
+}
+
+assert.match(appMarkup, /id="phonics-words-overview"/, '主題詞語總覽容器存在');
+assert.match(appMarkup, /id="phonics-words-card-grid"/, '主題詞語卡片網格存在');
+assert.match(appSource, /topic\?\.section === 'sight' && !topic\.soundMissions/, '所有 Sight 主題詞語共用一頁詞卡；音素任務保留原模式');
+assert.match(appSource, /renderPhonicsWordsOverview\(\)/, '主題生字由共用 renderer 顯示');
+assert.match(appSource, /speakEnglishTerm\(card\.dataset\.topicWord/, '按主題詞卡可播放完整詞語');
+assert.match(appSource, /開始挑戰 →/, '主題詞卡頁保留挑戰入口');
+assert.match(playgroundTheme, /words-card-grid[\s\S]*repeat\(5, minmax\(0, 1fr\)\)/, '寬版主題詞卡採用五欄');
+assert.match(playgroundTheme, /@media \(max-width: 900px\)[\s\S]*words-card-grid[\s\S]*repeat\(3, minmax\(0, 1fr\)\)/, '平板直向主題詞卡採用三欄');
+assert.match(playgroundTheme, /@media \(max-width: 560px\)[\s\S]*words-card-grid[\s\S]*repeat\(2, minmax\(0, 1fr\)\)/, '手機主題詞卡採用兩欄');
+
+const allVocabularyTopicIds = [
+  'sight_food', 'sight_veg', 'sight_places', 'sight_vehicles', 'sight_fruit', 'sight_household', 'sight_school_items',
+  'sight_jobs_nearby', 'sight_jobs_world', 'sight_body', 'sight_feelings', 'sight_clothes', 'sight_family_people',
+  'sight_weather', 'sight_colors', 'sight_numbers', 'sight_shapes', 'sight_toys', 'sight_actions',
+  'festival_christmas', 'festival_lunar_new_year', 'festival_mid_autumn', 'festival_dragon_boat', 'festival_halloween',
+];
+for (const topicId of allVocabularyTopicIds) {
+  const vocabularyTopic = context.window.KakaPhonicsWords.getPhonicsTopicById(topicId);
+  assert.ok(vocabularyTopic, `${topicId} 生字主題存在`);
+  assert.equal(vocabularyTopic.section, 'sight', `${topicId} 屬於英文主題詞語`);
+  assert.ok(vocabularyTopic.words.length > 0, `${topicId} 有可展示的詞卡`);
 }
 
 const correctedVocabularyTopics = ['sight_food', 'sight_veg', 'sight_household', 'sight_feelings', 'sight_weather', 'sight_toys'];
