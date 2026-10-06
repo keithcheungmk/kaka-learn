@@ -620,13 +620,7 @@
   min-height: 100dvh; height: auto; overflow: visible;
 }
 .math-life-skill-screen .game-header { grid-area: header; margin: 0; }
-.math-life-skill-screen[data-activity="little-shop"].active::before { background: linear-gradient(145deg, #fff9e9, #eef8ff 58%, #fff5df); }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-prompt-wrap,
-.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-board,
-.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-answer-panel {
-  border-color: #edc976;
-  box-shadow: 0 8px 22px rgba(112, 82, 37, .16);
-}
+.math-life-shop-stage { display: contents; }
 .math-life-skill-planet { grid-area: planet; margin: 0; color: #267655; text-align: center; font-size: clamp(.9rem, 1.5vw, 1.1rem); font-weight: 900; }
 .math-life-skill-prompt-wrap { grid-area: prompt; display: flex; align-items: center; justify-content: center; width: min(100%, 1320px); min-width: 0; margin: 0 auto; }
 .math-life-skill-prompt { width: 100%; margin: 0; padding: 12px 18px; border: 2px solid #a9d6ee; border-radius: 20px; background: linear-gradient(120deg, #fff, #eef8ff); color: #18345f; text-align: center; font-size: clamp(1.05rem, 2.1vh, 1.5rem); font-weight: 900; line-height: 1.25; box-shadow: 0 6px 18px rgba(71,117,160,.1); }
@@ -724,56 +718,6 @@
 .math-life-shop-pay-button { width: min(100%, 520px); min-height: 58px; border-radius: 18px; background: linear-gradient(145deg, #45c792, #22aa77); color: #fff; font-size: 1.2rem; font-weight: 950; }
 .math-life-skill-screen[data-activity="little-shop"] .math-life-skill-feedback:empty { display: none; }
 .math-life-skill-screen[data-activity="little-shop"] .math-life-skill-feedback:not(:empty) { padding: 10px 14px; border-radius: 16px; background: #e8f7ef; color: #236348; font-weight: 850; line-height: 1.35; }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-prompt-wrap { display: flex; padding: 8px 14px; box-sizing: border-box; border: 2px solid #edc976; border-radius: 22px; background: linear-gradient(120deg, #fffdf6, #fff 70%); }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-prompt { border: 0; background: transparent; box-shadow: none; }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-scene { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); justify-items: center; align-items: center; gap: 10px; width: 100%; }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-product-card { grid-column: 1; grid-row: 1 / span 2; min-width: 0; width: 100%; padding: 12px 8px; }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-wallet { grid-column: 2; grid-row: 1; min-width: 0; width: 100%; padding: 10px; }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-payment-tray { grid-column: 2; grid-row: 2; min-height: 76px; padding: 8px; gap: 6px; }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-coins { max-width: 100%; gap: 5px; }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-coin-button { min-width: 64px; min-height: 64px; }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-coin-button .math-life-hk-coin { width: 54px; }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster { grid-area: poster; display: flex; flex-direction: column; gap: 10px; min-width: 0; min-height: 0; padding: 10px; overflow: hidden; border: 2px solid #edc976; border-radius: 24px; background: linear-gradient(145deg, #fff8df, #fff); box-shadow: 0 8px 22px rgba(112, 82, 37, .13); }
-.math-life-shop-poster-image { display: block; width: 100%; min-height: 0; flex: 1 1 auto; border-radius: 16px; object-fit: contain; background: #fffdf6; }
-.math-life-shop-poster > strong { flex: 0 0 auto; color: #8a6418; text-align: center; font-size: clamp(1rem, 1.6vw, 1.25rem); }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-planet { display: none; }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-board-wrap { min-height: 340px; }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-board { padding: 12px; }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-answers-heading { color: #8a6418; }
-.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-board { background: rgba(255, 253, 246, .94); }
-
-@media (min-width: 1000px) and (orientation: landscape) {
-  .math-life-skill-screen[data-activity="little-shop"].active {
-    grid-template-columns: minmax(205px, .72fr) minmax(380px, 1.45fr) minmax(235px, .83fr);
-    grid-template-rows: auto auto minmax(340px, 1fr);
-    grid-template-areas: "header header header" "poster prompt answers" "poster board answers";
-  }
-  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster { min-height: 340px; }
-}
-
-@media (min-width: 701px) and (max-width: 999px) and (orientation: landscape) {
-  .math-life-skill-screen[data-activity="little-shop"].active {
-    grid-template-columns: minmax(0, 1.4fr) minmax(230px, .8fr);
-    grid-template-rows: auto auto auto minmax(320px, 1fr);
-    grid-template-areas: "header header" "poster poster" "prompt answers" "board answers";
-  }
-  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster { flex-direction: row; align-items: center; height: clamp(130px, 23vh, 190px); }
-  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster-image { width: auto; min-width: 0; height: 100%; flex: 1 1 auto; }
-  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster > strong { width: 150px; }
-  .math-life-skill-screen[data-activity="little-shop"] .math-life-skill-board-wrap { min-height: 320px; }
-}
-
-@media (orientation: portrait) {
-  .math-life-skill-screen[data-activity="little-shop"].active {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: auto auto auto auto auto;
-    grid-template-areas: "header" "poster" "prompt" "board" "answers";
-  }
-  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster { display: flex; min-height: 0; padding: 8px; gap: 5px; }
-  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster-image { width: 100%; height: auto; max-height: clamp(130px, 22vh, 220px); flex: 0 1 auto; aspect-ratio: 16 / 9; object-fit: contain; }
-  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster > strong { font-size: .95rem; }
-  .math-life-skill-screen[data-activity="little-shop"] .math-life-skill-board-wrap { min-height: 300px; }
-}
 .math-life-measure-object { display: grid; justify-items: center; align-items: center; align-content: center; gap: 8px; flex: 1 1 0; max-width: 320px; min-width: 0; min-height: 150px; padding: 10px; border: 2px solid #b9d9f5; border-radius: 18px; background: #fff; }
 .math-life-ruler { display: flex; align-items: center; width: 100%; min-height: 76px; background: repeating-linear-gradient(90deg, transparent 0 calc(10% - 1px), #aac4d9 calc(10% - 1px) 10%); border-bottom: 2px solid #a5bfd4; }
 .math-life-measure-bar { display: block; max-width: 100%; height: 32px; border: 2px solid #bf7723; border-radius: 8px; background: repeating-linear-gradient(90deg, #ffd35e 0 28px, #f8a83b 28px 56px); }
@@ -2083,6 +2027,253 @@
   html.math-canvas-mode body{display:block}
   html.math-canvas-mode #app{width:100%;height:auto;min-height:100dvh;max-width:none;margin:0;padding:16px;overflow:visible}
   html.math-canvas-mode .math-screen.active{height:auto;min-height:100dvh;overflow:visible}
+}
+
+/* Fruit shop: keep the page to a header and one immersive play area. */
+.math-life-skill-screen[data-activity="little-shop"].active {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(500px, 1fr);
+  grid-template-areas: "header" "stage";
+  align-content: stretch;
+  gap: clamp(8px, 1.2vh, 14px);
+  min-height: 100dvh;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-stage {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-area: stage;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas: "prompt" "board" "answers";
+  align-items: stretch;
+  gap: clamp(10px, 1.5vh, 18px);
+  min-width: 0;
+  min-height: clamp(500px, calc(100dvh - 150px), 780px);
+  padding: clamp(14px, 2.2vw, 28px);
+  overflow: hidden;
+  border: 2px solid rgba(228, 188, 91, .75);
+  border-radius: clamp(20px, 2.2vw, 32px);
+  background: rgba(255, 250, 232, .82);
+  box-shadow: 0 10px 28px rgba(92, 108, 132, .12);
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(110deg, rgba(255, 251, 235, .36), rgba(255, 255, 255, .48) 54%, rgba(239, 248, 255, .36));
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 52%;
+  opacity: .55;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-planet { display: none; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-prompt-wrap {
+  grid-area: prompt;
+  display: flex;
+  justify-self: center;
+  width: min(100%, 1100px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-prompt {
+  padding: 4px 8px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  font-size: clamp(1.15rem, 2.4vw, 1.8rem);
+  text-wrap: balance;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-board-wrap {
+  grid-area: board;
+  min-height: 0;
+  justify-content: center;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-board-heading { display: none; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-board {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-scene {
+  display: grid;
+  grid-template-columns: minmax(150px, .75fr) minmax(0, 1.25fr);
+  grid-template-rows: auto auto;
+  grid-template-areas: "product wallet" "product tray";
+  align-items: center;
+  justify-items: stretch;
+  gap: clamp(10px, 1.6vw, 22px);
+  width: min(100%, 1020px);
+  color: #17345c;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-product-card {
+  grid-area: product;
+  min-width: 0;
+  padding: 8px;
+  border: 0;
+  border-radius: 24px;
+  background: transparent;
+  box-shadow: none;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-item {
+  font-size: clamp(5rem, 15vh, 9.5rem);
+  filter: drop-shadow(0 8px 6px rgba(26, 55, 80, .16));
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-product-card strong { font-size: clamp(1.2rem, 2.6vw, 1.8rem); }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-price-tag { font-size: clamp(1.3rem, 2.7vw, 1.8rem); }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-wallet {
+  position: relative;
+  grid-area: wallet;
+  isolation: isolate;
+  min-width: 0;
+  width: 100%;
+  padding: clamp(18px, 2vw, 26px) clamp(12px, 1.6vw, 20px) clamp(14px, 1.4vw, 18px);
+  border: 3px solid #a76837;
+  border-radius: 24px 24px 34px 34px;
+  background: linear-gradient(145deg, #e8bd82 0%, #d69c5f 58%, #c27e43 100%);
+  box-shadow: 0 8px 0 #a96334, inset 0 2px 0 rgba(255,255,255,.65), 0 12px 20px rgba(97,65,38,.15);
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-wallet::before {
+  position: absolute;
+  z-index: -1;
+  top: -3px;
+  left: 50%;
+  width: clamp(42px, 6vw, 66px);
+  height: 22px;
+  content: "";
+  transform: translateX(-50%);
+  border: 3px solid #a76837;
+  border-top: 0;
+  border-radius: 0 0 15px 15px;
+  background: linear-gradient(180deg, #f1d2a4, #dca66b);
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-wallet > strong {
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 249, 230, .92);
+  color: #704322;
+  font-size: clamp(.95rem, 1.7vw, 1.2rem);
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-coins {
+  position: relative;
+  z-index: 1;
+  max-width: none;
+  gap: clamp(4px, .8vw, 10px);
+  padding: clamp(8px, 1vw, 12px);
+  border: 2px solid rgba(130, 81, 44, .38);
+  border-radius: 18px 18px 26px 26px;
+  background: linear-gradient(145deg, rgba(255,249,232,.88), rgba(247,228,195,.9));
+  box-shadow: inset 0 4px 8px rgba(118,74,40,.13), 0 2px 0 rgba(255,255,255,.45);
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-coin-button {
+  min-width: clamp(66px, 9vh, 92px);
+  min-height: clamp(66px, 9vh, 92px);
+  border-radius: 50%;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-coin-button .math-life-hk-coin { width: clamp(54px, 7.5vh, 78px); }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-payment-tray {
+  position: relative;
+  grid-area: tray;
+  justify-self: center;
+  width: min(100%, 680px);
+  min-height: 138px;
+  padding: 18px 28px;
+  gap: 10px;
+  border: 7px solid #bd8d4c;
+  border-radius: 50% / 38%;
+  background: radial-gradient(ellipse at 50% 34%, #fffdf5 0%, #fff8e8 55%, #efd9a8 100%);
+  color: #604a1b;
+  box-shadow: 0 9px 0 #9e713b, inset 0 0 0 4px rgba(255,255,255,.75), inset 0 0 0 8px rgba(189,141,76,.2), 0 15px 22px rgba(94,72,39,.16);
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-payment-tray > strong { flex-basis: 100%; color: #785522; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-payment-coins { min-width: 0; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-payment-coins .math-life-hk-coin { width: clamp(44px, 5.8vh, 58px); }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-payment-coins .math-life-hk-coin.is-arriving { animation: math-life-coin-land .24s cubic-bezier(.2,.8,.25,1.15) both; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-answer-panel {
+  grid-area: answers;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-answers-heading { display: none; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-choices { display: flex; justify-content: center; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-pay-button,
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-next { width: min(100%, 340px); min-height: 62px; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-feedback { width: min(100%, 760px); box-sizing: border-box; }
+
+@media (orientation: landscape) and (min-width: 701px) {
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-stage {
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    min-height: clamp(500px, calc(100dvh - 138px), 780px);
+  }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-scene { grid-template-columns: minmax(200px, .68fr) minmax(0, 1.32fr); }
+}
+@media (orientation: portrait), (max-width: 700px) {
+  .math-life-skill-screen[data-activity="little-shop"].active {
+    grid-template-rows: auto auto;
+    min-height: 100dvh;
+  }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-stage {
+    grid-template-rows: auto minmax(300px, auto) auto;
+    min-height: max(640px, calc(100dvh - 150px));
+    overflow: hidden;
+    padding: clamp(12px, 3vw, 20px);
+  }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster-image { object-position: center; }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-scene {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "product" "wallet" "tray";
+    gap: 12px;
+  }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-product-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 10px;
+  }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-item { font-size: clamp(3.5rem, 10vh, 5.5rem); }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-wallet { gap: 6px; }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-coin-button { min-width: 60px; min-height: 60px; }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-coin-button .math-life-hk-coin { width: 50px; }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-payment-tray { min-height: 124px; padding: 14px 18px; border-radius: 50% / 32%; }
+}
+
+@keyframes math-life-coin-land {
+  from { opacity: .3; transform: translateY(-16px) scale(.82); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-payment-coins .math-life-hk-coin.is-arriving { animation-duration: .01ms; }
 }
 
 /* Shared light playground theme for every Math route (not just Clock).

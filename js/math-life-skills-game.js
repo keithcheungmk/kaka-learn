@@ -82,7 +82,7 @@
     const product = el('div', 'math-life-product-card');
     product.append(el('span', 'math-life-shop-item', question.item.emoji), el('strong', '', question.item.name), el('span', 'math-life-price-tag', `$${question.price}`));
     const wallet = el('div', 'math-life-wallet');
-    wallet.append(el('strong', '', '錢包：點硬幣放入付款盤'));
+    wallet.append(el('strong', '', '👛 卡卡的小錢包'));
     const coins = el('div', 'math-life-coins');
     question.coins.forEach((coin, index) => {
       const selected = shopSelected.has(index);
@@ -92,11 +92,12 @@
       button.setAttribute('aria-pressed', String(selected)); button.append(coinFace(coin.value));
       button.addEventListener('click', () => {
         if (locked) return;
-        if (shopSelected.has(index)) shopSelected.delete(index); else shopSelected.add(index);
+        const returning = shopSelected.has(index);
+        if (returning) shopSelected.delete(index); else shopSelected.add(index);
         button.classList.toggle('is-selected', shopSelected.has(index));
         button.setAttribute('aria-pressed', String(shopSelected.has(index)));
         button.setAttribute('aria-label', `${coin.value}蚊硬幣${shopSelected.has(index) ? '，已放入付款盤，點一下取回' : '，點一下放入付款盤'}`);
-        updateShopPayment(question);
+        updateShopPayment(question, returning ? null : index);
       });
       coins.append(button);
     });
@@ -108,13 +109,13 @@
     tray.append(selectedCoins, total);
     shop.append(product, wallet, tray); board.append(shop); updateShopPayment(question);
   }
-  function updateShopPayment(question) {
+  function updateShopPayment(question, arrivingCoinIndex = null) {
     const selectedCoins = $('math-life-payment-coins'); const totalNode = $('math-life-payment-total');
     if (!selectedCoins || !totalNode) return;
-    const values = [...shopSelected].map((coinIndex) => question.coins[coinIndex]?.value).filter(Number.isFinite);
+    const values = [...shopSelected].map((coinIndex) => ({ index: coinIndex, value: question.coins[coinIndex]?.value })).filter(({ value }) => Number.isFinite(value));
     selectedCoins.replaceChildren();
-    values.forEach((value) => selectedCoins.append(coinFace(value)));
-    const total = values.reduce((sum, value) => sum + value, 0);
+    values.forEach(({ index, value }) => selectedCoins.append(coinFace(value, index === arrivingCoinIndex ? 'is-arriving' : '')));
+    const total = values.reduce((sum, { value }) => sum + value, 0);
     totalNode.textContent = `$${total}`;
     totalNode.setAttribute('aria-label', `付款盤總額${total}蚊`);
   }
