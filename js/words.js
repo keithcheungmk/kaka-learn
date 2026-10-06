@@ -1434,6 +1434,10 @@ const ANIMAL_ILLUSTRATIONS = {
   she: 'assets/animals/wild/snake.webp',
   gou: 'assets/animals/wild/dog.webp',
   mao: 'assets/animals/wild/cat.webp',
+  tu: 'assets/animals/wild/rabbit.webp',
+  yang: 'assets/animals/wild/sheep.webp',
+  niu: 'assets/animals/wild/cow.webp',
+  ma: 'assets/animals/wild/horse.webp',
 };
 
 // 連一連專用圖像校訂：只改善容易混淆的抽象詞，不更改其他學習遊戲的原裝 Emoji。

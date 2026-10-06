@@ -56,6 +56,10 @@ const mappedAnimals = new Map([
   ['she', 'snake.webp'],
   ['gou', 'dog.webp'],
   ['mao', 'cat.webp'],
+  ['tu', 'rabbit.webp'],
+  ['yang', 'sheep.webp'],
+  ['niu', 'cow.webp'],
+  ['ma', 'horse.webp'],
 ]);
 for (const [id, filename] of mappedAnimals) {
   const word = words.getWordById(id);
@@ -73,7 +77,7 @@ for (const [id, filename] of mappedAnimals) {
   assert.ok(bytes.byteLength < 400 * 1024, `${filename} stays below the 400 KiB asset limit`);
 }
 
-const unrelated = words.getWordById('tu');
+const unrelated = words.getWordById('ya');
 assert.ok(words.wordIllustHtml(unrelated).includes('class="emoji-face"'),
   'unmapped animals continue using the emoji fallback');
 assert.ok(!words.wordIllustHtml(unrelated).includes('word-photo'),
