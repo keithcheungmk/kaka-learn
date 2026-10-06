@@ -1002,6 +1002,14 @@ python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
 - 本機 `scripts/smoke-shots.py --no-shots` 因 macOS Chromium MachPort 權限未能啟動；推送後由 CI／Pages 家庭裝置 smoke 補驗。
 - 變更：`index.html`、`js/app.js`、`css/styles.css`、`scripts/test-chinese-word-wall.mjs`、`docs/handover.md`。整合至主線前尚未部署。
 
+### 2026-10-07 · ChatGPT/Codex — Fruit shop wallet and payment tray
+
+- Simplified the fruit-shop screen to one main play area over a softly visible original shop poster; made the fruit, wallet, and payment tray the visual focus. Added a clearly illustrated wallet, a rounded ceramic-style payment dish, and a brief coin-arrival cue while preserving tap-to-select and tap-again-to-return behavior.
+- Added `skills/kaka-scenario-learning-game/SKILL.md` to capture reusable child-centered design guidance: familiar scenarios, concise Cantonese prompts, visual reasoning, unambiguous answer logic, touch-friendly interactions, and appropriately paced feedback.
+- Validation: fruit-shop tests, four-method math tests, JavaScript syntax, 41 invariants, static site build, and `git diff --check` passed. Skill validation was manually reviewed because PyYAML is unavailable. Physical iPad/iPhone visual testing remains unverified.
+- Changes: `index.html`, `css/math.css`, `js/math-life-skills-game.js`, `scripts/test-math-life-skills.mjs`, `skills/kaka-scenario-learning-game/SKILL.md`, `docs/handover.md`.
+- Release status: integrated into the isolated release worktree; GitHub push, Pages deployment, and live verification pending.
+
 ### 2026-10-06 · ChatGPT/Codex — Keep Jobs portraits inside Topic Words cards
 
 - Fixed the Jobs / People Around Us word-wall portraits overflowing their cards and covering neighboring rows. The overview now uses contained, landscape photo frames (up to 144×104px; 120×82px on phones), with taller word cards and a face-focused crop; other career-photo screens keep their existing sizing.
