@@ -2066,6 +2066,71 @@
   html.math-canvas-mode .math-screen.active{height:auto;min-height:100dvh;overflow:visible}
 }
 
+/* Shared light playground theme for every Math route (not just Clock).
+   Keep this scoped to .math-screen so language and reading games are untouched. */
+html.math-canvas-mode .math-screen.active {
+  --ink: #17345c;
+  --ink-dim: #58738e;
+  --gold-soft: #a76500;
+  --teal-soft: #198866;
+  --shadow: 0 10px 24px rgba(77, 116, 158, .14);
+  color: #17345c;
+  background: transparent;
+}
+
+html.math-canvas-mode #app .math-screen.active::before {
+  background:
+    radial-gradient(ellipse at 7% 4%, rgba(255, 231, 147, .5), transparent 32%),
+    radial-gradient(ellipse at 92% 12%, rgba(144, 213, 255, .4), transparent 33%),
+    linear-gradient(145deg, #fffdf5, #eef8ff 58%, #f7f1ff);
+}
+
+/* Older count / compare / number-line activities now sit on the same light canvas. */
+html.math-canvas-mode .math-screen .math-learn-stage,
+html.math-canvas-mode .math-screen .math-count-field--quiz,
+html.math-canvas-mode .math-screen .math-compare-side,
+html.math-canvas-mode .math-screen .math-compare-pick,
+html.math-canvas-mode .math-screen .math-clock-pick,
+html.math-canvas-mode .math-screen .math-counting-set,
+html.math-canvas-mode .math-screen .math-relations-explain {
+  border-color: #c9dced;
+  background: linear-gradient(145deg, #fff, #f0f8ff);
+  color: #17345c;
+  box-shadow: 0 8px 20px rgba(77, 116, 158, .12);
+}
+
+html.math-canvas-mode .math-screen .math-learn-stage,
+html.math-canvas-mode .math-screen .math-compare-pick,
+html.math-canvas-mode .math-screen .math-clock-pick,
+html.math-canvas-mode .math-screen .speak-btn { color: #17345c; }
+html.math-canvas-mode .math-screen .math-learn-num,
+html.math-canvas-mode .math-screen .math-compare-vs,
+html.math-canvas-mode .math-screen .math-venus-say { color: #a76500; }
+html.math-canvas-mode .math-screen .math-compare-label,
+html.math-canvas-mode .math-screen .math-counting-instruction,
+html.math-canvas-mode .math-screen .math-relations-explain { color: #496b87; }
+html.math-canvas-mode .math-screen .math-count-tappable { background: #edf6ff; }
+html.math-canvas-mode .math-screen .math-count-field--quiz { border-color: #c9dced; }
+html.math-canvas-mode .math-screen .math-counting-set { border-color: #9cc9e7; }
+html.math-canvas-mode .math-playground-screen .math-playground-card .math-galaxy-status { color: #8c5b00; }
+
+html.math-canvas-mode .math-screen .math-nline-track {
+  border-color: #8fb8d6;
+  background: linear-gradient(180deg, #e8f5ff, #d8ebfb);
+  box-shadow: inset 0 2px 5px rgba(52, 94, 133, .12);
+}
+html.math-canvas-mode .math-screen .math-nline-tick { background: rgba(39, 75, 112, .28); }
+html.math-canvas-mode .math-screen .math-nline-label { color: #254c73; }
+html.math-canvas-mode .math-screen .math-nline-choice {
+  border-color: #c5d9eb;
+  background: #fff;
+  color: #17345c;
+}
+html.math-canvas-mode .math-screen .math-nline-choice.is-selected {
+  border-color: #e9b73c;
+  background: #fff3c8;
+}
+
 /* ── 數理 iPad 橫向總版型 ─────────────────────────────
    所有數理遊戲共用同一個橫向節奏：標題列 → 指示 → 主操作區。
    內容用畫布寬度計算，唔用固定手機直流式寬度。 */

@@ -131,3 +131,93 @@
   .concrete-target-card{flex-wrap:wrap}
   .concrete-target-answer{flex-basis:100%;width:min(100%,300px);margin-top:2px}
 }
+
+/* All addition and subtraction routes share the light Math Playground palette. */
+html.math-canvas-mode .addition-screen,
+html.math-canvas-mode .subtraction-screen {
+  background: transparent;
+  color: #17345c;
+}
+html.math-canvas-mode .earth-game-header h1,
+html.math-canvas-mode .addition-select-lead,
+html.math-canvas-mode .subtraction-mission-progress,
+html.math-canvas-mode .subtraction-desc,
+html.math-canvas-mode .addition-mission-progress,
+html.math-canvas-mode .addition-desc { color: #365d7b; text-shadow: none; }
+html.math-canvas-mode .addition-level-card,
+html.math-canvas-mode .subtraction-level-card {
+  border-color: color-mix(in srgb, var(--addition-accent, var(--subtraction-accent, #61afd0)) 45%, white);
+  background: linear-gradient(145deg, #fff, #edf7ff);
+  color: #17345c;
+  box-shadow: 0 10px 24px rgba(77, 116, 158, .14);
+}
+html.math-canvas-mode .addition-level-kicker,
+html.math-canvas-mode .subtraction-level-kicker { color: #267655; }
+html.math-canvas-mode .addition-level-visual,
+html.math-canvas-mode .addition-level-card strong,
+html.math-canvas-mode .subtraction-level-card strong { color: #17345c; filter: none; }
+html.math-canvas-mode .addition-level-status,
+html.math-canvas-mode .subtraction-level-status { color: #946000; }
+html.math-canvas-mode .addition-scenario,
+html.math-canvas-mode .subtraction-scenario,
+html.math-canvas-mode .addition-board-label,
+html.math-canvas-mode .subtraction-board-label { color: #267655; }
+html.math-canvas-mode .addition-equation,
+html.math-canvas-mode .subtraction-equation {
+  border-color: #b9d6e8;
+  background: linear-gradient(145deg, #fff, #edf7ff);
+  color: #17345c;
+  box-shadow: 0 6px 16px rgba(77, 116, 158, .1);
+}
+html.math-canvas-mode .addition-equation .eq-unknown,
+html.math-canvas-mode .subtraction-equation .subtraction-removed { color: #a76500; }
+html.math-canvas-mode .addition-equation .eq-sum,
+html.math-canvas-mode .subtraction-equation .subtraction-result { color: #087ca9; }
+html.math-canvas-mode .concrete-math-layout .addition-warehouse {
+  border-color: #e8c66a;
+  background: linear-gradient(145deg, #fffaf0, #fff);
+}
+html.math-canvas-mode .concrete-math-layout .addition-warehouse-label,
+html.math-canvas-mode .subtraction-takeaway-label { color: #8a6418; }
+html.math-canvas-mode .subtraction-takeaway {
+  border-color: #e5bd58;
+  background: #fff7df;
+  box-shadow: 0 6px 16px rgba(145, 111, 31, .1);
+}
+html.math-canvas-mode .subtraction-takeaway .subtraction-object { background: #fff0bd; }
+html.math-canvas-mode .number-bonds-prompt { color: #365d7b; }
+html.math-canvas-mode .number-bonds-target-card {
+  border-color: #8fcfe1;
+  background: linear-gradient(145deg, #fff, #edf8ff);
+  color: #365d7b;
+}
+html.math-canvas-mode .number-bonds-target-card strong { color: #17345c; }
+html.math-canvas-mode .number-bonds-row {
+  border: 1px solid #d5e4f1;
+  background: #fff;
+  color: #365d7b;
+}
+html.math-canvas-mode .number-bonds-equals { color: #365d7b; }
+html.math-canvas-mode .number-bonds-row-target {
+  border-color: #8fcfe1;
+  background: #e9f8ff;
+  color: #17345c;
+}
+html.math-canvas-mode .number-bonds-pool-wrap {
+  border: 1px solid #d5e4f1;
+  background: #f7fbff;
+  color: #365d7b;
+}
+html.math-canvas-mode .number-bonds-number {
+  border-color: #b6d5e8;
+  background: #fff;
+  color: #17345c;
+}
+html.math-canvas-mode .number-bonds-number:hover { background: #e9f8ff; }
+html.math-canvas-mode .number-bonds-correct-inner {
+  border-color: #9bcfe2;
+  background: linear-gradient(145deg, #fff, #f1f9ff);
+  color: #17345c;
+}
+html.math-canvas-mode .number-bonds-correct-inner h2 { color: #267655; }
+html.math-canvas-mode .number-bonds-correct-inner p { color: #365d7b; }
