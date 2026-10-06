@@ -1454,6 +1454,10 @@ const ANIMAL_ILLUSTRATIONS = {
   qingting: 'assets/animals/wild/dragonfly.webp',
   shayu: 'assets/animals/wild/shark.webp',
   jingyu: 'assets/animals/wild/whale.webp',
+  bazhaoyu: 'assets/animals/wild/octopus.webp',
+  shuimu: 'assets/animals/wild/jellyfish.webp',
+  haigui: 'assets/animals/wild/sea-turtle.webp',
+  haixing: 'assets/animals/wild/starfish.webp',
 };
 
 // 連一連專用圖像校訂：只改善容易混淆的抽象詞，不更改其他學習遊戲的原裝 Emoji。
