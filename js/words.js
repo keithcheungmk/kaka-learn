@@ -1446,6 +1446,10 @@ const ANIMAL_ILLUSTRATIONS = {
   ciwei: 'assets/animals/wild/hedgehog.webp',
   hudie: 'assets/animals/wild/butterfly.webp',
   mifeng: 'assets/animals/wild/bee.webp',
+  mayi: 'assets/animals/wild/ant.webp',
+  jiachong: 'assets/animals/wild/beetle.webp',
+  zhizhu: 'assets/animals/wild/spider.webp',
+  woniu: 'assets/animals/wild/snail.webp',
 };
 
 // 連一連專用圖像校訂：只改善容易混淆的抽象詞，不更改其他學習遊戲的原裝 Emoji。
