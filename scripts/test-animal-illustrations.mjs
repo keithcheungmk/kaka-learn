@@ -8,6 +8,8 @@ vm.runInNewContext(source, { window: browser });
 const words = browser.KakaWords;
 const zoo = words.getTopicById('zoo');
 assert.ok(zoo, '動物園 topic exists');
+const animalWordIds = new Set(['zoo', 'small_animals', 'dino', 'bugs', 'ocean']
+  .flatMap((topicId) => words.getTopicById(topicId)?.wordIds || []));
 
 const addedAnimals = [
   ['huanxiong', '浣熊'],
@@ -50,10 +52,14 @@ const mappedAnimals = new Map([
   ['haitun', 'dolphin.webp'],
   ['haibao', 'seal.webp'],
   ['kongque', 'peacock.webp'],
+  ['honghe', 'flamingo.webp'],
+  ['she', 'snake.webp'],
+  ['gou', 'dog.webp'],
+  ['mao', 'cat.webp'],
 ]);
 for (const [id, filename] of mappedAnimals) {
   const word = words.getWordById(id);
-  assert.ok(zoo.wordIds.includes(id), `${id} is in 動物園`);
+  assert.ok(animalWordIds.has(id), `${id} is in a Chinese animal topic`);
   const expectedPath = `assets/animals/wild/${filename}`;
   const markup = words.wordIllustHtml(word);
   assert.ok(markup.includes(`src="${expectedPath}"`), `${id} maps to ${filename}`);
@@ -67,7 +73,7 @@ for (const [id, filename] of mappedAnimals) {
   assert.ok(bytes.byteLength < 400 * 1024, `${filename} stays below the 400 KiB asset limit`);
 }
 
-const unrelated = words.getWordById('gou');
+const unrelated = words.getWordById('tu');
 assert.ok(words.wordIllustHtml(unrelated).includes('class="emoji-face"'),
   'unmapped animals continue using the emoji fallback');
 assert.ok(!words.wordIllustHtml(unrelated).includes('word-photo'),
