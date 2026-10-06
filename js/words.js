@@ -1418,6 +1418,10 @@ const ANIMAL_ILLUSTRATIONS = {
   changjinglu: 'assets/animals/wild/giraffe.webp',
   banma: 'assets/animals/wild/zebra.webp',
   qie: 'assets/animals/wild/penguin.webp',
+  hou: 'assets/animals/wild/monkey.webp',
+  hema: 'assets/animals/wild/hippo.webp',
+  xiniu: 'assets/animals/wild/rhino.webp',
+  luotuo: 'assets/animals/wild/camel.webp',
 };
 
 // 連一連專用圖像校訂：只改善容易混淆的抽象詞，不更改其他學習遊戲的原裝 Emoji。
