@@ -82,6 +82,8 @@ let learnPairs = [];
 let learnIndex = 0;
 /** 相反位置學習頁用成對模式 */
 let learnPairMode = false;
+/** 普通中文詞語主題用整頁詞語牆；課本仍保留原本讀本流程。 */
+let learnWordsOverview = false;
 /** 已經睇完最後一張：之後「去玩玩」要留低，即使誤撳「再睇一次」 */
 let learnPassedOnce = false;
 /** 今輪玩法：listen / match / build */
@@ -393,6 +395,17 @@ function bindLearn() {
   if (next) next.onclick = () => stepLearn(1);
   const play = $('#btn-learn-play');
   if (play) play.onclick = () => openPlayPick();
+  const wordsGrid = $('#learn-words-grid');
+  if (wordsGrid) {
+    wordsGrid.addEventListener('click', (event) => {
+      const card = event.target.closest('[data-learn-word-id]');
+      if (!card || !wordsGrid.contains(card)) return;
+      const word = learnWords.find((entry) => entry.id === card.dataset.learnWordId);
+      if (!word) return;
+      state = loadState();
+      speakTerm(wordSpeakText(word), { muted: state.muted });
+    });
+  }
 }
 
 function bindPlayPick() {
@@ -1141,6 +1154,7 @@ function startLearn(topic, book) {
     : wordsForTopic(topic.id);
 
   learnPairMode = topic.id === 'opposites';
+  learnWordsOverview = topic.id !== 'red_series' && topic.id !== 'orange_series';
   learnPairs = [];
   learnWords = sourceWords.filter((w) => enabled.has(w.id));
   if (learnWords.length < 1) learnWords = sourceWords;
@@ -1164,10 +1178,11 @@ function startLearn(topic, book) {
   if (backBtn) backBtn.textContent = book ? '← 揀書' : '← 主題';
   const lead = $('#learn-lead');
   if (lead) {
-    lead.textContent = learnPairMode
-      ? '撳卡聽相反詞'
+    lead.textContent = learnWordsOverview
+      ? '每個詞語都可以撳喇叭聽廣東話讀音。'
       : '撳卡聽廣東話';
   }
+  $('#screen-learn')?.classList.toggle('is-word-wall', learnWordsOverview);
   renderLearnCard();
   showScreen('learn');
 }
@@ -1254,6 +1269,16 @@ function updateLearnFinishRow(atEnd) {
 }
 
 function renderLearnCard() {
+  if (learnWordsOverview) {
+    renderChineseWordWall();
+    return;
+  }
+
+  const overview = $('#learn-words-overview');
+  const nav = $('#screen-learn .learn-nav');
+  if (overview) overview.hidden = true;
+  if (nav) nav.hidden = false;
+
   if (learnPairMode) {
     renderLearnPairCard();
     return;
@@ -1293,6 +1318,65 @@ function renderLearnCard() {
   if (face) face.classList.add('emoji-face-lg');
 
   speakCurrentLearn(true);
+}
+
+function renderChineseWordWall() {
+  const screen = $('#screen-learn');
+  const overview = $('#learn-words-overview');
+  const stage = $('#learn-stage');
+  const pairStage = $('#learn-pair-stage');
+  const nav = screen?.querySelector('.learn-nav');
+  const grid = $('#learn-words-grid');
+  const heading = $('#learn-words-heading');
+  const progress = $('#learn-progress');
+  if (!overview || !grid) return;
+
+  overview.hidden = false;
+  if (stage) stage.hidden = true;
+  if (pairStage) pairStage.hidden = true;
+  if (nav) nav.hidden = true;
+  if (heading) heading.textContent = learnPairMode ? '相反詞・一起學' : '詞語牆';
+  if (progress) progress.textContent = `${learnWords.length} 個詞`;
+
+  grid.innerHTML = '';
+  if (learnPairMode) {
+    learnPairs.forEach((pair, index) => {
+      const row = document.createElement('div');
+      row.className = 'chinese-word-pair-row';
+      row.setAttribute('aria-label', `第 ${index + 1} 組相反詞`);
+      row.append(
+        makeChineseWordCard(pair.left, '相反詞之一'),
+        makeChineseWordCard(pair.right, '相反詞之二'),
+      );
+      grid.appendChild(row);
+    });
+  } else {
+    learnWords.forEach((word) => grid.appendChild(makeChineseWordCard(word)));
+  }
+
+  // 全部詞卡同時展示，無需逐張翻卡；完成後可直接選擇挑戰。
+  learnPassedOnce = true;
+  const finishRow = $('#learn-finish-row');
+  const play = $('#btn-learn-play');
+  if (finishRow) {
+    finishRow.hidden = false;
+    finishRow.classList.add('is-ready');
+  }
+  if (play) play.textContent = '開始挑戰 →';
+}
+
+function makeChineseWordCard(word, description = '') {
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'chinese-word-card';
+  card.dataset.learnWordId = word.id;
+  card.setAttribute('aria-label', `聽詞語：${word.term}${description ? `，${description}` : ''}`);
+  card.innerHTML = `
+    <span class="chinese-word-art">${wordIllustHtml(word)}</span>
+    <span class="chinese-word-label">${word.term}</span>
+    <span class="chinese-word-speaker" aria-hidden="true">🔊 聽詞語</span>
+  `;
+  return card;
 }
 
 function renderLearnPairCard() {

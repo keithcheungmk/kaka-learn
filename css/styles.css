@@ -596,6 +596,150 @@ div.star-panel {
   box-shadow: var(--shadow);
 }
 
+/* 中文普通詞語：整頁詞語牆，逐張點按播放廣東話；長主題可自然捲動。 */
+#screen-learn.is-word-wall.active {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 14px;
+}
+
+.chinese-words-overview {
+  width: 100%;
+  margin: 0 auto 14px;
+}
+
+.chinese-words-overview[hidden] { display: none !important; }
+
+.chinese-words-heading {
+  margin: 0 auto 16px;
+  text-align: center;
+}
+
+.chinese-words-heading h2 {
+  margin: 0;
+  color: var(--gold-soft);
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+.chinese-words-heading p {
+  margin: 4px 0 0;
+  color: var(--ink-dim);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.chinese-words-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(8px, 1.2vw, 14px);
+  align-items: stretch;
+}
+
+.chinese-word-card {
+  appearance: none;
+  min-width: 0;
+  min-height: 170px;
+  padding: 12px 8px 10px;
+  border: 2px solid rgba(94, 234, 212, 0.35);
+  border-radius: 20px;
+  background: var(--space-panel);
+  color: var(--ink);
+  font: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(10, 8, 34, 0.2);
+  transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.chinese-word-card:active {
+  transform: scale(0.97);
+  border-color: var(--gold);
+  background: rgba(59, 42, 122, 0.96);
+}
+
+.chinese-word-art {
+  height: clamp(72px, 10vw, 104px);
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.chinese-word-art .emoji-plate {
+  width: clamp(64px, 8vw, 88px);
+  height: clamp(64px, 8vw, 88px);
+  max-width: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.chinese-word-art .word-photo,
+.chinese-word-art .career-illustration,
+.chinese-word-art .character-word-illustration {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.chinese-word-label {
+  max-width: 100%;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.chinese-word-speaker {
+  color: var(--gold-soft);
+  font-size: clamp(0.82rem, 1.4vw, 1rem);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.chinese-word-pair-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(8px, 1.2vw, 14px);
+  padding: 8px;
+  border: 1px solid rgba(253, 230, 138, 0.48);
+  border-radius: 22px;
+  background: rgba(26, 16, 64, 0.36);
+}
+
+.chinese-word-pair-row .chinese-word-card { min-height: 156px; }
+
+.is-word-wall .learn-finish-row {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  padding: 10px 0 max(10px, env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, transparent, rgba(26, 16, 64, 0.94) 30%);
+}
+
+.is-word-wall .learn-finish-row .btn {
+  width: min(100%, 620px);
+  min-height: 64px;
+  margin: 0 auto;
+}
+
+.is-word-wall .section-lead { text-align: center; }
+
+@media (max-width: 900px) {
+  .chinese-words-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (max-width: 620px) {
+  .chinese-words-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .chinese-word-card { min-height: 150px; border-radius: 17px; }
+}
+
 .learn-stage #learn-illust {
   width: 100%;
   display: flex;
