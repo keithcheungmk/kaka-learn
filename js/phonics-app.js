@@ -747,8 +747,10 @@
     const wordsOverview = topic?.section === 'sight' && !topic.soundMissions;
     screen?.classList.toggle('is-words-overview', wordsOverview);
     const wordsPanel = $('#phonics-words-overview');
+    const learnStage = $('#phonics-learn-stage');
     const learnNav = $('#screen-phonics-learn .learn-nav');
     if (wordsPanel) wordsPanel.hidden = !wordsOverview;
+    if (learnStage) learnStage.hidden = wordsOverview;
     if (learnNav) learnNav.hidden = wordsOverview;
     if (wordsOverview) {
       renderPhonicsWordsOverview();

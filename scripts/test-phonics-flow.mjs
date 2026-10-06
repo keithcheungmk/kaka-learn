@@ -51,6 +51,7 @@ assert.match(appMarkup, /id="phonics-words-overview"/, '主題詞語總覽容器
 assert.match(appMarkup, /id="phonics-words-card-grid"/, '主題詞語卡片網格存在');
 assert.match(appSource, /topic\?\.section === 'sight' && !topic\.soundMissions/, '所有 Sight 主題詞語共用一頁詞卡；音素任務保留原模式');
 assert.match(appSource, /renderPhonicsWordsOverview\(\)/, '主題生字由共用 renderer 顯示');
+assert.match(appSource, /learnStage\) learnStage\.hidden = wordsOverview/, '主題詞卡頁隱藏舊單字卡，其他學習頁恢復');
 assert.match(appSource, /speakEnglishTerm\(card\.dataset\.topicWord/, '按主題詞卡可播放完整詞語');
 assert.match(appSource, /開始挑戰 →/, '主題詞卡頁保留挑戰入口');
 assert.match(playgroundTheme, /words-card-grid[\s\S]*repeat\(5, minmax\(0, 1fr\)\)/, '寬版主題詞卡採用五欄');
