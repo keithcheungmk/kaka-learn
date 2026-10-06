@@ -994,6 +994,14 @@ python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
 - Validation: phonics flow tests, JavaScript syntax checks, all 40 invariants, and `git diff --check` passed.
 - Changes: `css/playground-theme.css`, `scripts/test-phonics-flow.mjs`, `docs/handover.md`.
 
+### 2026-10-07 · ChatGPT/Codex — Chinese topic word wall
+
+- 普通中文認字／詞語主題改為整頁詞卡，逐張可按來聽粵語；紅輯、橙輯仍使用各自的課本流程，普通話及家庭故事入口保持獨立。
+- 「相反位置」仍按八組相反詞並排展示；完成詞語預覽後可進入原有主題挑戰，未改星星規則。
+- 驗證：`node scripts/test-chinese-word-wall.mjs`、`node scripts/test-chinese-connect-rounds.mjs`、`node scripts/test-phonics-flow.mjs`、`python3 -B scripts/check-invariants.py`（41 項）、本地建置及 `git diff --check` 通過。
+- 本機 `scripts/smoke-shots.py --no-shots` 因 macOS Chromium MachPort 權限未能啟動；推送後由 CI／Pages 家庭裝置 smoke 補驗。
+- 變更：`index.html`、`js/app.js`、`css/styles.css`、`scripts/test-chinese-word-wall.mjs`、`docs/handover.md`。整合至主線前尚未部署。
+
 ### 2026-10-06 · ChatGPT/Codex — Keep Jobs portraits inside Topic Words cards
 
 - Fixed the Jobs / People Around Us word-wall portraits overflowing their cards and covering neighboring rows. The overview now uses contained, landscape photo frames (up to 144×104px; 120×82px on phones), with taller word cards and a face-focused crop; other career-photo screens keep their existing sizing.
