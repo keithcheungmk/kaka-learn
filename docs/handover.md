@@ -142,6 +142,12 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 - GitHub CI #389（含 iPad Pro 11 直／橫及 iPhone 16 Pro Max viewport 回歸）及 Pages #334 成功；公開首頁已載入本次版本。此為 Chromium 模擬 viewport，不代表已做實機 iPad／iPhone 人手驗收。
 - 數學功能提交：`d4b00d8`；交接紀錄跟進提交：`bab0e58`（CI #391、Pages #335 亦成功）。涉及 `index.html`、`css/math.css`、數學遊戲模組及 `scripts/smoke-shots.py`。
 
+### 2026-10-06 · ChatGPT／Codex（數學全站淺色主題）
+
+- 按 Keith 澄清，淺色遊樂園主題套用到整個數學區及各遊戲畫面，不只時鐘；統一數學畫布、卡片、提示、數線、語音按鈕和加減法介面的色彩對比，維持各玩法本身的互動與版面。
+- 驗證：數學生活挑戰／策略測試、中文動物插圖及 Connect 回歸、41 項 invariants、靜態建置及家庭裝置 smoke 均通過。GitHub CI #37467499928、Pages #37467499816 成功；公開首頁回應 HTTP 200，已部署 `css/math.css` 含完整數學畫布淺色背景規則。viewport 測試係 Chromium 模擬，未有人手實機驗收 iPad／iPhone。
+- 功能提交及 merge：`ff0860e`／`a46ac31`；涉及 `css/math.css`、`css/additionGame.css`、`docs/handover.md`。GitHub Pages 已發布至 `main`。
+
 ### 2026-10-04 · ChatGPT／Codex（英文學習入口整理）
 
 - 主頁統一為單一「英文學習」入口，入面分為故事閱讀、主題詞語及 Phonics；Carter Family、Magic Marker、Wacky Ricky 等故事系列共用故事入口，Little Fox Pilot 留待第二階段。
