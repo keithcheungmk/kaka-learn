@@ -20,7 +20,7 @@ function seeded(seed) {
 }
 for (const activity of data.ACTIVITIES) {
   for (let seed = 1; seed <= 200; seed += 1) {
-    const mission = data.makeMission(activity.id, { random: seeded(seed) });
+    const mission = data.makeMission(activity.id, { random: seeded(seed), length: 5 });
     assert.equal(mission.length, 5);
     mission.forEach((question, index) => {
       assert.equal(question.round, index); assert.equal(question.activityId, activity.id);
@@ -39,9 +39,22 @@ for (const activity of data.ACTIVITIES) {
         assert.ok(question.choices.every((choice) => String(Number(choice.id)) === choice.id), 'bond answers are one missing quantity, not competing valid equations');
       }
       if (question.kind === 'shape' || question.kind === 'pattern') assert.ok(question.choices.every((choice) => data.SHAPES.some((shape) => shape.id === choice.id)));
-      if (question.kind === 'shop') {
-        assert.ok(question.price >= 2 && question.wallet >= 1 && question.wallet <= 10);
-        assert.equal(question.answer, question.wallet >= question.price ? 'enough' : 'more');
+      if (question.kind === 'shop-recognize') {
+        assert.ok([1, 2, 5, 10].includes(question.coin.value));
+        assert.equal(question.answer, String(question.coin.value));
+        assert.equal(question.choices.length, 3);
+        assert.ok(question.choices.some((choice) => choice.value === question.coin.value));
+        assert.match(question.prompt, /同一款/, 'children match a visible reference coin instead of guessing a hidden target');
+        assert.ok(question.explain.includes(String(question.coin.value)), 'coin feedback names the denomination');
+      }
+      if (question.kind === 'shop-payment') {
+        assert.ok(question.price >= 1 && question.price <= 12);
+        assert.ok(question.coins.length >= 2 && question.coins.length <= 7);
+        assert.ok(question.coins.every((coin) => [1, 2, 5, 10].includes(coin.value)));
+        assert.equal(question.wallet, question.coins.length);
+        const canPayExactly = (coins, remaining) => remaining === 0 || coins.some((coin, index) => coin.value <= remaining && canPayExactly(coins.filter((_, i) => i !== index), remaining - coin.value));
+        assert.ok(canPayExactly(question.coins, question.price), `shop purse can pay $${question.price}`);
+        assert.equal(question.answer, 'pay');
       }
       if (question.kind === 'measure') {
         assert.ok(['長短', '輕重', '水量'].includes(question.attribute));
@@ -50,17 +63,26 @@ for (const activity of data.ACTIVITIES) {
     });
   }
 }
-const shapeMission = data.makeMission('shape-patterns', { random: seeded(24) });
+const shapeMission = data.makeMission('shape-patterns', { random: seeded(24), length: 5 });
 assert.deepEqual([...shapeMission.map((q) => q.kind)], ['shape', 'shape', 'shape', 'pattern', 'pattern']);
+for (let seed = 1; seed <= 200; seed += 1) {
+  const shopMission = data.makeMission('little-shop', { random: seeded(seed), length: 10 });
+  assert.equal(shopMission.length, 10);
+  assert.deepEqual([...shopMission.slice(0, 2).map((question) => question.kind)], ['shop-recognize', 'shop-recognize']);
+  assert.ok(shopMission.slice(2).every((question) => question.kind === 'shop-payment'));
+}
 assert.throws(() => data.makeMission('retired-planet'), RangeError);
 assert.match(read('index.html'), /id="math-extra-mission-grid"/);
 assert.match(read('index.html'), /id="screen-math-life-skill"/);
 assert.match(read('js/math-app.js'), /KakaMathLifeSkillsGame\.init/);
-assert.match(read('js/math-life-skills-game.js'), /speakThen\(`答啱喇！\$\{question\.explain\}/, 'spoken explanation precedes enabling the next question');
+assert.match(read('js/math-life-skills-game.js'), /speakThen\(`答啱喇！\$\{explanation\}你好叻！`, \(\) => \{ if \(nextButton\) nextButton\.hidden = false; \}\);/, 'spoken explanation and praise finish before enabling the next question');
 assert.match(read('js/math-life-skills-game.js'), /function selectCompareItem/);
 assert.match(read('js/math-life-skills-game.js'), /math-life-answer-number/);
 assert.match(read('js/math-life-skills-game.js'), /question\.part/);
 assert.match(read('css/math.css'), /\.math-life-ten-cell\.is-empty/);
+assert.match(read('js/math-life-skills-game.js'), /coinFace\(question\.coin\.value, 'is-target-coin'\)/);
+assert.match(read('js/math-life-skills-game.js'), /而家有\$\$\{total\}，仲差/);
+assert.match(read('css/math.css'), /math-life-skill-feedback:not\(:empty\)/);
 assert.match(read('index.html'), /class="math-life-skill-answer-panel"/);
 assert.match(read('index.html'), /math-life-skill-board-wrap/);
 assert.match(read('css/math.css'), /grid-template-areas: "header header" "planet planet" "prompt prompt" "board answers"/);

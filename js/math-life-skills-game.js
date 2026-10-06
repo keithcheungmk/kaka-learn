@@ -1,7 +1,8 @@
 /** 五項生活數學任務引擎：各題型有自己的操作與視覺提示。 */
 (function () {
   let deps = null, activity = null, mission = [], index = 0, locked = false, wrongAttempts = 0, generation = 0;
-  let compareSelection = null, paired = { left: new Set(), right: new Set() };
+  let compareSelection = null, paired = { left: new Set(), right: new Set() }, shopSelected = new Set();
+  const SHOP_STORY = '卡卡嚟到水果店想買水果，幫佢揀啱硬幣啦！';
   const $ = (id) => document.getElementById(id);
   const data = () => window.KakaMathLifeSkillsData;
 
@@ -71,14 +72,61 @@
     frame.setAttribute('aria-label', `目標${question.total}粒星的格子，已經有${question.part}粒，還有${question.total - question.part}個空格`);
     board.append(el('p', 'math-life-board-instruction', `已有${question.part}粒，看看還有幾個空格。`), equation, frame);
   }
+  function coinFace(value, extraClass = '') {
+    const coin = el('span', `math-life-hk-coin math-life-hk-coin--${value}${extraClass ? ` ${extraClass}` : ''}`, `$${value}`);
+    coin.setAttribute('aria-hidden', 'true');
+    return coin;
+  }
   function renderShop(board, question) {
     const shop = el('div', 'math-life-shop-scene');
+    if (question.kind === 'shop-recognize') {
+      shop.classList.add('is-coin-recognition');
+      const till = el('div', 'math-life-shop-till');
+      till.append(coinFace(question.coin.value, 'is-target-coin'), el('strong', '', '睇清楚呢枚硬幣'), el('span', '', '喺右邊揀返同一款。'));
+      shop.append(till); board.append(shop); return;
+    }
     const product = el('div', 'math-life-product-card');
-    product.append(el('span', 'math-life-shop-item', question.item.emoji), el('strong', '', question.item.name), el('span', 'math-life-price-tag', `${question.price} 個幣`));
-    const wallet = el('div', 'math-life-wallet'); wallet.append(el('strong', '', `錢包有 ${question.wallet} 個幣`));
+    product.append(el('span', 'math-life-shop-item', question.item.emoji), el('strong', '', question.item.name), el('span', 'math-life-price-tag', `$${question.price}`));
+    const wallet = el('div', 'math-life-wallet');
+    wallet.append(el('strong', '', '錢包：點硬幣放入付款盤'));
     const coins = el('div', 'math-life-coins');
-    for (let i = 0; i < question.wallet; i += 1) coins.append(el('span', 'math-life-coin', '🪙'));
-    wallet.append(coins); shop.append(product, wallet); board.append(shop);
+    question.coins.forEach((coin, index) => {
+      const selected = shopSelected.has(index);
+      const button = el('button', `math-life-coin-button math-life-shop-coin${selected ? ' is-selected' : ''}`);
+      button.type = 'button'; button.disabled = locked; button.dataset.coinIndex = String(index);
+      button.setAttribute('aria-label', `${coin.value}蚊硬幣${selected ? '，已放入付款盤，點一下取回' : '，點一下放入付款盤'}`);
+      button.setAttribute('aria-pressed', String(selected)); button.append(coinFace(coin.value));
+      button.addEventListener('click', () => {
+        if (locked) return;
+        if (shopSelected.has(index)) shopSelected.delete(index); else shopSelected.add(index);
+        button.classList.toggle('is-selected', shopSelected.has(index));
+        button.setAttribute('aria-pressed', String(shopSelected.has(index)));
+        button.setAttribute('aria-label', `${coin.value}蚊硬幣${shopSelected.has(index) ? '，已放入付款盤，點一下取回' : '，點一下放入付款盤'}`);
+        updateShopPayment(question);
+      });
+      coins.append(button);
+    });
+    wallet.append(coins);
+    const tray = el('div', 'math-life-payment-tray');
+    tray.append(el('strong', '', '付款盤'));
+    const selectedCoins = el('div', 'math-life-payment-coins'); selectedCoins.id = 'math-life-payment-coins';
+    const total = el('output', 'math-life-payment-total', '$0'); total.id = 'math-life-payment-total'; total.setAttribute('aria-label', '付款盤總額');
+    tray.append(selectedCoins, total);
+    shop.append(product, wallet, tray); board.append(shop); updateShopPayment(question);
+  }
+  function updateShopPayment(question) {
+    const selectedCoins = $('math-life-payment-coins'); const totalNode = $('math-life-payment-total');
+    if (!selectedCoins || !totalNode) return;
+    const values = [...shopSelected].map((coinIndex) => question.coins[coinIndex]?.value).filter(Number.isFinite);
+    selectedCoins.replaceChildren();
+    values.forEach((value) => selectedCoins.append(coinFace(value)));
+    const total = values.reduce((sum, value) => sum + value, 0);
+    totalNode.textContent = `$${total}`;
+    totalNode.setAttribute('aria-label', `付款盤總額${total}蚊`);
+  }
+  function renderShopPaymentAction(question, choices) {
+    const pay = el('button', 'btn math-life-shop-pay-button', '付錢啦'); pay.type = 'button';
+    pay.addEventListener('click', () => answer(question, { id: 'pay' }, pay)); choices.append(pay);
   }
   function renderMeasure(board, question) {
     const pair = el('div', `math-life-measure-pair is-${question.attribute === '長短' ? 'length' : question.attribute === '輕重' ? 'weight' : 'capacity'}`);
@@ -116,8 +164,36 @@
       const row = el('div', 'math-life-pattern-row');
       question.sequence.forEach((shape, i) => { const tile = el('div', 'math-life-pattern-tile'); tile.append(shapeDrawing(shape, data().COLORS[i % data().COLORS.length])); row.append(tile); });
       row.append(el('div', 'math-life-pattern-missing', '?')); board.append(el('p', 'math-life-board-instruction', '找找重複的形狀小隊。'), row);
-    } else if (question.kind === 'shop') renderShop(board, question);
+    } else if (question.kind === 'shop-recognize' || question.kind === 'shop-payment') renderShop(board, question);
     else if (question.kind === 'measure') renderMeasure(board, question);
+  }
+  function renderShopIntro() {
+    $('math-life-skill-progress').textContent = '準備出發';
+    $('math-life-skill-prompt').textContent = '水果店小任務：幫卡卡買水果！';
+    $('math-life-skill-feedback').textContent = '';
+    $('btn-math-life-skill-next').hidden = true;
+    const board = $('math-life-skill-board'); board.replaceChildren(); board.classList.add('is-shop-intro');
+    const card = el('div', 'math-life-shop-intro-card');
+    const scene = el('img', 'math-life-shop-intro-image');
+    scene.src = './assets/math-life/fruit-shop-scene.jpg';
+    scene.alt = '卡卡提着籃子來到水果店，店主身旁有各種水果';
+    const story = el('div', 'math-life-shop-intro-copy');
+    story.append(el('span', 'math-life-shop-intro-kicker', '今日小任務'),
+      el('strong', '', '卡卡想買水果！'),
+      el('p', '', '店裏有好多香甜水果，請你幫卡卡認硬幣、揀啱錢付款。'));
+    const actions = el('div', 'math-life-shop-intro-actions');
+    const replay = el('button', 'btn math-life-shop-replay', '🔊 聽卡卡講'); replay.type = 'button';
+    replay.addEventListener('click', () => speakThen(SHOP_STORY, () => {}));
+    actions.append(replay); story.append(actions); card.append(scene, story); board.append(card);
+    const choices = $('math-life-skill-choices'); choices.replaceChildren();
+    const startButton = el('button', 'btn math-life-shop-start', '開始幫手 →'); startButton.type = 'button';
+    startButton.addEventListener('click', () => {
+      board.classList.remove('is-shop-intro');
+      $('math-life-skill-answers-heading').textContent = '💡 揀答案';
+      renderQuestion(); speakThen(mission[0].prompt || activity.title, () => {});
+    });
+    choices.append(startButton);
+    $('math-life-skill-answers-heading').textContent = '🛍️ 準備出發';
   }
   function recordAttempt(question, correct, picked) {
     if (!deps?.mastery?.recordAttempt) return;
@@ -129,6 +205,18 @@
   }
   function answer(question, choice, button) {
     if (locked) return;
+    if (question.kind === 'shop-payment') {
+      const total = [...shopSelected].reduce((sum, coinIndex) => sum + (question.coins[coinIndex]?.value || 0), 0);
+      if (total !== question.price) {
+        wrongAttempts += 1; recordAttempt(question, false, String(total)); button.classList.add('is-bad');
+        announce(total === 0
+          ? '未揀硬幣喎，喺錢包撳幾個放入付款盤先。'
+          : total < question.price
+            ? `而家有$${total}，仲差$${question.price - total}。睇吓錢包有冇啱嘅硬幣。`
+            : `而家有$${total}，多咗$${total - question.price}。撳付款盤入面嘅硬幣收返，再試吓。`);
+        deps?.speech?.playTryAgainCue?.({ muted: deps.isMuted?.() }); setTimeout(() => button.classList.remove('is-bad'), 420); return;
+      }
+    }
     if (question.kind === 'compare' && paired.left.size < Math.min(question.left, question.right)) {
       announce('先把兩邊的物品一對一配好，才揀答案喔。'); return;
     }
@@ -137,21 +225,31 @@
       if (question.kind === 'compare') announce(`已一對一配好${Math.min(question.left, question.right)}對，看看哪邊有剩。`);
       else if (question.kind === 'bonds') announce(`可以用星星逐個數一數，合起來有幾個。`);
       else if (question.kind === 'shape' || question.kind === 'pattern') announce(`再看看形狀的邊、角，或前面重複的次序。`);
+      else if (question.kind === 'shop-recognize') announce('睇吓硬幣中間個數字，再同右邊比一比。');
       else announce(`再看看物品、價錢和數量，慢慢想一想。`);
       deps?.speech?.playTryAgainCue?.({ muted: deps.isMuted?.() }); setTimeout(() => button.classList.remove('is-bad'), 420); return;
     }
     locked = true; document.querySelectorAll('#math-life-skill-choices button').forEach((item) => { item.disabled = true; });
     button.classList.add('is-ok');
-    recordAttempt(question, true, choice.id); deps?.speech?.playCorrectCue?.({ muted: deps.isMuted?.() });
-    announce(`答啱喇！${question.explain}`);
+    const pickedAnswer = question.kind === 'shop-payment'
+      ? [...shopSelected].map((coinIndex) => question.coins[coinIndex].value).join('+')
+      : choice.id;
+    recordAttempt(question, true, pickedAnswer); deps?.speech?.playCorrectCue?.({ muted: deps.isMuted?.() });
+    const explanation = question.kind === 'shop-payment'
+      ? `${[...shopSelected].map((coinIndex) => `$${question.coins[coinIndex].value}`).join('＋')}＝$${question.price}，啱啱好！`
+      : question.explain;
+    announce(`答啱喇！${explanation}`);
+    document.querySelectorAll('.math-life-shop-coin').forEach((coin) => { coin.disabled = true; });
     const nextButton = $('btn-math-life-skill-next'); if (nextButton) nextButton.hidden = true;
-    speakThen(`答啱喇！${question.explain}你好叻！`, () => { if (nextButton) nextButton.hidden = false; });
+    speakThen(`答啱喇！${explanation}你好叻！`, () => { if (nextButton) nextButton.hidden = false; });
   }
   function renderChoice(question, choice, choices) {
     const button = el('button', 'btn math-life-choice'); button.type = 'button'; button.dataset.choiceId = String(choice.id);
     if (question.kind === 'shape' || question.kind === 'pattern') {
       const shape = data().SHAPES.find((item) => item.id === choice.id);
       if (shape) button.append(shapeDrawing(shape, '#ffd064')); button.append(el('strong', '', choice.label));
+    } else if (question.kind === 'shop-recognize') {
+      button.append(coinFace(Number(choice.id), 'is-choice-coin'), el('strong', '', `${choice.id}蚊`));
     } else if (question.kind === 'bonds') {
       button.append(el('span', 'math-life-answer-number', String(choice.id)), el('span', 'math-life-answer-unit', '粒'));
     } else button.textContent = choice.label;
@@ -160,19 +258,26 @@
   }
   function renderQuestion() {
     const question = mission[index]; if (!question) return;
-    locked = false; wrongAttempts = 0; compareSelection = null; paired = { left: new Set(), right: new Set() };
+    locked = false; wrongAttempts = 0; compareSelection = null; paired = { left: new Set(), right: new Set() }; shopSelected = new Set();
     $('math-life-skill-progress').textContent = `${index + 1}/${mission.length}`;
     $('math-life-skill-prompt').textContent = question.prompt || activity.title;
     $('math-life-skill-feedback').textContent = ''; $('btn-math-life-skill-next').hidden = true;
+    $('math-life-skill-answers-heading').textContent = '💡 揀答案';
+    $('math-life-skill-board').classList.remove('is-shop-intro');
     renderQuestionVisual(question); const choices = $('math-life-skill-choices'); choices.replaceChildren();
-    question.choices.forEach((choice) => renderChoice(question, choice, choices));
+    if (question.kind === 'shop-payment') renderShopPaymentAction(question, choices);
+    else question.choices.forEach((choice) => renderChoice(question, choice, choices));
   }
   function start(activityId) {
     const found = data().ACTIVITIES.find((item) => item.id === activityId); if (!found) return;
     generation += 1; activity = found; mission = data().makeMission(activityId, { length: 10 }); index = 0;
     $('math-life-skill-title').textContent = found.title; $('math-life-skill-planet').textContent = `生活挑戰・${found.subtitle}`;
-    $('btn-back-math-life-skill').onclick = () => deps?.openGalaxy?.(); renderQuestion(); deps.showMathScreen('lifeSkill');
-    speakThen(mission[0].prompt || found.title, () => {});
+    const screen = $('screen-math-life-skill'); if (screen) screen.dataset.activity = activityId;
+    $('btn-back-math-life-skill').onclick = () => deps?.openGalaxy?.();
+    if (activityId === 'little-shop') renderShopIntro(); else renderQuestion();
+    deps.showMathScreen('lifeSkill');
+    if (activityId === 'little-shop') speakThen(SHOP_STORY, () => {});
+    else speakThen(mission[0].prompt || found.title, () => {});
   }
   function next() {
     if (!locked) return;

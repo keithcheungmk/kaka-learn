@@ -44,6 +44,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 | 加減法操作流程統一、回答確認、拖曳防誤觸及桌面版面 | Math Lead（Chief 整合） | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | 先操作後回答；共享檔由 Chief 整合 |
 | 數學玩法縮至四星＋水星重做 | Math Lead（ChatGPT／Codex Chief 整合） | `index.html`, `js/math-*`, `css/math.css`, 數理測試、`scripts/check-invariants.py`, `docs/handover.md` | 2026-09-28 | Keith 指示只保留地球加法、月球減法、金星時鐘及全新水星數量玩法；其他星球、Number Bonds 從入口與流程下架。原 9/16 iPad 橫向工作納入此任務；未部署 |
 | 五項生活數感活動 | ChatGPT／Codex（Math；Chief review） | `index.html`, `css/math.css`, `js/math-app.js`, `js/math-life-skills-*`, `scripts/test-math-life-skills.mjs` | 2026-10-01 | 加入數量比較、數字拆合、形狀與規律、小小商店、生活度量；本機數學回歸及 invariants 通過。尚未在 iPad/iPhone 實機視覺驗收。 |
+| 香港水果店錢幣玩法第一版 | ChatGPT／Codex（Chief；Math code；Chinese art direction consulted） | `index.html`, `css/math.css`, `js/math-life-skills-*`, `assets/math-life/`, `assets/image-formats.lock.json`, `docs/math-brief.md`, `docs/handover.md` | 2026-10-06 | 增加入場故事卡、短粵語語音、提示角落插圖；改為先看真實硬幣再配對；付款盤可點選／收回硬幣並顯示總額，錯答提示差額或多付額。配套明亮化金星時鐘頁。功能測試、invariants、3 個 Chromium 裝置 viewport smoke 通過；未做實體 iPad/iPhone 驗收。待合併及部署。只限數學時鐘主題與「小小商店」topic。 |
 | 職業字詞 45 張卡卡／禧禧未來職業插圖 | ChatGPT／Codex | `js/words.js`, `css/styles.css`, `assets/careers/`, 職業插圖測試、`docs/handover.md` | 2026-09-29 | 由 Keith 指示按已同意方案落地；保留其餘主題原 Emoji；待完成 iPad 驗證及部署 |
 
 <!-- 範本（複製一行，填完刪走「—」嗰行）：
@@ -103,6 +104,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-10-06 · ChatGPT／Codex（時鐘視覺及水果店互動完善）
+
+- 金星時鐘遊戲沿用現有版面／指針操作，只將背景、文字、提示、電子時間、答案卡及 CTA 調成配合數學遊樂園的明亮淺色系。
+- 水果店入場先用原創繪本情境圖和短語音交代任務；認幣題直接展示目標硬幣；付款題以香港硬幣放入／取回付款盤，實時計總額，答錯提示不足／多付金額及修正方法。回饋空白時不再保留空白色條。
+- 驗證：數學生活技能測試、四種計算法測試、41 項 invariants、JavaScript syntax、`git diff --check` 及 iPad Pro 11 直／橫 + iPhone 16 Pro Max 三種 Chromium viewport smoke 通過。Chromium 為模擬 viewport，未做實體 iPad／iPhone 人手驗收。
+- 部署狀態：待合併／Pages workflow；完成後在此補記 CI、Pages run 及 live check。
 
 ### 2026-10-05 · ChatGPT／Codex（數學遊樂園重整與發布）
 

@@ -4,7 +4,7 @@
     { id: 'quantity-compare', planetId: 'number-relations', planet: '水星', title: '配一配・邊邊多？', skillId: 'compare.quantity.1to10', subtitle: '比較兩盤日常物品的多少' },
     { id: 'number-bonds', planetId: 'compare-size', planet: '地球', title: '數字好朋友・合起來', skillId: 'numberBonds.to10', subtitle: '找出兩部分合成目標數字的方法' },
     { id: 'shape-patterns', planetId: 'number-relations', planet: '水星', title: '形狀觀察隊', skillId: 'shape.pattern.AB', subtitle: '先認形狀，再找重複規律' },
-    { id: 'little-shop', planetId: 'compare-size', planet: '地球', title: '小小商店・數錢買物', skillId: 'money.matchPrice.1to10', subtitle: '數硬幣，看看夠不夠買' },
+    { id: 'little-shop', planetId: 'compare-size', planet: '地球', title: '卡卡水果店・香港硬幣', skillId: 'money.matchPrice.1to10', subtitle: '認識硬幣，幫卡卡買水果' },
     { id: 'measure-compare', planetId: 'moon', planet: '月球', title: '生活度量・比一比', skillId: 'measure.compare.visual', subtitle: '比較長短、輕重和多少' },
   ];
   const OBJECTS = [
@@ -20,9 +20,11 @@
     { id: 'parallelogram', name: '平行四邊形', points: '30,15 95,15 70,85 5,85' }, { id: 'trapezoid', name: '梯形', points: '28,15 72,15 95,85 5,85' },
   ];
   const SHOP_ITEMS = [
-    { emoji: '🍓', name: '士多啤梨', count: '粒' }, { emoji: '🫐', name: '藍莓', count: '粒' },
-    { emoji: '🍪', name: '餅乾', count: '塊' }, { emoji: '🧃', name: '果汁', count: '盒' },
+    { emoji: '🍓', name: '士多啤梨', price: 8 }, { emoji: '🫐', name: '藍莓', price: 7 },
+    { emoji: '🍊', name: '橙', price: 5 }, { emoji: '🍉', name: '西瓜', price: 10 },
+    { emoji: '🍎', name: '蘋果', price: 12 },
   ];
+  const HK_COINS = [10, 5, 2, 1].map((value) => ({ value, label: `$${value}` }));
   const COLORS = ['#f66d72', '#438de8', '#ffb547', '#37b98f', '#9a77e8', '#e87aa6'];
   const SIDE_CHOICES = [
     { id: 'left', label: '左邊較多' }, { id: 'same', label: '一樣多' }, { id: 'right', label: '右邊較多' },
@@ -72,17 +74,45 @@
       .map((item) => ({ id: item.id, label: item.name }));
     return { kind: 'pattern', stage: 'pattern', sequence, answer: first.id, choices, prompt: '形狀一組一組重複排隊，問號後面是哪個？', explain: `每組都是${first.name}、${second.name}；下一個回到${first.name}。` };
   }
+  function exactCoinCombinations(price) {
+    const combinations = [];
+    function visit(remaining, firstIndex, chosen) {
+      if (remaining === 0) { combinations.push(chosen); return; }
+      if (chosen.length >= price) return;
+      for (let i = firstIndex; i < HK_COINS.length; i += 1) {
+        const value = HK_COINS[i].value;
+        if (value <= remaining) visit(remaining - value, i, [...chosen, value]);
+      }
+    }
+    visit(price, 0, []);
+    return combinations;
+  }
   function shopQuestion(round, random) {
-    const price = amount(2, round < 2 ? 5 : 10, random);
+    if (round < 2) {
+      const coin = pick(HK_COINS, random);
+      const choices = shuffle([coin, ...shuffle(HK_COINS.filter((item) => item.value !== coin.value), random).slice(0, 2)], random)
+        .map((item) => ({ id: String(item.value), label: item.label, value: item.value }));
+      return { kind: 'shop-recognize', coin, answer: String(coin.value), choices,
+        prompt: '睇吓呢枚硬幣，喺右邊搵返同一款。', explain: `呢枚係${coin.value}蚊硬幣；可以睇硬幣中間個數字。` };
+    }
+
     const item = pick(SHOP_ITEMS, random);
-    const wallet = amount(1, round < 2 ? 6 : 10, random);
-    const enough = wallet >= price;
-    const choices = shuffle([
-      { id: 'enough', label: '夠買' }, { id: 'more', label: '還差一些' },
-    ], random);
-    const answer = enough ? 'enough' : 'more';
-    const explanation = enough ? `${wallet}個幣${wallet === price ? '剛好' : '多過價錢'}買${item.name}。` : `${wallet}個幣比${price}個少，還差一些。`;
-    return { kind: 'shop', item, price, wallet, answer, choices, prompt: `${item.emoji}要${price}個幣。錢包有${wallet}個，夠不夠買？`, explain: explanation };
+    const price = item.price;
+    // The purse always contains one exact solution plus a few spare coins. Children
+    // can choose any available set whose face values add up to the fruit's price.
+    const solutions = exactCoinCombinations(price);
+    const shortSolutions = solutions.filter((combination) => combination.length <= 4);
+    const solution = pick(shortSolutions.length ? shortSolutions : solutions, random);
+    const coins = solution.map((value, index) => ({ id: `pay-${index}`, value }));
+    const spareCount = amount(1, 3, random);
+    for (let i = 0; i < spareCount; i += 1) {
+      const value = pick(HK_COINS, random).value;
+      coins.push({ id: `spare-${i}`, value });
+    }
+    const choices = [{ id: 'pay', label: '付錢啦' }, { id: 'keep-looking', label: '再看看' }];
+    return { kind: 'shop-payment', item, price, coins: shuffle(coins, random), wallet: coins.length,
+      answer: 'pay', choices, prompt: `${item.name}要${price}蚊，揀啱硬幣放入付款盤。`,
+      explain: `啱啱好畀到${price}蚊。` };
   }
   function measureQuestion(round, random) {
     const attribute = ['長短', '輕重', '水量'][round % 3];
