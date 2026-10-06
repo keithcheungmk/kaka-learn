@@ -110,9 +110,9 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 - 水果店十題由第一題開始直接練習付款，移除認一／二／五／十蚊硬幣題；保留點選硬幣放入／取回付款盤、即時計總額及「付錢啦」確認，答案欄標示「完成付款」。
 - 水果店故事海報持續顯示：闊屏幕置左、答題畫面在中、付款與回饋在右；窄橫屏海報橫跨頂部；直屏改用可捲動單欄和 16:9 小海報。題目短語音合併場景與本題，不另加冗長介紹頁。
-- 驗證：生活技能測試（200 組種子、每組 10 題均為付款題）、計算法測試、41 項 invariants、JS 語法及靜態建置通過。macOS 本機 Chromium 因 MachPort 權限未能啟動；家庭 viewport smoke 留待 GitHub CI。實體 iPad／iPhone 未驗收。
+- 驗證：生活技能測試（200 組種子、每組 10 題均為付款題）、計算法測試、41 項 invariants、JS 語法及靜態建置通過。GitHub CI #37483963943 的 iPad Pro 11 直／橫及 iPhone 16 Pro Max 模擬 viewport smoke 通過；本機 Chromium 因 MachPort 權限未能啟動，實體 iPad／iPhone 未驗收。
 - 改動檔案：`index.html`、`css/math.css`、`js/math-life-skills-data.js`、`js/math-life-skills-game.js`、`scripts/test-math-life-skills.mjs`、`docs/handover.md`。
-- 發佈狀態：待 GitHub Actions 與 Pages 確認。
+- 發佈：`dba0c00` 已推送至 `main`；其初次 Pages run #37483963457 因後續英文 PR #119 同時合併而取消。後續 main merge `88d843f` 包含本提交，CI #37484148234 及 Pages #37484148063 成功。公開站 `version.json` 為 `88d843f`；首頁載入新版水果店海報及淺色佈局，付款題資料不再包含認幣題，海報圖 HTTP 200。
 
 ### 2026-10-06 · ChatGPT／Codex（普通中文動物連線插畫）
 
