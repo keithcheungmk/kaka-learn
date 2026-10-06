@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="theme-color" content="#eaf7ff" />
-  <title>卡卡學習・太空戰士</title>
+  <title>卡卡開心學習樂園｜中英數和普通話</title>
   <meta http-equiv="Cache-Control" content="no-cache" />
 
   <!-- KAKA RANGER 徽章：favicon / app icon -->
@@ -15,18 +15,18 @@
   <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/icon-180.png" />
   <link rel="manifest" href="./assets/icons/site.webmanifest" />
 
-  <!-- 分享連結預覽：KAKA RANGER 完整 logo -->
+  <!-- 分享連結預覽：首頁主視覺 -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="卡卡學習・太空戰士" />
-  <meta property="og:description" content="陪小朋友識字、學拼音、玩數學" />
-  <meta property="og:image" content="https://keithcheungmk.github.io/kaka-learn/assets/og-image.png" />
+  <meta property="og:title" content="卡卡開心學習樂園｜中英數和普通話" />
+  <meta property="og:description" content="同卡卡一齊玩，開心學中文、英文、普通話同數學！" />
+  <meta property="og:image" content="https://keithcheungmk.github.io/kaka-learn/assets/home-learning-picnic.jpg" />
   <meta property="og:url" content="https://keithcheungmk.github.io/kaka-learn/" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://keithcheungmk.github.io/kaka-learn/assets/og-image.png" />
+  <meta name="twitter:image" content="https://keithcheungmk.github.io/kaka-learn/assets/home-learning-picnic.jpg" />
   <link rel="stylesheet" href="./css/styles.css?v=20260928story-scroll" />
   <link rel="stylesheet" href="./css/phonics.css?v=20260905list" />
   <link rel="stylesheet" href="./css/story-demo.css?v=20260911b" />
-  <link rel="stylesheet" href="./css/math.css?v=20261006-playground-clock-style" />
+  <link rel="stylesheet" href="./css/math.css?v=20261001-life-skills" />
   <link rel="stylesheet" href="./css/additionGame.css?v=4751bde" />
   <link rel="stylesheet" href="./css/playground-theme.css?v=20260927a" />
 </head>
@@ -75,23 +75,43 @@
       </header>
 
       <div class="hero-home">
-        <div class="chinese-hero" aria-hidden="true">
-          <img src="./assets/chinese-hero.png" alt="" width="978" height="514" decoding="async" fetchpriority="high" />
+        <div class="home-hero-poster">
+          <img src="./assets/home-learning-picnic.jpg" alt="卡卡在公園野餐讀圖書，旁邊有一個小太空玩具角色" width="1400" height="788" decoding="async" fetchpriority="high" />
+          <div class="home-hero-copy">
+            <p class="home-hero-eyebrow">故事・遊戲・一齊探索</p>
+            <h1 id="home-hero-title">卡卡開心學習樂園</h1>
+            <p>同卡卡一齊玩，開心學中文、英文、普通話同數學！</p>
+          </div>
         </div>
-        <p class="hero-sub">太空戰士，出發認字、英文同數理！</p>
-        <div class="btn-row hero-cta-row">
-          <button type="button" class="btn" id="btn-start-topics" aria-label="太空戰士認字">太空戰士認字</button>
-          <a class="btn btn-secondary" href="./pth-demo.html?v=20260914-pth-word-audio" aria-label="普通話拼音">普通話拼音</a>
-          <button type="button" class="btn btn-secondary" id="btn-start-english" aria-label="英文學習・English Learning">英文學習・English Learning</button>
-          <button type="button" class="btn btn-accent" id="btn-start-math">數學遊樂園</button>
-          <a
-            class="btn btn-friend home-friend-link"
-            href="https://yiu0527.github.io/HeiHeiClass/index.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="禧禧遊戲樂園（新分頁開啟）"
-          >禧禧遊戲樂園 ↗</a>
-        </div>
+        <nav class="home-subject-grid" aria-label="選擇學習科目">
+          <button type="button" class="home-entry home-entry-chinese" id="btn-start-topics" aria-label="卡卡中文樂園：識字、故事、砌句">
+            <span class="home-entry-kicker">中文・識字故事</span>
+            <strong>卡卡中文樂園</strong>
+            <span class="home-entry-detail">識字・故事・砌句</span>
+          </button>
+          <button type="button" class="home-entry home-entry-english" id="btn-start-english" aria-label="卡卡英文樂園：Phonics、串字、故事">
+            <span class="home-entry-kicker">ENGLISH</span>
+            <strong>卡卡英文樂園</strong>
+            <span class="home-entry-detail">Phonics・串字・故事</span>
+          </button>
+          <a class="home-entry home-entry-putonghua" href="./pth-demo.html?v=20261004" aria-label="卡卡普通話拼音：聲母、韻母、拼音">
+            <span class="home-entry-kicker">普通話・拼音</span>
+            <strong>卡卡普通話拼音</strong>
+            <span class="home-entry-detail">聲母・韻母・拼音</span>
+          </a>
+          <button type="button" class="home-entry home-entry-math" id="btn-start-math" aria-label="卡卡數學樂園：數數、計算、思考">
+            <span class="home-entry-kicker">數數・思考</span>
+            <strong>卡卡數學樂園</strong>
+            <span class="home-entry-detail">數數・計算・思考</span>
+          </button>
+        </nav>
+        <a
+          class="btn btn-friend home-friend-link"
+          href="https://yiu0527.github.io/HeiHeiClass/index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="禧禧遊戲樂園（新分頁開啟）"
+        >禧禧遊戲樂園 ↗</a>
         <div class="home-side-row">
           <button type="button" class="btn btn-ghost" id="btn-home-progress">我的進度</button>
           <button type="button" class="btn btn-ghost" id="btn-switch-profile">換小朋友</button>
@@ -352,29 +372,45 @@
 
     <!-- 英文學習：故事閱讀、主題詞語、字母音與拼讀 -->
     <section id="screen-english-hub" class="screen phonics-screen english-hub-screen" aria-label="英文學習・選擇學習方式">
-      <div class="game-header">
+      <div class="english-hub-topbar">
         <button type="button" class="btn btn-ghost" id="btn-back-english-home">← 主頁</button>
-        <h1>英文學習 <small>English Learning</small></h1>
+        <span class="english-hub-kicker">KAKA'S ENGLISH PLAYGROUND</span>
       </div>
-      <p class="section-lead">揀一種學習方式；每個入口只做一件主要任務。</p>
+      <header class="english-hub-hero">
+        <div class="english-hub-hero-copy">
+          <span class="english-hub-eyebrow">LEARN THROUGH PLAY</span>
+          <h1>英文學習 <small>English Learning</small></h1>
+          <p>讀故事、認詞語、玩拼讀；揀一個學習世界出發！</p>
+        </div>
+        <div class="english-hub-world-count" aria-label="三個學習世界">
+          <strong>03</strong>
+          <span>個學習世界</span>
+        </div>
+      </header>
       <div class="english-hub-grid">
-        <button type="button" class="english-hub-card english-hub-story" id="btn-english-story">
-          <span class="english-hub-icon" aria-hidden="true">📚</span>
-          <span class="english-hub-title">故事閱讀 <small>Story Reading</small></span>
-          <span class="english-hub-description">聽逐頁故事，讀句子，再找回句子中缺少的字。</span>
-          <span class="english-hub-action">選擇故事系列 →</span>
+        <button type="button" class="english-hub-card english-hub-story" id="btn-english-story" aria-label="故事閱讀 Story Reading：聽故事、讀句子、找故事詞語">
+          <img class="english-hub-art" src="assets/english-worlds/story-reading.webp" alt="" aria-hidden="true" width="1254" height="1254" fetchpriority="high">
+          <span class="english-hub-card-body">
+            <span class="english-hub-title">故事閱讀 <small>Story Reading</small></span>
+            <span class="english-hub-description">跟住繪本聽故事、讀句子，再找故事入面嘅詞語。</span>
+            <span class="english-hub-action">去揀故事 →</span>
+          </span>
         </button>
-        <button type="button" class="english-hub-card english-hub-words" id="btn-english-words">
-          <span class="english-hub-icon" aria-hidden="true">🖼️</span>
-          <span class="english-hub-title">主題詞語 <small>Topic Words</small></span>
-          <span class="english-hub-description">按主題認讀完整英文詞，聽音、看圖和配對。</span>
-          <span class="english-hub-action">選擇詞語主題 →</span>
+        <button type="button" class="english-hub-card english-hub-words" id="btn-english-words" aria-label="主題詞語 Topic Words：看圖、聽音、認讀完整英文詞">
+          <img class="english-hub-art" src="assets/english-worlds/topic-words.webp" alt="" aria-hidden="true" width="1254" height="1254" decoding="async">
+          <span class="english-hub-card-body">
+            <span class="english-hub-title">主題詞語 <small>Topic Words</small></span>
+            <span class="english-hub-description">看清楚圖像、聽英文讀音，認識一個完整詞語。</span>
+            <span class="english-hub-action">去揀詞語主題 →</span>
+          </span>
         </button>
-        <button type="button" class="english-hub-card english-hub-phonics" id="btn-english-phonics">
-          <span class="english-hub-icon" aria-hidden="true">🔤</span>
-          <span class="english-hub-title">字母音・拼讀 <small>Phonics</small></span>
-          <span class="english-hub-description">學字母和字母組合發音，再練習拼合單詞。</span>
-          <span class="english-hub-action">開始學字母音 →</span>
+        <button type="button" class="english-hub-card english-hub-phonics" id="btn-english-phonics" aria-label="字母音・拼讀 Phonics：聽字母音，把聲音拼成單字">
+          <img class="english-hub-art" src="assets/english-worlds/phonics.webp" alt="" aria-hidden="true" width="1254" height="1254" decoding="async">
+          <span class="english-hub-card-body">
+            <span class="english-hub-title">字母音・拼讀 <small>Phonics</small></span>
+            <span class="english-hub-description">聽字母發音，把聲音合起來讀成單字。</span>
+            <span class="english-hub-action">去玩拼讀 →</span>
+          </span>
         </button>
       </div>
     </section>
@@ -1004,8 +1040,8 @@
   <script src="./js/additionGame.js?v=20260908a"></script>
   <script src="./js/subtractionData.js?v=20260908a"></script>
   <script src="./js/subtractionGame.js?v=20260908a"></script>
-  <script src="./js/math-life-skills-data.js?v=20261006-fruit-shop-story"></script>
-  <script src="./js/math-life-skills-game.js?v=20261006-fruit-shop-story"></script>
+  <script src="./js/math-life-skills-data.js?v=20261001-life-skills"></script>
+  <script src="./js/math-life-skills-game.js?v=20261001-life-skills"></script>
   <script src="./js/math-strategies-data.js?v=1"></script>
   <script src="./js/math-strategies-game.js?v=1"></script>
   <script src="./js/math-app.js?v=20261001-life-skills"></script>

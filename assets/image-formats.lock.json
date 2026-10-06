@@ -227,6 +227,10 @@
     "format": "PNG",
     "alpha": true
   },
+  "assets/home-learning-picnic.jpg": {
+    "format": "JPEG",
+    "alpha": false
+  },
   "assets/math/galaxy-bg.jpg": {
     "format": "JPEG",
     "alpha": false

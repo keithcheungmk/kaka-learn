@@ -110,7 +110,21 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 - 金星時鐘遊戲沿用現有版面／指針操作，只將背景、文字、提示、電子時間、答案卡及 CTA 調成配合數學遊樂園的明亮淺色系。
 - 水果店入場先用原創繪本情境圖和短語音交代任務；認幣題直接展示目標硬幣；付款題以香港硬幣放入／取回付款盤，實時計總額，答錯提示不足／多付金額及修正方法。回饋空白時不再保留空白色條。
 - 驗證：數學生活技能測試、四種計算法測試、41 項 invariants、JavaScript syntax、`git diff --check` 及 iPad Pro 11 直／橫 + iPhone 16 Pro Max 三種 Chromium viewport smoke 通過。Chromium 為模擬 viewport，未做實體 iPad／iPhone 人手驗收。
-- 部署狀態：待合併／Pages workflow；完成後在此補記 CI、Pages run 及 live check。
+- 發佈：由本次合併至 `main` 觸發 CI／Pages；CI、Pages run 及 live 狀態由 release report 核實。實體 iPad／iPhone 人手驗收仍未做。
+
+### 2026-10-06 · ChatGPT／Codex（英文學習入口設計）
+
+- 英文學習入口改成淺色遊樂場風格，以三張原創插畫說清故事閱讀、主題詞語及 Phonics 三條路線；新增中英文標題、簡短玩法說明及清楚入口提示，保留原有路由和獨立學習進度。
+- iPad 橫向三欄、iPad 直向圖文卡、手機單欄；修正 HTML 原始圖片尺寸撐大卡片造成橫向內容跑出畫面。圖片載入已加到家庭裝置 smoke。
+- 本機驗證：41 項 invariants、故事任務、Phonics flow、16 項 storage tests、`smoke-shots.py --no-shots`、三尺寸入口圖片／文字 focused check、靜態建置及 `git diff --check` 通過。CI／Pages 待本次 branch merge 後補記。
+- 改動檔案：`index.html`、`css/phonics.css`、`assets/english-worlds/*.webp`、`scripts/smoke-shots.py`、`docs/handover.md`。
+
+### 2026-10-06 · ChatGPT／Codex（首頁圖畫書式改版）
+
+- 主頁換成 Keith 選定的野餐讀書主視覺，擴大成寬幅封面；中文、英文、普通話、數學各自改為大觸控入口，保留「禧禧遊戲樂園」原名稱／網址、Profile／星星／進度與家長書架功能。
+- 加入首頁專用故事書風格與 iPad／手機響應式版面；入口既有 JS ID 不變。圖片為原創玩具太空人形象，並非 Buzz Lightyear 官方素材。
+- 驗證：`check-invariants.py`（41 項）及靜態建置通過；本機 Chromium 因 macOS Mach port sandbox 無法啟動。三個家庭裝置 viewport smoke 由本次 CI／Pages workflow 執行；實機 iPad 人手視覺檢查未做。
+- 涉及 `index.html`、`css/styles.css`、`assets/home-learning-picnic.jpg`、`assets/image-formats.lock.json`、`scripts/check-invariants.py`、`docs/handover.md`。本次 release push 會觸發 CI 及 Pages，結果以發佈回報為準。
 
 ### 2026-10-05 · ChatGPT／Codex（數學遊樂園重整與發布）
 
