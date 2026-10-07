@@ -22,6 +22,7 @@
 
 - `assets/family-stories/characters/*-turnaround.webp` 是角色三視圖；場景生成時以相關角色圖作參考。`xiyu-turnaround.webp` 是浠榆的初生包被角色設定圖。
 - `family-height-lineup.webp` 是六人共同比例參考。
+- **卡卡形象主參考（Keith 2026-10-08 選定）**：`docs/design/kaka-character-reference-sheet.jpg`（五個全身角度＋四個表情）同畫風範本 `docs/design/kaka-breakfast-style-reference.jpg`。凡生成有卡卡嘅圖，兩張都要作參考圖，臉型、髮型、笑容同服裝以呢兩張為準；呢兩張係設定稿，唔直接放上網站。
 - 不改角色的髮型、主色服裝、臉型或年齡感；角色身高用相同地面基線校準。
 - 圖中不生成中文字、拼音或對話框；文字由 HTML 顯示。
 - 每篇故事中的角色衣服固定，不因格數改變；避免背景角色被誤認為主角。
