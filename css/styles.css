@@ -618,7 +618,7 @@ div.star-panel {
 
 .chinese-words-heading h2 {
   margin: 0;
-  color: var(--gold-soft);
+  color: var(--answer-ink);
   font-size: clamp(1.45rem, 3vw, 2rem);
 }
 
@@ -696,7 +696,7 @@ div.star-panel {
 }
 
 .chinese-word-speaker {
-  color: var(--gold-soft);
+  color: var(--ink-dim);
   font-size: clamp(0.82rem, 1.4vw, 1rem);
   font-weight: 700;
   white-space: nowrap;
@@ -724,6 +724,7 @@ div.star-panel {
 }
 
 .is-word-wall .learn-finish-row .btn {
+  color: var(--answer-ink);
   width: min(100%, 620px);
   min-height: 64px;
   margin: 0 auto;
@@ -738,6 +739,30 @@ div.star-panel {
 @media (max-width: 620px) {
   .chinese-words-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .chinese-word-card { min-height: 150px; border-radius: 17px; }
+}
+
+/* iPad 遊戲畫面唔准成頁捲：只得詞牆格仔區內捲，「開始挑戰」固定喺下面唔疊住詞卡。 */
+@media (min-width: 701px) {
+  #screen-learn.is-word-wall.active {
+    overflow: hidden;
+    padding-bottom: 0;
+  }
+
+  #screen-learn.is-word-wall .chinese-words-overview:not([hidden]) {
+    flex: 1 1 0;
+    margin-bottom: 0;
+    padding: 0 4px 12px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #screen-learn.is-word-wall .learn-finish-row {
+    position: static;
+    flex: none;
+    padding: 10px 0 max(6px, env(safe-area-inset-bottom));
+    background: none;
+  }
 }
 
 .learn-stage #learn-illust {
