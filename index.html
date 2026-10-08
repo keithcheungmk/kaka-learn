@@ -246,7 +246,11 @@
       <section class="chinese-words-overview" id="learn-words-overview" aria-label="主題詞語" hidden>
         <div class="chinese-words-heading">
           <h2 id="learn-words-heading">詞語牆</h2>
-          <p>逐個撳詞卡聽廣東話讀音；準備好就開始挑戰。</p>
+          <p id="learn-words-hint">逐個撳詞卡聽廣東話讀音；準備好就開始挑戰。</p>
+          <div class="chinese-voice-toggle" id="chinese-voice-toggle" role="group" aria-label="揀讀音">
+            <button type="button" class="chinese-voice-btn is-on" data-chinese-voice="yue" aria-pressed="true">粵語</button>
+            <button type="button" class="chinese-voice-btn" data-chinese-voice="cmn" aria-pressed="false">普通話</button>
+          </div>
         </div>
         <div class="chinese-words-grid" id="learn-words-grid"></div>
       </section>
@@ -1049,6 +1053,7 @@
   <script src="./js/no-zoom.js?v=20260818d"></script>
   <script src="./js/emoji-art.js?v=20260830a"></script>
   <script src="./js/words.js?v=20260929-deer-art"></script>
+  <script src="./js/words-mandarin.js?v=20261008-cmn"></script>
   <script src="./js/storage.js?v=20260904a"></script>
   <script src="./js/speech.js?v=20260818e"></script>
   <script src="./js/star-fx.js?v=20260831l"></script>

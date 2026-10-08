@@ -178,6 +178,20 @@ body::before {
   filter: brightness(0.97);
 }
 
+.topic-pass.is-yes {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.topic-pass.is-no {
+  background: #eef2f7;
+  color: #475569;
+}
+
+.chinese-word-card:active {
+  background: #e9fbf4;
+}
+
 .btn-ghost,
 .btn-parent {
   color: var(--ink);

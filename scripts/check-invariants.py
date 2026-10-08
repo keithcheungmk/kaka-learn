@@ -1020,8 +1020,20 @@ def check_pth_contract() -> None:
         fail("pth-contract", result.stderr[-1200:] or "PTH 回歸失敗")
 
 
+def check_chinese_mandarin() -> None:
+    """中文詞語牆普通話：每個一般詞語要有預錄音，講法／manifest 唔可以過期。"""
+    node = shutil.which("node")
+    if not node:
+        fail("chinese-mandarin", "需要 node 執行中文普通話錄音檢查")
+        return
+    result = subprocess.run([node, "scripts/test-chinese-mandarin.mjs"], capture_output=True, text=True)
+    if result.returncode:
+        fail("chinese-mandarin", result.stderr[-1200:] or "中文普通話錄音檢查失敗")
+
+
 CHECKS = [
     check_pth_contract,
+    check_chinese_mandarin,
     check_js_syntax,
     check_no_build_step,
     check_cache_bust_tags,

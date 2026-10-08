@@ -34,6 +34,7 @@ FREDOKA_URL = (
 UI_EXTRA = (
     "卡卡學習太空戰士學院認字字母數理聽配砌今日累積幣枚返去揀主題書玩法"
     "禧禧換小朋友我的進度已過未過小遊戲樂園近日要練"
+    "粵語普通話聽詞"
 )
 
 
@@ -43,13 +44,11 @@ def read(p: Path) -> str:
 
 def collect_han_chars() -> str:
     chars: set[str] = set()
-    for rel in ("js/words.js", "js/phonics-words.js"):
+    for rel in ("js/words.js", "js/phonics-words.js", "js/words-mandarin.js"):
         src = read(ROOT / rel)
         src = re.sub(r"/\*.*?\*/", "", src, flags=re.S)
         src = re.sub(r"(?m)^\s*//.*$", "", src)
-        for m in re.finditer(r"term:\s*'([^']*)'", src):
-            chars.update(m.group(1))
-        for m in re.finditer(r"say:\s*'([^']*)'", src):
+        for m in re.finditer(r"(?:term|say|cmn):\s*'([^']*)'", src):
             chars.update(m.group(1))
     chars.update(UI_EXTRA)
     latin = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")

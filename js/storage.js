@@ -26,6 +26,7 @@ const DEFAULT_PROFILE_STATE = {
   enabledWordIds: null, // null = 全部啟用
   voiceURI: null, // null = 自動（優先粵語女聲）
   autoSpeak: true,
+  chineseVoice: 'yue', // 中文詞語牆讀音：'yue' 粵語／'cmn' 普通話
   coinHintSeen: false,
 
   /* ── 獎勵規則（2026-08 改版）──────────────────────────

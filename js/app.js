@@ -55,7 +55,9 @@ const {
   playStarCue,
   playCoinHintCue,
   estimateSpeakMs,
+  cancelAllSpeech,
 } = window.KakaSpeech;
+const KakaMandarin = window.KakaMandarin || null;
 
 function wordSpeakText(word) {
   if (!word) return '';
@@ -403,7 +405,62 @@ function bindLearn() {
       const word = learnWords.find((entry) => entry.id === card.dataset.learnWordId);
       if (!word) return;
       state = loadState();
-      speakTerm(wordSpeakText(word), { muted: state.muted });
+      if (chineseVoiceMode() === 'cmn') {
+        playMandarinWord(word, state.muted);
+      } else {
+        stopMandarinAudio();
+        speakTerm(wordSpeakText(word), { muted: state.muted });
+      }
+    });
+  }
+  $$('[data-chinese-voice]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const voice = btn.dataset.chineseVoice === 'cmn' ? 'cmn' : 'yue';
+      if (voice === chineseVoiceMode()) return;
+      stopMandarinAudio();
+      cancelAllSpeech?.();
+      state = updateState({ chineseVoice: voice });
+      if (learnWordsOverview) renderChineseWordWall();
+    });
+  });
+}
+
+/** 中文詞語牆讀音：每個小朋友各自記住揀咗粵語定普通話。 */
+function chineseVoiceMode() {
+  return KakaMandarin && loadState().chineseVoice === 'cmn' ? 'cmn' : 'yue';
+}
+
+let mandarinAudio = null;
+
+function stopMandarinAudio() {
+  if (!mandarinAudio) return;
+  mandarinAudio.pause();
+  mandarinAudio.removeAttribute('src');
+  mandarinAudio.load();
+}
+
+function setWordWallHint(text) {
+  const hint = $('#learn-words-hint');
+  if (hint) hint.textContent = text;
+}
+
+/** 普通話只播預錄音檔；播唔到就提示再撳，唔會偷偷用粵語 TTS 代替。 */
+function playMandarinWord(word, muted) {
+  cancelAllSpeech?.();
+  if (muted || !KakaMandarin) return;
+  if (!mandarinAudio) {
+    mandarinAudio = new Audio();
+    mandarinAudio.preload = 'auto';
+  }
+  mandarinAudio.pause();
+  mandarinAudio.src = KakaMandarin.audioSrc(word);
+  mandarinAudio.currentTime = 0;
+  const failed = () => setWordWallHint('普通話錄音暫時播唔到，請再撳一次。');
+  mandarinAudio.onerror = failed;
+  const playing = mandarinAudio.play();
+  if (playing && typeof playing.catch === 'function') {
+    playing.catch((err) => {
+      if (err && err.name !== 'AbortError') failed();
     });
   }
 }
@@ -787,6 +844,7 @@ function finishChineseConnectRound() {
 
 function showScreen(name) {
   hidePlayFinish();
+  stopMandarinAudio();
   $$('.screen').forEach((el) => el.classList.remove('active'));
   const map = {
     profiles: '#screen-profiles',
@@ -1338,6 +1396,19 @@ function renderChineseWordWall() {
   if (heading) heading.textContent = learnPairMode ? '相反詞・一起學' : '詞語牆';
   if (progress) progress.textContent = `${learnWords.length} 個詞`;
 
+  const voice = chineseVoiceMode();
+  const voiceToggle = $('#chinese-voice-toggle');
+  if (voiceToggle) voiceToggle.hidden = !KakaMandarin;
+  $$('[data-chinese-voice]').forEach((btn) => {
+    const on = btn.dataset.chineseVoice === voice;
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  const voiceName = voice === 'cmn' ? '普通話' : '廣東話';
+  setWordWallHint(`逐個撳詞卡聽${voiceName}讀音；準備好就開始挑戰。`);
+  const lead = $('#learn-lead');
+  if (lead) lead.textContent = `每個詞語都可以撳喇叭聽${voiceName}讀音。`;
+
   grid.innerHTML = '';
   if (learnPairMode) {
     learnPairs.forEach((pair, index) => {
@@ -1370,11 +1441,15 @@ function makeChineseWordCard(word, description = '') {
   card.type = 'button';
   card.className = 'chinese-word-card';
   card.dataset.learnWordId = word.id;
-  card.setAttribute('aria-label', `聽詞語：${word.term}${description ? `，${description}` : ''}`);
+  const cmn = chineseVoiceMode() === 'cmn';
+  const cmnTerm = cmn && KakaMandarin.differs(word) ? KakaMandarin.mandarinTerm(word) : '';
+  const spoken = cmn ? `聽普通話：${cmnTerm || word.term}` : `聽詞語：${word.term}`;
+  card.setAttribute('aria-label', `${spoken}${description ? `，${description}` : ''}`);
   card.innerHTML = `
     <span class="chinese-word-art">${wordIllustHtml(word)}</span>
     <span class="chinese-word-label">${word.term}</span>
-    <span class="chinese-word-speaker" aria-hidden="true">🔊 聽詞語</span>
+    ${cmnTerm ? `<span class="chinese-word-cmn">普通話：${cmnTerm}</span>` : ''}
+    <span class="chinese-word-speaker" aria-hidden="true">${cmn ? '🔊 聽普通話' : '🔊 聽詞語'}</span>
   `;
   return card;
 }

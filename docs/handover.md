@@ -106,6 +106,14 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-08 · Cursor Chief Lead（中文詞語牆粵／普切換・第一期）
+
+- Keith 決定：詞語牆頂一個「粵語／普通話」切換掣（唔加每張卡掣、唔顯示拼音）；普通話講法唔同嘅詞讀普通話詞並喺卡上細字顯示（例如單車→「普通話：自行車」）；「巴士」「白飯」跟《快樂拼音》課本唔改。範圍只限一般主題詞語牆；配一配、砌一砌、紅輯／橙輯留第二期。
+- 讀音選擇按小朋友分倉（`storage.js` `chineseVoice: 'yue'|'cmn'`，預設粵語）。普通話只播 `assets/chinese-mandarin/<wordId>.m4a` 預錄音（macOS Tingting 合成，403 個，約 2MB），播唔到就提示再撳，**唔會** fallback 粵語 TTS。
+- 普通話講法／只改讀法嘅詞表喺 `js/words-mandarin.js`；加新詞或改講法後要跑 `python3 scripts/build-chinese-mandarin-audio.py` 同 `python3 scripts/build-font-subset.py`，`scripts/test-chinese-mandarin.mjs`（經 `check-invariants.py` 入 CI）會攔漏錄音或過期 manifest。單字多音字「長」「累」用同音字鎖讀音。
+- 順手修主題卡「未過／已過」標籤對比（淺色主題下約 6.9:1）。
+- 驗證：storage／普通話測試、invariants、`git diff --check`、家庭裝置 smoke（模擬 viewport，非真機）通過；Tingting 錄音未經人耳逐個聽審。
+
 ### 2026-10-08 · Cursor Chief Lead（家族角色正式名及統一造型設定圖）
 
 - Keith 定名：虹姑姑、蛙蛙、耀叔叔。故事 manifest（18 篇）、角色卡、角色設定及第一版文件全部改用正式名；`check-invariants.py` 新增 `family-names`，攔「堯叔叔／娃娃／紅姑姑」及單稱「姑姑」。故事讀音用裝置語音讀文字，冇預錄音要重做。

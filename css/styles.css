@@ -628,6 +628,45 @@ div.star-panel {
   font-size: clamp(1rem, 2vw, 1.2rem);
 }
 
+.chinese-voice-toggle {
+  display: inline-flex;
+  margin-top: 10px;
+  padding: 4px;
+  gap: 4px;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 0 0 2px rgba(93, 145, 203, 0.42);
+}
+
+.chinese-voice-toggle[hidden] { display: none !important; }
+
+.chinese-voice-btn {
+  appearance: none;
+  min-width: 104px;
+  min-height: 48px;
+  padding: 6px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #18345f;
+  font: inherit;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 800;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.chinese-voice-btn.is-on {
+  background: #1d6fb8;
+  color: #ffffff;
+  box-shadow: 0 3px 0 #124f86;
+}
+
+.chinese-voice-btn:focus-visible {
+  outline: 3px solid #18345f;
+  outline-offset: 2px;
+}
+
 .chinese-words-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -691,6 +730,19 @@ div.star-panel {
   font-size: clamp(1.05rem, 2vw, 1.5rem);
   font-weight: 700;
   line-height: 1.25;
+  overflow-wrap: anywhere;
+  text-align: center;
+}
+
+.chinese-word-cmn {
+  max-width: 100%;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fff4dc;
+  color: #7a4205;
+  font-size: clamp(0.82rem, 1.4vw, 1rem);
+  font-weight: 800;
+  line-height: 1.3;
   overflow-wrap: anywhere;
   text-align: center;
 }

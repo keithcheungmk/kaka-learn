@@ -285,6 +285,20 @@ test('Phonics Phase 3A：卡卡／禧禧能力紀錄完全隔離', () => {
   assert.equal(S.loadState().phonicsSkillStats.recognition.m.right, 1);
 });
 
+test('中文讀音（粵／普）按 Profile 分開，預設粵語', () => {
+  const S = freshStorage();
+  S.setActiveProfile('kaka');
+  assert.equal(S.loadState().chineseVoice, 'yue');
+  S.updateState({ chineseVoice: 'cmn' });
+  assert.equal(S.loadState().chineseVoice, 'cmn');
+
+  S.setActiveProfile('heihei');
+  assert.equal(S.loadState().chineseVoice, 'yue');
+
+  S.setActiveProfile('kaka');
+  assert.equal(S.loadState().chineseVoice, 'cmn');
+});
+
 test('Profile 選擇重新載入後保留，兩邊輪次進度唔互串', () => {
   const { S, localStorage } = loadStorage();
   S.setActiveProfile('heihei');
