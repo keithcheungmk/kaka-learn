@@ -7,7 +7,7 @@ manifest="global.window={};require('./data/family-stories/manifest.js');process.
 stories=json.loads(subprocess.check_output(['node','-e',manifest],cwd=ROOT,text=True))
 errors=[]
 def norm(text): return re.sub(r'[，。！？、\s]','',text)
-if len(stories)!=18: errors.append(f'Expected 18 stories, found {len(stories)}')
+if len(stories)!=19: errors.append(f'Expected 19 stories, found {len(stories)}')
 for story in stories:
     label=story.get('id','?')
     if len(story.get('pages',[])) not in range(6,9): errors.append(f'{label}: page count must be 6-8')

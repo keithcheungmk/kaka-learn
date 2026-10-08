@@ -21,6 +21,7 @@
 | 長大以後，我想做甚麼？ | 幼稚園職業分享日 | 原創職業詞語；沒有紅書來源詞 | *The Grocery Store*、*A Picnic in the Park*：輪流分享、各自選擇、不同工作都能幫助別人 |
 | 浠榆妹妹來了 | 珠海月子中心 | 家庭照顧和新生妹妹詞語；沒有紅書來源詞 | 以家庭日常、迎接新成員和親友探訪延展故事節奏 |
 | 國慶假期，去珠海看妹妹 | 珠海月子中心、室內遊樂場 | 國慶探親及遊樂場詞語；沒有紅書來源詞 | *Summer Vacation*、*The Amusement Park*：假期探親、分開活動、玩後回家分享 |
+| 珠海探妹妹（一）：和公公婆婆去珠海 | 港珠澳大橋、珠海月子中心、餐廳和酒店 | 2026-10-08 系列第一集；交通、探親、美食詞語；沒有紅書來源詞 | *Summer Vacation*：家庭出遊、夜間行程；續集按 Keith 提供嘅行程另開（`series`／`episode`／`date` 欄位） |
 
 情節參考包括 Carter Family 的《A Picnic in the Park》（安排活動、到公園遊玩）、《The Grocery Store》（一起選購和分配物品）、《A Rainy Day》（天氣變化後轉換活動）、《Planting Seeds》（分工和等待結果）、《Summer Vacation》（家庭出遊日程）、《At the Beach》（戶外安全和共同探索）、《Watching Hawks》（觀察野生動物）和《The Amusement Park》（遊樂場行程）。中文故事的情節、句子及對白會按紅書詞彙和卡卡、禧禧的人物設定重新編排。
 

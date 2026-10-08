@@ -106,6 +106,12 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-08 · Cursor Chief Lead（故事〈珠海探妹妹（一）：和公公婆婆去珠海〉）
+
+- 用 `.agents/skills/kaka-story-based-chinese-learning/` 流程新增第 19 篇故事（八頁）：爸爸駕駛電動車、經港珠澳大橋夜景、月子中心、婆婆扶住卡卡抱妹妹、講故事、坐的士去餐廳食鮮蝦紅米腸同榴槤飛餅、返酒店瞓覺。manifest 新增 `date:'2026-10-08'`、`series:'珠海探妹妹'`、`episode:1`；Keith 之後會寫續集（二、三…），每集用自己嘅日期同行程。
+- 新角色公公、婆婆設定圖 `docs/design/gonggong-character-reference-sheet.jpg`、`popo-character-reference-sheet.jpg`（Agent 原創，唔部署；Keith 提供相片可替換）。場景圖 `assets/family-stories/scenes/zhuhai-grandparents-ep1-p01.webp` 至 `p08.webp`（900×600），圖內冇字／車牌／標誌；特斯拉只寫「電動車」，唔畫品牌。
+- `scripts/check-family-stories.py` 篇數改為 19。
+
 ### 2026-10-08 · Cursor Chief Lead（屋企／日常用品原創物件插圖）
 
 - Keith 指出中文「屋企」「日常用品」有唔少 Emoji 唔係嗰樣嘢（桌子用凳、衣櫃用衫、冰箱用冰粒、洗衣機用洗衣籃、電風扇用吹風公仔面等），亦有四個詞共用 🛏️、洗頭水／沐浴露共用 🧴 靠角落字分。Keith 睇過三張樣板後批准成批改。

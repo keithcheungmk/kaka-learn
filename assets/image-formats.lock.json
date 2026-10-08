@@ -1,8 +1,4 @@
 {
-  "assets/math-life/fruit-shop-scene.jpg": {
-    "format": "JPEG",
-    "alpha": false
-  },
   "assets/book-scenes/anan-biscuits-fruit.jpg": {
     "format": "JPEG",
     "alpha": false
@@ -270,6 +266,10 @@
   "assets/math/planets/venus.png": {
     "format": "PNG",
     "alpha": true
+  },
+  "assets/math-life/fruit-shop-scene.jpg": {
+    "format": "JPEG",
+    "alpha": false
   },
   "assets/og-image.png": {
     "format": "PNG",

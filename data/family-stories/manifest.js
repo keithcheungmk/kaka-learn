@@ -243,5 +243,21 @@ window.FAMILY_STORIES = [
       {"sentence":"爸爸請卡卡食雪糕，卡卡想用五個幣換冰糖士多啤梨。","tiles":["爸爸","請","卡卡","食","雪糕","，","卡卡","想用","五個幣","換","冰糖士多啤梨","。"],"learn":["雪糕","冰糖士多啤梨"],"distractors":["南瓜","手模"],"focusWords":["雪糕","冰糖士多啤梨"],"dialogue":{"speaker":"卡卡","text":"我想用五個幣換冰糖士多啤梨。"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p07.webp"},
       {"sentence":"回到家，卡卡把五個幣交回爸爸，因為他很守信用。","tiles":["回到家","，","卡卡","把","五個幣","交回","爸爸","，","因為","他","很","守信用","。"],"learn":["五個幣","守信用"],"distractors":["忘記","借走"],"focusWords":["五個幣","守信用"],"dialogue":{"speaker":"傑叔叔","text":"你答應交回來，真的做到了！"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p08.webp"}
     ]
+  },
+  {
+    id:'zhuhai-grandparents-ep1', title:'珠海探妹妹（一）：和公公婆婆去珠海', place:'港珠澳大橋、珠海月子中心、餐廳和酒店', date:'2026-10-08', series:'珠海探妹妹', episode:1,
+    characters:['卡卡','傑叔叔','公公','婆婆','虹姑姑','浠榆'], sourceBooks:[], bookWords:[],
+    extensionWords:['十月八日','爸爸','駕駛','電動車','載','卡卡','公公','婆婆','出發','開上','港珠澳大橋','大橋','夜景','美麗','到了','珠海','大家','月子中心','看','媽媽','浠榆妹妹','坐在','沙發','扶着','讓','抱抱','妹妹','拿着','圖書','講故事','聽得','開心','休息','其他人','坐','的士','餐廳','吃晚飯','吃了','鮮蝦','紅米腸','還有','香香','榴槤','飛餅','吃飽','回到','酒店','一起','睡覺'],
+    summary:'2026年10月8日：爸爸駕駛電動車，載卡卡和公公婆婆經港珠澳大橋去珠海探望浠榆妹妹；卡卡抱抱妹妹、講故事，再坐的士去吃晚飯，最後回酒店睡覺。',
+    pages:[
+      {"sentence":"十月八日，爸爸駕駛電動車，載卡卡、公公和婆婆出發。","tiles":["十月八日","，","爸爸","駕駛","電動車","，","載","卡卡","、","公公","和","婆婆","出發","。"],"learn":["電動車","出發"],"distractors":["巴士","回家"],"focusWords":["電動車","出發"],"dialogue":{"speaker":"卡卡","text":"我們去珠海看妹妹啦！"},"image":"assets/family-stories/scenes/zhuhai-grandparents-ep1-p01.webp"},
+      {"sentence":"電動車開上港珠澳大橋，大橋的夜景很美麗。","tiles":["電動車","開上","港珠澳大橋","，","大橋","的","夜景","很","美麗","。"],"learn":["港珠澳大橋","夜景"],"distractors":["隧道","早上"],"focusWords":["港珠澳大橋","夜景"],"dialogue":{"speaker":"卡卡","text":"看！大橋上的燈亮晶晶！"},"image":"assets/family-stories/scenes/zhuhai-grandparents-ep1-p02.webp"},
+      {"sentence":"到了珠海，大家去月子中心看媽媽和浠榆妹妹。","tiles":["到了","珠海","，","大家","去","月子中心","看","媽媽","和","浠榆妹妹","。"],"learn":["珠海","月子中心"],"distractors":["中山","動物園"],"focusWords":["珠海","月子中心"],"dialogue":{"speaker":"婆婆","text":"浠榆妹妹，公公婆婆來看你啦！"},"image":"assets/family-stories/scenes/zhuhai-grandparents-ep1-p03.webp"},
+      {"sentence":"卡卡坐在沙發上，婆婆扶着，讓卡卡抱抱妹妹。","tiles":["卡卡","坐在","沙發","上","，","婆婆","扶着","，","讓","卡卡","抱抱","妹妹","。"],"learn":["沙發","抱抱"],"distractors":["滑梯","跑跑"],"focusWords":["沙發","抱抱"],"dialogue":{"speaker":"婆婆","text":"手要托住妹妹的頭，輕輕的。"},"image":"assets/family-stories/scenes/zhuhai-grandparents-ep1-p04.webp"},
+      {"sentence":"卡卡拿着圖書講故事給妹妹聽，妹妹聽得很開心。","tiles":["卡卡","拿着","圖書","講故事","給","妹妹","聽","，","妹妹","聽得","很","開心","。"],"learn":["講故事","開心"],"distractors":["唱歌","害怕"],"focusWords":["講故事","開心"],"dialogue":{"speaker":"虹姑姑","text":"妹妹最喜歡聽哥哥講故事！"},"image":"assets/family-stories/scenes/zhuhai-grandparents-ep1-p05.webp"},
+      {"sentence":"媽媽和妹妹要休息，其他人坐的士去餐廳吃晚飯。","tiles":["媽媽","和","妹妹","要","休息","，","其他人","坐","的士","去","餐廳","吃晚飯","。"],"learn":["的士","餐廳"],"distractors":["飛機","公園"],"focusWords":["的士","餐廳"],"dialogue":{"speaker":"公公","text":"我們坐的士去吃晚飯吧。"},"image":"assets/family-stories/scenes/zhuhai-grandparents-ep1-p06.webp"},
+      {"sentence":"卡卡吃了鮮蝦紅米腸，還有香香的榴槤飛餅。","tiles":["卡卡","吃了","鮮蝦","紅米腸","，","還有","香香","的","榴槤","飛餅","。"],"learn":["紅米腸","飛餅"],"distractors":["雪糕","蛋撻"],"focusWords":["紅米腸","飛餅"],"dialogue":{"speaker":"卡卡","text":"紅米腸有蝦，飛餅好香，真好吃！"},"image":"assets/family-stories/scenes/zhuhai-grandparents-ep1-p07.webp"},
+      {"sentence":"吃飽後，大家回到酒店一起睡覺。","tiles":["吃飽","後","，","大家","回到","酒店","一起","睡覺","。"],"learn":["酒店","睡覺"],"distractors":["學校","洗澡"],"focusWords":["酒店","睡覺"],"dialogue":{"speaker":"卡卡","text":"明天我還要來看妹妹！"},"image":"assets/family-stories/scenes/zhuhai-grandparents-ep1-p08.webp"}
+    ]
   }
 ];
