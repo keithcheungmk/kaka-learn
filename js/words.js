@@ -222,7 +222,7 @@ const WORDS = [
   { id: 'yongchi', term: '泳池', isDeer: false, emoji: '🏊', badge: '', plate: '#0f3550' },
   // 屋企：房間／傢俬／電器／設施（叫法跟朋友：沙發、冰箱、電風扇、床、窗戶、門）
   { id: 'chufang', term: '廚房', isDeer: false, emoji: '🍳', badge: '', plate: '#3a3010' },
-  { id: 'shuifang', term: '睡房', isDeer: false, emoji: '🛏️', badge: '房', plate: '#1a3050' },
+  { id: 'shuifang', term: '睡房', isDeer: false, emoji: '🛏️', badge: '', plate: '#1a3050' },
   { id: 'cesuo', term: '廁所', isDeer: false, emoji: '🚽', badge: '', plate: '#2a3548' },
   { id: 'yushi', term: '浴室', isDeer: false, emoji: '🚿', badge: '', plate: '#0f3550' },
   { id: 'dianshi', term: '電視', isDeer: false, emoji: '📺', badge: '', plate: '#102848' },
@@ -234,29 +234,29 @@ const WORDS = [
   { id: 'chuanghu', term: '窗戶', isDeer: false, emoji: '🪟', badge: '', plate: '#0f3550' },
   { id: 'deng', term: '燈', isDeer: false, emoji: '💡', badge: '', plate: '#3a3410' },
   { id: 'yizi', term: '椅子', isDeer: false, emoji: '🪑', badge: '', plate: '#3a2818' },
-  { id: 'zhuozi', term: '桌子', isDeer: false, emoji: '🪑', badge: '桌', plate: '#2a3548' },
+  { id: 'zhuozi', term: '桌子', isDeer: false, emoji: '🪑', badge: '', plate: '#2a3548' },
   { id: 'yigui', term: '衣櫃', isDeer: false, emoji: '👕', badge: '', plate: '#1a3050' },
   { id: 'tuoxie', term: '拖鞋', isDeer: false, emoji: '🩴', badge: '', plate: '#402038' },
   { id: 'chuangpu', term: '床', isDeer: false, emoji: '🛏️', badge: '', plate: '#1a2a4a' },
   { id: 'shafa', term: '沙發', isDeer: false, emoji: '🛋️', badge: '', plate: '#281840' },
-  { id: 'zhentou', term: '枕頭', isDeer: false, emoji: '🛏️', badge: '枕', plate: '#2a1840' },
-  { id: 'beizi', term: '被子', isDeer: false, emoji: '🛏️', badge: '被', plate: '#401028' },
+  { id: 'zhentou', term: '枕頭', isDeer: false, emoji: '🛏️', badge: '', plate: '#2a1840' },
+  { id: 'beizi', term: '被子', isDeer: false, emoji: '🛏️', badge: '', plate: '#401028' },
   { id: 'shizhong', term: '時鐘', isDeer: false, emoji: '⏰', badge: '', plate: '#3a3010' },
-  { id: 'lengqi', term: '冷氣機', isDeer: false, emoji: '❄️', badge: '冷', plate: '#0f3550' },
+  { id: 'lengqi', term: '冷氣機', isDeer: false, emoji: '❄️', badge: '', plate: '#0f3550' },
   { id: 'mensuo', term: '門鎖', isDeer: false, emoji: '🔒', badge: '', plate: '#2a2a35' },
   { id: 'lajitong', term: '垃圾桶', isDeer: false, emoji: '🗑️', badge: '', plate: '#3a3a45' },
   { id: 'xiangkuang', term: '相框', isDeer: false, emoji: '🖼️', badge: '', plate: '#3a2818' },
   { id: 'ditan', term: '地毯', isDeer: false, emoji: '🟫', badge: '', plate: '#402010', en: { word: 'mat', letters: ['m', 'a', 't'] } },
-  { id: 'xishoutai', term: '洗手台', isDeer: false, emoji: '🧼', badge: '台', plate: '#2a3a50' },
+  { id: 'xishoutai', term: '洗手台', isDeer: false, emoji: '🧼', badge: '', plate: '#2a3a50' },
   { id: 'shuilongtou', term: '水龍頭', isDeer: false, emoji: '🚰', badge: '', plate: '#102848' },
   { id: 'chouti', term: '抽屜', isDeer: false, emoji: '🗄️', badge: '', plate: '#3a2818' },
   { id: 'yangtai', term: '陽台', isDeer: false, emoji: '🪴', badge: '', plate: '#143828' },
   // 日常用品（含餐具；鏡子／毛巾／牙刷由屋企移入）
   { id: 'jing', term: '鏡子', isDeer: false, emoji: '🪞', badge: '', plate: '#2a3a50' },
-  { id: 'maojin', term: '毛巾', isDeer: false, emoji: '🧼', badge: '巾', plate: '#2a3a50' },
+  { id: 'maojin', term: '毛巾', isDeer: false, emoji: '🧼', badge: '', plate: '#2a3a50' },
   { id: 'yashua', term: '牙刷', isDeer: false, emoji: '🪥', badge: '', plate: '#143828' },
   { id: 'shuihu', term: '水壺', isDeer: false, emoji: '🥤', badge: '', plate: '#0f3550' },
-  { id: 'yagao', term: '牙膏', isDeer: false, emoji: '🦷', badge: '膏', plate: '#2a3a50' },
+  { id: 'yagao', term: '牙膏', isDeer: false, emoji: '🦷', badge: '', plate: '#2a3a50' },
   { id: 'beizi_cup', term: '杯子', isDeer: false, emoji: '🥤', badge: '', plate: '#102848' },
   { id: 'wan', term: '碗', isDeer: false, emoji: '🥣', badge: '', plate: '#3a3010' },
   { id: 'tangchi', term: '湯匙', isDeer: false, emoji: '🥄', badge: '', plate: '#2a3548' },
@@ -266,8 +266,8 @@ const WORDS = [
   { id: 'zhijin', term: '紙巾', isDeer: false, emoji: '🧻', badge: '', plate: '#3a3a45' },
   { id: 'shuzi', term: '梳子', isDeer: false, emoji: '🪮', badge: '', plate: '#402038' },
   { id: 'lifa', term: '理髮', isDeer: false, emoji: '💇', badge: '', plate: '#281840' },
-  { id: 'xitoushui', term: '洗頭水', isDeer: false, emoji: '🧴', badge: '洗', plate: '#1a3050' },
-  { id: 'muyulu', term: '沐浴露', isDeer: false, emoji: '🧴', badge: '浴', plate: '#0f3535' },
+  { id: 'xitoushui', term: '洗頭水', isDeer: false, emoji: '🧴', badge: '', plate: '#1a3050' },
+  { id: 'muyulu', term: '沐浴露', isDeer: false, emoji: '🧴', badge: '', plate: '#0f3535' },
   { id: 'kouzhao', term: '口罩', isDeer: false, emoji: '😷', badge: '', plate: '#2a3548' },
   { id: 'yanjing', term: '眼鏡', isDeer: false, emoji: '👓', badge: '', plate: '#1a2a4a' },
   // 紅輯高頻（對齊《我自己會讀》紅輯溫習；書面語字形，粵語 TTS）
@@ -1361,6 +1361,14 @@ const CAREER_ILLUSTRATIONS = {
   tushuguan_guanliyuan: 'assets/careers/tushuguan_guanliyuan.webp',
 };
 
+// 屋企／日常用品：系統 Emoji 冇對應物件（例如衣櫃、洗衣機）或者幾個詞共用同一個圖，
+// 改用原創透明插圖，直接放喺詞卡深色底板上；生成方法見 scripts/build-object-art.py。
+const OBJECT_ILLUSTRATIONS = Object.fromEntries([
+  'zhuozi', 'yigui', 'xuegui', 'xiyiji', 'fengshan', 'lengqi', 'chouti', 'ditan', 'yangtai',
+  'xishoutai', 'shuifang', 'zhentou', 'beizi', 'chufang', 'mensuo', 'shuilongtou',
+  'maojin', 'yagao', 'shuihu', 'xitoushui', 'muyulu', 'shuzi', 'zhijin', 'beizi_cup', 'chazi',
+].map((id) => [id, `assets/object-art/${id}.webp`]));
+
 // 情緒、常見動作及運動改用卡卡／禧禧角色圖；其他詞卡維持既有 Emoji。
 const CHARACTER_WORD_ILLUSTRATIONS = {
   kaixin: 'assets/character-words/emotions/kaixin.webp',
@@ -1474,7 +1482,7 @@ const CHINESE_CONNECT_EMOJI_OVERRIDES = {
 
 function isChineseConnectIllustratable(word) {
   return Boolean(word && (ANIMAL_ILLUSTRATIONS[word.id] || word.photo || word.emoji || CAREER_ILLUSTRATIONS[word.id]
-    || CHARACTER_WORD_ILLUSTRATIONS[word.id] || CHINESE_CONNECT_EMOJI_OVERRIDES[word.id]));
+    || CHARACTER_WORD_ILLUSTRATIONS[word.id] || OBJECT_ILLUSTRATIONS[word.id] || CHINESE_CONNECT_EMOJI_OVERRIDES[word.id]));
 }
 
 function chineseConnectIllustHtml(word) {
@@ -1491,6 +1499,13 @@ function wordIllustHtml(word) {
   if (photo) {
     return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
     <img class="word-photo" src="${photo}" alt="${word.term}" loading="lazy" />
+    ${badge}
+  </span>`;
+  }
+  const objectIllustration = OBJECT_ILLUSTRATIONS[word.id];
+  if (objectIllustration) {
+    return `<span class="emoji-plate object-plate" style="--plate:${word.plate || '#122848'}">
+    <img class="object-illustration" src="${objectIllustration}" alt="" aria-hidden="true" loading="lazy" />
     ${badge}
   </span>`;
   }
@@ -1529,4 +1544,5 @@ window.KakaWords = {
   chineseConnectIllustHtml,
   isChineseConnectIllustratable,
   CHARACTER_WORD_ILLUSTRATIONS,
+  OBJECT_ILLUSTRATIONS,
 };
