@@ -11,3 +11,4 @@ Keith（2026-09-21）硬性工作流：
 2. Agent 自己對 `source-materials/` 核實內容 → 跑測試／invariants → **commit → merge／push 部署**。
 3. 收工只交 **可撳網址**（例如 Pages）；佢唔滿意會喺網站玩完再講，再改再部署。
 4. 「第二人驗收」＝Keith 喺 live 玩；**唔係** chat 入面 code review。呢條優先過舊「先等 Keith 確認先開正式題」。
+5. **長期授權 push `main`（Keith 2026-10-08）**：Keith 已明確授權 agent 喺本機測試、`check-invariants.py` 及分支 CI 全綠後，直接 fast-forward `git push origin HEAD:main` 部署 Pages，唔使逐次再問；唔包括 force push、改寫歷史或提交 `source-materials/`。
