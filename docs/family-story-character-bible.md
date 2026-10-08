@@ -10,20 +10,22 @@
 |---|---:|---|---|
 | 卡卡 | 4歲／106 cm | 短黑髮、笑容爽朗 | 黃色上衣、深藍邊、深藍短褲 |
 | 禧禧 | 3歲／約96 cm | 圓臉、大眼、黑髮；「禧」取自千禧年 | 深藍外套、黃色衣領 |
-| 姑姑／紅姑姑 | 161 cm | 比蛙蛙高、身形較修長、尖一些的臉、較長頭髮 | 珊瑚紅開襟衫、深藍長褲 |
+| 虹姑姑 | 161 cm | 比蛙蛙高、身形較修長、尖一些的臉、較長頭髮 | 珊瑚紅開襟衫、深藍長褲 |
 | 蛙蛙 | 155 cm | 禧禧的媽媽；身形較矮、圓臉、大眼；「蛙」取自青蛙 | 薄荷綠開襟衫、藍綠長褲 |
 | 傑叔叔 | 170 cm | 卡卡的爸爸；成熟和善 | 深藍襯衫外套、芥末黃上衣 |
 | 耀叔叔 | 175 cm | 禧禧的爸爸 | 灰綠襯衫外套、淺色上衣 |
 | 浠榆 | 初生寶寶 | 卡卡的妹妹 | 淡粉色花朵圖案包被；以安全包裹／成人抱着的姿勢出現 |
 
-成人和孩子的頭身比例要分開處理：成人較高、四肢較長；卡卡只比禧禧高約10 cm。姑姑與蛙蛙相差約6 cm；耀叔叔比傑叔叔高約5 cm。浠榆是初生嬰兒，不設定未提供的身高；必須由成人妥善抱着或放在安全嬰兒床內。
+**正式名（Keith 2026-10-08）**：虹姑姑、蛙蛙、耀叔叔；故事、對白、砌句磚及角色卡一律用呢三個寫法，唔再用「姑姑」單稱、「紅姑姑」、「娃娃」或「堯叔叔」（`check-invariants.py` 的 `family-names` 檢查）。
+
+成人和孩子的頭身比例要分開處理：成人較高、四肢較長；卡卡只比禧禧高約10 cm。虹姑姑與蛙蛙相差約6 cm；耀叔叔比傑叔叔高約5 cm。浠榆是初生嬰兒，不設定未提供的身高；必須由成人妥善抱着或放在安全嬰兒床內。
 
 ## 參考圖與生成要求
 
 - `assets/family-stories/characters/*-turnaround.webp` 是角色三視圖；場景生成時以相關角色圖作參考。`xiyu-turnaround.webp` 是浠榆的初生包被角色設定圖。
 - `family-height-lineup.webp` 是六人共同比例參考。
 - **卡卡形象主參考（Keith 2026-10-08 選定）**：`docs/design/kaka-character-reference-sheet.jpg`（五個全身角度＋四個表情）同畫風範本 `docs/design/kaka-breakfast-style-reference.jpg`。凡生成有卡卡嘅圖，兩張都要作參考圖，臉型、髮型、笑容同服裝以呢兩張為準；呢兩張係設定稿，唔直接放上網站。
-- **其餘五位統一造型（2026-10-08，以卡卡設定圖畫風統一）**：禧禧 `docs/design/heihei-character-reference-sheet.jpg`、姑姑 `auntie-character-reference-sheet.jpg`、蛙蛙 `wawa-character-reference-sheet.jpg`、傑叔叔 `jie-character-reference-sheet.jpg`、耀叔叔 `yao-character-reference-sheet.jpg`；六人同框比例以 `docs/design/family-height-lineup-reference.jpg` 為準。生成場景時放入相關角色嘅設定圖（多人同框再加六人比例圖）；以上設定圖優先於 `assets/family-stories/characters/` 舊三視圖。
+- **其餘五位統一造型（2026-10-08，以卡卡設定圖畫風統一）**：禧禧 `docs/design/heihei-character-reference-sheet.jpg`、虹姑姑 `auntie-character-reference-sheet.jpg`、蛙蛙 `wawa-character-reference-sheet.jpg`、傑叔叔 `jie-character-reference-sheet.jpg`、耀叔叔 `yao-character-reference-sheet.jpg`；六人同框比例以 `docs/design/family-height-lineup-reference.jpg` 為準。生成場景時放入相關角色嘅設定圖（多人同框再加六人比例圖）；以上設定圖優先於 `assets/family-stories/characters/` 舊三視圖。
 - 不改角色的髮型、主色服裝、臉型或年齡感；角色身高用相同地面基線校準。
 - 圖中不生成中文字、拼音或對話框；文字由 HTML 顯示。
 - 每篇故事中的角色衣服固定，不因格數改變；避免背景角色被誤認為主角。

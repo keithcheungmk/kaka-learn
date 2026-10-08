@@ -953,6 +953,19 @@ def check_book_scans_shelf() -> None:
             fail("book-scans", "書本掃描入口要放喺主頁，唔好塞入小朋友揀 Profile 大卡")
 
 
+def check_family_names() -> None:
+    """故事角色正式名：虹姑姑、蛙蛙、耀叔叔（Keith 2026-10-08）。"""
+    for path in ("data/family-stories/manifest.js", "js/family-storybook.js"):
+        if not Path(path).is_file():
+            continue
+        src = read(path)
+        for old, new in (("堯叔叔", "耀叔叔"), ("娃娃", "蛙蛙"), ("紅姑姑", "虹姑姑")):
+            if old in src:
+                fail("family-names", f"{path} 用咗舊名「{old}」，要寫「{new}」")
+        if re.search(r"(?<!虹)姑姑", src):
+            fail("family-names", f"{path} 有單稱「姑姑」，要寫「虹姑姑」")
+
+
 def check_family_storybook_entry() -> None:
     """獨立中文故事書入口及 provenance/test 邊界必須存在。"""
     html = read("index.html")
@@ -1048,6 +1061,7 @@ CHECKS = [
     check_family_smoke_devices,
     check_book_scans_shelf,
     check_family_storybook_entry,
+    check_family_names,
     check_asset_weight,
 ]
 

@@ -106,6 +106,11 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-08 · Cursor Chief Lead（家族角色正式名及統一造型設定圖）
+
+- Keith 定名：虹姑姑、蛙蛙、耀叔叔。故事 manifest（18 篇）、角色卡、角色設定及第一版文件全部改用正式名；`check-invariants.py` 新增 `family-names`，攔「堯叔叔／娃娃／紅姑姑」及單稱「姑姑」。故事讀音用裝置語音讀文字，冇預錄音要重做。
+- 六位角色統一造型設定圖放 `docs/design/*-character-reference-sheet.jpg`，六人比例圖 `docs/design/family-height-lineup-reference.jpg`（設定稿，唔部署）；`docs/family-story-character-bible.md` 已寫明生成新圖時優先用呢批參考。網站現有故事場景圖未重畫。
+
 ### 2026-10-07 · Cursor Chief Lead（中文詞牆 iPad 版面修正，解除部署阻塞）
 
 - `915730a` 中文主題詞牆令學習頁成頁捲動、sticky「開始挑戰」疊住詞卡；`9694737`／`fd9aeee` 嘅 CI 同 Pages 部署因家庭裝置 smoke 失敗，詞牆同水果店錢包一直未上線（live 停喺 `e9b79f2`）。

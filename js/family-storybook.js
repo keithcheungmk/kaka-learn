@@ -5,7 +5,7 @@
   const cast = [
     ['卡卡','4歲・106 cm','短黑髮；黃衣深藍邊','kaka-turnaround.webp'],
     ['禧禧','3歲・約96 cm','圓臉大眼；深藍衣黃衣領','heihei-turnaround.webp'],
-    ['姑姑／紅姑姑','161 cm','身形較高、面尖、長髮','auntie-turnaround.webp'],
+    ['虹姑姑','161 cm','身形較高、面尖、長髮','auntie-turnaround.webp'],
     ['蛙蛙','155 cm','禧禧的媽媽；身形較矮、圓臉大眼','wawa-turnaround.webp'],
     ['傑叔叔','170 cm','卡卡的爸爸；深藍外套','jie-turnaround.webp'],
     ['耀叔叔','175 cm','禧禧的爸爸；灰綠外套','yao-turnaround.webp'],

@@ -32,7 +32,7 @@
 
 ## 人物連續性
 
-請先讀 `docs/family-story-character-bible.md`。六位原有角色共用同一身高基線：卡卡106 cm、禧禧約96 cm、蛙蛙155 cm、姑姑161 cm、傑叔叔170 cm、耀叔叔175 cm；浠榆是初生嬰兒，不另設身高。服裝、髮型及辨識特徵以 `assets/family-stories/characters/` 角色三視圖為準。每格圖在網頁外另配句子和對白，插圖不含文字。
+請先讀 `docs/family-story-character-bible.md`。六位原有角色共用同一身高基線：卡卡106 cm、禧禧約96 cm、蛙蛙155 cm、虹姑姑161 cm、傑叔叔170 cm、耀叔叔175 cm；浠榆是初生嬰兒，不另設身高。服裝、髮型及辨識特徵以 `assets/family-stories/characters/` 角色三視圖為準。每格圖在網頁外另配句子和對白，插圖不含文字。
 
 ## 音訊與玩法
 
