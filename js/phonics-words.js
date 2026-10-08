@@ -1,6 +1,7 @@
 /** SPACE RANGER PHONICS（49 音溫習 + CVC 詞族 + 常見字）
  *  獨立資料檔，唔改動 js/words.js 嘅任何現有內容。
- *  一般插圖用系統 Emoji；英文職業主題用 Kaka／Heihei 原創職業插圖；字母統一用 Ranger Sound Energy 節點，
+ *  一般插圖用系統 Emoji；英文職業主題用 Kaka／Heihei 原創職業插圖；冇準確 Emoji 嘅屋企物件用 `objectArt`
+ *  重用中文 assets/object-art 透明插圖（`emoji` 仍保留作「有圖」判斷）；字母統一用 Ranger Sound Energy 節點，
  *  唔用擬人方塊角色，避免表情搶走字形同讀音焦點。
  *
  *  聲音訓練基地：媽媽錄製的 49 音；每組先聽熟，再做辨音。
@@ -286,8 +287,9 @@ const PHONICS_TOPICS = [
   {
     id: 'sight_household', title: '家居用品', titleEn: 'Household Items', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 件家居用品', cover: '🛋️', section: 'sight', flow: 'blend', modes: ['build', 'connect'],
     words: [
-      ['bed', '🛏️'], ['sofa', '🛋️'], ['table', '🍽️'], ['chair', '🪑'], ['lamp', '💡'], ['clock', '🕰️'], ['cup', '☕'], ['plate', '🥣'], ['spoon', '🥄'], ['towel', '🧺'],
-    ].map(([word, emoji], i) => ({ id: `sight_household_${i}`, word, letters: Array.from(word), emoji, plate: '#1a3050' })),
+      ['bed', '🛏️'], ['sofa', '🛋️'], ['table', '🍽️', './assets/object-art/zhuozi.webp'], ['chair', '🪑'], ['lamp', '💡'], ['clock', '🕰️'],
+      ['cup', '☕', './assets/object-art/beizi_cup.webp'], ['plate', '🍽️'], ['spoon', '🥄'], ['towel', '🧺', './assets/object-art/maojin.webp'],
+    ].map(([word, emoji, objectArt], i) => ({ id: `sight_household_${i}`, word, letters: Array.from(word), emoji, ...(objectArt ? { objectArt } : {}), plate: '#1a3050' })),
   },
   {
     id: 'sight_school_items', title: '學校用品', titleEn: 'School Items', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 件學校用品', cover: '🎒', section: 'sight', flow: 'blend', modes: ['build', 'connect'],
@@ -431,7 +433,7 @@ const PHONICS_TOPICS = [
       { id: 'hat', word: 'hat', letters: ['h', 'a', 't'], emoji: '🎩', plate: '#3a3010' },
       { id: 'bat', word: 'bat', letters: ['b', 'a', 't'], emoji: '🦇', plate: '#1a1a22' },
       { id: 'rat', word: 'rat', letters: ['r', 'a', 't'], emoji: '🐀', plate: '#2a2a35' },
-      { id: 'mat', word: 'mat', letters: ['m', 'a', 't'], emoji: '🟫', plate: '#402010' },
+      { id: 'mat', word: 'mat', letters: ['m', 'a', 't'], emoji: '🟫', objectArt: './assets/object-art/ditan.webp', plate: '#402010' },
     ],
   },
   {
@@ -445,7 +447,7 @@ const PHONICS_TOPICS = [
       { id: 'pan', word: 'pan', letters: ['p', 'a', 'n'], emoji: '🍳', plate: '#3a3010' },
       { id: 'man', word: 'man', letters: ['m', 'a', 'n'], emoji: '👨', plate: '#1a3050' },
       { id: 'van', word: 'van', letters: ['v', 'a', 'n'], emoji: '🚐', plate: '#102848' },
-      { id: 'fan', word: 'fan', letters: ['f', 'a', 'n'], emoji: '🪭', plate: '#2a1840' },
+      { id: 'fan', word: 'fan', letters: ['f', 'a', 'n'], emoji: '🪭', objectArt: './assets/object-art/fengshan.webp', plate: '#2a1840' },
     ],
   },
   {
@@ -457,7 +459,7 @@ const PHONICS_TOPICS = [
     words: [
       { id: 'cap', word: 'cap', letters: ['c', 'a', 'p'], emoji: '🧢', plate: '#102848' },
       { id: 'map', word: 'map', letters: ['m', 'a', 'p'], emoji: '🗺️', plate: '#143828' },
-      { id: 'tap', word: 'tap', letters: ['t', 'a', 'p'], emoji: '🚰', plate: '#0f3550' },
+      { id: 'tap', word: 'tap', letters: ['t', 'a', 'p'], emoji: '🚰', objectArt: './assets/object-art/shuilongtou.webp', plate: '#0f3550' },
       { id: 'nap', word: 'nap', letters: ['n', 'a', 'p'], emoji: '😴', plate: '#1a2a4a' },
     ],
   },
@@ -535,6 +537,9 @@ function phonicsWordIllustHtml(word) {
   if (!word) return '';
   if (word.photo) return `<span class="career-photo-plate"><img class="career-photo" src="${word.photo}" alt="" loading="lazy" decoding="async"></span>`;
   if (!word.emoji) return '';
+  if (word.objectArt) return `<span class="emoji-plate object-plate" style="--plate:${word.plate || '#122848'}">
+    <img class="object-illustration" src="${word.objectArt}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+  </span>`;
   return `<span class="emoji-plate" style="--plate:${word.plate || '#122848'}">
     <span class="emoji-face" aria-hidden="true">${window.KakaEmojiArt ? window.KakaEmojiArt.html(word.emoji) : word.emoji}</span>
   </span>`;

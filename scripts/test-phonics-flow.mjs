@@ -78,7 +78,7 @@ const correctedVocabularyTopics = ['sight_food', 'sight_veg', 'sight_household',
 for (const topicId of correctedVocabularyTopics) {
   const vocabularyTopic = context.window.KakaPhonicsWords.getPhonicsTopicById(topicId);
   assert.equal(
-    new Set(vocabularyTopic.words.map((item) => item.emoji)).size,
+    new Set(vocabularyTopic.words.map((item) => item.objectArt || item.photo || item.emoji)).size,
     vocabularyTopic.words.length,
     `${topicId} 每個詞都有獨立圖像`,
   );
@@ -169,6 +169,30 @@ for (const word of ['firefighter', 'pharmacist', 'hairdresser', 'librarian', 'ph
   assert.equal(jobWords.find((item) => item.word === word).buildMode, 'recognize', `${word} 先使用整詞認讀，避免硬拆長字`);
 }
 assert.match(dataSource, /if \(word\.photo\) return .*career-photo/, '職業插圖優先於 Emoji 顯示');
+
+const expectedObjectArt = {
+  sight_household: { table: 'zhuozi', cup: 'beizi_cup', towel: 'maojin' },
+  cvc_at: { mat: 'ditan' },
+  cvc_an: { fan: 'fengshan' },
+  cvc_ap: { tap: 'shuilongtou' },
+};
+for (const [topicId, words] of Object.entries(expectedObjectArt)) {
+  const objectTopic = context.window.KakaPhonicsWords.getPhonicsTopicById(topicId);
+  for (const [word, artId] of Object.entries(words)) {
+    const item = objectTopic.words.find((entry) => entry.word === word);
+    assert.equal(item.objectArt, `./assets/object-art/${artId}.webp`, `${word} 重用中文原創物件插圖`);
+    assert.ok(fs.existsSync(path.join(repo, item.objectArt)), `${word} 物件插圖檔存在`);
+    assert.ok(item.emoji, `${word} 保留 emoji 作有圖判斷`);
+    const html = context.window.KakaPhonicsWords.phonicsWordIllustHtml(item);
+    assert.match(html, /class="emoji-plate object-plate"[\s\S]*class="object-illustration"/, `${word} 用透明物件插圖樣式，唔用職業相裁切框`);
+    assert.doesNotMatch(html, /career-photo|emoji-face/, `${word} 唔會同時出 Emoji 或職業相框`);
+  }
+}
+assert.equal(
+  context.window.KakaPhonicsWords.getPhonicsTopicById('sight_household').words.find((entry) => entry.word === 'plate').emoji,
+  '🍽️',
+  'plate 用碟加刀叉 Emoji，唔再用碗',
+);
 assert.match(appSource, /word\.buildMode === 'phrase' \? '先聽完整職稱/, '雙字職稱的學習卡提供逐詞聆聽');
 assert.match(appSource, /allBuildWords = currentTopicWords\(\)\.filter\(\(w\) => w\.letters && \['phonics', 'phrase'\]/, '長字整詞認讀項目不會誤入字母拼音遊戲');
 assert.match(appSource, /const phraseMode = target\.buildMode === 'phrase'/, '雙字職稱拼字遊戲改用完整詞語磚');

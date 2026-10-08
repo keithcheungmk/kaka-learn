@@ -106,12 +106,19 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-08 · English Lead → Cursor Chief Lead（英文 Phonics 重用物件插圖）
+
+- Keith 要求英文對應中文嘅物件插圖改動。`js/phonics-words.js` 新增 `objectArt` 欄（同職業 `photo` 分開），喺原有 emoji plate 入面顯示透明插圖；`emoji` 欄保留。
+- 改咗 6 個字：家居用品 table→`zhuozi`、cup→`beizi_cup`、towel→`maojin`；CVC mat→`ditan`、fan→`fengshan`、tap→`shuilongtou`。plate 由 🥣 改做 🍽️。`scripts/test-phonics-flow.mjs` 加檢查。
+- 未處理（留待 Keith 決定）：衣物主題有幾對詞共用同一個 Emoji（jacket／shirt 👕、coat／scarf 🧣、skirt／dress 👗、shorts／pants 👖），連一連會撞；glue 🧴、eraser 🧽、snow 🧊、tin 🫙 唔夠準。`scripts/test-career-illustrations.mjs` 喺 HEAD 已經 fail（仲預期「狗」用 Emoji，但而家用動物相），唔喺 CI。
+- 驗證：invariants、phonics flow、`git diff --check`、家庭裝置 smoke（模擬 viewport，非真機）通過。
+
 ### 2026-10-08 · Cursor Chief Lead（屋企／日常用品原創物件插圖）
 
 - Keith 指出中文「屋企」「日常用品」有唔少 Emoji 唔係嗰樣嘢（桌子用凳、衣櫃用衫、冰箱用冰粒、洗衣機用洗衣籃、電風扇用吹風公仔面等），亦有四個詞共用 🛏️、洗頭水／沐浴露共用 🧴 靠角落字分。Keith 睇過三張樣板後批准成批改。
 - 25 個詞改用原創透明插圖 `assets/object-art/<wordId>.webp`（512px，合共約 600KB）：桌子、衣櫃、冰箱、洗衣機、電風扇、冷氣機、抽屜、地毯、陽台、洗手台、睡房、枕頭、被子、廚房、門鎖、水龍頭、毛巾、牙膏、水壺、洗頭水、沐浴露、梳子、紙巾、杯子、叉子。`js/words.js` `OBJECT_ILLUSTRATIONS` 優先於 Emoji，所有中文玩法（詞語牆、配一配、砌一砌、連一連）共用；`emoji` 欄保留作資料／fallback。
 - 同時刪走呢批詞嘅角落細字（房、桌、枕、被、冷、台、巾、膏、洗、浴），避免「配一配」露答案。
-- 生成圖原檔唔入 repo；重做用 `python3 scripts/build-object-art.py <生成圖資料夾>`（白底去背、淺灰影處理、裁邊）。英文 Phonics 嘅類似錯圖（table 🍽️、towel 🧺、fan 🪭）未改，留待 Keith 決定。
+- 生成圖原檔唔入 repo；重做用 `python3 scripts/build-object-art.py <生成圖資料夾>`（白底去背、淺灰影處理、裁邊）。英文 Phonics 對應改動見上一條。
 - 驗證：invariants、`git diff --check`、普通話／storage 測試、家庭裝置 smoke（模擬 viewport，非真機）通過；PTH 瀏覽器回歸第一次有一步超時，重跑通過。
 
 ### 2026-10-08 · Cursor Chief Lead（中文詞語牆粵／普切換・第一期）
