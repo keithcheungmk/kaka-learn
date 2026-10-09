@@ -108,11 +108,12 @@ function sightWordTopic({ id, title, titleEn, blurb, cover, words, plate = '#1a3
     section: 'sight',
     flow: 'blend',
     modes: ['build', 'connect'],
-    words: words.map(([word, emoji], index) => ({
+    words: words.map(([word, emoji, objectArt], index) => ({
       id: `${id}_${index}`,
       word,
       letters: Array.from(word),
       emoji,
+      ...(objectArt ? { objectArt } : {}),
       plate,
     })),
   };
@@ -322,7 +323,9 @@ const PHONICS_TOPICS = [
     words: [
       ['shirt', '👕'], ['pants', '👖'], ['dress', '👗'], ['skirt', '👗'], ['shoes', '👟'], ['socks', '🧦'],
       ['hat', '🧢'], ['coat', '🧣'], ['jacket', '👕'], ['scarf', '🧣'], ['gloves', '🧤'], ['shorts', '👖'],
-    ],
+    ].map(([word, emoji]) => (['shirt', 'pants', 'dress', 'skirt', 'coat', 'jacket', 'scarf', 'shorts'].includes(word)
+      ? [word, emoji, `./assets/object-art/clothes_${word}.webp`]
+      : [word, emoji])),
   }),
   spellingTopic({
     id: 'sight_family_people', title: '家庭與身邊的人', titleEn: 'Family & People', blurb: '睇圖 · 聽音 · 詞塊拼讀 · 12 個家庭及學校人物詞語', cover: '👨‍👩‍👧‍👦',

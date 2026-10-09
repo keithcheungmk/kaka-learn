@@ -106,6 +106,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-09 · Cursor Chief Lead（英文 Clothes 撞圖改原創插圖）
+
+- Keith 揀先處理英文衣物撞圖。8 個字改用原創透明插圖 `assets/object-art/clothes_<word>.webp`（合共約 210KB）：shirt（黃 T 恤）、jacket（紅色短身拉鏈有帽）、coat（啡色長身有腰帶）、scarf（綠白間條頸巾）、dress（粉紅連身裙）、skirt（紫色百褶裙，冇上身）、pants（長牛仔褲）、shorts（橙色短褲）。每對刻意整到外形一眼分得出；shoes、socks、hat、gloves 照用 Emoji。
+- `sightWordTopic()` 接受第三格 `objectArt`；`scripts/build-object-art.py` 加入 8 個來源；`test-phonics-flow.mjs` 檢查 Clothes 12 個字圖像唯一。
+- 仍未處理：glue 🧴、eraser 🧽、snow 🧊、tin 🫙；`scripts/test-career-illustrations.mjs` 舊 fail。
+- 驗證：invariants、phonics flow／storage／story-mission、`git diff --check`、家庭裝置 smoke（模擬 viewport，非真機）通過；iPad 橫向衣物詞語牆 8 張圖載入、冇溢出、冇 console error。
+
 ### 2026-10-08 · English Lead → Cursor Chief Lead（英文 Phonics 重用物件插圖）
 
 - Keith 要求英文對應中文嘅物件插圖改動。`js/phonics-words.js` 新增 `objectArt` 欄（同職業 `photo` 分開），喺原有 emoji plate 入面顯示透明插圖；`emoji` 欄保留。

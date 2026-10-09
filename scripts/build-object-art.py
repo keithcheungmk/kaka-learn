@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""屋企／日常用品物件插圖：白底生成圖 → 去背 → 裁邊 → 512px 透明 webp。
+"""屋企／日常用品／英文衣物物件插圖：白底生成圖 → 去背 → 裁邊 → 512px 透明 webp。
 
 用法：
     python3 scripts/build-object-art.py <生成圖資料夾>
@@ -46,6 +46,15 @@ SOURCES = {
     "zhijin": "obj-zhijin.jpg",
     "beizi_cup": "obj-beizi-cup.jpg",
     "chazi": "obj-chazi.jpg",
+    # 英文 Clothes（Emoji 成對撞圖）
+    "clothes_shirt": "clothes-shirt.jpg",
+    "clothes_jacket": "clothes-jacket.jpg",
+    "clothes_coat": "clothes-coat.jpg",
+    "clothes_scarf": "clothes-scarf.jpg",
+    "clothes_dress": "clothes-dress.jpg",
+    "clothes_skirt": "clothes-skirt.jpg",
+    "clothes_pants": "clothes-pants.jpg",
+    "clothes_shorts": "clothes-shorts.jpg",
 }
 
 

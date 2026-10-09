@@ -74,7 +74,7 @@ for (const topicId of allVocabularyTopicIds) {
   assert.ok(vocabularyTopic.words.length > 0, `${topicId} 有可展示的詞卡`);
 }
 
-const correctedVocabularyTopics = ['sight_food', 'sight_veg', 'sight_household', 'sight_feelings', 'sight_weather', 'sight_toys'];
+const correctedVocabularyTopics = ['sight_food', 'sight_veg', 'sight_household', 'sight_feelings', 'sight_weather', 'sight_toys', 'sight_clothes'];
 for (const topicId of correctedVocabularyTopics) {
   const vocabularyTopic = context.window.KakaPhonicsWords.getPhonicsTopicById(topicId);
   assert.equal(
@@ -175,6 +175,9 @@ const expectedObjectArt = {
   cvc_at: { mat: 'ditan' },
   cvc_an: { fan: 'fengshan' },
   cvc_ap: { tap: 'shuilongtou' },
+  sight_clothes: Object.fromEntries(
+    ['shirt', 'pants', 'dress', 'skirt', 'coat', 'jacket', 'scarf', 'shorts'].map((word) => [word, `clothes_${word}`]),
+  ),
 };
 for (const [topicId, words] of Object.entries(expectedObjectArt)) {
   const objectTopic = context.window.KakaPhonicsWords.getPhonicsTopicById(topicId);
