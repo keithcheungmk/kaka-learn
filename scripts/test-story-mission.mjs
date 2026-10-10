@@ -85,6 +85,8 @@ assert.equal(storyDemo.pageCount, 1033, 'The balanced answer system should cover
 assert.deepEqual(Array.from(storyDemo.series, (series) => [series.id, series.bookCount, series.pageCount]), [['carter', 85, 1033], ['magic-marker', 73, 655], ['wacky-ricky', 100, 960]], 'All story collections should remain independent');
 assert.deepEqual(Array.from(magicBooks, (book) => book.id), Array.from({ length: 73 }, (_, index) => `mm${String(index + 1).padStart(3, '0')}`), 'The Magic Marker catalogue should run continuously through MM073');
 const normalize = (word) => String(word).toLowerCase().replace(/[^a-z]/g, '');
+const rejectedMagicNames = new Set(['alex', 'sue', 'maxie', 'taco']);
+const isMagicName = (key) => rejectedMagicNames.has(key) || rejectedMagicNames.has(key.replace(/s$/, ''));
 const seededRandom = (seed) => () => {
   seed = (seed * 1664525 + 1013904223) >>> 0;
   return seed / 0x100000000;
@@ -94,9 +96,23 @@ for (const book of magicBooks) {
   assert.equal(book.sourceSet, 'magic-marker', `${book.id} should preserve its source collection`);
   for (const item of book.pages) {
     assert.equal(item.verificationStatus, 'verified', `${book.id} page ${item.printedPage} should be source-checked`);
-    assert.equal(item.blanks.length, 1, `${book.id} page ${item.printedPage} should have one blank`);
+    assert.ok(item.blanks.length === 1 || item.blanks.length === 2, `${book.id} page ${item.printedPage} should have one or two content blanks`);
     assert.equal(item.choices.length, 3, `${book.id} page ${item.printedPage} should define the answer and two reviewed distractors`);
-    assert.ok(item.sentence.includes(item.blanks[0]), `${book.id} blank should appear in the sentence`);
+    const pageKeys = item.sentence.map((word) => normalize(word)).filter(Boolean);
+    const onlyNames = pageKeys.every((key) => isMagicName(key) || /^\d+$/.test(key));
+    for (const blank of item.blanks) {
+      assert.ok(item.sentence.includes(blank), `${book.id} blank ${blank} should appear in the sentence`);
+      const blankKey = normalize(blank);
+      if (!onlyNames) {
+        assert.ok(!isMagicName(blankKey), `${book.id} page ${item.printedPage} blank ${blank} must not be a name`);
+      }
+    }
+    if (item.blanks.length === 2) {
+      const phraseStart = item.sentence.reduce((found, word, index) => (
+        word === item.blanks[0] && item.sentence[index + 1] === item.blanks[1] ? index : found
+      ), -1);
+      assert.equal(item.sentence[phraseStart + 1], item.blanks[1], `${book.id} page ${item.printedPage} two-word blank must be consecutive`);
+    }
     await access(new URL(`../${item.image.slice(2)}`, import.meta.url), fsConstants.R_OK);
     await access(new URL(`../${item.audio.slice(2)}`, import.meta.url), fsConstants.R_OK);
   }
