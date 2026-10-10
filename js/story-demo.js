@@ -509,8 +509,11 @@
     $$('.story-fill-tile').forEach((tile) => tile.classList.toggle('selected', tile.dataset.word === word));
     const submit = $('#btn-story-submit');
     if (submit) submit.disabled = false;
-    $('#story-play-feedback').textContent = 'Now press Submit.';
+    const hint = 'Press Submit first, then Next.';
+    $('#story-play-feedback').textContent = hint;
     $('#story-play-feedback').className = 'feedback';
+    const help = $('.story-fill-help');
+    if (help && !help.hasAttribute('hidden')) help.textContent = hint;
     speech.cancelAllSpeech?.();
     speech.speakEnglishTerm?.(word, { rate: 1.0, pitch: 1.05 });
   }
@@ -531,6 +534,7 @@
       panel.insertAdjacentHTML('beforeend', `<button type="button" class="btn btn-primary story-next-page" id="btn-story-next">${pageIndex === list.length - 1 ? 'Finish story →' : 'Next page →'}</button>`);
       $('#btn-story-next')?.addEventListener('click', nextPage);
     }
+    revealStoryNextButton();
     void awardStoryPageStar(item);
     speakPraise();
   }
@@ -646,8 +650,15 @@
       $('#story-fill-bank').insertAdjacentHTML('afterend', `<button type="button" class="btn btn-primary story-next-page" id="btn-story-next">${pageIndex === list.length - 1 ? 'Finish story →' : 'Next page →'}</button>`);
       $('#btn-story-next')?.addEventListener('click', nextPage);
     }
+    revealStoryNextButton();
     void awardStoryPageStar(item);
     speakPraise();
+  }
+
+  function revealStoryNextButton() {
+    const next = $('#btn-story-next');
+    if (!next || typeof next.scrollIntoView !== 'function') return;
+    next.scrollIntoView({ block: 'nearest', inline: 'nearest' });
   }
 
   function nextPage() {
