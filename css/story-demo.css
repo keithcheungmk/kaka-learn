@@ -185,6 +185,7 @@
   font: inherit;
   cursor: pointer;
 }
+.story-fill-blank.is-phrase { min-width: clamp(110px, 16vw, 210px); }
 .story-fill-blank.has-selection { border-style:solid; color:#fff; background:rgba(67,56,202,.78); }
 .story-fill-blank.filled { border-style:solid; border-color:#86efac; color:#fff; background:rgba(22,101,52,.7); }
 .story-fill-blank:disabled { cursor: default; opacity: .9; }

@@ -111,11 +111,18 @@ for (const book of wackyBooks) {
     if (!item.blanks.length) {
       assert.equal(item.choices.length, 0, `${book.id} page ${item.printedPage} should skip choices when it has no content blank`);
     } else {
-      assert.equal(item.blanks.length, 1, `${book.id} page ${item.printedPage} should have one content blank`);
+      assert.ok(item.blanks.length === 1 || item.blanks.length === 2, `${book.id} page ${item.printedPage} should have one or two content blanks`);
       assert.equal(item.choices.length, 3);
-      assert.ok(item.sentence.includes(item.blanks[0]));
-      const blankKey = normalize(item.blanks[0]);
-      assert.ok(!rejectedWackyBlanks.has(blankKey) && !rejectedWackyBlanks.has(blankKey.replace(/s$/, '')), `${book.id} page ${item.printedPage} blank ${item.blanks[0]} must not be a name or stop word`);
+      for (const blank of item.blanks) {
+        assert.ok(item.sentence.includes(blank), `${book.id} blank ${blank} should appear in the sentence`);
+        const blankKey = normalize(blank);
+        assert.ok(!rejectedWackyBlanks.has(blankKey) && !rejectedWackyBlanks.has(blankKey.replace(/s$/, '')), `${book.id} page ${item.printedPage} blank ${blank} must not be a name or stop word`);
+      }
+      if (item.blanks.length === 2) {
+        const start = item.sentence.indexOf(item.blanks[0]);
+        assert.equal(item.sentence[start + 1], item.blanks[1], `${book.id} page ${item.printedPage} two-word blank must be consecutive`);
+        assert.ok(item.choices[0].includes(' '), `${book.id} page ${item.printedPage} phrase choices should be two words`);
+      }
     }
     await access(new URL(`../${item.image.slice(2)}`, import.meta.url), fsConstants.R_OK);
     await access(new URL(`../${item.audio.slice(2)}`, import.meta.url), fsConstants.R_OK);

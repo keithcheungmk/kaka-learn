@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from wacky_ricky_blanks import (  # noqa: E402
     FAMILY_NAMES,
     STOP_WORDS,
+    find_phrase_pair,
     is_rejected_blank,
     load_wacky_manifest,
     normalize_blank,
@@ -76,6 +77,22 @@ def test_picker_examples() -> None:
             assert_true(not is_rejected_blank(got), f"picked rejected word {got!r} from {source!r}")
 
 
+def test_phrase_pairs() -> None:
+    assert_true(
+        find_phrase_pair("There’s my dad. He’s a computer programmer. Hello, Dad! Hi, Ricky. Play nicely with your sister.")
+        == ("computer", "programmer."),
+        "computer programmer should be the two-word phrase",
+    )
+    assert_true(
+        find_phrase_pair("That sounds fun! I have an idea. Let’s make breakfast.") == ("make", "breakfast."),
+        "make breakfast should be a verb-object phrase",
+    )
+    assert_true(
+        find_phrase_pair("Merry Christmas, Ricky. Merry Christmas, Rachel.") is None,
+        "name-only pages should not invent a phrase",
+    )
+
+
 def test_never_falls_back_to_names_or_stops() -> None:
     for source in (
         "Hi, Ricky.",
@@ -97,26 +114,43 @@ def test_manifest_has_no_rejected_blanks() -> None:
     payload = load_wacky_manifest()
     rejected: list[str] = []
     empty = 0
+    one = 0
+    two = 0
     pages = 0
     for book in payload.get("books", []):
         for page in book.get("pages", []):
             pages += 1
             blanks = page.get("blanks") or []
+            sentence = page.get("sentence") or []
             if not blanks:
                 empty += 1
                 continue
-            answer = blanks[0]
-            if is_rejected_blank(answer):
-                rejected.append(f"{book.get('id')} p{page.get('printedPage')}: {answer!r}")
-            sentence = page.get("sentence") or []
-            if answer not in sentence:
-                rejected.append(f"{book.get('id')} p{page.get('printedPage')}: blank {answer!r} missing from sentence")
+            if len(blanks) == 2:
+                two += 1
+                joined = " ".join(sentence)
+                if " ".join(blanks) not in joined and not any(
+                    sentence[index] == blanks[0] and sentence[index + 1] == blanks[1]
+                    for index in range(len(sentence) - 1)
+                ):
+                    rejected.append(f"{book.get('id')} p{page.get('printedPage')}: phrase {blanks!r} is not consecutive")
+            elif len(blanks) == 1:
+                one += 1
+            else:
+                rejected.append(f"{book.get('id')} p{page.get('printedPage')}: unexpected blank count {blanks!r}")
+            for answer in blanks:
+                if is_rejected_blank(answer):
+                    rejected.append(f"{book.get('id')} p{page.get('printedPage')}: {answer!r}")
+                if answer not in sentence:
+                    rejected.append(f"{book.get('id')} p{page.get('printedPage')}: blank {answer!r} missing from sentence")
     assert_true(not rejected, "rejected Wacky Ricky blanks:\n  " + "\n  ".join(rejected[:20]))
-    print(f"wacky ricky blank checks passed ({pages} pages, {empty} listen-only, 0 rejected)")
+    share = two / pages if pages else 0
+    assert_true(0.18 <= share <= 0.32, f"two-word share should stay near 20-30%, got {share:.1%} ({two}/{pages})")
+    print(f"wacky ricky blank checks passed ({pages} pages, {one} one-word, {two} two-word, {empty} listen-only, 0 rejected)")
 
 
 def main() -> int:
     test_picker_examples()
+    test_phrase_pairs()
     test_never_falls_back_to_names_or_stops()
     test_manifest_has_no_rejected_blanks()
     assert_true("ricky" in FAMILY_NAMES and "the" in STOP_WORDS, "reject lists incomplete")

@@ -112,15 +112,12 @@ def main() -> None:
                         shutil.copy2(source, destination)
 
             words = tokens(page.get("text", ""))
-            target = pick_blank(page.get("text", ""), words)
-            rng = random.Random(f"{entry['book_id']}:{page['pdf_page']}")
-            choices = choose_choices(target, words, vocab_by_norm, rng)
             pages_out.append({
                 "pdfPage": page["pdf_page"],
                 "printedPage": page.get("printed_page"),
                 "sentence": words,
-                "blanks": [target] if target else [],
-                "choices": choices,
+                "blanks": [],
+                "choices": [],
                 "image": f"./assets/{image_dest_rel}",
                 "audio": f"./assets/{audio_dest_rel}",
                 "sourceText": page.get("text", ""),
@@ -158,9 +155,10 @@ def main() -> None:
         "books": books_out,
         "skippedPages": skipped,
     }
+    apply_blanks_to_manifest(payload)
     encoded = json.dumps(payload, ensure_ascii=False, indent=2)
     if not args.dry_run:
-        MANIFEST.write_text("window.KakaWackyRickyManifest = " + encoded + ";\n")
+        write_wacky_manifest(payload)
     staged_bytes = sum((ROOT / "assets" / path).stat().st_size if (ROOT / "assets" / path).exists() else Path(src).stat().st_size for path, src in copied.items())
     print(json.dumps({"books": len(books_out), "narrated_pages": total_pages, "pages_with_media": sum(len(book["pages"]) for book in books_out), "skipped_pages": skipped, "media_files": len(copied), "media_bytes": staged_bytes, "manifest": str(MANIFEST), "dry_run": args.dry_run}, ensure_ascii=False, indent=2))
 

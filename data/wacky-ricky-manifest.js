@@ -45,7 +45,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "sister.",
             "right",
-            "meet"
+            "name"
           ],
           "image": "./assets/wacky-ricky/wr001/pages/WR001-pdf02-print01.webp",
           "audio": "./assets/wacky-ricky/wr001/WR001-pdf02-print01.mp3",
@@ -82,7 +82,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "parents.",
-            "Play",
+            "programmer.",
             "Raccoon."
           ],
           "image": "./assets/wacky-ricky/wr001/pages/WR001-pdf03-print02.webp",
@@ -115,12 +115,13 @@ window.KakaWackyRickyManifest = {
             "sister."
           ],
           "blanks": [
-            "sister."
+            "computer",
+            "programmer."
           ],
           "choices": [
-            "sister.",
-            "down",
-            "house."
+            "computer programmer.",
+            "sister’s room",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr001/pages/WR001-pdf04-print03.webp",
           "audio": "./assets/wacky-ricky/wr001/WR001-pdf04-print03.mp3",
@@ -156,7 +157,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "soon.",
-            "baseball.",
+            "computer",
             "down"
           ],
           "image": "./assets/wacky-ricky/wr001/pages/WR001-pdf05-print04.webp",
@@ -188,8 +189,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "room.",
-            "There’s",
-            "sister’s"
+            "dentist.",
+            "Welcome"
           ],
           "image": "./assets/wacky-ricky/wr001/pages/WR001-pdf06-print05.webp",
           "audio": "./assets/wacky-ricky/wr001/WR001-pdf06-print05.mp3",
@@ -217,8 +218,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "game.",
-            "nicely",
-            "hall."
+            "sister.",
+            "meet"
           ],
           "image": "./assets/wacky-ricky/wr001/pages/WR001-pdf07-print06.webp",
           "audio": "./assets/wacky-ricky/wr001/WR001-pdf07-print06.mp3",
@@ -249,10 +250,10 @@ window.KakaWackyRickyManifest = {
             "Gill."
           ],
           "blanks": [
-            "Gill."
+            "name"
           ],
           "choices": [
-            "Gill.",
+            "name",
             "see.",
             "meet"
           ],
@@ -280,12 +281,13 @@ window.KakaWackyRickyManifest = {
             "see."
           ],
           "blanks": [
-            "hall."
+            "sister’s",
+            "room"
           ],
           "choices": [
-            "hall.",
-            "dentist.",
-            "Come"
+            "sister’s room",
+            "computer programmer.",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr001/pages/WR001-pdf09-print08.webp",
           "audio": "./assets/wacky-ricky/wr001/WR001-pdf09-print08.mp3",
@@ -309,7 +311,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "right",
-            "show",
+            "sister.",
             "Come"
           ],
           "image": "./assets/wacky-ricky/wr001/pages/WR001-pdf10-print09.webp",
@@ -341,8 +343,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "want",
-            "show",
-            "right"
+            "soon.",
+            "see."
           ],
           "image": "./assets/wacky-ricky/wr001/pages/WR001-pdf11-print10.webp",
           "audio": "./assets/wacky-ricky/wr001/WR001-pdf11-print10.mp3",
@@ -385,12 +387,13 @@ window.KakaWackyRickyManifest = {
             "tree."
           ],
           "blanks": [
+            "Christmas",
             "tree."
           ],
           "choices": [
-            "tree.",
-            "plug",
-            "Look"
+            "Christmas tree.",
+            "giant power",
+            "finally, “santa@northpole.org.”"
           ],
           "image": "./assets/wacky-ricky/wr002/pages/WR002-pdf03-print01.webp",
           "audio": "./assets/wacky-ricky/wr002/WR002-pdf03-print01.mp3",
@@ -415,12 +418,13 @@ window.KakaWackyRickyManifest = {
             "tree!"
           ],
           "blanks": [
+            "Christmas",
             "tree!"
           ],
           "choices": [
-            "tree!",
-            "goes.",
-            "“Dear"
+            "Christmas tree!",
+            "giant power",
+            "finally, “santa@northpole.org.”"
           ],
           "image": "./assets/wacky-ricky/wr002/pages/WR002-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr002/WR002-pdf04-print02.mp3",
@@ -459,7 +463,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "beautiful.",
             "email",
-            "bike.”"
+            "copy"
           ],
           "image": "./assets/wacky-ricky/wr002/pages/WR002-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr002/WR002-pdf05-print03.mp3",
@@ -530,7 +534,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "computer.",
             "everything.",
-            "doll,"
+            "down!"
           ],
           "image": "./assets/wacky-ricky/wr002/pages/WR002-pdf07-print05.webp",
           "audio": "./assets/wacky-ricky/wr002/WR002-pdf07-print05.mp3",
@@ -619,8 +623,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "scarf,",
-            "nice.",
-            "flying"
+            "plug",
+            "goes."
           ],
           "image": "./assets/wacky-ricky/wr002/pages/WR002-pdf09-print07.webp",
           "audio": "./assets/wacky-ricky/wr002/WR002-pdf09-print07.mp3",
@@ -659,7 +663,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "Send.",
             "doll,",
-            "tea"
+            "use"
           ],
           "image": "./assets/wacky-ricky/wr002/pages/WR002-pdf10-print08.webp",
           "audio": "./assets/wacky-ricky/wr002/WR002-pdf10-print08.mp3",
@@ -724,7 +728,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "presents?",
             "beautiful!",
-            "toast"
+            "cook."
           ],
           "image": "./assets/wacky-ricky/wr003/pages/WR003-pdf03-print02.webp",
           "audio": "./assets/wacky-ricky/wr003/WR003-pdf03-print02.mp3",
@@ -750,12 +754,13 @@ window.KakaWackyRickyManifest = {
             "breakfast."
           ],
           "blanks": [
+            "make",
             "breakfast."
           ],
           "choices": [
-            "breakfast.",
-            "know",
-            "wanted!"
+            "make breakfast.",
+            "making breakfast.",
+            "Christmas, everyone!"
           ],
           "image": "./assets/wacky-ricky/wr003/pages/WR003-pdf04-print03.webp",
           "audio": "./assets/wacky-ricky/wr003/WR003-pdf04-print03.mp3",
@@ -792,7 +797,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "microwave.",
-            "doll",
+            "make",
             "morning."
           ],
           "image": "./assets/wacky-ricky/wr003/pages/WR003-pdf05-print04.webp",
@@ -822,8 +827,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "microwave!",
-            "doing?",
-            "cook."
+            "first.",
+            "idea."
           ],
           "image": "./assets/wacky-ricky/wr003/pages/WR003-pdf06-print05.webp",
           "audio": "./assets/wacky-ricky/wr003/WR003-pdf06-print05.mp3",
@@ -858,12 +863,13 @@ window.KakaWackyRickyManifest = {
             "Mom."
           ],
           "blanks": [
+            "making",
             "breakfast."
           ],
           "choices": [
-            "breakfast.",
-            "one",
-            "worry."
+            "making breakfast.",
+            "make breakfast.",
+            "Christmas, everyone!"
           ],
           "image": "./assets/wacky-ricky/wr003/pages/WR003-pdf07-print06.webp",
           "audio": "./assets/wacky-ricky/wr003/WR003-pdf07-print06.mp3",
@@ -887,12 +893,12 @@ window.KakaWackyRickyManifest = {
             "Hurray!"
           ],
           "blanks": [
-            "Hurray!"
+            "first."
           ],
           "choices": [
-            "Hurray!",
-            "everyone!",
-            "toaster"
+            "first.",
+            "fun!",
+            "o’clock"
           ],
           "image": "./assets/wacky-ricky/wr003/pages/WR003-pdf08-print07.webp",
           "audio": "./assets/wacky-ricky/wr003/WR003-pdf08-print07.mp3",
@@ -922,14 +928,8 @@ window.KakaWackyRickyManifest = {
             "you,",
             "Ricky."
           ],
-          "blanks": [
-            "Here’s"
-          ],
-          "choices": [
-            "Here’s",
-            "six",
-            "toaster"
-          ],
+          "blanks": [],
+          "choices": [],
           "image": "./assets/wacky-ricky/wr003/pages/WR003-pdf09-print08.webp",
           "audio": "./assets/wacky-ricky/wr003/WR003-pdf09-print08.mp3",
           "sourceText": "Here’s one for you, Rachel. Wow! I like it! This one is for you, Ricky.",
@@ -960,8 +960,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "wanted!",
-            "beautiful!",
-            "fun!"
+            "Christmas,",
+            "one"
           ],
           "image": "./assets/wacky-ricky/wr003/pages/WR003-pdf10-print09.webp",
           "audio": "./assets/wacky-ricky/wr003/WR003-pdf10-print09.mp3",
@@ -989,8 +989,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "beautiful!",
-            "know",
-            "doll"
+            "open",
+            "know"
           ],
           "image": "./assets/wacky-ricky/wr003/pages/WR003-pdf11-print10.webp",
           "audio": "./assets/wacky-ricky/wr003/WR003-pdf11-print10.mp3",
@@ -1044,12 +1044,13 @@ window.KakaWackyRickyManifest = {
             "year."
           ],
           "blanks": [
+            "new",
             "year."
           ],
           "choices": [
-            "year.",
-            "time.",
-            "Happy"
+            "new year.",
+            "almost time.",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr004/pages/WR004-pdf03-print01.webp",
           "audio": "./assets/wacky-ricky/wr004/WR004-pdf03-print01.mp3",
@@ -1215,12 +1216,13 @@ window.KakaWackyRickyManifest = {
             "year."
           ],
           "blanks": [
+            "new",
             "year."
           ],
           "choices": [
-            "year.",
-            "want",
-            "sis!"
+            "new year.",
+            "almost time.",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr004/pages/WR004-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr004/WR004-pdf08-print06.mp3",
@@ -1324,12 +1326,13 @@ window.KakaWackyRickyManifest = {
             "Ricky."
           ],
           "blanks": [
-            "breakfast,"
+            "play",
+            "outside?"
           ],
           "choices": [
-            "breakfast,",
-            "doing?",
-            "build"
+            "play outside?",
+            "snow angel.",
+            "little cold."
           ],
           "image": "./assets/wacky-ricky/wr005/pages/WR005-pdf03-print01.webp",
           "audio": "./assets/wacky-ricky/wr005/WR005-pdf03-print01.mp3",
@@ -1584,12 +1587,13 @@ window.KakaWackyRickyManifest = {
             "minute."
           ],
           "blanks": [
-            "minute."
+            "run",
+            "home."
           ],
           "choices": [
-            "minute.",
-            "making",
-            "build"
+            "run home.",
+            "play outside?",
+            "snow angel."
           ],
           "image": "./assets/wacky-ricky/wr005/pages/WR005-pdf10-print08.webp",
           "audio": "./assets/wacky-ricky/wr005/WR005-pdf10-print08.mp3",
@@ -1818,12 +1822,13 @@ window.KakaWackyRickyManifest = {
             "great!"
           ],
           "blanks": [
+            "looks",
             "great!"
           ],
           "choices": [
-            "great!",
-            "Give",
-            "warm."
+            "looks great!",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr006/pages/WR006-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr006/WR006-pdf08-print06.mp3",
@@ -1956,12 +1961,13 @@ window.KakaWackyRickyManifest = {
             "ready."
           ],
           "blanks": [
-            "ready."
+            "those",
+            "bullies"
           ],
           "choices": [
-            "ready.",
-            "truce.",
-            "well,"
+            "those bullies",
+            "Snowball fight!",
+            "secret weapon."
           ],
           "image": "./assets/wacky-ricky/wr007/pages/WR007-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr007/WR007-pdf04-print02.mp3",
@@ -1983,12 +1989,13 @@ window.KakaWackyRickyManifest = {
             "fight!"
           ],
           "blanks": [
+            "Snowball",
             "fight!"
           ],
           "choices": [
-            "fight!",
-            "Way",
-            "well,"
+            "Snowball fight!",
+            "those bullies",
+            "secret weapon."
           ],
           "image": "./assets/wacky-ricky/wr007/pages/WR007-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr007/WR007-pdf05-print03.mp3",
@@ -2157,12 +2164,13 @@ window.KakaWackyRickyManifest = {
             "weapon."
           ],
           "blanks": [
+            "secret",
             "weapon."
           ],
           "choices": [
-            "weapon.",
-            "think",
-            "minute."
+            "secret weapon.",
+            "those bullies",
+            "Snowball fight!"
           ],
           "image": "./assets/wacky-ricky/wr007/pages/WR007-pdf11-print09.webp",
           "audio": "./assets/wacky-ricky/wr007/WR007-pdf11-print09.mp3",
@@ -2519,12 +2527,13 @@ window.KakaWackyRickyManifest = {
             "blocks."
           ],
           "blanks": [
+            "Lego",
             "blocks."
           ],
           "choices": [
-            "blocks.",
-            "pushed",
-            "after"
+            "Lego blocks.",
+            "sleep more.",
+            "stay home,"
           ],
           "image": "./assets/wacky-ricky/wr008/pages/WR008-pdf09-print08.webp",
           "audio": "./assets/wacky-ricky/wr008/WR008-pdf09-print08.mp3",
@@ -2576,12 +2585,13 @@ window.KakaWackyRickyManifest = {
             "good."
           ],
           "blanks": [
-            "We’ll"
+            "until",
+            "after"
           ],
           "choices": [
-            "We’ll",
-            "guys.",
-            "fair,"
+            "until after",
+            "sleep more.",
+            "stay home,"
           ],
           "image": "./assets/wacky-ricky/wr008/pages/WR008-pdf11-print10.webp",
           "audio": "./assets/wacky-ricky/wr008/WR008-pdf11-print10.mp3",
@@ -2628,8 +2638,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "bored.",
-            "treat.",
-            "wrong?"
+            "Watch",
+            "Come"
           ],
           "image": "./assets/wacky-ricky/wr009/pages/WR009-pdf02-print01.webp",
           "audio": "./assets/wacky-ricky/wr009/WR009-pdf02-print01.mp3",
@@ -2666,7 +2676,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "stay",
             "after",
-            "scared."
+            "sister,"
           ],
           "image": "./assets/wacky-ricky/wr009/pages/WR009-pdf03-print02.webp",
           "audio": "./assets/wacky-ricky/wr009/WR009-pdf03-print02.mp3",
@@ -2697,8 +2707,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "sister,",
-            "fountain.",
-            "wrong?"
+            "guys!",
+            "Come"
           ],
           "image": "./assets/wacky-ricky/wr009/pages/WR009-pdf04-print03.webp",
           "audio": "./assets/wacky-ricky/wr009/WR009-pdf04-print03.mp3",
@@ -2738,7 +2748,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "wrong?",
-            "cheered",
+            "fun!",
             "angry,"
           ],
           "image": "./assets/wacky-ricky/wr009/pages/WR009-pdf05-print04.webp",
@@ -2770,7 +2780,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "funny.",
             "going",
-            "Here’s"
+            "lunch."
           ],
           "image": "./assets/wacky-ricky/wr009/pages/WR009-pdf06-print05.webp",
           "audio": "./assets/wacky-ricky/wr009/WR009-pdf06-print05.mp3",
@@ -2831,7 +2841,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "Hold",
-            "Watch",
+            "worry.",
             "going"
           ],
           "image": "./assets/wacky-ricky/wr009/pages/WR009-pdf08-print07.webp",
@@ -2867,8 +2877,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "cream",
-            "know.",
-            "treat."
+            "nice.",
+            "Watch"
           ],
           "image": "./assets/wacky-ricky/wr009/pages/WR009-pdf09-print08.webp",
           "audio": "./assets/wacky-ricky/wr009/WR009-pdf09-print08.mp3",
@@ -2904,7 +2914,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "cheered",
             "empty.",
-            "treat."
+            "Watch"
           ],
           "image": "./assets/wacky-ricky/wr009/pages/WR009-pdf10-print09.webp",
           "audio": "./assets/wacky-ricky/wr009/WR009-pdf10-print09.mp3",
@@ -2941,12 +2951,13 @@ window.KakaWackyRickyManifest = {
             "go."
           ],
           "blanks": [
-            "treat."
+            "after",
+            "lunch."
           ],
           "choices": [
-            "treat.",
-            "dentist.",
-            "scary."
+            "after lunch.",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr009/pages/WR009-pdf11-print10.webp",
           "audio": "./assets/wacky-ricky/wr009/WR009-pdf11-print10.mp3",
@@ -2987,12 +2998,13 @@ window.KakaWackyRickyManifest = {
             "flying."
           ],
           "blanks": [
+            "practice",
             "flying."
           ],
           "choices": [
-            "flying.",
-            "comes",
-            "need"
+            "practice flying.",
+            "climb higher.",
+            "ugly clothes."
           ],
           "image": "./assets/wacky-ricky/wr010/pages/WR010-pdf03-print01.webp",
           "audio": "./assets/wacky-ricky/wr010/WR010-pdf03-print01.mp3",
@@ -3026,7 +3038,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "play?",
             "help",
-            "three,"
+            "two,"
           ],
           "image": "./assets/wacky-ricky/wr010/pages/WR010-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr010/WR010-pdf04-print02.mp3",
@@ -3050,8 +3062,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "three,",
-            "Want",
-            "Fox."
+            "careful,",
+            "say"
           ],
           "image": "./assets/wacky-ricky/wr010/pages/WR010-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr010/WR010-pdf05-print03.mp3",
@@ -3079,7 +3091,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "careful,",
             "later.",
-            "ugly"
+            "Want"
           ],
           "image": "./assets/wacky-ricky/wr010/pages/WR010-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr010/WR010-pdf06-print04.mp3",
@@ -3105,12 +3117,13 @@ window.KakaWackyRickyManifest = {
             "Ricky!"
           ],
           "blanks": [
+            "climb",
             "higher."
           ],
           "choices": [
-            "higher.",
-            "talk",
-            "comes"
+            "climb higher.",
+            "practice flying.",
+            "ugly clothes."
           ],
           "image": "./assets/wacky-ricky/wr010/pages/WR010-pdf07-print05.webp",
           "audio": "./assets/wacky-ricky/wr010/WR010-pdf07-print05.mp3",
@@ -3140,12 +3153,12 @@ window.KakaWackyRickyManifest = {
             "you?"
           ],
           "blanks": [
-            "Who’s"
+            "comes"
           ],
           "choices": [
-            "Who’s",
-            "later.",
-            "talk"
+            "comes",
+            "talk",
+            "help"
           ],
           "image": "./assets/wacky-ricky/wr010/pages/WR010-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr010/WR010-pdf08-print06.mp3",
@@ -3199,12 +3212,13 @@ window.KakaWackyRickyManifest = {
             "clothes."
           ],
           "blanks": [
+            "ugly",
             "clothes."
           ],
           "choices": [
-            "clothes.",
-            "need",
-            "Who’s"
+            "ugly clothes.",
+            "practice flying.",
+            "climb higher."
           ],
           "image": "./assets/wacky-ricky/wr010/pages/WR010-pdf10-print08.webp",
           "audio": "./assets/wacky-ricky/wr010/WR010-pdf10-print08.mp3",
@@ -3236,8 +3250,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "later.",
-            "One,",
-            "three,"
+            "try",
+            "flying."
           ],
           "image": "./assets/wacky-ricky/wr010/pages/WR010-pdf11-print09.webp",
           "audio": "./assets/wacky-ricky/wr010/WR010-pdf11-print09.mp3",
@@ -3265,8 +3279,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "something,",
-            "talk",
-            "play?"
+            "ugly",
+            "soon!"
           ],
           "image": "./assets/wacky-ricky/wr010/pages/WR010-pdf12-print10.webp",
           "audio": "./assets/wacky-ricky/wr010/WR010-pdf12-print10.mp3",
@@ -3292,7 +3306,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "help",
-            "two,",
+            "flying.",
             "talk"
           ],
           "image": "./assets/wacky-ricky/wr010/pages/WR010-pdf13-print11.webp",
@@ -3325,8 +3339,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "want",
-            "two,",
-            "three,"
+            "flying.",
+            "yet,"
           ],
           "image": "./assets/wacky-ricky/wr010/pages/WR010-pdf14-print12.webp",
           "audio": "./assets/wacky-ricky/wr010/WR010-pdf14-print12.mp3",
@@ -3381,8 +3395,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "later.",
-            "Umm",
-            "chocolates?"
+            "chocolates?",
+            "V-valentine’s"
           ],
           "image": "./assets/wacky-ricky/wr011/pages/WR011-pdf02-print01.webp",
           "audio": "./assets/wacky-ricky/wr011/WR011-pdf02-print01.mp3",
@@ -3411,7 +3425,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "Valentine’s",
-            "V-valentine’s",
+            "H-happy",
             "give"
           ],
           "image": "./assets/wacky-ricky/wr011/pages/WR011-pdf03-print02.webp",
@@ -3445,14 +3459,8 @@ window.KakaWackyRickyManifest = {
             "to",
             "go."
           ],
-          "blanks": [
-            "Umm"
-          ],
-          "choices": [
-            "Umm",
-            "Valentine’s",
-            "card"
-          ],
+          "blanks": [],
+          "choices": [],
           "image": "./assets/wacky-ricky/wr011/pages/WR011-pdf04-print03.webp",
           "audio": "./assets/wacky-ricky/wr011/WR011-pdf04-print03.mp3",
           "sourceText": "What’s that, Ricky? Is it for me? Umm . . . no. Sorry, Brenda, I have to go.",
@@ -3482,12 +3490,13 @@ window.KakaWackyRickyManifest = {
             "you."
           ],
           "blanks": [
+            "Happy",
             "Valentine’s"
           ],
           "choices": [
-            "Valentine’s",
-            "card",
-            "chocolates?"
+            "Happy Valentine’s",
+            "H-happy V-valentine’s",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr011/pages/WR011-pdf05-print04.webp",
           "audio": "./assets/wacky-ricky/wr011/WR011-pdf05-print04.mp3",
@@ -3522,8 +3531,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "chocolates?",
-            "H-happy",
-            "give"
+            "V-valentine’s",
+            "friend."
           ],
           "image": "./assets/wacky-ricky/wr011/pages/WR011-pdf06-print05.webp",
           "audio": "./assets/wacky-ricky/wr011/WR011-pdf06-print05.mp3",
@@ -3617,12 +3626,13 @@ window.KakaWackyRickyManifest = {
             "you."
           ],
           "blanks": [
+            "Happy",
             "Valentine’s"
           ],
           "choices": [
-            "Valentine’s",
-            "doing",
-            "friend."
+            "Happy Valentine’s",
+            "H-happy V-valentine’s",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr011/pages/WR011-pdf09-print08.webp",
           "audio": "./assets/wacky-ricky/wr011/WR011-pdf09-print08.mp3",
@@ -3886,12 +3896,13 @@ window.KakaWackyRickyManifest = {
             "notebooks."
           ],
           "blanks": [
-            "notebooks."
+            "need",
+            "pencils"
           ],
           "choices": [
-            "notebooks.",
-            "ten-page",
-            "preschool!"
+            "need pencils",
+            "rocket shoes.",
+            "Great lists!"
           ],
           "image": "./assets/wacky-ricky/wr012/pages/WR012-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr012/WR012-pdf08-print06.mp3",
@@ -3998,12 +4009,13 @@ window.KakaWackyRickyManifest = {
             "Ricky."
           ],
           "blanks": [
+            "play",
             "school,"
           ],
           "choices": [
-            "school,",
-            "first",
-            "candy,"
+            "play school,",
+            "rocket shoes.",
+            "need pencils"
           ],
           "image": "./assets/wacky-ricky/wr012/pages/WR012-pdf11-print09.webp",
           "audio": "./assets/wacky-ricky/wr012/WR012-pdf11-print09.mp3",
@@ -4034,12 +4046,13 @@ window.KakaWackyRickyManifest = {
             "seat."
           ],
           "blanks": [
-            "seat."
+            "play",
+            "school!"
           ],
           "choices": [
-            "seat.",
-            "sour",
-            "list."
+            "play school!",
+            "rocket shoes.",
+            "need pencils"
           ],
           "image": "./assets/wacky-ricky/wr012/pages/WR012-pdf12-print10.webp",
           "audio": "./assets/wacky-ricky/wr012/WR012-pdf12-print10.mp3",
@@ -4173,12 +4186,13 @@ window.KakaWackyRickyManifest = {
             "sister."
           ],
           "blanks": [
-            "sister."
+            "find",
+            "pencils."
           ],
           "choices": [
-            "sister.",
-            "spend",
-            "need?"
+            "find pencils.",
+            "spend three",
+            "three dollars."
           ],
           "image": "./assets/wacky-ricky/wr013/pages/WR013-pdf03-print01.webp",
           "audio": "./assets/wacky-ricky/wr013/WR013-pdf03-print01.mp3",
@@ -4394,12 +4408,13 @@ window.KakaWackyRickyManifest = {
             "need?"
           ],
           "blanks": [
-            "need?"
+            "find",
+            "everything"
           ],
           "choices": [
-            "need?",
-            "many",
-            "buy?"
+            "find everything",
+            "find pencils.",
+            "spend three"
           ],
           "image": "./assets/wacky-ricky/wr013/pages/WR013-pdf09-print07.webp",
           "audio": "./assets/wacky-ricky/wr013/WR013-pdf09-print07.mp3",
@@ -4603,12 +4618,13 @@ window.KakaWackyRickyManifest = {
             "go."
           ],
           "blanks": [
-            "packed"
+            "pencil",
+            "case"
           ],
           "choices": [
-            "packed",
-            "doing?",
-            "great"
+            "pencil case",
+            "almost time",
+            "back upstairs"
           ],
           "image": "./assets/wacky-ricky/wr014/pages/WR014-pdf06-print05.webp",
           "audio": "./assets/wacky-ricky/wr014/WR014-pdf06-print05.mp3",
@@ -4679,12 +4695,13 @@ window.KakaWackyRickyManifest = {
             "pretty."
           ],
           "blanks": [
-            "pretty."
+            "first",
+            "day."
           ],
           "choices": [
-            "pretty.",
-            "know",
-            "almost"
+            "first day.",
+            "almost time",
+            "back upstairs"
           ],
           "image": "./assets/wacky-ricky/wr014/pages/WR014-pdf08-print07.webp",
           "audio": "./assets/wacky-ricky/wr014/WR014-pdf08-print07.mp3",
@@ -5066,12 +5083,13 @@ window.KakaWackyRickyManifest = {
             "year."
           ],
           "blanks": [
+            "last",
             "year."
           ],
           "choices": [
-            "year.",
-            "lots",
-            "nice"
+            "last year.",
+            "Good morning,",
+            "first day"
           ],
           "image": "./assets/wacky-ricky/wr015/pages/WR015-pdf08-print07.webp",
           "audio": "./assets/wacky-ricky/wr015/WR015-pdf08-print07.mp3",
@@ -5100,12 +5118,13 @@ window.KakaWackyRickyManifest = {
             "day."
           ],
           "blanks": [
-            "nice"
+            "nice",
+            "day."
           ],
           "choices": [
-            "nice",
-            "Come",
-            "road"
+            "nice day.",
+            "Good morning,",
+            "first day"
           ],
           "image": "./assets/wacky-ricky/wr015/pages/WR015-pdf09-print08.webp",
           "audio": "./assets/wacky-ricky/wr015/WR015-pdf09-print08.mp3",
@@ -5205,7 +5224,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "guys!",
-            "pretty",
+            "Nothing,",
             "Come"
           ],
           "image": "./assets/wacky-ricky/wr016/pages/WR016-pdf03-print01.webp",
@@ -5244,8 +5263,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "bought",
-            "candy,",
-            "sour"
+            "pretty",
+            "wait"
           ],
           "image": "./assets/wacky-ricky/wr016/pages/WR016-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr016/WR016-pdf04-print02.mp3",
@@ -5276,8 +5295,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "minute.",
-            "Cool",
-            "Nothing,"
+            "best.",
+            "guys!"
           ],
           "image": "./assets/wacky-ricky/wr016/pages/WR016-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr016/WR016-pdf05-print03.mp3",
@@ -5302,12 +5321,13 @@ window.KakaWackyRickyManifest = {
             "course."
           ],
           "blanks": [
-            "course."
+            "sour",
+            "candy,"
           ],
           "choices": [
-            "course.",
-            "bring",
-            "morning!"
+            "sour candy,",
+            "Super Power",
+            "pretty sour,"
           ],
           "image": "./assets/wacky-ricky/wr016/pages/WR016-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr016/WR016-pdf06-print04.mp3",
@@ -5327,12 +5347,13 @@ window.KakaWackyRickyManifest = {
             "Ricky."
           ],
           "blanks": [
+            "pretty",
             "sour,"
           ],
           "choices": [
-            "sour,",
-            "Show",
-            "Maybe"
+            "pretty sour,",
+            "Super Power",
+            "sour candy,"
           ],
           "image": "./assets/wacky-ricky/wr016/pages/WR016-pdf07-print05.webp",
           "audio": "./assets/wacky-ricky/wr016/WR016-pdf07-print05.mp3",
@@ -5369,8 +5390,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "morning!",
-            "book",
-            "bring"
+            "bring",
+            "Power"
           ],
           "image": "./assets/wacky-ricky/wr016/pages/WR016-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr016/WR016-pdf08-print06.mp3",
@@ -5397,12 +5418,12 @@ window.KakaWackyRickyManifest = {
             "."
           ],
           "blanks": [
-            "Maybe"
+            "candy,"
           ],
           "choices": [
-            "Maybe",
-            "bought",
-            "best."
+            "candy,",
+            "Come",
+            "book"
           ],
           "image": "./assets/wacky-ricky/wr016/pages/WR016-pdf09-print07.webp",
           "audio": "./assets/wacky-ricky/wr016/WR016-pdf09-print07.mp3",
@@ -5447,8 +5468,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "bring",
-            "Come",
-            "Power"
+            "Cool",
+            "see."
           ],
           "image": "./assets/wacky-ricky/wr016/pages/WR016-pdf10-print08.webp",
           "audio": "./assets/wacky-ricky/wr016/WR016-pdf10-print08.mp3",
@@ -5493,8 +5514,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "recess.",
-            "think",
-            "Today,"
+            "watch.",
+            "worry,"
           ],
           "image": "./assets/wacky-ricky/wr017/pages/WR017-pdf03-print01.webp",
           "audio": "./assets/wacky-ricky/wr017/WR017-pdf03-print01.mp3",
@@ -5510,14 +5531,8 @@ window.KakaWackyRickyManifest = {
           "sentence": [
             "Whoo-hoo!"
           ],
-          "blanks": [
-            "Whoo-hoo!"
-          ],
-          "choices": [
-            "Whoo-hoo!",
-            "worry,",
-            "books"
-          ],
+          "blanks": [],
+          "choices": [],
           "image": "./assets/wacky-ricky/wr017/pages/WR017-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr017/WR017-pdf04-print02.mp3",
           "sourceText": "Whoo-hoo!",
@@ -5557,12 +5572,13 @@ window.KakaWackyRickyManifest = {
             "Hook."
           ],
           "blanks": [
+            "Captain",
             "Hook."
           ],
           "choices": [
-            "Hook.",
-            "close",
-            "board"
+            "Captain Hook.",
+            "Hook’s ship.",
+            "next recess."
           ],
           "image": "./assets/wacky-ricky/wr017/pages/WR017-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr017/WR017-pdf05-print03.mp3",
@@ -5599,12 +5615,13 @@ window.KakaWackyRickyManifest = {
             "ship."
           ],
           "blanks": [
+            "Hook’s",
             "ship."
           ],
           "choices": [
-            "ship.",
-            "next",
-            "fine."
+            "Hook’s ship.",
+            "Captain Hook.",
+            "next recess."
           ],
           "image": "./assets/wacky-ricky/wr017/pages/WR017-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr017/WR017-pdf06-print04.mp3",
@@ -5677,7 +5694,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "escape.",
             "close",
-            "captured,"
+            "Come"
           ],
           "image": "./assets/wacky-ricky/wr017/pages/WR017-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr017/WR017-pdf08-print06.mp3",
@@ -5738,12 +5755,12 @@ window.KakaWackyRickyManifest = {
             "Pan!"
           ],
           "blanks": [
-            "Peter"
+            "Nooooo!"
           ],
           "choices": [
-            "Peter",
-            "Hook’s",
-            "locked"
+            "Nooooo!",
+            "books",
+            "fine."
           ],
           "image": "./assets/wacky-ricky/wr017/pages/WR017-pdf10-print08.webp",
           "audio": "./assets/wacky-ricky/wr017/WR017-pdf10-print08.mp3",
@@ -5809,7 +5826,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "hurt?",
-            "think",
+            "Today,",
             "Hook."
           ],
           "image": "./assets/wacky-ricky/wr017/pages/WR017-pdf12-print10.webp",
@@ -5844,7 +5861,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "over.",
             "ship.",
-            "watch."
+            "worry,"
           ],
           "image": "./assets/wacky-ricky/wr017/pages/WR017-pdf13-print11.webp",
           "audio": "./assets/wacky-ricky/wr017/WR017-pdf13-print11.mp3",
@@ -5865,12 +5882,13 @@ window.KakaWackyRickyManifest = {
             "recess."
           ],
           "blanks": [
+            "next",
             "recess."
           ],
           "choices": [
-            "recess.",
-            "Whoo-hoo!",
-            "outside"
+            "next recess.",
+            "Captain Hook.",
+            "Hook’s ship."
           ],
           "image": "./assets/wacky-ricky/wr017/pages/WR017-pdf14-print12.webp",
           "audio": "./assets/wacky-ricky/wr017/WR017-pdf14-print12.mp3",
@@ -5915,11 +5933,11 @@ window.KakaWackyRickyManifest = {
             "Forestwood."
           ],
           "blanks": [
-            "Forestwood."
+            "friend"
           ],
           "choices": [
-            "Forestwood.",
-            "gone?",
+            "friend",
+            "long",
             "evening."
           ],
           "image": "./assets/wacky-ricky/wr018/pages/WR018-pdf02-print01.webp",
@@ -6039,12 +6057,13 @@ window.KakaWackyRickyManifest = {
             "milk."
           ],
           "blanks": [
-            "milk."
+            "Come",
+            "inside"
           ],
           "choices": [
-            "milk.",
-            "take",
-            "nice"
+            "Come inside",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr018/pages/WR018-pdf06-print05.webp",
           "audio": "./assets/wacky-ricky/wr018/WR018-pdf06-print05.mp3",
@@ -6279,11 +6298,11 @@ window.KakaWackyRickyManifest = {
             "you."
           ],
           "blanks": [
-            "Shhh!"
+            "walks"
           ],
           "choices": [
-            "Shhh!",
-            "ball",
+            "walks",
+            "going",
             "weekends,"
           ],
           "image": "./assets/wacky-ricky/wr019/pages/WR019-pdf03-print01.webp",
@@ -6368,8 +6387,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "want",
-            "night.",
-            "walks"
+            "tells",
+            "wants"
           ],
           "image": "./assets/wacky-ricky/wr019/pages/WR019-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr019/WR019-pdf05-print03.mp3",
@@ -6403,12 +6422,13 @@ window.KakaWackyRickyManifest = {
             "help!"
           ],
           "blanks": [
-            "need"
+            "need",
+            "any"
           ],
           "choices": [
-            "need",
-            "dog-care",
-            "won!"
+            "need any",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr019/pages/WR019-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr019/WR019-pdf06-print04.mp3",
@@ -6445,8 +6465,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "help.",
-            "dog.",
-            "feeds"
+            "far",
+            "going"
           ],
           "image": "./assets/wacky-ricky/wr019/pages/WR019-pdf07-print05.webp",
           "audio": "./assets/wacky-ricky/wr019/WR019-pdf07-print05.mp3",
@@ -6483,7 +6503,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "walk",
             "feed",
-            "Shhh!"
+            "want"
           ],
           "image": "./assets/wacky-ricky/wr019/pages/WR019-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr019/WR019-pdf08-print06.mp3",
@@ -6521,8 +6541,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "race.",
-            "wants",
-            "Friday,"
+            "won!",
+            "Listen"
           ],
           "image": "./assets/wacky-ricky/wr019/pages/WR019-pdf09-print07.webp",
           "audio": "./assets/wacky-ricky/wr019/WR019-pdf09-print07.mp3",
@@ -6595,8 +6615,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "rains",
-            "flowers",
-            "water"
+            "fun!",
+            "Come"
           ],
           "image": "./assets/wacky-ricky/wr020/pages/WR020-pdf03-print01.webp",
           "audio": "./assets/wacky-ricky/wr020/WR020-pdf03-print01.mp3",
@@ -6622,12 +6642,13 @@ window.KakaWackyRickyManifest = {
             "Why?"
           ],
           "blanks": [
-            "grow."
+            "rains",
+            "because"
           ],
           "choices": [
-            "grow.",
-            "Come",
-            "little"
+            "rains because",
+            "always rains",
+            "play outside."
           ],
           "image": "./assets/wacky-ricky/wr020/pages/WR020-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr020/WR020-pdf04-print02.mp3",
@@ -6657,12 +6678,13 @@ window.KakaWackyRickyManifest = {
             "raincoat."
           ],
           "blanks": [
-            "raincoat."
+            "play",
+            "outside."
           ],
           "choices": [
-            "raincoat.",
-            "minute,",
-            "made"
+            "play outside.",
+            "always rains",
+            "rains because"
           ],
           "image": "./assets/wacky-ricky/wr020/pages/WR020-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr020/WR020-pdf05-print03.mp3",
@@ -6696,8 +6718,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "take",
-            "Maybe",
-            "always"
+            "One,",
+            "little"
           ],
           "image": "./assets/wacky-ricky/wr020/pages/WR020-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr020/WR020-pdf06-print04.mp3",
@@ -6774,8 +6796,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "minute,",
-            "hard.",
-            "grow."
+            "made",
+            "hard."
           ],
           "image": "./assets/wacky-ricky/wr020/pages/WR020-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr020/WR020-pdf08-print06.mp3",
@@ -6848,8 +6870,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "race",
-            "water",
-            "always"
+            "always",
+            "little"
           ],
           "image": "./assets/wacky-ricky/wr020/pages/WR020-pdf10-print08.webp",
           "audio": "./assets/wacky-ricky/wr020/WR020-pdf10-print08.mp3",
@@ -7070,12 +7092,13 @@ window.KakaWackyRickyManifest = {
             "Grandma."
           ],
           "blanks": [
+            "beautiful",
             "doll!"
           ],
           "choices": [
-            "doll!",
-            "another",
-            "baby!"
+            "beautiful doll!",
+            "Welcome home,",
+            "another gift?"
           ],
           "image": "./assets/wacky-ricky/wr021/pages/WR021-pdf07-print06.webp",
           "audio": "./assets/wacky-ricky/wr021/WR021-pdf07-print06.mp3",
@@ -7186,12 +7209,13 @@ window.KakaWackyRickyManifest = {
             "gift?"
           ],
           "blanks": [
+            "another",
             "gift?"
           ],
           "choices": [
-            "gift?",
-            "soon.",
-            "dears."
+            "another gift?",
+            "Welcome home,",
+            "beautiful doll!"
           ],
           "image": "./assets/wacky-ricky/wr021/pages/WR021-pdf11-print10.webp",
           "audio": "./assets/wacky-ricky/wr021/WR021-pdf11-print10.mp3",
@@ -7239,7 +7263,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "strawberries.",
-            "need",
+            "Soon,",
             "raisins"
           ],
           "image": "./assets/wacky-ricky/wr022/pages/WR022-pdf03-print01.webp",
@@ -7274,7 +7298,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "plant,",
-            "guys.",
+            "hard",
             "climb"
           ],
           "image": "./assets/wacky-ricky/wr022/pages/WR022-pdf04-print02.webp",
@@ -7302,7 +7326,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "shovel.",
-            "want",
+            "well.",
             "covered"
           ],
           "image": "./assets/wacky-ricky/wr022/pages/WR022-pdf05-print03.webp",
@@ -7339,7 +7363,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "lines.",
             "great,",
-            "grab"
+            "grow"
           ],
           "image": "./assets/wacky-ricky/wr022/pages/WR022-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr022/WR022-pdf06-print04.mp3",
@@ -7375,12 +7399,13 @@ window.KakaWackyRickyManifest = {
             "day."
           ],
           "blanks": [
-            "raisins"
+            "eat",
+            "chocolate-"
           ],
           "choices": [
-            "raisins",
-            "something.",
-            "grow"
+            "eat chocolate-",
+            "Everyone, grab",
+            "straight lines."
           ],
           "image": "./assets/wacky-ricky/wr022/pages/WR022-pdf07-print05.webp",
           "audio": "./assets/wacky-ricky/wr022/WR022-pdf07-print05.mp3",
@@ -7451,12 +7476,13 @@ window.KakaWackyRickyManifest = {
             "well."
           ],
           "blanks": [
+            "grow",
             "well."
           ],
           "choices": [
-            "well.",
-            "guys.",
-            "covered"
+            "grow well.",
+            "Everyone, grab",
+            "straight lines."
           ],
           "image": "./assets/wacky-ricky/wr022/pages/WR022-pdf09-print07.webp",
           "audio": "./assets/wacky-ricky/wr022/WR022-pdf09-print07.mp3",
@@ -7479,10 +7505,10 @@ window.KakaWackyRickyManifest = {
             "see!"
           ],
           "blanks": [
-            "You’ll"
+            "plant?"
           ],
           "choices": [
-            "You’ll",
+            "plant?",
             "well.",
             "work,"
           ],
@@ -7568,12 +7594,13 @@ window.KakaWackyRickyManifest = {
             "water."
           ],
           "blanks": [
-            "water."
+            "need",
+            "more"
           ],
           "choices": [
-            "water.",
-            "blankets.",
-            "nice,"
+            "need more",
+            "little strawberry",
+            "Never mind."
           ],
           "image": "./assets/wacky-ricky/wr023/pages/WR023-pdf03-print02.webp",
           "audio": "./assets/wacky-ricky/wr023/WR023-pdf03-print02.mp3",
@@ -7743,12 +7770,13 @@ window.KakaWackyRickyManifest = {
             "raisins."
           ],
           "blanks": [
-            "raisins."
+            "planted",
+            "chocolate-covered"
           ],
           "choices": [
-            "raisins.",
-            "know,",
-            "find"
+            "planted chocolate-covered",
+            "little strawberry",
+            "need more"
           ],
           "image": "./assets/wacky-ricky/wr023/pages/WR023-pdf08-print07.webp",
           "audio": "./assets/wacky-ricky/wr023/WR023-pdf08-print07.mp3",
@@ -7934,12 +7962,13 @@ window.KakaWackyRickyManifest = {
             "Ricky."
           ],
           "blanks": [
-            "difficult,"
+            "want",
+            "Super"
           ],
           "choices": [
-            "difficult,",
-            "Saturday,",
-            "money."
+            "want Super",
+            "want kangaroo",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr024/pages/WR024-pdf04-print03.webp",
           "audio": "./assets/wacky-ricky/wr024/WR024-pdf04-print03.mp3",
@@ -8087,12 +8116,13 @@ window.KakaWackyRickyManifest = {
             "shoes."
           ],
           "blanks": [
-            "shoes."
+            "want",
+            "kangaroo"
           ],
           "choices": [
-            "shoes.",
-            "money.",
-            "birthday,"
+            "want kangaroo",
+            "want Super",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr024/pages/WR024-pdf09-print08.webp",
           "audio": "./assets/wacky-ricky/wr024/WR024-pdf09-print08.mp3",
@@ -8209,8 +8239,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "Everybody",
-            "first.",
-            "safely."
+            "guess",
+            "wanted"
           ],
           "image": "./assets/wacky-ricky/wr025/pages/WR025-pdf02-print01.webp",
           "audio": "./assets/wacky-ricky/wr025/WR025-pdf02-print01.mp3",
@@ -8235,7 +8265,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "surprise",
-            "party!",
+            "Power",
             "Squirrel"
           ],
           "image": "./assets/wacky-ricky/wr025/pages/WR025-pdf03-print02.webp",
@@ -8260,10 +8290,10 @@ window.KakaWackyRickyManifest = {
             "V-veronica."
           ],
           "blanks": [
-            "V-veronica."
+            "Th-th-thank"
           ],
           "choices": [
-            "V-veronica.",
+            "Th-th-thank",
             "Squirrel",
             "party!"
           ],
@@ -8363,12 +8393,13 @@ window.KakaWackyRickyManifest = {
             "Ricky!"
           ],
           "blanks": [
+            "Happy",
             "birthday,"
           ],
           "choices": [
-            "birthday,",
-            "Everybody",
-            "shoes."
+            "Happy birthday,",
+            "Power Squirrel.",
+            "kangaroo shoes."
           ],
           "image": "./assets/wacky-ricky/wr025/pages/WR025-pdf07-print06.webp",
           "audio": "./assets/wacky-ricky/wr025/WR025-pdf07-print06.mp3",
@@ -8408,12 +8439,13 @@ window.KakaWackyRickyManifest = {
             "safely."
           ],
           "blanks": [
-            "safely."
+            "happy",
+            "birthday"
           ],
           "choices": [
-            "safely.",
-            "guys!",
-            "guess"
+            "happy birthday",
+            "Power Squirrel.",
+            "kangaroo shoes."
           ],
           "image": "./assets/wacky-ricky/wr025/pages/WR025-pdf08-print07.webp",
           "audio": "./assets/wacky-ricky/wr025/WR025-pdf08-print07.mp3",
@@ -8564,7 +8596,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "time",
             "Good",
-            "Who’s"
+            "first?"
           ],
           "image": "./assets/wacky-ricky/wr026/pages/WR026-pdf02-print01.webp",
           "audio": "./assets/wacky-ricky/wr026/WR026-pdf02-print01.mp3",
@@ -8598,12 +8630,13 @@ window.KakaWackyRickyManifest = {
             "do."
           ],
           "blanks": [
-            "first?"
+            "play",
+            "“hit"
           ],
           "choices": [
-            "first?",
-            "made",
-            "careful,"
+            "play “hit",
+            "first player.",
+            "Good hit,"
           ],
           "image": "./assets/wacky-ricky/wr026/pages/WR026-pdf03-print02.webp",
           "audio": "./assets/wacky-ricky/wr026/WR026-pdf03-print02.mp3",
@@ -8631,12 +8664,13 @@ window.KakaWackyRickyManifest = {
             "Brian."
           ],
           "blanks": [
+            "first",
             "player."
           ],
           "choices": [
-            "player.",
-            "Twinkies.",
-            "made"
+            "first player.",
+            "play “hit",
+            "Good hit,"
           ],
           "image": "./assets/wacky-ricky/wr026/pages/WR026-pdf04-print03.webp",
           "audio": "./assets/wacky-ricky/wr026/WR026-pdf04-print03.mp3",
@@ -8719,7 +8753,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "kick.",
-            "birthday.",
+            "decorated",
             "play"
           ],
           "image": "./assets/wacky-ricky/wr026/pages/WR026-pdf07-print06.webp",
@@ -8750,7 +8784,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "next.",
-            "Who’s",
+            "first?",
             "look"
           ],
           "image": "./assets/wacky-ricky/wr026/pages/WR026-pdf08-print07.webp",
@@ -8839,8 +8873,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "birthday,",
-            "stick.",
-            "going"
+            "game.",
+            "careful,"
           ],
           "image": "./assets/wacky-ricky/wr026/pages/WR026-pdf11-print10.webp",
           "audio": "./assets/wacky-ricky/wr026/WR026-pdf11-print10.mp3",
@@ -8927,12 +8961,13 @@ window.KakaWackyRickyManifest = {
             "chores."
           ],
           "blanks": [
+            "doing",
             "chores."
           ],
           "choices": [
-            "chores.",
-            "steer.",
-            "first."
+            "doing chores.",
+            "Saturday, everyone.",
+            "want both"
           ],
           "image": "./assets/wacky-ricky/wr027/pages/WR027-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr027/WR027-pdf04-print02.mp3",
@@ -8964,12 +8999,13 @@ window.KakaWackyRickyManifest = {
             "Ricky."
           ],
           "blanks": [
-            "garbage,"
+            "want",
+            "both"
           ],
           "choices": [
-            "garbage,",
-            "together.",
-            "different,"
+            "want both",
+            "Saturday, everyone.",
+            "doing chores."
           ],
           "image": "./assets/wacky-ricky/wr027/pages/WR027-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr027/WR027-pdf05-print03.mp3",
@@ -8991,12 +9027,13 @@ window.KakaWackyRickyManifest = {
             "now."
           ],
           "blanks": [
+            "start",
             "right"
           ],
           "choices": [
-            "right",
-            "Grab",
-            "chores."
+            "start right",
+            "Saturday, everyone.",
+            "doing chores."
           ],
           "image": "./assets/wacky-ricky/wr027/pages/WR027-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr027/WR027-pdf06-print04.mp3",
@@ -9107,7 +9144,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "heavy,",
             "make",
-            "Whew!"
+            "work"
           ],
           "image": "./assets/wacky-ricky/wr027/pages/WR027-pdf09-print07.webp",
           "audio": "./assets/wacky-ricky/wr027/WR027-pdf09-print07.mp3",
@@ -9147,14 +9184,8 @@ window.KakaWackyRickyManifest = {
           "sentence": [
             "Whew!"
           ],
-          "blanks": [
-            "Whew!"
-          ],
-          "choices": [
-            "Whew!",
-            "easy.",
-            "Flap"
-          ],
+          "blanks": [],
+          "choices": [],
           "image": "./assets/wacky-ricky/wr027/pages/WR027-pdf11-print09.webp",
           "audio": "./assets/wacky-ricky/wr027/WR027-pdf11-print09.mp3",
           "sourceText": "Whew!",
@@ -9217,7 +9248,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "help,",
             "beds.",
-            "clean"
+            "doing"
           ],
           "image": "./assets/wacky-ricky/wr027/pages/WR027-pdf14-print12.webp",
           "audio": "./assets/wacky-ricky/wr027/WR027-pdf14-print12.mp3",
@@ -9312,12 +9343,13 @@ window.KakaWackyRickyManifest = {
             "school."
           ],
           "blanks": [
-            "school."
+            "take",
+            "care"
           ],
           "choices": [
-            "school.",
-            "feeling",
-            "cream?"
+            "take care",
+            "need anything.",
+            "need, son?"
           ],
           "image": "./assets/wacky-ricky/wr028/pages/WR028-pdf03-print02.webp",
           "audio": "./assets/wacky-ricky/wr028/WR028-pdf03-print02.mp3",
@@ -9396,12 +9428,13 @@ window.KakaWackyRickyManifest = {
             "please."
           ],
           "blanks": [
-            "water,"
+            "need,",
+            "son?"
           ],
           "choices": [
-            "water,",
-            "feel",
-            "Call"
+            "need, son?",
+            "take care",
+            "need anything."
           ],
           "image": "./assets/wacky-ricky/wr028/pages/WR028-pdf06-print05.webp",
           "audio": "./assets/wacky-ricky/wr028/WR028-pdf06-print05.mp3",
@@ -9640,12 +9673,13 @@ window.KakaWackyRickyManifest = {
             "please."
           ],
           "blanks": [
+            "Turn",
             "around,"
           ],
           "choices": [
-            "around,",
-            "careful!",
-            "school."
+            "Turn around,",
+            "after school.",
+            "paper balls."
           ],
           "image": "./assets/wacky-ricky/wr029/pages/WR029-pdf03-print02.webp",
           "audio": "./assets/wacky-ricky/wr029/WR029-pdf03-print02.mp3",
@@ -9723,12 +9757,13 @@ window.KakaWackyRickyManifest = {
             "balls."
           ],
           "blanks": [
+            "paper",
             "balls."
           ],
           "choices": [
-            "balls.",
-            "school.",
-            "trouble."
+            "paper balls.",
+            "after school.",
+            "Turn around,"
           ],
           "image": "./assets/wacky-ricky/wr029/pages/WR029-pdf07-print06.webp",
           "audio": "./assets/wacky-ricky/wr029/WR029-pdf07-print06.mp3",
@@ -9920,12 +9955,13 @@ window.KakaWackyRickyManifest = {
             "Hopper."
           ],
           "blanks": [
-            "help"
+            "after",
+            "school."
           ],
           "choices": [
-            "help",
-            "plan.",
-            "something"
+            "after school.",
+            "Turn around,",
+            "paper balls."
           ],
           "image": "./assets/wacky-ricky/wr029/pages/WR029-pdf15-print14.webp",
           "audio": "./assets/wacky-ricky/wr029/WR029-pdf15-print14.mp3",
@@ -9986,12 +10022,13 @@ window.KakaWackyRickyManifest = {
             "year."
           ],
           "blanks": [
-            "year."
+            "space",
+            "museum."
           ],
           "choices": [
-            "year.",
-            "open.",
-            "stand"
+            "space museum.",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr030/pages/WR030-pdf03-print01.webp",
           "audio": "./assets/wacky-ricky/wr030/WR030-pdf03-print01.mp3",
@@ -10052,8 +10089,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "stand",
-            "Welcome",
-            "Maybe"
+            "year.",
+            "Come"
           ],
           "image": "./assets/wacky-ricky/wr030/pages/WR030-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr030/WR030-pdf05-print03.mp3",
@@ -10095,12 +10132,13 @@ window.KakaWackyRickyManifest = {
             "please."
           ],
           "blanks": [
-            "Follow"
+            "space",
+            "museum."
           ],
           "choices": [
-            "Follow",
-            "bus,",
-            "Someday"
+            "space museum.",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr030/pages/WR030-pdf07-print05.webp",
           "audio": "./assets/wacky-ricky/wr030/WR030-pdf07-print05.mp3",
@@ -10130,8 +10168,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "worry,",
-            "fine.",
-            "start"
+            "bus,",
+            "museum."
           ],
           "image": "./assets/wacky-ricky/wr030/pages/WR030-pdf10-print08.webp",
           "audio": "./assets/wacky-ricky/wr030/WR030-pdf10-print08.mp3",
@@ -10186,8 +10224,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "open.",
-            "copilot.",
-            "Follow"
+            "museum.",
+            "Someday"
           ],
           "image": "./assets/wacky-ricky/wr030/pages/WR030-pdf13-print11.webp",
           "audio": "./assets/wacky-ricky/wr030/WR030-pdf13-print11.mp3",
@@ -10229,8 +10267,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "back",
-            "Someday",
-            "fine."
+            "bus,",
+            "worry,"
           ],
           "image": "./assets/wacky-ricky/wr030/pages/WR030-pdf14-print12.webp",
           "audio": "./assets/wacky-ricky/wr030/WR030-pdf14-print12.mp3",
@@ -10275,12 +10313,13 @@ window.KakaWackyRickyManifest = {
             "on."
           ],
           "blanks": [
-            "hold"
+            "big",
+            "trouble"
           ],
           "choices": [
-            "hold",
-            "fly.",
-            "Look"
+            "big trouble",
+            "flying frog.",
+            "d-don’t know."
           ],
           "image": "./assets/wacky-ricky/wr031/pages/WR031-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr031/WR031-pdf04-print02.mp3",
@@ -10474,12 +10513,13 @@ window.KakaWackyRickyManifest = {
             "okay."
           ],
           "blanks": [
-            "think"
+            "pretty",
+            "hard."
           ],
           "choices": [
-            "think",
-            "class.",
-            "crash."
+            "pretty hard.",
+            "big trouble",
+            "flying frog."
           ],
           "image": "./assets/wacky-ricky/wr031/pages/WR031-pdf11-print09.webp",
           "audio": "./assets/wacky-ricky/wr031/WR031-pdf11-print09.mp3",
@@ -10675,12 +10715,13 @@ window.KakaWackyRickyManifest = {
             "books."
           ],
           "blanks": [
-            "books."
+            "play",
+            "every"
           ],
           "choices": [
-            "books.",
-            "report",
-            "Europe."
+            "play every",
+            "report cards.",
+            "new bike."
           ],
           "image": "./assets/wacky-ricky/wr032/pages/WR032-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr032/WR032-pdf05-print03.mp3",
@@ -10706,12 +10747,13 @@ window.KakaWackyRickyManifest = {
             "fun."
           ],
           "blanks": [
-            "Sounds"
+            "new",
+            "bike."
           ],
           "choices": [
-            "Sounds",
-            "cards.",
-            "books."
+            "new bike.",
+            "report cards.",
+            "play every"
           ],
           "image": "./assets/wacky-ricky/wr032/pages/WR032-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr032/WR032-pdf06-print04.mp3",
@@ -10730,12 +10772,13 @@ window.KakaWackyRickyManifest = {
             "vacation!"
           ],
           "blanks": [
+            "summer",
             "vacation!"
           ],
           "choices": [
-            "vacation!",
-            "Sounds",
-            "miss"
+            "summer vacation!",
+            "report cards.",
+            "play every"
           ],
           "image": "./assets/wacky-ricky/wr032/pages/WR032-pdf07-print05.webp",
           "audio": "./assets/wacky-ricky/wr032/WR032-pdf07-print05.mp3",
@@ -10801,8 +10844,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "September.",
-            "more",
-            "bike."
+            "play",
+            "meet"
           ],
           "image": "./assets/wacky-ricky/wr032/pages/WR032-pdf09-print07.webp",
           "audio": "./assets/wacky-ricky/wr032/WR032-pdf09-print07.mp3",
@@ -10886,8 +10929,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "Good-bye,",
-            "vacation!",
-            "great"
+            "books.",
+            "later."
           ],
           "image": "./assets/wacky-ricky/wr032/pages/WR032-pdf12-print10.webp",
           "audio": "./assets/wacky-ricky/wr032/WR032-pdf12-print10.mp3",
@@ -11064,12 +11107,13 @@ window.KakaWackyRickyManifest = {
             "girls."
           ],
           "blanks": [
+            "little",
             "girls."
           ],
           "choices": [
-            "girls.",
-            "swim",
-            "Looks"
+            "little girls.",
+            "hiking, swimming,",
+            "Looks great!"
           ],
           "image": "./assets/wacky-ricky/wr033/pages/WR033-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr033/WR033-pdf06-print04.mp3",
@@ -11186,12 +11230,13 @@ window.KakaWackyRickyManifest = {
             "now?"
           ],
           "blanks": [
-            "swimming"
+            "Looks",
+            "great!"
           ],
           "choices": [
-            "swimming",
-            "enough,",
-            "tomorrow."
+            "Looks great!",
+            "little girls.",
+            "hiking, swimming,"
           ],
           "image": "./assets/wacky-ricky/wr033/pages/WR033-pdf10-print08.webp",
           "audio": "./assets/wacky-ricky/wr033/WR033-pdf10-print08.mp3",
@@ -11323,12 +11368,13 @@ window.KakaWackyRickyManifest = {
             "amazing."
           ],
           "blanks": [
-            "amazing."
+            "beautiful",
+            "morning."
           ],
           "choices": [
-            "amazing.",
-            "poles?",
-            "worm,"
+            "beautiful morning.",
+            "fishing poles?",
+            "need worms,"
           ],
           "image": "./assets/wacky-ricky/wr034/pages/WR034-pdf02-print01.webp",
           "audio": "./assets/wacky-ricky/wr034/WR034-pdf02-print01.mp3",
@@ -11451,12 +11497,13 @@ window.KakaWackyRickyManifest = {
             "marshmallows."
           ],
           "blanks": [
-            "fish"
+            "need",
+            "worms,"
           ],
           "choices": [
-            "fish",
-            "amazing.",
-            "worm,"
+            "need worms,",
+            "beautiful morning.",
+            "fishing poles?"
           ],
           "image": "./assets/wacky-ricky/wr034/pages/WR034-pdf06-print05.webp",
           "audio": "./assets/wacky-ricky/wr034/WR034-pdf06-print05.mp3",
@@ -11648,12 +11695,13 @@ window.KakaWackyRickyManifest = {
             "real?"
           ],
           "blanks": [
+            "Bigfoot",
             "real?"
           ],
           "choices": [
-            "real?",
-            "strong.",
-            "tale."
+            "Bigfoot real?",
+            "fairy tale.",
+            "W-w-who’s t-t-there?"
           ],
           "image": "./assets/wacky-ricky/wr035/pages/WR035-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr035/WR035-pdf05-print03.mp3",
@@ -11685,12 +11733,13 @@ window.KakaWackyRickyManifest = {
             "tale."
           ],
           "blanks": [
+            "fairy",
             "tale."
           ],
           "choices": [
-            "tale.",
-            "turn",
-            "sister."
+            "fairy tale.",
+            "Bigfoot real?",
+            "W-w-who’s t-t-there?"
           ],
           "image": "./assets/wacky-ricky/wr035/pages/WR035-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr035/WR035-pdf06-print04.mp3",
@@ -11929,7 +11978,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "turn.",
-            "Here’s",
+            "lot.",
             "fish"
           ],
           "image": "./assets/wacky-ricky/wr036/pages/WR036-pdf03-print01.webp",
@@ -11959,12 +12008,13 @@ window.KakaWackyRickyManifest = {
             "else?"
           ],
           "blanks": [
-            "else?"
+            "new",
+            "tricks."
           ],
           "choices": [
-            "else?",
-            "lot.",
-            "family"
+            "new tricks.",
+            "swimming pool.",
+            "summer vacation?"
           ],
           "image": "./assets/wacky-ricky/wr036/pages/WR036-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr036/WR036-pdf04-print02.mp3",
@@ -12008,7 +12058,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "turn.",
-            "rained",
+            "really",
             "fun"
           ],
           "image": "./assets/wacky-ricky/wr036/pages/WR036-pdf05-print03.webp",
@@ -12033,12 +12083,13 @@ window.KakaWackyRickyManifest = {
             "vacation?"
           ],
           "blanks": [
+            "summer",
             "vacation?"
           ],
           "choices": [
-            "vacation?",
-            "fishing.",
-            "played"
+            "summer vacation?",
+            "new tricks.",
+            "swimming pool."
           ],
           "image": "./assets/wacky-ricky/wr036/pages/WR036-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr036/WR036-pdf06-print04.mp3",
@@ -12115,7 +12166,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "fish",
-            "tricks.",
+            "bicycle.",
             "bad."
           ],
           "image": "./assets/wacky-ricky/wr036/pages/WR036-pdf08-print06.webp",
@@ -12143,8 +12194,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "catch",
-            "family",
-            "stayed"
+            "fish",
+            "summer"
           ],
           "image": "./assets/wacky-ricky/wr036/pages/WR036-pdf09-print07.webp",
           "audio": "./assets/wacky-ricky/wr036/WR036-pdf09-print07.mp3",
@@ -12172,8 +12223,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "scary!",
-            "over",
-            "any"
+            "park.",
+            "bad."
           ],
           "image": "./assets/wacky-ricky/wr036/pages/WR036-pdf10-print08.webp",
           "audio": "./assets/wacky-ricky/wr036/WR036-pdf10-print08.mp3",
@@ -12481,12 +12532,13 @@ window.KakaWackyRickyManifest = {
             "job!"
           ],
           "blanks": [
-            "Good"
+            "Good",
+            "job!"
           ],
           "choices": [
-            "Good",
-            "boy’s",
-            "want"
+            "Good job!",
+            "hurt yourself?",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr037/pages/WR037-pdf11-print09.webp",
           "audio": "./assets/wacky-ricky/wr037/WR037-pdf11-print09.mp3",
@@ -12540,12 +12592,13 @@ window.KakaWackyRickyManifest = {
             "yourself?"
           ],
           "blanks": [
+            "hurt",
             "yourself?"
           ],
           "choices": [
-            "yourself?",
-            "small.",
-            "bike"
+            "hurt yourself?",
+            "Good job!",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr037/pages/WR037-pdf13-print11.webp",
           "audio": "./assets/wacky-ricky/wr037/WR037-pdf13-print11.mp3",
@@ -12625,12 +12678,13 @@ window.KakaWackyRickyManifest = {
             "sell."
           ],
           "blanks": [
-            "sell."
+            "old",
+            "toys"
           ],
           "choices": [
-            "sell.",
-            "fifty",
-            "stuff,"
+            "old toys",
+            "put prices",
+            "favorite baseball"
           ],
           "image": "./assets/wacky-ricky/wr038/pages/WR038-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr038/WR038-pdf04-print02.mp3",
@@ -12657,12 +12711,13 @@ window.KakaWackyRickyManifest = {
             "everything."
           ],
           "blanks": [
-            "everything."
+            "put",
+            "prices"
           ],
           "choices": [
-            "everything.",
-            "twenty-five",
-            "ever."
+            "put prices",
+            "old toys",
+            "favorite baseball"
           ],
           "image": "./assets/wacky-ricky/wr038/pages/WR038-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr038/WR038-pdf05-print03.mp3",
@@ -12697,7 +12752,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "room.",
             "guys!",
-            "old"
+            "pay"
           ],
           "image": "./assets/wacky-ricky/wr038/pages/WR038-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr038/WR038-pdf06-print04.mp3",
@@ -12738,8 +12793,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "cents.",
-            "double.",
-            "Cool!"
+            "ever.",
+            "cuddly."
           ],
           "image": "./assets/wacky-ricky/wr038/pages/WR038-pdf07-print05.webp",
           "audio": "./assets/wacky-ricky/wr038/WR038-pdf07-print05.mp3",
@@ -12775,8 +12830,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "guys!",
-            "later.",
-            "See"
+            "old",
+            "stuff,"
           ],
           "image": "./assets/wacky-ricky/wr038/pages/WR038-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr038/WR038-pdf08-print06.mp3",
@@ -12807,8 +12862,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "cards.",
-            "Here’s",
-            "guys!"
+            "later.",
+            "having"
           ],
           "image": "./assets/wacky-ricky/wr038/pages/WR038-pdf09-print07.webp",
           "audio": "./assets/wacky-ricky/wr038/WR038-pdf09-print07.mp3",
@@ -12939,8 +12994,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "things?",
-            "These",
-            "bear!"
+            "baseball",
+            "best"
           ],
           "image": "./assets/wacky-ricky/wr038/pages/WR038-pdf14-print12.webp",
           "audio": "./assets/wacky-ricky/wr038/WR038-pdf14-print12.mp3",
@@ -13116,12 +13171,13 @@ window.KakaWackyRickyManifest = {
             "autumn."
           ],
           "blanks": [
-            "autumn."
+            "beautiful",
+            "colors."
           ],
           "choices": [
-            "autumn.",
-            "those",
-            "idea."
+            "beautiful colors.",
+            "apple orchard.",
+            "see any."
           ],
           "image": "./assets/wacky-ricky/wr039/pages/WR039-pdf07-print05.webp",
           "audio": "./assets/wacky-ricky/wr039/WR039-pdf07-print05.mp3",
@@ -13147,12 +13203,13 @@ window.KakaWackyRickyManifest = {
             "any."
           ],
           "blanks": [
-            "chestnuts."
+            "see",
+            "any."
           ],
           "choices": [
-            "chestnuts.",
-            "three,",
-            "colder."
+            "see any.",
+            "apple orchard.",
+            "beautiful colors."
           ],
           "image": "./assets/wacky-ricky/wr039/pages/WR039-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr039/WR039-pdf08-print06.mp3",
@@ -13270,12 +13327,13 @@ window.KakaWackyRickyManifest = {
             "JUMP!"
           ],
           "blanks": [
-            "JUMP!"
+            "good",
+            "pile."
           ],
           "choices": [
-            "JUMP!",
-            "going?",
-            "Cool!"
+            "good pile.",
+            "apple orchard.",
+            "beautiful colors."
           ],
           "image": "./assets/wacky-ricky/wr039/pages/WR039-pdf13-print11.webp",
           "audio": "./assets/wacky-ricky/wr039/WR039-pdf13-print11.mp3",
@@ -13403,12 +13461,13 @@ window.KakaWackyRickyManifest = {
             "delicious."
           ],
           "blanks": [
+            "look",
             "delicious."
           ],
           "choices": [
-            "delicious.",
-            "dangerous.",
-            "pick"
+            "look delicious.",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr040/pages/WR040-pdf04-print03.webp",
           "audio": "./assets/wacky-ricky/wr040/WR040-pdf04-print03.mp3",
@@ -13725,12 +13784,13 @@ window.KakaWackyRickyManifest = {
             "garbage."
           ],
           "blanks": [
-            "garbage."
+            "red",
+            "hair."
           ],
           "choices": [
-            "garbage.",
-            "make",
-            "thirty"
+            "red hair.",
+            "making applesauce.",
+            "make applesauce?"
           ],
           "image": "./assets/wacky-ricky/wr041/pages/WR041-pdf05-print04.webp",
           "audio": "./assets/wacky-ricky/wr041/WR041-pdf05-print04.mp3",
@@ -13755,12 +13815,13 @@ window.KakaWackyRickyManifest = {
             "minutes."
           ],
           "blanks": [
-            "minutes."
+            "takes",
+            "thirty"
           ],
           "choices": [
-            "minutes.",
-            "careful",
-            "hair."
+            "takes thirty",
+            "making applesauce.",
+            "make applesauce?"
           ],
           "image": "./assets/wacky-ricky/wr041/pages/WR041-pdf06-print05.webp",
           "audio": "./assets/wacky-ricky/wr041/WR041-pdf06-print05.mp3",
@@ -13952,12 +14013,13 @@ window.KakaWackyRickyManifest = {
             "boots!"
           ],
           "blanks": [
-            "boots!"
+            "little",
+            "muddy!"
           ],
           "choices": [
-            "boots!",
-            "put",
-            "right."
+            "little muddy!",
+            "almost Halloween.",
+            "pretty big!"
           ],
           "image": "./assets/wacky-ricky/wr042/pages/WR042-pdf03-print02.webp",
           "audio": "./assets/wacky-ricky/wr042/WR042-pdf03-print02.mp3",
@@ -14095,12 +14157,13 @@ window.KakaWackyRickyManifest = {
             "big!"
           ],
           "blanks": [
-            "pretty"
+            "pretty",
+            "big!"
           ],
           "choices": [
-            "pretty",
-            "small.",
-            "thing"
+            "pretty big!",
+            "almost Halloween.",
+            "little muddy!"
           ],
           "image": "./assets/wacky-ricky/wr042/pages/WR042-pdf08-print07.webp",
           "audio": "./assets/wacky-ricky/wr042/WR042-pdf08-print07.mp3",
@@ -14216,7 +14279,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "ready.",
-            "full",
+            "Good",
             "Happy"
           ],
           "image": "./assets/wacky-ricky/wr043/pages/WR043-pdf03-print01.webp",
@@ -14253,8 +14316,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "shiny!",
-            "treat!",
-            "sure"
+            "Trick",
+            "time!"
           ],
           "image": "./assets/wacky-ricky/wr043/pages/WR043-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr043/WR043-pdf04-print02.mp3",
@@ -14281,7 +14344,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "trick-or-treating!",
             "first",
-            "trade."
+            "treat!"
           ],
           "image": "./assets/wacky-ricky/wr043/pages/WR043-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr043/WR043-pdf05-print03.mp3",
@@ -14305,7 +14368,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "treat!",
             "candy",
-            "Here’s"
+            "house."
           ],
           "image": "./assets/wacky-ricky/wr043/pages/WR043-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr043/WR043-pdf06-print04.mp3",
@@ -14330,12 +14393,13 @@ window.KakaWackyRickyManifest = {
             "Halloween!"
           ],
           "blanks": [
+            "Happy",
             "Halloween!"
           ],
           "choices": [
-            "Halloween!",
-            "haunted.",
-            "ready."
+            "Happy Halloween!",
+            "long time!",
+            "really shiny!"
           ],
           "image": "./assets/wacky-ricky/wr043/pages/WR043-pdf07-print05.webp",
           "audio": "./assets/wacky-ricky/wr043/WR043-pdf07-print05.mp3",
@@ -14370,12 +14434,13 @@ window.KakaWackyRickyManifest = {
             "house."
           ],
           "blanks": [
+            "last",
             "house."
           ],
           "choices": [
-            "house.",
-            "time!",
-            "sure"
+            "last house.",
+            "long time!",
+            "really shiny!"
           ],
           "image": "./assets/wacky-ricky/wr043/pages/WR043-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr043/WR043-pdf08-print06.mp3",
@@ -14407,8 +14472,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "scary.",
-            "really",
-            "Look"
+            "safe.",
+            "name"
           ],
           "image": "./assets/wacky-ricky/wr043/pages/WR043-pdf09-print07.webp",
           "audio": "./assets/wacky-ricky/wr043/WR043-pdf09-print07.mp3",
@@ -14465,7 +14530,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "trade.",
-            "last",
+            "long",
             "Happy"
           ],
           "image": "./assets/wacky-ricky/wr043/pages/WR043-pdf11-print09.webp",
@@ -14492,8 +14557,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "candy",
-            "Look",
-            "ready."
+            "name",
+            "scary."
           ],
           "image": "./assets/wacky-ricky/wr043/pages/WR043-pdf12-print10.webp",
           "audio": "./assets/wacky-ricky/wr043/WR043-pdf12-print10.mp3",
@@ -14521,12 +14586,13 @@ window.KakaWackyRickyManifest = {
             "safe."
           ],
           "blanks": [
+            "looks",
             "safe."
           ],
           "choices": [
-            "safe.",
-            "bag",
-            "ready."
+            "looks safe.",
+            "long time!",
+            "really shiny!"
           ],
           "image": "./assets/wacky-ricky/wr043/pages/WR043-pdf13-print11.webp",
           "audio": "./assets/wacky-ricky/wr043/WR043-pdf13-print11.mp3",
@@ -14600,12 +14666,13 @@ window.KakaWackyRickyManifest = {
             "to?"
           ],
           "blanks": [
+            "swimming",
             "lessons."
           ],
           "choices": [
-            "lessons.",
-            "everyone.",
-            "start"
+            "swimming lessons.",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr044/pages/WR044-pdf03-print01.webp",
           "audio": "./assets/wacky-ricky/wr044/WR044-pdf03-print01.mp3",
@@ -14626,12 +14693,12 @@ window.KakaWackyRickyManifest = {
             "Hurray!"
           ],
           "blanks": [
-            "Hurray!"
+            "Jump"
           ],
           "choices": [
-            "Hurray!",
-            "down",
-            "feet"
+            "Jump",
+            "Put",
+            "scary."
           ],
           "image": "./assets/wacky-ricky/wr044/pages/WR044-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr044/WR044-pdf04-print02.mp3",
@@ -14657,7 +14724,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "jump.",
-            "today?",
+            "under!",
             "deep"
           ],
           "image": "./assets/wacky-ricky/wr044/pages/WR044-pdf05-print03.webp",
@@ -14690,8 +14757,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "think",
-            "want",
-            "little."
+            "Aww,",
+            "scared?"
           ],
           "image": "./assets/wacky-ricky/wr044/pages/WR044-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr044/WR044-pdf06-print04.mp3",
@@ -14730,8 +14797,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "water.",
-            "cold.",
-            "more."
+            "deep",
+            "want"
           ],
           "image": "./assets/wacky-ricky/wr044/pages/WR044-pdf07-print05.webp",
           "audio": "./assets/wacky-ricky/wr044/WR044-pdf07-print05.mp3",
@@ -14764,8 +14831,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "water.",
-            "time",
-            "lesson,"
+            "Well,",
+            "more."
           ],
           "image": "./assets/wacky-ricky/wr044/pages/WR044-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr044/WR044-pdf08-print06.mp3",
@@ -14795,8 +14862,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "warm!",
-            "start",
-            "Put"
+            "think",
+            "scary."
           ],
           "image": "./assets/wacky-ricky/wr044/pages/WR044-pdf09-print07.webp",
           "audio": "./assets/wacky-ricky/wr044/WR044-pdf09-print07.mp3",
@@ -14827,8 +14894,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "under!",
-            "scary.",
-            "water."
+            "start",
+            "cold."
           ],
           "image": "./assets/wacky-ricky/wr044/pages/WR044-pdf10-print08.webp",
           "audio": "./assets/wacky-ricky/wr044/WR044-pdf10-print08.mp3",
@@ -14852,8 +14919,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "scary.",
-            "scared?",
-            "lesson,"
+            "warm!",
+            "more."
           ],
           "image": "./assets/wacky-ricky/wr044/pages/WR044-pdf12-print10.webp",
           "audio": "./assets/wacky-ricky/wr044/WR044-pdf12-print10.mp3",
@@ -14890,12 +14957,13 @@ window.KakaWackyRickyManifest = {
             "Rachel?"
           ],
           "blanks": [
-            "lesson,"
+            "swimming",
+            "lessons"
           ],
           "choices": [
-            "lesson,",
-            "scary.",
-            "feet"
+            "swimming lessons",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr044/pages/WR044-pdf13-print11.webp",
           "audio": "./assets/wacky-ricky/wr044/WR044-pdf13-print11.mp3",
@@ -14931,7 +14999,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "more.",
             "Well,",
-            "today?"
+            "under!"
           ],
           "image": "./assets/wacky-ricky/wr044/pages/WR044-pdf14-print12.webp",
           "audio": "./assets/wacky-ricky/wr044/WR044-pdf14-print12.mp3",
@@ -14984,7 +15052,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "face",
-            "touch",
+            "try.",
             "play"
           ],
           "image": "./assets/wacky-ricky/wr045/pages/WR045-pdf03-print01.webp",
@@ -15037,12 +15105,13 @@ window.KakaWackyRickyManifest = {
             "Yeah!"
           ],
           "blanks": [
-            "girls?"
+            "starfish,",
+            "boys"
           ],
           "choices": [
-            "girls?",
-            "swim?",
-            "game."
+            "starfish, boys",
+            "hundred meters.",
+            "diving game."
           ],
           "image": "./assets/wacky-ricky/wr045/pages/WR045-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr045/WR045-pdf05-print03.mp3",
@@ -15092,7 +15161,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "try.",
-            "Maybe",
+            "ready",
             "face"
           ],
           "image": "./assets/wacky-ricky/wr045/pages/WR045-pdf07-print05.webp",
@@ -15118,12 +15187,12 @@ window.KakaWackyRickyManifest = {
             "."
           ],
           "blanks": [
-            "Maybe"
+            "want"
           ],
           "choices": [
-            "Maybe",
-            "water!",
-            "game."
+            "want",
+            "fish!",
+            "girls?"
           ],
           "image": "./assets/wacky-ricky/wr045/pages/WR045-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr045/WR045-pdf08-print06.mp3",
@@ -15153,7 +15222,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "starfish!",
             "floated",
-            "cold."
+            "deep"
           ],
           "image": "./assets/wacky-ricky/wr045/pages/WR045-pdf09-print07.webp",
           "audio": "./assets/wacky-ricky/wr045/WR045-pdf09-print07.mp3",
@@ -15185,12 +15254,13 @@ window.KakaWackyRickyManifest = {
             "lot!"
           ],
           "blanks": [
-            "Really?"
+            "hundred",
+            "meters."
           ],
           "choices": [
-            "Really?",
-            "cold.",
-            "water!"
+            "hundred meters.",
+            "starfish, boys",
+            "diving game."
           ],
           "image": "./assets/wacky-ricky/wr045/pages/WR045-pdf10-print08.webp",
           "audio": "./assets/wacky-ricky/wr045/WR045-pdf10-print08.mp3",
@@ -15269,7 +15339,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "dive!",
             "enjoy",
-            "one"
+            "ready"
           ],
           "image": "./assets/wacky-ricky/wr045/pages/WR045-pdf12-print10.webp",
           "audio": "./assets/wacky-ricky/wr045/WR045-pdf12-print10.mp3",
@@ -15300,12 +15370,13 @@ window.KakaWackyRickyManifest = {
             "water!"
           ],
           "blanks": [
-            "water!"
+            "enjoy",
+            "swimming"
           ],
           "choices": [
-            "water!",
-            "Maybe",
-            "help"
+            "enjoy swimming",
+            "starfish, boys",
+            "hundred meters."
           ],
           "image": "./assets/wacky-ricky/wr045/pages/WR045-pdf13-print11.webp",
           "audio": "./assets/wacky-ricky/wr045/WR045-pdf13-print11.mp3",
@@ -15346,7 +15417,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "cold.",
             "down",
-            "touch"
+            "try."
           ],
           "image": "./assets/wacky-ricky/wr045/pages/WR045-pdf14-print12.webp",
           "audio": "./assets/wacky-ricky/wr045/WR045-pdf14-print12.mp3",
@@ -15387,7 +15458,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "Dive",
-            "maybe",
+            "One,",
             "Push"
           ],
           "image": "./assets/wacky-ricky/wr046/pages/WR046-pdf03-print01.webp",
@@ -15448,7 +15519,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "jump.",
-            "maybe",
+            "One,",
             "Next"
           ],
           "image": "./assets/wacky-ricky/wr046/pages/WR046-pdf05-print03.webp",
@@ -15485,7 +15556,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "hard.",
             "count.",
-            "One,"
+            "ready?"
           ],
           "image": "./assets/wacky-ricky/wr046/pages/WR046-pdf06-print04.webp",
           "audio": "./assets/wacky-ricky/wr046/WR046-pdf06-print04.mp3",
@@ -15521,8 +15592,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "right!",
-            "Dive",
-            "jump."
+            "hard.",
+            "little"
           ],
           "image": "./assets/wacky-ricky/wr046/pages/WR046-pdf07-print05.webp",
           "audio": "./assets/wacky-ricky/wr046/WR046-pdf07-print05.mp3",
@@ -15554,8 +15625,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "three.",
-            "feet",
-            "harder."
+            "harder.",
+            "jump."
           ],
           "image": "./assets/wacky-ricky/wr046/pages/WR046-pdf08-print06.webp",
           "audio": "./assets/wacky-ricky/wr046/WR046-pdf08-print06.mp3",
@@ -15586,7 +15657,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "dive!",
             "seem",
-            "Put"
+            "ready?"
           ],
           "image": "./assets/wacky-ricky/wr046/pages/WR046-pdf09-print07.webp",
           "audio": "./assets/wacky-ricky/wr046/WR046-pdf09-print07.mp3",
@@ -15651,12 +15722,13 @@ window.KakaWackyRickyManifest = {
             "can."
           ],
           "blanks": [
+            "little",
             "harder."
           ],
           "choices": [
-            "harder.",
-            "everybody",
-            "Hold"
+            "little harder.",
+            "feet together.",
+            "three, dive!"
           ],
           "image": "./assets/wacky-ricky/wr046/pages/WR046-pdf11-print09.webp",
           "audio": "./assets/wacky-ricky/wr046/WR046-pdf11-print09.mp3",
@@ -15677,12 +15749,13 @@ window.KakaWackyRickyManifest = {
             "DIVE!"
           ],
           "blanks": [
+            "three,",
             "DIVE!"
           ],
           "choices": [
-            "DIVE!",
-            "jump.",
-            "look"
+            "three, DIVE!",
+            "feet together.",
+            "little harder."
           ],
           "image": "./assets/wacky-ricky/wr046/pages/WR046-pdf12-print10.webp",
           "audio": "./assets/wacky-ricky/wr046/WR046-pdf12-print10.mp3",
@@ -15712,12 +15785,13 @@ window.KakaWackyRickyManifest = {
             "year."
           ],
           "blanks": [
+            "next",
             "year."
           ],
           "choices": [
-            "year.",
-            "Hold",
-            "know"
+            "next year.",
+            "feet together.",
+            "three, dive!"
           ],
           "image": "./assets/wacky-ricky/wr046/pages/WR046-pdf14-print12.webp",
           "audio": "./assets/wacky-ricky/wr046/WR046-pdf14-print12.mp3",
@@ -15768,12 +15842,13 @@ window.KakaWackyRickyManifest = {
             "minute."
           ],
           "blanks": [
-            "minute."
+            "little",
+            "longer,"
           ],
           "choices": [
-            "minute.",
-            "school",
-            "Good"
+            "little longer,",
+            "Come downstairs",
+            "after school."
           ],
           "image": "./assets/wacky-ricky/wr047/pages/WR047-pdf03-print01.webp",
           "audio": "./assets/wacky-ricky/wr047/WR047-pdf03-print01.mp3",
@@ -15802,7 +15877,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "late.",
             "time",
-            "little"
+            "longer,"
           ],
           "image": "./assets/wacky-ricky/wr047/pages/WR047-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr047/WR047-pdf04-print02.mp3",
@@ -15833,12 +15908,13 @@ window.KakaWackyRickyManifest = {
             "breakfast."
           ],
           "blanks": [
-            "breakfast."
+            "Come",
+            "downstairs"
           ],
           "choices": [
-            "breakfast.",
-            "home.",
-            "You’ll"
+            "Come downstairs",
+            "little longer,",
+            "after school."
           ],
           "image": "./assets/wacky-ricky/wr047/pages/WR047-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr047/WR047-pdf05-print03.mp3",
@@ -15878,7 +15954,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "look",
-            "longer,",
+            "minute.",
             "late."
           ],
           "image": "./assets/wacky-ricky/wr047/pages/WR047-pdf06-print04.webp",
@@ -15907,7 +15983,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "already!",
-            "Awww.",
+            "back",
             "after"
           ],
           "image": "./assets/wacky-ricky/wr047/pages/WR047-pdf07-print05.webp",
@@ -15997,7 +16073,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "juice.",
             "ahead.",
-            "wake"
+            "8:20"
           ],
           "image": "./assets/wacky-ricky/wr047/pages/WR047-pdf11-print09.webp",
           "audio": "./assets/wacky-ricky/wr047/WR047-pdf11-print09.mp3",
@@ -16035,7 +16111,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "homework.",
             "breakfast.",
-            "home."
+            "know."
           ],
           "image": "./assets/wacky-ricky/wr047/pages/WR047-pdf12-print10.webp",
           "audio": "./assets/wacky-ricky/wr047/WR047-pdf12-print10.mp3",
@@ -16092,12 +16168,13 @@ window.KakaWackyRickyManifest = {
             "school."
           ],
           "blanks": [
+            "after",
             "school."
           ],
           "choices": [
-            "school.",
-            "dressed",
-            "minute."
+            "after school.",
+            "little longer,",
+            "Come downstairs"
           ],
           "image": "./assets/wacky-ricky/wr047/pages/WR047-pdf14-print12.webp",
           "audio": "./assets/wacky-ricky/wr047/WR047-pdf14-print12.mp3",
@@ -16172,12 +16249,13 @@ window.KakaWackyRickyManifest = {
             "luck!"
           ],
           "blanks": [
+            "Good",
             "luck!"
           ],
           "choices": [
-            "luck!",
-            "best,",
-            "study"
+            "Good luck!",
+            "spelling words?",
+            "books away."
           ],
           "image": "./assets/wacky-ricky/wr048/pages/WR048-pdf04-print02.webp",
           "audio": "./assets/wacky-ricky/wr048/WR048-pdf04-print02.mp3",
@@ -16445,12 +16523,13 @@ window.KakaWackyRickyManifest = {
             "guess."
           ],
           "blanks": [
-            "guess."
+            "gold",
+            "star."
           ],
           "choices": [
-            "guess.",
-            "All",
-            "pencil?"
+            "gold star.",
+            "spelling words?",
+            "Good luck!"
           ],
           "image": "./assets/wacky-ricky/wr048/pages/WR048-pdf12-print10.webp",
           "audio": "./assets/wacky-ricky/wr048/WR048-pdf12-print10.mp3",
@@ -16487,12 +16566,13 @@ window.KakaWackyRickyManifest = {
             "star!"
           ],
           "blanks": [
+            "gold",
             "star!"
           ],
           "choices": [
-            "star!",
-            "ahead.",
-            "books"
+            "gold star!",
+            "spelling words?",
+            "Good luck!"
           ],
           "image": "./assets/wacky-ricky/wr048/pages/WR048-pdf13-print11.webp",
           "audio": "./assets/wacky-ricky/wr048/WR048-pdf13-print11.mp3",
@@ -16607,7 +16687,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "cold!",
-            "games.",
+            "great,",
             "loud."
           ],
           "image": "./assets/wacky-ricky/wr049/pages/WR049-pdf03-print02.webp",
@@ -16703,7 +16783,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "Open",
             "tall!",
-            "Yuck!"
+            "130"
           ],
           "image": "./assets/wacky-ricky/wr049/pages/WR049-pdf06-print05.webp",
           "audio": "./assets/wacky-ricky/wr049/WR049-pdf06-print05.mp3",
@@ -16733,12 +16813,13 @@ window.KakaWackyRickyManifest = {
             "games."
           ],
           "blanks": [
+            "computer",
             "games."
           ],
           "choices": [
-            "games.",
-            "any",
-            "Breathe"
+            "computer games.",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr049/pages/WR049-pdf07-print06.webp",
           "audio": "./assets/wacky-ricky/wr049/WR049-pdf07-print06.mp3",
@@ -16806,7 +16887,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "tall",
-            "Fox.",
+            "games.",
             "many"
           ],
           "image": "./assets/wacky-ricky/wr049/pages/WR049-pdf09-print08.webp",
@@ -16859,12 +16940,12 @@ window.KakaWackyRickyManifest = {
             "Whew!"
           ],
           "blanks": [
-            "Whew!"
+            "today."
           ],
           "choices": [
-            "Whew!",
-            "eyes.",
-            "more"
+            "today.",
+            "great,",
+            "eyes."
           ],
           "image": "./assets/wacky-ricky/wr049/pages/WR049-pdf11-print10.webp",
           "audio": "./assets/wacky-ricky/wr049/WR049-pdf11-print10.mp3",
@@ -16961,12 +17042,13 @@ window.KakaWackyRickyManifest = {
             "helper."
           ],
           "blanks": [
-            "helper."
+            "next",
+            "trick,"
           ],
           "choices": [
-            "helper.",
-            "hat.",
-            "become"
+            "next trick,",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr050/pages/WR050-pdf05-print03.webp",
           "audio": "./assets/wacky-ricky/wr050/WR050-pdf05-print03.mp3",
@@ -17013,7 +17095,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "Come",
             "hat.",
-            "scared"
+            "brother?"
           ],
           "image": "./assets/wacky-ricky/wr050/pages/WR050-pdf07-print05.webp",
           "audio": "./assets/wacky-ricky/wr050/WR050-pdf07-print05.mp3",
@@ -17367,12 +17449,13 @@ window.KakaWackyRickyManifest = {
             "have?"
           ],
           "blanks": [
+            "much",
             "money"
           ],
           "choices": [
-            "money",
-            "Fifteen",
-            "want"
+            "much money",
+            "five dollars",
+            "Fifteen dollars,"
           ],
           "image": "./assets/wacky-ricky/wr051/pages/WR051-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr051/WR051-pdf05.mp3",
@@ -17528,12 +17611,13 @@ window.KakaWackyRickyManifest = {
             "money!"
           ],
           "blanks": [
+            "make",
             "money!"
           ],
           "choices": [
-            "money!",
-            "eighteen.",
-            "Already?"
+            "make money!",
+            "much money",
+            "five dollars"
           ],
           "image": "./assets/wacky-ricky/wr051/pages/WR051-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr051/WR051-pdf10.mp3",
@@ -17677,12 +17761,13 @@ window.KakaWackyRickyManifest = {
             "money."
           ],
           "blanks": [
+            "make",
             "money."
           ],
           "choices": [
-            "money.",
-            "kind",
-            "Good"
+            "make money.",
+            "hot chocolate.",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr052/pages/WR052-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr052/WR052-pdf05.mp3",
@@ -17773,12 +17858,13 @@ window.KakaWackyRickyManifest = {
             "chocolate."
           ],
           "blanks": [
+            "hot",
             "chocolate."
           ],
           "choices": [
-            "chocolate.",
-            "money.",
-            "morning,"
+            "hot chocolate.",
+            "make money.",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr052/pages/WR052-pdf08.webp",
           "audio": "./assets/wacky-ricky/wr052/WR052-pdf08.mp3",
@@ -18066,12 +18152,13 @@ window.KakaWackyRickyManifest = {
             "here."
           ],
           "blanks": [
-            "photo"
+            "picture",
+            "frame!"
           ],
           "choices": [
-            "photo",
-            "true",
-            "story"
+            "picture frame!",
+            "Happy holidays,",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr053/pages/WR053-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr053/WR053-pdf10.mp3",
@@ -18207,12 +18294,13 @@ window.KakaWackyRickyManifest = {
             "everyone!"
           ],
           "blanks": [
-            "everyone!"
+            "Happy",
+            "holidays,"
           ],
           "choices": [
-            "everyone!",
-            "story",
-            "picture"
+            "Happy holidays,",
+            "picture frame!",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr053/pages/WR053-pdf14.webp",
           "audio": "./assets/wacky-ricky/wr053/WR053-pdf14.mp3",
@@ -18250,12 +18338,13 @@ window.KakaWackyRickyManifest = {
             "Yeah."
           ],
           "blanks": [
+            "new",
             "year,"
           ],
           "choices": [
-            "year,",
-            "already",
-            "study"
+            "new year,",
+            "New Year’s",
+            "Come back"
           ],
           "image": "./assets/wacky-ricky/wr054/pages/WR054-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr054/WR054-pdf03.mp3",
@@ -18280,12 +18369,13 @@ window.KakaWackyRickyManifest = {
             "resolution?"
           ],
           "blanks": [
+            "New",
             "Year’s"
           ],
           "choices": [
-            "Year’s",
-            "school.",
-            "back"
+            "New Year’s",
+            "new year,",
+            "Come back"
           ],
           "image": "./assets/wacky-ricky/wr054/pages/WR054-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr054/WR054-pdf04.mp3",
@@ -18515,12 +18605,13 @@ window.KakaWackyRickyManifest = {
             "here!"
           ],
           "blanks": [
+            "Come",
             "back"
           ],
           "choices": [
-            "back",
-            "study",
-            "already"
+            "Come back",
+            "new year,",
+            "New Year’s"
           ],
           "image": "./assets/wacky-ricky/wr054/pages/WR054-pdf12.webp",
           "audio": "./assets/wacky-ricky/wr054/WR054-pdf12.mp3",
@@ -18608,12 +18699,13 @@ window.KakaWackyRickyManifest = {
             "boys?"
           ],
           "blanks": [
+            "those",
             "boys?"
           ],
           "choices": [
-            "boys?",
-            "solve",
-            "problem?"
+            "those boys?",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr055/pages/WR055-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr055/WR055-pdf03.mp3",
@@ -18639,7 +18731,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "hurt!",
             "ball",
-            "pushing"
+            "someone."
           ],
           "image": "./assets/wacky-ricky/wr055/pages/WR055-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr055/WR055-pdf04.mp3",
@@ -18667,7 +18759,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "matter",
             "jacket,",
-            "apologize"
+            "Try"
           ],
           "image": "./assets/wacky-ricky/wr055/pages/WR055-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr055/WR055-pdf05.mp3",
@@ -18706,7 +18798,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "ball",
             "hurt!",
-            "jacket,"
+            "matter"
           ],
           "image": "./assets/wacky-ricky/wr055/pages/WR055-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr055/WR055-pdf06.mp3",
@@ -18736,7 +18828,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "problem?",
             "those",
-            "boys?"
+            "ignore"
           ],
           "image": "./assets/wacky-ricky/wr055/pages/WR055-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr055/WR055-pdf07.mp3",
@@ -18761,7 +18853,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "really.",
             "behaved",
-            "pushing"
+            "solve"
           ],
           "image": "./assets/wacky-ricky/wr055/pages/WR055-pdf08.webp",
           "audio": "./assets/wacky-ricky/wr055/WR055-pdf08.mp3",
@@ -18797,7 +18889,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "nice.",
             "pushing",
-            "yesterday."
+            "took"
           ],
           "image": "./assets/wacky-ricky/wr055/pages/WR055-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr055/WR055-pdf09.mp3",
@@ -18830,7 +18922,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "someone.",
             "matter",
-            "ball"
+            "problem?"
           ],
           "image": "./assets/wacky-ricky/wr055/pages/WR055-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr055/WR055-pdf10.mp3",
@@ -18858,7 +18950,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "jacket,",
             "matter",
-            "took"
+            "apologize"
           ],
           "image": "./assets/wacky-ricky/wr055/pages/WR055-pdf11.webp",
           "audio": "./assets/wacky-ricky/wr055/WR055-pdf11.mp3",
@@ -18914,8 +19006,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "yesterday.",
-            "here’s",
-            "Look,"
+            "solve",
+            "nice."
           ],
           "image": "./assets/wacky-ricky/wr055/pages/WR055-pdf13.webp",
           "audio": "./assets/wacky-ricky/wr055/WR055-pdf13.mp3",
@@ -18942,7 +19034,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "nice,",
             "hurt!",
-            "Try"
+            "way?"
           ],
           "image": "./assets/wacky-ricky/wr055/pages/WR055-pdf14.webp",
           "audio": "./assets/wacky-ricky/wr055/WR055-pdf14.mp3",
@@ -18985,12 +19077,13 @@ window.KakaWackyRickyManifest = {
             "pairs."
           ],
           "blanks": [
-            "pairs."
+            "science",
+            "project,"
           ],
           "choices": [
-            "pairs.",
-            "want",
-            "Those"
+            "science project,",
+            "Those cookies",
+            "brother, Victor."
           ],
           "image": "./assets/wacky-ricky/wr056/pages/WR056-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr056/WR056-pdf03.mp3",
@@ -19214,12 +19307,12 @@ window.KakaWackyRickyManifest = {
             "Hello."
           ],
           "blanks": [
-            "who’s"
+            "Victor."
           ],
           "choices": [
-            "who’s",
-            "one",
-            "work"
+            "Victor.",
+            "game?",
+            "started"
           ],
           "image": "./assets/wacky-ricky/wr056/pages/WR056-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr056/WR056-pdf10.mp3",
@@ -19248,12 +19341,13 @@ window.KakaWackyRickyManifest = {
             "cool."
           ],
           "blanks": [
-            "cool."
+            "new",
+            "game?"
           ],
           "choices": [
-            "cool.",
-            "home",
-            "time."
+            "new game?",
+            "science project,",
+            "Those cookies"
           ],
           "image": "./assets/wacky-ricky/wr056/pages/WR056-pdf11.webp",
           "audio": "./assets/wacky-ricky/wr056/WR056-pdf11.mp3",
@@ -19283,12 +19377,13 @@ window.KakaWackyRickyManifest = {
             "time."
           ],
           "blanks": [
-            "time."
+            "play",
+            "one"
           ],
           "choices": [
-            "time.",
-            "because,",
-            "want"
+            "play one",
+            "science project,",
+            "Those cookies"
           ],
           "image": "./assets/wacky-ricky/wr056/pages/WR056-pdf13.webp",
           "audio": "./assets/wacky-ricky/wr056/WR056-pdf13.mp3",
@@ -19367,12 +19462,13 @@ window.KakaWackyRickyManifest = {
             "today."
           ],
           "blanks": [
-            "today."
+            "see",
+            "everyone"
           ],
           "choices": [
-            "today.",
-            "anymore.",
-            "project?"
+            "see everyone",
+            "play baseball?",
+            "Playing baseball."
           ],
           "image": "./assets/wacky-ricky/wr057/pages/WR057-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr057/WR057-pdf04.mp3",
@@ -19404,7 +19500,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "talk",
             "Fine",
-            "brother"
+            "friends"
           ],
           "image": "./assets/wacky-ricky/wr057/pages/WR057-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr057/WR057-pdf05.mp3",
@@ -19427,12 +19523,13 @@ window.KakaWackyRickyManifest = {
             "baseball?"
           ],
           "blanks": [
+            "play",
             "baseball?"
           ],
           "choices": [
-            "baseball?",
-            "time",
-            "maybe"
+            "play baseball?",
+            "see everyone",
+            "Playing baseball."
           ],
           "image": "./assets/wacky-ricky/wr057/pages/WR057-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr057/WR057-pdf06.mp3",
@@ -19466,8 +19563,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "wonder",
-            "cool.",
-            "Glad"
+            "everyone",
+            "how’s"
           ],
           "image": "./assets/wacky-ricky/wr057/pages/WR057-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr057/WR057-pdf07.mp3",
@@ -19490,12 +19587,13 @@ window.KakaWackyRickyManifest = {
             "baseball."
           ],
           "blanks": [
+            "Playing",
             "baseball."
           ],
           "choices": [
-            "baseball.",
-            "jealous",
-            "Because"
+            "Playing baseball.",
+            "see everyone",
+            "play baseball?"
           ],
           "image": "./assets/wacky-ricky/wr057/pages/WR057-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr057/WR057-pdf09.mp3",
@@ -19555,7 +19653,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "care?",
-            "maybe",
+            "Ready",
             "talk"
           ],
           "image": "./assets/wacky-ricky/wr057/pages/WR057-pdf11.webp",
@@ -19585,8 +19683,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "cool.",
-            "play",
-            "today."
+            "anymore.",
+            "brother"
           ],
           "image": "./assets/wacky-ricky/wr057/pages/WR057-pdf12.webp",
           "audio": "./assets/wacky-ricky/wr057/WR057-pdf12.mp3",
@@ -19693,12 +19791,13 @@ window.KakaWackyRickyManifest = {
             "project."
           ],
           "blanks": [
+            "science",
             "project."
           ],
           "choices": [
-            "project.",
-            "house?",
-            "parents."
+            "science project.",
+            "new partner.",
+            "whose house?"
           ],
           "image": "./assets/wacky-ricky/wr058/pages/WR058-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr058/WR058-pdf03.mp3",
@@ -19728,12 +19827,13 @@ window.KakaWackyRickyManifest = {
             "partner."
           ],
           "blanks": [
+            "new",
             "partner."
           ],
           "choices": [
-            "partner.",
-            "Guess",
-            "whatever"
+            "new partner.",
+            "science project.",
+            "whose house?"
           ],
           "image": "./assets/wacky-ricky/wr058/pages/WR058-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr058/WR058-pdf04.mp3",
@@ -19760,8 +19860,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "Guess",
-            "sure.",
-            "whatever"
+            "partner.",
+            "Call"
           ],
           "image": "./assets/wacky-ricky/wr058/pages/WR058-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr058/WR058-pdf05.mp3",
@@ -19785,7 +19885,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "Zion",
             "play",
-            "started"
+            "whatever"
           ],
           "image": "./assets/wacky-ricky/wr058/pages/WR058-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr058/WR058-pdf06.mp3",
@@ -19817,8 +19917,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "play",
-            "started",
-            "say."
+            "parents.",
+            "need"
           ],
           "image": "./assets/wacky-ricky/wr058/pages/WR058-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr058/WR058-pdf07.mp3",
@@ -19854,8 +19954,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "They’ll",
-            "partner.",
-            "started"
+            "project.",
+            "whose"
           ],
           "image": "./assets/wacky-ricky/wr058/pages/WR058-pdf08.webp",
           "audio": "./assets/wacky-ricky/wr058/WR058-pdf08.mp3",
@@ -19904,7 +20004,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "sure.",
-            "mad.",
+            "They’ll",
             "Guess"
           ],
           "image": "./assets/wacky-ricky/wr058/pages/WR058-pdf09.webp",
@@ -19938,8 +20038,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "talk",
-            "house?",
-            "project."
+            "Zion",
+            "say."
           ],
           "image": "./assets/wacky-ricky/wr058/pages/WR058-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr058/WR058-pdf10.mp3",
@@ -19977,12 +20077,13 @@ window.KakaWackyRickyManifest = {
             "Captain."
           ],
           "blanks": [
+            "destroyed,",
             "Captain."
           ],
           "choices": [
-            "Captain.",
-            "computer",
-            "lied"
+            "destroyed, Captain.",
+            "science project",
+            "big trouble,"
           ],
           "image": "./assets/wacky-ricky/wr059/pages/WR059-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr059/WR059-pdf03.mp3",
@@ -20008,8 +20109,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "young",
-            "lied",
-            "Victor."
+            "must",
+            "well,"
           ],
           "image": "./assets/wacky-ricky/wr059/pages/WR059-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr059/WR059-pdf04.mp3",
@@ -20069,8 +20170,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "house?",
-            "home.",
-            "big"
+            "inside",
+            "Captain."
           ],
           "image": "./assets/wacky-ricky/wr059/pages/WR059-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr059/WR059-pdf06.mp3",
@@ -20123,8 +20224,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "doing",
-            "Victor.",
-            "two"
+            "well,",
+            "Victor’s."
           ],
           "image": "./assets/wacky-ricky/wr059/pages/WR059-pdf08.webp",
           "audio": "./assets/wacky-ricky/wr059/WR059-pdf08.mp3",
@@ -20159,7 +20260,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "project",
             "playing",
-            "come"
+            "home."
           ],
           "image": "./assets/wacky-ricky/wr059/pages/WR059-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr059/WR059-pdf09.mp3",
@@ -20220,12 +20321,13 @@ window.KakaWackyRickyManifest = {
             "us."
           ],
           "blanks": [
-            "lied"
+            "big",
+            "trouble,"
           ],
           "choices": [
-            "lied",
-            "doing",
-            "ready"
+            "big trouble,",
+            "destroyed, Captain.",
+            "science project"
           ],
           "image": "./assets/wacky-ricky/wr059/pages/WR059-pdf11.webp",
           "audio": "./assets/wacky-ricky/wr059/WR059-pdf11.mp3",
@@ -20260,12 +20362,13 @@ window.KakaWackyRickyManifest = {
             "weeks."
           ],
           "blanks": [
-            "weeks."
+            "come",
+            "straight"
           ],
           "choices": [
-            "weeks.",
-            "Victor.",
-            "big"
+            "come straight",
+            "destroyed, Captain.",
+            "science project"
           ],
           "image": "./assets/wacky-ricky/wr059/pages/WR059-pdf12.webp",
           "audio": "./assets/wacky-ricky/wr059/WR059-pdf12.mp3",
@@ -20325,8 +20428,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "house.",
-            "come",
-            "well,"
+            "home.",
+            "big"
           ],
           "image": "./assets/wacky-ricky/wr059/pages/WR059-pdf14.webp",
           "audio": "./assets/wacky-ricky/wr059/WR059-pdf14.mp3",
@@ -20457,12 +20560,13 @@ window.KakaWackyRickyManifest = {
             "mind."
           ],
           "blanks": [
+            "Never",
             "mind."
           ],
           "choices": [
-            "mind.",
-            "talking",
-            "borrow"
+            "Never mind.",
+            "small house?",
+            "friends anymore."
           ],
           "image": "./assets/wacky-ricky/wr060/pages/WR060-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr060/WR060-pdf05.mp3",
@@ -20497,12 +20601,13 @@ window.KakaWackyRickyManifest = {
             "house?"
           ],
           "blanks": [
+            "small",
             "house?"
           ],
           "choices": [
-            "house?",
-            "going?",
-            "friends"
+            "small house?",
+            "Never mind.",
+            "friends anymore."
           ],
           "image": "./assets/wacky-ricky/wr060/pages/WR060-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr060/WR060-pdf06.mp3",
@@ -20906,12 +21011,13 @@ window.KakaWackyRickyManifest = {
             "handshake."
           ],
           "blanks": [
+            "special",
             "handshake."
           ],
           "choices": [
-            "handshake.",
-            "friends",
-            "hurt,"
+            "special handshake.",
+            "special sign",
+            "guys doing?"
           ],
           "image": "./assets/wacky-ricky/wr061/pages/WR061-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr061/WR061-pdf09.mp3",
@@ -20970,12 +21076,13 @@ window.KakaWackyRickyManifest = {
             "catch."
           ],
           "blanks": [
+            "play",
             "catch."
           ],
           "choices": [
-            "catch.",
-            "friendship.",
-            "house,"
+            "play catch.",
+            "special sign",
+            "guys doing?"
           ],
           "image": "./assets/wacky-ricky/wr061/pages/WR061-pdf11.webp",
           "audio": "./assets/wacky-ricky/wr061/WR061-pdf11.mp3",
@@ -21020,7 +21127,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "Saturday,",
-            "take",
+            "well.",
             "sleeping?"
           ],
           "image": "./assets/wacky-ricky/wr062/pages/WR062-pdf02.webp",
@@ -21054,8 +21161,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "well.",
-            "Saturday,",
-            "anything,"
+            "sleeping?",
+            "Saturday,"
           ],
           "image": "./assets/wacky-ricky/wr062/pages/WR062-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr062/WR062-pdf03.mp3",
@@ -21089,7 +21196,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "good",
             "hands.",
-            "anything,"
+            "Saturday,"
           ],
           "image": "./assets/wacky-ricky/wr062/pages/WR062-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr062/WR062-pdf04.mp3",
@@ -21120,12 +21227,13 @@ window.KakaWackyRickyManifest = {
             "rest."
           ],
           "blanks": [
-            "rest."
+            "take",
+            "care"
           ],
           "choices": [
-            "rest.",
-            "feel",
-            "home."
+            "take care",
+            "fever, dear.",
+            "good hands."
           ],
           "image": "./assets/wacky-ricky/wr062/pages/WR062-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr062/WR062-pdf05.mp3",
@@ -21152,12 +21260,13 @@ window.KakaWackyRickyManifest = {
             "hands."
           ],
           "blanks": [
+            "good",
             "hands."
           ],
           "choices": [
-            "hands.",
-            "brought",
-            "dear."
+            "good hands.",
+            "fever, dear.",
+            "take care"
           ],
           "image": "./assets/wacky-ricky/wr062/pages/WR062-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr062/WR062-pdf06.mp3",
@@ -21263,8 +21372,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "sleeping?",
-            "stay",
-            "look"
+            "take",
+            "lots"
           ],
           "image": "./assets/wacky-ricky/wr062/pages/WR062-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr062/WR062-pdf10.mp3",
@@ -21292,7 +21401,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "juice.",
-            "feel",
+            "good",
             "fever,"
           ],
           "image": "./assets/wacky-ricky/wr062/pages/WR062-pdf11.webp",
@@ -21339,8 +21448,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "soup.",
-            "tomato",
-            "put"
+            "chicken",
+            "see"
           ],
           "image": "./assets/wacky-ricky/wr063/pages/WR063-pdf02.webp",
           "audio": "./assets/wacky-ricky/wr063/WR063-pdf02.mp3",
@@ -21374,7 +21483,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "tomato",
-            "put",
+            "see",
             "fruit."
           ],
           "image": "./assets/wacky-ricky/wr063/pages/WR063-pdf03.webp",
@@ -21404,12 +21513,13 @@ window.KakaWackyRickyManifest = {
             "Ricky."
           ],
           "blanks": [
-            "chicken,"
+            "see",
+            "any"
           ],
           "choices": [
-            "chicken,",
-            "we’ll",
-            "tomato"
+            "see any",
+            "chicken-noodle soup.",
+            "find any"
           ],
           "image": "./assets/wacky-ricky/wr063/pages/WR063-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr063/WR063-pdf04.mp3",
@@ -21439,12 +21549,13 @@ window.KakaWackyRickyManifest = {
             "dogs."
           ],
           "blanks": [
+            "hot",
             "dogs."
           ],
           "choices": [
-            "dogs.",
-            "tomato",
-            "neither."
+            "hot dogs.",
+            "chicken-noodle soup.",
+            "find any"
           ],
           "image": "./assets/wacky-ricky/wr063/pages/WR063-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr063/WR063-pdf05.mp3",
@@ -21479,8 +21590,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "fruit.",
-            "Good",
-            "any"
+            "heat",
+            "chicken"
           ],
           "image": "./assets/wacky-ricky/wr063/pages/WR063-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr063/WR063-pdf06.mp3",
@@ -21512,7 +21623,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "minutes.",
             "chicken",
-            "noise,"
+            "something."
           ],
           "image": "./assets/wacky-ricky/wr063/pages/WR063-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr063/WR063-pdf07.mp3",
@@ -21537,8 +21648,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "noise,",
-            "chicken",
-            "we’ll"
+            "Hmm,",
+            "Yuck!"
           ],
           "image": "./assets/wacky-ricky/wr063/pages/WR063-pdf08.webp",
           "audio": "./assets/wacky-ricky/wr063/WR063-pdf08.mp3",
@@ -21626,7 +21737,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "ever",
             "fruit.",
-            "put"
+            "see"
           ],
           "image": "./assets/wacky-ricky/wr063/pages/WR063-pdf11.webp",
           "audio": "./assets/wacky-ricky/wr063/WR063-pdf11.mp3",
@@ -21782,12 +21893,13 @@ window.KakaWackyRickyManifest = {
             "Okay."
           ],
           "blanks": [
-            "spelling"
+            "study",
+            "together?"
           ],
           "choices": [
-            "spelling",
-            "news.",
-            "cookie?"
+            "study together?",
+            "exciting news.",
+            "must spell."
           ],
           "image": "./assets/wacky-ricky/wr064/pages/WR064-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr064/WR064-pdf06.mp3",
@@ -21812,12 +21924,13 @@ window.KakaWackyRickyManifest = {
             "Me!"
           ],
           "blanks": [
+            "spell",
             "“equalize.”"
           ],
           "choices": [
-            "“equalize.”",
-            "words",
-            "“recipient.”"
+            "spell “equalize.”",
+            "exciting news.",
+            "must spell."
           ],
           "image": "./assets/wacky-ricky/wr064/pages/WR064-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr064/WR064-pdf07.mp3",
@@ -22099,12 +22212,13 @@ window.KakaWackyRickyManifest = {
             "win."
           ],
           "blanks": [
-            "hope"
+            "final",
+            "five."
           ],
           "choices": [
-            "hope",
-            "incorrect.",
-            "happy"
+            "final five.",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr065/pages/WR065-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr065/WR065-pdf07.mp3",
@@ -22260,8 +22374,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "want",
-            "long",
-            "winner!"
+            "going",
+            "sweater."
           ],
           "image": "./assets/wacky-ricky/wr066/pages/WR066-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr066/WR066-pdf03.mp3",
@@ -22298,7 +22412,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "course.",
             "red",
-            "pretty,"
+            "Presumptuous."
           ],
           "image": "./assets/wacky-ricky/wr066/pages/WR066-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr066/WR066-pdf04.mp3",
@@ -22321,12 +22435,13 @@ window.KakaWackyRickyManifest = {
             "sweater."
           ],
           "blanks": [
+            "red",
             "sweater."
           ],
           "choices": [
-            "sweater.",
-            "friend",
-            "course."
+            "red sweater.",
+            "long time.",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr066/pages/WR066-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr066/WR066-pdf05.mp3",
@@ -22351,8 +22466,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "pretty,",
-            "lucky",
-            "winner!"
+            "nervous.",
+            "cheer"
           ],
           "image": "./assets/wacky-ricky/wr066/pages/WR066-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr066/WR066-pdf06.mp3",
@@ -22385,8 +22500,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "going",
-            "want",
-            "friend"
+            "long",
+            "Presumptuous."
           ],
           "image": "./assets/wacky-ricky/wr066/pages/WR066-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr066/WR066-pdf07.mp3",
@@ -22415,7 +22530,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "cheer",
-            "spell",
+            "nervous.",
             "going"
           ],
           "image": "./assets/wacky-ricky/wr066/pages/WR066-pdf08.webp",
@@ -22447,12 +22562,13 @@ window.KakaWackyRickyManifest = {
             "her."
           ],
           "blanks": [
-            "cheer"
+            "long",
+            "time."
           ],
           "choices": [
-            "cheer",
-            "nervous.",
-            "guys!"
+            "long time.",
+            "red sweater.",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr066/pages/WR066-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr066/WR066-pdf09.mp3",
@@ -22479,8 +22595,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "spell",
-            "Hurray",
-            "long"
+            "hope",
+            "incorrect."
           ],
           "image": "./assets/wacky-ricky/wr066/pages/WR066-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr066/WR066-pdf10.mp3",
@@ -22505,8 +22621,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "incorrect.",
-            "wearing",
-            "win."
+            "hope",
+            "Camaraderie."
           ],
           "image": "./assets/wacky-ricky/wr066/pages/WR066-pdf11.webp",
           "audio": "./assets/wacky-ricky/wr066/WR066-pdf11.mp3",
@@ -22551,8 +22667,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "winner!",
-            "spell",
-            "course."
+            "course.",
+            "going"
           ],
           "image": "./assets/wacky-ricky/wr066/pages/WR066-pdf13.webp",
           "audio": "./assets/wacky-ricky/wr066/WR066-pdf13.mp3",
@@ -22571,14 +22687,8 @@ window.KakaWackyRickyManifest = {
             "for",
             "Brenda!"
           ],
-          "blanks": [
-            "Hurray"
-          ],
-          "choices": [
-            "Hurray",
-            "Camaraderie.",
-            "incorrect."
-          ],
+          "blanks": [],
+          "choices": [],
           "image": "./assets/wacky-ricky/wr066/pages/WR066-pdf14.webp",
           "audio": "./assets/wacky-ricky/wr066/WR066-pdf14.mp3",
           "sourceText": "12 Hurray for Brenda!",
@@ -22747,12 +22857,13 @@ window.KakaWackyRickyManifest = {
             "Brenda?"
           ],
           "blanks": [
-            "shopping,"
+            "those",
+            "boxes."
           ],
           "choices": [
-            "shopping,",
-            "bee.",
-            "smart."
+            "those boxes.",
+            "new city.",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr067/pages/WR067-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr067/WR067-pdf06.mp3",
@@ -22841,12 +22952,13 @@ window.KakaWackyRickyManifest = {
             "city."
           ],
           "blanks": [
+            "new",
             "city."
           ],
           "choices": [
-            "city.",
-            "going",
-            "weekend."
+            "new city.",
+            "those boxes.",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr067/pages/WR067-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr067/WR067-pdf09.mp3",
@@ -22981,12 +23093,13 @@ window.KakaWackyRickyManifest = {
             "not."
           ],
           "blanks": [
-            "hope"
+            "always",
+            "remember"
           ],
           "choices": [
-            "hope",
-            "never",
-            "think"
+            "always remember",
+            "never forget",
+            "We’ll miss"
           ],
           "image": "./assets/wacky-ricky/wr068/pages/WR068-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr068/WR068-pdf04.mp3",
@@ -23023,12 +23136,13 @@ window.KakaWackyRickyManifest = {
             "won’t."
           ],
           "blanks": [
-            "sure"
+            "never",
+            "forget"
           ],
           "choices": [
-            "sure",
-            "give",
-            "bug"
+            "never forget",
+            "always remember",
+            "We’ll miss"
           ],
           "image": "./assets/wacky-ricky/wr068/pages/WR068-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr068/WR068-pdf05.mp3",
@@ -23292,12 +23406,13 @@ window.KakaWackyRickyManifest = {
             "stuff?"
           ],
           "blanks": [
-            "stuff?"
+            "see",
+            "any"
           ],
           "choices": [
-            "stuff?",
-            "house.",
-            "live"
+            "see any",
+            "went inside",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr069/pages/WR069-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr069/WR069-pdf05.mp3",
@@ -23427,12 +23542,13 @@ window.KakaWackyRickyManifest = {
             "Kitty."
           ],
           "blanks": [
-            "house."
+            "went",
+            "inside"
           ],
           "choices": [
-            "house.",
-            "gone",
-            "fun"
+            "went inside",
+            "see any",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr069/pages/WR069-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr069/WR069-pdf09.mp3",
@@ -23500,12 +23616,13 @@ window.KakaWackyRickyManifest = {
             "everyone."
           ],
           "blanks": [
-            "everyone."
+            "new",
+            "student"
           ],
           "choices": [
-            "everyone.",
-            "Katy?",
-            "because"
+            "new student",
+            "sister Katy?",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr070/pages/WR070-pdf02.webp",
           "audio": "./assets/wacky-ricky/wr070/WR070-pdf02.mp3",
@@ -23712,12 +23829,13 @@ window.KakaWackyRickyManifest = {
             "Huh?"
           ],
           "blanks": [
+            "sister",
             "Katy?"
           ],
           "choices": [
-            "Katy?",
-            "everyone.",
-            "Merry"
+            "sister Katy?",
+            "new student",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr070/pages/WR070-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr070/WR070-pdf10.mp3",
@@ -23858,12 +23976,13 @@ window.KakaWackyRickyManifest = {
             "reading."
           ],
           "blanks": [
-            "reading."
+            "jumping",
+            "rope."
           ],
           "choices": [
-            "reading.",
-            "pink.",
-            "Good-bye,"
+            "jumping rope.",
+            "favorite colors.",
+            "black, green,"
           ],
           "image": "./assets/wacky-ricky/wr071/pages/WR071-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr071/WR071-pdf04.mp3",
@@ -24033,12 +24152,13 @@ window.KakaWackyRickyManifest = {
             "."
           ],
           "blanks": [
-            "purple"
+            "black,",
+            "green,"
           ],
           "choices": [
-            "purple",
-            "think",
-            "drink."
+            "black, green,",
+            "jumping rope.",
+            "favorite colors."
           ],
           "image": "./assets/wacky-ricky/wr071/pages/WR071-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr071/WR071-pdf09.mp3",
@@ -24391,12 +24511,13 @@ window.KakaWackyRickyManifest = {
             "allowed."
           ],
           "blanks": [
+            "girls",
             "allowed."
           ],
           "choices": [
-            "allowed.",
-            "all",
-            "kind"
+            "girls allowed.",
+            "boys’ club.”",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr072/pages/WR072-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr072/WR072-pdf10.mp3",
@@ -24426,12 +24547,13 @@ window.KakaWackyRickyManifest = {
             "it?"
           ],
           "blanks": [
-            "going"
+            "boys’",
+            "club.”"
           ],
           "choices": [
-            "going",
-            "homework?",
-            "play?"
+            "boys’ club.”",
+            "girls allowed.",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr072/pages/WR072-pdf11.webp",
           "audio": "./assets/wacky-ricky/wr072/WR072-pdf11.mp3",
@@ -24475,12 +24597,13 @@ window.KakaWackyRickyManifest = {
             "one?"
           ],
           "blanks": [
-            "find"
+            "find",
+            "one?"
           ],
           "choices": [
-            "find",
-            "playground?",
-            "lot?"
+            "find one?",
+            "long time.",
+            "find another"
           ],
           "image": "./assets/wacky-ricky/wr073/pages/WR073-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr073/WR073-pdf03.mp3",
@@ -24547,12 +24670,13 @@ window.KakaWackyRickyManifest = {
             "clubhouse!"
           ],
           "blanks": [
-            "clubhouse!"
+            "find",
+            "another"
           ],
           "choices": [
-            "clubhouse!",
-            "many",
-            "doing?"
+            "find another",
+            "find one?",
+            "long time."
           ],
           "image": "./assets/wacky-ricky/wr073/pages/WR073-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr073/WR073-pdf05.mp3",
@@ -24580,8 +24704,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "girls.",
-            "time.",
-            "bother"
+            "We’ll",
+            "club."
           ],
           "image": "./assets/wacky-ricky/wr073/pages/WR073-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr073/WR073-pdf06.mp3",
@@ -24610,8 +24734,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "people.",
-            "one?",
-            "find"
+            "playground?",
+            "long"
           ],
           "image": "./assets/wacky-ricky/wr073/pages/WR073-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr073/WR073-pdf07.mp3",
@@ -24640,8 +24764,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "parking",
-            "many",
-            "find"
+            "need",
+            "Joe’s"
           ],
           "image": "./assets/wacky-ricky/wr073/pages/WR073-pdf08.webp",
           "audio": "./assets/wacky-ricky/wr073/WR073-pdf08.mp3",
@@ -24710,7 +24834,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "allowed!",
-            "Place?",
+            "club.",
             "lived"
           ],
           "image": "./assets/wacky-ricky/wr073/pages/WR073-pdf10.webp",
@@ -24760,8 +24884,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "club!",
-            "enter",
-            "Who’s"
+            "anyway!",
+            "need"
           ],
           "image": "./assets/wacky-ricky/wr074/pages/WR074-pdf02.webp",
           "audio": "./assets/wacky-ricky/wr074/WR074-pdf02.mp3",
@@ -24791,7 +24915,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "need",
-            "allowed",
+            "monster",
             "tent."
           ],
           "image": "./assets/wacky-ricky/wr074/pages/WR074-pdf03.webp",
@@ -24876,12 +25000,13 @@ window.KakaWackyRickyManifest = {
             "sundae”?"
           ],
           "blanks": [
+            "caramel-frosted",
             "sundae”?"
           ],
           "choices": [
-            "sundae”?",
-            "“Zion",
-            "much"
+            "caramel-frosted sundae”?",
+            "monster rules”?",
+            "allowed anyway!"
           ],
           "image": "./assets/wacky-ricky/wr074/pages/WR074-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr074/WR074-pdf06.mp3",
@@ -24907,12 +25032,13 @@ window.KakaWackyRickyManifest = {
             "rules”?"
           ],
           "blanks": [
+            "monster",
             "rules”?"
           ],
           "choices": [
-            "rules”?",
-            "“Zion",
-            "allowed"
+            "monster rules”?",
+            "caramel-frosted sundae”?",
+            "allowed anyway!"
           ],
           "image": "./assets/wacky-ricky/wr074/pages/WR074-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr074/WR074-pdf07.mp3",
@@ -24939,10 +25065,10 @@ window.KakaWackyRickyManifest = {
             "there?"
           ],
           "blanks": [
-            "Who’s"
+            "book."
           ],
           "choices": [
-            "Who’s",
+            "book.",
             "password?",
             "say"
           ],
@@ -24973,8 +25099,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "know.",
-            "rules”?",
-            "sundae”?"
+            "say",
+            "allowed"
           ],
           "image": "./assets/wacky-ricky/wr074/pages/WR074-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr074/WR074-pdf09.mp3",
@@ -25002,7 +25128,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "clubhouse.",
-            "Who’s",
+            "“Zion",
             "girls"
           ],
           "image": "./assets/wacky-ricky/wr074/pages/WR074-pdf10.webp",
@@ -25029,8 +25155,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "anyway!",
-            "Who’s",
-            "III”?"
+            "“Zion",
+            "own"
           ],
           "image": "./assets/wacky-ricky/wr074/pages/WR074-pdf11.webp",
           "audio": "./assets/wacky-ricky/wr074/WR074-pdf11.mp3",
@@ -25080,7 +25206,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "know.",
             "want",
-            "spray"
+            "water"
           ],
           "image": "./assets/wacky-ricky/wr075/pages/WR075-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr075/WR075-pdf03.mp3",
@@ -25109,8 +25235,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "want",
-            "spray",
-            "meeting."
+            "idea.",
+            "having"
           ],
           "image": "./assets/wacky-ricky/wr075/pages/WR075-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr075/WR075-pdf04.mp3",
@@ -25136,7 +25262,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "Come",
-            "guess",
+            "water",
             "good"
           ],
           "image": "./assets/wacky-ricky/wr075/pages/WR075-pdf05.webp",
@@ -25237,12 +25363,13 @@ window.KakaWackyRickyManifest = {
             "password."
           ],
           "blanks": [
-            "password."
+            "water",
+            "guns?"
           ],
           "choices": [
-            "password.",
-            "all",
-            "want"
+            "water guns?",
+            "boys’ club",
+            "good idea."
           ],
           "image": "./assets/wacky-ricky/wr075/pages/WR075-pdf08.webp",
           "audio": "./assets/wacky-ricky/wr075/WR075-pdf08.mp3",
@@ -25273,12 +25400,13 @@ window.KakaWackyRickyManifest = {
             "idea."
           ],
           "blanks": [
+            "good",
             "idea."
           ],
           "choices": [
-            "idea.",
-            "guess",
-            "mad?"
+            "good idea.",
+            "boys’ club",
+            "water guns?"
           ],
           "image": "./assets/wacky-ricky/wr075/pages/WR075-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr075/WR075-pdf09.mp3",
@@ -25370,12 +25498,13 @@ window.KakaWackyRickyManifest = {
             "though."
           ],
           "blanks": [
+            "happy",
             "though."
           ],
           "choices": [
-            "though.",
-            "somewhere.",
-            "trip."
+            "happy though.",
+            "field trip.",
+            "reptile farm."
           ],
           "image": "./assets/wacky-ricky/wr076/pages/WR076-pdf02.webp",
           "audio": "./assets/wacky-ricky/wr076/WR076-pdf02.mp3",
@@ -25400,12 +25529,13 @@ window.KakaWackyRickyManifest = {
             "trip."
           ],
           "blanks": [
+            "field",
             "trip."
           ],
           "choices": [
-            "trip.",
-            "looks",
-            "reptile"
+            "field trip.",
+            "happy though.",
+            "reptile farm."
           ],
           "image": "./assets/wacky-ricky/wr076/pages/WR076-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr076/WR076-pdf03.mp3",
@@ -25432,8 +25562,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "going,",
-            "see",
-            "Urgh!"
+            "surprise",
+            "bad"
           ],
           "image": "./assets/wacky-ricky/wr076/pages/WR076-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr076/WR076-pdf05.mp3",
@@ -25498,8 +25628,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "idea,",
-            "though.",
-            "somewhere."
+            "lizards.",
+            "surprise"
           ],
           "image": "./assets/wacky-ricky/wr076/pages/WR076-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr076/WR076-pdf07.mp3",
@@ -25532,7 +25662,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "looking",
-            "away!",
+            "see",
             "reptile"
           ],
           "image": "./assets/wacky-ricky/wr076/pages/WR076-pdf08.webp",
@@ -25562,7 +25692,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "surprise",
-            "idea,",
+            "know",
             "snakes"
           ],
           "image": "./assets/wacky-ricky/wr076/pages/WR076-pdf09.webp",
@@ -25687,12 +25817,13 @@ window.KakaWackyRickyManifest = {
             "meters."
           ],
           "blanks": [
+            "four",
             "meters."
           ],
           "choices": [
-            "meters.",
-            "Help",
-            "everybody?"
+            "four meters.",
+            "“Wolf spider.”",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr077/pages/WR077-pdf02.webp",
           "audio": "./assets/wacky-ricky/wr077/WR077-pdf02.mp3",
@@ -25832,12 +25963,13 @@ window.KakaWackyRickyManifest = {
             "Urgh!"
           ],
           "blanks": [
-            "Urgh!"
+            "“Wolf",
+            "spider.”"
           ],
           "choices": [
-            "Urgh!",
-            "Alligators!",
-            "Look"
+            "“Wolf spider.”",
+            "four meters.",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr077/pages/WR077-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr077/WR077-pdf09.mp3",
@@ -25980,12 +26112,13 @@ window.KakaWackyRickyManifest = {
             "you!"
           ],
           "blanks": [
-            "glad"
+            "big",
+            "trouble,"
           ],
           "choices": [
-            "glad",
-            "guess.",
-            "morning,"
+            "big trouble,",
+            "really angry,",
+            "big mistake."
           ],
           "image": "./assets/wacky-ricky/wr078/pages/WR078-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr078/WR078-pdf03.mp3",
@@ -26110,12 +26243,13 @@ window.KakaWackyRickyManifest = {
             "mistake."
           ],
           "blanks": [
+            "big",
             "mistake."
           ],
           "choices": [
-            "mistake.",
-            "going",
-            "think"
+            "big mistake.",
+            "big trouble,",
+            "really angry,"
           ],
           "image": "./assets/wacky-ricky/wr078/pages/WR078-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr078/WR078-pdf07.mp3",
@@ -26264,12 +26398,13 @@ window.KakaWackyRickyManifest = {
             "baseball?"
           ],
           "blanks": [
+            "play",
             "baseball?"
           ],
           "choices": [
-            "baseball?",
-            "likes",
-            "friends"
+            "play baseball?",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr079/pages/WR079-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr079/WR079-pdf03.mp3",
@@ -26558,12 +26693,13 @@ window.KakaWackyRickyManifest = {
             "me?"
           ],
           "blanks": [
+            "everyone",
             "laughing"
           ],
           "choices": [
-            "laughing",
-            "guys.",
-            "kind"
+            "everyone laughing",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr080/pages/WR080-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr080/WR080-pdf04.mp3",
@@ -26850,12 +26986,13 @@ window.KakaWackyRickyManifest = {
             "today?"
           ],
           "blanks": [
-            "today?"
+            "stay",
+            "home"
           ],
           "choices": [
-            "today?",
-            "Breakfast!",
-            "well,"
+            "stay home",
+            "whipped cream!",
+            "Blueberry pancakes?"
           ],
           "image": "./assets/wacky-ricky/wr081/pages/WR081-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr081/WR081-pdf04.mp3",
@@ -26878,12 +27015,13 @@ window.KakaWackyRickyManifest = {
             "cream!"
           ],
           "blanks": [
+            "whipped",
             "cream!"
           ],
           "choices": [
-            "cream!",
-            "stay",
-            "see"
+            "whipped cream!",
+            "stay home",
+            "Blueberry pancakes?"
           ],
           "image": "./assets/wacky-ricky/wr081/pages/WR081-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr081/WR081-pdf05.mp3",
@@ -27081,8 +27219,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "girlfriend?",
-            "fight?",
-            "Maybe"
+            "Forget",
+            "fight?"
           ],
           "image": "./assets/wacky-ricky/wr082/pages/WR082-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr082/WR082-pdf03.mp3",
@@ -27111,7 +27249,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "fine,",
             "time.",
-            "ignore"
+            "invite"
           ],
           "image": "./assets/wacky-ricky/wr082/pages/WR082-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr082/WR082-pdf04.mp3",
@@ -27152,7 +27290,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "play",
             "house.",
-            "Forget"
+            "ignore"
           ],
           "image": "./assets/wacky-ricky/wr082/pages/WR082-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr082/WR082-pdf05.mp3",
@@ -27176,12 +27314,13 @@ window.KakaWackyRickyManifest = {
             "go."
           ],
           "blanks": [
-            "Forget"
+            "next",
+            "time."
           ],
           "choices": [
-            "Forget",
-            "invite",
-            "baseball?"
+            "next time.",
+            "nice surprise!",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr082/pages/WR082-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr082/WR082-pdf06.mp3",
@@ -27207,8 +27346,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "ringing,",
-            "Maybe",
-            "time."
+            "fine,",
+            "wait!"
           ],
           "image": "./assets/wacky-ricky/wr082/pages/WR082-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr082/WR082-pdf07.mp3",
@@ -27261,12 +27400,13 @@ window.KakaWackyRickyManifest = {
             "surprise!"
           ],
           "blanks": [
+            "nice",
             "surprise!"
           ],
           "choices": [
-            "surprise!",
-            "ignore",
-            "girlfriend?"
+            "nice surprise!",
+            "next time.",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr082/pages/WR082-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr082/WR082-pdf09.mp3",
@@ -27369,12 +27509,13 @@ window.KakaWackyRickyManifest = {
             "summer?"
           ],
           "blanks": [
-            "summer?"
+            "special",
+            "plans"
           ],
           "choices": [
-            "summer?",
-            "going",
-            "house."
+            "special plans",
+            "last day",
+            "old girlfriend."
           ],
           "image": "./assets/wacky-ricky/wr083/pages/WR083-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr083/WR083-pdf03.mp3",
@@ -27565,12 +27706,13 @@ window.KakaWackyRickyManifest = {
             "vacation."
           ],
           "blanks": [
-            "vacation."
+            "take",
+            "photos"
           ],
           "choices": [
-            "vacation.",
-            "special",
-            "Today"
+            "take photos",
+            "last day",
+            "special plans"
           ],
           "image": "./assets/wacky-ricky/wr083/pages/WR083-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr083/WR083-pdf09.mp3",
@@ -27748,12 +27890,13 @@ window.KakaWackyRickyManifest = {
             "boys."
           ],
           "blanks": [
+            "tickets,",
             "boys."
           ],
           "choices": [
-            "boys.",
-            "bus",
-            "help"
+            "tickets, boys.",
+            "New Mont.",
+            "adventure begins!"
           ],
           "image": "./assets/wacky-ricky/wr084/pages/WR084-pdf05.webp",
           "audio": "./assets/wacky-ricky/wr084/WR084-pdf05.mp3",
@@ -27778,12 +27921,13 @@ window.KakaWackyRickyManifest = {
             "Newman."
           ],
           "blanks": [
-            "Newman."
+            "New",
+            "Mont."
           ],
           "choices": [
-            "Newman.",
-            "ourselves!",
-            "worry."
+            "New Mont.",
+            "tickets, boys.",
+            "adventure begins!"
           ],
           "image": "./assets/wacky-ricky/wr084/pages/WR084-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr084/WR084-pdf06.mp3",
@@ -28091,12 +28235,13 @@ window.KakaWackyRickyManifest = {
             "Mont."
           ],
           "blanks": [
+            "New",
             "Mont."
           ],
           "choices": [
-            "Mont.",
-            "sure,",
-            "getting"
+            "New Mont.",
+            "already getting",
+            "change buses"
           ],
           "image": "./assets/wacky-ricky/wr085/pages/WR085-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr085/WR085-pdf07.mp3",
@@ -28154,12 +28299,13 @@ window.KakaWackyRickyManifest = {
             "Mont."
           ],
           "blanks": [
+            "New",
             "Mont."
           ],
           "choices": [
-            "Mont.",
-            "far",
-            "wrong"
+            "New Mont.",
+            "already getting",
+            "change buses"
           ],
           "image": "./assets/wacky-ricky/wr085/pages/WR085-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr085/WR085-pdf09.mp3",
@@ -28264,12 +28410,13 @@ window.KakaWackyRickyManifest = {
             "Mont."
           ],
           "blanks": [
+            "New",
             "Mont."
           ],
           "choices": [
-            "Mont.",
-            "one",
-            "bus."
+            "New Mont.",
+            "looked more",
+            "right place?"
           ],
           "image": "./assets/wacky-ricky/wr086/pages/WR086-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr086/WR086-pdf04.mp3",
@@ -28453,12 +28600,13 @@ window.KakaWackyRickyManifest = {
             "Mont!"
           ],
           "blanks": [
+            "New",
             "Mont!"
           ],
           "choices": [
-            "Mont!",
-            "friend",
-            "Excuse"
+            "New Mont!",
+            "looked more",
+            "right place?"
           ],
           "image": "./assets/wacky-ricky/wr086/pages/WR086-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr086/WR086-pdf10.mp3",
@@ -28648,12 +28796,13 @@ window.KakaWackyRickyManifest = {
             "soccer?"
           ],
           "blanks": [
+            "play",
             "soccer?"
           ],
           "choices": [
-            "soccer?",
-            "school.",
-            "really"
+            "play soccer?",
+            "new neighborhood.",
+            "old times."
           ],
           "image": "./assets/wacky-ricky/wr087/pages/WR087-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr087/WR087-pdf07.mp3",
@@ -28708,12 +28857,13 @@ window.KakaWackyRickyManifest = {
             "times."
           ],
           "blanks": [
+            "old",
             "times."
           ],
           "choices": [
-            "times.",
-            "Jessica.",
-            "nice,"
+            "old times.",
+            "new neighborhood.",
+            "old neighborhood."
           ],
           "image": "./assets/wacky-ricky/wr087/pages/WR087-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr087/WR087-pdf10.mp3",
@@ -28755,12 +28905,13 @@ window.KakaWackyRickyManifest = {
             "home."
           ],
           "blanks": [
-            "home."
+            "ready,",
+            "boys?"
           ],
           "choices": [
-            "home.",
-            "care,",
-            "stay"
+            "ready, boys?",
+            "right back!",
+            "anyone else"
           ],
           "image": "./assets/wacky-ricky/wr088/pages/WR088-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr088/WR088-pdf03.mp3",
@@ -28981,12 +29132,13 @@ window.KakaWackyRickyManifest = {
             "Brenda!"
           ],
           "blanks": [
+            "Take",
             "care,"
           ],
           "choices": [
-            "care,",
-            "right",
-            "stay"
+            "Take care,",
+            "ready, boys?",
+            "right back!"
           ],
           "image": "./assets/wacky-ricky/wr088/pages/WR088-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr088/WR088-pdf10.mp3",
@@ -29068,12 +29220,13 @@ window.KakaWackyRickyManifest = {
             "Richard."
           ],
           "blanks": [
-            "Italy,"
+            "lovely",
+            "time"
           ],
           "choices": [
-            "Italy,",
-            "anyone.",
-            "secret."
+            "lovely time",
+            "happy park",
+            "green house"
           ],
           "image": "./assets/wacky-ricky/wr089/pages/WR089-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr089/WR089-pdf04.mp3",
@@ -29359,12 +29512,13 @@ window.KakaWackyRickyManifest = {
             "secret!"
           ],
           "blanks": [
-            "secret!"
+            "soon",
+            "know"
           ],
           "choices": [
-            "secret!",
-            "right",
-            "Ginger!"
+            "soon know",
+            "taking hip-hop",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr090/pages/WR090-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr090/WR090-pdf04.mp3",
@@ -29587,12 +29741,13 @@ window.KakaWackyRickyManifest = {
             "it?"
           ],
           "blanks": [
-            "want"
+            "taking",
+            "hip-hop"
           ],
           "choices": [
-            "want",
-            "twins",
-            "lesson?"
+            "taking hip-hop",
+            "soon know",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr090/pages/WR090-pdf11.webp",
           "audio": "./assets/wacky-ricky/wr090/WR090-pdf11.mp3",
@@ -29634,12 +29789,13 @@ window.KakaWackyRickyManifest = {
             "easy."
           ],
           "blanks": [
+            "looks",
             "easy."
           ],
           "choices": [
-            "easy.",
-            "baseball.",
-            "elbows."
+            "looks easy.",
+            "Pull back",
+            "right, everyone,"
           ],
           "image": "./assets/wacky-ricky/wr091/pages/WR091-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr091/WR091-pdf03.mp3",
@@ -29869,12 +30025,13 @@ window.KakaWackyRickyManifest = {
             "won’t."
           ],
           "blanks": [
-            "worry."
+            "tell",
+            "anyone"
           ],
           "choices": [
-            "worry.",
-            "See?",
-            "stepped"
+            "tell anyone",
+            "looks easy.",
+            "Pull back"
           ],
           "image": "./assets/wacky-ricky/wr091/pages/WR091-pdf11.webp",
           "audio": "./assets/wacky-ricky/wr091/WR091-pdf11.mp3",
@@ -29954,12 +30111,13 @@ window.KakaWackyRickyManifest = {
             "baseball."
           ],
           "blanks": [
+            "play",
             "baseball."
           ],
           "choices": [
-            "baseball.",
-            "follow",
-            "anyone"
+            "play baseball.",
+            "looks easy.",
+            "Pull back"
           ],
           "image": "./assets/wacky-ricky/wr091/pages/WR091-pdf14.webp",
           "audio": "./assets/wacky-ricky/wr091/WR091-pdf14.mp3",
@@ -30004,12 +30162,13 @@ window.KakaWackyRickyManifest = {
             "shops!"
           ],
           "blanks": [
+            "many",
             "shops!"
           ],
           "choices": [
-            "shops!",
-            "wait.",
-            "cool!"
+            "many shops!",
+            "many people",
+            "new shirt."
           ],
           "image": "./assets/wacky-ricky/wr092/pages/WR092-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr092/WR092-pdf03.mp3",
@@ -30091,12 +30250,13 @@ window.KakaWackyRickyManifest = {
             "do."
           ],
           "blanks": [
+            "new",
             "shirt."
           ],
           "choices": [
-            "shirt.",
-            "mall.",
-            "shops!"
+            "new shirt.",
+            "many shops!",
+            "many people"
           ],
           "image": "./assets/wacky-ricky/wr092/pages/WR092-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr092/WR092-pdf06.mp3",
@@ -30406,12 +30566,13 @@ window.KakaWackyRickyManifest = {
             "haven’t."
           ],
           "blanks": [
+            "little",
             "girl?"
           ],
           "choices": [
-            "girl?",
-            "pink",
-            "someone"
+            "little girl?",
+            "pink dress.",
+            "sure someone"
           ],
           "image": "./assets/wacky-ricky/wr093/pages/WR093-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr093/WR093-pdf07.mp3",
@@ -30471,12 +30632,13 @@ window.KakaWackyRickyManifest = {
             "dress."
           ],
           "blanks": [
+            "pink",
             "dress."
           ],
           "choices": [
-            "dress.",
-            "know.",
-            "wallet?"
+            "pink dress.",
+            "little girl?",
+            "sure someone"
           ],
           "image": "./assets/wacky-ricky/wr093/pages/WR093-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr093/WR093-pdf09.mp3",
@@ -30556,12 +30718,13 @@ window.KakaWackyRickyManifest = {
             "terrible."
           ],
           "blanks": [
-            "terrible."
+            "looked",
+            "everywhere."
           ],
           "choices": [
-            "terrible.",
-            "much",
-            "child?"
+            "looked everywhere.",
+            "lost child?",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr094/pages/WR094-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr094/WR094-pdf03.mp3",
@@ -30598,12 +30761,13 @@ window.KakaWackyRickyManifest = {
             "is."
           ],
           "blanks": [
-            "know"
+            "lost",
+            "child?"
           ],
           "choices": [
-            "know",
-            "time",
-            "knows"
+            "lost child?",
+            "looked everywhere.",
+            "happy park"
           ],
           "image": "./assets/wacky-ricky/wr094/pages/WR094-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr094/WR094-pdf04.mp3",
@@ -30668,8 +30832,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "loves",
-            "safe.",
-            "everywhere."
+            "sister",
+            "man"
           ],
           "image": "./assets/wacky-ricky/wr094/pages/WR094-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr094/WR094-pdf06.mp3",
@@ -30699,8 +30863,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "time",
-            "Excuse",
-            "crying?"
+            "follow",
+            "Excuse"
           ],
           "image": "./assets/wacky-ricky/wr094/pages/WR094-pdf07.webp",
           "audio": "./assets/wacky-ricky/wr094/WR094-pdf07.mp3",
@@ -30731,7 +30895,7 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "mention",
-            "loves",
+            "Excuse",
             "time"
           ],
           "image": "./assets/wacky-ricky/wr094/pages/WR094-pdf08.webp",
@@ -30758,7 +30922,7 @@ window.KakaWackyRickyManifest = {
           "choices": [
             "crying?",
             "loves",
-            "safe."
+            "terrible."
           ],
           "image": "./assets/wacky-ricky/wr094/pages/WR094-pdf09.webp",
           "audio": "./assets/wacky-ricky/wr094/WR094-pdf09.mp3",
@@ -30785,8 +30949,8 @@ window.KakaWackyRickyManifest = {
           ],
           "choices": [
             "safe.",
-            "sister",
-            "think"
+            "looking",
+            "crying?"
           ],
           "image": "./assets/wacky-ricky/wr094/pages/WR094-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr094/WR094-pdf10.mp3",
@@ -30846,12 +31010,13 @@ window.KakaWackyRickyManifest = {
             "Rachel."
           ],
           "blanks": [
-            "keep"
+            "scary",
+            "day."
           ],
           "choices": [
-            "keep",
-            "time,",
-            "look"
+            "scary day.",
+            "makes mistakes,",
+            "Next time,"
           ],
           "image": "./assets/wacky-ricky/wr095/pages/WR095-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr095/WR095-pdf03.mp3",
@@ -30940,12 +31105,13 @@ window.KakaWackyRickyManifest = {
             "Ricky."
           ],
           "blanks": [
-            "stayed"
+            "makes",
+            "mistakes,"
           ],
           "choices": [
-            "stayed",
-            "keep",
-            "forever."
+            "makes mistakes,",
+            "scary day.",
+            "Next time,"
           ],
           "image": "./assets/wacky-ricky/wr095/pages/WR095-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr095/WR095-pdf06.mp3",
@@ -31276,12 +31442,13 @@ window.KakaWackyRickyManifest = {
             "later."
           ],
           "blanks": [
-            "later."
+            "come",
+            "over"
           ],
           "choices": [
-            "later.",
-            "big",
-            "really."
+            "come over",
+            "scary-mask contest.",
+            "big bag"
           ],
           "image": "./assets/wacky-ricky/wr096/pages/WR096-pdf08.webp",
           "audio": "./assets/wacky-ricky/wr096/WR096-pdf08.mp3",
@@ -31362,12 +31529,13 @@ window.KakaWackyRickyManifest = {
             "mask."
           ],
           "blanks": [
+            "scary",
             "mask."
           ],
           "choices": [
-            "mask.",
-            "make",
-            "going"
+            "scary mask.",
+            "scary-mask contest.",
+            "big bag"
           ],
           "image": "./assets/wacky-ricky/wr096/pages/WR096-pdf11.webp",
           "audio": "./assets/wacky-ricky/wr096/WR096-pdf11.mp3",
@@ -31487,12 +31655,13 @@ window.KakaWackyRickyManifest = {
             "fell!"
           ],
           "blanks": [
+            "almost",
             "fell!"
           ],
           "choices": [
-            "fell!",
-            "hurry",
-            "bring"
+            "almost fell!",
+            "better hurry",
+            "left something"
           ],
           "image": "./assets/wacky-ricky/wr097/pages/WR097-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr097/WR097-pdf06.mp3",
@@ -31640,12 +31809,13 @@ window.KakaWackyRickyManifest = {
             "man?"
           ],
           "blanks": [
-            "scary"
+            "scary",
+            "man?"
           ],
           "choices": [
-            "scary",
-            "hurry",
-            "leaving!"
+            "scary man?",
+            "almost fell!",
+            "better hurry"
           ],
           "image": "./assets/wacky-ricky/wr097/pages/WR097-pdf11.webp",
           "audio": "./assets/wacky-ricky/wr097/WR097-pdf11.mp3",
@@ -31732,12 +31902,13 @@ window.KakaWackyRickyManifest = {
             "contest!"
           ],
           "blanks": [
-            "contest!"
+            "scary",
+            "mask"
           ],
           "choices": [
-            "contest!",
-            "home.",
-            "everyone"
+            "scary mask",
+            "almost fell!",
+            "better hurry"
           ],
           "image": "./assets/wacky-ricky/wr097/pages/WR097-pdf14.webp",
           "audio": "./assets/wacky-ricky/wr097/WR097-pdf14.mp3",
@@ -31865,12 +32036,13 @@ window.KakaWackyRickyManifest = {
             "first?"
           ],
           "blanks": [
-            "first?"
+            "play",
+            "any"
           ],
           "choices": [
-            "first?",
-            "still",
-            "read"
+            "play any",
+            "something wrong,",
+            "Good, son."
           ],
           "image": "./assets/wacky-ricky/wr098/pages/WR098-pdf06.webp",
           "audio": "./assets/wacky-ricky/wr098/WR098-pdf06.mp3",
@@ -31996,12 +32168,13 @@ window.KakaWackyRickyManifest = {
             "time."
           ],
           "blanks": [
+            "long",
             "time."
           ],
           "choices": [
-            "time.",
-            "computer",
-            "read"
+            "long time.",
+            "something wrong,",
+            "play any"
           ],
           "image": "./assets/wacky-ricky/wr098/pages/WR098-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr098/WR098-pdf10.mp3",
@@ -32088,12 +32261,13 @@ window.KakaWackyRickyManifest = {
             "me."
           ],
           "blanks": [
-            "remind"
+            "play",
+            "games."
           ],
           "choices": [
-            "remind",
-            "having",
-            "everyone"
+            "play games.",
+            "something else.",
+            "everyone doing?"
           ],
           "image": "./assets/wacky-ricky/wr099/pages/WR099-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr099/WR099-pdf03.mp3",
@@ -32296,12 +32470,13 @@ window.KakaWackyRickyManifest = {
             "doing?"
           ],
           "blanks": [
+            "everyone",
             "doing?"
           ],
           "choices": [
-            "doing?",
-            "houses?",
-            "imagination,"
+            "everyone doing?",
+            "play games.",
+            "something else."
           ],
           "image": "./assets/wacky-ricky/wr099/pages/WR099-pdf10.webp",
           "audio": "./assets/wacky-ricky/wr099/WR099-pdf10.mp3",
@@ -32351,12 +32526,13 @@ window.KakaWackyRickyManifest = {
             "could."
           ],
           "blanks": [
-            "fast"
+            "looking",
+            "great."
           ],
           "choices": [
-            "fast",
-            "Look!",
-            "make"
+            "looking great.",
+            "need more",
+            "early, honey."
           ],
           "image": "./assets/wacky-ricky/wr100/pages/WR100-pdf03.webp",
           "audio": "./assets/wacky-ricky/wr100/WR100-pdf03.mp3",
@@ -32379,12 +32555,13 @@ window.KakaWackyRickyManifest = {
             "Dad?"
           ],
           "blanks": [
-            "cars,"
+            "need",
+            "more"
           ],
           "choices": [
-            "cars,",
-            "family",
-            "home"
+            "need more",
+            "looking great.",
+            "early, honey."
           ],
           "image": "./assets/wacky-ricky/wr100/pages/WR100-pdf04.webp",
           "audio": "./assets/wacky-ricky/wr100/WR100-pdf04.mp3",

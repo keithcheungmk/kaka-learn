@@ -3,11 +3,13 @@
 Fill-in blanks must be teachable content words. Series names, family roles,
 titles, and English function words are hard-rejected. If a page has no
 eligible word, the page stays listen-only (no blank) instead of falling
-back to a name or stop word.
+back to a name or stop word. About one quarter of pages use a natural
+two-word phrase blank (adj+noun, color+noun, verb+object, or noun+noun).
 """
 from __future__ import annotations
 
 import json
+import math
 import random
 import re
 from pathlib import Path
@@ -33,21 +35,51 @@ STOP_WORDS = {
     "very", "which", "why",
     "bye", "hello", "hey", "hi", "ok", "okay", "oh", "please", "sorry",
     "thank", "thanks", "uh", "um", "wow", "yeah", "yes",
+    "heres", "hurray", "hurrah", "maybe", "shhh", "umm", "whew", "whoo",
+    "whoohoo", "whos", "youll",
 }
 
 # Carter FAMILY_NAMES pattern, plus Wacky Ricky / Little Fox regulars and roles.
 FAMILY_NAMES = {
     "aunt", "bingo", "brenda", "brian", "brown", "dad", "daddy", "emmy",
-    "father", "grandma", "grandfather", "grandpa", "grandmother",
-    "harry", "hopper", "judy", "kitty", "mama", "miss", "mom", "mommy",
-    "mother", "mr", "mrs", "ms", "oliver", "papa", "rachel", "richard",
-    "ricky", "rover", "sir", "spike", "uncle", "veronica",
+    "father", "forestwood", "gill", "grandma", "grandfather", "grandpa",
+    "grandmother", "harry", "hopper", "judy", "kitty", "mama", "miss",
+    "mom", "mommy", "mother", "mr", "mrs", "ms", "oliver", "papa", "peter",
+    "rachel", "richard", "ricky", "rover", "santa", "sir", "spike",
+    "tinker", "uncle", "veronica",
+}
+
+COLORS = {
+    "black", "blue", "gold", "green", "grey", "gray", "orange", "pink",
+    "purple", "red", "silver", "white", "yellow",
+}
+
+ADJECTIVES = {
+    "baby", "beautiful", "best", "big", "bright", "clean", "cold", "dark",
+    "dirty", "dry", "fast", "favorite", "first", "funny", "good", "happy",
+    "hard", "high", "hot", "last", "little", "long", "loud", "new", "next",
+    "nice", "old", "pretty", "quiet", "ready", "sad", "scary", "secret",
+    "short", "small", "soft", "sour", "special", "sweet", "tall", "ugly",
+    "warm", "wet",
+}
+
+VERBS = {
+    "bring", "build", "call", "clean", "close", "come", "drink", "eat",
+    "email", "feed", "find", "finish", "give", "hear", "help", "hide",
+    "hold", "jump", "look", "make", "need", "open", "pick", "plant",
+    "play", "put", "read", "run", "see", "send", "show", "start", "take",
+    "turn", "wait", "walk", "want", "wash", "watch", "water", "write",
 }
 
 DISTRACTOR_POOL = [
     "park", "school", "house", "book", "ball", "happy", "little", "green",
     "quick", "funny", "water", "friend", "morning", "outside", "today",
     "warm", "play", "look",
+]
+
+PHRASE_DISTRACTORS = [
+    "happy park", "green house", "little school", "funny book",
+    "warm water", "big friend", "new morning", "quick ball",
 ]
 
 
@@ -76,10 +108,15 @@ def is_rejected_blank(word: str) -> bool:
         return True
     if _looks_like_stutter(word):
         return True
-    if key in STOP_WORDS:
-        return True
     if key == "miss":
         return _visible_stem(word)[:1].isupper()
+    parts = [part.lower() for part in _visible_stem(word).split("-") if part]
+    if any(part in FAMILY_NAMES or (part.endswith("s") and part[:-1] in FAMILY_NAMES) for part in parts):
+        return True
+    if any(key.startswith(name) and len(key) >= len(name) + 2 for name in ("ricky", "rachel", "brenda", "brian")):
+        return True
+    if key in STOP_WORDS:
+        return True
     if key in FAMILY_NAMES:
         return True
     if key.endswith("s") and key[:-1] in FAMILY_NAMES:
@@ -158,10 +195,97 @@ def pick_blank(source_text: str, words: list[str] | None = None) -> str:
     return ""
 
 
-def choose_choices(target: str, page_words: list[str], vocab_by_norm: dict[str, str], rng: random.Random) -> list[str]:
-    if not target:
+def _in_group(key: str, bucket: set[str]) -> bool:
+    if key in bucket:
+        return True
+    if key.endswith("s") and key[:-1] in bucket:
+        return True
+    if key.endswith("ing") and (key[:-3] in bucket or key[:-3] + "e" in bucket):
+        return True
+    if key.endswith("ed") and (key[:-2] in bucket or key[:-1] in bucket):
+        return True
+    return False
+
+
+def _pair_score(first: str, second: str) -> tuple[int, str]:
+    left = normalize_blank(first)
+    right = normalize_blank(second)
+    if right.endswith("ly") or right in {"soon", "later", "first", "next", "today", "tomorrow", "always", "never", "really", "finally"}:
+        return 0, ""
+    if left in COLORS:
+        return 5, "color-noun"
+    if left in ADJECTIVES:
+        return 4, "adj-noun"
+    if _in_group(left, VERBS) and not _in_group(right, VERBS) and right not in ADJECTIVES:
+        return 4, "verb-object"
+    if (
+        len(left) >= 4 and len(right) >= 4
+        and not _in_group(left, VERBS) and not _in_group(right, VERBS)
+        and right not in ADJECTIVES and right not in COLORS
+    ):
+        return 3, "noun-noun"
+    return 0, ""
+
+
+def find_phrase_pair(source_text: str, words: list[str] | None = None) -> tuple[str, str] | None:
+    """Return the best adjacent content-word pair, or None."""
+    words = list(words) if words is not None else tokenize(source_text)
+    counts = _counts(words)
+    clauses = split_clauses(source_text) or ([" ".join(words)] if words else [])
+    best: tuple[int, int, str, str] | None = None
+    for clause_index, clause in enumerate(clauses):
+        tokens = tokenize(clause)
+        for index, (first, second) in enumerate(zip(tokens, tokens[1:])):
+            if not _content_candidates([first], counts, 3) or not _content_candidates([second], counts, 3):
+                continue
+            score, _kind = _pair_score(first, second)
+            if not score:
+                continue
+            if index == len(tokens) - 2:
+                score += 1
+            ranked = (score, clause_index, first, second)
+            if best is None or (ranked[0], ranked[1]) > (best[0], best[1]):
+                best = ranked
+    if not best:
+        return None
+    return best[2], best[3]
+
+
+def two_word_quota(page_count: int) -> int:
+    if page_count < 3:
+        return 0
+    low = math.floor(page_count * 0.20)
+    high = math.floor(page_count * 0.30)
+    target = round(page_count * 0.25)
+    if high < 1:
+        return 1
+    return max(low, min(high, target if target else low))
+
+
+def format_blank_answer(blanks: list[str]) -> str:
+    return " ".join(blanks)
+
+
+def choose_choices(target: str | list[str], page_words: list[str], vocab_by_norm: dict[str, str], rng: random.Random, phrase_bank: list[str] | None = None) -> list[str]:
+    blanks = [target] if isinstance(target, str) else list(target)
+    if not blanks or not blanks[0]:
         return []
-    target_key = normalize_blank(target)
+    if len(blanks) >= 2:
+        answer = format_blank_answer(blanks)
+        answer_key = normalize_blank(answer)
+        picked: list[str] = []
+        used = {answer_key}
+        for phrase in list(phrase_bank or []) + PHRASE_DISTRACTORS:
+            key = normalize_blank(phrase)
+            if not key or key in used:
+                continue
+            picked.append(phrase)
+            used.add(key)
+            if len(picked) == 2:
+                break
+        return [answer, *picked[:2]]
+    answer = blanks[0]
+    target_key = normalize_blank(answer)
     page_keys = {normalize_blank(word) for word in page_words if normalize_blank(word)}
     distractors = [
         word for key, word in vocab_by_norm.items()
@@ -178,7 +302,7 @@ def choose_choices(target: str, page_words: list[str], vocab_by_norm: dict[str, 
         if normalize_blank(word) not in used:
             picked.append(word)
             used.add(normalize_blank(word))
-    return [target, *picked[:2]] if target else []
+    return [answer, *picked[:2]] if answer else []
 
 
 def load_wacky_manifest(path: Path | None = None) -> dict:
@@ -204,10 +328,34 @@ def apply_blanks_to_manifest(payload: dict) -> dict:
         vocab_by_norm: dict[str, str] = {}
         for word in vocabulary:
             vocab_by_norm.setdefault(normalize_blank(word), word)
+        page_plans: list[tuple[list[str], tuple[int, int, str, str] | None]] = []
+        phrase_bank: list[str] = []
         for page in book.get("pages", []):
             words = page.get("sentence") or tokenize(page.get("sourceText", ""))
-            target = pick_blank(page.get("sourceText", ""), words)
+            pair = find_phrase_pair(page.get("sourceText", ""), words)
+            one = pick_blank(page.get("sourceText", ""), words)
+            singles = [one] if one else []
+            scored = None
+            if pair:
+                score, kind = _pair_score(*pair)
+                scored = (score, 1 if words[-2:] == list(pair) else 0, kind, pair[0])
+                phrase_bank.append(format_blank_answer(list(pair)))
+            page_plans.append((singles, scored, pair, words))
+        chosen_phrase_indexes = {
+            index
+            for _score, index in sorted(
+                (
+                    (plan[1], index)
+                    for index, plan in enumerate(page_plans)
+                    if plan[1] is not None
+                ),
+                reverse=True,
+            )[: two_word_quota(len(page_plans))]
+        }
+        for index, page in enumerate(book.get("pages", [])):
+            singles, _scored, pair, words = page_plans[index]
+            blanks = list(pair) if index in chosen_phrase_indexes and pair else singles
             rng = random.Random(f"{book.get('id', '')}:{page.get('pdfPage')}")
-            page["blanks"] = [target] if target else []
-            page["choices"] = choose_choices(target, words, vocab_by_norm, rng)
+            page["blanks"] = blanks
+            page["choices"] = choose_choices(blanks, words, vocab_by_norm, rng, phrase_bank)
     return payload

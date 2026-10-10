@@ -111,7 +111,7 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 ### 2026-10-10 · Cursor Chief Lead（Wacky Ricky 填空改內容詞）
 
 - Little Fox／Wacky Ricky 自動填空不再用人名或虛詞。硬性拒絕 Carter STOP + 系列人名／稱謂（Ricky、Rachel、Brenda、Mom、Dad、Mrs、Brian、Kitty 等）；優先句末內容詞，冇合格詞就留聽頁、唔退回人名。
-- 重產 `data/wacky-ricky-manifest.js` 空白（音檔／頁圖唔郁）；`scripts/check-invariants.py` 新增 `check_wacky_ricky_blanks()`。開 PR，唔自 merge。
+- 約 20–30% 頁升級自然兩詞空格（adj+noun／color+noun／verb+object／noun+noun）；其餘一詞或跳過。重產 manifest 空白（音檔／頁圖唔郁）；`check_wacky_ricky_blanks()` 守住。開 PR，唔自 merge。
 
 ### 2026-10-10 · Cursor Chief Lead（故事 focus 優化：浠榆初生＋迪士尼／國慶合照拆開）
 
