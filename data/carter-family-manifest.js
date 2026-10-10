@@ -18,12 +18,12 @@ window.KakaCarterManifest = {
             "Harry."
           ],
           "blanks": [
-            "Harry."
+            "“Yay!”"
           ],
           "choices": [
-            "Harry.",
-            "Mom.",
-            "Dad."
+            "“Yay!”",
+            "sound",
+            "new"
           ],
           "image": "./assets/story-demo/cf004/pages/page-01.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-01.mp3",
@@ -47,8 +47,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "yard.",
-            "car.",
-            "woods."
+            "sniffed",
+            "Suddenly"
           ],
           "image": "./assets/story-demo/cf004/pages/page-02.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-02.mp3",
@@ -68,12 +68,12 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "car!”"
+            "“Everybody"
           ],
           "choices": [
-            "car!”",
-            "tent!”",
-            "woods!”"
+            "“Everybody",
+            "around.",
+            "all"
           ],
           "image": "./assets/story-demo/cf004/pages/page-03.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-03.mp3",
@@ -98,8 +98,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "stick.",
-            "food.",
-            "tent."
+            "sound",
+            "yard."
           ],
           "image": "./assets/story-demo/cf004/pages/page-04.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-04.mp3",
@@ -123,8 +123,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "loudly.",
-            "quietly.",
-            "slowly."
+            "Suddenly",
+            "tie"
           ],
           "image": "./assets/story-demo/cf004/pages/page-05.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-05.mp3",
@@ -149,8 +149,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "tent.",
-            "fire.",
-            "car."
+            "need",
+            "drove,"
           ],
           "image": "./assets/story-demo/cf004/pages/page-06.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-06.mp3",
@@ -172,8 +172,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "around.",
-            "inside.",
-            "upstairs."
+            "food.",
+            "need"
           ],
           "image": "./assets/story-demo/cf004/pages/page-07.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-07.mp3",
@@ -198,8 +198,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "food.",
-            "bags.",
-            "tent."
+            "set",
+            "yard."
           ],
           "image": "./assets/story-demo/cf004/pages/page-08.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-08.mp3",
@@ -222,8 +222,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "bears,”",
-            "dogs,",
-            "birds,"
+            "looking",
+            "drove,"
           ],
           "image": "./assets/story-demo/cf004/pages/page-09.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-09.mp3",
@@ -241,12 +241,13 @@ window.KakaCarterManifest = {
             "moved."
           ],
           "blanks": [
+            "bushes",
             "moved."
           ],
           "choices": [
-            "moved.",
-            "stopped.",
-            "opened."
+            "bushes moved.",
+            "sound came",
+            "new stick."
           ],
           "image": "./assets/story-demo/cf004/pages/page-10.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-10.mp3",
@@ -266,12 +267,13 @@ window.KakaCarterManifest = {
             "bushes."
           ],
           "blanks": [
-            "bushes."
+            "sound",
+            "came"
           ],
           "choices": [
-            "bushes.",
-            "tent.",
-            "car."
+            "sound came",
+            "bushes moved.",
+            "new stick."
           ],
           "image": "./assets/story-demo/cf004/pages/page-11.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-11.mp3",
@@ -290,12 +292,13 @@ window.KakaCarterManifest = {
             "stick."
           ],
           "blanks": [
+            "new",
             "stick."
           ],
           "choices": [
-            "stick.",
-            "ball.",
-            "bag."
+            "new stick.",
+            "bushes moved.",
+            "sound came"
           ],
           "image": "./assets/story-demo/cf004/pages/page-12.webp",
           "audio": "./assets/story-demo/cf004/cf004-page-12.mp3",
@@ -325,12 +328,13 @@ window.KakaCarterManifest = {
             "store."
           ],
           "blanks": [
+            "grocery",
             "store."
           ],
           "choices": [
-            "store.",
-            "park.",
-            "school."
+            "grocery store.",
+            "need fruit,”",
+            "need vegetables,”"
           ],
           "image": "./assets/story-demo/cf005/pages/page-01.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-01.mp3",
@@ -349,12 +353,13 @@ window.KakaCarterManifest = {
             "Mom."
           ],
           "blanks": [
+            "need",
             "fruit,”"
           ],
           "choices": [
-            "fruit,”",
-            "water,",
-            "bread,"
+            "need fruit,”",
+            "grocery store.",
+            "need vegetables,”"
           ],
           "image": "./assets/story-demo/cf005/pages/page-02.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-02.mp3",
@@ -374,12 +379,13 @@ window.KakaCarterManifest = {
             "Mom."
           ],
           "blanks": [
+            "need",
             "vegetables,”"
           ],
           "choices": [
-            "vegetables,”",
-            "cookies,",
-            "candy,"
+            "need vegetables,”",
+            "grocery store.",
+            "need fruit,”"
           ],
           "image": "./assets/story-demo/cf005/pages/page-03.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-03.mp3",
@@ -399,12 +405,12 @@ window.KakaCarterManifest = {
             "Mom."
           ],
           "blanks": [
-            "junk"
+            "food,”"
           ],
           "choices": [
-            "junk",
-            "good",
-            "healthy"
+            "food,”",
+            "soda",
+            "cart."
           ],
           "image": "./assets/story-demo/cf005/pages/page-04.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-04.mp3",
@@ -426,12 +432,12 @@ window.KakaCarterManifest = {
             "cart."
           ],
           "blanks": [
-            "cookies"
+            "cart."
           ],
           "choices": [
-            "cookies",
-            "apples",
-            "chips"
+            "cart.",
+            "candy",
+            "junk"
           ],
           "image": "./assets/story-demo/cf005/pages/page-05.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-05.mp3",
@@ -454,12 +460,12 @@ window.KakaCarterManifest = {
             "cart."
           ],
           "blanks": [
-            "soda"
+            "cart."
           ],
           "choices": [
-            "soda",
-            "water",
-            "juice"
+            "cart.",
+            "sneak",
+            "candy"
           ],
           "image": "./assets/story-demo/cf005/pages/page-06.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-06.mp3",
@@ -479,12 +485,12 @@ window.KakaCarterManifest = {
             "Mom."
           ],
           "blanks": [
-            "buying"
+            "soda,”"
           ],
           "choices": [
-            "buying",
-            "making",
-            "selling"
+            "soda,”",
+            "junk",
+            "cart."
           ],
           "image": "./assets/story-demo/cf005/pages/page-07.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-07.mp3",
@@ -506,12 +512,12 @@ window.KakaCarterManifest = {
             "cart."
           ],
           "blanks": [
-            "candy"
+            "cart."
           ],
           "choices": [
-            "candy",
-            "fruit",
-            "bread"
+            "cart.",
+            "food,”",
+            "fruit,”"
           ],
           "image": "./assets/story-demo/cf005/pages/page-08.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-08.mp3",
@@ -534,8 +540,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "done.",
-            "started.",
-            "lost."
+            "Everyone",
+            "counter."
           ],
           "image": "./assets/story-demo/cf005/pages/page-09.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-09.mp3",
@@ -560,8 +566,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "counter.",
-            "shelf.",
-            "floor."
+            "chips",
+            "fruit,”"
           ],
           "image": "./assets/story-demo/cf005/pages/page-10.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-10.mp3",
@@ -585,8 +591,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "chips",
-            "books",
-            "shoes"
+            "fruit,”",
+            "cart."
           ],
           "image": "./assets/story-demo/cf005/pages/page-11.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-11.mp3",
@@ -605,12 +611,12 @@ window.KakaCarterManifest = {
             "Oliver."
           ],
           "blanks": [
-            "me!”"
+            "wasn’t"
           ],
           "choices": [
-            "me!”",
-            "him!",
-            "you!"
+            "wasn’t",
+            "back,”",
+            "vegetables,”"
           ],
           "image": "./assets/story-demo/cf005/pages/page-12.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-12.mp3",
@@ -634,8 +640,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "back,”",
-            "away,”",
-            "down,”"
+            "bottle",
+            "shopping"
           ],
           "image": "./assets/story-demo/cf005/pages/page-13.webp",
           "audio": "./assets/story-demo/cf005/cf005-page-13.mp3",
@@ -667,12 +673,13 @@ window.KakaCarterManifest = {
             "Mom."
           ],
           "blanks": [
+            "fancy",
             "restaurant,”"
           ],
           "choices": [
-            "restaurant,”",
-            "school,",
-            "park,"
+            "fancy restaurant,”",
+            "pretty dress.",
+            "favorite sweater."
           ],
           "image": "./assets/story-demo/cf006/pages/page-01.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-01.mp3",
@@ -692,12 +699,13 @@ window.KakaCarterManifest = {
             "dress."
           ],
           "blanks": [
+            "pretty",
             "dress."
           ],
           "choices": [
-            "dress.",
-            "hat.",
-            "coat."
+            "pretty dress.",
+            "fancy restaurant,”",
+            "favorite sweater."
           ],
           "image": "./assets/story-demo/cf006/pages/page-02.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-02.mp3",
@@ -717,12 +725,13 @@ window.KakaCarterManifest = {
             "sweater."
           ],
           "blanks": [
+            "favorite",
             "sweater."
           ],
           "choices": [
-            "sweater.",
-            "jacket.",
-            "shirt."
+            "favorite sweater.",
+            "fancy restaurant,”",
+            "pretty dress."
           ],
           "image": "./assets/story-demo/cf006/pages/page-03.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-03.mp3",
@@ -744,12 +753,13 @@ window.KakaCarterManifest = {
             "pants."
           ],
           "blanks": [
+            "nice",
             "shirt"
           ],
           "choices": [
-            "shirt",
-            "dress",
-            "coat"
+            "nice shirt",
+            "fancy restaurant,”",
+            "pretty dress."
           ],
           "image": "./assets/story-demo/cf006/pages/page-04.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-04.mp3",
@@ -770,8 +780,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "waited.",
-            "ran.",
-            "slept."
+            "going",
+            "restaurant,”"
           ],
           "image": "./assets/story-demo/cf006/pages/page-05.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-05.mp3",
@@ -793,8 +803,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "dirty.”",
-            "wet.",
-            "lost."
+            "need",
+            "favorite"
           ],
           "image": "./assets/story-demo/cf006/pages/page-06.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-06.mp3",
@@ -815,8 +825,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "everywhere.",
-            "nowhere.",
-            "upstairs."
+            "going",
+            "sweater."
           ],
           "image": "./assets/story-demo/cf006/pages/page-07.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-07.mp3",
@@ -839,8 +849,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "nice.”",
-            "fast.",
-            "quiet."
+            "dirty.”",
+            "sweater."
           ],
           "image": "./assets/story-demo/cf006/pages/page-08.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-08.mp3",
@@ -865,8 +875,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "dirty,",
-            "ready,",
-            "lost,"
+            "dress.",
+            "shirt"
           ],
           "image": "./assets/story-demo/cf006/pages/page-09.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-09.mp3",
@@ -886,12 +896,12 @@ window.KakaCarterManifest = {
             "asked."
           ],
           "blanks": [
-            "kids?”"
+            "asked."
           ],
           "choices": [
-            "kids?”",
-            "bags?",
-            "shoes?"
+            "asked.",
+            "pants.",
+            "everywhere."
           ],
           "image": "./assets/story-demo/cf006/pages/page-10.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-10.mp3",
@@ -914,8 +924,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "dirty!”",
-            "hungry!",
-            "late!"
+            "look",
+            "nice"
           ],
           "image": "./assets/story-demo/cf006/pages/page-11.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-11.mp3",
@@ -939,8 +949,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "clean!",
-            "wet!",
-            "tired!"
+            "shirt",
+            "put"
           ],
           "image": "./assets/story-demo/cf006/pages/page-12.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-12.mp3",
@@ -961,12 +971,12 @@ window.KakaCarterManifest = {
             "Mom."
           ],
           "blanks": [
-            "nice?”"
+            "asked"
           ],
           "choices": [
-            "nice?”",
-            "happy?",
-            "ready?"
+            "asked",
+            "Puddles",
+            "need"
           ],
           "image": "./assets/story-demo/cf006/pages/page-13.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-13.mp3",
@@ -987,8 +997,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "“Oops,”",
-            "Wow,",
-            "Sorry,"
+            "kids",
+            "still"
           ],
           "image": "./assets/story-demo/cf006/pages/page-14.webp",
           "audio": "./assets/story-demo/cf006/cf006-page-14.mp3",
@@ -1020,8 +1030,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "glasses.",
-            "shoes.",
-            "books."
+            "after",
+            "night"
           ],
           "image": "./assets/story-demo/cf007/pages/page-01.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-01.mp3",
@@ -1042,12 +1052,12 @@ window.KakaCarterManifest = {
             "grumbled."
           ],
           "blanks": [
-            "fine"
+            "grumbled."
           ],
           "choices": [
-            "fine",
-            "well",
-            "badly"
+            "grumbled.",
+            "kids",
+            "tripped."
           ],
           "image": "./assets/story-demo/cf007/pages/page-02.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-02.mp3",
@@ -1067,12 +1077,13 @@ window.KakaCarterManifest = {
             "glasses."
           ],
           "blanks": [
-            "new"
+            "new",
+            "glasses."
           ],
           "choices": [
-            "new",
-            "old",
-            "blue"
+            "new glasses.",
+            "getting glasses.",
+            "truck came."
           ],
           "image": "./assets/story-demo/cf007/pages/page-03.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-03.mp3",
@@ -1093,12 +1104,12 @@ window.KakaCarterManifest = {
             "came."
           ],
           "blanks": [
-            "night"
+            "came."
           ],
           "choices": [
-            "night",
-            "morning",
-            "afternoon"
+            "came.",
+            "put",
+            "“Good"
           ],
           "image": "./assets/story-demo/cf007/pages/page-04.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-04.mp3",
@@ -1124,8 +1135,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "truck.",
-            "dog.",
-            "car."
+            "two",
+            "enough"
           ],
           "image": "./assets/story-demo/cf007/pages/page-05.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-05.mp3",
@@ -1146,8 +1157,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "tripped.",
-            "jumped.",
-            "laughed."
+            "sidewalk.",
+            "job,"
           ],
           "image": "./assets/story-demo/cf007/pages/page-06.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-06.mp3",
@@ -1167,12 +1178,12 @@ window.KakaCarterManifest = {
             "sidewalk."
           ],
           "blanks": [
-            "Coins"
+            "sidewalk."
           ],
           "choices": [
-            "Coins",
-            "Shoes",
-            "Books"
+            "sidewalk.",
+            "money.”",
+            "getting"
           ],
           "image": "./assets/story-demo/cf007/pages/page-07.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-07.mp3",
@@ -1191,12 +1202,12 @@ window.KakaCarterManifest = {
             "money.”"
           ],
           "blanks": [
-            "enough"
+            "money.”"
           ],
           "choices": [
-            "enough",
-            "much",
-            "little"
+            "money.”",
+            "love",
+            "bounced"
           ],
           "image": "./assets/story-demo/cf007/pages/page-08.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-08.mp3",
@@ -1219,8 +1230,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "quarters!",
-            "pennies!",
-            "buttons!"
+            "Coins",
+            "all"
           ],
           "image": "./assets/story-demo/cf007/pages/page-09.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-09.mp3",
@@ -1239,12 +1250,13 @@ window.KakaCarterManifest = {
             "Emmy."
           ],
           "blanks": [
-            "Emmy."
+            "“Good",
+            "job,"
           ],
           "choices": [
-            "Emmy.",
-            "Harry.",
-            "Mom."
+            "“Good job,",
+            "getting glasses.",
+            "new glasses."
           ],
           "image": "./assets/story-demo/cf007/pages/page-10.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-10.mp3",
@@ -1264,12 +1276,12 @@ window.KakaCarterManifest = {
             "Emmy."
           ],
           "blanks": [
-            "Emmy."
+            "cream,”"
           ],
           "choices": [
-            "Emmy.",
-            "Oliver.",
-            "Harry."
+            "cream,”",
+            "truck",
+            "night"
           ],
           "image": "./assets/story-demo/cf007/pages/page-11.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-11.mp3",
@@ -1291,12 +1303,13 @@ window.KakaCarterManifest = {
             "glasses!”"
           ],
           "blanks": [
-            "glad"
+            "new",
+            "glasses!”"
           ],
           "choices": [
-            "glad",
-            "sad",
-            "tired"
+            "new glasses!”",
+            "getting glasses.",
+            "truck came."
           ],
           "image": "./assets/story-demo/cf007/pages/page-12.webp",
           "audio": "./assets/story-demo/cf007/cf007-page-12.mp3",
@@ -1325,12 +1338,13 @@ window.KakaCarterManifest = {
             "dog."
           ],
           "blanks": [
-            "nice"
+            "nice",
+            "dog."
           ],
           "choices": [
-            "nice",
-            "mean",
-            "small"
+            "nice dog.",
+            "Hart’s kitten.",
+            "dogs sat—except"
           ],
           "image": "./assets/story-demo/cf008/pages/page-01.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-01.mp3",
@@ -1351,12 +1365,12 @@ window.KakaCarterManifest = {
             "socks."
           ],
           "blanks": [
-            "shoes"
+            "socks."
           ],
           "choices": [
-            "shoes",
-            "books",
-            "sticks"
+            "socks.",
+            "lost!”",
+            "chased"
           ],
           "image": "./assets/story-demo/cf008/pages/page-02.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-02.mp3",
@@ -1378,12 +1392,13 @@ window.KakaCarterManifest = {
             "kitten."
           ],
           "blanks": [
-            "chased"
+            "Hart’s",
+            "kitten."
           ],
           "choices": [
-            "chased",
-            "helped",
-            "found"
+            "Hart’s kitten.",
+            "nice dog.",
+            "dogs sat—except"
           ],
           "image": "./assets/story-demo/cf008/pages/page-03.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-03.mp3",
@@ -1401,12 +1416,12 @@ window.KakaCarterManifest = {
             "Emmy."
           ],
           "blanks": [
-            "Rover!”"
+            "cried"
           ],
           "choices": [
-            "Rover!”",
+            "cried",
             "Ginger!",
-            "Harry!"
+            "chewed"
           ],
           "image": "./assets/story-demo/cf008/pages/page-04.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-04.mp3",
@@ -1431,8 +1446,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "manners!”",
-            "tricks!",
-            "songs!"
+            "back—with",
+            "shoes"
           ],
           "image": "./assets/story-demo/cf008/pages/page-05.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-05.mp3",
@@ -1457,8 +1472,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "school.",
-            "park.",
-            "store."
+            "shoes",
+            "hopeless"
           ],
           "image": "./assets/story-demo/cf008/pages/page-06.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-06.mp3",
@@ -1477,12 +1492,12 @@ window.KakaCarterManifest = {
             "Rover."
           ],
           "blanks": [
-            "Rover."
+            "sat—except"
           ],
           "choices": [
-            "Rover.",
-            "Emmy.",
-            "Ginger."
+            "sat—except",
+            "Hart’s",
+            "back—with"
           ],
           "image": "./assets/story-demo/cf008/pages/page-07.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-07.mp3",
@@ -1505,8 +1520,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "barked—except",
-            "ran—except",
-            "slept—except"
+            "Hart",
+            "learn"
           ],
           "image": "./assets/story-demo/cf008/pages/page-08.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-08.mp3",
@@ -1525,12 +1540,13 @@ window.KakaCarterManifest = {
             "Rover."
           ],
           "blanks": [
+            "dogs",
             "fetched—except"
           ],
           "choices": [
-            "fetched—except",
-            "jumped—except",
-            "waited—except"
+            "dogs fetched—except",
+            "nice dog.",
+            "Hart’s kitten."
           ],
           "image": "./assets/story-demo/cf008/pages/page-09.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-09.mp3",
@@ -1555,8 +1571,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hopeless",
-            "helpful",
-            "happy"
+            "barked—except",
+            "fetch.”"
           ],
           "image": "./assets/story-demo/cf008/pages/page-10.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-10.mp3",
@@ -1578,8 +1594,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "outside.",
-            "inside.",
-            "upstairs."
+            "lost!”",
+            "socks."
           ],
           "image": "./assets/story-demo/cf008/pages/page-11.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-11.mp3",
@@ -1602,8 +1618,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "lost!”",
-            "safe!",
-            "hungry!"
+            "garden.",
+            "day"
           ],
           "image": "./assets/story-demo/cf008/pages/page-12.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-12.mp3",
@@ -1620,12 +1636,12 @@ window.KakaCarterManifest = {
             "sat."
           ],
           "blanks": [
-            "sat."
+            "Suddenly"
           ],
           "choices": [
-            "sat.",
-            "ran.",
-            "barked."
+            "Suddenly",
+            "Hart",
+            "chased"
           ],
           "image": "./assets/story-demo/cf008/pages/page-13.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-13.mp3",
@@ -1644,12 +1660,13 @@ window.KakaCarterManifest = {
             "Ginger!"
           ],
           "blanks": [
+            "back—with",
             "Ginger!"
           ],
           "choices": [
-            "Ginger!",
-            "Rover!",
-            "Emmy!"
+            "back—with Ginger!",
+            "nice dog.",
+            "Hart’s kitten."
           ],
           "image": "./assets/story-demo/cf008/pages/page-14.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-14.mp3",
@@ -1675,8 +1692,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "fetch.”",
-            "sleep.",
-            "hide."
+            "one",
+            "dogs"
           ],
           "image": "./assets/story-demo/cf008/pages/page-15.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-15.mp3",
@@ -1700,8 +1717,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "garden.",
-            "kitchen.",
-            "school."
+            "manners!”",
+            "dogs"
           ],
           "image": "./assets/story-demo/cf008/pages/page-16.webp",
           "audio": "./assets/story-demo/cf008/cf008-page-16.mp3",
@@ -1737,8 +1754,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "painting,”",
-            "cooking,",
-            "reading,"
+            "resting!”",
+            "went"
           ],
           "image": "./assets/story-demo/cf009/pages/page-01.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-01.mp3",
@@ -1763,8 +1780,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "basement.",
-            "kitchen.",
-            "garden."
+            "bumped",
+            "shopping."
           ],
           "image": "./assets/story-demo/cf009/pages/page-02.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-02.mp3",
@@ -1784,12 +1801,13 @@ window.KakaCarterManifest = {
             "kitchen."
           ],
           "blanks": [
+            "started",
             "painting"
           ],
           "choices": [
-            "painting",
-            "cleaning",
-            "building"
+            "started painting",
+            "good day",
+            "went everywhere."
           ],
           "image": "./assets/story-demo/cf009/pages/page-03.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-03.mp3",
@@ -1807,12 +1825,12 @@ window.KakaCarterManifest = {
             "Harry."
           ],
           "blanks": [
-            "Oliver!”"
+            "yelled"
           ],
           "choices": [
-            "Oliver!”",
-            "Mom!",
-            "Rover!"
+            "yelled",
+            "started",
+            "went"
           ],
           "image": "./assets/story-demo/cf009/pages/page-04.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-04.mp3",
@@ -1833,8 +1851,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "everywhere.",
-            "nowhere.",
-            "upstairs."
+            "roller.",
+            "bumped"
           ],
           "image": "./assets/story-demo/cf009/pages/page-05.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-05.mp3",
@@ -1853,12 +1871,12 @@ window.KakaCarterManifest = {
             "paint."
           ],
           "blanks": [
-            "cleaned"
+            "paint."
           ],
           "choices": [
-            "cleaned",
-            "spilled",
-            "mixed"
+            "paint.",
+            "kitchen.",
+            "spilled"
           ],
           "image": "./assets/story-demo/cf009/pages/page-06.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-06.mp3",
@@ -1882,8 +1900,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "shopping.",
-            "school.",
-            "work."
+            "went",
+            "sighed."
           ],
           "image": "./assets/story-demo/cf009/pages/page-07.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-07.mp3",
@@ -1904,12 +1922,13 @@ window.KakaCarterManifest = {
             "paint!"
           ],
           "blanks": [
+            "wet",
             "paint!"
           ],
           "choices": [
-            "paint!",
-            "water!",
-            "mud!"
+            "wet paint!",
+            "good day",
+            "started painting"
           ],
           "image": "./assets/story-demo/cf009/pages/page-08.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-08.mp3",
@@ -1933,8 +1952,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "sweater!”",
-            "hat!",
-            "dress!"
+            "down",
+            "basement."
           ],
           "image": "./assets/story-demo/cf009/pages/page-09.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-09.mp3",
@@ -1952,12 +1971,13 @@ window.KakaCarterManifest = {
             "again."
           ],
           "blanks": [
+            "started",
             "painting"
           ],
           "choices": [
-            "painting",
-            "cleaning",
-            "resting"
+            "started painting",
+            "good day",
+            "went everywhere."
           ],
           "image": "./assets/story-demo/cf009/pages/page-10.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-10.mp3",
@@ -1979,8 +1999,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "“Sit,",
-            "Stay,",
-            "Come,"
+            "sighed.",
+            "yelled"
           ],
           "image": "./assets/story-demo/cf009/pages/page-11.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-11.mp3",
@@ -2000,12 +2020,12 @@ window.KakaCarterManifest = {
             "sheet."
           ],
           "blanks": [
-            "spilled"
+            "sheet."
           ],
           "choices": [
-            "spilled",
-            "dried",
-            "stayed"
+            "sheet.",
+            "came",
+            "put"
           ],
           "image": "./assets/story-demo/cf009/pages/page-12.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-12.mp3",
@@ -2028,8 +2048,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "sighed.",
-            "smiled.",
-            "laughed."
+            "over",
+            "home"
           ],
           "image": "./assets/story-demo/cf009/pages/page-13.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-13.mp3",
@@ -2049,12 +2069,12 @@ window.KakaCarterManifest = {
             "roller."
           ],
           "blanks": [
-            "washed"
+            "roller."
           ],
           "choices": [
-            "washed",
-            "painted",
-            "dropped"
+            "roller.",
+            "kitchen.",
+            "bumped"
           ],
           "image": "./assets/story-demo/cf009/pages/page-14.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-14.mp3",
@@ -2075,12 +2095,13 @@ window.KakaCarterManifest = {
             "basement."
           ],
           "blanks": [
-            "basement."
+            "put",
+            "everything"
           ],
           "choices": [
-            "basement.",
-            "kitchen.",
-            "garden."
+            "put everything",
+            "good day",
+            "started painting"
           ],
           "image": "./assets/story-demo/cf009/pages/page-15.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-15.mp3",
@@ -2104,8 +2125,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "resting!”",
-            "playing!",
-            "running!"
+            "washed",
+            "kitchen."
           ],
           "image": "./assets/story-demo/cf009/pages/page-16.webp",
           "audio": "./assets/story-demo/cf009/cf009-page-16.mp3",
@@ -2141,8 +2162,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "dentist.",
-            "doctor.",
-            "school."
+            "come",
+            "late."
           ],
           "image": "./assets/story-demo/cf010/pages/page-01.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-01.mp3",
@@ -2167,8 +2188,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hurt",
-            "help",
-            "see"
+            "late.",
+            "bear"
           ],
           "image": "./assets/story-demo/cf010/pages/page-02.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-02.mp3",
@@ -2190,12 +2211,12 @@ window.KakaCarterManifest = {
             "Emmy."
           ],
           "blanks": [
-            "chair"
+            "down,”"
           ],
           "choices": [
-            "chair",
-            "car",
-            "door"
+            "down,”",
+            "going",
+            "yelled"
           ],
           "image": "./assets/story-demo/cf010/pages/page-03.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-03.mp3",
@@ -2219,8 +2240,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "late.",
-            "early.",
-            "ready."
+            "yelled",
+            "bear"
           ],
           "image": "./assets/story-demo/cf010/pages/page-04.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-04.mp3",
@@ -2245,8 +2266,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "know",
-            "forget",
-            "like"
+            "likes",
+            "look"
           ],
           "image": "./assets/story-demo/cf010/pages/page-05.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-05.mp3",
@@ -2266,12 +2287,12 @@ window.KakaCarterManifest = {
             "dentist."
           ],
           "blanks": [
-            "likes"
+            "dentist."
           ],
           "choices": [
-            "likes",
-            "needs",
-            "sees"
+            "dentist.",
+            "Next",
+            "know"
           ],
           "image": "./assets/story-demo/cf010/pages/page-06.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-06.mp3",
@@ -2292,8 +2313,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "go!”",
-            "stay!",
-            "wait!"
+            "chair",
+            "great,"
           ],
           "image": "./assets/story-demo/cf010/pages/page-07.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-07.mp3",
@@ -2315,12 +2336,13 @@ window.KakaCarterManifest = {
             "Cool."
           ],
           "blanks": [
+            "look",
             "great,"
           ],
           "choices": [
-            "great,",
-            "bad,",
-            "small,"
+            "look great,",
+            "chair goes",
+            "teddy bear"
           ],
           "image": "./assets/story-demo/cf010/pages/page-08.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-08.mp3",
@@ -2343,8 +2365,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "turn.",
-            "game.",
-            "story."
+            "know",
+            "dentist."
           ],
           "image": "./assets/story-demo/cf010/pages/page-09.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-09.mp3",
@@ -2363,12 +2385,13 @@ window.KakaCarterManifest = {
             "great.”"
           ],
           "blanks": [
-            "always"
+            "look",
+            "great.”"
           ],
           "choices": [
-            "always",
-            "never",
-            "sometimes"
+            "look great.”",
+            "chair goes",
+            "teddy bear"
           ],
           "image": "./assets/story-demo/cf010/pages/page-10.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-10.mp3",
@@ -2390,12 +2413,13 @@ window.KakaCarterManifest = {
             "filling.”"
           ],
           "blanks": [
-            "filling.”"
+            "come",
+            "back"
           ],
           "choices": [
-            "filling.”",
-            "checkup.",
-            "brush."
+            "come back",
+            "chair goes",
+            "teddy bear"
           ],
           "image": "./assets/story-demo/cf010/pages/page-11.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-11.mp3",
@@ -2419,12 +2443,12 @@ window.KakaCarterManifest = {
             "Emmy."
           ],
           "blanks": [
-            "dentist!”"
+            "yelled"
           ],
           "choices": [
-            "dentist!”",
-            "doctor!",
-            "school!"
+            "yelled",
+            "teeth",
+            "down,”"
           ],
           "image": "./assets/story-demo/cf010/pages/page-12.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-12.mp3",
@@ -2443,12 +2467,12 @@ window.KakaCarterManifest = {
             "bear."
           ],
           "blanks": [
-            "teddy"
+            "bear."
           ],
           "choices": [
-            "teddy",
-            "school",
-            "toy"
+            "bear.",
+            "know",
+            "hurt"
           ],
           "image": "./assets/story-demo/cf010/pages/page-13.webp",
           "audio": "./assets/story-demo/cf010/cf010-page-13.mp3",
@@ -2479,12 +2503,13 @@ window.KakaCarterManifest = {
             "Harry."
           ],
           "blanks": [
-            "asked"
+            "come",
+            "over?”"
           ],
           "choices": [
-            "asked",
-            "Jim",
-            "come"
+            "come over?”",
+            "big deal,”",
+            "went home."
           ],
           "image": "./assets/story-demo/cf011/pages/page-01.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-01.mp3",
@@ -2509,8 +2534,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "floor.",
-            "Jim",
-            "come"
+            "basket.",
+            "model"
           ],
           "image": "./assets/story-demo/cf011/pages/page-02.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-02.mp3",
@@ -2535,8 +2560,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "room.”",
-            "Jim",
-            "come"
+            "Soon",
+            "doing?”"
           ],
           "image": "./assets/story-demo/cf011/pages/page-03.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-03.mp3",
@@ -2562,8 +2587,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "basket.",
-            "Jim",
-            "come"
+            "floor.",
+            "dropped"
           ],
           "image": "./assets/story-demo/cf011/pages/page-04.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-04.mp3",
@@ -2587,8 +2612,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "neat.",
-            "Jim",
-            "come"
+            "doing?”",
+            "went"
           ],
           "image": "./assets/story-demo/cf011/pages/page-05.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-05.mp3",
@@ -2612,8 +2637,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "door",
-            "Jim",
-            "come"
+            "must",
+            "doing?”"
           ],
           "image": "./assets/story-demo/cf011/pages/page-06.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-06.mp3",
@@ -2635,8 +2660,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Jim.",
-            "come",
-            "over"
+            "over?”",
+            "Next"
           ],
           "image": "./assets/story-demo/cf011/pages/page-07.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-07.mp3",
@@ -2663,8 +2688,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "shelf.",
-            "Jim",
-            "come"
+            "dumped",
+            "home."
           ],
           "image": "./assets/story-demo/cf011/pages/page-08.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-08.mp3",
@@ -2689,8 +2714,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "floor.",
-            "Jim",
-            "come"
+            "robots",
+            "neat."
           ],
           "image": "./assets/story-demo/cf011/pages/page-09.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-09.mp3",
@@ -2715,7 +2740,7 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "model",
-            "Jim",
+            "“Oops,",
             "come"
           ],
           "image": "./assets/story-demo/cf011/pages/page-10.webp",
@@ -2736,12 +2761,12 @@ window.KakaCarterManifest = {
             "Jim."
           ],
           "blanks": [
-            "about"
+            "“Oops,"
           ],
           "choices": [
-            "about",
-            "Jim",
-            "come"
+            "“Oops,",
+            "must",
+            "asked"
           ],
           "image": "./assets/story-demo/cf011/pages/page-11.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-11.mp3",
@@ -2762,12 +2787,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "big",
             "deal,”"
           ],
           "choices": [
-            "deal,”",
-            "Jim",
-            "come"
+            "big deal,”",
+            "come over?”",
+            "went home."
           ],
           "image": "./assets/story-demo/cf011/pages/page-12.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-12.mp3",
@@ -2792,8 +2818,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "floor.",
-            "Jim",
-            "come"
+            "model",
+            "“Oops,"
           ],
           "image": "./assets/story-demo/cf011/pages/page-13.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-13.mp3",
@@ -2811,12 +2837,13 @@ window.KakaCarterManifest = {
             "home."
           ],
           "blanks": [
+            "went",
             "home."
           ],
           "choices": [
-            "home.",
-            "Jim",
-            "come"
+            "went home.",
+            "come over?”",
+            "big deal,”"
           ],
           "image": "./assets/story-demo/cf011/pages/page-14.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-14.mp3",
@@ -2842,8 +2869,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "room.",
-            "Jim",
-            "come"
+            "put",
+            "all"
           ],
           "image": "./assets/story-demo/cf011/pages/page-15.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-15.mp3",
@@ -2867,8 +2894,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "things.",
-            "Jim",
-            "come"
+            "must",
+            "shelf."
           ],
           "image": "./assets/story-demo/cf011/pages/page-16.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-16.mp3",
@@ -2892,8 +2919,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked",
-            "Jim",
-            "come"
+            "deal,”",
+            "must"
           ],
           "image": "./assets/story-demo/cf011/pages/page-17.webp",
           "audio": "./assets/story-demo/cf011/cf011-page-17.mp3",
@@ -2925,12 +2952,13 @@ window.KakaCarterManifest = {
             "vacation."
           ],
           "blanks": [
-            "vacation."
-          ],
-          "choices": [
-            "vacation.",
             "first",
             "day"
+          ],
+          "choices": [
+            "first day",
+            "glad school",
+            "cool spray."
           ],
           "image": "./assets/story-demo/cf012/pages/page-01.webp",
           "audio": "./assets/story-demo/cf012/cf012-page-01.mp3",
@@ -2955,8 +2983,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "over,”",
-            "first",
-            "day"
+            "vacation.",
+            "family"
           ],
           "image": "./assets/story-demo/cf012/pages/page-02.webp",
           "audio": "./assets/story-demo/cf012/cf012-page-02.mp3",
@@ -2981,8 +3009,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked",
-            "first",
-            "day"
+            "next?”",
+            "park."
           ],
           "image": "./assets/story-demo/cf012/pages/page-03.webp",
           "audio": "./assets/story-demo/cf012/cf012-page-03.mp3",
@@ -3007,8 +3035,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "park.",
-            "first",
-            "day"
+            "day",
+            "start"
           ],
           "image": "./assets/story-demo/cf012/pages/page-04.webp",
           "audio": "./assets/story-demo/cf012/cf012-page-04.mp3",
@@ -3033,8 +3061,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked",
-            "first",
-            "day"
+            "ran",
+            "family"
           ],
           "image": "./assets/story-demo/cf012/pages/page-05.webp",
           "audio": "./assets/story-demo/cf012/cf012-page-05.mp3",
@@ -3059,8 +3087,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "swimsuits.",
-            "first",
-            "day"
+            "day",
+            "vacation."
           ],
           "image": "./assets/story-demo/cf012/pages/page-06.webp",
           "audio": "./assets/story-demo/cf012/cf012-page-06.mp3",
@@ -3086,8 +3114,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "spray.",
-            "first",
-            "day"
+            "day",
+            "next?”"
           ],
           "image": "./assets/story-demo/cf012/pages/page-07.webp",
           "audio": "./assets/story-demo/cf012/cf012-page-07.mp3",
@@ -3107,12 +3135,13 @@ window.KakaCarterManifest = {
             "cards."
           ],
           "blanks": [
+            "played",
             "cards."
           ],
           "choices": [
-            "cards.",
-            "first",
-            "day"
+            "played cards.",
+            "first day",
+            "glad school"
           ],
           "image": "./assets/story-demo/cf012/pages/page-08.webp",
           "audio": "./assets/story-demo/cf012/cf012-page-08.mp3",
@@ -3131,12 +3160,13 @@ window.KakaCarterManifest = {
             "hide-and-seek."
           ],
           "blanks": [
-            "hide-and-seek."
+            "played",
+            "tag"
           ],
           "choices": [
-            "hide-and-seek.",
-            "first",
-            "day"
+            "played tag",
+            "first day",
+            "glad school"
           ],
           "image": "./assets/story-demo/cf012/pages/page-09.webp",
           "audio": "./assets/story-demo/cf012/cf012-page-09.mp3",
@@ -3161,8 +3191,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked",
-            "first",
-            "day"
+            "cool",
+            "came"
           ],
           "image": "./assets/story-demo/cf012/pages/page-10.webp",
           "audio": "./assets/story-demo/cf012/cf012-page-10.mp3",
@@ -3187,8 +3217,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "room.",
-            "first",
-            "day"
+            "put",
+            "school"
           ],
           "image": "./assets/story-demo/cf012/pages/page-11.webp",
           "audio": "./assets/story-demo/cf012/cf012-page-11.mp3",
@@ -3207,12 +3237,12 @@ window.KakaCarterManifest = {
             "again?”"
           ],
           "blanks": [
-            "again?”"
+            "start"
           ],
           "choices": [
-            "again?”",
-            "first",
-            "day"
+            "start",
+            "summer",
+            "glad"
           ],
           "image": "./assets/story-demo/cf012/pages/page-12.webp",
           "audio": "./assets/story-demo/cf012/cf012-page-12.mp3",
@@ -3244,12 +3274,13 @@ window.KakaCarterManifest = {
             "Mom."
           ],
           "blanks": [
+            "old",
             "things,”"
           ],
           "choices": [
-            "things,”",
-            "having",
-            "yard"
+            "old things,”",
+            "stuff anymore,”",
+            "board games"
           ],
           "image": "./assets/story-demo/cf013/pages/page-01.webp",
           "audio": "./assets/story-demo/cf013/cf013-page-01.mp3",
@@ -3276,8 +3307,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "anymore,”",
-            "having",
-            "yard"
+            "girl",
+            "board"
           ],
           "image": "./assets/story-demo/cf013/pages/page-02.webp",
           "audio": "./assets/story-demo/cf013/cf013-page-02.mp3",
@@ -3302,8 +3333,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "dolls.",
-            "having",
-            "yard"
+            "still",
+            "stuff"
           ],
           "image": "./assets/story-demo/cf013/pages/page-03.webp",
           "audio": "./assets/story-demo/cf013/cf013-page-03.mp3",
@@ -3329,8 +3360,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "sell.",
-            "having",
-            "yard"
+            "old",
+            "ball?”"
           ],
           "image": "./assets/story-demo/cf013/pages/page-04.webp",
           "audio": "./assets/story-demo/cf013/cf013-page-04.mp3",
@@ -3355,8 +3386,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked",
-            "having",
-            "yard"
+            "board",
+            "sold"
           ],
           "image": "./assets/story-demo/cf013/pages/page-05.webp",
           "audio": "./assets/story-demo/cf013/cf013-page-05.mp3",
@@ -3381,8 +3412,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "sale!",
-            "having",
-            "yard"
+            "dolls.",
+            "toy,”"
           ],
           "image": "./assets/story-demo/cf013/pages/page-06.webp",
           "audio": "./assets/story-demo/cf013/cf013-page-06.mp3",
@@ -3407,8 +3438,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "thought.",
-            "having",
-            "yard"
+            "stuff",
+            "found"
           ],
           "image": "./assets/story-demo/cf013/pages/page-07.webp",
           "audio": "./assets/story-demo/cf013/cf013-page-07.mp3",
@@ -3430,12 +3461,13 @@ window.KakaCarterManifest = {
             "clothes."
           ],
           "blanks": [
-            "clothes."
+            "blue",
+            "dishes"
           ],
           "choices": [
-            "clothes.",
-            "having",
-            "yard"
+            "blue dishes",
+            "old things,”",
+            "stuff anymore,”"
           ],
           "image": "./assets/story-demo/cf013/pages/page-08.webp",
           "audio": "./assets/story-demo/cf013/cf013-page-08.mp3",
@@ -3459,8 +3491,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "toys.",
-            "having",
-            "yard"
+            "walk.",
+            "time"
           ],
           "image": "./assets/story-demo/cf013/pages/page-09.webp",
           "audio": "./assets/story-demo/cf013/cf013-page-09.mp3",
@@ -3486,8 +3518,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "alligator.",
-            "having",
-            "yard"
+            "baby",
+            "play"
           ],
           "image": "./assets/story-demo/cf013/pages/page-10.webp",
           "audio": "./assets/story-demo/cf013/cf013-page-10.mp3",
@@ -3511,8 +3543,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "alligator.",
-            "having",
-            "yard"
+            "clothes.",
+            "picked"
           ],
           "image": "./assets/story-demo/cf013/pages/page-11.webp",
           "audio": "./assets/story-demo/cf013/cf013-page-11.mp3",
@@ -3535,12 +3567,13 @@ window.KakaCarterManifest = {
             "walk."
           ],
           "blanks": [
-            "walk."
+            "next",
+            "day"
           ],
           "choices": [
-            "walk.",
-            "having",
-            "yard"
+            "next day",
+            "old things,”",
+            "stuff anymore,”"
           ],
           "image": "./assets/story-demo/cf013/pages/page-12.webp",
           "audio": "./assets/story-demo/cf013/cf013-page-12.mp3",
@@ -3565,8 +3598,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "bought,",
-            "having",
-            "yard"
+            "found",
+            "clothes."
           ],
           "image": "./assets/story-demo/cf013/pages/page-13.webp",
           "audio": "./assets/story-demo/cf013/cf013-page-13.mp3",
@@ -3603,8 +3636,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "beach!”",
-            "perfect",
-            "day"
+            "under",
+            "knees."
           ],
           "image": "./assets/story-demo/cf014/pages/page-01.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-01.mp3",
@@ -3630,8 +3663,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cooler.",
-            "perfect",
-            "day"
+            "castle.",
+            "down"
           ],
           "image": "./assets/story-demo/cf014/pages/page-02.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-02.mp3",
@@ -3650,12 +3683,13 @@ window.KakaCarterManifest = {
             "everyone."
           ],
           "blanks": [
-            "everyone."
+            "put",
+            "sunscreen"
           ],
           "choices": [
-            "everyone.",
-            "perfect",
-            "day"
+            "put sunscreen",
+            "sand castle.",
+            "went down"
           ],
           "image": "./assets/story-demo/cf014/pages/page-03.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-03.mp3",
@@ -3675,12 +3709,13 @@ window.KakaCarterManifest = {
             "castle."
           ],
           "blanks": [
+            "sand",
             "castle."
           ],
           "choices": [
-            "castle.",
-            "perfect",
-            "day"
+            "sand castle.",
+            "put sunscreen",
+            "went down"
           ],
           "image": "./assets/story-demo/cf014/pages/page-04.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-04.mp3",
@@ -3707,8 +3742,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "water.",
-            "perfect",
-            "day"
+            "sand",
+            "soaked."
           ],
           "image": "./assets/story-demo/cf014/pages/page-05.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-05.mp3",
@@ -3729,12 +3764,13 @@ window.KakaCarterManifest = {
             "feet."
           ],
           "blanks": [
-            "feet."
+            "small",
+            "wave"
           ],
           "choices": [
-            "feet.",
-            "perfect",
-            "day"
+            "small wave",
+            "put sunscreen",
+            "sand castle."
           ],
           "image": "./assets/story-demo/cf014/pages/page-06.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-06.mp3",
@@ -3760,8 +3796,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "first,”",
-            "perfect",
-            "day"
+            "quick—”",
+            "want"
           ],
           "image": "./assets/story-demo/cf014/pages/page-07.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-07.mp3",
@@ -3786,8 +3822,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "knees.",
-            "perfect",
-            "day"
+            "went",
+            "soaked."
           ],
           "image": "./assets/story-demo/cf014/pages/page-08.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-08.mp3",
@@ -3811,8 +3847,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "back",
-            "perfect",
-            "day"
+            "day",
+            "went"
           ],
           "image": "./assets/story-demo/cf014/pages/page-09.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-09.mp3",
@@ -3838,8 +3874,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "quickly!”",
-            "perfect",
-            "day"
+            "Splash!",
+            "perfect"
           ],
           "image": "./assets/story-demo/cf014/pages/page-10.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-10.mp3",
@@ -3859,12 +3895,13 @@ window.KakaCarterManifest = {
             "wave."
           ],
           "blanks": [
+            "big",
             "wave."
           ],
           "choices": [
-            "wave.",
-            "perfect",
-            "day"
+            "big wave.",
+            "put sunscreen",
+            "sand castle."
           ],
           "image": "./assets/story-demo/cf014/pages/page-11.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-11.mp3",
@@ -3886,12 +3923,12 @@ window.KakaCarterManifest = {
             "again."
           ],
           "blanks": [
-            "again."
+            "water"
           ],
           "choices": [
-            "again.",
-            "perfect",
-            "day"
+            "water",
+            "Splash!",
+            "castle."
           ],
           "image": "./assets/story-demo/cf014/pages/page-12.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-12.mp3",
@@ -3917,8 +3954,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Splash!",
-            "perfect",
-            "day"
+            "cold",
+            "started"
           ],
           "image": "./assets/story-demo/cf014/pages/page-13.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-13.mp3",
@@ -3941,8 +3978,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wave.",
-            "perfect",
-            "day"
+            "beach!”",
+            "quick—”"
           ],
           "image": "./assets/story-demo/cf014/pages/page-14.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-14.mp3",
@@ -3967,8 +4004,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "soaked.",
-            "perfect",
-            "day"
+            "knees.",
+            "building"
           ],
           "image": "./assets/story-demo/cf014/pages/page-15.webp",
           "audio": "./assets/story-demo/cf014/cf014-page-15.mp3",
@@ -4003,8 +4040,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked",
-            "Everyone",
-            "movie"
+            "looks",
+            "cried"
           ],
           "image": "./assets/story-demo/cf015/pages/page-01.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-01.mp3",
@@ -4024,12 +4061,13 @@ window.KakaCarterManifest = {
             "chases!”"
           ],
           "blanks": [
-            "chases!”"
+            "see",
+            "car"
           ],
           "choices": [
-            "chases!”",
-            "Everyone",
-            "movie"
+            "see car",
+            "penguin movie,”",
+            "“Five tickets,"
           ],
           "image": "./assets/story-demo/cf015/pages/page-02.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-02.mp3",
@@ -4055,8 +4093,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "movie,”",
-            "Everyone",
-            "theater"
+            "candy.",
+            "kids"
           ],
           "image": "./assets/story-demo/cf015/pages/page-03.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-03.mp3",
@@ -4075,12 +4113,12 @@ window.KakaCarterManifest = {
             "Dad."
           ],
           "blanks": [
-            "please,”"
+            "tickets,"
           ],
           "choices": [
-            "please,”",
-            "Everyone",
-            "movie"
+            "tickets,",
+            "penguin",
+            "audience"
           ],
           "image": "./assets/story-demo/cf015/pages/page-04.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-04.mp3",
@@ -4100,12 +4138,13 @@ window.KakaCarterManifest = {
             "movie.”"
           ],
           "blanks": [
+            "baby",
             "movie.”"
           ],
           "choices": [
-            "movie.”",
-            "Everyone",
-            "theater"
+            "baby movie.”",
+            "see car",
+            "penguin movie,”"
           ],
           "image": "./assets/story-demo/cf015/pages/page-05.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-05.mp3",
@@ -4126,12 +4165,13 @@ window.KakaCarterManifest = {
             "candy."
           ],
           "blanks": [
+            "favorite",
             "candy."
           ],
           "choices": [
-            "candy.",
-            "Everyone",
-            "movie"
+            "favorite candy.",
+            "see car",
+            "penguin movie,”"
           ],
           "image": "./assets/story-demo/cf015/pages/page-06.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-06.mp3",
@@ -4156,8 +4196,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "theater.",
-            "Everyone",
-            "movie"
+            "chase!”",
+            "candy."
           ],
           "image": "./assets/story-demo/cf015/pages/page-07.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-07.mp3",
@@ -4181,8 +4221,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "penguins.",
-            "Everyone",
-            "movie"
+            "zookeeper.",
+            "favorite"
           ],
           "image": "./assets/story-demo/cf015/pages/page-08.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-08.mp3",
@@ -4208,8 +4248,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "thought",
-            "Everyone",
-            "movie"
+            "audience",
+            "funny."
           ],
           "image": "./assets/story-demo/cf015/pages/page-09.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-09.mp3",
@@ -4233,8 +4273,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "funny.",
-            "Everyone",
-            "movie"
+            "climbed",
+            "chase!”"
           ],
           "image": "./assets/story-demo/cf015/pages/page-10.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-10.mp3",
@@ -4251,12 +4291,13 @@ window.KakaCarterManifest = {
             "laughed."
           ],
           "blanks": [
+            "audience",
             "laughed."
           ],
           "choices": [
-            "laughed.",
-            "Everyone",
-            "movie"
+            "audience laughed.",
+            "see car",
+            "penguin movie,”"
           ],
           "image": "./assets/story-demo/cf015/pages/page-11.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-11.mp3",
@@ -4280,8 +4321,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "climbed",
-            "Everyone",
-            "movie"
+            "asked",
+            "chase!”"
           ],
           "image": "./assets/story-demo/cf015/pages/page-12.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-12.mp3",
@@ -4299,12 +4340,12 @@ window.KakaCarterManifest = {
             "again."
           ],
           "blanks": [
-            "again."
+            "laughed"
           ],
           "choices": [
-            "again.",
-            "Everyone",
-            "movie"
+            "laughed",
+            "candy.",
+            "chases!”"
           ],
           "image": "./assets/story-demo/cf015/pages/page-13.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-13.mp3",
@@ -4328,8 +4369,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "zookeeper.",
-            "Everyone",
-            "movie"
+            "boring,”",
+            "“Five"
           ],
           "image": "./assets/story-demo/cf015/pages/page-14.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-14.mp3",
@@ -4350,7 +4391,7 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hard.",
-            "Everyone",
+            "want",
             "movie"
           ],
           "image": "./assets/story-demo/cf015/pages/page-15.webp",
@@ -4375,8 +4416,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "jeep.",
-            "Everyone",
-            "movie"
+            "went",
+            "baby"
           ],
           "image": "./assets/story-demo/cf015/pages/page-16.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-16.mp3",
@@ -4400,8 +4441,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "chase!”",
-            "Everyone",
-            "movie"
+            "“Five",
+            "screen"
           ],
           "image": "./assets/story-demo/cf015/pages/page-17.webp",
           "audio": "./assets/story-demo/cf015/cf015-page-17.mp3",
@@ -4437,8 +4478,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "kitchen.",
-            "spent",
-            "all"
+            "left",
+            "hope"
           ],
           "image": "./assets/story-demo/cf016/pages/page-01.webp",
           "audio": "./assets/story-demo/cf016/cf016-page-01.mp3",
@@ -4465,8 +4506,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cake,”",
-            "spent",
-            "all"
+            "things",
+            "plate."
           ],
           "image": "./assets/story-demo/cf016/pages/page-02.webp",
           "audio": "./assets/story-demo/cf016/cf016-page-02.mp3",
@@ -4489,12 +4530,12 @@ window.KakaCarterManifest = {
             "raisins."
           ],
           "blanks": [
-            "raisins."
+            "picked"
           ],
           "choices": [
-            "raisins.",
-            "spent",
-            "all"
+            "picked",
+            "day",
+            "spent"
           ],
           "image": "./assets/story-demo/cf016/pages/page-03.webp",
           "audio": "./assets/story-demo/cf016/cf016-page-03.mp3",
@@ -4521,8 +4562,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cake",
-            "spent",
-            "all"
+            "whole",
+            "ate"
           ],
           "image": "./assets/story-demo/cf016/pages/page-04.webp",
           "audio": "./assets/story-demo/cf016/cf016-page-04.mp3",
@@ -4550,8 +4591,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "plate.",
-            "spent",
-            "all"
+            "picked",
+            "new"
           ],
           "image": "./assets/story-demo/cf016/pages/page-05.webp",
           "audio": "./assets/story-demo/cf016/cf016-page-05.mp3",
@@ -4578,8 +4619,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "things",
-            "spent",
-            "all"
+            "more",
+            "hope"
           ],
           "image": "./assets/story-demo/cf016/pages/page-06.webp",
           "audio": "./assets/story-demo/cf016/cf016-page-06.mp3",
@@ -4605,8 +4646,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cherries.",
-            "spent",
-            "all"
+            "things",
+            "wished"
           ],
           "image": "./assets/story-demo/cf016/pages/page-07.webp",
           "audio": "./assets/story-demo/cf016/cf016-page-07.mp3",
@@ -4627,12 +4668,13 @@ window.KakaCarterManifest = {
             "cake."
           ],
           "blanks": [
-            "cake."
+            "whole",
+            "piece"
           ],
           "choices": [
-            "cake.",
-            "spent",
-            "all"
+            "whole piece",
+            "hope everyone",
+            "raisins, carrots,"
           ],
           "image": "./assets/story-demo/cf016/pages/page-08.webp",
           "audio": "./assets/story-demo/cf016/cf016-page-08.mp3",
@@ -4652,12 +4694,13 @@ window.KakaCarterManifest = {
             "cake."
           ],
           "blanks": [
+            "more",
             "cake."
           ],
           "choices": [
-            "cake.",
-            "spent",
-            "all"
+            "more cake.",
+            "hope everyone",
+            "raisins, carrots,"
           ],
           "image": "./assets/story-demo/cf016/pages/page-09.webp",
           "audio": "./assets/story-demo/cf016/cf016-page-09.mp3",
@@ -4682,8 +4725,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cherries.",
-            "spent",
-            "all"
+            "more",
+            "cut"
           ],
           "image": "./assets/story-demo/cf016/pages/page-10.webp",
           "audio": "./assets/story-demo/cf016/cf016-page-10.mp3",
@@ -4706,12 +4749,13 @@ window.KakaCarterManifest = {
             "Oliver."
           ],
           "blanks": [
-            "cake!”"
+            "new",
+            "piece"
           ],
           "choices": [
-            "cake!”",
-            "spent",
-            "all"
+            "new piece",
+            "hope everyone",
+            "raisins, carrots,"
           ],
           "image": "./assets/story-demo/cf016/pages/page-11.webp",
           "audio": "./assets/story-demo/cf016/cf016-page-11.mp3",
@@ -4743,12 +4787,13 @@ window.KakaCarterManifest = {
             "play."
           ],
           "blanks": [
-            "play."
-          ],
-          "choices": [
-            "play.",
             "going",
             "outside"
+          ],
+          "choices": [
+            "going outside",
+            "started dusting",
+            "run away."
           ],
           "image": "./assets/story-demo/cf017/pages/page-01.webp",
           "audio": "./assets/story-demo/cf017/cf017-page-01.mp3",
@@ -4773,8 +4818,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "furniture,”",
-            "going",
-            "outside"
+            "space",
+            "duster."
           ],
           "image": "./assets/story-demo/cf017/pages/page-02.webp",
           "audio": "./assets/story-demo/cf017/cf017-page-02.mp3",
@@ -4796,12 +4841,13 @@ window.KakaCarterManifest = {
             "chairs."
           ],
           "blanks": [
-            "chairs."
+            "started",
+            "dusting"
           ],
           "choices": [
-            "chairs.",
-            "going",
-            "outside"
+            "started dusting",
+            "going outside",
+            "run away."
           ],
           "image": "./assets/story-demo/cf017/pages/page-03.webp",
           "audio": "./assets/story-demo/cf017/cf017-page-03.mp3",
@@ -4827,8 +4873,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "room.",
-            "going",
-            "outside"
+            "asked",
+            "dust"
           ],
           "image": "./assets/story-demo/cf017/pages/page-04.webp",
           "audio": "./assets/story-demo/cf017/cf017-page-04.mp3",
@@ -4852,12 +4898,13 @@ window.KakaCarterManifest = {
             "away."
           ],
           "blanks": [
+            "run",
             "away."
           ],
           "choices": [
-            "away.",
-            "going",
-            "outside"
+            "run away.",
+            "going outside",
+            "started dusting"
           ],
           "image": "./assets/story-demo/cf017/pages/page-05.webp",
           "audio": "./assets/story-demo/cf017/cf017-page-05.mp3",
@@ -4881,8 +4928,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "duster.",
-            "going",
-            "outside"
+            "hear",
+            "play."
           ],
           "image": "./assets/story-demo/cf017/pages/page-06.webp",
           "audio": "./assets/story-demo/cf017/cf017-page-06.mp3",
@@ -4907,8 +4954,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wand,”",
-            "going",
-            "outside"
+            "dusted",
+            "Soon"
           ],
           "image": "./assets/story-demo/cf017/pages/page-07.webp",
           "audio": "./assets/story-demo/cf017/cf017-page-07.mp3",
@@ -4929,8 +4976,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "showed",
-            "going",
-            "outside"
+            "chairs.",
+            "away."
           ],
           "image": "./assets/story-demo/cf017/pages/page-08.webp",
           "audio": "./assets/story-demo/cf017/cf017-page-08.mp3",
@@ -4956,8 +5003,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked",
-            "going",
-            "outside"
+            "room.",
+            "chairs."
           ],
           "image": "./assets/story-demo/cf017/pages/page-09.webp",
           "audio": "./assets/story-demo/cf017/cf017-page-09.mp3",
@@ -4978,12 +5025,12 @@ window.KakaCarterManifest = {
             "please?”"
           ],
           "blanks": [
-            "please?”"
+            "wand,"
           ],
           "choices": [
-            "please?”",
-            "going",
-            "outside"
+            "wand,",
+            "Soon",
+            "evil"
           ],
           "image": "./assets/story-demo/cf017/pages/page-10.webp",
           "audio": "./assets/story-demo/cf017/cf017-page-10.mp3",
@@ -5009,8 +5056,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wand.",
-            "going",
-            "outside"
+            "outside",
+            "Tom"
           ],
           "image": "./assets/story-demo/cf017/pages/page-11.webp",
           "audio": "./assets/story-demo/cf017/cf017-page-11.mp3",
@@ -5035,8 +5082,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hear",
-            "going",
-            "outside"
+            "Soon",
+            "come"
           ],
           "image": "./assets/story-demo/cf017/pages/page-12.webp",
           "audio": "./assets/story-demo/cf017/cf017-page-12.mp3",
@@ -5071,8 +5118,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "park.”",
-            "beautiful",
-            "day"
+            "went",
+            "look"
           ],
           "image": "./assets/story-demo/cf018/pages/page-01.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-01.mp3",
@@ -5096,12 +5143,13 @@ window.KakaCarterManifest = {
             "Mom."
           ],
           "blanks": [
-            "warm"
+            "eat",
+            "lunch"
           ],
           "choices": [
-            "warm",
-            "beautiful",
-            "day"
+            "eat lunch",
+            "put food",
+            "everyone drove"
           ],
           "image": "./assets/story-demo/cf018/pages/page-02.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-02.mp3",
@@ -5120,12 +5168,12 @@ window.KakaCarterManifest = {
             "fun.”"
           ],
           "blanks": [
-            "won’t"
+            "fun.”"
           ],
           "choices": [
-            "won’t",
-            "beautiful",
-            "day"
+            "fun.”",
+            "drove",
+            "pond!"
           ],
           "image": "./assets/story-demo/cf018/pages/page-03.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-03.mp3",
@@ -5146,12 +5194,13 @@ window.KakaCarterManifest = {
             "basket."
           ],
           "blanks": [
-            "basket."
+            "put",
+            "food"
           ],
           "choices": [
-            "basket.",
-            "beautiful",
-            "day"
+            "put food",
+            "eat lunch",
+            "everyone drove"
           ],
           "image": "./assets/story-demo/cf018/pages/page-04.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-04.mp3",
@@ -5175,8 +5224,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "park.",
-            "beautiful",
-            "day"
+            "food",
+            "away"
           ],
           "image": "./assets/story-demo/cf018/pages/page-05.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-05.mp3",
@@ -5200,8 +5249,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "frogs,”",
-            "beautiful",
-            "day"
+            "handed",
+            "Frisbee"
           ],
           "image": "./assets/story-demo/cf018/pages/page-06.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-06.mp3",
@@ -5225,8 +5274,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Frisbee",
-            "beautiful",
-            "day"
+            "family",
+            "basket."
           ],
           "image": "./assets/story-demo/cf018/pages/page-07.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-07.mp3",
@@ -5247,12 +5296,13 @@ window.KakaCarterManifest = {
             "pond!"
           ],
           "blanks": [
+            "frog",
             "pond!"
           ],
           "choices": [
-            "pond!",
-            "beautiful",
-            "day"
+            "frog pond!",
+            "eat lunch",
+            "put food"
           ],
           "image": "./assets/story-demo/cf018/pages/page-08.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-08.mp3",
@@ -5272,12 +5322,13 @@ window.KakaCarterManifest = {
             "frogs!”"
           ],
           "blanks": [
-            "frogs!”"
+            "scared",
+            "away"
           ],
           "choices": [
-            "frogs!”",
-            "beautiful",
-            "day"
+            "scared away",
+            "eat lunch",
+            "put food"
           ],
           "image": "./assets/story-demo/cf018/pages/page-09.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-09.mp3",
@@ -5300,8 +5351,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "sandwiches.",
-            "beautiful",
-            "day"
+            "went",
+            "look"
           ],
           "image": "./assets/story-demo/cf018/pages/page-10.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-10.mp3",
@@ -5325,8 +5376,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "thunder,”",
-            "beautiful",
-            "day"
+            "park.”",
+            "frog"
           ],
           "image": "./assets/story-demo/cf018/pages/page-11.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-11.mp3",
@@ -5350,8 +5401,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "food.",
-            "beautiful",
-            "day"
+            "frogs,”",
+            "away"
           ],
           "image": "./assets/story-demo/cf018/pages/page-12.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-12.mp3",
@@ -5376,8 +5427,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "back",
-            "beautiful",
-            "day"
+            "all",
+            "look"
           ],
           "image": "./assets/story-demo/cf018/pages/page-13.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-13.mp3",
@@ -5399,8 +5450,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "rain.",
-            "beautiful",
-            "day"
+            "car.",
+            "frog"
           ],
           "image": "./assets/story-demo/cf018/pages/page-14.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-14.mp3",
@@ -5424,8 +5475,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "picnic!”",
-            "beautiful",
-            "day"
+            "lunch",
+            "look"
           ],
           "image": "./assets/story-demo/cf018/pages/page-15.webp",
           "audio": "./assets/story-demo/cf018/cf018-page-15.mp3",
@@ -5460,8 +5511,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "library,”",
-            "Saturday",
-            "morning"
+            "family",
+            "see"
           ],
           "image": "./assets/story-demo/cf019/pages/page-01.webp",
           "audio": "./assets/story-demo/cf019/cf019-page-01.mp3",
@@ -5485,8 +5536,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "soccer.",
-            "Saturday",
-            "morning"
+            "know",
+            "bug"
           ],
           "image": "./assets/story-demo/cf019/pages/page-02.webp",
           "audio": "./assets/story-demo/cf019/cf019-page-02.mp3",
@@ -5508,12 +5559,13 @@ window.KakaCarterManifest = {
             "book."
           ],
           "blanks": [
+            "robot",
             "book."
           ],
           "choices": [
-            "book.",
-            "Saturday",
-            "morning"
+            "robot book.",
+            "snake book,”",
+            "new books."
           ],
           "image": "./assets/story-demo/cf019/pages/page-03.webp",
           "audio": "./assets/story-demo/cf019/cf019-page-03.mp3",
@@ -5538,8 +5590,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "thought.",
-            "Saturday",
-            "morning"
+            "getting",
+            "book."
           ],
           "image": "./assets/story-demo/cf019/pages/page-04.webp",
           "audio": "./assets/story-demo/cf019/cf019-page-04.mp3",
@@ -5565,8 +5617,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "grumbled.",
-            "Saturday",
-            "morning"
+            "library,”",
+            "getting"
           ],
           "image": "./assets/story-demo/cf019/pages/page-05.webp",
           "audio": "./assets/story-demo/cf019/cf019-page-05.mp3",
@@ -5591,8 +5643,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cars,”",
-            "Saturday",
-            "morning"
+            "robot",
+            "good"
           ],
           "image": "./assets/story-demo/cf019/pages/page-06.webp",
           "audio": "./assets/story-demo/cf019/cf019-page-06.mp3",
@@ -5616,8 +5668,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "book,”",
-            "Saturday",
-            "morning"
+            "looked",
+            "bug"
           ],
           "image": "./assets/story-demo/cf019/pages/page-07.webp",
           "audio": "./assets/story-demo/cf019/cf019-page-07.mp3",
@@ -5642,8 +5694,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "book,”",
-            "Saturday",
-            "morning"
+            "snake",
+            "grumbled."
           ],
           "image": "./assets/story-demo/cf019/pages/page-08.webp",
           "audio": "./assets/story-demo/cf019/cf019-page-08.mp3",
@@ -5665,12 +5717,12 @@ window.KakaCarterManifest = {
             "again."
           ],
           "blanks": [
-            "again."
+            "book"
           ],
           "choices": [
-            "again.",
-            "Saturday",
-            "morning"
+            "book",
+            "cars,”",
+            "books"
           ],
           "image": "./assets/story-demo/cf019/pages/page-09.webp",
           "audio": "./assets/story-demo/cf019/cf019-page-09.mp3",
@@ -5691,12 +5743,12 @@ window.KakaCarterManifest = {
             "again."
           ],
           "blanks": [
-            "again."
+            "library"
           ],
           "choices": [
-            "again.",
-            "Saturday",
-            "morning"
+            "library",
+            "good",
+            "getting"
           ],
           "image": "./assets/story-demo/cf019/pages/page-10.webp",
           "audio": "./assets/story-demo/cf019/cf019-page-10.mp3",
@@ -5716,12 +5768,13 @@ window.KakaCarterManifest = {
             "books."
           ],
           "blanks": [
+            "new",
             "books."
           ],
           "choices": [
-            "books.",
-            "Saturday",
-            "morning"
+            "new books.",
+            "robot book.",
+            "snake book,”"
           ],
           "image": "./assets/story-demo/cf019/pages/page-11.webp",
           "audio": "./assets/story-demo/cf019/cf019-page-11.mp3",
@@ -5742,12 +5795,13 @@ window.KakaCarterManifest = {
             "books."
           ],
           "blanks": [
+            "good",
             "books."
           ],
           "choices": [
-            "books.",
-            "Saturday",
-            "morning"
+            "good books.",
+            "robot book.",
+            "snake book,”"
           ],
           "image": "./assets/story-demo/cf019/pages/page-12.webp",
           "audio": "./assets/story-demo/cf019/cf019-page-12.mp3",
@@ -5769,12 +5823,12 @@ window.KakaCarterManifest = {
             "Oliver."
           ],
           "blanks": [
-            "again!”"
+            "book"
           ],
           "choices": [
-            "again!”",
-            "Saturday",
-            "morning"
+            "book",
+            "family",
+            "watch"
           ],
           "image": "./assets/story-demo/cf019/pages/page-13.webp",
           "audio": "./assets/story-demo/cf019/cf019-page-13.mp3",
@@ -5809,8 +5863,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "home",
-            "One",
-            "day"
+            "loves",
+            "snakes,”"
           ],
           "image": "./assets/story-demo/cf020/pages/page-01.webp",
           "audio": "./assets/story-demo/cf020/cf020-page-01.mp3",
@@ -5835,8 +5889,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "surprise",
-            "One",
-            "day"
+            "brought",
+            "sees"
           ],
           "image": "./assets/story-demo/cf020/pages/page-02.webp",
           "audio": "./assets/story-demo/cf020/cf020-page-02.mp3",
@@ -5859,8 +5913,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "snakes,”",
-            "One",
-            "day"
+            "watched",
+            "think"
           ],
           "image": "./assets/story-demo/cf020/pages/page-03.webp",
           "audio": "./assets/story-demo/cf020/cf020-page-03.mp3",
@@ -5886,8 +5940,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "snake",
-            "One",
-            "day"
+            "across",
+            "box."
           ],
           "image": "./assets/story-demo/cf020/pages/page-04.webp",
           "audio": "./assets/story-demo/cf020/cf020-page-04.mp3",
@@ -5912,8 +5966,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "took",
-            "One",
-            "day"
+            "till",
+            "loves"
           ],
           "image": "./assets/story-demo/cf020/pages/page-05.webp",
           "audio": "./assets/story-demo/cf020/cf020-page-05.mp3",
@@ -5938,8 +5992,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "fork.",
-            "One",
-            "day"
+            "think",
+            "sees"
           ],
           "image": "./assets/story-demo/cf020/pages/page-06.webp",
           "audio": "./assets/story-demo/cf020/cf020-page-06.mp3",
@@ -5965,8 +6019,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "snake,”",
-            "One",
-            "day"
+            "shaped",
+            "fork."
           ],
           "image": "./assets/story-demo/cf020/pages/page-07.webp",
           "audio": "./assets/story-demo/cf020/cf020-page-07.mp3",
@@ -5987,12 +6041,13 @@ window.KakaCarterManifest = {
             "outside."
           ],
           "blanks": [
+            "snake",
             "outside."
           ],
           "choices": [
-            "outside.",
-            "One",
-            "day"
+            "snake outside.",
+            "brought home",
+            "loves snakes,”"
           ],
           "image": "./assets/story-demo/cf020/pages/page-08.webp",
           "audio": "./assets/story-demo/cf020/cf020-page-08.mp3",
@@ -6013,12 +6068,13 @@ window.KakaCarterManifest = {
             "grass."
           ],
           "blanks": [
-            "grass."
+            "move",
+            "across"
           ],
           "choices": [
-            "grass.",
-            "One",
-            "day"
+            "move across",
+            "brought home",
+            "loves snakes,”"
           ],
           "image": "./assets/story-demo/cf020/pages/page-09.webp",
           "audio": "./assets/story-demo/cf020/cf020-page-09.mp3",
@@ -6039,12 +6095,13 @@ window.KakaCarterManifest = {
             "out."
           ],
           "blanks": [
-            "flicked"
+            "snake’s",
+            "tongue"
           ],
           "choices": [
-            "flicked",
-            "One",
-            "day"
+            "snake’s tongue",
+            "brought home",
+            "loves snakes,”"
           ],
           "image": "./assets/story-demo/cf020/pages/page-10.webp",
           "audio": "./assets/story-demo/cf020/cf020-page-10.mp3",
@@ -6064,12 +6121,13 @@ window.KakaCarterManifest = {
             "snake.”"
           ],
           "blanks": [
-            "snake.”"
+            "“Wait",
+            "till"
           ],
           "choices": [
-            "snake.”",
-            "One",
-            "day"
+            "“Wait till",
+            "brought home",
+            "loves snakes,”"
           ],
           "image": "./assets/story-demo/cf020/pages/page-11.webp",
           "audio": "./assets/story-demo/cf020/cf020-page-11.mp3",
@@ -6095,8 +6153,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "surprise!”",
-            "One",
-            "day"
+            "fork.",
+            "“Wait"
           ],
           "image": "./assets/story-demo/cf020/pages/page-12.webp",
           "audio": "./assets/story-demo/cf020/cf020-page-12.mp3",
@@ -6121,8 +6179,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "took",
-            "One",
-            "day"
+            "brought",
+            "outside."
           ],
           "image": "./assets/story-demo/cf020/pages/page-13.webp",
           "audio": "./assets/story-demo/cf020/cf020-page-13.mp3",
@@ -6146,7 +6204,7 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "snakes,”",
-            "One",
+            "snake",
             "day"
           ],
           "image": "./assets/story-demo/cf020/pages/page-14.webp",
@@ -6178,12 +6236,13 @@ window.KakaCarterManifest = {
             "Mom."
           ],
           "blanks": [
-            "special"
+            "special",
+            "day,”"
           ],
           "choices": [
-            "special",
-            "planting",
-            "flowers"
+            "special day,”",
+            "great baseball",
+            "family remembered."
           ],
           "image": "./assets/story-demo/cf021/pages/page-01.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-01.mp3",
@@ -6208,8 +6267,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "school!”",
-            "planting",
-            "flowers"
+            "baseball",
+            "pretty"
           ],
           "image": "./assets/story-demo/cf021/pages/page-02.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-02.mp3",
@@ -6232,12 +6291,12 @@ window.KakaCarterManifest = {
             "Mom."
           ],
           "blanks": [
-            "very"
+            "“Sunday"
           ],
           "choices": [
-            "very",
-            "planting",
-            "flowers"
+            "“Sunday",
+            "game",
+            "upstairs."
           ],
           "image": "./assets/story-demo/cf021/pages/page-03.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-03.mp3",
@@ -6262,8 +6321,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "game",
-            "planting",
-            "flowers"
+            "asked",
+            "bagels,”"
           ],
           "image": "./assets/story-demo/cf021/pages/page-04.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-04.mp3",
@@ -6288,8 +6347,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "ball",
-            "planting",
-            "flowers"
+            "“Sunday",
+            "“There’s"
           ],
           "image": "./assets/story-demo/cf021/pages/page-05.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-05.mp3",
@@ -6316,8 +6375,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked",
-            "planting",
-            "flowers"
+            "“There’s",
+            "early."
           ],
           "image": "./assets/story-demo/cf021/pages/page-06.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-06.mp3",
@@ -6342,8 +6401,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "remembered.",
-            "planting",
-            "flowers"
+            "carried",
+            "downstairs."
           ],
           "image": "./assets/story-demo/cf021/pages/page-07.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-07.mp3",
@@ -6368,8 +6427,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "early.",
-            "planting",
-            "flowers"
+            "day,”",
+            "bagels,”"
           ],
           "image": "./assets/story-demo/cf021/pages/page-08.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-08.mp3",
@@ -6391,12 +6450,13 @@ window.KakaCarterManifest = {
             "vase."
           ],
           "blanks": [
-            "vase."
+            "pretty",
+            "flowers"
           ],
           "choices": [
-            "vase.",
-            "planting",
-            "flowers"
+            "pretty flowers",
+            "special day,”",
+            "great baseball"
           ],
           "image": "./assets/story-demo/cf021/pages/page-09.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-09.mp3",
@@ -6416,12 +6476,13 @@ window.KakaCarterManifest = {
             "upstairs."
           ],
           "blanks": [
+            "tray",
             "upstairs."
           ],
           "choices": [
-            "upstairs.",
-            "planting",
-            "flowers"
+            "tray upstairs.",
+            "special day,”",
+            "great baseball"
           ],
           "image": "./assets/story-demo/cf021/pages/page-10.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-10.mp3",
@@ -6445,8 +6506,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "downstairs.",
-            "planting",
-            "flowers"
+            "flowers",
+            "tray"
           ],
           "image": "./assets/story-demo/cf021/pages/page-11.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-11.mp3",
@@ -6473,8 +6534,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "bagels,”",
-            "planting",
-            "flowers"
+            "kids",
+            "tray"
           ],
           "image": "./assets/story-demo/cf021/pages/page-12.webp",
           "audio": "./assets/story-demo/cf021/cf021-page-12.mp3",
@@ -6508,8 +6569,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "beautiful",
-            "day",
-            "want"
+            "down",
+            "away."
           ],
           "image": "./assets/story-demo/cf022/pages/page-01.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-01.mp3",
@@ -6528,12 +6589,13 @@ window.KakaCarterManifest = {
             "tag."
           ],
           "blanks": [
-            "played"
+            "played",
+            "tag."
           ],
           "choices": [
-            "played",
-            "beautiful",
-            "day"
+            "played tag.",
+            "beautiful day!”",
+            "green bug"
           ],
           "image": "./assets/story-demo/cf022/pages/page-02.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-02.mp3",
@@ -6556,12 +6618,13 @@ window.KakaCarterManifest = {
             "tree."
           ],
           "blanks": [
-            "tree."
+            "green",
+            "bug"
           ],
           "choices": [
-            "tree.",
-            "beautiful",
-            "day"
+            "green bug",
+            "beautiful day!”",
+            "played tag."
           ],
           "image": "./assets/story-demo/cf022/pages/page-03.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-03.mp3",
@@ -6585,8 +6648,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "leaf!”",
-            "beautiful",
-            "day"
+            "fun,”",
+            "green"
           ],
           "image": "./assets/story-demo/cf022/pages/page-04.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-04.mp3",
@@ -6611,8 +6674,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "down",
-            "beautiful",
-            "day"
+            "eating",
+            "cat"
           ],
           "image": "./assets/story-demo/cf022/pages/page-05.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-05.mp3",
@@ -6641,8 +6704,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "away.",
-            "beautiful",
-            "day"
+            "sky.",
+            "fence."
           ],
           "image": "./assets/story-demo/cf022/pages/page-06.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-06.mp3",
@@ -6667,8 +6730,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "feeder.",
-            "beautiful",
-            "day"
+            "down",
+            "leaf!”"
           ],
           "image": "./assets/story-demo/cf022/pages/page-07.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-07.mp3",
@@ -6693,8 +6756,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "fence.",
-            "beautiful",
-            "day"
+            "over",
+            "feeder."
           ],
           "image": "./assets/story-demo/cf022/pages/page-08.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-08.mp3",
@@ -6714,12 +6777,13 @@ window.KakaCarterManifest = {
             "fence."
           ],
           "blanks": [
-            "fence."
+            "jumped",
+            "down"
           ],
           "choices": [
-            "fence.",
-            "beautiful",
-            "day"
+            "jumped down",
+            "beautiful day!”",
+            "played tag."
           ],
           "image": "./assets/story-demo/cf022/pages/page-09.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-09.mp3",
@@ -6743,8 +6807,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "back.",
-            "beautiful",
-            "day"
+            "saw",
+            "looks"
           ],
           "image": "./assets/story-demo/cf022/pages/page-10.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-10.mp3",
@@ -6763,12 +6827,12 @@ window.KakaCarterManifest = {
             "Oliver."
           ],
           "blanks": [
-            "Oliver."
+            "fun,”"
           ],
           "choices": [
-            "Oliver.",
-            "beautiful",
-            "day"
+            "fun,”",
+            "tree.",
+            "day!”"
           ],
           "image": "./assets/story-demo/cf022/pages/page-11.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-11.mp3",
@@ -6792,8 +6856,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "fence.",
-            "beautiful",
-            "day"
+            "bird",
+            "Pickles"
           ],
           "image": "./assets/story-demo/cf022/pages/page-12.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-12.mp3",
@@ -6815,12 +6879,12 @@ window.KakaCarterManifest = {
             "Harry."
           ],
           "blanks": [
-            "that’s"
+            "think"
           ],
           "choices": [
-            "that’s",
-            "beautiful",
-            "day"
+            "think",
+            "Another",
+            "animal"
           ],
           "image": "./assets/story-demo/cf022/pages/page-13.webp",
           "audio": "./assets/story-demo/cf022/cf022-page-13.mp3",
@@ -6855,8 +6919,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "park.",
-            "family",
-            "amusement"
+            "thought.",
+            "scary"
           ],
           "image": "./assets/story-demo/cf023/pages/page-01.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-01.mp3",
@@ -6882,8 +6946,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "track.",
-            "family",
-            "amusement"
+            "horse.",
+            "ride,”"
           ],
           "image": "./assets/story-demo/cf023/pages/page-02.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-02.mp3",
@@ -6909,8 +6973,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "coaster!”",
-            "family",
-            "amusement"
+            "looked",
+            "park."
           ],
           "image": "./assets/story-demo/cf023/pages/page-03.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-03.mp3",
@@ -6936,8 +7000,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "want",
-            "family",
-            "amusement"
+            "horse.",
+            "roller"
           ],
           "image": "./assets/story-demo/cf023/pages/page-04.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-04.mp3",
@@ -6960,8 +7024,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "horse.",
-            "family",
-            "amusement"
+            "Ferris",
+            "want"
           ],
           "image": "./assets/story-demo/cf023/pages/page-05.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-05.mp3",
@@ -6982,12 +7046,13 @@ window.KakaCarterManifest = {
             "thought."
           ],
           "blanks": [
-            "thought."
+            "baby",
+            "ride,”"
           ],
           "choices": [
-            "thought.",
-            "family",
-            "amusement"
+            "baby ride,”",
+            "amusement park.",
+            "cars went"
           ],
           "image": "./assets/story-demo/cf023/pages/page-06.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-06.mp3",
@@ -7007,12 +7072,13 @@ window.KakaCarterManifest = {
             "now."
           ],
           "blanks": [
+            "looked",
             "bigger"
           ],
           "choices": [
-            "bigger",
-            "family",
-            "amusement"
+            "looked bigger",
+            "amusement park.",
+            "cars went"
           ],
           "image": "./assets/story-demo/cf023/pages/page-07.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-07.mp3",
@@ -7033,12 +7099,12 @@ window.KakaCarterManifest = {
             "Judy."
           ],
           "blanks": [
-            "“Let’s"
+            "go"
           ],
           "choices": [
-            "“Let’s",
-            "family",
-            "amusement"
+            "go",
+            "coaster!”",
+            "baby"
           ],
           "image": "./assets/story-demo/cf023/pages/page-08.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-08.mp3",
@@ -7062,8 +7128,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wheel.",
-            "family",
-            "amusement"
+            "cars",
+            "down"
           ],
           "image": "./assets/story-demo/cf023/pages/page-09.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-09.mp3",
@@ -7089,8 +7155,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "thought.",
-            "family",
-            "amusement"
+            "cars",
+            "horse."
           ],
           "image": "./assets/story-demo/cf023/pages/page-10.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-10.mp3",
@@ -7111,12 +7177,13 @@ window.KakaCarterManifest = {
             "coaster."
           ],
           "blanks": [
+            "roller",
             "coaster."
           ],
           "choices": [
-            "coaster.",
-            "family",
-            "amusement"
+            "roller coaster.",
+            "amusement park.",
+            "cars went"
           ],
           "image": "./assets/story-demo/cf023/pages/page-11.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-11.mp3",
@@ -7141,8 +7208,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "scary",
-            "family",
-            "amusement"
+            "slow,”",
+            "down"
           ],
           "image": "./assets/story-demo/cf023/pages/page-12.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-12.mp3",
@@ -7167,8 +7234,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "called",
-            "family",
-            "amusement"
+            "bigger",
+            "Everyone"
           ],
           "image": "./assets/story-demo/cf023/pages/page-13.webp",
           "audio": "./assets/story-demo/cf023/cf023-page-13.mp3",
@@ -7198,12 +7265,13 @@ window.KakaCarterManifest = {
             "yarn."
           ],
           "blanks": [
+            "purple",
             "yarn."
           ],
           "choices": [
-            "yarn.",
-            "learning",
-            "knit"
+            "purple yarn.",
+            "purple scarf.",
+            "warm,” thought"
           ],
           "image": "./assets/story-demo/cf024/pages/page-01.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-01.mp3",
@@ -7228,8 +7296,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "make.",
-            "learning",
-            "knit"
+            "one",
+            "upset."
           ],
           "image": "./assets/story-demo/cf024/pages/page-02.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-02.mp3",
@@ -7253,8 +7321,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "morning.",
-            "learning",
-            "knit"
+            "wear.”",
+            "lots"
           ],
           "image": "./assets/story-demo/cf024/pages/page-03.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-03.mp3",
@@ -7279,12 +7347,13 @@ window.KakaCarterManifest = {
             "scarf."
           ],
           "blanks": [
+            "purple",
             "scarf."
           ],
           "choices": [
-            "scarf.",
-            "learning",
-            "knit"
+            "purple scarf.",
+            "purple yarn.",
+            "warm,” thought"
           ],
           "image": "./assets/story-demo/cf024/pages/page-04.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-04.mp3",
@@ -7309,8 +7378,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "thought.",
-            "learning",
-            "knit"
+            "started",
+            "morning."
           ],
           "image": "./assets/story-demo/cf024/pages/page-05.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-05.mp3",
@@ -7332,12 +7401,13 @@ window.KakaCarterManifest = {
             "Emmy."
           ],
           "blanks": [
+            "warm,”",
             "thought"
           ],
           "choices": [
-            "thought",
-            "learning",
-            "knit"
+            "warm,” thought",
+            "purple yarn.",
+            "purple scarf."
           ],
           "image": "./assets/story-demo/cf024/pages/page-06.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-06.mp3",
@@ -7361,8 +7431,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "mistakes!”",
-            "learning",
-            "knit"
+            "know",
+            "one"
           ],
           "image": "./assets/story-demo/cf024/pages/page-07.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-07.mp3",
@@ -7387,8 +7457,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "pretty,”",
-            "learning",
-            "knit"
+            "make.",
+            "started"
           ],
           "image": "./assets/story-demo/cf024/pages/page-08.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-08.mp3",
@@ -7413,8 +7483,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "drawer.",
-            "learning",
-            "knit"
+            "pretty,”",
+            "know"
           ],
           "image": "./assets/story-demo/cf024/pages/page-09.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-09.mp3",
@@ -7433,12 +7503,13 @@ window.KakaCarterManifest = {
             "upset."
           ],
           "blanks": [
+            "looked",
             "upset."
           ],
           "choices": [
-            "upset.",
-            "learning",
-            "knit"
+            "looked upset.",
+            "purple yarn.",
+            "purple scarf."
           ],
           "image": "./assets/story-demo/cf024/pages/page-10.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-10.mp3",
@@ -7464,8 +7535,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wear.”",
-            "learning",
-            "knit"
+            "warm",
+            "looked"
           ],
           "image": "./assets/story-demo/cf024/pages/page-11.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-11.mp3",
@@ -7488,8 +7559,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "scarf.”",
-            "learning",
-            "knit"
+            "drawer.",
+            "need"
           ],
           "image": "./assets/story-demo/cf024/pages/page-12.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-12.mp3",
@@ -7511,8 +7582,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "scarf.",
-            "learning",
-            "knit"
+            "stuffed",
+            "make."
           ],
           "image": "./assets/story-demo/cf024/pages/page-13.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-13.mp3",
@@ -7534,8 +7605,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "put",
-            "learning",
-            "knit"
+            "“Brr,”",
+            "still"
           ],
           "image": "./assets/story-demo/cf024/pages/page-14.webp",
           "audio": "./assets/story-demo/cf024/cf024-page-14.mp3",
@@ -7570,8 +7641,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "today.”",
-            "good",
-            "news"
+            "started",
+            "wet"
           ],
           "image": "./assets/story-demo/cf025/pages/page-01.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-01.mp3",
@@ -7597,8 +7668,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "crib",
-            "good",
-            "news"
+            "put",
+            "want"
           ],
           "image": "./assets/story-demo/cf025/pages/page-02.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-02.mp3",
@@ -7624,8 +7695,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Martha,”",
-            "good",
-            "news"
+            "babysit",
+            "going"
           ],
           "image": "./assets/story-demo/cf025/pages/page-03.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-03.mp3",
@@ -7646,12 +7717,13 @@ window.KakaCarterManifest = {
             "Mom."
           ],
           "blanks": [
+            "new",
             "diaper,”"
           ],
           "choices": [
-            "diaper,”",
-            "good",
-            "news"
+            "new diaper,”",
+            "gave Martha",
+            "Soon Martha"
           ],
           "image": "./assets/story-demo/cf025/pages/page-04.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-04.mp3",
@@ -7675,8 +7747,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "good",
-            "news"
+            "tired.",
+            "new"
           ],
           "image": "./assets/story-demo/cf025/pages/page-05.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-05.mp3",
@@ -7695,12 +7767,13 @@ window.KakaCarterManifest = {
             "bottle."
           ],
           "blanks": [
-            "bottle."
+            "gave",
+            "Martha"
           ],
           "choices": [
-            "bottle.",
-            "good",
-            "news"
+            "gave Martha",
+            "new diaper,”",
+            "Soon Martha"
           ],
           "image": "./assets/story-demo/cf025/pages/page-06.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-06.mp3",
@@ -7720,12 +7793,13 @@ window.KakaCarterManifest = {
             "again."
           ],
           "blanks": [
-            "again."
+            "Soon",
+            "Martha"
           ],
           "choices": [
-            "again.",
-            "good",
-            "news"
+            "Soon Martha",
+            "new diaper,”",
+            "gave Martha"
           ],
           "image": "./assets/story-demo/cf025/pages/page-07.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-07.mp3",
@@ -7750,8 +7824,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "crib.",
-            "good",
-            "news"
+            "started",
+            "going"
           ],
           "image": "./assets/story-demo/cf025/pages/page-08.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-08.mp3",
@@ -7777,8 +7851,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "tired.",
-            "good",
-            "news"
+            "ran",
+            "alligator"
           ],
           "image": "./assets/story-demo/cf025/pages/page-09.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-09.mp3",
@@ -7803,8 +7877,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "good",
-            "news"
+            "started",
+            "brought"
           ],
           "image": "./assets/story-demo/cf025/pages/page-10.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-10.mp3",
@@ -7829,8 +7903,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "room.",
-            "good",
-            "news"
+            "bag",
+            "alligator"
           ],
           "image": "./assets/story-demo/cf025/pages/page-11.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-11.mp3",
@@ -7854,8 +7928,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Martha.",
-            "good",
-            "news"
+            "wet",
+            "started"
           ],
           "image": "./assets/story-demo/cf025/pages/page-12.webp",
           "audio": "./assets/story-demo/cf025/cf025-page-12.mp3",
@@ -7889,8 +7963,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "tote",
-            "carried",
-            "bag"
+            "far",
+            "kitchen."
           ],
           "image": "./assets/story-demo/cf026/pages/page-01.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-01.mp3",
@@ -7917,7 +7991,7 @@ window.KakaCarterManifest = {
           "choices": [
             "adventure,”",
             "carried",
-            "tote"
+            "hat."
           ],
           "image": "./assets/story-demo/cf026/pages/page-02.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-02.mp3",
@@ -7939,12 +8013,13 @@ window.KakaCarterManifest = {
             "kitchen."
           ],
           "blanks": [
-            "kitchen."
+            "kids",
+            "followed"
           ],
           "choices": [
-            "kitchen.",
-            "carried",
-            "tote"
+            "kids followed",
+            "wild animals?”",
+            "going outside"
           ],
           "image": "./assets/story-demo/cf026/pages/page-03.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-03.mp3",
@@ -7970,8 +8045,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "imagine,”",
-            "carried",
-            "tote"
+            "kitchen.",
+            "come"
           ],
           "image": "./assets/story-demo/cf026/pages/page-04.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-04.mp3",
@@ -7998,8 +8073,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "walk,”",
-            "carried",
-            "tote"
+            "asked",
+            "meet"
           ],
           "image": "./assets/story-demo/cf026/pages/page-05.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-05.mp3",
@@ -8023,8 +8098,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "sweater.",
-            "carried",
-            "tote"
+            "danger?”",
+            "animals?”"
           ],
           "image": "./assets/story-demo/cf026/pages/page-06.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-06.mp3",
@@ -8045,12 +8120,13 @@ window.KakaCarterManifest = {
             "Oliver."
           ],
           "blanks": [
-            "asked"
+            "wild",
+            "animals?”"
           ],
           "choices": [
-            "asked",
-            "carried",
-            "tote"
+            "wild animals?”",
+            "kids followed",
+            "going outside"
           ],
           "image": "./assets/story-demo/cf026/pages/page-07.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-07.mp3",
@@ -8074,8 +8150,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "carried",
-            "tote"
+            "books.",
+            "walk,”"
           ],
           "image": "./assets/story-demo/cf026/pages/page-08.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-08.mp3",
@@ -8099,8 +8175,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hat.",
-            "carried",
-            "tote"
+            "read.”",
+            "far"
           ],
           "image": "./assets/story-demo/cf026/pages/page-09.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-09.mp3",
@@ -8127,8 +8203,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "come",
-            "carried",
-            "tote"
+            "books.",
+            "read.”"
           ],
           "image": "./assets/story-demo/cf026/pages/page-10.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-10.mp3",
@@ -8147,12 +8223,13 @@ window.KakaCarterManifest = {
             "read.”"
           ],
           "blanks": [
-            "read.”"
+            "going",
+            "outside"
           ],
           "choices": [
-            "read.”",
-            "carried",
-            "tote"
+            "going outside",
+            "kids followed",
+            "wild animals?”"
           ],
           "image": "./assets/story-demo/cf026/pages/page-11.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-11.mp3",
@@ -8177,8 +8254,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "books.",
-            "carried",
-            "tote"
+            "far",
+            "put"
           ],
           "image": "./assets/story-demo/cf026/pages/page-12.webp",
           "audio": "./assets/story-demo/cf026/cf026-page-12.mp3",
@@ -8209,12 +8286,13 @@ window.KakaCarterManifest = {
             "Emmy."
           ],
           "blanks": [
+            "play",
             "soccer,”"
           ],
           "choices": [
-            "soccer,”",
-            "called",
-            "needs"
+            "play soccer,”",
+            "heard something.",
+            "come back."
           ],
           "image": "./assets/story-demo/cf027/pages/page-01.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-01.mp3",
@@ -8236,8 +8314,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "leash.",
-            "called",
-            "needs"
+            "soccer,”",
+            "lots"
           ],
           "image": "./assets/story-demo/cf027/pages/page-02.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-02.mp3",
@@ -8260,8 +8338,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "chase",
-            "called",
-            "needs"
+            "kid",
+            "play"
           ],
           "image": "./assets/story-demo/cf027/pages/page-03.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-03.mp3",
@@ -8285,8 +8363,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wanted",
-            "called",
-            "needs"
+            "eat",
+            "pulled"
           ],
           "image": "./assets/story-demo/cf027/pages/page-04.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-04.mp3",
@@ -8309,8 +8387,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wanted",
-            "called",
-            "needs"
+            "good",
+            "right"
           ],
           "image": "./assets/story-demo/cf027/pages/page-05.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-05.mp3",
@@ -8332,8 +8410,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "something.",
-            "called",
-            "needs"
+            "pulled",
+            "dog"
           ],
           "image": "./assets/story-demo/cf027/pages/page-06.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-06.mp3",
@@ -8359,8 +8437,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hands.",
-            "called",
-            "needs"
+            "play",
+            "lots"
           ],
           "image": "./assets/story-demo/cf027/pages/page-07.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-07.mp3",
@@ -8379,12 +8457,13 @@ window.KakaCarterManifest = {
             "back."
           ],
           "blanks": [
+            "come",
             "back."
           ],
           "choices": [
-            "back.",
-            "called",
-            "needs"
+            "come back.",
+            "play soccer,”",
+            "heard something."
           ],
           "image": "./assets/story-demo/cf027/pages/page-08.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-08.mp3",
@@ -8408,8 +8487,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "kids",
-            "called",
-            "needs"
+            "leash.",
+            "one"
           ],
           "image": "./assets/story-demo/cf027/pages/page-09.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-09.mp3",
@@ -8434,8 +8513,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "goal!",
-            "called",
-            "needs"
+            "play",
+            "player,”"
           ],
           "image": "./assets/story-demo/cf027/pages/page-10.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-10.mp3",
@@ -8459,12 +8538,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "player,”"
+            "good",
+            "soccer"
           ],
           "choices": [
-            "player,”",
-            "called",
-            "needs"
+            "good soccer",
+            "play soccer,”",
+            "heard something."
           ],
           "image": "./assets/story-demo/cf027/pages/page-11.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-11.mp3",
@@ -8491,8 +8571,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "walk,",
-            "called",
-            "needs"
+            "pulled",
+            "eat"
           ],
           "image": "./assets/story-demo/cf027/pages/page-12.webp",
           "audio": "./assets/story-demo/cf027/cf027-page-12.mp3",
@@ -8526,8 +8606,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "snowman!”",
-            "make",
-            "made"
+            "tried",
+            "big"
           ],
           "image": "./assets/story-demo/cf028/pages/page-01.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-01.mp3",
@@ -8548,12 +8628,13 @@ window.KakaCarterManifest = {
             "head."
           ],
           "blanks": [
+            "snowman’s",
             "head."
           ],
           "choices": [
-            "head.",
-            "make",
-            "snowman"
+            "snowman’s head.",
+            "big ideas!”",
+            "happy park"
           ],
           "image": "./assets/story-demo/cf028/pages/page-02.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-02.mp3",
@@ -8578,8 +8659,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "snowman.",
-            "make",
-            "made"
+            "hat,”",
+            "head."
           ],
           "image": "./assets/story-demo/cf028/pages/page-03.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-03.mp3",
@@ -8604,8 +8685,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "find",
-            "make",
-            "snowman"
+            "looks",
+            "took"
           ],
           "image": "./assets/story-demo/cf028/pages/page-04.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-04.mp3",
@@ -8631,8 +8712,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "silly",
-            "make",
-            "snowman"
+            "asked.",
+            "pot,"
           ],
           "image": "./assets/story-demo/cf028/pages/page-05.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-05.mp3",
@@ -8658,8 +8739,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "silly",
-            "make",
-            "snowman"
+            "box,",
+            "put"
           ],
           "image": "./assets/story-demo/cf028/pages/page-06.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-06.mp3",
@@ -8683,7 +8764,7 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "snowman.",
-            "make",
+            "snowman’s",
             "made"
           ],
           "image": "./assets/story-demo/cf028/pages/page-07.webp",
@@ -8707,8 +8788,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "make",
-            "snowman"
+            "snowman’s",
+            "made"
           ],
           "image": "./assets/story-demo/cf028/pages/page-08.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-08.mp3",
@@ -8730,12 +8811,13 @@ window.KakaCarterManifest = {
             "head."
           ],
           "blanks": [
+            "snowman’s",
             "head."
           ],
           "choices": [
-            "head.",
-            "make",
-            "snowman"
+            "snowman’s head.",
+            "big ideas!”",
+            "happy park"
           ],
           "image": "./assets/story-demo/cf028/pages/page-09.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-09.mp3",
@@ -8764,8 +8846,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "scarf.",
-            "make",
-            "snowman"
+            "nose",
+            "looks"
           ],
           "image": "./assets/story-demo/cf028/pages/page-10.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-10.mp3",
@@ -8791,8 +8873,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "silly!”",
-            "make",
-            "snowman"
+            "find",
+            "hat,”"
           ],
           "image": "./assets/story-demo/cf028/pages/page-11.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-11.mp3",
@@ -8811,12 +8893,13 @@ window.KakaCarterManifest = {
             "ideas!”"
           ],
           "blanks": [
+            "big",
             "ideas!”"
           ],
           "choices": [
-            "ideas!”",
-            "make",
-            "snowman"
+            "big ideas!”",
+            "snowman’s head.",
+            "happy park"
           ],
           "image": "./assets/story-demo/cf028/pages/page-12.webp",
           "audio": "./assets/story-demo/cf028/cf028-page-12.mp3",
@@ -8848,12 +8931,13 @@ window.KakaCarterManifest = {
             "house."
           ],
           "blanks": [
+            "tree",
             "house."
           ],
           "choices": [
-            "house.",
-            "playing",
-            "friends"
+            "tree house.",
+            "older kids",
+            "Sarah grinned"
           ],
           "image": "./assets/story-demo/cf029/pages/page-01.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-01.mp3",
@@ -8877,8 +8961,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "kids",
-            "playing",
-            "friends"
+            "after",
+            "club,”"
           ],
           "image": "./assets/story-demo/cf029/pages/page-02.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-02.mp3",
@@ -8902,8 +8986,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "club,”",
-            "playing",
-            "friends"
+            "all",
+            "plays"
           ],
           "image": "./assets/story-demo/cf029/pages/page-03.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-03.mp3",
@@ -8928,8 +9012,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Club!”",
-            "playing",
-            "friends"
+            "already",
+            "all"
           ],
           "image": "./assets/story-demo/cf029/pages/page-04.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-04.mp3",
@@ -8951,8 +9035,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "grinned",
-            "playing",
-            "friends"
+            "house.",
+            "lunch?”"
           ],
           "image": "./assets/story-demo/cf029/pages/page-05.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-05.mp3",
@@ -8978,8 +9062,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "lunch?”",
-            "playing",
-            "friends"
+            "Sarah",
+            "girls"
           ],
           "image": "./assets/story-demo/cf029/pages/page-06.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-06.mp3",
@@ -9006,8 +9090,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "time.",
-            "playing",
-            "friends"
+            "kids",
+            "asked."
           ],
           "image": "./assets/story-demo/cf029/pages/page-07.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-07.mp3",
@@ -9029,12 +9113,13 @@ window.KakaCarterManifest = {
             "time."
           ],
           "blanks": [
+            "same",
             "time."
           ],
           "choices": [
-            "time.",
-            "playing",
-            "friends"
+            "same time.",
+            "tree house.",
+            "older kids"
           ],
           "image": "./assets/story-demo/cf029/pages/page-08.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-08.mp3",
@@ -9055,12 +9140,13 @@ window.KakaCarterManifest = {
             "house.”"
           ],
           "blanks": [
+            "tree",
             "house.”"
           ],
           "choices": [
-            "house.”",
-            "playing",
-            "friends"
+            "tree house.”",
+            "older kids",
+            "Sarah grinned"
           ],
           "image": "./assets/story-demo/cf029/pages/page-09.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-09.mp3",
@@ -9085,8 +9171,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "club",
-            "playing",
-            "friends"
+            "time.",
+            "after"
           ],
           "image": "./assets/story-demo/cf029/pages/page-10.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-10.mp3",
@@ -9114,8 +9200,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "playing",
-            "friends"
+            "plays",
+            "older"
           ],
           "image": "./assets/story-demo/cf029/pages/page-11.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-11.mp3",
@@ -9139,8 +9225,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "fair,”",
-            "playing",
-            "friends"
+            "same",
+            "plays"
           ],
           "image": "./assets/story-demo/cf029/pages/page-12.webp",
           "audio": "./assets/story-demo/cf029/cf029-page-12.mp3",
@@ -9170,12 +9256,13 @@ window.KakaCarterManifest = {
             "today.”"
           ],
           "blanks": [
-            "today.”"
+            "play",
+            "inside"
           ],
           "choices": [
-            "today.”",
-            "rainy",
-            "day"
+            "play inside",
+            "paint something,”",
+            "pirate ship."
           ],
           "image": "./assets/story-demo/cf030/pages/page-01.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-01.mp3",
@@ -9199,8 +9286,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "kitchen.",
-            "rainy",
-            "day"
+            "having",
+            "painted"
           ],
           "image": "./assets/story-demo/cf030/pages/page-02.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-02.mp3",
@@ -9223,8 +9310,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "flour.",
-            "rainy",
-            "day"
+            "ship.",
+            "covered"
           ],
           "image": "./assets/story-demo/cf030/pages/page-03.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-03.mp3",
@@ -9248,8 +9335,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "flour!",
-            "rainy",
-            "day"
+            "today.”",
+            "having"
           ],
           "image": "./assets/story-demo/cf030/pages/page-04.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-04.mp3",
@@ -9273,8 +9360,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "something,”",
-            "rainy",
-            "day"
+            "back",
+            "today.”"
           ],
           "image": "./assets/story-demo/cf030/pages/page-05.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-05.mp3",
@@ -9293,12 +9380,13 @@ window.KakaCarterManifest = {
             "ship."
           ],
           "blanks": [
+            "pirate",
             "ship."
           ],
           "choices": [
-            "ship.",
-            "rainy",
-            "day"
+            "pirate ship.",
+            "play inside",
+            "paint something,”"
           ],
           "image": "./assets/story-demo/cf030/pages/page-06.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-06.mp3",
@@ -9322,8 +9410,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "paint!",
-            "rainy",
-            "day"
+            "pirate",
+            "ship."
           ],
           "image": "./assets/story-demo/cf030/pages/page-07.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-07.mp3",
@@ -9349,8 +9437,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "next,”",
-            "rainy",
-            "day"
+            "fun,”",
+            "kitchen."
           ],
           "image": "./assets/story-demo/cf030/pages/page-08.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-08.mp3",
@@ -9374,8 +9462,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "water.",
-            "rainy",
-            "day"
+            "flour.",
+            "inside"
           ],
           "image": "./assets/story-demo/cf030/pages/page-09.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-09.mp3",
@@ -9395,12 +9483,12 @@ window.KakaCarterManifest = {
             "tub."
           ],
           "blanks": [
-            "didn’t"
+            "tub."
           ],
           "choices": [
-            "didn’t",
-            "rainy",
-            "day"
+            "tub.",
+            "having",
+            "ship."
           ],
           "image": "./assets/story-demo/cf030/pages/page-10.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-10.mp3",
@@ -9420,12 +9508,13 @@ window.KakaCarterManifest = {
             "door."
           ],
           "blanks": [
+            "back",
             "door."
           ],
           "choices": [
-            "door.",
-            "rainy",
-            "day"
+            "back door.",
+            "play inside",
+            "paint something,”"
           ],
           "image": "./assets/story-demo/cf030/pages/page-11.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-11.mp3",
@@ -9450,8 +9539,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "having",
-            "rainy",
-            "day"
+            "inside",
+            "ship."
           ],
           "image": "./assets/story-demo/cf030/pages/page-12.webp",
           "audio": "./assets/story-demo/cf030/cf030-page-12.mp3",
@@ -9483,12 +9572,13 @@ window.KakaCarterManifest = {
             "home."
           ],
           "blanks": [
-            "home."
+            "kids",
+            "took"
           ],
           "choices": [
-            "home.",
-            "class",
-            "pet"
+            "kids took",
+            "cage home.",
+            "back legs."
           ],
           "image": "./assets/story-demo/cf031/pages/page-01.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-01.mp3",
@@ -9507,12 +9597,13 @@ window.KakaCarterManifest = {
             "home."
           ],
           "blanks": [
+            "cage",
             "home."
           ],
           "choices": [
-            "home.",
-            "class",
-            "pet"
+            "cage home.",
+            "kids took",
+            "back legs."
           ],
           "image": "./assets/story-demo/cf031/pages/page-02.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-02.mp3",
@@ -9535,8 +9626,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "nice,”",
-            "class",
-            "pet"
+            "ugly,”",
+            "back"
           ],
           "image": "./assets/story-demo/cf031/pages/page-03.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-03.mp3",
@@ -9561,8 +9652,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "face",
-            "class",
-            "pet"
+            "legs.",
+            "took"
           ],
           "image": "./assets/story-demo/cf031/pages/page-04.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-04.mp3",
@@ -9585,8 +9676,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "ugly,”",
-            "class",
-            "pet"
+            "think",
+            "smart,”"
           ],
           "image": "./assets/story-demo/cf031/pages/page-05.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-05.mp3",
@@ -9609,8 +9700,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "smart,”",
-            "class",
-            "pet"
+            "back",
+            "peanuts!”"
           ],
           "image": "./assets/story-demo/cf031/pages/page-06.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-06.mp3",
@@ -9628,12 +9719,12 @@ window.KakaCarterManifest = {
             "Mom."
           ],
           "blanks": [
-            "Mom."
+            "“Not"
           ],
           "choices": [
-            "Mom.",
-            "class",
-            "pet"
+            "“Not",
+            "paw.",
+            "took"
           ],
           "image": "./assets/story-demo/cf031/pages/page-07.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-07.mp3",
@@ -9657,8 +9748,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "castle.",
-            "class",
-            "pet"
+            "climbing",
+            "“Ratty"
           ],
           "image": "./assets/story-demo/cf031/pages/page-08.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-08.mp3",
@@ -9683,8 +9774,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "steps!”",
-            "class",
-            "pet"
+            "“Ratty",
+            "brought"
           ],
           "image": "./assets/story-demo/cf031/pages/page-09.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-09.mp3",
@@ -9707,12 +9798,13 @@ window.KakaCarterManifest = {
             "legs."
           ],
           "blanks": [
+            "back",
             "legs."
           ],
           "choices": [
-            "legs.",
-            "class",
-            "pet"
+            "back legs.",
+            "kids took",
+            "cage home."
           ],
           "image": "./assets/story-demo/cf031/pages/page-10.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-10.mp3",
@@ -9739,8 +9831,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Ratty,”",
-            "class",
-            "pet"
+            "really",
+            "rat"
           ],
           "image": "./assets/story-demo/cf031/pages/page-11.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-11.mp3",
@@ -9765,8 +9857,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "peanuts!”",
-            "class",
-            "pet"
+            "ugly,”",
+            "think"
           ],
           "image": "./assets/story-demo/cf031/pages/page-12.webp",
           "audio": "./assets/story-demo/cf031/cf031-page-12.mp3",
@@ -9801,8 +9893,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "drill,”",
-            "family",
-            "kitchen"
+            "tree",
+            "ready,”"
           ],
           "image": "./assets/story-demo/cf032/pages/page-01.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-01.mp3",
@@ -9823,12 +9915,13 @@ window.KakaCarterManifest = {
             "Harry."
           ],
           "blanks": [
+            "walk",
             "outside,”"
           ],
           "choices": [
-            "outside,”",
-            "family",
-            "kitchen"
+            "walk outside,”",
+            "fire drill,”",
+            "before dinner.”"
           ],
           "image": "./assets/story-demo/cf032/pages/page-02.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-02.mp3",
@@ -9853,8 +9946,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "dinner.”",
-            "family",
-            "kitchen"
+            "quickly",
+            "tell"
           ],
           "image": "./assets/story-demo/cf032/pages/page-03.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-03.mp3",
@@ -9881,8 +9974,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "alarm",
-            "family",
-            "kitchen"
+            "walked",
+            "dinner.”"
           ],
           "image": "./assets/story-demo/cf032/pages/page-04.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-04.mp3",
@@ -9908,8 +10001,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "house!”",
-            "family",
-            "kitchen"
+            "outside,”",
+            "smells"
           ],
           "image": "./assets/story-demo/cf032/pages/page-05.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-05.mp3",
@@ -9936,8 +10029,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "ready,”",
-            "family",
-            "kitchen"
+            "smoke",
+            "house!”"
           ],
           "image": "./assets/story-demo/cf032/pages/page-06.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-06.mp3",
@@ -9962,8 +10055,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "room.",
-            "family",
-            "kitchen"
+            "back",
+            "bad,”"
           ],
           "image": "./assets/story-demo/cf032/pages/page-07.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-07.mp3",
@@ -9984,12 +10077,13 @@ window.KakaCarterManifest = {
             "house."
           ],
           "blanks": [
+            "tree",
             "house."
           ],
           "choices": [
-            "house.",
-            "family",
-            "kitchen"
+            "tree house.",
+            "fire drill,”",
+            "walk outside,”"
           ],
           "image": "./assets/story-demo/cf032/pages/page-08.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-08.mp3",
@@ -10013,8 +10107,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "safe,”",
-            "family",
-            "kitchen"
+            "fire",
+            "outside,”"
           ],
           "image": "./assets/story-demo/cf032/pages/page-09.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-09.mp3",
@@ -10035,12 +10129,13 @@ window.KakaCarterManifest = {
             "house."
           ],
           "blanks": [
-            "house."
+            "walked",
+            "back"
           ],
           "choices": [
-            "house.",
-            "family",
-            "kitchen"
+            "walked back",
+            "fire drill,”",
+            "walk outside,”"
           ],
           "image": "./assets/story-demo/cf032/pages/page-10.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-10.mp3",
@@ -10063,8 +10158,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "smells",
-            "family",
-            "kitchen"
+            "fire",
+            "“Everybody"
           ],
           "image": "./assets/story-demo/cf032/pages/page-11.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-11.mp3",
@@ -10087,8 +10182,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "stove.",
-            "family",
-            "kitchen"
+            "smells",
+            "“Everybody"
           ],
           "image": "./assets/story-demo/cf032/pages/page-12.webp",
           "audio": "./assets/story-demo/cf032/cf032-page-12.mp3",
@@ -10126,8 +10221,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "mountain!”",
-            "nice",
-            "day"
+            "asked",
+            "hiked"
           ],
           "image": "./assets/story-demo/cf033/pages/page-01.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-01.mp3",
@@ -10153,8 +10248,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hard,”",
-            "nice",
-            "day"
+            "car",
+            "little"
           ],
           "image": "./assets/story-demo/cf033/pages/page-02.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-02.mp3",
@@ -10179,8 +10274,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "mountain.",
-            "nice",
-            "day"
+            "little",
+            "asked"
           ],
           "image": "./assets/story-demo/cf033/pages/page-03.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-03.mp3",
@@ -10207,8 +10302,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "water,”",
-            "nice",
-            "day"
+            "top",
+            "map,”"
           ],
           "image": "./assets/story-demo/cf033/pages/page-04.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-04.mp3",
@@ -10233,8 +10328,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "carry",
-            "nice",
-            "day"
+            "want",
+            "top"
           ],
           "image": "./assets/story-demo/cf033/pages/page-05.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-05.mp3",
@@ -10253,12 +10348,13 @@ window.KakaCarterManifest = {
             "trail."
           ],
           "blanks": [
-            "trail."
+            "Everybody",
+            "hiked"
           ],
           "choices": [
-            "trail.",
-            "nice",
-            "day"
+            "Everybody hiked",
+            "little bit,”",
+            "hike down"
           ],
           "image": "./assets/story-demo/cf033/pages/page-06.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-06.mp3",
@@ -10282,8 +10378,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked",
-            "nice",
-            "day"
+            "drove",
+            "want"
           ],
           "image": "./assets/story-demo/cf033/pages/page-07.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-07.mp3",
@@ -10303,12 +10399,13 @@ window.KakaCarterManifest = {
             "Oliver."
           ],
           "blanks": [
-            "little"
+            "little",
+            "bit,”"
           ],
           "choices": [
-            "little",
-            "nice",
-            "day"
+            "little bit,”",
+            "Everybody hiked",
+            "hike down"
           ],
           "image": "./assets/story-demo/cf033/pages/page-08.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-08.mp3",
@@ -10332,8 +10429,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "make",
-            "nice",
-            "day"
+            "water,”",
+            "top"
           ],
           "image": "./assets/story-demo/cf033/pages/page-09.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-09.mp3",
@@ -10354,12 +10451,12 @@ window.KakaCarterManifest = {
             "Dad."
           ],
           "blanks": [
-            "Dad."
+            "top,”"
           ],
           "choices": [
-            "Dad.",
-            "nice",
-            "day"
+            "top,”",
+            "down",
+            "tired?”"
           ],
           "image": "./assets/story-demo/cf033/pages/page-10.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-10.mp3",
@@ -10381,12 +10478,13 @@ window.KakaCarterManifest = {
             "Mom."
           ],
           "blanks": [
-            "mountain,”"
+            "hike",
+            "down"
           ],
           "choices": [
-            "mountain,”",
-            "nice",
-            "day"
+            "hike down",
+            "Everybody hiked",
+            "little bit,”"
           ],
           "image": "./assets/story-demo/cf033/pages/page-11.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-11.mp3",
@@ -10412,8 +10510,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "carry,”",
-            "nice",
-            "day"
+            "tired?”",
+            "want"
           ],
           "image": "./assets/story-demo/cf033/pages/page-12.webp",
           "audio": "./assets/story-demo/cf033/cf033-page-12.mp3",
@@ -10448,8 +10546,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "sick",
-            "time",
-            "school"
+            "stayed",
+            "“Tell"
           ],
           "image": "./assets/story-demo/cf034/pages/page-01.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-01.mp3",
@@ -10471,8 +10569,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "“Sorry,",
-            "time",
-            "school"
+            "day,”",
+            "hurt"
           ],
           "image": "./assets/story-demo/cf034/pages/page-02.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-02.mp3",
@@ -10496,8 +10594,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "home",
-            "time",
-            "school"
+            "juice.",
+            "Soon"
           ],
           "image": "./assets/story-demo/cf034/pages/page-03.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-03.mp3",
@@ -10524,8 +10622,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "party,”",
-            "time",
-            "school"
+            "sick",
+            "stayed"
           ],
           "image": "./assets/story-demo/cf034/pages/page-04.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-04.mp3",
@@ -10550,8 +10648,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "juice.",
-            "time",
-            "school"
+            "eat",
+            "“Today"
           ],
           "image": "./assets/story-demo/cf034/pages/page-05.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-05.mp3",
@@ -10572,12 +10670,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "eat",
             "cupcakes,”"
           ],
           "choices": [
-            "cupcakes,”",
-            "time",
-            "school"
+            "eat cupcakes,”",
+            "stayed home",
+            "class party,”"
           ],
           "image": "./assets/story-demo/cf034/pages/page-06.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-06.mp3",
@@ -10603,8 +10702,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "movie,”",
-            "time",
-            "school"
+            "hurt",
+            "better."
           ],
           "image": "./assets/story-demo/cf034/pages/page-07.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-07.mp3",
@@ -10622,12 +10721,13 @@ window.KakaCarterManifest = {
             "asleep."
           ],
           "blanks": [
+            "fell",
             "asleep."
           ],
           "choices": [
-            "asleep.",
-            "time",
-            "school"
+            "fell asleep.",
+            "stayed home",
+            "class party,”"
           ],
           "image": "./assets/story-demo/cf034/pages/page-08.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-08.mp3",
@@ -10648,12 +10748,13 @@ window.KakaCarterManifest = {
             "better."
           ],
           "blanks": [
+            "felt",
             "better."
           ],
           "choices": [
-            "better.",
-            "time",
-            "school"
+            "felt better.",
+            "stayed home",
+            "class party,”"
           ],
           "image": "./assets/story-demo/cf034/pages/page-09.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-09.mp3",
@@ -10679,8 +10780,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "party!”",
-            "time",
-            "school"
+            "juice.",
+            "better."
           ],
           "image": "./assets/story-demo/cf034/pages/page-10.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-10.mp3",
@@ -10706,8 +10807,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "party",
-            "time",
-            "school"
+            "class",
+            "watch"
           ],
           "image": "./assets/story-demo/cf034/pages/page-11.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-11.mp3",
@@ -10732,7 +10833,7 @@ window.KakaCarterManifest = {
           "choices": [
             "days,”",
             "time",
-            "school"
+            "stayed"
           ],
           "image": "./assets/story-demo/cf034/pages/page-12.webp",
           "audio": "./assets/story-demo/cf034/cf034-page-12.mp3",
@@ -10769,8 +10870,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "closet,”",
-            "going",
-            "clean"
+            "keep",
+            "room"
           ],
           "image": "./assets/story-demo/cf035/pages/page-01.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-01.mp3",
@@ -10793,7 +10894,7 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "help,”",
-            "going",
+            "looks",
             "clean"
           ],
           "image": "./assets/story-demo/cf035/pages/page-02.webp",
@@ -10820,8 +10921,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "long",
-            "going",
-            "clean"
+            "hat!”",
+            "vest"
           ],
           "image": "./assets/story-demo/cf035/pages/page-03.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-03.mp3",
@@ -10846,7 +10947,7 @@ window.KakaCarterManifest = {
           "choices": [
             "anything",
             "going",
-            "clean"
+            "“People"
           ],
           "image": "./assets/story-demo/cf035/pages/page-04.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-04.mp3",
@@ -10871,7 +10972,7 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "either,”",
-            "going",
+            "shirt",
             "clean"
           ],
           "image": "./assets/story-demo/cf035/pages/page-05.webp",
@@ -10892,12 +10993,13 @@ window.KakaCarterManifest = {
             "scarf."
           ],
           "blanks": [
+            "green",
             "scarf."
           ],
           "choices": [
-            "scarf.",
-            "going",
-            "clean"
+            "green scarf.",
+            "funny clothes",
+            "keep anything"
           ],
           "image": "./assets/story-demo/cf035/pages/page-06.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-06.mp3",
@@ -10920,8 +11022,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "scarf.",
-            "going",
-            "clean"
+            "either,”",
+            "help,”"
           ],
           "image": "./assets/story-demo/cf035/pages/page-07.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-07.mp3",
@@ -10951,7 +11053,7 @@ window.KakaCarterManifest = {
           "choices": [
             "spy’s",
             "going",
-            "clean"
+            "keep"
           ],
           "image": "./assets/story-demo/cf035/pages/page-08.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-08.mp3",
@@ -10975,12 +11077,13 @@ window.KakaCarterManifest = {
             "Oliver."
           ],
           "blanks": [
-            "doctor!”"
+            "white",
+            "shirt"
           ],
           "choices": [
-            "doctor!”",
-            "going",
-            "clean"
+            "white shirt",
+            "funny clothes",
+            "keep anything"
           ],
           "image": "./assets/story-demo/cf035/pages/page-09.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-09.mp3",
@@ -11006,8 +11109,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "front.",
-            "going",
-            "clean"
+            "spy’s",
+            "school"
           ],
           "image": "./assets/story-demo/cf035/pages/page-10.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-10.mp3",
@@ -11035,8 +11138,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "play!”",
-            "going",
-            "clean"
+            "clean",
+            "took"
           ],
           "image": "./assets/story-demo/cf035/pages/page-11.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-11.mp3",
@@ -11059,12 +11162,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "new",
             "clothes,”"
           ],
           "choices": [
-            "clothes,”",
-            "going",
-            "clean"
+            "new clothes,”",
+            "funny clothes",
+            "keep anything"
           ],
           "image": "./assets/story-demo/cf035/pages/page-12.webp",
           "audio": "./assets/story-demo/cf035/cf035-page-12.mp3",
@@ -11099,8 +11203,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "spring,”",
-            "Soon",
-            "plant"
+            "seeds,”",
+            "really"
           ],
           "image": "./assets/story-demo/cf036/pages/page-01.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-01.mp3",
@@ -11124,8 +11228,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "really",
-            "Soon",
-            "spring"
+            "everybody",
+            "next"
           ],
           "image": "./assets/story-demo/cf036/pages/page-02.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-02.mp3",
@@ -11145,12 +11249,13 @@ window.KakaCarterManifest = {
             "grow.”"
           ],
           "blanks": [
-            "grow.”"
+            "need",
+            "time"
           ],
           "choices": [
-            "grow.”",
-            "Soon",
-            "spring"
+            "need time",
+            "“Corn grows",
+            "make rows"
           ],
           "image": "./assets/story-demo/cf036/pages/page-03.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-03.mp3",
@@ -11176,8 +11281,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "seeds,”",
-            "Soon",
-            "spring"
+            "really",
+            "spring,”"
           ],
           "image": "./assets/story-demo/cf036/pages/page-04.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-04.mp3",
@@ -11197,12 +11302,13 @@ window.KakaCarterManifest = {
             "one."
           ],
           "blanks": [
+            "planted",
             "corn"
           ],
           "choices": [
-            "corn",
-            "Soon",
-            "spring"
+            "planted corn",
+            "“Corn grows",
+            "need time"
           ],
           "image": "./assets/story-demo/cf036/pages/page-05.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-05.mp3",
@@ -11222,12 +11328,13 @@ window.KakaCarterManifest = {
             "three."
           ],
           "blanks": [
-            "three."
+            "planted",
+            "carrots"
           ],
           "choices": [
-            "three.",
-            "Soon",
-            "spring"
+            "planted carrots",
+            "“Corn grows",
+            "need time"
           ],
           "image": "./assets/story-demo/cf036/pages/page-06.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-06.mp3",
@@ -11254,8 +11361,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "garden.",
-            "Soon",
-            "spring"
+            "time",
+            "make"
           ],
           "image": "./assets/story-demo/cf036/pages/page-07.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-07.mp3",
@@ -11279,8 +11386,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "grow,”",
-            "Soon",
-            "spring"
+            "“Soon",
+            "garden."
           ],
           "image": "./assets/story-demo/cf036/pages/page-08.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-08.mp3",
@@ -11306,8 +11413,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "garden.",
-            "Soon",
-            "spring"
+            "kids",
+            "grows"
           ],
           "image": "./assets/story-demo/cf036/pages/page-09.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-09.mp3",
@@ -11331,8 +11438,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "grow,”",
-            "Soon",
-            "spring"
+            "need",
+            "kids"
           ],
           "image": "./assets/story-demo/cf036/pages/page-10.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-10.mp3",
@@ -11357,8 +11464,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "corn",
-            "Soon",
-            "spring"
+            "seeds,”",
+            "later"
           ],
           "image": "./assets/story-demo/cf036/pages/page-11.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-11.mp3",
@@ -11377,12 +11484,12 @@ window.KakaCarterManifest = {
             "Oliver."
           ],
           "blanks": [
-            "Oliver."
+            "“No,"
           ],
           "choices": [
-            "Oliver.",
-            "Soon",
-            "spring"
+            "“No,",
+            "time",
+            "kids"
           ],
           "image": "./assets/story-demo/cf036/pages/page-12.webp",
           "audio": "./assets/story-demo/cf036/cf036-page-12.mp3",
@@ -11420,8 +11527,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "airplane!”",
-            "wait",
-            "fly"
+            "pilot?”",
+            "brought"
           ],
           "image": "./assets/story-demo/cf037/pages/page-01.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-01.mp3",
@@ -11449,8 +11556,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "plane,”",
-            "wait",
-            "fly"
+            "asked.",
+            "pilot?”"
           ],
           "image": "./assets/story-demo/cf037/pages/page-02.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-02.mp3",
@@ -11473,8 +11580,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "flying!",
-            "wait",
-            "fly"
+            "airplane!”",
+            "pilot?”"
           ],
           "image": "./assets/story-demo/cf037/pages/page-03.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-03.mp3",
@@ -11496,12 +11603,13 @@ window.KakaCarterManifest = {
             "better."
           ],
           "blanks": [
+            "feel",
             "better."
           ],
           "choices": [
-            "better.",
-            "wait",
-            "fly"
+            "feel better.",
+            "card game.",
+            "flight attendant"
           ],
           "image": "./assets/story-demo/cf037/pages/page-04.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-04.mp3",
@@ -11525,12 +11633,12 @@ window.KakaCarterManifest = {
             "fall.”"
           ],
           "blanks": [
-            "fall.”"
+            "fall?”"
           ],
           "choices": [
-            "fall.”",
-            "wait",
-            "fly"
+            "fall?”",
+            "gum",
+            "pilot?”"
           ],
           "image": "./assets/story-demo/cf037/pages/page-05.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-05.mp3",
@@ -11551,12 +11659,13 @@ window.KakaCarterManifest = {
             "game."
           ],
           "blanks": [
+            "card",
             "game."
           ],
           "choices": [
-            "game.",
-            "wait",
-            "fly"
+            "card game.",
+            "feel better.",
+            "flight attendant"
           ],
           "image": "./assets/story-demo/cf037/pages/page-06.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-06.mp3",
@@ -11575,12 +11684,12 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "said."
+            "fun,”"
           ],
           "choices": [
-            "said.",
-            "wait",
-            "fly"
+            "fun,”",
+            "saw",
+            "kids"
           ],
           "image": "./assets/story-demo/cf037/pages/page-07.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-07.mp3",
@@ -11606,8 +11715,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "snack.",
-            "wait",
-            "fly"
+            "pilot?”",
+            "gave"
           ],
           "image": "./assets/story-demo/cf037/pages/page-08.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-08.mp3",
@@ -11629,8 +11738,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "luggage.",
-            "wait",
-            "fly"
+            "asked.",
+            "flying!"
           ],
           "image": "./assets/story-demo/cf037/pages/page-09.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-09.mp3",
@@ -11657,8 +11766,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "wait",
-            "fly"
+            "plane,”",
+            "ears"
           ],
           "image": "./assets/story-demo/cf037/pages/page-10.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-10.mp3",
@@ -11683,8 +11792,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "maps.",
-            "wait",
-            "fly"
+            "heavy",
+            "kids"
           ],
           "image": "./assets/story-demo/cf037/pages/page-11.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-11.mp3",
@@ -11706,12 +11815,13 @@ window.KakaCarterManifest = {
             "asked."
           ],
           "blanks": [
-            "asked."
+            "flying",
+            "still"
           ],
           "choices": [
-            "asked.",
-            "wait",
-            "fly"
+            "flying still",
+            "feel better.",
+            "card game."
           ],
           "image": "./assets/story-demo/cf037/pages/page-12.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-12.mp3",
@@ -11732,8 +11842,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "laughed.",
-            "wait",
-            "fly"
+            "plane,”",
+            "Chewing"
           ],
           "image": "./assets/story-demo/cf037/pages/page-13.webp",
           "audio": "./assets/story-demo/cf037/cf037-page-13.mp3",
@@ -11764,12 +11874,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "turn",
             "left"
           ],
           "choices": [
-            "left",
-            "Carters",
-            "trip"
+            "turn left",
+            "than phones.",
+            "“Turn right,”"
           ],
           "image": "./assets/story-demo/cf038/pages/page-01.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-01.mp3",
@@ -11795,8 +11906,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "need",
-            "Carters",
-            "trip"
+            "maps",
+            "street,”"
           ],
           "image": "./assets/story-demo/cf038/pages/page-02.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-02.mp3",
@@ -11820,8 +11931,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "phones.",
-            "Carters",
-            "trip"
+            "walk",
+            "need"
           ],
           "image": "./assets/story-demo/cf038/pages/page-03.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-03.mp3",
@@ -11849,8 +11960,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "museum",
-            "Carters",
-            "trip"
+            "phones.",
+            "street,”"
           ],
           "image": "./assets/story-demo/cf038/pages/page-04.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-04.mp3",
@@ -11874,8 +11985,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "looked",
-            "Carters",
-            "trip"
+            "museum",
+            "phones."
           ],
           "image": "./assets/story-demo/cf038/pages/page-05.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-05.mp3",
@@ -11901,8 +12012,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "park.",
-            "Carters",
-            "trip"
+            "dead!”",
+            "Next"
           ],
           "image": "./assets/story-demo/cf038/pages/page-06.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-06.mp3",
@@ -11928,8 +12039,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hotel,”",
-            "Carters",
-            "trip"
+            "museum",
+            "“Where’s"
           ],
           "image": "./assets/story-demo/cf038/pages/page-07.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-07.mp3",
@@ -11947,12 +12058,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "“Turn",
             "right,”"
           ],
           "choices": [
-            "right,”",
-            "Carters",
-            "trip"
+            "“Turn right,”",
+            "turn left",
+            "than phones."
           ],
           "image": "./assets/story-demo/cf038/pages/page-08.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-08.mp3",
@@ -11976,8 +12088,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "dead!”",
-            "Carters",
-            "trip"
+            "went",
+            "find"
           ],
           "image": "./assets/story-demo/cf038/pages/page-09.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-09.mp3",
@@ -12000,8 +12112,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "Carters",
-            "trip"
+            "need",
+            "than"
           ],
           "image": "./assets/story-demo/cf038/pages/page-10.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-10.mp3",
@@ -12024,12 +12136,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "street,”"
+            "walk",
+            "along"
           ],
           "choices": [
-            "street,”",
-            "Carters",
-            "trip"
+            "walk along",
+            "turn left",
+            "than phones."
           ],
           "image": "./assets/story-demo/cf038/pages/page-11.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-11.mp3",
@@ -12056,8 +12169,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "brought",
-            "Carters",
-            "trip"
+            "After",
+            "museum"
           ],
           "image": "./assets/story-demo/cf038/pages/page-12.webp",
           "audio": "./assets/story-demo/cf038/cf038-page-12.mp3",
@@ -12094,8 +12207,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "glad",
-            "Carters",
-            "visited"
+            "go-kart",
+            "slid"
           ],
           "image": "./assets/story-demo/cf039/pages/page-01.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-01.mp3",
@@ -12120,8 +12233,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "park.",
-            "Carters",
-            "visited"
+            "glad",
+            "slid"
           ],
           "image": "./assets/story-demo/cf039/pages/page-02.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-02.mp3",
@@ -12144,8 +12257,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "fast.",
-            "Carters",
-            "visited"
+            "glad",
+            "see"
           ],
           "image": "./assets/story-demo/cf039/pages/page-03.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-03.mp3",
@@ -12169,8 +12282,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "skating!”",
-            "Carters",
-            "visited"
+            "tall",
+            "headfirst."
           ],
           "image": "./assets/story-demo/cf039/pages/page-04.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-04.mp3",
@@ -12191,12 +12304,13 @@ window.KakaCarterManifest = {
             "now.”"
           ],
           "blanks": [
+            "something",
             "else"
           ],
           "choices": [
-            "else",
-            "Carters",
-            "visited"
+            "something else",
+            "roller skating!”",
+            "tall slide,”"
           ],
           "image": "./assets/story-demo/cf039/pages/page-05.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-05.mp3",
@@ -12218,12 +12332,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "tall",
             "slide,”"
           ],
           "choices": [
-            "slide,”",
-            "Carters",
-            "visited"
+            "tall slide,”",
+            "roller skating!”",
+            "something else"
           ],
           "image": "./assets/story-demo/cf039/pages/page-06.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-06.mp3",
@@ -12241,12 +12356,13 @@ window.KakaCarterManifest = {
             "headfirst."
           ],
           "blanks": [
+            "down",
             "headfirst."
           ],
           "choices": [
-            "headfirst.",
-            "Carters",
-            "visited"
+            "down headfirst.",
+            "roller skating!”",
+            "something else"
           ],
           "image": "./assets/story-demo/cf039/pages/page-07.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-07.mp3",
@@ -12272,8 +12388,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "scare",
-            "Carters",
-            "visited"
+            "slide,”",
+            "ever!”"
           ],
           "image": "./assets/story-demo/cf039/pages/page-08.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-08.mp3",
@@ -12299,8 +12415,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "ever!”",
-            "Carters",
-            "visited"
+            "see",
+            "else"
           ],
           "image": "./assets/story-demo/cf039/pages/page-09.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-09.mp3",
@@ -12320,12 +12436,12 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "said."
+            "fun,”"
           ],
           "choices": [
-            "said.",
-            "Carters",
-            "visited"
+            "fun,”",
+            "mean",
+            "took"
           ],
           "image": "./assets/story-demo/cf039/pages/page-10.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-10.mp3",
@@ -12350,8 +12466,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "pointed",
-            "Carters",
-            "visited"
+            "park.",
+            "glad"
           ],
           "image": "./assets/story-demo/cf039/pages/page-11.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-11.mp3",
@@ -12376,8 +12492,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cream?”",
-            "Carters",
-            "visited"
+            "pointed",
+            "drove"
           ],
           "image": "./assets/story-demo/cf039/pages/page-12.webp",
           "audio": "./assets/story-demo/cf039/cf039-page-12.mp3",
@@ -12410,12 +12526,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "picking",
             "berries!”"
           ],
           "choices": [
-            "berries!”",
-            "good",
-            "day"
+            "picking berries!”",
+            "love blueberry",
+            "put all"
           ],
           "image": "./assets/story-demo/cf040/pages/page-01.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-01.mp3",
@@ -12440,8 +12557,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "berries",
-            "good",
-            "day"
+            "blueberry",
+            "rest"
           ],
           "image": "./assets/story-demo/cf040/pages/page-02.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-02.mp3",
@@ -12466,8 +12583,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "berries",
-            "good",
-            "day"
+            "over",
+            "buckets"
           ],
           "image": "./assets/story-demo/cf040/pages/page-03.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-03.mp3",
@@ -12493,8 +12610,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "pancakes",
-            "good",
-            "day"
+            "few",
+            "full"
           ],
           "image": "./assets/story-demo/cf040/pages/page-04.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-04.mp3",
@@ -12516,12 +12633,13 @@ window.KakaCarterManifest = {
             "bucket."
           ],
           "blanks": [
-            "bucket."
+            "put",
+            "all"
           ],
           "choices": [
-            "bucket.",
-            "good",
-            "day"
+            "put all",
+            "picking berries!”",
+            "love blueberry"
           ],
           "image": "./assets/story-demo/cf040/pages/page-05.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-05.mp3",
@@ -12546,8 +12664,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "herself.",
-            "good",
-            "day"
+            "blueberry",
+            "full"
           ],
           "image": "./assets/story-demo/cf040/pages/page-06.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-06.mp3",
@@ -12568,12 +12686,12 @@ window.KakaCarterManifest = {
             "again."
           ],
           "blanks": [
-            "again."
+            "over"
           ],
           "choices": [
-            "again.",
-            "good",
-            "day"
+            "over",
+            "full",
+            "picking"
           ],
           "image": "./assets/story-demo/cf040/pages/page-07.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-07.mp3",
@@ -12593,12 +12711,13 @@ window.KakaCarterManifest = {
             "handful."
           ],
           "blanks": [
+            "big",
             "handful."
           ],
           "choices": [
-            "handful.",
-            "good",
-            "day"
+            "big handful.",
+            "picking berries!”",
+            "love blueberry"
           ],
           "image": "./assets/story-demo/cf040/pages/page-08.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-08.mp3",
@@ -12619,8 +12738,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "said.",
-            "good",
-            "day"
+            "handful.",
+            "berries!”"
           ],
           "image": "./assets/story-demo/cf040/pages/page-09.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-09.mp3",
@@ -12648,8 +12767,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "bucket.",
-            "good",
-            "day"
+            "picking",
+            "full"
           ],
           "image": "./assets/story-demo/cf040/pages/page-10.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-10.mp3",
@@ -12674,8 +12793,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "buckets",
-            "good",
-            "day"
+            "all",
+            "pie!”"
           ],
           "image": "./assets/story-demo/cf040/pages/page-11.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-11.mp3",
@@ -12697,8 +12816,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "blue.",
-            "good",
-            "day"
+            "“Mmm!”",
+            "big"
           ],
           "image": "./assets/story-demo/cf040/pages/page-12.webp",
           "audio": "./assets/story-demo/cf040/cf040-page-12.mp3",
@@ -12735,8 +12854,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "experiment,”",
-            "doing",
-            "homework"
+            "put",
+            "spilled"
           ],
           "image": "./assets/story-demo/cf041/pages/page-01.webp",
           "audio": "./assets/story-demo/cf041/cf041-page-01.mp3",
@@ -12760,8 +12879,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "volcano,",
-            "Make",
-            "Volcanoes"
+            "doing",
+            "Red"
           ],
           "image": "./assets/story-demo/cf041/pages/page-02.webp",
           "audio": "./assets/story-demo/cf041/cf041-page-02.mp3",
@@ -12785,12 +12904,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "volcano,”"
+            "put",
+            "something"
           ],
           "choices": [
-            "volcano,”",
-            "could",
-            "put"
+            "put something",
+            "science experiment,”",
+            "science experiments!”"
           ],
           "image": "./assets/story-demo/cf041/pages/page-03.webp",
           "audio": "./assets/story-demo/cf041/cf041-page-03.mp3",
@@ -12815,8 +12935,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "Cool",
-            "looked"
+            "volcano,",
+            "experiments!”"
           ],
           "image": "./assets/story-demo/cf041/pages/page-04.webp",
           "audio": "./assets/story-demo/cf041/cf041-page-04.mp3",
@@ -12840,8 +12960,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "experiments!”",
-            "mind",
-            "loves"
+            "water.",
+            "steamed."
           ],
           "image": "./assets/story-demo/cf041/pages/page-05.webp",
           "audio": "./assets/story-demo/cf041/cf041-page-05.mp3",
@@ -12868,8 +12988,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "water.",
-            "made",
-            "clay"
+            "steamed.",
+            "boring!”"
           ],
           "image": "./assets/story-demo/cf041/pages/page-06.webp",
           "audio": "./assets/story-demo/cf041/cf041-page-06.mp3",
@@ -12895,8 +13015,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "glitter",
-            "poured",
-            "mixture"
+            "loves",
+            "mess?”"
           ],
           "image": "./assets/story-demo/cf041/pages/page-07.webp",
           "audio": "./assets/story-demo/cf041/cf041-page-07.mp3",
@@ -12913,12 +13033,13 @@ window.KakaCarterManifest = {
             "steamed."
           ],
           "blanks": [
+            "volcano",
             "steamed."
           ],
           "choices": [
-            "steamed.",
-            "Everyone",
-            "waited"
+            "volcano steamed.",
+            "science experiment,”",
+            "put something"
           ],
           "image": "./assets/story-demo/cf041/pages/page-08.webp",
           "audio": "./assets/story-demo/cf041/cf041-page-08.mp3",
@@ -12939,12 +13060,13 @@ window.KakaCarterManifest = {
             "volcano."
           ],
           "blanks": [
-            "volcano."
-          ],
-          "choices": [
-            "volcano.",
             "Red",
             "lava"
+          ],
+          "choices": [
+            "Red lava",
+            "science experiment,”",
+            "put something"
           ],
           "image": "./assets/story-demo/cf041/pages/page-09.webp",
           "audio": "./assets/story-demo/cf041/cf041-page-09.mp3",
@@ -12968,8 +13090,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "boring!”",
-            "clapped",
-            "laughed"
+            "else",
+            "asked."
           ],
           "image": "./assets/story-demo/cf041/pages/page-10.webp",
           "audio": "./assets/story-demo/cf041/cf041-page-10.mp3",
@@ -12993,8 +13115,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "mess.",
-            "Everyone",
-            "looked"
+            "lava",
+            "soap"
           ],
           "image": "./assets/story-demo/cf041/pages/page-11.webp",
           "audio": "./assets/story-demo/cf041/cf041-page-11.mp3",
@@ -13020,8 +13142,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "experiment!”",
-            "gulped",
-            "doing"
+            "mixed",
+            "volcano,"
           ],
           "image": "./assets/story-demo/cf041/pages/page-12.webp",
           "audio": "./assets/story-demo/cf041/cf041-page-12.mp3",
@@ -13053,12 +13175,13 @@ window.KakaCarterManifest = {
             "dinner."
           ],
           "blanks": [
+            "making",
             "dinner."
           ],
           "choices": [
-            "dinner.",
-            "wedding",
-            "anniversary"
+            "making dinner.",
+            "chopped vegetables.",
+            "little salt,”"
           ],
           "image": "./assets/story-demo/cf042/pages/page-01.webp",
           "audio": "./assets/story-demo/cf042/cf042-page-01.mp3",
@@ -13083,8 +13206,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "vegetables,”",
-            "make",
-            "pasta"
+            "anniversary",
+            "ruined"
           ],
           "image": "./assets/story-demo/cf042/pages/page-02.webp",
           "audio": "./assets/story-demo/cf042/cf042-page-02.mp3",
@@ -13107,8 +13230,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "special,”",
-            "Toast",
-            "shrugged"
+            "table.",
+            "sat"
           ],
           "image": "./assets/story-demo/cf042/pages/page-03.webp",
           "audio": "./assets/story-demo/cf042/cf042-page-03.mp3",
@@ -13132,8 +13255,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "vegetables.",
-            "boiled",
-            "pasta"
+            "dessert,”",
+            "put"
           ],
           "image": "./assets/story-demo/cf042/pages/page-04.webp",
           "audio": "./assets/story-demo/cf042/cf042-page-04.mp3",
@@ -13154,12 +13277,13 @@ window.KakaCarterManifest = {
             "thought."
           ],
           "blanks": [
-            "thought."
+            "little",
+            "salt,”"
           ],
           "choices": [
-            "thought.",
-            "tasted",
-            "sauce"
+            "little salt,”",
+            "making dinner.",
+            "chopped vegetables."
           ],
           "image": "./assets/story-demo/cf042/pages/page-05.webp",
           "audio": "./assets/story-demo/cf042/cf042-page-05.mp3",
@@ -13185,8 +13309,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "sauce.",
-            "mixed",
-            "cake"
+            "special,”",
+            "made"
           ],
           "image": "./assets/story-demo/cf042/pages/page-06.webp",
           "audio": "./assets/story-demo/cf042/cf042-page-06.mp3",
@@ -13211,8 +13335,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "together.",
-            "mixed",
-            "pasta"
+            "anniversary",
+            "thought."
           ],
           "image": "./assets/story-demo/cf042/pages/page-07.webp",
           "audio": "./assets/story-demo/cf042/cf042-page-07.mp3",
@@ -13237,8 +13361,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "table.",
-            "sat",
-            "food"
+            "lots",
+            "sauce"
           ],
           "image": "./assets/story-demo/cf042/pages/page-08.webp",
           "audio": "./assets/story-demo/cf042/cf042-page-08.mp3",
@@ -13260,12 +13384,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "little",
             "salt!”"
           ],
           "choices": [
-            "salt!”",
-            "only",
-            "added"
+            "little salt!”",
+            "making dinner.",
+            "chopped vegetables."
           ],
           "image": "./assets/story-demo/cf042/pages/page-09.webp",
           "audio": "./assets/story-demo/cf042/cf042-page-09.mp3",
@@ -13289,8 +13414,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "dessert,”",
-            "still",
-            "Ack"
+            "salt,”",
+            "mixed"
           ],
           "image": "./assets/story-demo/cf042/pages/page-10.webp",
           "audio": "./assets/story-demo/cf042/cf042-page-10.mp3",
@@ -13313,8 +13438,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "dinner!”",
-            "cake",
-            "black"
+            "needs",
+            "together."
           ],
           "image": "./assets/story-demo/cf042/pages/page-11.webp",
           "audio": "./assets/story-demo/cf042/cf042-page-11.mp3",
@@ -13339,8 +13464,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "toast!”",
-            "made",
-            "lots"
+            "anniversary",
+            "chopped"
           ],
           "image": "./assets/story-demo/cf042/pages/page-12.webp",
           "audio": "./assets/story-demo/cf042/cf042-page-12.mp3",
@@ -13376,8 +13501,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "mall.",
-            "took",
-            "kids"
+            "expensive.",
+            "buy"
           ],
           "image": "./assets/story-demo/cf043/pages/page-01.webp",
           "audio": "./assets/story-demo/cf043/cf043-page-01.mp3",
@@ -13400,8 +13525,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "expensive.",
-            "model",
-            "airplanes"
+            "all",
+            "pretzel."
           ],
           "image": "./assets/story-demo/cf043/pages/page-02.webp",
           "audio": "./assets/story-demo/cf043/cf043-page-02.mp3",
@@ -13424,12 +13549,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "something",
             "else,”"
           ],
           "choices": [
-            "else,”",
-            "Maybe",
-            "buy"
+            "something else,”",
+            "model airplanes",
+            "soccer ball."
           ],
           "image": "./assets/story-demo/cf043/pages/page-03.webp",
           "audio": "./assets/story-demo/cf043/cf043-page-03.mp3",
@@ -13455,8 +13581,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "thought.",
-            "enough",
-            "money"
+            "pretzel.",
+            "all"
           ],
           "image": "./assets/story-demo/cf043/pages/page-04.webp",
           "audio": "./assets/story-demo/cf043/cf043-page-04.mp3",
@@ -13476,12 +13602,13 @@ window.KakaCarterManifest = {
             "ball."
           ],
           "blanks": [
+            "soccer",
             "ball."
           ],
           "choices": [
-            "ball.",
-            "saw",
-            "soccer"
+            "soccer ball.",
+            "model airplanes",
+            "something else,”"
           ],
           "image": "./assets/story-demo/cf043/pages/page-05.webp",
           "audio": "./assets/story-demo/cf043/cf043-page-05.mp3",
@@ -13508,8 +13635,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "thought.",
-            "enough",
-            "money"
+            "saw",
+            "want!”"
           ],
           "image": "./assets/story-demo/cf043/pages/page-06.webp",
           "audio": "./assets/story-demo/cf043/cf043-page-06.mp3",
@@ -13533,8 +13660,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "want!”",
-            "saw",
-            "robot"
+            "airplanes",
+            "mall."
           ],
           "image": "./assets/story-demo/cf043/pages/page-07.webp",
           "audio": "./assets/story-demo/cf043/cf043-page-07.mp3",
@@ -13557,8 +13684,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "enough!",
-            "counted",
-            "money"
+            "surprise",
+            "airplanes"
           ],
           "image": "./assets/story-demo/cf043/pages/page-08.webp",
           "audio": "./assets/story-demo/cf043/cf043-page-08.mp3",
@@ -13578,12 +13705,12 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "would"
+            "that,”"
           ],
           "choices": [
-            "would",
-            "saw",
-            "robot"
+            "that,”",
+            "“Nobody",
+            "else,”"
           ],
           "image": "./assets/story-demo/cf043/pages/page-09.webp",
           "audio": "./assets/story-demo/cf043/cf043-page-09.mp3",
@@ -13609,8 +13736,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "once.",
-            "Everyone",
-            "bought"
+            "ball.",
+            "pretzel."
           ],
           "image": "./assets/story-demo/cf043/pages/page-10.webp",
           "audio": "./assets/story-demo/cf043/cf043-page-10.mp3",
@@ -13637,8 +13764,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "present",
-            "Everyone",
-            "opened"
+            "bit",
+            "warm"
           ],
           "image": "./assets/story-demo/cf043/pages/page-11.webp",
           "audio": "./assets/story-demo/cf043/cf043-page-11.mp3",
@@ -13659,12 +13786,13 @@ window.KakaCarterManifest = {
             "pretzel."
           ],
           "blanks": [
+            "warm",
             "pretzel."
           ],
           "choices": [
-            "pretzel.",
-            "bit",
-            "warm"
+            "warm pretzel.",
+            "model airplanes",
+            "something else,”"
           ],
           "image": "./assets/story-demo/cf043/pages/page-12.webp",
           "audio": "./assets/story-demo/cf043/cf043-page-12.mp3",
@@ -13693,12 +13821,13 @@ window.KakaCarterManifest = {
             "lessons."
           ],
           "blanks": [
-            "lessons."
+            "taking",
+            "violin"
           ],
           "choices": [
-            "lessons.",
-            "started",
-            "taking"
+            "taking violin",
+            "same song",
+            "song sounded"
           ],
           "image": "./assets/story-demo/cf044/pages/page-01.webp",
           "audio": "./assets/story-demo/cf044/cf044-page-01.mp3",
@@ -13720,12 +13849,12 @@ window.KakaCarterManifest = {
             "again!”"
           ],
           "blanks": [
-            "again!”"
+            "song"
           ],
           "choices": [
-            "again!”",
-            "groaned",
-            "play"
+            "song",
+            "violin",
+            "sounds"
           ],
           "image": "./assets/story-demo/cf044/pages/page-02.webp",
           "audio": "./assets/story-demo/cf044/cf044-page-02.mp3",
@@ -13748,8 +13877,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "loud.",
-            "kept",
-            "practicing"
+            "sounds",
+            "stage."
           ],
           "image": "./assets/story-demo/cf044/pages/page-03.webp",
           "audio": "./assets/story-demo/cf044/cf044-page-03.mp3",
@@ -13774,8 +13903,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "ears.",
-            "practiced",
-            "plugged"
+            "loud.",
+            "same"
           ],
           "image": "./assets/story-demo/cf044/pages/page-04.webp",
           "audio": "./assets/story-demo/cf044/cf044-page-04.mp3",
@@ -13800,8 +13929,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "learning",
-            "practiced",
-            "song"
+            "instruments.",
+            "perfectly!"
           ],
           "image": "./assets/story-demo/cf044/pages/page-05.webp",
           "audio": "./assets/story-demo/cf044/cf044-page-05.mp3",
@@ -13820,12 +13949,13 @@ window.KakaCarterManifest = {
             "instruments."
           ],
           "blanks": [
-            "instruments."
+            "played",
+            "many"
           ],
           "choices": [
-            "instruments.",
-            "recital",
-            "finally"
+            "played many",
+            "taking violin",
+            "same song"
           ],
           "image": "./assets/story-demo/cf044/pages/page-06.webp",
           "audio": "./assets/story-demo/cf044/cf044-page-06.mp3",
@@ -13843,12 +13973,13 @@ window.KakaCarterManifest = {
             "drums."
           ],
           "blanks": [
+            "played",
             "drums."
           ],
           "choices": [
-            "drums.",
-            "girl",
-            "played"
+            "played drums.",
+            "taking violin",
+            "same song"
           ],
           "image": "./assets/story-demo/cf044/pages/page-07.webp",
           "audio": "./assets/story-demo/cf044/cf044-page-07.mp3",
@@ -13874,8 +14005,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "nodded.",
-            "kids",
-            "practiced"
+            "lessons.",
+            "carried"
           ],
           "image": "./assets/story-demo/cf044/pages/page-08.webp",
           "audio": "./assets/story-demo/cf044/cf044-page-08.mp3",
@@ -13900,8 +14031,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "stage.",
-            "last",
-            "turn"
+            "sounds",
+            "played"
           ],
           "image": "./assets/story-demo/cf044/pages/page-09.webp",
           "audio": "./assets/story-demo/cf044/cf044-page-09.mp3",
@@ -13924,8 +14055,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "perfectly!",
-            "played",
-            "song"
+            "lessons.",
+            "sounds"
           ],
           "image": "./assets/story-demo/cf044/pages/page-10.webp",
           "audio": "./assets/story-demo/cf044/cf044-page-10.mp3",
@@ -13951,8 +14082,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "practiced",
-            "proud",
-            "smiled"
+            "instruments.",
+            "ears."
           ],
           "image": "./assets/story-demo/cf044/pages/page-11.webp",
           "audio": "./assets/story-demo/cf044/cf044-page-11.mp3",
@@ -13980,8 +14111,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "learn",
-            "play"
+            "girl",
+            "many"
           ],
           "image": "./assets/story-demo/cf044/pages/page-12.webp",
           "audio": "./assets/story-demo/cf044/cf044-page-12.mp3",
@@ -14016,8 +14147,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "year!”",
-            "summer",
-            "garden"
+            "money",
+            "beans"
           ],
           "image": "./assets/story-demo/cf045/pages/page-01.webp",
           "audio": "./assets/story-demo/cf045/cf045-page-01.mp3",
@@ -14041,8 +14172,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "strawberries.",
-            "Soon",
-            "carrots"
+            "going",
+            "went"
           ],
           "image": "./assets/story-demo/cf045/pages/page-02.webp",
           "audio": "./assets/story-demo/cf045/cf045-page-02.mp3",
@@ -14068,8 +14199,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "garden.",
-            "Every",
-            "day"
+            "Pay",
+            "came"
           ],
           "image": "./assets/story-demo/cf045/pages/page-03.webp",
           "audio": "./assets/story-demo/cf045/cf045-page-03.mp3",
@@ -14096,8 +14227,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "garden,”",
-            "tired",
-            "going"
+            "day",
+            "kids"
           ],
           "image": "./assets/story-demo/cf045/pages/page-04.webp",
           "audio": "./assets/story-demo/cf045/cf045-page-04.mp3",
@@ -14126,8 +14257,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "Mmm",
-            "These"
+            "sign",
+            "came"
           ],
           "image": "./assets/story-demo/cf045/pages/page-05.webp",
           "audio": "./assets/story-demo/cf045/cf045-page-05.mp3",
@@ -14150,8 +14281,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "idea.",
-            "know",
-            "told"
+            "money",
+            "all"
           ],
           "image": "./assets/story-demo/cf045/pages/page-06.webp",
           "audio": "./assets/story-demo/cf045/cf045-page-06.mp3",
@@ -14179,12 +14310,13 @@ window.KakaCarterManifest = {
             "can!”"
           ],
           "blanks": [
-            "Pick"
+            "Pick",
+            "all"
           ],
           "choices": [
-            "Pick",
-            "kids",
-            "made"
+            "Pick all",
+            "family went",
+            "told everyone"
           ],
           "image": "./assets/story-demo/cf045/pages/page-07.webp",
           "audio": "./assets/story-demo/cf045/cf045-page-07.mp3",
@@ -14204,12 +14336,13 @@ window.KakaCarterManifest = {
             "outside."
           ],
           "blanks": [
+            "sign",
             "outside."
           ],
           "choices": [
-            "outside.",
-            "kids",
-            "put"
+            "sign outside.",
+            "family went",
+            "told everyone"
           ],
           "image": "./assets/story-demo/cf045/pages/page-08.webp",
           "audio": "./assets/story-demo/cf045/cf045-page-08.mp3",
@@ -14234,8 +14367,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "garden.",
-            "Soon",
-            "people"
+            "outside.",
+            "tired"
           ],
           "image": "./assets/story-demo/cf045/pages/page-09.webp",
           "audio": "./assets/story-demo/cf045/cf045-page-09.mp3",
@@ -14255,12 +14388,13 @@ window.KakaCarterManifest = {
             "bucket."
           ],
           "blanks": [
-            "bucket."
+            "put",
+            "money"
           ],
           "choices": [
-            "bucket.",
-            "People",
-            "picked"
+            "put money",
+            "family went",
+            "told everyone"
           ],
           "image": "./assets/story-demo/cf045/pages/page-10.webp",
           "audio": "./assets/story-demo/cf045/cf045-page-10.mp3",
@@ -14287,8 +14421,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "money",
-            "buy"
+            "beans",
+            "year!”"
           ],
           "image": "./assets/story-demo/cf045/pages/page-11.webp",
           "audio": "./assets/story-demo/cf045/cf045-page-11.mp3",
@@ -14316,8 +14450,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "money,”",
-            "know",
-            "everyone"
+            "day",
+            "food?”"
           ],
           "image": "./assets/story-demo/cf045/pages/page-12.webp",
           "audio": "./assets/story-demo/cf045/cf045-page-12.mp3",
@@ -14348,12 +14482,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "best",
             "costume!”"
           ],
           "choices": [
-            "costume!”",
-            "Happy",
-            "Halloween"
+            "best costume!”",
+            "hope everyone",
+            "treat bags"
           ],
           "image": "./assets/story-demo/cf046/pages/page-01.webp",
           "audio": "./assets/story-demo/cf046/cf046-page-01.mp3",
@@ -14381,8 +14516,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "tricks.”",
-            "ninjas",
-            "all"
+            "jumped",
+            "treat"
           ],
           "image": "./assets/story-demo/cf046/pages/page-02.webp",
           "audio": "./assets/story-demo/cf046/cf046-page-02.mp3",
@@ -14405,8 +14540,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "trick",
-            "laughed",
-            "one"
+            "ran.",
+            "best"
           ],
           "image": "./assets/story-demo/cf046/pages/page-03.webp",
           "audio": "./assets/story-demo/cf046/cf046-page-03.mp3",
@@ -14429,8 +14564,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "treats.",
-            "kids",
-            "went"
+            "“Look",
+            "behind"
           ],
           "image": "./assets/story-demo/cf046/pages/page-04.webp",
           "audio": "./assets/story-demo/cf046/cf046-page-04.mp3",
@@ -14457,8 +14592,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "tree.",
-            "kids",
-            "went"
+            "hope",
+            "best"
           ],
           "image": "./assets/story-demo/cf046/pages/page-05.webp",
           "audio": "./assets/story-demo/cf046/cf046-page-05.mp3",
@@ -14483,8 +14618,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "bags",
-            "kids",
-            "screamed"
+            "lots",
+            "cried."
           ],
           "image": "./assets/story-demo/cf046/pages/page-06.webp",
           "audio": "./assets/story-demo/cf046/cf046-page-06.mp3",
@@ -14505,8 +14640,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cried.",
-            "Hey",
-            "Happy"
+            "bags",
+            "switched"
           ],
           "image": "./assets/story-demo/cf046/pages/page-07.webp",
           "audio": "./assets/story-demo/cf046/cf046-page-07.mp3",
@@ -14530,12 +14665,13 @@ window.KakaCarterManifest = {
             "bags.”"
           ],
           "blanks": [
+            "treat",
             "bags.”"
           ],
           "choices": [
-            "bags.”",
-            "came",
-            "over"
+            "treat bags.”",
+            "best costume!”",
+            "hope everyone"
           ],
           "image": "./assets/story-demo/cf046/pages/page-08.webp",
           "audio": "./assets/story-demo/cf046/cf046-page-08.mp3",
@@ -14562,8 +14698,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "treats",
-            "Look",
-            "how"
+            "lots",
+            "Suddenly"
           ],
           "image": "./assets/story-demo/cf046/pages/page-09.webp",
           "audio": "./assets/story-demo/cf046/cf046-page-09.mp3",
@@ -14588,8 +14724,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cried.",
-            "Hey",
-            "treats"
+            "costume!”",
+            "behind"
           ],
           "image": "./assets/story-demo/cf046/pages/page-10.webp",
           "audio": "./assets/story-demo/cf046/cf046-page-10.mp3",
@@ -14615,8 +14751,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "treats.”",
-            "gave",
-            "another"
+            "treat",
+            "gets"
           ],
           "image": "./assets/story-demo/cf046/pages/page-11.webp",
           "audio": "./assets/story-demo/cf046/cf046-page-11.mp3",
@@ -14635,12 +14771,13 @@ window.KakaCarterManifest = {
             "tricks!”"
           ],
           "blanks": [
+            "than",
             "tricks!”"
           ],
           "choices": [
-            "tricks!”",
-            "share",
-            "Treats"
+            "than tricks!”",
+            "best costume!”",
+            "hope everyone"
           ],
           "image": "./assets/story-demo/cf046/pages/page-12.webp",
           "audio": "./assets/story-demo/cf046/cf046-page-12.mp3",
@@ -14673,8 +14810,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "riding.",
-            "Carters",
-            "went"
+            "rules,",
+            "noises"
           ],
           "image": "./assets/story-demo/cf047/pages/page-01.webp",
           "audio": "./assets/story-demo/cf047/cf047-page-01.mp3",
@@ -14700,8 +14837,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "blinked.",
-            "horse",
-            "named"
+            "knows",
+            "slipped"
           ],
           "image": "./assets/story-demo/cf047/pages/page-02.webp",
           "audio": "./assets/story-demo/cf047/cf047-page-02.mp3",
@@ -14730,8 +14867,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "gallop.”",
-            "These",
-            "horses"
+            "blinked.",
+            "heels."
           ],
           "image": "./assets/story-demo/cf047/pages/page-03.webp",
           "audio": "./assets/story-demo/cf047/cf047-page-03.mp3",
@@ -14754,8 +14891,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "thought.",
-            "cowboy",
-            "horses"
+            "blinked.",
+            "horse"
           ],
           "image": "./assets/story-demo/cf047/pages/page-04.webp",
           "audio": "./assets/story-demo/cf047/cf047-page-04.mp3",
@@ -14780,8 +14917,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "heels.",
-            "tapped",
-            "horse"
+            "faster,",
+            "slow"
           ],
           "image": "./assets/story-demo/cf047/pages/page-05.webp",
           "audio": "./assets/story-demo/cf047/cf047-page-05.mp3",
@@ -14802,12 +14939,13 @@ window.KakaCarterManifest = {
             "cowboy!”"
           ],
           "blanks": [
+            "real",
             "cowboy!”"
           ],
           "choices": [
-            "cowboy!”",
-            "laughed",
-            "Buddy"
+            "real cowboy!”",
+            "horseback riding.",
+            "horse blinked."
           ],
           "image": "./assets/story-demo/cf047/pages/page-06.webp",
           "audio": "./assets/story-demo/cf047/cf047-page-06.mp3",
@@ -14836,12 +14974,13 @@ window.KakaCarterManifest = {
             "could."
           ],
           "blanks": [
-            "could."
+            "show",
+            "Buddy"
           ],
           "choices": [
-            "could.",
-            "frowned",
-            "show"
+            "show Buddy",
+            "horseback riding.",
+            "horse blinked."
           ],
           "image": "./assets/story-demo/cf047/pages/page-07.webp",
           "audio": "./assets/story-demo/cf047/cf047-page-07.mp3",
@@ -14867,8 +15006,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "galloped!",
-            "Buddy",
-            "jerked"
+            "guide",
+            "shouted"
           ],
           "image": "./assets/story-demo/cf047/pages/page-08.webp",
           "audio": "./assets/story-demo/cf047/cf047-page-08.mp3",
@@ -14892,8 +15031,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "saddle.",
-            "dropped",
-            "reins"
+            "horse",
+            "scare"
           ],
           "image": "./assets/story-demo/cf047/pages/page-09.webp",
           "audio": "./assets/story-demo/cf047/cf047-page-09.mp3",
@@ -14915,12 +15054,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "guide"
+            "“Loud",
+            "noises"
           ],
           "choices": [
-            "guide",
-            "Help",
-            "yelled"
+            "“Loud noises",
+            "horseback riding.",
+            "horse blinked."
           ],
           "image": "./assets/story-demo/cf047/pages/page-10.webp",
           "audio": "./assets/story-demo/cf047/cf047-page-10.mp3",
@@ -14942,8 +15082,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "rules,",
-            "looked",
-            "angry"
+            "cowboy,”",
+            "Buddy!”"
           ],
           "image": "./assets/story-demo/cf047/pages/page-11.webp",
           "audio": "./assets/story-demo/cf047/cf047-page-11.mp3",
@@ -14969,8 +15109,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "today,”",
-            "patted",
-            "Buddy"
+            "air",
+            "slow"
           ],
           "image": "./assets/story-demo/cf047/pages/page-12.webp",
           "audio": "./assets/story-demo/cf047/cf047-page-12.mp3",
@@ -15005,8 +15145,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "attic.",
-            "kids",
-            "went"
+            "hair,”",
+            "toy."
           ],
           "image": "./assets/story-demo/cf048/pages/page-01.webp",
           "audio": "./assets/story-demo/cf048/cf048-page-01.mp3",
@@ -15032,8 +15172,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "corner!”",
-            "Old",
-            "books"
+            "went",
+            "followed"
           ],
           "image": "./assets/story-demo/cf048/pages/page-02.webp",
           "audio": "./assets/story-demo/cf048/cf048-page-02.mp3",
@@ -15055,12 +15195,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "ghosts,”"
-          ],
-          "choices": [
-            "ghosts,”",
             "such",
             "thing"
+          ],
+          "choices": [
+            "such thing",
+            "kids went",
+            "see paw"
           ],
           "image": "./assets/story-demo/cf048/pages/page-03.webp",
           "audio": "./assets/story-demo/cf048/cf048-page-03.mp3",
@@ -15085,8 +15226,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "imagine",
-            "Thump",
-            "wind"
+            "thing",
+            "ghosts,”"
           ],
           "image": "./assets/story-demo/cf048/pages/page-04.webp",
           "audio": "./assets/story-demo/cf048/cf048-page-04.mp3",
@@ -15113,8 +15254,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "flashlights.",
-            "kids",
-            "went"
+            "ghosts,”",
+            "see"
           ],
           "image": "./assets/story-demo/cf048/pages/page-05.webp",
           "audio": "./assets/story-demo/cf048/cf048-page-05.mp3",
@@ -15139,8 +15280,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wind!”",
-            "Thump",
-            "kids"
+            "see",
+            "deep"
           ],
           "image": "./assets/story-demo/cf048/pages/page-06.webp",
           "audio": "./assets/story-demo/cf048/cf048-page-06.mp3",
@@ -15165,8 +15306,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "missing",
-            "looked",
-            "old"
+            "chewing",
+            "back"
           ],
           "image": "./assets/story-demo/cf048/pages/page-07.webp",
           "audio": "./assets/story-demo/cf048/cf048-page-07.mp3",
@@ -15190,8 +15331,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hair,”",
-            "shined",
-            "flashlight"
+            "imagine",
+            "deep"
           ],
           "image": "./assets/story-demo/cf048/pages/page-08.webp",
           "audio": "./assets/story-demo/cf048/cf048-page-08.mp3",
@@ -15216,12 +15357,13 @@ window.KakaCarterManifest = {
             "paws.”"
           ],
           "blanks": [
-            "paws.”"
+            "see",
+            "paw"
           ],
           "choices": [
-            "paws.”",
-            "shined",
-            "flashlight"
+            "see paw",
+            "kids went",
+            "such thing"
           ],
           "image": "./assets/story-demo/cf048/pages/page-09.webp",
           "audio": "./assets/story-demo/cf048/cf048-page-09.mp3",
@@ -15240,12 +15382,13 @@ window.KakaCarterManifest = {
             "breath."
           ],
           "blanks": [
+            "deep",
             "breath."
           ],
           "choices": [
-            "breath.",
-            "took",
-            "deep"
+            "deep breath.",
+            "kids went",
+            "such thing"
           ],
           "image": "./assets/story-demo/cf048/pages/page-10.webp",
           "audio": "./assets/story-demo/cf048/cf048-page-10.mp3",
@@ -15269,8 +15412,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "chewing",
-            "cried",
-            "toy"
+            "dust!",
+            "ghost"
           ],
           "image": "./assets/story-demo/cf048/pages/page-11.webp",
           "audio": "./assets/story-demo/cf048/cf048-page-11.mp3",
@@ -15291,12 +15434,12 @@ window.KakaCarterManifest = {
             "Emmy."
           ],
           "blanks": [
-            "here,”"
+            "followed"
           ],
           "choices": [
-            "here,”",
             "followed",
-            "patted"
+            "deep",
+            "back"
           ],
           "image": "./assets/story-demo/cf048/pages/page-12.webp",
           "audio": "./assets/story-demo/cf048/cf048-page-12.mp3",
@@ -15326,12 +15469,12 @@ window.KakaCarterManifest = {
             "again."
           ],
           "blanks": [
-            "again."
+            "Martha"
           ],
           "choices": [
-            "again.",
-            "Carters",
-            "babysitting"
+            "Martha",
+            "cover!",
+            "kiss."
           ],
           "image": "./assets/story-demo/cf049/pages/page-01.webp",
           "audio": "./assets/story-demo/cf049/cf049-page-01.mp3",
@@ -15356,8 +15499,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "floor.",
-            "looked",
-            "very"
+            "many",
+            "cover!"
           ],
           "image": "./assets/story-demo/cf049/pages/page-02.webp",
           "audio": "./assets/story-demo/cf049/cf049-page-02.mp3",
@@ -15379,12 +15522,13 @@ window.KakaCarterManifest = {
             "Martha."
           ],
           "blanks": [
+            "watched",
             "Martha."
           ],
           "choices": [
-            "Martha.",
-            "moved",
-            "across"
+            "watched Martha.",
+            "babysitting Martha",
+            "Baby Martha"
           ],
           "image": "./assets/story-demo/cf049/pages/page-03.webp",
           "audio": "./assets/story-demo/cf049/cf049-page-03.mp3",
@@ -15408,8 +15552,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "pick",
-            "rushed",
-            "Stop"
+            "needs",
+            "rules,”"
           ],
           "image": "./assets/story-demo/cf049/pages/page-04.webp",
           "audio": "./assets/story-demo/cf049/cf049-page-04.mp3",
@@ -15433,8 +15577,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "rules,”",
-            "needs",
-            "chew"
+            "books.",
+            "many"
           ],
           "image": "./assets/story-demo/cf049/pages/page-05.webp",
           "audio": "./assets/story-demo/cf049/cf049-page-05.mp3",
@@ -15455,12 +15599,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "Baby",
             "Martha,”"
           ],
           "choices": [
-            "Martha,”",
-            "bark",
-            "Baby"
+            "Baby Martha,”",
+            "babysitting Martha",
+            "watched Martha."
           ],
           "image": "./assets/story-demo/cf049/pages/page-06.webp",
           "audio": "./assets/story-demo/cf049/cf049-page-06.mp3",
@@ -15485,8 +15630,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "baby,”",
-            "jump",
-            "hurt"
+            "rushed",
+            "gave"
           ],
           "image": "./assets/story-demo/cf049/pages/page-07.webp",
           "audio": "./assets/story-demo/cf049/cf049-page-07.mp3",
@@ -15512,8 +15657,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "jump.",
-            "chew",
-            "bark"
+            "teeth",
+            "minute,”"
           ],
           "image": "./assets/story-demo/cf049/pages/page-08.webp",
           "audio": "./assets/story-demo/cf049/cf049-page-08.mp3",
@@ -15539,8 +15684,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cover!",
-            "Later",
-            "found"
+            "rug",
+            "minute,”"
           ],
           "image": "./assets/story-demo/cf049/pages/page-09.webp",
           "audio": "./assets/story-demo/cf049/cf049-page-09.mp3",
@@ -15563,8 +15708,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "minute,”",
-            "looked",
-            "very"
+            "jump",
+            "rushed"
           ],
           "image": "./assets/story-demo/cf049/pages/page-10.webp",
           "audio": "./assets/story-demo/cf049/cf049-page-10.mp3",
@@ -15586,12 +15731,12 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "does!”"
+            "Martha"
           ],
           "choices": [
-            "does!”",
-            "baby",
-            "chewing"
+            "Martha",
+            "jump",
+            "gave"
           ],
           "image": "./assets/story-demo/cf049/pages/page-11.webp",
           "audio": "./assets/story-demo/cf049/cf049-page-11.mp3",
@@ -15615,12 +15760,13 @@ window.KakaCarterManifest = {
             "kiss."
           ],
           "blanks": [
+            "big",
             "kiss."
           ],
           "choices": [
-            "kiss.",
-            "barked",
-            "loudly"
+            "big kiss.",
+            "babysitting Martha",
+            "Baby Martha"
           ],
           "image": "./assets/story-demo/cf049/pages/page-12.webp",
           "audio": "./assets/story-demo/cf049/cf049-page-12.mp3",
@@ -15656,8 +15802,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "lucky,”",
-            "took",
-            "trip"
+            "nice",
+            "new"
           ],
           "image": "./assets/story-demo/cf050/pages/page-01.webp",
           "audio": "./assets/story-demo/cf050/cf050-page-01.mp3",
@@ -15679,12 +15825,12 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "said."
+            "fun"
           ],
           "choices": [
-            "said.",
-            "frowned",
-            "Why"
+            "fun",
+            "looked",
+            "brought"
           ],
           "image": "./assets/story-demo/cf050/pages/page-02.webp",
           "audio": "./assets/story-demo/cf050/cf050-page-02.mp3",
@@ -15706,12 +15852,13 @@ window.KakaCarterManifest = {
             "restaurant."
           ],
           "blanks": [
+            "new",
             "restaurant."
           ],
           "choices": [
-            "restaurant.",
-            "brought",
-            "everyone"
+            "new restaurant.",
+            "grilled cheese,”",
+            "seafood pancake."
           ],
           "image": "./assets/story-demo/cf050/pages/page-03.webp",
           "audio": "./assets/story-demo/cf050/cf050-page-03.mp3",
@@ -15736,8 +15883,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cheese,”",
-            "waiter",
-            "brought"
+            "grinned.",
+            "left"
           ],
           "image": "./assets/story-demo/cf050/pages/page-04.webp",
           "audio": "./assets/story-demo/cf050/cf050-page-04.mp3",
@@ -15761,8 +15908,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "vegetables.",
-            "serve",
-            "japchae"
+            "cheese,”",
+            "things,”"
           ],
           "image": "./assets/story-demo/cf050/pages/page-05.webp",
           "audio": "./assets/story-demo/cf050/cf050-page-05.mp3",
@@ -15789,8 +15936,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "things,”",
-            "order",
-            "bunch"
+            "parking",
+            "trip?”"
           ],
           "image": "./assets/story-demo/cf050/pages/page-06.webp",
           "audio": "./assets/story-demo/cf050/cf050-page-06.mp3",
@@ -15809,12 +15956,13 @@ window.KakaCarterManifest = {
             "pancake."
           ],
           "blanks": [
+            "seafood",
             "pancake."
           ],
           "choices": [
-            "pancake.",
-            "tried",
-            "seafood"
+            "seafood pancake.",
+            "new restaurant.",
+            "grilled cheese,”"
           ],
           "image": "./assets/story-demo/cf050/pages/page-07.webp",
           "audio": "./assets/story-demo/cf050/cf050-page-07.mp3",
@@ -15839,8 +15987,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "bibimbap.",
-            "looked",
-            "bowl"
+            "lucky,”",
+            "vegetables."
           ],
           "image": "./assets/story-demo/cf050/pages/page-08.webp",
           "audio": "./assets/story-demo/cf050/cf050-page-08.mp3",
@@ -15866,8 +16014,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "restaurant.",
-            "kids",
-            "left"
+            "bibimbap.",
+            "asked."
           ],
           "image": "./assets/story-demo/cf050/pages/page-09.webp",
           "audio": "./assets/story-demo/cf050/cf050-page-09.mp3",
@@ -15889,12 +16037,13 @@ window.KakaCarterManifest = {
             "asked."
           ],
           "blanks": [
-            "asked."
+            "nice",
+            "trip?”"
           ],
           "choices": [
-            "asked.",
-            "having",
-            "nice"
+            "nice trip?”",
+            "new restaurant.",
+            "grilled cheese,”"
           ],
           "image": "./assets/story-demo/cf050/pages/page-10.webp",
           "audio": "./assets/story-demo/cf050/cf050-page-10.mp3",
@@ -15919,8 +16068,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "laughed.",
-            "asked",
-            "see"
+            "pancake.",
+            "brought"
           ],
           "image": "./assets/story-demo/cf050/pages/page-11.webp",
           "audio": "./assets/story-demo/cf050/cf050-page-11.mp3",
@@ -15944,8 +16093,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "grinned.",
-            "looked",
-            "confused"
+            "order",
+            "kids"
           ],
           "image": "./assets/story-demo/cf050/pages/page-12.webp",
           "audio": "./assets/story-demo/cf050/cf050-page-12.mp3",
@@ -15983,8 +16132,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "boys.",
-            "hair",
-            "long"
+            "It’ll",
+            "salon.”"
           ],
           "image": "./assets/story-demo/cf051/pages/page-01.webp",
           "audio": "./assets/story-demo/cf051/cf051-page-01.mp3",
@@ -16009,8 +16158,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "salon.”",
-            "problem",
-            "take"
+            "Another",
+            "long,”"
           ],
           "image": "./assets/story-demo/cf051/pages/page-02.webp",
           "audio": "./assets/story-demo/cf051/cf051-page-02.mp3",
@@ -16035,8 +16184,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "buzz",
-            "want",
-            "cut"
+            "short,”",
+            "weird"
           ],
           "image": "./assets/story-demo/cf051/pages/page-03.webp",
           "audio": "./assets/story-demo/cf051/cf051-page-03.mp3",
@@ -16059,12 +16208,13 @@ window.KakaCarterManifest = {
             "chair."
           ],
           "blanks": [
+            "big",
             "chair."
           ],
           "choices": [
-            "chair.",
-            "salon",
-            "sat"
+            "big chair.",
+            "hair salon.”",
+            "hair clipper."
           ],
           "image": "./assets/story-demo/cf051/pages/page-04.webp",
           "audio": "./assets/story-demo/cf051/cf051-page-04.mp3",
@@ -16085,12 +16235,13 @@ window.KakaCarterManifest = {
             "clipper."
           ],
           "blanks": [
+            "hair",
             "clipper."
           ],
           "choices": [
-            "clipper.",
-            "stylist",
-            "turned"
+            "hair clipper.",
+            "hair salon.”",
+            "big chair."
           ],
           "image": "./assets/story-demo/cf051/pages/page-05.webp",
           "audio": "./assets/story-demo/cf051/cf051-page-05.mp3",
@@ -16116,8 +16267,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "back,”",
-            "worry",
-            "grow"
+            "Another",
+            "After"
           ],
           "image": "./assets/story-demo/cf051/pages/page-06.webp",
           "audio": "./assets/story-demo/cf051/cf051-page-06.mp3",
@@ -16142,12 +16293,13 @@ window.KakaCarterManifest = {
             "asked."
           ],
           "blanks": [
-            "asked."
+            "look",
+            "weird"
           ],
           "choices": [
-            "asked.",
-            "started",
-            "cutting"
+            "look weird",
+            "hair salon.”",
+            "big chair."
           ],
           "image": "./assets/story-demo/cf051/pages/page-07.webp",
           "audio": "./assets/story-demo/cf051/cf051-page-07.mp3",
@@ -16179,8 +16331,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hair.",
-            "Hmm",
-            "think"
+            "clipper.",
+            "weird"
           ],
           "image": "./assets/story-demo/cf051/pages/page-08.webp",
           "audio": "./assets/story-demo/cf051/cf051-page-08.mp3",
@@ -16206,8 +16358,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "comb.",
-            "stylist",
-            "picked"
+            "think",
+            "boys."
           ],
           "image": "./assets/story-demo/cf051/pages/page-09.webp",
           "audio": "./assets/story-demo/cf051/cf051-page-09.mp3",
@@ -16232,8 +16384,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "happy.",
-            "After",
-            "haircuts"
+            "want",
+            "hair"
           ],
           "image": "./assets/story-demo/cf051/pages/page-10.webp",
           "audio": "./assets/story-demo/cf051/cf051-page-10.mp3",
@@ -16258,8 +16410,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "short,”",
-            "made",
-            "face"
+            "washed",
+            "turned"
           ],
           "image": "./assets/story-demo/cf051/pages/page-11.webp",
           "audio": "./assets/story-demo/cf051/cf051-page-11.mp3",
@@ -16283,8 +16435,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "together.",
-            "worry",
-            "boys"
+            "hair",
+            "back,”"
           ],
           "image": "./assets/story-demo/cf051/pages/page-12.webp",
           "audio": "./assets/story-demo/cf051/cf051-page-12.mp3",
@@ -16318,12 +16470,13 @@ window.KakaCarterManifest = {
             "asked."
           ],
           "blanks": [
-            "asked."
+            "juice",
+            "bottle"
           ],
           "choices": [
-            "asked.",
-            "threw",
-            "juice"
+            "juice bottle",
+            "went outside,”",
+            "scooping dirt"
           ],
           "image": "./assets/story-demo/cf052/pages/page-01.webp",
           "audio": "./assets/story-demo/cf052/cf052-page-01.mp3",
@@ -16352,8 +16505,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "garage.",
-            "rinsed",
-            "juice"
+            "rinse",
+            "feeding"
           ],
           "image": "./assets/story-demo/cf052/pages/page-02.webp",
           "audio": "./assets/story-demo/cf052/cf052-page-02.mp3",
@@ -16380,8 +16533,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "left",
-            "newspaper"
+            "threw",
+            "charge"
           ],
           "image": "./assets/story-demo/cf052/pages/page-03.webp",
           "audio": "./assets/story-demo/cf052/cf052-page-03.mp3",
@@ -16407,8 +16560,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "recycling",
-            "put",
-            "newspaper"
+            "asked.",
+            "rinse"
           ],
           "image": "./assets/story-demo/cf052/pages/page-04.webp",
           "audio": "./assets/story-demo/cf052/cf052-page-04.mp3",
@@ -16437,8 +16590,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "left",
-            "dog"
+            "found",
+            "went"
           ],
           "image": "./assets/story-demo/cf052/pages/page-05.webp",
           "audio": "./assets/story-demo/cf052/cf052-page-05.mp3",
@@ -16465,8 +16618,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "week?”",
-            "frowned",
-            "think"
+            "while",
+            "put"
           ],
           "image": "./assets/story-demo/cf052/pages/page-06.webp",
           "audio": "./assets/story-demo/cf052/cf052-page-06.mp3",
@@ -16495,8 +16648,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "recycle",
-            "looked",
-            "down"
+            "After",
+            "newspaper"
           ],
           "image": "./assets/story-demo/cf052/pages/page-07.webp",
           "audio": "./assets/story-demo/cf052/cf052-page-07.mp3",
@@ -16525,8 +16678,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "recycling,”",
-            "need",
-            "better"
+            "started",
+            "trash?”"
           ],
           "image": "./assets/story-demo/cf052/pages/page-08.webp",
           "audio": "./assets/story-demo/cf052/cf052-page-08.mp3",
@@ -16549,8 +16702,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "list.",
-            "Carters",
-            "started"
+            "After",
+            "dog"
           ],
           "image": "./assets/story-demo/cf052/pages/page-09.webp",
           "audio": "./assets/story-demo/cf052/cf052-page-09.mp3",
@@ -16577,8 +16730,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "missing.",
-            "After",
-            "while"
+            "lazy",
+            "bottle"
           ],
           "image": "./assets/story-demo/cf052/pages/page-10.webp",
           "audio": "./assets/story-demo/cf052/cf052-page-10.mp3",
@@ -16599,12 +16752,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "went",
             "outside,”"
           ],
           "choices": [
-            "outside,”",
-            "think",
-            "went"
+            "went outside,”",
+            "juice bottle",
+            "scooping dirt"
           ],
           "image": "./assets/story-demo/cf052/pages/page-11.webp",
           "audio": "./assets/story-demo/cf052/cf052-page-11.mp3",
@@ -16628,12 +16782,13 @@ window.KakaCarterManifest = {
             "boots."
           ],
           "blanks": [
-            "boots."
+            "scooping",
+            "dirt"
           ],
           "choices": [
-            "boots.",
-            "found",
-            "scooping"
+            "scooping dirt",
+            "juice bottle",
+            "went outside,”"
           ],
           "image": "./assets/story-demo/cf052/pages/page-12.webp",
           "audio": "./assets/story-demo/cf052/cf052-page-12.mp3",
@@ -16669,8 +16824,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "trip.",
-            "Carters",
-            "driving"
+            "flat",
+            "car,”"
           ],
           "image": "./assets/story-demo/cf053/pages/page-01.webp",
           "audio": "./assets/story-demo/cf053/cf053-page-01.mp3",
@@ -16696,8 +16851,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wrong",
-            "Suddenly",
-            "car"
+            "engine.",
+            "other."
           ],
           "image": "./assets/story-demo/cf053/pages/page-02.webp",
           "audio": "./assets/story-demo/cf053/cf053-page-02.mp3",
@@ -16723,8 +16878,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "looked",
-            "worried"
+            "car,”",
+            "home"
           ],
           "image": "./assets/story-demo/cf053/pages/page-03.webp",
           "audio": "./assets/story-demo/cf053/cf053-page-03.mp3",
@@ -16752,8 +16907,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "tires.",
-            "car",
-            "checked"
+            "forgot",
+            "home"
           ],
           "image": "./assets/story-demo/cf053/pages/page-04.webp",
           "audio": "./assets/story-demo/cf053/cf053-page-04.mp3",
@@ -16777,12 +16932,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "week,”"
+            "new",
+            "battery"
           ],
           "choices": [
-            "week,”",
-            "battery",
-            "dead"
+            "new battery",
+            "driving home",
+            "flat tire?”"
           ],
           "image": "./assets/story-demo/cf053/pages/page-05.webp",
           "audio": "./assets/story-demo/cf053/cf053-page-05.mp3",
@@ -16810,8 +16966,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "engine.",
-            "opened",
-            "hood"
+            "flat",
+            "mini-mart,”"
           ],
           "image": "./assets/story-demo/cf053/pages/page-06.webp",
           "audio": "./assets/story-demo/cf053/cf053-page-06.mp3",
@@ -16831,12 +16987,13 @@ window.KakaCarterManifest = {
             "other."
           ],
           "blanks": [
+            "each",
             "other."
           ],
           "choices": [
-            "other.",
-            "all",
-            "looked"
+            "each other.",
+            "driving home",
+            "flat tire?”"
           ],
           "image": "./assets/story-demo/cf053/pages/page-07.webp",
           "audio": "./assets/story-demo/cf053/cf053-page-07.mp3",
@@ -16855,12 +17012,13 @@ window.KakaCarterManifest = {
             "complain."
           ],
           "blanks": [
-            "complain."
-          ],
-          "choices": [
-            "complain.",
             "kids",
             "began"
+          ],
+          "choices": [
+            "kids began",
+            "driving home",
+            "flat tire?”"
           ],
           "image": "./assets/story-demo/cf053/pages/page-08.webp",
           "audio": "./assets/story-demo/cf053/cf053-page-08.mp3",
@@ -16886,8 +17044,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "bathroom!”",
-            "feel",
-            "thirsty"
+            "checked",
+            "home"
           ],
           "image": "./assets/story-demo/cf053/pages/page-09.webp",
           "audio": "./assets/story-demo/cf053/cf053-page-09.mp3",
@@ -16915,8 +17073,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "mini-mart,”",
-            "see",
-            "gas"
+            "wrong",
+            "other."
           ],
           "image": "./assets/story-demo/cf053/pages/page-10.webp",
           "audio": "./assets/story-demo/cf053/cf053-page-10.mp3",
@@ -16937,12 +17095,12 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "said."
+            "gas"
           ],
           "choices": [
-            "said.",
             "gas",
-            "problem"
+            "car’s",
+            "need"
           ],
           "image": "./assets/story-demo/cf053/pages/page-11.webp",
           "audio": "./assets/story-demo/cf053/cf053-page-11.mp3",
@@ -16967,8 +17125,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "tank!”",
-            "slapped",
-            "forehead"
+            "need",
+            "other."
           ],
           "image": "./assets/story-demo/cf053/pages/page-12.webp",
           "audio": "./assets/story-demo/cf053/cf053-page-12.mp3",
@@ -17004,8 +17162,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "planets.",
-            "went",
-            "library"
+            "make",
+            "“Well,"
           ],
           "image": "./assets/story-demo/cf054/pages/page-01.webp",
           "audio": "./assets/story-demo/cf054/cf054-page-01.mp3",
@@ -17032,8 +17190,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "tonight!”",
-            "backyard",
-            "star"
+            "stars",
+            "Carters"
           ],
           "image": "./assets/story-demo/cf054/pages/page-02.webp",
           "audio": "./assets/story-demo/cf054/cf054-page-02.mp3",
@@ -17065,8 +17223,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "look",
-            "Great",
-            "idea"
+            "make",
+            "“Well,"
           ],
           "image": "./assets/story-demo/cf054/pages/page-03.webp",
           "audio": "./assets/story-demo/cf054/cf054-page-03.mp3",
@@ -17089,12 +17247,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "cookies,”"
-          ],
-          "choices": [
-            "cookies,”",
             "make",
             "star"
+          ],
+          "choices": [
+            "make star",
+            "brought home",
+            "party tonight!”"
           ],
           "image": "./assets/story-demo/cf054/pages/page-04.webp",
           "audio": "./assets/story-demo/cf054/cf054-page-04.mp3",
@@ -17115,12 +17274,13 @@ window.KakaCarterManifest = {
             "tonight.”"
           ],
           "blanks": [
+            "bright",
             "tonight.”"
           ],
           "choices": [
-            "tonight.”",
-            "helped",
-            "read"
+            "bright tonight.”",
+            "brought home",
+            "party tonight!”"
           ],
           "image": "./assets/story-demo/cf054/pages/page-05.webp",
           "audio": "./assets/story-demo/cf054/cf054-page-05.mp3",
@@ -17147,8 +17307,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "telescope.”",
-            "favorite",
-            "planet"
+            "cloudy",
+            "bright"
           ],
           "image": "./assets/story-demo/cf054/pages/page-06.webp",
           "audio": "./assets/story-demo/cf054/cf054-page-06.mp3",
@@ -17174,8 +17334,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "oven.",
-            "put",
-            "cookies"
+            "cloudy",
+            "star"
           ],
           "image": "./assets/story-demo/cf054/pages/page-07.webp",
           "audio": "./assets/story-demo/cf054/cf054-page-07.mp3",
@@ -17204,8 +17364,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "night",
-            "fun",
-            "find"
+            "look",
+            "moon"
           ],
           "image": "./assets/story-demo/cf054/pages/page-08.webp",
           "audio": "./assets/story-demo/cf054/cf054-page-08.mp3",
@@ -17229,8 +17389,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "outside.",
-            "night",
-            "Carters"
+            "oven.",
+            "telescope.”"
           ],
           "image": "./assets/story-demo/cf054/pages/page-09.webp",
           "audio": "./assets/story-demo/cf054/cf054-page-09.mp3",
@@ -17257,8 +17417,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "everyone",
-            "brought",
-            "cookies"
+            "tonight!”",
+            "Carters"
           ],
           "image": "./assets/story-demo/cf054/pages/page-10.webp",
           "audio": "./assets/story-demo/cf054/cf054-page-10.mp3",
@@ -17281,12 +17441,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "see",
             "anything,”"
           ],
           "choices": [
-            "anything,”",
-            "see",
-            "any"
+            "see anything,”",
+            "brought home",
+            "party tonight!”"
           ],
           "image": "./assets/story-demo/cf054/pages/page-11.webp",
           "audio": "./assets/story-demo/cf054/cf054-page-11.mp3",
@@ -17313,8 +17474,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "moons,”",
-            "Everyone",
-            "disappointed"
+            "bright",
+            "brought"
           ],
           "image": "./assets/story-demo/cf054/pages/page-12.webp",
           "audio": "./assets/story-demo/cf054/cf054-page-12.mp3",
@@ -17351,8 +17512,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "shoes.",
-            "wore",
-            "uniform"
+            "time",
+            "stands."
           ],
           "image": "./assets/story-demo/cf055/pages/page-01.webp",
           "audio": "./assets/story-demo/cf055/cf055-page-01.mp3",
@@ -17378,8 +17539,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wind!”",
-            "windy",
-            "lucky"
+            "hat,",
+            "races"
           ],
           "image": "./assets/story-demo/cf055/pages/page-02.webp",
           "audio": "./assets/story-demo/cf055/cf055-page-02.mp3",
@@ -17401,12 +17562,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "high",
             "jump,”"
           ],
           "choices": [
-            "jump,”",
-            "events",
-            "doing"
+            "high jump,”",
+            "running shoes.",
+            "water bottle"
           ],
           "image": "./assets/story-demo/cf055/pages/page-03.webp",
           "audio": "./assets/story-demo/cf055/cf055-page-03.mp3",
@@ -17433,8 +17595,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "stands.",
-            "family",
-            "drove"
+            "uniform,",
+            "tumbled"
           ],
           "image": "./assets/story-demo/cf055/pages/page-04.webp",
           "audio": "./assets/story-demo/cf055/cf055-page-04.mp3",
@@ -17456,12 +17618,13 @@ window.KakaCarterManifest = {
             "car!”"
           ],
           "blanks": [
+            "water",
             "bottle"
           ],
           "choices": [
-            "bottle",
-            "Suddenly",
-            "ran"
+            "water bottle",
+            "running shoes.",
+            "high jump,”"
           ],
           "image": "./assets/story-demo/cf055/pages/page-05.webp",
           "audio": "./assets/story-demo/cf055/cf055-page-05.mp3",
@@ -17482,12 +17645,12 @@ window.KakaCarterManifest = {
             "could."
           ],
           "blanks": [
-            "could."
+            "fast"
           ],
           "choices": [
-            "could.",
-            "ran",
-            "fast"
+            "fast",
+            "back,",
+            "time"
           ],
           "image": "./assets/story-demo/cf055/pages/page-06.webp",
           "audio": "./assets/story-demo/cf055/cf055-page-06.mp3",
@@ -17514,8 +17677,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "breath.",
-            "back",
-            "gave"
+            "high",
+            "track."
           ],
           "image": "./assets/story-demo/cf055/pages/page-07.webp",
           "audio": "./assets/story-demo/cf055/cf055-page-07.mp3",
@@ -17537,12 +17700,13 @@ window.KakaCarterManifest = {
             "race."
           ],
           "blanks": [
+            "first",
             "race."
           ],
           "choices": [
-            "race.",
-            "almost",
-            "time"
+            "first race.",
+            "running shoes.",
+            "high jump,”"
           ],
           "image": "./assets/story-demo/cf055/pages/page-08.webp",
           "audio": "./assets/story-demo/cf055/cf055-page-08.mp3",
@@ -17561,12 +17725,12 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "“I’ll"
+            "said."
           ],
           "choices": [
-            "“I’ll",
-            "ran",
-            "fast"
+            "said.",
+            "catch!”",
+            "ran"
           ],
           "image": "./assets/story-demo/cf055/pages/page-09.webp",
           "audio": "./assets/story-demo/cf055/cf055-page-09.mp3",
@@ -17590,8 +17754,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "track.",
-            "Another",
-            "wind"
+            "races",
+            "bottle"
           ],
           "image": "./assets/story-demo/cf055/pages/page-10.webp",
           "audio": "./assets/story-demo/cf055/cf055-page-10.mp3",
@@ -17618,8 +17782,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "discus.",
-            "ran",
-            "grabbed"
+            "race.",
+            "Finally"
           ],
           "image": "./assets/story-demo/cf055/pages/page-11.webp",
           "audio": "./assets/story-demo/cf055/cf055-page-11.mp3",
@@ -17643,8 +17807,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "over.",
-            "Finally",
-            "track"
+            "ran",
+            "breath."
           ],
           "image": "./assets/story-demo/cf055/pages/page-12.webp",
           "audio": "./assets/story-demo/cf055/cf055-page-12.mp3",
@@ -17673,12 +17837,13 @@ window.KakaCarterManifest = {
             "day."
           ],
           "blanks": [
-            "beautiful"
+            "beautiful",
+            "day."
           ],
           "choices": [
-            "beautiful",
-            "day",
-            "tablet"
+            "beautiful day.",
+            "watching cartoons.”",
+            "flopped onto"
           ],
           "image": "./assets/story-demo/cf056/pages/page-01.webp",
           "audio": "./assets/story-demo/cf056/cf056-page-01.mp3",
@@ -17698,12 +17863,13 @@ window.KakaCarterManifest = {
             "sighed."
           ],
           "blanks": [
-            "sighed."
+            "watching",
+            "cartoons.”"
           ],
           "choices": [
-            "sighed.",
-            "stared",
-            "screen"
+            "watching cartoons.”",
+            "beautiful day.",
+            "flopped onto"
           ],
           "image": "./assets/story-demo/cf056/pages/page-02.webp",
           "audio": "./assets/story-demo/cf056/cf056-page-02.mp3",
@@ -17729,8 +17895,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "couch.",
-            "walked",
-            "flopped"
+            "minute.",
+            "phone."
           ],
           "image": "./assets/story-demo/cf056/pages/page-03.webp",
           "audio": "./assets/story-demo/cf056/cf056-page-03.mp3",
@@ -17753,8 +17919,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "phone.",
-            "stared",
-            "Huh"
+            "day.",
+            "devices."
           ],
           "image": "./assets/story-demo/cf056/pages/page-04.webp",
           "audio": "./assets/story-demo/cf056/cf056-page-04.mp3",
@@ -17781,8 +17947,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "level.”",
-            "kept",
-            "looking"
+            "kids",
+            "put"
           ],
           "image": "./assets/story-demo/cf056/pages/page-05.webp",
           "audio": "./assets/story-demo/cf056/cf056-page-05.mp3",
@@ -17807,8 +17973,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "phone.",
-            "walked",
-            "room"
+            "screen",
+            "put"
           ],
           "image": "./assets/story-demo/cf056/pages/page-06.webp",
           "audio": "./assets/story-demo/cf056/cf056-page-06.mp3",
@@ -17835,8 +18001,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "phone.",
-            "even",
-            "look"
+            "level.”",
+            "landed"
           ],
           "image": "./assets/story-demo/cf056/pages/page-07.webp",
           "audio": "./assets/story-demo/cf056/cf056-page-07.mp3",
@@ -17861,8 +18027,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "looked",
-            "more",
-            "screen"
+            "devices.",
+            "beautiful"
           ],
           "image": "./assets/story-demo/cf056/pages/page-08.webp",
           "audio": "./assets/story-demo/cf056/cf056-page-08.mp3",
@@ -17886,8 +18052,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "devices.",
-            "folded",
-            "arms"
+            "minute.",
+            "sighed."
           ],
           "image": "./assets/story-demo/cf056/pages/page-09.webp",
           "audio": "./assets/story-demo/cf056/cf056-page-09.mp3",
@@ -17911,8 +18077,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "window.",
-            "sat",
-            "complained"
+            "cartoons.”",
+            "minute."
           ],
           "image": "./assets/story-demo/cf056/pages/page-10.webp",
           "audio": "./assets/story-demo/cf056/cf056-page-10.mp3",
@@ -17936,8 +18102,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "phone!",
-            "saw",
-            "fair"
+            "stared",
+            "devices."
           ],
           "image": "./assets/story-demo/cf056/pages/page-11.webp",
           "audio": "./assets/story-demo/cf056/cf056-page-11.mp3",
@@ -17957,12 +18123,13 @@ window.KakaCarterManifest = {
             "phone."
           ],
           "blanks": [
-            "phone."
+            "put",
+            "down"
           ],
           "choices": [
-            "phone.",
-            "grinned",
-            "Sorry"
+            "put down",
+            "beautiful day.",
+            "watching cartoons.”"
           ],
           "image": "./assets/story-demo/cf056/pages/page-12.webp",
           "audio": "./assets/story-demo/cf056/cf056-page-12.mp3",
@@ -17992,12 +18159,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "last",
             "night!”"
           ],
           "choices": [
-            "night!”",
-            "snowed",
-            "last"
+            "last night!”",
+            "snow pants.",
+            "tall hill."
           ],
           "image": "./assets/story-demo/cf057/pages/page-01.webp",
           "audio": "./assets/story-demo/cf057/cf057-page-01.mp3",
@@ -18016,12 +18184,13 @@ window.KakaCarterManifest = {
             "pants."
           ],
           "blanks": [
+            "snow",
             "pants."
           ],
           "choices": [
-            "pants.",
-            "found",
-            "scarf"
+            "snow pants.",
+            "last night!”",
+            "tall hill."
           ],
           "image": "./assets/story-demo/cf057/pages/page-02.webp",
           "audio": "./assets/story-demo/cf057/cf057-page-02.mp3",
@@ -18046,8 +18215,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "sleds",
-            "put",
-            "car"
+            "lay",
+            "drove"
           ],
           "image": "./assets/story-demo/cf057/pages/page-03.webp",
           "audio": "./assets/story-demo/cf057/cf057-page-03.mp3",
@@ -18068,12 +18237,13 @@ window.KakaCarterManifest = {
             "hill."
           ],
           "blanks": [
+            "tall",
             "hill."
           ],
           "choices": [
-            "hill.",
-            "family",
-            "drove"
+            "tall hill.",
+            "last night!”",
+            "snow pants."
           ],
           "image": "./assets/story-demo/cf057/pages/page-04.webp",
           "audio": "./assets/story-demo/cf057/cf057-page-04.mp3",
@@ -18098,8 +18268,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "tall!”",
-            "hill",
-            "really"
+            "lay",
+            "snowed"
           ],
           "image": "./assets/story-demo/cf057/pages/page-05.webp",
           "audio": "./assets/story-demo/cf057/cf057-page-05.mp3",
@@ -18126,8 +18296,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "parking",
-            "checked",
-            "map"
+            "other",
+            "snow"
           ],
           "image": "./assets/story-demo/cf057/pages/page-06.webp",
           "audio": "./assets/story-demo/cf057/cf057-page-06.mp3",
@@ -18153,8 +18323,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "parking",
-            "Everyone",
-            "back"
+            "crashed",
+            "bump"
           ],
           "image": "./assets/story-demo/cf057/pages/page-07.webp",
           "audio": "./assets/story-demo/cf057/cf057-page-07.mp3",
@@ -18178,8 +18348,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "snowbank.",
-            "shot",
-            "down"
+            "Everyone",
+            "snowed"
           ],
           "image": "./assets/story-demo/cf057/pages/page-08.webp",
           "audio": "./assets/story-demo/cf057/cf057-page-08.mp3",
@@ -18206,8 +18376,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "sled.",
-            "Boom",
-            "crashed"
+            "lot",
+            "snowed"
           ],
           "image": "./assets/story-demo/cf057/pages/page-09.webp",
           "audio": "./assets/story-demo/cf057/cf057-page-09.mp3",
@@ -18232,8 +18402,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "laughed.",
-            "Finally",
-            "zoomed"
+            "crashed",
+            "pants."
           ],
           "image": "./assets/story-demo/cf057/pages/page-10.webp",
           "audio": "./assets/story-demo/cf057/cf057-page-10.mp3",
@@ -18257,8 +18427,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "again!”",
-            "love",
-            "sledding"
+            "laughed.",
+            "bump"
           ],
           "image": "./assets/story-demo/cf057/pages/page-11.webp",
           "audio": "./assets/story-demo/cf057/cf057-page-11.mp3",
@@ -18283,8 +18453,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "groaned.",
-            "Everyone",
-            "looked"
+            "crashed",
+            "snow"
           ],
           "image": "./assets/story-demo/cf057/pages/page-12.webp",
           "audio": "./assets/story-demo/cf057/cf057-page-12.mp3",
@@ -18318,12 +18488,13 @@ window.KakaCarterManifest = {
             "go?”"
           ],
           "blanks": [
-            "Zone!"
+            "“Sanjay’s",
+            "birthday"
           ],
           "choices": [
-            "Zone!",
-            "birthday",
-            "party"
+            "“Sanjay’s birthday",
+            "dark room.",
+            "friends went"
           ],
           "image": "./assets/story-demo/cf058/pages/page-01.webp",
           "audio": "./assets/story-demo/cf058/cf058-page-01.mp3",
@@ -18349,8 +18520,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Zone.”",
-            "thought",
-            "about"
+            "“Sanjay’s",
+            "tickets"
           ],
           "image": "./assets/story-demo/cf058/pages/page-02.webp",
           "audio": "./assets/story-demo/cf058/cf058-page-02.mp3",
@@ -18376,8 +18547,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "shrugged.",
-            "Fun",
-            "Zone"
+            "laser",
+            "backyard"
           ],
           "image": "./assets/story-demo/cf058/pages/page-03.webp",
           "audio": "./assets/story-demo/cf058/cf058-page-03.mp3",
@@ -18401,8 +18572,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "great,”",
-            "Fun",
-            "Zone"
+            "dark",
+            "jammed."
           ],
           "image": "./assets/story-demo/cf058/pages/page-04.webp",
           "audio": "./assets/story-demo/cf058/cf058-page-04.mp3",
@@ -18422,12 +18593,13 @@ window.KakaCarterManifest = {
             "room."
           ],
           "blanks": [
+            "dark",
             "room."
           ],
           "choices": [
-            "room.",
-            "Everyone",
-            "put"
+            "dark room.",
+            "“Sanjay’s birthday",
+            "friends went"
           ],
           "image": "./assets/story-demo/cf058/pages/page-05.webp",
           "audio": "./assets/story-demo/cf058/cf058-page-05.mp3",
@@ -18452,8 +18624,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Sanjay",
-            "vest",
-            "beep"
+            "dark",
+            "stuck"
           ],
           "image": "./assets/story-demo/cf058/pages/page-06.webp",
           "audio": "./assets/story-demo/cf058/cf058-page-06.mp3",
@@ -18477,8 +18649,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "arcade.",
-            "Huh",
-            "worker"
+            "“Sanjay’s",
+            "Sanjay"
           ],
           "image": "./assets/story-demo/cf058/pages/page-07.webp",
           "audio": "./assets/story-demo/cf058/cf058-page-07.mp3",
@@ -18503,8 +18675,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "machine.",
-            "Dino",
-            "Hunter"
+            "jammed.",
+            "Sanjay"
           ],
           "image": "./assets/story-demo/cf058/pages/page-08.webp",
           "audio": "./assets/story-demo/cf058/cf058-page-08.mp3",
@@ -18523,12 +18695,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "Finn"
+            "play",
+            "Skee-Ball,”"
           ],
           "choices": [
-            "Finn",
-            "Sanjay",
-            "groaned"
+            "play Skee-Ball,”",
+            "“Sanjay’s birthday",
+            "dark room."
           ],
           "image": "./assets/story-demo/cf058/pages/page-09.webp",
           "audio": "./assets/story-demo/cf058/cf058-page-09.mp3",
@@ -18550,8 +18723,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "jammed.",
-            "game",
-            "buzzed"
+            "“Sanjay’s",
+            "play"
           ],
           "image": "./assets/story-demo/cf058/pages/page-10.webp",
           "audio": "./assets/story-demo/cf058/cf058-page-10.mp3",
@@ -18575,8 +18748,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "Later",
-            "picked"
+            "jammed.",
+            "entered"
           ],
           "image": "./assets/story-demo/cf058/pages/page-11.webp",
           "audio": "./assets/story-demo/cf058/cf058-page-11.mp3",
@@ -18601,8 +18774,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "more",
-            "okay",
-            "smiled"
+            "arcade.",
+            "Sanjay"
           ],
           "image": "./assets/story-demo/cf058/pages/page-12.webp",
           "audio": "./assets/story-demo/cf058/cf058-page-12.mp3",
@@ -18640,8 +18813,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "stay",
-            "kitten",
-            "going"
+            "Suddenly",
+            "pounced"
           ],
           "image": "./assets/story-demo/cf059/pages/page-01.webp",
           "audio": "./assets/story-demo/cf059/cf059-page-01.mp3",
@@ -18668,8 +18841,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "weekend,”",
-            "barked",
-            "Woof"
+            "going",
+            "jumped"
           ],
           "image": "./assets/story-demo/cf059/pages/page-02.webp",
           "audio": "./assets/story-demo/cf059/cf059-page-02.mp3",
@@ -18692,8 +18865,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Nugget,”",
-            "next",
-            "day"
+            "“Yikes!",
+            "peeked"
           ],
           "image": "./assets/story-demo/cf059/pages/page-03.webp",
           "audio": "./assets/story-demo/cf059/cf059-page-03.mp3",
@@ -18713,12 +18886,13 @@ window.KakaCarterManifest = {
             "paws."
           ],
           "blanks": [
+            "big",
             "paws."
           ],
           "choices": [
-            "paws.",
-            "Nugget",
-            "looked"
+            "big paws.",
+            "Nugget climbed",
+            "Nugget peeked"
           ],
           "image": "./assets/story-demo/cf059/pages/page-04.webp",
           "audio": "./assets/story-demo/cf059/cf059-page-04.mp3",
@@ -18744,8 +18918,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "sofa.",
-            "Meow",
-            "Nugget"
+            "going",
+            "chair."
           ],
           "image": "./assets/story-demo/cf059/pages/page-05.webp",
           "audio": "./assets/story-demo/cf059/cf059-page-05.mp3",
@@ -18768,8 +18942,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "fast.",
-            "Nugget",
-            "jumped"
+            "climbed",
+            "side"
           ],
           "image": "./assets/story-demo/cf059/pages/page-06.webp",
           "audio": "./assets/story-demo/cf059/cf059-page-06.mp3",
@@ -18794,8 +18968,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "alone,”",
-            "bit",
-            "lip"
+            "pounced",
+            "jumped"
           ],
           "image": "./assets/story-demo/cf059/pages/page-07.webp",
           "audio": "./assets/story-demo/cf059/cf059-page-07.mp3",
@@ -18820,8 +18994,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "chair.",
-            "Later",
-            "sleeping"
+            "fuzzy",
+            "jumped"
           ],
           "image": "./assets/story-demo/cf059/pages/page-08.webp",
           "audio": "./assets/story-demo/cf059/cf059-page-08.mp3",
@@ -18841,12 +19015,13 @@ window.KakaCarterManifest = {
             "Nugget.”"
           ],
           "blanks": [
+            "hurt",
             "Nugget.”"
           ],
           "choices": [
-            "Nugget.”",
-            "hope",
-            "hurt"
+            "hurt Nugget.”",
+            "big paws.",
+            "Nugget climbed"
           ],
           "image": "./assets/story-demo/cf059/pages/page-09.webp",
           "audio": "./assets/story-demo/cf059/cf059-page-09.mp3",
@@ -18869,8 +19044,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "pounced",
-            "Suddenly",
-            "Nugget"
+            "chair.",
+            "hope"
           ],
           "image": "./assets/story-demo/cf059/pages/page-10.webp",
           "audio": "./assets/story-demo/cf059/cf059-page-10.mp3",
@@ -18895,8 +19070,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hurt",
-            "gasped",
-            "Yikes"
+            "stay",
+            "pounced"
           ],
           "image": "./assets/story-demo/cf059/pages/page-11.webp",
           "audio": "./assets/story-demo/cf059/cf059-page-11.mp3",
@@ -18917,12 +19092,13 @@ window.KakaCarterManifest = {
             "kiss."
           ],
           "blanks": [
+            "wet",
             "kiss."
           ],
           "choices": [
-            "kiss.",
-            "wagged",
-            "tail"
+            "wet kiss.",
+            "big paws.",
+            "Nugget climbed"
           ],
           "image": "./assets/story-demo/cf059/pages/page-12.webp",
           "audio": "./assets/story-demo/cf059/cf059-page-12.mp3",
@@ -18958,8 +19134,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cards,”",
-            "see",
-            "Day"
+            "candy.",
+            "head."
           ],
           "image": "./assets/story-demo/cf060/pages/page-01.webp",
           "audio": "./assets/story-demo/cf060/cf060-page-01.mp3",
@@ -18983,8 +19159,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "giggled.",
-            "Hearts",
-            "everywhere"
+            "party?”",
+            "cards,”"
           ],
           "image": "./assets/story-demo/cf060/pages/page-02.webp",
           "audio": "./assets/story-demo/cf060/cf060-page-02.mp3",
@@ -19010,8 +19186,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "candy.",
-            "made",
-            "face"
+            "bag",
+            "shook"
           ],
           "image": "./assets/story-demo/cf060/pages/page-03.webp",
           "audio": "./assets/story-demo/cf060/cf060-page-03.mp3",
@@ -19033,8 +19209,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "head.",
-            "shook",
-            "Those"
+            "guess",
+            "card."
           ],
           "image": "./assets/story-demo/cf060/pages/page-04.webp",
           "audio": "./assets/story-demo/cf060/cf060-page-04.mp3",
@@ -19056,12 +19232,13 @@ window.KakaCarterManifest = {
             "asked."
           ],
           "blanks": [
-            "asked."
-          ],
-          "choices": [
-            "asked.",
             "find",
             "any"
+          ],
+          "choices": [
+            "find any",
+            "Most cards",
+            "big card."
           ],
           "image": "./assets/story-demo/cf060/pages/page-05.webp",
           "audio": "./assets/story-demo/cf060/cf060-page-05.mp3",
@@ -19081,12 +19258,13 @@ window.KakaCarterManifest = {
             "card."
           ],
           "blanks": [
+            "big",
             "card."
           ],
           "choices": [
-            "card.",
-            "picked",
-            "one"
+            "big card.",
+            "Most cards",
+            "find any"
           ],
           "image": "./assets/story-demo/cf060/pages/page-06.webp",
           "audio": "./assets/story-demo/cf060/cf060-page-06.mp3",
@@ -19110,12 +19288,12 @@ window.KakaCarterManifest = {
             "okay.”"
           ],
           "blanks": [
-            "okay.”"
+            "guess"
           ],
           "choices": [
-            "okay.”",
-            "found",
-            "cards"
+            "guess",
+            "come",
+            "asked."
           ],
           "image": "./assets/story-demo/cf060/pages/page-07.webp",
           "audio": "./assets/story-demo/cf060/cf060-page-07.mp3",
@@ -19140,8 +19318,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "grumbled.",
-            "Finally",
-            "Day"
+            "came",
+            "guess"
           ],
           "image": "./assets/story-demo/cf060/pages/page-08.webp",
           "audio": "./assets/story-demo/cf060/cf060-page-08.mp3",
@@ -19168,8 +19346,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "friends.",
-            "Later",
-            "came"
+            "these",
+            "grumbled."
           ],
           "image": "./assets/story-demo/cf060/pages/page-09.webp",
           "audio": "./assets/story-demo/cf060/cf060-page-09.mp3",
@@ -19193,8 +19371,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "How",
-            "party"
+            "after",
+            "hand."
           ],
           "image": "./assets/story-demo/cf060/pages/page-10.webp",
           "audio": "./assets/story-demo/cf060/cf060-page-10.mp3",
@@ -19224,12 +19402,13 @@ window.KakaCarterManifest = {
             "hand."
           ],
           "blanks": [
-            "hand."
+            "big",
+            "card"
           ],
           "choices": [
-            "hand.",
-            "Really",
-            "thought"
+            "big card",
+            "Most cards",
+            "find any"
           ],
           "image": "./assets/story-demo/cf060/pages/page-11.webp",
           "audio": "./assets/story-demo/cf060/cf060-page-11.mp3",
@@ -19255,8 +19434,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "after",
-            "quickly",
-            "hid"
+            "party?”",
+            "came"
           ],
           "image": "./assets/story-demo/cf060/pages/page-12.webp",
           "audio": "./assets/story-demo/cf060/cf060-page-12.mp3",
@@ -19292,7 +19471,7 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "start.",
-            "Carters",
+            "asked",
             "sitting"
           ],
           "image": "./assets/story-demo/cf061/pages/page-01.webp",
@@ -19320,8 +19499,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "bathroom,”",
-            "take",
-            "come"
+            "led",
+            "castle?”"
           ],
           "image": "./assets/story-demo/cf061/pages/page-02.webp",
           "audio": "./assets/story-demo/cf061/cf061-page-02.mp3",
@@ -19344,8 +19523,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "lost,”",
-            "theater",
-            "really"
+            "offstage.",
+            "led"
           ],
           "image": "./assets/story-demo/cf061/pages/page-03.webp",
           "audio": "./assets/story-demo/cf061/cf061-page-03.mp3",
@@ -19370,8 +19549,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "seats.",
-            "theater",
-            "began"
+            "looking",
+            "princess"
           ],
           "image": "./assets/story-demo/cf061/pages/page-04.webp",
           "audio": "./assets/story-demo/cf061/cf061-page-04.mp3",
@@ -19393,12 +19572,12 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "here,”"
+            "back"
           ],
           "choices": [
-            "here,”",
-            "asked",
-            "thought"
+            "back",
+            "surprised.",
+            "garden."
           ],
           "image": "./assets/story-demo/cf061/pages/page-05.webp",
           "audio": "./assets/story-demo/cf061/cf061-page-05.mp3",
@@ -19423,8 +19602,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "garden.",
-            "curtain",
-            "began"
+            "offstage.",
+            "back"
           ],
           "image": "./assets/story-demo/cf061/pages/page-06.webp",
           "audio": "./assets/story-demo/cf061/cf061-page-06.mp3",
@@ -19448,8 +19627,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "whispered.",
-            "looked",
-            "around"
+            "bathroom,”",
+            "offstage."
           ],
           "image": "./assets/story-demo/cf061/pages/page-07.webp",
           "audio": "./assets/story-demo/cf061/cf061-page-07.mp3",
@@ -19472,12 +19651,13 @@ window.KakaCarterManifest = {
             "voice."
           ],
           "blanks": [
+            "loud",
             "voice."
           ],
           "choices": [
-            "voice.",
-            "Suddenly",
-            "trapdoor"
+            "loud voice.",
+            "came back",
+            "looked surprised."
           ],
           "image": "./assets/story-demo/cf061/pages/page-08.webp",
           "audio": "./assets/story-demo/cf061/cf061-page-08.mp3",
@@ -19498,12 +19678,13 @@ window.KakaCarterManifest = {
             "surprised."
           ],
           "blanks": [
+            "looked",
             "surprised."
           ],
           "choices": [
-            "surprised.",
-            "Everyone",
-            "audience"
+            "looked surprised.",
+            "came back",
+            "loud voice."
           ],
           "image": "./assets/story-demo/cf061/pages/page-09.webp",
           "audio": "./assets/story-demo/cf061/cf061-page-09.mp3",
@@ -19527,12 +19708,13 @@ window.KakaCarterManifest = {
             "Harry."
           ],
           "blanks": [
+            "princess",
             "asked"
           ],
           "choices": [
-            "asked",
-            "visitor",
-            "knight"
+            "princess asked",
+            "came back",
+            "loud voice."
           ],
           "image": "./assets/story-demo/cf061/pages/page-10.webp",
           "audio": "./assets/story-demo/cf061/cf061-page-10.mp3",
@@ -19555,8 +19737,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "offstage.",
-            "princess",
-            "led"
+            "surprised.",
+            "looked"
           ],
           "image": "./assets/story-demo/cf061/pages/page-11.webp",
           "audio": "./assets/story-demo/cf061/cf061-page-11.mp3",
@@ -19581,8 +19763,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "play!”",
-            "lost",
-            "Carters"
+            "voice.",
+            "seats."
           ],
           "image": "./assets/story-demo/cf061/pages/page-12.webp",
           "audio": "./assets/story-demo/cf061/cf061-page-12.mp3",
@@ -19615,8 +19797,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "late,”",
-            "asked",
-            "working"
+            "help",
+            "load"
           ],
           "image": "./assets/story-demo/cf062/pages/page-01.webp",
           "audio": "./assets/story-demo/cf062/cf062-page-01.mp3",
@@ -19641,8 +19823,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "laundry,”",
-            "help",
-            "nice"
+            "clothes",
+            "“Dogs"
           ],
           "image": "./assets/story-demo/cf062/pages/page-02.webp",
           "audio": "./assets/story-demo/cf062/cf062-page-02.mp3",
@@ -19674,12 +19856,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "floor,”"
+            "dirty",
+            "clothes"
           ],
           "choices": [
-            "floor,”",
-            "kids",
-            "brought"
+            "dirty clothes",
+            "working late,”",
+            "dark clothes"
           ],
           "image": "./assets/story-demo/cf062/pages/page-03.webp",
           "audio": "./assets/story-demo/cf062/cf062-page-03.mp3",
@@ -19705,8 +19888,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "laundry!”",
-            "ran",
-            "through"
+            "clean",
+            "every"
           ],
           "image": "./assets/story-demo/cf062/pages/page-04.webp",
           "audio": "./assets/story-demo/cf062/cf062-page-04.mp3",
@@ -19732,8 +19915,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "washer.",
-            "put",
-            "dark"
+            "brought",
+            "dirty"
           ],
           "image": "./assets/story-demo/cf062/pages/page-05.webp",
           "audio": "./assets/story-demo/cf062/cf062-page-05.mp3",
@@ -19761,8 +19944,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "clothes.",
-            "After",
-            "while"
+            "room",
+            "working"
           ],
           "image": "./assets/story-demo/cf062/pages/page-06.webp",
           "audio": "./assets/story-demo/cf062/cf062-page-06.mp3",
@@ -19784,12 +19967,13 @@ window.KakaCarterManifest = {
             "washer."
           ],
           "blanks": [
-            "washer."
+            "next",
+            "load"
           ],
           "choices": [
-            "washer.",
-            "put",
-            "next"
+            "next load",
+            "working late,”",
+            "dirty clothes"
           ],
           "image": "./assets/story-demo/cf062/pages/page-07.webp",
           "audio": "./assets/story-demo/cf062/cf062-page-07.mp3",
@@ -19814,8 +19998,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "clothes,”",
-            "Now",
-            "fold"
+            "washer.",
+            "room"
           ],
           "image": "./assets/story-demo/cf062/pages/page-08.webp",
           "audio": "./assets/story-demo/cf062/cf062-page-08.mp3",
@@ -19838,12 +20022,12 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "does"
+            "glad"
           ],
           "choices": [
-            "does",
-            "Doing",
-            "laundry"
+            "glad",
+            "while",
+            "After"
           ],
           "image": "./assets/story-demo/cf062/pages/page-09.webp",
           "audio": "./assets/story-demo/cf062/cf062-page-09.mp3",
@@ -19864,12 +20048,13 @@ window.KakaCarterManifest = {
             "clothes."
           ],
           "blanks": [
+            "clean",
             "clothes."
           ],
           "choices": [
-            "clothes.",
-            "came",
-            "home"
+            "clean clothes.",
+            "working late,”",
+            "dirty clothes"
           ],
           "image": "./assets/story-demo/cf062/pages/page-10.webp",
           "audio": "./assets/story-demo/cf062/cf062-page-10.mp3",
@@ -19895,8 +20080,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "week.”",
-            "wonderful",
-            "job"
+            "wanted",
+            "put"
           ],
           "image": "./assets/story-demo/cf062/pages/page-11.webp",
           "audio": "./assets/story-demo/cf062/cf062-page-11.mp3",
@@ -19921,8 +20106,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "surprise",
-            "boys",
-            "groaned"
+            "next",
+            "floor,”"
           ],
           "image": "./assets/story-demo/cf062/pages/page-12.webp",
           "audio": "./assets/story-demo/cf062/cf062-page-12.mp3",
@@ -19959,8 +20144,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "want",
-            "time",
-            "checkup"
+            "refused",
+            "dog"
           ],
           "image": "./assets/story-demo/cf063/pages/page-01.webp",
           "audio": "./assets/story-demo/cf063/cf063-page-01.mp3",
@@ -19984,12 +20169,13 @@ window.KakaCarterManifest = {
             "office."
           ],
           "blanks": [
+            "vet’s",
             "office."
           ],
           "choices": [
-            "office.",
-            "Come",
-            "pushed"
+            "vet’s office.",
+            "waiting area.",
+            "examining room."
           ],
           "image": "./assets/story-demo/cf063/pages/page-02.webp",
           "audio": "./assets/story-demo/cf063/cf063-page-02.mp3",
@@ -20016,8 +20202,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "feel,”",
-            "know",
-            "how"
+            "refused",
+            "cried."
           ],
           "image": "./assets/story-demo/cf063/pages/page-03.webp",
           "audio": "./assets/story-demo/cf063/cf063-page-03.mp3",
@@ -20042,8 +20228,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "treat,”",
-            "looked",
-            "Maybe"
+            "family",
+            "feel,”"
           ],
           "image": "./assets/story-demo/cf063/pages/page-04.webp",
           "audio": "./assets/story-demo/cf063/cf063-page-04.mp3",
@@ -20065,12 +20251,13 @@ window.KakaCarterManifest = {
             "area."
           ],
           "blanks": [
+            "waiting",
             "area."
           ],
           "choices": [
-            "area.",
-            "Soon",
-            "sitting"
+            "waiting area.",
+            "vet’s office.",
+            "examining room."
           ],
           "image": "./assets/story-demo/cf063/pages/page-05.webp",
           "audio": "./assets/story-demo/cf063/cf063-page-05.mp3",
@@ -20098,8 +20285,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "feel,”",
-            "know",
-            "how"
+            "family",
+            "waiting"
           ],
           "image": "./assets/story-demo/cf063/pages/page-06.webp",
           "audio": "./assets/story-demo/cf063/cf063-page-06.mp3",
@@ -20124,8 +20311,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "treat,”",
-            "looked",
-            "Maybe"
+            "lungs.",
+            "cried."
           ],
           "image": "./assets/story-demo/cf063/pages/page-07.webp",
           "audio": "./assets/story-demo/cf063/cf063-page-07.mp3",
@@ -20148,12 +20335,13 @@ window.KakaCarterManifest = {
             "room."
           ],
           "blanks": [
+            "examining",
             "room."
           ],
           "choices": [
-            "room.",
-            "family",
-            "went"
+            "examining room.",
+            "vet’s office.",
+            "waiting area."
           ],
           "image": "./assets/story-demo/cf063/pages/page-08.webp",
           "audio": "./assets/story-demo/cf063/cf063-page-08.mp3",
@@ -20177,12 +20365,12 @@ window.KakaCarterManifest = {
             "Rover."
           ],
           "blanks": [
-            "does"
+            "doctor"
           ],
           "choices": [
-            "does",
-            "First",
-            "vet"
+            "doctor",
+            "family",
+            "area."
           ],
           "image": "./assets/story-demo/cf063/pages/page-09.webp",
           "audio": "./assets/story-demo/cf063/cf063-page-09.mp3",
@@ -20208,8 +20396,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "lungs.",
-            "vet",
-            "listened"
+            "needs",
+            "dog"
           ],
           "image": "./assets/story-demo/cf063/pages/page-10.webp",
           "audio": "./assets/story-demo/cf063/cf063-page-10.mp3",
@@ -20233,8 +20421,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cried.",
-            "Shots",
-            "hate"
+            "area.",
+            "refused"
           ],
           "image": "./assets/story-demo/cf063/pages/page-11.webp",
           "audio": "./assets/story-demo/cf063/cf063-page-11.mp3",
@@ -20258,8 +20446,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "other.",
-            "quickly",
-            "joined"
+            "office.",
+            "vet’s"
           ],
           "image": "./assets/story-demo/cf063/pages/page-12.webp",
           "audio": "./assets/story-demo/cf063/cf063-page-12.mp3",
@@ -20284,8 +20472,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "treat,”",
-            "Maybe",
-            "needs"
+            "office.",
+            "hate"
           ],
           "image": "./assets/story-demo/cf063/pages/page-13.webp",
           "audio": "./assets/story-demo/cf063/cf063-page-13.mp3",
@@ -20322,8 +20510,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "show.",
-            "excited",
-            "about"
+            "painting,”",
+            "clay"
           ],
           "image": "./assets/story-demo/cf064/pages/page-01.webp",
           "audio": "./assets/story-demo/cf064/cf064-page-01.mp3",
@@ -20351,8 +20539,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "painting,”",
-            "wait",
-            "show"
+            "pointed",
+            "family"
           ],
           "image": "./assets/story-demo/cf064/pages/page-02.webp",
           "audio": "./assets/story-demo/cf064/cf064-page-02.mp3",
@@ -20380,8 +20568,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "painting,”",
-            "sure",
-            "fine"
+            "wonderful",
+            "wearing"
           ],
           "image": "./assets/story-demo/cf064/pages/page-03.webp",
           "audio": "./assets/story-demo/cf064/cf064-page-03.mp3",
@@ -20409,8 +20597,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "show,”",
-            "painting",
-            "sure"
+            "wearing",
+            "wonderful"
           ],
           "image": "./assets/story-demo/cf064/pages/page-04.webp",
           "audio": "./assets/story-demo/cf064/cf064-page-04.mp3",
@@ -20432,12 +20620,13 @@ window.KakaCarterManifest = {
             "show."
           ],
           "blanks": [
-            "show."
+            "family",
+            "went"
           ],
           "choices": [
-            "show.",
-            "Later",
-            "family"
+            "family went",
+            "purple dress,”",
+            "happy park"
           ],
           "image": "./assets/story-demo/cf064/pages/page-05.webp",
           "audio": "./assets/story-demo/cf064/cf064-page-05.mp3",
@@ -20461,8 +20650,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wonderful",
-            "cow",
-            "looks"
+            "Carters",
+            "right,”"
           ],
           "image": "./assets/story-demo/cf064/pages/page-06.webp",
           "audio": "./assets/story-demo/cf064/cf064-page-06.mp3",
@@ -20483,12 +20672,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "purple",
             "dress,”"
           ],
           "choices": [
-            "dress,”",
-            "Next",
-            "found"
+            "purple dress,”",
+            "family went",
+            "happy park"
           ],
           "image": "./assets/story-demo/cf064/pages/page-07.webp",
           "audio": "./assets/story-demo/cf064/cf064-page-07.mp3",
@@ -20516,8 +20706,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "grade.",
-            "Carters",
-            "looked"
+            "table.",
+            "cow!”"
           ],
           "image": "./assets/story-demo/cf064/pages/page-08.webp",
           "audio": "./assets/story-demo/cf064/cf064-page-08.mp3",
@@ -20543,8 +20733,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "right,”",
-            "find",
-            "one"
+            "pot",
+            "pointed"
           ],
           "image": "./assets/story-demo/cf064/pages/page-09.webp",
           "audio": "./assets/story-demo/cf064/cf064-page-09.mp3",
@@ -20572,8 +20762,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "table.",
-            "started",
-            "laugh"
+            "show.",
+            "cow!”"
           ],
           "image": "./assets/story-demo/cf064/pages/page-10.webp",
           "audio": "./assets/story-demo/cf064/cf064-page-10.mp3",
@@ -20601,8 +20791,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "show!”",
-            "clay",
-            "pot"
+            "grade.",
+            "all"
           ],
           "image": "./assets/story-demo/cf064/pages/page-11.webp",
           "audio": "./assets/story-demo/cf064/cf064-page-11.mp3",
@@ -20620,12 +20810,12 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "said."
+            "“Wow,"
           ],
           "choices": [
-            "said.",
-            "Wow",
-            "won"
+            "“Wow,",
+            "excited",
+            "table."
           ],
           "image": "./assets/story-demo/cf064/pages/page-12.webp",
           "audio": "./assets/story-demo/cf064/cf064-page-12.mp3",
@@ -20661,8 +20851,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Thanksgiving.”",
-            "Carters",
-            "eating"
+            "family",
+            "plates."
           ],
           "image": "./assets/story-demo/cf065/pages/page-01.webp",
           "audio": "./assets/story-demo/cf065/cf065-page-01.mp3",
@@ -20684,12 +20874,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "gravy,”"
+            "turkey,",
+            "stuffing,"
           ],
           "choices": [
-            "gravy,”",
-            "turkey",
-            "stuffing"
+            "turkey, stuffing,",
+            "new foods,”",
+            "bigger bite."
           ],
           "image": "./assets/story-demo/cf065/pages/page-02.webp",
           "audio": "./assets/story-demo/cf065/cf065-page-02.mp3",
@@ -20723,8 +20914,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "talk.",
-            "eat",
-            "mashed"
+            "old",
+            "foods,”"
           ],
           "image": "./assets/story-demo/cf065/pages/page-03.webp",
           "audio": "./assets/story-demo/cf065/cf065-page-03.mp3",
@@ -20751,8 +20942,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "face.",
-            "cooked",
-            "special"
+            "gravy,”",
+            "foods,”"
           ],
           "image": "./assets/story-demo/cf065/pages/page-04.webp",
           "audio": "./assets/story-demo/cf065/cf065-page-04.mp3",
@@ -20780,8 +20971,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "favorite,”",
-            "Oyster",
-            "pie"
+            "turkey,",
+            "talk."
           ],
           "image": "./assets/story-demo/cf065/pages/page-05.webp",
           "audio": "./assets/story-demo/cf065/cf065-page-05.mp3",
@@ -20808,8 +20999,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "kids",
-            "laughed"
+            "eat",
+            "always"
           ],
           "image": "./assets/story-demo/cf065/pages/page-06.webp",
           "audio": "./assets/story-demo/cf065/cf065-page-06.mp3",
@@ -20833,12 +21024,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "new",
             "foods,”"
           ],
           "choices": [
-            "foods,”",
-            "always",
-            "make"
+            "new foods,”",
+            "turkey, stuffing,",
+            "bigger bite."
           ],
           "image": "./assets/story-demo/cf065/pages/page-07.webp",
           "audio": "./assets/story-demo/cf065/cf065-page-07.mp3",
@@ -20862,8 +21054,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "first,",
-            "Everyone",
-            "looked"
+            "taste",
+            "eat"
           ],
           "image": "./assets/story-demo/cf065/pages/page-08.webp",
           "audio": "./assets/story-demo/cf065/cf065-page-08.mp3",
@@ -20890,8 +21082,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "plates.",
-            "put",
-            "oyster"
+            "busy",
+            "turkey,"
           ],
           "image": "./assets/story-demo/cf065/pages/page-09.webp",
           "audio": "./assets/story-demo/cf065/cf065-page-09.mp3",
@@ -20911,12 +21103,13 @@ window.KakaCarterManifest = {
             "bite."
           ],
           "blanks": [
+            "bigger",
             "bite."
           ],
           "choices": [
-            "bite.",
-            "took",
-            "bigger"
+            "bigger bite.",
+            "turkey, stuffing,",
+            "new foods,”"
           ],
           "image": "./assets/story-demo/cf065/pages/page-10.webp",
           "audio": "./assets/story-demo/cf065/cf065-page-10.mp3",
@@ -20941,8 +21134,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hard.",
-            "took",
-            "bite"
+            "eat",
+            "first,"
           ],
           "image": "./assets/story-demo/cf065/pages/page-11.webp",
           "audio": "./assets/story-demo/cf065/cf065-page-11.mp3",
@@ -20965,8 +21158,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "delicious!”",
-            "Okay",
-            "More"
+            "taste",
+            "oyster"
           ],
           "image": "./assets/story-demo/cf065/pages/page-12.webp",
           "audio": "./assets/story-demo/cf065/cf065-page-12.mp3",
@@ -21001,8 +21194,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "play!”",
-            "finally",
-            "stopped"
+            "drove",
+            "going"
           ],
           "image": "./assets/story-demo/cf066/pages/page-01.webp",
           "audio": "./assets/story-demo/cf066/cf066-page-01.mp3",
@@ -21021,12 +21214,13 @@ window.KakaCarterManifest = {
             "idea."
           ],
           "blanks": [
+            "better",
             "idea."
           ],
           "choices": [
-            "idea.",
-            "better",
-            "skiing"
+            "better idea.",
+            "warmest clothes.",
+            "snow pants"
           ],
           "image": "./assets/story-demo/cf066/pages/page-02.webp",
           "audio": "./assets/story-demo/cf066/cf066-page-02.mp3",
@@ -21051,8 +21245,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "skis,”",
-            "worry",
-            "rent"
+            "skied",
+            "lift?”"
           ],
           "image": "./assets/story-demo/cf066/pages/page-03.webp",
           "audio": "./assets/story-demo/cf066/cf066-page-03.mp3",
@@ -21073,12 +21267,13 @@ window.KakaCarterManifest = {
             "clothes."
           ],
           "blanks": [
+            "warmest",
             "clothes."
           ],
           "choices": [
-            "clothes.",
-            "Carters",
-            "looked"
+            "warmest clothes.",
+            "better idea.",
+            "snow pants"
           ],
           "image": "./assets/story-demo/cf066/pages/page-04.webp",
           "audio": "./assets/story-demo/cf066/cf066-page-04.mp3",
@@ -21104,8 +21299,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "jackets,”",
-            "Wear",
-            "snow"
+            "door",
+            "skied"
           ],
           "image": "./assets/story-demo/cf066/pages/page-05.webp",
           "audio": "./assets/story-demo/cf066/cf066-page-05.mp3",
@@ -21129,8 +21324,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Mountain.",
-            "Carters",
-            "drove"
+            "while",
+            "skied"
           ],
           "image": "./assets/story-demo/cf066/pages/page-06.webp",
           "audio": "./assets/story-demo/cf066/cf066-page-06.mp3",
@@ -21153,12 +21348,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "helmets,”"
+            "need",
+            "skis,"
           ],
           "choices": [
-            "helmets,”",
-            "led",
-            "family"
+            "need skis,",
+            "better idea.",
+            "warmest clothes."
           ],
           "image": "./assets/story-demo/cf066/pages/page-07.webp",
           "audio": "./assets/story-demo/cf066/cf066-page-07.mp3",
@@ -21183,8 +21379,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "equipment.",
-            "woman",
-            "measured"
+            "drove",
+            "pants"
           ],
           "image": "./assets/story-demo/cf066/pages/page-08.webp",
           "audio": "./assets/story-demo/cf066/cf066-page-08.mp3",
@@ -21211,8 +21407,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "ready.",
-            "took",
-            "while"
+            "need",
+            "poles,"
           ],
           "image": "./assets/story-demo/cf066/pages/page-09.webp",
           "audio": "./assets/story-demo/cf066/cf066-page-09.mp3",
@@ -21239,8 +21435,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "going",
-            "ski"
+            "skis,”",
+            "before,”"
           ],
           "image": "./assets/story-demo/cf066/pages/page-10.webp",
           "audio": "./assets/story-demo/cf066/cf066-page-10.mp3",
@@ -21266,8 +21462,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "before,”",
-            "looked",
-            "surprised"
+            "pants",
+            "poles,"
           ],
           "image": "./assets/story-demo/cf066/pages/page-11.webp",
           "audio": "./assets/story-demo/cf066/cf066-page-11.mp3",
@@ -21290,12 +21486,12 @@ window.KakaCarterManifest = {
             "again."
           ],
           "blanks": [
-            "again."
+            "shop"
           ],
           "choices": [
-            "again.",
-            "turned",
-            "around"
+            "shop",
+            "looked",
+            "better"
           ],
           "image": "./assets/story-demo/cf066/pages/page-12.webp",
           "audio": "./assets/story-demo/cf066/cf066-page-12.mp3",
@@ -21329,8 +21525,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "trucks!”",
-            "Wow",
-            "see"
+            "best",
+            "line,”"
           ],
           "image": "./assets/story-demo/cf067/pages/page-01.webp",
           "audio": "./assets/story-demo/cf067/cf067-page-01.mp3",
@@ -21356,8 +21552,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "festival.",
-            "Carters",
-            "food"
+            "ever!”",
+            "tacos,”"
           ],
           "image": "./assets/story-demo/cf067/pages/page-02.webp",
           "audio": "./assets/story-demo/cf067/cf067-page-02.mp3",
@@ -21382,8 +21578,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "dinner?”",
-            "should",
-            "Taco"
+            "pizza",
+            "passed."
           ],
           "image": "./assets/story-demo/cf067/pages/page-03.webp",
           "audio": "./assets/story-demo/cf067/cf067-page-03.mp3",
@@ -21405,12 +21601,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "tacos,”"
-          ],
-          "choices": [
-            "tacos,”",
             "want",
             "pizza"
+          ],
+          "choices": [
+            "want pizza",
+            "truck festival.",
+            "taking forever,”"
           ],
           "image": "./assets/story-demo/cf067/pages/page-04.webp",
           "audio": "./assets/story-demo/cf067/cf067-page-04.mp3",
@@ -21437,8 +21634,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "pizza,”",
-            "gave",
-            "money"
+            "all",
+            "truck"
           ],
           "image": "./assets/story-demo/cf067/pages/page-05.webp",
           "audio": "./assets/story-demo/cf067/cf067-page-05.mp3",
@@ -21458,12 +21655,13 @@ window.KakaCarterManifest = {
             "thought."
           ],
           "blanks": [
-            "thought."
+            "taking",
+            "forever,”"
           ],
           "choices": [
-            "thought.",
-            "lines",
-            "very"
+            "taking forever,”",
+            "truck festival.",
+            "want pizza"
           ],
           "image": "./assets/story-demo/cf067/pages/page-06.webp",
           "audio": "./assets/story-demo/cf067/cf067-page-06.mp3",
@@ -21491,8 +21689,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "passed.",
-            "groaned",
-            "waiting"
+            "best",
+            "King"
           ],
           "image": "./assets/story-demo/cf067/pages/page-07.webp",
           "audio": "./assets/story-demo/cf067/cf067-page-07.mp3",
@@ -21518,8 +21716,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "line,”",
-            "Cupcake",
-            "King"
+            "night.”",
+            "“These"
           ],
           "image": "./assets/story-demo/cf067/pages/page-08.webp",
           "audio": "./assets/story-demo/cf067/cf067-page-08.mp3",
@@ -21543,8 +21741,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "over.",
-            "waved",
-            "Everyone"
+            "ever!”",
+            "King"
           ],
           "image": "./assets/story-demo/cf067/pages/page-09.webp",
           "audio": "./assets/story-demo/cf067/cf067-page-09.mp3",
@@ -21570,8 +21768,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "ever!”",
-            "Yum",
-            "These"
+            "tacos,”",
+            "eat"
           ],
           "image": "./assets/story-demo/cf067/pages/page-10.webp",
           "audio": "./assets/story-demo/cf067/cf067-page-10.mp3",
@@ -21598,8 +21796,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "lines",
-            "other",
-            "trucks"
+            "“Cupcake",
+            "want"
           ],
           "image": "./assets/story-demo/cf067/pages/page-11.webp",
           "audio": "./assets/story-demo/cf067/cf067-page-11.mp3",
@@ -21619,12 +21817,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "eat",
             "dinner,”"
           ],
           "choices": [
-            "dinner,”",
-            "eat",
-            "ate"
+            "eat dinner,”",
+            "truck festival.",
+            "want pizza"
           ],
           "image": "./assets/story-demo/cf067/pages/page-12.webp",
           "audio": "./assets/story-demo/cf067/cf067-page-12.mp3",
@@ -21660,8 +21859,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wedding.",
-            "ring",
-            "bearer"
+            "dresses",
+            "find"
           ],
           "image": "./assets/story-demo/cf068/pages/page-01.webp",
           "audio": "./assets/story-demo/cf068/cf068-page-01.mp3",
@@ -21686,8 +21885,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "tight,”",
-            "suit",
-            "bow"
+            "groom’s",
+            "dresses"
           ],
           "image": "./assets/story-demo/cf068/pages/page-02.webp",
           "audio": "./assets/story-demo/cf068/cf068-page-02.mp3",
@@ -21713,8 +21912,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "Why",
-            "must"
+            "pink",
+            "dresses"
           ],
           "image": "./assets/story-demo/cf068/pages/page-03.webp",
           "audio": "./assets/story-demo/cf068/cf068-page-03.mp3",
@@ -21741,8 +21940,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wedding,”",
-            "important",
-            "job"
+            "asked.",
+            "away."
           ],
           "image": "./assets/story-demo/cf068/pages/page-04.webp",
           "audio": "./assets/story-demo/cf068/cf068-page-04.mp3",
@@ -21765,12 +21964,13 @@ window.KakaCarterManifest = {
             "flowers."
           ],
           "blanks": [
+            "pink",
             "flowers."
           ],
           "choices": [
-            "flowers.",
-            "watched",
-            "photographer"
+            "pink flowers.",
+            "ring bearer",
+            "rolled away."
           ],
           "image": "./assets/story-demo/cf068/pages/page-05.webp",
           "audio": "./assets/story-demo/cf068/cf068-page-05.mp3",
@@ -21791,12 +21991,13 @@ window.KakaCarterManifest = {
             "away."
           ],
           "blanks": [
+            "rolled",
             "away."
           ],
           "choices": [
-            "away.",
-            "Suddenly",
-            "photographer"
+            "rolled away.",
+            "ring bearer",
+            "pink flowers."
           ],
           "image": "./assets/story-demo/cf068/pages/page-06.webp",
           "audio": "./assets/story-demo/cf068/cf068-page-06.mp3",
@@ -21820,8 +22021,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "rings",
-            "know"
+            "wish",
+            "pillow?”"
           ],
           "image": "./assets/story-demo/cf068/pages/page-07.webp",
           "audio": "./assets/story-demo/cf068/cf068-page-07.mp3",
@@ -21845,8 +22046,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "rings.",
-            "Carters",
-            "looked"
+            "dresses",
+            "must"
           ],
           "image": "./assets/story-demo/cf068/pages/page-08.webp",
           "audio": "./assets/story-demo/cf068/cf068-page-08.mp3",
@@ -21873,8 +22074,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wedding!”",
-            "trouble",
-            "now"
+            "holding",
+            "tight,”"
           ],
           "image": "./assets/story-demo/cf068/pages/page-09.webp",
           "audio": "./assets/story-demo/cf068/cf068-page-09.mp3",
@@ -21901,8 +22102,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "anymore,”",
-            "ran",
-            "over"
+            "asked.",
+            "rings"
           ],
           "image": "./assets/story-demo/cf068/pages/page-10.webp",
           "audio": "./assets/story-demo/cf068/cf068-page-10.mp3",
@@ -21924,12 +22125,13 @@ window.KakaCarterManifest = {
             "rings.”"
           ],
           "blanks": [
-            "rings.”"
+            "best",
+            "man"
           ],
           "choices": [
-            "rings.”",
-            "worry",
-            "bride"
+            "best man",
+            "ring bearer",
+            "pink flowers."
           ],
           "image": "./assets/story-demo/cf068/pages/page-11.webp",
           "audio": "./assets/story-demo/cf068/cf068-page-11.mp3",
@@ -21955,8 +22157,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "wedding!”",
-            "smiled",
-            "still"
+            "asked.",
+            "groom’s"
           ],
           "image": "./assets/story-demo/cf068/pages/page-12.webp",
           "audio": "./assets/story-demo/cf068/cf068-page-12.mp3",
@@ -21990,8 +22192,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "novel.",
-            "reading",
-            "graphic"
+            "climbed",
+            "mud."
           ],
           "image": "./assets/story-demo/cf069/pages/page-01.webp",
           "audio": "./assets/story-demo/cf069/cf069-page-01.mp3",
@@ -22016,8 +22218,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "pushed",
-            "Thick",
-            "branches"
+            "read",
+            "Next"
           ],
           "image": "./assets/story-demo/cf069/pages/page-02.webp",
           "audio": "./assets/story-demo/cf069/cf069-page-02.mp3",
@@ -22037,12 +22239,13 @@ window.KakaCarterManifest = {
             "river."
           ],
           "blanks": [
+            "wide",
             "river."
           ],
           "choices": [
-            "river.",
-            "Dana",
-            "swam"
+            "wide river.",
+            "graphic novel.",
+            "hiking shoes."
           ],
           "image": "./assets/story-demo/cf069/pages/page-03.webp",
           "audio": "./assets/story-demo/cf069/cf069-page-03.mp3",
@@ -22066,8 +22269,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "mountain.",
-            "quickly",
-            "flipped"
+            "later,”",
+            "“Everything"
           ],
           "image": "./assets/story-demo/cf069/pages/page-04.webp",
           "audio": "./assets/story-demo/cf069/cf069-page-04.mp3",
@@ -22094,8 +22297,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "walked",
-            "room"
+            "mud.",
+            "stones."
           ],
           "image": "./assets/story-demo/cf069/pages/page-05.webp",
           "audio": "./assets/story-demo/cf069/cf069-page-05.mp3",
@@ -22119,8 +22322,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "later,”",
-            "groaned",
-            "reading"
+            "bad",
+            "Dana"
           ],
           "image": "./assets/story-demo/cf069/pages/page-06.webp",
           "audio": "./assets/story-demo/cf069/cf069-page-06.mp3",
@@ -22140,12 +22343,13 @@ window.KakaCarterManifest = {
             "shoes."
           ],
           "blanks": [
+            "hiking",
             "shoes."
           ],
           "choices": [
-            "shoes.",
-            "Everyone",
-            "put"
+            "hiking shoes.",
+            "graphic novel.",
+            "wide river."
           ],
           "image": "./assets/story-demo/cf069/pages/page-07.webp",
           "audio": "./assets/story-demo/cf069/cf069-page-07.mp3",
@@ -22169,8 +22373,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "through",
-            "trail",
-            "muddy"
+            "Next",
+            "Dana"
           ],
           "image": "./assets/story-demo/cf069/pages/page-08.webp",
           "audio": "./assets/story-demo/cf069/cf069-page-08.mp3",
@@ -22195,8 +22399,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "pushed",
-            "Thick",
-            "branches"
+            "stepped",
+            "Dana"
           ],
           "image": "./assets/story-demo/cf069/pages/page-09.webp",
           "audio": "./assets/story-demo/cf069/cf069-page-09.mp3",
@@ -22216,12 +22420,13 @@ window.KakaCarterManifest = {
             "stones."
           ],
           "blanks": [
-            "stones."
+            "walked",
+            "across"
           ],
           "choices": [
-            "stones.",
-            "trail",
-            "crossed"
+            "walked across",
+            "graphic novel.",
+            "wide river."
           ],
           "image": "./assets/story-demo/cf069/pages/page-10.webp",
           "audio": "./assets/story-demo/cf069/cf069-page-10.mp3",
@@ -22246,8 +22451,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "muddy!”",
-            "Now",
-            "trail"
+            "idea.”",
+            "shoes."
           ],
           "image": "./assets/story-demo/cf069/pages/page-11.webp",
           "audio": "./assets/story-demo/cf069/cf069-page-11.mp3",
@@ -22271,8 +22476,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "idea.”",
-            "nodded",
-            "hike"
+            "river.",
+            "mud."
           ],
           "image": "./assets/story-demo/cf069/pages/page-12.webp",
           "audio": "./assets/story-demo/cf069/cf069-page-12.mp3",
@@ -22306,8 +22511,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "movie",
-            "night"
+            "kids",
+            "movie"
           ],
           "image": "./assets/story-demo/cf070/pages/page-01.webp",
           "audio": "./assets/story-demo/cf070/cf070-page-01.mp3",
@@ -22332,12 +22537,13 @@ window.KakaCarterManifest = {
             "TV."
           ],
           "blanks": [
-            "turned"
+            "make",
+            "popcorn.”"
           ],
           "choices": [
-            "turned",
-            "kids",
-            "decide"
+            "make popcorn.”",
+            "popcorn popped.”",
+            "board games"
           ],
           "image": "./assets/story-demo/cf070/pages/page-02.webp",
           "audio": "./assets/story-demo/cf070/cf070-page-02.mp3",
@@ -22360,8 +22566,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Lightning",
-            "Crack",
-            "lit"
+            "asked.",
+            "power"
           ],
           "image": "./assets/story-demo/cf070/pages/page-03.webp",
           "audio": "./assets/story-demo/cf070/cf070-page-03.mp3",
@@ -22384,8 +22590,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "sighed.",
-            "Hey",
-            "happened"
+            "back",
+            "family"
           ],
           "image": "./assets/story-demo/cf070/pages/page-04.webp",
           "audio": "./assets/story-demo/cf070/cf070-page-04.mp3",
@@ -22412,8 +22618,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "everyone.",
-            "came",
-            "flashlights"
+            "back",
+            "popped.”"
           ],
           "image": "./assets/story-demo/cf070/pages/page-05.webp",
           "audio": "./assets/story-demo/cf070/cf070-page-05.mp3",
@@ -22436,12 +22642,13 @@ window.KakaCarterManifest = {
             "popped.”"
           ],
           "blanks": [
+            "popcorn",
             "popped.”"
           ],
           "choices": [
-            "popped.”",
-            "still",
-            "eat"
+            "popcorn popped.”",
+            "make popcorn.”",
+            "board games"
           ],
           "image": "./assets/story-demo/cf070/pages/page-06.webp",
           "audio": "./assets/story-demo/cf070/cf070-page-06.mp3",
@@ -22467,8 +22674,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "closet.",
-            "stinks",
-            "still"
+            "went",
+            "three"
           ],
           "image": "./assets/story-demo/cf070/pages/page-07.webp",
           "audio": "./assets/story-demo/cf070/cf070-page-07.mp3",
@@ -22493,8 +22700,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "candlelight.",
-            "family",
-            "played"
+            "heads.",
+            "everyone."
           ],
           "image": "./assets/story-demo/cf070/pages/page-08.webp",
           "audio": "./assets/story-demo/cf070/cf070-page-08.mp3",
@@ -22518,8 +22725,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "back",
-            "family",
-            "played"
+            "“Nope.",
+            "kids"
           ],
           "image": "./assets/story-demo/cf070/pages/page-09.webp",
           "audio": "./assets/story-demo/cf070/cf070-page-09.mp3",
@@ -22543,8 +22750,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "movie",
-            "Great",
-            "Should"
+            "popped.”",
+            "before"
           ],
           "image": "./assets/story-demo/cf070/pages/page-10.webp",
           "audio": "./assets/story-demo/cf070/cf070-page-10.mp3",
@@ -22564,12 +22771,13 @@ window.KakaCarterManifest = {
             "heads."
           ],
           "blanks": [
-            "heads."
+            "three",
+            "kids"
           ],
           "choices": [
-            "heads.",
-            "looked",
-            "three"
+            "three kids",
+            "make popcorn.”",
+            "popcorn popped.”"
           ],
           "image": "./assets/story-demo/cf070/pages/page-11.webp",
           "audio": "./assets/story-demo/cf070/cf070-page-11.mp3",
@@ -22593,8 +22801,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "lights.",
-            "Nope",
-            "turned"
+            "game",
+            "went"
           ],
           "image": "./assets/story-demo/cf070/pages/page-12.webp",
           "audio": "./assets/story-demo/cf070/cf070-page-12.mp3",
@@ -22625,12 +22833,13 @@ window.KakaCarterManifest = {
             "hoop."
           ],
           "blanks": [
+            "basketball",
             "hoop."
           ],
           "choices": [
-            "hoop.",
-            "driveway",
-            "setting"
+            "basketball hoop.",
+            "first game.",
+            "ball kept"
           ],
           "image": "./assets/story-demo/cf071/pages/page-01.webp",
           "audio": "./assets/story-demo/cf071/cf071-page-01.mp3",
@@ -22655,8 +22864,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hoop.",
-            "tossed",
-            "basketball"
+            "dropping",
+            "while."
           ],
           "image": "./assets/story-demo/cf071/pages/page-02.webp",
           "audio": "./assets/story-demo/cf071/cf071-page-02.mp3",
@@ -22680,8 +22889,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "ball.",
-            "tried",
-            "again"
+            "backboard.",
+            "while."
           ],
           "image": "./assets/story-demo/cf071/pages/page-03.webp",
           "audio": "./assets/story-demo/cf071/cf071-page-03.mp3",
@@ -22706,8 +22915,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "turn,”",
-            "score",
-            "either"
+            "one",
+            "backboard."
           ],
           "image": "./assets/story-demo/cf071/pages/page-04.webp",
           "audio": "./assets/story-demo/cf071/cf071-page-04.mp3",
@@ -22732,8 +22941,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "backboard.",
-            "show",
-            "bounced"
+            "basket.",
+            "kept"
           ],
           "image": "./assets/story-demo/cf071/pages/page-05.webp",
           "audio": "./assets/story-demo/cf071/cf071-page-05.mp3",
@@ -22760,12 +22969,13 @@ window.KakaCarterManifest = {
             "game."
           ],
           "blanks": [
+            "first",
             "game."
           ],
           "choices": [
-            "game.",
-            "made",
-            "slam"
+            "first game.",
+            "basketball hoop.",
+            "ball kept"
           ],
           "image": "./assets/story-demo/cf071/pages/page-06.webp",
           "audio": "./assets/story-demo/cf071/cf071-page-06.mp3",
@@ -22786,12 +22996,12 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "again!”"
+            "want"
           ],
           "choices": [
-            "again!”",
-            "won",
-            "next"
+            "want",
+            "backboard.",
+            "setting"
           ],
           "image": "./assets/story-demo/cf071/pages/page-07.webp",
           "audio": "./assets/story-demo/cf071/cf071-page-07.mp3",
@@ -22816,8 +23026,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "high,”",
-            "took",
-            "turns"
+            "bounced",
+            "one"
           ],
           "image": "./assets/story-demo/cf071/pages/page-08.webp",
           "audio": "./assets/story-demo/cf071/cf071-page-08.mp3",
@@ -22842,8 +23052,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "while.",
-            "moved",
-            "hoop"
+            "basket.",
+            "high,”"
           ],
           "image": "./assets/story-demo/cf071/pages/page-09.webp",
           "audio": "./assets/story-demo/cf071/cf071-page-09.mp3",
@@ -22868,8 +23078,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "basket.",
-            "Swish",
-            "ball"
+            "setting",
+            "five"
           ],
           "image": "./assets/story-demo/cf071/pages/page-10.webp",
           "audio": "./assets/story-demo/cf071/cf071-page-10.mp3",
@@ -22900,12 +23110,13 @@ window.KakaCarterManifest = {
             "outside."
           ],
           "blanks": [
+            "walk",
             "outside."
           ],
           "choices": [
-            "outside.",
-            "Today",
-            "Wellness"
+            "walk outside.",
+            "Hamm stopped",
+            "Everyone stretched"
           ],
           "image": "./assets/story-demo/cf072/pages/page-01.webp",
           "audio": "./assets/story-demo/cf072/cf072-page-01.mp3",
@@ -22929,8 +23140,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "trees.",
-            "Miss",
-            "Hamm"
+            "feel",
+            "fell"
           ],
           "image": "./assets/story-demo/cf072/pages/page-02.webp",
           "audio": "./assets/story-demo/cf072/cf072-page-02.mp3",
@@ -22957,8 +23168,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "arms.",
-            "watched",
-            "Miss"
+            "home",
+            "class"
           ],
           "image": "./assets/story-demo/cf072/pages/page-03.webp",
           "audio": "./assets/story-demo/cf072/cf072-page-03.mp3",
@@ -22982,8 +23193,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Hamm",
-            "Now",
-            "meditate"
+            "class",
+            "calm.”"
           ],
           "image": "./assets/story-demo/cf072/pages/page-04.webp",
           "audio": "./assets/story-demo/cf072/cf072-page-04.mp3",
@@ -23009,12 +23220,13 @@ window.KakaCarterManifest = {
             "smiled."
           ],
           "blanks": [
-            "smiled."
+            "feel",
+            "calm.”"
           ],
           "choices": [
-            "smiled.",
-            "Miss",
-            "Hamm"
+            "feel calm.”",
+            "walk outside.",
+            "Hamm stopped"
           ],
           "image": "./assets/story-demo/cf072/pages/page-05.webp",
           "audio": "./assets/story-demo/cf072/cf072-page-05.mp3",
@@ -23040,8 +23252,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "family.",
-            "home",
-            "wanted"
+            "calm.”",
+            "hard?”"
           ],
           "image": "./assets/story-demo/cf072/pages/page-06.webp",
           "audio": "./assets/story-demo/cf072/cf072-page-06.mp3",
@@ -23065,8 +23277,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "smiled.",
-            "homework",
-            "hard"
+            "family.",
+            "class"
           ],
           "image": "./assets/story-demo/cf072/pages/page-07.webp",
           "audio": "./assets/story-demo/cf072/cf072-page-07.mp3",
@@ -23089,8 +23301,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "making",
-            "bed",
-            "looks"
+            "feel",
+            "family."
           ],
           "image": "./assets/story-demo/cf072/pages/page-08.webp",
           "audio": "./assets/story-demo/cf072/cf072-page-08.mp3",
@@ -23114,8 +23326,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "shelf.",
-            "organizing",
-            "garage"
+            "hard?”",
+            "idea."
           ],
           "image": "./assets/story-demo/cf072/pages/page-09.webp",
           "audio": "./assets/story-demo/cf072/cf072-page-09.mp3",
@@ -23140,8 +23352,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "mess.”",
-            "meditate",
-            "right"
+            "sun.”",
+            "deep"
           ],
           "image": "./assets/story-demo/cf072/pages/page-10.webp",
           "audio": "./assets/story-demo/cf072/cf072-page-10.mp3",
@@ -23167,8 +23379,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "idea.",
-            "went",
-            "backyard"
+            "helps",
+            "class"
           ],
           "image": "./assets/story-demo/cf072/pages/page-11.webp",
           "audio": "./assets/story-demo/cf072/cf072-page-11.mp3",
@@ -23189,12 +23401,13 @@ window.KakaCarterManifest = {
             "calm!"
           ],
           "blanks": [
+            "felt",
             "calm!"
           ],
           "choices": [
-            "calm!",
-            "sat",
-            "down"
+            "felt calm!",
+            "walk outside.",
+            "Hamm stopped"
           ],
           "image": "./assets/story-demo/cf072/pages/page-12.webp",
           "audio": "./assets/story-demo/cf072/cf072-page-12.mp3",
@@ -23231,8 +23444,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "happily.",
-            "made",
-            "scary"
+            "“Nice",
+            "dinner"
           ],
           "image": "./assets/story-demo/cf073/pages/page-01.webp",
           "audio": "./assets/story-demo/cf073/cf073-page-01.mp3",
@@ -23251,12 +23464,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "“Nice",
             "mask,"
           ],
           "choices": [
-            "mask,",
-            "work",
-            "Nice"
+            "“Nice mask,",
+            "After dinner",
+            "back door."
           ],
           "image": "./assets/story-demo/cf073/pages/page-02.webp",
           "audio": "./assets/story-demo/cf073/cf073-page-02.mp3",
@@ -23282,8 +23496,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "scare",
-            "Next",
-            "tried"
+            "nose",
+            "put"
           ],
           "image": "./assets/story-demo/cf073/pages/page-03.webp",
           "audio": "./assets/story-demo/cf073/cf073-page-03.mp3",
@@ -23305,12 +23519,12 @@ window.KakaCarterManifest = {
             "again."
           ],
           "blanks": [
-            "again."
+            "mask"
           ],
           "choices": [
-            "again.",
-            "After",
-            "dinner"
+            "mask",
+            "tried",
+            "all,”"
           ],
           "image": "./assets/story-demo/cf073/pages/page-04.webp",
           "audio": "./assets/story-demo/cf073/cf073-page-04.mp3",
@@ -23336,8 +23550,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "scary",
-            "frowned",
-            "mask"
+            "inside,”",
+            "Next"
           ],
           "image": "./assets/story-demo/cf073/pages/page-05.webp",
           "audio": "./assets/story-demo/cf073/cf073-page-05.mp3",
@@ -23361,8 +23575,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "inside,”",
-            "Soon",
-            "almost"
+            "all,”",
+            "back"
           ],
           "image": "./assets/story-demo/cf073/pages/page-06.webp",
           "audio": "./assets/story-demo/cf073/cf073-page-06.mp3",
@@ -23382,12 +23596,13 @@ window.KakaCarterManifest = {
             "door."
           ],
           "blanks": [
+            "back",
             "door."
           ],
           "choices": [
-            "door.",
-            "went",
-            "back"
+            "back door.",
+            "“Nice mask,",
+            "After dinner"
           ],
           "image": "./assets/story-demo/cf073/pages/page-07.webp",
           "audio": "./assets/story-demo/cf073/cf073-page-07.mp3",
@@ -23414,8 +23629,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "over",
-            "cried",
-            "one"
+            "went",
+            "all,”"
           ],
           "image": "./assets/story-demo/cf073/pages/page-08.webp",
           "audio": "./assets/story-demo/cf073/cf073-page-08.mp3",
@@ -23440,8 +23655,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "window.",
-            "pressed",
-            "nose"
+            "one",
+            "even"
           ],
           "image": "./assets/story-demo/cf073/pages/page-09.webp",
           "audio": "./assets/story-demo/cf073/cf073-page-09.mp3",
@@ -23466,8 +23681,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "mask!”",
-            "opened",
-            "door"
+            "pressed",
+            "“Everyone"
           ],
           "image": "./assets/story-demo/cf073/pages/page-10.webp",
           "audio": "./assets/story-demo/cf073/cf073-page-10.mp3",
@@ -23505,8 +23720,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked",
-            "sure",
-            "want"
+            "down",
+            "guard"
           ],
           "image": "./assets/story-demo/cf074/pages/page-01.webp",
           "audio": "./assets/story-demo/cf074/cf074-page-01.mp3",
@@ -23534,8 +23749,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "crowd",
-            "kids",
-            "joined"
+            "leave",
+            "asked"
           ],
           "image": "./assets/story-demo/cf074/pages/page-02.webp",
           "audio": "./assets/story-demo/cf074/cf074-page-02.mp3",
@@ -23556,12 +23771,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "boards,”"
+            "hold",
+            "onto"
           ],
           "choices": [
-            "boards,”",
-            "Everyone",
-            "helpful"
+            "hold onto",
+            "kids joined",
+            "guard blew"
           ],
           "image": "./assets/story-demo/cf074/pages/page-03.webp",
           "audio": "./assets/story-demo/cf074/cf074-page-03.mp3",
@@ -23586,8 +23802,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "show",
-            "frowned",
-            "know"
+            "asked",
+            "kids"
           ],
           "image": "./assets/story-demo/cf074/pages/page-04.webp",
           "audio": "./assets/story-demo/cf074/cf074-page-04.mp3",
@@ -23612,8 +23828,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "myself.”",
-            "Thanks",
-            "need"
+            "boards,”",
+            "hold"
           ],
           "image": "./assets/story-demo/cf074/pages/page-05.webp",
           "audio": "./assets/story-demo/cf074/cf074-page-05.mp3",
@@ -23636,8 +23852,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "whistle.",
-            "Tweet",
-            "guard"
+            "joined",
+            "asked"
           ],
           "image": "./assets/story-demo/cf074/pages/page-06.webp",
           "audio": "./assets/story-demo/cf074/cf074-page-06.mp3",
@@ -23657,12 +23873,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "guard"
+            "playing",
+            "tag,”"
           ],
           "choices": [
-            "guard",
-            "Tweet",
-            "playing"
+            "playing tag,”",
+            "kids joined",
+            "hold onto"
           ],
           "image": "./assets/story-demo/cf074/pages/page-07.webp",
           "audio": "./assets/story-demo/cf074/cf074-page-07.mp3",
@@ -23691,8 +23908,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "minutes.”",
-            "Tweet",
-            "skating"
+            "sat",
+            "sure"
           ],
           "image": "./assets/story-demo/cf074/pages/page-08.webp",
           "audio": "./assets/story-demo/cf074/cf074-page-08.mp3",
@@ -23719,8 +23936,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "bench.",
-            "kids",
-            "sat"
+            "want",
+            "boards,”"
           ],
           "image": "./assets/story-demo/cf074/pages/page-09.webp",
           "audio": "./assets/story-demo/cf074/cf074-page-09.mp3",
@@ -23743,8 +23960,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "great!”",
-            "skating",
-            "doing"
+            "boards,”",
+            "blew"
           ],
           "image": "./assets/story-demo/cf074/pages/page-10.webp",
           "audio": "./assets/story-demo/cf074/cf074-page-10.mp3",
@@ -23778,8 +23995,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "ready",
-            "guess"
+            "friends",
+            "group"
           ],
           "image": "./assets/story-demo/cf075/pages/page-01.webp",
           "audio": "./assets/story-demo/cf075/cf075-page-01.mp3",
@@ -23804,8 +24021,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "friends",
-            "marching",
-            "parade"
+            "army",
+            "T-shirts."
           ],
           "image": "./assets/story-demo/cf075/pages/page-02.webp",
           "audio": "./assets/story-demo/cf075/cf075-page-02.mp3",
@@ -23829,8 +24046,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "boring.",
-            "shrugged",
-            "Watching"
+            "truck",
+            "ready,"
           ],
           "image": "./assets/story-demo/cf075/pages/page-03.webp",
           "audio": "./assets/story-demo/cf075/cf075-page-03.mp3",
@@ -23855,8 +24072,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hall.",
-            "found",
-            "group"
+            "arrived",
+            "Soon"
           ],
           "image": "./assets/story-demo/cf075/pages/page-04.webp",
           "audio": "./assets/story-demo/cf075/cf075-page-04.mp3",
@@ -23881,8 +24098,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Jackson",
-            "Look",
-            "Sanjay"
+            "asked.",
+            "march"
           ],
           "image": "./assets/story-demo/cf075/pages/page-05.webp",
           "audio": "./assets/story-demo/cf075/cf075-page-05.mp3",
@@ -23906,8 +24123,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "march",
-            "groaned",
-            "far"
+            "ready,",
+            "boring."
           ],
           "image": "./assets/story-demo/cf075/pages/page-06.webp",
           "audio": "./assets/story-demo/cf075/cf075-page-06.mp3",
@@ -23927,12 +24144,13 @@ window.KakaCarterManifest = {
             "too."
           ],
           "blanks": [
-            "arrived"
+            "big",
+            "army"
           ],
           "choices": [
-            "arrived",
-            "More",
-            "marchers"
+            "big army",
+            "seemed boring.",
+            "town hall."
           ],
           "image": "./assets/story-demo/cf075/pages/page-07.webp",
           "audio": "./assets/story-demo/cf075/cf075-page-07.mp3",
@@ -23953,12 +24171,13 @@ window.KakaCarterManifest = {
             "Street."
           ],
           "blanks": [
-            "Street."
+            "started",
+            "down"
           ],
           "choices": [
-            "Street.",
-            "parade",
-            "starting"
+            "started down",
+            "seemed boring.",
+            "town hall."
           ],
           "image": "./assets/story-demo/cf075/pages/page-08.webp",
           "audio": "./assets/story-demo/cf075/cf075-page-08.mp3",
@@ -23985,8 +24204,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "T-shirts.",
-            "put",
-            "zoo"
+            "watching",
+            "found"
           ],
           "image": "./assets/story-demo/cf075/pages/page-09.webp",
           "audio": "./assets/story-demo/cf075/cf075-page-09.mp3",
@@ -24011,8 +24230,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "watching",
-            "yelled",
-            "Cool"
+            "Jackson",
+            "even"
           ],
           "image": "./assets/story-demo/cf075/pages/page-10.webp",
           "audio": "./assets/story-demo/cf075/cf075-page-10.mp3",
@@ -24036,8 +24255,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "station.",
-            "Soon",
-            "reached"
+            "even",
+            "group"
           ],
           "image": "./assets/story-demo/cf075/pages/page-11.webp",
           "audio": "./assets/story-demo/cf075/cf075-page-11.mp3",
@@ -24061,12 +24280,13 @@ window.KakaCarterManifest = {
             "more!”"
           ],
           "blanks": [
-            "more!”"
+            "watching",
+            "parades."
           ],
           "choices": [
-            "more!”",
-            "found",
-            "fun"
+            "watching parades.",
+            "seemed boring.",
+            "town hall."
           ],
           "image": "./assets/story-demo/cf075/pages/page-12.webp",
           "audio": "./assets/story-demo/cf075/cf075-page-12.mp3",
@@ -24104,8 +24324,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "Street!”",
-            "One",
-            "Saturday"
+            "story",
+            "enough"
           ],
           "image": "./assets/story-demo/cf076/pages/page-01.webp",
           "audio": "./assets/story-demo/cf076/cf076-page-01.mp3",
@@ -24132,8 +24352,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "speed",
-            "want",
-            "see"
+            "house.",
+            "“Come"
           ],
           "image": "./assets/story-demo/cf076/pages/page-02.webp",
           "audio": "./assets/story-demo/cf076/cf076-page-02.mp3",
@@ -24152,12 +24372,12 @@ window.KakaCarterManifest = {
             "again."
           ],
           "blanks": [
-            "again."
+            "story"
           ],
           "choices": [
-            "again.",
-            "read",
-            "story"
+            "story",
+            "bikes,”",
+            "“More"
           ],
           "image": "./assets/story-demo/cf076/pages/page-03.webp",
           "audio": "./assets/story-demo/cf076/cf076-page-03.mp3",
@@ -24182,8 +24402,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "shoes.",
-            "put",
-            "grabbed"
+            "“Come",
+            "speed"
           ],
           "image": "./assets/story-demo/cf076/pages/page-04.webp",
           "audio": "./assets/story-demo/cf076/cf076-page-04.mp3",
@@ -24211,8 +24431,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "time",
-            "enough",
-            "held"
+            "while",
+            "back!”"
           ],
           "image": "./assets/story-demo/cf076/pages/page-05.webp",
           "audio": "./assets/story-demo/cf076/cf076-page-05.mp3",
@@ -24232,12 +24452,13 @@ window.KakaCarterManifest = {
             "Rover."
           ],
           "blanks": [
-            "called"
+            "“Come",
+            "back!”"
           ],
           "choices": [
-            "called",
-            "shouted",
-            "Come"
+            "“Come back!”",
+            "Main Street!”",
+            "enough time"
           ],
           "image": "./assets/story-demo/cf076/pages/page-06.webp",
           "audio": "./assets/story-demo/cf076/cf076-page-06.mp3",
@@ -24266,8 +24487,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "house.",
-            "ran",
-            "inside"
+            "shoes.",
+            "Street!”"
           ],
           "image": "./assets/story-demo/cf076/pages/page-07.webp",
           "audio": "./assets/story-demo/cf076/cf076-page-07.mp3",
@@ -24293,8 +24514,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "race.",
-            "quickly",
-            "drove"
+            "than",
+            "enough"
           ],
           "image": "./assets/story-demo/cf076/pages/page-08.webp",
           "audio": "./assets/story-demo/cf076/cf076-page-08.mp3",
@@ -24319,12 +24540,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "fast",
             "enough,”"
           ],
           "choices": [
-            "enough,”",
-            "Carters",
-            "hurried"
+            "fast enough,”",
+            "Main Street!”",
+            "enough time"
           ],
           "image": "./assets/story-demo/cf076/pages/page-09.webp",
           "audio": "./assets/story-demo/cf076/cf076-page-09.mp3",
@@ -24351,8 +24573,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "bikes,”",
-            "home",
-            "ride"
+            "down",
+            "house."
           ],
           "image": "./assets/story-demo/cf076/pages/page-10.webp",
           "audio": "./assets/story-demo/cf076/cf076-page-10.mp3",
@@ -24390,8 +24612,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "check",
-            "Carters",
-            "going"
+            "much",
+            "table"
           ],
           "image": "./assets/story-demo/cf077/pages/page-01.webp",
           "audio": "./assets/story-demo/cf077/cf077-page-01.mp3",
@@ -24416,8 +24638,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "driving",
-            "leaving",
-            "today"
+            "floor.",
+            "front"
           ],
           "image": "./assets/story-demo/cf077/pages/page-02.webp",
           "audio": "./assets/story-demo/cf077/cf077-page-02.mp3",
@@ -24443,8 +24665,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "than",
-            "much",
-            "bigger"
+            "need",
+            "real"
           ],
           "image": "./assets/story-demo/cf077/pages/page-03.webp",
           "audio": "./assets/story-demo/cf077/cf077-page-03.mp3",
@@ -24472,8 +24694,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "kitchen,”",
-            "hungry",
-            "sat"
+            "Dishes,",
+            "driveway"
           ],
           "image": "./assets/story-demo/cf077/pages/page-04.webp",
           "audio": "./assets/story-demo/cf077/cf077-page-04.mp3",
@@ -24501,8 +24723,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "seats.",
-            "After",
-            "lunch"
+            "counter.",
+            "real"
           ],
           "image": "./assets/story-demo/cf077/pages/page-05.webp",
           "audio": "./assets/story-demo/cf077/cf077-page-05.mp3",
@@ -24526,12 +24748,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "driving,”"
+            "first",
+            "rule"
           ],
           "choices": [
-            "driving,”",
-            "know",
-            "first"
+            "first rule",
+            "practice driving",
+            "much bigger"
           ],
           "image": "./assets/story-demo/cf077/pages/page-06.webp",
           "audio": "./assets/story-demo/cf077/cf077-page-06.mp3",
@@ -24558,8 +24781,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "counter.",
-            "carefully",
-            "pulled"
+            "driveway",
+            "Everyone"
           ],
           "image": "./assets/story-demo/cf077/pages/page-07.webp",
           "audio": "./assets/story-demo/cf077/cf077-page-07.mp3",
@@ -24585,8 +24808,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "floor.",
-            "Dishes",
-            "silverware"
+            "car,”",
+            "cleaned"
           ],
           "image": "./assets/story-demo/cf077/pages/page-08.webp",
           "audio": "./assets/story-demo/cf077/cf077-page-08.mp3",
@@ -24612,8 +24835,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cleaned",
-            "Stop",
-            "kids"
+            "front",
+            "lunch"
           ],
           "image": "./assets/story-demo/cf077/pages/page-09.webp",
           "audio": "./assets/story-demo/cf077/cf077-page-09.mp3",
@@ -24642,12 +24865,13 @@ window.KakaCarterManifest = {
             "leave!”"
           ],
           "blanks": [
-            "leave!”"
+            "Put",
+            "everything"
           ],
           "choices": [
-            "leave!”",
-            "smiled",
-            "know"
+            "Put everything",
+            "practice driving",
+            "much bigger"
           ],
           "image": "./assets/story-demo/cf077/pages/page-10.webp",
           "audio": "./assets/story-demo/cf077/cf077-page-10.mp3",
@@ -24680,12 +24904,12 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "here,”"
+            "trip"
           ],
           "choices": [
-            "here,”",
-            "Carters",
-            "visiting"
+            "trip",
+            "deer",
+            "Carters"
           ],
           "image": "./assets/story-demo/cf078/pages/page-01.webp",
           "audio": "./assets/story-demo/cf078/cf078-page-01.mp3",
@@ -24712,8 +24936,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hawks.",
-            "center",
-            "Carters"
+            "air.",
+            "better"
           ],
           "image": "./assets/story-demo/cf078/pages/page-02.webp",
           "audio": "./assets/story-demo/cf078/cf078-page-02.mp3",
@@ -24741,8 +24965,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "spot.",
-            "Carters",
-            "hiked"
+            "took",
+            "better"
           ],
           "image": "./assets/story-demo/cf078/pages/page-03.webp",
           "audio": "./assets/story-demo/cf078/cf078-page-03.mp3",
@@ -24767,8 +24991,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hawks,”",
-            "see",
-            "any"
+            "spot.",
+            "took"
           ],
           "image": "./assets/story-demo/cf078/pages/page-04.webp",
           "audio": "./assets/story-demo/cf078/cf078-page-04.mp3",
@@ -24792,8 +25016,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hawk",
-            "pointed",
-            "sky"
+            "hawks.",
+            "spot."
           ],
           "image": "./assets/story-demo/cf078/pages/page-05.webp",
           "audio": "./assets/story-demo/cf078/cf078-page-05.mp3",
@@ -24817,12 +25041,13 @@ window.KakaCarterManifest = {
             "watching."
           ],
           "blanks": [
-            "watching."
+            "see",
+            "any"
           ],
           "choices": [
-            "watching.",
-            "sighed",
-            "still"
+            "see any",
+            "field trip",
+            "visitors’ center,"
           ],
           "image": "./assets/story-demo/cf078/pages/page-06.webp",
           "audio": "./assets/story-demo/cf078/cf078-page-06.mp3",
@@ -24849,8 +25074,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "circling",
-            "Suddenly",
-            "spotted"
+            "visitors’",
+            "lifted"
           ],
           "image": "./assets/story-demo/cf078/pages/page-07.webp",
           "audio": "./assets/story-demo/cf078/cf078-page-07.mp3",
@@ -24877,8 +25102,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "look.",
-            "Another",
-            "hawk"
+            "spot.",
+            "Carters"
           ],
           "image": "./assets/story-demo/cf078/pages/page-08.webp",
           "audio": "./assets/story-demo/cf078/cf078-page-08.mp3",
@@ -24904,8 +25129,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "took",
-            "bird",
-            "lifted"
+            "those",
+            "center,"
           ],
           "image": "./assets/story-demo/cf078/pages/page-09.webp",
           "audio": "./assets/story-demo/cf078/cf078-page-09.mp3",
@@ -24929,12 +25154,13 @@ window.KakaCarterManifest = {
             "us!”"
           ],
           "blanks": [
-            "watching"
+            "watching",
+            "hawks."
           ],
           "choices": [
-            "watching",
-            "Look",
-            "everybody"
+            "watching hawks.",
+            "field trip",
+            "visitors’ center,"
           ],
           "image": "./assets/story-demo/cf078/pages/page-10.webp",
           "audio": "./assets/story-demo/cf078/cf078-page-10.mp3",
@@ -24970,8 +25196,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "treat",
-            "visiting",
-            "dairy"
+            "pens.",
+            "give"
           ],
           "image": "./assets/story-demo/cf079/pages/page-01.webp",
           "audio": "./assets/story-demo/cf079/cf079-page-01.mp3",
@@ -24996,8 +25222,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "anyway.",
-            "interested",
-            "farm"
+            "calves",
+            "eating"
           ],
           "image": "./assets/story-demo/cf079/pages/page-02.webp",
           "audio": "./assets/story-demo/cf079/cf079-page-02.mp3",
@@ -25022,8 +25248,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "farm.",
-            "Carters",
-            "arrived"
+            "anyway.",
+            "found"
           ],
           "image": "./assets/story-demo/cf079/pages/page-03.webp",
           "audio": "./assets/story-demo/cf079/cf079-page-03.mp3",
@@ -25049,8 +25275,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "pens.",
-            "Carters",
-            "found"
+            "looked",
+            "care"
           ],
           "image": "./assets/story-demo/cf079/pages/page-04.webp",
           "audio": "./assets/story-demo/cf079/cf079-page-04.mp3",
@@ -25075,8 +25301,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "empty.",
-            "Soon",
-            "noticed"
+            "care",
+            "barn,"
           ],
           "image": "./assets/story-demo/cf079/pages/page-05.webp",
           "audio": "./assets/story-demo/cf079/cf079-page-05.mp3",
@@ -25108,8 +25334,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "brother.",
-            "Ugh",
-            "care"
+            "Carters",
+            "found"
           ],
           "image": "./assets/story-demo/cf079/pages/page-06.webp",
           "audio": "./assets/story-demo/cf079/cf079-page-06.mp3",
@@ -25128,12 +25354,13 @@ window.KakaCarterManifest = {
             "milk.”"
           ],
           "blanks": [
-            "milk.”"
+            "give",
+            "chocolate"
           ],
           "choices": [
-            "milk.”",
-            "shook",
-            "head"
+            "give chocolate",
+            "dairy farm.",
+            "Carters found"
           ],
           "image": "./assets/story-demo/cf079/pages/page-07.webp",
           "audio": "./assets/story-demo/cf079/cf079-page-07.mp3",
@@ -25157,12 +25384,13 @@ window.KakaCarterManifest = {
             "window."
           ],
           "blanks": [
-            "window."
+            "looked",
+            "through"
           ],
           "choices": [
-            "window.",
-            "milking",
-            "barn"
+            "looked through",
+            "dairy farm.",
+            "Carters found"
           ],
           "image": "./assets/story-demo/cf079/pages/page-08.webp",
           "audio": "./assets/story-demo/cf079/cf079-page-08.mp3",
@@ -25190,8 +25418,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "shop,”",
-            "time",
-            "home"
+            "Soon",
+            "cream"
           ],
           "image": "./assets/story-demo/cf079/pages/page-09.webp",
           "audio": "./assets/story-demo/cf079/cf079-page-09.mp3",
@@ -25218,8 +25446,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "cone.",
-            "Soon",
-            "happily"
+            "empty.",
+            "window."
           ],
           "image": "./assets/story-demo/cf079/pages/page-10.webp",
           "audio": "./assets/story-demo/cf079/cf079-page-10.mp3",
@@ -25251,12 +25479,13 @@ window.KakaCarterManifest = {
             "TV."
           ],
           "blanks": [
+            "watching",
             "baseball"
           ],
           "choices": [
-            "baseball",
-            "watching",
-            "Soon"
+            "watching baseball",
+            "blue socks,”",
+            "good luck"
           ],
           "image": "./assets/story-demo/cf080/pages/page-01.webp",
           "audio": "./assets/story-demo/cf080/cf080-page-01.mp3",
@@ -25279,12 +25508,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "blue",
             "socks,”"
           ],
           "choices": [
-            "socks,”",
-            "score",
-            "asked"
+            "blue socks,”",
+            "watching baseball",
+            "good luck"
           ],
           "image": "./assets/story-demo/cf080/pages/page-02.webp",
           "audio": "./assets/story-demo/cf080/cf080-page-02.mp3",
@@ -25310,8 +25540,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "backward,”",
-            "Nothing",
-            "happened"
+            "three",
+            "charm."
           ],
           "image": "./assets/story-demo/cf080/pages/page-03.webp",
           "audio": "./assets/story-demo/cf080/cf080-page-03.mp3",
@@ -25335,8 +25565,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "charm.",
-            "Nothing",
-            "happened"
+            "wear",
+            "kitchen"
           ],
           "image": "./assets/story-demo/cf080/pages/page-04.webp",
           "audio": "./assets/story-demo/cf080/cf080-page-04.mp3",
@@ -25364,8 +25594,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "snack.",
-            "score",
-            "still"
+            "gone,",
+            "leave,"
           ],
           "image": "./assets/story-demo/cf080/pages/page-05.webp",
           "audio": "./assets/story-demo/cf080/cf080-page-05.mp3",
@@ -25392,8 +25622,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "scored,”",
-            "While",
-            "gone"
+            "backward,”",
+            "leave,"
           ],
           "image": "./assets/story-demo/cf080/pages/page-06.webp",
           "audio": "./assets/story-demo/cf080/cf080-page-06.mp3",
@@ -25418,8 +25648,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "runs!”",
-            "kitchen",
-            "heard"
+            "snack.",
+            "glad"
           ],
           "image": "./assets/story-demo/cf080/pages/page-07.webp",
           "audio": "./assets/story-demo/cf080/cf080-page-07.mp3",
@@ -25445,8 +25675,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "score,”",
-            "Whenever",
-            "leave"
+            "most",
+            "scored,”"
           ],
           "image": "./assets/story-demo/cf080/pages/page-08.webp",
           "audio": "./assets/story-demo/cf080/cf080-page-08.mp3",
@@ -25474,8 +25704,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "innings.",
-            "Maybe",
-            "should"
+            "exciting",
+            "snack."
           ],
           "image": "./assets/story-demo/cf080/pages/page-09.webp",
           "audio": "./assets/story-demo/cf080/cf080-page-09.mp3",
@@ -25504,8 +25734,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "innings!”",
-            "Good",
-            "news"
+            "gone,",
+            "watching"
           ],
           "image": "./assets/story-demo/cf080/pages/page-10.webp",
           "audio": "./assets/story-demo/cf080/cf080-page-10.mp3",
@@ -25542,8 +25772,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "museum,”",
-            "art",
-            "having"
+            "three",
+            "more"
           ],
           "image": "./assets/story-demo/cf081/pages/page-01.webp",
           "audio": "./assets/story-demo/cf081/cf081-page-01.mp3",
@@ -25571,8 +25801,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "list,”",
-            "museum",
-            "kids"
+            "know!”",
+            "meet"
           ],
           "image": "./assets/story-demo/cf081/pages/page-02.webp",
           "audio": "./assets/story-demo/cf081/cf081-page-02.mp3",
@@ -25602,8 +25832,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "painting",
-            "worked",
-            "together"
+            "know!”",
+            "found"
           ],
           "image": "./assets/story-demo/cf081/pages/page-03.webp",
           "audio": "./assets/story-demo/cf081/cf081-page-03.mp3",
@@ -25629,8 +25859,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "lost",
-            "sent",
-            "text"
+            "room.",
+            "know!”"
           ],
           "image": "./assets/story-demo/cf081/pages/page-04.webp",
           "audio": "./assets/story-demo/cf081/cf081-page-04.mp3",
@@ -25656,8 +25886,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "together.",
-            "texted",
-            "found"
+            "find",
+            "statue"
           ],
           "image": "./assets/story-demo/cf081/pages/page-05.webp",
           "audio": "./assets/story-demo/cf081/cf081-page-05.mp3",
@@ -25683,12 +25913,13 @@ window.KakaCarterManifest = {
             "dancer."
           ],
           "blanks": [
-            "dancer."
+            "need",
+            "three"
           ],
           "choices": [
-            "dancer.",
-            "Later",
-            "stared"
+            "need three",
+            "find everything",
+            "first item."
           ],
           "image": "./assets/story-demo/cf081/pages/page-06.webp",
           "audio": "./assets/story-demo/cf081/cf081-page-06.mp3",
@@ -25713,8 +25944,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "room.",
-            "found",
-            "bed"
+            "museum,”",
+            "list,”"
           ],
           "image": "./assets/story-demo/cf081/pages/page-07.webp",
           "audio": "./assets/story-demo/cf081/cf081-page-07.mp3",
@@ -25738,12 +25969,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "wears,”"
+            "find",
+            "something"
           ],
           "choices": [
-            "wears,”",
-            "looked",
-            "list"
+            "find something",
+            "find everything",
+            "first item."
           ],
           "image": "./assets/story-demo/cf081/pages/page-08.webp",
           "audio": "./assets/story-demo/cf081/cf081-page-08.mp3",
@@ -25770,8 +26002,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "room.",
-            "know",
-            "led"
+            "item.",
+            "dog.”"
           ],
           "image": "./assets/story-demo/cf081/pages/page-09.webp",
           "audio": "./assets/story-demo/cf081/cf081-page-09.mp3",
@@ -25798,8 +26030,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "find",
-            "finished",
-            "smiled"
+            "art",
+            "large"
           ],
           "image": "./assets/story-demo/cf081/pages/page-10.webp",
           "audio": "./assets/story-demo/cf081/cf081-page-10.mp3",
@@ -25836,8 +26068,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "lake.",
-            "boys",
-            "excited"
+            "hook!”",
+            "reeled"
           ],
           "image": "./assets/story-demo/cf082/pages/page-01.webp",
           "audio": "./assets/story-demo/cf082/cf082-page-01.mp3",
@@ -25858,12 +26090,13 @@ window.KakaCarterManifest = {
             "phone."
           ],
           "blanks": [
+            "new",
             "phone."
           ],
           "choices": [
-            "phone.",
-            "excited",
-            "about"
+            "new phone.",
+            "fishing rods.",
+            "put bait"
           ],
           "image": "./assets/story-demo/cf082/pages/page-02.webp",
           "audio": "./assets/story-demo/cf082/cf082-page-02.mp3",
@@ -25889,8 +26122,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "rods.",
-            "picked",
-            "fishing"
+            "phone.",
+            "scare"
           ],
           "image": "./assets/story-demo/cf082/pages/page-03.webp",
           "audio": "./assets/story-demo/cf082/cf082-page-03.mp3",
@@ -25917,8 +26150,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hooks.",
-            "helped",
-            "boys"
+            "“Shh,",
+            "end"
           ],
           "image": "./assets/story-demo/cf082/pages/page-04.webp",
           "audio": "./assets/story-demo/cf082/cf082-page-04.mp3",
@@ -25945,8 +26178,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "away!”",
-            "saw",
-            "fancy"
+            "reeled",
+            "end"
           ],
           "image": "./assets/story-demo/cf082/pages/page-05.webp",
           "audio": "./assets/story-demo/cf082/cf082-page-05.mp3",
@@ -25973,8 +26206,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "shouted.",
-            "put",
-            "bait"
+            "excited",
+            "first"
           ],
           "image": "./assets/story-demo/cf082/pages/page-06.webp",
           "audio": "./assets/story-demo/cf082/cf082-page-06.mp3",
@@ -26000,8 +26233,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "dock.",
-            "ran",
-            "end"
+            "rods.",
+            "hook!”"
           ],
           "image": "./assets/story-demo/cf082/pages/page-07.webp",
           "audio": "./assets/story-demo/cf082/cf082-page-07.mp3",
@@ -26028,8 +26261,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "fish!”",
-            "hope",
-            "catch"
+            "rods.",
+            "away!”"
           ],
           "image": "./assets/story-demo/cf082/pages/page-08.webp",
           "audio": "./assets/story-demo/cf082/cf082-page-08.mp3",
@@ -26055,8 +26288,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "hand.",
-            "held",
-            "rod"
+            "fish",
+            "reeled"
           ],
           "image": "./assets/story-demo/cf082/pages/page-09.webp",
           "audio": "./assets/story-demo/cf082/cf082-page-09.mp3",
@@ -26080,12 +26313,13 @@ window.KakaCarterManifest = {
             "fish."
           ],
           "blanks": [
-            "fish."
-          ],
-          "choices": [
-            "fish.",
             "put",
             "away"
+          ],
+          "choices": [
+            "put away",
+            "new phone.",
+            "fishing rods."
           ],
           "image": "./assets/story-demo/cf082/pages/page-10.webp",
           "audio": "./assets/story-demo/cf082/cf082-page-10.mp3",
@@ -26117,12 +26351,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "best",
             "tricks!”"
           ],
           "choices": [
-            "tricks!”",
-            "Carters",
-            "enjoying"
+            "best tricks!”",
+            "magician whispered",
+            "small spaces"
           ],
           "image": "./assets/story-demo/cf083/pages/page-01.webp",
           "audio": "./assets/story-demo/cf083/cf083-page-01.mp3",
@@ -26152,8 +26387,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "seat.",
-            "magician",
-            "asked"
+            "pounded",
+            "nodded."
           ],
           "image": "./assets/story-demo/cf083/pages/page-02.webp",
           "audio": "./assets/story-demo/cf083/cf083-page-02.mp3",
@@ -26179,8 +26414,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "volunteer!”",
-            "ran",
-            "onto"
+            "tricks!”",
+            "waved"
           ],
           "image": "./assets/story-demo/cf083/pages/page-03.webp",
           "audio": "./assets/story-demo/cf083/cf083-page-03.mp3",
@@ -26207,8 +26442,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "empty,”",
-            "magician",
-            "opened"
+            "seat.",
+            "secret?”"
           ],
           "image": "./assets/story-demo/cf083/pages/page-04.webp",
           "audio": "./assets/story-demo/cf083/cf083-page-04.mp3",
@@ -26229,12 +26464,12 @@ window.KakaCarterManifest = {
             "ear."
           ],
           "blanks": [
-            "Oliver’s"
+            "something"
           ],
           "choices": [
-            "Oliver’s",
-            "began",
-            "look"
+            "something",
+            "disappear",
+            "make"
           ],
           "image": "./assets/story-demo/cf083/pages/page-05.webp",
           "audio": "./assets/story-demo/cf083/cf083-page-05.mp3",
@@ -26262,8 +26497,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "stepped",
-            "waved",
-            "audience"
+            "volunteer!”",
+            "either,”"
           ],
           "image": "./assets/story-demo/cf083/pages/page-06.webp",
           "audio": "./assets/story-demo/cf083/cf083-page-06.mp3",
@@ -26285,12 +26520,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "either,”"
-          ],
-          "choices": [
-            "either,”",
             "small",
             "spaces"
+          ],
+          "choices": [
+            "small spaces",
+            "best tricks!”",
+            "magician whispered"
           ],
           "image": "./assets/story-demo/cf083/pages/page-07.webp",
           "audio": "./assets/story-demo/cf083/cf083-page-07.mp3",
@@ -26315,8 +26551,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "pounded",
-            "box",
-            "Help"
+            "already",
+            "looks"
           ],
           "image": "./assets/story-demo/cf083/pages/page-08.webp",
           "audio": "./assets/story-demo/cf083/cf083-page-08.mp3",
@@ -26340,8 +26576,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "family.",
-            "Amazing",
-            "opened"
+            "see",
+            "spaces"
           ],
           "image": "./assets/story-demo/cf083/pages/page-09.webp",
           "audio": "./assets/story-demo/cf083/cf083-page-09.mp3",
@@ -26367,8 +26603,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "nodded.",
-            "question",
-            "learn"
+            "magician",
+            "waved"
           ],
           "image": "./assets/story-demo/cf083/pages/page-10.webp",
           "audio": "./assets/story-demo/cf083/cf083-page-10.mp3",
@@ -26403,8 +26639,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "dentist.",
-            "taking",
-            "shopping"
+            "says",
+            "arrived"
           ],
           "image": "./assets/story-demo/cf084/pages/page-01.webp",
           "audio": "./assets/story-demo/cf084/cf084-page-01.mp3",
@@ -26432,8 +26668,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "o’clock,”",
-            "meet",
-            "park"
+            "slide.",
+            "gave"
           ],
           "image": "./assets/story-demo/cf084/pages/page-02.webp",
           "audio": "./assets/story-demo/cf084/cf084-page-02.mp3",
@@ -26459,8 +26695,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "late.",
-            "arrived",
-            "few"
+            "park",
+            "eleven"
           ],
           "image": "./assets/story-demo/cf084/pages/page-03.webp",
           "audio": "./assets/story-demo/cf084/cf084-page-03.mp3",
@@ -26486,8 +26722,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "playground,”",
-            "Maybe",
-            "waiting"
+            "slide.",
+            "dentist."
           ],
           "image": "./assets/story-demo/cf084/pages/page-04.webp",
           "audio": "./assets/story-demo/cf084/cf084-page-04.mp3",
@@ -26513,8 +26749,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "slide.",
-            "played",
-            "swings"
+            "dentist.",
+            "gave"
           ],
           "image": "./assets/story-demo/cf084/pages/page-05.webp",
           "audio": "./assets/story-demo/cf084/cf084-page-05.mp3",
@@ -26540,8 +26776,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "slide.",
-            "asked",
-            "check"
+            "creek",
+            "we’ll"
           ],
           "image": "./assets/story-demo/cf084/pages/page-06.webp",
           "audio": "./assets/story-demo/cf084/cf084-page-06.mp3",
@@ -26562,12 +26798,13 @@ window.KakaCarterManifest = {
             "home.”"
           ],
           "blanks": [
+            "went",
             "home.”"
           ],
           "choices": [
-            "home.”",
-            "see",
-            "called"
+            "went home.”",
+            "eleven o’clock,”",
+            "minutes late."
           ],
           "image": "./assets/story-demo/cf084/pages/page-07.webp",
           "audio": "./assets/story-demo/cf084/cf084-page-07.mp3",
@@ -26589,12 +26826,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
+            "small",
             "park,”"
           ],
           "choices": [
-            "park,”",
-            "only",
-            "small"
+            "small park,”",
+            "eleven o’clock,”",
+            "minutes late."
           ],
           "image": "./assets/story-demo/cf084/pages/page-08.webp",
           "audio": "./assets/story-demo/cf084/cf084-page-08.mp3",
@@ -26620,8 +26858,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "minutes.”",
-            "texted",
-            "laughed"
+            "taking",
+            "went"
           ],
           "image": "./assets/story-demo/cf084/pages/page-09.webp",
           "audio": "./assets/story-demo/cf084/cf084-page-09.mp3",
@@ -26647,8 +26885,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "asked.",
-            "scratched",
-            "head"
+            "taking",
+            "o’clock,”"
           ],
           "image": "./assets/story-demo/cf084/pages/page-10.webp",
           "audio": "./assets/story-demo/cf084/cf084-page-10.mp3",
@@ -26695,8 +26933,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "help.”",
-            "neighborhood",
-            "Easter"
+            "used",
+            "other"
           ],
           "image": "./assets/story-demo/cf085/pages/page-01.webp",
           "audio": "./assets/story-demo/cf085/cf085-page-01.mp3",
@@ -26724,8 +26962,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "break,”",
-            "left",
-            "kids"
+            "color",
+            "more"
           ],
           "image": "./assets/story-demo/cf085/pages/page-02.webp",
           "audio": "./assets/story-demo/cf085/cf085-page-02.mp3",
@@ -26749,12 +26987,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "colors,”"
+            "make",
+            "other"
           ],
           "choices": [
-            "colors,”",
-            "looked",
-            "food"
+            "make other",
+            "eggs because",
+            "boiled these"
           ],
           "image": "./assets/story-demo/cf085/pages/page-03.webp",
           "audio": "./assets/story-demo/cf085/cf085-page-03.mp3",
@@ -26775,12 +27014,13 @@ window.KakaCarterManifest = {
             "said."
           ],
           "blanks": [
-            "purple,”"
+            "red",
+            "make"
           ],
           "choices": [
-            "purple,”",
-            "Blue",
-            "red"
+            "red make",
+            "eggs because",
+            "boiled these"
           ],
           "image": "./assets/story-demo/cf085/pages/page-04.webp",
           "audio": "./assets/story-demo/cf085/cf085-page-04.mp3",
@@ -26805,8 +27045,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "colors",
-            "thought",
-            "while"
+            "other",
+            "those"
           ],
           "image": "./assets/story-demo/cf085/pages/page-05.webp",
           "audio": "./assets/story-demo/cf085/cf085-page-05.mp3",
@@ -26834,12 +27074,12 @@ window.KakaCarterManifest = {
             "more."
           ],
           "blanks": [
-            "more."
+            "found"
           ],
           "choices": [
-            "more.",
-            "cried",
-            "any"
+            "found",
+            "“Blue",
+            "decide"
           ],
           "image": "./assets/story-demo/cf085/pages/page-06.webp",
           "audio": "./assets/story-demo/cf085/cf085-page-06.mp3",
@@ -26866,8 +27106,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "eggs,”",
-            "strange",
-            "color"
+            "decide",
+            "more"
           ],
           "image": "./assets/story-demo/cf085/pages/page-07.webp",
           "audio": "./assets/story-demo/cf085/cf085-page-07.mp3",
@@ -26892,8 +27132,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "eggs?”",
-            "Soon",
-            "came"
+            "decide",
+            "need"
           ],
           "image": "./assets/story-demo/cf085/pages/page-08.webp",
           "audio": "./assets/story-demo/cf085/cf085-page-08.mp3",
@@ -26919,8 +27159,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "refrigerator,”",
-            "used",
-            "those"
+            "those",
+            "strange"
           ],
           "image": "./assets/story-demo/cf085/pages/page-09.webp",
           "audio": "./assets/story-demo/cf085/cf085-page-09.mp3",
@@ -26942,8 +27182,8 @@ window.KakaCarterManifest = {
           ],
           "choices": [
             "gray.”",
-            "grinned",
-            "dyed"
+            "other",
+            "found"
           ],
           "image": "./assets/story-demo/cf085/pages/page-10.webp",
           "audio": "./assets/story-demo/cf085/cf085-page-10.mp3",

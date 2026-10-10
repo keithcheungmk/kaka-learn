@@ -19,6 +19,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "data" / "wacky-ricky-manifest.js"
 MANIFEST_PREFIX = "window.KakaWackyRickyManifest = "
+CARTER_MANIFEST = ROOT / "data" / "carter-family-manifest.js"
+CARTER_PREFIX = "window.KakaCarterManifest = "
 
 # Carter STOP_WORDS plus spoken contractions used by the Wacky Ricky picker.
 STOP_WORDS = {
@@ -47,7 +49,7 @@ FAMILY_NAMES = {
     "father", "forestwood", "gill", "grandma", "grandfather", "grandpa",
     "grandmother", "harry", "hopper", "judy", "kitty", "mama", "miss",
     "mom", "mommy", "mother", "mr", "mrs", "ms", "oliver", "papa", "peter",
-    "rachel", "richard", "ricky", "rover", "santa", "sir", "spike",
+    "honey", "rachel", "richard", "ricky", "rover", "santa", "sir", "spike",
     "tinker", "uncle", "veronica",
 }
 
@@ -474,6 +476,25 @@ def write_wacky_manifest(payload: dict, path: Path | None = None) -> None:
     manifest_path.write_text(MANIFEST_PREFIX + encoded + ";\n", encoding="utf-8")
 
 
+def load_carter_manifest(path: Path | None = None) -> dict:
+    manifest_path = path or CARTER_MANIFEST
+    text = manifest_path.read_text(encoding="utf-8")
+    if not text.startswith(CARTER_PREFIX):
+        raise ValueError(f"unexpected Carter Family manifest prefix in {manifest_path}")
+    return json.loads(text[len(CARTER_PREFIX):].rstrip().removesuffix(";"))
+
+
+def write_carter_manifest(payload: dict, path: Path | None = None) -> None:
+    manifest_path = path or CARTER_MANIFEST
+    encoded = json.dumps(payload, ensure_ascii=False, indent=2)
+    manifest_path.write_text(CARTER_PREFIX + encoded + ";\n", encoding="utf-8")
+
+
+def page_source_text(page: dict) -> str:
+    words = page.get("sentence") or tokenize(page.get("sourceText", ""))
+    return page.get("sourceText") or " ".join(words)
+
+
 def apply_blanks_to_manifest(payload: dict) -> dict:
     """Rewrite blanks/choices from each page's existing sentence/sourceText."""
     for book in payload.get("books", []):
@@ -487,8 +508,9 @@ def apply_blanks_to_manifest(payload: dict) -> dict:
         phrase_bank: list[str] = []
         for page in book.get("pages", []):
             words = page.get("sentence") or tokenize(page.get("sourceText", ""))
-            pair = find_phrase_pair(page.get("sourceText", ""), words)
-            one = pick_blank(page.get("sourceText", ""), words)
+            source = page_source_text(page)
+            pair = find_phrase_pair(source, words)
+            one = pick_blank(source, words)
             singles = [one] if one else []
             scored = None
             if pair:

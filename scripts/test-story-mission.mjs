@@ -58,8 +58,16 @@ for (const book of manifestBooks) {
   assert.equal(book.pages.length, book.pages.filter((item) => item.verificationStatus === 'verified').length, `${book.id} pages must be verified`);
   for (const item of book.pages) {
     assert.equal(item.choices.length, 3, `${book.id} page ${item.printedPage} should provide the answer plus two reviewed distractors; runtime adds a fourth`);
-    assert.equal(item.blanks.length, 1, `${book.id} page ${item.printedPage} should have one blank`);
-    assert.ok(item.sentence.includes(item.blanks[0]), `${book.id} blank must occur in the sentence`);
+    assert.ok(item.blanks.length === 1 || item.blanks.length === 2, `${book.id} page ${item.printedPage} should have one or two content blanks`);
+    for (const blank of item.blanks) {
+      assert.ok(item.sentence.includes(blank), `${book.id} blank ${blank} must occur in the sentence`);
+    }
+    if (item.blanks.length === 2) {
+      const phraseStart = item.sentence.reduce((found, word, index) => (
+        word === item.blanks[0] && item.sentence[index + 1] === item.blanks[1] ? index : found
+      ), -1);
+      assert.equal(item.sentence[phraseStart + 1], item.blanks[1], `${book.id} page ${item.printedPage} two-word blank must be consecutive`);
+    }
     await access(new URL(`../${item.image.slice(2)}`, import.meta.url), fsConstants.R_OK);
     await access(new URL(`../${item.audio.slice(2)}`, import.meta.url), fsConstants.R_OK);
   }
