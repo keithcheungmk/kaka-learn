@@ -108,6 +108,17 @@
 
   const OPTION_LABELS = ['A', 'B', 'C', 'D'];
   const normalizeOption = (word) => String(word || '').toLowerCase().replace(/[^a-z]/g, '');
+  const PHRASE_FALLBACKS = ['happy park', 'green house', 'little school', 'funny book'];
+
+  function blankAnswer(item) {
+    const blanks = item?.blanks || [];
+    if (blanks.length >= 2) return blanks.join(' ');
+    return blanks[0] || '';
+  }
+
+  function pageHasPhrase(item) {
+    return (item?.blanks || []).length >= 2;
+  }
 
   function shuffle(items, random) {
     const shuffled = [...items];
@@ -134,29 +145,35 @@
   function createQuestionPlan(bookOrId, random = Math.random, sourceBooks = BOOKS) {
     const book = typeof bookOrId === 'string' ? sourceBooks.find((candidate) => candidate.id === bookOrId) : bookOrId;
     if (!book?.pages?.length) return [];
-    const localWordPool = book.pages.flatMap((page) => [...(page.blanks || []), ...(page.choices || [])]);
-    const allWordPool = sourceBooks.flatMap((candidateBook) => candidateBook.pages.flatMap((page) => [...(page.blanks || []), ...(page.choices || [])]));
+    const pageAnswer = (page) => blankAnswer(page);
+    const localWordPool = book.pages.flatMap((page) => [pageAnswer(page), ...(page.choices || [])].filter(Boolean));
+    const allWordPool = sourceBooks.flatMap((candidateBook) => candidateBook.pages.flatMap((page) => [pageAnswer(page), ...(page.choices || [])].filter(Boolean)));
     const answerSlots = balancedAnswerSlots(book.pages.length, random);
 
     return book.pages.map((page, pageIndex) => {
-      const answer = page.blanks?.[0];
+      const answer = pageAnswer(page);
+      if (!answer) {
+        return { listenOnly: true, correctIndex: -1, answer: '', choices: new Array() };
+      }
       const existingChoices = [...new Set([answer, ...(page.choices || [])].filter(Boolean))];
       const used = new Set(existingChoices.map(normalizeOption));
       const visible = new Set((page.sentence || []).map(normalizeOption));
       const findCandidates = (pool) => [...new Map(pool
         .filter((word) => {
           const key = normalizeOption(word);
-          return key && !used.has(key) && !visible.has(key) && key.length <= 14;
+          const wantsPhrase = answer.includes(' ');
+          return key && !used.has(key) && !visible.has(key) && key.length <= 24 && (!wantsPhrase || String(word).includes(' '));
         })
         .map((word) => [normalizeOption(word), word])).values()];
       let candidates = findCandidates(localWordPool);
       if (!candidates.length) candidates = findCandidates(allWordPool);
       const answerLength = normalizeOption(answer).length;
       const closest = candidates.sort((left, right) => Math.abs(normalizeOption(left).length - answerLength) - Math.abs(normalizeOption(right).length - answerLength)).slice(0, 12);
-      const extraDistractor = closest.length ? closest[Math.floor(random() * closest.length)] : 'story';
+      const extraDistractor = closest.length ? closest[Math.floor(random() * closest.length)] : (answer.includes(' ') ? 'happy park' : 'story');
       const choices = [...existingChoices.slice(0, 3), extraDistractor];
       while (choices.length < 4 || new Set(choices.map(normalizeOption)).size < 4) {
-        const fallback = ['family', 'school', 'happy', 'playing'].find((word) => !choices.some((choice) => normalizeOption(choice) === normalizeOption(word)));
+        const fallbackPool = answer.includes(' ') ? PHRASE_FALLBACKS : ['family', 'school', 'happy', 'playing'];
+        const fallback = fallbackPool.find((word) => !choices.some((choice) => normalizeOption(choice) === normalizeOption(word)));
         if (!fallback) break;
         choices.push(fallback);
       }
@@ -264,7 +281,9 @@
     audio.onended = () => {
       if (listenBtn) listenBtn.disabled = false;
       if (after) after();
-      else if (feedback) feedback.textContent = 'Now fill the missing word.';
+      else if (feedback) {
+        feedback.textContent = pageHasFill(current()) ? 'Now fill the missing word.' : 'Now tap Next page.';
+      }
     };
     audio.onerror = () => {
       if (listenBtn) listenBtn.disabled = false;
@@ -276,11 +295,42 @@
     });
   }
 
+  function pageHasFill(item) {
+    return Boolean(item?.blanks?.[0]);
+  }
+
+  function lastTokenIndex(sentence, word) {
+    for (let index = sentence.length - 1; index >= 0; index -= 1) {
+      if (sentence[index] === word) return index;
+    }
+    return -1;
+  }
+
+  function lastPhraseIndex(sentence, first, second) {
+    for (let index = sentence.length - 2; index >= 0; index -= 1) {
+      if (sentence[index] === first && sentence[index + 1] === second) return index;
+    }
+    return -1;
+  }
+
   function tokenMarkup(item, { filled = false } = {}) {
-    const blankSet = new Set(item.blanks);
-    return item.sentence.map((word, index) => blankSet.has(word) && !filled
-      ? `<button type="button" class="story-fill-blank story-sentence-token" data-sentence-index="${index}" data-blank="${word}" aria-label="Missing word">${selectedWord || '?'}</button>`
-      : `<span class="story-sentence-word story-sentence-token${blankSet.has(word) ? ' is-filled' : ''}" data-sentence-index="${index}">${word}</span>`).join(' ');
+    const blanks = item.blanks || [];
+    const phrase = blanks.length >= 2;
+    const answer = blankAnswer(item);
+    const phraseStart = phrase ? lastPhraseIndex(item.sentence, blanks[0], blanks[1]) : -1;
+    const wordIndex = phrase ? -1 : lastTokenIndex(item.sentence, blanks[0]);
+    return item.sentence.map((word, index) => {
+      const isStart = phrase ? index === phraseStart : index === wordIndex;
+      const isTail = phrase && index === phraseStart + 1;
+      if (isTail) return '';
+      if (isStart && !filled) {
+        return `<button type="button" class="story-fill-blank story-sentence-token${phrase ? ' is-phrase' : ''}" data-sentence-index="${index}" data-blank="${answer}" aria-label="${phrase ? 'Missing words' : 'Missing word'}">${selectedWord || (phrase ? '? ?' : '?')}</button>`;
+      }
+      if (isStart && filled) {
+        return `<span class="story-sentence-word story-sentence-token is-filled" data-sentence-index="${index}">${selectedWord || answer || word}</span>`;
+      }
+      return `<span class="story-sentence-word story-sentence-token" data-sentence-index="${index}">${word}</span>`;
+    }).filter(Boolean).join(' ');
   }
 
   function setReadingUi(disabled) {
@@ -422,18 +472,49 @@
     speech.speakEnglishTerm?.(word, { rate: 1.0, pitch: 1.05 });
   }
 
+  function completeListenOnlyPage(item) {
+    if (solved) return;
+    solved = true;
+    busy = false;
+    phase = 'fill';
+    const list = pages();
+    const feedback = $('#story-play-feedback');
+    if (feedback) { feedback.textContent = 'Great listening!'; feedback.className = 'feedback ok'; }
+    $('#story-play-lead').textContent = '呢一頁聽完就可以去下一頁。';
+    $('#story-play-stage')?.classList.add('is-solved');
+    $('#story-play-stage')?.classList.remove('is-listening');
+    const panel = $('.story-fill-panel');
+    if (panel && !$('#btn-story-next')) {
+      panel.insertAdjacentHTML('beforeend', `<button type="button" class="btn btn-primary story-next-page" id="btn-story-next">${pageIndex === list.length - 1 ? 'Finish story →' : 'Next page →'}</button>`);
+      $('#btn-story-next')?.addEventListener('click', nextPage);
+    }
+    void awardStoryPageStar(item);
+    speakPraise();
+  }
+
+  function afterStoryAudio(item) {
+    $('#story-play-stage')?.classList.remove('is-listening');
+    if (solved) return;
+    if (pageHasFill(item)) unlockFill();
+    else completeListenOnlyPage(item);
+  }
+
   function renderChallenge({ autoPlay = false } = {}) {
     const book = activeBook();
     const item = current();
-    const choices = questionPlan[pageIndex]?.choices || item.choices;
+    const hasFill = pageHasFill(item);
+    const choices = hasFill ? (questionPlan[pageIndex]?.choices || item.choices || []) : [];
     const list = pages();
     const stage = $('#story-play-stage');
     const locked = phase === 'listen' && !solved;
     $('#btn-back-story-play').textContent = `← ${activeSeries().title} 書架`;
     $('#story-play-title').textContent = 'Read & Fill';
-    $('#story-play-lead').textContent = locked
-      ? '先聽這一頁故事；聽完就可以揀字。'
-      : '聽英文句子，揀字，再按 Submit。';
+    const phrase = pageHasPhrase(item);
+    $('#story-play-lead').textContent = !hasFill
+      ? (locked ? '先聽這一頁故事。' : '呢一頁聽完就可以去下一頁。')
+      : locked
+        ? '先聽這一頁故事；聽完就可以揀字。'
+        : (phrase ? '聽英文句子，揀兩個字，再按 Submit。' : '聽英文句子，揀字，再按 Submit。');
     $('#story-round-progress').textContent = `${pageIndex + 1}/${list.length}`;
     stage.classList.add('story-page-challenge');
     stage.classList.toggle('is-listening', locked);
@@ -443,26 +524,23 @@
         <button type="button" class="btn btn-secondary story-story-listen" id="btn-story-listen">🔊 Listen to the story</button>
         <audio data-story-demo preload="metadata" src="${item.audio}"></audio>
       </div>
-      <section class="story-fill-panel" aria-label="Sentence fill activity">
+      <section class="story-fill-panel" aria-label="${hasFill ? 'Sentence fill activity' : 'Story listen activity'}">
         <p class="story-source-tag">${book.title} · PDF page ${item.pdfPage}</p>
-        <h2>Fill the missing word</h2>
-        <p class="story-fill-sentence">${tokenMarkup(item, { filled: solved })}</p>
-        <button type="button" class="btn btn-ghost story-sentence-listen" id="btn-story-read-sentence"${locked || solved ? ' hidden' : ''}>🔊 Read this sentence</button>
-        <p class="story-fill-help"${locked ? ' hidden' : ''}>Choose one word, then press Submit.</p>
-        <div class="story-fill-bank" id="story-fill-bank">${choices.map((word, index) => `<button type="button" class="story-fill-tile${selectedWord === word ? ' selected' : ''}${solved && item.blanks.includes(word) ? ' correct' : ''}" draggable="${!locked && !busy && !reading && !solved}" data-word="${word}"${locked || busy || reading || solved ? ' disabled' : ''}><span class="story-choice-label" aria-hidden="true">${OPTION_LABELS[index]}</span><span class="story-choice-word">${word}</span></button>`).join('')}</div>
-        <button type="button" class="btn btn-primary story-fill-submit" id="btn-story-submit"${locked || solved ? ' hidden' : ''}${!selectedWord || busy || reading ? ' disabled' : ''}>Submit</button>
+        <h2>${hasFill ? (phrase ? 'Fill the missing words' : 'Fill the missing word') : 'Listen to this page'}</h2>
+        <p class="story-fill-sentence">${tokenMarkup(item, { filled: solved || !hasFill })}</p>
+        <button type="button" class="btn btn-ghost story-sentence-listen" id="btn-story-read-sentence"${!hasFill || locked || solved ? ' hidden' : ''}>🔊 Read this sentence</button>
+        <p class="story-fill-help"${!hasFill || locked ? ' hidden' : ''}>${phrase ? 'Choose the two missing words, then press Submit.' : 'Choose one word, then press Submit.'}</p>
+        ${hasFill ? `<div class="story-fill-bank" id="story-fill-bank">${choices.map((word, index) => `<button type="button" class="story-fill-tile${selectedWord === word ? ' selected' : ''}${solved && normalizeOption(word) === normalizeOption(blankAnswer(item)) ? ' correct' : ''}" draggable="${!locked && !busy && !reading && !solved}" data-word="${word}"${locked || busy || reading || solved ? ' disabled' : ''}><span class="story-choice-label" aria-hidden="true">${OPTION_LABELS[index]}</span><span class="story-choice-word">${word}</span></button>`).join('')}</div>
+        <button type="button" class="btn btn-primary story-fill-submit" id="btn-story-submit"${locked || solved ? ' hidden' : ''}${!selectedWord || busy || reading ? ' disabled' : ''}>Submit</button>` : ''}
       </section>`;
     $('#story-play-actions').innerHTML = '';
     $('#story-play-options').innerHTML = '';
     $('#btn-story-listen')?.addEventListener('click', () => {
       if (busy || reading) return;
       speech.cancelAllSpeech?.();
-      if (!solved) lockFillForStory();
+      if (!solved && hasFill) lockFillForStory();
       stage.classList.add('is-listening');
-      playPageAudio({ after: () => {
-        stage.classList.remove('is-listening');
-        if (!solved) unlockFill();
-      } });
+      playPageAudio({ after: () => afterStoryAudio(item) });
     });
     $('#btn-story-read-sentence')?.addEventListener('click', () => readSentenceWithHighlight(item));
     $$('.story-fill-tile', stage).forEach((tile) => {
@@ -476,10 +554,7 @@
     });
     $('#btn-story-submit')?.addEventListener('click', submitWord);
     if (autoPlay) {
-      playPageAudio({ after: () => {
-        stage.classList.remove('is-listening');
-        unlockFill();
-      } });
+      playPageAudio({ after: () => afterStoryAudio(item) });
     }
   }
 
@@ -489,14 +564,14 @@
     const word = selectedWord;
     if (busy || reading || solved || phase !== 'fill' || !word) return;
     const blank = $('.story-fill-blank');
-    if (!item.blanks.includes(word)) {
+    if (normalizeOption(word) !== normalizeOption(blankAnswer(item))) {
       const tile = $$('.story-fill-tile').find((candidate) => candidate.dataset.word === word);
       tile?.classList.add('wrong');
       speech.playTryAgainCue?.({ muted: muted() });
       $('#story-play-feedback').textContent = 'That’s okay. Try again!';
       $('#story-play-feedback').className = 'feedback retry';
       selectedWord = null;
-      if (blank) { blank.textContent = '?'; blank.classList.remove('has-selection'); }
+      if (blank) { blank.textContent = pageHasPhrase(item) ? '? ?' : '?'; blank.classList.remove('has-selection'); }
       $$('.story-fill-tile').forEach((candidate) => candidate.classList.remove('selected'));
       const submit = $('#btn-story-submit');
       if (submit) submit.disabled = true;

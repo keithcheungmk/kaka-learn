@@ -1020,6 +1020,17 @@ def check_pth_contract() -> None:
         fail("pth-contract", result.stderr[-1200:] or "PTH 回歸失敗")
 
 
+def check_wacky_ricky_blanks() -> None:
+    """Wacky Ricky／Little Fox 填空唔可以用人名、稱謂或英文虛詞。"""
+    result = subprocess.run(
+        [sys.executable, "scripts/test-wacky-ricky-blanks.py"],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        fail("wacky-ricky-blanks", (result.stderr or result.stdout)[-1200:] or "Wacky Ricky 填空檢查失敗")
+
+
 def check_chinese_mandarin() -> None:
     """中文詞語牆普通話：每個一般詞語要有預錄音，講法／manifest 唔可以過期。"""
     node = shutil.which("node")
@@ -1074,6 +1085,7 @@ CHECKS = [
     check_book_scans_shelf,
     check_family_storybook_entry,
     check_family_names,
+    check_wacky_ricky_blanks,
     check_asset_weight,
 ]
 

@@ -97,19 +97,42 @@ for (const book of magicBooks) {
   assert.ok(plan.every((question) => question.choices.length === 4 && question.choices[question.correctIndex] === question.answer), `${book.id} answers should render with one correct choice among four`);
   assert.ok(plan.every((question) => new Set(question.choices.map(normalize)).size === 4), `${book.id} should have four different choices on every page`);
 }
+const rejectedWackyNames = new Set([
+  'ricky', 'rachel', 'brenda', 'brian', 'kitty', 'richard', 'veronica',
+  'mom', 'dad', 'mommy', 'daddy', 'mrs', 'mr', 'ms',
+]);
+const isWackyName = (key) => rejectedWackyNames.has(key) || rejectedWackyNames.has(key.replace(/s$/, ''));
+assert.match(source, /listenOnly/, 'Runtime may keep a listen-only safety path, but Wacky pages must all have fills');
+assert.match(source, /lastTokenIndex/, 'Repeated content words should blank only the last occurrence');
 for (const book of wackyBooks) {
   assert.equal(book.editorialStatus, 'review_required', `${book.id} should remain marked as unreviewed`);
   for (const item of book.pages) {
     assert.equal(item.contentStatus, 'auto_generated_pending_review');
     assert.equal(item.listeningStatus, 'pending');
-    assert.equal(item.choices.length, 3);
-    assert.ok(item.sentence.includes(item.blanks[0]));
+    assert.ok(item.blanks.length === 1 || item.blanks.length === 2, `${book.id} page ${item.printedPage} should have one or two content blanks`);
+    assert.equal(item.choices.length, 3, `${book.id} page ${item.printedPage} should define the answer and two distractors`);
+    const pageKeys = item.sentence.map((word) => normalize(word)).filter(Boolean);
+    const onlyNames = pageKeys.every((key) => isWackyName(key) || /^\d+$/.test(key));
+    for (const blank of item.blanks) {
+      assert.ok(item.sentence.includes(blank), `${book.id} blank ${blank} should appear in the sentence`);
+      const blankKey = normalize(blank);
+      if (!onlyNames) {
+        assert.ok(!isWackyName(blankKey), `${book.id} page ${item.printedPage} blank ${blank} must not be a name`);
+      }
+    }
+    if (item.blanks.length === 2) {
+      const phraseStart = item.sentence.reduce((found, word, index) => (
+        word === item.blanks[0] && item.sentence[index + 1] === item.blanks[1] ? index : found
+      ), -1);
+      assert.equal(item.sentence[phraseStart + 1], item.blanks[1], `${book.id} page ${item.printedPage} two-word blank must be consecutive`);
+      assert.ok(item.choices[0].includes(' '), `${book.id} page ${item.printedPage} phrase choices should be two words`);
+    }
     await access(new URL(`../${item.image.slice(2)}`, import.meta.url), fsConstants.R_OK);
     await access(new URL(`../${item.audio.slice(2)}`, import.meta.url), fsConstants.R_OK);
   }
   const plan = Array.from(storyDemo.createQuestionPlan(book, seededRandom(book.id.charCodeAt(2)), wackyBooks));
   assert.equal(plan.length, book.pages.length);
-  assert.ok(plan.every((question) => question.choices.length === 4 && question.choices[question.correctIndex] === question.answer));
+  assert.ok(plan.every((question) => question.choices.length === 4 && question.choices[question.correctIndex] === question.answer && !question.listenOnly));
 }
 for (const book of storyDemo.books) {
   let sawDifferentRun = false;
