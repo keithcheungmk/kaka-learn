@@ -1,0 +1,7 @@
+{
+  "book": "rb_fengwan", "series": "red_series", "allow_words": true,
+  "source": "2026-09-05 掃描書本認字卡（紅⑩《風跟我玩》）",
+  "cards": [
+    {"char":"小帆船"},{"char":"小頑皮"},{"char":"吹泡泡"},{"char":"跟我玩"},{"char":"了"},{"char":"是"},{"char":"我"},{"char":"風"},{"char":"玩"},{"char":"個"},{"char":"的"},{"char":"跟"},{"char":"紙"},{"char":"頭髮"},{"char":"飛機"},{"char":"風車"},{"char":"氣球"},{"char":"我的"},{"char":"吹亂"},{"char":"紙飛機"}
+  ]
+}

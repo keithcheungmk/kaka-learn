@@ -1,0 +1,3639 @@
+{
+  "version": 1,
+  "source": "macOS Tingting",
+  "locale": "zh_CN",
+  "kind": "synthetic-word-recordings",
+  "excludedTopics": [
+    "orange_series",
+    "red_series"
+  ],
+  "items": [
+    {
+      "id": "yi",
+      "term": "一",
+      "mandarinTerm": "一",
+      "speech": "一",
+      "speechText": "一",
+      "duration": 0.459,
+      "bytes": 3049
+    },
+    {
+      "id": "er",
+      "term": "二",
+      "mandarinTerm": "二",
+      "speech": "二",
+      "speechText": "二",
+      "duration": 0.506,
+      "bytes": 3321
+    },
+    {
+      "id": "san",
+      "term": "三",
+      "mandarinTerm": "三",
+      "speech": "三",
+      "speechText": "三",
+      "duration": 0.621,
+      "bytes": 3823
+    },
+    {
+      "id": "si",
+      "term": "四",
+      "mandarinTerm": "四",
+      "speech": "四",
+      "speechText": "四",
+      "duration": 0.516,
+      "bytes": 3297
+    },
+    {
+      "id": "wu",
+      "term": "五",
+      "mandarinTerm": "五",
+      "speech": "五",
+      "speechText": "五",
+      "duration": 0.472,
+      "bytes": 3051
+    },
+    {
+      "id": "liu",
+      "term": "六",
+      "mandarinTerm": "六",
+      "speech": "六",
+      "speechText": "六",
+      "duration": 0.565,
+      "bytes": 3643
+    },
+    {
+      "id": "qi",
+      "term": "七",
+      "mandarinTerm": "七",
+      "speech": "七",
+      "speechText": "七",
+      "duration": 0.566,
+      "bytes": 3594
+    },
+    {
+      "id": "ba",
+      "term": "八",
+      "mandarinTerm": "八",
+      "speech": "八",
+      "speechText": "八",
+      "duration": 0.455,
+      "bytes": 3064
+    },
+    {
+      "id": "jiu",
+      "term": "九",
+      "mandarinTerm": "九",
+      "speech": "九",
+      "speechText": "九",
+      "duration": 0.543,
+      "bytes": 3607
+    },
+    {
+      "id": "shi",
+      "term": "十",
+      "mandarinTerm": "十",
+      "speech": "十",
+      "speechText": "十",
+      "duration": 0.622,
+      "bytes": 3988
+    },
+    {
+      "id": "hong",
+      "term": "紅色",
+      "mandarinTerm": "紅色",
+      "speech": "紅色",
+      "speechText": "红色",
+      "duration": 0.766,
+      "bytes": 4770
+    },
+    {
+      "id": "huang",
+      "term": "黃色",
+      "mandarinTerm": "黃色",
+      "speech": "黃色",
+      "speechText": "黄色",
+      "duration": 0.802,
+      "bytes": 5152
+    },
+    {
+      "id": "lan",
+      "term": "藍色",
+      "mandarinTerm": "藍色",
+      "speech": "藍色",
+      "speechText": "蓝色",
+      "duration": 0.761,
+      "bytes": 4884
+    },
+    {
+      "id": "lv",
+      "term": "綠色",
+      "mandarinTerm": "綠色",
+      "speech": "綠色",
+      "speechText": "绿色",
+      "duration": 0.691,
+      "bytes": 4315
+    },
+    {
+      "id": "bai",
+      "term": "白色",
+      "mandarinTerm": "白色",
+      "speech": "白色",
+      "speechText": "白色",
+      "duration": 0.71,
+      "bytes": 4456
+    },
+    {
+      "id": "hei",
+      "term": "黑色",
+      "mandarinTerm": "黑色",
+      "speech": "黑色",
+      "speechText": "黑色",
+      "duration": 0.761,
+      "bytes": 4876
+    },
+    {
+      "id": "zi",
+      "term": "紫色",
+      "mandarinTerm": "紫色",
+      "speech": "紫色",
+      "speechText": "紫色",
+      "duration": 0.68,
+      "bytes": 4312
+    },
+    {
+      "id": "fenhong",
+      "term": "粉紅",
+      "mandarinTerm": "粉紅",
+      "speech": "粉紅",
+      "speechText": "粉红",
+      "duration": 0.842,
+      "bytes": 5451
+    },
+    {
+      "id": "chengse",
+      "term": "橙色",
+      "mandarinTerm": "橙色",
+      "speech": "橙色",
+      "speechText": "橙色",
+      "duration": 0.756,
+      "bytes": 4917
+    },
+    {
+      "id": "kafeise",
+      "term": "咖啡色",
+      "mandarinTerm": "咖啡色",
+      "speech": "咖啡色",
+      "speechText": "咖啡色",
+      "duration": 0.972,
+      "bytes": 6171
+    },
+    {
+      "id": "da_big",
+      "term": "大",
+      "mandarinTerm": "大",
+      "speech": "大",
+      "speechText": "大",
+      "duration": 0.437,
+      "bytes": 2784
+    },
+    {
+      "id": "xiao_small",
+      "term": "小",
+      "mandarinTerm": "小",
+      "speech": "小",
+      "speechText": "小",
+      "duration": 0.598,
+      "bytes": 3900
+    },
+    {
+      "id": "duo",
+      "term": "多",
+      "mandarinTerm": "多",
+      "speech": "多",
+      "speechText": "多",
+      "duration": 0.471,
+      "bytes": 3135
+    },
+    {
+      "id": "shao",
+      "term": "少",
+      "mandarinTerm": "少",
+      "speech": "少",
+      "speechText": "少",
+      "duration": 0.599,
+      "bytes": 3887
+    },
+    {
+      "id": "chang_long",
+      "term": "長",
+      "mandarinTerm": "長",
+      "speech": "常",
+      "speechText": "常",
+      "duration": 0.604,
+      "bytes": 3891
+    },
+    {
+      "id": "duan_short",
+      "term": "短",
+      "mandarinTerm": "短",
+      "speech": "短",
+      "speechText": "短",
+      "duration": 0.53,
+      "bytes": 3327
+    },
+    {
+      "id": "gao_tall",
+      "term": "高",
+      "mandarinTerm": "高",
+      "speech": "高",
+      "speechText": "高",
+      "duration": 0.513,
+      "bytes": 3290
+    },
+    {
+      "id": "ai_short_height",
+      "term": "矮",
+      "mandarinTerm": "矮",
+      "speech": "矮",
+      "speechText": "矮",
+      "duration": 0.604,
+      "bytes": 3840
+    },
+    {
+      "id": "shang",
+      "term": "上",
+      "mandarinTerm": "上",
+      "speech": "上",
+      "speechText": "上",
+      "duration": 0.575,
+      "bytes": 3622
+    },
+    {
+      "id": "xia",
+      "term": "下",
+      "mandarinTerm": "下",
+      "speech": "下",
+      "speechText": "下",
+      "duration": 0.54,
+      "bytes": 3595
+    },
+    {
+      "id": "qian_front",
+      "term": "前",
+      "mandarinTerm": "前",
+      "speech": "前",
+      "speechText": "前",
+      "duration": 0.637,
+      "bytes": 4127
+    },
+    {
+      "id": "hou_back",
+      "term": "後",
+      "mandarinTerm": "後",
+      "speech": "後",
+      "speechText": "后",
+      "duration": 0.535,
+      "bytes": 3383
+    },
+    {
+      "id": "zuo_left",
+      "term": "左",
+      "mandarinTerm": "左",
+      "speech": "左",
+      "speechText": "左",
+      "duration": 0.518,
+      "bytes": 3301
+    },
+    {
+      "id": "you_right",
+      "term": "右",
+      "mandarinTerm": "右",
+      "speech": "右",
+      "speechText": "右",
+      "duration": 0.529,
+      "bytes": 3343
+    },
+    {
+      "id": "limian",
+      "term": "裏面",
+      "mandarinTerm": "裏面",
+      "speech": "裏面",
+      "speechText": "里面",
+      "duration": 0.728,
+      "bytes": 4581
+    },
+    {
+      "id": "waimian",
+      "term": "外面",
+      "mandarinTerm": "外面",
+      "speech": "外面",
+      "speechText": "外面",
+      "duration": 0.762,
+      "bytes": 4821
+    },
+    {
+      "id": "ri",
+      "term": "太陽",
+      "mandarinTerm": "太陽",
+      "speech": "太陽",
+      "speechText": "太阳",
+      "duration": 0.761,
+      "bytes": 4913
+    },
+    {
+      "id": "yue",
+      "term": "月亮",
+      "mandarinTerm": "月亮",
+      "speech": "月亮",
+      "speechText": "月亮",
+      "duration": 0.726,
+      "bytes": 4637
+    },
+    {
+      "id": "yun",
+      "term": "雲朵",
+      "mandarinTerm": "雲朵",
+      "speech": "雲朵",
+      "speechText": "云朵",
+      "duration": 0.726,
+      "bytes": 4641
+    },
+    {
+      "id": "yu_rain",
+      "term": "下雨",
+      "mandarinTerm": "下雨",
+      "speech": "下雨",
+      "speechText": "下雨",
+      "duration": 0.761,
+      "bytes": 4923
+    },
+    {
+      "id": "xue",
+      "term": "雪花",
+      "mandarinTerm": "雪花",
+      "speech": "雪花",
+      "speechText": "雪花",
+      "duration": 0.915,
+      "bytes": 5696
+    },
+    {
+      "id": "feng",
+      "term": "大風",
+      "mandarinTerm": "大風",
+      "speech": "大風",
+      "speechText": "大风",
+      "duration": 0.784,
+      "bytes": 4831
+    },
+    {
+      "id": "dian",
+      "term": "閃電",
+      "mandarinTerm": "閃電",
+      "speech": "閃電",
+      "speechText": "闪电",
+      "duration": 0.841,
+      "bytes": 5409
+    },
+    {
+      "id": "caihong",
+      "term": "彩虹",
+      "mandarinTerm": "彩虹",
+      "speech": "彩虹",
+      "speechText": "彩虹",
+      "duration": 0.825,
+      "bytes": 5119
+    },
+    {
+      "id": "xingxing",
+      "term": "星星",
+      "mandarinTerm": "星星",
+      "speech": "星星",
+      "speechText": "星星",
+      "duration": 0.923,
+      "bytes": 5857
+    },
+    {
+      "id": "tiankong",
+      "term": "天空",
+      "mandarinTerm": "天空",
+      "speech": "天空",
+      "speechText": "天空",
+      "duration": 0.867,
+      "bytes": 5400
+    },
+    {
+      "id": "hua",
+      "term": "花",
+      "mandarinTerm": "花",
+      "speech": "花",
+      "speechText": "花",
+      "duration": 0.57,
+      "bytes": 3548
+    },
+    {
+      "id": "cao",
+      "term": "草",
+      "mandarinTerm": "草",
+      "speech": "草",
+      "speechText": "草",
+      "duration": 0.569,
+      "bytes": 3559
+    },
+    {
+      "id": "shu_tree",
+      "term": "樹",
+      "mandarinTerm": "樹",
+      "speech": "樹",
+      "speechText": "树",
+      "duration": 0.506,
+      "bytes": 3356
+    },
+    {
+      "id": "hai",
+      "term": "海",
+      "mandarinTerm": "海",
+      "speech": "海",
+      "speechText": "海",
+      "duration": 0.556,
+      "bytes": 3601
+    },
+    {
+      "id": "sha",
+      "term": "沙",
+      "mandarinTerm": "沙",
+      "speech": "沙",
+      "speechText": "沙",
+      "duration": 0.564,
+      "bytes": 3622
+    },
+    {
+      "id": "huo",
+      "term": "火",
+      "mandarinTerm": "火",
+      "speech": "火",
+      "speechText": "火",
+      "duration": 0.523,
+      "bytes": 3254
+    },
+    {
+      "id": "ye",
+      "term": "葉",
+      "mandarinTerm": "葉",
+      "speech": "葉",
+      "speechText": "叶",
+      "duration": 0.436,
+      "bytes": 2693
+    },
+    {
+      "id": "che",
+      "term": "汽車",
+      "mandarinTerm": "汽車",
+      "speech": "汽車",
+      "speechText": "汽车",
+      "duration": 0.833,
+      "bytes": 5285
+    },
+    {
+      "id": "bashi",
+      "term": "巴士",
+      "mandarinTerm": "巴士",
+      "speech": "巴士",
+      "speechText": "巴士",
+      "duration": 0.722,
+      "bytes": 4603
+    },
+    {
+      "id": "huoche",
+      "term": "火車",
+      "mandarinTerm": "火車",
+      "speech": "火車",
+      "speechText": "火车",
+      "duration": 0.837,
+      "bytes": 5411
+    },
+    {
+      "id": "feiji",
+      "term": "飛機",
+      "mandarinTerm": "飛機",
+      "speech": "飛機",
+      "speechText": "飞机",
+      "duration": 0.819,
+      "bytes": 5174
+    },
+    {
+      "id": "chuan",
+      "term": "輪船",
+      "mandarinTerm": "輪船",
+      "speech": "輪船",
+      "speechText": "轮船",
+      "duration": 0.948,
+      "bytes": 5957
+    },
+    {
+      "id": "danche",
+      "term": "單車",
+      "mandarinTerm": "自行車",
+      "speech": "自行車",
+      "speechText": "自行车",
+      "duration": 1.029,
+      "bytes": 6429
+    },
+    {
+      "id": "dishi",
+      "term": "的士",
+      "mandarinTerm": "出租車",
+      "speech": "出租車",
+      "speechText": "出租车",
+      "duration": 1.046,
+      "bytes": 6690
+    },
+    {
+      "id": "dianche",
+      "term": "電車",
+      "mandarinTerm": "電車",
+      "speech": "電車",
+      "speechText": "电车",
+      "duration": 0.809,
+      "bytes": 5168
+    },
+    {
+      "id": "ditie",
+      "term": "地鐵",
+      "mandarinTerm": "地鐵",
+      "speech": "地鐵",
+      "speechText": "地铁",
+      "duration": 0.68,
+      "bytes": 4312
+    },
+    {
+      "id": "motuoche",
+      "term": "摩托車",
+      "mandarinTerm": "摩托車",
+      "speech": "摩托車",
+      "speechText": "摩托车",
+      "duration": 1.03,
+      "bytes": 6407
+    },
+    {
+      "id": "xiaofangche",
+      "term": "消防車",
+      "mandarinTerm": "消防車",
+      "speech": "消防車",
+      "speechText": "消防车",
+      "duration": 1.156,
+      "bytes": 7263
+    },
+    {
+      "id": "jiuhuche",
+      "term": "救護車",
+      "mandarinTerm": "救護車",
+      "speech": "救護車",
+      "speechText": "救护车",
+      "duration": 1.054,
+      "bytes": 6735
+    },
+    {
+      "id": "jingche",
+      "term": "警察車",
+      "mandarinTerm": "警車",
+      "speech": "警車",
+      "speechText": "警车",
+      "duration": 0.833,
+      "bytes": 5166
+    },
+    {
+      "id": "yan",
+      "term": "眼睛",
+      "mandarinTerm": "眼睛",
+      "speech": "眼睛",
+      "speechText": "眼睛",
+      "duration": 0.832,
+      "bytes": 5230
+    },
+    {
+      "id": "erduo",
+      "term": "耳朵",
+      "mandarinTerm": "耳朵",
+      "speech": "耳朵",
+      "speechText": "耳朵",
+      "duration": 0.706,
+      "bytes": 4327
+    },
+    {
+      "id": "bi",
+      "term": "鼻子",
+      "mandarinTerm": "鼻子",
+      "speech": "鼻子",
+      "speechText": "鼻子",
+      "duration": 0.617,
+      "bytes": 3779
+    },
+    {
+      "id": "kou",
+      "term": "嘴巴",
+      "mandarinTerm": "嘴巴",
+      "speech": "嘴巴",
+      "speechText": "嘴巴",
+      "duration": 0.739,
+      "bytes": 4536
+    },
+    {
+      "id": "shou",
+      "term": "手",
+      "mandarinTerm": "手",
+      "speech": "手",
+      "speechText": "手",
+      "duration": 0.587,
+      "bytes": 3871
+    },
+    {
+      "id": "jiao",
+      "term": "腳",
+      "mandarinTerm": "腳",
+      "speech": "腳",
+      "speechText": "脚",
+      "duration": 0.555,
+      "bytes": 3597
+    },
+    {
+      "id": "tou",
+      "term": "頭",
+      "mandarinTerm": "頭",
+      "speech": "頭",
+      "speechText": "头",
+      "duration": 0.542,
+      "bytes": 3614
+    },
+    {
+      "id": "xin",
+      "term": "心",
+      "mandarinTerm": "心",
+      "speech": "心",
+      "speechText": "心",
+      "duration": 0.633,
+      "bytes": 4075
+    },
+    {
+      "id": "kaixin",
+      "term": "開心",
+      "mandarinTerm": "開心",
+      "speech": "開心",
+      "speechText": "开心",
+      "duration": 0.856,
+      "bytes": 5395
+    },
+    {
+      "id": "bukaixin",
+      "term": "不開心",
+      "mandarinTerm": "不開心",
+      "speech": "不開心",
+      "speechText": "不开心",
+      "duration": 1.059,
+      "bytes": 6681
+    },
+    {
+      "id": "shengqi",
+      "term": "生氣",
+      "mandarinTerm": "生氣",
+      "speech": "生氣",
+      "speechText": "生气",
+      "duration": 0.817,
+      "bytes": 5171
+    },
+    {
+      "id": "haipa",
+      "term": "害怕",
+      "mandarinTerm": "害怕",
+      "speech": "害怕",
+      "speechText": "害怕",
+      "duration": 0.835,
+      "bytes": 5393
+    },
+    {
+      "id": "jingxi",
+      "term": "驚喜",
+      "mandarinTerm": "驚喜",
+      "speech": "驚喜",
+      "speechText": "惊喜",
+      "duration": 0.775,
+      "bytes": 4933
+    },
+    {
+      "id": "haixiu",
+      "term": "害羞",
+      "mandarinTerm": "害羞",
+      "speech": "害羞",
+      "speechText": "害羞",
+      "duration": 0.835,
+      "bytes": 5342
+    },
+    {
+      "id": "zou",
+      "term": "走",
+      "mandarinTerm": "走",
+      "speech": "走",
+      "speechText": "走",
+      "duration": 0.529,
+      "bytes": 3310
+    },
+    {
+      "id": "pao",
+      "term": "跑",
+      "mandarinTerm": "跑",
+      "speech": "跑",
+      "speechText": "跑",
+      "duration": 0.494,
+      "bytes": 3309
+    },
+    {
+      "id": "tiao",
+      "term": "跳",
+      "mandarinTerm": "跳",
+      "speech": "跳",
+      "speechText": "跳",
+      "duration": 0.542,
+      "bytes": 3593
+    },
+    {
+      "id": "zuo_sit",
+      "term": "坐",
+      "mandarinTerm": "坐",
+      "speech": "坐",
+      "speechText": "坐",
+      "duration": 0.506,
+      "bytes": 3337
+    },
+    {
+      "id": "zhan",
+      "term": "站",
+      "mandarinTerm": "站",
+      "speech": "站",
+      "speechText": "站",
+      "duration": 0.501,
+      "bytes": 3367
+    },
+    {
+      "id": "pa",
+      "term": "爬",
+      "mandarinTerm": "爬",
+      "speech": "爬",
+      "speechText": "爬",
+      "duration": 0.505,
+      "bytes": 3387
+    },
+    {
+      "id": "diedao",
+      "term": "跌倒",
+      "mandarinTerm": "跌倒",
+      "speech": "跌倒",
+      "speechText": "跌倒",
+      "duration": 0.716,
+      "bytes": 4636
+    },
+    {
+      "id": "shuijiao",
+      "term": "睡覺",
+      "mandarinTerm": "睡覺",
+      "speech": "睡覺",
+      "speechText": "睡觉",
+      "duration": 0.829,
+      "bytes": 5198
+    },
+    {
+      "id": "chi_fan",
+      "term": "吃飯",
+      "mandarinTerm": "吃飯",
+      "speech": "吃飯",
+      "speechText": "吃饭",
+      "duration": 0.779,
+      "bytes": 4846
+    },
+    {
+      "id": "he_shui",
+      "term": "喝水",
+      "mandarinTerm": "喝水",
+      "speech": "喝水",
+      "speechText": "喝水",
+      "duration": 0.819,
+      "bytes": 5054
+    },
+    {
+      "id": "xi_shou",
+      "term": "洗手",
+      "mandarinTerm": "洗手",
+      "speech": "洗手",
+      "speechText": "洗手",
+      "duration": 0.854,
+      "bytes": 5425
+    },
+    {
+      "id": "shua_ya",
+      "term": "刷牙",
+      "mandarinTerm": "刷牙",
+      "speech": "刷牙",
+      "speechText": "刷牙",
+      "duration": 0.829,
+      "bytes": 5256
+    },
+    {
+      "id": "chuan_yifu",
+      "term": "穿衣服",
+      "mandarinTerm": "穿衣服",
+      "speech": "穿衣服",
+      "speechText": "穿衣服",
+      "duration": 1.069,
+      "bytes": 6711
+    },
+    {
+      "id": "tuo_yifu",
+      "term": "脫衣服",
+      "mandarinTerm": "脫衣服",
+      "speech": "脫衣服",
+      "speechText": "脱衣服",
+      "duration": 0.889,
+      "bytes": 5711
+    },
+    {
+      "id": "kan_shu",
+      "term": "看書",
+      "mandarinTerm": "看書",
+      "speech": "看書",
+      "speechText": "看书",
+      "duration": 0.786,
+      "bytes": 4913
+    },
+    {
+      "id": "ting_yinyue",
+      "term": "聽音樂",
+      "mandarinTerm": "聽音樂",
+      "speech": "聽音樂",
+      "speechText": "听音乐",
+      "duration": 0.937,
+      "bytes": 5918
+    },
+    {
+      "id": "shuo_hua",
+      "term": "說話",
+      "mandarinTerm": "說話",
+      "speech": "說話",
+      "speechText": "说话",
+      "duration": 0.782,
+      "bytes": 4884
+    },
+    {
+      "id": "xiezi_write",
+      "term": "寫字",
+      "mandarinTerm": "寫字",
+      "speech": "寫字",
+      "speechText": "写字",
+      "duration": 0.749,
+      "bytes": 4690
+    },
+    {
+      "id": "huahua",
+      "term": "畫畫",
+      "mandarinTerm": "畫畫",
+      "speech": "畫畫",
+      "speechText": "画画",
+      "duration": 0.767,
+      "bytes": 4895
+    },
+    {
+      "id": "changge",
+      "term": "唱歌",
+      "mandarinTerm": "唱歌",
+      "speech": "唱歌",
+      "speechText": "唱歌",
+      "duration": 0.802,
+      "bytes": 5132
+    },
+    {
+      "id": "tiao_wu",
+      "term": "跳舞",
+      "mandarinTerm": "跳舞",
+      "speech": "跳舞",
+      "speechText": "跳舞",
+      "duration": 0.762,
+      "bytes": 4919
+    },
+    {
+      "id": "pai_shou",
+      "term": "拍手",
+      "mandarinTerm": "拍手",
+      "speech": "拍手",
+      "speechText": "拍手",
+      "duration": 0.819,
+      "bytes": 5209
+    },
+    {
+      "id": "wan_play",
+      "term": "玩",
+      "mandarinTerm": "玩",
+      "speech": "玩",
+      "speechText": "玩",
+      "duration": 0.588,
+      "bytes": 3798
+    },
+    {
+      "id": "paobu",
+      "term": "跑步",
+      "mandarinTerm": "跑步",
+      "speech": "跑步",
+      "speechText": "跑步",
+      "duration": 0.715,
+      "bytes": 4631
+    },
+    {
+      "id": "ti_zuqiu",
+      "term": "踢足球",
+      "mandarinTerm": "踢足球",
+      "speech": "踢足球",
+      "speechText": "踢足球",
+      "duration": 1.111,
+      "bytes": 6978
+    },
+    {
+      "id": "youyong",
+      "term": "游泳",
+      "mandarinTerm": "游泳",
+      "speech": "游泳",
+      "speechText": "游泳",
+      "duration": 0.739,
+      "bytes": 4671
+    },
+    {
+      "id": "qi_danche",
+      "term": "騎單車",
+      "mandarinTerm": "騎自行車",
+      "speech": "騎自行車",
+      "speechText": "骑自行车",
+      "duration": 1.344,
+      "bytes": 8372
+    },
+    {
+      "id": "da_lanqiu",
+      "term": "打籃球",
+      "mandarinTerm": "打籃球",
+      "speech": "打籃球",
+      "speechText": "打篮球",
+      "duration": 1.075,
+      "bytes": 6740
+    },
+    {
+      "id": "tiaosheng",
+      "term": "跳繩",
+      "mandarinTerm": "跳繩",
+      "speech": "跳繩",
+      "speechText": "跳绳",
+      "duration": 0.878,
+      "bytes": 5431
+    },
+    {
+      "id": "da_yumaoqiu",
+      "term": "打羽毛球",
+      "mandarinTerm": "打羽毛球",
+      "speech": "打羽毛球",
+      "speechText": "打羽毛球",
+      "duration": 1.284,
+      "bytes": 7947
+    },
+    {
+      "id": "da_pingpangqiu",
+      "term": "打乒乓球",
+      "mandarinTerm": "打乒乓球",
+      "speech": "打乒乓球",
+      "speechText": "打乒乓球",
+      "duration": 1.423,
+      "bytes": 8842
+    },
+    {
+      "id": "zuo_ticao",
+      "term": "做體操",
+      "mandarinTerm": "做體操",
+      "speech": "做體操",
+      "speechText": "做体操",
+      "duration": 1.098,
+      "bytes": 6914
+    },
+    {
+      "id": "liubing",
+      "term": "溜冰",
+      "mandarinTerm": "溜冰",
+      "speech": "溜冰",
+      "speechText": "溜冰",
+      "duration": 0.762,
+      "bytes": 4852
+    },
+    {
+      "id": "lei",
+      "term": "累",
+      "mandarinTerm": "累",
+      "speech": "類",
+      "speechText": "类",
+      "duration": 0.47,
+      "bytes": 3107
+    },
+    {
+      "id": "e_hungry",
+      "term": "餓",
+      "mandarinTerm": "餓",
+      "speech": "餓",
+      "speechText": "饿",
+      "duration": 0.5,
+      "bytes": 3333
+    },
+    {
+      "id": "bao_full",
+      "term": "飽",
+      "mandarinTerm": "飽",
+      "speech": "飽",
+      "speechText": "饱",
+      "duration": 0.49,
+      "bytes": 3007
+    },
+    {
+      "id": "ke_thirsty",
+      "term": "渴",
+      "mandarinTerm": "渴",
+      "speech": "渴",
+      "speechText": "渴",
+      "duration": 0.483,
+      "bytes": 3063
+    },
+    {
+      "id": "tong",
+      "term": "痛",
+      "mandarinTerm": "痛",
+      "speech": "痛",
+      "speechText": "痛",
+      "duration": 0.495,
+      "bytes": 3357
+    },
+    {
+      "id": "re_hot",
+      "term": "熱",
+      "mandarinTerm": "熱",
+      "speech": "熱",
+      "speechText": "热",
+      "duration": 0.461,
+      "bytes": 3110
+    },
+    {
+      "id": "leng_cold",
+      "term": "冷",
+      "mandarinTerm": "冷",
+      "speech": "冷",
+      "speechText": "冷",
+      "duration": 0.528,
+      "bytes": 3282
+    },
+    {
+      "id": "xiang_scent",
+      "term": "香",
+      "mandarinTerm": "香",
+      "speech": "香",
+      "speechText": "香",
+      "duration": 0.61,
+      "bytes": 3864
+    },
+    {
+      "id": "chou",
+      "term": "臭",
+      "mandarinTerm": "臭",
+      "speech": "臭",
+      "speechText": "臭",
+      "duration": 0.57,
+      "bytes": 3662
+    },
+    {
+      "id": "baba",
+      "term": "爸爸",
+      "mandarinTerm": "爸爸",
+      "speech": "爸爸",
+      "speechText": "爸爸",
+      "duration": 0.675,
+      "bytes": 4376
+    },
+    {
+      "id": "mama",
+      "term": "媽媽",
+      "mandarinTerm": "媽媽",
+      "speech": "媽媽",
+      "speechText": "妈妈",
+      "duration": 0.681,
+      "bytes": 4387
+    },
+    {
+      "id": "yeye",
+      "term": "爺爺",
+      "mandarinTerm": "爺爺",
+      "speech": "爺爺",
+      "speechText": "爷爷",
+      "duration": 0.704,
+      "bytes": 4401
+    },
+    {
+      "id": "popo",
+      "term": "婆婆",
+      "mandarinTerm": "外婆",
+      "speech": "外婆",
+      "speechText": "外婆",
+      "duration": 0.832,
+      "bytes": 5201
+    },
+    {
+      "id": "gege",
+      "term": "哥哥",
+      "mandarinTerm": "哥哥",
+      "speech": "哥哥",
+      "speechText": "哥哥",
+      "duration": 0.583,
+      "bytes": 3789
+    },
+    {
+      "id": "jiejie",
+      "term": "姐姐",
+      "mandarinTerm": "姐姐",
+      "speech": "姐姐",
+      "speechText": "姐姐",
+      "duration": 0.729,
+      "bytes": 4689
+    },
+    {
+      "id": "didi",
+      "term": "弟弟",
+      "mandarinTerm": "弟弟",
+      "speech": "弟弟",
+      "speechText": "弟弟",
+      "duration": 0.518,
+      "bytes": 3312
+    },
+    {
+      "id": "meimei",
+      "term": "妹妹",
+      "mandarinTerm": "妹妹",
+      "speech": "妹妹",
+      "speechText": "妹妹",
+      "duration": 0.739,
+      "bytes": 4690
+    },
+    {
+      "id": "baobao",
+      "term": "寶寶",
+      "mandarinTerm": "寶寶",
+      "speech": "寶寶",
+      "speechText": "宝宝",
+      "duration": 0.745,
+      "bytes": 4710
+    },
+    {
+      "id": "fan",
+      "term": "白飯",
+      "mandarinTerm": "白飯",
+      "speech": "白飯",
+      "speechText": "白饭",
+      "duration": 0.768,
+      "bytes": 4904
+    },
+    {
+      "id": "mian",
+      "term": "湯麵",
+      "mandarinTerm": "湯麵",
+      "speech": "湯麵",
+      "speechText": "汤面",
+      "duration": 0.796,
+      "bytes": 4991
+    },
+    {
+      "id": "bao",
+      "term": "麵包",
+      "mandarinTerm": "麵包",
+      "speech": "麵包",
+      "speechText": "面包",
+      "duration": 0.751,
+      "bytes": 4828
+    },
+    {
+      "id": "dan",
+      "term": "蛋",
+      "mandarinTerm": "蛋",
+      "speech": "蛋",
+      "speechText": "蛋",
+      "duration": 0.472,
+      "bytes": 3027
+    },
+    {
+      "id": "nai",
+      "term": "牛奶",
+      "mandarinTerm": "牛奶",
+      "speech": "牛奶",
+      "speechText": "牛奶",
+      "duration": 0.753,
+      "bytes": 4798
+    },
+    {
+      "id": "dangao",
+      "term": "蛋糕",
+      "mandarinTerm": "蛋糕",
+      "speech": "蛋糕",
+      "speechText": "蛋糕",
+      "duration": 0.726,
+      "bytes": 4650
+    },
+    {
+      "id": "shui",
+      "term": "水",
+      "mandarinTerm": "水",
+      "speech": "水",
+      "speechText": "水",
+      "duration": 0.622,
+      "bytes": 3902
+    },
+    {
+      "id": "guozhi",
+      "term": "果汁",
+      "mandarinTerm": "果汁",
+      "speech": "果汁",
+      "speechText": "果汁",
+      "duration": 0.71,
+      "bytes": 4564
+    },
+    {
+      "id": "xuegao",
+      "term": "雪糕",
+      "mandarinTerm": "冰淇淋",
+      "speech": "冰淇淋",
+      "speechText": "冰淇淋",
+      "duration": 1.024,
+      "bytes": 6485
+    },
+    {
+      "id": "binggan",
+      "term": "餅乾",
+      "mandarinTerm": "餅乾",
+      "speech": "餅乾",
+      "speechText": "饼干",
+      "duration": 0.815,
+      "bytes": 5099
+    },
+    {
+      "id": "tangguo",
+      "term": "糖果",
+      "mandarinTerm": "糖果",
+      "speech": "糖果",
+      "speechText": "糖果",
+      "duration": 0.784,
+      "bytes": 4885
+    },
+    {
+      "id": "sanwenzi",
+      "term": "三文治",
+      "mandarinTerm": "三明治",
+      "speech": "三明治",
+      "speechText": "三明治",
+      "duration": 0.969,
+      "bytes": 6095
+    },
+    {
+      "id": "hanbao",
+      "term": "漢堡包",
+      "mandarinTerm": "漢堡",
+      "speech": "漢堡",
+      "speechText": "汉堡",
+      "duration": 0.788,
+      "bytes": 4941
+    },
+    {
+      "id": "pisa",
+      "term": "薄餅",
+      "mandarinTerm": "披薩",
+      "speech": "披薩",
+      "speechText": "披萨",
+      "duration": 0.751,
+      "bytes": 4907
+    },
+    {
+      "id": "shutiao",
+      "term": "薯條",
+      "mandarinTerm": "薯條",
+      "speech": "薯條",
+      "speechText": "薯条",
+      "duration": 0.864,
+      "bytes": 5437
+    },
+    {
+      "id": "jirou",
+      "term": "雞肉",
+      "mandarinTerm": "雞肉",
+      "speech": "雞肉",
+      "speechText": "鸡肉",
+      "duration": 0.729,
+      "bytes": 4668
+    },
+    {
+      "id": "niurou",
+      "term": "牛肉",
+      "mandarinTerm": "牛肉",
+      "speech": "牛肉",
+      "speechText": "牛肉",
+      "duration": 0.742,
+      "bytes": 4583
+    },
+    {
+      "id": "zhurou",
+      "term": "豬肉",
+      "mandarinTerm": "豬肉",
+      "speech": "豬肉",
+      "speechText": "猪肉",
+      "duration": 0.698,
+      "bytes": 4338
+    },
+    {
+      "id": "yangrou",
+      "term": "羊肉",
+      "mandarinTerm": "羊肉",
+      "speech": "羊肉",
+      "speechText": "羊肉",
+      "duration": 0.774,
+      "bytes": 4807
+    },
+    {
+      "id": "feiniu",
+      "term": "肥牛",
+      "mandarinTerm": "肥牛",
+      "speech": "肥牛",
+      "speechText": "肥牛",
+      "duration": 0.83,
+      "bytes": 5263
+    },
+    {
+      "id": "xia_shrimp",
+      "term": "蝦",
+      "mandarinTerm": "蝦",
+      "speech": "蝦",
+      "speechText": "虾",
+      "duration": 0.61,
+      "bytes": 3900
+    },
+    {
+      "id": "xie_crab",
+      "term": "蟹",
+      "mandarinTerm": "螃蟹",
+      "speech": "螃蟹",
+      "speechText": "螃蟹",
+      "duration": 0.749,
+      "bytes": 4902
+    },
+    {
+      "id": "haixian",
+      "term": "海鮮",
+      "mandarinTerm": "海鮮",
+      "speech": "海鮮",
+      "speechText": "海鲜",
+      "duration": 0.846,
+      "bytes": 5395
+    },
+    {
+      "id": "shu",
+      "term": "書本",
+      "mandarinTerm": "書本",
+      "speech": "書本",
+      "speechText": "书本",
+      "duration": 0.771,
+      "bytes": 4898
+    },
+    {
+      "id": "gangbi",
+      "term": "鉛筆",
+      "mandarinTerm": "鉛筆",
+      "speech": "鉛筆",
+      "speechText": "铅笔",
+      "duration": 0.752,
+      "bytes": 4809
+    },
+    {
+      "id": "chi",
+      "term": "間尺",
+      "mandarinTerm": "尺子",
+      "speech": "尺子",
+      "speechText": "尺子",
+      "duration": 0.709,
+      "bytes": 4443
+    },
+    {
+      "id": "shubao",
+      "term": "書包",
+      "mandarinTerm": "書包",
+      "speech": "書包",
+      "speechText": "书包",
+      "duration": 0.771,
+      "bytes": 4900
+    },
+    {
+      "id": "qiu",
+      "term": "足球",
+      "mandarinTerm": "足球",
+      "speech": "足球",
+      "speechText": "足球",
+      "duration": 0.82,
+      "bytes": 5088
+    },
+    {
+      "id": "jimu",
+      "term": "積木",
+      "mandarinTerm": "積木",
+      "speech": "積木",
+      "speechText": "积木",
+      "duration": 0.671,
+      "bytes": 4315
+    },
+    {
+      "id": "wuzi",
+      "term": "屋企",
+      "mandarinTerm": "家",
+      "speech": "家",
+      "speechText": "家",
+      "duration": 0.543,
+      "bytes": 3589
+    },
+    {
+      "id": "xuexiao",
+      "term": "學校",
+      "mandarinTerm": "學校",
+      "speech": "學校",
+      "speechText": "学校",
+      "duration": 0.845,
+      "bytes": 5387
+    },
+    {
+      "id": "keshi",
+      "term": "課室",
+      "mandarinTerm": "教室",
+      "speech": "教室",
+      "speechText": "教室",
+      "duration": 0.787,
+      "bytes": 4888
+    },
+    {
+      "id": "gongyuan",
+      "term": "公園",
+      "mandarinTerm": "公園",
+      "speech": "公園",
+      "speechText": "公园",
+      "duration": 0.827,
+      "bytes": 5148
+    },
+    {
+      "id": "youlechang",
+      "term": "遊樂場",
+      "mandarinTerm": "遊樂場",
+      "speech": "遊樂場",
+      "speechText": "游乐场",
+      "duration": 1.041,
+      "bytes": 6481
+    },
+    {
+      "id": "shangchang",
+      "term": "商場",
+      "mandarinTerm": "商場",
+      "speech": "商場",
+      "speechText": "商场",
+      "duration": 0.91,
+      "bytes": 5689
+    },
+    {
+      "id": "chaoshi",
+      "term": "超市",
+      "mandarinTerm": "超市",
+      "speech": "超市",
+      "speechText": "超市",
+      "duration": 0.802,
+      "bytes": 5161
+    },
+    {
+      "id": "jieshi",
+      "term": "街市",
+      "mandarinTerm": "菜市場",
+      "speech": "菜市場",
+      "speechText": "菜市场",
+      "duration": 1.069,
+      "bytes": 6773
+    },
+    {
+      "id": "tushuguan",
+      "term": "圖書館",
+      "mandarinTerm": "圖書館",
+      "speech": "圖書館",
+      "speechText": "图书馆",
+      "duration": 1.005,
+      "bytes": 6353
+    },
+    {
+      "id": "tingchechang",
+      "term": "停車場",
+      "mandarinTerm": "停車場",
+      "speech": "停車場",
+      "speechText": "停车场",
+      "duration": 1.087,
+      "bytes": 6732
+    },
+    {
+      "id": "shatian",
+      "term": "沙田",
+      "mandarinTerm": "沙田",
+      "speech": "沙田",
+      "speechText": "沙田",
+      "duration": 0.933,
+      "bytes": 5944
+    },
+    {
+      "id": "yiyuan",
+      "term": "醫院",
+      "mandarinTerm": "醫院",
+      "speech": "醫院",
+      "speechText": "医院",
+      "duration": 0.75,
+      "bytes": 4645
+    },
+    {
+      "id": "xiaofangju",
+      "term": "消防局",
+      "mandarinTerm": "消防局",
+      "speech": "消防局",
+      "speechText": "消防局",
+      "duration": 1.144,
+      "bytes": 7241
+    },
+    {
+      "id": "jingchaju",
+      "term": "警察局",
+      "mandarinTerm": "警察局",
+      "speech": "警察局",
+      "speechText": "警察局",
+      "duration": 1.1,
+      "bytes": 6994
+    },
+    {
+      "id": "jichang",
+      "term": "機場",
+      "mandarinTerm": "機場",
+      "speech": "機場",
+      "speechText": "机场",
+      "duration": 0.81,
+      "bytes": 5181
+    },
+    {
+      "id": "haitan",
+      "term": "海灘",
+      "mandarinTerm": "海灘",
+      "speech": "海灘",
+      "speechText": "海滩",
+      "duration": 0.893,
+      "bytes": 5625
+    },
+    {
+      "id": "canting",
+      "term": "餐廳",
+      "mandarinTerm": "餐廳",
+      "speech": "餐廳",
+      "speechText": "餐厅",
+      "duration": 0.848,
+      "bytes": 5450
+    },
+    {
+      "id": "cesuo",
+      "term": "廁所",
+      "mandarinTerm": "廁所",
+      "speech": "廁所",
+      "speechText": "厕所",
+      "duration": 0.767,
+      "bytes": 4919
+    },
+    {
+      "id": "yongchi",
+      "term": "泳池",
+      "mandarinTerm": "游泳池",
+      "speech": "游泳池",
+      "speechText": "游泳池",
+      "duration": 1.064,
+      "bytes": 6670
+    },
+    {
+      "id": "chufang",
+      "term": "廚房",
+      "mandarinTerm": "廚房",
+      "speech": "廚房",
+      "speechText": "厨房",
+      "duration": 0.825,
+      "bytes": 5205
+    },
+    {
+      "id": "shuifang",
+      "term": "睡房",
+      "mandarinTerm": "臥室",
+      "speech": "臥室",
+      "speechText": "卧室",
+      "duration": 0.716,
+      "bytes": 4585
+    },
+    {
+      "id": "yushi",
+      "term": "浴室",
+      "mandarinTerm": "浴室",
+      "speech": "浴室",
+      "speechText": "浴室",
+      "duration": 0.726,
+      "bytes": 4610
+    },
+    {
+      "id": "yangtai",
+      "term": "陽台",
+      "mandarinTerm": "陽台",
+      "speech": "陽台",
+      "speechText": "阳台",
+      "duration": 0.89,
+      "bytes": 5657
+    },
+    {
+      "id": "chuangpu",
+      "term": "床",
+      "mandarinTerm": "床",
+      "speech": "床",
+      "speechText": "床",
+      "duration": 0.639,
+      "bytes": 4157
+    },
+    {
+      "id": "zhentou",
+      "term": "枕頭",
+      "mandarinTerm": "枕頭",
+      "speech": "枕頭",
+      "speechText": "枕头",
+      "duration": 0.779,
+      "bytes": 4872
+    },
+    {
+      "id": "beizi",
+      "term": "被子",
+      "mandarinTerm": "被子",
+      "speech": "被子",
+      "speechText": "被子",
+      "duration": 0.641,
+      "bytes": 4125
+    },
+    {
+      "id": "yizi",
+      "term": "椅子",
+      "mandarinTerm": "椅子",
+      "speech": "椅子",
+      "speechText": "椅子",
+      "duration": 0.646,
+      "bytes": 4047
+    },
+    {
+      "id": "zhuozi",
+      "term": "桌子",
+      "mandarinTerm": "桌子",
+      "speech": "桌子",
+      "speechText": "桌子",
+      "duration": 0.674,
+      "bytes": 4378
+    },
+    {
+      "id": "shafa",
+      "term": "沙發",
+      "mandarinTerm": "沙發",
+      "speech": "沙發",
+      "speechText": "沙发",
+      "duration": 0.817,
+      "bytes": 5181
+    },
+    {
+      "id": "yigui",
+      "term": "衣櫃",
+      "mandarinTerm": "衣櫃",
+      "speech": "衣櫃",
+      "speechText": "衣柜",
+      "duration": 0.668,
+      "bytes": 4304
+    },
+    {
+      "id": "chouti",
+      "term": "抽屜",
+      "mandarinTerm": "抽屜",
+      "speech": "抽屜",
+      "speechText": "抽屉",
+      "duration": 0.732,
+      "bytes": 4638
+    },
+    {
+      "id": "dianshi",
+      "term": "電視",
+      "mandarinTerm": "電視",
+      "speech": "電視",
+      "speechText": "电视",
+      "duration": 0.762,
+      "bytes": 4829
+    },
+    {
+      "id": "xuegui",
+      "term": "冰箱",
+      "mandarinTerm": "冰箱",
+      "speech": "冰箱",
+      "speechText": "冰箱",
+      "duration": 0.815,
+      "bytes": 5128
+    },
+    {
+      "id": "xiyiji",
+      "term": "洗衣機",
+      "mandarinTerm": "洗衣機",
+      "speech": "洗衣機",
+      "speechText": "洗衣机",
+      "duration": 0.982,
+      "bytes": 6228
+    },
+    {
+      "id": "fengshan",
+      "term": "電風扇",
+      "mandarinTerm": "電風扇",
+      "speech": "電風扇",
+      "speechText": "电风扇",
+      "duration": 1.052,
+      "bytes": 6711
+    },
+    {
+      "id": "lengqi",
+      "term": "冷氣機",
+      "mandarinTerm": "空調",
+      "speech": "空調",
+      "speechText": "空调",
+      "duration": 0.83,
+      "bytes": 5305
+    },
+    {
+      "id": "dianhua",
+      "term": "電話",
+      "mandarinTerm": "電話",
+      "speech": "電話",
+      "speechText": "电话",
+      "duration": 0.739,
+      "bytes": 4616
+    },
+    {
+      "id": "shizhong",
+      "term": "時鐘",
+      "mandarinTerm": "時鐘",
+      "speech": "時鐘",
+      "speechText": "时钟",
+      "duration": 0.817,
+      "bytes": 5181
+    },
+    {
+      "id": "deng",
+      "term": "燈",
+      "mandarinTerm": "燈",
+      "speech": "燈",
+      "speechText": "灯",
+      "duration": 0.496,
+      "bytes": 3366
+    },
+    {
+      "id": "men",
+      "term": "門",
+      "mandarinTerm": "門",
+      "speech": "門",
+      "speechText": "门",
+      "duration": 0.565,
+      "bytes": 3610
+    },
+    {
+      "id": "mensuo",
+      "term": "門鎖",
+      "mandarinTerm": "門鎖",
+      "speech": "門鎖",
+      "speechText": "门锁",
+      "duration": 0.786,
+      "bytes": 4776
+    },
+    {
+      "id": "chuanghu",
+      "term": "窗戶",
+      "mandarinTerm": "窗戶",
+      "speech": "窗戶",
+      "speechText": "窗户",
+      "duration": 0.744,
+      "bytes": 4626
+    },
+    {
+      "id": "lajitong",
+      "term": "垃圾桶",
+      "mandarinTerm": "垃圾桶",
+      "speech": "垃圾桶",
+      "speechText": "垃圾桶",
+      "duration": 0.958,
+      "bytes": 5970
+    },
+    {
+      "id": "xiangkuang",
+      "term": "相框",
+      "mandarinTerm": "相框",
+      "speech": "相框",
+      "speechText": "相框",
+      "duration": 0.935,
+      "bytes": 5949
+    },
+    {
+      "id": "ditan",
+      "term": "地毯",
+      "mandarinTerm": "地毯",
+      "speech": "地毯",
+      "speechText": "地毯",
+      "duration": 0.762,
+      "bytes": 4888
+    },
+    {
+      "id": "xishoutai",
+      "term": "洗手台",
+      "mandarinTerm": "洗手台",
+      "speech": "洗手台",
+      "speechText": "洗手台",
+      "duration": 1.179,
+      "bytes": 7487
+    },
+    {
+      "id": "shuilongtou",
+      "term": "水龍頭",
+      "mandarinTerm": "水龍頭",
+      "speech": "水龍頭",
+      "speechText": "水龙头",
+      "duration": 1.096,
+      "bytes": 6992
+    },
+    {
+      "id": "tuoxie",
+      "term": "拖鞋",
+      "mandarinTerm": "拖鞋",
+      "speech": "拖鞋",
+      "speechText": "拖鞋",
+      "duration": 0.784,
+      "bytes": 4890
+    },
+    {
+      "id": "maojin",
+      "term": "毛巾",
+      "mandarinTerm": "毛巾",
+      "speech": "毛巾",
+      "speechText": "毛巾",
+      "duration": 0.821,
+      "bytes": 5175
+    },
+    {
+      "id": "yashua",
+      "term": "牙刷",
+      "mandarinTerm": "牙刷",
+      "speech": "牙刷",
+      "speechText": "牙刷",
+      "duration": 0.809,
+      "bytes": 5221
+    },
+    {
+      "id": "yagao",
+      "term": "牙膏",
+      "mandarinTerm": "牙膏",
+      "speech": "牙膏",
+      "speechText": "牙膏",
+      "duration": 0.704,
+      "bytes": 4426
+    },
+    {
+      "id": "jing",
+      "term": "鏡子",
+      "mandarinTerm": "鏡子",
+      "speech": "鏡子",
+      "speechText": "镜子",
+      "duration": 0.671,
+      "bytes": 4345
+    },
+    {
+      "id": "shuzi",
+      "term": "梳子",
+      "mandarinTerm": "梳子",
+      "speech": "梳子",
+      "speechText": "梳子",
+      "duration": 0.713,
+      "bytes": 4642
+    },
+    {
+      "id": "lifa",
+      "term": "理髮",
+      "mandarinTerm": "理髮",
+      "speech": "理髮",
+      "speechText": "理发",
+      "duration": 0.67,
+      "bytes": 4355
+    },
+    {
+      "id": "xitoushui",
+      "term": "洗頭水",
+      "mandarinTerm": "洗髮水",
+      "speech": "洗髮水",
+      "speechText": "洗发水",
+      "duration": 1.144,
+      "bytes": 7245
+    },
+    {
+      "id": "muyulu",
+      "term": "沐浴露",
+      "mandarinTerm": "沐浴露",
+      "speech": "沐浴露",
+      "speechText": "沐浴露",
+      "duration": 0.785,
+      "bytes": 4938
+    },
+    {
+      "id": "kouzhao",
+      "term": "口罩",
+      "mandarinTerm": "口罩",
+      "speech": "口罩",
+      "speechText": "口罩",
+      "duration": 0.76,
+      "bytes": 4918
+    },
+    {
+      "id": "yanjing",
+      "term": "眼鏡",
+      "mandarinTerm": "眼鏡",
+      "speech": "眼鏡",
+      "speechText": "眼镜",
+      "duration": 0.786,
+      "bytes": 4872
+    },
+    {
+      "id": "shuihu",
+      "term": "水壺",
+      "mandarinTerm": "水壺",
+      "speech": "水壺",
+      "speechText": "水壶",
+      "duration": 0.875,
+      "bytes": 5474
+    },
+    {
+      "id": "zhijin",
+      "term": "紙巾",
+      "mandarinTerm": "紙巾",
+      "speech": "紙巾",
+      "speechText": "纸巾",
+      "duration": 0.768,
+      "bytes": 4914
+    },
+    {
+      "id": "beizi_cup",
+      "term": "杯子",
+      "mandarinTerm": "杯子",
+      "speech": "杯子",
+      "speechText": "杯子",
+      "duration": 0.641,
+      "bytes": 4123
+    },
+    {
+      "id": "wan",
+      "term": "碗",
+      "mandarinTerm": "碗",
+      "speech": "碗",
+      "speechText": "碗",
+      "duration": 0.518,
+      "bytes": 3341
+    },
+    {
+      "id": "tangchi",
+      "term": "湯匙",
+      "mandarinTerm": "湯匙",
+      "speech": "湯匙",
+      "speechText": "汤匙",
+      "duration": 0.865,
+      "bytes": 5385
+    },
+    {
+      "id": "kuaizi",
+      "term": "筷子",
+      "mandarinTerm": "筷子",
+      "speech": "筷子",
+      "speechText": "筷子",
+      "duration": 0.739,
+      "bytes": 4633
+    },
+    {
+      "id": "chazi",
+      "term": "叉子",
+      "mandarinTerm": "叉子",
+      "speech": "叉子",
+      "speechText": "叉子",
+      "duration": 0.744,
+      "bytes": 4642
+    },
+    {
+      "id": "panzi",
+      "term": "盤子",
+      "mandarinTerm": "盤子",
+      "speech": "盤子",
+      "speechText": "盘子",
+      "duration": 0.691,
+      "bytes": 4360
+    },
+    {
+      "id": "lu",
+      "term": "鹿",
+      "mandarinTerm": "鹿",
+      "speech": "鹿",
+      "speechText": "鹿",
+      "duration": 0.436,
+      "bytes": 2711
+    },
+    {
+      "id": "meihualu",
+      "term": "梅花鹿",
+      "mandarinTerm": "梅花鹿",
+      "speech": "梅花鹿",
+      "speechText": "梅花鹿",
+      "duration": 0.914,
+      "bytes": 5586
+    },
+    {
+      "id": "xunlu",
+      "term": "馴鹿",
+      "mandarinTerm": "馴鹿",
+      "speech": "馴鹿",
+      "speechText": "驯鹿",
+      "duration": 0.741,
+      "bytes": 4661
+    },
+    {
+      "id": "tuolu",
+      "term": "駝鹿",
+      "mandarinTerm": "駝鹿",
+      "speech": "駝鹿",
+      "speechText": "驼鹿",
+      "duration": 0.68,
+      "bytes": 4405
+    },
+    {
+      "id": "malu",
+      "term": "馬鹿",
+      "mandarinTerm": "馬鹿",
+      "speech": "馬鹿",
+      "speechText": "马鹿",
+      "duration": 0.635,
+      "bytes": 4087
+    },
+    {
+      "id": "xiong",
+      "term": "熊",
+      "mandarinTerm": "熊",
+      "speech": "熊",
+      "speechText": "熊",
+      "duration": 0.622,
+      "bytes": 4089
+    },
+    {
+      "id": "xionghei",
+      "term": "黑熊",
+      "mandarinTerm": "黑熊",
+      "speech": "黑熊",
+      "speechText": "黑熊",
+      "duration": 0.842,
+      "bytes": 5455
+    },
+    {
+      "id": "xiongzong",
+      "term": "棕熊（灰熊）",
+      "mandarinTerm": "棕熊（灰熊）",
+      "speech": "棕熊",
+      "speechText": "棕熊",
+      "duration": 0.843,
+      "bytes": 5445
+    },
+    {
+      "id": "shizi",
+      "term": "獅子",
+      "mandarinTerm": "獅子",
+      "speech": "獅子",
+      "speechText": "狮子",
+      "duration": 0.713,
+      "bytes": 4605
+    },
+    {
+      "id": "laohu",
+      "term": "老虎",
+      "mandarinTerm": "老虎",
+      "speech": "老虎",
+      "speechText": "老虎",
+      "duration": 0.762,
+      "bytes": 4903
+    },
+    {
+      "id": "daxiang",
+      "term": "大象",
+      "mandarinTerm": "大象",
+      "speech": "大象",
+      "speechText": "大象",
+      "duration": 0.75,
+      "bytes": 4774
+    },
+    {
+      "id": "hou",
+      "term": "猴子",
+      "mandarinTerm": "猴子",
+      "speech": "猴子",
+      "speechText": "猴子",
+      "duration": 0.708,
+      "bytes": 4379
+    },
+    {
+      "id": "xiongmao",
+      "term": "熊貓",
+      "mandarinTerm": "熊貓",
+      "speech": "熊貓",
+      "speechText": "熊猫",
+      "duration": 0.831,
+      "bytes": 5263
+    },
+    {
+      "id": "changjinglu",
+      "term": "長頸鹿",
+      "mandarinTerm": "長頸鹿",
+      "speech": "長頸鹿",
+      "speechText": "长颈鹿",
+      "duration": 0.953,
+      "bytes": 5897
+    },
+    {
+      "id": "banma",
+      "term": "斑馬",
+      "mandarinTerm": "斑馬",
+      "speech": "斑馬",
+      "speechText": "斑马",
+      "duration": 0.652,
+      "bytes": 4103
+    },
+    {
+      "id": "qie",
+      "term": "企鵝",
+      "mandarinTerm": "企鵝",
+      "speech": "企鵝",
+      "speechText": "企鹅",
+      "duration": 0.706,
+      "bytes": 4527
+    },
+    {
+      "id": "hema",
+      "term": "河馬",
+      "mandarinTerm": "河馬",
+      "speech": "河馬",
+      "speechText": "河马",
+      "duration": 0.691,
+      "bytes": 4259
+    },
+    {
+      "id": "xiniu",
+      "term": "犀牛",
+      "mandarinTerm": "犀牛",
+      "speech": "犀牛",
+      "speechText": "犀牛",
+      "duration": 0.831,
+      "bytes": 5171
+    },
+    {
+      "id": "luotuo",
+      "term": "駱駝",
+      "mandarinTerm": "駱駝",
+      "speech": "駱駝",
+      "speechText": "骆驼",
+      "duration": 0.772,
+      "bytes": 4936
+    },
+    {
+      "id": "daishu",
+      "term": "袋鼠",
+      "mandarinTerm": "袋鼠",
+      "speech": "袋鼠",
+      "speechText": "袋鼠",
+      "duration": 0.715,
+      "bytes": 4489
+    },
+    {
+      "id": "shuxiong",
+      "term": "樹熊",
+      "mandarinTerm": "考拉",
+      "speech": "考拉",
+      "speechText": "考拉",
+      "duration": 0.739,
+      "bytes": 4693
+    },
+    {
+      "id": "huli",
+      "term": "狐狸",
+      "mandarinTerm": "狐狸",
+      "speech": "狐狸",
+      "speechText": "狐狸",
+      "duration": 0.558,
+      "bytes": 3534
+    },
+    {
+      "id": "huanxiong",
+      "term": "浣熊",
+      "mandarinTerm": "浣熊",
+      "speech": "浣熊",
+      "speechText": "浣熊",
+      "duration": 0.895,
+      "bytes": 5701
+    },
+    {
+      "id": "mizhuan",
+      "term": "蜜獾",
+      "mandarinTerm": "蜜獾",
+      "speech": "蜜獾",
+      "speechText": "蜜獾",
+      "duration": 0.843,
+      "bytes": 5356
+    },
+    {
+      "id": "eyu",
+      "term": "鱷魚",
+      "mandarinTerm": "鱷魚",
+      "speech": "鱷魚",
+      "speechText": "鳄鱼",
+      "duration": 0.673,
+      "bytes": 4368
+    },
+    {
+      "id": "she",
+      "term": "蛇",
+      "mandarinTerm": "蛇",
+      "speech": "蛇",
+      "speechText": "蛇",
+      "duration": 0.587,
+      "bytes": 3859
+    },
+    {
+      "id": "maotouying",
+      "term": "貓頭鷹",
+      "mandarinTerm": "貓頭鷹",
+      "speech": "貓頭鷹",
+      "speechText": "猫头鹰",
+      "duration": 1.006,
+      "bytes": 6390
+    },
+    {
+      "id": "lang",
+      "term": "狼",
+      "mandarinTerm": "狼",
+      "speech": "狼",
+      "speechText": "狼",
+      "duration": 0.54,
+      "bytes": 3561
+    },
+    {
+      "id": "haitun",
+      "term": "海豚",
+      "mandarinTerm": "海豚",
+      "speech": "海豚",
+      "speechText": "海豚",
+      "duration": 0.927,
+      "bytes": 5916
+    },
+    {
+      "id": "haibao",
+      "term": "海豹",
+      "mandarinTerm": "海豹",
+      "speech": "海豹",
+      "speechText": "海豹",
+      "duration": 0.788,
+      "bytes": 4922
+    },
+    {
+      "id": "kongque",
+      "term": "孔雀",
+      "mandarinTerm": "孔雀",
+      "speech": "孔雀",
+      "speechText": "孔雀",
+      "duration": 0.795,
+      "bytes": 5136
+    },
+    {
+      "id": "honghe",
+      "term": "紅鶴",
+      "mandarinTerm": "火烈鳥",
+      "speech": "火烈鳥",
+      "speechText": "火烈鸟",
+      "duration": 1.046,
+      "bytes": 6580
+    },
+    {
+      "id": "gou",
+      "term": "狗",
+      "mandarinTerm": "狗",
+      "speech": "狗",
+      "speechText": "狗",
+      "duration": 0.478,
+      "bytes": 3066
+    },
+    {
+      "id": "mao",
+      "term": "貓",
+      "mandarinTerm": "貓",
+      "speech": "貓",
+      "speechText": "猫",
+      "duration": 0.542,
+      "bytes": 3434
+    },
+    {
+      "id": "yu",
+      "term": "魚",
+      "mandarinTerm": "魚",
+      "speech": "魚",
+      "speechText": "鱼",
+      "duration": 0.459,
+      "bytes": 3032
+    },
+    {
+      "id": "niao",
+      "term": "鳥",
+      "mandarinTerm": "鳥",
+      "speech": "鳥",
+      "speechText": "鸟",
+      "duration": 0.567,
+      "bytes": 3551
+    },
+    {
+      "id": "tu",
+      "term": "兔子",
+      "mandarinTerm": "兔子",
+      "speech": "兔子",
+      "speechText": "兔子",
+      "duration": 0.657,
+      "bytes": 4167
+    },
+    {
+      "id": "yang",
+      "term": "羊",
+      "mandarinTerm": "羊",
+      "speech": "羊",
+      "speechText": "羊",
+      "duration": 0.54,
+      "bytes": 3570
+    },
+    {
+      "id": "niu",
+      "term": "牛",
+      "mandarinTerm": "牛",
+      "speech": "牛",
+      "speechText": "牛",
+      "duration": 0.602,
+      "bytes": 3799
+    },
+    {
+      "id": "ma",
+      "term": "馬",
+      "mandarinTerm": "馬",
+      "speech": "馬",
+      "speechText": "马",
+      "duration": 0.496,
+      "bytes": 3269
+    },
+    {
+      "id": "zhu",
+      "term": "豬",
+      "mandarinTerm": "豬",
+      "speech": "豬",
+      "speechText": "猪",
+      "duration": 0.477,
+      "bytes": 3108
+    },
+    {
+      "id": "ji",
+      "term": "雞",
+      "mandarinTerm": "雞",
+      "speech": "雞",
+      "speechText": "鸡",
+      "duration": 0.508,
+      "bytes": 3349
+    },
+    {
+      "id": "ya",
+      "term": "鴨",
+      "mandarinTerm": "鴨",
+      "speech": "鴨",
+      "speechText": "鸭",
+      "duration": 0.505,
+      "bytes": 3294
+    },
+    {
+      "id": "wa",
+      "term": "青蛙",
+      "mandarinTerm": "青蛙",
+      "speech": "青蛙",
+      "speechText": "青蛙",
+      "duration": 0.775,
+      "bytes": 4855
+    },
+    {
+      "id": "chong",
+      "term": "昆蟲",
+      "mandarinTerm": "昆蟲",
+      "speech": "昆蟲",
+      "speechText": "昆虫",
+      "duration": 0.878,
+      "bytes": 5468
+    },
+    {
+      "id": "long",
+      "term": "龍",
+      "mandarinTerm": "龍",
+      "speech": "龍",
+      "speechText": "龙",
+      "duration": 0.563,
+      "bytes": 3599
+    },
+    {
+      "id": "bianfu",
+      "term": "蝙蝠",
+      "mandarinTerm": "蝙蝠",
+      "speech": "蝙蝠",
+      "speechText": "蝙蝠",
+      "duration": 0.827,
+      "bytes": 5164
+    },
+    {
+      "id": "ciwei",
+      "term": "刺蝟",
+      "mandarinTerm": "刺蝟",
+      "speech": "刺蝟",
+      "speechText": "刺猬",
+      "duration": 0.777,
+      "bytes": 4871
+    },
+    {
+      "id": "pingguo",
+      "term": "蘋果",
+      "mandarinTerm": "蘋果",
+      "speech": "蘋果",
+      "speechText": "苹果",
+      "duration": 0.762,
+      "bytes": 4934
+    },
+    {
+      "id": "xiangjiao",
+      "term": "香蕉",
+      "mandarinTerm": "香蕉",
+      "speech": "香蕉",
+      "speechText": "香蕉",
+      "duration": 0.912,
+      "bytes": 5708
+    },
+    {
+      "id": "cheng",
+      "term": "橙子",
+      "mandarinTerm": "橙子",
+      "speech": "橙子",
+      "speechText": "橙子",
+      "duration": 0.674,
+      "bytes": 4353
+    },
+    {
+      "id": "putao",
+      "term": "葡萄",
+      "mandarinTerm": "葡萄",
+      "speech": "葡萄",
+      "speechText": "葡萄",
+      "duration": 0.784,
+      "bytes": 4985
+    },
+    {
+      "id": "xigua",
+      "term": "西瓜",
+      "mandarinTerm": "西瓜",
+      "speech": "西瓜",
+      "speechText": "西瓜",
+      "duration": 0.819,
+      "bytes": 5174
+    },
+    {
+      "id": "caomei",
+      "term": "草莓",
+      "mandarinTerm": "草莓",
+      "speech": "草莓",
+      "speechText": "草莓",
+      "duration": 0.767,
+      "bytes": 4913
+    },
+    {
+      "id": "mangguo",
+      "term": "芒果",
+      "mandarinTerm": "芒果",
+      "speech": "芒果",
+      "speechText": "芒果",
+      "duration": 0.763,
+      "bytes": 4892
+    },
+    {
+      "id": "boluo",
+      "term": "菠蘿",
+      "mandarinTerm": "菠蘿",
+      "speech": "菠蘿",
+      "speechText": "菠萝",
+      "duration": 0.7,
+      "bytes": 4343
+    },
+    {
+      "id": "tao",
+      "term": "桃",
+      "mandarinTerm": "桃",
+      "speech": "桃",
+      "speechText": "桃",
+      "duration": 0.575,
+      "bytes": 3695
+    },
+    {
+      "id": "ningmeng",
+      "term": "檸檬",
+      "mandarinTerm": "檸檬",
+      "speech": "檸檬",
+      "speechText": "柠檬",
+      "duration": 0.777,
+      "bytes": 4872
+    },
+    {
+      "id": "yingtao",
+      "term": "櫻桃",
+      "mandarinTerm": "櫻桃",
+      "speech": "櫻桃",
+      "speechText": "樱桃",
+      "duration": 0.83,
+      "bytes": 5235
+    },
+    {
+      "id": "qiyiguo",
+      "term": "奇異果",
+      "mandarinTerm": "獼猴桃",
+      "speech": "獼猴桃",
+      "speechText": "猕猴桃",
+      "duration": 1.03,
+      "bytes": 6382
+    },
+    {
+      "id": "fanqie",
+      "term": "番茄",
+      "mandarinTerm": "番茄",
+      "speech": "番茄",
+      "speechText": "番茄",
+      "duration": 0.83,
+      "bytes": 5214
+    },
+    {
+      "id": "hongluobo",
+      "term": "紅蘿蔔",
+      "mandarinTerm": "胡蘿蔔",
+      "speech": "胡蘿蔔",
+      "speechText": "胡萝卜",
+      "duration": 0.93,
+      "bytes": 5969
+    },
+    {
+      "id": "yumi",
+      "term": "玉米",
+      "mandarinTerm": "玉米",
+      "speech": "玉米",
+      "speechText": "玉米",
+      "duration": 0.668,
+      "bytes": 4254
+    },
+    {
+      "id": "baicai",
+      "term": "白菜",
+      "mandarinTerm": "白菜",
+      "speech": "白菜",
+      "speechText": "白菜",
+      "duration": 0.78,
+      "bytes": 4927
+    },
+    {
+      "id": "qiezi",
+      "term": "茄子",
+      "mandarinTerm": "茄子",
+      "speech": "茄子",
+      "speechText": "茄子",
+      "duration": 0.717,
+      "bytes": 4614
+    },
+    {
+      "id": "qingjiao",
+      "term": "青椒",
+      "mandarinTerm": "青椒",
+      "speech": "青椒",
+      "speechText": "青椒",
+      "duration": 0.857,
+      "bytes": 5443
+    },
+    {
+      "id": "shuzai",
+      "term": "薯仔",
+      "mandarinTerm": "土豆",
+      "speech": "土豆",
+      "speechText": "土豆",
+      "duration": 0.726,
+      "bytes": 4586
+    },
+    {
+      "id": "yangcong",
+      "term": "洋蔥",
+      "mandarinTerm": "洋蔥",
+      "speech": "洋蔥",
+      "speechText": "洋葱",
+      "duration": 0.867,
+      "bytes": 5428
+    },
+    {
+      "id": "mogu",
+      "term": "蘑菇",
+      "mandarinTerm": "蘑菇",
+      "speech": "蘑菇",
+      "speechText": "蘑菇",
+      "duration": 0.6,
+      "bytes": 3905
+    },
+    {
+      "id": "huanggua",
+      "term": "黃瓜",
+      "mandarinTerm": "黃瓜",
+      "speech": "黃瓜",
+      "speechText": "黄瓜",
+      "duration": 0.756,
+      "bytes": 4880
+    },
+    {
+      "id": "wandou",
+      "term": "豌豆",
+      "mandarinTerm": "豌豆",
+      "speech": "豌豆",
+      "speechText": "豌豆",
+      "duration": 0.704,
+      "bytes": 4441
+    },
+    {
+      "id": "nangua",
+      "term": "南瓜",
+      "mandarinTerm": "南瓜",
+      "speech": "南瓜",
+      "speechText": "南瓜",
+      "duration": 0.786,
+      "bytes": 4811
+    },
+    {
+      "id": "feiniu_wudong",
+      "term": "肥牛烏冬",
+      "mandarinTerm": "肥牛烏冬",
+      "speech": "肥牛烏冬",
+      "speechText": "肥牛乌冬",
+      "duration": 1.26,
+      "bytes": 8017
+    },
+    {
+      "id": "gulourou",
+      "term": "咕嚕肉",
+      "mandarinTerm": "咕嚕肉",
+      "speech": "咕嚕肉",
+      "speechText": "咕噜肉",
+      "duration": 0.861,
+      "bytes": 5366
+    },
+    {
+      "id": "dabianlu",
+      "term": "打邊爐",
+      "mandarinTerm": "火鍋",
+      "speech": "火鍋",
+      "speechText": "火锅",
+      "duration": 0.779,
+      "bytes": 4920
+    },
+    {
+      "id": "yezi",
+      "term": "椰子",
+      "mandarinTerm": "椰子",
+      "speech": "椰子",
+      "speechText": "椰子",
+      "duration": 0.656,
+      "bytes": 3963
+    },
+    {
+      "id": "maileji",
+      "term": "麥樂雞",
+      "mandarinTerm": "麥樂雞",
+      "speech": "麥樂雞",
+      "speechText": "麦乐鸡",
+      "duration": 0.959,
+      "bytes": 5908
+    },
+    {
+      "id": "roujiang_yifen",
+      "term": "肉醬意粉",
+      "mandarinTerm": "肉醬意粉",
+      "speech": "肉醬意粉",
+      "speechText": "肉酱意粉",
+      "duration": 1.229,
+      "bytes": 7737
+    },
+    {
+      "id": "wonton_mian",
+      "term": "雲吞麵",
+      "mandarinTerm": "雲吞麵",
+      "speech": "雲吞麵",
+      "speechText": "云吞面",
+      "duration": 1.062,
+      "bytes": 6700
+    },
+    {
+      "id": "changfen",
+      "term": "腸粉",
+      "mandarinTerm": "腸粉",
+      "speech": "腸粉",
+      "speechText": "肠粉",
+      "duration": 0.837,
+      "bytes": 5190
+    },
+    {
+      "id": "siumai",
+      "term": "燒賣",
+      "mandarinTerm": "燒賣",
+      "speech": "燒賣",
+      "speechText": "烧卖",
+      "duration": 0.771,
+      "bytes": 4932
+    },
+    {
+      "id": "yudan",
+      "term": "魚蛋",
+      "mandarinTerm": "魚丸",
+      "speech": "魚丸",
+      "speechText": "鱼丸",
+      "duration": 0.772,
+      "bytes": 4898
+    },
+    {
+      "id": "naicha",
+      "term": "奶茶",
+      "mandarinTerm": "奶茶",
+      "speech": "奶茶",
+      "speechText": "奶茶",
+      "duration": 0.786,
+      "bytes": 4855
+    },
+    {
+      "id": "boluoyou",
+      "term": "菠蘿油",
+      "mandarinTerm": "菠蘿油",
+      "speech": "菠蘿油",
+      "speechText": "菠萝油",
+      "duration": 0.99,
+      "bytes": 6207
+    },
+    {
+      "id": "fanqie_chaodan",
+      "term": "蕃茄炒蛋",
+      "mandarinTerm": "蕃茄炒蛋",
+      "speech": "蕃茄炒蛋",
+      "speechText": "蕃茄炒蛋",
+      "duration": 1.434,
+      "bytes": 9079
+    },
+    {
+      "id": "zheng_yu",
+      "term": "蒸魚",
+      "mandarinTerm": "蒸魚",
+      "speech": "蒸魚",
+      "speechText": "蒸鱼",
+      "duration": 0.698,
+      "bytes": 4360
+    },
+    {
+      "id": "zheng_shuidan",
+      "term": "蒸水蛋",
+      "mandarinTerm": "蒸水蛋",
+      "speech": "蒸水蛋",
+      "speechText": "蒸水蛋",
+      "duration": 1.012,
+      "bytes": 6294
+    },
+    {
+      "id": "gan_chao_niuhe",
+      "term": "干炒牛河",
+      "mandarinTerm": "干炒牛河",
+      "speech": "干炒牛河",
+      "speechText": "干炒牛河",
+      "duration": 1.338,
+      "bytes": 8311
+    },
+    {
+      "id": "chashao_fan",
+      "term": "叉燒飯",
+      "mandarinTerm": "叉燒飯",
+      "speech": "叉燒飯",
+      "speechText": "叉烧饭",
+      "duration": 1.057,
+      "bytes": 6778
+    },
+    {
+      "id": "dan_ta",
+      "term": "蛋撻",
+      "mandarinTerm": "蛋撻",
+      "speech": "蛋撻",
+      "speechText": "蛋挞",
+      "duration": 0.726,
+      "bytes": 4582
+    },
+    {
+      "id": "xi_duoshi",
+      "term": "西多士",
+      "mandarinTerm": "西多士",
+      "speech": "西多士",
+      "speechText": "西多士",
+      "duration": 1.063,
+      "bytes": 6763
+    },
+    {
+      "id": "xia_jiao",
+      "term": "蝦餃",
+      "mandarinTerm": "蝦餃",
+      "speech": "蝦餃",
+      "speechText": "虾饺",
+      "duration": 0.877,
+      "bytes": 5565
+    },
+    {
+      "id": "niunan_mian",
+      "term": "牛腩麵",
+      "mandarinTerm": "牛腩麵",
+      "speech": "牛腩麵",
+      "speechText": "牛腩面",
+      "duration": 1.055,
+      "bytes": 6608
+    },
+    {
+      "id": "dong_ningcha",
+      "term": "凍檸茶",
+      "mandarinTerm": "冰檸檬茶",
+      "speech": "冰檸檬茶",
+      "speechText": "冰柠檬茶",
+      "duration": 1.221,
+      "bytes": 7769
+    },
+    {
+      "id": "hainan_ji_fan",
+      "term": "海南雞飯",
+      "mandarinTerm": "海南雞飯",
+      "speech": "海南雞飯",
+      "speechText": "海南鸡饭",
+      "duration": 1.276,
+      "bytes": 7956
+    },
+    {
+      "id": "nuomi_ji",
+      "term": "糯米雞",
+      "mandarinTerm": "糯米雞",
+      "speech": "糯米雞",
+      "speechText": "糯米鸡",
+      "duration": 0.949,
+      "bytes": 5887
+    },
+    {
+      "id": "gongzai_mian",
+      "term": "公仔麵",
+      "mandarinTerm": "方便麵",
+      "speech": "方便麵",
+      "speechText": "方便面",
+      "duration": 1.086,
+      "bytes": 6685
+    },
+    {
+      "id": "jian_niang_sanbao",
+      "term": "煎釀三寶",
+      "mandarinTerm": "煎釀三寶",
+      "speech": "煎釀三寶",
+      "speechText": "煎酿三宝",
+      "duration": 1.286,
+      "bytes": 8065
+    },
+    {
+      "id": "yisheng",
+      "term": "醫生",
+      "mandarinTerm": "醫生",
+      "speech": "醫生",
+      "speechText": "医生",
+      "duration": 0.784,
+      "bytes": 4809
+    },
+    {
+      "id": "hushi",
+      "term": "護士",
+      "mandarinTerm": "護士",
+      "speech": "護士",
+      "speechText": "护士",
+      "duration": 0.721,
+      "bytes": 4623
+    },
+    {
+      "id": "laoshi_job",
+      "term": "老師",
+      "mandarinTerm": "老師",
+      "speech": "老師",
+      "speechText": "老师",
+      "duration": 0.819,
+      "bytes": 5188
+    },
+    {
+      "id": "xiaozhang",
+      "term": "校長",
+      "mandarinTerm": "校長",
+      "speech": "校長",
+      "speechText": "校长",
+      "duration": 0.854,
+      "bytes": 5427
+    },
+    {
+      "id": "xiaofangyuan",
+      "term": "消防員",
+      "mandarinTerm": "消防員",
+      "speech": "消防員",
+      "speechText": "消防员",
+      "duration": 1.214,
+      "bytes": 7508
+    },
+    {
+      "id": "jingcha",
+      "term": "警察",
+      "mandarinTerm": "警察",
+      "speech": "警察",
+      "speechText": "警察",
+      "duration": 0.787,
+      "bytes": 4969
+    },
+    {
+      "id": "jiuhuyuan",
+      "term": "救護員",
+      "mandarinTerm": "救護員",
+      "speech": "救護員",
+      "speechText": "救护员",
+      "duration": 1.1,
+      "bytes": 6973
+    },
+    {
+      "id": "yayi",
+      "term": "牙醫",
+      "mandarinTerm": "牙醫",
+      "speech": "牙醫",
+      "speechText": "牙医",
+      "duration": 0.704,
+      "bytes": 4283
+    },
+    {
+      "id": "yaojishi",
+      "term": "藥劑師",
+      "mandarinTerm": "藥劑師",
+      "speech": "藥劑師",
+      "speechText": "药剂师",
+      "duration": 1.041,
+      "bytes": 6449
+    },
+    {
+      "id": "faxingshi",
+      "term": "髮型師",
+      "mandarinTerm": "髮型師",
+      "speech": "髮型師",
+      "speechText": "发型师",
+      "duration": 1.109,
+      "bytes": 6989
+    },
+    {
+      "id": "shouhuoyuan",
+      "term": "售貨員",
+      "mandarinTerm": "售貨員",
+      "speech": "售貨員",
+      "speechText": "售货员",
+      "duration": 1.177,
+      "bytes": 7433
+    },
+    {
+      "id": "shouyinyuan",
+      "term": "收銀員",
+      "mandarinTerm": "收銀員",
+      "speech": "收銀員",
+      "speechText": "收银员",
+      "duration": 1.166,
+      "bytes": 7257
+    },
+    {
+      "id": "baoan",
+      "term": "保安",
+      "mandarinTerm": "保安",
+      "speech": "保安",
+      "speechText": "保安",
+      "duration": 0.733,
+      "bytes": 4628
+    },
+    {
+      "id": "qingjie_gongren",
+      "term": "清潔工人",
+      "mandarinTerm": "清潔工人",
+      "speech": "清潔工人",
+      "speechText": "清洁工人",
+      "duration": 1.286,
+      "bytes": 8077
+    },
+    {
+      "id": "jiawu_zhuli",
+      "term": "家務助理",
+      "mandarinTerm": "家務助理",
+      "speech": "家務助理",
+      "speechText": "家务助理",
+      "duration": 1.112,
+      "bytes": 7019
+    },
+    {
+      "id": "youchai",
+      "term": "郵差",
+      "mandarinTerm": "郵差",
+      "speech": "郵差",
+      "speechText": "邮差",
+      "duration": 0.855,
+      "bytes": 5405
+    },
+    {
+      "id": "songhuoyuan",
+      "term": "送貨員",
+      "mandarinTerm": "送貨員",
+      "speech": "送貨員",
+      "speechText": "送货员",
+      "duration": 1.214,
+      "bytes": 7459
+    },
+    {
+      "id": "siji",
+      "term": "司機",
+      "mandarinTerm": "司機",
+      "speech": "司機",
+      "speechText": "司机",
+      "duration": 0.772,
+      "bytes": 4833
+    },
+    {
+      "id": "bashi_siji",
+      "term": "巴士司機",
+      "mandarinTerm": "巴士司機",
+      "speech": "巴士司機",
+      "speechText": "巴士司机",
+      "duration": 1.221,
+      "bytes": 7468
+    },
+    {
+      "id": "diksi_siji",
+      "term": "的士司機",
+      "mandarinTerm": "出租車司機",
+      "speech": "出租車司機",
+      "speechText": "出租车司机",
+      "duration": 1.499,
+      "bytes": 9322
+    },
+    {
+      "id": "shiying",
+      "term": "侍應",
+      "mandarinTerm": "服務員",
+      "speech": "服務員",
+      "speechText": "服务员",
+      "duration": 0.987,
+      "bytes": 6236
+    },
+    {
+      "id": "yuanding",
+      "term": "園丁",
+      "mandarinTerm": "園丁",
+      "speech": "園丁",
+      "speechText": "园丁",
+      "duration": 0.738,
+      "bytes": 4618
+    },
+    {
+      "id": "siyangyuan",
+      "term": "動物園飼養員",
+      "mandarinTerm": "動物園飼養員",
+      "speech": "動物園飼養員",
+      "speechText": "动物园饲养员",
+      "duration": 1.748,
+      "bytes": 10810
+    },
+    {
+      "id": "shouyi",
+      "term": "獸醫",
+      "mandarinTerm": "獸醫",
+      "speech": "獸醫",
+      "speechText": "兽医",
+      "duration": 0.771,
+      "bytes": 4898
+    },
+    {
+      "id": "tushuguan_guanliyuan",
+      "term": "圖書館管理員",
+      "mandarinTerm": "圖書館管理員",
+      "speech": "圖書館管理員",
+      "speechText": "图书馆管理员",
+      "duration": 1.783,
+      "bytes": 11152
+    },
+    {
+      "id": "chushi",
+      "term": "廚師",
+      "mandarinTerm": "廚師",
+      "speech": "廚師",
+      "speechText": "厨师",
+      "duration": 0.802,
+      "bytes": 5145
+    },
+    {
+      "id": "nongfu",
+      "term": "農夫",
+      "mandarinTerm": "農夫",
+      "speech": "農夫",
+      "speechText": "农夫",
+      "duration": 0.774,
+      "bytes": 4931
+    },
+    {
+      "id": "jishi",
+      "term": "機師",
+      "mandarinTerm": "飛行員",
+      "speech": "飛行員",
+      "speechText": "飞行员",
+      "duration": 1.132,
+      "bytes": 7032
+    },
+    {
+      "id": "kongjie",
+      "term": "空中服務員",
+      "mandarinTerm": "空中服務員",
+      "speech": "空中服務員",
+      "speechText": "空中服务员",
+      "duration": 1.492,
+      "bytes": 9336
+    },
+    {
+      "id": "taikongren",
+      "term": "太空人",
+      "mandarinTerm": "太空人",
+      "speech": "太空人",
+      "speechText": "太空人",
+      "duration": 1.098,
+      "bytes": 7001
+    },
+    {
+      "id": "kexuejia",
+      "term": "科學家",
+      "mandarinTerm": "科學家",
+      "speech": "科學家",
+      "speechText": "科学家",
+      "duration": 1.087,
+      "bytes": 6830
+    },
+    {
+      "id": "huajia",
+      "term": "畫家",
+      "mandarinTerm": "畫家",
+      "speech": "畫家",
+      "speechText": "画家",
+      "duration": 0.848,
+      "bytes": 5401
+    },
+    {
+      "id": "yinyuejia",
+      "term": "音樂家",
+      "mandarinTerm": "音樂家",
+      "speech": "音樂家",
+      "speechText": "音乐家",
+      "duration": 0.981,
+      "bytes": 6161
+    },
+    {
+      "id": "yundongyuan",
+      "term": "運動員",
+      "mandarinTerm": "運動員",
+      "speech": "運動員",
+      "speechText": "运动员",
+      "duration": 1.039,
+      "bytes": 6433
+    },
+    {
+      "id": "yanyuan",
+      "term": "演員",
+      "mandarinTerm": "演員",
+      "speech": "演員",
+      "speechText": "演员",
+      "duration": 0.855,
+      "bytes": 5448
+    },
+    {
+      "id": "jizhe",
+      "term": "記者",
+      "mandarinTerm": "記者",
+      "speech": "記者",
+      "speechText": "记者",
+      "duration": 0.671,
+      "bytes": 4374
+    },
+    {
+      "id": "jianzhu_gongren",
+      "term": "建築工人",
+      "mandarinTerm": "建築工人",
+      "speech": "建築工人",
+      "speechText": "建筑工人",
+      "duration": 1.263,
+      "bytes": 7862
+    },
+    {
+      "id": "gongchengshi",
+      "term": "工程師",
+      "mandarinTerm": "工程師",
+      "speech": "工程師",
+      "speechText": "工程师",
+      "duration": 1.036,
+      "bytes": 6482
+    },
+    {
+      "id": "chuanzhang",
+      "term": "船長",
+      "mandarinTerm": "船長",
+      "speech": "船長",
+      "speechText": "船长",
+      "duration": 0.825,
+      "bytes": 5168
+    },
+    {
+      "id": "yufu",
+      "term": "漁夫",
+      "mandarinTerm": "漁夫",
+      "speech": "漁夫",
+      "speechText": "渔夫",
+      "duration": 0.738,
+      "bytes": 4617
+    },
+    {
+      "id": "jiushengyuan",
+      "term": "救生員",
+      "mandarinTerm": "救生員",
+      "speech": "救生員",
+      "speechText": "救生员",
+      "duration": 1.112,
+      "bytes": 6992
+    },
+    {
+      "id": "sheyingshi",
+      "term": "攝影師",
+      "mandarinTerm": "攝影師",
+      "speech": "攝影師",
+      "speechText": "摄影师",
+      "duration": 1.073,
+      "bytes": 6735
+    },
+    {
+      "id": "junren",
+      "term": "軍人",
+      "mandarinTerm": "軍人",
+      "speech": "軍人",
+      "speechText": "军人",
+      "duration": 0.824,
+      "bytes": 5207
+    },
+    {
+      "id": "huanbao_zhuren",
+      "term": "環境保護主任",
+      "mandarinTerm": "環境保護主任",
+      "speech": "環境保護主任",
+      "speechText": "环境保护主任",
+      "duration": 1.661,
+      "bytes": 10363
+    },
+    {
+      "id": "yiliao_xiaoshou",
+      "term": "醫療銷售代表",
+      "mandarinTerm": "醫療銷售代表",
+      "speech": "醫療銷售代表",
+      "speechText": "医疗销售代表",
+      "duration": 1.83,
+      "bytes": 11333
+    },
+    {
+      "id": "konglong",
+      "term": "恐龍",
+      "mandarinTerm": "恐龍",
+      "speech": "恐龍",
+      "speechText": "恐龙",
+      "duration": 0.772,
+      "bytes": 4942
+    },
+    {
+      "id": "baolong",
+      "term": "暴龍",
+      "mandarinTerm": "暴龍",
+      "speech": "暴龍",
+      "speechText": "暴龙",
+      "duration": 0.757,
+      "bytes": 4915
+    },
+    {
+      "id": "sanjiaolong",
+      "term": "三角龍",
+      "mandarinTerm": "三角龍",
+      "speech": "三角龍",
+      "speechText": "三角龙",
+      "duration": 1.108,
+      "bytes": 6926
+    },
+    {
+      "id": "lianglong",
+      "term": "梁龍",
+      "mandarinTerm": "梁龍",
+      "speech": "梁龍",
+      "speechText": "梁龙",
+      "duration": 0.821,
+      "bytes": 5205
+    },
+    {
+      "id": "jianlong",
+      "term": "劍龍",
+      "mandarinTerm": "劍龍",
+      "speech": "劍龍",
+      "speechText": "剑龙",
+      "duration": 0.81,
+      "bytes": 5186
+    },
+    {
+      "id": "yilong",
+      "term": "翼龍",
+      "mandarinTerm": "翼龍",
+      "speech": "翼龍",
+      "speechText": "翼龙",
+      "duration": 0.761,
+      "bytes": 4833
+    },
+    {
+      "id": "konglongdan",
+      "term": "恐龍蛋",
+      "mandarinTerm": "恐龍蛋",
+      "speech": "恐龍蛋",
+      "speechText": "恐龙蛋",
+      "duration": 0.958,
+      "bytes": 5915
+    },
+    {
+      "id": "fuzhilong",
+      "term": "副櫛龍",
+      "mandarinTerm": "副櫛龍",
+      "speech": "副櫛龍",
+      "speechText": "副栉龙",
+      "duration": 1.033,
+      "bytes": 6510
+    },
+    {
+      "id": "jialong",
+      "term": "甲龍",
+      "mandarinTerm": "甲龍",
+      "speech": "甲龍",
+      "speechText": "甲龙",
+      "duration": 0.822,
+      "bytes": 5206
+    },
+    {
+      "id": "sulong",
+      "term": "速龍",
+      "mandarinTerm": "速龍",
+      "speech": "速龍",
+      "speechText": "速龙",
+      "duration": 0.83,
+      "bytes": 5257
+    },
+    {
+      "id": "shan",
+      "term": "衫",
+      "mandarinTerm": "衣服",
+      "speech": "衣服",
+      "speechText": "衣服",
+      "duration": 0.668,
+      "bytes": 4256
+    },
+    {
+      "id": "fu",
+      "term": "褲",
+      "mandarinTerm": "褲子",
+      "speech": "褲子",
+      "speechText": "裤子",
+      "duration": 0.656,
+      "bytes": 4122
+    },
+    {
+      "id": "kwan",
+      "term": "裙",
+      "mandarinTerm": "裙子",
+      "speech": "裙子",
+      "speechText": "裙子",
+      "duration": 0.731,
+      "bytes": 4647
+    },
+    {
+      "id": "haai",
+      "term": "鞋",
+      "mandarinTerm": "鞋子",
+      "speech": "鞋子",
+      "speechText": "鞋子",
+      "duration": 0.726,
+      "bytes": 4645
+    },
+    {
+      "id": "mat",
+      "term": "襪",
+      "mandarinTerm": "襪子",
+      "speech": "襪子",
+      "speechText": "袜子",
+      "duration": 0.692,
+      "bytes": 4343
+    },
+    {
+      "id": "mou",
+      "term": "帽",
+      "mandarinTerm": "帽子",
+      "speech": "帽子",
+      "speechText": "帽子",
+      "duration": 0.681,
+      "bytes": 4364
+    },
+    {
+      "id": "waihgan",
+      "term": "頸巾",
+      "mandarinTerm": "圍巾",
+      "speech": "圍巾",
+      "speechText": "围巾",
+      "duration": 0.797,
+      "bytes": 5089
+    },
+    {
+      "id": "shoutao",
+      "term": "手套",
+      "mandarinTerm": "手套",
+      "speech": "手套",
+      "speechText": "手套",
+      "duration": 0.899,
+      "bytes": 5661
+    },
+    {
+      "id": "hudie",
+      "term": "蝴蝶",
+      "mandarinTerm": "蝴蝶",
+      "speech": "蝴蝶",
+      "speechText": "蝴蝶",
+      "duration": 0.709,
+      "bytes": 4417
+    },
+    {
+      "id": "mifeng",
+      "term": "蜜蜂",
+      "mandarinTerm": "蜜蜂",
+      "speech": "蜜蜂",
+      "speechText": "蜜蜂",
+      "duration": 0.785,
+      "bytes": 4832
+    },
+    {
+      "id": "mayi",
+      "term": "螞蟻",
+      "mandarinTerm": "螞蟻",
+      "speech": "螞蟻",
+      "speechText": "蚂蚁",
+      "duration": 0.693,
+      "bytes": 4374
+    },
+    {
+      "id": "jiachong",
+      "term": "甲蟲",
+      "mandarinTerm": "甲蟲",
+      "speech": "甲蟲",
+      "speechText": "甲虫",
+      "duration": 0.891,
+      "bytes": 5685
+    },
+    {
+      "id": "zhizhu",
+      "term": "蜘蛛",
+      "mandarinTerm": "蜘蛛",
+      "speech": "蜘蛛",
+      "speechText": "蜘蛛",
+      "duration": 0.686,
+      "bytes": 4447
+    },
+    {
+      "id": "woniu",
+      "term": "蝸牛",
+      "mandarinTerm": "蝸牛",
+      "speech": "蝸牛",
+      "speechText": "蜗牛",
+      "duration": 0.785,
+      "bytes": 4859
+    },
+    {
+      "id": "maomaochong",
+      "term": "毛毛蟲",
+      "mandarinTerm": "毛毛蟲",
+      "speech": "毛毛蟲",
+      "speechText": "毛毛虫",
+      "duration": 1.111,
+      "bytes": 7005
+    },
+    {
+      "id": "qingting",
+      "term": "蜻蜓",
+      "mandarinTerm": "蜻蜓",
+      "speech": "蜻蜓",
+      "speechText": "蜻蜓",
+      "duration": 0.891,
+      "bytes": 5711
+    },
+    {
+      "id": "shayu",
+      "term": "鯊魚",
+      "mandarinTerm": "鯊魚",
+      "speech": "鯊魚",
+      "speechText": "鲨鱼",
+      "duration": 0.748,
+      "bytes": 4882
+    },
+    {
+      "id": "jingyu",
+      "term": "鯨魚",
+      "mandarinTerm": "鯨魚",
+      "speech": "鯨魚",
+      "speechText": "鲸鱼",
+      "duration": 0.682,
+      "bytes": 4376
+    },
+    {
+      "id": "bazhaoyu",
+      "term": "八爪魚",
+      "mandarinTerm": "章魚",
+      "speech": "章魚",
+      "speechText": "章鱼",
+      "duration": 0.663,
+      "bytes": 4384
+    },
+    {
+      "id": "shuimu",
+      "term": "水母",
+      "mandarinTerm": "水母",
+      "speech": "水母",
+      "speechText": "水母",
+      "duration": 0.771,
+      "bytes": 4927
+    },
+    {
+      "id": "haigui",
+      "term": "海龜",
+      "mandarinTerm": "海龜",
+      "speech": "海龜",
+      "speechText": "海龟",
+      "duration": 0.811,
+      "bytes": 5238
+    },
+    {
+      "id": "haixing",
+      "term": "海星",
+      "mandarinTerm": "海星",
+      "speech": "海星",
+      "speechText": "海星",
+      "duration": 0.846,
+      "bytes": 5479
+    },
+    {
+      "id": "xiaochouyu",
+      "term": "小丑魚",
+      "mandarinTerm": "小丑魚",
+      "speech": "小丑魚",
+      "speechText": "小丑鱼",
+      "duration": 1.086,
+      "bytes": 6851
+    },
+    {
+      "id": "youyu",
+      "term": "魷魚",
+      "mandarinTerm": "魷魚",
+      "speech": "魷魚",
+      "speechText": "鱿鱼",
+      "duration": 0.669,
+      "bytes": 4378
+    }
+  ]
+}

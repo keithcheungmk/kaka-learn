@@ -1,0 +1,12 @@
+{
+  "book": "rb_qiqiu",
+  "series": "red_series",
+  "source": "範例檔（唔會被 --all 處理）。真實檔請寫：2026-08-30 字卡相片 12 張",
+  "note": "cards 順序 = 字卡順序。同一個字重複出現照寫，script 會自動去重。",
+  "cards": [
+    { "char": "我" },
+    { "char": "的" },
+    { "char": "呢" },
+    { "char": "找", "id": "zhao" }
+  ]
+}

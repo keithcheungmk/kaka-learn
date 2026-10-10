@@ -1,0 +1,565 @@
+/* 小鹿數理探險 — 獨立 IIFE（故障隔離：掛掉唔影響認字／字母隊） */
+(function () {
+  try {
+    bootMath();
+  } catch (err) {
+    console.error('KakaMath: boot failed; Chinese / phonics should still work.', err);
+    disableMathEntry();
+  }
+
+  function disableMathEntry() {
+    const btn = document.getElementById('btn-start-math');
+    if (btn) {
+      btn.disabled = true;
+      btn.title = '數理暫時未能開啟';
+    }
+  }
+
+  function bootMath() {
+    if (!window.KakaMathStorage || !window.KakaMathSkills || !window.KakaMathMercuryCountData || !window.KakaMathMercuryCountGame || !window.KakaMathLifeSkillsData || !window.KakaMathLifeSkillsGame || !window.KakaMathStrategiesData || !window.KakaMathStrategiesGame || !window.KakaAdditionData || !window.KakaAdditionGame) {
+      console.error('KakaMath: math modules missing.');
+      disableMathEntry();
+      return;
+    }
+
+    const {
+      loadState,
+      saveState,
+      updateState,
+      tryEarnStar,
+    } = window.KakaMathStorage;
+    const mastery = window.KakaMathMastery || null;
+    const speech = window.KakaSpeech || null;
+
+    const LIT_TARGET = 10;
+
+    /** 時間資料：先以四分一鐘（00／15／30／45）練習，適合初學者。 */
+    const ZH_HOUR = ['十二', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一'];
+    function clockItem(h, halfOrMinute) {
+      const minute = typeof halfOrMinute === 'number' ? halfOrMinute : (halfOrMinute ? 30 : 0);
+      const zh = ZH_HOUR[h % 12];
+      return {
+        id: `${h}-${String(minute).padStart(2, '0')}`,
+        h,
+        minute,
+        half: minute === 30,
+        say: minute === 0 ? `${zh}點鐘` : minute === 30 ? `${zh}點半` : `${zh}點${minute}分`,
+      };
+    }
+    const CLOCK_ITEMS = [];
+    for (let h = 1; h <= 12; h += 1) {
+      for (let minute = 0; minute < 60; minute += 15) CLOCK_ITEMS.push(clockItem(h, minute));
+    }
+
+    /** 先學：模擬鐘 + 電子鐘（整點／半點） */
+    const VENUS_TIME_LEARN_CARDS = [
+      { ...clockItem(3, false), learnSay: '三點鐘。模擬鐘短針指住 3，長針指住 12。電子鐘寫住 3:00。' },
+      { ...clockItem(3, true), learnSay: '三點半。長針指住 6，就係半點。電子鐘寫住 3:30。' },
+      { ...clockItem(12, false), learnSay: '十二點鐘。兩支針都指住 12。電子鐘寫住 12:00。' },
+      { ...clockItem(6, true), learnSay: '六點半。長針指住 6。電子鐘寫住 6:30。' },
+      { ...clockItem(9, false), learnSay: '電子鐘寫住 9:00，就係九點鐘。' },
+      { ...clockItem(2, true), learnSay: '電子鐘寫住 2:30，就係兩點半。' },
+    ];
+
+    const $ = (sel, root = document) => root.querySelector(sel);
+
+    const screens = {
+      home: '#screen-home',
+      galaxy: '#screen-math-galaxy',
+      relationsLearn: '#screen-math-relations-learn',
+      relationsPlay: '#screen-math-relations-play',
+      additionSelect: '#screen-math-earth-addition-select',
+      additionPlay: '#screen-math-earth-addition-play',
+      subtractionSelect: '#screen-math-moon-subtraction-select',
+      subtractionPlay: '#screen-math-moon-subtraction-play',
+      vlearn: '#screen-math-venus-learn',
+      vplay: '#screen-math-venus-play',
+      time: '#screen-math-time',
+      lifeSkill: '#screen-math-life-skill',
+      strategy: '#screen-math-strategy',
+    };
+
+    let vLearnIndex = 0;
+    let timeBusy = false;
+    let timeRound = null;
+    let timeCorrect = 0;
+    let timeMode = 'analog';
+    let timeSetSelection = { h: 12, minute: 0 };
+    let timeSetActiveHand = 'hour';
+
+    function isMuted() {
+      try {
+        return !!(window.KakaStorage && window.KakaStorage.loadState().muted);
+      } catch {
+        return false;
+      }
+    }
+
+    function speak(text, opts = {}) {
+      if (!speech || typeof speech.speakTerm !== 'function') return;
+      speech.warmAudio?.();
+      speech.speakTerm(text, { muted: isMuted(), rate: 0.92, pitch: 1.05, delayMs: 80, ...opts });
+    }
+
+    function showMathScreen(name) {
+      document.documentElement.classList.add('math-canvas-mode');
+      document.querySelectorAll('.screen').forEach((el) => el.classList.remove('active'));
+      const sel = screens[name] || screens.galaxy;
+      const el = $(sel);
+      el?.classList.add('active');
+      if (['relationsPlay', 'additionPlay', 'subtractionPlay', 'time', 'lifeSkill', 'strategy'].includes(name)) {
+        const fx = window.KakaStarFx;
+        fx?.mountPlayScreen?.(el);
+        fx?.ensureMathStarTarget?.(el, `${loadState().starsToday}/10`);
+      } else {
+        window.KakaStarFx?.hideRanger?.();
+      }
+    }
+
+    function goHome() {
+      document.documentElement.classList.remove('math-canvas-mode');
+      document.querySelectorAll('.screen').forEach((el) => el.classList.remove('active'));
+      $('#screen-home')?.classList.add('active');
+    }
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    /** 原創幼齡鐘面：純 CSS 畫（全部 1–12 數字＋兩支針），唔用外部圖 */
+    function clockFaceHtml(item, { small = false } = {}) {
+      const minute = Number.isFinite(item.minute) ? item.minute : (item.half ? 30 : 0);
+      const hourAng = ((item.h % 12) + minute / 60) * 30;
+      const minAng = minute * 6;
+      const hourLabels = [
+        { h: 12, ang: 0 },
+        { h: 1, ang: 30 },
+        { h: 2, ang: 60 },
+        { h: 3, ang: 90 },
+        { h: 4, ang: 120 },
+        { h: 5, ang: 150 },
+        { h: 6, ang: 180 },
+        { h: 7, ang: 210 },
+        { h: 8, ang: 240 },
+        { h: 9, ang: 270 },
+        { h: 10, ang: 300 },
+        { h: 11, ang: 330 },
+      ];
+      const markers = hourLabels
+        .map((m) => {
+          const rad = (m.ang * Math.PI) / 180;
+          const r = 38;
+          const x = 50 + r * Math.sin(rad);
+          const y = 50 - r * Math.cos(rad);
+          return `<span class="math-clock-marker math-clock-marker--num" style="left:${x}%;top:${y}%">${m.h}</span>`;
+        })
+        .join('');
+      // 最外圈細刻度：每個鐘點一條，跟住角度轉
+      const ticks = hourLabels
+        .map((m) => {
+          const rad = (m.ang * Math.PI) / 180;
+          const r = 46;
+          const x = 50 + r * Math.sin(rad);
+          const y = 50 - r * Math.cos(rad);
+          return `<span class="math-clock-tick" style="left:${x}%;top:${y}%;transform: translate(-50%, -50%) rotate(${m.ang}deg)"></span>`;
+        })
+        .join('');
+      return `<div class="math-clock-face math-clock-face--drawn${small ? ' math-clock-face--small' : ''}" role="img" aria-label="${item.say}">${ticks}${markers}<span class="math-clock-hand math-clock-hand--hour" style="transform: translateX(-50%) rotate(${hourAng}deg)"></span><span class="math-clock-hand math-clock-hand--min" style="transform: translateX(-50%) rotate(${minAng}deg)"></span><span class="math-clock-center"></span></div>`;
+    }
+
+    function digitalText(item) {
+      const minute = Number.isFinite(item.minute) ? item.minute : (item.half ? 30 : 0);
+      return `${item.h}:${String(minute).padStart(2, '0')}`;
+    }
+
+    function digitalClockHtml(item, { small = false } = {}) {
+      const text = digitalText(item);
+      return `<div class="math-digital-clock${small ? ' math-digital-clock--small' : ''}" role="img" aria-label="${item.say}"><span class="math-digital-digits">${text}</span></div>`;
+    }
+
+    function flashStarBurst() {
+      const burst = $('#star-burst');
+      if (!burst) return;
+      burst.classList.remove('show');
+      // force reflow
+      void burst.offsetWidth;
+      burst.classList.add('show');
+      setTimeout(() => burst.classList.remove('show'), 900);
+    }
+
+    /** 答啱：太空戰士射星去 header 星星位（無動畫就退回中間 burst） */
+    function playMathStarReward() {
+      const screen = document.querySelector('.math-screen.active');
+      const fx = window.KakaStarFx;
+      if (!screen || !fx?.flyStarFromRanger) {
+        flashStarBurst();
+        return;
+      }
+      const state = loadState();
+      fx.mountPlayScreen(screen);
+      fx.ensureMathStarTarget(screen, `${state.starsToday}/10`);
+      fx.flyStarFromRanger(screen, () => {
+        const s = loadState();
+        fx.ensureMathStarTarget(screen, `${s.starsToday}/10`);
+      });
+    }
+
+    function showMathRoundReward(message, onAgain) {
+      const overlay = $('#math-round-finish');
+      if (!overlay) return;
+      const msg = $('#math-round-finish-msg');
+      if (msg) msg.textContent = message || '今輪玩完喇！攞到一個獎勵！';
+      overlay.hidden = false;
+      speech?.playStarCue?.({ muted: isMuted() });
+      speak(message || '今輪玩完喇！你好叻呀！攞到一個獎勵！');
+      playMathStarReward();
+      $('#btn-math-round-again').onclick = () => { overlay.hidden = true; onAgain?.(); };
+      $('#btn-math-round-galaxy').onclick = () => { overlay.hidden = true; openGalaxy(); };
+    }
+
+    function renderGalaxy() {
+      const grid = $('#math-galaxy-grid');
+      if (!grid) return;
+      const state = loadState();
+      grid.classList.add('math-galaxy-grid');
+      grid.innerHTML = '';
+      const routes = [
+        { id: 'numbers', icon: '🍓', name: '數字探險', skill: '五個一組・數到 20', copy: '數水果和硬幣，完成十題攞一粒星。', open: () => window.KakaMathMercuryCountGame.openMission() },
+        { id: 'addition', icon: '🍊', name: '加法果園', skill: '加法・湊十法', copy: '將兩盤水果合埋，先湊成十。', open: () => window.KakaAdditionGame.openEarthAddition() },
+        { id: 'subtraction', icon: '🫐', name: '減法籃球場', skill: '減法・三種計算法', copy: '拎走水果，再試點樣拆十。', open: () => window.KakaSubtractionGame?.openMoonSubtraction() },
+        { id: 'clock', icon: '⏰', name: '時鐘遊樂屋', skill: '模擬鐘・電子鐘', copy: '聽時間、認鐘面，自己轉指針。', open: () => openVenusLearn() },
+      ];
+      routes.forEach((route) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `math-galaxy-card math-playground-card math-route-${route.id}`;
+        btn.setAttribute('aria-label', `${route.name}：${route.skill}。${route.copy}`);
+        btn.innerHTML = `<span class="math-route-icon" aria-hidden="true">${route.icon}</span><span class="math-galaxy-name">${route.name}</span><span class="math-galaxy-skill">${route.skill}</span><span class="math-route-copy">${route.copy}</span><span class="math-galaxy-status">開始闖關 →</span>`;
+        btn.addEventListener('click', route.open);
+        grid.appendChild(btn);
+      });
+      const summary = $('#math-park-star-summary');
+      if (summary) summary.textContent = `⭐ 今日星星 ${state.starsToday}/10`;
+    }
+
+    /** Render and show the math playground. */
+    function openGalaxy() {
+      try {
+        renderGalaxy();
+        showMathScreen('galaxy');
+      } catch (err) {
+        console.error('KakaMath: openGalaxy failed', err);
+        const grid = $('#math-galaxy-grid');
+        if (grid) {
+          grid.innerHTML = '<p class="section-lead">遊戲樂園暫時未能顯示，請返去再試。</p>';
+        }
+        showMathScreen('galaxy');
+      }
+    }
+
+    /* ---------- 數字探險 ---------- */
+
+    /* ---------- 加法果園 ---------- */
+
+    /* ---------- 時鐘遊樂屋 ---------- */
+    function openVenusLearn() {
+      vLearnIndex = 0;
+      const title = $('#math-venus-learn-title');
+      if (title) title.textContent = '時鐘遊樂屋・先學';
+      renderVenusLearnCard(true);
+      showMathScreen('vlearn');
+    }
+
+    function renderVenusLearnCard(autoSpeak) {
+      const card = VENUS_TIME_LEARN_CARDS[vLearnIndex];
+      const face = $('#math-venus-learn-face');
+      if (face) face.innerHTML = clockFaceHtml(card);
+      const dig = $('#math-venus-learn-digital');
+      if (dig) dig.innerHTML = `<span class="math-digital-digits">${digitalText(card)}</span>`;
+      const say = $('#math-venus-learn-say');
+      if (say) say.textContent = `${card.say} · ${digitalText(card)}`;
+      const progress = $('#math-venus-learn-progress');
+      if (progress) progress.textContent = `${vLearnIndex + 1}/${VENUS_TIME_LEARN_CARDS.length}`;
+
+      const prev = $('#btn-math-venus-learn-prev');
+      const next = $('#btn-math-venus-learn-next');
+      const finish = $('#math-venus-learn-finish-row');
+      if (prev) prev.disabled = vLearnIndex <= 0;
+      if (next) next.hidden = vLearnIndex >= VENUS_TIME_LEARN_CARDS.length - 1;
+      if (finish) finish.hidden = vLearnIndex < VENUS_TIME_LEARN_CARDS.length - 1;
+
+      if (autoSpeak) speakVenusLearn();
+    }
+
+    function speakVenusLearn() {
+      const card = VENUS_TIME_LEARN_CARDS[vLearnIndex];
+      speak(card.learnSay || card.say);
+    }
+
+    function openVenusPlay() {
+      const stars = $('#math-venus-play-stars');
+      const state = loadState();
+      if (stars) stars.textContent = `${state.starsToday}/10`;
+      const title = $('#math-venus-play-title');
+      if (title) title.textContent = '時鐘遊樂屋・去玩玩';
+      showMathScreen('vplay');
+    }
+
+    function openTimeQuiz(mode) {
+      timeMode = mode === 'digital' ? 'digital' : mode === 'set' ? 'set' : 'analog';
+      timeBusy = false;
+      timeCorrect = 0;
+      const title = $('#math-time-title');
+      if (title) title.textContent = timeMode === 'digital' ? '揀電子鐘' : timeMode === 'set' ? '轉圓鐘' : '揀鐘面';
+      updateTimeProgress();
+      nextTimeRound(true);
+      showMathScreen('time');
+    }
+
+    function updateTimeProgress() {
+      const el = $('#math-time-progress');
+      if (el) el.textContent = `${timeCorrect}/${LIT_TARGET}`;
+    }
+
+    function nextTimeRound(autoSpeak) {
+      const target = CLOCK_ITEMS[Math.floor(Math.random() * CLOCK_ITEMS.length)];
+      const others = shuffle(CLOCK_ITEMS.filter((c) => c.id !== target.id)).slice(0, 2);
+      const options = shuffle([target, ...others]);
+      timeRound = { target, options };
+
+      const prompt = $('#math-time-prompt');
+      if (prompt) {
+        prompt.textContent = timeMode === 'set' ? '睇電子鐘，再轉圓鐘揀返相同時間' : timeMode === 'digital' ? '聽完揀正確嘅電子鐘' : '聽完揀正確嘅鐘面';
+      }
+      const fb = $('#math-time-feedback');
+      if (fb) fb.textContent = '';
+
+      const box = $('#math-time-options');
+      const setPanel = $('#math-time-set');
+      if (setPanel) setPanel.hidden = timeMode !== 'set';
+      if (timeMode === 'set') {
+        timeSetSelection = { h: 12, minute: 0 };
+        timeSetActiveHand = 'hour';
+        const targetDig = $('#math-time-target-digital');
+        if (targetDig) targetDig.innerHTML = `<span class="math-digital-digits">${digitalText(target)}</span>`;
+        renderTimeSetFace();
+        if (box) box.innerHTML = '';
+      }
+      if (box && timeMode !== 'set') {
+        box.innerHTML = '';
+        options.forEach((c) => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = timeMode === 'digital' ? 'math-clock-pick math-clock-pick--digital' : 'math-clock-pick';
+          btn.setAttribute('aria-label', `${c.say} ${digitalText(c)}`);
+          btn.innerHTML =
+            timeMode === 'digital'
+              ? `${digitalClockHtml(c, { small: true })}<span class="math-clock-label">${c.say}</span>`
+              : `${clockFaceHtml(c, { small: true })}<span class="math-clock-label">${c.say}</span>`;
+          btn.addEventListener('click', () => onTimePick(c.id, btn));
+          box.appendChild(btn);
+        });
+      }
+      if (autoSpeak) speak(`幾點？${target.say}`);
+    }
+
+    function renderTimeSetFace() {
+      const face = $('#math-time-set-face');
+      if (!face) return;
+      const item = clockItem(timeSetSelection.h, timeSetSelection.minute);
+      face.innerHTML = clockFaceHtml(item);
+      face.setAttribute('aria-label', `${item.say}，先揀短針或長針，再按鐘面調校；完成後按「回答」`);
+      const updateFromPoint = (clientX, clientY) => {
+        const rect = face.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const angle = (Math.atan2(clientY - cy, clientX - cx) * 180 / Math.PI + 90 + 360) % 360;
+        if (timeSetActiveHand === 'minute') {
+          timeSetSelection.minute = (Math.round(angle / 90) * 15) % 60;
+        } else {
+          const h = Math.max(1, Math.min(12, Math.round(angle / 30) || 12));
+          timeSetSelection.h = h;
+        }
+        const hour = face.querySelector('.math-clock-hand--hour');
+        const minute = face.querySelector('.math-clock-hand--min');
+        if (hour) hour.style.transform = `translateX(-50%) rotate(${((timeSetSelection.h % 12) + timeSetSelection.minute / 60) * 30}deg)`;
+        if (minute) minute.style.transform = `translateX(-50%) rotate(${timeSetSelection.minute * 6}deg)`;
+        face.setAttribute('aria-label', `${clockItem(timeSetSelection.h, timeSetSelection.minute).say}，先揀短針或長針，再按鐘面調校；完成後按「回答」`);
+      };
+      let dragging = false;
+      face.onpointerdown = (event) => { dragging = true; face.setPointerCapture?.(event.pointerId); event.preventDefault(); updateFromPoint(event.clientX, event.clientY); };
+      face.onpointermove = (event) => { if (dragging) updateFromPoint(event.clientX, event.clientY); };
+      face.onpointerup = () => { dragging = false; };
+      face.onpointercancel = () => { dragging = false; };
+      face.onclick = (event) => updateFromPoint(event.clientX, event.clientY);
+      $('#btn-math-time-hand-hour')?.classList.toggle('is-active', timeSetActiveHand === 'hour');
+      $('#btn-math-time-hand-minute')?.classList.toggle('is-active', timeSetActiveHand === 'minute');
+    }
+
+    function onTimeSetAnswer() {
+      if (timeBusy || !timeRound || timeMode !== 'set') return;
+      const chosen = clockItem(timeSetSelection.h, timeSetSelection.minute);
+      onTimePick(chosen.id, $('#btn-math-time-set-answer'));
+    }
+
+    function onTimePick(id, btn) {
+      if (timeBusy || !timeRound) return;
+      timeBusy = true;
+      const muted = isMuted();
+      const fb = $('#math-time-feedback');
+      const ok = id === timeRound.target.id;
+
+      if (ok) {
+        btn.classList.add('is-ok');
+        speech?.playCorrectCue?.({ muted });
+        timeCorrect += 1;
+        updateTimeProgress();
+        const praise =
+          speech?.speakCorrectFeedback?.({ muted }) || '你好叻呀，答啱咗！';
+        if (fb) fb.textContent = praise;
+
+        if (timeCorrect >= LIT_TARGET) {
+          tryEarnStar();
+          if (fb) fb.textContent = `${praise} 十題完成，攞到一粒星星！`;
+          setTimeout(() => {
+            timeBusy = false;
+            showMathRoundReward('時鐘遊樂屋十題完成！攞到一粒星星，你好叻呀！', () => openTimeQuiz(timeMode));
+          }, 900);
+          return;
+        }
+
+        const stars = $('#math-venus-play-stars');
+        const state = loadState();
+        if (stars) stars.textContent = `${state.starsToday}/10`;
+
+        setTimeout(() => {
+          timeBusy = false;
+          nextTimeRound(true);
+        }, 1100);
+      } else {
+        btn.classList.add('is-bad');
+        speech?.playTryAgainCue?.({ muted });
+        const line = speech?.speakRetryFeedback?.({ muted }) || '唔緊要，試多次！';
+        if (fb) fb.textContent = line;
+        setTimeout(() => {
+          btn.classList.remove('is-bad');
+          timeBusy = false;
+        }, 700);
+      }
+    }
+
+    function bind() {
+      const start = $('#btn-start-math');
+      if (!start) {
+        console.error('KakaMath: #btn-start-math missing.');
+        return;
+      }
+      start.addEventListener('click', () => openGalaxy());
+
+      $('#btn-back-math-galaxy')?.addEventListener('click', () => goHome());
+
+      $('#btn-back-math-venus-learn')?.addEventListener('click', () => openGalaxy());
+      $('#math-venus-learn-tap')?.addEventListener('click', () => speakVenusLearn());
+      $('#btn-math-venus-learn-prev')?.addEventListener('click', () => {
+        if (vLearnIndex <= 0) return;
+        vLearnIndex -= 1;
+        renderVenusLearnCard(true);
+      });
+      $('#btn-math-venus-learn-next')?.addEventListener('click', () => {
+        if (vLearnIndex >= VENUS_TIME_LEARN_CARDS.length - 1) return;
+        vLearnIndex += 1;
+        renderVenusLearnCard(true);
+      });
+      $('#btn-math-venus-learn-play')?.addEventListener('click', () => openVenusPlay());
+
+      $('#btn-back-math-venus-play')?.addEventListener('click', () => openVenusLearn());
+      $('#btn-math-mode-time-analog')?.addEventListener('click', () => openTimeQuiz('analog'));
+      $('#btn-math-mode-time-digital')?.addEventListener('click', () => openTimeQuiz('digital'));
+      $('#btn-math-mode-time-set')?.addEventListener('click', () => openTimeQuiz('set'));
+
+      $('#btn-back-math-time')?.addEventListener('click', () => openVenusPlay());
+      $('#btn-math-time-speak')?.addEventListener('click', () => {
+        if (timeRound) speak(`幾點？${timeRound.target.say}`);
+      });
+      $('#btn-math-time-set-answer')?.addEventListener('click', onTimeSetAnswer);
+      $('#btn-math-time-hand-hour')?.addEventListener('click', () => { if (timeMode === 'set' && !timeBusy) { timeSetActiveHand = 'hour'; renderTimeSetFace(); } });
+      $('#btn-math-time-hand-minute')?.addEventListener('click', () => { if (timeMode === 'set' && !timeBusy) { timeSetActiveHand = 'minute'; renderTimeSetFace(); } });
+
+    }
+
+    bind();
+
+    window.KakaAdditionGame.init({
+      storage: window.KakaMathStorage,
+      loadState,
+      tryEarnStar,
+      openGalaxy,
+      showMathScreen,
+      speak,
+      speech,
+      isMuted,
+      playMathStarReward,
+    });
+
+    window.KakaSubtractionGame?.init({
+      storage: window.KakaMathStorage,
+      loadState,
+      tryEarnStar,
+      openGalaxy,
+      showMathScreen,
+      speak,
+      speech,
+      isMuted,
+      playMathStarReward,
+    });
+
+    window.KakaMathMercuryCountGame.init({
+      storage: window.KakaMathStorage,
+      loadState,
+      updateState,
+      saveState,
+      mastery,
+      speak,
+      speech,
+      tryEarnStar,
+      openGalaxy,
+      showMathScreen,
+      showMathRoundReward,
+      isMuted,
+    });
+
+    window.KakaMathLifeSkillsGame.init({
+      storage: window.KakaMathStorage,
+      loadState,
+      tryEarnStar,
+      mastery,
+      openGalaxy,
+      showMathScreen,
+      showMathRoundReward,
+      speak,
+      speech,
+      isMuted,
+      playMathStarReward,
+    });
+
+    window.KakaMathStrategiesGame.init({ openGalaxy, showMathScreen, speak, speech, isMuted });
+
+    window.KakaMath = {
+      goHome,
+      openRelationsLearn: () => window.KakaMathMercuryCountGame.openLearn(),
+      openRelationsMission: () => window.KakaMathMercuryCountGame.openMission(),
+      openEarthAddition: () => window.KakaAdditionGame.openEarthAddition(),
+      openMoonSubtraction: () => window.KakaSubtractionGame?.openMoonSubtraction(),
+      openVenusLearn,
+      openTimeQuiz,
+      openLifeSkill: (activityId) => window.KakaMathLifeSkillsGame.start(activityId),
+      openStrategyGame: (methodId) => window.KakaMathStrategiesGame.open(methodId),
+      openGalaxy,
+    };
+  }
+})();

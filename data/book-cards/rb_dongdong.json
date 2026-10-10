@@ -1,0 +1,7 @@
+{
+  "book": "rb_dongdong", "series": "red_series", "allow_words": true,
+  "source": "2026-09-05 掃描書本認字卡（紅⑫《冬冬請客》）",
+  "cards": [
+    {"char":"媽媽"},{"char":"骨頭"},{"char":"冬冬"},{"char":"青蛙"},{"char":"請客"},{"char":"小蟲"},{"char":"小狗"},{"char":"花貓"},{"char":"吃"},{"char":"了"},{"char":"來"},{"char":"玩"},{"char":"和"},{"char":"都"},{"char":"呢"},{"char":"魚"},{"char":"嗎"},{"char":"不是"},{"char":"說"},{"char":"他們"},{"char":"請"},{"char":"東西"},{"char":"不肯"},{"char":"很好"},{"char":"白兔"},{"char":"蘿蔔"},{"char":"吃東西"},{"char":"吃得很好"},{"char":"為什麼"}
+  ]
+}

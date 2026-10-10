@@ -1,0 +1,739 @@
+/* KAKA 日間太空遊樂場：共用淺色主題，載入在各模組樣式之後。 */
+:root {
+  --space-deep: #eaf7ff;
+  --space-navy: #dbeafe;
+  --space-mid: #e9e2ff;
+  --space-panel: rgba(255, 255, 255, 0.9);
+  --ink: #18345f;
+  --ink-dim: #527093;
+  --teal: #2bc99d;
+  --teal-soft: #7be8c8;
+  --mint: #b9f7d8;
+  --gold: #f8bd35;
+  --gold-soft: #ffe39a;
+  --coral: #f47d8b;
+  --ok: #33bf83;
+  --answer-ink: #18345f;
+  --answer-surface: #ffffff;
+  --answer-selected-surface: #e3faed;
+  --answer-selected-ink: #17396e;
+  --shadow: 0 12px 28px rgba(77, 116, 158, 0.18);
+}
+
+html,
+body {
+  background: #eaf7ff;
+  color: var(--ink);
+}
+
+body {
+  background:
+    radial-gradient(700px 380px at 4% 4%, rgba(255, 229, 143, 0.58), transparent 64%),
+    radial-gradient(620px 440px at 96% 10%, rgba(180, 224, 255, 0.75), transparent 63%),
+    radial-gradient(760px 430px at 48% 105%, rgba(222, 206, 255, 0.72), transparent 66%),
+    linear-gradient(180deg, #f8fcff 0%, #eaf7ff 48%, #edf1ff 100%);
+}
+
+/* 細雲、泡泡及遠處遊樂星球取代深色星塵；不影響任何互動。 */
+body::before {
+  opacity: 1;
+  animation: none;
+  background-image:
+    radial-gradient(72px 34px at 9% 19%, rgba(255, 255, 255, 0.88) 48%, transparent 50%),
+    radial-gradient(106px 42px at 12% 20%, rgba(255, 255, 255, 0.88) 48%, transparent 50%),
+    radial-gradient(80px 32px at 84% 12%, rgba(255, 255, 255, 0.82) 48%, transparent 50%),
+    radial-gradient(112px 44px at 90% 13%, rgba(255, 255, 255, 0.82) 48%, transparent 50%),
+    radial-gradient(10px 10px at 23% 74%, rgba(255, 196, 78, 0.7) 48%, transparent 52%),
+    radial-gradient(13px 13px at 77% 67%, rgba(113, 208, 255, 0.58) 48%, transparent 52%),
+    radial-gradient(18px 18px at 93% 88%, rgba(244, 125, 139, 0.35) 48%, transparent 52%);
+}
+
+/* 停用舊有的深銀河遮罩；各學習線共用日間天空。 */
+.screen.active:not(.phonics-screen):not(.math-screen)::before,
+.phonics-screen.active::before,
+.story-demo-screen.active::before,
+.math-screen.active::before,
+#screen-math-galaxy.math-screen.active::before,
+#screen-math-hub.math-screen.active::before {
+  background:
+    radial-gradient(620px 300px at 12% 5%, rgba(255, 235, 164, 0.44), transparent 62%),
+    radial-gradient(600px 340px at 92% 22%, rgba(191, 225, 255, 0.62), transparent 63%),
+    linear-gradient(180deg, rgba(248, 252, 255, 0.74), rgba(235, 244, 255, 0.84));
+}
+
+.brand-name,
+.topic-group-title,
+.learn-hear,
+.learn-pair-vs,
+.phonics-mission-kicker,
+.phonics-mission-number {
+  color: #b76a08;
+  text-shadow: none;
+}
+
+.brand-tag,
+.section-lead,
+.prompt-box p,
+.star-meta span,
+.topic-progress-n {
+  color: var(--ink-dim);
+}
+
+.star-panel,
+.progress-pill,
+.topic-card,
+.learn-stage,
+.learn-pair-card,
+.play-mode-card,
+.prompt-box,
+.build-pool,
+.match-stage,
+.word-chain-entry,
+.progress-math-chip {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(93, 145, 203, 0.42);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+/* English 入口保留「兩條學習線」的分區，但兩區都改成明亮的遊樂場底。 */
+.english-track,
+.english-track-sight,
+.english-track-phonics {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(229, 242, 255, 0.82));
+  border-color: rgba(93, 145, 203, 0.42);
+  box-shadow: var(--shadow);
+}
+
+.english-track-sight {
+  background: linear-gradient(145deg, rgba(255, 250, 225, 0.94), rgba(239, 232, 255, 0.86));
+  border-color: rgba(237, 177, 55, 0.56);
+}
+
+.english-track-heading p,
+.english-track-heading h2 small,
+.topic-title-en,
+.phonics-mission-number {
+  color: #207d67;
+}
+
+.phonics-hero {
+  border-color: rgba(83, 151, 212, 0.56);
+  background:
+    radial-gradient(circle at 74% 30%, rgba(128, 237, 193, 0.62), transparent 32%),
+    linear-gradient(135deg, rgba(225, 239, 255, 0.96), rgba(232, 224, 255, 0.94));
+  box-shadow: var(--shadow);
+}
+
+.phonics-hero-callout {
+  background: rgba(255, 255, 255, 0.86);
+  color: var(--ink);
+  box-shadow: 0 4px 12px rgba(77, 116, 158, 0.16);
+}
+
+/* 數理也沿用同一片日間天空，核心學習卡和選項不再是深藍底。 */
+.math-chip,
+.math-galaxy-card,
+.math-learn-stage,
+.math-count-field--quiz,
+.math-quantity-option,
+.math-backlog-learn-stage,
+.math-backlog-visual,
+.math-backlog-option {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(93, 145, 203, 0.42);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.math-learn-num,
+.math-quantity-option,
+.math-coming,
+.math-galaxy-lead,
+.math-galaxy-lead span {
+  color: #a85d08;
+  text-shadow: none;
+}
+
+.math-count-tappable {
+  background: rgba(255, 255, 255, 0.78);
+  border-color: rgba(93, 145, 203, 0.2);
+}
+
+.star-meta strong,
+.progress-pill {
+  color: #a85d08;
+}
+
+.topic-card,
+.learn-stage,
+.learn-pair-card,
+.play-mode-card {
+  border-width: 2px;
+}
+
+.topic-card:active,
+.play-mode-card:active,
+.learn-pair-card:active {
+  filter: brightness(0.97);
+}
+
+.topic-pass.is-yes {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.topic-pass.is-no {
+  background: #eef2f7;
+  color: #475569;
+}
+
+.chinese-word-card:active {
+  background: #e9fbf4;
+}
+
+.btn-ghost,
+.btn-parent {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 0 0 2px rgba(93, 145, 203, 0.26), var(--shadow);
+}
+
+.profile-card,
+.profile-chip {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(237, 177, 55, 0.58);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+
+.profile-card-name {
+  color: var(--ink);
+}
+
+.learn-nav .btn-ghost:not(:disabled) {
+  color: var(--ink);
+  box-shadow: 0 0 0 2px rgba(93, 145, 203, 0.42), var(--shadow);
+}
+
+.emoji-plate {
+  --plate: #dff3ff;
+  box-shadow: 0 8px 18px rgba(68, 113, 158, 0.14);
+}
+
+/* 連一連和字母遊戲用同一種淺色板，避免一半仍然是夜空。 */
+.phonics-screen .topic-card,
+.phonics-screen .learn-stage,
+.phonics-screen .build-pool,
+.phonics-screen .match-stage,
+.connect-picture-main,
+.connect-word-card,
+.word-card,
+.build-slot {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(93, 145, 203, 0.48);
+  color: var(--ink);
+  box-shadow: 0 8px 20px rgba(77, 116, 158, 0.13);
+}
+
+.connect-picture-main.is-selected,
+.connect-word-card.is-selected,
+.word-card.selected,
+.build-slot.is-next {
+  background: #e6fbf3;
+  border-color: #26af86;
+  box-shadow: 0 0 0 4px rgba(43, 201, 157, 0.2), 0 8px 20px rgba(77, 116, 158, 0.13);
+}
+
+.connect-picture-main.is-matched,
+.connect-word-card.is-matched,
+.word-card.correct,
+.build-slot.is-filled {
+  background: #e3faed;
+  border-color: #32b97d;
+}
+
+/* 音素踏腳石：淺底、深色字和厚外框，比舊深藍圓點清楚。 */
+.letter-tile .sound-energy-glyph {
+  border: 3px solid #5b9fe1;
+  background:
+    radial-gradient(circle at 34% 26%, #ffffff 0 14%, transparent 15%),
+    linear-gradient(145deg, #ffffff, #dceeff);
+  color: #1b3970;
+  box-shadow:
+    inset 0 -5px 0 rgba(124, 177, 226, 0.2),
+    0 0 0 4px rgba(121, 181, 231, 0.18),
+    0 7px 0 #8ab9e2,
+    0 11px 18px rgba(65, 105, 154, 0.2);
+}
+
+.letter-tile.is-energized .sound-energy-glyph {
+  border-color: #e9a60d;
+  color: #704006;
+  background: linear-gradient(145deg, #fffbe3, #ffe08a);
+  box-shadow: 0 0 0 6px rgba(248, 189, 53, 0.22), 0 7px 0 #dd9710, 0 12px 22px rgba(239, 176, 30, 0.26);
+}
+
+/* 已放入格的綠邊只表示「答啱」；字母本身必須繼續是深色，不能沉入深綠底。 */
+.build-slot.is-filled .letter-tile .sound-energy-glyph,
+.build-slot.is-chunk .letter-tile .sound-energy-glyph {
+  border-color: #28b982;
+  background: linear-gradient(145deg, #ffffff, #dff8eb);
+  color: #17396e;
+  box-shadow:
+    inset 0 -5px 0 rgba(65, 190, 137, 0.18),
+    0 0 0 4px rgba(58, 196, 139, 0.22),
+    0 7px 0 #67ca9f,
+    0 11px 18px rgba(65, 105, 154, 0.18);
+}
+
+.build-slot.is-blending .letter-tile .sound-energy-glyph {
+  border-color: #e9a60d;
+  background: linear-gradient(145deg, #fffbe3, #ffe08a);
+  color: #704006;
+}
+
+/* Original Kaka/Heihei career artwork for the English Jobs topic. */
+.career-photo-plate {
+  display: grid;
+  place-items: center;
+  width: min(36vw, 300px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 4px solid rgba(93, 145, 203, 0.35);
+  border-radius: 30px;
+  background: linear-gradient(145deg, #e5f3ff, #fff);
+  box-shadow: 0 12px 28px rgba(48, 87, 133, 0.2);
+}
+
+.career-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.topic-cover-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: inherit;
+}
+
+.topic-cover-photo {
+  width: clamp(64px, 14vw, 92px);
+  height: clamp(64px, 14vw, 92px);
+  overflow: hidden;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 5px 0 #8ab9e2, 0 9px 16px rgba(65, 105, 154, 0.16);
+}
+
+.letter-row.has-word-parts {
+  width: min(100%, 620px);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Whole-word phrase tiles are separate vocabulary items, not phoneme steps.
+   Keep the phonics connector from striking through the words. */
+.letter-row.has-word-parts::before {
+  display: none;
+}
+
+.word-part-tile,
+.build-word-tile,
+.build-word-placed {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 112px;
+  min-height: 58px;
+  padding: 10px 18px;
+  border: 3px solid #5b9fe1;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #fff, #dceeff);
+  color: #1b3970;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.6vw, 1.45rem);
+  font-weight: 800;
+  box-shadow: 0 5px 0 #8ab9e2, 0 9px 16px rgba(65, 105, 154, 0.16);
+}
+
+.word-part-tile { cursor: pointer; }
+.word-part-tile:active { transform: translateY(2px); }
+
+#phonics-build-slots.has-word-phrase {
+  width: min(100%, 620px);
+  max-width: 620px;
+  gap: clamp(12px, 3vw, 24px);
+}
+
+#phonics-build-slots.has-word-phrase .build-slot {
+  width: min(38vw, 240px);
+  min-width: 132px;
+  height: clamp(66px, 10vh, 92px);
+  border-radius: 20px;
+}
+
+.build-word-ghost {
+  font-size: clamp(1rem, 2.8vw, 1.5rem);
+  letter-spacing: 0;
+}
+
+.build-word-placed {
+  min-width: 0;
+  width: 94%;
+  min-height: 50px;
+  padding: 6px 12px;
+  border-color: #28b982;
+  background: linear-gradient(145deg, #fff, #dff8eb);
+  box-shadow: 0 5px 0 #67ca9f, 0 9px 16px rgba(65, 105, 154, 0.16);
+}
+
+#phonics-build-pool.has-word-tiles {
+  grid-template-columns: repeat(2, minmax(120px, 1fr));
+  max-width: 560px;
+}
+
+#phonics-build-pool .build-tile.is-word-tile {
+  aspect-ratio: auto;
+  min-height: 68px;
+  padding: 8px;
+}
+
+@media (max-width: 640px) {
+  .career-photo-plate { width: min(54vw, 240px); border-radius: 22px; }
+  #phonics-build-slots.has-word-phrase .build-slot { min-width: min(40vw, 172px); }
+  #phonics-build-pool.has-word-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .build-word-tile { min-width: 0; width: 100%; padding: 8px; }
+}
+
+.letter-row {
+  width: min(100%, 460px);
+  gap: clamp(8px, 1.8vw, 14px);
+  padding: 8px 10px 14px;
+  border-radius: 999px;
+  background: rgba(219, 238, 255, 0.72);
+  box-shadow: inset 0 0 0 2px rgba(93, 145, 203, 0.18);
+}
+
+.letter-row:not(:empty)::before {
+  left: 7%;
+  right: 7%;
+  height: 5px;
+  background: linear-gradient(90deg, transparent, #ffd36b 13%, #ffd36b 87%, transparent);
+  box-shadow: none;
+}
+
+.letter-row .letter-tile {
+  width: clamp(52px, 10vw, 64px);
+  height: clamp(52px, 10vw, 64px);
+}
+
+.letter-row.has-long-sounds {
+  width: min(100%, 520px);
+  gap: clamp(4px, 1.1vw, 8px);
+}
+
+.letter-row.has-long-sounds .letter-tile {
+  width: clamp(44px, 7.7vw, 54px);
+  height: clamp(44px, 7.7vw, 54px);
+}
+
+.letter-row.has-extra-long-sounds .letter-tile {
+  width: clamp(40px, 6.6vw, 48px);
+  height: clamp(40px, 6.6vw, 48px);
+}
+
+.story-demo-hero,
+.story-play-stage {
+  border-color: rgba(108, 157, 215, 0.54);
+  background: linear-gradient(135deg, rgba(235, 225, 255, 0.92), rgba(220, 244, 255, 0.94));
+  box-shadow: var(--shadow);
+}
+
+.story-demo-hero p,
+.story-demo-source-note,
+.story-play-stage p,
+.story-activity-card small,
+.story-activity-description {
+  color: var(--ink-dim);
+}
+
+.story-activity-card,
+.story-answer,
+.story-fill-tile {
+  color: var(--ink);
+  border-color: rgba(93, 145, 203, 0.42);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 480px) {
+  .letter-row.has-long-sounds {
+    max-width: 330px;
+    flex-wrap: wrap;
+    padding-inline: 14px;
+  }
+
+  .letter-row.has-long-sounds::before {
+    display: none;
+  }
+
+  .letter-row.has-long-sounds .letter-tile {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .letter-tile .sound-energy-glyph,
+  .topic-card,
+  .play-mode-card {
+    transition: none;
+  }
+}
+
+/* 全站答案／字詞磚：明確指定深字淺底，避免繼承深色底後字色對比不足。 */
+.build-tile,
+.build-drag-ghost,
+.chip,
+.pic-card,
+.chain-option,
+.sentence-story-card,
+.sentence-card {
+  background: var(--answer-surface);
+  border-color: rgba(93, 145, 203, 0.55);
+  color: var(--answer-ink);
+}
+
+.build-drag-ghost {
+  box-shadow: 0 10px 24px rgba(35, 65, 105, 0.24);
+}
+
+.build-tile.is-selected,
+.chip.selected,
+.pic-card.selected {
+  border-color: #21815f;
+  background: var(--answer-selected-surface);
+  color: var(--answer-selected-ink);
+}
+
+.build-tile.is-dragging,
+.chain-option.is-dragging {
+  opacity: 0.8;
+}
+
+.chain-option small { color: #72520a; }
+.sentence-story-card small { color: #456b92; }
+
+.sentence-card-person { border-color: #3b82f6; background: #eff6ff; }
+.sentence-card-person small { color: #1d4ed8; }
+.sentence-card-verb { border-color: #ea580c; background: #fff7ed; }
+.sentence-card-verb small { color: #9a3412; }
+.sentence-card-object { border-color: #16a34a; background: #f0fdf4; }
+.sentence-card-object small { color: #166534; }
+.sentence-card-other { border-color: #9333ea; background: #faf5ff; }
+.sentence-card-other small { color: #6b21a8; }
+
+.feedback { color: #18345f; }
+.feedback.ok { color: #0b5f43; }
+.feedback.retry { color: #775000; }
+
+.story-fill-tile.wrong,
+.story-fill-tile.selected,
+.story-fill-tile.correct { color: #ffffff; }
+.story-fill-tile.wrong { background: #9f1239; }
+.story-fill-tile.selected { background: #714819; }
+.story-fill-tile.correct { background: #166534; }
+.story-fill-tile:disabled { opacity: 0.85; }
+.story-play-stage.is-listening .story-fill-bank { opacity: 0.85; }
+
+.build-tile:focus-visible,
+.chip:focus-visible,
+.pic-card:focus-visible,
+.chain-option:focus-visible,
+.sentence-story-card:focus-visible,
+.sentence-card:focus-visible {
+  outline: 3px solid #18345f;
+  outline-offset: 3px;
+}
+
+.chain-option small,
+.sentence-story-card small,
+.sentence-card-person small,
+.sentence-card-verb small,
+.sentence-card-object small,
+.sentence-card-other small { font-weight: 700; }
+
+/* Topic Words: one glanceable, tappable word wall for every English vocabulary topic. */
+#screen-phonics-learn.is-words-overview .words-overview {
+  width: min(100%, 1240px);
+  margin: 0 auto;
+  padding: clamp(14px, 2.2vw, 26px);
+  border: 2px solid rgba(93, 145, 203, 0.3);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: var(--shadow);
+}
+
+#screen-phonics-learn.is-words-overview .words-overview-heading {
+  margin: 0 0 16px;
+  text-align: center;
+}
+
+#screen-phonics-learn.is-words-overview .words-overview-heading h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+#screen-phonics-learn.is-words-overview .words-overview-heading p {
+  margin: 4px 0 0;
+  color: var(--ink-dim);
+  font-size: clamp(.95rem, 1.8vw, 1.15rem);
+  font-weight: 700;
+}
+
+#screen-phonics-learn.is-words-overview .words-card-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(10px, 1.4vw, 18px);
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-card {
+  appearance: none;
+  display: flex;
+  min-width: 0;
+  min-height: 208px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 8px;
+  border: 2px solid #efc85c;
+  border-radius: 22px;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 5px 12px rgba(55, 87, 123, 0.13);
+  cursor: pointer;
+  font: inherit;
+  transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-card:active,
+#screen-phonics-learn.is-words-overview .topic-word-card.is-speaking {
+  transform: translateY(-2px);
+  border-color: #36bd91;
+  background: #e9fbf4;
+  box-shadow: 0 0 0 4px rgba(54, 189, 145, 0.18), 0 8px 16px rgba(55, 87, 123, 0.14);
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-card:focus-visible {
+  outline: 3px solid #2f80d1;
+  outline-offset: 3px;
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-art {
+  display: grid;
+  width: 100%;
+  min-height: 108px;
+  place-items: center;
+}
+
+/* Keep the original career portraits inside each overview card instead of
+   letting the larger phonics-card image size cover neighboring words. */
+#screen-phonics-learn.is-words-overview .topic-word-art .career-photo-plate {
+  width: min(100%, 144px);
+  height: 104px;
+  aspect-ratio: auto;
+  border-width: 3px;
+  border-radius: 18px;
+  box-shadow: 0 5px 12px rgba(48, 87, 133, 0.14);
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-art .career-photo {
+  object-fit: cover;
+  object-position: center 32%;
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-art .emoji-plate {
+  width: 82px;
+  height: 82px;
+  background: #e7f3ff;
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-art .emoji-face {
+  font-size: 2.8rem;
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-label {
+  overflow-wrap: anywhere;
+  color: #193864;
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: lowercase;
+}
+
+#screen-phonics-learn.is-words-overview .topic-word-hear {
+  color: #347fc5;
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+#screen-phonics-learn.is-words-overview .learn-finish-row {
+  margin: 18px auto 28px;
+}
+
+#screen-phonics-learn.is-words-overview #btn-phonics-learn-play {
+  min-width: min(100%, 360px);
+  min-height: 64px;
+  font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+}
+
+@media (max-width: 900px) {
+  #screen-phonics-learn.is-words-overview .words-card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  #screen-phonics-learn.is-words-overview .words-overview {
+    padding: 12px;
+    border-radius: 20px;
+  }
+
+  #screen-phonics-learn.is-words-overview .words-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  #screen-phonics-learn.is-words-overview .topic-word-card {
+    min-height: 178px;
+    border-radius: 18px;
+  }
+
+  #screen-phonics-learn.is-words-overview .topic-word-art {
+    min-height: 88px;
+  }
+
+  #screen-phonics-learn.is-words-overview .topic-word-art .career-photo-plate {
+    width: min(100%, 120px);
+    height: 82px;
+    border-radius: 14px;
+  }
+
+  #screen-phonics-learn.is-words-overview .topic-word-art .emoji-plate {
+    width: 70px;
+    height: 70px;
+  }
+
+  #screen-phonics-learn.is-words-overview .topic-word-art .emoji-face {
+    font-size: 2.35rem;
+  }
+}

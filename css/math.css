@@ -1,0 +1,2747 @@
+/* 小鹿數理探險 — 獨立樣式（故障隔離：只影響 .math-screen） */
+
+.math-screen.active {
+  position: relative;
+  isolation: isolate;
+}
+
+.math-screen.active::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 500px at 50% 20%, color-mix(in srgb, var(--math-planet, #3b82f6) 28%, transparent), transparent 60%),
+    radial-gradient(700px 400px at 80% 80%, rgba(251, 191, 36, 0.1), transparent 55%);
+}
+
+/* 銀河旅程：真實銀河背景圖 */
+#screen-math-galaxy.math-screen.active::before {
+  background:
+    radial-gradient(700px 360px at 50% 35%, rgba(59, 130, 246, 0.28), transparent 68%),
+    linear-gradient(180deg, rgba(4, 11, 24, 0.16) 0%, rgba(20, 43, 86, 0.28) 55%, rgba(7, 21, 38, 0.58) 100%),
+    url("../assets/math/galaxy-bg.jpg") center / cover no-repeat;
+}
+
+/* Hub 亦可微透銀河 */
+#screen-math-hub.math-screen.active::before {
+  background:
+    radial-gradient(900px 500px at 50% 18%, color-mix(in srgb, var(--math-planet, #3b82f6) 22%, transparent), transparent 58%),
+    linear-gradient(180deg, rgba(7, 21, 38, 0.55) 0%, rgba(7, 21, 38, 0.72) 100%),
+    url("../assets/math/galaxy-bg.jpg") center 40% / cover no-repeat;
+}
+
+.math-hub {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+  padding: 8px 0 24px;
+}
+
+.math-planet-stage {
+  position: relative;
+  width: min(72vw, 280px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+/* Hub 大星球：改用真實太陽系 globe */
+#math-planet-ball.math-globe-wrap {
+  width: 78%;
+  aspect-ratio: 1;
+  animation: math-planet-breathe 3.6s ease-in-out infinite;
+}
+
+#math-planet-ball .math-globe {
+  width: 100%;
+  height: 100%;
+}
+
+#math-planet-ball.is-lit,
+.math-globe-wrap.is-lit .math-globe {
+  box-shadow:
+    0 0 0 3px rgba(253, 230, 138, 0.85),
+    0 0 24px rgba(251, 191, 36, 0.45),
+    0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes math-planet-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+/* ---------- 真實感星球 globe（後備 CSS；優先用照片 .math-globe-img） ---------- */
+.math-globe-wrap {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  flex-shrink: 0;
+}
+
+.math-globe-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.45));
+  pointer-events: none;
+  user-select: none;
+}
+
+/* 全站圖片後備色唔應該填入已去背嘅星球 alpha。 */
+.math-screen .math-globe-img {
+  background-color: transparent;
+}
+
+.math-globe-wrap--photo.is-lit .math-globe-img,
+#math-planet-ball.is-lit .math-globe-img {
+  filter:
+    drop-shadow(0 0 10px rgba(253, 230, 138, 0.75))
+    drop-shadow(0 12px 22px rgba(0, 0, 0, 0.45));
+}
+
+.math-globe-wrap--saturn.math-globe-wrap--photo {
+  width: 120px;
+  height: 96px;
+}
+
+.math-globe-wrap--saturn.math-globe-wrap--photo .math-globe-img {
+  border-radius: 0;
+  width: 118%;
+  height: 118%;
+  max-width: none;
+}
+
+.math-globe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow:
+    inset -14px -10px 28px rgba(0, 0, 0, 0.45),
+    inset 10px 8px 18px rgba(255, 255, 255, 0.22),
+    0 14px 28px rgba(0, 0, 0, 0.4);
+}
+
+.math-globe-wrap--saturn:not(.math-globe-wrap--photo) {
+  width: 120px;
+  height: 96px;
+}
+
+.math-globe-wrap--saturn:not(.math-globe-wrap--photo) .math-globe {
+  width: 72%;
+  height: 90%;
+  justify-self: center;
+}
+
+.math-globe-wrap--saturn:not(.math-globe-wrap--photo)::before {
+  content: "";
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  top: 48%;
+  height: 28%;
+  border-radius: 50%;
+  border: 3px solid rgba(232, 205, 150, 0.55);
+  border-top-color: rgba(245, 230, 190, 0.85);
+  border-bottom-color: rgba(160, 130, 80, 0.35);
+  transform: rotateX(68deg) translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
+  box-shadow: 0 0 12px rgba(240, 213, 154, 0.25);
+}
+
+.math-globe-wrap--saturn:not(.math-globe-wrap--photo)::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 50%;
+  height: 16%;
+  border-radius: 50%;
+  border: 2px solid rgba(210, 180, 120, 0.4);
+  transform: rotateX(68deg) translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.math-globe--mercury {
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.45), transparent 38%),
+    radial-gradient(circle at 62% 58%, rgba(80, 80, 85, 0.35) 0 8%, transparent 9%),
+    radial-gradient(circle at 40% 70%, rgba(60, 60, 65, 0.3) 0 6%, transparent 7%),
+    linear-gradient(145deg, #d5d8de 0%, #9a9ea8 45%, #6e727a 100%);
+}
+
+.math-globe--venus {
+  background:
+    radial-gradient(circle at 30% 26%, rgba(255, 255, 255, 0.5), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(180, 120, 40, 0.25), transparent 50%),
+    linear-gradient(150deg, #f3e0b0 0%, #e0b86a 40%, #c4893a 100%);
+}
+
+.math-globe--earth {
+  background:
+    radial-gradient(circle at 28% 24%, rgba(255, 255, 255, 0.45), transparent 36%),
+    radial-gradient(circle at 58% 42%, #2f9e5b 0 14%, transparent 15%),
+    radial-gradient(circle at 38% 62%, #247a48 0 10%, transparent 11%),
+    radial-gradient(circle at 72% 68%, #1f6b3f 0 12%, transparent 13%),
+    linear-gradient(145deg, #5eb0ef 0%, #1d6fd0 42%, #0b3d91 100%);
+}
+
+.math-globe--mars {
+  background:
+    radial-gradient(circle at 30% 26%, rgba(255, 230, 200, 0.4), transparent 38%),
+    radial-gradient(circle at 55% 48%, rgba(120, 50, 30, 0.35) 0 10%, transparent 11%),
+    radial-gradient(circle at 40% 72%, rgba(90, 40, 25, 0.3) 0 8%, transparent 9%),
+    linear-gradient(150deg, #f08a5a 0%, #c4472a 48%, #7a2410 100%);
+}
+
+.math-globe--jupiter {
+  background:
+    radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.35), transparent 36%),
+    repeating-linear-gradient(
+      180deg,
+      #e8c9a0 0 8%,
+      #d4a574 8% 16%,
+      #c4895a 16% 22%,
+      #ead2b0 22% 30%,
+      #b87448 30% 38%,
+      #e0b888 38% 46%,
+      #c99560 46% 54%,
+      #e8c9a0 54% 62%,
+      #a86a3c 62% 70%,
+      #d4a574 70% 100%
+    );
+}
+
+.math-globe--saturn {
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.4), transparent 38%),
+    linear-gradient(160deg, #f7e7c2 0%, #e8c98a 45%, #c9a35c 100%);
+}
+
+.math-globe--uranus {
+  background:
+    radial-gradient(circle at 30% 26%, rgba(255, 255, 255, 0.5), transparent 40%),
+    linear-gradient(150deg, #b8f3f8 0%, #5ec8d6 45%, #2a8f9e 100%);
+}
+
+.math-globe--neptune {
+  background:
+    radial-gradient(circle at 30% 26%, rgba(200, 230, 255, 0.45), transparent 38%),
+    radial-gradient(circle at 65% 55%, rgba(20, 40, 120, 0.35), transparent 45%),
+    linear-gradient(150deg, #6b9ef5 0%, #2f5ec8 48%, #1a2f8a 100%);
+}
+
+.math-ranger-guide-logo {
+  position: absolute;
+  right: -12%;
+  bottom: -5%;
+  width: 112px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 16px rgba(0, 0, 0, 0.4));
+  animation: math-ranger-bob 2.8s ease-in-out infinite;
+  z-index: 3;
+}
+
+.math-header-spacer {
+  width: 120px;
+}
+
+@keyframes math-ranger-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.math-hub-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  font-weight: 700;
+}
+
+.math-hub-blurb {
+  margin: 0;
+  color: var(--ink-dim);
+  font-size: 1.05rem;
+}
+
+.math-hub-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.math-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(18, 40, 72, 0.75);
+  border: 1px solid rgba(253, 230, 138, 0.35);
+  font-size: 0.95rem;
+}
+
+.math-coming {
+  margin: 0;
+  color: var(--gold-soft);
+  font-size: 0.98rem;
+}
+
+/* ---------- 銀河旅程卡（圓形星球，唔再用方塊 topic-card） ---------- */
+#math-galaxy-grid.math-galaxy-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(4px, 1.2vw, 12px);
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 0 18px;
+}
+
+@media (max-width: 900px) {
+  #math-galaxy-grid.math-galaxy-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.math-galaxy-card {
+  appearance: none;
+  border: none;
+  background: linear-gradient(160deg, rgba(30, 64, 115, 0.74), rgba(16, 33, 67, 0.72));
+  color: var(--ink);
+  cursor: pointer;
+  touch-action: manipulation;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 12px 10px 13px;
+  min-height: 184px;
+  border: 2px solid rgba(125, 211, 252, 0.42);
+  box-shadow: 0 10px 24px rgba(2, 12, 32, 0.34), inset 0 1px 0 rgba(255,255,255,.12);
+  border-radius: 24px;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.math-galaxy-planet {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.math-galaxy-card:active {
+  transform: scale(0.96);
+}
+
+.math-galaxy-card:disabled {
+  cursor: not-allowed;
+  opacity: 0.56;
+  filter: saturate(0.58);
+}
+
+.math-galaxy-card:focus-visible {
+  outline: 3px solid var(--teal-soft);
+  outline-offset: 2px;
+}
+
+.math-galaxy-card .math-globe-wrap {
+  width: min(18vw, 72px);
+  height: min(18vw, 72px);
+}
+
+.math-galaxy-card .math-globe-wrap--saturn {
+  width: min(29vw, 116px);
+  height: min(24vw, 96px);
+}
+
+.math-galaxy-card .math-globe-img {
+  transition: transform 0.2s ease;
+}
+
+.math-galaxy-card:active .math-globe-img {
+  transform: scale(0.94);
+}
+
+.math-galaxy-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 2.8vw, 1.25rem);
+}
+
+.math-galaxy-icon {
+  position: absolute;
+  right: -9px;
+  bottom: -8px;
+  font-size: 36px;
+  line-height: 1;
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.42));
+}
+
+.math-galaxy-skill {
+  font-size: 0.92rem;
+  color: var(--ink-dim);
+}
+
+.math-galaxy-card.is-lit .math-galaxy-skill {
+  color: var(--gold-soft);
+}
+
+.math-galaxy-status {
+  min-height: 1.25em;
+  color: var(--teal-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.math-galaxy-card:not(.is-lit) .math-galaxy-status {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.math-galaxy-brand {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.35));
+}
+
+.math-galaxy-card.is-lit {
+  background: linear-gradient(160deg, rgba(37, 99, 235, 0.82), rgba(15, 53, 104, 0.82));
+  border-color: rgba(253, 230, 138, 0.82);
+  box-shadow: 0 0 22px rgba(56, 189, 248, 0.26), inset 0 0 0 2px rgba(253, 230, 138, 0.3);
+}
+
+.math-galaxy-lead { font-size: clamp(1.15rem, 2.4vw, 1.45rem); color: #dbeafe; text-shadow: 0 2px 8px rgba(0,0,0,.4); }
+.math-extra-missions {
+  width: min(100%, 1420px);
+  margin: clamp(14px, 2vh, 24px) auto 0;
+  padding: clamp(16px, 2vw, 28px);
+  border: 1px solid #cfdfef;
+  border-radius: 28px;
+  background: linear-gradient(145deg, rgba(255,255,255,.96), rgba(237,247,255,.96));
+  box-shadow: 0 14px 32px rgba(77,116,158,.14), inset 0 1px 0 white;
+}
+.math-extra-missions-heading { margin-bottom: 14px; text-align: center; }
+.math-extra-missions-kicker { display: inline-block; padding: 5px 12px; border-radius: 999px; background: #e9f8f1; color: #157556; font-size: .82rem; font-weight: 900; }
+.math-extra-missions h2 { margin: 7px 0 0; color: #18345f; text-align: center; font-size: clamp(1.2rem, 2vw, 1.7rem); }
+.math-extra-missions-heading p { margin: 4px 0 0; color: #527093; text-align: center; font-size: clamp(.9rem, 1.4vw, 1.05rem); }
+.math-extra-mission-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: clamp(10px, 1.2vw, 18px); }
+.math-extra-mission-card {
+  --mission-accent: #58a9e8;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  min-width: 0;
+  min-height: 204px;
+  padding: 18px 14px 16px;
+  border: 1px solid #d7e5f2;
+  border-top: 5px solid var(--mission-accent);
+  border-radius: 22px;
+  background: #fff;
+  color: #18345f;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation; box-shadow: 0 8px 20px rgba(67,105,149,.11);
+}
+.math-extra-mission-card.mission-2 { --mission-accent: #63bf98; }
+.math-extra-mission-card.mission-3 { --mission-accent: #a17ae3; }
+.math-extra-mission-card.mission-4 { --mission-accent: #f3b945; }
+.math-extra-mission-card.mission-4 { background: linear-gradient(rgba(255, 255, 255, .88), rgba(255, 255, 255, .97)), url("../assets/math-life/fruit-shop-scene.jpg") center 48% / cover no-repeat; }
+.math-extra-mission-card.mission-5 { --mission-accent: #59b7c7; }
+.math-extra-mission-card:active { transform: scale(.98); }
+.math-extra-mission-card:focus-visible { outline: 3px solid #2169a5; outline-offset: 3px; }
+.math-extra-mission-icon { display: grid; place-items: center; width: 66px; height: 66px; border-radius: 20px; background: color-mix(in srgb, var(--mission-accent) 16%, white); font-size: 2.7rem; }
+.math-extra-mission-location { color: #247454; font-size: .82rem; font-weight: 900; }
+.math-extra-mission-card strong { font-size: clamp(.95rem, 1.25vw, 1.08rem); line-height: 1.2; }
+.math-extra-mission-description { color: #607891; font-size: .86rem; line-height: 1.3; }
+.math-extra-mission-arrow { margin-top: auto; color: #9a6200; font-size: .92rem; font-weight: 950; }
+
+.math-strategies-launch { width: min(100%, 1420px); margin: clamp(14px, 2vh, 24px) auto 0; padding: clamp(16px, 2vw, 28px); border: 1px solid #cfdfef; border-radius: 28px; background: linear-gradient(145deg, rgba(255,255,255,.97), rgba(237,247,255,.97)); box-shadow: 0 14px 32px rgba(77,116,158,.14), inset 0 1px 0 white; }
+.math-strategy-method-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(10px, 1.2vw, 18px); }
+.math-strategy-card { --method-accent: #38a9cb; display: flex; flex-direction: column; align-items: center; gap: 9px; min-width: 0; min-height: 190px; padding: 18px 14px; border: 1px solid #d3e2ef; border-top: 5px solid var(--method-accent); border-radius: 22px; background: #fff; color: #18345f; font: inherit; text-align: center; cursor: pointer; touch-action: manipulation; box-shadow: 0 8px 20px rgba(67,105,149,.11); }
+.math-strategy-card:nth-child(2) { --method-accent: #ed9b43; }
+.math-strategy-card:nth-child(3) { --method-accent: #9a78d2; }
+.math-strategy-card:nth-child(4) { --method-accent: #43b88a; }
+.math-strategy-card:active { transform: scale(.985); }
+.math-strategy-card:focus-visible, .math-strategy-choice:focus-visible { outline: 3px solid #2169a5; outline-offset: 3px; }
+.math-strategy-card-icon { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 17px; background: color-mix(in srgb, var(--method-accent) 15%, white); font: 2rem/1 "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+.math-strategy-card-type, .math-strategy-eyebrow { color: #537493; font-size: .82rem; font-weight: 900; }
+.math-strategy-card strong { font-size: clamp(1rem, 1.5vw, 1.22rem); }
+.math-strategy-card-copy { color: #607891; font-size: .9rem; line-height: 1.35; }
+.math-strategy-card-cta { margin-top: auto; color: #936000; font-weight: 950; }
+
+.math-strategy-screen.active { box-sizing: border-box; display: flex; flex-direction: column; gap: clamp(12px, 2vh, 22px); min-height: 100dvh; height: auto; max-height: none; overflow: visible; }
+.math-strategy-screen .game-header { margin: 0; }
+.math-strategy-method-label { margin: 0; color: #267655; text-align: center; font-size: clamp(1rem, 1.7vw, 1.25rem); font-weight: 950; }
+.math-strategy-intro-panel, .math-strategy-play-panel, .math-strategy-finish-panel { width: min(100%, 1420px); margin: 0 auto; padding: clamp(20px, 3vw, 42px); box-sizing: border-box; border: 2px solid #c7dced; border-radius: 28px; background: linear-gradient(145deg, #fff, #f0f8ff); box-shadow: 0 12px 30px rgba(77,116,158,.14), inset 0 1px 0 white; }
+.math-strategy-intro-panel[hidden], .math-strategy-play-panel[hidden], .math-strategy-finish-panel[hidden] { display: none; }
+.math-strategy-intro-panel { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: 16px 28px; }
+.math-strategy-intro-copy h2, .math-strategy-finish-panel h2 { margin: 5px 0 10px; color: #18345f; font-size: clamp(1.4rem, 2.5vw, 2rem); }
+.math-strategy-intro-copy p, .math-strategy-finish-panel p { margin: 0; color: #527093; font-size: clamp(1rem, 1.6vw, 1.2rem); line-height: 1.5; font-weight: 750; }
+.math-strategy-example { padding: clamp(16px, 2vw, 28px); border-radius: 22px; background: #edf7ff; }
+.math-strategy-example > strong { display: block; margin-bottom: 12px; color: #173d70; text-align: center; font-size: clamp(2rem, 5vw, 3.4rem); }
+.math-strategy-example ol, .math-strategy-steps { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.math-strategy-example li, .math-strategy-steps li { display: flex; align-items: center; gap: 10px; color: #365a7c; font-size: clamp(.95rem, 1.45vw, 1.12rem); font-weight: 850; }
+.math-strategy-example li span, .math-strategy-steps li span { display: grid; place-items: center; flex: 0 0 30px; width: 30px; height: 30px; border-radius: 50%; background: #ffdf8b; color: #654500; }
+.math-strategy-primary { grid-column: 1 / -1; justify-self: center; width: min(100%, 420px); min-height: 60px; border-radius: 18px; background: linear-gradient(145deg, #42c991, #20ad77); color: #fff; font-size: 1.2rem; font-weight: 950; }
+.math-strategy-play-panel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, .8fr); align-items: stretch; gap: clamp(16px, 2.5vw, 34px); }
+.math-strategy-question-card { display: grid; place-content: center; justify-items: center; min-height: 340px; padding: 20px; border-radius: 22px; background: linear-gradient(145deg, #edf7ff, #fff); text-align: center; }
+.math-strategy-question-card p { margin: 0 0 16px; color: #56809f; font-weight: 900; }
+.math-strategy-question-card h2 { max-width: 640px; margin: 0 0 22px; color: #234b74; font-size: clamp(1.15rem, 2.2vw, 1.6rem); }
+.math-strategy-equation { padding: 14px 24px; border: 2px solid #80cbe0; border-radius: 20px; background: white; color: #18345f; font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 1000; letter-spacing: .03em; }
+.math-strategy-answer-area { display: flex; flex-direction: column; justify-content: center; gap: 12px; min-width: 0; }
+.math-strategy-answer-area h3 { margin: 0; color: #267655; font-size: 1.1rem; }
+.math-strategy-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.math-strategy-choice { min-height: 68px; border: 2px solid #efbd4e; border-radius: 18px; background: linear-gradient(145deg, #fff8e0, #ffedb5); color: #18345f; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 1000; cursor: pointer; touch-action: manipulation; }
+.math-strategy-choice:disabled { cursor: default; }
+.math-strategy-choice.is-correct { border-color: #45b787; background: #e5f8ed; }
+.math-strategy-choice.is-wrong { border-color: #e58b8b; background: #fff0f0; }
+.math-strategy-feedback { min-height: 2.7em; margin: 0; padding: 12px; border-radius: 15px; background: #f1f6fb; color: #365a7c; font-weight: 850; line-height: 1.4; }
+.math-strategy-feedback.is-correct { background: #e8f8ef; color: #176b4c; }
+.math-strategy-feedback.is-help { background: #fff6dd; color: #684d0a; }
+.math-strategy-steps { padding: 12px 14px; border: 1px solid #f0d179; border-radius: 16px; background: #fffaf0; }
+.math-strategy-steps[hidden] { display: none; }
+.math-strategy-finish-panel { display: grid; justify-items: center; gap: 12px; text-align: center; }
+.math-strategy-finish-icon { font: 4rem/1 "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+.math-strategy-finish-panel h2 { margin: 0; }
+.math-strategy-finish-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; width: 100%; margin-top: 10px; }
+.math-strategy-finish-actions .btn { min-height: 56px; }
+
+/* Playful, touch-first number-frame work surface used by all four methods. */
+.math-strategy-route { width: min(100%, 1420px); margin: clamp(16px, 2vh, 24px) auto 0; padding: clamp(16px, 2vw, 26px); border: 1px solid #cfdfef; border-radius: 26px; background: linear-gradient(145deg, #fff, #f1f8ff); box-shadow: 0 10px 24px rgba(67,105,149,.10); }
+.math-strategy-route > h2 { margin: 0 0 4px; color: #18345f; text-align: center; font-size: clamp(1.1rem, 1.8vw, 1.5rem); }
+.math-strategy-route > p { margin: 0 0 14px; color: #607891; text-align: center; font-weight: 750; }
+.math-strategy-route .math-strategy-method-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+.math-strategy-screen.active { background: radial-gradient(ellipse at top left, #fff7da 0, transparent 36%), radial-gradient(ellipse at bottom right, #dff4ff 0, transparent 45%), #f0f7ff; }
+.math-strategy-play-panel { grid-template-columns: minmax(0, 1.3fr) minmax(300px, .7fr); align-items: center; }
+.math-strategy-question-card { align-content: center; gap: 8px; min-height: 0; padding: clamp(16px, 2vw, 28px); }
+.math-strategy-question-card h2 { margin: 0; }
+.math-strategy-board-hint { margin: 0 !important; color: #357d64 !important; }
+.math-strategy-board { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 1.5vw, 18px); width: 100%; }
+.math-fruit-group { min-width: 0; padding: 12px; border: 1px solid #d7e7f4; border-radius: 18px; background: rgba(255,255,255,.88); }
+.math-fruit-group h4 { display: flex; justify-content: space-between; gap: 8px; margin: 0 0 8px; color: #315b7c; font-size: clamp(.84rem, 1.25vw, 1rem); }
+.math-fruit-group h4 span { color: #68859a; white-space: nowrap; }
+.math-fruit-frame { display: grid; grid-template-columns: repeat(var(--frame-columns, 5), minmax(0, 1fr)); gap: 5px; }
+.math-fruit-cell { display: grid; place-items: center; min-width: 0; min-height: clamp(34px, 4.1vw, 54px); padding: 2px; border: 1px solid #c8d9e8; border-radius: 10px; background: #f6fbff; color: #203e5b; font: clamp(1rem, 2vw, 1.55rem)/1 "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+.math-fruit-cell.is-filled { border-color: #f2c451; background: linear-gradient(145deg, #fff8df, #ffedb4); box-shadow: 0 2px 4px rgba(168,125,20,.12); }
+.math-fruit-cell.is-actionable { cursor: pointer; touch-action: manipulation; }
+.math-fruit-cell.is-actionable:active { transform: scale(.92); }
+.math-fruit-cell:disabled { cursor: default; }
+.math-fruit-cell.is-moved { min-height: 38px; }
+.math-fruit-takeaway { grid-column: 1 / -1; background: #fff9e7; border-color: #f4d276; }
+.math-fruit-empty { grid-column: 1 / -1; padding: 8px; color: #678298; text-align: center; font-size: .9rem; }
+.math-strategy-answer-area { align-self: stretch; padding: clamp(18px, 2vw, 28px); border: 1px solid #d7e7f4; border-radius: 22px; background: linear-gradient(145deg, white, #f1f9ff); }
+.math-strategy-action-copy { margin: 0; color: #365a7c; font-size: clamp(1.05rem, 1.6vw, 1.25rem); line-height: 1.45; font-weight: 850; }
+.math-strategy-move-count { min-height: 1.4em; color: #267655; font-weight: 900; }
+.math-strategy-feedback { min-height: 3em; }
+.math-strategy-primary:disabled { opacity: .65; }
+
+@media (max-width: 760px) {
+  .math-strategy-play-panel { grid-template-columns: minmax(0, 1fr); }
+  .math-strategy-board { grid-template-columns: minmax(0, 1fr); }
+  .math-fruit-takeaway { grid-column: auto; }
+  .math-fruit-cell { min-height: 46px; }
+}
+
+/* Math playground replaces the old planet landing screen but keeps its saved
+   progress data. Bright route cards make the new path-based structure obvious. */
+.math-playground-screen.active { box-sizing: border-box; display: flex; flex-direction: column; gap: clamp(12px, 1.8vh, 22px); min-height: 100dvh; height: auto; max-height: none; overflow: visible; padding-bottom: max(24px, env(safe-area-inset-bottom)); color: #17345c; }
+#screen-math-galaxy.math-screen.active::before, .math-playground-screen.active::before { background: radial-gradient(ellipse at 7% 4%, rgba(255,231,147,.52), transparent 32%), radial-gradient(ellipse at 92% 12%, rgba(144,213,255,.40), transparent 33%), linear-gradient(145deg, #fffdf5, #eef8ff 58%, #f7f1ff); }
+.math-strategy-screen.active::before { background: radial-gradient(ellipse at 8% 8%, rgba(255,231,147,.42), transparent 32%), radial-gradient(ellipse at 90% 12%, rgba(144,213,255,.38), transparent 34%), linear-gradient(145deg, #fffdf5, #eef8ff 58%, #f7f1ff); }
+.math-playground-screen .game-header { margin: 0; }
+.math-playground-screen .game-header h1 { color: #17345c; }
+.math-park-star-summary { justify-self: end; padding: 10px 16px; border: 1px solid #d2e3f4; border-radius: 999px; background: #fff; color: #9b6500; font-weight: 950; white-space: nowrap; box-shadow: 0 4px 12px rgba(61,102,146,.1); }
+.math-galaxy-lead { margin: 0; color: #477092; text-align: center; font-size: clamp(1.05rem, 1.8vw, 1.35rem); font-weight: 850; }
+#math-galaxy-grid.math-galaxy-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.7vw, 24px); max-width: 1600px; padding: 0; }
+.math-playground-card.math-galaxy-card { position: relative; min-height: clamp(210px, 26vh, 300px); padding: clamp(18px, 2vw, 28px); gap: 9px; overflow: hidden; border: 2px solid color-mix(in srgb, var(--route-accent, #55b5d8) 42%, white); border-top: 7px solid var(--route-accent, #55b5d8); border-radius: 28px; background: linear-gradient(145deg, #fff, color-mix(in srgb, var(--route-accent, #55b5d8) 8%, white)); color: #18345f; box-shadow: 0 12px 28px rgba(57,96,138,.13), inset 0 1px 0 white; }
+.math-route-numbers { --route-accent: #51b6d3; }
+.math-route-addition { --route-accent: #f1b344; }
+.math-route-subtraction { --route-accent: #6eacd9; }
+.math-route-clock { --route-accent: #a47bd4; }
+.math-route-icon { display: grid; place-items: center; width: clamp(58px, 7vh, 80px); height: clamp(58px, 7vh, 80px); border-radius: 23px; background: color-mix(in srgb, var(--route-accent, #55b5d8) 16%, white); font: clamp(2.2rem, 4.2vh, 3rem)/1 "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
+.math-playground-card .math-galaxy-name { color: #18345f; font-size: clamp(1.25rem, 2vw, 1.75rem); font-weight: 1000; }
+.math-galaxy-skill, .math-route-copy { color: #59758f; font-size: clamp(.9rem, 1.25vw, 1.08rem); font-weight: 800; line-height: 1.35; }
+.math-playground-card .math-galaxy-status { margin-top: auto; color: #8c5b00; font-size: 1rem; font-weight: 950; }
+.math-playground-card:active { transform: translateY(2px) scale(.99); }
+.math-playground-card:focus-visible { outline: 4px solid #246ea3; outline-offset: 3px; }
+.math-extra-missions { width: min(100%, 1600px); margin: 0 auto; }
+.math-extra-mission-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.math-counting-set { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: clamp(8px, 1vw, 14px); }
+.math-counting-five-group { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 5px; align-items: center; justify-items: center; max-width: 360px; padding: 8px; border: 2px solid #efc95d; border-radius: 15px; background: linear-gradient(145deg, #fff9df, #fff); }
+.math-counting-five-label { grid-column: 1 / -1; color: #8c5b00; font-size: .78rem; font-weight: 950; }
+.math-counting-five-group .math-counting-object { width: clamp(34px, 4vw, 54px); }
+
+@media (max-width: 900px) {
+  #math-galaxy-grid.math-galaxy-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .math-extra-mission-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .math-extra-mission-card:last-child { grid-column: auto; }
+}
+@media (max-width: 560px) {
+  #math-galaxy-grid.math-galaxy-grid { grid-template-columns: minmax(0, 1fr); }
+  .math-playground-card.math-galaxy-card { min-height: 170px; }
+  .math-extra-mission-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.math-life-skill-screen.active {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(300px, .65fr);
+  grid-template-rows: auto auto auto minmax(360px, 1fr);
+  grid-template-areas: "header header" "planet planet" "prompt prompt" "board answers";
+  align-items: stretch;
+  gap: clamp(10px, 1.35vh, 18px);
+  min-height: 100dvh; height: auto; overflow: visible;
+}
+.math-life-skill-screen .game-header { grid-area: header; margin: 0; }
+.math-life-shop-stage { display: contents; }
+.math-life-skill-planet { grid-area: planet; margin: 0; color: #267655; text-align: center; font-size: clamp(.9rem, 1.5vw, 1.1rem); font-weight: 900; }
+.math-life-skill-prompt-wrap { grid-area: prompt; display: flex; align-items: center; justify-content: center; width: min(100%, 1320px); min-width: 0; margin: 0 auto; }
+.math-life-skill-prompt { width: 100%; margin: 0; padding: 12px 18px; border: 2px solid #a9d6ee; border-radius: 20px; background: linear-gradient(120deg, #fff, #eef8ff); color: #18345f; text-align: center; font-size: clamp(1.05rem, 2.1vh, 1.5rem); font-weight: 900; line-height: 1.25; box-shadow: 0 6px 18px rgba(71,117,160,.1); }
+.math-life-shop-poster { display: none; }
+.math-life-skill-board-wrap { grid-area: board; display: flex; flex-direction: column; min-width: 0; min-height: 360px; }
+.math-life-skill-board-heading, .math-life-skill-answers-heading { display: flex; align-items: center; gap: 8px; margin: 0 0 8px 4px; color: #267655; font-size: 1rem; font-weight: 950; }
+.math-life-skill-board { display: grid; place-content: center; justify-items: center; align-content: center; gap: 14px; flex: 1; min-width: 0; min-height: 320px; width: 100%; padding: clamp(16px, 2vw, 28px); box-sizing: border-box; border: 2px solid #c5d9ec; border-radius: 26px; background: linear-gradient(145deg, #fff, #f0f8ff); color: #17345c; box-shadow: 0 12px 28px rgba(77,116,158,.13), inset 0 1px 0 #fff; }
+.math-life-skill-answer-panel { grid-area: answers; display: flex; flex-direction: column; gap: 10px; min-width: 0; padding: clamp(14px, 1.5vw, 22px); border: 1px solid #d2e2ef; border-radius: 26px; background: linear-gradient(145deg, #fff, #f4f9ff); box-shadow: 0 10px 24px rgba(77,116,158,.12); }
+.math-life-skill-answers-heading { color: #18345f; margin: 0 0 2px; }
+.math-life-skill-choices { display: grid; grid-template-columns: 1fr; align-content: center; gap: 10px; min-width: 0; width: 100%; }
+.math-life-choice { display: flex; align-items: center; justify-content: center; gap: 10px; min-width: 0; min-height: 58px; padding: 10px 12px; border: 2px solid #e8bf5a; border-radius: 18px; background: linear-gradient(145deg, #fff7dc, #ffedb1); color: #18345f; font-size: clamp(1rem, 2.2vh, 1.28rem); font-weight: 900; line-height: 1.15; cursor: pointer; touch-action: manipulation; box-shadow: 0 4px 10px rgba(105,88,36,.08); }
+.math-life-choice svg { width: 42px; height: 42px; flex: 0 0 auto; }
+.math-life-choice:disabled { cursor: default; }
+.math-life-choice:focus-visible, .math-life-object:focus-visible { outline: 3px solid #2476ad; outline-offset: 2px; }
+.math-life-choice.is-bad { animation: math-soft-wobble .3s ease; border-color: #e58b8b; background: #fff0f0; }
+.math-life-choice.is-ok { border-color: #4bae83; background: #e5f8ed; }
+.math-life-skill-feedback { min-height: 2.7em; margin: 0; padding: 10px; border-radius: 14px; background: #eef8f2; color: #176b4c; text-align: center; font-size: clamp(.95rem, 1.8vh, 1.12rem); font-weight: 900; line-height: 1.35; }
+.math-life-skill-next { width: 100%; min-height: 56px; border-radius: 18px; background: linear-gradient(145deg, #41c58e, #20ad77); color: #fff; font-size: 1.2rem; font-weight: 950; }
+.math-life-skill-next[hidden] { display: none; }
+.math-life-board-instruction { margin: 0; color: #486984; text-align: center; font-size: clamp(.9rem, 1.6vw, 1.08rem); font-weight: 900; }
+.math-life-pair, .math-life-measure-pair { display: flex; align-items: center; justify-content: center; gap: clamp(8px, 1.4vw, 20px); width: 100%; }
+.math-life-pile { display: grid; justify-items: center; align-content: start; gap: 10px; flex: 1 1 0; max-width: 440px; min-width: 0; min-height: 190px; padding: 12px; border: 2px solid #c3d9eb; border-radius: 20px; background: #fff; }
+.math-life-side-label { color: #24476f; font-size: clamp(.8rem, 1.5vh, 1rem); font-weight: 900; }
+.math-life-pile-items { display: flex; flex-wrap: wrap; align-content: flex-start; justify-content: center; gap: 7px; width: 100%; }
+.math-life-object { display: grid; place-items: center; min-width: 48px; min-height: 48px; padding: 2px; border: 2px solid #dce9f5; border-radius: 14px; background: #f4f9ff; font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-size: clamp(1.5rem, 3.6vh, 2.25rem); line-height: 1; cursor: pointer; }
+.math-life-object.is-selected { border-color: #edaa35; background: #fff1c6; transform: translateY(-3px); }
+.math-life-object.is-paired { border-color: #80c9a6; background: #e7f8ef; opacity: .72; }
+.math-life-object:disabled { cursor: default; }
+.math-life-pair-count { color: #527093; font-size: .82rem; font-weight: 850; }
+.math-life-vs { flex: 0 0 auto; color: #267655; font-size: 1.7rem; font-weight: 1000; }
+.math-life-bond-equation { display: flex; align-items: center; justify-content: center; gap: clamp(8px, 1.2vw, 18px); margin-bottom: 16px; color: #274b76; font-size: clamp(.85rem, 1.8vh, 1.2rem); font-weight: 800; }
+.math-life-target-number, .math-life-part-number, .math-life-missing-number { display: grid; place-items: center; min-width: clamp(48px, 6vw, 76px); min-height: clamp(48px, 6vw, 76px); border: 3px solid #4bbbdc; border-radius: 16px; background: white; color: #17345c; font-size: clamp(1.6rem, 4vh, 2.8rem); font-weight: 1000; }
+.math-life-target-number { border-color: #f2b731; }
+.math-life-ten-frame { display: grid; grid-template-columns: repeat(5, minmax(32px, 68px)); gap: 7px; }
+.math-life-ten-cell { display: grid; place-items: center; aspect-ratio: 1; border: 2px solid #92bce5; border-radius: 12px; background: #f7fbff; font-size: clamp(1.2rem, 3vh, 2rem); }
+.math-life-ten-cell.is-filled { border-color: #f0b73a; background: #fff3be; }
+.math-life-ten-cell.is-empty { border-color: #78bbd6; border-style: dashed; background: #eef9ff; }
+.math-life-answer-number { font-size: 1.65rem; font-weight: 1000; }
+.math-life-answer-unit { color: #725a25; font-size: 1rem; }
+.math-life-shape-card { display: grid; justify-items: center; gap: 12px; color: #17345c; font-size: clamp(1.2rem, 2.6vh, 1.8rem); }
+.math-life-shape-drawing { display: block; width: 54px; height: 54px; flex: 0 0 auto; border: 3px solid #174b70; background: var(--shape-color, #ff9b39); box-sizing: border-box; filter: drop-shadow(0 3px 2px rgba(28,70,103,.17)); }
+.math-life-shape-drawing::before, .math-life-shape-drawing::after { content: none !important; display: none !important; }
+.math-life-shape-card .math-life-shape-drawing { width: clamp(120px, 19vw, 196px); height: clamp(120px, 19vw, 196px); }
+.math-life-pattern-tile .math-life-shape-drawing { width: 82%; height: 82%; }
+.math-life-shape-drawing.shape--circle { border-radius: 50%; }
+.math-life-shape-drawing.shape--oval { border-radius: 50%; transform: scaleY(.62); }
+.math-life-shape-drawing.shape--triangle { border: 0; clip-path: polygon(50% 3%, 98% 94%, 2% 94%); }
+.math-life-shape-drawing.shape--square { border-radius: 7px; }
+.math-life-shape-drawing.shape--rectangle { border-radius: 7px; transform: scaleY(.62); }
+.math-life-shape-drawing.shape--diamond { border: 0; clip-path: polygon(50% 2%, 98% 50%, 50% 98%, 2% 50%); }
+.math-life-shape-drawing.shape--pentagon { border: 0; clip-path: polygon(50% 2%, 98% 37%, 80% 98%, 20% 98%, 2% 37%); }
+.math-life-shape-drawing.shape--hexagon { border: 0; clip-path: polygon(25% 2%, 75% 2%, 98% 50%, 75% 98%, 25% 98%, 2% 50%); }
+.math-life-shape-drawing.shape--parallelogram { border: 0; clip-path: polygon(32% 2%, 98% 2%, 68% 98%, 2% 98%); }
+.math-life-shape-drawing.shape--trapezoid { border: 0; clip-path: polygon(28% 2%, 72% 2%, 98% 98%, 2% 98%); }
+.math-life-pattern-row { display: flex; align-items: center; justify-content: center; gap: clamp(6px, 1.4vw, 18px); width: 100%; }
+.math-life-pattern-tile, .math-life-pattern-missing { display: grid; place-items: center; width: clamp(54px, 8vw, 92px); aspect-ratio: 1; border: 2px solid #b7d0ec; border-radius: 16px; background: #fff; }
+.math-life-pattern-tile .math-life-shape-drawing { width: 80%; height: 80%; }
+.math-life-pattern-missing { border-style: dashed; color: #d89600; font-size: 2rem; font-weight: 900; }
+.math-life-shop-scene { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: clamp(16px, 3vw, 42px); color: #17345c; font-size: clamp(1rem, 2vh, 1.35rem); font-weight: 900; }
+.math-life-product-card, .math-life-wallet { display: grid; justify-items: center; gap: 10px; min-width: 190px; padding: 18px; border: 2px solid #cbddec; border-radius: 22px; background: #fff; box-shadow: 0 6px 16px rgba(77,116,158,.1); }
+.math-life-shop-item { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-size: clamp(3.5rem, 8vh, 6rem); line-height: 1; }
+.math-life-price-tag { padding: 6px 14px; border-radius: 999px; background: #fff1bf; color: #815500; }
+.math-life-coins { display: flex; flex-wrap: wrap; justify-content: center; gap: 2px 5px; max-width: 360px; font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-size: clamp(1.3rem, 3vh, 1.9rem); }
+.math-life-coin { line-height: 1.15; }
+.math-life-hk-coin {
+  display: inline-grid; place-items: center; flex: 0 0 auto;
+  width: clamp(58px, 8vh, 84px); aspect-ratio: 1;
+  background-position: center; background-repeat: no-repeat; background-size: contain;
+  color: transparent; font-size: 0; line-height: 1;
+  filter: drop-shadow(0 3px 3px rgba(61, 49, 23, .24));
+}
+.math-life-hk-coin--1 { background-image: url("../assets/math-life/coin-1.svg"); }
+.math-life-hk-coin--2 { background-image: url("../assets/math-life/coin-2.svg"); }
+.math-life-hk-coin--5 { background-image: url("../assets/math-life/coin-5.svg"); }
+.math-life-hk-coin--10 { background-image: url("../assets/math-life/coin-10.svg"); }
+.math-life-coin-button {
+  display: grid; place-items: center; min-width: 84px; min-height: 84px;
+  padding: 5px; border: 2px solid #e6d6ad; border-radius: 20px;
+  background: #fffaf0; cursor: pointer; touch-action: manipulation;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+.math-life-coin-button .math-life-hk-coin { width: clamp(66px, 9vh, 92px); }
+.math-life-coin-button.is-selected { transform: translateY(-5px); border-color: #35ad83; background: #e5f8ef; box-shadow: 0 0 0 3px rgba(53, 173, 131, .18); }
+.math-life-coin-button:disabled { cursor: default; }
+.math-life-coin-button:focus-visible, .math-life-shop-pay-button:focus-visible { outline: 3px solid #2476ad; outline-offset: 3px; }
+.math-life-payment-tray {
+  display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px;
+  width: min(100%, 560px); min-height: 92px; padding: 12px 18px; box-sizing: border-box;
+  border: 3px dashed #e9bd55; border-radius: 22px; background: rgba(255, 250, 231, .96); color: #604a1b;
+}
+.math-life-payment-tray > strong { flex: 0 0 100%; text-align: center; }
+.math-life-payment-coins { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; min-height: 54px; gap: 4px; }
+.math-life-payment-coins .math-life-hk-coin { width: 54px; }
+.math-life-payment-total { min-width: 74px; padding: 5px 12px; border-radius: 999px; background: #fff; color: #17345c; text-align: center; font-size: 1.35rem; font-weight: 1000; }
+.math-life-shop-pay-button { width: min(100%, 520px); min-height: 58px; border-radius: 18px; background: linear-gradient(145deg, #45c792, #22aa77); color: #fff; font-size: 1.2rem; font-weight: 950; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-feedback:empty { display: none; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-feedback:not(:empty) { padding: 10px 14px; border-radius: 16px; background: #e8f7ef; color: #236348; font-weight: 850; line-height: 1.35; }
+.math-life-measure-object { display: grid; justify-items: center; align-items: center; align-content: center; gap: 8px; flex: 1 1 0; max-width: 320px; min-width: 0; min-height: 150px; padding: 10px; border: 2px solid #b9d9f5; border-radius: 18px; background: #fff; }
+.math-life-ruler { display: flex; align-items: center; width: 100%; min-height: 76px; background: repeating-linear-gradient(90deg, transparent 0 calc(10% - 1px), #aac4d9 calc(10% - 1px) 10%); border-bottom: 2px solid #a5bfd4; }
+.math-life-measure-bar { display: block; max-width: 100%; height: 32px; border: 2px solid #bf7723; border-radius: 8px; background: repeating-linear-gradient(90deg, #ffd35e 0 28px, #f8a83b 28px 56px); }
+.math-life-balance-visual { display: grid; justify-items: center; gap: 8px; }
+.math-life-weight-blocks { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); justify-items: center; gap: 2px; max-width: 100%; }
+.math-life-weight-block { font-size: clamp(1.2rem, 3.2vh, 1.8rem); line-height: 1; }
+.math-life-cup { position: relative; display: block; overflow: hidden; width: 64px; height: 100px; border: 4px solid #47729d; border-top-width: 2px; border-radius: 4px 4px 18px 18px; background: #f7fbff; }
+.math-life-cup-water { position: absolute; inset-inline: 0; bottom: 0; background: #56c9ed; border-top: 3px solid #239dc9; }
+.math-life-measure-mark { color: #527093; font-size: .85rem; font-weight: 900; }
+
+/* These two new destinations contain more content than a single canvas can
+   safely clip. Let the document grow and scroll only while either is active. */
+@supports selector(html:has(*)) {
+  html.math-canvas-mode:has(#screen-math-galaxy.active),
+  html.math-canvas-mode:has(#screen-math-life-skill.active),
+  html.math-canvas-mode:has(#screen-math-strategy.active),
+  html.math-canvas-mode:has(#screen-math-earth-addition-select.active),
+  html.math-canvas-mode:has(#screen-math-moon-subtraction-select.active),
+  html.math-canvas-mode:has(#screen-math-galaxy.active) body,
+  html.math-canvas-mode:has(#screen-math-life-skill.active) body,
+  html.math-canvas-mode:has(#screen-math-strategy.active) body,
+  html.math-canvas-mode:has(#screen-math-earth-addition-select.active) body,
+  html.math-canvas-mode:has(#screen-math-moon-subtraction-select.active) body { height: auto; min-height: 100%; overflow-x: hidden; overflow-y: auto; }
+  html.math-canvas-mode:has(#screen-math-galaxy.active) body,
+  html.math-canvas-mode:has(#screen-math-life-skill.active) body,
+  html.math-canvas-mode:has(#screen-math-strategy.active) body,
+  html.math-canvas-mode:has(#screen-math-earth-addition-select.active) body,
+  html.math-canvas-mode:has(#screen-math-moon-subtraction-select.active) body { display: block; }
+  html.math-canvas-mode:has(#screen-math-galaxy.active) #app,
+  html.math-canvas-mode:has(#screen-math-life-skill.active) #app,
+  html.math-canvas-mode:has(#screen-math-strategy.active) #app,
+  html.math-canvas-mode:has(#screen-math-earth-addition-select.active) #app,
+  html.math-canvas-mode:has(#screen-math-moon-subtraction-select.active) #app { height: auto; min-height: 100dvh; overflow: visible; }
+  html.math-canvas-mode:has(#screen-math-galaxy.active) #screen-math-galaxy.active,
+  html.math-canvas-mode:has(#screen-math-life-skill.active) #screen-math-life-skill.active,
+  html.math-canvas-mode:has(#screen-math-strategy.active) #screen-math-strategy.active,
+  html.math-canvas-mode:has(#screen-math-earth-addition-select.active) #screen-math-earth-addition-select.active,
+  html.math-canvas-mode:has(#screen-math-moon-subtraction-select.active) #screen-math-moon-subtraction-select.active { height: auto; min-height: 100dvh; max-height: none; overflow: visible; }
+}
+
+@keyframes math-soft-wobble { 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+@media (max-width: 900px) {
+  .math-extra-mission-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .math-extra-mission-card:last-child { grid-column: 1 / -1; }
+  .math-strategy-method-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 701px) and (orientation: landscape) {
+  .math-extra-mission-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  html.math-canvas-mode:has(#screen-math-galaxy.active) #app, html.math-canvas-mode:has(#screen-math-life-skill.active) #app, html.math-canvas-mode:has(#screen-math-strategy.active) #app { width: 100%; }
+  html.math-canvas-mode .math-life-skill-screen.active { width: 100%; height: auto; min-height: 100dvh; max-height: none; overflow: visible; }
+  html.math-canvas-mode .math-strategy-screen.active { width: 100%; height: auto; min-height: 100dvh; max-height: none; overflow: visible; }
+}
+@media (min-width: 701px) and (max-width: 900px) and (orientation: portrait) {
+  .math-life-skill-screen.active { grid-template-columns: 1fr; grid-template-rows: auto auto auto auto auto; grid-template-areas: "header" "planet" "prompt" "board" "answers"; min-height: 0; }
+  .math-life-skill-board-wrap { min-height: 330px; }
+  .math-life-skill-choices { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-scene { grid-template-columns: minmax(0, 1fr); }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-product-card { grid-column: 1; grid-row: auto; display: flex; flex-direction: row; justify-content: space-around; gap: 8px; padding: 8px; }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-item { font-size: 2.7rem; }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-wallet,
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-payment-tray { grid-column: 1; grid-row: auto; }
+  .math-strategy-method-grid { grid-template-columns: 1fr; }
+  .math-strategy-card { min-height: 0; }
+  .math-strategy-intro-panel, .math-strategy-play-panel { grid-template-columns: minmax(0, 1fr); }
+  .math-strategy-primary { grid-column: auto; width: 100%; }
+  .math-strategy-question-card { min-height: 240px; }
+  .math-strategy-choices { gap: 8px; }
+  .math-strategy-choice { min-height: 60px; }
+  .math-strategy-finish-actions { flex-direction: column; }
+  .math-life-skill-screen.active { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto auto auto; grid-template-areas: "header" "planet" "prompt" "board" "answers"; height: auto; min-height: 100dvh; overflow: visible; }
+  .math-life-skill-screen .game-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "back progress" "title title"; gap: 8px; margin-bottom: 0; }
+  .math-life-skill-screen .game-header > :first-child { grid-area: back; justify-self: start; }
+  .math-life-skill-screen .game-header h1 { grid-area: title; min-width: 0; text-align: center; overflow-wrap: anywhere; font-size: clamp(1.25rem, 5vw, 1.65rem); }
+  .math-life-skill-screen .game-header > :last-child { grid-area: progress; justify-self: end; }
+  .math-life-skill-board-wrap { min-height: 300px; }
+  .math-life-skill-board { min-height: 260px; }
+  .math-life-skill-choices { grid-template-columns: 1fr; }
+  .math-life-skill-next { width: 100%; }
+  .math-life-pair { gap: 6px; }
+  .math-life-pile { min-height: 160px; padding: 8px; }
+  .math-life-object { min-width: 42px; min-height: 42px; }
+  .math-life-skill-answer-panel { padding: 14px; }
+  .math-life-ten-frame { grid-template-columns: repeat(5, minmax(30px, 54px)); gap: 5px; }
+  .math-life-pattern-row { gap: 5px; }
+  .math-life-pattern-tile, .math-life-pattern-missing { width: clamp(42px, 13vw, 68px); border-radius: 12px; }
+}
+.math-galaxy-lead span { color: #fde68a; }
+.math-galaxy-card.planet-count { border-color: rgba(96, 165, 250, .72); }
+.math-galaxy-card.planet-time { border-color: rgba(251, 191, 36, .72); }
+.math-galaxy-card.planet-compare-size { border-color: rgba(52, 211, 153, .72); }
+.math-galaxy-card.planet-moon { border-color: rgba(196, 181, 253, .72); }
+.math-galaxy-card.planet-shape { border-color: rgba(251, 146, 60, .72); }
+
+/* Landscape game screens can use the full iPad canvas instead of the
+   narrow desktop content cap. */
+@media (min-width: 701px) and (orientation: landscape) {
+  #app:has(.math-screen.active) { max-width: 1400px; }
+  #screen-math-time.math-screen.active { min-height: 0; }
+  #screen-math-time .math-time-set { width: min(100%, 980px); grid-template-columns: 180px minmax(280px, 360px) 1fr; align-items: center; text-align: left; }
+  #screen-math-time .math-time-set-label { grid-column: 1; }
+  #screen-math-time .math-time-set .math-digital-clock { grid-column: 1; grid-row: 2; }
+  #screen-math-time .math-time-set-hint { grid-column: 3; grid-row: 2; }
+  #screen-math-time .math-time-set-face { grid-column: 2; grid-row: 1 / span 4; width: clamp(280px, 27vw, 360px); }
+  #screen-math-time .math-time-hand-controls { grid-column: 3; grid-row: 3; justify-content: flex-start; }
+  #screen-math-time #btn-math-time-set-answer { grid-column: 3; grid-row: 4; justify-self: start; }
+}
+
+.math-lit-badge {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gold-soft);
+}
+
+/* ---------- 飛過場 warp-hop ---------- */
+.math-warp {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(800px 400px at 50% 40%, rgba(251, 191, 36, 0.18), transparent 55%),
+    rgba(4, 11, 24, 0.88);
+  backdrop-filter: blur(4px);
+}
+
+.math-warp[hidden] {
+  display: none !important;
+}
+
+.math-warp-inner {
+  width: min(100%, 520px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+
+.math-warp-planets {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 140px;
+}
+
+.math-warp-from,
+.math-warp-to {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.math-warp-from .math-globe-img,
+.math-warp-to .math-globe-img {
+  width: min(28vw, 112px);
+  height: min(28vw, 112px);
+}
+
+.math-warp-ship {
+  position: absolute;
+  left: 18%;
+  top: 36%;
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px rgba(253, 230, 138, 0.8));
+  opacity: 0;
+}
+
+.math-warp.is-flying .math-warp-ship {
+  animation: math-warp-hop 1.8s ease-in-out forwards;
+}
+
+.math-warp.is-flying .math-warp-from {
+  animation: math-warp-glow 0.6s ease;
+}
+
+.math-warp.is-flying .math-warp-to {
+  animation: math-warp-arrive 1.8s ease forwards;
+}
+
+@keyframes math-warp-hop {
+  0% {
+    left: 18%;
+    top: 36%;
+    opacity: 0;
+    transform: scale(0.6) rotate(-20deg);
+  }
+  12% {
+    opacity: 1;
+  }
+  55% {
+    left: 48%;
+    top: 18%;
+    transform: scale(1.1) rotate(10deg);
+  }
+  100% {
+    left: 72%;
+    top: 36%;
+    opacity: 0.2;
+    transform: scale(0.85) rotate(25deg);
+  }
+}
+
+@keyframes math-warp-glow {
+  from {
+    filter: brightness(1);
+  }
+  40% {
+    filter: brightness(1.35) drop-shadow(0 0 16px rgba(253, 230, 138, 0.9));
+  }
+  to {
+    filter: brightness(1);
+  }
+}
+
+@keyframes math-warp-arrive {
+  0%,
+  55% {
+    transform: scale(0.92);
+    filter: brightness(0.85);
+  }
+  100% {
+    transform: scale(1.06);
+    filter: brightness(1.2) drop-shadow(0 0 18px rgba(253, 230, 138, 0.75));
+  }
+}
+
+.math-warp-msg {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.math-warp-actions {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #math-planet-ball.math-globe-wrap,
+  .math-ranger-guide-logo,
+  .math-count-dot,
+  .math-warp.is-flying .math-warp-ship,
+  .math-warp.is-flying .math-warp-from,
+  .math-warp.is-flying .math-warp-to {
+    animation: none;
+  }
+
+  .math-warp.is-flying .math-warp-ship {
+    opacity: 1;
+    left: 48%;
+  }
+}
+
+/* ---------- 水星・數數學習／測驗 ---------- */
+.math-screen .btn-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: min(100%, 420px);
+  margin: 12px auto 0;
+}
+
+.math-learn-stage {
+  appearance: none;
+  border: 2px solid rgba(253, 230, 138, 0.35);
+  background: rgba(18, 40, 72, 0.72);
+  border-radius: var(--radius);
+  color: var(--ink);
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 18px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  touch-action: manipulation;
+  box-shadow: var(--shadow);
+}
+
+.math-learn-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 10vw, 4rem);
+  font-weight: 700;
+  color: var(--gold-soft);
+  line-height: 1;
+}
+
+.math-count-field {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 10px;
+  min-height: 120px;
+  width: 100%;
+  padding: 8px;
+}
+
+.math-count-field--quiz {
+  min-height: 150px;
+  margin: 8px 0 4px;
+  background: rgba(18, 40, 72, 0.55);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.math-count-dot {
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  line-height: 1;
+  animation: math-count-pop 0.35s ease both;
+}
+
+/* 數理物件採用裝置原生彩色 emoji（iPad／iPhone 會使用 Apple Color Emoji）。 */
+.math-native-emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  font-variant-emoji: emoji;
+  text-rendering: optimizeLegibility;
+}
+
+.math-count-tappable {
+  appearance: none;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  min-width: 64px;
+  min-height: 64px;
+  padding: 7px;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: opacity 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+}
+
+.math-count-tappable.is-counted {
+  opacity: 0.48;
+  transform: scale(0.86);
+  border-color: #6ee7b7;
+  background: rgba(52, 211, 153, 0.18);
+}
+
+.math-touch-count {
+  width: min(100%, 560px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(7px, 1.5vw, 14px);
+}
+
+.math-touch-count--arc .math-count-tappable:nth-child(2n) {
+  transform: translateY(10px);
+}
+
+.math-touch-count--arc .math-count-tappable.is-counted {
+  transform: translateY(10px) scale(0.86);
+}
+
+.math-touch-status {
+  width: 100%;
+  text-align: center;
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  font-weight: 700;
+}
+
+.math-count-field--conservation {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 12px;
+}
+
+.math-conservation-row {
+  min-height: 116px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.math-conservation-row .math-count-dot,
+.math-one-more-group .math-count-dot,
+.math-subitize-pattern .math-count-dot {
+  font-size: clamp(1.55rem, 4.5vw, 2.35rem);
+}
+
+.math-conservation-row--line {
+  flex-wrap: nowrap;
+}
+
+.math-conservation-row--scattered .math-count-dot:nth-child(2n) {
+  transform: translateY(13px);
+}
+
+.math-conservation-arrow {
+  color: var(--gold-soft);
+  font-weight: 700;
+  text-align: center;
+  max-width: 80px;
+}
+
+.math-target-number {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--ink-dim);
+  font-weight: 700;
+}
+
+.math-target-number strong {
+  color: var(--gold-soft);
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 15vw, 6.8rem);
+  line-height: 1;
+}
+
+.math-one-more-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  max-width: 65%;
+}
+
+.math-one-more-action {
+  min-width: 88px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(110, 231, 183, 0.16);
+  color: #6ee7b7;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 6vw, 2.8rem);
+  font-weight: 700;
+  text-align: center;
+}
+
+.math-one-more-action.is-less {
+  background: rgba(253, 230, 138, 0.14);
+  color: var(--gold-soft);
+}
+
+.math-subitize-pattern {
+  width: min(100%, 260px);
+  min-height: 130px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+  gap: 8px 28px;
+  padding: 14px 26px;
+  border: 3px solid rgba(255, 255, 255, 0.16);
+  border-radius: 24px;
+}
+
+.math-subitize-pattern--fiveFrame {
+  width: min(100%, 420px);
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.math-quantity-option {
+  appearance: none;
+  width: clamp(94px, 25vw, 132px);
+  min-height: 86px;
+  border: 3px solid rgba(110, 231, 183, 0.48);
+  border-radius: 22px;
+  background: rgba(24, 48, 92, 0.92);
+  color: #6ee7b7;
+  cursor: pointer;
+  touch-action: manipulation;
+  padding: 12px;
+}
+
+.math-mini-dots {
+  display: block;
+  overflow-wrap: anywhere;
+  letter-spacing: 4px;
+  font-size: clamp(1.15rem, 3.5vw, 1.55rem);
+  line-height: 1.35;
+}
+
+.math-quantity-option.is-ok {
+  animation: popOk 0.45s ease;
+  border-color: #6ee7b7;
+}
+
+.math-quantity-option.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+.math-num-bubble:disabled {
+  opacity: 0.3;
+  cursor: default;
+  filter: grayscale(0.65);
+}
+
+.math-count-field.is-guided .math-count-dot:not(.is-counted) {
+  filter: drop-shadow(0 0 12px rgba(253, 230, 138, 0.95));
+}
+
+@media (max-width: 560px) {
+  .math-life-shop-scene:not(.is-coin-recognition) { grid-template-columns: minmax(0, 1fr); }
+  .math-life-shop-scene:not(.is-coin-recognition) .math-life-product-card,
+  .math-life-shop-scene:not(.is-coin-recognition) .math-life-wallet,
+  .math-life-shop-scene:not(.is-coin-recognition) .math-life-payment-tray { grid-column: 1; grid-row: auto; }
+  .math-count-field--conservation {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .math-conservation-row {
+    min-height: 72px;
+  }
+
+  .math-conservation-arrow {
+    max-width: none;
+  }
+
+  .math-count-tappable {
+    min-width: 54px;
+    min-height: 54px;
+  }
+}
+
+@keyframes math-count-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.math-num-bubbles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin: 16px 0 8px;
+}
+
+.math-num-bubble {
+  appearance: none;
+  border: none;
+  width: clamp(72px, 18vw, 96px);
+  height: clamp(72px, 18vw, 96px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.45), transparent 42%),
+    var(--math-planet, #b6bcc4);
+  color: #1a1f2c;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 6vw, 2.4rem);
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.28);
+}
+
+.math-num-bubble:active {
+  transform: scale(0.94);
+}
+
+.math-num-bubble.is-ok {
+  animation: popOk 0.45s ease;
+}
+
+.math-num-bubble.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+#screen-math-learn.math-screen.active,
+#screen-math-play.math-screen.active,
+#screen-math-count.math-screen.active {
+  --math-planet: #b6bcc4;
+}
+
+#screen-math-venus-learn.math-screen.active,
+#screen-math-venus-play.math-screen.active,
+#screen-math-time.math-screen.active {
+  --math-planet: #e8c27a;
+}
+
+#screen-math-earth-levels.math-screen.active,
+#screen-math-earth-game.math-screen.active {
+  --math-planet: #3b82f6;
+}
+
+#screen-math-learn.math-screen.active::before,
+#screen-math-play.math-screen.active::before,
+#screen-math-count.math-screen.active::before,
+#screen-math-venus-learn.math-screen.active::before,
+#screen-math-venus-play.math-screen.active::before,
+#screen-math-time.math-screen.active::before,
+#screen-math-earth-levels.math-screen.active::before,
+#screen-math-earth-game.math-screen.active::before {
+  background:
+    radial-gradient(900px 500px at 50% 18%, color-mix(in srgb, var(--math-planet, #b6bcc4) 22%, transparent), transparent 58%),
+    linear-gradient(180deg, rgba(7, 21, 38, 0.55) 0%, rgba(7, 21, 38, 0.72) 100%),
+    url("../assets/math/galaxy-bg.jpg") center 40% / cover no-repeat;
+}
+
+/* ---------- 金星・邊多邊少 ---------- */
+.math-compare-pairs {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+.math-compare-side,
+.math-compare-pick {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-height: 170px;
+  padding: 12px;
+  border-radius: 22px;
+  background: rgba(18, 40, 72, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.math-compare-pick {
+  appearance: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  font: inherit;
+  color: inherit;
+}
+
+.math-compare-pick:active {
+  transform: scale(0.98);
+}
+
+.math-compare-pick.is-ok {
+  border-color: rgba(253, 230, 138, 0.9);
+  box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.35);
+  animation: popOk 0.45s ease;
+}
+
+.math-compare-pick.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+.math-compare-vs {
+  align-self: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gold-soft);
+  font-size: 1.2rem;
+}
+
+.math-compare-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 6px;
+  min-height: 84px;
+  flex: 1;
+}
+
+.math-compare-label {
+  font-size: 0.95rem;
+  color: var(--ink-dim);
+}
+
+.math-venus-say {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--gold-soft);
+}
+
+.math-compare-actions {
+  margin: 14px 0 6px;
+}
+
+/* ---------- 地球・能量方塊加法 ---------- */
+.math-addition-level-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.math-addition-level-card {
+  appearance: none;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  background: rgba(18, 40, 72, 0.62);
+  color: inherit;
+  font: inherit;
+  padding: 14px 10px;
+  min-height: 108px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  touch-action: manipulation;
+  text-align: center;
+}
+
+.math-addition-level-card:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.math-addition-level-card.is-locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.math-addition-level-card.is-done {
+  border-color: rgba(253, 230, 138, 0.55);
+}
+
+.math-addition-level-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5vw, 2rem);
+  font-weight: 800;
+  color: var(--gold-soft);
+}
+
+.math-addition-level-title {
+  font-size: 0.95rem;
+  color: var(--ink-dim);
+}
+
+.math-addition-board {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 6px 0 10px;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5.5vw, 2.2rem);
+  font-weight: 800;
+}
+
+.math-addition-eq-a,
+.math-addition-eq-sum {
+  color: var(--gold-soft);
+}
+
+.math-addition-eq-b {
+  color: #67e8f9;
+  min-width: 1.2em;
+  text-align: center;
+}
+
+.math-addition-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 0;
+}
+
+.math-addition-slots {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  gap: 8px;
+  width: 100%;
+}
+
+.math-addition-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 8px;
+  border-radius: 20px;
+  background: rgba(18, 40, 72, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 120px;
+}
+
+.math-addition-slot.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+.math-addition-slot--b.is-drop-target {
+  border-color: rgba(103, 232, 249, 0.75);
+  box-shadow: 0 0 0 3px rgba(103, 232, 249, 0.25);
+}
+
+.math-addition-slot-label {
+  font-size: 0.85rem;
+  color: var(--ink-dim);
+}
+
+.math-addition-merge {
+  align-self: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gold-soft);
+  font-size: 1.4rem;
+}
+
+.math-addition-blocks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  gap: 6px;
+  min-height: 72px;
+  width: 100%;
+}
+
+.math-addition-blocks--drop {
+  min-height: 84px;
+  border-radius: 14px;
+  border: 2px dashed rgba(103, 232, 249, 0.35);
+  padding: 6px;
+}
+
+.math-energy-block {
+  width: clamp(36px, 9vw, 44px);
+  height: clamp(36px, 9vw, 44px);
+  border-radius: 10px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.35) 0%, transparent 40%),
+    linear-gradient(180deg, #38bdf8 0%, #2563eb 55%, #1e40af 100%);
+  box-shadow:
+    0 0 12px rgba(56, 189, 248, 0.45),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+  animation: math-count-pop 0.3s ease both;
+  touch-action: none;
+}
+
+.math-energy-block.is-in-warehouse {
+  cursor: grab;
+}
+
+.math-energy-block.is-dragging {
+  opacity: 0.35;
+}
+
+.math-addition-stack {
+  appearance: none;
+  border: none;
+  background: rgba(15, 35, 62, 0.7);
+  border-radius: 16px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  touch-action: manipulation;
+  color: inherit;
+  font: inherit;
+  min-width: 64px;
+}
+
+.math-addition-stack:active {
+  transform: scale(0.96);
+}
+
+.math-addition-stack-preview {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+  max-width: 88px;
+}
+
+.math-addition-stack-preview .math-energy-block {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+}
+
+.math-addition-stack-count {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--gold-soft);
+}
+
+.math-addition-warehouse {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 4px;
+}
+
+.math-addition-hint {
+  font-size: 1rem;
+  color: var(--ink-dim);
+  text-align: center;
+  margin: 0;
+}
+
+.math-addition-actions {
+  margin-top: 4px;
+}
+
+.math-addition-celebrate {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(7, 21, 38, 0.82);
+  padding: 24px;
+}
+
+.math-addition-celebrate-burst {
+  width: min(70vw, 280px);
+  height: min(70vw, 280px);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(253, 230, 138, 0.35), transparent 62%),
+    linear-gradient(180deg, rgba(56, 189, 248, 0.25), rgba(37, 99, 235, 0.15));
+  animation: math-addition-merge 0.9s ease both;
+}
+
+.math-addition-celebrate-say {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 800;
+  color: var(--gold-soft);
+  text-align: center;
+}
+
+@keyframes math-addition-merge {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  45% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.math-addition-slots.is-merging .math-energy-block {
+  animation: math-addition-block-merge 0.75s ease both;
+}
+
+@keyframes math-addition-block-merge {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15) translateY(-6px);
+    filter: brightness(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#screen-math-earth-game.math-screen.active {
+  overflow: hidden;
+}
+
+@media (max-width: 700px) {
+  .math-addition-level-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- 月球・時間（原創畫鐘，唔用外部圖） ---------- */
+.math-clock-face {
+  position: relative;
+  display: block;
+  width: min(52vw, 220px);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  line-height: 0;
+}
+
+.math-clock-face--drawn {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 30%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.75) 55%),
+    #f8fafc;
+  border: 6px solid #0f172a;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.35), inset 0 0 0 4px rgba(251, 191, 36, 0.35);
+}
+
+.math-clock-face .math-clock-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+  z-index: 2;
+}
+
+.math-clock-face .math-clock-marker--num {
+  font-size: clamp(0.95rem, 3.8vw, 1.25rem);
+  color: #0f172a;
+  text-shadow:
+    -1px -1px 0 #ffffff,
+    1px -1px 0 #ffffff,
+    -1px 1px 0 #ffffff,
+    1px 1px 0 #ffffff,
+    0 2px 3px rgba(15, 23, 42, 0.15);
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  min-width: auto;
+}
+
+.math-clock-face .math-clock-marker--dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fbbf24;
+  border: 1.5px solid #0f172a;
+}
+
+/* 最外圈細刻度：每個鐘點一條短線，跟住角度轉 */
+.math-clock-tick {
+  position: absolute;
+  width: 3px;
+  height: 10px;
+  border-radius: 2px;
+  background: #0f172a;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.math-clock-face--small .math-clock-tick {
+  width: 2px;
+  height: 7px;
+}
+
+.math-clock-hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: 50% 100%;
+  border-radius: 999px;
+  z-index: 3;
+}
+
+.math-clock-hand--hour {
+  width: 10px;
+  height: 20%;
+  background: #0f172a;
+}
+
+.math-clock-hand--min {
+  width: 7px;
+  height: 30%;
+  background: #b45309;
+}
+
+.math-clock-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: #b45309;
+  border: 2px solid #ffffff;
+  z-index: 4;
+}
+
+.math-clock-face--small {
+  width: 100%;
+  max-width: 140px;
+}
+
+.math-clock-face--small .math-clock-marker--num {
+  font-size: clamp(0.62rem, 2.1vw, 0.78rem);
+  padding: 0;
+}
+
+.math-clock-face--small .math-clock-marker--dot {
+  width: 6px;
+  height: 6px;
+}
+
+#screen-math-time .game-header {
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+
+#screen-math-time .game-header h1 {
+  flex: 1 1 100%;
+  text-align: center;
+}
+
+.math-clock-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  max-width: 640px;
+  margin: 12px auto 20px;
+  padding-bottom: 10px;
+}
+
+.math-clock-pick {
+  appearance: none;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  background: rgba(18, 40, 72, 0.6);
+  border-radius: 20px;
+  padding: 12px;
+  cursor: pointer;
+  touch-action: manipulation;
+  min-height: 96px;
+}
+
+.math-clock-pick img {
+  width: 100%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+}
+
+.math-clock-pick:active {
+  transform: scale(0.96);
+}
+
+.math-clock-pick.is-ok {
+  border-color: rgba(253, 230, 138, 0.9);
+  box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.35);
+  animation: popOk 0.45s ease;
+}
+
+.math-clock-pick.is-bad {
+  animation: softShake 0.4s ease;
+}
+
+#screen-math-time .feedback {
+  margin: 12px 0 8px;
+  padding-bottom: 8px;
+}
+
+.math-clock-label {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.92rem;
+  color: var(--ink-dim);
+}
+
+/* ---------- 金星・電子鐘 ---------- */
+.math-clock-pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 24px);
+  flex-wrap: wrap;
+}
+
+.math-digital-clock {
+  min-width: clamp(120px, 28vw, 180px);
+  padding: clamp(10px, 2vw, 16px) clamp(14px, 3vw, 22px);
+  border-radius: 14px;
+  background: #0b1224;
+  border: 2px solid rgba(253, 230, 138, 0.45);
+  box-shadow: inset 0 0 18px rgba(56, 189, 248, 0.15);
+  text-align: center;
+}
+
+.math-digital-clock--small {
+  min-width: clamp(88px, 20vw, 120px);
+  padding: 8px 12px;
+}
+
+.math-digital-digits {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 7vw, 2.8rem);
+  font-weight: 700;
+  color: #67e8f9;
+  letter-spacing: 0.06em;
+}
+
+.math-digital-clock--small .math-digital-digits {
+  font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+}
+
+.math-clock-pick--digital {
+  min-width: clamp(110px, 26vw, 150px);
+}
+
+.math-time-set {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  width: min(100%, 430px);
+  margin: 8px auto 14px;
+  text-align: center;
+}
+.math-time-set[hidden] { display: none; }
+.math-time-set-label { margin: 0; color: var(--ink-dim); font-weight: 700; }
+.math-time-set-hint { margin: 0; color: var(--ink-dim); font-size: .95rem; }
+.math-time-set-face { width: clamp(190px, 42vw, 260px); aspect-ratio: 1; cursor: grab; touch-action: none; user-select: none; }
+.math-time-set-face:active { cursor: grabbing; }
+.math-time-set-face .math-clock-face { width: 100%; height: 100%; }
+.math-time-toggle { min-height: 44px; }
+.math-time-hand-controls { display: flex; gap: 10px; justify-content: center; }
+.math-time-hand-controls .btn { min-height: 44px; min-width: 120px; }
+.math-time-hand-controls .btn.is-active { background: #fbbf24; color: #0b1b36; box-shadow: 0 0 0 3px rgba(253,230,138,.45); }
+#btn-math-time-set-answer { min-height: 48px; min-width: 150px; }
+
+@media (max-width: 700px) {
+  .math-time-set { margin-bottom: 8px; }
+  .math-time-set-face { width: min(58vw, 230px); }
+}
+
+#screen-math-venus-learn.math-screen.active,
+#screen-math-venus-play.math-screen.active,
+#screen-math-time.math-screen.active {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+/* 數理以 iPad 橫向為主，但畫布跟 Chrome 實際可用 viewport 流動，不綁死實體解像度。 */
+@media (min-width:701px) and (orientation:landscape) {
+  html.math-canvas-mode,
+  html.math-canvas-mode body {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    overflow: hidden;
+  }
+
+  html.math-canvas-mode body {
+    display: grid;
+    place-items: center;
+  }
+
+  html.math-canvas-mode #app {
+    width: 100dvw;
+    height: 100dvh;
+    min-height: 0;
+    max-width: none;
+    margin: 0;
+    padding: max(12px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+    overflow: hidden;
+  }
+
+  html.math-canvas-mode .math-screen.active {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  /* Level and method selection is browsing, not a drag exercise: expose a
+     small internal scroll instead of clipping any cards below the fold. */
+  html.math-canvas-mode #screen-math-earth-addition-select.math-screen.active,
+  html.math-canvas-mode #screen-math-moon-subtraction-select.math-screen.active {
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+  }
+}
+
+/* 直向 iPad 採用同手機一致的單欄、可捲動操作流程。 */
+@media (min-width:701px) and (orientation:portrait) {
+  html.math-canvas-mode,html.math-canvas-mode body{height:auto;min-height:100%;overflow:auto}
+  html.math-canvas-mode body{display:block}
+  html.math-canvas-mode #app{width:100%;height:auto;min-height:100dvh;max-width:none;margin:0;padding:16px;overflow:visible}
+  html.math-canvas-mode .math-screen.active{height:auto;min-height:100dvh;overflow:visible}
+}
+
+/* Fruit shop: keep the page to a header and one immersive play area. */
+.math-life-skill-screen[data-activity="little-shop"].active {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(500px, 1fr);
+  grid-template-areas: "header" "stage";
+  align-content: stretch;
+  gap: clamp(8px, 1.2vh, 14px);
+  min-height: 100dvh;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-stage {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-area: stage;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas: "prompt" "board" "answers";
+  align-items: stretch;
+  gap: clamp(10px, 1.5vh, 18px);
+  min-width: 0;
+  min-height: clamp(500px, calc(100dvh - 150px), 780px);
+  padding: clamp(14px, 2.2vw, 28px);
+  overflow: hidden;
+  border: 2px solid rgba(228, 188, 91, .75);
+  border-radius: clamp(20px, 2.2vw, 32px);
+  background: rgba(255, 250, 232, .82);
+  box-shadow: 0 10px 28px rgba(92, 108, 132, .12);
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: linear-gradient(110deg, rgba(255, 251, 235, .36), rgba(255, 255, 255, .48) 54%, rgba(239, 248, 255, .36));
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 52%;
+  opacity: .55;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-planet { display: none; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-prompt-wrap {
+  grid-area: prompt;
+  display: flex;
+  justify-self: center;
+  width: min(100%, 1100px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-prompt {
+  padding: 4px 8px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  font-size: clamp(1.15rem, 2.4vw, 1.8rem);
+  text-wrap: balance;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-board-wrap {
+  grid-area: board;
+  min-height: 0;
+  justify-content: center;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-board-heading { display: none; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-board {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-scene {
+  display: grid;
+  grid-template-columns: minmax(150px, .75fr) minmax(0, 1.25fr);
+  grid-template-rows: auto auto;
+  grid-template-areas: "product wallet" "product tray";
+  align-items: center;
+  justify-items: stretch;
+  gap: clamp(10px, 1.6vw, 22px);
+  width: min(100%, 1020px);
+  color: #17345c;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-product-card {
+  grid-area: product;
+  min-width: 0;
+  padding: 8px;
+  border: 0;
+  border-radius: 24px;
+  background: transparent;
+  box-shadow: none;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-item {
+  font-size: clamp(5rem, 15vh, 9.5rem);
+  filter: drop-shadow(0 8px 6px rgba(26, 55, 80, .16));
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-product-card strong { font-size: clamp(1.2rem, 2.6vw, 1.8rem); }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-price-tag { font-size: clamp(1.3rem, 2.7vw, 1.8rem); }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-wallet {
+  position: relative;
+  grid-area: wallet;
+  isolation: isolate;
+  min-width: 0;
+  width: 100%;
+  padding: clamp(18px, 2vw, 26px) clamp(12px, 1.6vw, 20px) clamp(14px, 1.4vw, 18px);
+  border: 3px solid #a76837;
+  border-radius: 24px 24px 34px 34px;
+  background: linear-gradient(145deg, #e8bd82 0%, #d69c5f 58%, #c27e43 100%);
+  box-shadow: 0 8px 0 #a96334, inset 0 2px 0 rgba(255,255,255,.65), 0 12px 20px rgba(97,65,38,.15);
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-wallet::before {
+  position: absolute;
+  z-index: -1;
+  top: -3px;
+  left: 50%;
+  width: clamp(42px, 6vw, 66px);
+  height: 22px;
+  content: "";
+  transform: translateX(-50%);
+  border: 3px solid #a76837;
+  border-top: 0;
+  border-radius: 0 0 15px 15px;
+  background: linear-gradient(180deg, #f1d2a4, #dca66b);
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-wallet > strong {
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 249, 230, .92);
+  color: #704322;
+  font-size: clamp(.95rem, 1.7vw, 1.2rem);
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-coins {
+  position: relative;
+  z-index: 1;
+  max-width: none;
+  gap: clamp(4px, .8vw, 10px);
+  padding: clamp(8px, 1vw, 12px);
+  border: 2px solid rgba(130, 81, 44, .38);
+  border-radius: 18px 18px 26px 26px;
+  background: linear-gradient(145deg, rgba(255,249,232,.88), rgba(247,228,195,.9));
+  box-shadow: inset 0 4px 8px rgba(118,74,40,.13), 0 2px 0 rgba(255,255,255,.45);
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-coin-button {
+  min-width: clamp(66px, 9vh, 92px);
+  min-height: clamp(66px, 9vh, 92px);
+  border-radius: 50%;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-coin-button .math-life-hk-coin { width: clamp(54px, 7.5vh, 78px); }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-payment-tray {
+  position: relative;
+  grid-area: tray;
+  justify-self: center;
+  width: min(100%, 680px);
+  min-height: 138px;
+  padding: 18px 28px;
+  gap: 10px;
+  border: 7px solid #bd8d4c;
+  border-radius: 50% / 38%;
+  background: radial-gradient(ellipse at 50% 34%, #fffdf5 0%, #fff8e8 55%, #efd9a8 100%);
+  color: #604a1b;
+  box-shadow: 0 9px 0 #9e713b, inset 0 0 0 4px rgba(255,255,255,.75), inset 0 0 0 8px rgba(189,141,76,.2), 0 15px 22px rgba(94,72,39,.16);
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-payment-tray > strong { flex-basis: 100%; color: #785522; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-payment-coins { min-width: 0; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-payment-coins .math-life-hk-coin { width: clamp(44px, 5.8vh, 58px); }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-payment-coins .math-life-hk-coin.is-arriving { animation: math-life-coin-land .24s cubic-bezier(.2,.8,.25,1.15) both; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-answer-panel {
+  grid-area: answers;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-answers-heading { display: none; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-choices { display: flex; justify-content: center; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-shop-pay-button,
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-next { width: min(100%, 340px); min-height: 62px; }
+.math-life-skill-screen[data-activity="little-shop"] .math-life-skill-feedback { width: min(100%, 760px); box-sizing: border-box; }
+
+@media (orientation: landscape) and (min-width: 701px) {
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-stage {
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    min-height: clamp(500px, calc(100dvh - 138px), 780px);
+  }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-scene { grid-template-columns: minmax(200px, .68fr) minmax(0, 1.32fr); }
+}
+@media (orientation: portrait), (max-width: 700px) {
+  .math-life-skill-screen[data-activity="little-shop"].active {
+    grid-template-rows: auto auto;
+    min-height: 100dvh;
+  }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-stage {
+    grid-template-rows: auto minmax(300px, auto) auto;
+    min-height: max(640px, calc(100dvh - 150px));
+    overflow: hidden;
+    padding: clamp(12px, 3vw, 20px);
+  }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-poster-image { object-position: center; }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-scene {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "product" "wallet" "tray";
+    gap: 12px;
+  }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-product-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 4px 10px;
+  }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-item { font-size: clamp(3.5rem, 10vh, 5.5rem); }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-wallet { gap: 6px; }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-coin-button { min-width: 60px; min-height: 60px; }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-coin-button .math-life-hk-coin { width: 50px; }
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-payment-tray { min-height: 124px; padding: 14px 18px; border-radius: 50% / 32%; }
+}
+
+@keyframes math-life-coin-land {
+  from { opacity: .3; transform: translateY(-16px) scale(.82); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .math-life-skill-screen[data-activity="little-shop"] .math-life-payment-coins .math-life-hk-coin.is-arriving { animation-duration: .01ms; }
+}
+
+/* Shared light playground theme for every Math route (not just Clock).
+   Keep this scoped to .math-screen so language and reading games are untouched. */
+html.math-canvas-mode .math-screen.active {
+  --ink: #17345c;
+  --ink-dim: #58738e;
+  --gold-soft: #a76500;
+  --teal-soft: #198866;
+  --shadow: 0 10px 24px rgba(77, 116, 158, .14);
+  color: #17345c;
+  background: transparent;
+}
+
+html.math-canvas-mode #app .math-screen.active::before {
+  background:
+    radial-gradient(ellipse at 7% 4%, rgba(255, 231, 147, .5), transparent 32%),
+    radial-gradient(ellipse at 92% 12%, rgba(144, 213, 255, .4), transparent 33%),
+    linear-gradient(145deg, #fffdf5, #eef8ff 58%, #f7f1ff);
+}
+
+/* Older count / compare / number-line activities now sit on the same light canvas. */
+html.math-canvas-mode .math-screen .math-learn-stage,
+html.math-canvas-mode .math-screen .math-count-field--quiz,
+html.math-canvas-mode .math-screen .math-compare-side,
+html.math-canvas-mode .math-screen .math-compare-pick,
+html.math-canvas-mode .math-screen .math-clock-pick,
+html.math-canvas-mode .math-screen .math-counting-set,
+html.math-canvas-mode .math-screen .math-relations-explain {
+  border-color: #c9dced;
+  background: linear-gradient(145deg, #fff, #f0f8ff);
+  color: #17345c;
+  box-shadow: 0 8px 20px rgba(77, 116, 158, .12);
+}
+
+html.math-canvas-mode .math-screen .math-learn-stage,
+html.math-canvas-mode .math-screen .math-compare-pick,
+html.math-canvas-mode .math-screen .math-clock-pick,
+html.math-canvas-mode .math-screen .speak-btn { color: #17345c; }
+html.math-canvas-mode .math-screen .math-learn-num,
+html.math-canvas-mode .math-screen .math-compare-vs,
+html.math-canvas-mode .math-screen .math-venus-say { color: #a76500; }
+html.math-canvas-mode .math-screen .math-compare-label,
+html.math-canvas-mode .math-screen .math-counting-instruction,
+html.math-canvas-mode .math-screen .math-relations-explain { color: #496b87; }
+html.math-canvas-mode .math-screen .math-count-tappable { background: #edf6ff; }
+html.math-canvas-mode .math-screen .math-count-field--quiz { border-color: #c9dced; }
+html.math-canvas-mode .math-screen .math-counting-set { border-color: #9cc9e7; }
+html.math-canvas-mode .math-playground-screen .math-playground-card .math-galaxy-status { color: #8c5b00; }
+
+html.math-canvas-mode .math-screen .math-nline-track {
+  border-color: #8fb8d6;
+  background: linear-gradient(180deg, #e8f5ff, #d8ebfb);
+  box-shadow: inset 0 2px 5px rgba(52, 94, 133, .12);
+}
+html.math-canvas-mode .math-screen .math-nline-tick { background: rgba(39, 75, 112, .28); }
+html.math-canvas-mode .math-screen .math-nline-label { color: #254c73; }
+html.math-canvas-mode .math-screen .math-nline-choice {
+  border-color: #c5d9eb;
+  background: #fff;
+  color: #17345c;
+}
+html.math-canvas-mode .math-screen .math-nline-choice.is-selected {
+  border-color: #e9b73c;
+  background: #fff3c8;
+}
+
+/* ── 數理 iPad 橫向總版型 ─────────────────────────────
+   所有數理遊戲共用同一個橫向節奏：標題列 → 指示 → 主操作區。
+   內容用畫布寬度計算，唔用固定手機直流式寬度。 */
+@media (min-width:701px) and (orientation:landscape) {
+  html.math-canvas-mode #app {
+    max-width: none;
+    padding: clamp(6px, .7vh, 10px) clamp(16px, 2.2vw, 32px);
+  }
+
+  html.math-canvas-mode .math-screen.active {
+    box-sizing: border-box;
+    gap: clamp(4px, .55vh, 7px);
+  }
+
+  html.math-canvas-mode .math-screen .game-header {
+    display: grid;
+    grid-template-columns: minmax(170px, 1fr) minmax(260px, 1.5fr) minmax(170px, 1fr);
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  html.math-canvas-mode .math-screen .game-header h1 {
+    grid-column: 2;
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    font-size: clamp(1.45rem, 3.1vw, 2.25rem);
+  }
+
+  html.math-canvas-mode .math-screen .game-header > :last-child {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  html.math-canvas-mode .math-screen .section-lead,
+  html.math-canvas-mode .math-screen .prompt-box {
+    width: min(100%, 1100px);
+    margin-inline: auto;
+  }
+
+  html.math-canvas-mode #math-galaxy-grid.math-galaxy-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: min(100%, 1320px);
+    max-width: none;
+    gap: clamp(10px, 1.4vw, 22px);
+    align-self: center;
+  }
+
+  html.math-canvas-mode #math-galaxy-grid .math-galaxy-card {
+    min-height: min(32vh, 240px);
+    padding: clamp(14px, 1.5vw, 22px);
+  }
+
+  /* 先學頁：圖像／電子鐘同左右操作，唔再一味向下堆。 */
+  html.math-canvas-mode .math-learn-stage {
+    width: min(100%, 980px);
+    max-width: none;
+    min-height: min(46vh, 380px);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto;
+    align-items: center;
+  }
+
+  html.math-canvas-mode .math-learn-stage .learn-hear,
+  html.math-canvas-mode .math-venus-stage .math-venus-say {
+    grid-column: 1 / -1;
+  }
+
+  html.math-canvas-mode .math-screen .btn-stack {
+    width: min(100%, 980px);
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    margin-top: auto;
+  }
+
+  html.math-canvas-mode .math-screen .btn-stack .btn {
+    flex: 1 1 0;
+    min-height: 78px;
+  }
+
+  html.math-canvas-mode #screen-math-fuel.math-screen.active {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+    grid-template-rows: auto auto 1fr auto;
+    align-items: center;
+  }
+  html.math-canvas-mode #screen-math-fuel .game-header,
+  html.math-canvas-mode #screen-math-fuel .prompt-box,
+  html.math-canvas-mode #screen-math-fuel .feedback { grid-column: 1 / -1; }
+  html.math-canvas-mode #screen-math-fuel .math-mission-hero,
+  html.math-canvas-mode #screen-math-fuel .math-fuel-rocket-wrap { grid-column: 2; }
+  html.math-canvas-mode #screen-math-fuel .math-manip-stage { grid-column: 1; grid-row: 3; width: 100%; }
+
+  html.math-canvas-mode #screen-math-time.math-screen.active {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    align-content: stretch;
+  }
+  html.math-canvas-mode #screen-math-time .math-time-set { align-self: stretch; }
+
+  html.math-canvas-mode #screen-math-earth-addition-select .addition-level-menu,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-grid {
+    width: min(100%, 1320px);
+    max-width: none;
+    margin-inline: auto;
+  }
+  html.math-canvas-mode #screen-math-earth-addition-select .addition-level-menu { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  html.math-canvas-mode #screen-math-earth-addition-select .addition-level-card,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-card { min-height: min(46vh, 340px); }
+  html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* 關卡選擇頁仲有下方方法卡；橫向 iPad 要一屏睇晒兩層內容。 */
+  html.math-canvas-mode #screen-math-earth-addition-select .addition-level-menu {
+    gap: 12px;
+    margin-top: 0;
+    padding: 4px 12px 8px;
+  }
+  html.math-canvas-mode #screen-math-earth-addition-select .addition-level-card,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-card {
+    min-height: min(25vh, 205px);
+    padding-block: 10px;
+  }
+  html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-card strong {
+    font-size: clamp(2.25rem, 5vw, 3rem);
+  }
+  html.math-canvas-mode #screen-math-moon-subtraction-select .subtraction-level-grid {
+    gap: 12px;
+    padding: 4px 12px;
+  }
+  html.math-canvas-mode #screen-math-earth-addition-select .math-strategy-route,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .math-strategy-route {
+    margin-top: 2px;
+    padding: 10px 14px;
+  }
+  html.math-canvas-mode #screen-math-earth-addition-select .math-strategy-route > p,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .math-strategy-route > p {
+    margin-bottom: 8px;
+  }
+  html.math-canvas-mode #screen-math-earth-addition-select .math-strategy-card,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .math-strategy-card {
+    min-height: 150px;
+    gap: 5px;
+    padding: 8px;
+  }
+  html.math-canvas-mode #screen-math-earth-addition-select .math-strategy-card-icon,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .math-strategy-card-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    font-size: 1.6rem;
+  }
+  html.math-canvas-mode #screen-math-earth-addition-select .math-strategy-card-copy,
+  html.math-canvas-mode #screen-math-moon-subtraction-select .math-strategy-card-copy {
+    font-size: .78rem;
+    line-height: 1.2;
+  }
+  html.math-canvas-mode #screen-math-moon-subtraction-play .subtraction-stage {
+    gap: 6px;
+  }
+  html.math-canvas-mode #screen-math-moon-subtraction-play .subtraction-slot-wrap {
+    min-height: max(160px, 22vh);
+    padding-block: 14px;
+  }
+
+  /* 數數／形狀／規律：大圖置中，選項沿底部橫向伸展。 */
+  html.math-canvas-mode #screen-math-count.math-screen.active,
+  html.math-canvas-mode #screen-math-count .math-count-field--quiz {
+    width: min(100%, 1100px);
+    min-height: 0;
+    margin: 0 auto;
+    align-self: stretch;
+  }
+
+  html.math-canvas-mode #screen-math-count .math-num-bubbles {
+    width: min(100%, 1100px);
+    margin: 0 auto;
+  }
+
+  /* 加減法沿用各自操作元件，但主內容放大到橫向畫布。 */
+  html.math-canvas-mode .concrete-math-layout {
+    width: min(100%, 1320px);
+    margin-inline: auto;
+  }
+
+  html.math-canvas-mode .addition-stage,
+  html.math-canvas-mode .subtraction-stage {
+    width: 100%;
+  }
+
+  html.math-canvas-mode .addition-equation,
+  html.math-canvas-mode .subtraction-equation {
+    font-size: clamp(2rem, 4vw, 3.4rem);
+  }
+
+  /* 原生 emoji：保留彩色 Apple Emoji，同 OpenMoji 圓碟分開。 */
+  html.math-canvas-mode .math-native-emoji,
+  html.math-canvas-mode .math-pattern-animal,
+  html.math-canvas-mode .math-galaxy-icon,
+  html.math-canvas-mode .addition-object,
+  html.math-canvas-mode .subtraction-object {
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+    font-variant-emoji: emoji;
+  }
+}
+
+/* 水星・由實物數量開始：每件物件分開顯示，答案只係數字選擇。 */
+.math-counting-set {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(12px, 2.4vw, 32px);
+  width: min(100%, 1100px);
+  min-height: clamp(150px, 28vh, 310px);
+  margin: clamp(8px, 2vh, 22px) auto;
+  padding: clamp(16px, 3vw, 36px);
+  border: 3px solid rgba(125, 211, 252, 0.62);
+  border-radius: clamp(22px, 3vw, 38px);
+  background: linear-gradient(145deg, rgba(24, 58, 103, 0.92), rgba(13, 32, 65, 0.88));
+  box-shadow: 0 18px 42px rgba(2, 10, 28, 0.32), inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.math-counting-object {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: 0 0 clamp(76px, 10vw, 118px);
+  width: clamp(76px, 10vw, 118px);
+  height: clamp(76px, 10vw, 118px);
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.24);
+  animation: math-count-pop .24s ease-out both;
+}
+
+.math-counting-emoji {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+  font-size: clamp(44px, 6vw, 74px);
+  line-height: 1;
+}
+
+.math-counting-number {
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #fbbf24;
+  color: #172554;
+  font-size: 1.35rem;
+  font-weight: 900;
+  box-shadow: 0 3px 8px rgba(2, 10, 28, .25);
+}
+
+.math-counting-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(88px, 150px));
+  justify-content: center;
+  gap: clamp(12px, 2.5vw, 30px);
+  width: min(100%, 620px);
+  margin: 0 auto;
+}
+
+.math-counting-choice {
+  appearance: none;
+  min-width: 0;
+  min-height: clamp(72px, 12vh, 112px);
+  border: 3px solid #fbbf24;
+  border-radius: 24px;
+  background: linear-gradient(160deg, #fff5c2, #fbbf24);
+  color: #172554;
+  font: 900 clamp(2.4rem, 5vw, 4rem)/1 Fredoka, "Noto Sans HK", sans-serif;
+  box-shadow: 0 7px 0 #b45309, 0 12px 20px rgba(0,0,0,.2);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.math-counting-choice:disabled { cursor: default; }
+.math-counting-choice.is-wrong { animation: math-count-wobble .28s ease-in-out; border-color: #93c5fd; background: #dbeafe; }
+.math-counting-choice.is-correct { border-color: #6ee7b7; background: #a7f3d0; }
+
+#screen-math-relations-play .math-relations-explain {
+  width: min(100%, 900px);
+  margin: clamp(10px, 2vh, 20px) auto 0;
+  padding: clamp(14px, 2vw, 24px);
+  border: 2px solid rgba(110, 231, 183, .72);
+  border-radius: 24px;
+  background: rgba(8, 36, 57, .92);
+  color: #e6fff4;
+  text-align: center;
+}
+
+#screen-math-relations-play .math-relations-explain p { margin: 0 0 12px; font-size: clamp(1rem, 2vw, 1.4rem); }
+
+@keyframes math-count-pop {
+  from { opacity: 0; transform: scale(.82); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes math-count-wobble {
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+@media (max-width: 600px) {
+  .math-counting-set { min-height: 170px; gap: 10px; }
+  .math-counting-object { flex-basis: 64px; width: 64px; height: 64px; border-radius: 18px; }
+  .math-counting-emoji { font-size: 42px; }
+  .math-counting-choices { grid-template-columns: repeat(3, minmax(72px, 1fr)); gap: 10px; }
+  .math-counting-choice { min-height: 68px; border-radius: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .math-counting-object { animation: none; }
+  .math-counting-choice.is-wrong { animation: none; }
+}
+
+/* Clock route: match the bright Math Playground while keeping the clock
+   artwork and its existing interaction/layout intact. */
+#screen-math-time.math-screen.active {
+  color: #17345c;
+}
+
+#screen-math-time.math-screen.active::before {
+  background:
+    radial-gradient(ellipse at 7% 4%, rgba(255, 231, 147, .48), transparent 32%),
+    radial-gradient(ellipse at 92% 12%, rgba(144, 213, 255, .38), transparent 33%),
+    linear-gradient(145deg, #fffdf5, #eef8ff 58%, #f7f1ff);
+}
+
+#screen-math-time .game-header h1 { color: #17345c; text-shadow: none; }
+#screen-math-time .game-header .btn-ghost {
+  border-color: #d2e3f4;
+  background: #fff;
+  color: #17345c;
+  box-shadow: 0 5px 14px rgba(61, 102, 146, .12);
+}
+
+#screen-math-time .prompt-box {
+  border-color: #c9deef;
+  background: linear-gradient(120deg, #fff, #f3faff);
+  color: #18345f;
+  box-shadow: 0 8px 22px rgba(71, 117, 160, .12);
+}
+#screen-math-time .prompt-box p,
+#screen-math-time .math-time-set-label,
+#screen-math-time .math-time-set-hint,
+#screen-math-time .math-clock-label { color: #496b8b; }
+#screen-math-time .feedback {
+  color: #285c48;
+  text-shadow: none;
+}
+
+#screen-math-time .math-clock-pick {
+  border: 2px solid #d4e3f1;
+  background: linear-gradient(145deg, #fff, #f1f8ff);
+  box-shadow: 0 8px 20px rgba(61, 102, 146, .12), inset 0 1px 0 #fff;
+}
+#screen-math-time .math-clock-pick.is-ok {
+  border-color: #53bd91;
+  background: linear-gradient(145deg, #f0fff7, #d9f7e9);
+  box-shadow: 0 0 0 3px rgba(83, 189, 145, .2);
+}
+#screen-math-time .math-clock-pick.is-bad {
+  border-color: #ef9a9a;
+  background: #fff1f1;
+}
+
+#screen-math-time .math-digital-clock {
+  border-color: #91cfe5;
+  background: linear-gradient(145deg, #eaf9ff, #d8f1ff);
+  box-shadow: inset 0 0 18px rgba(56, 189, 248, .12), 0 5px 14px rgba(61, 102, 146, .1);
+}
+#screen-math-time .math-digital-digits { color: #087ca9; }
+#screen-math-time .math-time-hand-controls .btn.is-active {
+  background: #ffcf59;
+  color: #17345c;
+  box-shadow: 0 0 0 3px rgba(255, 207, 89, .3);
+}
+#screen-math-time #btn-math-time-set-answer {
+  border-color: #33b88b;
+  background: linear-gradient(145deg, #55d7aa, #21b883);
+  color: #123b4e;
+  box-shadow: 0 6px 0 #12866e, 0 12px 20px rgba(42, 135, 117, .16);
+}
+
+/* iPad 直向仍然維持固定遊戲畫布；只有揀主題／揀關卡頁容許瀏覽。 */
+@media (min-width:701px) and (orientation:portrait) {
+  html.math-canvas-mode .math-screen.active { height: 100%; min-height: 0; overflow: hidden; }
+  html.math-canvas-mode #screen-math-galaxy.math-screen.active,
+  html.math-canvas-mode #screen-math-earth-addition-select.math-screen.active,
+  html.math-canvas-mode #screen-math-moon-subtraction-select.math-screen.active,
+  html.math-canvas-mode #screen-math-play.math-screen.active,
+  html.math-canvas-mode #screen-math-venus-play.math-screen.active { height: auto; min-height: 100dvh; overflow: visible; }
+}
