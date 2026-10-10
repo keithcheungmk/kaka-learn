@@ -959,7 +959,7 @@ def check_family_names() -> None:
         if not Path(path).is_file():
             continue
         src = read(path)
-        for old, new in (("堯叔叔", "耀叔叔"), ("娃娃", "蛙蛙"), ("紅姑姑", "虹姑姑")):
+        for old, new in (("堯叔叔", "耀叔叔"), ("娃娃", "蛙蛙"), ("紅姑姑", "虹姑姑"), ("妹媽", "姨媽")):
             if old in src:
                 fail("family-names", f"{path} 用咗舊名「{old}」，要寫「{new}」")
         if re.search(r"(?<!虹)姑姑", src):

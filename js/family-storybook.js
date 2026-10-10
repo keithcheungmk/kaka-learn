@@ -10,7 +10,7 @@
     ['傑叔叔','170 cm','卡卡的爸爸；深藍外套','jie-turnaround.webp'],
     ['耀叔叔','175 cm','禧禧的爸爸；灰綠外套','yao-turnaround.webp'],
     ['浠榆','初生寶寶','卡卡的妹妹；淡粉色花紋包被','xiyu-turnaround.webp'],
-    ['妹媽','約163 cm','虹姑姑的家姐；孔雀綠開襟衫、短黑髮','meima-turnaround.webp']
+    ['姨媽','約163 cm','虹姑姑的家姐；孔雀綠開襟衫、短黑髮','yima-turnaround.webp']
   ];
   const $ = id => document.getElementById(id);
   const library = $('library'), reader = $('reader');
