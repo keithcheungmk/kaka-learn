@@ -11,6 +11,26 @@ if len(stories)!=20: errors.append(f'Expected 20 stories, found {len(stories)}')
 for story in stories:
     label=story.get('id','?')
     if len(story.get('pages',[])) not in range(6,9): errors.append(f'{label}: page count must be 6-8')
+    zh_blob=' '.join([
+        str(story.get('title','')),
+        str(story.get('summary','')),
+        ' '.join(story.get('extensionWords',[])),
+        ' '.join(
+            ' '.join([
+                page.get('sentence',''),
+                page.get('dialogue',{}).get('text',''),
+                ' '.join(page.get('tiles',[])),
+                ' '.join(page.get('focusWords',[])),
+                ' '.join(page.get('learn',[])),
+                ' '.join(page.get('distractors',[])),
+            ])
+            for page in story.get('pages',[])
+        ),
+    ])
+    if re.search(r'(?i)\b(?:bb\s*)?spa\b', zh_blob) or 'Spa' in zh_blob or 'SPA' in zh_blob:
+        errors.append(f'{label}: story Chinese fields must not use English Spa / BB Spa')
+    if 'spa' in label.lower():
+        errors.append(f'{label}: story id must not contain spa')
     cards={}
     for book in story.get('sourceBooks',[]):
         path=ROOT/'data'/'book-cards'/f'{book}.json'

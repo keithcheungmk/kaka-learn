@@ -36,7 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 珠海探妹妹（二）姨媽正名＋BB Spa 浴缸修正 | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/zhuhai-bb-spa-yumcha-p02.webp`, `p03.webp`, `docs/family-story-character-bible.md`, `scripts/check-invariants.py` | 2026-10-10 | #122 已 merge；修正 PR #123：妹媽→姨媽，垂直透明浴缸＋姑娘 |
+| 珠海探妹妹（二）去英文＋大型透明浴缸 | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/zhuhai-yima-bathtub-*`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | #122/#123 之後：清走 Spa 英文、id 改 `zhuhai-yima-bathtub`、浴缸改大型透明缸 |
 | 主頁四科入口加入卡卡插畫 | ChatGPT／Codex | `index.html`, `css/styles.css`, `assets/home-subjects/`, `assets/image-formats.lock.json`, `docs/handover.md` | 2026-10-06 | Keith 已看過四科卡片 demo 並指示繼續；只改入口視覺，保留文字、連結與按鈕行為。 |
 | 紅輯「按書頁砌句」資料層及遊戲引擎 | Chinese Lead（Chief 整合） | `js/book-scene-demo.js`, `book-scene-demo.html`, `css/book-scene-demo.css`, `data/red-series/`, `scripts/test-book-scene-demo.mjs`, `scripts/smoke-book-scene-demo.py`, `docs/cursor-handoff-2026-09-20.md` | 2026-09-20 | Keith 交辦：本機接盤；內容由 Chinese Lead，shared／部署由 Chief；唔開 Cloud Agent |
 | 書本掃描書架 | Chinese Lead（Chief 整合） | `book-scans/index.html`, `index.html`（共享）, `css/styles.css`（共享）, `scripts/check-invariants.py`（共享） | 2026-09-08 | 家長 PDF 書架；中文內容由 Chinese Lead，共享檔由 Chief 認領 |
@@ -107,11 +107,11 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
-### 2026-10-10 · Cursor Chief Lead（故事〈珠海探妹妹（二）：妹妹游BB Spa〉）
+### 2026-10-10 · Cursor Chief Lead（故事〈珠海探妹妹（二）：嬰兒水療〉）
 
-- 用 `.agents/skills/kaka-story-based-chinese-learning/` 流程新增第 20 篇故事（八頁）：月子中心拜望、浠榆 BB Spa 戴游泳圈游來游去、懷抱玩耍、酒店酒樓飲茶（蝦餃／燒賣／豆漿／油炸鬼／粟米蝦餅）、姨媽帶公公婆婆去澳門郵政局同景點。`series:'珠海探妹妹'`、`episode:2`、`date:'2026-10-09'`。
-- 新角色姨媽＝虹姑姑的家姐（正寫「姨媽」，唔好寫「妹媽」）；設定圖 `docs/design/yima-character-reference-sheet.jpg`，三視圖 `assets/family-stories/characters/yima-turnaround.webp`。場景圖 `zhuhai-bb-spa-yumcha-p01.webp` 至 `p08.webp`。
-- Keith 修正：角色名由誤寫「妹媽」改正為「姨媽」；BB Spa 插圖改為垂直透明浴缸＋姑娘照顧，唔再用泳池。`family-names` 檢查加攔「妹媽」。PR #122，唔自行 merge。
+- 用 `.agents/skills/kaka-story-based-chinese-learning/` 流程新增第 20 篇故事（八頁）：月子中心拜望、浠榆嬰兒水療戴游泳圈游來游去、懷抱玩耍、酒店酒樓飲茶（蝦餃／燒賣／豆漿／油炸鬼／粟米蝦餅）、姨媽帶公公婆婆去澳門郵政局同景點。`series:'珠海探妹妹'`、`episode:2`、`date:'2026-10-09'`。
+- 新角色姨媽＝虹姑姑的家姐（正寫「姨媽」，唔好寫「妹媽」）；設定圖 `docs/design/yima-character-reference-sheet.jpg`，三視圖 `assets/family-stories/characters/yima-turnaround.webp`。
+- #122／#123 之後再修正：故事 id 改 `zhuhai-yima-bathtub`；標題同正文清走 Spa／英文；浴缸改大型透明浴缸（唔係幼長圓柱），姑娘照顧妹妹戴游泳圈在水裏玩。
 
 ### 2026-10-09 · Cursor Chief Lead（英文 Clothes 撞圖改原創插圖）
 
