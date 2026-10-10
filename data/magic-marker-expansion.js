@@ -20,18 +20,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "Taco."
         ],
         "blanks": [
-          "Taco."
+          "This"
         ],
         "choices": [
-          "Taco.",
-          "Maxie.",
-          "Alex."
+          "This",
+          "doing?",
+          "meet"
         ],
         "image": "./assets/story-demo/mm003/pages/page-01.webp",
         "audio": "./assets/story-demo/mm003/mm003-page-01.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p3 printed p1: exact visible sentence; clip-map source MM003-pdf03-print01.mp3 (first-pass alignment)."
       },
       {
@@ -49,8 +49,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "Hammie!",
-          "Taco!",
-          "Maxie!"
+          "drawing.",
+          "friend."
         ],
         "image": "./assets/story-demo/mm003/pages/page-02.webp",
         "audio": "./assets/story-demo/mm003/mm003-page-02.mp3",
@@ -73,14 +73,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "running.",
-          "drawing.",
-          "sleeping."
+          "doing?",
+          "name"
         ],
         "image": "./assets/story-demo/mm003/pages/page-03.webp",
         "audio": "./assets/story-demo/mm003/mm003-page-03.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p5 printed p3: exact visible sentence; clip-map source MM003-pdf05-print03.mp3 (first-pass alignment)."
       },
       {
@@ -96,12 +96,13 @@ window.KakaMagicMarkerManifest.books.push(...[
           "friend."
         ],
         "blanks": [
+          "new",
           "friend."
         ],
         "choices": [
-          "friend.",
-          "brother.",
-          "sister."
+          "new friend.",
+          "happy park",
+          "green house"
         ],
         "image": "./assets/story-demo/mm003/pages/page-04.webp",
         "audio": "./assets/story-demo/mm003/mm003-page-04.mp3",
@@ -126,14 +127,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "meet",
-          "see",
-          "help"
+          "name",
+          "Hammie!"
         ],
         "image": "./assets/story-demo/mm003/pages/page-05.webp",
         "audio": "./assets/story-demo/mm003/mm003-page-05.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p7 printed p5: exact visible sentence; clip-map source MM003-pdf07-print05.mp3 (first-pass alignment)."
       },
       {
@@ -151,8 +152,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "doing?",
-          "reading?",
-          "playing?"
+          "running.",
+          "meet"
         ],
         "image": "./assets/story-demo/mm003/pages/page-06.webp",
         "audio": "./assets/story-demo/mm003/mm003-page-06.mp3",
@@ -175,14 +176,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "drawing.",
-          "running.",
-          "eating."
+          "new",
+          "Fishy,"
         ],
         "image": "./assets/story-demo/mm003/pages/page-07.webp",
         "audio": "./assets/story-demo/mm003/mm003-page-07.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p9 printed p7: exact visible sentence; clip-map source MM003-pdf09-print07.mp3 (first-pass alignment)."
       },
       {
@@ -199,14 +200,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "eating!",
-          "running!",
-          "sleeping!"
+          "running.",
+          "Hammie!"
         ],
         "image": "./assets/story-demo/mm003/pages/page-08.webp",
         "audio": "./assets/story-demo/mm003/mm003-page-08.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p10 printed p8: exact visible sentence; clip-map source MM003-pdf10-print08.mp3 (first-pass alignment)."
       }
     ]
@@ -235,14 +236,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "key.",
-          "chair.",
-          "feather."
+          "window.",
+          "chair."
         ],
         "image": "./assets/story-demo/mm004/pages/page-01.webp",
         "audio": "./assets/story-demo/mm004/mm004-page-01.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "first-pass",
-        "audioMatchRatio": 0.0,
+        "audioMatchRatio": 0,
         "reviewNote": "PDF p3 printed p1: exact visible sentence; clip-map source MM004-pdf03-print01.mp3 (first-pass alignment)."
       },
       {
@@ -255,18 +256,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "that?"
         ],
         "blanks": [
-          "that?"
+          "What"
         ],
         "choices": [
-          "that?",
-          "this?",
-          "these?"
+          "What",
+          "opening",
+          "window."
         ],
         "image": "./assets/story-demo/mm004/pages/page-02.webp",
         "audio": "./assets/story-demo/mm004/mm004-page-02.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p4 printed p2: exact visible sentence; clip-map source MM004-pdf04-print02.mp3 (first-pass alignment)."
       },
       {
@@ -283,14 +284,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "chair.",
-          "key.",
-          "feather."
+          "opening",
+          "key."
         ],
         "image": "./assets/story-demo/mm004/pages/page-03.webp",
         "audio": "./assets/story-demo/mm004/mm004-page-03.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p5 printed p3: exact visible sentence; clip-map source MM004-pdf05-print03.mp3 (first-pass alignment)."
       },
       {
@@ -308,14 +309,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "doing?",
-          "reading?",
-          "playing?"
+          "feather.",
+          "window."
         ],
         "image": "./assets/story-demo/mm004/pages/page-04.webp",
         "audio": "./assets/story-demo/mm004/mm004-page-04.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p6 printed p4: exact visible sentence; clip-map source MM004-pdf06-print04.mp3 (first-pass alignment)."
       },
       {
@@ -333,14 +334,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "window.",
-          "key.",
-          "chair."
+          "chair.",
+          "feather."
         ],
         "image": "./assets/story-demo/mm004/pages/page-05.webp",
         "audio": "./assets/story-demo/mm004/mm004-page-05.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p7 printed p5: exact visible sentence; clip-map source MM004-pdf07-print05.mp3 (first-pass alignment)."
       },
       {
@@ -358,8 +359,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "feather.",
-          "key.",
-          "chair."
+          "chair.",
+          "window."
         ],
         "image": "./assets/story-demo/mm004/pages/page-07.webp",
         "audio": "./assets/story-demo/mm004/mm004-page-07.mp3",
@@ -378,12 +379,12 @@ window.KakaMagicMarkerManifest.books.push(...[
           "Taco."
         ],
         "blanks": [
-          "Taco."
+          "and"
         ],
         "choices": [
-          "Taco.",
-          "Alex.",
-          "Sue."
+          "and",
+          "doing?",
+          "window."
         ],
         "image": "./assets/story-demo/mm004/pages/page-08.webp",
         "audio": "./assets/story-demo/mm004/mm004-page-08.mp3",
@@ -417,14 +418,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "Benny.",
-          "Taco.",
-          "Maxie."
+          "Smiley.",
+          "brother."
         ],
         "image": "./assets/story-demo/mm005/pages/page-01.webp",
         "audio": "./assets/story-demo/mm005/mm005-page-01.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p3 printed p1: exact visible sentence; clip-map source MM005-pdf03-print01.mp3 (first-pass alignment)."
       },
       {
@@ -441,14 +442,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "Benny?",
-          "Taco?",
-          "Maxie?"
+          "Smiley.",
+          "friend"
         ],
         "image": "./assets/story-demo/mm005/pages/page-02.webp",
         "audio": "./assets/story-demo/mm005/mm005-page-02.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p4 printed p2: exact visible sentence; clip-map source MM005-pdf04-print02.mp3 (first-pass alignment)."
       },
       {
@@ -466,14 +467,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "brother.",
-          "friend.",
-          "sister."
+          "Benny.",
+          "Smiley."
         ],
         "image": "./assets/story-demo/mm005/pages/page-03.webp",
         "audio": "./assets/story-demo/mm005/mm005-page-03.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p5 printed p3: exact visible sentence; clip-map source MM005-pdf05-print03.mp3 (first-pass alignment)."
       },
       {
@@ -492,14 +493,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "friend",
-          "brother",
-          "sister"
+          "Smiley.",
+          "Benny."
         ],
         "image": "./assets/story-demo/mm005/pages/page-04.webp",
         "audio": "./assets/story-demo/mm005/mm005-page-04.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p6 printed p4: exact visible sentence; clip-map source MM005-pdf06-print04.mp3 (first-pass alignment)."
       },
       {
@@ -515,8 +516,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "Smiley.",
-          "Taco.",
-          "Maxie."
+          "Benny.",
+          "brother."
         ],
         "image": "./assets/story-demo/mm005/pages/page-05.webp",
         "audio": "./assets/story-demo/mm005/mm005-page-05.mp3",
@@ -539,8 +540,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "close!",
-          "scary!",
-          "funny!"
+          "Smiley.",
+          "Benny."
         ],
         "image": "./assets/story-demo/mm005/pages/page-08.webp",
         "audio": "./assets/story-demo/mm005/mm005-page-08.mp3",
@@ -575,14 +576,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "bread.",
-          "milk.",
-          "pizza."
+          "full!",
+          "soup?"
         ],
         "image": "./assets/story-demo/mm006/pages/page-02.webp",
         "audio": "./assets/story-demo/mm006/mm006-page-02.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p3 printed p2: exact visible sentence; clip-map source MM006-pdf03-print02.mp3 (first-pass alignment)."
       },
       {
@@ -600,14 +601,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "milk?",
-          "bread?",
-          "pizza?"
+          "cake.",
+          "mouse"
         ],
         "image": "./assets/story-demo/mm006/pages/page-04.webp",
         "audio": "./assets/story-demo/mm006/mm006-page-04.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p5 printed p4: exact visible sentence; clip-map source MM006-pdf05-print04.mp3 (first-pass alignment)."
       },
       {
@@ -625,14 +626,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "pizza",
-          "bread",
-          "milk"
+          "bread.",
+          "chocolate"
         ],
         "image": "./assets/story-demo/mm006/pages/page-05.webp",
         "audio": "./assets/story-demo/mm006/mm006-page-05.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p6 printed p5: exact visible sentence; clip-map source MM006-pdf06-print05.mp3 (first-pass alignment)."
       },
       {
@@ -647,12 +648,13 @@ window.KakaMagicMarkerManifest.books.push(...[
           "soup?"
         ],
         "blanks": [
+          "mouse",
           "soup?"
         ],
         "choices": [
-          "soup?",
-          "bread?",
-          "milk?"
+          "mouse soup?",
+          "chocolate cake.",
+          "happy park"
         ],
         "image": "./assets/story-demo/mm006/pages/page-07.webp",
         "audio": "./assets/story-demo/mm006/mm006-page-07.mp3",
@@ -676,14 +678,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "cake.",
-          "bread.",
-          "milk."
+          "soup?",
+          "milk?"
         ],
         "image": "./assets/story-demo/mm006/pages/page-08.webp",
         "audio": "./assets/story-demo/mm006/mm006-page-08.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p9 printed p8: exact visible sentence; clip-map source MM006-pdf09-print08.mp3 (first-pass alignment)."
       },
       {
@@ -700,14 +702,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "full!",
-          "hungry!",
-          "tired!"
+          "soup?",
+          "bread."
         ],
         "image": "./assets/story-demo/mm006/pages/page-10.webp",
         "audio": "./assets/story-demo/mm006/mm006-page-10.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p11 printed p10: exact visible sentence; clip-map source MM006-pdf11-print10.mp3 (first-pass alignment)."
       }
     ]
@@ -737,14 +739,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "soccer?",
-          "goal?",
-          "go?"
+          "win",
+          "Ten,"
         ],
         "image": "./assets/story-demo/mm007/pages/page-01.webp",
         "audio": "./assets/story-demo/mm007/mm007-page-01.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p3 printed p1: exact visible sentence; clip-map source MM007-pdf03-print01.mp3 (first-pass alignment)."
       },
       {
@@ -762,14 +764,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "goal.",
-          "ball.",
-          "net."
+          "eight",
+          "soccer?"
         ],
         "image": "./assets/story-demo/mm007/pages/page-03.webp",
         "audio": "./assets/story-demo/mm007/mm007-page-03.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p5 printed p3: exact visible sentence; clip-map source MM007-pdf05-print03.mp3 (first-pass alignment)."
       },
       {
@@ -782,18 +784,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "go!"
         ],
         "blanks": [
-          "go!"
+          "Ready,"
         ],
         "choices": [
-          "go!",
-          "stop!",
-          "wait!"
+          "Ready,",
+          "hide-and-seek.",
+          "nine,"
         ],
         "image": "./assets/story-demo/mm007/pages/page-04.webp",
         "audio": "./assets/story-demo/mm007/mm007-page-04.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p6 printed p4: exact visible sentence; clip-map source MM007-pdf06-print04.mp3 (first-pass alignment)."
       },
       {
@@ -806,12 +808,13 @@ window.KakaMagicMarkerManifest.books.push(...[
           "hide-and-seek."
         ],
         "blanks": [
+          "play",
           "hide-and-seek."
         ],
         "choices": [
-          "hide-and-seek.",
-          "soccer.",
-          "goal."
+          "play hide-and-seek.",
+          "Ready, set,",
+          "nine, eight"
         ],
         "image": "./assets/story-demo/mm007/pages/page-06.webp",
         "audio": "./assets/story-demo/mm007/mm007-page-06.mp3",
@@ -832,18 +835,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "Go!"
         ],
         "blanks": [
-          "nine,"
+          "eight"
         ],
         "choices": [
-          "nine,",
-          "six,",
-          "seven,"
+          "eight",
+          "set,",
+          "goal."
         ],
         "image": "./assets/story-demo/mm007/pages/page-07.webp",
         "audio": "./assets/story-demo/mm007/mm007-page-07.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p9 printed p7: exact visible sentence; clip-map source MM007-pdf09-print07.mp3 (first-pass alignment)."
       },
       {
@@ -860,14 +863,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "win",
-          "lose",
-          "play"
+          "Ready,",
+          "Ten,"
         ],
         "image": "./assets/story-demo/mm007/pages/page-08.webp",
         "audio": "./assets/story-demo/mm007/mm007-page-08.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p10 printed p8: exact visible sentence; clip-map source MM007-pdf10-print08.mp3 (first-pass alignment)."
       }
     ]
@@ -892,12 +895,12 @@ window.KakaMagicMarkerManifest.books.push(...[
           "Maxie?"
         ],
         "blanks": [
-          "Maxie?"
+          "Where"
         ],
         "choices": [
-          "Maxie?",
-          "Taco?",
-          "Alex?"
+          "Where",
+          "station.",
+          "store."
         ],
         "image": "./assets/story-demo/mm008/pages/page-01.webp",
         "audio": "./assets/story-demo/mm008/mm008-page-01.mp3",
@@ -922,14 +925,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "store.",
-          "playground.",
-          "station."
+          "police",
+          "playground."
         ],
         "image": "./assets/story-demo/mm008/pages/page-02.webp",
         "audio": "./assets/story-demo/mm008/mm008-page-02.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p4 printed p2: exact visible sentence; clip-map source MM008-pdf04-print02.mp3 (first-pass alignment)."
       },
       {
@@ -942,18 +945,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "Taco?"
         ],
         "blanks": [
-          "Taco?"
+          "Where"
         ],
         "choices": [
-          "Taco?",
-          "Maxie?",
-          "Alex?"
+          "Where",
+          "store.",
+          "playground."
         ],
         "image": "./assets/story-demo/mm008/pages/page-03.webp",
         "audio": "./assets/story-demo/mm008/mm008-page-03.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p5 printed p3: exact visible sentence; clip-map source MM008-pdf05-print03.mp3 (first-pass alignment)."
       },
       {
@@ -973,13 +976,13 @@ window.KakaMagicMarkerManifest.books.push(...[
         "choices": [
           "playground.",
           "store.",
-          "station."
+          "police"
         ],
         "image": "./assets/story-demo/mm008/pages/page-04.webp",
         "audio": "./assets/story-demo/mm008/mm008-page-04.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p6 printed p4: exact visible sentence; clip-map source MM008-pdf06-print04.mp3 (first-pass alignment)."
       },
       {
@@ -995,12 +998,13 @@ window.KakaMagicMarkerManifest.books.push(...[
           "station."
         ],
         "blanks": [
+          "police",
           "station."
         ],
         "choices": [
-          "station.",
-          "store.",
-          "playground."
+          "police station.",
+          "happy park",
+          "green house"
         ],
         "image": "./assets/story-demo/mm008/pages/page-05.webp",
         "audio": "./assets/story-demo/mm008/mm008-page-05.mp3",
@@ -1025,8 +1029,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "playground.",
-          "store.",
-          "station."
+          "station.",
+          "police"
         ],
         "image": "./assets/story-demo/mm008/pages/page-06.webp",
         "audio": "./assets/story-demo/mm008/mm008-page-06.mp3",
@@ -1047,14 +1051,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "Maxie!",
-          "Taco!",
-          "Alex!"
+          "police",
+          "station."
         ],
         "image": "./assets/story-demo/mm008/pages/page-07.webp",
         "audio": "./assets/story-demo/mm008/mm008-page-07.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "first-pass",
-        "audioMatchRatio": 0.0,
+        "audioMatchRatio": 0,
         "reviewNote": "PDF p9 printed p7: exact visible sentence; clip-map source MM008-pdf09-print07.mp3 (first-pass alignment)."
       },
       {
@@ -1067,18 +1071,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "they?"
         ],
         "blanks": [
-          "they?"
+          "Where"
         ],
         "choices": [
-          "they?",
-          "we?",
-          "you?"
+          "Where",
+          "playground.",
+          "station."
         ],
         "image": "./assets/story-demo/mm008/pages/page-08.webp",
         "audio": "./assets/story-demo/mm008/mm008-page-08.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p10 printed p8: exact visible sentence; clip-map source MM008-pdf10-print08.mp3 (first-pass alignment)."
       }
     ]
@@ -1109,8 +1113,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "horse?",
-          "cat?",
-          "dog?"
+          "drive?",
+          "course"
         ],
         "image": "./assets/story-demo/mm009/pages/page-02.webp",
         "audio": "./assets/story-demo/mm009/mm009-page-02.mp3",
@@ -1133,14 +1137,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "skate?",
-          "run?",
-          "walk?"
+          "ride",
+          "drive?"
         ],
         "image": "./assets/story-demo/mm009/pages/page-03.webp",
         "audio": "./assets/story-demo/mm009/mm009-page-03.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p4 printed p3: exact visible sentence; clip-map source MM009-pdf04-print03.mp3 (first-pass alignment)."
       },
       {
@@ -1157,14 +1161,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "drive?",
-          "run?",
-          "walk?"
+          "light",
+          "ride"
         ],
         "image": "./assets/story-demo/mm009/pages/page-05.webp",
         "audio": "./assets/story-demo/mm009/mm009-page-05.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p6 printed p5: exact visible sentence; clip-map source MM009-pdf06-print05.mp3 (first-pass alignment)."
       },
       {
@@ -1182,14 +1186,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "idea.",
-          "plan.",
-          "game."
+          "skate?",
+          "wish"
         ],
         "image": "./assets/story-demo/mm009/pages/page-06.webp",
         "audio": "./assets/story-demo/mm009/mm009-page-06.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p7 printed p6: exact visible sentence; clip-map source MM009-pdf07-print06.mp3 (first-pass alignment)."
       },
       {
@@ -1207,8 +1211,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "fly.",
-          "run.",
-          "walk."
+          "skate?",
+          "idea."
         ],
         "image": "./assets/story-demo/mm009/pages/page-07.webp",
         "audio": "./assets/story-demo/mm009/mm009-page-07.mp3",
@@ -1232,14 +1236,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "green.",
-          "blue.",
-          "purple."
+          "idea.",
+          "course"
         ],
         "image": "./assets/story-demo/mm009/pages/page-08.webp",
         "audio": "./assets/story-demo/mm009/mm009-page-08.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p9 printed p8: exact visible sentence; clip-map source MM009-pdf09-print08.mp3 (first-pass alignment)."
       },
       {
@@ -1257,14 +1261,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "course",
-          "sorry",
-          "maybe"
+          "skate?",
+          "light"
         ],
         "image": "./assets/story-demo/mm009/pages/page-09.webp",
         "audio": "./assets/story-demo/mm009/mm009-page-09.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p10 printed p9: exact visible sentence; clip-map source MM009-pdf10-print09.mp3 (first-pass alignment)."
       },
       {
@@ -1279,12 +1283,12 @@ window.KakaMagicMarkerManifest.books.push(...[
           "fly!"
         ],
         "blanks": [
-          "fly!"
+          "wish"
         ],
         "choices": [
-          "fly!",
-          "run!",
-          "walk!"
+          "wish",
+          "course",
+          "light"
         ],
         "image": "./assets/story-demo/mm009/pages/page-10.webp",
         "audio": "./assets/story-demo/mm009/mm009-page-10.mp3",
@@ -1318,14 +1322,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "draw!",
-          "read!",
-          "write!"
+          "red",
+          "house."
         ],
         "image": "./assets/story-demo/mm010/pages/page-01.webp",
         "audio": "./assets/story-demo/mm010/mm010-page-01.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p3 printed p1: exact visible sentence; clip-map source MM010-pdf03-print01.mp3 (first-pass alignment)."
       },
       {
@@ -1340,18 +1344,19 @@ window.KakaMagicMarkerManifest.books.push(...[
           "house."
         ],
         "blanks": [
+          "purple",
           "house."
         ],
         "choices": [
-          "house.",
-          "school.",
-          "store."
+          "purple house.",
+          "orange car.",
+          "red flower."
         ],
         "image": "./assets/story-demo/mm010/pages/page-03.webp",
         "audio": "./assets/story-demo/mm010/mm010-page-03.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p5 printed p3: exact visible sentence; clip-map source MM010-pdf05-print03.mp3 (first-pass alignment)."
       },
       {
@@ -1366,18 +1371,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "car."
         ],
         "blanks": [
-          "car."
+          "orange"
         ],
         "choices": [
-          "car.",
-          "bike.",
-          "bus."
+          "orange",
+          "raining.",
+          "Yippie,"
         ],
         "image": "./assets/story-demo/mm010/pages/page-04.webp",
         "audio": "./assets/story-demo/mm010/mm010-page-04.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p6 printed p4: exact visible sentence; clip-map source MM010-pdf06-print04.mp3 (first-pass alignment)."
       },
       {
@@ -1392,18 +1397,19 @@ window.KakaMagicMarkerManifest.books.push(...[
           "flower."
         ],
         "blanks": [
+          "red",
           "flower."
         ],
         "choices": [
-          "flower.",
-          "tree.",
-          "leaf."
+          "red flower.",
+          "purple house.",
+          "orange car."
         ],
         "image": "./assets/story-demo/mm010/pages/page-05.webp",
         "audio": "./assets/story-demo/mm010/mm010-page-05.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p7 printed p5: exact visible sentence; clip-map source MM010-pdf07-print05.mp3 (first-pass alignment)."
       },
       {
@@ -1419,14 +1425,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "raining.",
-          "snowing.",
-          "sunny."
+          "drawing",
+          "house."
         ],
         "image": "./assets/story-demo/mm010/pages/page-06.webp",
         "audio": "./assets/story-demo/mm010/mm010-page-06.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p8 printed p6: exact visible sentence; clip-map source MM010-pdf08-print06.mp3 (first-pass alignment)."
       },
       {
@@ -1444,8 +1450,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "umbrella!",
-          "hat!",
-          "coat!"
+          "red",
+          "orange"
         ],
         "image": "./assets/story-demo/mm010/pages/page-07.webp",
         "audio": "./assets/story-demo/mm010/mm010-page-07.mp3",
@@ -1470,14 +1476,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "green!",
-          "blue!",
-          "purple!"
+          "flower.",
+          "car."
         ],
         "image": "./assets/story-demo/mm010/pages/page-08.webp",
         "audio": "./assets/story-demo/mm010/mm010-page-08.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p10 printed p8: exact visible sentence; clip-map source MM010-pdf10-print08.mp3 (first-pass alignment)."
       }
     ]
@@ -1508,14 +1514,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "Watch",
-          "look",
-          "listen"
+          "wet",
+          "fun!"
         ],
         "image": "./assets/story-demo/mm011/pages/page-02.webp",
         "audio": "./assets/story-demo/mm011/mm011-page-02.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p3 printed p2: exact visible sentence; clip-map source MM011-pdf03-print02.mp3 (first-pass alignment)."
       },
       {
@@ -1532,14 +1538,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "fun!",
-          "work!",
-          "sleep!"
+          "back",
+          "all"
         ],
         "image": "./assets/story-demo/mm011/pages/page-03.webp",
         "audio": "./assets/story-demo/mm011/mm011-page-03.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p4 printed p3: exact visible sentence; clip-map source MM011-pdf04-print03.mp3 (first-pass alignment)."
       },
       {
@@ -1559,8 +1565,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "wet",
-          "dry",
-          "warm"
+          "Watch",
+          "fun!"
         ],
         "image": "./assets/story-demo/mm011/pages/page-04.webp",
         "audio": "./assets/story-demo/mm011/mm011-page-04.mp3",
@@ -1587,8 +1593,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "marker!",
-          "pencil!",
-          "crayon!"
+          "fun!",
+          "all"
         ],
         "image": "./assets/story-demo/mm011/pages/page-05.webp",
         "audio": "./assets/story-demo/mm011/mm011-page-05.mp3",
@@ -1610,8 +1616,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "Watch",
-          "look",
-          "listen"
+          "all",
+          "fun!"
         ],
         "image": "./assets/story-demo/mm011/pages/page-06.webp",
         "audio": "./assets/story-demo/mm011/mm011-page-06.mp3",
@@ -1636,14 +1642,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "marker!",
-          "pencil!",
-          "crayon!"
+          "Watch",
+          "all"
         ],
         "image": "./assets/story-demo/mm011/pages/page-07.webp",
         "audio": "./assets/story-demo/mm011/mm011-page-07.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p8 printed p7: exact visible sentence; clip-map source MM011-pdf08-print07.mp3 (first-pass alignment)."
       },
       {
@@ -1655,18 +1661,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "this!"
         ],
         "blanks": [
-          "this!"
+          "Watch"
         ],
         "choices": [
-          "this!",
-          "that!",
-          "these!"
+          "Watch",
+          "Give",
+          "fun!"
         ],
         "image": "./assets/story-demo/mm011/pages/page-08.webp",
         "audio": "./assets/story-demo/mm011/mm011-page-08.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p9 printed p8: exact visible sentence; clip-map source MM011-pdf09-print08.mp3 (first-pass alignment)."
       },
       {
@@ -1679,12 +1685,12 @@ window.KakaMagicMarkerManifest.books.push(...[
           "she?"
         ],
         "blanks": [
-          "she?"
+          "Who"
         ],
         "choices": [
-          "she?",
-          "he?",
-          "they?"
+          "Who",
+          "wet",
+          "all"
         ],
         "image": "./assets/story-demo/mm011/pages/page-10.webp",
         "audio": "./assets/story-demo/mm011/mm011-page-10.mp3",
@@ -1722,14 +1728,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "book.",
-          "sleep.",
-          "lunch."
+          "lunch!",
+          "sleep."
         ],
         "image": "./assets/story-demo/mm012/pages/page-01.webp",
         "audio": "./assets/story-demo/mm012/mm012-page-01.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p3 printed p1: exact visible sentence; clip-map source MM012-pdf03-print01.mp3 (first-pass alignment)."
       },
       {
@@ -1747,14 +1753,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "sleep.",
-          "eat.",
-          "play."
+          "book.",
+          "home!"
         ],
         "image": "./assets/story-demo/mm012/pages/page-02.webp",
         "audio": "./assets/story-demo/mm012/mm012-page-02.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p4 printed p2: exact visible sentence; clip-map source MM012-pdf04-print02.mp3 (first-pass alignment)."
       },
       {
@@ -1769,12 +1775,13 @@ window.KakaMagicMarkerManifest.books.push(...[
           "lunch!"
         ],
         "blanks": [
+          "eat",
           "lunch!"
         ],
         "choices": [
-          "lunch!",
-          "bread!",
-          "milk!"
+          "eat lunch!",
+          "happy park",
+          "green house"
         ],
         "image": "./assets/story-demo/mm012/pages/page-03.webp",
         "audio": "./assets/story-demo/mm012/mm012-page-03.mp3",
@@ -1798,8 +1805,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "steak?",
-          "bread?",
-          "milk?"
+          "lunch!",
+          "eat"
         ],
         "image": "./assets/story-demo/mm012/pages/page-04.webp",
         "audio": "./assets/story-demo/mm012/mm012-page-04.mp3",
@@ -1818,18 +1825,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "do!"
         ],
         "blanks": [
-          "do!"
+          "Yes,"
         ],
         "choices": [
-          "do!",
-          "go!",
-          "play!"
+          "Yes,",
+          "steak?",
+          "book."
         ],
         "image": "./assets/story-demo/mm012/pages/page-05.webp",
         "audio": "./assets/story-demo/mm012/mm012-page-05.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p7 printed p5: exact visible sentence; clip-map source MM012-pdf07-print05.mp3 (first-pass alignment)."
       },
       {
@@ -1845,14 +1852,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "eat!",
-          "sleep!",
-          "play!"
+          "lunch!",
+          "want"
         ],
         "image": "./assets/story-demo/mm012/pages/page-06.webp",
         "audio": "./assets/story-demo/mm012/mm012-page-06.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p8 printed p6: exact visible sentence; clip-map source MM012-pdf08-print06.mp3 (first-pass alignment)."
       },
       {
@@ -1869,12 +1876,12 @@ window.KakaMagicMarkerManifest.books.push(...[
           "now?"
         ],
         "blanks": [
-          "now?"
+          "want"
         ],
         "choices": [
-          "now?",
-          "later?",
-          "tomorrow?"
+          "want",
+          "home!",
+          "read"
         ],
         "image": "./assets/story-demo/mm012/pages/page-07.webp",
         "audio": "./assets/story-demo/mm012/mm012-page-07.mp3",
@@ -1899,14 +1906,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "home!",
-          "store!",
-          "playground!"
+          "read",
+          "book."
         ],
         "image": "./assets/story-demo/mm012/pages/page-08.webp",
         "audio": "./assets/story-demo/mm012/mm012-page-08.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p10 printed p8: exact visible sentence; clip-map source MM012-pdf10-print08.mp3 (first-pass alignment)."
       }
     ]
@@ -1931,18 +1938,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "Sue!"
         ],
         "blanks": [
-          "Sue!"
+          "and"
         ],
         "choices": [
-          "Sue!",
-          "Taco!",
-          "Maxie!"
+          "and",
+          "angry.",
+          "marker."
         ],
         "image": "./assets/story-demo/mm013/pages/page-01.webp",
         "audio": "./assets/story-demo/mm013/mm013-page-01.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p3 printed p1: exact visible sentence; clip-map source MM013-pdf03-print01.mp3 (first-pass alignment)."
       },
       {
@@ -1959,8 +1966,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "angry.",
-          "happy.",
-          "sad."
+          "marker.",
+          "magic"
         ],
         "image": "./assets/story-demo/mm013/pages/page-02.webp",
         "audio": "./assets/story-demo/mm013/mm013-page-02.mp3",
@@ -1985,8 +1992,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "angry!",
-          "happy!",
-          "sad!"
+          "marker.",
+          "magic"
         ],
         "image": "./assets/story-demo/mm013/pages/page-03.webp",
         "audio": "./assets/story-demo/mm013/mm013-page-03.mp3",
@@ -2009,8 +2016,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "sorry",
-          "happy",
-          "angry"
+          "marker.",
+          "angry."
         ],
         "image": "./assets/story-demo/mm013/pages/page-04.webp",
         "audio": "./assets/story-demo/mm013/mm013-page-04.mp3",
@@ -2034,14 +2041,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "sorry.",
-          "happy.",
-          "angry."
+          "magic",
+          "marker."
         ],
         "image": "./assets/story-demo/mm013/pages/page-05.webp",
         "audio": "./assets/story-demo/mm013/mm013-page-05.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p7 printed p5: exact visible sentence; clip-map source MM013-pdf07-print05.mp3 (first-pass alignment)."
       },
       {
@@ -2055,18 +2062,19 @@ window.KakaMagicMarkerManifest.books.push(...[
           "marker."
         ],
         "blanks": [
+          "magic",
           "marker."
         ],
         "choices": [
-          "marker.",
-          "pencil.",
-          "crayon."
+          "magic marker.",
+          "happy park",
+          "green house"
         ],
         "image": "./assets/story-demo/mm013/pages/page-07.webp",
         "audio": "./assets/story-demo/mm013/mm013-page-07.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p9 printed p7: exact visible sentence; clip-map source MM013-pdf09-print07.mp3 (first-pass alignment)."
       },
       {
@@ -2082,14 +2090,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "that?",
-          "this?",
-          "these?"
+          "angry.",
+          "magic"
         ],
         "image": "./assets/story-demo/mm013/pages/page-08.webp",
         "audio": "./assets/story-demo/mm013/mm013-page-08.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p10 printed p8: exact visible sentence; clip-map source MM013-pdf10-print08.mp3 (first-pass alignment)."
       }
     ]
@@ -2118,8 +2126,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "marker.",
-          "pencil.",
-          "crayon."
+          "something!",
+          "magic"
         ],
         "image": "./assets/story-demo/mm014/pages/page-01.webp",
         "audio": "./assets/story-demo/mm014/mm014-page-01.mp3",
@@ -2141,12 +2149,12 @@ window.KakaMagicMarkerManifest.books.push(...[
           "Maxie?"
         ],
         "blanks": [
-          "magic"
+          "marker,"
         ],
         "choices": [
-          "magic",
-          "red",
-          "blue"
+          "marker,",
+          "hula",
+          "something!"
         ],
         "image": "./assets/story-demo/mm014/pages/page-02.webp",
         "audio": "./assets/story-demo/mm014/mm014-page-02.mp3",
@@ -2165,18 +2173,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "something!"
         ],
         "blanks": [
-          "draw"
+          "something!"
         ],
         "choices": [
-          "draw",
-          "read",
-          "write"
+          "something!",
+          "helmet",
+          "marker."
         ],
         "image": "./assets/story-demo/mm014/pages/page-03.webp",
         "audio": "./assets/story-demo/mm014/mm014-page-03.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "first-pass",
-        "audioMatchRatio": 0.0,
+        "audioMatchRatio": 0,
         "reviewNote": "PDF p5 printed p3: exact visible sentence; clip-map source MM014-pdf05-print03.mp3 (first-pass alignment)."
       },
       {
@@ -2191,18 +2199,19 @@ window.KakaMagicMarkerManifest.books.push(...[
           "rope?"
         ],
         "blanks": [
+          "jump",
           "rope?"
         ],
         "choices": [
-          "rope?",
-          "ball?",
-          "hoop?"
+          "jump rope?",
+          "magic marker,",
+          "draw something!"
         ],
         "image": "./assets/story-demo/mm014/pages/page-04.webp",
         "audio": "./assets/story-demo/mm014/mm014-page-04.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p6 printed p4: exact visible sentence; clip-map source MM014-pdf06-print04.mp3 (first-pass alignment)."
       },
       {
@@ -2218,12 +2227,13 @@ window.KakaMagicMarkerManifest.books.push(...[
           "hoop."
         ],
         "blanks": [
+          "hula",
           "hoop."
         ],
         "choices": [
-          "hoop.",
-          "rope.",
-          "ball."
+          "hula hoop.",
+          "magic marker,",
+          "draw something!"
         ],
         "image": "./assets/story-demo/mm014/pages/page-05.webp",
         "audio": "./assets/story-demo/mm014/mm014-page-05.mp3",
@@ -2247,8 +2257,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "helmet",
-          "hat",
-          "cap"
+          "hoop.",
+          "drawing"
         ],
         "image": "./assets/story-demo/mm014/pages/page-06.webp",
         "audio": "./assets/story-demo/mm014/mm014-page-06.mp3",
@@ -2273,8 +2283,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "marker,",
-          "pencil,",
-          "crayon,"
+          "hoop.",
+          "magic"
         ],
         "image": "./assets/story-demo/mm014/pages/page-07.webp",
         "audio": "./assets/story-demo/mm014/mm014-page-07.mp3",
@@ -2296,8 +2306,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "magic.",
-          "red.",
-          "blue."
+          "marker.",
+          "drawing"
         ],
         "image": "./assets/story-demo/mm014/pages/page-08.webp",
         "audio": "./assets/story-demo/mm014/mm014-page-08.mp3",
@@ -2332,14 +2342,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "artist!",
-          "singer!",
-          "teacher!"
+          "guitar.",
+          "singer!"
         ],
         "image": "./assets/story-demo/mm015/pages/page-02.webp",
         "audio": "./assets/story-demo/mm015/mm015-page-02.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p3 printed p2: exact visible sentence; clip-map source MM015-pdf03-print02.mp3 (first-pass alignment)."
       },
       {
@@ -2356,7 +2366,7 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "turn,",
-          "game,",
+          "guitar.",
           "time,"
         ],
         "image": "./assets/story-demo/mm015/pages/page-03.webp",
@@ -2381,14 +2391,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "artist?",
-          "singer?",
-          "teacher?"
+          "One",
+          "more"
         ],
         "image": "./assets/story-demo/mm015/pages/page-04.webp",
         "audio": "./assets/story-demo/mm015/mm015-page-04.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p5 printed p4: exact visible sentence; clip-map source MM015-pdf05-print04.mp3 (first-pass alignment)."
       },
       {
@@ -2401,18 +2411,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "not."
         ],
         "blanks": [
-          "not."
+          "No,"
         ],
         "choices": [
-          "not.",
-          "ready.",
-          "here."
+          "No,",
+          "singer!",
+          "watermelon"
         ],
         "image": "./assets/story-demo/mm015/pages/page-05.webp",
         "audio": "./assets/story-demo/mm015/mm015-page-05.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p6 printed p5: exact visible sentence; clip-map source MM015-pdf06-print05.mp3 (first-pass alignment)."
       },
       {
@@ -2425,18 +2435,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "it?"
         ],
         "blanks": [
-          "it?"
+          "What"
         ],
         "choices": [
-          "it?",
-          "that?",
-          "this?"
+          "What",
+          "singer!",
+          "guitar."
         ],
         "image": "./assets/story-demo/mm015/pages/page-06.webp",
         "audio": "./assets/story-demo/mm015/mm015-page-06.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p7 printed p6: exact visible sentence; clip-map source MM015-pdf07-print06.mp3 (first-pass alignment)."
       },
       {
@@ -2450,12 +2460,13 @@ window.KakaMagicMarkerManifest.books.push(...[
           "guitar."
         ],
         "blanks": [
+          "watermelon",
           "guitar."
         ],
         "choices": [
-          "guitar.",
-          "piano.",
-          "drum."
+          "watermelon guitar.",
+          "more time,",
+          "happy park"
         ],
         "image": "./assets/story-demo/mm015/pages/page-07.webp",
         "audio": "./assets/story-demo/mm015/mm015-page-07.mp3",
@@ -2478,14 +2489,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "artist.",
-          "singer.",
-          "teacher."
+          "time,",
+          "watermelon"
         ],
         "image": "./assets/story-demo/mm015/pages/page-08.webp",
         "audio": "./assets/story-demo/mm015/mm015-page-08.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p9 printed p8: exact visible sentence; clip-map source MM015-pdf09-print08.mp3 (first-pass alignment)."
       },
       {
@@ -2499,18 +2510,19 @@ window.KakaMagicMarkerManifest.books.push(...[
           "Taco."
         ],
         "blanks": [
+          "more",
           "time,"
         ],
         "choices": [
-          "time,",
-          "turn,",
-          "game,"
+          "more time,",
+          "watermelon guitar.",
+          "happy park"
         ],
         "image": "./assets/story-demo/mm015/pages/page-09.webp",
         "audio": "./assets/story-demo/mm015/mm015-page-09.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p10 printed p9: exact visible sentence; clip-map source MM015-pdf10-print09.mp3 (first-pass alignment)."
       },
       {
@@ -2531,14 +2543,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "singer!",
-          "dancer!",
-          "turn!"
+          "guitar.",
+          "more"
         ],
         "image": "./assets/story-demo/mm015/pages/page-10.webp",
         "audio": "./assets/story-demo/mm015/mm015-page-10.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p11 printed p10: exact visible sentence; clip-map source MM015-pdf11-print10.mp3 (first-pass alignment)."
       }
     ]
@@ -2565,12 +2577,13 @@ window.KakaMagicMarkerManifest.books.push(...[
           "game."
         ],
         "blanks": [
+          "card",
           "game."
         ],
         "choices": [
-          "game.",
-          "book.",
-          "song."
+          "card game.",
+          "happy park",
+          "green house"
         ],
         "image": "./assets/story-demo/mm016/pages/page-01.webp",
         "audio": "./assets/story-demo/mm016/mm016-page-01.mp3",
@@ -2596,14 +2609,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "bike?",
-          "car?",
-          "horse?"
+          "help",
+          "draw!"
         ],
         "image": "./assets/story-demo/mm016/pages/page-02.webp",
         "audio": "./assets/story-demo/mm016/mm016-page-02.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p4 printed p2: exact visible sentence; clip-map source MM016-pdf04-print02.mp3 (first-pass alignment)."
       },
       {
@@ -2621,8 +2634,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "skateboard?",
-          "bike?",
-          "scooter?"
+          "draw!",
+          "ride"
         ],
         "image": "./assets/story-demo/mm016/pages/page-03.webp",
         "audio": "./assets/story-demo/mm016/mm016-page-03.mp3",
@@ -2649,8 +2662,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "draw!",
-          "read!",
-          "write!"
+          "play",
+          "Heddy,"
         ],
         "image": "./assets/story-demo/mm016/pages/page-04.webp",
         "audio": "./assets/story-demo/mm016/mm016-page-04.mp3",
@@ -2673,8 +2686,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "skateboard.",
-          "bike.",
-          "scooter."
+          "game.",
+          "draw!"
         ],
         "image": "./assets/story-demo/mm016/pages/page-05.webp",
         "audio": "./assets/story-demo/mm016/mm016-page-05.mp3",
@@ -2697,8 +2710,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "help",
-          "find",
-          "see"
+          "ride",
+          "bike?"
         ],
         "image": "./assets/story-demo/mm016/pages/page-06.webp",
         "audio": "./assets/story-demo/mm016/mm016-page-06.mp3",
@@ -2726,8 +2739,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "help",
-          "find",
-          "see"
+          "Heddy,",
+          "card"
         ],
         "image": "./assets/story-demo/mm016/pages/page-07.webp",
         "audio": "./assets/story-demo/mm016/mm016-page-07.mp3",
@@ -2749,14 +2762,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "go!",
-          "stop!",
-          "wait!"
+          "ride",
+          "Everyone,"
         ],
         "image": "./assets/story-demo/mm016/pages/page-08.webp",
         "audio": "./assets/story-demo/mm016/mm016-page-08.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p10 printed p8: exact visible sentence; clip-map source MM016-pdf10-print08.mp3 (first-pass alignment)."
       }
     ]
@@ -2781,12 +2794,13 @@ window.KakaMagicMarkerManifest.books.push(...[
           "cupcakes."
         ],
         "blanks": [
+          "drawing",
           "cupcakes."
         ],
         "choices": [
-          "cupcakes.",
-          "bread.",
-          "milk."
+          "drawing cupcakes.",
+          "happy park",
+          "green house"
         ],
         "image": "./assets/story-demo/mm017/pages/page-01.webp",
         "audio": "./assets/story-demo/mm017/mm017-page-01.mp3",
@@ -2809,8 +2823,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "short.",
-          "tall.",
-          "small."
+          "small",
+          "dog"
         ],
         "image": "./assets/story-demo/mm017/pages/page-02.webp",
         "audio": "./assets/story-demo/mm017/mm017-page-02.mp3",
@@ -2835,14 +2849,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "tall",
-          "short",
-          "small"
+          "dog",
+          "cupcakes."
         ],
         "image": "./assets/story-demo/mm017/pages/page-03.webp",
         "audio": "./assets/story-demo/mm017/mm017-page-03.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p5 printed p3: exact visible sentence; clip-map source MM017-pdf05-print03.mp3 (first-pass alignment)."
       },
       {
@@ -2859,8 +2873,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "Black.",
-          "Brown.",
-          "White."
+          "sad.",
+          "short."
         ],
         "image": "./assets/story-demo/mm017/pages/page-04.webp",
         "audio": "./assets/story-demo/mm017/mm017-page-04.mp3",
@@ -2882,18 +2896,18 @@ window.KakaMagicMarkerManifest.books.push(...[
           "brown."
         ],
         "blanks": [
-          "dog"
+          "small"
         ],
         "choices": [
-          "dog",
-          "cat",
-          "bird"
+          "small",
+          "drawing",
+          "know."
         ],
         "image": "./assets/story-demo/mm017/pages/page-05.webp",
         "audio": "./assets/story-demo/mm017/mm017-page-05.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p7 printed p5: exact visible sentence; clip-map source MM017-pdf07-print05.mp3 (first-pass alignment)."
       },
       {
@@ -2910,14 +2924,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "know.",
-          "see.",
-          "think."
+          "old.",
+          "short."
         ],
         "image": "./assets/story-demo/mm017/pages/page-06.webp",
         "audio": "./assets/story-demo/mm017/mm017-page-06.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p8 printed p6: exact visible sentence; clip-map source MM017-pdf08-print06.mp3 (first-pass alignment)."
       },
       {
@@ -2934,8 +2948,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "sad.",
-          "happy.",
-          "angry."
+          "know.",
+          "short."
         ],
         "image": "./assets/story-demo/mm017/pages/page-07.webp",
         "audio": "./assets/story-demo/mm017/mm017-page-07.mp3",
@@ -2954,12 +2968,12 @@ window.KakaMagicMarkerManifest.books.push(...[
           "she?"
         ],
         "blanks": [
-          "she?"
+          "Who"
         ],
         "choices": [
-          "she?",
-          "he?",
-          "they?"
+          "Who",
+          "sad.",
+          "short."
         ],
         "image": "./assets/story-demo/mm017/pages/page-08.webp",
         "audio": "./assets/story-demo/mm017/mm017-page-08.mp3",
@@ -2991,12 +3005,13 @@ window.KakaMagicMarkerManifest.books.push(...[
           "cupcakes."
         ],
         "blanks": [
+          "making",
           "cupcakes."
         ],
         "choices": [
-          "cupcakes.",
-          "bread.",
-          "milk."
+          "making cupcakes.",
+          "many pets?",
+          "big cat."
         ],
         "image": "./assets/story-demo/mm018/pages/page-01.webp",
         "audio": "./assets/story-demo/mm018/mm018-page-01.mp3",
@@ -3020,8 +3035,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "cupcakes?",
-          "bread?",
-          "milk?"
+          "many",
+          "making"
         ],
         "image": "./assets/story-demo/mm018/pages/page-02.webp",
         "audio": "./assets/story-demo/mm018/mm018-page-02.mp3",
@@ -3043,14 +3058,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "Thank",
-          "Hello",
-          "Sorry"
+          "making",
+          "want"
         ],
         "image": "./assets/story-demo/mm018/pages/page-03.webp",
         "audio": "./assets/story-demo/mm018/mm018-page-03.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p5 printed p3: exact visible sentence; clip-map source MM018-pdf05-print03.mp3 (first-pass alignment)."
       },
       {
@@ -3066,12 +3081,12 @@ window.KakaMagicMarkerManifest.books.push(...[
           "Taco."
         ],
         "blanks": [
-          "Maxie,"
+          "This"
         ],
         "choices": [
-          "Maxie,",
-          "Alex,",
-          "Sue,"
+          "This",
+          "making",
+          "many"
         ],
         "image": "./assets/story-demo/mm018/pages/page-04.webp",
         "audio": "./assets/story-demo/mm018/mm018-page-04.mp3",
@@ -3094,8 +3109,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "pets?",
-          "friends?",
-          "toys?"
+          "want",
+          "cupcakes."
         ],
         "image": "./assets/story-demo/mm018/pages/page-05.webp",
         "audio": "./assets/story-demo/mm018/mm018-page-05.mp3",
@@ -3115,12 +3130,13 @@ window.KakaMagicMarkerManifest.books.push(...[
           "cat."
         ],
         "blanks": [
+          "big",
           "cat."
         ],
         "choices": [
-          "cat.",
-          "dog.",
-          "bird."
+          "big cat.",
+          "making cupcakes.",
+          "many pets?"
         ],
         "image": "./assets/story-demo/mm018/pages/page-06.webp",
         "audio": "./assets/story-demo/mm018/mm018-page-06.mp3",
@@ -3145,14 +3161,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "marker",
-          "pencil",
-          "crayon"
+          "cupcakes.",
+          "cat."
         ],
         "image": "./assets/story-demo/mm018/pages/page-07.webp",
         "audio": "./assets/story-demo/mm018/mm018-page-07.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p9 printed p7: exact visible sentence; clip-map source MM018-pdf09-print07.mp3 (first-pass alignment)."
       },
       {
@@ -3168,8 +3184,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "run!",
-          "walk!",
-          "jump!"
+          "pets?",
+          "cat."
         ],
         "image": "./assets/story-demo/mm018/pages/page-08.webp",
         "audio": "./assets/story-demo/mm018/mm018-page-08.mp3",
@@ -3205,14 +3221,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "bed.",
-          "chair.",
-          "sofa."
+          "behind",
+          "come"
         ],
         "image": "./assets/story-demo/mm019/pages/page-02.webp",
         "audio": "./assets/story-demo/mm019/mm019-page-02.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p3 printed p2: exact visible sentence; clip-map source MM019-pdf03-print02.mp3 (first-pass alignment)."
       },
       {
@@ -3230,14 +3246,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "dog?",
-          "cat?",
-          "bird?"
+          "bed.",
+          "doll"
         ],
         "image": "./assets/story-demo/mm019/pages/page-03.webp",
         "audio": "./assets/story-demo/mm019/mm019-page-03.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p4 printed p3: exact visible sentence; clip-map source MM019-pdf04-print03.mp3 (first-pass alignment)."
       },
       {
@@ -3256,14 +3272,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "boxes.",
-          "chairs.",
-          "tables."
+          "bed.",
+          "back!"
         ],
         "image": "./assets/story-demo/mm019/pages/page-04.webp",
         "audio": "./assets/story-demo/mm019/mm019-page-04.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p5 printed p4: exact visible sentence; clip-map source MM019-pdf05-print04.mp3 (first-pass alignment)."
       },
       {
@@ -3276,12 +3292,13 @@ window.KakaMagicMarkerManifest.books.push(...[
           "back!"
         ],
         "blanks": [
+          "come",
           "back!"
         ],
         "choices": [
-          "back!",
-          "home!",
-          "here!"
+          "come back!",
+          "happy park",
+          "green house"
         ],
         "image": "./assets/story-demo/mm019/pages/page-06.webp",
         "audio": "./assets/story-demo/mm019/mm019-page-06.mp3",
@@ -3307,8 +3324,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "tree.",
-          "bed.",
-          "dog."
+          "come",
+          "bed."
         ],
         "image": "./assets/story-demo/mm019/pages/page-07.webp",
         "audio": "./assets/story-demo/mm019/mm019-page-07.mp3",
@@ -3335,14 +3352,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "chair.",
-          "key.",
-          "feather."
+          "behind",
+          "tree."
         ],
         "image": "./assets/story-demo/mm019/pages/page-08.webp",
         "audio": "./assets/story-demo/mm019/mm019-page-08.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p9 printed p8: exact visible sentence; clip-map source MM019-pdf09-print08.mp3 (first-pass alignment)."
       },
       {
@@ -3362,14 +3379,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "chair.",
-          "key.",
-          "feather."
+          "back!",
+          "boxes."
         ],
         "image": "./assets/story-demo/mm019/pages/page-09.webp",
         "audio": "./assets/story-demo/mm019/mm019-page-09.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p10 printed p9: exact visible sentence; clip-map source MM019-pdf10-print09.mp3 (first-pass alignment)."
       },
       {
@@ -3386,14 +3403,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "go!",
-          "stop!",
-          "wait!"
+          "come",
+          "tree."
         ],
         "image": "./assets/story-demo/mm019/pages/page-10.webp",
         "audio": "./assets/story-demo/mm019/mm019-page-10.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p11 printed p10: exact visible sentence; clip-map source MM019-pdf11-print10.mp3 (first-pass alignment)."
       }
     ]
@@ -3422,14 +3439,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "strawberries.",
-          "pineapples.",
-          "grapes."
+          "favorite",
+          "Run!"
         ],
         "image": "./assets/story-demo/mm020/pages/page-01.webp",
         "audio": "./assets/story-demo/mm020/mm020-page-01.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p3 printed p1: exact visible sentence; clip-map source MM020-pdf03-print01.mp3 (first-pass alignment)."
       },
       {
@@ -3446,8 +3463,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "pineapples.",
-          "strawberries.",
-          "grapes."
+          "favorite",
+          "cream."
         ],
         "image": "./assets/story-demo/mm020/pages/page-02.webp",
         "audio": "./assets/story-demo/mm020/mm020-page-02.mp3",
@@ -3470,8 +3487,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "grapes.",
-          "strawberries.",
-          "pineapples."
+          "Run!",
+          "cream."
         ],
         "image": "./assets/story-demo/mm020/pages/page-03.webp",
         "audio": "./assets/story-demo/mm020/mm020-page-03.mp3",
@@ -3494,8 +3511,8 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "bananas.",
-          "strawberries.",
-          "pineapples."
+          "pineapples.",
+          "looking"
         ],
         "image": "./assets/story-demo/mm020/pages/page-04.webp",
         "audio": "./assets/story-demo/mm020/mm020-page-04.mp3",
@@ -3518,18 +3535,19 @@ window.KakaMagicMarkerManifest.books.push(...[
           "cream."
         ],
         "blanks": [
+          "favorite",
           "ice"
         ],
         "choices": [
-          "ice",
-          "chocolate",
-          "strawberry"
+          "favorite ice",
+          "happy park",
+          "green house"
         ],
         "image": "./assets/story-demo/mm020/pages/page-05.webp",
         "audio": "./assets/story-demo/mm020/mm020-page-05.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p7 printed p5: exact visible sentence; clip-map source MM020-pdf07-print05.mp3 (first-pass alignment)."
       },
       {
@@ -3546,14 +3564,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "witch.",
-          "teacher.",
-          "friend."
+          "looking",
+          "grapes."
         ],
         "image": "./assets/story-demo/mm020/pages/page-06.webp",
         "audio": "./assets/story-demo/mm020/mm020-page-06.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p8 printed p6: exact visible sentence; clip-map source MM020-pdf08-print06.mp3 (first-pass alignment)."
       },
       {
@@ -3568,14 +3586,14 @@ window.KakaMagicMarkerManifest.books.push(...[
         ],
         "choices": [
           "Run!",
-          "walk!",
-          "jump!"
+          "favorite",
+          "looking"
         ],
         "image": "./assets/story-demo/mm020/pages/page-07.webp",
         "audio": "./assets/story-demo/mm020/mm020-page-07.mp3",
         "verificationStatus": "verified",
         "audioAlignmentStatus": "source-matched",
-        "audioMatchRatio": 1.0,
+        "audioMatchRatio": 1,
         "reviewNote": "PDF p9 printed p7: exact visible sentence; clip-map source MM020-pdf09-print07.mp3 (first-pass alignment)."
       }
     ]

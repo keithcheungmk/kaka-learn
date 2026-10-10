@@ -36,7 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| Carter Family 填空改內容詞 | Cursor Chief Lead（English 範圍） | `scripts/wacky_ricky_blanks.py`, `scripts/apply-carter-family-blanks.py`, `data/carter-family-manifest.js`, `js/story-demo.js`, `scripts/test-carter-family-blanks.py`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准用 Wacky #128 規則先改 Carter；唔改書架星、唔做 Magic Marker。開 PR，唔自 merge |
+| Magic Marker 填空改內容詞 | Cursor Chief Lead（English 範圍） | `scripts/wacky_ricky_blanks.py`, `scripts/apply-magic-marker-blanks.py`, `data/magic-marker-manifest.js`, `data/magic-marker-expansion.js`, `data/magic-marker-rest.js`, `scripts/test-magic-marker-blanks.py`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准 Carter #130 merge 後只改 Magic Marker；同一套 #128 規則；唔改書架星。開 PR，唔自 merge |
 | 故事 focus 優化（浠榆初生＋迪士尼／國慶合照拆開） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/hongkong-disney-p06.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准：初生篇保留洗澡、淡化珠海／月子中心／睡覺；迪士尼對齊地圖／城堡／排隊／紀念品／合照照片；國慶唔再 focus 合照／照片。開 PR，唔自 merge。 |
 | 主頁四科入口加入卡卡插畫 | ChatGPT／Codex | `index.html`, `css/styles.css`, `assets/home-subjects/`, `assets/image-formats.lock.json`, `docs/handover.md` | 2026-10-06 | Keith 已看過四科卡片 demo 並指示繼續；只改入口視覺，保留文字、連結與按鈕行為。 |
 | 紅輯「按書頁砌句」資料層及遊戲引擎 | Chinese Lead（Chief 整合） | `js/book-scene-demo.js`, `book-scene-demo.html`, `css/book-scene-demo.css`, `data/red-series/`, `scripts/test-book-scene-demo.mjs`, `scripts/smoke-book-scene-demo.py`, `docs/cursor-handoff-2026-09-20.md` | 2026-09-20 | Keith 交辦：本機接盤；內容由 Chinese Lead，shared／部署由 Chief；唔開 Cloud Agent |
@@ -108,9 +108,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-10 · Cursor Chief Lead（Magic Marker 填空改內容詞）
+
+- Carter #130 已 merge。Keith 指示而家只改 Magic Marker：同一套 Wacky／Carter 內容詞規則（STOP + Maxie／Taco／Alex／Sue）、20–30% 兩詞、每頁都有格、最簡單合格詞作後備。重產 MM001–MM073 空白，音檔／頁圖／書架星唔郁。開 PR，唔自 merge。
+
 ### 2026-10-10 · Cursor Chief Lead（Carter Family 填空改內容詞）
 
-- Keith 批准將 Wacky Ricky #128 填空規則套去 Carter Family（先開 PR，Magic Marker 等 Carter 過目先）。內容詞、硬性拒絕 STOP／家人名、20–30% 兩詞、每頁都有格、最簡單合格詞作後備。重產空白，音檔／頁圖唔郁。開 PR，唔自 merge。
+- Keith 批准將 Wacky Ricky #128 填空規則套去 Carter Family。內容詞、硬性拒絕 STOP／家人名、20–30% 兩詞、每頁都有格、最簡單合格詞作後備。重產空白，音檔／頁圖唔郁。#130 已由 Chief merge 入 `main`。
 
 ### 2026-10-10 · Cursor Chief Lead（Wacky Ricky 書架完成星）
 

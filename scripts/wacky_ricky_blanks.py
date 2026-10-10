@@ -1,4 +1,4 @@
-"""Shared Wacky Ricky / Little Fox missing-word picker.
+"""Shared Wacky Ricky / Carter / Magic Marker missing-word picker.
 
 Fill-in blanks must be teachable content words. Series names, family roles,
 titles, and English function words are hard-rejected when any content word
@@ -14,6 +14,7 @@ import json
 import math
 import random
 import re
+import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -21,6 +22,19 @@ MANIFEST = ROOT / "data" / "wacky-ricky-manifest.js"
 MANIFEST_PREFIX = "window.KakaWackyRickyManifest = "
 CARTER_MANIFEST = ROOT / "data" / "carter-family-manifest.js"
 CARTER_PREFIX = "window.KakaCarterManifest = "
+MAGIC_MANIFEST = ROOT / "data" / "magic-marker-manifest.js"
+MAGIC_EXPANSION = ROOT / "data" / "magic-marker-expansion.js"
+MAGIC_REST = ROOT / "data" / "magic-marker-rest.js"
+MAGIC_MANIFEST_PREFIX = "window.KakaMagicMarkerManifest = "
+MAGIC_PUSH_PREFIX = "window.KakaMagicMarkerManifest.books.push(..."
+MAGIC_PUSH_HEADER = (
+    "/* Generated from local Magic Marker PDFs and page-level clip maps by "
+    "scripts/build-magic-marker-expansion.py. */\n"
+)
+MAGIC_PILOT_HEADER = (
+    "/* Magic Marker MM001-MM002 pilot: every playable sentence is transcribed from\n"
+    " * the cited printed page, paired with its matching local page clip. */\n"
+)
 
 # Carter STOP_WORDS plus spoken contractions used by the Wacky Ricky picker.
 STOP_WORDS = {
@@ -43,14 +57,14 @@ STOP_WORDS = {
     "whoohoo", "whos", "youll",
 }
 
-# Carter FAMILY_NAMES pattern, plus Wacky Ricky / Little Fox regulars and roles.
+# Carter FAMILY_NAMES pattern, plus Wacky Ricky / Little Fox / Magic Marker names.
 FAMILY_NAMES = {
-    "aunt", "bingo", "brenda", "brian", "brown", "dad", "daddy", "emmy",
+    "alex", "aunt", "bingo", "brenda", "brian", "brown", "dad", "daddy", "emmy",
     "father", "forestwood", "gill", "grandma", "grandfather", "grandpa",
-    "grandmother", "harry", "hopper", "judy", "kitty", "mama", "miss",
+    "grandmother", "harry", "hopper", "judy", "kitty", "mama", "maxie", "miss",
     "mom", "mommy", "mother", "mr", "mrs", "ms", "oliver", "papa", "peter",
     "honey", "rachel", "richard", "ricky", "rover", "santa", "sir", "spike",
-    "tinker", "uncle", "veronica",
+    "sue", "taco", "tinker", "uncle", "veronica",
 }
 
 COLORS = {
@@ -488,6 +502,65 @@ def write_carter_manifest(payload: dict, path: Path | None = None) -> None:
     manifest_path = path or CARTER_MANIFEST
     encoded = json.dumps(payload, ensure_ascii=False, indent=2)
     manifest_path.write_text(CARTER_PREFIX + encoded + ";\n", encoding="utf-8")
+
+
+def _strip_js_comment_header(text: str) -> str:
+    return re.sub(r"^/\*.*?\*/\s*", "", text, count=1, flags=re.S)
+
+
+def _load_magic_push_books(path: Path) -> list[dict]:
+    text = _strip_js_comment_header(path.read_text(encoding="utf-8"))
+    if not text.startswith(MAGIC_PUSH_PREFIX):
+        raise ValueError(f"unexpected Magic Marker push prefix in {path}")
+    body = text[len(MAGIC_PUSH_PREFIX):].rstrip().removesuffix(";")
+    if body.endswith(")"):
+        body = body[:-1]
+    return json.loads(body)
+
+
+def _write_magic_push_books(path: Path, books: list[dict]) -> None:
+    encoded = json.dumps(books, ensure_ascii=False, indent=2)
+    path.write_text(MAGIC_PUSH_HEADER + MAGIC_PUSH_PREFIX + encoded + ");\n", encoding="utf-8")
+
+
+def load_magic_marker_books() -> list[dict]:
+    """Load MM001–MM073 from the three Magic Marker data files."""
+    files = [MAGIC_MANIFEST, MAGIC_EXPANSION, MAGIC_REST]
+    file_lits = ", ".join(json.dumps(str(path)) for path in files)
+    script = f"""
+const fs = require("fs");
+const vm = require("vm");
+const sandbox = {{ window: {{}} }};
+for (const file of [{file_lits}]) {{
+  vm.runInNewContext(fs.readFileSync(file, "utf8"), sandbox);
+}}
+process.stdout.write(JSON.stringify(sandbox.window.KakaMagicMarkerManifest.books));
+"""
+    result = subprocess.run(["node", "-e", script], capture_output=True, text=True, check=True)
+    books = json.loads(result.stdout)
+    if len(books) != 73:
+        raise ValueError(f"expected 73 Magic Marker books, got {len(books)}")
+    return books
+
+
+def load_magic_marker_payload() -> dict:
+    return {"books": load_magic_marker_books()}
+
+
+def write_magic_marker_payload(payload: dict) -> None:
+    books = payload.get("books") or []
+    by_id = {book["id"]: book for book in books}
+    expected = [f"mm{index:03d}" for index in range(1, 74)]
+    missing = [book_id for book_id in expected if book_id not in by_id]
+    if missing:
+        raise ValueError(f"Magic Marker write missing books: {missing[:8]}")
+    pilot = [by_id[book_id] for book_id in expected[:2]]
+    MAGIC_MANIFEST.write_text(
+        MAGIC_PILOT_HEADER + MAGIC_MANIFEST_PREFIX + json.dumps({"books": pilot}, ensure_ascii=False, indent=2) + ";\n",
+        encoding="utf-8",
+    )
+    _write_magic_push_books(MAGIC_EXPANSION, [by_id[book_id] for book_id in expected[2:20]])
+    _write_magic_push_books(MAGIC_REST, [by_id[book_id] for book_id in expected[20:]])
 
 
 def page_source_text(page: dict) -> str:

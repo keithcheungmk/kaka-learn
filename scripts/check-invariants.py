@@ -1048,6 +1048,17 @@ def check_wacky_ricky_blanks() -> None:
         fail("wacky-ricky-blanks", (result.stderr or result.stdout)[-1200:] or "Wacky Ricky 填空檢查失敗")
 
 
+def check_magic_marker_blanks() -> None:
+    """Magic Marker 填空用內容詞，每頁都要有格，唔用系列人名／虛詞。"""
+    result = subprocess.run(
+        [sys.executable, "scripts/test-magic-marker-blanks.py"],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        fail("magic-marker-blanks", (result.stderr or result.stdout)[-1200:] or "Magic Marker 填空檢查失敗")
+
+
 def check_chinese_mandarin() -> None:
     """中文詞語牆普通話：每個一般詞語要有預錄音，講法／manifest 唔可以過期。"""
     node = shutil.which("node")
@@ -1104,6 +1115,7 @@ CHECKS = [
     check_family_names,
     check_carter_family_blanks,
     check_wacky_ricky_blanks,
+    check_magic_marker_blanks,
     check_asset_weight,
 ]
 
