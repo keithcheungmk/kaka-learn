@@ -107,6 +107,12 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-10 · Cursor Chief Lead（故事〈珠海探妹妹（二）：妹妹游BB Spa〉）
+
+- 用 `.agents/skills/kaka-story-based-chinese-learning/` 流程新增第 20 篇故事（八頁）：月子中心拜望、浠榆 BB Spa 戴游泳圈游來游去、懷抱玩耍、酒店酒樓飲茶（蝦餃／燒賣／豆漿／油炸鬼／粟米蝦餅）、妹媽帶公公婆婆去澳門郵政局同景點。`series:'珠海探妹妹'`、`episode:2`、`date:'2026-10-09'`。
+- 新角色妹媽＝虹姑姑的家姐；設定圖 `docs/design/meima-character-reference-sheet.jpg`，三視圖 `assets/family-stories/characters/meima-turnaround.webp`。場景圖 `zhuhai-bb-spa-yumcha-p01.webp` 至 `p08.webp`。
+- `scripts/check-family-stories.py` 篇數 19→20。本地故事檢查 20 篇／134 頁、43 項 invariants 通過。PR #122，唔自行 merge。
+
 ### 2026-10-09 · Cursor Chief Lead（英文 Clothes 撞圖改原創插圖）
 
 - Keith 揀先處理英文衣物撞圖。8 個字改用原創透明插圖 `assets/object-art/clothes_<word>.webp`（合共約 210KB）：shirt（黃 T 恤）、jacket（紅色短身拉鏈有帽）、coat（啡色長身有腰帶）、scarf（綠白間條頸巾）、dress（粉紅連身裙）、skirt（紫色百褶裙，冇上身）、pants（長牛仔褲）、shorts（橙色短褲）。每對刻意整到外形一眼分得出；shoes、socks、hat、gloves 照用 Emoji。
