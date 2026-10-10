@@ -1026,6 +1026,17 @@ def check_pth_contract() -> None:
         fail("pth-contract", result.stderr[-1200:] or "PTH 回歸失敗")
 
 
+def check_carter_family_blanks() -> None:
+    """Carter Family 填空用內容詞，每頁都要有格，唔用人名／虛詞。"""
+    result = subprocess.run(
+        [sys.executable, "scripts/test-carter-family-blanks.py"],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        fail("carter-family-blanks", (result.stderr or result.stdout)[-1200:] or "Carter Family 填空檢查失敗")
+
+
 def check_wacky_ricky_blanks() -> None:
     """Wacky Ricky／Little Fox 填空唔可以用人名、稱謂或英文虛詞。"""
     result = subprocess.run(
@@ -1091,6 +1102,7 @@ CHECKS = [
     check_book_scans_shelf,
     check_family_storybook_entry,
     check_family_names,
+    check_carter_family_blanks,
     check_wacky_ricky_blanks,
     check_asset_weight,
 ]
