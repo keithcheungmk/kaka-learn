@@ -12,10 +12,13 @@ from wacky_ricky_blanks import (  # noqa: E402
     FAMILY_NAMES,
     STOP_WORDS,
     find_phrase_pair,
+    is_leaked_page_number,
+    is_name_blank,
     is_rejected_blank,
     load_wacky_manifest,
     normalize_blank,
     pick_blank,
+    tokenize,
 )
 
 
@@ -44,11 +47,11 @@ def test_picker_examples() -> None:
         ),
         (
             "Merry Christmas, Ricky. Merry Christmas, Rachel.",
-            "",
+            "Merry",
         ),
         (
             "Yes, Mr. Brown.",
-            "",
+            "Yes,",
         ),
         (
             "Ha-ha-ha! Way to go, Ricky! Now you can have a truce.",
@@ -64,7 +67,31 @@ def test_picker_examples() -> None:
         ),
         (
             "Hello, Miss Kitty.",
-            "",
+            "Hello,",
+        ),
+        (
+            "Here we go.",
+            "go.",
+        ),
+        (
+            "It's h-h-hot!",
+            "h-h-hot!",
+        ),
+        (
+            "Spike, are you okay?",
+            "okay?",
+        ),
+        (
+            "Am I late? Am I late?",
+            "late?",
+        ),
+        (
+            "10, 9, 8, 7, 6 . . .",
+            "10,",
+        ),
+        (
+            "I'm sorry, Rachel. Ha-ha-ha!",
+            "sorry,",
         ),
     ]
     for source, expected in cases:
@@ -73,8 +100,13 @@ def test_picker_examples() -> None:
             got == expected,
             f"pick_blank({source!r}) -> {got!r}, expected {expected!r}",
         )
-        if got:
-            assert_true(not is_rejected_blank(got), f"picked rejected word {got!r} from {source!r}")
+        if got and not is_name_blank(got):
+            pass
+        elif got:
+            assert_true(
+                _page_only_has_names(tokenize(source)),
+                f"picked name {got!r} from {source!r} which still has non-name words",
+            )
 
 
 def test_phrase_pairs() -> None:
@@ -88,26 +120,48 @@ def test_phrase_pairs() -> None:
         "make breakfast should be a verb-object phrase",
     )
     assert_true(
-        find_phrase_pair("Merry Christmas, Ricky. Merry Christmas, Rachel.") is None,
-        "name-only pages should not invent a phrase",
+        find_phrase_pair("Merry Christmas, Ricky. Merry Christmas, Rachel.") == ("Merry", "Christmas,"),
+        "repeated Merry Christmas should still be a natural two-word phrase",
     )
 
 
-def test_never_falls_back_to_names_or_stops() -> None:
-    for source in (
-        "Hi, Ricky.",
-        "Hello, Rachel!",
-        "Yes, Mom.",
-        "Okay, Dad!",
-        "Mrs. Kitty.",
-        "What?",
-    ):
+def test_never_falls_back_to_names_when_other_words_exist() -> None:
+    cases = [
+        ("Hi, Ricky.", "Hi,"),
+        ("Hello, Rachel!", "Hello,"),
+        ("Yes, Mom.", "Yes,"),
+        ("Okay, Dad!", "Okay,"),
+        ("What?", "What?"),
+        ("Hey, Ricky.", "Hey,"),
+        ("Dad!", "Dad!"),
+        ("Mrs. Kitty.", "Kitty."),
+    ]
+    for source, expected in cases:
         got = pick_blank(source)
-        assert_true(got == "", f"expected no blank for {source!r}, got {got!r}")
+        assert_true(got == expected, f"pick_blank({source!r}) -> {got!r}, expected {expected!r}")
+        assert_true(bool(got), f"every page must have a fill, got empty for {source!r}")
+    for source in ("Hi, Ricky.", "Hello, Rachel!", "Yes, Mom.", "Okay, Dad!", "Hey, Ricky.", "What?"):
+        got = pick_blank(source)
+        assert_true(not is_name_blank(got), f"must not pick a name from {source!r}, got {got!r}")
+    assert_true(is_name_blank("Ricky.") and is_name_blank("Rachel"), "Ricky/Rachel must stay names")
     assert_true(is_rejected_blank("Ricky.") and is_rejected_blank("Rachel"), "Ricky/Rachel must be rejected")
     assert_true(is_rejected_blank("Mom") and is_rejected_blank("Dad!"), "Mom/Dad must be rejected")
     assert_true(is_rejected_blank("Mrs.") and is_rejected_blank("the"), "Mrs/the must be rejected")
     assert_true(is_rejected_blank("Ricky's") and is_rejected_blank("Brian"), "Ricky's/Brian must be rejected")
+
+
+def _page_only_has_names(sentence: list[str]) -> bool:
+    for index, word in enumerate(sentence):
+        key = normalize_blank(word)
+        if not key:
+            continue
+        if is_leaked_page_number(word, index, sentence):
+            continue
+        if key.isdigit():
+            return False
+        if not is_name_blank(word):
+            return False
+    return True
 
 
 def test_manifest_has_no_rejected_blanks() -> None:
@@ -124,6 +178,7 @@ def test_manifest_has_no_rejected_blanks() -> None:
             sentence = page.get("sentence") or []
             if not blanks:
                 empty += 1
+                rejected.append(f"{book.get('id')} p{page.get('printedPage')}: missing blank")
                 continue
             if len(blanks) == 2:
                 two += 1
@@ -138,20 +193,23 @@ def test_manifest_has_no_rejected_blanks() -> None:
             else:
                 rejected.append(f"{book.get('id')} p{page.get('printedPage')}: unexpected blank count {blanks!r}")
             for answer in blanks:
-                if is_rejected_blank(answer):
-                    rejected.append(f"{book.get('id')} p{page.get('printedPage')}: {answer!r}")
+                if is_name_blank(answer) and not _page_only_has_names(sentence):
+                    rejected.append(f"{book.get('id')} p{page.get('printedPage')}: name {answer!r}")
+                if is_name_blank(answer) and len(blanks) == 2:
+                    rejected.append(f"{book.get('id')} p{page.get('printedPage')}: name inside phrase {blanks!r}")
                 if answer not in sentence:
                     rejected.append(f"{book.get('id')} p{page.get('printedPage')}: blank {answer!r} missing from sentence")
+    assert_true(empty == 0, f"every page must have a fill, got {empty} skipped")
     assert_true(not rejected, "rejected Wacky Ricky blanks:\n  " + "\n  ".join(rejected[:20]))
     share = two / pages if pages else 0
     assert_true(0.18 <= share <= 0.32, f"two-word share should stay near 20-30%, got {share:.1%} ({two}/{pages})")
-    print(f"wacky ricky blank checks passed ({pages} pages, {one} one-word, {two} two-word, {empty} listen-only, 0 rejected)")
+    print(f"wacky ricky blank checks passed ({pages} pages, {one} one-word, {two} two-word, {empty} skipped, 0 rejected)")
 
 
 def main() -> int:
     test_picker_examples()
     test_phrase_pairs()
-    test_never_falls_back_to_names_or_stops()
+    test_never_falls_back_to_names_when_other_words_exist()
     test_manifest_has_no_rejected_blanks()
     assert_true("ricky" in FAMILY_NAMES and "the" in STOP_WORDS, "reject lists incomplete")
     assert_true(normalize_blank("Ricky's") == "rickys", "normalize should strip punctuation")

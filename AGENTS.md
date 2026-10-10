@@ -16,7 +16,7 @@
 - 主頁只放一個「英文學習・English Learning」入口；入面分為「故事閱讀／Story Reading」、「主題詞語／Topic Words」及「字母音・拼讀／Phonics」三條路線。
 - 「Topic Words」係完整詞語認讀，唔統稱做 Sight Words；Sight Words 只用於真正高頻功能字內容。詞語認讀進度同 Phonics 解碼能力分開記錄。
 - 故事系列（Carter Family、Magic Marker、Wacky Ricky 及日後 Little Fox）共用 Story Reading 入口；唔為同類故事再開主頁捷徑。Space Patrol／Little Fox Pilot 放喺共用入口穩定後第二階段接入。
-- Wacky Ricky／Little Fox 填空只可用內容詞（名詞／動詞／形容詞）；硬性拒絕英文 STOP 同系列人名／稱謂（Ricky、Rachel、Brenda、Mom、Dad、Mrs 等，對齊 Carter `STOP_WORDS`／`FAMILY_NAMES`）。約 20–30% 頁用自然兩詞空格（adj+noun／color+noun／verb+object）；其餘一詞或跳過。冇合格詞就唔出空格，唔可以退回人名或虛詞。
+- Wacky Ricky／Little Fox 填空只可用內容詞（名詞／動詞／形容詞）；硬性拒絕英文 STOP 同系列人名／稱謂（Ricky、Rachel、Brenda、Mom、Dad、Mrs 等，對齊 Carter `STOP_WORDS`／`FAMILY_NAMES`）。約 20–30% 頁用自然兩詞空格（adj+noun／color+noun／verb+object）；其餘每頁一詞，優先最短常見名詞／動詞／形容詞。**每頁都要有填空**，唔設 skip／listen-only／只聽頁。冇高質唯一詞就揀最簡單合格內容詞（可放寬重複、len≥3，必要時 destutter 或 `go`／`okay`／`sorry` 等最後手段）；人名只喺整頁再無其他字母詞先用。畫面只空最後一次出現，避免重複詞變兩個格。
 
 ## Agent 團隊與 routing（Keith 2026-09-21）
 

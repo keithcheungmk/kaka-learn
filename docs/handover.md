@@ -36,7 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| Wacky Ricky 填空改內容詞 | Cursor Chief Lead（English 範圍） | `scripts/wacky_ricky_blanks.py`, `scripts/build-wacky-ricky-site-data.py`, `data/wacky-ricky-manifest.js`, `js/story-demo.js`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith：空白唔可以係 Ricky／Rachel／Mom 等人名或虛詞；開 PR，唔自 merge |
+| Wacky Ricky 填空改內容詞 | Cursor Chief Lead（English 範圍） | `scripts/wacky_ricky_blanks.py`, `scripts/build-wacky-ricky-site-data.py`, `data/wacky-ricky-manifest.js`, `js/story-demo.js`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准教學方向，但禁止 skip／只聽頁；49 頁要用最簡單合格內容詞補空。開 PR，唔自 merge |
 | 故事 focus 優化（浠榆初生＋迪士尼／國慶合照拆開） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/hongkong-disney-p06.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准：初生篇保留洗澡、淡化珠海／月子中心／睡覺；迪士尼對齊地圖／城堡／排隊／紀念品／合照照片；國慶唔再 focus 合照／照片。開 PR，唔自 merge。 |
 | 主頁四科入口加入卡卡插畫 | ChatGPT／Codex | `index.html`, `css/styles.css`, `assets/home-subjects/`, `assets/image-formats.lock.json`, `docs/handover.md` | 2026-10-06 | Keith 已看過四科卡片 demo 並指示繼續；只改入口視覺，保留文字、連結與按鈕行為。 |
 | 紅輯「按書頁砌句」資料層及遊戲引擎 | Chinese Lead（Chief 整合） | `js/book-scene-demo.js`, `book-scene-demo.html`, `css/book-scene-demo.css`, `data/red-series/`, `scripts/test-book-scene-demo.mjs`, `scripts/smoke-book-scene-demo.py`, `docs/cursor-handoff-2026-09-20.md` | 2026-09-20 | Keith 交辦：本機接盤；內容由 Chinese Lead，shared／部署由 Chief；唔開 Cloud Agent |
@@ -110,8 +110,8 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ### 2026-10-10 · Cursor Chief Lead（Wacky Ricky 填空改內容詞）
 
-- Little Fox／Wacky Ricky 自動填空不再用人名或虛詞。硬性拒絕 Carter STOP + 系列人名／稱謂（Ricky、Rachel、Brenda、Mom、Dad、Mrs、Brian、Kitty 等）；優先句末內容詞，冇合格詞就留聽頁、唔退回人名。
-- 約 20–30% 頁升級自然兩詞空格（adj+noun／color+noun／verb+object／noun+noun）；其餘一詞或跳過。重產 manifest 空白（音檔／頁圖唔郁）；`check_wacky_ricky_blanks()` 守住。開 PR，唔自 merge。
+- Little Fox／Wacky Ricky 自動填空不再用人名或虛詞。硬性拒絕 Carter STOP + 系列人名／稱謂（Ricky、Rachel、Brenda、Mom、Dad、Mrs、Brian、Kitty 等）；優先句末內容詞。
+- 約 20–30% 頁升級自然兩詞空格（adj+noun／color+noun／verb+object／noun+noun）；其餘每頁一詞最簡單合格內容詞。**唔設 listen-only／只聽頁**——舊 49 頁空格用最短常見名詞／動詞／形容詞（可重複、len≥3、destutter、`go`／`okay`／`sorry`）補上；人名只喺整頁再無其他字母詞先用。畫面只空最後一次出現。重產 manifest 空白（音檔／頁圖唔郁）；`check_wacky_ricky_blanks()` 守住。開 PR，唔自 merge。
 
 ### 2026-10-10 · Cursor Chief Lead（故事 focus 優化：浠榆初生＋迪士尼／國慶合照拆開）
 

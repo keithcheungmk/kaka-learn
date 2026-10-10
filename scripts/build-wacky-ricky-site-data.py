@@ -41,14 +41,19 @@ def refresh_existing_blanks(*, dry_run: bool = False) -> None:
     """Rewrite blanks from existing page text without touching audio or images."""
     payload = load_wacky_manifest()
     apply_blanks_to_manifest(payload)
-    empty = sum(1 for book in payload["books"] for page in book["pages"] if not page.get("blanks"))
-    pages = sum(len(book["pages"]) for book in payload["books"])
+    blanks = [page.get("blanks") or [] for book in payload["books"] for page in book["pages"]]
+    empty = sum(1 for item in blanks if not item)
+    one = sum(1 for item in blanks if len(item) == 1)
+    two = sum(1 for item in blanks if len(item) == 2)
+    pages = len(blanks)
     if not dry_run:
         write_wacky_manifest(payload)
     print(json.dumps({
         "mode": "blanks-only",
         "books": len(payload["books"]),
         "pages": pages,
+        "one_word": one,
+        "two_word": two,
         "pages_without_blank": empty,
         "manifest": str(MANIFEST),
         "dry_run": dry_run,

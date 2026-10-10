@@ -1,10 +1,12 @@
 """Shared Wacky Ricky / Little Fox missing-word picker.
 
 Fill-in blanks must be teachable content words. Series names, family roles,
-titles, and English function words are hard-rejected. If a page has no
-eligible word, the page stays listen-only (no blank) instead of falling
-back to a name or stop word. About one quarter of pages use a natural
-two-word phrase blank (adj+noun, color+noun, verb+object, or noun+noun).
+titles, and English function words are hard-rejected when any content word
+exists. Every page must have a fill: quality unique sentence-final content
+first, otherwise the simplest allowed content word (shortest common
+noun/verb/adj, destuttered forms, then last-resort interjections). Names
+are used only when the page has no other alphabetic token. About one
+quarter of pages use a natural two-word phrase blank.
 """
 from __future__ import annotations
 
@@ -56,19 +58,39 @@ COLORS = {
 
 ADJECTIVES = {
     "baby", "beautiful", "best", "big", "bright", "clean", "cold", "dark",
-    "dirty", "dry", "fast", "favorite", "first", "funny", "good", "happy",
-    "hard", "high", "hot", "last", "little", "long", "loud", "new", "next",
-    "nice", "old", "pretty", "quiet", "ready", "sad", "scary", "secret",
-    "short", "small", "soft", "sour", "special", "sweet", "tall", "ugly",
-    "warm", "wet",
+    "dirty", "dry", "fast", "favorite", "fine", "first", "funny", "good",
+    "happy", "hard", "high", "hot", "last", "little", "long", "loud",
+    "merry", "new", "next", "nice", "old", "pretty", "quiet", "ready",
+    "sad", "scary", "secret", "short", "small", "soft", "sour", "special",
+    "sweet", "tall", "ugly", "warm", "wet",
 }
 
 VERBS = {
     "bring", "build", "call", "clean", "close", "come", "drink", "eat",
-    "email", "feed", "find", "finish", "give", "hear", "help", "hide",
+    "email", "feed", "find", "finish", "give", "go", "hear", "help", "hide",
     "hold", "jump", "look", "make", "need", "open", "pick", "plant",
     "play", "put", "read", "run", "see", "send", "show", "start", "take",
     "turn", "wait", "walk", "want", "wash", "watch", "water", "write",
+}
+
+# Soft interjections / social words: still STOP for quality picks, allowed
+# as the simplest fill when a page has no noun/verb/adjective.
+LAST_RESORT_WORDS = {
+    "again", "go", "hello", "hey", "hi", "hurray", "no", "okay",
+    "ow", "please", "sorry", "whew", "whoohoo", "wow", "yeah", "yes",
+}
+
+QUESTION_WORDS = {"how", "what", "when", "where", "who", "why"}
+
+LEXICAL_STOP = {
+    "about", "can", "for", "from", "had", "has", "have", "here", "into",
+    "like", "not", "that", "there", "this", "will", "with",
+}
+
+SIMPLE_WORDS = {
+    "boring", "camaraderie", "christmas", "first", "friend", "friends",
+    "glad", "go", "goodbye", "late", "merry", "one", "ow", "safe", "say",
+    "separate", "wanted", "won",
 }
 
 DISTRACTOR_POOL = [
@@ -102,12 +124,26 @@ def _looks_like_stutter(word: str) -> bool:
     return any(len(part) == 1 for part in parts) or len(set(parts)) == 1
 
 
-def is_rejected_blank(word: str) -> bool:
+def destutter_key(word: str) -> str:
+    """Return the intended word inside a stutter or letter-spelling, if any."""
+    stem = _visible_stem(word)
+    parts = [part for part in stem.split("-") if part]
+    if len(parts) < 2:
+        return ""
+    if all(len(part) == 1 and part.isalpha() for part in parts):
+        joined = "".join(parts).lower()
+        return joined if len(joined) >= 3 else ""
+    if _looks_like_stutter(word):
+        last = parts[-1].lower()
+        if last.isalpha() and len(last) >= 2:
+            return last
+    return ""
+
+
+def is_name_blank(word: str) -> bool:
     key = normalize_blank(word)
     if not key:
-        return True
-    if _looks_like_stutter(word):
-        return True
+        return False
     if key == "miss":
         return _visible_stem(word)[:1].isupper()
     parts = [part.lower() for part in _visible_stem(word).split("-") if part]
@@ -115,13 +151,31 @@ def is_rejected_blank(word: str) -> bool:
         return True
     if any(key.startswith(name) and len(key) >= len(name) + 2 for name in ("ricky", "rachel", "brenda", "brian")):
         return True
-    if key in STOP_WORDS:
-        return True
     if key in FAMILY_NAMES:
         return True
     if key.endswith("s") and key[:-1] in FAMILY_NAMES:
         return True
     return False
+
+
+def is_rejected_blank(word: str) -> bool:
+    key = normalize_blank(word)
+    if not key:
+        return True
+    if _looks_like_stutter(word):
+        return True
+    if is_name_blank(word):
+        return True
+    if key in STOP_WORDS:
+        return True
+    return False
+
+
+def is_leaked_page_number(word: str, index: int, words: list[str]) -> bool:
+    key = normalize_blank(word)
+    if not (index == 0 and key.isdigit() and 1 <= len(key) <= 2 and len(words) > 1):
+        return False
+    return any(re.search(r"[A-Za-z]", token) for token in words[1:])
 
 
 def split_clauses(text: str) -> list[str]:
@@ -158,7 +212,13 @@ def _counts(words: list[str]) -> dict[str, int]:
     return counts
 
 
-def _content_candidates(words: list[str], counts: dict[str, int], min_len: int) -> list[str]:
+def _content_candidates(
+    words: list[str],
+    counts: dict[str, int],
+    min_len: int,
+    *,
+    require_unique: bool = True,
+) -> list[str]:
     chosen: list[str] = []
     for word in words:
         key = normalize_blank(word)
@@ -168,18 +228,29 @@ def _content_candidates(words: list[str], counts: dict[str, int], min_len: int) 
             continue
         if is_rejected_blank(word):
             continue
-        if counts.get(key, 0) != 1:
+        if require_unique and counts.get(key, 0) != 1:
             continue
         chosen.append(word)
     return chosen
 
 
-def pick_blank(source_text: str, words: list[str] | None = None) -> str:
-    """Pick one page-unique content word, preferring a sentence-final one.
+def _is_common_content(key: str) -> bool:
+    return (
+        key in COLORS
+        or key in ADJECTIVES
+        or _in_group(key, VERBS)
+        or key in SIMPLE_WORDS
+        or key in LAST_RESORT_WORDS
+    )
 
-    Never returns a stop word or series name. Empty string means skip the fill.
-    """
-    words = list(words) if words is not None else tokenize(source_text)
+
+def _simplest_score(word: str) -> tuple[int, int, str]:
+    key = destutter_key(word) or normalize_blank(word)
+    return (0 if _is_common_content(key) else 1, len(key), key)
+
+
+def pick_quality_blank(source_text: str, words: list[str]) -> str:
+    """Pick one page-unique content word, preferring a sentence-final one."""
     counts = _counts(words)
     clauses = split_clauses(source_text)
     if not clauses:
@@ -193,6 +264,88 @@ def pick_blank(source_text: str, words: list[str] | None = None) -> str:
         if page_candidates:
             return page_candidates[-1]
     return ""
+
+
+def pick_simplest_blank(source_text: str, words: list[str] | None = None) -> str:
+    """Pick the shortest allowed content word so the page still has a fill."""
+    words = list(words) if words is not None else tokenize(source_text)
+    content: list[str] = []
+    last_resort: list[str] = []
+    questions: list[str] = []
+    lexical: list[str] = []
+    other: list[str] = []
+    numbers: list[str] = []
+    names: list[str] = []
+    for index, word in enumerate(words):
+        key = normalize_blank(word)
+        if not key:
+            continue
+        if is_leaked_page_number(word, index, words):
+            numbers.append(word)
+            continue
+        if is_name_blank(word):
+            names.append(word)
+            continue
+        dest = destutter_key(word)
+        if key.isdigit():
+            numbers.append(word)
+            continue
+        if dest:
+            if is_name_blank(dest):
+                names.append(word)
+                continue
+            useful = (
+                dest in LAST_RESORT_WORDS
+                or dest in ADJECTIVES
+                or dest in COLORS
+                or dest in SIMPLE_WORDS
+                or _in_group(dest, VERBS)
+                or (dest not in STOP_WORDS and len(dest) >= 3)
+            )
+            if useful:
+                (last_resort if dest in STOP_WORDS or dest in LAST_RESORT_WORDS else content).append(word)
+            continue
+        if _looks_like_stutter(word):
+            continue
+        if key in LAST_RESORT_WORDS:
+            last_resort.append(word)
+            continue
+        if key in STOP_WORDS:
+            if key in QUESTION_WORDS:
+                questions.append(word)
+            elif key in LEXICAL_STOP:
+                lexical.append(word)
+            else:
+                other.append(word)
+            continue
+        content.append(word)
+    if content:
+        return min(content, key=_simplest_score)
+    if last_resort:
+        return min(last_resort, key=_simplest_score)
+    if questions:
+        return min(questions, key=_simplest_score)
+    if lexical:
+        return max(lexical, key=lambda word: (len(normalize_blank(word)), normalize_blank(word)))
+    if other:
+        return max(other, key=lambda word: (len(normalize_blank(word)), normalize_blank(word)))
+    if numbers:
+        return max(numbers, key=lambda word: (len(normalize_blank(word)), normalize_blank(word)))
+    if names:
+        return names[-1]
+    return words[-1] if words else ""
+
+
+def pick_blank(source_text: str, words: list[str] | None = None) -> str:
+    """Pick a content-word blank. Never returns empty when the page has tokens.
+
+    Quality unique sentence-final content first. If none, the simplest allowed
+    word (still preferring nouns/verbs/adjectives over names and STOP).
+    """
+    words = list(words) if words is not None else tokenize(source_text)
+    if not words:
+        return ""
+    return pick_quality_blank(source_text, words) or pick_simplest_blank(source_text, words)
 
 
 def _in_group(key: str, bucket: set[str]) -> bool:
@@ -236,7 +389,9 @@ def find_phrase_pair(source_text: str, words: list[str] | None = None) -> tuple[
     for clause_index, clause in enumerate(clauses):
         tokens = tokenize(clause)
         for index, (first, second) in enumerate(zip(tokens, tokens[1:])):
-            if not _content_candidates([first], counts, 3) or not _content_candidates([second], counts, 3):
+            if not _content_candidates([first], counts, 3, require_unique=False) or not _content_candidates(
+                [second], counts, 3, require_unique=False
+            ):
                 continue
             score, _kind = _pair_score(first, second)
             if not score:

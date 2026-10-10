@@ -299,15 +299,29 @@
     return Boolean(item?.blanks?.[0]);
   }
 
+  function lastTokenIndex(sentence, word) {
+    for (let index = sentence.length - 1; index >= 0; index -= 1) {
+      if (sentence[index] === word) return index;
+    }
+    return -1;
+  }
+
+  function lastPhraseIndex(sentence, first, second) {
+    for (let index = sentence.length - 2; index >= 0; index -= 1) {
+      if (sentence[index] === first && sentence[index + 1] === second) return index;
+    }
+    return -1;
+  }
+
   function tokenMarkup(item, { filled = false } = {}) {
     const blanks = item.blanks || [];
     const phrase = blanks.length >= 2;
     const answer = blankAnswer(item);
+    const phraseStart = phrase ? lastPhraseIndex(item.sentence, blanks[0], blanks[1]) : -1;
+    const wordIndex = phrase ? -1 : lastTokenIndex(item.sentence, blanks[0]);
     return item.sentence.map((word, index) => {
-      const isStart = phrase
-        ? word === blanks[0] && item.sentence[index + 1] === blanks[1]
-        : blanks.includes(word);
-      const isTail = phrase && word === blanks[1] && item.sentence[index - 1] === blanks[0];
+      const isStart = phrase ? index === phraseStart : index === wordIndex;
+      const isTail = phrase && index === phraseStart + 1;
       if (isTail) return '';
       if (isStart && !filled) {
         return `<button type="button" class="story-fill-blank story-sentence-token${phrase ? ' is-phrase' : ''}" data-sentence-index="${index}" data-blank="${answer}" aria-label="${phrase ? 'Missing words' : 'Missing word'}">${selectedWord || (phrase ? '? ?' : '?')}</button>`;
