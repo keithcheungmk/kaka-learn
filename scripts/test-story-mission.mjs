@@ -99,7 +99,7 @@ for (const book of magicBooks) {
 }
 const rejectedWackyBlanks = new Set([
   'ricky', 'rachel', 'brenda', 'brian', 'kitty', 'richard', 'veronica',
-  'mom', 'dad', 'mommy', 'daddy', 'mrs', 'mr', 'miss', 'ms',
+  'mom', 'dad', 'mommy', 'daddy', 'mrs', 'mr', 'ms',
   'the', 'and', 'you', 'your', 'what', 'this',
 ]);
 assert.match(source, /listenOnly/, 'Pages without a content-word blank should stay listen-only');

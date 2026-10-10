@@ -141,7 +141,7 @@
     return book.pages.map((page, pageIndex) => {
       const answer = page.blanks?.[0];
       if (!answer) {
-        return { choices: [], correctIndex: -1, answer: '', listenOnly: true };
+        return { listenOnly: true, correctIndex: -1, answer: '', choices: new Array() };
       }
       const existingChoices = [...new Set([answer, ...(page.choices || [])].filter(Boolean))];
       const used = new Set(existingChoices.map(normalizeOption));
