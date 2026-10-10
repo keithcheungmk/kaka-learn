@@ -36,6 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| 故事 focus 優化（浴缸詞＋長隆／中山配對） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/zhuhai-yima-bathtub-p02.webp`, `p03.webp`, `zhongshan-zoo-day-p02.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准兩項：浴缸改浮水／踢水；長隆＝望遠鏡／安全區、中山＝餵食／守信用；動物 focus 唔雙佔。開 PR，唔自 merge。 |
 | 主頁四科入口加入卡卡插畫 | ChatGPT／Codex | `index.html`, `css/styles.css`, `assets/home-subjects/`, `assets/image-formats.lock.json`, `docs/handover.md` | 2026-10-06 | Keith 已看過四科卡片 demo 並指示繼續；只改入口視覺，保留文字、連結與按鈕行為。 |
 | 紅輯「按書頁砌句」資料層及遊戲引擎 | Chinese Lead（Chief 整合） | `js/book-scene-demo.js`, `book-scene-demo.html`, `css/book-scene-demo.css`, `data/red-series/`, `scripts/test-book-scene-demo.mjs`, `scripts/smoke-book-scene-demo.py`, `docs/cursor-handoff-2026-09-20.md` | 2026-09-20 | Keith 交辦：本機接盤；內容由 Chinese Lead，shared／部署由 Chief；唔開 Cloud Agent |
 | 書本掃描書架 | Chinese Lead（Chief 整合） | `book-scans/index.html`, `index.html`（共享）, `css/styles.css`（共享）, `scripts/check-invariants.py`（共享） | 2026-09-08 | 家長 PDF 書架；中文內容由 Chinese Lead，共享檔由 Chief 認領 |
@@ -106,11 +107,16 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-10 · Cursor Chief Lead（故事 focus 優化：浴缸詞＋長隆／中山配對）
+
+- Keith 批准兩項優化（開 PR、唔自 merge）：（A）`zhuhai-yima-bathtub` focus 由洗澡／游來游去改為浮水／踢水／姑娘照顧／透明浴缸等，避開同初生篇重疊；淡化帶／走進；（B）`chimelong-safari` 偏望遠鏡／安全區觀看，`zhongshan-zoo-day` 偏餵食／騎小馬／守信用，動物名唔同時做兩邊 focus。
+- 重畫浴缸 p02–p03 同中山 p02；`check-family-stories`／`check-invariants` 綠。
+
 ### 2026-10-10 · Cursor Chief Lead（故事〈珠海探妹妹（二）：嬰兒水療〉）
 
-- 用 `.agents/skills/kaka-story-based-chinese-learning/` 流程新增第 20 篇故事（八頁）：月子中心拜望、浠榆嬰兒水療戴游泳圈游來游去、懷抱玩耍、酒店酒樓飲茶（蝦餃／燒賣／豆漿／油炸鬼／粟米蝦餅）、姨媽帶公公婆婆去澳門郵政局同景點。`series:'珠海探妹妹'`、`episode:2`、`date:'2026-10-09'`。
+- 用 `.agents/skills/kaka-story-based-chinese-learning/` 流程新增第 20 篇故事（八頁）：月子中心拜望、浠榆嬰兒水療戴游泳圈浮水踢水、懷抱玩耍、酒店酒樓飲茶（蝦餃／燒賣／豆漿／油炸鬼／粟米蝦餅）、姨媽和公公婆婆去澳門郵政局同景點。`series:'珠海探妹妹'`、`episode:2`、`date:'2026-10-09'`。
 - 新角色姨媽＝虹姑姑的家姐（正寫「姨媽」，唔好寫「妹媽」）；設定圖 `docs/design/yima-character-reference-sheet.jpg`，三視圖 `assets/family-stories/characters/yima-turnaround.webp`。
-- #122／#123 之後再修正：故事 id 改 `zhuhai-yima-bathtub`；標題同正文清走 Spa／英文；浴缸改大型透明浴缸（唔係幼長圓柱），姑娘照顧妹妹戴游泳圈在水裏玩。
+- #122／#123 之後再修正：故事 id 改 `zhuhai-yima-bathtub`；標題同正文清走 Spa／英文；浴缸改大型透明浴缸（唔係幼長圓柱），姑娘照顧妹妹戴游泳圈浮水踢水（唔用洗澡／游來游去做 focus）。
 
 ### 2026-10-09 · Cursor Chief Lead（英文 Clothes 撞圖改原創插圖）
 

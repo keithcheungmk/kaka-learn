@@ -93,15 +93,15 @@ window.FAMILY_STORIES = [
   },
   {
     id:'chimelong-safari', title:'長隆野生動物世界', place:'廣州長隆', characters:['卡卡','禧禧','耀叔叔'], sourceBooks:['rb_kuaipao','rb_shuijiao','rb_dongdong'],
-    bookWords:['小鹿','老虎','兔子','獅子','叫','誰','在'], extensionWords:["長頸鹿","大象","望遠鏡","動物園","斑馬","猴子","快跑","看見","帶","走來","安全區","動物"],
-    summary:'在安全觀賞區觀察動物，聽叫聲、找斑馬，認識牠們的生活。',
+    bookWords:['小鹿','老虎','兔子','獅子','叫','誰','在'], extensionWords:["長頸鹿","大象","望遠鏡","動物園","斑馬","猴子","快跑","看見","走來","安全區","動物","參觀","遠處","慢慢","聽見","叫聲","觀看","記下","安靜地"],
+    summary:'在安全區用望遠鏡安靜觀看，聽叫聲、記下今天看見的動物。',
     pages:[
-      {"sentence":"耀叔叔帶孩子們到動物園。","tiles":["耀叔叔","帶","孩子們","到","動物園"],"learn":["帶","動物園"],"distractors":["酒店","超市"],"focusWords":["帶","動物園"],"dialogue":{"speaker":"禧禧","text":"我們一起去看動物吧。"}},
-      {"sentence":"卡卡用望遠鏡看小鹿。","tiles":["卡卡","用","望遠鏡","看","小鹿"],"learn":["望遠鏡","小鹿"],"distractors":["小狗","氣球"],"focusWords":["望遠鏡","小鹿"],"dialogue":{"speaker":"卡卡","text":"我用望遠鏡看見小鹿。"}},
-      {"sentence":"遠處的斑馬慢慢走來。","tiles":["遠處","的","斑馬","慢慢","走來"],"learn":["斑馬","走來"],"distractors":["河水","橙子"],"focusWords":["斑馬","走來"],"dialogue":{"speaker":"耀叔叔","text":"斑馬慢慢走過來了。"}},
-      {"sentence":"禧禧聽見猴子在叫。","tiles":["禧禧","聽見","猴子","在","叫"],"learn":["猴子","叫"],"distractors":["睡覺","飛走"],"focusWords":["猴子","叫"],"dialogue":{"speaker":"禧禧","text":"我聽見猴子在叫！"}},
-      {"sentence":"大家在安全區看大象。","tiles":["大家","在","安全區","看","大象"],"learn":["安全區","大象"],"distractors":["大火","海豚"],"focusWords":["安全區","大象"],"dialogue":{"speaker":"卡卡","text":"我們在安全區看大象。"}},
-      {"sentence":"孩子們記下今天看見的動物。","tiles":["孩子們","記下","今天","看見","的","動物"],"learn":["看見","動物"],"distractors":["送給","收起"],"focusWords":["看見","動物"],"dialogue":{"speaker":"耀叔叔","text":"今天大家看見很多動物。"}}
+      {"sentence":"耀叔叔和孩子們一起參觀動物園。","tiles":["耀叔叔","和","孩子們","一起","參觀","動物園"],"learn":["參觀","動物園"],"distractors":["酒店","超市"],"focusWords":["參觀","動物園"],"dialogue":{"speaker":"禧禧","text":"我們一起去看動物吧。"}},
+      {"sentence":"卡卡用望遠鏡看遠處。","tiles":["卡卡","用","望遠鏡","看","遠處"],"learn":["望遠鏡","遠處"],"distractors":["眼鏡","近處"],"focusWords":["望遠鏡","遠處"],"dialogue":{"speaker":"卡卡","text":"我用望遠鏡看得好清楚！"}},
+      {"sentence":"遠處有動物慢慢走來。","tiles":["遠處","有","動物","慢慢","走來"],"learn":["慢慢","走來"],"distractors":["快跑","飛走"],"focusWords":["慢慢","走來"],"dialogue":{"speaker":"耀叔叔","text":"看，動物慢慢走過來了。"}},
+      {"sentence":"禧禧聽見遠處傳來叫聲。","tiles":["禧禧","聽見","遠處","傳來","叫聲"],"learn":["聽見","叫聲"],"distractors":["看見","歌聲"],"focusWords":["聽見","叫聲"],"dialogue":{"speaker":"禧禧","text":"我聽見叫聲了！"}},
+      {"sentence":"大家在安全區安靜地觀看。","tiles":["大家","在","安全區","安靜地","觀看"],"learn":["安全區","觀看"],"distractors":["遊樂場","追逐"],"focusWords":["安全區","觀看"],"dialogue":{"speaker":"卡卡","text":"我們在安全區安靜地看。"}},
+      {"sentence":"孩子們記下今天看見的動物。","tiles":["孩子們","記下","今天","看見","的","動物"],"learn":["記下","看見"],"distractors":["忘記","聽不見"],"focusWords":["記下","看見"],"dialogue":{"speaker":"耀叔叔","text":"今天大家看見很多動物。"}}
     ]
   },
   {
@@ -231,15 +231,15 @@ window.FAMILY_STORIES = [
   },
   {
     id:'zhongshan-zoo-day', title:'中山動物園的一天', place:'中山動物園', characters:['卡卡','傑叔叔','動物園工作員（客串）'], sourceBooks:[], bookWords:[],
-    extensionWords:['卡卡','爸爸','傑叔叔','中山','動物園','坐','電動高爾夫球車','進入','看見','獅子','老虎','斑馬','拿着','有','鮮嫩','樹葉','樹枝','餵','長頸鹿','小心地','把','蘿蔔','南瓜','甘蔗','放到','大象','面前','戴上','頭盔','騎馬馬甲','騎着','啡色','小馬','走了','兩圈','在','水塘','金魚','鴨仔','還','天鵝','爸爸','請','食','雪糕','臨走時','想用','五個幣','換','冰糖士多啤梨','回到家','交回','因為','他','很','守信用','和','進入','的','、','。','，'],
-    summary:'卡卡和爸爸在中山動物園坐電動車、看動物、餵食、騎小馬，最後用五個幣換冰糖士多啤梨，回家後守信用交回給爸爸。',
+    extensionWords:['卡卡','爸爸','傑叔叔','中山','動物園','坐','電動高爾夫球車','進入','看見','獅子','老虎','斑馬','拿着','有','鮮嫩','樹葉','樹枝','餵','長頸鹿','小心地','把','蘿蔔','南瓜','甘蔗','放到','大象','面前','戴上','頭盔','騎馬馬甲','騎着','啡色','小馬','走了','兩圈','在','水塘','金魚','鴨仔','還','天鵝','爸爸','請','食','雪糕','臨走時','想用','五個幣','換','冰糖士多啤梨','回到家','交回','因為','他','很','守信用','和','進入','的','、','。','，','餵食區','準備','餵食盤','動物'],
+    summary:'卡卡和爸爸在中山動物園坐電動車、餵食、騎小馬，最後用五個幣換冰糖士多啤梨，回家後守信用交回給爸爸。',
     pages:[
-      {"sentence":"卡卡和爸爸坐電動高爾夫球車進入動物園。","tiles":["卡卡","和","爸爸","坐","電動高爾夫球車","進入","動物園","。"],"learn":["電動高爾夫球車","動物園"],"distractors":["水族館","超市"],"focusWords":["電動高爾夫球車","動物園"],"dialogue":{"speaker":"卡卡","text":"坐電動車看動物，好開心！"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p01.webp"},
-      {"sentence":"卡卡看見獅子、老虎和斑馬。","tiles":["卡卡","看見","獅子","、","老虎","和","斑馬","。"],"learn":["獅子","斑馬"],"distractors":["海豚","小狗"],"focusWords":["獅子","斑馬"],"dialogue":{"speaker":"卡卡","text":"獅子和老虎很威風，斑馬身上有黑白條紋！"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p02.webp"},
-      {"sentence":"卡卡拿着有鮮嫩樹葉的樹枝餵長頸鹿。","tiles":["卡卡","拿着","有","鮮嫩","樹葉","的","樹枝","餵","長頸鹿","。"],"learn":["樹枝","長頸鹿"],"distractors":["胡蘿蔔","水草"],"focusWords":["樹枝","長頸鹿"],"dialogue":{"speaker":"傑叔叔","text":"慢慢伸出樹枝，讓長頸鹿自己來吃。"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p03.webp"},
-      {"sentence":"卡卡小心地把蘿蔔、南瓜和甘蔗放到大象面前。","tiles":["卡卡","小心地","把","蘿蔔","、","南瓜","和","甘蔗","放到","大象","面前","。"],"learn":["蘿蔔","大象"],"distractors":["蘋果","兔子"],"focusWords":["蘿蔔","大象"],"dialogue":{"speaker":"傑叔叔","text":"小心一點，先把食物放在餵食盤上。"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p04.webp"},
+      {"sentence":"卡卡和爸爸坐電動高爾夫球車進入動物園。","tiles":["卡卡","和","爸爸","坐","電動高爾夫球車","進入","動物園","。"],"learn":["電動高爾夫球車","進入"],"distractors":["水族館","離開"],"focusWords":["電動高爾夫球車","進入"],"dialogue":{"speaker":"卡卡","text":"坐電動車看動物，好開心！"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p01.webp"},
+      {"sentence":"卡卡走到餵食區，準備餵動物。","tiles":["卡卡","走到","餵食區","，","準備","餵","動物","。"],"learn":["餵食區","準備"],"distractors":["遊樂場","休息"],"focusWords":["餵食區","準備"],"dialogue":{"speaker":"傑叔叔","text":"我們先去餵食區，慢慢來。"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p02.webp"},
+      {"sentence":"卡卡拿着鮮嫩樹葉去餵長頸鹿。","tiles":["卡卡","拿着","鮮嫩","樹葉","去","餵","長頸鹿","。"],"learn":["樹葉","餵"],"distractors":["石頭","搶"],"focusWords":["樹葉","餵"],"dialogue":{"speaker":"傑叔叔","text":"慢慢伸出樹葉，讓長頸鹿自己來吃。"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p03.webp"},
+      {"sentence":"卡卡小心地把蘿蔔放到餵食盤上。","tiles":["卡卡","小心地","把","蘿蔔","放到","餵食盤","上","。"],"learn":["小心地","餵食盤"],"distractors":["匆忙地","桌子"],"focusWords":["小心地","餵食盤"],"dialogue":{"speaker":"傑叔叔","text":"小心一點，先把食物放在餵食盤上。"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p04.webp"},
       {"sentence":"卡卡戴上頭盔和騎馬馬甲，騎着啡色小馬走了兩圈。","tiles":["卡卡","戴上","頭盔","和","騎馬馬甲","，","騎着","啡色","小馬","走了","兩圈","。"],"learn":["頭盔","小馬"],"distractors":["泳圈","滑梯"],"focusWords":["頭盔","小馬"],"dialogue":{"speaker":"動物園工作員（客串）","text":"我扶住小馬，你坐穩就可以了。"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p05.webp"},
-      {"sentence":"卡卡在水塘餵金魚和鴨仔，還看見天鵝。","tiles":["卡卡","在","水塘","餵","金魚","和","鴨仔","，","還","看見","天鵝","。"],"learn":["金魚","天鵝"],"distractors":["獅子","斑馬"],"focusWords":["金魚","天鵝"],"dialogue":{"speaker":"卡卡","text":"金魚游來游去，鴨仔和天鵝也來了！"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p06.webp"},
+      {"sentence":"卡卡在水塘餵金魚和鴨仔。","tiles":["卡卡","在","水塘","餵","金魚","和","鴨仔","。"],"learn":["水塘","餵"],"distractors":["沙池","搶"],"focusWords":["水塘","餵"],"dialogue":{"speaker":"卡卡","text":"金魚和鴨仔都來吃啦！"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p06.webp"},
       {"sentence":"爸爸請卡卡食雪糕，卡卡想用五個幣換冰糖士多啤梨。","tiles":["爸爸","請","卡卡","食","雪糕","，","卡卡","想用","五個幣","換","冰糖士多啤梨","。"],"learn":["雪糕","冰糖士多啤梨"],"distractors":["南瓜","手模"],"focusWords":["雪糕","冰糖士多啤梨"],"dialogue":{"speaker":"卡卡","text":"我想用五個幣換冰糖士多啤梨。"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p07.webp"},
       {"sentence":"回到家，卡卡把五個幣交回爸爸，因為他很守信用。","tiles":["回到家","，","卡卡","把","五個幣","交回","爸爸","，","因為","他","很","守信用","。"],"learn":["五個幣","守信用"],"distractors":["忘記","借走"],"focusWords":["五個幣","守信用"],"dialogue":{"speaker":"傑叔叔","text":"你答應交回來，真的做到了！"},"image":"assets/family-stories/scenes/zhongshan-zoo-day-p08.webp"}
     ]
@@ -263,16 +263,16 @@ window.FAMILY_STORIES = [
   {
     id:'zhuhai-yima-bathtub', title:'珠海探妹妹（二）：嬰兒水療', place:'珠海月子中心、酒店酒樓和澳門', date:'2026-10-09', series:'珠海探妹妹', episode:2,
     characters:['卡卡','公公','婆婆','虹姑姑','姨媽','浠榆'], sourceBooks:[], bookWords:[],
-    extensionWords:['卡卡','公公','婆婆','來到','月子中心','拜望','妹妹','原來','今天','不是','普通','洗澡','姑娘','照顧','透明浴缸','戴着','游泳圈','做','嬰兒水療','浠榆','圈','自由','地','在','裏','游來游去','看完','游泳','大家','懷抱','一起','玩耍','了一會兒','走到','樓下','的','酒店','酒樓','飲茶','桌上','有','蝦餃','燒賣','豆漿','油炸鬼','和','粟米蝦餅','覺得','點心','好好味','之後','姨媽','帶','公公婆婆','去','澳門','還','走進','郵政局','看了','很多','景點','過得','很','充實'],
-    summary:'2026年10月9日：卡卡和公公婆婆再到月子中心看浠榆；妹妹在透明浴缸裏做嬰兒水療，姑娘照顧着她戴游泳圈在水裏玩，大家抱抱玩耍後下樓飲茶，姨媽再帶公公婆婆去澳門看郵政局和景點。',
+    extensionWords:['卡卡','公公','婆婆','來到','月子中心','拜望','妹妹','原來','今天','姑娘照顧','透明浴缸','戴着','游泳圈','浮水','踢水','浠榆','圈','在','裏','看完','水療','大家','懷抱','一起','玩耍','了一會兒','走到','樓下','的','酒店','酒樓','飲茶','桌上','有','蝦餃','燒賣','豆漿','油炸鬼','和','粟米蝦餅','覺得','點心','好好味','之後','姨媽','公公婆婆','去','澳門','還到','郵政局','看一看','看了','很多','景點','過得','很','充實'],
+    summary:'2026年10月9日：卡卡和公公婆婆再到月子中心看浠榆；姑娘照顧妹妹在透明浴缸裏浮水踢水，大家抱抱玩耍後下樓飲茶，姨媽再和公公婆婆去澳門看郵政局和景點。',
     pages:[
       {"sentence":"卡卡、公公和婆婆來到月子中心拜望妹妹。","tiles":["卡卡","、","公公","和","婆婆","來到","月子中心","拜望","妹妹","。"],"learn":["拜望","妹妹"],"distractors":["玩耍","哥哥"],"focusWords":["拜望","妹妹"],"dialogue":{"speaker":"卡卡","text":"妹妹，我們來看你啦！"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p01.webp"},
-      {"sentence":"原來今天不是普通洗澡，姑娘照顧妹妹在透明浴缸裏戴着游泳圈做嬰兒水療。","tiles":["原來","今天","不是","普通","洗澡","，","姑娘","照顧","妹妹","在","透明浴缸","裏","戴着","游泳圈","做","嬰兒水療","。"],"learn":["洗澡","游泳圈"],"distractors":["游泳池","枕頭"],"focusWords":["洗澡","游泳圈"],"dialogue":{"speaker":"虹姑姑","text":"今天是嬰兒水療，姑娘會照顧着妹妹哦！"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p02.webp"},
-      {"sentence":"浠榆戴着圈，在透明浴缸裏自由地游來游去。","tiles":["浠榆","戴着","圈","，","在","透明浴缸","裏","自由","地","游來游去","。"],"learn":["自由","游來游去"],"distractors":["睡覺","坐着"],"focusWords":["自由","游來游去"],"dialogue":{"speaker":"卡卡","text":"妹妹戴着游泳圈在水裏玩，好開心！"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p03.webp"},
-      {"sentence":"看完游泳，大家懷抱妹妹，一起玩耍了一會兒。","tiles":["看完","游泳","，","大家","懷抱","妹妹","，","一起","玩耍","了一會兒","。"],"learn":["懷抱","玩耍"],"distractors":["放下","跑步"],"focusWords":["懷抱","玩耍"],"dialogue":{"speaker":"婆婆","text":"來，輕輕抱着妹妹玩一會兒。"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p04.webp"},
+      {"sentence":"原來今天姑娘照顧妹妹，在透明浴缸裏戴着游泳圈浮水。","tiles":["原來","今天","姑娘照顧","妹妹","，","在","透明浴缸","裏","戴着","游泳圈","浮水","。"],"learn":["姑娘照顧","透明浴缸"],"distractors":["自己玩","游泳池"],"focusWords":["姑娘照顧","透明浴缸"],"dialogue":{"speaker":"虹姑姑","text":"今天姑娘照顧妹妹，在透明浴缸裏浮水哦！"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p02.webp"},
+      {"sentence":"浠榆戴着圈，在透明浴缸裏浮水踢水。","tiles":["浠榆","戴着","圈","，","在","透明浴缸","裏","浮水","踢水","。"],"learn":["浮水","踢水"],"distractors":["睡覺","坐着"],"focusWords":["浮水","踢水"],"dialogue":{"speaker":"卡卡","text":"妹妹浮水踢水，好開心！"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p03.webp"},
+      {"sentence":"看完水療，大家懷抱妹妹，一起玩耍了一會兒。","tiles":["看完","水療","，","大家","懷抱","妹妹","，","一起","玩耍","了一會兒","。"],"learn":["懷抱","玩耍"],"distractors":["放下","跑步"],"focusWords":["懷抱","玩耍"],"dialogue":{"speaker":"婆婆","text":"來，輕輕抱着妹妹玩一會兒。"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p04.webp"},
       {"sentence":"看完妹妹，大家走到樓下的酒店酒樓飲茶。","tiles":["看完","妹妹","，","大家","走到","樓下","的","酒店","酒樓","飲茶","。"],"learn":["酒樓","飲茶"],"distractors":["公園","睡覺"],"focusWords":["酒樓","飲茶"],"dialogue":{"speaker":"公公","text":"我們落樓飲茶，吃點心吧。"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p05.webp"},
       {"sentence":"桌上有蝦餃、燒賣、豆漿、油炸鬼和粟米蝦餅，卡卡覺得點心好好味。","tiles":["桌上","有","蝦餃","、","燒賣","、","豆漿","、","油炸鬼","和","粟米蝦餅","，","卡卡","覺得","點心","好好味","。"],"learn":["點心","好好味"],"distractors":["藥材","好辛苦"],"focusWords":["點心","好好味"],"dialogue":{"speaker":"卡卡","text":"這些點心好好味，我吃了很多！"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p06.webp"},
-      {"sentence":"之後，姨媽帶公公婆婆去澳門，還走進郵政局。","tiles":["之後","，","姨媽","帶","公公婆婆","去","澳門","，","還","走進","郵政局","。"],"learn":["姨媽","郵政局"],"distractors":["虹姑姑","超市"],"focusWords":["姨媽","郵政局"],"dialogue":{"speaker":"姨媽","text":"我們先去郵政局，再看看附近的大樓。"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p07.webp"},
+      {"sentence":"之後，姨媽和公公婆婆去澳門，還到郵政局看一看。","tiles":["之後","，","姨媽","和","公公婆婆","去","澳門","，","還到","郵政局","看一看","。"],"learn":["姨媽","郵政局"],"distractors":["虹姑姑","超市"],"focusWords":["姨媽","郵政局"],"dialogue":{"speaker":"姨媽","text":"我們先去郵政局，再看看附近的大樓。"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p07.webp"},
       {"sentence":"大家看了很多澳門景點，今天過得很充實。","tiles":["大家","看了","很多","澳門","景點","，","今天","過得","很","充實","。"],"learn":["景點","充實"],"distractors":["功課","無聊"],"focusWords":["景點","充實"],"dialogue":{"speaker":"婆婆","text":"今天真充實，我們都好開心。"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p08.webp"}
     ]
   }
