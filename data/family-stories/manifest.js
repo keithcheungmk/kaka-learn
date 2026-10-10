@@ -259,5 +259,21 @@ window.FAMILY_STORIES = [
       {"sentence":"卡卡吃了鮮蝦紅米腸，還有香香的榴槤飛餅。","tiles":["卡卡","吃了","鮮蝦","紅米腸","，","還有","香香","的","榴槤","飛餅","。"],"learn":["紅米腸","飛餅"],"distractors":["雪糕","蛋撻"],"focusWords":["紅米腸","飛餅"],"dialogue":{"speaker":"卡卡","text":"紅米腸有蝦，飛餅好香，真好吃！"},"image":"assets/family-stories/scenes/zhuhai-grandparents-ep1-p07.webp"},
       {"sentence":"吃飽後，大家回到酒店一起睡覺。","tiles":["吃飽","後","，","大家","回到","酒店","一起","睡覺","。"],"learn":["酒店","睡覺"],"distractors":["學校","洗澡"],"focusWords":["酒店","睡覺"],"dialogue":{"speaker":"卡卡","text":"明天我還要來看妹妹！"},"image":"assets/family-stories/scenes/zhuhai-grandparents-ep1-p08.webp"}
     ]
+  },
+  {
+    id:'zhuhai-bb-spa-yumcha', title:'珠海探妹妹（二）：妹妹游BB Spa', place:'珠海月子中心、酒店酒樓和澳門', date:'2026-10-09', series:'珠海探妹妹', episode:2,
+    characters:['卡卡','公公','婆婆','虹姑姑','妹媽','浠榆'], sourceBooks:[], bookWords:[],
+    extensionWords:['卡卡','公公','婆婆','來到','月子中心','拜望','妹妹','原來','今天','不是','普通','洗澡','戴着','游泳圈','做','BB Spa','浠榆','圈','自由','地','在','水裏','游來游去','看完','游泳','大家','懷抱','一起','玩耍','了一會兒','走到','樓下','的','酒店','酒樓','飲茶','桌上','有','蝦餃','燒賣','豆漿','油炸鬼','和','粟米蝦餅','覺得','點心','好好味','之後','妹媽','帶','公公婆婆','去','澳門','還','走進','郵政局','看了','很多','景點','過得','很','充實'],
+    summary:'2026年10月9日：卡卡和公公婆婆再到月子中心看浠榆；妹妹做BB Spa、戴游泳圈游來游去，大家抱抱玩耍後下樓飲茶，妹媽再帶公公婆婆去澳門看郵政局和景點。',
+    pages:[
+      {"sentence":"卡卡、公公和婆婆來到月子中心拜望妹妹。","tiles":["卡卡","、","公公","和","婆婆","來到","月子中心","拜望","妹妹","。"],"learn":["拜望","妹妹"],"distractors":["玩耍","哥哥"],"focusWords":["拜望","妹妹"],"dialogue":{"speaker":"卡卡","text":"妹妹，我們來看你啦！"},"image":"assets/family-stories/scenes/zhuhai-bb-spa-yumcha-p01.webp"},
+      {"sentence":"原來今天不是普通洗澡，妹妹戴着游泳圈做BB Spa。","tiles":["原來","今天","不是","普通","洗澡","，","妹妹","戴着","游泳圈","做","BB Spa","。"],"learn":["洗澡","游泳圈"],"distractors":["浴缸","枕頭"],"focusWords":["洗澡","游泳圈"],"dialogue":{"speaker":"虹姑姑","text":"今天是BB Spa，不是普通浴缸哦！"},"image":"assets/family-stories/scenes/zhuhai-bb-spa-yumcha-p02.webp"},
+      {"sentence":"浠榆戴着圈，自由地在水裏游來游去。","tiles":["浠榆","戴着","圈","，","自由","地","在","水裏","游來游去","。"],"learn":["自由","游來游去"],"distractors":["睡覺","坐着"],"focusWords":["自由","游來游去"],"dialogue":{"speaker":"卡卡","text":"妹妹游來游去，好開心！"},"image":"assets/family-stories/scenes/zhuhai-bb-spa-yumcha-p03.webp"},
+      {"sentence":"看完游泳，大家懷抱妹妹，一起玩耍了一會兒。","tiles":["看完","游泳","，","大家","懷抱","妹妹","，","一起","玩耍","了一會兒","。"],"learn":["懷抱","玩耍"],"distractors":["放下","跑步"],"focusWords":["懷抱","玩耍"],"dialogue":{"speaker":"婆婆","text":"來，輕輕抱着妹妹玩一會兒。"},"image":"assets/family-stories/scenes/zhuhai-bb-spa-yumcha-p04.webp"},
+      {"sentence":"看完妹妹，大家走到樓下的酒店酒樓飲茶。","tiles":["看完","妹妹","，","大家","走到","樓下","的","酒店","酒樓","飲茶","。"],"learn":["酒樓","飲茶"],"distractors":["公園","睡覺"],"focusWords":["酒樓","飲茶"],"dialogue":{"speaker":"公公","text":"我們落樓飲茶，吃點心吧。"},"image":"assets/family-stories/scenes/zhuhai-bb-spa-yumcha-p05.webp"},
+      {"sentence":"桌上有蝦餃、燒賣、豆漿、油炸鬼和粟米蝦餅，卡卡覺得點心好好味。","tiles":["桌上","有","蝦餃","、","燒賣","、","豆漿","、","油炸鬼","和","粟米蝦餅","，","卡卡","覺得","點心","好好味","。"],"learn":["點心","好好味"],"distractors":["藥材","好辛苦"],"focusWords":["點心","好好味"],"dialogue":{"speaker":"卡卡","text":"這些點心好好味，我吃了很多！"},"image":"assets/family-stories/scenes/zhuhai-bb-spa-yumcha-p06.webp"},
+      {"sentence":"之後，妹媽帶公公婆婆去澳門，還走進郵政局。","tiles":["之後","，","妹媽","帶","公公婆婆","去","澳門","，","還","走進","郵政局","。"],"learn":["妹媽","郵政局"],"distractors":["虹姑姑","超市"],"focusWords":["妹媽","郵政局"],"dialogue":{"speaker":"妹媽","text":"我們先去郵政局，再看看附近的大樓。"},"image":"assets/family-stories/scenes/zhuhai-bb-spa-yumcha-p07.webp"},
+      {"sentence":"大家看了很多澳門景點，今天過得很充實。","tiles":["大家","看了","很多","澳門","景點","，","今天","過得","很","充實","。"],"learn":["景點","充實"],"distractors":["功課","無聊"],"focusWords":["景點","充實"],"dialogue":{"speaker":"婆婆","text":"今天真充實，我們都好開心。"},"image":"assets/family-stories/scenes/zhuhai-bb-spa-yumcha-p08.webp"}
+    ]
   }
 ];
