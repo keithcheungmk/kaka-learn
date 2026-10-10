@@ -136,11 +136,12 @@
     }
   }
 
-  function isWackyBookComplete(book, passedKeys = passedStoryKeys()) {
+  function isStoryBookComplete(book, passedKeys = passedStoryKeys()) {
     if (!book?.id || !book.pages?.length) return false;
     if (passedKeys[storyBookKey(book.id)]) return true;
     return book.pages.every((page, index) => passedKeys[storyPageKey(book.id, page, index)]);
   }
+  const isWackyBookComplete = isStoryBookComplete;
 
   function markStoryBookComplete(book) {
     const storage = window.KakaStorage;
@@ -279,10 +280,9 @@
         : '';
     }
     const grid = $('#story-demo-activity-grid');
-    const showCompletion = currentSeriesId === 'wacky-ricky';
-    const passedKeys = showCompletion ? passedStoryKeys() : {};
+    const passedKeys = passedStoryKeys();
     grid.innerHTML = BOOKS.map((book) => bookShelfCardHtml(book, {
-      complete: showCompletion && isWackyBookComplete(book, passedKeys),
+      complete: isStoryBookComplete(book, passedKeys),
     })).join('');
     $$('[data-book-id]', grid).forEach((button) => {
       button.addEventListener('click', () => startBook(button.dataset.bookId));
@@ -667,7 +667,7 @@
     $('#story-play-stage').classList.remove('story-page-challenge', 'is-listening', 'is-solved');
     const missingPages = book.unavailablePages?.length || 0;
     const finishNote = missingPages ? `${missingPages} page${missingPages === 1 ? ' is' : 's are'} unavailable because no reliable recording is ready yet.` : 'Read the story again whenever you like.';
-    if (currentSeriesId === 'wacky-ricky') markStoryBookComplete(book);
+    markStoryBookComplete(book);
     $('#story-play-stage').innerHTML = `<div class="story-finish"><span>★</span><h2>${book.title} Complete!</h2><p>${finishNote}</p></div>`;
     $('#story-play-actions').innerHTML = '<button type="button" class="btn btn-secondary" id="btn-story-restart">Read again</button>';
     $('#story-play-options').innerHTML = `<button type="button" class="story-answer" id="btn-story-home">Back to ${activeSeries().title} Books</button>`;
@@ -701,6 +701,7 @@
     createQuestionPlan,
     storyPageKey,
     storyBookKey,
+    isStoryBookComplete,
     isWackyBookComplete,
     bookShelfCardHtml,
     markStoryBookComplete,
