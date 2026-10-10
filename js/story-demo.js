@@ -140,6 +140,9 @@
 
     return book.pages.map((page, pageIndex) => {
       const answer = page.blanks?.[0];
+      if (!answer) {
+        return { choices: [], correctIndex: -1, answer: '', listenOnly: true };
+      }
       const existingChoices = [...new Set([answer, ...(page.choices || [])].filter(Boolean))];
       const used = new Set(existingChoices.map(normalizeOption));
       const visible = new Set((page.sentence || []).map(normalizeOption));
@@ -264,7 +267,9 @@
     audio.onended = () => {
       if (listenBtn) listenBtn.disabled = false;
       if (after) after();
-      else if (feedback) feedback.textContent = 'Now fill the missing word.';
+      else if (feedback) {
+        feedback.textContent = pageHasFill(current()) ? 'Now fill the missing word.' : 'Now tap Next page.';
+      }
     };
     audio.onerror = () => {
       if (listenBtn) listenBtn.disabled = false;
@@ -274,6 +279,10 @@
       if (listenBtn) listenBtn.disabled = false;
       if (feedback) { feedback.textContent = 'Tap Listen to play the story.'; feedback.className = 'feedback retry'; }
     });
+  }
+
+  function pageHasFill(item) {
+    return Boolean(item?.blanks?.[0]);
   }
 
   function tokenMarkup(item, { filled = false } = {}) {
@@ -422,18 +431,48 @@
     speech.speakEnglishTerm?.(word, { rate: 1.0, pitch: 1.05 });
   }
 
+  function completeListenOnlyPage(item) {
+    if (solved) return;
+    solved = true;
+    busy = false;
+    phase = 'fill';
+    const list = pages();
+    const feedback = $('#story-play-feedback');
+    if (feedback) { feedback.textContent = 'Great listening!'; feedback.className = 'feedback ok'; }
+    $('#story-play-lead').textContent = '呢一頁聽完就可以去下一頁。';
+    $('#story-play-stage')?.classList.add('is-solved');
+    $('#story-play-stage')?.classList.remove('is-listening');
+    const panel = $('.story-fill-panel');
+    if (panel && !$('#btn-story-next')) {
+      panel.insertAdjacentHTML('beforeend', `<button type="button" class="btn btn-primary story-next-page" id="btn-story-next">${pageIndex === list.length - 1 ? 'Finish story →' : 'Next page →'}</button>`);
+      $('#btn-story-next')?.addEventListener('click', nextPage);
+    }
+    void awardStoryPageStar(item);
+    speakPraise();
+  }
+
+  function afterStoryAudio(item) {
+    $('#story-play-stage')?.classList.remove('is-listening');
+    if (solved) return;
+    if (pageHasFill(item)) unlockFill();
+    else completeListenOnlyPage(item);
+  }
+
   function renderChallenge({ autoPlay = false } = {}) {
     const book = activeBook();
     const item = current();
-    const choices = questionPlan[pageIndex]?.choices || item.choices;
+    const hasFill = pageHasFill(item);
+    const choices = hasFill ? (questionPlan[pageIndex]?.choices || item.choices || []) : [];
     const list = pages();
     const stage = $('#story-play-stage');
     const locked = phase === 'listen' && !solved;
     $('#btn-back-story-play').textContent = `← ${activeSeries().title} 書架`;
     $('#story-play-title').textContent = 'Read & Fill';
-    $('#story-play-lead').textContent = locked
-      ? '先聽這一頁故事；聽完就可以揀字。'
-      : '聽英文句子，揀字，再按 Submit。';
+    $('#story-play-lead').textContent = !hasFill
+      ? (locked ? '先聽這一頁故事。' : '呢一頁聽完就可以去下一頁。')
+      : locked
+        ? '先聽這一頁故事；聽完就可以揀字。'
+        : '聽英文句子，揀字，再按 Submit。';
     $('#story-round-progress').textContent = `${pageIndex + 1}/${list.length}`;
     stage.classList.add('story-page-challenge');
     stage.classList.toggle('is-listening', locked);
@@ -443,26 +482,23 @@
         <button type="button" class="btn btn-secondary story-story-listen" id="btn-story-listen">🔊 Listen to the story</button>
         <audio data-story-demo preload="metadata" src="${item.audio}"></audio>
       </div>
-      <section class="story-fill-panel" aria-label="Sentence fill activity">
+      <section class="story-fill-panel" aria-label="${hasFill ? 'Sentence fill activity' : 'Story listen activity'}">
         <p class="story-source-tag">${book.title} · PDF page ${item.pdfPage}</p>
-        <h2>Fill the missing word</h2>
-        <p class="story-fill-sentence">${tokenMarkup(item, { filled: solved })}</p>
-        <button type="button" class="btn btn-ghost story-sentence-listen" id="btn-story-read-sentence"${locked || solved ? ' hidden' : ''}>🔊 Read this sentence</button>
-        <p class="story-fill-help"${locked ? ' hidden' : ''}>Choose one word, then press Submit.</p>
-        <div class="story-fill-bank" id="story-fill-bank">${choices.map((word, index) => `<button type="button" class="story-fill-tile${selectedWord === word ? ' selected' : ''}${solved && item.blanks.includes(word) ? ' correct' : ''}" draggable="${!locked && !busy && !reading && !solved}" data-word="${word}"${locked || busy || reading || solved ? ' disabled' : ''}><span class="story-choice-label" aria-hidden="true">${OPTION_LABELS[index]}</span><span class="story-choice-word">${word}</span></button>`).join('')}</div>
-        <button type="button" class="btn btn-primary story-fill-submit" id="btn-story-submit"${locked || solved ? ' hidden' : ''}${!selectedWord || busy || reading ? ' disabled' : ''}>Submit</button>
+        <h2>${hasFill ? 'Fill the missing word' : 'Listen to this page'}</h2>
+        <p class="story-fill-sentence">${tokenMarkup(item, { filled: solved || !hasFill })}</p>
+        <button type="button" class="btn btn-ghost story-sentence-listen" id="btn-story-read-sentence"${!hasFill || locked || solved ? ' hidden' : ''}>🔊 Read this sentence</button>
+        <p class="story-fill-help"${!hasFill || locked ? ' hidden' : ''}>Choose one word, then press Submit.</p>
+        ${hasFill ? `<div class="story-fill-bank" id="story-fill-bank">${choices.map((word, index) => `<button type="button" class="story-fill-tile${selectedWord === word ? ' selected' : ''}${solved && item.blanks.includes(word) ? ' correct' : ''}" draggable="${!locked && !busy && !reading && !solved}" data-word="${word}"${locked || busy || reading || solved ? ' disabled' : ''}><span class="story-choice-label" aria-hidden="true">${OPTION_LABELS[index]}</span><span class="story-choice-word">${word}</span></button>`).join('')}</div>
+        <button type="button" class="btn btn-primary story-fill-submit" id="btn-story-submit"${locked || solved ? ' hidden' : ''}${!selectedWord || busy || reading ? ' disabled' : ''}>Submit</button>` : ''}
       </section>`;
     $('#story-play-actions').innerHTML = '';
     $('#story-play-options').innerHTML = '';
     $('#btn-story-listen')?.addEventListener('click', () => {
       if (busy || reading) return;
       speech.cancelAllSpeech?.();
-      if (!solved) lockFillForStory();
+      if (!solved && hasFill) lockFillForStory();
       stage.classList.add('is-listening');
-      playPageAudio({ after: () => {
-        stage.classList.remove('is-listening');
-        if (!solved) unlockFill();
-      } });
+      playPageAudio({ after: () => afterStoryAudio(item) });
     });
     $('#btn-story-read-sentence')?.addEventListener('click', () => readSentenceWithHighlight(item));
     $$('.story-fill-tile', stage).forEach((tile) => {
@@ -476,10 +512,7 @@
     });
     $('#btn-story-submit')?.addEventListener('click', submitWord);
     if (autoPlay) {
-      playPageAudio({ after: () => {
-        stage.classList.remove('is-listening');
-        unlockFill();
-      } });
+      playPageAudio({ after: () => afterStoryAudio(item) });
     }
   }
 

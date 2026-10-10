@@ -13,25 +13,60 @@ import random
 import shutil
 from pathlib import Path
 
+from wacky_ricky_blanks import (
+    MANIFEST,
+    apply_blanks_to_manifest,
+    choose_choices,
+    load_wacky_manifest,
+    normalize_blank,
+    pick_blank,
+    tokenize,
+    write_wacky_manifest,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "source-materials/Wacky Ricky/Page-level clips"
 ASSET_ROOT = ROOT / "assets/wacky-ricky"
-MANIFEST = ROOT / "data/wacky-ricky-manifest.js"
-STOP = set("a an and are arent as at be been but by can did didnt do does doesnt for from had has have he hes her him his i if ill im in into is isnt it its ive like me my not of on or our out said she shes so that the their them then there they theyre this to up was wasnt we were were weve what when where who will with you youre your".split())
 
 
 def tokens(text: str) -> list[str]:
-    return text.replace("\n", " ").split()
+    return tokenize(text)
 
 
 def norm(word: str) -> str:
-    return "".join(char.lower() for char in word if char.isalnum())
+    return normalize_blank(word)
+
+
+def refresh_existing_blanks(*, dry_run: bool = False) -> None:
+    """Rewrite blanks from existing page text without touching audio or images."""
+    payload = load_wacky_manifest()
+    apply_blanks_to_manifest(payload)
+    empty = sum(1 for book in payload["books"] for page in book["pages"] if not page.get("blanks"))
+    pages = sum(len(book["pages"]) for book in payload["books"])
+    if not dry_run:
+        write_wacky_manifest(payload)
+    print(json.dumps({
+        "mode": "blanks-only",
+        "books": len(payload["books"]),
+        "pages": pages,
+        "pages_without_blank": empty,
+        "manifest": str(MANIFEST),
+        "dry_run": dry_run,
+    }, ensure_ascii=False, indent=2))
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument(
+        "--blanks-only",
+        action="store_true",
+        help="Regenerate blanks/choices from the existing manifest; leave media untouched.",
+    )
     args = parser.parse_args()
+    if args.blanks_only:
+        refresh_existing_blanks(dry_run=args.dry_run)
+        return
 
     index = json.loads((SOURCE / "index.json").read_text())
     books_out = []
@@ -77,23 +112,9 @@ def main() -> None:
                         shutil.copy2(source, destination)
 
             words = tokens(page.get("text", ""))
-            counts = {}
-            for word in words:
-                if norm(word):
-                    counts[norm(word)] = counts.get(norm(word), 0) + 1
-            unique_words = [word for word in words if norm(word) and counts[norm(word)] == 1]
-            possible = [word for word in unique_words if norm(word) not in STOP and len(norm(word)) >= 3]
-            if not possible:
-                possible = unique_words
-            target = possible[len(possible) // 2] if possible else ""
-            target_key = norm(target)
-            page_keys = {norm(word) for word in words if norm(word)}
-            distractors = [word for key, word in vocab_by_norm.items() if key != target_key and key not in page_keys and len(key) >= 2]
+            target = pick_blank(page.get("text", ""), words)
             rng = random.Random(f"{entry['book_id']}:{page['pdf_page']}")
-            distractors.sort(key=lambda word: (abs(len(norm(word)) - len(target_key)), norm(word)))
-            distractors = distractors[: min(len(distractors), 24)]
-            rng.shuffle(distractors)
-            choices = [target, *distractors[:2]]
+            choices = choose_choices(target, words, vocab_by_norm, rng)
             pages_out.append({
                 "pdfPage": page["pdf_page"],
                 "printedPage": page.get("printed_page"),

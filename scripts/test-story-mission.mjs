@@ -97,19 +97,36 @@ for (const book of magicBooks) {
   assert.ok(plan.every((question) => question.choices.length === 4 && question.choices[question.correctIndex] === question.answer), `${book.id} answers should render with one correct choice among four`);
   assert.ok(plan.every((question) => new Set(question.choices.map(normalize)).size === 4), `${book.id} should have four different choices on every page`);
 }
+const rejectedWackyBlanks = new Set([
+  'ricky', 'rachel', 'brenda', 'brian', 'kitty', 'richard', 'veronica',
+  'mom', 'dad', 'mommy', 'daddy', 'mrs', 'mr', 'miss', 'ms',
+  'the', 'and', 'you', 'your', 'what', 'this',
+]);
+assert.match(source, /listenOnly/, 'Pages without a content-word blank should stay listen-only');
 for (const book of wackyBooks) {
   assert.equal(book.editorialStatus, 'review_required', `${book.id} should remain marked as unreviewed`);
   for (const item of book.pages) {
     assert.equal(item.contentStatus, 'auto_generated_pending_review');
     assert.equal(item.listeningStatus, 'pending');
-    assert.equal(item.choices.length, 3);
-    assert.ok(item.sentence.includes(item.blanks[0]));
+    if (!item.blanks.length) {
+      assert.equal(item.choices.length, 0, `${book.id} page ${item.printedPage} should skip choices when it has no content blank`);
+    } else {
+      assert.equal(item.blanks.length, 1, `${book.id} page ${item.printedPage} should have one content blank`);
+      assert.equal(item.choices.length, 3);
+      assert.ok(item.sentence.includes(item.blanks[0]));
+      const blankKey = normalize(item.blanks[0]);
+      assert.ok(!rejectedWackyBlanks.has(blankKey) && !rejectedWackyBlanks.has(blankKey.replace(/s$/, '')), `${book.id} page ${item.printedPage} blank ${item.blanks[0]} must not be a name or stop word`);
+    }
     await access(new URL(`../${item.image.slice(2)}`, import.meta.url), fsConstants.R_OK);
     await access(new URL(`../${item.audio.slice(2)}`, import.meta.url), fsConstants.R_OK);
   }
   const plan = Array.from(storyDemo.createQuestionPlan(book, seededRandom(book.id.charCodeAt(2)), wackyBooks));
   assert.equal(plan.length, book.pages.length);
-  assert.ok(plan.every((question) => question.choices.length === 4 && question.choices[question.correctIndex] === question.answer));
+  assert.ok(plan.every((question, index) => (
+    book.pages[index].blanks.length
+      ? question.choices.length === 4 && question.choices[question.correctIndex] === question.answer
+      : question.listenOnly === true && question.choices.length === 0
+  )));
 }
 for (const book of storyDemo.books) {
   let sawDifferentRun = false;
