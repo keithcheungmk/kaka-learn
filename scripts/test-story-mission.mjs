@@ -176,7 +176,39 @@ assert.match(source, /story-sentence-token/, 'The sentence should expose word-le
 assert.match(source, /function readSentenceWithHighlight/, 'The short sentence should be read with word highlighting');
 assert.match(source, /function speakPraise/, 'Correct answers should use a spoken praise line');
 assert.match(source, /function awardStoryPageStar/, 'Story pages should award a tracked star');
-assert.match(source, /story\|\$\{activeBookId\}\|page-/, 'Story star keys should be stable per book/page');
+assert.match(source, /function storyPageKey/, 'Story page keys should stay stable per book/page');
+assert.match(source, /function isWackyBookComplete/, 'Wacky Ricky shelf stars should reuse passedKeys completion');
+assert.match(source, /function markStoryBookComplete/, 'Finishing a Wacky episode should record the book key without extra coins');
+assert.match(source, /currentSeriesId === 'wacky-ricky'/, 'Completion stars belong on the Wacky Ricky shelf only');
+assert.match(css, /\.story-complete-star/, 'Completed Wacky episodes should show the existing gold star badge');
+{
+  const wr001 = wackyBooks[0];
+  assert.equal(storyDemo.storyPageKey('wr001', { printedPage: 3 }, 0), 'story|wr001|page-3');
+  assert.equal(storyDemo.storyPageKey('wr001', {}, 4), 'story|wr001|page-5');
+  assert.equal(storyDemo.storyBookKey('wr001'), 'story|wr001');
+  assert.equal(storyDemo.isWackyBookComplete(wr001, {}), false);
+  assert.equal(storyDemo.isWackyBookComplete(wr001, { 'story|wr001': true }), true);
+  const pageKeys = Object.fromEntries(wr001.pages.map((page, index) => [storyDemo.storyPageKey(wr001.id, page, index), true]));
+  assert.equal(storyDemo.isWackyBookComplete(wr001, pageKeys), true);
+  assert.equal(storyDemo.isWackyBookComplete(wr001, { [storyDemo.storyPageKey(wr001.id, wr001.pages[0], 0)]: true }), false);
+  const doneCard = storyDemo.bookShelfCardHtml(wr001, { complete: true });
+  const freshCard = storyDemo.bookShelfCardHtml(wr001, { complete: false });
+  assert.match(doneCard, /story-complete-star/);
+  assert.match(doneCard, /is-complete/);
+  assert.match(doneCard, /已完成/);
+  assert.doesNotMatch(freshCard, /story-complete-star/);
+  assert.doesNotMatch(freshCard, /is-complete/);
+  let tryEarnCalls = 0;
+  const store = { passedKeys: {} };
+  storySandbox.window.KakaStorage = {
+    loadState: () => store,
+    updateState: (patch) => { Object.assign(store, patch); },
+    tryEarnStar: () => { tryEarnCalls += 1; return { gained: true }; },
+  };
+  storyDemo.markStoryBookComplete(wr001);
+  assert.equal(store.passedKeys['story|wr001'], true, 'finish should persist the episode key');
+  assert.equal(tryEarnCalls, 0, 'episode star must not award an extra AEON coin / tryEarnStar');
+}
 assert.match(source, /Great job, Kaka! You got it right!/, 'The praise lines should address Kaka in English');
 assert.match(source, /if \(!\$\('#btn-story-next'\)\)[\s\S]*void awardStoryPageStar\(item\);\s*speakPraise\(\);/, 'Correct answers should show Next page immediately, then award the star and play praise');
 assert.match(source, /\$\('#btn-story-submit'\)\?\.remove\(\)/, 'Submit should be removed after a correct answer');
