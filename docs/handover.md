@@ -36,7 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 故事 focus 優化（浴缸詞＋長隆／中山配對） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/zhuhai-yima-bathtub-p02.webp`, `p03.webp`, `zhongshan-zoo-day-p02.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准兩項：浴缸改浮水／踢水；長隆＝望遠鏡／安全區、中山＝餵食／守信用；動物 focus 唔雙佔。開 PR，唔自 merge。 |
+| 故事 focus 優化（浠榆初生＋迪士尼／國慶合照拆開） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/hongkong-disney-p06.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准：初生篇保留洗澡、淡化珠海／月子中心／睡覺；迪士尼對齊地圖／城堡／排隊／紀念品／合照照片；國慶唔再 focus 合照／照片。開 PR，唔自 merge。 |
 | 主頁四科入口加入卡卡插畫 | ChatGPT／Codex | `index.html`, `css/styles.css`, `assets/home-subjects/`, `assets/image-formats.lock.json`, `docs/handover.md` | 2026-10-06 | Keith 已看過四科卡片 demo 並指示繼續；只改入口視覺，保留文字、連結與按鈕行為。 |
 | 紅輯「按書頁砌句」資料層及遊戲引擎 | Chinese Lead（Chief 整合） | `js/book-scene-demo.js`, `book-scene-demo.html`, `css/book-scene-demo.css`, `data/red-series/`, `scripts/test-book-scene-demo.mjs`, `scripts/smoke-book-scene-demo.py`, `docs/cursor-handoff-2026-09-20.md` | 2026-09-20 | Keith 交辦：本機接盤；內容由 Chinese Lead，shared／部署由 Chief；唔開 Cloud Agent |
 | 書本掃描書架 | Chinese Lead（Chief 整合） | `book-scans/index.html`, `index.html`（共享）, `css/styles.css`（共享）, `scripts/check-invariants.py`（共享） | 2026-09-08 | 家長 PDF 書架；中文內容由 Chinese Lead，共享檔由 Chief 認領 |
@@ -106,6 +106,11 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-10-10 · Cursor Chief Lead（故事 focus 優化：浠榆初生＋迪士尼／國慶合照拆開）
+
+- Keith 批准兩項（開 PR、唔自 merge）：（1）`xiyu-newborn` 保留洗澡，淡化珠海／月子中心／睡覺 focus，改偏高興／迎接／照顧；（2）`hongkong-disney` 對齊地圖／城堡／排隊／紀念品／合照／照片，清走唔對題紅書詞；`xiyu-national-day` 唔再 focus 合照／照片。
+- 重畫迪士尼 p06（紀念品＋照片）；`check-family-stories`／`check-invariants` 綠。
 
 ### 2026-10-10 · Cursor Chief Lead（故事 focus 優化：浴缸詞＋長隆／中山配對）
 
