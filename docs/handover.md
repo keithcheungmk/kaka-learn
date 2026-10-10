@@ -36,7 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| Carter／Magic Marker 書架完成星 | Cursor Chief Lead（English 範圍） | `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `AGENTS.md`, `docs/handover.md` | 2026-10-10 | Keith 要 Carter＋Magic Marker 書架星，對齊 Wacky #129；星只係進度；唔自 merge |
+| WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
 | 故事 focus 優化（浠榆初生＋迪士尼／國慶合照拆開） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/hongkong-disney-p06.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准：初生篇保留洗澡、淡化珠海／月子中心／睡覺；迪士尼對齊地圖／城堡／排隊／紀念品／合照照片；國慶唔再 focus 合照／照片。開 PR，唔自 merge。 |
 | 主頁四科入口加入卡卡插畫 | ChatGPT／Codex | `index.html`, `css/styles.css`, `assets/home-subjects/`, `assets/image-formats.lock.json`, `docs/handover.md` | 2026-10-06 | Keith 已看過四科卡片 demo 並指示繼續；只改入口視覺，保留文字、連結與按鈕行為。 |
 | 紅輯「按書頁砌句」資料層及遊戲引擎 | Chinese Lead（Chief 整合） | `js/book-scene-demo.js`, `book-scene-demo.html`, `css/book-scene-demo.css`, `data/red-series/`, `scripts/test-book-scene-demo.mjs`, `scripts/smoke-book-scene-demo.py`, `docs/cursor-handoff-2026-09-20.md` | 2026-09-20 | Keith 交辦：本機接盤；內容由 Chinese Lead，shared／部署由 Chief；唔開 Cloud Agent |
@@ -108,9 +108,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-10 · Cursor Chief Lead（WR019 Pet Care Next 被剪走）
+
+- iPad 上 Wacky Ricky wr019 長句＋兩詞空格答啱後，Next 喺 DOM 但被 `.story-fill-panel`／stage `overflow:hidden` 剪走。最小修復：平板／桌面 panel `overflow-y:auto`，答啱後 `scrollIntoView(Next)`，揀字先提示 Submit then Next。唔改填空資料。開 PR，唔自 merge。
+
 ### 2026-10-10 · Cursor Chief Lead（Carter／Magic Marker 書架完成星）
 
-- Keith 要 Carter Family 同 Magic Marker 書架喺未撳入 episode 前顯示 ★，對齊 Wacky Ricky #129。重用 `passedKeys`（`story|{bookId}` 或全部 `story|{bookId}|page-{n}`）。星只係進度；`tryEarnStar`／AEON 幣規則唔改。開 PR，唔自 merge。
+- Keith 要 Carter Family 同 Magic Marker 書架喺未撳入 episode 前顯示 ★，對齊 Wacky Ricky #129。#132 已由 Chief merge 入 `main`。
 
 ### 2026-10-10 · Cursor Chief Lead（Magic Marker 填空改內容詞）
 

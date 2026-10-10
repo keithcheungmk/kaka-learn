@@ -252,6 +252,9 @@ assert.match(css, /\.story-complete-star/, 'Completed episodes should show the e
 }
 assert.match(source, /Great job, Kaka! You got it right!/, 'The praise lines should address Kaka in English');
 assert.match(source, /if \(!\$\('#btn-story-next'\)\)[\s\S]*void awardStoryPageStar\(item\);\s*speakPraise\(\);/, 'Correct answers should show Next page immediately, then award the star and play praise');
+assert.match(source, /function revealStoryNextButton/, 'Next must be scrolled into view after it appears');
+assert.match(source, /scrollIntoView\(\{\s*block:\s*'nearest'/, 'Next scroll should keep the button in the visible fill panel');
+assert.match(source, /Press Submit first, then Next\./, 'Picking a word should remind the child to Submit before Next');
 assert.match(source, /\$\('#btn-story-submit'\)\?\.remove\(\)/, 'Submit should be removed after a correct answer');
 assert.doesNotMatch(source, /function renderListen/, 'There should be no separate listen-only layout');
 assert.doesNotMatch(source, /const MISSION/, 'The former separate multi-question mission should be removed');
@@ -266,6 +269,8 @@ assert.match(css, /\.story-fill-tile\s*\{\s*min-height:\s*44px;\s*padding-block:
 assert.match(css, /\.story-play-stage\s*\{[^}]*width:\s*100%;\s*max-width:\s*1180px/s, 'Story stage should size to its parent and avoid viewport-based margin overflow');
 assert.match(css, /\.story-challenge-story/, 'Story listen control should sit with the page image');
 assert.match(css, /\.story-fill-panel[\s\S]*padding:\s*clamp\(12px/, 'Fill panel should keep comfortable inner padding');
+assert.match(css, /\.story-fill-panel\s*\{[^}]*overflow-y:\s*auto/s, 'Tablet/desktop fill panel must scroll so Next is not clipped');
+assert.match(css, /@media \(max-width:\s*700px\)[\s\S]*\.story-fill-panel\s*\{[^}]*overflow:\s*visible/s, 'Phone fill panel should stay overflow visible');
 assert.match(source, /story-challenge-story/, 'Listen to the story should live in the left story column');
 assert.doesNotMatch(source, /story-fill-tools/, 'Story listen should not share the right-hand quiz toolbar');
 assert.match(index, /每頁先聽故事，再把剛才聽到的一個字放回短句/);

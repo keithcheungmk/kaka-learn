@@ -537,6 +537,18 @@ def check_three_entries() -> None:
         fail("entries", "故事完成星標未有對應樣式")
 
 
+def check_story_next_reachable() -> None:
+    """WR019 Pet Care：iPad 答啱後 Next 唔可以被填空面板 overflow:hidden 剪走。"""
+    css = read("css/story-demo.css")
+    story = read("js/story-demo.js")
+    if not re.search(r"\.story-fill-panel\s*\{[^}]*overflow-y:\s*auto", css, re.S):
+        fail("story-next", "平板／桌面 .story-fill-panel 要 overflow-y:auto，等 Next 可以捲到")
+    if not re.search(r"@media \(max-width:\s*700px\)[\s\S]*\.story-fill-panel\s*\{[^}]*overflow:\s*visible", css):
+        fail("story-next", "手機 .story-fill-panel 要維持 overflow:visible")
+    if "function revealStoryNextButton" not in story or "scrollIntoView" not in story:
+        fail("story-next", "答啱後要 scrollIntoView Next")
+
+
 def check_phonics_ranger_theme() -> None:
     """Phonics 已由鹿主題轉做 KAKA Ranger，舊鹿圖唔可以再接入畫面。"""
     html = read("index.html")
@@ -1094,6 +1106,7 @@ CHECKS = [
     check_ranger_mirror_dodge,
     check_no_zoom,
     check_three_entries,
+    check_story_next_reachable,
     check_phonics_ranger_theme,
     check_phonics_sound_energy,
     check_phonics_skill_tracking,
