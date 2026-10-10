@@ -201,6 +201,7 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - **砌一砌淡色格（`.build-ghost`）係配對支架，唔係洩題。** 目標係活動學習：睇圖 → 喺字池搵同一個字 → 拖／撳入格；靠重複移動嚟認字形。唔好刪淡字、唔好改成空白考試格。字池要留干擾字，等卡卡真係要揀。
 - **所有答案／選項／字詞磚文字都要清楚可讀**：一般文字對比至少 WCAG AA 4.5:1；共用答案色用 `--answer-ink`／`--answer-surface`，已選、已填及回饋狀態亦要保持對比，唔好只靠 opacity／顏色微差表達狀態。鍵盤焦點必須有清晰外框。
 - **遊戲畫面一屏到底，唔准捲。** 只有「主頁／揀主題／揀書／字母隊揀主題」准上下捲（純瀏覽、唔涉拖曳）。
+  故事 Read & Fill 例外（Keith 2026-10-10 Pet Care）：平板／桌面嘅 `.story-fill-panel` 可以內部直向捲，等長句＋兩詞空格答啱後 Next 唔被剪走；全頁遊戲畫面仍然一屏。手機維持 panel `overflow: visible`。
   尺寸用 `min(px, vw, vh)` 跟住視窗高度縮；橫向嘅砌一砌係兩欄（左圖右字池）。
   **家庭目標裝置**（Keith 實機）：最新 iPad Pro 11" M4（834×1210 直／1210×834 橫）、iPhone 16 Pro Max（430×932 直）。
   真改版面／CSS／遊戲流程：本地跑 `python3 scripts/smoke-shots.py --no-shots`（預設就係呢三個 viewport；CI 一樣）。
