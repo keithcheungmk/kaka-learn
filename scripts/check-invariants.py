@@ -527,6 +527,12 @@ def check_three_entries() -> None:
     story = read("js/story-demo.js")
     if "window.KakaPhonics?.openEnglishHub" not in story:
         fail("entries", "故事系列返回按鈕未返回共用英文入口")
+    if "function isWackyBookComplete" not in story or "story-complete-star" not in story:
+        fail("entries", "Wacky Ricky 書架要顯示已完成星標")
+    if "currentSeriesId === 'wacky-ricky'" not in story or "markStoryBookComplete" not in story:
+        fail("entries", "Wacky Ricky 完成星只可以喺該系列書架顯示，並寫入 episode passedKeys")
+    if "story-complete-star" not in read("css/story-demo.css"):
+        fail("entries", "Wacky Ricky 完成星標未有對應樣式")
 
 
 def check_phonics_ranger_theme() -> None:

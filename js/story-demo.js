@@ -120,6 +120,49 @@
     return (item?.blanks || []).length >= 2;
   }
 
+  function storyPageKey(bookId, page, index) {
+    return `story|${bookId}|page-${page?.printedPage || index + 1}`;
+  }
+
+  function storyBookKey(bookId) {
+    return `story|${bookId}`;
+  }
+
+  function passedStoryKeys() {
+    try {
+      return window.KakaStorage?.loadState?.().passedKeys || {};
+    } catch {
+      return {};
+    }
+  }
+
+  function isWackyBookComplete(book, passedKeys = passedStoryKeys()) {
+    if (!book?.id || !book.pages?.length) return false;
+    if (passedKeys[storyBookKey(book.id)]) return true;
+    return book.pages.every((page, index) => passedKeys[storyPageKey(book.id, page, index)]);
+  }
+
+  function markStoryBookComplete(book) {
+    const storage = window.KakaStorage;
+    if (!book?.id || !storage?.loadState || !storage?.updateState) return;
+    const key = storyBookKey(book.id);
+    const state = storage.loadState();
+    if (state.passedKeys?.[key]) return;
+    storage.updateState({ passedKeys: { ...(state.passedKeys || {}), [key]: true } });
+  }
+
+  function bookShelfCardHtml(book, { complete = false } = {}) {
+    const star = complete
+      ? '<span class="story-complete-star" aria-label="已完成">★</span>'
+      : '';
+    const titleStar = complete ? ' <span class="story-complete-tag" aria-hidden="true">★</span>' : '';
+    return `<button type="button" class="story-activity-card story-activity-card--read${complete ? ' is-complete' : ''}" data-book-id="${book.id}">
+      <span class="story-activity-cover">${star}<img class="story-activity-image" src="${book.cover || book.pages[0]?.image || ''}" alt="" loading="lazy" decoding="async"></span>
+      <strong>${book.title}${titleStar}</strong><small>${book.cfLabel || book.mmLabel || book.wrLabel} · ${book.pages.length} playable pages${book.unavailablePages?.length ? ` · ${book.unavailablePages.length} audio pages unavailable` : ''}</small>
+      <span class="story-activity-description">聽每一頁，再放回剛才聽到的一個字。</span><span class="story-activity-status">${complete ? '已完成 · 再玩 →' : 'Start →'}</span>
+    </button>`;
+  }
+
   function shuffle(items, random) {
     const shuffled = [...items];
     for (let index = shuffled.length - 1; index > 0; index -= 1) {
@@ -236,11 +279,11 @@
         : '';
     }
     const grid = $('#story-demo-activity-grid');
-    grid.innerHTML = BOOKS.map((book) => `<button type="button" class="story-activity-card story-activity-card--read" data-book-id="${book.id}">
-      <img class="story-activity-image" src="${book.cover || book.pages[0]?.image || ''}" alt="" loading="lazy" decoding="async">
-      <strong>${book.title}</strong><small>${book.cfLabel || book.mmLabel || book.wrLabel} · ${book.pages.length} playable pages${book.unavailablePages?.length ? ` · ${book.unavailablePages.length} audio pages unavailable` : ''}</small>
-      <span class="story-activity-description">聽每一頁，再放回剛才聽到的一個字。</span><span class="story-activity-status">Start →</span>
-    </button>`).join('');
+    const showCompletion = currentSeriesId === 'wacky-ricky';
+    const passedKeys = showCompletion ? passedStoryKeys() : {};
+    grid.innerHTML = BOOKS.map((book) => bookShelfCardHtml(book, {
+      complete: showCompletion && isWackyBookComplete(book, passedKeys),
+    })).join('');
     $$('[data-book-id]', grid).forEach((button) => {
       button.addEventListener('click', () => startBook(button.dataset.bookId));
     });
@@ -444,7 +487,7 @@
   function awardStoryPageStar(item) {
     const storage = window.KakaStorage;
     if (!storage?.loadState || !storage?.tryEarnStar || !storage?.updateState) return Promise.resolve(false);
-    const pageKey = `story|${activeBookId}|page-${item.printedPage || pageIndex + 1}`;
+    const pageKey = storyPageKey(activeBookId, item, pageIndex);
     const before = storage.loadState();
     if (before.passedKeys?.[pageKey]) return Promise.resolve(false);
     const result = storage.tryEarnStar();
@@ -624,6 +667,7 @@
     $('#story-play-stage').classList.remove('story-page-challenge', 'is-listening', 'is-solved');
     const missingPages = book.unavailablePages?.length || 0;
     const finishNote = missingPages ? `${missingPages} page${missingPages === 1 ? ' is' : 's are'} unavailable because no reliable recording is ready yet.` : 'Read the story again whenever you like.';
+    if (currentSeriesId === 'wacky-ricky') markStoryBookComplete(book);
     $('#story-play-stage').innerHTML = `<div class="story-finish"><span>★</span><h2>${book.title} Complete!</h2><p>${finishNote}</p></div>`;
     $('#story-play-actions').innerHTML = '<button type="button" class="btn btn-secondary" id="btn-story-restart">Read again</button>';
     $('#story-play-options').innerHTML = `<button type="button" class="story-answer" id="btn-story-home">Back to ${activeSeries().title} Books</button>`;
@@ -655,5 +699,10 @@
     books: CARTER_BOOKS.map((book) => ({ id: book.id, title: book.title, pageCount: book.pages.length })),
     pageCount: totalPages(CARTER_BOOKS),
     createQuestionPlan,
+    storyPageKey,
+    storyBookKey,
+    isWackyBookComplete,
+    bookShelfCardHtml,
+    markStoryBookComplete,
   };
 }());
