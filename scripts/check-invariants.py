@@ -1017,6 +1017,10 @@ def check_family_storybook_entry() -> None:
         fail("family-storybook", "故事頁唔好再放普通話掣、聲線下拉、試聽或頁腳免責")
     if 'id="back-library"' in story_html or "← 故事書目" in story_html:
         fail("family-storybook", "讀者頁唔好再放「故事書目」第二層返回")
+    if 'id="back-chinese"' not in story_html or 'href="index.html#screen-topics"' not in story_html:
+        fail("family-storybook", "書目頁頂欄「← 中文」要返中文主題頁")
+    if "back-chinese" not in story_js or "leaveReader()" not in story_js:
+        fail("family-storybook", "閱讀頁「← 中文」要返回故事書目，唔好跳去中文主題根")
     if 'id="brand-title"' not in story_html or "storyHeading(" not in story_js or "place}：${title}" not in story_js:
         fail("family-storybook", "閱讀頁頂欄要顯示「地點：故事名」")
     if "is-reading" not in story_css or "is-reading" not in story_js:
