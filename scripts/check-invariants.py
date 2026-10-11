@@ -1060,6 +1060,11 @@ def check_family_storybook_en_entry() -> None:
         fail("family-storybook-en", "系列卡要寫 Karl、HeiHei、Froggie")
     if "littleFoxCards + familyCard" not in story_demo:
         fail("family-storybook-en", "家庭故事卡要排喺三張 Little Fox 卡下面")
+    series_screen = html.split('id="screen-story-series"', 1)[1].split('id="screen-story-demo"', 1)[0] if 'id="screen-story-series"' in html else ""
+    if "← 英文學習" not in series_screen or "<h1>英文故事書</h1>" not in series_screen:
+        fail("family-storybook-en", "系列揀選頁要留「← 英文學習」同標題「英文故事書」")
+    if any(label in series_screen for label in ("選擇故事系列", "Little Fox 系列", "LITTLE FOX")):
+        fail("family-storybook-en", "系列揀選頁唔好再寫「選擇故事系列」「Little Fox 系列」或 LITTLE FOX eyebrow")
     for path in (
         "family-storybook-en.html",
         "css/family-storybook-en.css",
