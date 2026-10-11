@@ -1040,13 +1040,26 @@ def check_family_storybook_entry() -> None:
 def check_family_storybook_en_entry() -> None:
     """獨立英文家庭故事殼：平行中文故事小隊，唔伸延 Little Fox。"""
     html = read("index.html")
+    story_demo = read("js/story-demo.js")
     if 'id="btn-english-family-stories"' not in html or './family-storybook-en.html' not in html:
         fail("family-storybook-en", "英文 hub 要有家庭故事入口，平行 Little Fox")
     hub = html.split('id="screen-english-hub"', 1)[1].split('id="screen-phonics-topics"', 1)[0] if 'id="screen-english-hub"' in html else ""
     if 'id="btn-english-family-stories"' not in hub:
-        fail("family-storybook-en", "英文家庭故事入口要放喺英文 hub，唔好嵌喺 Little Fox 系列頁")
-    if 'id="screen-story-series"' in hub and hub.find('id="btn-english-family-stories"') > hub.find('id="screen-story-series"'):
-        fail("family-storybook-en", "英文家庭故事入口唔可以放喺 Little Fox 系列畫面入面")
+        fail("family-storybook-en", "英文 hub 可保留家庭故事入口")
+    series_block = re.search(r"const SERIES = \[(.*?)\];", story_demo, re.S)
+    series_ids = re.findall(r"id:\s*'([^']+)'", series_block.group(1)) if series_block else []
+    if series_ids != ["carter", "magic-marker", "wacky-ricky"]:
+        fail("family-storybook-en", "Little Fox SERIES 只可以係 Carter／Magic Marker／Wacky Ricky；家庭故事用獨立卡")
+    if "family-stories-en" not in story_demo or "family-storybook-en.html" not in story_demo:
+        fail("family-storybook-en", "Story Reading 系列揀選頁要有家庭故事第四張卡，連去 family-storybook-en.html")
+    if "rainbow-umbrella" not in story_demo and "park-kite" not in story_demo:
+        fail("family-storybook-en", "系列卡縮圖要重用家庭故事場景圖")
+    if "2 books" not in story_demo:
+        fail("family-storybook-en", "系列卡 meta 要寫 2 books")
+    if "Karl" not in story_demo or "HeiHei" not in story_demo or "Froggie" not in story_demo:
+        fail("family-storybook-en", "系列卡要寫 Karl、HeiHei、Froggie")
+    if "littleFoxCards + familyCard" not in story_demo:
+        fail("family-storybook-en", "家庭故事卡要排喺三張 Little Fox 卡下面")
     for path in (
         "family-storybook-en.html",
         "css/family-storybook-en.css",

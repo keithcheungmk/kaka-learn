@@ -282,6 +282,16 @@ assert.match(index, /id="btn-english-words"/, 'English hub should route to Topic
 assert.match(index, /id="btn-english-phonics"/, 'English hub should route to Phonics');
 assert.match(index, /id="screen-story-series"/, 'Little Fox entry should expose a collection chooser');
 assert.match(source, /window\.KakaPhonics\?\.openEnglishHub/, 'Story series back should return to the shared English hub');
+const seriesBlock = source.match(/const SERIES = \[([\s\S]*?)\];/)?.[1] || '';
+assert.match(seriesBlock, /id: 'carter'/);
+assert.match(seriesBlock, /id: 'magic-marker'/);
+assert.match(seriesBlock, /id: 'wacky-ricky'/);
+assert.doesNotMatch(seriesBlock, /family-stories-en/, 'Family stories must not join the Little Fox SERIES catalogue');
+assert.match(source, /data-series-id="\$\{FAMILY_STORIES_CARD\.id\}"|data-series-id="family-stories-en"/, 'Series picker should list family stories under Wacky Ricky');
+assert.match(source, /family-storybook-en\.html/, 'Family stories card should open the English family storybook');
+assert.match(source, /2 books/, 'Family stories card should say 2 books');
+assert.match(source, /Karl,& HeiHei Family Stories|Karl &amp; HeiHei Family Stories/, 'Family stories card should use the Karl & HeiHei title');
+assert.match(source, /littleFoxCards \+ familyCard/, 'Family stories card must render after the three Little Fox cards');
 
 const requiredAssets = [
   '../assets/story-demo/pages/page-01.webp',
