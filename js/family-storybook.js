@@ -15,17 +15,20 @@
   const $ = id => document.getElementById(id);
   const library = $('library'), reader = $('reader');
   const finishedKey = 'kaka-family-storybook-finished-v1';
-  const voiceModeKey = 'kaka-family-storybook-voice-v1';
   const speech = window.KakaSpeech || {};
-  // Trial Mandarin path: same Traditional page text via zh-CN TTS. Easy to strip later.
-  let voiceMode = 'yue';
-  try {
-    const saved = localStorage.getItem(voiceModeKey);
-    if (saved === 'cmn' || saved === 'yue') voiceMode = saved;
-  } catch { /* keep default Cantonese */ }
+  const libraryTitle = '卡卡和禧禧一齊玩';
   const heldUtters = [];
   let current = null, pageIndex = 0, pageStates = [], activeUtterance = null, activeSpeechFallback = null, activeSpeechRetry = null, activeSlots = [], activeSlot = 0;
   const safeRead = key => { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } };
+  const storyHeading = story => {
+    const place = String(story?.place || '').trim();
+    const title = String(story?.title || '').trim();
+    return place ? `${place}：${title}` : title;
+  };
+  const setReadingChrome = on => {
+    $('story-topbar').classList.toggle('is-reading', on);
+    $('brand-title').textContent = on && current ? storyHeading(current) : libraryTitle;
+  };
   const refreshStars = () => {
     $('star-total').textContent = safeRead(finishedKey).length;
     const total = $('story-total');
@@ -54,7 +57,7 @@
     pageIndex = 0;
     pageStates = current.pages.map(page => ({ unlocked: false, solved: false, answers: Array(page.focusWords.length).fill('') }));
     library.classList.add('hidden'); reader.classList.remove('hidden'); $('completion').classList.add('hidden');
-    $('story-title').textContent = current.title; $('story-place').textContent = current.place;
+    setReadingChrome(true);
     renderPage(); window.scrollTo({top:0,behavior:'smooth'});
   }
   function stopSpeech() {
@@ -83,32 +86,11 @@
     const name = String(voice.name || '');
     return /zh-hk/.test(lang) || /^yue\b/.test(lang) || /cantonese|粵語|粤语|廣東話|广东话|sinji|思睿|曉佳|曉曼/i.test(name);
   }
-  function pickMandarinVoice(voices) {
-    const female = /tingting|婷婷|tian-tian|天天|meijia|美佳|xiaoxiao|xiaoyi|語珊|yating|雅婷/i;
-    const mandarin = voices.filter(voice => {
-      const lang = String(voice.lang || '').replaceAll('_', '-').toLowerCase();
-      return /^(cmn)(-|$)/.test(lang) || /^zh-(hans-)?(cn|sg)(-|$)/.test(lang);
-    });
-    return mandarin.find(voice => female.test(String(voice.name || ''))) || mandarin[0] || null;
-  }
   function pickStoryVoice() {
     const voices = canAttemptSpeech() ? window.speechSynthesis.getVoices() : [];
-    if (voiceMode === 'cmn') return pickMandarinVoice(voices);
     const fromSpeech = speech.currentVoice?.();
     if (fromSpeech && isCantoneseVoice(fromSpeech)) return fromSpeech;
     return voices.find(isCantoneseVoice) || fromSpeech || null;
-  }
-  function syncVoiceToggle() {
-    document.querySelectorAll('[data-story-voice]').forEach(btn => {
-      const on = btn.dataset.storyVoice === voiceMode;
-      btn.classList.toggle('is-on', on);
-      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    });
-  }
-  function setVoiceMode(mode) {
-    voiceMode = mode === 'cmn' ? 'cmn' : 'yue';
-    try { localStorage.setItem(voiceModeKey, voiceMode); } catch { /* session-only */ }
-    syncVoiceToggle();
   }
   function pageReadingText(page) {
     const sentence = String(page.sentence || '').replace(/[。！？]$/, '');
@@ -116,9 +98,14 @@
     return `${sentence}。${page.dialogue?.speaker || ''}說：「${dialogue}」`;
   }
   function leaveReader() {
-    stopSpeech(); reader.classList.add('hidden'); library.classList.remove('hidden'); renderLibrary(); window.scrollTo({top:0,behavior:'smooth'});
+    stopSpeech();
+    current = null;
+    reader.classList.add('hidden');
+    library.classList.remove('hidden');
+    setReadingChrome(false);
+    renderLibrary();
+    window.scrollTo({top:0,behavior:'smooth'});
   }
-  $('back-library').addEventListener('click', leaveReader);
   $('next-story').addEventListener('click', leaveReader);
   function renderPage() {
     const page = current.pages[pageIndex], state = pageStates[pageIndex];
@@ -188,8 +175,7 @@
       $('guardian-unlock').classList.remove('hidden');
       return false;
     }
-    const lang = voiceMode === 'cmn' ? 'zh-CN' : 'zh-HK';
-    const voiceLabel = voiceMode === 'cmn' ? '普通話' : '粵語';
+    const lang = 'zh-HK';
     const startUtterance = (utteranceText) => {
       const utterance = new SpeechSynthesisUtterance(utteranceText);
       const voice = pickStoryVoice();
@@ -248,7 +234,7 @@
       }
       finish(false, { error: 'silent' });
     }, estimatedMs);
-    $('audio-feedback').textContent = `正在用${voiceLabel}讀本頁……`;
+    $('audio-feedback').textContent = '正在用粵語讀本頁……';
     try {
       if (window.speechSynthesis.paused) window.speechSynthesis.resume();
     } catch { /* ignore */ }
@@ -271,23 +257,11 @@
       window.setTimeout(() => {
         if (finished || started) return;
         if (current && !pageStates[pageIndex]?.unlocked) $('guardian-unlock').classList.remove('hidden');
-        $('audio-feedback').textContent = `未聽到${voiceLabel}。可以再撳喇叭，或由家長朗讀。`;
+        $('audio-feedback').textContent = '未聽到粵語。可以再撳喇叭，或由家長朗讀。';
       }, 1100);
     }, 700);
     return true;
   }
-  $('story-voice-toggle').addEventListener('click', event => {
-    const btn = event.target.closest('[data-story-voice]');
-    if (!btn) return;
-    const next = btn.dataset.storyVoice === 'cmn' ? 'cmn' : 'yue';
-    if (next === voiceMode) return;
-    stopSpeech();
-    setVoiceMode(next);
-    if (current) {
-      const label = voiceMode === 'cmn' ? '普通話' : '粵語';
-      $('audio-feedback').textContent = `已轉做${label}。撳「聽本頁」再用呢個讀音。`;
-    }
-  });
   $('speak-sentence').addEventListener('click', () => {
     if (!current) return;
     speakStory(pageReadingText(current.pages[pageIndex]), {unlockPage:true});
@@ -420,6 +394,6 @@
     window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
   }
   speech.warmVoices?.();
-  syncVoiceToggle();
+  setReadingChrome(false);
   renderLibrary();
 })();

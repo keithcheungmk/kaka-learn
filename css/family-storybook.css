@@ -16,13 +16,17 @@ body {
   background: radial-gradient(ellipse at 18% 0,#1c356a 0,transparent 36%), radial-gradient(ellipse at 100% 80%,#271d5b 0,transparent 42%),#090f30;
 }
 .storybook-shell { width: min(1240px,100% - 32px); margin: auto; padding: 24px 0 48px; }
-.topbar,.reader-head,.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.topbar,.section-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .topbar { margin-bottom: 34px; }
-.brand { text-align: center; }
+.brand { min-width: 0; flex: 1; text-align: center; }
 .brand span,.eyebrow { margin: 0; color: var(--mint); font-weight: 800; letter-spacing: .08em; }
-.brand h1 { font-size: clamp(1.4rem,3vw,2rem); margin: 4px 0; }
+.brand h1 { font-size: clamp(1.15rem,3vw,2rem); margin: 4px 0; line-height: 1.25; overflow-wrap: anywhere; }
 .back-link,.star-total,.page-count { border: 1px solid #395d9a; border-radius: 20px; background: #17264f; color: var(--ink); padding: 12px 18px; font: inherit; font-weight: 800; text-decoration: none; }
 .star-total { color: var(--gold); white-space: nowrap; }
+.topbar:not(.is-reading) .page-count,
+.topbar.is-reading .star-total,
+.topbar.is-reading #brand-kicker { display: none; }
+.topbar.is-reading { margin-bottom: 16px; }
 .intro { padding: 36px; border: 1px solid var(--line); border-radius: 28px; background: linear-gradient(125deg,#182b59,#142049); text-align: center; margin-bottom: 28px; }
 .intro h2 { font-size: clamp(1.7rem,4vw,2.8rem); margin: .35em 0; }
 .intro p:last-child { color: var(--muted); font-size: 1.1rem; margin-bottom: 0; }
@@ -45,45 +49,9 @@ body {
 .cast-card img { width: 86px; height: 86px; object-fit: contain; border-radius: 12px; background: #fff; flex: none; }
 .cast-card strong { color: var(--gold); font-size: 1.1rem; }
 .cast-card p { margin: 5px 0 0; color: var(--muted); }
-.reader-head { margin-bottom: 14px; }
-.reader-head>div:nth-child(2) { min-width: 0; text-align: center; }
-.reader-head h2 { margin: 4px 0; }
 .page-count { color: var(--mint); white-space: nowrap; }
-.progress-track { height: 8px; border-radius: 10px; background: #24345f; overflow: hidden; margin: 14px 0 18px; }
+.progress-track { height: 8px; border-radius: 10px; background: #24345f; overflow: hidden; margin: 0 0 18px; }
 .progress-track span { height: 100%; display: block; width: 16.67%; background: linear-gradient(90deg,var(--mint),#74e3a1); transition: width .2s; }
-.chinese-voice-toggle {
-  display: inline-flex;
-  margin-top: 8px;
-  padding: 4px;
-  gap: 4px;
-  border-radius: 999px;
-  background: #ffffff;
-  box-shadow: 0 0 0 2px rgba(93, 145, 203, 0.42);
-}
-.chinese-voice-btn {
-  appearance: none;
-  min-width: 88px;
-  min-height: 44px;
-  padding: 6px 16px;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  color: #18345f;
-  font: inherit;
-  font-size: clamp(1rem, 2vw, 1.15rem);
-  font-weight: 800;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-.chinese-voice-btn.is-on {
-  background: #1d6fb8;
-  color: #ffffff;
-  box-shadow: 0 3px 0 #124f86;
-}
-.chinese-voice-btn:focus-visible {
-  outline: 3px solid #ffd34f;
-  outline-offset: 2px;
-}
 .lesson-spread { display: grid; grid-template-columns: minmax(0,3fr) minmax(360px,2fr); gap: 18px; align-items: stretch; }
 .book-page,.activity { min-width: 0; border: 1px solid #3b6ead; border-radius: 24px; background: rgba(17,29,68,.96); padding: 20px; }
 .panel-label { color: var(--mint); font-weight: 900; letter-spacing: .06em; margin: 0 0 12px; }
@@ -137,11 +105,8 @@ button:focus-visible,a:focus-visible,select:focus-visible { outline: 3px solid v
   .story-grid { grid-template-columns: 1fr; }
   .lesson-spread { grid-template-columns: 1fr; }
   .scene-frame img { aspect-ratio: 1.45; }
-  .reader-head { align-items: flex-start; }
-  .reader-head>div:nth-child(2) { text-align: left; }
-  .reader-head h2 { font-size: 1.25rem; }
   .page-count { padding: 8px; font-size: .9rem; }
-  .reader-head>.back-link { padding: 9px; font-size: .9rem; }
+  .topbar.is-reading .brand h1 { font-size: 1.15rem; }
   .section-heading { display: block; }
   .section-heading>span { display: block; text-align: left; }
 }
@@ -152,15 +117,12 @@ button:focus-visible,a:focus-visible,select:focus-visible { outline: 3px solid v
   .intro { padding: 24px 16px; }
   .topbar { gap: 8px; flex-wrap: wrap; }
   .brand { order: -1; width: 100%; }
-  .reader-head { gap: 7px; }
-  .reader-head>.back-link { padding: 8px; }
-  .reader-head h2 { font-size: 1.1rem; }
   .page-count { font-size: .8rem; padding: 7px; }
+  .topbar.is-reading .brand h1 { font-size: 1.05rem; }
   .book-page,.activity { padding: 14px; }
   .sentence-row { display: block; }
   .page-reading { font-size: 1.55rem; }
   .speak-button { margin: 4px 0 8px; }
-  .chinese-voice-btn { min-width: 76px; }
   .task-sentence { padding: 12px; }
   .task-actions { justify-content: stretch; }
   .task-actions button { flex: 1; }
