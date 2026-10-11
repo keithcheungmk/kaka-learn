@@ -410,6 +410,47 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Four-panel iPad play screen must not page-scroll, overflowY={metrics['overflowY']}")
     if metrics["recordH"] < 44:
         raise RuntimeError("Record button touch target must be at least 44px")
+    pg.evaluate("() => window.KakaFourPanel?.revealClosedLoopForTest?.()")
+    pg.wait_for_selector("#kid-panels:not(.hidden) .kid-panel-btn")
+    pg.wait_for_selector("#kid-self:not(.hidden) .kid-self-btn")
+    pg.wait_for_selector("#parent-checks:not(.hidden)")
+    kid_copy = pg.evaluate(
+        """() => ({
+          panels: [...document.querySelectorAll('#kid-panel-grid .kid-panel-btn')].map((el) => el.textContent.trim()),
+          self: [...document.querySelectorAll('#kid-self .kid-self-btn')].map((el) => el.textContent.trim()),
+          parent: document.querySelector('.parent-frame')?.textContent || '',
+          retry: document.querySelector('#retry-note')?.textContent || '',
+          completeDisabled: document.querySelector('#btn-complete')?.disabled ?? true,
+        })"""
+    )
+    if kid_copy["panels"] != ["第一", "然後", "後來", "最後"]:
+        raise RuntimeError(f"Kid panel checks must be the four beats, got {kid_copy['panels']}")
+    if kid_copy["self"] != ["我講齊喇", "我講大聲", "我講完喇"]:
+        raise RuntimeError(f"Kid self-check labels mismatch: {kid_copy['self']}")
+    if "小朋友話自己做到喇" not in kid_copy["parent"]:
+        raise RuntimeError("Parent checks must be framed as confirming the kid self-check")
+    if "再講一次呀" not in kid_copy["retry"]:
+        raise RuntimeError("Disagree path must keep the gentle retry line")
+    if kid_copy["completeDisabled"] is not True:
+        raise RuntimeError("Complete must stay locked until parent also agrees")
+    review_metrics = pg.evaluate(
+        """() => {
+          const d = document.documentElement;
+          const targets = [...document.querySelectorAll('.kid-panel-btn, .kid-self-btn, #btn-rerecord')];
+          return {
+            overflowX: d.scrollWidth - d.clientWidth,
+            overflowY: d.scrollHeight - d.clientHeight,
+            minTap: Math.min(...targets.map((el) => Math.min(el.getBoundingClientRect().width, el.getBoundingClientRect().height))),
+          };
+        }"""
+    )
+    if review_metrics["overflowX"] > 2:
+        raise RuntimeError(f"Four-panel review overflows horizontally by {review_metrics['overflowX']}px")
+    if pg.viewport_size["width"] > 700 and review_metrics["overflowY"] > 2:
+        raise RuntimeError(f"Four-panel iPad review must not page-scroll, overflowY={review_metrics['overflowY']}")
+    if review_metrics["minTap"] < 44:
+        raise RuntimeError(f"Closed-loop tap targets must be at least 44px, got {review_metrics['minTap']}")
+    probe("中文・四格講故事閉環評分")
     pg.click("#back-link")
     pg.wait_for_selector("#wall:not(.hidden) [data-start='rainbow-umbrella']")
     with pg.expect_navigation():

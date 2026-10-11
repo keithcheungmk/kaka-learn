@@ -36,8 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 頂欄返回只准一層 | Cursor Chief Lead | `js/nav-back.js`, `js/app.js`, `index.html`, `family-storybook.html`, `family-storybook-en.html`, `four-panel-story.html`, `book-scene-demo.html`, `pth-demo.html`, `scripts/check-invariants.py`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | Keith：所有 ← 掣只返上一層，唔跳主頁；保留 #136 閱讀返書目；四格／EN 家庭 chrome 一致；Draft PR，唔自 merge |
-| 四格講故事 MVP（回家路上） | Cursor Chief Lead（Chinese 範圍） | `four-panel-story.html`, `js/four-panel-story.js`, `css/four-panel-story.css`, `data/four-panel-stories.js`, `index.html`（中文主題入口）, `css/styles.css`（入口卡）, `scripts/check-invariants.py`, `scripts/smoke-shots.py`, `scripts/test-four-panel-story.mjs`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | Keith 批准試用：獨立講故事模式，唔混入 family-storybook 填空；本機錄音；家長三勾先領星；Draft PR，唔自 merge |
+| 四格講故事閉環評分（無 ASR） | Cursor Chief Lead（Chinese 範圍） | `four-panel-story.html`, `js/four-panel-story.js`, `css/four-panel-story.css`, `scripts/test-four-panel-story.mjs`, `scripts/check-invariants.py`, `scripts/smoke-shots.py`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | Keith 批准一頁紙：回放後小朋友撳亮四格＋三個自己檢查，家長三勾改為確認；兩邊同意先全星；唔同意「再講一次呀」；唔半星／唔 ASR／唔上傳；保留 #141 一層返回 |
 | 英文系列揀選頁清走 Little Fox 標籤 | Cursor Chief Lead（English 範圍） | `index.html`, `scripts/check-invariants.py`, `scripts/test-story-mission.mjs`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | #138 squash-merge 漏咗標籤移除；清走「選擇故事系列／Little Fox 系列／LITTLE FOX eyebrow」；保留返回、標題、幣 pill、四張卡；唔自 merge |
 | 故事閱讀頁「← 中文」返回書目 | Cursor Chief Lead（Chinese 範圍） | `family-storybook.html`, `js/family-storybook.js`, `scripts/check-invariants.py`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-11 | Keith：閱讀頁左上「← 中文」返 #library，唔跳中文主題根；唔自 merge |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
@@ -112,15 +111,19 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-11 · Cursor Chief Lead（四格講故事閉環評分，無 ASR）
+
+- Keith 批准一頁紙：回放後先小朋友撳亮四格（第一／然後／後來／最後），再三個自己檢查（我講齊喇／我講大聲／我講完喇）；家長三勾改為確認小朋友自己檢查。兩邊同意先領現有一粒星；唔同意溫柔「再講一次呀」＋再錄一次，唔扣星、唔半星、唔 ASR、唔上傳。只改 `four-panel-story` 評分；頂欄保留 #141 一層返回。
+
 ### 2026-10-11 · Cursor Chief Lead（頂欄返回只准一層）
 
 - Keith：所有左上 ← 掣只返上一層，唔好跳主頁／揀小朋友。保留 #136 閱讀「← 中文／English」返書目。
 - 獨立頁用 `js/nav-back.js`：有同站 history 就 `history.back()`，否則父畫面 hash。`index.html` 認 `#screen-topics`／`#screen-story-series`／`#screen-english-hub`／`#screen-home`，`history.back` 用 `kaka-return-screen` 還原離開前畫面。
-- 四格：玩→關卡牆，牆→中文主題。EN 家庭書目 fallback 改系列揀選頁。書頁砌句／普通話／掃描書架同樣一層。砌句子遊戲頂欄改返中文主題。Draft PR，唔自 merge。
+- 四格：玩→關卡牆，牆→中文主題。EN 家庭書目 fallback 改系列揀選頁。書頁砌句／普通話／掃描書架同樣一層。砌句子遊戲頂欄改返中文主題。#141 已 squash-merge 入 main。
 
 ### 2026-10-11 · Cursor Chief Lead（四格講故事 MVP）
 
-- Keith 批准試用獨立「四格講故事」：中文主題頁入口、關卡牆（四格縮圖＋點此兒開始）、本機錄音（最多約 90 秒、可回放）、示範故事、家長三勾先領星。第一本回家路上用 rainbow-umbrella p01／p02／p04／p06。唔混入 family-storybook 填空；錄音唔上傳／唔 ASR。Draft PR，唔自 merge。
+- Keith 批准試用獨立「四格講故事」：中文主題頁入口、關卡牆（四格縮圖＋點此兒開始）、本機錄音（最多約 90 秒、可回放）、示範故事、家長三勾先領星。第一本回家路上用 rainbow-umbrella p01／p02／p04／p06。唔混入 family-storybook 填空；錄音唔上傳／唔 ASR。#140 已入 main。
 
 ### 2026-10-11 · Cursor Chief Lead（英文系列揀選頁清走品牌標籤）
 

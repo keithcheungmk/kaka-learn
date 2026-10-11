@@ -193,6 +193,15 @@ button:focus-visible {
   min-width: 0;
   position: relative;
 }
+.comic-hit {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 14px;
+}
 .comic-panel img {
   display: block;
   width: 100%;
@@ -201,6 +210,10 @@ button:focus-visible {
   border-radius: 14px;
   background: #e9edf6;
   border: 3px solid #f3f5ff;
+}
+.comic-panel.is-lit img {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px #4de0be99;
 }
 .comic-panel figcaption {
   position: absolute;
@@ -276,6 +289,56 @@ button:focus-visible {
 .status-note[data-tone="warn"] { color: #ffd34f; }
 .status-note[data-tone="ok"] { color: var(--mint); }
 .playback audio { width: 100%; }
+.kid-panels {
+  display: grid;
+  gap: 8px;
+}
+.kid-step-label, .parent-frame {
+  margin: 0;
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 1.02rem;
+  line-height: 1.4;
+}
+.kid-panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.kid-panel-btn, .kid-self-btn {
+  min-width: 0;
+  min-height: 52px;
+  border: 2px solid #5d8ad0;
+  border-radius: 16px;
+  background: #213d76;
+  color: var(--ink);
+  font: inherit;
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  font-weight: 900;
+  cursor: pointer;
+}
+.kid-self {
+  display: grid;
+  gap: 8px;
+}
+.kid-self-btn { min-height: 56px; }
+.kid-panel-btn.is-on, .kid-self-btn.is-on {
+  border-color: var(--gold);
+  background: linear-gradient(#ffe17a, #ffbf35);
+  color: var(--answer-ink);
+  box-shadow: 0 3px #bb741c;
+}
+.retry-note {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: #174466;
+  border: 1px solid var(--mint);
+  color: #e7fff7;
+  font-weight: 800;
+  font-size: 1.15rem;
+  text-align: center;
+}
 .model-box {
   padding: 10px 12px;
   border-radius: 14px;
@@ -296,6 +359,7 @@ button:focus-visible {
   display: grid;
   gap: 8px;
 }
+.parent-frame { color: var(--mint); }
 .parent-checks label {
   display: flex;
   align-items: center;

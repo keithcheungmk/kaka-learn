@@ -1045,7 +1045,7 @@ def check_family_storybook_entry() -> None:
 
 
 def check_four_panel_story() -> None:
-    """獨立四格講故事：中文入口、本機錄音、家長三勾領星，唔混入填空故事。"""
+    """獨立四格講故事：中文入口、本機錄音、小朋友自己檢查＋家長確認領星，唔混入填空故事。"""
     html = read("index.html")
     if 'id="btn-topics-four-panel"' not in html or "./four-panel-story.html" not in html:
         fail("four-panel", "中文主題頁要有「四格講故事」獨立入口")
@@ -1075,13 +1075,27 @@ def check_four_panel_story() -> None:
         fail("four-panel", "錄音唔可以上傳；唔准 fetch／XHR／FormData")
     if "webkitSpeechRecognition" in js or "SpeechRecognition" in js:
         fail("four-panel", "唔好做 ASR／轉文字")
-    if "2/5" in js or "五星" in js or "star-rating" in js:
-        fail("four-panel", "唔好做假 2/5 星評分")
+    if "2/5" in js or "五星" in js or "star-rating" in js or "半星" in js or "half-star" in js:
+        fail("four-panel", "唔好做假 2/5 星或半星評分")
     if "第一、然後、後來、最後，同我講個故事啦" not in data:
         fail("four-panel", "提示要係粵語「第一、然後、後來、最後，同我講個故事啦」")
-    for check in ("講齊四格？", "有然後／最後？", "敢講完？", "再錄一次"):
+    for check in (
+        "講齊四格？",
+        "有然後／最後？",
+        "敢講完？",
+        "再錄一次",
+        "我講齊喇",
+        "我講大聲",
+        "我講完喇",
+        "再講一次呀",
+        "小朋友話自己做到喇",
+    ):
         if check not in page:
             fail("four-panel", f"完成流程缺少「{check}」")
+    if "kid-panels" not in page or "kid-self" not in page:
+        fail("four-panel", "回放之後要有小朋友撳亮四格同自己檢查")
+    if "bothSidesAgree" not in js:
+        fail("four-panel", "領星要兩邊同意：小朋友自己檢查＋家長確認")
     if "錄音只留喺呢部機" not in page or "唔會上傳" not in page:
         fail("four-panel", "要有清楚嘅咪高峰／本機錄音私隱說明")
     if "rainbow-umbrella" not in data:
@@ -1100,7 +1114,7 @@ def check_four_panel_story() -> None:
     if "p03.webp" in data or "p05.webp" in data:
         fail("four-panel", "回家路上四格應係 p01／p02／p04／p06，唔好用 p03／p05")
     if "tryEarnStar" not in js or "markTopicPassed" not in js:
-        fail("four-panel", "家長三勾之後要用現有星星／passedKeys 完成")
+        fail("four-panel", "兩邊同意之後要用現有星星／passedKeys 完成")
     if "js/speech.js" not in page:
         fail("four-panel", "提示／示範要用 speech.js 粵語 TTS")
     if 'href="index.html#screen-topics"' not in page:
