@@ -105,9 +105,9 @@
 
 - 無登入、廣告、追蹤、寫字練習、故事模式、真實付款／AEON API。
 - UI 用繁體中文；主題係原創「**太空戰士學院**」（中文太空冒險；唔用迪士尼／彼思名稱、角色或素材）。動物主題仍保留鹿等字詞內容。
-- `family-storybook.html` 係獨立中文故事小隊入口；故事原創，只參考紅輯認字卡。每篇 6–8 格，`bookWords` 必須可追溯到列出的認字卡，場景延伸詞獨立放入 `extensionWords`，完成整篇只獎一粒星。故事頁只用粵語朗讀：裝置 `speechSynthesis` 讀當頁繁體文字，走 `js/speech.js` 嘅 zh-HK／yue 揀聲同 iOS 解鎖；唔放普通話掣，唔用認字牆 m4a，亦唔好把普通話寫入故事內容。閱讀頁頂欄顯示「地點：故事名」（例如「回家路上：雨停了，收起雨傘」）；「← 中文」閱讀時返書目，書目頁返中文主題。唔放星星進度 pill 同「← 故事書目」第二層返回。播放失敗時可由家長朗讀解鎖。故事頁將敘述及「角色說：『對白』」排成同一段、同一字級，不設獨立對白框；頁面不顯示每頁重點詞／參考讀本註記，來源詞語仍保留於 manifest 供遊戲與 provenance 使用。
-- `family-storybook-en.html` 係獨立英文家庭故事殼，平行中文故事小隊，**唔好**伸延 Little Fox `story-demo.js`／`assets/story-demo`。角色名 Karl／HeiHei／Froggie；每頁聽完再填 2 個英文重點詞；TTS 用 `js/speech.js` 嘅 `speakEnglishTerm`／en-US。Story Reading 系列揀選頁用同一風格第四張卡進入（Wacky Ricky 下面）；英文 hub 可保留平行入口。卡片只係入口，唔好把家庭故事寫入 Little Fox `SERIES` catalogue。重用中文場景圖 `assets/family-stories/scenes/`。閱讀頁頂欄 `place: story`（例如 `Going Home: The Rain Stops`）；「← English」閱讀時返 EN 書目，書目頁返 `#screen-english-hub`，唔跳去主題詞根。播放失敗時可由家長朗讀解鎖。完成整篇一粒星。
-- `four-panel-story.html` 係獨立「四格講故事」口語模式（Keith 2026-10-11 試用）；中文主題頁另開入口，**唔好**混入 `family-storybook` 填空頁。關卡牆用四格縮圖＋「點此兒開始」。MVP 第一本 `rainbow-umbrella`（回家路上）用現有 p01 落雨、p02 開傘、p04 水窪、p06 收傘返屋企。玩時固定四格＋粵語提示「第一、然後、後來、最後，同我講個故事啦」。`MediaRecorder`／`getUserMedia` 只留喺呢部機，唔上傳、唔 ASR、唔做假 2/5 星。停錄後先出家長示範故事；完成只靠三個家長勾（講齊四格？｜有然後／最後？｜敢講完？）再領現有一粒星；可「再錄一次」。
+- `family-storybook.html` 係獨立中文故事小隊入口；故事原創，只參考紅輯認字卡。每篇 6–8 格，`bookWords` 必須可追溯到列出的認字卡，場景延伸詞獨立放入 `extensionWords`，完成整篇只獎一粒星。故事頁只用粵語朗讀：裝置 `speechSynthesis` 讀當頁繁體文字，走 `js/speech.js` 嘅 zh-HK／yue 揀聲同 iOS 解鎖；唔放普通話掣，唔用認字牆 m4a，亦唔好把普通話寫入故事內容。閱讀頁頂欄顯示「地點：故事名」（例如「回家路上：雨停了，收起雨傘」）；「← 中文」閱讀時返書目，書目頁有 in-app history 就 `history.back()`，否則返中文主題。唔放星星進度 pill 同「← 故事書目」第二層返回。播放失敗時可由家長朗讀解鎖。故事頁將敘述及「角色說：『對白』」排成同一段、同一字級，不設獨立對白框；頁面不顯示每頁重點詞／參考讀本註記，來源詞語仍保留於 manifest 供遊戲與 provenance 使用。
+- `family-storybook-en.html` 係獨立英文家庭故事殼，平行中文故事小隊，**唔好**伸延 Little Fox `story-demo.js`／`assets/story-demo`。角色名 Karl／HeiHei／Froggie；每頁聽完再填 2 個英文重點詞；TTS 用 `js/speech.js` 嘅 `speakEnglishTerm`／en-US。Story Reading 系列揀選頁用同一風格第四張卡進入（Wacky Ricky 下面）；英文 hub 可保留平行入口。卡片只係入口，唔好把家庭故事寫入 Little Fox `SERIES` catalogue。重用中文場景圖 `assets/family-stories/scenes/`。閱讀頁頂欄 `place: story`（例如 `Going Home: The Rain Stops`）；「← English」閱讀時返 EN 書目，書目頁有 in-app history 就 `history.back()`（系列揀選或英文 hub），否則返 `#screen-story-series`，唔跳主頁或主題詞根。播放失敗時可由家長朗讀解鎖。完成整篇一粒星。
+- `four-panel-story.html` 係獨立「四格講故事」口語模式（Keith 2026-10-11 試用）；中文主題頁另開入口，**唔好**混入 `family-storybook` 填空頁。關卡牆用四格縮圖＋「點此兒開始」。MVP 第一本 `rainbow-umbrella`（回家路上）用現有 p01 落雨、p02 開傘、p04 水窪、p06 收傘返屋企。玩時固定四格＋粵語提示「第一、然後、後來、最後，同我講個故事啦」。`MediaRecorder`／`getUserMedia` 只留喺呢部機，唔上傳、唔 ASR、唔做假 2/5 星。停錄後先出家長示範故事；完成只靠三個家長勾（講齊四格？｜有然後／最後？｜敢講完？）再領現有一粒星；可「再錄一次」。玩時頂欄「← 關卡」返關卡牆；牆頂欄「← 中文」有 in-app history 就 `history.back()`，否則返中文主題，唔好跳主頁。
 - **SPACE RANGER PHONICS 已停用鹿主題**：所有 Phonics 畫面用 KAKA Ranger、翼形胸章、能量字母及共用深藍太空背景；唔好再引用 `phonics-hero.jpg`／`phonics-space-bg.jpg` 或新增鹿太空人。鹿只保留喺動物認字內容及未另行改版嘅數理模組。
 - **Phonics 字母唔擬人化**：字母只可以用統一 Ranger Sound Energy 節點顯示；唔好加眼、嘴、面孔、四肢或固定角色配色，亦唔好用 Numberblocks 式方塊角色。插圖只在直接解釋單字意思時使用。
 - **Phonics 能力數據要誠實分類**：認音（聽音揀單字母）、blending（由圖／意思解碼有 `letters` 嘅 CVC 字）、segmenting（砌出有 `letters` 嘅字）分開記錄；完整單字 TTS 揀圖、Sight words、撳錯字格位置唔可以當成其中一項能力。卡卡／禧禧資料必須分倉。
@@ -165,6 +165,13 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - Agent：修某個 app 嘅 bug 唔好順便改另外兩個；回歸時確認其他入口仍可進入。
 
 ## 改動時注意
+
+### 頂欄返回只准一層（2026-10-11）
+
+- 所有左上返回掣（「← 中文」「← English」「← 英文學習」等）只准返**上一層**，唔好跳去 `index.html` 主頁／揀小朋友。
+- 獨立頁（`family-storybook`、`family-storybook-en`、`four-panel-story`、`book-scene-demo`、`pth-demo`）有同站 history 就 `history.back()`；否則去即時父畫面 hash：`#screen-topics`、`#screen-story-series`、`#screen-english-hub`、`#screen-home`。
+- 閱讀頁保持 #136：中文／英文「←」返書目，唔跳主題根。四格玩時返關卡牆。故事 play 返系列書架，系列卡返系列揀選。
+- `index.html` 必須認上述 hash，並用 `kaka-return-screen` 還原離開前畫面。唔好用裸 `href="index.html"`。
 
 ### 普通話專用契約（2026-10-04）
 

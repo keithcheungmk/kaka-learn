@@ -143,7 +143,7 @@
     <!-- 砌句子 demo -->
     <section id="screen-sentence" class="screen" aria-label="砌句子遊戲">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-sentence">← 主頁</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-sentence">← 中文</button>
         <h1>砌句子</h1>
         <div class="progress-pill"><strong id="sentence-progress">1/12</strong></div>
       </div>
@@ -1076,6 +1076,7 @@
   <script src="./js/storage.js?v=20260904a"></script>
   <script src="./js/speech.js?v=20260818e"></script>
   <script src="./js/star-fx.js?v=20260831l"></script>
+  <script src="./js/nav-back.js?v=20261011-one-level"></script>
   <script src="./js/app.js?v=20261007-word-wall"></script>
   <script src="./js/phonics-words.js?v=20260905list"></script>
   <script src="./js/phonics-app.js?v=20260905list"></script>
@@ -1100,5 +1101,8 @@
   <script src="./js/math-strategies-game.js?v=1"></script>
   <script src="./js/math-app.js?v=20261001-life-skills"></script>
   <script src="./js/version-check.js?v=20260903a"></script>
+  <script>
+    window.addEventListener('load', () => window.KakaLearn?.applyLocationHash?.());
+  </script>
 </body>
 </html>

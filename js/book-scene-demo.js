@@ -619,6 +619,10 @@ function movePreviewPage(delta) {
   renderScene();
 }
 
+document.querySelector('.scene-back')?.addEventListener('click', (event) => {
+  event.preventDefault();
+  (window.KakaNav || { goBackOr: (href) => { location.assign(href); } }).goBackOr('index.html#screen-topics');
+});
 $('#scene-listen').addEventListener('click', listenCurrentSentence);
 $('#scene-submit').addEventListener('click', submitScene);
 $('#scene-start-quiz').addEventListener('click', startSentenceQuiz);

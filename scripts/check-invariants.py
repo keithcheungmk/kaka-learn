@@ -1023,9 +1023,11 @@ def check_family_storybook_entry() -> None:
     if 'id="back-library"' in story_html or "← 故事書目" in story_html:
         fail("family-storybook", "讀者頁唔好再放「故事書目」第二層返回")
     if 'id="back-chinese"' not in story_html or 'href="index.html#screen-topics"' not in story_html:
-        fail("family-storybook", "書目頁頂欄「← 中文」要返中文主題頁")
+        fail("family-storybook", "書目頁頂欄「← 中文」無 history 時要返中文主題頁")
     if "back-chinese" not in story_js or "leaveReader()" not in story_js:
         fail("family-storybook", "閱讀頁「← 中文」要返回故事書目，唔好跳去中文主題根")
+    if "goBackOr" not in story_js or "nav-back.js" not in story_html:
+        fail("family-storybook", "書目頁「← 中文」有 in-app history 要 history.back，唔好重載跳主頁")
     if 'id="brand-title"' not in story_html or "storyHeading(" not in story_js or "place}：${title}" not in story_js:
         fail("family-storybook", "閱讀頁頂欄要顯示「地點：故事名」")
     if "is-reading" not in story_css or "is-reading" not in story_js:
@@ -1101,6 +1103,10 @@ def check_four_panel_story() -> None:
         fail("four-panel", "家長三勾之後要用現有星星／passedKeys 完成")
     if "js/speech.js" not in page:
         fail("four-panel", "提示／示範要用 speech.js 粵語 TTS")
+    if 'href="index.html#screen-topics"' not in page:
+        fail("four-panel", "關卡牆「← 中文」無 history 時要返中文主題，唔好跳主頁")
+    if "leavePlay()" not in js or "goBackOr" not in js or "nav-back.js" not in page:
+        fail("four-panel", "玩時「← 關卡」返關卡牆；牆頂欄有 history 要返上一層")
     node = shutil.which("node")
     if node:
         result = subprocess.run([node, "scripts/test-four-panel-story.mjs"], capture_output=True, text=True)
@@ -1164,10 +1170,14 @@ def check_family_storybook_en_entry() -> None:
         fail("family-storybook-en", "故事頁不可顯示每頁來源註記或獨立對白框")
     if 'id="back-library"' in story_html or "← 故事書目" in story_html:
         fail("family-storybook-en", "讀者頁唔好再放「故事書目」第二層返回")
-    if 'id="back-english"' not in story_html or 'href="index.html#screen-english-hub"' not in story_html:
-        fail("family-storybook-en", "書目頁頂欄「← English」要返英文 hub，唔好跳去主題詞根")
+    if 'id="back-english"' not in story_html or 'href="index.html#screen-story-series"' not in story_html:
+        fail("family-storybook-en", "書目頁頂欄「← English」無 history 時要返故事系列揀選頁，唔好跳主頁或主題詞根")
+    if "screen-english-hub" in story_html.split('id="back-english"', 1)[-1][:120]:
+        fail("family-storybook-en", "書目頁「← English」唔好寫死英文 hub；系列卡要返系列揀選頁")
     if "back-english" not in story_js or "leaveReader()" not in story_js or "place}: ${title}" not in story_js:
         fail("family-storybook-en", "閱讀頁「← English」要返回 EN 書目，頂欄要顯示 place: story")
+    if "goBackOr" not in story_js or "nav-back.js" not in story_html:
+        fail("family-storybook-en", "書目頁「← English」有 in-app history 要 history.back")
     if "is-reading" not in story_js:
         fail("family-storybook-en", "閱讀頁要收起星星進度 pill，書目頁先顯示")
     if "js/speech.js" not in story_html or "speakEnglishTerm" not in story_js or "warmEnglishVoice" not in story_js:
@@ -1243,6 +1253,39 @@ def check_magic_marker_blanks() -> None:
         fail("magic-marker-blanks", (result.stderr or result.stdout)[-1200:] or "Magic Marker 填空檢查失敗")
 
 
+def check_one_level_back() -> None:
+    """頂欄返回只准返上一層：有 history 就 back，否則父畫面 hash；唔好重載跌主頁。"""
+    nav = read("js/nav-back.js")
+    app = read("js/app.js")
+    index = read("index.html")
+    if "function goBackOr" not in nav or "history.back()" not in nav:
+        fail("one-level-back", "js/nav-back.js 要提供 goBackOr／history.back")
+    if "applyLocationHash" not in app or "kaka-return-screen" not in app or "back_forward" not in app:
+        fail("one-level-back", "index 要記住離開前畫面，history.back 先還原，並認父畫面 hash")
+    for marker in ("screen-topics", "screen-english-hub", "screen-story-series", "screen-home"):
+        if marker not in app:
+            fail("one-level-back", f"hash／返回還原缺少 {marker}")
+    if "nav-back.js" not in index or "applyLocationHash" not in index:
+        fail("one-level-back", "index.html 要載入 nav-back 並喺 load 後套用 hash")
+    if "showScreen('home')" in read("js/app.js").split("btn-back-sentence")[1][:200]:
+        fail("one-level-back", "砌句子遊戲頂欄唔可以跳主頁")
+    scene = read("book-scene-demo.html")
+    if 'href="index.html#screen-topics"' not in scene or "nav-back.js" not in scene:
+        fail("one-level-back", "書頁砌句「← 中文」要返中文主題，唔好裸 index.html")
+    if re.search(r'class="scene-back"[^>]*href="index\.html"', scene):
+        fail("one-level-back", "書頁砌句頂欄唔可以用裸 index.html")
+    pth = read("pth-demo.html")
+    if 'href="index.html#screen-home"' not in pth or "nav-back.js" not in pth:
+        fail("one-level-back", "普通話頂欄無 history 時要返主頁畫面，唔好重載跌去揀小朋友")
+    node = shutil.which("node")
+    if node:
+        result = subprocess.run([node, "scripts/test-nav-back.mjs"], capture_output=True, text=True)
+        if result.returncode:
+            fail("one-level-back", (result.stdout or result.stderr or "一層返回測試失敗").strip()[:800])
+    else:
+        notes.append("冇 node，跳過一層返回單元測試")
+
+
 def check_chinese_mandarin() -> None:
     """中文詞語牆普通話：每個一般詞語要有預錄音，講法／manifest 唔可以過期。"""
     node = shutil.which("node")
@@ -1299,6 +1342,7 @@ CHECKS = [
     check_family_storybook_entry,
     check_four_panel_story,
     check_family_storybook_en_entry,
+    check_one_level_back,
     check_family_names,
     check_carter_family_blanks,
     check_wacky_ricky_blanks,

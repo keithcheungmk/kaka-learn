@@ -378,7 +378,8 @@ def walk(pg, url, shots: Path | None, tag: str):
     if "four-panel-story.html" not in four_href:
         raise RuntimeError("Chinese hub must open the independent four-panel story page")
     probe("中文・四格講故事入口")
-    pg.goto(url.rstrip("/") + "/four-panel-story.html", wait_until="domcontentloaded")
+    with pg.expect_navigation():
+        pg.click("#btn-topics-four-panel")
     pg.wait_for_selector("#level-grid [data-start='rainbow-umbrella']")
     if pg.is_visible("#play") and "hidden" not in (pg.get_attribute("#play", "class") or ""):
         raise RuntimeError("Four-panel mode must start on the level wall")
@@ -411,6 +412,13 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError("Record button touch target must be at least 44px")
     pg.click("#back-link")
     pg.wait_for_selector("#wall:not(.hidden) [data-start='rainbow-umbrella']")
+    with pg.expect_navigation():
+        pg.click("#back-link")
+    pg.wait_for_selector("#screen-topics.active #btn-topics-four-panel")
+    if pg.is_visible("#screen-profiles") and "active" in (pg.get_attribute("#screen-profiles", "class") or ""):
+        raise RuntimeError("Four-panel wall ← 中文 must not dump on the profile picker")
+    if pg.is_visible("#screen-home") and "active" in (pg.get_attribute("#screen-home", "class") or ""):
+        raise RuntimeError("Four-panel wall ← 中文 must return one level to Chinese topics, not home")
 
     return seen
 
