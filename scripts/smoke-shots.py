@@ -367,6 +367,51 @@ def walk(pg, url, shots: Path | None, tag: str):
     if pg.is_visible("#reader") and "hidden" not in (pg.get_attribute("#reader", "class") or ""):
         raise RuntimeError("← English must return to the EN family story library")
 
+    # Independent Cantonese four-panel speaking mode; do not mix into fill-in pages.
+    pg.goto(url, wait_until="domcontentloaded")
+    pg.wait_for_timeout(300)
+    pg.click("#btn-profile-kaka")
+    pg.wait_for_timeout(200)
+    pg.click("#btn-start-topics")
+    pg.wait_for_selector("#screen-topics.active #btn-topics-four-panel")
+    four_href = pg.get_attribute("#btn-topics-four-panel", "href") or ""
+    if "four-panel-story.html" not in four_href:
+        raise RuntimeError("Chinese hub must open the independent four-panel story page")
+    probe("中文・四格講故事入口")
+    pg.goto(url.rstrip("/") + "/four-panel-story.html", wait_until="domcontentloaded")
+    pg.wait_for_selector("#level-grid [data-start='rainbow-umbrella']")
+    if pg.is_visible("#play") and "hidden" not in (pg.get_attribute("#play", "class") or ""):
+        raise RuntimeError("Four-panel mode must start on the level wall")
+    thumbs = pg.evaluate("() => document.querySelectorAll('#level-grid .level-thumb img').length")
+    if thumbs != 4:
+        raise RuntimeError(f"Level card must show 4 numbered panels, got {thumbs}")
+    pg.click("[data-start='rainbow-umbrella']")
+    pg.wait_for_selector("#play:not(.hidden) #btn-record")
+    panels = pg.evaluate("() => document.querySelectorAll('#comic-board .comic-panel img').length")
+    if panels != 4:
+        raise RuntimeError(f"Play screen must show 4 comic panels, got {panels}")
+    privacy = pg.text_content("#privacy-note") or ""
+    if "唔會上傳" not in privacy or "呢部機" not in privacy:
+        raise RuntimeError("Play screen must show local-only microphone copy")
+    metrics = pg.evaluate(
+        """() => {
+          const d = document.documentElement;
+          return {
+            overflowX: d.scrollWidth - d.clientWidth,
+            overflowY: d.scrollHeight - d.clientHeight,
+            recordH: document.querySelector('#btn-record')?.getBoundingClientRect().height || 0,
+          };
+        }"""
+    )
+    if metrics["overflowX"] > 2:
+        raise RuntimeError(f"Four-panel play screen overflows horizontally by {metrics['overflowX']}px")
+    if pg.viewport_size["width"] > 700 and metrics["overflowY"] > 2:
+        raise RuntimeError(f"Four-panel iPad play screen must not page-scroll, overflowY={metrics['overflowY']}")
+    if metrics["recordH"] < 44:
+        raise RuntimeError("Record button touch target must be at least 44px")
+    pg.click("#back-link")
+    pg.wait_for_selector("#wall:not(.hidden) [data-start='rainbow-umbrella']")
+
     return seen
 
 
