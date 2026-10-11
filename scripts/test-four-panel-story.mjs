@@ -81,5 +81,6 @@ assert.doesNotMatch(js, /2\/5|五星|半星|half-star/);
 assert.match(css, /overflow-y:\s*auto/, '講故事側欄可以內部捲，等示範同家長勾唔被剪走');
 assert.match(css, /\.kid-panel-btn\.is-on/, '四格要撳得亮');
 assert.match(css, /\.kid-self-btn\.is-on/, '自己檢查掣要撳得亮');
+assert.match(css, /\.primary-btn:disabled/, '未兩邊同意時領星掣要睇得出未開');
 
 console.log('PASS: four-panel-story — 回家路上四格、本機錄音、小朋友自己檢查＋家長確認、獨立於填空故事。');

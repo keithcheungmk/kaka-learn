@@ -397,6 +397,11 @@ button:focus-visible {
   cursor: pointer;
   box-shadow: 0 4px #bb741c;
 }
+.primary-btn:disabled {
+  opacity: .42;
+  cursor: not-allowed;
+  box-shadow: none;
+}
 .ghost-btn {
   border: 1px solid #5079bb;
   background: #253c70;
