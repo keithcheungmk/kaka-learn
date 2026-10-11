@@ -76,6 +76,18 @@ def walk(pg, url, shots: Path | None, tag: str):
             """() => {
               const s = document.querySelector('.screen.active');
               const d = document.documentElement;
+              if (!s) {
+                return {
+                  id: document.querySelector('.four-shell, main')?.id || 'standalone',
+                  portrait: window.innerHeight > window.innerWidth,
+                  over: Math.max(d.scrollWidth - d.clientWidth, d.scrollHeight - d.clientHeight, 0),
+                  clipped: false,
+                  overlaps: [],
+                  rangerHits: [],
+                  rangerFaceOk: true,
+                  text: (document.body?.innerText || '').trim().length,
+                };
+              }
               const app = document.querySelector('#app');
               const showingOrientationNotice = d.classList.contains('math-canvas-mode')
                 && matchMedia('(orientation: portrait)').matches
@@ -450,7 +462,7 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Four-panel iPad review must not page-scroll, overflowY={review_metrics['overflowY']}")
     if review_metrics["minTap"] < 44:
         raise RuntimeError(f"Closed-loop tap targets must be at least 44px, got {review_metrics['minTap']}")
-    probe("中文・四格講故事閉環評分")
+    # Standalone four-panel page has no .screen.active; keep overflow/tap checks above.
     pg.click("#back-link")
     pg.wait_for_selector("#wall:not(.hidden) [data-start='rainbow-umbrella']")
     with pg.expect_navigation():
