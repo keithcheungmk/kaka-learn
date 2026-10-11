@@ -282,10 +282,12 @@
   $('btn-rerecord').addEventListener('click', rerecord);
   $('parent-checks').addEventListener('change', refreshCompleteButton);
   $('back-link').addEventListener('click', (event) => {
+    event.preventDefault();
     if (current) {
-      event.preventDefault();
       leavePlay();
+      return;
     }
+    (window.KakaNav || { goBackOr: (href) => { location.assign(href); } }).goBackOr('index.html#screen-topics');
   });
   window.addEventListener('pagehide', () => {
     stopRecording({ silent: true });

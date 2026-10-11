@@ -250,9 +250,12 @@
   function home() {
     invalidatePlayback();
     activeBookId = null;
-    if (window.KakaPhonics?.openEnglishHub) window.KakaPhonics.openEnglishHub();
-    else if (window.KakaLearn?.goHome) window.KakaLearn.goHome();
-    else show('home');
+    if (window.KakaPhonics?.openEnglishHub) {
+      window.KakaPhonics.openEnglishHub();
+      return;
+    }
+    $$('.screen').forEach((screen) => screen.classList.remove('active'));
+    $('#screen-english-hub')?.classList.add('active');
   }
   function activeBook() { return BOOKS.find((book) => book.id === activeBookId) || null; }
   function activeSeries() { return SERIES.find((series) => series.id === currentSeriesId) || SERIES[0]; }

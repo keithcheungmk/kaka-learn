@@ -17,7 +17,7 @@
     $('story-topbar').classList.toggle('is-reading', on);
     $('brand-title').textContent = on && current ? storyHeading(current) : libraryTitle;
     const back = $('back-english');
-    if (back) back.setAttribute('href', on ? '#library' : 'index.html#screen-english-hub');
+    if (back) back.setAttribute('href', on ? '#library' : 'index.html#screen-story-series');
   };
   const refreshStars = () => {
     $('star-total').textContent = safeRead(finishedKey).length;
@@ -77,9 +77,12 @@
   }
   $('next-story').addEventListener('click', leaveReader);
   $('back-english').addEventListener('click', event => {
-    if (!$('story-topbar').classList.contains('is-reading')) return;
     event.preventDefault();
-    leaveReader();
+    if ($('story-topbar').classList.contains('is-reading')) {
+      leaveReader();
+      return;
+    }
+    (window.KakaNav || { goBackOr: (href) => { location.assign(href); } }).goBackOr('index.html#screen-story-series');
   });
   function renderPage() {
     const page = current.pages[pageIndex], state = pageStates[pageIndex];

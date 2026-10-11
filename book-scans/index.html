@@ -130,7 +130,7 @@
     <p class="eyebrow">太空戰士學院</p>
     <h1>書本掃描</h1>
     <p class="note">呢啲係屋企自用嘅學習掃描，唔作外傳。</p>
-    <p class="back"><a href="../">← 返主頁</a></p>
+    <p class="back"><a id="back-home" href="../index.html#screen-home">← 返主頁</a></p>
     <ul class="books">
       <li>
         <a href="我的氣球呢.pdf" target="_blank" rel="noopener noreferrer">
@@ -209,5 +209,12 @@
       <li><a href="風跟我玩.pdf" target="_blank" rel="noopener noreferrer"><span class="cover" aria-hidden="true">🌬️</span><span class="meta"><span class="series">紅輯 ⑩</span><span class="title">風跟我玩</span></span><span class="action">開啟 PDF</span></a></li>
     </ul>
   </main>
+  <script src="../js/nav-back.js"></script>
+  <script>
+    document.getElementById('back-home')?.addEventListener('click', (event) => {
+      event.preventDefault();
+      (window.KakaNav || { goBackOr: (href) => { location.assign(href); } }).goBackOr('../index.html#screen-home');
+    });
+  </script>
 </body>
 </html>

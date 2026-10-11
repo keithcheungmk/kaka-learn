@@ -110,9 +110,12 @@
   }
   $('next-story').addEventListener('click', leaveReader);
   $('back-chinese').addEventListener('click', event => {
-    if (!$('story-topbar').classList.contains('is-reading')) return;
     event.preventDefault();
-    leaveReader();
+    if ($('story-topbar').classList.contains('is-reading')) {
+      leaveReader();
+      return;
+    }
+    (window.KakaNav || { goBackOr: (href) => { location.assign(href); } }).goBackOr('index.html#screen-topics');
   });
   function renderPage() {
     const page = current.pages[pageIndex], state = pageStates[pageIndex];

@@ -139,6 +139,94 @@ const BUILD_CAP = 10;
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
+const RETURN_SCREEN_KEY = 'kaka-return-screen';
+const RESTORE_SCREENS = new Set([
+  'screen-home',
+  'screen-topics',
+  'screen-english-hub',
+  'screen-story-series',
+  'screen-math-galaxy',
+  'screen-phonics-topics',
+  'screen-progress',
+]);
+const RESTORE_PARENT = {
+  'screen-story-demo': 'screen-story-series',
+  'screen-story-play': 'screen-story-series',
+  'screen-books': 'screen-topics',
+  'screen-learn': 'screen-topics',
+  'screen-play': 'screen-topics',
+  'screen-match': 'screen-topics',
+  'screen-build': 'screen-topics',
+  'screen-chain': 'screen-topics',
+  'screen-sentence': 'screen-topics',
+  'screen-sentence-landing': 'screen-topics',
+  'screen-chinese-connect': 'screen-topics',
+};
+let pendingReturnScreen = null;
+let bootNavApplied = false;
+
+function rememberActiveScreen() {
+  try {
+    const active = document.querySelector('#app .screen.active');
+    const raw = active?.id || '';
+    const id = RESTORE_SCREENS.has(raw) ? raw : (RESTORE_PARENT[raw] || '');
+    if (id) sessionStorage.setItem(RETURN_SCREEN_KEY, id);
+  } catch {
+    /* private mode / blocked storage */
+  }
+}
+
+function consumeReturnScreen() {
+  try {
+    const id = sessionStorage.getItem(RETURN_SCREEN_KEY);
+    sessionStorage.removeItem(RETURN_SCREEN_KEY);
+    return id;
+  } catch {
+    return null;
+  }
+}
+
+function applyScreenId(id) {
+  const openers = {
+    'screen-topics': () => openTopics(),
+    'screen-english-hub': () => window.KakaPhonics?.openEnglishHub?.(),
+    'screen-story-series': () => window.KakaStoryDemo?.open?.(),
+    'screen-story-demo': () => window.KakaStoryDemo?.open?.(),
+    'screen-home': () => showScreen('home'),
+    'screen-math-galaxy': () => window.KakaMath?.openGalaxy?.(),
+    'screen-phonics-topics': () => window.KakaPhonics?.openWordTopics?.() || window.KakaPhonics?.openEnglishHub?.(),
+    'screen-progress': () => openProgress(),
+    'screen-books': () => openTopics(),
+  };
+  const open = openers[id];
+  if (!open) return false;
+  if (!getActiveProfile()) {
+    pendingReturnScreen = id;
+    showScreen('profiles');
+    return true;
+  }
+  open();
+  return true;
+}
+
+function navigationType() {
+  try {
+    return performance.getEntriesByType('navigation')[0]?.type || '';
+  } catch {
+    return '';
+  }
+}
+
+function applyLocationHash() {
+  const hash = String(location.hash || '').replace(/^#/, '');
+  if (hash && applyScreenId(hash)) return true;
+  if (bootNavApplied) return false;
+  bootNavApplied = true;
+  if (navigationType() !== 'back_forward') return false;
+  const remembered = consumeReturnScreen();
+  return !!(remembered && applyScreenId(remembered));
+}
+
 function init() {
   try {
     // 先套用家長揀咗嘅聲，再暖機，唔係第一句會用返自動揀嗰把
@@ -159,6 +247,12 @@ function init() {
     refreshStarUI();
     refreshProfileChrome();
     closeAllModals();
+    window.addEventListener('pagehide', rememberActiveScreen);
+    window.addEventListener('hashchange', () => applyLocationHash());
+    window.addEventListener('pageshow', (event) => {
+      if (event.persisted) return;
+      applyLocationHash();
+    });
   } catch (err) {
     console.error('KakaLearn init failed', err);
   }
@@ -334,6 +428,7 @@ function bindHome() {
     startMatch: startMatchMode,
     startBuild: startBuildMode,
     goHome: () => showScreen('home'),
+    applyLocationHash,
     openTopics,
     playRoundTarget,
     playRoundCap,
@@ -1110,7 +1205,7 @@ function bindSentenceGame() {
   $('#btn-topics-chain')?.addEventListener('click', openWordChain);
   $('#btn-back-sentence-landing')?.addEventListener('click', () => showScreen('topics'));
   $('#btn-sentence-submit')?.addEventListener('click', submitSentence);
-  $('#btn-back-sentence')?.addEventListener('click', () => showScreen('home'));
+  $('#btn-back-sentence')?.addEventListener('click', () => showScreen('topics'));
   $('#btn-sentence-restart')?.addEventListener('click', openSentenceGame);
 }
 
@@ -2387,6 +2482,11 @@ function selectProfile(id) {
   KakaSpeech.setPreferredVoiceURI?.(state.voiceURI || null);
   refreshProfileChrome();
   refreshStarUI();
+  if (pendingReturnScreen) {
+    const next = pendingReturnScreen;
+    pendingReturnScreen = null;
+    if (applyScreenId(next)) return;
+  }
   showScreen('home');
 }
 

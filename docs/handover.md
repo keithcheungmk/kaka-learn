@@ -36,6 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| 頂欄返回只准一層 | Cursor Chief Lead | `js/nav-back.js`, `js/app.js`, `index.html`, `family-storybook.html`, `family-storybook-en.html`, `four-panel-story.html`, `book-scene-demo.html`, `pth-demo.html`, `scripts/check-invariants.py`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | Keith：所有 ← 掣只返上一層，唔跳主頁；保留 #136 閱讀返書目；四格／EN 家庭 chrome 一致；Draft PR，唔自 merge |
 | 四格講故事 MVP（回家路上） | Cursor Chief Lead（Chinese 範圍） | `four-panel-story.html`, `js/four-panel-story.js`, `css/four-panel-story.css`, `data/four-panel-stories.js`, `index.html`（中文主題入口）, `css/styles.css`（入口卡）, `scripts/check-invariants.py`, `scripts/smoke-shots.py`, `scripts/test-four-panel-story.mjs`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | Keith 批准試用：獨立講故事模式，唔混入 family-storybook 填空；本機錄音；家長三勾先領星；Draft PR，唔自 merge |
 | 英文系列揀選頁清走 Little Fox 標籤 | Cursor Chief Lead（English 範圍） | `index.html`, `scripts/check-invariants.py`, `scripts/test-story-mission.mjs`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | #138 squash-merge 漏咗標籤移除；清走「選擇故事系列／Little Fox 系列／LITTLE FOX eyebrow」；保留返回、標題、幣 pill、四張卡；唔自 merge |
 | 故事閱讀頁「← 中文」返回書目 | Cursor Chief Lead（Chinese 範圍） | `family-storybook.html`, `js/family-storybook.js`, `scripts/check-invariants.py`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-11 | Keith：閱讀頁左上「← 中文」返 #library，唔跳中文主題根；唔自 merge |
@@ -110,6 +111,12 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-10-11 · Cursor Chief Lead（頂欄返回只准一層）
+
+- Keith：所有左上 ← 掣只返上一層，唔好跳主頁／揀小朋友。保留 #136 閱讀「← 中文／English」返書目。
+- 獨立頁用 `js/nav-back.js`：有同站 history 就 `history.back()`，否則父畫面 hash。`index.html` 認 `#screen-topics`／`#screen-story-series`／`#screen-english-hub`／`#screen-home`，`history.back` 用 `kaka-return-screen` 還原離開前畫面。
+- 四格：玩→關卡牆，牆→中文主題。EN 家庭書目 fallback 改系列揀選頁。書頁砌句／普通話／掃描書架同樣一層。砌句子遊戲頂欄改返中文主題。Draft PR，唔自 merge。
 
 ### 2026-10-11 · Cursor Chief Lead（四格講故事 MVP）
 
