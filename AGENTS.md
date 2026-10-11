@@ -16,6 +16,7 @@
 - 主頁只放一個「英文學習・English Learning」入口；入面分為「故事閱讀／Story Reading」、「主題詞語／Topic Words」及「字母音・拼讀／Phonics」三條路線。
 - 「Topic Words」係完整詞語認讀，唔統稱做 Sight Words；Sight Words 只用於真正高頻功能字內容。詞語認讀進度同 Phonics 解碼能力分開記錄。
 - 故事系列（Carter Family、Magic Marker、Wacky Ricky 及日後 Little Fox）共用 Story Reading 入口；唔為同類故事再開主頁捷徑。Space Patrol／Little Fox Pilot 放喺共用入口穩定後第二階段接入。
+- 英文家庭故事（Karl & HeiHei／卡卡和禧禧）喺 Story Reading 系列揀選頁排喺 Wacky Ricky **下面**，同一風格第四張卡，連去 `family-storybook-en.html`。唔好只收喺英文 hub。Little Fox 三張卡同 catalogue 唔改、唔當第四個 Little Fox 系列。
 - Carter Family、Magic Marker、Wacky Ricky 書架若該集已完成，未撳入去都要顯示 ★ 進度星（封面角標＋標題）；完成以 `kaka-learn-v1` 該小朋友嘅 `passedKeys` 判斷（`story|{bookId}` 或每一頁 `story|{bookId}|page-{n}`）。星只係進度，唔另獎 AEON 幣。
 - Wacky Ricky／Little Fox 填空只可用內容詞（名詞／動詞／形容詞）；硬性拒絕英文 STOP 同系列人名／稱謂（Ricky、Rachel、Brenda、Mom、Dad、Mrs 等，對齊 Carter `STOP_WORDS`／`FAMILY_NAMES`）。約 20–30% 頁用自然兩詞空格（adj+noun／color+noun／verb+object）；其餘每頁一詞，優先最短常見名詞／動詞／形容詞。**每頁都要有填空**，唔設 skip／listen-only／只聽頁。冇高質唯一詞就揀最簡單合格內容詞（可放寬重複、len≥3，必要時 destutter 或 `go`／`okay`／`sorry` 等最後手段）；人名只喺整頁再無其他字母詞先用。畫面只空最後一次出現，避免重複詞變兩個格。
 - Carter Family 填空用同一套內容詞規則（STOP + Harry／Emmy／Oliver／Rover／Judy／Mom／Dad／Aunt／Grandpa 等稱謂）；約 20–30% 兩詞、其餘一詞、每頁都有格。重產空白唔好郁音檔／頁圖。
@@ -105,7 +106,7 @@
 - 無登入、廣告、追蹤、寫字練習、故事模式、真實付款／AEON API。
 - UI 用繁體中文；主題係原創「**太空戰士學院**」（中文太空冒險；唔用迪士尼／彼思名稱、角色或素材）。動物主題仍保留鹿等字詞內容。
 - `family-storybook.html` 係獨立中文故事小隊入口；故事原創，只參考紅輯認字卡。每篇 6–8 格，`bookWords` 必須可追溯到列出的認字卡，場景延伸詞獨立放入 `extensionWords`，完成整篇只獎一粒星。故事頁只用粵語朗讀：裝置 `speechSynthesis` 讀當頁繁體文字，走 `js/speech.js` 嘅 zh-HK／yue 揀聲同 iOS 解鎖；唔放普通話掣，唔用認字牆 m4a，亦唔好把普通話寫入故事內容。閱讀頁頂欄顯示「地點：故事名」（例如「回家路上：雨停了，收起雨傘」）；「← 中文」閱讀時返書目，書目頁返中文主題。唔放星星進度 pill 同「← 故事書目」第二層返回。播放失敗時可由家長朗讀解鎖。故事頁將敘述及「角色說：『對白』」排成同一段、同一字級，不設獨立對白框；頁面不顯示每頁重點詞／參考讀本註記，來源詞語仍保留於 manifest 供遊戲與 provenance 使用。
-- `family-storybook-en.html` 係獨立英文家庭故事殼，平行中文故事小隊，**唔好**伸延 Little Fox `story-demo.js`／`assets/story-demo`。角色名 Karl／HeiHei／Froggie；每頁聽完再填 2 個英文重點詞；TTS 用 `js/speech.js` 嘅 `speakEnglishTerm`／en-US。英文 hub 放獨立入口，唔嵌喺 Little Fox 系列。重用中文場景圖 `assets/family-stories/scenes/`。閱讀頁頂欄 `place: story`（例如 `Going Home: The Rain Stops`）；「← English」閱讀時返 EN 書目，書目頁返 `#screen-english-hub`，唔跳去主題詞根。播放失敗時可由家長朗讀解鎖。完成整篇一粒星。
+- `family-storybook-en.html` 係獨立英文家庭故事殼，平行中文故事小隊，**唔好**伸延 Little Fox `story-demo.js`／`assets/story-demo`。角色名 Karl／HeiHei／Froggie；每頁聽完再填 2 個英文重點詞；TTS 用 `js/speech.js` 嘅 `speakEnglishTerm`／en-US。Story Reading 系列揀選頁用同一風格第四張卡進入（Wacky Ricky 下面）；英文 hub 可保留平行入口。卡片只係入口，唔好把家庭故事寫入 Little Fox `SERIES` catalogue。重用中文場景圖 `assets/family-stories/scenes/`。閱讀頁頂欄 `place: story`（例如 `Going Home: The Rain Stops`）；「← English」閱讀時返 EN 書目，書目頁返 `#screen-english-hub`，唔跳去主題詞根。播放失敗時可由家長朗讀解鎖。完成整篇一粒星。
 - **SPACE RANGER PHONICS 已停用鹿主題**：所有 Phonics 畫面用 KAKA Ranger、翼形胸章、能量字母及共用深藍太空背景；唔好再引用 `phonics-hero.jpg`／`phonics-space-bg.jpg` 或新增鹿太空人。鹿只保留喺動物認字內容及未另行改版嘅數理模組。
 - **Phonics 字母唔擬人化**：字母只可以用統一 Ranger Sound Energy 節點顯示；唔好加眼、嘴、面孔、四肢或固定角色配色，亦唔好用 Numberblocks 式方塊角色。插圖只在直接解釋單字意思時使用。
 - **Phonics 能力數據要誠實分類**：認音（聽音揀單字母）、blending（由圖／意思解碼有 `letters` 嘅 CVC 字）、segmenting（砌出有 `letters` 嘅字）分開記錄；完整單字 TTS 揀圖、Sight words、撳錯字格位置唔可以當成其中一項能力。卡卡／禧禧資料必須分倉。

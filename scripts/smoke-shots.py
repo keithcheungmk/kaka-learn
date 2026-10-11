@@ -281,6 +281,15 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.click("#btn-start-english")
     pg.click("#btn-english-story")
     pg.wait_for_selector("#screen-story-series.active [data-series-id='magic-marker']")
+    pg.wait_for_selector("#screen-story-series.active [data-series-id='family-stories-en']")
+    series_ids = pg.evaluate(
+        "() => [...document.querySelectorAll('#story-series-grid [data-series-id]')].map((el) => el.dataset.seriesId)"
+    )
+    if series_ids != ["carter", "magic-marker", "wacky-ricky", "family-stories-en"]:
+        raise RuntimeError(f"Story series list must keep Little Fox cards then family stories, got {series_ids!r}")
+    family_href = pg.get_attribute("#screen-story-series.active [data-series-id='family-stories-en']", "href") or ""
+    if "family-storybook-en.html" not in family_href:
+        raise RuntimeError("Family stories series card must open family-storybook-en.html")
     probe("英文故事書系列")
     pg.click("#btn-back-story-series")
     pg.wait_for_selector("#screen-english-hub.active")

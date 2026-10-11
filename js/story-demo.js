@@ -103,6 +103,15 @@
     { id: 'magic-marker', title: 'Magic Marker', label: 'MAGIC MARKER', range: 'MM001–MM073', image: MAGIC_MARKER_BOOKS[0]?.cover || MAGIC_MARKER_BOOKS[0]?.pages[0]?.image, description: 'Maxie、Taco、Alex 和 Sue 的故事', books: MAGIC_MARKER_BOOKS },
     { id: 'wacky-ricky', title: 'Wacky Ricky', label: 'WACKY RICKY', range: 'WR001–WR100', image: WACKY_RICKY_BOOKS[0]?.cover || WACKY_RICKY_BOOKS[0]?.pages[0]?.image, description: 'Ricky 和朋友們的故事 · 錄音仍待聽審', books: WACKY_RICKY_BOOKS },
   ];
+  // Independent English family-story shell — same visual card, not a Little Fox catalogue.
+  const FAMILY_STORIES_CARD = {
+    id: 'family-stories-en',
+    href: './family-storybook-en.html',
+    title: 'Karl &amp; HeiHei Family Stories',
+    image: './assets/family-stories/scenes/rainbow-umbrella-p01.webp',
+    meta: '2 books',
+    description: 'Listen, read, fill missing words — family scenes with Karl, HeiHei, Froggie',
+  };
   let currentSeriesId = 'carter';
   let BOOKS = CARTER_BOOKS;
 
@@ -254,12 +263,18 @@
   function renderSeriesChooser() {
     const grid = $('#story-series-grid');
     if (!grid) return;
-    grid.innerHTML = SERIES.map((series) => `<button type="button" class="story-activity-card story-activity-card--read" data-series-id="${series.id}">
+    const littleFoxCards = SERIES.map((series) => `<button type="button" class="story-activity-card story-activity-card--read" data-series-id="${series.id}">
       <img class="story-activity-image" src="${series.image || ''}" alt="" loading="lazy" decoding="async">
       <strong>${series.title}</strong><small>${series.books.length} books · ${series.range}</small>
       <span class="story-activity-description">${series.description}</span><span class="story-activity-status">Open stories →</span>
     </button>`).join('');
-    $$('[data-series-id]', grid).forEach((button) => button.addEventListener('click', () => openHub(button.dataset.seriesId)));
+    const familyCard = `<a class="story-activity-card story-activity-card--read" data-series-id="${FAMILY_STORIES_CARD.id}" href="${FAMILY_STORIES_CARD.href}">
+      <img class="story-activity-image" src="${FAMILY_STORIES_CARD.image}" alt="" loading="lazy" decoding="async">
+      <strong>${FAMILY_STORIES_CARD.title}</strong><small>${FAMILY_STORIES_CARD.meta}</small>
+      <span class="story-activity-description">${FAMILY_STORIES_CARD.description}</span><span class="story-activity-status">Open stories →</span>
+    </a>`;
+    grid.innerHTML = littleFoxCards + familyCard;
+    $$('button[data-series-id]', grid).forEach((button) => button.addEventListener('click', () => openHub(button.dataset.seriesId)));
   }
 
   function renderHub() {
