@@ -281,6 +281,12 @@ assert.match(index, /id="btn-english-story"/, 'English hub should route to Story
 assert.match(index, /id="btn-english-words"/, 'English hub should route to Topic Words');
 assert.match(index, /id="btn-english-phonics"/, 'English hub should route to Phonics');
 assert.match(index, /id="screen-story-series"/, 'Little Fox entry should expose a collection chooser');
+const seriesScreen = index.match(/id="screen-story-series"[\s\S]*?id="screen-story-demo"/)?.[0] || '';
+assert.match(seriesScreen, /← 英文學習/, 'Series picker should keep the English hub back button');
+assert.match(seriesScreen, /<h1>英文故事書<\/h1>/, 'Series picker should keep the 英文故事書 title');
+assert.doesNotMatch(seriesScreen, /選擇故事系列/, 'Series picker should not show 選擇故事系列');
+assert.doesNotMatch(seriesScreen, /Little Fox 系列/, 'Series picker should not show the Little Fox 系列 pill');
+assert.doesNotMatch(seriesScreen, /LITTLE FOX/, 'Series picker should not shout the Little Fox eyebrow');
 assert.match(source, /window\.KakaPhonics\?\.openEnglishHub/, 'Story series back should return to the shared English hub');
 const seriesBlock = source.match(/const SERIES = \[([\s\S]*?)\];/)?.[1] || '';
 assert.match(seriesBlock, /id: 'carter'/);
