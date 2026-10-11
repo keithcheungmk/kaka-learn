@@ -28,6 +28,8 @@
   const setReadingChrome = on => {
     $('story-topbar').classList.toggle('is-reading', on);
     $('brand-title').textContent = on && current ? storyHeading(current) : libraryTitle;
+    const back = $('back-chinese');
+    if (back) back.setAttribute('href', on ? '#library' : 'index.html#screen-topics');
   };
   const refreshStars = () => {
     $('star-total').textContent = safeRead(finishedKey).length;
@@ -107,6 +109,11 @@
     window.scrollTo({top:0,behavior:'smooth'});
   }
   $('next-story').addEventListener('click', leaveReader);
+  $('back-chinese').addEventListener('click', event => {
+    if (!$('story-topbar').classList.contains('is-reading')) return;
+    event.preventDefault();
+    leaveReader();
+  });
   function renderPage() {
     const page = current.pages[pageIndex], state = pageStates[pageIndex];
     stopSpeech();
