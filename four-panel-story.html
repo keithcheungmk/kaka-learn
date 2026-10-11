@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
+  <meta name="theme-color" content="#101c49">
+  <title>四格講故事｜卡卡學習</title>
+  <link rel="stylesheet" href="css/four-panel-story.css?v=four-panel">
+</head>
+<body>
+  <main class="four-shell">
+    <header class="topbar">
+      <a id="back-link" class="back-link" href="index.html#screen-topics">← 中文</a>
+      <div class="brand">
+        <span id="brand-kicker">講故事・粵語</span>
+        <h1 id="brand-title">四格講故事</h1>
+      </div>
+      <div id="star-pill" class="star-pill is-empty" aria-live="polite">☆</div>
+    </header>
+
+    <section id="wall" class="view" aria-labelledby="wall-heading">
+      <div class="wall-intro">
+        <h2 id="wall-heading">揀一個漫畫，講個故事</h2>
+        <p>睇四幅圖，用「第一、然後、後來、最後」同我講。錄音只留喺呢部機。</p>
+      </div>
+      <div id="level-grid" class="level-grid"></div>
+    </section>
+
+    <section id="play" class="view play-view hidden" aria-labelledby="brand-title">
+      <div class="play-spread">
+        <div id="comic-board" class="comic-board" aria-label="四格漫畫"></div>
+        <aside class="talk-panel" aria-label="講故事">
+          <div class="prompt-row">
+            <p id="prompt-text" class="prompt-text"></p>
+            <button type="button" class="icon-btn" id="btn-prompt" aria-label="再聽提示">🔊 提示</button>
+          </div>
+          <button type="button" class="record-btn" id="btn-record">🎤 開始錄音</button>
+          <p class="privacy-note" id="privacy-note">錄音只留喺呢部機，唔會上傳，亦唔會轉成文字。第一次用要准許咪高峰。</p>
+          <p class="status-note" id="status-note" role="status" aria-live="polite"></p>
+          <div id="playback" class="playback hidden">
+            <p>聽返自己講：</p>
+            <audio id="playback-audio" controls playsinline></audio>
+          </div>
+          <div id="model-box" class="model-box hidden">
+            <h3>示範故事（家長睇）</h3>
+            <p id="model-text"></p>
+            <button type="button" class="icon-btn" id="btn-model">🔊 聽示範</button>
+          </div>
+          <div id="parent-checks" class="parent-checks hidden">
+            <label><input type="checkbox" data-check="four">講齊四格？</label>
+            <label><input type="checkbox" data-check="then">有然後／最後？</label>
+            <label><input type="checkbox" data-check="brave">敢講完？</label>
+          </div>
+          <div id="play-actions" class="play-actions hidden">
+            <button type="button" class="primary-btn" id="btn-complete" disabled>完成・領星</button>
+            <button type="button" class="ghost-btn" id="btn-rerecord">再錄一次</button>
+          </div>
+          <div id="completion" class="completion hidden" aria-live="polite">
+            <div class="completion-star">⭐</div>
+            <h3>講完喇！</h3>
+            <p>呢個故事已經完成。想再練可以再錄一次。</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+  <script src="js/no-zoom.js?v=four-panel"></script>
+  <script src="js/storage.js?v=four-panel"></script>
+  <script src="js/speech.js?v=four-panel"></script>
+  <script src="data/four-panel-stories.js?v=four-panel"></script>
+  <script src="js/four-panel-story.js?v=four-panel"></script>
+</body>
+</html>

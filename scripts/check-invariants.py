@@ -975,7 +975,12 @@ def check_book_scans_shelf() -> None:
 
 def check_family_names() -> None:
     """故事角色正式名：虹姑姑、蛙蛙、耀叔叔（Keith 2026-10-08）。"""
-    for path in ("data/family-stories/manifest.js", "js/family-storybook.js"):
+    for path in (
+        "data/family-stories/manifest.js",
+        "js/family-storybook.js",
+        "data/four-panel-stories.js",
+        "js/four-panel-story.js",
+    ):
         if not Path(path).is_file():
             continue
         src = read(path)
@@ -1035,6 +1040,74 @@ def check_family_storybook_entry() -> None:
         fail("family-storybook", "故事頁唔好再留普通話朗讀路徑")
     if "guardian-unlock" not in story_html or "guardian-unlock" not in story_js:
         fail("family-storybook", "播唔到語音時要保留家長朗讀後備")
+
+
+def check_four_panel_story() -> None:
+    """獨立四格講故事：中文入口、本機錄音、家長三勾領星，唔混入填空故事。"""
+    html = read("index.html")
+    if 'id="btn-topics-four-panel"' not in html or "./four-panel-story.html" not in html:
+        fail("four-panel", "中文主題頁要有「四格講故事」獨立入口")
+    if "四格講故事" not in html:
+        fail("four-panel", "中文主題頁入口要寫「四格講故事」")
+    for path in (
+        "four-panel-story.html",
+        "css/four-panel-story.css",
+        "js/four-panel-story.js",
+        "data/four-panel-stories.js",
+        "scripts/test-four-panel-story.mjs",
+    ):
+        if not Path(path).is_file():
+            fail("four-panel", f"缺少獨立四格講故事檔案：{path}")
+    page = read("four-panel-story.html")
+    js = read("js/four-panel-story.js")
+    data = read("data/four-panel-stories.js")
+    story_js = read("js/family-storybook.js")
+    story_html = read("family-storybook.html")
+    if "MediaRecorder" in story_js or "getUserMedia" in story_js:
+        fail("four-panel", "family-storybook 填空頁唔好混入錄音講故事")
+    if "四格講故事" in story_html or "btn-record" in story_html:
+        fail("four-panel", "family-storybook.html 唔好加四格講故事畫面")
+    if "MediaRecorder" not in js or "getUserMedia" not in js:
+        fail("four-panel", "四格講故事要用本機 MediaRecorder／getUserMedia")
+    if "fetch(" in js or "XMLHttpRequest" in js or "FormData" in js:
+        fail("four-panel", "錄音唔可以上傳；唔准 fetch／XHR／FormData")
+    if "webkitSpeechRecognition" in js or "SpeechRecognition" in js:
+        fail("four-panel", "唔好做 ASR／轉文字")
+    if "2/5" in js or "五星" in js or "star-rating" in js:
+        fail("four-panel", "唔好做假 2/5 星評分")
+    if "第一、然後、後來、最後，同我講個故事啦" not in data:
+        fail("four-panel", "提示要係粵語「第一、然後、後來、最後，同我講個故事啦」")
+    for check in ("講齊四格？", "有然後／最後？", "敢講完？", "再錄一次"):
+        if check not in page:
+            fail("four-panel", f"完成流程缺少「{check}」")
+    if "錄音只留喺呢部機" not in page or "唔會上傳" not in page:
+        fail("four-panel", "要有清楚嘅咪高峰／本機錄音私隱說明")
+    if "rainbow-umbrella" not in data:
+        fail("four-panel", "MVP 第一本要係 rainbow-umbrella／回家路上")
+    for panel in (
+        "rainbow-umbrella-p01.webp",
+        "rainbow-umbrella-p02.webp",
+        "rainbow-umbrella-p04.webp",
+        "rainbow-umbrella-p06.webp",
+    ):
+        rel = f"assets/family-stories/scenes/{panel}"
+        if rel not in data:
+            fail("four-panel", f"回家路上四格要引用 {rel}")
+        if not Path(rel).is_file():
+            fail("four-panel", f"缺少四格圖：{rel}")
+    if "p03.webp" in data or "p05.webp" in data:
+        fail("four-panel", "回家路上四格應係 p01／p02／p04／p06，唔好用 p03／p05")
+    if "tryEarnStar" not in js or "markTopicPassed" not in js:
+        fail("four-panel", "家長三勾之後要用現有星星／passedKeys 完成")
+    if "js/speech.js" not in page:
+        fail("four-panel", "提示／示範要用 speech.js 粵語 TTS")
+    node = shutil.which("node")
+    if node:
+        result = subprocess.run([node, "scripts/test-four-panel-story.mjs"], capture_output=True, text=True)
+        if result.returncode:
+            fail("four-panel", (result.stdout or result.stderr or "四格講故事檢查失敗").strip()[:800])
+    else:
+        notes.append("冇 node，跳過四格講故事單元測試")
 
 
 def check_family_storybook_en_entry() -> None:
@@ -1224,6 +1297,7 @@ CHECKS = [
     check_family_smoke_devices,
     check_book_scans_shelf,
     check_family_storybook_entry,
+    check_four_panel_story,
     check_family_storybook_en_entry,
     check_family_names,
     check_carter_family_blanks,
