@@ -9,10 +9,14 @@
 </head>
 <body>
   <main class="storybook-shell">
-    <header class="topbar">
+    <header class="topbar" id="story-topbar">
       <a class="back-link" href="index.html#screen-topics">← 中文</a>
-      <div class="brand"><span>故事閱讀・詞語遊戲</span><h1>卡卡和禧禧一齊玩</h1></div>
-      <div class="star-total" aria-live="polite">⭐ <strong id="star-total">0</strong> / <span id="story-total">11</span></div>
+      <div class="brand">
+        <span id="brand-kicker">故事閱讀・詞語遊戲</span>
+        <h1 id="brand-title">卡卡和禧禧一齊玩</h1>
+      </div>
+      <div class="star-total" id="star-pill" aria-live="polite">⭐ <strong id="star-total">0</strong> / <span id="story-total">11</span></div>
+      <div id="page-count" class="page-count">第 1 / 6 頁</div>
     </header>
     <section id="library" class="view" aria-labelledby="library-heading">
       <div class="intro">
@@ -27,19 +31,7 @@
         <div id="cast-grid" class="cast-grid"></div>
       </section>
     </section>
-    <section id="reader" class="view hidden" aria-labelledby="story-title">
-      <div class="reader-head">
-        <button id="back-library" class="back-link" type="button">← 故事書目</button>
-        <div>
-          <p id="story-place" class="eyebrow"></p>
-          <h2 id="story-title"></h2>
-          <div class="chinese-voice-toggle" id="story-voice-toggle" role="group" aria-label="揀讀音">
-            <button type="button" class="chinese-voice-btn is-on" data-story-voice="yue" aria-pressed="true">粵語</button>
-            <button type="button" class="chinese-voice-btn" data-story-voice="cmn" aria-pressed="false">普通話</button>
-          </div>
-        </div>
-        <div id="page-count" class="page-count">第 1 / 6 頁</div>
-      </div>
+    <section id="reader" class="view hidden" aria-labelledby="brand-title">
       <div class="progress-track"><span id="page-progress"></span></div>
       <section class="lesson-spread" aria-label="故事頁和詞語任務">
         <article class="book-page">
