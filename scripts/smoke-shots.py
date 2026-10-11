@@ -339,6 +339,25 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.wait_for_selector("#btn-story-next", timeout=15000)
     probe("MM073 答對與星星")
 
+    # English family stories are a separate shell, parallel to Little Fox.
+    pg.goto(url.rstrip("/") + "/family-storybook-en.html", wait_until="domcontentloaded")
+    pg.wait_for_selector("#story-grid [data-story='rainbow-umbrella']")
+    pg.wait_for_selector("#story-grid [data-story='park-kite']")
+    if pg.is_visible("#reader"):
+        raise RuntimeError("EN family story library must start on the picker, not a reader")
+    pg.click("#story-grid [data-story='rainbow-umbrella']")
+    pg.wait_for_selector("#reader:not(.hidden)")
+    heading = pg.text_content("#brand-title") or ""
+    if "Going Home: The Rain Stops" not in heading:
+        raise RuntimeError(f"EN family story title must be place: story, got {heading!r}")
+    back_href = pg.get_attribute("#back-english", "href") or ""
+    if "screen-english-hub" in back_href and "family-storybook-en" not in back_href:
+        raise RuntimeError("Reading-page ← English must stay on the EN family library, not the English hub")
+    pg.click("#back-english")
+    pg.wait_for_selector("#library:not(.hidden) #story-grid [data-story='park-kite']")
+    if pg.is_visible("#reader") and "hidden" not in (pg.get_attribute("#reader", "class") or ""):
+        raise RuntimeError("← English must return to the EN family story library")
+
     return seen
 
 

@@ -1037,6 +1037,63 @@ def check_family_storybook_entry() -> None:
         fail("family-storybook", "播唔到語音時要保留家長朗讀後備")
 
 
+def check_family_storybook_en_entry() -> None:
+    """獨立英文家庭故事殼：平行中文故事小隊，唔伸延 Little Fox。"""
+    html = read("index.html")
+    if 'id="btn-english-family-stories"' not in html or './family-storybook-en.html' not in html:
+        fail("family-storybook-en", "英文 hub 要有家庭故事入口，平行 Little Fox")
+    hub = html.split('id="screen-english-hub"', 1)[1].split('id="screen-phonics-topics"', 1)[0] if 'id="screen-english-hub"' in html else ""
+    if 'id="btn-english-family-stories"' not in hub:
+        fail("family-storybook-en", "英文家庭故事入口要放喺英文 hub，唔好嵌喺 Little Fox 系列頁")
+    if 'id="screen-story-series"' in hub and hub.find('id="btn-english-family-stories"') > hub.find('id="screen-story-series"'):
+        fail("family-storybook-en", "英文家庭故事入口唔可以放喺 Little Fox 系列畫面入面")
+    for path in (
+        "family-storybook-en.html",
+        "css/family-storybook-en.css",
+        "js/family-storybook-en.js",
+        "data/family-stories/manifest-en.js",
+        "scripts/check-family-stories-en.py",
+    ):
+        if not Path(path).is_file():
+            fail("family-storybook-en", f"缺少獨立英文故事書檔案：{path}")
+    story_html = read("family-storybook-en.html")
+    story_js = read("js/family-storybook-en.js")
+    manifest = read("data/family-stories/manifest-en.js")
+    if "story-demo.js" in story_html or "story-demo.js" in story_js or "KakaStoryDemo" in story_js:
+        fail("family-storybook-en", "英文家庭故事唔可以伸延 Little Fox story-demo.js")
+    if "FAMILY_STORIES_EN" not in manifest or "rainbow-umbrella" not in manifest or "park-kite" not in manifest:
+        fail("family-storybook-en", "英文 manifest 要有 rainbow-umbrella 同 park-kite")
+    if "HeiHei" not in manifest or "Karl" not in manifest or "Froggie" not in manifest:
+        fail("family-storybook-en", "英文故事角色名要係 Karl、HeiHei、Froggie")
+    if any(bad in manifest for bad in ("Heihei", "禧禧", "卡卡", "蛙蛙")):
+        fail("family-storybook-en", "英文故事要用 HeiHei 拼法，唔好用中文名或 Heihei")
+    if 'id="page-reading"' not in story_html or "pageReadingText(page)" not in story_js:
+        fail("family-storybook-en", "敘述和角色對白必須整合成同一段故事文字")
+    if any(marker in story_html for marker in ('id="source-note"', 'class="dialogue-bubble"', 'id="page-dialogue"')):
+        fail("family-storybook-en", "故事頁不可顯示每頁來源註記或獨立對白框")
+    if 'id="back-library"' in story_html or "← 故事書目" in story_html:
+        fail("family-storybook-en", "讀者頁唔好再放「故事書目」第二層返回")
+    if 'id="back-english"' not in story_html or 'href="index.html#screen-english-hub"' not in story_html:
+        fail("family-storybook-en", "書目頁頂欄「← English」要返英文 hub，唔好跳去主題詞根")
+    if "back-english" not in story_js or "leaveReader()" not in story_js or "place}: ${title}" not in story_js:
+        fail("family-storybook-en", "閱讀頁「← English」要返回 EN 書目，頂欄要顯示 place: story")
+    if "is-reading" not in story_js:
+        fail("family-storybook-en", "閱讀頁要收起星星進度 pill，書目頁先顯示")
+    if "js/speech.js" not in story_html or "speakEnglishTerm" not in story_js or "warmEnglishVoice" not in story_js:
+        fail("family-storybook-en", "英文家庭故事要用 speech.js 嘅 speakEnglishTerm／en-US")
+    if "zh-HK" in story_js or "zh-CN" in story_js or "chinese-mandarin" in story_js:
+        fail("family-storybook-en", "英文家庭故事唔好走粵語／普通話朗讀路徑")
+    if "guardian-unlock" not in story_html or "guardian-unlock" not in story_js:
+        fail("family-storybook-en", "播唔到語音時要保留家長朗讀後備")
+    node = shutil.which("node")
+    if node:
+        result = subprocess.run([sys.executable, "scripts/check-family-stories-en.py"], capture_output=True, text=True)
+        if result.returncode:
+            fail("family-storybook-en", (result.stdout or result.stderr or "英文家庭故事檢查失敗").strip()[:800])
+    else:
+        notes.append("冇 node，跳過英文家庭故事內容檢查（CI 一定會跑）")
+
+
 def check_asset_weight() -> None:
     """效能：單檔唔好超過 400KB，所有遊戲共用 assets/ 唔好超過 300MB。"""
     total = 0
@@ -1149,6 +1206,7 @@ CHECKS = [
     check_family_smoke_devices,
     check_book_scans_shelf,
     check_family_storybook_entry,
+    check_family_storybook_en_entry,
     check_family_names,
     check_carter_family_blanks,
     check_wacky_ricky_blanks,
