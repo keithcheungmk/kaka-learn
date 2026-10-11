@@ -7,6 +7,8 @@
   const TOPIC_ID = 'four-panel';
   const MAX_MS = 90 * 1000;
   const MIME_TYPES = ['audio/mp4', 'audio/aac', 'audio/webm;codecs=opus', 'audio/webm'];
+  const KID_SELF_LABELS = { all: '我講齊喇', loud: '我講大聲', done: '我講完喇' };
+  const RETRY_LINE = '再講一次呀';
 
   const wall = $('wall');
   const play = $('play');
@@ -26,9 +28,41 @@
     }) || '';
   }
 
+  function kidPanelButtons() {
+    return [...document.querySelectorAll('#kid-panel-grid .kid-panel-btn')];
+  }
+
+  function kidSelfButtons() {
+    return [...document.querySelectorAll('#kid-self .kid-self-btn')];
+  }
+
+  function allKidPanelsOn() {
+    const buttons = kidPanelButtons();
+    return buttons.length === 4 && buttons.every((btn) => btn.classList.contains('is-on'));
+  }
+
+  function allKidSelfOn() {
+    const buttons = kidSelfButtons();
+    return buttons.length === 3 && buttons.every((btn) => btn.classList.contains('is-on'));
+  }
+
   function allChecksOn() {
     return [...document.querySelectorAll('#parent-checks input[type="checkbox"]')]
       .every((box) => box.checked);
+  }
+
+  function bothSidesAgree() {
+    return allKidPanelsOn() && allKidSelfOn() && allChecksOn();
+  }
+
+  function parentTouched() {
+    return [...document.querySelectorAll('#parent-checks input[type="checkbox"]')]
+      .some((box) => box.checked);
+  }
+
+  function setKidOn(btn, on) {
+    btn.classList.toggle('is-on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
   }
 
   function isLevelDone(id) {
@@ -79,7 +113,7 @@
     }
     $('btn-record').classList.remove('is-recording');
     $('btn-record').textContent = '🎤 開始錄音';
-    if (!silent) setStatus('錄音停咗。可以聽返自己，或者睇示範。', 'ok');
+    if (!silent) setStatus('錄音停咗。可以聽返自己，再撳亮四格。', 'ok');
   }
 
   function speakLine(text) {
@@ -88,26 +122,59 @@
     if (speech.speakTerm) speech.speakTerm(text, { rate: 0.92, pitch: 1.05 });
   }
 
+  function resetKidLoop() {
+    kidPanelButtons().forEach((btn) => setKidOn(btn, false));
+    kidSelfButtons().forEach((btn) => setKidOn(btn, false));
+    document.querySelectorAll('#comic-board .comic-panel').forEach((panel) => {
+      panel.classList.remove('is-lit');
+    });
+    document.querySelectorAll('#parent-checks input[type="checkbox"]').forEach((box) => {
+      box.checked = false;
+    });
+    $('kid-self').classList.add('hidden');
+    $('model-box').classList.add('hidden');
+    $('parent-checks').classList.add('hidden');
+    $('play-actions').classList.add('hidden');
+    $('retry-note').classList.add('hidden');
+  }
+
+  function syncComicLights() {
+    const onBeats = new Set(
+      kidPanelButtons().filter((btn) => btn.classList.contains('is-on')).map((btn) => btn.dataset.beat),
+    );
+    document.querySelectorAll('#comic-board .comic-panel').forEach((panel) => {
+      panel.classList.toggle('is-lit', onBeats.has(panel.dataset.beat));
+    });
+  }
+
+  function revealClosedLoop() {
+    const panelsReady = allKidPanelsOn();
+    const selfReady = panelsReady && allKidSelfOn();
+    $('kid-self').classList.toggle('hidden', !panelsReady);
+    $('model-box').classList.toggle('hidden', !selfReady);
+    $('parent-checks').classList.toggle('hidden', !selfReady);
+    $('play-actions').classList.toggle('hidden', !selfReady);
+    if (selfReady) {
+      $('model-text').textContent = current?.modelStory || '';
+    }
+    refreshCompleteButton();
+  }
+
   function showReview() {
     play.classList.add('is-reviewing');
-    $('model-box').classList.remove('hidden');
-    $('parent-checks').classList.remove('hidden');
-    $('play-actions').classList.remove('hidden');
-    $('model-text').textContent = current.modelStory;
-    refreshCompleteButton();
-    $('play-actions').scrollIntoView({ block: 'end', behavior: 'smooth' });
+    renderKidPanels();
+    resetKidLoop();
+    $('kid-panels').classList.remove('hidden');
+    revealClosedLoop();
+    $('kid-panels').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 
   function hideReview() {
     play.classList.remove('is-reviewing');
     $('playback').classList.add('hidden');
-    $('model-box').classList.add('hidden');
-    $('parent-checks').classList.add('hidden');
-    $('play-actions').classList.add('hidden');
+    $('kid-panels').classList.add('hidden');
     $('completion').classList.add('hidden');
-    document.querySelectorAll('#parent-checks input[type="checkbox"]').forEach((box) => {
-      box.checked = false;
-    });
+    resetKidLoop();
     refreshCompleteButton();
   }
 
@@ -120,8 +187,14 @@
 
   function refreshCompleteButton() {
     const already = current && isLevelDone(current.id);
-    $('btn-complete').disabled = !allChecksOn();
+    const parentOpen = !$('parent-checks').classList.contains('hidden');
+    const agree = bothSidesAgree();
+    $('btn-complete').disabled = !agree;
     $('btn-complete').textContent = already ? '完成' : '完成・領星';
+    const showRetry = parentOpen && parentTouched() && !allChecksOn();
+    $('retry-note').classList.toggle('hidden', !showRetry);
+    if (showRetry) setStatus(RETRY_LINE);
+    else if (parentOpen && agree) setStatus('');
     if (already) $('completion').classList.remove('hidden');
   }
 
@@ -152,8 +225,48 @@
 
   function renderComic() {
     $('comic-board').innerHTML = current.panels.map((panel) => (
-      `<figure class="comic-panel"><img src="${panel.image}" alt="${panel.alt}"><figcaption>${panel.beat}</figcaption></figure>`
+      `<figure class="comic-panel" data-beat="${panel.beat}">
+        <button type="button" class="comic-hit" data-beat="${panel.beat}" aria-label="撳亮${panel.beat}">
+          <img src="${panel.image}" alt="${panel.alt}">
+        </button>
+        <figcaption>${panel.beat}</figcaption>
+      </figure>`
     )).join('');
+    $('comic-board').querySelectorAll('.comic-hit').forEach((button) => {
+      button.addEventListener('click', () => toggleKidPanel(button.dataset.beat));
+    });
+  }
+
+  function renderKidPanels() {
+    if (!current) return;
+    $('kid-panel-grid').innerHTML = current.panels.map((panel) => (
+      `<button type="button" class="kid-panel-btn" data-beat="${panel.beat}" aria-pressed="false">${panel.beat}</button>`
+    )).join('');
+    kidPanelButtons().forEach((button) => {
+      button.addEventListener('click', () => toggleKidPanel(button.dataset.beat));
+    });
+  }
+
+  function toggleKidPanel(beat) {
+    if (!play.classList.contains('is-reviewing') || !beat) return;
+    const btn = kidPanelButtons().find((item) => item.dataset.beat === beat);
+    if (!btn) return;
+    setKidOn(btn, !btn.classList.contains('is-on'));
+    syncComicLights();
+    speakLine(beat);
+    revealClosedLoop();
+  }
+
+  function toggleKidSelf(key) {
+    if (!play.classList.contains('is-reviewing') || !allKidPanelsOn()) return;
+    const btn = kidSelfButtons().find((item) => item.dataset.self === key);
+    if (!btn) return;
+    setKidOn(btn, !btn.classList.contains('is-on'));
+    speakLine(KID_SELF_LABELS[key] || btn.textContent);
+    revealClosedLoop();
+    if (allKidSelfOn()) {
+      $('play-actions').scrollIntoView({ block: 'end', behavior: 'smooth' });
+    }
   }
 
   function openLevel(id) {
@@ -191,7 +304,7 @@
 
   async function startRecording() {
     if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') {
-      setStatus('呢部機暫時錄唔到音。家長可以聽住小朋友現場講，再撳下面睇示範。', 'warn');
+      setStatus('呢部機暫時錄唔到音。家長可以聽住小朋友現場講，再撳亮四格。', 'warn');
       showReview();
       return;
     }
@@ -200,7 +313,7 @@
         audio: { echoCancellation: true, noiseSuppression: true },
       });
     } catch {
-      setStatus('未准許用咪。可以喺瀏覽器設定打開咪高峰，或者由家長聽住現場講，再睇示範。', 'warn');
+      setStatus('未准許用咪。可以喺瀏覽器設定打開咪高峰，或者由家長聽住現場講，再撳亮四格。', 'warn');
       showReview();
       return;
     }
@@ -214,7 +327,7 @@
       usedMime = recorder.mimeType || mimeType;
     } catch {
       stopTracks();
-      setStatus('呢部機錄唔到音。家長可以聽住現場講，再睇示範。', 'warn');
+      setStatus('呢部機錄唔到音。家長可以聽住現場講，再撳亮四格。', 'warn');
       showReview();
       return;
     }
@@ -224,7 +337,7 @@
     recorder.onstop = () => {
       stopTracks();
       if (!chunks.length) {
-        setStatus('未錄到聲音，再試一次或者現場講完再睇示範。', 'warn');
+        setStatus('未錄到聲音，再試一次或者現場講完再撳亮四格。', 'warn');
         showReview();
         return;
       }
@@ -258,10 +371,11 @@
   }
 
   function completeLevel() {
-    if (!current || !allChecksOn()) return;
+    if (!current || !bothSidesAgree()) return;
     const first = !isLevelDone(current.id);
     markLevelDone(current.id);
     if (first && storage.tryEarnStar) storage.tryEarnStar();
+    $('retry-note').classList.add('hidden');
     $('completion').classList.remove('hidden');
     refreshStars();
     refreshCompleteButton();
@@ -272,7 +386,7 @@
     stopRecording({ silent: true });
     revokePlayback();
     hideReview();
-    setStatus('再講一次喇。');
+    setStatus(RETRY_LINE);
   }
 
   $('btn-prompt').addEventListener('click', () => current && speakLine(current.prompt));
@@ -280,6 +394,10 @@
   $('btn-record').addEventListener('click', onRecordClick);
   $('btn-complete').addEventListener('click', completeLevel);
   $('btn-rerecord').addEventListener('click', rerecord);
+  $('kid-self').addEventListener('click', (event) => {
+    const btn = event.target.closest('[data-self]');
+    if (btn) toggleKidSelf(btn.dataset.self);
+  });
   $('parent-checks').addEventListener('change', refreshCompleteButton);
   $('back-link').addEventListener('click', (event) => {
     event.preventDefault();
@@ -303,9 +421,28 @@
   window.KakaFourPanel = {
     TOPIC_ID,
     MAX_MS,
+    RETRY_LINE,
+    KID_SELF_LABELS,
     levels,
     pickMimeType,
+    allKidPanelsOn,
+    allKidSelfOn,
     allChecksOn,
+    bothSidesAgree,
     isLevelDone,
+    showReview,
+    toggleKidPanel,
+    toggleKidSelf,
+    revealClosedLoopForTest() {
+      if (!current) return;
+      showReview();
+      current.panels.forEach((panel) => {
+        const btn = kidPanelButtons().find((item) => item.dataset.beat === panel.beat);
+        if (btn) setKidOn(btn, true);
+      });
+      syncComicLights();
+      kidSelfButtons().forEach((btn) => setKidOn(btn, true));
+      revealClosedLoop();
+    },
   };
 })();

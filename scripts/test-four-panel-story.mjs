@@ -49,18 +49,38 @@ assert.match(html, /有然後／最後？/);
 assert.match(html, /敢講完？/);
 assert.match(html, /再錄一次/);
 assert.match(html, /id="btn-record"/);
+assert.match(html, /id="playback"/);
+assert.match(html, /id="kid-panels"/);
+assert.match(html, /id="kid-self"/);
+assert.match(html, /我講齊喇/);
+assert.match(html, /我講大聲/);
+assert.match(html, /我講完喇/);
+assert.match(html, /再講一次呀/);
+assert.match(html, /小朋友話自己做到喇/);
 assert.match(html, /js\/speech\.js/);
+assert.ok(
+  html.indexOf('id="playback"') < html.indexOf('id="kid-panels"')
+    && html.indexOf('id="kid-panels"') < html.indexOf('id="kid-self"')
+    && html.indexOf('id="kid-self"') < html.indexOf('id="model-box"')
+    && html.indexOf('id="model-box"') < html.indexOf('id="parent-checks"'),
+  '閉環評分要插喺回放同示範／家長／完成之間',
+);
 assert.match(js, /MediaRecorder/);
 assert.match(js, /getUserMedia/);
 assert.match(js, /tryEarnStar/);
 assert.match(js, /markTopicPassed/);
+assert.match(js, /bothSidesAgree/);
+assert.match(js, /RETRY_LINE = '再講一次呀'/);
 assert.match(js, /MAX_MS = 90 \* 1000/);
 assert.match(html, /nav-back\.js/);
 assert.match(html, /href="index.html#screen-topics"/);
 assert.match(js, /leavePlay\(\)/);
 assert.match(js, /goBackOr\('index\.html#screen-topics'\)/);
-assert.doesNotMatch(js, /fetch\(|XMLHttpRequest|FormData|webkitSpeechRecognition/);
-assert.doesNotMatch(js, /2\/5|五星/);
+assert.doesNotMatch(js, /fetch\(|XMLHttpRequest|FormData|webkitSpeechRecognition|SpeechRecognition/);
+assert.doesNotMatch(js, /2\/5|五星|半星|half-star/);
 assert.match(css, /overflow-y:\s*auto/, '講故事側欄可以內部捲，等示範同家長勾唔被剪走');
+assert.match(css, /\.kid-panel-btn\.is-on/, '四格要撳得亮');
+assert.match(css, /\.kid-self-btn\.is-on/, '自己檢查掣要撳得亮');
+assert.match(css, /\.primary-btn:disabled/, '未兩邊同意時領星掣要睇得出未開');
 
-console.log('PASS: four-panel-story MVP — 回家路上四格、本機錄音、家長三勾、獨立於填空故事。');
+console.log('PASS: four-panel-story — 回家路上四格、本機錄音、小朋友自己檢查＋家長確認、獨立於填空故事。');

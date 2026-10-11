@@ -41,16 +41,28 @@
             <p>聽返自己講：</p>
             <audio id="playback-audio" controls playsinline></audio>
           </div>
+          <div id="kid-panels" class="kid-panels hidden" role="group" aria-label="小朋友撳亮四格">
+            <p class="kid-step-label">你講咗邊格？撳亮佢</p>
+            <div id="kid-panel-grid" class="kid-panel-grid"></div>
+          </div>
+          <div id="kid-self" class="kid-self hidden" role="group" aria-label="小朋友自己檢查">
+            <p class="kid-step-label">自己檢查吓</p>
+            <button type="button" class="kid-self-btn" data-self="all" aria-pressed="false">我講齊喇</button>
+            <button type="button" class="kid-self-btn" data-self="loud" aria-pressed="false">我講大聲</button>
+            <button type="button" class="kid-self-btn" data-self="done" aria-pressed="false">我講完喇</button>
+          </div>
           <div id="model-box" class="model-box hidden">
             <h3>示範故事（家長睇）</h3>
             <p id="model-text"></p>
             <button type="button" class="icon-btn" id="btn-model">🔊 聽示範</button>
           </div>
           <div id="parent-checks" class="parent-checks hidden">
+            <p class="parent-frame">小朋友話自己做到喇。家長聽完，確認吓係咪一樣：</p>
             <label><input type="checkbox" data-check="four">講齊四格？</label>
             <label><input type="checkbox" data-check="then">有然後／最後？</label>
             <label><input type="checkbox" data-check="brave">敢講完？</label>
           </div>
+          <p id="retry-note" class="retry-note hidden" role="status">再講一次呀</p>
           <div id="play-actions" class="play-actions hidden">
             <button type="button" class="primary-btn" id="btn-complete" disabled>完成・領星</button>
             <button type="button" class="ghost-btn" id="btn-rerecord">再錄一次</button>
