@@ -1013,6 +1013,18 @@ def check_family_storybook_entry() -> None:
         fail("family-storybook", "故事頁不可顯示每頁來源註記或獨立對白框")
     if ".page-reading" not in story_css or ".dialogue-bubble" in story_css:
         fail("family-storybook", "整合故事文字須使用單一字級樣式，且移除對白框樣式")
+    if any(marker in story_html for marker in ('id="mandarin-voice"', 'id="test-voice"', "普通話聲線", "故事為原創內容")):
+        fail("family-storybook", "故事頁唔好再放普通話聲線下拉／試聽／頁腳免責")
+    if 'id="story-voice-toggle"' not in story_html or 'data-story-voice="yue"' not in story_html or 'data-story-voice="cmn"' not in story_html:
+        fail("family-storybook", "故事頁要有粵語｜普通話讀音掣，預設粵語")
+    if 'js/speech.js' not in story_html:
+        fail("family-storybook", "故事頁要載入 speech.js 做粵語揀聲同 iOS 解鎖")
+    if "chinese-mandarin" in story_js or "assets/chinese-mandarin" in story_html:
+        fail("family-storybook", "故事朗讀唔好用認字牆普通話 m4a")
+    if "voiceMode = 'yue'" not in story_js or "speakStory(" not in story_js or "unlockSpeech" not in story_js:
+        fail("family-storybook", "故事朗讀預設粵語，用 speechSynthesis 讀當頁文字，並要解鎖 iOS 語音")
+    if "guardian-unlock" not in story_html or "guardian-unlock" not in story_js:
+        fail("family-storybook", "播唔到語音時要保留家長朗讀後備")
 
 
 def check_asset_weight() -> None:
