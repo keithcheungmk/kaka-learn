@@ -89,14 +89,17 @@
   }
 
   function showReview() {
+    play.classList.add('is-reviewing');
     $('model-box').classList.remove('hidden');
     $('parent-checks').classList.remove('hidden');
     $('play-actions').classList.remove('hidden');
     $('model-text').textContent = current.modelStory;
     refreshCompleteButton();
+    $('play-actions').scrollIntoView({ block: 'end', behavior: 'smooth' });
   }
 
   function hideReview() {
+    play.classList.remove('is-reviewing');
     $('playback').classList.add('hidden');
     $('model-box').classList.add('hidden');
     $('parent-checks').classList.add('hidden');
@@ -180,6 +183,7 @@
     revokePlayback();
     current = null;
     play.classList.add('hidden');
+    play.classList.remove('is-reviewing');
     wall.classList.remove('hidden');
     document.querySelector('.four-shell')?.classList.remove('is-playing');
     renderWall();
