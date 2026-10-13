@@ -50,7 +50,22 @@ def collect_han_chars() -> str:
         src = re.sub(r"(?m)^\s*//.*$", "", src)
         for m in re.finditer(r"(?:term|say|cmn):\s*'([^']*)'", src):
             chars.update(m.group(1))
-    for rel in ("data/common-sense-heroes.js", "js/common-sense.js", "common-sense.html"):
+    for rel in (
+        "js/common-sense.js",
+        "js/interview-comics.js",
+        "common-sense.html",
+        "interview-comics.html",
+        "data/common-sense-catalog.js",
+        "data/common-sense-heroes.js",
+        "data/common-sense-safe-outing.js",
+        "data/common-sense-manners-hygiene.js",
+        "data/common-sense-transport-hk.js",
+        "data/common-sense-weather-seasons.js",
+        "data/common-sense-festivals-hk.js",
+        "data/common-sense-recycle-green.js",
+        "data/common-sense-food-health.js",
+        "data/interview-comics.js",
+    ):
         chars.update(ch for ch in read(ROOT / rel) if "\u4e00" <= ch <= "\u9fff")
     chars.update(UI_EXTRA)
     latin = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")

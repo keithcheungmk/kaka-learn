@@ -36,6 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| 卡卡常識樂園 P0–P8 通宵全範圍 | Cursor Chief Lead | `common-sense.html`, `js/common-sense.js`, `data/common-sense-*.js`, `interview-comics.html`, `js/interview-comics.js`, `assets/common-sense/`, `js/storage.js`, `scripts/check-invariants.py`, `docs/handover.md`, `AGENTS.md` | 2026-10-13 | Keith 批准 v1.1：P0–P7 答題包＋P3 地圖釘＋P7 過程卡＋B1–B3 面試四格；P9 灰即將推出；唔改中文四格／#144 |
 | 英文系列揀選頁清走 Little Fox 標籤 | Cursor Chief Lead（English 範圍） | `index.html`, `scripts/check-invariants.py`, `scripts/test-story-mission.mjs`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | #138 squash-merge 漏咗標籤移除；清走「選擇故事系列／Little Fox 系列／LITTLE FOX eyebrow」；保留返回、標題、幣 pill、四張卡；唔自 merge |
 | 故事閱讀頁「← 中文」返回書目 | Cursor Chief Lead（Chinese 範圍） | `family-storybook.html`, `js/family-storybook.js`, `scripts/check-invariants.py`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-11 | Keith：閱讀頁左上「← 中文」返 #library，唔跳中文主題根；唔自 merge |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
@@ -110,9 +111,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-13 · Cursor Chief Lead（卡卡常識樂園 P0–P8）
+
+- Keith 批准計劃 v1.1 通宵全做：pack schema 化；P0–P7 線 A 可玩（含 P3 自製港鐵示意地圖＋家庭站釘、P7 牛奶／麵包過程卡）；P8 面試四格 B1–B3 獨立頁，重用中文四格錄音／檢查迴圈，入口只喺常識 hub；P9 其餘 A 包同 B4–B6 灰「即將推出」。唔改中文四格、唔搶 #144。已接 #145：煮餾→煮餸；再開一次重抽 10 題。
+
 ### 2026-10-13 · Cursor Chief Lead（常識樂園 live QA：煮餸＋再開一次）
 
-- #143 上線後小朋友／家長 QA：廚師／護士文案「煮餾」改「煮餸」；慶祝畫面「再開一次」直接重抽 10 題，唔再返學習牆。「返包牆」仍可返 hub。包牆 ← 主頁 href 已係 `#screen-home`，一次跌去揀小朋友未能重現，只加註解。開 PR，唔自 merge，避開 overnight P1–P8。
+- #143 上線後小朋友／家長 QA：廚師／護士文案「煮餾」改「煮餸」；慶祝畫面「再開一次」直接重抽 10 題，唔再返學習牆。「返包牆」仍可返 hub。包牆 ← 主頁 href 已係 `#screen-home`，一次跌去揀小朋友未能重現，只加註解。#145 已 merge 入 `main`。
 
 ### 2026-10-13 · Cursor Chief Lead（四格講故事 live QA）
 

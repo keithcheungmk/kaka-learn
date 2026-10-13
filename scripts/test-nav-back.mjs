@@ -72,5 +72,11 @@ assert.match(commonSenseHtml, /href="index.html#screen-home"/);
 assert.match(commonSenseHtml, /nav-back\.js/);
 assert.match(commonSenseJs, /HOME_HREF = 'index\.html#screen-home'/);
 assert.match(commonSenseJs, /goBackOr\(HOME_HREF\)/);
+const interviewJs = read('js/interview-comics.js');
+const interviewHtml = read('interview-comics.html');
+assert.match(interviewHtml, /href="common-sense.html"/);
+assert.match(interviewJs, /HUB_HREF = 'common-sense\.html'/);
+assert.match(interviewJs, /goBackOr\(HUB_HREF\)/);
+assert.doesNotMatch(interviewJs, /screen-topics/);
 
 console.log('PASS: one-level back — history.back when same-origin, else parent hash.');

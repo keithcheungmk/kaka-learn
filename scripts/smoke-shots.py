@@ -526,9 +526,13 @@ def walk(pg, url, shots: Path | None, tag: str):
     with pg.expect_navigation():
         pg.click("#btn-start-common-sense")
     pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-heroes")
-    soon = pg.text_content(".pack-soon") or ""
-    if "面試四格" not in soon or "即將推出" not in soon:
-        raise RuntimeError("Common-sense hub must grey out 面試四格 as coming soon")
+    soon = pg.evaluate("() => [...document.querySelectorAll('.pack-soon')].map((el) => el.textContent).join(' ')")
+    if "即將推出" not in soon or "情緒小達人" not in soon:
+        raise RuntimeError("Common-sense hub must grey remaining P9 packs as coming soon")
+    if "面試四格" in soon:
+        raise RuntimeError("面試四格 must be playable, not greyed as coming soon")
+    if not pg.query_selector("#btn-pack-comics"):
+        raise RuntimeError("Common-sense hub must link to playable 面試四格")
     pg.click("#btn-pack-heroes")
     pg.wait_for_selector("#view-learn:not(.hidden) #btn-start-quiz")
     cards = pg.evaluate("() => document.querySelectorAll('#learn-grid .learn-card').length")
@@ -608,6 +612,46 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.click("#back-link")
     pg.wait_for_selector("#view-learn:not(.hidden) #btn-start-quiz")
     pg.click("#back-link")
+    pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-heroes")
+    pg.click("#btn-pack-transport")
+    pg.wait_for_selector("#view-learn:not(.hidden) #cs-mtr-map")
+    map_text = pg.text_content("#cs-mtr-map") or ""
+    for pin in ("荃灣西", "馬鞍山", "沙田", "深水埗", "迪士尼", "尖沙咀", "旺角"):
+        if pin not in map_text:
+            raise RuntimeError(f"Transport learn wall map must pin {pin}")
+    pg.click("#back-link")
+    pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-food")
+    pg.click("#btn-pack-food")
+    pg.wait_for_selector("#view-learn:not(.hidden) #cs-food-process")
+    food_text = pg.text_content("#cs-food-process") or ""
+    if "牛奶" not in food_text or "麵包" not in food_text:
+        raise RuntimeError("Food learn wall must show milk and bread process cards")
+    pg.click("#back-link")
+    pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-comics")
+    with pg.expect_navigation():
+        pg.click("#btn-pack-comics")
+    pg.wait_for_selector("#wall:not(.hidden) [data-start='rain-no-umbrella']")
+    for start_id in ("rain-no-umbrella", "mtr-need-seat", "park-ball-lost"):
+        if not pg.query_selector(f"[data-start='{start_id}']"):
+            raise RuntimeError(f"Interview comics wall missing {start_id}")
+    pg.click("[data-start='rain-no-umbrella']")
+    pg.wait_for_selector("#play:not(.hidden) .comic-hit")
+    preview = pg.evaluate(
+        """() => {
+          const hit = document.querySelector('#comic-board .comic-hit');
+          hit.click();
+          return {
+            preview: document.querySelectorAll('#comic-board .comic-panel.is-preview').length,
+            status: document.querySelector('#status-note')?.textContent || '',
+          };
+        }"""
+    )
+    if preview["preview"] < 1:
+        raise RuntimeError("Interview comics panels must react before recording")
+    pg.click("#back-link")
+    pg.wait_for_selector("#wall:not(.hidden) [data-start='rain-no-umbrella']")
+    with pg.expect_navigation():
+        pg.click("#back-link")
     pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-heroes")
     with pg.expect_navigation():
         pg.click("#back-link")

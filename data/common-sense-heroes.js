@@ -1,10 +1,18 @@
-/** 卡卡常識樂園 · 線 A「社區小英雄」題庫（v4.1） */
+/** 卡卡常識樂園 · 線 A「社區小英雄」題庫（v4.1；v1.1 加生活錨點） */
 window.COMMON_SENSE_HEROES = {
   packId: 'community-heroes',
   topicId: 'common-sense',
   coinMode: 'common-sense-heroes',
   title: '社區小英雄',
   roundSize: 10,
+  goal: '識得社區小英雄做咩工作',
+  intro: '卡卡去診所、坐巴士、返幼稚園都會見到呢啲人。先認「見過邊個」，再學佢哋做咩工作。撳卡可以聽一聽。學完就開始答題。',
+  cover: 'assets/careers/yisheng.webp',
+  wrongHint: '唔係呢個喎，再諗吓○○平時幫人做咩？',
+  lifeAnchor: {
+    title: '卡卡見過呢啲人',
+    body: '發燒會見醫生同護士；坐巴士會見司機；返崇真幼稚園會見老師。街上仲有警察、消防員同救護員。識佢哋做咩，先至答題。',
+  },
   careers: [
     {
       id: 'yisheng',
@@ -148,3 +156,6 @@ window.COMMON_SENSE_HEROES = {
     },
   ],
 };
+window.COMMON_SENSE_HEROES.items = window.COMMON_SENSE_HEROES.careers;
+window.COMMON_SENSE_PACKS = window.COMMON_SENSE_PACKS || {};
+window.COMMON_SENSE_PACKS['community-heroes'] = window.COMMON_SENSE_HEROES;

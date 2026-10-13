@@ -14,11 +14,12 @@
 ### 卡卡常識樂園（主頁頂層科目）
 
 - 主頁與中文／英文／普通話／數學**同級**加「卡卡常識樂園」入口；**唔好**放喺中文主題頁下面。
-- 常識 hub／包牆：A「社區小英雄」可玩；B「面試四格」灰「即將推出」。唔搬中文「四格講故事」、唔做公民／時政、唔上雲、唔開 AI 面試官。
-- 線 A 玩法（v4.1）：**學習牆一次過列晒約 10 職業**（圖＋短句，可聽）→ 大掣「開始答題」→ 題庫隨機抽 10 題（同場唔重複）。每題大圖＋「呢個係○○。佢做啲咩？」＋四選一（1 啱 3 錯）。唔好先揀一個職業再入關。唔做「邊個係醫生」認人揀圖。無拖一拖。無家長「有講／冇講」閘。
-- 進度「已答啱 N／10」；答錯可重試、唔計入 N。**10／10** 自動出大星星慶祝屏（對齊中文 `play-finish`），再 `earnCoinForMode('common-sense-heroes')`；文案「今輪玩完喇！攞到一個 AEON 幣！」（當日已派則用中文同款後備）。
-- 四選一掣約 8–16 字粵語短句；醫生＝醫院睇症／醫病，救護員＝救護車急救送院，互相當錯選。粵語錄音稿可長過掣面。圖重用 `assets/careers/`：`yisheng`、`hushi`、`xiaofangyuan`、`jingcha`、`laoshi_job`、`siji`、`chushi`、`youchai`、`shouhuoyuan`、`jiuhuyuan`。
-- 獨立頁 `common-sense.html`；頂欄「←」只返上一層（hub 無 history 時 `index.html#screen-home`）。進度／幣只記本機 Profile。
+- 教學精神：**由身邊生活帶入 → 再落學習重點**。家庭錨點：荃灣西（屋企）、馬鞍山（禧禧）、沙田（爸爸返工）、深水埗（崇真幼稚園）；另有迪士尼、尖沙咀、旺角。
+- 線 A 可玩包（P0–P7）：社區小英雄、安全出街、禮貌衛生、香港交通、天氣四季、香港節日、環保回收、飲食健康。其餘 A 包（情緒／動植物／身體／家庭／上學／時間／色形）可灰「即將推出」。
+- 共用 pack schema：`data/common-sense-catalog.js` + `data/common-sense-*.js`；新包＝題庫＋資源，唔複製整頁。每包學習牆 →「開始答題」→ 隨機 10 題四選一 → 10／10 大星＋`earnCoinForMode`（獨立 `modeKey`）。無拖一拖、無家長開口閘、無「邊個係」認人揀圖。
+- P3 學習牆必須有自製港鐵**示意**地圖＋家庭站釘（唔複製官方 MTR 版權地圖，標「非官方」）。P7 必須有牛奶／麵包過程短圖（2–4 步）。
+- 線 B 面試四格（`interview-comics.html`）只從常識 hub 進入；重用中文四格錄音／檢查迴圈，**唔**改中文舊四格。通宵 B1–B3：落大雨冇遮、車廂讓座、公園波。錄音前撳格要有預覽亮／提示。完成一套獨立 `modeKey` 幣。文案唔寫「返中文」。
+- 獨立頁 `common-sense.html`／`interview-comics.html`；頂欄「←」只返上一層（hub 無 history 時 `index.html#screen-home`；四格牆返常識 hub）。進度／幣只記本機 Profile。
 
 ### English learning structure
 
@@ -178,7 +179,7 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 ### 頂欄返回只准一層（2026-10-11）
 
 - 所有左上返回掣（「← 中文」「← English」「← 英文學習」等）只准返**上一層**，唔好跳去 `index.html` 主頁／揀小朋友。
-- 獨立頁（`family-storybook`、`family-storybook-en`、`four-panel-story`、`book-scene-demo`、`pth-demo`）有同站 history 就 `history.back()`；否則去即時父畫面 hash：`#screen-topics`、`#screen-story-series`、`#screen-english-hub`、`#screen-home`。
+- 獨立頁（`family-storybook`、`family-storybook-en`、`four-panel-story`、`book-scene-demo`、`pth-demo`、`common-sense`、`interview-comics`）有同站 history 就 `history.back()`；否則去即時父畫面 hash：`#screen-topics`、`#screen-story-series`、`#screen-english-hub`、`#screen-home`。面試四格無 history 時返 `common-sense.html`。
 - 閱讀頁保持 #136：中文／英文「←」返書目，唔跳主題根。四格玩時返關卡牆。故事 play 返系列書架，系列卡返系列揀選。
 - `index.html` 必須認上述 hash，並用 `kaka-return-screen` 還原離開前畫面。唔好用裸 `href="index.html"`。
 

@@ -1279,13 +1279,28 @@ def check_magic_marker_blanks() -> None:
 
 
 def check_common_sense() -> None:
-    """主頁頂層常識樂園：社區小英雄學習牆＋隨機 10 題＋10／10 幣。"""
+    """主頁頂層常識樂園：多包 schema、P0–P7 答題、P3 地圖、P7 過程、B1–B3 面試四格。"""
     for path in (
         "common-sense.html",
         "css/common-sense.css",
         "js/common-sense.js",
+        "data/common-sense-catalog.js",
         "data/common-sense-heroes.js",
+        "data/common-sense-safe-outing.js",
+        "data/common-sense-manners-hygiene.js",
+        "data/common-sense-transport-hk.js",
+        "data/common-sense-weather-seasons.js",
+        "data/common-sense-festivals-hk.js",
+        "data/common-sense-recycle-green.js",
+        "data/common-sense-food-health.js",
+        "assets/common-sense/mtr-family-map.svg",
+        "assets/common-sense/process/milk-1.svg",
+        "assets/common-sense/process/bread-1.svg",
+        "interview-comics.html",
+        "js/interview-comics.js",
+        "data/interview-comics.js",
         "scripts/test-common-sense.mjs",
+        "scripts/test-interview-comics.mjs",
         "assets/home-subjects/common-sense.webp",
     ):
         if not Path(path).exists():
@@ -1293,16 +1308,24 @@ def check_common_sense() -> None:
     js = read("js/common-sense.js")
     html = read("common-sense.html")
     if "earnCoinForMode" not in js or "common-sense-heroes" not in js:
-        fail("common-sense", "完成一輪要呼叫 earnCoinForMode('common-sense-heroes')")
+        fail("common-sense", "完成一輪要呼叫 earnCoinForMode")
     if "開始答題" not in html or "即將推出" not in html:
-        fail("common-sense", "學習牆要有開始答題；面試四格要灰態即將推出")
+        fail("common-sense", "學習牆要有開始答題；P9 其餘包要標即將推出")
     if "draggable" in js or "有講" in js:
-        fail("common-sense", "唔好做拖一拖或家長開口閘")
+        fail("common-sense", "線 A 唔好做拖一拖或家長開口閘")
+    catalog = read("data/common-sense-catalog.js")
+    if "interview-comics.html" not in catalog:
+        fail("common-sense", "面試四格入口要喺常識 hub")
+    if "非官方" not in read("assets/common-sense/mtr-family-map.svg"):
+        fail("common-sense", "港鐵示意地圖要標非官方")
     node = shutil.which("node")
     if node:
         result = subprocess.run([node, "scripts/test-common-sense.mjs"], capture_output=True, text=True)
         if result.returncode:
             fail("common-sense", (result.stdout or result.stderr or "常識樂園檢查失敗").strip()[:800])
+        comics = subprocess.run([node, "scripts/test-interview-comics.mjs"], capture_output=True, text=True)
+        if comics.returncode:
+            fail("common-sense", (comics.stdout or comics.stderr or "面試四格檢查失敗").strip()[:800])
     else:
         notes.append("冇 node，跳過常識樂園單元測試")
 
@@ -1324,6 +1347,11 @@ def check_one_level_back() -> None:
     common = read("common-sense.html")
     if 'href="index.html#screen-home"' not in common or "nav-back.js" not in common:
         fail("one-level-back", "常識樂園頂欄無 history 時要返主頁畫面，唔好重載跌去揀小朋友")
+    comics = read("interview-comics.html")
+    if 'href="common-sense.html"' not in comics or "nav-back.js" not in comics:
+        fail("one-level-back", "面試四格無 history 時要返常識 hub，唔好跳中文或主頁")
+    if "← 中文" in comics:
+        fail("one-level-back", "面試四格文案唔可以寫返中文")
     if "showScreen('home')" in read("js/app.js").split("btn-back-sentence")[1][:200]:
         fail("one-level-back", "砌句子遊戲頂欄唔可以跳主頁")
     scene = read("book-scene-demo.html")

@@ -52,7 +52,19 @@ const DEFAULT_PROFILE_STATE = {
 /** 中文認字每日三個幣位（聽／配／砌） */
 const COIN_MODES = ['listen', 'match', 'build'];
 /** 其他科目獨立一日一幣；唔佔中文三個幣位 */
-const EXTRA_COIN_MODES = ['common-sense-heroes'];
+const EXTRA_COIN_MODES = [
+  'common-sense-heroes',
+  'common-sense-safe',
+  'common-sense-manners',
+  'common-sense-transport',
+  'common-sense-weather',
+  'common-sense-festivals',
+  'common-sense-recycle',
+  'common-sense-food',
+  'common-sense-comic-rain',
+  'common-sense-comic-mtr',
+  'common-sense-comic-park',
+];
 const ALL_COIN_MODES = COIN_MODES.concat(EXTRA_COIN_MODES);
 
 const PROFILE_FIELD_KEYS = Object.keys(DEFAULT_PROFILE_STATE);

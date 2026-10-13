@@ -1,17 +1,18 @@
 (() => {
   'use strict';
 
-  const pack = window.COMMON_SENSE_HEROES || {};
-  const careers = Array.isArray(pack.careers) ? pack.careers : [];
+  const catalog = window.COMMON_SENSE_CATALOG || { packs: [] };
+  const packMap = window.COMMON_SENSE_PACKS || {};
   const storage = window.KakaStorage || {};
   const speech = window.KakaSpeech || {};
   const $ = (id) => document.getElementById(id);
 
   const HOME_HREF = 'index.html#screen-home';
   const VIEWS = ['view-packs', 'view-learn', 'view-quiz', 'view-finish'];
-  const WRONG_HINT = '唔係呢個喎，再諗吓○○平時幫人做咩？';
+  const FALLBACK_HINT = '唔係呢個喎，再諗吓○○啦，可以再試。';
 
   let view = 'packs';
+  let currentPack = null;
   let quizOrder = [];
   let quizIndex = 0;
   let correctCount = 0;
@@ -41,6 +42,13 @@
     return Boolean(window.__KAKA_TEST__);
   }
 
+  function packItems(pack) {
+    if (!pack) return [];
+    if (Array.isArray(pack.items) && pack.items.length) return pack.items;
+    if (Array.isArray(pack.careers) && pack.careers.length) return pack.careers;
+    return [];
+  }
+
   function speak(text, onEnd) {
     if (!speech.speakTerm) {
       if (typeof onEnd === 'function') onEnd();
@@ -60,8 +68,9 @@
   }
 
   function sampleRound() {
-    const size = Math.min(pack.roundSize || 10, careers.length);
-    return shuffle(careers).slice(0, size);
+    const items = packItems(currentPack);
+    const size = Math.min(currentPack?.roundSize || 10, items.length);
+    return shuffle(items).slice(0, size);
   }
 
   function currentQuestion() {
@@ -93,46 +102,128 @@
       const el = $(id);
       if (el) el.classList.toggle('hidden', id !== `view-${next}`);
     });
+    const title = currentPack?.title || '卡卡常識樂園';
     if (next === 'packs') {
       setBrand('常識樂園', '卡卡常識樂園');
       setBack('← 主頁', HOME_HREF);
-      setPill('社區英雄');
+      setPill('揀主題');
     } else if (next === 'learn') {
-      setBrand('常識樂園', '社區小英雄');
+      setBrand('常識樂園', title);
       setBack('← 常識', HOME_HREF);
       setPill('學習牆');
     } else if (next === 'quiz') {
-      setBrand('答題挑戰', '社區小英雄');
+      setBrand('答題挑戰', title);
       setBack('← 學習牆', HOME_HREF);
       setPill(`已答啱 ${correctCount}／10`);
     } else if (next === 'finish') {
-      setBrand('過關', '社區小英雄');
+      setBrand('過關', title);
       setBack('← 包牆', HOME_HREF);
       setPill('10／10');
     }
   }
 
-  function renderLearnWall() {
-    const grid = $('learn-grid');
+  function renderPackWall() {
+    const grid = $('pack-grid');
     if (!grid) return;
-    grid.innerHTML = '';
-    careers.forEach((career) => {
+    const packs = Array.isArray(catalog.packs) ? catalog.packs : [];
+    const lineA = packs.filter((p) => p.line !== 'B');
+    const lineB = packs.filter((p) => p.line === 'B');
+    const renderCard = (meta) => {
+      const playable = meta.status === 'playable';
+      const cover = meta.cover
+        ? `<img class="pack-art" src="${meta.cover}" alt="" width="256" height="256">`
+        : `<span class="pack-art pack-soon-icon" aria-hidden="true">${meta.emoji || '📖'}</span>`;
+      const inner = `${cover}<span class="pack-meta"><strong>${meta.kicker}</strong><span>${meta.blurb}</span></span>`;
+      if (!playable) {
+        return `<div class="pack pack-soon" aria-disabled="true">${inner}</div>`;
+      }
+      if (meta.href) {
+        return `<a class="pack pack-playable" id="${meta.buttonId || ''}" href="${meta.href}" aria-label="${meta.kicker}">${inner}</a>`;
+      }
+      return `<button type="button" class="pack pack-playable" id="${meta.buttonId || ''}" data-pack="${meta.packId}" aria-label="${meta.kicker}，學完再答十題">${inner}</button>`;
+    };
+    grid.innerHTML =
+      `<p class="pack-line-label">${catalog.lineATitle || '常識答題'}</p>` +
+      lineA.map(renderCard).join('') +
+      `<p class="pack-line-label">${catalog.lineBTitle || '面試四格'}</p>` +
+      lineB.map(renderCard).join('');
+    grid.querySelectorAll('[data-pack]').forEach((btn) => {
+      btn.addEventListener('click', () => openPack(btn.dataset.pack));
+    });
+  }
+
+  function renderLearnWall() {
+    const extras = $('learn-extras');
+    const grid = $('learn-grid');
+    const heading = $('learn-heading');
+    const intro = $('learn-intro-text');
+    if (heading) heading.textContent = currentPack?.title || '';
+    if (intro) intro.textContent = currentPack?.intro || '';
+    if (extras) extras.innerHTML = '';
+    if (grid) grid.innerHTML = '';
+    if (!currentPack) return;
+
+    if (currentPack.lifeAnchor && extras) {
+      const box = document.createElement('section');
+      box.className = 'life-anchor';
+      box.innerHTML = `<h3>${currentPack.lifeAnchor.title}</h3><p>${currentPack.lifeAnchor.body}</p>`;
+      extras.appendChild(box);
+    }
+    (currentPack.sections || []).forEach((section) => {
+      if (!extras) return;
+      if (section.type === 'map') extras.appendChild(renderMap(section));
+      if (section.type === 'process') extras.appendChild(renderProcess(section));
+    });
+
+    packItems(currentPack).forEach((entry) => {
       const card = document.createElement('button');
       card.type = 'button';
       card.className = 'learn-card';
-      card.dataset.career = career.id;
-      card.setAttribute('aria-label', `${career.wallLine}，聽一聽`);
+      card.dataset.item = entry.id;
+      card.setAttribute('aria-label', `${entry.wallLine}，聽一聽`);
+      const img = entry.image
+        ? `<img src="${entry.image}" alt="${entry.name}" width="256" height="256">`
+        : '';
       card.innerHTML =
-        `<img src="${career.image}" alt="${career.name}" width="256" height="256">` +
-        `<p class="name">${career.name}</p>` +
-        `<p class="duty">${career.wallLine}</p>` +
+        img +
+        `<p class="name">${entry.name}</p>` +
+        `<p class="duty">${entry.wallLine}</p>` +
         '<p class="hear">🔊 聽一聽</p>';
       card.addEventListener('click', () => {
         card.classList.add('is-heard');
-        speak(career.audio || career.ask);
+        speak(entry.audio || entry.ask);
       });
       grid.appendChild(card);
     });
+  }
+
+  function renderMap(section) {
+    const el = document.createElement('section');
+    el.className = 'cs-map';
+    el.id = section.id || 'cs-mtr-map';
+    const pins = (section.pins || []).map((pin) => (
+      `<li><b>${pin.n}</b><span>${pin.name}</span><em>${pin.note}</em></li>`
+    )).join('');
+    el.innerHTML =
+      `<h3>${section.title}</h3>` +
+      `<img src="${section.src}" alt="${section.title}">` +
+      `<p class="map-caption">${section.caption || ''}</p>` +
+      `<ul class="cs-pins">${pins}</ul>`;
+    return el;
+  }
+
+  function renderProcess(section) {
+    const el = document.createElement('section');
+    el.className = 'cs-process';
+    el.id = section.id || 'cs-food-process';
+    const strips = (section.strips || []).map((strip) => {
+      const steps = (strip.steps || []).map((step, i) => (
+        `<li><img src="${step.image}" alt="${step.label}"><span>${i + 1}. ${step.label}</span></li>`
+      )).join('');
+      return `<div class="process-strip"><h4>${strip.title}</h4><ol>${steps}</ol></div>`;
+    }).join('');
+    el.innerHTML = `<h3>${section.title}</h3><p>${section.intro || ''}</p>${strips}`;
+    return el;
   }
 
   function updateProgress() {
@@ -145,8 +236,9 @@
     answering = false;
     const img = $('quiz-img');
     if (img) {
-      img.src = q.image;
-      img.alt = q.name;
+      img.src = q.image || '';
+      img.alt = q.name || '';
+      img.classList.toggle('hidden', !q.image);
     }
     const ask = $('quiz-q');
     if (ask) ask.textContent = q.ask;
@@ -205,7 +297,8 @@
     }
     btn.classList.add('is-wrong');
     btn.disabled = true;
-    const hint = WRONG_HINT.replace('○○', q.name);
+    const template = currentPack?.wrongHint || FALLBACK_HINT;
+    const hint = template.replace('○○', q.name || '');
     if (fb) {
       fb.textContent = hint;
       fb.className = 'feedback is-bad';
@@ -226,10 +319,11 @@
   function showFinish() {
     if (!finishAwarded) {
       finishAwarded = true;
+      const mode = currentPack?.coinMode || 'common-sense-heroes';
       const coin = storage.earnCoinForMode
-        ? storage.earnCoinForMode(pack.coinMode || 'common-sense-heroes')
+        ? storage.earnCoinForMode(mode)
         : { gained: false, already: true };
-      storage.markTopicPassed?.(pack.topicId || 'common-sense', pack.packId || 'community-heroes');
+      storage.markTopicPassed?.('common-sense', currentPack?.packId || 'community-heroes');
       const msg = $('finish-msg');
       const line = coin.gained
         ? '今輪玩完喇！攞到一個 AEON 幣！'
@@ -244,11 +338,25 @@
 
   function goPacks() {
     stopSpeech();
+    currentPack = null;
     showView('packs');
+  }
+
+  function openPack(packId) {
+    const pack = packMap[packId];
+    if (!pack) return;
+    currentPack = pack;
+    stopSpeech();
+    renderLearnWall();
+    showView('learn');
   }
 
   function goLearn() {
     stopSpeech();
+    if (!currentPack) {
+      goPacks();
+      return;
+    }
     showView('learn');
   }
 
@@ -272,7 +380,6 @@
 
   function bind() {
     $('back-link')?.addEventListener('click', onBack);
-    $('btn-pack-heroes')?.addEventListener('click', goLearn);
     $('btn-start-quiz')?.addEventListener('click', startQuiz);
     $('btn-quiz-listen')?.addEventListener('click', () => {
       const q = currentQuestion();
@@ -290,20 +397,29 @@
   }
 
   speech.warmVoices?.();
-  renderLearnWall();
+  renderPackWall();
   bind();
   showView('packs');
 
   window.KakaCommonSense = {
-    pack,
-    careers,
+    catalog,
+    packMap,
     hanLen,
     sampleRound,
     currentQuestion,
-    getProgress: () => ({ view, quizIndex, correctCount, total: quizOrder.length }),
+    getProgress: () => ({
+      view,
+      packId: currentPack?.packId || null,
+      quizIndex,
+      correctCount,
+      total: quizOrder.length,
+    }),
     startQuiz,
+    openPack,
     showLearn: goLearn,
     showPacks: goPacks,
+    get pack() { return currentPack || packMap['community-heroes'] || {}; },
+    get careers() { return packItems(currentPack || packMap['community-heroes']); },
     answerCurrentCorrect() {
       const q = currentQuestion();
       if (!q) return false;

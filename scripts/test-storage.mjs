@@ -188,6 +188,8 @@ test('常識樂園獨立幣位：一日一次，唔佔中文聽配砌三個幣�
   S.setActiveProfile('kaka');
   assert.equal(S.COIN_MODES.includes('common-sense-heroes'), false);
   assert.ok(S.EXTRA_COIN_MODES.includes('common-sense-heroes'));
+  assert.ok(S.EXTRA_COIN_MODES.includes('common-sense-transport'));
+  assert.ok(S.EXTRA_COIN_MODES.includes('common-sense-comic-rain'));
   const a = S.earnCoinForMode('common-sense-heroes');
   assert.equal(a.gained, true);
   assert.equal(a.state.coinsTotal, 1);

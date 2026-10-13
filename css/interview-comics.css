@@ -1,0 +1,64 @@
+/* 常識樂園面試四格：沿用四格引擎結構，改淺色以對齊常識 hub */
+.cs-comics {
+  --ink: #18345f;
+  --muted: #527093;
+  --navy: #eaf7ff;
+  --panel: rgba(255, 255, 255, 0.92);
+  --line: #d5e4f4;
+  --mint: #2a8f6f;
+  --gold: #d4782a;
+  --coral: #e07a5f;
+  --answer-ink: #18345f;
+  --answer-surface: #ffffff;
+  color-scheme: light;
+}
+.cs-comics html, .cs-comics body, body.cs-comics {
+  color: var(--ink);
+  background:
+    radial-gradient(700px 380px at 8% 0, rgba(255, 229, 143, 0.55), transparent 64%),
+    radial-gradient(620px 440px at 96% 12%, rgba(180, 224, 255, 0.7), transparent 63%),
+    linear-gradient(180deg, #f8fcff 0%, #eaf7ff 48%, #edf8f3 100%);
+}
+.cs-comics .back-link, .cs-comics .star-pill {
+  background: var(--panel);
+  color: var(--ink);
+  border-color: var(--line);
+}
+.cs-comics .star-pill { color: var(--gold); }
+.cs-comics .wall-intro,
+.cs-comics .level-card,
+.cs-comics .comic-board,
+.cs-comics .talk-panel {
+  background: #fff;
+  border-color: var(--line);
+  color: var(--ink);
+}
+.cs-comics .wall-intro {
+  background: linear-gradient(125deg, #fff, #eaf7ff);
+}
+.cs-comics .level-card.pack-soon {
+  opacity: 0.58;
+  filter: grayscale(0.2);
+}
+.cs-comics .comic-panel.is-preview img {
+  border-color: #3b6fd8;
+  box-shadow: 0 0 0 3px rgba(59, 111, 216, 0.25);
+}
+.cs-comics .extend-box {
+  margin-top: 12px;
+  text-align: left;
+  background: #eaf7ff;
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+.cs-comics .extend-prompt { font-weight: 800; margin: 0 0 8px; }
+.cs-comics .extend-hints { display: grid; gap: 8px; }
+.cs-comics .extend-hint {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+}
+.cs-comics .completion-star { font-size: 3rem; line-height: 1; }
+.cs-comics .brand span { color: var(--mint); }
