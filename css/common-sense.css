@@ -487,6 +487,43 @@ a.pack { text-decoration: none; }
   }
   .choices { grid-template-columns: 1fr 1fr; }
   .quiz-hero img { width: min(240px, 32dvh); }
+  .cs-map {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.9fr);
+    grid-template-rows: auto auto auto;
+    gap: 8px 14px;
+    align-items: start;
+  }
+  .cs-map h3 { grid-column: 1 / -1; grid-row: 1; }
+  .cs-map img {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+    max-height: min(280px, 40dvh);
+    object-fit: contain;
+  }
+  .cs-pins {
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    align-self: stretch;
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .cs-map .map-caption {
+    grid-column: 1 / -1;
+    grid-row: 3;
+  }
+  .cs-pins li { padding: 6px 8px; }
+  .cs-process {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px 14px;
+  }
+  .cs-process h3,
+  .cs-process > p { grid-column: 1 / -1; }
+  .process-strip { margin-top: 0; }
+  .process-strip img { max-height: 92px; }
 }
 
 @media (max-width: 1050px) {

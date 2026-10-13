@@ -619,6 +619,20 @@ def walk(pg, url, shots: Path | None, tag: str):
     for pin in ("荃灣西", "馬鞍山", "沙田", "深水埗", "迪士尼", "尖沙咀", "旺角"):
         if pin not in map_text:
             raise RuntimeError(f"Transport learn wall map must pin {pin}")
+    if pg.viewport_size["width"] > 1000:
+        hidden_pins = pg.evaluate(
+            """() => {
+              const vh = window.innerHeight;
+              return [...document.querySelectorAll('#cs-mtr-map li')]
+                .filter((li) => {
+                  const r = li.getBoundingClientRect();
+                  return r.bottom > vh + 2 || r.top < -2;
+                })
+                .map((li) => (li.textContent || '').trim());
+            }"""
+        )
+        if hidden_pins:
+            raise RuntimeError(f"iPad landscape map pins must stay on-screen, clipped {hidden_pins}")
     pg.click("#back-link")
     pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-food")
     pg.click("#btn-pack-food")
@@ -626,6 +640,22 @@ def walk(pg, url, shots: Path | None, tag: str):
     food_text = pg.text_content("#cs-food-process") or ""
     if "牛奶" not in food_text or "麵包" not in food_text:
         raise RuntimeError("Food learn wall must show milk and bread process cards")
+    if pg.viewport_size["width"] > 1000:
+        food_vis = pg.evaluate(
+            """() => {
+              const vh = window.innerHeight;
+              return [...document.querySelectorAll('#cs-food-process .process-strip')].map((el) => {
+                const r = el.getBoundingClientRect();
+                return {
+                  title: el.querySelector('h4')?.textContent || '',
+                  visible: r.top < vh - 24 && r.bottom > 24,
+                };
+              });
+            }"""
+        )
+        missing = [item["title"] for item in food_vis if not item["visible"]]
+        if missing:
+            raise RuntimeError(f"iPad landscape food process must show milk and bread, missing {missing}")
     pg.click("#back-link")
     pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-comics")
     with pg.expect_navigation():
