@@ -590,8 +590,8 @@ def walk(pg, url, shots: Path | None, tag: str):
             raise RuntimeError("Could not click the correct common-sense answer")
     pg.wait_for_selector("#view-finish:not(.hidden) #finish-msg")
     finish_msg = pg.text_content("#finish-msg") or ""
-    if "攞到一個 AEON 幣" not in finish_msg:
-        raise RuntimeError(f"Finish screen must award a coin, got {finish_msg!r}")
+    if "攞到一個 AEON 幣" not in finish_msg and "今日已攞" not in finish_msg:
+        raise RuntimeError(f"Finish screen must award a coin or say 今日已攞, got {finish_msg!r}")
     if pg.is_visible("#view-quiz") and "hidden" not in (pg.get_attribute("#view-quiz", "class") or ""):
         raise RuntimeError("10／10 must auto-open the celebration screen")
     pg.click("#btn-play-again")
