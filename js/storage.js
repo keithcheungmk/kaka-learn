@@ -49,8 +49,11 @@ const DEFAULT_PROFILE_STATE = {
   economyVersion: 2,
 };
 
-/** 每種玩法一日一個幣 */
+/** 中文認字每日三個幣位（聽／配／砌） */
 const COIN_MODES = ['listen', 'match', 'build'];
+/** 其他科目獨立一日一幣；唔佔中文三個幣位 */
+const EXTRA_COIN_MODES = ['common-sense-heroes'];
+const ALL_COIN_MODES = COIN_MODES.concat(EXTRA_COIN_MODES);
 
 const PROFILE_FIELD_KEYS = Object.keys(DEFAULT_PROFILE_STATE);
 
@@ -320,7 +323,7 @@ function coinsTodayCount() {
 /** 完成一輪：派幣。同一種玩法一日只派一次。 */
 function earnCoinForMode(mode) {
   const state = loadState();
-  if (!COIN_MODES.includes(mode)) return { state, gained: false, already: false };
+  if (!ALL_COIN_MODES.includes(mode)) return { state, gained: false, already: false };
   if (state.coinsToday[mode]) {
     return { state, gained: false, already: true };
   }
@@ -529,6 +532,8 @@ window.KakaStorage = {
   redeemableCoins,
   resetStars,
   COIN_MODES,
+  EXTRA_COIN_MODES,
+  ALL_COIN_MODES,
   coinsTodayMap,
   coinsTodayCount,
   earnCoinForMode,

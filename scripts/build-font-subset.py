@@ -50,6 +50,8 @@ def collect_han_chars() -> str:
         src = re.sub(r"(?m)^\s*//.*$", "", src)
         for m in re.finditer(r"(?:term|say|cmn):\s*'([^']*)'", src):
             chars.update(m.group(1))
+    for rel in ("data/common-sense-heroes.js", "js/common-sense.js", "common-sense.html"):
+        chars.update(ch for ch in read(ROOT / rel) if "\u4e00" <= ch <= "\u9fff")
     chars.update(UI_EXTRA)
     latin = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789")
     latin.update("，。！？：；、（）／…—·")

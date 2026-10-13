@@ -495,7 +495,7 @@ def check_three_entries() -> None:
     """首頁品牌、四科名稱與朋友入口穩定；英文仍由單一入口分流。"""
     html = read("index.html")
     home = html.split('id="screen-home"', 1)[1].split("</section>", 1)[0] if 'id="screen-home"' in html else ""
-    for label in ["卡卡開心學習樂園", "卡卡中文樂園", "卡卡英文樂園", "卡卡普通話拼音", "卡卡數學樂園"]:
+    for label in ["卡卡開心學習樂園", "卡卡中文樂園", "卡卡英文樂園", "卡卡普通話拼音", "卡卡數學樂園", "卡卡常識樂園"]:
         if label not in home:
             fail("home-labels", f"主頁缺少核准入口／標題：{label}")
     if 'src="./assets/home-learning-picnic.jpg"' not in home or not Path("assets/home-learning-picnic.jpg").is_file():
@@ -514,6 +514,11 @@ def check_three_entries() -> None:
             fail("entries", f"英文學習分流頁唔見 #{btn}")
     if html.count('id="btn-start-english"') != 1:
         fail("entries", "主頁應該只有一個英文學習入口")
+    if 'id="btn-start-common-sense"' not in home or "common-sense.html" not in home:
+        fail("entries", "主頁要有頂層「卡卡常識樂園」入口，連去 common-sense.html")
+    topics = html.split('id="screen-topics"', 1)[1] if 'id="screen-topics"' in html else ""
+    if "卡卡常識樂園" in topics or "btn-start-common-sense" in topics:
+        fail("entries", "常識樂園唔可以掛喺中文主題頁下面")
     if 'id="btn-start-story-demo"' in html or 'id="btn-start-phonics"' in html:
         fail("entries", "主頁應只保留一個英文入口，故事與 Phonics 請由英文分流頁進入")
     phonics = read("js/phonics-app.js")
@@ -1267,6 +1272,35 @@ def check_magic_marker_blanks() -> None:
         fail("magic-marker-blanks", (result.stderr or result.stdout)[-1200:] or "Magic Marker 填空檢查失敗")
 
 
+def check_common_sense() -> None:
+    """主頁頂層常識樂園：社區小英雄學習牆＋隨機 10 題＋10／10 幣。"""
+    for path in (
+        "common-sense.html",
+        "css/common-sense.css",
+        "js/common-sense.js",
+        "data/common-sense-heroes.js",
+        "scripts/test-common-sense.mjs",
+        "assets/home-subjects/common-sense.webp",
+    ):
+        if not Path(path).exists():
+            fail("common-sense", f"缺少 {path}")
+    js = read("js/common-sense.js")
+    html = read("common-sense.html")
+    if "earnCoinForMode" not in js or "common-sense-heroes" not in js:
+        fail("common-sense", "完成一輪要呼叫 earnCoinForMode('common-sense-heroes')")
+    if "開始答題" not in html or "即將推出" not in html:
+        fail("common-sense", "學習牆要有開始答題；面試四格要灰態即將推出")
+    if "draggable" in js or "有講" in js:
+        fail("common-sense", "唔好做拖一拖或家長開口閘")
+    node = shutil.which("node")
+    if node:
+        result = subprocess.run([node, "scripts/test-common-sense.mjs"], capture_output=True, text=True)
+        if result.returncode:
+            fail("common-sense", (result.stdout or result.stderr or "常識樂園檢查失敗").strip()[:800])
+    else:
+        notes.append("冇 node，跳過常識樂園單元測試")
+
+
 def check_one_level_back() -> None:
     """頂欄返回只准返上一層：有 history 就 back，否則父畫面 hash；唔好重載跌主頁。"""
     nav = read("js/nav-back.js")
@@ -1281,6 +1315,9 @@ def check_one_level_back() -> None:
             fail("one-level-back", f"hash／返回還原缺少 {marker}")
     if "nav-back.js" not in index or "applyLocationHash" not in index:
         fail("one-level-back", "index.html 要載入 nav-back 並喺 load 後套用 hash")
+    common = read("common-sense.html")
+    if 'href="index.html#screen-home"' not in common or "nav-back.js" not in common:
+        fail("one-level-back", "常識樂園頂欄無 history 時要返主頁畫面，唔好重載跌去揀小朋友")
     if "showScreen('home')" in read("js/app.js").split("btn-back-sentence")[1][:200]:
         fail("one-level-back", "砌句子遊戲頂欄唔可以跳主頁")
     scene = read("book-scene-demo.html")
@@ -1356,6 +1393,7 @@ CHECKS = [
     check_family_storybook_entry,
     check_four_panel_story,
     check_family_storybook_en_entry,
+    check_common_sense,
     check_one_level_back,
     check_family_names,
     check_carter_family_blanks,

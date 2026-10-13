@@ -3454,7 +3454,7 @@ body:has(#screen-home.active)::before { display: none; }
 
 .home-subject-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(10px, 1.5vw, 20px);
   width: 100%;
 }
@@ -3514,6 +3514,7 @@ body:has(#screen-home.active)::before { display: none; }
 .home-entry-english { background: linear-gradient(145deg, #b67a17, #885314); }
 .home-entry-putonghua { background: linear-gradient(145deg, #5369b9, #3e4f94); }
 .home-entry-math { background: linear-gradient(145deg, #257ba1, #1a5f7e); }
+.home-entry-common-sense { background: linear-gradient(145deg, #d46a3c, #b04a28); }
 
 #screen-home .home-friend-link {
   min-height: 52px;

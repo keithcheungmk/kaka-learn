@@ -473,6 +473,93 @@ def walk(pg, url, shots: Path | None, tag: str):
     if pg.is_visible("#screen-home") and "active" in (pg.get_attribute("#screen-home", "class") or ""):
         raise RuntimeError("Four-panel wall ← 中文 must return one level to Chinese topics, not home")
 
+    # 卡卡常識樂園：主頁頂層 → 包牆 → 學習牆 → 隨機 10 題 → 10／10 慶祝＋幣
+    pg.goto(url, wait_until="domcontentloaded")
+    pg.wait_for_timeout(300)
+    pg.click("#btn-profile-kaka")
+    pg.wait_for_timeout(200)
+    pg.wait_for_selector("#screen-home.active #btn-start-common-sense")
+    cs_href = pg.get_attribute("#btn-start-common-sense", "href") or ""
+    if "common-sense.html" not in cs_href:
+        raise RuntimeError("Home must open 卡卡常識樂園 as a standalone top-level subject")
+    if "卡卡常識樂園" not in (pg.text_content("#screen-home.active") or ""):
+        raise RuntimeError("Home must show the 卡卡常識樂園 subject card")
+    probe("主頁・常識入口")
+    with pg.expect_navigation():
+        pg.click("#btn-start-common-sense")
+    pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-heroes")
+    soon = pg.text_content(".pack-soon") or ""
+    if "面試四格" not in soon or "即將推出" not in soon:
+        raise RuntimeError("Common-sense hub must grey out 面試四格 as coming soon")
+    pg.click("#btn-pack-heroes")
+    pg.wait_for_selector("#view-learn:not(.hidden) #btn-start-quiz")
+    cards = pg.evaluate("() => document.querySelectorAll('#learn-grid .learn-card').length")
+    if cards != 10:
+        raise RuntimeError(f"Learn wall must show all 10 careers at once, got {cards}")
+    start_h = pg.evaluate("() => document.querySelector('#btn-start-quiz')?.getBoundingClientRect().height || 0")
+    if start_h < 44:
+        raise RuntimeError("開始答題 must be at least 44px tall")
+    learn_overflow_x = pg.evaluate("() => document.documentElement.scrollWidth - document.documentElement.clientWidth")
+    if learn_overflow_x > 2:
+        raise RuntimeError(f"Learn wall overflows horizontally by {learn_overflow_x}px")
+    pg.click("#btn-start-quiz")
+    pg.wait_for_selector("#view-quiz:not(.hidden) #quiz-choices .choice")
+    choice_n = pg.evaluate("() => document.querySelectorAll('#quiz-choices .choice').length")
+    if choice_n != 4:
+        raise RuntimeError(f"Quiz must show 4 choices, got {choice_n}")
+    quiz_metrics = pg.evaluate(
+        """() => {
+          const d = document.documentElement;
+          const choices = [...document.querySelectorAll('#quiz-choices .choice')];
+          return {
+            overflowX: d.scrollWidth - d.clientWidth,
+            overflowY: d.scrollHeight - d.clientHeight,
+            minTap: Math.min(...choices.map((el) => Math.min(el.getBoundingClientRect().width, el.getBoundingClientRect().height))),
+            progress: document.querySelector('#status-pill')?.textContent || '',
+          };
+        }"""
+    )
+    if quiz_metrics["overflowX"] > 2:
+        raise RuntimeError(f"Common-sense quiz overflows horizontally by {quiz_metrics['overflowX']}px")
+    if pg.viewport_size["width"] > 700 and quiz_metrics["overflowY"] > 2:
+        raise RuntimeError(f"Common-sense iPad quiz must not page-scroll, overflowY={quiz_metrics['overflowY']}")
+    if quiz_metrics["minTap"] < 44:
+        raise RuntimeError(f"Quiz choices must be at least 44px, got {quiz_metrics['minTap']}")
+    if "已答啱 0／10" not in quiz_metrics["progress"]:
+        raise RuntimeError(f"Quiz progress must start at 已答啱 0／10, got {quiz_metrics['progress']!r}")
+    pg.evaluate("() => { window.__KAKA_TEST__ = true; }")
+    pg.evaluate("() => window.KakaCommonSense.answerCurrentWrong()")
+    wrong_state = pg.evaluate(
+        """() => ({
+          progress: document.querySelector('#status-pill')?.textContent || '',
+          feedback: document.querySelector('#quiz-feedback')?.textContent || '',
+          disabledWrong: [...document.querySelectorAll('#quiz-choices .choice.is-wrong')].length,
+        })"""
+    )
+    if "已答啱 0／10" not in wrong_state["progress"]:
+        raise RuntimeError("Wrong answers must not increment 已答啱 N／10")
+    if "唔係呢個喎" not in wrong_state["feedback"]:
+        raise RuntimeError("Wrong answers need the gentle retry hint")
+    if wrong_state["disabledWrong"] < 1:
+        raise RuntimeError("Wrong choice should stay marked so the child can retry")
+    for _ in range(10):
+        ok = pg.evaluate("() => window.KakaCommonSense.answerCurrentCorrect()")
+        if not ok:
+            raise RuntimeError("Could not click the correct common-sense answer")
+    pg.wait_for_selector("#view-finish:not(.hidden) #finish-msg")
+    finish_msg = pg.text_content("#finish-msg") or ""
+    if "攞到一個 AEON 幣" not in finish_msg and "你好叻呀" not in finish_msg:
+        raise RuntimeError(f"Finish screen must award a coin, got {finish_msg!r}")
+    if pg.is_visible("#view-quiz") and "hidden" not in (pg.get_attribute("#view-quiz", "class") or ""):
+        raise RuntimeError("10／10 must auto-open the celebration screen")
+    pg.click("#back-link")
+    pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-heroes")
+    with pg.expect_navigation():
+        pg.click("#back-link")
+    pg.wait_for_selector("#screen-home.active #btn-start-common-sense")
+    if pg.is_visible("#screen-profiles") and "active" in (pg.get_attribute("#screen-profiles", "class") or ""):
+        raise RuntimeError("Common-sense hub ← 主頁 must not dump on the profile picker")
+
     return seen
 
 

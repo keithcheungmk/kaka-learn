@@ -36,6 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| 卡卡常識樂園 MVP-1 線 A 社區小英雄 | Cursor Chief Lead | `index.html`, `js/storage.js`, `common-sense.html`, `js/common-sense.js`, `css/common-sense.css`, `data/common-sense-heroes.js`, `scripts/check-invariants.py`, `scripts/smoke-shots.py`, `docs/handover.md`, `AGENTS.md` | 2026-10-13 | Keith 批准 v4.1：主頁頂層入口；學習牆列晒 10 職業→開始答題→隨機 10 題四選一；10／10 大星星＋`earnCoinForMode('common-sense-heroes')`；B 面試四格灰態；唔入中文、無家長閘、無拖一拖 |
 | 四格講故事閉環評分（無 ASR） | Cursor Chief Lead（Chinese 範圍） | `four-panel-story.html`, `js/four-panel-story.js`, `css/four-panel-story.css`, `scripts/test-four-panel-story.mjs`, `scripts/check-invariants.py`, `scripts/smoke-shots.py`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | Keith 批准一頁紙：回放後小朋友撳亮四格＋三個自己檢查，家長三勾改為確認；兩邊同意先全星；唔同意「再講一次呀」；唔半星／唔 ASR／唔上傳；保留 #141 一層返回 |
 | 英文系列揀選頁清走 Little Fox 標籤 | Cursor Chief Lead（English 範圍） | `index.html`, `scripts/check-invariants.py`, `scripts/test-story-mission.mjs`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | #138 squash-merge 漏咗標籤移除；清走「選擇故事系列／Little Fox 系列／LITTLE FOX eyebrow」；保留返回、標題、幣 pill、四張卡；唔自 merge |
 | 故事閱讀頁「← 中文」返回書目 | Cursor Chief Lead（Chinese 範圍） | `family-storybook.html`, `js/family-storybook.js`, `scripts/check-invariants.py`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-11 | Keith：閱讀頁左上「← 中文」返 #library，唔跳中文主題根；唔自 merge |

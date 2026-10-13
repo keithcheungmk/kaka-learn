@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
+  <meta name="theme-color" content="#eaf7ff">
+  <title>卡卡常識樂園｜社區小英雄</title>
+  <link rel="stylesheet" href="css/common-sense.css?v=cs-heroes">
+</head>
+<body>
+  <main class="cs-shell">
+    <header class="topbar">
+      <a id="back-link" class="back-link" href="index.html#screen-home">← 主頁</a>
+      <div class="brand">
+        <span id="brand-kicker">常識樂園</span>
+        <h1 id="brand-title">卡卡常識樂園</h1>
+      </div>
+      <div id="status-pill" class="status-pill" aria-live="polite">社區英雄</div>
+    </header>
+
+    <section id="view-packs" class="view" aria-labelledby="packs-heading">
+      <div class="intro">
+        <h2 id="packs-heading">揀一個主題包</h2>
+        <p>先學社區小英雄做咩工作，再答十題攞幣。面試四格稍後先玩。</p>
+      </div>
+      <div class="pack-grid">
+        <button type="button" class="pack pack-playable" id="btn-pack-heroes" aria-label="社區小英雄，學職業再答十題">
+          <img class="pack-art" src="assets/careers/yisheng.webp" alt="" width="256" height="256">
+          <span class="pack-meta">
+            <strong>A · 社區小英雄</strong>
+            <span>學職業 → 答 10 題 → 攞幣</span>
+          </span>
+        </button>
+        <div class="pack pack-soon" aria-disabled="true">
+          <span class="pack-art pack-soon-icon" aria-hidden="true">📖</span>
+          <span class="pack-meta">
+            <strong>B · 面試四格</strong>
+            <span>即將推出</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-learn" class="view hidden" aria-labelledby="learn-heading">
+      <div class="intro learn-intro">
+        <h2 id="learn-heading">社區小英雄</h2>
+        <p>睇晒呢啲小英雄做咩工作，學完就撳「開始答題」——答啱 10 題就有大星星同幣！撳卡可以聽一聽。</p>
+      </div>
+      <div id="learn-grid" class="learn-grid"></div>
+      <div class="sticky-cta">
+        <button type="button" class="cta-big" id="btn-start-quiz">開始答題</button>
+      </div>
+    </section>
+
+    <section id="view-quiz" class="view hidden quiz-view" aria-labelledby="quiz-heading">
+      <h2 id="quiz-heading" class="visually-hidden">答題挑戰</h2>
+      <div class="quiz-body">
+        <div class="quiz-hero">
+          <img id="quiz-img" alt="" width="512" height="512">
+          <p class="quiz-q" id="quiz-q"></p>
+          <button type="button" class="listen-btn" id="btn-quiz-listen">🔊 聽一聽</button>
+        </div>
+        <div>
+          <div class="choices" id="quiz-choices" role="group" aria-label="職責答案"></div>
+          <p class="feedback" id="quiz-feedback" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-finish" class="view hidden finish-view" aria-labelledby="finish-heading">
+      <div class="celebrate">
+        <div class="burst" aria-hidden="true">★</div>
+        <img class="ranger" src="assets/kaka-ranger-celebrate.png" alt="" width="235" height="305">
+        <h2 id="finish-heading">已答啱 10／10！</h2>
+        <p class="coin-line" id="finish-msg">今輪玩完喇！攞到一個 AEON 幣！</p>
+        <div class="finish-actions">
+          <button type="button" class="cta-big" id="btn-play-again">再開一次</button>
+          <button type="button" class="ghost-btn" id="btn-back-packs">返包牆</button>
+          <a class="ghost-btn" id="btn-back-home" href="index.html#screen-home">返主頁</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/no-zoom.js?v=cs-heroes"></script>
+  <script src="js/nav-back.js?v=20261011-one-level"></script>
+  <script src="js/storage.js?v=cs-heroes"></script>
+  <script src="js/speech.js?v=cs-heroes"></script>
+  <script src="data/common-sense-heroes.js?v=cs-heroes"></script>
+  <script src="js/common-sense.js?v=cs-heroes"></script>
+</body>
+</html>

@@ -11,6 +11,8 @@ const read = (rel) => fs.readFileSync(path.join(root, rel), 'utf8');
 const navSrc = read('js/nav-back.js');
 const appSrc = read('js/app.js');
 const fourJs = read('js/four-panel-story.js');
+const commonSenseJs = read('js/common-sense.js');
+const commonSenseHtml = read('common-sense.html');
 const familyJs = read('js/family-storybook.js');
 const familyEnJs = read('js/family-storybook-en.js');
 
@@ -66,5 +68,9 @@ assert.match(familyJs, /goBackOr\('index\.html#screen-topics'\)/);
 assert.match(familyEnJs, /leaveReader\(\)/);
 assert.match(familyEnJs, /goBackOr\('index\.html#screen-story-series'\)/);
 assert.doesNotMatch(familyEnJs, /goBackOr\('index\.html#screen-english-hub'\)/);
+assert.match(commonSenseHtml, /href="index.html#screen-home"/);
+assert.match(commonSenseHtml, /nav-back\.js/);
+assert.match(commonSenseJs, /HOME_HREF = 'index\.html#screen-home'/);
+assert.match(commonSenseJs, /goBackOr\(HOME_HREF\)/);
 
 console.log('PASS: one-level back — history.back when same-origin, else parent hash.');

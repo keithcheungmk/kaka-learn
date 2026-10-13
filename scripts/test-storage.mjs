@@ -183,6 +183,23 @@ test('接一接沿用砌字幣位：仍然只有三種每日幣，不會新增�
   assert.equal(S.coinsTodayCount(), 1);
 });
 
+test('常識樂園獨立幣位：一日一次，唔佔中文聽配砌三個幣位', () => {
+  const S = freshStorage();
+  S.setActiveProfile('kaka');
+  assert.equal(S.COIN_MODES.includes('common-sense-heroes'), false);
+  assert.ok(S.EXTRA_COIN_MODES.includes('common-sense-heroes'));
+  const a = S.earnCoinForMode('common-sense-heroes');
+  assert.equal(a.gained, true);
+  assert.equal(a.state.coinsTotal, 1);
+  assert.equal(S.coinsTodayCount(), 0, '中文今日幣位仍係 0／3');
+  const b = S.earnCoinForMode('common-sense-heroes');
+  assert.equal(b.gained, false);
+  assert.equal(b.already, true);
+  assert.equal(S.earnCoinForMode('listen').gained, true);
+  assert.equal(S.coinsTodayCount(), 1);
+  assert.equal(S.loadState().coinsTotal, 2);
+});
+
 test('Phonics Phase 3A：認音／拼合／拆音分開記錄，recent 最多 10 次', () => {
   const S = freshStorage();
   S.setActiveProfile('kaka');
