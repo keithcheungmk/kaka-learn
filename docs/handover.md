@@ -30,12 +30,17 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 ## 進行中（認領）
 
+| 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
+|---|---|---|---|---|
+| 常識樂園 #146 live QA 修復 | Cursor Chief Lead | `css/interview-comics.css`, `js/common-sense.js`, `scripts/test-common-sense.mjs`, `scripts/test-interview-comics.mjs`, `scripts/smoke-shots.py`, `docs/handover.md` | 2026-10-13 | 面試列表淺底、1280 提示鈕、過關←學習牆、今日已攞 |
+
 2026-10-04 ChatGPT／Codex：PTH audit 修復在獨立 worktree `/private/tmp/kaka-pth-repair` 完成，進入 CI／發佈驗證；勿用舊本機 PTH renderer 覆蓋。其餘共享工作樹不變；Supabase 支線仍暫停。
 
 改共享檔（尤其係下面「撞車高危檔案」）之前，先喺呢度認領。做完／merge 完就刪嗰行。**永遠唔好兩個人同時認領同一批檔／同一個功能。**
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| 常識樂園 #146 live QA 修復 | Cursor Chief Lead | `css/interview-comics.css`, `js/common-sense.js`, `scripts/test-common-sense.mjs`, `scripts/test-interview-comics.mjs`, `scripts/smoke-shots.py`, `docs/handover.md` | 2026-10-13 | 面試列表淺底、1280 提示鈕、過關←學習牆、今日已攞 |
 | 英文系列揀選頁清走 Little Fox 標籤 | Cursor Chief Lead（English 範圍） | `index.html`, `scripts/check-invariants.py`, `scripts/test-story-mission.mjs`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | #138 squash-merge 漏咗標籤移除；清走「選擇故事系列／Little Fox 系列／LITTLE FOX eyebrow」；保留返回、標題、幣 pill、四張卡；唔自 merge |
 | 故事閱讀頁「← 中文」返回書目 | Cursor Chief Lead（Chinese 範圍） | `family-storybook.html`, `js/family-storybook.js`, `scripts/check-invariants.py`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-11 | Keith：閱讀頁左上「← 中文」返 #library，唔跳中文主題根；唔自 merge |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
