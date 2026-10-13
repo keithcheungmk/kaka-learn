@@ -116,11 +116,24 @@ body { min-height: 100dvh; }
   border-radius: 12px;
   background: #e8ecf4;
 }
+.wall-hit {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 12px;
+}
 .level-thumb img {
   display: block;
   width: 100%;
   aspect-ratio: 1.42;
   object-fit: cover;
+}
+.level-thumb.is-lit img,
+.wall-hit:active img {
+  box-shadow: 0 0 0 3px var(--gold);
 }
 .level-thumb b {
   position: absolute;
@@ -211,7 +224,8 @@ button:focus-visible {
   background: #e9edf6;
   border: 3px solid #f3f5ff;
 }
-.comic-panel.is-lit img {
+.comic-panel.is-lit img,
+.comic-hit:active img {
   border-color: var(--gold);
   box-shadow: 0 0 0 3px #4de0be99;
 }

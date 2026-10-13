@@ -398,11 +398,49 @@ def walk(pg, url, shots: Path | None, tag: str):
     thumbs = pg.evaluate("() => document.querySelectorAll('#level-grid .level-thumb img').length")
     if thumbs != 4:
         raise RuntimeError(f"Level card must show 4 numbered panels, got {thumbs}")
+    wall_preview = pg.evaluate(
+        """() => {
+          const hit = document.querySelector('#level-grid .wall-hit[data-beat="第一"]');
+          if (!hit) return { ok: false };
+          hit.click();
+          const lit = hit.closest('.level-thumb')?.classList.contains('is-lit');
+          const stillWall = !document.querySelector('#wall')?.classList.contains('hidden');
+          return { ok: true, lit, stillWall };
+        }"""
+    )
+    if not wall_preview.get("ok") or wall_preview.get("lit") is not True:
+        raise RuntimeError("Level-wall comic thumbs must light up when tapped")
+    if wall_preview.get("stillWall") is not True:
+        raise RuntimeError("Wall thumb taps must not start the level")
+    start_label = pg.text_content("[data-start='rainbow-umbrella']") or ""
+    if start_label.strip() != "點此開始":
+        raise RuntimeError(f"Level start button must be 「點此開始」, got {start_label!r}")
+    if "兒" in start_label or "儿" in start_label:
+        raise RuntimeError("Level start button must not keep the stray 兒")
     pg.click("[data-start='rainbow-umbrella']")
     pg.wait_for_selector("#play:not(.hidden) #btn-record")
     panels = pg.evaluate("() => document.querySelectorAll('#comic-board .comic-panel img').length")
     if panels != 4:
         raise RuntimeError(f"Play screen must show 4 comic panels, got {panels}")
+    preview = pg.evaluate(
+        """() => {
+          const hit = document.querySelector('#comic-board .comic-hit[data-beat="第一"]');
+          if (!hit) return { ok: false, reason: 'missing-hit' };
+          hit.click();
+          const lit = document.querySelector('#comic-board .comic-panel[data-beat="第一"]')?.classList.contains('is-lit');
+          const reviewing = document.querySelector('#play')?.classList.contains('is-reviewing');
+          const kidHidden = document.querySelector('#kid-panels')?.classList.contains('hidden');
+          return { ok: true, lit, reviewing, kidHidden };
+        }"""
+    )
+    if not preview.get("ok"):
+        raise RuntimeError("Play screen must expose tappable comic hits before recording")
+    if preview.get("lit") is not True:
+        raise RuntimeError("Comic panels must light up before recording finishes")
+    if preview.get("reviewing") is True:
+        raise RuntimeError("Preview taps must not enter the parent/kid check step")
+    if preview.get("kidHidden") is not True:
+        raise RuntimeError("Preview taps must not reveal scoring checks")
     privacy = pg.text_content("#privacy-note") or ""
     if "唔會上傳" not in privacy or "呢部機" not in privacy:
         raise RuntimeError("Play screen must show local-only microphone copy")

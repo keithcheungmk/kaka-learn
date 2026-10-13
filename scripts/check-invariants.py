@@ -1084,6 +1084,12 @@ def check_four_panel_story() -> None:
         fail("four-panel", "唔好做假 2/5 星或半星評分")
     if "第一、然後、後來、最後，同我講個故事啦" not in data:
         fail("four-panel", "提示要係粵語「第一、然後、後來、最後，同我講個故事啦」")
+    if "點此兒" in data or "点此儿" in data or "點此兒" in js:
+        fail("four-panel", "關卡牆入口唔好寫「點此兒開始」；要用「點此開始」")
+    if "點此開始" not in data:
+        fail("four-panel", "關卡牆入口要寫「點此開始」")
+    if "previewComicBeat" not in js or "onComicHit" not in js or "previewWallBeat" not in js:
+        fail("four-panel", "關卡牆同等錄音／錄音中都要撳得亮四格；評分仍喺回放後先計")
     for check in (
         "講齊四格？",
         "有然後／最後？",

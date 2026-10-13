@@ -122,6 +122,43 @@
     if (speech.speakTerm) speech.speakTerm(text, { rate: 0.92, pitch: 1.05 });
   }
 
+  function isRecordingNow() {
+    return !!(recorder && recorder.state === 'recording');
+  }
+
+  function lightComicBeat(beat) {
+    const panel = document.querySelector(`#comic-board .comic-panel[data-beat="${beat}"]`);
+    if (!panel) return false;
+    panel.classList.add('is-lit');
+    return true;
+  }
+
+  /** 等錄音／錄音中都可以撳四格：亮燈；未錄音仲會讀格名。評分唔喺呢度計。 */
+  function previewComicBeat(beat) {
+    if (!current || !beat || play.classList.contains('is-reviewing')) return false;
+    if (!lightComicBeat(beat)) return false;
+    if (!isRecordingNow()) speakLine(beat);
+    return true;
+  }
+
+  function onComicHit(beat) {
+    if (!beat) return;
+    if (play.classList.contains('is-reviewing')) {
+      toggleKidPanel(beat);
+      return;
+    }
+    previewComicBeat(beat);
+  }
+
+  function previewWallBeat(button) {
+    const beat = button?.dataset?.beat;
+    const thumb = button?.closest('.level-thumb');
+    if (!beat || !thumb) return false;
+    thumb.classList.add('is-lit');
+    speakLine(beat);
+    return true;
+  }
+
   function resetKidLoop() {
     kidPanelButtons().forEach((btn) => setKidOn(btn, false));
     kidSelfButtons().forEach((btn) => setKidOn(btn, false));
@@ -202,7 +239,12 @@
     $('level-grid').innerHTML = levels.map((level) => {
       const done = isLevelDone(level.id);
       const thumbs = level.panels.map((panel, index) => (
-        `<figure class="level-thumb"><img src="${panel.image}" alt="${panel.alt}"><b>${index + 1}</b></figure>`
+        `<figure class="level-thumb">
+          <button type="button" class="wall-hit" data-beat="${panel.beat}" aria-label="聽${panel.beat}">
+            <img src="${panel.image}" alt="${panel.alt}">
+          </button>
+          <b>${index + 1}</b>
+        </figure>`
       )).join('');
       return `<article class="level-card" data-level="${level.id}">
         <div class="level-thumbs">${thumbs}</div>
@@ -215,6 +257,9 @@
     }).join('');
     $('level-grid').querySelectorAll('[data-start]').forEach((button) => {
       button.addEventListener('click', () => openLevel(button.dataset.start));
+    });
+    $('level-grid').querySelectorAll('.wall-hit').forEach((button) => {
+      button.addEventListener('click', () => previewWallBeat(button));
     });
     $('brand-title').textContent = '四格講故事';
     $('brand-kicker').textContent = '講故事・粵語';
@@ -233,7 +278,7 @@
       </figure>`
     )).join('');
     $('comic-board').querySelectorAll('.comic-hit').forEach((button) => {
-      button.addEventListener('click', () => toggleKidPanel(button.dataset.beat));
+      button.addEventListener('click', () => onComicHit(button.dataset.beat));
     });
   }
 
@@ -431,6 +476,9 @@
     bothSidesAgree,
     isLevelDone,
     showReview,
+    previewComicBeat,
+    previewWallBeat,
+    onComicHit,
     toggleKidPanel,
     toggleKidSelf,
     revealClosedLoopForTest() {
