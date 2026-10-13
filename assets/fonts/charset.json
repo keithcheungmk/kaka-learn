@@ -821,7 +821,7 @@
     "餐",
     "餓",
     "館",
-    "餾",
+    "餸",
     "香",
     "馬",
     "馴",
@@ -865,8 +865,8 @@
     "龜"
   ],
   "files": {
-    "noto-sans-hk-500.woff2": 226024,
-    "noto-sans-hk-700.woff2": 231072,
+    "noto-sans-hk-500.woff2": 226304,
+    "noto-sans-hk-700.woff2": 231160,
     "fredoka.woff2": 34808
   }
 }

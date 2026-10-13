@@ -30,7 +30,7 @@ window.COMMON_SENSE_HEROES = {
       wrong: [
         '喺馬路指揮交通、保護大家',
         '開車載客人去想去嘅地方',
-        '喺廚房煮飯煮餾畀人食',
+        '喺廚房煮飯煮餸畀人食',
       ],
       audio: '呢個係護士。護士會喺醫院照顧病人，幫手打針、量體溫，同醫生一齊照顧大家。',
     },
@@ -94,15 +94,15 @@ window.COMMON_SENSE_HEROES = {
       id: 'chushi',
       name: '廚師',
       image: 'assets/careers/chushi.webp',
-      wallLine: '廚師——煮飯煮餾畀人食',
+      wallLine: '廚師——煮飯煮餸畀人食',
       ask: '呢個係廚師。佢做啲咩？',
-      correct: '喺廚房煮飯煮餾畀大家食',
+      correct: '喺廚房煮飯煮餸畀大家食',
       wrong: [
         '喺馬路指揮交通保護大家',
         '趕去現場救火同埋救人',
         '喺學校教小朋友認字學嘢',
       ],
-      audio: '呢個係廚師。廚師喺廚房煮飯煮餾，整好味嘅飯菜畀大家食。',
+      audio: '呢個係廚師。廚師喺廚房煮飯煮餸，整好味嘅飯菜畀大家食。',
     },
     {
       id: 'youchai',
