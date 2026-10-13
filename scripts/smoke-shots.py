@@ -590,6 +590,23 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Finish screen must award a coin, got {finish_msg!r}")
     if pg.is_visible("#view-quiz") and "hidden" not in (pg.get_attribute("#view-quiz", "class") or ""):
         raise RuntimeError("10／10 must auto-open the celebration screen")
+    pg.click("#btn-play-again")
+    pg.wait_for_selector("#view-quiz:not(.hidden) #quiz-choices .choice")
+    replay = pg.evaluate(
+        """() => ({
+          viewHidden: document.querySelector('#view-learn')?.classList.contains('hidden'),
+          progress: document.querySelector('#status-pill')?.textContent || '',
+          choices: document.querySelectorAll('#quiz-choices .choice').length,
+        })"""
+    )
+    if not replay["viewHidden"]:
+        raise RuntimeError("再開一次 must start a new quiz, not return to the learn wall")
+    if "已答啱 0／10" not in replay["progress"]:
+        raise RuntimeError(f"再開一次 must reshuffle a fresh 10-question round, got {replay['progress']!r}")
+    if replay["choices"] != 4:
+        raise RuntimeError(f"Replay quiz must show 4 choices, got {replay['choices']}")
+    pg.click("#back-link")
+    pg.wait_for_selector("#view-learn:not(.hidden) #btn-start-quiz")
     pg.click("#back-link")
     pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-heroes")
     with pg.expect_navigation():

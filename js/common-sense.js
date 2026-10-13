@@ -264,6 +264,9 @@
       goPacks();
       return;
     }
+    // Pack-wall ← 主頁: fallback is index.html#screen-home, not bare index.html.
+    // One live QA hit 你係邊個 once and could not repro; history.back() can
+    // land on index without a restored hash/profile. No wrong href here.
     (window.KakaNav || { goBackOr: (href) => { location.assign(href); } }).goBackOr(HOME_HREF);
   }
 
@@ -277,7 +280,7 @@
     });
     $('btn-play-again')?.addEventListener('click', () => {
       stopSpeech();
-      goLearn();
+      startQuiz();
     });
     $('btn-back-packs')?.addEventListener('click', goPacks);
     $('btn-back-home')?.addEventListener('click', (event) => {
