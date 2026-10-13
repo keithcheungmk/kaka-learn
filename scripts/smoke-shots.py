@@ -590,7 +590,7 @@ def walk(pg, url, shots: Path | None, tag: str):
             raise RuntimeError("Could not click the correct common-sense answer")
     pg.wait_for_selector("#view-finish:not(.hidden) #finish-msg")
     finish_msg = pg.text_content("#finish-msg") or ""
-    if "攞到一個 AEON 幣" not in finish_msg and "你好叻呀" not in finish_msg:
+    if "攞到一個 AEON 幣" not in finish_msg:
         raise RuntimeError(f"Finish screen must award a coin, got {finish_msg!r}")
     if pg.is_visible("#view-quiz") and "hidden" not in (pg.get_attribute("#view-quiz", "class") or ""):
         raise RuntimeError("10／10 must auto-open the celebration screen")
@@ -609,6 +609,19 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"再開一次 must reshuffle a fresh 10-question round, got {replay['progress']!r}")
     if replay["choices"] != 4:
         raise RuntimeError(f"Replay quiz must show 4 choices, got {replay['choices']}")
+    for _ in range(10):
+        ok = pg.evaluate("() => window.KakaCommonSense.answerCurrentCorrect()")
+        if not ok:
+            raise RuntimeError("Could not finish the replay common-sense round")
+    pg.wait_for_selector("#view-finish:not(.hidden) #finish-msg")
+    replay_msg = pg.text_content("#finish-msg") or ""
+    if "今日已攞" not in replay_msg:
+        raise RuntimeError(f"Same-day replay must say 今日已攞, got {replay_msg!r}")
+    if "攞到一個 AEON 幣" in replay_msg:
+        raise RuntimeError("Same-day replay must not imply another coin")
+    back_label = pg.text_content("#back-link") or ""
+    if "學習牆" not in back_label:
+        raise RuntimeError(f"Finish top-bar must return to the learn wall, got {back_label!r}")
     pg.click("#back-link")
     pg.wait_for_selector("#view-learn:not(.hidden) #btn-start-quiz")
     pg.click("#back-link")
@@ -664,6 +677,20 @@ def walk(pg, url, shots: Path | None, tag: str):
     for start_id in ("rain-no-umbrella", "mtr-need-seat", "park-ball-lost"):
         if not pg.query_selector(f"[data-start='{start_id}']"):
             raise RuntimeError(f"Interview comics wall missing {start_id}")
+    wall_bg = pg.evaluate(
+        """() => {
+          const htmlBg = getComputedStyle(document.documentElement).backgroundColor;
+          const bodyBg = getComputedStyle(document.body).backgroundColor;
+          document.scrollingElement.scrollTop = document.scrollingElement.scrollHeight;
+          const bottom = document.elementFromPoint(24, window.innerHeight - 24);
+          const bottomBg = bottom ? getComputedStyle(bottom).backgroundColor : '';
+          document.scrollingElement.scrollTop = 0;
+          return { htmlBg, bodyBg, bottomBg };
+        }"""
+    )
+    for key, value in wall_bg.items():
+        if "9, 15, 48" in value or "16, 26, 67" in value:
+            raise RuntimeError(f"Interview wall must use the light hub background, {key}={value}")
     pg.click("[data-start='rain-no-umbrella']")
     pg.wait_for_selector("#play:not(.hidden) .comic-hit")
     preview = pg.evaluate(
@@ -678,6 +705,47 @@ def walk(pg, url, shots: Path | None, tag: str):
     )
     if preview["preview"] < 1:
         raise RuntimeError("Interview comics panels must react before recording")
+
+    def prompt_clipped():
+        box = pg.evaluate(
+            """() => {
+              const el = document.querySelector('#btn-prompt');
+              if (!el) return { missing: true };
+              const r = el.getBoundingClientRect();
+              return {
+                missing: false,
+                left: r.left,
+                right: r.right,
+                top: r.top,
+                bottom: r.bottom,
+                width: r.width,
+                height: r.height,
+                vw: window.innerWidth,
+                vh: window.innerHeight,
+                text: (el.textContent || '').trim(),
+              };
+            }"""
+        )
+        if box.get("missing"):
+            return "missing 🔊 提示"
+        if "提示" not in box["text"]:
+            return f"prompt label {box['text']!r}"
+        if box["width"] < 44 or box["height"] < 44:
+            return f"prompt too small {box['width']}x{box['height']}"
+        if box["left"] < 2 or box["right"] > box["vw"] - 2 or box["top"] < 2 or box["bottom"] > box["vh"] + 2:
+            return f"prompt clipped {box}"
+        return ""
+
+    clipped = prompt_clipped()
+    if clipped:
+        raise RuntimeError(f"Interview play 提示 must stay fully tappable, {clipped}")
+    original = pg.viewport_size
+    pg.set_viewport_size({"width": 1280, "height": original["height"]})
+    pg.wait_for_timeout(120)
+    clipped_1280 = prompt_clipped()
+    pg.set_viewport_size(original)
+    if clipped_1280:
+        raise RuntimeError(f"Interview play 提示 must stay fully tappable at 1280, {clipped_1280}")
     pg.click("#back-link")
     pg.wait_for_selector("#wall:not(.hidden) [data-start='rain-no-umbrella']")
     with pg.expect_navigation():

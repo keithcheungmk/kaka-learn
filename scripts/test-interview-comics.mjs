@@ -35,7 +35,16 @@ assert.match(js, /KakaInterviewComics/);
 assert.doesNotMatch(js, /fetch\(|XMLHttpRequest|FormData|webkitSpeechRecognition|SpeechRecognition/);
 assert.doesNotMatch(js, /2\/5|五星|半星|half-star/);
 assert.match(css, /is-preview/);
+assert.match(css, /html,\s*\nbody/);
+assert.match(css, /background-color:\s*#eaf7ff/);
+assert.match(css, /color-scheme:\s*light/);
+assert.match(css, /height:\s*auto/);
+assert.match(css, /#btn-prompt/);
+assert.match(css, /flex-shrink:\s*0/);
+assert.doesNotMatch(css, /\.cs-comics html/);
+assert.doesNotMatch(css, /#090f30|#101a43/);
 assert.match(html, /extend-box/);
+assert.match(html, /id="btn-prompt"/);
 
 const topicsStart = index.indexOf('id="screen-topics"');
 const topics = topicsStart >= 0 ? index.slice(topicsStart) : '';

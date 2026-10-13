@@ -1297,6 +1297,7 @@ def check_common_sense() -> None:
         "assets/common-sense/process/milk-1.svg",
         "assets/common-sense/process/bread-1.svg",
         "interview-comics.html",
+        "css/interview-comics.css",
         "js/interview-comics.js",
         "data/interview-comics.js",
         "scripts/test-common-sense.mjs",
@@ -1309,6 +1310,10 @@ def check_common_sense() -> None:
     html = read("common-sense.html")
     if "earnCoinForMode" not in js or "common-sense-heroes" not in js:
         fail("common-sense", "完成一輪要呼叫 earnCoinForMode")
+    if "今日已攞" not in js:
+        fail("common-sense", "同一日重玩要講今日已攞，唔好誤導再領幣")
+    if "← 包牆" in js or "view === 'learn' || view === 'finish'" in js:
+        fail("common-sense", "線 A 過關頂欄要返學習牆，唔好跳過")
     if "開始答題" not in html or "即將推出" not in html:
         fail("common-sense", "學習牆要有開始答題；P9 其餘包要標即將推出")
     if "draggable" in js or "有講" in js:

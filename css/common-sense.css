@@ -444,6 +444,9 @@ a.pack { text-decoration: none; }
   font-weight: 800;
   line-height: 1.4;
 }
+.coin-line.is-already {
+  color: var(--accent);
+}
 .finish-actions {
   display: grid;
   gap: 8px;

@@ -117,7 +117,7 @@
       setPill(`已答啱 ${correctCount}／10`);
     } else if (next === 'finish') {
       setBrand('過關', title);
-      setBack('← 包牆', HOME_HREF);
+      setBack('← 學習牆', HOME_HREF);
       setPill('10／10');
     }
   }
@@ -327,11 +327,14 @@
       const msg = $('finish-msg');
       const line = coin.gained
         ? '今輪玩完喇！攞到一個 AEON 幣！'
-        : '今輪玩完喇！你好叻呀！呢個玩法今日嘅幣已經攞咗，試下第二個玩法啦';
-      if (msg) msg.textContent = line;
+        : '今日已攞！今輪玩完喇，再開一次唔會再派幣。';
+      if (msg) {
+        msg.textContent = line;
+        msg.classList.toggle('is-already', Boolean(coin.already));
+      }
       speech.playStarCue?.({ muted: isMuted() });
       if (coin.gained) speech.playCoinHintCue?.({ muted: isMuted() });
-      speak(coin.gained ? '今輪玩完喇！攞到一個 AEON 幣！' : '今輪玩完喇！你好叻呀！');
+      speak(coin.gained ? '今輪玩完喇！攞到一個 AEON 幣！' : '今日已攞！今輪玩完喇！');
     }
     showView('finish');
   }
@@ -362,12 +365,12 @@
 
   function onBack(event) {
     event.preventDefault();
-    if (view === 'quiz') {
+    if (view === 'quiz' || view === 'finish') {
       stopSpeech();
       goLearn();
       return;
     }
-    if (view === 'learn' || view === 'finish') {
+    if (view === 'learn') {
       stopSpeech();
       goPacks();
       return;
