@@ -9,7 +9,7 @@ window.FOUR_PANEL_STORIES = [
     id: 'rainbow-umbrella',
     title: '雨停了，收起雨傘',
     place: '回家路上',
-    startLabel: '點此兒開始',
+    startLabel: '點此開始',
     prompt: '第一、然後、後來、最後，同我講個故事啦',
     modelStory: '第一，秋天返屋企路上開始落雨，禧禧同蛙蛙一齊行。然後，蛙蛙開咗把橙色雨傘，兩個人一齊避雨。後來，地上有個小水窪，禧禧小心行過。最後，雨停咗，太陽出嚟，兩個人收起小雨傘返屋企。',
     panels: [
