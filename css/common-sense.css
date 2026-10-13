@@ -62,6 +62,15 @@ body { min-height: 100dvh; }
   flex-direction: column;
   min-width: 0;
 }
+@media (min-width: 701px) {
+  .cs-shell {
+    height: 100dvh;
+    overflow: hidden;
+  }
+  #view-learn {
+    min-height: 0;
+  }
+}
 
 .topbar {
   display: flex;
@@ -163,13 +172,18 @@ body { min-height: 100dvh; }
 .pack-meta strong { font-size: 1.12rem; }
 .pack-meta span { color: var(--muted); font-size: 0.9rem; }
 
-.learn-intro { margin-bottom: 10px; }
+.learn-intro { margin-bottom: 10px; flex-shrink: 0; }
+#view-learn { overflow: hidden; }
 .learn-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 148px), 1fr));
   gap: 10px;
-  padding-bottom: 84px;
   min-width: 0;
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 8px;
+  align-content: start;
+  grid-auto-rows: min-content;
 }
 .learn-card {
   appearance: none;
@@ -198,6 +212,7 @@ body { min-height: 100dvh; }
 .learn-card img {
   width: 100%;
   aspect-ratio: 1;
+  max-height: 160px;
   object-fit: cover;
   border-radius: 12px;
   background: #eef4fb;
@@ -208,10 +223,9 @@ body { min-height: 100dvh; }
 .learn-card .hear { margin: 6px 0 0; color: var(--accent2); font-size: 0.75rem; font-weight: 700; }
 
 .sticky-cta {
-  position: sticky;
-  bottom: 10px;
-  z-index: 4;
-  padding-top: 8px;
+  flex-shrink: 0;
+  padding-top: 10px;
+  padding-bottom: 4px;
 }
 .cta-big {
   width: 100%;
@@ -360,7 +374,14 @@ body { min-height: 100dvh; }
 }
 
 @media (min-width: 900px) and (orientation: landscape) {
-  .learn-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); padding-bottom: 76px; }
+  .learn-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .intro { padding: 12px 16px; }
+  .intro h2 { margin-bottom: 4px; }
+  .learn-card { padding: 8px; }
+  .learn-card img { max-height: 112px; }
+  .learn-card .name { margin: 4px 0 1px; font-size: 0.92rem; }
+  .learn-card .duty { font-size: 0.7rem; }
+  .learn-card .hear { margin-top: 2px; }
   .quiz-body {
     display: grid;
     grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
@@ -371,9 +392,14 @@ body { min-height: 100dvh; }
   .quiz-hero img { width: min(240px, 32dvh); }
 }
 
+@media (max-width: 1050px) {
+  .learn-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 700px) {
   .cs-shell { width: min(100% - 20px, 1100px); }
-  .learn-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #view-learn { overflow: visible; }
+  .learn-grid { overflow: visible; flex: none; }
   .quiz-view { overflow: visible; }
 }
 
