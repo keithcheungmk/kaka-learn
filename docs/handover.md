@@ -36,7 +36,6 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 隱藏配一配＋連一連放大＋完成巴斯光年獎勵 | Cursor Chief Lead | `js/celebrate-finish.js`, `css/celebrate-finish.css`, `js/app.js`, `css/phonics.css`, `css/styles.css`, `index.html`, 各完成頁, `scripts/check-invariants.py` | 2026-10-14 | Keith：玩法頁藏配一配；iPad 連一連圖大約大 50%；完成頒星／幣先播太空戰士獎勵＋粵語再出再玩掣 |
 | 英文系列揀選頁清走 Little Fox 標籤 | Cursor Chief Lead（English 範圍） | `index.html`, `scripts/check-invariants.py`, `scripts/test-story-mission.mjs`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | #138 squash-merge 漏咗標籤移除；清走「選擇故事系列／Little Fox 系列／LITTLE FOX eyebrow」；保留返回、標題、幣 pill、四張卡；唔自 merge |
 | 故事閱讀頁「← 中文」返回書目 | Cursor Chief Lead（Chinese 範圍） | `family-storybook.html`, `js/family-storybook.js`, `scripts/check-invariants.py`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-11 | Keith：閱讀頁左上「← 中文」返 #library，唔跳中文主題根；唔自 merge |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
@@ -111,11 +110,12 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
-### 2026-10-14 · Cursor Chief Lead（隱藏配一配＋連一連放大＋完成獎勵）
+### 2026-10-14 · Cursor Chief Lead（#154 隱藏配一配＋連一連放大＋完成獎勵）
 
 - 中文去玩玩隱藏「配一配」，保留 `#screen-match`／`startMatchMode`。
 - 連一連 iPad／寬螢幕圖片大約增大 50%（`min(120px, 15vw, 18vh)`；手機 ≤640px 唔改）。
 - 新共用 `KakaCelebrate`：重用 `kaka-ranger-celebrate.png`、`kaka-ranger-star.png`，粵語「你好叻啊，完成咗啦，獎勵你一個金幣！」，動畫期間藏再玩掣，可跳過。
+- PR #154 CI 綠後 fast-forward 入 `main`。
 
 ### 2026-10-14 · Cursor Chief Lead（#152 出白氣再分色換景）
 
