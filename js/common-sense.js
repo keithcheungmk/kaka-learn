@@ -125,18 +125,26 @@
     slot?.classList.add('is-ready');
   }
 
+  function revealMedia(img, slot, instant) {
+    const go = () => markMediaReady(img, slot, instant);
+    if (typeof img.decode === 'function' && img.naturalWidth > 0) {
+      img.decode().then(go, go);
+      return;
+    }
+    go();
+  }
+
   function bindMedia(root) {
     const scope = root || document;
     scope.querySelectorAll('.cs-media img').forEach((img) => {
       const slot = img.closest('.cs-media');
       const instant = img.complete && img.naturalWidth > 0;
-      const ready = () => markMediaReady(img, slot, instant);
       if (instant) {
-        ready();
+        revealMedia(img, slot, true);
         return;
       }
-      img.addEventListener('load', ready, { once: true });
-      img.addEventListener('error', ready, { once: true });
+      img.addEventListener('load', () => revealMedia(img, slot, false), { once: true });
+      img.addEventListener('error', () => markMediaReady(img, slot, true), { once: true });
     });
   }
 
@@ -514,12 +522,12 @@
       img.src = q.image || '';
       img.alt = q.name || '';
       img.classList.toggle('hidden', !q.image);
-      const ready = (instant) => markMediaReady(img, frame, instant);
+      const ready = (instant) => revealMedia(img, frame, instant);
       if (q.image) {
         if (img.complete && img.naturalWidth > 0) ready(true);
         else {
           img.addEventListener('load', () => ready(false), { once: true });
-          img.addEventListener('error', () => ready(false), { once: true });
+          img.addEventListener('error', () => markMediaReady(img, frame, true), { once: true });
         }
         setPreloads([q.image]);
       } else {

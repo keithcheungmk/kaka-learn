@@ -361,7 +361,13 @@ a.pack { text-decoration: none; }
   100% { background-position: -20% 0; }
 }
 .learn-card .cs-media { max-height: 160px; }
-.season-card .cs-media { max-height: min(280px, 36dvh); }
+.season-card .cs-media {
+  width: min(100%, calc(min(280px, 36dvh) * 4 / 3));
+  max-width: 100%;
+  max-height: none;
+  margin-inline: auto;
+  aspect-ratio: 4 / 3;
+}
 .season-card img { max-height: none; }
 .learn-grid.season-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -667,7 +673,10 @@ a.pack { text-decoration: none; }
   .learn-card { padding: 8px; }
   .learn-card .cs-media { max-height: 112px; }
   .learn-card img { max-height: 112px; }
-  .season-card .cs-media { max-height: min(260px, 42dvh); }
+  .season-card .cs-media {
+    width: min(100%, calc(min(280px, 44dvh) * 4 / 3));
+    max-height: none;
+  }
   .season-card img { max-height: none; }
   .learn-card .name { margin: 4px 0 1px; font-size: 0.92rem; }
   .learn-card .duty { font-size: 0.7rem; }

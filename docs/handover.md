@@ -36,7 +36,6 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 天氣同四季重做＋常識圖載入佔位 | Cursor Chief Lead | `data/common-sense-weather-seasons.js`, `js/common-sense.js`, `css/common-sense.css`, `js/interview-comics.js`, `css/interview-comics.css`, `assets/common-sense/scenes/`, `scripts/test-common-sense.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-14 | #150 已合。四季四大入口＋季節活動卡；圖 shimmer／eager／lazy／preload；開 PR 後 CI 綠自 merge |
 | 英文系列揀選頁清走 Little Fox 標籤 | Cursor Chief Lead（English 範圍） | `index.html`, `scripts/check-invariants.py`, `scripts/test-story-mission.mjs`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | #138 squash-merge 漏咗標籤移除；清走「選擇故事系列／Little Fox 系列／LITTLE FOX eyebrow」；保留返回、標題、幣 pill、四張卡；唔自 merge |
 | 故事閱讀頁「← 中文」返回書目 | Cursor Chief Lead（Chinese 範圍） | `family-storybook.html`, `js/family-storybook.js`, `scripts/check-invariants.py`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-11 | Keith：閱讀頁左上「← 中文」返 #library，唔跳中文主題根；唔自 merge |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
@@ -110,6 +109,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-10-14 · Cursor Chief Lead（天氣同四季改四季入口＋圖載入佔位）
+
+- 天氣包學習牆改春／夏／秋／冬四大入口；入季先一句香港天氣，再活動卡（圖＋短句＋🔊）。回：季節頁 → 四季牆 → 常識 hub。
+- 測驗仍四選一、每答案🔊、10／10 大星＋幣；題目改季節情景，不足 10 題由全包補。
+- 常識頁加 shimmer 佔位、首屏 eager＋preload、其餘 lazy；已解碼圖即現。橫向四季卡鎖 4:3，唔再被 112px 壓扁。
+- 新圖 12 張。#151 CI 綠後 fast-forward 入 `main`。
 
 ### 2026-10-14 · Cursor Chief Lead（職業包答題圖填滿 4:3）
 

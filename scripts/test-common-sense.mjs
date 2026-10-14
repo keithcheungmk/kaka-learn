@@ -74,6 +74,8 @@ assert.match(js, /openSeason/);
 assert.match(js, /← 四季/);
 assert.match(js, /cs-media/);
 assert.match(js, /markMediaReady/);
+assert.match(js, /revealMedia/);
+assert.match(js, /img\.decode/);
 assert.match(js, /is-instant/);
 assert.match(js, /loading="\$\{eager \? 'eager' : 'lazy'\}"/);
 assert.match(js, /rel = 'preload'/);
