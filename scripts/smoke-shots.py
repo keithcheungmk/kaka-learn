@@ -676,26 +676,16 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.click("#back-link")
     pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-food")
     pg.click("#btn-pack-food")
-    pg.wait_for_selector("#view-learn:not(.hidden) #cs-food-process")
-    food_text = pg.text_content("#cs-food-process") or ""
+    pg.wait_for_selector("#view-learn:not(.hidden) #cs-food-comics")
+    food_text = pg.text_content("#cs-food-comics") or ""
     if "牛奶" not in food_text or "麵包" not in food_text:
-        raise RuntimeError("Food learn wall must show milk and bread process cards")
-    if pg.viewport_size["width"] > 1000:
-        food_vis = pg.evaluate(
-            """() => {
-              const vh = window.innerHeight;
-              return [...document.querySelectorAll('#cs-food-process .process-strip')].map((el) => {
-                const r = el.getBoundingClientRect();
-                return {
-                  title: el.querySelector('h4')?.textContent || '',
-                  visible: r.top < vh - 24 && r.bottom > 24,
-                };
-              });
-            }"""
-        )
-        missing = [item["title"] for item in food_vis if not item["visible"]]
-        if missing:
-            raise RuntimeError(f"iPad landscape food process must show milk and bread, missing {missing}")
+        raise RuntimeError("Food learn wall must show milk and bread comic strips")
+    strips = pg.evaluate("() => [...document.querySelectorAll('#cs-food-comics .comic-strip')].map((el) => el.querySelector('h3')?.textContent || '')")
+    if len(strips) != 2:
+        raise RuntimeError(f"Food comics must have milk and bread stories, got {strips}")
+    panels = pg.evaluate("() => [...document.querySelectorAll('#cs-food-comics .comic-strip')].map((el) => el.querySelectorAll('li').length)")
+    if any(n < 4 or n > 6 for n in panels):
+        raise RuntimeError(f"Food comics must have 4–6 panels each, got {panels}")
     pg.click("#back-link")
     pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-comics")
     with pg.expect_navigation():
