@@ -106,6 +106,7 @@ body.cs-comics {
   display: block;
 }
 .cs-comics .cs-media img.is-ready { opacity: 1; }
+.cs-comics .cs-media img.is-instant { transition: none; }
 @keyframes cs-shimmer {
   0% { background-position: 100% 0; }
   100% { background-position: -20% 0; }

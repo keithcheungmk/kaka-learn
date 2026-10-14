@@ -119,15 +119,19 @@
     );
   }
 
+  function markMediaReady(img, slot, instant) {
+    img.classList.toggle('is-instant', Boolean(instant));
+    img.classList.add('is-ready');
+    slot?.classList.add('is-ready');
+  }
+
   function bindMedia(root) {
     const scope = root || document;
     scope.querySelectorAll('.cs-media img').forEach((img) => {
       const slot = img.closest('.cs-media');
-      const ready = () => {
-        img.classList.add('is-ready');
-        slot?.classList.add('is-ready');
-      };
-      if (img.complete && img.naturalWidth > 0) {
+      const instant = img.complete && img.naturalWidth > 0;
+      const ready = () => markMediaReady(img, slot, instant);
+      if (instant) {
         ready();
         return;
       }
@@ -502,7 +506,7 @@
     const img = $('quiz-img');
     const frame = img?.closest('.quiz-frame, .cs-media');
     if (img) {
-      img.classList.remove('is-ready');
+      img.classList.remove('is-ready', 'is-instant');
       frame?.classList.remove('is-ready');
       img.loading = 'eager';
       img.fetchPriority = 'high';
@@ -510,15 +514,12 @@
       img.src = q.image || '';
       img.alt = q.name || '';
       img.classList.toggle('hidden', !q.image);
-      const ready = () => {
-        img.classList.add('is-ready');
-        frame?.classList.add('is-ready');
-      };
+      const ready = (instant) => markMediaReady(img, frame, instant);
       if (q.image) {
-        if (img.complete && img.naturalWidth > 0) ready();
+        if (img.complete && img.naturalWidth > 0) ready(true);
         else {
-          img.addEventListener('load', ready, { once: true });
-          img.addEventListener('error', ready, { once: true });
+          img.addEventListener('load', () => ready(false), { once: true });
+          img.addEventListener('error', () => ready(false), { once: true });
         }
         setPreloads([q.image]);
       } else {

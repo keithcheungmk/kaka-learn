@@ -38,11 +38,13 @@
     const scope = root || document;
     scope.querySelectorAll('.cs-media img').forEach((img) => {
       const slot = img.closest('.cs-media');
+      const instant = img.complete && img.naturalWidth > 0;
       const ready = () => {
+        img.classList.toggle('is-instant', instant);
         img.classList.add('is-ready');
         slot?.classList.add('is-ready');
       };
-      if (img.complete && img.naturalWidth > 0) {
+      if (instant) {
         ready();
         return;
       }

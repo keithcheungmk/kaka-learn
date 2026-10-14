@@ -73,10 +73,18 @@ assert.match(js, /currentSeason/);
 assert.match(js, /openSeason/);
 assert.match(js, /← 四季/);
 assert.match(js, /cs-media/);
+assert.match(js, /markMediaReady/);
+assert.match(js, /is-instant/);
 assert.match(js, /loading="\$\{eager \? 'eager' : 'lazy'\}"/);
 assert.match(js, /rel = 'preload'/);
 assert.match(css, /cs-shimmer/);
 assert.match(css, /\.learn-grid\.season-grid/);
+assert.match(
+  css,
+  /\.learn-card img \{ max-height: 112px; \}[\s\S]{0,180}\.season-card \.cs-media/,
+  '橫向四季大卡 max-height 要寫喺學習卡 112px 之後，唔好被壓扁'
+);
+assert.match(css, /\.season-card img \{ max-height: none; \}/);
 assert.match(html, /quiz-frame cs-media/);
 assert.doesNotMatch(js, /lifeAnchor/);
 const speechSrc = read('js/speech.js');
