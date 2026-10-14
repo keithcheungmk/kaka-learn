@@ -1,0 +1,12 @@
+{
+  "source": "assets/kaka-ranger-solo.png",
+  "fist_anchor_src": {
+    "x": 0.2,
+    "y": 0.67
+  },
+  "muzzle_anchor": {
+    "x": 0.279,
+    "y": 0.678
+  },
+  "size": 192
+}

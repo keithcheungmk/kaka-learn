@@ -1,0 +1,560 @@
+{
+  "version": 2,
+  "source": "macOS Tingting",
+  "locale": "zh_CN",
+  "kind": "synthetic-word-recordings",
+  "items": [
+    {
+      "id": "b-1",
+      "word": "波波球",
+      "speechText": "波波球",
+      "pinyin": "bō bō qiú",
+      "duration": 1.082375,
+      "bytes": 6633
+    },
+    {
+      "id": "b-2",
+      "word": "巴士",
+      "speechText": "巴士",
+      "pinyin": "bā shì",
+      "duration": 0.72175,
+      "bytes": 4603
+    },
+    {
+      "id": "b-3",
+      "word": "白飯",
+      "speechText": "白饭",
+      "pinyin": "bái fàn",
+      "duration": 0.768167,
+      "bytes": 4904
+    },
+    {
+      "id": "p-1",
+      "word": "葡萄",
+      "speechText": "葡萄",
+      "pinyin": "pú tao",
+      "duration": 0.784083,
+      "bytes": 4985
+    },
+    {
+      "id": "p-2",
+      "word": "蘋果",
+      "speechText": "苹果",
+      "pinyin": "píng guǒ",
+      "duration": 0.762417,
+      "bytes": 4934
+    },
+    {
+      "id": "p-3",
+      "word": "瀑布",
+      "speechText": "瀑布",
+      "pinyin": "pù bù",
+      "duration": 0.656375,
+      "bytes": 4115
+    },
+    {
+      "id": "m-1",
+      "word": "米飯",
+      "speechText": "米饭",
+      "pinyin": "mǐ fàn",
+      "duration": 0.739375,
+      "bytes": 4568
+    },
+    {
+      "id": "m-2",
+      "word": "貓咪",
+      "speechText": "猫咪",
+      "pinyin": "māo mī",
+      "duration": 0.669167,
+      "bytes": 4401
+    },
+    {
+      "id": "m-3",
+      "word": "馬",
+      "speechText": "马",
+      "pinyin": "mǎ",
+      "duration": 0.495667,
+      "bytes": 3269
+    },
+    {
+      "id": "f-1",
+      "word": "風箏",
+      "speechText": "风筝",
+      "pinyin": "fēng zheng",
+      "duration": 0.806958,
+      "bytes": 5174
+    },
+    {
+      "id": "f-2",
+      "word": "飛機",
+      "speechText": "飞机",
+      "pinyin": "fēi jī",
+      "duration": 0.818583,
+      "bytes": 5174
+    },
+    {
+      "id": "f-3",
+      "word": "飯盒",
+      "speechText": "饭盒",
+      "pinyin": "fàn hé",
+      "duration": 0.841792,
+      "bytes": 5367
+    },
+    {
+      "id": "d-1",
+      "word": "大象",
+      "speechText": "大象",
+      "pinyin": "dà xiàng",
+      "duration": 0.749667,
+      "bytes": 4774
+    },
+    {
+      "id": "d-2",
+      "word": "打中",
+      "speechText": "打中",
+      "pinyin": "dǎ zhòng",
+      "duration": 0.691625,
+      "bytes": 4386
+    },
+    {
+      "id": "d-3",
+      "word": "大門",
+      "speechText": "大门",
+      "pinyin": "dà mén",
+      "duration": 0.738083,
+      "bytes": 4584
+    },
+    {
+      "id": "t-1",
+      "word": "太陽",
+      "speechText": "太阳",
+      "pinyin": "tài yáng",
+      "duration": 0.760875,
+      "bytes": 4913
+    },
+    {
+      "id": "t-2",
+      "word": "兔子",
+      "speechText": "兔子",
+      "pinyin": "tù zi",
+      "duration": 0.656542,
+      "bytes": 4167
+    },
+    {
+      "id": "t-3",
+      "word": "糖果",
+      "speechText": "糖果",
+      "pinyin": "táng guǒ",
+      "duration": 0.784083,
+      "bytes": 4885
+    },
+    {
+      "id": "n-1",
+      "word": "奶牛",
+      "speechText": "奶牛",
+      "pinyin": "nǎi niú",
+      "duration": 0.809167,
+      "bytes": 5177
+    },
+    {
+      "id": "n-2",
+      "word": "鳥",
+      "speechText": "鸟",
+      "pinyin": "niǎo",
+      "duration": 0.567458,
+      "bytes": 3551
+    },
+    {
+      "id": "n-3",
+      "word": "牛奶",
+      "speechText": "牛奶",
+      "pinyin": "niú nǎi",
+      "duration": 0.753208,
+      "bytes": 4798
+    },
+    {
+      "id": "l-1",
+      "word": "梨子",
+      "speechText": "梨子",
+      "pinyin": "lí zi",
+      "duration": 0.576958,
+      "bytes": 3551
+    },
+    {
+      "id": "l-2",
+      "word": "鹿",
+      "speechText": "鹿",
+      "pinyin": "lù",
+      "duration": 0.435542,
+      "bytes": 2711
+    },
+    {
+      "id": "l-3",
+      "word": "老師",
+      "speechText": "老师",
+      "pinyin": "lǎo shī",
+      "duration": 0.818792,
+      "bytes": 5188
+    },
+    {
+      "id": "g-1",
+      "word": "哥哥",
+      "speechText": "哥哥",
+      "pinyin": "gē ge",
+      "duration": 0.582708,
+      "bytes": 3789
+    },
+    {
+      "id": "g-2",
+      "word": "狗狗",
+      "speechText": "狗狗",
+      "pinyin": "gǒu gou",
+      "duration": 0.722167,
+      "bytes": 4635
+    },
+    {
+      "id": "g-3",
+      "word": "公雞",
+      "speechText": "公鸡",
+      "pinyin": "gōng jī",
+      "duration": 0.73375,
+      "bytes": 4606
+    },
+    {
+      "id": "k-1",
+      "word": "可樂",
+      "speechText": "可乐",
+      "pinyin": "kě lè",
+      "duration": 0.7155,
+      "bytes": 4630
+    },
+    {
+      "id": "k-2",
+      "word": "看見",
+      "speechText": "看见",
+      "pinyin": "kàn jiàn",
+      "duration": 0.785875,
+      "bytes": 4895
+    },
+    {
+      "id": "k-3",
+      "word": "口罩",
+      "speechText": "口罩",
+      "pinyin": "kǒu zhào",
+      "duration": 0.760417,
+      "bytes": 4918
+    },
+    {
+      "id": "h-1",
+      "word": "花朵",
+      "speechText": "花朵",
+      "pinyin": "huā duǒ",
+      "duration": 0.767167,
+      "bytes": 4906
+    },
+    {
+      "id": "h-2",
+      "word": "河水",
+      "speechText": "河水",
+      "pinyin": "hé shuǐ",
+      "duration": 0.819167,
+      "bytes": 5050
+    },
+    {
+      "id": "h-3",
+      "word": "海船",
+      "speechText": "海船",
+      "pinyin": "hǎi chuán",
+      "duration": 0.973792,
+      "bytes": 6186
+    },
+    {
+      "id": "j-1",
+      "word": "雞蛋",
+      "speechText": "鸡蛋",
+      "pinyin": "jī dàn",
+      "duration": 0.705625,
+      "bytes": 4467
+    },
+    {
+      "id": "j-2",
+      "word": "家人",
+      "speechText": "家人",
+      "pinyin": "jiā rén",
+      "duration": 0.786917,
+      "bytes": 4995
+    },
+    {
+      "id": "j-3",
+      "word": "橘子",
+      "speechText": "橘子",
+      "pinyin": "jú zi",
+      "duration": 0.649875,
+      "bytes": 4062
+    },
+    {
+      "id": "q-1",
+      "word": "旗子",
+      "speechText": "旗子",
+      "pinyin": "qí zi",
+      "duration": 0.694042,
+      "bytes": 4300
+    },
+    {
+      "id": "q-2",
+      "word": "青草",
+      "speechText": "青草",
+      "pinyin": "qīng cǎo",
+      "duration": 0.879792,
+      "bytes": 5512
+    },
+    {
+      "id": "q-3",
+      "word": "琴鍵",
+      "speechText": "琴键",
+      "pinyin": "qín jiàn",
+      "duration": 0.810125,
+      "bytes": 5110
+    },
+    {
+      "id": "x-1",
+      "word": "蝦子",
+      "speechText": "虾子",
+      "pinyin": "xiā zi",
+      "duration": 0.795792,
+      "bytes": 5141
+    },
+    {
+      "id": "x-2",
+      "word": "星星",
+      "speechText": "星星",
+      "pinyin": "xīng xing",
+      "duration": 0.9235,
+      "bytes": 5857
+    },
+    {
+      "id": "x-3",
+      "word": "洗手",
+      "speechText": "洗手",
+      "pinyin": "xǐ shǒu",
+      "duration": 0.853833,
+      "bytes": 5425
+    },
+    {
+      "id": "zh-1",
+      "word": "紙張",
+      "speechText": "纸张",
+      "pinyin": "zhǐ zhāng",
+      "duration": 0.732958,
+      "bytes": 4647
+    },
+    {
+      "id": "zh-2",
+      "word": "豬",
+      "speechText": "猪",
+      "pinyin": "zhū",
+      "duration": 0.477125,
+      "bytes": 3108
+    },
+    {
+      "id": "zh-3",
+      "word": "蜘蛛",
+      "speechText": "蜘蛛",
+      "pinyin": "zhī zhū",
+      "duration": 0.6865,
+      "bytes": 4447
+    },
+    {
+      "id": "ch-1",
+      "word": "車子",
+      "speechText": "车子",
+      "pinyin": "chē zi",
+      "duration": 0.67425,
+      "bytes": 4406
+    },
+    {
+      "id": "ch-2",
+      "word": "叉子",
+      "speechText": "叉子",
+      "pinyin": "chā zi",
+      "duration": 0.743917,
+      "bytes": 4642
+    },
+    {
+      "id": "ch-3",
+      "word": "出發",
+      "speechText": "出发",
+      "pinyin": "chū fā",
+      "duration": 0.743917,
+      "bytes": 4750
+    },
+    {
+      "id": "sh-1",
+      "word": "書本",
+      "speechText": "书本",
+      "pinyin": "shū běn",
+      "duration": 0.770875,
+      "bytes": 4898
+    },
+    {
+      "id": "sh-2",
+      "word": "獅子",
+      "speechText": "狮子",
+      "pinyin": "shī zi",
+      "duration": 0.712792,
+      "bytes": 4605
+    },
+    {
+      "id": "sh-3",
+      "word": "樹木",
+      "speechText": "树木",
+      "pinyin": "shù mù",
+      "duration": 0.712792,
+      "bytes": 4660
+    },
+    {
+      "id": "r-1",
+      "word": "日出",
+      "speechText": "日出",
+      "pinyin": "rì chū",
+      "duration": 0.751833,
+      "bytes": 4927
+    },
+    {
+      "id": "r-2",
+      "word": "人",
+      "speechText": "人",
+      "pinyin": "rén",
+      "duration": 0.542208,
+      "bytes": 3626
+    },
+    {
+      "id": "r-3",
+      "word": "肉類",
+      "speechText": "肉类",
+      "pinyin": "ròu lèi",
+      "duration": 0.683792,
+      "bytes": 4400
+    },
+    {
+      "id": "z-1",
+      "word": "早上",
+      "speechText": "早上",
+      "pinyin": "zǎo shang",
+      "duration": 0.81975,
+      "bytes": 5052
+    },
+    {
+      "id": "z-2",
+      "word": "走路",
+      "speechText": "走路",
+      "pinyin": "zǒu lù",
+      "duration": 0.692042,
+      "bytes": 4308
+    },
+    {
+      "id": "z-3",
+      "word": "足球",
+      "speechText": "足球",
+      "pinyin": "zú qiú",
+      "duration": 0.819792,
+      "bytes": 5088
+    },
+    {
+      "id": "c-1",
+      "word": "草地",
+      "speechText": "草地",
+      "pinyin": "cǎo dì",
+      "duration": 0.7205,
+      "bytes": 4674
+    },
+    {
+      "id": "c-2",
+      "word": "彩虹",
+      "speechText": "彩虹",
+      "pinyin": "cǎi hóng",
+      "duration": 0.825,
+      "bytes": 5119
+    },
+    {
+      "id": "c-3",
+      "word": "菜",
+      "speechText": "菜",
+      "pinyin": "cài",
+      "duration": 0.534542,
+      "bytes": 3334
+    },
+    {
+      "id": "s-1",
+      "word": "森林",
+      "speechText": "森林",
+      "pinyin": "sēn lín",
+      "duration": 0.855292,
+      "bytes": 5385
+    },
+    {
+      "id": "s-2",
+      "word": "絲線",
+      "speechText": "丝线",
+      "pinyin": "sī xiàn",
+      "duration": 0.79475,
+      "bytes": 4885
+    },
+    {
+      "id": "s-3",
+      "word": "傘",
+      "speechText": "伞",
+      "pinyin": "sǎn",
+      "duration": 0.585792,
+      "bytes": 3875
+    },
+    {
+      "id": "y-1",
+      "word": "葉子",
+      "speechText": "叶子",
+      "pinyin": "yè zi",
+      "duration": 0.679417,
+      "bytes": 4328
+    },
+    {
+      "id": "y-2",
+      "word": "衣服",
+      "speechText": "衣服",
+      "pinyin": "yī fu",
+      "duration": 0.667917,
+      "bytes": 4256
+    },
+    {
+      "id": "y-3",
+      "word": "鴨子",
+      "speechText": "鸭子",
+      "pinyin": "yā zi",
+      "duration": 0.644625,
+      "bytes": 4054
+    },
+    {
+      "id": "w-1",
+      "word": "玩具",
+      "speechText": "玩具",
+      "pinyin": "wán jù",
+      "duration": 0.704292,
+      "bytes": 4324
+    },
+    {
+      "id": "w-2",
+      "word": "晚上",
+      "speechText": "晚上",
+      "pinyin": "wǎn shang",
+      "duration": 0.797167,
+      "bytes": 5014
+    },
+    {
+      "id": "w-3",
+      "word": "襪子",
+      "speechText": "袜子",
+      "pinyin": "wà zi",
+      "duration": 0.692208,
+      "bytes": 4343
+    }
+  ]
+}

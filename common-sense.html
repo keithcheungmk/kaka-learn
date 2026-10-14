@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
+  <meta name="theme-color" content="#eaf7ff">
+  <title>卡卡常識樂園</title>
+  <link rel="stylesheet" href="css/common-sense.css?v=42c3175">
+  <link rel="stylesheet" href="css/celebrate-finish.css?v=42c3175">
+</head>
+<body>
+  <main class="cs-shell">
+    <header class="topbar">
+      <a id="back-link" class="back-link" href="index.html#screen-home">← 主頁</a>
+      <div class="brand">
+        <span id="brand-kicker">常識樂園</span>
+        <h1 id="brand-title">卡卡常識樂園</h1>
+      </div>
+      <div id="status-pill" class="status-pill" aria-live="polite">揀主題</div>
+    </header>
+
+    <section id="view-packs" class="view" aria-labelledby="packs-heading">
+      <div class="intro">
+        <h2 id="packs-heading">揀一個主題包</h2>
+        <p>由身邊生活開始學，再答十題攞幣。<a href="interview-comics.html">面試四格</a>而家都可以講。</p>
+      </div>
+      <div id="pack-grid" class="pack-grid"></div>
+    </section>
+
+    <section id="view-learn" class="view hidden" aria-labelledby="learn-heading">
+      <div class="intro learn-intro">
+        <h2 id="learn-heading">學習牆</h2>
+        <p id="learn-intro-text">睇晒圖同短句，撳卡可以聽一聽。學完就撳「開始答題」——答啱 10 題就有大星星同幣！</p>
+      </div>
+      <div id="learn-scroll" class="learn-scroll">
+        <div id="learn-extras"></div>
+        <div id="learn-grid" class="learn-grid"></div>
+      </div>
+      <div class="sticky-cta">
+        <button type="button" class="cta-big" id="btn-start-quiz">開始答題</button>
+      </div>
+    </section>
+
+    <section id="view-quiz" class="view hidden quiz-view" aria-labelledby="quiz-heading">
+      <h2 id="quiz-heading" class="visually-hidden">答題挑戰</h2>
+      <div class="quiz-body">
+        <div class="quiz-hero">
+          <div class="quiz-frame cs-media">
+            <span class="cs-shimmer" aria-hidden="true"></span>
+            <img id="quiz-img" alt="" width="800" height="600" decoding="async">
+          </div>
+          <p class="quiz-q" id="quiz-q"></p>
+          <button type="button" class="listen-btn" id="btn-quiz-listen">🔊 聽一聽</button>
+        </div>
+        <div>
+          <div class="choices" id="quiz-choices" role="group" aria-label="答案"></div>
+          <p class="feedback" id="quiz-feedback" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-finish" class="view hidden finish-view" aria-labelledby="finish-heading">
+      <div class="celebrate">
+        <div class="burst" aria-hidden="true">★</div>
+        <img class="ranger" src="assets/kaka-ranger-celebrate.png" alt="" width="235" height="305">
+        <h2 id="finish-heading">已答啱 10／10！</h2>
+        <p class="coin-line" id="finish-msg">今輪玩完喇！攞到一個 AEON 幣！</p>
+        <div class="finish-actions" data-celebrate-actions>
+          <button type="button" class="cta-big" id="btn-play-again">再開一次</button>
+          <button type="button" class="ghost-btn" id="btn-back-packs">返包牆</button>
+          <a class="ghost-btn" id="btn-back-home" href="index.html#screen-home">返主頁</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/no-zoom.js?v=42c3175"></script>
+  <script src="js/nav-back.js?v=42c3175"></script>
+  <script src="js/storage.js?v=42c3175"></script>
+  <script src="js/speech.js?v=42c3175"></script>
+  <script src="js/celebrate-finish.js?v=42c3175"></script>
+  <script src="data/common-sense-catalog.js?v=42c3175"></script>
+  <script src="data/common-sense-heroes.js?v=42c3175"></script>
+  <script src="data/common-sense-safe-outing.js?v=42c3175"></script>
+  <script src="data/common-sense-manners-hygiene.js?v=42c3175"></script>
+  <script src="data/common-sense-transport-hk.js?v=42c3175"></script>
+  <script src="data/common-sense-weather-seasons.js?v=42c3175"></script>
+  <script src="data/common-sense-festivals-hk.js?v=42c3175"></script>
+  <script src="data/common-sense-recycle-green.js?v=42c3175"></script>
+  <script src="data/common-sense-food-health.js?v=42c3175"></script>
+  <script src="js/common-sense.js?v=42c3175"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+  "book": "rb_anan", "series": "red_series", "allow_words": true,
+  "source": "2026-09-05 掃描書本認字卡（紅②《貪吃的安安》）",
+  "cards": [
+    {"char":"的"},{"char":"汽水"},{"char":"了"},{"char":"餅乾"},{"char":"痛"},{"char":"糖果"},{"char":"水果"},{"char":"薯片"},{"char":"花生"},{"char":"貪吃"},{"char":"安安"},{"char":"痛了"},{"char":"肚子"},{"char":"貪吃的"},{"char":"哎喲"},{"char":"安安的"}
+  ]
+}
