@@ -72,7 +72,13 @@ assert.match(js, /currentFestival/);
 assert.match(js, /currentSeason/);
 assert.match(js, /openSeason/);
 assert.match(js, /← 四季/);
+assert.match(js, /← \$\{currentSeason\.name\}/);
+assert.doesNotMatch(js, /← 季節/);
+assert.match(js, /if \(currentSeason\) return seasonQuizItems\(currentSeason\)/);
+assert.doesNotMatch(js, /own\.concat\(all\.filter/);
 assert.match(js, /cs-media/);
+assert.match(js, /cs-shimmer/);
+assert.match(html, /class="cs-shimmer"/);
 assert.match(js, /markMediaReady/);
 assert.match(js, /revealMedia/);
 assert.match(js, /img\.decode/);
@@ -319,8 +325,19 @@ for (const season of weather.seasons) {
   assert.ok(fs.existsSync(path.join(root, season.cover)), season.cover);
   assert.ok((season.events || []).length >= 4, `${season.id} 至少四張活動卡`);
   assert.ok(season.intro, `${season.id} 要有一句香港天氣`);
+  const pool = (season.events || []).concat(season.quizExtra || []);
+  assert.equal(pool.length, 10, `${season.id} 該季題庫要補夠十題`);
   for (const entry of season.events) assertQuizEntry(`weather-seasons/${season.id}`, entry);
+  for (const extra of season.quizExtra || []) assertQuizEntry(`weather-seasons/${season.id}`, extra);
 }
+const summerAsk = weather.seasons.find((s) => s.id === 'summer').events
+  .concat(weather.seasons.find((s) => s.id === 'summer').quizExtra)
+  .map((e) => e.ask + e.correct + e.name).join('\n');
+assert.doesNotMatch(summerAsk, /回南天|清明/, '夏天題庫唔好混入春天');
+const winterAsk = weather.seasons.find((s) => s.id === 'winter').events
+  .concat(weather.seasons.find((s) => s.id === 'winter').quizExtra)
+  .map((e) => e.ask + e.correct + e.name).join('\n');
+assert.doesNotMatch(winterAsk, /回南天|清明|雪糕|沙灘/, '冬天題庫唔好混入春夏');
 const weatherAsks = weatherEvents.map((e) => e.ask + e.correct).join('\n');
 assert.match(weatherAsks, /打邊爐/);
 assert.match(weatherAsks, /天文台/);

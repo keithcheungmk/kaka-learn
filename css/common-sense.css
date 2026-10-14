@@ -328,7 +328,8 @@ a.pack { text-decoration: none; }
   background: #d7e6f4;
   isolation: isolate;
 }
-.cs-media::after {
+.cs-media::after,
+.cs-shimmer {
   content: "";
   position: absolute;
   inset: 0;
@@ -338,7 +339,8 @@ a.pack { text-decoration: none; }
   animation: cs-shimmer 1.15s ease-in-out infinite;
   pointer-events: none;
 }
-.cs-media.is-ready::after { display: none; }
+.cs-media.is-ready::after,
+.cs-media.is-ready > .cs-shimmer { display: none; }
 .cs-media img {
   position: relative;
   z-index: 1;
@@ -755,6 +757,7 @@ a.pack { text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   .burst { animation: none; }
   .cta-big, .pack, .learn-card, .choice { transition: none; }
-  .cs-media::after { animation: none; }
+  .cs-media::after,
+  .cs-shimmer { animation: none; }
   .cs-media img { transition: none; }
 }

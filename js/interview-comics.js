@@ -28,6 +28,7 @@
     const prio = eager ? ' fetchpriority="high"' : '';
     return (
       `<span class="cs-media">` +
+      `<span class="cs-shimmer" aria-hidden="true"></span>` +
       `<img src="${src}" alt="${alt || ''}" width="640" height="480" ` +
       `loading="${eager ? 'eager' : 'lazy'}" decoding="async"${prio}>` +
       `</span>`

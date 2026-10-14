@@ -36,6 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| #151 體驗官：季節答題只問該季＋出白氣重畫 | Cursor Chief Lead | `data/common-sense-weather-seasons.js`, `js/common-sense.js`, `css/common-sense.css`, `assets/common-sense/scenes/winter-cold.webp`, `scripts/test-common-sense.mjs`, `docs/handover.md` | 2026-10-14 | 由季節入去只抽該季；不足 10 用 quizExtra 補題；答題返回「← 夏天」；重畫出白氣；確認 shimmer |
 | 英文系列揀選頁清走 Little Fox 標籤 | Cursor Chief Lead（English 範圍） | `index.html`, `scripts/check-invariants.py`, `scripts/test-story-mission.mjs`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | #138 squash-merge 漏咗標籤移除；清走「選擇故事系列／Little Fox 系列／LITTLE FOX eyebrow」；保留返回、標題、幣 pill、四張卡；唔自 merge |
 | 故事閱讀頁「← 中文」返回書目 | Cursor Chief Lead（Chinese 範圍） | `family-storybook.html`, `js/family-storybook.js`, `scripts/check-invariants.py`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-11 | Keith：閱讀頁左上「← 中文」返 #library，唔跳中文主題根；唔自 merge |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |

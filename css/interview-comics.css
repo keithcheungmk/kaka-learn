@@ -83,7 +83,8 @@ body.cs-comics {
   background: #d7e6f4;
   isolation: isolate;
 }
-.cs-comics .cs-media::after {
+.cs-comics .cs-media::after,
+.cs-comics .cs-shimmer {
   content: "";
   position: absolute;
   inset: 0;
@@ -93,7 +94,8 @@ body.cs-comics {
   animation: cs-shimmer 1.15s ease-in-out infinite;
   pointer-events: none;
 }
-.cs-comics .cs-media.is-ready::after { display: none; }
+.cs-comics .cs-media.is-ready::after,
+.cs-comics .cs-media.is-ready > .cs-shimmer { display: none; }
 .cs-comics .cs-media img {
   position: relative;
   z-index: 1;
@@ -112,7 +114,8 @@ body.cs-comics {
   100% { background-position: -20% 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .cs-comics .cs-media::after { animation: none; }
+  .cs-comics .cs-media::after,
+  .cs-comics .cs-shimmer { animation: none; }
   .cs-comics .cs-media img { transition: none; }
 }
 .cs-comics .prompt-row {

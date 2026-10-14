@@ -1330,8 +1330,14 @@ def check_common_sense() -> None:
         fail("common-sense", "飲食包要有牛奶／麵包連環圖")
     if "currentSeason" not in js or "openSeason" not in js:
         fail("common-sense", "天氣包要有四季入口同季節頁")
+    if "← ${currentSeason.name}" not in js or "← 季節" in js:
+        fail("common-sense", "答題返回要寫季節名，例如 ← 夏天")
+    if "if (currentSeason) return seasonQuizItems(currentSeason)" not in js:
+        fail("common-sense", "由季節入去答題只可以抽該季題目")
     if "cs-media" not in js or "cs-shimmer" not in read("css/common-sense.css"):
         fail("common-sense", "常識圖要有載入佔位同 shimmer")
+    if 'class="cs-shimmer"' not in js and "cs-shimmer" not in html:
+        fail("common-sense", "載入佔位要有可見 .cs-shimmer 元素")
     weather_src = read("data/common-sense-weather-seasons.js")
     if '"kind": "seasons"' not in weather_src or weather_src.count('"id": "spring"') < 1:
         fail("common-sense", "天氣同四季要分春夏秋冬四個入口")

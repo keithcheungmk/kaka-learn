@@ -75,12 +75,8 @@
   function packItems(pack) {
     if (currentFestival) return festivalQuizItems(currentFestival);
     if (isSeasonsPack(pack)) {
-      const all = allSeasonQuizItems(pack);
-      if (!currentSeason) return all;
-      const own = seasonQuizItems(currentSeason);
-      if (own.length >= (pack.roundSize || 10)) return own;
-      const seen = new Set(own.map((entry) => entry.id));
-      return own.concat(all.filter((entry) => !seen.has(entry.id)));
+      if (currentSeason) return seasonQuizItems(currentSeason);
+      return allSeasonQuizItems(pack);
     }
     if (!pack) return [];
     if (Array.isArray(pack.items) && pack.items.length) return pack.items;
@@ -113,6 +109,7 @@
     const prio = eager ? ' fetchpriority="high"' : '';
     return (
       `<span class="cs-media">` +
+      `<span class="cs-shimmer" aria-hidden="true"></span>` +
       `<img src="${src}" alt="${alt || ''}" width="${width}" height="${height}" ` +
       `loading="${eager ? 'eager' : 'lazy'}" decoding="async"${prio}${extraClass}>` +
       `</span>`
@@ -127,11 +124,18 @@
 
   function revealMedia(img, slot, instant) {
     const go = () => markMediaReady(img, slot, instant);
+    const afterDecode = () => {
+      if (isTestFast()) {
+        go();
+        return;
+      }
+      window.setTimeout(go, instant ? 180 : 90);
+    };
     if (typeof img.decode === 'function' && img.naturalWidth > 0) {
-      img.decode().then(go, go);
+      img.decode().then(afterDecode, afterDecode);
       return;
     }
-    go();
+    afterDecode();
   }
 
   function bindMedia(root) {
@@ -230,11 +234,11 @@
       }
     } else if (next === 'quiz') {
       setBrand('答題挑戰', title);
-      setBack(currentSeason ? '← 季節' : (currentFestival ? '← 生字' : '← 學習牆'), HOME_HREF);
+      setBack(currentSeason ? `← ${currentSeason.name}` : (currentFestival ? '← 生字' : '← 學習牆'), HOME_HREF);
       setPill(`已答啱 ${correctCount}／10`);
     } else if (next === 'finish') {
       setBrand('過關', title);
-      setBack(currentSeason ? '← 季節' : (currentFestival ? '← 生字' : '← 學習牆'), HOME_HREF);
+      setBack(currentSeason ? `← ${currentSeason.name}` : (currentFestival ? '← 生字' : '← 學習牆'), HOME_HREF);
       setPill('10／10');
     }
   }
