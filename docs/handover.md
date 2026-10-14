@@ -36,7 +36,6 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 職業包答題圖填滿 4:3 | Cursor Chief Lead | `data/common-sense-heroes.js`, `assets/common-sense/scenes/` 十張職業場景, `scripts/test-common-sense.mjs`, `scripts/check-invariants.py`, `scripts/smoke-shots.py`, `docs/handover.md` | 2026-10-14 | Keith 批准：職業包方形字卡喺 4:3 框左右留白；重畫 4:3 場景填滿；唔改 pedagogy／面試四格；CI 綠後 merge |
 | 英文系列揀選頁清走 Little Fox 標籤 | Cursor Chief Lead（English 範圍） | `index.html`, `scripts/check-invariants.py`, `scripts/test-story-mission.mjs`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | #138 squash-merge 漏咗標籤移除；清走「選擇故事系列／Little Fox 系列／LITTLE FOX eyebrow」；保留返回、標題、幣 pill、四張卡；唔自 merge |
 | 故事閱讀頁「← 中文」返回書目 | Cursor Chief Lead（Chinese 範圍） | `family-storybook.html`, `js/family-storybook.js`, `scripts/check-invariants.py`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-11 | Keith：閱讀頁左上「← 中文」返 #library，唔跳中文主題根；唔自 merge |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
@@ -110,6 +109,10 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-10-14 · Cursor Chief Lead（職業包答題圖填滿 4:3）
+
+- 社區小英雄十張答題圖按現有 careers 肖像**重畫**成 4:3 橫向場景（唔係 crop），放入 `assets/common-sense/scenes/`，檔名仍係職業 id。題庫 pedagogy 唔改；方形 `assets/careers/` 字卡保留。禮貌包「見老師」一併用老師 4:3 圖。#149 CI 綠後 fast-forward 入 `main`。
 
 ### 2026-10-13 · Cursor Chief Lead（常識答題 4:3 畫框＋每項語音＋場景圖）
 
