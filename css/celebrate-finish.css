@@ -41,6 +41,11 @@ html {
   animation: kakaCelebratePop 0.85s cubic-bezier(.22,.9,.28,1.15);
 }
 
+.kaka-celebrate-overlay .play-finish-star img,
+.kaka-celebrate-play .play-finish-star img {
+  background: transparent;
+}
+
 .kaka-celebrate-skip {
   min-height: 44px;
   min-width: 44px;

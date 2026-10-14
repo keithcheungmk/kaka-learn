@@ -796,7 +796,7 @@ function layoutChineseConnectBoard() {
     board.style.height = 'auto';
     board.style.gridTemplateColumns = '';
   } else {
-    board.style.height = `clamp(400px, ${Math.min(82, 46 + count * 8)}vh, 720px)`;
+    board.style.height = `clamp(400px, ${Math.min(86, 48 + count * 8)}vh, 760px)`;
     board.style.gridTemplateColumns = 'minmax(0, 1.22fr) minmax(0, 1fr)';
   }
 }

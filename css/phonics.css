@@ -307,6 +307,10 @@
     grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr);
   }
 
+  .connect-card-list {
+    gap: clamp(8px, 1.2vh, 12px);
+  }
+
   .connect-picture-main .emoji-plate {
     width: min(120px, 15vw, 18vh);
     height: min(120px, 15vw, 18vh);

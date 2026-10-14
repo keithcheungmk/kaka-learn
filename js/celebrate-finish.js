@@ -174,9 +174,10 @@
       speechApi().playStarCue?.({ muted });
       speechApi().playCoinHintCue?.({ muted });
 
-      const animWait = prefersReducedMotion() ? 0 : ANIM_MS;
-      const speakWait = speechApi().estimateSpeakMs?.(LINE, { rate: 0.92, delayMs: 160 }) || 4200;
-      session.timer = setTimeout(reveal, Math.max(animWait, muted ? animWait + 400 : speakWait) + 80);
+      const reduced = prefersReducedMotion();
+      const animWait = reduced ? 350 : ANIM_MS;
+      const speakWait = muted ? 0 : (speechApi().estimateSpeakMs?.(LINE, { rate: 0.92, delayMs: 160 }) || 4200);
+      session.timer = setTimeout(reveal, Math.max(animWait, speakWait) + 80);
 
       speechApi().speakTerm?.(LINE, {
         muted,
@@ -184,8 +185,8 @@
         pitch: 1.08,
         delayMs: 160,
         onEnd: () => {
-          if (gen !== token) return;
-          const remain = prefersReducedMotion() ? 0 : Math.max(0, ANIM_MS - 200);
+          if (gen !== token || muted) return;
+          const remain = reduced ? 0 : Math.max(0, ANIM_MS - 200);
           setTimeout(reveal, remain);
         },
       });
