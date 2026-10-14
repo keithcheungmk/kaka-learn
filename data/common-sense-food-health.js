@@ -7,17 +7,14 @@ window.COMMON_SENSE_PACKS["food-health"] = {
   "title": "飲食同健康",
   "roundSize": 10,
   "goal": "知常見食物點嚟，再識均衡同洗手",
-  "intro": "先睇牛奶同麵包點嚟，再學食飯前洗手、口渴飲水。過程係橋，健康習慣先係關卡。",
+  "intro": "牛奶由牛到杯，麵包由小麥到出爐。睇完連環圖，再學洗手同飲水。",
   "cover": "assets/common-sense/scenes/milk-from-cow.webp",
   "wrongHint": "唔係呢個喎，再諗吓食物點嚟，或者食飯前應該點？",
-  "lifeAnchor": {
-    "title": "先睇食物點嚟",
-    "body": "牛奶來自牛，麵包用小麥焗。知點嚟之後，先學邊啲食得健康。"
-  },
   "items": [
     {
       "id": "milk-from-cow",
       "name": "牛奶來自牛",
+      "wall": false,
       "image": "assets/common-sense/scenes/milk-from-cow.webp",
       "wallLine": "牛奶——主要來自奶牛",
       "ask": "卡卡朝早飲嘅牛奶，主要來自咩？",
@@ -32,6 +29,7 @@ window.COMMON_SENSE_PACKS["food-health"] = {
     {
       "id": "bread-wheat",
       "name": "麵包用小麥",
+      "wall": false,
       "image": "assets/common-sense/scenes/bread-wheat.webp",
       "wallLine": "麵包——主要用麵粉小麥",
       "ask": "麵包主要係用咩整出嚟？",
@@ -158,52 +156,68 @@ window.COMMON_SENSE_PACKS["food-health"] = {
   ],
   "sections": [
     {
-      "type": "process",
-      "id": "cs-food-process",
-      "title": "食物點嚟",
-      "intro": "牛奶同麵包唔係櫃桶變出來。睇完幾步，先至識食得健康。",
+      "type": "comics",
+      "id": "cs-food-comics",
       "strips": [
         {
           "id": "milk",
-          "title": "牛奶",
+          "title": "牛奶由牛到飲",
           "steps": [
             {
-              "image": "assets/common-sense/process/milk-1.svg",
-              "label": "牛"
+              "image": "assets/common-sense/process/milk-1.webp",
+              "caption": "乳牛喺草地食草。",
+              "audio": "乳牛喺草地食草，牛奶就係由佢哋嚟。"
             },
             {
-              "image": "assets/common-sense/process/milk-2.svg",
-              "label": "擠奶"
+              "image": "assets/common-sense/process/milk-2.webp",
+              "caption": "農夫輕輕擠牛奶。",
+              "audio": "農夫坐喺牛旁邊，輕輕擠牛奶入鐵桶。"
             },
             {
-              "image": "assets/common-sense/process/milk-3.svg",
-              "label": "裝盒"
+              "image": "assets/common-sense/process/milk-3.webp",
+              "caption": "工廠把牛奶裝入盒。",
+              "audio": "工廠把新鮮牛奶裝入盒子，方便送去超市。"
             },
             {
-              "image": "assets/common-sense/process/milk-4.svg",
-              "label": "飲"
+              "image": "assets/common-sense/process/milk-4.webp",
+              "caption": "同媽媽去超市攞牛奶。",
+              "audio": "超市雪櫃有好多盒牛奶，同大人一齊攞返屋企。"
+            },
+            {
+              "image": "assets/common-sense/process/milk-5.webp",
+              "caption": "坐定飲杯冰鮮牛奶。",
+              "audio": "牛奶倒入杯，坐定飲完，嘴邊一撇白鬍子。"
             }
           ]
         },
         {
           "id": "bread",
-          "title": "麵包",
+          "title": "麵包由小麥到出爐",
           "steps": [
             {
-              "image": "assets/common-sense/process/bread-1.svg",
-              "label": "小麥"
+              "image": "assets/common-sense/process/bread-1.webp",
+              "caption": "金黃小麥喺田裏生長。",
+              "audio": "麵包用嘅麵粉，最初係田裏金黃色嘅小麥。"
             },
             {
-              "image": "assets/common-sense/process/bread-2.svg",
-              "label": "揉麵"
+              "image": "assets/common-sense/process/bread-2.webp",
+              "caption": "小麥磨成白白麵粉。",
+              "audio": "小麥磨碎之後，就變成白白幼幼嘅麵粉。"
             },
             {
-              "image": "assets/common-sense/process/bread-3.svg",
-              "label": "焗"
+              "image": "assets/common-sense/process/bread-3.webp",
+              "caption": "師傅同卡卡一齊揉麵糰。",
+              "audio": "麵粉加水揉成麵糰，用手壓一壓、摺一摺。"
             },
             {
-              "image": "assets/common-sense/process/bread-4.svg",
-              "label": "出爐"
+              "image": "assets/common-sense/process/bread-4.webp",
+              "caption": "麵糰放入焗爐烤熟。",
+              "audio": "麵糰放入焗爐，火慢慢將佢烤成金黃色。"
+            },
+            {
+              "image": "assets/common-sense/process/bread-5.webp",
+              "caption": "香噴噴麵包出爐喇。",
+              "audio": "麵包出爐，熱熱香香，等佢涼一涼先至食。"
             }
           ]
         }

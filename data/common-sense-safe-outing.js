@@ -7,13 +7,9 @@ window.COMMON_SENSE_PACKS["safe-outing"] = {
   "title": "安全出街",
   "roundSize": 10,
   "goal": "出街識保護自己同屋企人",
-  "intro": "先講返學去深水埗、同大人出街，再學紅綠燈、陌生人同火警應該點做。撳卡可以聽一聽。學完就開始答題。",
+  "intro": "卡卡返崇真幼稚園要去深水埗。過馬路牽大人手，識紅綠燈同保護自己。撳卡可以聽一聽。",
   "cover": "assets/common-sense/scenes/red-light.webp",
   "wrongHint": "唔係呢個喎，再諗吓同大人出街應該點保護自己？",
-  "lifeAnchor": {
-    "title": "返學去深水埗，同大人出街",
-    "body": "卡卡返崇真幼稚園要去深水埗。過馬路牽大人手，唔見人就搵穿制服職員或者警察。"
-  },
   "items": [
     {
       "id": "red-light",

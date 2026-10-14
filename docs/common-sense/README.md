@@ -10,9 +10,9 @@
 ## 硬門檻資產
 
 - `assets/common-sense/mtr-family-map.svg`：兒童向示意，非官方
-- `assets/common-sense/process/`：牛奶／麵包 2–4 步
+- `assets/common-sense/process/`：牛奶／麵包 4–6 格連環圖
 - `assets/common-sense/comics/`：面試四格原創圖
 
 ## 刻意未做（P9／後期）
 
-情緒、動植物、身體五感、家庭角色、上學日常、時間感覺、生活色形；B4–B6（走失／倒瀉水／分享玩具）。包牆灰「即將推出」。
+情緒、動植物、身體五感、家庭角色、上學日常、時間感覺、生活色形；B4–B6（走失／倒瀉水／分享玩具）。未實作主題暫時隱藏，唔喺包牆顯示。

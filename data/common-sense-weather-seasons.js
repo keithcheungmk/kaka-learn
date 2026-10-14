@@ -7,13 +7,9 @@ window.COMMON_SENSE_PACKS["weather-seasons"] = {
   "title": "天氣同四季",
   "roundSize": 10,
   "goal": "睇天氣識着衫同帶邊啲嘢",
-  "intro": "今朝天陰，書包掛遮返深水埗——先由落雨開始，再學熱凍同四季。",
+  "intro": "香港忽然落雨好常見。同大人出門先睇天，書包掛遮。撳卡可以聽一聽。",
   "cover": "assets/common-sense/scenes/rain-umbrella.webp",
   "wrongHint": "唔係呢個喎，再諗吓○○啦，可以再試。",
-  "lifeAnchor": {
-    "title": "落雨返學帶遮",
-    "body": "香港忽然落雨好常見。同大人出門先睇天，書包掛遮；打風就聽大人決定。"
-  },
   "items": [
     {
       "id": "rain-umbrella",

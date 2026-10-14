@@ -7,13 +7,9 @@ window.COMMON_SENSE_PACKS["transport-hk"] = {
   "title": "香港交通",
   "roundSize": 10,
   "goal": "由屋企學校站識港鐵，再識巴士渡輪同車廂禮儀",
-  "intro": "先喺地圖搵卡卡屋企、學校、爸爸返工同禧禧，再識地鐵方便同車廂點做。",
+  "intro": "荃灣西係屋企，深水埗返學，沙田爸爸返工，馬鞍山探禧禧。先喺地圖搵站，再學車廂點做。",
   "cover": "assets/common-sense/scenes/priority.webp",
   "wrongHint": "唔係呢個喎，再睇吓地圖釘同卡卡身邊嘅站。",
-  "lifeAnchor": {
-    "title": "由身邊嘅站開始",
-    "body": "荃灣西係屋企，深水埗返學，沙田爸爸返工，馬鞍山探禧禧。坐地鐵好方便，仲可以去迪士尼。"
-  },
   "items": [
     {
       "id": "home-tw",

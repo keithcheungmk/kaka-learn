@@ -7,13 +7,9 @@ window.COMMON_SENSE_PACKS["manners-hygiene"] = {
   "title": "禮貌同衛生",
   "roundSize": 10,
   "goal": "識講唔該謝謝，又識洗手",
-  "intro": "見老師講早晨、搭車講唔該、食飯前洗手——呢啲係卡卡每日都會用到嘅。撳卡可以聽一聽。",
+  "intro": "朝早見老師講早晨，搭車講唔該謝謝，食飯前洗手。撳卡可以聽一聽。",
   "cover": "assets/careers/laoshi_job.webp",
   "wrongHint": "唔係呢個喎，再諗吓○○啦，可以再試。",
-  "lifeAnchor": {
-    "title": "見老師、坐車、食飯都會用到",
-    "body": "朝早見老師講早晨；車廂讓座要唔該謝謝；食飯前洗手。禮貌唔係背口號，而係每日一句。"
-  },
   "items": [
     {
       "id": "please",

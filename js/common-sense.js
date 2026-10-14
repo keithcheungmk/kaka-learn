@@ -13,6 +13,7 @@
 
   let view = 'packs';
   let currentPack = null;
+  let currentFestival = null;
   let quizOrder = [];
   let quizIndex = 0;
   let correctCount = 0;
@@ -42,14 +43,30 @@
     return Boolean(window.__KAKA_TEST__);
   }
 
+  function isFestivalsPack(pack) {
+    return Boolean(pack?.kind === 'festivals' || (pack?.festivals && pack.festivals.length));
+  }
+
+  function festivalQuizItems(fest) {
+    if (!fest) return [];
+    const words = Array.isArray(fest.words) ? fest.words : [];
+    const extra = Array.isArray(fest.quizExtra) ? fest.quizExtra : [];
+    return words.concat(extra);
+  }
+
   function packItems(pack) {
+    if (currentFestival) return festivalQuizItems(currentFestival);
     if (!pack) return [];
     if (Array.isArray(pack.items) && pack.items.length) return pack.items;
     if (Array.isArray(pack.careers) && pack.careers.length) return pack.careers;
     return [];
   }
 
-  function speak(text, onEnd) {
+  function wallItems(pack) {
+    return packItems(pack).filter((entry) => entry && entry.wall !== false);
+  }
+
+  function speak(text, onEnd, lang) {
     if (!speech.speakTerm) {
       if (typeof onEnd === 'function') onEnd();
       return;
@@ -59,6 +76,7 @@
       rate: 0.92,
       pitch: 1.05,
       delayMs: isTestFast() ? 0 : 80,
+      lang: lang || 'zh-HK',
       onEnd,
     });
   }
@@ -96,28 +114,38 @@
     el.setAttribute('href', href);
   }
 
+  function setStartVisible(show) {
+    const cta = document.querySelector('.sticky-cta');
+    if (cta) cta.classList.toggle('hidden', !show);
+  }
+
   function showView(next) {
     view = next;
     VIEWS.forEach((id) => {
       const el = $(id);
       if (el) el.classList.toggle('hidden', id !== `view-${next}`);
     });
-    const title = currentPack?.title || '卡卡常識樂園';
+    const title = currentFestival?.name || currentPack?.title || '卡卡常識樂園';
     if (next === 'packs') {
       setBrand('常識樂園', '卡卡常識樂園');
       setBack('← 主頁', HOME_HREF);
       setPill('揀主題');
     } else if (next === 'learn') {
       setBrand('常識樂園', title);
-      setBack('← 常識', HOME_HREF);
-      setPill('學習牆');
+      if (currentFestival) {
+        setBack('← 節日', HOME_HREF);
+        setPill('生字');
+      } else {
+        setBack('← 常識', HOME_HREF);
+        setPill('學習牆');
+      }
     } else if (next === 'quiz') {
       setBrand('答題挑戰', title);
-      setBack('← 學習牆', HOME_HREF);
+      setBack(currentFestival ? '← 生字' : '← 學習牆', HOME_HREF);
       setPill(`已答啱 ${correctCount}／10`);
     } else if (next === 'finish') {
       setBrand('過關', title);
-      setBack('← 學習牆', HOME_HREF);
+      setBack(currentFestival ? '← 生字' : '← 學習牆', HOME_HREF);
       setPill('10／10');
     }
   }
@@ -126,17 +154,13 @@
     const grid = $('pack-grid');
     if (!grid) return;
     const packs = Array.isArray(catalog.packs) ? catalog.packs : [];
-    const lineA = packs.filter((p) => p.line !== 'B');
-    const lineB = packs.filter((p) => p.line === 'B');
+    const lineA = packs.filter((p) => p.line !== 'B' && p.status === 'playable');
+    const lineB = packs.filter((p) => p.line === 'B' && p.status === 'playable');
     const renderCard = (meta) => {
-      const playable = meta.status === 'playable';
       const cover = meta.cover
         ? `<img class="pack-art" src="${meta.cover}" alt="" width="256" height="256">`
         : `<span class="pack-art pack-soon-icon" aria-hidden="true">${meta.emoji || '📖'}</span>`;
       const inner = `${cover}<span class="pack-meta"><strong>${meta.kicker}</strong><span>${meta.blurb}</span></span>`;
-      if (!playable) {
-        return `<div class="pack pack-soon" aria-disabled="true">${inner}</div>`;
-      }
       if (meta.href) {
         return `<a class="pack pack-playable" id="${meta.buttonId || ''}" href="${meta.href}" aria-label="${meta.kicker}">${inner}</a>`;
       }
@@ -157,37 +181,70 @@
     const grid = $('learn-grid');
     const heading = $('learn-heading');
     const intro = $('learn-intro-text');
-    if (heading) heading.textContent = currentPack?.title || '';
-    if (intro) intro.textContent = currentPack?.intro || '';
     if (extras) extras.innerHTML = '';
     if (grid) grid.innerHTML = '';
-    if (!currentPack) return;
-
-    if (currentPack.lifeAnchor && extras) {
-      const box = document.createElement('section');
-      box.className = 'life-anchor';
-      box.innerHTML = `<h3>${currentPack.lifeAnchor.title}</h3><p>${currentPack.lifeAnchor.body}</p>`;
-      extras.appendChild(box);
+    if (!currentPack) {
+      if (heading) heading.textContent = '';
+      if (intro) intro.textContent = '';
+      setStartVisible(false);
+      return;
     }
+
+    if (currentFestival) {
+      if (heading) heading.textContent = currentFestival.name;
+      if (intro) intro.textContent = currentFestival.intro || currentPack.intro || '';
+      setStartVisible(true);
+      (currentFestival.words || []).forEach((entry) => {
+        grid.appendChild(renderWordCard(entry));
+      });
+      return;
+    }
+
+    if (heading) heading.textContent = currentPack.title || '';
+    if (intro) intro.textContent = currentPack.intro || '';
+    setStartVisible(!isFestivalsPack(currentPack));
+
     (currentPack.sections || []).forEach((section) => {
       if (!extras) return;
       if (section.type === 'map') extras.appendChild(renderMap(section));
       if (section.type === 'process') extras.appendChild(renderProcess(section));
+      if (section.type === 'comics') extras.appendChild(renderComics(section));
     });
 
-    packItems(currentPack).forEach((entry) => {
+    if (isFestivalsPack(currentPack)) {
+      (currentPack.festivals || []).forEach((fest) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'learn-card festival-card';
+        card.dataset.festival = fest.id;
+        card.setAttribute('aria-label', `${fest.name}，入去學生字`);
+        const img = fest.cover
+          ? `<img src="${fest.cover}" alt="${fest.name}" width="256" height="192">`
+          : '';
+        card.innerHTML =
+          img +
+          `<p class="name">${fest.name}</p>` +
+          `<p class="duty">${fest.wallLine || ''}</p>` +
+          '<p class="hear">入去學生字</p>';
+        card.addEventListener('click', () => openFestival(fest.id));
+        grid.appendChild(card);
+      });
+      return;
+    }
+
+    wallItems(currentPack).forEach((entry) => {
       const card = document.createElement('button');
       card.type = 'button';
       card.className = 'learn-card';
       card.dataset.item = entry.id;
-      card.setAttribute('aria-label', `${entry.wallLine}，聽一聽`);
+      card.setAttribute('aria-label', `${entry.wallLine || entry.name}，聽一聽`);
       const img = entry.image
-        ? `<img src="${entry.image}" alt="${entry.name}" width="256" height="256">`
+        ? `<img src="${entry.image}" alt="${entry.name}" width="256" height="192">`
         : '';
       card.innerHTML =
         img +
         `<p class="name">${entry.name}</p>` +
-        `<p class="duty">${entry.wallLine}</p>` +
+        `<p class="duty">${entry.wallLine || ''}</p>` +
         '<p class="hear">🔊 聽一聽</p>';
       card.addEventListener('click', () => {
         card.classList.add('is-heard');
@@ -195,6 +252,35 @@
       });
       grid.appendChild(card);
     });
+  }
+
+  function renderWordCard(entry) {
+    const card = document.createElement('article');
+    card.className = 'learn-card word-card';
+    card.dataset.item = entry.id;
+    const img = entry.image
+      ? `<img src="${entry.image}" alt="${entry.name}" width="256" height="192">`
+      : '';
+    card.innerHTML =
+      img +
+      `<p class="name">${entry.name}</p>` +
+      '<div class="speak-duo">' +
+      `<button type="button" class="speak-lang speak-yue" aria-label="用廣東話讀「${entry.name}」">廣東話</button>` +
+      `<button type="button" class="speak-lang speak-pth" aria-label="用普通話讀「${entry.pth || entry.name}」">普通話</button>` +
+      '</div>';
+    card.querySelector('.speak-yue').addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      card.classList.add('is-heard');
+      speak(entry.name, null, 'zh-HK');
+    });
+    card.querySelector('.speak-pth').addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      card.classList.add('is-heard');
+      speak(entry.pth || entry.name, null, 'zh-CN');
+    });
+    return card;
   }
 
   function renderMap(section) {
@@ -222,7 +308,38 @@
       )).join('');
       return `<div class="process-strip"><h4>${strip.title}</h4><ol>${steps}</ol></div>`;
     }).join('');
-    el.innerHTML = `<h3>${section.title}</h3><p>${section.intro || ''}</p>${strips}`;
+    el.innerHTML = `<h3>${section.title || ''}</h3><p>${section.intro || ''}</p>${strips}`;
+    return el;
+  }
+
+  function renderComics(section) {
+    const el = document.createElement('section');
+    el.className = 'cs-comics';
+    el.id = section.id || 'cs-food-comics';
+    (section.strips || []).forEach((strip) => {
+      const block = document.createElement('div');
+      block.className = 'comic-strip';
+      const heading = document.createElement('h3');
+      heading.textContent = strip.title || '';
+      block.appendChild(heading);
+      const list = document.createElement('ol');
+      (strip.steps || []).forEach((step) => {
+        const li = document.createElement('li');
+        li.innerHTML =
+          `<img src="${step.image}" alt="${step.caption || ''}" width="900" height="675">` +
+          `<p>${step.caption || ''}</p>`;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'comic-speak';
+        btn.setAttribute('aria-label', `聽「${step.caption || strip.title}」`);
+        btn.textContent = '🔊 聽一聽';
+        btn.addEventListener('click', () => speak(step.audio || step.caption));
+        li.appendChild(btn);
+        list.appendChild(li);
+      });
+      block.appendChild(list);
+      el.appendChild(block);
+    });
     return el;
   }
 
@@ -329,6 +446,7 @@
   }
 
   function startQuiz() {
+    if (isFestivalsPack(currentPack) && !currentFestival) return;
     quizOrder = sampleRound();
     quizIndex = 0;
     correctCount = 0;
@@ -344,7 +462,10 @@
       const coin = storage.earnCoinForMode
         ? storage.earnCoinForMode(mode)
         : { gained: false, already: true };
-      storage.markTopicPassed?.('common-sense', currentPack?.packId || 'community-heroes');
+      const passedId = currentFestival
+        ? `${currentPack?.packId || 'festivals-hk'}-${currentFestival.id}`
+        : (currentPack?.packId || 'community-heroes');
+      storage.markTopicPassed?.('common-sense', passedId);
       const msg = $('finish-msg');
       const line = coin.gained
         ? '今輪玩完喇！攞到一個 AEON 幣！'
@@ -363,6 +484,7 @@
   function goPacks() {
     stopSpeech();
     currentPack = null;
+    currentFestival = null;
     showView('packs');
   }
 
@@ -370,6 +492,16 @@
     const pack = packMap[packId];
     if (!pack) return;
     currentPack = pack;
+    currentFestival = null;
+    stopSpeech();
+    renderLearnWall();
+    showView('learn');
+  }
+
+  function openFestival(festId) {
+    const fest = (currentPack?.festivals || []).find((item) => item.id === festId);
+    if (!fest) return;
+    currentFestival = fest;
     stopSpeech();
     renderLearnWall();
     showView('learn');
@@ -381,6 +513,7 @@
       goPacks();
       return;
     }
+    renderLearnWall();
     showView('learn');
   }
 
@@ -393,12 +526,15 @@
     }
     if (view === 'learn') {
       stopSpeech();
+      if (currentFestival) {
+        currentFestival = null;
+        renderLearnWall();
+        showView('learn');
+        return;
+      }
       goPacks();
       return;
     }
-    // Pack-wall ← 主頁: fallback is index.html#screen-home, not bare index.html.
-    // One live QA hit 你係邊個 once and could not repro; history.back() can
-    // land on index without a restored hash/profile. No wrong href here.
     (window.KakaNav || { goBackOr: (href) => { location.assign(href); } }).goBackOr(HOME_HREF);
   }
 
@@ -434,15 +570,18 @@
     getProgress: () => ({
       view,
       packId: currentPack?.packId || null,
+      festivalId: currentFestival?.id || null,
       quizIndex,
       correctCount,
       total: quizOrder.length,
     }),
     startQuiz,
     openPack,
+    openFestival,
     showLearn: goLearn,
     showPacks: goPacks,
     get pack() { return currentPack || packMap['community-heroes'] || {}; },
+    get festival() { return currentFestival; },
     get careers() { return packItems(currentPack || packMap['community-heroes']); },
     answerCurrentCorrect() {
       const q = currentQuestion();

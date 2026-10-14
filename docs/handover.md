@@ -36,6 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| 常識樂園 Keith 回饋（學習牆合併、隱藏即將推出、節日生字、飲食連環圖） | Cursor Chief Lead | `common-sense.html`, `css/common-sense.css`, `js/common-sense.js`, `js/speech.js`, `js/storage.js`, `data/common-sense-*.js`, `assets/common-sense/`, `scripts/test-common-sense.mjs`, `scripts/check-invariants.py`, `AGENTS.md`, `docs/handover.md` | 2026-10-14 | Keith 圖1–4：合併重複標題卡；隱藏即將推出；節日生字 poster＋粵普發音＋按節日出題；飲食牛奶麵包連環圖 |
 | 英文系列揀選頁清走 Little Fox 標籤 | Cursor Chief Lead（English 範圍） | `index.html`, `scripts/check-invariants.py`, `scripts/test-story-mission.mjs`, `AGENTS.md`, `docs/handover.md` | 2026-10-11 | #138 squash-merge 漏咗標籤移除；清走「選擇故事系列／Little Fox 系列／LITTLE FOX eyebrow」；保留返回、標題、幣 pill、四張卡；唔自 merge |
 | 故事閱讀頁「← 中文」返回書目 | Cursor Chief Lead（Chinese 範圍） | `family-storybook.html`, `js/family-storybook.js`, `scripts/check-invariants.py`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-11 | Keith：閱讀頁左上「← 中文」返 #library，唔跳中文主題根；唔自 merge |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |

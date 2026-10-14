@@ -33,7 +33,7 @@ assert.match(html, /id="view-quiz"/);
 assert.match(html, /id="view-finish"/);
 assert.match(html, /id="learn-extras"/);
 assert.match(html, /開始答題/);
-assert.match(html, /即將推出/);
+assert.doesNotMatch(html, /即將推出/);
 assert.match(html, /面試四格/);
 assert.match(html, /href="index.html#screen-home"/);
 assert.match(html, /id="btn-play-again"/);
@@ -63,6 +63,17 @@ assert.doesNotMatch(js, /btn-play-again[\s\S]{0,160}goLearn/);
 assert.match(js, /btn-back-packs[\s\S]{0,80}goPacks/);
 assert.match(js, /type === 'map'/);
 assert.match(js, /type === 'process'/);
+assert.match(js, /type === 'comics'/);
+assert.match(js, /status === 'playable'/);
+assert.match(js, /speak-yue/);
+assert.match(js, /speak-pth/);
+assert.match(js, /zh-CN/);
+assert.match(js, /currentFestival/);
+assert.doesNotMatch(js, /lifeAnchor/);
+const speechSrc = read('js/speech.js');
+assert.match(speechSrc, /speakMandarinTerm/);
+assert.match(speechSrc, /pickMandarinVoice/);
+assert.match(speechSrc, /zh-CN/);
 assert.match(storage, /EXTRA_COIN_MODES/);
 assert.match(storage, /common-sense-heroes/);
 assert.match(storage, /common-sense-transport/);
@@ -75,6 +86,9 @@ assert.match(css, /min-height:\s*44px/);
 assert.match(css, /min-height:\s*52px/);
 assert.match(css, /\.cs-map/);
 assert.match(css, /\.cs-process/);
+assert.match(css, /\.cs-comics/);
+assert.match(css, /\.speak-duo/);
+assert.match(css, /\.comic-strip img[\s\S]{0,80}aspect-ratio:\s*4\s*\/\s*3/);
 assert.match(html, /quiz-frame/);
 assert.match(css, /\.quiz-frame/);
 assert.match(css, /aspect-ratio:\s*4\s*\/\s*3/);
@@ -126,31 +140,40 @@ const soonA = [
 const hanLen = (text) => (String(text || '').match(/[\u4e00-\u9fff]/g) || []).length;
 const metaById = Object.fromEntries((catalog.packs || []).map((p) => [p.packId, p]));
 
+function quizPool(pack) {
+  if (Array.isArray(pack.festivals) && pack.festivals.length) return null;
+  return pack.items || pack.careers || [];
+}
+
+function assertQuizEntry(id, entry) {
+  assert.ok(fs.existsSync(path.join(root, entry.image)), `${entry.image} 要存在`);
+  assert.match(entry.image, /assets\/common-sense\/scenes\/.+\.webp$/, `${id}/${entry.id} 答題圖要係 4:3 場景，唔好用抽象 icon 或方形職業字卡`);
+  assert.equal(entry.wrong.length, 3, `${id}/${entry.id} 要有 3 個錯選`);
+  for (const choice of [entry.correct, ...entry.wrong]) {
+    const n = hanLen(choice);
+    assert.ok(n >= 8 && n <= 16, `${id}/${entry.id} 「${choice}」字數 ${n} 要 8–16`);
+  }
+  assert.ok(hanLen(entry.audio) > hanLen(entry.correct), `${id}/${entry.id} 錄音稿要長過掣面`);
+}
+
 for (const id of playableA) {
   assert.equal(metaById[id].status, 'playable', `${id} 要可玩`);
   const pack = packs[id];
   assert.ok(pack, `${id} 要有題庫`);
   assert.equal(pack.roundSize, 10);
-  const items = pack.items || pack.careers || [];
-  assert.equal(items.length, 10, `${id} 要有 10 個學習項`);
-  assert.ok(pack.lifeAnchor?.title, `${id} 要有生活錨點`);
+  assert.ok(!pack.lifeAnchor, `${id} 學習牆唔好再重複生活錨點卡`);
+  assert.ok(pack.intro, `${id} 要有一句說明`);
   assert.ok(pack.coinMode.startsWith('common-sense-'), `${id} 獨立 modeKey`);
   assert.match(storage, new RegExp(pack.coinMode.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
-  for (const entry of items) {
-    assert.ok(fs.existsSync(path.join(root, entry.image)), `${entry.image} 要存在`);
-    assert.match(entry.image, /assets\/common-sense\/scenes\/.+\.webp$/, `${id}/${entry.id} 答題圖要係 4:3 場景，唔好用抽象 icon 或方形職業字卡`);
-    assert.equal(entry.wrong.length, 3, `${id}/${entry.id} 要有 3 個錯選`);
-    for (const choice of [entry.correct, ...entry.wrong]) {
-      const n = hanLen(choice);
-      assert.ok(n >= 8 && n <= 16, `${id}/${entry.id} 「${choice}」字數 ${n} 要 8–16`);
-    }
-    assert.ok(hanLen(entry.audio) > hanLen(entry.correct), `${id}/${entry.id} 錄音稿要長過掣面`);
-  }
+  if (id === 'festivals-hk') continue;
+  const items = quizPool(pack);
+  assert.equal(items.length, 10, `${id} 要有 10 個學習項`);
+  for (const entry of items) assertQuizEntry(id, entry);
 }
 
 for (const id of soonA) {
-  assert.equal(metaById[id].status, 'soon', `${id} 通宵可灰`);
-  assert.match(metaById[id].blurb, /即將推出/);
+  assert.equal(metaById[id].status, 'soon', `${id} 資料可留`);
+  assert.match(js, /status === 'playable'/, '包牆只顯示可玩主題');
 }
 
 const comicsMeta = metaById['interview-comics'];
@@ -208,23 +231,48 @@ assert.match(asks, /迪士尼/);
 assert.doesNotMatch(asks, /羅湖邊境站.*正確|正確定義/);
 
 const food = packs['food-health'];
-const process = (food.sections || []).find((s) => s.type === 'process');
-assert.ok(process, 'P7 要有食物過程區');
-assert.equal(process.strips.length, 2);
-assert.equal(process.strips[0].title, '牛奶');
-assert.equal(process.strips[1].title, '麵包');
-for (const strip of process.strips) {
-  assert.ok(strip.steps.length >= 2 && strip.steps.length <= 4);
+const comics = (food.sections || []).find((s) => s.type === 'comics');
+assert.ok(comics, 'P7 要有牛奶／麵包連環圖');
+assert.equal(comics.strips.length, 2);
+assert.match(comics.strips[0].title, /牛奶/);
+assert.match(comics.strips[1].title, /麵包/);
+for (const strip of comics.strips) {
+  assert.ok(strip.steps.length >= 4 && strip.steps.length <= 6, `${strip.id} 要 4–6 格`);
   for (const step of strip.steps) {
     assert.ok(fs.existsSync(path.join(root, step.image)), step.image);
+    assert.match(step.image, /\.webp$/);
+    assert.ok(step.caption, `${strip.id} 每格要有短句`);
+    assert.ok(step.audio, `${strip.id} 每格要有朗讀`);
   }
 }
+assert.equal(food.intro.split(/[。！]/).filter(Boolean).length <= 2, true, '飲食包說明最多一兩句');
 const foodAsk = food.items.map((i) => i.ask + i.correct).join('\n');
 assert.match(foodAsk, /牛奶/);
 assert.match(foodAsk, /麵包|麵粉|小麥/);
 assert.match(foodAsk, /洗手/);
 
+const festivals = packs['festivals-hk'];
+assert.ok(Array.isArray(festivals.festivals) && festivals.festivals.length >= 6, '節日包要分節日');
+assert.doesNotMatch(JSON.stringify(festivals), /元宵/);
+const newYear = festivals.festivals.find((f) => f.id === 'new-year');
+const xmas = festivals.festivals.find((f) => f.id === 'christmas');
+assert.ok(newYear.words.some((w) => w.id === 'lai-see-safe'), '利是問大人要併入新年');
+assert.ok(newYear.words.some((w) => w.name.includes('利是封')));
+assert.ok(xmas.words.some((w) => w.name.includes('觀光巴士')));
+assert.ok(xmas.words.some((w) => w.name.includes('尖沙咀')));
+assert.ok(xmas.words.some((w) => w.name.includes('商場')));
+for (const fest of festivals.festivals) {
+  const items = (fest.words || []).concat(fest.quizExtra || []);
+  assert.equal(items.length, 10, `${fest.id} 要有 10 題`);
+  assert.ok((fest.words || []).length >= 3, `${fest.id} 生字 poster 至少三個詞`);
+  for (const word of fest.words || []) {
+    assert.ok(word.pth, `${fest.id}/${word.id} 要有普通話讀法`);
+    assertQuizEntry(`festivals-hk/${fest.id}`, word);
+  }
+  for (const extra of fest.quizExtra || []) assertQuizEntry(`festivals-hk/${fest.id}`, extra);
+}
+
 assert.doesNotMatch(js, /揀一個職業再入/);
 assert.match(js, /sampleRound|shuffle/);
 
-console.log('PASS: common-sense — P0–P7 可玩、P3 地圖釘、P7 過程卡、P9 灰態、獨立 modeKey、8–16 字選項。');
+console.log('PASS: common-sense — P0–P7 可玩、節日生字、飲食連環圖、隱藏即將推出、獨立 modeKey、8–16 字選項。');

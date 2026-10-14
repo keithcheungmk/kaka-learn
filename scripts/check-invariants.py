@@ -1294,8 +1294,8 @@ def check_common_sense() -> None:
         "data/common-sense-recycle-green.js",
         "data/common-sense-food-health.js",
         "assets/common-sense/mtr-family-map.svg",
-        "assets/common-sense/process/milk-1.svg",
-        "assets/common-sense/process/bread-1.svg",
+        "assets/common-sense/process/milk-1.webp",
+        "assets/common-sense/process/bread-1.webp",
         "assets/common-sense/scenes/red-light.webp",
         "assets/common-sense/scenes/priority.webp",
         "assets/common-sense/scenes/yisheng.webp",
@@ -1318,8 +1318,14 @@ def check_common_sense() -> None:
         fail("common-sense", "同一日重玩要講今日已攞，唔好誤導再領幣")
     if "← 包牆" in js or "view === 'learn' || view === 'finish'" in js:
         fail("common-sense", "線 A 過關頂欄要返學習牆，唔好跳過")
-    if "開始答題" not in html or "即將推出" not in html:
-        fail("common-sense", "學習牆要有開始答題；P9 其餘包要標即將推出")
+    if "開始答題" not in html:
+        fail("common-sense", "學習牆要有開始答題")
+    if "即將推出" in html:
+        fail("common-sense", "未實作主題要隱藏，唔好再寫即將推出")
+    if "speakMandarinTerm" not in read("js/speech.js") or "zh-CN" not in js:
+        fail("common-sense", "節日生字要有普通話 zh-CN 發音")
+    if "type === 'comics'" not in js:
+        fail("common-sense", "飲食包要有牛奶／麵包連環圖")
     if "draggable" in js or "有講" in js:
         fail("common-sense", "線 A 唔好做拖一拖或家長開口閘")
     if "quiz-frame" not in html or "choice-speak" not in js:

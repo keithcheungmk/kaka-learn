@@ -527,10 +527,9 @@ def walk(pg, url, shots: Path | None, tag: str):
         pg.click("#btn-start-common-sense")
     pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-heroes")
     soon = pg.evaluate("() => [...document.querySelectorAll('.pack-soon')].map((el) => el.textContent).join(' ')")
-    if "即將推出" not in soon or "情緒小達人" not in soon:
-        raise RuntimeError("Common-sense hub must grey remaining P9 packs as coming soon")
-    if "面試四格" in soon:
-        raise RuntimeError("面試四格 must be playable, not greyed as coming soon")
+    hub_text = pg.evaluate("() => document.querySelector('#view-packs')?.innerText || ''")
+    if soon.strip() or "即將推出" in hub_text or "情緒小達人" in hub_text:
+        raise RuntimeError("Common-sense hub must hide unimplemented packs, not show coming soon")
     if not pg.query_selector("#btn-pack-comics"):
         raise RuntimeError("Common-sense hub must link to playable 面試四格")
     pg.click("#btn-pack-heroes")

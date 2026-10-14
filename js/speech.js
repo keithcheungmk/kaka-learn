@@ -90,6 +90,45 @@ function pickCantoneseVoice() {
   return voices[0] || null;
 }
 
+function pickMandarinVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const voices = speechSynthesis.getVoices();
+  if (!voices.length) return null;
+
+  const isCN = (v) => /zh[-_]CN/i.test(v.lang) || /cmn[-_]hans/i.test(v.lang);
+  const isTW = (v) => /zh[-_]TW/i.test(v.lang);
+  const isMandarin = (v) => isCN(v) || isTW(v) || /mandarin|putonghua|國語|普通话|汉语/i.test(v.name);
+
+  const prefer = [
+    (v) => isCN(v) && isFemaleName(v),
+    (v) => isCN(v) && !isMaleName(v),
+    (v) => isCN(v),
+    (v) => isTW(v) && isFemaleName(v),
+    (v) => isTW(v) && !isMaleName(v),
+    (v) => isMandarin(v) && isFemaleName(v),
+    (v) => isMandarin(v) && !isMaleName(v),
+    (v) => isMandarin(v),
+  ];
+
+  for (const test of prefer) {
+    const found = voices.find(test);
+    if (found) return found;
+  }
+  return null;
+}
+
+function resolveVoiceForLang(lang) {
+  const mandarin = /^zh[-_]CN$/i.test(String(lang || '')) || lang === 'mandarin';
+  if (mandarin) {
+    const voice = pickMandarinVoice();
+    if (voice) return { voice, lang: /zh[-_](CN|TW)/i.test(voice.lang || '') ? voice.lang : 'zh-CN' };
+    return { voice: null, lang: 'zh-CN' };
+  }
+  const voice = cachedVoice || pickCantoneseVoice();
+  if (voice) return { voice, lang: voice.lang || 'zh-HK' };
+  return { voice: null, lang: 'zh-HK' };
+}
+
 /** iPad Safari／Chrome 要有 user gesture 先准出聲，而且第一次 speak 必須喺
  *  gesture 入面「即刻」行（隔咗 setTimeout 就唔算）。所以喺全站第一次撳嘅
  *  嗰一刻，同步播一個零音量嘅空 utterance 解鎖，之後自動讀出先可靠。
@@ -182,7 +221,7 @@ function cancelAllSpeech() {
  * iOS Safari：cancel 之後要稍延遲再 speak，否則會靜音失敗；
  * 而且 onend 經常唔 fire——會用時長後備確保 onEnd 一定會跑。
  * @param {string} text
- * @param {{ muted?: boolean, rate?: number, pitch?: number, delayMs?: number, onEnd?: function }} options
+ * @param {{ muted?: boolean, rate?: number, pitch?: number, delayMs?: number, onEnd?: function, lang?: string }} options
  */
 function speakTerm(text, {
   muted = false,
@@ -190,6 +229,7 @@ function speakTerm(text, {
   pitch = 1.05,
   delayMs = 80,
   onEnd = null,
+  lang = 'zh-HK',
 } = {}) {
   const runEnd = (() => {
     let done = false;
@@ -234,13 +274,9 @@ function speakTerm(text, {
     }
 
     const utter = new SpeechSynthesisUtterance(text);
-    const voice = cachedVoice || pickCantoneseVoice();
-    if (voice) {
-      utter.voice = voice;
-      utter.lang = voice.lang || 'zh-HK';
-    } else {
-      utter.lang = 'zh-HK';
-    }
+    const picked = resolveVoiceForLang(lang);
+    if (picked.voice) utter.voice = picked.voice;
+    utter.lang = picked.lang;
     utter.rate = rate;
     utter.pitch = pitch;
     utter.onend = () => {
@@ -273,13 +309,9 @@ function speakTerm(text, {
       try {
         if (speechSynthesis.speaking || speechSynthesis.pending) return;
         const retry = new SpeechSynthesisUtterance(text);
-        const v2 = cachedVoice || pickCantoneseVoice();
-        if (v2) {
-          retry.voice = v2;
-          retry.lang = v2.lang || 'zh-HK';
-        } else {
-          retry.lang = 'zh-HK';
-        }
+        const retryPick = resolveVoiceForLang(lang);
+        if (retryPick.voice) retry.voice = retryPick.voice;
+        retry.lang = retryPick.lang;
         retry.rate = rate;
         retry.pitch = pitch;
         retry.onstart = () => {
@@ -560,6 +592,10 @@ function warmEnglishVoice() {
  * @param {string} text
  * @param {{ muted?: boolean, rate?: number, pitch?: number, delayMs?: number, onEnd?: function }} options
  */
+function speakMandarinTerm(text, opts = {}) {
+  return speakTerm(text, { ...opts, lang: 'zh-CN' });
+}
+
 function speakEnglishTerm(text, {
   muted = false,
   rate = 0.85,
@@ -618,6 +654,7 @@ window.KakaSpeech = {
   currentVoice: () => cachedVoice,
   warmAudio,
   speakTerm,
+  speakMandarinTerm,
   speakChar,
   speakThen,
   speakCorrectFeedback,

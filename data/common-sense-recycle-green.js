@@ -7,13 +7,9 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
   "title": "環保回收",
   "roundSize": 10,
   "goal": "識分紙膠金屬玻璃去邊個箱",
-  "intro": "飲完牛奶盒、膠樽，問大人去邊個箱。先由屋企分類開始，再學慳電同愛護公園。",
+  "intro": "飲完牛奶盒、膠樽，問大人去邊個箱。先由屋企分類開始。撳卡可以聽一聽。",
   "cover": "assets/common-sense/scenes/paper.webp",
   "wrongHint": "唔係呢個喎，再諗吓○○啦，可以再試。",
-  "lifeAnchor": {
-    "title": "由屋企分類開始",
-    "body": "卡卡飲完牛奶或者膠水，問大人：呢樣去紙、膠、金屬定玻璃？出街帶可重用袋。"
-  },
   "items": [
     {
       "id": "paper",
