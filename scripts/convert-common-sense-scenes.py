@@ -47,7 +47,7 @@ MAP = {
     "hot-no-coat": "cs-weather-hot-day.jpg",
     "four-seasons": "cs-weather-four-seasons.jpg",
     "summer-hot": "cs-weather-summer.jpg",
-    "winter-cold": "cs-white-breath.jpg",
+    "winter-cold": "cs-white-breath-v3.jpg",
     "sun-hat": "cs-weather-sun-hat.jpg",
     "wet-floor": "cs-weather-wet-floor.jpg",
     "adult-warning": "cs-weather-listen-adult.jpg",
