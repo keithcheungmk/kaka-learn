@@ -318,6 +318,65 @@ a.pack { text-decoration: none; }
   background: #eef4fb;
   display: block;
 }
+.cs-media {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #d7e6f4;
+  isolation: isolate;
+}
+.cs-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(105deg, #d4e4f4 8%, #f4f9fd 46%, #d4e4f4 86%);
+  background-size: 220% 100%;
+  animation: cs-shimmer 1.15s ease-in-out infinite;
+  pointer-events: none;
+}
+.cs-media.is-ready::after { display: none; }
+.cs-media img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  background: transparent;
+  display: block;
+  border-radius: 0;
+}
+.cs-media img.is-ready { opacity: 1; }
+@keyframes cs-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -20% 0; }
+}
+.learn-card .cs-media { max-height: 160px; }
+.season-card .cs-media { max-height: min(240px, 34dvh); }
+.learn-grid.season-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.cs-map .cs-media {
+  margin: 8px 0;
+  border-radius: 14px;
+  max-height: none;
+}
+.comic-strip .cs-media { max-height: none; }
+.process-strip .cs-media {
+  aspect-ratio: 1;
+  max-height: none;
+}
+.pack-art {
+  background: #d7e6f4;
+}
 .learn-card .name { margin: 8px 0 2px; font-weight: 800; font-size: 1rem; }
 .learn-card .duty { margin: 0; color: var(--muted); font-size: 0.78rem; line-height: 1.35; }
 .learn-card .hear { margin: 6px 0 0; color: var(--accent2); font-size: 0.75rem; font-weight: 700; }
@@ -432,13 +491,14 @@ a.pack { text-decoration: none; }
   aspect-ratio: 4 / 3;
   margin: 0 auto 10px;
   border-radius: 20px;
-  background: #e8f0fa;
+  background: #d7e6f4;
   box-shadow: var(--shadow);
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+.quiz-frame.cs-media { isolation: isolate; }
 .quiz-frame img,
 .quiz-hero img {
   width: 100%;
@@ -599,6 +659,9 @@ a.pack { text-decoration: none; }
 
 @media (min-width: 900px) and (orientation: landscape) {
   .learn-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .learn-grid.season-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .season-card .cs-media { max-height: min(210px, 36dvh); }
+  .learn-card .cs-media { max-height: 112px; }
   .intro { padding: 12px 16px; }
   .intro h2 { margin-bottom: 4px; }
   .learn-card { padding: 8px; }
@@ -680,4 +743,6 @@ a.pack { text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   .burst { animation: none; }
   .cta-big, .pack, .learn-card, .choice { transition: none; }
+  .cs-media::after { animation: none; }
+  .cs-media img { transition: none; }
 }

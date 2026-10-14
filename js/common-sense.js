@@ -14,11 +14,14 @@
   let view = 'packs';
   let currentPack = null;
   let currentFestival = null;
+  let currentSeason = null;
   let quizOrder = [];
   let quizIndex = 0;
   let correctCount = 0;
   let answering = false;
   let finishAwarded = false;
+  const preloadLinks = [];
+  const FIRST_EAGER = 6;
 
   function hanLen(text) {
     return (String(text || '').match(/[\u4e00-\u9fff]/g) || []).length;
@@ -47,6 +50,10 @@
     return Boolean(pack?.kind === 'festivals' || (pack?.festivals && pack.festivals.length));
   }
 
+  function isSeasonsPack(pack) {
+    return Boolean(pack?.kind === 'seasons' || (pack?.seasons && pack.seasons.length));
+  }
+
   function festivalQuizItems(fest) {
     if (!fest) return [];
     const words = Array.isArray(fest.words) ? fest.words : [];
@@ -54,12 +61,79 @@
     return words.concat(extra);
   }
 
+  function seasonQuizItems(season) {
+    if (!season) return [];
+    const events = Array.isArray(season.events) ? season.events : [];
+    const extra = Array.isArray(season.quizExtra) ? season.quizExtra : [];
+    return events.concat(extra);
+  }
+
+  function allSeasonQuizItems(pack) {
+    return (pack?.seasons || []).flatMap((season) => seasonQuizItems(season));
+  }
+
   function packItems(pack) {
     if (currentFestival) return festivalQuizItems(currentFestival);
+    if (isSeasonsPack(pack)) {
+      const all = allSeasonQuizItems(pack);
+      if (!currentSeason) return all;
+      const own = seasonQuizItems(currentSeason);
+      if (own.length >= (pack.roundSize || 10)) return own;
+      const seen = new Set(own.map((entry) => entry.id));
+      return own.concat(all.filter((entry) => !seen.has(entry.id)));
+    }
     if (!pack) return [];
     if (Array.isArray(pack.items) && pack.items.length) return pack.items;
     if (Array.isArray(pack.careers) && pack.careers.length) return pack.careers;
     return [];
+  }
+
+  function nestedLearn() {
+    return currentFestival || currentSeason;
+  }
+
+  function setPreloads(urls) {
+    preloadLinks.splice(0).forEach((el) => el.remove());
+    [...new Set((urls || []).filter(Boolean))].slice(0, 8).forEach((href) => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = href;
+      document.head.appendChild(link);
+      preloadLinks.push(link);
+    });
+  }
+
+  function mediaImg(src, alt, opts = {}) {
+    if (!src) return '';
+    const eager = Boolean(opts.eager);
+    const width = opts.width || 900;
+    const height = opts.height || 675;
+    const extraClass = opts.className ? ` class="${opts.className}"` : '';
+    const prio = eager ? ' fetchpriority="high"' : '';
+    return (
+      `<span class="cs-media">` +
+      `<img src="${src}" alt="${alt || ''}" width="${width}" height="${height}" ` +
+      `loading="${eager ? 'eager' : 'lazy'}" decoding="async"${prio}${extraClass}>` +
+      `</span>`
+    );
+  }
+
+  function bindMedia(root) {
+    const scope = root || document;
+    scope.querySelectorAll('.cs-media img').forEach((img) => {
+      const slot = img.closest('.cs-media');
+      const ready = () => {
+        img.classList.add('is-ready');
+        slot?.classList.add('is-ready');
+      };
+      if (img.complete && img.naturalWidth > 0) {
+        ready();
+        return;
+      }
+      img.addEventListener('load', ready, { once: true });
+      img.addEventListener('error', ready, { once: true });
+    });
   }
 
   function wallItems(pack) {
@@ -125,14 +199,17 @@
       const el = $(id);
       if (el) el.classList.toggle('hidden', id !== `view-${next}`);
     });
-    const title = currentFestival?.name || currentPack?.title || '卡卡常識樂園';
+    const title = currentSeason?.name || currentFestival?.name || currentPack?.title || '卡卡常識樂園';
     if (next === 'packs') {
       setBrand('常識樂園', '卡卡常識樂園');
       setBack('← 主頁', HOME_HREF);
       setPill('揀主題');
     } else if (next === 'learn') {
       setBrand('常識樂園', title);
-      if (currentFestival) {
+      if (currentSeason) {
+        setBack('← 四季', HOME_HREF);
+        setPill('季節');
+      } else if (currentFestival) {
         setBack('← 節日', HOME_HREF);
         setPill('生字');
       } else {
@@ -141,11 +218,11 @@
       }
     } else if (next === 'quiz') {
       setBrand('答題挑戰', title);
-      setBack(currentFestival ? '← 生字' : '← 學習牆', HOME_HREF);
+      setBack(currentSeason ? '← 季節' : (currentFestival ? '← 生字' : '← 學習牆'), HOME_HREF);
       setPill(`已答啱 ${correctCount}／10`);
     } else if (next === 'finish') {
       setBrand('過關', title);
-      setBack(currentFestival ? '← 生字' : '← 學習牆', HOME_HREF);
+      setBack(currentSeason ? '← 季節' : (currentFestival ? '← 生字' : '← 學習牆'), HOME_HREF);
       setPill('10／10');
     }
   }
@@ -156,9 +233,9 @@
     const packs = Array.isArray(catalog.packs) ? catalog.packs : [];
     const lineA = packs.filter((p) => p.line !== 'B' && p.status === 'playable');
     const lineB = packs.filter((p) => p.line === 'B' && p.status === 'playable');
-    const renderCard = (meta) => {
+    const renderCard = (meta, index) => {
       const cover = meta.cover
-        ? `<img class="pack-art" src="${meta.cover}" alt="" width="256" height="256">`
+        ? `<img class="pack-art" src="${meta.cover}" alt="" width="256" height="256" loading="${index < FIRST_EAGER ? 'eager' : 'lazy'}" decoding="async"${index < 4 ? ' fetchpriority="high"' : ''}>`
         : `<span class="pack-art pack-soon-icon" aria-hidden="true">${meta.emoji || '📖'}</span>`;
       const inner = `${cover}<span class="pack-meta"><strong>${meta.kicker}</strong><span>${meta.blurb}</span></span>`;
       if (meta.href) {
@@ -168,12 +245,13 @@
     };
     grid.innerHTML =
       `<p class="pack-line-label">${catalog.lineATitle || '常識答題'}</p>` +
-      lineA.map(renderCard).join('') +
+      lineA.map((meta, i) => renderCard(meta, i)).join('') +
       `<p class="pack-line-label">${catalog.lineBTitle || '面試四格'}</p>` +
-      lineB.map(renderCard).join('');
+      lineB.map((meta, i) => renderCard(meta, lineA.length + i)).join('');
     grid.querySelectorAll('[data-pack]').forEach((btn) => {
       btn.addEventListener('click', () => openPack(btn.dataset.pack));
     });
+    setPreloads(lineA.concat(lineB).slice(0, 8).map((meta) => meta.cover));
   }
 
   function renderLearnWall() {
@@ -181,8 +259,12 @@
     const grid = $('learn-grid');
     const heading = $('learn-heading');
     const intro = $('learn-intro-text');
+    const toPreload = [];
     if (extras) extras.innerHTML = '';
-    if (grid) grid.innerHTML = '';
+    if (grid) {
+      grid.innerHTML = '';
+      grid.classList.toggle('season-grid', Boolean(isSeasonsPack(currentPack) && !currentSeason));
+    }
     if (!currentPack) {
       if (heading) heading.textContent = '';
       if (intro) intro.textContent = '';
@@ -190,13 +272,29 @@
       return;
     }
 
+    if (currentSeason) {
+      if (heading) heading.textContent = currentSeason.name;
+      if (intro) intro.textContent = currentSeason.intro || currentPack.intro || '';
+      setStartVisible(true);
+      (currentSeason.events || []).forEach((entry, index) => {
+        grid.appendChild(renderEventCard(entry, index));
+        if (index < FIRST_EAGER) toPreload.push(entry.image);
+      });
+      setPreloads(toPreload);
+      bindMedia($('view-learn'));
+      return;
+    }
+
     if (currentFestival) {
       if (heading) heading.textContent = currentFestival.name;
       if (intro) intro.textContent = currentFestival.intro || currentPack.intro || '';
       setStartVisible(true);
-      (currentFestival.words || []).forEach((entry) => {
-        grid.appendChild(renderWordCard(entry));
+      (currentFestival.words || []).forEach((entry, index) => {
+        grid.appendChild(renderWordCard(entry, index));
+        if (index < FIRST_EAGER) toPreload.push(entry.image);
       });
+      setPreloads(toPreload);
+      bindMedia($('view-learn'));
       return;
     }
 
@@ -212,37 +310,55 @@
     });
 
     if (isFestivalsPack(currentPack)) {
-      (currentPack.festivals || []).forEach((fest) => {
+      (currentPack.festivals || []).forEach((fest, index) => {
         const card = document.createElement('button');
         card.type = 'button';
         card.className = 'learn-card festival-card';
         card.dataset.festival = fest.id;
         card.setAttribute('aria-label', `${fest.name}，入去學生字`);
-        const img = fest.cover
-          ? `<img src="${fest.cover}" alt="${fest.name}" width="256" height="192">`
-          : '';
         card.innerHTML =
-          img +
+          mediaImg(fest.cover, fest.name, { eager: index < FIRST_EAGER, width: 900, height: 675 }) +
           `<p class="name">${fest.name}</p>` +
           `<p class="duty">${fest.wallLine || ''}</p>` +
           '<p class="hear">入去學生字</p>';
         card.addEventListener('click', () => openFestival(fest.id));
         grid.appendChild(card);
+        if (index < FIRST_EAGER) toPreload.push(fest.cover);
       });
+      setPreloads(toPreload);
+      bindMedia($('view-learn'));
       return;
     }
 
-    wallItems(currentPack).forEach((entry) => {
+    if (isSeasonsPack(currentPack)) {
+      (currentPack.seasons || []).forEach((season, index) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'learn-card season-card';
+        card.dataset.season = season.id;
+        card.setAttribute('aria-label', `${season.name}，入去睇天氣`);
+        card.innerHTML =
+          mediaImg(season.cover, season.name, { eager: true, width: 900, height: 675 }) +
+          `<p class="name">${season.name}</p>` +
+          `<p class="duty">${season.wallLine || ''}</p>` +
+          '<p class="hear">入去睇睇</p>';
+        card.addEventListener('click', () => openSeason(season.id));
+        grid.appendChild(card);
+        toPreload.push(season.cover);
+      });
+      setPreloads(toPreload);
+      bindMedia($('view-learn'));
+      return;
+    }
+
+    wallItems(currentPack).forEach((entry, index) => {
       const card = document.createElement('button');
       card.type = 'button';
       card.className = 'learn-card';
       card.dataset.item = entry.id;
       card.setAttribute('aria-label', `${entry.wallLine || entry.name}，聽一聽`);
-      const img = entry.image
-        ? `<img src="${entry.image}" alt="${entry.name}" width="256" height="192">`
-        : '';
       card.innerHTML =
-        img +
+        mediaImg(entry.image, entry.name, { eager: index < FIRST_EAGER, width: 900, height: 675 }) +
         `<p class="name">${entry.name}</p>` +
         `<p class="duty">${entry.wallLine || ''}</p>` +
         '<p class="hear">🔊 聽一聽</p>';
@@ -251,18 +367,46 @@
         speak(entry.audio || entry.ask);
       });
       grid.appendChild(card);
+      if (index < FIRST_EAGER) toPreload.push(entry.image);
     });
+    setPreloads(toPreload.concat(
+      (currentPack.sections || []).flatMap((section) => {
+        if (section.type === 'map') return [section.src];
+        if (section.type === 'comics') {
+          return (section.strips || []).flatMap((strip) =>
+            (strip.steps || []).slice(0, 3).map((step) => step.image)
+          );
+        }
+        return [];
+      })
+    ));
+    bindMedia($('view-learn'));
   }
 
-  function renderWordCard(entry) {
+  function renderEventCard(entry, index) {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'learn-card';
+    card.dataset.item = entry.id;
+    card.setAttribute('aria-label', `${entry.wallLine || entry.name}，聽一聽`);
+    card.innerHTML =
+      mediaImg(entry.image, entry.name, { eager: index < FIRST_EAGER, width: 900, height: 675 }) +
+      `<p class="name">${entry.name}</p>` +
+      `<p class="duty">${entry.wallLine || ''}</p>` +
+      '<p class="hear">🔊 聽一聽</p>';
+    card.addEventListener('click', () => {
+      card.classList.add('is-heard');
+      speak(entry.audio || entry.ask);
+    });
+    return card;
+  }
+
+  function renderWordCard(entry, index) {
     const card = document.createElement('article');
     card.className = 'learn-card word-card';
     card.dataset.item = entry.id;
-    const img = entry.image
-      ? `<img src="${entry.image}" alt="${entry.name}" width="256" height="192">`
-      : '';
     card.innerHTML =
-      img +
+      mediaImg(entry.image, entry.name, { eager: index < FIRST_EAGER, width: 900, height: 675 }) +
       `<p class="name">${entry.name}</p>` +
       '<div class="speak-duo">' +
       `<button type="button" class="speak-lang speak-yue" aria-label="用廣東話讀「${entry.name}」">廣東話</button>` +
@@ -292,7 +436,7 @@
     )).join('');
     el.innerHTML =
       `<h3>${section.title}</h3>` +
-      `<img src="${section.src}" alt="${section.title}">` +
+      mediaImg(section.src, section.title, { eager: true, width: 900, height: 675 }) +
       `<p class="map-caption">${section.caption || ''}</p>` +
       `<ul class="cs-pins">${pins}</ul>`;
     return el;
@@ -304,7 +448,7 @@
     el.id = section.id || 'cs-food-process';
     const strips = (section.strips || []).map((strip) => {
       const steps = (strip.steps || []).map((step, i) => (
-        `<li><img src="${step.image}" alt="${step.label}"><span>${i + 1}. ${step.label}</span></li>`
+        `<li>${mediaImg(step.image, step.label, { eager: i < 2, width: 256, height: 256 })}<span>${i + 1}. ${step.label}</span></li>`
       )).join('');
       return `<div class="process-strip"><h4>${strip.title}</h4><ol>${steps}</ol></div>`;
     }).join('');
@@ -316,17 +460,21 @@
     const el = document.createElement('section');
     el.className = 'cs-comics';
     el.id = section.id || 'cs-food-comics';
-    (section.strips || []).forEach((strip) => {
+    (section.strips || []).forEach((strip, stripIndex) => {
       const block = document.createElement('div');
       block.className = 'comic-strip';
       const heading = document.createElement('h3');
       heading.textContent = strip.title || '';
       block.appendChild(heading);
       const list = document.createElement('ol');
-      (strip.steps || []).forEach((step) => {
+      (strip.steps || []).forEach((step, stepIndex) => {
         const li = document.createElement('li');
         li.innerHTML =
-          `<img src="${step.image}" alt="${step.caption || ''}" width="900" height="675">` +
+          mediaImg(step.image, step.caption || '', {
+            eager: stripIndex === 0 && stepIndex < 4,
+            width: 900,
+            height: 675,
+          }) +
           `<p>${step.caption || ''}</p>`;
         const btn = document.createElement('button');
         btn.type = 'button';
@@ -352,10 +500,30 @@
     if (!q) return;
     answering = false;
     const img = $('quiz-img');
+    const frame = img?.closest('.quiz-frame, .cs-media');
     if (img) {
+      img.classList.remove('is-ready');
+      frame?.classList.remove('is-ready');
+      img.loading = 'eager';
+      img.fetchPriority = 'high';
+      img.decoding = 'async';
       img.src = q.image || '';
       img.alt = q.name || '';
       img.classList.toggle('hidden', !q.image);
+      const ready = () => {
+        img.classList.add('is-ready');
+        frame?.classList.add('is-ready');
+      };
+      if (q.image) {
+        if (img.complete && img.naturalWidth > 0) ready();
+        else {
+          img.addEventListener('load', ready, { once: true });
+          img.addEventListener('error', ready, { once: true });
+        }
+        setPreloads([q.image]);
+      } else {
+        ready();
+      }
     }
     const ask = $('quiz-q');
     if (ask) ask.textContent = q.ask;
@@ -462,8 +630,9 @@
       const coin = storage.earnCoinForMode
         ? storage.earnCoinForMode(mode)
         : { gained: false, already: true };
-      const passedId = currentFestival
-        ? `${currentPack?.packId || 'festivals-hk'}-${currentFestival.id}`
+      const nested = nestedLearn();
+      const passedId = nested
+        ? `${currentPack?.packId || 'community-heroes'}-${nested.id}`
         : (currentPack?.packId || 'community-heroes');
       storage.markTopicPassed?.('common-sense', passedId);
       const msg = $('finish-msg');
@@ -485,6 +654,7 @@
     stopSpeech();
     currentPack = null;
     currentFestival = null;
+    currentSeason = null;
     showView('packs');
   }
 
@@ -493,6 +663,7 @@
     if (!pack) return;
     currentPack = pack;
     currentFestival = null;
+    currentSeason = null;
     stopSpeech();
     renderLearnWall();
     showView('learn');
@@ -502,6 +673,17 @@
     const fest = (currentPack?.festivals || []).find((item) => item.id === festId);
     if (!fest) return;
     currentFestival = fest;
+    currentSeason = null;
+    stopSpeech();
+    renderLearnWall();
+    showView('learn');
+  }
+
+  function openSeason(seasonId) {
+    const season = (currentPack?.seasons || []).find((item) => item.id === seasonId);
+    if (!season) return;
+    currentSeason = season;
+    currentFestival = null;
     stopSpeech();
     renderLearnWall();
     showView('learn');
@@ -526,8 +708,9 @@
     }
     if (view === 'learn') {
       stopSpeech();
-      if (currentFestival) {
+      if (currentFestival || currentSeason) {
         currentFestival = null;
+        currentSeason = null;
         renderLearnWall();
         showView('learn');
         return;
@@ -571,6 +754,7 @@
       view,
       packId: currentPack?.packId || null,
       festivalId: currentFestival?.id || null,
+      seasonId: currentSeason?.id || null,
       quizIndex,
       correctCount,
       total: quizOrder.length,
@@ -578,10 +762,12 @@
     startQuiz,
     openPack,
     openFestival,
+    openSeason,
     showLearn: goLearn,
     showPacks: goPacks,
     get pack() { return currentPack || packMap['community-heroes'] || {}; },
     get festival() { return currentFestival; },
+    get season() { return currentSeason; },
     get careers() { return packItems(currentPack || packMap['community-heroes']); },
     answerCurrentCorrect() {
       const q = currentQuestion();

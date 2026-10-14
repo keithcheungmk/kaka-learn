@@ -1300,6 +1300,8 @@ def check_common_sense() -> None:
         "assets/common-sense/scenes/priority.webp",
         "assets/common-sense/scenes/yisheng.webp",
         "assets/common-sense/scenes/laoshi_job.webp",
+        "assets/common-sense/scenes/season-spring.webp",
+        "assets/common-sense/scenes/hotpot.webp",
         "interview-comics.html",
         "css/interview-comics.css",
         "js/interview-comics.js",
@@ -1326,6 +1328,13 @@ def check_common_sense() -> None:
         fail("common-sense", "節日生字要有普通話 zh-CN 發音")
     if "type === 'comics'" not in js:
         fail("common-sense", "飲食包要有牛奶／麵包連環圖")
+    if "currentSeason" not in js or "openSeason" not in js:
+        fail("common-sense", "天氣包要有四季入口同季節頁")
+    if "cs-media" not in js or "cs-shimmer" not in read("css/common-sense.css"):
+        fail("common-sense", "常識圖要有載入佔位同 shimmer")
+    weather_src = read("data/common-sense-weather-seasons.js")
+    if '"kind": "seasons"' not in weather_src or weather_src.count('"id": "spring"') < 1:
+        fail("common-sense", "天氣同四季要分春夏秋冬四個入口")
     if "draggable" in js or "有講" in js:
         fail("common-sense", "線 A 唔好做拖一拖或家長開口閘")
     if "quiz-frame" not in html or "choice-speak" not in js:

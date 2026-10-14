@@ -23,6 +23,34 @@
   let playbackUrl = '';
   let localDone = new Set();
 
+  function mediaImg(src, alt, eager) {
+    if (!src) return '';
+    const prio = eager ? ' fetchpriority="high"' : '';
+    return (
+      `<span class="cs-media">` +
+      `<img src="${src}" alt="${alt || ''}" width="640" height="480" ` +
+      `loading="${eager ? 'eager' : 'lazy'}" decoding="async"${prio}>` +
+      `</span>`
+    );
+  }
+
+  function bindMedia(root) {
+    const scope = root || document;
+    scope.querySelectorAll('.cs-media img').forEach((img) => {
+      const slot = img.closest('.cs-media');
+      const ready = () => {
+        img.classList.add('is-ready');
+        slot?.classList.add('is-ready');
+      };
+      if (img.complete && img.naturalWidth > 0) {
+        ready();
+        return;
+      }
+      img.addEventListener('load', ready, { once: true });
+      img.addEventListener('error', ready, { once: true });
+    });
+  }
+
   function pickMimeType() {
     if (typeof MediaRecorder === 'undefined') return '';
     return MIME_TYPES.find((type) => {
@@ -204,10 +232,10 @@
   }
 
   function renderWall() {
-    const playable = levels.map((level) => {
+    const playable = levels.map((level, levelIndex) => {
       const done = isLevelDone(level.id);
       const thumbs = level.panels.map((panel, index) => (
-        `<figure class="level-thumb"><img src="${panel.image}" alt="${panel.alt}"><b>${index + 1}</b></figure>`
+        `<figure class="level-thumb">${mediaImg(panel.image, panel.alt, levelIndex === 0 || index < 2)}<b>${index + 1}</b></figure>`
       )).join('');
       return `<article class="level-card" data-level="${level.id}">
         <div class="level-thumbs">${thumbs}</div>
@@ -230,6 +258,7 @@
     $('level-grid').querySelectorAll('[data-start]').forEach((button) => {
       button.addEventListener('click', () => openLevel(button.dataset.start));
     });
+    bindMedia($('level-grid'));
     $('brand-title').textContent = '面試四格';
     $('brand-kicker').textContent = '常識樂園・粵語';
     $('back-link').setAttribute('href', HUB_HREF);
@@ -241,7 +270,7 @@
     $('comic-board').innerHTML = current.panels.map((panel) => (
       `<figure class="comic-panel" data-beat="${panel.beat}">
         <button type="button" class="comic-hit" data-beat="${panel.beat}" aria-label="撳亮${panel.beat}">
-          <img src="${panel.image}" alt="${panel.alt}">
+          ${mediaImg(panel.image, panel.alt, true)}
         </button>
         <figcaption>${panel.beat}</figcaption>
       </figure>`
@@ -249,6 +278,7 @@
     $('comic-board').querySelectorAll('.comic-hit').forEach((button) => {
       button.addEventListener('click', () => onComicHit(button.dataset.beat));
     });
+    bindMedia($('comic-board'));
   }
 
   function renderKidPanels() {

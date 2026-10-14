@@ -44,8 +44,8 @@ window.COMMON_SENSE_CATALOG = {
       "line": "A",
       "status": "playable",
       "kicker": "A · 天氣同四季",
-      "blurb": "落雨帶遮、凍着外套",
-      "cover": "assets/common-sense/scenes/rain-umbrella.webp",
+      "blurb": "春夏秋冬，睇天氣學活動",
+      "cover": "assets/common-sense/scenes/four-seasons.webp",
       "buttonId": "btn-pack-weather"
     },
     {

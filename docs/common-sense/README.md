@@ -4,7 +4,7 @@
 
 ## 可玩
 
-- 線 A：`community-heroes`、`safe-outing`、`manners-hygiene`、`transport-hk`、`weather-seasons`、`festivals-hk`、`recycle-green`、`food-health`
+- 線 A：`community-heroes`、`safe-outing`、`manners-hygiene`、`transport-hk`、`weather-seasons`（春夏秋冬四大入口）、`festivals-hk`、`recycle-green`、`food-health`
 - 線 B：`rain-no-umbrella`、`mtr-need-seat`、`park-ball-lost`（`interview-comics.html`，只從常識 hub 進入）
 
 ## 硬門檻資產

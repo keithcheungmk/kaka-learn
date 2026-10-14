@@ -69,6 +69,15 @@ assert.match(js, /speak-yue/);
 assert.match(js, /speak-pth/);
 assert.match(js, /zh-CN/);
 assert.match(js, /currentFestival/);
+assert.match(js, /currentSeason/);
+assert.match(js, /openSeason/);
+assert.match(js, /← 四季/);
+assert.match(js, /cs-media/);
+assert.match(js, /loading="\$\{eager \? 'eager' : 'lazy'\}"/);
+assert.match(js, /rel = 'preload'/);
+assert.match(css, /cs-shimmer/);
+assert.match(css, /\.learn-grid\.season-grid/);
+assert.match(html, /quiz-frame cs-media/);
 assert.doesNotMatch(js, /lifeAnchor/);
 const speechSrc = read('js/speech.js');
 assert.match(speechSrc, /speakMandarinTerm/);
@@ -142,6 +151,7 @@ const metaById = Object.fromEntries((catalog.packs || []).map((p) => [p.packId, 
 
 function quizPool(pack) {
   if (Array.isArray(pack.festivals) && pack.festivals.length) return null;
+  if (Array.isArray(pack.seasons) && pack.seasons.length) return null;
   return pack.items || pack.careers || [];
 }
 
@@ -165,7 +175,7 @@ for (const id of playableA) {
   assert.ok(pack.intro, `${id} 要有一句說明`);
   assert.ok(pack.coinMode.startsWith('common-sense-'), `${id} 獨立 modeKey`);
   assert.match(storage, new RegExp(pack.coinMode.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
-  if (id === 'festivals-hk') continue;
+  if (id === 'festivals-hk' || id === 'weather-seasons') continue;
   const items = quizPool(pack);
   assert.equal(items.length, 10, `${id} 要有 10 個學習項`);
   for (const entry of items) assertQuizEntry(id, entry);
@@ -272,7 +282,41 @@ for (const fest of festivals.festivals) {
   for (const extra of fest.quizExtra || []) assertQuizEntry(`festivals-hk/${fest.id}`, extra);
 }
 
+const weather = packs['weather-seasons'];
+assert.ok(Array.isArray(weather.seasons) && weather.seasons.length === 4, '天氣包要四個季節入口');
+assert.equal(weather.seasons.map((s) => s.id).join(','), 'spring,summer,autumn,winter');
+assert.match(weather.intro, /春/);
+assert.equal(weather.intro.split(/[。！]/).filter(Boolean).length <= 2, true, '天氣包說明最多一兩句');
+const weatherEvents = weather.seasons.flatMap((s) => s.events || []);
+assert.ok(weatherEvents.length >= 10, '四季活動合計要夠十題');
+const weatherNames = weatherEvents.map((e) => e.name).join('|');
+assert.match(weatherNames, /潮濕/);
+assert.match(weatherNames, /回南天/);
+assert.match(weatherNames, /大霧/);
+assert.match(weatherNames, /清明/);
+assert.match(weatherNames, /戴帽/);
+assert.match(weatherNames, /打風/);
+assert.match(weatherNames, /雪糕/);
+assert.match(weatherNames, /沙灘/);
+assert.match(weatherNames, /天朗氣清/);
+assert.match(weatherNames, /行山/);
+assert.match(weatherNames, /賞月/);
+assert.match(weatherNames, /外套/);
+assert.match(weatherNames, /打邊爐/);
+assert.match(weatherNames, /露營/);
+assert.match(weatherNames, /白氣/);
+for (const season of weather.seasons) {
+  assert.ok(fs.existsSync(path.join(root, season.cover)), season.cover);
+  assert.ok((season.events || []).length >= 4, `${season.id} 至少四張活動卡`);
+  assert.ok(season.intro, `${season.id} 要有一句香港天氣`);
+  for (const entry of season.events) assertQuizEntry(`weather-seasons/${season.id}`, entry);
+}
+const weatherAsks = weatherEvents.map((e) => e.ask + e.correct).join('\n');
+assert.match(weatherAsks, /打邊爐/);
+assert.match(weatherAsks, /天文台/);
+assert.match(weatherAsks, /邊個季節|春天|夏天|秋天|冬天/);
+
 assert.doesNotMatch(js, /揀一個職業再入/);
 assert.match(js, /sampleRound|shuffle/);
 
-console.log('PASS: common-sense — P0–P7 可玩、節日生字、飲食連環圖、隱藏即將推出、獨立 modeKey、8–16 字選項。');
+console.log('PASS: common-sense — P0–P7 可玩、節日生字、飲食連環圖、四季入口、圖載入佔位、隱藏即將推出、獨立 modeKey、8–16 字選項。');
