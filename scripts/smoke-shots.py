@@ -568,6 +568,8 @@ def walk(pg, url, shots: Path | None, tag: str):
             frameRatio: frame && frame.height ? frame.width / frame.height : 0,
             frameH: frame?.height || 0,
             objectFit: img ? getComputedStyle(img).objectFit : '',
+            fillW: frame && img ? img.getBoundingClientRect().width / frame.width : 0,
+            fillH: frame && img ? img.getBoundingClientRect().height / frame.height : 0,
           };
         }"""
     )
@@ -583,6 +585,10 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Quiz image frame must be ~4:3, got {quiz_metrics['frameRatio']:.3f}")
     if quiz_metrics["objectFit"] != "contain":
         raise RuntimeError(f"Quiz image must use object-fit:contain, got {quiz_metrics['objectFit']!r}")
+    if quiz_metrics["fillW"] < 0.92 or quiz_metrics["fillH"] < 0.92:
+        raise RuntimeError(
+            f"Quiz image must fill the 4:3 frame, fillW={quiz_metrics['fillW']:.3f} fillH={quiz_metrics['fillH']:.3f}"
+        )
     if pg.viewport_size["width"] <= 700 and quiz_metrics["frameH"] > (pg.viewport_size["height"] * 0.36) + 2:
         raise RuntimeError(f"Phone quiz image taller than ~1/3 screen, height={quiz_metrics['frameH']}")
     if "已答啱 0／10" not in quiz_metrics["progress"]:

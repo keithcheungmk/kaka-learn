@@ -17,7 +17,7 @@ window.COMMON_SENSE_HEROES = {
     {
       id: 'yisheng',
       name: '醫生',
-      image: 'assets/careers/yisheng.webp',
+      image: 'assets/common-sense/scenes/yisheng.webp',
       wallLine: '醫生——喺醫院幫人睇症',
       ask: '呢個係醫生。佢做啲咩？',
       correct: '喺醫院幫人睇症、醫好身體',
@@ -31,7 +31,7 @@ window.COMMON_SENSE_HEROES = {
     {
       id: 'hushi',
       name: '護士',
-      image: 'assets/careers/hushi.webp',
+      image: 'assets/common-sense/scenes/hushi.webp',
       wallLine: '護士——喺醫院照顧病人',
       ask: '呢個係護士。佢做啲咩？',
       correct: '喺醫院照顧病人、幫手打針量體溫',
@@ -45,7 +45,7 @@ window.COMMON_SENSE_HEROES = {
     {
       id: 'xiaofangyuan',
       name: '消防員',
-      image: 'assets/careers/xiaofangyuan.webp',
+      image: 'assets/common-sense/scenes/xiaofangyuan.webp',
       wallLine: '消防員——救火同埋救人',
       ask: '呢個係消防員。佢做啲咩？',
       correct: '救火同埋救人出危險',
@@ -59,7 +59,7 @@ window.COMMON_SENSE_HEROES = {
     {
       id: 'jingcha',
       name: '警察',
-      image: 'assets/careers/jingcha.webp',
+      image: 'assets/common-sense/scenes/jingcha.webp',
       wallLine: '警察——保護大家安全',
       ask: '呢個係警察。佢做啲咩？',
       correct: '保護大家安全、幫有需要嘅人',
@@ -73,7 +73,7 @@ window.COMMON_SENSE_HEROES = {
     {
       id: 'laoshi_job',
       name: '老師',
-      image: 'assets/careers/laoshi_job.webp',
+      image: 'assets/common-sense/scenes/laoshi_job.webp',
       wallLine: '老師——教小朋友學嘢',
       ask: '呢個係老師。佢做啲咩？',
       correct: '喺學校教小朋友學嘢同認字',
@@ -87,7 +87,7 @@ window.COMMON_SENSE_HEROES = {
     {
       id: 'siji',
       name: '司機',
-      image: 'assets/careers/siji.webp',
+      image: 'assets/common-sense/scenes/siji.webp',
       wallLine: '司機——開車載人去地方',
       ask: '呢個係司機。佢做啲咩？',
       correct: '開車載人去想去嘅地方',
@@ -101,7 +101,7 @@ window.COMMON_SENSE_HEROES = {
     {
       id: 'chushi',
       name: '廚師',
-      image: 'assets/careers/chushi.webp',
+      image: 'assets/common-sense/scenes/chushi.webp',
       wallLine: '廚師——煮飯煮餸畀人食',
       ask: '呢個係廚師。佢做啲咩？',
       correct: '喺廚房煮飯煮餸畀大家食',
@@ -115,7 +115,7 @@ window.COMMON_SENSE_HEROES = {
     {
       id: 'youchai',
       name: '郵差',
-      image: 'assets/careers/youchai.webp',
+      image: 'assets/common-sense/scenes/youchai.webp',
       wallLine: '郵差——送信同包裹到屋企',
       ask: '呢個係郵差。佢做啲咩？',
       correct: '送信同包裹送到屋企',
@@ -129,7 +129,7 @@ window.COMMON_SENSE_HEROES = {
     {
       id: 'shouhuoyuan',
       name: '售貨員',
-      image: 'assets/careers/shouhuoyuan.webp',
+      image: 'assets/common-sense/scenes/shouhuoyuan.webp',
       wallLine: '售貨員——喺舖頭幫人買嘢',
       ask: '呢個係售貨員。佢做啲咩？',
       correct: '喺舖頭幫人撿嘢同埋買嘢',
@@ -143,7 +143,7 @@ window.COMMON_SENSE_HEROES = {
     {
       id: 'jiuhuyuan',
       name: '救護員',
-      image: 'assets/careers/jiuhuyuan.webp',
+      image: 'assets/common-sense/scenes/jiuhuyuan.webp',
       wallLine: '救護員——救護車急救送院',
       ask: '呢個係救護員。佢做啲咩？',
       correct: '開救護車急救、送病人去醫院',

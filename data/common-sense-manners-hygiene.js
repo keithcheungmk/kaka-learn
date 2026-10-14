@@ -46,7 +46,7 @@ window.COMMON_SENSE_PACKS["manners-hygiene"] = {
     {
       "id": "morning",
       "name": "見老師講早晨",
-      "image": "assets/careers/laoshi_job.webp",
+      "image": "assets/common-sense/scenes/laoshi_job.webp",
       "wallLine": "朝早見老師——微笑講早晨",
       "ask": "朝早返崇真幼稚園見到老師，應該講咩？",
       "correct": "微笑同老師講早晨",

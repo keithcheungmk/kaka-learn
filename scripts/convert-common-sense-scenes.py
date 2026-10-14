@@ -81,6 +81,16 @@ MAP = {
     "breakfast": "cs-food-breakfast.jpg",
     "brush-tell": "cs-food-brush.jpg",
     "sit-share": "cs-food-sit-eat.jpg",
+    "yisheng": "cs-career-yisheng.jpg",
+    "hushi": "cs-career-hushi.jpg",
+    "xiaofangyuan": "cs-career-xiaofangyuan.jpg",
+    "jingcha": "cs-career-jingcha.jpg",
+    "laoshi_job": "cs-career-laoshi.jpg",
+    "siji": "cs-career-siji.jpg",
+    "chushi": "cs-career-chushi.jpg",
+    "youchai": "cs-career-youchai.jpg",
+    "shouhuoyuan": "cs-career-shouhuoyuan.jpg",
+    "jiuhuyuan": "cs-career-jiuhuyuan.jpg",
 }
 
 

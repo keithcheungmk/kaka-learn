@@ -1298,6 +1298,8 @@ def check_common_sense() -> None:
         "assets/common-sense/process/bread-1.svg",
         "assets/common-sense/scenes/red-light.webp",
         "assets/common-sense/scenes/priority.webp",
+        "assets/common-sense/scenes/yisheng.webp",
+        "assets/common-sense/scenes/laoshi_job.webp",
         "interview-comics.html",
         "css/interview-comics.css",
         "js/interview-comics.js",
@@ -1322,6 +1324,23 @@ def check_common_sense() -> None:
         fail("common-sense", "線 A 唔好做拖一拖或家長開口閘")
     if "quiz-frame" not in html or "choice-speak" not in js:
         fail("common-sense", "答題圖要 4:3 畫框，每項答案要有獨立聽掣")
+    heroes_src = read("data/common-sense-heroes.js")
+    if re.search(r"image:\s*['\"]assets/careers/", heroes_src):
+        fail("common-sense", "社區小英雄答題圖要填滿 4:3，唔好再用方形 careers 字卡")
+    try:
+        from PIL import Image  # type: ignore
+    except ImportError:
+        Image = None  # type: ignore
+    if Image:
+        for rel in re.findall(r"image:\s*['\"]([^'\"]+)['\"]", heroes_src):
+            path = Path(rel)
+            if not path.exists():
+                fail("common-sense", f"缺少職業答題圖 {rel}")
+                continue
+            with Image.open(path) as im:
+                w, h = im.size
+            if h <= 0 or abs((w / h) - (4 / 3)) > 0.04:
+                fail("common-sense", f"{rel} 要係 4:3 橫圖，而家 {w}×{h}")
     catalog = read("data/common-sense-catalog.js")
     if "interview-comics.html" not in catalog:
         fail("common-sense", "面試四格入口要喺常識 hub")

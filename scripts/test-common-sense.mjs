@@ -138,9 +138,7 @@ for (const id of playableA) {
   assert.match(storage, new RegExp(pack.coinMode.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   for (const entry of items) {
     assert.ok(fs.existsSync(path.join(root, entry.image)), `${entry.image} 要存在`);
-    if (id !== 'community-heroes' && !(id === 'manners-hygiene' && entry.id === 'morning')) {
-      assert.match(entry.image, /assets\/common-sense\/scenes\/.+\.webp$/, `${id}/${entry.id} 答題圖要係 4:3 場景，唔好用抽象 icon`);
-    }
+    assert.match(entry.image, /assets\/common-sense\/scenes\/.+\.webp$/, `${id}/${entry.id} 答題圖要係 4:3 場景，唔好用抽象 icon 或方形職業字卡`);
     assert.equal(entry.wrong.length, 3, `${id}/${entry.id} 要有 3 個錯選`);
     for (const choice of [entry.correct, ...entry.wrong]) {
       const n = hanLen(choice);
@@ -168,6 +166,13 @@ const doctor = heroes.careers.find((c) => c.id === 'yisheng');
 const medic = heroes.careers.find((c) => c.id === 'jiuhuyuan');
 const chef = heroes.careers.find((c) => c.id === 'chushi');
 const nurse = heroes.careers.find((c) => c.id === 'hushi');
+for (const career of heroes.careers) {
+  assert.equal(
+    career.image,
+    `assets/common-sense/scenes/${career.id}.webp`,
+    `${career.id} 答題圖檔名要同職業 id 對上`
+  );
+}
 assert.match(chef.wallLine, /煮飯煮餸/);
 assert.match(chef.correct, /煮飯煮餸/);
 assert.match(chef.audio, /煮飯煮餸/);

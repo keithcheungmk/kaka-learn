@@ -129,7 +129,7 @@ MANNERS = [
          "要講對唔住，關心吓",
          ["當睇唔到繼續行開", "話係佢自己撞過嚟", "笑住行開都唔出聲"],
          "撞到人要講對唔住，問吓人得唔得，唔好當無事。"),
-    item("morning", "見老師講早晨", "assets/careers/laoshi_job.webp",
+    item("morning", "見老師講早晨", "assets/common-sense/scenes/laoshi_job.webp",
          "朝早見老師——微笑講早晨",
          "朝早返崇真幼稚園見到老師，應該講咩？",
          "微笑同老師講早晨",
