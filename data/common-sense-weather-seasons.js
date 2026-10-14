@@ -8,7 +8,7 @@ window.COMMON_SENSE_PACKS["weather-seasons"] = {
   "roundSize": 10,
   "goal": "睇天氣識着衫同帶邊啲嘢",
   "intro": "今朝天陰，書包掛遮返深水埗——先由落雨開始，再學熱凍同四季。",
-  "cover": "assets/common-sense/icons/rain-umbrella.svg",
+  "cover": "assets/common-sense/scenes/rain-umbrella.webp",
   "wrongHint": "唔係呢個喎，再諗吓○○啦，可以再試。",
   "lifeAnchor": {
     "title": "落雨返學帶遮",
@@ -18,7 +18,7 @@ window.COMMON_SENSE_PACKS["weather-seasons"] = {
     {
       "id": "rain-umbrella",
       "name": "落雨帶遮",
-      "image": "assets/common-sense/icons/rain-umbrella.svg",
+      "image": "assets/common-sense/scenes/rain-umbrella.webp",
       "wallLine": "今朝天陰——書包掛把遮返學",
       "ask": "深水埗今朝落雨，返學要帶咩？",
       "correct": "書包掛把遮先出街",
@@ -32,7 +32,7 @@ window.COMMON_SENSE_PACKS["weather-seasons"] = {
     {
       "id": "typhoon",
       "name": "打風聽大人",
-      "image": "assets/common-sense/icons/typhoon.svg",
+      "image": "assets/common-sense/scenes/typhoon.webp",
       "wallLine": "打風——出唔出街聽大人",
       "ask": "外面打風，卡卡可唔可以自己決定出街？",
       "correct": "打風聽大人決定出唔出",
@@ -46,7 +46,7 @@ window.COMMON_SENSE_PACKS["weather-seasons"] = {
     {
       "id": "cold-coat",
       "name": "凍着外套",
-      "image": "assets/common-sense/icons/cold-coat.svg",
+      "image": "assets/common-sense/scenes/cold-coat.webp",
       "wallLine": "好凍——着厚外套先出門",
       "ask": "冬天朝早好凍，出街應該着咩？",
       "correct": "着厚外套同埋長褲",
@@ -60,7 +60,7 @@ window.COMMON_SENSE_PACKS["weather-seasons"] = {
     {
       "id": "hot-no-coat",
       "name": "熱唔好厚褸",
-      "image": "assets/common-sense/icons/hot-day.svg",
+      "image": "assets/common-sense/scenes/hot-no-coat.webp",
       "wallLine": "好熱——唔好着厚外套",
       "ask": "夏天好熱，可唔可以着厚大褸出街？",
       "correct": "好熱唔好着厚外套",
@@ -74,7 +74,7 @@ window.COMMON_SENSE_PACKS["weather-seasons"] = {
     {
       "id": "four-seasons",
       "name": "春夏秋冬",
-      "image": "assets/common-sense/icons/spring.svg",
+      "image": "assets/common-sense/scenes/four-seasons.webp",
       "wallLine": "四季——春、夏、秋、冬",
       "ask": "一年有四個季節，叫咩名？",
       "correct": "春夏秋冬一共四個季",
@@ -88,7 +88,7 @@ window.COMMON_SENSE_PACKS["weather-seasons"] = {
     {
       "id": "summer-hot",
       "name": "夏天又熱又曬",
-      "image": "assets/common-sense/icons/summer.svg",
+      "image": "assets/common-sense/scenes/summer-hot.webp",
       "wallLine": "夏天——好多時又熱又曬",
       "ask": "香港夏天最常見係點？",
       "correct": "夏天好多時又熱又曬",
@@ -102,7 +102,7 @@ window.COMMON_SENSE_PACKS["weather-seasons"] = {
     {
       "id": "winter-cold",
       "name": "冬天會凍",
-      "image": "assets/common-sense/icons/winter.svg",
+      "image": "assets/common-sense/scenes/winter-cold.webp",
       "wallLine": "冬天——會凍，要着多件",
       "ask": "冬天朝早出街，常見會點？",
       "correct": "冬天會凍，要着多件",
@@ -116,7 +116,7 @@ window.COMMON_SENSE_PACKS["weather-seasons"] = {
     {
       "id": "sun-hat",
       "name": "猛日戴帽",
-      "image": "assets/common-sense/icons/sun-hat.svg",
+      "image": "assets/common-sense/scenes/sun-hat.webp",
       "wallLine": "出街猛日——戴帽防晒",
       "ask": "太陽好猛出公園，應該戴咩？",
       "correct": "出街猛日戴帽防晒",
@@ -130,7 +130,7 @@ window.COMMON_SENSE_PACKS["weather-seasons"] = {
     {
       "id": "wet-floor",
       "name": "濕地慢慢行",
-      "image": "assets/common-sense/icons/wet-floor.svg",
+      "image": "assets/common-sense/scenes/wet-floor.webp",
       "wallLine": "落完雨地面濕——慢慢行",
       "ask": "落完雨地面好濕，應該點行？",
       "correct": "濕地慢慢行，小心滑",
@@ -144,7 +144,7 @@ window.COMMON_SENSE_PACKS["weather-seasons"] = {
     {
       "id": "adult-warning",
       "name": "警告聽大人",
-      "image": "assets/common-sense/icons/listen-adult.svg",
+      "image": "assets/common-sense/scenes/adult-warning.webp",
       "wallLine": "天文台警告——聽屋企大人",
       "ask": "電視講有打風警告，邊個決定出唔出街？",
       "correct": "警告要聽屋企大人決定",

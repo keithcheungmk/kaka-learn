@@ -8,7 +8,7 @@ window.COMMON_SENSE_PACKS["transport-hk"] = {
   "roundSize": 10,
   "goal": "由屋企學校站識港鐵，再識巴士渡輪同車廂禮儀",
   "intro": "先喺地圖搵卡卡屋企、學校、爸爸返工同禧禧，再識地鐵方便同車廂點做。",
-  "cover": "assets/common-sense/icons/metro.svg",
+  "cover": "assets/common-sense/scenes/priority.webp",
   "wrongHint": "唔係呢個喎，再睇吓地圖釘同卡卡身邊嘅站。",
   "lifeAnchor": {
     "title": "由身邊嘅站開始",
@@ -18,7 +18,7 @@ window.COMMON_SENSE_PACKS["transport-hk"] = {
     {
       "id": "home-tw",
       "name": "屋企近荃灣西",
-      "image": "assets/common-sense/icons/home-station.svg",
+      "image": "assets/common-sense/scenes/home-tw.webp",
       "wallLine": "卡卡屋企——近荃灣西站",
       "ask": "卡卡屋企近邊一個港鐵站？",
       "correct": "屋企就近荃灣西站",
@@ -32,7 +32,7 @@ window.COMMON_SENSE_PACKS["transport-hk"] = {
     {
       "id": "school-ssp",
       "name": "學校喺深水埗",
-      "image": "assets/common-sense/icons/school-station.svg",
+      "image": "assets/common-sense/scenes/school-ssp.webp",
       "wallLine": "崇真幼稚園——喺深水埗",
       "ask": "卡卡返崇真幼稚園，學校喺邊一站附近？",
       "correct": "學校喺深水埗嗰邊",
@@ -46,7 +46,7 @@ window.COMMON_SENSE_PACKS["transport-hk"] = {
     {
       "id": "dad-st",
       "name": "爸爸返工沙田",
-      "image": "assets/common-sense/icons/dad-work.svg",
+      "image": "assets/common-sense/scenes/dad-st.webp",
       "wallLine": "爸爸返工——去沙田",
       "ask": "爸爸返工坐車，主要去邊一站？",
       "correct": "爸爸返工去沙田站",
@@ -60,7 +60,7 @@ window.COMMON_SENSE_PACKS["transport-hk"] = {
     {
       "id": "heihei-mos",
       "name": "禧禧住馬鞍山",
-      "image": "assets/common-sense/icons/friend-home.svg",
+      "image": "assets/common-sense/scenes/heihei-mos.webp",
       "wallLine": "朋友禧禧——住馬鞍山",
       "ask": "想探朋友禧禧，要坐車去邊？",
       "correct": "禧禧住喺馬鞍山站",
@@ -74,7 +74,7 @@ window.COMMON_SENSE_PACKS["transport-hk"] = {
     {
       "id": "disney",
       "name": "地鐵去迪士尼",
-      "image": "assets/common-sense/icons/disney-fun.svg",
+      "image": "assets/common-sense/scenes/disney.webp",
       "wallLine": "想去玩——可以坐地鐵去迪士尼",
       "ask": "卡卡想去迪士尼玩，可唔可以坐地鐵去？",
       "correct": "可以坐地鐵去迪士尼",
@@ -88,7 +88,7 @@ window.COMMON_SENSE_PACKS["transport-hk"] = {
     {
       "id": "tst-mk",
       "name": "出名站尖沙咀旺角",
-      "image": "assets/common-sense/icons/famous-tst.svg",
+      "image": "assets/common-sense/scenes/tst-mk.webp",
       "wallLine": "尖沙咀、旺角——都係出名站",
       "ask": "尖沙咀同旺角係咪香港好出名嘅站？",
       "correct": "尖沙咀同旺角都好出名",
@@ -102,7 +102,7 @@ window.COMMON_SENSE_PACKS["transport-hk"] = {
     {
       "id": "call-mtr",
       "name": "地下鐵叫港鐵",
-      "image": "assets/common-sense/icons/metro.svg",
+      "image": "assets/common-sense/scenes/call-mtr.webp",
       "wallLine": "地下鐵——日常叫港鐵、地鐵",
       "ask": "香港地下鐵，日常最常叫佢做咩？",
       "correct": "香港日常叫港鐵地鐵",
@@ -116,7 +116,7 @@ window.COMMON_SENSE_PACKS["transport-hk"] = {
     {
       "id": "no-run-car",
       "name": "車廂唔好跑",
-      "image": "assets/common-sense/icons/no-run-train.svg",
+      "image": "assets/common-sense/scenes/no-run-car.webp",
       "wallLine": "坐車廂——唔好跑，企穩陣",
       "ask": "港鐵車廂裏面，可唔可以走嚟走去跑？",
       "correct": "車廂唔好跑，企穩陣",
@@ -130,7 +130,7 @@ window.COMMON_SENSE_PACKS["transport-hk"] = {
     {
       "id": "priority",
       "name": "優先座讓人",
-      "image": "assets/common-sense/icons/priority-seat.svg",
+      "image": "assets/common-sense/scenes/priority.webp",
       "wallLine": "優先座——畀有需要嘅人",
       "ask": "車廂優先座，應該留給邊啲人？",
       "correct": "優先座畀有需要嘅人",
@@ -144,7 +144,7 @@ window.COMMON_SENSE_PACKS["transport-hk"] = {
     {
       "id": "yellow-line",
       "name": "等車企黃線內",
-      "image": "assets/common-sense/icons/yellow-line.svg",
+      "image": "assets/common-sense/scenes/yellow-line.webp",
       "wallLine": "等車——企喺黃線裏面",
       "ask": "月台等車，應該企喺邊？",
       "correct": "等車要企喺黃線裏面",

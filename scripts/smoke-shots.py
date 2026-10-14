@@ -549,15 +549,25 @@ def walk(pg, url, shots: Path | None, tag: str):
     choice_n = pg.evaluate("() => document.querySelectorAll('#quiz-choices .choice').length")
     if choice_n != 4:
         raise RuntimeError(f"Quiz must show 4 choices, got {choice_n}")
+    speak_n = pg.evaluate("() => document.querySelectorAll('#quiz-choices .choice-speak').length")
+    if speak_n != 4:
+        raise RuntimeError(f"Each answer needs a speaker control, got {speak_n}")
     quiz_metrics = pg.evaluate(
         """() => {
           const d = document.documentElement;
           const choices = [...document.querySelectorAll('#quiz-choices .choice')];
+          const speaks = [...document.querySelectorAll('#quiz-choices .choice-speak')];
+          const frame = document.querySelector('.quiz-frame')?.getBoundingClientRect();
+          const img = document.querySelector('#quiz-img');
           return {
             overflowX: d.scrollWidth - d.clientWidth,
             overflowY: d.scrollHeight - d.clientHeight,
             minTap: Math.min(...choices.map((el) => Math.min(el.getBoundingClientRect().width, el.getBoundingClientRect().height))),
+            speakTap: Math.min(...speaks.map((el) => Math.min(el.getBoundingClientRect().width, el.getBoundingClientRect().height))),
             progress: document.querySelector('#status-pill')?.textContent || '',
+            frameRatio: frame && frame.height ? frame.width / frame.height : 0,
+            frameH: frame?.height || 0,
+            objectFit: img ? getComputedStyle(img).objectFit : '',
           };
         }"""
     )
@@ -567,8 +577,20 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Common-sense iPad quiz must not page-scroll, overflowY={quiz_metrics['overflowY']}")
     if quiz_metrics["minTap"] < 44:
         raise RuntimeError(f"Quiz choices must be at least 44px, got {quiz_metrics['minTap']}")
+    if quiz_metrics["speakTap"] < 44:
+        raise RuntimeError(f"Answer speaker must be at least 44px, got {quiz_metrics['speakTap']}")
+    if abs(quiz_metrics["frameRatio"] - (4 / 3)) > 0.12:
+        raise RuntimeError(f"Quiz image frame must be ~4:3, got {quiz_metrics['frameRatio']:.3f}")
+    if quiz_metrics["objectFit"] != "contain":
+        raise RuntimeError(f"Quiz image must use object-fit:contain, got {quiz_metrics['objectFit']!r}")
+    if pg.viewport_size["width"] <= 700 and quiz_metrics["frameH"] > (pg.viewport_size["height"] * 0.36) + 2:
+        raise RuntimeError(f"Phone quiz image taller than ~1/3 screen, height={quiz_metrics['frameH']}")
     if "已答啱 0／10" not in quiz_metrics["progress"]:
         raise RuntimeError(f"Quiz progress must start at 已答啱 0／10, got {quiz_metrics['progress']!r}")
+    pg.click("#quiz-choices .choice-speak")
+    after_speak = pg.evaluate("() => document.querySelector('#status-pill')?.textContent || ''")
+    if "已答啱 0／10" not in after_speak:
+        raise RuntimeError("Tapping an answer speaker must not select that answer")
     pg.evaluate("() => { window.__KAKA_TEST__ = true; }")
     pg.evaluate("() => window.KakaCommonSense.answerCurrentWrong()")
     wrong_state = pg.evaluate(

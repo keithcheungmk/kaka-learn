@@ -8,7 +8,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
   "roundSize": 10,
   "goal": "識分紙膠金屬玻璃去邊個箱",
   "intro": "飲完牛奶盒、膠樽，問大人去邊個箱。先由屋企分類開始，再學慳電同愛護公園。",
-  "cover": "assets/common-sense/icons/paper-bin.svg",
+  "cover": "assets/common-sense/scenes/paper.webp",
   "wrongHint": "唔係呢個喎，再諗吓○○啦，可以再試。",
   "lifeAnchor": {
     "title": "由屋企分類開始",
@@ -18,7 +18,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
     {
       "id": "paper",
       "name": "報紙去紙箱",
-      "image": "assets/common-sense/icons/paper-bin.svg",
+      "image": "assets/common-sense/scenes/paper.webp",
       "wallLine": "乾淨報紙——入藍色紙箱",
       "ask": "屋企睇完嘅乾淨報紙，應該放去邊？",
       "correct": "乾淨報紙放入紙箱",
@@ -32,7 +32,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
     {
       "id": "plastic",
       "name": "膠樽去膠箱",
-      "image": "assets/common-sense/icons/plastic-bin.svg",
+      "image": "assets/common-sense/scenes/plastic.webp",
       "wallLine": "飲完膠樽——問大人入膠箱",
       "ask": "飲完牛奶或者水嘅膠樽，通常去邊個箱？",
       "correct": "空膠樽放入塑膠箱",
@@ -46,7 +46,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
     {
       "id": "metal",
       "name": "汽水罐金屬",
-      "image": "assets/common-sense/icons/metal-bin.svg",
+      "image": "assets/common-sense/scenes/metal.webp",
       "wallLine": "汽水罐——入金屬箱",
       "ask": "空咗嘅汽水鋁罐，應該去邊？",
       "correct": "空鋁罐放入金屬箱",
@@ -60,7 +60,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
     {
       "id": "glass",
       "name": "玻璃瓶玻璃箱",
-      "image": "assets/common-sense/icons/glass-bin.svg",
+      "image": "assets/common-sense/scenes/glass.webp",
       "wallLine": "玻璃瓶——入玻璃箱，好易碎",
       "ask": "空咗嘅玻璃樽，應該細細力放去邊？",
       "correct": "玻璃樽放入玻璃箱",
@@ -74,7 +74,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
     {
       "id": "banana",
       "name": "蕉皮唔入玻璃",
-      "image": "assets/common-sense/icons/banana-peel.svg",
+      "image": "assets/common-sense/scenes/banana.webp",
       "wallLine": "蕉皮——唔入玻璃箱，問大人",
       "ask": "食完香蕉嘅皮，可唔可以丟入玻璃回收箱？",
       "correct": "蕉皮唔好入玻璃箱",
@@ -88,7 +88,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
     {
       "id": "reuse-bag",
       "name": "出街帶重用袋",
-      "image": "assets/common-sense/icons/reuse-bag.svg",
+      "image": "assets/common-sense/scenes/reuse-bag.webp",
       "wallLine": "買嘢——帶可重用袋",
       "ask": "同大人去超市，點樣減少用膠袋？",
       "correct": "出街帶可重用布袋",
@@ -102,7 +102,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
     {
       "id": "lights-off",
       "name": "唔 vis 燈要熄",
-      "image": "assets/common-sense/icons/lights-off.svg",
+      "image": "assets/common-sense/scenes/lights-off.webp",
       "wallLine": "離開房間——記得熄燈",
       "ask": "出咗房冇人，電燈應該點？",
       "correct": "冇人房就要熄咗燈",
@@ -116,7 +116,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
     {
       "id": "park-flower",
       "name": "公園花唔摘",
-      "image": "assets/common-sense/icons/park-flower.svg",
+      "image": "assets/common-sense/scenes/park-flower.webp",
       "wallLine": "公園花草——睇得，唔好摘",
       "ask": "同大人去公園，可唔可以摘花回家？",
       "correct": "公園花睇得唔好摘",
@@ -130,7 +130,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
     {
       "id": "straw",
       "name": "飲筒用完問大人",
-      "image": "assets/common-sense/icons/straw.svg",
+      "image": "assets/common-sense/scenes/straw.webp",
       "wallLine": "膠飲筒用完——問大人點丟",
       "ask": "飲完嘢嘅膠飲筒，應該點？",
       "correct": "用完問大人點樣丟",
@@ -144,7 +144,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
     {
       "id": "clean-paper",
       "name": "乾淨紙先回收",
-      "image": "assets/common-sense/icons/clean-paper.svg",
+      "image": "assets/common-sense/scenes/clean-paper.webp",
       "wallLine": "廢紙——乾淨先好回收",
       "ask": "紙搓成團，但有油有醬，仲可唔可以當回收紙？",
       "correct": "乾淨紙先好去回收",

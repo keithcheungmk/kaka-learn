@@ -8,7 +8,7 @@ window.COMMON_SENSE_PACKS["food-health"] = {
   "roundSize": 10,
   "goal": "知常見食物點嚟，再識均衡同洗手",
   "intro": "先睇牛奶同麵包點嚟，再學食飯前洗手、口渴飲水。過程係橋，健康習慣先係關卡。",
-  "cover": "assets/common-sense/process/milk-4.svg",
+  "cover": "assets/common-sense/scenes/milk-from-cow.webp",
   "wrongHint": "唔係呢個喎，再諗吓食物點嚟，或者食飯前應該點？",
   "lifeAnchor": {
     "title": "先睇食物點嚟",
@@ -18,7 +18,7 @@ window.COMMON_SENSE_PACKS["food-health"] = {
     {
       "id": "milk-from-cow",
       "name": "牛奶來自牛",
-      "image": "assets/common-sense/process/milk-1.svg",
+      "image": "assets/common-sense/scenes/milk-from-cow.webp",
       "wallLine": "牛奶——主要來自奶牛",
       "ask": "卡卡朝早飲嘅牛奶，主要來自咩？",
       "correct": "牛奶主要來自奶牛",
@@ -32,7 +32,7 @@ window.COMMON_SENSE_PACKS["food-health"] = {
     {
       "id": "bread-wheat",
       "name": "麵包用小麥",
-      "image": "assets/common-sense/process/bread-1.svg",
+      "image": "assets/common-sense/scenes/bread-wheat.webp",
       "wallLine": "麵包——主要用麵粉小麥",
       "ask": "麵包主要係用咩整出嚟？",
       "correct": "麵包主要用麵粉小麥",
@@ -46,7 +46,7 @@ window.COMMON_SENSE_PACKS["food-health"] = {
     {
       "id": "rice",
       "name": "飯來自米",
-      "image": "assets/common-sense/icons/rice.svg",
+      "image": "assets/common-sense/scenes/rice.webp",
       "wallLine": "白飯——米煮熟就係飯",
       "ask": "晚飯碗裏面嘅白飯，主要來自咩？",
       "correct": "白飯主要來自稻米",
@@ -60,7 +60,7 @@ window.COMMON_SENSE_PACKS["food-health"] = {
     {
       "id": "wash-eat",
       "name": "食飯前洗手",
-      "image": "assets/common-sense/icons/wash-hands.svg",
+      "image": "assets/common-sense/scenes/wash-eat.webp",
       "wallLine": "食飯前——洗手先至健康",
       "ask": "坐低食飯之前，最緊要做咩？",
       "correct": "食飯之前要先洗手",
@@ -74,7 +74,7 @@ window.COMMON_SENSE_PACKS["food-health"] = {
     {
       "id": "drink-water",
       "name": "口渴飲水",
-      "image": "assets/common-sense/icons/water-glass.svg",
+      "image": "assets/common-sense/scenes/drink-water.webp",
       "wallLine": "口渴——優先飲清水",
       "ask": "跑完公園好口渴，優先飲咩？",
       "correct": "口渴要優先飲清水",
@@ -88,7 +88,7 @@ window.COMMON_SENSE_PACKS["food-health"] = {
     {
       "id": "fruit",
       "name": "水果例子",
-      "image": "assets/common-sense/icons/fruit.svg",
+      "image": "assets/common-sense/scenes/fruit.webp",
       "wallLine": "水果——蘋果香蕉都健康",
       "ask": "以下邊樣最似日常水果？",
       "correct": "蘋果香蕉都係水果",
@@ -102,7 +102,7 @@ window.COMMON_SENSE_PACKS["food-health"] = {
     {
       "id": "candy-not-meal",
       "name": "糖果唔當正餐",
-      "image": "assets/common-sense/icons/candy.svg",
+      "image": "assets/common-sense/scenes/candy-not-meal.webp",
       "wallLine": "糖果——偶爾食，唔當飯",
       "ask": "糖果可唔可以當成餐午飯？",
       "correct": "糖果唔可以當正餐",
@@ -116,7 +116,7 @@ window.COMMON_SENSE_PACKS["food-health"] = {
     {
       "id": "breakfast",
       "name": "早餐好重要",
-      "image": "assets/common-sense/icons/breakfast.svg",
+      "image": "assets/common-sense/scenes/breakfast.webp",
       "wallLine": "早餐——返學前要食",
       "ask": "朝早返學之前，早餐重唔重要？",
       "correct": "早餐好重要，要食飽",
@@ -130,7 +130,7 @@ window.COMMON_SENSE_PACKS["food-health"] = {
     {
       "id": "brush-tell",
       "name": "刷牙同告訴大人",
-      "image": "assets/common-sense/icons/brush-teeth.svg",
+      "image": "assets/common-sense/scenes/brush-tell.webp",
       "wallLine": "牙齒——朝晚刷；唔舒服告訴大人",
       "ask": "食完甜嘢或者肚唔舒服，應該點？",
       "correct": "刷牙，唔舒服告訴大人",
@@ -144,7 +144,7 @@ window.COMMON_SENSE_PACKS["food-health"] = {
     {
       "id": "sit-share",
       "name": "坐定食問大人",
-      "image": "assets/common-sense/icons/sit-eat.svg",
+      "image": "assets/common-sense/scenes/sit-share.webp",
       "wallLine": "食飯——坐定；分享先問大人",
       "ask": "食飯同分享食物，卡卡應該點？",
       "correct": "坐定食，分享先問大人",

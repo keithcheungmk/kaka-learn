@@ -75,6 +75,16 @@ assert.match(css, /min-height:\s*44px/);
 assert.match(css, /min-height:\s*52px/);
 assert.match(css, /\.cs-map/);
 assert.match(css, /\.cs-process/);
+assert.match(html, /quiz-frame/);
+assert.match(css, /\.quiz-frame/);
+assert.match(css, /aspect-ratio:\s*4\s*\/\s*3/);
+assert.match(css, /object-fit:\s*contain/);
+assert.doesNotMatch(css, /\.quiz-hero img[\s\S]{0,180}object-fit:\s*cover/);
+assert.match(css, /\.choice-speak/);
+assert.match(js, /choice-speak/);
+assert.match(js, /dataset\.answer/);
+assert.match(js, /stopPropagation/);
+assert.match(js, /speakBtn[\s\S]{0,220}speak\(text\)/);
 
 const context = { window: {} };
 vm.runInNewContext(catalogSrc, context);
@@ -128,6 +138,9 @@ for (const id of playableA) {
   assert.match(storage, new RegExp(pack.coinMode.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   for (const entry of items) {
     assert.ok(fs.existsSync(path.join(root, entry.image)), `${entry.image} 要存在`);
+    if (id !== 'community-heroes' && !(id === 'manners-hygiene' && entry.id === 'morning')) {
+      assert.match(entry.image, /assets\/common-sense\/scenes\/.+\.webp$/, `${id}/${entry.id} 答題圖要係 4:3 場景，唔好用抽象 icon`);
+    }
     assert.equal(entry.wrong.length, 3, `${id}/${entry.id} 要有 3 個錯選`);
     for (const choice of [entry.correct, ...entry.wrong]) {
       const n = hanLen(choice);

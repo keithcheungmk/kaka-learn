@@ -8,7 +8,7 @@ window.COMMON_SENSE_PACKS["safe-outing"] = {
   "roundSize": 10,
   "goal": "出街識保護自己同屋企人",
   "intro": "先講返學去深水埗、同大人出街，再學紅綠燈、陌生人同火警應該點做。撳卡可以聽一聽。學完就開始答題。",
-  "cover": "assets/common-sense/icons/red-light.svg",
+  "cover": "assets/common-sense/scenes/red-light.webp",
   "wrongHint": "唔係呢個喎，再諗吓同大人出街應該點保護自己？",
   "lifeAnchor": {
     "title": "返學去深水埗，同大人出街",
@@ -18,7 +18,7 @@ window.COMMON_SENSE_PACKS["safe-outing"] = {
     {
       "id": "red-light",
       "name": "紅燈停一停",
-      "image": "assets/common-sense/icons/red-light.svg",
+      "image": "assets/common-sense/scenes/red-light.webp",
       "wallLine": "紅燈——停低，牽住大人手",
       "ask": "卡卡同大人返深水埗，見到紅燈應該點？",
       "correct": "停低等綠燈，牽住大人手",
@@ -32,7 +32,7 @@ window.COMMON_SENSE_PACKS["safe-outing"] = {
     {
       "id": "green-light",
       "name": "綠燈先過",
-      "image": "assets/common-sense/icons/green-light.svg",
+      "image": "assets/common-sense/scenes/green-light.webp",
       "wallLine": "綠燈——睇清楚先過，唔好跑",
       "ask": "綠燈亮咗，過馬路應該點？",
       "correct": "睇清楚先過，唔好跑步",
@@ -46,7 +46,7 @@ window.COMMON_SENSE_PACKS["safe-outing"] = {
     {
       "id": "stranger-candy",
       "name": "唔跟陌生人",
-      "image": "assets/common-sense/icons/stranger-candy.svg",
+      "image": "assets/common-sense/scenes/stranger-candy.webp",
       "wallLine": "陌生人請食糖——唔好跟，同大人講",
       "ask": "出街有唔識嘅人請卡卡食糖，應該點？",
       "correct": "唔好跟，快啲同大人講",
@@ -60,7 +60,7 @@ window.COMMON_SENSE_PACKS["safe-outing"] = {
     {
       "id": "mall-help",
       "name": "商場搵職員",
-      "image": "assets/common-sense/icons/mall-help.svg",
+      "image": "assets/common-sense/scenes/mall-help.webp",
       "wallLine": "商場唔見大人——搵穿制服職員",
       "ask": "商場裏面暫時唔見爸媽，卡卡應該搵邊個？",
       "correct": "搵穿制服職員或者警察",
@@ -74,7 +74,7 @@ window.COMMON_SENSE_PACKS["safe-outing"] = {
     {
       "id": "fire-alarm",
       "name": "火警跟大人",
-      "image": "assets/common-sense/icons/fire-alarm.svg",
+      "image": "assets/common-sense/scenes/fire-alarm.webp",
       "wallLine": "聽到火警鐘——跟大人快啲離開",
       "ask": "學校或者商場聽到火警鐘，應該點？",
       "correct": "跟大人快啲安全離開",
@@ -88,7 +88,7 @@ window.COMMON_SENSE_PACKS["safe-outing"] = {
     {
       "id": "lift-door",
       "name": "唔玩電梯門",
-      "image": "assets/common-sense/icons/lift.svg",
+      "image": "assets/common-sense/scenes/lift-door.webp",
       "wallLine": "電梯門開緊——唔好用手玩",
       "ask": "電梯門開嚟合埋，可唔可以玩門？",
       "correct": "企定定，唔好用手玩門",
@@ -102,7 +102,7 @@ window.COMMON_SENSE_PACKS["safe-outing"] = {
     {
       "id": "hot-soup",
       "name": "熱嘢唔掂",
-      "image": "assets/common-sense/icons/hot-soup.svg",
+      "image": "assets/common-sense/scenes/hot-soup.webp",
       "wallLine": "熱湯熱飯——等大人話得先掂",
       "ask": "桌上有碗熱湯，卡卡可唔可以即刻掂？",
       "correct": "唔好掂，等大人話得先",
@@ -116,7 +116,7 @@ window.COMMON_SENSE_PACKS["safe-outing"] = {
     {
       "id": "no-run-road",
       "name": "過馬路唔跑",
-      "image": "assets/common-sense/icons/no-run.svg",
+      "image": "assets/common-sense/scenes/no-run-road.webp",
       "wallLine": "過馬路——牽大人，唔好跑",
       "ask": "過馬路去學校，要唔要跑快啲？",
       "correct": "唔好跑，牽住大人慢慢行",
@@ -130,7 +130,7 @@ window.COMMON_SENSE_PACKS["safe-outing"] = {
     {
       "id": "seatbelt",
       "name": "坐車扣帶",
-      "image": "assets/common-sense/icons/seatbelt.svg",
+      "image": "assets/common-sense/scenes/seatbelt.webp",
       "wallLine": "坐車——要扣好安全帶",
       "ask": "同大人坐車出街，要唔要扣安全帶？",
       "correct": "一定要扣好安全帶",
@@ -144,7 +144,7 @@ window.COMMON_SENSE_PACKS["safe-outing"] = {
     {
       "id": "call-adult",
       "name": "有人受傷叫大人",
-      "image": "assets/common-sense/icons/call-adult.svg",
+      "image": "assets/common-sense/scenes/call-adult.webp",
       "wallLine": "有人受傷——叫大人，唔自己亂搬",
       "ask": "公園有人跌親受傷，卡卡先做乜？",
       "correct": "快啲叫大人或者職員",

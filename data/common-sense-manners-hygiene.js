@@ -18,7 +18,7 @@ window.COMMON_SENSE_PACKS["manners-hygiene"] = {
     {
       "id": "please",
       "name": "講唔該",
-      "image": "assets/common-sense/icons/please.svg",
+      "image": "assets/common-sense/scenes/please.webp",
       "wallLine": "得到嘢——要講唔該、謝謝",
       "ask": "老師派貼紙畀卡卡，應該講咩？",
       "correct": "要講唔該同埋謝謝",
@@ -32,7 +32,7 @@ window.COMMON_SENSE_PACKS["manners-hygiene"] = {
     {
       "id": "sorry",
       "name": "講對唔住",
-      "image": "assets/common-sense/icons/sorry.svg",
+      "image": "assets/common-sense/scenes/sorry.webp",
       "wallLine": "撞到人——要講對唔住",
       "ask": "行路唔小心撞到同學，應該講咩？",
       "correct": "要講對唔住，關心吓",
@@ -60,7 +60,7 @@ window.COMMON_SENSE_PACKS["manners-hygiene"] = {
     {
       "id": "wash-before-eat",
       "name": "食飯前洗手",
-      "image": "assets/common-sense/icons/wash-hands.svg",
+      "image": "assets/common-sense/scenes/wash-before-eat.webp",
       "wallLine": "食飯前——先洗手再食",
       "ask": "坐低食飯之前，卡卡要先做咩？",
       "correct": "先洗手再坐定食飯",
@@ -74,7 +74,7 @@ window.COMMON_SENSE_PACKS["manners-hygiene"] = {
     {
       "id": "cover-cough",
       "name": "咳要遮口",
-      "image": "assets/common-sense/icons/cover-cough.svg",
+      "image": "assets/common-sense/scenes/cover-cough.webp",
       "wallLine": "咳同打乞嗤——遮口",
       "ask": "喺課室忽然想咳，應該點做？",
       "correct": "用紙巾或者手肘遮口",
@@ -88,7 +88,7 @@ window.COMMON_SENSE_PACKS["manners-hygiene"] = {
     {
       "id": "queue",
       "name": "要排隊",
-      "image": "assets/common-sense/icons/queue.svg",
+      "image": "assets/common-sense/scenes/queue.webp",
       "wallLine": "等車等洗手——要排隊",
       "ask": "洗手盤前面有人排緊隊，可唔可以插隊？",
       "correct": "要排隊，唔可以插隊",
@@ -102,7 +102,7 @@ window.COMMON_SENSE_PACKS["manners-hygiene"] = {
     {
       "id": "return-toy",
       "name": "借完要還",
-      "image": "assets/common-sense/icons/return-toy.svg",
+      "image": "assets/common-sense/scenes/return-toy.webp",
       "wallLine": "借完嘢——還返去同多謝",
       "ask": "借咗同學積木玩完，應該點？",
       "correct": "還返去同埋講多謝",
@@ -116,7 +116,7 @@ window.COMMON_SENSE_PACKS["manners-hygiene"] = {
     {
       "id": "sneeze",
       "name": "打乞嗤遮口",
-      "image": "assets/common-sense/icons/sneeze.svg",
+      "image": "assets/common-sense/scenes/sneeze.webp",
       "wallLine": "打乞嗤——轉身遮口",
       "ask": "搭車時想打乞嗤，應該點？",
       "correct": "轉身遮口，之後洗手",
@@ -130,7 +130,7 @@ window.COMMON_SENSE_PACKS["manners-hygiene"] = {
     {
       "id": "dry-hands",
       "name": "洗手抹乾",
-      "image": "assets/common-sense/icons/dry-hands.svg",
+      "image": "assets/common-sense/scenes/dry-hands.webp",
       "wallLine": "洗手——洗完要抹乾",
       "ask": "廁所洗手洗完，仲要做咩？",
       "correct": "洗手洗完要抹乾手",
@@ -144,7 +144,7 @@ window.COMMON_SENSE_PACKS["manners-hygiene"] = {
     {
       "id": "shoes-off",
       "name": "入屋換鞋",
-      "image": "assets/common-sense/icons/shoes-off.svg",
+      "image": "assets/common-sense/scenes/shoes-off.webp",
       "wallLine": "入門口——換拖鞋，唔好踩鞋",
       "ask": "返到荃灣西屋企門口，可唔可以穿着街鞋入去？",
       "correct": "入屋要換拖鞋，唔好踩",

@@ -8,7 +8,7 @@ window.COMMON_SENSE_PACKS["festivals-hk"] = {
   "roundSize": 10,
   "goal": "識香港大節日做咩慶祝",
   "intro": "由屋企過年着紅色、派利是開始，再識中秋賞月、端午食糉。節日係屋企會經歷嘅開心事。",
-  "cover": "assets/common-sense/icons/new-year.svg",
+  "cover": "assets/common-sense/scenes/new-year.webp",
   "wrongHint": "唔係呢個喎，再諗吓○○啦，可以再試。",
   "lifeAnchor": {
     "title": "由屋企過年開始",
@@ -18,7 +18,7 @@ window.COMMON_SENSE_PACKS["festivals-hk"] = {
     {
       "id": "new-year",
       "name": "新年紅色利是",
-      "image": "assets/common-sense/icons/new-year.svg",
+      "image": "assets/common-sense/scenes/new-year.webp",
       "wallLine": "屋企過年——紅色、利是、講吉利說話",
       "ask": "農曆新年喺屋企，最常見會見到咩？",
       "correct": "新年着紅色，屋企派利是",
@@ -32,7 +32,7 @@ window.COMMON_SENSE_PACKS["festivals-hk"] = {
     {
       "id": "lantern",
       "name": "元宵燈籠",
-      "image": "assets/common-sense/icons/lantern.svg",
+      "image": "assets/common-sense/scenes/lantern.webp",
       "wallLine": "元宵——會見到燈籠",
       "ask": "元宵節最常會見到咩？",
       "correct": "元宵夜晚會睇燈籠",
@@ -46,7 +46,7 @@ window.COMMON_SENSE_PACKS["festivals-hk"] = {
     {
       "id": "ching-ming",
       "name": "清明紀念",
-      "image": "assets/common-sense/icons/ching-ming.svg",
+      "image": "assets/common-sense/scenes/ching-ming.webp",
       "wallLine": "清明——同大人去紀念先輩",
       "ask": "清明節屋企人通常會去邊？",
       "correct": "清明同大人去紀念先輩",
@@ -60,7 +60,7 @@ window.COMMON_SENSE_PACKS["festivals-hk"] = {
     {
       "id": "dragon-boat",
       "name": "端午龍舟糉",
-      "image": "assets/common-sense/icons/dragon-boat.svg",
+      "image": "assets/common-sense/scenes/dragon-boat.webp",
       "wallLine": "端午——扒龍舟、食糉",
       "ask": "端午節最常做咩慶祝？",
       "correct": "端午扒龍舟同埋食糉",
@@ -74,7 +74,7 @@ window.COMMON_SENSE_PACKS["festivals-hk"] = {
     {
       "id": "mid-autumn",
       "name": "中秋月餅",
-      "image": "assets/common-sense/icons/moon-cake.svg",
+      "image": "assets/common-sense/scenes/mid-autumn.webp",
       "wallLine": "中秋——賞月同食月餅",
       "ask": "中秋節屋企最常食咩？",
       "correct": "中秋賞月同埋食月餅",
@@ -88,7 +88,7 @@ window.COMMON_SENSE_PACKS["festivals-hk"] = {
     {
       "id": "moon-watch",
       "name": "中秋賞月",
-      "image": "assets/common-sense/icons/moon-cake.svg",
+      "image": "assets/common-sense/scenes/moon-watch.webp",
       "wallLine": "中秋夜晚——一齊望月亮",
       "ask": "中秋除咗食月餅，仲會做咩？",
       "correct": "中秋夜晚一齊賞月亮",
@@ -102,7 +102,7 @@ window.COMMON_SENSE_PACKS["festivals-hk"] = {
     {
       "id": "christmas",
       "name": "聖誕燈飾",
-      "image": "assets/common-sense/icons/christmas.svg",
+      "image": "assets/common-sense/scenes/christmas.webp",
       "wallLine": "聖誕——樹同燈飾",
       "ask": "聖誕節街上屋企常見咩佈置？",
       "correct": "聖誕會有樹同燈飾",
@@ -116,7 +116,7 @@ window.COMMON_SENSE_PACKS["festivals-hk"] = {
     {
       "id": "birthday",
       "name": "生日吹蠟燭",
-      "image": "assets/common-sense/icons/birthday.svg",
+      "image": "assets/common-sense/scenes/birthday.webp",
       "wallLine": "生日——吹蠟燭許願",
       "ask": "屋企過生日，蛋糕上面通常做咩？",
       "correct": "生日吹蠟燭許個願",
@@ -130,7 +130,7 @@ window.COMMON_SENSE_PACKS["festivals-hk"] = {
     {
       "id": "lai-see-safe",
       "name": "利是問大人",
-      "image": "assets/common-sense/icons/no-stranger-lai-see.svg",
+      "image": "assets/common-sense/scenes/lai-see-safe.webp",
       "wallLine": "賀年利是——唔好亂收陌生人",
       "ask": "過年有唔識嘅人派利是，應該點？",
       "correct": "唔好亂收陌生人利是",
@@ -144,7 +144,7 @@ window.COMMON_SENSE_PACKS["festivals-hk"] = {
     {
       "id": "new-year-day",
       "name": "元旦新一年",
-      "image": "assets/common-sense/icons/new-year-day.svg",
+      "image": "assets/common-sense/scenes/new-year-day.webp",
       "wallLine": "元旦——新一年第一日",
       "ask": "元旦係一年裏面邊一日？",
       "correct": "元旦係新一年第一日",

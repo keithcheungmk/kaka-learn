@@ -18,7 +18,7 @@ window.COMMON_SENSE_CATALOG = {
       "status": "playable",
       "kicker": "A · 安全出街",
       "blurb": "返學過馬路、識保護自己",
-      "cover": "assets/common-sense/icons/red-light.svg",
+      "cover": "assets/common-sense/scenes/red-light.webp",
       "buttonId": "btn-pack-safe"
     },
     {
@@ -36,7 +36,7 @@ window.COMMON_SENSE_CATALOG = {
       "status": "playable",
       "kicker": "A · 香港交通",
       "blurb": "屋企學校站＋港鐵地圖",
-      "cover": "assets/common-sense/icons/metro.svg",
+      "cover": "assets/common-sense/scenes/priority.webp",
       "buttonId": "btn-pack-transport"
     },
     {
@@ -45,7 +45,7 @@ window.COMMON_SENSE_CATALOG = {
       "status": "playable",
       "kicker": "A · 天氣同四季",
       "blurb": "落雨帶遮、凍着外套",
-      "cover": "assets/common-sense/icons/rain-umbrella.svg",
+      "cover": "assets/common-sense/scenes/rain-umbrella.webp",
       "buttonId": "btn-pack-weather"
     },
     {
@@ -54,7 +54,7 @@ window.COMMON_SENSE_CATALOG = {
       "status": "playable",
       "kicker": "A · 香港節日",
       "blurb": "過年、中秋、端午",
-      "cover": "assets/common-sense/icons/new-year.svg",
+      "cover": "assets/common-sense/scenes/new-year.webp",
       "buttonId": "btn-pack-festivals"
     },
     {
@@ -63,7 +63,7 @@ window.COMMON_SENSE_CATALOG = {
       "status": "playable",
       "kicker": "A · 環保回收",
       "blurb": "紙膠金屬玻璃分類",
-      "cover": "assets/common-sense/icons/paper-bin.svg",
+      "cover": "assets/common-sense/scenes/paper.webp",
       "buttonId": "btn-pack-recycle"
     },
     {
@@ -72,7 +72,7 @@ window.COMMON_SENSE_CATALOG = {
       "status": "playable",
       "kicker": "A · 飲食同健康",
       "blurb": "牛奶麵包點嚟＋洗手",
-      "cover": "assets/common-sense/process/milk-4.svg",
+      "cover": "assets/common-sense/scenes/milk-from-cow.webp",
       "buttonId": "btn-pack-food"
     },
     {

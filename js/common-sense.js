@@ -251,12 +251,33 @@
     if (!box) return;
     box.innerHTML = '';
     shuffle([q.correct, ...q.wrong]).forEach((text) => {
+      const row = document.createElement('div');
+      row.className = 'choice-row';
+
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'choice';
-      btn.textContent = text;
+      btn.dataset.answer = text;
+      const label = document.createElement('span');
+      label.className = 'choice-text';
+      label.textContent = text;
+      btn.appendChild(label);
       btn.addEventListener('click', () => onAnswer(btn, text === q.correct, q));
-      box.appendChild(btn);
+
+      const speakBtn = document.createElement('button');
+      speakBtn.type = 'button';
+      speakBtn.className = 'choice-speak';
+      speakBtn.setAttribute('aria-label', `聽「${text}」`);
+      speakBtn.textContent = '🔊';
+      speakBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        speak(text);
+      });
+
+      row.appendChild(btn);
+      row.appendChild(speakBtn);
+      box.appendChild(row);
     });
     updateProgress();
     speak(q.ask);
@@ -427,7 +448,7 @@
       const q = currentQuestion();
       if (!q) return false;
       const btn = [...document.querySelectorAll('#quiz-choices .choice')]
-        .find((el) => el.textContent === q.correct);
+        .find((el) => (el.dataset.answer || el.querySelector('.choice-text')?.textContent) === q.correct);
       if (!btn) return false;
       btn.click();
       return true;
@@ -436,7 +457,7 @@
       const q = currentQuestion();
       if (!q) return false;
       const btn = [...document.querySelectorAll('#quiz-choices .choice')]
-        .find((el) => el.textContent !== q.correct && !el.disabled);
+        .find((el) => (el.dataset.answer || el.querySelector('.choice-text')?.textContent) !== q.correct && !el.disabled);
       if (!btn) return false;
       btn.click();
       return true;

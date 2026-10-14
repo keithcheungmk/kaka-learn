@@ -1296,6 +1296,8 @@ def check_common_sense() -> None:
         "assets/common-sense/mtr-family-map.svg",
         "assets/common-sense/process/milk-1.svg",
         "assets/common-sense/process/bread-1.svg",
+        "assets/common-sense/scenes/red-light.webp",
+        "assets/common-sense/scenes/priority.webp",
         "interview-comics.html",
         "css/interview-comics.css",
         "js/interview-comics.js",
@@ -1318,6 +1320,8 @@ def check_common_sense() -> None:
         fail("common-sense", "學習牆要有開始答題；P9 其餘包要標即將推出")
     if "draggable" in js or "有講" in js:
         fail("common-sense", "線 A 唔好做拖一拖或家長開口閘")
+    if "quiz-frame" not in html or "choice-speak" not in js:
+        fail("common-sense", "答題圖要 4:3 畫框，每項答案要有獨立聽掣")
     catalog = read("data/common-sense-catalog.js")
     if "interview-comics.html" not in catalog:
         fail("common-sense", "面試四格入口要喺常識 hub")
