@@ -181,7 +181,12 @@
   function showReward(level) {
     const overlay = $('#math-round-finish'); if (!overlay) return;
     const msg = $('#math-round-finish-msg'); if (msg) msg.textContent = `${level.title}完成！攞到一個獎勵！`;
-    overlay.hidden = false; deps?.speech?.playStarCue?.({ muted: deps.isMuted?.() }); deps?.speak?.('今輪玩完喇！你好叻呀！攞到一個獎勵！'); deps?.playMathStarReward?.();
+    overlay.hidden = false; deps?.playMathStarReward?.();
+    if (window.KakaCelebrate?.play) window.KakaCelebrate.play({ root: overlay, muted: deps.isMuted?.() });
+    else {
+      deps?.speech?.playStarCue?.({ muted: deps.isMuted?.() });
+      deps?.speak?.('今輪玩完喇！你好叻呀！攞到一個獎勵！');
+    }
     $('#btn-math-round-again').onclick = () => { overlay.hidden = true; startMission(currentLevelIndex, 0); };
     $('#btn-math-round-galaxy').onclick = () => { overlay.hidden = true; deps?.openGalaxy?.(); };
   }

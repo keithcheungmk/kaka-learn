@@ -279,6 +279,7 @@
   }
 
   function hidePhonicsRoundFinish(mode) {
+    window.KakaCelebrate?.hide?.();
     $(`#screen-phonics-${mode} .phonics-round-finish`)?.remove();
   }
 
@@ -305,7 +306,7 @@
       <div class="play-finish-inner" role="dialog" aria-modal="true" aria-label="小測驗完成">
         <div class="play-finish-star" aria-hidden="true"><img src="./assets/kaka-ranger-celebrate.png" alt=""></div>
         <p>${finishText}你儲滿咗 10 粒星。</p>
-        <div class="play-finish-actions">
+        <div class="play-finish-actions" data-celebrate-actions>
           <button type="button" class="btn btn-primary" data-phonics-round-again>再玩一輪</button>
           <button type="button" class="btn btn-secondary" data-phonics-round-back>${isBlendFlow ? '返字卡' : '返玩法'}</button>
         </div>
@@ -323,6 +324,10 @@
       else openPhonicsPlayPick();
     });
     screen.appendChild(finish);
+    window.KakaCelebrate?.play?.({
+      root: finish,
+      muted: typeof isMuted === 'function' ? isMuted() : false,
+    });
   }
 
   function awardPhonicsRoundStar(mode, target, onComplete) {

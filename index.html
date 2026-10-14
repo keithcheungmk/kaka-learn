@@ -29,6 +29,7 @@
   <link rel="stylesheet" href="./css/math.css?v=20261001-life-skills" />
   <link rel="stylesheet" href="./css/additionGame.css?v=4751bde" />
   <link rel="stylesheet" href="./css/playground-theme.css?v=20261006-career-photos" />
+  <link rel="stylesheet" href="./css/celebrate-finish.css?v=20261014-celebrate" />
 </head>
 <body>
   <div id="app">
@@ -315,7 +316,7 @@
       </div>
       <p class="section-lead" id="play-lead">你想點樣認？</p>
       <div class="play-choices">
-        <button type="button" class="play-mode-card play-mode-match" id="btn-mode-match" aria-label="配一配，睇圖，揀漢字">
+        <button type="button" class="play-mode-card play-mode-match" id="btn-mode-match" hidden aria-label="配一配，睇圖，揀漢字">
           <span class="play-mode-preview play-preview-match" aria-hidden="true">
             <span class="play-preview-plate">⭐</span>
             <span class="play-preview-chars">
@@ -367,7 +368,7 @@
       <div class="chain-board" id="chain-board" aria-live="polite"></div>
       <div class="chain-options" id="chain-options" aria-label="揀下一個詞"></div>
       <p class="feedback" id="chain-feedback" aria-live="polite"></p>
-      <div class="btn-row chain-actions">
+      <div class="btn-row chain-actions" data-celebrate-actions>
         <button type="button" class="btn btn-secondary" id="btn-chain-restart">再玩一次</button>
       </div>
     </section>
@@ -1037,7 +1038,7 @@
         <img src="./assets/kaka-ranger-celebrate.png" alt="" width="235" height="305" decoding="async" />
       </div>
       <p id="play-finish-msg">今輪玩完喇！你好叻呀！</p>
-      <div class="btn-row">
+      <div class="btn-row" data-celebrate-actions>
         <button type="button" class="btn btn-secondary" id="btn-play-again">再玩一輪</button>
         <button type="button" class="btn" id="btn-play-topics">返主題</button>
       </div>
@@ -1051,7 +1052,7 @@
         <img src="./assets/kaka-ranger-celebrate.png" alt="" width="235" height="305" decoding="async" />
       </div>
       <p id="math-round-finish-msg">今輪玩完喇！攞到一個獎勵！</p>
-      <div class="btn-row">
+      <div class="btn-row" data-celebrate-actions>
         <button type="button" class="btn btn-secondary" id="btn-math-round-again">再玩一輪</button>
         <button type="button" class="btn" id="btn-math-round-galaxy">返遊戲樂園</button>
       </div>
@@ -1084,6 +1085,7 @@
   <script src="./js/storage.js?v=20260904a"></script>
   <script src="./js/speech.js?v=20260818e"></script>
   <script src="./js/star-fx.js?v=20260831l"></script>
+  <script src="./js/celebrate-finish.js?v=20261014-celebrate"></script>
   <script src="./js/nav-back.js?v=20261011-one-level"></script>
   <script src="./js/app.js?v=20261007-word-wall"></script>
   <script src="./js/phonics-words.js?v=20260905list"></script>

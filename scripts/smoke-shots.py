@@ -206,11 +206,11 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.wait_for_timeout(500)
     probe("揀玩法")
 
-    for btn, step in [("#btn-mode-build", "砌一砌"), ("#btn-mode-match", "配一配")]:
+    for btn, step in [("#btn-mode-build", "砌一砌")]:
         pg.click(btn)
         pg.wait_for_timeout(800)
         probe(step)
-        back = {"#btn-mode-build": "#btn-back-build", "#btn-mode-match": "#btn-back-match"}[btn]
+        back = {"#btn-mode-build": "#btn-back-build"}[btn]
         pg.click(back)
         pg.wait_for_timeout(400)
 

@@ -952,6 +952,10 @@ div.star-panel {
   overflow-y: auto;
 }
 
+#btn-mode-match {
+  display: none !important;
+}
+
 .play-mode-card {
   appearance: none;
   border: 2px solid rgba(94, 234, 212, 0.28);

@@ -305,6 +305,7 @@ function refreshPlayRoundUI() {
 }
 
 function hidePlayFinish() {
+  window.KakaCelebrate?.hide?.();
   const el = $('#play-finish');
   if (el) el.hidden = true;
   busy = false;
@@ -326,14 +327,18 @@ function showPlayFinish() {
     : '今輪玩完喇！你好叻呀！呢個玩法今日嘅幣已經攞咗，試下第二個玩法啦';
   if (msg) msg.textContent = line;
   showStarBurst();
-  playStarCue({ muted: state.muted });
-  if (coin.gained) playCoinHintCue({ muted: state.muted });
-  speakTerm(coin.gained ? '今輪玩完喇！攞到一個 AEON 幣！' : '今輪玩完喇！你好叻呀！', {
-    muted: state.muted,
-    rate: 0.92,
-    pitch: 1.08,
-    delayMs: 180,
-  });
+  if (window.KakaCelebrate?.play) {
+    window.KakaCelebrate.play({ root: el, muted: state.muted });
+  } else {
+    playStarCue({ muted: state.muted });
+    if (coin.gained) playCoinHintCue({ muted: state.muted });
+    speakTerm(coin.gained ? '今輪玩完喇！攞到一個 AEON 幣！' : '今輪玩完喇！你好叻呀！', {
+      muted: state.muted,
+      rate: 0.92,
+      pitch: 1.08,
+      delayMs: 180,
+    });
+  }
 }
 
 function bindPlayFinish() {
@@ -571,7 +576,10 @@ function bindPlayPick() {
   };
   const matchBtn = $('#btn-mode-match');
   const buildBtn = $('#btn-mode-build');
-  if (matchBtn) matchBtn.onclick = startMatchMode;
+  if (matchBtn) {
+    matchBtn.hidden = true;
+    matchBtn.onclick = startMatchMode;
+  }
   if (buildBtn) buildBtn.onclick = startBuildMode;
   const connectBtn = $('#btn-mode-chinese-connect');
   if (connectBtn) connectBtn.onclick = startChineseConnectMode;
@@ -615,7 +623,7 @@ function initChineseConnect() {
       <section class="connect-column" aria-label="圖片"><h2>圖片</h2><div class="connect-card-list" id="chinese-connect-pictures"></div></section>
       <section class="connect-column" aria-label="詞語"><h2>詞語</h2><div class="connect-card-list" id="chinese-connect-words"></div></section>
     </div>
-    <div class="btn-row" id="chinese-connect-finish" hidden>
+    <div class="btn-row" id="chinese-connect-finish" hidden data-celebrate-actions>
       <p class="feedback ok" id="chinese-connect-finish-message" aria-live="polite"></p>
       <button type="button" class="btn" id="btn-chinese-connect-next" hidden>下一輪</button>
       <button type="button" class="btn" id="btn-chinese-connect-again" hidden>再玩一次</button>
@@ -789,7 +797,7 @@ function layoutChineseConnectBoard() {
     board.style.gridTemplateColumns = '';
   } else {
     board.style.height = `clamp(400px, ${Math.min(82, 46 + count * 8)}vh, 720px)`;
-    board.style.gridTemplateColumns = 'repeat(2, minmax(0, 1fr))';
+    board.style.gridTemplateColumns = 'minmax(0, 1.22fr) minmax(0, 1fr)';
   }
 }
 
@@ -919,7 +927,6 @@ function finishChineseConnectRound() {
   const remaining = round.topicWords.length - round.rounds
     .slice(0, round.roundIndex + 1)
     .reduce((sum, words) => sum + words.length, 0);
-  $('#chinese-connect-finish').hidden = false;
   $('#chinese-connect-finish-message').textContent = isTopicComplete
     ? `全部 ${round.topicWords.length} 個詞語完成！獲得一粒星！`
     : `第 ${round.roundIndex + 1}/${round.rounds.length} 輪完成！還有 ${remaining} 個詞語。`;
@@ -927,13 +934,27 @@ function finishChineseConnectRound() {
   $('#chinese-connect-feedback').className = 'feedback ok';
   $('#btn-chinese-connect-next').hidden = isTopicComplete;
   $('#btn-chinese-connect-again').hidden = !isTopicComplete;
+  const revealFinish = () => {
+    if (chineseConnectRound !== round) return;
+    $('#chinese-connect-finish').hidden = false;
+  };
   if (isTopicComplete && !round.topicStarAwarded) {
     round.topicStarAwarded = true;
     markTopicPassed(activeTopicId, activeBook ? activeBook.id : null);
     awardStar().then(() => {
       if (chineseConnectRound !== round) return;
       showStarBurst();
+      if (window.KakaCelebrate?.play) {
+        window.KakaCelebrate.play({
+          muted: loadState().muted,
+          actions: $('#chinese-connect-finish'),
+        }).then(revealFinish);
+      } else {
+        revealFinish();
+      }
     });
+  } else {
+    revealFinish();
   }
 }
 
@@ -1043,6 +1064,13 @@ function renderWordChain() {
     const screen = $('#screen-chain');
     window.KakaStarFx?.mountPlayScreen?.(screen);
     window.KakaStarFx?.flyStarFromRanger?.(screen, () => refreshStarUI());
+    const restartRow = $('.chain-actions');
+    if (window.KakaCelebrate?.play && restartRow) {
+      window.KakaCelebrate.play({
+        muted: loadState().muted,
+        actions: restartRow,
+      });
+    }
     return;
   }
   const next = activeChain[chainIndex + 1];
@@ -1656,6 +1684,8 @@ function openPlayPick() {
   const base = topic ? topic.title : '';
   const withBook = activeBook ? `${base}・${activeBook.title}` : base;
   if (title) title.textContent = withBook ? `${withBook}・去玩玩` : '去玩玩';
+  const matchBtn = $('#btn-mode-match');
+  if (matchBtn) matchBtn.hidden = true;
   if (activeTopicId === 'opposites') {
     setPlayModeCopy('#btn-mode-match', '配一配', '睇圖，揀相反');
   } else {

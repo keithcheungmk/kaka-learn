@@ -402,6 +402,10 @@
     refreshStars(); $('activity').classList.add('hidden'); $('completion').classList.remove('hidden');
     $('completion-summary').textContent = `你完成了《${current.title}》的 ${current.pages.length} 頁，每頁都把重點詞放回句子裏。`;
     window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+    window.KakaCelebrate?.play?.({
+      actions: $('next-story'),
+      muted: Boolean(window.KakaStorage?.loadState?.()?.muted),
+    });
   }
   speech.warmVoices?.();
   setReadingChrome(false);

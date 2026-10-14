@@ -702,6 +702,12 @@
     $('#story-play-options').innerHTML = `<button type="button" class="story-answer" id="btn-story-home">Back to ${activeSeries().title} Books</button>`;
     $('#btn-story-restart')?.addEventListener('click', () => startBook(book.id));
     $('#btn-story-home')?.addEventListener('click', () => openHub());
+    const restart = $('#btn-story-restart');
+    const homeBtn = $('#btn-story-home');
+    window.KakaCelebrate?.play?.({
+      actions: [restart, homeBtn].filter(Boolean),
+      muted: Boolean(window.KakaStorage?.loadState?.()?.muted),
+    });
   }
 
   function renderPage() {

@@ -611,6 +611,10 @@ function advanceScene(isLastQuestion = sceneIndex >= book.scenes.length - 1) {
     ? `你完成了《${book.title}》的 ${book.scenes.length} 個書頁任務，集齊 ${book.stars} 粒星！`
     : `你完成了《${book.title}》的場景字詞任務。`;
   saveProgress({ sceneIndex, stars, completed: true });
+  window.KakaCelebrate?.play?.({
+    actions: $('#scene-replay'),
+    muted: Boolean(window.KakaStorage?.loadState?.()?.muted),
+  });
 }
 
 function movePreviewPage(delta) {

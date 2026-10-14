@@ -215,9 +215,13 @@
       const msg = $('#math-round-finish-msg');
       if (msg) msg.textContent = message || '今輪玩完喇！攞到一個獎勵！';
       overlay.hidden = false;
-      speech?.playStarCue?.({ muted: isMuted() });
-      speak(message || '今輪玩完喇！你好叻呀！攞到一個獎勵！');
       playMathStarReward();
+      if (window.KakaCelebrate?.play) {
+        window.KakaCelebrate.play({ root: overlay, muted: isMuted() });
+      } else {
+        speech?.playStarCue?.({ muted: isMuted() });
+        speak(message || '今輪玩完喇！你好叻呀！攞到一個獎勵！');
+      }
       $('#btn-math-round-again').onclick = () => { overlay.hidden = true; onAgain?.(); };
       $('#btn-math-round-galaxy').onclick = () => { overlay.hidden = true; openGalaxy(); };
     }

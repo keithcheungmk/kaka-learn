@@ -301,6 +301,31 @@
   font-size: min(3rem, 6.3vw, 6vh);
 }
 
+/* iPad／寬螢幕：連一連左邊縮圖大約放大 50%，手機維持原大細。 */
+@media (min-width: 700px) {
+  .connect-board {
+    grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr);
+  }
+
+  .connect-picture-main .emoji-plate {
+    width: min(120px, 15vw, 18vh);
+    height: min(120px, 15vw, 18vh);
+  }
+
+  .connect-picture-main .emoji-face {
+    font-size: min(4.6rem, 9.5vw, 9vh);
+  }
+
+  .connect-picture-main .word-photo,
+  .connect-picture-main .object-illustration,
+  .connect-picture-main .career-illustration,
+  .connect-picture-main .character-word-illustration {
+    padding: 0;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+}
+
 .connect-word-card {
   display: grid;
   width: 100%;

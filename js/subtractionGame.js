@@ -79,7 +79,9 @@
     });
   }
   function showReward(level) {
-    const overlay = $('#math-round-finish'); if (!overlay) return; const msg = $('#math-round-finish-msg'); if (msg) msg.textContent = `${level.title}完成！攞到一個獎勵！`; overlay.hidden = false; deps.speech?.playStarCue?.({ muted: deps.isMuted?.() }); deps.speak?.('今輪玩完喇！你好叻呀！攞到一個獎勵！'); deps.playMathStarReward?.();
+    const overlay = $('#math-round-finish'); if (!overlay) return; const msg = $('#math-round-finish-msg'); if (msg) msg.textContent = `${level.title}完成！攞到一個獎勵！`; overlay.hidden = false; deps.playMathStarReward?.();
+    if (window.KakaCelebrate?.play) window.KakaCelebrate.play({ root: overlay, muted: deps.isMuted?.() });
+    else { deps.speech?.playStarCue?.({ muted: deps.isMuted?.() }); deps.speak?.('今輪玩完喇！你好叻呀！攞到一個獎勵！'); }
     $('#btn-math-round-again').onclick = () => { overlay.hidden = true; startMission(currentLevelIndex, 0); }; $('#btn-math-round-galaxy').onclick = () => { overlay.hidden = true; deps.openGalaxy?.(); };
   }
   function startMission(levelIndex, missionIndex) { currentLevelIndex = levelIndex; currentMissionIndex = missionIndex; busy = false; const level = levels[levelIndex]; const mission = level.missions[missionIndex]; $('#subtraction-play-title').textContent = level.title; $('#subtraction-scenario').textContent = `${mission.scenario} · ${mission.visual.emoji}`; $('#subtraction-desc').textContent = `${mission.desc} 完成後撳「回答」。`; $('#subtraction-target-num').textContent = String(mission.remaining); $('#subtraction-target-label').textContent = `${mission.visual.label}（目標剩 ${mission.remaining}${mission.visual.measure}）`; $('#subtraction-mission-progress').textContent = `今輪第 ${missionIndex + 1} / ${level.missions.length} 題`; $('#subtraction-feedback').textContent = ''; renderMission(mission); updateStars(); deps.showMathScreen('subtractionPlay'); requestAnimationFrame(() => positionInitialObjects()); deps.speak?.(mission.desc); }

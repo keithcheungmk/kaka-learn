@@ -308,6 +308,10 @@
     refreshStars(); $('activity').classList.add('hidden'); $('completion').classList.remove('hidden');
     $('completion-summary').textContent = `You finished ${storyHeading(current)} · ${current.pages.length} pages.`;
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    window.KakaCelebrate?.play?.({
+      actions: $('next-story'),
+      muted: Boolean(window.KakaStorage?.loadState?.()?.muted),
+    });
   }
   speech.warmVoices?.();
   speech.warmEnglishVoice?.();

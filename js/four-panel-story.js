@@ -424,7 +424,14 @@
     $('completion').classList.remove('hidden');
     refreshStars();
     refreshCompleteButton();
-    speakLine('講完喇，好叻呀。');
+    if (window.KakaCelebrate?.play) {
+      window.KakaCelebrate.play({
+        actions: $('completion'),
+        muted: Boolean(storage.loadState?.()?.muted),
+      }).then(() => $('completion')?.classList.remove('hidden'));
+    } else {
+      speakLine('講完喇，好叻呀。');
+    }
   }
 
   function rerecord() {

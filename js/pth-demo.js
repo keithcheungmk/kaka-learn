@@ -142,6 +142,13 @@ $('#submitAnswer').onclick = async () => {
   await fireStar(round.index + 1); if (request !== generation) return;
   renderStars(); renderGroups(); locked = false; next = true;
   $('#submitAnswer').textContent = round.index === 9 ? '查看星星記錄 →' : '下一題 →'; $('#submitAnswer').disabled = false;
+  if (round.index === 9 && window.KakaCelebrate?.play) {
+    $('#submitAnswer').disabled = true;
+    window.KakaCelebrate.play({
+      actions: $('#submitAnswer'),
+      muted: Boolean(window.KakaStorage?.loadState?.()?.muted),
+    }).then(() => { $('#submitAnswer').disabled = false; });
+  }
 };
 $('#startQuiz').onclick = () => showTab('quiz');
 document.querySelectorAll('.tab').forEach(button => button.onclick = () => showTab(button.dataset.tab));

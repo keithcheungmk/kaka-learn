@@ -866,6 +866,86 @@ def check_polyphone_say() -> None:
             fail("polyphone", "單字「長」嘅聲音必須只讀「長」，唔可以讀成「好長」")
 
 
+def check_match_mode_hidden() -> None:
+    """中文去玩玩隱藏配一配入口，但保留畫面同程式方便再開。"""
+    html = read("index.html")
+    m = re.search(r"<button[^>]*id=\"btn-mode-match\"[^>]*>", html)
+    if not m:
+        fail("match-hidden", "index.html 要保留 #btn-mode-match")
+    elif "hidden" not in m.group(0):
+        fail("match-hidden", "配一配玩法卡要加 hidden，唔顯示俾小朋友")
+    if 'id="screen-match"' not in html:
+        fail("match-hidden", "配一配遊戲畫面要保留，方便日後再開")
+    css = read("css/styles.css")
+    if "#btn-mode-match" not in css or "display: none" not in css.split("#btn-mode-match", 1)[-1][:180]:
+        fail("match-hidden", "css/styles.css 要用 #btn-mode-match { display:none } 雙重隱藏")
+    app = strip_js_comments(read("js/app.js"))
+    if "matchBtn.hidden = true" not in app:
+        fail("match-hidden", "app.js 開玩法頁時都要保持配一配隱藏")
+    if "function startMatchMode" not in app:
+        fail("match-hidden", "startMatchMode 要保留，唔好刪配一配程式")
+
+
+def check_connect_picture_scale() -> None:
+    """iPad／寬螢幕連一連圖片大約放大 50%；手機唔好撐爆。"""
+    css = read("css/phonics.css")
+    if "@media (min-width: 700px)" not in css:
+        fail("connect-scale", "phonics.css 要有 min-width: 700px 放大連一連圖")
+    if "min(120px, 15vw, 18vh)" not in css:
+        fail("connect-scale", "寬螢幕連一連 emoji-plate 要大約 120px（相對 76px 增大 50%）")
+    if "max-width: 640px" not in css:
+        fail("connect-scale", "手機連一連要維持單欄，唔好跟 iPad 放大")
+    app = read("js/app.js")
+    if "minmax(0, 1.22fr) minmax(0, 1fr)" not in app:
+        fail("connect-scale", "中文連一連圖片欄喺寬螢幕要闊過詞語欄")
+
+
+def check_celebrate_finish() -> None:
+    """完成頒星／幣要先播太空戰士獎勵＋粵語，之後先出再玩掣。"""
+    js = read("js/celebrate-finish.js")
+    css = read("css/celebrate-finish.css")
+    if "你好叻啊，完成咗啦，獎勵你一個金幣！" not in js:
+        fail("celebrate", "獎勵粵語要係「你好叻啊，完成咗啦，獎勵你一個金幣！」")
+    if "kaka-ranger-celebrate.png" not in js or "kaka-ranger-star.png" not in js:
+        fail("celebrate", "要重用 kaka-ranger-celebrate.png 同 kaka-ranger-star.png")
+    if "speakTerm" not in js:
+        fail("celebrate", "獎勵語音要走 speech.js speakTerm")
+    if "kaka-celebrate-waiting" not in css or "kaka-celebrate-skip" not in css:
+        fail("celebrate", "動畫期間要藏再玩掣，並提供跳過")
+    for page in (
+        "index.html",
+        "common-sense.html",
+        "four-panel-story.html",
+        "interview-comics.html",
+        "family-storybook.html",
+        "family-storybook-en.html",
+        "book-scene-demo.html",
+        "pth-demo.html",
+    ):
+        src = read(page)
+        if "celebrate-finish.js" not in src:
+            fail("celebrate", f"{page} 要載入 celebrate-finish.js")
+        if "celebrate-finish.css" not in src:
+            fail("celebrate", f"{page} 要載入 celebrate-finish.css")
+    for src in (
+        "js/app.js",
+        "js/phonics-app.js",
+        "js/math-app.js",
+        "js/common-sense.js",
+        "js/four-panel-story.js",
+        "js/interview-comics.js",
+        "js/family-storybook.js",
+        "js/book-scene-demo.js",
+    ):
+        if "KakaCelebrate" not in read(src):
+            fail("celebrate", f"{src} 完成獎勵要呼叫 KakaCelebrate")
+    node = shutil.which("node")
+    if node:
+        result = subprocess.run([node, "scripts/test-celebrate-finish.mjs"], capture_output=True, text=True)
+        if result.returncode:
+            fail("celebrate", (result.stderr or result.stdout)[-1200:] or "完成獎勵回歸失敗")
+
+
 def check_match_naming() -> None:
     """玩法名統一「配一配」，唔好再同「睇圖」三名混用。"""
     html = read("index.html")
@@ -1468,6 +1548,9 @@ CHECKS = [
     check_font_coverage,
     check_polyphone_say,
     check_match_naming,
+    check_match_mode_hidden,
+    check_connect_picture_scale,
+    check_celebrate_finish,
     check_learn_finish_always,
     check_cjk_halfwidth_punct,
     check_agent_collab_docs,

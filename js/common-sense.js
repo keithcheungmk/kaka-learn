@@ -656,11 +656,17 @@
         msg.textContent = line;
         msg.classList.toggle('is-already', Boolean(coin.already));
       }
-      speech.playStarCue?.({ muted: isMuted() });
-      if (coin.gained) speech.playCoinHintCue?.({ muted: isMuted() });
-      speak(coin.gained ? '今輪玩完喇！攞到一個 AEON 幣！' : '今日已攞！今輪玩完喇！');
+      if (!window.KakaCelebrate?.play) {
+        speech.playStarCue?.({ muted: isMuted() });
+        if (coin.gained) speech.playCoinHintCue?.({ muted: isMuted() });
+        speak(coin.gained ? '今輪玩完喇！攞到一個 AEON 幣！' : '今日已攞！今輪玩完喇！');
+      }
     }
     showView('finish');
+    const celebrate = document.querySelector('#view-finish .celebrate');
+    if (window.KakaCelebrate?.play && celebrate) {
+      window.KakaCelebrate.play({ root: celebrate, muted: isMuted() });
+    }
   }
 
   function goPacks() {
