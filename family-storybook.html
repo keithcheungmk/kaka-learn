@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#101c49">
   <title>卡卡和禧禧一齊玩｜故事閱讀與詞語遊戲</title>
   <link rel="stylesheet" href="css/family-storybook.css">
-  <link rel="stylesheet" href="css/celebrate-finish.css?v=20261014-celebrate">
+  <link rel="stylesheet" href="css/celebrate-finish.css?v=20261018-fullmoon-qa">
 </head>
 <body>
   <main class="storybook-shell">
@@ -58,13 +58,26 @@
         </section>
       </section>
       <nav class="reader-controls" aria-label="故事頁導航"><button id="prev-page" class="secondary-button" type="button">上一頁</button><button id="next-page" class="primary-button" type="button" disabled>下一頁 →</button></nav>
-      <section id="completion" class="completion hidden" aria-live="polite"><div class="completion-star">⭐</div><h3>故事完成！</h3><p id="completion-summary"></p><button id="next-story" class="primary-button" type="button">返回故事書目</button></section>
+      <section id="completion" class="play-finish completion hidden" role="dialog" aria-modal="true" aria-labelledby="completion-heading" aria-live="polite">
+        <div class="play-finish-inner">
+          <div class="play-finish-star kaka-celebrate-stage" aria-hidden="true">
+            <img class="kaka-celebrate-ranger" src="assets/kaka-ranger-celebrate.png" alt="" width="235" height="305" decoding="async">
+          </div>
+          <h3 id="completion-heading">故事完成！</h3>
+          <p id="completion-line">你好叻啊，完成咗啦，獎勵你一個金幣！</p>
+          <p id="completion-summary"></p>
+          <div id="story-finish-actions" class="finish-actions" data-celebrate-actions>
+            <button id="replay-story" class="primary-button" type="button">再玩一次</button>
+            <button id="next-story" class="secondary-button" type="button">返回故事書目</button>
+          </div>
+        </div>
+      </section>
     </section>
   </main>
   <script src="js/speech.js?v=xiyu-deploy-refresh"></script>
-  <script src="js/celebrate-finish.js?v=20261014-celebrate"></script>
+  <script src="js/celebrate-finish.js?v=20261018-fullmoon-qa"></script>
   <script src="js/nav-back.js?v=20261011-one-level"></script>
-  <script src="data/family-stories/manifest.js?v=xiyu-deploy-refresh"></script>
-  <script src="js/family-storybook.js?v=xiyu-deploy-refresh"></script>
+  <script src="data/family-stories/manifest.js?v=xiyu-fullmoon-qa"></script>
+  <script src="js/family-storybook.js?v=xiyu-fullmoon-qa"></script>
 </body>
 </html>

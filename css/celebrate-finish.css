@@ -4,8 +4,38 @@ html {
   --kaka-celebrate: 1;
 }
 
+/* 獨立頁（家庭故事等）唔載入 styles.css，所以正中固定層要寫喺呢度。 */
+.play-finish[hidden],
+.play-finish.hidden,
+.kaka-celebrate-overlay[hidden] {
+  display: none !important;
+}
+
+.play-finish {
+  position: fixed;
+  inset: 0;
+  z-index: 36;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(3, 10, 22, 0.78);
+}
+
 .kaka-celebrate-overlay.play-finish {
   z-index: 40;
+}
+
+.play-finish-inner {
+  width: min(480px, 100%);
+  max-height: min(92dvh, 100%);
+  overflow: auto;
+  text-align: center;
+  background: linear-gradient(180deg, #122848, #0b1d3a);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  border-radius: 28px;
+  padding: 22px 20px 20px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
 }
 
 .kaka-celebrate-stage {
@@ -41,9 +71,22 @@ html {
   animation: kakaCelebratePop 0.85s cubic-bezier(.22,.9,.28,1.15);
 }
 
-.kaka-celebrate-overlay .play-finish-star img,
-.kaka-celebrate-play .play-finish-star img {
+.play-finish-star img,
+.kaka-celebrate-ranger {
+  width: auto;
+  height: clamp(110px, min(22vh, 30vw), 190px);
+  display: block;
+  margin: 0 auto;
   background: transparent;
+}
+
+.play-finish-inner > p,
+#kaka-celebrate-line {
+  margin: 12px 0 10px;
+  font-size: clamp(1.2rem, 3.2vw, 1.75rem);
+  font-weight: 800;
+  color: #ffe89a;
+  line-height: 1.35;
 }
 
 .kaka-celebrate-skip {
@@ -64,6 +107,15 @@ html {
 .kaka-celebrate-skip:focus-visible {
   outline: 3px solid var(--teal-soft, #5eead4);
   outline-offset: 2px;
+}
+
+.finish-actions,
+.play-finish-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
 }
 
 .kaka-celebrate-waiting .btn-row,

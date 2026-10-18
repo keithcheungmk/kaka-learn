@@ -94,10 +94,11 @@ button:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
 @keyframes star-draw { 72% { fill: transparent; stroke-dashoffset: 0; } 100% { fill: var(--gold); stroke-dashoffset: 0; } }
 .guardian-unlock { display: block; width: 100%; margin-top: 8px; border: 1px solid var(--gold); border-radius: 12px; padding: 10px 12px; color: var(--gold); background: #282c4c; font: inherit; font-weight: 800; cursor: pointer; }
 .reader-controls { display: flex; justify-content: space-between; margin: 18px 0 32px; }
-.completion { border: 1px solid #476fa9; border-radius: 24px; background: #14234c; padding: 36px; margin-top: 18px; text-align: center; }
-.completion-star { font-size: 4rem; }
-.completion h3 { font-size: 2rem; margin: 0; }
-.completion p { color: var(--muted); }
+.completion { text-align: center; }
+.completion h3 { font-size: clamp(1.5rem, 3vw, 2rem); margin: 8px 0 0; color: var(--gold); }
+.completion #completion-summary { color: var(--muted); margin: 8px 0 0; }
+.finish-actions .primary-button,
+.finish-actions .secondary-button { min-height: 52px; min-width: 140px; }
 .hidden { display: none!important; }
 footer { margin-top: 35px; color: #94a4ce; text-align: center; font-size: .86rem; }
 button:focus-visible,a:focus-visible,select:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }

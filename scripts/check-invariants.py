@@ -912,6 +912,10 @@ def check_celebrate_finish() -> None:
         fail("celebrate", "獎勵語音要走 speech.js speakTerm")
     if "kaka-celebrate-waiting" not in css or "kaka-celebrate-skip" not in css:
         fail("celebrate", "動畫期間要藏再玩掣，並提供跳過")
+    if "position: fixed" not in css or "align-items: center" not in css or "justify-content: center" not in css:
+        fail("celebrate", "獨立頁獎勵層要畫面正中固定，唔可以貼頁底")
+    if ".play-finish[hidden]" not in css:
+        fail("celebrate", "play-finish 用 display:flex 時要守住 [hidden]")
     for page in (
         "index.html",
         "common-sense.html",
@@ -1127,6 +1131,22 @@ def check_family_storybook_entry() -> None:
         fail("family-storybook", "故事頁唔好再留普通話朗讀路徑")
     if "guardian-unlock" not in story_html or "guardian-unlock" not in story_js:
         fail("family-storybook", "播唔到語音時要保留家長朗讀後備")
+    after = re.search(r"function afterPageHeard\([\s\S]*?\n  \}", story_js)
+    if not after:
+        fail("family-storybook", "聽本頁要有 afterPageHeard 解鎖填詞")
+    elif "audioLocked = true" in after.group(0) or "speakStory(" in after.group(0):
+        fail("family-storybook", "聽本頁第一遍完就要解鎖詞語掣，唔好再播第二遍先解鎖")
+    if "再玩一次" not in story_html or 'id="replay-story"' not in story_html or "replayCurrentStory" not in story_js:
+        fail("family-storybook", "完成獎勵後要有再玩一次，可保留返回故事書目")
+    if "scrollHeight" in story_js:
+        fail("family-storybook", "完成獎勵唔好捲去頁底")
+    if "root: completion" not in story_js or "story-finish-actions" not in story_js:
+        fail("family-storybook", "完成獎勵要喺正中 completion 層播，播完先出掣")
+    node = shutil.which("node")
+    if node:
+        result = subprocess.run([node, "scripts/test-family-storybook.mjs"], capture_output=True, text=True)
+        if result.returncode:
+            fail("family-storybook", (result.stderr or result.stdout)[-1200:] or "家庭故事驗收回歸失敗")
 
 
 def check_four_panel_story() -> None:

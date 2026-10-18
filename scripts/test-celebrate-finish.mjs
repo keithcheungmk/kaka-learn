@@ -20,6 +20,10 @@ assert.match(js, /speakTerm/);
 assert.match(js, /kaka-celebrate-skip/);
 assert.match(css, /kaka-ranger-star\.png/);
 assert.match(css, /kaka-celebrate-waiting/);
+assert.match(css, /position:\s*fixed/);
+assert.match(css, /align-items:\s*center/);
+assert.match(css, /justify-content:\s*center/);
+assert.match(css, /\.play-finish\[hidden\]/);
 assert.match(index, /id="btn-mode-match"[^>]*\bhidden\b/);
 assert.match(index, /celebrate-finish\.js/);
 assert.match(app, /matchBtn\.hidden = true/);
@@ -55,6 +59,9 @@ for (const file of [
 ]) {
   assert.match(read(file), /KakaCelebrate/, `${file} 完成流程要呼叫 KakaCelebrate`);
 }
+
+assert.match(read('family-storybook.html'), /再玩一次/);
+assert.match(read('js/family-storybook.js'), /root:\s*completion/);
 
 class MockEl {
   constructor(tag, attrs = {}) {

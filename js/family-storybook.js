@@ -102,14 +102,23 @@
   }
   function leaveReader() {
     stopSpeech();
+    window.KakaCelebrate?.hide?.();
     current = null;
     reader.classList.add('hidden');
     library.classList.remove('hidden');
+    $('completion').classList.add('hidden');
     setReadingChrome(false);
     renderLibrary();
     window.scrollTo({top:0,behavior:'smooth'});
   }
+  function replayCurrentStory() {
+    if (!current) return;
+    window.KakaCelebrate?.hide?.();
+    $('completion').classList.add('hidden');
+    openStory(current.id);
+  }
   $('next-story').addEventListener('click', leaveReader);
+  $('replay-story').addEventListener('click', replayCurrentStory);
   $('back-chinese').addEventListener('click', event => {
     event.preventDefault();
     if ($('story-topbar').classList.contains('is-reading')) {
@@ -150,31 +159,14 @@
 
   function afterPageHeard(unlockedPageIndex) {
     if (!current || !pageStates[unlockedPageIndex]) return;
-    pageStates[unlockedPageIndex].unlocked = true;
-    $('guardian-unlock').classList.add('hidden');
-    $('task-feedback').textContent = '聽完了，請把兩個重點詞放回句子。';
     const unlockedPage = current.pages[unlockedPageIndex];
     const unlockedState = pageStates[unlockedPageIndex];
-    unlockedState.audioLocked = true;
-    $('speak-sentence').disabled = true;
+    unlockedState.unlocked = true;
+    unlockedState.audioLocked = false;
+    $('guardian-unlock').classList.add('hidden');
+    $('task-feedback').textContent = '聽完了，請把兩個重點詞放回句子。';
+    $('speak-sentence').disabled = false;
     renderWordTask(unlockedPage, unlockedState);
-    const readStarted = speakStory(unlockedPage.sentence, {
-      onEnd: () => {
-        unlockedState.audioLocked = false;
-        $('speak-sentence').disabled = false;
-        if (current?.pages[pageIndex] === unlockedPage) renderWordTask(unlockedPage, unlockedState);
-      },
-      onError: () => {
-        unlockedState.audioLocked = false;
-        $('speak-sentence').disabled = false;
-        if (current?.pages[pageIndex] === unlockedPage) renderWordTask(unlockedPage, unlockedState);
-      }
-    });
-    if (!readStarted) {
-      unlockedState.audioLocked = false;
-      $('speak-sentence').disabled = false;
-      renderWordTask(unlockedPage, unlockedState);
-    }
   }
 
   function speakStory(text, { unlockPage = false, onEnd = null, onError = null } = {}) {
@@ -400,11 +392,14 @@
       completed.push(current.id);
       try { localStorage.setItem(finishedKey, JSON.stringify(completed)); } catch { /* Progress still completes for this session. */ }
     }
-    refreshStars(); $('activity').classList.add('hidden'); $('completion').classList.remove('hidden');
+    refreshStars();
+    $('activity').classList.add('hidden');
+    const completion = $('completion');
+    completion.classList.remove('hidden');
     $('completion-summary').textContent = `你完成了《${current.title}》的 ${current.pages.length} 頁，每頁都把重點詞放回句子裏。`;
-    window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
     window.KakaCelebrate?.play?.({
-      actions: $('next-story'),
+      root: completion,
+      actions: $('story-finish-actions'),
       muted: Boolean(window.KakaStorage?.loadState?.()?.muted),
     });
   }
