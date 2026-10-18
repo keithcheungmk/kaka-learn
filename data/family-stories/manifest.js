@@ -275,5 +275,21 @@ window.FAMILY_STORIES = [
       {"sentence":"之後，姨媽和公公婆婆去澳門，還到郵政局看一看。","tiles":["之後","，","姨媽","和","公公婆婆","去","澳門","，","還到","郵政局","看一看","。"],"learn":["姨媽","郵政局"],"distractors":["虹姑姑","超市"],"focusWords":["姨媽","郵政局"],"dialogue":{"speaker":"姨媽","text":"我們先去郵政局，再看看附近的大樓。"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p07.webp"},
       {"sentence":"大家看了很多澳門景點，今天過得很充實。","tiles":["大家","看了","很多","澳門","景點","，","今天","過得","很","充實","。"],"learn":["景點","充實"],"distractors":["功課","無聊"],"focusWords":["景點","充實"],"dialogue":{"speaker":"婆婆","text":"今天真充實，我們都好開心。"},"image":"assets/family-stories/scenes/zhuhai-yima-bathtub-p08.webp"}
     ]
+  },
+  {
+    id:'xiyu-fullmoon-party', title:'浠榆滿月派對', place:'珠海、拱北口岸和酒店', date:'2026-10-17', series:'珠海探妹妹', episode:3,
+    characters:['卡卡','傑叔叔','爺爺','婆婆','姨媽','虹姑姑','浠榆'], sourceBooks:[], bookWords:[],
+    extensionWords:['爺爺','坐','飛機','從','福州','飛到','珠海','探望','浠榆','婆婆','姨媽','巴士','香港','來到','爸爸','開車','去','商場','停車場','很難找','晚上','大家','吃','番茄湯','火鍋','還有','最愛','肥牛','酒店','房間','裏','有','樓梯','開心地','走上走下','十月十八日','早上','滿月','滿月派對','播放','成長影片','爺爺婆婆','送來','利是','中午','拱北','口岸','附近','酒樓','吃飯','望見','澳門','傍晚','專車','一起','回港'],
+    summary:'2026年10月17至18日：爺爺坐飛機從福州來，婆婆和姨媽坐巴士從香港來；大家吃火鍋、住有樓梯的酒店，再參加浠榆滿月派對，最後去口岸酒樓望澳門，親人坐專車回港。',
+    pages:[
+      {"sentence":"爺爺坐飛機，從福州飛到珠海探望浠榆。","tiles":["爺爺","坐","飛機","，","從","福州","飛到","珠海","探望","浠榆","。"],"learn":["飛機","福州"],"distractors":["火車","中山"],"focusWords":["飛機","福州"],"dialogue":{"speaker":"卡卡","text":"爺爺坐飛機來看浠榆啦！"},"image":"assets/family-stories/scenes/xiyu-fullmoon-party-p01.webp"},
+      {"sentence":"婆婆和姨媽坐巴士，從香港來到珠海。","tiles":["婆婆","和","姨媽","坐","巴士","，","從","香港","來到","珠海","。"],"learn":["巴士","香港"],"distractors":["的士","深圳"],"focusWords":["巴士","香港"],"dialogue":{"speaker":"姨媽","text":"我們坐巴士過關，很快就到了！"},"image":"assets/family-stories/scenes/xiyu-fullmoon-party-p02.webp"},
+      {"sentence":"爸爸開車去商場，停車場很難找。","tiles":["爸爸","開車","去","商場","，","停車場","很難找","。"],"learn":["商場","停車場"],"distractors":["公園","車站"],"focusWords":["商場","停車場"],"dialogue":{"speaker":"傑叔叔","text":"車位都滿了，我們再慢慢找。"},"image":"assets/family-stories/scenes/xiyu-fullmoon-party-p03.webp"},
+      {"sentence":"晚上大家吃番茄湯火鍋，還有卡卡最愛的肥牛。","tiles":["晚上","大家","吃","番茄湯","火鍋","，","還有","卡卡","最愛","的","肥牛","。"],"learn":["火鍋","肥牛"],"distractors":["點心","青菜"],"focusWords":["火鍋","肥牛"],"dialogue":{"speaker":"卡卡","text":"肥牛放進火鍋，香噴噴！"},"image":"assets/family-stories/scenes/xiyu-fullmoon-party-p04.webp"},
+      {"sentence":"酒店房間裏有樓梯，卡卡開心地走上走下。","tiles":["酒店","房間","裏","有","樓梯","，","卡卡","開心地","走上走下","。"],"learn":["樓梯","走上走下"],"distractors":["電梯","跑來跑去"],"focusWords":["樓梯","走上走下"],"dialogue":{"speaker":"卡卡","text":"這裏有樓梯，上上落落真好玩！"},"image":"assets/family-stories/scenes/xiyu-fullmoon-party-p05.webp"},
+      {"sentence":"十月十八日早上，滿月派對播放成長影片，爺爺婆婆送來利是。","tiles":["十月十八日","早上","，","滿月派對","播放","成長影片","，","爺爺婆婆","送來","利是","。"],"learn":["滿月","利是"],"distractors":["生日","糖果"],"focusWords":["滿月","利是"],"dialogue":{"speaker":"爺爺","text":"浠榆滿月快樂，這封利是送給你！"},"image":"assets/family-stories/scenes/xiyu-fullmoon-party-p06.webp"},
+      {"sentence":"中午大家去拱北口岸附近的酒樓吃飯，望見澳門。","tiles":["中午","大家","去","拱北","口岸","附近","的","酒樓","吃飯","，","望見","澳門","。"],"learn":["口岸","澳門"],"distractors":["機場","深圳"],"focusWords":["口岸","澳門"],"dialogue":{"speaker":"卡卡","text":"酒樓窗外望到澳門，好漂亮！"},"image":"assets/family-stories/scenes/xiyu-fullmoon-party-p07.webp"},
+      {"sentence":"傍晚，爺爺、婆婆和姨媽坐專車一起回港。","tiles":["傍晚","，","爺爺","、","婆婆","和","姨媽","坐","專車","一起","回港","。"],"learn":["專車","回港"],"distractors":["巴士","留下"],"focusWords":["專車","回港"],"dialogue":{"speaker":"婆婆","text":"我們坐專車回去，下次再來看你！"},"image":"assets/family-stories/scenes/xiyu-fullmoon-party-p08.webp"}
+    ]
   }
 ];

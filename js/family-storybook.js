@@ -10,7 +10,8 @@
     ['傑叔叔','170 cm','卡卡的爸爸；深藍外套','jie-turnaround.webp'],
     ['耀叔叔','175 cm','禧禧的爸爸；灰綠外套','yao-turnaround.webp'],
     ['浠榆','初生寶寶','卡卡的妹妹；淡粉色花紋包被','xiyu-turnaround.webp'],
-    ['姨媽','約163 cm','虹姑姑的家姐；孔雀綠開襟衫、短黑髮','yima-turnaround.webp']
+    ['姨媽','約163 cm','虹姑姑的家姐；孔雀綠開襟衫、短黑髮','yima-turnaround.webp'],
+    ['爺爺','約165 cm','光頭；米色 polo、卡其長褲','yeye-turnaround.webp']
   ];
   const $ = id => document.getElementById(id);
   const library = $('library'), reader = $('reader');
@@ -46,7 +47,7 @@
         ? story.bookWords.slice(0,4)
         : story.pages.flatMap(page => page.focusWords).slice(0,4);
       const wordLabel = hasBookWords ? '讀本詞' : '學習詞語';
-      return `<button class="story-card" type="button" data-story="${story.id}" aria-label="開始故事：${story.title}"><img class="story-cover" src="${image}" alt="${story.title}插圖" onerror="this.src='assets/family-stories/characters/family-height-lineup.webp'"><span><strong class="story-title">${String(index+1).padStart(2,'0')}・${story.title} ${done?'<span class="done-tag">★</span>':''}</strong><p>${story.place} · ${story.pages.length}頁</p><p>${story.summary}</p><p class="card-words">${wordLabel}：${displayedWords.join('、')}</p>${story.artNote?`<p class="art-note">${story.artNote}</p>`:''}</span></button>`;
+      return `<button class="story-card" type="button" data-story="${story.id}" aria-label="開始故事：${story.title}"><img class="story-cover" src="${image}" alt="${story.title}插圖" onerror="this.src='assets/family-stories/characters/family-height-lineup.webp'"><span><strong class="story-title">${String(index+1).padStart(2,'0')}・${story.title} ${done?'<span class="done-tag">★</span>':''}</strong><p>${story.place} · ${story.pages.length}頁</p><p>${story.summary}</p><p class="card-words">${wordLabel}：${displayedWords.join('、')}</p>${story.artNote?`<p class="art-note">${story.artNote}</p>`:''}<p class="card-cta">故事／點這裏開始</p></span></button>`;
     }).join('');
     const castGrid = $('cast-grid');
     if (castGrid) castGrid.innerHTML = cast.map(([name,height,traits,file]) => `<article class="cast-card"><img src="assets/family-stories/characters/${file}" alt="${name}角色三視圖"><div><strong>${name}</strong><p>${height} · ${traits}</p></div></article>`).join('');

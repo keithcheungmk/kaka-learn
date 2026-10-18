@@ -16,6 +16,7 @@
 | 耀叔叔 | 175 cm | 禧禧的爸爸 | 灰綠襯衫外套、淺色上衣 |
 | 浠榆 | 初生寶寶 | 卡卡的妹妹 | 淡粉色花朵圖案包被；以安全包裹／成人抱着的姿勢出現 |
 | 公公 | 約165 cm | 卡卡的公公；銀灰短髮、圓金框眼鏡、慈祥 | 米色長袖上衣、啡色冷背心、卡其長褲、啡色鞋 |
+| 爺爺 | 約165 cm | 本篇《浠榆滿月派對》用「爺爺」稱呼；光頭、無眼鏡、和善 | 米色短袖 polo、卡其長褲、啡色鞋 |
 | 婆婆 | 約150 cm | 卡卡的婆婆；灰色短曲髮、笑容溫柔 | 淡紫開襟衫、梅紅上衣、深藍長褲、米色平底鞋 |
 | 姨媽 | 約163 cm | 虹姑姑的家姐；臉型較圓、肩上短黑髮、神情溫柔穩重 | 孔雀綠開襟衫、米色上衣、淺駝長褲、米色平底鞋 |
 
@@ -30,7 +31,8 @@
 - **卡卡形象主參考（Keith 2026-10-08 選定）**：`docs/design/kaka-character-reference-sheet.jpg`（五個全身角度＋四個表情）同畫風範本 `docs/design/kaka-breakfast-style-reference.jpg`。凡生成有卡卡嘅圖，兩張都要作參考圖，臉型、髮型、笑容同服裝以呢兩張為準；呢兩張係設定稿，唔直接放上網站。
 - **其餘五位統一造型（2026-10-08，以卡卡設定圖畫風統一）**：禧禧 `docs/design/heihei-character-reference-sheet.jpg`、虹姑姑 `auntie-character-reference-sheet.jpg`、蛙蛙 `wawa-character-reference-sheet.jpg`、傑叔叔 `jie-character-reference-sheet.jpg`、耀叔叔 `yao-character-reference-sheet.jpg`；六人同框比例以 `docs/design/family-height-lineup-reference.jpg` 為準。生成場景時放入相關角色嘅設定圖（多人同框再加六人比例圖）；以上設定圖優先於 `assets/family-stories/characters/` 舊三視圖。
 - **公公、婆婆（2026-10-08，《珠海探妹妹》系列）**：`docs/design/gonggong-character-reference-sheet.jpg`、`popo-character-reference-sheet.jpg`；暫為 Agent 原創設計，Keith 日後提供相片或描述時可替換。卡卡抱浠榆時必須有成人托住妹妹頭部。
-- **姨媽（2026-10-10，《珠海探妹妹》續集）**：虹姑姑的家姐，正式稱呼「姨媽」，唔好寫「妹媽」、唔好寫成「紅姑姑」或單稱「姑姑」。`docs/design/yima-character-reference-sheet.jpg` 同 `assets/family-stories/characters/yima-turnaround.webp`；暫為 Agent 原創設計，只記呢層關係，唔好加其他背景。服裝同髮型必須同虹姑姑（珊瑚紅開襟衫、較長頭髮）一眼分得開。
+- **爺爺（2026-10-18，《浠榆滿月派對》）**：Keith 提供家庭相片只作造型參考，唔嵌入網站。本篇用「爺爺」：光頭、無眼鏡、米色 polo、卡其長褲。設定圖 `docs/design/yeye-character-reference-sheet.jpg`，三視圖 `assets/family-stories/characters/yeye-turnaround.webp`。舊篇「公公」（銀髮眼鏡冷背心）造型保留，唔改已上線插圖。
+- **姨媽（2026-10-10，《珠海探妹妹》續集）**：虹姑姑的家姐，正式稱呼「姨媽」，唔好寫「妹媽」、唔好寫成「紅姑姑」或單稱「姑姑」。`docs/design/yima-character-reference-sheet.jpg` 同 `assets/family-stories/characters/yima-turnaround.webp`；暫為 Agent 原創設計，只記呢層關係，唔好加其他背景。服裝同髮型必須同虹姑姑（珊瑚紅開襟衫、較長頭髮）一眼分得開。滿月篇按 Keith 相片改白 T 恤、較長黑髮，仍然要同虹姑姑珊瑚紅開襟一眼分得開。
 - 不改角色的髮型、主色服裝、臉型或年齡感；角色身高用相同地面基線校準。
 - 圖中不生成中文字、拼音或對話框；文字由 HTML 顯示。
 - 每篇故事中的角色衣服固定，不因格數改變；避免背景角色被誤認為主角。

@@ -37,6 +37,7 @@ body {
 .story-title { display: block; font-size: 1.25rem; margin: 0 0 8px; }
 .story-card p { margin: 4px 0; color: var(--muted); }
 .story-card .card-words { font-size: .9rem; }
+.story-card .card-cta { color: var(--mint); font-weight: 800; margin-top: 8px; }
 .story-card .art-note { color: #ffe89a; font-size: .88rem; font-weight: 800; }
 .done-tag { color: var(--gold); font-weight: 800; }
 .cast-section { margin-top: 46px; }
