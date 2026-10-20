@@ -30,9 +30,25 @@
   };
   const setReadingChrome = on => {
     $('story-topbar').classList.toggle('is-reading', on);
+    document.querySelector('.storybook-shell')?.classList.toggle('is-reading', on);
     $('brand-title').textContent = on && current ? storyHeading(current) : libraryTitle;
     const back = $('back-chinese');
     if (back) back.setAttribute('href', on ? '#library' : 'index.html#screen-topics');
+  };
+  const isMuted = () => Boolean(window.KakaStorage?.loadState?.()?.muted);
+  function speakPlacedChip(word, correct) {
+    speech.unlockSpeech?.();
+    speech.warmAudio?.();
+    const muted = isMuted();
+    if (correct && speech.speakThen && speech.playCorrectCue) {
+      speech.speakThen(word, { muted, lang: 'zh-HK' }, () => speech.playCorrectCue({ muted }));
+      return;
+    }
+    if (speech.speakTerm) {
+      speech.speakTerm(word, { muted, lang: 'zh-HK' });
+      return;
+    }
+    speakStory(word);
   };
   const refreshStars = () => {
     const playableIds = new Set(stories.map(story => story.id));
@@ -334,7 +350,7 @@
         let index = activeSlot;
         if (state.answers[index]) index = state.answers.findIndex(value => !value);
         if (index < 0) return;
-        speakStory(word);
+        speakPlacedChip(word, word === activeSlots[index]);
         state.answers[index] = word;
         activeSlot = state.answers.findIndex(value => !value);
         if (activeSlot < 0) activeSlot = index;

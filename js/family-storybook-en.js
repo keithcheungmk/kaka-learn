@@ -15,6 +15,7 @@
   };
   const setReadingChrome = on => {
     $('story-topbar').classList.toggle('is-reading', on);
+    document.querySelector('.storybook-shell')?.classList.toggle('is-reading', on);
     $('brand-title').textContent = on && current ? storyHeading(current) : libraryTitle;
     const back = $('back-english');
     if (back) back.setAttribute('href', on ? '#library' : 'index.html#screen-story-series');

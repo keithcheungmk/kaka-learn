@@ -1156,6 +1156,13 @@ def check_family_storybook_entry() -> None:
         fail("family-storybook", "詞語池順序要喺入頁時固定，撳字磚／答錯／提交唔好再 shuffle")
     if story_js.count("shuffle(") != 1:
         fail("family-storybook", "shuffle() 只可以喺入頁第一次組詞語池時叫一次")
+    if "speakPlacedChip" not in story_js or "speakThen" not in story_js or "playCorrectCue" not in story_js:
+        fail("family-storybook", "答對填入空格要先粵語讀該詞，再叮一聲")
+    activity_html = story_html.split('id="activity"', 1)[-1].split('id="completion"', 1)[0]
+    if "reader-controls" not in activity_html or "next-page" not in activity_html:
+        fail("family-storybook", "下一頁要喺填詞欄附近，iPad 唔使捲先見到")
+    if ".storybook-shell.is-reading" not in story_css or "align-items: start" not in story_css:
+        fail("family-storybook", "閱讀頁要收緊詞語池／句子／下一頁間距")
     node = shutil.which("node")
     if node:
         result = subprocess.run([node, "scripts/test-family-storybook.mjs"], capture_output=True, text=True)

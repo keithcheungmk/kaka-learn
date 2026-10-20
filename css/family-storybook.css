@@ -53,7 +53,7 @@ body {
 .page-count { color: var(--mint); white-space: nowrap; }
 .progress-track { height: 8px; border-radius: 10px; background: #24345f; overflow: hidden; margin: 0 0 18px; }
 .progress-track span { height: 100%; display: block; width: 16.67%; background: linear-gradient(90deg,var(--mint),#74e3a1); transition: width .2s; }
-.lesson-spread { display: grid; grid-template-columns: minmax(0,3fr) minmax(360px,2fr); gap: 18px; align-items: stretch; }
+.lesson-spread { display: grid; grid-template-columns: minmax(0,3fr) minmax(360px,2fr); gap: 18px; align-items: start; }
 .book-page,.activity { min-width: 0; border: 1px solid #3b6ead; border-radius: 24px; background: rgba(17,29,68,.96); padding: 20px; }
 .panel-label { color: var(--mint); font-weight: 900; letter-spacing: .06em; margin: 0 0 12px; }
 .scene-frame { margin: 0; }
@@ -102,7 +102,9 @@ button:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
 @keyframes ranger-arrives { 0% { opacity: 0; transform: translate(34px,18px) rotate(12deg) scale(.65); } 55% { opacity: 1; transform: translate(-4px,-3px) rotate(-5deg) scale(1.06); } 100% { opacity: 1; transform: translate(0,0) rotate(0) scale(1); } }
 @keyframes star-draw { 72% { fill: transparent; stroke-dashoffset: 0; } 100% { fill: var(--gold); stroke-dashoffset: 0; } }
 .guardian-unlock { display: block; width: 100%; margin-top: 8px; border: 1px solid var(--gold); border-radius: 12px; padding: 10px 12px; color: var(--gold); background: #282c4c; font: inherit; font-weight: 800; cursor: pointer; }
-.reader-controls { display: flex; justify-content: space-between; margin: 18px 0 32px; }
+.reader-controls { display: flex; justify-content: space-between; gap: 10px; margin: 8px 0 0; }
+.reader-controls .primary-button,
+.reader-controls .secondary-button { min-height: 48px; }
 .completion { text-align: center; }
 .completion h3 { font-size: clamp(1.5rem, 3vw, 2rem); margin: 8px 0 0; color: var(--gold); }
 .completion #completion-summary { color: var(--muted); margin: 8px 0 0; }
@@ -111,11 +113,32 @@ button:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
 .hidden { display: none!important; }
 footer { margin-top: 35px; color: #94a4ce; text-align: center; font-size: .86rem; }
 button:focus-visible,a:focus-visible,select:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.storybook-shell.is-reading { padding: 10px 0 16px; }
+.storybook-shell.is-reading .progress-track { margin-bottom: 8px; }
+.storybook-shell.is-reading .lesson-spread { gap: 10px 14px; }
+.storybook-shell.is-reading .book-page,
+.storybook-shell.is-reading .activity { padding: 12px 14px; }
+.storybook-shell.is-reading .panel-label { margin-bottom: 6px; }
+.storybook-shell.is-reading .activity h3 { margin: 0 0 6px; font-size: clamp(1.15rem, 2vw, 1.45rem); }
+.storybook-shell.is-reading .task-instruction { margin: 0 0 6px; }
+.storybook-shell.is-reading .task-sentence { min-height: 72px; padding: 10px 12px; line-height: 1.55; }
+.storybook-shell.is-reading .task-sentence-speaker { margin-top: 6px; min-height: 44px; }
+.storybook-shell.is-reading .word-bank-wrap { margin-top: 8px; }
+.storybook-shell.is-reading .word-bank-wrap h4 { margin-bottom: 6px; }
+.storybook-shell.is-reading .word-bank { min-height: 56px; padding: 8px; gap: 8px; }
+.storybook-shell.is-reading .task-actions { margin-top: 8px; }
+.storybook-shell.is-reading .task-feedback { margin-top: 6px; min-height: 1.2em; }
+.storybook-shell.is-reading .reader-controls { margin-top: 8px; }
+.storybook-shell.is-reading .audio-feedback { margin-bottom: 6px; }
 @media(max-width:850px) {
   .storybook-shell { width: min(100% - 20px,700px); padding-top: 12px; }
   .story-grid { grid-template-columns: 1fr; }
   .lesson-spread { grid-template-columns: 1fr; }
   .scene-frame img { aspect-ratio: 1.45; }
+  .storybook-shell.is-reading .scene-frame img { aspect-ratio: 1.78; }
+  .storybook-shell.is-reading .activity h3 { display: none; }
+  .storybook-shell.is-reading .page-reading { font-size: 1.35rem; margin: 0 0 4px; }
+  .storybook-shell.is-reading .scene-frame figcaption { padding: 4px; }
   .page-count { padding: 8px; font-size: .9rem; }
   .topbar.is-reading .brand h1 { font-size: 1.15rem; }
   .section-heading { display: block; }
