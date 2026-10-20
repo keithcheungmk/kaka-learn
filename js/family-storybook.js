@@ -1,6 +1,8 @@
 (() => {
   'use strict';
-  const stories = window.FAMILY_STORIES || [];
+  const allStories = window.FAMILY_STORIES || [];
+  const isPlayable = story => !story.hidden && !story.retired;
+  const stories = allStories.filter(isPlayable);
   const bookTitles = {rb_anan:'《貪吃的安安》',rb_dongdong:'《冬冬請客》',rb_fenguo:'《分果果》',rb_fengwan:'《風跟我玩》',rb_huangye:'《黃葉》',rb_kuaipao:'《快跑呀》',rb_qiqiu:'《我的氣球呢？》',rb_shuijiao:'《誰在叫？》',rb_xiaoming:'《小明和氣球》',rb_xin:'《信》',rb_yishuhua:'《一束花》',rb_yusan:'《雨傘》'};
   const cast = [
     ['卡卡','4歲・106 cm','短黑髮；黃衣深藍邊','kaka-turnaround.webp'],
@@ -33,7 +35,9 @@
     if (back) back.setAttribute('href', on ? '#library' : 'index.html#screen-topics');
   };
   const refreshStars = () => {
-    $('star-total').textContent = safeRead(finishedKey).length;
+    const playableIds = new Set(stories.map(story => story.id));
+    const finished = safeRead(finishedKey).filter(id => playableIds.has(id));
+    $('star-total').textContent = finished.length;
     const total = $('story-total');
     if (total) total.textContent = stories.length;
   };
@@ -55,8 +59,8 @@
     refreshStars();
   }
   function openStory(id) {
-    current = stories.find(story => story.id === id);
-    if (!current) return;
+    current = allStories.find(story => story.id === id);
+    if (!current || !isPlayable(current)) return;
     pageIndex = 0;
     pageStates = current.pages.map(page => ({ unlocked: false, solved: false, answers: Array(page.focusWords.length).fill('') }));
     library.classList.add('hidden'); reader.classList.remove('hidden'); $('completion').classList.add('hidden');

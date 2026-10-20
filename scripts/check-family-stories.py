@@ -7,7 +7,16 @@ manifest="global.window={};require('./data/family-stories/manifest.js');process.
 stories=json.loads(subprocess.check_output(['node','-e',manifest],cwd=ROOT,text=True))
 errors=[]
 def norm(text): return re.sub(r'[，。！？、\s]','',text)
-if len(stories)!=21: errors.append(f'Expected 21 stories, found {len(stories)}')
+HIDDEN_IDS={'park-kite','red-balloon','zhuhai-aquarium','chimelong-safari'}
+if len(stories)!=21: errors.append(f'Expected 21 stories in catalog, found {len(stories)}')
+playable=[story for story in stories if not story.get('hidden') and not story.get('retired')]
+if len(playable)!=17: errors.append(f'Expected 17 playable stories, found {len(playable)}')
+for hid in sorted(HIDDEN_IDS):
+    story=next((item for item in stories if item.get('id')==hid), None)
+    if not story: errors.append(f'missing retired story {hid}')
+    elif not story.get('hidden') and not story.get('retired'): errors.append(f'{hid} must set hidden or retired so kids do not see it on the shelf')
+if any(story.get('id') in HIDDEN_IDS for story in playable):
+    errors.append('hidden/retired stories must not appear in the playable shelf list')
 for story in stories:
     label=story.get('id','?')
     if len(story.get('pages',[])) not in range(6,9): errors.append(f'{label}: page count must be 6-8')
@@ -72,4 +81,4 @@ for story in stories:
 if errors:
     print('\n'.join('FAIL: '+e for e in errors));sys.exit(1)
 total_pages=sum(len(story.get('pages',[])) for story in stories)
-print(f'PASS: {len(stories)} stories; {total_pages} pages total (6-8 each); source words, classified learning words, answer tiles and art paths validated.')
+print(f'PASS: {len(stories)} stories in catalog ({len(playable)} playable, {len(stories)-len(playable)} hidden); {total_pages} pages total (6-8 each); source words, classified learning words, answer tiles and art paths validated.')

@@ -29,9 +29,22 @@ assert.doesNotMatch(afterHeard, /audioLocked\s*=\s*true/);
 assert.doesNotMatch(afterHeard, /speakStory\(/);
 assert.match(celebrateCss, /position:\s*fixed/);
 assert.match(css, /min-height:\s*52px/);
+assert.match(js, /!story\.hidden && !story\.retired/);
+assert.match(css, /\.word-choice[\s\S]*transform:\s*none/);
+assert.doesNotMatch(css, /\.word-choice:not\(:disabled\):hover[^}]*transform:\s*translateY/);
+assert.doesNotMatch(css, /@keyframes\s+[^{]*(shake|bounce|pulse|flash|wiggle)/i);
 
 const context = { window: {} };
 vm.runInNewContext(read('data/family-stories/manifest.js'), context);
+const hiddenIds = ['park-kite', 'red-balloon', 'zhuhai-aquarium', 'chimelong-safari'];
+for (const id of hiddenIds) {
+  const retired = context.window.FAMILY_STORIES.find((item) => item.id === id);
+  assert.ok(retired, `要保留 ${id} 喺 catalog`);
+  assert.ok(retired.hidden || retired.retired, `${id} 要 hidden/retired，唔好出現喺書架`);
+}
+const playable = context.window.FAMILY_STORIES.filter((item) => !item.hidden && !item.retired);
+assert.equal(playable.length, 17);
+assert.equal(context.window.FAMILY_STORIES.length, 21);
 const story = context.window.FAMILY_STORIES.find((item) => item.id === 'xiyu-fullmoon-party');
 assert.ok(story, '要有浠榆滿月派對');
 assert.equal(story.pages[2].dialogue.speaker, '爸爸');

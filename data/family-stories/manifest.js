@@ -1,7 +1,7 @@
 /* Original KAKA family stories. Book words are linked to verified red-series word cards. */
 window.FAMILY_STORIES = [
   {
-    id:'park-kite', title:'公園裏的風箏', place:'香港公園', characters:['卡卡','禧禧','公園工作員（客串）'], sourceBooks:['rb_fengwan','rb_qiqiu'],
+    id:'park-kite', hidden:true, title:'公園裏的風箏', place:'香港公園', characters:['卡卡','禧禧','公園工作員（客串）'], sourceBooks:['rb_fengwan','rb_qiqiu'],
     bookWords:['風','風車','氣球','我的'], extensionWords:["風箏","草地","線","公園","吹起","跑","收好","工作員","取下","來到","拿着","長長的","幫忙","扶住","線軸"],
     summary:'一陣風吹起風箏，卡卡和禧禧學會一起拿穩風箏線。',
     pages:[
@@ -27,7 +27,7 @@ window.FAMILY_STORIES = [
     ]
   },
   {
-    id:'red-balloon', title:'紅氣球飛到樹上', place:'社區公園', characters:['卡卡','傑叔叔'], sourceBooks:['rb_qiqiu','rb_xiaoming'],
+    id:'red-balloon', hidden:true, title:'紅氣球飛到樹上', place:'社區公園', characters:['卡卡','傑叔叔'], sourceBooks:['rb_qiqiu','rb_xiaoming'],
     bookWords:['紅','氣球','飛走','飛到','我的'], extensionWords:["樹枝","風大","打結","天空","方向","取回","指着","交給"],
     summary:'氣球被風吹走，父子沿着方向尋找，最後安全取回。',
     pages:[
@@ -66,7 +66,7 @@ window.FAMILY_STORIES = [
     ]
   },
   {
-    id:'zhuhai-aquarium', title:'珠海水族館探險', place:'珠海水族館', characters:['卡卡','禧禧','耀叔叔'], sourceBooks:['rb_shuijiao','rb_dongdong','rb_xin'],
+    id:'zhuhai-aquarium', hidden:true, title:'珠海水族館探險', place:'珠海水族館', characters:['卡卡','禧禧','耀叔叔'], sourceBooks:['rb_shuijiao','rb_dongdong','rb_xin'],
     bookWords:['魚','小狗','媽媽','爸爸'], extensionWords:["水族館","海豚","海龜","水母","水","海","小魚","看見","一起","帶","玻璃","一隻","一條","游來游去","拍照","留念"],
     summary:'耀叔叔帶兩個孩子在水族館觀察海洋動物，最後合照留念。',
     pages:[
@@ -92,7 +92,7 @@ window.FAMILY_STORIES = [
     ]
   },
   {
-    id:'chimelong-safari', title:'長隆野生動物世界', place:'廣州長隆', characters:['卡卡','禧禧','耀叔叔'], sourceBooks:['rb_kuaipao','rb_shuijiao','rb_dongdong'],
+    id:'chimelong-safari', hidden:true, title:'長隆野生動物世界', place:'廣州長隆', characters:['卡卡','禧禧','耀叔叔'], sourceBooks:['rb_kuaipao','rb_shuijiao','rb_dongdong'],
     bookWords:['小鹿','老虎','兔子','獅子','叫','誰','在'], extensionWords:["長頸鹿","大象","望遠鏡","動物園","斑馬","猴子","快跑","看見","走來","安全區","動物","參觀","遠處","慢慢","聽見","叫聲","觀看","記下","安靜地"],
     summary:'在安全區用望遠鏡安靜觀看，聽叫聲、記下今天看見的動物。',
     pages:[

@@ -1142,6 +1142,16 @@ def check_family_storybook_entry() -> None:
         fail("family-storybook", "完成獎勵唔好捲去頁底")
     if "root: completion" not in story_js or "story-finish-actions" not in story_js:
         fail("family-storybook", "完成獎勵要喺正中 completion 層播，播完先出掣")
+    for hid in ("park-kite", "red-balloon", "zhuhai-aquarium", "chimelong-safari"):
+        if f"id:'{hid}', hidden:true" not in manifest and f'id:"{hid}", hidden:true' not in manifest:
+            fail("family-storybook", f"{hid} 要 hidden:true，小朋友書架唔好見到")
+    if "!story.hidden && !story.retired" not in story_js:
+        fail("family-storybook", "書架要過濾 hidden/retired 故事")
+    hover = re.search(r"\.word-choice:not\(:disabled\):hover[\s\S]*?\}", story_css)
+    if hover and re.search(r"translateY|animation\s*:", hover.group(0)):
+        fail("family-storybook", "詞語池 word-choice 唔可以 bounce／flash／shake")
+    if re.search(r"@keyframes[^{]*(shake|bounce|pulse|flash|wiggle)", story_css, re.I):
+        fail("family-storybook", "家庭故事 CSS 唔好用 shake／bounce／pulse／flash keyframes 喺詞語掣")
     node = shutil.which("node")
     if node:
         result = subprocess.run([node, "scripts/test-family-storybook.mjs"], capture_output=True, text=True)
