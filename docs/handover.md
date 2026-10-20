@@ -36,7 +36,6 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 家庭日記詞語池順序＋答對叮聲＋下一頁貼填詞 | Cursor Chief Lead（Chinese 範圍） | `js/family-storybook.js`, `css/family-storybook.css`, `family-storybook.html`, `scripts/test-family-storybook.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-20 | #157 follow-up：shuffle 只入頁一次；答對填詞先粵語再叮；iPad「下一頁」貼住填詞欄 |
 | 故事閱讀頁「← 中文」返回書目 | Cursor Chief Lead（Chinese 範圍） | `family-storybook.html`, `js/family-storybook.js`, `scripts/check-invariants.py`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-11 | Keith：閱讀頁左上「← 中文」返 #library，唔跳中文主題根；唔自 merge |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
 | 故事 focus 優化（浠榆初生＋迪士尼／國慶合照拆開） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/hongkong-disney-p06.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准：初生篇保留洗澡、淡化珠海／月子中心／睡覺；迪士尼對齊地圖／城堡／排隊／紀念品／合照照片；國慶唔再 focus 合照／照片。開 PR，唔自 merge。 |
@@ -109,6 +108,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-10-20 · Cursor Chief Lead（#158 詞語池固定＋答對叮聲＋下一頁貼填詞）
+
+- 入頁先 shuffle 一次，撳字磚／答錯／提交／重置唔再洗牌。
+- 填入正確重點詞：粵語讀該詞，讀完再 Web Audio「叮」；錯撳只讀詞。
+- 「下一頁」放填詞欄下面，閱讀頁間距收緊；iPad 直／橫一屏見到。
+- #158 CI 綠後 fast-forward 入 `main`。
 
 ### 2026-10-20 · Cursor Chief Lead（#157 家庭日記：下架 4 本＋婆婆／禧禧造型＋詞語池静止）
 
