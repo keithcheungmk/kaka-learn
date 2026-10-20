@@ -43,8 +43,16 @@ for (const id of hiddenIds) {
   assert.ok(retired.hidden || retired.retired, `${id} 要 hidden/retired，唔好出現喺書架`);
 }
 const playable = context.window.FAMILY_STORIES.filter((item) => !item.hidden && !item.retired);
-assert.equal(playable.length, 17);
-assert.equal(context.window.FAMILY_STORIES.length, 21);
+assert.equal(playable.length, 18);
+assert.equal(context.window.FAMILY_STORIES.length, 22);
+const farm = context.window.FAMILY_STORIES.find((item) => item.id === 'zhongshan-happy-farm');
+assert.ok(farm, '要有中山開心農莊');
+assert.equal(farm.pages.length, 8);
+assert.equal(farm.hidden, undefined);
+assert.ok(farm.characters.includes('蛙蛙'));
+assert.ok(farm.characters.includes('禧禧'));
+assert.doesNotMatch(JSON.stringify(farm), /娃娃/);
+assert.equal(farm.pages[3].focusWords[0], '拖拉機');
 const story = context.window.FAMILY_STORIES.find((item) => item.id === 'xiyu-fullmoon-party');
 assert.ok(story, '要有浠榆滿月派對');
 assert.equal(story.pages[2].dialogue.speaker, '爸爸');

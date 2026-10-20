@@ -291,5 +291,21 @@ window.FAMILY_STORIES = [
       {"sentence":"中午大家去拱北口岸附近的酒樓吃飯，望見澳門。","tiles":["中午","大家","去","拱北","口岸","附近","的","酒樓","吃飯","，","望見","澳門","。"],"learn":["口岸","澳門"],"distractors":["機場","深圳"],"focusWords":["口岸","澳門"],"dialogue":{"speaker":"卡卡","text":"酒樓窗外望到澳門，好漂亮！"},"image":"assets/family-stories/scenes/xiyu-fullmoon-party-p07.webp"},
       {"sentence":"傍晚，爺爺、婆婆和姨媽坐專車一起回港。","tiles":["傍晚","，","爺爺","、","婆婆","和","姨媽","坐","專車","一起","回港","。"],"learn":["專車","回港"],"distractors":["巴士","留下"],"focusWords":["專車","回港"],"dialogue":{"speaker":"婆婆","text":"我們坐專車回去，下次再來看你！"},"image":"assets/family-stories/scenes/xiyu-fullmoon-party-p08.webp"}
     ]
+  },
+  {
+    id:'zhongshan-happy-farm', title:'中山開心農莊', place:'中山開心農莊',
+    characters:['卡卡','禧禧','蛙蛙','傑叔叔','耀叔叔','媽媽','爸爸','叔叔（客串）'], sourceBooks:[], bookWords:[],
+    extensionWords:['爸爸媽媽','帶','卡卡','坐車','去','中山','和','禧禧','蛙蛙','耀叔叔','一家','飲茶','吃','馬拉糕','蝦餃','還有','黃色','雨傘','果凍','修車','換','輪胎','傑叔叔','大家','開心農莊','農莊','買了','門票','一人','一架','電動','拖拉機','在','草地','來回','開','坐着','滑草板','從','草坡','滑下來','用','乾粟米','胡蘿蔔','豆子','餵','白鴿','然後','洗手','各摘','一串','葡萄','放進','籃子','看見','山羊','孔雀','鴕鳥','把','楊桃','交給','叔叔','回珠海','吃晚飯','再','回香港'],
+    summary:'爸爸媽媽帶卡卡去中山，和禧禧、蛙蛙、耀叔叔一家飲茶；之後去開心農莊開拖拉機、滑草、餵白鴿、摘葡萄、看鴕鳥，再回珠海吃晚飯，一起回香港。',
+    pages:[
+      {"sentence":"爸爸媽媽帶卡卡坐車去中山，和禧禧、蛙蛙、耀叔叔一家飲茶。","tiles":["爸爸媽媽","帶","卡卡","坐車","去","中山","，","和","禧禧","、","蛙蛙","、","耀叔叔","一家","飲茶","。"],"learn":["中山","飲茶"],"distractors":["珠海","睡覺"],"focusWords":["中山","飲茶"],"dialogue":{"speaker":"蛙蛙","text":"我們到中山飲茶啦！"},"image":"assets/family-stories/scenes/zhongshan-happy-farm-p01.webp"},
+      {"sentence":"卡卡和禧禧吃馬拉糕、蝦餃，還有黃色雨傘果凍。","tiles":["卡卡","和","禧禧","吃","馬拉糕","、","蝦餃","，","還有","黃色","雨傘","果凍","。"],"learn":["馬拉糕","蝦餃"],"distractors":["燒賣","雪糕"],"focusWords":["馬拉糕","蝦餃"],"dialogue":{"speaker":"禧禧","text":"黃色雨傘果凍好好吃！"},"image":"assets/family-stories/scenes/zhongshan-happy-farm-p02.webp"},
+      {"sentence":"耀叔叔去修車換輪胎，傑叔叔帶蛙蛙、禧禧和卡卡去開心農莊。","tiles":["耀叔叔","去","修車","換","輪胎","，","傑叔叔","帶","蛙蛙","、","禧禧","和","卡卡","去","開心農莊","。"],"learn":["輪胎","開心農莊"],"distractors":["雨傘","酒店"],"focusWords":["輪胎","開心農莊"],"dialogue":{"speaker":"耀叔叔","text":"我去換輪胎，你們先去農莊玩。"},"image":"assets/family-stories/scenes/zhongshan-happy-farm-p03.webp"},
+      {"sentence":"卡卡和禧禧一人一架電動拖拉機，在草地來回開。","tiles":["卡卡","和","禧禧","一人","一架","電動","拖拉機","，","在","草地","來回","開","。"],"learn":["拖拉機","草地"],"distractors":["單車","沙池"],"focusWords":["拖拉機","草地"],"dialogue":{"speaker":"卡卡","text":"我的拖拉機開動了！"},"image":"assets/family-stories/scenes/zhongshan-happy-farm-p04.webp"},
+      {"sentence":"卡卡和禧禧坐着滑草板，從草坡滑下來。","tiles":["卡卡","和","禧禧","坐着","滑草板","，","從","草坡","滑下來","。"],"learn":["滑草板","草坡"],"distractors":["滑梯","沙堆"],"focusWords":["滑草板","草坡"],"dialogue":{"speaker":"禧禧","text":"從草坡滑下來，好好玩！"},"image":"assets/family-stories/scenes/zhongshan-happy-farm-p05.webp"},
+      {"sentence":"卡卡和禧禧用乾粟米、胡蘿蔔和豆子餵白鴿，然後洗手。","tiles":["卡卡","和","禧禧","用","乾粟米","、","胡蘿蔔","和","豆子","餵","白鴿","，","然後","洗手","。"],"learn":["白鴿","洗手"],"distractors":["孔雀","睡覺"],"focusWords":["白鴿","洗手"],"dialogue":{"speaker":"蛙蛙","text":"餵完白鴿要洗手哦！"},"image":"assets/family-stories/scenes/zhongshan-happy-farm-p06.webp"},
+      {"sentence":"禧禧和卡卡各摘一串葡萄，蛙蛙放進籃子。","tiles":["禧禧","和","卡卡","各摘","一串","葡萄","，","蛙蛙","放進","籃子","。"],"learn":["葡萄","籃子"],"distractors":["蘋果","盒子"],"focusWords":["葡萄","籃子"],"dialogue":{"speaker":"蛙蛙","text":"要用剪刀小心剪蒂哦！"},"image":"assets/family-stories/scenes/zhongshan-happy-farm-p07.webp"},
+      {"sentence":"大家看見山羊、孔雀和鴕鳥，卡卡把楊桃交給叔叔去餵。","tiles":["大家","看見","山羊","、","孔雀","和","鴕鳥","，","卡卡","把","楊桃","交給","叔叔","去","餵","。"],"learn":["鴕鳥","楊桃"],"distractors":["大象","西瓜"],"focusWords":["鴕鳥","楊桃"],"dialogue":{"speaker":"卡卡","text":"我們回珠海吃晚飯，再回香港！"},"image":"assets/family-stories/scenes/zhongshan-happy-farm-p08.webp"}
+    ]
   }
 ];

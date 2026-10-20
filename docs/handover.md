@@ -109,6 +109,12 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-20 · Cursor Chief Lead（中山開心農莊家庭日記）
+
+- 中文家庭日記新增八頁〈中山開心農莊〉（`zhongshan-happy-farm`）：飲茶、馬拉糕／蝦餃／雨傘果凍、耀叔叔換輪胎、電動拖拉機、滑草、餵白鴿洗手、摘葡萄、鴕鳥楊桃後回珠海再回港。
+- 新畫卡通場景 `assets/family-stories/scenes/zhongshan-happy-farm-p01.webp`–`p08.webp`；參考相只作構圖，唔嵌入網站。禧禧男孩、蛙蛙正名、唔改 #158 play UX、四本下架書維持 `hidden`。
+- Catalog 22 篇／150 頁，可玩 18 本。checks／書架總數已對齊。
+
 ### 2026-10-20 · Cursor Chief Lead（#157 家庭日記：下架 4 本＋婆婆／禧禧造型＋詞語池静止）
 
 - 中文書架 `hidden:true` 下架 `park-kite`／`red-balloon`／`zhuhai-aquarium`／`chimelong-safari`；catalog 仍 21 篇，可玩 17 本；資產同 localStorage 星留低。

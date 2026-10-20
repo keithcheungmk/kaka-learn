@@ -8,9 +8,9 @@ stories=json.loads(subprocess.check_output(['node','-e',manifest],cwd=ROOT,text=
 errors=[]
 def norm(text): return re.sub(r'[，。！？、\s]','',text)
 HIDDEN_IDS={'park-kite','red-balloon','zhuhai-aquarium','chimelong-safari'}
-if len(stories)!=21: errors.append(f'Expected 21 stories in catalog, found {len(stories)}')
+if len(stories)!=22: errors.append(f'Expected 22 stories in catalog, found {len(stories)}')
 playable=[story for story in stories if not story.get('hidden') and not story.get('retired')]
-if len(playable)!=17: errors.append(f'Expected 17 playable stories, found {len(playable)}')
+if len(playable)!=18: errors.append(f'Expected 18 playable stories, found {len(playable)}')
 for hid in sorted(HIDDEN_IDS):
     story=next((item for item in stories if item.get('id')==hid), None)
     if not story: errors.append(f'missing retired story {hid}')
