@@ -33,6 +33,10 @@ assert.match(js, /!story\.hidden && !story\.retired/);
 assert.match(css, /\.word-choice[\s\S]*transform:\s*none/);
 assert.doesNotMatch(css, /\.word-choice:not\(:disabled\):hover[^}]*transform:\s*translateY/);
 assert.doesNotMatch(css, /@keyframes\s+[^{]*(shake|bounce|pulse|flash|wiggle)/i);
+assert.match(js, /if \(!state\.wordPool\) \{[\s\S]*?state\.wordPool = shuffle\(/);
+assert.match(js, /const pool = state\.wordPool/);
+assert.equal([...js.matchAll(/\bshuffle\(/g)].length, 1, 'shuffle 只可以喺入頁第一次組詞語池時叫');
+assert.doesNotMatch(js, /addEventListener\('click'[\s\S]{0,500}shuffle\(/);
 
 const context = { window: {} };
 vm.runInNewContext(read('data/family-stories/manifest.js'), context);
