@@ -1152,6 +1152,17 @@ def check_family_storybook_entry() -> None:
         fail("family-storybook", "詞語池 word-choice 唔可以 bounce／flash／shake")
     if re.search(r"@keyframes[^{]*(shake|bounce|pulse|flash|wiggle)", story_css, re.I):
         fail("family-storybook", "家庭故事 CSS 唔好用 shake／bounce／pulse／flash keyframes 喺詞語掣")
+    if "if (!state.wordPool)" not in story_js or "state.wordPool = shuffle" not in story_js or "const pool = state.wordPool" not in story_js:
+        fail("family-storybook", "詞語池順序要喺入頁時固定，撳字磚／答錯／提交唔好再 shuffle")
+    if story_js.count("shuffle(") != 1:
+        fail("family-storybook", "shuffle() 只可以喺入頁第一次組詞語池時叫一次")
+    if "speakPlacedChip" not in story_js or "speakThen" not in story_js or "playCorrectCue" not in story_js:
+        fail("family-storybook", "答對填入空格要先粵語讀該詞，再叮一聲")
+    activity_html = story_html.split('id="activity"', 1)[-1].split('id="completion"', 1)[0]
+    if "reader-controls" not in activity_html or "next-page" not in activity_html:
+        fail("family-storybook", "下一頁要喺填詞欄附近，iPad 唔使捲先見到")
+    if ".storybook-shell.is-reading" not in story_css or "align-items: start" not in story_css:
+        fail("family-storybook", "閱讀頁要收緊詞語池／句子／下一頁間距")
     node = shutil.which("node")
     if node:
         result = subprocess.run([node, "scripts/test-family-storybook.mjs"], capture_output=True, text=True)
@@ -1321,6 +1332,10 @@ def check_family_storybook_en_entry() -> None:
         fail("family-storybook-en", "英文家庭故事唔好走粵語／普通話朗讀路徑")
     if "guardian-unlock" not in story_html or "guardian-unlock" not in story_js:
         fail("family-storybook-en", "播唔到語音時要保留家長朗讀後備")
+    if "if (!state.wordPool)" not in story_js or "state.wordPool = shuffle" not in story_js or "const pool = state.wordPool" not in story_js:
+        fail("family-storybook-en", "英文詞語池順序要喺入頁時固定，撳字磚唔好再 shuffle")
+    if story_js.count("shuffle(") != 1:
+        fail("family-storybook-en", "英文 shuffle() 只可以喺入頁第一次組詞語池時叫一次")
     node = shutil.which("node")
     if node:
         result = subprocess.run([sys.executable, "scripts/check-family-stories-en.py"], capture_output=True, text=True)

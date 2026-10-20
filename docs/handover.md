@@ -112,8 +112,15 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 ### 2026-10-20 · Cursor Chief Lead（中山開心農莊家庭日記）
 
 - 中文家庭日記新增八頁〈中山開心農莊〉（`zhongshan-happy-farm`）：飲茶、馬拉糕／蝦餃／雨傘果凍、耀叔叔換輪胎、電動拖拉機、滑草、餵白鴿洗手、摘葡萄、鴕鳥楊桃後回珠海再回港。
-- 新畫卡通場景 `assets/family-stories/scenes/zhongshan-happy-farm-p01.webp`–`p08.webp`；參考相只作構圖，唔嵌入網站。禧禧男孩、蛙蛙正名、唔改 #158 play UX、四本下架書維持 `hidden`。
-- Catalog 22 篇／150 頁，可玩 18 本。checks／書架總數已對齊。
+- 新畫卡通場景 `assets/family-stories/scenes/zhongshan-happy-farm-p01.webp`–`p08.webp`；參考相只作構圖，唔嵌入網站。禧禧男孩、蛙蛙正名、四本下架書維持 `hidden`。
+- Catalog 22 篇／150 頁，可玩 18 本。checks／書架總數已對齊。#159 已 merge `main`（#158 play UX：shuffle 一次／答對叮聲／下一頁貼填詞）入故事分支，唔改嗰套操作。
+
+### 2026-10-20 · Cursor Chief Lead（#158 詞語池固定＋答對叮聲＋下一頁貼填詞）
+
+- 入頁先 shuffle 一次，撳字磚／答錯／提交／重置唔再洗牌。
+- 填入正確重點詞：粵語讀該詞，讀完再 Web Audio「叮」；錯撳只讀詞。
+- 「下一頁」放填詞欄下面，閱讀頁間距收緊；iPad 直／橫一屏見到。
+- #158 CI 綠後 fast-forward 入 `main`。
 
 ### 2026-10-20 · Cursor Chief Lead（#157 家庭日記：下架 4 本＋婆婆／禧禧造型＋詞語池静止）
 

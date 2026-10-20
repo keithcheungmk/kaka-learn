@@ -15,6 +15,7 @@
   };
   const setReadingChrome = on => {
     $('story-topbar').classList.toggle('is-reading', on);
+    document.querySelector('.storybook-shell')?.classList.toggle('is-reading', on);
     $('brand-title').textContent = on && current ? storyHeading(current) : libraryTitle;
     const back = $('back-english');
     if (back) back.setAttribute('href', on ? '#library' : 'index.html#screen-story-series');
@@ -226,7 +227,10 @@
     $('task-sentence').replaceChildren(...pieces);
     $('speak-task-sentence').disabled = !state.unlocked || state.audioLocked || state.speechSequenceActive;
     const distractors = (page.distractors || []).slice(0, 2);
-    const pool = shuffle([...new Set([...activeSlots, ...distractors])]);
+    if (!state.wordPool) {
+      state.wordPool = shuffle([...new Set([...activeSlots, ...distractors])]);
+    }
+    const pool = state.wordPool;
     const bank = $('word-bank'); bank.replaceChildren();
     pool.forEach(word => {
       const button = document.createElement('button');
