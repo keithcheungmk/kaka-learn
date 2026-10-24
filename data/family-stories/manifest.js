@@ -296,6 +296,11 @@ window.FAMILY_STORIES = [
     id:'zhongshan-happy-farm', title:'中山開心農莊', place:'中山',
     characters:['卡卡','禧禧','蛙蛙','傑叔叔','耀叔叔','媽媽','爸爸','叔叔（客串）'], sourceBooks:[], bookWords:[],
     extensionWords:['爸爸媽媽','帶','卡卡','坐車','去','中山','和','禧禧','蛙蛙','耀叔叔','一家','飲茶','吃','馬拉糕','蝦餃','還有','黃色','雨傘','果凍','修車','換','輪胎','傑叔叔','大家','開心農莊','農莊','買了','門票','一人','一架','電動','拖拉機','在','草地','來回','開','坐着','滑草板','從','草坡','滑下來','用','乾粟米','胡蘿蔔','豆子','餵','白鴿','然後','洗手','各摘','一串','葡萄','放進','籃子','看見','山羊','孔雀','鴕鳥','把','楊桃','交給','叔叔','回珠海','吃晚飯','再','回香港'],
+    warmupPairs:[
+      {word:'拖拉機', image:'assets/family-stories/scenes/zhongshan-happy-farm-p04.webp'},
+      {word:'白鴿', image:'assets/family-stories/scenes/zhongshan-happy-farm-p06.webp'},
+      {word:'葡萄', image:'assets/family-stories/scenes/zhongshan-happy-farm-p07.webp'}
+    ],
     summary:'爸爸媽媽帶卡卡去中山，和禧禧、蛙蛙、耀叔叔一家飲茶；之後去開心農莊開拖拉機、滑草、餵白鴿、摘葡萄、看鴕鳥，再回珠海吃晚飯，一起回香港。',
     pages:[
       {"sentence":"爸爸媽媽帶卡卡坐車去中山，和禧禧、蛙蛙、耀叔叔一家飲茶。","tiles":["爸爸媽媽","帶","卡卡","坐車","去","中山","，","和","禧禧","、","蛙蛙","、","耀叔叔","一家","飲茶","。"],"learn":["中山","飲茶"],"distractors":["珠海","睡覺"],"focusWords":["中山","飲茶"],"dialogue":{"speaker":"蛙蛙","text":"我們到中山飲茶啦！"},"image":"assets/family-stories/scenes/zhongshan-happy-farm-p01.webp"},

@@ -21,19 +21,29 @@
   const speech = window.KakaSpeech || {};
   const libraryTitle = '卡卡和禧禧一齊玩';
   const heldUtters = [];
-  let current = null, pageIndex = 0, pageStates = [], activeUtterance = null, activeSpeechFallback = null, activeSpeechRetry = null, activeSlots = [], activeSlot = 0;
+  let current = null, pageIndex = 0, pageStates = [], activeUtterance = null, activeSpeechFallback = null, activeSpeechRetry = null, activeSlots = [], activeSlot = 0, warmupState = null, warmupMissTimer = null;
   const safeRead = key => { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } };
   const storyHeading = story => {
     const place = String(story?.place || '').trim();
     const title = String(story?.title || '').trim();
     return place ? `${place}：${title}` : title;
   };
-  const setReadingChrome = on => {
-    $('story-topbar').classList.toggle('is-reading', on);
-    document.querySelector('.storybook-shell')?.classList.toggle('is-reading', on);
-    $('brand-title').textContent = on && current ? storyHeading(current) : libraryTitle;
+  const storyWarmupPairs = story => {
+    const pairs = Array.isArray(story?.warmupPairs)
+      ? story.warmupPairs.filter(pair => pair && pair.word && pair.image)
+      : [];
+    return pairs.length ? pairs : null;
+  };
+  const setReadingChrome = (on, mode = on ? 'reading' : 'library') => {
+    const view = mode === 'warmup' ? 'warmup' : on ? 'reading' : 'library';
+    $('story-topbar').classList.toggle('is-reading', view === 'reading');
+    $('story-topbar').classList.toggle('is-warmup', view === 'warmup');
+    document.querySelector('.storybook-shell')?.classList.toggle('is-reading', view === 'reading');
+    document.querySelector('.storybook-shell')?.classList.toggle('is-warmup', view === 'warmup');
+    $('brand-title').textContent = view !== 'library' && current ? storyHeading(current) : libraryTitle;
     const back = $('back-chinese');
-    if (back) back.setAttribute('href', on ? '#library' : 'index.html#screen-topics');
+    if (back) back.setAttribute('href', view === 'library' ? 'index.html#screen-topics' : '#library');
+    if (view === 'warmup') $('page-count').textContent = '圖字熱身';
   };
   const isMuted = () => Boolean(window.KakaStorage?.loadState?.()?.muted);
   function speakPlacedChip(word, correct) {
@@ -79,9 +89,155 @@
     if (!current || !isPlayable(current)) return;
     pageIndex = 0;
     pageStates = current.pages.map(page => ({ unlocked: false, solved: false, answers: Array(page.focusWords.length).fill('') }));
-    library.classList.add('hidden'); reader.classList.remove('hidden'); $('completion').classList.add('hidden');
-    setReadingChrome(true);
-    renderPage(); window.scrollTo({top:0,behavior:'smooth'});
+    library.classList.add('hidden');
+    $('completion').classList.add('hidden');
+    if (storyWarmupPairs(current)) {
+      beginWarmup({ reset: true });
+      window.scrollTo({top:0,behavior:'smooth'});
+      return;
+    }
+    showReader();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function showReader() {
+    $('warmup')?.classList.add('hidden');
+    library.classList.add('hidden');
+    reader.classList.remove('hidden');
+    setReadingChrome(true, 'reading');
+    renderPage();
+  }
+  function beginWarmup({ reset = true } = {}) {
+    const pairs = storyWarmupPairs(current);
+    if (!pairs) {
+      showReader();
+      return;
+    }
+    if (reset || !warmupState || warmupState.storyId !== current.id) {
+      const indexes = pairs.map((_, index) => index);
+      warmupState = {
+        storyId: current.id,
+        pairs,
+        imageOrder: shuffle(indexes),
+        wordOrder: shuffle([...indexes]),
+        matched: new Set(),
+        selected: null,
+        miss: null,
+        done: false
+      };
+    }
+    if (warmupMissTimer) window.clearTimeout(warmupMissTimer);
+    warmupMissTimer = null;
+    library.classList.add('hidden');
+    reader.classList.add('hidden');
+    $('warmup').classList.remove('hidden');
+    $('warmup-feedback').textContent = '';
+    $('warmup-feedback').classList.remove('success');
+    setReadingChrome(true, 'warmup');
+    renderWarmup();
+  }
+  function renderWarmup() {
+    if (!warmupState) return;
+    const { pairs, imageOrder, wordOrder, matched, selected, miss } = warmupState;
+    const pictures = $('warmup-pictures');
+    const words = $('warmup-words');
+    pictures.replaceChildren();
+    words.replaceChildren();
+    imageOrder.forEach((pairIndex, displayIndex) => {
+      const pair = pairs[pairIndex];
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'warmup-picture';
+      if (selected?.type === 'image' && selected.pairIndex === pairIndex) button.classList.add('is-selected');
+      if (matched.has(pairIndex)) button.classList.add('is-matched');
+      if (miss && miss.some(item => item.type === 'image' && item.pairIndex === pairIndex)) button.classList.add('is-miss');
+      button.disabled = matched.has(pairIndex) || warmupState.done;
+      button.setAttribute('aria-label', `故事圖 ${displayIndex + 1}`);
+      const image = document.createElement('img');
+      image.src = pair.image;
+      image.alt = '';
+      image.width = 900;
+      image.height = 600;
+      button.append(image);
+      button.addEventListener('click', () => pickWarmup('image', pairIndex));
+      pictures.append(button);
+    });
+    wordOrder.forEach(pairIndex => {
+      const pair = pairs[pairIndex];
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'warmup-word';
+      button.textContent = pair.word;
+      if (selected?.type === 'word' && selected.pairIndex === pairIndex) button.classList.add('is-selected');
+      if (matched.has(pairIndex)) button.classList.add('is-matched');
+      if (miss && miss.some(item => item.type === 'word' && item.pairIndex === pairIndex)) button.classList.add('is-miss');
+      button.disabled = matched.has(pairIndex) || warmupState.done;
+      button.addEventListener('click', () => pickWarmup('word', pairIndex));
+      words.append(button);
+    });
+    $('warmup-progress').textContent = `已配對 ${matched.size}／${pairs.length}`;
+  }
+  function pickWarmup(type, pairIndex) {
+    if (!warmupState || warmupState.done || warmupState.matched.has(pairIndex)) return;
+    const selected = warmupState.selected;
+    if (!selected) {
+      warmupState.selected = { type, pairIndex };
+      warmupState.miss = null;
+      renderWarmup();
+      return;
+    }
+    if (selected.type === type) {
+      warmupState.selected = selected.pairIndex === pairIndex ? null : { type, pairIndex };
+      warmupState.miss = null;
+      renderWarmup();
+      return;
+    }
+    if (selected.pairIndex === pairIndex) {
+      warmupState.matched.add(pairIndex);
+      warmupState.selected = null;
+      warmupState.miss = null;
+      speakPlacedChip(warmupState.pairs[pairIndex].word, true);
+      if (warmupState.matched.size === warmupState.pairs.length) {
+        warmupState.done = true;
+        $('warmup-feedback').textContent = '配齊喇！而家入故事。';
+        $('warmup-feedback').classList.add('success');
+        renderWarmup();
+        window.setTimeout(() => {
+          if (current && warmupState?.done) showReader();
+        }, 900);
+        return;
+      }
+      $('warmup-feedback').textContent = '';
+      renderWarmup();
+      return;
+    }
+    warmupState.miss = [
+      { type: selected.type, pairIndex: selected.pairIndex },
+      { type, pairIndex }
+    ];
+    warmupState.selected = null;
+    $('warmup-feedback').textContent = '';
+    renderWarmup();
+    if (warmupMissTimer) window.clearTimeout(warmupMissTimer);
+    warmupMissTimer = window.setTimeout(() => {
+      if (!warmupState) return;
+      warmupState.miss = null;
+      renderWarmup();
+    }, 220);
+  }
+  function leaveWarmup() {
+    stopSpeech();
+    if (warmupMissTimer) window.clearTimeout(warmupMissTimer);
+    warmupMissTimer = null;
+    warmupState = null;
+    current = null;
+    $('warmup').classList.add('hidden');
+    $('warmup-feedback').textContent = '';
+    $('warmup-feedback').classList.remove('success');
+    library.classList.remove('hidden');
+    reader.classList.add('hidden');
+    setReadingChrome(false, 'library');
+    renderLibrary();
+    window.scrollTo({top:0,behavior:'smooth'});
   }
   function stopSpeech() {
     if (activeSpeechFallback) window.clearTimeout(activeSpeechFallback);
@@ -123,10 +279,16 @@
   function leaveReader() {
     stopSpeech();
     window.KakaCelebrate?.hide?.();
+    $('completion').classList.add('hidden');
+    if (current && storyWarmupPairs(current)) {
+      reader.classList.add('hidden');
+      beginWarmup({ reset: true });
+      window.scrollTo({top:0,behavior:'smooth'});
+      return;
+    }
     current = null;
     reader.classList.add('hidden');
     library.classList.remove('hidden');
-    $('completion').classList.add('hidden');
     setReadingChrome(false);
     renderLibrary();
     window.scrollTo({top:0,behavior:'smooth'});
@@ -141,6 +303,10 @@
   $('replay-story').addEventListener('click', replayCurrentStory);
   $('back-chinese').addEventListener('click', event => {
     event.preventDefault();
+    if ($('story-topbar').classList.contains('is-warmup')) {
+      leaveWarmup();
+      return;
+    }
     if ($('story-topbar').classList.contains('is-reading')) {
       leaveReader();
       return;
@@ -426,7 +592,17 @@
       muted: Boolean(window.KakaStorage?.loadState?.()?.muted),
     });
   }
+  function storyIdFromLocation() {
+    try {
+      const queryId = new URLSearchParams(location.search).get('story');
+      if (queryId) return queryId;
+    } catch { /* ignore */ }
+    const hash = String(location.hash || '').replace(/^#/, '');
+    return hash && hash !== 'library' ? hash : '';
+  }
   speech.warmVoices?.();
   setReadingChrome(false);
   renderLibrary();
+  const bootStory = storyIdFromLocation();
+  if (bootStory) openStory(bootStory);
 })();

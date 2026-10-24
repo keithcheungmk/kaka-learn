@@ -36,7 +36,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 故事閱讀頁「← 中文」返回書目 | Cursor Chief Lead（Chinese 範圍） | `family-storybook.html`, `js/family-storybook.js`, `scripts/check-invariants.py`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-11 | Keith：閱讀頁左上「← 中文」返 #library，唔跳中文主題根；唔自 merge |
+| 中山開心農莊圖字配對熱身 | Cursor Chief Lead（Chinese 範圍） | `family-storybook.html`, `js/family-storybook.js`, `css/family-storybook.css`, `data/family-stories/manifest.js`, `scripts/check-invariants.py`, `scripts/test-family-storybook.mjs`, `docs/handover.md` | 2026-10-24 | Keith：只有農莊入填空前熱身；#158 答對叮聲；CI 綠自 merge |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
 | 故事 focus 優化（浠榆初生＋迪士尼／國慶合照拆開） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/hongkong-disney-p06.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准：初生篇保留洗澡、淡化珠海／月子中心／睡覺；迪士尼對齊地圖／城堡／排隊／紀念品／合照照片；國慶唔再 focus 合照／照片。開 PR，唔自 merge。 |
 | 主頁四科入口加入卡卡插畫 | ChatGPT／Codex | `index.html`, `css/styles.css`, `assets/home-subjects/`, `assets/image-formats.lock.json`, `docs/handover.md` | 2026-10-06 | Keith 已看過四科卡片 demo 並指示繼續；只改入口視覺，保留文字、連結與按鈕行為。 |
@@ -108,6 +108,12 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-10-24 · Cursor Chief Lead（中山開心農莊圖字配對熱身）
+
+- 《中山開心農莊》入填空前加「圖字配對熱身」：拖拉機／白鴿／葡萄，重用本篇 p04／p06／p07 場景圖；撳圖再撳字或調轉。
+- 答對重用 #158 `speakThen`＋`playCorrectCue`；答錯靜靜還原、唔洗牌；三對配齊先入原本填空。熱身唔另獎星／幣。
+- 頂欄「← 中文」熱身返書目、填空返熱身。試玩：`family-storybook.html?story=zhongshan-happy-farm`。
 
 ### 2026-10-20 · Cursor Chief Lead（中山開心農莊家庭日記）
 

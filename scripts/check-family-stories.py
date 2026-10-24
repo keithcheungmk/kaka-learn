@@ -78,6 +78,22 @@ for story in stories:
         if not speech.get('text') or not re.search(r'[。！？]$',speech.get('text','')): errors.append(f'{label} page {i}: dialogue must be a complete punctuated sentence')
     for asset in [f'{label}-p{i:02}.webp' for i in range(1,len(story.get('pages',[]))+1)]:
         if not (ROOT/'assets/family-stories/scenes'/asset).exists(): errors.append(f'{label}: missing art {asset}')
+    warmup=story.get('warmupPairs')
+    focus_words={word for page in story.get('pages',[]) for word in page.get('focusWords',[])}
+    if label=='zhongshan-happy-farm':
+        if not warmup or len(warmup)!=3: errors.append(f'{label}: farm pilot must have exactly 3 warmupPairs')
+    elif warmup:
+        errors.append(f'{label}: warmupPairs is a farm-only pilot')
+    if warmup:
+        seen=set()
+        for pair in warmup:
+            word=str(pair.get('word') or '')
+            image=str(pair.get('image') or '')
+            if word not in focus_words: errors.append(f'{label}: warmup word {word} must be a page focusWord')
+            if word in seen: errors.append(f'{label}: warmup word {word} is duplicated')
+            seen.add(word)
+            if not image.startswith(f'assets/family-stories/scenes/{label}-') or not (ROOT/image).exists():
+                errors.append(f'{label}: warmup image for {word} must be an existing story scene')
 if errors:
     print('\n'.join('FAIL: '+e for e in errors));sys.exit(1)
 total_pages=sum(len(story.get('pages',[])) for story in stories)

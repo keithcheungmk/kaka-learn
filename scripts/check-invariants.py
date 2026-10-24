@@ -1154,8 +1154,21 @@ def check_family_storybook_entry() -> None:
         fail("family-storybook", "家庭故事 CSS 唔好用 shake／bounce／pulse／flash keyframes 喺詞語掣")
     if "if (!state.wordPool)" not in story_js or "state.wordPool = shuffle" not in story_js or "const pool = state.wordPool" not in story_js:
         fail("family-storybook", "詞語池順序要喺入頁時固定，撳字磚／答錯／提交唔好再 shuffle")
-    if story_js.count("shuffle(") != 1:
-        fail("family-storybook", "shuffle() 只可以喺入頁第一次組詞語池時叫一次")
+    if story_js.count("shuffle(") != 3 or "imageOrder: shuffle" not in story_js or "wordOrder: shuffle" not in story_js:
+        fail("family-storybook", "shuffle() 只可以喺填詞池同熱身圖／字首次入頁各叫一次")
+    if 'id="warmup"' not in story_html or "圖字配對熱身" not in story_html or "beginWarmup" not in story_js:
+        fail("family-storybook", "《中山開心農莊》要有圖字配對熱身，配齊先入填空")
+    warmup_html = story_html.split('id="warmup"', 1)[-1].split('id="reader"', 1)[0]
+    if any(marker in warmup_html for marker in ("檢查", "Check", "生命", "愛心", "lives")):
+        fail("family-storybook", "熱身唔可以有檢查掣、生命或愛心")
+    if "图字" in story_html or "配对" in story_html or "热身" in story_html:
+        fail("family-storybook", "熱身介面要用繁體中文")
+    if "leaveWarmup" not in story_js or "is-warmup" not in story_js:
+        fail("family-storybook", "熱身頂欄←要返書目；填空有熱身要返熱身，唔好跳主頁")
+    if "speakPlacedChip(warmupState.pairs[pairIndex].word, true)" not in story_js:
+        fail("family-storybook", "熱身答對要重用填空粵語讀詞再叮聲")
+    if ".warmup-picture" not in story_css or "4 / 3" not in story_css or "object-fit: cover" not in story_css:
+        fail("family-storybook", "熱身插圖框要約 4:3 填滿，唔好左右大白邊")
     if "speakPlacedChip" not in story_js or "speakThen" not in story_js or "playCorrectCue" not in story_js:
         fail("family-storybook", "答對填入空格要先粵語讀該詞，再叮一聲")
     activity_html = story_html.split('id="activity"', 1)[-1].split('id="completion"', 1)[0]
