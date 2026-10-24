@@ -617,9 +617,27 @@ button:focus-visible {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  flex-shrink: 0;
 }
 .listen-actions .ghost-btn,
 .listen-actions .primary-btn { flex: 1; min-height: 52px; }
+@media (min-width: 901px) {
+  .listen-view {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(240px, .75fr);
+    grid-template-rows: auto 1fr auto auto;
+    align-items: stretch;
+    gap: 12px 14px;
+  }
+  .listen-view h2 { display: none; }
+  .listen-board {
+    grid-column: 1;
+    grid-row: 1 / 5;
+    flex: unset;
+  }
+  .listen-beat, .listen-line, .listen-actions { grid-column: 2; }
+  .listen-board .comic-panel img { aspect-ratio: 1.55; }
+}
 @keyframes slot-nudge {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-6px); }
