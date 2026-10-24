@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101c49">
+  <title>Karl, HeiHei and Froggie｜English Family Stories</title>
+  <link rel="stylesheet" href="css/family-storybook.css">
+  <link rel="stylesheet" href="css/family-storybook-en.css">
+  <link rel="stylesheet" href="css/celebrate-finish.css?v=4c78096">
+</head>
+<body>
+  <main class="storybook-shell">
+    <header class="topbar" id="story-topbar">
+      <a id="back-english" class="back-link" href="index.html#screen-story-series">← English</a>
+      <div class="brand">
+        <span id="brand-kicker">Family Stories · English</span>
+        <h1 id="brand-title">Karl, HeiHei and Froggie</h1>
+      </div>
+      <div class="star-total" id="star-pill" aria-live="polite">⭐ <strong id="star-total">0</strong> / <span id="story-total">2</span></div>
+      <div id="page-count" class="page-count">Page 1 / 6</div>
+    </header>
+    <section id="library" class="view" aria-labelledby="library-heading">
+      <div class="intro">
+        <p class="eyebrow">Listen · Read · Fill two words</p>
+        <h2 id="library-heading">Which story today?</h2>
+        <p>每個故事有 6 頁。先聽英文句子，再把兩個重點詞放回句子。</p>
+      </div>
+      <div id="story-grid" class="story-grid"></div>
+    </section>
+    <section id="reader" class="view hidden" aria-labelledby="brand-title">
+      <div class="progress-track"><span id="page-progress"></span></div>
+      <section class="lesson-spread" aria-label="Story page and word task">
+        <article class="book-page">
+          <p class="panel-label">Story reading</p>
+          <figure class="scene-frame"><img id="scene-image" alt="Story illustration"><figcaption id="scene-caption"></figcaption></figure>
+          <div class="sentence-row"><p id="page-reading" class="page-reading"></p><button id="speak-sentence" class="speak-button" type="button">🔊 Listen</button></div>
+          <p id="audio-feedback" class="audio-feedback" aria-live="polite"></p>
+        </article>
+        <section id="activity" class="activity" aria-labelledby="activity-heading">
+          <p class="panel-label">Word task</p>
+          <p id="task-instruction" class="task-instruction">Listen to the page, then put the two focus words back.</p>
+          <h3 id="activity-heading">Listen, then fill two words</h3>
+          <p id="task-sentence" class="task-sentence" aria-label="Fill-in sentence"></p>
+          <button id="speak-task-sentence" class="speak-button task-sentence-speaker" type="button" disabled>🔊 Hear the sentence</button>
+          <div class="word-bank-wrap"><h4>Word bank</h4><div id="word-bank" class="word-bank" aria-label="Word choices"></div></div>
+          <div class="task-actions"><button id="reset-page" class="secondary-button" type="button">Reset words</button><button id="submit-page" class="primary-button" type="button">Submit</button></div>
+          <p id="task-feedback" class="task-feedback" role="status" aria-live="polite"></p>
+          <div id="answer-celebration" class="answer-celebration hidden" aria-hidden="true">
+            <img src="assets/kaka-ranger-celebrate.png" alt="">
+            <svg viewBox="0 0 100 100" focusable="false"><path d="M50 5 L61 38 L96 38 L68 59 L79 93 L50 72 L21 93 L32 59 L4 38 L39 38 Z"></path></svg>
+          </div>
+          <button id="guardian-unlock" class="guardian-unlock hidden" type="button">A parent can read this page</button>
+          <nav class="reader-controls" aria-label="Story page navigation"><button id="prev-page" class="secondary-button" type="button">← Back</button><button id="next-page" class="primary-button" type="button" disabled>Next →</button></nav>
+        </section>
+      </section>
+      <section id="completion" class="completion hidden" aria-live="polite"><div class="completion-star">⭐</div><h3>Story complete!</h3><p id="completion-summary"></p><button id="next-story" class="primary-button" type="button">Back to stories</button></section>
+    </section>
+  </main>
+  <script src="js/speech.js?v=4c78096"></script>
+  <script src="js/celebrate-finish.js?v=4c78096"></script>
+  <script src="js/nav-back.js?v=4c78096"></script>
+  <script src="data/family-stories/manifest-en.js?v=4c78096"></script>
+  <script src="js/family-storybook-en.js?v=4c78096"></script>
+</body>
+</html>
