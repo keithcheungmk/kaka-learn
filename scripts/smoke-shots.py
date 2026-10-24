@@ -669,15 +669,25 @@ def walk(pg, url, shots: Path | None, tag: str):
     rewrite = (pg.text_content("#btn-rewrite") or "").strip()
     if rewrite != "再寫一次":
         raise RuntimeError(f"Rewrite button must be 「再寫一次」, got {rewrite!r}")
+    rest = (pg.text_content("#btn-write-rest") or "").strip()
+    if rest != "休息一下":
+        raise RuntimeError(f"Write screen must offer 休息一下, got {rest!r}")
     write_metrics = pg.evaluate(
         """() => {
           const d = document.documentElement;
           const start = document.querySelector('#btn-rewrite')?.getBoundingClientRect();
+          const restBtn = document.querySelector('#btn-write-rest')?.getBoundingClientRect();
+          window.KakaHanziWrite?.showActiveStrokeGuide?.(0);
+          const guide = document.querySelector('#hanzi-guide path');
           return {
             overflowX: d.scrollWidth - d.clientWidth,
             overflowY: d.scrollHeight - d.clientHeight,
             tap: Math.min(start?.width || 0, start?.height || 0),
+            restTap: Math.min(restBtn?.width || 0, restBtn?.height || 0),
             writerKids: document.querySelector('#hanzi-target')?.childElementCount || 0,
+            guideFill: guide?.getAttribute('fill') || '',
+            guideOpacity: Number(guide?.getAttribute('fill-opacity') || 0),
+            guideHidden: !guide,
           };
         }"""
     )
@@ -687,6 +697,14 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Hanzi iPad write screen must not page-scroll, overflowY={write_metrics['overflowY']}")
     if write_metrics["tap"] < 44:
         raise RuntimeError("Hanzi rewrite button must be at least 44px")
+    if write_metrics["restTap"] < 44:
+        raise RuntimeError("Hanzi 休息一下 must be at least 44px")
+    if write_metrics.get("guideHidden"):
+        raise RuntimeError("Write screen must show a visible orange stroke guide")
+    if write_metrics.get("guideFill") != "#ff8a1a":
+        raise RuntimeError(f"Active stroke guide must be #ff8a1a, got {write_metrics.get('guideFill')!r}")
+    if write_metrics.get("guideOpacity", 0) < 0.5:
+        raise RuntimeError(f"Active stroke guide opacity too low: {write_metrics.get('guideOpacity')}")
     colors = pg.evaluate(
         """() => ({
           orange: window.KakaHanziWrite?.GUIDE_ORANGE,
@@ -701,11 +719,22 @@ def walk(pg, url, shots: Path | None, tag: str):
     miss = (pg.text_content("#write-status") or "").strip()
     if "再試一次" not in miss:
         raise RuntimeError(f"A miss must update status to 再試一次, got {miss!r}")
+    pg.click("#btn-write-rest")
+    pg.wait_for_selector("#view-adventure:not(.hidden) #btn-start-adventure")
+    if pg.is_visible("#view-write") and "hidden" not in (pg.get_attribute("#view-write", "class") or ""):
+        raise RuntimeError("休息一下 must leave the write screen")
+    if pg.url.endswith("index.html") or "#screen-" in pg.url:
+        raise RuntimeError("休息一下 must stay in 卡卡學寫字, not dump the app")
+    pg.click("#btn-start-adventure")
+    pg.wait_for_selector("#view-write:not(.hidden) #hanzi-target svg")
     pg.evaluate("() => window.KakaHanziWrite?.onLevelPassed?.()")
     pg.wait_for_selector("#pass-overlay:not(.hidden) #pass-title")
     pass_title = (pg.text_content("#pass-title") or "").strip()
     if pass_title != "過關啦！":
         raise RuntimeError(f"Pass title must be 「過關啦！」, got {pass_title!r}")
+    gloss = (pg.text_content("#pass-gloss") or "").strip()
+    if "呢個係星星月亮嘅星" not in gloss:
+        raise RuntimeError(f"Pass overlay must show gloss before 過關啦, got {gloss!r}")
     stars = (pg.text_content(".pass-stars") or "").strip()
     if stars != "★★★":
         raise RuntimeError(f"Pass screen must show three stars, got {stars!r}")

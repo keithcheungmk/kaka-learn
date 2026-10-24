@@ -1355,10 +1355,18 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "寫字關要有一屏米字格版面")
     if "GUIDE_ORANGE" not in js or "highlightColor: GUIDE_ORANGE" not in js:
         fail("hanzi-write", "引導線同文案都要係清晰橙色")
+    if "showActiveStrokeGuide" not in js or "getScalingTransform" not in js:
+        fail("hanzi-write", "當筆要畫可見橙色導線，唔可以靠透明 median")
+    if "id=\"hanzi-guide\"" not in page or "id=\"pass-gloss\"" not in page:
+        fail("hanzi-write", "要有當筆橙色層同過關釋義字幕")
+    if "休息一下" not in page or "btn-write-rest" not in js:
+        fail("hanzi-write", "寫字中要有「休息一下」離開掣")
     if "跟著橙色線" not in js or "跟著橙色線" not in page:
         fail("hanzi-write", "文案要寫跟著橙色線，並同畫面橙色對齊")
     if "onMistake" not in js or "再試一次" not in js:
         fail("hanzi-write", "漏筆／亂劃要有溫柔「再試一次」回饋")
+    if "showPassGloss" not in js or "glossYue" not in js:
+        fail("hanzi-write", "過關要先顯示 glossYue 字幕再讀粵語")
     if "btn-pass-home" not in js or js.split("btn-pass-home", 1)[-1][:220].count("goBackOr(PARENT_HREF)") < 1:
         fail("hanzi-write", "過關「返主頁」要 goBackOr 返中文主題")
     node = shutil.which("node")
