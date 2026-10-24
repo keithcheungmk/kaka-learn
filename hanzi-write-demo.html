@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
   <meta name="theme-color" content="#0b1638">
   <title>卡卡學寫字｜寫字・筆順</title>
-  <link rel="stylesheet" href="css/hanzi-write-demo.css?v=hanzi-write">
+  <link rel="stylesheet" href="css/hanzi-write-demo.css?v=hanzi-write-qa24">
 </head>
 <body>
   <main class="hw-shell">
@@ -70,6 +70,7 @@
               <line x1="2" y1="2" x2="98" y2="98"></line>
               <line x1="98" y1="2" x2="2" y2="98"></line>
             </svg>
+            <div id="hanzi-guide" class="hanzi-guide" aria-hidden="true"></div>
             <div id="hanzi-target" class="hanzi-target"></div>
           </div>
         </div>
@@ -79,6 +80,7 @@
             <button type="button" class="primary-btn" id="btn-guide">看筆順</button>
             <button type="button" class="ghost-btn" id="btn-rewrite">再寫一次</button>
             <button type="button" class="ghost-btn" id="btn-next-char" hidden>下一個</button>
+            <button type="button" class="rest-btn" id="btn-write-rest">休息一下</button>
           </div>
         </aside>
       </div>
@@ -91,6 +93,7 @@
         <span class="rocket rocket-win"></span>
       </div>
       <p class="pass-stars" aria-hidden="true">★★★</p>
+      <p id="pass-gloss" class="pass-gloss" aria-live="polite"></p>
       <h2 id="pass-title">過關啦！</h2>
       <p id="pass-copy">三顆星星已亮起。完成一輪，獎勵一枚星星幣。</p>
       <p id="pass-coin" class="pass-coin">＋1 星星幣</p>
@@ -102,12 +105,12 @@
     </div>
   </div>
 
-  <script src="js/no-zoom.js?v=hanzi-write"></script>
-  <script src="js/nav-back.js?v=hanzi-write"></script>
-  <script src="js/storage.js?v=hanzi-write"></script>
-  <script src="js/speech.js?v=hanzi-write"></script>
+  <script src="js/no-zoom.js?v=hanzi-write-qa24"></script>
+  <script src="js/nav-back.js?v=hanzi-write-qa24"></script>
+  <script src="js/storage.js?v=hanzi-write-qa24"></script>
+  <script src="js/speech.js?v=hanzi-write-qa24"></script>
   <script src="vendor/hanzi-writer/hanzi-writer.min.js?v=3.7.3"></script>
-  <script src="data/hanzi-write-chars.js?v=hanzi-write"></script>
-  <script src="js/hanzi-write-demo.js?v=hanzi-write"></script>
+  <script src="data/hanzi-write-chars.js?v=hanzi-write-qa24"></script>
+  <script src="js/hanzi-write-demo.js?v=hanzi-write-qa24"></script>
 </body>
 </html>

@@ -120,13 +120,51 @@
     onComplete(data);
   }
 
+  function clearActiveStrokeGuide() {
+    const host = $('hanzi-guide');
+    if (host) host.replaceChildren();
+  }
+
+  function showActiveStrokeGuide(strokeIndex) {
+    const host = $('hanzi-guide');
+    if (!host) return;
+    host.replaceChildren();
+    const level = currentLevel();
+    const pathD = CHAR_DATA[level.char]?.strokes?.[strokeIndex];
+    if (!pathD || typeof HanziWriter === 'undefined' || !HanziWriter.getScalingTransform) return;
+    const size = boardSize();
+    const svgNs = ['http:', 'www.w3.org/2000/svg'].join('//');
+    const svg = document.createElementNS(svgNs, 'svg');
+    svg.setAttribute('width', String(size));
+    svg.setAttribute('height', String(size));
+    svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+    svg.setAttribute('overflow', 'visible');
+    const group = document.createElementNS(svgNs, 'g');
+    const transform = HanziWriter.getScalingTransform(size, size, 12);
+    group.setAttribute('transform', transform.transform);
+    const path = document.createElementNS(svgNs, 'path');
+    path.setAttribute('d', pathD);
+    path.setAttribute('fill', GUIDE_ORANGE);
+    path.setAttribute('fill-opacity', '0.92');
+    path.setAttribute('stroke', GUIDE_ORANGE);
+    path.setAttribute('stroke-width', '18');
+    path.setAttribute('stroke-linejoin', 'round');
+    path.setAttribute('stroke-opacity', '0.95');
+    path.dataset.strokeIndex = String(strokeIndex);
+    group.appendChild(path);
+    svg.appendChild(group);
+    host.appendChild(svg);
+  }
+
   function destroyWriter() {
     if (writer?.cancelQuiz) {
       try { writer.cancelQuiz(); } catch { /* quiz may already be idle */ }
     }
     writer = null;
     quizActive = false;
-    $('hanzi-target').innerHTML = '';
+    clearActiveStrokeGuide();
+    const target = $('hanzi-target');
+    if (target) target.innerHTML = '';
   }
 
   function boardSize() {
@@ -155,15 +193,18 @@
     if (!writer) return;
     quizActive = true;
     setWriteStatus(WRITE_HINT);
+    showActiveStrokeGuide(0);
     writer.quiz({
       onMistake() {
         onQuizMiss();
       },
-      onCorrectStroke() {
+      onCorrectStroke(data) {
         setWriteStatus(WRITE_HINT);
+        showActiveStrokeGuide((data?.strokeNum ?? 0) + 1);
       },
       onComplete() {
         quizActive = false;
+        clearActiveStrokeGuide();
         onLevelPassed();
       },
     });
@@ -175,6 +216,7 @@
       try { writer.cancelQuiz(); } catch { /* ignore */ }
     }
     quizActive = false;
+    clearActiveStrokeGuide();
     setWriteStatus('先看筆順，再自己寫。');
     writer.animateCharacter({
       onComplete() {
@@ -199,8 +241,10 @@
       highlightColor: GUIDE_ORANGE,
       outlineColor: OUTLINE_INK,
       drawingColor: '#e56700',
+      drawingWidth: 8,
       showHintAfterMisses: 1,
       highlightOnComplete: true,
+      strokeHighlightSpeed: 1,
       charDataLoader,
     });
     playGuide();
@@ -216,6 +260,7 @@
     $('btn-next-char').hidden = true;
     if ($('btn-pass-rewrite')) $('btn-pass-rewrite').hidden = true;
     $('pass-overlay').classList.add('hidden');
+    showPassGloss('');
     showView('write');
     speak(`寫${level.say || level.char}`);
     requestAnimationFrame(() => mountWriter());
@@ -258,19 +303,36 @@
     speakGlossThenCheer(level);
   }
 
+  function showPassGloss(text) {
+    const el = $('pass-gloss');
+    if (!el) return '';
+    const gloss = String(text || '').trim();
+    el.textContent = gloss;
+    el.hidden = !gloss;
+    return gloss;
+  }
+
   function speakGlossThenCheer(level) {
-    const gloss = level.glossYue || '';
-    const cheer = () => speak(PASS_CHEER);
-    if (gloss && typeof speech.speakThen === 'function') {
-      speech.unlockSpeech?.();
-      speech.speakThen(gloss, { rate: 0.92, pitch: 1.08 }, cheer);
+    const gloss = showPassGloss(level?.glossYue || '');
+    // iPad Safari 常吞第二次 async speak；亦會喺 cancel 後太快再講就靜音。
+    // 畫面先出釋義字幕，再用一句粵語讀「釋義。過關啦」，靜音機都睇到先釋義再過關。
+    const line = gloss ? `${gloss}。${PASS_CHEER}` : PASS_CHEER;
+    speech.unlockSpeech?.();
+    const opts = { rate: 0.92, pitch: 1.08, delayMs: 60, lang: 'zh-HK' };
+    if (typeof speech.speakThen === 'function') {
+      speech.speakThen(line, opts, () => {});
       return;
     }
-    cheer();
+    if (typeof speech.speakTerm === 'function') {
+      speech.speakTerm(line, opts);
+      return;
+    }
+    speak(line);
   }
 
   function rewrite() {
     $('pass-overlay').classList.add('hidden');
+    showPassGloss('');
     if (!writer) {
       mountWriter();
       return;
@@ -280,9 +342,14 @@
 
   function leaveWrite() {
     $('pass-overlay').classList.add('hidden');
+    showPassGloss('');
     destroyWriter();
     renderBank();
     showView('adventure');
+  }
+
+  function restFromWrite() {
+    leaveWrite();
   }
 
   function onBack(event) {
@@ -317,8 +384,12 @@
   });
   $('btn-pass-home').addEventListener('click', () => {
     $('pass-overlay').classList.add('hidden');
+    showPassGloss('');
     destroyWriter();
     nav.goBackOr(PARENT_HREF);
+  });
+  $('btn-write-rest')?.addEventListener('click', () => {
+    restFromWrite();
   });
   $('back-link').addEventListener('click', onBack);
 
@@ -347,6 +418,11 @@
     currentLevel,
     firstPlayableIndex,
     speakGlossThenCheer,
+    showPassGloss,
+    showActiveStrokeGuide,
+    clearActiveStrokeGuide,
+    leaveWrite,
+    restFromWrite,
     showView,
     openWrite,
     onLevelPassed,
