@@ -543,6 +543,15 @@ a.pack { text-decoration: none; }
   gap: 10px;
   min-width: 0;
 }
+.choices.is-listening .choice {
+  pointer-events: none;
+  opacity: 0.78;
+  cursor: default;
+}
+.choice.is-playing {
+  border-color: #7eb0e0;
+  box-shadow: 0 0 0 3px rgba(70, 140, 210, 0.22);
+}
 .choice-row {
   display: flex;
   align-items: stretch;

@@ -1507,6 +1507,15 @@ def check_common_sense() -> None:
         fail("common-sense", "線 A 唔好做拖一拖或家長開口閘")
     if "quiz-frame" not in html or "choice-speak" not in js:
         fail("common-sense", "答題圖要 4:3 畫框，每項答案要有獨立聽掣")
+    if "ASK_UNLOCK_MS" not in js or "speak(quizLine" not in js:
+        fail("common-sense", "答題要先播職業短句再判；聽一聽問句最多約 2 秒解鎖")
+    listen_tail = js.split("$('btn-quiz-listen')?.addEventListener", 1)
+    if (
+        len(listen_tail) < 2
+        or "speak(q.ask)" not in listen_tail[-1][:220]
+        or "q.audio" in listen_tail[-1][:220]
+    ):
+        fail("common-sense", "答題聽一聽只准播短問句，唔好播長全文")
     heroes_src = read("data/common-sense-heroes.js")
     if re.search(r"image:\s*['\"]assets/careers/", heroes_src):
         fail("common-sense", "社區小英雄答題圖要填滿 4:3，唔好再用方形 careers 字卡")

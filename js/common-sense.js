@@ -10,6 +10,7 @@
   const HOME_HREF = 'index.html#screen-home';
   const VIEWS = ['view-packs', 'view-learn', 'view-quiz', 'view-finish'];
   const FALLBACK_HINT = '唔係呢個喎，再諗吓○○啦，可以再試。';
+  const ASK_UNLOCK_MS = 2000;
 
   let view = 'packs';
   let currentPack = null;
@@ -19,6 +20,9 @@
   let quizIndex = 0;
   let correctCount = 0;
   let answering = false;
+  let choicesLocked = false;
+  let unlockTimer = null;
+  let answerSpeakId = 0;
   let finishAwarded = false;
   const preloadLinks = [];
   const FIRST_EAGER = 6;
@@ -173,6 +177,53 @@
 
   function stopSpeech() {
     speech.cancelAllSpeech?.();
+  }
+
+  function clearUnlockTimer() {
+    if (unlockTimer) {
+      clearTimeout(unlockTimer);
+      unlockTimer = null;
+    }
+  }
+
+  function setChoicesLocked(locked) {
+    choicesLocked = Boolean(locked);
+    const box = $('quiz-choices');
+    box?.classList.toggle('is-listening', choicesLocked);
+    if (box) box.setAttribute('aria-busy', choicesLocked ? 'true' : 'false');
+    [...document.querySelectorAll('#quiz-choices .choice')].forEach((el) => {
+      if (choicesLocked) el.setAttribute('aria-disabled', 'true');
+      else el.removeAttribute('aria-disabled');
+    });
+  }
+
+  function unlockChoices() {
+    clearUnlockTimer();
+    setChoicesLocked(false);
+  }
+
+  function startAskUnlockGate() {
+    clearUnlockTimer();
+    if (isTestFast()) {
+      setChoicesLocked(false);
+      return;
+    }
+    setChoicesLocked(true);
+    unlockTimer = setTimeout(unlockChoices, ASK_UNLOCK_MS);
+  }
+
+  function resetQuizSpeech() {
+    answerSpeakId += 1;
+    answering = false;
+    clearUnlockTimer();
+    setChoicesLocked(false);
+    $('btn-quiz-listen')?.removeAttribute('disabled');
+    stopSpeech();
+  }
+
+  /** 答題播掣面短「佢做緊乜」，唔播題庫長稿 audio。 */
+  function quizLine(text) {
+    return String(text || '').trim();
   }
 
   function sampleRound() {
@@ -515,6 +566,8 @@
     const q = currentQuestion();
     if (!q) return;
     answering = false;
+    answerSpeakId += 1;
+    $('btn-quiz-listen')?.removeAttribute('disabled');
     const img = $('quiz-img');
     const frame = img?.closest('.quiz-frame, .cs-media');
     if (img) {
@@ -570,6 +623,7 @@
       speakBtn.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
+        if (answering) return;
         speak(text);
       });
 
@@ -578,7 +632,8 @@
       box.appendChild(row);
     });
     updateProgress();
-    speak(q.ask);
+    startAskUnlockGate();
+    speak(q.ask, unlockChoices);
   }
 
   function afterCorrectAdvance() {
@@ -590,11 +645,10 @@
     renderQuiz();
   }
 
-  function onAnswer(btn, ok, q) {
-    if (answering) return;
+  function applyJudgement(btn, ok, q) {
     const fb = $('quiz-feedback');
+    $('btn-quiz-listen')?.removeAttribute('disabled');
     if (ok) {
-      answering = true;
       [...document.querySelectorAll('#quiz-choices .choice')].forEach((el) => {
         el.disabled = true;
       });
@@ -614,8 +668,12 @@
       speak('啱喇！', go);
       return;
     }
+    answering = false;
     btn.classList.add('is-wrong');
     btn.disabled = true;
+    [...document.querySelectorAll('#quiz-choices .choice')].forEach((el) => {
+      if (el !== btn && !el.classList.contains('is-wrong')) el.disabled = false;
+    });
     const template = currentPack?.wrongHint || FALLBACK_HINT;
     const hint = template.replace('○○', q.name || '');
     if (fb) {
@@ -626,12 +684,36 @@
     speak(hint);
   }
 
+  function onAnswer(btn, ok, q) {
+    if (answering) return;
+    if (choicesLocked && !isTestFast()) return;
+    answering = true;
+    unlockChoices();
+    const id = ++answerSpeakId;
+    [...document.querySelectorAll('#quiz-choices .choice')].forEach((el) => {
+      el.disabled = true;
+    });
+    $('btn-quiz-listen')?.setAttribute('disabled', 'disabled');
+    btn.classList.add('is-playing');
+    const judge = () => {
+      if (id !== answerSpeakId) return;
+      btn.classList.remove('is-playing');
+      applyJudgement(btn, ok, q);
+    };
+    if (isTestFast()) {
+      judge();
+      return;
+    }
+    speak(quizLine(btn.dataset.answer || ''), judge);
+  }
+
   function startQuiz() {
     if (isFestivalsPack(currentPack) && !currentFestival) return;
     quizOrder = sampleRound();
     quizIndex = 0;
     correctCount = 0;
     finishAwarded = false;
+    resetQuizSpeech();
     showView('quiz');
     renderQuiz();
   }
@@ -670,7 +752,7 @@
   }
 
   function goPacks() {
-    stopSpeech();
+    resetQuizSpeech();
     currentPack = null;
     currentFestival = null;
     currentSeason = null;
@@ -683,7 +765,7 @@
     currentPack = pack;
     currentFestival = null;
     currentSeason = null;
-    stopSpeech();
+    resetQuizSpeech();
     renderLearnWall();
     showView('learn');
   }
@@ -693,7 +775,7 @@
     if (!fest) return;
     currentFestival = fest;
     currentSeason = null;
-    stopSpeech();
+    resetQuizSpeech();
     renderLearnWall();
     showView('learn');
   }
@@ -703,13 +785,13 @@
     if (!season) return;
     currentSeason = season;
     currentFestival = null;
-    stopSpeech();
+    resetQuizSpeech();
     renderLearnWall();
     showView('learn');
   }
 
   function goLearn() {
-    stopSpeech();
+    resetQuizSpeech();
     if (!currentPack) {
       goPacks();
       return;
@@ -721,12 +803,12 @@
   function onBack(event) {
     event.preventDefault();
     if (view === 'quiz' || view === 'finish') {
-      stopSpeech();
+      resetQuizSpeech();
       goLearn();
       return;
     }
     if (view === 'learn') {
-      stopSpeech();
+      resetQuizSpeech();
       if (currentFestival || currentSeason) {
         currentFestival = null;
         currentSeason = null;
@@ -744,11 +826,12 @@
     $('back-link')?.addEventListener('click', onBack);
     $('btn-start-quiz')?.addEventListener('click', startQuiz);
     $('btn-quiz-listen')?.addEventListener('click', () => {
+      if (answering) return;
       const q = currentQuestion();
-      if (q) speak(q.audio || q.ask);
+      if (q) speak(q.ask);
     });
     $('btn-play-again')?.addEventListener('click', () => {
-      stopSpeech();
+      resetQuizSpeech();
       startQuiz();
     });
     $('btn-back-packs')?.addEventListener('click', goPacks);
@@ -788,6 +871,8 @@
     get festival() { return currentFestival; },
     get season() { return currentSeason; },
     get careers() { return packItems(currentPack || packMap['community-heroes']); },
+    isChoicesLocked: () => choicesLocked,
+    ASK_UNLOCK_MS,
     answerCurrentCorrect() {
       const q = currentQuestion();
       if (!q) return false;

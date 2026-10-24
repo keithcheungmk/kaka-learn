@@ -635,6 +635,28 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Learn wall overflows horizontally by {learn_overflow_x}px")
     pg.click("#btn-start-quiz")
     pg.wait_for_selector("#view-quiz:not(.hidden) #quiz-choices .choice")
+    gate = pg.evaluate(
+        """() => ({
+          listening: document.querySelector('#quiz-choices')?.classList.contains('is-listening'),
+          lockedApi: Boolean(window.KakaCommonSense?.isChoicesLocked?.()),
+          unlockMs: window.KakaCommonSense?.ASK_UNLOCK_MS,
+        })"""
+    )
+    if gate["unlockMs"] != 2000:
+        raise RuntimeError("Quiz ask gate must unlock after about 2 seconds")
+    if gate["listening"] or gate["lockedApi"]:
+        pg.evaluate("() => document.querySelector('#quiz-choices .choice')?.click()")
+        gated = pg.evaluate(
+            """() => ({
+              progress: document.querySelector('#status-pill')?.textContent || '',
+              feedback: document.querySelector('#quiz-feedback')?.textContent || '',
+              playing: document.querySelectorAll('#quiz-choices .choice.is-playing').length,
+            })"""
+        )
+        if "已答啱 0／10" not in gated["progress"]:
+            raise RuntimeError("Tapping an answer during the ask gate must not score yet")
+        if "啱喇" in gated["feedback"] or "唔係呢個喎" in gated["feedback"] or gated["playing"]:
+            raise RuntimeError("Ask gate must delay judging; do not play-then-judge while still locked")
     choice_n = pg.evaluate("() => document.querySelectorAll('#quiz-choices .choice').length")
     if choice_n != 4:
         raise RuntimeError(f"Quiz must show 4 choices, got {choice_n}")
