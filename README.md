@@ -160,6 +160,6 @@ CODEX.md            # Codex 入口，指向 AGENTS.md
 
 ## 非目標
 
-無登入、廣告、追蹤、寫字練習、故事模式、真正 AEON／付款串接。
+無登入、廣告、追蹤、故事模式、真正 AEON／付款串接。寫字只限 Keith 已批准嘅「卡卡認字 Demo」（本機筆順，唔上傳）。
 
 業務建議可放喺 sibling repo `keith-ops`；所有 app 程式碼只喺本 repo。

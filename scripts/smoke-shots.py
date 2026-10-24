@@ -601,6 +601,73 @@ def walk(pg, url, shots: Path | None, tag: str):
     if pg.is_visible("#screen-home") and "active" in (pg.get_attribute("#screen-home", "class") or ""):
         raise RuntimeError("Four-panel wall ← 中文 must return one level to Chinese topics, not home")
 
+    # 卡卡認字 Demo：中文主題入口 → 選角色／冒險 → 寫「星」→ 過關
+    pg.wait_for_selector("#screen-topics.active #btn-topics-hanzi-write")
+    hanzi_href = pg.get_attribute("#btn-topics-hanzi-write", "href") or ""
+    if "hanzi-write-demo.html" not in hanzi_href:
+        raise RuntimeError("Chinese hub must open the independent hanzi-write demo")
+    probe("中文・卡卡認字 Demo 入口")
+    with pg.expect_navigation():
+        pg.click("#btn-topics-hanzi-write")
+    pg.wait_for_selector("#btn-start-adventure, #btn-profile-kaka")
+    if pg.is_visible("#view-adventure") and "hidden" not in (pg.get_attribute("#view-adventure", "class") or ""):
+        pg.click("#back-link")
+        pg.wait_for_selector("#view-profile:not(.hidden) #btn-profile-kaka")
+    if pg.is_visible("#view-write") and "hidden" not in (pg.get_attribute("#view-write", "class") or ""):
+        raise RuntimeError("Hanzi demo must not start on the writing screen")
+    pg.click("#btn-profile-kaka")
+    pg.wait_for_selector("#view-adventure:not(.hidden) #btn-start-adventure")
+    start_label = (pg.text_content("#btn-start-adventure") or "").strip()
+    if start_label != "開始冒險":
+        raise RuntimeError(f"Adventure button must be 「開始冒險」, got {start_label!r}")
+    pg.click("#btn-start-adventure")
+    pg.wait_for_selector("#view-write:not(.hidden) #hanzi-target")
+    heading = pg.text_content("#write-heading") or ""
+    if "星" not in heading:
+        raise RuntimeError(f"Write screen must ask for 星, got {heading!r}")
+    if not pg.locator(".mizi-board").count():
+        raise RuntimeError("Write screen must show a 米字格")
+    rewrite = (pg.text_content("#btn-rewrite") or "").strip()
+    if rewrite != "再寫一次":
+        raise RuntimeError(f"Rewrite button must be 「再寫一次」, got {rewrite!r}")
+    write_metrics = pg.evaluate(
+        """() => {
+          const d = document.documentElement;
+          const start = document.querySelector('#btn-rewrite')?.getBoundingClientRect();
+          return {
+            overflowX: d.scrollWidth - d.clientWidth,
+            overflowY: d.scrollHeight - d.clientHeight,
+            tap: Math.min(start?.width || 0, start?.height || 0),
+            writerKids: document.querySelector('#hanzi-target')?.childElementCount || 0,
+          };
+        }"""
+    )
+    if write_metrics["overflowX"] > 2:
+        raise RuntimeError(f"Hanzi write screen overflows horizontally by {write_metrics['overflowX']}px")
+    if pg.viewport_size["width"] > 700 and write_metrics["overflowY"] > 2:
+        raise RuntimeError(f"Hanzi iPad write screen must not page-scroll, overflowY={write_metrics['overflowY']}")
+    if write_metrics["tap"] < 44:
+        raise RuntimeError("Hanzi rewrite button must be at least 44px")
+    pg.evaluate("() => window.KakaHanziWrite?.onLevelPassed?.()")
+    pg.wait_for_selector("#pass-overlay:not(.hidden) #pass-title")
+    pass_title = (pg.text_content("#pass-title") or "").strip()
+    if pass_title != "過關啦！":
+        raise RuntimeError(f"Pass title must be 「過關啦！」, got {pass_title!r}")
+    stars = (pg.text_content(".pass-stars") or "").strip()
+    if stars != "★★★":
+        raise RuntimeError(f"Pass screen must show three stars, got {stars!r}")
+    if "下一關" not in (pg.text_content("#btn-next-level") or ""):
+        raise RuntimeError("Pass screen must offer 下一關")
+    if "返主頁" not in (pg.text_content("#btn-pass-home") or ""):
+        raise RuntimeError("Pass screen must offer 返主頁")
+    pg.click("#btn-pass-home")
+    pg.wait_for_selector("#view-adventure:not(.hidden) #btn-start-adventure")
+    pg.click("#back-link")
+    pg.wait_for_selector("#view-profile:not(.hidden)")
+    with pg.expect_navigation():
+        pg.click("#back-link")
+    pg.wait_for_selector("#screen-topics.active #btn-topics-hanzi-write")
+
     # 卡卡常識樂園：主頁頂層 → 包牆 → 學習牆 → 隨機 10 題 → 10／10 慶祝＋幣
     pg.goto(url, wait_until="domcontentloaded")
     pg.wait_for_timeout(300)

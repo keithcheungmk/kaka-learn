@@ -190,6 +190,7 @@ test('常識樂園獨立幣位：一日一次，唔佔中文聽配砌三個幣�
   assert.ok(S.EXTRA_COIN_MODES.includes('common-sense-heroes'));
   assert.ok(S.EXTRA_COIN_MODES.includes('common-sense-transport'));
   assert.ok(S.EXTRA_COIN_MODES.includes('common-sense-comic-rain'));
+  assert.ok(S.EXTRA_COIN_MODES.includes('hanzi-write'));
   const a = S.earnCoinForMode('common-sense-heroes');
   assert.equal(a.gained, true);
   assert.equal(a.state.coinsTotal, 1);
@@ -200,6 +201,17 @@ test('常識樂園獨立幣位：一日一次，唔佔中文聽配砌三個幣�
   assert.equal(S.earnCoinForMode('listen').gained, true);
   assert.equal(S.coinsTodayCount(), 1);
   assert.equal(S.loadState().coinsTotal, 2);
+});
+
+test('認字 Demo 獨立幣位：一日一次，唔佔中文聽配砌', () => {
+  const S = freshStorage();
+  S.setActiveProfile('kaka');
+  const a = S.earnCoinForMode('hanzi-write');
+  assert.equal(a.gained, true);
+  assert.equal(S.coinsTodayCount(), 0);
+  assert.equal(S.earnCoinForMode('hanzi-write').already, true);
+  assert.equal(S.earnCoinForMode('listen').gained, true);
+  assert.equal(S.coinsTodayCount(), 1);
 });
 
 test('Phonics Phase 3A：認音／拼合／拆音分開記錄，recent 最多 10 次', () => {

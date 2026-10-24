@@ -1299,6 +1299,59 @@ def check_four_panel_story() -> None:
         notes.append("冇 node，跳過四格講故事單元測試")
 
 
+def check_hanzi_write_demo() -> None:
+    """Keith 2026-10-24：中文主題「卡卡認字 Demo」本機 hanzi-writer 寫繁體「星」。"""
+    html = read("index.html")
+    if 'id="btn-topics-hanzi-write"' not in html or "./hanzi-write-demo.html" not in html:
+        fail("hanzi-write", "中文主題頁要有卡卡認字 Demo 獨立入口")
+    if "卡卡認字 Demo" not in html:
+        fail("hanzi-write", "中文主題頁入口要寫「卡卡認字 Demo」")
+    for path in (
+        "hanzi-write-demo.html",
+        "css/hanzi-write-demo.css",
+        "js/hanzi-write-demo.js",
+        "data/hanzi-write-chars.js",
+        "vendor/hanzi-writer/hanzi-writer.min.js",
+        "scripts/test-hanzi-write-demo.mjs",
+    ):
+        if not Path(path).is_file():
+            fail("hanzi-write", f"缺少認字 Demo 檔案：{path}")
+    page = read("hanzi-write-demo.html")
+    js = read("js/hanzi-write-demo.js")
+    css = read("css/hanzi-write-demo.css")
+    data = read("data/hanzi-write-chars.js")
+    storage = read("js/storage.js")
+    if "hanzi-writer.min.js" not in page or "HanziWriter.create" not in js:
+        fail("hanzi-write", "頁面要嵌入本機 hanzi-writer")
+    if "cdn.jsdelivr" in page or "unpkg.com" in page:
+        fail("hanzi-write", "hanzi-writer 要本機 vendor，唔好 runtime CDN")
+    if '"星"' not in data or "KAKA_HANZI_WRITE_CHARS" not in data:
+        fail("hanzi-write", "要有本機繁體「星」筆順資料")
+    if "米字格" not in page or "再寫一次" not in page or "過關啦！" not in page:
+        fail("hanzi-write", "流程要有米字格、再寫一次、過關啦")
+    if "btn-profile-kaka" not in page or "profile-kaka.jpg" not in page:
+        fail("hanzi-write", "要重用卡卡／禧禧頭像選角色")
+    if "earnCoinForMode" not in js or "hanzi-write" not in js:
+        fail("hanzi-write", "過關要呼叫 earnCoinForMode('hanzi-write')")
+    if "tryEarnStar" not in js:
+        fail("hanzi-write", "過關要記星星")
+    if "'hanzi-write'" not in storage:
+        fail("hanzi-write", "storage EXTRA_COIN_MODES 要有 hanzi-write")
+    if "fetch(" in js or "XMLHttpRequest" in js:
+        fail("hanzi-write", "筆跡／進度唔可以上傳")
+    if any(name in page or name in js for name in ("巴斯光年", "Buzz Lightyear", "迪士尼")):
+        fail("hanzi-write", "唔好用受版權卡通名稱")
+    if "100dvh" not in css or ".mizi-board" not in css:
+        fail("hanzi-write", "寫字關要有一屏米字格版面")
+    node = shutil.which("node")
+    if node:
+        result = subprocess.run([node, "scripts/test-hanzi-write-demo.mjs"], capture_output=True, text=True)
+        if result.returncode:
+            fail("hanzi-write", (result.stdout or result.stderr or "認字 Demo 檢查失敗").strip()[:800])
+    else:
+        notes.append("冇 node，跳過認字 Demo 單元測試")
+
+
 def check_family_storybook_en_entry() -> None:
     """獨立英文家庭故事殼：平行中文故事小隊，唔伸延 Little Fox。"""
     html = read("index.html")
@@ -1574,6 +1627,12 @@ def check_one_level_back() -> None:
         fail("one-level-back", "面試四格文案唔可以寫返中文")
     if "showScreen('home')" in read("js/app.js").split("btn-back-sentence")[1][:200]:
         fail("one-level-back", "砌句子遊戲頂欄唔可以跳主頁")
+    hanzi = read("hanzi-write-demo.html")
+    hanzi_js = read("js/hanzi-write-demo.js")
+    if 'href="index.html#screen-topics"' not in hanzi or "nav-back.js" not in hanzi:
+        fail("one-level-back", "認字 Demo 頂欄無 history 時要返中文主題，唔好裸 index.html")
+    if "goBackOr(PARENT_HREF)" not in hanzi_js or "view === 'write'" not in hanzi_js:
+        fail("one-level-back", "認字 Demo 寫字中返回要先返冒險，頂欄再 goBackOr 中文主題")
     scene = read("book-scene-demo.html")
     if 'href="index.html#screen-topics"' not in scene or "nav-back.js" not in scene:
         fail("one-level-back", "書頁砌句「← 中文」要返中文主題，唔好裸 index.html")
@@ -1649,6 +1708,7 @@ CHECKS = [
     check_book_scans_shelf,
     check_family_storybook_entry,
     check_four_panel_story,
+    check_hanzi_write_demo,
     check_family_storybook_en_entry,
     check_common_sense,
     check_one_level_back,

@@ -64,6 +64,7 @@ const EXTRA_COIN_MODES = [
   'common-sense-comic-rain',
   'common-sense-comic-mtr',
   'common-sense-comic-park',
+  'hanzi-write',
 ];
 const ALL_COIN_MODES = COIN_MODES.concat(EXTRA_COIN_MODES);
 
