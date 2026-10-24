@@ -609,19 +609,19 @@ def walk(pg, url, shots: Path | None, tag: str):
     probe("中文・卡卡認字 Demo 入口")
     with pg.expect_navigation():
         pg.click("#btn-topics-hanzi-write")
-    pg.wait_for_selector("#btn-start-adventure, #btn-profile-kaka")
-    if pg.is_visible("#view-adventure") and "hidden" not in (pg.get_attribute("#view-adventure", "class") or ""):
+    pg.wait_for_selector("#view-adventure:not(.hidden) #btn-start-adventure, #view-profile:not(.hidden) #btn-profile-kaka")
+    if pg.is_visible("#view-adventure:not(.hidden)"):
         pg.click("#back-link")
         pg.wait_for_selector("#view-profile:not(.hidden) #btn-profile-kaka")
-    if pg.is_visible("#view-write") and "hidden" not in (pg.get_attribute("#view-write", "class") or ""):
+    if pg.is_visible("#view-write:not(.hidden)"):
         raise RuntimeError("Hanzi demo must not start on the writing screen")
-    pg.click("#btn-profile-kaka")
+    pg.click("#view-profile:not(.hidden) #btn-profile-kaka")
     pg.wait_for_selector("#view-adventure:not(.hidden) #btn-start-adventure")
     start_label = (pg.text_content("#btn-start-adventure") or "").strip()
     if start_label != "開始冒險":
         raise RuntimeError(f"Adventure button must be 「開始冒險」, got {start_label!r}")
     pg.click("#btn-start-adventure")
-    pg.wait_for_selector("#view-write:not(.hidden) #hanzi-target")
+    pg.wait_for_selector("#view-write:not(.hidden) #hanzi-target svg")
     heading = pg.text_content("#write-heading") or ""
     if "星" not in heading:
         raise RuntimeError(f"Write screen must ask for 星, got {heading!r}")

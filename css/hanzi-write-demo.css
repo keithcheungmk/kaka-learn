@@ -376,8 +376,16 @@ body { min-height: 100dvh; }
 
 .pass-actions { display: grid; gap: 10px; }
 
-@media (max-width: 700px) {
+@media (max-width: 900px), (orientation: portrait) {
   .write-spread { grid-template-columns: minmax(0, 1fr); }
+  .write-panel {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .status-note { margin: 0; text-align: left; flex: 1; min-width: 0; }
+  .btn-stack { flex: 1; min-width: 0; }
   .hw-shell { width: min(100% - 16px, 1180px); }
   .profile-card-img {
     width: min(120px, 34vw);
@@ -385,6 +393,6 @@ body { min-height: 100dvh; }
   }
 }
 
-@media (min-width: 701px) {
+@media (min-width: 901px) and (orientation: landscape) {
   .write-view { overflow: hidden; }
 }
