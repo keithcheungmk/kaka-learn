@@ -687,6 +687,20 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Hanzi iPad write screen must not page-scroll, overflowY={write_metrics['overflowY']}")
     if write_metrics["tap"] < 44:
         raise RuntimeError("Hanzi rewrite button must be at least 44px")
+    colors = pg.evaluate(
+        """() => ({
+          orange: window.KakaHanziWrite?.GUIDE_ORANGE,
+          hint: window.KakaHanziWrite?.WRITE_HINT,
+        })"""
+    )
+    if colors.get("orange") != "#ff8a1a":
+        raise RuntimeError(f"Guide color must be kid-visible orange, got {colors.get('orange')!r}")
+    if "橙色" not in (colors.get("hint") or ""):
+        raise RuntimeError("Write hint must name the orange guide line")
+    pg.evaluate("() => window.KakaHanziWrite?.onQuizMiss?.()")
+    miss = (pg.text_content("#write-status") or "").strip()
+    if "再試一次" not in miss:
+        raise RuntimeError(f"A miss must update status to 再試一次, got {miss!r}")
     pg.evaluate("() => window.KakaHanziWrite?.onLevelPassed?.()")
     pg.wait_for_selector("#pass-overlay:not(.hidden) #pass-title")
     pass_title = (pg.text_content("#pass-title") or "").strip()
@@ -699,13 +713,11 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError("Pass screen must offer 下一關")
     if "返主頁" not in (pg.text_content("#btn-pass-home") or ""):
         raise RuntimeError("Pass screen must offer 返主頁")
-    pg.click("#btn-pass-home")
-    pg.wait_for_selector("#view-adventure:not(.hidden) #btn-start-adventure")
-    pg.click("#back-link")
-    pg.wait_for_selector("#view-profile:not(.hidden)")
     with pg.expect_navigation():
-        pg.click("#back-link")
+        pg.click("#btn-pass-home")
     pg.wait_for_selector("#screen-topics.active #btn-topics-hanzi-write")
+    if pg.is_visible("#screen-home") and "active" in (pg.get_attribute("#screen-home", "class") or ""):
+        raise RuntimeError("Hanzi 返主頁 must return to Chinese topics, not home")
 
     # 卡卡常識樂園：主頁頂層 → 包牆 → 學習牆 → 隨機 10 題 → 10／10 慶祝＋幣
     pg.goto(url, wait_until="domcontentloaded")

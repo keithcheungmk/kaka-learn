@@ -73,6 +73,7 @@ assert.match(hanziHtml, /nav-back\.js/);
 assert.match(hanziJs, /PARENT_HREF = 'index\.html#screen-topics'/);
 assert.match(hanziJs, /goBackOr\(PARENT_HREF\)/);
 assert.match(hanziJs, /view === 'write'/);
+assert.match(hanziJs, /btn-pass-home[\s\S]{0,280}goBackOr\(PARENT_HREF\)/);
 assert.match(familyJs, /leaveReader\(\)/);
 assert.match(familyJs, /goBackOr\('index\.html#screen-topics'\)/);
 assert.match(familyEnJs, /leaveReader\(\)/);
