@@ -9,10 +9,17 @@
   const MIME_TYPES = ['audio/mp4', 'audio/aac', 'audio/webm;codecs=opus', 'audio/webm'];
   const KID_SELF_LABELS = { all: '我講齊喇', loud: '我講大聲', done: '我講完喇' };
   const RETRY_LINE = '再講一次呀';
+  const WARMUP_HINTS = [
+    '唔係呢格，再試吓。',
+    '睇吓邊格啱呢幅。',
+    '開頭定結尾？再試吓。',
+  ];
+  const VIEWS = ['wall', 'warmup', 'path', 'listen', 'play'];
 
   const wall = $('wall');
   const play = $('play');
   let current = null;
+  let view = 'wall';
   let recorder = null;
   let recordStream = null;
   let chunks = [];
@@ -20,12 +27,38 @@
   let recordStartedAt = 0;
   let playbackUrl = '';
   let localDone = new Set();
+  let warmupState = null;
+  let warmupMissTimer = null;
+  let warmupAdvanceTimer = null;
+  let listenTimer = null;
+  let listenIndex = 0;
+  let listenPlaying = false;
 
   function pickMimeType() {
     if (typeof MediaRecorder === 'undefined') return '';
     return MIME_TYPES.find((type) => {
       try { return MediaRecorder.isTypeSupported(type); } catch { return false; }
     }) || '';
+  }
+
+  function hasSortWarmup(level) {
+    return Boolean(level?.sortWarmup) && Array.isArray(level?.panels) && level.panels.length === 4;
+  }
+
+  function shuffle(values) {
+    const copy = [...values];
+    for (let i = copy.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    if (copy.length > 1 && copy.every((value, index) => value === values[index])) {
+      [copy[0], copy[1]] = [copy[1], copy[0]];
+    }
+    return copy;
+  }
+
+  function warmupHint(missCount) {
+    return WARMUP_HINTS[Math.min(Math.max(0, missCount - 1), WARMUP_HINTS.length - 1)];
   }
 
   function kidPanelButtons() {
@@ -116,10 +149,28 @@
     if (!silent) setStatus('錄音停咗。可以聽返自己，再撳亮四格。', 'ok');
   }
 
+  function isMuted() {
+    return Boolean(storage.loadState?.()?.muted);
+  }
+
   function speakLine(text) {
     if (!text) return;
     speech.unlockSpeech?.();
-    if (speech.speakTerm) speech.speakTerm(text, { rate: 0.92, pitch: 1.05 });
+    if (speech.speakTerm) speech.speakTerm(text, { rate: 0.92, pitch: 1.05, muted: isMuted() });
+  }
+
+  function speakCue(text, correct) {
+    if (!text) return;
+    speech.unlockSpeech?.();
+    speech.warmAudio?.();
+    const muted = isMuted();
+    if (correct && speech.speakThen && speech.playCorrectCue) {
+      speech.speakThen(text, { muted, lang: 'zh-HK', rate: 0.92, pitch: 1.05 }, () => {
+        speech.playCorrectCue({ muted });
+      });
+      return;
+    }
+    speakLine(text);
   }
 
   function isRecordingNow() {
@@ -235,13 +286,71 @@
     if (already) $('completion').classList.remove('hidden');
   }
 
+  function hideViews() {
+    VIEWS.forEach((name) => $(name)?.classList.add('hidden'));
+  }
+
+  function setChrome() {
+    const title = $('brand-title');
+    const kicker = $('brand-kicker');
+    const back = $('back-link');
+    const shell = document.querySelector('.four-shell');
+    shell?.classList.toggle('is-stage', view !== 'wall');
+    shell?.classList.toggle('is-playing', view === 'play');
+    refreshStars();
+    if (view === 'warmup') {
+      title.textContent = `${current.place}：${current.title}`;
+      kicker.textContent = '排圖熱身';
+      back.textContent = '← 關卡';
+      back.setAttribute('href', '#wall');
+      return;
+    }
+    if (view === 'path') {
+      title.textContent = `${current.place}：${current.title}`;
+      kicker.textContent = '揀下一步';
+      back.textContent = '← 熱身';
+      back.setAttribute('href', '#warmup');
+      return;
+    }
+    if (view === 'listen') {
+      title.textContent = `${current.place}：${current.title}`;
+      kicker.textContent = '聽範讀';
+      back.textContent = '← 選路';
+      back.setAttribute('href', '#path');
+      return;
+    }
+    if (view === 'play') {
+      title.textContent = `${current.place}：${current.title}`;
+      kicker.textContent = '四格講故事';
+      if (hasSortWarmup(current)) {
+        back.textContent = '← 選路';
+        back.setAttribute('href', '#path');
+      } else {
+        back.textContent = '← 關卡';
+        back.setAttribute('href', '#wall');
+      }
+      return;
+    }
+    title.textContent = '四格講故事';
+    kicker.textContent = '講故事・粵語';
+    back.textContent = '← 中文';
+    back.setAttribute('href', 'index.html#screen-topics');
+  }
+
+  function showView(name) {
+    hideViews();
+    view = name;
+    $(name)?.classList.remove('hidden');
+    setChrome();
+  }
+
   function renderWall() {
     $('level-grid').innerHTML = levels.map((level) => {
       const done = isLevelDone(level.id);
       const thumbs = level.panels.map((panel, index) => (
         `<figure class="level-thumb">
           <button type="button" class="wall-hit" data-beat="${panel.beat}" aria-label="聽${panel.beat}">
-            <img src="${panel.image}" alt="${panel.alt}">
+            <img src="${panel.image}" alt="${panel.alt}" draggable="false">
           </button>
           <b>${index + 1}</b>
         </figure>`
@@ -261,18 +370,14 @@
     $('level-grid').querySelectorAll('.wall-hit').forEach((button) => {
       button.addEventListener('click', () => previewWallBeat(button));
     });
-    $('brand-title').textContent = '四格講故事';
-    $('brand-kicker').textContent = '講故事・粵語';
-    $('back-link').setAttribute('href', 'index.html#screen-topics');
-    $('back-link').textContent = '← 中文';
-    refreshStars();
+    showView('wall');
   }
 
   function renderComic() {
     $('comic-board').innerHTML = current.panels.map((panel) => (
       `<figure class="comic-panel" data-beat="${panel.beat}">
         <button type="button" class="comic-hit" data-beat="${panel.beat}" aria-label="撳亮${panel.beat}">
-          <img src="${panel.image}" alt="${panel.alt}">
+          <img src="${panel.image}" alt="${panel.alt}" draggable="false">
         </button>
         <figcaption>${panel.beat}</figcaption>
       </figure>`
@@ -314,36 +419,269 @@
     }
   }
 
+  function clearWarmupTimers() {
+    if (warmupMissTimer) window.clearTimeout(warmupMissTimer);
+    if (warmupAdvanceTimer) window.clearTimeout(warmupAdvanceTimer);
+    warmupMissTimer = null;
+    warmupAdvanceTimer = null;
+  }
+
+  function setWarmupFeedback(text, kind) {
+    const el = $('warmup-feedback');
+    el.textContent = text || '';
+    el.classList.toggle('is-retry', kind === 'retry');
+    el.classList.toggle('success', kind === 'success');
+  }
+
+  function beginWarmup({ reset = true } = {}) {
+    if (!current || !hasSortWarmup(current)) {
+      showPlay();
+      return;
+    }
+    if (reset || !warmupState || warmupState.storyId !== current.id) {
+      warmupState = {
+        storyId: current.id,
+        poolOrder: shuffle(current.panels.map((_, index) => index)),
+        slots: [null, null, null, null],
+        selected: null,
+        missSlot: null,
+        missCount: 0,
+        done: false,
+      };
+    }
+    clearWarmupTimers();
+    stopListen();
+    showView('warmup');
+    setWarmupFeedback(warmupState.done ? '排好喇！而家揀下一步。' : '', warmupState.done ? 'success' : '');
+    renderWarmup();
+    if (!warmupState.done) speakLine('撳一幅圖，再撳格。');
+  }
+
+  function renderWarmup() {
+    if (!current || !warmupState) return;
+    const pool = $('warmup-pool');
+    const slots = $('warmup-slots');
+    pool.replaceChildren();
+    slots.replaceChildren();
+    warmupState.poolOrder.forEach((panelIndex) => {
+      const panel = current.panels[panelIndex];
+      const placed = warmupState.slots.includes(panelIndex);
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'warmup-pic';
+      button.dataset.panel = String(panelIndex);
+      if (warmupState.selected === panelIndex) button.classList.add('is-selected');
+      if (placed) button.classList.add('is-placed');
+      button.disabled = placed || warmupState.done;
+      button.setAttribute('aria-label', panel.cue || `故事圖 ${panelIndex + 1}`);
+      const image = document.createElement('img');
+      image.src = panel.image;
+      image.alt = panel.alt;
+      image.draggable = false;
+      button.append(image);
+      button.addEventListener('click', () => pickWarmupPicture(panelIndex));
+      pool.append(button);
+    });
+    current.panels.forEach((panel, slotIndex) => {
+      const filled = warmupState.slots[slotIndex];
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'warmup-slot';
+      button.dataset.slot = String(slotIndex);
+      if (filled != null) button.classList.add('is-filled');
+      if (warmupState.missSlot === slotIndex) button.classList.add('is-miss');
+      button.disabled = warmupState.done;
+      button.setAttribute('aria-label', `第 ${slotIndex + 1} 格`);
+      const badge = document.createElement('b');
+      badge.textContent = String(slotIndex + 1);
+      button.append(badge);
+      if (filled != null) {
+        const image = document.createElement('img');
+        image.src = current.panels[filled].image;
+        image.alt = current.panels[filled].alt;
+        image.draggable = false;
+        button.append(image);
+      } else {
+        const empty = document.createElement('span');
+        empty.className = 'slot-empty';
+        empty.textContent = '放呢度';
+        button.append(empty);
+      }
+      button.addEventListener('click', () => placeWarmupSlot(slotIndex));
+      slots.append(button);
+    });
+    const placedCount = warmupState.slots.filter((item) => item != null).length;
+    $('warmup-progress').textContent = `已排好 ${placedCount}／4`;
+    $('btn-warmup-next').classList.toggle('hidden', !warmupState.done);
+  }
+
+  function pickWarmupPicture(panelIndex) {
+    if (!warmupState || warmupState.done || warmupState.slots.includes(panelIndex)) return;
+    warmupState.selected = warmupState.selected === panelIndex ? null : panelIndex;
+    warmupState.missSlot = null;
+    setWarmupFeedback('', '');
+    if (warmupState.selected != null) {
+      const cue = current.panels[panelIndex].cue || '';
+      speakCue(cue, false);
+    }
+    renderWarmup();
+  }
+
+  function placeWarmupSlot(slotIndex) {
+    if (!warmupState || warmupState.done) return;
+    if (warmupState.slots[slotIndex] != null) {
+      setWarmupFeedback('呢格已經有圖喇。', 'retry');
+      return;
+    }
+    if (warmupState.selected == null) {
+      setWarmupFeedback('先撳一幅圖。', 'retry');
+      return;
+    }
+    const panelIndex = warmupState.selected;
+    if (panelIndex === slotIndex) {
+      warmupState.slots[slotIndex] = panelIndex;
+      warmupState.selected = null;
+      warmupState.missSlot = null;
+      warmupState.missCount = 0;
+      speakCue(current.panels[panelIndex].beat, true);
+      const placedCount = warmupState.slots.filter((item) => item != null).length;
+      if (placedCount === 4) {
+        warmupState.done = true;
+        setWarmupFeedback('排好喇！而家揀下一步。', 'success');
+        renderWarmup();
+        warmupAdvanceTimer = window.setTimeout(() => {
+          if (current && warmupState?.done && view === 'warmup') showPath();
+        }, 2200);
+        return;
+      }
+      setWarmupFeedback('', '');
+      renderWarmup();
+      return;
+    }
+    warmupState.missCount += 1;
+    warmupState.missSlot = slotIndex;
+    setWarmupFeedback(warmupHint(warmupState.missCount), 'retry');
+    renderWarmup();
+    if (warmupMissTimer) window.clearTimeout(warmupMissTimer);
+    warmupMissTimer = window.setTimeout(() => {
+      if (!warmupState) return;
+      warmupState.missSlot = null;
+      renderWarmup();
+    }, 800);
+  }
+
+  function leaveWarmup() {
+    clearWarmupTimers();
+    stopListen();
+    speech.cancelAllSpeech?.();
+    warmupState = null;
+    current = null;
+    setWarmupFeedback('', '');
+    renderWall();
+  }
+
+  function showPath() {
+    if (!current) return;
+    clearWarmupTimers();
+    stopListen();
+    speech.cancelAllSpeech?.();
+    showView('path');
+    speakLine('想先聽一次，定係而家講？');
+  }
+
+  function stopListen() {
+    listenPlaying = false;
+    if (listenTimer) window.clearTimeout(listenTimer);
+    listenTimer = null;
+    speech.cancelAllSpeech?.();
+  }
+
+  function renderListenBoard(activeIndex) {
+    $('listen-board').innerHTML = current.panels.map((panel, index) => (
+      `<figure class="comic-panel${index === activeIndex ? ' is-lit' : ''}" data-beat="${panel.beat}">
+        <img src="${panel.image}" alt="${panel.alt}" draggable="false">
+        <figcaption>${panel.beat}</figcaption>
+      </figure>`
+    )).join('');
+  }
+
+  function playListenStep(index) {
+    if (!current || view !== 'listen') return;
+    if (index >= current.panels.length) {
+      listenPlaying = false;
+      $('listen-beat').textContent = '聽完喇';
+      $('listen-line').textContent = '可以再聽，或者去講。';
+      return;
+    }
+    listenIndex = index;
+    listenPlaying = true;
+    const panel = current.panels[index];
+    $('listen-beat').textContent = panel.beat;
+    $('listen-line').textContent = panel.modelLine || '';
+    renderListenBoard(index);
+    const line = `${panel.beat}，${panel.modelLine || ''}`.replace(/，$/, '');
+    const muted = isMuted();
+    const goNext = () => {
+      if (!listenPlaying || view !== 'listen') return;
+      playListenStep(index + 1);
+    };
+    speech.unlockSpeech?.();
+    if (speech.speakThen) {
+      speech.speakThen(line, { muted, lang: 'zh-HK', rate: 0.92, pitch: 1.05 }, goNext);
+    } else {
+      speakLine(line);
+      listenTimer = window.setTimeout(goNext, 2600);
+    }
+  }
+
+  function showListen() {
+    if (!current) return;
+    stopListen();
+    showView('listen');
+    $('listen-beat').textContent = current.panels[0].beat;
+    $('listen-line').textContent = '';
+    renderListenBoard(-1);
+    playListenStep(0);
+  }
+
+  function showPlay() {
+    if (!current) return;
+    clearWarmupTimers();
+    stopListen();
+    stopRecording({ silent: true });
+    revokePlayback();
+    hideReview();
+    showView('play');
+    $('prompt-text').textContent = current.prompt;
+    renderComic();
+    refreshCompleteButton();
+    setStatus('');
+    speakLine(current.prompt);
+  }
+
   function openLevel(id) {
     current = levels.find((level) => level.id === id);
     if (!current) return;
     stopRecording({ silent: true });
     revokePlayback();
     hideReview();
-    wall.classList.add('hidden');
-    play.classList.remove('hidden');
-    document.querySelector('.four-shell')?.classList.add('is-playing');
-    $('brand-title').textContent = `${current.place}：${current.title}`;
-    $('brand-kicker').textContent = '四格講故事';
-    $('back-link').setAttribute('href', '#wall');
-    $('back-link').textContent = '← 關卡';
-    $('prompt-text').textContent = current.prompt;
-    renderComic();
-    refreshStars();
-    refreshCompleteButton();
-    setStatus('');
-    speakLine(current.prompt);
+    if (hasSortWarmup(current)) {
+      beginWarmup({ reset: true });
+      return;
+    }
+    showPlay();
   }
 
   function leavePlay() {
     stopRecording({ silent: true });
     speech.cancelAllSpeech?.();
     revokePlayback();
+    hideReview();
+    if (current && hasSortWarmup(current)) {
+      showPath();
+      return;
+    }
     current = null;
-    play.classList.add('hidden');
-    play.classList.remove('is-reviewing');
-    wall.classList.remove('hidden');
-    document.querySelector('.four-shell')?.classList.remove('is-playing');
     renderWall();
   }
 
@@ -441,11 +779,42 @@
     setStatus(RETRY_LINE);
   }
 
+  function onBack() {
+    if (view === 'play') {
+      leavePlay();
+      return;
+    }
+    if (view === 'listen') {
+      stopListen();
+      showPath();
+      return;
+    }
+    if (view === 'path') {
+      beginWarmup({ reset: false });
+      return;
+    }
+    if (view === 'warmup') {
+      leaveWarmup();
+      return;
+    }
+    (window.KakaNav || { goBackOr: (href) => { location.assign(href); } }).goBackOr('index.html#screen-topics');
+  }
+
   $('btn-prompt').addEventListener('click', () => current && speakLine(current.prompt));
   $('btn-model').addEventListener('click', () => current && speakLine(current.modelStory));
   $('btn-record').addEventListener('click', onRecordClick);
   $('btn-complete').addEventListener('click', completeLevel);
   $('btn-rerecord').addEventListener('click', rerecord);
+  $('btn-warmup-next').addEventListener('click', () => {
+    if (warmupState?.done) showPath();
+  });
+  $('btn-listen-model').addEventListener('click', showListen);
+  $('btn-go-tell').addEventListener('click', showPlay);
+  $('btn-replay-model').addEventListener('click', () => {
+    stopListen();
+    playListenStep(0);
+  });
+  $('btn-listen-tell').addEventListener('click', showPlay);
   $('kid-self').addEventListener('click', (event) => {
     const btn = event.target.closest('[data-self]');
     if (btn) toggleKidSelf(btn.dataset.self);
@@ -453,14 +822,11 @@
   $('parent-checks').addEventListener('change', refreshCompleteButton);
   $('back-link').addEventListener('click', (event) => {
     event.preventDefault();
-    if (current) {
-      leavePlay();
-      return;
-    }
-    (window.KakaNav || { goBackOr: (href) => { location.assign(href); } }).goBackOr('index.html#screen-topics');
+    onBack();
   });
   window.addEventListener('pagehide', () => {
     stopRecording({ silent: true });
+    stopListen();
     revokePlayback();
   });
   document.addEventListener('visibilitychange', () => {
@@ -475,8 +841,11 @@
     MAX_MS,
     RETRY_LINE,
     KID_SELF_LABELS,
+    WARMUP_HINTS,
     levels,
     pickMimeType,
+    hasSortWarmup,
+    warmupHint,
     allKidPanelsOn,
     allKidSelfOn,
     allChecksOn,
@@ -488,6 +857,27 @@
     onComicHit,
     toggleKidPanel,
     toggleKidSelf,
+    pickWarmupPicture,
+    placeWarmupSlot,
+    showPath,
+    showListen,
+    showPlay,
+    completeSortWarmupForTest() {
+      if (!current || !hasSortWarmup(current)) return;
+      warmupState = {
+        storyId: current.id,
+        poolOrder: current.panels.map((_, index) => index),
+        slots: [0, 1, 2, 3],
+        selected: null,
+        missSlot: null,
+        missCount: 0,
+        done: true,
+      };
+      clearWarmupTimers();
+      setWarmupFeedback('排好喇！而家揀下一步。', 'success');
+      renderWarmup();
+      showPath();
+    },
     revealClosedLoopForTest() {
       if (!current) return;
       showReview();

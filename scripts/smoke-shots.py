@@ -418,6 +418,89 @@ def walk(pg, url, shots: Path | None, tag: str):
     if "兒" in start_label or "儿" in start_label:
         raise RuntimeError("Level start button must not keep the stray 兒")
     pg.click("[data-start='rainbow-umbrella']")
+    pg.wait_for_selector("#warmup:not(.hidden) #warmup-pool")
+    if pg.is_visible("#play") and "hidden" not in (pg.get_attribute("#play", "class") or ""):
+        raise RuntimeError("Going Home must start with the sort warmup, not the recorder")
+    warmup_probe = pg.evaluate(
+        """() => {
+          const pool = [...document.querySelectorAll('#warmup-pool .warmup-pic img')].map((img) => img.getAttribute('src') || '');
+          const first = document.querySelector('#warmup-pool .warmup-pic:not(.is-placed)');
+          if (!first) return { ok: false, reason: 'missing-warmup' };
+          const panelIndex = Number(first.dataset.panel);
+          const wrongSlotIndex = panelIndex === 3 ? 0 : 3;
+          first.click();
+          document.querySelector(`#warmup-slots .warmup-slot[data-slot="${wrongSlotIndex}"]`)?.click();
+          return {
+            ok: true,
+            poolCount: pool.length,
+            selected: !!document.querySelector('#warmup-pool .warmup-pic.is-selected'),
+            feedback: document.querySelector('#warmup-feedback')?.textContent || '',
+            hasCross: /[✕✘❌]/.test(document.body.innerText),
+            playHidden: document.querySelector('#play')?.classList.contains('hidden'),
+          };
+        }"""
+    )
+    if not warmup_probe.get("ok"):
+        raise RuntimeError("Warmup must show tappable pictures and 1–4 slots")
+    if warmup_probe.get("poolCount") != 4:
+        raise RuntimeError(f"Warmup pool must have 4 pictures, got {warmup_probe.get('poolCount')}")
+    if warmup_probe.get("selected") is not True:
+        raise RuntimeError("Wrong slot must keep the selected picture")
+    if "再試吓" not in (warmup_probe.get("feedback") or "") and "呢格" not in (warmup_probe.get("feedback") or ""):
+        raise RuntimeError("Wrong slot must give a gentle hint")
+    if warmup_probe.get("hasCross"):
+        raise RuntimeError("Warmup must not show a red cross")
+    if warmup_probe.get("playHidden") is not True:
+        raise RuntimeError("A wrong sort must not unlock recording")
+    placed = pg.evaluate(
+        """() => {
+          const order = [
+            ['rainbow-umbrella-p01.webp', '0'],
+            ['rainbow-umbrella-p02.webp', '1'],
+            ['rainbow-umbrella-p04.webp', '2'],
+            ['rainbow-umbrella-p06.webp', '3'],
+          ];
+          for (const [file, slot] of order) {
+            const pic = [...document.querySelectorAll('#warmup-pool .warmup-pic img')]
+              .find((img) => (img.getAttribute('src') || '').endsWith(file))
+              ?.closest('.warmup-pic');
+            if (!pic) return { ok: false, file };
+            if (!pic.classList.contains('is-selected')) pic.click();
+            const cell = document.querySelector(`#warmup-slots .warmup-slot[data-slot="${slot}"]`);
+            if (!cell) return { ok: false, file };
+            cell.click();
+          }
+          return {
+            ok: true,
+            nextVisible: !document.querySelector('#btn-warmup-next')?.classList.contains('hidden'),
+            feedback: document.querySelector('#warmup-feedback')?.textContent || '',
+          };
+        }"""
+    )
+    if not placed.get("ok"):
+        raise RuntimeError(f"Could not place warmup pictures in order ({placed.get('file')})")
+    if placed.get("nextVisible") is not True:
+        raise RuntimeError("Correct sort must unlock the next step")
+    pg.click("#btn-warmup-next")
+    pg.wait_for_selector("#path:not(.hidden) #btn-listen-model")
+    path_copy = pg.evaluate(
+        """() => ({
+          listen: document.querySelector('#btn-listen-model')?.textContent.trim(),
+          tell: document.querySelector('#btn-go-tell')?.textContent.trim(),
+        })"""
+    )
+    if path_copy["listen"] != "🔊 聽範讀":
+        raise RuntimeError(f"Path must offer 聽範讀, got {path_copy['listen']!r}")
+    if path_copy["tell"] != "🎤 去講":
+        raise RuntimeError(f"Path must offer 去講, got {path_copy['tell']!r}")
+    pg.click("#btn-listen-model")
+    pg.wait_for_selector("#listen:not(.hidden) #listen-board")
+    listen_count = pg.evaluate("() => document.querySelectorAll('#listen-board .comic-panel img').length")
+    if listen_count != 4:
+        raise RuntimeError(f"Model listen must show 4 panels, got {listen_count}")
+    if not pg.is_visible("#btn-listen-tell"):
+        raise RuntimeError("Model listen must keep a 去講 skip")
+    pg.click("#btn-listen-tell")
     pg.wait_for_selector("#play:not(.hidden) #btn-record")
     panels = pg.evaluate("() => document.querySelectorAll('#comic-board .comic-panel img').length")
     if panels != 4:
@@ -501,6 +584,13 @@ def walk(pg, url, shots: Path | None, tag: str):
     if review_metrics["minTap"] < 44:
         raise RuntimeError(f"Closed-loop tap targets must be at least 44px, got {review_metrics['minTap']}")
     # Standalone four-panel page has no .screen.active; keep overflow/tap checks above.
+    back_label = (pg.text_content("#back-link") or "").strip()
+    if back_label != "← 選路":
+        raise RuntimeError(f"Play back must return one level to the path, got {back_label!r}")
+    pg.click("#back-link")
+    pg.wait_for_selector("#path:not(.hidden) #btn-go-tell")
+    pg.click("#back-link")
+    pg.wait_for_selector("#warmup:not(.hidden) #warmup-pool")
     pg.click("#back-link")
     pg.wait_for_selector("#wall:not(.hidden) [data-start='rainbow-umbrella']")
     with pg.expect_navigation():

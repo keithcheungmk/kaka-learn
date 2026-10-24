@@ -1273,7 +1273,23 @@ def check_four_panel_story() -> None:
     if 'href="index.html#screen-topics"' not in page:
         fail("four-panel", "關卡牆「← 中文」無 history 時要返中文主題，唔好跳主頁")
     if "leavePlay()" not in js or "goBackOr" not in js or "nav-back.js" not in page:
-        fail("four-panel", "玩時「← 關卡」返關卡牆；牆頂欄有 history 要返上一層")
+        fail("four-panel", "玩時有熱身就「← 選路」；無熱身先「← 關卡」；牆頂欄有 history 要返上一層")
+    if 'id="warmup"' not in page or 'id="path"' not in page or 'id="listen"' not in page:
+        fail("four-panel", "回家路上要有排圖熱身、選路同聽範讀畫面")
+    if "聽範讀" not in page or "去講" not in page:
+        fail("four-panel", "排好之後要拆開「聽範讀」同「去講」兩條路")
+    if "beginWarmup" not in js or "placeWarmupSlot" not in js or "唔係呢格，再試吓" not in js:
+        fail("four-panel", "排圖熱身要撳圖入格，錯格溫柔提示")
+    if "sortWarmup" not in data:
+        fail("four-panel", "只有標咗 sortWarmup 嘅書先開排圖熱身")
+    if "tryEarnStar" not in js.split("function beginWarmup", 1)[-1].split("function leaveWarmup", 1)[0]:
+        pass
+    else:
+        fail("four-panel", "熱身唔可以領大星／幣")
+    if "draggable=\"true\"" in js or "ondragstart" in js:
+        fail("four-panel", "排圖熱身唔好做拖曳")
+    if "✕" in js or "❌" in js or "紅叉" in js:
+        fail("four-panel", "錯格唔好用紅叉")
     node = shutil.which("node")
     if node:
         result = subprocess.run([node, "scripts/test-four-panel-story.mjs"], capture_output=True, text=True)

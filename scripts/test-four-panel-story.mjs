@@ -45,6 +45,24 @@ for (const panel of book.panels) {
   assert.ok(fs.existsSync(path.join(root, panel.image)), `${panel.image} 要存在`);
 }
 assert.match(book.modelStory, /第一.+然後.+後來.+最後/s, '示範故事要有四段時間詞');
+assert.equal(book.sortWarmup, true, '回家路上要開排圖熱身');
+assert.equal(book.panels.map((panel) => panel.cue).join('|'), '落雨|開傘|水窪|收傘');
+assert.ok(book.panels.every((panel) => panel.modelLine), '每格要有粵語範讀短句');
+assert.doesNotMatch(html, /id="listen-en"|Listen to|Skip|Drag to/);
+
+assert.match(html, /id="warmup"/);
+assert.match(html, /id="path"/);
+assert.match(html, /id="listen"/);
+assert.match(html, /先排吓圖/);
+assert.match(html, /聽範讀/);
+assert.match(html, /去講/);
+assert.match(html, /id="btn-warmup-next"/);
+assert.ok(
+  html.indexOf('id="warmup"') < html.indexOf('id="path"')
+    && html.indexOf('id="path"') < html.indexOf('id="listen"')
+    && html.indexOf('id="listen"') < html.indexOf('id="play"'),
+  '熱身 → 選路 → 聽範讀 → 去講，唔好一氣塞完',
+);
 
 assert.match(html, /錄音只留喺呢部機/, '要有本機錄音說明');
 assert.match(html, /唔會上傳/, '要講明唔上傳');
@@ -87,9 +105,30 @@ assert.match(js, /leavePlay\(\)/);
 assert.match(js, /goBackOr\('index\.html#screen-topics'\)/);
 assert.doesNotMatch(js, /fetch\(|XMLHttpRequest|FormData|webkitSpeechRecognition|SpeechRecognition/);
 assert.doesNotMatch(js, /2\/5|五星|半星|half-star/);
+assert.match(js, /function beginWarmup/);
+assert.match(js, /function pickWarmupPicture/);
+assert.match(js, /function placeWarmupSlot/);
+assert.match(js, /function showPath/);
+assert.match(js, /function showListen/);
+assert.match(js, /唔係呢格，再試吓/);
+assert.match(js, /← 熱身/);
+assert.match(js, /← 選路/);
+assert.match(js, /, 2200\)/);
+assert.doesNotMatch(js, /✕|✘|❌|紅叉/);
+assert.doesNotMatch(js, /addEventListener\('drag|ondragstart|draggable="true"/);
+assert.doesNotMatch(html, /draggable="true"/);
+const warmupFns = js.match(/function beginWarmup[\s\S]*function leaveWarmup[\s\S]*?\n  \}/)?.[0] || '';
+assert.doesNotMatch(warmupFns, /tryEarnStar|earnCoin|KakaCelebrate/, '熱身唔獎大星／幣');
+assert.match(js, /function completeLevel[\s\S]*tryEarnStar/);
+assert.doesNotMatch(js.split('function completeLevel')[0], /tryEarnStar/, '大星只喺講完＋家長確認後');
+const interviewJs = read('js/interview-comics.js');
+const interviewHtml = read('interview-comics.html');
+assert.doesNotMatch(interviewJs, /sortWarmup|beginWarmup|聽範讀|先排吓圖/);
+assert.doesNotMatch(interviewHtml, /id="warmup"|聽範讀|先排吓圖/);
 assert.match(css, /overflow-y:\s*auto/, '講故事側欄可以內部捲，等示範同家長勾唔被剪走');
+assert.match(css, /slot-nudge/, '錯格要輕抖，唔好紅叉');
 assert.match(css, /\.kid-panel-btn\.is-on/, '四格要撳得亮');
 assert.match(css, /\.kid-self-btn\.is-on/, '自己檢查掣要撳得亮');
 assert.match(css, /\.primary-btn:disabled/, '未兩邊同意時領星掣要睇得出未開');
 
-console.log('PASS: four-panel-story — 回家路上四格、本機錄音、小朋友自己檢查＋家長確認、獨立於填空故事。');
+console.log('PASS: four-panel-story — 回家路上先排後講、範讀可跳、本機錄音、家長確認先領星。');

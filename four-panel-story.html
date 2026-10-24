@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
   <meta name="theme-color" content="#101c49">
   <title>四格講故事｜卡卡學習</title>
-  <link rel="stylesheet" href="css/four-panel-story.css?v=four-panel">
+  <link rel="stylesheet" href="css/four-panel-story.css?v=sort-warmup">
   <link rel="stylesheet" href="css/celebrate-finish.css?v=20261014-celebrate">
 </head>
 <body>
@@ -25,6 +25,44 @@
         <p>睇四幅圖，用「第一、然後、後來、最後」同我講。錄音只留喺呢部機。</p>
       </div>
       <div id="level-grid" class="level-grid"></div>
+    </section>
+
+    <section id="warmup" class="view warmup-view hidden" aria-labelledby="warmup-heading">
+      <h2 id="warmup-heading">先排吓圖</h2>
+      <p id="warmup-instruction" class="stage-instruction">撳一幅圖，再撳 1 至 4 格。排好先去下一步。</p>
+      <p id="warmup-progress" class="stage-progress" aria-live="polite">已排好 0／4</p>
+      <div class="warmup-spread">
+        <div class="warmup-col">
+          <p class="col-label">揀一幅圖</p>
+          <div id="warmup-pool" class="warmup-grid" aria-label="亂序四格"></div>
+        </div>
+        <div class="warmup-col">
+          <p class="col-label">放去邊格</p>
+          <div id="warmup-slots" class="warmup-grid" aria-label="1 至 4 格"></div>
+        </div>
+      </div>
+      <p id="warmup-feedback" class="stage-feedback" role="status" aria-live="polite"></p>
+      <button type="button" class="primary-btn hidden" id="btn-warmup-next">下一步</button>
+    </section>
+
+    <section id="path" class="view path-view hidden" aria-labelledby="path-heading">
+      <h2 id="path-heading">排好喇</h2>
+      <p class="stage-instruction">想先聽一次，定係而家自己講？</p>
+      <div class="path-actions">
+        <button type="button" class="path-btn path-btn-listen" id="btn-listen-model">🔊 聽範讀</button>
+        <button type="button" class="path-btn path-btn-tell" id="btn-go-tell">🎤 去講</button>
+      </div>
+    </section>
+
+    <section id="listen" class="view listen-view hidden" aria-labelledby="listen-heading">
+      <h2 id="listen-heading">聽範讀</h2>
+      <p id="listen-beat" class="listen-beat" aria-live="polite">第一</p>
+      <div id="listen-board" class="comic-board listen-board" aria-label="範讀四格"></div>
+      <p id="listen-line" class="listen-line" aria-live="polite"></p>
+      <div class="listen-actions">
+        <button type="button" class="ghost-btn" id="btn-replay-model">再聽</button>
+        <button type="button" class="primary-btn" id="btn-listen-tell">去講</button>
+      </div>
     </section>
 
     <section id="play" class="view play-view hidden" aria-labelledby="brand-title">
@@ -82,7 +120,7 @@
   <script src="js/storage.js?v=four-panel"></script>
   <script src="js/speech.js?v=four-panel"></script>
   <script src="js/celebrate-finish.js?v=20261014-celebrate"></script>
-  <script src="data/four-panel-stories.js?v=four-panel"></script>
-  <script src="js/four-panel-story.js?v=four-panel"></script>
+  <script src="data/four-panel-stories.js?v=sort-warmup"></script>
+  <script src="js/four-panel-story.js?v=sort-warmup"></script>
 </body>
 </html>

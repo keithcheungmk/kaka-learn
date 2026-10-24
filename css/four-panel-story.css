@@ -438,18 +438,214 @@ button:focus-visible {
 }
 @media (max-width: 700px) {
   .four-shell { width: min(100% - 16px, 700px); padding-top: 10px; }
-  .play-view { overflow: visible; }
+  .play-view, .warmup-view, .path-view, .listen-view { overflow: visible; }
   .talk-panel { overflow: visible; }
   .record-btn { min-height: 64px; }
 }
+.warmup-view, .path-view, .listen-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 10px;
+}
+.stage-instruction {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 800;
+  line-height: 1.45;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+.stage-progress {
+  margin: 0;
+  color: var(--gold);
+  font-weight: 800;
+}
+.warmup-view h2, .path-view h2, .listen-view h2 {
+  margin: 0;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+}
+.warmup-spread {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px;
+}
+.warmup-col { min-width: 0; display: grid; gap: 8px; align-content: start; }
+.col-label {
+  margin: 0;
+  color: var(--mint);
+  font-weight: 800;
+  font-size: .95rem;
+}
+.warmup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.warmup-pic, .warmup-slot {
+  position: relative;
+  min-width: 0;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 4px solid #3b6ead;
+  border-radius: 16px;
+  background: #e9edf6;
+  overflow: hidden;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  -webkit-user-drag: none;
+}
+.warmup-pic img, .warmup-slot img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.42;
+  object-fit: cover;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.warmup-pic.is-selected {
+  border-width: 6px;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(255, 211, 79, .4);
+}
+.warmup-pic.is-placed {
+  opacity: .38;
+  cursor: default;
+}
+.warmup-slot {
+  background: #14244f;
+  border-style: dashed;
+  color: var(--ink);
+}
+.warmup-slot.is-filled {
+  border-style: solid;
+  border-color: var(--mint);
+  background: #e9edf6;
+}
+.warmup-slot.is-miss {
+  border-style: solid;
+  border-width: 6px;
+  border-color: #ff9a72;
+  box-shadow: 0 0 0 4px rgba(255, 154, 114, .4);
+  animation: slot-nudge .42s ease;
+}
+.warmup-slot b {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  z-index: 1;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: #172048;
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: .9rem;
+  font-weight: 900;
+}
+.slot-empty {
+  display: grid;
+  place-items: center;
+  min-height: 72px;
+  aspect-ratio: 1.42;
+  color: var(--muted);
+  font-weight: 800;
+}
+.stage-feedback {
+  margin: 0;
+  min-height: 1.6em;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.15rem;
+}
+.stage-feedback.is-retry {
+  color: #ffb199;
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+}
+.stage-feedback.success {
+  color: var(--mint);
+  font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+  font-weight: 900;
+}
+#btn-warmup-next { align-self: center; min-width: min(280px, 100%); min-height: 52px; }
+.path-view { align-items: center; text-align: center; justify-content: center; }
+.path-actions {
+  width: min(560px, 100%);
+  display: grid;
+  gap: 14px;
+}
+.path-btn {
+  min-height: 88px;
+  border: 0;
+  border-radius: 20px;
+  font: inherit;
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 900;
+  cursor: pointer;
+}
+.path-btn-listen {
+  color: var(--ink);
+  background: linear-gradient(#2a6d8a, #174466);
+  box-shadow: 0 5px #0d2a42;
+}
+.path-btn-tell {
+  color: var(--answer-ink);
+  background: linear-gradient(#ffe17a, #ffbf35);
+  box-shadow: 0 5px #bb741c;
+}
+.listen-beat {
+  margin: 0;
+  text-align: center;
+  color: var(--gold);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 900;
+}
+.listen-board { flex: 1; }
+.listen-line {
+  margin: 0;
+  text-align: center;
+  color: var(--muted);
+  font-weight: 800;
+  line-height: 1.45;
+}
+.listen-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.listen-actions .ghost-btn,
+.listen-actions .primary-btn { flex: 1; min-height: 52px; }
+@keyframes slot-nudge {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+@media (max-width: 900px) {
+  .warmup-spread { grid-template-columns: 1fr; }
+  .slot-empty { min-height: 64px; }
+}
 @media (min-width: 701px) {
   html, body { height: 100dvh; }
-  .four-shell.is-playing {
+  .four-shell.is-playing,
+  .four-shell.is-stage {
     height: 100dvh;
     overflow: hidden;
   }
-  .four-shell.is-playing .play-view { min-height: 0; overflow: hidden; }
+  .four-shell.is-playing .play-view,
+  .four-shell.is-stage .warmup-view,
+  .four-shell.is-stage .path-view,
+  .four-shell.is-stage .listen-view { min-height: 0; overflow: hidden; }
+  .warmup-pic img, .warmup-slot img, .slot-empty {
+    aspect-ratio: 1.55;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .record-btn.is-recording { animation: none; }
+  .warmup-slot.is-miss { animation: none; }
 }
