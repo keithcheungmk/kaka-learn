@@ -226,6 +226,12 @@
     return String(text || '').trim();
   }
 
+  function quizGoal() {
+    if (quizOrder.length) return quizOrder.length;
+    const items = packItems(currentPack);
+    return Math.min(currentPack?.roundSize || 10, items.length || 10);
+  }
+
   function sampleRound() {
     const items = packItems(currentPack);
     const size = Math.min(currentPack?.roundSize || 10, items.length);
@@ -286,11 +292,11 @@
     } else if (next === 'quiz') {
       setBrand('答題挑戰', title);
       setBack(currentSeason ? `← ${currentSeason.name}` : (currentFestival ? '← 生字' : '← 學習牆'), HOME_HREF);
-      setPill(`已答啱 ${correctCount}／10`);
+      setPill(`已答啱 ${correctCount}／${quizGoal()}`);
     } else if (next === 'finish') {
       setBrand('過關', title);
       setBack(currentSeason ? `← ${currentSeason.name}` : (currentFestival ? '← 生字' : '← 學習牆'), HOME_HREF);
-      setPill('10／10');
+      setPill(`${quizGoal()}／${quizGoal()}`);
     }
   }
 
@@ -559,7 +565,7 @@
   }
 
   function updateProgress() {
-    if (view === 'quiz') setPill(`已答啱 ${correctCount}／10`);
+    if (view === 'quiz') setPill(`已答啱 ${correctCount}／${quizGoal()}`);
   }
 
   function renderQuiz() {
@@ -637,7 +643,7 @@
   }
 
   function afterCorrectAdvance() {
-    if (correctCount >= 10) {
+    if (correctCount >= quizGoal()) {
       showFinish();
       return;
     }
@@ -730,6 +736,9 @@
         ? `${currentPack?.packId || 'community-heroes'}-${nested.id}`
         : (currentPack?.packId || 'community-heroes');
       storage.markTopicPassed?.('common-sense', passedId);
+      const goal = quizGoal();
+      const heading = $('finish-heading');
+      if (heading) heading.textContent = `已答啱 ${goal}／${goal}！`;
       const msg = $('finish-msg');
       const line = coin.gained
         ? '今輪玩完喇！攞到一個 AEON 幣！'

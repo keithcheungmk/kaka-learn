@@ -5,7 +5,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
   "topicId": "common-sense",
   "coinMode": "common-sense-recycle",
   "title": "環保回收",
-  "roundSize": 10,
+  "roundSize": 9,
   "goal": "識分紙膠金屬玻璃去邊個箱",
   "intro": "飲完牛奶盒、膠樽，問大人去邊個箱。先由屋企分類開始。撳卡可以聽一聽。",
   "cover": "assets/common-sense/scenes/paper.webp",
@@ -97,7 +97,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
     },
     {
       "id": "lights-off",
-      "name": "唔 vis 燈要熄",
+      "name": "走人要熄燈",
       "image": "assets/common-sense/scenes/lights-off.webp",
       "wallLine": "離開房間——記得熄燈",
       "ask": "出咗房冇人，電燈應該點？",
@@ -122,20 +122,6 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
         "摘完再倒去回收箱"
       ],
       "audio": "公園花草大家一齊欣賞，用手睇得，唔好摘、唔好踩。"
-    },
-    {
-      "id": "straw",
-      "name": "飲筒用完問大人",
-      "image": "assets/common-sense/scenes/straw.webp",
-      "wallLine": "膠飲筒用完——問大人點丟",
-      "ask": "飲完嘢嘅膠飲筒，應該點？",
-      "correct": "用完問大人點樣丟",
-      "wrong": [
-        "飲筒射去車廂地下",
-        "飲筒塞入朋友書包",
-        "飲筒丟去公園水池"
-      ],
-      "audio": "用完飲筒唔好亂丟，問大人丟入邊個桶。"
     },
     {
       "id": "clean-paper",

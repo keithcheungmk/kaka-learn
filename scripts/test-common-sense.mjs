@@ -52,6 +52,9 @@ assert.doesNotMatch(js, /返中文/);
 assert.match(js, /earnCoinForMode/);
 assert.match(js, /common-sense-heroes/);
 assert.match(js, /已答啱/);
+assert.match(js, /function quizGoal/);
+assert.match(js, /correctCount >= quizGoal\(\)/);
+assert.doesNotMatch(js, /correctCount >= 10/);
 assert.match(js, /今輪玩完喇！攞到一個 AEON 幣！/);
 assert.match(js, /今日已攞/);
 assert.match(js, /HOME_HREF = 'index\.html#screen-home'/);
@@ -198,15 +201,50 @@ for (const id of playableA) {
   assert.equal(metaById[id].status, 'playable', `${id} 要可玩`);
   const pack = packs[id];
   assert.ok(pack, `${id} 要有題庫`);
-  assert.equal(pack.roundSize, 10);
+  const expectedRound = id === 'recycle-green' ? 9 : 10;
+  assert.equal(pack.roundSize, expectedRound, `${id} roundSize 要 ${expectedRound}`);
   assert.ok(!pack.lifeAnchor, `${id} 學習牆唔好再重複生活錨點卡`);
   assert.ok(pack.intro, `${id} 要有一句說明`);
   assert.ok(pack.coinMode.startsWith('common-sense-'), `${id} 獨立 modeKey`);
   assert.match(storage, new RegExp(pack.coinMode.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   if (id === 'festivals-hk' || id === 'weather-seasons') continue;
   const items = quizPool(pack);
-  assert.equal(items.length, 10, `${id} 要有 10 個學習項`);
+  assert.equal(items.length, expectedRound, `${id} 要有 ${expectedRound} 個學習項`);
   for (const entry of items) assertQuizEntry(id, entry);
+}
+
+const recycle = packs['recycle-green'];
+assert.equal(recycle.items.length, 9);
+assert.ok(!recycle.items.some((entry) => entry.id === 'straw'), '環保回收唔好再出飲筒題');
+assert.doesNotMatch(JSON.stringify(recycle), /飲筒/);
+const lights = recycle.items.find((entry) => entry.id === 'lights-off');
+assert.equal(lights.name, '走人要熄燈');
+assert.equal(lights.wallLine, '離開房間——記得熄燈');
+assert.match(lights.ask, /冇人/);
+assert.match(lights.correct, /熄/);
+
+const LATIN_JUNK = /[A-Za-z]{2,}/;
+const SKIP_LATIN_KEYS = new Set([
+  'id', 'packId', 'topicId', 'coinMode', 'image', 'cover', 'src', 'type',
+  'href', 'buttonId', 'status', 'line', 'emoji', 'pth', 'kind',
+]);
+function walkKidCopy(node, path, visit) {
+  if (!node || typeof node !== 'object') return;
+  if (Array.isArray(node)) {
+    node.forEach((child, i) => walkKidCopy(child, `${path}[${i}]`, visit));
+    return;
+  }
+  for (const [key, value] of Object.entries(node)) {
+    if (SKIP_LATIN_KEYS.has(key)) continue;
+    const next = path ? `${path}.${key}` : key;
+    if (typeof value === 'string') visit(next, value);
+    else walkKidCopy(value, next, visit);
+  }
+}
+for (const [id, pack] of Object.entries(packs)) {
+  walkKidCopy(pack, id, (path, text) => {
+    assert.doesNotMatch(text, LATIN_JUNK, `${path} 中文標題／文案唔好混入英文垃圾字：${text}`);
+  });
 }
 
 for (const id of soonA) {
@@ -358,4 +396,4 @@ assert.match(weatherAsks, /邊個季節|春天|夏天|秋天|冬天/);
 assert.doesNotMatch(js, /揀一個職業再入/);
 assert.match(js, /sampleRound|shuffle/);
 
-console.log('PASS: common-sense — P0–P7 可玩、節日生字、飲食連環圖、四季入口、圖載入佔位、隱藏即將推出、獨立 modeKey、8–16 字選項。');
+console.log('PASS: common-sense — P0–P7 可玩、節日生字、飲食連環圖、四季入口、圖載入佔位、隱藏即將推出、獨立 modeKey、8–16 字選項、回收 9 題無 vis／飲筒。');

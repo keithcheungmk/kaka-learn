@@ -26,6 +26,13 @@ def item(id, name, image, wall, ask, correct, wrong, audio):
         ERRORS.append(f"{id} 要 3 個錯選")
     if han(audio) <= han(correct):
         ERRORS.append(f"{id} 錄音稿要長過掣面")
+    latin = re.compile(r"[A-Za-z]{2,}")
+    for field, text in (("name", name), ("wallLine", wall), ("ask", ask), ("correct", correct), ("audio", audio)):
+        if latin.search(text):
+            ERRORS.append(f"{id} {field} 唔好混入英文垃圾字：{text}")
+    for choice in wrong:
+        if latin.search(choice):
+            ERRORS.append(f"{id} 錯選唔好混入英文垃圾字：{choice}")
     return {
         "id": id,
         "name": name,
@@ -405,7 +412,7 @@ RECYCLE = [
          "出街帶可重用布袋",
          ["每次都要新膠袋十個", "用完袋即刻丟去海", "膠袋帶越多就越環保"],
          "出門帶可重用袋，買餸少用新膠袋，地球輕鬆啲。"),
-    item("lights-off", "唔 vis 燈要熄", "assets/common-sense/scenes/lights-off.webp",
+    item("lights-off", "走人要熄燈", "assets/common-sense/scenes/lights-off.webp",
          "離開房間——記得熄燈",
          "出咗房冇人，電燈應該點？",
          "冇人房就要熄咗燈",
@@ -417,12 +424,6 @@ RECYCLE = [
          "公園花睇得唔好摘",
          ["見到靚花就摘晒佢", "用腳踩低全部花朵", "摘完再倒去回收箱"],
          "公園花草大家一齊欣賞，用手睇得，唔好摘、唔好踩。"),
-    item("straw", "飲筒用完問大人", "assets/common-sense/scenes/straw.webp",
-         "膠飲筒用完——問大人點丟",
-         "飲完嘢嘅膠飲筒，應該點？",
-         "用完問大人點樣丟",
-         ["飲筒射去車廂地下", "飲筒塞入朋友書包", "飲筒丟去公園水池"],
-         "用完飲筒唔好亂丟，問大人丟入邊個桶。"),
     item("clean-paper", "乾淨紙先回收", "assets/common-sense/scenes/clean-paper.webp",
          "廢紙——乾淨先好回收",
          "紙搓成團，但有油有醬，仲可唔可以當回收紙？",
@@ -430,9 +431,6 @@ RECYCLE = [
          ["越污糟越要入紙箱", "有湯嘅紙一定回收", "濕紙巾全部當報紙"],
          "乾淨紙先好回收。有油、有醬、好濕，問大人丟普通垃圾桶。"),
 ]
-
-# Fix accidental English in recycle lights-off wallLine - I used "唔 vis 燈" - need Chinese only
-RECYCLE[6]["wallLine"] = "離開房間——記得熄燈"
 
 FOOD = [
     item("milk-from-cow", "牛奶來自牛", "assets/common-sense/scenes/milk-from-cow.webp",
@@ -498,13 +496,13 @@ FOOD = [
 ]
 
 
-def pack(pack_id, title, coin, goal, intro, anchor_title, anchor_body, items, extra=None, cover=None, wrong_hint=None):
+def pack(pack_id, title, coin, goal, intro, anchor_title, anchor_body, items, extra=None, cover=None, wrong_hint=None, round_size=10):
     obj = {
         "packId": pack_id,
         "topicId": "common-sense",
         "coinMode": coin,
         "title": title,
-        "roundSize": 10,
+        "roundSize": round_size,
         "goal": goal,
         "intro": intro,
         "cover": cover or items[0]["image"],
@@ -569,6 +567,10 @@ FOOD_SECTIONS = [
 
 
 def main() -> None:
+    if any(entry["id"] == "straw" for entry in RECYCLE):
+        ERRORS.append("recycle-green 已下架飲筒題，唔好再 emit straw")
+    if len(RECYCLE) != 9:
+        ERRORS.append(f"recycle-green 要 9 題，而家 {len(RECYCLE)}")
     if ERRORS:
         raise SystemExit("\n".join(ERRORS))
 
@@ -610,7 +612,8 @@ def main() -> None:
              "飲完牛奶盒、膠樽，問大人去邊個箱。先由屋企分類開始，再學慳電同愛護公園。",
              "由屋企分類開始",
              "卡卡飲完牛奶或者膠水，問大人：呢樣去紙、膠、金屬定玻璃？出街帶可重用袋。",
-             RECYCLE, cover="assets/common-sense/scenes/paper.webp"),
+             RECYCLE, cover="assets/common-sense/scenes/paper.webp",
+             round_size=9),
         pack("food-health", "飲食同健康", "common-sense-food",
              "知常見食物點嚟，再識均衡同洗手",
              "先睇牛奶同麵包點嚟，再學食飯前洗手、口渴飲水。過程係橋，健康習慣先係關卡。",
