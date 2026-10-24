@@ -42,7 +42,25 @@
     document.querySelector('.storybook-shell')?.classList.toggle('is-warmup', view === 'warmup');
     $('brand-title').textContent = view !== 'library' && current ? storyHeading(current) : libraryTitle;
     const back = $('back-chinese');
-    if (back) back.setAttribute('href', view === 'library' ? 'index.html#screen-topics' : '#library');
+    if (back) {
+      if (view === 'warmup') {
+        back.textContent = '← 書目';
+        back.setAttribute('href', '#library');
+        back.setAttribute('aria-label', '返回故事書目');
+      } else if (view === 'reading' && current && storyWarmupPairs(current)) {
+        back.textContent = '← 熱身';
+        back.setAttribute('href', '#library');
+        back.setAttribute('aria-label', '返回圖字配對熱身');
+      } else if (view === 'reading') {
+        back.textContent = '← 中文';
+        back.setAttribute('href', '#library');
+        back.setAttribute('aria-label', '返回故事書目');
+      } else {
+        back.textContent = '← 中文';
+        back.setAttribute('href', 'index.html#screen-topics');
+        back.setAttribute('aria-label', '返回中文主題');
+      }
+    }
     if (view === 'warmup') $('page-count').textContent = '圖字熱身';
   };
   const isMuted = () => Boolean(window.KakaStorage?.loadState?.()?.muted);
@@ -130,10 +148,27 @@
     library.classList.add('hidden');
     reader.classList.add('hidden');
     $('warmup').classList.remove('hidden');
-    $('warmup-feedback').textContent = '';
-    $('warmup-feedback').classList.remove('success');
+    setWarmupFeedback('', '');
     setReadingChrome(true, 'warmup');
     renderWarmup();
+  }
+  function makeWarmupListen(word) {
+    const listen = document.createElement('button');
+    listen.type = 'button';
+    listen.className = 'warmup-listen';
+    listen.textContent = '🔊';
+    listen.setAttribute('aria-label', `聽：${word}`);
+    listen.addEventListener('click', event => {
+      event.stopPropagation();
+      speakPlacedChip(word, false);
+    });
+    return listen;
+  }
+  function setWarmupFeedback(text, kind) {
+    const feedback = $('warmup-feedback');
+    feedback.textContent = text;
+    feedback.classList.toggle('success', kind === 'success');
+    feedback.classList.toggle('is-retry', kind === 'retry');
   }
   function renderWarmup() {
     if (!warmupState) return;
@@ -144,6 +179,8 @@
     words.replaceChildren();
     imageOrder.forEach((pairIndex, displayIndex) => {
       const pair = pairs[pairIndex];
+      const card = document.createElement('div');
+      card.className = 'warmup-picture-card';
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'warmup-picture';
@@ -159,10 +196,13 @@
       image.height = 600;
       button.append(image);
       button.addEventListener('click', () => pickWarmup('image', pairIndex));
-      pictures.append(button);
+      card.append(makeWarmupListen(pair.word), button);
+      pictures.append(card);
     });
     wordOrder.forEach(pairIndex => {
       const pair = pairs[pairIndex];
+      const card = document.createElement('div');
+      card.className = 'warmup-word-card';
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'warmup-word';
@@ -172,22 +212,28 @@
       if (miss && miss.some(item => item.type === 'word' && item.pairIndex === pairIndex)) button.classList.add('is-miss');
       button.disabled = matched.has(pairIndex) || warmupState.done;
       button.addEventListener('click', () => pickWarmup('word', pairIndex));
-      words.append(button);
+      card.append(makeWarmupListen(pair.word), button);
+      words.append(card);
     });
     $('warmup-progress').textContent = `已配對 ${matched.size}／${pairs.length}`;
   }
   function pickWarmup(type, pairIndex) {
     if (!warmupState || warmupState.done || warmupState.matched.has(pairIndex)) return;
     const selected = warmupState.selected;
+    const word = warmupState.pairs[pairIndex].word;
     if (!selected) {
       warmupState.selected = { type, pairIndex };
       warmupState.miss = null;
+      setWarmupFeedback('', '');
+      if (type === 'image') speakPlacedChip(word, false);
       renderWarmup();
       return;
     }
     if (selected.type === type) {
       warmupState.selected = selected.pairIndex === pairIndex ? null : { type, pairIndex };
       warmupState.miss = null;
+      setWarmupFeedback('', '');
+      if (warmupState.selected && type === 'image') speakPlacedChip(word, false);
       renderWarmup();
       return;
     }
@@ -195,34 +241,29 @@
       warmupState.matched.add(pairIndex);
       warmupState.selected = null;
       warmupState.miss = null;
-      speakPlacedChip(warmupState.pairs[pairIndex].word, true);
+      speakPlacedChip(word, true);
       if (warmupState.matched.size === warmupState.pairs.length) {
         warmupState.done = true;
-        $('warmup-feedback').textContent = '配齊喇！而家入故事。';
-        $('warmup-feedback').classList.add('success');
+        setWarmupFeedback('配齊喇！而家入故事。', 'success');
         renderWarmup();
         window.setTimeout(() => {
           if (current && warmupState?.done) showReader();
-        }, 900);
+        }, 2200);
         return;
       }
-      $('warmup-feedback').textContent = '';
+      setWarmupFeedback('', '');
       renderWarmup();
       return;
     }
-    warmupState.miss = [
-      { type: selected.type, pairIndex: selected.pairIndex },
-      { type, pairIndex }
-    ];
-    warmupState.selected = null;
-    $('warmup-feedback').textContent = '';
+    warmupState.miss = [{ type, pairIndex }];
+    setWarmupFeedback('唔係呢個，再試吓。', 'retry');
     renderWarmup();
     if (warmupMissTimer) window.clearTimeout(warmupMissTimer);
     warmupMissTimer = window.setTimeout(() => {
       if (!warmupState) return;
       warmupState.miss = null;
       renderWarmup();
-    }, 220);
+    }, 800);
   }
   function leaveWarmup() {
     stopSpeech();
@@ -231,8 +272,7 @@
     warmupState = null;
     current = null;
     $('warmup').classList.add('hidden');
-    $('warmup-feedback').textContent = '';
-    $('warmup-feedback').classList.remove('success');
+    setWarmupFeedback('', '');
     library.classList.remove('hidden');
     reader.classList.add('hidden');
     setReadingChrome(false, 'library');

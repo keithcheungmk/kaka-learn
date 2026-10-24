@@ -1165,8 +1165,16 @@ def check_family_storybook_entry() -> None:
         fail("family-storybook", "熱身介面要用繁體中文")
     if "leaveWarmup" not in story_js or "is-warmup" not in story_js:
         fail("family-storybook", "熱身頂欄←要返書目；填空有熱身要返熱身，唔好跳主頁")
-    if "speakPlacedChip(warmupState.pairs[pairIndex].word, true)" not in story_js:
-        fail("family-storybook", "熱身答對要重用填空粵語讀詞再叮聲")
+    if "← 書目" not in story_js or "← 熱身" not in story_js:
+        fail("family-storybook", "熱身頂欄要寫「← 書目」，農莊填空要寫「← 熱身」")
+    if "speakPlacedChip(word, true)" not in story_js or "speakPlacedChip(word, false)" not in story_js:
+        fail("family-storybook", "熱身撳圖要粵語讀詞；答對要重用填空粵語讀詞再叮聲")
+    if "warmup-listen" not in story_js or "stopPropagation" not in story_js:
+        fail("family-storybook", "熱身圖／字要有只聽唔選嘅喇叭")
+    if "唔係呢個，再試吓" not in story_js or story_js.count("warmupState.selected = null") != 1:
+        fail("family-storybook", "錯配要清楚提示並保留原先選中，等下一掣啱字即計分")
+    if ", 2200)" not in story_js or "#warmup-feedback.success" not in story_css:
+        fail("family-storybook", "配齊提示要放大，並稍停先入填空")
     if ".warmup-picture" not in story_css or "4 / 3" not in story_css or "object-fit: cover" not in story_css:
         fail("family-storybook", "熱身插圖框要約 4:3 填滿，唔好左右大白邊")
     if "speakPlacedChip" not in story_js or "speakThen" not in story_js or "playCorrectCue" not in story_js:
