@@ -232,6 +232,17 @@
     return Math.min(currentPack?.roundSize || 10, items.length || 10);
   }
 
+  function hanRoundLabel(size) {
+    const n = Number(size) || 10;
+    const digits = { 8: '八', 9: '九', 10: '十', 11: '十一', 12: '十二' };
+    return `${digits[n] || n}題`;
+  }
+
+  function packRoundSize(packId) {
+    const pack = packMap[packId];
+    return pack?.roundSize || 10;
+  }
+
   function sampleRound() {
     const items = packItems(currentPack);
     const size = Math.min(currentPack?.roundSize || 10, items.length);
@@ -314,7 +325,8 @@
       if (meta.href) {
         return `<a class="pack pack-playable" id="${meta.buttonId || ''}" href="${meta.href}" aria-label="${meta.kicker}">${inner}</a>`;
       }
-      return `<button type="button" class="pack pack-playable" id="${meta.buttonId || ''}" data-pack="${meta.packId}" aria-label="${meta.kicker}，學完再答十題">${inner}</button>`;
+      const countLabel = hanRoundLabel(packRoundSize(meta.packId));
+      return `<button type="button" class="pack pack-playable" id="${meta.buttonId || ''}" data-pack="${meta.packId}" aria-label="${meta.kicker}，學完再答${countLabel}">${inner}</button>`;
     };
     grid.innerHTML =
       `<p class="pack-line-label">${catalog.lineATitle || '常識答題'}</p>` +

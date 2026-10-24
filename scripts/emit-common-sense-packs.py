@@ -609,7 +609,7 @@ def main() -> None:
              FESTIVALS, cover="assets/common-sense/scenes/new-year.webp"),
         pack("recycle-green", "環保回收", "common-sense-recycle",
              "識分紙膠金屬玻璃去邊個箱",
-             "飲完牛奶盒、膠樽，問大人去邊個箱。先由屋企分類開始，再學慳電同愛護公園。",
+             "飲完牛奶盒、膠樽，問大人去邊個箱。先由屋企分類開始。撳卡可以聽一聽。答九題就有大星星同幣。",
              "由屋企分類開始",
              "卡卡飲完牛奶或者膠水，問大人：呢樣去紙、膠、金屬定玻璃？出街帶可重用袋。",
              RECYCLE, cover="assets/common-sense/scenes/paper.webp",
@@ -649,7 +649,7 @@ def main() -> None:
              "blurb": "過年、中秋、端午", "cover": "assets/common-sense/scenes/new-year.webp",
              "buttonId": "btn-pack-festivals"},
             {"packId": "recycle-green", "line": "A", "status": "playable", "kicker": "A · 環保回收",
-             "blurb": "紙膠金屬玻璃分類", "cover": "assets/common-sense/scenes/paper.webp",
+             "blurb": "紙膠金屬玻璃分類・答九題", "cover": "assets/common-sense/scenes/paper.webp",
              "buttonId": "btn-pack-recycle"},
             {"packId": "food-health", "line": "A", "status": "playable", "kicker": "A · 飲食同健康",
              "blurb": "牛奶麵包點嚟＋洗手", "cover": "assets/common-sense/scenes/milk-from-cow.webp",
@@ -673,6 +673,9 @@ def main() -> None:
              "blurb": "即將推出", "cover": "", "emoji": "🔴"},
         ],
     }
+    recycle_meta = next((row for row in catalog["packs"] if row["packId"] == "recycle-green"), {})
+    if "九題" not in recycle_meta.get("blurb", "") or "十題" in recycle_meta.get("blurb", "") or "10 題" in recycle_meta.get("blurb", ""):
+        raise SystemExit("recycle-green 目錄要寫答九題，唔好再寫十題")
     dump_js("COMMON_SENSE_CATALOG", catalog, DATA / "common-sense-catalog.js", False)
     print("all packs ok")
 

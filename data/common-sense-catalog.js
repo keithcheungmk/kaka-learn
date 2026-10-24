@@ -62,7 +62,7 @@ window.COMMON_SENSE_CATALOG = {
       "line": "A",
       "status": "playable",
       "kicker": "A · 環保回收",
-      "blurb": "紙膠金屬玻璃分類",
+      "blurb": "紙膠金屬玻璃分類・答九題",
       "cover": "assets/common-sense/scenes/paper.webp",
       "buttonId": "btn-pack-recycle"
     },

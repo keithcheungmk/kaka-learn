@@ -7,7 +7,7 @@ window.COMMON_SENSE_PACKS["recycle-green"] = {
   "title": "環保回收",
   "roundSize": 9,
   "goal": "識分紙膠金屬玻璃去邊個箱",
-  "intro": "飲完牛奶盒、膠樽，問大人去邊個箱。先由屋企分類開始。撳卡可以聽一聽。",
+  "intro": "飲完牛奶盒、膠樽，問大人去邊個箱。先由屋企分類開始。撳卡可以聽一聽。答九題就有大星星同幣。",
   "cover": "assets/common-sense/scenes/paper.webp",
   "wrongHint": "唔係呢個喎，再諗吓○○啦，可以再試。",
   "items": [

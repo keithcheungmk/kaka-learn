@@ -222,6 +222,14 @@ assert.equal(lights.name, '走人要熄燈');
 assert.equal(lights.wallLine, '離開房間——記得熄燈');
 assert.match(lights.ask, /冇人/);
 assert.match(lights.correct, /熄/);
+assert.match(js, /function hanRoundLabel/);
+assert.doesNotMatch(js, /學完再答十題/);
+assert.doesNotMatch(html, /再答十題/);
+assert.doesNotMatch(html, /答啱 10 題/);
+assert.match(metaById['recycle-green'].blurb, /九題/);
+assert.doesNotMatch(metaById['recycle-green'].blurb, /十題|10 題/);
+assert.match(recycle.intro, /九題/);
+assert.doesNotMatch(`${recycle.intro}${recycle.goal}`, /十題|10 題/);
 
 const LATIN_JUNK = /[A-Za-z]{2,}/;
 const SKIP_LATIN_KEYS = new Set([
