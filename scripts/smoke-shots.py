@@ -397,21 +397,43 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError("Four-panel mode must start on the level wall")
     thumbs = pg.evaluate("() => document.querySelectorAll('#level-grid .level-thumb img').length")
     if thumbs != 4:
-        raise RuntimeError(f"Level card must show 4 numbered panels, got {thumbs}")
+        raise RuntimeError(f"Level card must show 4 panels, got {thumbs}")
     wall_preview = pg.evaluate(
         """() => {
-          const hit = document.querySelector('#level-grid .wall-hit[data-beat="第一"]');
+          const files = [...document.querySelectorAll('#level-grid .level-thumb img')]
+            .map((img) => (img.getAttribute('src') || '').split('/').pop());
+          const numbers = [...document.querySelectorAll('#level-grid .level-thumb b')]
+            .map((el) => el.textContent.trim());
+          const hit = document.querySelector('#level-grid .wall-hit');
           if (!hit) return { ok: false };
           hit.click();
           const lit = hit.closest('.level-thumb')?.classList.contains('is-lit');
           const stillWall = !document.querySelector('#wall')?.classList.contains('hidden');
-          return { ok: true, lit, stillWall };
+          return {
+            ok: true,
+            lit,
+            stillWall,
+            files,
+            numbers,
+            hasBeat: !!document.querySelector('#level-grid .wall-hit[data-beat]'),
+          };
         }"""
     )
     if not wall_preview.get("ok") or wall_preview.get("lit") is not True:
         raise RuntimeError("Level-wall comic thumbs must light up when tapped")
     if wall_preview.get("stillWall") is not True:
         raise RuntimeError("Wall thumb taps must not start the level")
+    if wall_preview.get("numbers"):
+        raise RuntimeError(f"Going Home wall must not print 1–4 order badges, got {wall_preview.get('numbers')}")
+    if wall_preview.get("hasBeat"):
+        raise RuntimeError("Going Home wall thumbs must not label the story beats")
+    if wall_preview.get("files") == [
+        "rainbow-umbrella-p01.webp",
+        "rainbow-umbrella-p02.webp",
+        "rainbow-umbrella-p04.webp",
+        "rainbow-umbrella-p06.webp",
+    ]:
+        raise RuntimeError("Going Home wall must shuffle preview pictures so it does not leak the order")
     start_label = pg.text_content("[data-start='rainbow-umbrella']") or ""
     if start_label.strip() != "點此開始":
         raise RuntimeError(f"Level start button must be 「點此開始」, got {start_label!r}")
@@ -481,6 +503,23 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Could not place warmup pictures in order ({placed.get('file')})")
     if placed.get("nextVisible") is not True:
         raise RuntimeError("Correct sort must unlock the next step")
+    still_warmup = pg.evaluate(
+        """() => ({
+          warmup: !document.querySelector('#warmup')?.classList.contains('hidden'),
+          path: document.querySelector('#path')?.classList.contains('hidden'),
+        })"""
+    )
+    if still_warmup.get("warmup") is not True or still_warmup.get("path") is not True:
+        raise RuntimeError("Finished sort must wait for 下一步; must not auto-jump to the path")
+    next_box = pg.evaluate(
+        """() => {
+          const el = document.querySelector('#btn-warmup-next');
+          const r = el?.getBoundingClientRect();
+          return r ? { w: r.width, h: r.height } : null;
+        }"""
+    )
+    if not next_box or next_box["h"] > 52 or next_box["w"] > 180:
+        raise RuntimeError(f"下一步 must stay a compact button, got {next_box}")
     pg.click("#btn-warmup-next")
     pg.wait_for_selector("#path:not(.hidden) #btn-listen-model")
     path_copy = pg.evaluate(

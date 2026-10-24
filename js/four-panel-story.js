@@ -29,7 +29,6 @@
   let localDone = new Set();
   let warmupState = null;
   let warmupMissTimer = null;
-  let warmupAdvanceTimer = null;
   let listenTimer = null;
   let listenIndex = 0;
   let listenPlaying = false;
@@ -202,11 +201,11 @@
   }
 
   function previewWallBeat(button) {
-    const beat = button?.dataset?.beat;
     const thumb = button?.closest('.level-thumb');
-    if (!beat || !thumb) return false;
+    if (!thumb) return false;
     thumb.classList.add('is-lit');
-    speakLine(beat);
+    const spoken = button.dataset.beat || button.dataset.cue || '';
+    if (spoken) speakLine(spoken);
     return true;
   }
 
@@ -347,14 +346,24 @@
   function renderWall() {
     $('level-grid').innerHTML = levels.map((level) => {
       const done = isLevelDone(level.id);
-      const thumbs = level.panels.map((panel, index) => (
-        `<figure class="level-thumb">
+      const hideOrder = hasSortWarmup(level);
+      const previewPanels = hideOrder ? shuffle(level.panels) : level.panels;
+      const thumbs = previewPanels.map((panel, index) => {
+        if (hideOrder) {
+          const cue = panel.cue || '';
+          return `<figure class="level-thumb">
+          <button type="button" class="wall-hit" data-cue="${cue}" aria-label="睇圖">
+            <img src="${panel.image}" alt="${panel.alt}" draggable="false">
+          </button>
+        </figure>`;
+        }
+        return `<figure class="level-thumb">
           <button type="button" class="wall-hit" data-beat="${panel.beat}" aria-label="聽${panel.beat}">
             <img src="${panel.image}" alt="${panel.alt}" draggable="false">
           </button>
           <b>${index + 1}</b>
-        </figure>`
-      )).join('');
+        </figure>`;
+      }).join('');
       return `<article class="level-card" data-level="${level.id}">
         <div class="level-thumbs">${thumbs}</div>
         <div class="level-meta">
@@ -421,9 +430,7 @@
 
   function clearWarmupTimers() {
     if (warmupMissTimer) window.clearTimeout(warmupMissTimer);
-    if (warmupAdvanceTimer) window.clearTimeout(warmupAdvanceTimer);
     warmupMissTimer = null;
-    warmupAdvanceTimer = null;
   }
 
   function setWarmupFeedback(text, kind) {
@@ -452,7 +459,7 @@
     clearWarmupTimers();
     stopListen();
     showView('warmup');
-    setWarmupFeedback(warmupState.done ? '排好喇！而家揀下一步。' : '', warmupState.done ? 'success' : '');
+    setWarmupFeedback(warmupState.done ? '排好喇！撳下一步。' : '', warmupState.done ? 'success' : '');
     renderWarmup();
     if (!warmupState.done) speakLine('撳一幅圖，再撳格。');
   }
@@ -547,11 +554,8 @@
       const placedCount = warmupState.slots.filter((item) => item != null).length;
       if (placedCount === 4) {
         warmupState.done = true;
-        setWarmupFeedback('排好喇！而家揀下一步。', 'success');
+        setWarmupFeedback('排好喇！撳下一步。', 'success');
         renderWarmup();
-        warmupAdvanceTimer = window.setTimeout(() => {
-          if (current && warmupState?.done && view === 'warmup') showPath();
-        }, 2200);
         return;
       }
       setWarmupFeedback('', '');
@@ -874,9 +878,8 @@
         done: true,
       };
       clearWarmupTimers();
-      setWarmupFeedback('排好喇！而家揀下一步。', 'success');
+      setWarmupFeedback('排好喇！撳下一步。', 'success');
       renderWarmup();
-      showPath();
     },
     revealClosedLoopForTest() {
       if (!current) return;

@@ -1288,6 +1288,12 @@ def check_four_panel_story() -> None:
         fail("four-panel", "熱身唔可以領大星／幣")
     if "draggable=\"true\"" in js or "ondragstart" in js:
         fail("four-panel", "排圖熱身唔好做拖曳")
+    if "hideOrder ? shuffle(level.panels)" not in js:
+        fail("four-panel", "有排圖熱身嘅關卡卡要打亂預覽，唔好印正確 1–4")
+    if ", 2200)" in js or "setTimeout(() => {\n          if (current && warmupState?.done && view === 'warmup') showPath()" in js:
+        fail("four-panel", "排齊之後要等人撳「下一步」，唔好自動跳選路")
+    if 'class="warmup-next hidden"' not in page:
+        fail("four-panel", "下一步要係正常細掣，唔好用高大 primary")
     if "✕" in js or "❌" in js or "紅叉" in js:
         fail("four-panel", "錯格唔好用紅叉")
     node = shutil.which("node")
