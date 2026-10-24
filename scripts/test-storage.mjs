@@ -203,7 +203,7 @@ test('常識樂園獨立幣位：一日一次，唔佔中文聽配砌三個幣�
   assert.equal(S.loadState().coinsTotal, 2);
 });
 
-test('認字 Demo 獨立幣位：一日一次，唔佔中文聽配砌', () => {
+test('學寫字獨立幣位：一日一次，唔佔中文聽配砌', () => {
   const S = freshStorage();
   S.setActiveProfile('kaka');
   const a = S.earnCoinForMode('hanzi-write');

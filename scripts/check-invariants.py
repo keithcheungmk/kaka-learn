@@ -1306,12 +1306,14 @@ def check_four_panel_story() -> None:
 
 
 def check_hanzi_write_demo() -> None:
-    """Keith 2026-10-24：中文主題「卡卡認字 Demo」本機 hanzi-writer 寫繁體「星」。"""
+    """Keith 2026-10-24：中文主題「卡卡學寫字」本機 hanzi-writer 寫繁體十二關。"""
     html = read("index.html")
     if 'id="btn-topics-hanzi-write"' not in html or "./hanzi-write-demo.html" not in html:
-        fail("hanzi-write", "中文主題頁要有卡卡認字 Demo 獨立入口")
-    if "卡卡認字 Demo" not in html:
-        fail("hanzi-write", "中文主題頁入口要寫「卡卡認字 Demo」")
+        fail("hanzi-write", "中文主題頁要有卡卡學寫字獨立入口")
+    if "卡卡學寫字" not in html:
+        fail("hanzi-write", "中文主題頁入口要寫「卡卡學寫字」")
+    if "卡卡認字 Demo" in html:
+        fail("hanzi-write", "中文主題頁唔好再用「卡卡認字 Demo」")
     for path in (
         "hanzi-write-demo.html",
         "css/hanzi-write-demo.css",
@@ -1321,7 +1323,7 @@ def check_hanzi_write_demo() -> None:
         "scripts/test-hanzi-write-demo.mjs",
     ):
         if not Path(path).is_file():
-            fail("hanzi-write", f"缺少認字 Demo 檔案：{path}")
+            fail("hanzi-write", f"缺少學寫字檔案：{path}")
     page = read("hanzi-write-demo.html")
     js = read("js/hanzi-write-demo.js")
     css = read("css/hanzi-write-demo.css")
@@ -1333,6 +1335,8 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "hanzi-writer 要本機 vendor，唔好 runtime CDN")
     if '"星"' not in data or "KAKA_HANZI_WRITE_CHARS" not in data:
         fail("hanzi-write", "要有本機繁體「星」筆順資料")
+    if "KAKA_HANZI_WRITE_BANK" not in data or '"glossYue"' not in data:
+        fail("hanzi-write", "字庫要有 BANK 同 glossYue")
     if "米字格" not in page or "再寫一次" not in page or "過關啦！" not in page:
         fail("hanzi-write", "流程要有米字格、再寫一次、過關啦")
     if "btn-profile-kaka" not in page or "profile-kaka.jpg" not in page:
@@ -1361,9 +1365,9 @@ def check_hanzi_write_demo() -> None:
     if node:
         result = subprocess.run([node, "scripts/test-hanzi-write-demo.mjs"], capture_output=True, text=True)
         if result.returncode:
-            fail("hanzi-write", (result.stdout or result.stderr or "認字 Demo 檢查失敗").strip()[:800])
+            fail("hanzi-write", (result.stdout or result.stderr or "學寫字檢查失敗").strip()[:800])
     else:
-        notes.append("冇 node，跳過認字 Demo 單元測試")
+        notes.append("冇 node，跳過學寫字單元測試")
 
 
 def check_family_storybook_en_entry() -> None:

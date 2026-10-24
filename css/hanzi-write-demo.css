@@ -110,6 +110,36 @@ body { min-height: 100dvh; }
 
 .who-line { color: var(--gold); font-weight: 800; }
 
+.level-bank {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.level-chip {
+  appearance: none;
+  min-width: var(--tap);
+  min-height: var(--tap);
+  padding: 8px 10px;
+  border-radius: 14px;
+  border: 2px solid #4a6ea8;
+  background: #14244b;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 900;
+  font-size: 1.35rem;
+  cursor: pointer;
+}
+
+.level-chip.is-passed {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(255, 211, 79, .28);
+}
+
 .sky-art {
   position: relative;
   height: clamp(110px, 22vh, 180px);
@@ -289,7 +319,7 @@ body { min-height: 100dvh; }
   width: min(420px, 100%, 58vh);
   aspect-ratio: 1;
   margin: 0 auto;
-  background: #f7fbff;
+  background: #e8eef8;
   border-radius: 18px;
   box-shadow: inset 0 0 0 3px #c23b3b;
 }

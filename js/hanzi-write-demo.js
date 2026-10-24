@@ -5,13 +5,16 @@
   const speech = window.KakaSpeech || {};
   const nav = window.KakaNav || { goBackOr: (href) => { location.assign(href); } };
   const CHAR_DATA = window.KAKA_HANZI_WRITE_CHARS || {};
-  const LEVELS = window.KAKA_HANZI_WRITE_LEVELS || [];
+  const BANK = window.KAKA_HANZI_WRITE_BANK || window.KAKA_HANZI_WRITE_LEVELS || [];
+  const LEVELS = BANK;
   const TOPIC_ID = 'hanzi-write';
   const COIN_MODE = 'hanzi-write';
   const PARENT_HREF = 'index.html#screen-topics';
   const GUIDE_ORANGE = '#ff8a1a';
+  const OUTLINE_INK = '#8aa0c8';
   const WRITE_HINT = '跟著橙色線，一筆一筆寫。';
   const RETRY_HINT = '再試一次。跟著橙色線寫。';
+  const PASS_CHEER = '過關啦';
 
   const $ = (id) => document.getElementById(id);
   const views = {
@@ -75,8 +78,32 @@
     return storage.getActiveProfile?.()?.name || '小朋友';
   }
 
+  function firstPlayableIndex() {
+    const list = levels();
+    const idx = list.findIndex((level) => !storage.isKeyPassed?.(TOPIC_ID, level.id));
+    return idx === -1 ? 0 : idx;
+  }
+
+  function renderBank() {
+    const el = $('level-bank');
+    if (!el) return;
+    el.replaceChildren();
+    levels().forEach((level, i) => {
+      const passed = storage.isKeyPassed?.(TOPIC_ID, level.id);
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'level-chip' + (passed ? ' is-passed' : '');
+      btn.setAttribute('role', 'listitem');
+      btn.textContent = level.char;
+      btn.setAttribute('aria-label', `${level.title || `第${i + 1}關`} 寫${level.char}`);
+      btn.addEventListener('click', () => openWrite(i));
+      el.appendChild(btn);
+    });
+  }
+
   function goAdventure() {
     $('who-line').textContent = `${whoName()}，準備好了嗎？`;
+    renderBank();
     showView('adventure');
     speak(`${whoName()}，開始冒險`);
   }
@@ -170,7 +197,7 @@
       padding: 12,
       strokeColor: GUIDE_ORANGE,
       highlightColor: GUIDE_ORANGE,
-      outlineColor: '#ffb14a',
+      outlineColor: OUTLINE_INK,
       drawingColor: '#e56700',
       showHintAfterMisses: 1,
       highlightOnComplete: true,
@@ -187,6 +214,7 @@
     $('write-heading').textContent = `寫「${level.char}」`;
     $('write-lead').textContent = level.hint ? `${level.hint}。先看筆順，再自己寫一次。` : '先看筆順，再自己寫一次。';
     $('btn-next-char').hidden = true;
+    if ($('btn-pass-rewrite')) $('btn-pass-rewrite').hidden = true;
     $('pass-overlay').classList.add('hidden');
     showView('write');
     speak(`寫${level.say || level.char}`);
@@ -215,12 +243,30 @@
     const hasNext = levelIndex < levels().length - 1;
     $('btn-next-char').hidden = !hasNext;
     $('btn-next-level').hidden = !hasNext;
-    $('pass-copy').textContent = first
-      ? '三顆星星已亮起。完成一輪，獎勵一枚星星幣。'
-      : '這一關已經完成。可以再寫一次；今天的星星幣已經領取。';
+    if ($('btn-pass-rewrite')) $('btn-pass-rewrite').hidden = hasNext;
+    if (!hasNext) {
+      $('pass-copy').textContent = first
+        ? '十二關都寫完喇。三顆星星已亮起。完成一輪，獎勵一枚星星幣。'
+        : '全部關卡已經完成。可以再寫一次；今天的星星幣已經領取。';
+    } else {
+      $('pass-copy').textContent = first
+        ? '三顆星星已亮起。完成一輪，獎勵一枚星星幣。'
+        : '這一關已經完成。可以再寫一次；今天的星星幣已經領取。';
+    }
     $('pass-coin').textContent = coin.gained ? '＋1 星星幣' : (coin.already ? '今天已領過幣' : '星星已記下');
     $('pass-overlay').classList.remove('hidden');
-    speak('過關啦');
+    speakGlossThenCheer(level);
+  }
+
+  function speakGlossThenCheer(level) {
+    const gloss = level.glossYue || '';
+    const cheer = () => speak(PASS_CHEER);
+    if (gloss && typeof speech.speakThen === 'function') {
+      speech.unlockSpeech?.();
+      speech.speakThen(gloss, { rate: 0.92, pitch: 1.08 }, cheer);
+      return;
+    }
+    cheer();
   }
 
   function rewrite() {
@@ -235,6 +281,7 @@
   function leaveWrite() {
     $('pass-overlay').classList.add('hidden');
     destroyWriter();
+    renderBank();
     showView('adventure');
   }
 
@@ -253,7 +300,7 @@
 
   $('btn-profile-kaka').addEventListener('click', () => pickProfile('kaka'));
   $('btn-profile-heihei').addEventListener('click', () => pickProfile('heihei'));
-  $('btn-start-adventure').addEventListener('click', () => openWrite(0));
+  $('btn-start-adventure').addEventListener('click', () => openWrite(firstPlayableIndex()));
   $('btn-guide').addEventListener('click', () => {
     speech.unlockSpeech?.();
     playGuide();
@@ -264,6 +311,10 @@
   });
   $('btn-next-char').addEventListener('click', () => openWrite(levelIndex + 1));
   $('btn-next-level').addEventListener('click', () => openWrite(levelIndex + 1));
+  $('btn-pass-rewrite')?.addEventListener('click', () => {
+    speech.unlockSpeech?.();
+    rewrite();
+  });
   $('btn-pass-home').addEventListener('click', () => {
     $('pass-overlay').classList.add('hidden');
     destroyWriter();
@@ -288,10 +339,14 @@
     COIN_MODE,
     PARENT_HREF,
     GUIDE_ORANGE,
+    OUTLINE_INK,
     WRITE_HINT,
     RETRY_HINT,
+    PASS_CHEER,
     levels,
     currentLevel,
+    firstPlayableIndex,
+    speakGlossThenCheer,
     showView,
     openWrite,
     onLevelPassed,

@@ -114,7 +114,7 @@
   - 海洋動物：鯊魚、鯨魚、八爪魚、水母、海龜、海星、小丑魚、魷魚
 
 - 無登入、廣告、追蹤、故事模式、真實付款／AEON API。
-- **已批准寫字例外（Keith 2026-10-24）**：中文主題頁「卡卡認字 Demo」可用本機 `hanzi-writer` 做繁體「星」筆順關；重用卡卡／禧禧 Profile；過關記星＋獨立 `hanzi-write` 幣位（一日一次）；筆跡唔上傳。唔好再加無入口 orphan 寫字頁，亦唔好抄受版權角色。
+- **已批准寫字例外（Keith 2026-10-24）**：中文主題頁「卡卡學寫字」可用本機 `hanzi-writer` 做繁體筆順關（星、月、一等十二字）；重用卡卡／禧禧 Profile；過關記星＋獨立 `hanzi-write` 幣位（一日一次）；筆跡唔上傳。唔好再加無入口 orphan 寫字頁，亦唔好抄受版權角色。
 - UI 用繁體中文；主題係原創「**太空戰士學院**」（中文太空冒險；唔用迪士尼／彼思名稱、角色或素材）。動物主題仍保留鹿等字詞內容。
 - `family-storybook.html` 係獨立中文故事小隊入口；故事原創，只參考紅輯認字卡。每篇 6–8 格，`bookWords` 必須可追溯到列出的認字卡，場景延伸詞獨立放入 `extensionWords`，完成整篇只獎一粒星。《中山開心農莊》試點先玩「圖字配對熱身」（`warmupPairs` 必須係該篇 `focusWords`＋本篇場景圖）：撳圖再撳字或調轉，答對粵語讀詞再叮、答錯靜靜重試唔洗牌、配齊先入填空；熱身唔另獎星／幣、無生命、無檢查掣。其他故事暫唔加。故事頁只用粵語朗讀：裝置 `speechSynthesis` 讀當頁繁體文字，走 `js/speech.js` 嘅 zh-HK／yue 揀聲同 iOS 解鎖；唔放普通話掣，唔用認字牆 m4a，亦唔好把普通話寫入故事內容。閱讀頁頂欄顯示「地點：故事名」（例如「回家路上：雨停了，收起雨傘」）；「← 中文」書目返中文主題；熱身頂欄寫「← 書目」返書架；填空若本篇有熱身就寫「← 熱身」返熱身，否則「← 中文」返書目。書目頁有 in-app history 就 `history.back()`，否則返中文主題。唔放星星進度 pill 同「← 故事書目」第二層返回。播放失敗時可由家長朗讀解鎖。故事頁將敘述及「角色說：『對白』」排成同一段、同一字級，不設獨立對白框；頁面不顯示每頁重點詞／參考讀本註記，來源詞語仍保留於 manifest 供遊戲與 provenance 使用。
 - `family-storybook-en.html` 係獨立英文家庭故事殼，平行中文故事小隊，**唔好**伸延 Little Fox `story-demo.js`／`assets/story-demo`。角色名 Karl／HeiHei／Froggie；每頁聽完再填 2 個英文重點詞；TTS 用 `js/speech.js` 嘅 `speakEnglishTerm`／en-US。Story Reading 系列揀選頁用同一風格第四張卡進入（Wacky Ricky 下面）；英文 hub 可保留平行入口。卡片只係入口，唔好把家庭故事寫入 Little Fox `SERIES` catalogue。重用中文場景圖 `assets/family-stories/scenes/`。閱讀頁頂欄 `place: story`（例如 `Going Home: The Rain Stops`）；「← English」閱讀時返 EN 書目，書目頁有 in-app history 就 `history.back()`（系列揀選或英文 hub），否則返 `#screen-story-series`，唔跳主頁或主題詞根。播放失敗時可由家長朗讀解鎖。完成整篇一粒星。

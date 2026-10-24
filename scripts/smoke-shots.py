@@ -640,12 +640,12 @@ def walk(pg, url, shots: Path | None, tag: str):
     if pg.is_visible("#screen-home") and "active" in (pg.get_attribute("#screen-home", "class") or ""):
         raise RuntimeError("Four-panel wall ← 中文 must return one level to Chinese topics, not home")
 
-    # 卡卡認字 Demo：中文主題入口 → 選角色／冒險 → 寫「星」→ 過關
+    # 卡卡學寫字：中文主題入口 → 選角色／冒險 → 寫「星」→ 過關
     pg.wait_for_selector("#screen-topics.active #btn-topics-hanzi-write")
     hanzi_href = pg.get_attribute("#btn-topics-hanzi-write", "href") or ""
     if "hanzi-write-demo.html" not in hanzi_href:
         raise RuntimeError("Chinese hub must open the independent hanzi-write demo")
-    probe("中文・卡卡認字 Demo 入口")
+    probe("中文・卡卡學寫字入口")
     with pg.expect_navigation():
         pg.click("#btn-topics-hanzi-write")
     pg.wait_for_selector("#view-adventure:not(.hidden) #btn-start-adventure, #view-profile:not(.hidden) #btn-profile-kaka")

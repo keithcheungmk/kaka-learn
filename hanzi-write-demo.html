@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
   <meta name="theme-color" content="#0b1638">
-  <title>卡卡認字 Demo｜寫一個字</title>
+  <title>卡卡學寫字｜寫字・筆順</title>
   <link rel="stylesheet" href="css/hanzi-write-demo.css?v=hanzi-write">
 </head>
 <body>
@@ -13,7 +13,7 @@
       <a id="back-link" class="back-link" href="index.html#screen-topics">← 中文</a>
       <div class="brand">
         <span id="brand-kicker">寫字・筆順</span>
-        <h1 id="brand-title">卡卡認字 Demo</h1>
+        <h1 id="brand-title">卡卡學寫字</h1>
       </div>
       <div id="star-pill" class="star-pill" aria-live="polite">★ 0</div>
     </header>
@@ -50,7 +50,8 @@
         </div>
         <p class="who-line" id="who-line">卡卡，準備好未？</p>
         <h2 id="adventure-heading">開始冒險</h2>
-        <p>坐火箭到星星星球，跟著筆順，在米字格寫繁體「星」。</p>
+        <p id="adventure-lead">坐火箭去寫字星球，跟著橙色線，在米字格寫十二個字。由「星」開始，再寫月、一、大……</p>
+        <div class="level-bank" id="level-bank" role="list" aria-label="十二關字庫"></div>
         <button type="button" class="primary-btn" id="btn-start-adventure">開始冒險</button>
       </div>
     </section>
@@ -95,6 +96,7 @@
       <p id="pass-coin" class="pass-coin">＋1 星星幣</p>
       <div class="pass-actions">
         <button type="button" class="primary-btn" id="btn-next-level">下一關</button>
+        <button type="button" class="ghost-btn" id="btn-pass-rewrite" hidden>再寫一次</button>
         <button type="button" class="ghost-btn" id="btn-pass-home">返主頁</button>
       </div>
     </div>
