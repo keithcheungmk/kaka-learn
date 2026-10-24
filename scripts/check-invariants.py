@@ -1349,6 +1349,14 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "唔好用受版權卡通名稱")
     if "100dvh" not in css or ".mizi-board" not in css:
         fail("hanzi-write", "寫字關要有一屏米字格版面")
+    if "GUIDE_ORANGE" not in js or "highlightColor: GUIDE_ORANGE" not in js:
+        fail("hanzi-write", "引導線同文案都要係清晰橙色")
+    if "跟著橙色線" not in js or "跟著橙色線" not in page:
+        fail("hanzi-write", "文案要寫跟著橙色線，並同畫面橙色對齊")
+    if "onMistake" not in js or "再試一次" not in js:
+        fail("hanzi-write", "漏筆／亂劃要有溫柔「再試一次」回饋")
+    if "btn-pass-home" not in js or js.split("btn-pass-home", 1)[-1][:220].count("goBackOr(PARENT_HREF)") < 1:
+        fail("hanzi-write", "過關「返主頁」要 goBackOr 返中文主題")
     node = shutil.which("node")
     if node:
         result = subprocess.run([node, "scripts/test-hanzi-write-demo.mjs"], capture_output=True, text=True)

@@ -9,6 +9,9 @@
   const TOPIC_ID = 'hanzi-write';
   const COIN_MODE = 'hanzi-write';
   const PARENT_HREF = 'index.html#screen-topics';
+  const GUIDE_ORANGE = '#ff8a1a';
+  const WRITE_HINT = '跟著橙色線，一筆一筆寫。';
+  const RETRY_HINT = '再試一次。跟著橙色線寫。';
 
   const $ = (id) => document.getElementById(id);
   const views = {
@@ -22,6 +25,7 @@
   let writer = null;
   let quizActive = false;
   let passedThisVisit = new Set();
+  let lastMissSpeakAt = 0;
 
   function levels() {
     return LEVELS.filter((level) => CHAR_DATA[level.char]);
@@ -104,11 +108,33 @@
     return Math.max(180, Math.floor(raw - 8));
   }
 
+  function setWriteStatus(text, tone) {
+    const el = $('write-status');
+    if (!el) return;
+    el.textContent = text;
+    el.classList.toggle('is-retry', tone === 'retry');
+  }
+
+  function onQuizMiss() {
+    setWriteStatus(RETRY_HINT, 'retry');
+    const now = Date.now();
+    if (now - lastMissSpeakAt > 1600) {
+      lastMissSpeakAt = now;
+      speak('再試一次');
+    }
+  }
+
   function startQuiz() {
     if (!writer) return;
     quizActive = true;
-    $('write-status').textContent = '跟著橙色線，一筆一筆寫。';
+    setWriteStatus(WRITE_HINT);
     writer.quiz({
+      onMistake() {
+        onQuizMiss();
+      },
+      onCorrectStroke() {
+        setWriteStatus(WRITE_HINT);
+      },
       onComplete() {
         quizActive = false;
         onLevelPassed();
@@ -122,7 +148,7 @@
       try { writer.cancelQuiz(); } catch { /* ignore */ }
     }
     quizActive = false;
-    $('write-status').textContent = '先看筆順，再自己寫。';
+    setWriteStatus('先看筆順，再自己寫。');
     writer.animateCharacter({
       onComplete() {
         startQuiz();
@@ -134,7 +160,7 @@
     const level = currentLevel();
     destroyWriter();
     if (typeof HanziWriter === 'undefined') {
-      $('write-status').textContent = '寫字工具未載入，請重新整理。';
+      setWriteStatus('寫字工具未載入，請重新整理。');
       return;
     }
     const size = boardSize();
@@ -142,10 +168,10 @@
       width: size,
       height: size,
       padding: 12,
-      strokeColor: '#d35400',
-      radicalColor: '#c0392b',
-      outlineColor: '#d7c4b5',
-      drawingColor: '#1d4f91',
+      strokeColor: GUIDE_ORANGE,
+      highlightColor: GUIDE_ORANGE,
+      outlineColor: '#ffb14a',
+      drawingColor: '#e56700',
       showHintAfterMisses: 1,
       highlightOnComplete: true,
       charDataLoader,
@@ -241,7 +267,7 @@
   $('btn-pass-home').addEventListener('click', () => {
     $('pass-overlay').classList.add('hidden');
     destroyWriter();
-    showView('adventure');
+    nav.goBackOr(PARENT_HREF);
   });
   $('back-link').addEventListener('click', onBack);
 
@@ -261,11 +287,15 @@
     TOPIC_ID,
     COIN_MODE,
     PARENT_HREF,
+    GUIDE_ORANGE,
+    WRITE_HINT,
+    RETRY_HINT,
     levels,
     currentLevel,
     showView,
     openWrite,
     onLevelPassed,
+    onQuizMiss,
     awardClear,
     getView: () => view,
   };

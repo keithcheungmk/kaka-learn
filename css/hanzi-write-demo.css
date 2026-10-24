@@ -329,6 +329,10 @@ body { min-height: 100dvh; }
 
 .btn-stack { display: grid; gap: 10px; }
 .status-note { margin-bottom: 0; }
+.status-note.is-retry {
+  color: var(--coral);
+  font-weight: 800;
+}
 
 .pass-overlay {
   position: fixed;
