@@ -36,7 +36,6 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 常識樂園身體同五感＋答啱點解 | Cursor Chief Lead | `data/common-sense-body-senses.js`, `data/common-sense-catalog.js`, `js/common-sense.js`, `css/common-sense.css`, `common-sense.html`, `js/storage.js`, `assets/common-sense/scenes/`, `scripts/test-common-sense.mjs`, `docs/handover.md` | 2026-10-25 | Keith 批准：body-senses 可玩；答啱播一句粵語點解＋字幕＋下一題可跳；答錯 retry；唔做動物植物；唔掂寫字 |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
 | 故事 focus 優化（浠榆初生＋迪士尼／國慶合照拆開） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/hongkong-disney-p06.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准：初生篇保留洗澡、淡化珠海／月子中心／睡覺；迪士尼對齊地圖／城堡／排隊／紀念品／合照照片；國慶唔再 focus 合照／照片。開 PR，唔自 merge。 |
 | 主頁四科入口加入卡卡插畫 | ChatGPT／Codex | `index.html`, `css/styles.css`, `assets/home-subjects/`, `assets/image-formats.lock.json`, `docs/handover.md` | 2026-10-06 | Keith 已看過四科卡片 demo 並指示繼續；只改入口視覺，保留文字、連結與按鈕行為。 |
@@ -108,6 +107,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-10-25 · Cursor Chief Lead（身體同五感＋答啱點解 #172）
+
+- Hub「身體同五感」由 soon 改可玩：8 題四選一，學習牆 8 卡，獨立 `common-sense-body` 幣。
+- 答啱播 `whyYue` 粵語一句＋字幕，期間可撳「下一題」跳過；答錯短提示再試，唔播長點解。
+- 八張 4:3 卡卡風格場景。動物植物／寫字頁冇郁。#172 CI 綠後 fast-forward 入 `main`。
+- 試玩：`common-sense.html` → 身體同五感（舊 tab 要閂再開）。
 
 ### 2026-10-25 · Cursor Chief Lead（卡卡學寫字自寫關虛線提示 #171）
 
