@@ -678,7 +678,13 @@ def walk(pg, url, shots: Path | None, tag: str):
           const start = document.querySelector('#btn-rewrite')?.getBoundingClientRect();
           const restBtn = document.querySelector('#btn-write-rest')?.getBoundingClientRect();
           window.KakaHanziWrite?.showActiveStrokeGuide?.(0);
-          const guide = document.querySelector('#hanzi-guide path');
+          const guide = document.querySelector('.hanzi-guide-stroke, #hanzi-guide path');
+          const target = document.querySelector('.hanzi-target');
+          const guideHost = document.querySelector('.hanzi-guide');
+          const targetZ = Number(target ? getComputedStyle(target).zIndex : 0);
+          const guideZ = Number(guideHost ? getComputedStyle(guideHost).zIndex : 0);
+          const size = Math.min(target?.clientWidth || 320, target?.clientHeight || 320);
+          const drawingW = window.KakaHanziWrite?.drawingWidthFor?.(size) || 0;
           return {
             overflowX: d.scrollWidth - d.clientWidth,
             overflowY: d.scrollHeight - d.clientHeight,
@@ -690,6 +696,10 @@ def walk(pg, url, shots: Path | None, tag: str):
             guideDash: guide?.getAttribute('stroke-dasharray') || '',
             guideHidden: !guide,
             guideFillIsNone: (guide?.getAttribute('fill') || '') === 'none',
+            guideInWriter: !!guide?.closest('#hanzi-target'),
+            inkAboveGuide: !!(guide?.closest('#hanzi-target') || targetZ > guideZ),
+            drawingWidth: drawingW,
+            drawingInk: window.KakaHanziWrite?.DRAWING_INK || '',
           };
         }"""
     )
@@ -709,6 +719,14 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Active stroke guide must be #ff8a1a, got {write_metrics.get('guideStroke')!r}")
     if not write_metrics.get("guideDash"):
         raise RuntimeError("Quiz stroke guide must use a dashed outline")
+    if not write_metrics.get("inkAboveGuide"):
+        raise RuntimeError("Child ink layer must paint above the dashed stroke guide")
+    if not write_metrics.get("guideInWriter"):
+        raise RuntimeError("Quiz stroke guide must sit inside the writer SVG so finger ink paints after it")
+    if write_metrics.get("drawingWidth", 0) < 56:
+        raise RuntimeError(f"drawingWidth too thin for iPad finger: {write_metrics.get('drawingWidth')}")
+    if write_metrics.get("drawingInk") != "#16325c":
+        raise RuntimeError(f"Live ink must contrast the orange guide, got {write_metrics.get('drawingInk')!r}")
     colors = pg.evaluate(
         """() => ({
           orange: window.KakaHanziWrite?.GUIDE_ORANGE,

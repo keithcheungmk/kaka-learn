@@ -1363,6 +1363,14 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "自寫關提示唔可以實心填橙色，否則睇唔到手指墨")
     if "fill-opacity', '0.92'" in js:
         fail("hanzi-write", "自寫關唔好再用實心高透明度橙色填筆")
+    if "placeGuideInWriter" not in js or "drawingWidthFor" not in js:
+        fail("hanzi-write", "當筆要插入 writer SVG，筆跡先會畫喺虛線上面")
+    if "drawingWidth: 14" in js or "drawingWidth: 8" in js:
+        fail("hanzi-write", "drawingWidth 14／8 縮完只得約 5px，iPad 手指會遮住")
+    if "DRAWING_TARGET_PX = 26" not in js:
+        fail("hanzi-write", "自寫墨水要夠粗（約 26 CSS px）先睇到")
+    if ".hanzi-target {\n  z-index: 3;" not in css:
+        fail("hanzi-write", "寫字層 z-index 要高過虛線 fallback，墨水先唔會被蓋")
     if "id=\"hanzi-guide\"" not in page or "id=\"pass-gloss\"" not in page:
         fail("hanzi-write", "要有當筆橙色層同過關釋義字幕")
     if "休息一下" not in page or "btn-write-rest" not in js:
