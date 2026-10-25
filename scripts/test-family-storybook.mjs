@@ -115,10 +115,14 @@ assert.equal(tianye.title, '田野部落開心日');
 assert.equal(tianye.date, '2026-10-25');
 assert.ok(tianye.characters.includes('希恩妹妹'));
 assert.ok(tianye.characters.includes('護士姐姐'));
-assert.equal(JSON.stringify(tianye.pages[7].focusWords), JSON.stringify(['學懂', '安全']));
-assert.match(tianye.pages[7].sentence, /細心照顧/);
-assert.match(tianye.pages[7].sentence, /溫柔餵/);
-assert.match(tianye.pages[7].sentence, /安全玩/);
+assert.equal(JSON.stringify(tianye.pages[7].focusWords), JSON.stringify(['細心', '溫柔', '安全']));
+assert.match(tianye.pages[7].sentence, /學識/);
+assert.doesNotMatch(tianye.pages[7].sentence, /學懂/);
+assert.match(tianye.pages[7].sentence, /細心照顧妹妹/);
+assert.match(tianye.pages[7].sentence, /溫柔餵動物/);
+assert.match(tianye.pages[7].sentence, /安全揸車開船/);
+assert.equal(tianye.pages[7].dialogue.text, '細心照顧妹妹。溫柔餵動物。同爸爸安全揸車開船。');
+assert.match(tianye.pages[2].sentence, /開車去田野部落農莊/);
 assert.equal(tianye.hidden, undefined);
 assert.equal(tianye.warmupPairs, undefined);
 
