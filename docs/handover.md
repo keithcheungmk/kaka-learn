@@ -111,7 +111,7 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 ### 2026-10-25 · Cursor Chief Lead（《田野部落開心日》妹妹名改返浠榆）
 
 - Keith 語音誤聽修正：妹妹永遠叫「浠榆妹妹」，唔係「希恩」。已刪角色聖經「日記用希恩」例外。
-- 改 `tianye-happy-day` 角色／詞／句子／測試斷言；`family-names` 攔「希恩」。
+- 改 `tianye-happy-day` 角色／詞／句子／測試斷言；`family-names` 攔「希恩」。#178 CI 綠後 fast-forward 入 `main`，Pages 已上線。
 - 試玩：`family-storybook.html` →《田野部落開心日》第 1 頁（舊 tab 要閂再開）。
 
 ### 2026-10-25 · Cursor Chief Lead（《田野部落開心日》體驗官三點 #177）
