@@ -1063,7 +1063,7 @@ def check_book_scans_shelf() -> None:
 
 
 def check_family_names() -> None:
-    """故事角色正式名：虹姑姑、蛙蛙、耀叔叔（Keith 2026-10-08）。"""
+    """故事角色正式名：虹姑姑、蛙蛙、耀叔叔、浠榆妹妹（Keith 2026-10-08／10-25）。"""
     for path in (
         "data/family-stories/manifest.js",
         "js/family-storybook.js",
@@ -1073,7 +1073,7 @@ def check_family_names() -> None:
         if not Path(path).is_file():
             continue
         src = read(path)
-        for old, new in (("堯叔叔", "耀叔叔"), ("娃娃", "蛙蛙"), ("紅姑姑", "虹姑姑"), ("妹媽", "姨媽")):
+        for old, new in (("堯叔叔", "耀叔叔"), ("娃娃", "蛙蛙"), ("紅姑姑", "虹姑姑"), ("妹媽", "姨媽"), ("希恩妹妹", "浠榆妹妹"), ("希恩", "浠榆")):
             if old in src:
                 fail("family-names", f"{path} 用咗舊名「{old}」，要寫「{new}」")
         if re.search(r"(?<!虹)姑姑", src):
