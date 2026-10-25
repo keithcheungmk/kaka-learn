@@ -36,7 +36,6 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 卡卡學寫字筆跡在虛線上面＋加粗 | Cursor Chief Lead | `js/hanzi-write-demo.js`, `css/hanzi-write-demo.css`, `hanzi-write-demo.html`, `scripts/test-hanzi-write-demo.mjs`, `scripts/smoke-shots.py`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-25 | QA #171 後：自寫墨水要喺虛線上面、夠粗唔俾 iPad 手指完全遮住。空心線可第二輪。 |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
 | 故事 focus 優化（浠榆初生＋迪士尼／國慶合照拆開） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/hongkong-disney-p06.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准：初生篇保留洗澡、淡化珠海／月子中心／睡覺；迪士尼對齊地圖／城堡／排隊／紀念品／合照照片；國慶唔再 focus 合照／照片。開 PR，唔自 merge。 |
 | 主頁四科入口加入卡卡插畫 | ChatGPT／Codex | `index.html`, `css/styles.css`, `assets/home-subjects/`, `assets/image-formats.lock.json`, `docs/handover.md` | 2026-10-06 | Keith 已看過四科卡片 demo 並指示繼續；只改入口視覺，保留文字、連結與按鈕行為。 |
@@ -108,6 +107,12 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-10-25 · Cursor Chief Lead（卡卡學寫字筆跡在上＋加粗 #173）
+
+- #171 之後 QA：虛線層蓋住手指墨，`drawingWidth: 14` 縮完只得約 5px。
+- 自寫當筆插入 writer SVG，筆跡後畫；墨水約 26 CSS px 深藍。錯筆閃紅框。空心線留第二輪。
+- #173 CI 綠後 rebase 入 `main`。試玩：`hanzi-write-demo.html`（舊 tab 要閂再開）。
 
 ### 2026-10-25 · Cursor Chief Lead（身體同五感＋答啱點解 #172）
 
