@@ -12,6 +12,8 @@
   const PARENT_HREF = 'index.html#screen-topics';
   const GUIDE_ORANGE = '#ff8a1a';
   const OUTLINE_INK = '#8aa0c8';
+  const GUIDE_DASH = '16 10';
+  const GUIDE_OUTLINE_WIDTH = '10';
   const WRITE_HINT = '跟著橙色線，一筆一筆寫。';
   const RETRY_HINT = '再試一次。跟著橙色線寫。';
   const PASS_CHEER = '過關啦';
@@ -144,12 +146,17 @@
     group.setAttribute('transform', transform.transform);
     const path = document.createElementNS(svgNs, 'path');
     path.setAttribute('d', pathD);
-    path.setAttribute('fill', GUIDE_ORANGE);
-    path.setAttribute('fill-opacity', '0.92');
+    // Quiz hint: dashed / hollow outline. Solid fill looks like a finished stroke
+    // and covers the child's finger ink under .hanzi-guide (z-index 2).
+    path.setAttribute('fill', 'none');
     path.setAttribute('stroke', GUIDE_ORANGE);
-    path.setAttribute('stroke-width', '18');
+    path.setAttribute('stroke-width', GUIDE_OUTLINE_WIDTH);
+    path.setAttribute('stroke-dasharray', GUIDE_DASH);
     path.setAttribute('stroke-linejoin', 'round');
-    path.setAttribute('stroke-opacity', '0.95');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('stroke-opacity', '1');
+    path.setAttribute('vector-effect', 'non-scaling-stroke');
+    path.classList.add('hanzi-guide-stroke');
     path.dataset.strokeIndex = String(strokeIndex);
     group.appendChild(path);
     svg.appendChild(group);
@@ -241,7 +248,7 @@
       highlightColor: GUIDE_ORANGE,
       outlineColor: OUTLINE_INK,
       drawingColor: '#e56700',
-      drawingWidth: 8,
+      drawingWidth: 14,
       showHintAfterMisses: 1,
       highlightOnComplete: true,
       strokeHighlightSpeed: 1,
@@ -410,6 +417,8 @@
     COIN_MODE,
     PARENT_HREF,
     GUIDE_ORANGE,
+    GUIDE_DASH,
+    GUIDE_OUTLINE_WIDTH,
     OUTLINE_INK,
     WRITE_HINT,
     RETRY_HINT,

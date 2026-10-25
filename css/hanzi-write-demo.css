@@ -359,12 +359,26 @@ body { min-height: 100dvh; }
 }
 
 .hanzi-guide {
+  /* Hint sits above the writer so the dashed tip stays visible over the
+     gray outline; fill:none keeps the child's finger ink visible. */
   z-index: 2;
   pointer-events: none;
 }
 
 .hanzi-target {
   z-index: 1;
+}
+
+.hanzi-guide path,
+.hanzi-guide-stroke {
+  fill: none;
+  stroke: #ff8a1a;
+  stroke-width: 10px;
+  stroke-dasharray: 16 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-opacity: 1;
+  vector-effect: non-scaling-stroke;
 }
 
 .hanzi-guide svg,

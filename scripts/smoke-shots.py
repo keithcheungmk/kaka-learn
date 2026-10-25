@@ -686,8 +686,10 @@ def walk(pg, url, shots: Path | None, tag: str):
             restTap: Math.min(restBtn?.width || 0, restBtn?.height || 0),
             writerKids: document.querySelector('#hanzi-target')?.childElementCount || 0,
             guideFill: guide?.getAttribute('fill') || '',
-            guideOpacity: Number(guide?.getAttribute('fill-opacity') || 0),
+            guideStroke: guide?.getAttribute('stroke') || '',
+            guideDash: guide?.getAttribute('stroke-dasharray') || '',
             guideHidden: !guide,
+            guideFillIsNone: (guide?.getAttribute('fill') || '') === 'none',
           };
         }"""
     )
@@ -701,10 +703,12 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError("Hanzi 休息一下 must be at least 44px")
     if write_metrics.get("guideHidden"):
         raise RuntimeError("Write screen must show a visible orange stroke guide")
-    if write_metrics.get("guideFill") != "#ff8a1a":
-        raise RuntimeError(f"Active stroke guide must be #ff8a1a, got {write_metrics.get('guideFill')!r}")
-    if write_metrics.get("guideOpacity", 0) < 0.5:
-        raise RuntimeError(f"Active stroke guide opacity too low: {write_metrics.get('guideOpacity')}")
+    if not write_metrics.get("guideFillIsNone"):
+        raise RuntimeError(f"Quiz stroke guide must be hollow (fill=none), got {write_metrics.get('guideFill')!r}")
+    if write_metrics.get("guideStroke") != "#ff8a1a":
+        raise RuntimeError(f"Active stroke guide must be #ff8a1a, got {write_metrics.get('guideStroke')!r}")
+    if not write_metrics.get("guideDash"):
+        raise RuntimeError("Quiz stroke guide must use a dashed outline")
     colors = pg.evaluate(
         """() => ({
           orange: window.KakaHanziWrite?.GUIDE_ORANGE,
