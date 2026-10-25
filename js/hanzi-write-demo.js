@@ -157,16 +157,16 @@
   function placeGuideInWriter(path) {
     const group = writerStrokeGroup();
     if (!group) return false;
-    group.querySelectorAll('.hanzi-guide-stroke').forEach((el) => el.remove());
-    // Keep live finger ink after the dashed tip so paint order is
-    // outline → completed strokes → dashed guide → child's own stroke.
-    const ink = [...group.querySelectorAll('path')].find((el) => (
-      el.getAttribute('fill') === 'none'
-      && !el.classList.contains('hanzi-guide-stroke')
-    ));
-    if (ink) group.insertBefore(path, ink);
-    else group.appendChild(path);
-    return true;
+    group.querySelectorAll(':scope > .hanzi-guide-stroke').forEach((el) => el.remove());
+    // Append as a direct child. The writer group already holds outline /
+    // completed strokes; live finger ink is mounted after this tip.
+    // Do not insertBefore nested clip paths — they are not children of `g`.
+    try {
+      group.appendChild(path);
+      return group.contains(path);
+    } catch {
+      return false;
+    }
   }
 
   function clearActiveStrokeGuide() {
