@@ -640,7 +640,7 @@ def walk(pg, url, shots: Path | None, tag: str):
     if pg.is_visible("#screen-home") and "active" in (pg.get_attribute("#screen-home", "class") or ""):
         raise RuntimeError("Four-panel wall ← 中文 must return one level to Chinese topics, not home")
 
-    # 卡卡學寫字：中文主題入口 → 選角色／冒險 → 寫「星」→ 過關
+    # 卡卡學寫字：中文主題入口 → 選章 → 聽圖熱身 → 選字 → 寫「一」→ 過關
     pg.wait_for_selector("#screen-topics.active #btn-topics-hanzi-write")
     hanzi_href = pg.get_attribute("#btn-topics-hanzi-write", "href") or ""
     if "hanzi-write-demo.html" not in hanzi_href:
@@ -657,13 +657,35 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.click("#view-profile:not(.hidden) #btn-profile-kaka")
     pg.wait_for_selector("#view-adventure:not(.hidden) #btn-start-adventure")
     start_label = (pg.text_content("#btn-start-adventure") or "").strip()
-    if start_label != "開始冒險":
-        raise RuntimeError(f"Adventure button must be 「開始冒險」, got {start_label!r}")
+    if start_label != "由第一章開始":
+        raise RuntimeError(f"Chapter button must be 「由第一章開始」, got {start_label!r}")
+    if "即將開放" not in (pg.text_content("#chapter-grid") or ""):
+        raise RuntimeError("Chapter list must show 即將開放 for later chapters")
     pg.click("#btn-start-adventure")
+    pg.wait_for_selector("#view-warmup:not(.hidden) #warmup-grid, #view-chars:not(.hidden) #level-bank")
+    for _ in range(8):
+        if pg.is_visible("#view-chars:not(.hidden)"):
+            break
+        if pg.is_visible("#view-warmup:not(.hidden)"):
+            pg.evaluate(
+                """() => {
+                  const id = window.KakaHanziWrite?.warmupTargetId?.();
+                  if (id) document.querySelector('#warmup-grid [data-char-id="' + id + '"]')?.click();
+                  else window.KakaHanziWrite?.finishWarmup?.();
+                }"""
+            )
+            pg.wait_for_timeout(180)
+    pg.wait_for_selector("#view-chars:not(.hidden) #level-bank")
+    if "0／6" not in (pg.text_content("#level-bank") or ""):
+        raise RuntimeError("Character list must show 0／6 progress")
+    first_chip = pg.query_selector("#level-bank [data-char-id='yi']")
+    if not first_chip:
+        raise RuntimeError("Chapter 1 must list 一")
+    first_chip.click()
     pg.wait_for_selector("#view-write:not(.hidden) #hanzi-target svg")
     heading = pg.text_content("#write-heading") or ""
-    if "星" not in heading:
-        raise RuntimeError(f"Write screen must ask for 星, got {heading!r}")
+    if "一" not in heading:
+        raise RuntimeError(f"Write screen must ask for 一, got {heading!r}")
     if not pg.locator(".mizi-board").count():
         raise RuntimeError("Write screen must show a 米字格")
     rewrite = (pg.text_content("#btn-rewrite") or "").strip()
@@ -741,13 +763,25 @@ def walk(pg, url, shots: Path | None, tag: str):
     miss = (pg.text_content("#write-status") or "").strip()
     if "再試一次" not in miss:
         raise RuntimeError(f"A miss must update status to 再試一次, got {miss!r}")
+    hint_levels = pg.evaluate(
+        """() => {
+          const api = window.KakaHanziWrite;
+          return {
+            at0: api?.hintLevelFor?.(0),
+            at2: api?.hintLevelFor?.(2),
+            at4: api?.hintLevelFor?.(4),
+          };
+        }"""
+    )
+    if hint_levels.get("at0") != 1 or hint_levels.get("at2") != 2 or hint_levels.get("at4") != 3:
+        raise RuntimeError(f"Hint fade must be 1/2/3 by success count, got {hint_levels!r}")
     pg.click("#btn-write-rest")
-    pg.wait_for_selector("#view-adventure:not(.hidden) #btn-start-adventure")
+    pg.wait_for_selector("#view-chars:not(.hidden) #level-bank")
     if pg.is_visible("#view-write") and "hidden" not in (pg.get_attribute("#view-write", "class") or ""):
         raise RuntimeError("休息一下 must leave the write screen")
     if pg.url.endswith("index.html") or "#screen-" in pg.url:
         raise RuntimeError("休息一下 must stay in 卡卡學寫字, not dump the app")
-    pg.click("#btn-start-adventure")
+    pg.click("#level-bank [data-char-id='yi']")
     pg.wait_for_selector("#view-write:not(.hidden) #hanzi-target svg")
     pg.evaluate("() => window.KakaHanziWrite?.onLevelPassed?.()")
     pg.wait_for_selector("#pass-overlay:not(.hidden) #pass-title")
@@ -755,13 +789,13 @@ def walk(pg, url, shots: Path | None, tag: str):
     if pass_title != "過關啦！":
         raise RuntimeError(f"Pass title must be 「過關啦！」, got {pass_title!r}")
     gloss = (pg.text_content("#pass-gloss") or "").strip()
-    if "呢個係星星月亮嘅星" not in gloss:
+    if "呢個係一二三嘅一" not in gloss:
         raise RuntimeError(f"Pass overlay must show gloss before 過關啦, got {gloss!r}")
-    stars = (pg.text_content(".pass-stars") or "").strip()
-    if stars != "★★★":
-        raise RuntimeError(f"Pass screen must show three stars, got {stars!r}")
-    if "下一關" not in (pg.text_content("#btn-next-level") or ""):
-        raise RuntimeError("Pass screen must offer 下一關")
+    stars = (pg.text_content("#pass-stars") or "").strip()
+    if "★" not in stars:
+        raise RuntimeError(f"Pass screen must show stars, got {stars!r}")
+    if "返回字表" not in (pg.text_content("#btn-back-chars") or ""):
+        raise RuntimeError("Pass screen must offer 返回字表")
     if "返主頁" not in (pg.text_content("#btn-pass-home") or ""):
         raise RuntimeError("Pass screen must offer 返主頁")
     with pg.expect_navigation():

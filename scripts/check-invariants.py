@@ -1306,7 +1306,7 @@ def check_four_panel_story() -> None:
 
 
 def check_hanzi_write_demo() -> None:
-    """Keith 2026-10-24：中文主題「卡卡學寫字」本機 hanzi-writer 寫繁體十二關。"""
+    """Keith 2026-10-25：中文主題「卡卡學寫字」本機 hanzi-writer，第 1–3 章每字六次。"""
     html = read("index.html")
     if 'id="btn-topics-hanzi-write"' not in html or "./hanzi-write-demo.html" not in html:
         fail("hanzi-write", "中文主題頁要有卡卡學寫字獨立入口")
@@ -1337,6 +1337,10 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "要有本機繁體「星」筆順資料")
     if "KAKA_HANZI_WRITE_BANK" not in data or '"glossYue"' not in data:
         fail("hanzi-write", "字庫要有 BANK 同 glossYue")
+    if "KAKA_HANZI_WRITE_CHAPTERS" not in data or "入門筆畫" not in data:
+        fail("hanzi-write", "要有第 1–3 章目錄")
+    if "即將開放" not in data:
+        fail("hanzi-write", "第 4–10 章要標即將開放")
     if "米字格" not in page or "再寫一次" not in page or "過關啦！" not in page:
         fail("hanzi-write", "流程要有米字格、再寫一次、過關啦")
     if "btn-profile-kaka" not in page or "profile-kaka.jpg" not in page:
@@ -1375,6 +1379,12 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "要有當筆橙色層同過關釋義字幕")
     if "休息一下" not in page or "btn-write-rest" not in js:
         fail("hanzi-write", "寫字中要有「休息一下」離開掣")
+    if "NEED_SUCCESSES = 6" not in js or "hintLevelFor" not in js:
+        fail("hanzi-write", "每字要六次成功，並按次數淡化提示")
+    if "聽粵語，再指圖" not in page or "view-warmup" not in page:
+        fail("hanzi-write", "每章寫字前要有聽粵語指圖熱身")
+    if "hanziWriteProgress" not in js or "hanziWriteProgress" not in storage:
+        fail("hanzi-write", "0–6 進度要記本機，唔好一日清零")
     if "跟著橙色線" not in js or "跟著橙色線" not in page:
         fail("hanzi-write", "文案要寫跟著橙色線，並同畫面橙色對齊")
     if "onMistake" not in js or "再試一次" not in js:

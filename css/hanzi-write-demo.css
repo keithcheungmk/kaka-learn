@@ -469,6 +469,128 @@ body { min-height: 100dvh; }
 
 .pass-actions { display: grid; gap: 10px; }
 
+.browse-view { overflow: auto; }
+
+.adventure-card { width: min(860px, 100%); }
+
+.chapter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0 0 16px;
+}
+
+.chapter-card {
+  appearance: none;
+  min-width: 0;
+  min-height: var(--tap);
+  padding: 14px 12px;
+  border-radius: 18px;
+  border: 2px solid #4a6ea8;
+  background: #14244b;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  display: grid;
+  gap: 4px;
+}
+
+.chapter-card strong {
+  font-size: clamp(1.15rem, 2.6vw, 1.45rem);
+}
+
+.chapter-card .chapter-meta,
+.chapter-card .chapter-blurb {
+  color: var(--muted);
+  font-size: .92rem;
+  line-height: 1.4;
+}
+
+.chapter-card.is-done {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(255, 211, 79, .28);
+}
+
+.chapter-card.is-locked {
+  cursor: default;
+  opacity: .72;
+  border-style: dashed;
+}
+
+.char-bank {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.level-chip {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 8px 6px;
+}
+
+.level-chip .chip-char { line-height: 1.1; }
+.level-chip .chip-prog {
+  font-size: .78rem;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.level-chip.is-passed .chip-prog { color: var(--gold); }
+
+.write-progress {
+  margin: 0 0 10px;
+  color: var(--gold);
+  font-weight: 800;
+}
+
+.warmup-card { width: min(720px, 100%); }
+.warmup-progress {
+  margin: 0 0 12px;
+  color: var(--gold);
+  font-weight: 800;
+}
+
+.warmup-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.warmup-choice {
+  appearance: none;
+  min-width: 0;
+  min-height: 88px;
+  border-radius: 18px;
+  border: 2px solid #4a6ea8;
+  background: #e8eef8;
+  color: #172048;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  gap: 4px;
+  padding: 10px;
+}
+
+.warmup-choice .warmup-emoji {
+  font-size: clamp(2rem, 7vw, 3rem);
+  line-height: 1;
+}
+
+.warmup-choice.is-wrong {
+  animation: hw-miss-shake .42s ease;
+}
+
+@media (max-width: 700px) {
+  .chapter-grid,
+  .char-bank { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (max-width: 900px), (orientation: portrait) {
   .write-spread { grid-template-columns: minmax(0, 1fr); }
   .write-panel {

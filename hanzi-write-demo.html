@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
   <meta name="theme-color" content="#0b1638">
   <title>卡卡學寫字｜寫字・筆順</title>
-  <link rel="stylesheet" href="css/hanzi-write-demo.css?v=hanzi-write-qa26">
+  <link rel="stylesheet" href="css/hanzi-write-demo.css?v=hanzi-write-ch13">
 </head>
 <body>
   <main class="hw-shell">
@@ -26,7 +26,7 @@
           <span class="rocket"></span>
         </div>
         <h2 id="profile-heading">你是誰？</h2>
-        <p>選頭像，開始太空寫字冒險。進度只記在這部機，不會上傳。</p>
+        <p>選頭像，開始寫字練習。進度只記在這部機，不會上傳。</p>
         <div class="profile-pick-grid">
           <button type="button" class="profile-card" id="btn-profile-kaka" aria-label="卡卡">
             <img class="profile-card-img" src="./assets/profile-kaka.jpg" alt="" width="384" height="384" decoding="async">
@@ -40,28 +40,44 @@
       </div>
     </section>
 
-    <section id="view-adventure" class="view hidden" aria-labelledby="adventure-heading">
+    <section id="view-adventure" class="view hidden browse-view" aria-labelledby="adventure-heading">
       <div class="hero-card adventure-card">
-        <div class="sky-art sky-art-lg" aria-hidden="true">
-          <span class="star-dust"></span>
-          <span class="planet planet-a"></span>
-          <span class="planet planet-b"></span>
-          <span class="rocket rocket-fly"></span>
-        </div>
-        <p class="who-line" id="who-line">卡卡，準備好未？</p>
-        <h2 id="adventure-heading">開始冒險</h2>
-        <p id="adventure-lead">坐火箭去寫字星球，跟著橙色線，在米字格寫十二個字。由「星」開始，再寫月、一、大……</p>
-        <div class="level-bank" id="level-bank" role="list" aria-label="十二關字庫"></div>
-        <button type="button" class="primary-btn" id="btn-start-adventure">開始冒險</button>
+        <p class="who-line" id="who-line">卡卡，準備好了嗎？</p>
+        <h2 id="adventure-heading">選一章</h2>
+        <p id="adventure-lead">第一至第三章可以寫。每個字要寫滿六次，進度會記住，下次可以再寫。第四至第十章即將開放。</p>
+        <div class="chapter-grid" id="chapter-grid" role="list" aria-label="寫字章節"></div>
+        <button type="button" class="primary-btn" id="btn-start-adventure">由第一章開始</button>
+      </div>
+    </section>
+
+    <section id="view-warmup" class="view hidden" aria-labelledby="warmup-heading">
+      <div class="hero-card warmup-card">
+        <p class="level-kicker" id="warmup-kicker">第一章</p>
+        <h2 id="warmup-heading">聽粵語，再指圖</h2>
+        <p id="warmup-lead">先按「聽一聽」，再指正確的圖。答錯可以再試，圖不會換位。</p>
+        <p id="warmup-progress" class="warmup-progress" aria-live="polite">已完成 0／4</p>
+        <button type="button" class="primary-btn" id="btn-warmup-listen">聽一聽</button>
+        <div class="warmup-grid" id="warmup-grid" role="list" aria-label="聽完指圖"></div>
+        <p id="warmup-status" class="status-note" role="status">先聽，再指圖。</p>
+      </div>
+    </section>
+
+    <section id="view-chars" class="view hidden browse-view" aria-labelledby="chars-heading">
+      <div class="hero-card adventure-card">
+        <p class="level-kicker" id="chars-kicker">第一章</p>
+        <h2 id="chars-heading">選一個字</h2>
+        <p id="chars-lead">每個字要寫滿六次才過關。數字是已寫次數，離開後進度仍在。</p>
+        <div class="level-bank char-bank" id="level-bank" role="list" aria-label="本章字表"></div>
       </div>
     </section>
 
     <section id="view-write" class="view write-view hidden" aria-labelledby="write-heading">
       <div class="write-spread">
         <div class="mizi-wrap">
-          <p class="level-kicker" id="level-kicker">第一關</p>
-          <h2 id="write-heading">寫「星」</h2>
-          <p class="write-lead" id="write-lead">先看筆順，再自己寫一次。</p>
+          <p class="level-kicker" id="level-kicker">第一章 · 入門筆畫</p>
+          <h2 id="write-heading">寫「一」</h2>
+          <p class="write-lead" id="write-lead">先看筆順，再自己寫。跟著橙色線，一筆一筆寫。</p>
+          <p class="write-progress" id="write-progress" aria-live="polite">已寫 0／6 · 提示：完整虛線</p>
           <div class="mizi-board" aria-label="米字格">
             <svg class="mizi-grid" viewBox="0 0 100 100" aria-hidden="true">
               <rect x="1.5" y="1.5" width="97" height="97" rx="4"></rect>
@@ -87,30 +103,43 @@
     </section>
   </main>
 
+  <div id="rest-overlay" class="pass-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="rest-title">
+    <div class="pass-card">
+      <p class="pass-stars" aria-hidden="true">★</p>
+      <h2 id="rest-title">寫得好！</h2>
+      <p id="rest-copy">已經寫了 2／6 次。要休息一下嗎？進度已記住，下次可以再寫。</p>
+      <div class="pass-actions">
+        <button type="button" class="primary-btn" id="btn-rest-continue">繼續寫</button>
+        <button type="button" class="rest-btn" id="btn-rest-leave">休息一下</button>
+      </div>
+    </div>
+  </div>
+
   <div id="pass-overlay" class="pass-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="pass-title">
     <div class="pass-card">
       <div class="pass-sky" aria-hidden="true">
         <span class="rocket rocket-win"></span>
       </div>
-      <p class="pass-stars" aria-hidden="true">★★★</p>
+      <p class="pass-stars" id="pass-stars" aria-hidden="true">★★★</p>
       <p id="pass-gloss" class="pass-gloss" aria-live="polite"></p>
       <h2 id="pass-title">過關啦！</h2>
-      <p id="pass-copy">三顆星星已亮起。完成一輪，獎勵一枚星星幣。</p>
+      <p id="pass-copy">這個字已經寫滿六次。星星已記下。</p>
       <p id="pass-coin" class="pass-coin">＋1 星星幣</p>
       <div class="pass-actions">
-        <button type="button" class="primary-btn" id="btn-next-level">下一關</button>
+        <button type="button" class="primary-btn" id="btn-back-chars">返回字表</button>
+        <button type="button" class="ghost-btn" id="btn-next-level" hidden>下一個字</button>
         <button type="button" class="ghost-btn" id="btn-pass-rewrite" hidden>再寫一次</button>
         <button type="button" class="ghost-btn" id="btn-pass-home">返主頁</button>
       </div>
     </div>
   </div>
 
-  <script src="js/no-zoom.js?v=hanzi-write-qa26"></script>
-  <script src="js/nav-back.js?v=hanzi-write-qa26"></script>
-  <script src="js/storage.js?v=hanzi-write-qa26"></script>
-  <script src="js/speech.js?v=hanzi-write-qa26"></script>
+  <script src="js/no-zoom.js?v=hanzi-write-ch13"></script>
+  <script src="js/nav-back.js?v=hanzi-write-ch13"></script>
+  <script src="js/storage.js?v=hanzi-write-ch13"></script>
+  <script src="js/speech.js?v=hanzi-write-ch13"></script>
   <script src="vendor/hanzi-writer/hanzi-writer.min.js?v=3.7.3"></script>
-  <script src="data/hanzi-write-chars.js?v=hanzi-write-qa26"></script>
-  <script src="js/hanzi-write-demo.js?v=hanzi-write-qa26"></script>
+  <script src="data/hanzi-write-chars.js?v=hanzi-write-ch13"></script>
+  <script src="js/hanzi-write-demo.js?v=hanzi-write-ch13"></script>
 </body>
 </html>

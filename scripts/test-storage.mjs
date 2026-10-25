@@ -192,6 +192,9 @@ test('常識樂園獨立幣位：一日一次，唔佔中文聽配砌三個幣�
   assert.ok(S.EXTRA_COIN_MODES.includes('common-sense-comic-rain'));
   assert.ok(S.EXTRA_COIN_MODES.includes('common-sense-body'));
   assert.ok(S.EXTRA_COIN_MODES.includes('hanzi-write'));
+  assert.ok(S.EXTRA_COIN_MODES.includes('hanzi-write-ch1'));
+  assert.ok(S.EXTRA_COIN_MODES.includes('hanzi-write-ch2'));
+  assert.ok(S.EXTRA_COIN_MODES.includes('hanzi-write-ch3'));
   const a = S.earnCoinForMode('common-sense-heroes');
   assert.equal(a.gained, true);
   assert.equal(a.state.coinsTotal, 1);
@@ -211,8 +214,21 @@ test('學寫字獨立幣位：一日一次，唔佔中文聽配砌', () => {
   assert.equal(a.gained, true);
   assert.equal(S.coinsTodayCount(), 0);
   assert.equal(S.earnCoinForMode('hanzi-write').already, true);
+  assert.equal(S.earnCoinForMode('hanzi-write-ch1').gained, true);
   assert.equal(S.earnCoinForMode('listen').gained, true);
   assert.equal(S.coinsTodayCount(), 1);
+});
+
+test('學寫字進度跨日仍在：唔跟 roundProgress 清零', () => {
+  const S = freshStorage();
+  S.setActiveProfile('kaka');
+  S.updateState({
+    hanziWriteProgress: { chars: { yi: 3 }, warmups: { ch1: true }, chapters: {} },
+    coinsDate: '2000-01-01',
+  });
+  const state = S.loadState();
+  assert.equal(state.hanziWriteProgress.chars.yi, 3);
+  assert.equal(state.hanziWriteProgress.warmups.ch1, true);
 });
 
 test('Phonics Phase 3A：認音／拼合／拆音分開記錄，recent 最多 10 次', () => {
@@ -271,11 +287,13 @@ test('resetStars：清空幣同 wordStats', () => {
   S.earnCoinForMode('build');
   S.recordWordResult('gou', true);
   S.recordPhonicsSkillResult('recognition', 'm', true);
+  S.updateState({ hanziWriteProgress: { chars: { yi: 4 }, warmups: {}, chapters: {} } });
   const next = S.resetStars();
   assert.equal(next.coinsTotal, 0);
   assert.equal(next.totalStars, 0);
   assert.equal(Object.keys(next.wordStats).length, 0);
   assert.equal(Object.keys(next.phonicsSkillStats.recognition).length, 0);
+  assert.equal(JSON.stringify(next.hanziWriteProgress), JSON.stringify({ chars: {}, warmups: {}, chapters: {} }));
 });
 
 test('Profile 隔離：卡卡賺幣唔入禧禧', () => {

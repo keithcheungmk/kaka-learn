@@ -46,6 +46,7 @@ const DEFAULT_PROFILE_STATE = {
   phonicsLearningVersion: 1,
   coinLog: {}, // { "YYYY-MM-DD": n } 每日賺到幾個幣（進度頁日曆）
   passedKeys: {}, // { "zoo": true, "red_series|rb_xiaoming": true }
+  hanziWriteProgress: { chars: {}, warmups: {}, chapters: {} },
   economyVersion: 2,
 };
 
@@ -66,6 +67,9 @@ const EXTRA_COIN_MODES = [
   'common-sense-comic-mtr',
   'common-sense-comic-park',
   'hanzi-write',
+  'hanzi-write-ch1',
+  'hanzi-write-ch2',
+  'hanzi-write-ch3',
 ];
 const ALL_COIN_MODES = COIN_MODES.concat(EXTRA_COIN_MODES);
 
@@ -82,6 +86,7 @@ function emptyProfile() {
     phonicsSkillStats: { recognition: {}, blending: {}, segmenting: {} },
     coinLog: {},
     passedKeys: {},
+    hanziWriteProgress: { chars: {}, warmups: {}, chapters: {} },
   };
 }
 
@@ -132,6 +137,16 @@ function applyDailyReset(profile) {
   profile.phonicsLearningVersion = 1;
   if (!profile.coinLog || typeof profile.coinLog !== 'object') profile.coinLog = {};
   if (!profile.passedKeys || typeof profile.passedKeys !== 'object') profile.passedKeys = {};
+  if (!profile.hanziWriteProgress || typeof profile.hanziWriteProgress !== 'object') {
+    profile.hanziWriteProgress = { chars: {}, warmups: {}, chapters: {} };
+  } else {
+    const hw = profile.hanziWriteProgress;
+    profile.hanziWriteProgress = {
+      chars: hw.chars && typeof hw.chars === 'object' ? hw.chars : {},
+      warmups: hw.warmups && typeof hw.warmups === 'object' ? hw.warmups : {},
+      chapters: hw.chapters && typeof hw.chapters === 'object' ? hw.chapters : {},
+    };
+  }
   return profile;
 }
 
@@ -530,6 +545,7 @@ function resetStars() {
     phonicsLearningVersion: 1,
     coinLog: {},
     passedKeys: {},
+    hanziWriteProgress: { chars: {}, warmups: {}, chapters: {} },
   });
 }
 
