@@ -166,6 +166,30 @@
     speech.speakTerm?.(text, { rate: 0.92, pitch: 1.08 });
   }
 
+  function vocabFor(level) {
+    const items = Array.isArray(level?.vocab) ? level.vocab : [];
+    return items.slice(0, 4).filter((item) => item && item.word);
+  }
+
+  function renderVocab(hostId, level) {
+    const host = $(hostId);
+    if (!host) return;
+    const items = vocabFor(level);
+    host.replaceChildren();
+    host.hidden = items.length === 0;
+    const kicker = hostId === 'write-vocab' ? $('write-vocab-kicker') : null;
+    if (kicker) kicker.hidden = items.length === 0;
+    items.forEach((item) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'vocab-chip';
+      btn.textContent = item.word;
+      btn.setAttribute('aria-label', `聽「${item.word}」`);
+      btn.addEventListener('click', () => speak(item.say || item.word));
+      host.appendChild(btn);
+    });
+  }
+
   function refreshStars() {
     const state = storage.loadState?.() || {};
     const pill = $('star-pill');
@@ -508,6 +532,7 @@
     if ($('write-progress')) {
       $('write-progress').textContent = `已寫 ${done}／${NEED_SUCCESSES} · 提示：${hintLabel(hint)}`;
     }
+    renderVocab('write-vocab', level);
   }
 
   function flashMissBoard() {
@@ -715,6 +740,7 @@
     if (chapterCoin.gained) coinBits.push('＋1 章節幣');
     if (!coinBits.length) coinBits.push(coin.already ? '今天已領過幣' : '星星已記下');
     $('pass-coin').textContent = coinBits.join(' · ');
+    renderVocab('pass-vocab', level);
     $('pass-overlay').classList.remove('hidden');
     speakGlossThenCheer(level);
   }
@@ -882,6 +908,8 @@
     onWriteSuccess,
     onQuizMiss,
     awardClear,
+    vocabFor,
+    renderVocab,
     getView: () => view,
     getChapterId: () => chapterId,
   };

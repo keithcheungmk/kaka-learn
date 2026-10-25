@@ -686,8 +686,25 @@ def walk(pg, url, shots: Path | None, tag: str):
     heading = pg.text_content("#write-heading") or ""
     if "一" not in heading:
         raise RuntimeError(f"Write screen must ask for 一, got {heading!r}")
-    if not pg.locator(".mizi-board").count():
-        raise RuntimeError("Write screen must show a 米字格")
+    if not pg.locator(".mizi-board, .jiugong-board").count():
+        raise RuntimeError("Write screen must show a 九宮格")
+    grid_svg = pg.inner_html(".jiugong-grid") or ""
+    if "x1=\"2\" y1=\"2\" x2=\"98\" y2=\"98\"" in grid_svg:
+        raise RuntimeError("九宮格 must not include 米字 diagonal lines")
+    if "34.33" not in grid_svg or "67.67" not in grid_svg:
+        raise RuntimeError("九宮格 must use 3×3 lines at one-third")
+    vocab_text = pg.text_content("#write-vocab") or ""
+    if "一個" not in vocab_text:
+        raise RuntimeError(f"Write screen must show related vocab, got {vocab_text!r}")
+    vocab_tap = pg.evaluate(
+        """() => {
+          const chip = document.querySelector('#write-vocab .vocab-chip');
+          const box = chip?.getBoundingClientRect();
+          return Math.min(box?.width || 0, box?.height || 0);
+        }"""
+    )
+    if vocab_tap < 44:
+        raise RuntimeError(f"Vocab chip tap target must be at least 44px, got {vocab_tap}")
     rewrite = (pg.text_content("#btn-rewrite") or "").strip()
     if rewrite != "再寫一次":
         raise RuntimeError(f"Rewrite button must be 「再寫一次」, got {rewrite!r}")

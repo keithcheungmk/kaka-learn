@@ -1337,12 +1337,18 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "要有本機繁體「星」筆順資料")
     if "KAKA_HANZI_WRITE_BANK" not in data or '"glossYue"' not in data:
         fail("hanzi-write", "字庫要有 BANK 同 glossYue")
+    if '"vocab"' not in data or '"edbStrokeCount"' not in data:
+        fail("hanzi-write", "字庫要有相關詞 vocab 同 EDB 筆畫數")
     if "KAKA_HANZI_WRITE_CHAPTERS" not in data or "入門筆畫" not in data:
         fail("hanzi-write", "要有第 1–3 章目錄")
     if "即將開放" not in data:
         fail("hanzi-write", "第 4–10 章要標即將開放")
-    if "米字格" not in page or "再寫一次" not in page or "過關啦！" not in page:
-        fail("hanzi-write", "流程要有米字格、再寫一次、過關啦")
+    if "九宮格" not in page or "再寫一次" not in page or "過關啦！" not in page:
+        fail("hanzi-write", "流程要有九宮格、再寫一次、過關啦")
+    if "米字格" in page or 'x1="2" y1="2" x2="98" y2="98"' in page:
+        fail("hanzi-write", "寫字底要用九宮格，唔好米字對角線")
+    if "write-vocab" not in page or "pass-vocab" not in page:
+        fail("hanzi-write", "寫字／過關畫面要有相關詞")
     if "btn-profile-kaka" not in page or "profile-kaka.jpg" not in page:
         fail("hanzi-write", "要重用卡卡／禧禧頭像選角色")
     if "earnCoinForMode" not in js or "hanzi-write" not in js:
@@ -1355,8 +1361,10 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "筆跡／進度唔可以上傳")
     if any(name in page or name in js for name in ("巴斯光年", "Buzz Lightyear", "迪士尼")):
         fail("hanzi-write", "唔好用受版權卡通名稱")
-    if "100dvh" not in css or ".mizi-board" not in css:
-        fail("hanzi-write", "寫字關要有一屏米字格版面")
+    if "100dvh" not in css or ".mizi-board" not in css or ".jiugong-grid" not in css:
+        fail("hanzi-write", "寫字關要有一屏九宮格版面")
+    if ".vocab-chip" not in css:
+        fail("hanzi-write", "相關詞掣要有大 tap target 樣式")
     if "GUIDE_ORANGE" not in js or "highlightColor: GUIDE_ORANGE" not in js:
         fail("hanzi-write", "引導線同文案都要係清晰橙色")
     if "showActiveStrokeGuide" not in js or "getScalingTransform" not in js:

@@ -46,7 +46,16 @@ assert.match(html, /id="level-bank"/);
 assert.match(html, /id="chapter-grid"/);
 assert.match(html, /id="view-warmup"/);
 assert.match(html, /id="view-chars"/);
-assert.match(html, /米字格/);
+assert.match(html, /九宮格/);
+assert.match(html, /jiugong-grid/);
+assert.match(html, /34\.33/);
+assert.match(html, /67\.67/);
+assert.match(html, /id="write-vocab"/);
+assert.match(html, /id="pass-vocab"/);
+assert.match(html, /相關詞/);
+assert.doesNotMatch(html, /米字格/);
+assert.doesNotMatch(html, /x1="2" y1="2" x2="98" y2="98"/);
+assert.doesNotMatch(html, /x1="98" y1="2" x2="2" y2="98"/);
 assert.match(html, /再寫一次/);
 assert.match(html, /過關啦！/);
 assert.match(html, /id="pass-gloss"/);
@@ -72,7 +81,9 @@ assert.doesNotMatch(html, /巴斯光年|Buzz|迪士尼|Disney|Lightyear/i);
 
 assert.match(css, /100dvh/);
 assert.match(css, /mizi-board/);
-assert.match(css, /background: #e8eef8/);
+assert.match(css, /jiugong-grid/);
+assert.match(css, /vocab-chip/);
+assert.doesNotMatch(css, /stroke-dasharray: 3 2/);
 assert.match(css, /level-bank/);
 assert.match(css, /chapter-grid/);
 assert.match(css, /warmup-grid/);
@@ -125,6 +136,11 @@ assert.match(js, /drawingWidth: drawingWidthFor\(size\)/);
 assert.match(js, /drawingColor: DRAWING_INK/);
 assert.match(js, /function flashMissBoard/);
 assert.match(js, /function showRestOffer/);
+assert.match(js, /function vocabFor/);
+assert.match(js, /function renderVocab/);
+assert.match(js, /write-vocab/);
+assert.match(js, /pass-vocab/);
+assert.match(js, /聽「\$\{item\.word\}」/);
 assert.match(js, /聽粵語，再指圖/);
 assert.match(js, /即將開放/);
 assert.doesNotMatch(js, /drawingWidth: 14/);
@@ -190,6 +206,13 @@ for (const item of bank) {
   assert.ok(item.hint, `${item.char} 要有 hint`);
   assert.ok(Array.isArray(glyph.strokes) && glyph.strokes.length > 0, `${item.char} 要有 strokes`);
   assert.equal(glyph.medians.length, glyph.strokes.length, `${item.char} median 對數`);
+  assert.ok(Array.isArray(item.vocab), `${item.char} 要有相關詞`);
+  assert.ok(item.vocab.length >= 2 && item.vocab.length <= 4, `${item.char} 相關詞要 2–4 個`);
+  for (const vocab of item.vocab) {
+    assert.ok(vocab.word && vocab.word.includes(item.char), `${item.char} 相關詞「${vocab.word}」要含本字`);
+    assert.ok(vocab.say, `${item.char} 相關詞要有粵語 say`);
+  }
+  assert.equal(item.edbStrokeCount, glyph.strokes.length, `${item.char} 筆畫數要對齊 EDB／常用字字形表`);
   for (const stroke of glyph.strokes) {
     assert.match(stroke, /^M /, `${item.char} stroke 要係 SVG path`);
   }
