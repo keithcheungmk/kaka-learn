@@ -56,8 +56,8 @@ for (const id of hiddenIds) {
   assert.ok(retired.hidden || retired.retired, `${id} 要 hidden/retired，唔好出現喺書架`);
 }
 const playable = context.window.FAMILY_STORIES.filter((item) => !item.hidden && !item.retired);
-assert.equal(playable.length, 18);
-assert.equal(context.window.FAMILY_STORIES.length, 22);
+assert.equal(playable.length, 19);
+assert.equal(context.window.FAMILY_STORIES.length, 23);
 const farm = context.window.FAMILY_STORIES.find((item) => item.id === 'zhongshan-happy-farm');
 assert.ok(farm, '要有中山開心農莊');
 assert.equal(farm.pages.length, 8);
@@ -108,5 +108,18 @@ assert.equal(JSON.stringify(story.pages[4].focusWords), JSON.stringify(['樓梯'
 assert.match(story.pages[4].sentence, /上上落落/);
 assert.doesNotMatch(story.pages[4].sentence, /走上走下/);
 assert.ok(story.characters.includes('爸爸'));
+const tianye = context.window.FAMILY_STORIES.find((item) => item.id === 'tianye-happy-day');
+assert.ok(tianye, '要有田野部落開心日');
+assert.equal(tianye.pages.length, 8);
+assert.equal(tianye.title, '田野部落開心日');
+assert.equal(tianye.date, '2026-10-25');
+assert.ok(tianye.characters.includes('希恩妹妹'));
+assert.ok(tianye.characters.includes('護士姐姐'));
+assert.equal(JSON.stringify(tianye.pages[7].focusWords), JSON.stringify(['學懂', '安全']));
+assert.match(tianye.pages[7].sentence, /細心照顧/);
+assert.match(tianye.pages[7].sentence, /溫柔餵/);
+assert.match(tianye.pages[7].sentence, /安全玩/);
+assert.equal(tianye.hidden, undefined);
+assert.equal(tianye.warmupPairs, undefined);
 
 console.log('test-family-storybook: ok');
