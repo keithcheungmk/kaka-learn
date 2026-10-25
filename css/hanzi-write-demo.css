@@ -359,14 +359,14 @@ body { min-height: 100dvh; }
 }
 
 .hanzi-guide {
-  /* Hint sits above the writer so the dashed tip stays visible over the
-     gray outline; fill:none keeps the child's finger ink visible. */
-  z-index: 2;
+  /* Fallback overlay only. Live quiz tip is injected into the writer SVG
+     so the child's ink paints after the dashed guide. */
+  z-index: 1;
   pointer-events: none;
 }
 
 .hanzi-target {
-  z-index: 1;
+  z-index: 3;
 }
 
 .hanzi-guide path,
@@ -379,6 +379,7 @@ body { min-height: 100dvh; }
   stroke-linejoin: round;
   stroke-opacity: 1;
   vector-effect: non-scaling-stroke;
+  pointer-events: none;
 }
 
 .hanzi-guide svg,
@@ -394,8 +395,21 @@ body { min-height: 100dvh; }
 .btn-stack { display: grid; gap: 10px; }
 .status-note { margin-bottom: 0; }
 .status-note.is-retry {
-  color: var(--coral);
-  font-weight: 800;
+  color: #ffb4a0;
+  font-weight: 900;
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+}
+
+.mizi-board.is-miss {
+  box-shadow: inset 0 0 0 5px #e24b4b, 0 0 0 4px rgba(226, 75, 75, .35);
+  animation: hw-miss-shake .42s ease;
+}
+
+@keyframes hw-miss-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-7px); }
+  50% { transform: translateX(7px); }
+  75% { transform: translateX(-4px); }
 }
 
 .pass-overlay {

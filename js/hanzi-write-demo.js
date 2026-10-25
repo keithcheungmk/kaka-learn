@@ -12,8 +12,10 @@
   const PARENT_HREF = 'index.html#screen-topics';
   const GUIDE_ORANGE = '#ff8a1a';
   const OUTLINE_INK = '#8aa0c8';
+  const DRAWING_INK = '#16325c';
   const GUIDE_DASH = '16 10';
   const GUIDE_OUTLINE_WIDTH = '10';
+  const DRAWING_TARGET_PX = 26;
   const WRITE_HINT = '跟著橙色線，一筆一筆寫。';
   const RETRY_HINT = '再試一次。跟著橙色線寫。';
   const PASS_CHEER = '過關啦';
@@ -122,18 +124,67 @@
     onComplete(data);
   }
 
+  function drawingWidthFor(size) {
+    // hanzi-writer drawingWidth is in the 1024-unit character space, then
+    // scaled onto the board. 14 ≈ 5 CSS px on a 400px board — too thin for
+    // an iPad finger. Target ~26 CSS px so the trail stays visible.
+    const scale = Math.max(0.12, (Number(size) - 24) / 1024);
+    return Math.max(56, Math.round(DRAWING_TARGET_PX / scale));
+  }
+
+  function writerStrokeGroup() {
+    return document.querySelector('#hanzi-target svg > g');
+  }
+
+  function makeGuidePath(pathD, strokeIndex) {
+    const svgNs = ['http:', 'www.w3.org/2000/svg'].join('//');
+    const path = document.createElementNS(svgNs, 'path');
+    path.setAttribute('d', pathD);
+    path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', GUIDE_ORANGE);
+    path.setAttribute('stroke-width', GUIDE_OUTLINE_WIDTH);
+    path.setAttribute('stroke-dasharray', GUIDE_DASH);
+    path.setAttribute('stroke-linejoin', 'round');
+    path.setAttribute('stroke-linecap', 'round');
+    path.setAttribute('stroke-opacity', '1');
+    path.setAttribute('vector-effect', 'non-scaling-stroke');
+    path.setAttribute('pointer-events', 'none');
+    path.classList.add('hanzi-guide-stroke');
+    path.dataset.strokeIndex = String(strokeIndex);
+    return path;
+  }
+
+  function placeGuideInWriter(path) {
+    const group = writerStrokeGroup();
+    if (!group) return false;
+    group.querySelectorAll('.hanzi-guide-stroke').forEach((el) => el.remove());
+    // Keep live finger ink after the dashed tip so paint order is
+    // outline → completed strokes → dashed guide → child's own stroke.
+    const ink = [...group.querySelectorAll('path')].find((el) => (
+      el.getAttribute('fill') === 'none'
+      && !el.classList.contains('hanzi-guide-stroke')
+    ));
+    if (ink) group.insertBefore(path, ink);
+    else group.appendChild(path);
+    return true;
+  }
+
   function clearActiveStrokeGuide() {
+    document.querySelectorAll('.hanzi-guide-stroke').forEach((el) => el.remove());
     const host = $('hanzi-guide');
     if (host) host.replaceChildren();
   }
 
   function showActiveStrokeGuide(strokeIndex) {
     const host = $('hanzi-guide');
-    if (!host) return;
-    host.replaceChildren();
+    clearActiveStrokeGuide();
     const level = currentLevel();
     const pathD = CHAR_DATA[level.char]?.strokes?.[strokeIndex];
     if (!pathD || typeof HanziWriter === 'undefined' || !HanziWriter.getScalingTransform) return;
+    const path = makeGuidePath(pathD, strokeIndex);
+    if (placeGuideInWriter(path)) return;
+    // Fallback overlay sits under #hanzi-target so finger ink still wins.
+    if (!host) return;
     const size = boardSize();
     const svgNs = ['http:', 'www.w3.org/2000/svg'].join('//');
     const svg = document.createElementNS(svgNs, 'svg');
@@ -144,20 +195,6 @@
     const group = document.createElementNS(svgNs, 'g');
     const transform = HanziWriter.getScalingTransform(size, size, 12);
     group.setAttribute('transform', transform.transform);
-    const path = document.createElementNS(svgNs, 'path');
-    path.setAttribute('d', pathD);
-    // Quiz hint: dashed / hollow outline. Solid fill looks like a finished stroke
-    // and covers the child's finger ink under .hanzi-guide (z-index 2).
-    path.setAttribute('fill', 'none');
-    path.setAttribute('stroke', GUIDE_ORANGE);
-    path.setAttribute('stroke-width', GUIDE_OUTLINE_WIDTH);
-    path.setAttribute('stroke-dasharray', GUIDE_DASH);
-    path.setAttribute('stroke-linejoin', 'round');
-    path.setAttribute('stroke-linecap', 'round');
-    path.setAttribute('stroke-opacity', '1');
-    path.setAttribute('vector-effect', 'non-scaling-stroke');
-    path.classList.add('hanzi-guide-stroke');
-    path.dataset.strokeIndex = String(strokeIndex);
     group.appendChild(path);
     svg.appendChild(group);
     host.appendChild(svg);
@@ -187,8 +224,18 @@
     el.classList.toggle('is-retry', tone === 'retry');
   }
 
+  function flashMissBoard() {
+    const board = document.querySelector('.mizi-board');
+    if (!board) return;
+    board.classList.remove('is-miss');
+    void board.offsetWidth;
+    board.classList.add('is-miss');
+    window.setTimeout(() => board.classList.remove('is-miss'), 520);
+  }
+
   function onQuizMiss() {
     setWriteStatus(RETRY_HINT, 'retry');
+    flashMissBoard();
     const now = Date.now();
     if (now - lastMissSpeakAt > 1600) {
       lastMissSpeakAt = now;
@@ -247,8 +294,8 @@
       strokeColor: GUIDE_ORANGE,
       highlightColor: GUIDE_ORANGE,
       outlineColor: OUTLINE_INK,
-      drawingColor: '#e56700',
-      drawingWidth: 14,
+      drawingColor: DRAWING_INK,
+      drawingWidth: drawingWidthFor(size),
       showHintAfterMisses: 1,
       highlightOnComplete: true,
       strokeHighlightSpeed: 1,
@@ -419,7 +466,11 @@
     GUIDE_ORANGE,
     GUIDE_DASH,
     GUIDE_OUTLINE_WIDTH,
+    DRAWING_INK,
+    DRAWING_TARGET_PX,
     OUTLINE_INK,
+    drawingWidthFor,
+    placeGuideInWriter,
     WRITE_HINT,
     RETRY_HINT,
     PASS_CHEER,
