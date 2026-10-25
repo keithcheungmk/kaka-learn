@@ -103,6 +103,14 @@ MAP = {
     "youchai": "cs-career-youchai.jpg",
     "shouhuoyuan": "cs-career-shouhuoyuan.jpg",
     "jiuhuyuan": "cs-career-jiuhuyuan.jpg",
+    "eyes-see": "cs-body-eyes-see.jpg",
+    "ears-hear": "cs-body-ears-hear.jpg",
+    "nose-smell": "cs-body-nose-smell.jpg",
+    "tongue-taste": "cs-body-tongue-taste.jpg",
+    "hands-touch": "cs-body-hands-touch.jpg",
+    "feet-walk": "cs-body-feet-walk.jpg",
+    "hands-hold": "cs-body-hands-hold.jpg",
+    "protect-ears": "cs-body-protect-ears.jpg",
 }
 
 

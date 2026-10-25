@@ -106,6 +106,7 @@ assert.match(storage, /EXTRA_COIN_MODES/);
 assert.match(storage, /common-sense-heroes/);
 assert.match(storage, /common-sense-transport/);
 assert.match(storage, /common-sense-food/);
+assert.match(storage, /common-sense-body/);
 assert.match(storage, /common-sense-comic-rain/);
 assert.match(storage, /COIN_MODES = \['listen', 'match', 'build'\]/);
 
@@ -151,6 +152,7 @@ for (const rel of [
   'data/common-sense-festivals-hk.js',
   'data/common-sense-recycle-green.js',
   'data/common-sense-food-health.js',
+  'data/common-sense-body-senses.js',
 ]) {
   vm.runInNewContext(read(rel), context);
 }
@@ -166,11 +168,11 @@ const playableA = [
   'festivals-hk',
   'recycle-green',
   'food-health',
+  'body-senses',
 ];
 const soonA = [
   'emotions',
   'animals-plants',
-  'body-senses',
   'family-roles',
   'school-day',
   'time-sense',
@@ -201,7 +203,7 @@ for (const id of playableA) {
   assert.equal(metaById[id].status, 'playable', `${id} 要可玩`);
   const pack = packs[id];
   assert.ok(pack, `${id} 要有題庫`);
-  const expectedRound = id === 'recycle-green' ? 9 : 10;
+  const expectedRound = id === 'recycle-green' ? 9 : id === 'body-senses' ? 8 : 10;
   assert.equal(pack.roundSize, expectedRound, `${id} roundSize 要 ${expectedRound}`);
   assert.ok(!pack.lifeAnchor, `${id} 學習牆唔好再重複生活錨點卡`);
   assert.ok(pack.intro, `${id} 要有一句說明`);
@@ -210,7 +212,14 @@ for (const id of playableA) {
   if (id === 'festivals-hk' || id === 'weather-seasons') continue;
   const items = quizPool(pack);
   assert.equal(items.length, expectedRound, `${id} 要有 ${expectedRound} 個學習項`);
-  for (const entry of items) assertQuizEntry(id, entry);
+  for (const entry of items) {
+    assertQuizEntry(id, entry);
+    if (id === 'body-senses') {
+      assert.ok(entry.whyYue, `${id}/${entry.id} 要有 whyYue`);
+      const whyN = hanLen(entry.whyYue);
+      assert.ok(whyN >= 8 && whyN <= 28, `${id}/${entry.id} whyYue 字數 ${whyN} 要短句`);
+    }
+  }
 }
 
 const recycle = packs['recycle-green'];
@@ -222,6 +231,14 @@ assert.equal(lights.name, '走人要熄燈');
 assert.equal(lights.wallLine, '離開房間——記得熄燈');
 assert.match(lights.ask, /冇人/);
 assert.match(lights.correct, /熄/);
+assert.match(js, /whyYue/);
+assert.match(js, /skipWhyAndAdvance/);
+assert.match(js, /btn-quiz-next/);
+assert.match(html, /id="btn-quiz-next"/);
+assert.match(html, /id="quiz-why"/);
+assert.match(html, /下一題/);
+assert.match(css, /\.quiz-why/);
+assert.match(metaById['body-senses'].blurb, /八題/);
 assert.match(js, /function hanRoundLabel/);
 assert.doesNotMatch(js, /學完再答十題/);
 assert.doesNotMatch(html, /再答十題/);
@@ -404,4 +421,4 @@ assert.match(weatherAsks, /邊個季節|春天|夏天|秋天|冬天/);
 assert.doesNotMatch(js, /揀一個職業再入/);
 assert.match(js, /sampleRound|shuffle/);
 
-console.log('PASS: common-sense — P0–P7 可玩、節日生字、飲食連環圖、四季入口、圖載入佔位、隱藏即將推出、獨立 modeKey、8–16 字選項、回收 9 題無 vis／飲筒。');
+console.log('PASS: common-sense — P0–P7 可玩、身體同五感八題點解、節日生字、飲食連環圖、四季入口、圖載入佔位、隱藏即將推出、獨立 modeKey、8–16 字選項、回收 9 題無 vis／飲筒。');

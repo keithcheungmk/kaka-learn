@@ -190,6 +190,7 @@ test('常識樂園獨立幣位：一日一次，唔佔中文聽配砌三個幣�
   assert.ok(S.EXTRA_COIN_MODES.includes('common-sense-heroes'));
   assert.ok(S.EXTRA_COIN_MODES.includes('common-sense-transport'));
   assert.ok(S.EXTRA_COIN_MODES.includes('common-sense-comic-rain'));
+  assert.ok(S.EXTRA_COIN_MODES.includes('common-sense-body'));
   assert.ok(S.EXTRA_COIN_MODES.includes('hanzi-write'));
   const a = S.earnCoinForMode('common-sense-heroes');
   assert.equal(a.gained, true);

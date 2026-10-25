@@ -106,11 +106,11 @@ window.COMMON_SENSE_CATALOG = {
     {
       "packId": "body-senses",
       "line": "A",
-      "status": "soon",
+      "status": "playable",
       "kicker": "A · 身體同五感",
-      "blurb": "即將推出",
-      "cover": "",
-      "emoji": "👂"
+      "blurb": "眼耳鼻舌手腳・答八題",
+      "cover": "assets/common-sense/scenes/eyes-see.webp",
+      "buttonId": "btn-pack-body"
     },
     {
       "packId": "family-roles",

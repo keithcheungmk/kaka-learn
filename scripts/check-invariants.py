@@ -1540,6 +1540,8 @@ def check_common_sense() -> None:
         "data/common-sense-festivals-hk.js",
         "data/common-sense-recycle-green.js",
         "data/common-sense-food-health.js",
+        "data/common-sense-body-senses.js",
+        "assets/common-sense/scenes/eyes-see.webp",
         "assets/common-sense/mtr-family-map.svg",
         "assets/common-sense/process/milk-1.webp",
         "assets/common-sense/process/bread-1.webp",
@@ -1594,6 +1596,10 @@ def check_common_sense() -> None:
         fail("common-sense", "答題圖要 4:3 畫框，每項答案要有獨立聽掣")
     if "ASK_UNLOCK_MS" not in js or "speak(quizLine" not in js:
         fail("common-sense", "答題要先播職業短句再判；聽一聽問句最多約 2 秒解鎖")
+    if "whyYue" not in js or "btn-quiz-next" not in html or "quiz-why" not in html:
+        fail("common-sense", "身體同五感答啱要有粵語點解字幕同下一題")
+    if 'common-sense-body-senses.js' not in html:
+        fail("common-sense", "常識頁要載入身體同五感題庫")
     listen_tail = js.split("$('btn-quiz-listen')?.addEventListener", 1)
     if (
         len(listen_tail) < 2
@@ -1617,6 +1623,16 @@ def check_common_sense() -> None:
             with Image.open(path) as im:
                 w, h = im.size
             if h <= 0 or abs((w / h) - (4 / 3)) > 0.04:
+                fail("common-sense", f"{rel} 要係 4:3 橫圖，而家 {w}×{h}")
+        body_src = read("data/common-sense-body-senses.js")
+        for rel in re.findall(r'"image":\s*"([^"]+)"', body_src):
+            path = Path(rel)
+            if not path.is_file():
+                fail("common-sense", f"缺少身體同五感圖 {rel}")
+                continue
+            with Image.open(path) as im:
+                w, h = im.size
+            if h == 0 or abs((w / h) - (4 / 3)) > 0.03:
                 fail("common-sense", f"{rel} 要係 4:3 橫圖，而家 {w}×{h}")
     catalog = read("data/common-sense-catalog.js")
     if "interview-comics.html" not in catalog:

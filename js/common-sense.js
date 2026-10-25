@@ -24,6 +24,7 @@
   let unlockTimer = null;
   let answerSpeakId = 0;
   let finishAwarded = false;
+  let whyPending = false;
   const preloadLinks = [];
   const FIRST_EAGER = 6;
 
@@ -212,11 +213,44 @@
     unlockTimer = setTimeout(unlockChoices, ASK_UNLOCK_MS);
   }
 
+  function hideWhy() {
+    whyPending = false;
+    $('view-quiz')?.classList.remove('is-why');
+    const box = $('quiz-why');
+    const text = $('quiz-why-text');
+    const next = $('btn-quiz-next');
+    if (box) box.classList.add('hidden');
+    if (text) text.textContent = '';
+    if (next) next.setAttribute('disabled', 'disabled');
+  }
+
+  function showWhy(why) {
+    whyPending = true;
+    $('view-quiz')?.classList.add('is-why');
+    const box = $('quiz-why');
+    const text = $('quiz-why-text');
+    const next = $('btn-quiz-next');
+    if (text) text.textContent = why;
+    if (box) box.classList.remove('hidden');
+    if (next) next.removeAttribute('disabled');
+  }
+
+  function skipWhyAndAdvance() {
+    if (!whyPending) return;
+    whyPending = false;
+    answerSpeakId += 1;
+    stopSpeech();
+    hideWhy();
+    afterCorrectAdvance();
+  }
+
   function resetQuizSpeech() {
     answerSpeakId += 1;
     answering = false;
+    whyPending = false;
     clearUnlockTimer();
     setChoicesLocked(false);
+    hideWhy();
     $('btn-quiz-listen')?.removeAttribute('disabled');
     stopSpeech();
   }
@@ -611,6 +645,7 @@
     }
     const ask = $('quiz-q');
     if (ask) ask.textContent = q.ask;
+    hideWhy();
     const fb = $('quiz-feedback');
     if (fb) {
       fb.textContent = '';
@@ -678,6 +713,25 @@
         fb.className = 'feedback is-ok';
       }
       speech.playCorrectCue?.({ muted: isMuted() });
+      const why = quizLine(q.whyYue);
+      if (why) {
+        $('btn-quiz-listen')?.setAttribute('disabled', 'disabled');
+        if (fb) {
+          fb.textContent = '';
+          fb.className = 'feedback';
+        }
+        showWhy(why);
+        const id = answerSpeakId;
+        const go = () => {
+          if (id !== answerSpeakId || !whyPending) return;
+          whyPending = false;
+          hideWhy();
+          afterCorrectAdvance();
+        };
+        if (isTestFast()) return;
+        speak(why, go);
+        return;
+      }
       const go = () => afterCorrectAdvance();
       if (isTestFast()) {
         go();
@@ -687,6 +741,7 @@
       return;
     }
     answering = false;
+    hideWhy();
     btn.classList.add('is-wrong');
     btn.disabled = true;
     [...document.querySelectorAll('#quiz-choices .choice')].forEach((el) => {
@@ -851,6 +906,10 @@
       const q = currentQuestion();
       if (q) speak(q.ask);
     });
+    $('btn-quiz-next')?.addEventListener('click', (event) => {
+      event.preventDefault();
+      skipWhyAndAdvance();
+    });
     $('btn-play-again')?.addEventListener('click', () => {
       resetQuizSpeech();
       startQuiz();
@@ -893,6 +952,8 @@
     get season() { return currentSeason; },
     get careers() { return packItems(currentPack || packMap['community-heroes']); },
     isChoicesLocked: () => choicesLocked,
+    isWhyVisible: () => Boolean(whyPending && !$('quiz-why')?.classList.contains('hidden')),
+    skipWhy: skipWhyAndAdvance,
     ASK_UNLOCK_MS,
     answerCurrentCorrect() {
       const q = currentQuestion();

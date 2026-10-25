@@ -916,6 +916,67 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.wait_for_selector("#view-learn:not(.hidden) #btn-start-quiz")
     pg.click("#back-link")
     pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-heroes")
+    if not pg.query_selector("#btn-pack-body"):
+        raise RuntimeError("Common-sense hub must show playable 身體同五感")
+    pg.click("#btn-pack-body")
+    pg.wait_for_selector("#view-learn:not(.hidden) #btn-start-quiz")
+    body_cards = pg.evaluate("() => document.querySelectorAll('#learn-grid .learn-card').length")
+    if body_cards != 8:
+        raise RuntimeError(f"Body-senses learn wall must show 8 cards, got {body_cards}")
+    pg.click("#btn-start-quiz")
+    pg.wait_for_selector("#view-quiz:not(.hidden) #quiz-choices .choice")
+    pg.evaluate("() => { window.__KAKA_TEST__ = true; }")
+    pg.evaluate("() => window.KakaCommonSense.answerCurrentWrong()")
+    body_wrong = pg.evaluate(
+        """() => ({
+          progress: document.querySelector('#status-pill')?.textContent || '',
+          feedback: document.querySelector('#quiz-feedback')?.textContent || '',
+          why: document.querySelector('#quiz-why-text')?.textContent || '',
+          whyHidden: document.querySelector('#quiz-why')?.classList.contains('hidden'),
+        })"""
+    )
+    if "已答啱 0／8" not in body_wrong["progress"]:
+        raise RuntimeError("Body-senses wrong answers must not increment progress")
+    if "唔係呢個喎" not in body_wrong["feedback"]:
+        raise RuntimeError("Body-senses wrong answers need the gentle retry hint")
+    if body_wrong["why"].strip() or not body_wrong["whyHidden"]:
+        raise RuntimeError("Wrong answers must not play the long 點解")
+    pg.evaluate("() => window.KakaCommonSense.answerCurrentCorrect()")
+    body_why = pg.evaluate(
+        """() => {
+          const next = document.querySelector('#btn-quiz-next');
+          const box = next?.getBoundingClientRect();
+          const d = document.documentElement;
+          return {
+            why: document.querySelector('#quiz-why-text')?.textContent || '',
+            nextLabel: next?.textContent || '',
+            hidden: document.querySelector('#quiz-why')?.classList.contains('hidden'),
+            tap: box ? Math.min(box.width, box.height) : 0,
+            overflowX: d.scrollWidth - d.clientWidth,
+            overflowY: d.scrollHeight - d.clientHeight,
+            progress: document.querySelector('#status-pill')?.textContent || '',
+          };
+        }"""
+    )
+    if body_why["hidden"] or len(body_why["why"].strip()) < 4:
+        raise RuntimeError("Correct body-senses answers must show the 點解 subtitle")
+    if "下一題" not in body_why["nextLabel"]:
+        raise RuntimeError("Why panel must offer 下一題 to skip")
+    if body_why["tap"] < 44:
+        raise RuntimeError(f"下一題 must be at least 44px, got {body_why['tap']}")
+    if "已答啱 1／8" not in body_why["progress"]:
+        raise RuntimeError(f"Correct why step should already count, got {body_why['progress']!r}")
+    if body_why["overflowX"] > 2:
+        raise RuntimeError(f"Body-senses why panel overflows horizontally by {body_why['overflowX']}px")
+    if pg.viewport_size["width"] > 700 and body_why["overflowY"] > 2:
+        raise RuntimeError(f"Body-senses iPad why panel must not page-scroll, overflowY={body_why['overflowY']}")
+    pg.click("#btn-quiz-next")
+    pg.wait_for_function("() => (document.querySelector('#status-pill')?.textContent || '').includes('已答啱 1／8') && document.querySelector('#quiz-why')?.classList.contains('hidden')")
+    probe("常識・身體同五感點解")
+    pg.click("#back-link")
+    pg.wait_for_selector("#view-learn:not(.hidden) #btn-start-quiz")
+    pg.click("#back-link")
+    pg.wait_for_selector("#view-packs:not(.hidden) #btn-pack-heroes")
     pg.click("#btn-pack-transport")
     pg.wait_for_selector("#view-learn:not(.hidden) #cs-mtr-map")
     map_text = pg.text_content("#cs-mtr-map") or ""

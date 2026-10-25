@@ -614,6 +614,29 @@ a.pack { text-decoration: none; }
 }
 .feedback.is-ok { color: var(--ok); }
 .feedback.is-bad { color: var(--bad); }
+.quiz-why {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.quiz-why-text {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(1.02rem, 2.3vw, 1.28rem);
+  font-weight: 800;
+  line-height: 1.4;
+  color: var(--ok);
+}
+.quiz-why-next { min-height: 52px; }
+.quiz-view.is-why .listen-btn { display: none; }
+@media (min-width: 701px) {
+  .quiz-view.is-why .quiz-frame {
+    width: min(100%, calc(min(18dvh, 9.2rem) * 4 / 3));
+    max-height: min(18dvh, 9.2rem);
+  }
+}
 
 .finish-view { justify-content: center; }
 .celebrate {

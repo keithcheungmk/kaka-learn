@@ -64,6 +64,7 @@ def collect_han_chars() -> str:
         "data/common-sense-festivals-hk.js",
         "data/common-sense-recycle-green.js",
         "data/common-sense-food-health.js",
+        "data/common-sense-body-senses.js",
         "data/interview-comics.js",
     ):
         chars.update(ch for ch in read(ROOT / rel) if "\u4e00" <= ch <= "\u9fff")
