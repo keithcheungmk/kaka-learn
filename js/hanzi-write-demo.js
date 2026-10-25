@@ -18,7 +18,6 @@
   const GUIDE_OUTLINE_WIDTH = '10';
   const DRAWING_TARGET_PX = 26;
   const NEED_SUCCESSES = 6;
-  const WARMUP_SIZE = 4;
   const HINT_FULL = 1;
   const HINT_FAINT = 2;
   const HINT_BLANK = 3;
@@ -32,7 +31,6 @@
   const views = {
     profile: $('view-profile'),
     adventure: $('view-adventure'),
-    warmup: $('view-warmup'),
     chars: $('view-chars'),
     write: $('view-write'),
   };
@@ -43,7 +41,6 @@
   let writer = null;
   let quizActive = false;
   let lastMissSpeakAt = 0;
-  let warmupState = null;
 
   function levels() {
     return BANK.filter((level) => CHAR_DATA[level.char]);
@@ -69,6 +66,7 @@
   }
 
   function emptyProgress() {
+    // warmups is leftover chapter-gate progress; ignored after Keith 2026-10-25.
     return { chars: {}, warmups: {}, chapters: {} };
   }
 
@@ -110,16 +108,6 @@
     return value;
   }
 
-  function isWarmupDone(id) {
-    return !!loadProgress().warmups[id || chapterId];
-  }
-
-  function markWarmupDone(id) {
-    const next = loadProgress();
-    next.warmups[id || chapterId] = true;
-    saveProgress(next);
-  }
-
   function chapterCleared(id) {
     const list = chapterLevels(id);
     return list.length > 0 && list.every((level) => successCount(level.id) >= NEED_SUCCESSES);
@@ -155,7 +143,7 @@
     });
     const back = $('back-link');
     if (name === 'write') back.textContent = '← 字表';
-    else if (name === 'chars' || name === 'warmup') back.textContent = '← 選章';
+    else if (name === 'chars') back.textContent = '← 選章';
     else if (name === 'adventure') back.textContent = '← 選角色';
     else back.textContent = '← 中文';
     refreshStars();
@@ -169,6 +157,28 @@
   function vocabFor(level) {
     const items = Array.isArray(level?.vocab) ? level.vocab : [];
     return items.slice(0, 4).filter((item) => item && item.word);
+  }
+
+  function renderMeaning(level) {
+    const btn = $('write-meaning');
+    if (!btn) return;
+    const char = String(level?.char || '').trim();
+    const emoji = String(level?.emoji || '').trim();
+    btn.replaceChildren();
+    if (!char) {
+      btn.hidden = true;
+      return;
+    }
+    btn.hidden = false;
+    const face = document.createElement('span');
+    face.className = 'write-meaning-emoji';
+    face.setAttribute('aria-hidden', 'true');
+    face.textContent = emoji || char;
+    const glyph = document.createElement('span');
+    glyph.className = 'write-meaning-char';
+    glyph.textContent = char;
+    btn.append(face, glyph);
+    btn.setAttribute('aria-label', `聽「${char}」`);
   }
 
   function renderVocab(hostId, level) {
@@ -271,114 +281,10 @@
     showView('chars');
   }
 
-  function shuffle(list) {
-    const out = [...list];
-    for (let i = out.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [out[i], out[j]] = [out[j], out[i]];
-    }
-    return out;
-  }
-
-  function buildWarmup(id) {
-    const pool = chapterLevels(id);
-    const targets = shuffle(pool).slice(0, Math.min(WARMUP_SIZE, pool.length));
-    return {
-      chapterId: id,
-      index: 0,
-      items: targets.map((target) => {
-        const others = shuffle(pool.filter((item) => item.id !== target.id)).slice(0, 3);
-        return { target, choices: shuffle([target, ...others]) };
-      }),
-    };
-  }
-
-  function warmupTargetId() {
-    return warmupState?.items?.[warmupState.index]?.target?.id || '';
-  }
-
-  function renderWarmup() {
-    const item = warmupState?.items?.[warmupState.index];
-    const chapter = chapterById(warmupState?.chapterId || chapterId);
-    if ($('warmup-kicker')) $('warmup-kicker').textContent = `第${chapter.no}章 · ${chapter.title}`;
-    if ($('warmup-progress')) {
-      $('warmup-progress').textContent = `已完成 ${warmupState?.index || 0}／${warmupState?.items?.length || WARMUP_SIZE}`;
-    }
-    const grid = $('warmup-grid');
-    if (!grid || !item) return;
-    grid.replaceChildren();
-    item.choices.forEach((choice) => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'warmup-choice';
-      btn.dataset.charId = choice.id;
-      btn.innerHTML = `<span class="warmup-emoji" aria-hidden="true">${choice.emoji || choice.char}</span><span>${choice.char}</span>`;
-      btn.setAttribute('aria-label', choice.char);
-      btn.addEventListener('click', () => answerWarmup(choice.id));
-      grid.appendChild(btn);
-    });
-    if ($('warmup-status')) {
-      $('warmup-status').textContent = '先聽，再指圖。';
-      $('warmup-status').classList.remove('is-retry');
-    }
-  }
-
-  function playWarmupPrompt() {
-    const target = warmupState?.items?.[warmupState.index]?.target;
-    if (!target) return;
-    speak(target.say || target.char);
-  }
-
-  function openWarmup(id) {
-    chapterId = id;
-    warmupState = buildWarmup(id);
-    renderWarmup();
-    showView('warmup');
-    speak('聽粵語，再指圖');
-    window.setTimeout(playWarmupPrompt, 400);
-  }
-
-  function answerWarmup(choiceId) {
-    const item = warmupState?.items?.[warmupState.index];
-    if (!item) return;
-    if (choiceId !== item.target.id) {
-      if ($('warmup-status')) {
-        $('warmup-status').textContent = '再試一次。先聽，再指圖。';
-        $('warmup-status').classList.add('is-retry');
-      }
-      const wrong = document.querySelector(`#warmup-grid [data-char-id="${choiceId}"]`);
-      if (wrong) {
-        wrong.classList.remove('is-wrong');
-        void wrong.offsetWidth;
-        wrong.classList.add('is-wrong');
-      }
-      speak('再試一次');
-      return;
-    }
-    speak(item.target.say || item.target.char);
-    warmupState.index += 1;
-    if (warmupState.index >= warmupState.items.length) {
-      finishWarmup();
-      return;
-    }
-    renderWarmup();
-    window.setTimeout(playWarmupPrompt, 350);
-  }
-
-  function finishWarmup() {
-    markWarmupDone(warmupState?.chapterId || chapterId);
-    warmupState = null;
-    goChars();
-  }
-
   function openChapter(id) {
     const chapter = chapterById(id);
     if (!chapter?.open) return;
     chapterId = chapter.id;
-    if (!isWarmupDone(chapter.id)) {
-      openWarmup(chapter.id);
-      return;
-    }
     goChars();
   }
 
@@ -532,6 +438,7 @@
     if ($('write-progress')) {
       $('write-progress').textContent = `已寫 ${done}／${NEED_SUCCESSES} · 提示：${hintLabel(hint)}`;
     }
+    renderMeaning(level);
     renderVocab('write-vocab', level);
   }
 
@@ -796,8 +703,7 @@
       leaveWrite();
       return;
     }
-    if (view === 'chars' || view === 'warmup') {
-      warmupState = null;
+    if (view === 'chars') {
       goAdventure();
       return;
     }
@@ -811,9 +717,10 @@
   $('btn-profile-kaka').addEventListener('click', () => pickProfile('kaka'));
   $('btn-profile-heihei').addEventListener('click', () => pickProfile('heihei'));
   $('btn-start-adventure').addEventListener('click', () => openChapter('ch1'));
-  $('btn-warmup-listen')?.addEventListener('click', () => {
+  $('write-meaning')?.addEventListener('click', () => {
+    const level = currentLevel();
     speech.unlockSpeech?.();
-    playWarmupPrompt();
+    speak(level.say || level.char);
   });
   $('btn-guide').addEventListener('click', () => {
     speech.unlockSpeech?.();
@@ -901,15 +808,13 @@
     showView,
     openWrite,
     openChapter,
-    finishWarmup,
-    warmupTargetId,
-    answerWarmup,
     onLevelPassed,
     onWriteSuccess,
     onQuizMiss,
     awardClear,
     vocabFor,
     renderVocab,
+    renderMeaning,
     getView: () => view,
     getChapterId: () => chapterId,
   };

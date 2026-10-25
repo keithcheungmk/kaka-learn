@@ -640,7 +640,7 @@ def walk(pg, url, shots: Path | None, tag: str):
     if pg.is_visible("#screen-home") and "active" in (pg.get_attribute("#screen-home", "class") or ""):
         raise RuntimeError("Four-panel wall ← 中文 must return one level to Chinese topics, not home")
 
-    # 卡卡學寫字：中文主題入口 → 選章 → 聽圖熱身 → 選字 → 寫「一」→ 過關
+    # 卡卡學寫字：中文主題入口 → 選章 → 選字 → 寫「一」→ 過關
     pg.wait_for_selector("#screen-topics.active #btn-topics-hanzi-write")
     hanzi_href = pg.get_attribute("#btn-topics-hanzi-write", "href") or ""
     if "hanzi-write-demo.html" not in hanzi_href:
@@ -662,19 +662,8 @@ def walk(pg, url, shots: Path | None, tag: str):
     if "即將開放" not in (pg.text_content("#chapter-grid") or ""):
         raise RuntimeError("Chapter list must show 即將開放 for later chapters")
     pg.click("#btn-start-adventure")
-    pg.wait_for_selector("#view-warmup:not(.hidden) #warmup-grid, #view-chars:not(.hidden) #level-bank")
-    for _ in range(8):
-        if pg.is_visible("#view-chars:not(.hidden)"):
-            break
-        if pg.is_visible("#view-warmup:not(.hidden)"):
-            pg.evaluate(
-                """() => {
-                  const id = window.KakaHanziWrite?.warmupTargetId?.();
-                  if (id) document.querySelector('#warmup-grid [data-char-id="' + id + '"]')?.click();
-                  else window.KakaHanziWrite?.finishWarmup?.();
-                }"""
-            )
-            pg.wait_for_timeout(180)
+    if pg.query_selector("#view-warmup, #warmup-grid, #btn-warmup-listen"):
+        raise RuntimeError("Hanzi chapter entry must skip the old 聽粵語指圖 gate")
     pg.wait_for_selector("#view-chars:not(.hidden) #level-bank")
     if "0／6" not in (pg.text_content("#level-bank") or ""):
         raise RuntimeError("Character list must show 0／6 progress")
@@ -686,6 +675,19 @@ def walk(pg, url, shots: Path | None, tag: str):
     heading = pg.text_content("#write-heading") or ""
     if "一" not in heading:
         raise RuntimeError(f"Write screen must ask for 一, got {heading!r}")
+    meaning = (pg.text_content("#write-meaning") or "").strip()
+    if "一" not in meaning:
+        raise RuntimeError(f"Write screen must pair the character with a meaning buddy, got {meaning!r}")
+    if pg.evaluate("() => document.querySelector('#write-meaning')?.hidden === true"):
+        raise RuntimeError("Write meaning buddy must stay visible beside the 九宮格")
+    meaning_tap = pg.evaluate(
+        """() => {
+          const box = document.querySelector('#write-meaning')?.getBoundingClientRect();
+          return Math.min(box?.width || 0, box?.height || 0);
+        }"""
+    )
+    if meaning_tap < 44:
+        raise RuntimeError(f"Meaning buddy tap target must be at least 44px, got {meaning_tap}")
     if not pg.locator(".mizi-board, .jiugong-board").count():
         raise RuntimeError("Write screen must show a 九宮格")
     grid_svg = pg.inner_html(".jiugong-grid") or ""
@@ -724,11 +726,19 @@ def walk(pg, url, shots: Path | None, tag: str):
           const guideZ = Number(guideHost ? getComputedStyle(guideHost).zIndex : 0);
           const size = Math.min(target?.clientWidth || 320, target?.clientHeight || 320);
           const drawingW = window.KakaHanziWrite?.drawingWidthFor?.(size) || 0;
+          const meaningBox = document.querySelector('#write-meaning')?.getBoundingClientRect();
+          const boardBox = document.querySelector('.mizi-board')?.getBoundingClientRect();
+          const coversBoard = !!(meaningBox && boardBox
+            && meaningBox.right > boardBox.left + 4
+            && meaningBox.left < boardBox.right - 4
+            && meaningBox.bottom > boardBox.top + 4
+            && meaningBox.top < boardBox.bottom - 4);
           return {
             overflowX: d.scrollWidth - d.clientWidth,
             overflowY: d.scrollHeight - d.clientHeight,
             tap: Math.min(start?.width || 0, start?.height || 0),
             restTap: Math.min(restBtn?.width || 0, restBtn?.height || 0),
+            coversBoard,
             writerKids: document.querySelector('#hanzi-target')?.childElementCount || 0,
             guideFill: guide?.getAttribute('fill') || '',
             guideStroke: guide?.getAttribute('stroke') || '',
@@ -742,6 +752,8 @@ def walk(pg, url, shots: Path | None, tag: str):
           };
         }"""
     )
+    if write_metrics.get("coversBoard"):
+        raise RuntimeError("Meaning buddy must not cover the 九宮格 write canvas")
     if write_metrics["overflowX"] > 2:
         raise RuntimeError(f"Hanzi write screen overflows horizontally by {write_metrics['overflowX']}px")
     if pg.viewport_size["width"] > 700 and write_metrics["overflowY"] > 2:

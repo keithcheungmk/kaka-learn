@@ -583,44 +583,38 @@ body { min-height: 100dvh; }
   font-weight: 800;
 }
 
-.warmup-card { width: min(720px, 100%); }
-.warmup-progress {
-  margin: 0 0 12px;
-  color: var(--gold);
-  font-weight: 800;
-}
-
-.warmup-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
-  margin: 12px 0;
-}
-
-.warmup-choice {
+.write-meaning {
   appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: var(--tap);
   min-width: 0;
-  min-height: 88px;
+  padding: 10px 14px;
   border-radius: 18px;
   border: 2px solid #4a6ea8;
   background: #e8eef8;
   color: #172048;
   font: inherit;
-  font-weight: 800;
   cursor: pointer;
-  display: grid;
-  place-items: center;
-  gap: 4px;
-  padding: 10px;
 }
 
-.warmup-choice .warmup-emoji {
-  font-size: clamp(2rem, 7vw, 3rem);
+.write-meaning:focus-visible {
+  outline: 3px solid #ffd34f;
+  outline-offset: 2px;
+}
+
+.write-meaning-emoji {
+  font-size: clamp(1.7rem, 4.4vw, 2.4rem);
   line-height: 1;
 }
 
-.warmup-choice.is-wrong {
-  animation: hw-miss-shake .42s ease;
+.write-meaning-char {
+  font-size: clamp(1.5rem, 3.6vw, 2.1rem);
+  font-weight: 900;
+  line-height: 1;
 }
 
 @media (max-width: 700px) {
@@ -636,10 +630,17 @@ body { min-height: 100dvh; }
     align-items: center;
     gap: 10px 12px;
   }
-  .status-note { margin: 0; text-align: left; grid-column: 1; min-width: 0; }
+  .write-meaning {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    padding: 8px 12px;
+  }
+  .write-meaning-emoji { font-size: clamp(1.5rem, 6vw, 2rem); }
+  .write-meaning-char { font-size: clamp(1.35rem, 5vw, 1.8rem); }
+  .status-note { margin: 0; text-align: left; grid-column: 1; grid-row: 2; min-width: 0; }
   .vocab-kicker,
   .vocab-row { grid-column: 1 / -1; }
-  .btn-stack { grid-column: 2; grid-row: 1; min-width: 0; }
+  .btn-stack { grid-column: 2; grid-row: 2; min-width: 0; }
   .hw-shell { width: min(100% - 16px, 1180px); }
   .profile-card-img {
     width: min(120px, 34vw);

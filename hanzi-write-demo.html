@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
   <meta name="theme-color" content="#0b1638">
   <title>卡卡學寫字｜寫字・筆順</title>
-  <link rel="stylesheet" href="css/hanzi-write-demo.css?v=hanzi-write-ch13">
+  <link rel="stylesheet" href="css/hanzi-write-demo.css?v=hanzi-write-no-gate">
 </head>
 <body>
   <main class="hw-shell">
@@ -50,18 +50,6 @@
       </div>
     </section>
 
-    <section id="view-warmup" class="view hidden" aria-labelledby="warmup-heading">
-      <div class="hero-card warmup-card">
-        <p class="level-kicker" id="warmup-kicker">第一章</p>
-        <h2 id="warmup-heading">聽粵語，再指圖</h2>
-        <p id="warmup-lead">先按「聽一聽」，再指正確的圖。答錯可以再試，圖不會換位。</p>
-        <p id="warmup-progress" class="warmup-progress" aria-live="polite">已完成 0／4</p>
-        <button type="button" class="primary-btn" id="btn-warmup-listen">聽一聽</button>
-        <div class="warmup-grid" id="warmup-grid" role="list" aria-label="聽完指圖"></div>
-        <p id="warmup-status" class="status-note" role="status">先聽，再指圖。</p>
-      </div>
-    </section>
-
     <section id="view-chars" class="view hidden browse-view" aria-labelledby="chars-heading">
       <div class="hero-card adventure-card">
         <p class="level-kicker" id="chars-kicker">第一章</p>
@@ -91,6 +79,10 @@
           </div>
         </div>
         <aside class="write-panel">
+          <button type="button" class="write-meaning" id="write-meaning" aria-label="聽「一」">
+            <span class="write-meaning-emoji" aria-hidden="true">1️⃣</span>
+            <span class="write-meaning-char">一</span>
+          </button>
           <p id="write-status" class="status-note" role="status">跟著橙色線，一筆一筆寫。</p>
           <p class="vocab-kicker" id="write-vocab-kicker">相關詞 · 撳一撳聽粵語</p>
           <div class="vocab-row" id="write-vocab" aria-label="相關詞語"></div>
@@ -138,12 +130,12 @@
     </div>
   </div>
 
-  <script src="js/no-zoom.js?v=hanzi-write-ch13"></script>
-  <script src="js/nav-back.js?v=hanzi-write-ch13"></script>
-  <script src="js/storage.js?v=hanzi-write-ch13"></script>
-  <script src="js/speech.js?v=hanzi-write-ch13"></script>
+  <script src="js/no-zoom.js?v=hanzi-write-no-gate"></script>
+  <script src="js/nav-back.js?v=hanzi-write-no-gate"></script>
+  <script src="js/storage.js?v=hanzi-write-no-gate"></script>
+  <script src="js/speech.js?v=hanzi-write-no-gate"></script>
   <script src="vendor/hanzi-writer/hanzi-writer.min.js?v=3.7.3"></script>
-  <script src="data/hanzi-write-chars.js?v=hanzi-write-ch13"></script>
-  <script src="js/hanzi-write-demo.js?v=hanzi-write-ch13"></script>
+  <script src="data/hanzi-write-chars.js?v=hanzi-write-no-gate"></script>
+  <script src="js/hanzi-write-demo.js?v=hanzi-write-no-gate"></script>
 </body>
 </html>

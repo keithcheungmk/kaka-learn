@@ -1389,8 +1389,10 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "寫字中要有「休息一下」離開掣")
     if "NEED_SUCCESSES = 6" not in js or "hintLevelFor" not in js:
         fail("hanzi-write", "每字要六次成功，並按次數淡化提示")
-    if "聽粵語，再指圖" not in page or "view-warmup" not in page:
-        fail("hanzi-write", "每章寫字前要有聽粵語指圖熱身")
+    if "聽粵語，再指圖" in page or "view-warmup" in page or "openWarmup" in js:
+        fail("hanzi-write", "選章後要直接選字寫字，唔好再閘聽粵語指圖熱身")
+    if "write-meaning" not in page or "renderMeaning" not in js or ".write-meaning" not in css:
+        fail("hanzi-write", "寫字畫面要有字＋emoji 意思，唔好另開測驗閘")
     if "hanziWriteProgress" not in js or "hanziWriteProgress" not in storage:
         fail("hanzi-write", "0–6 進度要記本機，唔好一日清零")
     if "跟著橙色線" not in js or "跟著橙色線" not in page:
