@@ -103,6 +103,8 @@ assert.match(js, /fill', 'none'/);
 assert.match(js, /vector-effect', 'non-scaling-stroke'/);
 assert.match(js, /function drawingWidthFor/);
 assert.match(js, /function placeGuideInWriter/);
+assert.match(js, /group\.appendChild\(path\)/);
+assert.doesNotMatch(js, /insertBefore\(path, ink\)/);
 assert.match(js, /DRAWING_TARGET_PX = 26/);
 assert.match(js, /DRAWING_INK = '#16325c'/);
 assert.match(js, /drawingWidth: drawingWidthFor\(size\)/);
