@@ -108,6 +108,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-26 · Cursor Chief Lead（家庭故事書面中文硬規則）
+
+- Keith 新規：中文家庭故事／生字任務一律用香港正式書面中文（正體），禁止粵語口語入正文、詞語任務、對白；人物名鎖定「浠榆妹妹」。
+- 規範寫入 `AGENTS.md`、角色聖經、第一版說明、中文故事 skill、Chinese Lead；`check-family-stories.py` 自動掃對白／sentence／tiles／learn／dialogue／extensionWords 常見口語字（哋、唔、係咪、嚟、咗、喺、冇、睇、攞、俾、啲、咁、喇、喎、㗎、咩、嘢等），唔誤殺「的／了」。`check-invariants.py` 新增 `family-written-chinese` 並真正跑中文故事檢查。
+- 一次過改現網 24 篇中文 manifest（優先對白／句子／詞磚）。典型：❌「我好掛住你哋！」→ ✅「我很想念你們！」；《山姆超市和室內動物園》《田野部落開心日》《中山動物園的一天》《珠海探妹妹（二）》等亦改「學識／揸車／沖涼／食雪糕／好好味／同」等。英文 manifest 同四格口語模式不改。
+- 試玩：`family-storybook.html`（舊 tab 要閂再開）。
+
 ### 2026-10-26 · Cursor Chief Lead（《山姆超市同室內動物園》#179）
 
 - 中文家庭日記新增八頁〈山姆超市同室內動物園〉（`sam-supermarket-zoo`，卡卡日記 2026-10-24）。

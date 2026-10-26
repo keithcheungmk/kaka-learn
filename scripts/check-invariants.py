@@ -1062,6 +1062,22 @@ def check_book_scans_shelf() -> None:
             fail("book-scans", "書本掃描入口要放喺主頁，唔好塞入小朋友揀 Profile 大卡")
 
 
+def check_family_story_written_chinese() -> None:
+    """故事／生字任務用香港正式書面中文（Keith 2026-10-26）。"""
+    agents = read("AGENTS.md")
+    bible = read("docs/family-story-character-bible.md")
+    checker = read("scripts/check-family-stories.py")
+    if "香港正式書面中文" not in agents:
+        fail("family-written-chinese", "AGENTS.md 要寫明故事／生字任務用香港正式書面中文")
+    if "香港正式書面中文" not in bible:
+        fail("family-written-chinese", "角色設定要寫明故事正文用香港正式書面中文")
+    for marker in ("ORAL_CHARS", "ORAL_PHRASES", "scan_oral", "你哋", "掛住"):
+        if marker not in checker:
+            fail("family-written-chinese", f"check-family-stories.py 要有口語掃描（缺 {marker}）")
+    if "的／了" not in checker and "的/了" not in checker:
+        fail("family-written-chinese", "口語掃描要註明唔好誤殺書面「的／了」")
+
+
 def check_family_names() -> None:
     """故事角色正式名：虹姑姑、蛙蛙、耀叔叔、浠榆妹妹（Keith 2026-10-08／10-25）。"""
     for path in (
@@ -1189,6 +1205,9 @@ def check_family_storybook_entry() -> None:
         result = subprocess.run([node, "scripts/test-family-storybook.mjs"], capture_output=True, text=True)
         if result.returncode:
             fail("family-storybook", (result.stderr or result.stdout)[-1200:] or "家庭故事驗收回歸失敗")
+    result = subprocess.run([sys.executable, "scripts/check-family-stories.py"], capture_output=True, text=True)
+    if result.returncode:
+        fail("family-storybook", (result.stderr or result.stdout)[-1200:] or "家庭故事資料檢查失敗")
 
 
 def check_four_panel_story() -> None:
@@ -1789,6 +1808,7 @@ CHECKS = [
     check_common_sense,
     check_one_level_back,
     check_family_names,
+    check_family_story_written_chinese,
     check_carter_family_blanks,
     check_wacky_ricky_blanks,
     check_magic_marker_blanks,

@@ -118,18 +118,19 @@ assert.ok(tianye.characters.includes('護士姐姐'));
 assert.match(tianye.pages[0].sentence, /浠榆妹妹/);
 assert.doesNotMatch(JSON.stringify(tianye), /希恩/);
 assert.equal(JSON.stringify(tianye.pages[7].focusWords), JSON.stringify(['細心', '溫柔', '安全']));
-assert.match(tianye.pages[7].sentence, /學識/);
+assert.match(tianye.pages[7].sentence, /學會/);
+assert.doesNotMatch(tianye.pages[7].sentence, /學識/);
 assert.doesNotMatch(tianye.pages[7].sentence, /學懂/);
 assert.match(tianye.pages[7].sentence, /細心照顧妹妹/);
 assert.match(tianye.pages[7].sentence, /溫柔餵動物/);
-assert.match(tianye.pages[7].sentence, /安全揸車開船/);
-assert.equal(tianye.pages[7].dialogue.text, '細心照顧妹妹。溫柔餵動物。同爸爸安全揸車開船。');
+assert.match(tianye.pages[7].sentence, /安全開車開船/);
+assert.equal(tianye.pages[7].dialogue.text, '細心照顧妹妹。溫柔餵動物。和爸爸安全開車開船。');
 assert.match(tianye.pages[2].sentence, /開車去田野部落農莊/);
 assert.equal(tianye.hidden, undefined);
 assert.equal(tianye.warmupPairs, undefined);
 const samZoo = context.window.FAMILY_STORIES.find((item) => item.id === 'sam-supermarket-zoo');
-assert.ok(samZoo, '要有山姆超市同室內動物園');
-assert.equal(samZoo.title, '山姆超市同室內動物園');
+assert.ok(samZoo, '要有山姆超市和室內動物園');
+assert.equal(samZoo.title, '山姆超市和室內動物園');
 assert.equal(samZoo.date, '2026-10-24');
 assert.equal(samZoo.series, '卡卡日記');
 assert.equal(samZoo.pages.length, 8);
@@ -139,7 +140,8 @@ assert.ok(samZoo.characters.includes('虹姑姑'));
 assert.doesNotMatch(JSON.stringify(samZoo), /希恩/);
 assert.doesNotMatch(JSON.stringify(samZoo), /小鸡|选购|质量|认真储币|白鸽/);
 assert.match(samZoo.pages[0].sentence, /浠榆妹妹/);
-assert.match(samZoo.pages[0].dialogue.text, /掛住你哋/);
+assert.equal(samZoo.pages[0].dialogue.text, '我很想念你們！');
+assert.doesNotMatch(JSON.stringify(samZoo), /你哋|掛住|學識/);
 assert.match(samZoo.pages[1].sentence, /山姆超市/);
 assert.match(samZoo.pages[1].sentence, /毛公仔/);
 assert.match(samZoo.pages[2].sentence, /儲幣幣/);
@@ -151,12 +153,31 @@ assert.doesNotMatch(samZoo.pages[5].sentence, /白鴿/);
 assert.match(samZoo.pages[6].sentence, /小馬/);
 assert.match(samZoo.pages[6].sentence, /小雞/);
 assert.equal(JSON.stringify(samZoo.pages[7].focusWords), JSON.stringify(['慢慢揀', '溫柔', '儲幣幣']));
-assert.match(samZoo.pages[7].sentence, /學識/);
+assert.match(samZoo.pages[7].sentence, /學會/);
+assert.doesNotMatch(samZoo.pages[7].sentence, /學識/);
 assert.match(samZoo.pages[7].sentence, /超市慢慢揀/);
 assert.match(samZoo.pages[7].sentence, /溫柔餵動物/);
 assert.match(samZoo.pages[7].sentence, /認真儲幣幣/);
 assert.equal(samZoo.pages[7].dialogue.text, '超市慢慢揀。溫柔餵動物。認真儲幣幣。');
 assert.equal(samZoo.hidden, undefined);
 assert.equal(samZoo.warmupPairs, undefined);
+
+const oralRe = /[哋唔嚟咗喺冇睇攞俾啲咁喇啦喎㗎咩嘢嘅哦]|係咪|你哋|我哋|佢哋|掛住|揸車|沖涼|好味|落樓|食雪糕/;
+for (const item of context.window.FAMILY_STORIES) {
+  const blob = [
+    item.title,
+    item.summary,
+    ...(item.extensionWords || []),
+    ...item.pages.flatMap((page) => [
+      page.sentence,
+      page.dialogue?.text,
+      ...(page.tiles || []),
+      ...(page.learn || []),
+      ...(page.focusWords || []),
+      ...(page.distractors || []),
+    ]),
+  ].join('\n');
+  assert.doesNotMatch(blob, oralRe, `${item.id} 故事學習欄位要用書面中文`);
+}
 
 console.log('test-family-storybook: ok');
