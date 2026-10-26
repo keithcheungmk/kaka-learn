@@ -648,20 +648,26 @@ def walk(pg, url, shots: Path | None, tag: str):
     probe("中文・卡卡學寫字入口")
     with pg.expect_navigation():
         pg.click("#btn-topics-hanzi-write")
-    pg.wait_for_selector("#view-adventure:not(.hidden) #btn-start-adventure, #view-profile:not(.hidden) #btn-profile-kaka")
+    pg.wait_for_selector("#view-adventure:not(.hidden) [data-chapter-id='ch1'], #view-profile:not(.hidden) #btn-profile-kaka")
     if pg.is_visible("#view-adventure:not(.hidden)"):
         pg.click("#back-link")
         pg.wait_for_selector("#view-profile:not(.hidden) #btn-profile-kaka")
     if pg.is_visible("#view-write:not(.hidden)"):
         raise RuntimeError("Hanzi demo must not start on the writing screen")
     pg.click("#view-profile:not(.hidden) #btn-profile-kaka")
-    pg.wait_for_selector("#view-adventure:not(.hidden) #btn-start-adventure")
-    start_label = (pg.text_content("#btn-start-adventure") or "").strip()
-    if start_label != "由第一章開始":
-        raise RuntimeError(f"Chapter button must be 「由第一章開始」, got {start_label!r}")
-    if "即將開放" not in (pg.text_content("#chapter-grid") or ""):
-        raise RuntimeError("Chapter list must show 即將開放 for later chapters")
-    pg.click("#btn-start-adventure")
+    pg.wait_for_selector("#view-adventure:not(.hidden) [data-chapter-id='ch1']")
+    ch1_label = (pg.text_content("[data-chapter-id='ch1'] .chapter-label") or "").strip()
+    if ch1_label != "第1章":
+        raise RuntimeError(f"Chapter tile must show 「第1章」, got {ch1_label!r}")
+    if "即將開放" in (pg.text_content("#chapter-grid") or ""):
+        raise RuntimeError("Locked chapter tiles must not repeat 即將開放")
+    if not pg.query_selector("#chapter-grid .chapter-card.is-locked .chapter-lock"):
+        raise RuntimeError("Locked chapters must show a padlock overlay")
+    if pg.query_selector("#btn-start-adventure"):
+        raise RuntimeError("Chapter picker must not keep 由第一章開始")
+    if not pg.query_selector("#btn-speak-chapters"):
+        raise RuntimeError("Chapter picker must have a speaker button")
+    pg.click("[data-chapter-id='ch1']")
     if pg.query_selector("#view-warmup, #warmup-grid, #btn-warmup-listen"):
         raise RuntimeError("Hanzi chapter entry must skip the old 聽粵語指圖 gate")
     pg.wait_for_selector("#view-chars:not(.hidden) #level-bank")

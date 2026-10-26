@@ -5,17 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
   <meta name="theme-color" content="#0b1638">
   <title>卡卡學寫字｜寫字・筆順</title>
-  <link rel="stylesheet" href="css/hanzi-write-demo.css?v=hanzi-write-no-gate">
+  <link rel="stylesheet" href="css/hanzi-write-demo.css?v=hanzi-write-picture-tiles">
 </head>
 <body>
   <main class="hw-shell">
     <header class="topbar">
       <a id="back-link" class="back-link" href="index.html#screen-topics">← 中文</a>
-      <div class="brand">
+      <div class="brand" id="brand-block">
         <span id="brand-kicker">寫字・筆順</span>
         <h1 id="brand-title">卡卡學寫字</h1>
       </div>
-      <div id="star-pill" class="star-pill" aria-live="polite">★ 0</div>
+      <div class="topbar-end">
+        <button type="button" class="speak-btn" id="btn-speak-chapters" hidden aria-label="聽：揀一章來寫">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M4 10v4h3l4 3V7L7 10H4Zm13.5 2a3.5 3.5 0 0 0-1.8-3.1v6.2A3.5 3.5 0 0 0 17.5 12Zm-1.8-7v1.6A7 7 0 0 1 20 12a7 7 0 0 1-4.3 6.4V20A8.6 8.6 0 0 0 21.5 12 8.6 8.6 0 0 0 15.7 5Z"/></svg>
+        </button>
+        <div id="star-pill" class="star-pill" aria-live="polite">★ 0</div>
+      </div>
     </header>
 
     <section id="view-profile" class="view" aria-labelledby="profile-heading">
@@ -41,12 +46,16 @@
     </section>
 
     <section id="view-adventure" class="view hidden browse-view" aria-labelledby="adventure-heading">
-      <div class="hero-card adventure-card">
+      <div class="chapter-picker">
         <p class="who-line" id="who-line">卡卡，準備好了嗎？</p>
-        <h2 id="adventure-heading">選一章</h2>
-        <p id="adventure-lead">第一至第三章可以寫。每個字要寫滿六次，進度會記住，下次可以再寫。第四至第十章即將開放。</p>
+        <div class="chapter-picker-head">
+          <h2 id="adventure-heading">選一章</h2>
+          <button type="button" class="parent-help-btn" id="btn-chapter-help" aria-expanded="false" aria-controls="chapter-help" aria-label="給家長：寫字說明">？</button>
+        </div>
+        <div id="chapter-help" class="parent-help" hidden>
+          <p id="adventure-lead">第一至第三章可以寫。每個字要寫滿六次，進度會記住，下次可以再寫。第四至第十章即將開放。</p>
+        </div>
         <div class="chapter-grid" id="chapter-grid" role="list" aria-label="寫字章節"></div>
-        <button type="button" class="primary-btn" id="btn-start-adventure">由第一章開始</button>
       </div>
     </section>
 
@@ -130,12 +139,12 @@
     </div>
   </div>
 
-  <script src="js/no-zoom.js?v=hanzi-write-no-gate"></script>
-  <script src="js/nav-back.js?v=hanzi-write-no-gate"></script>
-  <script src="js/storage.js?v=hanzi-write-no-gate"></script>
-  <script src="js/speech.js?v=hanzi-write-no-gate"></script>
+  <script src="js/no-zoom.js?v=hanzi-write-picture-tiles"></script>
+  <script src="js/nav-back.js?v=hanzi-write-picture-tiles"></script>
+  <script src="js/storage.js?v=hanzi-write-picture-tiles"></script>
+  <script src="js/speech.js?v=hanzi-write-picture-tiles"></script>
   <script src="vendor/hanzi-writer/hanzi-writer.min.js?v=3.7.3"></script>
-  <script src="data/hanzi-write-chars.js?v=hanzi-write-no-gate"></script>
-  <script src="js/hanzi-write-demo.js?v=hanzi-write-no-gate"></script>
+  <script src="data/hanzi-write-chars.js?v=hanzi-write-picture-tiles"></script>
+  <script src="js/hanzi-write-demo.js?v=hanzi-write-picture-tiles"></script>
 </body>
 </html>

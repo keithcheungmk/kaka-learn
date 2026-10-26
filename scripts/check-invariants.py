@@ -1217,6 +1217,12 @@ def check_four_panel_story() -> None:
         fail("four-panel", "中文主題頁要有「四格講故事」獨立入口")
     if "四格講故事" not in html:
         fail("four-panel", "中文主題頁入口要寫「四格講故事」")
+    if "four-panel-entry-thumbs" in html:
+        fail("four-panel", "中文主題四格卡要用一幅現有故事圖，唔好四格縮圖牆")
+    if "rainbow-umbrella-p02.webp" not in html:
+        fail("four-panel", "中文主題四格卡要重用彩虹傘現有插圖")
+    if "family-height-lineup.webp" not in html:
+        fail("four-panel", "中文主題故事卡要重用家庭角色合照")
     for path in (
         "four-panel-story.html",
         "css/four-panel-story.css",
@@ -1333,6 +1339,10 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "中文主題頁入口要寫「卡卡學寫字」")
     if "卡卡認字 Demo" in html:
         fail("hanzi-write", "中文主題頁唔好再用「卡卡認字 Demo」")
+    if "xiezi-write.webp" not in html:
+        fail("hanzi-write", "中文主題寫字卡要重用卡卡寫字插圖")
+    if "hanzi-write-entry-rocket" in html:
+        fail("hanzi-write", "寫字入口唔好再用 CSS 火箭牆")
     for path in (
         "hanzi-write-demo.html",
         "css/hanzi-write-demo.css",
@@ -1362,6 +1372,18 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "要有第 1–3 章目錄")
     if "即將開放" not in data:
         fail("hanzi-write", "第 4–10 章要標即將開放")
+    if "btn-speak-chapters" not in page or "btn-chapter-help" not in page:
+        fail("hanzi-write", "選章頁要有喇叭同家長說明")
+    if "chapter-lock" not in js or "chapterStarCount" not in js:
+        fail("hanzi-write", "選章磚要用星星進度同鎖")
+    if "稍後才可以寫" in js:
+        fail("hanzi-write", "鎖住章節唔好喺卡面重複即將開放文案")
+    if "btn-start-adventure" in page:
+        fail("hanzi-write", "選章磚本身就係入口，唔好再加大掣由第一章開始")
+    for n in range(1, 11):
+        art = Path(f"assets/hanzi-write/chapters/ch{n}.webp")
+        if not art.is_file():
+            fail("hanzi-write", f"缺少選章圖 {art}")
     if "九宮格" not in page or "再寫一次" not in page or "過關啦！" not in page:
         fail("hanzi-write", "流程要有九宮格、再寫一次、過關啦")
     if "米字格" in page or 'x1="2" y1="2" x2="98" y2="98"' in page:

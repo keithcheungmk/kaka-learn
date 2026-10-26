@@ -141,11 +141,18 @@
       if (!el) return;
       el.classList.toggle('hidden', key !== name);
     });
+    document.body.classList.toggle('is-chapter-picker', name === 'adventure');
     const back = $('back-link');
+    const speakBtn = $('btn-speak-chapters');
+    const starPill = $('star-pill');
+    const brand = $('brand-block');
     if (name === 'write') back.textContent = '← 字表';
     else if (name === 'chars') back.textContent = '← 選章';
-    else if (name === 'adventure') back.textContent = '← 選角色';
+    else if (name === 'adventure') back.textContent = '返去';
     else back.textContent = '← 中文';
+    if (speakBtn) speakBtn.hidden = name !== 'adventure';
+    if (starPill) starPill.hidden = name === 'adventure';
+    if (brand) brand.hidden = name === 'adventure';
     refreshStars();
   }
 
@@ -217,6 +224,17 @@
     return storage.getActiveProfile?.()?.name || '小朋友';
   }
 
+  function chapterStarCount(done, total) {
+    if (!total || done <= 0) return 0;
+    return Math.max(1, Math.min(5, Math.round((done / total) * 5)));
+  }
+
+  function starRowHtml(filled) {
+    return Array.from({ length: 5 }, (_, i) => (
+      `<span class="chapter-star${i < filled ? ' is-on' : ''}" aria-hidden="true">★</span>`
+    )).join('');
+  }
+
   function renderChapters() {
     const el = $('chapter-grid');
     if (!el) return;
@@ -225,28 +243,51 @@
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'chapter-card';
+      btn.dataset.chapterId = chapter.id;
       btn.setAttribute('role', 'listitem');
       const list = chapterLevels(chapter.id);
       const done = list.filter((level) => successCount(level.id) >= NEED_SUCCESSES).length;
+      const filled = chapter.open ? chapterStarCount(done, list.length) : 0;
+      const art = chapter.art || `assets/hanzi-write/chapters/${chapter.id}.webp`;
+      const lock = chapter.open ? '' : '<span class="chapter-lock" aria-hidden="true"></span>';
+      btn.innerHTML = `<span class="chapter-label">第${chapter.no}章</span><span class="chapter-art"><img src="${art}" alt="" width="720" height="720" decoding="async">${lock}</span><span class="chapter-stars">${starRowHtml(filled)}</span>`;
       if (!chapter.open) {
         btn.classList.add('is-locked');
         btn.disabled = true;
-        btn.innerHTML = `<span class="chapter-meta">第${chapter.no}章</span><strong>即將開放</strong><span class="chapter-blurb">稍後才可以寫。</span>`;
+        btn.setAttribute('aria-label', `第${chapter.no}章，尚未開放`);
       } else {
         if (done === list.length && list.length) btn.classList.add('is-done');
-        btn.innerHTML = `<span class="chapter-meta">第${chapter.no}章</span><strong>${chapter.title}</strong><span class="chapter-blurb">${chapter.blurb || ''}</span><span class="chapter-meta">已過 ${done}／${list.length} 字</span>`;
-        btn.setAttribute('aria-label', `第${chapter.no}章 ${chapter.title}，已過 ${done}／${list.length} 字`);
-        btn.addEventListener('click', () => openChapter(chapter.id));
+        btn.setAttribute('aria-label', `第${chapter.no}章 ${chapter.title}`);
+        btn.addEventListener('click', () => {
+          speak(`第${chapter.no}章，${chapter.title}`);
+          openChapter(chapter.id);
+        });
       }
       el.appendChild(btn);
     });
   }
 
+  function speakPickChapter() {
+    speak('揀一章嚟寫');
+  }
+
+  function toggleChapterHelp() {
+    const panel = $('chapter-help');
+    const btn = $('btn-chapter-help');
+    if (!panel || !btn) return;
+    const open = panel.hasAttribute('hidden');
+    panel.toggleAttribute('hidden', !open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
   function goAdventure() {
     $('who-line').textContent = `${whoName()}，準備好了嗎？`;
+    const help = $('chapter-help');
+    const helpBtn = $('btn-chapter-help');
+    if (help) help.hidden = true;
+    if (helpBtn) helpBtn.setAttribute('aria-expanded', 'false');
     renderChapters();
     showView('adventure');
-    speak(`${whoName()}，選一章`);
   }
 
   function pickProfile(id) {
@@ -716,7 +757,11 @@
 
   $('btn-profile-kaka').addEventListener('click', () => pickProfile('kaka'));
   $('btn-profile-heihei').addEventListener('click', () => pickProfile('heihei'));
-  $('btn-start-adventure').addEventListener('click', () => openChapter('ch1'));
+  $('btn-speak-chapters')?.addEventListener('click', () => {
+    speech.unlockSpeech?.();
+    speakPickChapter();
+  });
+  $('btn-chapter-help')?.addEventListener('click', toggleChapterHelp);
   $('write-meaning')?.addEventListener('click', () => {
     const level = currentLevel();
     speech.unlockSpeech?.();
@@ -815,6 +860,9 @@
     vocabFor,
     renderVocab,
     renderMeaning,
+    renderChapters,
+    chapterStarCount,
+    speakPickChapter,
     getView: () => view,
     getChapterId: () => chapterId,
   };
