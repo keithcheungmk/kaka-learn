@@ -110,6 +110,14 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-26 · Cursor Chief Lead（中文揀主題兩層同頁，修正 #181/#182）
+
+- Keith 更正：#181/#182 唔應該把每個認字分類做成大插畫＋開始學長列表。
+- `#screen-topics` 上半恰好 4 個大入口：原創故事、四格講故事、卡卡學寫字、**認字遊戲**（重用看書插圖，連去現有認字／詞語流程）。
+- 下半同頁恢復 emoji＋短名分類牆；入去之後詞語牆／故事／寫字／四格維持現有。
+- 認字遊戲**唔好**標成常識樂園；常識仍只喺主頁頂層。
+- 試玩：https://keithcheungmk.github.io/kaka-learn/index.html#screen-topics（合入 main 後；舊 tab 要閂再開）。
+
 ### 2026-10-26 · Cursor Chief Lead（#181 QA：揀主題全大卡＋寫字章卡／入口／休息 #182）
 
 - 卡卡體驗官跟進 #181：揀主題下層清走 emoji 小卡牆，課本溫習／今日好學／日常生活／動物改大圖模組；第二層 `#screen-topic-group` 都係大卡。

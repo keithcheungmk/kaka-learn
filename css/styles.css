@@ -1022,16 +1022,15 @@ div.star-panel {
 
 .hub-entry-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
   width: min(980px, 100%);
   margin: 4px auto 18px;
   min-width: 0;
 }
-@media (min-width: 700px) {
-  .hub-entry-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+@media (max-width: 700px) {
+  .hub-entry-grid { gap: 10px; }
+  .hub-entry-grid .hub-module { padding: 8px; gap: 8px; }
 }
 
 .hub-module,
@@ -1090,7 +1089,7 @@ div.star-panel {
 .family-story-poster > img { object-position: center 62%; }
 .hanzi-write-entry-poster > img { object-position: center 42%; }
 .four-panel-entry-poster > img { object-position: 18% 78%; }
-.word-games-entry-poster > img { object-position: center 28%; }
+.word-games-entry-poster > img { object-position: center 62%; }
 
 .hub-module-banner,
 .family-story-banner,
@@ -1143,6 +1142,7 @@ div.star-panel {
 .hub-module-cta {
   width: 100%;
   min-height: 52px;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
