@@ -25,7 +25,9 @@
   const WRITE_HINT_FAINT = '跟著淡虛線和橙色起筆點寫。';
   const WRITE_HINT_BLANK = '這次自己寫。忘記了可以按「看筆順」。';
   const RETRY_HINT = '再試一次。跟著橙色線寫。';
-  const PASS_CHEER = '過關啦';
+  const PASS_TITLE = '寫得好！再學下一個字。';
+  const PASS_CHEER = '寫得好！再學下一個字。';
+  const MID_CHEER_AT = 3;
 
   const $ = (id) => document.getElementById(id);
   const views = {
@@ -463,6 +465,23 @@
     if (!el) return;
     el.textContent = text;
     el.classList.toggle('is-retry', tone === 'retry');
+    el.classList.toggle('is-cheer', tone === 'cheer');
+  }
+
+  function midCheerFor(level) {
+    const line = String(level?.midCheer || '').trim();
+    if (line) return line;
+    const gloss = String(level?.glossYue || '').trim();
+    const char = String(level?.char || '').trim();
+    if (gloss) return `${gloss}。你很棒，繼續寫漂亮一點！`;
+    return char ? `這個是『${char}』字。你很棒，繼續寫漂亮一點！` : '你很棒，繼續寫漂亮一點！';
+  }
+
+  function cheerMidway(level) {
+    const line = midCheerFor(level);
+    setWriteStatus(line, 'cheer');
+    speak(line);
+    return line;
   }
 
   function renderWriteStamps(count, opts = {}) {
@@ -682,6 +701,7 @@
       return;
     }
     continueWrite();
+    if (next === MID_CHEER_AT) cheerMidway(level);
   }
 
   function continueWrite() {
@@ -694,23 +714,42 @@
     startQuiz();
   }
 
+  function stylePassCta(hasNext) {
+    const nextBtn = $('btn-next-level');
+    const backBtn = $('btn-back-chars');
+    if (nextBtn) {
+      nextBtn.hidden = !hasNext;
+      nextBtn.classList.toggle('primary-btn', hasNext);
+      nextBtn.classList.toggle('ghost-btn', !hasNext);
+      nextBtn.classList.toggle('pass-secondary', !hasNext);
+    }
+    if (backBtn) {
+      backBtn.classList.toggle('primary-btn', !hasNext);
+      backBtn.classList.toggle('ghost-btn', hasNext);
+      backBtn.classList.toggle('pass-secondary', hasNext);
+    }
+  }
+
   function onLevelPassed(opts) {
     const level = currentLevel();
     const { first, coin, chapterFirst, chapterCoin } = awardClear(level, opts);
     const nextIdx = nextIncompleteIndex();
     const hasNext = nextIdx !== -1 && nextIdx !== levelIndex;
     if ($('btn-next-char')) $('btn-next-char').hidden = !hasNext;
-    if ($('btn-next-level')) $('btn-next-level').hidden = !hasNext;
     if ($('btn-pass-rewrite')) $('btn-pass-rewrite').hidden = hasNext;
-    if ($('pass-stars')) $('pass-stars').textContent = chapterFirst ? '★★★★★' : '★★★';
+    stylePassCta(hasNext);
+    if ($('pass-title')) $('pass-title').textContent = PASS_TITLE;
+    if ($('pass-stars')) $('pass-stars').textContent = '★★★';
     if (chapterFirst) {
-      $('pass-copy').textContent = first
-        ? '這個字寫滿六次，這一章也完成了。大獎勵已記下。'
-        : '這一章已經完成。大獎勵已記下。';
+      $('pass-copy').textContent = '這個字已經寫滿六次。這一章的字都寫好了。';
     } else if (first) {
-      $('pass-copy').textContent = '這個字已經寫滿六次。星星已亮起。完成一輪，獎勵一枚星星幣。';
+      $('pass-copy').textContent = hasNext
+        ? '這個字已經寫滿六次。繼續學下一個字吧。'
+        : '這個字已經寫滿六次。可以再寫，也可以返回字表。';
     } else {
-      $('pass-copy').textContent = '這個字已經寫滿六次。可以再寫；今天的星星幣已經領取。';
+      $('pass-copy').textContent = hasNext
+        ? '這個字已經寫滿六次。可以再寫，也可以學下一個字。'
+        : '這個字已經寫滿六次。可以再寫，也可以返回字表。';
     }
     const coinBits = [];
     if (coin.gained) coinBits.push('＋1 星星幣');
@@ -848,7 +887,11 @@
     HINT_BLANK,
     WRITE_HINT,
     RETRY_HINT,
+    PASS_TITLE,
     PASS_CHEER,
+    MID_CHEER_AT,
+    midCheerFor,
+    cheerMidway,
     hintLevelFor,
     successCount,
     setSuccessCount,

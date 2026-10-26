@@ -744,7 +744,6 @@ def walk(pg, url, shots: Path | None, tag: str):
           const board = document.querySelector('.mizi-board')?.getBoundingClientRect();
           const last = stamps[stamps.length - 1]?.getBoundingClientRect();
           const first = stamps[0]?.getBoundingClientRect();
-          const view = document.querySelector('#view-write')?.getBoundingClientRect();
           const visibleLead = document.querySelector('#write-lead');
           const visibleProgress = document.querySelector('#write-progress');
           const progressBox = visibleProgress?.getBoundingClientRect();
@@ -753,9 +752,12 @@ def walk(pg, url, shots: Path | None, tag: str):
           return {
             count: stamps.length,
             lit: stamps.filter((el) => el.classList.contains('is-on')).length,
-            minSize: Math.min(...stamps.map((el) => Math.min(el.clientWidth, el.clientHeight))),
-            rightGap: view && last ? view.right - last.right : 99,
-            bottomGap: view && last ? view.bottom - last.bottom : 99,
+            minSize: Math.min(...stamps.map((el) => {
+              const box = el.getBoundingClientRect();
+              return Math.min(box.width, box.height);
+            })),
+            rightGap: last ? window.innerWidth - last.right : 99,
+            bottomGap: last ? window.innerHeight - last.bottom : 99,
             coversBoard: !!(board && first && last
               && last.right > board.left + 4
               && first.left < board.right - 4
@@ -888,6 +890,8 @@ def walk(pg, url, shots: Path | None, tag: str):
             lit: stamps.filter((el) => el.classList.contains('is-on')).length,
             flashed: document.querySelector('.mizi-board')?.classList.contains('is-success') === true,
             overlay: document.querySelector('#pass-overlay')?.classList.contains('hidden') === false,
+            status: document.querySelector('#write-status')?.textContent || '',
+            cheer: document.querySelector('#write-status')?.classList.contains('is-cheer') === true,
           };
         }"""
     )
@@ -897,6 +901,11 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError("A successful write must flash the 九宮格")
     if after_tick.get("overlay"):
         raise RuntimeError("A mid-character success must not open the pass overlay")
+    if after_tick.get("count") == 3:
+        if "這個是" not in (after_tick.get("status") or "") or not after_tick.get("cheer"):
+            raise RuntimeError(f"The 3rd success must show a written meaning cheer, got {after_tick!r}")
+        if "過關" in (after_tick.get("status") or ""):
+            raise RuntimeError("The 3rd success must not talk about 過關")
     hint_levels = pg.evaluate(
         """() => {
           const api = window.KakaHanziWrite;
@@ -912,14 +921,25 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.evaluate("() => window.KakaHanziWrite?.onLevelPassed?.()")
     pg.wait_for_selector("#pass-overlay:not(.hidden) #pass-title")
     pass_title = (pg.text_content("#pass-title") or "").strip()
-    if pass_title != "過關啦！":
-        raise RuntimeError(f"Pass title must be 「過關啦！」, got {pass_title!r}")
+    if pass_title != "寫得好！再學下一個字。":
+        raise RuntimeError(f"Pass title must encourage the next character, got {pass_title!r}")
+    if "過關" in pass_title or "關卡" in pass_title:
+        raise RuntimeError(f"Pass title must not say 過關／關卡, got {pass_title!r}")
     gloss = (pg.text_content("#pass-gloss") or "").strip()
-    if "呢個係一二三嘅一" not in gloss:
-        raise RuntimeError(f"Pass overlay must show gloss before 過關啦, got {gloss!r}")
+    if "這個是一二三的『一』" not in gloss:
+        raise RuntimeError(f"Pass overlay must show written gloss, got {gloss!r}")
     stars = (pg.text_content("#pass-stars") or "").strip()
     if "★" not in stars:
         raise RuntimeError(f"Pass screen must show stars, got {stars!r}")
+    next_btn = pg.locator("#btn-next-level")
+    if not next_btn.is_visible() or (next_btn.text_content() or "").strip() != "下一個字":
+        raise RuntimeError("Pass screen primary action must be 下一個字")
+    next_class = pg.get_attribute("#btn-next-level", "class") or ""
+    back_class = pg.get_attribute("#btn-back-chars", "class") or ""
+    if "primary-btn" not in next_class:
+        raise RuntimeError("下一個字 must be the large primary button")
+    if "pass-secondary" not in back_class:
+        raise RuntimeError("返回字表 must stay a secondary action")
     if "返回字表" not in (pg.text_content("#btn-back-chars") or ""):
         raise RuntimeError("Pass screen must offer 返回字表")
     if "返主頁" not in (pg.text_content("#btn-pass-home") or ""):

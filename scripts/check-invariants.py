@@ -1417,8 +1417,18 @@ def check_hanzi_write_demo() -> None:
     ):
         if marker not in data:
             fail("hanzi-write", f"選章圖缺少現有資產 {marker}")
-    if "九宮格" not in page or "再寫一次" not in page or "過關啦！" not in page:
-        fail("hanzi-write", "流程要有九宮格、再寫一次、過關啦")
+    if "九宮格" not in page or "再寫一次" not in page or "寫得好！再學下一個字。" not in page:
+        fail("hanzi-write", "流程要有九宮格、再寫一次、寫得好鼓勵彈窗")
+    if "過關啦" in page or "過關啦" in js:
+        fail("hanzi-write", "寫字彈窗唔好再寫過關啦")
+    if "撳一撳" in page:
+        fail("hanzi-write", "寫字畫面要用書面「點按聽粵語」")
+    if 'id="btn-next-level"' not in page or "pass-secondary" not in page:
+        fail("hanzi-write", "彈窗主掣要係下一個字，返回字表要做次要")
+    if "midCheer" not in data or "cheerMidway" not in js or "MID_CHEER_AT = 3" not in js:
+        fail("hanzi-write", "第 3 次成功要有滲入字義的書面鼓勵")
+    if "呢個係" in data:
+        fail("hanzi-write", "字義／鼓勵要用書面中文，唔好用「呢個係」")
     if "米字格" in page or 'x1="2" y1="2" x2="98" y2="98"' in page:
         fail("hanzi-write", "寫字底要用九宮格，唔好米字對角線")
     if "write-vocab" not in page or "pass-vocab" not in page:
@@ -1471,8 +1481,10 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "每次寫成功要有叮聲同成功閃一下")
     if ".mizi-board.is-success" not in css or "hw-success-flash" not in css:
         fail("hanzi-write", "成功閃要有九宮格高亮樣式")
-    if "clamp(44px" not in css or "right: max(" not in css or "bottom: max(" not in css:
+    if "clamp(52px" not in css or "right: max(" not in css or "bottom: max(" not in css:
         fail("hanzi-write", "進度星要夠大並固定右下，唔擋左手")
+    if "position: fixed" not in css or ".write-stamps" not in css:
+        fail("hanzi-write", "寫字進度要固定右下，唔好跟住頁面捲走")
     if "聽粵語，再指圖" in page or "view-warmup" in page or "openWarmup" in js:
         fail("hanzi-write", "選章後要直接選字寫字，唔好再閘聽粵語指圖熱身")
     if "write-meaning" not in page or "renderMeaning" not in js or ".write-meaning" not in css:
@@ -1484,7 +1496,7 @@ def check_hanzi_write_demo() -> None:
     if "onMistake" not in js or "再試一次" not in js:
         fail("hanzi-write", "漏筆／亂劃要有溫柔「再試一次」回饋")
     if "showPassGloss" not in js or "glossYue" not in js:
-        fail("hanzi-write", "過關要先顯示 glossYue 字幕再讀粵語")
+        fail("hanzi-write", "寫滿六次要先顯示 glossYue 字幕再讀粵語")
     if "btn-pass-home" not in js or js.split("btn-pass-home", 1)[-1][:220].count("goBackOr(PARENT_HREF)") < 1:
         fail("hanzi-write", "過關「返主頁」要 goBackOr 返中文主題")
     node = shutil.which("node")
