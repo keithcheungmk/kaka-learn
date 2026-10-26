@@ -154,6 +154,7 @@
     if (starPill) starPill.hidden = name === 'adventure';
     if (brand) brand.hidden = name === 'adventure';
     refreshStars();
+    renderWriteStamps(name === 'write' ? successCount(currentLevel().id) : 0);
   }
 
   function speak(text) {
@@ -464,6 +465,29 @@
     el.classList.toggle('is-retry', tone === 'retry');
   }
 
+  function renderWriteStamps(count, opts = {}) {
+    const host = $('write-stamps');
+    if (!host) return;
+    const n = Math.min(NEED_SUCCESSES, Math.max(0, Number(count) || 0));
+    host.hidden = view !== 'write';
+    host.setAttribute('aria-label', '寫字進度');
+    if (host.childElementCount !== NEED_SUCCESSES) {
+      host.replaceChildren();
+      for (let i = 0; i < NEED_SUCCESSES; i += 1) {
+        const item = document.createElement('li');
+        item.className = 'write-stamp';
+        item.setAttribute('aria-hidden', 'true');
+        item.textContent = '★';
+        host.appendChild(item);
+      }
+    }
+    [...host.children].forEach((el, i) => {
+      const on = i < n;
+      el.classList.toggle('is-on', on);
+      el.classList.toggle('is-pop', Boolean(opts.pop) && on && i === n - 1);
+    });
+  }
+
   function refreshWriteChrome() {
     const level = currentLevel();
     const chapter = chapterById(chapterId);
@@ -473,23 +497,40 @@
     if ($('write-heading')) $('write-heading').textContent = `寫「${level.char}」`;
     if ($('write-lead')) {
       $('write-lead').textContent = level.hint
-        ? `${level.hint}。已寫 ${done}／${NEED_SUCCESSES}。提示：${hintLabel(hint)}。`
-        : `已寫 ${done}／${NEED_SUCCESSES}。提示：${hintLabel(hint)}。`;
+        ? `${level.hint}。提示：${hintLabel(hint)}。`
+        : `提示：${hintLabel(hint)}。`;
     }
     if ($('write-progress')) {
-      $('write-progress').textContent = `已寫 ${done}／${NEED_SUCCESSES} · 提示：${hintLabel(hint)}`;
+      $('write-progress').textContent = `提示：${hintLabel(hint)}`;
     }
     renderMeaning(level);
     renderVocab('write-vocab', level);
+    renderWriteStamps(done);
   }
 
   function flashMissBoard() {
     const board = document.querySelector('.mizi-board');
     if (!board) return;
-    board.classList.remove('is-miss');
+    board.classList.remove('is-miss', 'is-success');
     void board.offsetWidth;
     board.classList.add('is-miss');
     window.setTimeout(() => board.classList.remove('is-miss'), 520);
+  }
+
+  function flashSuccessBoard() {
+    const board = document.querySelector('.mizi-board');
+    if (!board) return;
+    board.classList.remove('is-miss', 'is-success');
+    void board.offsetWidth;
+    board.classList.add('is-success');
+    window.setTimeout(() => board.classList.remove('is-success'), 520);
+  }
+
+  function celebrateWriteTick(count) {
+    speech.warmAudio?.();
+    speech.playCorrectCue?.();
+    flashSuccessBoard();
+    renderWriteStamps(count, { pop: true });
   }
 
   function onQuizMiss() {
@@ -574,6 +615,7 @@
     if ($('btn-next-char')) $('btn-next-char').hidden = true;
     refreshWriteChrome();
     showView('write');
+    speech.warmAudio?.();
     speak(`寫${currentLevel().say || currentLevel().char}`);
     requestAnimationFrame(() => mountWriter());
   }
@@ -631,9 +673,10 @@
   function onWriteSuccess() {
     const level = currentLevel();
     const prev = successCount(level.id);
-    const next = setSuccessCount(level.id, prev + 1);
+    const next = setSuccessCount(level.id, Math.min(NEED_SUCCESSES, prev + 1));
     awardSuccessTick();
     refreshWriteChrome();
+    celebrateWriteTick(next);
     if (next >= NEED_SUCCESSES) {
       onLevelPassed({ firstClear: prev < NEED_SUCCESSES });
       return;
@@ -831,7 +874,10 @@
     vocabFor,
     renderVocab,
     renderMeaning,
+    renderWriteStamps,
     renderChapters,
+    flashSuccessBoard,
+    celebrateWriteTick,
     chapterStarCount,
     speakPickChapter,
     getView: () => view,

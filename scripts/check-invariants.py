@@ -1465,6 +1465,14 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "寫字邏輯唔好再留中途休息流程")
     if "NEED_SUCCESSES = 6" not in js or "hintLevelFor" not in js:
         fail("hanzi-write", "每字要六次成功，並按次數淡化提示")
+    if 'id="write-stamps"' not in page or ".write-stamp" not in css or "renderWriteStamps" not in js:
+        fail("hanzi-write", "寫字畫面右下要有 6 粒圖形進度星")
+    if "flashSuccessBoard" not in js or "celebrateWriteTick" not in js or "playCorrectCue" not in js:
+        fail("hanzi-write", "每次寫成功要有叮聲同成功閃一下")
+    if ".mizi-board.is-success" not in css or "hw-success-flash" not in css:
+        fail("hanzi-write", "成功閃要有九宮格高亮樣式")
+    if "clamp(44px" not in css or "right: max(" not in css or "bottom: max(" not in css:
+        fail("hanzi-write", "進度星要夠大並固定右下，唔擋左手")
     if "聽粵語，再指圖" in page or "view-warmup" in page or "openWarmup" in js:
         fail("hanzi-write", "選章後要直接選字寫字，唔好再閘聽粵語指圖熱身")
     if "write-meaning" not in page or "renderMeaning" not in js or ".write-meaning" not in css:

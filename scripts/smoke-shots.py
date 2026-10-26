@@ -733,6 +733,63 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Rewrite button must be 「再寫一次」, got {rewrite!r}")
     if pg.is_visible("#btn-write-rest") or pg.is_visible("#rest-overlay"):
         raise RuntimeError("Write screen must not offer 休息一下")
+    stamp_probe = pg.evaluate(
+        """() => {
+          const api = window.KakaHanziWrite;
+          const id = api?.currentLevel?.()?.id;
+          api?.setSuccessCount?.(id, 2);
+          api?.renderWriteStamps?.(2);
+          const host = document.querySelector('#write-stamps');
+          const stamps = [...document.querySelectorAll('#write-stamps .write-stamp')];
+          const board = document.querySelector('.mizi-board')?.getBoundingClientRect();
+          const last = stamps[stamps.length - 1]?.getBoundingClientRect();
+          const first = stamps[0]?.getBoundingClientRect();
+          const view = document.querySelector('#view-write')?.getBoundingClientRect();
+          const visibleLead = document.querySelector('#write-lead');
+          const visibleProgress = document.querySelector('#write-progress');
+          const progressBox = visibleProgress?.getBoundingClientRect();
+          const progressHidden = !visibleProgress || visibleProgress.classList.contains('is-aux')
+            || (progressBox && (progressBox.width <= 2 || progressBox.height <= 2));
+          return {
+            count: stamps.length,
+            lit: stamps.filter((el) => el.classList.contains('is-on')).length,
+            minSize: Math.min(...stamps.map((el) => Math.min(el.clientWidth, el.clientHeight))),
+            rightGap: view && last ? view.right - last.right : 99,
+            bottomGap: view && last ? view.bottom - last.bottom : 99,
+            coversBoard: !!(board && first && last
+              && last.right > board.left + 4
+              && first.left < board.right - 4
+              && last.bottom > board.top + 4
+              && first.top < board.bottom - 4),
+            leadText: visibleLead?.textContent || '',
+            progressHidden,
+            hostHidden: host?.hidden === true,
+          };
+        }"""
+    )
+    if stamp_probe.get("count") != 6:
+        raise RuntimeError(f"Write screen must show 6 stamp stars, got {stamp_probe.get('count')}")
+    if stamp_probe.get("lit") != 2:
+        raise RuntimeError(f"Stamp stars must mirror success count, lit={stamp_probe.get('lit')}")
+    if stamp_probe.get("minSize", 0) < 44:
+        raise RuntimeError(f"Stamp stars must be at least 44px, got {stamp_probe.get('minSize')}")
+    if stamp_probe.get("rightGap", 99) > 28 or stamp_probe.get("bottomGap", 99) > 28:
+        raise RuntimeError(f"Stamp stars must sit at bottom-right, gaps={stamp_probe}")
+    if stamp_probe.get("coversBoard"):
+        raise RuntimeError("Stamp stars must not cover the 九宮格")
+    if "／" in (stamp_probe.get("leadText") or "") or "2／6" in (stamp_probe.get("leadText") or ""):
+        raise RuntimeError("Write lead must not show 2／6 number copy")
+    if not stamp_probe.get("progressHidden"):
+        raise RuntimeError("Top 已寫 n／6 text must stay auxiliary, not the main progress")
+    before_miss = pg.evaluate(
+        """() => {
+          const api = window.KakaHanziWrite;
+          return {
+            count: api?.successCount?.(api.currentLevel().id),
+            lit: document.querySelectorAll('#write-stamps .write-stamp.is-on').length,
+          };
+        }"""
+    )
     write_metrics = pg.evaluate(
         """() => {
           const d = document.documentElement;
@@ -808,6 +865,38 @@ def walk(pg, url, shots: Path | None, tag: str):
     miss = (pg.text_content("#write-status") or "").strip()
     if "再試一次" not in miss:
         raise RuntimeError(f"A miss must update status to 再試一次, got {miss!r}")
+    after_miss = pg.evaluate(
+        """() => {
+          const api = window.KakaHanziWrite;
+          return {
+            count: api?.successCount?.(api.currentLevel().id),
+            lit: document.querySelectorAll('#write-stamps .write-stamp.is-on').length,
+          };
+        }"""
+    )
+    if after_miss.get("count") != before_miss.get("count") or after_miss.get("lit") != before_miss.get("lit"):
+        raise RuntimeError(f"A miss must not dim earned stars, before={before_miss!r} after={after_miss!r}")
+    after_tick = pg.evaluate(
+        """() => {
+          const api = window.KakaHanziWrite;
+          const before = api?.successCount?.(api.currentLevel().id);
+          api?.onWriteSuccess?.();
+          const stamps = [...document.querySelectorAll('#write-stamps .write-stamp')];
+          return {
+            before,
+            count: api?.successCount?.(api.currentLevel().id),
+            lit: stamps.filter((el) => el.classList.contains('is-on')).length,
+            flashed: document.querySelector('.mizi-board')?.classList.contains('is-success') === true,
+            overlay: document.querySelector('#pass-overlay')?.classList.contains('hidden') === false,
+          };
+        }"""
+    )
+    if after_tick.get("count") != (after_tick.get("before") or 0) + 1 or after_tick.get("lit") != after_tick.get("count"):
+        raise RuntimeError(f"A successful write must light one more star, got {after_tick!r}")
+    if not after_tick.get("flashed"):
+        raise RuntimeError("A successful write must flash the 九宮格")
+    if after_tick.get("overlay"):
+        raise RuntimeError("A mid-character success must not open the pass overlay")
     hint_levels = pg.evaluate(
         """() => {
           const api = window.KakaHanziWrite;

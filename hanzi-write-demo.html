@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
   <meta name="theme-color" content="#0b1638">
   <title>卡卡學寫字｜寫字・筆順</title>
-  <link rel="stylesheet" href="css/hanzi-write-demo.css?v=hanzi-write-picture-tiles">
+  <link rel="stylesheet" href="css/hanzi-write-demo.css?v=hanzi-write-stamp-stars">
 </head>
 <body>
   <main class="hw-shell">
@@ -74,7 +74,7 @@
           <p class="level-kicker" id="level-kicker">第一章 · 入門筆畫</p>
           <h2 id="write-heading">寫「一」</h2>
           <p class="write-lead" id="write-lead">先看筆順，再自己寫。跟著橙色線，一筆一筆寫。</p>
-          <p class="write-progress" id="write-progress" aria-live="polite">已寫 0／6 · 提示：完整虛線</p>
+          <p class="write-progress is-aux" id="write-progress">提示：完整虛線</p>
           <div class="mizi-board jiugong-board" aria-label="九宮格">
             <svg class="jiugong-grid" viewBox="0 0 100 100" aria-hidden="true">
               <rect x="1.5" y="1.5" width="97" height="97" rx="2"></rect>
@@ -102,6 +102,7 @@
           </div>
         </aside>
       </div>
+      <ol id="write-stamps" class="write-stamps" aria-label="寫字進度"></ol>
     </section>
   </main>
 
@@ -126,12 +127,12 @@
     </div>
   </div>
 
-  <script src="js/no-zoom.js?v=hanzi-write-picture-tiles"></script>
-  <script src="js/nav-back.js?v=hanzi-write-picture-tiles"></script>
-  <script src="js/storage.js?v=hanzi-write-picture-tiles"></script>
-  <script src="js/speech.js?v=hanzi-write-picture-tiles"></script>
+  <script src="js/no-zoom.js?v=hanzi-write-stamp-stars"></script>
+  <script src="js/nav-back.js?v=hanzi-write-stamp-stars"></script>
+  <script src="js/storage.js?v=hanzi-write-stamp-stars"></script>
+  <script src="js/speech.js?v=hanzi-write-stamp-stars"></script>
   <script src="vendor/hanzi-writer/hanzi-writer.min.js?v=3.7.3"></script>
-  <script src="data/hanzi-write-chars.js?v=hanzi-write-picture-tiles"></script>
-  <script src="js/hanzi-write-demo.js?v=hanzi-write-picture-tiles"></script>
+  <script src="data/hanzi-write-chars.js?v=hanzi-write-stamp-stars"></script>
+  <script src="js/hanzi-write-demo.js?v=hanzi-write-stamp-stars"></script>
 </body>
 </html>
