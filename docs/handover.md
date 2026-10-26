@@ -36,7 +36,6 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 中文揀主題兩層同頁（修正 #181/#182） | Cursor Chief Lead | `index.html`, `js/app.js`, `css/styles.css`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-26 | Keith 批准：上半 4 大入口（第四個＝認字遊戲，唔係常識），下半同頁 emoji 牆；唔改內頁玩法／插圖 |
 | 寫字每次成功叮＋閃＋右下 6 粒星＋寫完鼓勵彈窗 | Cursor Chief Lead | `hanzi-write-demo.html`, `css/hanzi-write-demo.css`, `js/hanzi-write-demo.js`, `data/hanzi-write-chars.js`, `scripts/test-hanzi-write-demo.mjs`, `scripts/smoke-shots.py`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-26 | Keith 已批：6 星進度＋叮閃；寫完唔講過關；主掣下一個字；第 3 次書面字義鼓勵；CI 綠自合入 |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
 | 故事 focus 優化（浠榆初生＋迪士尼／國慶合照拆開） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/hongkong-disney-p06.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准：初生篇保留洗澡、淡化珠海／月子中心／睡覺；迪士尼對齊地圖／城堡／排隊／紀念品／合照照片；國慶唔再 focus 合照／照片。開 PR，唔自 merge。 |
@@ -116,7 +115,7 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 - `#screen-topics` 上半恰好 4 個大入口：原創故事、四格講故事、卡卡學寫字、**認字遊戲**（重用看書插圖，連去現有認字／詞語流程）。
 - 下半同頁恢復 emoji＋短名分類牆；入去之後詞語牆／故事／寫字／四格維持現有。
 - 認字遊戲**唔好**標成常識樂園；常識仍只喺主頁頂層。
-- 試玩：https://keithcheungmk.github.io/kaka-learn/index.html#screen-topics（合入 main 後；舊 tab 要閂再開）。
+- #184 CI 綠後 fast-forward 入 `main`（`6d923fd`）。Pages 已上線。試玩：https://keithcheungmk.github.io/kaka-learn/index.html#screen-topics（舊 tab 要閂再開）。
 
 ### 2026-10-26 · Cursor Chief Lead（#181 QA：揀主題全大卡＋寫字章卡／入口／休息 #182）
 
