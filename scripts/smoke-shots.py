@@ -34,7 +34,6 @@ SCROLLABLE = {
     "screen-home",
     "screen-english-hub",
     "screen-topics",
-    "screen-topic-group",
     "screen-books",
     "screen-phonics-topics",
     "screen-phonics-sounds",
@@ -191,24 +190,22 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.wait_for_timeout(600)
     probe("揀主題")
 
+    hub_text = pg.text_content("#topics-hub-entries") or ""
+    for name in ("原創故事", "四格講故事", "卡卡學寫字", "認字遊戲"):
+        if name not in hub_text:
+            raise RuntimeError(f"Chinese hub must show the big entry {name!r}")
+    if "常識樂園" in hub_text:
+        raise RuntimeError("Chinese hub must not label the fourth entry as 常識樂園")
+    if not pg.is_visible("#topic-grid"):
+        raise RuntimeError("Chinese hub must show the emoji topic wall on the same page")
     clicked = False
-    for el in pg.query_selector_all("#screen-topics button"):
-        if "今日好學" in (el.inner_text() or ""):
-            el.click()
-            clicked = True
-            break
-    if not clicked:
-        raise RuntimeError("Chinese hub must show 今日好學 as a big card")
-    pg.wait_for_selector("#screen-topic-group.active")
-    pg.wait_for_timeout(400)
-    clicked = False
-    for el in pg.query_selector_all("#screen-topic-group button"):
+    for el in pg.query_selector_all("#topic-grid .topic-card"):
         if "動物園" in (el.inner_text() or ""):
             el.click()
             clicked = True
             break
     if not clicked:
-        raise RuntimeError("今日好學 must open 動物園 as a big card")
+        raise RuntimeError("Emoji wall must open 動物園 with the existing learn flow")
     pg.wait_for_timeout(600)
     probe("學習頁")
 

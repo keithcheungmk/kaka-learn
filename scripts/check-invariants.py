@@ -519,22 +519,27 @@ def check_three_entries() -> None:
     topics = html.split('id="screen-topics"', 1)[1] if 'id="screen-topics"' in html else ""
     if "卡卡常識樂園" in topics or "btn-start-common-sense" in topics:
         fail("entries", "常識樂園唔可以掛喺中文主題頁下面")
-    topics_only = topics.split('id="screen-topic-group"', 1)[0] if 'id="screen-topic-group"' in topics else topics
-    if 'id="topic-grid"' in topics_only or "topic-cover" in topics_only:
-        fail("entries", "中文揀主題唔可以再留 emoji 小卡牆")
-    for label in ("課本溫習", "今日好學", "日常生活"):
+    topics_only = topics.split('id="screen-books"', 1)[0] if 'id="screen-books"' in topics else topics
+    if "常識樂園" in topics_only or "common-sense.html" in topics_only:
+        fail("entries", "認字遊戲／中文揀主題唔可以標成或連去常識樂園")
+    for label in ("原創故事", "四格講故事", "卡卡學寫字", "認字遊戲"):
         if label not in topics_only:
-            fail("entries", f"中文揀主題要有大圖模組「{label}」")
-    for asset in (
-        "kan-shu.webp",
-        "kaixin.webp",
-        "home-tw.webp",
-        "zhongshan-zoo-day-p01.webp",
-    ):
-        if asset not in topics_only:
-            fail("entries", f"中文揀主題大卡要重用現有插圖 {asset}")
-    if 'id="screen-topic-group"' not in html or 'id="topic-group-stack"' not in html:
-        fail("entries", "認字模組要有第二層大圖揀題頁")
+            fail("entries", f"中文揀主題上半要有大入口「{label}」")
+    if topics_only.count('<section class="hub-module ') != 4:
+        fail("entries", "中文揀主題上半恰好 4 個大入口")
+    if 'id="btn-topics-word-games"' not in topics_only or 'id="topics-word-wall"' not in topics_only:
+        fail("entries", "認字遊戲要捲去同頁 emoji 分類牆")
+    if 'id="topic-grid"' not in topics_only:
+        fail("entries", "中文揀主題下半要有 emoji 分類牆 #topic-grid")
+    if "topic-group-entry" in topics_only or 'id="screen-topic-group"' in html or "hub-topic-stack" in html:
+        fail("entries", "唔好再把每個認字分類做成大插畫＋開始學長列表")
+    if "kan-shu.webp" not in topics_only:
+        fail("entries", "認字遊戲大卡要重用現有看書插圖")
+    app = read("js/app.js")
+    if "function renderTopics" not in app or "function scrollToWordGames" not in app:
+        fail("entries", "認字分類牆要由 renderTopics 填，認字遊戲入口要捲去牆")
+    if "function openTopicGroup" in app or "renderTopicHubCard" in app:
+        fail("entries", "唔好再做認字分類大插畫第二層")
     if 'id="btn-start-story-demo"' in html or 'id="btn-start-phonics"' in html:
         fail("entries", "主頁應只保留一個英文入口，故事與 Phonics 請由英文分流頁進入")
     phonics = read("js/phonics-app.js")
@@ -1357,7 +1362,7 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "中文主題頁唔好再用「卡卡認字 Demo」")
     if "paper-bridge-p01.webp" not in html:
         fail("hanzi-write", "中文主題寫字卡要重用卡卡同禧禧一齊坐桌現有插圖")
-    topics_html = html.split('id="screen-topics"', 1)[1].split('id="screen-topic-group"', 1)[0] if 'id="screen-topics"' in html else ""
+    topics_html = html.split('id="screen-topics"', 1)[1].split('id="screen-books"', 1)[0] if 'id="screen-topics"' in html else ""
     if "xiezi-write.webp" in topics_html:
         fail("hanzi-write", "寫字入口唔好再用單人特寫裁切")
     if "hanzi-write-entry-rocket" in html:
