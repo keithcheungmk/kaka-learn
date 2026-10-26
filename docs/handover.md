@@ -36,7 +36,6 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 卡卡日記《山姆超市同室內動物園》 | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/sam-supermarket-zoo-p0*.webp`, `scripts/check-family-stories.py`, `scripts/test-family-storybook.mjs`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-26 | Keith 已批：2026-10-24 日記；妹妹寫浠榆；插圖重繪唔用相片 |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
 | 故事 focus 優化（浠榆初生＋迪士尼／國慶合照拆開） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/hongkong-disney-p06.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准：初生篇保留洗澡、淡化珠海／月子中心／睡覺；迪士尼對齊地圖／城堡／排隊／紀念品／合照照片；國慶唔再 focus 合照／照片。開 PR，唔自 merge。 |
 | 主頁四科入口加入卡卡插畫 | ChatGPT／Codex | `index.html`, `css/styles.css`, `assets/home-subjects/`, `assets/image-formats.lock.json`, `docs/handover.md` | 2026-10-06 | Keith 已看過四科卡片 demo 並指示繼續；只改入口視覺，保留文字、連結與按鈕行為。 |
@@ -108,6 +107,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-10-26 · Cursor Chief Lead（《山姆超市同室內動物園》#179）
+
+- 中文家庭日記新增八頁〈山姆超市同室內動物園〉（`sam-supermarket-zoo`，卡卡日記 2026-10-24）。
+- 探月子中心浠榆妹妹、山姆超市選購、認真儲幣幣、室內動物園餵小鸚鵡／小馬／小雞；結尾學識：超市慢慢揀、溫柔餵動物、認真儲幣幣。
+- 插圖按角色設定重畫，參考相不入站。目錄 24 篇／166 頁，可玩 20 本。#179 CI 綠後 fast-forward 入 `main`。
+- 試玩：`family-storybook.html` →《山姆超市同室內動物園》（舊 tab 要閂再開）。
 
 ### 2026-10-25 · Cursor Chief Lead（《田野部落開心日》妹妹名改返浠榆）
 
