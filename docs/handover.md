@@ -36,7 +36,6 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 四格排圖熱身圖卡 cover 裁頭／遮 | Cursor Chief Lead | `css/four-panel-story.css`, `css/interview-comics.css`, `four-panel-story.html`, `interview-comics.html`, `scripts/test-four-panel-story.mjs`, `scripts/test-interview-comics.mjs`, `scripts/smoke-shots.py`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-26 | Keith 截圖：回家路上排圖熱身裁走頭同遮。只改 contain＋letterbox；唔做「只收下一格」。CI 綠自合入 |
 | 寫字每次成功叮＋閃＋右下 6 粒星＋寫完鼓勵彈窗 | Cursor Chief Lead | `hanzi-write-demo.html`, `css/hanzi-write-demo.css`, `js/hanzi-write-demo.js`, `data/hanzi-write-chars.js`, `scripts/test-hanzi-write-demo.mjs`, `scripts/smoke-shots.py`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-26 | Keith 已批：6 星進度＋叮閃；寫完唔講過關；主掣下一個字；第 3 次書面字義鼓勵；CI 綠自合入 |
 | WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
 | 故事 focus 優化（浠榆初生＋迪士尼／國慶合照拆開） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/hongkong-disney-p06.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准：初生篇保留洗澡、淡化珠海／月子中心／睡覺；迪士尼對齊地圖／城堡／排隊／紀念品／合照照片；國慶唔再 focus 合照／照片。開 PR，唔自 merge。 |
@@ -109,6 +108,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-10-26 · Cursor Chief Lead（四格圖卡 contain，唔再裁頭／遮 #185）
+
+- Keith 截圖：回家路上排圖熱身用 `object-fit:cover` 裁走媽媽頭頂同橙色雨傘（插圖 640×640，橫向格 1.42／1.55）。
+- 關卡牆、排圖熱身、講／範讀四格改 `contain`；letterbox 用原有淺底。面試四格 `.cs-media` 同步。
+- 唔做「只收下一格」；唔重畫插圖。
+- #185 CI 綠後 fast-forward 入 `main`（`be83503`）。試玩：https://keithcheungmk.github.io/kaka-learn/four-panel-story.html（舊 tab 要閂再開）。
 
 ### 2026-10-26 · Cursor Chief Lead（中文揀主題兩層同頁，修正 #181/#182）
 
