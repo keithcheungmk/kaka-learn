@@ -100,6 +100,7 @@ assert.match(css, /chapter-grid/);
 assert.match(css, /chapter-art/);
 assert.match(css, /chapter-lock/);
 assert.match(css, /chapter-star/);
+assert.match(css, /\[hidden\]\s*\{\s*display:\s*none\s*!important/);
 assert.match(css, /write-meaning/);
 assert.match(css, /write-meaning-emoji/);
 assert.doesNotMatch(css, /warmup-grid/);

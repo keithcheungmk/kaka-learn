@@ -1049,10 +1049,11 @@ div.star-panel {
   display: block;
   overflow: hidden;
   min-width: 0;
-  aspect-ratio: 1.72;
+  aspect-ratio: 1.38;
   border-radius: 18px;
   background: #fffdf6;
 }
+.family-story-poster { aspect-ratio: 1.55; }
 .hub-module-poster > img,
 .family-story-poster > img,
 .four-panel-entry-poster > img,
@@ -1062,8 +1063,9 @@ div.star-panel {
   height: 100%;
   object-fit: cover;
 }
-.hanzi-write-entry-poster > img { object-position: center 18%; }
-.four-panel-entry-poster > img { object-position: center 30%; }
+.family-story-poster > img { object-position: center 62%; }
+.hanzi-write-entry-poster > img { object-position: center 48%; }
+.four-panel-entry-poster > img { object-position: 18% 78%; }
 
 .hub-module-banner,
 .family-story-banner,
