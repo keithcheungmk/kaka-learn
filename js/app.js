@@ -75,6 +75,8 @@ let buildSelectedKey = null;
 let buildDrag = null;
 /** @type {string|null} */
 let activeTopicId = null;
+/** @type {{ id: string, title: string, ids: string[] }|null} 中文主題大卡揀咗邊組 */
+let activeTopicGroup = null;
 /** @type {{ id: string, title: string, wordIds: string[] }|null} 紅橙輯入面揀咗邊本書 */
 let activeBook = null;
 /** @type {ReturnType<typeof wordsForTopic>} */
@@ -152,6 +154,7 @@ const RESTORE_SCREENS = new Set([
 const RESTORE_PARENT = {
   'screen-story-demo': 'screen-story-series',
   'screen-story-play': 'screen-story-series',
+  'screen-topic-group': 'screen-topics',
   'screen-books': 'screen-topics',
   'screen-learn': 'screen-topics',
   'screen-play': 'screen-topics',
@@ -456,11 +459,24 @@ function bindHome() {
   $('#home-profile-chip')?.addEventListener('click', () => openProgress());
 }
 
+function goBackFromBooks() {
+  if (activeTopicGroup) {
+    openTopicGroup(activeTopicGroup.id);
+    return;
+  }
+  openTopics();
+}
+
 function bindTopics() {
   const back = $('#btn-back-topics');
   if (back) back.onclick = () => showScreen('home');
   const backBooks = $('#btn-back-books');
-  if (backBooks) backBooks.onclick = () => openTopics();
+  if (backBooks) backBooks.onclick = () => goBackFromBooks();
+  const backGroup = $('#btn-back-topic-group');
+  if (backGroup) backGroup.onclick = () => openTopics();
+  $$('#screen-topics [data-topic-group]').forEach((el) => {
+    el.addEventListener('click', () => openTopicGroup(el.getAttribute('data-topic-group')));
+  });
 }
 
 function bindLearn() {
@@ -469,6 +485,10 @@ function bindLearn() {
     if (activeBook) {
       const topic = getTopicById(activeTopicId);
       if (topic) openBookPicker(topic);
+      return;
+    }
+    if (activeTopicGroup) {
+      openTopicGroup(activeTopicGroup.id);
       return;
     }
     openTopics();
@@ -967,6 +987,7 @@ function showScreen(name) {
     home: '#screen-home',
     progress: '#screen-progress',
     topics: '#screen-topics',
+    topicGroup: '#screen-topic-group',
     books: '#screen-books',
     learn: '#screen-learn',
     play: '#screen-play',
@@ -983,7 +1004,7 @@ function showScreen(name) {
     refreshStarUI();
   } else {
     window.KakaStarFx?.hideRanger?.();
-    if (name === 'home' || name === 'topics' || name === 'play' || name === 'progress') {
+    if (name === 'home' || name === 'topics' || name === 'topicGroup' || name === 'play' || name === 'progress') {
       refreshStarUI();
       refreshProfileChrome();
     }
@@ -1239,7 +1260,7 @@ function bindSentenceGame() {
 
 function openTopics() {
   activeBook = null;
-  renderTopics();
+  activeTopicGroup = null;
   showScreen('topics');
   refreshStarUI();
 }
@@ -1249,6 +1270,8 @@ function openBookPicker(topic) {
   activeBook = null;
   const title = $('#books-topic-title');
   if (title) title.textContent = topic.title;
+  const backBooks = $('#btn-back-books');
+  if (backBooks) backBooks.textContent = activeTopicGroup ? `← ${activeTopicGroup.title}` : '← 主題';
   const lead = $('#screen-books .section-lead');
   if (lead) {
     lead.textContent = topic.id === 'jobs'
@@ -1356,7 +1379,13 @@ function startLearn(topic, book) {
   const title = $('#learn-topic-title');
   if (title) title.textContent = book ? `${topic.title}・${book.title}` : topic.title;
   const backBtn = $('#btn-back-learn');
-  if (backBtn) backBtn.textContent = book ? '← 揀書' : '← 主題';
+  if (backBtn) {
+    backBtn.textContent = book
+      ? '← 揀書'
+      : activeTopicGroup
+        ? `← ${activeTopicGroup.title}`
+        : '← 主題';
+  }
   const lead = $('#learn-lead');
   if (lead) {
     lead.textContent = learnWordsOverview
@@ -1374,6 +1403,38 @@ const TOPIC_GROUPS = [
   { id: 'life', title: '日常生活', ids: ['opposites', 'weather', 'nature', 'transport', 'body', 'emotions', 'actions', 'sports', 'senses', 'school', 'places', 'home', 'daily', 'fruit', 'veg', 'hk_food', 'jobs', 'clothes'] },
   { id: 'animals', title: '動物', ids: ['small_animals', 'bugs', 'ocean', 'dino'] },
 ];
+
+const TOPIC_ART = {
+  red_series: 'assets/family-stories/scenes/red-balloon-p01.webp',
+  orange_series: 'assets/common-sense/scenes/shoes-off.webp',
+  colors: 'assets/character-words/actions/huahua.webp',
+  family: 'assets/family-stories/scenes/zhuhai-grandparents-ep1-p01.webp',
+  zoo: 'assets/family-stories/scenes/zhongshan-zoo-day-p02.webp',
+  food: 'assets/character-words/actions/chi-fan.webp',
+  numbers: 'assets/common-sense/scenes/fest-lai-see.webp',
+  opposites: 'assets/family-stories/scenes/garden-flowers-p01.webp',
+  weather: 'assets/common-sense/scenes/rain-umbrella.webp',
+  nature: 'assets/common-sense/scenes/park-flower.webp',
+  transport: 'assets/family-stories/scenes/tianye-happy-day-p03.webp',
+  body: 'assets/common-sense/scenes/hands-hold.webp',
+  emotions: 'assets/character-words/emotions/jingxi.webp',
+  actions: 'assets/character-words/actions/pao.webp',
+  sports: 'assets/character-words/sports/ti-zuqiu.webp',
+  senses: 'assets/common-sense/scenes/nose-smell.webp',
+  school: 'assets/common-sense/scenes/school-ssp.webp',
+  places: 'assets/common-sense/scenes/tst-mk.webp',
+  home: 'assets/common-sense/scenes/home-tw.webp',
+  daily: 'assets/character-words/actions/xi-shou.webp',
+  fruit: 'assets/common-sense/scenes/fruit.webp',
+  veg: 'assets/family-stories/scenes/zhongshan-happy-farm-p01.webp',
+  hk_food: 'assets/food-hk/boluoyou.jpg',
+  jobs: 'assets/family-stories/scenes/future-careers-p01.webp',
+  clothes: 'assets/character-words/actions/chuan-yifu.webp',
+  small_animals: 'assets/family-stories/scenes/sam-supermarket-zoo-p04.webp',
+  bugs: 'assets/family-stories/scenes/garden-flowers-p03.webp',
+  ocean: 'assets/family-stories/scenes/zhuhai-aquarium-p01.webp',
+  dino: 'assets/dino/baolong.png',
+};
 
 function topicProgressHtml(topic) {
   const ids = topic.wordIds || [];
@@ -1412,26 +1473,47 @@ function renderTopicCard(topic) {
   return btn;
 }
 
-function renderTopics() {
-  const grid = $('#topic-grid');
-  if (!grid) return;
-  grid.innerHTML = '';
-  const byId = new Map(TOPICS.map((t) => [t.id, t]));
-  const used = new Set();
-  TOPIC_GROUPS.forEach((group) => {
-    const topics = group.ids.map((id) => byId.get(id)).filter(Boolean);
-    if (!topics.length) return;
-    topics.forEach((t) => used.add(t.id));
-    const heading = document.createElement('h2');
-    heading.className = 'topic-group-title';
-    heading.textContent = group.title;
-    grid.appendChild(heading);
-    topics.forEach((topic) => grid.appendChild(renderTopicCard(topic)));
+function topicArt(topic) {
+  return TOPIC_ART[topic.id] || 'assets/character-words/actions/kan-shu.webp';
+}
+
+function renderTopicHubCard(topic, group) {
+  const section = document.createElement('section');
+  section.className = `hub-module topic-pick-entry is-${group.id}`;
+  const books = Boolean(topic.books && topic.books.length);
+  const cta = books ? '揀書 →' : '開始學 →';
+  section.innerHTML = `
+    <button type="button" class="hub-module-poster topic-group-poster" data-topic-id="${topic.id}">
+      <img src="${topicArt(topic)}" alt="" width="1024" height="1024" loading="lazy" decoding="async">
+      <span class="hub-module-banner">
+        <span class="hub-module-titles"><span>${group.title}</span><h2>${topic.title}</h2></span>
+      </span>
+    </button>
+    <button type="button" class="btn btn-story hub-module-cta is-${group.id}" data-topic-id="${topic.id}" aria-label="${topic.title}">${cta}</button>
+  `;
+  section.querySelectorAll('[data-topic-id]').forEach((el) => {
+    el.addEventListener('click', () => openLearn(topic.id));
   });
-  const leftover = TOPICS.filter((t) => !used.has(t.id));
-  if (leftover.length) {
-    leftover.forEach((topic) => grid.appendChild(renderTopicCard(topic)));
+  return section;
+}
+
+function openTopicGroup(groupId) {
+  const group = TOPIC_GROUPS.find((item) => item.id === groupId);
+  if (!group) return;
+  activeTopicGroup = group;
+  const title = $('#topic-group-title');
+  if (title) title.textContent = group.title;
+  const stack = $('#topic-group-stack');
+  if (stack) {
+    stack.innerHTML = '';
+    const byId = new Map(TOPICS.map((t) => [t.id, t]));
+    group.ids.forEach((id) => {
+      const topic = byId.get(id);
+      if (topic) stack.appendChild(renderTopicHubCard(topic, group));
+    });
   }
+  showScreen('topicGroup');
+  refreshStarUI();
 }
 
 function learnDeckLength() {
@@ -2508,6 +2590,7 @@ function selectProfile(id) {
   playMode = null;
   resetPlayRoundProgress();
   activeTopicId = null;
+  activeTopicGroup = null;
   activeBook = null;
   KakaSpeech.setPreferredVoiceURI?.(state.voiceURI || null);
   refreshProfileChrome();

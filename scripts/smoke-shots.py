@@ -190,10 +190,24 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.wait_for_timeout(600)
     probe("揀主題")
 
+    clicked = False
     for el in pg.query_selector_all("#screen-topics button"):
+        if "今日好學" in (el.inner_text() or ""):
+            el.click()
+            clicked = True
+            break
+    if not clicked:
+        raise RuntimeError("Chinese hub must show 今日好學 as a big card")
+    pg.wait_for_selector("#screen-topic-group.active")
+    pg.wait_for_timeout(400)
+    clicked = False
+    for el in pg.query_selector_all("#screen-topic-group button"):
         if "動物園" in (el.inner_text() or ""):
             el.click()
+            clicked = True
             break
+    if not clicked:
+        raise RuntimeError("今日好學 must open 動物園 as a big card")
     pg.wait_for_timeout(600)
     probe("學習頁")
 

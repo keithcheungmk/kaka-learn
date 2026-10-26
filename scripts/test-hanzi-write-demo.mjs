@@ -21,6 +21,13 @@ assert.match(index, /卡卡學寫字/);
 assert.match(index, /xiezi-write\.webp/, '寫字卡要重用卡卡寫字插圖');
 assert.match(index, /family-height-lineup\.webp/, '故事卡要重用家庭合照');
 assert.match(index, /rainbow-umbrella-p02\.webp/, '四格卡要重用現有雨傘插圖');
+assert.match(index, /kan-shu\.webp/, '課本溫習卡要重用看書插圖');
+assert.match(index, /kaixin\.webp/, '今日好學卡要重用開心插圖');
+assert.match(index, /home-tw\.webp/, '日常生活卡要重用屋邨插圖');
+assert.match(index, /zhongshan-zoo-day-p01\.webp/, '動物卡要重用動物園插圖');
+assert.match(index, /id="btn-topics-group-starter"/);
+assert.match(index, /id="screen-topic-group"/);
+assert.doesNotMatch(index, /id="topic-grid"/, '揀主題唔好再留 emoji 小卡牆');
 assert.match(index, /aria-label="獨立開啟卡卡學寫字"/);
 assert.doesNotMatch(index, /four-panel-entry-thumbs/);
 assert.doesNotMatch(index, /hanzi-write-entry-rocket/);
@@ -214,7 +221,21 @@ assert.equal(bank.length, 30, '第 1-3 章合共三十個字');
 assert.equal(chapters.length, 10, '十章目錄');
 assert.equal(chapters.filter((c) => c.open).length, 3, '只開放三章');
 assert.ok(chapters.slice(3).every((c) => c.title === '即將開放' && !c.open), '4-10 章即將開放');
-assert.ok(chapters.every((c) => c.art && fs.existsSync(path.join(root, c.art))), '每章要有物件主題圖');
+const CHAPTER_ART = {
+  ch1: 'assets/character-words/actions/xiezi-write.webp',
+  ch2: 'assets/common-sense/scenes/home-tw.webp',
+  ch3: 'assets/character-words/actions/chuan-yifu.webp',
+  ch4: 'assets/family-stories/scenes/zhongshan-zoo-day-p01.webp',
+  ch5: 'assets/character-words/actions/kan-shu.webp',
+  ch6: 'assets/family-stories/scenes/tianye-happy-day-p06.webp',
+  ch7: 'assets/family-stories/scenes/garden-flowers-p01.webp',
+  ch8: 'assets/common-sense/scenes/rain-umbrella.webp',
+  ch9: 'assets/family-stories/scenes/tianye-happy-day-p03.webp',
+  ch10: 'assets/common-sense/scenes/moon-watch.webp',
+};
+assert.ok(chapters.every((c) => c.art && !c.art.includes('hanzi-write/chapters/') && fs.existsSync(path.join(root, c.art))), '每章要用現有網站插圖，唔好新黏土物件包');
+assert.deepEqual(Object.fromEntries(chapters.map((c) => [c.id, c.art])), CHAPTER_ART, '章節圖要對齊現有角色／場景資產');
+assert.ok(!fs.existsSync(path.join(root, 'assets/hanzi-write/chapters/ch1.webp')), '唔好再放黏土物件章節圖');
 
 const starFn = js.match(/function chapterStarCount\(done, total\) \{[\s\S]*?\n  \}/);
 assert.ok(starFn, '要有 chapterStarCount');

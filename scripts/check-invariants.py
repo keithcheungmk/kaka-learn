@@ -519,6 +519,22 @@ def check_three_entries() -> None:
     topics = html.split('id="screen-topics"', 1)[1] if 'id="screen-topics"' in html else ""
     if "卡卡常識樂園" in topics or "btn-start-common-sense" in topics:
         fail("entries", "常識樂園唔可以掛喺中文主題頁下面")
+    topics_only = topics.split('id="screen-topic-group"', 1)[0] if 'id="screen-topic-group"' in topics else topics
+    if 'id="topic-grid"' in topics_only or "topic-cover" in topics_only:
+        fail("entries", "中文揀主題唔可以再留 emoji 小卡牆")
+    for label in ("課本溫習", "今日好學", "日常生活"):
+        if label not in topics_only:
+            fail("entries", f"中文揀主題要有大圖模組「{label}」")
+    for asset in (
+        "kan-shu.webp",
+        "kaixin.webp",
+        "home-tw.webp",
+        "zhongshan-zoo-day-p01.webp",
+    ):
+        if asset not in topics_only:
+            fail("entries", f"中文揀主題大卡要重用現有插圖 {asset}")
+    if 'id="screen-topic-group"' not in html or 'id="topic-group-stack"' not in html:
+        fail("entries", "認字模組要有第二層大圖揀題頁")
     if 'id="btn-start-story-demo"' in html or 'id="btn-start-phonics"' in html:
         fail("entries", "主頁應只保留一個英文入口，故事與 Phonics 請由英文分流頁進入")
     phonics = read("js/phonics-app.js")
@@ -1380,10 +1396,24 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "鎖住章節唔好喺卡面重複即將開放文案")
     if "btn-start-adventure" in page:
         fail("hanzi-write", "選章磚本身就係入口，唔好再加大掣由第一章開始")
-    for n in range(1, 11):
-        art = Path(f"assets/hanzi-write/chapters/ch{n}.webp")
-        if not art.is_file():
-            fail("hanzi-write", f"缺少選章圖 {art}")
+    if "hanzi-write/chapters/" in data:
+        fail("hanzi-write", "選章圖要重用現有網站插圖，唔好新黏土物件包")
+    if Path("assets/hanzi-write/chapters/ch1.webp").is_file():
+        fail("hanzi-write", "唔好再放黏土物件章節圖")
+    for marker in (
+        "xiezi-write.webp",
+        "home-tw.webp",
+        "chuan-yifu.webp",
+        "zhongshan-zoo-day-p01.webp",
+        "kan-shu.webp",
+        "tianye-happy-day-p06.webp",
+        "garden-flowers-p01.webp",
+        "rain-umbrella.webp",
+        "tianye-happy-day-p03.webp",
+        "moon-watch.webp",
+    ):
+        if marker not in data:
+            fail("hanzi-write", f"選章圖缺少現有資產 {marker}")
     if "九宮格" not in page or "再寫一次" not in page or "過關啦！" not in page:
         fail("hanzi-write", "流程要有九宮格、再寫一次、過關啦")
     if "米字格" in page or 'x1="2" y1="2" x2="98" y2="98"' in page:

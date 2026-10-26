@@ -248,7 +248,7 @@
       const list = chapterLevels(chapter.id);
       const done = list.filter((level) => successCount(level.id) >= NEED_SUCCESSES).length;
       const filled = chapter.open ? chapterStarCount(done, list.length) : 0;
-      const art = chapter.art || `assets/hanzi-write/chapters/${chapter.id}.webp`;
+      const art = chapter.art;
       const lock = chapter.open ? '' : '<span class="chapter-lock" aria-hidden="true"></span>';
       btn.innerHTML = `<span class="chapter-label">第${chapter.no}章</span><span class="chapter-art"><img src="${art}" alt="" width="720" height="720" decoding="async">${lock}</span><span class="chapter-stars">${starRowHtml(filled)}</span>`;
       if (!chapter.open) {

@@ -792,7 +792,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 1,
     "title": "入門筆畫",
     "open": true,
-    "art": "assets/hanzi-write/chapters/ch1.webp",
+    "art": "assets/character-words/actions/xiezi-write.webp",
     "blurb": "先學一、二、三和常用筆畫。",
     "charIds": [
       "yi",
@@ -812,7 +812,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 2,
     "title": "我同屋企",
     "open": true,
-    "art": "assets/hanzi-write/chapters/ch2.webp",
+    "art": "assets/common-sense/scenes/home-tw.webp",
     "blurb": "寫手、眼、耳和家人的字。",
     "charIds": [
       "shou",
@@ -832,7 +832,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 3,
     "title": "身體衣物",
     "open": true,
-    "art": "assets/hanzi-write/chapters/ch3.webp",
+    "art": "assets/character-words/actions/chuan-yifu.webp",
     "blurb": "寫頭、腳、衣、帽等身體衣物字。",
     "charIds": [
       "tou",
@@ -852,7 +852,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 4,
     "title": "即將開放",
     "open": false,
-    "art": "assets/hanzi-write/chapters/ch4.webp",
+    "art": "assets/family-stories/scenes/zhongshan-zoo-day-p01.webp",
     "blurb": "這一章稍後才開放。",
     "charIds": []
   },
@@ -861,7 +861,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 5,
     "title": "即將開放",
     "open": false,
-    "art": "assets/hanzi-write/chapters/ch5.webp",
+    "art": "assets/character-words/actions/kan-shu.webp",
     "blurb": "這一章稍後才開放。",
     "charIds": []
   },
@@ -870,7 +870,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 6,
     "title": "即將開放",
     "open": false,
-    "art": "assets/hanzi-write/chapters/ch6.webp",
+    "art": "assets/family-stories/scenes/tianye-happy-day-p06.webp",
     "blurb": "這一章稍後才開放。",
     "charIds": []
   },
@@ -879,7 +879,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 7,
     "title": "即將開放",
     "open": false,
-    "art": "assets/hanzi-write/chapters/ch7.webp",
+    "art": "assets/family-stories/scenes/garden-flowers-p01.webp",
     "blurb": "這一章稍後才開放。",
     "charIds": []
   },
@@ -888,7 +888,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 8,
     "title": "即將開放",
     "open": false,
-    "art": "assets/hanzi-write/chapters/ch8.webp",
+    "art": "assets/common-sense/scenes/rain-umbrella.webp",
     "blurb": "這一章稍後才開放。",
     "charIds": []
   },
@@ -897,7 +897,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 9,
     "title": "即將開放",
     "open": false,
-    "art": "assets/hanzi-write/chapters/ch9.webp",
+    "art": "assets/family-stories/scenes/tianye-happy-day-p03.webp",
     "blurb": "這一章稍後才開放。",
     "charIds": []
   },
@@ -906,7 +906,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 10,
     "title": "即將開放",
     "open": false,
-    "art": "assets/hanzi-write/chapters/ch10.webp",
+    "art": "assets/common-sense/scenes/moon-watch.webp",
     "blurb": "這一章稍後才開放。",
     "charIds": []
   }
