@@ -8,9 +8,9 @@ stories=json.loads(subprocess.check_output(['node','-e',manifest],cwd=ROOT,text=
 errors=[]
 def norm(text): return re.sub(r'[，。！？、\s]','',text)
 HIDDEN_IDS={'park-kite','red-balloon','zhuhai-aquarium','chimelong-safari'}
-if len(stories)!=23: errors.append(f'Expected 23 stories in catalog, found {len(stories)}')
+if len(stories)!=24: errors.append(f'Expected 24 stories in catalog, found {len(stories)}')
 playable=[story for story in stories if not story.get('hidden') and not story.get('retired')]
-if len(playable)!=19: errors.append(f'Expected 19 playable stories, found {len(playable)}')
+if len(playable)!=20: errors.append(f'Expected 20 playable stories, found {len(playable)}')
 for hid in sorted(HIDDEN_IDS):
     story=next((item for item in stories if item.get('id')==hid), None)
     if not story: errors.append(f'missing retired story {hid}')
@@ -54,7 +54,7 @@ for story in stories:
         for word in page.get('learn',[]):
             if word not in allowed: errors.append(f'{label} page {i}: unclassified learning word {word}')
         focus=page.get('focusWords',[])
-        expected_focus=3 if label=='tianye-happy-day' and i==8 else 2
+        expected_focus=3 if (label=='tianye-happy-day' and i==8) or (label=='sam-supermarket-zoo' and i==8) else 2
         if len(focus)!=expected_focus: errors.append(f'{label} page {i}: expected exactly {expected_focus} focus words')
         if page.get('learn',[])!=focus: errors.append(f'{label} page {i}: learn words must match focusWords in sentence order')
         if len(page.get('distractors',[]))<2: errors.append(f'{label} page {i}: expected at least two distractors')

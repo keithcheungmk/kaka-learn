@@ -328,5 +328,21 @@ window.FAMILY_STORIES = [
       {"sentence":"卡卡用小網撈金魚，肚子餓時大家吃自己帶來的提子和餅乾。","tiles":["卡卡","用","小網","撈","金魚","，","肚子餓時","大家","吃","自己帶來的","提子","和","餅乾","。"],"learn":["金魚","提子"],"distractors":["氣球","蘋果"],"focusWords":["金魚","提子"],"dialogue":{"speaker":"卡卡","text":"金魚游來游去，提子和餅乾好好吃！"},"image":"assets/family-stories/scenes/tianye-happy-day-p07.webp"},
       {"sentence":"卡卡今天學識細心照顧妹妹、溫柔餵動物、同爸爸安全揸車開船。","tiles":["卡卡","今天","學識","細心","照顧","妹妹","、","溫柔","餵","動物","、","同爸爸","安全","揸車開船","。"],"learn":["細心","溫柔","安全"],"distractors":["粗心","用力"],"focusWords":["細心","溫柔","安全"],"dialogue":{"speaker":"卡卡","text":"細心照顧妹妹。溫柔餵動物。同爸爸安全揸車開船。"},"image":"assets/family-stories/scenes/tianye-happy-day-p08.webp"}
     ]
+  },
+  {
+    id:'sam-supermarket-zoo', title:'山姆超市同室內動物園', place:'珠海月子中心、山姆超市和室內動物園', date:'2026-10-24', series:'卡卡日記',
+    characters:['卡卡','爸爸','傑叔叔','媽媽','虹姑姑','浠榆妹妹','禧禧'], sourceBooks:[], bookWords:[],
+    extensionWords:['分開','一個星期','卡卡','和','爸爸','又來','珠海','月子中心','探望','媽媽','浠榆妹妹','早上','大家','去','很大的','山姆超市','選購','麵包','水果','小狗','毛公仔','說','自己會','認真','儲幣幣','換','心愛的','禮物','之後','商場','的','室內動物園','看見','小馬','乳牛','羊駝','小雞','小豬','推着','粉紅','手推車','載着','青菜','飼料','許多','小鳥','走過來','禧禧','輕輕','餵','小鸚鵡','吃','青菜葉','又','戴着','手套','捧起','今天','學識','超市','慢慢揀','溫柔','動物'],
+    summary:'2026年10月24日卡卡日記：分開一個星期後，卡卡和爸爸再到珠海月子中心探望媽媽和浠榆妹妹；早上一起去很大的山姆超市選購麵包、水果和小狗毛公仔，卡卡說要認真儲幣幣換禮物。之後去商場室內動物園，推粉紅手推車載青菜飼料，溫柔餵小鸚鵡和小馬，再和媽媽輕輕捧小雞。',
+    pages:[
+      {"sentence":"分開一個星期，卡卡和爸爸又來珠海月子中心探望媽媽和浠榆妹妹。","tiles":["分開","一個星期","，","卡卡","和","爸爸","又來","珠海","月子中心","探望","媽媽","和","浠榆妹妹","。"],"learn":["月子中心","浠榆妹妹"],"distractors":["動物園","哥哥"],"focusWords":["月子中心","浠榆妹妹"],"dialogue":{"speaker":"卡卡","text":"我好掛住你哋！"},"image":"assets/family-stories/scenes/sam-supermarket-zoo-p01.webp"},
+      {"sentence":"早上大家去很大的山姆超市，選購麵包、水果和小狗毛公仔。","tiles":["早上","大家","去","很大的","山姆超市","，","選購","麵包","、","水果","和","小狗","毛公仔","。"],"learn":["山姆超市","毛公仔"],"distractors":["便利店","氣球"],"focusWords":["山姆超市","毛公仔"],"dialogue":{"speaker":"爸爸","text":"貨物大件，品質很好。"},"image":"assets/family-stories/scenes/sam-supermarket-zoo-p02.webp"},
+      {"sentence":"卡卡說，自己會認真儲幣幣，換心愛的禮物。","tiles":["卡卡","說","，","自己會","認真","儲幣幣","，","換","心愛的","禮物","。"],"learn":["儲幣幣","禮物"],"distractors":["花錢","玩具"],"focusWords":["儲幣幣","禮物"],"dialogue":{"speaker":"卡卡","text":"我會認真儲幣幣換禮物。"},"image":"assets/family-stories/scenes/sam-supermarket-zoo-p03.webp"},
+      {"sentence":"之後大家去商場的室內動物園，看見小馬、乳牛、羊駝、小雞和小豬。","tiles":["之後","大家","去","商場","的","室內動物園","，","看見","小馬","、","乳牛","、","羊駝","、","小雞","和","小豬","。"],"learn":["室內動物園","羊駝"],"distractors":["水族館","大象"],"focusWords":["室內動物園","羊駝"],"dialogue":{"speaker":"禧禧","text":"好多小動物呀！"},"image":"assets/family-stories/scenes/sam-supermarket-zoo-p04.webp"},
+      {"sentence":"卡卡推着粉紅手推車，載着青菜飼料。","tiles":["卡卡","推着","粉紅","手推車","，","載着","青菜","飼料","。"],"learn":["手推車","飼料"],"distractors":["書包","糖果"],"focusWords":["手推車","飼料"],"dialogue":{"speaker":"卡卡","text":"飼料放好了，去餵動物吧！"},"image":"assets/family-stories/scenes/sam-supermarket-zoo-p05.webp"},
+      {"sentence":"許多小鳥走過來，卡卡和禧禧輕輕餵小鸚鵡。","tiles":["許多","小鳥","走過來","，","卡卡","和","禧禧","輕輕","餵","小鸚鵡","。"],"learn":["小鳥","小鸚鵡"],"distractors":["白鴿","小狗"],"focusWords":["小鳥","小鸚鵡"],"dialogue":{"speaker":"卡卡","text":"小鳥，慢慢吃呀。"},"image":"assets/family-stories/scenes/sam-supermarket-zoo-p06.webp"},
+      {"sentence":"卡卡餵小馬吃青菜葉，又戴着手套，和媽媽輕輕捧起小雞。","tiles":["卡卡","餵","小馬","吃","青菜葉","，","又","戴着","手套","，","和","媽媽","輕輕","捧起","小雞","。"],"learn":["小馬","小雞"],"distractors":["大象","小貓"],"focusWords":["小馬","小雞"],"dialogue":{"speaker":"媽媽","text":"小雞要輕輕捧。"},"image":"assets/family-stories/scenes/sam-supermarket-zoo-p07.webp"},
+      {"sentence":"卡卡今天學識超市慢慢揀、溫柔餵動物、認真儲幣幣。","tiles":["卡卡","今天","學識","超市","慢慢揀","、","溫柔","餵","動物","、","認真","儲幣幣","。"],"learn":["慢慢揀","溫柔","儲幣幣"],"distractors":["急急腳","用力"],"focusWords":["慢慢揀","溫柔","儲幣幣"],"dialogue":{"speaker":"卡卡","text":"超市慢慢揀。溫柔餵動物。認真儲幣幣。"},"image":"assets/family-stories/scenes/sam-supermarket-zoo-p08.webp"}
+    ]
   }
 ];

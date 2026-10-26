@@ -56,8 +56,8 @@ for (const id of hiddenIds) {
   assert.ok(retired.hidden || retired.retired, `${id} 要 hidden/retired，唔好出現喺書架`);
 }
 const playable = context.window.FAMILY_STORIES.filter((item) => !item.hidden && !item.retired);
-assert.equal(playable.length, 19);
-assert.equal(context.window.FAMILY_STORIES.length, 23);
+assert.equal(playable.length, 20);
+assert.equal(context.window.FAMILY_STORIES.length, 24);
 const farm = context.window.FAMILY_STORIES.find((item) => item.id === 'zhongshan-happy-farm');
 assert.ok(farm, '要有中山開心農莊');
 assert.equal(farm.pages.length, 8);
@@ -127,5 +127,36 @@ assert.equal(tianye.pages[7].dialogue.text, '細心照顧妹妹。溫柔餵動�
 assert.match(tianye.pages[2].sentence, /開車去田野部落農莊/);
 assert.equal(tianye.hidden, undefined);
 assert.equal(tianye.warmupPairs, undefined);
+const samZoo = context.window.FAMILY_STORIES.find((item) => item.id === 'sam-supermarket-zoo');
+assert.ok(samZoo, '要有山姆超市同室內動物園');
+assert.equal(samZoo.title, '山姆超市同室內動物園');
+assert.equal(samZoo.date, '2026-10-24');
+assert.equal(samZoo.series, '卡卡日記');
+assert.equal(samZoo.pages.length, 8);
+assert.ok(samZoo.characters.includes('浠榆妹妹'));
+assert.ok(samZoo.characters.includes('禧禧'));
+assert.ok(samZoo.characters.includes('虹姑姑'));
+assert.doesNotMatch(JSON.stringify(samZoo), /希恩/);
+assert.doesNotMatch(JSON.stringify(samZoo), /小鸡|选购|质量|认真储币|白鸽/);
+assert.match(samZoo.pages[0].sentence, /浠榆妹妹/);
+assert.match(samZoo.pages[0].dialogue.text, /掛住你哋/);
+assert.match(samZoo.pages[1].sentence, /山姆超市/);
+assert.match(samZoo.pages[1].sentence, /毛公仔/);
+assert.match(samZoo.pages[2].sentence, /儲幣幣/);
+assert.match(samZoo.pages[3].sentence, /室內動物園/);
+assert.match(samZoo.pages[3].sentence, /羊駝/);
+assert.match(samZoo.pages[4].sentence, /手推車/);
+assert.match(samZoo.pages[5].sentence, /小鸚鵡/);
+assert.doesNotMatch(samZoo.pages[5].sentence, /白鴿/);
+assert.match(samZoo.pages[6].sentence, /小馬/);
+assert.match(samZoo.pages[6].sentence, /小雞/);
+assert.equal(JSON.stringify(samZoo.pages[7].focusWords), JSON.stringify(['慢慢揀', '溫柔', '儲幣幣']));
+assert.match(samZoo.pages[7].sentence, /學識/);
+assert.match(samZoo.pages[7].sentence, /超市慢慢揀/);
+assert.match(samZoo.pages[7].sentence, /溫柔餵動物/);
+assert.match(samZoo.pages[7].sentence, /認真儲幣幣/);
+assert.equal(samZoo.pages[7].dialogue.text, '超市慢慢揀。溫柔餵動物。認真儲幣幣。');
+assert.equal(samZoo.hidden, undefined);
+assert.equal(samZoo.warmupPairs, undefined);
 
 console.log('test-family-storybook: ok');
