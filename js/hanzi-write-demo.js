@@ -625,17 +625,7 @@
 
   function hideOverlays() {
     $('pass-overlay')?.classList.add('hidden');
-    $('rest-overlay')?.classList.add('hidden');
     showPassGloss('');
-  }
-
-  function showRestOffer(done) {
-    const copy = $('rest-copy');
-    if (copy) {
-      copy.textContent = `已經寫了 ${done}／${NEED_SUCCESSES} 次。要休息一下嗎？進度已記住，下次可以再寫。`;
-    }
-    $('rest-overlay')?.classList.remove('hidden');
-    speak('寫得好，要休息一下嗎');
   }
 
   function onWriteSuccess() {
@@ -646,10 +636,6 @@
     refreshWriteChrome();
     if (next >= NEED_SUCCESSES) {
       onLevelPassed({ firstClear: prev < NEED_SUCCESSES });
-      return;
-    }
-    if (next % 2 === 0) {
-      showRestOffer(next);
       return;
     }
     continueWrite();
@@ -734,10 +720,6 @@
     showView('chars');
   }
 
-  function restFromWrite() {
-    leaveWrite();
-  }
-
   function onBack(event) {
     event.preventDefault();
     if (view === 'write') {
@@ -793,16 +775,6 @@
     destroyWriter();
     nav.goBackOr(PARENT_HREF);
   });
-  $('btn-write-rest')?.addEventListener('click', () => {
-    restFromWrite();
-  });
-  $('btn-rest-continue')?.addEventListener('click', () => {
-    speech.unlockSpeech?.();
-    continueWrite();
-  });
-  $('btn-rest-leave')?.addEventListener('click', () => {
-    restFromWrite();
-  });
   $('back-link').addEventListener('click', onBack);
 
   window.addEventListener('resize', () => {
@@ -849,7 +821,6 @@
     showActiveStrokeGuide,
     clearActiveStrokeGuide,
     leaveWrite,
-    restFromWrite,
     showView,
     openWrite,
     openChapter,

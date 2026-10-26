@@ -731,14 +731,12 @@ def walk(pg, url, shots: Path | None, tag: str):
     rewrite = (pg.text_content("#btn-rewrite") or "").strip()
     if rewrite != "再寫一次":
         raise RuntimeError(f"Rewrite button must be 「再寫一次」, got {rewrite!r}")
-    rest = (pg.text_content("#btn-write-rest") or "").strip()
-    if rest != "休息一下":
-        raise RuntimeError(f"Write screen must offer 休息一下, got {rest!r}")
+    if pg.is_visible("#btn-write-rest") or pg.is_visible("#rest-overlay"):
+        raise RuntimeError("Write screen must not offer 休息一下")
     write_metrics = pg.evaluate(
         """() => {
           const d = document.documentElement;
           const start = document.querySelector('#btn-rewrite')?.getBoundingClientRect();
-          const restBtn = document.querySelector('#btn-write-rest')?.getBoundingClientRect();
           window.KakaHanziWrite?.showActiveStrokeGuide?.(0);
           const guide = document.querySelector('.hanzi-guide-stroke, #hanzi-guide path');
           const target = document.querySelector('.hanzi-target');
@@ -758,7 +756,6 @@ def walk(pg, url, shots: Path | None, tag: str):
             overflowX: d.scrollWidth - d.clientWidth,
             overflowY: d.scrollHeight - d.clientHeight,
             tap: Math.min(start?.width || 0, start?.height || 0),
-            restTap: Math.min(restBtn?.width || 0, restBtn?.height || 0),
             coversBoard,
             writerKids: document.querySelector('#hanzi-target')?.childElementCount || 0,
             guideFill: guide?.getAttribute('fill') || '',
@@ -781,8 +778,6 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Hanzi iPad write screen must not page-scroll, overflowY={write_metrics['overflowY']}")
     if write_metrics["tap"] < 44:
         raise RuntimeError("Hanzi rewrite button must be at least 44px")
-    if write_metrics["restTap"] < 44:
-        raise RuntimeError("Hanzi 休息一下 must be at least 44px")
     if write_metrics.get("guideHidden"):
         raise RuntimeError("Write screen must show a visible orange stroke guide")
     if not write_metrics.get("guideFillIsNone"):
@@ -825,14 +820,6 @@ def walk(pg, url, shots: Path | None, tag: str):
     )
     if hint_levels.get("at0") != 1 or hint_levels.get("at2") != 2 or hint_levels.get("at4") != 3:
         raise RuntimeError(f"Hint fade must be 1/2/3 by success count, got {hint_levels!r}")
-    pg.click("#btn-write-rest")
-    pg.wait_for_selector("#view-chars:not(.hidden) #level-bank")
-    if pg.is_visible("#view-write") and "hidden" not in (pg.get_attribute("#view-write", "class") or ""):
-        raise RuntimeError("休息一下 must leave the write screen")
-    if pg.url.endswith("index.html") or "#screen-" in pg.url:
-        raise RuntimeError("休息一下 must stay in 卡卡學寫字, not dump the app")
-    pg.click("#level-bank [data-char-id='yi']")
-    pg.wait_for_selector("#view-write:not(.hidden) #hanzi-target svg")
     pg.evaluate("() => window.KakaHanziWrite?.onLevelPassed?.()")
     pg.wait_for_selector("#pass-overlay:not(.hidden) #pass-title")
     pass_title = (pg.text_content("#pass-title") or "").strip()

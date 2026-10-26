@@ -1456,8 +1456,10 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "寫字層 z-index 要高過虛線 fallback，墨水先唔會被蓋")
     if "id=\"hanzi-guide\"" not in page or "id=\"pass-gloss\"" not in page:
         fail("hanzi-write", "要有當筆橙色層同過關釋義字幕")
-    if "休息一下" not in page or "btn-write-rest" not in js:
-        fail("hanzi-write", "寫字中要有「休息一下」離開掣")
+    if "休息一下" in page or "btn-write-rest" in page or "rest-overlay" in page:
+        fail("hanzi-write", "寫字中唔好再有「休息一下」中途休息畫面")
+    if "showRestOffer" in js or "restFromWrite" in js or "btn-write-rest" in js:
+        fail("hanzi-write", "寫字邏輯唔好再留中途休息流程")
     if "NEED_SUCCESSES = 6" not in js or "hintLevelFor" not in js:
         fail("hanzi-write", "每字要六次成功，並按次數淡化提示")
     if "聽粵語，再指圖" in page or "view-warmup" in page or "openWarmup" in js:
