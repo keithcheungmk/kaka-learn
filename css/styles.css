@@ -1054,6 +1054,7 @@ div.star-panel {
   background: #fffdf6;
 }
 .family-story-poster { aspect-ratio: 1.55; }
+.hanzi-write-entry-poster { aspect-ratio: 1.55; }
 .hub-module-poster > img,
 .family-story-poster > img,
 .four-panel-entry-poster > img,
@@ -1064,7 +1065,7 @@ div.star-panel {
   object-fit: cover;
 }
 .family-story-poster > img { object-position: center 62%; }
-.hanzi-write-entry-poster > img { object-position: center 48%; }
+.hanzi-write-entry-poster > img { object-position: center 42%; }
 .four-panel-entry-poster > img { object-position: 18% 78%; }
 
 .hub-module-banner,

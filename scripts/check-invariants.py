@@ -1355,8 +1355,11 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "中文主題頁入口要寫「卡卡學寫字」")
     if "卡卡認字 Demo" in html:
         fail("hanzi-write", "中文主題頁唔好再用「卡卡認字 Demo」")
-    if "xiezi-write.webp" not in html:
-        fail("hanzi-write", "中文主題寫字卡要重用卡卡寫字插圖")
+    if "paper-bridge-p01.webp" not in html:
+        fail("hanzi-write", "中文主題寫字卡要重用卡卡同禧禧一齊坐桌現有插圖")
+    topics_html = html.split('id="screen-topics"', 1)[1].split('id="screen-topic-group"', 1)[0] if 'id="screen-topics"' in html else ""
+    if "xiezi-write.webp" in topics_html:
+        fail("hanzi-write", "寫字入口唔好再用單人特寫裁切")
     if "hanzi-write-entry-rocket" in html:
         fail("hanzi-write", "寫字入口唔好再用 CSS 火箭牆")
     for path in (
