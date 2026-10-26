@@ -34,6 +34,7 @@ SCROLLABLE = {
     "screen-home",
     "screen-english-hub",
     "screen-topics",
+    "screen-topic-group",
     "screen-books",
     "screen-phonics-topics",
     "screen-phonics-sounds",
