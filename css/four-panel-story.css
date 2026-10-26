@@ -129,7 +129,8 @@ body { min-height: 100dvh; }
   display: block;
   width: 100%;
   aspect-ratio: 1.42;
-  object-fit: cover;
+  object-fit: contain;
+  background: #e8ecf4;
 }
 .level-thumb.is-lit img,
 .wall-hit:active img {
@@ -219,7 +220,7 @@ button:focus-visible {
   display: block;
   width: 100%;
   aspect-ratio: 1.42;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 14px;
   background: #e9edf6;
   border: 3px solid #f3f5ff;
@@ -503,7 +504,8 @@ button:focus-visible {
   display: block;
   width: 100%;
   aspect-ratio: 1.42;
-  object-fit: cover;
+  object-fit: contain;
+  background: #e9edf6;
   pointer-events: none;
   -webkit-user-drag: none;
 }

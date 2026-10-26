@@ -1342,6 +1342,14 @@ def check_four_panel_story() -> None:
         fail("four-panel", "下一步要係正常細掣，唔好用高大 primary")
     if "✕" in js or "❌" in js or "紅叉" in js:
         fail("four-panel", "錯格唔好用紅叉")
+    css = read("css/four-panel-story.css")
+    if "object-fit: cover" in css:
+        fail("four-panel", "四格圖卡要用 object-fit:contain 顯示全幅，唔好 cover 裁走頭／遮")
+    for marker in (".level-thumb img", ".comic-panel img", ".warmup-pic img, .warmup-slot img"):
+        if marker not in css:
+            fail("four-panel", f"四格 CSS 要有 {marker}")
+    if css.count("object-fit: contain") < 3:
+        fail("four-panel", "關卡牆、排圖熱身、講／範讀四格都要用 contain")
     node = shutil.which("node")
     if node:
         result = subprocess.run([node, "scripts/test-four-panel-story.mjs"], capture_output=True, text=True)
@@ -1764,6 +1772,11 @@ def check_common_sense() -> None:
             if h == 0 or abs((w / h) - (4 / 3)) > 0.03:
                 fail("common-sense", f"{rel} 要係 4:3 橫圖，而家 {w}×{h}")
     catalog = read("data/common-sense-catalog.js")
+    comics_css = read("css/interview-comics.css")
+    if "object-fit: cover" in comics_css:
+        fail("common-sense", "面試四格圖卡要用 object-fit:contain 顯示全幅，唔好 cover 裁圖")
+    if "object-fit: contain" not in comics_css:
+        fail("common-sense", "面試四格 .cs-media 圖要 contain")
     if "interview-comics.html" not in catalog:
         fail("common-sense", "面試四格入口要喺常識 hub")
     if "非官方" not in read("assets/common-sense/mtr-family-map.svg"):

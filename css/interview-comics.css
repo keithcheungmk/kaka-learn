@@ -101,10 +101,10 @@ body.cs-comics {
   z-index: 1;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   opacity: 0;
   transition: opacity 0.18s ease;
-  background: transparent;
+  background: #d7e6f4;
   display: block;
 }
 .cs-comics .cs-media img.is-ready { opacity: 1; }

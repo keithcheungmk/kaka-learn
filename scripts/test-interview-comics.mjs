@@ -35,6 +35,8 @@ assert.match(js, /KakaInterviewComics/);
 assert.doesNotMatch(js, /fetch\(|XMLHttpRequest|FormData|webkitSpeechRecognition|SpeechRecognition/);
 assert.doesNotMatch(js, /2\/5|五星|半星|half-star/);
 assert.match(css, /is-preview/);
+assert.match(css, /object-fit:\s*contain/, '面試四格圖卡要全幅 contain');
+assert.doesNotMatch(css, /object-fit:\s*cover/, '面試四格唔好 cover 裁圖');
 assert.match(css, /html,\s*\nbody/);
 assert.match(css, /background-color:\s*#eaf7ff/);
 assert.match(css, /color-scheme:\s*light/);

@@ -471,6 +471,9 @@ def walk(pg, url, shots: Path | None, tag: str):
             feedback: document.querySelector('#warmup-feedback')?.textContent || '',
             hasCross: /[✕✘❌]/.test(document.body.innerText),
             playHidden: document.querySelector('#play')?.classList.contains('hidden'),
+            objectFits: [...document.querySelectorAll('#warmup-pool .warmup-pic img')].map(
+              (img) => getComputedStyle(img).objectFit
+            ),
           };
         }"""
     )
@@ -486,6 +489,8 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError("Warmup must not show a red cross")
     if warmup_probe.get("playHidden") is not True:
         raise RuntimeError("A wrong sort must not unlock recording")
+    if not warmup_probe.get("objectFits") or any(fit != "contain" for fit in warmup_probe.get("objectFits") or []):
+        raise RuntimeError(f"Warmup pictures must use object-fit:contain, got {warmup_probe.get('objectFits')}")
     placed = pg.evaluate(
         """() => {
           const order = [
@@ -549,6 +554,12 @@ def walk(pg, url, shots: Path | None, tag: str):
     listen_count = pg.evaluate("() => document.querySelectorAll('#listen-board .comic-panel img').length")
     if listen_count != 4:
         raise RuntimeError(f"Model listen must show 4 panels, got {listen_count}")
+    listen_fits = pg.evaluate(
+        """() => [...document.querySelectorAll('#listen-board .comic-panel img')]
+          .map((img) => getComputedStyle(img).objectFit)"""
+    )
+    if any(fit != "contain" for fit in listen_fits):
+        raise RuntimeError(f"Listen comic panels must use object-fit:contain, got {listen_fits}")
     if not pg.is_visible("#btn-listen-tell"):
         raise RuntimeError("Model listen must keep a 去講 skip")
     pg.click("#btn-listen-tell")
@@ -556,6 +567,12 @@ def walk(pg, url, shots: Path | None, tag: str):
     panels = pg.evaluate("() => document.querySelectorAll('#comic-board .comic-panel img').length")
     if panels != 4:
         raise RuntimeError(f"Play screen must show 4 comic panels, got {panels}")
+    play_fits = pg.evaluate(
+        """() => [...document.querySelectorAll('#comic-board .comic-panel img')]
+          .map((img) => getComputedStyle(img).objectFit)"""
+    )
+    if any(fit != "contain" for fit in play_fits):
+        raise RuntimeError(f"Play comic panels must use object-fit:contain, got {play_fits}")
     preview = pg.evaluate(
         """() => {
           const hit = document.querySelector('#comic-board .comic-hit[data-beat="第一"]');
@@ -1241,6 +1258,12 @@ def walk(pg, url, shots: Path | None, tag: str):
     )
     if preview["preview"] < 1:
         raise RuntimeError("Interview comics panels must react before recording")
+    interview_fits = pg.evaluate(
+        """() => [...document.querySelectorAll('#comic-board .cs-media img, #comic-board .comic-panel img')]
+          .map((img) => getComputedStyle(img).objectFit)"""
+    )
+    if not interview_fits or any(fit != "contain" for fit in interview_fits):
+        raise RuntimeError(f"Interview comic panels must use object-fit:contain, got {interview_fits}")
 
     def prompt_clipped():
         box = pg.evaluate(
