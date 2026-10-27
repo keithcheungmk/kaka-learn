@@ -462,39 +462,74 @@ def walk(pg, url, shots: Path | None, tag: str):
             if not pg.is_visible("#phonics-sight-grid") or pg.is_visible("#phonics-topic-grid"):
                 raise RuntimeError("Topic Words screen must show only its word-topic grid")
             probe("主題詞語")
-            pg.click("#btn-open-emoji-spelling")
-            pg.wait_for_selector("#screen-emoji-spelling.active #emoji-spelling-category-grid .emoji-spelling-category")
-            probe("Emoji Spelling 主題選擇")
-            pg.click('#emoji-spelling-category-grid [data-topic-id="cvc_at"]')
+            # Each displayed picture-word topic must reach the new game, including nested collections.
+            topic_ids = pg.locator('#phonics-sight-grid [data-topic-id]').evaluate_all('(els) => els.map(e => e.dataset.topicId)')
+            for topic_id in topic_ids:
+                pg.locator(f'#phonics-sight-grid [data-topic-id="{topic_id}"]').click()
+                if pg.is_visible('#screen-phonics-collections.active'):
+                    child_ids = pg.locator('#phonics-collections-grid [data-topic-id]').evaluate_all('(els) => els.map(e => e.dataset.topicId)')
+                    for child_id in child_ids:
+                        pg.locator(f'#phonics-collections-grid [data-topic-id="{child_id}"]').click()
+                        pg.wait_for_selector('#screen-emoji-spelling.active #emoji-spelling-word-grid .emoji-spelling-word-card')
+                        pg.click('#btn-emoji-spelling-back-categories')
+                        pg.wait_for_selector('#screen-phonics-collections.active')
+                    pg.click('#btn-back-phonics-collections')
+                else:
+                    pg.wait_for_selector('#screen-emoji-spelling.active #emoji-spelling-word-grid .emoji-spelling-word-card')
+                    pg.click('#btn-emoji-spelling-back-categories')
+                pg.wait_for_selector('#screen-phonics-topics.active')
+            pg.click('#phonics-sight-grid [data-topic-id="animal_spelling"]')
             pg.wait_for_selector("#screen-emoji-spelling.active #emoji-spelling-word-grid .emoji-spelling-word-card")
             probe("Emoji Spelling 詞語預習")
+            target_letters = pg.evaluate("""() => window.KakaEmojiSpellingData.getTopics()
+              .find(topic => topic.id === 'animal_spelling').words[0].letters""")
+            pg.evaluate("""() => {
+              const sounds = window.KakaEmojiSpellingSounds; window.__emojiCues = { correct: 0, wrong: 0, phonics: 0 }; window.__emojiSequence = [];
+              const speech = window.KakaSpeech, say = speech.speakEnglishTerm;
+              speech.speakEnglishTerm = (word, ...args) => { window.__emojiSequence.push(word); return say(word, ...args); };
+              const correct = sounds.correct, wrong = sounds.retry, phonics = sounds.playPhonics;
+              sounds.correct = (...args) => { window.__emojiCues.correct++; return correct(...args); };
+              sounds.retry = (...args) => { window.__emojiCues.wrong++; return wrong(...args); };
+              sounds.playPhonics = (...args) => { window.__emojiCues.phonics++; window.__emojiSequence.push("[phonics]"); return phonics(...args); };
+            }""")
             pg.click("#btn-emoji-spelling-start")
             pg.wait_for_selector("#screen-emoji-spelling.active.is-playing #emoji-spelling-letter-pool .emoji-spelling-letter")
-            drag_probe = pg.evaluate("""() => {
-              const tile = document.querySelector('#emoji-spelling-letter-pool .emoji-spelling-letter:not(:disabled)');
+            if pg.evaluate("() => window.__emojiSequence[0]") != ''.join(target_letters):
+                raise RuntimeError("First question should automatically say its word")
+            wrong_letter = pg.evaluate("""letter => [...document.querySelectorAll('#emoji-spelling-letter-pool .emoji-spelling-letter')]
+              .find(tile => tile.textContent.trim() !== letter.toUpperCase())?.textContent.trim()""", target_letters[0])
+            pg.locator(f'#emoji-spelling-letter-pool .emoji-spelling-letter:text-is("{wrong_letter}")').first.click()
+            if pg.locator("#emoji-spelling-answer .emoji-spelling-slot.is-filled").count() != 0:
+                raise RuntimeError("Wrong letter must remain in the pool and leave the answer unchanged")
+            if pg.evaluate("() => window.__emojiCues.wrong") != 1:
+                raise RuntimeError("Wrong letter must play the retry cue immediately")
+            drag_probe = pg.evaluate("""letter => {
+              const tile = [...document.querySelectorAll('#emoji-spelling-letter-pool .emoji-spelling-letter:not(:disabled)')].find(el => el.textContent.trim() === letter.toUpperCase());
               const slot = document.querySelector('#emoji-spelling-answer .emoji-spelling-slot:not(:disabled)');
               if (!tile || !slot) return null;
               const t = tile.getBoundingClientRect();
               const s = slot.getBoundingClientRect();
               return { tile: tile.textContent.trim(), start: { x: t.left + t.width / 2, y: t.top + t.height / 2 }, end: { x: s.left + s.width / 2, y: s.top + s.height / 2 } };
-            }""")
+            }""", target_letters[0])
             if not drag_probe:
                 raise RuntimeError("Emoji Spelling must render an available letter and empty answer slot")
             pg.mouse.move(drag_probe["start"]["x"], drag_probe["start"]["y"])
             pg.mouse.down()
             pg.mouse.move(drag_probe["end"]["x"], drag_probe["end"]["y"], steps=8)
             pg.mouse.up()
-            pg.wait_for_timeout(250)
+            pg.wait_for_timeout(450)
             if pg.locator("#emoji-spelling-answer .emoji-spelling-slot.is-filled").count() != 1:
                 raise RuntimeError("Dragging a letter to an empty answer slot must place it")
             placed = pg.locator("#emoji-spelling-answer .emoji-spelling-slot.is-filled").first.text_content().strip()
             if placed != drag_probe["tile"]:
                 raise RuntimeError(f"Dragged letter should land in the answer slot, expected {drag_probe['tile']!r}, got {placed!r}")
+            if pg.evaluate("() => window.__emojiCues.correct") != 1:
+                raise RuntimeError("Correct letter must play the success cue immediately")
             pg.locator("#emoji-spelling-answer .emoji-spelling-slot.is-filled").first.click()
             pg.wait_for_timeout(100)
             if pg.locator("#emoji-spelling-answer .emoji-spelling-slot.is-filled").count() != 0:
                 raise RuntimeError("Tapping a placed letter should remove it from its slot")
-            pg.locator("#emoji-spelling-letter-pool .emoji-spelling-letter:not(:disabled)").first.click()
+            pg.locator(f'#emoji-spelling-letter-pool .emoji-spelling-letter:not(:disabled):text-is("{target_letters[0].upper()}")').first.click()
             pg.wait_for_timeout(100)
             if pg.locator("#emoji-spelling-answer .emoji-spelling-slot.is-filled").count() != 1:
                 raise RuntimeError("Tapping a letter tile should place it in the next empty slot")
@@ -508,11 +543,15 @@ def walk(pg, url, shots: Path | None, tag: str):
             if not challenge_fit.get("answer") or challenge_fit.get("letters", 0) < 5:
                 raise RuntimeError(f"Emoji Spelling needs letter slots and a usable tile pool: {challenge_fit}")
             pg.locator("#emoji-spelling-answer .emoji-spelling-slot.is-filled").first.click()
-            target_letters = pg.evaluate("""() => window.KakaEmojiSpellingData.getTopics()
-              .find(topic => topic.id === 'cvc_at').words[0].letters""")
             for letter in target_letters:
                 pg.locator(f'#emoji-spelling-letter-pool .emoji-spelling-letter:not(:disabled):text-is("{letter.upper()}")').first.click()
-            pg.wait_for_function("() => document.querySelector('#emoji-spelling-progress')?.textContent.trim() === '2 / 10'", timeout=8000)
+            pg.wait_for_function("() => document.querySelector('#emoji-spelling-progress')?.textContent.trim() === '2 / 10'", timeout=20000)
+            if pg.evaluate("() => window.__emojiCues.phonics") < 1:
+                raise RuntimeError("Completed pilot word should play phonics chunks")
+            sequence = pg.evaluate("() => window.__emojiSequence.slice(-5)")
+            expected_sequence = [''.join(target_letters), '[phonics]', ''.join(target_letters), 'Great job, Kaka!', 'dog']
+            if sequence != expected_sequence:
+                raise RuntimeError(f"Spelling feedback should read word, phonics, word, then praise: {sequence}")
             if pg.locator("#emoji-spelling-play-view .emoji-spelling-round-bar .star-cell.is-on").count() != 1:
                 raise RuntimeError("A correct word should light one English round star")
             pg.click("#btn-emoji-spelling-review")
@@ -528,7 +567,7 @@ def walk(pg, url, shots: Path | None, tag: str):
               window.KakaStorage.clearRoundProgress(key);
               window.KakaStorage.saveRoundProgress(`${key}|offset`, ['19']);
             }""")
-            pg.click('#emoji-spelling-category-grid [data-topic-id="sight_jobs_world"]')
+            pg.evaluate("() => window.KakaEmojiSpelling.openTopicById('sight_jobs_world')")
             pg.click("#btn-emoji-spelling-start")
             pg.wait_for_selector("#screen-emoji-spelling.active.is-playing #emoji-spelling-letter-pool .emoji-spelling-letter")
             long_word = pg.evaluate("""() => {
@@ -547,7 +586,6 @@ def walk(pg, url, shots: Path | None, tag: str):
             probe("Emoji Spelling 長詞挑戰")
             pg.click("#btn-emoji-spelling-review")
             pg.click("#btn-emoji-spelling-back-categories")
-            pg.click("#btn-emoji-spelling-back-english")
             pg.wait_for_selector('#screen-phonics-topics.active[data-english-track="sight"]')
             pg.click("#btn-back-phonics-topics")
             pg.wait_for_selector("#screen-english-hub.active")
@@ -556,6 +594,12 @@ def walk(pg, url, shots: Path | None, tag: str):
             if pg.is_visible("#phonics-sight-grid") or not pg.is_visible("#phonics-topic-grid"):
                 raise RuntimeError("Phonics screen must show only its phonics-topic grid")
             probe("Phonics 主題入口")
+            phonics_ids = pg.locator('#phonics-topic-grid [data-topic-id]').evaluate_all('(els) => els.map(e => e.dataset.topicId)')
+            for topic_id in [item for item in phonics_ids if item != 'letters_rev']:
+                pg.locator(f'#phonics-topic-grid [data-topic-id="{topic_id}"]').click()
+                pg.wait_for_selector('#screen-emoji-spelling.active #emoji-spelling-word-grid .emoji-spelling-word-card')
+                pg.click('#btn-emoji-spelling-back-categories')
+                pg.wait_for_selector('#screen-phonics-topics.active[data-english-track="phonics"]')
             pg.click("#phonics-topic-grid .topic-card:first-child")
             pg.wait_for_timeout(500)
             probe("字母音清單")

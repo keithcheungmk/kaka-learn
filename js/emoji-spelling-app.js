@@ -3,8 +3,9 @@
   const data = window.KakaEmojiSpellingData;
   const phonics = window.KakaPhonicsWords;
   const speech = window.KakaSpeech;
+  const sounds = window.KakaEmojiSpellingSounds;
   const storage = window.KakaStorage;
-  if (!data || !phonics || !speech || !storage) {
+  if (!data || !phonics || !speech || !sounds || !storage) {
     console.error('Emoji Spelling could not start: shared English data or services are missing.');
     return;
   }
@@ -12,10 +13,13 @@
   const $ = (selector) => document.querySelector(selector);
   const topics = data.getTopics();
   const ROUND_SIZE = 10;
+  const SPEAKER_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm12.5-.9a1 1 0 0 1 1.4 0 5.5 5.5 0 0 1 0 7.8 1 1 0 1 1-1.4-1.4 3.5 3.5 0 0 0 0-5 1 1 0 0 1 0-1.4z"/></svg>';
   const state = { topic: null, round: [], index: 0, score: 0, pool: [], selected: [], completed: [], key: '', offset: 0, locked: false };
   let answerTimer = null;
   let roundToken = 0;
   let suppressLetterClickUntil = 0;
+  let returnCollectionId = null;
+  let returnTrack = 'sight';
 
   function muted() {
     try { return !!storage.loadState().muted; } catch { return false; }
@@ -29,6 +33,7 @@
     if (answerTimer) clearTimeout(answerTimer);
     answerTimer = null;
     speech.cancelAllSpeech?.();
+    sounds.stopPhonics();
   }
 
   function showScreen(screen) {
@@ -50,11 +55,7 @@
   function imageHtml(emoji, plate, asset = '') {
     if (asset) return `<span class="emoji-spelling-custom-art"><img src="${asset}" alt="" loading="lazy" decoding="async"></span>`;
     const parts = window.KakaEmojiArt?.graphemes?.(emoji) || [emoji];
-    const art = parts.map((part) => {
-      const id = window.KakaEmojiArt?.codeName?.(part);
-      if (!id || data.needsNativeEmoji(id)) return `<span class="emoji-spelling-native">${part}</span>`;
-      return window.KakaEmojiArt.html(part);
-    }).join('');
+    const art = parts.map((part) => `<span class="emoji-spelling-native">${part}</span>`).join('');
     const multi = parts.length > 1;
     return `<span class="emoji-plate" style="--plate:${plate}"><span class="emoji-face${multi ? ' is-multi' : ''}" aria-hidden="true">${art}</span></span>`;
   }
@@ -79,16 +80,17 @@
     state.topic = topic;
     state.round = [];
     state.score = 0;
-    $('#emoji-spelling-learn-title').textContent = topic.titleEn;
-    $('#emoji-spelling-learn-lead').textContent = '撳圖卡聽英文詞語，認識好晒就開始串字。';
+    $('#emoji-spelling-learn-title').textContent = "Let's Learn! 📖";
+    $('#emoji-spelling-learn-lead').textContent = '點擊卡片聽發音，準備好就出發挑戰！';
     const grid = $('#emoji-spelling-word-grid');
     grid.replaceChildren();
-    topic.words.forEach((word) => {
+    const offset = topicOffset(topic, progressKey(topic));
+    data.planRound(topic.words, offset, Math.min(ROUND_SIZE, topic.words.length)).forEach((word) => {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'emoji-spelling-word-card';
       button.setAttribute('aria-label', `Listen to ${word.word}`);
-      button.innerHTML = `${imageHtml(word.emoji, word.plate, word.photo || word.objectArt)}<strong>${word.word.toUpperCase()}</strong><span class="emoji-spelling-card-speaker" aria-hidden="true">🔊</span>`;
+      button.innerHTML = `${imageHtml(word.emoji, word.plate, word.photo || word.objectArt)}<strong>${word.word.toUpperCase()}</strong><span class="emoji-spelling-card-speaker" aria-hidden="true">${SPEAKER_ICON}</span>`;
       button.addEventListener('click', () => speak(word.word));
       grid.appendChild(button);
     });
@@ -99,6 +101,11 @@
   function progressKey(topic) {
     const profileId = typeof storage.getActiveProfileId === 'function' ? storage.getActiveProfileId() : 'kaka';
     return `${profileId}|emoji-spelling|${topic.id}`;
+  }
+
+  function topicOffset(topic, key) {
+    const saved = Number(storage.loadRoundProgress?.(`${key}|offset`)?.[0] || 0);
+    return Number.isFinite(saved) && saved >= 0 ? Math.floor(saved) % topic.words.length : 0;
   }
 
   function renderRoundBar() {
@@ -127,8 +134,7 @@
     roundToken += 1;
     state.key = progressKey(state.topic);
     if (restart) storage.clearRoundProgress?.(state.key);
-    const savedOffset = Number(storage.loadRoundProgress?.(`${state.key}|offset`)?.[0] || 0);
-    state.offset = Number.isFinite(savedOffset) && savedOffset >= 0 ? Math.floor(savedOffset) % state.topic.words.length : 0;
+    state.offset = topicOffset(state.topic, state.key);
     state.round = data.planRound(state.topic.words, state.offset, ROUND_SIZE);
     state.completed = restart ? [] : (storage.loadRoundProgress?.(state.key) || []).slice(0, ROUND_SIZE);
     if (state.completed.length >= ROUND_SIZE) {
@@ -145,26 +151,43 @@
   function renderQuestion() {
     const word = state.round[state.index];
     if (!word) return finishRound();
-    state.pool = data.makeLetterPool(word.word);
+    state.pool = data.makeLetterPool(word.word, Math.random, 2);
     state.selected = data.createAnswerSlots(word.letters.length);
     state.locked = false;
-    $('#emoji-spelling-play-title').textContent = state.topic.titleEn;
+    $('#screen-emoji-spelling')?.classList.toggle('has-long-word', word.letters.length > 10);
+    $('#emoji-spelling-play-title').textContent = '✨ Emoji Spelling ✨';
     $('#emoji-spelling-progress').textContent = `${state.index + 1} / ${state.round.length}`;
     $('#emoji-spelling-picture').innerHTML = imageHtml(word.emoji, word.plate, word.photo || word.objectArt);
+    $('#btn-emoji-spelling-phonics').hidden = !word.phonicsChunks.length;
     $('#emoji-spelling-feedback').textContent = '';
     $('#emoji-spelling-feedback').classList.remove('is-retry', 'is-correct');
     renderAnswer();
     renderLetterPool();
+    speak(word.word);
   }
 
   function placeLetter(tile, slotIndex) {
     if (state.locked || state.selected.some((item) => item?.key === tile.key)) return;
-    const nextIndex = slotIndex == null ? data.nextEmptySlot(state.selected) : slotIndex;
-    if (nextIndex < 0 || nextIndex >= state.selected.length || state.selected[nextIndex]) return;
+    const nextIndex = data.nextEmptySlot(state.selected);
+    if (nextIndex < 0) return;
+    sounds.stopPhonics();
+    speech.cancelAllSpeech?.();
+    const feedback = $('#emoji-spelling-feedback');
+    if ((slotIndex != null && slotIndex !== nextIndex) || tile.letter !== state.round[state.index].letters[nextIndex]) {
+      feedback.textContent = '再試另一個字母！';
+      feedback.classList.remove('is-correct');
+      feedback.classList.add('is-retry');
+      sounds.retry({ muted: muted() });
+      return;
+    }
     state.selected[nextIndex] = tile;
+    feedback.textContent = '啱喇！';
+    feedback.classList.remove('is-retry');
+    feedback.classList.add('is-correct');
     renderAnswer();
     renderLetterPool();
     if (state.selected.every(Boolean)) checkAnswer();
+    else sounds.correct({ muted: muted() });
   }
 
   function renderAnswer() {
@@ -225,6 +248,7 @@
       button.classList.remove('is-dragging');
       document.querySelectorAll('.emoji-spelling-slot.is-drop-target').forEach((slot) => slot.classList.remove('is-drop-target'));
       if (!moved) return;
+      if (upEvent.type === 'pointercancel') { ghost.remove(); suppressLetterClickUntil = Date.now() + 350; return; }
       suppressLetterClickUntil = Date.now() + 350;
       ghost.remove();
       const target = document.elementFromPoint(upEvent.clientX, upEvent.clientY)?.closest?.('.emoji-spelling-slot:not(:disabled)');
@@ -275,7 +299,7 @@
     if (!data.isCorrectAnswer(state.selected, target.word)) {
       feedback.textContent = 'Not quite. Try again!';
       feedback.classList.add('is-retry');
-      speech.playTryAgainCue({ muted: muted() });
+      sounds.retry({ muted: muted() });
       speak('Try again!', 0.94);
       const token = roundToken;
       answerTimer = setTimeout(() => {
@@ -295,10 +319,9 @@
     feedback.textContent = 'Great spelling!';
     feedback.classList.remove('is-retry');
     feedback.classList.add('is-correct');
-    speech.playCorrectCue({ muted: muted() });
-    speak(`Great job! ${target.word}.`, 0.9);
+    sounds.correct({ muted: muted() });
     const token = roundToken;
-    answerTimer = setTimeout(() => {
+    const award = () => {
       if (token !== roundToken) return;
       const commitStar = () => {
         if (token !== roundToken) return;
@@ -314,7 +337,35 @@
         window.KakaStarFx.flyStarFromRanger($('#screen-emoji-spelling'), commitStar);
       } else commitStar();
       answerTimer = null;
-    }, Math.max(850, Math.min(1300, target.word.length * 65)));
+    };
+    // Guard every stage against navigation and speech engines that never fire onEnd.
+    const sayThen = (text, next) => {
+      if (token !== roundToken) return;
+      let finished = false;
+      const done = () => {
+        if (finished || token !== roundToken) return;
+        finished = true;
+        if (answerTimer) clearTimeout(answerTimer);
+        answerTimer = null;
+        next();
+      };
+      const fallbackMs = Math.max(2200, speech.estimateSpeakMs?.(text, { rate: 0.84, delayMs: 0 }) || 2200);
+      answerTimer = setTimeout(done, fallbackMs);
+      speech.speakEnglishTerm(text, { muted: muted(), rate: 0.84, pitch: 1.05, delayMs: 0, onEnd: done });
+    };
+    const praise = () => {
+      const name = storage.getActiveProfileId?.() === 'heihei' ? 'Heihei' : 'Kaka';
+      feedback.textContent = `Great job, ${name}!`;
+      sayThen(`Great job, ${name}!`, award);
+    };
+    const repeatWord = () => sayThen(target.word, praise);
+    sayThen(target.word, () => {
+      if (!target.phonicsChunks.length) return repeatWord();
+      feedback.textContent = `聽音塊：${target.phonicsChunks.map(chunk => chunk.replace(/^oo-(?:long|short)$/, 'oo')).join(' · ')}`;
+      sounds.playPhonics(target.phonicsChunks, { muted: muted() }).then(() => {
+        if (token === roundToken) repeatWord();
+      });
+    });
   }
 
   function finishRound() {
@@ -338,6 +389,25 @@
     showScreen($('#screen-emoji-spelling'));
   }
 
+  function openTopicById(id, collectionId = null, track = 'sight') {
+    const topic = topics.find((item) => item.id === id);
+    if (!topic) return false;
+    roundToken += 1;
+    returnCollectionId = collectionId;
+    returnTrack = track;
+    openTopic(topic);
+    return true;
+  }
+
+  function returnToTopics() {
+    stopAudio();
+    roundToken += 1;
+    if (returnCollectionId && window.KakaPhonics?.openWordCollections) window.KakaPhonics.openWordCollections(returnCollectionId);
+    else if (returnTrack === 'phonics' && window.KakaPhonics?.openPhonicsTopics) window.KakaPhonics.openPhonicsTopics();
+    else if (window.KakaPhonics?.openWordTopics) window.KakaPhonics.openWordTopics();
+    else openCategories();
+  }
+
   function backToEnglish() {
     stopAudio();
     roundToken += 1;
@@ -348,8 +418,8 @@
   function bind() {
     $('#btn-open-emoji-spelling')?.addEventListener('click', openCategories);
     $('#btn-emoji-spelling-back-english')?.addEventListener('click', backToEnglish);
-    $('#btn-emoji-spelling-back-categories')?.addEventListener('click', openCategories);
-    $('#btn-emoji-spelling-learn-back-bottom')?.addEventListener('click', openCategories);
+    $('#btn-emoji-spelling-back-categories')?.addEventListener('click', returnToTopics);
+    $('#btn-emoji-spelling-learn-back-bottom')?.addEventListener('click', returnToTopics);
     $('#btn-emoji-spelling-start')?.addEventListener('click', () => startRound());
     $('#btn-emoji-spelling-review')?.addEventListener('click', () => {
       roundToken += 1;
@@ -358,14 +428,21 @@
     });
     $('#btn-emoji-spelling-speak')?.addEventListener('click', () => {
       const word = state.round[state.index];
-      if (word) speak(word.word);
+      if (word) { sounds.stopPhonics(); speak(word.word); }
+    });
+    $('#btn-emoji-spelling-phonics')?.addEventListener('click', () => {
+      const word = state.round[state.index];
+      if (!word || !word.phonicsChunks.length || state.locked) return;
+      speech.cancelAllSpeech?.();
+      sounds.playPhonics(word.phonicsChunks, { muted: muted() });
     });
     $('#btn-emoji-spelling-undo')?.addEventListener('click', undoLast);
-    $('#btn-emoji-spelling-choose-again')?.addEventListener('click', openCategories);
+    $('#btn-emoji-spelling-choose-again')?.addEventListener('click', returnToTopics);
     $('#btn-emoji-spelling-play-again')?.addEventListener('click', () => startRound({ restart: true }));
     renderCategories();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind, { once: true });
   else bind();
+  window.KakaEmojiSpelling = { openTopicById };
 })();
