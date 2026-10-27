@@ -21,8 +21,8 @@
     "note": "Asset filenames were checked only. No clip was listened to; candidates remain provisional until the sound and blending are audited."
   },
   "summary": {
-    "candidateCount": 94,
-    "rejectedCount": 199,
+    "candidateCount": 91,
+    "rejectedCount": 202,
     "clipsAudiblyVerifiedCount": 0,
     "byTopic": {
       "animal_spelling": {
@@ -67,8 +67,8 @@
       },
       "festival_halloween": {
         "audited": 10,
-        "candidates": 2,
-        "rejected": 8
+        "candidates": 1,
+        "rejected": 9
       },
       "sight_jobs_nearby": {
         "audited": 25,
@@ -112,8 +112,8 @@
       },
       "sight_numbers": {
         "audited": 12,
-        "candidates": 6,
-        "rejected": 6
+        "candidates": 4,
+        "rejected": 8
       },
       "sight_shapes": {
         "audited": 12,
@@ -1354,27 +1354,8 @@
       "sourceId": "festival_halloween_7",
       "topicId": "festival_halloween",
       "word": "mask",
-      "status": "candidate_pending_audio_audition",
-      "orderedPairs": [
-        {
-          "grapheme": "m",
-          "soundAsset": "m"
-        },
-        {
-          "grapheme": "a",
-          "soundAsset": "a"
-        },
-        {
-          "grapheme": "s",
-          "soundAsset": "s"
-        },
-        {
-          "grapheme": "k",
-          "soundAsset": "k"
-        }
-      ],
-      "silentLetters": [],
-      "caveats": []
+      "status": "rejected",
+      "reason": "British English mask uses /ɑː/; the available short-a clip is not a safe match."
     },
     {
       "sourceId": "festival_halloween_8",
@@ -2563,23 +2544,8 @@
       "sourceId": "sight_numbers_1",
       "topicId": "sight_numbers",
       "word": "two",
-      "status": "candidate_pending_audio_audition",
-      "orderedPairs": [
-        {
-          "grapheme": "t",
-          "soundAsset": "t"
-        },
-        {
-          "grapheme": "o",
-          "soundAsset": "oo-long"
-        }
-      ],
-      "silentLetters": [
-        "w"
-      ],
-      "caveats": [
-        "The w is silent; o represents /uː/ and pairs with oo-long."
-      ]
+      "status": "rejected",
+      "reason": "The letter w is omitted by a simple phonics tile sequence; no safe ordered grapheme mapping was assigned."
     },
     {
       "sourceId": "sight_numbers_2",
@@ -2674,23 +2640,8 @@
       "sourceId": "sight_numbers_8",
       "topicId": "sight_numbers",
       "word": "nine",
-      "status": "candidate_pending_audio_audition",
-      "orderedPairs": [
-        {
-          "grapheme": "n",
-          "soundAsset": "n"
-        },
-        {
-          "grapheme": "i_e",
-          "soundAsset": "igh"
-        }
-      ],
-      "silentLetters": [
-        "e"
-      ],
-      "caveats": [
-        "Final e is silent; i_e represents /aɪ/ and pairs with igh."
-      ]
+      "status": "rejected",
+      "reason": "The split i_e pattern crosses an internal n, so the visible graphemes cannot be represented as a simple ordered tile sequence."
     },
     {
       "sourceId": "sight_numbers_9",
