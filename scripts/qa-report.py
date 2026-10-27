@@ -53,7 +53,7 @@ def review_hints(files: list[str], impact: dict[str, bool]) -> list[str]:
     if any("star-fx" in p or "space-ranger" in p for p in files):
         hints.append("太空戰士：驗一個玩法屏 + 槍口射星（用 smoke 截圖，禁 computerUse）。")
     if any(p == "index.html" for p in files):
-        hints.append("主頁改動：驗四入口可開 + 新連結（如有）。")
+        hints.append("主頁改動：驗三個中文入口可開 + 新連結（如有）。")
     if impact["math"] and not impact["chinese"]:
         hints.append("數理專用：確認認字／字母隊仍可進入。")
     if not hints:

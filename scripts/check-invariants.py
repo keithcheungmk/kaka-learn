@@ -519,25 +519,32 @@ def check_three_entries() -> None:
     topics = html.split('id="screen-topics"', 1)[1] if 'id="screen-topics"' in html else ""
     if "卡卡常識樂園" in topics or "btn-start-common-sense" in topics:
         fail("entries", "常識樂園唔可以掛喺中文主題頁下面")
-    topics_only = topics.split('id="screen-books"', 1)[0] if 'id="screen-books"' in topics else topics
+    topics_only = topics.split('id="screen-word-games"', 1)[0] if 'id="screen-word-games"' in topics else topics
     if "常識樂園" in topics_only or "common-sense.html" in topics_only:
         fail("entries", "認字遊戲／中文揀主題唔可以標成或連去常識樂園")
-    for label in ("原創故事", "四格講故事", "卡卡學寫字", "認字遊戲"):
+    for label in ("卡卡日記故事", "卡卡學寫字", "認字遊戲"):
         if label not in topics_only:
             fail("entries", f"中文揀主題上半要有大入口「{label}」")
-    if topics_only.count('<section class="hub-module ') != 4:
-        fail("entries", "中文揀主題上半恰好 4 個大入口")
-    if 'id="btn-topics-word-games"' not in topics_only or 'id="topics-word-wall"' not in topics_only:
-        fail("entries", "認字遊戲要捲去同頁 emoji 分類牆")
-    if 'id="topic-grid"' not in topics_only:
-        fail("entries", "中文揀主題下半要有 emoji 分類牆 #topic-grid")
+    if topics_only.count('<section class="hub-module ') != 3:
+        fail("entries", "中文揀主題上半恰好 3 個大入口；四格講故事由面試四格承接")
+    hub_css = read("css/styles.css")
+    if "width: min(1360px, 100%)" not in hub_css or "aspect-ratio: 1.25" not in hub_css:
+        fail("entries", "中文入口版面要加闊、放大插圖區，唔好沿用舊細卡尺寸")
+    word_entry = topics_only.split('class="hub-module word-games-entry"', 1)[1].split('</section>', 1)[0] if 'class="hub-module word-games-entry"' in topics_only else ""
+    if 'id="btn-topics-word-games"' not in word_entry or 'aria-controls="screen-word-games"' not in word_entry:
+        fail("entries", "認字遊戲入口要連到獨立認字分類頁")
+    if 'id="topic-grid"' in topics_only or 'id="topics-word-wall"' in topics_only:
+        fail("entries", "認字分類牆唔可以留喺三個入口頁下面")
+    word_screen = html.split('id="screen-word-games"', 1)[1].split('id="screen-books"', 1)[0] if 'id="screen-word-games"' in html else ""
+    if 'id="btn-back-word-games"' not in word_screen or 'id="topics-word-wall"' not in word_screen or 'id="topic-grid"' not in word_screen:
+        fail("entries", "獨立認字遊戲頁要包含返回掣和完整分類牆")
     if "topic-group-entry" in topics_only or 'id="screen-topic-group"' in html or "hub-topic-stack" in html:
         fail("entries", "唔好再把每個認字分類做成大插畫＋開始學長列表")
-    if "kan-shu.webp" not in topics_only:
-        fail("entries", "認字遊戲大卡要重用現有看書插圖")
+    if "kan-shu.webp" not in topics_only or "漢字配圖" not in topics_only or "🍊" not in topics_only:
+        fail("entries", "認字遊戲入口要展示看書角色和漢字＋emoji 配對線索")
     app = read("js/app.js")
-    if "function renderTopics" not in app or "function scrollToWordGames" not in app:
-        fail("entries", "認字分類牆要由 renderTopics 填，認字遊戲入口要捲去牆")
+    if "function renderTopics" not in app or "function openWordGames" not in app or "function returnToTopicBrowse" not in app:
+        fail("entries", "認字分類牆要由 renderTopics 填，並由認字遊戲獨立頁進入及返回")
     if "function openTopicGroup" in app or "renderTopicHubCard" in app:
         fail("entries", "唔好再做認字分類大插畫第二層")
     if 'id="btn-start-story-demo"' in html or 'id="btn-start-phonics"' in html:
@@ -1232,16 +1239,10 @@ def check_family_storybook_entry() -> None:
 
 
 def check_four_panel_story() -> None:
-    """獨立四格講故事：中文入口、本機錄音、小朋友自己檢查＋家長確認領星，唔混入填空故事。"""
+    """保留可直達的四格講故事頁，但不再和常識的面試四格重複佔中文入口。"""
     html = read("index.html")
-    if 'id="btn-topics-four-panel"' not in html or "./four-panel-story.html" not in html:
-        fail("four-panel", "中文主題頁要有「四格講故事」獨立入口")
-    if "四格講故事" not in html:
-        fail("four-panel", "中文主題頁入口要寫「四格講故事」")
-    if "four-panel-entry-thumbs" in html:
-        fail("four-panel", "中文主題四格卡要用一幅現有故事圖，唔好四格縮圖牆")
-    if "rainbow-umbrella-p02.webp" not in html:
-        fail("four-panel", "中文主題四格卡要重用彩虹傘現有插圖")
+    if 'id="btn-topics-four-panel"' in html or "./four-panel-story.html" in html:
+        fail("four-panel", "四格講故事不應再和常識下的面試四格重複佔中文入口")
     if "family-height-lineup.webp" not in html:
         fail("four-panel", "中文主題故事卡要重用家庭角色合照")
     for path in (
@@ -1368,8 +1369,8 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "中文主題頁入口要寫「卡卡學寫字」")
     if "卡卡認字 Demo" in html:
         fail("hanzi-write", "中文主題頁唔好再用「卡卡認字 Demo」")
-    if "paper-bridge-p01.webp" not in html:
-        fail("hanzi-write", "中文主題寫字卡要重用卡卡同禧禧一齊坐桌現有插圖")
+    if "assets/hub/chinese-writing-entry-cover.webp" not in html or not Path("assets/hub/chinese-writing-entry-cover.webp").is_file():
+        fail("hanzi-write", "中文主題寫字卡要有卡卡和禧禧一同書寫的封面圖")
     topics_html = html.split('id="screen-topics"', 1)[1].split('id="screen-books"', 1)[0] if 'id="screen-topics"' in html else ""
     if "xiezi-write.webp" in topics_html:
         fail("hanzi-write", "寫字入口唔好再用單人特寫裁切")

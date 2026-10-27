@@ -28,12 +28,13 @@ import subprocess
 import sys
 from pathlib import Path
 
-# 只許呢幾頁捲：純瀏覽、唔涉拖曳（主頁四入口掣可超出一屏）
+# 只許呢幾頁捲：純瀏覽、唔涉拖曳（中文入口頁可超出一屏）
 SCROLLABLE = {
     "screen-profiles",
     "screen-home",
     "screen-english-hub",
     "screen-topics",
+    "screen-word-games",
     "screen-books",
     "screen-phonics-topics",
     "screen-phonics-sounds",
@@ -191,13 +192,19 @@ def walk(pg, url, shots: Path | None, tag: str):
     probe("揀主題")
 
     hub_text = pg.text_content("#topics-hub-entries") or ""
-    for name in ("原創故事", "四格講故事", "卡卡學寫字", "認字遊戲"):
+    for name in ("卡卡日記故事", "卡卡學寫字", "認字遊戲"):
         if name not in hub_text:
             raise RuntimeError(f"Chinese hub must show the big entry {name!r}")
+    if "四格講故事" in hub_text:
+        raise RuntimeError("Chinese hub must not duplicate the four-panel story entry")
     if "常識樂園" in hub_text:
-        raise RuntimeError("Chinese hub must not label the fourth entry as 常識樂園")
-    if not pg.is_visible("#topic-grid"):
-        raise RuntimeError("Chinese hub must show the emoji topic wall on the same page")
+        raise RuntimeError("Chinese hub must not label an entry as 常識樂園")
+    if pg.is_visible("#topic-grid"):
+        raise RuntimeError("Emoji topic categories must not remain below the three Chinese entries")
+    pg.click("#btn-topics-word-games")
+    pg.wait_for_selector("#screen-word-games.active #topic-grid")
+    if not pg.is_visible("#screen-word-games #topics-word-wall"):
+        raise RuntimeError("Recognition entry must open the separate page containing the original category wall")
     clicked = False
     for el in pg.query_selector_all("#topic-grid .topic-card"):
         if "動物園" in (el.inner_text() or ""):
@@ -391,19 +398,16 @@ def walk(pg, url, shots: Path | None, tag: str):
     if pg.is_visible("#reader") and "hidden" not in (pg.get_attribute("#reader", "class") or ""):
         raise RuntimeError("← English must return to the EN family story library")
 
-    # Independent Cantonese four-panel speaking mode; do not mix into fill-in pages.
-    pg.goto(url, wait_until="domcontentloaded")
+    # Legacy standalone Cantonese four-panel page; it is no longer duplicated in the Chinese hub.
+    pg.goto(url + "#screen-topics", wait_until="domcontentloaded")
+    pg.wait_for_selector("#screen-topics.active")
+    site_root = url.split("#", 1)[0].split("?", 1)[0].rstrip("/")
+    if site_root.endswith("/index.html"):
+        site_root = site_root[:-len("/index.html")]
+    four_panel_url = site_root + "/four-panel-story.html"
+    pg.goto(four_panel_url, wait_until="domcontentloaded")
     pg.wait_for_timeout(300)
-    pg.click("#btn-profile-kaka")
-    pg.wait_for_timeout(200)
-    pg.click("#btn-start-topics")
-    pg.wait_for_selector("#screen-topics.active #btn-topics-four-panel")
-    four_href = pg.get_attribute("#btn-topics-four-panel", "href") or ""
-    if "four-panel-story.html" not in four_href:
-        raise RuntimeError("Chinese hub must open the independent four-panel story page")
-    probe("中文・四格講故事入口")
-    with pg.expect_navigation():
-        pg.click("#btn-topics-four-panel")
+    probe("獨立・四格講故事")
     pg.wait_for_selector("#level-grid [data-start='rainbow-umbrella']")
     if pg.is_visible("#play") and "hidden" not in (pg.get_attribute("#play", "class") or ""):
         raise RuntimeError("Four-panel mode must start on the level wall")
@@ -663,7 +667,9 @@ def walk(pg, url, shots: Path | None, tag: str):
     pg.wait_for_selector("#wall:not(.hidden) [data-start='rainbow-umbrella']")
     with pg.expect_navigation():
         pg.click("#back-link")
-    pg.wait_for_selector("#screen-topics.active #btn-topics-four-panel")
+    pg.wait_for_selector("#screen-topics.active #btn-topics-hanzi-write")
+    if pg.is_visible("#btn-topics-four-panel"):
+        raise RuntimeError("Chinese topic page must not restore the removed four-panel duplicate entry")
     if pg.is_visible("#screen-profiles") and "active" in (pg.get_attribute("#screen-profiles", "class") or ""):
         raise RuntimeError("Four-panel wall ← 中文 must not dump on the profile picker")
     if pg.is_visible("#screen-home") and "active" in (pg.get_attribute("#screen-home", "class") or ""):

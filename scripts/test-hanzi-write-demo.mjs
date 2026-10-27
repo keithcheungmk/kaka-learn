@@ -18,20 +18,30 @@ const storage = read('js/storage.js');
 assert.match(index, /id="btn-topics-hanzi-write"/, '中文主題頁要有學寫字入口');
 assert.match(index, /hanzi-write-demo\.html/, '入口要連去獨立頁');
 assert.match(index, /卡卡學寫字/);
-assert.match(index, /paper-bridge-p01\.webp/, '寫字卡要重用卡卡同禧禧一齊坐桌現有插圖');
+assert.match(index, /chinese-writing-entry-cover\.webp/, '寫字卡要展示卡卡和禧禧都在寫字');
+assert.ok(fs.existsSync(path.join(root, 'assets/hub/chinese-writing-entry-cover.webp')), '缺少中文寫字入口封面圖');
 assert.doesNotMatch(index.split('id="screen-topics"')[1].split('id="screen-books"')[0], /xiezi-write\.webp/, '寫字入口唔好再用單人特寫裁切');
 assert.match(index, /family-height-lineup\.webp/, '故事卡要重用家庭合照');
-assert.match(index, /rainbow-umbrella-p02\.webp/, '四格卡要重用現有雨傘插圖');
+assert.doesNotMatch(index, /four-panel-story\.html|btn-topics-four-panel/, '中文主題頁不再重複列出四格講故事入口');
 assert.match(index, /kan-shu\.webp/, '認字遊戲卡要重用看書插圖');
 assert.match(index, /id="btn-topics-word-games"/);
 assert.match(index, /id="topic-grid"/, '揀主題下半要有 emoji 分類牆');
 assert.doesNotMatch(index, /id="screen-topic-group"/, '唔好再做認字分類大插畫第二層');
-assert.match(index.split('id="screen-topics"')[1].split('id="screen-books"')[0], /原創故事/);
+assert.match(index.split('id="screen-topics"')[1].split('id="screen-books"')[0], /卡卡日記故事/);
 assert.match(index.split('id="screen-topics"')[1].split('id="screen-books"')[0], /認字遊戲/);
+const topicsEntryMarkup = index.split('id="topics-hub-entries"')[1].split('id="screen-word-games"')[0];
+assert.equal((topicsEntryMarkup.match(/<section class="hub-module /g) || []).length, 3, '中文主題頁保留三個主要入口');
+assert.match(index, /漢字配圖[\s\S]{0,80}🍊/, '認字入口要呈現漢字配 emoji 的玩法線索');
+assert.match(index, /id="btn-topics-word-games"[^>]*aria-controls="screen-word-games"/);
+assert.match(index, /id="screen-word-games"[\s\S]*id="topics-word-wall"[\s\S]*id="topic-grid"[\s\S]*id="screen-books"/, '所有原有認字分類要收進認字遊戲頁');
+assert.doesNotMatch(index.split('id="screen-topics"')[1].split('id="screen-word-games"')[0], /id="topic-grid"/, '三個入口頁不可再顯示整面分類牆');
 assert.match(index, /aria-label="獨立開啟卡卡學寫字"/);
 assert.doesNotMatch(index, /four-panel-entry-thumbs/);
 assert.doesNotMatch(index, /hanzi-write-entry-rocket/);
 assert.doesNotMatch(index, /卡卡認字 Demo/);
+const hubCss = read('css/styles.css');
+assert.match(hubCss, /\.hub-entry-grid\s*\{[\s\S]{0,180}width:\s*min\(1360px,\s*100%\)/, '中文入口區要用較寬版面放大插圖');
+assert.match(hubCss, /aspect-ratio:\s*1\.25/, '入口插圖比例要較舊版更大');
 
 for (const rel of [
   'hanzi-write-demo.html',

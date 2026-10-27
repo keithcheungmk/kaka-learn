@@ -213,7 +213,7 @@
           </span>
         </div>
       </div>
-      <p class="section-lead hub-modules-lead">揀一個入口，或者下面揀認字分類</p>
+      <p class="section-lead hub-modules-lead">揀一個學習入口</p>
       <button type="button" class="btn btn-sentence-home" id="btn-topics-sentence" hidden>中文砌句子</button>
       <button type="button" class="btn btn-chain-home" id="btn-topics-chain" hidden>詞語鏈・接一接</button>
       <div class="hub-entry-grid" id="topics-hub-entries">
@@ -224,26 +224,14 @@
             <span class="hub-module-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M7 4h11v15H8.5A2.5 2.5 0 0 0 6 21.5V6a2 2 0 0 1 1-2Zm-1 2v13.2c0 .4.3.8.7.8.5 0 .8-.4.8-.8V4H7a1 1 0 0 0-1 2Z"/></svg>
             </span>
-            <span class="hub-module-titles"><span>故事</span><h2 id="family-story-entry-title">原創故事</h2></span>
+            <span class="hub-module-titles"><span>生活日記</span><h2 id="family-story-entry-title">卡卡日記故事</h2></span>
           </span>
         </a>
         <a class="btn btn-story hub-module-cta is-story" id="btn-topics-family-stories" href="./family-storybook.html" aria-label="獨立開啟卡卡和禧禧一齊玩故事書">開始 →</a>
       </section>
-      <section class="hub-module four-panel-entry" aria-labelledby="four-panel-entry-title">
-        <a class="hub-module-poster four-panel-entry-poster" href="./four-panel-story.html" aria-labelledby="four-panel-entry-title">
-          <img src="assets/family-stories/scenes/rainbow-umbrella-p02.webp" alt="禧禧和虹姑姑在雨中一起撐傘" width="900" height="600" decoding="async">
-          <span class="hub-module-banner four-panel-entry-banner">
-            <span class="hub-module-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M4 12a8 8 0 1 1 13.3 6H16a2 2 0 0 0-2 2v1.2A8 8 0 0 1 4 12Z"/></svg>
-            </span>
-            <span class="hub-module-titles"><span>講故事</span><h2 id="four-panel-entry-title">四格講故事</h2></span>
-          </span>
-        </a>
-        <a class="btn btn-story hub-module-cta is-tell" id="btn-topics-four-panel" href="./four-panel-story.html" aria-label="獨立開啟四格講故事">開始 →</a>
-      </section>
       <section class="hub-module hanzi-write-entry" aria-labelledby="hanzi-write-entry-title">
         <a class="hub-module-poster hanzi-write-entry-poster" href="./hanzi-write-demo.html" aria-labelledby="hanzi-write-entry-title">
-          <img src="assets/family-stories/scenes/paper-bridge-p01.webp" alt="卡卡和禧禧坐在書桌前一齊學" width="900" height="600" decoding="async">
+          <img src="assets/hub/chinese-writing-entry-cover.webp" alt="卡卡和禧禧各自拿着筆在紙上寫字，媽媽在旁鼓勵" width="1536" height="1024" decoding="async">
           <span class="hub-module-banner hanzi-write-entry-banner">
             <span class="hub-module-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M4 20h4l11-11-4-4L4 16v4Zm14.7-13.3 1.6-1.6a1 1 0 0 0 0-1.4l-2-2a1 1 0 0 0-1.4 0l-1.6 1.6 3.4 3.4Z"/></svg>
@@ -254,8 +242,9 @@
         <a class="btn btn-story hub-module-cta is-write" id="btn-topics-hanzi-write" href="./hanzi-write-demo.html" aria-label="獨立開啟卡卡學寫字">開始 →</a>
       </section>
       <section class="hub-module word-games-entry" aria-labelledby="word-games-entry-title">
-        <button type="button" class="hub-module-poster word-games-entry-poster" data-scroll-word-games aria-labelledby="word-games-entry-title">
+        <button type="button" class="hub-module-poster word-games-entry-poster" data-open-word-games aria-labelledby="word-games-entry-title" aria-controls="screen-word-games">
           <img src="assets/character-words/actions/kan-shu.webp" alt="小朋友坐着看書認字" width="1024" height="1024" decoding="async">
+          <span class="word-games-clue" aria-hidden="true"><span>漢字配圖</span><strong>橙 <span>🍊</span></strong></span>
           <span class="hub-module-banner word-games-entry-banner">
             <span class="hub-module-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6 4h12a1 1 0 0 1 1 1v15l-7-3-7 3V5a1 1 0 0 1 1-1Z"/></svg>
@@ -263,9 +252,21 @@
             <span class="hub-module-titles"><span>認字</span><h2 id="word-games-entry-title">認字遊戲</h2></span>
           </span>
         </button>
-        <button type="button" class="btn btn-story hub-module-cta is-words" data-scroll-word-games id="btn-topics-word-games" aria-label="打開認字遊戲分類">開始 →</button>
+        <button type="button" class="btn btn-story hub-module-cta is-words" data-open-word-games id="btn-topics-word-games" aria-label="開始認字遊戲" aria-controls="screen-word-games">開始 →</button>
       </section>
       </div>
+    </section>
+
+    <section id="screen-word-games" class="screen" aria-label="認字遊戲分類">
+      <div class="game-header">
+        <button type="button" class="btn btn-ghost" id="btn-back-word-games">← 主題</button>
+        <h1>認字遊戲</h1>
+        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+          <span class="star-icon">★</span>
+          <span class="star-meta"><strong class="stars-today-inline">0/10</strong></span>
+        </div>
+      </div>
+      <p class="section-lead">揀一個分類，開始認字遊戲</p>
       <section class="topics-word-wall" id="topics-word-wall" aria-labelledby="topics-word-wall-title">
         <h2 class="section-lead hub-modules-lead" id="topics-word-wall-title">認字分類</h2>
         <div class="topic-grid" id="topic-grid"></div>

@@ -77,6 +77,8 @@ let buildDrag = null;
 let activeTopicId = null;
 /** @type {{ id: string, title: string, wordIds: string[] }|null} 紅橙輯入面揀咗邊本書 */
 let activeBook = null;
+/** 認字遊戲分類頁入課堂後，返回時回到原來的分類頁。 */
+let topicBrowseScreen = 'topics';
 /** @type {ReturnType<typeof wordsForTopic>} */
 let learnWords = [];
 /** @type {{ left: object, right: object }[]} */
@@ -143,6 +145,7 @@ const RETURN_SCREEN_KEY = 'kaka-return-screen';
 const RESTORE_SCREENS = new Set([
   'screen-home',
   'screen-topics',
+  'screen-word-games',
   'screen-english-hub',
   'screen-story-series',
   'screen-math-galaxy',
@@ -198,6 +201,7 @@ function applyScreenId(id) {
     'screen-phonics-topics': () => window.KakaPhonics?.openWordTopics?.() || window.KakaPhonics?.openEnglishHub?.(),
     'screen-progress': () => openProgress(),
     'screen-books': () => openTopics(),
+    'screen-word-games': () => openWordGames(),
   };
   const open = openers[id];
   if (!open) return false;
@@ -365,7 +369,7 @@ function bindPlayFinish() {
           return;
         }
       }
-      openTopics();
+      returnToTopicBrowse();
     };
   }
 }
@@ -457,21 +461,28 @@ function bindHome() {
   $('#home-profile-chip')?.addEventListener('click', () => openProgress());
 }
 
-function scrollToWordGames() {
-  const wall = $('#topics-word-wall');
-  if (!wall) return;
-  wall.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  const first = wall.querySelector('.topic-card');
-  if (first instanceof HTMLElement) first.focus();
+function openWordGames() {
+  topicBrowseScreen = 'wordGames';
+  renderTopics();
+  showScreen('wordGames');
+  refreshStarUI();
+}
+
+function returnToTopicBrowse() {
+  activeBook = null;
+  renderTopics();
+  showScreen(topicBrowseScreen === 'wordGames' ? 'wordGames' : 'topics');
+  refreshStarUI();
 }
 
 function bindTopics() {
   const back = $('#btn-back-topics');
   if (back) back.onclick = () => showScreen('home');
   const backBooks = $('#btn-back-books');
-  if (backBooks) backBooks.onclick = () => openTopics();
-  $$('#screen-topics [data-scroll-word-games]').forEach((el) => {
-    el.addEventListener('click', () => scrollToWordGames());
+  if (backBooks) backBooks.onclick = () => returnToTopicBrowse();
+  $('#btn-back-word-games')?.addEventListener('click', () => openTopics());
+  $$('#screen-topics [data-open-word-games]').forEach((el) => {
+    el.addEventListener('click', () => openWordGames());
   });
 }
 
@@ -483,7 +494,7 @@ function bindLearn() {
       if (topic) openBookPicker(topic);
       return;
     }
-    openTopics();
+    returnToTopicBrowse();
   };
   const stage = $('#learn-stage');
   if (stage) stage.onclick = () => speakCurrentLearn();
@@ -979,6 +990,7 @@ function showScreen(name) {
     home: '#screen-home',
     progress: '#screen-progress',
     topics: '#screen-topics',
+    wordGames: '#screen-word-games',
     books: '#screen-books',
     learn: '#screen-learn',
     play: '#screen-play',
@@ -995,7 +1007,7 @@ function showScreen(name) {
     refreshStarUI();
   } else {
     window.KakaStarFx?.hideRanger?.();
-    if (name === 'home' || name === 'topics' || name === 'play' || name === 'progress') {
+    if (name === 'home' || name === 'topics' || name === 'wordGames' || name === 'play' || name === 'progress') {
       refreshStarUI();
       refreshProfileChrome();
     }
@@ -1250,6 +1262,7 @@ function bindSentenceGame() {
 }
 
 function openTopics() {
+  topicBrowseScreen = 'topics';
   activeBook = null;
   renderTopics();
   showScreen('topics');

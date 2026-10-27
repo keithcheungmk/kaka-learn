@@ -16,8 +16,7 @@ const index = read('index.html');
 const familyHtml = read('family-storybook.html');
 const familyJs = read('js/family-storybook.js');
 
-assert.match(index, /id="btn-topics-four-panel"/, '中文主題頁要有四格講故事入口');
-assert.match(index, /four-panel-story\.html/, '入口要連去獨立頁');
+assert.doesNotMatch(index, /id="btn-topics-four-panel"|four-panel-story\.html/, '四格講故事由常識的面試四格承接，不再重複佔中文入口');
 assert.doesNotMatch(familyHtml, /四格講故事/, '唔好混入中文故事填空頁');
 assert.doesNotMatch(familyJs, /MediaRecorder|getUserMedia/, '填空故事唔好錄音');
 
