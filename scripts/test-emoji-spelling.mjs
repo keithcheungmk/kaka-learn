@@ -23,7 +23,7 @@ function assertArtwork(emoji, asset, label) {
 }
 assert.equal(topics.length, 32, '所有有圖像的 Phonics 主題及節日子主題納入題庫');
 assert.equal(topics.reduce((sum, topic) => sum + topic.words.length, 0), 333, '全部 333 個現有圖詞納入題庫');
-assert.equal(topics.flatMap(topic => topic.words).filter(word => word.phonicsChunks.length).length, 113, '113 個詞有保守音塊配置');
+assert.equal(topics.flatMap(topic => topic.words).filter(word => word.phonicsChunks.length).length, 112, '112 個詞有保守音塊配置');
 assert.equal(topics.some((topic) => topic.id === 'letters_rev'), false, '獨立字母音練習不混入詞語拼字遊戲');
 
 for (const topic of topics) {
@@ -37,8 +37,8 @@ for (const topic of topics) {
     if (word.phonicsChunks.length && !word.phonicsLabels) assert.equal(word.phonicsChunks.map(chunk => chunk.replace(/^oo-(long|short)$/, 'oo')).join(''), word.word.toLowerCase().replace(/[^a-z]/g, ''), `${word.word} 音塊與拼字一致`);
     if (word.phonicsLabels) {
       assert.equal(word.phonicsLabels.length, word.phonicsChunks.length, `${word.word} 每個字形有一個音`);
-      const written = [...word.phonicsLabels].join('');
-      assert.equal(written.replace(/_e/g, '') + (written.includes('_e') ? 'e' : ''), word.word.toLowerCase().replace(/[^a-z]/g, ''), `${word.word} 音塊字形與拼字一致`);
+      const written = [...word.phonicsLabels].join('') + (word.phonicsNotes.includes('e 不發音') ? 'e' : '');
+      assert.equal(written, word.word.toLowerCase().replace(/[^a-z]/g, ''), `${word.word} 按字形次序顯示可發音字母及靜音 e`);
     }
   }
   const seen = new Set();
@@ -125,9 +125,11 @@ assert.deepEqual([...topics.find(topic => topic.id === 'sight_food').words.find(
 assert.deepEqual([...topics.find(topic => topic.id === 'sight_food').words.find(word => word.word === 'rice').phonicsChunks], ['r', 'ice']);
 assert.equal(topics.find(topic => topic.id === 'sight_toys').words.find(word => word.word === 'ball').phonicsChunks.length, 0, 'ball 不用錯誤短 a 硬拆');
 assert.deepEqual([...topics.find(topic => topic.id === 'sight_food').words.find(word => word.word === 'cake').phonicsChunks], ['c', 'ai', 'k']);
-assert.deepEqual([...topics.find(topic => topic.id === 'sight_food').words.find(word => word.word === 'cake').phonicsLabels], ['c', 'a_e', 'k']);
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_food').words.find(word => word.word === 'cake').phonicsLabels], ['c', 'a', 'k']);
 assert.deepEqual([...topics.find(topic => topic.id === 'sight_places').words.find(word => word.word === 'home').phonicsChunks], ['h', 'oa', 'm']);
-assert.deepEqual([...topics.find(topic => topic.id === 'sight_places').words.find(word => word.word === 'home').phonicsLabels], ['h', 'o_e', 'm']);
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_places').words.find(word => word.word === 'home').phonicsLabels], ['h', 'o', 'm']);
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_places').words.find(word => word.word === 'home').phonicsNotes], ['e 不發音']);
+assert.deepEqual([...topics.find(topic => topic.id === 'festival_halloween').words.find(word => word.word === 'mask').phonicsChunks], []);
 assert.deepEqual([...topics.find(topic => topic.id === 'sight_numbers').words.find(word => word.word === 'two').phonicsChunks], [], 'two 不可漏掉 w 或假裝係規則拼讀');
 assert.deepEqual([...topics.find(topic => topic.id === 'sight_numbers').words.find(word => word.word === 'nine').phonicsChunks], [], 'nine 的 i_e 跨越內部 n，不能直接排成獨立 grapheme tiles');
 const wordById = (topic, sourceId) => topics.find(item => item.id === topic).words.find(word => word.sourceId === sourceId);

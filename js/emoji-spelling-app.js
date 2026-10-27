@@ -361,7 +361,8 @@
     const repeatWord = () => sayThen(target.word, praise);
     sayThen(target.word, () => {
       if (!target.phonicsChunks.length) return repeatWord();
-      feedback.textContent = `聽音塊：${(target.phonicsLabels || target.phonicsChunks.map(chunk => chunk.replace(/^oo-(?:long|short)$/, 'oo'))).join(' · ')}`;
+      const notes = target.phonicsNotes?.length ? `（${target.phonicsNotes.join('；')}）` : '';
+      feedback.textContent = `聽音塊：${(target.phonicsLabels || target.phonicsChunks.map(chunk => chunk.replace(/^oo-(?:long|short)$/, 'oo'))).join(' · ')}${notes}`;
       sounds.playPhonics(target.phonicsChunks, { muted: muted() }).then(() => {
         if (token === roundToken) repeatWord();
       });
