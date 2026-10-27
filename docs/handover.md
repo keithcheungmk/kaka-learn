@@ -114,7 +114,8 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 - 中文揀主題移除重疊的「四格講故事」捷徑，保留《卡卡日記故事》、卡卡學寫字、認字遊戲三個較大的入口；面試四格仍由常識樂園進入。
 - 認字遊戲入口改為清楚的漢字＋配圖線索，分類牆移到獨立認字分類畫面；返回會回到中文入口。寫字入口封面換成卡卡與禧禧寫字的插圖。
 - 更新 `AGENTS.md`、入口版面／導覽、QA 與 smoke selectors；自動檢查通過。受本機 sandbox 禁止開 HTTP server 影響，未完成瀏覽器／iPad 實機視覺驗收。
-- 已在本機 `main` 快進合併；尚未 push 或部署。工作樹以外原有未提交變更保持不動。
+- `c2b8840` 已快進合併並推送至 `main`；CI #762 與 Pages #455 通過，iPad Pro 11 直／橫及 iPhone 16 Pro Max smoke 全綠，公開首頁已確認更新。未做實機 iPad 人眼驗收。
+- 嘗試關閉 12 個 2026-10-07 或更早的舊 PR，GitHub connector 全部回覆 403 `Resource not accessible by integration`；PR 及分支仍保留，需有可寫 PR 權限時再收起。
 
 ### 2026-10-26 · Cursor Chief Lead（四格圖卡 contain，唔再裁頭／遮 #185）
 
