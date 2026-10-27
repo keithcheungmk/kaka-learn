@@ -1,0 +1,3775 @@
+{
+  "title": "Emoji Spelling remaining-topic phonics audit",
+  "date": "2026-10-28",
+  "scope": {
+    "excludedTopics": [
+      "sight_food",
+      "sight_veg",
+      "sight_fruit",
+      "sight_vehicles"
+    ],
+    "leafTopicCount": 28,
+    "itemCount": 293,
+    "clipsAudiblyVerified": false,
+    "repositoryFilesModified": false,
+    "deployed": false
+  },
+  "assetCheck": {
+    "existingMp3Count": 50,
+    "pairsRequireSoundAssetFile": true,
+    "allCandidatesHaveAssets": true,
+    "note": "Asset filenames were checked only. No clip was listened to; candidates remain provisional until the sound and blending are audited."
+  },
+  "summary": {
+    "candidateCount": 94,
+    "rejectedCount": 199,
+    "clipsAudiblyVerifiedCount": 0,
+    "byTopic": {
+      "animal_spelling": {
+        "audited": 20,
+        "candidates": 12,
+        "rejected": 8
+      },
+      "sight_places": {
+        "audited": 10,
+        "candidates": 5,
+        "rejected": 5
+      },
+      "sight_household": {
+        "audited": 10,
+        "candidates": 6,
+        "rejected": 4
+      },
+      "sight_school_items": {
+        "audited": 10,
+        "candidates": 3,
+        "rejected": 7
+      },
+      "festival_christmas": {
+        "audited": 10,
+        "candidates": 2,
+        "rejected": 8
+      },
+      "festival_lunar_new_year": {
+        "audited": 10,
+        "candidates": 1,
+        "rejected": 9
+      },
+      "festival_mid_autumn": {
+        "audited": 10,
+        "candidates": 0,
+        "rejected": 10
+      },
+      "festival_dragon_boat": {
+        "audited": 10,
+        "candidates": 1,
+        "rejected": 9
+      },
+      "festival_halloween": {
+        "audited": 10,
+        "candidates": 2,
+        "rejected": 8
+      },
+      "sight_jobs_nearby": {
+        "audited": 25,
+        "candidates": 2,
+        "rejected": 23
+      },
+      "sight_jobs_world": {
+        "audited": 20,
+        "candidates": 0,
+        "rejected": 20
+      },
+      "sight_body": {
+        "audited": 12,
+        "candidates": 5,
+        "rejected": 7
+      },
+      "sight_feelings": {
+        "audited": 12,
+        "candidates": 3,
+        "rejected": 9
+      },
+      "sight_clothes": {
+        "audited": 12,
+        "candidates": 3,
+        "rejected": 9
+      },
+      "sight_family_people": {
+        "audited": 12,
+        "candidates": 0,
+        "rejected": 12
+      },
+      "sight_weather": {
+        "audited": 12,
+        "candidates": 2,
+        "rejected": 10
+      },
+      "sight_colors": {
+        "audited": 12,
+        "candidates": 4,
+        "rejected": 8
+      },
+      "sight_numbers": {
+        "audited": 12,
+        "candidates": 6,
+        "rejected": 6
+      },
+      "sight_shapes": {
+        "audited": 12,
+        "candidates": 1,
+        "rejected": 11
+      },
+      "sight_toys": {
+        "audited": 12,
+        "candidates": 5,
+        "rejected": 7
+      },
+      "sight_actions": {
+        "audited": 12,
+        "candidates": 6,
+        "rejected": 6
+      },
+      "cvc_at": {
+        "audited": 5,
+        "candidates": 3,
+        "rejected": 2
+      },
+      "cvc_an": {
+        "audited": 5,
+        "candidates": 4,
+        "rejected": 1
+      },
+      "cvc_ap": {
+        "audited": 4,
+        "candidates": 4,
+        "rejected": 0
+      },
+      "cvc_in": {
+        "audited": 4,
+        "candidates": 4,
+        "rejected": 0
+      },
+      "cvc_ig": {
+        "audited": 4,
+        "candidates": 4,
+        "rejected": 0
+      },
+      "cvc_ot": {
+        "audited": 3,
+        "candidates": 3,
+        "rejected": 0
+      },
+      "cvc_og": {
+        "audited": 3,
+        "candidates": 3,
+        "rejected": 0
+      }
+    }
+  },
+  "items": [
+    {
+      "sourceId": "animal_cat",
+      "topicId": "animal_spelling",
+      "word": "cat",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "animal_dog",
+      "topicId": "animal_spelling",
+      "word": "dog",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "animal_pig",
+      "topicId": "animal_spelling",
+      "word": "pig",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "animal_hen",
+      "topicId": "animal_spelling",
+      "word": "hen",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "h",
+          "soundAsset": "h"
+        },
+        {
+          "grapheme": "e",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "animal_fox",
+      "topicId": "animal_spelling",
+      "word": "fox",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "f",
+          "soundAsset": "f"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "x",
+          "soundAsset": "x"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "animal_bat",
+      "topicId": "animal_spelling",
+      "word": "bat",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "animal_rat",
+      "topicId": "animal_spelling",
+      "word": "rat",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "animal_fish",
+      "topicId": "animal_spelling",
+      "word": "fish",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "f",
+          "soundAsset": "f"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "sh",
+          "soundAsset": "sh"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "animal_frog",
+      "topicId": "animal_spelling",
+      "word": "frog",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "animal_duck",
+      "topicId": "animal_spelling",
+      "word": "duck",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        },
+        {
+          "grapheme": "u",
+          "soundAsset": "u"
+        },
+        {
+          "grapheme": "ck",
+          "soundAsset": "ck"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "animal_cow",
+      "topicId": "animal_spelling",
+      "word": "cow",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "animal_owl",
+      "topicId": "animal_spelling",
+      "word": "owl",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "animal_ant",
+      "topicId": "animal_spelling",
+      "word": "ant",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "animal_bee",
+      "topicId": "animal_spelling",
+      "word": "bee",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "ee",
+          "soundAsset": "ee"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "animal_goat",
+      "topicId": "animal_spelling",
+      "word": "goat",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        },
+        {
+          "grapheme": "oa",
+          "soundAsset": "oa"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "animal_lion",
+      "topicId": "animal_spelling",
+      "word": "lion",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "animal_bear",
+      "topicId": "animal_spelling",
+      "word": "bear",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "animal_snail",
+      "topicId": "animal_spelling",
+      "word": "snail",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "ai",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "animal_zebra",
+      "topicId": "animal_spelling",
+      "word": "zebra",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "animal_monkey",
+      "topicId": "animal_spelling",
+      "word": "monkey",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_places_0",
+      "topicId": "sight_places",
+      "word": "home",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "h",
+          "soundAsset": "h"
+        },
+        {
+          "grapheme": "o_e",
+          "soundAsset": "oa"
+        },
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Final e is silent; o_e maps to the existing /əʊ/ oa clip."
+      ]
+    },
+    {
+      "sourceId": "sight_places_1",
+      "topicId": "sight_places",
+      "word": "school",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "sight_places_2",
+      "topicId": "sight_places",
+      "word": "park",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_places_3",
+      "topicId": "sight_places",
+      "word": "shop",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "sh",
+          "soundAsset": "sh"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_places_4",
+      "topicId": "sight_places",
+      "word": "hospital",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_places_5",
+      "topicId": "sight_places",
+      "word": "library",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_places_6",
+      "topicId": "sight_places",
+      "word": "pool",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "oo",
+          "soundAsset": "oo-long"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_places_7",
+      "topicId": "sight_places",
+      "word": "beach",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "ea",
+          "soundAsset": "ee"
+        },
+        {
+          "grapheme": "ch",
+          "soundAsset": "ch"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_places_8",
+      "topicId": "sight_places",
+      "word": "zoo",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "z",
+          "soundAsset": "z"
+        },
+        {
+          "grapheme": "oo",
+          "soundAsset": "oo-long"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_places_9",
+      "topicId": "sight_places",
+      "word": "classroom",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_household_0",
+      "topicId": "sight_household",
+      "word": "bed",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "e",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_household_1",
+      "topicId": "sight_household",
+      "word": "sofa",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_household_2",
+      "topicId": "sight_household",
+      "word": "table",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_household_3",
+      "topicId": "sight_household",
+      "word": "chair",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_household_4",
+      "topicId": "sight_household",
+      "word": "lamp",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        },
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_household_5",
+      "topicId": "sight_household",
+      "word": "clock",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "ck",
+          "soundAsset": "ck"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_household_6",
+      "topicId": "sight_household",
+      "word": "cup",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "u",
+          "soundAsset": "u"
+        },
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_household_7",
+      "topicId": "sight_household",
+      "word": "plate",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "a_e",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Final e is silent; a_e maps to the existing /eɪ/ ai clip."
+      ]
+    },
+    {
+      "sourceId": "sight_household_8",
+      "topicId": "sight_household",
+      "word": "spoon",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "oo",
+          "soundAsset": "oo-long"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_household_9",
+      "topicId": "sight_household",
+      "word": "towel",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "sight_school_items_0",
+      "topicId": "sight_school_items",
+      "word": "book",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "oo",
+          "soundAsset": "oo-short"
+        },
+        {
+          "grapheme": "k",
+          "soundAsset": "k"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_school_items_1",
+      "topicId": "sight_school_items",
+      "word": "bag",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_school_items_2",
+      "topicId": "sight_school_items",
+      "word": "pen",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "e",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_school_items_3",
+      "topicId": "sight_school_items",
+      "word": "pencil",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_school_items_4",
+      "topicId": "sight_school_items",
+      "word": "ruler",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_school_items_5",
+      "topicId": "sight_school_items",
+      "word": "eraser",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_school_items_6",
+      "topicId": "sight_school_items",
+      "word": "crayon",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_school_items_7",
+      "topicId": "sight_school_items",
+      "word": "paper",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_school_items_8",
+      "topicId": "sight_school_items",
+      "word": "glue",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_school_items_9",
+      "topicId": "sight_school_items",
+      "word": "scissors",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_christmas_0",
+      "topicId": "festival_christmas",
+      "word": "Santa Claus",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "festival_christmas_1",
+      "topicId": "festival_christmas",
+      "word": "reindeer",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_christmas_2",
+      "topicId": "festival_christmas",
+      "word": "sleigh",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "festival_christmas_3",
+      "topicId": "festival_christmas",
+      "word": "stocking",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "festival_christmas_4",
+      "topicId": "festival_christmas",
+      "word": "present",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_christmas_5",
+      "topicId": "festival_christmas",
+      "word": "tree",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_christmas_6",
+      "topicId": "festival_christmas",
+      "word": "ornament",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_christmas_7",
+      "topicId": "festival_christmas",
+      "word": "gingerbread",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_christmas_8",
+      "topicId": "festival_christmas",
+      "word": "snowman",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "ow",
+          "soundAsset": "oa"
+        },
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Word-specific mapping: ow in snow is /əʊ/ and is paired to the existing oa clip; do not generalize to ow in cow."
+      ]
+    },
+    {
+      "sourceId": "festival_christmas_9",
+      "topicId": "festival_christmas",
+      "word": "bell",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "e",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "ll",
+          "soundAsset": "ll"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "festival_lunar_new_year_0",
+      "topicId": "festival_lunar_new_year",
+      "word": "red packet",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "festival_lunar_new_year_1",
+      "topicId": "festival_lunar_new_year",
+      "word": "lion dance",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "festival_lunar_new_year_2",
+      "topicId": "festival_lunar_new_year",
+      "word": "firecracker",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_lunar_new_year_3",
+      "topicId": "festival_lunar_new_year",
+      "word": "tangerine",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_lunar_new_year_4",
+      "topicId": "festival_lunar_new_year",
+      "word": "blossom",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "festival_lunar_new_year_5",
+      "topicId": "festival_lunar_new_year",
+      "word": "couplet",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "festival_lunar_new_year_6",
+      "topicId": "festival_lunar_new_year",
+      "word": "lucky",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "festival_lunar_new_year_7",
+      "topicId": "festival_lunar_new_year",
+      "word": "family",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "festival_lunar_new_year_8",
+      "topicId": "festival_lunar_new_year",
+      "word": "feast",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "f",
+          "soundAsset": "f"
+        },
+        {
+          "grapheme": "ea",
+          "soundAsset": "ee"
+        },
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "festival_lunar_new_year_9",
+      "topicId": "festival_lunar_new_year",
+      "word": "New Year",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "festival_mid_autumn_0",
+      "topicId": "festival_mid_autumn",
+      "word": "mooncake",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "festival_mid_autumn_1",
+      "topicId": "festival_mid_autumn",
+      "word": "moon",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "festival_mid_autumn_2",
+      "topicId": "festival_mid_autumn",
+      "word": "rabbit",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_mid_autumn_3",
+      "topicId": "festival_mid_autumn",
+      "word": "lantern",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_mid_autumn_4",
+      "topicId": "festival_mid_autumn",
+      "word": "pomelo",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "festival_mid_autumn_5",
+      "topicId": "festival_mid_autumn",
+      "word": "tea",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "festival_mid_autumn_6",
+      "topicId": "festival_mid_autumn",
+      "word": "cloud",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "festival_mid_autumn_7",
+      "topicId": "festival_mid_autumn",
+      "word": "sky",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "festival_mid_autumn_8",
+      "topicId": "festival_mid_autumn",
+      "word": "night",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "festival_mid_autumn_9",
+      "topicId": "festival_mid_autumn",
+      "word": "harvest",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_dragon_boat_0",
+      "topicId": "festival_dragon_boat",
+      "word": "dragon boat",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "festival_dragon_boat_1",
+      "topicId": "festival_dragon_boat",
+      "word": "dumpling",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "festival_dragon_boat_2",
+      "topicId": "festival_dragon_boat",
+      "word": "paddle",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "festival_dragon_boat_3",
+      "topicId": "festival_dragon_boat",
+      "word": "race",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_dragon_boat_4",
+      "topicId": "festival_dragon_boat",
+      "word": "river",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_dragon_boat_5",
+      "topicId": "festival_dragon_boat",
+      "word": "team",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "ea",
+          "soundAsset": "ee"
+        },
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "festival_dragon_boat_6",
+      "topicId": "festival_dragon_boat",
+      "word": "drum",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_dragon_boat_7",
+      "topicId": "festival_dragon_boat",
+      "word": "flag",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "festival_dragon_boat_8",
+      "topicId": "festival_dragon_boat",
+      "word": "water",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_dragon_boat_9",
+      "topicId": "festival_dragon_boat",
+      "word": "winner",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_halloween_0",
+      "topicId": "festival_halloween",
+      "word": "pumpkin",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "festival_halloween_1",
+      "topicId": "festival_halloween",
+      "word": "costume",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "festival_halloween_2",
+      "topicId": "festival_halloween",
+      "word": "witch",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "festival_halloween_3",
+      "topicId": "festival_halloween",
+      "word": "ghost",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "festival_halloween_4",
+      "topicId": "festival_halloween",
+      "word": "spider",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_halloween_5",
+      "topicId": "festival_halloween",
+      "word": "bat",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "festival_halloween_6",
+      "topicId": "festival_halloween",
+      "word": "candy",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "festival_halloween_7",
+      "topicId": "festival_halloween",
+      "word": "mask",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "k",
+          "soundAsset": "k"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "festival_halloween_8",
+      "topicId": "festival_halloween",
+      "word": "trick",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "festival_halloween_9",
+      "topicId": "festival_halloween",
+      "word": "treat",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_0",
+      "topicId": "sight_jobs_nearby",
+      "word": "doctor",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_1",
+      "topicId": "sight_jobs_nearby",
+      "word": "nurse",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_2",
+      "topicId": "sight_jobs_nearby",
+      "word": "teacher",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_3",
+      "topicId": "sight_jobs_nearby",
+      "word": "principal",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_4",
+      "topicId": "sight_jobs_nearby",
+      "word": "firefighter",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_5",
+      "topicId": "sight_jobs_nearby",
+      "word": "police officer",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_6",
+      "topicId": "sight_jobs_nearby",
+      "word": "paramedic",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_7",
+      "topicId": "sight_jobs_nearby",
+      "word": "dentist",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        },
+        {
+          "grapheme": "e",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_jobs_nearby_8",
+      "topicId": "sight_jobs_nearby",
+      "word": "pharmacist",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_9",
+      "topicId": "sight_jobs_nearby",
+      "word": "hairdresser",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_10",
+      "topicId": "sight_jobs_nearby",
+      "word": "shop assistant",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_11",
+      "topicId": "sight_jobs_nearby",
+      "word": "cashier",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_12",
+      "topicId": "sight_jobs_nearby",
+      "word": "security guard",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_13",
+      "topicId": "sight_jobs_nearby",
+      "word": "cleaner",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_14",
+      "topicId": "sight_jobs_nearby",
+      "word": "domestic helper",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_15",
+      "topicId": "sight_jobs_nearby",
+      "word": "postman",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_16",
+      "topicId": "sight_jobs_nearby",
+      "word": "delivery worker",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_17",
+      "topicId": "sight_jobs_nearby",
+      "word": "driver",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_18",
+      "topicId": "sight_jobs_nearby",
+      "word": "bus driver",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_19",
+      "topicId": "sight_jobs_nearby",
+      "word": "taxi driver",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_20",
+      "topicId": "sight_jobs_nearby",
+      "word": "waiter",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_21",
+      "topicId": "sight_jobs_nearby",
+      "word": "gardener",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_22",
+      "topicId": "sight_jobs_nearby",
+      "word": "zookeeper",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_nearby_23",
+      "topicId": "sight_jobs_nearby",
+      "word": "vet",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "v",
+          "soundAsset": "v"
+        },
+        {
+          "grapheme": "e",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_jobs_nearby_24",
+      "topicId": "sight_jobs_nearby",
+      "word": "librarian",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_world_0",
+      "topicId": "sight_jobs_world",
+      "word": "chef",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "sight_jobs_world_1",
+      "topicId": "sight_jobs_world",
+      "word": "farmer",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_world_2",
+      "topicId": "sight_jobs_world",
+      "word": "pilot",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_jobs_world_3",
+      "topicId": "sight_jobs_world",
+      "word": "flight attendant",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "sight_jobs_world_4",
+      "topicId": "sight_jobs_world",
+      "word": "astronaut",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_world_5",
+      "topicId": "sight_jobs_world",
+      "word": "scientist",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_jobs_world_6",
+      "topicId": "sight_jobs_world",
+      "word": "artist",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_world_7",
+      "topicId": "sight_jobs_world",
+      "word": "musician",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_jobs_world_8",
+      "topicId": "sight_jobs_world",
+      "word": "athlete",
+      "status": "rejected",
+      "reason": "Contains th, whose voiced/unvoiced value is not confirmed in the project audio standard."
+    },
+    {
+      "sourceId": "sight_jobs_world_9",
+      "topicId": "sight_jobs_world",
+      "word": "actor",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_world_10",
+      "topicId": "sight_jobs_world",
+      "word": "reporter",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_world_11",
+      "topicId": "sight_jobs_world",
+      "word": "builder",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_world_12",
+      "topicId": "sight_jobs_world",
+      "word": "engineer",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_world_13",
+      "topicId": "sight_jobs_world",
+      "word": "ship captain",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "sight_jobs_world_14",
+      "topicId": "sight_jobs_world",
+      "word": "fisherman",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_world_15",
+      "topicId": "sight_jobs_world",
+      "word": "lifeguard",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_world_16",
+      "topicId": "sight_jobs_world",
+      "word": "photographer",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_world_17",
+      "topicId": "sight_jobs_world",
+      "word": "soldier",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_jobs_world_18",
+      "topicId": "sight_jobs_world",
+      "word": "environmental officer",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "sight_jobs_world_19",
+      "topicId": "sight_jobs_world",
+      "word": "medical sales representative",
+      "status": "rejected",
+      "reason": "Multiword phrase: word boundaries and stress need separate validated mappings; do not flatten into one phoneme sequence."
+    },
+    {
+      "sourceId": "sight_body_0",
+      "topicId": "sight_body",
+      "word": "eye",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_body_1",
+      "topicId": "sight_body",
+      "word": "ear",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_body_2",
+      "topicId": "sight_body",
+      "word": "nose",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "o_e",
+          "soundAsset": "oa"
+        },
+        {
+          "grapheme": "s (voiced)",
+          "soundAsset": "z"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Final e is silent; o_e maps to /əʊ/. Final s is voiced /z/, so use z clip."
+      ]
+    },
+    {
+      "sourceId": "sight_body_3",
+      "topicId": "sight_body",
+      "word": "mouth",
+      "status": "rejected",
+      "reason": "Contains th, whose voiced/unvoiced value is not confirmed in the project audio standard."
+    },
+    {
+      "sourceId": "sight_body_4",
+      "topicId": "sight_body",
+      "word": "head",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "h",
+          "soundAsset": "h"
+        },
+        {
+          "grapheme": "ea",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Word-specific alternate mapping: ea represents /ɛ/ and pairs with e clip."
+      ]
+    },
+    {
+      "sourceId": "sight_body_5",
+      "topicId": "sight_body",
+      "word": "hair",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_body_6",
+      "topicId": "sight_body",
+      "word": "face",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_body_7",
+      "topicId": "sight_body",
+      "word": "hand",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "h",
+          "soundAsset": "h"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_body_8",
+      "topicId": "sight_body",
+      "word": "arm",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_body_9",
+      "topicId": "sight_body",
+      "word": "leg",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "e",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_body_10",
+      "topicId": "sight_body",
+      "word": "foot",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "f",
+          "soundAsset": "f"
+        },
+        {
+          "grapheme": "oo",
+          "soundAsset": "oo-short"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_body_11",
+      "topicId": "sight_body",
+      "word": "tooth",
+      "status": "rejected",
+      "reason": "Contains th, whose voiced/unvoiced value is not confirmed in the project audio standard."
+    },
+    {
+      "sourceId": "sight_feelings_0",
+      "topicId": "sight_feelings",
+      "word": "happy",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "sight_feelings_1",
+      "topicId": "sight_feelings",
+      "word": "sad",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_feelings_2",
+      "topicId": "sight_feelings",
+      "word": "angry",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_feelings_3",
+      "topicId": "sight_feelings",
+      "word": "scared",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_feelings_4",
+      "topicId": "sight_feelings",
+      "word": "excited",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_feelings_5",
+      "topicId": "sight_feelings",
+      "word": "shy",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "sight_feelings_6",
+      "topicId": "sight_feelings",
+      "word": "tired",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_feelings_7",
+      "topicId": "sight_feelings",
+      "word": "hungry",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_feelings_8",
+      "topicId": "sight_feelings",
+      "word": "thirsty",
+      "status": "rejected",
+      "reason": "Contains th, whose voiced/unvoiced value is not confirmed in the project audio standard."
+    },
+    {
+      "sourceId": "sight_feelings_9",
+      "topicId": "sight_feelings",
+      "word": "hot",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "h",
+          "soundAsset": "h"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_feelings_10",
+      "topicId": "sight_feelings",
+      "word": "cold",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "o (in -old)",
+          "soundAsset": "oa"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Word-specific mapping: o in -old represents /əʊ/ and pairs with oa clip."
+      ]
+    },
+    {
+      "sourceId": "sight_feelings_11",
+      "topicId": "sight_feelings",
+      "word": "hurt",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_clothes_0",
+      "topicId": "sight_clothes",
+      "word": "shirt",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_clothes_1",
+      "topicId": "sight_clothes",
+      "word": "pants",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "sight_clothes_2",
+      "topicId": "sight_clothes",
+      "word": "dress",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_clothes_3",
+      "topicId": "sight_clothes",
+      "word": "skirt",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_clothes_4",
+      "topicId": "sight_clothes",
+      "word": "shoes",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_clothes_5",
+      "topicId": "sight_clothes",
+      "word": "socks",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "ck",
+          "soundAsset": "ck"
+        },
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_clothes_6",
+      "topicId": "sight_clothes",
+      "word": "hat",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "h",
+          "soundAsset": "h"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_clothes_7",
+      "topicId": "sight_clothes",
+      "word": "coat",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "oa",
+          "soundAsset": "oa"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_clothes_8",
+      "topicId": "sight_clothes",
+      "word": "jacket",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_clothes_9",
+      "topicId": "sight_clothes",
+      "word": "scarf",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_clothes_10",
+      "topicId": "sight_clothes",
+      "word": "gloves",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_clothes_11",
+      "topicId": "sight_clothes",
+      "word": "shorts",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_family_people_0",
+      "topicId": "sight_family_people",
+      "word": "father",
+      "status": "rejected",
+      "reason": "Contains th, whose voiced/unvoiced value is not confirmed in the project audio standard."
+    },
+    {
+      "sourceId": "sight_family_people_1",
+      "topicId": "sight_family_people",
+      "word": "mother",
+      "status": "rejected",
+      "reason": "Contains th, whose voiced/unvoiced value is not confirmed in the project audio standard."
+    },
+    {
+      "sourceId": "sight_family_people_2",
+      "topicId": "sight_family_people",
+      "word": "brother",
+      "status": "rejected",
+      "reason": "Contains th, whose voiced/unvoiced value is not confirmed in the project audio standard."
+    },
+    {
+      "sourceId": "sight_family_people_3",
+      "topicId": "sight_family_people",
+      "word": "sister",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_family_people_4",
+      "topicId": "sight_family_people",
+      "word": "baby",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "sight_family_people_5",
+      "topicId": "sight_family_people",
+      "word": "grandfather",
+      "status": "rejected",
+      "reason": "Contains th, whose voiced/unvoiced value is not confirmed in the project audio standard."
+    },
+    {
+      "sourceId": "sight_family_people_6",
+      "topicId": "sight_family_people",
+      "word": "grandmother",
+      "status": "rejected",
+      "reason": "Contains th, whose voiced/unvoiced value is not confirmed in the project audio standard."
+    },
+    {
+      "sourceId": "sight_family_people_7",
+      "topicId": "sight_family_people",
+      "word": "aunt",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_family_people_8",
+      "topicId": "sight_family_people",
+      "word": "uncle",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_family_people_9",
+      "topicId": "sight_family_people",
+      "word": "friend",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_family_people_10",
+      "topicId": "sight_family_people",
+      "word": "teacher",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_family_people_11",
+      "topicId": "sight_family_people",
+      "word": "classmate",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_weather_0",
+      "topicId": "sight_weather",
+      "word": "sunny",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "sight_weather_1",
+      "topicId": "sight_weather",
+      "word": "cloudy",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "sight_weather_2",
+      "topicId": "sight_weather",
+      "word": "rainy",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_weather_3",
+      "topicId": "sight_weather",
+      "word": "windy",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "sight_weather_4",
+      "topicId": "sight_weather",
+      "word": "stormy",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_weather_5",
+      "topicId": "sight_weather",
+      "word": "hot",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "h",
+          "soundAsset": "h"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_weather_6",
+      "topicId": "sight_weather",
+      "word": "cold",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "o (in -old)",
+          "soundAsset": "oa"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Word-specific mapping: o in -old represents /əʊ/ and pairs with oa clip."
+      ]
+    },
+    {
+      "sourceId": "sight_weather_7",
+      "topicId": "sight_weather",
+      "word": "snowy",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "sight_weather_8",
+      "topicId": "sight_weather",
+      "word": "rain",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_weather_9",
+      "topicId": "sight_weather",
+      "word": "snow",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "sight_weather_10",
+      "topicId": "sight_weather",
+      "word": "rainbow",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_weather_11",
+      "topicId": "sight_weather",
+      "word": "umbrella",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_colors_0",
+      "topicId": "sight_colors",
+      "word": "red",
+      "status": "rejected",
+      "reason": "Contains /r/; although the UK word-level onset is straightforward, the project standard requires human review of the British r recording before using that clip."
+    },
+    {
+      "sourceId": "sight_colors_1",
+      "topicId": "sight_colors",
+      "word": "blue",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "ue",
+          "soundAsset": "oo-long"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "The ue spelling represents /uː/ and pairs with oo-long."
+      ]
+    },
+    {
+      "sourceId": "sight_colors_2",
+      "topicId": "sight_colors",
+      "word": "yellow",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "sight_colors_3",
+      "topicId": "sight_colors",
+      "word": "green",
+      "status": "rejected",
+      "reason": "Contains /r/; although the UK word-level onset is straightforward, the project standard requires human review of the British r recording before using that clip."
+    },
+    {
+      "sourceId": "sight_colors_4",
+      "topicId": "sight_colors",
+      "word": "orange",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_colors_5",
+      "topicId": "sight_colors",
+      "word": "purple",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_colors_6",
+      "topicId": "sight_colors",
+      "word": "pink",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "sight_colors_7",
+      "topicId": "sight_colors",
+      "word": "black",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "ck",
+          "soundAsset": "ck"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_colors_8",
+      "topicId": "sight_colors",
+      "word": "white",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "wh",
+          "soundAsset": "w"
+        },
+        {
+          "grapheme": "i_e",
+          "soundAsset": "igh"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "wh represents /w/; final e is silent and i_e represents /aɪ/."
+      ]
+    },
+    {
+      "sourceId": "sight_colors_9",
+      "topicId": "sight_colors",
+      "word": "brown",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_colors_10",
+      "topicId": "sight_colors",
+      "word": "grey",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_colors_11",
+      "topicId": "sight_colors",
+      "word": "gold",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "oa"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Word-specific mapping: o in -old represents /əʊ/ and pairs with oa."
+      ]
+    },
+    {
+      "sourceId": "sight_numbers_0",
+      "topicId": "sight_numbers",
+      "word": "one",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_numbers_1",
+      "topicId": "sight_numbers",
+      "word": "two",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "oo-long"
+        }
+      ],
+      "silentLetters": [
+        "w"
+      ],
+      "caveats": [
+        "The w is silent; o represents /uː/ and pairs with oo-long."
+      ]
+    },
+    {
+      "sourceId": "sight_numbers_2",
+      "topicId": "sight_numbers",
+      "word": "three",
+      "status": "rejected",
+      "reason": "Contains th, whose voiced/unvoiced value is not confirmed in the project audio standard."
+    },
+    {
+      "sourceId": "sight_numbers_3",
+      "topicId": "sight_numbers",
+      "word": "four",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_numbers_4",
+      "topicId": "sight_numbers",
+      "word": "five",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "f",
+          "soundAsset": "f"
+        },
+        {
+          "grapheme": "i_e",
+          "soundAsset": "igh"
+        },
+        {
+          "grapheme": "v",
+          "soundAsset": "v"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Final e is silent; i_e represents /aɪ/ and pairs with igh."
+      ]
+    },
+    {
+      "sourceId": "sight_numbers_5",
+      "topicId": "sight_numbers",
+      "word": "six",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "x",
+          "soundAsset": "x"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_numbers_6",
+      "topicId": "sight_numbers",
+      "word": "seven",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_numbers_7",
+      "topicId": "sight_numbers",
+      "word": "eight",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "eigh",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "The full grapheme eigh represents /eɪ/ and pairs with ai."
+      ]
+    },
+    {
+      "sourceId": "sight_numbers_8",
+      "topicId": "sight_numbers",
+      "word": "nine",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "i_e",
+          "soundAsset": "igh"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Final e is silent; i_e represents /aɪ/ and pairs with igh."
+      ]
+    },
+    {
+      "sourceId": "sight_numbers_9",
+      "topicId": "sight_numbers",
+      "word": "ten",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "e",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_numbers_10",
+      "topicId": "sight_numbers",
+      "word": "eleven",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_numbers_11",
+      "topicId": "sight_numbers",
+      "word": "twelve",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_shapes_0",
+      "topicId": "sight_shapes",
+      "word": "circle",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_shapes_1",
+      "topicId": "sight_shapes",
+      "word": "square",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_shapes_2",
+      "topicId": "sight_shapes",
+      "word": "triangle",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_shapes_3",
+      "topicId": "sight_shapes",
+      "word": "rectangle",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_shapes_4",
+      "topicId": "sight_shapes",
+      "word": "star",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_shapes_5",
+      "topicId": "sight_shapes",
+      "word": "heart",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_shapes_6",
+      "topicId": "sight_shapes",
+      "word": "oval",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_shapes_7",
+      "topicId": "sight_shapes",
+      "word": "diamond",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_shapes_8",
+      "topicId": "sight_shapes",
+      "word": "cube",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_shapes_9",
+      "topicId": "sight_shapes",
+      "word": "cone",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "o_e",
+          "soundAsset": "oa"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Final e is silent; o_e represents /əʊ/ and pairs with oa."
+      ]
+    },
+    {
+      "sourceId": "sight_shapes_10",
+      "topicId": "sight_shapes",
+      "word": "cylinder",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_shapes_11",
+      "topicId": "sight_shapes",
+      "word": "sphere",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_toys_0",
+      "topicId": "sight_toys",
+      "word": "ball",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "sight_toys_1",
+      "topicId": "sight_toys",
+      "word": "doll",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "ll",
+          "soundAsset": "ll"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_toys_2",
+      "topicId": "sight_toys",
+      "word": "teddy",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "sight_toys_3",
+      "topicId": "sight_toys",
+      "word": "puzzle",
+      "status": "rejected",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+    },
+    {
+      "sourceId": "sight_toys_4",
+      "topicId": "sight_toys",
+      "word": "toy",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "oy",
+          "soundAsset": "oi"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "The oy spelling represents /ɔɪ/ and pairs with oi."
+      ]
+    },
+    {
+      "sourceId": "sight_toys_5",
+      "topicId": "sight_toys",
+      "word": "balloon",
+      "status": "rejected",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+    },
+    {
+      "sourceId": "sight_toys_6",
+      "topicId": "sight_toys",
+      "word": "dice",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        },
+        {
+          "grapheme": "i_e",
+          "soundAsset": "igh"
+        },
+        {
+          "grapheme": "c (before silent e)",
+          "soundAsset": "s"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Final e is silent; c before e represents /s/ and pairs with s."
+      ]
+    },
+    {
+      "sourceId": "sight_toys_7",
+      "topicId": "sight_toys",
+      "word": "target",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_toys_8",
+      "topicId": "sight_toys",
+      "word": "slide",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "i_e",
+          "soundAsset": "igh"
+        },
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Final e is silent; i_e represents /aɪ/ and pairs with igh."
+      ]
+    },
+    {
+      "sourceId": "sight_toys_9",
+      "topicId": "sight_toys",
+      "word": "carousel",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_toys_10",
+      "topicId": "sight_toys",
+      "word": "maracas",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_toys_11",
+      "topicId": "sight_toys",
+      "word": "game",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        },
+        {
+          "grapheme": "a_e",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Final e is silent; a_e represents /eɪ/ and pairs with ai."
+      ]
+    },
+    {
+      "sourceId": "sight_actions_0",
+      "topicId": "sight_actions",
+      "word": "run",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_actions_1",
+      "topicId": "sight_actions",
+      "word": "jump",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "j",
+          "soundAsset": "j"
+        },
+        {
+          "grapheme": "u",
+          "soundAsset": "u"
+        },
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        },
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_actions_2",
+      "topicId": "sight_actions",
+      "word": "walk",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "sight_actions_3",
+      "topicId": "sight_actions",
+      "word": "clap",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_actions_4",
+      "topicId": "sight_actions",
+      "word": "wave",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "w",
+          "soundAsset": "w"
+        },
+        {
+          "grapheme": "a_e",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "v",
+          "soundAsset": "v"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Final e is silent; a_e represents /eɪ/ and pairs with ai."
+      ]
+    },
+    {
+      "sourceId": "sight_actions_5",
+      "topicId": "sight_actions",
+      "word": "swim",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "w",
+          "soundAsset": "w"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_actions_6",
+      "topicId": "sight_actions",
+      "word": "sleep",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "ee",
+          "soundAsset": "ee"
+        },
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_actions_7",
+      "topicId": "sight_actions",
+      "word": "read",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_actions_8",
+      "topicId": "sight_actions",
+      "word": "write",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_actions_9",
+      "topicId": "sight_actions",
+      "word": "draw",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "sight_actions_10",
+      "topicId": "sight_actions",
+      "word": "sing",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "ng",
+          "soundAsset": "ng"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "sight_actions_11",
+      "topicId": "sight_actions",
+      "word": "ride",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "cat",
+      "topicId": "cvc_at",
+      "word": "cat",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "hat",
+      "topicId": "cvc_at",
+      "word": "hat",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "h",
+          "soundAsset": "h"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "bat",
+      "topicId": "cvc_at",
+      "word": "bat",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "rat",
+      "topicId": "cvc_at",
+      "word": "rat",
+      "status": "rejected",
+      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+    },
+    {
+      "sourceId": "mat",
+      "topicId": "cvc_at",
+      "word": "mat",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "can",
+      "topicId": "cvc_an",
+      "word": "can",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "The short-a family context selects /kæn/ rather than weak-form /kən/."
+      ]
+    },
+    {
+      "sourceId": "pan",
+      "topicId": "cvc_an",
+      "word": "pan",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "man",
+      "topicId": "cvc_an",
+      "word": "man",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "van",
+      "topicId": "cvc_an",
+      "word": "van",
+      "status": "rejected",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+    },
+    {
+      "sourceId": "fan",
+      "topicId": "cvc_an",
+      "word": "fan",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "f",
+          "soundAsset": "f"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "cap",
+      "topicId": "cvc_ap",
+      "word": "cap",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "map",
+      "topicId": "cvc_ap",
+      "word": "map",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "tap",
+      "topicId": "cvc_ap",
+      "word": "tap",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "nap",
+      "topicId": "cvc_ap",
+      "word": "nap",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "pin",
+      "topicId": "cvc_in",
+      "word": "pin",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "tin",
+      "topicId": "cvc_in",
+      "word": "tin",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "bin",
+      "topicId": "cvc_in",
+      "word": "bin",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "win",
+      "topicId": "cvc_in",
+      "word": "win",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "w",
+          "soundAsset": "w"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "pig",
+      "topicId": "cvc_ig",
+      "word": "pig",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "dig",
+      "topicId": "cvc_ig",
+      "word": "dig",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "big",
+      "topicId": "cvc_ig",
+      "word": "big",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "wig",
+      "topicId": "cvc_ig",
+      "word": "wig",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "w",
+          "soundAsset": "w"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "pot",
+      "topicId": "cvc_ot",
+      "word": "pot",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "hot",
+      "topicId": "cvc_ot",
+      "word": "hot",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "h",
+          "soundAsset": "h"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "cot",
+      "topicId": "cvc_ot",
+      "word": "cot",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "dog",
+      "topicId": "cvc_og",
+      "word": "dog",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "fog",
+      "topicId": "cvc_og",
+      "word": "fog",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "f",
+          "soundAsset": "f"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    },
+    {
+      "sourceId": "log",
+      "topicId": "cvc_og",
+      "word": "log",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
+    }
+  ]
+}
