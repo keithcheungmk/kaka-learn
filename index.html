@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="./css/additionGame.css?v=4751bde" />
   <link rel="stylesheet" href="./css/playground-theme.css?v=20261006-career-photos" />
   <link rel="stylesheet" href="./css/celebrate-finish.css?v=20261014-celebrate" />
+  <link rel="stylesheet" href="./css/emoji-spelling-reference.css?v=20261027b" />
 </head>
 <body>
   <div id="app">
@@ -476,12 +477,12 @@
             <span class="english-hub-action">去揀故事 →</span>
           </span>
         </button>
-        <button type="button" class="english-hub-card english-hub-words" id="btn-english-words" aria-label="主題詞語 Topic Words：看圖、聽音、認讀完整英文詞">
+        <button type="button" class="english-hub-card english-hub-words" id="btn-english-words" aria-label="圖像拼字 Emoji Spelling：揀主題、看圖聽音、試拼字">
           <img class="english-hub-art" src="assets/english-worlds/topic-words.webp" alt="" aria-hidden="true" width="1254" height="1254" decoding="async">
           <span class="english-hub-card-body">
-            <span class="english-hub-title">主題詞語 <small>Topic Words</small></span>
-            <span class="english-hub-description">看清楚圖像、聽英文讀音，認識一個完整詞語。</span>
-            <span class="english-hub-action">去揀詞語主題 →</span>
+            <span class="english-hub-title">圖像拼字 <small>Emoji Spelling</small></span>
+            <span class="english-hub-description">揀主題、睇圖、聽讀音，逐個字母試拼字。</span>
+            <span class="english-hub-action">去揀拼字主題 →</span>
           </span>
         </button>
         <button type="button" class="english-hub-card english-hub-phonics" id="btn-english-phonics" aria-label="字母音・拼讀 Phonics：聽字母音，把聲音拼成單字">
@@ -509,29 +510,14 @@
     <section id="screen-phonics-topics" class="screen phonics-screen" aria-label="SPACE RANGER ENGLISH・揀學習線">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-phonics-topics">← 英文學習</button>
-        <h1 id="english-topic-screen-title">主題詞語</h1>
+        <h1 id="english-topic-screen-title">圖像拼字</h1>
       </div>
       <div class="english-track english-track-sight">
         <header class="english-track-heading">
           <span class="english-track-kicker">WORD MISSION · 01</span>
-          <h2>Topic Words <small>主題詞語認讀</small></h2>
-          <p>按主題認得完整英文字，再用圖像、聆聽同配對記住意思。</p>
+          <h2>Emoji Spelling <small>圖像拼字</small></h2>
+          <p>揀一個主題，睇圖、聽英文，再一齊試拼字。</p>
         </header>
-        <div class="emoji-spelling-entry">
-          <div class="emoji-spelling-entry-copy">
-            <span class="english-track-kicker">PICTURE SPELLING</span>
-            <h2>Emoji Spelling <small>圖像串字</small></h2>
-            <p>先認識主題詞語，再看圖、聽讀音，逐個字母拼出英文。</p>
-          </div>
-          <button type="button" class="emoji-spelling-launch" id="btn-open-emoji-spelling">
-            <span class="emoji-spelling-launch-art" aria-hidden="true">🍕</span>
-            <span class="emoji-spelling-launch-copy">
-              <strong>開始圖像串字</strong>
-              <small>揀主題・聽詞語・拖拉或點選字母拼字</small>
-            </span>
-            <span class="emoji-spelling-launch-arrow" aria-hidden="true">→</span>
-          </button>
-        </div>
         <div class="topic-grid" id="phonics-sight-grid"></div>
       </div>
       <div class="english-track english-track-phonics">
@@ -577,7 +563,7 @@
         <div class="emoji-spelling-word-grid" id="emoji-spelling-word-grid"></div>
         <div class="emoji-spelling-actions">
           <button type="button" class="btn btn-secondary" id="btn-emoji-spelling-learn-back-bottom">← 主題</button>
-          <button type="button" class="btn btn-accent" id="btn-emoji-spelling-start">開始串字 →</button>
+          <button type="button" class="btn btn-accent" id="btn-emoji-spelling-start">出發挑戰！ 🚀</button>
         </div>
       </div>
 
@@ -587,17 +573,20 @@
           <h1 id="emoji-spelling-play-title">圖像串字</h1>
           <div class="progress-pill"><strong id="emoji-spelling-progress">1 / 10</strong></div>
         </div>
-        <p class="section-lead">看圖、聽讀音，再把字母逐個放進格內。</p>
+        <p class="section-lead">看圖、聽讀音，再試試下一個字母。</p>
         <div class="emoji-spelling-challenge" id="emoji-spelling-challenge">
           <div class="emoji-spelling-picture-row">
             <div class="emoji-spelling-picture" id="emoji-spelling-picture"></div>
-            <button type="button" class="emoji-spelling-speak" id="btn-emoji-spelling-speak" aria-label="再聽一次單字">🔊</button>
+            <button type="button" class="emoji-spelling-speak" id="btn-emoji-spelling-speak" aria-label="再聽一次單字"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm12.5-.9a1 1 0 0 1 1.4 0 5.5 5.5 0 0 1 0 7.8 1 1 0 1 1-1.4-1.4 3.5 3.5 0 0 0 0-5 1 1 0 0 1 0-1.4zm2.8-2.8a1 1 0 0 1 1.4 0 9.5 9.5 0 0 1 0 13.4 1 1 0 0 1-1.4-1.4 7.5 7.5 0 0 0 0-10.6 1 1 0 0 1 0-1.4z"/></svg></button>
+            <button type="button" class="emoji-spelling-phonics" id="btn-emoji-spelling-phonics" hidden>🔊 聽音塊</button>
           </div>
           <div class="emoji-spelling-answer" id="emoji-spelling-answer" aria-label="答案字母位置"></div>
-          <p class="emoji-spelling-instruction">可把下面字母拖入格仔，或逐個點選。</p>
-          <div class="emoji-spelling-letter-pool" id="emoji-spelling-letter-pool" aria-label="字母選擇"></div>
-          <button type="button" class="emoji-spelling-undo" id="btn-emoji-spelling-undo">⌫ 撤回最後一個字母</button>
-          <p class="emoji-spelling-feedback" id="emoji-spelling-feedback" aria-live="polite"></p>
+          <div class="emoji-spelling-pool-panel">
+            <p class="emoji-spelling-instruction">選出正確的字母拼出英文單字！</p>
+            <div class="emoji-spelling-letter-pool" id="emoji-spelling-letter-pool" aria-label="字母選擇"></div>
+            <button type="button" class="emoji-spelling-undo" id="btn-emoji-spelling-undo">⌫ 撤回最後一個字母</button>
+            <p class="emoji-spelling-feedback" id="emoji-spelling-feedback" aria-live="polite"></p>
+          </div>
         </div>
         <div id="emoji-spelling-finish" class="emoji-spelling-finish" role="dialog" aria-modal="true" aria-labelledby="emoji-spelling-finish-title" hidden>
           <div class="emoji-spelling-finish-coin" aria-hidden="true">⭐</div>
@@ -1195,9 +1184,10 @@
   <script src="./js/nav-back.js?v=20261011-one-level"></script>
   <script src="./js/app.js?v=20261007-word-wall"></script>
   <script src="./js/phonics-words.js?v=20260905list"></script>
-  <script src="./js/phonics-app.js?v=20260905list"></script>
-  <script src="./js/emoji-spelling-data.js?v=20261027f"></script>
-  <script src="./js/emoji-spelling-app.js?v=20261027g"></script>
+  <script src="./js/phonics-app.js?v=20261028-emoji-all"></script>
+  <script src="./js/emoji-spelling-sounds.js?v=20261028a"></script>
+  <script src="./js/emoji-spelling-data.js?v=20261028b"></script>
+  <script src="./js/emoji-spelling-app.js?v=20261028a"></script>
   <script src="./data/carter-family-manifest.js?v=20260928cf040"></script>
   <script src="./data/magic-marker-manifest.js?v=20260930-mm002"></script>
   <script src="./data/magic-marker-expansion.js?v=20260930-mm020"></script>

@@ -23,8 +23,8 @@
 
 ### English learning structure
 
-- 主頁只放一個「英文學習・English Learning」入口；入面分為「故事閱讀／Story Reading」、「主題詞語／Topic Words」及「字母音・拼讀／Phonics」三條路線。
-- 「Topic Words」係完整詞語認讀，唔統稱做 Sight Words；Sight Words 只用於真正高頻功能字內容。詞語認讀進度同 Phonics 解碼能力分開記錄。
+- 主頁只放一個「英文學習・English Learning」入口；入面分為「故事閱讀／Story Reading」、「圖像拼字／Emoji Spelling」（主題詞語）及「字母音・拼讀／Phonics」三條路線。
+- 「圖像拼字／Emoji Spelling」以完整詞語配圖、聽音及逐字母拼字；主題詞語唔統稱做 Sight Words。獨立字母音學習仍保留，詞語拼字進度同 Phonics 解碼能力分開記錄。
 - 故事系列（Carter Family、Magic Marker、Wacky Ricky 及日後 Little Fox）共用 Story Reading 入口；唔為同類故事再開主頁捷徑。Space Patrol／Little Fox Pilot 放喺共用入口穩定後第二階段接入。
 - 英文家庭故事（Karl & HeiHei／卡卡和禧禧）喺 Story Reading 系列揀選頁排喺 Wacky Ricky **下面**，同一風格第四張卡，連去 `family-storybook-en.html`。唔好只收喺英文 hub。Little Fox 三張卡同 catalogue 唔改、唔當第四個 Little Fox 系列。系列揀選頁頂欄只留「← 英文學習」＋「英文故事書」＋幣 pill；唔好再寫「選擇故事系列」「Little Fox 系列」或 LITTLE FOX eyebrow。
 - Carter Family、Magic Marker、Wacky Ricky 書架若該集已完成，未撳入去都要顯示 ★ 進度星（封面角標＋標題）；完成以 `kaka-learn-v1` 該小朋友嘅 `passedKeys` 判斷（`story|{bookId}` 或每一頁 `story|{bookId}|page-{n}`）。星只係進度，唔另獎 AEON 幣。

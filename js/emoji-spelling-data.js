@@ -10,13 +10,104 @@
     cvc_og: 'Short O Words · -og',
   };
 
-  // Current English source contains these pictograms without local SVGs.
-  // The renderer uses the device emoji for them instead of requesting a 404.
-  const NATIVE_EMOJI_IDS = new Set([
-    '2603', '1F6F7', '1F9E7', '1F9E8', '1F340', '1F96E', '1F315',
-    '1F407', '1F3EE', '1F375', '1F30C', '1F33E', '1F409', '1F6F6',
-    '1F941', '1F978', '1F9D9', '1F47B', '1FA84', '1F36D',
-  ]);
+  // Conservative sound groups using existing phoneme recordings; other words use whole-word audio.
+  // Recording quality and British accent still require listening review.
+  const WORD_PHONICS = {
+    "animal_cat": ["c", "a", "t"],
+    "animal_dog": ["d", "o", "g"],
+    "animal_pig": ["p", "i", "g"],
+    "animal_hen": ["h", "e", "n"],
+    "animal_fox": ["f", "o", "x"],
+    "animal_bat": ["b", "a", "t"],
+    "animal_fish": ["f", "i", "sh"],
+    "animal_duck": ["d", "u", "ck"],
+    "animal_ant": ["a", "n", "t"],
+    "animal_bee": ["b", "ee"],
+    "animal_goat": ["g", "oa", "t"],
+    "animal_snail": ["s", "n", "ai", "l"],
+    "sight_food_0": ["r", "ice"],
+    "sight_food_2": ["m", "i", "l", "k"],
+    "sight_food_7": ["f", "i", "sh"],
+    "sight_places_3": ["sh", "o", "p"],
+    "sight_places_6": ["p", "oo-long", "l"],
+    "sight_places_8": ["z", "oo-long"],
+    "sight_vehicles_1": ["b", "u", "s"],
+    "sight_vehicles_6": ["v", "a", "n"],
+    "sight_household_0": ["b", "e", "d"],
+    "sight_household_4": ["l", "a", "m", "p"],
+    "sight_household_5": ["c", "l", "o", "ck"],
+    "sight_household_6": ["c", "u", "p"],
+    "sight_household_8": ["s", "p", "oo-long", "n"],
+    "sight_school_items_0": ["b", "oo-short", "k"],
+    "sight_school_items_1": ["b", "a", "g"],
+    "sight_school_items_2": ["p", "e", "n"],
+    "festival_christmas_5": ["t", "r", "ee"],
+    "festival_christmas_9": ["b", "e", "ll"],
+    "festival_halloween_5": ["b", "a", "t"],
+    "sight_jobs_nearby_23": ["v", "e", "t"],
+    "sight_body_5": ["h", "air"],
+    "sight_body_7": ["h", "a", "n", "d"],
+    "sight_body_9": ["l", "e", "g"],
+    "sight_body_10": ["f", "oo-short", "t"],
+    "sight_feelings_1": ["s", "a", "d"],
+    "sight_feelings_9": ["h", "o", "t"],
+    "sight_clothes_6": ["h", "a", "t"],
+    "sight_weather_5": ["h", "o", "t"],
+    "sight_colors_0": ["r", "e", "d"],
+    "sight_colors_7": ["b", "l", "a", "ck"],
+    "sight_numbers_5": ["s", "i", "x"],
+    "sight_numbers_9": ["t", "e", "n"],
+    "sight_toys_1": ["d", "o", "ll"],
+    "sight_actions_1": ["j", "u", "m", "p"],
+    "sight_actions_3": ["c", "l", "a", "p"],
+    "sight_actions_5": ["s", "w", "i", "m"],
+    "sight_actions_10": ["s", "i", "ng"],
+    "cat": ["c", "a", "t"],
+    "hat": ["h", "a", "t"],
+    "bat": ["b", "a", "t"],
+    "van": ["v", "a", "n"],
+    "pig": ["p", "i", "g"],
+    "hot": ["h", "o", "t"],
+    "dog": ["d", "o", "g"],
+    "rat": ["r", "a", "t"],
+    "mat": ["m", "a", "t"],
+    "can": ["c", "a", "n"],
+    "pan": ["p", "a", "n"],
+    "man": ["m", "a", "n"],
+    "fan": ["f", "a", "n"],
+    "cap": ["c", "a", "p"],
+    "map": ["m", "a", "p"],
+    "tap": ["t", "a", "p"],
+    "nap": ["n", "a", "p"],
+    "pin": ["p", "i", "n"],
+    "tin": ["t", "i", "n"],
+    "bin": ["b", "i", "n"],
+    "win": ["w", "i", "n"],
+    "dig": ["d", "i", "g"],
+    "big": ["b", "i", "g"],
+    "wig": ["w", "i", "g"],
+    "pot": ["p", "o", "t"],
+    "cot": ["c", "o", "t"],
+    "fog": ["f", "o", "g"],
+    "log": ["l", "o", "g"],
+    "animal_rat": ["r", "a", "t"],
+    "animal_frog": ["f", "r", "o", "g"],
+  };
+
+  // Corrections local to this game: use native emoji when a clear one exists.
+  const PICTURE_CORRECTIONS = {
+    sight_veg_5: { emoji: '🫘' },
+    sight_places_9: { objectArt: './assets/emoji-spelling/classroom.svg' },
+    sight_school_items_5: { objectArt: './assets/emoji-spelling/eraser.svg' },
+    sight_school_items_8: { objectArt: './assets/emoji-spelling/glue.svg' },
+    festival_christmas_6: { objectArt: './assets/emoji-spelling/ornament.svg' },
+    festival_mid_autumn_4: { objectArt: './assets/common-sense/scenes/fest-pomelo.webp' },
+    festival_dragon_boat_0: { emoji: '🐉🚣' },
+    festival_dragon_boat_2: { objectArt: './assets/emoji-spelling/paddle.svg' },
+    sight_weather_8: { emoji: '🌧️' },
+    sight_weather_9: { emoji: '❄️' },
+    sight_toys_11: { objectArt: './assets/emoji-spelling/board-game.svg' },
+  };
 
   function cleanLetters(word) {
     return Array.from(String(word || '').toLowerCase()).filter((letter) => /[a-z]/.test(letter));
@@ -49,10 +140,11 @@
               word: String(word.word).trim(),
               letters: cleanLetters(word.word),
               wordBreaks,
-              emoji: word.emoji,
+              emoji: PICTURE_CORRECTIONS[word.id]?.emoji || word.emoji,
               plate: word.plate || '#24446a',
               photo: word.photo || '',
-              objectArt: word.objectArt || '',
+              objectArt: PICTURE_CORRECTIONS[word.id]?.objectArt || word.objectArt || '',
+              phonicsChunks: WORD_PHONICS[word.id] || [],
             };
           }),
       }))
@@ -68,11 +160,11 @@
     return result;
   }
 
-  function makeLetterPool(word, random = Math.random) {
+  function makeLetterPool(word, random = Math.random, distractorCount = 4) {
     const letters = cleanLetters(word);
     const answerLetters = new Set(letters);
     const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('').filter((letter) => !answerLetters.has(letter));
-    const distractors = shuffle(alphabet, random).slice(0, 4);
+    const distractors = shuffle(alphabet, random).slice(0, Math.max(0, distractorCount));
     return shuffle([
       ...letters.map((letter, index) => ({ key: `answer-${index}`, letter, answer: true })),
       ...distractors.map((letter, index) => ({ key: `distractor-${index}`, letter, answer: false })),
@@ -103,7 +195,6 @@
     makeLetterPool,
     createAnswerSlots,
     planRound,
-    needsNativeEmoji: (id) => NATIVE_EMOJI_IDS.has(id),
     nextEmptySlot,
     isCorrectAnswer,
   };

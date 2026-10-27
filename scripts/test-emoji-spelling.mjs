@@ -19,10 +19,7 @@ function assertArtwork(emoji, asset, label) {
     assert.ok(asset.startsWith('./assets/') && fs.existsSync(path.join(repo, asset)), `${label} 的專用插圖檔存在`);
     return;
   }
-  for (const part of art.graphemes(emoji)) {
-    const id = art.codeName(part);
-    assert.ok(fs.existsSync(path.join(repo, 'assets/openmoji', `${id}.svg`)) || api.needsNativeEmoji(id), `${label} 的 ${id} 有 SVG 或原生 emoji fallback`);
-  }
+  assert.ok(art.graphemes(emoji).length > 0, `${label} 有可顯示的原生 emoji`);
 }
 assert.equal(topics.length, 32, '所有有圖像的 Phonics 主題及節日子主題納入題庫');
 assert.equal(topics.reduce((sum, topic) => sum + topic.words.length, 0), 333, '全部 333 個現有圖詞納入題庫');
@@ -36,6 +33,7 @@ for (const topic of topics) {
     assert.ok(word.emoji, `${word.word} 有圖像提示`);
     assertArtwork(word.emoji, word.photo || word.objectArt, word.word);
     assert.deepEqual([...word.letters].join(''), word.word.toLowerCase().replace(/[^a-z]/g, ''), `${word.word} 轉為正確字母槽`);
+    if (word.phonicsChunks.length) assert.equal(word.phonicsChunks.map(chunk => chunk.replace(/^oo-(long|short)$/, 'oo')).join(''), word.word.toLowerCase().replace(/[^a-z]/g, ''), `${word.word} 音塊與拼字一致`);
   }
   const seen = new Set();
   let offset = 0;
@@ -104,16 +102,39 @@ assert.equal(api.isCorrectAnswer(slots, 'bananas'), false, '答案必須與目�
 
 const markup = fs.readFileSync(path.join(repo, 'index.html'), 'utf8');
 const app = fs.readFileSync(path.join(repo, 'js/emoji-spelling-app.js'), 'utf8');
+const referenceCss = fs.readFileSync(path.join(repo, 'css/emoji-spelling-reference.css'), 'utf8');
 const sightTrackMarkup = markup.match(/<div class="english-track english-track-sight">([\s\S]*?)<\/div>\s*<div class="english-track english-track-phonics">/)?.[1] || '';
-assert.match(sightTrackMarkup, /id="btn-open-emoji-spelling"[\s\S]*?拖拉或點選字母拼字/, '圖像串字入口放在 Topic Words 之內並說明拖拉及點選操作');
+assert.doesNotMatch(sightTrackMarkup, /id="btn-open-emoji-spelling"/, '避免重複入口');
+const phonicsApp = fs.readFileSync(path.join(repo, 'js/phonics-app.js'), 'utf8');
+assert.match(phonicsApp, /!topic.soundMissions[\s\S]{0,100}openTopicById/, '有圖詞的拼字主題開啟圖像拼字');
+assert.match(phonicsApp, /openTopicById\?\.\(collection.id, topic.id\)/, '子分類保留返回上層');
+const animal = topics.find(topic => topic.id === 'animal_spelling');
+assert.equal(animal.words.find(word => word.sourceId === 'animal_goat').emoji, '🐐');
+assert.equal(animal.words.find(word => word.sourceId === 'animal_monkey').emoji, '🐒');
+assert.deepEqual([...animal.words.find(word => word.sourceId === 'animal_fish').phonicsChunks], ['f', 'i', 'sh']);
+assert.equal(animal.words.find(word => word.sourceId === 'animal_monkey').phonicsChunks.length, 0);
+for (const word of topics.flatMap(topic => topic.words)) for (const chunk of word.phonicsChunks.filter(chunk => chunk !== 'ice')) assert.ok(fs.existsSync(path.join(repo, 'assets/phonemes', `${chunk}.mp3`)), `${chunk} 音檔存在`);
+assert.equal(api.makeLetterPool('cat', Math.random, 2).length, 5);
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_food').words.find(word => word.word === 'milk').phonicsChunks], ['m', 'i', 'l', 'k']);
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_food').words.find(word => word.word === 'rice').phonicsChunks], ['r', 'ice']);
+assert.equal(topics.find(topic => topic.id === 'sight_toys').words.find(word => word.word === 'ball').phonicsChunks.length, 0, 'ball 不用錯誤短 a 硬拆');
+const wordById = (topic, sourceId) => topics.find(item => item.id === topic).words.find(word => word.sourceId === sourceId);
+assert.equal(wordById('sight_weather', 'sight_weather_8').emoji, '🌧️');
+assert.equal(wordById('sight_weather', 'sight_weather_9').emoji, '❄️');
+assert.match(wordById('sight_school_items', 'sight_school_items_5').objectArt, /eraser\.svg$/);
+assert.match(wordById('sight_school_items', 'sight_school_items_8').objectArt, /glue\.svg$/);
+
 assert.match(markup, /id="screen-emoji-spelling"/, '新遊戲有獨立畫面，不覆蓋 Phonics');
 assert.match(markup, /id="emoji-spelling-finish"/, '完成畫面有獎勵提示');
 assert.match(app, /flyStarFromRanger/, '每題答對會沿用英文 Phonics 星星動畫');
 assert.match(app, /saveRoundProgress/, '中途離開後可由已完成題數繼續今輪');
 assert.match(app, /pointerdown/, '支援觸控拖拉字母入答案格');
 assert.match(app, /placeLetter\(tile\)/, '保留點選字母的非拖拉操作');
-assert.match(app, /playTryAgainCue/, '答錯時有溫和重試音效');
+assert.match(app, /sounds\.retry/, '答錯時有溫和重試音效');
 assert.match(app, /speakEnglishTerm/, '單字卡及提示使用 KAKA 英文語音');
+assert.match(app, /tile\.letter !== state\.round\[state\.index\]\.letters\[nextIndex\]/, '每次只接受下一格的正確字母');
+assert.doesNotMatch(app, /KakaEmojiArt\.html\(/, '圖像串字的 emoji 使用裝置原生字型');
+assert.match(referenceCss, /Apple Color Emoji/, 'iPhone／iPad 使用 Apple 原生 emoji 字型');
 
 console.log('Emoji Spelling tests passed');
 console.log(`  ✓ ${topics.length} categories and ${topics.reduce((sum, topic) => sum + topic.words.length, 0)} picture words`);

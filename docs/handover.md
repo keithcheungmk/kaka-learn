@@ -3,6 +3,10 @@
 Keith 現時以 Cursor 主 Agent 做 Chief Lead，下面設本機 Math／English／Chinese 三位專科 Lead。ChatGPT／Codex 如另行使用仍按任務認領直接改 repo；Grok 預設係外部顧問 bot，只提供建議，唔假設有 repo 權限。
 呢度記錄「其他人需要知」嘅分工、認領、撞車風險同未完事項，避免撞改。
 
+
+**2026-10-28 Codex Emoji Spelling 全主題本機整合（未部署）：** 以 `origin/main` `e5ae9e2` 為基礎保留先前獲批動物試玩；32 個詞語／CVC 分類、333 圖詞使用同一拼字流程，保留節日和職業子分類、獨立字母音及原進度 key。每題 2 個干擾字，點選或拖拉，題目自動讀字，答對後讀字、可用音塊、讀字及讚賞。79 個題目有既有音塊／詞尾示範（rice 用既定 r + ice）；其餘 254 個只讀完整詞語，未有逐音示範。這些數量只證明配置和檔案存在，不等於真人聽過／核實英式讀音。已修正 11 項圖詞錯配；稀有物件以本地插圖替代。工作位於 `/private/tmp/kaka-emoji-spelling-20261027`；iPad 真機音效、瀏覽器語音、剩餘音塊仍需確認；不得宣稱 333 字已完成 phonics 聽力核實。
+
+
 ## 邊個係邊個
 
 | 署名 | 係邊個 |
@@ -116,6 +120,11 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 - 接手舊本機故事／數學／PTH／素材時，先保留原工作樹；由最新 `origin/main` 開獨立 worktree，只揀需要嘅差異逐檔比對／移植。特別留意 `index.html`、`AGENTS.md`、`docs/handover.md`、`js/app.js`、`js/family-storybook.js`、`data/family-stories/manifest.js`、`css/styles.css`、`js/math-*`、`scripts/check-invariants.py` 等同路徑分歧。
 - 驗證：latest CI run `40513036813` 通過（57 項 invariants、20 項 storage 測試、模擬部署、iPad Pro 11 直／橫及 iPhone 16 Pro Max smoke）；Pages run `40513036737` 部署成功。公開 `https://keithcheungmk.github.io/kaka-learn/version.json` 回報 `{"version":"e5ae9e2"}`。本機完全相同主線 checkout 的 invariants、storage、中文詞語牆、家庭故事、Emoji Spelling、Story English 測試及 build 亦通過；本機 Playwright server 受 sandbox 禁止開 port，版面 smoke 以 GitHub CI 結果為準。
 - 本次只核對及記錄，未將舊工作目錄合併入主線；舊工作目錄內 430 個獨有檔案仍要逐項判斷係待整合內容、素材或暫存產物。
+
+### 2026-10-27 · ChatGPT／Codex（Emoji Spelling 參考介面）
+
+- 跟 Keith 提供的參考畫面調整預習與遊戲版面：藍底、白卡、黃色字母、綠色閃動開始掣；emoji 使用裝置原生字型，職業與物件的專用插圖沿用現有資源。
+- 點選或拖拉時逐格判斷：正確字母放入下一格並播成功聲；錯字母留在字池並播重試聲。保留十題星星、進度、續玩及長詞版面。
 
 ### 2026-10-27 · ChatGPT／Codex（Emoji Spelling 同版本核對）
 

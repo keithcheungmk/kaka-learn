@@ -219,7 +219,7 @@
     const topics = $('#screen-phonics-topics');
     const title = $('#english-topic-screen-title');
     const kicker = topics?.querySelector('.phonics-mission-kicker');
-    if (title) title.textContent = pActiveEnglishTrack === 'phonics' ? '字母音・拼讀' : '主題詞語';
+    if (title) title.textContent = pActiveEnglishTrack === 'phonics' ? '字母音・拼讀' : '圖像拼字';
     if (kicker) kicker.textContent = 'WORD MISSION';
     if (kicker && pActiveEnglishTrack === 'phonics') kicker.textContent = 'SOUND MISSION';
     $$('.phonics-screen').forEach((screen) => {
@@ -578,6 +578,7 @@
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'topic-card';
+      btn.dataset.topicId = topic.id;
       btn.innerHTML = `
         <span class="phonics-mission-number" aria-hidden="true">${track === 'sight' ? 'WORD' : 'MISSION'} ${String(counters[track]).padStart(2, '0')}</span>
         ${phonicsTopicCoverHtml(topic)}
@@ -585,7 +586,12 @@
         ${track === 'sight' && topic.titleEn ? `<span class="topic-title topic-title-en term-en">${topic.titleEn}</span>` : ''}
         <span class="topic-blurb term-en">${topic.blurb}</span>
       `;
-      btn.onclick = () => topic.soundMissions ? openPhonicsSounds() : topic.collections ? openPhonicsCollections(topic.id) : openPhonicsLearn(topic.id);
+      btn.onclick = () => {
+        if (!topic.soundMissions && !topic.collections && window.KakaEmojiSpelling?.openTopicById?.(topic.id, null, track)) return;
+        if (topic.soundMissions) openPhonicsSounds();
+        else if (topic.collections) openPhonicsCollections(topic.id);
+        else openPhonicsLearn(topic.id);
+      };
       grid.appendChild(btn);
     });
   }
@@ -614,6 +620,7 @@
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'topic-card collection-topic-card';
+      btn.dataset.topicId = collection.id;
       btn.innerHTML = `
         <span class="phonics-mission-number" aria-hidden="true">SET ${String(index + 1).padStart(2, '0')}</span>
         ${phonicsTopicCoverHtml(collection)}
@@ -621,7 +628,10 @@
         ${collection.titleEn ? `<span class="topic-title collection-title topic-title-en term-en">${collection.titleEn}</span>` : ''}
         <span class="topic-blurb term-en">${collection.blurb}</span>
       `;
-      btn.onclick = () => openPhonicsLearn(collection.id);
+      btn.onclick = () => {
+        if (pActiveEnglishTrack === 'sight' && window.KakaEmojiSpelling?.openTopicById?.(collection.id, topic.id)) return;
+        openPhonicsLearn(collection.id);
+      };
       grid.appendChild(btn);
     });
     showPScreen('collections');
@@ -1900,5 +1910,5 @@
   }
 
   document.addEventListener('DOMContentLoaded', init);
-  window.KakaPhonics = { openEnglishHub, openWordTopics: () => openPhonicsTopics('sight'), openPhonicsTopics: () => openPhonicsTopics('phonics') };
+  window.KakaPhonics = { openEnglishHub, openWordTopics: () => openPhonicsTopics('sight'), openWordCollections: (id) => openPhonicsCollections(id), openPhonicsTopics: () => openPhonicsTopics('phonics') };
 })();
