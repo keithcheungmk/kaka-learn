@@ -109,6 +109,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-10-27 · ChatGPT／Codex（Emoji Spelling 同版本核對）
+
+- 以 GitHub `main` 的 `a5db567` 為基準，在獨立 worktree 整合 Emoji Spelling；入口放在 Topic Words，沿用 Phonics 圖詞。32 個分類、333 個圖詞，支援拖放或點選字母、重試、每題一星及中途續玩；長主題完成一輪後輪換題目。英文十星回合沿用原有設計，唔挪用中文砌字每日幣。
+- `scripts/smoke-shots.py` 先比對預覽首頁及引用的 JS／CSS 與目前 checkout，錯版本會停止；只對已取消的指定太空戰士動作圖重新驗證 PNG，再判斷是否可忽略。CI／Pages 同時跑預覽來源與英文拼字專項檢查；長詞的家庭裝置版面、拖放、點選、星星及續玩納入 smoke。
+- 打包腳本改用 macOS／Linux 一致的版本戳處理，並檢查執行位置及輸出路徑，避免覆蓋 checkout 以外或受版本控制的檔案。
+- 正在檢查的變更以 CI、Pages workflow 同公開網站所顯示的版本確認部署狀態；不可把舊工作目錄的其他改動一併提交。
+
 ### 2026-10-27 · ChatGPT／Codex（中文入口整理）
 
 - 中文揀主題移除重疊的「四格講故事」捷徑，保留《卡卡日記故事》、卡卡學寫字、認字遊戲三個較大的入口；面試四格仍由常識樂園進入。

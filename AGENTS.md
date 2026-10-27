@@ -64,6 +64,14 @@
 - 「第二人驗收」＝Keith 喺 live／Pages 玩；**唔係** chat 入面 code review。呢條優先過舊「先等 Keith 確認先開正式題」。
 - 詳見 `.cursor/rules/keith-play-not-code.mdc` 同 `docs/qa-check.md`。
 
+### 最新網站基準及隔離交付（Keith 2026-10-27）
+
+- 開始修改前先 fetch `origin/main`，核對主線 commit、Pages 部署及相關最新改動；如果未能更新主線，先講清楚限制，唔好把舊 checkout 當現網。
+- 舊工作目錄如有不相關或未提交改動，由最新主線開獨立 worktree；逐個檢視、只移入本次需要嘅檔案或差異，唔整批 merge 舊草稿。保留其他人嘅工作。
+- 跑版面 smoke 前，伺服器必須由正在檢查嘅工作目錄提供內容；`scripts/smoke-shots.py` 會比較預覽首頁及其本地 JS／CSS 與該 checkout 的檔案，對唔上就即時停止。用 `--url` 指向正確預覽，唔好將舊伺服器的結果當成新版本驗收。
+- 交付前再次核對主線有否前進、只 stage 本次檔案並檢查 staged diff；CI 成功後才合併。分別確認 commit、push、Pages 部署同公開網站版本，唔好將其中一步當成全部完成。
+- `scripts/build-site.sh` 只可在 checkout 根目錄執行，輸出必須在 checkout 內且不可覆蓋受版本控制的檔案；用同一套 Python 版本戳處理 macOS／Linux，確認打包後引用和 `version.json` 對齊。
+
 ### Source Materials：Keith 只負責掉檔，Agent 負責其餘工作
 
 - **唯一投放路徑**：`source-materials/`。Keith 可以將 MP3、PDF、相片、Flash Cards、試算表、壓縮檔或其他教材直接混合放入去。

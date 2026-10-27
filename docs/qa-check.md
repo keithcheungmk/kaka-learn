@@ -100,7 +100,7 @@
 > Exit 0 先好人手睇下面；exit 1 = 自動「有問題」，實作 agent 要修到綠先再檢查。
 > 佢已經自動覆蓋：JS syntax、24 個核心動物字、鹿類規則、`.build-ghost`、完成一輪派幣、
 > Profile 分倉、鎖放大、三個入口、storage 鍵分家、數理故障隔離、asset 404、圖片大細、外部依賴。
-> 跟住跑 `python3 scripts/smoke-shots.py --no-shots`（要 `python3 -m http.server 5173` 開住）：
+> 跟住喺要檢查嘅 checkout 開 `python3 -m http.server 5173`，再跑 `python3 scripts/smoke-shots.py --no-shots`；如用其他 port，加 `--url http://127.0.0.1:PORT`。腳本會先比較伺服器首頁及引用的本地 JS／CSS 與目前 checkout，版本不符即停止，唔可用舊服務嘅結果驗收：
 > **預設家庭裝置**——iPad Pro 11 直／橫 + iPhone 16 Pro Max 直（共 3 個 viewport）× 全程畫面，
 > 檢查**溢出、元素重疊、內容被剪走**、白屏、404、console error。舊全尺寸用 `--all`。
 > **iPad 遊戲畫面要捲 = blocker**（KAKA 拖字會捲親）；只有揀主題／揀書准捲。

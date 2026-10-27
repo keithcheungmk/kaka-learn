@@ -23,10 +23,74 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import os
 import subprocess
 import sys
+from html.parser import HTMLParser
 from pathlib import Path
+from urllib.error import URLError
+from urllib.parse import unquote, urljoin, urlsplit
+from urllib.request import urlopen
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+
+
+class PreviewReferences(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.paths = []
+
+    def handle_starttag(self, tag, attrs):
+        values = dict(attrs)
+        ref = values.get("src") if tag == "script" else (
+            values.get("href") if tag == "link" and "stylesheet" in (values.get("rel") or "").split() else None
+        )
+        if ref:
+            parsed = urlsplit(ref)
+            if not parsed.scheme and not parsed.netloc and not parsed.path.startswith("/"):
+                self.paths.append(ref)
+
+
+def verify_preview_source(base_url: str) -> None:
+    """Reject another checkout even when its index matches but scripts differ."""
+    index_url = urljoin(base_url.rstrip("/") + "/", "index.html")
+    expected_index = (REPO_ROOT / "index.html").read_bytes()
+    parser = PreviewReferences()
+    parser.feed(expected_index.decode("utf-8"))
+    for ref in ["index.html", *dict.fromkeys(parser.paths)]:
+        path = (REPO_ROOT / unquote(urlsplit(ref).path)).resolve()
+        if not path.is_relative_to(REPO_ROOT) or not path.is_file():
+            raise RuntimeError(f"目前工作目錄的預覽檔案不存在或超出範圍：{ref}")
+        url = urljoin(index_url, ref)
+        try:
+            with urlopen(url, timeout=8) as response:
+                actual = response.read()
+        except (OSError, URLError) as exc:
+            raise RuntimeError(f"無法讀取預覽伺服器 {url}：{exc}") from exc
+        if hashlib.sha256(actual).digest() != hashlib.sha256(path.read_bytes()).digest():
+            raise RuntimeError(
+                f"預覽伺服器的 {ref} 與目前工作目錄 {REPO_ROOT} 不一致；"
+                "請在該工作目錄啟動伺服器，並用 --url 指定它。"
+            )
+
+
+def cancelled_pose_is_available(url: str, reason: str) -> bool:
+    """Pose changes can cancel an in-flight image; independently verify the exact asset."""
+    pose_names = {
+        "space-ranger-pose-fistpump.png", "space-ranger-pose-point.png",
+        "space-ranger-pose-thumbsup.png", "space-ranger-pose-wave.png",
+    }
+    if reason != "net::ERR_ABORTED" or Path(urlsplit(url).path).name not in pose_names:
+        return False
+    try:
+        with urlopen(url, timeout=8) as response:
+            body = response.read()
+            return (response.status == 200 and len(body) > 24
+                    and body.startswith(b"\x89PNG\r\n\x1a\n")
+                    and body.endswith(b"\x00\x00\x00\x00IEND\xaeB`\x82"))
+    except (OSError, URLError):
+        return False
 
 # 只許呢幾頁捲：純瀏覽、唔涉拖曳（中文入口頁可超出一屏）
 SCROLLABLE = {
@@ -38,6 +102,7 @@ SCROLLABLE = {
     "screen-books",
     "screen-phonics-topics",
     "screen-phonics-sounds",
+    "screen-emoji-spelling",  # Category/word review can scroll; the active spelling challenge must not.
     "screen-progress",
     "screen-math-galaxy",  # Browsing hub for planet and life-skill destinations; the actual math activities remain no-scroll.
     "screen-math-earth-addition-select",  # Level/method browsing; keep the actual fruit manipulation screen no-scroll.
@@ -292,6 +357,93 @@ def walk(pg, url, shots: Path | None, tag: str):
             if not pg.is_visible("#phonics-sight-grid") or pg.is_visible("#phonics-topic-grid"):
                 raise RuntimeError("Topic Words screen must show only its word-topic grid")
             probe("主題詞語")
+            pg.click("#btn-open-emoji-spelling")
+            pg.wait_for_selector("#screen-emoji-spelling.active #emoji-spelling-category-grid .emoji-spelling-category")
+            probe("Emoji Spelling 主題選擇")
+            pg.click('#emoji-spelling-category-grid [data-topic-id="cvc_at"]')
+            pg.wait_for_selector("#screen-emoji-spelling.active #emoji-spelling-word-grid .emoji-spelling-word-card")
+            probe("Emoji Spelling 詞語預習")
+            pg.click("#btn-emoji-spelling-start")
+            pg.wait_for_selector("#screen-emoji-spelling.active.is-playing #emoji-spelling-letter-pool .emoji-spelling-letter")
+            drag_probe = pg.evaluate("""() => {
+              const tile = document.querySelector('#emoji-spelling-letter-pool .emoji-spelling-letter:not(:disabled)');
+              const slot = document.querySelector('#emoji-spelling-answer .emoji-spelling-slot:not(:disabled)');
+              if (!tile || !slot) return null;
+              const t = tile.getBoundingClientRect();
+              const s = slot.getBoundingClientRect();
+              return { tile: tile.textContent.trim(), start: { x: t.left + t.width / 2, y: t.top + t.height / 2 }, end: { x: s.left + s.width / 2, y: s.top + s.height / 2 } };
+            }""")
+            if not drag_probe:
+                raise RuntimeError("Emoji Spelling must render an available letter and empty answer slot")
+            pg.mouse.move(drag_probe["start"]["x"], drag_probe["start"]["y"])
+            pg.mouse.down()
+            pg.mouse.move(drag_probe["end"]["x"], drag_probe["end"]["y"], steps=8)
+            pg.mouse.up()
+            pg.wait_for_timeout(250)
+            if pg.locator("#emoji-spelling-answer .emoji-spelling-slot.is-filled").count() != 1:
+                raise RuntimeError("Dragging a letter to an empty answer slot must place it")
+            placed = pg.locator("#emoji-spelling-answer .emoji-spelling-slot.is-filled").first.text_content().strip()
+            if placed != drag_probe["tile"]:
+                raise RuntimeError(f"Dragged letter should land in the answer slot, expected {drag_probe['tile']!r}, got {placed!r}")
+            pg.locator("#emoji-spelling-answer .emoji-spelling-slot.is-filled").first.click()
+            pg.wait_for_timeout(100)
+            if pg.locator("#emoji-spelling-answer .emoji-spelling-slot.is-filled").count() != 0:
+                raise RuntimeError("Tapping a placed letter should remove it from its slot")
+            pg.locator("#emoji-spelling-letter-pool .emoji-spelling-letter:not(:disabled)").first.click()
+            pg.wait_for_timeout(100)
+            if pg.locator("#emoji-spelling-answer .emoji-spelling-slot.is-filled").count() != 1:
+                raise RuntimeError("Tapping a letter tile should place it in the next empty slot")
+            probe("Emoji Spelling 拼字挑戰")
+            challenge_fit = pg.evaluate("""() => {
+              const screen = document.querySelector('#screen-emoji-spelling');
+              return { overflow: screen.scrollHeight - screen.clientHeight, answer: !!screen.querySelector('#emoji-spelling-answer .emoji-spelling-slot'), letters: screen.querySelectorAll('#emoji-spelling-letter-pool .emoji-spelling-letter').length };
+            }""")
+            if pg.viewport_size["width"] > 700 and challenge_fit.get("overflow", 0) > 2:
+                raise RuntimeError(f"Emoji Spelling active game must fit one viewport, got {challenge_fit}")
+            if not challenge_fit.get("answer") or challenge_fit.get("letters", 0) < 5:
+                raise RuntimeError(f"Emoji Spelling needs letter slots and a usable tile pool: {challenge_fit}")
+            pg.locator("#emoji-spelling-answer .emoji-spelling-slot.is-filled").first.click()
+            target_letters = pg.evaluate("""() => window.KakaEmojiSpellingData.getTopics()
+              .find(topic => topic.id === 'cvc_at').words[0].letters""")
+            for letter in target_letters:
+                pg.locator(f'#emoji-spelling-letter-pool .emoji-spelling-letter:not(:disabled):text-is("{letter.upper()}")').first.click()
+            pg.wait_for_function("() => document.querySelector('#emoji-spelling-progress')?.textContent.trim() === '2 / 10'", timeout=8000)
+            if pg.locator("#emoji-spelling-play-view .emoji-spelling-round-bar .star-cell.is-on").count() != 1:
+                raise RuntimeError("A correct word should light one English round star")
+            pg.click("#btn-emoji-spelling-review")
+            pg.wait_for_selector("#screen-emoji-spelling.active #emoji-spelling-learn-view:not([hidden])")
+            pg.click("#btn-emoji-spelling-start")
+            if (pg.text_content("#emoji-spelling-progress") or "").strip() != "2 / 10":
+                raise RuntimeError("Returning to Emoji Spelling should resume the saved round")
+            pg.click("#btn-emoji-spelling-review")
+            pg.click("#btn-emoji-spelling-back-categories")
+            pg.evaluate("""() => {
+              const profile = window.KakaStorage.getActiveProfileId();
+              const key = `${profile}|emoji-spelling|sight_jobs_world`;
+              window.KakaStorage.clearRoundProgress(key);
+              window.KakaStorage.saveRoundProgress(`${key}|offset`, ['19']);
+            }""")
+            pg.click('#emoji-spelling-category-grid [data-topic-id="sight_jobs_world"]')
+            pg.click("#btn-emoji-spelling-start")
+            pg.wait_for_selector("#screen-emoji-spelling.active.is-playing #emoji-spelling-letter-pool .emoji-spelling-letter")
+            long_word = pg.evaluate("""() => {
+              const screen = document.querySelector('#screen-emoji-spelling');
+              const plate = screen.querySelector('#emoji-spelling-picture .emoji-plate, #emoji-spelling-picture .emoji-spelling-custom-art')?.getBoundingClientRect();
+              const images = [...screen.querySelectorAll('#emoji-spelling-picture img')].map(img => img.getBoundingClientRect());
+              return { overflow: screen.scrollHeight - screen.clientHeight,
+                       horizontal: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+                       slots: screen.querySelectorAll('#emoji-spelling-answer .emoji-spelling-slot').length,
+                       artFits: !!plate && images.every(img => img.left >= plate.left - 2 && img.right <= plate.right + 2 && img.top >= plate.top - 2 && img.bottom <= plate.bottom + 2) };
+            }""")
+            if long_word.get("slots") != 26 or long_word.get("horizontal", 0) > 2 or not long_word.get("artFits"):
+                raise RuntimeError(f"Longest spelling word must render without horizontal clipping: {long_word}")
+            if pg.viewport_size["width"] > 700 and long_word.get("overflow", 0) > 2:
+                raise RuntimeError(f"Longest spelling word must fit the iPad game screen: {long_word}")
+            probe("Emoji Spelling 長詞挑戰")
+            pg.click("#btn-emoji-spelling-review")
+            pg.click("#btn-emoji-spelling-back-categories")
+            pg.click("#btn-emoji-spelling-back-english")
+            pg.wait_for_selector('#screen-phonics-topics.active[data-english-track="sight"]')
             pg.click("#btn-back-phonics-topics")
             pg.wait_for_selector("#screen-english-hub.active")
             pg.click("#btn-english-phonics")
@@ -1338,6 +1490,12 @@ def main() -> int:
     args = ap.parse_args()
 
     try:
+        verify_preview_source(args.url)
+    except RuntimeError as exc:
+        print(f"smoke-shots 停止：{exc}")
+        return 1
+
+    try:
         from playwright.sync_api import sync_playwright
     except ImportError:
         print("冇裝 playwright，跳過視覺煙霧測試。")
@@ -1354,7 +1512,7 @@ def main() -> int:
 
     problems = 0
     errors: list[str] = []
-    failed: list[str] = []
+    failed: list[tuple[str, str]] = []
     not_found: list[str] = []
 
     with sync_playwright() as pw:
@@ -1365,7 +1523,7 @@ def main() -> int:
         for name, (w, h), phone in targets:
             page = browser.new_page(viewport={"width": w, "height": h}, is_mobile=True, has_touch=True)
             page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
-            page.on("requestfailed", lambda r: failed.append(r.url))
+            page.on("requestfailed", lambda r: failed.append((r.url, r.failure or "unknown")))
             page.on("response", lambda r: not_found.append(r.url) if r.status == 404 else None)
             try:
                 rows = walk(page, args.url, shots, name)
@@ -1400,8 +1558,11 @@ def main() -> int:
             page.close()
         browser.close()
 
-    for u in dict.fromkeys(x for x in failed if "fonts.g" not in x):
-        print(f"  ✗ 載入失敗：{u}")
+    for u, reason in dict.fromkeys(x for x in failed if "fonts.g" not in x[0]):
+        if cancelled_pose_is_available(u, reason):
+            print(f"  · 動作圖請求取消，重取確認可用：{u}")
+            continue
+        print(f"  ✗ 載入失敗：{u}（{reason}）")
         problems += 1
     for e in dict.fromkeys(errors):
         if "ERR_TUNNEL" in e or "fonts.g" in e:

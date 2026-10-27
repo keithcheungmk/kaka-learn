@@ -32,6 +32,7 @@
     'screen-phonics-listen',
     'screen-phonics-match',
     'screen-phonics-build',
+    'screen-emoji-spelling',
     'screen-math-relations-play',
     'screen-math-relations-learn',
     'screen-math-compare',

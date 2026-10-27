@@ -1852,9 +1852,25 @@ def check_chinese_mandarin() -> None:
         fail("chinese-mandarin", result.stderr[-1200:] or "中文普通話錄音檢查失敗")
 
 
+def check_emoji_spelling_release() -> None:
+    """Existing CI and Pages gates run the spelling and preview-source contracts."""
+    node = shutil.which("node")
+    if not node:
+        fail("emoji-spelling", "需要 node 執行英文拼字檢查")
+        return
+    for label, command in (
+        ("emoji-spelling", [node, "scripts/test-emoji-spelling.mjs"]),
+        ("preview-source", [sys.executable, "scripts/test-preview-source.py"]),
+    ):
+        result = subprocess.run(command, capture_output=True, text=True)
+        if result.returncode:
+            fail(label, (result.stderr or result.stdout or "檢查失敗").strip()[-1200:])
+
+
 CHECKS = [
     check_pth_contract,
     check_chinese_mandarin,
+    check_emoji_spelling_release,
     check_js_syntax,
     check_no_build_step,
     check_cache_bust_tags,
