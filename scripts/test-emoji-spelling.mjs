@@ -14,6 +14,7 @@ vm.runInContext(fs.readFileSync(path.join(repo, 'js/emoji-spelling-data.js'), 'u
 const api = context.window.KakaEmojiSpellingData;
 const topics = api.getTopics();
 const art = context.window.KakaEmojiArt;
+const findWord = (topicId, sourceId) => topics.find((topic) => topic.id === topicId)?.words.find((word) => word.sourceId === sourceId);
 function assertArtwork(emoji, asset, label) {
   if (asset) {
     assert.ok(asset.startsWith('./assets/') && fs.existsSync(path.join(repo, asset)), `${label} 的專用插圖檔存在`);
@@ -25,6 +26,29 @@ assert.equal(topics.length, 32, '所有有圖像的 Phonics 主題及節日子�
 assert.equal(topics.reduce((sum, topic) => sum + topic.words.length, 0), 333, '全部 333 個現有圖詞納入題庫');
 assert.equal(topics.flatMap(topic => topic.words).filter(word => word.phonicsChunks.length).length, 181, '181 個詞有待覆聽音塊配置');
 assert.equal(topics.some((topic) => topic.id === 'letters_rev'), false, '獨立字母音練習不混入詞語拼字遊戲');
+assert.equal(findWord('sight_places', 'sight_places_3')?.emoji, '🏪', 'shop 使用店舖而非購物袋圖示');
+for (const [topicId, sourceId, expectedArt] of [
+  ['sight_places', 'sight_places_5', './assets/emoji-spelling/library.svg'],
+  ['sight_places', 'sight_places_6', './assets/emoji-spelling/pool.svg'],
+  ['sight_food', 'sight_food_7', './assets/emoji-spelling/cooked-fish.svg'],
+  ['festival_lunar_new_year', 'festival_lunar_new_year_1', './assets/emoji-spelling/lion-dance.svg'],
+  ['festival_lunar_new_year', 'festival_lunar_new_year_5', './assets/emoji-spelling/couplet.svg'],
+  ['festival_christmas', 'festival_christmas_9', './assets/emoji-spelling/gingerbread.svg'],
+  ['festival_dragon_boat', 'festival_dragon_boat_1', './assets/common-sense/scenes/fest-zongzi.webp'],
+  ['sight_feelings', 'sight_feelings_7', './assets/emoji-spelling/thirsty.svg'],
+  ['sight_colors', 'sight_colors_11', './assets/emoji-spelling/gold.svg'],
+  ['cvc_ig', 'wig', './assets/emoji-spelling/wig.svg'],
+]) {
+  const word = findWord(topicId, sourceId);
+  assert.ok(word && (word.photo === expectedArt || word.objectArt === expectedArt), `${word?.word || sourceId} 使用直接清楚的圖片線索`);
+}
+assert.equal(findWord('sight_body', 'sight_body_5')?.emoji, '🦱', 'hair 顯示頭髮本身');
+assert.equal(findWord('sight_feelings', 'sight_feelings_4')?.emoji, '🤩', 'excited 顯示興奮表情');
+assert.equal(findWord('sight_actions', 'sight_actions_6')?.emoji, '🛌', 'sleep 用睡覺場景而非單獨睡臉');
+assert.equal(findWord('cvc_in', 'tin')?.emoji, '🥫', 'tin 使用金屬罐圖示');
+assert.ok(findWord('sight_jobs_nearby', 'sight_jobs_nearby_3')?.photo.endsWith('xiaozhang-adult.webp'), 'principal 使用成人校長圖片');
+assert.ok(findWord('sight_jobs_world', 'sight_jobs_world_18')?.photo.endsWith('huanbao-emoji-clear.webp'), 'environmental officer 使用清楚的環境巡查圖片');
+assert.ok(findWord('sight_jobs_world', 'sight_jobs_world_19')?.photo.endsWith('yiliao-xiaoshou-clear.webp'), 'medical sales representative 使用醫療產品介紹圖片');
 
 for (const topic of topics) {
   assert.ok(topic.titleEn, `${topic.id} 有可顯示的英文主題名`);
