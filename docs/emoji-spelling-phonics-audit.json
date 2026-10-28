@@ -21,8 +21,8 @@
     "note": "Asset filenames were checked only. No clip was listened to; candidates remain provisional until the sound and blending are audited."
   },
   "summary": {
-    "candidateCount": 115,
-    "rejectedCount": 178,
+    "candidateCount": 118,
+    "rejectedCount": 175,
     "clipsAudiblyVerifiedCount": 0,
     "byTopic": {
       "animal_spelling": {
@@ -82,13 +82,13 @@
       },
       "sight_body": {
         "audited": 12,
-        "candidates": 6,
-        "rejected": 6
+        "candidates": 7,
+        "rejected": 5
       },
       "sight_feelings": {
         "audited": 12,
-        "candidates": 3,
-        "rejected": 9
+        "candidates": 4,
+        "rejected": 8
       },
       "sight_clothes": {
         "audited": 12,
@@ -127,8 +127,8 @@
       },
       "sight_actions": {
         "audited": 12,
-        "candidates": 7,
-        "rejected": 5
+        "candidates": 8,
+        "rejected": 4
       },
       "cvc_at": {
         "audited": 5,
@@ -2095,8 +2095,22 @@
       "sourceId": "sight_body_8",
       "topicId": "sight_body",
       "word": "arm",
-      "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "ar",
+          "soundAsset": "ar"
+        },
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Provisional mapping; audio and British pronunciation require human listening.",
+        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      ]
     },
     {
       "sourceId": "sight_body_9",
@@ -2203,8 +2217,22 @@
       "sourceId": "sight_feelings_5",
       "topicId": "sight_feelings",
       "word": "shy",
-      "status": "rejected",
-      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "sh",
+          "soundAsset": "sh"
+        },
+        {
+          "grapheme": "y",
+          "soundAsset": "igh"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Provisional mapping; audio and British pronunciation require human listening.",
+        "Previous conservative review: No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      ]
     },
     {
       "sourceId": "sight_feelings_6",
@@ -3489,8 +3517,27 @@
       "sourceId": "sight_actions_7",
       "topicId": "sight_actions",
       "word": "read",
-      "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "ea",
+          "soundAsset": "ee"
+        },
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Provisional mapping; audio and British pronunciation require human listening.",
+        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use.",
+        "This Action Words entry is the present-tense /riːd/; the game sends 'reed' to device TTS to avoid the ambiguous isolated spelling 'read'."
+      ]
     },
     {
       "sourceId": "sight_actions_8",

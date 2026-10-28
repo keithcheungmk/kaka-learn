@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs><linearGradient id="cone" x1="0" x2="1" y1="0" y2="0"><stop stop-color="#ffb951"/><stop offset=".55" stop-color="#ffdb80"/><stop offset="1" stop-color="#e58d2d"/></linearGradient></defs>
+  <path d="M100 20 29 153c0 15 32 27 71 27s71-12 71-27L100 20Z" fill="url(#cone)" stroke="#b97321" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M29 153c0 15 32 27 71 27s71-12 71-27" fill="none" stroke="#b97321" stroke-width="5"/>
+</svg>

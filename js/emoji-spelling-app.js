@@ -91,7 +91,7 @@
       button.className = 'emoji-spelling-word-card';
       button.setAttribute('aria-label', `Listen to ${word.word}`);
       button.innerHTML = `${imageHtml(word.emoji, word.plate, word.photo || word.objectArt)}<strong>${word.word.toUpperCase()}</strong><span class="emoji-spelling-card-speaker" aria-hidden="true">${SPEAKER_ICON}</span>`;
-      button.addEventListener('click', () => speak(word.word));
+      button.addEventListener('click', () => speak(word.spokenText || word.word));
       grid.appendChild(button);
     });
     showView('learn');
@@ -163,7 +163,7 @@
     $('#emoji-spelling-feedback').classList.remove('is-retry', 'is-correct');
     renderAnswer();
     renderLetterPool();
-    speak(word.word);
+    speak(word.spokenText || word.word);
   }
 
   function placeLetter(tile, slotIndex) {
@@ -358,8 +358,9 @@
       feedback.textContent = `Great job, ${name}!`;
       sayThen(`Great job, ${name}!`, award);
     };
-    const repeatWord = () => sayThen(target.word, praise);
-    sayThen(target.word, () => {
+    const spokenWord = target.spokenText || target.word;
+    const repeatWord = () => sayThen(spokenWord, praise);
+    sayThen(spokenWord, () => {
       if (!target.phonicsChunks.length) return repeatWord();
       const notes = target.phonicsNotes?.length ? `（${target.phonicsNotes.join('；')}）` : '';
       feedback.textContent = `聽音塊：${(target.phonicsLabels || target.phonicsChunks.map(chunk => chunk.replace(/^oo-(?:long|short)$/, 'oo'))).join(' · ')}${notes}`;
@@ -429,7 +430,7 @@
     });
     $('#btn-emoji-spelling-speak')?.addEventListener('click', () => {
       const word = state.round[state.index];
-      if (word) { sounds.stopPhonics(); speak(word.word); }
+      if (word) { sounds.stopPhonics(); speak(word.spokenText || word.word); }
     });
     $('#btn-emoji-spelling-phonics')?.addEventListener('click', () => {
       const word = state.round[state.index];
