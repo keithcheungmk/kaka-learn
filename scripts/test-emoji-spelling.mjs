@@ -151,6 +151,13 @@ assert.equal(api.isCorrectAnswer(slots, 'bananas'), false, '答案必須與目�
 
 const markup = fs.readFileSync(path.join(repo, 'index.html'), 'utf8');
 const app = fs.readFileSync(path.join(repo, 'js/emoji-spelling-app.js'), 'utf8');
+const sharedApp = fs.readFileSync(path.join(repo, 'js/app.js'), 'utf8');
+assert.match(app, /storage\.tryEarnStar\(\)/, '每個完成詞語會寫入玩家的累積星星');
+assert.match(app, /earnCoinForMode\(storage\.getCoinModeForGame\?\.\('build'\) \|\| 'build'\)/, '完成十題會按砌字玩法每日上限派幣');
+assert.match(app, /window\.KakaLearn\?\.refreshRewards\?\.\(\)/, '獲得星星及完成一輪後刷新全站獎勵');
+assert.match(sharedApp, /refreshRewards:\s*refreshStarUI/, '共享 App 對其他遊戲提供獎勵刷新方法');
+assert.match(app, /state\.index !== answeredIndex/, '星星動畫回調重複觸發時不會重複派星或跳題');
+assert.match(app, /coin\.gained\s*\?\s*'你儲滿了 10 粒星，仲賺到 1 枚 AEON 幣！'/, '完成訊息只在真的獲幣時宣稱獲得 AEON 幣');
 assert.match(markup, /id="emoji-spelling-picture"[^>]*role="img"[^>]*aria-label=/, '拼字提示圖有螢幕閱讀器文字');
 assert.match(markup, /id="emoji-spelling-progress"[^>]*aria-live="polite"/, '題目進度會通知輔助技術');
 assert.match(app, /emoji-spelling-finish-title'\)\?\.focus/, '完成獎勵開啟後將焦點移至對話框標題');

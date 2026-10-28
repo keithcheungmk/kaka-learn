@@ -325,12 +325,15 @@
     const token = roundToken;
     const award = () => {
       if (token !== roundToken) return;
+      const answeredIndex = state.index;
       const commitStar = () => {
-        if (token !== roundToken) return;
+        if (token !== roundToken || state.index !== answeredIndex) return;
+        storage.tryEarnStar();
         state.completed.push(`${state.index}:${target.id}`);
         if (state.completed.length < ROUND_SIZE) storage.saveRoundProgress?.(state.key, state.completed);
         else storage.clearRoundProgress?.(state.key);
         renderRoundBar();
+        window.KakaLearn?.refreshRewards?.();
         state.index += 1;
         if (state.index >= state.round.length) finishRound();
         else renderQuestion();
@@ -375,15 +378,19 @@
   function finishRound() {
     stopAudio();
     storage.saveRoundProgress?.(`${state.key}|offset`, [String((state.offset + ROUND_SIZE) % state.topic.words.length)]);
+    const coin = storage.earnCoinForMode(storage.getCoinModeForGame?.('build') || 'build');
+    window.KakaLearn?.refreshRewards?.();
     $('#emoji-spelling-finish-score').textContent = `${state.score} / ${state.round.length} 個詞語`;
-    $('#emoji-spelling-finish-reward').textContent = '你儲滿了 10 粒星，拼字進步了！';
+    $('#emoji-spelling-finish-reward').textContent = coin.gained
+      ? '你儲滿了 10 粒星，仲賺到 1 枚 AEON 幣！'
+      : '你儲滿了 10 粒星；今日「砌一砌」的 AEON 幣已領取。';
     $('#emoji-spelling-finish').hidden = false;
     $('#emoji-spelling-finish').classList.remove('is-celebrating');
     void $('#emoji-spelling-finish').offsetWidth;
     $('#emoji-spelling-finish').classList.add('is-celebrating');
     $('#emoji-spelling-finish-title')?.focus({ preventScroll: true });
     speech.playStarCue({ muted: muted() });
-    speak('Amazing spelling! You earned ten stars!', 0.92);
+    speak(coin.gained ? 'Amazing spelling! You earned ten stars and a coin!' : 'Amazing spelling! You earned ten stars!', 0.92);
   }
 
   function openCategories() {
