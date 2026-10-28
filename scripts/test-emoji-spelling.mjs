@@ -23,7 +23,7 @@ function assertArtwork(emoji, asset, label) {
 }
 assert.equal(topics.length, 32, '所有有圖像的 Phonics 主題及節日子主題納入題庫');
 assert.equal(topics.reduce((sum, topic) => sum + topic.words.length, 0), 333, '全部 333 個現有圖詞納入題庫');
-assert.equal(topics.flatMap(topic => topic.words).filter(word => word.phonicsChunks.length).length, 112, '112 個詞有保守音塊配置');
+assert.equal(topics.flatMap(topic => topic.words).filter(word => word.phonicsChunks.length).length, 135, '135 個詞有待覆聽音塊配置');
 assert.equal(topics.some((topic) => topic.id === 'letters_rev'), false, '獨立字母音練習不混入詞語拼字遊戲');
 
 for (const topic of topics) {
@@ -133,6 +133,18 @@ assert.deepEqual([...topics.find(topic => topic.id === 'festival_halloween').wor
 assert.deepEqual([...topics.find(topic => topic.id === 'sight_numbers').words.find(word => word.word === 'two').phonicsChunks], [], 'two 不可漏掉 w 或假裝係規則拼讀');
 assert.deepEqual([...topics.find(topic => topic.id === 'sight_numbers').words.find(word => word.word === 'nine').phonicsChunks], [], 'nine 的 i_e 跨越內部 n，不能直接排成獨立 grapheme tiles');
 const wordById = (topic, sourceId) => topics.find(item => item.id === topic).words.find(word => word.sourceId === sourceId);
+const audit = JSON.parse(fs.readFileSync(path.join(repo, 'docs/emoji-spelling-phonics-audit.json'), 'utf8'));
+for (const item of audit.items) {
+  const word = wordById(item.topicId, item.sourceId);
+  assert.ok(word, `音塊審核項目 ${item.topicId}/${item.sourceId} 對應實際題目`);
+  assert.equal(Boolean(word.phonicsChunks.length), item.status === 'candidate_pending_audio_audition', `${item.word} 審核表與遊戲音塊狀態一致`);
+}
+assert.deepEqual([...wordById('sight_food', 'sight_food_1').phonicsChunks], ['b', 'r', 'e', 'd']);
+assert.deepEqual([...wordById('festival_mid_autumn', 'festival_mid_autumn_5').phonicsLabels], ['t', 'ea']);
+assert.deepEqual([...wordById('sight_weather', 'sight_weather_9').phonicsChunks], ['s', 'n', 'oa']);
+assert.deepEqual([...wordById('sight_actions', 'sight_actions_0').phonicsChunks], ['r', 'u', 'n']);
+assert.deepEqual([...wordById('animal_spelling', 'animal_cow').phonicsChunks], ['c', 'ow']);
+assert.deepEqual([...wordById('sight_fruit', 'sight_fruit_3').phonicsLabels], ['g', 'r', 'a', 'p']);
 assert.equal(wordById('sight_weather', 'sight_weather_8').emoji, '🌧️');
 assert.equal(wordById('sight_weather', 'sight_weather_9').emoji, '❄️');
 assert.match(wordById('sight_school_items', 'sight_school_items_5').objectArt, /eraser\.svg$/);
