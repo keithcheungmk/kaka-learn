@@ -16,8 +16,8 @@
     "note": "Asset filenames were checked only. No clip was listened to; candidates remain provisional until the sound and blending are audited."
   },
   "summary": {
-    "candidateCount": 146,
-    "rejectedCount": 187,
+    "candidateCount": 165,
+    "rejectedCount": 168,
     "clipsAudiblyVerifiedCount": 0,
     "byTopic": {
       "animal_spelling": {
@@ -77,38 +77,38 @@
       },
       "sight_body": {
         "audited": 12,
-        "candidates": 8,
-        "rejected": 4
+        "candidates": 10,
+        "rejected": 2
       },
       "sight_feelings": {
         "audited": 12,
-        "candidates": 4,
-        "rejected": 8
+        "candidates": 6,
+        "rejected": 6
       },
       "sight_clothes": {
-        "audited": 12,
-        "candidates": 5,
-        "rejected": 7
-      },
-      "sight_family_people": {
-        "audited": 12,
-        "candidates": 0,
-        "rejected": 12
-      },
-      "sight_weather": {
-        "audited": 12,
-        "candidates": 4,
-        "rejected": 8
-      },
-      "sight_colors": {
         "audited": 12,
         "candidates": 7,
         "rejected": 5
       },
+      "sight_family_people": {
+        "audited": 12,
+        "candidates": 1,
+        "rejected": 11
+      },
+      "sight_weather": {
+        "audited": 12,
+        "candidates": 9,
+        "rejected": 3
+      },
+      "sight_colors": {
+        "audited": 12,
+        "candidates": 9,
+        "rejected": 3
+      },
       "sight_numbers": {
         "audited": 12,
-        "candidates": 4,
-        "rejected": 8
+        "candidates": 6,
+        "rejected": 6
       },
       "sight_shapes": {
         "audited": 12,
@@ -117,13 +117,13 @@
       },
       "sight_toys": {
         "audited": 12,
-        "candidates": 5,
-        "rejected": 7
+        "candidates": 6,
+        "rejected": 6
       },
       "sight_actions": {
         "audited": 12,
-        "candidates": 8,
-        "rejected": 4
+        "candidates": 10,
+        "rejected": 2
       },
       "cvc_at": {
         "audited": 5,
@@ -336,8 +336,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -387,8 +386,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -430,8 +428,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -451,8 +448,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -541,8 +537,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -576,7 +571,7 @@
       "topicId": "animal_spelling",
       "word": "zebra",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "animal_monkey",
@@ -639,8 +634,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -677,7 +671,7 @@
       "topicId": "sight_places",
       "word": "library",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_places_6",
@@ -746,7 +740,7 @@
       "topicId": "sight_places",
       "word": "classroom",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_household_0",
@@ -789,7 +783,7 @@
       "topicId": "sight_household",
       "word": "chair",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_household_4",
@@ -1006,28 +1000,28 @@
       "topicId": "sight_school_items",
       "word": "ruler",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_school_items_5",
       "topicId": "sight_school_items",
       "word": "eraser",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_school_items_6",
       "topicId": "sight_school_items",
       "word": "crayon",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_school_items_7",
       "topicId": "sight_school_items",
       "word": "paper",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_school_items_8",
@@ -1058,7 +1052,7 @@
       "topicId": "sight_school_items",
       "word": "scissors",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "festival_christmas_0",
@@ -1072,7 +1066,7 @@
       "topicId": "festival_christmas",
       "word": "reindeer",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "festival_christmas_2",
@@ -1093,7 +1087,7 @@
       "topicId": "festival_christmas",
       "word": "present",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "festival_christmas_5",
@@ -1116,8 +1110,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -1125,14 +1118,14 @@
       "topicId": "festival_christmas",
       "word": "ornament",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Multisyllabic word with reduced vowel(s); the current inventory has no schwa asset for a safe complete sequence."
     },
     {
       "sourceId": "festival_christmas_7",
       "topicId": "festival_christmas",
       "word": "gingerbread",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "festival_christmas_8",
@@ -1167,7 +1160,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Word-specific mapping: ow in snow is /əʊ/ and is paired to the existing oa clip; do not generalize to ow in cow."
+        "In snowman, ow represents /əʊ/ and uses the oa clip; do not generalize to ow in cow."
       ]
     },
     {
@@ -1211,14 +1204,14 @@
       "topicId": "festival_lunar_new_year",
       "word": "firecracker",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "festival_lunar_new_year_3",
       "topicId": "festival_lunar_new_year",
       "word": "tangerine",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "festival_lunar_new_year_4",
@@ -1309,8 +1302,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -1318,14 +1310,14 @@
       "topicId": "festival_mid_autumn",
       "word": "rabbit",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "festival_mid_autumn_3",
       "topicId": "festival_mid_autumn",
       "word": "lantern",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "festival_mid_autumn_4",
@@ -1351,8 +1343,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -1380,8 +1371,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+        "In cloud, ou represents /aʊ/ and uses the ow clip; adult audition remains pending."
       ]
     },
     {
@@ -1429,8 +1419,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -1438,7 +1427,7 @@
       "topicId": "festival_mid_autumn",
       "word": "harvest",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Multisyllabic UK word with reduced vowel; the written r is not pronounced in non-rhotic British speech, and no complete conservative mapping was established."
     },
     {
       "sourceId": "festival_dragon_boat_0",
@@ -1492,7 +1481,7 @@
       "topicId": "festival_dragon_boat",
       "word": "river",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "festival_dragon_boat_5",
@@ -1541,8 +1530,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -1570,8 +1558,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -1579,14 +1566,14 @@
       "topicId": "festival_dragon_boat",
       "word": "water",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Multisyllabic UK word with a reduced final vowel; the written r is not pronounced in non-rhotic British speech, and no complete conservative mapping was established."
     },
     {
       "sourceId": "festival_dragon_boat_9",
       "topicId": "festival_dragon_boat",
       "word": "winner",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Multisyllabic UK word with a reduced final vowel; the written r is not pronounced in non-rhotic British speech, and no complete conservative mapping was established."
     },
     {
       "sourceId": "festival_halloween_0",
@@ -1638,7 +1625,7 @@
       "topicId": "festival_halloween",
       "word": "spider",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Multisyllabic UK word with a reduced final vowel; the written r is not pronounced in non-rhotic British speech, and no complete conservative mapping was established."
     },
     {
       "sourceId": "festival_halloween_5",
@@ -1737,35 +1724,35 @@
       "topicId": "sight_jobs_nearby",
       "word": "doctor",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_1",
       "topicId": "sight_jobs_nearby",
       "word": "nurse",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_2",
       "topicId": "sight_jobs_nearby",
       "word": "teacher",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_3",
       "topicId": "sight_jobs_nearby",
       "word": "principal",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_4",
       "topicId": "sight_jobs_nearby",
       "word": "firefighter",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_5",
@@ -1779,7 +1766,7 @@
       "topicId": "sight_jobs_nearby",
       "word": "paramedic",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_7",
@@ -1824,14 +1811,14 @@
       "topicId": "sight_jobs_nearby",
       "word": "pharmacist",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_9",
       "topicId": "sight_jobs_nearby",
       "word": "hairdresser",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_10",
@@ -1845,7 +1832,7 @@
       "topicId": "sight_jobs_nearby",
       "word": "cashier",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_12",
@@ -1859,7 +1846,7 @@
       "topicId": "sight_jobs_nearby",
       "word": "cleaner",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_14",
@@ -1887,7 +1874,7 @@
       "topicId": "sight_jobs_nearby",
       "word": "driver",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_18",
@@ -1908,21 +1895,21 @@
       "topicId": "sight_jobs_nearby",
       "word": "waiter",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_21",
       "topicId": "sight_jobs_nearby",
       "word": "gardener",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_22",
       "topicId": "sight_jobs_nearby",
       "word": "zookeeper",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_nearby_23",
@@ -1951,7 +1938,7 @@
       "topicId": "sight_jobs_nearby",
       "word": "librarian",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_world_0",
@@ -1965,7 +1952,7 @@
       "topicId": "sight_jobs_world",
       "word": "farmer",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_world_2",
@@ -1986,7 +1973,7 @@
       "topicId": "sight_jobs_world",
       "word": "astronaut",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_world_5",
@@ -2000,7 +1987,7 @@
       "topicId": "sight_jobs_world",
       "word": "artist",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_world_7",
@@ -2021,28 +2008,28 @@
       "topicId": "sight_jobs_world",
       "word": "actor",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_world_10",
       "topicId": "sight_jobs_world",
       "word": "reporter",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_world_11",
       "topicId": "sight_jobs_world",
       "word": "builder",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_world_12",
       "topicId": "sight_jobs_world",
       "word": "engineer",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_world_13",
@@ -2056,28 +2043,28 @@
       "topicId": "sight_jobs_world",
       "word": "fisherman",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_world_15",
       "topicId": "sight_jobs_world",
       "word": "lifeguard",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_world_16",
       "topicId": "sight_jobs_world",
       "word": "photographer",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_world_17",
       "topicId": "sight_jobs_world",
       "word": "soldier",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_jobs_world_18",
@@ -2097,15 +2084,33 @@
       "sourceId": "sight_body_0",
       "topicId": "sight_body",
       "word": "eye",
-      "status": "rejected",
-      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "eye",
+          "soundAsset": "igh"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "eye is a word-specific spelling for /aɪ/."
+      ]
     },
     {
       "sourceId": "sight_body_1",
       "topicId": "sight_body",
       "word": "ear",
-      "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "ear",
+          "soundAsset": "ear"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "In UK English, ear represents /ɪə/; adult review of this sound remains required."
+      ]
     },
     {
       "sourceId": "sight_body_2",
@@ -2181,8 +2186,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -2255,8 +2259,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -2314,8 +2317,29 @@
       "sourceId": "sight_feelings_0",
       "topicId": "sight_feelings",
       "word": "happy",
-      "status": "rejected",
-      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "h",
+          "soundAsset": "h"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "pp",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "y",
+          "soundAsset": "ee"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "pp represents one /p/ sound; final y represents /i/."
+      ]
     },
     {
       "sourceId": "sight_feelings_1",
@@ -2344,14 +2368,35 @@
       "topicId": "sight_feelings",
       "word": "angry",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_feelings_3",
       "topicId": "sight_feelings",
       "word": "scared",
-      "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "c",
+          "soundAsset": "k"
+        },
+        {
+          "grapheme": "are",
+          "soundAsset": "air"
+        },
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "In scared, are represents /eə/; sc is the initial /s/ + /k/ blend. Adult UK review is required."
+      ]
     },
     {
       "sourceId": "sight_feelings_4",
@@ -2377,8 +2422,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -2386,14 +2430,14 @@
       "topicId": "sight_feelings",
       "word": "tired",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_feelings_7",
       "topicId": "sight_feelings",
       "word": "hungry",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_feelings_8",
@@ -2457,14 +2501,31 @@
       "topicId": "sight_feelings",
       "word": "hurt",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_clothes_0",
       "topicId": "sight_clothes",
       "word": "shirt",
-      "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "sh",
+          "soundAsset": "sh"
+        },
+        {
+          "grapheme": "ir",
+          "soundAsset": "er"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "In UK English, ir represents /ɜː/; adult review of this sound mapping and clip is required."
+      ]
     },
     {
       "sourceId": "sight_clothes_1",
@@ -2532,14 +2593,31 @@
       "topicId": "sight_clothes",
       "word": "skirt",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_clothes_4",
       "topicId": "sight_clothes",
       "word": "shoes",
-      "status": "rejected",
-      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "sh",
+          "soundAsset": "sh"
+        },
+        {
+          "grapheme": "oe",
+          "soundAsset": "oo-long"
+        },
+        {
+          "grapheme": "s",
+          "soundAsset": "z"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "oe represents /uː/; final plural s is /z/."
+      ]
     },
     {
       "sourceId": "sight_clothes_5",
@@ -2623,7 +2701,7 @@
       "topicId": "sight_clothes",
       "word": "scarf",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_clothes_10",
@@ -2637,7 +2715,7 @@
       "topicId": "sight_clothes",
       "word": "shorts",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_family_people_0",
@@ -2665,14 +2743,35 @@
       "topicId": "sight_family_people",
       "word": "sister",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_family_people_4",
       "topicId": "sight_family_people",
       "word": "baby",
-      "status": "rejected",
-      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "y",
+          "soundAsset": "ee"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Final y represents /i/."
+      ]
     },
     {
       "sourceId": "sight_family_people_5",
@@ -2707,14 +2806,14 @@
       "topicId": "sight_family_people",
       "word": "friend",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_family_people_10",
       "topicId": "sight_family_people",
       "word": "teacher",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_family_people_11",
@@ -2727,36 +2826,128 @@
       "sourceId": "sight_weather_0",
       "topicId": "sight_weather",
       "word": "sunny",
-      "status": "rejected",
-      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "u",
+          "soundAsset": "u"
+        },
+        {
+          "grapheme": "nn",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "y",
+          "soundAsset": "ee"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "nn represents one /n/ sound; final y represents /i/."
+      ]
     },
     {
       "sourceId": "sight_weather_1",
       "topicId": "sight_weather",
       "word": "cloudy",
-      "status": "rejected",
-      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "ou",
+          "soundAsset": "ow"
+        },
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        },
+        {
+          "grapheme": "y",
+          "soundAsset": "ee"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "In cloudy, ou represents /aʊ/; final y represents /i/."
+      ]
     },
     {
       "sourceId": "sight_weather_2",
       "topicId": "sight_weather",
       "word": "rainy",
-      "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "ai",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "y",
+          "soundAsset": "ee"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Final y represents /i/; adult review of the UK /r/ sound is required."
+      ]
     },
     {
       "sourceId": "sight_weather_3",
       "topicId": "sight_weather",
       "word": "windy",
-      "status": "rejected",
-      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "w",
+          "soundAsset": "w"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        },
+        {
+          "grapheme": "y",
+          "soundAsset": "ee"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Final y represents /i/."
+      ]
     },
     {
       "sourceId": "sight_weather_4",
       "topicId": "sight_weather",
       "word": "stormy",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_weather_5",
@@ -2812,8 +3003,29 @@
       "sourceId": "sight_weather_7",
       "topicId": "sight_weather",
       "word": "snowy",
-      "status": "rejected",
-      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "ow",
+          "soundAsset": "oa"
+        },
+        {
+          "grapheme": "y",
+          "soundAsset": "ee"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "In snowy, ow represents /əʊ/; final y represents /i/."
+      ]
     },
     {
       "sourceId": "sight_weather_8",
@@ -2836,8 +3048,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -2861,8 +3072,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+        "In snow, ow represents /əʊ/ and uses the oa clip, unlike /aʊ/ in cloud and brown."
       ]
     },
     {
@@ -2870,14 +3080,14 @@
       "topicId": "sight_weather",
       "word": "rainbow",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_weather_11",
       "topicId": "sight_weather",
       "word": "umbrella",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_colors_0",
@@ -2900,8 +3110,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains /r/; although the UK word-level onset is straightforward, the project standard requires human review of the British r recording before using that clip."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -2932,8 +3141,29 @@
       "sourceId": "sight_colors_2",
       "topicId": "sight_colors",
       "word": "yellow",
-      "status": "rejected",
-      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "y",
+          "soundAsset": "y"
+        },
+        {
+          "grapheme": "e",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "ll",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "ow",
+          "soundAsset": "oa"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "In yellow, ow represents /əʊ/; ll represents one /l/ sound."
+      ]
     },
     {
       "sourceId": "sight_colors_3",
@@ -2960,8 +3190,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains /r/; although the UK word-level onset is straightforward, the project standard requires human review of the British r recording before using that clip."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -2969,14 +3198,14 @@
       "topicId": "sight_colors",
       "word": "orange",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_colors_5",
       "topicId": "sight_colors",
       "word": "purple",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_colors_6",
@@ -3062,16 +3291,32 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+        "In brown, ow represents /aʊ/ and uses the ow clip, unlike ow in snow."
       ]
     },
     {
       "sourceId": "sight_colors_10",
       "topicId": "sight_colors",
       "word": "grey",
-      "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        },
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "ey",
+          "soundAsset": "ai"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "ey represents /eɪ/; /gr/ is an initial consonant blend. Adult UK /r/ audition is required."
+      ]
     },
     {
       "sourceId": "sight_colors_11",
@@ -3106,14 +3351,29 @@
       "topicId": "sight_numbers",
       "word": "one",
       "status": "rejected",
-      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+      "reason": "Irregular spelling: the /wʌn/ sequence is not represented by a reliable ordered mapping in the current sound inventory."
     },
     {
       "sourceId": "sight_numbers_1",
       "topicId": "sight_numbers",
       "word": "two",
-      "status": "rejected",
-      "reason": "The letter w is omitted by a simple phonics tile sequence; no safe ordered grapheme mapping was assigned."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "oo-long"
+        }
+      ],
+      "silentLetters": [
+        "w"
+      ],
+      "caveats": [
+        "The w is silent; o represents /uː/ in two."
+      ]
     },
     {
       "sourceId": "sight_numbers_2",
@@ -3127,7 +3387,7 @@
       "topicId": "sight_numbers",
       "word": "four",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_numbers_4",
@@ -3244,50 +3504,77 @@
       "sourceId": "sight_numbers_11",
       "topicId": "sight_numbers",
       "word": "twelve",
-      "status": "rejected",
-      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "w",
+          "soundAsset": "w"
+        },
+        {
+          "grapheme": "e",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "v",
+          "soundAsset": "v"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "The final e is silent; pronounced graphemes map in order to /t w ɛ l v/."
+      ]
     },
     {
       "sourceId": "sight_shapes_0",
       "topicId": "sight_shapes",
       "word": "circle",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_shapes_1",
       "topicId": "sight_shapes",
       "word": "square",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_shapes_2",
       "topicId": "sight_shapes",
       "word": "triangle",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_shapes_3",
       "topicId": "sight_shapes",
       "word": "rectangle",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_shapes_4",
       "topicId": "sight_shapes",
       "word": "star",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_shapes_5",
       "topicId": "sight_shapes",
       "word": "heart",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_shapes_6",
@@ -3341,21 +3628,21 @@
       "topicId": "sight_shapes",
       "word": "cylinder",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_shapes_11",
       "topicId": "sight_shapes",
       "word": "sphere",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_toys_0",
       "topicId": "sight_toys",
       "word": "ball",
       "status": "rejected",
-      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      "reason": "Not mapped yet: the current candidates do not establish an appropriate UK grapheme-to-phoneme mapping for a."
     },
     {
       "sourceId": "sight_toys_1",
@@ -3383,8 +3670,29 @@
       "sourceId": "sight_toys_2",
       "topicId": "sight_toys",
       "word": "teddy",
-      "status": "rejected",
-      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "e",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "dd",
+          "soundAsset": "d"
+        },
+        {
+          "grapheme": "y",
+          "soundAsset": "ee"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "dd represents one /d/ sound; final y represents /i/."
+      ]
     },
     {
       "sourceId": "sight_toys_3",
@@ -3451,7 +3759,7 @@
       "topicId": "sight_toys",
       "word": "target",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_toys_8",
@@ -3488,14 +3796,14 @@
       "topicId": "sight_toys",
       "word": "carousel",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_toys_10",
       "topicId": "sight_toys",
       "word": "maracas",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_toys_11",
@@ -3544,8 +3852,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -3578,8 +3885,27 @@
       "sourceId": "sight_actions_2",
       "topicId": "sight_actions",
       "word": "walk",
-      "status": "rejected",
-      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "w",
+          "soundAsset": "w"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "or"
+        },
+        {
+          "grapheme": "k",
+          "soundAsset": "k"
+        }
+      ],
+      "silentLetters": [
+        "l"
+      ],
+      "caveats": [
+        "The l is silent; a represents /ɔː/ in walk."
+      ]
     },
     {
       "sourceId": "sight_actions_3",
@@ -3707,7 +4033,6 @@
       "silentLetters": [],
       "caveats": [
         "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use.",
         "This Action Words entry is the present-tense /riːd/; the game sends 'reed' to device TTS to avoid the ambiguous isolated spelling 'read'."
       ]
     },
@@ -3716,14 +4041,31 @@
       "topicId": "sight_actions",
       "word": "write",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "sight_actions_9",
       "topicId": "sight_actions",
       "word": "draw",
-      "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        },
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "aw",
+          "soundAsset": "or"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "aw represents /ɔː/; /dr/ is an initial consonant blend, not an r-controlled vowel. Adult UK /r/ audition is required."
+      ]
     },
     {
       "sourceId": "sight_actions_10",
@@ -3752,7 +4094,7 @@
       "topicId": "sight_actions",
       "word": "ride",
       "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
     },
     {
       "sourceId": "cat",
@@ -3841,8 +4183,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -3866,8 +4207,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {
@@ -3959,8 +4299,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+        "Provisional mapping; audio and British pronunciation require human listening."
       ]
     },
     {

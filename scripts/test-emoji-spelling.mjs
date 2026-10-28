@@ -23,7 +23,7 @@ function assertArtwork(emoji, asset, label) {
 }
 assert.equal(topics.length, 32, '所有有圖像的 Phonics 主題及節日子主題納入題庫');
 assert.equal(topics.reduce((sum, topic) => sum + topic.words.length, 0), 333, '全部 333 個現有圖詞納入題庫');
-assert.equal(topics.flatMap(topic => topic.words).filter(word => word.phonicsChunks.length).length, 146, '146 個詞有待覆聽音塊配置');
+assert.equal(topics.flatMap(topic => topic.words).filter(word => word.phonicsChunks.length).length, 165, '165 個詞有待覆聽音塊配置');
 assert.equal(topics.some((topic) => topic.id === 'letters_rev'), false, '獨立字母音練習不混入詞語拼字遊戲');
 
 for (const topic of topics) {
@@ -37,8 +37,23 @@ for (const topic of topics) {
     if (word.phonicsChunks.length && !word.phonicsLabels) assert.equal(word.phonicsChunks.map(chunk => chunk.replace(/^oo-(long|short)$/, 'oo')).join(''), word.word.toLowerCase().replace(/[^a-z]/g, ''), `${word.word} 音塊與拼字一致`);
     if (word.phonicsLabels) {
       assert.equal(word.phonicsLabels.length, word.phonicsChunks.length, `${word.word} 每個字形有一個音`);
-      const written = [...word.phonicsLabels].join('') + (word.phonicsNotes.includes('e 不發音') ? 'e' : '');
-      assert.equal(written, word.word.toLowerCase().replace(/[^a-z]/g, ''), `${word.word} 按字形次序顯示可發音字母及靜音 e`);
+      const silentLetters = word.phonicsNotes.flatMap(note => {
+        const match = note.match(/([a-z]) 不發音/i);
+        return match ? [match[1].toLowerCase()] : [];
+      });
+      let spellingIndex = 0;
+      const skipped = [];
+      for (const grapheme of word.phonicsLabels) {
+        while (!word.word.toLowerCase().startsWith(grapheme.toLowerCase(), spellingIndex)) {
+          const letter = word.word.toLowerCase()[spellingIndex];
+          assert.ok(letter && silentLetters.includes(letter), `${word.word} 只可跳過明確標註的靜音字母`);
+          skipped.push(letter);
+          spellingIndex += 1;
+        }
+        spellingIndex += grapheme.length;
+      }
+      skipped.push(...word.word.toLowerCase().slice(spellingIndex));
+      assert.deepEqual(skipped.sort(), [...silentLetters].sort(), `${word.word} 字形按次序重建拼字，靜音字母有明確標記`);
     }
   }
   const seen = new Set();
@@ -131,7 +146,16 @@ assert.deepEqual([...topics.find(topic => topic.id === 'sight_places').words.fin
 assert.deepEqual([...topics.find(topic => topic.id === 'sight_places').words.find(word => word.word === 'home').phonicsLabels], ['h', 'o', 'm']);
 assert.deepEqual([...topics.find(topic => topic.id === 'sight_places').words.find(word => word.word === 'home').phonicsNotes], ['e 不發音']);
 assert.deepEqual([...topics.find(topic => topic.id === 'festival_halloween').words.find(word => word.word === 'mask').phonicsChunks], []);
-assert.deepEqual([...topics.find(topic => topic.id === 'sight_numbers').words.find(word => word.word === 'two').phonicsChunks], [], 'two 不可漏掉 w 或假裝係規則拼讀');
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_numbers').words.find(word => word.word === 'two').phonicsLabels], ['t', 'o'], 'two 只顯示發音字形，並清楚標示靜音 w');
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_numbers').words.find(word => word.word === 'two').phonicsNotes], ['w 不發音']);
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_numbers').words.find(word => word.word === 'twelve').phonicsNotes], ['字尾 e 不發音']);
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_actions').words.find(word => word.word === 'walk').phonicsLabels], ['w', 'a', 'k'], 'walk 靜音 l 不會被當成一個音');
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_body').words.find(word => word.word === 'eye').phonicsChunks], ['igh']);
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_body').words.find(word => word.word === 'ear').phonicsChunks], ['ear']);
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_clothes').words.find(word => word.word === 'shoes').phonicsChunks], ['sh', 'oo-long', 'z']);
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_clothes').words.find(word => word.word === 'shirt').phonicsChunks], ['sh', 'er', 't'], 'shirt 的 ir 對應英式 /ɜː/，但仍待人耳覆聽');
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_weather').words.find(word => word.word === 'cloudy').phonicsChunks], ['c', 'l', 'ow', 'd', 'ee']);
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_weather').words.find(word => word.word === 'snowy').phonicsChunks], ['s', 'n', 'oa', 'ee'], 'snowy 的 ow /əʊ/ 不會沿用 cloudy 的 /aʊ/');
 assert.deepEqual([...topics.find(topic => topic.id === 'sight_numbers').words.find(word => word.word === 'nine').phonicsChunks], [], 'nine 的 i_e 跨越內部 n，不能直接排成獨立 grapheme tiles');
 const wordById = (topic, sourceId) => topics.find(item => item.id === topic).words.find(word => word.sourceId === sourceId);
 const audit = JSON.parse(fs.readFileSync(path.join(repo, 'docs/emoji-spelling-phonics-audit.json'), 'utf8'));
@@ -155,7 +179,11 @@ for (const item of audit.items) {
     assert.ok(item.orderedPairs.every(pair => fs.existsSync(path.join(repo, 'assets/phonemes', `${pair.soundAsset}.mp3`))), `${item.word} 所有候選音檔都存在`);
     assert.equal(item.orderedPairs.length, word.phonicsChunks.length, `${item.word} 詞形和候選音塊數一致`);
     assert.deepEqual(item.orderedPairs.map(pair => pair.soundAsset), [...word.phonicsChunks], `${item.word} 審核音檔順序與遊戲字卡一致`);
-    if (word.phonicsNotes.some(note => note.includes('不發音'))) assert.ok(item.silentLetters.includes('e'), `${item.word} 字卡標明靜音 e 時，審核表亦要記錄`);
+    const notedSilentLetters = word.phonicsNotes.flatMap(note => {
+      const match = note.match(/([a-z]) 不發音/i);
+      return match ? [match[1].toLowerCase()] : [];
+    });
+    assert.deepEqual([...item.silentLetters].sort(), [...notedSilentLetters].sort(), `${item.word} 靜音字母紀錄與字卡說明一致`);
   }
 }
 assert.deepEqual([...wordById('sight_food', 'sight_food_1').phonicsChunks], ['b', 'r', 'e', 'd']);
