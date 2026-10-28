@@ -109,6 +109,7 @@ assert.equal(api.isCorrectAnswer(slots, 'bananas'), false, '答案必須與目�
 const markup = fs.readFileSync(path.join(repo, 'index.html'), 'utf8');
 const app = fs.readFileSync(path.join(repo, 'js/emoji-spelling-app.js'), 'utf8');
 const referenceCss = fs.readFileSync(path.join(repo, 'css/emoji-spelling-reference.css'), 'utf8');
+const spellingCss = fs.readFileSync(path.join(repo, 'css/emoji-spelling.css'), 'utf8');
 const sightTrackMarkup = markup.match(/<div class="english-track english-track-sight">([\s\S]*?)<\/div>\s*<div class="english-track english-track-phonics">/)?.[1] || '';
 assert.doesNotMatch(sightTrackMarkup, /id="btn-open-emoji-spelling"/, '避免重複入口');
 const phonicsApp = fs.readFileSync(path.join(repo, 'js/phonics-app.js'), 'utf8');
@@ -173,6 +174,27 @@ assert.match(app, /speakEnglishTerm/, '單字卡及提示使用 KAKA 英文語�
 assert.match(app, /tile\.letter !== state\.round\[state\.index\]\.letters\[nextIndex\]/, '每次只接受下一格的正確字母');
 assert.doesNotMatch(app, /KakaEmojiArt\.html\(/, '圖像串字的 emoji 使用裝置原生字型');
 assert.match(referenceCss, /Apple Color Emoji/, 'iPhone／iPad 使用 Apple 原生 emoji 字型');
+
+function luminance(hex) {
+  const channels = hex.match(/[\da-f]{2}/gi).map(channel => parseInt(channel, 16) / 255);
+  const linear = channels.map(value => value <= .04045 ? value / 12.92 : ((value + .055) / 1.055) ** 2.4);
+  return .2126 * linear[0] + .7152 * linear[1] + .0722 * linear[2];
+}
+function contrastRatio(foreground, background) {
+  const [lighter, darker] = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
+  return (lighter + .05) / (darker + .05);
+}
+for (const [label, foreground, background] of [
+  ['開始掣文字', '#153861', '#36d975'],
+  ['單字重播圖示', '#153861', '#45a9fa'],
+  ['已用字母', '#43566b', '#d6dde3'],
+  ['答對提示', '#126c50', '#ffffff'],
+  ['完成獎勵提示', '#126c50', '#f9fdff'],
+  ['字卡喇叭圖示', '#2679b9', '#ffffff'],
+]) assert.ok(contrastRatio(foreground, background) >= 4.5, `${label} 文字／圖示對比至少 4.5:1`);
+assert.match(referenceCss, /#btn-emoji-spelling-start\s*\{[^}]*color:\s*#153861/s, '脈動開始掣採用高對比深色字');
+assert.match(referenceCss, /emoji-spelling-letter\.is-used\s*\{[^}]*color:\s*#43566b/s, '已用字母保留可讀對比');
+assert.match(spellingCss, /\.emoji-spelling-feedback\s*\{[^}]*color:\s*#126c50/s, '答對提示使用高對比深綠');
 
 console.log('Emoji Spelling tests passed');
 console.log(`  ✓ ${topics.length} categories and ${topics.reduce((sum, topic) => sum + topic.words.length, 0)} picture words`);
