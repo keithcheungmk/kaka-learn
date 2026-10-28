@@ -113,9 +113,9 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 - 以 GitHub `origin/main` `e5ae9e24cf8b2f64b4ad701bf0794a47982f3433`（短 SHA `e5ae9e2`）作最新基準。自共同祖先 `2ed3434` 起，主線前進 237 個提交；最新一批包括中文入口／寫字介面、家庭日記故事及詞語拼字遊戲等更新。唔好再將 `codex/local-wip-preserved-20260929` 當成現行主線。
 - 舊本機 checkout 當時停喺 `0c9b24b`，比共同祖先多 5 個本機故事提交、落後主線 237 個提交，並有 2,411 個已修改／新增檔案。逐檔比對工作目錄與 `origin/main`：1,938 個與主線內容完全相同、43 個同路徑內容不同、430 個檔案只存在舊本機目錄。此為 2026-10-28 快照；唔好整批 merge／覆蓋／刪除，亦唔好將舊工作樹直接 rebase。
-- 接手舊本機故事／數學／PTH／素材時，先保留原工作樹；由最新 `origin/main` 開獨立 worktree，只揀需要嘅差異逐檔比對／移植。特別留意 `index.html`、`AGENTS.md`、`docs/handover.md`、`js/app.js`、`js/family-storybook.js`、`data/family-stories/manifest.js`、`css/styles.css`、`js/math-*`、`scripts/check-invariants.py` 等同路徑分歧。
+- 後續新任務一律以最新 `origin/main` 同公開 Pages 為準，喺乾淨 checkout／worktree 開始；唔好喺 `codex/local-wip-preserved-20260929` 繼續開工，避免舊檔蓋過 live page。已封存嘅舊故事／數學／PTH／素材改動唔係待辦，亦唔需要主動逐項復活；只有 Keith 明確重新指定時，先由封存目錄挑選指定內容，逐檔比較及移植。
 - 驗證：latest CI run `40513036813` 通過（57 項 invariants、20 項 storage 測試、模擬部署、iPad Pro 11 直／橫及 iPhone 16 Pro Max smoke）；Pages run `40513036737` 部署成功。公開 `https://keithcheungmk.github.io/kaka-learn/version.json` 回報 `{"version":"e5ae9e2"}`。本機完全相同主線 checkout 的 invariants、storage、中文詞語牆、家庭故事、Emoji Spelling、Story English 測試及 build 亦通過；本機 Playwright server 受 sandbox 禁止開 port，版面 smoke 以 GitHub CI 結果為準。
-- 本次只核對及記錄，未將舊工作目錄合併入主線；舊工作目錄內 430 個獨有檔案仍要逐項判斷係待整合內容、素材或暫存產物。
+- 主線於 2026-10-28 只新增咗交接記錄提交 `9c03ce4`；CI／Pages 均成功，公開版本已核對為 `9c03ce4`。舊工作目錄未有合併或清理，封存內容不計入現行任務。
 
 ### 2026-10-27 · ChatGPT／Codex（Emoji Spelling 同版本核對）
 
