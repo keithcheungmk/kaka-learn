@@ -26,6 +26,9 @@ jobs:
       - name: storage.js 單元測試
         run: node scripts/test-storage.mjs
 
+      - name: Emoji Spelling 全主題／phonics 覆蓋測試
+        run: node scripts/test-emoji-spelling.mjs
+
       - name: 模擬部署（確保 _site 齊料）
         run: |
           bash scripts/build-site.sh _site "${GITHUB_SHA::7}"

@@ -23,7 +23,7 @@ function assertArtwork(emoji, asset, label) {
 }
 assert.equal(topics.length, 32, '所有有圖像的 Phonics 主題及節日子主題納入題庫');
 assert.equal(topics.reduce((sum, topic) => sum + topic.words.length, 0), 333, '全部 333 個現有圖詞納入題庫');
-assert.equal(topics.flatMap(topic => topic.words).filter(word => word.phonicsChunks.length).length, 165, '165 個詞有待覆聽音塊配置');
+assert.equal(topics.flatMap(topic => topic.words).filter(word => word.phonicsChunks.length).length, 181, '181 個詞有待覆聽音塊配置');
 assert.equal(topics.some((topic) => topic.id === 'letters_rev'), false, '獨立字母音練習不混入詞語拼字遊戲');
 
 for (const topic of topics) {
@@ -123,6 +123,10 @@ assert.equal(api.isCorrectAnswer(slots, 'bananas'), false, '答案必須與目�
 
 const markup = fs.readFileSync(path.join(repo, 'index.html'), 'utf8');
 const app = fs.readFileSync(path.join(repo, 'js/emoji-spelling-app.js'), 'utf8');
+assert.match(markup, /id="emoji-spelling-picture"[^>]*role="img"[^>]*aria-label=/, '拼字提示圖有螢幕閱讀器文字');
+assert.match(markup, /id="emoji-spelling-progress"[^>]*aria-live="polite"/, '題目進度會通知輔助技術');
+assert.match(app, /emoji-spelling-finish-title'\)\?\.focus/, '完成獎勵開啟後將焦點移至對話框標題');
+assert.match(app, /event\.key !== 'Tab'[\s\S]*actions\[actions\.length - 1\]/, '完成獎勵對話框限制 Tab 焦點範圍');
 const referenceCss = fs.readFileSync(path.join(repo, 'css/emoji-spelling-reference.css'), 'utf8');
 const spellingCss = fs.readFileSync(path.join(repo, 'css/emoji-spelling.css'), 'utf8');
 const sightTrackMarkup = markup.match(/<div class="english-track english-track-sight">([\s\S]*?)<\/div>\s*<div class="english-track english-track-phonics">/)?.[1] || '';
@@ -134,11 +138,11 @@ const animal = topics.find(topic => topic.id === 'animal_spelling');
 assert.equal(animal.words.find(word => word.sourceId === 'animal_goat').emoji, '🐐');
 assert.equal(animal.words.find(word => word.sourceId === 'animal_monkey').emoji, '🐒');
 assert.deepEqual([...animal.words.find(word => word.sourceId === 'animal_fish').phonicsChunks], ['f', 'i', 'sh']);
-assert.equal(animal.words.find(word => word.sourceId === 'animal_monkey').phonicsChunks.length, 0);
+assert.deepEqual([...animal.words.find(word => word.sourceId === 'animal_monkey').phonicsChunks], ['m', 'u', 'ng', 'k', 'ee']);
 for (const word of topics.flatMap(topic => topic.words)) for (const chunk of word.phonicsChunks.filter(chunk => chunk !== 'ice')) assert.ok(fs.existsSync(path.join(repo, 'assets/phonemes', `${chunk}.mp3`)), `${chunk} 音檔存在`);
 assert.equal(api.makeLetterPool('cat', Math.random, 2).length, 5);
 assert.deepEqual([...topics.find(topic => topic.id === 'sight_food').words.find(word => word.word === 'milk').phonicsChunks], ['m', 'i', 'l', 'k']);
-assert.deepEqual([...topics.find(topic => topic.id === 'sight_food').words.find(word => word.word === 'rice').phonicsChunks], [], 'rice 沒有獨立 ice 音檔，應使用完整詞語語音');
+assert.deepEqual([...topics.find(topic => topic.id === 'sight_food').words.find(word => word.word === 'rice').phonicsChunks], ['r', 'igh', 's'], 'rice 不使用不存在的 ice 音檔');
 assert.equal(topics.find(topic => topic.id === 'sight_toys').words.find(word => word.word === 'ball').phonicsChunks.length, 0, 'ball 不用錯誤短 a 硬拆');
 assert.deepEqual([...topics.find(topic => topic.id === 'sight_food').words.find(word => word.word === 'cake').phonicsChunks], ['c', 'ai', 'k']);
 assert.deepEqual([...topics.find(topic => topic.id === 'sight_food').words.find(word => word.word === 'cake').phonicsLabels], ['c', 'a', 'k']);
@@ -214,7 +218,17 @@ assert.deepEqual([...wordById('sight_toys', 'sight_toys_1').phonicsLabels], ['d'
 assert.deepEqual([...wordById('sight_feelings', 'sight_feelings_5').phonicsLabels], ['sh', 'y']);
 assert.deepEqual([...wordById('sight_actions', 'sight_actions_7').phonicsChunks], ['r', 'ee', 'd']);
 assert.equal(wordById('sight_actions', 'sight_actions_7').spokenText, 'reed', 'read 的現在式發音需避開 TTS 誤讀成過去式');
+assert.deepEqual([...wordById('animal_spelling', 'animal_monkey').phonicsChunks], ['m', 'u', 'ng', 'k', 'ee']);
+assert.deepEqual([...wordById('sight_household', 'sight_household_3').phonicsChunks], ['ch', 'air']);
+assert.deepEqual([...wordById('festival_christmas', 'festival_christmas_3').phonicsChunks], ['s', 't', 'o', 'ck', 'i', 'ng']);
+assert.deepEqual([...wordById('sight_food', 'sight_food_0').phonicsChunks], ['r', 'igh', 's'], 'rice 使用實際存在的音檔，不假設有 ice 音檔');
+assert.deepEqual([...wordById('sight_shapes', 'sight_shapes_4').phonicsChunks], ['s', 't', 'ar']);
+assert.deepEqual([...wordById('sight_weather', 'sight_weather_10').phonicsChunks], ['r', 'ai', 'n', 'b', 'oa']);
 assert.match(wordById('sight_shapes', 'sight_shapes_9').objectArt, /cone\.svg$/);
+for (const [sourceId, filename] of [['sight_shapes_0', 'circle.svg'], ['sight_shapes_1', 'square.svg'], ['sight_shapes_3', 'rectangle.svg'], ['sight_shapes_6', 'oval.svg']]) {
+  assert.ok(wordById('sight_shapes', sourceId).objectArt.endsWith(filename), `${sourceId} 使用清楚的幾何形狀圖`);
+}
+assert.equal(wordById('sight_jobs_nearby', 'sight_jobs_nearby_1').emoji, '👨‍⚕️', 'nurse emoji 與插圖人物性別一致');
 assert.equal(wordById('sight_weather', 'sight_weather_8').emoji, '🌧️');
 assert.equal(wordById('sight_weather', 'sight_weather_9').emoji, '❄️');
 assert.match(wordById('sight_school_items', 'sight_school_items_5').objectArt, /eraser\.svg$/);

@@ -158,11 +158,13 @@
     $('#emoji-spelling-play-title').textContent = '✨ Emoji Spelling ✨';
     $('#emoji-spelling-progress').textContent = `${state.index + 1} / ${state.round.length}`;
     $('#emoji-spelling-picture').innerHTML = imageHtml(word.emoji, word.plate, word.photo || word.objectArt);
+    $('#emoji-spelling-picture').setAttribute('aria-label', `Picture clue for ${word.word}`);
     $('#btn-emoji-spelling-phonics').hidden = !word.phonicsChunks.length;
     $('#emoji-spelling-feedback').textContent = '';
     $('#emoji-spelling-feedback').classList.remove('is-retry', 'is-correct');
     renderAnswer();
     renderLetterPool();
+    $('#emoji-spelling-letter-pool button:not(:disabled)')?.focus({ preventScroll: true });
     speak(word.spokenText || word.word);
   }
 
@@ -379,6 +381,7 @@
     $('#emoji-spelling-finish').classList.remove('is-celebrating');
     void $('#emoji-spelling-finish').offsetWidth;
     $('#emoji-spelling-finish').classList.add('is-celebrating');
+    $('#emoji-spelling-finish-title')?.focus({ preventScroll: true });
     speech.playStarCue({ muted: muted() });
     speak('Amazing spelling! You earned ten stars!', 0.92);
   }
@@ -388,6 +391,7 @@
     roundToken += 1;
     showView('category');
     renderCategories();
+    $('#emoji-spelling-category-grid button')?.focus({ preventScroll: true });
     showScreen($('#screen-emoji-spelling'));
   }
 
@@ -441,6 +445,15 @@
     $('#btn-emoji-spelling-undo')?.addEventListener('click', undoLast);
     $('#btn-emoji-spelling-choose-again')?.addEventListener('click', returnToTopics);
     $('#btn-emoji-spelling-play-again')?.addEventListener('click', () => startRound({ restart: true }));
+    $('#emoji-spelling-finish')?.addEventListener('keydown', (event) => {
+      if (event.key !== 'Tab') return;
+      const actions = [...$('#emoji-spelling-finish').querySelectorAll('button:not(:disabled)')];
+      if (!actions.length) return;
+      const first = actions[0];
+      const last = actions[actions.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
     renderCategories();
   }
 
