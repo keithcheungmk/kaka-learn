@@ -59,6 +59,7 @@
     "sight_jobs_nearby_23": ["v", "e", "t"],
     "sight_body_5": ["h", "air"],
     "sight_body_7": ["h", "a", "n", "d"],
+    "sight_body_8": ["ar", "m"],
     "sight_body_9": ["l", "e", "g"],
     "sight_body_10": ["f", "oo-short", "t"],
     "sight_feelings_1": ["s", "a", "d"],
@@ -138,6 +139,7 @@
     sight_body_2: { word: 'nose', labels: ['n', 'o', 's'], sounds: ['n', 'oa', 'z'], notes: ['e 不發音'] },
     sight_body_4: { word: 'head', labels: ['h', 'ea', 'd'], sounds: ['h', 'e', 'd'] },
     sight_feelings_10: { word: 'cold', labels: ['c', 'o', 'l', 'd'], sounds: ['c', 'oa', 'l', 'd'] },
+    sight_feelings_5: { word: 'shy', labels: ['sh', 'y'], sounds: ['sh', 'igh'] },
     sight_clothes_5: { word: 'socks', labels: ['s', 'o', 'ck', 's'], sounds: ['s', 'o', 'ck', 's'] },
     sight_clothes_7: { word: 'coat', labels: ['c', 'oa', 't'], sounds: ['c', 'oa', 't'] },
     sight_weather_6: { word: 'cold', labels: ['c', 'o', 'l', 'd'], sounds: ['c', 'oa', 'l', 'd'] },
@@ -153,6 +155,8 @@
     sight_toys_8: { word: 'slide', labels: ['s', 'l', 'i', 'd'], sounds: ['s', 'l', 'igh', 'd'], notes: ['e 不發音'] },
     sight_toys_11: { word: 'game', labels: ['g', 'a', 'm'], sounds: ['g', 'ai', 'm'], notes: ['e 不發音'] },
     sight_actions_4: { word: 'wave', labels: ['w', 'a', 'v'], sounds: ['w', 'ai', 'v'], notes: ['e 不發音'] },
+    // This action word means the present-tense /riːd/; use a disambiguated TTS cue.
+    sight_actions_7: { word: 'read', labels: ['r', 'ea', 'd'], sounds: ['r', 'ee', 'd'], spokenText: 'reed' },
     sight_actions_6: { word: 'sleep', labels: ['s', 'l', 'ee', 'p'], sounds: ['s', 'l', 'ee', 'p'] },
   };
 
@@ -168,6 +172,7 @@
     festival_dragon_boat_2: { objectArt: './assets/emoji-spelling/paddle.svg' },
     sight_weather_8: { emoji: '🌧️' },
     sight_weather_9: { emoji: '❄️' },
+    sight_shapes_9: { objectArt: './assets/emoji-spelling/cone.svg' },
     sight_toys_11: { objectArt: './assets/emoji-spelling/board-game.svg' },
   };
 
@@ -211,6 +216,7 @@
               phonicsChunks: approved?.sounds || WORD_PHONICS[word.id] || [],
               phonicsLabels: approved?.labels || null,
               phonicsNotes: approved?.notes || [],
+              spokenText: approved?.spokenText || '',
             };
           }),
       }))

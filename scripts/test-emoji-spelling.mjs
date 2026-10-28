@@ -23,7 +23,7 @@ function assertArtwork(emoji, asset, label) {
 }
 assert.equal(topics.length, 32, '所有有圖像的 Phonics 主題及節日子主題納入題庫');
 assert.equal(topics.reduce((sum, topic) => sum + topic.words.length, 0), 333, '全部 333 個現有圖詞納入題庫');
-assert.equal(topics.flatMap(topic => topic.words).filter(word => word.phonicsChunks.length).length, 135, '135 個詞有待覆聽音塊配置');
+assert.equal(topics.flatMap(topic => topic.words).filter(word => word.phonicsChunks.length).length, 138, '138 個詞有待覆聽音塊配置');
 assert.equal(topics.some((topic) => topic.id === 'letters_rev'), false, '獨立字母音練習不混入詞語拼字遊戲');
 
 for (const topic of topics) {
@@ -145,6 +145,11 @@ assert.deepEqual([...wordById('sight_weather', 'sight_weather_9').phonicsChunks]
 assert.deepEqual([...wordById('sight_actions', 'sight_actions_0').phonicsChunks], ['r', 'u', 'n']);
 assert.deepEqual([...wordById('animal_spelling', 'animal_cow').phonicsChunks], ['c', 'ow']);
 assert.deepEqual([...wordById('sight_fruit', 'sight_fruit_3').phonicsLabels], ['g', 'r', 'a', 'p']);
+assert.deepEqual([...wordById('sight_body', 'sight_body_8').phonicsChunks], ['ar', 'm']);
+assert.deepEqual([...wordById('sight_feelings', 'sight_feelings_5').phonicsLabels], ['sh', 'y']);
+assert.deepEqual([...wordById('sight_actions', 'sight_actions_7').phonicsChunks], ['r', 'ee', 'd']);
+assert.equal(wordById('sight_actions', 'sight_actions_7').spokenText, 'reed', 'read 的現在式發音需避開 TTS 誤讀成過去式');
+assert.match(wordById('sight_shapes', 'sight_shapes_9').objectArt, /cone\.svg$/);
 assert.equal(wordById('sight_weather', 'sight_weather_8').emoji, '🌧️');
 assert.equal(wordById('sight_weather', 'sight_weather_9').emoji, '❄️');
 assert.match(wordById('sight_school_items', 'sight_school_items_5').objectArt, /eraser\.svg$/);
