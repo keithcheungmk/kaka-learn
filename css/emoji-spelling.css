@@ -139,7 +139,7 @@
 .emoji-spelling-word-card .emoji-plate { width: 68px; height: 68px; }
 .emoji-spelling-word-card .emoji-face { font-size: 43px; }
 .emoji-spelling-word-card strong { max-width: 100%; font-family: var(--font-display); font-size: clamp(.96rem, 1.6vw, 1.2rem); line-height: 1.15; text-align: center; overflow-wrap: anywhere; }
-.emoji-spelling-card-speaker { color: #388dd3; font-size: 1.15rem; }
+.emoji-spelling-card-speaker { color: #2679b9; font-size: 1.15rem; }
 
 .emoji-spelling-actions { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; padding: 4px 0 26px; }
 
@@ -175,13 +175,13 @@
 .emoji-spelling-letter.is-dragging { opacity: .3; }
 .emoji-spelling-drag-ghost { position: fixed; z-index: 1000; display: grid; width: 56px; height: 62px; place-items: center; border: 3px solid #f2bf43; border-radius: 16px; color: #1a3764; background: #fff7d9; box-shadow: 0 8px 20px #18345d55; font-size: 1.7rem; font-weight: 900; pointer-events: none; transform: translate(-50%, -50%) scale(1.06); }
 .emoji-spelling-undo { margin: 12px auto 0; padding: 9px 20px; border: 1px solid #c5d8eb; border-radius: 999px; color: #355879; background: #f1f7fd; font-size: 1rem; font-weight: 800; cursor: pointer; }
-.emoji-spelling-feedback { min-height: 1.5em; margin: 10px 0 0; color: #178b68; font-family: var(--font-display); font-size: clamp(1.1rem, 3vw, 1.55rem); font-weight: 800; }
+.emoji-spelling-feedback { min-height: 1.5em; margin: 10px 0 0; color: #126c50; font-family: var(--font-display); font-size: clamp(1.1rem, 3vw, 1.55rem); font-weight: 800; }
 .emoji-spelling-feedback.is-retry { color: #a75a25; }
 .emoji-spelling-finish { position: fixed; z-index: 120; inset: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(14px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left)); display: grid; align-content: center; justify-items: center; gap: 10px; padding: clamp(22px, 5vw, 48px); border: 3px solid #f2c64e; border-radius: 32px; color: #1a3764; background: rgba(249, 253, 255, .98); box-shadow: 0 0 0 100vmax rgba(13, 31, 60, .52), 0 22px 50px rgba(20, 52, 87, .3); text-align: center; }
 .emoji-spelling-finish-coin { font-size: clamp(70px, 14vw, 120px); line-height: 1; }
 .emoji-spelling-finish h2 { margin: 0; font-family: var(--font-display); font-size: clamp(1.8rem, 5vw, 3rem); }
 .emoji-spelling-finish p { margin: 0; font-size: clamp(1.05rem, 2.6vw, 1.4rem); font-weight: 800; }
-.emoji-spelling-finish-reward { color: #168664; }
+.emoji-spelling-finish-reward { color: #126c50; }
 .emoji-spelling-finish.is-celebrating .emoji-spelling-finish-coin { animation: emoji-coin-pop 780ms cubic-bezier(.2, .9, .3, 1.3) both; }
 @keyframes emoji-coin-pop { 0% { transform: translateY(20px) scale(.55) rotate(-18deg); opacity: .4; } 68% { transform: translateY(-8px) scale(1.12) rotate(8deg); opacity: 1; } 100% { transform: translateY(0) scale(1) rotate(0); } }
 
