@@ -6,7 +6,7 @@ Keith 現時以 Cursor 主 Agent 做 Chief Lead，下面設本機 Math／English
 
 **2026-10-28 Codex Emoji Spelling 全主題本機整合（未部署）：** 以最新 `origin/main` `9c03ce4` 為基礎保留先前獲批動物試玩；32 個詞語／CVC 分類、333 圖詞使用同一拼字流程，保留節日和職業子分類、獨立字母音及原進度 key。每題 2 個干擾字，點選或拖拉，題目自動讀字，答對後讀字、可用音塊、讀字及讚賞。135 個題目有音塊／詞尾示範（rice 用既定 r + ice）；其餘 198 個只讀完整詞語。先前新增 25 個候選音塊映射，本輪再新增 23 題待覆聽映射；沒有任何錄音在本輪經人耳核實，須由熟悉英式 synthetic phonics 的成人覆聽後才可標為驗收。已修正 11 項圖詞錯配；稀有物件以本地插圖替代。工作位於 `/private/tmp/kaka-emoji-spelling-20261027`；iPad 真機音效及瀏覽器語音仍需確認；不得宣稱 333 字已完成 phonics 聽力核實。分支已推送；GitHub PR connector 建立權限不足，且使用本機憑證繞過 connector 的操作被自動審批拒絕，故未建 PR、未 merge／部署。
 
-本輪已對齊審核表與實際題庫，候選及待處理詞詳見 `docs/emoji-spelling-audio-coverage.md`。全 333 題拼字模擬、phonics flow 和 57 項 invariants 通過；iPad 直／橫及手機尺寸的瀏覽器測試覆蓋試錯、拼字、回饋次序及星星，語音以測試替身模擬，並非真人聽音或真機驗收。
+本輪已對齊審核表與實際題庫，候選及待處理詞詳見 `docs/emoji-spelling-audio-coverage.md`。全 333 題拼字模擬、phonics flow 和 57 項 invariants 通過；iPad 直／橫及手機尺寸的瀏覽器測試覆蓋試錯、拼字、回饋次序及星星，語音以測試替身模擬，並非真人聽音或真機驗收。50 個現有音檔均可解碼且短於單音逾時；12 個有少量浮點解碼樣本達到或超過滿幅，須聽音確認有否爆音。
 
 
 ## 邊個係邊個
