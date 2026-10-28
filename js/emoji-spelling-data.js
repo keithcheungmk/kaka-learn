@@ -164,6 +164,8 @@
   const PICTURE_CORRECTIONS = {
     sight_veg_5: { emoji: '🫘' },
     sight_places_9: { objectArt: './assets/emoji-spelling/classroom.svg' },
+    sight_places_2: { objectArt: './assets/emoji-spelling/park.svg' },
+    sight_places_8: { objectArt: './assets/emoji-spelling/zoo.svg' },
     sight_school_items_5: { objectArt: './assets/emoji-spelling/eraser.svg' },
     sight_school_items_8: { objectArt: './assets/emoji-spelling/glue.svg' },
     festival_christmas_6: { objectArt: './assets/emoji-spelling/ornament.svg' },
@@ -172,7 +174,12 @@
     festival_dragon_boat_2: { objectArt: './assets/emoji-spelling/paddle.svg' },
     sight_weather_8: { emoji: '🌧️' },
     sight_weather_9: { emoji: '❄️' },
+    sight_feelings_5: { emoji: '😳' },
+    sight_family_people_11: { objectArt: './assets/emoji-spelling/classmates.svg' },
+    festival_halloween_1: { objectArt: './assets/emoji-spelling/costume.svg' },
     sight_shapes_9: { objectArt: './assets/emoji-spelling/cone.svg' },
+    sight_shapes_10: { objectArt: './assets/emoji-spelling/cylinder.svg' },
+    sight_shapes_11: { objectArt: './assets/emoji-spelling/sphere.svg' },
     sight_toys_11: { objectArt: './assets/emoji-spelling/board-game.svg' },
   };
 
