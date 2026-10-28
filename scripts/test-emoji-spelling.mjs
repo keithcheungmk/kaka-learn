@@ -34,6 +34,10 @@ for (const topic of topics) {
     assert.ok(word.emoji, `${word.word} 有圖像提示`);
     assertArtwork(word.emoji, word.photo || word.objectArt, word.word);
     assert.deepEqual([...word.letters].join(''), word.word.toLowerCase().replace(/[^a-z]/g, ''), `${word.word} 轉為正確字母槽`);
+    for (const chunk of word.phonicsChunks) {
+      if (/^oo-(long|short)$/.test(chunk)) continue; // These two long/short oo examples are spoken through English TTS.
+      assert.ok(fs.existsSync(path.join(repo, 'assets/phonemes', `${chunk}.mp3`)), `${word.word} 的音塊 ${chunk} 有對應錄音`);
+    }
     if (word.phonicsChunks.length && !word.phonicsLabels) assert.equal(word.phonicsChunks.map(chunk => chunk.replace(/^oo-(long|short)$/, 'oo')).join(''), word.word.toLowerCase().replace(/[^a-z]/g, ''), `${word.word} 音塊與拼字一致`);
     if (word.phonicsLabels) {
       assert.equal(word.phonicsLabels.length, word.phonicsChunks.length, `${word.word} 每個字形有一個音`);
