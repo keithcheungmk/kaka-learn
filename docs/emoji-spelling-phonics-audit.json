@@ -2,16 +2,11 @@
   "title": "Emoji Spelling remaining-topic phonics audit",
   "date": "2026-10-28",
   "scope": {
-    "excludedTopics": [
-      "sight_food",
-      "sight_veg",
-      "sight_fruit",
-      "sight_vehicles"
-    ],
-    "leafTopicCount": 28,
-    "itemCount": 293,
+    "excludedTopics": [],
+    "leafTopicCount": 32,
+    "itemCount": 333,
     "clipsAudiblyVerified": false,
-    "repositoryFilesModified": false,
+    "repositoryFilesModified": true,
     "deployed": false
   },
   "assetCheck": {
@@ -21,8 +16,8 @@
     "note": "Asset filenames were checked only. No clip was listened to; candidates remain provisional until the sound and blending are audited."
   },
   "summary": {
-    "candidateCount": 118,
-    "rejectedCount": 175,
+    "candidateCount": 146,
+    "rejectedCount": 187,
     "clipsAudiblyVerifiedCount": 0,
     "byTopic": {
       "animal_spelling": {
@@ -42,8 +37,8 @@
       },
       "sight_school_items": {
         "audited": 10,
-        "candidates": 3,
-        "rejected": 7
+        "candidates": 4,
+        "rejected": 6
       },
       "festival_christmas": {
         "audited": 10,
@@ -57,18 +52,18 @@
       },
       "festival_mid_autumn": {
         "audited": 10,
-        "candidates": 4,
-        "rejected": 6
+        "candidates": 5,
+        "rejected": 5
       },
       "festival_dragon_boat": {
         "audited": 10,
-        "candidates": 3,
-        "rejected": 7
+        "candidates": 4,
+        "rejected": 6
       },
       "festival_halloween": {
         "audited": 10,
-        "candidates": 1,
-        "rejected": 9
+        "candidates": 4,
+        "rejected": 6
       },
       "sight_jobs_nearby": {
         "audited": 25,
@@ -82,8 +77,8 @@
       },
       "sight_body": {
         "audited": 12,
-        "candidates": 7,
-        "rejected": 5
+        "candidates": 8,
+        "rejected": 4
       },
       "sight_feelings": {
         "audited": 12,
@@ -92,8 +87,8 @@
       },
       "sight_clothes": {
         "audited": 12,
-        "candidates": 4,
-        "rejected": 8
+        "candidates": 5,
+        "rejected": 7
       },
       "sight_family_people": {
         "audited": 12,
@@ -164,6 +159,26 @@
         "audited": 3,
         "candidates": 3,
         "rejected": 0
+      },
+      "sight_food": {
+        "audited": 10,
+        "candidates": 6,
+        "rejected": 4
+      },
+      "sight_veg": {
+        "audited": 10,
+        "candidates": 3,
+        "rejected": 7
+      },
+      "sight_vehicles": {
+        "audited": 10,
+        "candidates": 8,
+        "rejected": 2
+      },
+      "sight_fruit": {
+        "audited": 10,
+        "candidates": 3,
+        "rejected": 7
       }
     }
   },
@@ -1018,8 +1033,25 @@
       "sourceId": "sight_school_items_8",
       "topicId": "sight_school_items",
       "word": "glue",
-      "status": "rejected",
-      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "ue",
+          "soundAsset": "oo-long"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "ue is one vowel grapheme for /uː/. Candidate only; adult audition is required."
+      ]
     },
     {
       "sourceId": "sight_school_items_9",
@@ -1356,8 +1388,25 @@
       "sourceId": "festival_mid_autumn_7",
       "topicId": "festival_mid_autumn",
       "word": "sky",
-      "status": "rejected",
-      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "k",
+          "soundAsset": "k"
+        },
+        {
+          "grapheme": "y",
+          "soundAsset": "igh"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Final y represents /aɪ/. Candidate only; adult audition is required."
+      ]
     },
     {
       "sourceId": "festival_mid_autumn_8",
@@ -1416,8 +1465,27 @@
       "sourceId": "festival_dragon_boat_3",
       "topicId": "festival_dragon_boat",
       "word": "race",
-      "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "c",
+          "soundAsset": "s"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Final e is silent; c is soft /s/. Adult British /r/ and phoneme audition is required."
+      ]
     },
     {
       "sourceId": "festival_dragon_boat_4",
@@ -1538,8 +1606,25 @@
       "sourceId": "festival_halloween_2",
       "topicId": "festival_halloween",
       "word": "witch",
-      "status": "rejected",
-      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "w",
+          "soundAsset": "w"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "tch",
+          "soundAsset": "ch"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "tch is one trigraph for /tʃ/. Candidate only; adult audition is required."
+      ]
     },
     {
       "sourceId": "festival_halloween_3",
@@ -1595,15 +1680,57 @@
       "sourceId": "festival_halloween_8",
       "topicId": "festival_halloween",
       "word": "trick",
-      "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "ck",
+          "soundAsset": "ck"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "The initial /tr/ is a consonant blend, not an r-controlled vowel. Adult British /r/ audition is required."
+      ]
     },
     {
       "sourceId": "festival_halloween_9",
       "topicId": "festival_halloween",
       "word": "treat",
-      "status": "rejected",
-      "reason": "Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "ea",
+          "soundAsset": "ee"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "The initial /tr/ is a consonant blend, not an r-controlled vowel. Adult British /r/ audition is required."
+      ]
     },
     {
       "sourceId": "sight_jobs_nearby_0",
@@ -2062,8 +2189,28 @@
       "sourceId": "sight_body_6",
       "topicId": "sight_body",
       "word": "face",
-      "status": "rejected",
-      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "f",
+          "soundAsset": "f"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "c",
+          "soundAsset": "s"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "One-syllable word: a_e represents /eɪ/ and soft c represents /s/. Final e is silent.",
+        "Mapping remains provisional until adult listening review of British phoneme clips."
+      ]
     },
     {
       "sourceId": "sight_body_7",
@@ -2323,8 +2470,33 @@
       "sourceId": "sight_clothes_1",
       "topicId": "sight_clothes",
       "word": "pants",
-      "status": "rejected",
-      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Candidate uses the available short-a clip for the British /æ/ vowel; adult listening review remains required."
+      ]
     },
     {
       "sourceId": "sight_clothes_2",
@@ -2352,7 +2524,7 @@
       "silentLetters": [],
       "caveats": [
         "Provisional mapping; audio and British pronunciation require human listening.",
-        "Previous conservative review: Contains r or an r-controlled pattern; the project standard requires human review of the British recording before use."
+        "The r is a consonant in the initial /dr/ blend, not an r-controlled vowel. Adult listening review remains required."
       ]
     },
     {
@@ -4208,6 +4380,656 @@
       ],
       "silentLetters": [],
       "caveats": []
+    },
+    {
+      "sourceId": "sight_food_0",
+      "topicId": "sight_food",
+      "word": "rice",
+      "status": "rejected",
+      "reason": "possible final-e/long-vowel spelling not represented. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_food_1",
+      "topicId": "sight_food",
+      "word": "bread",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "ea",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "d",
+          "soundAsset": "d"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_food_2",
+      "topicId": "sight_food",
+      "word": "milk",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "k",
+          "soundAsset": "k"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_food_3",
+      "topicId": "sight_food",
+      "word": "egg",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "e",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "gg",
+          "soundAsset": "g"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_food_4",
+      "topicId": "sight_food",
+      "word": "apple",
+      "status": "rejected",
+      "reason": "possible final-e/long-vowel spelling not represented; doubled-letter spelling needs explicit one-sound mapping. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_food_5",
+      "topicId": "sight_food",
+      "word": "banana",
+      "status": "rejected",
+      "reason": "multisyllabic or likely reduced-vowel pronunciation; schwa is unavailable. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_food_6",
+      "topicId": "sight_food",
+      "word": "cake",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "a_e",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "k",
+          "soundAsset": "k"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_food_7",
+      "topicId": "sight_food",
+      "word": "fish",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "f",
+          "soundAsset": "f"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "sh",
+          "soundAsset": "sh"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_food_8",
+      "topicId": "sight_food",
+      "word": "chicken",
+      "status": "rejected",
+      "reason": "multisyllabic or likely reduced-vowel pronunciation; schwa is unavailable. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_food_9",
+      "topicId": "sight_food",
+      "word": "juice",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "j",
+          "soundAsset": "j"
+        },
+        {
+          "grapheme": "ui",
+          "soundAsset": "oo-long"
+        },
+        {
+          "grapheme": "c",
+          "soundAsset": "s"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_veg_0",
+      "topicId": "sight_veg",
+      "word": "carrot",
+      "status": "rejected",
+      "reason": "doubled-letter spelling needs explicit one-sound mapping. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_veg_1",
+      "topicId": "sight_veg",
+      "word": "corn",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "or",
+          "soundAsset": "or"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_veg_2",
+      "topicId": "sight_veg",
+      "word": "tomato",
+      "status": "rejected",
+      "reason": "multisyllabic or likely reduced-vowel pronunciation; schwa is unavailable. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_veg_3",
+      "topicId": "sight_veg",
+      "word": "potato",
+      "status": "rejected",
+      "reason": "multisyllabic or likely reduced-vowel pronunciation; schwa is unavailable. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_veg_4",
+      "topicId": "sight_veg",
+      "word": "peas",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "ea",
+          "soundAsset": "ee"
+        },
+        {
+          "grapheme": "s",
+          "soundAsset": "z"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_veg_5",
+      "topicId": "sight_veg",
+      "word": "beans",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "ea",
+          "soundAsset": "ee"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "s",
+          "soundAsset": "z"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_veg_6",
+      "topicId": "sight_veg",
+      "word": "cabbage",
+      "status": "rejected",
+      "reason": "possible final-e/long-vowel spelling not represented; multisyllabic or likely reduced-vowel pronunciation; schwa is unavailable; doubled-letter spelling needs explicit one-sound mapping. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_veg_7",
+      "topicId": "sight_veg",
+      "word": "onion",
+      "status": "rejected",
+      "reason": "multisyllabic or likely reduced-vowel pronunciation; schwa is unavailable. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_veg_8",
+      "topicId": "sight_veg",
+      "word": "mushroom",
+      "status": "rejected",
+      "reason": "multisyllabic or likely reduced-vowel pronunciation; schwa is unavailable; doubled-letter spelling needs explicit one-sound mapping. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_veg_9",
+      "topicId": "sight_veg",
+      "word": "cucumber",
+      "status": "rejected",
+      "reason": "multisyllabic or likely reduced-vowel pronunciation; schwa is unavailable. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_vehicles_0",
+      "topicId": "sight_vehicles",
+      "word": "car",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "c",
+          "soundAsset": "c"
+        },
+        {
+          "grapheme": "ar",
+          "soundAsset": "ar"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_vehicles_1",
+      "topicId": "sight_vehicles",
+      "word": "bus",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "u",
+          "soundAsset": "u"
+        },
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_vehicles_2",
+      "topicId": "sight_vehicles",
+      "word": "taxi",
+      "status": "rejected",
+      "reason": "taxi ends in i pronounced /iː/ in the target pronunciation; the available i clip is /ɪ/, so the full spelling-to-sound mapping is not supported. No audio was auditioned."
+    },
+    {
+      "sourceId": "sight_vehicles_3",
+      "topicId": "sight_vehicles",
+      "word": "tram",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_vehicles_4",
+      "topicId": "sight_vehicles",
+      "word": "train",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "ai",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_vehicles_5",
+      "topicId": "sight_vehicles",
+      "word": "truck",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "u",
+          "soundAsset": "u"
+        },
+        {
+          "grapheme": "ck",
+          "soundAsset": "ck"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_vehicles_6",
+      "topicId": "sight_vehicles",
+      "word": "van",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "v",
+          "soundAsset": "v"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_vehicles_7",
+      "topicId": "sight_vehicles",
+      "word": "bike",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "igh"
+        },
+        {
+          "grapheme": "k",
+          "soundAsset": "k"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_vehicles_8",
+      "topicId": "sight_vehicles",
+      "word": "ferry",
+      "status": "rejected",
+      "reason": "doubled-letter spelling needs explicit one-sound mapping. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_vehicles_9",
+      "topicId": "sight_vehicles",
+      "word": "plane",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_fruit_0",
+      "topicId": "sight_fruit",
+      "word": "apple",
+      "status": "rejected",
+      "reason": "possible final-e/long-vowel spelling not represented; doubled-letter spelling needs explicit one-sound mapping. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_fruit_1",
+      "topicId": "sight_fruit",
+      "word": "banana",
+      "status": "rejected",
+      "reason": "multisyllabic or likely reduced-vowel pronunciation; schwa is unavailable. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_fruit_2",
+      "topicId": "sight_fruit",
+      "word": "orange",
+      "status": "rejected",
+      "reason": "possible final-e/long-vowel spelling not represented; multisyllabic or likely reduced-vowel pronunciation; schwa is unavailable. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_fruit_3",
+      "topicId": "sight_fruit",
+      "word": "grape",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        },
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_fruit_4",
+      "topicId": "sight_fruit",
+      "word": "mango",
+      "status": "rejected",
+      "reason": "no reviewed direct grapheme mapping assigned; requires word-specific pronunciation and grapheme analysis. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_fruit_5",
+      "topicId": "sight_fruit",
+      "word": "melon",
+      "status": "rejected",
+      "reason": "no reviewed direct grapheme mapping assigned; requires word-specific pronunciation and grapheme analysis. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_fruit_6",
+      "topicId": "sight_fruit",
+      "word": "pear",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "ear",
+          "soundAsset": "air"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_fruit_7",
+      "topicId": "sight_fruit",
+      "word": "peach",
+      "status": "candidate_pending_audio_audition",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "ea",
+          "soundAsset": "ee"
+        },
+        {
+          "grapheme": "ch",
+          "soundAsset": "ch"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+      ]
+    },
+    {
+      "sourceId": "sight_fruit_8",
+      "topicId": "sight_fruit",
+      "word": "lemon",
+      "status": "rejected",
+      "reason": "no reviewed direct grapheme mapping assigned; requires word-specific pronunciation and grapheme analysis. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+    },
+    {
+      "sourceId": "sight_fruit_9",
+      "topicId": "sight_fruit",
+      "word": "kiwi",
+      "status": "rejected",
+      "reason": "no reviewed direct grapheme mapping assigned; requires word-specific pronunciation and grapheme analysis. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
     }
   ]
 }

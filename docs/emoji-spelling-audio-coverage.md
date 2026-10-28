@@ -1,41 +1,70 @@
 # Emoji Spelling 音塊覆蓋檢查
 
-共 32 個圖詞／CVC 分類、333 個題目；138 個有音塊或詞尾示範，195 個暫時只讀完整單字。
+共 32 個圖詞／CVC 分類、333 個題目。146 個有待成人覆聽的音塊／詞尾示範；187 個暫時只讀完整單字。完整逐題清單見 [phonics audit](emoji-spelling-phonics-audit.json)。
 
-音塊配置經字形及現有檔案檢查；這不證明錄音已經人耳核對或實機驗收。rice 的 ice 沿用既有完整詞尾 TTS，並非單獨音素。cake、home 等拆分字母組合有獨立字形和音檔配對。缺少音塊不代表詞語沒有發音；其餘題目使用裝置英文語音讀完整單字。
+所有候選都只代表字形—音素對應及音檔檔名經靜態檢視；**沒有任何片段經人耳核實**，所以全部仍待熟悉英式 synthetic phonics 的成人逐項聽音、核對混音及實機播放。不可將候選當成已驗收。純讀整個單字的題目照常用英文 TTS，不會用字母名稱假裝 phonics。
 
-2026-10-28 技術檢查：50 個 MP3 都能解碼，長度為 0.297–0.833 秒，短於播放器的 1.8 秒單音逾時。浮點解碼時 b、c、ch、ck、d、g、h、i、j、p、t、u 有少量樣本的絕對值達到或超過 1；這是需要覆聽的潛在峰值問題，不代表已確定有可聽爆音。檢查檔案和波形不能取代英式發音、純音及混音的人耳驗收。
+2026-10-28 技術檢查：50 個 MP3 都可解碼，長度為 0.297–0.833 秒，短於播放器 1.8 秒單音逾時。b、c、ch、ck、d、g、h、i、j、p、t、u 有少量解碼樣本達到或超過浮點滿幅；這只表示有潛在峰值，並未證實聽得出爆音，需人耳檢查。
 
-本輪依 Luna 提交的逐詞審核清單，先前新增 25 個候選配置，另新增 26 個待覆聽候選配置（包含部分多音字形與靜音 e）；另有 `two` 及 `nine` 因無法正確呈現逐個字形而拒絕。新增配置的音檔尚未人耳覆聽，必須待熟悉英式 phonics 的成人逐音核實後，才可標作已驗收。完整候選／拒絕清單見 [`emoji-spelling-phonics-audit.json`](emoji-spelling-phonics-audit.json)。
+今次修正覆蓋漏項：先前 audit 少咗食物、蔬菜、水果、交通工具 40 題；現已補入 audit，令逐題表覆蓋全 333 題。將「rice」的 `ice` 假分音移除，因 repo 無 `ice` 獨立音檔，改用完整詞語 TTS。新增候選 `juice`, `glue`, `witch`, `trick`, `treat`, `sky`, `race`；並澄清 `/tr/` 是開首子音連綴、`tch` 是一個三字母音組。所有新增配置仍待覆聽。
 
-以下列出仍只用完整單字語音、尚無音塊配置的 195 個題目。不應以字母名稱代替 phonics，也不能對靜音字母或多音字機械逐字拼讀。
+候選音塊共 146 題，依主題如下：
 
-新增候選及先前候選映射均待成人覆聽；新增的 26 題是 bread, park, car, tram, train, truck, moon, tea, cloud, night, drum, flag, dress, rain, snow, green, run, cow, owl, corn, grape, bear, brown, arm, shy, read（現在式）。遊戲對 `read` 的完整詞語 TTS 使用「reed」提示音，避免裝置把孤立拼法讀成過去式；畫面仍顯示 READ。
+- 動物拼字園 (animal_spelling): cat, dog, pig, hen, fox, bat, rat, fish, frog, duck, cow, owl, ant, bee, goat, bear, snail
+- 地方 (sight_places): home, park, shop, pool, beach, zoo
+- 家居用品 (sight_household): bed, lamp, clock, cup, plate, spoon
+- 學校用品 (sight_school_items): book, bag, pen, glue
+- 聖誕節 (festival_christmas): tree, snowman, bell
+- 農曆新年 (festival_lunar_new_year): feast
+- 中秋節 (festival_mid_autumn): moon, tea, cloud, sky, night
+- 端午節 (festival_dragon_boat): race, team, drum, flag
+- 萬聖節 (festival_halloween): witch, bat, trick, treat
+- 身邊的職業 (sight_jobs_nearby): dentist, vet
+- 身體部位 (sight_body): nose, head, hair, face, hand, arm, leg, foot
+- 情緒與感受 (sight_feelings): sad, shy, hot, cold
+- 衣物 (sight_clothes): pants, dress, socks, hat, coat
+- 天氣 (sight_weather): hot, cold, rain, snow
+- 顏色 (sight_colors): red, blue, green, black, white, brown, gold
+- 數字 (sight_numbers): five, six, eight, ten
+- 形狀 (sight_shapes): cone
+- 玩具 (sight_toys): doll, toy, dice, slide, game
+- 動作 (sight_actions): run, jump, clap, wave, swim, sleep, read, sing
+- 拼一拼・-at (cvc_at): cat, hat, bat, rat, mat
+- 拼一拼・-an (cvc_an): can, pan, man, van, fan
+- 拼一拼・-ap (cvc_ap): cap, map, tap, nap
+- 拼一拼・-in (cvc_in): pin, tin, bin, win
+- 拼一拼・-ig (cvc_ig): pig, dig, big, wig
+- 拼一拼・-ot (cvc_ot): pot, hot, cot
+- 拼一拼・-og (cvc_og): dog, fog, log
+- 食物 (sight_food): bread, milk, egg, cake, fish, juice
+- 蔬菜 (sight_veg): corn, peas, beans
+- 車輛 (sight_vehicles): car, bus, tram, train, truck, van, bike, plane
+- 水果 (sight_fruit): grape, pear, peach
 
-先前候選映射，待成人覆聽：cake, bike, plane, home, beach, plate, snowman, feast, team, dentist, nose, head, cold, socks, coat, blue, white, gold, five, eight, cone, toy, dice, slide, game, wave, sleep。
+暫時只讀完整單字語音的 187 題如下：
 
-- Animal Spelling Zoo (animal_spelling): lion, zebra, monkey
-- Food (sight_food): apple, banana, chicken, juice
-- Vegetables (sight_veg): carrot, tomato, potato, cabbage, onion, mushroom, cucumber
-- Places (sight_places): school, hospital, library, classroom
-- Vehicles (sight_vehicles): taxi, ferry
-- Fruit (sight_fruit): apple, banana, orange, mango, melon, lemon, kiwi
-- Household Items (sight_household): sofa, table, chair, towel
-- School Items (sight_school_items): pencil, ruler, eraser, crayon, paper, glue, scissors
-- Christmas (festival_christmas): Santa Claus, reindeer, sleigh, stocking, present, ornament, gingerbread
-- Lunar New Year (festival_lunar_new_year): red packet, lion dance, firecracker, tangerine, blossom, couplet, lucky, family, New Year
-- Mid-Autumn Festival (festival_mid_autumn): mooncake, rabbit, lantern, pomelo, sky, harvest
-- Dragon Boat Festival (festival_dragon_boat): dragon boat, dumpling, paddle, race, river, water, winner
-- Halloween (festival_halloween): pumpkin, costume, witch, ghost, spider, candy, mask, trick, treat
-- People Around Us (sight_jobs_nearby): doctor, nurse, teacher, principal, firefighter, police officer, paramedic, pharmacist, hairdresser, shop assistant, cashier, security guard, cleaner, domestic helper, postman, delivery worker, driver, bus driver, taxi driver, waiter, gardener, zookeeper, librarian
-- Jobs Around the World (sight_jobs_world): chef, farmer, pilot, flight attendant, astronaut, scientist, artist, musician, athlete, actor, reporter, builder, engineer, ship captain, fisherman, lifeguard, photographer, soldier, environmental officer, medical sales representative
-- My Body (sight_body): eye, ear, mouth, face, tooth
-- Feelings (sight_feelings): happy, angry, scared, excited, tired, hungry, thirsty, hurt
-- Clothes (sight_clothes): shirt, pants, skirt, shoes, jacket, scarf, gloves, shorts
-- Family & People (sight_family_people): father, mother, brother, sister, baby, grandfather, grandmother, aunt, uncle, friend, teacher, classmate
-- Weather (sight_weather): sunny, cloudy, rainy, windy, stormy, snowy, rainbow, umbrella
-- Colors (sight_colors): yellow, orange, purple, pink, grey
-- Numbers (sight_numbers): one, two, three, four, seven, nine, eleven, twelve
-- Shapes (sight_shapes): circle, square, triangle, rectangle, star, heart, oval, diamond, cube, cylinder, sphere
-- Toys (sight_toys): ball, teddy, puzzle, balloon, target, carousel, maracas
-- Action Words (sight_actions): walk, write, draw, ride
+- 動物拼字園 (animal_spelling): lion, zebra, monkey
+- 食物 (sight_food): rice, apple, banana, chicken
+- 蔬菜 (sight_veg): carrot, tomato, potato, cabbage, onion, mushroom, cucumber
+- 地方 (sight_places): school, hospital, library, classroom
+- 車輛 (sight_vehicles): taxi, ferry
+- 水果 (sight_fruit): apple, banana, orange, mango, melon, lemon, kiwi
+- 家居用品 (sight_household): sofa, table, chair, towel
+- 學校用品 (sight_school_items): pencil, ruler, eraser, crayon, paper, scissors
+- 聖誕節 (festival_christmas): Santa Claus, reindeer, sleigh, stocking, present, ornament, gingerbread
+- 農曆新年 (festival_lunar_new_year): red packet, lion dance, firecracker, tangerine, blossom, couplet, lucky, family, New Year
+- 中秋節 (festival_mid_autumn): mooncake, rabbit, lantern, pomelo, harvest
+- 端午節 (festival_dragon_boat): dragon boat, dumpling, paddle, river, water, winner
+- 萬聖節 (festival_halloween): pumpkin, costume, ghost, spider, candy, mask
+- 身邊的職業 (sight_jobs_nearby): doctor, nurse, teacher, principal, firefighter, police officer, paramedic, pharmacist, hairdresser, shop assistant, cashier, security guard, cleaner, domestic helper, postman, delivery worker, driver, bus driver, taxi driver, waiter, gardener, zookeeper, librarian
+- 世界各地的職業 (sight_jobs_world): chef, farmer, pilot, flight attendant, astronaut, scientist, artist, musician, athlete, actor, reporter, builder, engineer, ship captain, fisherman, lifeguard, photographer, soldier, environmental officer, medical sales representative
+- 身體部位 (sight_body): eye, ear, mouth, tooth
+- 情緒與感受 (sight_feelings): happy, angry, scared, excited, tired, hungry, thirsty, hurt
+- 衣物 (sight_clothes): shirt, skirt, shoes, jacket, scarf, gloves, shorts
+- 家庭與身邊的人 (sight_family_people): father, mother, brother, sister, baby, grandfather, grandmother, aunt, uncle, friend, teacher, classmate
+- 天氣 (sight_weather): sunny, cloudy, rainy, windy, stormy, snowy, rainbow, umbrella
+- 顏色 (sight_colors): yellow, orange, purple, pink, grey
+- 數字 (sight_numbers): one, two, three, four, seven, nine, eleven, twelve
+- 形狀 (sight_shapes): circle, square, triangle, rectangle, star, heart, oval, diamond, cube, cylinder, sphere
+- 玩具 (sight_toys): ball, teddy, puzzle, balloon, target, carousel, maracas
+- 動作 (sight_actions): walk, write, draw, ride
