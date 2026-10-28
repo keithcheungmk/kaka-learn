@@ -321,8 +321,43 @@ def walk(pg, url, shots: Path | None, tag: str):
             pg.wait_for_selector("#screen-math-relations-play.active #math-relations-distance-choices button", state="visible")
             pg.wait_for_timeout(400)
             probe("數學・數字探險")
+            # Exercise the largest counting board, including the fourth group.
+            pg.evaluate('''() => {
+              KakaMathStorage.updateState({mercuryCountProgress: {completedRounds: 3}});
+              const random = Math.random;
+              Math.random = () => 0.999;
+              try { KakaMath.openRelationsMission(); } finally { Math.random = random; }
+            }''')
+            pg.wait_for_timeout(500)
+            probe("數學・二十個物件")
+            count_fit = pg.evaluate('''() => {
+              const objects = [...document.querySelectorAll('#math-relations-line .math-counting-object')];
+              const choices = document.querySelector('#math-relations-distance-choices').getBoundingClientRect();
+              return { count: objects.length, overlaps: objects.some((e) => {
+                const r = e.getBoundingClientRect();
+                return r.bottom > choices.top && r.top < choices.bottom && r.right > choices.left && r.left < choices.right;
+              }) };
+            }''')
+            if count_fit['count'] != 20 or count_fit['overlaps']:
+                raise RuntimeError(f"Counting 20 items must not overlap the answer buttons: {count_fit}")
+            pg.evaluate('''() => {
+              window.__smokeMathSpeakThen = KakaSpeech.speakThen;
+              KakaSpeech.speakThen = (_text, _options, done) => done?.();
+            }''')
+            pg.get_by_role("button", name="答案 1", exact=True).click()
+            pg.wait_for_timeout(400)
+            probe("數學・數數答錯提示")
+            pg.get_by_role("button", name="答案 20", exact=True).click()
+            pg.wait_for_selector("#btn-math-relations-explain-next:not([disabled])", state="visible")
+            probe("數學・數數答啱回饋")
+            if pg.viewport_size["width"] > 700:
+                next_rect = pg.locator("#btn-math-relations-explain-next").bounding_box()
+                if not next_rect or next_rect['y'] + next_rect['height'] > pg.viewport_size['height']:
+                    raise RuntimeError(f"Counting feedback must leave the next button visible: {next_rect}")
+            pg.evaluate('''() => { KakaSpeech.speakThen = window.__smokeMathSpeakThen; delete window.__smokeMathSpeakThen; }''')
             pg.click("#btn-back-math-relations-play")
 
+            pg.click('#math-playground-tabs [data-math-category="operations"]')
             pg.click("#screen-math-galaxy.active .math-route-addition")
             pg.wait_for_selector("#screen-math-earth-addition-select.active .addition-level-card:not(.is-locked)", state="visible")
             probe("數學・加法關卡")
@@ -341,10 +376,80 @@ def walk(pg, url, shots: Path | None, tag: str):
             pg.click("#btn-back-math-subtraction-play")
             pg.click("#btn-back-math-subtraction-select")
 
+            pg.click('#math-playground-tabs [data-math-category="time"]')
             pg.click("#screen-math-galaxy.active .math-route-clock")
             pg.wait_for_selector("#screen-math-venus-learn.active #math-venus-learn-face")
             probe("數學・時鐘遊樂屋")
             pg.click("#btn-back-math-venus-learn")
+            for category, activity in [
+                ("count", "quantity-compare"),
+                ("operations", "number-bonds"),
+                ("life", "shape-patterns"),
+                ("life", "little-shop"),
+                ("life", "measure-compare"),
+            ]:
+                pg.click(f'#math-playground-tabs [data-math-category="{category}"]')
+                pg.evaluate('''() => {
+                  const data = window.KakaMathLifeSkillsData;
+                  window.__mathLifeSmokeOriginalMission = data.makeMission;
+                  window.__mathLifeSmokeOriginalSpeakThen = window.KakaSpeech.speakThen;
+                  window.__mathLifeSmokeSpoken = [];
+                  data.makeMission = (...args) => {
+                    window.__mathLifeSmokeMission = window.__mathLifeSmokeOriginalMission(...args);
+                    return window.__mathLifeSmokeMission;
+                  };
+                  window.KakaSpeech.speakThen = (text, _options, done) => {
+                    window.__mathLifeSmokeSpoken.push(text);
+                    done?.();
+                  };
+                }''')
+                pg.click(f'#screen-math-galaxy.active .math-route-{activity}')
+                pg.wait_for_selector(f'#screen-math-life-skill.active[data-activity="{activity}"] #math-life-skill-board')
+                pg.wait_for_timeout(400)  # Let the screen entrance transition finish before measuring.
+                probe(f"數學・{activity}")
+                question = pg.evaluate('() => window.__mathLifeSmokeMission[0]')
+                if activity == "quantity-compare":
+                    pair_count = min(question["left"], question["right"])
+                    for pair_index in range(pair_count):
+                        pg.locator("#math-life-skill-board .math-life-pile--left .math-life-object").nth(pair_index).click()
+                        pg.locator("#math-life-skill-board .math-life-pile--right .math-life-object").nth(pair_index).click()
+                    wrong_choice = "same" if question["answer"] != "same" else "left"
+                elif activity == "little-shop":
+                    wrong_choice = None
+                else:
+                    wrong_choice = next(choice["id"] for choice in question["choices"] if str(choice["id"]) != str(question["answer"]))
+                for attempt in range(2):
+                    if activity == "little-shop":
+                        pg.locator("#math-life-skill-choices .math-life-shop-pay-button").click()
+                    else:
+                        pg.locator(f'#math-life-skill-choices [data-choice-id="{wrong_choice}"]').click()
+                    pg.wait_for_function("""() => {
+                      const feedback = document.querySelector('#math-life-skill-feedback')?.textContent?.trim();
+                      const spoken = window.__mathLifeSmokeSpoken;
+                      return Boolean(feedback && spoken?.at(-1) === feedback);
+                    }""")
+                    feedback = pg.locator("#math-life-skill-feedback").inner_text()
+                    if attempt == 1 and feedback == first_hint:
+                        raise RuntimeError(f"{activity} should scaffold a second wrong answer")
+                    if attempt == 0:
+                        first_hint = feedback
+                probe(f"數學・{activity}答錯教學")
+                if activity != "little-shop":
+                    pg.locator(f'#math-life-skill-choices [data-choice-id="{question["answer"]}"]').click()
+                    pg.wait_for_function("""() => {
+                      const feedback = document.querySelector('#math-life-skill-feedback')?.textContent?.trim();
+                      const spoken = window.__mathLifeSmokeSpoken;
+                      return feedback?.startsWith('答啱喇！') && spoken?.at(-1)?.startsWith('答啱喇！');
+                    }""")
+                    if not pg.is_visible("#btn-math-life-skill-next"):
+                        raise RuntimeError(f"{activity} should show next question after praise is spoken")
+                    probe(f"數學・{activity}答啱回饋")
+                pg.evaluate('''() => {
+                  window.KakaMathLifeSkillsData.makeMission = window.__mathLifeSmokeOriginalMission;
+                  window.KakaSpeech.speakThen = window.__mathLifeSmokeOriginalSpeakThen;
+                  delete window.__mathLifeSmokeMission;
+                }''')
+                pg.click("#btn-back-math-life-skill")
         if entry == "#btn-start-english":
             pg.wait_for_selector("#screen-english-hub.active #btn-english-story")
             pg.wait_for_function("""() => {

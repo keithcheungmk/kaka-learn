@@ -40,7 +40,7 @@
         group.className = 'math-counting-five-group';
         const groupLabel = document.createElement('span');
         groupLabel.className = 'math-counting-five-label';
-        groupLabel.textContent = `第 ${Math.floor(i / 5) + 1} 組・5個`;
+        groupLabel.textContent = count - i >= 5 ? '一組 5 個' : '剩低嗰組';
         group.append(groupLabel);
         root.append(group);
       }
@@ -182,12 +182,11 @@
       renderCountSet($('math-relations-line'), question.count, question.object, { numbered: true });
       if (feedback) feedback.textContent = `一齊五個一組數：${guide}。答案係 ${question.answer}。`;
       deps?.speech?.playTryAgainCue?.({ muted: deps.isMuted?.() });
-      speak(`唔緊要，我哋五個一組數：${guide}。總共有${question.answer}${question.object.counter}${question.object.name}。`);
-      setTimeout(() => {
+      speak(`唔緊要，我哋五個一組數：${guide}。總共有${question.answer}${question.object.counter}${question.object.name}。`, () => {
         button.classList.remove('is-wrong');
         busy = false;
         setChoiceButtonsDisabled(false);
-      }, 500);
+      });
       return;
     }
 
@@ -195,6 +194,10 @@
     // correct selection as another failed first attempt in mastery history.
     if (wrongAttempts === 0) recordAttempt(question, true);
     button.classList.add('is-correct');
+    // Leave the chosen answer visible and make room for the explanation.
+    $('math-relations-distance-choices')?.querySelectorAll('button').forEach((choice) => {
+      if (choice !== button) choice.hidden = true;
+    });
     deps?.speech?.playCorrectCue?.({ muted: deps.isMuted?.() });
 
     if (feedback) feedback.textContent = '答啱喇！';

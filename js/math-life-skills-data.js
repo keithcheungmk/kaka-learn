@@ -1,11 +1,11 @@
 /** 五項生活數學任務：先用看得見、摸得到的情境，再慢慢抽象成數字。 */
 (function () {
   const ACTIVITIES = [
-    { id: 'quantity-compare', planetId: 'number-relations', planet: '水星', title: '配一配・邊邊多？', skillId: 'compare.quantity.1to10', subtitle: '比較兩盤日常物品的多少' },
-    { id: 'number-bonds', planetId: 'compare-size', planet: '地球', title: '數字好朋友・合起來', skillId: 'numberBonds.to10', subtitle: '找出兩部分合成目標數字的方法' },
-    { id: 'shape-patterns', planetId: 'number-relations', planet: '水星', title: '形狀觀察隊', skillId: 'shape.pattern.AB', subtitle: '先認形狀，再找重複規律' },
-    { id: 'little-shop', planetId: 'compare-size', planet: '地球', title: '卡卡水果店・幫手付款', skillId: 'money.matchPrice.1to10', subtitle: '用熟悉嘅硬幣，幫卡卡買水果' },
-    { id: 'measure-compare', planetId: 'moon', planet: '月球', title: '生活度量・比一比', skillId: 'measure.compare.visual', subtitle: '比較長短、輕重和多少' },
+    { id: 'quantity-compare', planetId: 'number-relations', planet: '水星', title: '配一配・邊邊多？', skillId: 'compare.quantity.1to10', subtitle: '逐對配好，再數邊邊剩低幾多', cardCopy: '點兩邊嘅物品配成一對，睇吓邊邊有剩。' },
+    { id: 'number-bonds', planetId: 'compare-size', planet: '地球', title: '數字好朋友・合起來', skillId: 'numberBonds.to10', subtitle: '睇星星格仔仲差幾多粒，砌成目標數', cardCopy: '睇住星星格仔填空，搵出仲差幾多粒。' },
+    { id: 'shape-patterns', planetId: 'number-relations', planet: '水星', title: '形狀觀察隊', skillId: 'shape.pattern.AB', subtitle: '認一認形狀，再接住重複規律', cardCopy: '睇形狀嘅邊同角，再接住排隊。' },
+    { id: 'little-shop', planetId: 'compare-size', planet: '地球', title: '卡卡水果店・幫手付款', skillId: 'money.matchPrice.1to10', subtitle: '揀港幣硬幣，幫卡卡付啱價錢', cardCopy: '揀香港硬幣放入付款盤，幫卡卡買水果。' },
+    { id: 'measure-compare', planetId: 'moon', planet: '月球', title: '卡卡量一量・讀厘米', skillId: 'measure.length.read-ruler', subtitle: '物件由0開始，先找十厘米，再數小格', cardCopy: '幫文具同玩具對齊0厘米，讀出有幾長。' },
   ];
   const OBJECTS = [
     { emoji: '🫐', name: '藍莓', counter: '粒' }, { emoji: '🍓', name: '士多啤梨', counter: '粒' },
@@ -23,6 +23,11 @@
     { emoji: '🍓', name: '士多啤梨', price: 8 }, { emoji: '🫐', name: '藍莓', price: 7 },
     { emoji: '🍊', name: '橙', price: 5 }, { emoji: '🍉', name: '西瓜', price: 10 },
     { emoji: '🍎', name: '蘋果', price: 12 },
+  ];
+  const MEASURE_LENGTH_ITEMS = [
+    { emoji: '🧽', name: '擦膠', min: 4, max: 7 }, { emoji: '🖍️', name: '蠟筆', min: 8, max: 10 },
+    { emoji: '✏️', name: '鉛筆', min: 13, max: 18 }, { emoji: '🚗', name: '玩具車', min: 11, max: 16 },
+    { emoji: '🧸', name: '小熊', min: 15, max: 20 },
   ];
   const HK_COINS = [10, 5, 2, 1].map((value) => ({ value, label: `$${value}` }));
   const COLORS = ['#f66d72', '#438de8', '#ffb547', '#37b98f', '#9a77e8', '#e87aa6'];
@@ -46,7 +51,7 @@
     const object = pick(OBJECTS, random);
     const answer = left === right ? 'same' : left > right ? 'left' : 'right';
     const more = answer === 'same' ? '兩邊一樣多' : `${answer === 'left' ? '左邊' : '右邊'}較多`;
-    return { kind: 'compare', left, right, object, answer, choices: SIDE_CHOICES, prompt: '先幫兩邊的物品配成一對，再看看哪邊有剩。', explain: `左邊${left}${object.counter}，右邊${right}${object.counter}；${more}。` };
+    return { kind: 'compare', left, right, object, answer, choices: SIDE_CHOICES, prompt: '先幫兩邊嘅物品逐對配好，再睇吓邊邊有剩。', explain: `左邊有${left}${object.counter}，右邊有${right}${object.counter}；${more}。` };
   }
   function bondQuestion(round, random) {
     const total = round === 0 ? 10 : round === 1 ? 5 : amount(5, 10, random);
@@ -64,7 +69,7 @@
       const shape = pick(beginnerShapes, random);
       const distractors = shuffle(beginnerShapes.filter((item) => item.id !== shape.id), random).slice(0, 2);
       const choices = shuffle([shape, ...distractors], random).map((item) => ({ id: item.id, label: item.name }));
-      return { kind: 'shape', stage: 'recognize', shape, answer: shape.id, choices, prompt: '仔細看看外形，這是甚麼形狀？', explain: `這是${shape.name}。` };
+      return { kind: 'shape', stage: 'recognize', shape, answer: shape.id, choices, prompt: '睇清楚個外形，呢個係咩形狀？', explain: `呢個係${shape.name}。` };
     }
     const shapes = SHAPES.slice(0, round === 3 ? 4 : 6);
     const first = pick(shapes, random);
@@ -72,7 +77,7 @@
     const sequence = [first, second, first, second];
     const choices = shuffle([first, second, ...shuffle(shapes.filter((item) => item.id !== first.id && item.id !== second.id), random).slice(0, 1)], random)
       .map((item) => ({ id: item.id, label: item.name }));
-    return { kind: 'pattern', stage: 'pattern', sequence, answer: first.id, choices, prompt: '形狀一組一組重複排隊，問號後面是哪個？', explain: `每組都是${first.name}、${second.name}；下一個回到${first.name}。` };
+    return { kind: 'pattern', stage: 'pattern', sequence, answer: first.id, choices, prompt: '形狀一組一組排隊，問號應該放邊個？', explain: `規律係${first.name}、${second.name}，跟住再${first.name}、${second.name}；所以問號放${first.name}。` };
   }
   function exactCoinCombinations(price) {
     const combinations = [];
@@ -107,20 +112,19 @@
       explain: `啱啱好畀到${price}蚊。` };
   }
   function measureQuestion(round, random) {
-    const attribute = ['長短', '輕重', '水量'][round % 3];
-    const upper = round < 3 ? 4 : 7;
-    const left = amount(1, upper, random);
-    const right = random() < .16 ? left : Math.max(1, Math.min(upper, left + (random() < .5 ? -amount(1, 2, random) : amount(1, 2, random))));
-    const answer = left === right ? 'same' : left > right ? 'left' : 'right';
-    const noun = attribute === '長短' ? '長' : attribute === '輕重' ? '重' : '多';
-    const compareText = answer === 'same' ? '一樣' : `${answer === 'left' ? '左邊' : '右邊'}較${noun}`;
-    const explain = attribute === '長短' ? `${compareText}。把兩條積木尺的起點對齊，就容易看出長短。`
-      : attribute === '輕重' ? `${compareText}。兩邊用同樣的砝碼比較，砝碼多的一邊比較重。`
-        : `${compareText}。看透明量杯的刻度，水位高的杯子水較多。`;
-    const choices = attribute === '長短' ? [{ id: 'left', label: '左邊較長' }, { id: 'same', label: '一樣長' }, { id: 'right', label: '右邊較長' }]
-      : attribute === '輕重' ? [{ id: 'left', label: '左邊較重' }, { id: 'same', label: '一樣重' }, { id: 'right', label: '右邊較重' }]
-        : [{ id: 'left', label: '左杯水較多' }, { id: 'same', label: '一樣多' }, { id: 'right', label: '右杯水較多' }];
-    return { kind: 'measure', attribute, left, right, answer, choices, prompt: attribute === '長短' ? '兩條積木尺排齊起點，哪條比較長？' : attribute === '輕重' ? '看看天秤上的砝碼，哪邊比較重？' : '看量杯的水位，哪杯水比較多？', explain };
+    const earlyPool = MEASURE_LENGTH_ITEMS.slice(0, 2);
+    const laterPool = MEASURE_LENGTH_ITEMS.filter((candidate) => candidate.min >= 10);
+    const item = pick(round < 3 ? earlyPool : laterPool, random);
+    const cm = amount(item.min, item.max, random);
+    const distractors = shuffle([cm - 2, cm - 1, cm + 1, cm + 2].filter((value) => value >= 0 && value <= 20), random).slice(0, 2);
+    const choices = shuffle([cm, ...distractors], random).map((value) => ({ id: String(value), label: `${value} cm` }));
+    const explain = cm < 10
+      ? `${item.name}由0厘米開始，沿住尺數到${cm}厘米。厘米即係cm，係量度長度嘅單位。`
+      : `${item.name}由0厘米開始，先行到10厘米大刻度，再數多${cm - 10}格，係${cm}厘米。厘米即係cm，係量度長度嘅單位。`;
+    return {
+      kind: 'measure', attribute: '長度讀數', item, cm, answer: String(cm), choices,
+      prompt: `${item.name}由0厘米開始，先找最近嘅十厘米大刻度，再數小格。佢有幾長？`, explain,
+    };
   }
   function makeMission(activityId, { random = Math.random, length = 10 } = {}) {
     const activity = ACTIVITIES.find((item) => item.id === activityId);

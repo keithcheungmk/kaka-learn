@@ -579,12 +579,20 @@
 .math-playground-screen .game-header h1 { color: #17345c; }
 .math-park-star-summary { justify-self: end; padding: 10px 16px; border: 1px solid #d2e3f4; border-radius: 999px; background: #fff; color: #9b6500; font-weight: 950; white-space: nowrap; box-shadow: 0 4px 12px rgba(61,102,146,.1); }
 .math-galaxy-lead { margin: 0; color: #477092; text-align: center; font-size: clamp(1.05rem, 1.8vw, 1.35rem); font-weight: 850; }
-#math-galaxy-grid.math-galaxy-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(12px, 1.7vw, 24px); max-width: 1600px; padding: 0; }
+.math-playground-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; width: min(100%, 1000px); margin: 0 auto; padding: 7px; border: 1px solid #c9def1; border-radius: 22px; background: rgba(255,255,255,.86); box-sizing: border-box; }
+.math-playground-tabs button { min-width: 0; min-height: 52px; padding: 8px; border: 2px solid transparent; border-radius: 16px; background: transparent; color: #365d7f; font: inherit; font-weight: 900; cursor: pointer; touch-action: manipulation; }
+.math-playground-tabs button[aria-pressed="true"] { border-color: #6dbedc; background: #e3f7ff; color: #155c73; }
+.math-playground-tabs button:focus-visible { outline: 3px solid #155c73; outline-offset: 2px; }
+#math-galaxy-grid.math-galaxy-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(12px, 1.7vw, 24px); max-width: 1100px; padding: 0; }
 .math-playground-card.math-galaxy-card { position: relative; min-height: clamp(210px, 26vh, 300px); padding: clamp(18px, 2vw, 28px); gap: 9px; overflow: hidden; border: 2px solid color-mix(in srgb, var(--route-accent, #55b5d8) 42%, white); border-top: 7px solid var(--route-accent, #55b5d8); border-radius: 28px; background: linear-gradient(145deg, #fff, color-mix(in srgb, var(--route-accent, #55b5d8) 8%, white)); color: #18345f; box-shadow: 0 12px 28px rgba(57,96,138,.13), inset 0 1px 0 white; }
+.math-playground-card.math-galaxy-card { flex: 1 1 245px; max-width: 340px; }
 .math-route-numbers { --route-accent: #51b6d3; }
 .math-route-addition { --route-accent: #f1b344; }
 .math-route-subtraction { --route-accent: #6eacd9; }
 .math-route-clock { --route-accent: #a47bd4; }
+.math-route-quantity-compare, .math-route-measure-compare { --route-accent: #65bca2; }
+.math-route-number-bonds, .math-route-little-shop { --route-accent: #eea356; }
+.math-route-shape-patterns { --route-accent: #a47bd4; }
 .math-route-icon { display: grid; place-items: center; width: clamp(58px, 7vh, 80px); height: clamp(58px, 7vh, 80px); border-radius: 23px; background: color-mix(in srgb, var(--route-accent, #55b5d8) 16%, white); font: clamp(2.2rem, 4.2vh, 3rem)/1 "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; }
 .math-playground-card .math-galaxy-name { color: #18345f; font-size: clamp(1.25rem, 2vw, 1.75rem); font-weight: 1000; }
 .math-galaxy-skill, .math-route-copy { color: #59758f; font-size: clamp(.9rem, 1.25vw, 1.08rem); font-weight: 800; line-height: 1.35; }
@@ -596,7 +604,9 @@
 .math-counting-set { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: clamp(8px, 1vw, 14px); }
 .math-counting-five-group { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 5px; align-items: center; justify-items: center; max-width: 360px; padding: 8px; border: 2px solid #efc95d; border-radius: 15px; background: linear-gradient(145deg, #fff9df, #fff); }
 .math-counting-five-label { grid-column: 1 / -1; color: #8c5b00; font-size: .78rem; font-weight: 950; }
-.math-counting-five-group .math-counting-object { width: clamp(34px, 4vw, 54px); }
+.math-counting-five-group .math-counting-object { width: clamp(34px, 4vw, 50px); height: clamp(34px, 4vw, 50px); border-radius: 12px; }
+.math-counting-five-group .math-counting-emoji { font-size: clamp(26px, 3.5vw, 40px); }
+.math-counting-five-group .math-counting-number { width: 22px; height: 22px; right: -5px; bottom: -5px; font-size: .78rem; }
 
 @media (max-width: 900px) {
   #math-galaxy-grid.math-galaxy-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -604,6 +614,7 @@
   .math-extra-mission-card:last-child { grid-column: auto; }
 }
 @media (max-width: 560px) {
+  .math-playground-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   #math-galaxy-grid.math-galaxy-grid { grid-template-columns: minmax(0, 1fr); }
   .math-playground-card.math-galaxy-card { min-height: 170px; }
   .math-extra-mission-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -727,6 +738,30 @@
 .math-life-cup { position: relative; display: block; overflow: hidden; width: 64px; height: 100px; border: 4px solid #47729d; border-top-width: 2px; border-radius: 4px 4px 18px 18px; background: #f7fbff; }
 .math-life-cup-water { position: absolute; inset-inline: 0; bottom: 0; background: #56c9ed; border-top: 3px solid #239dc9; }
 .math-life-measure-mark { color: #527093; font-size: .85rem; font-weight: 900; }
+.math-life-measure-item-label { color: #17345c; font-size: clamp(1.1rem, 2.2vh, 1.45rem); font-weight: 900; }
+.math-life-ruler {
+  position: relative; display: block; width: min(100%, 300px); height: 112px; min-height: 112px;
+  margin-top: 4px; border: 0; background: none;
+}
+.math-life-ruler::after {
+  content: ""; position: absolute; z-index: 0; inset-inline: 0; bottom: 28px; height: 10px;
+  border: 2px solid #ad7827; border-radius: 4px; background: linear-gradient(180deg, #ffe7a6, #f3c759);
+}
+.math-life-ruler-tick { position: absolute; z-index: 2; bottom: 38px; width: 2px; height: 10px; background: #365b76; }
+.math-life-ruler-tick.is-major { height: 20px; }
+.math-life-ruler-number { position: absolute; left: 50%; bottom: 23px; transform: translateX(-50%); color: #284967; font-size: .68rem; font-weight: 850; }
+.math-life-measure-reading { width: min(100%, 820px); max-width: 820px; min-height: 240px; gap: 6px; padding: clamp(14px, 2vw, 28px); }
+.math-life-ruler-alignment { color: #527093; font-size: clamp(.95rem, 1.5vw, 1.15rem); font-weight: 850; }
+.math-life-ruler-endpoint { position: absolute; z-index: 4; top: 0; transform: translateX(-50%); display: grid; place-items: center; width: 30px; height: 28px; border-radius: 10px; background: #e7f8f0; color: #168262; font-size: 1.15rem; font-weight: 950; line-height: 1; }
+.math-life-ruler-endpoint::after { content: ""; position: absolute; top: 24px; width: 3px; height: 28px; border-radius: 3px; background: #19a27d; }
+.math-life-measure-reading .math-life-measure-object-icon { left: 4px; right: auto; bottom: -7px; transform: none; }
+.math-life-measure-bar {
+  position: absolute; z-index: 1; left: 0; bottom: 51px; display: block; height: 23px; box-sizing: border-box;
+  border: 2px solid #bc7321; border-radius: 6px; background: linear-gradient(180deg, #ffd774, #f7ad3c);
+}
+.math-life-measure-object-icon { position: absolute; right: -13px; bottom: -13px; font-size: 2.15rem; line-height: 1; transform: translateX(50%); }
+.math-life-ruler-tick[data-cm="0"] .math-life-ruler-number { left: 0; transform: none; }
+.math-life-ruler-tick[data-cm="20"] .math-life-ruler-number { left: auto; right: 0; transform: none; }
 
 /* These two new destinations contain more content than a single canvas can
    safely clip. Let the document grow and scroll only while either is active. */
@@ -768,6 +803,9 @@
 @media (min-width: 701px) and (orientation: landscape) {
   .math-extra-mission-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
   html.math-canvas-mode:has(#screen-math-galaxy.active) #app, html.math-canvas-mode:has(#screen-math-life-skill.active) #app, html.math-canvas-mode:has(#screen-math-strategy.active) #app { width: 100%; }
+  /* Keep the app's vertical padding inside the viewport-sized activity. */
+  html.math-canvas-mode:has(#screen-math-life-skill.active) #app { padding-block: 0; }
+  html.math-canvas-mode #screen-math-life-skill.active { padding-block: 6px; box-sizing: border-box; }
   html.math-canvas-mode .math-life-skill-screen.active { width: 100%; height: auto; min-height: 100dvh; max-height: none; overflow: visible; }
   html.math-canvas-mode .math-strategy-screen.active { width: 100%; height: auto; min-height: 100dvh; max-height: none; overflow: visible; }
 }
@@ -2029,6 +2067,34 @@
   html.math-canvas-mode .math-screen.active{height:auto;min-height:100dvh;overflow:visible}
 }
 
+/* Counting: keep the story, the objects and the choices visually distinct. */
+#screen-math-relations-play .math-counting-layout { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(140px, .65fr) minmax(0, 1.9fr) minmax(170px, .7fr); gap: clamp(8px, 1.2vw, 16px); align-items: stretch; }
+#screen-math-relations-play .math-counting-story { position: relative; min-width: 0; min-height: 180px; overflow: hidden; border: 2px solid #c9def1; border-radius: 22px; background: #e6f4ff; }
+#screen-math-relations-play .math-counting-story img { width: 100%; height: 100%; object-fit: cover; }
+#screen-math-relations-play .math-counting-story strong { position: absolute; inset: auto 0 0; padding: 24px 10px 12px; color: #fff; text-align: center; background: linear-gradient(transparent, rgba(20,50,70,.9)); }
+#screen-math-relations-play #math-relations-line.math-counting-set { width: 100%; height: 100%; min-height: 0; box-sizing: border-box; margin: 0; padding: 10px; gap: 10px; align-content: center; }
+#screen-math-relations-play .math-counting-answer-panel { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-width: 0; padding: 12px; border: 2px solid #c9def1; border-radius: 22px; background: #fff; color: #18345f; }
+#screen-math-relations-play .math-counting-choices { grid-template-columns: 1fr; gap: 10px; width: 100%; }
+#screen-math-relations-play .math-counting-choice { min-height: 58px; font-size: clamp(1.7rem, 4vh, 2.8rem); }
+#screen-math-relations-play .math-relations-explain { width: 100%; box-sizing: border-box; margin: 0; padding: 10px; }
+#screen-math-relations-play .math-relations-explain p { font-size: 1rem; }
+#screen-math-relations-play #math-relations-explain-msg { font-size: clamp(.9rem, 1.8vh, 1rem); line-height: 1.35; }
+#screen-math-relations-play .math-relations-explain .btn-row { margin: 0; }
+#screen-math-relations-play .math-relations-explain .btn { min-height: 48px; padding: 8px 12px; font-size: 1rem; }
+@media (max-width: 900px) {
+  #screen-math-relations-play .math-counting-layout { grid-template-columns: minmax(110px, .5fr) minmax(0, 1.5fr); grid-template-rows: minmax(0, 1fr) auto; }
+  #screen-math-relations-play .math-counting-answer-panel { grid-column: 1 / -1; display: grid; grid-template-columns: auto minmax(0, 1fr); align-content: center; }
+  #screen-math-relations-play .math-counting-choices { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #screen-math-relations-play .math-counting-answer-panel .feedback,
+  #screen-math-relations-play .math-relations-explain { grid-column: 1 / -1; }
+}
+@media (max-width: 700px) {
+  #screen-math-relations-play .math-counting-layout { display: flex; flex-direction: column; }
+  #screen-math-relations-play .math-counting-story { height: 160px; min-height: 160px; }
+  #screen-math-relations-play #math-relations-line.math-counting-set { height: auto; min-height: 180px; }
+  #screen-math-relations-play .math-counting-answer-panel { display: flex; }
+}
+
 /* Fruit shop: keep the page to a header and one immersive play area. */
 .math-life-skill-screen[data-activity="little-shop"].active {
   grid-template-columns: minmax(0, 1fr);
@@ -2231,7 +2297,7 @@
 @media (orientation: landscape) and (min-width: 701px) {
   .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-stage {
     grid-template-rows: auto minmax(0, 1fr) auto;
-    min-height: clamp(500px, calc(100dvh - 138px), 780px);
+    min-height: clamp(500px, calc(100dvh - 158px), 780px);
   }
   .math-life-skill-screen[data-activity="little-shop"] .math-life-shop-scene { grid-template-columns: minmax(200px, .68fr) minmax(0, 1.32fr); }
 }

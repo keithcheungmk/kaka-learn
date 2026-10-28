@@ -12,7 +12,7 @@ vm.runInContext(read('js/math-life-skills-data.js'), context);
 const data = context.window.KakaMathLifeSkillsData;
 assert.deepEqual([...data.ACTIVITIES.map(({ id }) => id)], ['quantity-compare', 'number-bonds', 'shape-patterns', 'little-shop', 'measure-compare']);
 assert.equal(data.SHAPES.length, 10);
-assert.ok(data.ACTIVITIES.every((activity) => activity.planet && activity.skillId && activity.subtitle));
+assert.ok(data.ACTIVITIES.every((activity) => activity.planet && activity.skillId && activity.subtitle && activity.cardCopy));
 
 function seeded(seed) {
   let value = seed % 2147483647; if (value <= 0) value += 2147483646;
@@ -49,8 +49,15 @@ for (const activity of data.ACTIVITIES) {
         assert.equal(question.answer, 'pay');
       }
       if (question.kind === 'measure') {
-        assert.ok(['長短', '輕重', '水量'].includes(question.attribute));
-        assert.equal(question.answer, question.left === question.right ? 'same' : question.left > question.right ? 'left' : 'right');
+        assert.equal(question.attribute, '長度讀數');
+        assert.ok(question.cm >= 4 && question.cm <= 20);
+        assert.equal(question.answer, String(question.cm));
+        assert.ok(question.item && question.item.emoji && question.item.name);
+        assert.match(question.prompt, /0厘米.*十厘米.*小格/);
+        assert.match(question.explain, /厘米.*cm/);
+        if (index < 3) assert.ok(question.cm <= 10, 'first three ruler questions stay within 10 cm');
+        else assert.ok(question.cm >= 10, 'later ruler questions extend past 10 cm');
+        assert.ok(question.choices.every((choice) => /^\d+ cm$/.test(choice.label)));
       }
     });
   }
@@ -70,6 +77,12 @@ assert.match(read('js/math-life-skills-game.js'), /speakThen\(`答啱喇！\$\{e
 assert.match(read('js/math-life-skills-game.js'), /function selectCompareItem/);
 assert.match(read('js/math-life-skills-game.js'), /math-life-answer-number/);
 assert.match(read('js/math-life-skills-game.js'), /question\.part/);
+assert.match(read('js/math-life-skills-game.js'), /0厘米；再找最近而未超過物件尾端嘅10厘米大刻度，跟住數小格/);
+assert.match(read('js/math-life-skills-game.js'), /math-life-ruler-endpoint/);
+assert.match(read('js/math-life-skills-game.js'), /function mistakeHint\(question\)/);
+assert.match(read('js/math-life-skills-game.js'), /if \(wrongAttempts > 1\)/, 'second mistake receives the worked explanation');
+assert.match(read('js/math-life-skills-game.js'), /speakThen\(hint, \(\) => \{\}\)/, 'mistake guidance is also spoken');
+assert.match(read('js/math-app.js'), /copy: item\.cardCopy/, 'activity cards explain the concrete action');
 assert.match(read('css/math.css'), /\.math-life-ten-cell\.is-empty/);
 assert.match(read('js/math-life-skills-game.js'), /question\.kind === 'shop-payment' \? '🧺 完成付款'/);
 assert.match(read('js/math-life-skills-game.js'), /而家有\$\$\{total\}，仲差/);

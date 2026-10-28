@@ -69,8 +69,8 @@
       count,
       object: OBJECTS[0],
       title: count === 1 ? '數一粒' : `數${count}個`,
-      prompt: `望住蘋果，逐個數一數。`,
-      speak: `${ZH[count]}個蘋果。我哋由一開始逐個數：${Array.from({ length: count }, (_, i) => ZH[i + 1]).join('、')}。`,
+      prompt: `望住${OBJECTS[0].name}，逐${OBJECTS[0].counter}數一數。`,
+      speak: `${ZH[count]}${OBJECTS[0].counter}${OBJECTS[0].name}。我哋由一開始逐${OBJECTS[0].counter}數：${Array.from({ length: count }, (_, i) => ZH[i + 1]).join('、')}。`,
     }));
   }
 

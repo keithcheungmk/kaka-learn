@@ -886,20 +886,29 @@
         <p id="math-relations-prompt">數一數有幾個，再揀數字。</p>
         <button type="button" class="speak-btn" id="btn-math-relations-speak" aria-label="再聽一次">🔊 再聽一次</button>
       </div>
-      <div id="math-relations-line" class="math-nline" role="group" aria-label="數一數物件"></div>
-      <div id="math-relations-distance-choices" aria-label="揀數字答案"></div>
-      <div class="math-relations-actions">
-        <button type="button" class="btn btn-secondary" id="btn-math-relations-stop" hidden>停喺呢度</button>
-        <button type="button" class="btn btn-ghost" id="btn-math-relations-change-first" hidden>改第一段</button>
-        <button type="button" class="btn btn-secondary" id="btn-math-relations-hint" hidden>提示</button>
-        <button type="button" class="btn" id="btn-math-relations-answer" hidden>回答</button>
-      </div>
-      <p class="feedback" id="math-relations-feedback" aria-live="polite"></p>
-      <div class="math-relations-explain" id="math-relations-explain" hidden>
-        <p id="math-relations-explain-msg">試吓講畀我聽。</p>
-        <div class="btn-row">
-          <button type="button" class="btn btn-secondary" id="btn-math-relations-explain-demo">聽示範</button>
-          <button type="button" class="btn" id="btn-math-relations-explain-next">下一題</button>
+      <div class="math-counting-layout">
+        <aside class="math-counting-story" aria-label="數數小任務">
+          <img src="./assets/math-life/fruit-shop-scene.jpg" alt="卡卡在水果店" />
+          <strong>一齊數一數！</strong>
+        </aside>
+        <div id="math-relations-line" class="math-nline" role="group" aria-label="數一數物件"></div>
+        <div class="math-counting-answer-panel">
+          <strong>揀個數字</strong>
+          <div id="math-relations-distance-choices" aria-label="揀數字答案"></div>
+          <div class="math-relations-actions">
+            <button type="button" class="btn btn-secondary" id="btn-math-relations-stop" hidden>停喺呢度</button>
+            <button type="button" class="btn btn-ghost" id="btn-math-relations-change-first" hidden>改第一段</button>
+            <button type="button" class="btn btn-secondary" id="btn-math-relations-hint" hidden>提示</button>
+            <button type="button" class="btn" id="btn-math-relations-answer" hidden>回答</button>
+          </div>
+          <p class="feedback" id="math-relations-feedback" aria-live="polite"></p>
+          <div class="math-relations-explain" id="math-relations-explain" hidden>
+            <p id="math-relations-explain-msg">試吓講畀我聽。</p>
+            <div class="btn-row">
+              <button type="button" class="btn btn-secondary" id="btn-math-relations-explain-demo">聽示範</button>
+              <button type="button" class="btn" id="btn-math-relations-explain-next">下一題</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1049,9 +1058,15 @@
         <h1>數學遊樂園</h1>
         <div class="math-park-star-summary" id="math-park-star-summary" aria-live="polite">⭐ 今日星星 0/10</div>
       </div>
-      <p class="section-lead math-galaxy-lead">揀一條路線，逐關玩數學遊戲！</p>
+      <p class="section-lead math-galaxy-lead">揀個任務，一齊玩數學！</p>
+      <nav class="math-playground-tabs" id="math-playground-tabs" aria-label="數學遊戲分類">
+        <button type="button" data-math-category="count" aria-pressed="true">🔢 數數</button>
+        <button type="button" data-math-category="operations" aria-pressed="false">➕ 加減</button>
+        <button type="button" data-math-category="time" aria-pressed="false">🕒 時間</button>
+        <button type="button" data-math-category="life" aria-pressed="false">🍓 生活數學</button>
+      </nav>
       <div class="topic-grid math-galaxy-grid math-playground-grid" id="math-galaxy-grid"></div>
-      <section class="math-extra-missions" aria-labelledby="math-extra-missions-title">
+      <section class="math-extra-missions" aria-labelledby="math-extra-missions-title" hidden>
         <div class="math-extra-missions-heading">
           <span class="math-extra-missions-kicker">遊樂園支線・動手玩</span>
           <h2 id="math-extra-missions-title">生活挑戰</h2>

@@ -25,12 +25,15 @@ function seeded(seed) {
 }
 
 assert.deepEqual([...D.LEARN_STEPS.map((step) => step.count)], [1, 2, 3]);
-assert.equal(D.stageForCompletedRounds(0).max, 3);
-assert.equal(D.stageForCompletedRounds(0).skillId, 'count.oneToOne.1to5');
-assert.equal(D.stageForCompletedRounds(1).max, 5);
-assert.equal(D.stageForCompletedRounds(1).skillId, 'count.oneToOne.1to5');
-assert.equal(D.stageForCompletedRounds(3).max, 10);
-assert.equal(D.stageForCompletedRounds(3).skillId, 'count.oneToOne.1to10');
+for (const step of D.LEARN_STEPS) {
+  assert.ok(step.prompt.includes(step.object.name));
+  assert.ok(step.speak.includes(step.object.name));
+}
+assert.equal(D.stageForCompletedRounds(0).max, 10);
+assert.equal(D.stageForCompletedRounds(0).min, 5);
+assert.equal(D.stageForCompletedRounds(1).max, 15);
+assert.equal(D.stageForCompletedRounds(3).max, 20);
+assert.equal(D.stageForCompletedRounds(3).skillId, 'count.oneToOne.1to20');
 assert.equal(D.completedRoundsFromState({ numberRelationsProgress: { completedRounds: 12 } }), 0,
   'legacy number-line progress must not skip the new beginner counting stage');
 assert.equal(D.completedRoundsFromState({ mercuryCountProgress: { completedRounds: 2 } }), 2);
@@ -41,10 +44,10 @@ for (const completedRounds of [0, 1, 3]) {
   const expectedMax = D.stageForCompletedRounds(completedRounds).max;
   for (let seed = 1; seed <= 250; seed += 1) {
     const mission = D.generateMission({ completedRounds, random: seeded(seed) });
-    assert.equal(mission.length, 5);
+    assert.equal(mission.length, 10);
     mission.forEach((question) => {
       assert.equal(question.type, 'count-objects');
-      assert.ok(question.count >= 1 && question.count <= expectedMax);
+      assert.ok(question.count >= 5 && question.count <= expectedMax);
       assert.equal(question.answer, question.count);
       assert.equal(question.choices.length, 3);
       assert.equal(new Set(question.choices).size, 3);
@@ -66,9 +69,48 @@ assert.doesNotMatch(appSource, /window\.KakaNumberBondsGame\.init/);
 assert.doesNotMatch(appSource, /window\.KakaMathNumberLineGame/);
 assert.match(gameSource, /value !== question\.answer/);
 assert.match(gameSource, /busy = false;\s*setChoiceButtonsDisabled\(false\)/);
-assert.match(gameSource, /再數一次。逐粒由一開始，慢慢數就得。/);
+assert.match(gameSource, /一齊五個一組數/);
 assert.match(gameSource, /next\.disabled = true/);
 assert.match(gameSource, /speak\(question\.spokenCorrect/);
 assert.doesNotMatch(gameSource, /spokenCorrect.*?setTimeout\(advance/s);
+
+// A partial group must never claim it contains five objects.
+class FakeElement {
+  constructor() { this.children = []; this.attributes = {}; this.listeners = {}; this.classList = { add() {}, remove() {} }; }
+  setAttribute(name, value) { this.attributes[name] = value; }
+  append(...children) { this.children.push(...children); }
+  replaceChildren(...children) { this.children = [...children]; }
+  addEventListener(type, listener) { this.listeners[type] = listener; }
+  querySelectorAll() { return this.children; }
+}
+const elements = new Map();
+context.document = {
+  getElementById(id) { if (!elements.has(id)) elements.set(id, new FakeElement()); return elements.get(id); },
+  createElement() { return new FakeElement(); },
+};
+context.setTimeout = () => 0;
+vm.runInContext(gameSource, context);
+D.generateMission = () => [D.makeQuestion({ count: 14, max: 20 })];
+let speechDone;
+context.window.KakaMathMercuryCountGame.init({
+  showMathScreen() {}, isMuted: () => false,
+  speech: { speakThen(_text, _options, done) { speechDone = done; } },
+});
+context.window.KakaMathMercuryCountGame.openMission();
+const groups = elements.get('math-relations-line').children;
+assert.deepEqual(groups.map((group) => group.children[0].textContent), ['一組 5 個', '一組 5 個', '剩低嗰組']);
+assert.deepEqual(groups.map((group) => group.children.length - 1), [5, 5, 4]);
+const choices = elements.get('math-relations-distance-choices').children;
+const wrongChoice = choices.find((choice) => choice.textContent !== '14');
+wrongChoice.listeners.click();
+assert.ok(choices.every((choice) => choice.disabled), 'choices stay disabled while counting aloud');
+speechDone();
+assert.ok(choices.every((choice) => !choice.disabled), 'choices become available after the explanation');
+const correctChoice = choices.find((choice) => choice.textContent === '14');
+correctChoice.listeners.click();
+assert.ok(choices.filter((choice) => choice !== correctChoice).every((choice) => choice.hidden), 'wrong choices leave room for feedback');
+assert.equal(elements.get('btn-math-relations-explain-next').disabled, true);
+speechDone();
+assert.equal(elements.get('btn-math-relations-explain-next').disabled, false, 'next is enabled after spoken feedback');
 
 console.log('test-math-mercury-count: ok');

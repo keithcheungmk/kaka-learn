@@ -226,18 +226,32 @@
       $('#btn-math-round-galaxy').onclick = () => { overlay.hidden = true; openGalaxy(); };
     }
 
+    let activeMathCategory = 'count';
+
     function renderGalaxy() {
       const grid = $('#math-galaxy-grid');
       if (!grid) return;
       const state = loadState();
       grid.classList.add('math-galaxy-grid');
       grid.innerHTML = '';
-      const routes = [
-        { id: 'numbers', icon: '🍓', name: '數字探險', skill: '五個一組・數到 20', copy: '數水果和硬幣，完成十題攞一粒星。', open: () => window.KakaMathMercuryCountGame.openMission() },
-        { id: 'addition', icon: '🍊', name: '加法果園', skill: '加法・湊十法', copy: '將兩盤水果合埋，先湊成十。', open: () => window.KakaAdditionGame.openEarthAddition() },
-        { id: 'subtraction', icon: '🫐', name: '減法籃球場', skill: '減法・三種計算法', copy: '拎走水果，再試點樣拆十。', open: () => window.KakaSubtractionGame?.openMoonSubtraction() },
-        { id: 'clock', icon: '⏰', name: '時鐘遊樂屋', skill: '模擬鐘・電子鐘', copy: '聽時間、認鐘面，自己轉指針。', open: () => openVenusLearn() },
-      ];
+      const life = (id, icon) => {
+        const item = window.KakaMathLifeSkillsData.ACTIVITIES.find((activity) => activity.id === id);
+        return { id, icon, name: item.title, skill: item.subtitle, copy: item.cardCopy, open: () => window.KakaMathLifeSkillsGame.start(id) };
+      };
+      const categories = {
+        count: [
+          { id: 'numbers', icon: '🍓', name: '數字探險', skill: '五個一組・數到 20', copy: '數水果和硬幣，完成十題攞一粒星。', open: () => window.KakaMathMercuryCountGame.openMission() },
+          life('quantity-compare', '🔎'),
+        ],
+        operations: [
+          { id: 'addition', icon: '🍊', name: '加法果園', skill: '加法・湊十法', copy: '將兩盤水果合埋，先湊成十。', open: () => window.KakaAdditionGame.openEarthAddition() },
+          { id: 'subtraction', icon: '🫐', name: '減法籃球場', skill: '減法・三種計算法', copy: '拎走水果，再試點樣拆十。', open: () => window.KakaSubtractionGame?.openMoonSubtraction() },
+          life('number-bonds', '🧩'),
+        ],
+        time: [{ id: 'clock', icon: '⏰', name: '時鐘遊樂屋', skill: '模擬鐘・電子鐘', copy: '聽時間、認鐘面，自己轉指針。', open: () => openVenusLearn() }],
+        life: [life('shape-patterns', '🔺'), life('little-shop', '🛒'), life('measure-compare', '📏')],
+      };
+      const routes = categories[activeMathCategory];
       routes.forEach((route) => {
         const btn = document.createElement('button');
         btn.type = 'button';
@@ -464,6 +478,16 @@
         return;
       }
       start.addEventListener('click', () => openGalaxy());
+
+      $('#math-playground-tabs')?.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-math-category]');
+        if (!button) return;
+        activeMathCategory = button.dataset.mathCategory;
+        $('#math-playground-tabs').querySelectorAll('button').forEach((tab) => {
+          tab.setAttribute('aria-pressed', String(tab === button));
+        });
+        renderGalaxy();
+      });
 
       $('#btn-back-math-galaxy')?.addEventListener('click', () => goHome());
 

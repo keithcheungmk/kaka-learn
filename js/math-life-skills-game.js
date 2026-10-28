@@ -24,6 +24,40 @@
     drawing.setAttribute('aria-hidden', 'true'); drawing.style.setProperty('--shape-color', color); return drawing;
   }
   function announce(text) { const node = $('math-life-skill-feedback'); if (node) node.textContent = text; }
+  function mistakeHint(question) {
+    if (wrongAttempts > 1) {
+      if (question.kind === 'compare' && question.left !== question.right) {
+        const side = question.left > question.right ? '左邊' : '右邊';
+        return `左邊有${question.left}${question.object.counter}，右邊有${question.right}${question.object.counter}；${side}多${Math.abs(question.left - question.right)}${question.object.counter}。`;
+      }
+      return question.explain;
+    }
+    if (question.kind === 'compare') return `試吓先配好${Math.min(question.left, question.right)}對，再數吓剩低幾多${question.object.counter}。`;
+    if (question.kind === 'bonds') return question.total === 10
+      ? `已有${question.part}粒；由${question.part}開始，喺格仔逐格數到10。`
+      : `已有${question.part}粒，睇吓仲有幾多個空格，就砌成${question.total}粒。`;
+    if (question.kind === 'shape') return `用手指沿住條邊行一圈，再數吓有幾多個角。`;
+    if (question.kind === 'pattern') return `將頭兩個形狀當成一組，跟住睇呢組重複咗幾多次。`;
+    if (question.kind === 'measure') {
+      return '先確認物件一端對齊0厘米；再找最近而未超過物件尾端嘅10厘米大刻度，跟住數小格。';
+    }
+    return '再睇清楚水果價錢同付款盤入面嘅硬幣，加埋試吓。';
+  }
+  function exactShopHint(question) {
+    const picked = [];
+    function find(start, remaining) {
+      if (remaining === 0) return true;
+      for (let i = start; i < question.coins.length; i += 1) {
+        if (question.coins[i].value > remaining) continue;
+        picked.push(question.coins[i].value);
+        if (find(i + 1, remaining - question.coins[i].value)) return true;
+        picked.pop();
+      }
+      return false;
+    }
+    if (!find(0, question.price)) return '';
+    return `可以揀${picked.map((value) => `$${value}`).join('加')}，${picked.reduce((sum, value) => sum + value, 0)}蚊啱啱好。`;
+  }
   function renderPile(parent, count, object, side) {
     const group = el('section', `math-life-pile math-life-pile--${side}`);
     group.setAttribute('aria-label', `${side === 'left' ? '左邊' : '右邊'}有${count}${object.counter}${object.name}`);
@@ -124,27 +158,24 @@
     pay.addEventListener('click', () => answer(question, { id: 'pay' }, pay)); choices.append(pay);
   }
   function renderMeasure(board, question) {
-    const pair = el('div', `math-life-measure-pair is-${question.attribute === '長短' ? 'length' : question.attribute === '輕重' ? 'weight' : 'capacity'}`);
-    ['left', 'right'].forEach((side) => {
-      const amount = question[side], card = el('div', 'math-life-measure-object');
-      card.append(el('strong', 'math-life-side-label', side === 'left' ? '左邊' : '右邊'));
-      if (question.attribute === '長短') {
-        const ruler = el('div', 'math-life-ruler');
-        const bar = el('span', 'math-life-measure-bar'); bar.style.width = `${Math.round(30 + amount * 8)}%`;
-        ruler.append(bar); card.append(ruler);
-      } else if (question.attribute === '輕重') {
-        const scale = el('div', 'math-life-balance-visual');
-        const weights = el('span', 'math-life-weight-blocks');
-        for (let i = 0; i < amount; i += 1) weights.append(el('span', 'math-life-weight-block', '🧱'));
-        scale.append(el('span', 'math-life-balance-pan', '⚖️'), weights); card.append(scale);
-      } else {
-        const cup = el('span', 'math-life-cup'), water = el('span', 'math-life-cup-water');
-        water.style.height = `${Math.round(14 + amount * 10)}%`; cup.append(water); card.append(cup);
-        card.append(el('span', 'math-life-measure-mark', `${amount} 格`));
-      }
-      pair.append(card);
-    });
-    board.append(pair);
+    const card = el('div', 'math-life-measure-object math-life-measure-reading');
+    const ruler = el('div', 'math-life-ruler');
+    const bar = el('span', 'math-life-measure-bar');
+    bar.style.width = `${Math.round(question.cm / 20 * 100)}%`;
+    bar.append(el('span', 'math-life-measure-object-icon', question.item.emoji));
+    ruler.append(bar);
+    for (let cm = 0; cm <= 20; cm += 1) {
+      const tick = el('span', `math-life-ruler-tick${cm % 5 === 0 ? ' is-major' : ''}`);
+      tick.dataset.cm = String(cm); tick.style.left = `${cm / 20 * 100}%`;
+      if (cm % 5 === 0) tick.append(el('span', 'math-life-ruler-number', String(cm)));
+      ruler.append(tick);
+    }
+    const endpoint = el('span', 'math-life-ruler-endpoint', '?');
+    endpoint.style.left = `${question.cm / 20 * 100}%`; ruler.append(endpoint);
+    card.append(el('strong', 'math-life-measure-item-label', `${question.item.emoji} ${question.item.name}`),
+      el('span', 'math-life-ruler-alignment', '物件一端對齊尺上嘅0 cm'), ruler,
+      el('span', 'math-life-measure-mark', '先找0／10厘米大刻度，再數小格'));
+    board.append(card);
   }
   function renderQuestionVisual(question) {
     const board = $('math-life-skill-board'); if (!board) return;
@@ -157,7 +188,7 @@
       board.append(card);
     } else if (question.kind === 'pattern') {
       const row = el('div', 'math-life-pattern-row');
-      question.sequence.forEach((shape, i) => { const tile = el('div', 'math-life-pattern-tile'); tile.append(shapeDrawing(shape, data().COLORS[i % data().COLORS.length])); row.append(tile); });
+      question.sequence.forEach((shape, i) => { const tile = el('div', 'math-life-pattern-tile'); tile.append(shapeDrawing(shape, data().COLORS[i % 2])); row.append(tile); });
       row.append(el('div', 'math-life-pattern-missing', '?')); board.append(el('p', 'math-life-board-instruction', '找找重複的形狀小隊。'), row);
     } else if (question.kind === 'shop-payment') renderShop(board, question);
     else if (question.kind === 'measure') renderMeasure(board, question);
@@ -176,12 +207,14 @@
       const total = [...shopSelected].reduce((sum, coinIndex) => sum + (question.coins[coinIndex]?.value || 0), 0);
       if (total !== question.price) {
         wrongAttempts += 1; recordAttempt(question, false, String(total)); button.classList.add('is-bad');
-        announce(total === 0
+        let hint = total === 0
           ? '未揀硬幣喎，喺錢包撳幾個放入付款盤先。'
           : total < question.price
             ? `而家有$${total}，仲差$${question.price - total}。睇吓錢包有冇啱嘅硬幣。`
-            : `而家有$${total}，多咗$${total - question.price}。撳付款盤入面嘅硬幣收返，再試吓。`);
-        deps?.speech?.playTryAgainCue?.({ muted: deps.isMuted?.() }); setTimeout(() => button.classList.remove('is-bad'), 420); return;
+            : `而家有$${total}，多咗$${total - question.price}。撳付款盤入面嘅硬幣收返，再試吓。`;
+        if (wrongAttempts > 1) hint += ` ${exactShopHint(question)}`;
+        announce(hint); deps?.speech?.playTryAgainCue?.({ muted: deps.isMuted?.() }); speakThen(hint, () => {});
+        setTimeout(() => button.classList.remove('is-bad'), 420); return;
       }
     }
     if (question.kind === 'compare' && paired.left.size < Math.min(question.left, question.right)) {
@@ -189,11 +222,9 @@
     }
     if (choice.id !== question.answer) {
       wrongAttempts += 1; recordAttempt(question, false, choice.id); button.classList.add('is-bad');
-      if (question.kind === 'compare') announce(`已一對一配好${Math.min(question.left, question.right)}對，看看哪邊有剩。`);
-      else if (question.kind === 'bonds') announce(`可以用星星逐個數一數，合起來有幾個。`);
-      else if (question.kind === 'shape' || question.kind === 'pattern') announce(`再看看形狀的邊、角，或前面重複的次序。`);
-      else announce(`再看看物品、價錢和數量，慢慢想一想。`);
-      deps?.speech?.playTryAgainCue?.({ muted: deps.isMuted?.() }); setTimeout(() => button.classList.remove('is-bad'), 420); return;
+      const hint = mistakeHint(question);
+      announce(hint); deps?.speech?.playTryAgainCue?.({ muted: deps.isMuted?.() }); speakThen(hint, () => {});
+      setTimeout(() => button.classList.remove('is-bad'), 420); return;
     }
     locked = true; document.querySelectorAll('#math-life-skill-choices button').forEach((item) => { item.disabled = true; });
     button.classList.add('is-ok');
