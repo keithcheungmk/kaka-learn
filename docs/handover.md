@@ -6,9 +6,11 @@ Keith 現時以 Cursor 主 Agent 做 Chief Lead，下面設本機 Math／English
 呢度記錄「其他人需要知」嘅分工、認領、撞車風險同未完事項，避免撞改。
 
 
-**2026-10-28 Codex Emoji Spelling 全主題本機整合（未部署）：** 以 `origin/main` `db26f80` 為基礎，分支 `/private/tmp/kaka-emoji-spelling-20261027`。32 個分類、333 個圖詞均已整合入同一遊戲流程；目前 181 個詞有待成人覆聽的音塊候選，152 個詞安全地使用完整詞語 TTS。新增 16 個音塊候選並修正 `rice` 假音塊；`taxi`、`slide`、`game` 等保留 TTS。形狀中的圓形／正方形／長方形／橢圓改為自製幾何 SVG，nurse emoji 與插圖人物一致。增加題庫及 phonics audit 同步檢查、CI 中 Emoji Spelling 測試、提示圖替代文字、進度 live announcement 及完成彈窗焦點管理。commit `9968faf`；再更新本交接簿後會有後續本機 commit。
+**2026-10-28 Codex Emoji Spelling 全主題整合（未部署）：** 以最新 `origin/main` `db26f80` 為基礎，分支 `/private/tmp/kaka-emoji-spelling-20261027`。32 個分類、333 個圖詞均已整合入同一遊戲流程；181 個詞有候選音塊，152 個詞使用完整詞語 TTS。新增 16 個音塊候選並修正 `rice` 假音塊；`taxi`、`slide`、`game` 等保留 TTS。形狀中的圓形／正方形／長方形／橢圓改為自製幾何 SVG，nurse emoji 與插圖人物一致。增加題庫及 phonics audit 同步檢查、CI 中 Emoji Spelling 測試、提示圖替代文字、進度 live announcement 及完成彈窗焦點管理。程式改動 commit `9968faf`。
 
-本輪 `node scripts/test-emoji-spelling.mjs` 通過（32 類、333 詞全拼字模擬）、`node scripts/test-phonics-flow.mjs` 通過、`scripts/check-invariants.py` 57 項通過、乾淨建置通過。最新版尚未有 viewport/browser smoke，因本機預覽伺服器受 sandbox 阻止；普通 `git push` DNS 無法連線，GitHub Git Data API create-blob 亦回覆 403 `Resource not accessible by integration`。所以分支未推送、未開 PR、未部署；勿聲稱已上線。先前另一版 smoke 和插圖接觸表結果不代表本次資料／UI 的裝置驗收。181 組音塊候選均未經人耳核實；12 個 MP3 浮點樣本接近或達滿幅，須聽音。iPad 真機驗收仍未完成。
+本輪 `node scripts/test-emoji-spelling.mjs` 通過（32 類、333 詞全拼字模擬）、`node scripts/test-phonics-flow.mjs` 通過、`scripts/check-invariants.py` 57 項通過、乾淨建置通過。2026-10-28 家庭 viewport smoke 全通過：iPad 直／橫 37 個畫面均一屏，iPhone 37 個畫面無重疊／裁切，並完成 PTH browser regression；無 404 或 console error。三個 Luna 唯讀批次已逐項結構檢視 181 個候選，沒有確認到需撤回的拼字／切分錯誤；`mango` 的 n→/ŋ/ 再 g→/g/ 有一位覆核者提出教學表述疑慮，資料保留原本的上下文註記「n 在 g 前表示 /ŋ/」，仍須成人覆聽決定。英式非捲舌、部分音檔音量與混音均未做人耳核實：目前 0 個片段可標為已驗收，音檔分析只證明可解碼及檔案存在。iPad 真機 spot-check 仍未完成。
+
+本次 `git fetch origin main` 成功，`origin/main` 仍為 `db26f80`，分支基底沒有落後。完整 smoke 中曾有兩次單 viewport 的偶發進度 timeout；直接重跑原 walk 及 iPad 直向連跑三次均通過，再跑完整家庭 smoke 亦全通過。需留意此間歇性測試不穩定性。當前分支尚未推送／開 PR／部署；上一輪 push 曾因 DNS 失敗、GitHub Git Data API 曾回 403，須重試並分別確認 CI、合併及 Pages 線上版本，勿把本機通過寫成已上線。
 
 
 ## 邊個係邊個
