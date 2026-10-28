@@ -440,6 +440,7 @@ function bindHome() {
     goHome: () => showScreen('home'),
     applyLocationHash,
     openTopics,
+    refreshRewards: refreshStarUI,
     playRoundTarget,
     playRoundCap,
     getPlayProgress: () => ({
