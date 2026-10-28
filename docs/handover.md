@@ -10,7 +10,7 @@ Keith 現時以 Cursor 主 Agent 做 Chief Lead，下面設本機 Math／English
 
 本輪 `node scripts/test-emoji-spelling.mjs` 通過（32 類、333 詞全拼字模擬）、`node scripts/test-phonics-flow.mjs` 通過、`scripts/check-invariants.py` 57 項通過、乾淨建置通過。2026-10-28 家庭 viewport smoke 全通過：iPad 直／橫 37 個畫面均一屏，iPhone 37 個畫面無重疊／裁切，並完成 PTH browser regression；無 404 或 console error。三個 Luna 唯讀批次已逐項結構檢視 181 個候選，沒有確認到需撤回的拼字／切分錯誤；`mango` 的 n→/ŋ/ 再 g→/g/ 有一位覆核者提出教學表述疑慮，資料保留原本的上下文註記「n 在 g 前表示 /ŋ/」，仍須成人覆聽決定。英式非捲舌、部分音檔音量與混音均未做人耳核實：目前 0 個片段可標為已驗收，音檔分析只證明可解碼及檔案存在。iPad 真機 spot-check 仍未完成。
 
-本次 `git fetch origin main` 成功，`origin/main` 仍為 `db26f80`，分支基底沒有落後。完整 smoke 中曾有兩次單 viewport 的偶發進度 timeout；直接重跑原 walk 及 iPad 直向連跑三次均通過，再跑完整家庭 smoke 亦全通過。需留意此間歇性測試不穩定性。當前分支尚未推送／開 PR／部署；上一輪 push 曾因 DNS 失敗、GitHub Git Data API 曾回 403，須重試並分別確認 CI、合併及 Pages 線上版本，勿把本機通過寫成已上線。
+本次 `git fetch origin main` 成功，`origin/main` 仍為 `db26f80`，分支基底沒有落後。完整 smoke 中曾有兩次單 viewport 的偶發進度 timeout；直接重跑原 walk 及 iPad 直向連跑三次均通過，再跑完整家庭 smoke 亦全通過。需留意此間歇性測試不穩定性。分支尚未推送／開 PR／部署；本輪 push 被拒絕，GitHub 回報 OAuth App 缺少 `workflow` scope，因分支新增 `.github/workflows/ci.yml` 測試步驟。commit `e300483` 和先前 6 個功能 commit 仍安全保存在本機；不要移除 CI 改動來繞過權限，也不要以其他整合 API 重試寫入。須由 GitHub App 管理員補足 workflow 權限後再推送、跑 CI、開 PR；未推送前不可宣稱完成部署。
 
 
 ## 邊個係邊個
