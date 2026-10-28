@@ -154,6 +154,13 @@ assert.equal(wordById('sight_weather', 'sight_weather_8').emoji, '🌧️');
 assert.equal(wordById('sight_weather', 'sight_weather_9').emoji, '❄️');
 assert.match(wordById('sight_school_items', 'sight_school_items_5').objectArt, /eraser\.svg$/);
 assert.match(wordById('sight_school_items', 'sight_school_items_8').objectArt, /glue\.svg$/);
+assert.match(wordById('sight_places', 'sight_places_2').objectArt, /park\.svg$/);
+assert.match(wordById('sight_places', 'sight_places_8').objectArt, /zoo\.svg$/);
+assert.equal(wordById('sight_feelings', 'sight_feelings_5').emoji, '😳', 'shy 使用清楚表達害羞的圖像');
+assert.match(wordById('sight_family_people', 'sight_family_people_11').objectArt, /classmates\.svg$/);
+assert.match(wordById('festival_halloween', 'festival_halloween_1').objectArt, /costume\.svg$/);
+assert.match(wordById('sight_shapes', 'sight_shapes_10').objectArt, /cylinder\.svg$/);
+assert.match(wordById('sight_shapes', 'sight_shapes_11').objectArt, /sphere\.svg$/);
 
 assert.match(markup, /id="screen-emoji-spelling"/, '新遊戲有獨立畫面，不覆蓋 Phonics');
 assert.match(markup, /id="emoji-spelling-finish"/, '完成畫面有獎勵提示');
