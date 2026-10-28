@@ -571,12 +571,12 @@
         <div class="game-header">
           <button type="button" class="btn btn-ghost" id="btn-emoji-spelling-review">← 重溫詞語</button>
           <h1 id="emoji-spelling-play-title">圖像串字</h1>
-          <div class="progress-pill"><strong id="emoji-spelling-progress">1 / 10</strong></div>
+          <div class="progress-pill"><strong id="emoji-spelling-progress" aria-live="polite" aria-atomic="true">1 / 10</strong></div>
         </div>
         <p class="section-lead">看圖、聽讀音，再試試下一個字母。</p>
         <div class="emoji-spelling-challenge" id="emoji-spelling-challenge">
           <div class="emoji-spelling-picture-row">
-            <div class="emoji-spelling-picture" id="emoji-spelling-picture"></div>
+            <div class="emoji-spelling-picture" id="emoji-spelling-picture" role="img" aria-label="Picture clue"></div>
             <button type="button" class="emoji-spelling-speak" id="btn-emoji-spelling-speak" aria-label="再聽一次單字"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 4V5L7 9H3zm12.5-.9a1 1 0 0 1 1.4 0 5.5 5.5 0 0 1 0 7.8 1 1 0 1 1-1.4-1.4 3.5 3.5 0 0 0 0-5 1 1 0 0 1 0-1.4zm2.8-2.8a1 1 0 0 1 1.4 0 9.5 9.5 0 0 1 0 13.4 1 1 0 0 1-1.4-1.4 7.5 7.5 0 0 0 0-10.6 1 1 0 0 1 0-1.4z"/></svg></button>
             <button type="button" class="emoji-spelling-phonics" id="btn-emoji-spelling-phonics" hidden>🔊 聽音塊</button>
           </div>
@@ -590,7 +590,7 @@
         </div>
         <div id="emoji-spelling-finish" class="emoji-spelling-finish" role="dialog" aria-modal="true" aria-labelledby="emoji-spelling-finish-title" hidden>
           <div class="emoji-spelling-finish-coin" aria-hidden="true">⭐</div>
-          <h2 id="emoji-spelling-finish-title">完成一輪！</h2>
+          <h2 id="emoji-spelling-finish-title" tabindex="-1">完成一輪！</h2>
           <p id="emoji-spelling-finish-score"></p>
           <p id="emoji-spelling-finish-reward" class="emoji-spelling-finish-reward"></p>
           <div class="emoji-spelling-actions">

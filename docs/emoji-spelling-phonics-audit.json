@@ -13,17 +13,17 @@
     "existingMp3Count": 50,
     "pairsRequireSoundAssetFile": true,
     "allCandidatesHaveAssets": true,
-    "note": "Asset filenames were checked only. No clip was listened to; candidates remain provisional until the sound and blending are audited."
+    "note": "Asset filenames were checked only. No clip was listened to; candidates remain provisional until sound quality and blending are audited by an adult."
   },
   "summary": {
-    "candidateCount": 165,
-    "rejectedCount": 168,
+    "candidateCount": 181,
+    "rejectedCount": 152,
     "clipsAudiblyVerifiedCount": 0,
     "byTopic": {
       "animal_spelling": {
         "audited": 20,
-        "candidates": 17,
-        "rejected": 3
+        "candidates": 18,
+        "rejected": 2
       },
       "sight_places": {
         "audited": 10,
@@ -32,8 +32,8 @@
       },
       "sight_household": {
         "audited": 10,
-        "candidates": 6,
-        "rejected": 4
+        "candidates": 7,
+        "rejected": 3
       },
       "sight_school_items": {
         "audited": 10,
@@ -42,18 +42,18 @@
       },
       "festival_christmas": {
         "audited": 10,
-        "candidates": 3,
-        "rejected": 7
+        "candidates": 5,
+        "rejected": 5
       },
       "festival_lunar_new_year": {
         "audited": 10,
-        "candidates": 1,
-        "rejected": 9
+        "candidates": 2,
+        "rejected": 8
       },
       "festival_mid_autumn": {
         "audited": 10,
-        "candidates": 5,
-        "rejected": 5
+        "candidates": 6,
+        "rejected": 4
       },
       "festival_dragon_boat": {
         "audited": 10,
@@ -62,8 +62,8 @@
       },
       "festival_halloween": {
         "audited": 10,
-        "candidates": 4,
-        "rejected": 6
+        "candidates": 5,
+        "rejected": 5
       },
       "sight_jobs_nearby": {
         "audited": 25,
@@ -72,8 +72,8 @@
       },
       "sight_jobs_world": {
         "audited": 20,
-        "candidates": 0,
-        "rejected": 20
+        "candidates": 1,
+        "rejected": 19
       },
       "sight_body": {
         "audited": 12,
@@ -87,8 +87,8 @@
       },
       "sight_clothes": {
         "audited": 12,
-        "candidates": 7,
-        "rejected": 5
+        "candidates": 10,
+        "rejected": 2
       },
       "sight_family_people": {
         "audited": 12,
@@ -97,13 +97,13 @@
       },
       "sight_weather": {
         "audited": 12,
-        "candidates": 9,
-        "rejected": 3
+        "candidates": 10,
+        "rejected": 2
       },
       "sight_colors": {
         "audited": 12,
-        "candidates": 9,
-        "rejected": 3
+        "candidates": 10,
+        "rejected": 2
       },
       "sight_numbers": {
         "audited": 12,
@@ -112,13 +112,13 @@
       },
       "sight_shapes": {
         "audited": 12,
-        "candidates": 1,
-        "rejected": 11
+        "candidates": 2,
+        "rejected": 10
       },
       "sight_toys": {
         "audited": 12,
-        "candidates": 6,
-        "rejected": 6
+        "candidates": 4,
+        "rejected": 8
       },
       "sight_actions": {
         "audited": 12,
@@ -162,8 +162,8 @@
       },
       "sight_food": {
         "audited": 10,
-        "candidates": 6,
-        "rejected": 4
+        "candidates": 7,
+        "rejected": 3
       },
       "sight_veg": {
         "audited": 10,
@@ -172,13 +172,13 @@
       },
       "sight_vehicles": {
         "audited": 10,
-        "candidates": 8,
-        "rejected": 2
+        "candidates": 9,
+        "rejected": 1
       },
       "sight_fruit": {
         "audited": 10,
-        "candidates": 3,
-        "rejected": 7
+        "candidates": 5,
+        "rejected": 5
       }
     }
   },
@@ -335,9 +335,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "animal_fish",
@@ -385,9 +383,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "animal_duck",
@@ -427,9 +423,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "animal_owl",
@@ -447,9 +441,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "animal_ant",
@@ -536,9 +528,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "animal_snail",
@@ -577,8 +567,35 @@
       "sourceId": "animal_monkey",
       "topicId": "animal_spelling",
       "word": "monkey",
-      "status": "rejected",
-      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+      "status": "candidate_pending_audio_audition",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established.",
+      "orderedPairs": [
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "u"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "ng"
+        },
+        {
+          "grapheme": "k",
+          "soundAsset": "k"
+        },
+        {
+          "grapheme": "ey",
+          "soundAsset": "ee"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "n 在 k 前表示 /ŋ/",
+        "字尾 ey 表示 /i/"
+      ]
     },
     {
       "sourceId": "sight_places_0",
@@ -591,7 +608,7 @@
           "soundAsset": "h"
         },
         {
-          "grapheme": "o_e",
+          "grapheme": "o",
           "soundAsset": "oa"
         },
         {
@@ -603,7 +620,7 @@
         "e"
       ],
       "caveats": [
-        "Final e is silent; o_e maps to the existing /əʊ/ oa clip."
+        "e 不發音"
       ]
     },
     {
@@ -633,9 +650,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_places_3",
@@ -684,7 +699,7 @@
           "soundAsset": "p"
         },
         {
-          "grapheme": "oo",
+          "grapheme": "oo-long",
           "soundAsset": "oo-long"
         },
         {
@@ -728,7 +743,7 @@
           "soundAsset": "z"
         },
         {
-          "grapheme": "oo",
+          "grapheme": "oo-long",
           "soundAsset": "oo-long"
         }
       ],
@@ -782,8 +797,20 @@
       "sourceId": "sight_household_3",
       "topicId": "sight_household",
       "word": "chair",
-      "status": "rejected",
-      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
+      "status": "candidate_pending_audio_audition",
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence.",
+      "orderedPairs": [
+        {
+          "grapheme": "ch",
+          "soundAsset": "ch"
+        },
+        {
+          "grapheme": "air",
+          "soundAsset": "air"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
     },
     {
       "sourceId": "sight_household_4",
@@ -874,7 +901,7 @@
           "soundAsset": "l"
         },
         {
-          "grapheme": "a_e",
+          "grapheme": "a",
           "soundAsset": "ai"
         },
         {
@@ -886,7 +913,7 @@
         "e"
       ],
       "caveats": [
-        "Final e is silent; a_e maps to the existing /eɪ/ ai clip."
+        "e 不發音"
       ]
     },
     {
@@ -904,7 +931,7 @@
           "soundAsset": "p"
         },
         {
-          "grapheme": "oo",
+          "grapheme": "oo-long",
           "soundAsset": "oo-long"
         },
         {
@@ -933,7 +960,7 @@
           "soundAsset": "b"
         },
         {
-          "grapheme": "oo",
+          "grapheme": "oo-short",
           "soundAsset": "oo-short"
         },
         {
@@ -1044,7 +1071,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "ue is one vowel grapheme for /uː/. Candidate only; adult audition is required."
+        "ue 是一組字母，表示 /uː/"
       ]
     },
     {
@@ -1072,15 +1099,63 @@
       "sourceId": "festival_christmas_2",
       "topicId": "festival_christmas",
       "word": "sleigh",
-      "status": "rejected",
-      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned."
+      "status": "candidate_pending_audio_audition",
+      "reason": "Contains a vowel/digraph pattern requiring word-specific pronunciation review; no complete conservative mapping was assigned.",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "eigh",
+          "soundAsset": "ai"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "eigh 在 sleigh 中表示 /eɪ/"
+      ]
     },
     {
       "sourceId": "festival_christmas_3",
       "topicId": "festival_christmas",
       "word": "stocking",
-      "status": "rejected",
-      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+      "status": "candidate_pending_audio_audition",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established.",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "o"
+        },
+        {
+          "grapheme": "ck",
+          "soundAsset": "ck"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "ng",
+          "soundAsset": "ng"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "ng 表示 /ŋ/"
+      ]
     },
     {
       "sourceId": "festival_christmas_4",
@@ -1109,9 +1184,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "festival_christmas_6",
@@ -1159,9 +1232,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "In snowman, ow represents /əʊ/ and uses the oa clip; do not generalize to ow in cow."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "festival_christmas_9",
@@ -1231,8 +1302,30 @@
       "sourceId": "festival_lunar_new_year_6",
       "topicId": "festival_lunar_new_year",
       "word": "lucky",
-      "status": "rejected",
-      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      "status": "candidate_pending_audio_audition",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter.",
+      "orderedPairs": [
+        {
+          "grapheme": "l",
+          "soundAsset": "l"
+        },
+        {
+          "grapheme": "u",
+          "soundAsset": "u"
+        },
+        {
+          "grapheme": "ck",
+          "soundAsset": "ck"
+        },
+        {
+          "grapheme": "y",
+          "soundAsset": "ee"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "字尾 y 表示 /i/"
+      ]
     },
     {
       "sourceId": "festival_lunar_new_year_7",
@@ -1292,7 +1385,7 @@
           "soundAsset": "m"
         },
         {
-          "grapheme": "oo",
+          "grapheme": "oo-long",
           "soundAsset": "oo-long"
         },
         {
@@ -1301,16 +1394,40 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "festival_mid_autumn_2",
       "topicId": "festival_mid_autumn",
       "word": "rabbit",
-      "status": "rejected",
-      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
+      "status": "candidate_pending_audio_audition",
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence.",
+      "orderedPairs": [
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "bb",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "bb 表示一個 /b/ 音"
+      ]
     },
     {
       "sourceId": "festival_mid_autumn_3",
@@ -1342,9 +1459,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "festival_mid_autumn_6",
@@ -1370,9 +1485,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "In cloud, ou represents /aʊ/ and uses the ow clip; adult audition remains pending."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "festival_mid_autumn_7",
@@ -1395,7 +1508,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Final y represents /aɪ/. Candidate only; adult audition is required."
+        "y 在字尾表示 /aɪ/"
       ]
     },
     {
@@ -1418,9 +1531,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "festival_mid_autumn_9",
@@ -1473,7 +1584,8 @@
         "e"
       ],
       "caveats": [
-        "Final e is silent; c is soft /s/. Adult British /r/ and phoneme audition is required."
+        "e 不發音",
+        "c 發 /s/"
       ]
     },
     {
@@ -1529,9 +1641,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "festival_dragon_boat_7",
@@ -1557,9 +1667,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "festival_dragon_boat_8",
@@ -1579,8 +1687,40 @@
       "sourceId": "festival_halloween_0",
       "topicId": "festival_halloween",
       "word": "pumpkin",
-      "status": "rejected",
-      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established."
+      "status": "candidate_pending_audio_audition",
+      "reason": "Multisyllabic or reduced-vowel word; current clips do not include schwa and a complete safe mapping was not established.",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "u",
+          "soundAsset": "u"
+        },
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        },
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "k",
+          "soundAsset": "k"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
     },
     {
       "sourceId": "festival_halloween_1",
@@ -1610,7 +1750,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "tch is one trigraph for /tʃ/. Candidate only; adult audition is required."
+        "tch 表示一個 /tʃ/ 音"
       ]
     },
     {
@@ -1688,7 +1828,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "The initial /tr/ is a consonant blend, not an r-controlled vowel. Adult British /r/ audition is required."
+        "/tr/ 是開首子音連綴"
       ]
     },
     {
@@ -1716,7 +1856,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "The initial /tr/ is a consonant blend, not an r-controlled vowel. Adult British /r/ audition is required."
+        "/tr/ 是開首子音連綴"
       ]
     },
     {
@@ -1986,8 +2126,34 @@
       "sourceId": "sight_jobs_world_6",
       "topicId": "sight_jobs_world",
       "word": "artist",
-      "status": "rejected",
-      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
+      "status": "candidate_pending_audio_audition",
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence.",
+      "orderedPairs": [
+        {
+          "grapheme": "ar",
+          "soundAsset": "ar"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "英式非捲舌 /ɑː/"
+      ]
     },
     {
       "sourceId": "sight_jobs_world_7",
@@ -2093,7 +2259,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "eye is a word-specific spelling for /aɪ/."
+        "eye 是表示 /aɪ/ 的特殊拼法"
       ]
     },
     {
@@ -2109,7 +2275,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "In UK English, ear represents /ɪə/; adult review of this sound remains required."
+        "英式發音需覆核 /ɪə/ 音檔"
       ]
     },
     {
@@ -2123,11 +2289,11 @@
           "soundAsset": "n"
         },
         {
-          "grapheme": "o_e",
+          "grapheme": "o",
           "soundAsset": "oa"
         },
         {
-          "grapheme": "s (voiced)",
+          "grapheme": "s",
           "soundAsset": "z"
         }
       ],
@@ -2135,7 +2301,7 @@
         "e"
       ],
       "caveats": [
-        "Final e is silent; o_e maps to /əʊ/. Final s is voiced /z/, so use z clip."
+        "e 不發音"
       ]
     },
     {
@@ -2165,9 +2331,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Word-specific alternate mapping: ea represents /ɛ/ and pairs with e clip."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_body_5",
@@ -2185,9 +2349,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_body_6",
@@ -2212,8 +2374,8 @@
         "e"
       ],
       "caveats": [
-        "One-syllable word: a_e represents /eɪ/ and soft c represents /s/. Final e is silent.",
-        "Mapping remains provisional until adult listening review of British phoneme clips."
+        "e 不發音",
+        "c 發 /s/"
       ]
     },
     {
@@ -2258,9 +2420,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_body_9",
@@ -2295,7 +2455,7 @@
           "soundAsset": "f"
         },
         {
-          "grapheme": "oo",
+          "grapheme": "oo-short",
           "soundAsset": "oo-short"
         },
         {
@@ -2338,7 +2498,8 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "pp represents one /p/ sound; final y represents /i/."
+        "pp 表示一個 /p/ 音",
+        "字尾 y 表示 /i/"
       ]
     },
     {
@@ -2395,7 +2556,8 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "In scared, are represents /eə/; sc is the initial /s/ + /k/ blend. Adult UK review is required."
+        "are 在 scared 中表示 /eə/",
+        "sc 是 /s/ + /k/ 的開首子音連綴"
       ]
     },
     {
@@ -2421,9 +2583,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_feelings_6",
@@ -2479,7 +2639,7 @@
           "soundAsset": "c"
         },
         {
-          "grapheme": "o (in -old)",
+          "grapheme": "o",
           "soundAsset": "oa"
         },
         {
@@ -2492,9 +2652,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Word-specific mapping: o in -old represents /əʊ/ and pairs with oa clip."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_feelings_11",
@@ -2524,7 +2682,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "In UK English, ir represents /ɜː/; adult review of this sound mapping and clip is required."
+        "英式 ir 表示 /ɜː/；需成人覆核音檔"
       ]
     },
     {
@@ -2555,9 +2713,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Candidate uses the available short-a clip for the British /æ/ vowel; adult listening review remains required."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_clothes_2",
@@ -2583,17 +2739,36 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "The r is a consonant in the initial /dr/ blend, not an r-controlled vowel. Adult listening review remains required."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_clothes_3",
       "topicId": "sight_clothes",
       "word": "skirt",
-      "status": "rejected",
-      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
+      "status": "candidate_pending_audio_audition",
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence.",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "k",
+          "soundAsset": "k"
+        },
+        {
+          "grapheme": "ir",
+          "soundAsset": "er"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "ir 在 skirt 中表示英式 /ɜː/"
+      ]
     },
     {
       "sourceId": "sight_clothes_4",
@@ -2616,7 +2791,8 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "oe represents /uː/; final plural s is /z/."
+        "oe 表示 /uː/",
+        "字尾 s 發 /z/"
       ]
     },
     {
@@ -2700,8 +2876,31 @@
       "sourceId": "sight_clothes_9",
       "topicId": "sight_clothes",
       "word": "scarf",
-      "status": "rejected",
-      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
+      "status": "candidate_pending_audio_audition",
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence.",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "c",
+          "soundAsset": "k"
+        },
+        {
+          "grapheme": "ar",
+          "soundAsset": "ar"
+        },
+        {
+          "grapheme": "f",
+          "soundAsset": "f"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "sc 是 /s/ + /k/ 的開首子音連綴",
+        "ar 在 scarf 中表示英式 /ɑː/"
+      ]
     },
     {
       "sourceId": "sight_clothes_10",
@@ -2714,8 +2913,28 @@
       "sourceId": "sight_clothes_11",
       "topicId": "sight_clothes",
       "word": "shorts",
-      "status": "rejected",
-      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
+      "status": "candidate_pending_audio_audition",
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence.",
+      "orderedPairs": [
+        {
+          "grapheme": "sh",
+          "soundAsset": "sh"
+        },
+        {
+          "grapheme": "or",
+          "soundAsset": "or"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": []
     },
     {
       "sourceId": "sight_family_people_0",
@@ -2770,7 +2989,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Final y represents /i/."
+        "字尾 y 表示 /i/"
       ]
     },
     {
@@ -2847,7 +3066,8 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "nn represents one /n/ sound; final y represents /i/."
+        "nn 表示一個 /n/ 音",
+        "字尾 y 表示 /i/"
       ]
     },
     {
@@ -2879,7 +3099,8 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "In cloudy, ou represents /aʊ/; final y represents /i/."
+        "ou 表示 /aʊ/",
+        "字尾 y 表示 /i/"
       ]
     },
     {
@@ -2907,7 +3128,8 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Final y represents /i/; adult review of the UK /r/ sound is required."
+        "字尾 y 表示 /i/",
+        "英式 /r/ 音檔需覆核"
       ]
     },
     {
@@ -2939,7 +3161,7 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "Final y represents /i/."
+        "字尾 y 表示 /i/"
       ]
     },
     {
@@ -2982,7 +3204,7 @@
           "soundAsset": "c"
         },
         {
-          "grapheme": "o (in -old)",
+          "grapheme": "o",
           "soundAsset": "oa"
         },
         {
@@ -2995,9 +3217,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Word-specific mapping: o in -old represents /əʊ/ and pairs with oa clip."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_weather_7",
@@ -3024,7 +3244,8 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "In snowy, ow represents /əʊ/; final y represents /i/."
+        "ow 在 snowy 中表示 /əʊ/",
+        "字尾 y 表示 /i/"
       ]
     },
     {
@@ -3047,9 +3268,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_weather_9",
@@ -3071,16 +3290,40 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "In snow, ow represents /əʊ/ and uses the oa clip, unlike /aʊ/ in cloud and brown."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_weather_10",
       "topicId": "sight_weather",
       "word": "rainbow",
-      "status": "rejected",
-      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
+      "status": "candidate_pending_audio_audition",
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence.",
+      "orderedPairs": [
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "ai",
+          "soundAsset": "ai"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "n"
+        },
+        {
+          "grapheme": "b",
+          "soundAsset": "b"
+        },
+        {
+          "grapheme": "ow",
+          "soundAsset": "oa"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "ow 在 rainbow 中表示 /əʊ/"
+      ]
     },
     {
       "sourceId": "sight_weather_11",
@@ -3109,9 +3352,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_colors_1",
@@ -3133,9 +3374,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "The ue spelling represents /uː/ and pairs with oo-long."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_colors_2",
@@ -3162,7 +3401,8 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "In yellow, ow represents /əʊ/; ll represents one /l/ sound."
+        "字尾 ow 在 yellow 中表示 /əʊ/",
+        "ll 表示一個 /l/ 音"
       ]
     },
     {
@@ -3189,9 +3429,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_colors_4",
@@ -3211,8 +3449,30 @@
       "sourceId": "sight_colors_6",
       "topicId": "sight_colors",
       "word": "pink",
-      "status": "rejected",
-      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter."
+      "status": "candidate_pending_audio_audition",
+      "reason": "No complete conservative grapheme-to-existing-sound mapping was established; do not substitute letter names or infer one sound per letter.",
+      "orderedPairs": [
+        {
+          "grapheme": "p",
+          "soundAsset": "p"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "i"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "ng"
+        },
+        {
+          "grapheme": "k",
+          "soundAsset": "k"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "n 在 k 前表示 /ŋ/"
+      ]
     },
     {
       "sourceId": "sight_colors_7",
@@ -3251,7 +3511,7 @@
           "soundAsset": "w"
         },
         {
-          "grapheme": "i_e",
+          "grapheme": "i",
           "soundAsset": "igh"
         },
         {
@@ -3263,7 +3523,7 @@
         "e"
       ],
       "caveats": [
-        "wh represents /w/; final e is silent and i_e represents /aɪ/."
+        "e 不發音"
       ]
     },
     {
@@ -3290,9 +3550,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "In brown, ow represents /aʊ/ and uses the ow clip, unlike ow in snow."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_colors_10",
@@ -3315,7 +3573,8 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "ey represents /eɪ/; /gr/ is an initial consonant blend. Adult UK /r/ audition is required."
+        "ey 表示 /eɪ/",
+        "/gr/ 是開首子音連綴；英式 /r/ 音檔需覆核"
       ]
     },
     {
@@ -3342,9 +3601,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Word-specific mapping: o in -old represents /əʊ/ and pairs with oa."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_numbers_0",
@@ -3372,7 +3629,7 @@
         "w"
       ],
       "caveats": [
-        "The w is silent; o represents /uː/ in two."
+        "w 不發音"
       ]
     },
     {
@@ -3400,7 +3657,7 @@
           "soundAsset": "f"
         },
         {
-          "grapheme": "i_e",
+          "grapheme": "i",
           "soundAsset": "igh"
         },
         {
@@ -3412,7 +3669,7 @@
         "e"
       ],
       "caveats": [
-        "Final e is silent; i_e represents /aɪ/ and pairs with igh."
+        "e 不發音"
       ]
     },
     {
@@ -3460,9 +3717,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "The full grapheme eigh represents /eɪ/ and pairs with ai."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_numbers_8",
@@ -3531,7 +3786,7 @@
         "e"
       ],
       "caveats": [
-        "The final e is silent; pronounced graphemes map in order to /t w ɛ l v/."
+        "字尾 e 不發音"
       ]
     },
     {
@@ -3566,8 +3821,26 @@
       "sourceId": "sight_shapes_4",
       "topicId": "sight_shapes",
       "word": "star",
-      "status": "rejected",
-      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence."
+      "status": "candidate_pending_audio_audition",
+      "reason": "Not mapped yet: this word still needs a word-specific grapheme-to-phoneme analysis and a suitable recorded sound sequence.",
+      "orderedPairs": [
+        {
+          "grapheme": "s",
+          "soundAsset": "s"
+        },
+        {
+          "grapheme": "t",
+          "soundAsset": "t"
+        },
+        {
+          "grapheme": "ar",
+          "soundAsset": "ar"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "ar 在 star 中表示英式 /ɑː/"
+      ]
     },
     {
       "sourceId": "sight_shapes_5",
@@ -3608,7 +3881,7 @@
           "soundAsset": "c"
         },
         {
-          "grapheme": "o_e",
+          "grapheme": "o",
           "soundAsset": "oa"
         },
         {
@@ -3620,7 +3893,7 @@
         "e"
       ],
       "caveats": [
-        "Final e is silent; o_e represents /əʊ/ and pairs with oa."
+        "e 不發音"
       ]
     },
     {
@@ -3691,7 +3964,8 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "dd represents one /d/ sound; final y represents /i/."
+        "dd 表示一個 /d/ 音",
+        "字尾 y 表示 /i/"
       ]
     },
     {
@@ -3717,9 +3991,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "The oy spelling represents /ɔɪ/ and pairs with oi."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_toys_5",
@@ -3739,11 +4011,11 @@
           "soundAsset": "d"
         },
         {
-          "grapheme": "i_e",
+          "grapheme": "i",
           "soundAsset": "igh"
         },
         {
-          "grapheme": "c (before silent e)",
+          "grapheme": "c",
           "soundAsset": "s"
         }
       ],
@@ -3751,7 +4023,8 @@
         "e"
       ],
       "caveats": [
-        "Final e is silent; c before e represents /s/ and pairs with s."
+        "e 不發音",
+        "c 發 /s/"
       ]
     },
     {
@@ -3765,30 +4038,11 @@
       "sourceId": "sight_toys_8",
       "topicId": "sight_toys",
       "word": "slide",
-      "status": "candidate_pending_audio_audition",
-      "orderedPairs": [
-        {
-          "grapheme": "s",
-          "soundAsset": "s"
-        },
-        {
-          "grapheme": "l",
-          "soundAsset": "l"
-        },
-        {
-          "grapheme": "i_e",
-          "soundAsset": "igh"
-        },
-        {
-          "grapheme": "d",
-          "soundAsset": "d"
-        }
-      ],
-      "silentLetters": [
-        "e"
-      ],
+      "status": "rejected",
+      "orderedPairs": [],
+      "silentLetters": [],
       "caveats": [
-        "Final e is silent; i_e represents /aɪ/ and pairs with igh."
+        "目前遊戲未配置對應音塊，使用完整單字語音"
       ]
     },
     {
@@ -3809,26 +4063,11 @@
       "sourceId": "sight_toys_11",
       "topicId": "sight_toys",
       "word": "game",
-      "status": "candidate_pending_audio_audition",
-      "orderedPairs": [
-        {
-          "grapheme": "g",
-          "soundAsset": "g"
-        },
-        {
-          "grapheme": "a_e",
-          "soundAsset": "ai"
-        },
-        {
-          "grapheme": "m",
-          "soundAsset": "m"
-        }
-      ],
-      "silentLetters": [
-        "e"
-      ],
+      "status": "rejected",
+      "orderedPairs": [],
+      "silentLetters": [],
       "caveats": [
-        "Final e is silent; a_e represents /eɪ/ and pairs with ai."
+        "目前遊戲未配置對應音塊，使用完整單字語音"
       ]
     },
     {
@@ -3851,9 +4090,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_actions_1",
@@ -3904,7 +4141,8 @@
         "l"
       ],
       "caveats": [
-        "The l is silent; a represents /ɔː/ in walk."
+        "l 不發音",
+        "a 在 walk 中表示 /ɔː/"
       ]
     },
     {
@@ -3944,7 +4182,7 @@
           "soundAsset": "w"
         },
         {
-          "grapheme": "a_e",
+          "grapheme": "a",
           "soundAsset": "ai"
         },
         {
@@ -3956,7 +4194,7 @@
         "e"
       ],
       "caveats": [
-        "Final e is silent; a_e represents /eɪ/ and pairs with ai."
+        "e 不發音"
       ]
     },
     {
@@ -4031,10 +4269,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening.",
-        "This Action Words entry is the present-tense /riːd/; the game sends 'reed' to device TTS to avoid the ambiguous isolated spelling 'read'."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_actions_8",
@@ -4064,7 +4299,8 @@
       ],
       "silentLetters": [],
       "caveats": [
-        "aw represents /ɔː/; /dr/ is an initial consonant blend, not an r-controlled vowel. Adult UK /r/ audition is required."
+        "aw 表示 /ɔː/",
+        "/dr/ 是開首子音連綴；英式 /r/ 音檔需覆核"
       ]
     },
     {
@@ -4182,9 +4418,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "mat",
@@ -4206,9 +4440,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "can",
@@ -4230,9 +4462,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "The short-a family context selects /kæn/ rather than weak-form /kən/."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "pan",
@@ -4298,9 +4528,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Provisional mapping; audio and British pronunciation require human listening."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "fan",
@@ -4724,8 +4952,29 @@
       "sourceId": "sight_food_0",
       "topicId": "sight_food",
       "word": "rice",
-      "status": "rejected",
-      "reason": "possible final-e/long-vowel spelling not represented. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+      "status": "candidate_pending_audio_audition",
+      "reason": "possible final-e/long-vowel spelling not represented. Do not derive chunks by spelling each letter; no chunk audio was auditioned.",
+      "orderedPairs": [
+        {
+          "grapheme": "r",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "igh"
+        },
+        {
+          "grapheme": "c",
+          "soundAsset": "s"
+        }
+      ],
+      "silentLetters": [
+        "e"
+      ],
+      "caveats": [
+        "字尾 e 不發音",
+        "c 發 /s/"
+      ]
     },
     {
       "sourceId": "sight_food_1",
@@ -4751,9 +5000,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_food_2",
@@ -4779,9 +5026,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_food_3",
@@ -4799,9 +5044,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_food_4",
@@ -4828,7 +5071,7 @@
           "soundAsset": "c"
         },
         {
-          "grapheme": "a_e",
+          "grapheme": "a",
           "soundAsset": "ai"
         },
         {
@@ -4840,7 +5083,7 @@
         "e"
       ],
       "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+        "e 不發音"
       ]
     },
     {
@@ -4863,9 +5106,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_food_8",
@@ -4897,7 +5138,8 @@
         "e"
       ],
       "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+        "e 不發音",
+        "c 發 /s/"
       ]
     },
     {
@@ -4927,9 +5169,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_veg_2",
@@ -4965,9 +5205,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_veg_5",
@@ -4993,9 +5231,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_veg_6",
@@ -5041,9 +5277,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_vehicles_1",
@@ -5065,16 +5299,19 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_vehicles_2",
       "topicId": "sight_vehicles",
       "word": "taxi",
       "status": "rejected",
-      "reason": "taxi ends in i pronounced /iː/ in the target pronunciation; the available i clip is /ɪ/, so the full spelling-to-sound mapping is not supported. No audio was auditioned."
+      "reason": "taxi ends in i pronounced /iː/ in the target pronunciation; the available i clip is /ɪ/, so the full spelling-to-sound mapping is not supported. No audio was auditioned.",
+      "orderedPairs": [],
+      "silentLetters": [],
+      "caveats": [
+        "目前遊戲未配置對應音塊，使用完整單字語音"
+      ]
     },
     {
       "sourceId": "sight_vehicles_3",
@@ -5100,9 +5337,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_vehicles_4",
@@ -5128,9 +5363,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_vehicles_5",
@@ -5156,9 +5389,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_vehicles_6",
@@ -5180,9 +5411,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_vehicles_7",
@@ -5207,15 +5436,38 @@
         "e"
       ],
       "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+        "e 不發音"
       ]
     },
     {
       "sourceId": "sight_vehicles_8",
       "topicId": "sight_vehicles",
       "word": "ferry",
-      "status": "rejected",
-      "reason": "doubled-letter spelling needs explicit one-sound mapping. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+      "status": "candidate_pending_audio_audition",
+      "reason": "doubled-letter spelling needs explicit one-sound mapping. Do not derive chunks by spelling each letter; no chunk audio was auditioned.",
+      "orderedPairs": [
+        {
+          "grapheme": "f",
+          "soundAsset": "f"
+        },
+        {
+          "grapheme": "e",
+          "soundAsset": "e"
+        },
+        {
+          "grapheme": "rr",
+          "soundAsset": "r"
+        },
+        {
+          "grapheme": "y",
+          "soundAsset": "ee"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "rr 表示一個 /r/ 音",
+        "字尾 y 表示 /i/"
+      ]
     },
     {
       "sourceId": "sight_vehicles_9",
@@ -5244,7 +5496,7 @@
         "e"
       ],
       "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+        "e 不發音"
       ]
     },
     {
@@ -5295,15 +5547,41 @@
         "e"
       ],
       "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
+        "e 不發音"
       ]
     },
     {
       "sourceId": "sight_fruit_4",
       "topicId": "sight_fruit",
       "word": "mango",
-      "status": "rejected",
-      "reason": "no reviewed direct grapheme mapping assigned; requires word-specific pronunciation and grapheme analysis. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+      "status": "candidate_pending_audio_audition",
+      "reason": "no reviewed direct grapheme mapping assigned; requires word-specific pronunciation and grapheme analysis. Do not derive chunks by spelling each letter; no chunk audio was auditioned.",
+      "orderedPairs": [
+        {
+          "grapheme": "m",
+          "soundAsset": "m"
+        },
+        {
+          "grapheme": "a",
+          "soundAsset": "a"
+        },
+        {
+          "grapheme": "n",
+          "soundAsset": "ng"
+        },
+        {
+          "grapheme": "g",
+          "soundAsset": "g"
+        },
+        {
+          "grapheme": "o",
+          "soundAsset": "oa"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "n 在 g 前表示 /ŋ/"
+      ]
     },
     {
       "sourceId": "sight_fruit_5",
@@ -5328,9 +5606,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_fruit_7",
@@ -5352,9 +5628,7 @@
         }
       ],
       "silentLetters": [],
-      "caveats": [
-        "Mapping uses the existing phoneme inventory; pronunciation and blending remain pending adult listening review."
-      ]
+      "caveats": []
     },
     {
       "sourceId": "sight_fruit_8",
@@ -5367,8 +5641,30 @@
       "sourceId": "sight_fruit_9",
       "topicId": "sight_fruit",
       "word": "kiwi",
-      "status": "rejected",
-      "reason": "no reviewed direct grapheme mapping assigned; requires word-specific pronunciation and grapheme analysis. Do not derive chunks by spelling each letter; no chunk audio was auditioned."
+      "status": "candidate_pending_audio_audition",
+      "reason": "no reviewed direct grapheme mapping assigned; requires word-specific pronunciation and grapheme analysis. Do not derive chunks by spelling each letter; no chunk audio was auditioned.",
+      "orderedPairs": [
+        {
+          "grapheme": "k",
+          "soundAsset": "k"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "ee"
+        },
+        {
+          "grapheme": "w",
+          "soundAsset": "w"
+        },
+        {
+          "grapheme": "i",
+          "soundAsset": "ee"
+        }
+      ],
+      "silentLetters": [],
+      "caveats": [
+        "兩個 i 都表示 /iː/"
+      ]
     }
   ]
 }
