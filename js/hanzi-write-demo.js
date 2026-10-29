@@ -19,7 +19,6 @@
   const GUIDE_OUTLINE_WIDTH = '10';
   const DRAWING_TARGET_PX = 26;
   const NEED_SUCCESSES = 6;
-  const REPLAY_SUCCESSES = 2;
   const HINT_FULL = 1;
   const HINT_FAINT = 2;
   const HINT_BLANK = 3;
@@ -46,11 +45,10 @@
   let writer = null;
   let quizActive = false;
   let lastMissSpeakAt = 0;
-  let replayMode = false;
-  let replayWrites = 0;
   let familyPerson = null;
   let familyCharIndex = 0;
   let familySolved = false;
+  let practiceCount = 0;
 
   function levels() {
     return BANK.filter((level) => CHAR_DATA[level.char]);
@@ -157,7 +155,6 @@
     });
     document.body.classList.toggle('is-chapter-picker', name === 'adventure');
     document.body.classList.toggle('is-family-writing', name === 'write' && Boolean(familyPerson));
-    document.body.classList.toggle('is-replay-writing', name === 'write' && replayMode && !familyPerson);
     const back = $('back-link');
     const speakBtn = $('btn-speak-chapters');
     const starPill = $('star-pill');
@@ -171,8 +168,8 @@
     if (starPill) starPill.hidden = name === 'adventure';
     if (brand) brand.hidden = name === 'adventure';
     refreshStars();
-    const count = familyPerson ? familyCharIndex + (familySolved ? 1 : 0) : replayMode ? replayWrites : successCount(currentLevel().id);
-    renderWriteStamps(name === 'write' ? count : 0, { total: familyPerson ? 3 : replayMode ? REPLAY_SUCCESSES : NEED_SUCCESSES });
+    const count = familyPerson ? familyCharIndex + (familySolved ? 1 : 0) : practiceCount;
+    renderWriteStamps(name === 'write' ? count : 0, { total: familyPerson ? 3 : NEED_SUCCESSES });
   }
 
   function speak(text) {
@@ -353,7 +350,6 @@
 
   function goFamily() {
     familyPerson = null;
-    replayMode = false;
     const grid = $('family-grid');
     grid.replaceChildren();
     FAMILY_NAMES.forEach((person) => {
@@ -371,7 +367,7 @@
   function openFamilyName(id) {
     familyPerson = FAMILY_NAMES.find((person) => person.id === id);
     if (!familyPerson) return;
-    replayMode = false;
+    practiceCount = 0;
     familyCharIndex = 0;
     familySolved = false;
     hideOverlays();
@@ -466,7 +462,7 @@
     const host = $('hanzi-guide');
     clearActiveStrokeGuide();
     const level = currentLevel();
-    const hint = hintLevelFor(successCount(level.id));
+    const hint = hintLevelFor(practiceCount);
     const pathD = CHAR_DATA[level.char]?.strokes?.[strokeIndex];
     if (typeof HanziWriter === 'undefined' || !HanziWriter.getScalingTransform) return;
     const nodes = [];
@@ -554,7 +550,7 @@
     }
     [...host.children].forEach((el, i) => {
       const on = i < n;
-      el.textContent = familyPerson || replayMode ? '●' : '★';
+      el.textContent = familyPerson ? '●' : '★';
       el.classList.toggle('is-on', on);
       el.classList.toggle('is-pop', Boolean(opts.pop) && on && i === n - 1);
     });
@@ -581,7 +577,7 @@
       return;
     }
     const chapter = chapterById(chapterId);
-    const done = successCount(level.id);
+    const done = practiceCount;
     const hint = hintLevelFor(done);
     if ($('level-kicker')) $('level-kicker').textContent = `第${chapter.no}章 · ${chapter.title}`;
     if ($('write-heading')) $('write-heading').textContent = `寫「${level.char}」`;
@@ -591,12 +587,11 @@
         : `提示：${hintLabel(hint)}。`;
     }
     if ($('write-progress')) {
-      $('write-progress').textContent = replayMode ? `重玩：${replayWrites}／${REPLAY_SUCCESSES} 次` : `提示：${hintLabel(hint)}`;
+      $('write-progress').textContent = `提示：${hintLabel(hint)}`;
     }
     renderMeaning(level);
     renderVocab('write-vocab', level);
-    if (replayMode) renderWriteStamps(replayWrites, { total: REPLAY_SUCCESSES });
-    else renderWriteStamps(done);
+    renderWriteStamps(done);
   }
 
   function flashMissBoard() {
@@ -636,7 +631,7 @@
 
   function startQuiz() {
     if (!writer) return;
-    const hint = hintLevelFor(successCount(currentLevel().id));
+    const hint = hintLevelFor(practiceCount);
     quizActive = true;
     setWriteStatus(writeHintFor(hint));
     showActiveStrokeGuide(0);
@@ -679,7 +674,7 @@
       return;
     }
     const size = boardSize();
-    const hint = hintLevelFor(successCount(level.id));
+    const hint = hintLevelFor(practiceCount);
     writer = HanziWriter.create('hanzi-target', level.char, {
       width: size,
       height: size,
@@ -695,7 +690,7 @@
       strokeHighlightSpeed: 1,
       charDataLoader,
     });
-    if (successCount(level.id) === 0) playGuide();
+    if (practiceCount === 0) playGuide();
     else startQuiz();
   }
 
@@ -703,8 +698,8 @@
     familyPerson = null;
     const list = chapterLevels();
     levelIndex = Math.max(0, Math.min(index, list.length - 1));
-    replayMode = successCount(currentLevel().id) >= NEED_SUCCESSES;
-    replayWrites = 0;
+    const saved = successCount(currentLevel().id);
+    practiceCount = saved >= NEED_SUCCESSES ? 0 : saved;
     hideOverlays();
     if ($('btn-next-char')) $('btn-next-char').hidden = true;
     if ($('btn-next-char')) $('btn-next-char').textContent = '下一個';
@@ -784,6 +779,7 @@
     $('btn-pass-rewrite').hidden = false;
     $('btn-next-char').hidden = true;
     stylePassCta(false);
+    $('btn-next-level').textContent = '返回家人';
     showPassGloss('');
     $('pass-overlay').classList.remove('hidden');
     speak(`${person.name}，寫得好！`);
@@ -800,21 +796,16 @@
       else { setWriteStatus('寫得好！按「下一個字」繼續。', 'cheer'); $('btn-next-char').hidden = false; }
       return;
     }
-    if (replayMode) {
-      replayWrites = Math.min(REPLAY_SUCCESSES, replayWrites + 1);
-      refreshWriteChrome();
-      celebrateWriteTick(replayWrites, { total: REPLAY_SUCCESSES });
-      if (replayWrites >= REPLAY_SUCCESSES) onLevelPassed({ replay: true });
-      else { setWriteStatus('寫得好！再寫一次。', 'cheer'); startQuiz(); }
-      return;
-    }
-    const prev = successCount(level.id);
-    const next = setSuccessCount(level.id, Math.min(NEED_SUCCESSES, prev + 1));
-    awardSuccessTick();
+    const saved = successCount(level.id);
+    const prev = practiceCount;
+    const next = Math.min(NEED_SUCCESSES, prev + 1);
+    practiceCount = next;
+    if (saved < NEED_SUCCESSES) setSuccessCount(level.id, Math.max(saved, next));
+    if (saved < NEED_SUCCESSES) awardSuccessTick();
     refreshWriteChrome();
     celebrateWriteTick(next);
     if (next >= NEED_SUCCESSES) {
-      onLevelPassed({ firstClear: prev < NEED_SUCCESSES });
+      onLevelPassed({ firstClear: saved < NEED_SUCCESSES });
       return;
     }
     continueWrite();
@@ -833,56 +824,46 @@
 
   function stylePassCta(hasNext) {
     const nextBtn = $('btn-next-level');
-    const backBtn = $('btn-back-chars');
     if (nextBtn) {
-      nextBtn.hidden = !hasNext;
-      nextBtn.classList.toggle('primary-btn', hasNext);
-      nextBtn.classList.toggle('ghost-btn', !hasNext);
-      nextBtn.classList.toggle('pass-secondary', !hasNext);
+      nextBtn.hidden = false;
+      nextBtn.textContent = hasNext ? '下一個字' : '返回字表';
     }
-    if (backBtn) {
-      backBtn.classList.toggle('primary-btn', !hasNext);
-      backBtn.classList.toggle('ghost-btn', hasNext);
-      backBtn.classList.toggle('pass-secondary', hasNext);
-    }
+    document.querySelectorAll('.pass-actions .pass-secondary').forEach((button) => {
+      button.hidden = true;
+    });
   }
 
   function onLevelPassed(opts) {
     const level = currentLevel();
-    const replay = Boolean(opts?.replay);
-    const { first, coin, chapterFirst, chapterCoin } = replay
-      ? { first: false, coin: { gained: false }, chapterFirst: false, chapterCoin: { gained: false } }
-      : awardClear(level, opts);
-    const nextIdx = nextIncompleteIndex();
-    const hasNext = nextIdx !== -1 && nextIdx !== levelIndex;
-    if ($('btn-next-char')) $('btn-next-char').hidden = !hasNext;
-    if ($('btn-pass-rewrite')) $('btn-pass-rewrite').hidden = hasNext;
+    const replay = successCount(level.id) >= NEED_SUCCESSES && !opts?.firstClear;
+    const { first, coin, chapterFirst, chapterCoin } = awardClear(level, opts);
+    const hasNext = levelIndex + 1 < chapterLevels().length;
+    if ($('btn-next-char')) $('btn-next-char').hidden = true;
     stylePassCta(hasNext);
     if ($('pass-title')) $('pass-title').textContent = PASS_TITLE;
     if ($('pass-stars')) { $('pass-stars').hidden = replay; $('pass-stars').textContent = '★★★'; }
     $('pass-coin').hidden = replay;
-    $('pass-vocab-kicker').hidden = false;
-    $('pass-vocab').hidden = false;
+    $('pass-vocab-kicker').hidden = true;
+    $('pass-vocab').hidden = true;
     $('btn-back-chars').textContent = '返回字表';
     if (replay) {
-      $('pass-copy').textContent = '你再寫了兩次，寫得好！';
+      $('pass-copy').textContent = '你再寫了六次，寫得好！';
     } else if (chapterFirst) {
       $('pass-copy').textContent = '這個字已經寫滿六次。這一章的字都寫好了。';
     } else if (first) {
       $('pass-copy').textContent = hasNext
         ? '這個字已經寫滿六次。繼續學下一個字吧。'
-        : '這個字已經寫滿六次。可以再寫，也可以返回字表。';
+        : '這個字已經寫滿六次。返回字表繼續練習吧。';
     } else {
       $('pass-copy').textContent = hasNext
-        ? '這個字已經寫滿六次。可以再寫，也可以學下一個字。'
-        : '這個字已經寫滿六次。可以再寫，也可以返回字表。';
+        ? '這個字已經寫滿六次。繼續學下一個字吧。'
+        : '這個字已經寫滿六次。返回字表繼續練習吧。';
     }
     const coinBits = [];
     if (coin.gained) coinBits.push('＋1 星星幣');
     if (chapterCoin.gained) coinBits.push('＋1 章節幣');
     if (!coinBits.length) coinBits.push(coin.already ? '今天已領過幣' : '星星已記下');
     $('pass-coin').textContent = coinBits.join(' · ');
-    renderVocab('pass-vocab', level);
     $('pass-overlay').classList.remove('hidden');
     speakGlossThenCheer(level);
   }
@@ -918,10 +899,7 @@
       familySolved = false;
       $('btn-next-char').hidden = true;
     }
-    if (!familyPerson && successCount(currentLevel().id) >= NEED_SUCCESSES && !replayMode) replayMode = true;
-    if (replayMode && replayWrites >= REPLAY_SUCCESSES) replayWrites = 0;
     hideOverlays();
-    document.body.classList.toggle('is-replay-writing', replayMode && !familyPerson);
     refreshWriteChrome();
     if (!writer) {
       mountWriter();
@@ -998,8 +976,9 @@
     openWrite(idx === -1 ? levelIndex : idx);
   });
   $('btn-next-level')?.addEventListener('click', () => {
-    const idx = nextIncompleteIndex();
-    openWrite(idx === -1 ? levelIndex : idx);
+    if (familyPerson) { hideOverlays(); destroyWriter(); goFamily(); return; }
+    if (levelIndex + 1 < chapterLevels().length) openWrite(levelIndex + 1);
+    else leaveWrite();
   });
   $('btn-back-chars')?.addEventListener('click', () => leaveWrite());
   $('btn-pass-rewrite')?.addEventListener('click', () => {

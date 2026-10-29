@@ -1059,7 +1059,7 @@ def walk(pg, url, shots: Path | None, tag: str):
           const api = window.KakaHanziWrite;
           const id = api?.currentLevel?.()?.id;
           api?.setSuccessCount?.(id, 2);
-          api?.renderWriteStamps?.(2);
+          api?.openWrite?.(0);
           const host = document.querySelector('#write-stamps');
           const stamps = [...document.querySelectorAll('#write-stamps .write-stamp')];
           const board = document.querySelector('.mizi-board')?.getBoundingClientRect();
@@ -1184,6 +1184,7 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Guide color must be kid-visible orange, got {colors.get('orange')!r}")
     if "橙色" not in (colors.get("hint") or ""):
         raise RuntimeError("Write hint must name the orange guide line")
+    pg.wait_for_timeout(300)  # Let the remounted writer start its quiz before simulating a miss.
     pg.evaluate("() => window.KakaHanziWrite?.onQuizMiss?.()")
     miss = (pg.text_content("#write-status") or "").strip()
     if "再試一次" not in miss:
@@ -1256,20 +1257,32 @@ def walk(pg, url, shots: Path | None, tag: str):
     if not next_btn.is_visible() or (next_btn.text_content() or "").strip() != "下一個字":
         raise RuntimeError("Pass screen primary action must be 下一個字")
     next_class = pg.get_attribute("#btn-next-level", "class") or ""
-    back_class = pg.get_attribute("#btn-back-chars", "class") or ""
     if "primary-btn" not in next_class:
         raise RuntimeError("下一個字 must be the large primary button")
-    if "pass-secondary" not in back_class:
-        raise RuntimeError("返回字表 must stay a secondary action")
-    if "返回字表" not in (pg.text_content("#btn-back-chars") or ""):
-        raise RuntimeError("Pass screen must offer 返回字表")
-    if "返主頁" not in (pg.text_content("#btn-pass-home") or ""):
-        raise RuntimeError("Pass screen must offer 返主頁")
-    with pg.expect_navigation():
-        pg.click("#btn-pass-home")
-    pg.wait_for_selector("#screen-topics.active #btn-topics-hanzi-write")
-    if pg.is_visible("#screen-home") and "active" in (pg.get_attribute("#screen-home", "class") or ""):
-        raise RuntimeError("Hanzi 返主頁 must return to Chinese topics, not home")
+    for button in ("#btn-back-chars", "#btn-pass-rewrite", "#btn-pass-home"):
+        if pg.is_visible(button):
+            raise RuntimeError(f"Only the next character action should be visible: {button}")
+    pg.click("#btn-next-level")
+    pg.wait_for_selector("#view-write:not(.hidden)")
+    if pg.evaluate("() => window.KakaHanziWrite.currentLevel().char") != "二":
+        raise RuntimeError("Next action must open the next character")
+
+    # Revisit the completed first character: it needs six new successes,
+    # while its previously saved completion remains intact.
+    pg.click("#back-link")
+    pg.wait_for_selector("#view-chars:not(.hidden)")
+    pg.locator("#level-bank .level-chip").first.click()
+    pg.wait_for_selector("#view-write:not(.hidden)")
+    for tick in range(1, 7):
+        pg.evaluate("() => window.KakaHanziWrite.onWriteSuccess()")
+        if pg.evaluate("() => window.KakaHanziWrite.successCount(window.KakaHanziWrite.currentLevel().id)") != 6:
+            raise RuntimeError("Replaying must preserve the saved completion")
+        visible = pg.is_visible("#pass-overlay")
+        if visible != (tick == 6):
+            raise RuntimeError(f"Replay must finish after six successes, got overlay={visible} on {tick}")
+    if pg.locator("#pass-overlay button:visible").count() != 1:
+        raise RuntimeError("Completion must have exactly one action button")
+    pg.click("#btn-next-level")
 
     # 卡卡常識樂園：主頁頂層 → 包牆 → 學習牆 → 隨機 10 題 → 10／10 慶祝＋幣
     pg.goto(url, wait_until="domcontentloaded")
@@ -1665,12 +1678,17 @@ def main() -> int:
     not_found: list[str] = []
 
     with sync_playwright() as pw:
-        browser = pw.chromium.launch()
+        browser = pw.chromium.launch(args=["--mute-audio"])
         targets = [(n, wh, False) for n, wh in ipads.items()] + [(n, wh, True) for n, wh in phones.items()]
         mode = "全尺寸" if args.all else "家庭裝置（iPad Pro 11 + iPhone 16 Pro Max）"
         print(f"smoke-shots：{mode}（{len(targets)} 個 viewport）")
         for name, (w, h), phone in targets:
             page = browser.new_page(viewport={"width": w, "height": h}, is_mobile=True, has_touch=True)
+            page.add_init_script("""() => {
+              if (window.speechSynthesis) window.speechSynthesis.speak = (utterance) => {
+                setTimeout(() => utterance.onend?.({ type: 'end' }), 0);
+              };
+            }""")
             page.on("console", lambda m: errors.append(m.text) if m.type == "error" else None)
             page.on("requestfailed", lambda r: failed.append((r.url, r.failure or "unknown")))
             page.on("response", lambda r: not_found.append(r.url) if r.status == 404 else None)
