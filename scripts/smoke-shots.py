@@ -1184,6 +1184,7 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError(f"Guide color must be kid-visible orange, got {colors.get('orange')!r}")
     if "橙色" not in (colors.get("hint") or ""):
         raise RuntimeError("Write hint must name the orange guide line")
+    pg.wait_for_timeout(300)  # Let the remounted writer start its quiz before simulating a miss.
     pg.evaluate("() => window.KakaHanziWrite?.onQuizMiss?.()")
     miss = (pg.text_content("#write-status") or "").strip()
     if "再試一次" not in miss:
