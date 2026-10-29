@@ -1,5 +1,7 @@
 # AGENTS.md — kaka-learn
 
+> **2026-10-29 Keith 更新測試範圍（優先於下方舊有全站 smoke 要求）：** 日常改動只檢查受影響功能及直接相關的進度、入口和返回流程；介面改動檢查相關 iPad 直／橫及 iPhone 畫面。只有改共用基建或有明確跨模組風險時才擴大回歸。全站回歸每三日定期執行或在有具體理由時執行；測試必須靜音，避免干擾家庭。CI 的全站 UI 回歸留給手動觸發或共用基建改動；勿將以下舊文的全站 smoke 視為每次修改的必需步驟。
+
 給 Cursor／ChatGPT Codex／Grok bot／自動化 agent 嘅專案指引。
 
 > **開工前必須睇 `docs/handover.md`** — Keith 現時主要用 ChatGPT（Codex）、Cursor 同 Grok bot。
