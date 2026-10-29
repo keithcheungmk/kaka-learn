@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -30,13 +32,44 @@ jobs:
       - name: 硬性約束檢查
         run: python3 scripts/check-invariants.py
 
-      - name: 家庭裝置版面回歸（iPad Pro 11 + iPhone 16 Pro Max；唔准要捲、唔准重疊）
+      - name: 判斷畫面檢查範圍
+        id: scope
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BASE: ${{ github.event.before }}
+        run: |
+          if [ "$EVENT_NAME" = workflow_dispatch ] || [ -z "$PUSH_BASE" ] || ! git cat-file -e "$PUSH_BASE^{commit}" 2>/dev/null; then
+            echo "full=true" >> "$GITHUB_OUTPUT"
+            echo "hanzi=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git diff --name-only "$PUSH_BASE" HEAD > /tmp/kaka-changed-files
+          if grep -Eq '^(index\.html|css/styles\.css|js/(app|storage|speech|nav-back)\.js)$' /tmp/kaka-changed-files; then
+            echo "full=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "full=false" >> "$GITHUB_OUTPUT"
+          fi
+          if grep -Eq '^(hanzi-write-demo\.html|js/hanzi-write-demo\.js|css/hanzi-write-demo\.css|data/hanzi-write-chars\.js|scripts/test-hanzi-replay\.py)$' /tmp/kaka-changed-files; then
+            echo "hanzi=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "hanzi=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 準備靜音畫面檢查
+        if: steps.scope.outputs.full == 'true' || steps.scope.outputs.hanzi == 'true'
         run: |
           pip install --quiet playwright
           python3 -m playwright install --with-deps chromium
           python3 -m http.server 5173 &
           for i in $(seq 1 20); do curl -sf http://localhost:5173/ >/dev/null && break; sleep 0.5; done
-          python3 scripts/smoke-shots.py --no-shots
+
+      - name: 寫字定向檢查
+        if: steps.scope.outputs.hanzi == 'true'
+        run: python3 scripts/test-hanzi-replay.py
+
+      - name: 全站畫面回歸（共用基建或手動觸發）
+        if: steps.scope.outputs.full == 'true'
+        run: python3 scripts/smoke-shots.py --no-shots
 
       - name: Prepare static site
         run: bash scripts/build-site.sh _site "${GITHUB_SHA::7}"
