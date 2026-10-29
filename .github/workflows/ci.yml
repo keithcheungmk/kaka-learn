@@ -37,17 +37,54 @@ jobs:
           grep -q "?v=${GITHUB_SHA::7}" _site/index.html
 
   layout:
-    name: 家庭裝置版面回歸（iPad Pro 11 + iPhone 16 Pro Max）
+    name: 按改動範圍檢查家庭裝置
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 判斷畫面檢查範圍
+        id: scope
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PUSH_BASE: ${{ github.event.before }}
+        run: |
+          if [ "$EVENT_NAME" = workflow_dispatch ]; then
+            echo "full=true" >> "$GITHUB_OUTPUT"
+            echo "hanzi=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          base="${PR_BASE:-$PUSH_BASE}"
+          if [ -z "$base" ] || ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+            base="$(git merge-base origin/main HEAD 2>/dev/null || true)"
+          fi
+          if [ -z "$base" ]; then
+            echo "full=true" >> "$GITHUB_OUTPUT"
+            echo "hanzi=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git diff --name-only "$base" HEAD > /tmp/kaka-changed-files
+          if grep -Eq '^(index\.html|css/styles\.css|js/(app|storage|speech|nav-back)\.js)$' /tmp/kaka-changed-files; then
+            echo "full=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "full=false" >> "$GITHUB_OUTPUT"
+          fi
+          if grep -Eq '^(hanzi-write-demo\.html|js/hanzi-write-demo\.js|css/hanzi-write-demo\.css|data/hanzi-write-chars\.js|scripts/test-hanzi-replay\.py)$' /tmp/kaka-changed-files; then
+            echo "hanzi=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "hanzi=false" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: 安裝 playwright
+        if: steps.scope.outputs.full == 'true' || steps.scope.outputs.hanzi == 'true'
         run: |
           pip install --quiet playwright
           python3 -m playwright install --with-deps chromium
 
       - name: 開靜態伺服器
+        if: steps.scope.outputs.full == 'true' || steps.scope.outputs.hanzi == 'true'
         run: |
           python3 -m http.server 5173 &
           for i in $(seq 1 20); do
@@ -55,5 +92,10 @@ jobs:
             sleep 0.5
           done
 
-      - name: 家庭裝置（iPad Pro 11 直／橫 + iPhone 16 Pro Max）
+      - name: 靜音檢查寫字重玩（iPad／iPhone）
+        if: steps.scope.outputs.hanzi == 'true'
+        run: python3 scripts/test-hanzi-replay.py
+
+      - name: 全站家庭裝置回歸（手動或共用基建變更）
+        if: steps.scope.outputs.full == 'true'
         run: python3 scripts/smoke-shots.py --no-shots
