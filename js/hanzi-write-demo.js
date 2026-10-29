@@ -4,7 +4,8 @@
   const storage = window.KakaStorage || {};
   const speech = window.KakaSpeech || {};
   const nav = window.KakaNav || { goBackOr: (href) => { location.assign(href); } };
-  const CHAR_DATA = window.KAKA_HANZI_WRITE_CHARS || {};
+  const CHAR_DATA = { ...(window.KAKA_HANZI_WRITE_CHARS || {}), ...(window.KAKA_FAMILY_NAME_CHARS || {}) };
+  const FAMILY_NAMES = window.KAKA_FAMILY_NAMES || [];
   const BANK = window.KAKA_HANZI_WRITE_BANK || window.KAKA_HANZI_WRITE_LEVELS || [];
   const CHAPTERS = window.KAKA_HANZI_WRITE_CHAPTERS || [];
   const TOPIC_ID = 'hanzi-write';
@@ -34,6 +35,7 @@
     profile: $('view-profile'),
     adventure: $('view-adventure'),
     chars: $('view-chars'),
+    family: $('view-family'),
     write: $('view-write'),
   };
 
@@ -43,7 +45,9 @@
   let writer = null;
   let quizActive = false;
   let lastMissSpeakAt = 0;
-  // Each visit to a completed character starts a fresh six-writing practice.
+  let familyPerson = null;
+  let familyCharIndex = 0;
+  let familySolved = false;
   let practiceCount = 0;
 
   function levels() {
@@ -65,6 +69,10 @@
   }
 
   function currentLevel() {
+    if (familyPerson) {
+      const char = Array.from(familyPerson.name)[familyCharIndex];
+      return { id: `family-${familyPerson.id}-${familyCharIndex}`, char, say: char, title: `寫「${char}」` };
+    }
     const list = chapterLevels();
     return list[levelIndex] || list[0] || levels()[0] || { id: 'yi', char: '一', say: '一', title: '寫「一」' };
   }
@@ -146,11 +154,13 @@
       el.classList.toggle('hidden', key !== name);
     });
     document.body.classList.toggle('is-chapter-picker', name === 'adventure');
+    document.body.classList.toggle('is-family-writing', name === 'write' && Boolean(familyPerson));
     const back = $('back-link');
     const speakBtn = $('btn-speak-chapters');
     const starPill = $('star-pill');
     const brand = $('brand-block');
-    if (name === 'write') back.textContent = '← 字表';
+    if (name === 'write') back.textContent = familyPerson ? '← 家人' : '← 字表';
+    else if (name === 'family') back.textContent = '← 選章';
     else if (name === 'chars') back.textContent = '← 選章';
     else if (name === 'adventure') back.textContent = '返去';
     else back.textContent = '← 中文';
@@ -158,7 +168,8 @@
     if (starPill) starPill.hidden = name === 'adventure';
     if (brand) brand.hidden = name === 'adventure';
     refreshStars();
-    renderWriteStamps(name === 'write' ? practiceCount : 0);
+    const count = familyPerson ? familyCharIndex + (familySolved ? 1 : 0) : practiceCount;
+    renderWriteStamps(name === 'write' ? count : 0, { total: familyPerson ? 3 : NEED_SUCCESSES });
   }
 
   function speak(text) {
@@ -286,6 +297,7 @@
   }
 
   function goAdventure() {
+    familyPerson = null;
     $('who-line').textContent = `${whoName()}，準備好了嗎？`;
     const help = $('chapter-help');
     const helpBtn = $('btn-chapter-help');
@@ -332,6 +344,39 @@
     if (!chapter?.open) return;
     chapterId = chapter.id;
     goChars();
+  }
+
+  function familyKey(person) { return `family-name-${person.id}`; }
+
+  function goFamily() {
+    familyPerson = null;
+    const grid = $('family-grid');
+    grid.replaceChildren();
+    FAMILY_NAMES.forEach((person) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'family-card';
+      const done = storage.isKeyPassed?.(TOPIC_ID, familyKey(person));
+      btn.innerHTML = `<span class="family-portrait"><img src="${person.art}" alt=""></span><strong>${person.label}</strong><span class="family-card-name">${person.name}</span><span>${done ? '★ 已寫過' : '開始寫'}</span>`;
+      btn.addEventListener('click', () => openFamilyName(person.id));
+      grid.appendChild(btn);
+    });
+    showView('family');
+  }
+
+  function openFamilyName(id) {
+    familyPerson = FAMILY_NAMES.find((person) => person.id === id);
+    if (!familyPerson) return;
+    practiceCount = 0;
+    familyCharIndex = 0;
+    familySolved = false;
+    hideOverlays();
+    $('btn-next-char').hidden = true;
+    $('btn-next-char').textContent = '下一個字';
+    showView('write');
+    refreshWriteChrome();
+    speak(`${familyPerson.label}，${familyPerson.name}`);
+    requestAnimationFrame(() => mountWriter());
   }
 
   function charDataLoader(char, onComplete) {
@@ -489,12 +534,13 @@
   function renderWriteStamps(count, opts = {}) {
     const host = $('write-stamps');
     if (!host) return;
-    const n = Math.min(NEED_SUCCESSES, Math.max(0, Number(count) || 0));
+    const total = opts.total || NEED_SUCCESSES;
+    const n = Math.min(total, Math.max(0, Number(count) || 0));
     host.hidden = view !== 'write';
     host.setAttribute('aria-label', '寫字進度');
-    if (host.childElementCount !== NEED_SUCCESSES) {
+    if (host.childElementCount !== total) {
       host.replaceChildren();
-      for (let i = 0; i < NEED_SUCCESSES; i += 1) {
+      for (let i = 0; i < total; i += 1) {
         const item = document.createElement('li');
         item.className = 'write-stamp';
         item.setAttribute('aria-hidden', 'true');
@@ -504,6 +550,7 @@
     }
     [...host.children].forEach((el, i) => {
       const on = i < n;
+      el.textContent = familyPerson ? '●' : '★';
       el.classList.toggle('is-on', on);
       el.classList.toggle('is-pop', Boolean(opts.pop) && on && i === n - 1);
     });
@@ -511,6 +558,24 @@
 
   function refreshWriteChrome() {
     const level = currentLevel();
+    const familyHeader = $('family-name-header');
+    familyHeader.hidden = !familyPerson;
+    $('family-side-portrait').hidden = !familyPerson;
+    $('write-meaning').hidden = Boolean(familyPerson);
+    $('write-vocab').hidden = Boolean(familyPerson);
+    $('write-vocab-kicker').hidden = Boolean(familyPerson);
+    if (familyPerson) {
+      $('level-kicker').textContent = '寫家人的名字';
+      $('write-heading').textContent = `寫「${level.char}」`;
+      $('write-lead').textContent = '看筆順，慢慢寫。';
+      $('write-progress').textContent = `第 ${familyCharIndex + 1}／3 個字`;
+      $('family-write-image').src = familyPerson.art;
+      $('family-side-image').src = familyPerson.art;
+      $('family-write-label').textContent = familyPerson.label;
+      $('family-name-chars').innerHTML = Array.from(familyPerson.name).map((char, i) => `<span class="${i === familyCharIndex ? 'is-current' : ''} ${i < familyCharIndex || (i === familyCharIndex && familySolved) ? 'is-done' : ''}">${char}</span>`).join('');
+      renderWriteStamps(familyCharIndex + (familySolved ? 1 : 0), { total: 3 });
+      return;
+    }
     const chapter = chapterById(chapterId);
     const done = practiceCount;
     const hint = hintLevelFor(done);
@@ -547,11 +612,11 @@
     window.setTimeout(() => board.classList.remove('is-success'), 520);
   }
 
-  function celebrateWriteTick(count) {
+  function celebrateWriteTick(count, opts = {}) {
     speech.warmAudio?.();
     speech.playCorrectCue?.();
     flashSuccessBoard();
-    renderWriteStamps(count, { pop: true });
+    renderWriteStamps(count, { ...opts, pop: true });
   }
 
   function onQuizMiss() {
@@ -630,12 +695,14 @@
   }
 
   function openWrite(index) {
+    familyPerson = null;
     const list = chapterLevels();
     levelIndex = Math.max(0, Math.min(index, list.length - 1));
     const saved = successCount(currentLevel().id);
     practiceCount = saved >= NEED_SUCCESSES ? 0 : saved;
     hideOverlays();
     if ($('btn-next-char')) $('btn-next-char').hidden = true;
+    if ($('btn-next-char')) $('btn-next-char').textContent = '下一個';
     refreshWriteChrome();
     showView('write');
     speech.warmAudio?.();
@@ -693,14 +760,48 @@
     showPassGloss('');
   }
 
+  function completeFamilyName() {
+    const person = familyPerson;
+    const alreadyDone = Boolean(storage.isKeyPassed?.(TOPIC_ID, familyKey(person)));
+    if (!alreadyDone) {
+      storage.markTopicPassed?.(TOPIC_ID, familyKey(person));
+      storage.tryEarnStar?.();
+    }
+    refreshStars();
+    $('pass-title').textContent = `寫好${person.label}的名字！`;
+    $('pass-copy').textContent = person.name;
+    $('pass-stars').hidden = alreadyDone;
+    $('pass-stars').textContent = '★';
+    $('pass-coin').hidden = true;
+    $('pass-vocab-kicker').hidden = true;
+    $('pass-vocab').hidden = true;
+    $('btn-back-chars').textContent = '返回家人';
+    $('btn-pass-rewrite').hidden = false;
+    $('btn-next-char').hidden = true;
+    stylePassCta(false);
+    $('btn-next-level').textContent = '返回家人';
+    showPassGloss('');
+    $('pass-overlay').classList.remove('hidden');
+    speak(`${person.name}，寫得好！`);
+  }
+
   function onWriteSuccess() {
     const level = currentLevel();
+    if (familyPerson) {
+      if (familySolved) return;
+      familySolved = true;
+      refreshWriteChrome();
+      celebrateWriteTick(familyCharIndex + 1, { total: 3 });
+      if (familyCharIndex === 2) completeFamilyName();
+      else { setWriteStatus('寫得好！按「下一個字」繼續。', 'cheer'); $('btn-next-char').hidden = false; }
+      return;
+    }
     const saved = successCount(level.id);
     const prev = practiceCount;
     const next = Math.min(NEED_SUCCESSES, prev + 1);
     practiceCount = next;
     if (saved < NEED_SUCCESSES) setSuccessCount(level.id, Math.max(saved, next));
-    awardSuccessTick();
+    if (saved < NEED_SUCCESSES) awardSuccessTick();
     refreshWriteChrome();
     celebrateWriteTick(next);
     if (next >= NEED_SUCCESSES) {
@@ -734,13 +835,20 @@
 
   function onLevelPassed(opts) {
     const level = currentLevel();
+    const replay = successCount(level.id) >= NEED_SUCCESSES && !opts?.firstClear;
     const { first, coin, chapterFirst, chapterCoin } = awardClear(level, opts);
     const hasNext = levelIndex + 1 < chapterLevels().length;
     if ($('btn-next-char')) $('btn-next-char').hidden = true;
     stylePassCta(hasNext);
     if ($('pass-title')) $('pass-title').textContent = PASS_TITLE;
-    if ($('pass-stars')) $('pass-stars').textContent = '★★★';
-    if (chapterFirst) {
+    if ($('pass-stars')) { $('pass-stars').hidden = replay; $('pass-stars').textContent = '★★★'; }
+    $('pass-coin').hidden = replay;
+    $('pass-vocab-kicker').hidden = true;
+    $('pass-vocab').hidden = true;
+    $('btn-back-chars').textContent = '返回字表';
+    if (replay) {
+      $('pass-copy').textContent = '你再寫了六次，寫得好！';
+    } else if (chapterFirst) {
       $('pass-copy').textContent = '這個字已經寫滿六次。這一章的字都寫好了。';
     } else if (first) {
       $('pass-copy').textContent = hasNext
@@ -786,7 +894,13 @@
   }
 
   function rewrite() {
+    if (familyPerson && !$('pass-overlay').classList.contains('hidden')) { openFamilyName(familyPerson.id); return; }
+    if (familyPerson && familySolved) {
+      familySolved = false;
+      $('btn-next-char').hidden = true;
+    }
     hideOverlays();
+    refreshWriteChrome();
     if (!writer) {
       mountWriter();
       return;
@@ -797,6 +911,7 @@
   function leaveWrite() {
     hideOverlays();
     destroyWriter();
+    if (familyPerson) { goFamily(); return; }
     renderChars();
     showView('chars');
   }
@@ -811,6 +926,7 @@
       goAdventure();
       return;
     }
+    if (view === 'family') { goAdventure(); return; }
     if (view === 'adventure') {
       showView('profile');
       return;
@@ -820,6 +936,8 @@
 
   $('btn-profile-kaka').addEventListener('click', () => pickProfile('kaka'));
   $('btn-profile-heihei').addEventListener('click', () => pickProfile('heihei'));
+  $('btn-family-names').addEventListener('click', goFamily);
+  $('btn-family-speak').addEventListener('click', () => { if (familyPerson) speak(familyPerson.name); });
   $('btn-speak-chapters')?.addEventListener('click', () => {
     speech.unlockSpeech?.();
     speakPickChapter();
@@ -832,6 +950,11 @@
   });
   $('btn-guide').addEventListener('click', () => {
     speech.unlockSpeech?.();
+    if (familyPerson && familySolved) {
+      familySolved = false;
+      $('btn-next-char').hidden = true;
+      refreshWriteChrome();
+    }
     playGuide();
   });
   $('btn-rewrite').addEventListener('click', () => {
@@ -839,10 +962,21 @@
     rewrite();
   });
   $('btn-next-char').addEventListener('click', () => {
+    if (familyPerson) {
+      if (!familySolved || familyCharIndex >= 2) return;
+      familyCharIndex += 1;
+      familySolved = false;
+      $('btn-next-char').hidden = true;
+      refreshWriteChrome();
+      speak(currentLevel().char);
+      mountWriter();
+      return;
+    }
     const idx = nextIncompleteIndex();
     openWrite(idx === -1 ? levelIndex : idx);
   });
   $('btn-next-level')?.addEventListener('click', () => {
+    if (familyPerson) { hideOverlays(); destroyWriter(); goFamily(); return; }
     if (levelIndex + 1 < chapterLevels().length) openWrite(levelIndex + 1);
     else leaveWrite();
   });
@@ -859,7 +993,7 @@
   $('back-link').addEventListener('click', onBack);
 
   window.addEventListener('resize', () => {
-    if (view === 'write' && writer) mountWriter();
+    if (view === 'write' && writer && !(familyPerson && familySolved)) mountWriter();
   });
 
   speech.warmVoices?.();

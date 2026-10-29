@@ -71,7 +71,7 @@ jobs:
           else
             echo "full=false" >> "$GITHUB_OUTPUT"
           fi
-          if grep -Eq '^(hanzi-write-demo\.html|js/hanzi-write-demo\.js|css/hanzi-write-demo\.css|data/hanzi-write-chars\.js|scripts/test-hanzi-replay\.py)$' /tmp/kaka-changed-files; then
+          if grep -Eq '^(hanzi-write-demo\.html|js/hanzi-write-demo\.js|css/hanzi-write-demo\.css|data/hanzi-write-chars\.js|data/hanzi-family-names\.js|scripts/test-hanzi-family-names\.py|scripts/test-hanzi-replay\.py)$' /tmp/kaka-changed-files; then
             echo "hanzi=true" >> "$GITHUB_OUTPUT"
           else
             echo "hanzi=false" >> "$GITHUB_OUTPUT"
@@ -94,7 +94,9 @@ jobs:
 
       - name: 靜音檢查寫字重玩（iPad／iPhone）
         if: steps.scope.outputs.hanzi == 'true'
-        run: python3 scripts/test-hanzi-replay.py
+        run: |
+          python3 scripts/test-hanzi-replay.py
+          python3 scripts/test-hanzi-family-names.py
 
       - name: 全站家庭裝置回歸（手動或共用基建變更）
         if: steps.scope.outputs.full == 'true'
