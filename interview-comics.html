@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#eaf7ff">
   <title>面試四格｜卡卡常識樂園</title>
   <link rel="stylesheet" href="css/four-panel-story.css?v=contain-panels">
-  <link rel="stylesheet" href="css/interview-comics.css?v=contain-panels">
+  <link rel="stylesheet" href="css/interview-comics.css?v=20261030-retell1">
   <link rel="stylesheet" href="css/celebrate-finish.css?v=20261014-celebrate">
 </head>
 <body class="cs-comics">
@@ -23,7 +23,7 @@
     <section id="wall" class="view" aria-labelledby="wall-heading">
       <div class="wall-intro">
         <h2 id="wall-heading">揀一套面試四格</h2>
-        <p>睇四幅圖，用「第一、然後、後來、最後」講個問題同點處理。錄音只留喺呢部機，唔會上傳。</p>
+        <p>先聽一次故事，再跟四幅圖練習複述；熟習後可以試吓自己講。錄音只留喺呢部機，唔會上傳。</p>
       </div>
       <div id="level-grid" class="level-grid"></div>
     </section>
@@ -32,11 +32,22 @@
       <div class="play-spread">
         <div id="comic-board" class="comic-board" aria-label="四格漫畫"></div>
         <aside class="talk-panel" aria-label="講故事">
+          <section id="story-coach" class="story-coach" aria-live="polite">
+            <p id="stage-title" class="stage-title">先聽卡卡講故事</p>
+            <p id="stage-hint" class="stage-hint">聽完之後，跟住四個提示詞講一次。</p>
+            <div id="beat-cues" class="beat-cues" aria-label="四格提示詞"></div>
+            <p id="guided-count" class="guided-count">跟提示練習：0 次；練習 2 次後可試自主複述</p>
+          </section>
+          <div id="model-box" class="model-box">
+            <h3>故事範讀</h3>
+            <p id="model-text"></p>
+            <button type="button" class="icon-btn" id="btn-model">🔊 再聽故事</button>
+          </div>
           <div class="prompt-row">
             <p id="prompt-text" class="prompt-text"></p>
             <button type="button" class="icon-btn" id="btn-prompt" aria-label="再聽提示">🔊 提示</button>
           </div>
-          <button type="button" class="record-btn" id="btn-record">🎤 開始錄音</button>
+          <button type="button" class="record-btn" id="btn-record">🎤 跟提示講故事</button>
           <p class="privacy-note" id="privacy-note">錄音只留喺呢部機，唔會上傳，亦唔會轉成文字。第一次用要准許咪高峰。未准咪都可以逐格睇圖同現場講。</p>
           <p class="status-note" id="status-note" role="status" aria-live="polite"></p>
           <div id="playback" class="playback hidden">
@@ -53,10 +64,10 @@
             <button type="button" class="kid-self-btn" data-self="loud" aria-pressed="false">我講大聲</button>
             <button type="button" class="kid-self-btn" data-self="done" aria-pressed="false">我講完喇</button>
           </div>
-          <div id="model-box" class="model-box hidden">
-            <h3>示範故事（家長睇）</h3>
-            <p id="model-text"></p>
-            <button type="button" class="icon-btn" id="btn-model">🔊 聽示範</button>
+          <div id="guided-actions" class="guided-actions hidden">
+            <button type="button" class="ghost-btn hidden" id="btn-live-practice">我講完喇</button>
+            <button type="button" class="primary-btn" id="btn-guided-again">🔁 跟提示再講一次</button>
+            <button type="button" class="primary-btn independent-btn hidden" id="btn-independent">🌟 試吓自己講</button>
           </div>
           <div id="parent-checks" class="parent-checks hidden">
             <p class="parent-frame">小朋友話自己做到喇。家長聽完，確認吓係咪一樣：</p>
@@ -87,7 +98,7 @@
   <script src="js/storage.js?v=cs-comics"></script>
   <script src="js/speech.js?v=cs-comics"></script>
   <script src="js/celebrate-finish.js?v=20261014-celebrate"></script>
-  <script src="data/interview-comics.js?v=cs-comics"></script>
-  <script src="js/interview-comics.js?v=cs-comics"></script>
+  <script src="data/interview-comics.js?v=20261030-retell1"></script>
+  <script src="js/interview-comics.js?v=20261030-retell1"></script>
 </body>
 </html>
