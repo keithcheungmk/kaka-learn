@@ -1,0 +1,7 @@
+{
+  "book": "rb_fenguo", "series": "red_series", "allow_words": true,
+  "source": "2026-09-05 掃描書本認字卡（紅⑤《分果果》）",
+  "cards": [
+    {"char":"哥哥"},{"char":"留給"},{"char":"姐姐"},{"char":"最後"},{"char":"婆婆"},{"char":"分果果"},{"char":"小狗"},{"char":"我"},{"char":"和"},{"char":"一個"},{"char":"個"},{"char":"分"},{"char":"隻"},{"char":"梨"},{"char":"橙"},{"char":"果果"},{"char":"香蕉"},{"char":"蘋果"},{"char":"水果"},{"char":"媽媽"},{"char":"芒果"},{"char":"爸爸"}
+  ]
+}

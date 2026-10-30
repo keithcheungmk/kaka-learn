@@ -1,0 +1,7 @@
+{
+  "book": "rb_shuijiao", "series": "red_series", "allow_words": true,
+  "source": "2026-09-05 掃描書本認字卡（紅⑦《誰在叫》）",
+  "cards": [
+    {"char":"肚子"},{"char":"小弟弟"},{"char":"誰在叫"},{"char":"叫"},{"char":"在"},{"char":"誰"},{"char":"餓"},{"char":"貓"},{"char":"羊"},{"char":"牛"},{"char":"狗"},{"char":"鳥"},{"char":"了"},{"char":"吱吱"},{"char":"喵喵"},{"char":"咩咩"},{"char":"汪汪"},{"char":"哞哞"},{"char":"哇哇"}
+  ]
+}

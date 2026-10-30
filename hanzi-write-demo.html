@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover, shrink-to-fit=no">
+  <meta name="theme-color" content="#0b1638">
+  <title>卡卡學寫字｜寫字・筆順</title>
+  <link rel="stylesheet" href="css/hanzi-write-demo.css?v=0d3cb82">
+</head>
+<body>
+  <main class="hw-shell">
+    <header class="topbar">
+      <a id="back-link" class="back-link" href="index.html#screen-topics">← 中文</a>
+      <div class="brand" id="brand-block">
+        <span id="brand-kicker">寫字・筆順</span>
+        <h1 id="brand-title">卡卡學寫字</h1>
+      </div>
+      <div class="topbar-end">
+        <button type="button" class="speak-btn" id="btn-speak-chapters" hidden aria-label="聽：揀一章來寫">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M4 10v4h3l4 3V7L7 10H4Zm13.5 2a3.5 3.5 0 0 0-1.8-3.1v6.2A3.5 3.5 0 0 0 17.5 12Zm-1.8-7v1.6A7 7 0 0 1 20 12a7 7 0 0 1-4.3 6.4V20A8.6 8.6 0 0 0 21.5 12 8.6 8.6 0 0 0 15.7 5Z"/></svg>
+        </button>
+        <div id="star-pill" class="star-pill" aria-live="polite">★ 0</div>
+      </div>
+    </header>
+
+    <section id="view-profile" class="view" aria-labelledby="profile-heading">
+      <div class="hero-card">
+        <div class="sky-art" aria-hidden="true">
+          <span class="planet planet-a"></span>
+          <span class="planet planet-b"></span>
+          <span class="rocket"></span>
+        </div>
+        <h2 id="profile-heading">你是誰？</h2>
+        <p>選頭像，開始寫字練習。進度只記在這部機，不會上傳。</p>
+        <div class="profile-pick-grid">
+          <button type="button" class="profile-card" id="btn-profile-kaka" aria-label="卡卡">
+            <img class="profile-card-img" src="./assets/profile-kaka.jpg" alt="" width="384" height="384" decoding="async">
+            <span class="profile-card-name">卡卡</span>
+          </button>
+          <button type="button" class="profile-card" id="btn-profile-heihei" aria-label="禧禧">
+            <img class="profile-card-img" src="./assets/profile-heihei.jpg" alt="" width="384" height="384" decoding="async">
+            <span class="profile-card-name">禧禧</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="view-adventure" class="view hidden browse-view" aria-labelledby="adventure-heading">
+      <div class="chapter-picker">
+        <p class="who-line" id="who-line">卡卡，準備好了嗎？</p>
+        <div class="chapter-picker-head">
+          <h2 id="adventure-heading">選一章</h2>
+          <button type="button" class="parent-help-btn" id="btn-chapter-help" aria-expanded="false" aria-controls="chapter-help" aria-label="給家長：寫字說明">？</button>
+        </div>
+        <div id="chapter-help" class="parent-help" hidden>
+          <p id="adventure-lead">第一至第三章可以寫。第一次每個字寫六次；已完成的字再玩時寫六次。也可以寫家人的名字。第四至第十章即將開放。</p>
+        </div>
+        <button type="button" class="family-entry" id="btn-family-names">
+          <img src="assets/family-stories/characters/family-height-lineup.webp" alt="" loading="lazy">
+          <span><strong>寫家人的名字</strong><small>揀一位家人，一筆一筆寫名字</small></span><span aria-hidden="true">→</span>
+        </button>
+        <div class="chapter-grid" id="chapter-grid" role="list" aria-label="寫字章節"></div>
+      </div>
+    </section>
+
+    <section id="view-family" class="view hidden browse-view" aria-labelledby="family-heading">
+      <div class="hero-card family-picker">
+        <h2 id="family-heading">寫家人的名字</h2>
+        <p>揀一位家人，聽一聽名字，再一個字一個字寫。</p>
+        <div class="family-grid" id="family-grid"></div>
+      </div>
+    </section>
+
+    <section id="view-chars" class="view hidden browse-view" aria-labelledby="chars-heading">
+      <div class="hero-card adventure-card">
+        <p class="level-kicker" id="chars-kicker">第一章</p>
+        <h2 id="chars-heading">選一個字</h2>
+        <p id="chars-lead">每個字要寫滿六次才過關。數字是已寫次數，離開後進度仍在。</p>
+        <div class="level-bank char-bank" id="level-bank" role="list" aria-label="本章字表"></div>
+      </div>
+    </section>
+
+    <section id="view-write" class="view write-view hidden" aria-labelledby="write-heading">
+      <div class="write-spread">
+        <div class="mizi-wrap">
+          <p class="level-kicker" id="level-kicker">第一章 · 入門筆畫</p>
+          <h2 id="write-heading">寫「一」</h2>
+          <p class="write-lead" id="write-lead">先看筆順，再自己寫。跟著橙色線，一筆一筆寫。</p>
+          <p class="write-progress is-aux" id="write-progress">提示：完整虛線</p>
+          <div class="family-name-header" id="family-name-header" hidden>
+            <div class="family-portrait" id="family-write-portrait"><img id="family-write-image" alt=""></div>
+            <div><div class="family-name-heading"><span id="family-write-label"></span><button type="button" id="btn-family-speak" aria-label="聽家人的名字">🔊</button></div><div class="family-name-chars" id="family-name-chars" aria-label="名字進度"></div></div>
+          </div>
+          <div class="mizi-board jiugong-board" aria-label="九宮格">
+            <svg class="jiugong-grid" viewBox="0 0 100 100" aria-hidden="true">
+              <rect x="1.5" y="1.5" width="97" height="97" rx="2"></rect>
+              <line x1="34.33" y1="2" x2="34.33" y2="98"></line>
+              <line x1="67.67" y1="2" x2="67.67" y2="98"></line>
+              <line x1="2" y1="34.33" x2="98" y2="34.33"></line>
+              <line x1="2" y1="67.67" x2="98" y2="67.67"></line>
+            </svg>
+            <div id="hanzi-guide" class="hanzi-guide" aria-hidden="true"></div>
+            <div id="hanzi-target" class="hanzi-target"></div>
+          </div>
+        </div>
+        <aside class="write-panel">
+          <div class="family-side-portrait family-portrait" id="family-side-portrait" hidden><img id="family-side-image" alt=""></div>
+          <button type="button" class="write-meaning" id="write-meaning" aria-label="聽「一」">
+            <span class="write-meaning-emoji" aria-hidden="true">1️⃣</span>
+            <span class="write-meaning-char">一</span>
+          </button>
+          <p id="write-status" class="status-note" role="status">跟著橙色線，一筆一筆寫。</p>
+          <p class="vocab-kicker" id="write-vocab-kicker">相關詞 · 點按聽粵語</p>
+          <div class="vocab-row" id="write-vocab" aria-label="相關詞語"></div>
+          <div class="btn-stack">
+            <button type="button" class="primary-btn" id="btn-guide">看筆順</button>
+            <button type="button" class="ghost-btn" id="btn-rewrite">再寫一次</button>
+            <button type="button" class="ghost-btn" id="btn-next-char" hidden>下一個</button>
+          </div>
+        </aside>
+      </div>
+      <ol id="write-stamps" class="write-stamps" aria-label="寫字進度"></ol>
+    </section>
+  </main>
+
+  <div id="pass-overlay" class="pass-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="pass-title">
+    <div class="pass-card">
+      <div class="pass-sky" aria-hidden="true">
+        <span class="rocket rocket-win"></span>
+      </div>
+      <p class="pass-stars" id="pass-stars" aria-hidden="true">★★★</p>
+      <p id="pass-gloss" class="pass-gloss" aria-live="polite"></p>
+      <h2 id="pass-title">寫得好！再學下一個字。</h2>
+      <p id="pass-copy">這個字已經寫滿六次。繼續學下一個字吧。</p>
+      <p class="vocab-kicker" id="pass-vocab-kicker" hidden>相關詞 · 點按聽粵語</p>
+      <div class="vocab-row" id="pass-vocab" aria-label="相關詞語" hidden></div>
+      <p id="pass-coin" class="pass-coin">＋1 星星幣</p>
+      <div class="pass-actions">
+        <button type="button" class="primary-btn" id="btn-next-level">下一個字</button>
+        <button type="button" class="ghost-btn pass-secondary" id="btn-back-chars" hidden>返回字表</button>
+        <button type="button" class="ghost-btn pass-secondary" id="btn-pass-rewrite" hidden>再寫一次</button>
+        <button type="button" class="ghost-btn pass-secondary" id="btn-pass-home" hidden>返主頁</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/no-zoom.js?v=0d3cb82"></script>
+  <script src="js/nav-back.js?v=0d3cb82"></script>
+  <script src="js/storage.js?v=0d3cb82"></script>
+  <script src="js/speech.js?v=0d3cb82"></script>
+  <script src="vendor/hanzi-writer/hanzi-writer.min.js?v=0d3cb82"></script>
+  <script src="data/hanzi-write-chars.js?v=0d3cb82"></script>
+  <script src="data/hanzi-family-names.js?v=0d3cb82"></script>
+  <script src="js/hanzi-write-demo.js?v=0d3cb82"></script>
+</body>
+</html>
