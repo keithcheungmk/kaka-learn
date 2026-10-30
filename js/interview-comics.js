@@ -22,6 +22,10 @@
   let recordStartedAt = 0;
   let playbackUrl = '';
   let localDone = new Set();
+  let practiceMode = 'guided';
+  let guidedPracticeCount = 0;
+  let hasRecording = false;
+  let livePracticePending = false;
 
   function mediaImg(src, alt, eager) {
     if (!src) return '';
@@ -145,8 +149,10 @@
       stopTracks();
     }
     $('btn-record').classList.remove('is-recording');
-    $('btn-record').textContent = '🎤 開始錄音';
-    if (!silent) setStatus('錄音停咗。可以聽返自己，再撳亮四格。', 'ok');
+    $('btn-record').textContent = practiceMode === 'independent' ? '🎤 開始自主複述' : '🎤 跟提示講故事';
+    if (!silent) setStatus(practiceMode === 'guided'
+      ? '錄音停咗。可以聽返自己，再跟提示練習。'
+      : '錄音停咗。可以聽返自己，再撳亮講過嘅四格。', 'ok');
   }
 
   function speakLine(text) {
@@ -165,9 +171,10 @@
       box.checked = false;
     });
     $('kid-self').classList.add('hidden');
-    $('model-box').classList.add('hidden');
+    $('model-box').classList.toggle('hidden', practiceMode === 'independent');
     $('parent-checks').classList.add('hidden');
     $('play-actions').classList.add('hidden');
+    $('guided-actions').classList.add('hidden');
     $('retry-note').classList.add('hidden');
   }
 
@@ -181,15 +188,16 @@
   }
 
   function revealClosedLoop() {
+    const isGuided = practiceMode === 'guided';
     const panelsReady = allKidPanelsOn();
     const selfReady = panelsReady && allKidSelfOn();
-    $('kid-self').classList.toggle('hidden', !panelsReady);
-    $('model-box').classList.toggle('hidden', !selfReady);
-    $('parent-checks').classList.toggle('hidden', !selfReady);
-    $('play-actions').classList.toggle('hidden', !selfReady);
-    if (selfReady) {
-      $('model-text').textContent = current?.modelStory || '';
-    }
+    $('kid-self').classList.toggle('hidden', isGuided || !panelsReady);
+    $('model-box').classList.toggle('hidden', !isGuided);
+    $('parent-checks').classList.toggle('hidden', isGuided || !selfReady);
+    $('play-actions').classList.toggle('hidden', isGuided || !selfReady);
+    $('guided-actions').classList.toggle('hidden', !isGuided || (!hasRecording && !livePracticePending));
+    $('btn-live-practice').classList.toggle('hidden', !livePracticePending);
+    $('btn-independent').classList.toggle('hidden', guidedPracticeCount < 2);
     refreshCompleteButton();
   }
 
@@ -197,16 +205,19 @@
     play.classList.add('is-reviewing');
     renderKidPanels();
     resetKidLoop();
-    $('kid-panels').classList.remove('hidden');
+    $('kid-panels').classList.toggle('hidden', practiceMode === 'guided');
+    $('btn-record').classList.toggle('hidden', practiceMode === 'guided');
     revealClosedLoop();
     $('kid-panels').scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 
   function hideReview() {
     play.classList.remove('is-reviewing');
+    $('btn-record').classList.remove('hidden');
     $('playback').classList.add('hidden');
     $('kid-panels').classList.add('hidden');
     $('completion').classList.add('hidden');
+    $('guided-actions').classList.add('hidden');
     document.querySelectorAll('#comic-board .comic-panel').forEach((panel) => {
       panel.classList.remove('is-preview');
     });
@@ -270,6 +281,9 @@
   }
 
   function renderComic() {
+    $('beat-cues').innerHTML = current.panels.map((panel, index) => (
+      `<span class="beat-cue" data-beat="${panel.beat}"><b>${index + 1}</b>${panel.beat}</span>`
+    )).join('');
     $('comic-board').innerHTML = current.panels.map((panel) => (
       `<figure class="comic-panel" data-beat="${panel.beat}">
         <button type="button" class="comic-hit" data-beat="${panel.beat}" aria-label="撳亮${panel.beat}">
@@ -333,6 +347,10 @@
   function openLevel(id) {
     current = levels.find((level) => level.id === id);
     if (!current) return;
+    practiceMode = 'guided';
+    guidedPracticeCount = 0;
+    hasRecording = false;
+    livePracticePending = false;
     stopRecording({ silent: true });
     revokePlayback();
     hideReview();
@@ -343,12 +361,20 @@
     $('brand-kicker').textContent = '面試四格';
     $('back-link').setAttribute('href', '#wall');
     $('back-link').textContent = '← 關卡';
-    $('prompt-text').textContent = current.prompt;
+    $('prompt-text').textContent = '聽完故事後，跟住四個提示詞講一次。';
+    $('stage-title').textContent = '先聽卡卡講故事';
+    $('stage-hint').textContent = '聽完之後，跟住四個提示詞講一次。';
+    $('guided-count').textContent = '跟提示練習：0 次；練習 2 次後可試自主複述';
+    $('model-text').textContent = current.modelStory;
+    $('model-box').classList.remove('hidden');
+    $('btn-record').textContent = '🎤 跟提示講故事';
+    $('guided-actions').classList.add('hidden');
+    $('btn-independent').classList.add('hidden');
     renderComic();
     refreshStars();
     refreshCompleteButton();
     setStatus('');
-    speakLine(current.prompt);
+    speakLine(current.modelStory);
   }
 
   function leavePlay() {
@@ -365,8 +391,7 @@
 
   async function startRecording() {
     if (!navigator.mediaDevices?.getUserMedia || typeof MediaRecorder === 'undefined') {
-      setStatus('呢部機暫時錄唔到音。家長可以聽住小朋友現場講，再撳亮四格。', 'warn');
-      showReview();
+      offerLivePractice('呢部機暫時錄唔到音。可以望住四格現場講，講完撳「我講完喇」。');
       return;
     }
     try {
@@ -374,11 +399,13 @@
         audio: { echoCancellation: true, noiseSuppression: true },
       });
     } catch {
-      setStatus('未准許用咪。可以喺瀏覽器設定打開咪高峰，或者由家長聽住現場講，再撳亮四格。', 'warn');
-      showReview();
+      offerLivePractice('未准許用咪。可以由家長聽住現場講，講完撳「我講完喇」。');
       return;
     }
     chunks = [];
+    hasRecording = false;
+    livePracticePending = false;
+    $('btn-live-practice').classList.add('hidden');
     revokePlayback();
     hideReview();
     const mimeType = pickMimeType();
@@ -388,8 +415,7 @@
       usedMime = recorder.mimeType || mimeType;
     } catch {
       stopTracks();
-      setStatus('呢部機錄唔到音。家長可以聽住現場講，再撳亮四格。', 'warn');
-      showReview();
+      offerLivePractice('呢部機錄唔到音。可以望住四格現場講，講完撳「我講完喇」。');
       return;
     }
     recorder.ondataavailable = (event) => {
@@ -403,6 +429,11 @@
         return;
       }
       const blob = new Blob(chunks, { type: usedMime || chunks[0].type || 'audio/webm' });
+      hasRecording = true;
+      if (practiceMode === 'guided') {
+        guidedPracticeCount += 1;
+        $('guided-count').textContent = `跟提示練習：${guidedPracticeCount} 次${guidedPracticeCount < 2 ? '；練習 2 次後可試自主複述' : '；已可以試自主複述'}`;
+      }
       playbackUrl = URL.createObjectURL(blob);
       const audio = $('playback-audio');
       audio.src = playbackUrl;
@@ -477,11 +508,62 @@
     setStatus(RETRY_LINE);
   }
 
+  function offerLivePractice(message) {
+    $('playback').classList.add('hidden');
+    showReview();
+    if (practiceMode === 'guided') {
+      livePracticePending = true;
+      revealClosedLoop();
+      $('btn-live-practice').classList.remove('hidden');
+    } else {
+      message = '呢部機暫時錄唔到音。小朋友可以現場講，然後撳亮講過嘅四格並完成自我檢查；家長聽完再確認。';
+    }
+    setStatus(message, 'warn');
+  }
+
+  function finishLivePractice() {
+    if (!livePracticePending || practiceMode !== 'guided') return;
+    livePracticePending = false;
+    hasRecording = true;
+    guidedPracticeCount += 1;
+    $('guided-count').textContent = `跟提示練習：${guidedPracticeCount} 次${guidedPracticeCount < 2 ? '；練習 2 次後可試自主複述' : '；已可以試自主複述'}`;
+    $('btn-live-practice').classList.add('hidden');
+    $('btn-independent').classList.toggle('hidden', guidedPracticeCount < 2);
+    setStatus('好呀！可以再跟提示講一次，或者聽返卡卡講嘅故事。', 'ok');
+  }
+
+  function beginGuidedAgain() {
+    practiceMode = 'guided';
+    $('stage-title').textContent = '跟住四個提示再講一次';
+    $('stage-hint').textContent = '望住四幅圖，慢慢講；講幾多次都可以。';
+    $('prompt-text').textContent = '第一、然後、後來、最後，慢慢講一次。';
+    $('btn-record').textContent = '🎤 跟提示講故事';
+    startRecording();
+  }
+
+  function beginIndependent() {
+    if (guidedPracticeCount < 2) return;
+    practiceMode = 'independent';
+    $('stage-title').textContent = '試吓自己講';
+    $('stage-hint').textContent = '望住四幅圖自己講一次；四個提示詞仍然喺度幫你。';
+    $('prompt-text').textContent = '試吓用自己嘅說話，講返呢四幅圖。';
+    $('btn-record').textContent = '🎤 開始自主複述';
+    $('model-box').classList.add('hidden');
+    $('kid-panels').classList.add('hidden');
+    $('kid-self').classList.add('hidden');
+    $('parent-checks').classList.add('hidden');
+    $('play-actions').classList.add('hidden');
+    startRecording();
+  }
+
   $('btn-prompt').addEventListener('click', () => current && speakLine(current.prompt));
   $('btn-model').addEventListener('click', () => current && speakLine(current.modelStory));
   $('btn-record').addEventListener('click', onRecordClick);
   $('btn-complete').addEventListener('click', completeLevel);
   $('btn-rerecord').addEventListener('click', rerecord);
+  $('btn-guided-again').addEventListener('click', beginGuidedAgain);
+  $('btn-independent').addEventListener('click', beginIndependent);
+  $('btn-live-practice').addEventListener('click', finishLivePractice);
   $('kid-self').addEventListener('click', (event) => {
     const btn = event.target.closest('[data-self]');
     if (btn) toggleKidSelf(btn.dataset.self);

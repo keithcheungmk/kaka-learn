@@ -31,6 +31,10 @@ assert.match(js, /MediaRecorder/);
 assert.match(js, /getUserMedia/);
 assert.match(js, /bothSidesAgree/);
 assert.match(js, /RETRY_LINE = '再講一次呀'/);
+assert.match(js, /guidedPracticeCount < 2/, '兩次提示練習後先開自主複述');
+assert.match(js, /speakLine\(current\.modelStory\)/, '入關先自動聽完整故事');
+assert.match(js, /beginIndependent/, '要有自主複述模式');
+assert.match(js, /finishLivePractice/, '無咪裝置要支援現場練習');
 assert.match(js, /KakaInterviewComics/);
 assert.doesNotMatch(js, /fetch\(|XMLHttpRequest|FormData|webkitSpeechRecognition|SpeechRecognition/);
 assert.doesNotMatch(js, /2\/5|五星|半星|half-star/);
@@ -47,6 +51,9 @@ assert.doesNotMatch(css, /\.cs-comics html/);
 assert.doesNotMatch(css, /#090f30|#101a43/);
 assert.match(html, /extend-box/);
 assert.match(html, /id="btn-prompt"/);
+assert.match(html, /id="beat-cues"/, '每篇要有第一、然後、後來、最後提示');
+assert.match(html, /id="btn-guided-again"/);
+assert.match(html, /id="btn-independent"/);
 
 const topicsStart = index.indexOf('id="screen-topics"');
 const topics = topicsStart >= 0 ? index.slice(topicsStart) : '';
@@ -70,12 +77,19 @@ for (const book of levels) {
   assert.equal(book.panels.length, 4);
   assert.equal(book.panels.map((p) => p.beat).join('|'), '第一|然後|後來|最後');
   assert.match(book.modelStory, /第一.+然後.+後來.+最後/s);
+  assert.equal(book.panels.map((p) => p.beat).join('|'), '第一|然後|後來|最後', '每篇四個提示詞順序一致');
   assert.ok(book.extendPrompt);
   assert.ok(book.extendHints.length >= 2);
   for (const panel of book.panels) {
     assert.ok(fs.existsSync(path.join(root, panel.image)), panel.image);
   }
 }
+const mtr = levels.find((level) => level.id === 'mtr-need-seat');
+assert.match(mtr.modelStory, /婆婆，呢度有位呀，你坐呢個位啦，近啲/);
+assert.match(mtr.modelStory, /另一個位/);
+assert.equal(mtr.panels[3].image, 'assets/common-sense/comics/mtr-p04-retell.webp');
+assert.match(mtr.panels[3].alt, /另一個空位/);
+assert.ok(fs.existsSync(path.join(root, mtr.panels[3].image)));
 assert.equal(context.window.INTERVIEW_COMICS_SOON.length, 3);
 
-console.log('PASS: interview-comics — B1–B3 可玩、入口只喺常識 hub、重用錄音檢查、預覽撳格、獨立幣位。');
+console.log('PASS: interview-comics — 三篇先聽完整故事、四詞提示、兩次引導練習後自主複述；港鐵讓座圖文一致；獨立獎勵及本機錄音規則保留。');
