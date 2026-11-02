@@ -76,6 +76,16 @@ window.COMMON_SENSE_CATALOG = {
       "buttonId": "btn-pack-food"
     },
     {
+      "packId": "construction-trucks",
+      "line": "A",
+      "status": "playable",
+      "kicker": "A · 工程車小隊",
+      "blurb": "認識八種工程車，聽三語、做任務",
+      "cover": "assets/common-sense/construction-trucks.webp",
+      "buttonId": "btn-pack-construction-trucks",
+      "href": "construction-trucks.html"
+    },
+    {
       "packId": "interview-comics",
       "line": "B",
       "status": "playable",
