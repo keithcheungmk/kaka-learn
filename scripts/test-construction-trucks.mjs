@@ -23,8 +23,8 @@ for (const item of vehicles) {
 
 const catalog = read('data/common-sense-catalog.js');
 assert.match(catalog, /construction-trucks\.html/);
-assert.match(catalog, /assets\/common-sense\/construction-trucks\.webp/);
-assert.match(read('common-sense.html'), /common-sense-catalog\.js\?v=cs-construction-trucks-20261103/);
+assert.match(catalog, /assets\/common-sense\/construction-trucks-v2\.webp/);
+assert.match(read('common-sense.html'), /common-sense-catalog\.js\?v=cs-construction-trucks-art-v2-20261103/);
 const page = read('construction-trucks.html');
 assert.match(page, /data-say-name="mandarin"/);
 assert.match(page, /data-say-name="english"/);
@@ -40,7 +40,7 @@ assert.match(app, /tryEarnStar/);
 assert.match(app, /playTryAgainCue/);
 assert.match(app, /playCorrectCue/);
 assert.match(read('js/storage.js'), /'common-sense-construction-trucks'/);
-const asset = fs.statSync(path.join(root, 'assets/common-sense/construction-trucks.webp'));
+const asset = fs.statSync(path.join(root, 'assets/common-sense/construction-trucks-v2.webp'));
 assert.ok(asset.size <= 400_000, `vehicle contact sheet must stay within asset limit (${asset.size} bytes)`);
 
 console.log('Construction Truck Squad: 8 vehicles, 3-language name/facts, toy missions, feedback, reward, and asset checks passed.');

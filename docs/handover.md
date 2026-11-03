@@ -1,6 +1,6 @@
 # 交接簿 — Cursor Chief Lead ⇄ 專科 Leads ⇄ ChatGPT／Grok
 
-**2026-11-03 Codex — 常識「工程車小隊」demo（未發布）：** 以本機快取 `origin/main` `f152b8e` 建立隔離分支 `/private/tmp/kaka-construction-trucks`；GitHub DNS 暫時無法連線，尚未確認最新主線。新增八種玩具工程車卡、粵語／普通話／英文車名及用途朗讀、八題用途選擇、答對後積木實作任務、常識安全提示及獨立每日幣／首次通關星。中文 Lead 核對名詞，建議香港叫法與普通話正式名分欄，並分清挖土機／鏟土機、吊車／叉車；已採納。`node --check`、`scripts/test-construction-trucks.mjs`、57 項 `check-invariants.py`、`git diff --check` 通過；`smoke-shots.py --no-shots` 因沙盒禁止讀取 localhost 預覽而停止，瀏覽器政策亦拒絕直接開 `file:` 預覽，所以未完成頁面視覺／iPad實機檢查。未 commit／push／部署；須先刷新 origin/main，再做可用嘅頁面視覺檢視。圖片係概念示意，未按實物逐款確認。
+**2026-11-03 Codex — 常識「工程車小隊」demo（未發布）：** 以本機快取 `origin/main` `f152b8e` 建立隔離分支 `/private/tmp/kaka-construction-trucks`；GitHub DNS 暫時無法連線，尚未確認最新主線。新增八種玩具工程車卡、粵語／普通話／英文車名及用途朗讀、八題用途選擇、答對後積木實作任務、常識安全提示及獨立每日幣／首次通關星。中文 Lead 核對名詞，建議香港叫法與普通話正式名分欄，並分清挖土機／鏟土機、吊車／叉車；已採納。用戶選定產品圖風格後，另加 4×2 黃橙磁力積木工程車插圖 `assets/common-sense/construction-trucks-v2.webp`，並套用到入口封面和遊戲車圖。`node --check`、`scripts/test-construction-trucks.mjs`、57 項網站不變條件、`git diff --check` 通過；瀏覽器沙盒拒絕本機頁面預覽，尚未完成頁面視覺／iPad 實機檢查。未 push／部署；須先刷新 origin/main，再安排視覺驗收。插圖為依玩具風格製作的概念圖，並非實物逐車掃描。
 
 **2026-10-29 Codex 寫字重玩與驗收範圍：** 完成過的字每次重新進入時由零開始六次練習，已保存的通關進度不清除；完成畫面只顯示下一個字，章節最後一字顯示返回字表。日常以受影響功能及相關流程作靜音定向驗證；全站回歸每三日定期執行，共用基建改動或有跨模組風險時再擴大。GitHub UI CI 依改動檔案選擇寫字定向測試或共用基建全站回歸。
 

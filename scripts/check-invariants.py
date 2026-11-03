@@ -1684,7 +1684,7 @@ def check_common_sense() -> None:
         "js/construction-trucks.js",
         "data/common-sense-construction-trucks.js",
         "scripts/test-construction-trucks.mjs",
-        "assets/common-sense/construction-trucks.webp",
+        "assets/common-sense/construction-trucks-v2.webp",
         "assets/common-sense/scenes/eyes-see.webp",
         "assets/common-sense/mtr-family-map.svg",
         "assets/common-sense/process/milk-1.webp",

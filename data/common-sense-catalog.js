@@ -81,7 +81,7 @@ window.COMMON_SENSE_CATALOG = {
       "status": "playable",
       "kicker": "A · 工程車小隊",
       "blurb": "認識八種工程車，聽三語、做任務",
-      "cover": "assets/common-sense/construction-trucks.webp",
+      "cover": "assets/common-sense/construction-trucks-v2.webp",
       "buttonId": "btn-pack-construction-trucks",
       "href": "construction-trucks.html"
     },
