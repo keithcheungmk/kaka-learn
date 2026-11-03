@@ -41,7 +41,7 @@
 
   function renderSelector() {
     $('detail-selector').innerHTML = vehicles.map((vehicle, index) =>
-      `<button type="button" data-select="${index}" aria-current="${index === selectedVehicle}">${vehicle.yue}</button>`).join('');
+      `<button type="button" data-select="${index}" aria-label="選擇${vehicle.yue}" aria-pressed="${index === selectedVehicle}"><span class="vehicle-art selector-art" data-vehicle="${vehicle.id}" aria-hidden="true"></span></button>`).join('');
     $('detail-selector').querySelectorAll('[data-select]').forEach((button) => button.addEventListener('click', () => openDetail(Number(button.dataset.select))));
   }
 
