@@ -63,6 +63,7 @@ const EXTRA_COIN_MODES = [
   'common-sense-recycle',
   'common-sense-food',
   'common-sense-body',
+  'common-sense-construction-trucks',
   'common-sense-comic-rain',
   'common-sense-comic-mtr',
   'common-sense-comic-park',

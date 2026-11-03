@@ -1679,6 +1679,12 @@ def check_common_sense() -> None:
         "data/common-sense-recycle-green.js",
         "data/common-sense-food-health.js",
         "data/common-sense-body-senses.js",
+        "construction-trucks.html",
+        "css/construction-trucks.css",
+        "js/construction-trucks.js",
+        "data/common-sense-construction-trucks.js",
+        "scripts/test-construction-trucks.mjs",
+        "assets/common-sense/construction-trucks-v2.webp",
         "assets/common-sense/scenes/eyes-see.webp",
         "assets/common-sense/mtr-family-map.svg",
         "assets/common-sense/process/milk-1.webp",
@@ -1773,6 +1779,8 @@ def check_common_sense() -> None:
             if h == 0 or abs((w / h) - (4 / 3)) > 0.03:
                 fail("common-sense", f"{rel} 要係 4:3 橫圖，而家 {w}×{h}")
     catalog = read("data/common-sense-catalog.js")
+    if "construction-trucks.html" not in catalog or "common-sense-construction-trucks" not in read("js/storage.js"):
+        fail("common-sense", "工程車小隊要有常識入口同獨立獎勵玩法")
     comics_css = read("css/interview-comics.css")
     if "object-fit: cover" in comics_css:
         fail("common-sense", "面試四格圖卡要用 object-fit:contain 顯示全幅，唔好 cover 裁圖")
@@ -1790,6 +1798,9 @@ def check_common_sense() -> None:
         comics = subprocess.run([node, "scripts/test-interview-comics.mjs"], capture_output=True, text=True)
         if comics.returncode:
             fail("common-sense", (comics.stdout or comics.stderr or "面試四格檢查失敗").strip()[:800])
+        trucks = subprocess.run([node, "scripts/test-construction-trucks.mjs"], capture_output=True, text=True)
+        if trucks.returncode:
+            fail("common-sense", (trucks.stdout or trucks.stderr or "工程車小隊檢查失敗").strip()[:800])
     else:
         notes.append("冇 node，跳過常識樂園單元測試")
 
