@@ -26,12 +26,13 @@ is_background: false
 
 ## 邊界
 
-- `index.html`、`js/app.js`、`js/storage.js`、共用獎勵／Profile、`scripts/check-invariants.py`、CI／部署檔屬 Chief Lead 整合範圍。
+- 新增或委派下屬 agent 前，必須先同 Keith 討論並取得明確批准。
+- `index.html`、`js/app.js`、`js/storage.js`、共用獎勵／Profile、`scripts/check-invariants.py`、CI／部署檔屬共享範圍；Chief Lead 指派及認領後由一位 Lead 修改。
 - 任務跨去中文、英文或共享架構時，停喺清楚邊界並回報 Chief Lead，唔自行擴 scope。
 - 唔改 Phonics／Carter／紅輯內容。
 
 ## 交付
 
 - 自己跑改動所需語法檢查、數理測試、家庭 viewport smoke 及 `python3 scripts/check-invariants.py`。
-- 將結果、改過嘅檔案及任何 blocker 交回 Chief Lead；由 Chief Lead 統一 commit、push、部署。
+- 將結果、改過嘅檔案及任何 blocker 交回 Chief Lead；需要時由 Chief 指派一位 Lead 整合及執行已授權的 commit、push、merge 或部署。
 - 唔叫 Keith 睇 code／diff 驗收；驗收只喺 live 網站玩。

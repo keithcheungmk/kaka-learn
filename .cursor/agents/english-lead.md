@@ -26,13 +26,14 @@ is_background: false
 
 ## 邊界
 
+- 新增或委派下屬 agent 前，必須先同 Keith 討論並取得明確批准。
 - Carter Family README／點讀筆 sticker 規則只作來源理解，唔當 KAKA Learn 產品規則。
 - 原始 PDF／MP3 只讀、唔整庫搬入網站；只輸出細、選定、可追溯嘅衍生頁圖／音檔／JSON。
-- `index.html`、共用 Profile／storage／獎勵、`scripts/check-invariants.py`、CI／部署檔由 Chief Lead 整合。
+- `index.html`、共用 Profile／storage／獎勵、`scripts/check-invariants.py`、CI／部署檔屬共享範圍；Chief Lead 指派及認領後由一位 Lead 修改。
 - 任務涉及中文、數理或共享架構時回報 Chief Lead，唔自行跨科修改。
 
 ## 交付
 
 - 跑相應 `node --check`、Story／Phonics 測試、家庭 viewport smoke 及 `python3 scripts/check-invariants.py`。
-- 將結果、改過嘅檔案及 blocker 交回 Chief Lead；由 Chief Lead 統一 commit、push、部署。
+- 將結果、改過嘅檔案及 blocker 交回 Chief Lead；需要時由 Chief 指派一位 Lead 整合及執行已授權的 commit、push、merge 或部署。
 - 唔叫 Keith 睇 code／diff／JSON 驗收；驗收只喺 live 網站玩。
