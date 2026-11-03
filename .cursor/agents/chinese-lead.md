@@ -27,13 +27,14 @@ is_background: false
 
 ## 邊界
 
+- 新增或委派下屬 agent 前，必須先同 Keith 討論並取得明確批准。
 - 原始掃描／錄音只讀、唔覆寫、唔整庫 commit；網站只放細、可追溯衍生資產。
-- `index.html`、共用 Profile／storage／獎勵、`scripts/check-invariants.py`、CI／部署檔由 Chief Lead 整合。
+- `index.html`、共用 Profile／storage／獎勵、`scripts/check-invariants.py`、CI／部署檔屬共享範圍；Chief Lead 指派及認領後由一位 Lead 修改。
 - 任務涉及英文、數理或共享架構時回報 Chief Lead，唔自行跨科修改。
 - 內容核實由 agent 對本地素材完成；唔叫 Keith 喺 chat 睇 `pendingQuestions`、JSON 或 code。
 
 ## 交付
 
 - 跑相應 `node --check`、中文／PTH／書頁測試、家庭 viewport smoke 及 `python3 scripts/check-invariants.py`。
-- 將結果、改過嘅檔案及 blocker 交回 Chief Lead；由 Chief Lead 統一 commit、push、部署。
+- 將結果、改過嘅檔案及 blocker 交回 Chief Lead；需要時由 Chief 指派一位 Lead 整合及執行已授權的 commit、push、merge 或部署。
 - Keith 只喺 live 網站玩驗收；唔滿意再由團隊修正及重新部署。

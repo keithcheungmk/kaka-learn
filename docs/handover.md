@@ -6,7 +6,7 @@
 
 > 2026-10-28 數學遊樂場：在獨立分支 `codex/math-playground-refresh-20261027` 由最新 `origin/main`（`db26f80`）整理「數數／加減／時間／生活數學」入口；保留現有水果店、四種計算法與進度。數數改成故事圖、物件板與答案區，修正 20 件物品重疊、不足五個的組別標籤及答錯後語音完成才可重試；形狀規律重複圖形使用一致顏色。生活數學卡片加入具體玩法描述；錯誤提示按題型分步講解、第二次錯誤示範答案，並同步朗讀。度量第一階段已改成讀厘米：擦膠／蠟筆先練 0–10cm，再用鉛筆／玩具車／小熊練 10–20cm；物件起點對齊 0cm，先找整十刻度再數小格，二次答錯會照實際讀數拆步講解。呢個係圖片式直尺練習，未包含手動捲尺、門邊等長距離量度。數學單元／策略測試、57 項 invariants，以及家庭裝置完整 smoke 已過：iPad 直／橫各 55 個畫面一屏可用，iPhone 55 個畫面無重疊／裁切，並覆蓋答錯／答啱語音後狀態；附帶 PTH regression 亦通過。已向 Chief Lead 查詢數學整合範圍，未收到回覆；數學變更經獨立檢查結論「可以 merge」。工作提交 `e1006d5` 已 fast-forward 推送至 `main`；GitHub CI 與 Pages workflow 均成功，線上 `version.json` 確認為 `e1006d5`。GitHub PR API 回 403，因 main 未設保護而直接 fast-forward。其他題型的情境／互動仍待逐項改造。
 
-Keith 現時以 Cursor 主 Agent 做 Chief Lead，下面設本機 Math／English／Chinese 三位專科 Lead。ChatGPT／Codex 如另行使用仍按任務認領直接改 repo；Grok 預設係外部顧問 bot，只提供建議，唔假設有 repo 權限。
+2026-11-03 Keith 指示：Codex 主 Agent 擔任 Chief Lead，負責派單、監督、審核及協調；Math／English／Chinese 三位 Lead 執行工作，包括獲指派的共享檔及發布操作。新增下屬 agent 前必須先同 Keith 討論並取得明確批准。Grok 預設係外部顧問 bot，只提供建議。
 呢度記錄「其他人需要知」嘅分工、認領、撞車風險同未完事項，避免撞改。
 
 
@@ -23,14 +23,14 @@ Keith 現時以 Cursor 主 Agent 做 Chief Lead，下面設本機 Math／English
 
 | 署名 | 係邊個 |
 |---|---|
-| **Cursor Chief Lead** | Keith 本機 Cursor 主 Agent；總負責拆 scope、委派專科、共享檔整合、驗證、commit、push 同部署 |
+| **Codex Chief Lead** | 拆 scope、派單、協調共享檔、監督、審核及匯報；不親自實作 |
 | **Math Lead** | `.cursor/agents/math-lead.md`；數理、加減法、數感、數學面試玩法及數理回歸 |
 | **English Lead** | `.cursor/agents/english-lead.md`；Carter Family、Story English、Game Night、Sight Words、Phonics |
 | **Chinese Lead** | `.cursor/agents/chinese-lead.md`；中文認字、紅／橙輯、書頁砌句、字卡 OCR、粵語及 PTH |
-| **ChatGPT／Codex** | Keith 如另行使用嘅實作／內容核對 agent；依 handover 認領工作，唔再係預設 Chief Lead |
+| **ChatGPT／Codex** | 本對話的 Chief Lead；由三位專科 Lead 執行實作 |
 | **Grok bot** | Keith 手動使用嘅外部建議／研究 bot；預設唯讀，無 repo、push、merge 或部署權限 |
 
-Keith 明確交俾邊個嘅任務，就由嗰個做；未指定時由 Cursor Chief Lead routing。三位專科 Lead 完成後交 Chief 整合，唔自行 push／部署。共享檔先認領，避免同時寫同一功能。Grok 嘅輸出係建議，唔係已驗證嘅 repo 狀態；除非 Keith 另行明確交代，唔叫 Grok 寫入或接觸私有素材／密鑰。Claude 舊工作只保留喺歷史紀錄，唔再係現行 owner。
+Keith 明確交俾邊個嘅任務，就由嗰個做；未指定時由 Codex Chief Lead 派其中一位主責。共享檔整合及發布由指定 Lead 執行，Chief 監督；未獲授權唔自行 push／部署。共享檔先認領，避免同時寫同一功能。Grok 嘅輸出係建議，唔係已驗證嘅 repo 狀態；除非 Keith 另行明確交代，唔叫 Grok 寫入或接觸私有素材／密鑰。Claude 舊工作只保留喺歷史紀錄，唔再係現行 owner。
 
 ## 點用呢個檔
 
@@ -93,15 +93,15 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 範圍 | 擁有人 | 主要檔案 |
 |---|---|---|
-| Chief Lead：routing、跨科校準、共享架構、整合 review、驗證、commit／部署 | **Cursor Chief Lead** | `index.html`、`js/app.js`、`js/storage.js`、共用獎勵／Profile、`.github/workflows/*`、`scripts/check-invariants.py`、`docs/handover.md` |
+| Chief Lead：routing、跨科校準、審核及監督 | **Codex Chief Lead**（實作交指定 Lead） | `index.html`、`js/app.js`、`js/storage.js`、共用獎勵／Profile、`.github/workflows/*`、`scripts/check-invariants.py`、`docs/handover.md` |
 | 數理內容、玩法、題目、版面及測試 | **Math Lead** | `js/math-*`、`css/math.css`、`js/additionGame.js`、`js/subtractionGame.js`、數理測試 |
 | 英文故事、Carter Family、Sight Words、Phonics、錄音及測試 | **English Lead** | `js/phonics-*`、Story English／Game Night、英文衍生資產及測試 |
 | 中文認字、紅／橙輯、書頁砌句、字卡 OCR、粵語、PTH | **Chinese Lead** | `data/red-series/`、`book-scene-*`、中文／PTH 資料、衍生資產及測試 |
-| 太空戰士造型、槍口射星動畫 | **Cursor Chief Lead** | `js/star-fx.js`、`scripts/crop-ranger-shooter.py`、`assets/` ranger 圖 |
-| 新主題內容與網站資產整合 | **相應專科 Lead＋Chief 整合** | 科目資料由 Lead；`js/words.js`、共享 CSS／入口及資產鎖由 Chief 認領 |
+| 太空戰士造型、槍口射星動畫 | **Chief 指派一位 Lead** | `js/star-fx.js`、`scripts/crop-ranger-shooter.py`、`assets/` ranger 圖 |
+| 新主題內容與網站資產整合 | **相應專科 Lead，Chief 協調** | 科目資料由 Lead；`js/words.js`、共享 CSS／入口及資產鎖由 Chief 安排認領 |
 | 第二意見、概念發想、公開資料研究 | **Grok bot**（Keith 手動邀請） | 不直接讀寫 repo；輸出由 ChatGPT／Cursor 核實後採納 |
 
-呢個分工唔係死嘅——需要跨界時先由 Chief Lead 拆件並喺「進行中」認領。**唔好兩個 agent 同時改同一個功能／同一批檔。** 專科 Lead 唔自行 push／部署；Grok 如要由顧問角色升級成程式執行者，須 Keith 另行明確授權並先更新規則。
+呢個分工唔係死嘅——需要跨界時先由 Chief Lead 拆件並喺「進行中」認領。**唔好兩個 agent 同時改同一個功能／同一批檔。** 專科 Lead 按授權及 Chief 指派執行 push／部署；Grok 如要由顧問角色升級成程式執行者，須 Keith 另行明確授權並先更新規則。
 
 ## 撞車高危檔案
 
