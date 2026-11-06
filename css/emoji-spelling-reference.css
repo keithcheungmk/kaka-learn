@@ -1,0 +1,82 @@
+/* Emoji Spelling reference layout: native emoji, bright cards and simple feedback. */
+body:has(#screen-emoji-spelling.active) { background: linear-gradient(135deg, #a6c7f7, #bce5f8); }
+body:has(#screen-emoji-spelling.active)::before { background: none; }
+#screen-emoji-spelling.active::before {
+  background: linear-gradient(135deg, #a6c7f7, #bce5f8);
+}
+#screen-emoji-spelling { color: #263c5d; }
+#screen-emoji-spelling .emoji-spelling-view { width: min(100%, 1120px); }
+#screen-emoji-spelling .game-header h1 { color: #fff; text-shadow: 0 3px 9px #5278a777; }
+#screen-emoji-spelling .section-lead { color: #294d77; text-align: center; font-weight: 800; }
+#screen-emoji-spelling .emoji-spelling-word-grid {
+  padding: clamp(12px, 2vw, 22px);
+  border-radius: 28px;
+  background: #e7f2ff;
+  box-shadow: 0 12px 24px #3b608035;
+}
+#screen-emoji-spelling .emoji-spelling-word-card {
+  min-height: 150px;
+  border: 2px solid #ffd060;
+  border-radius: 20px;
+  background: #fff;
+}
+#screen-emoji-spelling .emoji-plate { background: transparent; box-shadow: none; }
+#screen-emoji-spelling .emoji-spelling-native { font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif; line-height: 1; }
+#screen-emoji-spelling .emoji-spelling-word-card .emoji-face { font-size: clamp(48px, 5.4vw, 66px); }
+#screen-emoji-spelling .emoji-spelling-card-speaker svg { display: block; width: 22px; height: 22px; fill: currentColor; }
+#screen-emoji-spelling #btn-emoji-spelling-start {
+  min-height: 64px;
+  padding: 12px clamp(36px, 5vw, 72px);
+  color: #153861;
+  background: #36d975;
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 8px 0 #1aa753, 0 12px 22px #2a6b6260;
+  animation: emoji-start-pulse 1.7s ease-in-out infinite;
+}
+@keyframes emoji-start-pulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.13); box-shadow: 0 8px 0 #1aa753, 0 0 30px #57f99cdd; } }
+#screen-emoji-spelling .emoji-spelling-challenge {
+  display: block;
+  width: min(100%, 1050px);
+  margin: 6px auto 18px;
+  padding: clamp(12px, 2vh, 24px);
+  border: 0;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 15px 30px #305e8738;
+}
+#screen-emoji-spelling .emoji-spelling-picture-row { display: flex; flex-direction: row; min-height: 0; gap: 18px; }
+#screen-emoji-spelling .emoji-spelling-picture .emoji-plate,
+#screen-emoji-spelling .emoji-spelling-picture .emoji-spelling-custom-art { width: clamp(100px, 17vh, 170px); height: clamp(100px, 17vh, 170px); }
+#screen-emoji-spelling .emoji-spelling-picture .emoji-face { font-size: clamp(88px, 15vh, 152px); }
+#screen-emoji-spelling .emoji-spelling-picture .emoji-face.is-multi .emoji-spelling-native { font-size: .48em; }
+#screen-emoji-spelling .emoji-spelling-speak { flex: none; background: #45a9fa; color: #153861; border: 0; box-shadow: 0 4px 0 #1a78d9; }
+#screen-emoji-spelling .emoji-spelling-speak svg { display: block; width: 30px; height: 30px; margin: auto; fill: currentColor; }
+#screen-emoji-spelling .emoji-spelling-answer { display: flex; min-height: 54px; margin: 10px auto; gap: 6px; }
+#screen-emoji-spelling .emoji-spelling-slot { width: 52px; height: 58px; border: 3px dashed #cbd2d9; background: #fff; border-radius: 14px; }
+#screen-emoji-spelling .emoji-spelling-slot.is-filled { border: 3px solid #48c77d; background: #e2faeb; }
+#screen-emoji-spelling .emoji-spelling-pool-panel { padding: 10px; border: 2px solid #e1e3e8; border-radius: 20px; background: #f1f2f4; }
+#screen-emoji-spelling .emoji-spelling-instruction { margin: 0 0 8px; color: #536172; }
+#screen-emoji-spelling .emoji-spelling-letter-pool { display: flex; flex-wrap: wrap; justify-content: center; width: min(100%, 620px); gap: 7px; }
+#screen-emoji-spelling .emoji-spelling-letter { flex: 0 0 88px; min-height: 52px; border: 0; border-radius: 15px; background: #ffd268; color: #243650; box-shadow: 0 4px 8px #343f542a; }
+#screen-emoji-spelling .emoji-spelling-letter:not(:disabled):focus-visible { outline: 3px solid #1569ca; outline-offset: 2px; }
+#screen-emoji-spelling .emoji-spelling-letter.is-used { background: #d6dde3; color: #43566b; }
+#screen-emoji-spelling .emoji-spelling-undo { margin-top: 8px; min-height: 44px; }
+#screen-emoji-spelling .emoji-spelling-feedback { margin: 4px 0 0; min-height: 1.25em; font-size: 1rem; }
+#screen-emoji-spelling.has-long-word .emoji-spelling-picture .emoji-plate,
+#screen-emoji-spelling.has-long-word .emoji-spelling-picture .emoji-spelling-custom-art { width: 86px; height: 86px; }
+#screen-emoji-spelling.has-long-word .emoji-spelling-picture .emoji-face { font-size: 76px; }
+#screen-emoji-spelling.has-long-word .emoji-spelling-slot { width: 44px; height: 48px; }
+#screen-emoji-spelling.has-long-word .emoji-spelling-letter-pool { width: min(100%, 740px); }
+#screen-emoji-spelling.has-long-word .emoji-spelling-letter { flex-basis: 52px; min-height: 46px; }
+@media (max-width: 700px) {
+  #screen-emoji-spelling.has-long-word .emoji-spelling-letter { flex-basis: 44px; }
+  #screen-emoji-spelling .emoji-spelling-word-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #screen-emoji-spelling .emoji-spelling-challenge { padding: 12px; }
+  #screen-emoji-spelling .emoji-spelling-letter { flex-basis: 50px; }
+}
+@media (prefers-reduced-motion: reduce) { #screen-emoji-spelling #btn-emoji-spelling-start { animation: none; } }
+
+#screen-emoji-spelling .emoji-spelling-picture-row { flex-wrap: wrap; justify-content: center; }
+#screen-emoji-spelling .emoji-spelling-phonics { min-height: 44px; padding: 8px 14px; border: 2px solid #73b5ee; border-radius: 20px; background: #e9f6ff; color: #153861; font-weight: 700; cursor: pointer; }
+#screen-emoji-spelling .emoji-spelling-phonics[hidden] { display: none; }

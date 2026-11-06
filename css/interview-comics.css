@@ -1,0 +1,272 @@
+/* 常識樂園面試四格：沿用四格引擎結構，改淺色以對齊常識 hub */
+:root {
+  color-scheme: light;
+  --ink: #18345f;
+  --muted: #527093;
+  --navy: #eaf7ff;
+  --panel: rgba(255, 255, 255, 0.92);
+  --line: #d5e4f4;
+  --mint: #2a8f6f;
+  --gold: #d4782a;
+  --coral: #e07a5f;
+  --answer-ink: #18345f;
+  --answer-surface: #ffffff;
+}
+
+html,
+body,
+body.cs-comics {
+  color: var(--ink);
+  background-color: #eaf7ff;
+  background-image:
+    radial-gradient(700px 380px at 8% 0, rgba(255, 229, 143, 0.55), transparent 64%),
+    radial-gradient(620px 440px at 96% 12%, rgba(180, 224, 255, 0.7), transparent 63%),
+    linear-gradient(180deg, #f8fcff 0%, #eaf7ff 48%, #edf8f3 100%);
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+  background-size: auto, auto, 100% 100%;
+  min-height: 100%;
+}
+
+/* 四格引擎喺平板鎖 html/body = 100dvh；列表一捲就露出夜空底。牆頁要跟內容長。 */
+@media (min-width: 701px) {
+  html,
+  body {
+    height: auto;
+    min-height: 100dvh;
+  }
+}
+
+.cs-comics .four-shell {
+  width: min(1100px, calc(100% - 32px));
+  padding-inline: max(4px, env(safe-area-inset-left), env(safe-area-inset-right));
+}
+
+.cs-comics .back-link,
+.cs-comics .star-pill {
+  background: var(--panel);
+  color: var(--ink);
+  border-color: var(--line);
+  flex: 0 0 auto;
+}
+.cs-comics .star-pill { color: var(--gold); }
+.cs-comics .topbar {
+  gap: 8px;
+  min-width: 0;
+}
+.cs-comics .wall-intro,
+.cs-comics .level-card,
+.cs-comics .comic-board,
+.cs-comics .talk-panel {
+  background: #fff;
+  border-color: var(--line);
+  color: var(--ink);
+}
+.cs-comics .wall-intro {
+  background: linear-gradient(125deg, #fff, #eaf7ff);
+}
+.cs-comics .level-card.pack-soon {
+  opacity: 0.58;
+  filter: grayscale(0.2);
+}
+.cs-comics .comic-panel.is-preview img,
+.cs-comics .comic-panel.is-preview .cs-media {
+  border-color: #3b6fd8;
+  box-shadow: 0 0 0 3px rgba(59, 111, 216, 0.25);
+}
+.cs-comics .cs-media {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #d7e6f4;
+  isolation: isolate;
+}
+.cs-comics .cs-media::after,
+.cs-comics .cs-shimmer {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(105deg, #d4e4f4 8%, #f4f9fd 46%, #d4e4f4 86%);
+  background-size: 220% 100%;
+  animation: cs-shimmer 1.15s ease-in-out infinite;
+  pointer-events: none;
+}
+.cs-comics .cs-media.is-ready::after,
+.cs-comics .cs-media.is-ready > .cs-shimmer { display: none; }
+.cs-comics .cs-media img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  background: #d7e6f4;
+  display: block;
+}
+.cs-comics .cs-media img.is-ready { opacity: 1; }
+.cs-comics .cs-media img.is-instant { transition: none; }
+@keyframes cs-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -20% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-comics .cs-media::after,
+  .cs-comics .cs-shimmer { animation: none; }
+  .cs-comics .cs-media img { transition: none; }
+}
+.cs-comics .prompt-row {
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
+}
+.cs-comics .prompt-text {
+  overflow-wrap: anywhere;
+}
+.cs-comics .icon-btn {
+  flex: 0 0 auto;
+  background: #eef6ff;
+  color: #18345f;
+  border: 1px solid #c5daf5;
+  padding: 10px 14px;
+}
+.cs-comics #btn-prompt {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.cs-comics .talk-panel {
+  overflow-x: auto;
+  padding-right: 14px;
+}
+.cs-comics .kid-panel-btn,
+.cs-comics .kid-self-btn,
+.cs-comics .parent-checks label {
+  background: #eef6ff;
+  color: var(--ink);
+  border-color: #c5daf5;
+}
+.cs-comics .ghost-btn {
+  background: #fff;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.cs-comics .retry-note {
+  background: #eaf7ff;
+  color: var(--ink);
+  border-color: var(--mint);
+}
+.cs-comics .model-box {
+  background: #eaf7ff;
+  border-color: var(--line);
+}
+.cs-comics .extend-box {
+  margin-top: 12px;
+  text-align: left;
+  background: #eaf7ff;
+  border-radius: 14px;
+  padding: 10px 12px;
+}
+.cs-comics .extend-prompt { font-weight: 800; margin: 0 0 8px; }
+.cs-comics .extend-hints { display: grid; gap: 8px; }
+.cs-comics .extend-hint {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+}
+.cs-comics .completion-star { font-size: 3rem; line-height: 1; }
+.cs-comics .brand span { color: var(--mint); }
+
+.cs-comics .story-coach {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid #c5daf5;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f5fbff, #e8f7f2);
+}
+.cs-comics .stage-title {
+  margin: 0;
+  color: #18345f;
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+.cs-comics .stage-hint,
+.cs-comics .guided-count {
+  margin: 0;
+  color: #496b8d;
+  font-weight: 750;
+  line-height: 1.4;
+}
+.cs-comics .guided-count { font-size: .9rem; }
+.cs-comics .beat-cues {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+.cs-comics .beat-cue {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 4px;
+  border-radius: 12px;
+  background: #fff;
+  color: #18345f;
+  border: 1px solid #c5daf5;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.cs-comics .beat-cue b {
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  color: #fff;
+  background: #2a8f6f;
+  font-size: .78rem;
+}
+.cs-comics .guided-actions {
+  display: grid;
+  gap: 8px;
+}
+.cs-comics .guided-actions .primary-btn {
+  width: 100%;
+  min-height: 54px;
+  background: linear-gradient(#41d78c, #20b96e);
+  color: #083d2b;
+  box-shadow: 0 4px #158451;
+}
+.cs-comics .guided-actions .independent-btn {
+  background: linear-gradient(#ffe17a, #ffbf35);
+  color: #18345f;
+  box-shadow: 0 4px #bb741c;
+}
+.cs-comics .record-btn { background: linear-gradient(#36cb8c, #19a875); box-shadow: 0 5px #11764f; }
+.cs-comics .record-btn.is-recording { background: linear-gradient(#ff5d6c, #c81e3a); }
+
+@media (max-width: 430px) {
+  .cs-comics .beat-cues { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; }
+  .cs-comics .beat-cue { justify-content: flex-start; font-size: .86rem; gap: 5px; padding-inline: 8px; }
+  .cs-comics .beat-cue b { width: 19px; height: 19px; font-size: .7rem; }
+}
+
+@media (min-width: 901px) and (max-width: 1360px) {
+  .cs-comics .four-shell {
+    width: min(1040px, calc(100% - 40px));
+  }
+  .cs-comics .play-spread {
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, 1fr);
+    gap: 12px;
+  }
+  .cs-comics .topbar {
+    padding-right: 2px;
+  }
+}

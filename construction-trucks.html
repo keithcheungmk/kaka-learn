@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#eaf7ff">
+  <title>工程車小隊｜卡卡常識樂園</title>
+  <link rel="stylesheet" href="css/construction-trucks.css?v=901172f">
+</head>
+<body>
+  <main class="truck-shell">
+    <header class="truck-topbar">
+      <a class="back-link" id="truck-back" href="common-sense.html">← 常識樂園</a>
+      <div class="brand"><span>卡卡常識樂園</span><h1>工程車小隊</h1></div>
+      <div class="status-pill" id="status-pill" aria-live="polite">認識工程車</div>
+    </header>
+
+    <section class="screen" id="screen-home" aria-labelledby="home-title">
+      <div class="intro">
+        <h2 id="home-title">工地上有好多工程車！</h2>
+        <p>看看它們怎樣工作，聽聽三種語言，再用積木車試一試。<br><strong>安全提示：工程車很大，要站遠一點看。</strong></p>
+      </div>
+      <div class="vehicle-grid" id="vehicle-grid" aria-label="八種工程車"></div>
+      <div class="home-actions"><button class="primary" id="start-mission" type="button">開始工程車任務 →</button></div>
+    </section>
+
+    <section class="screen hidden" id="screen-detail" aria-labelledby="detail-name">
+      <div class="detail-card">
+        <div class="vehicle-art selected-art" id="detail-art" role="img" aria-label="工程車插圖"></div>
+        <div class="detail-copy">
+          <p class="eyebrow">認識工程車</p>
+          <h2 id="detail-name"></h2>
+          <p class="mandarin-line" id="detail-mandarin"></p>
+          <p class="english-line" id="detail-english"></p>
+          <h3>它會做甚麼？</h3>
+          <p id="detail-fact" class="fact"></p>
+          <div class="audio-row" aria-label="聽車名">
+            <button type="button" data-say-name="yue">🔊 粵語</button>
+            <button type="button" data-say-name="mandarin">🔊 普通話</button>
+            <button type="button" data-say-name="english">🔊 English</button>
+          </div>
+          <div class="audio-row" aria-label="聽用途說明">
+            <button type="button" data-say-fact="yue">🔊 聽用途</button>
+            <button type="button" data-say-fact="mandarin">🔊 普通話用途</button>
+            <button type="button" data-say-fact="english">🔊 English fact</button>
+          </div>
+          <div class="toy-task"><strong>🧱 玩具任務</strong><p id="detail-toy"></p></div>
+          <button class="primary detail-next" id="detail-next" type="button">再認識一輛車 →</button>
+        </div>
+      </div>
+      <div class="all-vehicles" id="detail-selector" role="group" aria-label="選擇工程車"></div>
+    </section>
+
+    <section class="screen hidden" id="screen-quiz" aria-labelledby="quiz-title">
+      <div class="quiz-heading"><span class="step-pill" id="quiz-progress">任務 1／8</span><h2 id="quiz-title">工程車要出動！</h2><p>聽聽車名，配對它的工作場景。</p></div>
+      <article class="quiz-card">
+        <div class="vehicle-art quiz-art" id="quiz-art" role="img" aria-label="工程車插圖"></div>
+        <div class="quiz-copy"><p class="quiz-name" id="quiz-name" aria-live="polite"></p><p class="question" id="quiz-question"></p><p class="quiz-fact" id="quiz-fact"></p>
+          <div class="audio-row" aria-label="聽車名">
+            <button type="button" data-say-quiz-name="yue">🔊 車名</button>
+            <button type="button" data-say-quiz-name="mandarin">🔊 普通話車名</button>
+            <button type="button" data-say-quiz-name="english">🔊 English name</button>
+          </div>
+          <div class="audio-row" aria-label="聽工程車工作">
+            <button type="button" data-say-quiz="yue">🔊 聽任務</button>
+            <button type="button" data-say-quiz="mandarin">🔊 普通話</button>
+            <button type="button" data-say-quiz="english">🔊 English</button>
+          </div>
+          <div class="choices" id="choices" role="group" aria-label="選擇工程車"></div>
+          <p class="feedback" id="feedback" aria-live="polite"></p>
+          <button class="primary hidden" id="next-question" type="button">下一個任務 →</button>
+        </div>
+      </article>
+      <div class="mission-toy" id="mission-toy"><strong>任務完成後，記得用積木車試一試！</strong></div>
+    </section>
+
+    <section class="screen hidden finish-screen" id="screen-finish" aria-labelledby="finish-title">
+      <div class="finish-card"><div class="finish-icon" aria-hidden="true">🏆</div><p class="eyebrow">工程車小隊</p>
+        <h2 id="finish-title">八個工程車任務完成！</h2><p id="finish-message">你認識了不同工程車的工作。</p>
+        <div class="toy-task finish-toy"><strong>最後的積木任務</strong><p>選一輛車，說出它的名字和用途，再用它完成一件小工作。</p></div>
+        <div class="finish-actions"><button class="primary" id="play-again" type="button">再玩一次</button><button class="secondary" id="back-home" type="button">回工程車圖卡</button></div>
+      </div>
+    </section>
+  </main>
+  <script src="js/no-zoom.js?v=901172f"></script>
+  <script src="js/nav-back.js?v=901172f"></script>
+  <script src="js/storage.js?v=901172f"></script>
+  <script src="js/speech.js?v=901172f"></script>
+  <script src="data/common-sense-construction-trucks.js?v=901172f"></script>
+  <script src="js/construction-trucks.js?v=901172f"></script>
+</body>
+</html>
