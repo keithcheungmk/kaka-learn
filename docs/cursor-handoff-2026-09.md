@@ -2,6 +2,8 @@
 
 更新：2026-09-20。呢份係俾 Cursor 開工時先讀嘅導覽；程式碼同測試先係事實來源，規則以 [`AGENTS.md`](../AGENTS.md) 及 [`docs/handover.md`](handover.md) 為準。
 
+**本機開工（有素材）**：直接複製 [`docs/local-agent-start-prompt.md`](local-agent-start-prompt.md) 入面嘅「可複製 Prompt」，喺本機 Cursor 新 Agent chat 貼上。內容／Carter／錄音工序預設本機；Cloud Agent 讀唔到 `source-materials/`。
+
 ## 新增素材／library 提示（2026-09-20）
 
 Keith 提到「crop project folder」最近加入咗好多 source material。喺目前機器嘅
