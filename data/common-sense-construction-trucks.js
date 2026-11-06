@@ -2,7 +2,7 @@
 window.CONSTRUCTION_TRUCKS = [
   {
     id: 'excavator', yue: '挖土機', mandarin: '挖掘机', english: 'excavator', icon: '🚜',
-    fact: '長臂上的鏟斗可以挖泥、挖坑，也可以把泥土放到車上。',
+    fact: '長臂上的鏟斗可以挖泥、挖坑，也可以把泥土放到車上。', scene: '⛏️🟫',
     factMandarin: '长臂上的铲斗可以挖土、挖坑，也可以把泥土放到车上。',
     factEnglish: 'Its long arm digs soil and can place the soil into a truck.',
     quiz: '這輛車最常用來做甚麼？', job: '用鏟斗挖泥、挖坑',
@@ -11,7 +11,7 @@ window.CONSTRUCTION_TRUCKS = [
   },
   {
     id: 'crane', yue: '吊車', mandarin: '起重机', english: 'crane truck', icon: '🏗️',
-    fact: '吊臂和吊鉤可以把較重的材料吊起，再移到需要的位置。',
+    fact: '吊臂和吊鉤可以把較重的材料吊起，再移到需要的位置。', scene: '🏗️📦',
     factMandarin: '吊臂和吊钩可以把较重的材料吊起，再移到需要的位置。',
     factEnglish: 'Its boom and hook lift heavy materials and move them into place.',
     quiz: '這輛車最常用來做甚麼？', job: '用吊臂和吊鉤吊起材料',
@@ -20,7 +20,7 @@ window.CONSTRUCTION_TRUCKS = [
   },
   {
     id: 'loader', yue: '鏟土機', mandarin: '裝載機', english: 'wheel loader', icon: '🚜',
-    fact: '車頭的大鏟斗可以鏟起沙石，再把它們搬到另一處。',
+    fact: '車頭的大鏟斗可以鏟起沙石，再把它們搬到另一處。', scene: '🪣🟫',
     factMandarin: '车头的大铲斗可以铲起沙石，再把它们搬到另一处。',
     factEnglish: 'Its front bucket scoops up sand and stones and carries them elsewhere.',
     quiz: '這輛車最常用來做甚麼？', job: '用車頭的大鏟斗搬沙石',
@@ -29,7 +29,7 @@ window.CONSTRUCTION_TRUCKS = [
   },
   {
     id: 'road-roller', yue: '壓路機', mandarin: '壓路机', english: 'road roller', icon: '🚧',
-    fact: '前面的重滾輪會把路面壓平，令道路更平整。',
+    fact: '前面的重滾輪會把路面壓平，令道路更平整。', scene: '🛣️⬇️',
     factMandarin: '前面的重滚轮会把路面压平，让道路更平整。',
     factEnglish: 'Its heavy front roller presses the road flat and smooth.',
     quiz: '這輛車最常用來做甚麼？', job: '用重滾輪把路面壓平',
@@ -38,7 +38,7 @@ window.CONSTRUCTION_TRUCKS = [
   },
   {
     id: 'forklift', yue: '叉車', mandarin: '叉车', english: 'forklift', icon: '🏗️',
-    fact: '車前的兩支貨叉可以升高，用來搬運貨物或箱子。',
+    fact: '車前的兩支貨叉可以升高，用來搬運貨物或箱子。', scene: '📦⬆️',
     factMandarin: '车前的两支货叉可以升高，用来搬运货物或箱子。',
     factEnglish: 'Its two front forks lift and carry goods or boxes.',
     quiz: '這輛車最常用來做甚麼？', job: '用兩支貨叉搬起貨物',
@@ -47,7 +47,7 @@ window.CONSTRUCTION_TRUCKS = [
   },
   {
     id: 'mixer', yue: '攪拌車', mandarin: '混凝土搅拌车', english: 'concrete mixer truck', icon: '🚚',
-    fact: '車上的攪拌筒會轉動，讓混凝土在運送途中保持均勻。',
+    fact: '車上的攪拌筒會轉動，讓混凝土在運送途中保持均勻。', scene: '🔄🧱',
     factMandarin: '车上的搅拌筒会转动，让混凝土在运送途中保持均匀。',
     factEnglish: 'Its drum turns to keep the concrete mixed while it is being carried.',
     quiz: '這輛車最常用來做甚麼？', job: '用轉動的攪拌筒運送混凝土',
@@ -56,7 +56,7 @@ window.CONSTRUCTION_TRUCKS = [
   },
   {
     id: 'dump-truck', yue: '泥頭車', mandarin: '自卸卡車', english: 'dump truck', icon: '🚛',
-    fact: '車斗可以升起並傾斜，把泥土或沙石倒下來。',
+    fact: '車斗可以升起並傾斜，把泥土或沙石倒下來。', scene: '⬆️🟫',
     factMandarin: '车斗可以升起并倾斜，把泥土或沙石倒下来。',
     factEnglish: 'Its bed tips up to unload soil or stones.',
     quiz: '這輛車最常用來做甚麼？', job: '升起車斗，倒出泥土或沙石',
@@ -65,7 +65,7 @@ window.CONSTRUCTION_TRUCKS = [
   },
   {
     id: 'tanker', yue: '油罐車', mandarin: '油罐车', english: 'tanker truck', icon: '🚚',
-    fact: '罐形車身可以運送液體；運送油品時，要遵守安全規定。',
+    fact: '罐形車身可以運送液體；運送油品時，要遵守安全規定。', scene: '💧💦',
     factMandarin: '罐形车身可以运送液体；运送油品时，要遵守安全规定。',
     factEnglish: 'Its tank carries liquids. Fuel must be transported safely under special rules.',
     quiz: '這輛車最常用來做甚麼？', job: '用罐形車身運送液體',

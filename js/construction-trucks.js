@@ -75,14 +75,15 @@
     $('quiz-progress').textContent = `任務 ${currentIndex + 1}／${questionOrder.length}`;
     $('quiz-art').dataset.vehicle = item.id;
     $('quiz-art').setAttribute('aria-label', `${item.yue}插圖`);
+    $('quiz-name').textContent = `車名：${item.yue}`;
     $('quiz-question').textContent = item.quiz;
     $('quiz-fact').textContent = '看看這輛車的工具，再想想它會怎樣幫忙。';
     $('feedback').textContent = '';
     $('next-question').classList.add('hidden');
     $('mission-toy').innerHTML = '<strong>答對後會有一個積木車小任務！</strong>';
-    const answers = shuffle(vehicles.map((vehicle, index) => ({ text: vehicle.job, correct: index === vehicleIndex })));
+    const answers = shuffle(vehicles.map((vehicle, index) => ({ text: vehicle.job, scene: vehicle.scene, correct: index === vehicleIndex })));
     $('choices').innerHTML = answers.map((answer) =>
-      `<button type="button" data-correct="${answer.correct}" aria-label="${answer.text}">${answer.text}</button>`).join('');
+      `<button type="button" data-correct="${answer.correct}" aria-label="${answer.text}"><span class="choice-scene" aria-hidden="true">${answer.scene}</span><span>${answer.text}</span></button>`).join('');
     $('choices').querySelectorAll('button').forEach((button) => button.addEventListener('click', () => chooseAnswer(button, item)));
     $('status-pill').textContent = `${correctCount} 題答啱`;
   }

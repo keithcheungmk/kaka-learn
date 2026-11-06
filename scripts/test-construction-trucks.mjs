@@ -15,7 +15,7 @@ const ids = ['excavator', 'crane', 'loader', 'road-roller', 'forklift', 'mixer',
 assert.equal(vehicles.length, 8, 'must cover the eight toy vehicle types');
 assert.deepEqual(Array.from(vehicles, (v) => v.id), ids, 'keep the illustration sprite order and learning records aligned');
 for (const item of vehicles) {
-  for (const key of ['yue', 'mandarin', 'english', 'fact', 'factMandarin', 'factEnglish', 'job', 'toy']) {
+  for (const key of ['yue', 'mandarin', 'english', 'fact', 'factMandarin', 'factEnglish', 'job', 'scene', 'toy']) {
     assert.ok(item[key]?.trim(), `${item.id} needs ${key}`);
   }
   assert.ok(item.yue.length < 12, `${item.id} Cantonese label fits the card`);
@@ -32,6 +32,8 @@ assert.match(page, /data-say-fact="mandarin"/);
 assert.match(page, /data-say-fact="english"/);
 assert.match(page, /安全提示：工程車很大，要站遠一點看/);
 assert.match(page, /id="screen-quiz"/);
+assert.match(page, /聽聽車名，配對它的工作場景/);
+assert.match(page, /id="quiz-name"/);
 assert.match(page, /id="screen-finish"/);
 assert.match(page, /id="detail-selector" role="group" aria-label="選擇工程車"/);
 const app = read('js/construction-trucks.js');
@@ -43,6 +45,8 @@ assert.match(app, /markTopicPassed\?\.\('common-sense', 'construction-trucks'\)/
 assert.match(app, /tryEarnStar/);
 assert.match(app, /playTryAgainCue/);
 assert.match(app, /playCorrectCue/);
+assert.match(app, /車名：\$\{item\.yue\}/);
+assert.match(app, /choice-scene/);
 assert.match(read('js/storage.js'), /'common-sense-construction-trucks'/);
 const asset = fs.statSync(path.join(root, 'assets/common-sense/construction-trucks-v2.webp'));
 assert.ok(asset.size <= 400_000, `vehicle contact sheet must stay within asset limit (${asset.size} bytes)`);
