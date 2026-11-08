@@ -8,6 +8,13 @@
   const FAMILY_NAMES = window.KAKA_FAMILY_NAMES || [];
   const BANK = window.KAKA_HANZI_WRITE_BANK || window.KAKA_HANZI_WRITE_LEVELS || [];
   const CHAPTERS = window.KAKA_HANZI_WRITE_CHAPTERS || [];
+  const LIFE_CHAPTER = { id: 'life-demo', title: '生活單字', open: true, charIds: ['shou', 'kou', 'mu', 'er_ear'] };
+  const LIFE_ART = {
+    shou: 'assets/character-words/actions/xi-shou.webp',
+    kou: 'assets/character-words/actions/shuo-hua.webp',
+    mu: 'assets/character-words/actions/kan-shu.webp',
+    er_ear: 'assets/character-words/actions/ting-yinyue.webp',
+  };
   const TOPIC_ID = 'hanzi-write';
   const COIN_MODE = 'hanzi-write';
   const PARENT_HREF = 'index.html#screen-topics';
@@ -55,6 +62,7 @@
   }
 
   function chapterById(id) {
+    if (id === LIFE_CHAPTER.id) return LIFE_CHAPTER;
     return CHAPTERS.find((chapter) => chapter.id === id) || CHAPTERS[0];
   }
 
@@ -64,6 +72,7 @@
 
   function chapterLevels(id) {
     const chapter = chapterById(id || chapterId);
+    if (chapter.id === LIFE_CHAPTER.id) return chapter.charIds.map((charId) => levels().find((level) => level.id === charId)).filter(Boolean);
     const ids = new Set(chapter?.charIds || []);
     return levels().filter((level) => ids.has(level.id));
   }
@@ -126,6 +135,7 @@
   }
 
   function chapterRewardPending(id) {
+    if (id === LIFE_CHAPTER.id) return false;
     return chapterCleared(id) && !loadProgress().chapters[id];
   }
 
@@ -155,6 +165,7 @@
     });
     document.body.classList.toggle('is-chapter-picker', name === 'adventure');
     document.body.classList.toggle('is-family-writing', name === 'write' && Boolean(familyPerson));
+    document.body.classList.toggle('is-life-writing', name === 'write' && !familyPerson && chapterId === LIFE_CHAPTER.id);
     const back = $('back-link');
     const speakBtn = $('btn-speak-chapters');
     const starPill = $('star-pill');
@@ -196,7 +207,13 @@
     const face = document.createElement('span');
     face.className = 'write-meaning-emoji';
     face.setAttribute('aria-hidden', 'true');
-    face.textContent = emoji || char;
+    if (chapterId === LIFE_CHAPTER.id && LIFE_ART[level.id]) {
+      const picture = document.createElement('img');
+      picture.src = LIFE_ART[level.id];
+      picture.alt = '';
+      face.classList.add('life-meaning-picture');
+      face.appendChild(picture);
+    } else face.textContent = emoji || char;
     const glyph = document.createElement('span');
     glyph.className = 'write-meaning-char';
     glyph.textContent = char;
@@ -318,7 +335,7 @@
     if (!el) return;
     el.replaceChildren();
     const chapter = chapterById(chapterId);
-    if ($('chars-kicker')) $('chars-kicker').textContent = `第${chapter.no}章 · ${chapter.title}`;
+    if ($('chars-kicker')) $('chars-kicker').textContent = chapter.id === LIFE_CHAPTER.id ? chapter.title : `第${chapter.no}章 · ${chapter.title}`;
     chapterLevels().forEach((level, i) => {
       const done = successCount(level.id);
       const btn = document.createElement('button');
@@ -579,7 +596,7 @@
     const chapter = chapterById(chapterId);
     const done = practiceCount;
     const hint = hintLevelFor(done);
-    if ($('level-kicker')) $('level-kicker').textContent = `第${chapter.no}章 · ${chapter.title}`;
+    if ($('level-kicker')) $('level-kicker').textContent = chapter.id === LIFE_CHAPTER.id ? chapter.title : `第${chapter.no}章 · ${chapter.title}`;
     if ($('write-heading')) $('write-heading').textContent = `寫「${level.char}」`;
     if ($('write-lead')) {
       $('write-lead').textContent = level.hint
@@ -937,6 +954,7 @@
   $('btn-profile-kaka').addEventListener('click', () => pickProfile('kaka'));
   $('btn-profile-heihei').addEventListener('click', () => pickProfile('heihei'));
   $('btn-family-names').addEventListener('click', goFamily);
+  $('btn-life-writing').addEventListener('click', () => openChapter(LIFE_CHAPTER.id));
   $('btn-family-speak').addEventListener('click', () => { if (familyPerson) speak(familyPerson.name); });
   $('btn-speak-chapters')?.addEventListener('click', () => {
     speech.unlockSpeech?.();
