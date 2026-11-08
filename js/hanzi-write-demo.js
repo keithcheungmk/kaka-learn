@@ -4,17 +4,16 @@
   const storage = window.KakaStorage || {};
   const speech = window.KakaSpeech || {};
   const nav = window.KakaNav || { goBackOr: (href) => { location.assign(href); } };
-  const CHAR_DATA = { ...(window.KAKA_HANZI_WRITE_CHARS || {}), ...(window.KAKA_FAMILY_NAME_CHARS || {}) };
+  const CHAR_DATA = { ...(window.KAKA_HANZI_WRITE_CHARS || {}), ...(window.KAKA_FAMILY_NAME_CHARS || {}), ...(window.KAKA_LIFE_WORD_CHARS || {}) };
   const FAMILY_NAMES = window.KAKA_FAMILY_NAMES || [];
   const BANK = window.KAKA_HANZI_WRITE_BANK || window.KAKA_HANZI_WRITE_LEVELS || [];
   const CHAPTERS = window.KAKA_HANZI_WRITE_CHAPTERS || [];
-  const LIFE_CHAPTER = { id: 'life-demo', title: '生活單字', open: true, charIds: ['shou', 'kou', 'mu', 'er_ear'] };
-  const LIFE_ART = {
-    shou: 'assets/character-words/actions/xi-shou.webp',
-    kou: 'assets/character-words/actions/shuo-hua.webp',
-    mu: 'assets/character-words/actions/kan-shu.webp',
-    er_ear: 'assets/character-words/actions/ting-yinyue.webp',
-  };
+  const LIFE_CHAPTER = { id: 'life-demo', title: '生活詞語', open: true, charIds: [] };
+  const LIFE_WORDS = [
+    { word: '洗手', art: 'assets/character-words/actions/xi-shou.webp' },
+    { word: '拍手', art: 'assets/character-words/actions/pai-shou.webp' },
+    { word: '大口', art: 'assets/character-words/actions/chi-fan.webp' },
+  ];
   const TOPIC_ID = 'hanzi-write';
   const COIN_MODE = 'hanzi-write';
   const PARENT_HREF = 'index.html#screen-topics';
@@ -56,6 +55,11 @@
   let familyCharIndex = 0;
   let familySolved = false;
   let practiceCount = 0;
+  let lifeWord = null;
+  let lifeIndex = 0;
+  let lifeRounds = 0;
+  let lifeLastWord = '';
+  let lifeFinished = false;
 
   function levels() {
     return BANK.filter((level) => CHAR_DATA[level.char]);
@@ -78,6 +82,10 @@
   }
 
   function currentLevel() {
+    if (lifeWord) {
+      const char = Array.from(lifeWord.word)[lifeIndex];
+      return { id: `life-${lifeWord.word}-${lifeIndex}`, char, say: char, title: `寫「${char}」` };
+    }
     if (familyPerson) {
       const char = Array.from(familyPerson.name)[familyCharIndex];
       return { id: `family-${familyPerson.id}-${familyCharIndex}`, char, say: char, title: `寫「${char}」` };
@@ -170,7 +178,7 @@
     const speakBtn = $('btn-speak-chapters');
     const starPill = $('star-pill');
     const brand = $('brand-block');
-    if (name === 'write') back.textContent = familyPerson ? '← 家人' : '← 字表';
+    if (name === 'write') back.textContent = lifeWord ? '← 選章' : familyPerson ? '← 家人' : '← 字表';
     else if (name === 'family') back.textContent = '← 選章';
     else if (name === 'chars') back.textContent = '← 選章';
     else if (name === 'adventure') back.textContent = '返去';
@@ -179,8 +187,8 @@
     if (starPill) starPill.hidden = name === 'adventure';
     if (brand) brand.hidden = name === 'adventure';
     refreshStars();
-    const count = familyPerson ? familyCharIndex + (familySolved ? 1 : 0) : practiceCount;
-    renderWriteStamps(name === 'write' ? count : 0, { total: familyPerson ? 3 : NEED_SUCCESSES });
+    const count = lifeWord ? lifeRounds : familyPerson ? familyCharIndex + (familySolved ? 1 : 0) : practiceCount;
+    renderWriteStamps(name === 'write' ? count : 0, { total: lifeWord || familyPerson ? 3 : NEED_SUCCESSES });
   }
 
   function speak(text) {
@@ -207,18 +215,25 @@
     const face = document.createElement('span');
     face.className = 'write-meaning-emoji';
     face.setAttribute('aria-hidden', 'true');
-    if (chapterId === LIFE_CHAPTER.id && LIFE_ART[level.id]) {
+    if (lifeWord) {
       const picture = document.createElement('img');
-      picture.src = LIFE_ART[level.id];
+      picture.src = lifeWord.art;
       picture.alt = '';
       face.classList.add('life-meaning-picture');
       face.appendChild(picture);
     } else face.textContent = emoji || char;
     const glyph = document.createElement('span');
     glyph.className = 'write-meaning-char';
-    glyph.textContent = char;
+    glyph.textContent = lifeWord ? lifeWord.word : char;
     btn.append(face, glyph);
-    btn.setAttribute('aria-label', `聽「${char}」`);
+    if (lifeWord) {
+      const sound = document.createElement('span');
+      sound.className = 'life-sound-icon';
+      sound.textContent = '🔊';
+      sound.setAttribute('aria-hidden', 'true');
+      btn.appendChild(sound);
+    }
+    btn.setAttribute('aria-label', `聽「${lifeWord ? lifeWord.word : char}」`);
   }
 
   function renderVocab(hostId, level) {
@@ -315,6 +330,7 @@
 
   function goAdventure() {
     familyPerson = null;
+    lifeWord = null;
     $('who-line').textContent = `${whoName()}，準備好了嗎？`;
     const help = $('chapter-help');
     const helpBtn = $('btn-chapter-help');
@@ -593,6 +609,23 @@
       renderWriteStamps(familyCharIndex + (familySolved ? 1 : 0), { total: 3 });
       return;
     }
+    if (lifeWord) {
+      $('level-kicker').textContent = '生活詞語';
+      const chars = Array.from(lifeWord.word);
+      $('write-heading').replaceChildren(...chars.map((char, i) => {
+        const span = document.createElement('span');
+        span.textContent = char;
+        if (i === lifeIndex) span.className = 'life-current-char';
+        return span;
+      }));
+      $('write-lead').textContent = `寫第 ${lifeRounds + 1} 遍，現在寫「${chars[lifeIndex]}」。`;
+      $('write-progress').textContent = `已完成 ${lifeRounds}／3 遍`;
+      renderMeaning(level);
+      $('write-vocab').hidden = true;
+      $('write-vocab-kicker').hidden = true;
+      renderWriteStamps(lifeRounds, { total: 3 });
+      return;
+    }
     const chapter = chapterById(chapterId);
     const done = practiceCount;
     const hint = hintLevelFor(done);
@@ -727,6 +760,25 @@
     requestAnimationFrame(() => mountWriter());
   }
 
+  function openLifeWord() {
+    const available = LIFE_WORDS.filter((entry) => entry.word !== lifeLastWord && Array.from(entry.word).every((char) => CHAR_DATA[char]));
+    if (!available.length) { goAdventure(); return; }
+    lifeWord = available[Math.floor(Math.random() * available.length)];
+    lifeLastWord = lifeWord.word;
+    lifeIndex = 0;
+    lifeRounds = 0;
+    lifeFinished = false;
+    practiceCount = 0;
+    chapterId = LIFE_CHAPTER.id;
+    familyPerson = null;
+    hideOverlays();
+    $('btn-next-char').hidden = true;
+    refreshWriteChrome();
+    showView('write');
+    speak(lifeWord.word);
+    requestAnimationFrame(() => mountWriter());
+  }
+
   function nextIncompleteIndex() {
     const list = chapterLevels();
     const idx = list.findIndex((level, i) => i > levelIndex && successCount(level.id) < NEED_SUCCESSES);
@@ -804,6 +856,39 @@
 
   function onWriteSuccess() {
     const level = currentLevel();
+    if (lifeWord) {
+      if (lifeFinished) return;
+      if (lifeIndex + 1 < Array.from(lifeWord.word).length) {
+        lifeIndex += 1;
+      } else {
+        lifeRounds += 1;
+        lifeIndex = 0;
+        celebrateWriteTick(lifeRounds, { total: 3 });
+      }
+      if (lifeRounds >= 3) {
+        lifeFinished = true;
+        const key = `life-word-${lifeWord.word}`;
+        const already = Boolean(storage.isKeyPassed?.(TOPIC_ID, key));
+        if (!already) { storage.markTopicPassed?.(TOPIC_ID, key); storage.tryEarnStar?.(); }
+        refreshStars();
+        $('pass-title').textContent = '寫得好！';
+        $('pass-copy').textContent = `「${lifeWord.word}」寫了三遍。`;
+        $('pass-stars').hidden = already;
+        $('pass-stars').textContent = '★';
+        $('pass-coin').hidden = true;
+        $('pass-vocab-kicker').hidden = true;
+        $('pass-vocab').hidden = true;
+        stylePassCta(false);
+        $('btn-next-level').textContent = '下一個詞語';
+        $('pass-overlay').classList.remove('hidden');
+        speak(`${lifeWord.word}，寫得好！`);
+        return;
+      }
+      practiceCount = lifeRounds;
+      refreshWriteChrome();
+      requestAnimationFrame(() => mountWriter());
+      return;
+    }
     if (familyPerson) {
       if (familySolved) return;
       familySolved = true;
@@ -928,6 +1013,7 @@
   function leaveWrite() {
     hideOverlays();
     destroyWriter();
+    if (lifeWord) { lifeWord = null; goAdventure(); return; }
     if (familyPerson) { goFamily(); return; }
     renderChars();
     showView('chars');
@@ -954,7 +1040,7 @@
   $('btn-profile-kaka').addEventListener('click', () => pickProfile('kaka'));
   $('btn-profile-heihei').addEventListener('click', () => pickProfile('heihei'));
   $('btn-family-names').addEventListener('click', goFamily);
-  $('btn-life-writing').addEventListener('click', () => openChapter(LIFE_CHAPTER.id));
+  $('btn-life-writing').addEventListener('click', openLifeWord);
   $('btn-family-speak').addEventListener('click', () => { if (familyPerson) speak(familyPerson.name); });
   $('btn-speak-chapters')?.addEventListener('click', () => {
     speech.unlockSpeech?.();
@@ -964,7 +1050,7 @@
   $('write-meaning')?.addEventListener('click', () => {
     const level = currentLevel();
     speech.unlockSpeech?.();
-    speak(level.say || level.char);
+    speak(lifeWord ? lifeWord.word : level.say || level.char);
   });
   $('btn-guide').addEventListener('click', () => {
     speech.unlockSpeech?.();
@@ -994,6 +1080,7 @@
     openWrite(idx === -1 ? levelIndex : idx);
   });
   $('btn-next-level')?.addEventListener('click', () => {
+    if (lifeWord) { openLifeWord(); return; }
     if (familyPerson) { hideOverlays(); destroyWriter(); goFamily(); return; }
     if (levelIndex + 1 < chapterLevels().length) openWrite(levelIndex + 1);
     else leaveWrite();
