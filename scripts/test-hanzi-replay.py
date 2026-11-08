@@ -7,7 +7,12 @@ with sync_playwright() as p:
         context = browser.new_context(viewport={'width': width, 'height': height}, has_touch=True)
         page = context.new_page()
         page.goto(os.environ.get('KAKA_TEST_URL', 'http://127.0.0.1:5173') + '/hanzi-write-demo.html', wait_until='domcontentloaded')
-        page.evaluate("() => { for (const k of ['speakTerm','speakThen','warmAudio','unlockSpeech','playCorrectCue']) window.KakaSpeech[k] = () => {}; }")
+        page.evaluate("""() => {
+          window.__spoken = []; window.__cues = 0;
+          window.KakaSpeech.speakTerm = (text, opts = {}) => { window.__spoken.push(text); if (opts.onEnd) setTimeout(opts.onEnd, 0); };
+          for (const k of ['speakThen','warmAudio','unlockSpeech']) window.KakaSpeech[k] = () => {};
+          window.KakaSpeech.playCorrectCue = () => { window.__cues++; };
+        }""")
         page.click('#btn-profile-kaka')
         page.click("[data-chapter-id='ch1']")
         page.click("[data-char-id='yi']")
@@ -33,6 +38,7 @@ with sync_playwright() as p:
         page.evaluate('() => { Math.random = () => 0; }')
         page.click('#btn-life-writing')
         assert page.is_visible('#view-write'), f'{name}: topic must start directly'
+        page.wait_for_function("() => !document.querySelector('#write-meaning').disabled")
         word = page.locator('#write-meaning .write-meaning-char').inner_text()
         assert word == '洗手'
         assert page.evaluate('() => window.KAKA_LIFE_WORD_CHARS.洗.strokes.length') == 9
@@ -45,24 +51,50 @@ with sync_playwright() as p:
             expected = word[step % 2]
             assert page.evaluate('() => window.KakaHanziWrite.currentLevel().char') == expected
             page.evaluate('() => window.KakaHanziWrite.onWriteSuccess()')
+            assert page.locator('#write-meaning').is_disabled(), f'{name}: feedback must lock input'
+            if step % 2 == 1:
+                assert page.locator('#write-heading').evaluate('(el) => el.classList.contains("life-word-celebrate")')
+                assert page.locator('#write-heading span').count() == 2
+            if step == 0:
+                page.evaluate('() => window.KakaHanziWrite.onWriteSuccess()')
+                assert page.evaluate('() => window.KakaHanziWrite.currentLevel().char') == '手'
+            page.wait_for_function("() => !document.querySelector('#write-meaning').disabled")
+            if step == 0:
+                assert page.evaluate("() => window.__spoken.at(-1).includes('洗手') && window.__spoken.at(-1).includes('洗') && window.__spoken.at(-1).includes('手')")
+            if step % 2 == 1:
+                assert page.evaluate("() => window.__spoken.at(-1).includes('洗手')")
+                assert page.evaluate('() => window.__spoken.at(-1)').find('三遍' if step == 5 else '再寫一次') >= 0
             assert page.is_visible('#pass-overlay') == (step == 5), f'{name}: word completed too early at {step}'
+        assert page.evaluate('() => window.__cues') >= 6
         assert page.locator('#pass-overlay button:visible').count() == 1
         assert page.locator('#btn-next-level').inner_text() == '下一個詞語'
         assert page.evaluate('(w) => window.KakaStorage.isKeyPassed("hanzi-write", "life-word-" + w)', word)
         page.click('#btn-next-level')
+        page.wait_for_function("() => !document.querySelector('#write-meaning').disabled")
         assert page.is_visible('#view-write')
         assert page.locator('#write-meaning .write-meaning-char').inner_text() == '拍手'
         for _ in range(6):
             page.evaluate('() => window.KakaHanziWrite.onWriteSuccess()')
+            page.wait_for_function("() => !document.querySelector('#write-meaning').disabled")
         stars = page.evaluate('() => window.KakaStorage.loadState().totalStars')
         page.click('#btn-next-level')
+        page.wait_for_function("() => !document.querySelector('#write-meaning').disabled")
         assert page.locator('#write-meaning .write-meaning-char').inner_text() == word
         for _ in range(6):
             page.evaluate('() => window.KakaHanziWrite.onWriteSuccess()')
+            page.wait_for_function("() => !document.querySelector('#write-meaning').disabled")
         assert page.evaluate('() => window.KakaStorage.loadState().totalStars') == stars, f'{name}: replay awarded another star'
         page.evaluate('() => { Math.random = () => 0.999; }')
         page.click('#btn-next-level')
         assert page.locator('#write-meaning .write-meaning-char').inner_text() == '大口'
+        page.wait_for_function("() => !document.querySelector('#write-meaning').disabled")
+        page.evaluate("() => { window.__pendingFeedback = null; window.KakaSpeech.speakTerm = (text, opts = {}) => { window.__pendingFeedback = opts.onEnd; }; }")
+        page.evaluate('() => window.KakaHanziWrite.onWriteSuccess()')
+        page.wait_for_function('() => typeof window.__pendingFeedback === "function"')
+        page.click('#back-link')
+        assert page.is_visible('#view-adventure')
+        page.evaluate('() => window.__pendingFeedback()')
+        assert page.is_visible('#view-adventure'), f'{name}: stale voice callback changed screens'
         print(f'{name}: replay, saved progress, next and last character passed')
         context.close()
     browser.close()
