@@ -509,7 +509,7 @@ def check_three_entries() -> None:
     ]:
         if btn not in html:
             fail("entries", f"index.html 唔見 #{btn}（{name} 入口）")
-    for btn in ["btn-english-story", "btn-english-words", "btn-english-phonics"]:
+    for btn in ["btn-english-story", "btn-english-words"]:
         if f'id="{btn}"' not in html:
             fail("entries", f"英文學習分流頁唔見 #{btn}")
     if html.count('id="btn-start-english"') != 1:
@@ -552,11 +552,11 @@ def check_three_entries() -> None:
     phonics = read("js/phonics-app.js")
     phonics_css = read("css/phonics.css")
     if "openPhonicsTopics('sight')" not in phonics or "openPhonicsTopics('phonics')" not in phonics:
-        fail("entries", "英文學習分流頁嘅 Topic Words／Phonics 按鈕未接到各自內容")
-    if "pActiveEnglishTrack" not in phonics or 'dataset.englishTrack = pActiveEnglishTrack' not in phonics:
-        fail("entries", "Topic Words 與 Phonics 頁面未按選擇分開顯示")
-    if 'data-english-track="sight"' not in phonics_css or 'data-english-track="phonics"' not in phonics_css:
-        fail("entries", "Topic Words／Phonics 頁面未分開隱藏另一條路線")
+        fail("entries", "圖像拼讀須保留主題及字母音內容")
+    if 'id="btn-english-phonics"' in html:
+        fail("entries", "圖像拼字與 Phonics 應合併為一個入口")
+    if 'data-english-track="sight"] .english-track-phonics' in phonics_css:
+        fail("entries", "合併後應能在同一頁看到圖像主題和字母音挑戰")
     story = read("js/story-demo.js")
     if "window.KakaPhonics?.openEnglishHub" not in story:
         fail("entries", "故事系列返回按鈕未返回共用英文入口")

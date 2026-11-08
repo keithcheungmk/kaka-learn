@@ -24,14 +24,14 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:image" content="https://keithcheungmk.github.io/kaka-learn/assets/home-learning-picnic.jpg" />
   <link rel="stylesheet" href="./css/styles.css?v=20261007-word-wall" />
-  <link rel="stylesheet" href="./css/phonics.css?v=20260905list" />
-  <link rel="stylesheet" href="./css/emoji-spelling.css?v=20261028a" />
+  <link rel="stylesheet" href="./css/phonics.css?v=20261108-unified" />
+  <link rel="stylesheet" href="./css/emoji-spelling.css?v=20261108-unified" />
   <link rel="stylesheet" href="./css/story-demo.css?v=20260911b" />
   <link rel="stylesheet" href="./css/math.css?v=20261001-life-skills" />
   <link rel="stylesheet" href="./css/additionGame.css?v=4751bde" />
   <link rel="stylesheet" href="./css/playground-theme.css?v=20261006-career-photos" />
   <link rel="stylesheet" href="./css/celebrate-finish.css?v=20261014-celebrate" />
-  <link rel="stylesheet" href="./css/emoji-spelling-reference.css?v=20261028a" />
+  <link rel="stylesheet" href="./css/emoji-spelling-reference.css?v=20261108-unified" />
 </head>
 <body>
   <div id="app">
@@ -463,8 +463,8 @@
           <h1>英文學習 <small>English Learning</small></h1>
           <p>讀故事、認詞語、玩拼讀；揀一個學習世界出發！</p>
         </div>
-        <div class="english-hub-world-count" aria-label="三個學習世界">
-          <strong>03</strong>
+        <div class="english-hub-world-count" aria-label="兩個學習世界">
+          <strong>02</strong>
           <span>個學習世界</span>
         </div>
       </header>
@@ -477,20 +477,12 @@
             <span class="english-hub-action">去揀故事 →</span>
           </span>
         </button>
-        <button type="button" class="english-hub-card english-hub-words" id="btn-english-words" aria-label="圖像拼字 Emoji Spelling：揀主題、看圖聽音、試拼字">
+        <button type="button" class="english-hub-card english-hub-words" id="btn-english-words" aria-label="圖像拼讀 Emoji Phonics Spelling：揀主題、看圖聽音、試拼字">
           <img class="english-hub-art" src="assets/english-worlds/topic-words.webp" alt="" aria-hidden="true" width="1254" height="1254" decoding="async">
           <span class="english-hub-card-body">
-            <span class="english-hub-title">圖像拼字 <small>Emoji Spelling</small></span>
-            <span class="english-hub-description">揀主題、睇圖、聽讀音，逐個字母試拼字。</span>
+            <span class="english-hub-title">圖像拼讀 <small>Emoji Phonics Spelling</small></span>
+            <span class="english-hub-description">揀主題、睇圖、聽英文，拼字後一齊聽字母音。</span>
             <span class="english-hub-action">去揀拼字主題 →</span>
-          </span>
-        </button>
-        <button type="button" class="english-hub-card english-hub-phonics" id="btn-english-phonics" aria-label="字母音・拼讀 Phonics：聽字母音，把聲音拼成單字">
-          <img class="english-hub-art" src="assets/english-worlds/phonics.webp" alt="" aria-hidden="true" width="1254" height="1254" decoding="async">
-          <span class="english-hub-card-body">
-            <span class="english-hub-title">字母音・拼讀 <small>Phonics</small></span>
-            <span class="english-hub-description">聽字母發音，把聲音合起來讀成單字。</span>
-            <span class="english-hub-action">去玩拼讀 →</span>
           </span>
         </button>
       </div>
@@ -510,21 +502,21 @@
     <section id="screen-phonics-topics" class="screen phonics-screen" aria-label="SPACE RANGER ENGLISH・揀學習線">
       <div class="game-header">
         <button type="button" class="btn btn-ghost" id="btn-back-phonics-topics">← 英文學習</button>
-        <h1 id="english-topic-screen-title">圖像拼字</h1>
+        <h1 id="english-topic-screen-title">圖像拼讀</h1>
       </div>
       <div class="english-track english-track-sight">
         <header class="english-track-heading">
           <span class="english-track-kicker">WORD MISSION · 01</span>
-          <h2>Emoji Spelling <small>圖像拼字</small></h2>
-          <p>揀一個主題，睇圖、聽英文，再一齊試拼字。</p>
+          <h2>圖像拼讀 <small>Emoji Phonics Spelling</small></h2>
+          <p>揀一個主題，睇圖、聽英文，再一齊拼字同聽字母音。</p>
         </header>
         <div class="topic-grid" id="phonics-sight-grid"></div>
       </div>
       <div class="english-track english-track-phonics">
         <header class="english-track-heading">
           <span class="english-track-kicker">SOUND MISSION</span>
-          <h2>Phonics <small>字母音・拼讀</small></h2>
-          <p>逐個音聽清楚，再將聲音連起來拼出英文字。</p>
+          <h2>字母音挑戰 <small>Phonics</small></h2>
+          <p>想練多啲字母音？揀下面嘅聲音任務或者拼字組合。</p>
         </header>
         <div class="phonics-hero" aria-hidden="true">
           <div class="phonics-hero-brand">
@@ -1199,8 +1191,8 @@
   <script src="./js/nav-back.js?v=20261011-one-level"></script>
   <script src="./js/app.js?v=20261028-emoji-rewards"></script>
   <script src="./js/phonics-words.js?v=20260905list"></script>
-  <script src="./js/phonics-app.js?v=20261028-emoji-all"></script>
-  <script src="./js/emoji-spelling-sounds.js?v=20261028a"></script>
+  <script src="./js/phonics-app.js?v=20261108-unified"></script>
+  <script src="./js/emoji-spelling-sounds.js?v=20261108-unified"></script>
   <script src="./js/emoji-spelling-data.js?v=20261028f"></script>
   <script src="./js/emoji-spelling-app.js?v=20261028d-rewards"></script>
   <script src="./data/carter-family-manifest.js?v=20260928cf040"></script>

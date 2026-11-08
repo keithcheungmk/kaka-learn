@@ -219,7 +219,7 @@
     const topics = $('#screen-phonics-topics');
     const title = $('#english-topic-screen-title');
     const kicker = topics?.querySelector('.phonics-mission-kicker');
-    if (title) title.textContent = pActiveEnglishTrack === 'phonics' ? '字母音・拼讀' : '圖像拼字';
+    if (title) title.textContent = '圖像拼讀';
     if (kicker) kicker.textContent = 'WORD MISSION';
     if (kicker && pActiveEnglishTrack === 'phonics') kicker.textContent = 'SOUND MISSION';
     $$('.phonics-screen').forEach((screen) => {
@@ -545,7 +545,6 @@
     }
     $('#btn-back-english-home')?.addEventListener('click', goHome);
     $('#btn-english-words')?.addEventListener('click', () => openPhonicsTopics('sight'));
-    $('#btn-english-phonics')?.addEventListener('click', () => openPhonicsTopics('phonics'));
     $('#btn-english-story')?.addEventListener('click', () => window.KakaStoryDemo?.open?.());
   }
 
@@ -629,7 +628,7 @@
         <span class="topic-blurb term-en">${collection.blurb}</span>
       `;
       btn.onclick = () => {
-        if (pActiveEnglishTrack === 'sight' && window.KakaEmojiSpelling?.openTopicById?.(collection.id, topic.id)) return;
+        if (window.KakaEmojiSpelling?.openTopicById?.(collection.id, topic.id)) return;
         openPhonicsLearn(collection.id);
       };
       grid.appendChild(btn);
