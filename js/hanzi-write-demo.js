@@ -60,6 +60,52 @@
   let lifeRounds = 0;
   let lifeLastWord = '';
   let lifeFinished = false;
+  let lifeFeedbackBusy = false;
+  let lifeFeedbackToken = 0;
+  let lifeFeedbackTimer = null;
+  let lifeFeedbackFallback = null;
+
+  function setLifeFeedbackBusy(busy) {
+    lifeFeedbackBusy = busy;
+    document.body.classList.toggle('is-life-feedback', busy);
+    $('hanzi-target')?.setAttribute('aria-busy', String(busy));
+    ['btn-guide', 'btn-rewrite', 'write-meaning'].forEach((id) => { if ($(id)) $(id).disabled = busy; });
+  }
+
+  function cancelLifeFeedback() {
+    lifeFeedbackToken += 1;
+    if (lifeFeedbackTimer) clearTimeout(lifeFeedbackTimer);
+    if (lifeFeedbackFallback) clearTimeout(lifeFeedbackFallback);
+    lifeFeedbackTimer = null;
+    lifeFeedbackFallback = null;
+    if (lifeFeedbackBusy) speech.cancelAllSpeech?.();
+    $('write-heading')?.classList.remove('life-word-celebrate');
+    $('write-meaning')?.classList.remove('life-word-celebrate');
+    setLifeFeedbackBusy(false);
+  }
+
+  function playLifeFeedback(line, { cue = false, next = () => {} } = {}) {
+    cancelLifeFeedback();
+    const token = lifeFeedbackToken;
+    setLifeFeedbackBusy(true);
+    if (cue) { speech.warmAudio?.(); speech.playCorrectCue?.(); }
+    const finish = () => {
+      if (token !== lifeFeedbackToken || !lifeFeedbackBusy) return;
+      if (lifeFeedbackFallback) clearTimeout(lifeFeedbackFallback);
+      lifeFeedbackFallback = null;
+      setLifeFeedbackBusy(false);
+      next();
+    };
+    lifeFeedbackTimer = setTimeout(() => {
+      if (token !== lifeFeedbackToken) return;
+      lifeFeedbackTimer = null;
+      if (!speech.speakTerm) { finish(); return; }
+      const options = { rate: 0.92, pitch: 1.08, onEnd: finish };
+      const estimated = speech.estimateSpeakMs?.(line, options) || Math.max(2500, line.length * 300);
+      lifeFeedbackFallback = setTimeout(finish, estimated + 1000);
+      speech.speakTerm(line, options);
+    }, cue ? 350 : 0);
+  }
 
   function levels() {
     return BANK.filter((level) => CHAR_DATA[level.char]);
@@ -329,6 +375,7 @@
   }
 
   function goAdventure() {
+    cancelLifeFeedback();
     familyPerson = null;
     lifeWord = null;
     $('who-line').textContent = `${whoName()}，準備好了嗎？`;
@@ -670,6 +717,7 @@
   }
 
   function onQuizMiss() {
+    if (lifeWord && lifeFeedbackBusy) return;
     setWriteStatus(RETRY_HINT, 'retry');
     flashMissBoard();
     const now = Date.now();
@@ -761,6 +809,7 @@
   }
 
   function openLifeWord() {
+    cancelLifeFeedback();
     const available = LIFE_WORDS.filter((entry) => entry.word !== lifeLastWord && Array.from(entry.word).every((char) => CHAR_DATA[char]));
     if (!available.length) { goAdventure(); return; }
     lifeWord = available[Math.floor(Math.random() * available.length)];
@@ -775,8 +824,13 @@
     $('btn-next-char').hidden = true;
     refreshWriteChrome();
     showView('write');
-    speak(lifeWord.word);
-    requestAnimationFrame(() => mountWriter());
+    playLifeFeedback(lifeWord.word, { next: scheduleLifeWriter });
+  }
+
+  function scheduleLifeWriter() {
+    const token = lifeFeedbackToken;
+    const word = lifeWord;
+    requestAnimationFrame(() => { if (word && word === lifeWord && token === lifeFeedbackToken && view === 'write') mountWriter(); });
   }
 
   function nextIncompleteIndex() {
@@ -857,14 +911,22 @@
   function onWriteSuccess() {
     const level = currentLevel();
     if (lifeWord) {
-      if (lifeFinished) return;
+      if (lifeFinished || lifeFeedbackBusy) return;
+      const chars = Array.from(lifeWord.word);
+      const completedChar = chars[lifeIndex];
       if (lifeIndex + 1 < Array.from(lifeWord.word).length) {
         lifeIndex += 1;
-      } else {
-        lifeRounds += 1;
-        lifeIndex = 0;
-        celebrateWriteTick(lifeRounds, { total: 3 });
+        practiceCount = lifeRounds;
+        refreshWriteChrome();
+        flashSuccessBoard();
+        const line = `你好叻！你啱啱寫咗${lifeWord.word}嘅「${completedChar}」喇！跟住我哋寫「${chars[lifeIndex]}」字啦。`;
+        playLifeFeedback(line, { cue: true });
+        scheduleLifeWriter();
+        return;
       }
+      lifeRounds += 1;
+      flashSuccessBoard();
+      renderWriteStamps(lifeRounds, { total: 3, pop: true });
       if (lifeRounds >= 3) {
         lifeFinished = true;
         const key = `life-word-${lifeWord.word}`;
@@ -880,13 +942,25 @@
         $('pass-vocab').hidden = true;
         stylePassCta(false);
         $('btn-next-level').textContent = '下一個詞語';
-        $('pass-overlay').classList.remove('hidden');
-        speak(`${lifeWord.word}，寫得好！`);
+        playLifeFeedback(`你好叻！你寫好${lifeWord.word}，恭喜你寫咗三遍！`, { cue: true, next: () => {
+          $('write-heading').classList.remove('life-word-celebrate');
+          $('write-meaning').classList.remove('life-word-celebrate');
+          $('pass-overlay').classList.remove('hidden');
+        } });
+        $('write-heading').classList.add('life-word-celebrate');
+        $('write-meaning').classList.add('life-word-celebrate');
         return;
       }
-      practiceCount = lifeRounds;
-      refreshWriteChrome();
-      requestAnimationFrame(() => mountWriter());
+      playLifeFeedback(`你好叻！你寫好${lifeWord.word}！我哋再寫一次啦。`, { cue: true, next: () => {
+        $('write-heading').classList.remove('life-word-celebrate');
+        $('write-meaning').classList.remove('life-word-celebrate');
+        lifeIndex = 0;
+        practiceCount = lifeRounds;
+        refreshWriteChrome();
+        scheduleLifeWriter();
+      } });
+      $('write-heading').classList.add('life-word-celebrate');
+      $('write-meaning').classList.add('life-word-celebrate');
       return;
     }
     if (familyPerson) {
@@ -1011,6 +1085,7 @@
   }
 
   function leaveWrite() {
+    cancelLifeFeedback();
     hideOverlays();
     destroyWriter();
     if (lifeWord) { lifeWord = null; goAdventure(); return; }
@@ -1098,7 +1173,7 @@
   $('back-link').addEventListener('click', onBack);
 
   window.addEventListener('resize', () => {
-    if (view === 'write' && writer && !(familyPerson && familySolved)) mountWriter();
+    if (view === 'write' && writer && !lifeFeedbackBusy && !(familyPerson && familySolved)) mountWriter();
   });
 
   speech.warmVoices?.();

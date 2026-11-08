@@ -881,6 +881,14 @@ body.is-replay-writing .write-progress.is-aux {
 .is-life-writing .write-meaning-char { font-size: clamp(2.1rem, 5vw, 3.5rem); }
 .life-sound-icon { font-size: 1.6rem; }
 .life-current-char { color: #ba6800; text-decoration: underline; text-underline-offset: .16em; }
+.is-life-feedback #hanzi-target { pointer-events: none; }
+.life-word-celebrate .write-meaning-char, #write-heading.life-word-celebrate span {
+  color: #078663;
+  animation: life-word-pop .55s ease-in-out 2;
+  display: inline-block;
+}
+@keyframes life-word-pop { 50% { transform: scale(1.12); } }
+@media (prefers-reduced-motion: reduce) { .life-word-celebrate .write-meaning-char, #write-heading.life-word-celebrate span { animation: none; } }
 
 @media (max-width: 700px) {
   .chapter-grid,
