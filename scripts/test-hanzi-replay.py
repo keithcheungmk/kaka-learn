@@ -29,6 +29,40 @@ with sync_playwright() as p:
         assert page.locator('#btn-next-level').inner_text() == '返回字表'
         page.click('#btn-next-level')
         assert page.is_visible('#view-chars')
+        page.click('#back-link')
+        page.evaluate('() => { Math.random = () => 0; }')
+        page.click('#btn-life-writing')
+        assert page.is_visible('#view-write'), f'{name}: topic must start directly'
+        word = page.locator('#write-meaning .write-meaning-char').inner_text()
+        assert word == '洗手'
+        assert page.evaluate('() => window.KAKA_LIFE_WORD_CHARS.洗.strokes.length') == 9
+        assert page.evaluate('() => window.KAKA_LIFE_WORD_CHARS.拍.strokes.length') == 8
+        assert page.locator('#write-heading').inner_text() == word
+        page.wait_for_function("() => { const img = document.querySelector('#write-meaning img'); return img && img.complete && img.naturalWidth > 0; }")
+        if name == 'iPad橫' and os.environ.get('KAKA_TEST_SCREENSHOT'):
+            page.screenshot(path=os.environ['KAKA_TEST_SCREENSHOT'])
+        for step in range(6):
+            expected = word[step % 2]
+            assert page.evaluate('() => window.KakaHanziWrite.currentLevel().char') == expected
+            page.evaluate('() => window.KakaHanziWrite.onWriteSuccess()')
+            assert page.is_visible('#pass-overlay') == (step == 5), f'{name}: word completed too early at {step}'
+        assert page.locator('#pass-overlay button:visible').count() == 1
+        assert page.locator('#btn-next-level').inner_text() == '下一個詞語'
+        assert page.evaluate('(w) => window.KakaStorage.isKeyPassed("hanzi-write", "life-word-" + w)', word)
+        page.click('#btn-next-level')
+        assert page.is_visible('#view-write')
+        assert page.locator('#write-meaning .write-meaning-char').inner_text() == '拍手'
+        for _ in range(6):
+            page.evaluate('() => window.KakaHanziWrite.onWriteSuccess()')
+        stars = page.evaluate('() => window.KakaStorage.loadState().totalStars')
+        page.click('#btn-next-level')
+        assert page.locator('#write-meaning .write-meaning-char').inner_text() == word
+        for _ in range(6):
+            page.evaluate('() => window.KakaHanziWrite.onWriteSuccess()')
+        assert page.evaluate('() => window.KakaStorage.loadState().totalStars') == stars, f'{name}: replay awarded another star'
+        page.evaluate('() => { Math.random = () => 0.999; }')
+        page.click('#btn-next-level')
+        assert page.locator('#write-meaning .write-meaning-char').inner_text() == '大口'
         print(f'{name}: replay, saved progress, next and last character passed')
         context.close()
     browser.close()

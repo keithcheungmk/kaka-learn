@@ -879,6 +879,8 @@ body.is-replay-writing .write-progress.is-aux {
 .life-meaning-picture { flex: 1 1 100%; }
 .life-meaning-picture img { display: block; width: min(100%, 220px); height: clamp(100px, 20vh, 175px); object-fit: contain; margin: auto; border-radius: 14px; }
 .is-life-writing .write-meaning-char { font-size: clamp(2.1rem, 5vw, 3.5rem); }
+.life-sound-icon { font-size: 1.6rem; }
+.life-current-char { color: #ba6800; text-decoration: underline; text-underline-offset: .16em; }
 
 @media (max-width: 700px) {
   .chapter-grid,
