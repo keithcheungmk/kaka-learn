@@ -872,6 +872,14 @@ body.is-replay-writing .write-progress.is-aux {
   line-height: 1;
 }
 
+.is-life-writing .write-spread { grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr); }
+.is-life-writing .write-panel { grid-column: 1; grid-row: 1; }
+.is-life-writing .mizi-wrap { grid-column: 2; grid-row: 1; }
+.is-life-writing .write-meaning { flex-wrap: wrap; background: #f6fbff; }
+.life-meaning-picture { flex: 1 1 100%; }
+.life-meaning-picture img { display: block; width: min(100%, 220px); height: clamp(100px, 20vh, 175px); object-fit: contain; margin: auto; border-radius: 14px; }
+.is-life-writing .write-meaning-char { font-size: clamp(2.1rem, 5vw, 3.5rem); }
+
 @media (max-width: 700px) {
   .chapter-grid,
   .char-bank { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -882,6 +890,8 @@ body.is-replay-writing .write-progress.is-aux {
 }
 
 @media (max-width: 900px), (orientation: portrait) {
+  .is-life-writing .write-spread { grid-template-columns: minmax(0, 1fr); }
+  .is-life-writing .write-panel, .is-life-writing .mizi-wrap { grid-column: 1; grid-row: auto; }
   .write-spread { grid-template-columns: minmax(0, 1fr); }
   .write-panel {
     display: grid;
