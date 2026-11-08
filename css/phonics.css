@@ -541,7 +541,7 @@
 
 .english-hub-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(14px, 2.2vw, 26px);
   width: 100%;
   margin: clamp(20px, 3vw, 34px) auto 0;
@@ -830,10 +830,6 @@
   }
 }
 
-#screen-phonics-topics[data-english-track="sight"] .english-track-phonics,
-#screen-phonics-topics[data-english-track="phonics"] .english-track-sight {
-  display: none;
-}
 
 .english-track {
   width: min(100%, 1040px);

@@ -454,13 +454,13 @@ def walk(pg, url, shots: Path | None, tag: str):
             pg.wait_for_selector("#screen-english-hub.active #btn-english-story")
             pg.wait_for_function("""() => {
               const images = [...document.querySelectorAll('#screen-english-hub.active .english-hub-art')];
-              return images.length === 3 && images.every(image => image.complete && image.naturalWidth > 0);
+              return images.length === 2 && images.every(image => image.complete && image.naturalWidth > 0);
             }""")
             probe("英文學習入口")
             pg.click("#btn-english-words")
             pg.wait_for_selector('#screen-phonics-topics.active[data-english-track="sight"]')
-            if not pg.is_visible("#phonics-sight-grid") or pg.is_visible("#phonics-topic-grid"):
-                raise RuntimeError("Topic Words screen must show only its word-topic grid")
+            if not pg.is_visible("#phonics-sight-grid") or not pg.is_visible("#phonics-topic-grid"):
+                raise RuntimeError("Unified spelling screen must show both picture topics and phonics challenges")
             probe("主題詞語")
             # Each displayed picture-word topic must reach the new game, including nested collections.
             topic_ids = pg.locator('#phonics-sight-grid [data-topic-id]').evaluate_all('(els) => els.map(e => e.dataset.topicId)')
@@ -587,19 +587,15 @@ def walk(pg, url, shots: Path | None, tag: str):
             pg.click("#btn-emoji-spelling-review")
             pg.click("#btn-emoji-spelling-back-categories")
             pg.wait_for_selector('#screen-phonics-topics.active[data-english-track="sight"]')
-            pg.click("#btn-back-phonics-topics")
-            pg.wait_for_selector("#screen-english-hub.active")
-            pg.click("#btn-english-phonics")
-            pg.wait_for_selector('#screen-phonics-topics.active[data-english-track="phonics"]')
-            if pg.is_visible("#phonics-sight-grid") or not pg.is_visible("#phonics-topic-grid"):
-                raise RuntimeError("Phonics screen must show only its phonics-topic grid")
+            if not pg.is_visible("#phonics-sight-grid") or not pg.is_visible("#phonics-topic-grid"):
+                raise RuntimeError("Unified spelling screen must retain both topic grids")
             probe("Phonics 主題入口")
             phonics_ids = pg.locator('#phonics-topic-grid [data-topic-id]').evaluate_all('(els) => els.map(e => e.dataset.topicId)')
             for topic_id in [item for item in phonics_ids if item != 'letters_rev']:
                 pg.locator(f'#phonics-topic-grid [data-topic-id="{topic_id}"]').click()
                 pg.wait_for_selector('#screen-emoji-spelling.active #emoji-spelling-word-grid .emoji-spelling-word-card')
                 pg.click('#btn-emoji-spelling-back-categories')
-                pg.wait_for_selector('#screen-phonics-topics.active[data-english-track="phonics"]')
+                pg.wait_for_selector('#screen-phonics-topics.active')
             pg.click("#phonics-topic-grid .topic-card:first-child")
             pg.wait_for_timeout(500)
             probe("字母音清單")

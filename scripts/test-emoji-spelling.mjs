@@ -164,6 +164,11 @@ assert.match(app, /emoji-spelling-finish-title'\)\?\.focus/, '完成獎勵開啟
 assert.match(app, /event\.key !== 'Tab'[\s\S]*actions\[actions\.length - 1\]/, '完成獎勵對話框限制 Tab 焦點範圍');
 const referenceCss = fs.readFileSync(path.join(repo, 'css/emoji-spelling-reference.css'), 'utf8');
 const spellingCss = fs.readFileSync(path.join(repo, 'css/emoji-spelling.css'), 'utf8');
+const hub = markup.split('id="screen-english-hub"')[1].split('id="screen-phonics-topics"')[0];
+assert.equal((hub.match(/id="btn-english-words"/g) || []).length, 1, '圖像拼讀只有一個英文入口');
+assert.doesNotMatch(hub, /id="btn-english-phonics"/, '舊 phonics 分流入口已合併');
+assert.doesNotMatch(fs.readFileSync(path.join(repo, 'css/phonics.css'), 'utf8'), /data-english-track="sight"\] \.english-track-phonics/, '主題與聲音挑戰同頁可見');
+assert.ok(topics.some(topic => topic.id === 'cvc_at' && topic.words.some(word => word.word === 'cat')), '原 phonics cat 拼字主題仍可走圖像拼讀');
 const sightTrackMarkup = markup.match(/<div class="english-track english-track-sight">([\s\S]*?)<\/div>\s*<div class="english-track english-track-phonics">/)?.[1] || '';
 assert.doesNotMatch(sightTrackMarkup, /id="btn-open-emoji-spelling"/, '避免重複入口');
 const phonicsApp = fs.readFileSync(path.join(repo, 'js/phonics-app.js'), 'utf8');
