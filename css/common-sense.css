@@ -402,6 +402,7 @@ a.pack { text-decoration: none; }
   width: 100%;
   margin-top: 8px;
 }
+.voice-status { margin: 8px 0 0; color: #694019; font-size: 0.8rem; line-height: 1.4; }
 .speak-lang,
 .comic-speak {
   min-height: 44px;

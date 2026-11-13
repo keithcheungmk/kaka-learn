@@ -95,9 +95,10 @@ function pickMandarinVoice() {
   const voices = speechSynthesis.getVoices();
   if (!voices.length) return null;
 
-  const isCN = (v) => /zh[-_]CN/i.test(v.lang) || /cmn[-_]hans/i.test(v.lang);
-  const isTW = (v) => /zh[-_]TW/i.test(v.lang);
-  const isMandarin = (v) => isCN(v) || isTW(v) || /mandarin|putonghua|國語|普通话|汉语/i.test(v.name);
+  const isCantonese = (v) => /^(?:yue|zh[-_](?:HK|MO))(?:[-_]|$)/i.test(v.lang || '') || /cantonese|廣東話|广东话|粵語|粤语/i.test(v.name || '');
+  const isCN = (v) => !isCantonese(v) && /^(?:zh[-_](?:CN|Hans)|cmn)(?:[-_]|$)/i.test(v.lang || '');
+  const isTW = (v) => !isCantonese(v) && /^zh[-_](?:TW|Hant[-_]TW)(?:[-_]|$)/i.test(v.lang || '');
+  const isMandarin = (v) => !isCantonese(v) && (isCN(v) || isTW(v) || /mandarin|putonghua|國語|国语|普通話|普通话/i.test(v.name || ''));
 
   const prefer = [
     (v) => isCN(v) && isFemaleName(v),
@@ -229,6 +230,8 @@ function speakTerm(text, {
   pitch = 1.05,
   delayMs = 80,
   onEnd = null,
+  onUnavailable = null,
+  requireMandarinVoice = false,
   lang = 'zh-HK',
 } = {}) {
   const runEnd = (() => {
@@ -253,6 +256,7 @@ function speakTerm(text, {
     return;
   }
   if (!('speechSynthesis' in window)) {
+    if (requireMandarinVoice && typeof onUnavailable === 'function') onUnavailable();
     runEnd();
     return;
   }
@@ -275,6 +279,11 @@ function speakTerm(text, {
 
     const utter = new SpeechSynthesisUtterance(text);
     const picked = resolveVoiceForLang(lang);
+    if (requireMandarinVoice && !picked.voice) {
+      if (typeof onUnavailable === 'function') onUnavailable();
+      runEnd();
+      return;
+    }
     if (picked.voice) utter.voice = picked.voice;
     utter.lang = picked.lang;
     utter.rate = rate;
@@ -310,6 +319,11 @@ function speakTerm(text, {
         if (speechSynthesis.speaking || speechSynthesis.pending) return;
         const retry = new SpeechSynthesisUtterance(text);
         const retryPick = resolveVoiceForLang(lang);
+        if (requireMandarinVoice && !retryPick.voice) {
+          if (typeof onUnavailable === 'function') onUnavailable();
+          runEnd();
+          return;
+        }
         if (retryPick.voice) retry.voice = retryPick.voice;
         retry.lang = retryPick.lang;
         retry.rate = rate;

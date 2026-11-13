@@ -161,8 +161,9 @@
     return packItems(pack).filter((entry) => entry && entry.wall !== false);
   }
 
-  function speak(text, onEnd, lang) {
+  function speak(text, onEnd, lang, onUnavailable) {
     if (!speech.speakTerm) {
+      if (lang === 'zh-CN' && typeof onUnavailable === 'function') onUnavailable();
       if (typeof onEnd === 'function') onEnd();
       return;
     }
@@ -173,6 +174,8 @@
       delayMs: isTestFast() ? 0 : 80,
       lang: lang || 'zh-HK',
       onEnd,
+      onUnavailable,
+      requireMandarinVoice: lang === 'zh-CN',
     });
   }
 
@@ -530,18 +533,24 @@
       '<div class="speak-duo">' +
       `<button type="button" class="speak-lang speak-yue" aria-label="用廣東話讀「${entry.name}」">廣東話</button>` +
       `<button type="button" class="speak-lang speak-pth" aria-label="用普通話讀「${entry.pth || entry.name}」">普通話</button>` +
-      '</div>';
+      '</div><p class="voice-status" role="status" hidden></p>';
     card.querySelector('.speak-yue').addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
       card.classList.add('is-heard');
+      card.querySelector('.voice-status').hidden = true;
       speak(entry.name, null, 'zh-HK');
     });
     card.querySelector('.speak-pth').addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
       card.classList.add('is-heard');
-      speak(entry.pth || entry.name, null, 'zh-CN');
+      const status = card.querySelector('.voice-status');
+      status.hidden = true;
+      speak(entry.pth || entry.name, null, 'zh-CN', () => {
+        status.textContent = '暫時未能播放普通話，請檢查裝置的普通話語音設定。';
+        status.hidden = false;
+      });
     });
     return card;
   }
