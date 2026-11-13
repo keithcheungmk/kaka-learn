@@ -175,6 +175,7 @@
       lang: lang || 'zh-HK',
       onEnd,
       onUnavailable,
+      requireMandarinVoice: lang === 'zh-CN',
     });
   }
 

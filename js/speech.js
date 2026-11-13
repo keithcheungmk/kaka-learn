@@ -231,6 +231,7 @@ function speakTerm(text, {
   delayMs = 80,
   onEnd = null,
   onUnavailable = null,
+  requireMandarinVoice = false,
   lang = 'zh-HK',
 } = {}) {
   const runEnd = (() => {
@@ -255,7 +256,7 @@ function speakTerm(text, {
     return;
   }
   if (!('speechSynthesis' in window)) {
-    if ((lang === 'mandarin' || /^zh[-_]CN$/i.test(lang)) && typeof onUnavailable === 'function') onUnavailable();
+    if (requireMandarinVoice && typeof onUnavailable === 'function') onUnavailable();
     runEnd();
     return;
   }
@@ -278,7 +279,7 @@ function speakTerm(text, {
 
     const utter = new SpeechSynthesisUtterance(text);
     const picked = resolveVoiceForLang(lang);
-    if ((lang === 'mandarin' || /^zh[-_]CN$/i.test(lang)) && !picked.voice) {
+    if (requireMandarinVoice && !picked.voice) {
       if (typeof onUnavailable === 'function') onUnavailable();
       runEnd();
       return;
@@ -318,7 +319,7 @@ function speakTerm(text, {
         if (speechSynthesis.speaking || speechSynthesis.pending) return;
         const retry = new SpeechSynthesisUtterance(text);
         const retryPick = resolveVoiceForLang(lang);
-        if ((lang === 'mandarin' || /^zh[-_]CN$/i.test(lang)) && !retryPick.voice) {
+        if (requireMandarinVoice && !retryPick.voice) {
           if (typeof onUnavailable === 'function') onUnavailable();
           runEnd();
           return;
