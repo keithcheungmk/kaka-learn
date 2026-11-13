@@ -86,8 +86,29 @@ with sync_playwright() as p:
         assert page.evaluate('() => window.KakaStorage.loadState().totalStars') == stars, f'{name}: replay awarded another star'
         page.evaluate('() => { Math.random = () => 0.999; }')
         page.click('#btn-next-level')
-        assert page.locator('#write-meaning .write-meaning-char').inner_text() == '大口'
+        assert page.locator('#write-meaning .write-meaning-char').inner_text() == '刷牙'
         page.wait_for_function("() => !document.querySelector('#write-meaning').disabled")
+        assert page.locator('#star-pill').is_hidden()
+        page.click('#life-word-picker')
+        assert page.is_visible('#life-picker-dialog')
+        assert page.locator('.life-picker-item').count() == 6
+        page.wait_for_function("() => [...document.querySelectorAll('.life-picker-item img')].every(img => img.complete && img.naturalWidth > 0)")
+        assert page.evaluate('() => Object.fromEntries(Object.entries(window.KAKA_LIFE_WORD_CHARS).filter(([c]) => "吃飯喝水看書刷".includes(c)).map(([c,d]) => [c,d.strokes.length]))') == {'吃': 6, '飯': 12, '喝': 12, '水': 4, '看': 9, '書': 10, '刷': 8}
+        page.click('#life-picker-close')
+        assert page.is_hidden('#life-picker-dialog')
+        page.evaluate('() => window.KakaStorage.markTopicPassed("hanzi-write", "life-word-大口")')
+        before = page.evaluate('() => window.KakaStorage.loadState().totalStars')
+        page.click('#life-word-picker')
+        page.click('[data-word="吃飯"]')
+        page.wait_for_function("() => !document.querySelector('#write-meaning').disabled")
+        assert page.locator('#write-meaning .write-meaning-char').inner_text() == '吃飯'
+        for _ in range(6):
+            page.evaluate('() => window.KakaHanziWrite.onWriteSuccess()')
+            page.wait_for_function("() => !document.querySelector('#write-meaning').disabled")
+        assert page.evaluate('() => window.KakaStorage.loadState().totalStars') == before, f'{name}: renamed word awarded twice'
+        page.click('#btn-next-level')
+        page.wait_for_function("() => !document.querySelector('#write-meaning').disabled")
+        assert page.locator('#write-meaning .write-meaning-char').inner_text() != '吃飯'
         page.evaluate("() => { window.__pendingFeedback = null; window.KakaSpeech.speakTerm = (text, opts = {}) => { window.__pendingFeedback = opts.onEnd; }; }")
         page.evaluate('() => window.KakaHanziWrite.onWriteSuccess()')
         page.wait_for_function('() => typeof window.__pendingFeedback === "function"')

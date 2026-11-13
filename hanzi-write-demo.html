@@ -20,6 +20,7 @@
           <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M4 10v4h3l4 3V7L7 10H4Zm13.5 2a3.5 3.5 0 0 0-1.8-3.1v6.2A3.5 3.5 0 0 0 17.5 12Zm-1.8-7v1.6A7 7 0 0 1 20 12a7 7 0 0 1-4.3 6.4V20A8.6 8.6 0 0 0 21.5 12 8.6 8.6 0 0 0 15.7 5Z"/></svg>
         </button>
         <div id="star-pill" class="star-pill" aria-live="polite">★ 0</div>
+        <button type="button" id="life-word-picker" class="life-picker-button" hidden aria-haspopup="dialog" aria-controls="life-picker-dialog">🖼️ 揀詞語</button>
       </div>
     </header>
 
@@ -126,6 +127,13 @@
       <ol id="write-stamps" class="write-stamps" aria-label="寫字進度"></ol>
     </section>
   </main>
+
+  <div id="life-picker-dialog" class="life-picker-overlay" role="dialog" aria-modal="true" aria-labelledby="life-picker-title" hidden>
+    <div class="life-picker-card">
+      <div class="life-picker-head"><h2 id="life-picker-title">揀一個詞語</h2><button type="button" id="life-picker-close" aria-label="關閉詞語選單">✕</button></div>
+      <div id="life-picker-grid" class="life-picker-grid"></div>
+    </div>
+  </div>
 
   <div id="pass-overlay" class="pass-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="pass-title">
     <div class="pass-card">
