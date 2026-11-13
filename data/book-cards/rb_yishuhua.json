@@ -1,0 +1,7 @@
+{
+  "book": "rb_yishuhua", "series": "red_series", "allow_words": true,
+  "source": "2026-09-05 掃描書本認字卡（紅⑨《一束花》）",
+  "cards": [
+    {"char":"我"},{"char":"做"},{"char":"花兒"},{"char":"把"},{"char":"送給"},{"char":"一朵"},{"char":"媽媽"},{"char":"一束"},{"char":"做好"},{"char":"一"},{"char":"八"},{"char":"束"},{"char":"三"},{"char":"七"},{"char":"五"},{"char":"了"},{"char":"六"},{"char":"四"},{"char":"朵"},{"char":"兩"},{"char":"花"}
+  ]
+}

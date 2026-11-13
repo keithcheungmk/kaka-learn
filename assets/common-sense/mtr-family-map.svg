@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-label="卡卡一家港鐵示意地圖">
+  <rect width="800" height="480" rx="28" fill="#f4fbff"/>
+  <rect x="16" y="16" width="768" height="448" rx="22" fill="#eaf7ff" stroke="#d5e4f4" stroke-width="3"/>
+  <text x="400" y="52" text-anchor="middle" font-size="22" font-weight="700" fill="#18345f" font-family="Noto Sans HK, PingFang HK, sans-serif">卡卡嘅港鐵地圖（示意・非官方）</text>
+  <path d="M90 250 H410" stroke="#c45c2a" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M410 250 V390" stroke="#c45c2a" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M410 250 C 480 250 500 180 560 180" stroke="#7a4a12" stroke-width="12" fill="none"/>
+  <path d="M560 180 H710" stroke="#7a4a12" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M90 250 C 90 180 130 120 170 120" stroke="#9b7ed9" stroke-width="10" fill="none"/>
+  <circle cx="90" cy="250" r="28" fill="#e07a5f" stroke="#18345f" stroke-width="4"/><text x="90" y="258" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">1</text><circle cx="250" cy="250" r="28" fill="#2a8f6f" stroke="#18345f" stroke-width="4"/><text x="250" y="258" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">2</text><circle cx="410" cy="250" r="28" fill="#f0b429" stroke="#18345f" stroke-width="4"/><text x="410" y="258" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">3</text><circle cx="410" cy="390" r="28" fill="#3b6fd8" stroke="#18345f" stroke-width="4"/><text x="410" y="398" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">4</text><circle cx="560" cy="180" r="28" fill="#8aa0c0" stroke="#18345f" stroke-width="4"/><text x="560" y="188" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">5</text><circle cx="710" cy="110" r="28" fill="#f4a0c8" stroke="#18345f" stroke-width="4"/><text x="710" y="118" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">6</text><circle cx="170" cy="120" r="28" fill="#9b7ed9" stroke="#18345f" stroke-width="4"/><text x="170" y="128" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">7</text>
+  <text x="400" y="456" text-anchor="middle" font-size="13" fill="#527093" font-family="Noto Sans HK, PingFang HK, sans-serif">坐地鐵好方便　可以坐地鐵去迪士尼　示意用・非官方</text>
+</svg>

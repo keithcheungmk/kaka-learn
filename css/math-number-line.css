@@ -1,0 +1,201 @@
+/* 水星・數字關係數軸 */
+.math-nline {
+  --nline-accent: #f8d57a;
+  position: relative;
+  width: min(100%, 920px);
+  margin: 8px auto;
+  padding: 28px 12px 36px;
+  touch-action: none;
+  user-select: none;
+  outline: none;
+}
+
+.math-nline-track {
+  position: relative;
+  height: clamp(64px, 10vh, 84px);
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06)),
+    rgba(15, 23, 42, 0.55);
+  border: 2px solid rgba(248, 213, 122, 0.55);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.math-nline-band {
+  position: absolute;
+  top: 50%;
+  height: 42%;
+  transform: translateY(-50%);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.math-nline-band--move {
+  background: rgba(110, 231, 183, 0.45);
+}
+
+.math-nline-band--first {
+  background: rgba(125, 211, 252, 0.5);
+}
+
+.math-nline-band--second {
+  background: rgba(251, 191, 36, 0.55);
+}
+
+.math-nline-tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.math-nline-tick.is-glow {
+  background: #fbbf24;
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+}
+
+.math-nline-label {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 6px);
+  transform: translateX(-50%);
+  font-family: Fredoka, 'Noto Sans HK', sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 2.6vw, 1.2rem);
+  color: #f8fafc;
+  min-width: 1.4em;
+  text-align: center;
+}
+
+.math-nline-start {
+  position: absolute;
+  top: -10px;
+  transform: translate(-50%, -100%);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(125, 211, 252, 0.9);
+  color: #0f172a;
+  font-size: 0.75rem;
+  font-weight: 800;
+  pointer-events: none;
+}
+
+.math-nline-marker {
+  appearance: none;
+  position: absolute;
+  top: 50%;
+  width: clamp(44px, 8vw, 56px);
+  height: clamp(44px, 8vw, 56px);
+  transform: translate(-50%, -50%);
+  border: 3px solid #0f172a;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff7d6, #fbbf24 55%, #d97706);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  cursor: grab;
+  z-index: 2;
+}
+
+.math-nline-marker:active {
+  cursor: grabbing;
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.math-nline-choice {
+  appearance: none;
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  background: rgba(15, 23, 42, 0.55);
+  color: #fff;
+  font-family: Fredoka, 'Noto Sans HK', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.math-nline-choice.is-selected {
+  border-color: #fbbf24;
+  background: rgba(251, 191, 36, 0.28);
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.35);
+}
+
+#math-relations-distance-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin: 8px auto;
+  max-width: 520px;
+}
+
+#math-relations-distance-choices[hidden] {
+  display: none !important;
+}
+
+#screen-math-relations-learn.math-screen.active,
+#screen-math-relations-play.math-screen.active {
+  --math-planet: #b6bcc4;
+  display: flex;
+  flex-direction: column;
+}
+
+#screen-math-relations-learn .section-lead,
+#screen-math-relations-play .prompt-box p {
+  text-align: center;
+}
+
+.math-relations-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 8px 0 4px;
+}
+
+.math-relations-actions .btn {
+  min-height: 48px;
+  min-width: 120px;
+}
+
+.math-relations-explain {
+  margin: 8px auto 0;
+  max-width: 640px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(248, 213, 122, 0.35);
+  text-align: center;
+}
+
+.math-relations-explain[hidden] {
+  display: none !important;
+}
+
+.math-relations-learn-stage {
+  appearance: none;
+  display: block;
+  width: min(100%, 960px);
+  margin: 0 auto;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+}
+
+@media (max-width: 700px) {
+  .math-nline {
+    padding: 22px 4px 40px;
+  }
+  .math-nline-label {
+    font-size: 0.85rem;
+  }
+}
+
+@media (min-width: 701px) and (orientation: landscape) {
+  #screen-math-relations-play.math-screen.active,
+  #screen-math-relations-learn.math-screen.active {
+    overflow: hidden;
+  }
+}
