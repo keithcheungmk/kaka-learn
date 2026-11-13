@@ -12,7 +12,10 @@
   const LIFE_WORDS = [
     { word: '洗手', art: 'assets/character-words/actions/xi-shou.webp' },
     { word: '拍手', art: 'assets/character-words/actions/pai-shou.webp' },
-    { word: '大口', art: 'assets/character-words/actions/chi-fan.webp' },
+    { word: '吃飯', rewardKey: '大口', art: 'assets/character-words/actions/chi-fan.webp' },
+    { word: '喝水', art: 'assets/character-words/actions/he-shui.webp' },
+    { word: '看書', art: 'assets/character-words/actions/kan-shu.webp' },
+    { word: '刷牙', art: 'assets/character-words/actions/shua-ya.webp' },
   ];
   const TOPIC_ID = 'hanzi-write';
   const COIN_MODE = 'hanzi-write';
@@ -69,7 +72,7 @@
     lifeFeedbackBusy = busy;
     document.body.classList.toggle('is-life-feedback', busy);
     $('hanzi-target')?.setAttribute('aria-busy', String(busy));
-    ['btn-guide', 'btn-rewrite', 'write-meaning'].forEach((id) => { if ($(id)) $(id).disabled = busy; });
+    ['btn-guide', 'btn-rewrite', 'write-meaning', 'life-word-picker'].forEach((id) => { if ($(id)) $(id).disabled = busy; });
   }
 
   function cancelLifeFeedback() {
@@ -230,7 +233,8 @@
     else if (name === 'adventure') back.textContent = '返去';
     else back.textContent = '← 中文';
     if (speakBtn) speakBtn.hidden = name !== 'adventure';
-    if (starPill) starPill.hidden = name === 'adventure';
+    if (starPill) starPill.hidden = name === 'adventure' || (name === 'write' && Boolean(lifeWord));
+    $('life-word-picker').hidden = !(name === 'write' && lifeWord);
     if (brand) brand.hidden = name === 'adventure';
     refreshStars();
     const count = lifeWord ? lifeRounds : familyPerson ? familyCharIndex + (familySolved ? 1 : 0) : practiceCount;
@@ -808,9 +812,10 @@
     requestAnimationFrame(() => mountWriter());
   }
 
-  function openLifeWord() {
+  function openLifeWord(selectedWord = null) {
     cancelLifeFeedback();
-    const available = LIFE_WORDS.filter((entry) => entry.word !== lifeLastWord && Array.from(entry.word).every((char) => CHAR_DATA[char]));
+    $('life-picker-dialog').hidden = true;
+    const available = LIFE_WORDS.filter((entry) => (!selectedWord || entry.word === selectedWord) && (selectedWord || entry.word !== lifeLastWord) && Array.from(entry.word).every((char) => CHAR_DATA[char]));
     if (!available.length) { goAdventure(); return; }
     lifeWord = available[Math.floor(Math.random() * available.length)];
     lifeLastWord = lifeWord.word;
@@ -929,7 +934,7 @@
       renderWriteStamps(lifeRounds, { total: 3, pop: true });
       if (lifeRounds >= 3) {
         lifeFinished = true;
-        const key = `life-word-${lifeWord.word}`;
+        const key = `life-word-${lifeWord.rewardKey || lifeWord.word}`;
         const already = Boolean(storage.isKeyPassed?.(TOPIC_ID, key));
         if (!already) { storage.markTopicPassed?.(TOPIC_ID, key); storage.tryEarnStar?.(); }
         refreshStars();
@@ -1115,7 +1120,28 @@
   $('btn-profile-kaka').addEventListener('click', () => pickProfile('kaka'));
   $('btn-profile-heihei').addEventListener('click', () => pickProfile('heihei'));
   $('btn-family-names').addEventListener('click', goFamily);
-  $('btn-life-writing').addEventListener('click', openLifeWord);
+  $('btn-life-writing').addEventListener('click', () => openLifeWord());
+  $('life-word-picker').addEventListener('click', () => {
+    const grid = $('life-picker-grid');
+    grid.replaceChildren();
+    LIFE_WORDS.filter((entry) => Array.from(entry.word).every((char) => CHAR_DATA[char])).forEach((entry) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'life-picker-item';
+      button.dataset.word = entry.word;
+      button.setAttribute('aria-label', `寫「${entry.word}」`);
+      const picture = document.createElement('img');
+      picture.src = entry.art; picture.alt = '';
+      const label = document.createElement('span'); label.textContent = entry.word;
+      button.append(picture, label);
+      button.addEventListener('click', () => openLifeWord(entry.word));
+      grid.appendChild(button);
+    });
+    $('life-picker-dialog').hidden = false;
+    $('life-picker-close').focus();
+  });
+  $('life-picker-close').addEventListener('click', () => { $('life-picker-dialog').hidden = true; $('life-word-picker').focus(); });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !$('life-picker-dialog').hidden) { $('life-picker-dialog').hidden = true; $('life-word-picker').focus(); } });
   $('btn-family-speak').addEventListener('click', () => { if (familyPerson) speak(familyPerson.name); });
   $('btn-speak-chapters')?.addEventListener('click', () => {
     speech.unlockSpeech?.();

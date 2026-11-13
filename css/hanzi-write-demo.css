@@ -881,6 +881,17 @@ body.is-replay-writing .write-progress.is-aux {
 .is-life-writing .write-meaning-char { font-size: clamp(2.1rem, 5vw, 3.5rem); }
 .life-sound-icon { font-size: 1.6rem; }
 .life-current-char { color: #ba6800; text-decoration: underline; text-underline-offset: .16em; }
+.life-picker-button { min-height: 48px; padding: 8px 16px; border: 2px solid #9fc3e8; border-radius: 999px; background: #fff; color: #17365e; font: inherit; font-weight: 800; cursor: pointer; }
+.life-picker-overlay { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 16px; background: rgba(10, 29, 56, .65); }
+.life-picker-card { width: min(900px, 100%); max-height: min(90dvh, 800px); overflow: auto; padding: clamp(16px, 3vw, 28px); border-radius: 24px; background: #fff; color: #17365e; }
+.life-picker-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.life-picker-head h2 { margin: 0; }
+.life-picker-head button { min-width: 48px; min-height: 48px; border: 1px solid #9fc3e8; border-radius: 12px; background: #eff7ff; font-size: 1.4rem; }
+.life-picker-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+.life-picker-item { min-width: 0; min-height: 48px; padding: 8px; border: 2px solid #bdd6ee; border-radius: 16px; background: #f5faff; color: #17365e; font: inherit; font-weight: 800; cursor: pointer; }
+.life-picker-item img { display: block; width: 100%; height: clamp(80px, 16vh, 140px); object-fit: contain; border-radius: 10px; }
+.life-picker-item span { display: block; margin-top: 6px; }
+@media (max-width: 600px) { .life-picker-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .is-life-feedback #hanzi-target { pointer-events: none; }
 .life-word-celebrate .write-meaning-char, #write-heading.life-word-celebrate span {
   color: #078663;
