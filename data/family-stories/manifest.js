@@ -346,6 +346,193 @@ window.FAMILY_STORIES = [
     ]
   },
   {
+  "id": "zhuhai-two-day",
+  "title": "珠海兩日遊",
+  "place": "珠海",
+  "date": "2026-11-06",
+  "series": "卡卡日記",
+  "characters": [
+    "卡卡",
+    "禧禧",
+    "爸爸"
+  ],
+  "sourceBooks": [],
+  "bookWords": [],
+  "extensionWords": [
+    "珠海",
+    "旅程",
+    "浴場",
+    "洗澡",
+    "水果",
+    "雪糕",
+    "電子遊戲機",
+    "賽車",
+    "早餐",
+    "卡丁車",
+    "頭盔",
+    "保護裝備",
+    "駕駛",
+    "四、五圈",
+    "山姆超市",
+    "香港"
+  ],
+  "summary": "卡卡和禧禧到珠海遊玩，去浴場、玩遊戲和室內卡丁車，最後到山姆超市購物並返回香港。",
+  "pages": [
+    {
+      "sentence": "十一月六日，卡卡和禧禧一起到珠海遊玩，很期待旅程。",
+      "tiles": [
+        "十一月六日，卡卡和禧禧一起到珠海遊玩，很期待旅程。"
+      ],
+      "learn": [
+        "珠海",
+        "旅程"
+      ],
+      "distractors": [
+        "北京",
+        "雨傘"
+      ],
+      "focusWords": [
+        "珠海",
+        "旅程"
+      ],
+      "image": "assets/family-stories/scenes/zhuhai-two-day-p01.webp"
+    },
+    {
+      "sentence": "卡卡第一次到浴場，和爸爸一起洗澡，覺得很新鮮。",
+      "tiles": [
+        "卡卡第一次到浴場，和爸爸一起洗澡，覺得很新鮮。"
+      ],
+      "learn": [
+        "浴場",
+        "洗澡"
+      ],
+      "distractors": [
+        "農場",
+        "跑步"
+      ],
+      "focusWords": [
+        "浴場",
+        "洗澡"
+      ],
+      "image": "assets/family-stories/scenes/zhuhai-two-day-p02.webp"
+    },
+    {
+      "sentence": "浴場有很多水果和雪糕，大家吃得很開心。",
+      "tiles": [
+        "浴場有很多水果和雪糕，大家吃得很開心。"
+      ],
+      "learn": [
+        "水果",
+        "雪糕"
+      ],
+      "distractors": [
+        "書包",
+        "汽車"
+      ],
+      "focusWords": [
+        "水果",
+        "雪糕"
+      ],
+      "image": "assets/family-stories/scenes/zhuhai-two-day-p03.webp"
+    },
+    {
+      "sentence": "卡卡和禧禧玩電子遊戲機，也玩賽車遊戲。",
+      "tiles": [
+        "卡卡和禧禧玩電子遊戲機，也玩賽車遊戲。"
+      ],
+      "learn": [
+        "電子遊戲機",
+        "賽車"
+      ],
+      "distractors": [
+        "足球",
+        "鋼琴"
+      ],
+      "focusWords": [
+        "電子遊戲機",
+        "賽車"
+      ],
+      "image": "assets/family-stories/scenes/zhuhai-two-day-p04.webp"
+    },
+    {
+      "sentence": "十一月七日，大家吃過早餐後，去玩室內卡丁車。",
+      "tiles": [
+        "十一月七日，大家吃過早餐後，去玩室內卡丁車。"
+      ],
+      "learn": [
+        "早餐",
+        "卡丁車"
+      ],
+      "distractors": [
+        "晚餐",
+        "單車"
+      ],
+      "focusWords": [
+        "早餐",
+        "卡丁車"
+      ],
+      "image": "assets/family-stories/scenes/zhuhai-two-day-p05.webp"
+    },
+    {
+      "sentence": "卡卡戴上頭盔，穿好保護裝備。",
+      "tiles": [
+        "卡卡戴上頭盔，穿好保護裝備。"
+      ],
+      "learn": [
+        "頭盔",
+        "保護裝備"
+      ],
+      "distractors": [
+        "帽子",
+        "雨衣"
+      ],
+      "focusWords": [
+        "頭盔",
+        "保護裝備"
+      ],
+      "image": "assets/family-stories/scenes/zhuhai-two-day-p06.webp"
+    },
+    {
+      "sentence": "大家各自駕駛了四、五圈，卡卡和禧禧都表現很好。",
+      "tiles": [
+        "大家各自駕駛了四、五圈，卡卡和禧禧都表現很好。"
+      ],
+      "learn": [
+        "駕駛",
+        "四、五圈"
+      ],
+      "distractors": [
+        "游泳",
+        "一百圈"
+      ],
+      "focusWords": [
+        "駕駛",
+        "四、五圈"
+      ],
+      "image": "assets/family-stories/scenes/zhuhai-two-day-p07.webp"
+    },
+    {
+      "sentence": "大家到山姆超市購物，買完東西便返回香港。",
+      "tiles": [
+        "大家到山姆超市購物，買完東西便返回香港。"
+      ],
+      "learn": [
+        "山姆超市",
+        "香港"
+      ],
+      "distractors": [
+        "動物園",
+        "澳門"
+      ],
+      "focusWords": [
+        "山姆超市",
+        "香港"
+      ],
+      "image": "assets/family-stories/scenes/zhuhai-two-day-p08.webp"
+    }
+  ]
+},
+  {
     id:'kai-tak-cruise-terminal', title:'啟德郵輪碼頭的一天', place:'香港啟德郵輪碼頭', date:'2026-11-15', series:'卡卡日記',
     characters:['卡卡','禧禧','謙謙'], hidden:false, sourceBooks:[], bookWords:[],
     extensionWords:['今天','是','2026年11月15日','卡卡','第一次','來到','香港','啟德','郵輪碼頭','看見','一艘','很大的','郵輪','碼頭兩邊','望見','大海','禧禧','和','謙謙','在','碼頭上面','的','空中花園','玩','滑板車','互相追逐','玩得很開心','他們','一起','泡泡槍','泡泡','沒有','玩具','大家','把','分享','給他','再一起玩','鋪開','露營的','毯子','野餐','水果','餅乾','有','菠蘿','蘋果','橙','栗子','最後','走進','裏的','親子餐廳','餐廳','裏面','還有','室內遊樂場','遊樂場','吃完飯','回家','的路上','已經','在車上','睡着了'],

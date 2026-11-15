@@ -314,7 +314,7 @@
   function pageReadingText(page) {
     const sentence = String(page.sentence || '').replace(/[。！？]$/, '');
     const dialogue = String(page.dialogue?.text || '').replace(/^「|」$/g, '');
-    return `${sentence}。${page.dialogue?.speaker || ''}說：「${dialogue}」`;
+    return dialogue ? `${sentence}。${page.dialogue?.speaker || ''}說：「${dialogue}」` : `${sentence}。`;
   }
   function leaveReader() {
     stopSpeech();

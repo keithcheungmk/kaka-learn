@@ -56,8 +56,14 @@ for (const id of hiddenIds) {
   assert.ok(retired.hidden || retired.retired, `${id} 要 hidden/retired，唔好出現喺書架`);
 }
 const playable = context.window.FAMILY_STORIES.filter((item) => !item.hidden && !item.retired);
-assert.equal(playable.length, 21);
-assert.equal(context.window.FAMILY_STORIES.length, 25);
+assert.equal(playable.length, 22);
+assert.equal(context.window.FAMILY_STORIES.length, 26);
+const zhuhai = context.window.FAMILY_STORIES.find((item) => item.id === 'zhuhai-two-day');
+assert.ok(zhuhai, '珠海兩日遊要出現在書架');
+assert.equal(zhuhai.pages.length, 8);
+assert.ok(zhuhai.pages.every(page => page.focusWords.length === 2 && !page.dialogue));
+assert.match(zhuhai.pages[5].sentence, /頭盔.*保護裝備/);
+assert.match(zhuhai.pages[7].sentence, /山姆超市.*香港/);
 const farm = context.window.FAMILY_STORIES.find((item) => item.id === 'zhongshan-happy-farm');
 assert.ok(farm, '要有中山開心農莊');
 assert.equal(farm.pages.length, 8);

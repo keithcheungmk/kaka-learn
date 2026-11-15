@@ -56,9 +56,9 @@ if oral_hits('我們的雨停了。'):
 if oral_hits('這是系統關係。'):
     errors.append('oral-scanner: must not flag 係 inside 關係／系統')
 HIDDEN_IDS={'park-kite','red-balloon','zhuhai-aquarium','chimelong-safari'}
-if len(stories)!=25: errors.append(f'Expected 25 stories in catalog, found {len(stories)}')
+if len(stories)!=26: errors.append(f'Expected 26 stories in catalog, found {len(stories)}')
 playable=[story for story in stories if not story.get('hidden') and not story.get('retired')]
-if len(playable)!=21: errors.append(f'Expected 21 playable stories, found {len(playable)}')
+if len(playable)!=22: errors.append(f'Expected 22 playable stories, found {len(playable)}')
 for hid in sorted(HIDDEN_IDS):
     story=next((item for item in stories if item.get('id')==hid), None)
     if not story: errors.append(f'missing retired story {hid}')
@@ -129,8 +129,8 @@ for story in stories:
         if not page.get('sentence'): errors.append(f'{page_label}: missing sentence')
         elif not re.search(r'[。！？]$',page['sentence']) or re.search(r'[。！？].+[。！？]',page['sentence']): errors.append(f'{page_label}: story text must be one complete sentence')
         speech=page.get('dialogue',{})
-        if speech.get('speaker') not in story.get('characters',[]): errors.append(f'{page_label}: dialogue speaker must be a listed story character')
-        if not speech.get('text') or not re.search(r'[。！？]$',speech.get('text','')): errors.append(f'{page_label}: dialogue must be a complete punctuated sentence')
+        if speech and speech.get('speaker') not in story.get('characters',[]): errors.append(f'{page_label}: dialogue speaker must be a listed story character')
+        if speech and (not speech.get('text') or not re.search(r'[。！？]$',speech.get('text',''))): errors.append(f'{page_label}: dialogue must be a complete punctuated sentence')
         scan_oral(page_label, 'sentence', page.get('sentence', ''))
         scan_oral(page_label, 'tiles', page.get('tiles', []))
         scan_oral(page_label, 'learn', page.get('learn', []))
