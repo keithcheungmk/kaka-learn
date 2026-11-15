@@ -56,8 +56,8 @@ for (const id of hiddenIds) {
   assert.ok(retired.hidden || retired.retired, `${id} 要 hidden/retired，唔好出現喺書架`);
 }
 const playable = context.window.FAMILY_STORIES.filter((item) => !item.hidden && !item.retired);
-assert.equal(playable.length, 20);
-assert.equal(context.window.FAMILY_STORIES.length, 24);
+assert.equal(playable.length, 21);
+assert.equal(context.window.FAMILY_STORIES.length, 25);
 const farm = context.window.FAMILY_STORIES.find((item) => item.id === 'zhongshan-happy-farm');
 assert.ok(farm, '要有中山開心農莊');
 assert.equal(farm.pages.length, 8);
@@ -161,6 +161,41 @@ assert.match(samZoo.pages[7].sentence, /認真儲幣幣/);
 assert.equal(samZoo.pages[7].dialogue.text, '超市慢慢揀。溫柔餵動物。認真儲幣幣。');
 assert.equal(samZoo.hidden, undefined);
 assert.equal(samZoo.warmupPairs, undefined);
+const kaiTak = context.window.FAMILY_STORIES.find((item) => item.id === 'kai-tak-cruise-terminal');
+assert.ok(kaiTak, '要有啟德郵輪碼頭的一天');
+assert.equal(kaiTak.title, '啟德郵輪碼頭的一天');
+assert.equal(kaiTak.place, '香港啟德郵輪碼頭');
+assert.equal(kaiTak.date, '2026-11-15');
+assert.equal(kaiTak.series, '卡卡日記');
+assert.equal(kaiTak.hidden, false);
+assert.equal(kaiTak.pages.length, 6);
+assert.equal(JSON.stringify(kaiTak.characters), JSON.stringify(['卡卡', '禧禧', '謙謙']));
+assert.ok(playable.some((item) => item.id === 'kai-tak-cruise-terminal'), '新日記要出現喺書架');
+assert.equal(playable.at(-1).id, 'kai-tak-cruise-terminal');
+assert.match(kaiTak.summary, /2026年11月15日/);
+assert.match(kaiTak.pages[0].sentence, /2026年11月15日/);
+assert.match(kaiTak.pages[0].sentence, /郵輪碼頭/);
+assert.equal(JSON.stringify(kaiTak.pages[0].focusWords), JSON.stringify(['郵輪碼頭', '大海']));
+assert.equal(kaiTak.pages[0].dialogue.text, '郵輪好大啊！');
+assert.equal(JSON.stringify(kaiTak.pages[1].focusWords), JSON.stringify(['空中花園', '滑板車']));
+assert.equal(kaiTak.pages[1].dialogue.speaker, '禧禧');
+assert.equal(kaiTak.pages[1].dialogue.text, '我們一起玩滑板車吧！');
+assert.equal(JSON.stringify(kaiTak.pages[2].focusWords), JSON.stringify(['泡泡', '分享']));
+assert.match(kaiTak.pages[2].sentence, /分享/);
+assert.equal(kaiTak.pages[2].dialogue.text, '我們一起分享玩具吧！');
+assert.equal(JSON.stringify(kaiTak.pages[3].focusWords), JSON.stringify(['野餐', '水果']));
+assert.match(kaiTak.pages[3].sentence, /菠蘿/);
+assert.equal(kaiTak.pages[3].dialogue.speaker, '謙謙');
+assert.equal(JSON.stringify(kaiTak.pages[4].focusWords), JSON.stringify(['餐廳', '遊樂場']));
+assert.equal(kaiTak.pages[4].dialogue.speaker, '禧禧');
+assert.equal(JSON.stringify(kaiTak.pages[5].focusWords), JSON.stringify(['回家', '睡着了']));
+assert.match(kaiTak.pages[5].sentence, /睡着了/);
+assert.doesNotMatch(JSON.stringify(kaiTak), /眠著|傑叔叔|爸爸|媽媽|你哋|冇|喺|睇咩|玩得好開心/);
+assert.equal(kaiTak.warmupPairs, undefined);
+for (const [index, page] of kaiTak.pages.entries()) {
+  assert.equal(page.tiles.join('').replace(/[，。！？、\s]/g, ''), page.sentence.replace(/[，。！？、\s]/g, ''), `第 ${index + 1} 頁詞磚要重組句子`);
+  assert.ok(fs.existsSync(path.join(root, page.image)), `要有第 ${index + 1} 頁插圖`);
+}
 
 const oralRe = /[哋唔嚟咗喺冇睇攞俾啲咁喇啦喎㗎咩嘢嘅哦]|係咪|你哋|我哋|佢哋|掛住|揸車|沖涼|好味|落樓|食雪糕/;
 for (const item of context.window.FAMILY_STORIES) {

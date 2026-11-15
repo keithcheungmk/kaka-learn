@@ -56,9 +56,9 @@ if oral_hits('我們的雨停了。'):
 if oral_hits('這是系統關係。'):
     errors.append('oral-scanner: must not flag 係 inside 關係／系統')
 HIDDEN_IDS={'park-kite','red-balloon','zhuhai-aquarium','chimelong-safari'}
-if len(stories)!=24: errors.append(f'Expected 24 stories in catalog, found {len(stories)}')
+if len(stories)!=25: errors.append(f'Expected 25 stories in catalog, found {len(stories)}')
 playable=[story for story in stories if not story.get('hidden') and not story.get('retired')]
-if len(playable)!=20: errors.append(f'Expected 20 playable stories, found {len(playable)}')
+if len(playable)!=21: errors.append(f'Expected 21 playable stories, found {len(playable)}')
 for hid in sorted(HIDDEN_IDS):
     story=next((item for item in stories if item.get('id')==hid), None)
     if not story: errors.append(f'missing retired story {hid}')
