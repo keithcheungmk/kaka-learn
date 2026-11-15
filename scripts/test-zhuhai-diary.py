@@ -5,7 +5,12 @@ with sync_playwright() as p:
  b=p.chromium.launch(headless=True,args=['--mute-audio'])
  for name,w,h in [('iPad portrait',834,1210),('iPad landscape',1210,834),('iPhone',430,932)]:
   page=b.new_page(viewport={'width':w,'height':h},has_touch=True)
-  page.add_init_script("delete window.speechSynthesis; delete window.SpeechSynthesisUtterance;")
+  page.add_init_script("""() => {
+    delete window.speechSynthesis; delete window.SpeechSynthesisUtterance;
+    Object.defineProperty(window, 'AudioContext', {value: undefined, configurable: false});
+    Object.defineProperty(window, 'webkitAudioContext', {value: undefined, configurable: false});
+    Object.defineProperty(HTMLMediaElement.prototype, 'play', {value: function() { return Promise.resolve(); }, configurable: false});
+  }""")
   page.goto(URL,wait_until='domcontentloaded')
   # Deep link enters reader automatically.
   page.wait_for_selector('#scene-image',state='visible')
