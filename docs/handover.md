@@ -127,6 +127,14 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-11-15 · Cursor（《啟德郵輪碼頭的一天》卡卡日記）
+
+- 中文家庭日記新增六頁〈啟德郵輪碼頭的一天〉（`kai-tak-cruise-terminal`，卡卡日記 2026-11-15）：卡卡、禧禧、謙謙到香港啟德郵輪碼頭，空中花園玩滑板車、分享泡泡、野餐，再到親子餐廳和室內遊樂場，回家路上卡卡睡着了。
+- 謙謙為新朋友角色；三視圖 `assets/family-stories/characters/qianqian-turnaround.webp`。第 1 頁重點詞用「郵輪碼頭／大海」，因為「郵輪」同「郵輪碼頭」會重疊、引擎唔准兩個空白。
+- 目錄 25 篇／172 頁，可玩 21 本。試玩：https://keithcheungmk.github.io/kaka-learn/family-storybook.html?story=kai-tak-cruise-terminal
+
+
+
 ### 2026-10-30 · ChatGPT／Codex（面試四格聽故事＋分段複述）
 
 - B1–B3 三篇現有故事都改成入關先粵語聽完整示範、畫面固定「第一／然後／後來／最後」四詞；可重複跟提示練習，完成兩次後才開放自主複述。提示練習不需家長逐項驗收或派星；自主複述沿用原有本機錄音、四格自評、家長確認及原星／幣邏輯。無咪裝置可現場講並按「我講完喇」。

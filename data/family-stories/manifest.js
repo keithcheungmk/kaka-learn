@@ -344,5 +344,19 @@ window.FAMILY_STORIES = [
       {"sentence":"卡卡餵小馬吃青菜葉，又戴着手套，和媽媽輕輕捧起小雞。","tiles":["卡卡","餵","小馬","吃","青菜葉","，","又","戴着","手套","，","和","媽媽","輕輕","捧起","小雞","。"],"learn":["小馬","小雞"],"distractors":["大象","小貓"],"focusWords":["小馬","小雞"],"dialogue":{"speaker":"媽媽","text":"小雞要輕輕捧。"},"image":"assets/family-stories/scenes/sam-supermarket-zoo-p07.webp"},
       {"sentence":"卡卡今天學會超市慢慢揀、溫柔餵動物、認真儲幣幣。","tiles":["卡卡","今天","學會","超市","慢慢揀","、","溫柔","餵","動物","、","認真","儲幣幣","。"],"learn":["慢慢揀","溫柔","儲幣幣"],"distractors":["匆匆忙忙","用力"],"focusWords":["慢慢揀","溫柔","儲幣幣"],"dialogue":{"speaker":"卡卡","text":"超市慢慢揀。溫柔餵動物。認真儲幣幣。"},"image":"assets/family-stories/scenes/sam-supermarket-zoo-p08.webp"}
     ]
+  },
+  {
+    id:'kai-tak-cruise-terminal', title:'啟德郵輪碼頭的一天', place:'香港啟德郵輪碼頭', date:'2026-11-15', series:'卡卡日記',
+    characters:['卡卡','禧禧','謙謙'], hidden:false, sourceBooks:[], bookWords:[],
+    extensionWords:['今天','是','2026年11月15日','卡卡','第一次','來到','香港','啟德','郵輪碼頭','看見','一艘','很大的','郵輪','碼頭兩邊','望見','大海','禧禧','和','謙謙','在','碼頭上面','的','空中花園','玩','滑板車','互相追逐','玩得很開心','他們','一起','泡泡槍','泡泡','沒有','玩具','大家','把','分享','給他','再一起玩','鋪開','露營的','毯子','野餐','水果','餅乾','有','菠蘿','蘋果','橙','栗子','最後','走進','裏的','親子餐廳','餐廳','裏面','還有','室內遊樂場','遊樂場','吃完飯','回家','的路上','已經','在車上','睡着了'],
+    summary:'2026年11月15日卡卡日記：卡卡第一次來到香港啟德郵輪碼頭，看見一艘很大的郵輪，碼頭兩邊望見大海。卡卡、禧禧和謙謙在空中花園玩滑板車、分享泡泡玩具、野餐，再走進親子餐廳和室內遊樂場；回家路上卡卡睡着了。',
+    pages:[
+      {"sentence":"今天是2026年11月15日，卡卡第一次來到香港啟德郵輪碼頭，看見一艘很大的郵輪，碼頭兩邊望見大海。","tiles":["今天","是","2026年11月15日","，","卡卡","第一次","來到","香港","啟德","郵輪碼頭","，","看見","一艘","很大的","郵輪","，","碼頭兩邊","望見","大海","。"],"learn":["郵輪碼頭","大海"],"distractors":["機場","山谷"],"focusWords":["郵輪碼頭","大海"],"dialogue":{"speaker":"卡卡","text":"郵輪好大啊！"},"image":"assets/family-stories/scenes/kai-tak-cruise-terminal-p01.webp"},
+      {"sentence":"卡卡、禧禧和謙謙在碼頭上面的空中花園玩滑板車，互相追逐，玩得很開心。","tiles":["卡卡","、","禧禧","和","謙謙","在","碼頭上面","的","空中花園","玩","滑板車","，","互相追逐","，","玩得很開心","。"],"learn":["空中花園","滑板車"],"distractors":["游泳池","單車"],"focusWords":["空中花園","滑板車"],"dialogue":{"speaker":"禧禧","text":"我們一起玩滑板車吧！"},"image":"assets/family-stories/scenes/kai-tak-cruise-terminal-p02.webp"},
+      {"sentence":"他們一起玩泡泡槍，謙謙沒有玩具，大家把玩具分享給他，再一起玩。","tiles":["他們","一起","玩","泡泡槍","，","謙謙","沒有","玩具","，","大家","把","玩具","分享","給他","，","再一起玩","。"],"learn":["泡泡","分享"],"distractors":["搶走","獨玩"],"focusWords":["泡泡","分享"],"dialogue":{"speaker":"卡卡","text":"我們一起分享玩具吧！"},"image":"assets/family-stories/scenes/kai-tak-cruise-terminal-p03.webp"},
+      {"sentence":"他們在空中花園鋪開露營的毯子野餐，一起分享水果和餅乾，有菠蘿、蘋果、橙和栗子。","tiles":["他們","在","空中花園","鋪開","露營的","毯子","野餐","，","一起","分享","水果","和","餅乾","，","有","菠蘿","、","蘋果","、","橙","和","栗子","。"],"learn":["野餐","水果"],"distractors":["功課","蔬菜"],"focusWords":["野餐","水果"],"dialogue":{"speaker":"謙謙","text":"這些水果真好吃！"},"image":"assets/family-stories/scenes/kai-tak-cruise-terminal-p04.webp"},
+      {"sentence":"最後大家走進郵輪碼頭裏的親子餐廳，裏面還有室內遊樂場。","tiles":["最後","大家","走進","郵輪碼頭","裏的","親子餐廳","，","裏面","還有","室內遊樂場","。"],"learn":["餐廳","遊樂場"],"distractors":["圖書館","球場"],"focusWords":["餐廳","遊樂場"],"dialogue":{"speaker":"禧禧","text":"這裏還可以玩遊樂場！"},"image":"assets/family-stories/scenes/kai-tak-cruise-terminal-p05.webp"},
+      {"sentence":"吃完飯回家的路上，卡卡已經在車上睡着了。","tiles":["吃完飯","回家","的路上","，","卡卡","已經","在車上","睡着了","。"],"learn":["回家","睡着了"],"distractors":["上學","醒來"],"focusWords":["回家","睡着了"],"dialogue":{"speaker":"禧禧","text":"卡卡睡着了，真甜。"},"image":"assets/family-stories/scenes/kai-tak-cruise-terminal-p06.webp"}
+    ]
   }
 ];
