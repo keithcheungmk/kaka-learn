@@ -133,7 +133,7 @@ window.FAMILY_STORIES = [
     ]
   },
   {
-    id:'paper-bridge', title:'紙橋挑戰', place:'幼稚園課室', characters:['卡卡','禧禧','老師'], sourceBooks:[], bookWords:[],
+    id:'paper-bridge', hidden:true, title:'紙橋挑戰', place:'幼稚園課室', characters:['卡卡','禧禧','老師'], sourceBooks:[], bookWords:[],
     extensionWords:['老師','請','大家','用','紙','積木','做','一座橋','放在','兩張桌子','中間','紙橋','倒下','一起','商量','摺好','站穩','承托','三塊積木','完成','分享'],
     summary:'卡卡和禧禧用紙和積木做橋，從倒下的第一次嘗試中學會商量和改進。',
     pages:[
@@ -146,7 +146,7 @@ window.FAMILY_STORIES = [
     ]
   },
   {
-    id:'bus-visit', title:'坐巴士去探望婆婆', place:'巴士站和婆婆家', characters:['卡卡','禧禧','傑叔叔','站務員','婆婆'], sourceBooks:[], bookWords:[],
+    id:'bus-visit', hidden:true, title:'坐巴士去探望婆婆', place:'巴士站和婆婆家', characters:['卡卡','禧禧','傑叔叔','站務員','婆婆'], sourceBooks:[], bookWords:[],
     extensionWords:['巴士','探望','站牌','方向','兩個','停下來','看清楚','車頭號碼','不對','提醒','等一等','站務員','幫忙','正確','路線','到站','排隊','下車','門口','迎接','回家'],
     summary:'卡卡和禧禧跟傑叔叔坐巴士探望婆婆，學會看站牌和跟着大人確認路線。',
     pages:[
@@ -159,7 +159,7 @@ window.FAMILY_STORIES = [
     ]
   },
   {
-    id:'power-outage', title:'停電的晚上', place:'家中客廳', characters:['卡卡','禧禧','傑叔叔','媽媽'], sourceBooks:[], bookWords:[],
+    id:'power-outage', hidden:true, title:'停電的晚上', place:'家中客廳', characters:['卡卡','禧禧','傑叔叔','媽媽'], sourceBooks:[], bookWords:[],
     extensionWords:['晚飯後','客廳','燈','突然','熄了','房間','變黑了','害怕','陪着','一起','找','大人','手電筒','照亮','安心','坐在','等待','電力','恢復','電燈','亮了','放回','原位'],
     summary:'停電的晚上，卡卡和禧禧找大人，跟家人安全地等待電力恢復。',
     pages:[
@@ -172,7 +172,7 @@ window.FAMILY_STORIES = [
     ]
   },
   {
-    id:'hongkong-disney', title:'香港迪士尼的一天', place:'香港迪士尼樂園', characters:['卡卡','禧禧','虹姑姑','蛙蛙','傑叔叔','耀叔叔'], sourceBooks:[], bookWords:[],
+    id:'hongkong-disney', hidden:true, title:'香港迪士尼的一天', place:'香港迪士尼樂園', characters:['卡卡','禧禧','虹姑姑','蛙蛙','傑叔叔','耀叔叔'], sourceBooks:[], bookWords:[],
     extensionWords:["城堡","地圖","排隊","紀念品","巡遊","合照","樂園","來到","前行","找到","路旁","一張","照片","選了","送給"],
     summary:'兩家人看地圖排隊找城堡，欣賞巡遊，拍合照，再選紀念品留下照片。',
     pages:[
@@ -354,7 +354,8 @@ window.FAMILY_STORIES = [
   "characters": [
     "卡卡",
     "禧禧",
-    "爸爸"
+    "爸爸",
+    "耀叔叔"
   ],
   "sourceBooks": [],
   "bookWords": [],
@@ -374,9 +375,12 @@ window.FAMILY_STORIES = [
     "駕駛",
     "四、五圈",
     "山姆超市",
-    "香港"
+    "香港",
+    "禧禧",
+    "爸爸",
+    "耀叔叔"
   ],
-  "summary": "卡卡和禧禧到珠海遊玩，去浴場、玩遊戲和室內卡丁車，最後到山姆超市購物並返回香港。",
+  "summary": "卡卡、禧禧和爸爸、耀叔叔到珠海遊玩，一起去浴場、玩遊戲和室內卡丁車，最後到山姆超市購物並返回香港。",
   "pages": [
     {
       "sentence": "十一月六日，卡卡和禧禧一起到珠海遊玩，很期待旅程。",
@@ -398,9 +402,9 @@ window.FAMILY_STORIES = [
       "image": "assets/family-stories/scenes/zhuhai-two-day-p01.webp"
     },
     {
-      "sentence": "卡卡第一次到浴場，和爸爸一起洗澡，覺得很新鮮。",
+      "sentence": "卡卡第一次到浴場，和禧禧、爸爸、耀叔叔一起洗澡，覺得很新鮮。",
       "tiles": [
-        "卡卡第一次到浴場，和爸爸一起洗澡，覺得很新鮮。"
+        "卡卡第一次到浴場，和禧禧、爸爸、耀叔叔一起洗澡，覺得很新鮮。"
       ],
       "learn": [
         "浴場",
@@ -474,9 +478,9 @@ window.FAMILY_STORIES = [
       "image": "assets/family-stories/scenes/zhuhai-two-day-p05.webp"
     },
     {
-      "sentence": "卡卡戴上頭盔，穿好保護裝備。",
+      "sentence": "卡卡和禧禧都戴上頭盔，穿好保護裝備。",
       "tiles": [
-        "卡卡戴上頭盔，穿好保護裝備。"
+        "卡卡和禧禧都戴上頭盔，穿好保護裝備。"
       ],
       "learn": [
         "頭盔",

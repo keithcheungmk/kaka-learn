@@ -56,7 +56,7 @@ for (const id of hiddenIds) {
   assert.ok(retired.hidden || retired.retired, `${id} 要 hidden/retired，唔好出現喺書架`);
 }
 const playable = context.window.FAMILY_STORIES.filter((item) => !item.hidden && !item.retired);
-assert.equal(playable.length, 22);
+assert.equal(playable.length, 18);
 assert.equal(context.window.FAMILY_STORIES.length, 26);
 const zhuhai = context.window.FAMILY_STORIES.find((item) => item.id === 'zhuhai-two-day');
 assert.ok(zhuhai, '珠海兩日遊要出現在書架');
