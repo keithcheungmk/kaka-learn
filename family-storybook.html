@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#101c49">
   <title>卡卡和禧禧一齊玩｜故事閱讀與詞語遊戲</title>
-  <link rel="stylesheet" href="css/family-storybook.css?v=kai-tak-20261115">
+  <link rel="stylesheet" href="css/family-storybook.css?v=parent-review-20261116">
   <link rel="stylesheet" href="css/celebrate-finish.css?v=20261018-fullmoon-qa">
 </head>
 <body>
@@ -16,9 +16,14 @@
         <span id="brand-kicker">故事閱讀・詞語遊戲</span>
         <h1 id="brand-title">卡卡和禧禧一齊玩</h1>
       </div>
+      <button id="parent-review-entry" class="parent-review-entry" type="button">家長檢視</button>
       <div class="star-total" id="star-pill" aria-live="polite">⭐ <strong id="star-total">0</strong> / <span id="story-total">18</span></div>
       <div id="page-count" class="page-count">第 1 / 6 頁</div>
     </header>
+    <div id="parent-review-banner" class="parent-review-banner hidden" role="status">
+      <p>家長檢視中，只看書圖，不會計算星星</p>
+      <button id="exit-parent-review" class="parent-review-exit" type="button">離開檢視</button>
+    </div>
     <section id="library" class="view" aria-labelledby="library-heading">
       <div class="intro">
         <p class="eyebrow">聽故事・讀句子・玩生字</p>
@@ -84,11 +89,27 @@
         </div>
       </section>
     </section>
+    <section id="parent-preview" class="view hidden" aria-labelledby="parent-preview-heading">
+      <p class="panel-label">家長檢視</p>
+      <h2 id="parent-preview-heading">全書預覽</h2>
+      <nav id="parent-page-jump" class="parent-page-jump" aria-label="跳至頁數"></nav>
+      <div id="parent-pages" class="parent-pages"></div>
+    </section>
   </main>
+  <div id="parent-confirm" class="parent-confirm hidden" role="dialog" aria-modal="true" aria-labelledby="parent-confirm-heading">
+    <div class="parent-confirm-sheet">
+      <h2 id="parent-confirm-heading">家長檢視</h2>
+      <p>快速查看全部插圖和文字，不用聽語音、不用答題。</p>
+      <div class="parent-confirm-actions">
+        <button id="parent-confirm-start" class="parent-confirm-start" type="button">開始檢視</button>
+        <button id="parent-confirm-cancel" class="parent-confirm-cancel" type="button">返回</button>
+      </div>
+    </div>
+  </div>
   <script src="js/speech.js?v=xiyu-deploy-refresh"></script>
   <script src="js/celebrate-finish.js?v=20261018-fullmoon-qa"></script>
   <script src="js/nav-back.js?v=20261011-one-level"></script>
   <script src="data/family-stories/manifest.js?v=kai-tak-20261115"></script>
-  <script src="js/family-storybook.js?v=kai-tak-20261115"></script
+  <script src="js/family-storybook.js?v=parent-review-20261116"></script>
 </body>
 </html>

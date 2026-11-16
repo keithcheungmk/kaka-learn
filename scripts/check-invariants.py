@@ -1228,6 +1228,25 @@ def check_family_storybook_entry() -> None:
         fail("family-storybook", "下一頁要喺填詞欄附近，iPad 唔使捲先見到")
     if ".storybook-shell.is-reading" not in story_css or "align-items: start" not in story_css:
         fail("family-storybook", "閱讀頁要收緊詞語池／句子／下一頁間距")
+    if 'id="parent-review-entry"' not in story_html or "家長檢視" not in story_html:
+        fail("family-storybook", "書目頂欄要有安靜的「家長檢視」入口")
+    if "快速查看全部插圖和文字，不用聽語音、不用答題。" not in story_html:
+        fail("family-storybook", "家長檢視確認層要說明只看書圖、不用聽語音和答題")
+    if "開始檢視" not in story_html or 'id="parent-confirm-cancel"' not in story_html:
+        fail("family-storybook", "家長檢視確認層要有「開始檢視」和「返回」")
+    if "家長檢視中，只看書圖，不會計算星星" not in story_html or "離開檢視" not in story_html:
+        fail("family-storybook", "家長檢視要有常駐橫幅和「離開檢視」")
+    if 'id="parent-preview"' not in story_html or "parent-page-jump" not in story_html:
+        fail("family-storybook", "家長檢視要有全書直向預覽和跳頁")
+    if "get('view') === 'parent'" not in story_js or "showParentPreview" not in story_js:
+        fail("family-storybook", "家長檢視要支援 ?view=parent 深連結，並跳過小朋友答題")
+    if "檢視全書" not in story_js or "故事／點這裏開始" not in story_js:
+        fail("family-storybook", "家長模式下書卡改「檢視全書」，小朋友路徑保留原 CTA")
+    if "if (parentMode) return" not in story_js:
+        fail("family-storybook", "家長檢視不可寫 finishedKey 或派星")
+    parent_css = re.search(r"\.parent-page-frame img\s*\{[^}]+\}", story_css)
+    if not parent_css or "object-fit: contain" not in parent_css.group(0) or "object-fit: cover" in parent_css.group(0):
+        fail("family-storybook", "家長檢視插圖要用 object-fit:contain 顯示全幅，唔好裁圖")
     node = shutil.which("node")
     if node:
         result = subprocess.run([node, "scripts/test-family-storybook.mjs"], capture_output=True, text=True)
