@@ -13,6 +13,7 @@ assert.deepEqual(output.pages[0].tiles, page.tiles);
 assert.deepEqual(output.pages[0].learn, page.focusWords);
 assert.deepEqual(output.pages[0].focusWords, page.focusWords);
 assert.deepEqual(output.extensionWords, ['卡卡','看書']);
+assert.deepEqual(output.sourceBooks, []);
 assert.deepEqual(story.pages[0].tiles, page.tiles);
 result = run({...story,pages:story.pages.map(p=>({...p,tiles:undefined}))});
 assert.deepEqual(JSON.parse(result.stdout).pages[0].tiles, [page.sentence]);
@@ -21,6 +22,7 @@ for (const bad of [
   {...page, focusWords:['看書','卡卡']},
   {...page, focusWords:['卡卡','不見']},
   {...page, distractors:['卡卡','畫畫']},
+  {...page, distractors:['跑步','跑步']},
   {...page, sentence:'卡卡和禧禧看書'},
   {...page, focusWords:['卡卡']},
 ]) {

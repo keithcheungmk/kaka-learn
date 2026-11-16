@@ -25,6 +25,7 @@ function draftStory(input) {
     const focusWords = requireStrings(page.focusWords, `${label}: focusWords`, 1);
     if (focusWords.length !== 2) throw new Error(`${label}: supply exactly two focusWords`);
     const distractors = requireStrings(page.distractors, `${label}: distractors`, 2);
+    if (new Set(distractors).size !== distractors.length) throw new Error(`${label}: distractors must be distinct`);
     if (new Set(focusWords).size !== focusWords.length || focusWords.some(word => distractors.includes(word))) throw new Error(`${label}: words must be distinct from distractors`);
     let previousEnd = 0;
     for (const word of focusWords) {
