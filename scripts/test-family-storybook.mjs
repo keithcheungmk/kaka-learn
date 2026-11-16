@@ -204,6 +204,41 @@ for (const [index, page] of kaiTak.pages.entries()) {
 }
 
 const oralRe = /[哋唔嚟咗喺冇睇攞俾啲咁喇啦喎㗎咩嘢嘅哦]|係咪|你哋|我哋|佢哋|掛住|揸車|沖涼|好味|落樓|食雪糕/;
+assert.match(html, /id="parent-review-entry"/);
+assert.match(html, />家長檢視</);
+assert.match(html, /快速查看全部插圖和文字，不用聽語音、不用答題。/);
+assert.match(html, />開始檢視</);
+assert.match(html, /id="parent-confirm-cancel"/);
+assert.match(html, /家長檢視中，只看書圖，不會計算星星/);
+assert.match(html, />離開檢視</);
+assert.match(html, /id="parent-preview"/);
+assert.match(html, /id="parent-page-jump"/);
+assert.match(js, /故事／點這裏開始/);
+assert.match(js, /檢視全書/);
+assert.match(js, /get\('view'\) === 'parent'/);
+assert.match(js, /if \(parentMode\) \{\s*showParentPreview\(\);\s*return;\s*\}/);
+assert.match(js, /function completeStory\(\) \{\s*if \(parentMode\) return;/);
+assert.match(js, /本頁學詞：/);
+assert.match(js, /speakStory\(pageReadingText\(current\.pages\[index\]\)\)/);
+assert.match(js, /leaveParentPreview\(\)/);
+assert.match(js, /exitParentMode/);
+assert.doesNotMatch(js, /localStorage\.setItem\([^)]*parent/);
+assert.match(css, /\.parent-page-frame img[\s\S]*object-fit:\s*contain/);
+assert.doesNotMatch(css, /\.parent-page-frame img[\s\S]*object-fit:\s*cover/);
+assert.match(css, /\.parent-review-entry[\s\S]*background:\s*none/);
+const parentBlock = js.slice(js.indexOf('function parentViewRequested'), js.indexOf('speech.warmVoices'));
+assert.match(parentBlock, /function renderParentPreview/);
+assert.doesNotMatch(parentBlock, /finishedKey|completeStory|earnCoin|tryEarnStar|localStorage\.setItem/);
+assert.doesNotMatch(parentBlock, /unlockPage:\s*true/);
+assert.doesNotMatch(parentBlock, /beginWarmup|renderWordTask|showReader\(/);
+assert.doesNotMatch(read('family-storybook-en.html'), /家長檢視|parent-preview|view=parent/);
+assert.doesNotMatch(read('js/family-storybook-en.js'), /家長檢視|parentMode|view=parent|檢視全書/);
+const parentUi = [
+  html.match(/id="parent-review-banner"[\s\S]*?<\/div>/)?.[0] || '',
+  html.match(/id="parent-confirm"[\s\S]*?<\/div>\s*<\/div>/)?.[0] || '',
+].join('\n');
+assert.match(parentUi, /快速查看全部插圖和文字/);
+assert.doesNotMatch(parentUi, oralRe);
 for (const item of context.window.FAMILY_STORIES) {
   const blob = [
     item.title,

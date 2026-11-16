@@ -21,7 +21,7 @@
   const speech = window.KakaSpeech || {};
   const libraryTitle = '卡卡和禧禧一齊玩';
   const heldUtters = [];
-  let current = null, pageIndex = 0, pageStates = [], activeUtterance = null, activeSpeechFallback = null, activeSpeechRetry = null, activeSlots = [], activeSlot = 0, warmupState = null, warmupMissTimer = null;
+  let current = null, pageIndex = 0, pageStates = [], activeUtterance = null, activeSpeechFallback = null, activeSpeechRetry = null, activeSlots = [], activeSlot = 0, warmupState = null, warmupMissTimer = null, parentMode = false;
   const safeRead = key => { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } };
   const storyHeading = story => {
     const place = String(story?.place || '').trim();
@@ -35,15 +35,21 @@
     return pairs.length ? pairs : null;
   };
   const setReadingChrome = (on, mode = on ? 'reading' : 'library') => {
-    const view = mode === 'warmup' ? 'warmup' : on ? 'reading' : 'library';
+    const view = mode === 'warmup' ? 'warmup' : mode === 'parent' ? 'parent' : on ? 'reading' : 'library';
     $('story-topbar').classList.toggle('is-reading', view === 'reading');
     $('story-topbar').classList.toggle('is-warmup', view === 'warmup');
+    $('story-topbar').classList.toggle('is-parent-preview', view === 'parent');
     document.querySelector('.storybook-shell')?.classList.toggle('is-reading', view === 'reading');
     document.querySelector('.storybook-shell')?.classList.toggle('is-warmup', view === 'warmup');
+    document.querySelector('.storybook-shell')?.classList.toggle('is-parent-preview', view === 'parent');
     $('brand-title').textContent = view !== 'library' && current ? storyHeading(current) : libraryTitle;
     const back = $('back-chinese');
     if (back) {
       if (view === 'warmup') {
+        back.textContent = '← 書目';
+        back.setAttribute('href', '#library');
+        back.setAttribute('aria-label', '返回故事書目');
+      } else if (view === 'parent') {
         back.textContent = '← 書目';
         back.setAttribute('href', '#library');
         back.setAttribute('aria-label', '返回故事書目');
@@ -62,6 +68,7 @@
       }
     }
     if (view === 'warmup') $('page-count').textContent = '圖字熱身';
+    if (view === 'parent' && current) $('page-count').textContent = `全書 ${current.pages.length} 頁`;
   };
   const isMuted = () => Boolean(window.KakaStorage?.loadState?.()?.muted);
   function speakPlacedChip(word, correct) {
@@ -95,7 +102,9 @@
         ? story.bookWords.slice(0,4)
         : story.pages.flatMap(page => page.focusWords).slice(0,4);
       const wordLabel = hasBookWords ? '讀本詞' : '學習詞語';
-      return `<button class="story-card" type="button" data-story="${story.id}" aria-label="開始故事：${story.title}"><img class="story-cover" src="${image}" alt="${story.title}插圖" onerror="this.src='assets/family-stories/characters/family-height-lineup.webp'"><span><strong class="story-title">${String(index+1).padStart(2,'0')}・${story.title} ${done?'<span class="done-tag">★</span>':''}</strong><p>${story.place} · ${story.pages.length}頁</p><p>${story.summary}</p><p class="card-words">${wordLabel}：${displayedWords.join('、')}</p>${story.artNote?`<p class="art-note">${story.artNote}</p>`:''}<p class="card-cta">故事／點這裏開始</p></span></button>`;
+      const cta = parentMode ? '檢視全書' : '故事／點這裏開始';
+      const aria = parentMode ? `檢視全書：${story.title}` : `開始故事：${story.title}`;
+      return `<button class="story-card" type="button" data-story="${story.id}" aria-label="${aria}"><img class="story-cover" src="${image}" alt="${story.title}插圖" onerror="this.src='assets/family-stories/characters/family-height-lineup.webp'"><span><strong class="story-title">${String(index+1).padStart(2,'0')}・${story.title} ${done?'<span class="done-tag">★</span>':''}</strong><p>${story.place} · ${story.pages.length}頁</p><p>${story.summary}</p><p class="card-words">${wordLabel}：${displayedWords.join('、')}</p>${story.artNote?`<p class="art-note">${story.artNote}</p>`:''}<p class="card-cta">${cta}</p></span></button>`;
     }).join('');
     const castGrid = $('cast-grid');
     if (castGrid) castGrid.innerHTML = cast.map(([name,height,traits,file]) => `<article class="cast-card"><img src="assets/family-stories/characters/${file}" alt="${name}角色三視圖"><div><strong>${name}</strong><p>${height} · ${traits}</p></div></article>`).join('');
@@ -105,9 +114,14 @@
   function openStory(id) {
     current = allStories.find(story => story.id === id);
     if (!current || !isPlayable(current)) return;
+    if (parentMode) {
+      showParentPreview();
+      return;
+    }
     pageIndex = 0;
     pageStates = current.pages.map(page => ({ unlocked: false, solved: false, answers: Array(page.focusWords.length).fill('') }));
     library.classList.add('hidden');
+    $('parent-preview')?.classList.add('hidden');
     $('completion').classList.add('hidden');
     if (storyWarmupPairs(current)) {
       beginWarmup({ reset: true });
@@ -119,6 +133,7 @@
   }
   function showReader() {
     $('warmup')?.classList.add('hidden');
+    $('parent-preview')?.classList.add('hidden');
     library.classList.add('hidden');
     reader.classList.remove('hidden');
     setReadingChrome(true, 'reading');
@@ -147,6 +162,7 @@
     warmupMissTimer = null;
     library.classList.add('hidden');
     reader.classList.add('hidden');
+    $('parent-preview')?.classList.add('hidden');
     $('warmup').classList.remove('hidden');
     setWarmupFeedback('', '');
     setReadingChrome(true, 'warmup');
@@ -343,6 +359,10 @@
   $('replay-story').addEventListener('click', replayCurrentStory);
   $('back-chinese').addEventListener('click', event => {
     event.preventDefault();
+    if ($('story-topbar').classList.contains('is-parent-preview')) {
+      leaveParentPreview();
+      return;
+    }
     if ($('story-topbar').classList.contains('is-warmup')) {
       leaveWarmup();
       return;
@@ -616,6 +636,7 @@
     }
   });
   function completeStory() {
+    if (parentMode) return;
     const completed = safeRead(finishedKey);
     if (!completed.includes(current.id)) {
       completed.push(current.id);
@@ -640,9 +661,128 @@
     const hash = String(location.hash || '').replace(/^#/, '');
     return hash && hash !== 'library' ? hash : '';
   }
+  function parentViewRequested() {
+    try {
+      return new URLSearchParams(location.search).get('view') === 'parent';
+    } catch {
+      return false;
+    }
+  }
+  function hideParentConfirm() {
+    $('parent-confirm')?.classList.add('hidden');
+  }
+  function showParentConfirm() {
+    $('parent-confirm')?.classList.remove('hidden');
+    $('parent-confirm-start')?.focus();
+  }
+  function applyParentMode(on) {
+    parentMode = Boolean(on);
+    document.querySelector('.storybook-shell')?.classList.toggle('is-parent-mode', parentMode);
+    $('parent-review-banner')?.classList.toggle('hidden', !parentMode);
+    hideParentConfirm();
+  }
+  function enterParentMode() {
+    applyParentMode(true);
+    if ($('story-topbar')?.classList.contains('is-parent-preview')) return;
+    renderLibrary();
+  }
+  function leaveParentPreview() {
+    stopSpeech();
+    current = null;
+    $('parent-preview')?.classList.add('hidden');
+    library.classList.remove('hidden');
+    reader.classList.add('hidden');
+    $('warmup')?.classList.add('hidden');
+    setReadingChrome(false, 'library');
+    renderLibrary();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function exitParentMode() {
+    const previewing = $('story-topbar')?.classList.contains('is-parent-preview');
+    applyParentMode(false);
+    if (previewing) leaveParentPreview();
+    else renderLibrary();
+  }
+  function showParentPreview() {
+    if (!current || !isPlayable(current)) return;
+    stopSpeech();
+    window.KakaCelebrate?.hide?.();
+    library.classList.add('hidden');
+    $('warmup')?.classList.add('hidden');
+    reader.classList.add('hidden');
+    $('completion')?.classList.add('hidden');
+    $('parent-preview')?.classList.remove('hidden');
+    setReadingChrome(true, 'parent');
+    renderParentPreview();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  function renderParentPreview() {
+    if (!current) return;
+    const jump = $('parent-page-jump');
+    const pages = $('parent-pages');
+    if (!jump || !pages) return;
+    jump.replaceChildren();
+    pages.replaceChildren();
+    current.pages.forEach((page, index) => {
+      const pageNo = index + 1;
+      const jumpLink = document.createElement('button');
+      jumpLink.type = 'button';
+      jumpLink.className = 'parent-jump-link';
+      jumpLink.textContent = `第 ${pageNo} 頁`;
+      jumpLink.addEventListener('click', () => {
+        document.getElementById(`parent-page-${pageNo}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      jump.append(jumpLink);
+      const article = document.createElement('article');
+      article.className = 'parent-page';
+      article.id = `parent-page-${pageNo}`;
+      const head = document.createElement('header');
+      head.className = 'parent-page-head';
+      const num = document.createElement('p');
+      num.className = 'parent-page-num';
+      num.textContent = `第 ${pageNo} / ${current.pages.length} 頁`;
+      const speakBtn = document.createElement('button');
+      speakBtn.type = 'button';
+      speakBtn.className = 'parent-speak';
+      speakBtn.textContent = '🔊 朗讀';
+      speakBtn.setAttribute('aria-label', `朗讀第 ${pageNo} 頁`);
+      speakBtn.addEventListener('click', () => {
+        if (!current) return;
+        speakStory(pageReadingText(current.pages[index]));
+      });
+      head.append(num, speakBtn);
+      const frame = document.createElement('figure');
+      frame.className = 'parent-page-frame';
+      const image = document.createElement('img');
+      image.src = `assets/family-stories/scenes/${current.id}-p${String(pageNo).padStart(2, '0')}.webp`;
+      image.alt = `${current.title}，第 ${pageNo} 頁`;
+      image.width = 900;
+      image.height = 600;
+      image.addEventListener('error', () => {
+        image.src = 'assets/family-stories/characters/family-height-lineup.webp';
+      });
+      frame.append(image);
+      const reading = document.createElement('p');
+      reading.className = 'parent-page-reading';
+      reading.textContent = pageReadingText(page);
+      const words = document.createElement('p');
+      words.className = 'parent-page-words';
+      words.textContent = `本頁學詞：${(page.focusWords || []).join('、')}`;
+      article.append(head, frame, reading, words);
+      pages.append(article);
+    });
+  }
+  $('parent-review-entry')?.addEventListener('click', showParentConfirm);
+  $('parent-confirm-start')?.addEventListener('click', enterParentMode);
+  $('parent-confirm-cancel')?.addEventListener('click', hideParentConfirm);
+  $('parent-confirm')?.addEventListener('click', event => {
+    if (event.target === $('parent-confirm')) hideParentConfirm();
+  });
+  $('exit-parent-review')?.addEventListener('click', exitParentMode);
   speech.warmVoices?.();
   setReadingChrome(false);
   renderLibrary();
+  if (parentViewRequested()) enterParentMode();
   const bootStory = storyIdFromLocation();
   if (bootStory) openStory(bootStory);
 })();
