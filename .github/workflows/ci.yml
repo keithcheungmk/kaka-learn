@@ -24,6 +24,7 @@ jobs:
         run: |
           python3 scripts/check-invariants.py
           python3 scripts/test-layout-scope.py
+          node scripts/test-draft-family-story.mjs
 
       - name: storage.js 單元測試
         run: node scripts/test-storage.mjs
