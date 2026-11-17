@@ -1,7 +1,8 @@
-import {sounds, groups, groupNames, buildQuestions} from './pth-content.js?v=20261004';
+import {sounds, groups, groupNames, buildQuestions} from './pth-content.js?v=20261117-pth-pinyin';
 import {wordAudioClips} from './pth-word-audio.js?v=20261004';
 import {createProgress} from './pth-progress.js?v=20261004';
 import {createAudioController} from './pth-audio.js?v=20261004b';
+import {escapeHtml, markInitialHtml} from './pth-pinyin.js?v=20261117-pth-pinyin';
 
 const $ = selector => document.querySelector(selector);
 const guestMemory = new Map();
@@ -15,16 +16,14 @@ let activeGroup = 'bpmf', tab = 'learn', question, round, selected = null;
 let heard = false, locked = false, next = false, generation = 0, animation;
 const audio = createAudioController($('#sharedAudio'), $('#wordAudioStatus'), () => document.querySelectorAll('video'), busy => {
   if (tab !== 'quiz' || !question) return;
-  const blocked = busy || locked || next || (question.type === 'listen' && !heard);
+  const needsListen = question.type === 'listen' && !heard;
+  const blocked = busy || locked || next || needsListen;
   document.querySelectorAll('.option').forEach(button => button.disabled = blocked);
   $('#submitAnswer').disabled = busy || locked || (!next && !selected);
 });
 const currentSounds = () => sounds.filter(sound => sound.group === activeGroup);
-const escape = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function pinyin(word) {
-  const n = word.initial.length;
-  return `<span class="pinyin-initial">${escape(word.pinyin.slice(0, n))}</span>${escape(word.pinyin.slice(n))}`;
-}
+const pinyin = word => markInitialHtml(word.pinyin, word.initial);
+
 function playWord(word, ended) {
   const clip = wordAudioClips[word.audioKey];
   if (!clip) { audio.message('這個詞語未有普通話錄音，請先練習其他詞語。'); return; }
@@ -59,7 +58,9 @@ function renderLearn() {
   $('#lessonGrid').innerHTML = currentSounds().map(sound => `<article class="lesson">
     <h3>${sound.name}</h3><p>${sound.tip}</p><div class="example-list">${sound.examples.map(word => `<div class="example-item">
       <span class="example-emoji" role="img" aria-label="${word.imageLabel}">${word.emoji}</span>
-      <strong>${word.word}</strong><span class="example-pinyin" lang="zh-Latn">${pinyin(word)}</span>
+      <strong>${word.word}</strong>
+      <span class="pinyin-chip" lang="zh-Latn">${pinyin(word)}</span>
+      <span class="pinyin-auto-badge">自動標拼音</span>
       <button class="word-audio" data-word-audio="${word.audioKey}" aria-label="播放${word.word}普通話">🔊</button>
     </div>`).join('')}</div>
     <video controls playsinline preload="none" poster="assets/pth/initials/posters/${sound.id}.jpg" src="${sound.video}" aria-label="${sound.name} 教材口形影片"></video>
@@ -83,8 +84,16 @@ function showTab(id) {
 }
 function selectAnswer(answer) {
   if (audio.busy || locked || next || (question.type === 'listen' && !heard)) return;
-  selected = answer; $('#answerSlot').textContent = answer; $('#answerSlot').classList.add('filled');
-  document.querySelectorAll('.option').forEach(button => { button.classList.toggle('selected', button.dataset.answer === answer); button.setAttribute('aria-pressed', String(button.dataset.answer === answer)); });
+  selected = answer;
+  const slot = $('#answerSlot');
+  if (slot) {
+    slot.textContent = answer;
+    slot.classList.add('filled');
+  }
+  document.querySelectorAll('.option').forEach(button => {
+    button.classList.toggle('selected', button.dataset.answer === answer);
+    button.setAttribute('aria-pressed', String(button.dataset.answer === answer));
+  });
   $('#submitAnswer').disabled = false;
 }
 function renderQuestion() {
@@ -93,28 +102,61 @@ function renderQuestion() {
   question = buildQuestions(activeGroup, round.seed)[round.index];
   selected = null; heard = false; next = false; locked = false;
   $('#questionNo').textContent = round.index + 1; $('#questionPrompt').textContent = question.prompt;
-  $('#feedback').textContent = question.type === 'listen' ? '先按「聽一聽」，聽完再選。' : '選一個字母，再提交答案。';
   $('#feedback').className = 'feedback'; $('#submitAnswer').textContent = '提交答案'; $('#submitAnswer').disabled = true;
   const word = question.word;
-  $('#quizMedia').innerHTML = `<div class="word-challenge">
-    <div class="challenge-emoji" role="img" aria-label="${question.type === 'listen' ? '聆聽詞語' : word.imageLabel}">${question.type === 'listen' ? '👂' : word.emoji}</div>
-    <strong id="quizWord">${question.type === 'listen' ? '聽一聽這個詞語' : word.word}</strong>
-    <span id="quizPinyin" class="example-pinyin" hidden></span>
-    <button class="audio-btn" id="challengeAudio">🔊 聽一聽</button></div>
-    <div class="answer-prompt">第一個${activeGroup === 'yw' ? '拼音字母' : '聲母'}<span id="answerSlot" class="answer-slot">選字母</span></div>`;
+  const isPinyin = question.type === 'pinyin';
+  const isListen = question.type === 'listen';
+
+  if (isPinyin) {
+    $('#feedback').textContent = '揀啱嘅拼音，再提交答案。';
+    $('#quizMedia').innerHTML = `<div class="word-challenge">
+      <div class="challenge-emoji" role="img" aria-label="${word.imageLabel}">${word.emoji}</div>
+      <strong id="quizWord">${word.word}</strong>
+      <span id="quizPinyin" class="pinyin-chip" hidden lang="zh-Latn"></span>
+      <span class="pinyin-quiz-note">用自動拼音出題 · 對答案</span>
+      <button class="audio-btn" id="challengeAudio">🔊 聽一聽</button>
+    </div>`;
+    $('#options').innerHTML = question.options.map(option =>
+      `<button class="option option-pinyin" data-answer="${escapeHtml(option)}" aria-pressed="false"><span class="pinyin-chip option-chip" lang="zh-Latn">${markInitialHtml(option)}</span></button>`
+    ).join('');
+  } else {
+    $('#feedback').textContent = isListen ? '先按「聽一聽」，聽完再選。' : '選一個字母，再提交答案。';
+    $('#quizMedia').innerHTML = `<div class="word-challenge">
+      <div class="challenge-emoji" role="img" aria-label="${isListen ? '聆聽詞語' : word.imageLabel}">${isListen ? '👂' : word.emoji}</div>
+      <strong id="quizWord">${isListen ? '聽一聽這個詞語' : word.word}</strong>
+      <span id="quizPinyin" class="pinyin-chip" hidden lang="zh-Latn"></span>
+      <button class="audio-btn" id="challengeAudio">🔊 聽一聽</button></div>
+      <div class="answer-prompt">第一個${activeGroup === 'yw' ? '拼音字母' : '聲母'}<span id="answerSlot" class="answer-slot">選字母</span></div>`;
+    $('#options').innerHTML = currentSounds().map(sound =>
+      `<button class="option" data-answer="${sound.id}" aria-pressed="false" draggable="true" ${isListen ? 'disabled' : ''}>${sound.name}</button>`
+    ).join('');
+  }
+
   const request = generation;
   $('#challengeAudio').onclick = () => playWord(word, () => {
     if (request !== generation || next || locked) return;
-    heard = true; document.querySelectorAll('.option').forEach(button => button.disabled = false);
-    $('#feedback').textContent = '聽到了！選一個字母，再提交。';
+    heard = true;
+    document.querySelectorAll('.option').forEach(button => button.disabled = false);
+    if (!isPinyin) $('#feedback').textContent = '聽到了！選一個字母，再提交。';
   });
-  $('#options').innerHTML = currentSounds().map(sound => `<button class="option" data-answer="${sound.id}" aria-pressed="false" draggable="true" ${question.type === 'listen' ? 'disabled' : ''}>${sound.name}</button>`).join('');
   document.querySelectorAll('.option').forEach(button => {
     button.onclick = () => selectAnswer(button.dataset.answer);
-    button.ondragstart = event => { if (button.disabled || locked || next) { event.preventDefault(); return; } event.dataTransfer.setData('text/plain', button.dataset.answer); };
+    if (!isPinyin) {
+      button.ondragstart = event => {
+        if (button.disabled || locked || next) { event.preventDefault(); return; }
+        event.dataTransfer.setData('text/plain', button.dataset.answer);
+      };
+    }
   });
-  $('#answerSlot').ondragover = event => event.preventDefault();
-  $('#answerSlot').ondrop = event => { event.preventDefault(); const answer = event.dataTransfer.getData('text/plain'); if (currentSounds().some(s => s.id === answer)) selectAnswer(answer); };
+  const slot = $('#answerSlot');
+  if (slot) {
+    slot.ondragover = event => event.preventDefault();
+    slot.ondrop = event => {
+      event.preventDefault();
+      const answer = event.dataTransfer.getData('text/plain');
+      if (currentSounds().some(s => s.id === answer)) selectAnswer(answer);
+    };
+  }
 }
 async function fireStar(index) {
   const target = $('#miniStars').children[index - 1].getBoundingClientRect();
@@ -136,9 +178,21 @@ $('#submitAnswer').onclick = async () => {
   locked = true; audio.stop(); const request = generation;
   if (!progress.accept(activeGroup, round.index, round.seed)) { showTab('quiz'); return; }
   $('#submitAnswer').disabled = true; document.querySelectorAll('.option').forEach(button => button.disabled = true);
-  $('#quizWord').textContent = question.word.word; $('#quizPinyin').innerHTML = pinyin(question.word); $('#quizPinyin').hidden = false;
-  $('.challenge-emoji').textContent = question.word.emoji;
-  $('#feedback').textContent = '答對了！卡卡射出一粒星！'; $('#feedback').className = 'feedback good';
+  $('#quizWord').textContent = question.word.word;
+  const quizPinyin = $('#quizPinyin');
+  if (quizPinyin) {
+    quizPinyin.innerHTML = pinyin(question.word);
+    quizPinyin.hidden = false;
+  }
+  const emoji = $('.challenge-emoji');
+  if (emoji) emoji.textContent = question.word.emoji;
+  document.querySelectorAll('.option').forEach(button => {
+    button.classList.toggle('correct', button.dataset.answer === question.answer);
+  });
+  $('#feedback').textContent = question.type === 'pinyin'
+    ? `答啱喇！${question.word.pinyin}`
+    : '答對了！卡卡射出一粒星！';
+  $('#feedback').className = 'feedback good';
   await fireStar(round.index + 1); if (request !== generation) return;
   renderStars(); renderGroups(); locked = false; next = true;
   $('#submitAnswer').textContent = round.index === 9 ? '查看星星記錄 →' : '下一題 →'; $('#submitAnswer').disabled = false;
