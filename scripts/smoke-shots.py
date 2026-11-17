@@ -991,10 +991,15 @@ def walk(pg, url, shots: Path | None, tag: str):
     ch1_label = (pg.text_content("[data-chapter-id='ch1'] .chapter-label") or "").strip()
     if ch1_label != "第1章":
         raise RuntimeError(f"Chapter tile must show 「第1章」, got {ch1_label!r}")
-    if "即將開放" in (pg.text_content("#chapter-grid") or ""):
-        raise RuntimeError("Locked chapter tiles must not repeat 即將開放")
-    if not pg.query_selector("#chapter-grid .chapter-card.is-locked .chapter-lock"):
-        raise RuntimeError("Locked chapters must show a padlock overlay")
+    chapter_grid = pg.text_content("#chapter-grid") or ""
+    if "即將開放" in chapter_grid:
+        raise RuntimeError("Ten chapters are open; tiles must not say 即將開放")
+    if pg.query_selector("#chapter-grid .chapter-card.is-locked"):
+        raise RuntimeError("Ten chapters are open; no locked chapter tiles")
+    if "土地同自然物" not in chapter_grid or "自然同天氣" not in chapter_grid:
+        raise RuntimeError("Chapter picker must show nature／land chapter titles")
+    if not pg.query_selector("[data-chapter-id='ch10']"):
+        raise RuntimeError("Chapter picker must list chapter 10")
     if pg.query_selector("#btn-start-adventure"):
         raise RuntimeError("Chapter picker must not keep 由第一章開始")
     if not pg.query_selector("#btn-speak-chapters"):
