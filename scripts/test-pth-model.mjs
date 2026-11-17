@@ -37,12 +37,20 @@ for (const group of groups) {
     assert.equal(questions.length, 10, group);
     assert.equal(new Set(questions.map(q => q.id)).size, 10, group);
     assert.deepEqual(questions, buildQuestions(group, seed), 'Seed must reproduce a resumed round');
-    assert.deepEqual(new Set(questions.map(q => q.type)), new Set(['listen', 'picture']));
+    const types = new Set(questions.map(q => q.type));
+    assert.ok([...types].every(t => ['listen', 'picture', 'pinyin'].includes(t)), group);
+    assert.ok(types.has('pinyin'), `${group} needs pick-pinyin tasks`);
     for (const question of questions) {
-      assert.equal(question.answer, initialOf(question.word.pinyin));
+      if (question.type === 'pinyin') {
+        assert.equal(question.answer, question.word.pinyin);
+        assert.ok(question.options.includes(question.answer));
+        assert.ok(question.options.length >= 2);
+      } else {
+        assert.equal(question.answer, initialOf(question.word.pinyin));
+        if (group === 'yw') assert.ok(question.prompt.includes('拼音字母'));
+      }
       assert.ok(sounds.some(s => s.group === group && s.examples.includes(question.word)));
       assert.ok(question.prompt && question.hint.includes(question.answer));
-      if (group === 'yw') assert.ok(question.prompt.includes('拼音字母'));
     }
     for (const sound of sounds.filter(s => s.group === group)) {
       assert.ok(questions.some(q => q.word.id === sound.examples[0].id), `Missing basic word ${sound.id}`);

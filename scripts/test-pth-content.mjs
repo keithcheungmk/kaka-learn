@@ -23,7 +23,18 @@ assert.equal(heihei.total(),10);assert.equal(kaka.total(),20);
 heihei.restart('yw');assert.equal(heihei.accept('yw',0,0),false);
 for(let i=0;i<10;i++)assert.ok(heihei.accept('yw',i,1));
 assert.equal(heihei.total(),10);assert.equal(createProgress(store,'heihei').load('yw').index,10);
-for(const group of groups)assert.equal(buildQuestions(group).length,10);
+for(const group of groups){
+  const questions=buildQuestions(group);
+  assert.equal(questions.length,10);
+  const pinyinQs=questions.filter(q=>q.type==='pinyin');
+  assert.ok(pinyinQs.length>=1,`${group} should include pick-pinyin tasks`);
+  for(const q of pinyinQs){
+    assert.equal(q.answer,q.word.pinyin);
+    assert.ok(q.options.includes(q.answer));
+    assert.ok(q.options.length>=2&&q.options.length<=4);
+    assert.equal(new Set(q.options.map(o=>o.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase())).size,q.options.length);
+  }
+}
 const runtime=fs.readFileSync(new URL('js/pth-demo.js',root),'utf8')+fs.readFileSync(new URL('js/pth-audio.js',root),'utf8');
 assert.doesNotMatch(runtime,/speechSynthesis|SpeechSynthesisUtterance/);
 console.log('PTH audio provenance, migration, profiles, duplicate/replay rewards: passed');

@@ -4,6 +4,8 @@
  * Examples are app-curated practice words; they are not claimed as textbook quotes.
  * y/w follow the textbook grouping but are labelled pinyin letters.
  */
+import {buildPinyinDistractors, shuffleCopy} from './pth-pinyin.js';
+
 export const groupNames = Object.freeze({
   bpmf: 'b・p・m・f', dtnl: 'd・t・n・l', gkh: 'g・k・h',
   jqx: 'j・q・x', zhchshr: 'zh・ch・sh・r', zcs: 'z・c・s', yw: 'y・w',
@@ -200,15 +202,20 @@ function seededRandom(seed) {
 export function buildQuestions(group, seed = 0) {
   if (!groups.includes(group)) throw new RangeError(`Unknown PTH group: ${group}`);
   const members = sounds.filter(sound => sound.group === group);
+  const pool = members.flatMap(sound => sound.examples);
   // Interleave initials so each one (including its basic word) is represented.
   const words = [0, 1, 2].flatMap(index => members.map(sound => sound.examples[index]));
-  const tasks = words.slice(0, 10).map((word, index) => ({
-    word, type: index % 2 === 0 ? 'listen' : 'picture',
-  }));
+  // Mix: listen / picture (聲母) + pinyin (揀啱拼音), still exactly 10.
+  const tasks = words.slice(0, 10).map((word, index) => {
+    const lane = index % 3;
+    const type = lane === 0 ? 'listen' : lane === 1 ? 'picture' : 'pinyin';
+    return { word, type };
+  });
   const firstPass = [...tasks];
   for (const task of firstPass) {
     if (tasks.length === 10) break;
-    tasks.push({ word: task.word, type: task.type === 'listen' ? 'picture' : 'listen' });
+    const nextType = task.type === 'listen' ? 'picture' : task.type === 'picture' ? 'pinyin' : 'listen';
+    tasks.push({ word: task.word, type: nextType });
   }
   const random = seededRandom(`${group}:${seed}`);
   for (let index = tasks.length - 1; index > 0; index--) {
@@ -216,10 +223,25 @@ export function buildQuestions(group, seed = 0) {
     [tasks[index], tasks[other]] = [tasks[other], tasks[index]];
   }
   const target = group === 'yw' ? '拼音字母' : '聲母';
-  return tasks.map(({ word, type }) => ({
-    id: `${group}:${word.id}:${type}`,
-    type, answer: word.initial, word,
-    prompt: `${type === 'listen' ? '聽詞語' : '看圖讀詞語'}，找出第一個${target}。`,
-    hint: `提示：「${word.word}」的第一個${target}是 ${word.initial}。`,
-  }));
+  return tasks.map(({ word, type }) => {
+    if (type === 'pinyin') {
+      const distractors = buildPinyinDistractors(word.pinyin, pool, random, 3);
+      const options = shuffleCopy([word.pinyin, ...distractors], random);
+      return {
+        id: `${group}:${word.id}:pinyin`,
+        type: 'pinyin',
+        answer: word.pinyin,
+        options,
+        word,
+        prompt: '看漢字，揀啱拼音。',
+        hint: `提示：「${word.word}」的拼音是 ${word.pinyin}。`,
+      };
+    }
+    return {
+      id: `${group}:${word.id}:${type}`,
+      type, answer: word.initial, word,
+      prompt: `${type === 'listen' ? '聽詞語' : '看圖讀詞語'}，找出第一個${target}。`,
+      hint: `提示：「${word.word}」的第一個${target}是 ${word.initial}。`,
+    };
+  });
 }
