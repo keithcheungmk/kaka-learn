@@ -1,8 +1,8 @@
-import {sounds, groups, groupNames, buildQuestions} from './pth-content.js?v=20261117-pth-pinyin';
+import {sounds, groups, groupNames, buildQuestions} from './pth-content.js?v=20261117-focus-card';
 import {wordAudioClips} from './pth-word-audio.js?v=20261004';
 import {createProgress} from './pth-progress.js?v=20261004';
 import {createAudioController} from './pth-audio.js?v=20261004b';
-import {escapeHtml, markInitialHtml} from './pth-pinyin.js?v=20261117-pth-pinyin';
+import {escapeHtml, markInitialHtml} from './pth-pinyin.js?v=20261117-focus-card';
 
 const $ = selector => document.querySelector(selector);
 const guestMemory = new Map();
@@ -54,15 +54,21 @@ function renderGroups() {
   });
 }
 function renderLearn() {
+  const targetLabel = activeGroup === 'yw' ? '拼音字母' : '聲母';
   $('#lessonGrid').style.setProperty('--lesson-count', currentSounds().length);
-  $('#lessonGrid').innerHTML = currentSounds().map(sound => `<article class="lesson">
-    <h3>${sound.name}</h3><p>${sound.tip}</p><div class="example-list">${sound.examples.map(word => `<div class="example-item">
-      <span class="example-emoji" role="img" aria-label="${word.imageLabel}">${word.emoji}</span>
-      <strong>${word.word}</strong>
-      <span class="pinyin-chip" lang="zh-Latn">${pinyin(word)}</span>
-      <span class="pinyin-auto-badge">自動標拼音</span>
-      <button class="word-audio" data-word-audio="${word.audioKey}" aria-label="播放${word.word}普通話">🔊</button>
-    </div>`).join('')}</div>
+  $('#lessonGrid').innerHTML = currentSounds().map(sound => `<article class="lesson lesson-focus">
+    <header class="lesson-head">
+      <h3>${sound.name}</h3>
+      <p class="lesson-tip">${sound.tip}</p>
+    </header>
+    <div class="focus-card-list">${sound.examples.map(word => `<article class="focus-card">
+      <span class="focus-emoji" role="img" aria-label="${word.imageLabel}">${word.emoji}</span>
+      <strong class="focus-word">${word.word}</strong>
+      <p class="focus-pinyin" lang="zh-Latn">${pinyin(word)}</p>
+      <button type="button" class="focus-listen" data-word-audio="${word.audioKey}" aria-label="聽「${word.word}」普通話">🔊 聽普通話</button>
+      <p class="focus-badge">✨ 自動標拼音</p>
+      <p class="focus-hint"><span class="focus-hint-icon" aria-hidden="true">💡</span>${targetLabel} <b>${sound.name}</b> · 跟住讀例詞</p>
+    </article>`).join('')}</div>
     <video controls playsinline preload="none" poster="assets/pth/initials/posters/${sound.id}.jpg" src="${sound.video}" aria-label="${sound.name} 教材口形影片"></video>
     <button class="audio-btn" data-play-video>▶ 重播 ${sound.name} 口形示範</button></article>`).join('');
   document.querySelectorAll('[data-word-audio]').forEach(button => button.onclick = () => {
