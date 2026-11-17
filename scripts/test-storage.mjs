@@ -410,5 +410,61 @@ test('coinLog：派幣寫入今日，歷史骨架有 14 日', () => {
   assert.equal(hist[0].count, 0);
 });
 
+test('日記故事：每本每日一幣，同日唔重複，寫入 activityLog', () => {
+  const S = freshStorage();
+  S.setActiveProfile('kaka');
+  const a = S.earnStoryCoin('zhuhai-two-day', '珠海兩日遊');
+  assert.equal(a.gained, true);
+  assert.equal(S.loadState().coinsTotal, 1);
+  assert.equal(S.hasStoryCoinToday('zhuhai-two-day'), true);
+  assert.equal(S.isStoryRead('zhuhai-two-day'), true);
+  assert.equal(S.coinsEarnedToday(), 1);
+  const again = S.earnStoryCoin('zhuhai-two-day', '珠海兩日遊');
+  assert.equal(again.gained, false);
+  assert.equal(again.already, true);
+  assert.equal(S.loadState().coinsTotal, 1);
+  const other = S.earnStoryCoin('kai-tak-cruise-terminal', '啟德郵輪碼頭的一天');
+  assert.equal(other.gained, true);
+  assert.equal(S.loadState().coinsTotal, 2);
+  assert.equal(S.coinsEarnedToday(), 2);
+  const today = S.todayActivity();
+  assert.equal(today.length, 2);
+  assert.equal(today[0].kind, 'story');
+  assert.equal(today[0].coin, 1);
+  assert.equal(today[0].id, 'kai-tak-cruise-terminal');
+});
+
+test('日記故事：換日可再攞同一本幣；讀過標記保留', () => {
+  const { S, localStorage } = loadStorage();
+  S.setActiveProfile('kaka');
+  S.earnStoryCoin('zhuhai-two-day', '珠海兩日遊');
+  assert.equal(S.hasStoryCoinToday('zhuhai-two-day'), true);
+  const raw = JSON.parse(localStorage.getItem('kaka-learn-v1'));
+  raw.profiles.kaka.coinsDate = '2000-01-01';
+  raw.profiles.kaka.storyCoinsToday = { 'zhuhai-two-day': 1 };
+  localStorage.setItem('kaka-learn-v1', JSON.stringify(raw));
+  const reloaded = loadStorage();
+  reloaded.localStorage.setItem('kaka-learn-v1', localStorage.getItem('kaka-learn-v1'));
+  reloaded.S.setActiveProfile('kaka');
+  assert.equal(reloaded.S.isStoryRead('zhuhai-two-day'), true);
+  assert.equal(reloaded.S.hasStoryCoinToday('zhuhai-two-day'), false);
+  const again = reloaded.S.earnStoryCoin('zhuhai-two-day', '珠海兩日遊');
+  assert.equal(again.gained, true);
+  assert.equal(reloaded.S.loadState().coinsTotal, 2);
+});
+
+test('earnCoinForMode 會寫 activityLog；markStoriesRead 遷移讀過', () => {
+  const S = freshStorage();
+  S.setActiveProfile('heihei');
+  S.earnCoinForMode('listen');
+  const acts = S.todayActivity();
+  assert.equal(acts.length, 1);
+  assert.equal(acts[0].kind, 'listen');
+  assert.equal(acts[0].label, '聽一聽');
+  S.markStoriesRead(['fruit-sharing', 'zhuhai-hotel']);
+  assert.equal(S.isStoryRead('fruit-sharing'), true);
+  assert.equal(S.isStoryRead('missing'), false);
+});
+
 console.log(`\n${passed} passed`);
 process.exit(0);

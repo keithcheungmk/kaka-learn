@@ -127,6 +127,12 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-11-17 · Cursor Chief Lead（星星／幣統一＋日記每日可再玩＋家長日報）
+
+- 家庭日記完成改為每本每日 1 個 AEON 幣（`earnStoryCoin`）；書架改顯示「讀過」＋「今日可攞幣／今日幣✓」，唔再用永遠 ★ 令小朋友以為唔使再玩。
+- `storage.js` 新增 `activityLog`／`storyCoinsToday`／`storyReadIds`；進度頁同故事書家長檢視顯示「今日玩咗咩」。
+- 舊 `kaka-family-storybook-finished-v1` 遷移為讀過標記，唔補歷史幣。
+
 ### 2026-11-16 · Cursor Chief Lead（珠海兩日遊改寫＋下架 4 篇虛構故事）
 
 - 〈珠海兩日遊〉浴場頁改為卡卡、禧禧、爸爸、耀叔叔一齊；卡丁車準備頁改為卡卡同禧禧都戴頭盔同保護裝備；重畫 p02／p06。

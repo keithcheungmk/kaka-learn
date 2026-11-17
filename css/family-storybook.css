@@ -47,7 +47,19 @@ body {
 .story-card .card-words { font-size: .9rem; }
 .story-card .card-cta { color: var(--mint); font-weight: 800; margin-top: 8px; }
 .story-card .art-note { color: #ffe89a; font-size: .88rem; font-weight: 800; }
+.card-badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 6px 0 2px; }
+.read-tag,.coin-tag { display: inline-flex; align-items: center; border-radius: 999px; padding: 2px 10px; font-size: .82rem; font-weight: 800; }
+.read-tag { background: rgba(148,180,255,.18); color: #cfe0ff; border: 1px solid #6f91d2; }
+.coin-tag.is-open { background: rgba(255,214,102,.16); color: #ffe89a; border: 1px solid #d7a63a; }
+.coin-tag.is-done { background: rgba(92,224,180,.18); color: var(--mint); border: 1px solid #3fbf93; }
 .done-tag { color: var(--gold); font-weight: 800; }
+.parent-daily-report { margin: 0 0 22px; padding: 16px 18px; border: 1px solid #3b64a1; border-radius: 22px; background: rgba(23,39,83,.94); }
+.parent-daily-report .section-heading { display: flex; justify-content: space-between; gap: 12px; align-items: end; margin-bottom: 10px; }
+.parent-daily-report .section-heading h2 { margin: 4px 0 0; font-size: 1.25rem; }
+.parent-daily-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.parent-daily-list li { display: flex; justify-content: space-between; gap: 12px; padding: 10px 12px; border-radius: 14px; background: rgba(10,20,48,.55); }
+.parent-daily-list li span { color: var(--mint); font-weight: 800; white-space: nowrap; }
+.parent-daily-list li.is-empty { color: var(--muted); }
 .cast-section { margin-top: 46px; }
 .section-heading { align-items: end; margin-bottom: 14px; }
 .section-heading h2 { margin: .25em 0; }

@@ -45,9 +45,37 @@ const DEFAULT_PROFILE_STATE = {
   },
   phonicsLearningVersion: 1,
   coinLog: {}, // { "YYYY-MM-DD": n } 每日賺到幾個幣（進度頁日曆）
+  activityLog: {}, // { "YYYY-MM-DD": [{ at, kind, label, coin, id? }] } 今日玩咗乜
+  storyCoinsToday: {}, // { [storyId]: 1 } 家庭日記：每本每日最多 1 幣
+  storyReadIds: {}, // { [storyId]: true } 曾經讀完（長期進度，唔鎖今日獎勵）
   passedKeys: {}, // { "zoo": true, "red_series|rb_xiaoming": true }
   hanziWriteProgress: { chars: {}, warmups: {}, chapters: {} },
   economyVersion: 2,
+};
+
+const ACTIVITY_LOG_DAYS = 30;
+
+const COIN_MODE_LABELS = {
+  listen: '聽一聽',
+  match: '配一配',
+  build: '砌一砌',
+  'common-sense-heroes': '常識・人物',
+  'common-sense-safe': '常識・安全',
+  'common-sense-manners': '常識・禮貌',
+  'common-sense-transport': '常識・交通',
+  'common-sense-weather': '常識・天氣',
+  'common-sense-festivals': '常識・節日',
+  'common-sense-recycle': '常識・環保',
+  'common-sense-food': '常識・食物',
+  'common-sense-body': '常識・身體',
+  'common-sense-construction-trucks': '常識・工程車',
+  'common-sense-comic-rain': '面試四格・落大雨',
+  'common-sense-comic-mtr': '面試四格・港鐵',
+  'common-sense-comic-park': '面試四格・公園',
+  'hanzi-write': '學寫字',
+  'hanzi-write-ch1': '學寫字・第1章',
+  'hanzi-write-ch2': '學寫字・第2章',
+  'hanzi-write-ch3': '學寫字・第3章',
 };
 
 /** 中文認字每日三個幣位（聽／配／砌） */
@@ -86,6 +114,9 @@ function emptyProfile() {
     wordStats: {},
     phonicsSkillStats: { recognition: {}, blending: {}, segmenting: {} },
     coinLog: {},
+    activityLog: {},
+    storyCoinsToday: {},
+    storyReadIds: {},
     passedKeys: {},
     hanziWriteProgress: { chars: {}, warmups: {}, chapters: {} },
   };
@@ -121,10 +152,37 @@ function extractProfileFields(obj) {
   return out;
 }
 
+function pruneActivityLog(log) {
+  const src = log && typeof log === 'object' ? log : {};
+  const today = todayKey();
+  const keep = {};
+  for (let i = 0; i < ACTIVITY_LOG_DAYS; i += 1) {
+    const day = shiftDayKey(today, -i);
+    if (Array.isArray(src[day]) && src[day].length) keep[day] = src[day];
+  }
+  return keep;
+}
+
+function appendActivityEntry(profile, entry) {
+  const day = todayKey();
+  const log = pruneActivityLog(profile.activityLog);
+  const list = Array.isArray(log[day]) ? [...log[day]] : [];
+  list.push({
+    at: new Date().toISOString(),
+    kind: String(entry.kind || 'play'),
+    label: String(entry.label || entry.kind || '活動'),
+    coin: entry.coin ? 1 : 0,
+    ...(entry.id ? { id: String(entry.id) } : {}),
+  });
+  log[day] = list;
+  profile.activityLog = log;
+}
+
 function applyDailyReset(profile) {
   if (profile.coinsDate !== todayKey()) {
     profile.coinsDate = todayKey();
     profile.coinsToday = {};
+    profile.storyCoinsToday = {};
     profile.roundProgress = {};
   }
   if (profile.starsDate !== todayKey()) {
@@ -132,11 +190,14 @@ function applyDailyReset(profile) {
     profile.starsDate = todayKey();
   }
   if (!profile.coinsToday || typeof profile.coinsToday !== 'object') profile.coinsToday = {};
+  if (!profile.storyCoinsToday || typeof profile.storyCoinsToday !== 'object') profile.storyCoinsToday = {};
+  if (!profile.storyReadIds || typeof profile.storyReadIds !== 'object') profile.storyReadIds = {};
   if (!profile.roundProgress || typeof profile.roundProgress !== 'object') profile.roundProgress = {};
   if (!profile.wordStats || typeof profile.wordStats !== 'object') profile.wordStats = {};
   profile.phonicsSkillStats = normalizePhonicsSkillStats(profile.phonicsSkillStats);
   profile.phonicsLearningVersion = 1;
   if (!profile.coinLog || typeof profile.coinLog !== 'object') profile.coinLog = {};
+  profile.activityLog = pruneActivityLog(profile.activityLog);
   if (!profile.passedKeys || typeof profile.passedKeys !== 'object') profile.passedKeys = {};
   if (!profile.hanziWriteProgress || typeof profile.hanziWriteProgress !== 'object') {
     profile.hanziWriteProgress = { chars: {}, warmups: {}, chapters: {} };
@@ -351,7 +412,7 @@ function coinsTodayCount() {
 }
 
 /** 完成一輪：派幣。同一種玩法一日只派一次。 */
-function earnCoinForMode(mode) {
+function earnCoinForMode(mode, label) {
   const state = loadState();
   if (!ALL_COIN_MODES.includes(mode)) return { state, gained: false, already: false };
   if (state.coinsToday[mode]) {
@@ -361,8 +422,89 @@ function earnCoinForMode(mode) {
   state.coinsToday = { ...state.coinsToday, [mode]: 1 };
   state.coinsTotal = (state.coinsTotal || 0) + 1;
   state.coinLog = { ...(state.coinLog || {}), [day]: ((state.coinLog || {})[day] || 0) + 1 };
+  appendActivityEntry(state, {
+    kind: mode,
+    label: label || COIN_MODE_LABELS[mode] || mode,
+    coin: 1,
+    id: mode,
+  });
   saveState(state);
   return { state, gained: true, already: false };
+}
+
+function hasStoryCoinToday(storyId) {
+  if (!storyId) return false;
+  const state = loadState();
+  return !!(state.storyCoinsToday && state.storyCoinsToday[storyId]);
+}
+
+function isStoryRead(storyId) {
+  if (!storyId) return false;
+  const state = loadState();
+  return !!(state.storyReadIds && state.storyReadIds[storyId]);
+}
+
+function markStoriesRead(ids) {
+  const list = Array.isArray(ids) ? ids : [];
+  if (!list.length) return loadState();
+  const state = loadState();
+  const next = { ...(state.storyReadIds || {}) };
+  list.forEach((id) => {
+    if (id) next[String(id)] = true;
+  });
+  state.storyReadIds = next;
+  saveState(state);
+  return state;
+}
+
+/** 家庭日記：每本故事今日完成派 1 幣；換日可再攞。 */
+function earnStoryCoin(storyId, label) {
+  const state = loadState();
+  if (!storyId) return { state, gained: false, already: false };
+  if (state.storyCoinsToday && state.storyCoinsToday[storyId]) {
+    state.storyReadIds = { ...(state.storyReadIds || {}), [storyId]: true };
+    saveState(state);
+    return { state, gained: false, already: true };
+  }
+  const day = todayKey();
+  state.storyCoinsToday = { ...(state.storyCoinsToday || {}), [storyId]: 1 };
+  state.storyReadIds = { ...(state.storyReadIds || {}), [storyId]: true };
+  state.coinsTotal = (state.coinsTotal || 0) + 1;
+  state.coinLog = { ...(state.coinLog || {}), [day]: ((state.coinLog || {})[day] || 0) + 1 };
+  appendActivityEntry(state, {
+    kind: 'story',
+    label: label || `日記・${storyId}`,
+    coin: 1,
+    id: storyId,
+  });
+  saveState(state);
+  return { state, gained: true, already: false };
+}
+
+/** 今日所有來源賺到嘅幣（含日記／寫字／常識等）。 */
+function coinsEarnedToday() {
+  const state = loadState();
+  const day = todayKey();
+  if (state.coinLog && state.coinLog[day] != null) return state.coinLog[day] || 0;
+  let n = 0;
+  Object.values(state.coinsToday || {}).forEach((v) => {
+    if (v) n += 1;
+  });
+  Object.values(state.storyCoinsToday || {}).forEach((v) => {
+    if (v) n += 1;
+  });
+  return n;
+}
+
+/** 某日活動列表（新→舊）。預設今日。 */
+function activityHistoryForDay(day = todayKey()) {
+  const log = loadState().activityLog || {};
+  const list = Array.isArray(log[day]) ? [...log[day]] : [];
+  return list.reverse();
+}
+
+function todayActivity() {
+  return activityHistoryForDay(todayKey());
 }
 
 function shiftDayKey(key, delta) {
@@ -538,6 +680,8 @@ function resetStars() {
     starsToday: 0,
     starsDate: todayKey(),
     coinsToday: {},
+    storyCoinsToday: {},
+    storyReadIds: {},
     coinsTotal: 0,
     coinsDate: todayKey(),
     roundProgress: {},
@@ -545,6 +689,7 @@ function resetStars() {
     phonicsSkillStats: { recognition: {}, blending: {}, segmenting: {} },
     phonicsLearningVersion: 1,
     coinLog: {},
+    activityLog: {},
     passedKeys: {},
     hanziWriteProgress: { chars: {}, warmups: {}, chapters: {} },
   });
@@ -565,9 +710,18 @@ window.KakaStorage = {
   COIN_MODES,
   EXTRA_COIN_MODES,
   ALL_COIN_MODES,
+  COIN_MODE_LABELS,
+  ACTIVITY_LOG_DAYS,
   coinsTodayMap,
   coinsTodayCount,
+  coinsEarnedToday,
   earnCoinForMode,
+  earnStoryCoin,
+  hasStoryCoinToday,
+  isStoryRead,
+  markStoriesRead,
+  todayActivity,
+  activityHistoryForDay,
   getCoinModeForGame,
   coinHistory,
   loadRoundProgress,

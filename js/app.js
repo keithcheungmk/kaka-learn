@@ -19,6 +19,7 @@ const {
   COIN_MODES,
   coinsTodayMap,
   coinsTodayCount,
+  coinsEarnedToday,
   earnCoinForMode,
   getCoinModeForGame,
   loadRoundProgress,
@@ -40,6 +41,7 @@ const {
   isTopicPassed,
   isKeyPassed,
   coinHistory,
+  todayActivity,
 } = window.KakaStorage;
 const {
   warmVoices,
@@ -2567,9 +2569,32 @@ function renderProgress() {
   if (title) title.textContent = `${info.name}嘅進度`;
   if (avatar) avatar.src = info.avatar;
 
-  const todayN = coinsTodayCount();
+  const todayN = typeof coinsEarnedToday === 'function' ? coinsEarnedToday() : coinsTodayCount();
   const todayEl = $('#progress-coin-today');
   if (todayEl) todayEl.textContent = `今日 ${todayN} 個幣 · 累積 ${redeemableCoins()} 枚`;
+
+  const activityEl = $('#progress-activity-today');
+  if (activityEl) {
+    activityEl.innerHTML = '';
+    const acts = typeof todayActivity === 'function' ? todayActivity() : [];
+    if (!acts.length) {
+      const li = document.createElement('li');
+      li.className = 'is-empty';
+      li.textContent = '今日還沒有遊戲紀錄。完成一輪或一本日記後會出現喺呢度。';
+      activityEl.appendChild(li);
+    } else {
+      acts.forEach((item) => {
+        const li = document.createElement('li');
+        const label = document.createElement('strong');
+        label.textContent = item.label || item.kind || '活動';
+        const note = document.createElement('span');
+        note.textContent = item.coin ? '＋1 幣' : '已完成';
+        li.appendChild(label);
+        li.appendChild(note);
+        activityEl.appendChild(li);
+      });
+    }
+  }
 
   const cal = $('#progress-coin-cal');
   if (cal) {

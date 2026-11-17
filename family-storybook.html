@@ -17,19 +17,29 @@
         <h1 id="brand-title">卡卡和禧禧一齊玩</h1>
       </div>
       <button id="parent-review-entry" class="parent-review-entry" type="button">家長檢視</button>
-      <div class="star-total" id="star-pill" aria-live="polite">⭐ <strong id="star-total">0</strong> / <span id="story-total">18</span></div>
+      <div class="star-total" id="star-pill" aria-live="polite" title="今日已攞的日記幣">今日幣 <strong id="star-total">0</strong></div>
       <div id="page-count" class="page-count">第 1 / 6 頁</div>
     </header>
     <div id="parent-review-banner" class="parent-review-banner hidden" role="status">
-      <p>家長檢視中，只看書圖，不會計算星星</p>
+      <p>家長檢視中，只看書圖，不會計算獎勵幣</p>
       <button id="exit-parent-review" class="parent-review-exit" type="button">離開檢視</button>
     </div>
     <section id="library" class="view" aria-labelledby="library-heading">
       <div class="intro">
         <p class="eyebrow">聽故事・讀句子・玩生字</p>
         <h2 id="library-heading">今天想和他們去哪裏？</h2>
-        <p>每個故事有 6 至 8 頁；先聽每頁故事，再把重點詞放回句子。</p>
+        <p>每個故事有 6 至 8 頁；先聽每頁故事，再把重點詞放回句子。完成一本今日可攞 1 個幣，換日可以再玩再攞。</p>
       </div>
+      <section id="parent-daily-report" class="parent-daily-report hidden" aria-labelledby="parent-daily-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">家長日報</p>
+            <h2 id="parent-daily-heading">今日玩咗咩</h2>
+          </div>
+          <span id="parent-daily-coin-summary">今日 0 個幣</span>
+        </div>
+        <ul id="parent-daily-list" class="parent-daily-list"></ul>
+      </section>
       <div id="story-grid" class="story-grid"></div>
       <section class="cast-section" hidden aria-hidden="true">
         <div class="section-heading"><div><p class="eyebrow">人物設定</p><h2>故事裏的家庭角色</h2></div><span>站在同一地面時，按真實身高比例呈現</span></div>
@@ -106,10 +116,11 @@
       </div>
     </div>
   </div>
+  <script src="js/storage.js?v=reward-daily-20261117"></script>
   <script src="js/speech.js?v=xiyu-deploy-refresh"></script>
   <script src="js/celebrate-finish.js?v=20261018-fullmoon-qa"></script>
   <script src="js/nav-back.js?v=20261011-one-level"></script>
   <script src="data/family-stories/manifest.js?v=kai-tak-20261115"></script>
-  <script src="js/family-storybook.js?v=parent-review-20261116"></script>
+  <script src="js/family-storybook.js?v=reward-daily-20261117"></script>
 </body>
 </html>

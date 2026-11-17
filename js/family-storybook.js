@@ -18,11 +18,26 @@
   const $ = id => document.getElementById(id);
   const library = $('library'), reader = $('reader');
   const finishedKey = 'kaka-family-storybook-finished-v1';
+  const storage = window.KakaStorage || {};
   const speech = window.KakaSpeech || {};
   const libraryTitle = '卡卡和禧禧一齊玩';
   const heldUtters = [];
   let current = null, pageIndex = 0, pageStates = [], activeUtterance = null, activeSpeechFallback = null, activeSpeechRetry = null, activeSlots = [], activeSlot = 0, warmupState = null, warmupMissTimer = null, parentMode = false;
   const safeRead = key => { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } };
+  const migrateLegacyFinished = () => {
+    const finished = safeRead(finishedKey);
+    if (!finished.length) return;
+    storage.markStoriesRead?.(finished);
+  };
+  const storyWasRead = id => Boolean(storage.isStoryRead?.(id) || safeRead(finishedKey).includes(id));
+  const storyCoinToday = id => Boolean(storage.hasStoryCoinToday?.(id));
+  const markLegacyFinished = id => {
+    const completed = safeRead(finishedKey);
+    if (!completed.includes(id)) {
+      completed.push(id);
+      try { localStorage.setItem(finishedKey, JSON.stringify(completed)); } catch { /* ignore */ }
+    }
+  };
   const storyHeading = story => {
     const place = String(story?.place || '').trim();
     const title = String(story?.title || '').trim();
@@ -86,30 +101,64 @@
     speakStory(word);
   };
   const refreshStars = () => {
-    const playableIds = new Set(stories.map(story => story.id));
-    const finished = safeRead(finishedKey).filter(id => playableIds.has(id));
-    $('star-total').textContent = finished.length;
-    const total = $('story-total');
-    if (total) total.textContent = stories.length;
+    const todayCoins = stories.filter(story => storyCoinToday(story.id)).length;
+    $('star-total').textContent = String(todayCoins);
+    const pill = $('star-pill');
+    if (pill) pill.setAttribute('aria-label', `今日已攞 ${todayCoins} 個日記幣`);
+  };
+  const renderParentDailyReport = () => {
+    const report = $('parent-daily-report');
+    const list = $('parent-daily-list');
+    const summary = $('parent-daily-coin-summary');
+    if (!report || !list) return;
+    if (!parentMode) {
+      report.classList.add('hidden');
+      return;
+    }
+    report.classList.remove('hidden');
+    const acts = storage.todayActivity?.() || [];
+    const coinN = storage.coinsEarnedToday?.() ?? acts.filter(item => item.coin).length;
+    if (summary) summary.textContent = `今日 ${coinN} 個幣`;
+    if (!acts.length) {
+      list.innerHTML = '<li class="is-empty">今日還沒有遊戲紀錄。</li>';
+      return;
+    }
+    list.innerHTML = acts.map(item => {
+      const coinNote = item.coin ? '＋1 幣' : '已完成';
+      return `<li><strong>${item.label || item.kind}</strong><span>${coinNote}</span></li>`;
+    }).join('');
   };
   const shuffle = values => [...values].map(value => [Math.random(), value]).sort((a,b) => a[0]-b[0]).map(pair => pair[1]);
   function renderLibrary() {
+    migrateLegacyFinished();
     $('story-grid').innerHTML = stories.map((story, index) => {
-      const done = safeRead(finishedKey).includes(story.id);
+      const read = storyWasRead(story.id);
+      const todayCoin = storyCoinToday(story.id);
       const image = `assets/family-stories/scenes/${story.id}-p01.webp`;
       const hasBookWords = story.bookWords.length > 0;
       const displayedWords = hasBookWords
         ? story.bookWords.slice(0,4)
         : story.pages.flatMap(page => page.focusWords).slice(0,4);
       const wordLabel = hasBookWords ? '讀本詞' : '學習詞語';
-      const cta = parentMode ? '檢視全書' : '故事／點這裏開始';
-      const aria = parentMode ? `檢視全書：${story.title}` : `開始故事：${story.title}`;
-      return `<button class="story-card" type="button" data-story="${story.id}" aria-label="${aria}"><img class="story-cover" src="${image}" alt="${story.title}插圖" onerror="this.src='assets/family-stories/characters/family-height-lineup.webp'"><span><strong class="story-title">${String(index+1).padStart(2,'0')}・${story.title} ${done?'<span class="done-tag">★</span>':''}</strong><p>${story.place} · ${story.pages.length}頁</p><p>${story.summary}</p><p class="card-words">${wordLabel}：${displayedWords.join('、')}</p>${story.artNote?`<p class="art-note">${story.artNote}</p>`:''}<p class="card-cta">${cta}</p></span></button>`;
+      const badges = [
+        read ? '<span class="read-tag">讀過</span>' : '',
+        todayCoin
+          ? '<span class="coin-tag is-done">今日幣✓</span>'
+          : '<span class="coin-tag is-open">今日可攞幣</span>'
+      ].filter(Boolean).join('');
+      const cta = parentMode
+        ? '檢視全書'
+        : (todayCoin ? '再玩一次（今日幣已攞）' : '故事／點這裏開始');
+      const aria = parentMode
+        ? `檢視全書：${story.title}`
+        : `開始故事：${story.title}${todayCoin ? '，今日幣已攞' : '，今日可攞幣'}`;
+      return `<button class="story-card" type="button" data-story="${story.id}" aria-label="${aria}"><img class="story-cover" src="${image}" alt="${story.title}插圖" onerror="this.src='assets/family-stories/characters/family-height-lineup.webp'"><span><strong class="story-title">${String(index+1).padStart(2,'0')}・${story.title}</strong><p class="card-badges">${badges}</p><p>${story.place} · ${story.pages.length}頁</p><p>${story.summary}</p><p class="card-words">${wordLabel}：${displayedWords.join('、')}</p>${story.artNote?`<p class="art-note">${story.artNote}</p>`:''}<p class="card-cta">${cta}</p></span></button>`;
     }).join('');
     const castGrid = $('cast-grid');
     if (castGrid) castGrid.innerHTML = cast.map(([name,height,traits,file]) => `<article class="cast-card"><img src="assets/family-stories/characters/${file}" alt="${name}角色三視圖"><div><strong>${name}</strong><p>${height} · ${traits}</p></div></article>`).join('');
     $('story-grid').querySelectorAll('[data-story]').forEach(button => button.addEventListener('click', () => openStory(button.dataset.story)));
     refreshStars();
+    renderParentDailyReport();
   }
   function openStory(id) {
     current = allStories.find(story => story.id === id);
@@ -637,21 +686,30 @@
   });
   function completeStory() {
     if (parentMode) return;
-    const completed = safeRead(finishedKey);
-    if (!completed.includes(current.id)) {
-      completed.push(current.id);
-      try { localStorage.setItem(finishedKey, JSON.stringify(completed)); } catch { /* Progress still completes for this session. */ }
-    }
+    markLegacyFinished(current.id);
+    const coin = storage.earnStoryCoin
+      ? storage.earnStoryCoin(current.id, current.title)
+      : { gained: false, already: false };
     refreshStars();
     $('activity').classList.add('hidden');
     const completion = $('completion');
     completion.classList.remove('hidden');
-    $('completion-summary').textContent = `你完成了《${current.title}》的 ${current.pages.length} 頁，每頁都把重點詞放回句子裏。`;
-    window.KakaCelebrate?.play?.({
-      root: completion,
-      actions: $('story-finish-actions'),
-      muted: Boolean(window.KakaStorage?.loadState?.()?.muted),
-    });
+    const line = $('completion-line');
+    const summary = $('completion-summary');
+    if (coin.gained) {
+      if (line) line.textContent = '你好叻啊，完成咗啦，獎勵你一個金幣！';
+      if (summary) summary.textContent = `你完成了《${current.title}》的 ${current.pages.length} 頁，今日已攞 1 個幣。`;
+      window.KakaCelebrate?.play?.({
+        root: completion,
+        actions: $('story-finish-actions'),
+        muted: Boolean(storage.loadState?.()?.muted),
+      });
+    } else {
+      if (line) line.textContent = '呢本今日幣攞咗喇，聽日再嚟或者試第二本！';
+      if (summary) summary.textContent = `你又完成了《${current.title}》。溫習好叻，聽日再攞幣。`;
+      $('story-finish-actions')?.classList.remove('hidden');
+      $('story-finish-actions')?.removeAttribute('aria-hidden');
+    }
   }
   function storyIdFromLocation() {
     try {

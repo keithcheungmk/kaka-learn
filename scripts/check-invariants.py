@@ -1234,8 +1234,12 @@ def check_family_storybook_entry() -> None:
         fail("family-storybook", "家長檢視確認層要說明只看書圖、不用聽語音和答題")
     if "開始檢視" not in story_html or 'id="parent-confirm-cancel"' not in story_html:
         fail("family-storybook", "家長檢視確認層要有「開始檢視」和「返回」")
-    if "家長檢視中，只看書圖，不會計算星星" not in story_html or "離開檢視" not in story_html:
+    if "家長檢視中，只看書圖，不會計算獎勵幣" not in story_html or "離開檢視" not in story_html:
         fail("family-storybook", "家長檢視要有常駐橫幅和「離開檢視」")
+    if "earnStoryCoin" not in story_js or "今日可攞幣" not in story_js:
+        fail("family-storybook", "日記完成要派每日幣，書架要顯示今日可攞幣")
+    if 'id="parent-daily-report"' not in story_html or "js/storage.js" not in story_html:
+        fail("family-storybook", "故事書要載入 storage，並有家長今日活動日報")
     if 'id="parent-preview"' not in story_html or "parent-page-jump" not in story_html:
         fail("family-storybook", "家長檢視要有全書直向預覽和跳頁")
     if "get('view') === 'parent'" not in story_js or "showParentPreview" not in story_js:
