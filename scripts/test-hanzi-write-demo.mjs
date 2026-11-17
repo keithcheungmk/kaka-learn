@@ -278,21 +278,16 @@ assert.equal(bank.length, 85, '十章合共八十五個字');
 assert.equal(chapters.length, 10, '十章目錄');
 assert.equal(chapters.filter((c) => c.open).length, 10, '十章全部開放');
 assert.ok(chapters.every((c) => c.open && c.title !== '即將開放'), '唔好再鎖即將開放空章');
-const CHAPTER_ART = {
-  ch1: 'assets/character-words/actions/xiezi-write.webp',
-  ch2: 'assets/common-sense/scenes/rain-umbrella.webp',
-  ch3: 'assets/family-stories/scenes/tianye-happy-day-p06.webp',
-  ch4: 'assets/family-stories/scenes/zhongshan-zoo-day-p01.webp',
-  ch5: 'assets/common-sense/scenes/moon-watch.webp',
-  ch6: 'assets/family-stories/scenes/garden-flowers-p01.webp',
-  ch7: 'assets/character-words/actions/kan-shu.webp',
-  ch8: 'assets/common-sense/scenes/home-tw.webp',
-  ch9: 'assets/character-words/actions/chuan-yifu.webp',
-  ch10: 'assets/family-stories/scenes/tianye-happy-day-p03.webp',
-};
-assert.ok(chapters.every((c) => c.art && !c.art.includes('hanzi-write/chapters/') && fs.existsSync(path.join(root, c.art))), '每章要用現有網站插圖，唔好新黏土物件包');
-assert.deepEqual(Object.fromEntries(chapters.map((c) => [c.id, c.art])), CHAPTER_ART, '章節圖要對齊現有角色／場景資產');
-assert.ok(!fs.existsSync(path.join(root, 'assets/hanzi-write/chapters/ch1.webp')), '唔好再放黏土物件章節圖');
+const CHAPTER_ART = Object.fromEntries(
+  Array.from({ length: 10 }, (_, i) => {
+    const id = `ch${i + 1}`;
+    return [id, `assets/hanzi-write/chapters/${id}.webp`];
+  }),
+);
+assert.ok(chapters.every((c) => c.art && c.art.includes('hanzi-write/chapters/') && fs.existsSync(path.join(root, c.art))), '每章要用主題小景物章節圖');
+assert.deepEqual(Object.fromEntries(chapters.map((c) => [c.id, c.art])), CHAPTER_ART, '章節圖要對齊十張主題小景物');
+assert.ok(fs.existsSync(path.join(root, 'assets/hanzi-write/chapters/ch1.webp')), '要有第1章主題圖');
+assert.ok(fs.existsSync(path.join(root, 'assets/hanzi-write/chapters/ch10.webp')), '要有第10章主題圖');
 
 const starFn = js.match(/function chapterStarCount\(done, total\) \{[\s\S]*?\n  \}/);
 assert.ok(starFn, '要有 chapterStarCount');

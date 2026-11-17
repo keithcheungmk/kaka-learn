@@ -127,6 +127,11 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-11-17 · Cursor Chief Lead（學寫字章節主題小景物圖）
+
+- 選章磚改用十張原創主題靜物圖（`assets/hanzi-write/chapters/ch1.webp`–`ch10.webp`），對應入門／自然／土地／方向／光／動植物／動作／屋企／身體／衣物；圖上唔放漢字。
+- 唔再借家庭故事劇照做寫字章封面。試玩：https://keithcheungmk.github.io/kaka-learn/hanzi-write-demo.html
+
 ### 2026-11-17 · Cursor Chief Lead（學寫字十章重排：自然／土地禾／方向）
 
 - 第 1 章入門筆畫保留；第 2–7 章改自然天氣、土地（含「禾」、唔用竹／虫）、方向、早晚光、花草動物、動作；第 8–10 章屋企／身體／衣物家居。十章全開，合共 85 字。

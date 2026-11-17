@@ -18587,7 +18587,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 1,
     "title": "入門筆畫",
     "open": true,
-    "art": "assets/character-words/actions/xiezi-write.webp",
+    "art": "assets/hanzi-write/chapters/ch1.webp",
     "blurb": "先學一、二、三和常用筆畫。",
     "charIds": [
       "yi",
@@ -18607,7 +18607,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 2,
     "title": "自然同天氣",
     "open": true,
-    "art": "assets/common-sense/scenes/rain-umbrella.webp",
+    "art": "assets/hanzi-write/chapters/ch2.webp",
     "blurb": "寫木、水、火、山和天氣的字。",
     "charIds": [
       "mu_wood",
@@ -18625,7 +18625,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 3,
     "title": "土地同自然物",
     "open": true,
-    "art": "assets/family-stories/scenes/tianye-happy-day-p06.webp",
+    "art": "assets/hanzi-write/chapters/ch3.webp",
     "blurb": "寫土、田、石、禾和土地的字。",
     "charIds": [
       "tu",
@@ -18643,7 +18643,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 4,
     "title": "上下同方向",
     "open": true,
-    "art": "assets/family-stories/scenes/zhongshan-zoo-day-p01.webp",
+    "art": "assets/hanzi-write/chapters/ch4.webp",
     "blurb": "寫上、下、左、右和東南西北。",
     "charIds": [
       "shang",
@@ -18662,7 +18662,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 5,
     "title": "早晚同光",
     "open": true,
-    "art": "assets/common-sense/scenes/moon-watch.webp",
+    "art": "assets/hanzi-write/chapters/ch5.webp",
     "blurb": "寫雲、雪、星、光和早晚出入。",
     "charIds": [
       "yun",
@@ -18680,7 +18680,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 6,
     "title": "花草同動物",
     "open": true,
-    "art": "assets/family-stories/scenes/garden-flowers-p01.webp",
+    "art": "assets/hanzi-write/chapters/ch6.webp",
     "blurb": "寫草、竹、魚、鳥和常見動物。",
     "charIds": [
       "cao",
@@ -18698,7 +18698,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 7,
     "title": "動作同行走",
     "open": true,
-    "art": "assets/character-words/actions/kan-shu.webp",
+    "art": "assets/hanzi-write/chapters/ch7.webp",
     "blurb": "寫走、跑、飛、坐和來回看。",
     "charIds": [
       "zou",
@@ -18716,7 +18716,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 8,
     "title": "我同屋企",
     "open": true,
-    "art": "assets/common-sense/scenes/home-tw.webp",
+    "art": "assets/hanzi-write/chapters/ch8.webp",
     "blurb": "寫手、眼、耳和家人的字。",
     "charIds": [
       "shou",
@@ -18736,7 +18736,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 9,
     "title": "身體部位",
     "open": true,
-    "art": "assets/character-words/actions/chuan-yifu.webp",
+    "art": "assets/hanzi-write/chapters/ch9.webp",
     "blurb": "寫頭、面、鼻、牙和身體的字。",
     "charIds": [
       "tou",
@@ -18754,7 +18754,7 @@ window.KAKA_HANZI_WRITE_CHAPTERS = [
     "no": 10,
     "title": "衣物同家居",
     "open": true,
-    "art": "assets/family-stories/scenes/tianye-happy-day-p03.webp",
+    "art": "assets/hanzi-write/chapters/ch10.webp",
     "blurb": "寫衣、帽、鞋、褲和家居的字。",
     "charIds": [
       "yi_clothes",

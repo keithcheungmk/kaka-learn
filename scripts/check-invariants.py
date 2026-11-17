@@ -1451,24 +1451,14 @@ def check_hanzi_write_demo() -> None:
         fail("hanzi-write", "鎖住章節唔好喺卡面重複即將開放文案")
     if "btn-start-adventure" in page:
         fail("hanzi-write", "選章磚本身就係入口，唔好再加大掣由第一章開始")
-    if "hanzi-write/chapters/" in data:
-        fail("hanzi-write", "選章圖要重用現有網站插圖，唔好新黏土物件包")
-    if Path("assets/hanzi-write/chapters/ch1.webp").is_file():
-        fail("hanzi-write", "唔好再放黏土物件章節圖")
-    for marker in (
-        "xiezi-write.webp",
-        "home-tw.webp",
-        "chuan-yifu.webp",
-        "zhongshan-zoo-day-p01.webp",
-        "kan-shu.webp",
-        "tianye-happy-day-p06.webp",
-        "garden-flowers-p01.webp",
-        "rain-umbrella.webp",
-        "tianye-happy-day-p03.webp",
-        "moon-watch.webp",
-    ):
-        if marker not in data:
-            fail("hanzi-write", f"選章圖缺少現有資產 {marker}")
+    if "hanzi-write/chapters/" not in data:
+        fail("hanzi-write", "選章圖要用主題小景物章節圖 assets/hanzi-write/chapters/")
+    for n in range(1, 11):
+        art = Path(f"assets/hanzi-write/chapters/ch{n}.webp")
+        if not art.is_file():
+            fail("hanzi-write", f"缺少章節主題圖 {art}")
+        if f"assets/hanzi-write/chapters/ch{n}.webp" not in data:
+            fail("hanzi-write", f"目錄要接上 ch{n} 主題圖")
     if "九宮格" not in page or "再寫一次" not in page or "寫得好！再學下一個字。" not in page:
         fail("hanzi-write", "流程要有九宮格、再寫一次、寫得好鼓勵彈窗")
     if "過關啦" in page or "過關啦" in js:
