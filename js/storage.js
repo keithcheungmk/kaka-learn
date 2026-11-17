@@ -76,6 +76,13 @@ const COIN_MODE_LABELS = {
   'hanzi-write-ch1': '學寫字・第1章',
   'hanzi-write-ch2': '學寫字・第2章',
   'hanzi-write-ch3': '學寫字・第3章',
+  'hanzi-write-ch4': '學寫字・第4章',
+  'hanzi-write-ch5': '學寫字・第5章',
+  'hanzi-write-ch6': '學寫字・第6章',
+  'hanzi-write-ch7': '學寫字・第7章',
+  'hanzi-write-ch8': '學寫字・第8章',
+  'hanzi-write-ch9': '學寫字・第9章',
+  'hanzi-write-ch10': '學寫字・第10章',
 };
 
 /** 中文認字每日三個幣位（聽／配／砌） */
@@ -99,6 +106,13 @@ const EXTRA_COIN_MODES = [
   'hanzi-write-ch1',
   'hanzi-write-ch2',
   'hanzi-write-ch3',
+  'hanzi-write-ch4',
+  'hanzi-write-ch5',
+  'hanzi-write-ch6',
+  'hanzi-write-ch7',
+  'hanzi-write-ch8',
+  'hanzi-write-ch9',
+  'hanzi-write-ch10',
 ];
 const ALL_COIN_MODES = COIN_MODES.concat(EXTRA_COIN_MODES);
 

@@ -1384,7 +1384,7 @@ def check_four_panel_story() -> None:
 
 
 def check_hanzi_write_demo() -> None:
-    """Keith 2026-10-25：中文主題「卡卡學寫字」本機 hanzi-writer，第 1–3 章每字六次。"""
+    """Keith 2026-10-25／11-17：中文主題「卡卡學寫字」本機 hanzi-writer，十章每字六次。"""
     html = read("index.html")
     if 'id="btn-topics-hanzi-write"' not in html or "./hanzi-write-demo.html" not in html:
         fail("hanzi-write", "中文主題頁要有卡卡學寫字獨立入口")
@@ -1425,9 +1425,24 @@ def check_hanzi_write_demo() -> None:
     if '"vocab"' not in data or '"edbStrokeCount"' not in data:
         fail("hanzi-write", "字庫要有相關詞 vocab 同 EDB 筆畫數")
     if "KAKA_HANZI_WRITE_CHAPTERS" not in data or "入門筆畫" not in data:
-        fail("hanzi-write", "要有第 1–3 章目錄")
-    if "即將開放" not in data:
-        fail("hanzi-write", "第 4–10 章要標即將開放")
+        fail("hanzi-write", "要有十章目錄")
+    for title in (
+        "自然同天氣",
+        "土地同自然物",
+        "上下同方向",
+        "早晚同光",
+        "花草同動物",
+        "動作同行走",
+        "我同屋企",
+        "身體部位",
+        "衣物同家居",
+    ):
+        if title not in data:
+            fail("hanzi-write", f"十章目錄要有「{title}」")
+    if '"禾"' not in data:
+        fail("hanzi-write", "土地章要有「禾」")
+    if "即將開放" in data:
+        fail("hanzi-write", "十章都要有字，唔好再留即將開放空章")
     if "btn-speak-chapters" not in page or "btn-chapter-help" not in page:
         fail("hanzi-write", "選章頁要有喇叭同家長說明")
     if "chapter-lock" not in js or "chapterStarCount" not in js:

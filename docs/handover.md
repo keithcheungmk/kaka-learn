@@ -127,6 +127,12 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-11-17 · Cursor Chief Lead（學寫字十章重排：自然／土地禾／方向）
+
+- 第 1 章入門筆畫保留；第 2–7 章改自然天氣、土地（含「禾」、唔用竹／虫）、方向、早晚光、花草動物、動作；第 8–10 章屋企／身體／衣物家居。十章全開，合共 85 字。
+- 新字筆順由 `hanzi-writer-data` 2.0.1 繁體 path 補入；章節完成幣位擴到 `hanzi-write-ch1`…`ch10`。
+- 更新 `AGENTS.md`、EDB audit、invariants／demo／storage 測試。試玩：https://keithcheungmk.github.io/kaka-learn/hanzi-write-demo.html
+
 ### 2026-11-17 · Cursor Chief Lead（星星／幣統一＋日記每日可再玩＋家長日報）
 
 - 家庭日記完成改為每本每日 1 個 AEON 幣（`earnStoryCoin`）；書架改顯示「讀過」＋「今日可攞幣／今日幣✓」，唔再用永遠 ★ 令小朋友以為唔使再玩。

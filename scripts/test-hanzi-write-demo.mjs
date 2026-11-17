@@ -263,6 +263,7 @@ assert.doesNotMatch(js, /卡卡認字 Demo/);
 
 assert.match(storage, /'hanzi-write'/);
 assert.match(storage, /'hanzi-write-ch1'/);
+assert.match(storage, /'hanzi-write-ch10'/);
 assert.match(storage, /hanziWriteProgress/);
 
 const context = { window: {} };
@@ -273,21 +274,21 @@ const catalog = context.window.KAKA_HANZI_WRITE_LEVELS;
 const chapters = context.window.KAKA_HANZI_WRITE_CHAPTERS;
 assert.ok(bank, '要有 KAKA_HANZI_WRITE_BANK');
 assert.equal(catalog, bank, 'LEVELS 要 alias BANK');
-assert.equal(bank.length, 30, '第 1-3 章合共三十個字');
+assert.equal(bank.length, 85, '十章合共八十五個字');
 assert.equal(chapters.length, 10, '十章目錄');
-assert.equal(chapters.filter((c) => c.open).length, 3, '只開放三章');
-assert.ok(chapters.slice(3).every((c) => c.title === '即將開放' && !c.open), '4-10 章即將開放');
+assert.equal(chapters.filter((c) => c.open).length, 10, '十章全部開放');
+assert.ok(chapters.every((c) => c.open && c.title !== '即將開放'), '唔好再鎖即將開放空章');
 const CHAPTER_ART = {
   ch1: 'assets/character-words/actions/xiezi-write.webp',
-  ch2: 'assets/common-sense/scenes/home-tw.webp',
-  ch3: 'assets/character-words/actions/chuan-yifu.webp',
+  ch2: 'assets/common-sense/scenes/rain-umbrella.webp',
+  ch3: 'assets/family-stories/scenes/tianye-happy-day-p06.webp',
   ch4: 'assets/family-stories/scenes/zhongshan-zoo-day-p01.webp',
-  ch5: 'assets/character-words/actions/kan-shu.webp',
-  ch6: 'assets/family-stories/scenes/tianye-happy-day-p06.webp',
-  ch7: 'assets/family-stories/scenes/garden-flowers-p01.webp',
-  ch8: 'assets/common-sense/scenes/rain-umbrella.webp',
-  ch9: 'assets/family-stories/scenes/tianye-happy-day-p03.webp',
-  ch10: 'assets/common-sense/scenes/moon-watch.webp',
+  ch5: 'assets/common-sense/scenes/moon-watch.webp',
+  ch6: 'assets/family-stories/scenes/garden-flowers-p01.webp',
+  ch7: 'assets/character-words/actions/kan-shu.webp',
+  ch8: 'assets/common-sense/scenes/home-tw.webp',
+  ch9: 'assets/character-words/actions/chuan-yifu.webp',
+  ch10: 'assets/family-stories/scenes/tianye-happy-day-p03.webp',
 };
 assert.ok(chapters.every((c) => c.art && !c.art.includes('hanzi-write/chapters/') && fs.existsSync(path.join(root, c.art))), '每章要用現有網站插圖，唔好新黏土物件包');
 assert.deepEqual(Object.fromEntries(chapters.map((c) => [c.id, c.art])), CHAPTER_ART, '章節圖要對齊現有角色／場景資產');
@@ -301,12 +302,28 @@ assert.equal(starBox.chapterStarCount(0, 10), 0);
 assert.equal(starBox.chapterStarCount(2, 10), 1);
 assert.equal(starBox.chapterStarCount(10, 10), 5);
 
-const ch1 = ['一', '二', '三', '十', '人', '大', '小', '口', '日', '月'];
-const ch2 = ['手', '目', '耳', '心', '爸', '媽', '哥', '弟', '姐', '妹'];
-const ch3 = ['頭', '面', '鼻', '牙', '腳', '肚', '背', '皮', '衣', '帽'];
-assert.equal(Array.from(bank.filter((b) => b.chapterId === 'ch1').map((b) => b.char)).join(''), ch1.join(''));
-assert.equal(Array.from(bank.filter((b) => b.chapterId === 'ch2').map((b) => b.char)).join(''), ch2.join(''));
-assert.equal(Array.from(bank.filter((b) => b.chapterId === 'ch3').map((b) => b.char)).join(''), ch3.join(''));
+const chapterChars = {
+  ch1: '一二三十人大小口日月',
+  ch2: '木水火山天雨風花',
+  ch3: '土田石里金玉禾川',
+  ch4: '上下左右中東西南北',
+  ch5: '雲雪星光早晚出入',
+  ch6: '草竹魚鳥羊牛馬兔',
+  ch7: '走跑飛坐立來回看',
+  ch8: '手目耳心爸媽哥弟姐妹',
+  ch9: '頭面鼻牙腳肚背皮',
+  ch10: '衣帽鞋褲裙襪衫床',
+};
+for (const [chapterId, expected] of Object.entries(chapterChars)) {
+  assert.equal(
+    Array.from(bank.filter((b) => b.chapterId === chapterId).map((b) => b.char)).join(''),
+    expected,
+    `${chapterId} 字序要對`,
+  );
+}
+assert.ok(bank.some((b) => b.char === '禾' && b.chapterId === 'ch3'), '土地章要用禾');
+assert.ok(!bank.some((b) => b.char === '竹' && b.chapterId === 'ch3'), '土地章唔好用竹頂替禾');
+assert.ok(!bank.some((b) => b.char === '虫'), '唔好再收虫');
 
 const keepIds = { 一: 'yi', 大: 'da', 小: 'xiao', 月: 'yue' };
 for (const [char, id] of Object.entries(keepIds)) {
