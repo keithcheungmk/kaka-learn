@@ -113,6 +113,10 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-11-18 · Cursor Chief Lead（repo cleanup skill）
+
+- 新增 `.agents/skills/kaka-repo-cleanup/SKILL.md`：開住 PR／remote branch／worktree 盤點 → Keith 推／掉 → 先部署保留項 → 其餘 drop。配合今次清理（關 12 PR、删 ~201 remote branch、清 12 worktree）。
+
 ### 2026-11-18 · ChatGPT／Codex — Listen & Find（Fruit Shop）
 
 - 英文入口新增「聽聲搵圖」世界：水果店場景內聽詞後用手指圈選或點選 8 種水果；答錯可重聽，答對會有變化鼓勵、圈選動畫及卡卡跳躍。對白獨立放在 `js/listen-find-dialogue.js`，方便日後調整。
