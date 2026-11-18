@@ -1,0 +1,469 @@
+/* Hallmark · Chinese hub shell · theme: Hum · redesign: polish+compose
+ * Screens: topics, word-games, books, learn, play, match, build, chain, sentence*
+ * Keeps every id / data-open-word-games / hub CTA wiring
+ * waive 39b kids tap ≥48px · waive 30a kept hanzi game glyphs (not emoji icons)
+ */
+/* Hallmark · critique: photo-led modules, one title, paper chrome; drop blue banners / arrow CTAs */
+
+@import url("./tokens.css");
+
+/* —— Shared paper when any Chinese screen leads —— */
+body:has(.chinese-shell.active) {
+  overflow-x: clip;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+body:has(.chinese-shell.active)::before {
+  opacity: 0.28;
+  animation: none;
+  background-image:
+    radial-gradient(1.2px 1.2px at 16% 20%, color-mix(in oklab, var(--color-kraft) 50%, transparent), transparent),
+    radial-gradient(1px 1px at 78% 30%, color-mix(in oklab, var(--color-mint-deep) 35%, transparent), transparent);
+}
+
+.chinese-shell.active:not(.phonics-screen):not(.math-screen)::before {
+  background:
+    linear-gradient(180deg, var(--color-hill-1), transparent 40%),
+    linear-gradient(180deg, color-mix(in oklab, var(--color-paper) 75%, transparent), var(--color-paper-2));
+}
+
+.chinese-shell.active,
+#screen-topics.chinese-shell.active,
+#screen-word-games.chinese-shell.active,
+#screen-books.chinese-shell.active,
+#screen-learn.chinese-shell.active,
+#screen-play.chinese-shell.active {
+  overflow-x: clip !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.chinese-shell .game-header {
+  margin-bottom: var(--space-sm);
+  gap: var(--space-sm);
+}
+
+.chinese-shell .game-header h1 {
+  margin: 0;
+  max-width: none;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 3.2vw, 1.9rem);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--tracking-display);
+  text-shadow: none;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.chinese-shell .game-header .btn-ghost,
+.chinese-shell .learn-nav .btn-ghost,
+.chinese-shell .learn-nav .btn-secondary,
+.chinese-shell .btn-row .btn-ghost,
+.chinese-shell .btn-row .btn-secondary {
+  border: 0;
+  border-radius: var(--radius-stock);
+  background: var(--color-card);
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-rule), 0 3px 0 0 var(--color-edge);
+  min-height: 48px;
+}
+
+.chinese-shell .game-header .btn-ghost:focus-visible,
+.chinese-shell .btn:focus-visible,
+.chinese-shell .hub-module-poster:focus-visible,
+.chinese-shell .hub-module-cta:focus-visible,
+.chinese-shell .topic-card:focus-visible,
+.chinese-shell .play-mode-card:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+
+.chinese-shell .star-panel {
+  background: transparent;
+  border: 0;
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1.5px var(--color-rule);
+  border-radius: var(--radius-pill);
+  min-height: 48px;
+  padding: var(--space-2xs) var(--space-sm);
+}
+
+.chinese-shell .star-panel .star-icon { color: var(--color-accent-deep); filter: none; }
+.chinese-shell .star-meta strong,
+.chinese-shell .stars-today-inline { color: var(--color-ink); }
+
+.chinese-shell .progress-pill {
+  background: var(--color-card);
+  border: 0;
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-rule);
+}
+
+.chinese-shell .section-lead,
+.chinese-shell .hub-modules-lead {
+  color: var(--color-ink-2);
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.chinese-shell .hub-modules-lead::before,
+.chinese-shell .hub-modules-lead::after {
+  display: none;
+}
+
+/* —— Topics hub modules —— */
+#screen-topics .hub-entry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+  width: min(920px, 100%);
+  margin: 0 auto;
+  padding: 0 0 var(--space-2xl);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#screen-topics .hub-module {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: clamp(24px, 3vw, 28px);
+  background: var(--color-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  width: 100%;
+  min-width: 0;
+}
+
+#screen-topics .hub-module-poster {
+  flex: 1 1 auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+  background: var(--color-paper-3);
+}
+
+#screen-topics .hub-module-poster > img {
+  object-fit: cover;
+  object-position: center;
+  background: var(--color-paper-3);
+  filter: saturate(1.04) brightness(1.02);
+}
+
+#screen-topics .hanzi-write-entry-poster > img,
+#screen-topics .word-games-entry-poster > img,
+#screen-topics .family-story-poster > img {
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+#screen-topics .hub-module-banner {
+  position: absolute;
+  inset: auto 0 0;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  background: color-mix(in oklab, var(--color-ink) 72%, transparent);
+  color: var(--color-paper-ink);
+  backdrop-filter: none;
+}
+
+#screen-topics .hub-module-icon { display: none; }
+
+#screen-topics .hub-module-titles > span {
+  color: color-mix(in oklab, var(--color-paper-ink) 82%, transparent);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+#screen-topics .hub-module-banner h2 {
+  color: var(--color-paper-ink);
+  text-shadow: none;
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--tracking-display);
+}
+
+#screen-topics .hub-module-cta {
+  --edge: 4px;
+  width: 100%;
+  min-height: 52px;
+  margin: 0;
+  border-radius: 0;
+  font-weight: 600;
+  color: var(--color-accent-ink);
+  background: var(--color-accent);
+  box-shadow: 0 var(--edge) 0 0 var(--color-accent-deep);
+}
+
+#screen-topics .hub-module-cta.is-story,
+#screen-topics .hub-module-cta.is-write,
+#screen-topics .hub-module-cta.is-words {
+  background: var(--color-accent);
+  box-shadow: 0 var(--edge) 0 0 var(--color-accent-deep);
+  color: var(--color-accent-ink);
+}
+
+#screen-topics .word-games-clue {
+  display: grid;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  min-width: 4.5rem;
+  padding: var(--space-2xs) var(--space-xs);
+  border: 0;
+  border-radius: var(--radius-stock);
+  background: var(--color-card);
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-rule), var(--shadow-card);
+  letter-spacing: 0;
+}
+
+#screen-topics .word-games-clue > span {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--color-muted);
+}
+
+#screen-topics .word-games-clue strong {
+  font-size: var(--text-lg);
+  font-weight: var(--display-weight);
+  color: var(--color-ink);
+}
+
+#screen-topics .hub-entry-grid .hub-module:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  width: min(100%, 28rem);
+  justify-self: center;
+}
+
+@media (max-width: 700px) {
+  #screen-topics .hub-entry-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #screen-topics .hub-entry-grid .hub-module:last-child:nth-child(odd) {
+    width: 100%;
+  }
+}
+
+/* —— Topic / book grids —— */
+.chinese-shell .topic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr));
+  gap: var(--space-sm);
+  width: min(980px, 100%);
+  margin: 0 auto var(--space-xl);
+}
+
+.chinese-shell .topic-card {
+  --edge: 4px;
+  border: 0;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-rule), 0 var(--edge) 0 0 var(--color-edge), var(--shadow-card);
+  min-height: 120px;
+}
+
+.chinese-shell .topic-card:active {
+  --edge: 1px;
+  transform: none;
+  translate: 0 2px;
+}
+
+.chinese-shell .topics-word-wall {
+  width: min(980px, 100%);
+  margin: 0 auto var(--space-xl);
+}
+
+/* —— Learn —— */
+#screen-learn .learn-stage,
+#screen-learn .learn-pair-card {
+  border: 0;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-card);
+}
+
+#screen-learn .learn-hear {
+  color: var(--color-accent-2);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+#screen-learn .chinese-voice-toggle {
+  background: var(--color-paper-2);
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--color-rule);
+  border-radius: var(--radius-pill);
+}
+
+#screen-learn .chinese-voice-btn {
+  color: var(--color-ink-2);
+  background: transparent;
+}
+
+#screen-learn .chinese-voice-btn.is-on {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+#screen-learn .chinese-word-card {
+  background: var(--color-card);
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--color-rule), var(--shadow-card);
+  color: var(--color-ink);
+}
+
+#screen-learn .btn#btn-learn-play,
+.chinese-shell .btn:not(.btn-ghost):not(.btn-secondary) {
+  --edge: 5px;
+  border: 0;
+  border-radius: var(--radius-stock);
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  box-shadow: 0 var(--edge) 0 0 var(--color-accent-deep);
+  font-weight: 600;
+}
+
+/* —— Play modes —— */
+#screen-play .play-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+  width: min(720px, 100%);
+  margin: 0 auto var(--space-md);
+}
+
+#screen-play .play-mode-card {
+  --edge: 5px;
+  border: 0;
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-rule), 0 var(--edge) 0 0 var(--color-edge), var(--shadow-card);
+  min-height: 160px;
+}
+
+#screen-play .play-mode-title {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--tracking-display);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+}
+
+#screen-play .play-mode-blurb {
+  color: var(--color-muted);
+  letter-spacing: 0;
+}
+
+#screen-play .play-preview-plate,
+#screen-play .play-preview-hand,
+#screen-play .word-chain-entry-icon {
+  display: none;
+}
+
+#screen-play .play-preview-chars,
+#screen-play .play-preview-slots,
+#screen-play .play-preview-tiles {
+  display: flex;
+  gap: var(--space-2xs);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#screen-play .play-preview-chars span,
+#screen-play .play-preview-slot,
+#screen-play .play-preview-tiles span {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2rem;
+  min-height: 2rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 10px;
+  background: var(--color-paper-2);
+  color: var(--color-ink);
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px var(--color-rule);
+}
+
+#screen-play .word-chain-entry {
+  width: min(720px, 100%);
+  margin: 0 auto var(--space-xl);
+  border: 0;
+  border-radius: var(--radius-card);
+  background: var(--color-sugar);
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-rule), var(--shadow-card);
+  min-height: 72px;
+}
+
+#screen-play .word-chain-entry > span[aria-hidden="true"]:last-child {
+  display: none;
+}
+
+#screen-play .word-chain-entry small {
+  color: var(--color-muted);
+}
+
+/* —— Match / build / chain / sentence chrome —— */
+#screen-match .prompt-box,
+#screen-build .prompt-box,
+#screen-chain .chain-board,
+#screen-sentence .sentence-scene {
+  border-radius: var(--radius-card);
+}
+
+#screen-chain .chain-reward-bar,
+#screen-sentence .sentence-reward-bar {
+  background: var(--color-card);
+  border: 0;
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-rule);
+  border-radius: var(--radius-stock);
+}
+
+#screen-chain .chain-reward-bar strong,
+#screen-sentence .sentence-reward-bar strong {
+  color: var(--color-accent-deep);
+}
+
+#screen-chain .chain-card {
+  background: var(--color-card);
+  border: 0;
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px var(--color-rule), var(--shadow-card);
+}
+
+#screen-sentence .sentence-pool button,
+#screen-sentence .sentence-slots .slot,
+#screen-match .choice,
+#screen-build .pool-tile,
+#screen-build .slot {
+  border-radius: var(--radius-stock);
+}
+
+@media (max-width: 700px) {
+  #screen-play .play-choices {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chinese-shell .topic-card,
+  #screen-topics .hub-module-cta,
+  #screen-play .play-mode-card {
+    transition: none;
+  }
+}

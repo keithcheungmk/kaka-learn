@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="./css/celebrate-finish.css?v=20261014-celebrate" />
   <link rel="stylesheet" href="./css/emoji-spelling-reference.css?v=20261108-unified" />
   <link rel="stylesheet" href="./css/hallmark-home.css?v=20261118-hum-full" />
+  <link rel="stylesheet" href="./css/hallmark-chinese.css?v=20261118-zh-hub" />
 </head>
 <body>
   <div id="app">
@@ -93,9 +94,7 @@
         <nav class="home-subject-grid" aria-label="選擇學習科目">
           <button type="button" class="home-entry home-entry-chinese" id="btn-start-topics" aria-label="卡卡中文樂園：識字、故事、砌句">
             <span class="home-entry-copy">
-              <span class="home-entry-kicker">中文，識字故事</span>
               <strong>卡卡中文樂園</strong>
-              <span class="home-entry-detail">識字、故事、砌句</span>
             </span>
             <img class="home-entry-illustration" src="./assets/home-subjects/chinese.webp" alt="" width="640" height="585" loading="lazy" decoding="async" />
           </button>
@@ -149,16 +148,16 @@
       </div>
     </section>
 
-    <section id="screen-sentence-landing" class="screen" aria-label="砌句子故事選擇">
-      <div class="game-header"><button type="button" class="btn btn-ghost" id="btn-back-sentence-landing">← 中文</button><h1>砌句子</h1><div class="progress-pill"><strong>12 個故事</strong></div></div>
+    <section id="screen-sentence-landing" class="screen chinese-shell" aria-label="砌句子故事選擇">
+      <div class="game-header"><button type="button" class="btn btn-ghost" id="btn-back-sentence-landing">中文</button><h1>砌句子</h1><div class="progress-pill"><strong>12 個故事</strong></div></div>
       <p class="section-lead">先看看全部故事，再選一個開始</p>
       <div class="sentence-story-grid" id="sentence-story-grid"></div>
     </section>
 
     <!-- 砌句子 demo -->
-    <section id="screen-sentence" class="screen" aria-label="砌句子遊戲">
+    <section id="screen-sentence" class="screen chinese-shell" aria-label="砌句子遊戲">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-sentence">← 中文</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-sentence">中文</button>
         <h1>砌句子</h1>
         <div class="progress-pill"><strong id="sentence-progress">1/12</strong></div>
       </div>
@@ -212,71 +211,62 @@
     </section>
 
     <!-- 揀主題 -->
-    <section id="screen-topics" class="screen" aria-label="揀主題">
+    <section id="screen-topics" class="screen chinese-shell" aria-label="卡卡中文樂園">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-topics">← 返去</button>
-        <h1>揀主題</h1>
-        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+        <button type="button" class="btn btn-ghost" id="btn-back-topics">主頁</button>
+        <h1>卡卡中文樂園</h1>
+        <div class="star-panel">
           <span class="star-icon">★</span>
           <span class="star-meta">
             <strong class="stars-today-inline">0/10</strong>
           </span>
         </div>
       </div>
-      <p class="section-lead hub-modules-lead">揀一個學習入口</p>
+      <p class="section-lead hub-modules-lead">揀一樣嚟玩</p>
       <button type="button" class="btn btn-sentence-home" id="btn-topics-sentence" hidden>中文砌句子</button>
-      <button type="button" class="btn btn-chain-home" id="btn-topics-chain" hidden>詞語鏈・接一接</button>
+      <button type="button" class="btn btn-chain-home" id="btn-topics-chain" hidden>詞語鏈，接一接</button>
       <div class="hub-entry-grid" id="topics-hub-entries">
       <section class="hub-module family-story-entry" aria-labelledby="family-story-entry-title">
         <a class="hub-module-poster family-story-poster" href="./family-storybook.html" aria-labelledby="family-story-entry-title">
           <img src="assets/family-stories/characters/family-height-lineup.webp" alt="卡卡、禧禧和四位家長的角色合照" width="1600" height="1067" decoding="async" fetchpriority="high">
           <span class="hub-module-banner family-story-banner">
-            <span class="hub-module-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M7 4h11v15H8.5A2.5 2.5 0 0 0 6 21.5V6a2 2 0 0 1 1-2Zm-1 2v13.2c0 .4.3.8.7.8.5 0 .8-.4.8-.8V4H7a1 1 0 0 0-1 2Z"/></svg>
-            </span>
             <span class="hub-module-titles"><span>生活日記</span><h2 id="family-story-entry-title">卡卡日記故事</h2></span>
           </span>
         </a>
-        <a class="btn btn-story hub-module-cta is-story" id="btn-topics-family-stories" href="./family-storybook.html" aria-label="獨立開啟卡卡和禧禧一齊玩故事書">開始 →</a>
+        <a class="btn btn-story hub-module-cta is-story" id="btn-topics-family-stories" href="./family-storybook.html" aria-label="獨立開啟卡卡和禧禧一齊玩故事書">開始</a>
       </section>
       <section class="hub-module hanzi-write-entry" aria-labelledby="hanzi-write-entry-title">
         <a class="hub-module-poster hanzi-write-entry-poster" href="./hanzi-write-demo.html" aria-labelledby="hanzi-write-entry-title">
           <img src="assets/hub/chinese-writing-entry-cover.webp" alt="卡卡和禧禧各自拿着筆在紙上寫字，媽媽在旁鼓勵" width="1536" height="1024" decoding="async">
           <span class="hub-module-banner hanzi-write-entry-banner">
-            <span class="hub-module-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M4 20h4l11-11-4-4L4 16v4Zm14.7-13.3 1.6-1.6a1 1 0 0 0 0-1.4l-2-2a1 1 0 0 0-1.4 0l-1.6 1.6 3.4 3.4Z"/></svg>
-            </span>
             <span class="hub-module-titles"><span>寫字</span><h2 id="hanzi-write-entry-title">卡卡學寫字</h2></span>
           </span>
         </a>
-        <a class="btn btn-story hub-module-cta is-write" id="btn-topics-hanzi-write" href="./hanzi-write-demo.html" aria-label="獨立開啟卡卡學寫字">開始 →</a>
+        <a class="btn btn-story hub-module-cta is-write" id="btn-topics-hanzi-write" href="./hanzi-write-demo.html" aria-label="獨立開啟卡卡學寫字">開始</a>
       </section>
       <section class="hub-module word-games-entry" aria-labelledby="word-games-entry-title">
         <button type="button" class="hub-module-poster word-games-entry-poster" data-open-word-games aria-labelledby="word-games-entry-title" aria-controls="screen-word-games">
           <img src="assets/character-words/actions/kan-shu.webp" alt="小朋友坐着看書認字" width="1024" height="1024" decoding="async">
           <span class="word-games-clue" aria-hidden="true"><span>漢字配圖</span><strong>橙 <span>🍊</span></strong></span>
           <span class="hub-module-banner word-games-entry-banner">
-            <span class="hub-module-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M6 4h12a1 1 0 0 1 1 1v15l-7-3-7 3V5a1 1 0 0 1 1-1Z"/></svg>
-            </span>
             <span class="hub-module-titles"><span>認字</span><h2 id="word-games-entry-title">認字遊戲</h2></span>
           </span>
         </button>
-        <button type="button" class="btn btn-story hub-module-cta is-words" data-open-word-games id="btn-topics-word-games" aria-label="開始認字遊戲" aria-controls="screen-word-games">開始 →</button>
+        <button type="button" class="btn btn-story hub-module-cta is-words" data-open-word-games id="btn-topics-word-games" aria-label="開始認字遊戲" aria-controls="screen-word-games">開始</button>
       </section>
       </div>
     </section>
 
-    <section id="screen-word-games" class="screen" aria-label="認字遊戲分類">
+    <section id="screen-word-games" class="screen chinese-shell" aria-label="認字遊戲分類">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-word-games">← 主題</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-word-games">中文</button>
         <h1>認字遊戲</h1>
-        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+        <div class="star-panel">
           <span class="star-icon">★</span>
           <span class="star-meta"><strong class="stars-today-inline">0/10</strong></span>
         </div>
       </div>
-      <p class="section-lead">揀一個分類，開始認字遊戲</p>
+      <p class="section-lead">揀一個分類</p>
       <section class="topics-word-wall" id="topics-word-wall" aria-labelledby="topics-word-wall-title">
         <h2 class="section-lead hub-modules-lead" id="topics-word-wall-title">認字分類</h2>
         <div class="topic-grid" id="topic-grid"></div>
@@ -284,25 +274,25 @@
     </section>
 
     <!-- 紅橙輯：揀書 -->
-    <section id="screen-books" class="screen" aria-label="揀書">
+    <section id="screen-books" class="screen chinese-shell" aria-label="揀書">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-books">← 主題</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-books">認字</button>
         <h1 id="books-topic-title">揀書</h1>
-        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+        <div class="star-panel">
           <span class="star-icon">★</span>
           <span class="star-meta">
             <strong class="stars-today-inline">0/10</strong>
           </span>
         </div>
       </div>
-      <p class="section-lead">今日讀咗邊本書？揀返嗰本嚟溫習</p>
+      <p class="section-lead">今日讀咗邊本？揀返嚟溫習</p>
       <div class="topic-grid" id="book-grid"></div>
     </section>
 
     <!-- 先學一學 -->
-    <section id="screen-learn" class="screen" aria-label="先學一學">
+    <section id="screen-learn" class="screen chinese-shell" aria-label="先學一學">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-learn">← 主題</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-learn">返去</button>
         <h1 id="learn-topic-title">先學一學</h1>
         <div class="progress-pill" aria-label="學習進度">
           <strong id="learn-progress">1/5</strong>
@@ -323,24 +313,24 @@
       <button type="button" class="learn-stage" id="learn-stage" aria-label="再聽一次">
         <div id="learn-illust"></div>
         <div class="learn-term" id="learn-term"></div>
-        <div class="learn-hear">🔊 聽一聽</div>
+        <div class="learn-hear">聽一聽</div>
       </button>
       <div class="learn-pair-stage" id="learn-pair-stage" hidden>
         <button type="button" class="learn-pair-card" id="learn-pair-left" aria-label="聽左邊">
           <div class="learn-pair-illust" id="learn-pair-left-illust"></div>
           <div class="learn-term learn-pair-term" id="learn-pair-left-term"></div>
-          <div class="learn-hear">🔊 聽</div>
+          <div class="learn-hear">聽</div>
         </button>
         <div class="learn-pair-vs" aria-hidden="true">相反</div>
         <button type="button" class="learn-pair-card" id="learn-pair-right" aria-label="聽右邊">
           <div class="learn-pair-illust" id="learn-pair-right-illust"></div>
           <div class="learn-term learn-pair-term" id="learn-pair-right-term"></div>
-          <div class="learn-hear">🔊 聽</div>
+          <div class="learn-hear">聽</div>
         </button>
       </div>
       <div class="btn-row learn-nav">
-        <button type="button" class="btn btn-ghost" id="btn-learn-prev">← 上一張</button>
-        <button type="button" class="btn btn-secondary" id="btn-learn-next">下一張 →</button>
+        <button type="button" class="btn btn-ghost" id="btn-learn-prev">上一張</button>
+        <button type="button" class="btn btn-secondary" id="btn-learn-next">下一張</button>
       </div>
       <div class="btn-row learn-finish-row" id="learn-finish-row">
         <button type="button" class="btn" id="btn-learn-play">去玩玩</button>
@@ -348,11 +338,11 @@
     </section>
 
     <!-- 學完揀玩法 -->
-    <section id="screen-play" class="screen" aria-label="揀玩法">
+    <section id="screen-play" class="screen chinese-shell" aria-label="揀玩法">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-play">← 再學</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-play">再學</button>
         <h1 id="play-topic-title">去玩玩</h1>
-        <div class="star-panel" style="min-height:56px;padding:8px 12px">
+        <div class="star-panel">
           <span class="star-icon">★</span>
           <span class="star-meta">
             <strong class="stars-today-inline">0/10</strong>
@@ -363,7 +353,6 @@
       <div class="play-choices">
         <button type="button" class="play-mode-card play-mode-match" id="btn-mode-match" hidden aria-label="配一配，睇圖，揀漢字">
           <span class="play-mode-preview play-preview-match" aria-hidden="true">
-            <span class="play-preview-plate">⭐</span>
             <span class="play-preview-chars">
               <span>月</span>
               <span class="is-glow">星</span>
@@ -377,7 +366,6 @@
         </button>
         <button type="button" class="play-mode-card play-mode-build" id="btn-mode-build" aria-label="砌一砌，用手砌漢字">
           <span class="play-mode-preview play-preview-build" aria-hidden="true">
-            <span class="play-preview-hand">✋</span>
             <span class="play-preview-slots">
               <span class="play-preview-slot"><span class="play-preview-ghost">小</span></span>
               <span class="play-preview-slot is-next"><span class="play-preview-ghost">鹿</span></span>
@@ -395,16 +383,14 @@
         </button>
       </div>
       <button type="button" class="word-chain-entry" id="btn-mode-chain" aria-label="接一接，搵下一個詞">
-        <span class="word-chain-entry-icon" aria-hidden="true">🔗</span>
         <span><strong>接一接</strong><small>搵下一個詞，睇下啲字點樣變</small></span>
-        <span aria-hidden="true">→</span>
       </button>
     </section>
 
     <!-- 詞語接龍 demo -->
-    <section id="screen-chain" class="screen" aria-label="接一接詞語遊戲">
+    <section id="screen-chain" class="screen chinese-shell" aria-label="接一接詞語遊戲">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-chain">← 玩法</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-chain">玩法</button>
         <h1>接一接</h1>
         <div class="progress-pill"><strong id="chain-progress">1/5</strong></div>
       </div>
@@ -419,9 +405,9 @@
     </section>
 
     <!-- 模式 B：配一配 -->
-    <section id="screen-match" class="screen" aria-label="配一配">
+    <section id="screen-match" class="screen chinese-shell" aria-label="配一配">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-match">← 玩法</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-match">玩法</button>
         <h1>配一配</h1>
         <div class="progress-pill" aria-label="今輪答啱進度">
           <strong id="match-round-progress">0/8</strong>
@@ -436,9 +422,9 @@
     </section>
 
     <!-- 模式 C：砌字配圖 -->
-    <section id="screen-build" class="screen" aria-label="砌一砌配漢字">
+    <section id="screen-build" class="screen chinese-shell" aria-label="砌一砌配漢字">
       <div class="game-header">
-        <button type="button" class="btn btn-ghost" id="btn-back-build">← 玩法</button>
+        <button type="button" class="btn btn-ghost" id="btn-back-build">玩法</button>
         <h1>砌一砌</h1>
         <div class="progress-pill" aria-label="今輪答啱進度">
           <strong id="build-round-progress">0/10</strong>
@@ -450,7 +436,7 @@
       <div class="build-stage" id="build-stage" aria-hidden="true"></div>
       <div class="build-slots" id="build-slots" aria-label="漢字格"></div>
       <div class="build-speak-wrap">
-        <button type="button" class="speak-btn" id="btn-speak-build" aria-label="聽呢個詞">🔊 聽呢個詞</button>
+        <button type="button" class="speak-btn" id="btn-speak-build" aria-label="聽呢個詞">聽呢個詞</button>
       </div>
       <div class="build-pool-wrap">
         <p class="section-label">字池</p>

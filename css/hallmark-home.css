@@ -383,6 +383,27 @@ body:has(#screen-home.active)::before {
 #screen-home .home-entry-chinese {
   background: var(--color-subject-zh);
   --subject-deep: var(--color-subject-zh-deep);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: end;
+  padding-block: var(--space-sm) var(--space-md);
+}
+
+#screen-home .home-entry-chinese .home-entry-kicker,
+#screen-home .home-entry-chinese .home-entry-detail {
+  display: none;
+}
+
+#screen-home .home-entry-chinese strong {
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  align-self: center;
+}
+
+#screen-home .home-entry-chinese .home-entry-illustration {
+  max-height: 148px;
+  width: min(100%, 168px);
+  object-fit: contain;
+  object-position: center bottom;
+  justify-self: end;
 }
 #screen-home .home-entry-english {
   background: var(--color-subject-en);
