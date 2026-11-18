@@ -996,7 +996,8 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError("Ten chapters are open; tiles must not say 即將開放")
     if pg.query_selector("#chapter-grid .chapter-card.is-locked"):
         raise RuntimeError("Ten chapters are open; no locked chapter tiles")
-    if "土地同自然物" not in chapter_grid or "自然同天氣" not in chapter_grid:
+    chapter_labels = pg.locator("#chapter-grid .chapter-card").evaluate_all("els => els.map(el => el.getAttribute('aria-label') || '').join(' ')")
+    if "土地同自然物" not in chapter_labels or "自然同天氣" not in chapter_labels:
         raise RuntimeError("Chapter picker must show nature／land chapter titles")
     if not pg.query_selector("[data-chapter-id='ch10']"):
         raise RuntimeError("Chapter picker must list chapter 10")
