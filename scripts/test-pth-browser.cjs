@@ -13,12 +13,12 @@ const pause=ms=>new Promise(r=>setTimeout(r,ms));
   await page.goto(base);await page.waitForSelector('.lesson');await page.selectOption('#profileSelect','kaka');
   for(const group of groups){
    await page.click('[data-tab="learn"]');await page.click(`[data-group="${group}"]`);
-   assert.equal(await page.locator('.example-item').count(),group==='yw'?6:['gkh','jqx','zcs'].includes(group)?9:12);
+   assert.equal(await page.locator('.focus-card').count(),group==='yw'?6:['gkh','jqx','zcs'].includes(group)?9:12);
    assert.ok(await page.locator('video').evaluateAll(videos=>videos.every(v=>v.preload==='none')),'unplayed lesson videos must not compete with word audio');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+2));
-   const contrast=await page.locator('.example-pinyin').first().evaluate(el=>{
+   const contrast=await page.locator('.focus-pinyin').first().evaluate(el=>{
     const lum=c=>{const a=c.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;});return a[0]*.2126+a[1]*.7152+a[2]*.0722;};
-    const a=lum(getComputedStyle(el).color),b=lum(getComputedStyle(el.parentElement).backgroundColor);return(Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+    const a=lum(getComputedStyle(el).color),b=lum(getComputedStyle(el.closest('.focus-card')).backgroundColor);return(Math.max(a,b)+.05)/(Math.min(a,b)+.05);
    });assert.ok(contrast>=4.5,`contrast ${contrast}`);
    if(process.env.PTH_SHOTS&&width===1210&&group==='jqx'){fs.mkdirSync(process.env.PTH_SHOTS,{recursive:true});await page.screenshot({path:`${process.env.PTH_SHOTS}/pth-learn.png`,fullPage:true});}
    await page.click('#startQuiz');assert.equal(await page.locator('#questionNo').textContent(),'1');
