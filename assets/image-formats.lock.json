@@ -63,6 +63,10 @@
     "format": "PNG",
     "alpha": true
   },
+  "assets/english-listen-find/kaka-celebrate.png": {
+    "format": "PNG",
+    "alpha": true
+  },
   "assets/food/feiniu.jpg": {
     "format": "JPEG",
     "alpha": false

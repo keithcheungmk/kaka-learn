@@ -1225,9 +1225,15 @@ def walk(pg, url, shots: Path | None, tag: str):
     if after_tick.get("overlay"):
         raise RuntimeError("A mid-character success must not open the pass overlay")
     if after_tick.get("count") == 3:
-        if "這個是" not in (after_tick.get("status") or "") or not after_tick.get("cheer"):
-            raise RuntimeError(f"The 3rd success must show a written meaning cheer, got {after_tick!r}")
-        if "過關" in (after_tick.get("status") or ""):
+        expected_cheer = pg.evaluate(
+            "() => window.KakaHanziWrite.midCheerFor(window.KakaHanziWrite.currentLevel())"
+        )
+        status = after_tick.get("status") or ""
+        if not after_tick.get("cheer") or status != expected_cheer:
+            raise RuntimeError(
+                f"The 3rd success must show the character midCheer, expected {expected_cheer!r}, got {after_tick!r}"
+            )
+        if "過關" in status:
             raise RuntimeError("The 3rd success must not talk about 過關")
     hint_levels = pg.evaluate(
         """() => {
