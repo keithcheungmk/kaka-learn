@@ -244,7 +244,7 @@
     });
     wall.addEventListener('pointerup', (event) => {
       if (event.pointerId !== drawingPointerId) return;
-      const moved = points.length > 1 && Math.hypot(points[points.length - 1].x - points[0].x, points[points.length - 1].y - points[0].y) > 16;
+      const moved = points.some((point) => Math.hypot(point.x - points[0].x, point.y - points[0].y) > 16);
       const target = moved ? targetInsideCircle(points) : targetAtPoint(event.clientX, event.clientY);
       clearDrawing();
       if (target) answerTarget(target);
