@@ -34,5 +34,5 @@ is_background: false
 ## 交付
 
 - 自己跑改動所需語法檢查、數理測試、家庭 viewport smoke 及 `python3 scripts/check-invariants.py`。
-- 將結果、改過嘅檔案及任何 blocker 交回 Chief Lead；需要時由 Chief 指派一位 Lead 整合及執行已授權的 commit、push、merge 或部署。
-- 唔叫 Keith 睇 code／diff 驗收；驗收只喺 live 網站玩。
+- 交返 Chief 嘅結果要係**可即時部署**：測試綠、範圍清楚、無「待 Keith 決定」細節（真 blocker 除外）。完結條件＝live 網址，唔係本機完成。
+- 方向已批後唔用樣板／問卷停低；唔叫 Keith 睇 code／diff 驗收。

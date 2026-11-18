@@ -48,29 +48,15 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 ## 進行中（認領）
 
-2026-10-04 ChatGPT／Codex：PTH audit 修復在獨立 worktree `/private/tmp/kaka-pth-repair` 完成，進入 CI／發佈驗證；勿用舊本機 PTH renderer 覆蓋。其餘共享工作樹不變；Supabase 支線仍暫停。
+改共享檔（尤其係下面「撞車高危檔案」）之前，先喺呢度認領。做完而且 **live `version.json` 對上該 commit** 之後先刪嗰行。**永遠唔好兩個人同時認領同一批檔／同一個功能。**
 
-改共享檔（尤其係下面「撞車高危檔案」）之前，先喺呢度認領。做完／merge 完就刪嗰行。**永遠唔好兩個人同時認領同一批檔／同一個功能。**
+認領生命週期：開行 → 做緊 → live 先刪。禁止用 `本機完成`／`待整合`／`尚未部署` 當備註終態（`check-invariants` 會擋）。理想係 0–2 行；過期噪音要清，唔好當活任務。
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| 寫字每次成功叮＋閃＋右下 6 粒星＋寫完鼓勵彈窗 | Cursor Chief Lead | `hanzi-write-demo.html`, `css/hanzi-write-demo.css`, `js/hanzi-write-demo.js`, `data/hanzi-write-chars.js`, `scripts/test-hanzi-write-demo.mjs`, `scripts/smoke-shots.py`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-26 | Keith 已批：6 星進度＋叮閃；寫完唔講過關；主掣下一個字；第 3 次書面字義鼓勵；CI 綠自合入 |
-| WR019 Pet Care Next 被剪走 | Cursor Chief Lead（English 範圍） | `css/story-demo.css`, `js/story-demo.js`, `scripts/test-story-mission.mjs`, `scripts/check-invariants.py`, `docs/handover.md` | 2026-10-10 | Keith 批准最小修復：panel 可捲＋scrollIntoView Next；唔改填空資料；唔自 merge |
-| 故事 focus 優化（浠榆初生＋迪士尼／國慶合照拆開） | Cursor Chief Lead | `data/family-stories/manifest.js`, `assets/family-stories/scenes/hongkong-disney-p06.webp`, `docs/family-storybook-first-edition.md`, `docs/handover.md` | 2026-10-10 | Keith 批准：初生篇保留洗澡、淡化珠海／月子中心／睡覺；迪士尼對齊地圖／城堡／排隊／紀念品／合照照片；國慶唔再 focus 合照／照片。開 PR，唔自 merge。 |
-| 主頁四科入口加入卡卡插畫 | ChatGPT／Codex | `index.html`, `css/styles.css`, `assets/home-subjects/`, `assets/image-formats.lock.json`, `docs/handover.md` | 2026-10-06 | Keith 已看過四科卡片 demo 並指示繼續；只改入口視覺，保留文字、連結與按鈕行為。 |
-| 紅輯「按書頁砌句」資料層及遊戲引擎 | Chinese Lead（Chief 整合） | `js/book-scene-demo.js`, `book-scene-demo.html`, `css/book-scene-demo.css`, `data/red-series/`, `scripts/test-book-scene-demo.mjs`, `scripts/smoke-book-scene-demo.py`, `docs/cursor-handoff-2026-09-20.md` | 2026-09-20 | Keith 交辦：本機接盤；內容由 Chinese Lead，shared／部署由 Chief；唔開 Cloud Agent |
-| 書本掃描書架 | Chinese Lead（Chief 整合） | `book-scans/index.html`, `index.html`（共享）, `css/styles.css`（共享）, `scripts/check-invariants.py`（共享） | 2026-09-08 | 家長 PDF 書架；中文內容由 Chinese Lead，共享檔由 Chief 認領 |
-| 中文故事小隊第一版 | ChatGPT／Codex（故事內容及 UI 狀態；Chief 整合） | `family-storybook.html`, `css/styles.css`, `js/family-storybook.js`, `data/family-stories/manifest.js`, `docs/family-storybook-first-edition.md`, `index.html`, `docs/handover.md` | 2026-10-02 | 新增〈浠榆妹妹來了〉八頁和九張角色／場景 WebP；紅書詞語來源留空並以「學習詞語」呈現。將錯寫的「堯叔叔」全數更正為「耀叔叔」。首個故事提交 `fdab12d` 已推送，GitHub Pages run #315 成功；瀏覽器仍取到未加版本戳的舊 JS，因此本次為故事資料與角色程式加入部署版本戳，確保即時刷新。 |
-| 國慶假期珠海探親故事 | ChatGPT／Codex（故事及場景圖） | `data/family-stories/manifest.js`, `assets/family-stories/scenes/xiyu-national-day-p01.webp` 至 `p08.webp`, `.agents/skills/kaka-story-based-chinese-learning/`, `docs/family-storybook-first-edition.md` | 2026-10-02 | 新增八頁〈國慶假期，去珠海看妹妹〉，包括手腳模紀念品和親子室內遊樂場；完成故事資料、八張插圖及專用中文故事學習 skill。本地故事／invariant／互動檢查通過；已提交新分支，未推送，待 Chief Lead 整合。 |
-| 加減法操作流程統一第一階段 | Math Lead（Chief 整合） | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | 加法回答確認、拖曳防誤觸、桌面排位；共享檔由 Chief 整合 |
-| 加減法操作流程統一、回答確認、拖曳防誤觸及桌面版面 | Math Lead（Chief 整合） | `index.html`, `js/additionGame.js`, `js/subtractionGame.js`, `css/additionGame.css`, `docs/handover.md` | 2026-09-08 | 先操作後回答；共享檔由 Chief 整合 |
-| 數學玩法縮至四星＋水星重做 | Math Lead（ChatGPT／Codex Chief 整合） | `index.html`, `js/math-*`, `css/math.css`, 數理測試、`scripts/check-invariants.py`, `docs/handover.md` | 2026-09-28 | Keith 指示只保留地球加法、月球減法、金星時鐘及全新水星數量玩法；其他星球、Number Bonds 從入口與流程下架。原 9/16 iPad 橫向工作納入此任務；未部署 |
-| 五項生活數感活動 | ChatGPT／Codex（Math；Chief review） | `index.html`, `css/math.css`, `js/math-app.js`, `js/math-life-skills-*`, `scripts/test-math-life-skills.mjs` | 2026-10-01 | 加入數量比較、數字拆合、形狀與規律、小小商店、生活度量；本機數學回歸及 invariants 通過。尚未在 iPad/iPhone 實機視覺驗收。 |
-| English Topic Words 一頁詞卡介面 | ChatGPT／Codex | `index.html`, `css/playground-theme.css`, `js/phonics-app.js`, `scripts/test-phonics-flow.mjs` | 2026-10-06 | 所有英文主題詞語（含職業分組、節日子主題）同頁展示完整詞卡及逐卡發音；純 phonics／字母音仍沿用原學習頁。 |
-| 職業字詞 45 張卡卡／禧禧未來職業插圖 | ChatGPT／Codex | `js/words.js`, `css/styles.css`, `assets/careers/`, 職業插圖測試、`docs/handover.md` | 2026-09-29 | 由 Keith 指示按已同意方案落地；保留其餘主題原 Emoji；待完成 iPad 驗證及部署 |
 
-<!-- 範本（複製一行，填完刪走「—」嗰行）：
-| 短描述 | Cursor／ChatGPT（Codex） | `path/a`, `path/b` | YYYY-MM-DD | Keith 交辦／自己認領 backlog |
+<!-- 範本（複製一行，填完刪走空表）：
+| 短描述 | Cursor／ChatGPT（Codex） | `path/a`, `path/b` | YYYY-MM-DD | 做緊；完結條件＝live |
 -->
 
 ## 暫緩支線（Keith 2026-09-19 指示）
@@ -126,6 +112,12 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-11-18 · Cursor Chief Lead（Outcome 流程：完結＝live）
+
+- 對 `origin/main` 稽核後清空「進行中」過期認領（寫字叮閃、WR019 Next、故事 focus、主頁插畫、書頁砌句、書本掃描、故事小隊、國慶故事、加減法統一、四星水星、生活數感、Topic Words 一頁卡、職業插圖等）。檔案已在 main／live，舊「待整合／尚未部署」備註當噪音關閉，唔合併 dirty WIP。
+- `AGENTS.md`／`.cursor/rules/keith-play-not-code.mdc`／`CLAUDE.md`／三位 Lead 寫死完結＝live、方向已批禁中途問卷、乾淨 worktree 開工。
+- 「待 Keith 話事」只留真拍板題；可執行項移去「Agent backlog」。`check-invariants` 加 handover 認領衛生檢查（禁止活認領寫本機完成／待整合／尚未部署）。
 
 ### 2026-11-17 · Cursor Chief Lead（學寫字章節主題小景物圖）
 
@@ -1378,21 +1370,31 @@ Claude 做咗一次完整審查，結果喺 **`docs/site-review-2026-09.md`** �
 重點三項（P0）：字形改用香港標準 + 自己 host 字體、加每隻字嘅掌握度記錄、單字讀音要有得校正。
 入面有一節「我睇過但冇問題、唔好去郁」，避免順手優化整壞嘢。
 
-## 未做／待 Keith 話事
+## 待 Keith 話事（真要拍板）
+
+呢表**只**放要 Keith 產品決定嘅題。Agent 見呢表唔等於要停低問；未獲指示前唔主動開工。
 
 | 項目 | 狀態 | 建議擁有人 |
 |---|---|---|
-| `version.json` 自動 reload（KAKA 部 iPad 冇人幫佢 hard-reload，長遠一定要） | 未開工 | Cursor |
-| 行星圖黑底去背（技術已驗證） | 未開工 | Cursor |
-| 字詞 union：13 本書有字未計入系列總數（紅輯 212→255、橙輯 183→197） | 未開工 | ChatGPT／Codex（核內容）＋Cursor（落地） |
-| 🫎 駝鹿 OpenMoji 淨係得對角，要換圖 | 未開工 | Cursor |
-| 已兌換記錄（唔記錄嘅話累積幣數唔誠實） | 未開工 | ChatGPT／Codex |
-| 怪獸 phase 2：每個主題一隻、原創畫、家長開關 | **等 KAKA 試玩結果** | ChatGPT／Codex（方案）＋Cursor（落地） |
-| ~~太空戰士造型同 Buzz Lightyear 似唔似~~ | ✅ 已決定接受（2026-09-02，見 AGENTS.md） | — |
-| 每日 3 個幣（真錢）會唔會太鬆手 | **等 Keith 決定** | Keith |
-| ~~答啱每一題要唔要換 ranger 反應~~ | ✅ 已做：頭頂 sparkle（下畫）+ 隨機換 4 款動作 pose（夜晚），兩次都 2026-09-02 | — |
-| 純面部表情（開心／眨眼等 7 款）想真係用得到，要新畫一版有戴頭盔嘅版本 | idea，未開工 | 新畫要 Keith／畫圖果邊 |
-| KAKA RANGER logo 擺喺主頁 `.brand-mark`（同而家 CSS 畫嘅 `.brand-orbit` 二揀一） | 未開工，今次冇做（範圍係 favicon／og-image） | Cursor |
+| 怪獸 phase 2：每個主題一隻、原創畫、家長開關 | 等 KAKA 試玩結果 | ChatGPT／Codex（方案）＋Cursor（落地） |
+| 每日 3 個幣（真錢）會唔會太鬆手 | 等 Keith 決定 | Keith |
+| 純面部表情（開心／眨眼等 7 款）要新畫戴頭盔版 | idea | 新畫要 Keith／畫圖 |
+| KAKA RANGER logo 擺主頁 `.brand-mark`（同 `.brand-orbit` 二揀一） | 未開工 | Cursor（要 Keith 揀視覺） |
+| ~~太空戰士造型同 Buzz Lightyear 似唔似~~ | ✅ 已接受（2026-09-02） | — |
+| ~~答啱換 ranger 反應~~ | ✅ 已做（2026-09-02） | — |
+
+## Agent backlog（可直接做，唔使再問）
+
+未認領前唔搶已有擁有人嘅活。開工要由 `origin/main` 開乾淨 worktree，完結＝live。
+
+| 項目 | 建議擁有人 |
+|---|---|
+| `version.json` 自動 reload（iPad 長開 tab 唔 hard-reload） | Cursor／Codex |
+| 行星圖黑底去背（技術已驗證） | Cursor |
+| 字詞 union：紅輯／橙輯系列總數未計齊 | ChatGPT／Codex（核）＋Cursor（落地） |
+| 駝鹿圖（🫎 OpenMoji 淨對角）換清楚插圖 | Cursor |
+| 已兌換記錄（累積幣誠實） | ChatGPT／Codex |
+| 英文錯圖／撞圖（glue🧴、eraser🧽、snow🧊、tin🫙；其餘見近期交接） | English Lead → Chief |
 
 無人擁有嘅 repo 項目，由 ChatGPT／Cursor 經「進行中」認領；已有擁有人嘅唔好搶。Grok bot 可畀第二意見，但預設唔係 repo owner。
 
@@ -1401,16 +1403,17 @@ Claude 做咗一次完整審查，結果喺 **`docs/site-review-2026-09.md`** �
 ChatGPT／Cursor 都跟呢套：
 
 ```bash
-git fetch origin main && git rebase origin/main   # 開工第一件事；ChatGPT／Cursor 都可能 push main
-# 認領「進行中」→ 改嘢 → 清認領
+git fetch origin main
+# 由 origin/main 開乾淨 worktree／分支；唔喺長期 dirty WIP 上開工
+# 認領「進行中」→ 改嘢
 python3 scripts/check-invariants.py               # 一定要 exit 0
-python3 scripts/smoke-shots.py --no-shots         # 家庭裝置；改過版面／CSS／流程先跑。全尺寸加 --all。小改動唔使本地重跑
-python3 scripts/qa-report.py                      # 跟 docs/qa-check.md
-# merge 入 main → Pages 自動上線 → 返嚟更新呢個檔嘅「最近改動」（署名 Cursor 或 ChatGPT／Codex）
+# 版面改動先查受影響頁；小改動跟 docs/qa-check.md
+# CI 綠 → merge／fast-forward main → 等 version.json 對 SHA → 交可撳網址
+# 返嚟更新「最近改動」並刪認領行（署名 Cursor 或 ChatGPT／Codex）
 ```
 
 ⚠️ 部署完，iPhone／iPad 要**閂咗個 tab 再開**先睇到新版（單純 refresh 唔夠，
-`index.html` 本身會被瀏覽器 cache）。呢個就係上面 `version.json` 嗰項想解決嘅問題。
+`index.html` 本身會被瀏覽器 cache）。呢個就係 Agent backlog 入面 `version.json` reload 想解決嘅問題。
 
 ### 2026-09-12 · Codex — 本地普通話聲母示範素材
 

@@ -1039,6 +1039,34 @@ def check_agent_collab_docs() -> None:
         fail("agent-docs", "字卡 OCR 指引要寫清 ChatGPT owner 同 Grok 界線")
     if "Claude Cowork" in ocr or "唔好叫 Cursor 或 Codex／ChatGPT 讀字卡相" in ocr:
         fail("agent-docs", "字卡 OCR 指引仍然鎖死 Claude 或禁止 ChatGPT")
+    for needle in ("Outcome 完結定義", "幾時先問 Keith", "version.json"):
+        if needle not in agents:
+            fail("agent-docs", f"AGENTS.md 要有 Outcome／問 Keith 規則（缺「{needle}」）")
+    if "Agent backlog" not in handover or "待 Keith 話事" not in handover:
+        fail("agent-docs", "handover 要分開「待 Keith 話事」同「Agent backlog」")
+
+
+def check_handover_claim_hygiene() -> None:
+    """活認領唔可以寫本機完成／待整合／尚未部署——嗰啲唔係終態。"""
+    text = read("docs/handover.md")
+    m = re.search(r"## 進行中（認領）\n(.*?)(\n## |\Z)", text, re.S)
+    if not m:
+        fail("handover-claims", "handover 缺少「進行中（認領）」段")
+        return
+    section = m.group(1)
+    banned = ("本機完成", "待整合", "尚未部署", "未部署")
+    for line in section.splitlines():
+        if not line.startswith("|") or line.startswith("|---") or "功能／範圍" in line:
+            continue
+        cells = [c.strip() for c in line.strip("|").split("|")]
+        if len(cells) < 2 or not cells[0] or cells[0] == "短描述":
+            continue
+        for bad in banned:
+            if bad in line:
+                fail(
+                    "handover-claims",
+                    f"活認領「{cells[0]}」唔可以寫「{bad}」；完結＝live 先刪行，或改寫做緊狀態",
+                )
 
 
 def check_family_smoke_devices() -> None:
@@ -1950,6 +1978,7 @@ CHECKS = [
     check_learn_finish_always,
     check_cjk_halfwidth_punct,
     check_agent_collab_docs,
+    check_handover_claim_hygiene,
     check_family_smoke_devices,
     check_book_scans_shelf,
     check_family_storybook_entry,

@@ -70,10 +70,31 @@
 - 「第二人驗收」＝Keith 喺 live／Pages 玩；**唔係** chat 入面 code review。呢條優先過舊「先等 Keith 確認先開正式題」。
 - 詳見 `.cursor/rules/keith-play-not-code.mdc` 同 `docs/qa-check.md`。
 
+### Outcome 完結定義（Keith 2026-11-18）
+
+任務**只有**達到下面先算完成。`本機完成`、`待整合`、`尚未部署` **唔係**終態，唔好當收工寫入交接。
+
+1. `python3 scripts/check-invariants.py` exit 0，以及今次範圍嘅相關測試綠。
+2. 有版面改動先查受影響頁；無版面改動唔做視覺巡查。
+3. commit 入可部署分支 → CI 綠 → fast-forward／merge 入 `main`。
+4. 公開站 `version.json` 對上該 commit SHA，相關資源 HTTP 200。
+5. 回覆只交可撳網址（必要時加一句去邊度玩）。
+
+### 幾時先問 Keith（決策表）
+
+| 情況 | 做法 |
+|---|---|
+| 學習內容對錯、私隱風險、品牌例外、新玩法／資訊架構 | 先畀短方案，**只問一次方向**；批咗就做到 live |
+| 已批方向內嘅實作細節（邊張圖、邊個詞先換、次要文案） | **唔問**；上線後 Keith 玩完再講 |
+| 髒 WIP／紅燈／撞檔 | 由 `origin/main` 開乾淨 worktree；唔停低叫 Keith 目視 code |
+| 真可能令正式題教錯或小朋友誤解 | 停低講明風險；唔丟 diff 叫佢驗 |
+
+大型功能／產品方向先討論一次（見 `CLAUDE.md`）。討論範圍只係方向同擺位，**唔包括**執行細節、樣板閘、AskQuestion 揀批次。方向已批之後禁止中途再問「你想點／睇下先」。
+
 ### 最新網站基準及隔離交付（Keith 2026-10-27）
 
 - 開始修改前先 fetch `origin/main`，核對主線 commit、Pages 部署及相關最新改動；如果未能更新主線，先講清楚限制，唔好把舊 checkout 當現網。
-- 舊工作目錄如有不相關或未提交改動，由最新主線開獨立 worktree；逐個檢視、只移入本次需要嘅檔案或差異，唔整批 merge 舊草稿。保留其他人嘅工作。
+- **預設開工根目錄**＝由最新 `origin/main` 開嘅乾淨 worktree／分支。`codex/local-wip-preserved-*` 或任何長期髒 checkout **只讀／揀選**；需要舊改動就搬檔或 cherry-pick，唔喺髒樹上繼續堆，亦唔整批 merge 舊草稿。保留其他人未提交工作。
 - 跑版面 smoke 前，伺服器必須由正在檢查嘅工作目錄提供內容；`scripts/smoke-shots.py` 會比較預覽首頁及其本地 JS／CSS 與該 checkout 的檔案，對唔上就即時停止。用 `--url` 指向正確預覽，唔好將舊伺服器的結果當成新版本驗收。
 - 交付前再次核對主線有否前進、只 stage 本次檔案並檢查 staged diff；CI 成功後才合併。分別確認 commit、push、Pages 部署同公開網站版本，唔好將其中一步當成全部完成。
 - `scripts/build-site.sh` 只可在 checkout 根目錄執行，輸出必須在 checkout 內且不可覆蓋受版本控制的檔案；用同一套 Python 版本戳處理 macOS／Linux，確認打包後引用和 `version.json` 對齊。

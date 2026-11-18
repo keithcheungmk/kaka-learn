@@ -12,3 +12,6 @@ Keith（2026-09-21）硬性工作流：
 3. 收工只交 **可撳網址**（例如 Pages）；佢唔滿意會喺網站玩完再講，再改再部署。
 4. 「第二人驗收」＝Keith 喺 live 玩；**唔係** chat 入面 code review。呢條優先過舊「先等 Keith 確認先開正式題」。
 5. **長期授權 push `main`（Keith 2026-10-08）**：Keith 已明確授權 agent 喺本機測試、`check-invariants.py` 及分支 CI 全綠後，直接 fast-forward `git push origin HEAD:main` 部署 Pages，唔使逐次再問；唔包括 force push、改寫歷史或提交 `source-materials/`。
+6. **完結＝live**（2026-11-18）：`本機完成`／`待整合`／`尚未部署` 唔算收工。要有 `main` commit、Pages `version.json` 對 SHA、可撳網址。
+7. **方向已批後禁止中途問卷**：唔好再用樣板閘、AskQuestion 或「你揀邊個」停低；細節上線後由 Keith 喺網站玩完再講。
+8. **髒樹唔當開工根**：由 `origin/main` 開乾淨 worktree；長期 dirty WIP 只讀／揀選。

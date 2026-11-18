@@ -36,5 +36,5 @@ is_background: false
 ## 交付
 
 - 跑相應 `node --check`、中文／PTH／書頁測試、家庭 viewport smoke 及 `python3 scripts/check-invariants.py`。
-- 將結果、改過嘅檔案及 blocker 交回 Chief Lead；需要時由 Chief 指派一位 Lead 整合及執行已授權的 commit、push、merge 或部署。
-- Keith 只喺 live 網站玩驗收；唔滿意再由團隊修正及重新部署。
+- 交返 Chief 嘅結果要係**可即時部署**：測試綠、範圍清楚、無「待 Keith 決定」細節（真 blocker 除外）。完結條件＝live 網址，唔係本機完成。
+- 方向已批後唔用樣板／問卷停低；Keith 只喺 live 網站玩驗收。
