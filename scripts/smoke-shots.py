@@ -1256,8 +1256,11 @@ def walk(pg, url, shots: Path | None, tag: str):
     if "過關" in pass_title or "關卡" in pass_title:
         raise RuntimeError(f"Pass title must not say 過關／關卡, got {pass_title!r}")
     gloss = (pg.text_content("#pass-gloss") or "").strip()
-    if "這個是一二三的『一』" not in gloss:
-        raise RuntimeError(f"Pass overlay must show written gloss, got {gloss!r}")
+    expected_gloss = pg.evaluate("() => window.KakaHanziWrite.currentLevel().glossYue")
+    if not expected_gloss or gloss != str(expected_gloss).strip():
+        raise RuntimeError(
+            f"Pass overlay must show the current character's written gloss, expected {expected_gloss!r}, got {gloss!r}"
+        )
     stars = (pg.text_content("#pass-stars") or "").strip()
     if "★" not in stars:
         raise RuntimeError(f"Pass screen must show stars, got {stars!r}")
