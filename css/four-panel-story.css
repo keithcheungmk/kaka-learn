@@ -413,9 +413,11 @@ button:focus-visible {
   box-shadow: 0 4px #bb741c;
 }
 .primary-btn:disabled {
-  opacity: .42;
+  opacity: 1;
   cursor: not-allowed;
   box-shadow: none;
+  color: #5a4520;
+  background: linear-gradient(#cbb56a, #a8882e);
 }
 .ghost-btn {
   border: 1px solid #5079bb;

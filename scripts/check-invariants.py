@@ -251,6 +251,35 @@ def check_answer_contrast() -> None:
         fail("answer-contrast", "PTH 已填答案未達 WCAG AA 4.5:1")
 
 
+def check_family_story_dark_shell_contrast() -> None:
+    """Hum paper body ink 唔可以滲入家庭故事／書景深色 panel；disabled 唔好靠低 opacity。"""
+    hallmark = read("css/hallmark-chinese-pages.css")
+    story_css = read("css/family-storybook.css")
+    scene_css = read("css/book-scene-demo.css")
+    for needle, label in (
+        (".book-page,", "hallmark 要為深色 .book-page 殼設淺字色"),
+        (".task-sentence,", "hallmark 要強制 .task-sentence 淺字"),
+        (".word-choice:disabled", "hallmark 要擋低 opacity disabled 詞語掣"),
+        ("opacity: 1 !important", "hallmark disabled 規則要 opacity:1"),
+        ("body:has(.scene-app)", "hallmark 要還原 book-scene 深色頁字色"),
+    ):
+        if needle not in hallmark:
+            fail("family-story-contrast", label)
+
+    if "color: var(--ink)" not in story_css or ".task-sentence" not in story_css:
+        fail("family-story-contrast", "family-storybook.css 句子／panel 要自帶淺 --ink")
+    if ".word-choice:disabled" not in story_css or "opacity: 1" not in story_css:
+        fail("family-story-contrast", "詞語掣 disabled 唔可以用低 opacity 洗淡字")
+    if "button:disabled" in story_css and "opacity: .45" in story_css:
+        fail("family-story-contrast", "唔好用 button:disabled { opacity:.45 } 喺深色故事頁")
+    if ".word-card:disabled" in scene_css and "opacity: .38" in scene_css:
+        fail("family-story-contrast", "book-scene word-card disabled 唔好用低 opacity")
+    for html_name in ("family-storybook.html", "book-scene-demo.html", "hanzi-write-demo.html"):
+        html = read(html_name)
+        if "hallmark-chinese-pages.css" not in html:
+            fail("family-story-contrast", f"{html_name} 要載入 hallmark 對比修正")
+
+
 def check_openmoji_coverage() -> None:
     """每個用到嘅 emoji 都要有 OpenMoji SVG。
 
@@ -1947,6 +1976,7 @@ CHECKS = [
     check_word_ids_unique,
     check_word_data_integrity,
     check_answer_contrast,
+    check_family_story_dark_shell_contrast,
     check_openmoji_coverage,
     check_emoji_disc,
     check_voice_picker,

@@ -1,5 +1,8 @@
 # 交接簿 — Cursor Chief Lead ⇄ 專科 Leads ⇄ ChatGPT／Grok
 
+**2026-11-18 Cursor Chief — 家庭故事右欄對比：** Hum paper `body` 深墨滲入 navy panel，再加 disabled `opacity:.42/.45` 令詞語掣／次要掣字變灰藍睇唔到。已喺 `hallmark-chinese-pages.css` 還原深色殼淺字、`family-storybook.css`／`book-scene-demo.css` 改 disabled 用實色唔洗淡，並加 `check_family_story_dark_shell_contrast`。試玩：https://keithcheungmk.github.io/kaka-learn/family-storybook.html（舊 tab 閂再開）。
+
+
 **2026-11-08 English Lead — 圖像拼讀入口整合：** 英文 hub 合併 Emoji Spelling 與 Phonics 入口；主題和字母音挑戰同頁，圖片詞與 CVC 組合共用逐字拼字流程，聲音訓練基地保留。完成後沿用既有單字→音塊→單字→鼓勵及 build 每日幣上限；不更改舊資料或 progress key。舊玩法只保留累計星和不同輪次紀錄，不能可靠還原每詞已派星，未做跨舊玩法逐詞去重；重玩按既有規則加星。音塊的 0/42 人耳驗收狀態不變，不可稱為音檔已核實。定向測試及 invariants 通過；本地預覽被 sandbox 拒絕，iPad 真機與音訊尚未驗收。發布待 Chief review。
 
 **2026-11-03 Codex — 常識「工程車小隊」：** 功能提交 `84031f0`、美術更新 `af46b6a` 已安全重建到最新主線 `0d3cb82`，並保留 PR #191 的面試四格及交接簿內容。新增八種玩具工程車、粵語／普通話／英文車名及用途朗讀、八題用途選擇、答對後積木實作任務、安全提示及獨立每日幣／首次通關星。中文 Lead 核對名詞，已採納香港叫法與普通話正式名分欄，並分清挖土機／鏟土機、吊車／叉車。插圖係依玩具風格製作的概念圖，並非實物逐車掃描。定向測試、JS syntax、invariants 及 `git diff --check` 通過；無本機 iPad 實機視覺檢查。發佈狀態待 PR／CI／Pages 完成後更新。

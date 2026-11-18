@@ -106,3 +106,123 @@ a:focus-visible {
 .profile-card-name {
   color: var(--color-ink) !important;
 }
+
+/*
+  Hum paper sets body to dark ink, but family-storybook / book-scene still keep
+  navy lesson panels. Anything that only inherits body colour becomes invisible.
+  Scope light ink onto those dark shells; keep paper chrome (topbar / library) dark-on-light.
+*/
+.intro {
+  background: var(--color-card) !important;
+  border: 0 !important;
+  box-shadow: var(--shadow-card) !important;
+  color: var(--color-ink) !important;
+}
+
+.intro h2,
+#library-heading {
+  color: var(--color-ink) !important;
+}
+
+.intro p {
+  color: var(--color-ink-2) !important;
+}
+
+.book-page,
+.activity,
+.completion,
+#warmup,
+.cast-card,
+.parent-daily-report,
+.scene-game,
+.scene-intro,
+.sentence-lane,
+.word-pool,
+.distractor-bank,
+.scene-complete {
+  color: #f5f6ff !important;
+}
+
+.task-sentence,
+.activity h3,
+#warmup h2,
+.page-reading,
+.lane-prompt {
+  color: #f5f6ff !important;
+}
+
+.task-instruction,
+.scene-frame figcaption,
+.completion #completion-summary,
+.cast-card p,
+.parent-daily-list li.is-empty,
+.section-heading > span,
+.scene-intro p,
+.scene-meta,
+.scene-help,
+.scene-book-toolbar > span {
+  color: #c0cbe8 !important;
+}
+
+.word-choice,
+.secondary-button,
+.speak-button,
+.warmup-word,
+.warmup-listen,
+.guardian-unlock,
+.scene-app .word-card,
+.scene-app .book-tabs button,
+.scene-app .scene-preview-nav button,
+.scene-app .scene-review {
+  color: #f5f6ff !important;
+}
+
+/*
+  Disabled chips used opacity ~0.45, which blends light ink into navy and
+  fails AA (effective ~3:1). Keep full opacity; mute with explicit colours.
+*/
+.word-choice:disabled,
+.secondary-button:disabled,
+.speak-button:disabled,
+.warmup-word:disabled,
+.warmup-listen:disabled,
+.scene-app .word-card:disabled,
+.scene-app button:disabled {
+  opacity: 1 !important;
+  color: #d7e0f7 !important;
+}
+
+.primary-button,
+.scene-start-quiz,
+.scene-submit {
+  color: #172048 !important;
+}
+
+.primary-button:disabled,
+.scene-start-quiz:disabled,
+.scene-submit:disabled {
+  opacity: 1 !important;
+  color: #5a4520 !important;
+}
+
+.panel-label {
+  color: #4de0be !important;
+}
+
+.word-bank-wrap h4,
+.task-feedback,
+.warmup-progress,
+.completion h3,
+.word-slot,
+.done-tag {
+  color: #ffd34f !important;
+}
+
+/* book-scene page: paper body ink must not win over the dark scene shell */
+body:has(.scene-app) {
+  color: #eef3ff !important;
+  background:
+    radial-gradient(circle at 10% 8%, #1a3473, transparent 33%),
+    radial-gradient(circle at 90% 75%, #31195f, transparent 35%),
+    #0a1230 !important;
+}
