@@ -113,6 +113,15 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-11-18 · ChatGPT／Codex — Listen & Find（Fruit Shop）
+
+- 英文入口新增「聽聲搵圖」世界：水果店場景內聽詞後用手指圈選或點選 8 種水果；答錯可重聽，答對會有變化鼓勵、圈選動畫及卡卡跳躍。對白獨立放在 `js/listen-find-dialogue.js`，方便日後調整。
+- 使用現有英文語音／靜音設定；朗讀結束以事件及時長後備推進。每個答對水果記一粒星，完成全輪按現有 `listen` 模式領取每日 AEON 幣。
+- 插畫放在 `assets/english-listen-find/`；水果店背景轉為 237 KB WebP，卡卡透明圖 29 KB PNG。新增 `skills/kaka-listen-find/SKILL.md` 記錄互動、資產、語音、獎勵與驗收流程。
+- 本機 JS 語法、圖片 lock、全站 invariants（57 項）、靜態建置及 `git diff --check` 通過。macOS 限制本機 Chromium 啟動及 localhost 預覽；PR CI/Pages workflow 用作後續驗證。未做真機 iPad／語音驗收。
+- 變更：`index.html`、`css/listen-find.css`、`js/listen-find.js`、`js/listen-find-dialogue.js`、`assets/english-listen-find/`、`assets/image-formats.lock.json`、`skills/kaka-listen-find/SKILL.md`、`docs/handover.md`。
+- 發布：合併 `main` 後由 GitHub Pages 自動部署；以部署 workflow 及 live `version.json` 驗證版本。
+
 ### 2026-11-18 · Cursor Chief Lead（英文錯圖 prove ship：glue／eraser／snow／tin）
 
 - Outcome 流程驗證：已批方向、無產品分岔，中途唔問 Keith。`glue`／`eraser`／`tin` 改用 `assets/object-art/english_*.webp`；`snow` 由 🧊 改 🌨️（白底雪堆去背唔穩，揀清楚 Emoji）。

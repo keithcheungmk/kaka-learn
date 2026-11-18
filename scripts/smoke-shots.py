@@ -454,7 +454,7 @@ def walk(pg, url, shots: Path | None, tag: str):
             pg.wait_for_selector("#screen-english-hub.active #btn-english-story")
             pg.wait_for_function("""() => {
               const images = [...document.querySelectorAll('#screen-english-hub.active .english-hub-art')];
-              return images.length === 2 && images.every(image => image.complete && image.naturalWidth > 0);
+              return images.length === 3 && images.every(image => image.complete && image.naturalWidth > 0);
             }""")
             probe("英文學習入口")
             pg.click("#btn-english-words")
@@ -996,7 +996,8 @@ def walk(pg, url, shots: Path | None, tag: str):
         raise RuntimeError("Ten chapters are open; tiles must not say 即將開放")
     if pg.query_selector("#chapter-grid .chapter-card.is-locked"):
         raise RuntimeError("Ten chapters are open; no locked chapter tiles")
-    if "土地同自然物" not in chapter_grid or "自然同天氣" not in chapter_grid:
+    chapter_labels = pg.locator("#chapter-grid .chapter-card").evaluate_all("els => els.map(el => el.getAttribute('aria-label') || '').join(' ')")
+    if "土地同自然物" not in chapter_labels or "自然同天氣" not in chapter_labels:
         raise RuntimeError("Chapter picker must show nature／land chapter titles")
     if not pg.query_selector("[data-chapter-id='ch10']"):
         raise RuntimeError("Chapter picker must list chapter 10")
@@ -1225,9 +1226,15 @@ def walk(pg, url, shots: Path | None, tag: str):
     if after_tick.get("overlay"):
         raise RuntimeError("A mid-character success must not open the pass overlay")
     if after_tick.get("count") == 3:
-        if "這個是" not in (after_tick.get("status") or "") or not after_tick.get("cheer"):
-            raise RuntimeError(f"The 3rd success must show a written meaning cheer, got {after_tick!r}")
-        if "過關" in (after_tick.get("status") or ""):
+        expected_cheer = pg.evaluate(
+            "() => window.KakaHanziWrite.midCheerFor(window.KakaHanziWrite.currentLevel())"
+        )
+        status = after_tick.get("status") or ""
+        if not after_tick.get("cheer") or status != expected_cheer:
+            raise RuntimeError(
+                f"The 3rd success must show the character midCheer, expected {expected_cheer!r}, got {after_tick!r}"
+            )
+        if "過關" in status:
             raise RuntimeError("The 3rd success must not talk about 過關")
     hint_levels = pg.evaluate(
         """() => {
@@ -1249,8 +1256,11 @@ def walk(pg, url, shots: Path | None, tag: str):
     if "過關" in pass_title or "關卡" in pass_title:
         raise RuntimeError(f"Pass title must not say 過關／關卡, got {pass_title!r}")
     gloss = (pg.text_content("#pass-gloss") or "").strip()
-    if "這個是一二三的『一』" not in gloss:
-        raise RuntimeError(f"Pass overlay must show written gloss, got {gloss!r}")
+    expected_gloss = pg.evaluate("() => window.KakaHanziWrite.currentLevel().glossYue")
+    if not expected_gloss or gloss != str(expected_gloss).strip():
+        raise RuntimeError(
+            f"Pass overlay must show the current character's written gloss, expected {expected_gloss!r}, got {gloss!r}"
+        )
     stars = (pg.text_content("#pass-stars") or "").strip()
     if "★" not in stars:
         raise RuntimeError(f"Pass screen must show stars, got {stars!r}")
