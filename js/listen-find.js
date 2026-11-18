@@ -32,6 +32,7 @@
   let points = [];
   let previousPraise = -1;
   let speechFallback = null;
+  let nextPromptTimer = null;
   let speechToken = 0;
 
   function isMuted() {
@@ -54,7 +55,7 @@
       onEnd?.();
     };
     if (onEnd) {
-      const fallbackMs = (window.KakaSpeech.estimateSpeakMs?.(text, { rate: 0.88, delayMs: 0 }) || 2200) + 500;
+      const fallbackMs = Math.min(9000, 1500 + text.trim().split(/\s+/).length * 650);
       speechFallback = window.setTimeout(done, fallbackMs);
     }
     window.KakaSpeech.speakEnglishTerm(text, {
@@ -68,6 +69,8 @@
 
   function cancelSpeech() {
     speechToken += 1;
+    if (nextPromptTimer) window.clearTimeout(nextPromptTimer);
+    nextPromptTimer = null;
     if (speechFallback) window.clearTimeout(speechFallback);
     speechFallback = null;
     window.KakaSpeech.cancelAllSpeech();
@@ -166,13 +169,14 @@
     const ys = pointsForCircle.map((point) => point.y);
     const bounds = { left: Math.min(...xs), right: Math.max(...xs), top: Math.min(...ys), bottom: Math.max(...ys) };
     const wallRect = wall.getBoundingClientRect();
-    return [...targets.values()].find((target) => {
+    const candidates = [...targets.values()].filter((target) => {
       if (target.classList.contains('is-found')) return false;
       const rect = target.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2 - wallRect.left;
       const centerY = rect.top + rect.height / 2 - wallRect.top;
       return centerX >= bounds.left && centerX <= bounds.right && centerY >= bounds.top && centerY <= bounds.bottom;
     });
+    return candidates.find((target) => target.dataset.fruit === order[index]) || candidates[0] || null;
   }
 
   function answerTarget(target) {
@@ -200,7 +204,7 @@
     mascot.classList.remove('is-celebrating');
     void mascot.offsetWidth;
     mascot.classList.add('is-celebrating');
-    speak(praise, () => window.setTimeout(askForFruit, 350));
+    speak(praise, () => { nextPromptTimer = window.setTimeout(askForFruit, 350); });
   }
 
   function setupTargets() {
@@ -259,6 +263,7 @@
     clearDrawing();
     $('.screen.active')?.classList.remove('active');
     screen.classList.add('active');
+    updateDrawingViewBox();
     overlay.hidden = false;
     $('#btn-listen-find-again').hidden = true;
     heading.textContent = 'Listen carefully...';
