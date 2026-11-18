@@ -295,8 +295,10 @@ const PHONICS_TOPICS = [
   {
     id: 'sight_school_items', title: '學校用品', titleEn: 'School Items', blurb: '睇圖 · 聽音 · 逐格砌字 · 10 件學校用品', cover: '🎒', section: 'sight', flow: 'blend', modes: ['build', 'connect'],
     words: [
-      ['book', '📘'], ['bag', '🎒'], ['pen', '🖊️'], ['pencil', '✏️'], ['ruler', '📏'], ['eraser', '🧽'], ['crayon', '🖍️'], ['paper', '📄'], ['glue', '🧴'], ['scissors', '✂️'],
-    ].map(([word, emoji], i) => ({ id: `sight_school_items_${i}`, word, letters: Array.from(word), emoji, plate: '#2a1840' })),
+      ['book', '📘'], ['bag', '🎒'], ['pen', '🖊️'], ['pencil', '✏️'], ['ruler', '📏'],
+      ['eraser', '🧽', './assets/object-art/english_eraser.webp'], ['crayon', '🖍️'], ['paper', '📄'],
+      ['glue', '🧴', './assets/object-art/english_glue.webp'], ['scissors', '✂️'],
+    ].map(([word, emoji, objectArt], i) => ({ id: `sight_school_items_${i}`, word, letters: Array.from(word), emoji, ...(objectArt ? { objectArt } : {}), plate: '#2a1840' })),
   },
   {
     id: 'hk_festivals', title: '香港節日', titleEn: 'Hong Kong Festivals', blurb: '5 個節日 · 50 個主題詞語', cover: '🎉', section: 'sight', collections: HK_FESTIVAL_TOPICS,
@@ -376,7 +378,7 @@ const PHONICS_TOPICS = [
     id: 'sight_weather', title: '天氣', titleEn: 'Weather', blurb: '睇圖 · 聽音 · 逐格砌字 · 12 個天氣詞語', cover: '🌈', plate: '#0f3550',
     words: [
       ['sunny', '☀️'], ['cloudy', '☁️'], ['rainy', '🌧️'], ['windy', '💨'], ['stormy', '⚡'], ['hot', '🥵'],
-      ['cold', '🥶'], ['snowy', '❄️'], ['rain', '🌂'], ['snow', '🧊'], ['rainbow', '🌈'], ['umbrella', '☂️'],
+      ['cold', '🥶'], ['snowy', '❄️'], ['rain', '🌂'], ['snow', '🌨️'], ['rainbow', '🌈'], ['umbrella', '☂️'],
     ],
   }),
   sightWordTopic({
@@ -474,7 +476,7 @@ const PHONICS_TOPICS = [
     modes: ['listen', 'match', 'build'],
     words: [
       { id: 'pin', word: 'pin', letters: ['p', 'i', 'n'], emoji: '📌', plate: '#401018' },
-      { id: 'tin', word: 'tin', letters: ['t', 'i', 'n'], emoji: '🫙', plate: '#2a3548' },
+      { id: 'tin', word: 'tin', letters: ['t', 'i', 'n'], emoji: '🥫', objectArt: './assets/object-art/english_tin.webp', plate: '#2a3548' },
       { id: 'bin', word: 'bin', letters: ['b', 'i', 'n'], emoji: '🗑️', plate: '#3a3a45' },
       { id: 'win', word: 'win', letters: ['w', 'i', 'n'], emoji: '🏆', plate: '#3a3010' },
     ],

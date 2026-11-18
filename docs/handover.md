@@ -113,6 +113,11 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
 
 ## 最近改動
 
+### 2026-11-18 · Cursor Chief Lead（英文錯圖 prove ship：glue／eraser／snow／tin）
+
+- Outcome 流程驗證：已批方向、無產品分岔，中途唔問 Keith。`glue`／`eraser`／`tin` 改用 `assets/object-art/english_*.webp`；`snow` 由 🧊 改 🌨️（白底雪堆去背唔穩，揀清楚 Emoji）。
+- `test-phonics-flow.mjs` 加檢查。Agent backlog 该项已清。
+
 ### 2026-11-18 · Cursor Chief Lead（Outcome 流程：完結＝live）
 
 - 對 `origin/main` 稽核後清空「進行中」過期認領（寫字叮閃、WR019 Next、故事 focus、主頁插畫、書頁砌句、書本掃描、故事小隊、國慶故事、加減法統一、四星水星、生活數感、Topic Words 一頁卡、職業插圖等）。檔案已在 main／live，舊「待整合／尚未部署」備註當噪音關閉，唔合併 dirty WIP。
@@ -1394,8 +1399,6 @@ Claude 做咗一次完整審查，結果喺 **`docs/site-review-2026-09.md`** �
 | 字詞 union：紅輯／橙輯系列總數未計齊 | ChatGPT／Codex（核）＋Cursor（落地） |
 | 駝鹿圖（🫎 OpenMoji 淨對角）換清楚插圖 | Cursor |
 | 已兌換記錄（累積幣誠實） | ChatGPT／Codex |
-| 英文錯圖／撞圖（glue🧴、eraser🧽、snow🧊、tin🫙；其餘見近期交接） | English Lead → Chief |
-
 無人擁有嘅 repo 項目，由 ChatGPT／Cursor 經「進行中」認領；已有擁有人嘅唔好搶。Grok bot 可畀第二意見，但預設唔係 repo owner。
 
 ## 開工前／收工 checklist

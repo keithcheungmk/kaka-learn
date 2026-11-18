@@ -178,6 +178,8 @@ const expectedObjectArt = {
   sight_clothes: Object.fromEntries(
     ['shirt', 'pants', 'dress', 'skirt', 'coat', 'jacket', 'scarf', 'shorts'].map((word) => [word, `clothes_${word}`]),
   ),
+  sight_school_items: { glue: 'english_glue', eraser: 'english_eraser' },
+  cvc_in: { tin: 'english_tin' },
 };
 for (const [topicId, words] of Object.entries(expectedObjectArt)) {
   const objectTopic = context.window.KakaPhonicsWords.getPhonicsTopicById(topicId);
@@ -195,6 +197,17 @@ assert.equal(
   context.window.KakaPhonicsWords.getPhonicsTopicById('sight_household').words.find((entry) => entry.word === 'plate').emoji,
   '🍽️',
   'plate 用碟加刀叉 Emoji，唔再用碗',
+);
+assert.equal(
+  context.window.KakaPhonicsWords.getPhonicsTopicById('sight_weather').words.find((entry) => entry.word === 'snow').emoji,
+  '🌨️',
+  'snow 用落雪 Emoji，唔再用冰粒',
+);
+const schoolTopic = context.window.KakaPhonicsWords.getPhonicsTopicById('sight_school_items');
+assert.equal(
+  new Set(schoolTopic.words.map((item) => item.objectArt || item.photo || item.emoji)).size,
+  schoolTopic.words.length,
+  'sight_school_items 每個詞都有獨立圖像',
 );
 assert.match(appSource, /word\.buildMode === 'phrase' \? '先聽完整職稱/, '雙字職稱的學習卡提供逐詞聆聽');
 assert.match(appSource, /allBuildWords = currentTopicWords\(\)\.filter\(\(w\) => w\.letters && \['phonics', 'phrase'\]/, '長字整詞認讀項目不會誤入字母拼音遊戲');

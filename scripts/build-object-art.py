@@ -55,6 +55,10 @@ SOURCES = {
     "clothes_skirt": "clothes-skirt.jpg",
     "clothes_pants": "clothes-pants.jpg",
     "clothes_shorts": "clothes-shorts.jpg",
+    # 英文錯圖（學校／天氣／CVC）
+    "english_glue": "obj-glue.jpg",
+    "english_eraser": "obj-eraser.jpg",
+    "english_tin": "obj-tin.jpg",
 }
 
 
@@ -63,6 +67,7 @@ SHADOW_TOL = {
     "beizi": 50, "chufang": 50, "shuifang": 50, "yangtai": 40, "yigui": 50,
     "chouti": 50, "zhuozi": 50, "zhentou": 50, "zhijin": 30, "xishoutai": 30,
     "muyulu": 30, "xitoushui": 30, "mensuo": 50, "beizi_cup": 30, "ditan": 40,
+    "english_glue": 28, "english_eraser": 40, "english_tin": 40,
 }
 # 邊緣冇白色部分嘅物件：連住背景嘅中性灰（影）一併去走。
 NEUTRAL_SHADOW = {"beizi", "chufang", "shuifang", "yangtai", "yigui", "chouti", "zhuozi", "mensuo"}
