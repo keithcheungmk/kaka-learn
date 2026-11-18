@@ -45,7 +45,8 @@ assert.match(js, /playCorrectCue\(\{ muted \}\)/);
 assert.match(js, /speakPlacedChip\(word, word === activeSlots\[index\]\)/);
 assert.match(html, /id="activity"[\s\S]*id="next-page"[\s\S]*id="completion"/);
 assert.match(css, /\.storybook-shell\.is-reading[\s\S]*\.reader-controls/);
-assert.match(css, /align-items:\s*start/);
+assert.match(css, /align-items:\s*stretch/);
+assert.match(css, /\.activity \.reader-controls/);
 
 const context = { window: {} };
 vm.runInNewContext(read('data/family-stories/manifest.js'), context);

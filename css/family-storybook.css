@@ -73,19 +73,24 @@ body {
 .page-count { color: var(--mint); white-space: nowrap; }
 .progress-track { height: 8px; border-radius: 10px; background: #24345f; overflow: hidden; margin: 0 0 18px; }
 .progress-track span { height: 100%; display: block; width: 16.67%; background: linear-gradient(90deg,var(--mint),#74e3a1); transition: width .2s; }
-.lesson-spread { display: grid; grid-template-columns: minmax(0,3fr) minmax(360px,2fr); gap: 18px; align-items: start; }
-.book-page,.activity { min-width: 0; border: 1px solid #3b6ead; border-radius: 24px; background: rgba(17,29,68,.96); padding: 20px; color: var(--ink); }
+.lesson-spread { display: grid; grid-template-columns: minmax(0,3fr) minmax(360px,2fr); gap: 18px; align-items: stretch; }
+.book-page,.activity { min-width: 0; border: 1px solid #3b6ead; border-radius: 24px; background: rgba(17,29,68,.96); padding: 20px; color: var(--ink); height: 100%; }
 .panel-label { color: var(--mint); font-weight: 900; letter-spacing: .06em; margin: 0 0 12px; }
 .activity h3 { color: var(--ink); }
 .scene-frame { margin: 0; }
-.scene-frame img { display: block; width: 100%; aspect-ratio: 1.42; object-fit: cover; border-radius: 16px; background: #e9edf6; border: 4px solid #f3f5ff; }
+.scene-frame img {
+  display: block; width: 100%; aspect-ratio: 1.42; object-fit: cover;
+  border-radius: 16px; background: #e9edf6; border: 4px solid #f3f5ff;
+}
 .scene-frame figcaption { color: var(--muted); padding: 7px 4px; }
 .sentence-row { display: flex; gap: 12px; align-items: center; }
 .page-reading { min-width: 0; flex: 1; color: var(--ink); font-size: clamp(1.5rem,2.6vw,2.2rem); line-height: 1.5; font-weight: 900; margin: 4px 0 8px; }
 .speak-button { border: 1px solid var(--mint); border-radius: 14px; background: #174466; color: var(--ink); padding: 12px 15px; font: inherit; font-weight: 800; white-space: nowrap; cursor: pointer; }
 .speak-button:hover { background: #206384; }
 .audio-feedback { min-height: 1.4em; margin: 0 0 10px; color: var(--mint); font-size: .92rem; }
-.activity { position: relative; display: flex; flex-direction: column; }
+.activity { position: relative; display: flex; flex-direction: column; min-height: 100%; }
+.activity .word-bank-wrap { flex: 1 1 auto; }
+.activity .reader-controls { margin-top: auto; }
 .activity h3 { font-size: clamp(1.35rem,2.2vw,1.8rem); margin: 4px 0 12px; }
 .task-instruction { color: var(--muted); line-height: 1.5; margin: 0 0 10px; }
 .task-sentence { display: flex; align-items: center; flex-wrap: wrap; gap: 5px 3px; min-height: 118px; padding: 18px; border: 1px dashed #7a9bce; border-radius: 18px; background: #0e193c; color: var(--ink); font-size: clamp(1.35rem,2.4vw,1.9rem); font-weight: 900; line-height: 1.8; }
@@ -208,7 +213,10 @@ footer { margin-top: 35px; color: #94a4ce; text-align: center; font-size: .86rem
 button:focus-visible,a:focus-visible,select:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 .storybook-shell.is-reading { padding: 10px 0 16px; }
 .storybook-shell.is-reading .progress-track { margin-bottom: 8px; }
-.storybook-shell.is-reading .lesson-spread { gap: 10px 14px; }
+.storybook-shell.is-reading .lesson-spread {
+  gap: 10px 14px;
+  min-height: calc(100dvh - 7.5rem);
+}
 .storybook-shell.is-reading .book-page,
 .storybook-shell.is-reading .activity { padding: 12px 14px; }
 .storybook-shell.is-reading .panel-label { margin-bottom: 6px; }

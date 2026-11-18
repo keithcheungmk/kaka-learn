@@ -1283,8 +1283,10 @@ def check_family_storybook_entry() -> None:
     activity_html = story_html.split('id="activity"', 1)[-1].split('id="completion"', 1)[0]
     if "reader-controls" not in activity_html or "next-page" not in activity_html:
         fail("family-storybook", "下一頁要喺填詞欄附近，iPad 唔使捲先見到")
-    if ".storybook-shell.is-reading" not in story_css or "align-items: start" not in story_css:
+    if ".storybook-shell.is-reading" not in story_css or ".storybook-shell.is-reading .word-bank" not in story_css:
         fail("family-storybook", "閱讀頁要收緊詞語池／句子／下一頁間距")
+    if "align-items: stretch" not in story_css or ".activity .reader-controls" not in story_css:
+        fail("family-storybook", "閱讀頁左右欄要拉齊高度，右欄唔好留一截空白底")
     if 'id="parent-review-entry"' not in story_html or "家長檢視" not in story_html:
         fail("family-storybook", "書目頂欄要有安靜的「家長檢視」入口")
     if "快速查看全部插圖和文字，不用聽語音、不用答題。" not in story_html:

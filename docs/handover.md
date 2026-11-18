@@ -1,5 +1,7 @@
 # 交接簿 — Cursor Chief Lead ⇄ 專科 Leads ⇄ ChatGPT／Grok
 
+**2026-11-18 Cursor Chief — 故事圖清晰度＋右欄齊高：** 場景圖多數只得 640px，iPad Retina 放大變朦；閱讀頁 `align-items:start` 令右欄矮一截留空白。已將軟圖升到 1280／1536 並輕微銳化，左右欄改 `stretch` 齊高。試玩：https://keithcheungmk.github.io/kaka-learn/family-storybook.html
+
 **2026-11-18 Cursor Chief — 家庭故事右欄對比：** Hum paper `body` 深墨滲入 navy panel，再加 disabled `opacity:.42/.45` 令詞語掣／次要掣字變灰藍睇唔到。已喺 `hallmark-chinese-pages.css` 還原深色殼淺字、`family-storybook.css`／`book-scene-demo.css` 改 disabled 用實色唔洗淡，並加 `check_family_story_dark_shell_contrast`。試玩：https://keithcheungmk.github.io/kaka-learn/family-storybook.html（舊 tab 閂再開）。
 
 
