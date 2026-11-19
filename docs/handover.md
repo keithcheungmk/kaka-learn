@@ -1,4 +1,6 @@
-# 交接簿 — Cursor Chief Lead ⇄ 專科 Leads ⇄ ChatGPT／Grok
+# 交接簿 — Cursor ⇄ Codex ⇄ WorkBuddy（＋專科 Leads／Grok）
+
+**2026-11-19 Cursor Chief — 納入騰訊 WorkBuddy：** 協作升級為 Cursor＋Codex＋WorkBuddy 三方實作；Cursor 仍係 Chief Lead。WorkBuddy 與 Codex 同級可認領／改互不重疊檔／完結＝live。可貼開工指令：`docs/workbuddy-bootstrap.md`。Grok 維持顧問唯讀。
 
 **2026-11-18 Cursor Chief — 故事圖清晰度＋右欄齊高：** 場景圖多數只得 640px，iPad Retina 放大變朦；閱讀頁 `align-items:start` 令右欄矮一截留空白。已將軟圖升到 1280／1536 並輕微銳化，左右欄改 `stretch` 齊高。試玩：https://keithcheungmk.github.io/kaka-learn/family-storybook.html
 
@@ -13,7 +15,7 @@
 
 > 2026-10-28 數學遊樂場：在獨立分支 `codex/math-playground-refresh-20261027` 由最新 `origin/main`（`db26f80`）整理「數數／加減／時間／生活數學」入口；保留現有水果店、四種計算法與進度。數數改成故事圖、物件板與答案區，修正 20 件物品重疊、不足五個的組別標籤及答錯後語音完成才可重試；形狀規律重複圖形使用一致顏色。生活數學卡片加入具體玩法描述；錯誤提示按題型分步講解、第二次錯誤示範答案，並同步朗讀。度量第一階段已改成讀厘米：擦膠／蠟筆先練 0–10cm，再用鉛筆／玩具車／小熊練 10–20cm；物件起點對齊 0cm，先找整十刻度再數小格，二次答錯會照實際讀數拆步講解。呢個係圖片式直尺練習，未包含手動捲尺、門邊等長距離量度。數學單元／策略測試、57 項 invariants，以及家庭裝置完整 smoke 已過：iPad 直／橫各 55 個畫面一屏可用，iPhone 55 個畫面無重疊／裁切，並覆蓋答錯／答啱語音後狀態；附帶 PTH regression 亦通過。已向 Chief Lead 查詢數學整合範圍，未收到回覆；數學變更經獨立檢查結論「可以 merge」。工作提交 `e1006d5` 已 fast-forward 推送至 `main`；GitHub CI 與 Pages workflow 均成功，線上 `version.json` 確認為 `e1006d5`。GitHub PR API 回 403，因 main 未設保護而直接 fast-forward。其他題型的情境／互動仍待逐項改造。
 
-2026-11-03 Keith 指示：Codex 主 Agent 擔任 Chief Lead，負責派單、監督、審核及協調；Math／English／Chinese 三位 Lead 執行工作，包括獲指派的共享檔及發布操作。新增下屬 agent 前必須先同 Keith 討論並取得明確批准。Grok 預設係外部顧問 bot，只提供建議。
+2026-11-19 Keith 指示：而家係 **Cursor ⇄ Codex ⇄ WorkBuddy** 三方協作。Cursor 主 Agent 係 Chief Lead（拆單、共享檔整合、未指定任務 routing）。Codex 同 WorkBuddy 同級可認領改 repo，跟完結＝live。Math／English／Chinese 三位本機 Lead 仍由 Chief 委派。新增下屬 agent 前必須先同 Keith 討論並取得明確批准。Grok 預設係外部顧問 bot，只提供建議。
 呢度記錄「其他人需要知」嘅分工、認領、撞車風險同未完事項，避免撞改。
 
 
@@ -30,26 +32,27 @@
 
 | 署名 | 係邊個 |
 |---|---|
-| **Codex Chief Lead** | 拆 scope、派單、協調共享檔、監督、審核及匯報；不親自實作 |
+| **Cursor Chief Lead** | Keith 本機 Cursor 主 Agent；拆單、共享檔整合、未指定任務 routing、驗證與部署協調 |
 | **Math Lead** | `.cursor/agents/math-lead.md`；數理、加減法、數感、數學面試玩法及數理回歸 |
 | **English Lead** | `.cursor/agents/english-lead.md`；Carter Family、Story English、Game Night、Sight Words、Phonics |
 | **Chinese Lead** | `.cursor/agents/chinese-lead.md`；中文認字、紅／橙輯、書頁砌句、字卡 OCR、粵語及 PTH |
-| **ChatGPT／Codex** | 本對話的 Chief Lead；由三位專科 Lead 執行實作 |
+| **ChatGPT／Codex** | 可認領後改互不重疊檔；跟完結＝live 自行測／commit／push |
+| **WorkBuddy** | 騰訊 WorkBuddy；與 Codex 同級實作協作者；認領署名 `WorkBuddy`；開工見 `docs/workbuddy-bootstrap.md` |
 | **Grok bot** | Keith 手動使用嘅外部建議／研究 bot；預設唯讀，無 repo、push、merge 或部署權限 |
 
-Keith 明確交俾邊個嘅任務，就由嗰個做；未指定時由 Codex Chief Lead 派其中一位主責。共享檔整合及發布由指定 Lead 執行，Chief 監督；未獲授權唔自行 push／部署。共享檔先認領，避免同時寫同一功能。Grok 嘅輸出係建議，唔係已驗證嘅 repo 狀態；除非 Keith 另行明確交代，唔叫 Grok 寫入或接觸私有素材／密鑰。Claude 舊工作只保留喺歷史紀錄，唔再係現行 owner。
+Keith 明確交俾邊個嘅任務，就由嗰個做；未指定時由 Cursor Chief Lead routing。三位專科 Lead 完成後交 Chief 整合，唔自行 push／部署。Codex／WorkBuddy 認領後可自行完成互不重疊範圍並跟完結＝live。共享檔先認領，避免同時寫同一功能。Grok 嘅輸出係建議，唔係已驗證嘅 repo 狀態；除非 Keith 另行明確交代，唔叫 Grok 寫入或接觸私有素材／密鑰。Claude 舊工作只保留喺歷史紀錄，唔再係現行 owner。
 
 ## 點用呢個檔
 
-Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**開工／收工協議：
+Chief Lead、三位專科 Lead、ChatGPT／Codex、**WorkBuddy**、以及另行使用嘅 Cursor **同一套**開工／收工協議：
 
 - **開工前**：`git fetch origin main` → 睇 `AGENTS.md`（硬性規則）→ 睇呢個檔（分工、進行中認領、地雷）。
 - **改共享／高危檔之前**：喺下面「進行中（認領）」表認領；同一功能／同一批檔唔可以兩個人同時改。
-- **merge 完之後**：喺「最近改動」加一段（日期、邊個做、改咗乜、掂咗邊啲檔），署名 **Cursor Chief Lead**、相應專科 Lead 或 **ChatGPT／Codex**。做完就清走認領。
+- **merge 完之後**：喺「最近改動」加一段（日期、邊個做、改咗乜、掂咗邊啲檔），署名 **Cursor Chief Lead**、相應專科 Lead、**ChatGPT／Codex** 或 **WorkBuddy**。做完就清走認領。
 - 只寫其他人要知嘅嘢：**擁有權、地雷、未完事項**。設計討論、需求分析唔好塞入嚟。
 - 呢個檔唔係規則書。任何「以後都要咁做」嘅嘢要寫入 `AGENTS.md`，
   而且同時喺 `scripts/check-invariants.py` 加一個 `check_xxx()`，靠機器守住，唔好靠記憶。
-- Grok bot 如受邀 review，Keith／ChatGPT 負責將必要且可分享嘅摘錄手動交畀佢；Grok 唔參與 repo 認領、merge 或部署流程。
+- Grok bot 如受邀 review，Keith／ChatGPT／WorkBuddy 負責將必要且可分享嘅摘錄手動交畀佢；Grok 唔參與 repo 認領、merge 或部署流程。
 
 ## 進行中（認領）
 
@@ -61,7 +64,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 |---|---|---|---|---|
 
 <!-- 範本（複製一行，填完刪走空表）：
-| 短描述 | Cursor／ChatGPT（Codex） | `path/a`, `path/b` | YYYY-MM-DD | 做緊；完結條件＝live |
+| 短描述 | Cursor／ChatGPT（Codex）／WorkBuddy | `path/a`, `path/b` | YYYY-MM-DD | 做緊；完結條件＝live |
 -->
 
 ## 暫緩支線（Keith 2026-09-19 指示）
@@ -86,7 +89,8 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 範圍 | 擁有人 | 主要檔案 |
 |---|---|---|
-| Chief Lead：routing、跨科校準、審核及監督 | **Codex Chief Lead**（實作交指定 Lead） | `index.html`、`js/app.js`、`js/storage.js`、共用獎勵／Profile、`.github/workflows/*`、`scripts/check-invariants.py`、`docs/handover.md` |
+| Chief Lead：routing、跨科校準、共享檔整合、驗證／部署協調 | **Cursor Chief Lead** | `index.html`、`js/app.js`、`js/storage.js`、共用獎勵／Profile、`.github/workflows/*`、`scripts/check-invariants.py`、`docs/handover.md` |
+| 認領後實作（互不重疊檔） | **ChatGPT／Codex** 或 **WorkBuddy** | 按認領表；開工見 `AGENTS.md`／`docs/workbuddy-bootstrap.md` |
 | 數理內容、玩法、題目、版面及測試 | **Math Lead** | `js/math-*`、`css/math.css`、`js/additionGame.js`、`js/subtractionGame.js`、數理測試 |
 | 英文故事、Carter Family、Sight Words、Phonics、錄音及測試 | **English Lead** | `js/phonics-*`、Story English／Game Night、英文衍生資產及測試 |
 | 中文認字、紅／橙輯、書頁砌句、字卡 OCR、粵語、PTH | **Chinese Lead** | `data/red-series/`、`book-scene-*`、中文／PTH 資料、衍生資產及測試 |

@@ -1045,7 +1045,7 @@ def check_cjk_halfwidth_punct() -> None:
 
 
 def check_agent_collab_docs() -> None:
-    """確保現行 ChatGPT／Cursor／Grok 分工及 OCR owner 寫入協作文件。"""
+    """確保現行 Cursor／ChatGPT／WorkBuddy／Grok 分工及 OCR owner 寫入協作文件。"""
     for f in ("CODEX.md", "CLAUDE.md"):
         if not Path(f).exists():
             fail("agent-docs", f"缺少 {f}")
@@ -1055,13 +1055,25 @@ def check_agent_collab_docs() -> None:
     agents = read("AGENTS.md")
     handover = read("docs/handover.md")
     ocr = read("docs/word-card-ocr.md")
+    bootstrap = Path("docs/workbuddy-bootstrap.md")
     grok_path = Path("GROK.md")
     if not grok_path.exists():
         fail("agent-docs", "缺少 GROK.md 協作界線")
+    if not bootstrap.exists():
+        fail("agent-docs", "缺少 docs/workbuddy-bootstrap.md（WorkBuddy 可貼開工指令）")
+    else:
+        boot = read("docs/workbuddy-bootstrap.md")
+        for needle in ("WorkBuddy", "AGENTS.md", "docs/handover.md", "完結＝live", "可撳網址"):
+            if needle not in boot:
+                fail("agent-docs", f"workbuddy-bootstrap.md 要包含：{needle}")
     for name, src in (("AGENTS.md", agents), ("docs/handover.md", handover)):
-        for role in ("ChatGPT", "Cursor", "Grok"):
+        for role in ("ChatGPT", "Cursor", "Grok", "WorkBuddy"):
             if role not in src:
                 fail("agent-docs", f"{name} 要記錄現行協作角色 {role}")
+    if "docs/workbuddy-bootstrap.md" not in agents:
+        fail("agent-docs", "AGENTS.md 要指向 docs/workbuddy-bootstrap.md")
+    if "WorkBuddy" not in read("CLAUDE.md"):
+        fail("agent-docs", "CLAUDE.md 要提到 WorkBuddy 三方協作")
     if "字卡相片辨讀由 ChatGPT" not in agents:
         fail("agent-docs", "AGENTS.md 要將字卡辨讀責任交畀 ChatGPT／Codex")
     if "ChatGPT／Codex" not in ocr or "Grok" not in ocr:

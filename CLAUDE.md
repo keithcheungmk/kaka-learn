@@ -1,7 +1,8 @@
 # CLAUDE.md
 
 規則同 Cursor 共用一份：見 **[AGENTS.md](./AGENTS.md)**。
-交接而家係三方：Cursor ⇄ Claude (Cowork) ⇄ Codex (ChatGPT)，見 `docs/handover.md`。
+交接而家係三方實作：Cursor ⇄ Codex (ChatGPT) ⇄ 騰訊 WorkBuddy，見 `docs/handover.md`。
+WorkBuddy 可貼開工指令：`docs/workbuddy-bootstrap.md`。
 
 Merge 前必須跑：
 
