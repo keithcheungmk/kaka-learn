@@ -1,5 +1,11 @@
 # 交接簿 — Cursor Chief Lead ⇄ 專科 Leads ⇄ ChatGPT／Grok
 
+## 現行速覽
+
+本節作交接索引；開工前仍按 AGENTS.md 閱讀本交接簿。認領表包含未核實舊記錄，不可單憑日期判斷完成；先核對分支、PR 和現有未提交工作。跨裝置同步仍暫緩。
+
+QA 報告預設只列範圍及待驗項；`--run` 在此工作目錄啟動隔離預覽並執行缺少的檢查，`--ci-run RUN_ID` 只接受 GitHub 上 CI workflow 在 main 的同一乾淨 commit 已完成成功 push run，並查證指定 job 和步驟；CI workflow 與比較基準不一致時不重用。報告不代替受影響功能的視覺和內容檢查。
+
 **2026-11-18 Cursor Chief — 故事圖清晰度＋右欄齊高：** 場景圖多數只得 640px，iPad Retina 放大變朦；閱讀頁 `align-items:start` 令右欄矮一截留空白。已將軟圖升到 1280／1536 並輕微銳化，左右欄改 `stretch` 齊高。試玩：https://keithcheungmk.github.io/kaka-learn/family-storybook.html
 
 **2026-11-18 Cursor Chief — 家庭故事右欄對比：** Hum paper `body` 深墨滲入 navy panel，再加 disabled `opacity:.42/.45` 令詞語掣／次要掣字變灰藍睇唔到。已喺 `hallmark-chinese-pages.css` 還原深色殼淺字、`family-storybook.css`／`book-scene-demo.css` 改 disabled 用實色唔洗淡，並加 `check_family_story_dark_shell_contrast`。試玩：https://keithcheungmk.github.io/kaka-learn/family-storybook.html（舊 tab 閂再開）。
@@ -59,6 +65,7 @@ Chief Lead、三位專科 Lead及另行使用嘅 ChatGPT／Cursor **同一套**�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| QA 報告及 CI／部署重複檢查整理 | Codex Chief 指派 | `scripts/qa-report.py`, `scripts/test-qa-report.py`, `scripts/test-layout-scope.py`, `.github/workflows/ci.yml`, `.github/workflows/deploy-pages.yml`, `docs/qa-check.md`, `docs/handover.md`, `AGENTS.md` | 2026-11-19 | 獨立工作目錄開發；開 PR 待審，未合併前不 live。 |
 
 <!-- 範本（複製一行，填完刪走空表）：
 | 短描述 | Cursor／ChatGPT（Codex） | `path/a`, `path/b` | YYYY-MM-DD | 做緊；完結條件＝live |

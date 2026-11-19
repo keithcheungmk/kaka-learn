@@ -172,7 +172,7 @@ python3 -m http.server 5173
 # 開 http://localhost:5173
 
 python3 scripts/check-invariants.py   # 硬性約束檢查，merge 前一定要 exit 0
-python3 scripts/qa-report.py         # 預填檢查報告（配合 docs/qa-check.md；≤5min）
+python3 scripts/qa-report.py         # 顯示檢查範圍和待驗項；--run 執行缺少的檢查
 bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 ```
 
@@ -200,6 +200,7 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 | `scripts/smoke-shots.py` | 預設家庭裝置（iPad Pro 11 直／橫 + iPhone 16 Pro Max）：溢出／白屏／404／console error；`--all` 先跑舊全尺寸 |
 | `scripts/apply-book-cards.py` + `data/book-cards/*.json` | 字卡相片 → 書本 wordIds（見 `docs/word-card-ocr.md`） |
 | `docs/qa-check.md` | 檢查 agent 規則（merge 前中文檢查報告；通過就直接 merge／部署，唔好叫用戶檢查） |
+| `docs/agent-workflow-quickstart.md` | 各範疇（中文／英文／普通話／數學／共用／素材／測試／發布）工作流程速覽；按需查閱，遇架構或部署決策交 Chief |
 
 ## 數學（小鹿數理探險）— 故障隔離（可共用 landing）
 
