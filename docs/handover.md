@@ -1,5 +1,7 @@
 # 交接簿 — Cursor ⇄ Codex ⇄ WorkBuddy（＋專科 Leads／Grok）
 
+**2026-11-19 Cursor Chief — WorkBuddy 分叉誤報澄清：** WorkBuddy 本機 `main` 未 `fetch`，以為 live `0760329` 唔喺 `main`。實際 `origin/main`＝`0760329`，live `version.json` 已對齊；`docs/workbuddy-bootstrap.md` 已在 `main`。本機 Documents checkout 已 fast-forward；髒 `AGENTS.md` 本機改動 stash 為 `workbuddy-local-AGENTS-notes-20261119`（skills 提示＋mdc 併入草稿），未入 main。
+
 **2026-11-19 Cursor Chief — 納入騰訊 WorkBuddy：** 協作升級為 Cursor＋Codex＋WorkBuddy 三方實作；Cursor 仍係 Chief Lead。WorkBuddy 與 Codex 同級可認領／改互不重疊檔／完結＝live。可貼開工指令：`docs/workbuddy-bootstrap.md`。Grok 維持顧問唯讀。
 
 **2026-11-18 Cursor Chief — 故事圖清晰度＋右欄齊高：** 場景圖多數只得 640px，iPad Retina 放大變朦；閱讀頁 `align-items:start` 令右欄矮一截留空白。已將軟圖升到 1280／1536 並輕微銳化，左右欄改 `stretch` 齊高。試玩：https://keithcheungmk.github.io/kaka-learn/family-storybook.html
