@@ -1,7 +1,7 @@
 # CLAUDE.md
 
 規則同 Cursor 共用一份：見 **[AGENTS.md](./AGENTS.md)**。
-交接而家係兩方實作：**WorkBuddy Chief** ⇄ Cursor，見 `docs/handover.md`。**Codex 已退出（Keith 2026-11-19）**，唔再訂閱／認領／署名。WorkBuddy 係全局 Chief，workflow 見 `docs/workbuddy-chief-lead-workflow.md`。
+交接而家係兩方實作：**Cursor（常任 Chief）** ⇄ **WorkBuddy（token 接棒）**，見 `docs/handover.md`。**Codex 已退出（Keith 2026-11-19）**，唔再訂閱／認領／署名。workflow 見 `docs/workbuddy-chief-lead-workflow.md`。
 WorkBuddy 可貼開工指令：`docs/workbuddy-bootstrap.md`。
 
 Merge 前必須跑：

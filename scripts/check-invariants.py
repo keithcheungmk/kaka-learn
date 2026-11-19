@@ -1045,7 +1045,7 @@ def check_cjk_halfwidth_punct() -> None:
 
 
 def check_agent_collab_docs() -> None:
-    """確保現行 WorkBuddy（Chief）＋Cursor 兩方、Grok 顧問及 OCR owner 寫入協作文件；Codex 已退出。"""
+    """確保 Cursor 常任 Chief、WorkBuddy token 接棒、Grok 顧問、OCR 流程；Codex 已退出。"""
     for f in ("CODEX.md", "CLAUDE.md"):
         if not Path(f).exists():
             fail("agent-docs", f"缺少 {f}")
@@ -1056,6 +1056,7 @@ def check_agent_collab_docs() -> None:
     handover = read("docs/handover.md")
     ocr = read("docs/word-card-ocr.md")
     bootstrap = Path("docs/workbuddy-bootstrap.md")
+    workflow = Path("docs/workbuddy-chief-lead-workflow.md")
     grok_path = Path("GROK.md")
     if not grok_path.exists():
         fail("agent-docs", "缺少 GROK.md 協作界線")
@@ -1063,29 +1064,43 @@ def check_agent_collab_docs() -> None:
         fail("agent-docs", "缺少 docs/workbuddy-bootstrap.md（WorkBuddy 可貼開工指令）")
     else:
         boot = read("docs/workbuddy-bootstrap.md")
-        for needle in ("WorkBuddy", "AGENTS.md", "docs/handover.md", "完結＝live", "可撳網址"):
+        for needle in ("WorkBuddy", "AGENTS.md", "docs/handover.md", "完結＝live", "可撳網址",
+                       "常任 Chief Lead＝Cursor", "token 接棒"):
             if needle not in boot:
                 fail("agent-docs", f"workbuddy-bootstrap.md 要包含：{needle}")
+    if not workflow.exists():
+        fail("agent-docs", "缺少 docs/workbuddy-chief-lead-workflow.md")
+    else:
+        wf = read("docs/workbuddy-chief-lead-workflow.md")
+        if "常任 Chief" not in wf or "token 接棒" not in wf:
+            fail("agent-docs", "workflow 要寫明 Cursor 常任 Chief 同 WorkBuddy token 接棒")
+        if "WorkBuddy（Chief）＋ Cursor" in wf or "WorkBuddy 做 Chief，預設只統籌" in wf:
+            fail("agent-docs", "workflow 仍然寫永久 WorkBuddy＝Chief（已作廢）")
     for name, src in (("AGENTS.md", agents), ("docs/handover.md", handover)):
         for role in ("Cursor", "Grok", "WorkBuddy"):
             if role not in src:
                 fail("agent-docs", f"{name} 要記錄現行協作角色 {role}")
+    if "Chief Lead＝Cursor" not in agents and "常任 Chief Lead" not in agents:
+        fail("agent-docs", "AGENTS.md 要寫明 Cursor 係常任 Chief Lead")
+    if "token 接棒" not in agents:
+        fail("agent-docs", "AGENTS.md 要寫明 WorkBuddy＝token 接棒")
     if "docs/workbuddy-bootstrap.md" not in agents:
         fail("agent-docs", "AGENTS.md 要指向 docs/workbuddy-bootstrap.md")
-    if "WorkBuddy" not in read("CLAUDE.md"):
-        fail("agent-docs", "CLAUDE.md 要提到 WorkBuddy")
-    # Keith 2026-11-19：Codex 退出，項目净係 WorkBuddy＋Cursor 兩方。
-    # 呢個 sentinel 防止日後效力嘅文件又將 Codex 寫返做現行角色／認領人。
+    if "WorkBuddy" not in read("CLAUDE.md") or "常任 Chief" not in read("CLAUDE.md"):
+        fail("agent-docs", "CLAUDE.md 要提到 WorkBuddy 同 Cursor 常任 Chief")
+    # Keith 2026-11-19：Codex 退出，項目净係 Cursor＋WorkBuddy 兩方。
     for name, src in (("AGENTS.md", agents), ("docs/handover.md", handover),
                       ("docs/workbuddy-bootstrap.md", read("docs/workbuddy-bootstrap.md"))):
         if "Codex 已退出" not in src:
             fail("agent-docs", f"{name} 要寫明「Codex 已退出」（Keith 2026-11-19）")
     if "已退役" not in read("CODEX.md"):
         fail("agent-docs", "CODEX.md 要標明已退役，唔好當 Codex 係現行協作者")
-    if "字卡相片辨讀由 WorkBuddy" not in agents:
-        fail("agent-docs", "AGENTS.md 要將字卡相片辨讀責任交畀 WorkBuddy（Codex 退出後接手）")
-    if "WorkBuddy" not in ocr or "Grok" not in ocr:
-        fail("agent-docs", "字卡 OCR 指引要寫清 WorkBuddy owner 同 Grok 界線")
+    if "字卡相片辨讀由當值 agent" not in agents:
+        fail("agent-docs", "AGENTS.md 要將字卡辨讀交畀當值 agent（Cursor 常規／WorkBuddy 接棒）")
+    if "apply-book-cards.py" not in ocr or "當值 agent" not in ocr:
+        fail("agent-docs", "字卡 OCR 指引要寫清當值 agent 同 apply-book-cards.py")
+    if "Grok" not in ocr:
+        fail("agent-docs", "字卡 OCR 指引要寫清 Grok 界線")
     if "Claude Cowork" in ocr or "由 ChatGPT／Codex 主責" in ocr:
         fail("agent-docs", "字卡 OCR 指引仍然鎖死舊 owner（Claude／Codex）")
     for needle in ("Outcome 完結定義", "幾時先問 Keith", "version.json"):
