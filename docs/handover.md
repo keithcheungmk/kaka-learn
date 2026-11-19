@@ -1,4 +1,6 @@
-# 交接簿 — Cursor ⇄ Codex ⇄ WorkBuddy（＋專科 Leads／Grok）
+# 交接簿 — WorkBuddy Chief ⇄ Cursor ⇄ Codex（＋專科 Leads／Grok）
+
+**2026-11-19 WorkBuddy Chief — 接任 Chief Lead（Keith 指示）：** Keith 指令 WorkBuddy 接任 Chief Lead；WorkBuddy 問過一次方向後，按 Lauren Tan（@poteto）原則定為「WorkBuddy 做全局 Chief（拆單／跨科校準／共享檔整合／獨立驗證／部署協調），Cursor 保留科目主導（指派三位本機 Lead），Codex 認領互不重疊檔」，明確唔設雙 Chief。設計稿 `docs/workbuddy-chief-lead-workflow.md` 已上線。治理檔 `AGENTS.md`／本檔／`docs/workbuddy-bootstrap.md`／`CLAUDE.md`／`CODEX.md`／`GROK.md`／`.cursor/agents/*.md` 同步更新。WorkBuddy 收工只交可撳網址。
 
 **2026-11-19 Cursor Chief — WorkBuddy 分叉誤報澄清：** WorkBuddy 本機 `main` 未 `fetch`，以為 live `0760329` 唔喺 `main`。實際 `origin/main`＝`0760329`，live `version.json` 已對齊；`docs/workbuddy-bootstrap.md` 已在 `main`。本機 Documents checkout 已 fast-forward；髒 `AGENTS.md` 本機改動 stash 為 `workbuddy-local-AGENTS-notes-20261119`（skills 提示＋mdc 併入草稿），未入 main。
 
@@ -17,7 +19,7 @@
 
 > 2026-10-28 數學遊樂場：在獨立分支 `codex/math-playground-refresh-20261027` 由最新 `origin/main`（`db26f80`）整理「數數／加減／時間／生活數學」入口；保留現有水果店、四種計算法與進度。數數改成故事圖、物件板與答案區，修正 20 件物品重疊、不足五個的組別標籤及答錯後語音完成才可重試；形狀規律重複圖形使用一致顏色。生活數學卡片加入具體玩法描述；錯誤提示按題型分步講解、第二次錯誤示範答案，並同步朗讀。度量第一階段已改成讀厘米：擦膠／蠟筆先練 0–10cm，再用鉛筆／玩具車／小熊練 10–20cm；物件起點對齊 0cm，先找整十刻度再數小格，二次答錯會照實際讀數拆步講解。呢個係圖片式直尺練習，未包含手動捲尺、門邊等長距離量度。數學單元／策略測試、57 項 invariants，以及家庭裝置完整 smoke 已過：iPad 直／橫各 55 個畫面一屏可用，iPhone 55 個畫面無重疊／裁切，並覆蓋答錯／答啱語音後狀態；附帶 PTH regression 亦通過。已向 Chief Lead 查詢數學整合範圍，未收到回覆；數學變更經獨立檢查結論「可以 merge」。工作提交 `e1006d5` 已 fast-forward 推送至 `main`；GitHub CI 與 Pages workflow 均成功，線上 `version.json` 確認為 `e1006d5`。GitHub PR API 回 403，因 main 未設保護而直接 fast-forward。其他題型的情境／互動仍待逐項改造。
 
-2026-11-19 Keith 指示：而家係 **Cursor ⇄ Codex ⇄ WorkBuddy** 三方協作。Cursor 主 Agent 係 Chief Lead（拆單、共享檔整合、未指定任務 routing）。Codex 同 WorkBuddy 同級可認領改 repo，跟完結＝live。Math／English／Chinese 三位本機 Lead 仍由 Chief 委派。新增下屬 agent 前必須先同 Keith 討論並取得明確批准。Grok 預設係外部顧問 bot，只提供建議。
+2026-11-19 Keith 指示（更新）：而家係 **WorkBuddy Chief ⇄ Cursor ⇄ Codex** 三方協作。**WorkBuddy 係 Chief Lead**（拆單、跨科校準、共享檔整合、獨立驗證、未指定任務 routing）；Cursor 保留科目主導，指派 Math／English／Chinese 三位本機 Lead；Codex 可認領改互不重疊 repo。三方都跟完結＝live。新增下屬 agent 前必須先同 Keith 討論並取得明確批准。Grok 預設係外部顧問 bot，只提供建議。（舊記錄：2026-11-19 初由 Cursor 任 Chief，同日 Keith 改由 WorkBuddy 接任。）
 呢度記錄「其他人需要知」嘅分工、認領、撞車風險同未完事項，避免撞改。
 
 
@@ -34,15 +36,15 @@
 
 | 署名 | 係邊個 |
 |---|---|
-| **Cursor Chief Lead** | Keith 本機 Cursor 主 Agent；拆單、共享檔整合、未指定任務 routing、驗證與部署協調 |
+| **WorkBuddy Chief Lead** | 騰訊 WorkBuddy；全局 Chief：拆單、跨科校準、共享檔整合、獨立驗證、未指定任務 routing、部署協調；預設唔寫 code；開工見 `docs/workbuddy-bootstrap.md`，workflow 見 `docs/workbuddy-chief-lead-workflow.md` |
+| **Cursor** | Keith 本機 Cursor 主 Agent；科目主導，指派三位本機 Lead；交返結果畀 Chief；可直接改 repo 同部署 |
 | **Math Lead** | `.cursor/agents/math-lead.md`；數理、加減法、數感、數學面試玩法及數理回歸 |
 | **English Lead** | `.cursor/agents/english-lead.md`；Carter Family、Story English、Game Night、Sight Words、Phonics |
 | **Chinese Lead** | `.cursor/agents/chinese-lead.md`；中文認字、紅／橙輯、書頁砌句、字卡 OCR、粵語及 PTH |
 | **ChatGPT／Codex** | 可認領後改互不重疊檔；跟完結＝live 自行測／commit／push |
-| **WorkBuddy** | 騰訊 WorkBuddy；與 Codex 同級實作協作者；認領署名 `WorkBuddy`；開工見 `docs/workbuddy-bootstrap.md` |
 | **Grok bot** | Keith 手動使用嘅外部建議／研究 bot；預設唯讀，無 repo、push、merge 或部署權限 |
 
-Keith 明確交俾邊個嘅任務，就由嗰個做；未指定時由 Cursor Chief Lead routing。三位專科 Lead 完成後交 Chief 整合，唔自行 push／部署。Codex／WorkBuddy 認領後可自行完成互不重疊範圍並跟完結＝live。共享檔先認領，避免同時寫同一功能。Grok 嘅輸出係建議，唔係已驗證嘅 repo 狀態；除非 Keith 另行明確交代，唔叫 Grok 寫入或接觸私有素材／密鑰。Claude 舊工作只保留喺歷史紀錄，唔再係現行 owner。
+Keith 明確交俾邊個嘅任務，就由嗰個做；未指定時由 WorkBuddy Chief routing。三位專科 Lead 完成後交 Chief 整合，唔自行 push／部署。Cursor／Codex 認領後可自行完成互不重疊範圍並跟完結＝live。共享檔先認領，避免同時寫同一功能。**唔設雙 Chief**：一個範疇只有一個 owner。Grok 嘅輸出係建議，唔係已驗證嘅 repo 狀態；除非 Keith 另行明確交代，唔叫 Grok 寫入或接觸私有素材／密鑰。Claude 舊工作只保留喺歷史紀錄，唔再係現行 owner。
 
 ## 點用呢個檔
 
@@ -50,7 +52,7 @@ Chief Lead、三位專科 Lead、ChatGPT／Codex、**WorkBuddy**、以及另行�
 
 - **開工前**：`git fetch origin main` → 睇 `AGENTS.md`（硬性規則）→ 睇呢個檔（分工、進行中認領、地雷）。
 - **改共享／高危檔之前**：喺下面「進行中（認領）」表認領；同一功能／同一批檔唔可以兩個人同時改。
-- **merge 完之後**：喺「最近改動」加一段（日期、邊個做、改咗乜、掂咗邊啲檔），署名 **Cursor Chief Lead**、相應專科 Lead、**ChatGPT／Codex** 或 **WorkBuddy**。做完就清走認領。
+- **merge 完之後**：喺「最近改動」加一段（日期、邊個做、改咗乜、掂咗邊啲檔），署名 **WorkBuddy Chief**、**Cursor**、相應專科 Lead 或 **ChatGPT／Codex**。做完就清走認領。
 - 只寫其他人要知嘅嘢：**擁有權、地雷、未完事項**。設計討論、需求分析唔好塞入嚟。
 - 呢個檔唔係規則書。任何「以後都要咁做」嘅嘢要寫入 `AGENTS.md`，
   而且同時喺 `scripts/check-invariants.py` 加一個 `check_xxx()`，靠機器守住，唔好靠記憶。
@@ -91,8 +93,9 @@ Chief Lead、三位專科 Lead、ChatGPT／Codex、**WorkBuddy**、以及另行�
 
 | 範圍 | 擁有人 | 主要檔案 |
 |---|---|---|
-| Chief Lead：routing、跨科校準、共享檔整合、驗證／部署協調 | **Cursor Chief Lead** | `index.html`、`js/app.js`、`js/storage.js`、共用獎勵／Profile、`.github/workflows/*`、`scripts/check-invariants.py`、`docs/handover.md` |
-| 認領後實作（互不重疊檔） | **ChatGPT／Codex** 或 **WorkBuddy** | 按認領表；開工見 `AGENTS.md`／`docs/workbuddy-bootstrap.md` |
+| Chief Lead：routing、跨科校準、共享檔整合、獨立驗證／部署協調 | **WorkBuddy Chief** | `index.html`、`js/app.js`、`js/storage.js`、共用獎勵／Profile、`.github/workflows/*`、`scripts/check-invariants.py`、`docs/handover.md` |
+| 科目主導（指派三位 Lead） | **Cursor** | `.cursor/agents/*.md`；科目內實作同整合，交返 Chief |
+| 認領後實作（互不重疊檔） | **ChatGPT／Codex** | 按認領表；開工見 `AGENTS.md` |
 | 數理內容、玩法、題目、版面及測試 | **Math Lead** | `js/math-*`、`css/math.css`、`js/additionGame.js`、`js/subtractionGame.js`、數理測試 |
 | 英文故事、Carter Family、Sight Words、Phonics、錄音及測試 | **English Lead** | `js/phonics-*`、Story English／Game Night、英文衍生資產及測試 |
 | 中文認字、紅／橙輯、書頁砌句、字卡 OCR、粵語、PTH | **Chinese Lead** | `data/red-series/`、`book-scene-*`、中文／PTH 資料、衍生資產及測試 |
@@ -100,11 +103,11 @@ Chief Lead、三位專科 Lead、ChatGPT／Codex、**WorkBuddy**、以及另行�
 | 新主題內容與網站資產整合 | **相應專科 Lead，Chief 協調** | 科目資料由 Lead；`js/words.js`、共享 CSS／入口及資產鎖由 Chief 安排認領 |
 | 第二意見、概念發想、公開資料研究 | **Grok bot**（Keith 手動邀請） | 不直接讀寫 repo；輸出由 ChatGPT／Cursor 核實後採納 |
 
-呢個分工唔係死嘅——需要跨界時先由 Chief Lead 拆件並喺「進行中」認領。**唔好兩個 agent 同時改同一個功能／同一批檔。** 專科 Lead 按授權及 Chief 指派執行 push／部署；Grok 如要由顧問角色升級成程式執行者，須 Keith 另行明確授權並先更新規則。
+呢個分工唔係死嘅——需要跨界時先由 WorkBuddy Chief 拆件並喺「進行中」認領。**唔好兩個 agent 同時改同一個功能／同一批檔。** 專科 Lead 按授權及 Chief 指派執行 push／部署；Grok 如要由顧問角色升級成程式執行者，須 Keith 另行明確授權並先更新規則。Chief 唔寫 code（低風險例外）：寫 code 嘅人唔批准自己 work，Chief 用證據做獨立驗證。同一錯誤被糾正 3 次就寫入 `check-invariants.py`。
 
 ## 撞車高危檔案
 
-Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下面呢批檔——改之前先認領，唔好兩個 agent 一齊改。Grok 預設唔改檔。
+WorkBuddy Chief、專科 Leads、Cursor 或 ChatGPT／Codex 都可能掂到下面呢批檔——改之前先認領，唔好兩個 agent 一齊改。Grok 預設唔改檔。
 
 - `css/styles.css` — ChatGPT／Cursor 都會掂。改之前認領 + `git fetch` + rebase，唔好用大段 rewrite，
   改細粒啲、貼住現有 selector 改。
@@ -123,6 +126,13 @@ Chief Lead、專科 Leads或另行使用嘅 ChatGPT／Cursor 都可能掂到下�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-11-19 · WorkBuddy Chief（接任 Chief Lead 治理交接）
+
+- Keith 指示 WorkBuddy 接任 Chief Lead；WorkBuddy 只問一次方向，按 Lauren Tan 三層編組定為「WorkBuddy 全局 Chief、Cursor 科目主導、Codex 認領」，唔設雙 Chief。
+- 新增設計稿 `docs/workbuddy-chief-lead-workflow.md`（三層模型、七步生命週期、playbook、獨立驗證關卡、3 strikes 轉 invariant、同 Lauren Tan 差異）。
+- 同步更新 `AGENTS.md`、本交接簿、`docs/workbuddy-bootstrap.md`、`CLAUDE.md`、`CODEX.md`、`GROK.md`、`.cursor/agents/*.md` 嘅 Chief 角色。
+- 定向測試：`check-invariants.py` 58 項；治理改動無版面，唔做視覺巡查。玩：https://keithcheungmk.github.io/kaka-learn/
 
 ### 2026-11-18 · Cursor Chief Lead（repo cleanup skill）
 

@@ -1,6 +1,6 @@
 # Grok bot 協作界線
 
-Keith 現時會用 ChatGPT（Codex）、Cursor 同 Grok bot。本文件係需要手動將專案背景交畀 Grok 時嘅精簡界線；Grok 唔會自動讀 repo，亦唔代表已獲 repo 權限。
+Keith 現時會用 WorkBuddy、Cursor、ChatGPT（Codex）同 Grok bot；全局 Chief 係 **WorkBuddy**（Keith 2026-11-19）。本文件係需要手動將專案背景交畀 Grok 時嘅精簡界線；Grok 唔會自動讀 repo，亦唔代表已獲 repo 權限。
 
 - 預設只做第二意見、概念發想、公開資料研究或對已分享 diff／文字提出 review 建議。
 - 唔可以假設自己可改檔、開 branch、push、merge、部署或讀本機素材；所有建議由 ChatGPT／Cursor 核實後先整合。

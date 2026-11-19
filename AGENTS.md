@@ -4,9 +4,9 @@
 
 給 Cursor／ChatGPT Codex／騰訊 WorkBuddy／Grok bot／自動化 agent 嘅專案指引。
 
-> **開工前必須睇 `docs/handover.md`** — Keith 而家主要用 **Cursor、ChatGPT（Codex）、騰訊 WorkBuddy** 三方協作；Grok bot 仍可作顧問。
-> Cursor 主 Agent 係 **Chief Lead**，按科目委派 `.cursor/agents/` 三位本機 Lead。
-> **Codex** 同 **WorkBuddy** 與 Cursor 同級可認領、改互不重疊檔，並跟「完結＝live」自行測／commit／push；署名分別用 `ChatGPT／Codex`、`WorkBuddy`。
+> **開工前必須睇 `docs/handover.md`** — Keith 而家主要用 **WorkBuddy、Cursor、ChatGPT（Codex）** 三方協作；Grok bot 仍可作顧問。
+> **騰訊 WorkBuddy 係 Chief Lead**（Keith 2026-11-19 指示）：負責拆單、跨科校準、共享檔整合、獨立驗證同部署協調；唔寫 code（低風險例外見下）。詳見 `docs/workbuddy-chief-lead-workflow.md`。
+> **Cursor** 保留科目主導：按科目指派 `.cursor/agents/` 三位本機 Lead，並可做科目內實作；**Codex** 可認領後改互不重疊檔。兩者都跟「完結＝live」自行測／commit／push；署名分別用 `Cursor`、`ChatGPT／Codex`。
 > Grok 預設只提供建議，唔改檔。WorkBuddy 開工指令見 `docs/workbuddy-bootstrap.md`。
 > 交接簿記錄現行分工、進行中認領、撞車高危檔案同未完事項。
 > 收工／merge 完記得返去更新。
@@ -39,26 +39,28 @@
 
 ## Agent 團隊與 routing（Keith 2026-09-21；2026-11-19 納入 WorkBuddy）
 
-### Chief Lead＝Cursor 主 Agent
+### Chief Lead＝騰訊 WorkBuddy（Keith 2026-11-19 指示）
 
-- 主 Agent 係總負責人：收需求、拆 scope、按科目委派、管理 `docs/handover.md` 認領、整合共享檔、跑全套驗證、commit、push 同部署。
-- Chief Lead 唔係另一個 child agent；唔需要 `.cursor/agents/chief-lead.md`。三位專科 Lead 完成工作後交返結果畀 Chief Lead。
-- 跨兩科或以上、主頁／共享 state／Profile／獎勵／CI／部署，一律先經 Chief Lead 拆件同整合。
+- WorkBuddy 係總協調者：收需求、拆 scope、界定邊界、管理 `docs/handover.md` 認領、整合共享檔、**獨立驗證**、commit、push 同部署協調。
+- **Chief 唔寫 code**：核心係協調；只有喺無其他執行者可用、任務低風險（單檔、可一分鐘還原、唔掂共享高危檔）時先親自做，而且唔可以自己寫自己批。設計詳見 `docs/workbuddy-chief-lead-workflow.md`。
+- Chief 唔係另一個 child agent；唔需要 `.cursor/agents/chief-lead.md`。三位專科 Lead 完成工作後交返結果畀 Chief。
+- 跨兩科或以上、主頁／共享 state／Profile／獎勵／CI／部署，一律先經 Chief 拆件同整合。
 - 三位 Lead 如需新增或委派任何下屬 agent，須先同 Keith 討論，取得明確批准；未批准前不得新增。
+- 設計精神參考 Lauren Tan（@poteto）嘅三層編組同信任金字塔：審證據唔審 diff、作者唔批准自己 work、同一錯誤被糾正 3 次就寫入 `scripts/check-invariants.py` 變成機器檢查。
 
-### 三方實作協作（Cursor ⇄ Codex ⇄ WorkBuddy）
+### 三方實作協作（WorkBuddy Chief ⇄ Cursor ⇄ Codex）
 
 | 署名 | 角色 |
 |---|---|
-| **Cursor Chief Lead** | 拆單、共享檔整合、未指定任務 routing；可直接改 repo 同部署 |
+| **WorkBuddy Chief Lead** | 騰訊 WorkBuddy；拆單、跨科校準、共享檔整合、獨立驗證、未指定任務 routing；開工指令見 `docs/workbuddy-bootstrap.md`，workflow 見 `docs/workbuddy-chief-lead-workflow.md` |
+| **Cursor** | 科目主導：指派 `.cursor/agents/` 三位本機 Lead，做科目內實作；交返結果畀 Chief；可直接改 repo 同部署 |
 | **ChatGPT／Codex** | 可認領後改互不重疊檔；跟完結＝live 自行測／commit／push |
-| **WorkBuddy** | 騰訊 WorkBuddy；與 Codex 同級；認領署名 `WorkBuddy`；可貼開工指令見 `docs/workbuddy-bootstrap.md` |
 | **Grok bot** | 外部顧問；預設唯讀建議，唔改 repo、唔 push |
 
-- Keith 明確交俾邊個，就由嗰個做；未指定先由 Cursor Chief Lead routing。
+- Keith 明確交俾邊個，就由嗰個做；未指定先由 WorkBuddy Chief routing。
 - 同一功能／同一批檔任何時候只可以一位 agent 寫；平行只限互不重疊範圍。
 - 開工前：`git fetch origin main` → 讀本檔 → 讀／寫 `docs/handover.md` 認領表。
-- WorkBuddy **唔係** Chief Lead；唔搶共享檔、唔改另一位已認領範圍；撞車先停低更新 handover。
+- WorkBuddy 做 Chief 唔代表可以一個人改晒：共享高危檔改之前認領、唔改另一位已認領範圍、撞車先停低更新 handover。
 
 ### 三位本機專科 Lead
 

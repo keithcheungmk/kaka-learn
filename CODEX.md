@@ -3,7 +3,7 @@
 規則同 Cursor／Claude 共用一份：見 **[AGENTS.md](./AGENTS.md)**。
 開工前／收工後要睇同更新 **[docs/handover.md](./docs/handover.md)**。
 
-- 喺交接簿「最近改動」署名 **Codex**（唔好簽 Cursor／Claude）。
+- 喺交接簿「最近改動」署名 **Codex**（唔好簽 Cursor／Claude）。全局 Chief 而家係 **WorkBuddy**（Keith 2026-11-19）；跨科／共享檔由 WorkBuddy 拆件整合。
 - 開工第一件事：`git fetch origin main`。
 - 改共享／高危檔之前，喺 handover「進行中（認領）」表認領；做完清走。同一批檔唔可以兩個人同時改。
 - 唔好讀《我自己會讀》字卡相——OCR 仍然係 Claude Cowork。
