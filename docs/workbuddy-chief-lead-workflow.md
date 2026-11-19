@@ -1,14 +1,16 @@
 # WorkBuddy Chief Lead workflow（設計提案，2026-11-19）
 
-> 狀態：**提案，未 commit、未 push、未生效**。現行治理真源仍係 `AGENTS.md` + `docs/handover.md`（Cursor 係 Chief Lead）。本檔只係設計稿，待 Keith 定值先改治理檔並上線。
+> 狀態：**已生效**（2026-11-19 上線）。治理真源係 `AGENTS.md` + `docs/handover.md`；本檔係_workflow_ 設計真源。
 >
-> 參考：Lauren Tan（@poteto，SpaceXAI Grok Bot 工程主管）公開分享嘅三層 agent 編組、信任金字塔同「作者唔批准自己 work」。本項目規模唔同（一套幼兒學習網、三方協作、token 有限），所以係**取其原則、縮細執行**，唔係照抄 11,000 PR／日嗰套。
+> 陣容（Keith 2026-11-19 最終指示）：**WorkBuddy（Chief）＋ Cursor 兩方**；**Codex 已退出**，Grok 只係唯讀顧問。
+>
+> 參考：Lauren Tan（@poteto，SpaceXAI Grok Bot 工程主管）公開分享嘅三層 agent 編組、信任金字塔同「作者唔批准自己 work」。本項目規模唔同（一套幼兒學習網、兩方協作、token 有限），所以係**取其原則、縮細執行**，唔係照抄 11,000 PR／日嗰套。
 
 ## 1. 設計原則（點解咁做）
 
 | Lauren Tan 原則 | 喺 kaka-learn 點落地 |
 |---|---|
-| Chief of staff 唔寫 code，只拆單、分派、追蹤 | WorkBuddy 做 Chief，預設只統籌；執行交 Cursor／Codex／三位專科 Lead |
+| Chief of staff 唔寫 code，只拆單、分派、追蹤 | WorkBuddy 做 Chief，預設只統籌；執行交 Cursor／三位專科 Lead（字卡 OCR 除外，由 Chief 主責） |
 | 信任金字塔：codebase + 靜態檢查最強，人手審查最弱 | 已有 `check-invariants.py`（58 項）＋ node 測試 ＋ CI 做地基；Keith 只喺 live「玩」，唔睇 diff |
 | 寫 code 嘅 agent 唔批准自己嘅 work | 執行者自測後，Chief 用**證據**（測試輸出／invariant／截圖）做獨立驗證，唔信口述 |
 | 審證據唔審 diff | 驗證看測試輸出、invariant 結果、受影響頁畫面；Keith 看 live 網址 |
@@ -20,12 +22,12 @@
 
 - **協調層（Chief = WorkBuddy）**：解讀 Keith 需求、界定方向同邊界、拆單、認領表管理、獨立驗證、整合、部署協調、向 Keith 回報。**唔寫 code**（例外見 §6）。
 - **執行層**：
-  - Cursor 及其三位本機專科 Lead（Math／English／Chinese）— 科目內容同 관련測試。
-  - Codex — 可認領互不重疊範圍。
-  - WorkBuddy 只喺無其他執行者可用且任務低風險時先降落執行（見 §6）。
+  - Cursor 及其三位本機專科 Lead（Math／English／Chinese）— 科目內容同相關測試。
+  - WorkBuddy 只喺無其他執行者可用且任務低風險時先降落執行（見 §6）；**字卡相片辨讀（OCR）係 Chief 主責**（內容核實，唔係寫 code，見 `docs/word-card-ocr.md`）。
+  - **Codex 已退出（Keith 2026-11-19）**：唔再認領、唔署名。
 - **編排層（playbooks）**：按任務類型固定流程，唔即興（見 §4）。
 
-Grok 維持外部顧問、唯讀、唔認領、唔 push。
+Grok 維持外部唯讀顧問、唔認領、唔 push；亦非現行 project 執行方。
 
 ## 3. 任務生命週期（七步）
 
@@ -60,7 +62,7 @@ Chief 唔需要逐行睇 code。驗證看呢啲嘢：
 
 ## 6. Chief 可唔可以寫 code？
 
-Lauren Tan 嘅純潔版本係「Chief 永遠唔寫」。但本項目得三方、token 有限，死守會浪費。折衷：
+Lauren Tan 嘅純潔版本係「Chief 永遠唔寫」。但本項目得兩方、token 有限，死守會浪費。折衷：
 
 - **預設**：Chief 唔寫，只統籌同驗證。
 - **例外**：無其他執行者可用、且任務屬低風險（單檔、可一分鐘還原、唔掂共享高危檔）時，Chief 可以親自做。
@@ -88,11 +90,13 @@ Lauren Tan 嘅純潔版本係「Chief 永遠唔寫」。但本項目得三方、
 | `CLAUDE.md`／`CODEX.md`／`GROK.md` | 涉及 Chief 稱呼嘅句子同步 |
 | `.cursor/agents/*.md` | 三位 Lead 的上報對象由 Cursor Chief 改 WorkBuddy Chief（如適用） |
 
+2026-11-19 補充：Keith 再指示 Codex 退出，項目收窄為 WorkBuddy＋Cursor 兩方；`CODEX.md` 轉退役聲明、OCR owner 轉 WorkBuddy、invariants 加「Codex 已退出」sentinel。
+
 改完跟住做：`check-invariants.py` → commit → CI 綠 → fast-forward `main` → 對 live `version.json` → 交可撳網址。
 
 ## 9. 同 Lauren Tan 原始方法嘅差異（誠實講清楚）
 
-- **規模**：佢係 10–20 個 agent 并行、一個月 11,000 PR；我哋係三方協作、一套比其他細好多嘅網站。唔追求并行數量。
+- **規模**：佢係 10–20 個 agent 并行、一個月 11,000 PR；我哋係兩方協作、一套比其他細好多嘅網站。唔追求并行數量。
 - **形式驗證**：佢用 TLA+／Lean／property-based UI test；本項目未用，亦未必值得。地基仍然係 invariants + 測試 + 定向 smoke。
 - **verifier agent**：佢係「另一組 agent 驗收」；我哋受限於項目批准規則，暫時由 Chief 睇證據代替。
 - **Chief 寫 code**：佢完全唔寫；我哋留低風險例外（§6）。

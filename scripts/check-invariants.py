@@ -1045,7 +1045,7 @@ def check_cjk_halfwidth_punct() -> None:
 
 
 def check_agent_collab_docs() -> None:
-    """確保現行 Cursor／ChatGPT／WorkBuddy／Grok 分工及 OCR owner 寫入協作文件。"""
+    """確保現行 WorkBuddy（Chief）＋Cursor 兩方、Grok 顧問及 OCR owner 寫入協作文件；Codex 已退出。"""
     for f in ("CODEX.md", "CLAUDE.md"):
         if not Path(f).exists():
             fail("agent-docs", f"缺少 {f}")
@@ -1067,19 +1067,27 @@ def check_agent_collab_docs() -> None:
             if needle not in boot:
                 fail("agent-docs", f"workbuddy-bootstrap.md 要包含：{needle}")
     for name, src in (("AGENTS.md", agents), ("docs/handover.md", handover)):
-        for role in ("ChatGPT", "Cursor", "Grok", "WorkBuddy"):
+        for role in ("Cursor", "Grok", "WorkBuddy"):
             if role not in src:
                 fail("agent-docs", f"{name} 要記錄現行協作角色 {role}")
     if "docs/workbuddy-bootstrap.md" not in agents:
         fail("agent-docs", "AGENTS.md 要指向 docs/workbuddy-bootstrap.md")
     if "WorkBuddy" not in read("CLAUDE.md"):
-        fail("agent-docs", "CLAUDE.md 要提到 WorkBuddy 三方協作")
-    if "字卡相片辨讀由 ChatGPT" not in agents:
-        fail("agent-docs", "AGENTS.md 要將字卡辨讀責任交畀 ChatGPT／Codex")
-    if "ChatGPT／Codex" not in ocr or "Grok" not in ocr:
-        fail("agent-docs", "字卡 OCR 指引要寫清 ChatGPT owner 同 Grok 界線")
-    if "Claude Cowork" in ocr or "唔好叫 Cursor 或 Codex／ChatGPT 讀字卡相" in ocr:
-        fail("agent-docs", "字卡 OCR 指引仍然鎖死 Claude 或禁止 ChatGPT")
+        fail("agent-docs", "CLAUDE.md 要提到 WorkBuddy")
+    # Keith 2026-11-19：Codex 退出，項目净係 WorkBuddy＋Cursor 兩方。
+    # 呢個 sentinel 防止日後效力嘅文件又將 Codex 寫返做現行角色／認領人。
+    for name, src in (("AGENTS.md", agents), ("docs/handover.md", handover),
+                      ("docs/workbuddy-bootstrap.md", read("docs/workbuddy-bootstrap.md"))):
+        if "Codex 已退出" not in src:
+            fail("agent-docs", f"{name} 要寫明「Codex 已退出」（Keith 2026-11-19）")
+    if "已退役" not in read("CODEX.md"):
+        fail("agent-docs", "CODEX.md 要標明已退役，唔好當 Codex 係現行協作者")
+    if "字卡相片辨讀由 WorkBuddy" not in agents:
+        fail("agent-docs", "AGENTS.md 要將字卡相片辨讀責任交畀 WorkBuddy（Codex 退出後接手）")
+    if "WorkBuddy" not in ocr or "Grok" not in ocr:
+        fail("agent-docs", "字卡 OCR 指引要寫清 WorkBuddy owner 同 Grok 界線")
+    if "Claude Cowork" in ocr or "由 ChatGPT／Codex 主責" in ocr:
+        fail("agent-docs", "字卡 OCR 指引仍然鎖死舊 owner（Claude／Codex）")
     for needle in ("Outcome 完結定義", "幾時先問 Keith", "version.json"):
         if needle not in agents:
             fail("agent-docs", f"AGENTS.md 要有 Outcome／問 Keith 規則（缺「{needle}」）")

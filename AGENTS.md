@@ -2,11 +2,11 @@
 
 > **2026-10-29 Keith 更新測試範圍（優先於下方舊有全站 smoke 要求）：** 日常改動只檢查受影響功能及直接相關的進度、入口和返回流程；介面改動檢查相關 iPad 直／橫及 iPhone 畫面。只有改共用基建或有明確跨模組風險時才擴大回歸。全站回歸每三日定期執行或在有具體理由時執行；測試必須靜音，避免干擾家庭。CI 的全站 UI 回歸留給手動觸發或共用基建改動；勿將以下舊文的全站 smoke 視為每次修改的必需步驟。
 
-給 Cursor／ChatGPT Codex／騰訊 WorkBuddy／Grok bot／自動化 agent 嘅專案指引。
+給騰訊 WorkBuddy／Cursor／Grok bot（顧問）／自動化 agent 嘅專案指引。
 
-> **開工前必須睇 `docs/handover.md`** — Keith 而家主要用 **WorkBuddy、Cursor、ChatGPT（Codex）** 三方協作；Grok bot 仍可作顧問。
-> **騰訊 WorkBuddy 係 Chief Lead**（Keith 2026-11-19 指示）：負責拆單、跨科校準、共享檔整合、獨立驗證同部署協調；唔寫 code（低風險例外見下）。詳見 `docs/workbuddy-chief-lead-workflow.md`。
-> **Cursor** 保留科目主導：按科目指派 `.cursor/agents/` 三位本機 Lead，並可做科目內實作；**Codex** 可認領後改互不重疊檔。兩者都跟「完結＝live」自行測／commit／push；署名分別用 `Cursor`、`ChatGPT／Codex`。
+> **開工前必須睇 `docs/handover.md`** — Keith 而家净係用 **WorkBuddy（Chief）＋ Cursor** 兩方做呢個 project（Keith 2026-11-19 指示）；**Codex 已退出，唔再訂閱、唔認領、唔署名**。Grok 只作唯讀顧問。
+> **騰訊 WorkBuddy 係 Chief Lead**（Keith 2026-11-19 指示）：負責拆單、跨科校準、共享檔整合、獨立驗證同部署協調；唔寫 code（低風險例外見下），但 **字卡相片辨讀（OCR）由 WorkBuddy 主責**（內容核實，唔係寫 code）。詳見 `docs/workbuddy-chief-lead-workflow.md`。
+> **Cursor** 保留科目主導：按科目指派 `.cursor/agents/` 三位本機 Lead，並可做科目內實作；兩方都跟「完結＝live」自行測／commit／push；署名分別用 `WorkBuddy`、`Cursor`。
 > Grok 預設只提供建議，唔改檔。WorkBuddy 開工指令見 `docs/workbuddy-bootstrap.md`。
 > 交接簿記錄現行分工、進行中認領、撞車高危檔案同未完事項。
 > 收工／merge 完記得返去更新。
@@ -48,15 +48,15 @@
 - 三位 Lead 如需新增或委派任何下屬 agent，須先同 Keith 討論，取得明確批准；未批准前不得新增。
 - 設計精神參考 Lauren Tan（@poteto）嘅三層編組同信任金字塔：審證據唔審 diff、作者唔批准自己 work、同一錯誤被糾正 3 次就寫入 `scripts/check-invariants.py` 變成機器檢查。
 
-### 三方實作協作（WorkBuddy Chief ⇄ Cursor ⇄ Codex）
+### 兩方實作協作（WorkBuddy Chief ⇄ Cursor）
 
 | 署名 | 角色 |
 |---|---|
-| **WorkBuddy Chief Lead** | 騰訊 WorkBuddy；拆單、跨科校準、共享檔整合、獨立驗證、未指定任務 routing；開工指令見 `docs/workbuddy-bootstrap.md`，workflow 見 `docs/workbuddy-chief-lead-workflow.md` |
+| **WorkBuddy Chief Lead** | 騰訊 WorkBuddy；拆單、跨科校準、共享檔整合、獨立驗證、未指定任務 routing、**字卡相片辨讀（OCR）主責**；開工指令見 `docs/workbuddy-bootstrap.md`，workflow 見 `docs/workbuddy-chief-lead-workflow.md` |
 | **Cursor** | 科目主導：指派 `.cursor/agents/` 三位本機 Lead，做科目內實作；交返結果畀 Chief；可直接改 repo 同部署 |
-| **ChatGPT／Codex** | 可認領後改互不重疊檔；跟完結＝live 自行測／commit／push |
-| **Grok bot** | 外部顧問；預設唯讀建議，唔改 repo、唔 push |
+| **Grok bot** | 外部顧問（已非現行 project 執行方）；預設唯讀建議，唔改 repo、唔 push、唔認領 |
 
+- **Codex 已退出（Keith 2026-11-19）：** 唔再係協作者；舊文件／ commits 入面嘅 `ChatGPT／Codex` 署名只係歷史紀錄。
 - Keith 明確交俾邊個，就由嗰個做；未指定先由 WorkBuddy Chief routing。
 - 同一功能／同一批檔任何時候只可以一位 agent 寫；平行只限互不重疊範圍。
 - 開工前：`git fetch origin main` → 讀本檔 → 讀／寫 `docs/handover.md` 認領表。
@@ -318,7 +318,7 @@ bash scripts/build-site.sh _site test # 模擬部署產物（可選）
 - **學習卡以該書實體認字卡上實際出現嘅詞／字／短語為準**（唔好預設一定係單字；紅⑪《小明和氣球》等卡上係詞／短語，JSON 要 `"allow_words": true`）。認字卡係最準依據，好過書名／主題推測。
 - **重複唔使理**：同一個字跨書出現、或者同一張卡重複，都正常，照收（App 入面同一字一個 entry 就得）。
 - **收到字卡相片就以字卡為準**，覆寫嗰本書嘅 `wordIds`；未收到嘅書暫時用推測，標明待校對。
-- **字卡相片辨讀由 ChatGPT（Codex）負責**：逐張讀原相、兩輪反查，整理成 JSON；Cursor／Grok 唔好靠書名推測或另起一份 OCR。落地一定要用 `scripts/apply-book-cards.py`（會攔簡體、形近字、非單字、錯 id），先 dry-run 再寫入；睇唔清先問 Keith。詳見 `docs/word-card-ocr.md`。
+- **字卡相片辨讀由 WorkBuddy 負責**（Keith 2026-11-19；Codex 退出後接手）：逐張讀原相、兩輪反查，整理成 JSON；Cursor／Grok 唔好靠書名推測或另起一份 OCR。落地一定要用 `scripts/apply-book-cards.py`（會攔簡體、形近字、非單字、錯 id），先 dry-run 再寫入；睇唔清先問 Keith。詳見 `docs/word-card-ocr.md`。
 - 已對過字卡嘅書會有 `verified: true` 同 `cardSource`；冇呢兩個 field 就即係仲係推測。
 - **字卡顯示**：大漢字＋讀音；可配個簡單 emoji 做裝飾，但唔使為單字／短語強求詞形或貼圖。
 - 其他主題（動物、食物…）維持教「詞＋emoji」，唔受呢條影響。
