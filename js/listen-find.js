@@ -1,17 +1,8 @@
-/* Listen & Find — find a spoken fruit in a familiar scene. */
+/* Listen & Find — hear one English word, then find it in a familiar scene. */
 (function () {
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-  const FRUITS = [
-    ['apple', 19, 22, 12, 20],
-    ['banana', 38, 22, 16, 21],
-    ['orange', 25, 70, 15, 23],
-    ['grapes', 19, 46, 16, 22],
-    ['pear', 38, 45, 11, 22],
-    ['strawberry', 51, 71, 10, 19],
-    ['pineapple', 61, 30, 13, 37],
-    ['watermelon', 81, 58, 21, 35],
-  ];
+  const SCENES = window.KAKA_LISTEN_FIND_SCENES || {};
 
   const screen = $('#screen-listen-find');
   if (!screen || !window.KakaSpeech || !window.KakaStorage) return;
@@ -24,7 +15,14 @@
   const heading = $('#listen-find-heading');
   const progress = $('#listen-find-progress');
   const mascot = $('#listen-find-mascot');
+  const backBtn = $('#btn-listen-find-back');
+  const introText = $('#listen-find-intro-text');
+  const startEmoji = $('#listen-find-start-emoji');
+  const startBody = $('#listen-find-start-body');
+  const poster = $('.listen-find-poster', screen);
+  const sceneImg = $('.listen-find-scene', screen);
   const targets = new Map();
+  let scene = null;
   let order = [];
   let index = 0;
   let active = false;
@@ -85,17 +83,25 @@
     return result;
   }
 
-  function setProgress() {
-    progress.textContent = `${index} / ${FRUITS.length} ✨`;
+  function targetCount() {
+    return scene?.targets?.length || 8;
   }
 
-  function praiseFor(fruit) {
+  function setProgress() {
+    progress.textContent = `${index} / ${targetCount()} ✨`;
+  }
+
+  function promptFor(word) {
+    return `Find the ${word}!`;
+  }
+
+  function praiseFor(word) {
     const lines = window.KAKA_FIND_PRAISE || [];
-    if (!lines.length) return `Great job, Kaka! You found the ${fruit}!`;
+    if (!lines.length) return `Great job, Kaka! You found the ${word}!`;
     let next = Math.floor(Math.random() * lines.length);
     if (lines.length > 1 && next === previousPraise) next = (next + 1) % lines.length;
     previousPraise = next;
-    return lines[next].replaceAll('{fruit}', fruit);
+    return lines[next].replaceAll('{word}', word).replaceAll('{fruit}', word);
   }
 
   function clearDrawing() {
@@ -109,32 +115,34 @@
     heading.textContent = 'Amazing work! 🌟';
     const coin = window.KakaStorage.earnCoinForMode(
       window.KakaStorage.getCoinModeForGame?.('listen') || 'listen',
-      'Listen & Find · Fruit Shop',
+      scene?.coinLabel || 'Listen & Find',
     );
     window.KakaLearn?.refreshRewards?.();
-    message.textContent = coin.gained
-      ? 'You found all eight fruits and earned an AEON coin!'
-      : 'You found all eight fruits! Your Listen coin is already collected today.';
+    const gained = !!coin.gained;
+    message.textContent = gained
+      ? (scene?.finishGained || 'You found every picture and earned an AEON coin!')
+      : (scene?.finishKept || 'You found every picture! Your Listen coin is already collected today.');
     $('#btn-listen-find-again').hidden = false;
-    speak(coin.gained
-      ? 'Amazing work! You found all eight fruits and earned a coin!'
-      : 'Amazing work! You found all eight fruits!');
+    speak(gained
+      ? (scene?.finishSpeakGained || 'Amazing work! You found every picture and earned a coin!')
+      : (scene?.finishSpeakKept || 'Amazing work! You found every picture!'));
   }
 
-  function askForFruit() {
+  function askForTarget() {
     if (index >= order.length) {
       finishRound();
       return;
     }
     active = true;
-    heading.textContent = 'Find the fruit!';
-    message.textContent = 'Listen carefully, then find the fruit.';
+    heading.textContent = scene?.findHeading || 'Find the picture!';
+    message.textContent = scene?.listenHint || 'Listen carefully, then find the picture.';
     setProgress();
     layoutScene();
-    speak(`Find the ${order[index]}!`);
+    speak(promptFor(order[index]));
   }
 
   function startRound() {
+    if (!scene) return;
     window.KakaSpeech.warmAudio();
     window.KakaSpeech.warmEnglishVoice();
     cancelSpeech();
@@ -146,17 +154,17 @@
     mascot.classList.remove('is-celebrating');
     overlay.hidden = true;
     screen.classList.add('is-playing');
-    order = shuffled(FRUITS.map(([fruit]) => fruit));
+    order = shuffled(scene.targets.map(([word]) => word));
     index = 0;
     setProgress();
     layoutScene();
-    askForFruit();
+    askForTarget();
     requestAnimationFrame(layoutScene);
   }
 
   function containRect(img) {
-    const naturalWidth = img.naturalWidth || 1672;
-    const naturalHeight = img.naturalHeight || 941;
+    const naturalWidth = img.naturalWidth || scene?.width || 1672;
+    const naturalHeight = img.naturalHeight || scene?.height || 941;
     const width = img.clientWidth;
     const height = img.clientHeight;
     if (!width || !height) return { left: 0, top: 0, width: 0, height: 0 };
@@ -210,19 +218,19 @@
       const centerY = rect.top + rect.height / 2 - wallRect.top;
       return centerX >= bounds.left && centerX <= bounds.right && centerY >= bounds.top && centerY <= bounds.bottom;
     });
-    return candidates.find((target) => target.dataset.fruit === order[index]) || candidates[0] || null;
+    return candidates.find((target) => target.dataset.target === order[index]) || candidates[0] || null;
   }
 
   function answerTarget(target) {
     if (!active || !target || target.classList.contains('is-found')) return;
     clearDrawing();
-    const fruit = target.dataset.fruit;
-    if (fruit !== order[index]) {
+    const word = target.dataset.target;
+    if (word !== order[index]) {
       target.classList.remove('is-wrong');
       void target.offsetWidth;
       target.classList.add('is-wrong');
-      message.textContent = 'Good try! Listen again for the fruit.';
-      speak('Good try! Listen again.', () => speak(`Find the ${order[index]}!`));
+      message.textContent = scene?.wrongHint || 'Good try! Listen again.';
+      speak('Good try! Listen again.', () => speak(promptFor(order[index])));
       return;
     }
 
@@ -233,30 +241,63 @@
     window.KakaStorage.tryEarnStar?.();
     window.KakaLearn?.refreshRewards?.();
     setProgress();
-    const praise = praiseFor(fruit);
+    const praise = praiseFor(word);
     message.textContent = praise;
     mascot.classList.remove('is-celebrating');
     void mascot.offsetWidth;
     mascot.classList.add('is-celebrating');
-    speak(praise, () => { nextPromptTimer = window.setTimeout(askForFruit, 350); });
+    speak(praise, () => { nextPromptTimer = window.setTimeout(askForTarget, 350); });
   }
 
-  function setupTargets() {
-    FRUITS.forEach(([fruit, left, top, width, height]) => {
-      const target = $(`.listen-find-target[data-fruit="${fruit}"]`);
+  function rebuildTargets() {
+    targets.clear();
+    $$('.listen-find-target', wall).forEach((el) => el.remove());
+    if (!scene) return;
+    scene.targets.forEach(([word, left, top, width, height]) => {
+      const target = document.createElement('div');
+      target.className = 'listen-find-target';
+      target.dataset.target = word;
+      target.setAttribute('role', 'button');
+      target.tabIndex = 0;
       target.style.left = `${left}%`;
       target.style.top = `${top}%`;
       target.style.width = `${width}%`;
       target.style.height = `${height}%`;
-      target.setAttribute('aria-label', `Find the ${fruit}`);
+      target.setAttribute('aria-label', `Find the ${word}`);
       target.addEventListener('keydown', (event) => {
         if (event.key !== 'Enter' && event.key !== ' ') return;
         event.preventDefault();
         answerTarget(target);
       });
-      targets.set(fruit, target);
+      wall.appendChild(target);
+      targets.set(word, target);
     });
     layoutScene();
+  }
+
+  function applySceneCopy() {
+    if (!scene) return;
+    if (introText) introText.textContent = scene.intro;
+    if (startEmoji) startEmoji.textContent = scene.emoji;
+    if (startBody) startBody.innerHTML = scene.startBody;
+    if (poster) poster.setAttribute('aria-label', scene.posterLabel);
+    wall.setAttribute('aria-label', scene.wallLabel);
+    screen.setAttribute('aria-label', `Listen and Find ${scene.titleEn}`);
+  }
+
+  function loadScene(id) {
+    const next = SCENES[id];
+    if (!next) return;
+    scene = next;
+    applySceneCopy();
+    if (sceneImg) {
+      sceneImg.src = scene.image;
+      sceneImg.alt = scene.alt;
+      sceneImg.setAttribute('width', String(scene.width));
+      sceneImg.setAttribute('height', String(scene.height));
+    }
+    rebuildTargets();
+    if (sceneImg?.complete && sceneImg.naturalWidth) layoutScene();
   }
 
   function pointerPoint(event) {
@@ -292,7 +333,7 @@
 
   function bindLayout() {
     const img = $('.listen-find-scene', screen);
-    const poster = img?.closest('.listen-find-poster');
+    const posterEl = img?.closest('.listen-find-poster');
     const stage = img?.closest('.listen-find-stage');
     const side = $('.listen-find-side', screen);
     const relayout = () => layoutScene();
@@ -305,7 +346,7 @@
     window.visualViewport?.addEventListener('resize', relayout, { passive: true });
     if (typeof ResizeObserver === 'function') {
       const observer = new ResizeObserver(relayout);
-      if (poster) observer.observe(poster);
+      if (posterEl) observer.observe(posterEl);
       if (stage) observer.observe(stage);
       if (img) observer.observe(img);
       if (side) observer.observe(side);
@@ -313,40 +354,79 @@
     img?.addEventListener('load', relayout);
   }
 
-  function open() {
+  function showPicker() {
     cancelSpeech();
     active = false;
+    scene = null;
     clearDrawing();
-    $('.screen.active')?.classList.remove('active');
-    screen.classList.add('active');
+    screen.classList.add('is-picking');
     screen.classList.remove('is-playing');
-    layoutScene();
-    overlay.hidden = false;
+    overlay.hidden = true;
     $('#btn-listen-find-again').hidden = true;
+    if (backBtn) backBtn.textContent = '← 英文學習';
     heading.textContent = 'Listen carefully...';
     message.textContent = 'Get ready to play!';
     index = 0;
     setProgress();
+    layoutScene();
+  }
+
+  function chooseChapter(id) {
+    loadScene(id);
+    screen.classList.remove('is-picking', 'is-playing');
+    overlay.hidden = false;
+    $('#btn-listen-find-again').hidden = true;
+    if (backBtn) backBtn.textContent = '← 選場景';
+    heading.textContent = 'Listen carefully...';
+    message.textContent = 'Get ready to play!';
+    index = 0;
+    setProgress();
+    layoutScene();
+    requestAnimationFrame(layoutScene);
+  }
+
+  function open() {
+    $('.screen.active')?.classList.remove('active');
+    screen.classList.add('active');
+    showPicker();
     window.KakaStarFx?.hideRanger?.();
   }
 
   function close() {
     active = false;
     cancelSpeech();
-    screen.classList.remove('is-playing');
+    scene = null;
+    screen.classList.remove('is-playing', 'is-picking');
     window.KakaPhonics?.openEnglishHub?.();
   }
 
+  function goBack() {
+    if (screen.classList.contains('is-picking')) {
+      close();
+      return;
+    }
+    showPicker();
+  }
+
   $('#btn-english-listen-find')?.addEventListener('click', open);
-  $('#btn-listen-find-back')?.addEventListener('click', close);
+  backBtn?.addEventListener('click', goBack);
   $('#btn-listen-find-start')?.addEventListener('click', startRound);
   $('#btn-listen-find-again')?.addEventListener('click', startRound);
   $('#btn-listen-find-listen')?.addEventListener('click', () => {
-    if (active && order[index]) speak(`Find the ${order[index]}!`);
+    if (active && order[index]) speak(promptFor(order[index]));
   });
-  setupTargets();
+  $$('[data-listen-find-chapter]').forEach((btn) => {
+    btn.addEventListener('click', () => chooseChapter(btn.dataset.listenFindChapter));
+  });
   bindDrawing();
   bindLayout();
   window.KakaPhonics?.warmEnglishVoice?.();
-  window.KakaListenFind = { open, layoutScene, containRect };
+  window.KakaListenFind = {
+    open,
+    layoutScene,
+    containRect,
+    chooseChapter,
+    getCurrentWord: () => order[index] || null,
+    isActive: () => active,
+  };
 })();
