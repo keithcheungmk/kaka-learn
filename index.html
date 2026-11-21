@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://keithcheungmk.github.io/kaka-learn/assets/home-learning-picnic.jpg" />
   <link rel="stylesheet" href="./css/styles.css?v=20261007-word-wall" />
   <link rel="stylesheet" href="./css/phonics.css?v=20261108-unified" />
-  <link rel="stylesheet" href="./css/listen-find.css?v=20261121-ipad-play" />
+  <link rel="stylesheet" href="./css/listen-find.css?v=20261121-zoo" />
   <link rel="stylesheet" href="./css/emoji-spelling.css?v=20261108-unified" />
   <link rel="stylesheet" href="./css/story-demo.css?v=20260911b" />
   <link rel="stylesheet" href="./css/math.css?v=20261001-life-skills" />
@@ -479,12 +479,12 @@
             <span class="english-hub-action">去揀拼字主題 →</span>
           </span>
         </button>
-        <button type="button" class="english-hub-card english-hub-listen-find" id="btn-english-listen-find" aria-label="Listen and Find：聽水果名稱，在水果店場景中圈出水果">
+        <button type="button" class="english-hub-card english-hub-listen-find" id="btn-english-listen-find" aria-label="聽聲搵圖 Listen and Find：聽英文名稱，在生活場景中圈出或點選">
           <img class="english-hub-art" src="assets/english-listen-find/fruit-shop-scene.webp" alt="" aria-hidden="true" width="1672" height="941" decoding="async">
           <span class="english-hub-card-body">
             <span class="english-hub-title">聽聲搵圖 <small>Listen &amp; Find</small></span>
-            <span class="english-hub-description">聽水果英文名，在生活場景中用手指圈出或點選。</span>
-            <span class="english-hub-action">去水果店搵一搵 →</span>
+            <span class="english-hub-description">聽英文名稱，在生活場景中用手指圈出或點選。</span>
+            <span class="english-hub-action">去揀場景 →</span>
           </span>
         </button>
       </div>
@@ -501,16 +501,36 @@
     </section>
 
     <!-- Listen & Find：生活場景聽詞找圖，與拼字路線分開。 -->
-    <section id="screen-listen-find" class="screen listen-find-screen" aria-label="Listen and Find fruit shop">
+    <section id="screen-listen-find" class="screen listen-find-screen" aria-label="Listen and Find">
       <header class="listen-find-topbar">
         <button type="button" class="btn btn-ghost" id="btn-listen-find-back">← 英文學習</button>
         <h1 class="listen-find-title">Listen &amp; Find</h1>
         <div class="listen-find-progress" id="listen-find-progress" aria-live="polite" aria-atomic="true">0 / 8 ✨</div>
       </header>
       <main class="listen-find-wrap">
+        <div class="listen-find-picker" id="listen-find-picker">
+          <p class="listen-find-picker-lead">揀一個場景</p>
+          <div class="listen-find-chapters">
+            <button type="button" class="listen-find-chapter" data-listen-find-chapter="fruit-shop">
+              <img src="assets/english-listen-find/fruit-shop-scene.webp" alt="" width="1672" height="941" decoding="async">
+              <span class="listen-find-chapter-title">水果店</span>
+              <span class="listen-find-chapter-en">Fruit shop</span>
+            </button>
+            <button type="button" class="listen-find-chapter" data-listen-find-chapter="farm">
+              <img src="assets/english-listen-find/farm-scene.webp" alt="" width="1280" height="720" decoding="async">
+              <span class="listen-find-chapter-title">農場</span>
+              <span class="listen-find-chapter-en">Farm</span>
+            </button>
+            <button type="button" class="listen-find-chapter" data-listen-find-chapter="zoo">
+              <img src="assets/english-listen-find/zoo-scene.webp" alt="" width="1280" height="720" decoding="async">
+              <span class="listen-find-chapter-title">動物園</span>
+              <span class="listen-find-chapter-en">Zoo</span>
+            </button>
+          </div>
+        </div>
         <div class="listen-find-intro">
           <span class="listen-find-eyebrow">LOOK · LISTEN · PLAY</span>
-          <p>聽水果英文名，喺水果店搵返佢。</p>
+          <p id="listen-find-intro-text">聽水果英文名，喺水果店搵返佢。</p>
         </div>
         <div class="listen-find-game">
           <section class="listen-find-poster" aria-label="Fruit shop scene">
@@ -518,14 +538,14 @@
               <img class="listen-find-scene" src="assets/english-listen-find/fruit-shop-scene.webp" alt="A fruit shop with apples, bananas, grapes, pears, oranges, strawberries, a pineapple and a watermelon" width="1672" height="941" decoding="async">
               <div class="listen-find-wall" id="listen-find-wall" aria-label="Fruit shop picture. Circle or tap the fruit you hear.">
                 <svg class="listen-find-draw" id="listen-find-draw" aria-hidden="true"><path id="listen-find-line" fill="none" stroke="#ffb340" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-                <div class="listen-find-target" data-fruit="apple" aria-label="fruit" role="button" tabindex="0"></div>
-                <div class="listen-find-target" data-fruit="banana" aria-label="fruit" role="button" tabindex="0"></div>
-                <div class="listen-find-target" data-fruit="orange" aria-label="fruit" role="button" tabindex="0"></div>
-                <div class="listen-find-target" data-fruit="grapes" aria-label="fruit" role="button" tabindex="0"></div>
-                <div class="listen-find-target" data-fruit="pear" aria-label="fruit" role="button" tabindex="0"></div>
-                <div class="listen-find-target" data-fruit="strawberry" aria-label="fruit" role="button" tabindex="0"></div>
-                <div class="listen-find-target" data-fruit="pineapple" aria-label="fruit" role="button" tabindex="0"></div>
-                <div class="listen-find-target" data-fruit="watermelon" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-target="apple" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-target="banana" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-target="orange" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-target="grapes" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-target="pear" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-target="strawberry" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-target="pineapple" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-target="watermelon" aria-label="fruit" role="button" tabindex="0"></div>
               </div>
             </div>
           </section>
@@ -544,9 +564,9 @@
         </div>
         <div class="listen-find-start-overlay" id="listen-find-overlay">
           <div class="listen-find-start-card">
-            <div class="listen-find-basket" aria-hidden="true">🧺</div>
+            <div class="listen-find-basket" id="listen-find-start-emoji" aria-hidden="true">🧺</div>
             <h2>Ready to play?</h2>
-            <p>Listen to the fruit name.<br>Circle or tap the fruit.</p>
+            <p id="listen-find-start-body">Listen to the fruit name.<br>Circle or tap the fruit.</p>
             <button class="listen-find-start" id="btn-listen-find-start" type="button">Let's play! →</button>
           </div>
         </div>
@@ -1250,8 +1270,9 @@
   <script src="./js/emoji-spelling-sounds.js?v=20261108-unified"></script>
   <script src="./js/emoji-spelling-data.js?v=20261028f"></script>
   <script src="./js/emoji-spelling-app.js?v=20261028d-rewards"></script>
-  <script src="./js/listen-find-dialogue.js?v=20261118a"></script>
-  <script src="./js/listen-find.js?v=20261121-ipad-play"></script>
+  <script src="./js/listen-find-dialogue.js?v=20261121-zoo"></script>
+  <script src="./js/listen-find-scenes.js?v=20261121-zoo"></script>
+  <script src="./js/listen-find.js?v=20261121-zoo"></script>
   <script src="./data/carter-family-manifest.js?v=20260928cf040"></script>
   <script src="./data/magic-marker-manifest.js?v=20260930-mm002"></script>
   <script src="./data/magic-marker-expansion.js?v=20260930-mm020"></script>

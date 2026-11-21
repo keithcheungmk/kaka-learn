@@ -70,6 +70,8 @@ Cursor Chief、WorkBuddy（接棒時）、三位專科 Lead **同一套**開工�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| Listen & Find 動物園章 | Cursor | `js/listen-find-scenes.js`, `index.html`（聽聲搵圖 picker）, `assets/english-listen-find/zoo-scene.webp`, `css/listen-find.css` | 2026-11-21 | 做緊；Keith 指定開 PR，唔 merge、唔 deploy |
+| Listen & Find iPad 版面 | Cursor | `css/listen-find.css`, `js/listen-find.js`, `index.html`（Listen & Find 標記） | 2026-11-21 | 做緊；Keith 今次指定開 PR，唔 merge、唔 deploy |
 | Listen & Find 開始卡／safe-area | Cursor | `css/listen-find.css`, `index.html`（Listen & Find 標記） | 2026-11-21 | 做緊；跟 #211 修矮橫向開始掣同 home indicator |
 
 <!-- 範本（複製一行，填完刪走空表）：
@@ -133,6 +135,20 @@ Cursor、WorkBuddy（接棒時）同專科 Leads 都可能掂到下面呢批檔�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-11-21 · Cursor Chief（聽聲搵圖動物園章，開 PR 唔 merge）
+
+- 英文 hub「聽聲搵圖」章節揀選加第三張卡：動物園／Zoo。八詞：lion、elephant、giraffe、monkey、panda、zebra、penguin、hippo。無老虎，無農場重疊詞。
+- 原創統一 16:9 圖 `assets/english-listen-find/zoo-scene.webp`（唔裁中山日記格、唔拼貼 wild sprites）。卡卡同禧禧只喺邊位旁觀，唔係目標。
+- 水果店／農場 hit region、文案同圖都唔改。鼓勵句仍然 `{word}`（`{fruit}` 仍可用）。每日 listen 幣規則不變。
+- 本地：`test-listen-find.mjs`、`test-listen-find-layout.py`（含動物園完整一輪，speech mock）、`check-invariants.py`。Keith 指定開 PR，唔 merge、唔 deploy。
+
+### 2026-11-21 · Cursor Chief（Listen & Find 農場章，開 PR 唔 merge）
+
+- 英文 hub「聽聲搵圖」先入章節揀選（水果店／農場），再行原本 start card 同 play layout。農場八詞：cow、pig、horse、chicken、duck、sheep、goat、rabbit。Zoo 唔入呢單。
+- 場景資料喺 `js/listen-find-scenes.js`；鼓勵句 `{word}`（`{fruit}` 仍可用）。水果店 hit region 同畫面保持原樣。
+- 原創農場圖 `assets/english-listen-find/farm-scene.webp`（唔裁中山日記格、唔拼貼 cutout）。WebP 唔入 jpg/png image-format lock。
+- 本地：`test-listen-find.mjs`、`test-listen-find-layout.py`（含農場完整一輪，speech mock）、`check-invariants.py` 全綠。未做真機 iPad／真人 TTS。
 
 ### 2026-11-19 · WorkBuddy Chief（Codex 退出，項目收窄為兩方）
 
