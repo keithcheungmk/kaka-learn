@@ -57,8 +57,26 @@ for (const id of hiddenIds) {
   assert.ok(retired.hidden || retired.retired, `${id} 要 hidden/retired，唔好出現喺書架`);
 }
 const playable = context.window.FAMILY_STORIES.filter((item) => !item.hidden && !item.retired);
-assert.equal(playable.length, 18);
-assert.equal(context.window.FAMILY_STORIES.length, 26);
+assert.equal(playable.length, 19);
+assert.equal(context.window.FAMILY_STORIES.length, 27);
+const pizza = context.window.FAMILY_STORIES.find((item) => item.id === 'ma-on-shan-pizza');
+assert.ok(pizza, '要有馬鞍山搓薄餅的一天');
+assert.equal(pizza.pages.length, 8);
+assert.ok(!pizza.hidden);
+assert.equal(pizza.date, '2026-11-21');
+assert.ok(pizza.characters.includes('洋洋'));
+assert.ok(pizza.characters.includes('洋洋媽媽'));
+assert.ok(pizza.characters.includes('蛙蛙'));
+const pizzaText = [
+  pizza.title, pizza.summary, pizza.extensionWords.join(' '),
+  ...pizza.pages.flatMap((page) => [
+    page.sentence, page.dialogue.text, ...page.tiles, page.focusWords.join(' '), page.distractors.join(' '),
+  ]),
+].join(' ');
+assert.doesNotMatch(pizzaText, /娃娃|Numberblocks/);
+assert.ok(pizza.pages.every(page => page.focusWords.length === 2));
+assert.equal(pizza.pages[6].focusWords.join(','), '爭着,輪流');
+assert.ok(pizza.pages.every(page => page.image && page.image.startsWith('assets/family-stories/scenes/ma-on-shan-pizza-p')));
 const zhuhai = context.window.FAMILY_STORIES.find((item) => item.id === 'zhuhai-two-day');
 assert.ok(zhuhai, '珠海兩日遊要出現在書架');
 assert.equal(zhuhai.pages.length, 8);
@@ -178,7 +196,7 @@ assert.equal(kaiTak.hidden, false);
 assert.equal(kaiTak.pages.length, 6);
 assert.equal(JSON.stringify(kaiTak.characters), JSON.stringify(['卡卡', '禧禧', '謙謙']));
 assert.ok(playable.some((item) => item.id === 'kai-tak-cruise-terminal'), '新日記要出現喺書架');
-assert.equal(playable.at(-1).id, 'kai-tak-cruise-terminal');
+assert.equal(playable.at(-1).id, 'ma-on-shan-pizza');
 assert.match(kaiTak.summary, /2026年11月15日/);
 assert.match(kaiTak.pages[0].sentence, /2026年11月15日/);
 assert.match(kaiTak.pages[0].sentence, /郵輪碼頭/);

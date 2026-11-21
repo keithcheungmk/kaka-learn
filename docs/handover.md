@@ -77,6 +77,7 @@ Cursor Chief、WorkBuddy（接棒時）、三位專科 Lead **同一套**開工�
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
 | Listen & Find 動物園章 | Cursor | `js/listen-find-scenes.js`, `index.html`（聽聲搵圖 picker）, `assets/english-listen-find/zoo-scene.webp`, `css/listen-find.css` | 2026-11-21 | 做緊；Keith 指定開 PR，唔 merge、唔 deploy |
+| 卡卡日記新篇《馬鞍山搓薄餅的一天》 | WorkBuddy | `data/family-stories/manifest.js`, `assets/family-stories/scenes/ma-on-shan-pizza-p0*.webp`, `scripts/check-family-stories.py`, `docs/family-storybook-first-edition.md`, `docs/family-story-character-bible.md` | 2026-11-21 | 做緊；完結條件＝live version.json 對 SHA |
 | Listen & Find 開始卡／safe-area | Cursor | `css/listen-find.css`, `index.html`（Listen & Find 標記） | 2026-11-21 | 做緊；跟 #211 修矮橫向開始掣同 home indicator |
 | QA 報告及 CI／部署重複檢查整理 | Codex Chief 指派 | `scripts/qa-report.py`, `scripts/test-qa-report.py`, `scripts/test-layout-scope.py`, `.github/workflows/ci.yml`, `.github/workflows/deploy-pages.yml`, `docs/qa-check.md`, `docs/handover.md`, `AGENTS.md` | 2026-11-19 | 獨立工作目錄開發；開 PR 待審，未合併前不 live。 |
 
