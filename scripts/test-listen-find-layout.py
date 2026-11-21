@@ -73,7 +73,7 @@ def assert_start_card_tappable(name, page):
             insideStage,
             overlayHidden: overlay.hidden,
             btn: { top: btnRect.top, bottom: btnRect.bottom, left: btnRect.left, right: btnRect.right, height: btnRect.height, width: btnRect.width },
-            overlay: { top: overlayRect.top, bottom: overlayRect.bottom, height: overlayRect.height },
+            overlay: { top: overlayRect.top, bottom: overlayRect.bottom, left: overlayRect.left, right: overlayRect.right, height: overlayRect.height },
             viewport: { width: window.innerWidth, height: window.innerHeight },
             padding: { top: pad.paddingTop, right: pad.paddingRight, bottom: pad.paddingBottom, left: pad.paddingLeft },
           };
@@ -85,13 +85,18 @@ def assert_start_card_tappable(name, page):
     if data["overlayHidden"]:
         errors.append("start overlay hidden before play")
     btn = data["btn"]
+    overlay = data["overlay"]
+    if btn["top"] < overlay["top"] - 1 or btn["left"] < overlay["left"] - 1:
+        errors.append(f"start button clipped by overlay top/left {btn} vs {overlay}")
+    if btn["bottom"] > overlay["bottom"] + 1 or btn["right"] > overlay["right"] + 1:
+        errors.append(f"start button clipped by overlay bottom/right {btn} vs {overlay}")
     if btn["top"] < -1 or btn["left"] < -1:
         errors.append(f"start button clipped top/left {btn}")
     if btn["bottom"] > data["viewport"]["height"] + 1 or btn["right"] > data["viewport"]["width"] + 1:
         errors.append(f"start button clipped bottom/right {btn} in {data['viewport']}")
     if btn["height"] < 44 or btn["width"] < 120:
         errors.append(f"start button too small {btn}")
-    if data["overlay"]["height"] < btn["height"]:
+    if overlay["height"] < btn["height"]:
         errors.append("overlay shorter than the start button")
     for side in ("top", "right", "bottom", "left"):
         if not data["padding"][side].endswith("px"):
@@ -269,6 +274,7 @@ def main():
     SHOT_DIR.mkdir(parents=True, exist_ok=True)
     ready_viewports = [
         ("iPhone16ProMax-landscape-ready", 932, 430),
+        ("short-landscape-ready", 812, 320),
         ("iPadPro11-landscape-ready", 1210, 834),
         ("iPadPro11-portrait-ready", 834, 1210),
     ]
