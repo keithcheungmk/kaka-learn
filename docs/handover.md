@@ -77,7 +77,6 @@ Cursor Chief、WorkBuddy（接棒時）、三位專科 Lead **同一套**開工�
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
 | Listen & Find 動物園章 | Cursor | `js/listen-find-scenes.js`, `index.html`（聽聲搵圖 picker）, `assets/english-listen-find/zoo-scene.webp`, `css/listen-find.css` | 2026-11-21 | 做緊；Keith 指定開 PR，唔 merge、唔 deploy |
-| 卡卡日記新篇《馬鞍山搓薄餅的一天》 | WorkBuddy | `data/family-stories/manifest.js`, `assets/family-stories/scenes/ma-on-shan-pizza-p0*.webp`, `scripts/check-family-stories.py`, `docs/family-storybook-first-edition.md`, `docs/family-story-character-bible.md` | 2026-11-21 | 做緊；完結條件＝live version.json 對 SHA |
 | Listen & Find 開始卡／safe-area | Cursor | `css/listen-find.css`, `index.html`（Listen & Find 標記） | 2026-11-21 | 做緊；跟 #211 修矮橫向開始掣同 home indicator |
 | QA 報告及 CI／部署重複檢查整理 | Codex Chief 指派 | `scripts/qa-report.py`, `scripts/test-qa-report.py`, `scripts/test-layout-scope.py`, `.github/workflows/ci.yml`, `.github/workflows/deploy-pages.yml`, `docs/qa-check.md`, `docs/handover.md`, `AGENTS.md` | 2026-11-19 | 獨立工作目錄開發；開 PR 待審，未合併前不 live。 |
 
@@ -142,6 +141,14 @@ Cursor、WorkBuddy（接棒時）同專科 Leads 都可能掂到下面呢批檔�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-11-21 · WorkBuddy（卡卡日記《馬鞍山搓薄餅的一天》）
+
+- 中文家庭日記新增八頁〈馬鞍山搓薄餅的一天〉（`ma-on-shan-pizza`，卡卡日記 2026-11-21）：卡卡、禧禧和洋洋在馬鞍山禧禧的家搓粉糰做薄餅，一人一個，放菠蘿、番茄醬和牛肉；蛙蛙和虹姑姑幫忙放進焗爐。吃過薄餅後玩玩具火車、砌路軌，再玩工程車和數字積木；爭玩具時洋洋媽媽走過來叫他們輪流玩，最後學會守規矩，大人坐在後面吃飯看着他們玩。
+- 新增角色洋洋（禧禧的朋友，約 4 歲）同洋洋媽媽，寫入 `docs/family-story-character-bible.md`；暫時未有獨立三視圖，以本篇場景圖作造型參考。
+- 原文「娃娃」一律寫「蛙蛙」，「pizza」寫「薄餅」，「Numberblocks」寫「數字積木」；全文香港書面中文，每頁兩個重點詞。
+- 8 張新場景圖 `assets/family-stories/scenes/ma-on-shan-pizza-p0*.webp`；同步目錄、`check-family-stories.py` 硬計數（27 篇／19 可玩）及 `test-family-storybook.mjs`。
+- **真機未驗**：粵語朗讀聲、iPad 直／橫版面手感要 Keith 自己玩。截圖巡查在 1180×900 完成。
 
 ### 2026-11-21 · Cursor Chief（聽聲搵圖動物園章，開 PR 唔 merge）
 
