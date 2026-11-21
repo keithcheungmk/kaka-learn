@@ -70,7 +70,7 @@ Cursor Chief、WorkBuddy（接棒時）、三位專科 Lead **同一套**開工�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| Listen & Find iPad 版面 | Cursor | `css/listen-find.css`, `js/listen-find.js`, `index.html`（Listen & Find 標記） | 2026-11-21 | 做緊；Keith 今次指定開 PR，唔 merge、唔 deploy |
+| Listen & Find 農場章 | Cursor | `css/listen-find.css`, `js/listen-find.js`, `js/listen-find-dialogue.js`, `index.html`（Listen & Find 標記）, `assets/english-listen-find/` | 2026-11-21 | 做緊；Keith 指定開 PR，唔 merge、唔 deploy；Zoo 唔入呢單 |
 
 <!-- 範本（複製一行，填完刪走空表）：
 | 短描述 | Cursor／WorkBuddy | `path/a`, `path/b` | YYYY-MM-DD | 做緊；完結條件＝live |
@@ -133,6 +133,13 @@ Cursor、WorkBuddy（接棒時）同專科 Leads 都可能掂到下面呢批檔�
   唔係 CI 會紅。任何專科 Lead 換圖都要交 Chief 更新 lock，唔好自行改 lock 規則。
 
 ## 最近改動
+
+### 2026-11-21 · Cursor Chief（Listen & Find 農場章，開 PR 唔 merge）
+
+- 英文 hub「聽聲搵圖」先入章節揀選（水果店／農場），再行原本 start card 同 play layout。農場八詞：cow、pig、horse、chicken、duck、sheep、goat、rabbit。Zoo 唔入呢單。
+- 場景資料喺 `js/listen-find-scenes.js`；鼓勵句 `{word}`（`{fruit}` 仍可用）。水果店 hit region 同畫面保持原樣。
+- 原創農場圖 `assets/english-listen-find/farm-scene.webp`（唔裁中山日記格、唔拼貼 cutout）。WebP 唔入 jpg/png image-format lock。
+- 本地：`test-listen-find.mjs`、`test-listen-find-layout.py`（含農場完整一輪，speech mock）、`check-invariants.py` 全綠。未做真機 iPad／真人 TTS。
 
 ### 2026-11-19 · WorkBuddy Chief（Codex 退出，項目收窄為兩方）
 

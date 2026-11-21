@@ -26,8 +26,13 @@ Use this skill when adding or maintaining an English listening-and-picture-searc
 4. Validate script syntax, target/data/art alignment, the focused game path, return navigation, responsive iPad portrait and landscape layouts, and reduced motion. Keep automated browser checks silent by mocking speech. Do not claim live audio or real-device touch verification unless performed on that device.
 5. For a release, follow current project checks and verify each stage separately: focused checks, reviewable branch/PR, required CI, merge, Pages deployment and live version. State any unverified device/audio behavior.
 
-## Current fruit-shop reference
+## Current chapters
 
-The first scene uses eight fruits: apple, banana, orange, grapes, pear, strawberry, pineapple and watermelon. `js/listen-find-dialogue.js` contains the editable praise lines. Its artwork hit regions live in `js/listen-find.js`; if the scene art changes, recheck all eight regions at desktop and iPad aspect ratios.
+English hub → 聽聲搵圖 (Listen & Find) opens a chapter picker. After a chapter is chosen, the existing start card and play flow run for that scene.
 
-Play layout (approved iPad change): collapse the LOOK · LISTEN · PLAY intro during play so the top bar keeps only back, a short title, and the progress count. Landscape uses a slim 180–200px mission panel; portrait puts the scene on top and a slim control bar below. Scene art uses `object-fit: contain` (do not crop fruits). `layoutScene()` maps the drawing overlay and hit regions to the painted image and must run after resize, rotation, and intro collapse.
+- Fruit shop: apple, banana, orange, grapes, pear, strawberry, pineapple, watermelon.
+- Farm: cow, pig, horse, chicken, duck, sheep, goat, rabbit.
+
+`js/listen-find-scenes.js` stores each scene's image, target names and percentage hit regions. `js/listen-find-dialogue.js` contains the editable praise lines (`{word}`; `{fruit}` still works). If scene art changes, recheck all eight regions at desktop and iPad aspect ratios. Do not add Zoo unless that chapter is explicitly commissioned.
+
+Play layout (approved iPad change): collapse the LOOK · LISTEN · PLAY intro during play so the top bar keeps only back, a short title, and the progress count. Landscape uses a slim 180–200px mission panel; portrait puts the scene on top and a slim control bar below. Scene art uses `object-fit: contain` (do not crop targets). `layoutScene()` maps the drawing overlay and hit regions to the painted image and must run after resize, rotation, and intro collapse.
