@@ -70,6 +70,7 @@ Cursor Chief、WorkBuddy（接棒時）、三位專科 Lead **同一套**開工�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
+| Listen & Find iPad 版面 | Cursor | `css/listen-find.css`, `js/listen-find.js`, `index.html`（Listen & Find 標記） | 2026-11-21 | 做緊；Keith 今次指定開 PR，唔 merge、唔 deploy |
 
 <!-- 範本（複製一行，填完刪走空表）：
 | 短描述 | Cursor／WorkBuddy | `path/a`, `path/b` | YYYY-MM-DD | 做緊；完結條件＝live |

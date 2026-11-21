@@ -29,3 +29,5 @@ Use this skill when adding or maintaining an English listening-and-picture-searc
 ## Current fruit-shop reference
 
 The first scene uses eight fruits: apple, banana, orange, grapes, pear, strawberry, pineapple and watermelon. `js/listen-find-dialogue.js` contains the editable praise lines. Its artwork hit regions live in `js/listen-find.js`; if the scene art changes, recheck all eight regions at desktop and iPad aspect ratios.
+
+Play layout (approved iPad change): collapse the LOOK · LISTEN · PLAY intro during play so the top bar keeps only back, a short title, and the progress count. Landscape uses a slim 180–200px mission panel; portrait puts the scene on top and a slim control bar below. Scene art uses `object-fit: contain` (do not crop fruits). `layoutScene()` maps the drawing overlay and hit regions to the painted image and must run after resize, rotation, and intro collapse.
