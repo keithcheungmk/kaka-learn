@@ -6,6 +6,13 @@ on:
   pull_request:
   workflow_dispatch:
 
+concurrency:
+  group: kaka-ci-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
   invariants:
     name: 硬性約束檢查（AGENTS.md）
@@ -24,6 +31,7 @@ jobs:
         run: |
           python3 scripts/check-invariants.py
           python3 scripts/test-layout-scope.py
+          python3 scripts/test-qa-report.py
           node scripts/test-draft-family-story.mjs
 
       - name: storage.js 單元測試
@@ -38,6 +46,21 @@ jobs:
           test -f _site/index.html
           test -f _site/.nojekyll
           grep -q "?v=${GITHUB_SHA::7}" _site/index.html
+
+      - name: 保存已驗證的網站產物
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        run: |
+          printf '%s\n' "$GITHUB_SHA" > "$RUNNER_TEMP/site-sha"
+          tar -czf "$RUNNER_TEMP/kaka-site.tar.gz" -C _site .
+
+      - uses: actions/upload-artifact@v4
+        if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+        with:
+          name: site-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/kaka-site.tar.gz
+            ${{ runner.temp }}/site-sha
+          if-no-files-found: error
 
   layout:
     name: 按改動範圍檢查家庭裝置
@@ -56,20 +79,23 @@ jobs:
         run: |
           if [ "$EVENT_NAME" = workflow_dispatch ]; then
             echo "full=true" >> "$GITHUB_OUTPUT"
-            echo "hanzi=false" >> "$GITHUB_OUTPUT"
+            echo "hanzi=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           base="${PR_BASE:-$PUSH_BASE}"
           if [ -z "$base" ] || ! git cat-file -e "$base^{commit}" 2>/dev/null; then
-            base="$(git merge-base origin/main HEAD 2>/dev/null || true)"
-          fi
-          if [ -z "$base" ]; then
             echo "full=true" >> "$GITHUB_OUTPUT"
-            echo "hanzi=false" >> "$GITHUB_OUTPUT"
+            echo "hanzi=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          git diff --name-only "$base" HEAD > /tmp/kaka-changed-files
-          bash scripts/layout-scope.sh < /tmp/kaka-changed-files >> "$GITHUB_OUTPUT"
+          changed_files="$(mktemp)"
+          trap 'rm -f "$changed_files"' EXIT
+          if ! git diff --no-renames --name-only "$base" HEAD > "$changed_files"; then
+            echo "full=true" >> "$GITHUB_OUTPUT"
+            echo "hanzi=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          bash scripts/layout-scope.sh < "$changed_files" >> "$GITHUB_OUTPUT"
 
       - name: 安裝 playwright
         if: steps.scope.outputs.full == 'true' || steps.scope.outputs.hanzi == 'true'
@@ -95,3 +121,35 @@ jobs:
       - name: 全站家庭裝置回歸（手動或共用基建變更）
         if: steps.scope.outputs.full == 'true'
         run: python3 scripts/smoke-shots.py --no-shots
+
+  deploy:
+    name: Deploy GitHub Pages
+    needs: [invariants, layout]
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: pages
+      queue: max
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-${{ github.sha }}
+          path: ${{ runner.temp }}/kaka-site
+      - name: 核對版本及準備產物
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$(cat "$RUNNER_TEMP/kaka-site/site-sha")" = "$GITHUB_SHA"
+          test "$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq .object.sha)" = "$GITHUB_SHA"
+          mkdir _site
+          tar -xzf "$RUNNER_TEMP/kaka-site/kaka-site.tar.gz" -C _site
+          test -f _site/.nojekyll
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          force_orphan: true
+          commit_message: Deploy kaka-learn to GitHub Pages

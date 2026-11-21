@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """Verify changed-file classification used by CI and deployment."""
 from pathlib import Path
+import os
 import subprocess
+import tempfile
+import textwrap
+import shutil
 
 root = Path(__file__).resolve().parents[1]
 script = root / 'scripts/layout-scope.sh'
@@ -22,6 +26,49 @@ for filename in ('index.html', 'css/styles.css', 'js/app.js', 'js/storage.js', '
 for filename in ('hanzi-write-demo.html', 'js/hanzi-write-demo.js', 'css/hanzi-write-demo.css', 'data/hanzi-write-chars.js', 'data/hanzi-family-names.js', 'scripts/test-hanzi-family-names.py', 'scripts/test-hanzi-replay.py'):
     result = subprocess.run(['bash', str(script)], input=filename + '\n', text=True, capture_output=True, check=True)
     assert result.stdout == 'full=false\nhanzi=true\n', filename
-for path in ('.github/workflows/ci.yml', '.github/workflows/deploy-pages.yml'):
-    assert 'bash scripts/layout-scope.sh < /tmp/kaka-changed-files >> "$GITHUB_OUTPUT"' in (root / path).read_text()
-print(f'layout scope: {len(cases)} cases and both workflows passed')
+workflow = (root / '.github/workflows/ci.yml').read_text()
+assert 'bash scripts/layout-scope.sh < "$changed_files" >> "$GITHUB_OUTPUT"' in workflow
+assert 'group: kaka-ci-${{ github.event_name }}-${{ github.ref }}' in workflow
+assert 'cancel-in-progress: true' in workflow.split('\njobs:', 1)[0]
+deploy = workflow.split('\n  deploy:\n', 1)[1]
+assert 'group: pages\n      queue: max' in deploy
+assert 'cancel-in-progress: true' not in deploy
+assert 'gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main"' in deploy
+assert 'needs: [invariants, layout]' in deploy
+assert "github.ref == 'refs/heads/main'" in deploy
+assert "github.event_name == 'push' || github.event_name == 'workflow_dispatch'" in deploy
+assert 'always()' not in deploy and 'continue-on-error' not in deploy
+assert 'name: site-${{ github.sha }}' in deploy
+assert 'site-sha' in deploy and '"$GITHUB_SHA"' in deploy
+assert 'test -f _site/.nojekyll' in deploy
+assert 'build-site.sh' not in deploy
+scope = textwrap.dedent(workflow.split('        id: scope\n', 1)[1].split('        run: |\n', 1)[1].split('\n\n      - name: 安裝 playwright', 1)[0])
+with tempfile.TemporaryDirectory() as tmp:
+    repo = Path(tmp)
+    def git(*args):
+        return subprocess.run(['git', *args], cwd=repo, check=True, capture_output=True, text=True).stdout.strip()
+    git('init', '-q')
+    git('config', 'user.email', 'test@example.invalid')
+    git('config', 'user.name', 'Test')
+    (repo / 'scripts').mkdir()
+    shutil.copy(script, repo / 'scripts/layout-scope.sh')
+    (repo / 'js').mkdir()
+    (repo / 'js/speech.js').write_text('speech')
+    git('add', '.'); git('commit', '-qm', 'base')
+    base = git('rev-parse', 'HEAD')
+    git('mv', 'js/speech.js', 'js/new-speech.js')
+    (repo / 'data').mkdir()
+    (repo / 'data/hanzi-write-chars.js').write_text('hanzi')
+    git('add', '.'); git('commit', '-qm', 'rename')
+    def route(event, push_base='', pr_base=''):
+        output = repo / 'output'
+        output.write_text('')
+        env = dict(os.environ, EVENT_NAME=event, PUSH_BASE=push_base, PR_BASE=pr_base, GITHUB_OUTPUT=str(output))
+        subprocess.run(['bash', '-e', '-c', scope], cwd=repo, env=env, check=True, capture_output=True, text=True)
+        return output.read_text()
+    assert route('push', base) == 'full=true\nhanzi=true\n'
+    assert route('pull_request', pr_base=base) == 'full=true\nhanzi=true\n'
+    assert route('push', '0' * 40) == 'full=true\nhanzi=true\n'
+    assert route('push') == 'full=true\nhanzi=true\n'
+    assert route('workflow_dispatch') == 'full=true\nhanzi=true\n'
+print(f'layout scope: {len(cases)} cases and CI passed')
