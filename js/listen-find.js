@@ -130,6 +130,7 @@
     heading.textContent = 'Find the fruit!';
     message.textContent = 'Listen carefully, then find the fruit.';
     setProgress();
+    layoutScene();
     speak(`Find the ${order[index]}!`);
   }
 
@@ -144,15 +145,48 @@
     $('#btn-listen-find-again').hidden = true;
     mascot.classList.remove('is-celebrating');
     overlay.hidden = true;
+    screen.classList.add('is-playing');
     order = shuffled(FRUITS.map(([fruit]) => fruit));
     index = 0;
     setProgress();
+    layoutScene();
     askForFruit();
+    requestAnimationFrame(layoutScene);
   }
 
-  function updateDrawingViewBox() {
-    const rect = wall.getBoundingClientRect();
-    if (rect.width && rect.height) svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
+  function containRect(img) {
+    const naturalWidth = img.naturalWidth || 1672;
+    const naturalHeight = img.naturalHeight || 941;
+    const width = img.clientWidth;
+    const height = img.clientHeight;
+    if (!width || !height) return { left: 0, top: 0, width: 0, height: 0 };
+    const scale = Math.min(width / naturalWidth, height / naturalHeight);
+    const paintedWidth = naturalWidth * scale;
+    const paintedHeight = naturalHeight * scale;
+    return {
+      left: (width - paintedWidth) / 2,
+      top: (height - paintedHeight) / 2,
+      width: paintedWidth,
+      height: paintedHeight,
+    };
+  }
+
+  function layoutScene() {
+    const img = $('.listen-find-scene', screen);
+    const stage = img?.closest('.listen-find-stage');
+    if (!img || !wall || !svg) return;
+    const painted = containRect(img);
+    if (stage) {
+      wall.style.left = `${painted.left}px`;
+      wall.style.top = `${painted.top}px`;
+      wall.style.width = `${painted.width}px`;
+      wall.style.height = `${painted.height}px`;
+      wall.style.right = 'auto';
+      wall.style.bottom = 'auto';
+    }
+    if (painted.width && painted.height) {
+      svg.setAttribute('viewBox', `0 0 ${painted.width} ${painted.height}`);
+    }
   }
 
   function targetAtPoint(x, y) {
@@ -222,7 +256,7 @@
       });
       targets.set(fruit, target);
     });
-    updateDrawingViewBox();
+    layoutScene();
   }
 
   function pointerPoint(event) {
@@ -254,7 +288,29 @@
       if (target) answerTarget(target);
     });
     wall.addEventListener('pointercancel', clearDrawing);
-    window.addEventListener('resize', updateDrawingViewBox, { passive: true });
+  }
+
+  function bindLayout() {
+    const img = $('.listen-find-scene', screen);
+    const poster = img?.closest('.listen-find-poster');
+    const stage = img?.closest('.listen-find-stage');
+    const side = $('.listen-find-side', screen);
+    const relayout = () => layoutScene();
+    window.addEventListener('resize', relayout, { passive: true });
+    window.addEventListener('orientationchange', () => {
+      relayout();
+      requestAnimationFrame(relayout);
+      window.setTimeout(relayout, 200);
+    }, { passive: true });
+    window.visualViewport?.addEventListener('resize', relayout, { passive: true });
+    if (typeof ResizeObserver === 'function') {
+      const observer = new ResizeObserver(relayout);
+      if (poster) observer.observe(poster);
+      if (stage) observer.observe(stage);
+      if (img) observer.observe(img);
+      if (side) observer.observe(side);
+    }
+    img?.addEventListener('load', relayout);
   }
 
   function open() {
@@ -263,7 +319,8 @@
     clearDrawing();
     $('.screen.active')?.classList.remove('active');
     screen.classList.add('active');
-    updateDrawingViewBox();
+    screen.classList.remove('is-playing');
+    layoutScene();
     overlay.hidden = false;
     $('#btn-listen-find-again').hidden = true;
     heading.textContent = 'Listen carefully...';
@@ -276,6 +333,7 @@
   function close() {
     active = false;
     cancelSpeech();
+    screen.classList.remove('is-playing');
     window.KakaPhonics?.openEnglishHub?.();
   }
 
@@ -288,6 +346,7 @@
   });
   setupTargets();
   bindDrawing();
+  bindLayout();
   window.KakaPhonics?.warmEnglishVoice?.();
-  window.KakaListenFind = { open };
+  window.KakaListenFind = { open, layoutScene, containRect };
 })();

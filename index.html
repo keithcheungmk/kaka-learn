@@ -26,7 +26,7 @@
   <meta name="twitter:image" content="https://keithcheungmk.github.io/kaka-learn/assets/home-learning-picnic.jpg" />
   <link rel="stylesheet" href="./css/styles.css?v=20261007-word-wall" />
   <link rel="stylesheet" href="./css/phonics.css?v=20261108-unified" />
-  <link rel="stylesheet" href="./css/listen-find.css?v=20261118-fruit-shop" />
+  <link rel="stylesheet" href="./css/listen-find.css?v=20261121-ipad-play" />
   <link rel="stylesheet" href="./css/emoji-spelling.css?v=20261108-unified" />
   <link rel="stylesheet" href="./css/story-demo.css?v=20260911b" />
   <link rel="stylesheet" href="./css/math.css?v=20261001-life-skills" />
@@ -504,37 +504,36 @@
     <section id="screen-listen-find" class="screen listen-find-screen" aria-label="Listen and Find fruit shop">
       <header class="listen-find-topbar">
         <button type="button" class="btn btn-ghost" id="btn-listen-find-back">← 英文學習</button>
-        <span class="listen-find-brand">KAKA'S LITTLE WORLD</span>
+        <h1 class="listen-find-title">Listen &amp; Find</h1>
+        <div class="listen-find-progress" id="listen-find-progress" aria-live="polite" aria-atomic="true">0 / 8 ✨</div>
       </header>
       <main class="listen-find-wrap">
         <div class="listen-find-intro">
-          <div>
-            <span class="listen-find-eyebrow">LOOK · LISTEN · PLAY</span>
-            <h1>Listen &amp; Find <span aria-hidden="true">🍎</span></h1>
-            <p>聽水果英文名，喺水果店搵返佢。</p>
-          </div>
-          <div class="listen-find-progress" id="listen-find-progress" aria-live="polite" aria-atomic="true">0 / 8 ✨</div>
+          <span class="listen-find-eyebrow">LOOK · LISTEN · PLAY</span>
+          <p>聽水果英文名，喺水果店搵返佢。</p>
         </div>
         <div class="listen-find-game">
           <section class="listen-find-poster" aria-label="Fruit shop scene">
-            <img class="listen-find-scene" src="assets/english-listen-find/fruit-shop-scene.webp" alt="A fruit shop with apples, bananas, grapes, pears, oranges, strawberries, a pineapple and a watermelon" width="1672" height="941" decoding="async">
-            <div class="listen-find-wall" id="listen-find-wall" aria-label="Fruit shop picture. Circle or tap the fruit you hear.">
-              <svg class="listen-find-draw" id="listen-find-draw" aria-hidden="true"><path id="listen-find-line" fill="none" stroke="#ffb340" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-              <div class="listen-find-target" data-fruit="apple" aria-label="fruit" role="button" tabindex="0"></div>
-              <div class="listen-find-target" data-fruit="banana" aria-label="fruit" role="button" tabindex="0"></div>
-              <div class="listen-find-target" data-fruit="orange" aria-label="fruit" role="button" tabindex="0"></div>
-              <div class="listen-find-target" data-fruit="grapes" aria-label="fruit" role="button" tabindex="0"></div>
-              <div class="listen-find-target" data-fruit="pear" aria-label="fruit" role="button" tabindex="0"></div>
-              <div class="listen-find-target" data-fruit="strawberry" aria-label="fruit" role="button" tabindex="0"></div>
-              <div class="listen-find-target" data-fruit="pineapple" aria-label="fruit" role="button" tabindex="0"></div>
-              <div class="listen-find-target" data-fruit="watermelon" aria-label="fruit" role="button" tabindex="0"></div>
-            </div>
-            <div class="listen-find-start-overlay" id="listen-find-overlay">
-              <div class="listen-find-start-card">
-                <div class="listen-find-basket" aria-hidden="true">🧺</div>
-                <h2>Ready to play?</h2>
-                <p>Listen to the fruit name.<br>Circle or tap the fruit.</p>
-                <button class="listen-find-start" id="btn-listen-find-start" type="button">Let's play! →</button>
+            <div class="listen-find-stage">
+              <img class="listen-find-scene" src="assets/english-listen-find/fruit-shop-scene.webp" alt="A fruit shop with apples, bananas, grapes, pears, oranges, strawberries, a pineapple and a watermelon" width="1672" height="941" decoding="async">
+              <div class="listen-find-wall" id="listen-find-wall" aria-label="Fruit shop picture. Circle or tap the fruit you hear.">
+                <svg class="listen-find-draw" id="listen-find-draw" aria-hidden="true"><path id="listen-find-line" fill="none" stroke="#ffb340" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <div class="listen-find-target" data-fruit="apple" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-fruit="banana" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-fruit="orange" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-fruit="grapes" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-fruit="pear" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-fruit="strawberry" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-fruit="pineapple" aria-label="fruit" role="button" tabindex="0"></div>
+                <div class="listen-find-target" data-fruit="watermelon" aria-label="fruit" role="button" tabindex="0"></div>
+              </div>
+              <div class="listen-find-start-overlay" id="listen-find-overlay">
+                <div class="listen-find-start-card">
+                  <div class="listen-find-basket" aria-hidden="true">🧺</div>
+                  <h2>Ready to play?</h2>
+                  <p>Listen to the fruit name.<br>Circle or tap the fruit.</p>
+                  <button class="listen-find-start" id="btn-listen-find-start" type="button">Let's play! →</button>
+                </div>
               </div>
             </div>
           </section>
@@ -544,11 +543,11 @@
             </div>
             <span class="listen-find-side-label">YOUR MISSION</span>
             <h2 id="listen-find-heading">Listen carefully...</h2>
-            <p class="listen-find-help">Circle the fruit with your finger, or tap it.</p>
+            <p class="listen-find-help">Circle or tap.</p>
             <button class="listen-find-listen" id="btn-listen-find-listen" type="button">🔊 Listen again</button>
             <div class="listen-find-message" id="listen-find-message" aria-live="polite">Get ready to play!</div>
             <button class="listen-find-again" id="btn-listen-find-again" type="button" hidden>Play again ↻</button>
-            <p class="listen-find-tip">Tap the speaker to hear the word again. Big circles are okay!</p>
+            <p class="listen-find-tip">Big circles are okay!</p>
           </aside>
         </div>
       </main>
@@ -1252,7 +1251,7 @@
   <script src="./js/emoji-spelling-data.js?v=20261028f"></script>
   <script src="./js/emoji-spelling-app.js?v=20261028d-rewards"></script>
   <script src="./js/listen-find-dialogue.js?v=20261118a"></script>
-  <script src="./js/listen-find.js?v=20261118a"></script>
+  <script src="./js/listen-find.js?v=20261121-ipad-play"></script>
   <script src="./data/carter-family-manifest.js?v=20260928cf040"></script>
   <script src="./data/magic-marker-manifest.js?v=20260930-mm002"></script>
   <script src="./data/magic-marker-expansion.js?v=20260930-mm020"></script>

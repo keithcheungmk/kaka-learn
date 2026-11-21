@@ -1985,6 +1985,17 @@ def check_chinese_mandarin() -> None:
         fail("chinese-mandarin", result.stderr[-1200:] or "中文普通話錄音檢查失敗")
 
 
+def check_listen_find() -> None:
+    """Listen & Find play layout: compact top bar, slim panel, contain-fit scene."""
+    node = shutil.which("node")
+    if not node:
+        notes.append("冇 node，跳過 Listen & Find 版面契約")
+        return
+    result = subprocess.run([node, "scripts/test-listen-find.mjs"], capture_output=True, text=True)
+    if result.returncode:
+        fail("listen-find", (result.stderr or result.stdout or "Listen & Find 版面檢查失敗").strip()[-1200:])
+
+
 def check_emoji_spelling_release() -> None:
     """Existing CI and Pages gates run the spelling and preview-source contracts."""
     node = shutil.which("node")
@@ -2003,6 +2014,7 @@ def check_emoji_spelling_release() -> None:
 CHECKS = [
     check_pth_contract,
     check_chinese_mandarin,
+    check_listen_find,
     check_emoji_spelling_release,
     check_js_syntax,
     check_no_build_step,
