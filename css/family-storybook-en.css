@@ -1,0 +1,12 @@
+/* Thin English overlay on the shared family-storybook chrome. */
+.word-slot {
+  min-width: 4.4em;
+  text-transform: none;
+}
+.page-reading,
+.task-sentence {
+  font-size: clamp(1.28rem, 2.3vw, 1.95rem);
+}
+.story-card .card-words {
+  text-transform: none;
+}

@@ -1,0 +1,432 @@
+/* Listen & Find — hear one English word, then find it in a familiar scene. */
+(function () {
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+  const SCENES = window.KAKA_LISTEN_FIND_SCENES || {};
+
+  const screen = $('#screen-listen-find');
+  if (!screen || !window.KakaSpeech || !window.KakaStorage) return;
+
+  const wall = $('#listen-find-wall');
+  const svg = $('#listen-find-draw');
+  const line = $('#listen-find-line');
+  const overlay = $('#listen-find-overlay');
+  const message = $('#listen-find-message');
+  const heading = $('#listen-find-heading');
+  const progress = $('#listen-find-progress');
+  const mascot = $('#listen-find-mascot');
+  const backBtn = $('#btn-listen-find-back');
+  const introText = $('#listen-find-intro-text');
+  const startEmoji = $('#listen-find-start-emoji');
+  const startBody = $('#listen-find-start-body');
+  const poster = $('.listen-find-poster', screen);
+  const sceneImg = $('.listen-find-scene', screen);
+  const targets = new Map();
+  let scene = null;
+  let order = [];
+  let index = 0;
+  let active = false;
+  let drawingPointerId = null;
+  let points = [];
+  let previousPraise = -1;
+  let speechFallback = null;
+  let nextPromptTimer = null;
+  let speechToken = 0;
+
+  function isMuted() {
+    try {
+      return !!window.KakaStorage.loadState().muted;
+    } catch {
+      return false;
+    }
+  }
+
+  function speak(text, onEnd) {
+    if (speechFallback) window.clearTimeout(speechFallback);
+    const token = ++speechToken;
+    let ended = false;
+    const done = () => {
+      if (ended || token !== speechToken) return;
+      ended = true;
+      if (speechFallback) window.clearTimeout(speechFallback);
+      speechFallback = null;
+      onEnd?.();
+    };
+    if (onEnd) {
+      const fallbackMs = Math.min(9000, 1500 + text.trim().split(/\s+/).length * 650);
+      speechFallback = window.setTimeout(done, fallbackMs);
+    }
+    window.KakaSpeech.speakEnglishTerm(text, {
+      muted: isMuted(),
+      rate: 0.88,
+      pitch: 1.08,
+      delayMs: 0,
+      onEnd: done,
+    });
+  }
+
+  function cancelSpeech() {
+    speechToken += 1;
+    if (nextPromptTimer) window.clearTimeout(nextPromptTimer);
+    nextPromptTimer = null;
+    if (speechFallback) window.clearTimeout(speechFallback);
+    speechFallback = null;
+    window.KakaSpeech.cancelAllSpeech();
+  }
+
+  function shuffled(items) {
+    const result = [...items];
+    for (let i = result.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+  }
+
+  function targetCount() {
+    return scene?.targets?.length || 8;
+  }
+
+  function setProgress() {
+    progress.textContent = `${index} / ${targetCount()} ✨`;
+  }
+
+  function promptFor(word) {
+    return `Find the ${word}!`;
+  }
+
+  function praiseFor(word) {
+    const lines = window.KAKA_FIND_PRAISE || [];
+    if (!lines.length) return `Great job, Kaka! You found the ${word}!`;
+    let next = Math.floor(Math.random() * lines.length);
+    if (lines.length > 1 && next === previousPraise) next = (next + 1) % lines.length;
+    previousPraise = next;
+    return lines[next].replaceAll('{word}', word).replaceAll('{fruit}', word);
+  }
+
+  function clearDrawing() {
+    points = [];
+    drawingPointerId = null;
+    line.setAttribute('d', '');
+  }
+
+  function finishRound() {
+    active = false;
+    heading.textContent = 'Amazing work! 🌟';
+    const coin = window.KakaStorage.earnCoinForMode(
+      window.KakaStorage.getCoinModeForGame?.('listen') || 'listen',
+      scene?.coinLabel || 'Listen & Find',
+    );
+    window.KakaLearn?.refreshRewards?.();
+    const gained = !!coin.gained;
+    message.textContent = gained
+      ? (scene?.finishGained || 'You found every picture and earned an AEON coin!')
+      : (scene?.finishKept || 'You found every picture! Your Listen coin is already collected today.');
+    $('#btn-listen-find-again').hidden = false;
+    speak(gained
+      ? (scene?.finishSpeakGained || 'Amazing work! You found every picture and earned a coin!')
+      : (scene?.finishSpeakKept || 'Amazing work! You found every picture!'));
+  }
+
+  function askForTarget() {
+    if (index >= order.length) {
+      finishRound();
+      return;
+    }
+    active = true;
+    heading.textContent = scene?.findHeading || 'Find the picture!';
+    message.textContent = scene?.listenHint || 'Listen carefully, then find the picture.';
+    setProgress();
+    layoutScene();
+    speak(promptFor(order[index]));
+  }
+
+  function startRound() {
+    if (!scene) return;
+    window.KakaSpeech.warmAudio();
+    window.KakaSpeech.warmEnglishVoice();
+    cancelSpeech();
+    targets.forEach((target) => {
+      target.classList.remove('is-found', 'is-wrong');
+      target.setAttribute('aria-pressed', 'false');
+    });
+    $('#btn-listen-find-again').hidden = true;
+    mascot.classList.remove('is-celebrating');
+    overlay.hidden = true;
+    screen.classList.add('is-playing');
+    order = shuffled(scene.targets.map(([word]) => word));
+    index = 0;
+    setProgress();
+    layoutScene();
+    askForTarget();
+    requestAnimationFrame(layoutScene);
+  }
+
+  function containRect(img) {
+    const naturalWidth = img.naturalWidth || scene?.width || 1672;
+    const naturalHeight = img.naturalHeight || scene?.height || 941;
+    const width = img.clientWidth;
+    const height = img.clientHeight;
+    if (!width || !height) return { left: 0, top: 0, width: 0, height: 0 };
+    const scale = Math.min(width / naturalWidth, height / naturalHeight);
+    const paintedWidth = naturalWidth * scale;
+    const paintedHeight = naturalHeight * scale;
+    return {
+      left: (width - paintedWidth) / 2,
+      top: (height - paintedHeight) / 2,
+      width: paintedWidth,
+      height: paintedHeight,
+    };
+  }
+
+  function layoutScene() {
+    const img = $('.listen-find-scene', screen);
+    const stage = img?.closest('.listen-find-stage');
+    if (!img || !wall || !svg) return;
+    const painted = containRect(img);
+    if (stage) {
+      wall.style.left = `${painted.left}px`;
+      wall.style.top = `${painted.top}px`;
+      wall.style.width = `${painted.width}px`;
+      wall.style.height = `${painted.height}px`;
+      wall.style.right = 'auto';
+      wall.style.bottom = 'auto';
+    }
+    if (painted.width && painted.height) {
+      svg.setAttribute('viewBox', `0 0 ${painted.width} ${painted.height}`);
+    }
+  }
+
+  function targetAtPoint(x, y) {
+    return [...targets.values()].find((target) => {
+      if (target.classList.contains('is-found')) return false;
+      const rect = target.getBoundingClientRect();
+      return x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom;
+    });
+  }
+
+  function targetInsideCircle(pointsForCircle) {
+    if (pointsForCircle.length < 2) return null;
+    const xs = pointsForCircle.map((point) => point.x);
+    const ys = pointsForCircle.map((point) => point.y);
+    const bounds = { left: Math.min(...xs), right: Math.max(...xs), top: Math.min(...ys), bottom: Math.max(...ys) };
+    const wallRect = wall.getBoundingClientRect();
+    const candidates = [...targets.values()].filter((target) => {
+      if (target.classList.contains('is-found')) return false;
+      const rect = target.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2 - wallRect.left;
+      const centerY = rect.top + rect.height / 2 - wallRect.top;
+      return centerX >= bounds.left && centerX <= bounds.right && centerY >= bounds.top && centerY <= bounds.bottom;
+    });
+    return candidates.find((target) => target.dataset.target === order[index]) || candidates[0] || null;
+  }
+
+  function answerTarget(target) {
+    if (!active || !target || target.classList.contains('is-found')) return;
+    clearDrawing();
+    const word = target.dataset.target;
+    if (word !== order[index]) {
+      target.classList.remove('is-wrong');
+      void target.offsetWidth;
+      target.classList.add('is-wrong');
+      message.textContent = scene?.wrongHint || 'Good try! Listen again.';
+      speak('Good try! Listen again.', () => speak(promptFor(order[index])));
+      return;
+    }
+
+    active = false;
+    target.classList.add('is-found');
+    target.setAttribute('aria-pressed', 'true');
+    index += 1;
+    window.KakaStorage.tryEarnStar?.();
+    window.KakaLearn?.refreshRewards?.();
+    setProgress();
+    const praise = praiseFor(word);
+    message.textContent = praise;
+    mascot.classList.remove('is-celebrating');
+    void mascot.offsetWidth;
+    mascot.classList.add('is-celebrating');
+    speak(praise, () => { nextPromptTimer = window.setTimeout(askForTarget, 350); });
+  }
+
+  function rebuildTargets() {
+    targets.clear();
+    $$('.listen-find-target', wall).forEach((el) => el.remove());
+    if (!scene) return;
+    scene.targets.forEach(([word, left, top, width, height]) => {
+      const target = document.createElement('div');
+      target.className = 'listen-find-target';
+      target.dataset.target = word;
+      target.setAttribute('role', 'button');
+      target.tabIndex = 0;
+      target.style.left = `${left}%`;
+      target.style.top = `${top}%`;
+      target.style.width = `${width}%`;
+      target.style.height = `${height}%`;
+      target.setAttribute('aria-label', `Find the ${word}`);
+      target.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        answerTarget(target);
+      });
+      wall.appendChild(target);
+      targets.set(word, target);
+    });
+    layoutScene();
+  }
+
+  function applySceneCopy() {
+    if (!scene) return;
+    if (introText) introText.textContent = scene.intro;
+    if (startEmoji) startEmoji.textContent = scene.emoji;
+    if (startBody) startBody.innerHTML = scene.startBody;
+    if (poster) poster.setAttribute('aria-label', scene.posterLabel);
+    wall.setAttribute('aria-label', scene.wallLabel);
+    screen.setAttribute('aria-label', `Listen and Find ${scene.titleEn}`);
+  }
+
+  function loadScene(id) {
+    const next = SCENES[id];
+    if (!next) return;
+    scene = next;
+    applySceneCopy();
+    if (sceneImg) {
+      sceneImg.src = scene.image;
+      sceneImg.alt = scene.alt;
+      sceneImg.setAttribute('width', String(scene.width));
+      sceneImg.setAttribute('height', String(scene.height));
+    }
+    rebuildTargets();
+    if (sceneImg?.complete && sceneImg.naturalWidth) layoutScene();
+  }
+
+  function pointerPoint(event) {
+    const rect = wall.getBoundingClientRect();
+    return { x: event.clientX - rect.left, y: event.clientY - rect.top };
+  }
+
+  function bindDrawing() {
+    wall.addEventListener('pointerdown', (event) => {
+      if (!active || drawingPointerId !== null) return;
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      event.preventDefault();
+      drawingPointerId = event.pointerId;
+      wall.setPointerCapture(event.pointerId);
+      points = [pointerPoint(event)];
+      line.setAttribute('d', `M ${points[0].x} ${points[0].y}`);
+    });
+    wall.addEventListener('pointermove', (event) => {
+      if (event.pointerId !== drawingPointerId) return;
+      const point = pointerPoint(event);
+      points.push(point);
+      line.setAttribute('d', `${line.getAttribute('d')} L ${point.x} ${point.y}`);
+    });
+    wall.addEventListener('pointerup', (event) => {
+      if (event.pointerId !== drawingPointerId) return;
+      const moved = points.some((point) => Math.hypot(point.x - points[0].x, point.y - points[0].y) > 16);
+      const target = moved ? targetInsideCircle(points) : targetAtPoint(event.clientX, event.clientY);
+      clearDrawing();
+      if (target) answerTarget(target);
+    });
+    wall.addEventListener('pointercancel', clearDrawing);
+  }
+
+  function bindLayout() {
+    const img = $('.listen-find-scene', screen);
+    const posterEl = img?.closest('.listen-find-poster');
+    const stage = img?.closest('.listen-find-stage');
+    const side = $('.listen-find-side', screen);
+    const relayout = () => layoutScene();
+    window.addEventListener('resize', relayout, { passive: true });
+    window.addEventListener('orientationchange', () => {
+      relayout();
+      requestAnimationFrame(relayout);
+      window.setTimeout(relayout, 200);
+    }, { passive: true });
+    window.visualViewport?.addEventListener('resize', relayout, { passive: true });
+    if (typeof ResizeObserver === 'function') {
+      const observer = new ResizeObserver(relayout);
+      if (posterEl) observer.observe(posterEl);
+      if (stage) observer.observe(stage);
+      if (img) observer.observe(img);
+      if (side) observer.observe(side);
+    }
+    img?.addEventListener('load', relayout);
+  }
+
+  function showPicker() {
+    cancelSpeech();
+    active = false;
+    scene = null;
+    clearDrawing();
+    screen.classList.add('is-picking');
+    screen.classList.remove('is-playing');
+    overlay.hidden = true;
+    $('#btn-listen-find-again').hidden = true;
+    if (backBtn) backBtn.textContent = '← 英文學習';
+    heading.textContent = 'Listen carefully...';
+    message.textContent = 'Get ready to play!';
+    index = 0;
+    setProgress();
+    layoutScene();
+  }
+
+  function chooseChapter(id) {
+    loadScene(id);
+    screen.classList.remove('is-picking', 'is-playing');
+    overlay.hidden = false;
+    $('#btn-listen-find-again').hidden = true;
+    if (backBtn) backBtn.textContent = '← 選場景';
+    heading.textContent = 'Listen carefully...';
+    message.textContent = 'Get ready to play!';
+    index = 0;
+    setProgress();
+    layoutScene();
+    requestAnimationFrame(layoutScene);
+  }
+
+  function open() {
+    $('.screen.active')?.classList.remove('active');
+    screen.classList.add('active');
+    showPicker();
+    window.KakaStarFx?.hideRanger?.();
+  }
+
+  function close() {
+    active = false;
+    cancelSpeech();
+    scene = null;
+    screen.classList.remove('is-playing', 'is-picking');
+    window.KakaPhonics?.openEnglishHub?.();
+  }
+
+  function goBack() {
+    if (screen.classList.contains('is-picking')) {
+      close();
+      return;
+    }
+    showPicker();
+  }
+
+  $('#btn-english-listen-find')?.addEventListener('click', open);
+  backBtn?.addEventListener('click', goBack);
+  $('#btn-listen-find-start')?.addEventListener('click', startRound);
+  $('#btn-listen-find-again')?.addEventListener('click', startRound);
+  $('#btn-listen-find-listen')?.addEventListener('click', () => {
+    if (active && order[index]) speak(promptFor(order[index]));
+  });
+  $$('[data-listen-find-chapter]').forEach((btn) => {
+    btn.addEventListener('click', () => chooseChapter(btn.dataset.listenFindChapter));
+  });
+  bindDrawing();
+  bindLayout();
+  window.KakaPhonics?.warmEnglishVoice?.();
+  window.KakaListenFind = {
+    open,
+    layoutScene,
+    containRect,
+    chooseChapter,
+    getCurrentWord: () => order[index] || null,
+    isActive: () => active,
+  };
+})();
