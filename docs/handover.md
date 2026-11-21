@@ -71,6 +71,7 @@ Cursor Chief、WorkBuddy（接棒時）、三位專科 Lead **同一套**開工�
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
 | Listen & Find 動物園章 | Cursor | `js/listen-find-scenes.js`, `index.html`（聽聲搵圖 picker）, `assets/english-listen-find/zoo-scene.webp`, `css/listen-find.css` | 2026-11-21 | 做緊；Keith 指定開 PR，唔 merge、唔 deploy |
+| Listen & Find 開始卡／safe-area | Cursor | `css/listen-find.css`, `index.html`（Listen & Find 標記） | 2026-11-21 | 做緊；跟 #211 修矮橫向開始掣同 home indicator |
 
 <!-- 範本（複製一行，填完刪走空表）：
 | 短描述 | Cursor／WorkBuddy | `path/a`, `path/b` | YYYY-MM-DD | 做緊；完結條件＝live |
