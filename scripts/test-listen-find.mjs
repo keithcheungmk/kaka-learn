@@ -35,6 +35,11 @@ assert.match(html, /data-fruit="apple"/);
 assert.match(html, /src="assets\/english-listen-find\/fruit-shop-scene\.webp"/);
 
 assert.match(html, /class="listen-find-stage"/);
+assert.match(
+  html,
+  /class="listen-find-stage"[\s\S]*listen-find-wall[\s\S]*<\/div>\s*<\/div>\s*<div class="listen-find-start-overlay"/,
+  'start overlay sits on the poster, not inside the overflow-hidden stage',
+);
 assert.match(css, /object-fit:\s*contain/);
 assert.doesNotMatch(css, /object-fit:\s*cover/);
 assert.match(css, /minmax\(180px,\s*200px\)/);
@@ -45,6 +50,8 @@ assert.match(css, /@media \(orientation:\s*portrait\),\s*\(max-height:\s*620px\)
 assert.match(css, /grid-template-rows:\s*minmax\(0,\s*1fr\) auto/);
 assert.match(css, /\.listen-find-listen \{[\s\S]*min-height:\s*64px/);
 assert.match(css, /#app:has\(#screen-listen-find\.active\)/);
+assert.match(css, /safe-area-inset-bottom/);
+assert.match(css, /safe-area-inset-top/);
 
 assert.match(js, /function layoutScene\(/);
 assert.match(js, /function containRect\(/);

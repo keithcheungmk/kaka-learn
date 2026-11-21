@@ -7,7 +7,10 @@
   width: 100%;
   max-width: none;
   min-height: 0;
-  padding: 8px 10px 10px;
+  padding: max(8px, env(safe-area-inset-top, 0px))
+    max(10px, env(safe-area-inset-right, 0px))
+    max(10px, env(safe-area-inset-bottom, 0px))
+    max(10px, env(safe-area-inset-left, 0px));
   color: #173d48;
   background: linear-gradient(135deg, #fffaf0, #f1f9ff 56%, #fff6df);
   font-family: var(--font-body, system-ui, sans-serif);
@@ -138,7 +141,8 @@
   z-index: 3;
   display: grid;
   place-items: center;
-  padding: 18px;
+  padding: 12px;
+  overflow: auto;
   background: #173d486b;
 }
 .listen-find-start-overlay[hidden] { display: none; }
@@ -247,6 +251,13 @@
 
 /* Portrait and short landscape: scene on top, slim control bar below. */
 @media (orientation: portrait), (max-height: 620px) {
+  .listen-find-intro { display: none; }
+  .listen-find-start-overlay { padding: 8px; align-content: center; }
+  .listen-find-start-card { width: min(100%, 280px); padding: 12px 14px; }
+  .listen-find-basket { font-size: 1.7rem; }
+  .listen-find-start-card h2 { margin: 2px 0; font-size: 1.25rem; }
+  .listen-find-start-card p { margin: 4px 0 8px; font-size: .9rem; }
+  .listen-find-start { min-height: 48px; padding: 10px 14px; }
   .listen-find-game {
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: minmax(0, 1fr) auto;

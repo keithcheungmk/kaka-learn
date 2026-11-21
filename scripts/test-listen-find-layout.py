@@ -44,7 +44,7 @@ def mute_speech(page):
     )
 
 
-def open_play(page):
+def open_ready(page):
     page.goto(f"{URL}/index.html", wait_until="domcontentloaded")
     mute_speech(page)
     page.click("#btn-profile-kaka")
@@ -56,6 +56,52 @@ def open_play(page):
     page.wait_for_function(
         "() => { const img = document.querySelector('.listen-find-scene'); return img && img.complete && img.naturalWidth > 0; }"
     )
+
+
+def assert_start_card_tappable(name, page):
+    data = page.evaluate(
+        """() => {
+          const btn = document.querySelector('#btn-listen-find-start');
+          const overlay = document.querySelector('#listen-find-overlay');
+          const stage = document.querySelector('.listen-find-stage');
+          const btnRect = btn.getBoundingClientRect();
+          const overlayRect = overlay.getBoundingClientRect();
+          const insideStage = !!overlay.closest('.listen-find-stage');
+          const screen = document.querySelector('#screen-listen-find');
+          const pad = getComputedStyle(screen);
+          return {
+            insideStage,
+            overlayHidden: overlay.hidden,
+            btn: { top: btnRect.top, bottom: btnRect.bottom, left: btnRect.left, right: btnRect.right, height: btnRect.height, width: btnRect.width },
+            overlay: { top: overlayRect.top, bottom: overlayRect.bottom, height: overlayRect.height },
+            viewport: { width: window.innerWidth, height: window.innerHeight },
+            padding: { top: pad.paddingTop, right: pad.paddingRight, bottom: pad.paddingBottom, left: pad.paddingLeft },
+          };
+        }"""
+    )
+    errors = []
+    if data["insideStage"]:
+        errors.append("start overlay is still inside the clipped stage")
+    if data["overlayHidden"]:
+        errors.append("start overlay hidden before play")
+    btn = data["btn"]
+    if btn["top"] < -1 or btn["left"] < -1:
+        errors.append(f"start button clipped top/left {btn}")
+    if btn["bottom"] > data["viewport"]["height"] + 1 or btn["right"] > data["viewport"]["width"] + 1:
+        errors.append(f"start button clipped bottom/right {btn} in {data['viewport']}")
+    if btn["height"] < 44 or btn["width"] < 120:
+        errors.append(f"start button too small {btn}")
+    if data["overlay"]["height"] < btn["height"]:
+        errors.append("overlay shorter than the start button")
+    for side in ("top", "right", "bottom", "left"):
+        if not data["padding"][side].endswith("px"):
+            errors.append(f"missing padding {side}")
+    if errors:
+        raise AssertionError(f"{name} ready: " + "; ".join(errors))
+
+
+def open_play(page):
+    open_ready(page)
     page.click("#btn-listen-find-start")
     page.wait_for_selector("#screen-listen-find.is-playing")
     page.wait_for_function(
@@ -221,8 +267,25 @@ def tap_hits_fruit(page, fruit):
 
 def main():
     SHOT_DIR.mkdir(parents=True, exist_ok=True)
+    ready_viewports = [
+        ("iPhone16ProMax-landscape-ready", 932, 430),
+        ("iPadPro11-landscape-ready", 1210, 834),
+        ("iPadPro11-portrait-ready", 834, 1210),
+    ]
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, args=["--mute-audio"])
+        for name, width, height in ready_viewports:
+            context = browser.new_context(
+                viewport={"width": width, "height": height},
+                has_touch=True,
+                device_scale_factor=2,
+            )
+            page = context.new_page()
+            open_ready(page)
+            assert_start_card_tappable(name, page)
+            if name == "iPhone16ProMax-landscape-ready":
+                page.screenshot(path=str(SHOT_DIR / "listen_find_iphone_landscape_ready.png"), full_page=False)
+            context.close()
         for name, width, height, mode in VIEWPORTS:
             context = browser.new_context(
                 viewport={"width": width, "height": height},
