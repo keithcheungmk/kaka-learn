@@ -85,6 +85,54 @@ def open_picker(page):
     page.wait_for_timeout(450)
 
 
+def assert_start_card_tappable(name, page):
+    data = page.evaluate(
+        """() => {
+          const btn = document.querySelector('#btn-listen-find-start');
+          const overlay = document.querySelector('#listen-find-overlay');
+          const stage = document.querySelector('.listen-find-stage');
+          const btnRect = btn.getBoundingClientRect();
+          const overlayRect = overlay.getBoundingClientRect();
+          const insideStage = !!overlay.closest('.listen-find-stage');
+          const screen = document.querySelector('#screen-listen-find');
+          const pad = getComputedStyle(screen);
+          return {
+            insideStage,
+            overlayHidden: overlay.hidden,
+            btn: { top: btnRect.top, bottom: btnRect.bottom, left: btnRect.left, right: btnRect.right, height: btnRect.height, width: btnRect.width },
+            overlay: { top: overlayRect.top, bottom: overlayRect.bottom, left: overlayRect.left, right: overlayRect.right, height: overlayRect.height },
+            viewport: { width: window.innerWidth, height: window.innerHeight },
+            padding: { top: pad.paddingTop, right: pad.paddingRight, bottom: pad.paddingBottom, left: pad.paddingLeft },
+          };
+        }"""
+    )
+    errors = []
+    if data["insideStage"]:
+        errors.append("start overlay is still inside the clipped stage")
+    if data["overlayHidden"]:
+        errors.append("start overlay hidden before play")
+    btn = data["btn"]
+    overlay = data["overlay"]
+    if btn["top"] < overlay["top"] - 1 or btn["left"] < overlay["left"] - 1:
+        errors.append(f"start button clipped by overlay top/left {btn} vs {overlay}")
+    if btn["bottom"] > overlay["bottom"] + 1 or btn["right"] > overlay["right"] + 1:
+        errors.append(f"start button clipped by overlay bottom/right {btn} vs {overlay}")
+    if btn["top"] < -1 or btn["left"] < -1:
+        errors.append(f"start button clipped top/left {btn}")
+    if btn["bottom"] > data["viewport"]["height"] + 1 or btn["right"] > data["viewport"]["width"] + 1:
+        errors.append(f"start button clipped bottom/right {btn} in {data['viewport']}")
+    if btn["height"] < 44 or btn["width"] < 120:
+        errors.append(f"start button too small {btn}")
+    if overlay["height"] < btn["height"]:
+        errors.append("overlay shorter than the start button")
+    for side in ("top", "right", "bottom", "left"):
+        if not data["padding"][side].endswith("px"):
+            errors.append(f"missing padding {side}")
+    if errors:
+        raise AssertionError(f"{name} ready: " + "; ".join(errors))
+
+
+
 def wait_scene_ready(page):
     page.wait_for_function(
         """() => {
@@ -301,9 +349,23 @@ def play_full_round(page, chapter):
 
 
 def main():
+    ready_viewports = [
+        ("iPhone16ProMax-landscape-ready", 932, 430),
+        ("short-landscape-ready", 812, 320),
+        ("iPadPro11-landscape-ready", 1210, 834),
+        ("iPadPro11-portrait-ready", 834, 1210),
+    ]
     SHOT_DIR.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, args=["--mute-audio"])
+        for name, w, h in ready_viewports:
+            ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=True, device_scale_factor=2)
+            pg = ctx.new_page()
+            open_picker(pg)
+            assert_start_card_tappable(name, pg)
+            if name == "iPhone16ProMax-landscape-ready":
+                pg.screenshot(path=str(SHOT_DIR / "listen_find_iphone_landscape_ready.png"), full_page=False)
+            ctx.close()
         for name, width, height, mode in VIEWPORTS:
             context = browser.new_context(
                 viewport={"width": width, "height": height},
@@ -384,7 +446,7 @@ def main():
                 play_full_round(page, "zoo")
             context.close()
         browser.close()
-    print(f"listen-find layout: {len(VIEWPORTS)} viewports passed, farm and zoo play checked")
+    print(f"listen-find layout: {len(VIEWPORTS)} viewports passed, ready-card + farm + zoo checked")
     return 0
 
 
