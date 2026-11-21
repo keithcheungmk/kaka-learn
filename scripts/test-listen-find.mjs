@@ -35,8 +35,18 @@ for (const word of ['cow', 'pig', 'horse', 'chicken', 'duck', 'sheep', 'goat', '
   assert.match(farmBlock, new RegExp(`\\['${word}',\\s*\\d+`));
 }
 assert.equal([...farmBlock.matchAll(/\['[a-z]+'/g)].length, 8, 'farm has eight animal targets');
-assert.doesNotMatch(scenes, /zoo|lion|elephant|giraffe|tiger/i);
-assert.doesNotMatch(html + js + scenes + dialogue, /聽聲揪圖|希恩|浓榆|濃榆/);
+assert.match(farmBlock, /\['cow', 54, 36, 17, 28\]/);
+assert.match(farmBlock, /\['rabbit', 83, 81, 12, 20\]/);
+
+const zooBlock = sceneTargets('zoo');
+assert.ok(zooBlock, 'zoo targets exist');
+for (const word of ['lion', 'elephant', 'giraffe', 'monkey', 'panda', 'zebra', 'penguin', 'hippo']) {
+  assert.match(zooBlock, new RegExp(`\\['${word}',\\s*\\d+`));
+}
+assert.equal([...zooBlock.matchAll(/\['[a-z]+'/g)].length, 8, 'zoo has eight animal targets');
+assert.doesNotMatch(zooBlock, /\btiger\b|\bpony\b|\bchick\b|\bhorse\b|\bchicken\b/);
+assert.doesNotMatch(scenes, /data-listen-find-chapter="(?:colours?|transport|clothes)"|id: '(?:colours?|transport|clothes)'/);
+assert.doesNotMatch(html + js + scenes + dialogue, /聽聲搗圖|聽聲掽圖|聽聲揪圖|洠榆|希恩|浓榆|濃榆/);
 
 assert.match(html, /聽聲搵圖/);
 assert.match(html, /id="btn-listen-find-back"/);
@@ -45,16 +55,20 @@ assert.match(html, /id="listen-find-progress"/);
 assert.match(html, /class="listen-find-topbar"[\s\S]*listen-find-title[\s\S]*listen-find-progress/);
 assert.match(html, /data-listen-find-chapter="fruit-shop"/);
 assert.match(html, /data-listen-find-chapter="farm"/);
+assert.match(html, /data-listen-find-chapter="zoo"/);
 assert.match(html, />水果店</);
 assert.match(html, />農場</);
+assert.match(html, />動物園</);
 assert.match(html, /Fruit shop/);
 assert.match(html, />Farm</);
+assert.match(html, />Zoo</);
 assert.doesNotMatch(html, /KAKA'S LITTLE WORLD/);
 assert.match(html, /LOOK · LISTEN · PLAY/);
 assert.match(html, /🔊 Listen again/);
 assert.match(html, /data-target="apple"/);
 assert.match(html, /src="assets\/english-listen-find\/fruit-shop-scene\.webp"/);
 assert.match(html, /src="assets\/english-listen-find\/farm-scene\.webp"/);
+assert.match(html, /src="assets\/english-listen-find\/zoo-scene\.webp"/);
 assert.match(html, /去揀場景/);
 
 assert.match(html, /class="listen-find-stage"/);
@@ -89,5 +103,6 @@ assert.match(dialogue, /KAKA_FIND_PRAISE/);
 
 assert.ok(fs.existsSync(path.join(root, 'assets/english-listen-find/farm-scene.webp')), 'farm scene artwork exists');
 assert.ok(fs.existsSync(path.join(root, 'assets/english-listen-find/fruit-shop-scene.webp')), 'fruit shop artwork exists');
+assert.ok(fs.existsSync(path.join(root, 'assets/english-listen-find/zoo-scene.webp')), 'zoo scene artwork exists');
 
 console.log('listen-find layout contract: passed');

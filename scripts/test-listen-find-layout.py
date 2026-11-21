@@ -40,6 +40,16 @@ EXPECTED_CENTERS = {
         "goat": (89, 50),
         "rabbit": (83, 81),
     },
+    "zoo": {
+        "lion": (88, 31),
+        "elephant": (70, 32),
+        "giraffe": (43, 28),
+        "monkey": (34, 66),
+        "panda": (48, 73),
+        "zebra": (61, 62),
+        "penguin": (72, 79),
+        "hippo": (88, 69),
+    },
 }
 
 
@@ -69,7 +79,7 @@ def open_picker(page):
     page.wait_for_function(
         """() => {
           const imgs = [...document.querySelectorAll('.listen-find-chapter img')];
-          return imgs.length === 2 && imgs.every((img) => img.complete && img.naturalWidth > 0);
+          return imgs.length === 3 && imgs.every((img) => img.complete && img.naturalWidth > 0);
         }"""
     )
     page.wait_for_timeout(450)
@@ -201,6 +211,8 @@ def assert_layout(name, mode, data, chapter="fruit-shop"):
         errors.append(f"fruit shop art missing {data['sceneSrc']}")
     if chapter == "farm" and "farm-scene.webp" not in data["sceneSrc"]:
         errors.append(f"farm art missing {data['sceneSrc']}")
+    if chapter == "zoo" and "zoo-scene.webp" not in data["sceneSrc"]:
+        errors.append(f"zoo art missing {data['sceneSrc']}")
 
     wall = data["wall"]
     img = data["img"]
@@ -272,7 +284,7 @@ def play_full_round(page, chapter):
     for step in range(8):
         word = page.evaluate("() => window.KakaListenFind.getCurrentWord()")
         if word not in EXPECTED_CENTERS[chapter]:
-            raise AssertionError(f"unexpected farm word {word!r}")
+            raise AssertionError(f"unexpected {chapter} word {word!r}")
         if word in found:
             raise AssertionError(f"repeated word {word!r}")
         found.add(word)
@@ -284,7 +296,7 @@ def play_full_round(page, chapter):
         if step < 7:
             page.wait_for_function("() => window.KakaListenFind.isActive() && window.KakaListenFind.getCurrentWord()")
     if found != set(EXPECTED_CENTERS[chapter]):
-        raise AssertionError(f"farm round words {found}")
+        raise AssertionError(f"{chapter} round words {found}")
     page.wait_for_selector("#btn-listen-find-again")
 
 
@@ -346,12 +358,33 @@ def main():
             tap_hits_target(page, "cow")
             tap_hits_target(page, "rabbit")
             tap_hits_target(page, "chicken")
-            page.screenshot(path=str(SHOT_DIR / f"listen-find-farm-{name}.png"), full_page=False)
             if name == "iPadPro11-landscape":
                 play_full_round(page, "farm")
             context.close()
+
+        for name, width, height, mode in (
+            ("iPadPro11-landscape", 1210, 834, "landscape"),
+            ("iPadPro11-portrait", 834, 1210, "portrait"),
+        ):
+            context = browser.new_context(
+                viewport={"width": width, "height": height},
+                has_touch=True,
+                device_scale_factor=2,
+            )
+            page = context.new_page()
+            open_picker(page)
+            pick_and_start(page, "zoo")
+            data = measure(page)
+            assert_layout(f"zoo-{name}", mode, data, "zoo")
+            tap_hits_target(page, "lion")
+            tap_hits_target(page, "giraffe")
+            tap_hits_target(page, "penguin")
+            page.screenshot(path=str(SHOT_DIR / f"listen-find-zoo-{name}.png"), full_page=False)
+            if name == "iPadPro11-landscape":
+                play_full_round(page, "zoo")
+            context.close()
         browser.close()
-    print(f"listen-find layout: {len(VIEWPORTS)} viewports passed, farm play checked")
+    print(f"listen-find layout: {len(VIEWPORTS)} viewports passed, farm and zoo play checked")
     return 0
 
 

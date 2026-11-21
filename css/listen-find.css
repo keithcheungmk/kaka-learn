@@ -70,7 +70,7 @@
 }
 .listen-find-chapters {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(12px, 2vw, 22px);
   min-height: 0;
 }
@@ -356,7 +356,7 @@
   .listen-find-again { grid-column: 1 / -1; }
 }
 @media (max-width: 560px) {
-  .listen-find-chapters { gap: 10px; }
+  .listen-find-chapters { grid-template-columns: 1fr; gap: 10px; }
   .listen-find-chapter { min-height: 0; border-radius: 20px; }
   .listen-find-chapter img { height: 110px; }
   .listen-find-chapter-title { padding: 8px 10px 0; font-size: 1.05rem; }

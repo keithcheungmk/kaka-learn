@@ -32,7 +32,10 @@ English hub → 聽聲搵圖 (Listen & Find) opens a chapter picker. After a cha
 
 - Fruit shop: apple, banana, orange, grapes, pear, strawberry, pineapple, watermelon.
 - Farm: cow, pig, horse, chicken, duck, sheep, goat, rabbit.
+- Zoo: lion, elephant, giraffe, monkey, panda, zebra, penguin, hippo. No tiger. Do not reuse Farm words such as pony or chick.
 
-`js/listen-find-scenes.js` stores each scene's image, target names and percentage hit regions. `js/listen-find-dialogue.js` contains the editable praise lines (`{word}`; `{fruit}` still works). If scene art changes, recheck all eight regions at desktop and iPad aspect ratios. Do not add Zoo unless that chapter is explicitly commissioned.
+The on-screen feature name is 聽聲搵圖 (Listen & Find). Never write 聽聲搗圖, 聽聲掽圖, or 聽聲揪圖. If a family name is needed, the baby sister is 浠榆妹妹 (HeiYu). Never write 洠榆, 希恩, or 浓榆. On-screen body copy is formal written Traditional Chinese; spoken lines may be Cantonese.
+
+`js/listen-find-scenes.js` stores each scene's image, target names and percentage hit regions. `js/listen-find-dialogue.js` contains the editable praise lines (`{word}`; `{fruit}` still works). If scene art changes, recheck all eight regions at desktop and iPad aspect ratios. Zoo art must be a new unified 16:9 scene under `assets/english-listen-find/`; do not crop diary comic panels or collage `assets/animals/wild` sprites.
 
 Play layout (approved iPad change): collapse the LOOK · LISTEN · PLAY intro during play so the top bar keeps only back, a short title, and the progress count. Landscape uses a slim 180–200px mission panel; portrait puts the scene on top and a slim control bar below. Scene art uses `object-fit: contain` (do not crop targets). `layoutScene()` maps the drawing overlay and hit regions to the painted image and must run after resize, rotation, and intro collapse.
