@@ -23,7 +23,7 @@ Use this skill when adding or maintaining an English listening-and-picture-searc
 1. Read repository `AGENTS.md` and `docs/handover.md`; check `git status` and the current branch tip. Preserve unrelated work and implement in an isolated checkout when the shared checkout is dirty.
 2. Confirm the target list against the scene artwork. Keep scene assets under `assets/english-listen-find/` (or a clearly named sibling directory), optimize images for the existing asset budget, and update the image-format lock through its approved owner/workflow.
 3. Place the game entry in the English learning route that best matches listening plus picture recognition. Reuse the project's speech, mute and screen navigation helpers; keep scene geometry, dialogue, presentation and interaction logic in their existing project layers.
-4. Validate script syntax, target/data/art alignment, the focused game path, return navigation, responsive iPad portrait and landscape layouts, and reduced motion. Keep automated browser checks silent by mocking speech. Do not claim live audio or real-device touch verification unless performed on that device.
+4. Validate script syntax, target/data/art alignment, the focused game path, return navigation, responsive iPad portrait and landscape layouts, and reduced motion. Keep automated browser checks silent by mocking speech. Do not claim live audio or real-device touch verification unless performed on that device. `scripts/test-listen-find-layout.py` runs in CI for the `listen` scope (`index.html`, `css/listen-find.css`, `js/listen-find*.js`, `assets/english-listen-find/*`): it opens a chapter before checking the start card, asserts picker columns per orientation, taps hit regions and plays a full round on iPad portrait and landscape.
 5. For a release, follow current project checks and verify each stage separately: focused checks, reviewable branch/PR, required CI, merge, Pages deployment and live version. State any unverified device/audio behavior.
 
 ## Current chapters
@@ -33,6 +33,9 @@ English hub → 聽聲搵圖 (Listen & Find) opens a chapter picker. After a cha
 - Fruit shop: apple, banana, orange, grapes, pear, strawberry, pineapple, watermelon.
 - Farm: cow, pig, horse, chicken, duck, sheep, goat, rabbit.
 - Zoo: lion, elephant, giraffe, monkey, panda, zebra, penguin, hippo. No tiger. Do not reuse Farm words such as pony or chick.
+- Construction site: excavator, crane, forklift, dump truck, mixer truck, road roller, tanker truck, front loader. Artwork has background tower cranes, so keep spoken prompts to the target word and treat taps on the background as a miss.
+
+The chapter picker sets `data-chapters` on `.listen-find-chapters` from the number of cards. With four cards it lays out one row of four in landscape and 2×2 in portrait (`max-width: 560px` stays a single column). Adding a fifth chapter needs a new CSS rule, otherwise the last card is orphaned on its own row.
 
 The on-screen feature name is 聽聲搵圖 (Listen & Find). Never write 聽聲搗圖, 聽聲掽圖, or 聽聲揪圖. If a family name is needed, the baby sister is 浠榆妹妹 (HeiYu). Never write 洠榆, 希恩, or 浓榆. On-screen body copy is formal written Traditional Chinese; spoken lines may be Cantonese.
 

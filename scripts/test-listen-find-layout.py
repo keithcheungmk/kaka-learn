@@ -2,14 +2,13 @@
 """Focused Listen & Find iPad layout + hit-region alignment checks. Mute speech."""
 import os
 import sys
-import tempfile
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
 REPO = Path(__file__).resolve().parents[1]
 URL = os.environ.get("KAKA_TEST_URL", "http://127.0.0.1:5173")
-SHOT_DIR = Path(os.environ.get("KAKA_TEST_SHOT_DIR", str(Path(tempfile.gettempdir()) / "kaka-learn-listen-find")))
+SHOT_DIR = Path(os.environ.get("KAKA_TEST_SHOT_DIR", "/opt/cursor/artifacts"))
 
 VIEWPORTS = [
     ("iPadPro11-landscape", 1210, 834, "landscape"),
@@ -99,6 +98,43 @@ def open_picker(page):
         }"""
     )
     page.wait_for_timeout(450)
+
+
+def assert_picker_layout(name, page, expected_columns, must_fit=False):
+    data = page.evaluate(
+        """() => {
+          const grid = document.querySelector('.listen-find-chapters');
+          const cards = [...grid.querySelectorAll('.listen-find-chapter')];
+          const rects = cards.map((card) => card.getBoundingClientRect());
+          const minWidth = Math.min(...rects.map((r) => r.width));
+          const minHeight = Math.min(...rects.map((r) => r.height));
+          return {
+            columns: getComputedStyle(grid).gridTemplateColumns.split(' ').length,
+            declared: grid.dataset.chapters || '',
+            cards: rects.length,
+            minWidth,
+            minHeight,
+            right: Math.max(...rects.map((r) => r.right)),
+            bottom: Math.max(...rects.map((r) => r.bottom)),
+            viewport: { width: window.innerWidth, height: window.innerHeight },
+          };
+        }"""
+    )
+    errors = []
+    if data["declared"] != "4":
+        errors.append(f"chapter count attr {data['declared']!r} != '4'")
+    if data["cards"] != 4:
+        errors.append(f"{data['cards']} chapter cards")
+    if data["columns"] != expected_columns:
+        errors.append(f"{data['columns']} columns, expected {expected_columns}")
+    if data["right"] > data["viewport"]["width"] + 1:
+        errors.append(f"cards overflow horizontally (right {data['right']:.0f} > {data['viewport']['width']})")
+    if must_fit and data["bottom"] > data["viewport"]["height"] + 1:
+        errors.append(f"cards overflow vertically (bottom {data['bottom']:.0f} > {data['viewport']['height']})")
+    if data["minWidth"] < 120 or data["minHeight"] < 110:
+        errors.append(f"chapter card too small {data['minWidth']:.0f}x{data['minHeight']:.0f}")
+    if errors:
+        raise AssertionError(f"{name} picker: " + "; ".join(errors))
 
 
 def assert_start_card_tappable(name, page):
@@ -368,22 +404,25 @@ def play_full_round(page, chapter):
 
 def main():
     ready_viewports = [
-        ("iPhone16ProMax-landscape-ready", 932, 430),
-        ("short-landscape-ready", 812, 320),
-        ("iPadPro11-landscape-ready", 1210, 834),
-        ("iPadPro11-portrait-ready", 834, 1210),
+        ("iPhone16ProMax-landscape-ready", 932, 430, 4, True),
+        ("short-landscape-ready", 812, 320, 4, True),
+        ("iPadPro11-landscape-ready", 1210, 834, 4, True),
+        ("iPadPro11-portrait-ready", 834, 1210, 2, True),
+        ("iPhone16ProMax-portrait-ready", 430, 932, 1, False),
     ]
     SHOT_DIR.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, args=["--mute-audio"])
-        for name, w, h in ready_viewports:
+        for name, w, h, columns, must_fit in ready_viewports:
             ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=True, device_scale_factor=2)
             pg = ctx.new_page()
             open_picker(pg)
+            assert_picker_layout(name, pg, columns, must_fit)
+            pg.screenshot(path=str(SHOT_DIR / f"picker-{name}.png"), full_page=False)
+            # 開始卡只會在揀完章節之後出現；先入章節再驗 overlay 同開始掣。
             pg.click('[data-listen-find-chapter="fruit-shop"]')
-            pg.wait_for_function("() => !document.querySelector('#screen-listen-find').classList.contains('is-picking')")
-            pg.wait_for_selector("#btn-listen-find-start")
-            wait_scene_ready(pg)
+            pg.wait_for_selector("#listen-find-overlay:not([hidden])")
+            pg.wait_for_timeout(350)
             assert_start_card_tappable(name, pg)
             if name == "iPhone16ProMax-landscape-ready":
                 pg.screenshot(path=str(SHOT_DIR / "listen_find_iphone_landscape_ready.png"), full_page=False)
