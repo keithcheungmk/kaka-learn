@@ -37,5 +37,5 @@ is_background: false
 ## 交付
 
 - 只跑改動直接相關的檢查。Listen & Find 場景或版面改動跑 `node scripts/test-listen-find.mjs`、`python3 scripts/test-listen-find-layout.py`；只有共用入口、導覽、獎勵或明確跨模組風險才加全站家庭 viewport smoke。
-- 依授權交付可審核的結果。除非 Keith 明確授權推送、合併或部署，否則停在指定交付點。清楚分開本地檢查、CI、合併、Pages 部署和 live 版本驗證。
+- 依授權交付可審核的結果。如推送、合併或部署已獲當次任務授權（明示授權或任務合理涵蓋），按指定交付點完成；否則先停在審核交付點。清楚分開本地檢查、CI、合併、Pages 部署和 live 版本驗證。
 - 方向已批後唔用樣板／問卷停低；唔叫 Keith 睇 code／diff／JSON 驗收。

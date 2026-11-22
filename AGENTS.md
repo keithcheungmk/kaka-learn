@@ -7,7 +7,7 @@
 > **開工前必須睇 `docs/handover.md`** — Cursor 係常任 Chief，WorkBuddy 係 Cursor token 用盡時的臨時接棒者。Keith 明確指派時，Codex 亦可參與指定範圍；呢項指派唔會改變 Cursor／WorkBuddy 的 Chief 分工。Grok 只作唯讀顧問。
 > **Cursor 主 Agent 係常任 Chief Lead**（Keith 2026-11-19 更正）：拆單、跨科校準、共享檔整合、routing、部署協調；並指派 `.cursor/agents/` 三位本機 Lead。
 > **WorkBuddy＝token 接棒位，唔係永久 Chief。** Keith 喺 Cursor token 用盡／轉用 WorkBuddy 時，WorkBuddy **臨時代理 Chief＋執行**，接續未完事項；Cursor 恢復後 Chief 交返 Cursor。詳見 `docs/workbuddy-chief-lead-workflow.md`。
-> Cursor、WorkBuddy 或獲 Keith 指派的 Codex，均按當次授權負責驗證及交付；只在獲明確授權時推送、合併或部署，署名必須反映實際執行者。Grok 預設只建議、唔改檔。GitHub CLI 權限疑難見 `docs/github-access-troubleshooting.md`。WorkBuddy 開工指令見 `docs/workbuddy-bootstrap.md`。
+> Cursor、WorkBuddy 或獲 Keith 指派的 Codex，均按當次授權負責驗證及交付；按當次授權（包括明示授權或由任務合理涵蓋）推送、合併或部署，署名必須反映實際執行者。Grok 預設只建議、唔改檔。GitHub CLI 權限疑難見 `docs/github-access-troubleshooting.md`。WorkBuddy 開工指令見 `docs/workbuddy-bootstrap.md`。
 > 交接簿記錄現行分工、進行中認領、撞車高危檔案同未完事項。
 > 收工／merge 完記得返去更新。
 
@@ -73,7 +73,7 @@
 | 中文認字、紅／橙輯、書頁砌句、字卡 OCR、粵語、PTH | `.cursor/agents/chinese-lead.md` | 中文／PTH／red-series 資料、介面及測試 |
 
 - 三位 Lead 全部係 **local subagent**、`model: inherit`；內容向任務可讀本機 `source-materials/`，唔開 Cloud Agent。
-- 科目 Lead 唔自行擴 scope 或新增下屬；按 Chief 指派負責實作、整合或發布，未經授權唔自行 push／部署。
+- 科目 Lead 唔自行擴 scope 或新增下屬；按 Chief 指派負責實作、整合或發布，未獲當次任務授權（明示或合理涵蓋）唔自行 push／部署。
 - `index.html`、`js/app.js`、`js/storage.js`、共用獎勵／Profile、`scripts/check-invariants.py`、`.github/workflows/*`、`docs/handover.md` 係共享範圍。需要改呢批檔時，Chief Lead 先安排認領並指派一位 Lead 實作。
 - 同一功能／同一批檔任何時候只可以一位 agent 寫；平行工作只限互不重疊範圍。
 - Keith 明確指定某位 Lead 時直接 routing；未指定就由 Chief Lead 判斷。專科 Lead 回報 blocker 畀 Chief，唔將 code／JSON 丟畀 Keith 驗收。

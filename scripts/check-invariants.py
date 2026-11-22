@@ -1102,8 +1102,10 @@ def check_agent_collab_docs() -> None:
         if "Keith 明確指派" not in src:
             fail("agent-docs", f"{name} 要寫明 Codex 只按 Keith 明確指派參與")
     codex = read("CODEX.md")
-    if "Keith 可明確指派 Codex" not in codex or "不得自行擴大任務" not in codex:
-        fail("agent-docs", "CODEX.md 要說明明確指派和權限界線")
+    if "Keith 可明確指派 Codex" not in codex or "不得自行擴大任務" not in codex or "任務合理涵蓋" not in codex:
+        fail("agent-docs", "CODEX.md 要說明明確指派、任務授權和權限界線")
+    if "任務合理涵蓋" not in agents:
+        fail("agent-docs", "AGENTS.md 要容許按任務合理涵蓋的授權完成交付")
     if "字卡相片辨讀由當值 agent" not in agents:
         fail("agent-docs", "AGENTS.md 要將字卡辨讀交畀當值 agent（Cursor 常規／WorkBuddy 接棒）")
     if "apply-book-cards.py" not in ocr or "當值 agent" not in ocr:
