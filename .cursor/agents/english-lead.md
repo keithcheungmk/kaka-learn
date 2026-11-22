@@ -36,6 +36,6 @@ is_background: false
 
 ## 交付
 
-- 跑相應 `node --check`、Story／Phonics 測試、家庭 viewport smoke 及 `python3 scripts/check-invariants.py`。
-- 交返 Chief 嘅結果要係**可即時部署**：測試綠、範圍清楚、無「待 Keith 決定」細節（真 blocker 除外）。完結條件＝live 網址，唔係本機完成。
+- 只跑改動直接相關的檢查。Listen & Find 場景或版面改動跑 `node scripts/test-listen-find.mjs`、`python3 scripts/test-listen-find-layout.py`；只有共用入口、導覽、獎勵或明確跨模組風險才加全站家庭 viewport smoke。
+- 依授權交付可審核的結果。除非 Keith 明確授權推送、合併或部署，否則停在指定交付點。清楚分開本地檢查、CI、合併、Pages 部署和 live 版本驗證。
 - 方向已批後唔用樣板／問卷停低；唔叫 Keith 睇 code／diff／JSON 驗收。

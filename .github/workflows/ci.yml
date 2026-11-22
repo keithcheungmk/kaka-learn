@@ -80,12 +80,14 @@ jobs:
           if [ "$EVENT_NAME" = workflow_dispatch ]; then
             echo "full=true" >> "$GITHUB_OUTPUT"
             echo "hanzi=true" >> "$GITHUB_OUTPUT"
+            echo "listen_find=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           base="${PR_BASE:-$PUSH_BASE}"
           if [ -z "$base" ] || ! git cat-file -e "$base^{commit}" 2>/dev/null; then
             echo "full=true" >> "$GITHUB_OUTPUT"
             echo "hanzi=true" >> "$GITHUB_OUTPUT"
+            echo "listen_find=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           changed_files="$(mktemp)"
@@ -93,18 +95,19 @@ jobs:
           if ! git diff --no-renames --name-only "$base" HEAD > "$changed_files"; then
             echo "full=true" >> "$GITHUB_OUTPUT"
             echo "hanzi=true" >> "$GITHUB_OUTPUT"
+            echo "listen_find=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           bash scripts/layout-scope.sh < "$changed_files" >> "$GITHUB_OUTPUT"
 
       - name: 安裝 playwright
-        if: steps.scope.outputs.full == 'true' || steps.scope.outputs.hanzi == 'true'
+        if: steps.scope.outputs.full == 'true' || steps.scope.outputs.hanzi == 'true' || steps.scope.outputs.listen_find == 'true'
         run: |
           pip install --quiet playwright
           python3 -m playwright install --with-deps chromium
 
       - name: 開靜態伺服器
-        if: steps.scope.outputs.full == 'true' || steps.scope.outputs.hanzi == 'true'
+        if: steps.scope.outputs.full == 'true' || steps.scope.outputs.hanzi == 'true' || steps.scope.outputs.listen_find == 'true'
         run: |
           python3 -m http.server 5173 &
           for i in $(seq 1 20); do
@@ -117,6 +120,10 @@ jobs:
         run: |
           python3 scripts/test-hanzi-replay.py
           python3 scripts/test-hanzi-family-names.py
+
+      - name: 靜音檢查 Listen & Find 版面及命中區
+        if: steps.scope.outputs.listen_find == 'true'
+        run: python3 scripts/test-listen-find-layout.py
 
       - name: 全站家庭裝置回歸（手動或共用基建變更）
         if: steps.scope.outputs.full == 'true'

@@ -2,13 +2,14 @@
 """Focused Listen & Find iPad layout + hit-region alignment checks. Mute speech."""
 import os
 import sys
+import tempfile
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
 REPO = Path(__file__).resolve().parents[1]
 URL = os.environ.get("KAKA_TEST_URL", "http://127.0.0.1:5173")
-SHOT_DIR = Path(os.environ.get("KAKA_TEST_SHOT_DIR", "/opt/cursor/artifacts"))
+SHOT_DIR = Path(os.environ.get("KAKA_TEST_SHOT_DIR", str(Path(tempfile.gettempdir()) / "kaka-learn-listen-find")))
 
 VIEWPORTS = [
     ("iPadPro11-landscape", 1210, 834, "landscape"),
@@ -379,6 +380,10 @@ def main():
             ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=True, device_scale_factor=2)
             pg = ctx.new_page()
             open_picker(pg)
+            pg.click('[data-listen-find-chapter="fruit-shop"]')
+            pg.wait_for_function("() => !document.querySelector('#screen-listen-find').classList.contains('is-picking')")
+            pg.wait_for_selector("#btn-listen-find-start")
+            wait_scene_ready(pg)
             assert_start_card_tappable(name, pg)
             if name == "iPhone16ProMax-landscape-ready":
                 pg.screenshot(path=str(SHOT_DIR / "listen_find_iphone_landscape_ready.png"), full_page=False)

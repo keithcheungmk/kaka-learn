@@ -1,21 +1,7 @@
-# CODEX.md（已退役）
+# CODEX.md
 
-> **Codex 已退出 kaka-learn（Keith 2026-11-19）：** Keith 唔再訂閱 Codex，項目净係 **Cursor（常任 Chief）＋ WorkBuddy（token 接棒）** 兩方做。本檔只作歷史存檔，**唔好再當 Codex 係現行協作者、owner 或署名**。新工作請看 **[AGENTS.md](./AGENTS.md)** 同 **[docs/handover.md](./docs/handover.md)**。
+Keith 可明確指派 Codex 參與 kaka-learn 的指定範圍。Codex 必須先讀 **[AGENTS.md](./AGENTS.md)** 和 **[docs/handover.md](./docs/handover.md)**，按當次授權工作、認領共享檔，並向當值 Chief 交付。Codex 不會因本文件而自動成為 Chief，也不得自行擴大任務、推送、合併或部署。
 
-舊規則（已失效，保留只供追溯）：
+Cursor 仍是常任 Chief。WorkBuddy 只在 Cursor token 用盡或 Keith 明確要求接棒時臨時代理 Chief。
 
-- 規則同 Cursor／Claude 共用一份：見 **[AGENTS.md](./AGENTS.md)**。
-- 開工前／收工後要睇同更新 **[docs/handover.md](./docs/handover.md)**。
-- 喺交接簿「最近改動」署名 **Codex** —— **已失效**；而家署名净係 `Cursor` 或 `WorkBuddy`。
-- 常任 Chief 係 **Cursor**；WorkBuddy 只係 token 接棒（Keith 2026-11-19 更正）。
-- 開工第一件事：`git fetch origin main`。
-- 改共享／高危檔之前，喺 handover「進行中（認領）」表認領；做完清走。同一批檔唔可以兩個人同時改。
-- 字卡 OCR —— 由當值 agent 做（見 `docs/word-card-ocr.md`），唔再係 Codex／Claude。
-
-Merge 前必須跑：
-
-```bash
-python3 scripts/check-invariants.py   # 硬性約束（要 exit 0）
-```
-
-檢查報告格式見 `docs/qa-check.md`。
+工作交付遵循實際授權。只在任務要求時準備 patch、PR、合併或部署，並分別記錄本地檢查、CI、合併、Pages 版本和 live 驗證結果。

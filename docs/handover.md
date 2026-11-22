@@ -1,6 +1,6 @@
 # 交接簿 — Cursor Chief ⇄ WorkBuddy 接棒（＋專科 Leads／Grok 顧問）
 
-> **Codex 已退出（Keith 2026-11-19）：** 項目而家淨係 **Cursor ＋ WorkBuddy** 兩方做；Codex 唔再訂閱、唔認領、唔署名。下面舊嘅 `ChatGPT／Codex` 署名係**歷史紀錄**。
+> **Keith 2026-11-22 更新：** Cursor 仍是常任 Chief，WorkBuddy 仍是 Cursor token 用盡時的臨時接棒者。Keith 明確指派時，Codex 可參與指定範圍；不得以此取代 Chief 分工或擴大授權。舊紀錄中的 Codex 署名只代表當時實際執行者。
 
 **2026-11-19 Cursor Chief — 更正：Cursor 常任 Chief；WorkBuddy＝token 接棒：** Keith 澄清唔係永久 WorkBuddy＝Chief。平時 Cursor 做總控；Cursor token 用盡先轉 WorkBuddy 臨時代理 Chief＋執行，再交返。已改 `AGENTS.md`／bootstrap／workflow／OCR／Lead 上報對象。
 
@@ -29,7 +29,7 @@ QA 報告預設只列範圍及待驗項；`--run` 在此工作目錄啟動隔離
 
 > 2026-10-28 數學遊樂場：在獨立分支 `codex/math-playground-refresh-20261027` 由最新 `origin/main`（`db26f80`）整理「數數／加減／時間／生活數學」入口；保留現有水果店、四種計算法與進度。數數改成故事圖、物件板與答案區，修正 20 件物品重疊、不足五個的組別標籤及答錯後語音完成才可重試；形狀規律重複圖形使用一致顏色。生活數學卡片加入具體玩法描述；錯誤提示按題型分步講解、第二次錯誤示範答案，並同步朗讀。度量第一階段已改成讀厘米：擦膠／蠟筆先練 0–10cm，再用鉛筆／玩具車／小熊練 10–20cm；物件起點對齊 0cm，先找整十刻度再數小格，二次答錯會照實際讀數拆步講解。呢個係圖片式直尺練習，未包含手動捲尺、門邊等長距離量度。數學單元／策略測試、57 項 invariants，以及家庭裝置完整 smoke 已過：iPad 直／橫各 55 個畫面一屏可用，iPhone 55 個畫面無重疊／裁切，並覆蓋答錯／答啱語音後狀態；附帶 PTH regression 亦通過。已向 Chief Lead 查詢數學整合範圍，未收到回覆；數學變更經獨立檢查結論「可以 merge」。工作提交 `e1006d5` 已 fast-forward 推送至 `main`；GitHub CI 與 Pages workflow 均成功，線上 `version.json` 確認為 `e1006d5`。GitHub PR API 回 403，因 main 未設保護而直接 fast-forward。其他題型的情境／互動仍待逐項改造。
 
-2026-11-19 Keith 指示（最新）：**Cursor＝常任 Chief**；**WorkBuddy＝Cursor token 用盡時嘅接棒**（臨時代理 Chief＋執行）。**Codex 已退出**。兩方都跟完結＝live。OCR 由當值 agent 做（必須 `apply-book-cards.py`）。新增下屬 agent 前必須先同 Keith 討論。Grok 只係唯讀顧問。
+2026-11-22 Keith 指示（最新）：**Cursor＝常任 Chief**；**WorkBuddy＝Cursor token 用盡時的接棒**（臨時代理 Chief＋執行）；Keith 明確指派時，Codex 可執行指定工作。各方只按當次授權推送、合併或部署。OCR 由當值 agent 做（必須 `apply-book-cards.py`）。新增下屬 agent 前必須先同 Keith 討論。Grok 只係唯讀顧問。
 呢度記錄「其他人需要知」嘅分工、認領、撞車風險同未完事項，避免撞改。
 
 
@@ -51,19 +51,18 @@ QA 報告預設只列範圍及待驗項；`--run` 在此工作目錄啟動隔離
 | **Math Lead** | `.cursor/agents/math-lead.md`；數理、加減法、數感、數學面試玩法及數理回歸 |
 | **English Lead** | `.cursor/agents/english-lead.md`；Carter Family、Story English、Game Night、Sight Words、Phonics |
 | **Chinese Lead** | `.cursor/agents/chinese-lead.md`；中文認字、紅／橙輯、書頁砌句、粵語及 PTH；字卡 OCR 常規可做（見 `docs/word-card-ocr.md`） |
+| **Codex** | Keith 明確指派時可參與指定範圍；不得取代常任 Chief 或擴大授權 |
 | **Grok bot** | 外部唯讀顧問；唔係現行 project 執行方；無 repo、push、merge、認領或部署權 |
 
-**Codex 已退出（Keith 2026-11-19）**：唔再係協作者；本檔較早同歷史段落嘅 `ChatGPT／Codex` 署名只作紀錄，唔好當現行 owner，新記錄唔好再用 Codex 署名。
-
-Keith 明確交俾邊個，就由嗰個做；未指定且喺 Cursor → Cursor Chief；喺 WorkBuddy 接棒對話 → WorkBuddy 臨時代理。專科 Lead 交返當值 Chief。共享檔先認領。**唔設永久雙 Chief**。Grok 只係建議。
+Keith 明確交俾邊個，就由嗰個做；未指定且喺 Cursor → Cursor Chief；喺 WorkBuddy 接棒對話 → WorkBuddy 臨時代理；Keith 指派 Codex 時 → Codex 只做指定範圍並向當值 Chief 交付。專科 Lead 交返當值 Chief。共享檔先認領。**唔設永久雙 Chief**。Grok 只係建議。
 
 ## 點用呢個檔
 
-Cursor Chief、WorkBuddy（接棒時）、三位專科 Lead **同一套**開工／收工協議：
+Cursor Chief、WorkBuddy（接棒時）、Keith 指派的 Codex 及三位專科 Lead **同一套**開工／收工協議：
 
 - **開工前**：`git fetch origin main` → 睇 `AGENTS.md` → 睇呢個檔。
 - **改共享／高危檔之前**：認領；同一批檔唔可以兩個人同時改。
-- **merge 完之後**：加最近改動，署名 **Cursor Chief**、**WorkBuddy** 或專科 Lead；清認領。接棒未完要寫「下一位：Cursor」。
+- **merge 完之後**：加最近改動，署名實際執行者；清認領。接棒未完要寫「下一位：Cursor」。
 - 只寫擁有權、地雷、未完事項。
 - 「以後都要咁做」寫入 `AGENTS.md` + `check-invariants.py`。
 - Grok 受邀時由 Keith／當值 agent 交可分享摘錄；Grok 唔認領。
@@ -76,9 +75,7 @@ Cursor Chief、WorkBuddy（接棒時）、三位專科 Lead **同一套**開工�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| Listen & Find 動物園章 | Cursor | `js/listen-find-scenes.js`, `index.html`（聽聲搵圖 picker）, `assets/english-listen-find/zoo-scene.webp`, `css/listen-find.css` | 2026-11-21 | 做緊；Keith 指定開 PR，唔 merge、唔 deploy |
-| Listen & Find 開始卡／safe-area | Cursor | `css/listen-find.css`, `index.html`（Listen & Find 標記） | 2026-11-21 | 做緊；跟 #211 修矮橫向開始掣同 home indicator |
-| QA 報告及 CI／部署重複檢查整理 | Codex Chief 指派 | `scripts/qa-report.py`, `scripts/test-qa-report.py`, `scripts/test-layout-scope.py`, `.github/workflows/ci.yml`, `.github/workflows/deploy-pages.yml`, `docs/qa-check.md`, `docs/handover.md`, `AGENTS.md` | 2026-11-19 | 獨立工作目錄開發；開 PR 待審，未合併前不 live。 |
+| Repo 規則、GitHub 存取診斷及 Listen & Find CI 範圍 | Codex（Keith 明確指派） | `AGENTS.md`, `.cursor/agents/english-lead.md`, `docs/handover.md`, `docs/github-access-troubleshooting.md`, `.github/workflows/ci.yml`, `scripts/layout-scope.sh`, `scripts/test-layout-scope.py`, `scripts/test-listen-find-layout.py`, `scripts/check-invariants.py`, `CODEX.md`, `docs/workbuddy-bootstrap.md` | 2026-11-22 | 獨立 PR；以最新 main 為基礎。舊 PR #210 仍開啟但已由 #217 重建並合併，唔好以舊分支作基礎。 |
 
 <!-- 範本（複製一行，填完刪走空表）：
 | 短描述 | Cursor／WorkBuddy | `path/a`, `path/b` | YYYY-MM-DD | 做緊；完結條件＝live |
@@ -121,7 +118,7 @@ Cursor Chief、WorkBuddy（接棒時）、三位專科 Lead **同一套**開工�
 
 ## 撞車高危檔案
 
-Cursor、WorkBuddy（接棒時）同專科 Leads 都可能掂到下面呢批檔——改之前先認領，唔好兩個 agent 一齊改。Grok 預設唔改檔。Codex 已退出，唔掂任何檔。
+Cursor、WorkBuddy（接棒時）、Keith 指派的 Codex 及專科 Leads 都可能掂到下面呢批檔；改之前先認領，唔好兩個 agent 一齊改。Grok 預設唔改檔。
 
 - `css/styles.css` — Cursor／WorkBuddy 都可能掂。改之前認領 + `git fetch` + rebase，唔好用大段 rewrite，
   改細粒啲、貼住現有 selector 改。
@@ -150,12 +147,21 @@ Cursor、WorkBuddy（接棒時）同專科 Leads 都可能掂到下面呢批檔�
 - 8 張新場景圖 `assets/family-stories/scenes/ma-on-shan-pizza-p0*.webp`；同步目錄、`check-family-stories.py` 硬計數（27 篇／19 可玩）及 `test-family-storybook.mjs`。
 - **真機未驗**：粵語朗讀聲、iPad 直／橫版面手感要 Keith 自己玩。截圖巡查在 1180×900 完成。
 
-### 2026-11-21 · Cursor Chief（聽聲搵圖動物園章，開 PR 唔 merge）
+### 2026-11-21 · Cursor Chief（聽聲搵圖動物園章）
 
 - 英文 hub「聽聲搵圖」章節揀選加第三張卡：動物園／Zoo。八詞：lion、elephant、giraffe、monkey、panda、zebra、penguin、hippo。無老虎，無農場重疊詞。
 - 原創統一 16:9 圖 `assets/english-listen-find/zoo-scene.webp`（唔裁中山日記格、唔拼貼 wild sprites）。卡卡同禧禧只喺邊位旁觀，唔係目標。
 - 水果店／農場 hit region、文案同圖都唔改。鼓勵句仍然 `{word}`（`{fruit}` 仍可用）。每日 listen 幣規則不變。
-- 本地：`test-listen-find.mjs`、`test-listen-find-layout.py`（含動物園完整一輪，speech mock）、`check-invariants.py`。Keith 指定開 PR，唔 merge、唔 deploy。
+- PR #214 於 2026-11-21 合併，merge commit `5c60510`。目前 `main` 為 `6427b018`，公開 `version.json` 為 `6427b01`。主線包含 Zoo 章與四個章節入口，因此舊「做緊」認領已清除。
+
+### 2026-11-22 · Listen & Find 舊 Cursor 認領核對
+
+- Keith 確認舊 Cursor 工作分支已放棄，不再作為有效認領。GitHub 記錄顯示 Zoo PR #214 和 safe-area 修正 PR #215 已合併；兩個 merge commit 都是目前 `main` 的祖先，公開版本 `6427b01` 與主線一致。
+- 主線來源已保留 `safe-area-inset-bottom` 樣式和四章入口。不要重新建立 Zoo 或 safe-area 認領；後續工作只按最新 handover 及當次指派。
+
+### 2026-11-22 · QA／CI 舊 PR 狀態
+
+- PR #210 仍顯示 open，但其重建版本 PR #217 已於 2026-11-21 合併，包含 #210 和 #215 的更新；merge commit `049944b` 是目前 `main` 的祖先。以目前主線為準；不要把 #210 當成未整合的唯一版本，也不要在其舊分支上疊新修改。
 
 ### 2026-11-21 · Cursor Chief（Listen & Find 農場章，開 PR 唔 merge）
 
@@ -169,7 +175,7 @@ Cursor、WorkBuddy（接棒時）同專科 Leads 都可能掂到下面呢批檔�
 - Keith 指示：唔再訂 Codex，項目净係 WorkBuddy（Chief）＋ Cursor 兩方做。
 - Codex 由所有現行角色／認領／署名移除；handover 入面舊 `ChatGPT／Codex` 署名只作歷史紀錄，已加頂部聲明。
 - 字卡相片辨讀（OCR）owner 由 Codex 轉 **WorkBuddy** 主責（內容核實，唔係寫 code），Cursor 繼續 script／UI 落地；`docs/word-card-ocr.md` 已更新。
-- `check-invariants.py` 角色檢查改為 WorkBuddy／Cursor／Grok（顧問），並加「Codex 已退出」sentinel 防止效力文件寫返 Codex 做現行角色。
+- `check-invariants.py` 當時檢查 WorkBuddy／Cursor／Grok（顧問），並防止效力文件將 Codex 列為現行角色；2026-11-22 後以 Keith 明確指派為準。
 - 同步改 `AGENTS.md`、本檔、`docs/workbuddy-bootstrap.md`、`docs/workbuddy-chief-lead-workflow.md`、`CLAUDE.md`、`CODEX.md`（退役聲明）、`GROK.md`。
 - 定向：`check-invariants.py` 全過；無版面改動，唔做視覺巡查。玩：https://keithcheungmk.github.io/kaka-learn/
 

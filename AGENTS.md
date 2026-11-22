@@ -2,12 +2,12 @@
 
 > **2026-10-29 Keith 更新測試範圍（優先於下方舊有全站 smoke 要求）：** 日常改動只檢查受影響功能及直接相關的進度、入口和返回流程；介面改動檢查相關 iPad 直／橫及 iPhone 畫面。只有改共用基建或有明確跨模組風險時才擴大回歸。全站回歸每三日定期執行或在有具體理由時執行；測試必須靜音，避免干擾家庭。CI 的全站 UI 回歸留給手動觸發或共用基建改動；勿將以下舊文的全站 smoke 視為每次修改的必需步驟。
 
-給 Cursor／騰訊 WorkBuddy／Grok bot（顧問）／自動化 agent 嘅專案指引。
+給 Cursor、騰訊 WorkBuddy、Keith 指定時參與的 Codex、Grok bot（顧問）及自動化 agent 的專案指引。
 
-> **開工前必須睇 `docs/handover.md`** — Keith 而家净係用 **Cursor ＋ WorkBuddy** 兩方做呢個 project；**Codex 已退出，唔再訂閱、唔認領、唔署名**。Grok 只作唯讀顧問。
+> **開工前必須睇 `docs/handover.md`** — Cursor 係常任 Chief，WorkBuddy 係 Cursor token 用盡時的臨時接棒者。Keith 明確指派時，Codex 亦可參與指定範圍；呢項指派唔會改變 Cursor／WorkBuddy 的 Chief 分工。Grok 只作唯讀顧問。
 > **Cursor 主 Agent 係常任 Chief Lead**（Keith 2026-11-19 更正）：拆單、跨科校準、共享檔整合、routing、部署協調；並指派 `.cursor/agents/` 三位本機 Lead。
 > **WorkBuddy＝token 接棒位，唔係永久 Chief。** Keith 喺 Cursor token 用盡／轉用 WorkBuddy 時，WorkBuddy **臨時代理 Chief＋執行**，接續未完事項；Cursor 恢復後 Chief 交返 Cursor。詳見 `docs/workbuddy-chief-lead-workflow.md`。
-> 兩方都跟「完結＝live」自行測／commit／push；署名用 `Cursor`／`WorkBuddy`。Grok 預設只建議、唔改檔。WorkBuddy 開工指令見 `docs/workbuddy-bootstrap.md`。
+> Cursor、WorkBuddy 或獲 Keith 指派的 Codex，均按當次授權負責驗證及交付；只在獲明確授權時推送、合併或部署，署名必須反映實際執行者。Grok 預設只建議、唔改檔。GitHub CLI 權限疑難見 `docs/github-access-troubleshooting.md`。WorkBuddy 開工指令見 `docs/workbuddy-bootstrap.md`。
 > 交接簿記錄現行分工、進行中認領、撞車高危檔案同未完事項。
 > 收工／merge 完記得返去更新。
 
@@ -54,11 +54,12 @@
 |---|---|
 | **Cursor Chief Lead** | 常任 Chief；科目 Lead routing；共享檔整合；部署 |
 | **WorkBuddy** | Cursor token 用盡／Keith 轉用 WorkBuddy 時：**臨時代理 Chief＋執行**，接續 handover 未完事項；Cursor 恢復後交返。開工見 `docs/workbuddy-bootstrap.md` |
+| **Codex** | Keith 明確指派時參與指定範圍；遵守當次授權、認領和交付要求，不取代 Cursor Chief 或 WorkBuddy 接棒 |
 | **Grok bot** | 外部顧問；預設唯讀，唔改 repo、唔 push、唔認領 |
 
 - **點解唔永久 WorkBuddy＝Chief：** Keith 主要喺 Cursor 做；WorkBuddy 係 quota／token 備援，唔係第二個常駐總控。永久雙 Chief 或「WorkBuddy 永遠拆單」會令 Cursor 有 token 時流程錯位。
 - **接棒規矩：** Keith 開 WorkBuddy 並交代「Cursor token 盡／接續」→ WorkBuddy 先 `git fetch`、讀 handover 認領／未完項 → 臨時代理 Chief 做完或做到可交接點 → 更新 handover 註明「下一位：Cursor」。
-- **Codex 已退出（Keith 2026-11-19）：** 唔再係協作者；舊 `ChatGPT／Codex` 署名只係歷史紀錄。
+- **Codex 參與方式（Keith 2026-11-22）：** Keith 明確指派時可做指定工作；未獲指派時唔代表 Cursor Chief、唔自行擴大任務或署名成其他執行者。
 - Keith 明確交俾邊個，就由嗰個做；未指定且喺 Cursor 對話 → Cursor Chief；喺 WorkBuddy 接棒對話 → WorkBuddy 臨時代理。
 - 同一功能／同一批檔任何時候只可以一位 agent 寫；平行只限互不重疊範圍。
 - 開工前：`git fetch origin main` → 讀本檔 → 讀／寫 `docs/handover.md` 認領表。
