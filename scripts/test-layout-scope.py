@@ -10,24 +10,32 @@ import shutil
 root = Path(__file__).resolve().parents[1]
 script = root / 'scripts/layout-scope.sh'
 cases = [
-    ([], 'full=false\nhanzi=false\n'),
-    (['data/hanzi-writer/life-word-data.js'], 'full=false\nhanzi=true\n'),
-    (['data/hanzi-write-chars.js'], 'full=false\nhanzi=true\n'),
-    (['js/speech.js'], 'full=true\nhanzi=false\n'),
-    (['js/speech.js', 'hanzi-write-demo.html'], 'full=true\nhanzi=true\n'),
-    (['data/hanzi-writer/life-word-data.js.bak'], 'full=false\nhanzi=false\n'),
+    ([], 'full=false\nhanzi=false\nlisten=false\n'),
+    (['data/hanzi-writer/life-word-data.js'], 'full=false\nhanzi=true\nlisten=false\n'),
+    (['data/hanzi-write-chars.js'], 'full=false\nhanzi=true\nlisten=false\n'),
+    (['js/speech.js'], 'full=true\nhanzi=false\nlisten=false\n'),
+    (['js/speech.js', 'hanzi-write-demo.html'], 'full=true\nhanzi=true\nlisten=false\n'),
+    (['data/hanzi-writer/life-word-data.js.bak'], 'full=false\nhanzi=false\nlisten=false\n'),
+    (['css/listen-find.css'], 'full=false\nhanzi=false\nlisten=true\n'),
+    (['js/listen-find-scenes.js'], 'full=false\nhanzi=false\nlisten=true\n'),
+    (['assets/english-listen-find/zoo-scene.webp'], 'full=false\nhanzi=false\nlisten=true\n'),
+    (['scripts/test-listen-find-layout.py'], 'full=false\nhanzi=false\nlisten=true\n'),
 ]
 for paths, expected in cases:
     result = subprocess.run(['bash', str(script)], input='\n'.join(paths) + '\n', text=True, capture_output=True, check=True)
     assert result.stdout == expected, (paths, result.stdout)
-for filename in ('index.html', 'css/styles.css', 'js/app.js', 'js/storage.js', 'js/speech.js', 'js/nav-back.js'):
+for filename in ('css/styles.css', 'js/app.js', 'js/storage.js', 'js/speech.js', 'js/nav-back.js'):
     result = subprocess.run(['bash', str(script)], input=filename + '\n', text=True, capture_output=True, check=True)
-    assert result.stdout == 'full=true\nhanzi=false\n', filename
+    assert result.stdout == 'full=true\nhanzi=false\nlisten=false\n', filename
+result = subprocess.run(['bash', str(script)], input='index.html\n', text=True, capture_output=True, check=True)
+assert result.stdout == 'full=true\nhanzi=false\nlisten=true\n', result.stdout
 for filename in ('hanzi-write-demo.html', 'js/hanzi-write-demo.js', 'css/hanzi-write-demo.css', 'data/hanzi-write-chars.js', 'data/hanzi-family-names.js', 'scripts/test-hanzi-family-names.py', 'scripts/test-hanzi-replay.py'):
     result = subprocess.run(['bash', str(script)], input=filename + '\n', text=True, capture_output=True, check=True)
-    assert result.stdout == 'full=false\nhanzi=true\n', filename
+    assert result.stdout == 'full=false\nhanzi=true\nlisten=false\n', filename
 workflow = (root / '.github/workflows/ci.yml').read_text()
 assert 'bash scripts/layout-scope.sh < "$changed_files" >> "$GITHUB_OUTPUT"' in workflow
+assert 'python3 scripts/test-listen-find-layout.py' in workflow
+assert "steps.scope.outputs.listen == 'true'" in workflow
 assert 'group: kaka-ci-${{ github.event_name }}-${{ github.ref }}' in workflow
 assert 'cancel-in-progress: true' in workflow.split('\njobs:', 1)[0]
 deploy = workflow.split('\n  deploy:\n', 1)[1]
@@ -66,9 +74,9 @@ with tempfile.TemporaryDirectory() as tmp:
         env = dict(os.environ, EVENT_NAME=event, PUSH_BASE=push_base, PR_BASE=pr_base, GITHUB_OUTPUT=str(output))
         subprocess.run(['bash', '-e', '-c', scope], cwd=repo, env=env, check=True, capture_output=True, text=True)
         return output.read_text()
-    assert route('push', base) == 'full=true\nhanzi=true\n'
-    assert route('pull_request', pr_base=base) == 'full=true\nhanzi=true\n'
-    assert route('push', '0' * 40) == 'full=true\nhanzi=true\n'
-    assert route('push') == 'full=true\nhanzi=true\n'
-    assert route('workflow_dispatch') == 'full=true\nhanzi=true\n'
+    assert route('push', base) == 'full=true\nhanzi=true\nlisten=false\n'
+    assert route('pull_request', pr_base=base) == 'full=true\nhanzi=true\nlisten=false\n'
+    assert route('push', '0' * 40) == 'full=true\nhanzi=true\nlisten=true\n'
+    assert route('push') == 'full=true\nhanzi=true\nlisten=true\n'
+    assert route('workflow_dispatch') == 'full=true\nhanzi=true\nlisten=true\n'
 print(f'layout scope: {len(cases)} cases and CI passed')
