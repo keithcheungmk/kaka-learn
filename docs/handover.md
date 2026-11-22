@@ -155,6 +155,7 @@ Cursor、WorkBuddy（接棒時）同專科 Leads 都可能掂到下面呢批檔�
 - 驗證洞：`scripts/test-listen-find-layout.py` 由 #215 起第一步 `assert_start_card_tappable` 必然 fail——picker 狀態下 `showPicker()` 會 `overlay.hidden = true`，但斷言要求 overlay 可見；而且呢個測試從來冇接入 CI。已改為先撳章節再驗開始卡，並喺 `scripts/layout-scope.sh` 加 `listen` 範圍、`.github/workflows/ci.yml` 加「聽聲搵圖章節版面與命中區域」步驟（`index.html`、`css/listen-find.css`、`js/listen-find*.js`、`assets/english-listen-find/*` 改動時自動跑）。
 - 排版：四章揀選由 3+1（最後一張孤立一行）改成橫向一行四張、直向 2×2；≤560px 維持單欄。`js/listen-find.js` 按卡片數寫 `data-chapters`，日後加第五章要補 CSS 規則。
 - 本機實測（Playwright，Chromium，speech mock）：5 個揀選尺寸（iPhone 直／橫、短橫、iPad 直／橫）＋6 個遊玩 viewport 全過，含工程車章 iPad 直／橫完整一輪同 8 個命中區域逐個點中。
+- 上線：`4ab917f`；CI 綠（新步驟「聽聲搵圖章節版面與命中區域」首跑 success），live `version.json`＝`4ab917f`，線上 CSS／JS 已見 `data-chapters` 規則。PR #210（已被 #217 取代）已關閉。
 - 未驗：真人 TTS 發音、真機觸感。另留意「crane」同背景兩座塔吊概念相近，若卡卡指錯可以換圖或改詞。
 
 ### 2026-11-21 · Cursor Chief（聽聲搵圖動物園章，開 PR 唔 merge）
