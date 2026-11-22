@@ -1,6 +1,6 @@
 # 交接簿 — Cursor Chief ⇄ WorkBuddy 接棒（＋專科 Leads／Grok 顧問）
 
-> **Codex 已退出（Keith 2026-11-19）：** 項目而家淨係 **Cursor ＋ WorkBuddy** 兩方做；Codex 唔再訂閱、唔認領、唔署名。下面舊嘅 `ChatGPT／Codex` 署名係**歷史紀錄**。
+> **Keith 2026-11-22 更新：** Cursor 仍是常任 Chief；WorkBuddy 仍是 Cursor token 用盡時的臨時接棒者。Keith 明確指派時，Codex 可參與指定工作並向當值 Chief 交付；不取代 Chief 分工，也不自行擴大授權。按當次任務授權（包括明示授權或由任務合理涵蓋）完成部署等交付。舊 `ChatGPT／Codex` 署名只代表當時實際執行者。
 
 **2026-11-22 WorkBuddy（臨時代理 Chief）— 聽聲搵圖工程車章接管：** 第四章「工程車工地」由 PR #218 於 21:08 merge，live `version.json`＝`6427b01`，場景圖 200。本輪補回交接：清走三行已完成認領（#214 動物園、#215 開始卡、#217 QA/CI 整理）、記錄 #218、補 `skills/kaka-listen-find/SKILL.md` 章節清單、關閉已被 #217 取代的 PR #210。同時修好一直未接入 CI 的 `scripts/test-listen-find-layout.py`，並把四章揀選排版由 3+1 改成橫向四欄／直向 2×2。詳見下面 2026-11-22 條目。
 
@@ -110,16 +110,17 @@ Cursor Chief、WorkBuddy（接棒時）、三位專科 Lead **同一套**開工�
 | 認領後實作（科目內／互不重疊檔） | **Cursor** | 按認領表；開工見 `AGENTS.md` |
 | 數理內容、玩法、題目、版面及測試 | **Math Lead** | `js/math-*`、`css/math.css`、`js/additionGame.js`、`js/subtractionGame.js`、數理測試 |
 | 英文故事、Carter Family、Sight Words、Phonics、錄音及測試 | **English Lead** | `js/phonics-*`、Story English／Game Night、英文衍生資產及測試 |
+| Keith 明確指派的專項工作 | **Codex**（只限當次範圍） | 依當次任務授權；交付予當值 Chief 驗收 |
 | 中文認字、紅／橙輯、書頁砌句、字卡 OCR、粵語、PTH | **Chinese Lead** | `data/red-series/`、`book-scene-*`、中文／PTH 資料、衍生資產及測試 |
 | 太空戰士造型、槍口射星動畫 | **Chief 指派一位 Lead** | `js/star-fx.js`、`scripts/crop-ranger-shooter.py`、`assets/` ranger 圖 |
 | 新主題內容與網站資產整合 | **相應專科 Lead，Chief 協調** | 科目資料由 Lead；`js/words.js`、共享 CSS／入口及資產鎖由 Chief 安排認領 |
 | 第二意見、概念發想、公開資料研究 | **Grok bot**（Keith 手動邀請；唯讀顧問，非執行方） | 不直接讀寫 repo；輸出由 WorkBuddy／Cursor 核實後採納 |
 
-呢個分工唔係死嘅——需要跨界時先由**當值 Chief**（平時 Cursor；接棒時 WorkBuddy）拆件並認領。**唔好兩個 agent 同時改同一個功能／同一批檔。** 獨立驗證以 CI + live SHA 為主。同一錯誤被糾正 3 次就寫入 `check-invariants.py`。
+呢個分工唔係死嘅——需要跨界時先由**當值 Chief**（平時 Cursor；接棒時 WorkBuddy）拆件並認領；Codex 只可按 Keith 當次指派做指定範圍。**唔好兩個 agent 同時改同一個功能／同一批檔。** 獨立驗證以 CI + live SHA 為主。同一錯誤被糾正 3 次就寫入 `check-invariants.py`。
 
 ## 撞車高危檔案
 
-Cursor、WorkBuddy（接棒時）同專科 Leads 都可能掂到下面呢批檔——改之前先認領，唔好兩個 agent 一齊改。Grok 預設唔改檔。Codex 已退出，唔掂任何檔。
+Cursor、WorkBuddy（接棒時）、Keith 指派的 Codex 同專科 Leads 都可能掂到下面呢批檔——改之前先認領，唔好兩個 agent 一齊改。Grok 預設唔改檔。Codex 只可改當次獲指派範圍。
 
 - `css/styles.css` — Cursor／WorkBuddy 都可能掂。改之前認領 + `git fetch` + rebase，唔好用大段 rewrite，
   改細粒啲、貼住現有 selector 改。
