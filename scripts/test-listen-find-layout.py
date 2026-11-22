@@ -50,6 +50,16 @@ EXPECTED_CENTERS = {
         "penguin": (72, 79),
         "hippo": (88, 69),
     },
+    "construction-site": {
+        "excavator": (13, 26),
+        "crane": (38, 27),
+        "forklift": (62.5, 31),
+        "dump truck": (87, 33),
+        "mixer truck": (13, 72),
+        "road roller": (36.5, 71.5),
+        "tanker truck": (62.5, 72),
+        "front loader": (87, 72),
+    },
 }
 
 
@@ -79,7 +89,12 @@ def open_picker(page):
     page.wait_for_function(
         """() => {
           const imgs = [...document.querySelectorAll('.listen-find-chapter img')];
-          return imgs.length === 3 && imgs.every((img) => img.complete && img.naturalWidth > 0);
+          const grid = document.querySelector('.listen-find-chapters');
+          const isShortLandscape = window.innerWidth > 560 && window.innerHeight <= 620
+            && matchMedia('(orientation: landscape)').matches;
+          const columnCount = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+          return imgs.length === 4 && imgs.every((img) => img.complete && img.naturalWidth > 0)
+            && (!isShortLandscape || columnCount === 4);
         }"""
     )
     page.wait_for_timeout(450)
@@ -261,6 +276,8 @@ def assert_layout(name, mode, data, chapter="fruit-shop"):
         errors.append(f"farm art missing {data['sceneSrc']}")
     if chapter == "zoo" and "zoo-scene.webp" not in data["sceneSrc"]:
         errors.append(f"zoo art missing {data['sceneSrc']}")
+    if chapter == "construction-site" and "construction-site-scene.webp" not in data["sceneSrc"]:
+        errors.append(f"construction site art missing {data['sceneSrc']}")
 
     wall = data["wall"]
     img = data["img"]
@@ -445,10 +462,34 @@ def main():
             if name == "iPadPro11-landscape":
                 play_full_round(page, "zoo")
             context.close()
+
+        for name, width, height, mode in (
+            ("iPadPro11-landscape", 1210, 834, "landscape"),
+            ("iPadPro11-portrait", 834, 1210, "portrait"),
+        ):
+            context = browser.new_context(
+                viewport={"width": width, "height": height},
+                has_touch=True,
+                device_scale_factor=2,
+            )
+            page = context.new_page()
+            open_picker(page)
+            pick_and_start(page, "construction-site")
+            data = measure(page)
+            assert_layout(f"construction-site-{name}", mode, data, "construction-site")
+            tap_hits_target(page, "excavator")
+            tap_hits_target(page, "front loader")
+            tap_hits_target(page, "mixer truck")
+            if name == "iPadPro11-landscape":
+                page.screenshot(path=str(SHOT_DIR / f"listen-find-construction-{name}.png"), full_page=False)
+                play_full_round(page, "construction-site")
+            context.close()
+
         browser.close()
-    print(f"listen-find layout: {len(VIEWPORTS)} viewports passed, ready-card + farm + zoo checked")
+    print(f"listen-find layout: {len(VIEWPORTS)} viewports passed, ready-card + farm + zoo + construction site checked")
     return 0
 
 
 if __name__ == "__main__":
     sys.exit(main())
+

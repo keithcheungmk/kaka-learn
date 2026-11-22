@@ -38,6 +38,31 @@ assert.equal([...farmBlock.matchAll(/\['[a-z]+'/g)].length, 8, 'farm has eight a
 assert.match(farmBlock, /\['cow', 54, 36, 17, 28\]/);
 assert.match(farmBlock, /\['rabbit', 83, 81, 12, 20\]/);
 
+const constructionBlock = sceneTargets('construction-site');
+assert.ok(constructionBlock, 'construction site targets exist');
+const constructionTargets = [...constructionBlock.matchAll(/\['([^']+)',\s*([\d.]+),\s*([\d.]+),\s*([\d.]+),\s*([\d.]+)\]/g)]
+  .map(([, word, x, y, width, height]) => ({ word, x: Number(x), y: Number(y), width: Number(width), height: Number(height) }));
+const constructionWords = ['excavator', 'crane', 'forklift', 'dump truck', 'mixer truck', 'road roller', 'tanker truck', 'front loader'];
+assert.deepEqual(constructionTargets.map(({ word }) => word), constructionWords, 'construction site target names and order');
+assert.equal(constructionTargets.length, 8, 'construction site has eight vehicle targets');
+for (const target of constructionTargets) {
+  assert.ok(target.x - target.width / 2 >= 0 && target.x + target.width / 2 <= 100, `${target.word} hit region stays within scene width`);
+  assert.ok(target.y - target.height / 2 >= 0 && target.y + target.height / 2 <= 100, `${target.word} hit region stays within scene height`);
+}
+for (let i = 0; i < constructionTargets.length; i++) {
+  for (let j = i + 1; j < constructionTargets.length; j++) {
+    const a = constructionTargets[i];
+    const b = constructionTargets[j];
+    const overlaps = Math.abs(a.x - b.x) < (a.width + b.width) / 2
+      && Math.abs(a.y - b.y) < (a.height + b.height) / 2;
+    assert.equal(overlaps, false, `${a.word} and ${b.word} hit regions do not overlap`);
+  }
+}
+assert.match(scenes, /titleZh: '工程車工地'/);
+assert.match(scenes, /nounPlural: 'construction vehicles'/);
+assert.match(scenes, /image: 'assets\/english-listen-find\/construction-site-scene\.webp'/);
+assert.match(css, /@media \(min-width: 561px\) and \(max-height: 620px\) and \(orientation: landscape\)[\s\S]*?\.listen-find-chapters \{ grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
+
 const zooBlock = sceneTargets('zoo');
 assert.ok(zooBlock, 'zoo targets exist');
 for (const word of ['lion', 'elephant', 'giraffe', 'monkey', 'panda', 'zebra', 'penguin', 'hippo']) {
@@ -56,9 +81,12 @@ assert.match(html, /class="listen-find-topbar"[\s\S]*listen-find-title[\s\S]*lis
 assert.match(html, /data-listen-find-chapter="fruit-shop"/);
 assert.match(html, /data-listen-find-chapter="farm"/);
 assert.match(html, /data-listen-find-chapter="zoo"/);
+assert.match(html, /data-listen-find-chapter="construction-site"/);
 assert.match(html, />水果店</);
 assert.match(html, />農場</);
 assert.match(html, />動物園</);
+assert.match(html, />工程車工地</);
+assert.match(html, /Construction site/);
 assert.match(html, /Fruit shop/);
 assert.match(html, />Farm</);
 assert.match(html, />Zoo</);
@@ -69,6 +97,7 @@ assert.match(html, /data-target="apple"/);
 assert.match(html, /src="assets\/english-listen-find\/fruit-shop-scene\.webp"/);
 assert.match(html, /src="assets\/english-listen-find\/farm-scene\.webp"/);
 assert.match(html, /src="assets\/english-listen-find\/zoo-scene\.webp"/);
+assert.match(html, /src="assets\/english-listen-find\/construction-site-scene\.webp"/);
 assert.match(html, /去揀場景/);
 
 assert.match(html, /class="listen-find-stage"/);
@@ -113,5 +142,7 @@ assert.match(dialogue, /KAKA_FIND_PRAISE/);
 assert.ok(fs.existsSync(path.join(root, 'assets/english-listen-find/farm-scene.webp')), 'farm scene artwork exists');
 assert.ok(fs.existsSync(path.join(root, 'assets/english-listen-find/fruit-shop-scene.webp')), 'fruit shop artwork exists');
 assert.ok(fs.existsSync(path.join(root, 'assets/english-listen-find/zoo-scene.webp')), 'zoo scene artwork exists');
+assert.ok(fs.existsSync(path.join(root, 'assets/english-listen-find/construction-site-scene.webp')), 'construction site artwork exists');
 
 console.log('listen-find layout contract: passed');
+

@@ -388,6 +388,11 @@
   }
   .listen-find-listen { min-width: 132px; padding-inline: 10px; font-size: .95rem; }
 }
+
+@media (min-width: 561px) and (max-height: 620px) and (orientation: landscape) {
+  .listen-find-chapters { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .listen-find-target.is-found, .listen-find-target.is-found::after, .listen-find-target.is-wrong, .listen-find-mascot img { animation: none !important; }
 }
+
