@@ -415,7 +415,10 @@
   $('#btn-listen-find-listen')?.addEventListener('click', () => {
     if (active && order[index]) speak(promptFor(order[index]));
   });
-  $$('[data-listen-find-chapter]').forEach((btn) => {
+  const chapterButtons = $$('[data-listen-find-chapter]');
+  const chapterGrid = $('.listen-find-chapters');
+  if (chapterGrid) chapterGrid.dataset.chapters = String(chapterButtons.length);
+  chapterButtons.forEach((btn) => {
     btn.addEventListener('click', () => chooseChapter(btn.dataset.listenFindChapter));
   });
   bindDrawing();
