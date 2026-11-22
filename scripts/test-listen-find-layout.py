@@ -76,12 +76,16 @@ def mute_speech(page):
     )
 
 
-def open_picker(page):
+def open_english_hub(page):
     page.goto(f"{URL}/index.html", wait_until="domcontentloaded")
     mute_speech(page)
     page.click("#btn-profile-kaka")
     page.click("#btn-start-english")
     page.wait_for_selector("#screen-english-hub.active")
+
+
+def open_picker(page):
+    open_english_hub(page)
     page.click("#btn-english-listen-find")
     page.wait_for_selector("#screen-listen-find.active")
     page.wait_for_selector("#screen-listen-find.is-picking")
@@ -98,6 +102,37 @@ def open_picker(page):
         }"""
     )
     page.wait_for_timeout(450)
+
+
+def assert_english_hub_layout(name, page, expected_columns):
+    data = page.evaluate(
+        """() => {
+          const screen = document.querySelector('#screen-english-hub');
+          const grid = document.querySelector('.english-hub-grid');
+          const cards = [...grid.querySelectorAll('.english-hub-card')];
+          const rects = [screen, grid, ...cards].map((e) => e.getBoundingClientRect());
+          return {
+            columns: getComputedStyle(grid).gridTemplateColumns.split(' ').length,
+            viewport: { width: window.innerWidth, height: window.innerHeight },
+            documentWidth: document.documentElement.scrollWidth,
+            screenRight: rects[0].right,
+            gridRight: rects[1].right,
+            cardRights: rects.slice(2).map((r) => r.right),
+          };
+        }"""
+    )
+    errors = []
+    if data["columns"] != expected_columns:
+        errors.append(f"{data['columns']} columns, expected {expected_columns}")
+    limit = data["viewport"]["width"] + 1
+    if data["documentWidth"] > limit:
+        errors.append(f"document overflows horizontally ({data['documentWidth']} > {limit})")
+    if data["screenRight"] > limit or data["gridRight"] > limit:
+        errors.append(f"hub screen/grid clipped at right edge: {data}")
+    if any(right > limit for right in data["cardRights"]):
+        errors.append(f"hub card clipped at right edge: {data['cardRights']}")
+    if errors:
+        raise AssertionError(f"{name} English hub: " + "; ".join(errors))
 
 
 def assert_picker_layout(name, page, expected_columns, must_fit=False):
@@ -413,6 +448,47 @@ def main():
     SHOT_DIR.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, args=["--mute-audio"])
+
+        # Regression for the reported iPad workflow: rotate the active English
+        # hub and the active Listen & Find picker without reloading, then open
+        # each screen fresh in portrait. This is an emulated viewport test, not
+        # a substitute for verifying the physical iPad browser's zoom state.
+        context = browser.new_context(
+            viewport={"width": 1210, "height": 834},
+            has_touch=True,
+            device_scale_factor=2,
+        )
+        page = context.new_page()
+        open_english_hub(page)
+        assert_english_hub_layout("hub-landscape-before-rotation", page, 2)
+        page.screenshot(path=str(SHOT_DIR / "english-hub-landscape-before-rotation.png"), full_page=False)
+        page.set_viewport_size({"width": 834, "height": 1210})
+        page.wait_for_function("() => matchMedia('(orientation: portrait)').matches")
+        assert_english_hub_layout("hub-portrait-after-rotation", page, 1)
+        page.screenshot(path=str(SHOT_DIR / "english-hub-portrait-after-rotation.png"), full_page=False)
+        page.set_viewport_size({"width": 1210, "height": 834})
+        page.wait_for_function("() => matchMedia('(orientation: landscape)').matches")
+        page.click("#btn-english-listen-find")
+        page.wait_for_selector("#screen-listen-find.active.is-picking")
+        assert_picker_layout("picker-landscape-before-rotation", page, 4, must_fit=True)
+        page.set_viewport_size({"width": 834, "height": 1210})
+        page.wait_for_function("() => matchMedia('(orientation: portrait)').matches")
+        assert_picker_layout("picker-portrait-after-rotation", page, 2, must_fit=True)
+        page.screenshot(path=str(SHOT_DIR / "listen-find-picker-portrait-after-rotation.png"), full_page=False)
+        context.close()
+
+        context = browser.new_context(
+            viewport={"width": 834, "height": 1210},
+            has_touch=True,
+            device_scale_factor=2,
+        )
+        page = context.new_page()
+        open_english_hub(page)
+        assert_english_hub_layout("hub-fresh-portrait", page, 1)
+        page.click("#btn-english-listen-find")
+        page.wait_for_selector("#screen-listen-find.active.is-picking")
+        assert_picker_layout("picker-fresh-portrait", page, 2, must_fit=True)
+        context.close()
         for name, w, h, columns, must_fit in ready_viewports:
             ctx = browser.new_context(viewport={"width": w, "height": h}, has_touch=True, device_scale_factor=2)
             pg = ctx.new_page()
@@ -530,7 +606,7 @@ def main():
             context.close()
 
         browser.close()
-    print(f"listen-find layout: {len(VIEWPORTS)} viewports passed, ready-card + farm + zoo + construction site checked")
+    print(f"listen-find layout: hub/picker rotation + fresh-portrait checks passed; {len(VIEWPORTS)} game viewports, ready-card, farm, zoo + construction site checked")
     return 0
 
 
