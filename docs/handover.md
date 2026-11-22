@@ -2,6 +2,8 @@
 
 > **Codex 已退出（Keith 2026-11-19）：** 項目而家淨係 **Cursor ＋ WorkBuddy** 兩方做；Codex 唔再訂閱、唔認領、唔署名。下面舊嘅 `ChatGPT／Codex` 署名係**歷史紀錄**。
 
+**2026-11-22 WorkBuddy（臨時代理 Chief）— 聽聲搵圖工程車章接管：** 第四章「工程車工地」由 PR #218 於 21:08 merge，live `version.json`＝`6427b01`，場景圖 200。本輪補回交接：清走三行已完成認領（#214 動物園、#215 開始卡、#217 QA/CI 整理）、記錄 #218、補 `skills/kaka-listen-find/SKILL.md` 章節清單、關閉已被 #217 取代的 PR #210。同時修好一直未接入 CI 的 `scripts/test-listen-find-layout.py`，並把四章揀選排版由 3+1 改成橫向四欄／直向 2×2。詳見下面 2026-11-22 條目。
+
 **2026-11-19 Cursor Chief — 更正：Cursor 常任 Chief；WorkBuddy＝token 接棒：** Keith 澄清唔係永久 WorkBuddy＝Chief。平時 Cursor 做總控；Cursor token 用盡先轉 WorkBuddy 臨時代理 Chief＋執行，再交返。已改 `AGENTS.md`／bootstrap／workflow／OCR／Lead 上報對象。
 
 **2026-11-19（歷史）WorkBuddy 曾短暫寫成永久 Chief：** 已作廢；以本段同 `AGENTS.md` 為準。
@@ -76,10 +78,6 @@ Cursor Chief、WorkBuddy（接棒時）、三位專科 Lead **同一套**開工�
 
 | 功能／範圍 | 認領人 | 主要檔案 | 開始日期 | 備註 |
 |---|---|---|---|---|
-| Listen & Find 動物園章 | Cursor | `js/listen-find-scenes.js`, `index.html`（聽聲搵圖 picker）, `assets/english-listen-find/zoo-scene.webp`, `css/listen-find.css` | 2026-11-21 | 做緊；Keith 指定開 PR，唔 merge、唔 deploy |
-| Listen & Find 開始卡／safe-area | Cursor | `css/listen-find.css`, `index.html`（Listen & Find 標記） | 2026-11-21 | 做緊；跟 #211 修矮橫向開始掣同 home indicator |
-| QA 報告及 CI／部署重複檢查整理 | Codex Chief 指派 | `scripts/qa-report.py`, `scripts/test-qa-report.py`, `scripts/test-layout-scope.py`, `.github/workflows/ci.yml`, `.github/workflows/deploy-pages.yml`, `docs/qa-check.md`, `docs/handover.md`, `AGENTS.md` | 2026-11-19 | 獨立工作目錄開發；開 PR 待審，未合併前不 live。 |
-
 <!-- 範本（複製一行，填完刪走空表）：
 | 短描述 | Cursor／WorkBuddy | `path/a`, `path/b` | YYYY-MM-DD | 做緊；完結條件＝live |
 -->
@@ -149,6 +147,15 @@ Cursor、WorkBuddy（接棒時）同專科 Leads 都可能掂到下面呢批檔�
 - 原文「娃娃」一律寫「蛙蛙」，「pizza」寫「薄餅」，「Numberblocks」寫「數字積木」；全文香港書面中文，每頁兩個重點詞。
 - 8 張新場景圖 `assets/family-stories/scenes/ma-on-shan-pizza-p0*.webp`；同步目錄、`check-family-stories.py` 硬計數（27 篇／19 可玩）及 `test-family-storybook.mjs`。
 - **真機未驗**：粵語朗讀聲、iPad 直／橫版面手感要 Keith 自己玩。截圖巡查在 1180×900 完成。
+
+### 2026-11-22 · WorkBuddy（臨時代理 Chief）— 聽聲搵圖：補交接、修驗證、四章排版
+
+- 第四章「工程車工地／Construction site」由 PR #218 於 21:08 merge，live `version.json`＝`6427b01`，場景圖 `construction-site-scene.webp` 200（301 KB，1672×941）。八詞：excavator、crane、forklift、dump truck、mixer truck、road roller、tanker truck、front loader。
+- 補交接：`docs/handover.md` 之前完全冇 #218；認領表三行（動物園 #214、開始卡 #215、QA/CI 整理 #217）其實都已 merge＋live，已清走。`skills/kaka-listen-find/SKILL.md` 補第四章，並寫明 `data-chapters` 排版規則同 CI 測試範圍。
+- 驗證洞：`scripts/test-listen-find-layout.py` 由 #215 起第一步 `assert_start_card_tappable` 必然 fail——picker 狀態下 `showPicker()` 會 `overlay.hidden = true`，但斷言要求 overlay 可見；而且呢個測試從來冇接入 CI。已改為先撳章節再驗開始卡，並喺 `scripts/layout-scope.sh` 加 `listen` 範圍、`.github/workflows/ci.yml` 加「聽聲搵圖章節版面與命中區域」步驟（`index.html`、`css/listen-find.css`、`js/listen-find*.js`、`assets/english-listen-find/*` 改動時自動跑）。
+- 排版：四章揀選由 3+1（最後一張孤立一行）改成橫向一行四張、直向 2×2；≤560px 維持單欄。`js/listen-find.js` 按卡片數寫 `data-chapters`，日後加第五章要補 CSS 規則。
+- 本機實測（Playwright，Chromium，speech mock）：5 個揀選尺寸（iPhone 直／橫、短橫、iPad 直／橫）＋6 個遊玩 viewport 全過，含工程車章 iPad 直／橫完整一輪同 8 個命中區域逐個點中。
+- 未驗：真人 TTS 發音、真機觸感。另留意「crane」同背景兩座塔吊概念相近，若卡卡指錯可以換圖或改詞。
 
 ### 2026-11-21 · Cursor Chief（聽聲搵圖動物園章，開 PR 唔 merge）
 
