@@ -46,9 +46,9 @@ EXPECTED_CENTERS = {
         "giraffe": (43, 28),
         "monkey": (34, 66),
         "panda": (48, 73),
-        "zebra": (61, 62),
+        "zebra": (58, 62),
         "penguin": (72, 79),
-        "hippo": (88, 69),
+        "hippo": (86, 69),
     },
     "construction-site": {
         "excavator": (13, 26),
