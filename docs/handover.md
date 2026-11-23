@@ -141,6 +141,16 @@ Cursor、WorkBuddy（接棒時）、Keith 指派的 Codex 同專科 Leads 都可
 
 ## 最近改動
 
+### 2026-11-23 · WorkBuddy — 卡卡日記《好久不見，Oli！》上線
+
+- Keith 提供 2026-11-22 真實事件＋Oli 相片；新增 8 頁故事 `oli-reunion-day`（series 卡卡日記）：重逢、字母咭比賽（大家鬥快串字都好叻）、積木塔、工程車運積木、蛋糕糕點，傍晚商場餐廳食薄餅／意粉／薯條（冇海景，Keith 更正），商場門口直路開心奔跑＋說再見。
+- 正文英文名「Oli」係第一個獲准入正文嘅英文字（Keith 2026-11-23 指定）；其餘正文維持全書面中文、薄餅唔寫披薩。
+- 新角色寫入角色聖經：Oli（黑賽車T恤＋灰米拼色外套＋淺藍牛仔褲，造型參考 Keith 相片左邊男仔，唔嵌入相片）、輝叔叔／Oli媽媽（暫定造型，Keith 未提供）。浠榆妹妹用包被設定，安全嬰兒床內。
+- 8 張圖 `oli-reunion-day-p01..p08.webp`（1536×920；視覺核對逐張過：人數、服裝、車無臉、字母咭 A/C/T 正確、無文字招牌）。p07 試咗 4 版先過（招牌字／捲髮／多人）。
+- 計數更新：`check-family-stories.py` 28 篇／20 可玩；`test-family-storybook.mjs` 加 Oli 篇回歸（含「除 Oli 外正文禁拉丁字母」斷言）。
+- 上線：commit `1970bde4`，CI 綠，live `version.json`＝`1970bde`，p01/p08 HTTP 200。
+- 未驗：粵語 TTS 朗讀、iPad 真機手感要 Keith 自己玩。
+
 ### 2026-11-23 · WorkBuddy — 模型及 token 指引＋開工預檢上線
 
 - 新增 `docs/model-and-token-guide.md`：三檔模型分工（文檔＝最平 flash；改 code＋測試＋截圖＝中階；難 bug／跨模組＝高階限時；旗艦用唔着）、預檢、讀取紀律（**唔好整份讀 handover**）、任務卡格式、交付四步。
