@@ -918,5 +918,20 @@ window.FAMILY_STORIES = [
       "image": "assets/family-stories/scenes/ma-on-shan-pizza-p08.webp"
     }
   ]
-}
+},
+  {
+    id:'oli-reunion-day', hidden:false, title:'好久不見，Oli！', place:'卡卡的家、荃灣西的商場', date:'2026-11-22', series:'卡卡日記', characters:['卡卡','Oli','輝叔叔','Oli媽媽','浠榆妹妹'], sourceBooks:[], bookWords:[],
+    extensionWords:["Oli","Oli媽媽","輝叔叔","帶着","來到","家","輕輕","跟","浠榆妹妹","打招呼","他們","比賽","抽","字母咭","鬥快","拼出","很多個","字","用","積木","疊起","一座","高高的","塔","開動","工程車","把","運到","地盤","一起","吃了","蛋糕","和","糕點","傍晚","大家","在","商場","的","餐廳","薄餅","意粉","薯條","門口","長長","直路","開心地","奔跑"],
+    summary:'輝叔叔和Oli媽媽帶Oli來探望卡卡，兩個好朋友一起玩字母咭、積木和工程車，又一起吃蛋糕和糕點，再到商場的餐廳吃薄餅、意粉和薯條，在商場門口的直路開心地奔跑，然後說再見。',
+    pages:[
+      {"sentence":"輝叔叔和Oli媽媽帶着Oli來到卡卡的家。","tiles":["輝叔叔","和","Oli媽媽","帶着","Oli","來到","卡卡","的","家"],"learn":["帶着","來到"],"distractors":["睡覺","下雨"],"focusWords":["帶着","來到"],"dialogue":{"speaker":"卡卡","text":"Oli！好久不見，我很想你！"},"image":"assets/family-stories/scenes/oli-reunion-day-p01.webp"},
+      {"sentence":"卡卡和Oli輕輕跟浠榆妹妹打招呼。","tiles":["卡卡","和","Oli","輕輕","跟","浠榆妹妹","打招呼"],"learn":["輕輕","打招呼"],"distractors":["跑步","大叫"],"focusWords":["輕輕","打招呼"],"dialogue":{"speaker":"Oli","text":"浠榆妹妹，你好。"},"image":"assets/family-stories/scenes/oli-reunion-day-p02.webp"},
+      {"sentence":"他們比賽抽字母咭，鬥快拼出很多個字。","tiles":["他們","比賽","抽","字母咭","鬥快","拼出","很多個","字"],"learn":["鬥快","拼出"],"distractors":["游泳","跳舞"],"focusWords":["鬥快","拼出"],"dialogue":{"speaker":"Oli","text":"我們都拼對了很多個字！"},"image":"assets/family-stories/scenes/oli-reunion-day-p03.webp"},
+      {"sentence":"他們用積木疊起一座高高的塔。","tiles":["他們","用","積木","疊起","一座","高高的","塔"],"learn":["疊起","高高的"],"distractors":["畫畫","唱歌"],"focusWords":["疊起","高高的"],"dialogue":{"speaker":"卡卡","text":"一層一層疊上去，塔沒有倒。"},"image":"assets/family-stories/scenes/oli-reunion-day-p04.webp"},
+      {"sentence":"Oli開動工程車，把積木運到地盤。","tiles":["Oli","開動","工程車","把","積木","運到","地盤"],"learn":["工程車","地盤"],"distractors":["睡覺","爬山"],"focusWords":["工程車","地盤"],"dialogue":{"speaker":"卡卡","text":"工程車來了，請讓一讓。"},"image":"assets/family-stories/scenes/oli-reunion-day-p05.webp"},
+      {"sentence":"他們一起吃了蛋糕和糕點。","tiles":["他們","一起","吃了","蛋糕","和","糕點"],"learn":["蛋糕","糕點"],"distractors":["蔬菜","海邊"],"focusWords":["蛋糕","糕點"],"dialogue":{"speaker":"Oli","text":"蛋糕甜甜的，真好吃！"},"image":"assets/family-stories/scenes/oli-reunion-day-p06.webp"},
+      {"sentence":"傍晚，大家在商場的餐廳吃了薄餅、意粉和薯條。","tiles":["傍晚","大家","在","商場","的","餐廳","吃了","薄餅","意粉","和","薯條"],"learn":["薄餅","薯條"],"distractors":["早餐","燒烤"],"focusWords":["薄餅","薯條"],"dialogue":{"speaker":"卡卡","text":"薄餅和意粉都很好吃！"},"image":"assets/family-stories/scenes/oli-reunion-day-p07.webp"},
+      {"sentence":"他們在商場門口的長長直路開心地奔跑。","tiles":["他們","在","商場","門口","的","長長","直路","開心地","奔跑"],"learn":["直路","奔跑"],"distractors":["飛機","潛水"],"focusWords":["直路","奔跑"],"dialogue":{"speaker":"Oli","text":"再見，卡卡！下次我們再一起玩！"},"image":"assets/family-stories/scenes/oli-reunion-day-p08.webp"}
+    ]
+  }
 ];
