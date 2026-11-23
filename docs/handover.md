@@ -141,6 +141,13 @@ Cursor、WorkBuddy（接棒時）、Keith 指派的 Codex 同專科 Leads 都可
 
 ## 最近改動
 
+### 2026-11-23 · WorkBuddy — 模型及 token 指引＋開工預檢上線
+
+- 新增 `docs/model-and-token-guide.md`：三檔模型分工（文檔＝最平 flash；改 code＋測試＋截圖＝中階；難 bug／跨模組＝高階限時；旗艦用唔着）、預檢、讀取紀律（**唔好整份讀 handover**）、任務卡格式、交付四步。
+- 新增 `scripts/dev-preflight.sh`：git fetch 同步、python3／node／gh auth／playwright、port 5173、未提交改動，一鍵 PASS/WARN。
+- `AGENTS.md`「Outcome 完結定義」加指針。
+- handover 拆分（1580 行／185 條歷史 → 現況＋archive）**未做**：要動 `check-invariants.py` handover 段檢查，待 Keith 話事先做。
+
 ### 2026-11-21 · WorkBuddy（卡卡日記《馬鞍山搓薄餅的一天》）
 
 - 中文家庭日記新增八頁〈馬鞍山搓薄餅的一天〉（`ma-on-shan-pizza`，卡卡日記 2026-11-21）：卡卡、禧禧和洋洋在馬鞍山禧禧的家搓粉糰做薄餅，一人一個，放菠蘿、番茄醬和牛肉；蛙蛙和虹姑姑幫忙放進焗爐。吃過薄餅後玩玩具火車、砌路軌，再玩工程車和數字積木；爭玩具時洋洋媽媽走過來叫他們輪流玩，最後學會守規矩，大人坐在後面吃飯看着他們玩。

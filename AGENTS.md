@@ -92,6 +92,8 @@
 
 任務**只有**達到下面先算完成。`本機完成`、`待整合`、`尚未部署` **唔係**終態，唔好當收工寫入交接。
 
+> 模型檔次揀選、開工預檢、讀取紀律、任務卡格式見 `docs/model-and-token-guide.md`；開工前跑 `bash scripts/dev-preflight.sh`。
+
 1. `python3 scripts/check-invariants.py` exit 0，以及今次範圍嘅相關測試綠。
 2. 有版面改動先查受影響頁；無版面改動唔做視覺巡查。
 3. commit 入可部署分支 → CI 綠 → fast-forward／merge 入 `main`。
