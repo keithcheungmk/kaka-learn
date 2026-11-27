@@ -613,8 +613,8 @@ def walk(pg, url, shots: Path | None, tag: str):
     series_ids = pg.evaluate(
         "() => [...document.querySelectorAll('#story-series-grid [data-series-id]')].map((el) => el.dataset.seriesId)"
     )
-    if series_ids != ["carter", "magic-marker", "wacky-ricky", "family-stories-en"]:
-        raise RuntimeError(f"Story series list must keep Little Fox cards then family stories, got {series_ids!r}")
+    if series_ids != ["carter", "magic-marker", "wacky-ricky", "family-stories-en", "book-dash-its-my-birthday"]:
+        raise RuntimeError(f"Story series list must keep Little Fox cards, family stories, then Book Dash, got {series_ids!r}")
     family_href = pg.get_attribute("#screen-story-series.active [data-series-id='family-stories-en']", "href") or ""
     if "family-storybook-en.html" not in family_href:
         raise RuntimeError("Family stories series card must open family-storybook-en.html")

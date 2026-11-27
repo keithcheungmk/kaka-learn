@@ -1,0 +1,12 @@
+{
+  "publisher": "Book Dash",
+  "bookUrl": "https://bookdash.org/books/its-my-birthday/",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "credits": {
+    "writer": "Sinovuyo Mcunukelwa",
+    "illustrator": "Josephine Versfeld",
+    "designer": "Nkosingiphile Mazibuko",
+    "editor": "Diane Awerbuck"
+  }
+}

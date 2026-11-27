@@ -112,6 +112,14 @@
     meta: '2 books',
     description: 'Listen, read, fill missing words — family scenes with Karl, HeiHei, Froggie',
   };
+  const BOOK_DASH_CARD = {
+    id: 'book-dash-its-my-birthday',
+    href: './book-dash-demo.html',
+    title: 'It’s My Birthday! · Book Dash',
+    image: './assets/book-dash/its-my-birthday/page-04.webp',
+    meta: '12 pages · CC BY 4.0',
+    description: 'Tap a word to hear it, follow the page and swipe to continue',
+  };
   let currentSeriesId = 'carter';
   let BOOKS = CARTER_BOOKS;
 
@@ -277,6 +285,11 @@
       <span class="story-activity-description">${FAMILY_STORIES_CARD.description}</span><span class="story-activity-status">Open stories →</span>
     </a>`;
     grid.innerHTML = littleFoxCards + familyCard;
+    grid.insertAdjacentHTML('beforeend', `<a class="story-activity-card story-activity-card--read" data-series-id="${BOOK_DASH_CARD.id}" href="${BOOK_DASH_CARD.href}">
+      <img class="story-activity-image" src="${BOOK_DASH_CARD.image}" alt="" loading="lazy" decoding="async">
+      <strong>${BOOK_DASH_CARD.title}</strong><small>${BOOK_DASH_CARD.meta}</small>
+      <span class="story-activity-description">${BOOK_DASH_CARD.description}</span><span class="story-activity-status">Open book →</span>
+    </a>`);
     $$('button[data-series-id]', grid).forEach((button) => button.addEventListener('click', () => openHub(button.dataset.seriesId)));
   }
 
