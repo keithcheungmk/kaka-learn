@@ -1,0 +1,1 @@
+.word:before{content:none}.word.active{background:transparent;color:transparent;border:0;outline:none}.word.active:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:#f6b800;border-radius:2px;pointer-events:none}.word:focus-visible{background:transparent;color:transparent;outline:2px solid #2477be}aside a, header a{color:#9ee3ff}

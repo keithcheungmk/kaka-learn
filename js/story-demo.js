@@ -290,6 +290,11 @@
       <strong>${BOOK_DASH_CARD.title}</strong><small>${BOOK_DASH_CARD.meta}</small>
       <span class="story-activity-description">${BOOK_DASH_CARD.description}</span><span class="story-activity-status">Open book →</span>
     </a>`);
+    [
+      ['a-house-for-mouse', 'A House for Mouse', '03'],
+      ['a-beautiful-day', 'A Beautiful Day', '05'],
+      ['a-tiny-seed', 'A Tiny Seed', '05'],
+    ].forEach(([id, title, page]) => grid.insertAdjacentHTML('beforeend', `<a class="story-activity-card story-activity-card--read" data-series-id="book-dash-${id}" href="./book-dash-${id}.html"><img class="story-activity-image" src="./assets/book-dash/${id}/page-${page}.webp" alt="" loading="lazy" decoding="async"><strong>${title} · Book Dash</strong><small>CC BY 4.0</small><span class="story-activity-description">Tap a word to hear it, and follow the story</span><span class="story-activity-status">Open book →</span></a>`));
     $$('button[data-series-id]', grid).forEach((button) => button.addEventListener('click', () => openHub(button.dataset.seriesId)));
   }
 
