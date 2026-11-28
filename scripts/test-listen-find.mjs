@@ -69,6 +69,8 @@ for (const word of ['lion', 'elephant', 'giraffe', 'monkey', 'panda', 'zebra', '
   assert.match(zooBlock, new RegExp(`\\['${word}',\\s*\\d+`));
 }
 assert.equal([...zooBlock.matchAll(/\['[a-z]+'/g)].length, 8, 'zoo has eight animal targets');
+assert.match(zooBlock, /\['zebra', 58, 62, 16, 24\]/);
+assert.match(zooBlock, /\['hippo', 86, 69, 20, 24\]/);
 assert.doesNotMatch(zooBlock, /\btiger\b|\bpony\b|\bchick\b|\bhorse\b|\bchicken\b/);
 assert.doesNotMatch(scenes, /data-listen-find-chapter="(?:colours?|transport|clothes)"|id: '(?:colours?|transport|clothes)'/);
 assert.doesNotMatch(html + js + scenes + dialogue, /聽聲搗圖|聽聲掽圖|聽聲揪圖|洠榆|希恩|浓榆|濃榆/);

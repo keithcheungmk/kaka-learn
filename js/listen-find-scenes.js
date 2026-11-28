@@ -99,9 +99,9 @@ window.KAKA_LISTEN_FIND_SCENES = {
       ['giraffe', 43, 28, 13, 42],
       ['monkey', 34, 66, 11, 22],
       ['panda', 48, 73, 11, 20],
-      ['zebra', 61, 62, 11, 24],
+      ['zebra', 58, 62, 16, 24],
       ['penguin', 72, 79, 8, 18],
-      ['hippo', 88, 69, 14, 24],
+      ['hippo', 86, 69, 20, 24],
     ],
   },
   'construction-site': {
