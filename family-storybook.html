@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f7f4e8">
+  <title>卡卡和禧禧一齊玩｜故事閱讀與詞語遊戲</title>
+  <link rel="stylesheet" href="css/family-storybook.css?v=d85ca45">
+  <link rel="stylesheet" href="css/celebrate-finish.css?v=d85ca45">
+  <link rel="stylesheet" href="css/hallmark-chinese-pages.css?v=d85ca45">
+</head>
+<body>
+  <main class="storybook-shell">
+    <header class="topbar" id="story-topbar">
+      <a id="back-chinese" class="back-link" href="index.html#screen-topics">← 中文</a>
+      <div class="brand">
+        <span id="brand-kicker">故事閱讀・詞語遊戲</span>
+        <h1 id="brand-title">卡卡和禧禧一齊玩</h1>
+      </div>
+      <button id="parent-review-entry" class="parent-review-entry" type="button">家長檢視</button>
+      <div class="star-total" id="star-pill" aria-live="polite" title="今日已攞的日記幣">今日幣 <strong id="star-total">0</strong></div>
+      <div id="page-count" class="page-count">第 1 / 6 頁</div>
+    </header>
+    <div id="parent-review-banner" class="parent-review-banner hidden" role="status">
+      <p>家長檢視中，只看書圖，不會計算獎勵幣</p>
+      <button id="exit-parent-review" class="parent-review-exit" type="button">離開檢視</button>
+    </div>
+    <section id="library" class="view" aria-labelledby="library-heading">
+      <div class="intro">
+        <h2 id="library-heading">今天想和他們去哪裏？</h2>
+        <p>每個故事有 6 至 8 頁；先聽每頁故事，再把重點詞放回句子。完成一本今日可攞 1 個幣，換日可以再玩再攞。</p>
+      </div>
+      <section id="parent-daily-report" class="parent-daily-report hidden" aria-labelledby="parent-daily-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">家長日報</p>
+            <h2 id="parent-daily-heading">今日玩咗咩</h2>
+          </div>
+          <span id="parent-daily-coin-summary">今日 0 個幣</span>
+        </div>
+        <ul id="parent-daily-list" class="parent-daily-list"></ul>
+      </section>
+      <div id="story-grid" class="story-grid"></div>
+      <section class="cast-section" hidden aria-hidden="true">
+        <div class="section-heading"><div><p class="eyebrow">人物設定</p><h2>故事裏的家庭角色</h2></div><span>站在同一地面時，按真實身高比例呈現</span></div>
+        <img class="height-lineup" src="assets/family-stories/characters/family-height-lineup.webp" alt="六位角色按身高比例排列">
+        <div id="cast-grid" class="cast-grid"></div>
+      </section>
+    </section>
+    <section id="warmup" class="view hidden" aria-labelledby="warmup-heading">
+      <p class="panel-label">圖字配對熱身</p>
+      <h2 id="warmup-heading">先配一配，再入故事</h2>
+      <p id="warmup-instruction" class="task-instruction">撳圖會讀嗰個詞。再撳字配對；錯咗圖會留住，再撳啱字就得。喇叭只聽、唔選。</p>
+      <p id="warmup-progress" class="warmup-progress" aria-live="polite">已配對 0／3</p>
+      <div class="warmup-board">
+        <div id="warmup-pictures" class="warmup-pictures" aria-label="故事圖"></div>
+        <div id="warmup-words" class="warmup-words" aria-label="詞語卡"></div>
+      </div>
+      <p id="warmup-feedback" class="task-feedback" role="status" aria-live="polite"></p>
+    </section>
+    <section id="reader" class="view hidden" aria-labelledby="brand-title">
+      <div class="progress-track"><span id="page-progress"></span></div>
+      <section class="lesson-spread" aria-label="故事頁和詞語任務">
+        <article class="book-page">
+          <p class="panel-label">故事閱讀</p>
+          <figure class="scene-frame"><img id="scene-image" alt="故事插圖"><figcaption id="scene-caption"></figcaption></figure>
+          <div class="sentence-row"><p id="page-reading" class="page-reading"></p><button id="speak-sentence" class="speak-button" type="button">聽本頁</button></div>
+          <p id="audio-feedback" class="audio-feedback" aria-live="polite"></p>
+        </article>
+        <section id="activity" class="activity" aria-labelledby="activity-heading">
+          <p class="panel-label">本頁詞語任務</p>
+          <p id="task-instruction" class="task-instruction">先聽左邊的句子，再把兩個重點詞放回句子。</p>
+          <h3 id="activity-heading">聽句子，填回詞語</h3>
+          <p id="task-sentence" class="task-sentence" aria-label="填詞句子"></p>
+          <button id="speak-task-sentence" class="speak-button task-sentence-speaker" type="button" disabled>聽完整句子</button>
+          <div class="word-bank-wrap"><h4>詞語池</h4><div id="word-bank" class="word-bank" aria-label="可選詞語"></div></div>
+          <div class="task-actions"><button id="reset-page" class="secondary-button" type="button">重新選詞</button><button id="submit-page" class="primary-button" type="button">提交本頁</button></div>
+          <p id="task-feedback" class="task-feedback" role="status" aria-live="polite"></p>
+          <div id="answer-celebration" class="answer-celebration hidden" aria-hidden="true">
+            <img src="assets/kaka-ranger-celebrate.png" alt="">
+            <svg viewBox="0 0 100 100" focusable="false"><path d="M50 5 L61 38 L96 38 L68 59 L79 93 L50 72 L21 93 L32 59 L4 38 L39 38 Z"></path></svg>
+          </div>
+          <button id="guardian-unlock" class="guardian-unlock hidden" type="button">由家長朗讀，繼續作答</button>
+          <nav class="reader-controls" aria-label="故事頁導航"><button id="prev-page" class="secondary-button" type="button">上一頁</button><button id="next-page" class="primary-button" type="button" disabled>下一頁 →</button></nav>
+        </section>
+      </section>
+      <section id="completion" class="play-finish completion hidden" role="dialog" aria-modal="true" aria-labelledby="completion-heading" aria-live="polite">
+        <div class="play-finish-inner">
+          <div class="play-finish-star kaka-celebrate-stage" aria-hidden="true">
+            <img class="kaka-celebrate-ranger" src="assets/kaka-ranger-celebrate.png" alt="" width="235" height="305" decoding="async">
+          </div>
+          <h3 id="completion-heading">故事完成！</h3>
+          <p id="completion-line">你好叻啊，完成咗啦，獎勵你一個金幣！</p>
+          <p id="completion-summary"></p>
+          <div id="story-finish-actions" class="finish-actions" data-celebrate-actions>
+            <button id="replay-story" class="primary-button" type="button">再玩一次</button>
+            <button id="next-story" class="secondary-button" type="button">返回故事書目</button>
+          </div>
+        </div>
+      </section>
+    </section>
+    <section id="parent-preview" class="view hidden" aria-labelledby="parent-preview-heading">
+      <p class="panel-label">家長檢視</p>
+      <h2 id="parent-preview-heading">全書預覽</h2>
+      <nav id="parent-page-jump" class="parent-page-jump" aria-label="跳至頁數"></nav>
+      <div id="parent-pages" class="parent-pages"></div>
+    </section>
+  </main>
+  <div id="parent-confirm" class="parent-confirm hidden" role="dialog" aria-modal="true" aria-labelledby="parent-confirm-heading">
+    <div class="parent-confirm-sheet">
+      <h2 id="parent-confirm-heading">家長檢視</h2>
+      <p>快速查看全部插圖和文字，不用聽語音、不用答題。</p>
+      <div class="parent-confirm-actions">
+        <button id="parent-confirm-start" class="parent-confirm-start" type="button">開始檢視</button>
+        <button id="parent-confirm-cancel" class="parent-confirm-cancel" type="button">返回</button>
+      </div>
+    </div>
+  </div>
+  <script src="js/storage.js?v=d85ca45"></script>
+  <script src="js/speech.js?v=d85ca45"></script>
+  <script src="js/celebrate-finish.js?v=d85ca45"></script>
+  <script src="js/nav-back.js?v=d85ca45"></script>
+  <script src="data/family-stories/manifest.js?v=d85ca45"></script>
+  <script src="js/family-storybook.js?v=d85ca45"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+/* PTH answer/control states: keep readable colors on the standalone learning page. */
+.answer-slot.filled {
+  background: #e3faed;
+  border-color: #21815f;
+  color: #19365f;
+}
+
+.option {
+  background: #ffffff;
+  color: #19365f;
+}
+
+.option.selected {
+  background: #fff7d7;
+  color: #19365f;
+}
+
+.word-audio {
+  background: #e4f4ff;
+  color: #19365f;
+}
+
+.feedback { color: #a13b52; }
+.feedback.good { color: #126b4a; }
+.complete { color: #126b4a; }
+
+.option:focus-visible,
+.answer-slot:focus-visible,
+.word-audio:focus-visible {
+  outline: 3px solid #19365f;
+  outline-offset: 3px;
+}

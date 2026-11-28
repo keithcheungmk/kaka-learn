@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>PTH × pinyin-pro 試用 Demo</title>
+  <link rel="stylesheet" href="css/pth-pinyin-pro-demo.css?v=d85ca45">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <a class="back" href="pth-demo.html">← 拼音小隊</a>
+      <div class="title">
+        <p class="eyebrow">試用頁 · 未接正式課</p>
+        <h1>pinyin-pro 能幫 PTH 做咩</h1>
+      </div>
+    </header>
+
+    <p class="banner">呢頁專俾你驗收 <strong>zh-lx/pinyin-pro</strong>。正式「拼音小隊」遊戲流程暫時未改；你覺得好先再接上去。</p>
+
+    <section class="panel">
+      <h2>1. 焦點卡：聲母橙、韻母藍</h2>
+      <p class="lead">下面用 pinyin-pro 嘅 <code>type:'all'</code> 自動拆聲母／韻母／聲調，唔使手填。</p>
+      <div id="focusGrid" class="focus-grid"></div>
+    </section>
+
+    <section class="panel">
+      <h2>2. 對照：教材拼音 vs 自動拼音</h2>
+      <p class="lead">用 PTH 例詞對照。一致＝可放心自動標；有差異＝加詞時要人手覆核（例如多音／香港用字）。</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>詞</th>
+              <th>而家教材 curated</th>
+              <th>pinyin-pro</th>
+              <th>聲母</th>
+              <th>結果</th>
+            </tr>
+          </thead>
+          <tbody id="compareBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>3. 小測驗：揀啱拼音</h2>
+      <p class="lead">正確答案同干擾項都由 pinyin-pro 產生（Demo 玩法）。</p>
+      <div class="quiz-card">
+        <div id="quizEmoji" class="quiz-emoji" aria-hidden="true">🎈</div>
+        <p id="quizPrompt" class="lead">睇字揀拼音</p>
+        <div id="quizWord" class="quiz-word">波波球</div>
+        <div id="quizOptions" class="options"></div>
+        <p id="quizFeedback" class="feedback" aria-live="polite"></p>
+      </div>
+      <div class="actions">
+        <button type="button" class="primary" id="nextQuiz">下一題</button>
+      </div>
+    </section>
+
+    <p class="foot">庫：vendor/pinyin-pro（MIT，v3.29.5）。正式接入建議：學習卡分色聲母／韻母、測驗干擾項、加詞時自動預填再人工確認。</p>
+  </main>
+
+  <script src="vendor/pinyin-pro/pinyin-pro.min.js?v=d85ca45"></script>
+  <script src="js/pth-pinyin-pro-demo.js?v=d85ca45"></script>
+</body>
+</html>
